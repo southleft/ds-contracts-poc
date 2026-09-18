@@ -84,7 +84,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-info",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/info",
                           "iconSize": 20
                         }
@@ -206,7 +206,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-info",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/info",
                           "iconSize": 20
                         }
@@ -328,7 +328,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-warning",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/warning",
                           "iconSize": 20
                         }
@@ -450,7 +450,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-warning",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/warning",
                           "iconSize": 20
                         }
@@ -572,7 +572,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-error",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/error",
                           "iconSize": 20
                         }
@@ -694,7 +694,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-error",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/error",
                           "iconSize": 20
                         }
@@ -816,7 +816,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-success",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/success",
                           "iconSize": 20
                         }
@@ -938,7 +938,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-success",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/success",
                           "iconSize": 20
                         }
@@ -1526,12 +1526,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -2030,7 +2037,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2098,6 +2105,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2358,6 +2366,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -2514,6 +2523,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -2657,6 +2680,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

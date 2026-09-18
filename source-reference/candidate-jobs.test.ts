@@ -118,6 +118,66 @@ function fixture() {
   };
 }
 
+test("Button and Checkbox preparations retain independent latest histories and recover without executing", () => {
+  const f = fixture();
+  f.options.selectLatestVerified = (request) => ({
+    ...structuredClone(f.selection),
+    request,
+  });
+  const jobs = createCandidateJobs(f.repo, f.options);
+  const checkbox = {
+    version: 2 as const,
+    component: "al-checkbox" as const,
+    baseline: f.request.baseline,
+  };
+  try {
+    const button = jobs.start(f.request);
+    f.report(button.id);
+    f.done();
+    const stateful = jobs.start(checkbox);
+    f.report(stateful.id);
+    f.done();
+    assert.equal(jobs.selectLatestPreparedVerified(f.request).id, button.id);
+    assert.equal(jobs.selectLatestPreparedVerified(checkbox).id, stateful.id);
+    assert.equal(
+      jobs.list(f.request.baseline.id).find((row) => row.id === stateful.id)!
+        .component,
+      "al-checkbox",
+    );
+    assert.equal(
+      jobs.list(f.request.baseline.id).find((row) => row.id === button.id)!
+        .component,
+      undefined,
+    );
+    assert.throws(
+      () => jobs.startVisual(checkbox),
+      /visual-component-unsupported/,
+    );
+    jobs.close();
+    const recovered = createCandidateJobs(f.repo, {
+      ...f.options,
+      run: () => {
+        throw Error("must not execute");
+      },
+    });
+    try {
+      assert.equal(
+        recovered.selectLatestPreparedVerified(checkbox).id,
+        stateful.id,
+      );
+      assert.equal(
+        recovered.selectLatestPreparedVerified(f.request).id,
+        button.id,
+      );
+    } finally {
+      recovered.close();
+    }
+  } finally {
+    jobs.close();
+    f.close();
+  }
+});
+
 test("candidate jobs validate before sealing, deduplicate, and reopen read-only with safe summaries", () => {
   const f = fixture(),
     jobs = createCandidateJobs(f.repo, f.options);

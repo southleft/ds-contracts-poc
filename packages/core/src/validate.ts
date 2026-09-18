@@ -7,6 +7,7 @@
  * Pure; imports @ds-contracts/schema only.
  */
 import {
+  PropSchema,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -88,6 +89,11 @@ export function validateContract(
   errors: string[],
   iconAssets: Map<string, string>,
 ) {
+  for (const prop of contract.props) if (prop.bindings.code.values) {
+    const parsed = PropSchema.safeParse(prop);
+    if (!parsed.success) errors.push(`${contract.id}: CODE_VALUES_INVALID:${prop.name}: ${parsed.error.message}`);
+    if (contract.bindings.code.runtime) errors.push(`${contract.id}: CODE_VALUES_RUNTIME_UNSUPPORTED: retained-runtime typed API mappings require a verified adapter`);
+  }
   const enumNames = new Set(enumProps(contract).map((p) => p.name));
   const hasChildrenText = (dep: Contract) =>
     dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
@@ -115,14 +121,47 @@ export function validateContract(
           errors.push(`${contract.id}: part "${name}" sets ${dep!.id} arrayOf prop "${propName}" — structured values cannot be fixed in anatomy`);
         }
         const parentRef = typeof value === 'string' ? value.match(/^\{([a-z][\w-]*)\}$/) : null;
-        if (parentRef && !enumNames.has(parentRef[1])) {
-          errors.push(
-            `${contract.id}: part "${name}" maps "{${parentRef[1]}}" but no enum prop "${parentRef[1]}" exists on this contract`,
-          );
+        if (parentRef) {
+          const parentProp = contract.props.find((p) => p.name === parentRef[1]);
+          if (!parentProp || (!isEnum(parentProp) && parentProp.type !== 'text' && parentProp.type !== 'boolean')) {
+            errors.push(`${contract.id}: part "${name}" maps "{${parentRef[1]}}" but no enum, text or boolean prop "${parentRef[1]}" exists on this contract`);
+          } else if (!isEnum(parentProp) && depProp && depProp.type !== parentProp.type) {
+            errors.push(`${contract.id}: part "${name}" maps ${parentProp.type} prop "${parentProp.name}" into incompatible ${dep!.id} prop "${propName}" (${JSON.stringify(depProp.type)})`);
+          }
         }
       }
       if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(`${contract.id}: part "${name}" sets text but ${dep.id} has no children text prop`);
+      }
+      if (part.component.initialProps) {
+        if (p.length === 1 || part.repeat)
+          errors.push(`${contract.id}: part "${name}" initialProps require a non-repeated nested component`);
+        for (const [key, value] of Object.entries(part.component.initialProps)) {
+          const child = dep?.props.find(prop => prop.name === key);
+          if (!child || !isEnum(child) || !child.bindings.code.initial) {
+            errors.push(`${contract.id}: part "${name}" initialProps has no declared child initializer for "${key}"`);
+            continue;
+          }
+          const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+          const parent = ref && contract.props.find(prop => prop.name === ref[1]);
+          if (ref ? !parent || !isEnum(parent) || parent.type.enum.some(v => !child.type.enum.includes(v)) : !child.type.enum.includes(value))
+            errors.push(`${contract.id}: part "${name}" initialProps value for "${key}" is outside the child canonical domain`);
+        }
+      }
+      if (part.parts !== undefined) {
+        // These parts belong to the caller. They enter the child's default
+        // ReactNode slot; they are not an override of its private anatomy.
+        const slots = dep ? walkAnatomy(dep).filter(w => w.part.slot?.name === 'children').map(w => w.part.slot!) : [];
+        if (dep && slots.length !== 1)
+          errors.push(`${contract.id}: part "${name}" supplies caller parts but ${dep.id} has no unique children slot`);
+        if (slots.some(slot => slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined))
+          errors.push(`${contract.id}: part "${name}" supplies caller parts to a constrained children slot; constraint projection is unsupported`);
+        const childrenProp = dep?.props.find(p => p.bindings.code.prop === 'children');
+        if (part.component.text !== undefined || (childrenProp && Object.hasOwn(part.component.props ?? {}, childrenProp.name)) ||
+            part.repeat || part.slot || part.content || part.text !== undefined || part.icon || part.meter)
+          errors.push(`${contract.id}: part "${name}" has conflicting component caller content`);
+        if (p.length === 1)
+          errors.push(`${contract.id}: part "${name}" is a root component reference; caller parts require a nested instance`);
       }
       // Round 2 iteration 9 — per-instance overrides: registry channels
       // only, and the CHILD must declare each channel overridable on its
@@ -332,11 +371,11 @@ export function validateContract(
       const tbpProp = contract.props.find((pr) => pr.name === tbp.prop);
       if (!tbpProp) {
         errors.push(`${contract.id}: part "${name}" tokensByProp references unknown prop "${tbp.prop}"`);
-      } else if (!isEnum(tbpProp)) {
-        errors.push(`${contract.id}: part "${name}" tokensByProp prop "${tbp.prop}" must be an enum prop`);
+      } else if (!isEnum(tbpProp) && !(isVariantBool(tbpProp) && tbpProp.bindings.figma.unsetValue !== undefined)) {
+        errors.push(`${contract.id}: part "${name}" tokensByProp prop "${tbp.prop}" must be an enum or an optional boolean with an omitted VARIANT plane`);
       } else {
         for (const [k, overrides] of Object.entries(tbp.map)) {
-          if (!tbpProp.type.enum.includes(k)) {
+          if (!(isEnum(tbpProp) ? tbpProp.type.enum : ['false', 'true']).includes(k)) {
             errors.push(`${contract.id}: part "${name}" tokensByProp map key "${k}" is not a value of prop "${tbp.prop}"`);
           }
           for (const ref of Object.values(overrides)) {
@@ -489,7 +528,8 @@ export function validateContract(
         );
       }
     };
-    if ((part.declared || part.declaredStates) && (part.component || part.slot)) {
+    const rootContentBox = name === 'root' && part === contract.anatomy.root && part.slot?.name === 'children';
+    if ((part.declared || part.declaredStates) && (part.component || (part.slot && !rootContentBox))) {
       errors.push(
         `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declared facts cannot restyle it (the child contract / consumer owns its styling)`,
       );
@@ -1227,4 +1267,3 @@ export function validateContract(
     }
   }
 }
-

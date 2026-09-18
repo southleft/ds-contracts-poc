@@ -167,8 +167,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -333,8 +333,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -499,8 +499,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -631,8 +631,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -794,8 +794,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -957,8 +957,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -1163,8 +1163,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#16161640\"/></svg>",
+                      "svgPaintVar": "imported/shared/color-16161640",
                       "iconSize": 16
                     }
                   ],
@@ -1295,8 +1295,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#16161640\"/></svg>",
+                      "svgPaintVar": "imported/shared/color-16161640",
                       "iconSize": 16
                     },
                     {
@@ -2324,12 +2324,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -2915,7 +2922,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2983,6 +2990,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -3244,6 +3252,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -3400,6 +3409,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -3543,6 +3566,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -9012,12 +9036,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -9568,7 +9599,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9636,6 +9667,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -9896,6 +9928,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -10052,6 +10085,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -10195,6 +10242,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -11445,12 +11493,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -12212,7 +12267,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12280,6 +12335,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -12543,6 +12599,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -12702,6 +12759,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -12845,6 +12916,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -12949,7 +13021,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -13035,7 +13107,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -13121,7 +13193,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -13207,7 +13279,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -13293,7 +13365,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -13379,7 +13451,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -13465,7 +13537,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -13551,7 +13623,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -13637,7 +13709,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -13723,7 +13795,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -13809,7 +13881,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -13895,7 +13967,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -13981,7 +14053,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -14067,7 +14139,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -14153,7 +14225,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -14239,7 +14311,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -15025,12 +15097,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -15525,7 +15604,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -15593,6 +15672,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -15853,6 +15933,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -16009,6 +16090,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -16152,6 +16247,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -16253,7 +16349,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-error",
-                      "svg": "<svg fill=\"#fa4d56\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#fa4d56\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
                       "svgPaintVar": "imported/inline-notification/icon/fill/error/high",
                       "iconSize": 20
                     }
@@ -16326,7 +16422,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -16399,7 +16495,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-error",
-                      "svg": "<svg fill=\"#da1e28\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#da1e28\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
                       "svgPaintVar": "imported/inline-notification/icon/fill/error/low",
                       "iconSize": 20
                     }
@@ -16472,7 +16568,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -16545,7 +16641,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-info",
-                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -16617,7 +16713,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -16690,7 +16786,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-info",
-                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -16762,7 +16858,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -16835,7 +16931,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-info-square",
-                      "svg": "<svg viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -16907,7 +17003,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -16980,7 +17076,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-info-square",
-                      "svg": "<svg viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17052,7 +17148,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -17125,7 +17221,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-success",
-                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17197,7 +17293,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -17270,7 +17366,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-success",
-                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17342,7 +17438,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -17415,7 +17511,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-warning",
-                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17487,7 +17583,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -17560,7 +17656,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-warning",
-                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17632,7 +17728,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -17705,7 +17801,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-warning-alt",
-                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17777,7 +17873,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/high",
                   "iconSize": 16
                 }
@@ -17850,7 +17946,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-warning-alt",
-                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
+                      "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
                       "iconSize": 20
                     }
                   ]
@@ -17922,7 +18018,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "inline-notification__close-button-icon",
-                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svg": "<svg height=\"16\" width=\"16\" fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                   "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color/low",
                   "iconSize": 16
                 }
@@ -18741,6 +18837,7 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
@@ -18748,6 +18845,12 @@ function applyFrameSpec(node, spec) {
   if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -19295,7 +19398,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19363,6 +19466,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -19623,6 +19727,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -19779,6 +19884,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -19922,6 +20041,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -20172,7 +20292,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -20558,7 +20678,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -20944,7 +21064,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -21330,7 +21450,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -23218,12 +23338,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -23928,7 +24055,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -23996,6 +24123,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -24260,6 +24388,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -24419,6 +24548,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -24562,6 +24705,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -27288,12 +27432,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -27832,7 +27983,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -27900,6 +28051,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -28160,6 +28312,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -28316,6 +28469,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -28459,6 +28626,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -31405,12 +31573,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -32005,7 +32180,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -32073,6 +32248,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -32333,6 +32509,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -32489,6 +32666,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -32632,6 +32823,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -34805,12 +34997,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -35387,7 +35586,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -35455,6 +35654,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -35716,6 +35916,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -35872,6 +36073,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -36015,6 +36230,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -37531,12 +37747,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -38274,7 +38497,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -38342,6 +38565,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -38605,6 +38829,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -38764,6 +38989,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -38907,6 +39146,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

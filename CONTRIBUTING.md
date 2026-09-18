@@ -63,8 +63,12 @@ record says otherwise. The playground runs the checked-out engine; its
 demonstrations do not qualify the complete conversion or repair journeys.
 
 The active work order is [docs/CURRENT.md](docs/CURRENT.md): complete the
-code-led journey, design-led journey, two-way repair and independent cohort
-qualification. Existing engine and recipe checks remain load-bearing. Historical
+React-led journey, Figma-to-React journey, two-way repair and independent React
+cohort qualification. Lit/Web Components integration is paused for planned
+V1.1; retain its code and evidence without making further adapter work a V1
+prerequisite. Add reusable conversion rules and verify their interactions,
+rather than a bespoke converter for each component. Existing engine and recipe
+checks remain load-bearing, including coverage of deferred adapters. Historical
 plans do not override this sequence, and a green lane alone does not complete it.
 
 Contributors may prepare packages and evidence. Tags, publication, deployments

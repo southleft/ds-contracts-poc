@@ -153,7 +153,9 @@ test("recorded samples use shared text and SVG specs, preserving topology and so
   assert.equal(svg.iconSize, 24);
   assert.match(svg.svg!, /viewBox="0 0 20 20"/);
   assert.match(svg.svg!, /fill-rule="evenodd"/);
-  assert.match(svg.svg!, /^<svg fill="rgb\(0, 11, 41\)" /);
+  assert.match(svg.svg!, /^<svg\b[^>]*\sfill="rgb\(0, 11, 41\)"(?:\s|>)/);
+  assert.match(svg.svg!, /^<svg\b[^>]*\swidth="24"(?:\s|>)/);
+  assert.match(svg.svg!, /^<svg\b[^>]*\sheight="24"(?:\s|>)/);
   assert.doesNotMatch(svg.svg!, /currentColor/);
   assert.equal(svg.svgPaintVar, undefined);
   assert.equal(icon.expectations!.svg[0].viewBox, "0 0 20 20");
@@ -388,8 +390,10 @@ test("SVG inherited fill and currentColor stay separate after shared reconstruct
     .find((c) => c.id === n.raw.expectedCaseId)!
     .slots.find((s) => s.sourceName === "before")!;
   const svg = allSpecs(slot.specs).find((s) => s.type === "svg")!;
-  assert.match(svg.svg!, /^<svg fill="rgb\(0, 0, 255\)" /);
+  assert.match(svg.svg!, /^<svg\b[^>]*\sfill="rgb\(0, 0, 255\)"(?:\s|>)/);
   assert.match(svg.svg!, /<path[^>]+fill="rgb\(255, 0, 0\)"/);
+  assert.match(svg.svg!, /^<svg\b[^>]*\swidth="24"(?:\s|>)/);
+  assert.match(svg.svg!, /^<svg\b[^>]*\sheight="24"(?:\s|>)/);
   assert.doesNotMatch(svg.svg!, /currentColor/);
   assert.equal(slot.expectations!.svg[0].fill, "rgb(0, 0, 255)");
   assert.equal(slot.expectations!.svg[0].color, "rgb(255, 0, 0)");
