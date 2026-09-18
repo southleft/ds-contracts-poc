@@ -5132,11 +5132,8 @@ function carryCrossAxisFill(
     return;
   }
   if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
-  // @door propose.cross-axis-fill-partial-refused
   if (filling !== m.occ.length) {
-    ctx.notes.push(
-      `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${filling}/${m.occ.length} variant occurrence(s) only — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
-    );
+    carryPartialCrossAxisFill(dim, base, m, parentModes, part, ctx, where);
     return;
   }
   if (dim === 'width') {
@@ -5161,6 +5158,149 @@ function carryCrossAxisFill(
   ctx.notes.push(
     `${where}: drawn FILL-height under a ROW parent with a DEFINITE height (dump v1.31 fillHeight; the parent's other children hug, so the parent's \`align: stretch\` cannot carry it) — carried as the part literal \`height: 100%\` (the cross-axis stretch against the parent's definite box, the same carrier crossAxisFillByProp uses for width)`,
   );
+}
+
+/** What an occurrence that does NOT draw the FILL contributes to the axis fit
+ *  below. It is a correlation key only and is never written: a non-filling
+ *  value gets NO literal (see carryPartialCrossAxisFill). Non-empty on
+ *  purpose — fitLiteralAxis reads an empty value as "not seen yet". */
+const NOT_FILLING = 'not-filling';
+
+/** G3b — a cross-axis FILL drawn in only SOME variant occurrences under a
+ *  parent with ONE auto-layout mode (field case: a designer's Tabs header
+ *  that FILLs its COLUMN root under Variant=Stretch and hugs under
+ *  Variant=Default). `literalsByProp` already spells it — `.variant-stretch
+ *  .header { width: 100% }` — so the fact is CARRIED exactly when "fills /
+ *  does not fill" is a pure function of ONE declared ENUM axis with full value
+ *  coverage (fitLiteralAxis: the same test per-side strokes and shape paints
+ *  ride; the layoutByProp discipline crossAxisFillByProp states). The carrier
+ *  is the one crossAxisFillByProp uses for its COLUMN planes and
+ *  carryCrossAxisFill for a whole-set FILL-height: `100%` on the cross
+ *  dimension, which the return leg lowers back to FILL (emit-figma-script).
+ *
+ *  The NON-filling values get NOTHING, deliberately. "Does not fill" is not
+ *  the fact "width: auto": that variant's size is whatever its own rules say
+ *  (hug, or a fixed size with its own carrier), an explicit `auto` would
+ *  override such a carrier and is not in the literal grammar, and an absent
+ *  key is what makes the return leg leave those variants un-filled instead of
+ *  inventing a FILL there.
+ *
+ *  Anything less correlated — a split across two axes, an axis value that
+ *  fills in some occurrences and not others, a declared value never observed,
+ *  a boolean axis (literalsByProp is enum-keyed) — stays the NAMED note it
+ *  was. A FILL-height keeps the definite-parent rule of the whole-set path. */
+function carryPartialCrossAxisFill(
+  dim: 'width' | 'height',
+  base: 'HORIZONTAL' | 'VERTICAL',
+  m: Merged,
+  parentModes: ParentModes,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const fillField = dim === 'height' ? 'fillHeight' : 'fillWidth';
+  const fillingOcc = m.occ.filter((o) => o.node[fillField] === true);
+  const drawn = `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${fillingOcc.length}/${m.occ.length} variant occurrence(s) only`;
+  const fit = fitLiteralAxis(
+    ctx,
+    m.occ.map((o) => ({ variant: o.variant, value: o.node[fillField] === true ? '100%' : NOT_FILLING })),
+  );
+  // @door propose.cross-axis-fill-partial-refused
+  if (!fit) {
+    ctx.notes.push(
+      `${drawn}, and "fills / does not fill" is not a pure function of ONE declared enum axis with full value coverage (it splits across two axes, an axis value fills in some occurrences and not others, a declared value was never observed, or the only fitting axis is boolean — literalsByProp is enum-keyed) — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (dim === 'height') {
+    const hugging = fillingOcc.filter((o) => parentModes.crossDefiniteByVariant?.get(o.variant) !== true);
+    // @door propose.cross-axis-fill-partial-hugging-parent
+    if (hugging.length > 0) {
+      ctx.notes.push(
+        `${drawn} (a function of axis "${fit.axis.property}") under a parent that HUGS its height on ${hugging.map((o) => o.variant).join(', ')} — \`height: 100%\` of an auto height is auto and the parent's \`align: stretch\` would stretch its other children, so no grammar spelling is exact; the cross-axis stretch is NAMED, not carried (review)`,
+      );
+      return;
+    }
+  }
+  const lbp =
+    (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+  // The referee's channel+prop rule (crossAxisFillByPropOn): a second claimant
+  // of this dimension on another prop would make the cascade order the meaning.
+  // @door propose.cross-axis-fill-partial-second-claimant
+  if (lbp.some((e) => e.prop !== fit.axis.propName && Object.values(e.map).some((o) => dim in o))) {
+    ctx.notes.push(
+      `${drawn} (a function of axis "${fit.axis.property}"), but another prop already claims \`${dim}\` through literalsByProp on this part — two props writing one dimension would make the cascade order the meaning; the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  const entry = lbp.find((e) => e.prop === fit.axis.propName) ?? { prop: fit.axis.propName, map: {} };
+  const stretched: string[] = [];
+  const claimed: string[] = [];
+  for (const value of fit.axis.values) {
+    if (fit.byValue.get(value) !== '100%') continue; // a non-filling value gets nothing
+    const key = axisValue(fit.axis, value);
+    if (entry.map[key]?.[dim] !== undefined) {
+      claimed.push(key); // an observed size already claims it
+      continue;
+    }
+    (entry.map[key] ??= {})[dim] = '100%';
+    stretched.push(key);
+  }
+  // @door propose.cross-axis-fill-partial-size-claimed
+  if (stretched.length === 0) {
+    ctx.notes.push(
+      `${drawn} (a function of axis "${fit.axis.property}"), but an observed \`${dim}\` literal already claims every filling value (${claimed.join(', ')}) — the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (!lbp.includes(entry)) lbp.push(entry);
+  part.literalsByProp = lbp;
+  const hugging = fit.axis.values.filter((v) => fit.byValue.get(v) !== '100%').map((v) => axisValue(fit.axis, v));
+  ctx.notes.push(
+    `${drawn} — a pure function of axis "${fit.axis.property}" with full value coverage, so the cross-axis stretch is carried as ${dim}: 100% through literalsByProp on \`${fit.axis.propName}\` (${stretched.join(', ')}); the value(s) that do not fill (${hugging.join(', ')}) get NO literal — their size is whatever their own rules say, and an absent key is what keeps the return leg from inventing a FILL there${claimed.length > 0 ? `; ${claimed.join(', ')} kept the observed size that already claims it` : ''}`,
+  );
+}
+
+/** G3b, the PRIMARY-axis twin — a FILL drawn ALONG the parent's primary axis
+ *  in only some variant occurrences (field case: the same Tabs set's list
+ *  under its ROW header, and each tab under the ROW list, FILL under
+ *  Variant=Stretch only). Along the primary axis a FILL is `layout.grow`
+ *  (`flex: 1 1 auto`), NOT a `100%` literal: three siblings at `width: 100%`
+ *  each claim the whole row, where three growers share it. `grow` is a
+ *  per-part invariant — primaryAxisGrow carries it only when EVERY occurrence
+ *  fills, and the per-variant layout vocabulary (VariantLayoutSchema:
+ *  display / direction / align / justify) has no `grow` — so the per-variant
+ *  case has no spelling today. It used to fall through primaryAxisGrow with no
+ *  note at all (the SILENT-LOSS class); it is NAMED here, once per part (a
+ *  repeat run's siblings share one path, so they share one note), with the
+ *  axis it follows when it follows one, so the schema change that would carry
+ *  it is a recorded gap rather than a guess. Each occurrence is read against
+ *  ITS OWN parent mode. Called from buildChildParts, above every branch of
+ *  buildPart and beside buildRepeatPart, so no part class can return past it. */
+function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes | null, ctx: Ctx, where: string): void {
+  if (!parentModes) return;
+  const facts = new Map<string, number>();
+  for (const m of siblings) {
+    const rows = m.occ.flatMap((o) => {
+      const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
+      if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') return [];
+      const dim = mode === 'HORIZONTAL' ? 'width' : 'height';
+      return [{ variant: o.variant, dim, mode, fills: o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] === true }];
+    });
+    const filling = rows.filter((r) => r.fills);
+    if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
+    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })));
+    const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
+    const correlation = fit
+      ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
+      : 'not a pure function of one declared enum axis';
+    const fact = `drawn ${planes.join(' and ')} in ${filling.length}/${rows.length} variant occurrence(s) only — ${correlation}. Along the primary axis a FILL is \`layout.grow\` (\`flex: 1 1 auto\`), not a \`100%\` literal (siblings at 100% each claim the whole row; growers share it), and \`grow\` is a per-part invariant: the per-variant layout vocabulary (layoutByProp / VariantLayoutSchema) has no \`grow\`, so the per-variant primary-axis FILL has no spelling; NAMED, not carried — nothing grows this part along that axis in any variant (review)`;
+    // @door propose.primary-axis-fill-partial-refused
+    facts.set(fact, (facts.get(fact) ?? 0) + 1);
+  }
+  for (const [fact, count] of facts) {
+    ctx.notes.push(`${where}: ${count > 1 ? `${count} repeated siblings each ` : ''}${fact}`);
+  }
 }
 
 /** PER-VARIANT accounting for the cross-axis FILL under a parent whose
@@ -7500,9 +7640,16 @@ function buildChildParts(
   // placement fact is child order (G5) and repeat runs stay legal.
   const manualGrid = mode?.grid?.carried === true && !mode.grid.flow;
   let i = 0;
+  let primaryFillNamedThrough = 0;
   while (i < children.length) {
     const child = children[i];
     const run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
+    // G3b primary-axis twin — once per child; a run that falls back to fixed
+    // parts below re-enters this loop for its later siblings, already named.
+    if (i >= primaryFillNamedThrough) {
+      namePartialPrimaryAxisFill(run ?? [child], mode, ctx, `${where}/${child.name}`);
+      primaryFillNamedThrough = i + (run?.length ?? 1);
+    }
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
       const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);

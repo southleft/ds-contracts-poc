@@ -30,6 +30,10 @@
   border-left-width: 0px;
 }
 
+.variant-stretch .alCTabsHeader {
+  width: 100%;
+}
+
 .alCTabsList {
   display: flex;
   flex-direction: row;

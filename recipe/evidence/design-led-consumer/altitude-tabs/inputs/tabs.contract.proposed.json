@@ -72,6 +72,16 @@
           "layout": {
             "direction": "row"
           },
+          "literalsByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "stretch": {
+                  "width": "100%"
+                }
+              }
+            }
+          ],
           "parts": {
             "alCTabsList": {
               "layout": {
