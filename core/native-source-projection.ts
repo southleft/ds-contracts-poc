@@ -320,7 +320,7 @@ export function resolveNativeSourceProjection(
       refuse("WRAPPER_STATE_INVALID");
     parts.set(key(n.partPath), structuredClone(n));
   }
-  // The initial native inspection supports exactly finite enum axes. Keep all
+  // Native inspection supports finite enum and boolean axes. Keep all
   // omitted values explicit; no extra code default or public Show-slot prop.
   if (
     !contract.props.length ||
@@ -336,9 +336,7 @@ export function resolveNativeSourceProjection(
       !mapping ||
       mapping.sourceProperty !== prop.bindings.code.prop ||
       !artifact.interface.writableProperties.includes(mapping.sourceProperty) ||
-      typeof prop.type !== "object" ||
-      !("enum" in prop.type) ||
-      !prop.type.enum.length ||
+      !(prop.type === "boolean" || (typeof prop.type === "object" && "enum" in prop.type && prop.type.enum.length > 0)) ||
       prop.default !== undefined ||
       prop.bindings.figma.kind !== "VARIANT" ||
       !prop.bindings.figma.unsetValue
@@ -415,10 +413,9 @@ export function resolveNativeSourceProjection(
           ? exactKeys(value, ["kind"])
           : value.kind === "value" &&
             exactKeys(value, ["kind", "value"]) &&
-            typeof value.value === "string" &&
-            typeof prop.type === "object" &&
-            "enum" in prop.type &&
-            prop.type.enum.includes(value.value))
+            (prop.type === "boolean" ? typeof value.value === "boolean" :
+              typeof value.value === "string" && typeof prop.type === "object" &&
+              "enum" in prop.type && prop.type.enum.includes(value.value)))
       )
         refuse("CASE_PROPERTY_INVALID");
     }
@@ -439,11 +436,12 @@ export function resolveNativeSourceProjection(
   let combinations: Record<string, RuntimeScopeValue>[] = [{}];
   for (const prop of contract.props) {
     const type = prop.type;
-    if (typeof type !== "object" || !("enum" in type))
+    if (type !== "boolean" && (typeof type !== "object" || !("enum" in type)))
       refuse("PROPERTY_MAPPING_INVALID");
+    const domain = type === "boolean" ? [false, true] : (type as { enum: string[] }).enum;
     combinations = combinations.flatMap((row) => [
       { ...row, [prop.name]: { kind: "omitted" as const } },
-      ...type.enum.map((value) => ({
+      ...domain.map((value) => ({
         ...row,
         [prop.name]: { kind: "value" as const, value },
       })),

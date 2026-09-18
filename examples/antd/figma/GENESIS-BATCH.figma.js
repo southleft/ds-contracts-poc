@@ -202,7 +202,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -263,7 +263,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info",
                   "iconSize": 14
                 }
@@ -356,7 +356,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -496,7 +496,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -557,7 +557,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success",
                   "iconSize": 14
                 }
@@ -650,7 +650,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -790,7 +790,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -851,7 +851,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z\" fill=\"#faad14\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z\" fill=\"#faad14\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning",
                   "iconSize": 14
                 }
@@ -944,7 +944,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -1084,7 +1084,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -1145,7 +1145,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error",
                   "iconSize": 14
                 }
@@ -1238,7 +1238,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"12\" width=\"12\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/alert/anticon/color",
                   "iconSize": 12,
                   "visibleProp": "Show Closable",
@@ -1985,12 +1985,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -2631,7 +2638,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2699,6 +2706,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2960,6 +2968,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -3116,6 +3125,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -3259,6 +3282,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -4219,12 +4243,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -4763,7 +4794,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4831,6 +4862,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -5091,6 +5123,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -5247,6 +5280,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -5390,6 +5437,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -7295,12 +7343,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -7770,7 +7825,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -7982,7 +8038,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -8050,6 +8106,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -8198,7 +8255,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -8337,6 +8395,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -8425,7 +8484,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -8520,6 +8580,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -8663,6 +8737,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -8786,7 +8861,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -8808,7 +8883,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -8894,7 +8969,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -8916,7 +8991,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9002,7 +9077,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9024,7 +9099,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9110,7 +9185,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9132,7 +9207,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9218,7 +9293,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9240,7 +9315,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9326,7 +9401,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9348,7 +9423,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/default/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9434,7 +9509,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9456,7 +9531,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9542,7 +9617,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9564,7 +9639,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9650,7 +9725,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9672,7 +9747,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9758,7 +9833,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9780,7 +9855,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9866,7 +9941,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9888,7 +9963,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -9974,7 +10049,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -9996,7 +10071,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#fff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10086,7 +10161,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10108,7 +10183,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10198,7 +10273,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10220,7 +10295,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10310,7 +10385,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10332,7 +10407,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10422,7 +10497,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10444,7 +10519,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10534,7 +10609,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10556,7 +10631,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10646,7 +10721,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10668,7 +10743,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/dashed/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10742,7 +10817,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10764,7 +10839,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10838,7 +10913,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10860,7 +10935,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -10934,7 +11009,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -10956,7 +11031,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11030,7 +11105,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11052,7 +11127,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11126,7 +11201,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11148,7 +11223,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#1677ff\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11222,7 +11297,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11244,7 +11319,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/link/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11318,7 +11393,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11340,7 +11415,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11414,7 +11489,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11436,7 +11511,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11510,7 +11585,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11532,7 +11607,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11606,7 +11681,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11628,7 +11703,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11702,7 +11777,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11724,7 +11799,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#000000e0\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/safe",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -11798,7 +11873,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon",
-                  "svg": "<svg viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 910 910\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 909.6 854.5 L 649.9 594.8 C 690.2 542.7 712 479 712 412 C 712 331.8 680.7 256.6 624.1 199.9 C 567.5 143.2 492.1 112 412 112 S 256.5 143.3 199.9 199.9 C 143.2 256.5 112 331.8 112 412 C 112 492.1 143.3 567.5 199.9 624.1 C 256.5 680.8 331.8 712 412 712 C 479 712 542.6 690.2 594.7 650 L 854.4 909.6 A 8.2 8.2 0 0 0 866 909.6 L 909.6 866.1 A 8.2 8.2 0 0 0 909.6 854.5 Z M 570.4 570.4 C 528 612.7 471.8 636 412 636 S 296 612.7 253.6 570.4 C 211.3 528 188 471.8 188 412 S 211.3 295.9 253.6 253.6 C 296 211.3 352.2 188 412 188 S 528.1 211.2 570.4 253.6 S 636 352.2 636 412 S 612.7 528.1 570.4 570.4 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Icon",
@@ -11820,7 +11895,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "anticon-2",
-                  "svg": "<svg viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
+                  "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 988 548 C 968.1 548 952 531.9 952 512 C 952 452.6 940.4 395 917.4 340.7 A 440.45 440.45 0 0 0 823.1 200.8 A 437.71 437.71 0 0 0 683.2 106.5 C 629 83.6 571.4 72 512 72 C 492.1 72 476 55.9 476 36 S 492.1 0 512 0 C 581.1 0 648.2 13.5 711.3 40.3 C 772.3 66 827 103 874 150 C 921 197 957.9 251.8 983.7 312.7 C 1010.4 375.8 1023.9 442.9 1023.9 512 C 1024 531.9 1007.9 548 988 548 Z\" fill=\"#ff4d4f\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/text/danger",
                   "iconSize": 14,
                   "visibleProp": "Show Loading",
@@ -13310,12 +13385,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -13879,7 +13961,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13947,6 +14029,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -14207,6 +14290,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -14363,6 +14447,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -14506,6 +14604,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -15732,12 +15831,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -16288,7 +16394,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16356,6 +16462,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -16616,6 +16723,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -16772,6 +16880,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -16915,6 +17037,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -18647,12 +18770,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -19226,7 +19356,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -19438,7 +19569,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19506,6 +19637,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -19654,7 +19786,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -19793,6 +19926,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -19881,7 +20015,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -19976,6 +20111,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -20119,6 +20268,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -23703,12 +23853,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -24259,7 +24416,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24327,6 +24484,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -24587,6 +24745,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -24743,6 +24902,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -24886,6 +25059,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -25189,7 +25363,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "anticon-exception",
-                          "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
+                          "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
                           "svgPaintVar": "imported/progress/label/color/exception",
                           "iconSize": 14
                         }
@@ -25447,7 +25621,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "anticon-success",
-                          "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
+                          "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
                           "svgPaintVar": "imported/progress/label/color/success",
                           "iconSize": 14
                         }
@@ -26250,12 +26424,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -26670,7 +26851,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -26882,7 +27064,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -26950,6 +27132,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -27095,7 +27278,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -27234,6 +27418,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -27319,7 +27504,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -27414,6 +27600,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -27557,6 +27757,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -29124,12 +29325,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -29702,7 +29910,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -29914,7 +30123,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -29982,6 +30191,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -30130,7 +30340,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -30269,6 +30480,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -30357,7 +30569,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -30452,6 +30665,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -30595,6 +30822,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -34031,12 +34259,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -34662,7 +34897,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -34874,7 +35110,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -34942,6 +35178,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -35092,7 +35329,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -35231,6 +35469,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -35320,7 +35559,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -35415,6 +35655,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -35558,6 +35812,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -35665,7 +35920,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -35727,7 +35982,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -35789,7 +36044,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -35851,7 +36106,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -35913,7 +36168,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -35975,7 +36230,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36037,7 +36292,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36099,7 +36354,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36161,7 +36416,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36223,7 +36478,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36285,7 +36540,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36347,7 +36602,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36409,7 +36664,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -36471,7 +36726,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "anticon",
-              "svg": "<svg viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
+              "svg": "<svg height=\"10\" width=\"10\" viewBox=\"0 0 858 858\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 799.86 166.31 C 799.88 166.31 799.9 166.33 799.94 166.37 L 857.63 224.07 C 857.67 224.1 857.68 224.12 857.69 224.15 A 0.12 0.12 0 0 1 857.69 224.21 C 857.69 224.24 857.67 224.26 857.63 224.3 L 569.93 512 L 857.63 799.7 C 857.67 799.74 857.68 799.76 857.69 799.79 A 0.12 0.12 0 0 1 857.69 799.86 C 857.69 799.88 857.67 799.9 857.63 799.94 L 799.93 857.63 C 799.9 857.67 799.88 857.68 799.86 857.69 A 0.12 0.12 0 0 1 799.79 857.69 C 799.76 857.69 799.74 857.67 799.7 857.63 L 512 569.93 L 224.3 857.63 C 224.26 857.67 224.24 857.68 224.21 857.69 A 0.12 0.12 0 0 1 224.14 857.69 C 224.12 857.69 224.1 857.67 224.06 857.63 L 166.37 799.93 C 166.33 799.9 166.32 799.88 166.31 799.86 A 0.12 0.12 0 0 1 166.31 799.79 C 166.31 799.76 166.33 799.74 166.37 799.7 L 454.07 512 L 166.37 224.3 C 166.33 224.26 166.32 224.24 166.31 224.21 A 0.12 0.12 0 0 1 166.31 224.14 C 166.31 224.12 166.33 224.1 166.37 224.06 L 224.07 166.37 C 224.1 166.33 224.12 166.32 224.14 166.31 A 0.12 0.12 0 0 1 224.21 166.31 C 224.24 166.31 224.26 166.33 224.3 166.37 L 512 454.07 L 799.7 166.37 C 799.74 166.33 799.76 166.32 799.79 166.31 A 0.12 0.12 0 0 1 799.86 166.31 Z\" fill=\"#00000073\" fill-rule=\"evenodd\"/></svg>",
               "svgPaintVar": "imported/tag/anticon/color",
               "iconSize": 10,
               "visibleProp": "Show Closable",
@@ -37128,12 +37383,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -37681,7 +37943,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -37749,6 +38011,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -38009,6 +38272,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -38165,6 +38429,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -38308,6 +38586,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -39162,12 +39441,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -40024,7 +40310,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -40092,6 +40378,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -40356,6 +40643,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -40516,6 +40804,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -40659,6 +40961,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

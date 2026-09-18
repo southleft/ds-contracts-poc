@@ -1055,6 +1055,10 @@ const COMPONENTS = [
               "columnGap": 16
             }
           },
+          "bindings": {
+            "gridRowGap": "space/gap/sm",
+            "gridColumnGap": "space/gap/md"
+          },
           "lits": {
             "width": 640,
             "height": 480
@@ -1386,6 +1390,7 @@ const COMPONENTS = [
     "colW": 380
   },
   {
+    "nestedPropertyControls": 1,
     "setName": "Card",
     "contractId": "ds.card",
     "version": "1.1.0",
@@ -3771,6 +3776,7 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   // A2 grid: GRID frames take the declaration path — the flex fields below
   // (axis aligns, layoutWrap) are not grid facts and are never written.
@@ -3781,6 +3787,12 @@ function applyFrameSpec(node, spec) {
   }
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -3906,6 +3918,13 @@ function applyFrameSpec(node, spec) {
       }
     }
   }
+  // Resizing can replace HUG tracks with FLEX. Restore the declaration after
+  // all bound/literal size writes, before appending or placing any children.
+  if (l.mode === 'GRID') applyGridFrame(node, l);
+  // Rebind after the last literal grid write so variable identity survives.
+  if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
+    node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -3948,6 +3967,7 @@ function applyGridFrame(node, l) {
   // value can never recover). HUG is written as the bare type, never valued.
   const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
   node.gridRowSizes = g.rows.map(trackWrite);
+  node.setSharedPluginData('ds_contracts', 'gridFlowRows', g.flowRows ? JSON.stringify(g.flowRows) : '');
   node.gridColumnSizes = g.columns.map(trackWrite);
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;
@@ -4296,6 +4316,7 @@ async function buildNode(spec, registry) {
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
+    (registry.nestedControls || (registry.nestedControls = [])).push(node);
   } else if (spec.type === 'slot') {
     // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
     // the slot is minted by the variant component that owns it and moved into
@@ -4408,7 +4429,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -4620,7 +4642,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4688,6 +4710,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -4835,10 +4858,12 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -4974,6 +4999,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -5061,8 +5087,10 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
+  for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -5156,6 +5184,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -5202,6 +5244,7 @@ async function syncOne(C) {
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
     built.push({ v, comp, registry });
   }
 
@@ -5299,6 +5342,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

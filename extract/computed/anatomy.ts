@@ -30,6 +30,8 @@
  * Pure module (no fs, no browser): run.ts writes the asset files.
  */
 import type { Contract, Part } from '../../scripts/contract-schema.js';
+import { preserveOrderedFlexText } from './ordered-text.js';
+import { unpaintedPseudoBox } from './unpainted-pseudo.js';
 import { GRID_REFUSALS, walkAnatomy } from '../../scripts/contract-schema.js';
 import { parseGridAutoFlow, parseGridLine, parseGridSelfAlign, parseGridTemplateAreas, parseGridTrackList, type GridAreaIR, type GridTrackIR } from '../../core/grid-css.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
@@ -1770,6 +1772,17 @@ export function reconstructSvg(
   }
   // larger user space than its box would silently crop). Circle-only MUI
   // progress rings use the authored offset form `SIZE/2 SIZE/2 SIZE SIZE`.
+  if (svgEl.svgViewport) {
+    const { viewBox, preserveAspectRatio } = svgEl.svgViewport;
+    if (viewBox.length !== 4 || viewBox.some(n => !Number.isFinite(n)) || viewBox[2] <= 0 || viewBox[3] <= 0 ||
+        viewBox[2] !== viewBox[3] || w !== h || preserveAspectRatio !== 'xMidYMid meet') {
+      receipts.push(`svg-observed-viewport-unqualified: ${label} — unsupported viewport or aspect-ratio mapping`);
+      return null;
+    }
+    receipts.push(`svg-viewbox-observed: ${label} — ${viewBox.join(' ')} from source SVG viewport evidence`);
+    return { markup: `<svg viewBox="${viewBox.join(' ')}" xmlns="http://www.w3.org/2000/svg">${paths.join('')}</svg>`,
+      size: w, vb: viewBox[2], extent: maxCoord, bumped: false };
+  }
   // @door anatomy.svg-viewbox-reconstruct
   if (circleOnly && circleCenter !== null && circleCenter > 0) {
     const size = Math.round(circleCenter);
@@ -1856,6 +1869,7 @@ export function promoteAnatomy(
   comp: ComponentConfig,
   union: UnionResult,
   componentKebab: string,
+  options: { preserveTextBoxes?: ReadonlySet<string> } = {},
 ): PromotionResult {
   const receipts: string[] = [];
   const refusals: string[] = [];
@@ -2102,6 +2116,24 @@ export function promoteAnatomy(
     }
   }
 
+  const usedContentNames = new Set([...entries.map(e => e.partName), ...staticByName.keys()]);
+  const preserveContentOrder = (part: Part, entry: UnionNode) => {
+    const index = idxOf.get(entry.id)!;
+    const observations = [...union.alignedByKey.values()].flatMap(aligned => {
+      const observed = aligned[index];
+      if (!observed) return [];
+      const elementParts = entry.children.filter(child => aligned[idxOf.get(child.id)!])
+        .sort((a, b) => Number(aligned[idxOf.get(a.id)!]!.path.split('.').at(-1)) -
+          Number(aligned[idxOf.get(b.id)!]!.path.split('.').at(-1)))
+        .map(child => child.partName);
+      return [{ node: observed.node, elementParts }];
+    });
+    const result = preserveOrderedFlexText(part, observations, entry.partName, usedContentNames,
+      options.preserveTextBoxes?.has(entry.repPath));
+    if (result.problem) refusals.push(result.problem);
+    if (result.changed) receipts.push(`ordered-flex-text-carried: ${entry.partName} retains its observed text/element sequence as anonymous text items`);
+  };
+
   /** RC7 — THE PLACEHOLDER STRING THE CAPTURE MOUNTED.
    *
    *  A computed-style capture reads STYLES, never attributes — `img-attrs-
@@ -2218,6 +2250,20 @@ export function promoteAnatomy(
       // planes included — a disabled checked Radio keeps its dot; an
       // enabled-only domain would fabricate a hidden-when-disabled fact).
       const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
+      // Preserve a fully observed, uniform empty box rather than dropping it
+      // for lack of paint. Its event behavior remains a separate qualification.
+      if (!hostIsShapeLeaf && domain.length) {
+        const boxes = domain.map(combo => {
+          const node = union.alignedByKey.get(`${combo.key}__default`)![i]!.node;
+          return unpaintedPseudoBox(node.style, node.pseudo[pe]);
+        });
+        if (boxes.every(box => box && JSON.stringify(box) === JSON.stringify(boxes[0]))) {
+          const name = `${e.partName}-${pe.slice(2)}`;
+          out.push([name, boxes[0]!]);
+          receipts.push(`pseudo-unpainted-box-carried: ${e.partName}${pe} → ${name}; uniform editable geometry with no paint; pointer-events retained as code-only declaration; native hit testing and DOM event retargeting unqualified`);
+          continue;
+        }
+      }
       // COINCIDENT-SHADOW FOLD (mui/slider live-canvas round, 2026-08-11).
       //
       // A pseudo whose ONLY paint is a box-shadow was refused by name
@@ -3452,6 +3498,7 @@ export function promoteAnatomy(
         return null;
       }
     }
+    preserveContentOrder(part, e);
     return part;
   };
 
@@ -3584,8 +3631,7 @@ export function promoteAnatomy(
   // mount is the proof the surface accepts text children.
   {
     const rootText = textOf(rootEntry.rep);
-    const carriesContent = (p: Part): boolean =>
-      p.content !== undefined || p.text !== undefined || Object.values(p.parts ?? {}).some(carriesContent);
+    const carriesContent = (p: Part): boolean => p.content !== undefined || p.text !== undefined;
     if (rootText.length > 0 && !carriesContent(newRoot)) {
       let boundProp = [...samplesByProp.entries()].find(([, v]) => v === rootText)?.[0];
       if (!boundProp && rootText === comp.sampleText && comp.sampleText.length > 0) {
@@ -3630,6 +3676,8 @@ export function promoteAnatomy(
       );
     }
   }
+
+  preserveContentOrder(newRoot, rootEntry);
 
   // static parts that neither matched nor re-joined: kept OUT (they never
   // rendered in any captured combo — drawing them would be phantom ink), a
@@ -3694,6 +3742,10 @@ export function promoteAnatomy(
     if (!ax || ax.unset === undefined) continue;
     const prop = contract.props.find((p) => p.name === axProp);
     if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type)) continue;
+    if (prop.bindings.figma.unsetValue !== undefined) {
+      receipts.push(`optional-adornment-omission-preserved: ${axProp} uses an explicit canvas omission option; no public enum member or code default is fabricated`);
+      continue;
+    }
     if (prop.type.enum.includes(ax.unset) || prop.default !== undefined) continue;
     prop.type.enum = [ax.unset, ...prop.type.enum];
     (prop as { default?: unknown }).default = ax.unset;

@@ -82,6 +82,12 @@ const parseComposite = (body: string): string[] | null => {
  * deliberate act; the checks in this file make sure the entry stays true.
  */
 const EXCLUDED: Record<string, string> = {
+  // Needs a Figma personal token with file read scope, network access to
+  // api.figma.com and the npm registry (it installs a fresh consumer), and a
+  // designer-authored input set. Its receipts are committed under
+  // recipe/evidence/design-led-consumer/ and reviewed by hand.
+  "root:design:consumer:check":
+    "needs FIGMA_TOKEN, api.figma.com and a registry install of a fresh consumer; evidence is committed and reviewed, not recomputed in CI",
   // The suite itself is no longer wired into a lane BY THIS NAME. The full lane
   // runs `eval:carried:check`, which runs every case (no --only, no skips) into
   // the same scratch record and then applies the named-red rule to what THAT run

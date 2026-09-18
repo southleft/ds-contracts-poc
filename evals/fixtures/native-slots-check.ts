@@ -614,6 +614,40 @@ console.log("\n8. FC-SLOT-BIRTH-BOX ON AMEND — a variant COMPONENT root the em
   const textNodes = findAll(leafMock, (n: any) => n.type === 'TEXT');
   if (!textNodes.length) fail('the leaf-guard fixture built no TEXT node — it is not exercising the guard');
   ok(`leaf guard: ${textNodes.length} TEXT leaf/leaves built without entering the frame-only re-measure`);
+
+  // A literal dimension is just as explicit as a token-bound dimension.
+  // Exercise roots (create + amend) and nested frames; an unpinned opposite
+  // axis must still leave the 100px birth box.
+  for (const [width, height] of [[73, 29], [47, undefined], [undefined, 31]]) {
+    const literalRoot = childlessRoot();
+    literalRoot.anatomy.root = {
+      layout: { display: 'flex', direction: 'column' },
+      literals: { ...(width !== undefined ? { width: `${width}px` } : {}), ...(height !== undefined ? { height: `${height}px` } : {}) },
+    };
+    const literalMock = createFigmaMock();
+    for (const version of ['0.1.0', '0.2.0']) {
+      literalRoot.version = version;
+      await runIn(literalMock, emitOf(literalRoot));
+      const roots = findAll(literalMock, (n: any) => n.type === 'COMPONENT');
+      if (!roots.length || roots.some((n: any) => n.width !== (width ?? 1) || n.height !== (height ?? 1)))
+        fail(`literal-sized empty roots lost their dimensions on ${version}: ${roots.map((n: any) => n.width + 'x' + n.height).join(', ')}`);
+    }
+  }
+  const literalChildren = childlessRoot();
+  literalChildren.semantics.element = 'div';
+  literalChildren.anatomy.root = { layout: { display: 'flex', direction: 'column' }, parts: {
+    widthOnly: { layout: { display: 'flex' }, literals: { width: '47px' } },
+    heightOnly: { layout: { display: 'flex' }, literals: { height: '31px' } },
+    both: { layout: { display: 'flex' }, literals: { width: '63px', height: '27px' } },
+  } };
+  const childMock = createFigmaMock();
+  await runIn(childMock, emitOf(literalChildren));
+  for (const [name, w, h] of [['widthOnly', 47, undefined], ['heightOnly', undefined, 31], ['both', 63, 27]] as const) {
+    const frames = findAll(childMock, (n: any) => n.type === 'FRAME' && n.name === name);
+    if (!frames.length || frames.some((n: any) => (w !== undefined && n.width !== w) || (h !== undefined && n.height !== h)))
+      fail(`literal child ${name} expected ${w}x${h}, observed ${frames.map((n: any) => n.width + 'x' + n.height).join(', ')}`);
+  }
+  ok('literal sizes survive root creation/amend and child birth-box repair; unpinned axes still remeasure');
 }
 
 console.log('\n9. FC-OVERFLOW-CLIP-LOST — declared overflow hidden/clip draws as clipsContent, auto/scroll does not');

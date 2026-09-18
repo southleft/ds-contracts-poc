@@ -19,11 +19,20 @@ import {
   type SemanticObservation,
 } from "./semantics.js";
 import type { SourceTopology, TopologyNode, TopologySlot } from "./topology.js";
+import { proveLitStaticTemplates } from "./lit-static-template-proof.js";
+import type { LitRenderObservation } from "./lit-render-observation.js";
 
 export interface LitRenderInput {
   source: LitTemplateInput;
   semantics: SemanticIntake;
   boundTopology: BoundTopologyResult;
+  /** Fresh instrumented render, bound by the calling evidence loader to the
+   * same source image/tree. Never retroactively attached to older captures. */
+  staticRender?: {
+    observation: LitRenderObservation;
+    sourcePngSha256: string;
+    sourceTreeSha256: string;
+  };
   /** Enumeration is fail-closed, never truncated. Hard maximum: 128 shapes. */
   maxShapes?: number;
 }
@@ -59,6 +68,15 @@ export interface LitRenderGuard {
   evidence: "observed-scalar" | "structure-only-unproven";
   reason?: string;
 }
+export interface LitRenderText {
+  templateId: string;
+  sourceSpan: LitSpan;
+  domPath: string;
+  visualPath?: string;
+  value: string;
+  /** Direct this.p syntax plus observed scalar equality, not causal behavior proof. */
+  sourceProperty?: string;
+}
 export interface LitRenderMatch {
   version: 1;
   status: "structure-matched" | "refused";
@@ -78,6 +96,7 @@ export interface LitRenderMatch {
   nodes: LitRenderNode[];
   bindings: LitRenderBinding[];
   slots: LitRenderSlot[];
+  texts?: LitRenderText[];
 }
 
 type Scalar = string | number | boolean | null | undefined;
@@ -86,12 +105,21 @@ type Evaluation =
   | { known: false; enumerable: boolean; reason: string };
 type SourceElement = Extract<LitNode, { kind: "element" }>;
 interface ShapeElement {
+  kind: "element";
   source: SourceElement;
   templateId: string;
-  children: ShapeElement[];
+  children: ShapeNode[];
 }
+interface ShapeText {
+  kind: "text";
+  templateId: string;
+  sourceSpan: LitSpan;
+  value: string;
+  sourceProperty?: string;
+}
+type ShapeNode = ShapeElement | ShapeText;
 interface Shape {
-  nodes: ShapeElement[];
+  nodes: ShapeNode[];
   templates: string[];
   guards: LitRenderGuard[];
 }
@@ -115,7 +143,25 @@ function fail(code: string): never {
  * evidence loader's responsibility; these hashes are not signatures.
  */
 export function matchLitRender(input: LitRenderInput): LitRenderMatch {
-  const read = readLitTemplateBindings(input.source);
+  let staticProof: ReturnType<typeof proveLitStaticTemplates> | undefined;
+  let staticProblem: string | undefined;
+  if (input.staticRender) {
+    try {
+      staticProof = proveLitStaticTemplates(
+        input.source,
+        input.staticRender.observation,
+      );
+    } catch (error) {
+      staticProblem =
+        error instanceof Error
+          ? error.message
+          : "static-template-observation-invalid";
+    }
+  }
+  const read = readLitTemplateBindings(
+    input.source,
+    staticProof?.substitutions,
+  );
   const { semantics, boundTopology: bound } = input;
   const result: LitRenderMatch = {
     version: 1,
@@ -145,6 +191,15 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
     slots: [],
   };
   try {
+    if (staticProblem) fail(staticProblem);
+    if (
+      input.staticRender &&
+      (input.staticRender.sourcePngSha256 !== semantics?.sourcePngSha256 ||
+        input.staticRender.sourceTreeSha256 !== semantics?.sourceTreeSha256 ||
+        input.staticRender.observation.policy.tagName !==
+          semantics?.declaration?.tagName)
+    )
+      fail("render-static-observation-identity-mismatch");
     const limit = input.maxShapes ?? 128;
     if (!Number.isInteger(limit) || limit < 1 || limit > 128)
       fail("render-shape-limit-invalid");
@@ -176,7 +231,13 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
       "render-state-mutation-unresolved",
       "static-html-values-unverified",
     ]);
-    if (read.problems.some((p) => structuralProblems.has(p.code)))
+    if (
+      read.problems.some(
+        (p) =>
+          structuralProblems.has(p.code) &&
+          !(staticProof && p.code === "static-html-values-unverified"),
+      )
+    )
       fail("render-source-topology-unresolved");
     result.limitations.push(
       ...read.problems.map(
@@ -307,7 +368,11 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
         ...shape,
         templates: [template.id, ...shape.templates],
       }));
-    const expandExpression = (expr: LitExpression, depth: number): Shape[] => {
+    const expandExpression = (
+      expr: LitExpression,
+      depth: number,
+      owner: string,
+    ): Shape[] => {
       if (depth > 64) fail("render-template-depth-limit");
       if (expr.kind === "template") {
         const template = templates.get(expr.templateId);
@@ -322,6 +387,7 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
               expandExpression(
                 guard.when === "truthy" ? expr.whenTrue : expr.whenFalse,
                 depth + 1,
+                owner,
               ),
               guard,
             ),
@@ -336,13 +402,19 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
             const takeRight =
               (guard.when === "truthy") === (expr.operator === "&&");
             if (takeRight)
-              return withGuard(expandExpression(expr.right, depth + 1), guard);
+              return withGuard(
+                expandExpression(expr.right, depth + 1, owner),
+                guard,
+              );
             const value = evalExpression(expr.left);
             // Unknown helper short-circuit values are only an EMPTY structural
             // candidate; no claim that all falsy values render empty (0 does not).
             if (!value.known && guard.evidence === "structure-only-unproven")
               return withGuard([empty()], guard);
-            return withGuard(expandExpression(expr.left, depth + 1), guard);
+            return withGuard(
+              expandExpression(expr.left, depth + 1, owner),
+              guard,
+            );
           }),
         );
       }
@@ -355,6 +427,29 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
           value.value === "")
       )
         return [empty()];
+      if (
+        value.known &&
+        (typeof value.value === "string" || typeof value.value === "number")
+      ) {
+        const text = String(value.value);
+        if (/^[\t\n\f\r ]*$/.test(text)) return [empty()];
+        return [
+          {
+            ...empty(),
+            nodes: [
+              {
+                kind: "text",
+                templateId: owner,
+                sourceSpan: expr.span,
+                value: text,
+                ...(expr.kind === "property"
+                  ? { sourceProperty: expr.name }
+                  : {}),
+              },
+            ],
+          },
+        ];
+      }
       fail("render-child-expression-unresolved");
     };
     const expandNodes = (
@@ -368,18 +463,35 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
         if (node.kind === "comment") continue;
         if (node.kind === "text") {
           if (!/^[\t\n\f\r ]*$/.test(node.value))
-            fail("render-source-text-unbound");
+            shapes = combine(shapes, [
+              {
+                ...empty(),
+                nodes: [
+                  {
+                    kind: "text",
+                    templateId: owner,
+                    sourceSpan: node.span,
+                    value: node.value,
+                  },
+                ],
+              },
+            ]);
           continue;
         }
         if (node.kind !== "element" && node.kind !== "expression")
           fail("render-source-node-unresolved");
         const next =
           node.kind === "expression"
-            ? expandExpression(node.expression, depth + 1)
+            ? expandExpression(node.expression, depth + 1, owner)
             : expandNodes(node.children, owner, depth + 1).map((shape) => ({
                 ...shape,
                 nodes: [
-                  { source: node, templateId: owner, children: shape.nodes },
+                  {
+                    kind: "element" as const,
+                    source: node,
+                    templateId: owner,
+                    children: shape.nodes,
+                  },
                 ],
               }));
         shapes = combine(shapes, next);
@@ -417,8 +529,17 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
       nodes: LitRenderNode[];
       bindings: LitRenderBinding[];
       slots: LitRenderSlot[];
+      texts: LitRenderText[];
     }> = [];
     for (const shape of candidates) {
+      if (
+        staticProof &&
+        (shape.templates.length !== staticProof.templateGroups.length ||
+          !staticProof.templateGroups.every((group, index) =>
+            group.includes(shape.templates[index]),
+          ))
+      )
+        continue;
       const correspondence = matchShape(shape, topology, semantics.observation);
       if (correspondence) matched.push({ shape, ...correspondence });
     }
@@ -436,6 +557,11 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
     result.nodes = chosen.nodes;
     result.bindings = chosen.bindings;
     result.slots = chosen.slots;
+    if (chosen.texts.length) {
+      result.texts = chosen.texts;
+      result.limitations[1] =
+        "Source comments, runtime comments (including Lit markers), and ASCII-whitespace-only text nodes are excluded from structural selection. Source-owned literal/scalar text retains source spans and positional DOM identity; scalar equality does not qualify a causal content API. Assigned consumer content retains exact slot Node identity.";
+    }
     result.limitations.push(
       ...result.guards
         .filter((g) => g.evidence === "structure-only-unproven")
@@ -629,11 +755,13 @@ function matchShape(
       nodes: LitRenderNode[];
       bindings: LitRenderBinding[];
       slots: LitRenderSlot[];
+      texts: LitRenderText[];
     }
   | undefined {
   const nodes: LitRenderNode[] = [],
     bindings: LitRenderBinding[] = [],
-    slots: LitRenderSlot[] = [];
+    slots: LitRenderSlot[] = [],
+    texts: LitRenderText[] = [];
   const direct = (path: string) =>
     topology.nodes
       .filter(
@@ -661,12 +789,28 @@ function matchShape(
   )
     return;
   const match = (
-    source: ShapeElement,
+    source: ShapeNode,
     actual: TopologyNode,
     depth: number,
   ): boolean => {
+    if (depth > 64) return false;
+    if (source.kind === "text") {
+      if (actual.kind !== "text" || actual.text !== source.value) return false;
+      texts.push({
+        templateId: source.templateId,
+        sourceSpan: source.sourceSpan,
+        domPath: actual.domPath,
+        value: source.value,
+        ...(actual.visualPath !== undefined
+          ? { visualPath: actual.visualPath }
+          : {}),
+        ...(source.sourceProperty
+          ? { sourceProperty: source.sourceProperty }
+          : {}),
+      });
+      return true;
+    }
     if (
-      depth > 64 ||
       actual.kind !== "element" ||
       actual.tag !== source.source.tag ||
       actual.shadowHostDomPath !== "host" ||
@@ -761,5 +905,5 @@ function matchShape(
     slots.length
   )
     return;
-  return { nodes, bindings, slots };
+  return { nodes, bindings, slots, texts };
 }

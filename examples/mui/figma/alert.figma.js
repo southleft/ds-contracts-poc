@@ -68,7 +68,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/standard",
                   "iconSize": 22
                 }
@@ -162,7 +162,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/filled",
                   "iconSize": 22
                 }
@@ -256,7 +256,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/outlined",
                   "iconSize": 22
                 }
@@ -350,7 +350,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/standard",
                   "iconSize": 22
                 }
@@ -444,7 +444,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/filled",
                   "iconSize": 22
                 }
@@ -538,7 +538,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/outlined",
                   "iconSize": 22
                 }
@@ -632,7 +632,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/standard",
                   "iconSize": 22
                 }
@@ -726,7 +726,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/filled",
                   "iconSize": 22
                 }
@@ -820,7 +820,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/outlined",
                   "iconSize": 22
                 }
@@ -914,7 +914,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/standard",
                   "iconSize": 22
                 }
@@ -1008,7 +1008,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/filled",
                   "iconSize": 22
                 }
@@ -1102,7 +1102,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/outlined",
                   "iconSize": 22
                 }
@@ -1659,12 +1659,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -2220,7 +2227,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2288,6 +2295,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2548,6 +2556,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -2704,6 +2713,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -2847,6 +2870,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

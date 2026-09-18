@@ -9,6 +9,7 @@ import {
 } from "./semantics.js";
 import {
   captureSourceTopology,
+  topologyPseudoProblems,
   type SourceTopology,
   type TopologyInput,
   type TopologyResult,
@@ -73,7 +74,7 @@ export function topologyJoinProblems(
   topology: SourceTopology,
   semantics: SemanticObservation,
 ): string[] {
-  const problems: string[] = [];
+  const problems: string[] = topologyPseudoProblems(topology);
   const nodes = new Map(topology.nodes.map((node) => [node.domPath, node]));
   if (nodes.size !== topology.nodes.length)
     return ["bound-topology-node-identity-ambiguous"];

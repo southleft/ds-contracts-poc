@@ -6,6 +6,7 @@ import { chromium, type Browser } from "playwright-core";
 import {
   isBindingEvidenceRequest,
   loadBindingEvidence,
+  bindingStories,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
 import {
@@ -21,6 +22,22 @@ import {
   probeBindingDifferential,
   type BindingDifferentialResult,
 } from "./binding-differential.js";
+import {
+  captureStableSemantics,
+  assessSemantics,
+  type SemanticIntake,
+} from "./semantics.js";
+import {
+  deriveLifecycleIdentityPolicy,
+  installLifecycleIdentityProbe,
+  semanticReplayMatches,
+} from "./lifecycle-identity.js";
+import {
+  deriveLitRenderObservationPolicy,
+  installLitRenderObservationProbe,
+  captureStableLitRender,
+  type LitRenderObservation,
+} from "./lit-render-observation.js";
 import { replayReference } from "./replay.js";
 
 export interface BindingRunDifferential {
@@ -38,6 +55,8 @@ export interface BindingRunRow {
   plannedDependencies: number;
   boundTopology?: BoundTopologyResult;
   correspondence?: LitRenderMatch;
+  replaySemantics?: SemanticIntake;
+  renderObservation?: LitRenderObservation;
   differentials: BindingRunDifferential[];
 }
 export interface BindingRunReport {
@@ -119,7 +138,7 @@ export async function runBindingJob(
       job.stories,
       evidence.rows.map((row) => row.story),
     ) ||
-    evidence.rows.length !== (job.request.supplement ? 7 : 4)
+    !same(job.stories, bindingStories(job.request))
   )
     fail("binding-run-job-evidence-mismatch");
   const report: BindingRunReport = {
@@ -141,7 +160,9 @@ export async function runBindingJob(
       })),
     })),
     scope:
-      "Recorded Altitude Button evidence only: four original rows and, when requested, three separately recorded variant rows retain their original source refusals. Eligible originals are replayed in fresh HAR-only contexts and joined to exact source AST/DOM identities. Only the default story receives three finite dependency probes; changed images are probe artifacts, never replacement answer keys. Structure-matched is not behavior acceptance, an accepted Contract, Figma output, fresh Altitude, a complete API/variant proof or a release grade. sourceStable records revalidated input identity before/after this run, not a continuous source mutation monitor.",
+      job.request.version === 2
+        ? "Recorded Checkbox evidence only: all four original states retain their source refusals. Fresh archived replay semantics, actual Lit parser input and DOM/pseudo/text identities are corroborated with the original source. Structural traces are not causal dependencies, behavior acceptance, an accepted Contract or Figma conversion."
+        : "Recorded Altitude Button evidence only: four original rows and, when requested, three separately recorded variant rows retain their original source refusals. Eligible originals are replayed in fresh HAR-only contexts and joined to exact source AST/DOM identities. Only the default story receives three finite dependency probes; changed images are probe artifacts, never replacement answer keys. Structure-matched is not behavior acceptance, an accepted Contract, Figma output, fresh Altitude, a complete API/variant proof or a release grade. sourceStable records revalidated input identity before/after this run, not a continuous source mutation monitor.",
   };
   const write = (relative: string, bytes: string | Uint8Array) => {
     assertDirectory();
@@ -225,22 +246,90 @@ export async function runBindingJob(
             original.replay.harSha256
           )
             fail("binding-run-archive-changed");
-          const reference = await replayReference(
+          const identityPolicy =
+            job.request.version === 2
+              ? deriveLifecycleIdentityPolicy(
+                  evidence.source,
+                  original.semantics.declaration,
+                )
+              : undefined;
+          const renderPolicy =
+            job.request.version === 2
+              ? deriveLitRenderObservationPolicy(
+                  evidence.source,
+                  original.semantics.declaration,
+                )
+              : undefined;
+          const reference = await replayReference<{
+            bound: BoundTopologyResult;
+            semantics?: SemanticIntake;
+            render?: LitRenderObservation;
+          }>(
             browser,
             original.replay.harPath,
             original.replay.url,
             original.profile,
             undefined,
-            (page) =>
-              captureBoundSourceTopology(page, {
+            async (page) => {
+              const semantics =
+                job.request.version === 2
+                  ? assessSemantics(
+                      original.semantics!.declaration,
+                      await captureStableSemantics(
+                        page,
+                        [original.semantics!.declaration.tagName],
+                        original.semantics!.declaration,
+                        original.topology!.sourcePngSha256,
+                      ),
+                      {
+                        valid: true,
+                        sourcePngSha256: original.topology!.sourcePngSha256,
+                        sourceTreeSha256: original.topology!.treeSha256,
+                      },
+                    )
+                  : original.semantics!;
+              if (
+                job.request.version === 2 &&
+                (semantics.status !== "observed" ||
+                  !semanticReplayMatches(
+                    original.semantics!.observation,
+                    semantics.observation,
+                    identityPolicy,
+                  ))
+              )
+                fail("binding-fresh-semantics-mismatch");
+              const bound = await captureBoundSourceTopology(page, {
                 topology: original.topology!,
-                semantics: original.semantics!,
-              }),
+                semantics,
+              });
+              if (job.request.version === 1) return { bound };
+              const render = await captureStableLitRender(
+                page,
+                [semantics.declaration.tagName],
+                semantics.sourcePngSha256,
+              );
+              if (!render) fail("binding-render-observation-missing");
+              return { bound, semantics, render };
+            },
+            job.request.version === 2
+              ? async (context) => {
+                  if (identityPolicy)
+                    await installLifecycleIdentityProbe(
+                      context,
+                      identityPolicy,
+                    );
+                  if (!renderPolicy) fail("binding-render-policy-unavailable");
+                  await installLitRenderObservationProbe(
+                    context,
+                    renderPolicy!,
+                  );
+                }
+              : undefined,
           );
           write(`${row.story}/replay.png`, reference.screenshot);
           const {
             screenshot: _screenshot,
-            inspection,
+            inspection: fresh,
             ...rawReference
           } = reference;
           json(`${row.story}/reference.json`, rawReference);
@@ -258,12 +347,24 @@ export async function runBindingJob(
             original.replay.harSha256
           )
             row.problems.push("binding-run-archive-changed");
+          const inspection = fresh?.bound;
+          if (fresh?.semantics) row.replaySemantics = fresh.semantics;
+          if (fresh?.render) row.renderObservation = fresh.render;
           if (inspection) row.boundTopology = inspection;
           if (!row.problems.length && inspection) {
             row.correspondence = matchLitRender({
               source: evidence.source,
-              semantics: original.semantics,
+              semantics: fresh?.semantics ?? original.semantics,
               boundTopology: inspection,
+              ...(fresh?.render
+                ? {
+                    staticRender: {
+                      observation: fresh.render,
+                      sourcePngSha256: original.topology!.sourcePngSha256,
+                      sourceTreeSha256: original.topology!.treeSha256,
+                    },
+                  }
+                : {}),
             });
             row.problems.push(
               ...inspection.problems,
@@ -341,6 +442,13 @@ export async function runBindingJob(
         row.problems.push(...differential.problems);
       }
       row.problems = [...new Set(row.problems)];
+      if (job.request.version === 2) {
+        json(`${row.story}/replay-semantics.json`, row.replaySemantics ?? null);
+        json(
+          `${row.story}/render-observation.json`,
+          row.renderObservation ?? null,
+        );
+      }
       json(`${row.story}/bound-topology.json`, row.boundTopology ?? null);
       json(`${row.story}/correspondence.json`, row.correspondence ?? null);
       json(`${row.story}/differentials.json`, row.differentials);

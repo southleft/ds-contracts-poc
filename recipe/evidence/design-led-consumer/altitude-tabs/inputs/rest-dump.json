@@ -1,0 +1,770 @@
+{
+  "_provenance": {
+    "fileKey": "y83n4o9LOGs74oAoguFcGS",
+    "extractedAt": "2026-09-18",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.32) for design→contract proposal.",
+    "dumpVersion": "1.32",
+    "captureGaps": [
+      "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
+      "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
+      "image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box",
+      "fixed sizes on plain rectangles (dump v1.8 fixedSize): not captured on this route — a drawn width/height is lost and the node sizes to content",
+      "strokeAlign (dump v1.11): not captured on this route — an OUTSIDE stroke (focus ring) will be read as an inward border",
+      "layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line",
+      "the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types"
+    ],
+    "variables": {
+      "status": "unavailable",
+      "cause": "scope",
+      "httpStatus": 403,
+      "message": "Figma refused /variables/local: your personal access token is missing the `file_variables:read` scope (HTTP 403 — a token scope, NOT a plan limit). This is fixable — mint a new token at figma.com → Settings → Security → Personal access tokens with \"Variables: read\" enabled, and re-run. (Variable NAMES will be unresolved until you do; the import still works, using resolved values.)",
+      "fix": "regenerate the token with file_variables:read"
+    }
+  },
+  "Tabs": {
+    "setName": "Tabs",
+    "type": "COMPONENT_SET",
+    "nodeId": "3558:61955",
+    "key": "b0fcf6c30821ef8e3eea377860944361ffc600a6",
+    "description": "Tag: al-tabs\n\nProps\n- variant — Tabs variant\n  - default: Tabs are left-aligned, and the width of each tab is defined by the length of its content\n  - stretch: Tabs stretch horizontally to have equal widths, which is calculated by the width of the screen divided by the number of tabs\n\nSlots\n- (default) — The tab items for the tabs\n- panel — The tab panels that correspond to the slotted tab items\n\nAccessibility\n- element: <div>\n- key ArrowRight: Activates the next tab.\n- key ArrowLeft: Activates the previous tab.\n- key Home: Activates the first tab.\n- key End: Activates the last tab.\n- focus: Roving focus across the tab list: the arrow keys move focus and activation together, so the list is a single tab stop and the panel is the next one.\n\nDocs: https://altitude.pages.dev/docs/components/tabs/",
+    "documentationLinks": [
+      {
+        "uri": "https://altitude.pages.dev/docs/components/tabs/"
+      }
+    ],
+    "propertyDefinitions": {
+      "Text#3558:4569": {
+        "type": "TEXT",
+        "defaultValue": "Tab One"
+      },
+      "Variant": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Stretch"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "name": "Variant=Default",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 439,
+          "height": 176
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "al-c-tabs__header",
+            "type": "FRAME",
+            "clipsContent": true,
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "stroke": {
+              "hex": "3c3c35"
+            },
+            "strokeWeight": 0,
+            "children": [
+              {
+                "name": "al-c-tabs__list",
+                "type": "FRAME",
+                "clipsContent": true,
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "children": [
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "AUTO",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "8ea6ff"
+                    },
+                    "strokeWeight": 0,
+                    "instanceOf": "Tab",
+                    "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "Yes"
+                    },
+                    "bbox": {
+                      "width": 101,
+                      "height": 38
+                    }
+                  },
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "AUTO",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "strokeWeight": 0,
+                    "instanceOf": "Tab",
+                    "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "No"
+                    },
+                    "bbox": {
+                      "width": 92,
+                      "height": 38
+                    }
+                  },
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "AUTO",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "strokeWeight": 0,
+                    "instanceOf": "Tab",
+                    "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "No"
+                    },
+                    "bbox": {
+                      "width": 92,
+                      "height": 38
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "al-c-tabs__body",
+            "type": "FRAME",
+            "clipsContent": true,
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "al-tab-panel",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 16,
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "instanceOf": "Tab Panel",
+                "instanceKey": "0dc3ed8ff424314e17f4c5cc0631486c4adb68b0",
+                "instanceSetKey": "0423a06e233beace25a2404fb4c288ac576defd1",
+                "componentProperties": {
+                  "State": "Default"
+                },
+                "bbox": {
+                  "width": 439,
+                  "height": 136
+                }
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "Variant": "Default"
+        }
+      },
+      {
+        "name": "Variant=Stretch",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 439,
+          "height": 176
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "children": [
+          {
+            "name": "al-c-tabs__header",
+            "type": "FRAME",
+            "clipsContent": true,
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "FIXED",
+              "counterSizing": "AUTO"
+            },
+            "stroke": {
+              "hex": "3c3c35"
+            },
+            "strokeWeight": 0,
+            "fillWidth": true,
+            "children": [
+              {
+                "name": "al-c-tabs__list",
+                "type": "FRAME",
+                "clipsContent": true,
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "AUTO"
+                },
+                "fillWidth": true,
+                "children": [
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "FIXED",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "8ea6ff"
+                    },
+                    "strokeWeight": 0,
+                    "fillWidth": true,
+                    "instanceOf": "Tab",
+                    "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "Yes"
+                    },
+                    "bbox": {
+                      "width": 146.33,
+                      "height": 38
+                    }
+                  },
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "FIXED",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "strokeWeight": 0,
+                    "fillWidth": true,
+                    "instanceOf": "Tab",
+                    "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "No"
+                    },
+                    "bbox": {
+                      "width": 146.33,
+                      "height": 38
+                    }
+                  },
+                  {
+                    "name": "al-tab",
+                    "type": "INSTANCE",
+                    "layout": {
+                      "mode": "HORIZONTAL",
+                      "primary": "CENTER",
+                      "counter": "CENTER",
+                      "spacing": 8,
+                      "padding": [
+                        8,
+                        16,
+                        8,
+                        16
+                      ],
+                      "primarySizing": "FIXED",
+                      "counterSizing": "AUTO"
+                    },
+                    "fill": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "stroke": {
+                      "hex": "000000",
+                      "alpha": 0
+                    },
+                    "strokeWeight": 0,
+                    "fillWidth": true,
+                    "instanceOf": "Tab",
+                    "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
+                    "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
+                    "componentProperties": {
+                      "Text#3543:4079": "Tab label",
+                      "State": "Default",
+                      "Active": "No"
+                    },
+                    "bbox": {
+                      "width": 146.33,
+                      "height": 38
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "al-c-tabs__body",
+            "type": "FRAME",
+            "clipsContent": true,
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "children": [
+              {
+                "name": "al-tab-panel",
+                "type": "INSTANCE",
+                "layout": {
+                  "mode": "VERTICAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "spacing": 16,
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "AUTO",
+                  "counterSizing": "AUTO"
+                },
+                "instanceOf": "Tab Panel",
+                "instanceKey": "0dc3ed8ff424314e17f4c5cc0631486c4adb68b0",
+                "instanceSetKey": "0423a06e233beace25a2404fb4c288ac576defd1",
+                "componentProperties": {
+                  "State": "Default"
+                },
+                "bbox": {
+                  "width": 439,
+                  "height": 136
+                }
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "Variant": "Stretch"
+        }
+      }
+    ]
+  },
+  "_degradations": [
+    {
+      "code": "variables-unavailable",
+      "nodePath": "file:y83n4o9LOGs74oAoguFcGS",
+      "message": "/v1/files/:key/variables/local refused with HTTP 403: the token lacks the file_variables:read scope (NOT a plan limit — the same token reads the file). FIX: regenerate the token with file_variables:read and re-run. Until then every variable binding on this dump is a resolved literal (see the variable-unresolved rows) and no variable name survives"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header",
+      "message": "stroke: variable id VariableID:386:756 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "stroke-weights-nonuniform",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header",
+      "message": "per-side stroke weights [1, 0, 1, 0] — dump v1 carries a uniform strokeWeight only; per-side weights dropped"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "stroke: variable id VariableID:386:758 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__body/al-tab-panel",
+      "message": "itemSpacing: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Default/al-c-tabs__body/al-tab-panel",
+      "message": "paddingTop: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header",
+      "message": "stroke: variable id VariableID:386:756 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "stroke-weights-nonuniform",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header",
+      "message": "per-side stroke weights [1, 0, 1, 0] — dump v1 carries a uniform strokeWeight only; per-side weights dropped"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "stroke: variable id VariableID:386:758 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "itemSpacing: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingLeft: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingTop: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingRight: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "paddingBottom: variable id VariableID:3653:29282 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header/al-c-tabs__list/al-tab",
+      "message": "fill: variable id VariableID:386:738 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__body/al-tab-panel",
+      "message": "itemSpacing: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__body/al-tab-panel",
+      "message": "paddingTop: variable id VariableID:3653:29284 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    }
+  ]
+}

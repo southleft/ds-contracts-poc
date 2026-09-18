@@ -54,7 +54,7 @@ test("both product surfaces render the canonical document, including its scope a
   assert.equal(site.route, "system");
   assert.ok(site.html.includes(`<article>${html}</article>`));
   assert.match(html, /v1 is not complete/);
-  assert.match(html, /The sync spine currently plans; it does not apply/);
+  assert.match(html, /The general sync spine still plans without applying/);
   assert.match(html, /src="\/assets\/product-loop.svg"/);
   assert.match(
     html,

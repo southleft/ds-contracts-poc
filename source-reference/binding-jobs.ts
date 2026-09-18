@@ -11,11 +11,15 @@ import {
 import path from "node:path";
 import {
   loadBindingEvidence,
+  bindingComponent,
+  bindingStories,
   isBindingEvidenceRequest,
   type BindingEvidence,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
 import type { BoundTopologyResult } from "./bound-topology.js";
+import type { SemanticIntake } from "./semantics.js";
+import type { LitRenderObservation } from "./lit-render-observation.js";
 import type { LitRenderMatch } from "./lit-render-match.js";
 import type { BindingDifferentialResult } from "./binding-differential.js";
 import { validateBindingReport } from "./binding-report.js";
@@ -30,6 +34,8 @@ export interface BindingTraceRow {
   plannedDependencies: number;
   boundTopology?: BoundTopologyResult;
   correspondence?: LitRenderMatch;
+  replaySemantics?: SemanticIntake;
+  renderObservation?: LitRenderObservation;
   differentials: Array<{
     key: string;
     problems: string[];
@@ -55,6 +61,7 @@ interface BindingJobRecord {
   reportSha256?: string;
 }
 export interface BindingJobSnapshot {
+  component?: "al-checkbox";
   id: string;
   state: BindingJobRecord["state"];
   denominator: number;
@@ -215,7 +222,7 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
           job.stories.some(
             (story) =>
               typeof story !== "string" ||
-              !/^atoms-button--[a-z-]+$/.test(story),
+              !bindingStories(job.request).includes(story),
           ) ||
           new Set(job.stories).size !== job.stories.length ||
           !/^[a-f0-9]{64}$/.test(job.sourceProgramSha256) ||
@@ -241,6 +248,9 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
   function snapshot(job: BindingJobRecord): BindingJobSnapshot {
     const result: BindingJobSnapshot = {
       id: job.id,
+      ...(job.request.version === 2
+        ? { component: "al-checkbox" as const }
+        : {}),
       state: job.state,
       denominator: job.stories.length,
       matched: 0,
@@ -286,7 +296,11 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
       if (!isBindingEvidenceRequest(request))
         throw Error("binding-request-invalid");
       const relevant = [...jobs.values()]
-        .filter((job) => job.request.baseline.id === request.baseline.id)
+        .filter(
+          (job) =>
+            job.request.baseline.id === request.baseline.id &&
+            bindingComponent(job.request) === bindingComponent(request),
+        )
         .sort((a, b) => a.startedAt.localeCompare(b.startedAt));
       const latest = relevant.at(-1);
       if (!latest) throw Error("binding-selection-unavailable");

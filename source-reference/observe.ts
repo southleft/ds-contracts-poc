@@ -27,6 +27,16 @@ export async function observeSource(page: Page, profile: SourceProfile,
       element = root?.querySelector(selector) ?? null;
       root = element?.shadowRoot ?? null;
     }
+    const labels = element && 'labels' in element ? Array.from((element as HTMLInputElement).labels ?? []) : [];
+    const label = labels.length === 1 ? labels[0] : null;
+    const associated = !!element && !!label && label.control === element &&
+      (!element.id || [...(element.getRootNode() as Document | ShadowRoot).querySelectorAll('[id]')].filter(n => n.id === element!.id).length === 1);
+    const labelBounds = label?.getBoundingClientRect();
+    const associatedLabel = p.associatedLabelText === undefined ? undefined : {
+      text: label?.innerText.trim() ?? '',
+      visible: !!label && !!labelBounds && labelBounds.width > 0 && labelBounds.height > 0 && label.checkVisibility({checkOpacity:true, checkVisibilityCSS:true}),
+      associated,
+    };
     const css = element ? getComputedStyle(element) : null;
     const rect = element?.getBoundingClientRect();
     // innerText includes the actual rendered text; slots need assigned content too.
@@ -36,7 +46,8 @@ export async function observeSource(page: Page, profile: SourceProfile,
       found: !!element,
       visible: !!element && element.checkVisibility({checkOpacity:true, checkVisibilityCSS:true}),
       width: rect?.width ?? 0, height: rect?.height ?? 0,
-      text: ((element as HTMLElement | null)?.innerText ?? element?.textContent ?? '') + slotText,
+      text: associatedLabel ? associatedLabel.text : ((element as HTMLElement | null)?.innerText ?? element?.textContent ?? '') + slotText,
+      ...(associatedLabel ? {associatedLabel} : {}),
       styles: Object.fromEntries(Object.keys(p.requiredStyles).map(k => [k, css?.getPropertyValue(k).trim() ?? ''])),
       tokens: Object.fromEntries(Object.keys(p.requiredTokens).map(k => [k, css?.getPropertyValue(k).trim() ?? ''])),
       fontsReady: document.fonts.status === 'loaded',
@@ -67,7 +78,7 @@ export async function observeSource(page: Page, profile: SourceProfile,
   let platformFonts: SourceObservation['platformFonts'] = [];
   try {
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
-    const expression = `(() => { let root = document, element = null; for (const s of ${JSON.stringify(profile.fontPath ?? profile.path)}) { element = root?.querySelector(s); root = element?.shadowRoot; } return element; })()`;
+    const expression = `(() => { let root = document, element = null; for (const s of ${JSON.stringify(profile.associatedLabelText === undefined ? profile.fontPath ?? profile.path : profile.path)}) { element = root?.querySelector(s); root = element?.shadowRoot; } return ${profile.associatedLabelText === undefined ? 'element' : 'element?.labels?.length === 1 ? element.labels[0] : null'}; })()`;
     const { result } = await cdp.send('Runtime.evaluate', {expression});
     if (result.objectId) {
       await cdp.send('DOM.getDocument', {depth:-1, pierce:true});

@@ -1,3 +1,15 @@
+import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
+import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
+import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
+import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
+import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
+import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
+import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
+import { isReactComparisonRequest, reactComparisonReservation, type ReactComparisonRequest } from './react-comparison-request.js';
+import type { prepareReactComparisonPlan } from './react-comparison-plan.js';
+import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from '../core/native-contract-comparison-observation.js';
 /** Durable, server-owned source-native operations. Transport executes the
  * returned command; it cannot choose its target, scope, script or expectations.
  * A native acknowledgement is retained before a separate observation is issued.
@@ -19,6 +31,7 @@ import {
 import path from "node:path";
 import {
   collectNativeImages,
+  collectExpectedNativeImages,
   type NativeImageObservation,
 } from "./native-operation-images.js";
 import { canonicalJson, revisionOf } from "../core/contract-provenance.js";
@@ -27,9 +40,10 @@ import {
   type NativeTokenIdentity,
 } from "../core/native-token-context.js";
 import {
-  emitNativeSourceReadbackScript,
-  verifyNativeSourceReadback,
+  emitNativeInspectionReadbackScript,
+  verifyNativeInspectionReadback,
   type NativeSourceObservationInput,
+  type NativeInspectionInput,
 } from "../core/native-source-observation.js";
 import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
@@ -50,28 +64,49 @@ import {
   buildNativeSourceComponentWrite,
 } from "./native-source-plan.js";
 import { readVerifiedRuntimeArtifact } from "./runtime-artifact.js";
+import type { prepareReactNativePlan } from './react-native-plan.js';
+import { isReactNativeRequest, reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
+import type { prepareReactCallerNativePlan } from './react-caller-native-plan.js';
+import { isReactCallerNativeRequest, reactCallerNativeReservation, type ReactCallerNativeRequest } from './react-caller-native-request.js';
 
 /** The current owner-approved writable target. A request/plan cannot override it. */
 export const SOURCE_NATIVE_FILE_KEY = "byMp6lt0Ij9b2QbkDGFwBh";
+/** Owner-supplied evaluation file, only for new React operation identities. */
+export const REACT_NATIVE_FILE_KEY = 'T56aKuRnoay1L7CKAjSWRO';
 const POLICY = {
   version: 1,
   fileKey: SOURCE_NATIVE_FILE_KEY,
   ownership: "new-operation-only",
 } as const;
-type Plan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
+type SourcePlan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
+type ReactPlan = ReturnType<typeof prepareReactNativePlan>;
+type CallerGraphPlan = ReturnType<typeof prepareReactCallerNativePlan>;
+type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
+type InitialPlan = ReturnType<typeof prepareReactInitialNativePlan>;
+type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan;
+const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
+const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
+type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
+const reservation = (r: OperationRequest) => isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+const isReactPlan = (p: Plan): p is ReactPlan | CallerGraphPlan | InitialPlan => 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection');
 type Pin = { id: string; reportSha256: string };
-export interface NativeOperationPreparation {
+export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
   preparation: Pin;
-  plan: Plan;
+  plan: P;
+  sourceCompatibility?: 'identity-opacity-omission';
 }
 export type NativeOperationPhase =
-  "token-create" | "token-readback" | "component-create" | "component-readback";
+  "token-create" | "token-readback" | "component-create" | "component-readback"
+  | "update-preflight-readback" | "update-apply" | "update-readback" | "comparison-recovery-readback" | "comparison-recovery-apply" | "comparison-repair-preflight-readback" | "comparison-repair-apply";
 export interface NativeOperationComponentContext {
   operation: NativeSourceWriteContext["operation"];
   tokens: NativeSourceWriteContext["tokens"];
   planRevision: string;
   journalRevision: string;
+  comparisonRecovery?: PreparedNativeComparisonRecovery;
 }
 export interface NativeOperationCommand {
   version: 1;
@@ -101,7 +136,13 @@ export interface NativeOperationResult {
     | Record<string, unknown>;
 }
 export interface NativeOperationSnapshot {
+  comparisonBaselineRefreshed?: boolean;
   id: string;
+  componentName?: string;
+  sourceOwnedContent?: boolean;
+  comparisonWidth?: number;
+  canResumeComparison?: boolean;
+  comparisonRepair?: {changes: NativeComparisonRepairPlan["changes"]};
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -117,17 +158,23 @@ export interface NativeOperationSnapshot {
     | "component-observation-refused"
     | "component-creation-refused"
     | "component-creation-invalid"
+    | "comparison-recovery-observed"
+    | "comparison-recovery-refused"
+    | "comparison-repair-observed"
+    | "comparison-repair-refused"
     | "component-partial-allocation"
     | "evidence-unavailable";
   structuralObservation?: {
     scope: "supported-structure";
-    status: "supported-structure-observed" | "refused";
+    status: "supported-structure-observed" | "supported-comparison-structure-observed" | "refused";
     limitations: string[];
   };
   imageObservation?: NativeImageObservation & { attemptId: string };
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
+  sourceCompilerRecompiled?: boolean;
+  sourceCompatibility?: 'identity-opacity-omission';
   acceptedContract: null;
   nativeQualification: "unqualified";
   counters: {
@@ -142,8 +189,8 @@ interface Header {
   version: 1;
   id: string;
   startedAt: string;
-  request: BindingEvidenceRequest;
-  policy: typeof POLICY;
+  request: OperationRequest;
+  policy: ReturnType<typeof policyFor>;
   visual: Pin;
   preparation: Pin;
   planRevision: string;
@@ -157,7 +204,7 @@ type Event = {
   previousSha256: string;
   recordedAt: string;
 } & (
-  | { kind: "dispatch"; command: Dispatch }
+  | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan; comparisonRefresh?: ReactComparisonRefresh }
   | { kind: "result"; envelope: NativeOperationResult }
   | { kind: "abandon-observation"; attemptId: string }
   | { kind: "retry-refused-creation" }
@@ -167,14 +214,41 @@ interface State {
   identity?: NativeTokenIdentity;
   componentCreation?: Record<string, any>;
   allocationAnchor?: NativeSourceObservationInput["allocationAnchor"];
-  componentObservation?: ReturnType<typeof verifyNativeSourceReadback>;
+  componentObservation?: ReturnType<typeof verifyNativeInspectionReadback> | ReturnType<typeof verifyNativeContractComparisonReadback>;
   imageReadback?: NativeOperationResult;
   pending?: NativeOperationCommand;
   problems: string[];
   dispatchedCreate: boolean;
   dispatchedComponent: boolean;
+  partialCreation?: Record<string, any>;
+  recovery?: PreparedNativeComparisonRecovery;
+  recoveryWritten?: boolean;
+  comparisonRepair?: NativeComparisonRepairPlan;
+  comparisonMigration?:NativeComparisonRepairPlan;
+  repairWritten?: boolean;
+  repairRevisionsWritten?: string[];
+  comparisonRefresh?: ReactComparisonRefresh;
 }
 export interface NativeOperationJobsOptions {
+  reactInitial?: {
+    prepare(request: ReactInitialNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<InitialPlan>;
+    buildComponent(request: ReactInitialNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
+  reactComparison?: {
+    refresh?(request: ReactComparisonRequest, operation: { id: string; fileKey: string }): ReactComparisonRefresh;
+    prepare(request: ReactComparisonRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ComparisonPlan>;
+    buildComponent(request: ReactComparisonRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
+  react?: {
+    updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
+      receipt: import('../core/native-source-observation.js').NativeSourceReadback } | undefined;
+    prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
+    buildComponent(request: ReactNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
+  reactCaller?: {
+    prepare(request: ReactCallerNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<CallerGraphPlan>;
+    buildComponent(request: ReactCallerNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
   /** Trusted in-process preparer. Reopens latest visual/source/runtime evidence
    * and compiles it for this exact host-allocated operation. Never an HTTP input. */
   prepare(
@@ -290,6 +364,25 @@ export function createNativeOperationJobs(
   repoRoot: string,
   options: NativeOperationJobsOptions,
 ) {
+  const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if (isReactInitialNativeRequest(request)) {
+      if (!options.reactInitial) fail('react-initial-adapter-unavailable');
+      return options.reactInitial.prepare(request, operation);
+    }
+    if (isReactComparisonRequest(request)) {
+      if (!options.reactComparison) fail('react-comparison-adapter-unavailable');
+      return options.reactComparison.prepare(request, operation);
+    }
+    if (isReactCallerNativeRequest(request)) {
+      if (!options.reactCaller) fail('react-caller-adapter-unavailable');
+      return options.reactCaller.prepare(request, operation);
+    }
+    if (isReactNativeRequest(request)) {
+      if (!options.react) fail('react-adapter-unavailable');
+      return options.react.prepare(request, operation);
+    }
+    return options.prepare(request, operation);
+  };
   const privateRoot = path.join(repoRoot, "private");
   const root = path.join(privateRoot, "source-native-app");
   const operations = path.join(root, "operations"),
@@ -354,14 +447,15 @@ export function createNativeOperationJobs(
       const header = JSON.parse(
         bytes(path.join(dir(id), "operation.json")).toString(),
       ) as Header;
-      if (!isBindingEvidenceRequest(header.request))
+      if (!validRequest(header.request))
         fail("history-unavailable");
-      if (header.request.baseline.id === baseline) return true;
+      if (reservation(header.request) === baseline) return true;
     }
     return false;
   };
-  const validatePlan = (prepared: NativeOperationPreparation, id: string) => {
+  const validatePlan = (prepared: NativeOperationPreparation<Plan>, id: string, request: OperationRequest) => {
     const plan = prepared.plan;
+    const fileKey = policyFor(request).fileKey;
     if (
       !pin(prepared.visual) ||
       !pin(prepared.preparation) ||
@@ -371,17 +465,21 @@ export function createNativeOperationJobs(
       plan.plan.acceptedContract !== null ||
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
-      !same(plan.plan.operation, { id, fileKey: SOURCE_NATIVE_FILE_KEY }) ||
-      plan.plan.tokenInput.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+      isReactPlan(plan) !== (isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isInitialPlan(plan) !== isReactInitialNativeRequest(request) ||
+      isComparisonPlan(plan) !== isReactComparisonRequest(request) ||
+      !same(plan.plan.operation, { id, fileKey }) ||
+      plan.plan.tokenInput.fileKey !== fileKey ||
       plan.plan.tokenInput.scopeId !== `source-${id}`
     )
       fail("preparation-invalid");
   };
   const validatePreparation = (
-    prepared: NativeOperationPreparation,
+    prepared: NativeOperationPreparation<Plan>,
     id: string,
+    request: OperationRequest,
   ) => {
-    validatePlan(prepared, id);
+    validatePlan(prepared, id, request);
     const plan = prepared.plan;
     const compiled = emitNativeTokenContextScript(plan.plan.tokenInput);
     if (!same(compiled.preparation, plan.plan.tokenPreparation))
@@ -544,7 +642,7 @@ export function createNativeOperationJobs(
       !object(value) ||
       value.version !== 1 ||
       value.operationId !== id ||
-      value.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+      value.fileKey !== plan.plan.operation.fileKey ||
       value.acceptedContract !== null ||
       value.nativeQualification !== "unqualified" ||
       !Array.isArray(value.nodes) ||
@@ -575,6 +673,23 @@ export function createNativeOperationJobs(
     }
     const textId = (x: unknown): x is string =>
       typeof x === "string" && x.length > 0 && x.length <= 512;
+    if (isComparisonPlan(plan)) {
+      const c = value.comparisons?.[0];
+      if (value.status !== 'created-candidate' || value.allocationAttempted !== true || value.problems.length || value.target !== null ||
+          value.variants !== undefined || !textId(value.pageId) || !textId(value.comparisonBoardId) ||
+          value.nodes.some((n: unknown) => !object(n) || !textId(n.id) || !textId(n.type)) ||
+          new Set(value.nodes.map((n: any) => n.id)).size !== value.nodes.length ||
+          !Array.isArray(value.comparisons) || value.comparisons.length !== 1 || !object(c) || c.id !== plan.plan.comparison.caseId ||
+          c.status !== 'created-comparison' || c.mainId !== plan.plan.comparison.mainId || !textId(c.instanceId) || c.slots?.length !== 1 ||
+          !same(c.slots[0].specPath, plan.plan.comparison.slotSpecPath)) return invalid;
+      const nodes = new Map(value.nodes.map((n: any) => [n.id, n.type]));
+      if (nodes.get(value.pageId) !== 'PAGE' || nodes.get(value.comparisonBoardId) !== 'FRAME' ||
+          nodes.get(c.instanceId) !== 'INSTANCE' || nodes.get(c.slots[0].nodeId) !== 'SLOT' ||
+          !textId(c.slots[0].propertyKey) || !Array.isArray(c.slots[0].contentNodeIds) ||
+          c.slots[0].contentNodeIds.length !== plan.plan.comparison.specs.length ||
+          c.slots[0].contentNodeIds.some((id: string) => !nodes.has(id))) return invalid;
+      return { phase: 'components-created', problems: [] };
+    }
     if (
       value.status !== "created-candidate" ||
       value.allocationAttempted !== true ||
@@ -586,9 +701,8 @@ export function createNativeOperationJobs(
       !Array.isArray(value.variants) ||
       value.variants.length !== plan.plan.component.variants.length ||
       !object(value.propertyDefinitions) ||
-      !Array.isArray(value.comparisons) ||
-      value.comparisons.length !== plan.plan.samples.cases.length ||
-      !textId(value.comparisonBoardId)
+      (isReactPlan(plan) ? value.comparisons !== undefined || value.comparisonBoardId !== undefined :
+        !Array.isArray(value.comparisons) || value.comparisons.length !== plan.plan.samples.cases.length || !textId(value.comparisonBoardId))
     )
       return invalid;
     if (
@@ -601,7 +715,7 @@ export function createNativeOperationJobs(
     const nodes = new Map(value.nodes.map((n: any) => [n.id, n.type]));
     if (
       nodes.get(value.pageId) !== "PAGE" ||
-      nodes.get(value.comparisonBoardId) !== "FRAME" ||
+      (!isReactPlan(plan) && nodes.get(value.comparisonBoardId) !== "FRAME") ||
       nodes.get(value.target.id) !== value.target.type ||
       !["COMPONENT", "COMPONENT_SET"].includes(value.target.type) ||
       value.variants.some(
@@ -610,6 +724,7 @@ export function createNativeOperationJobs(
       )
     )
       return invalid;
+    if (isReactPlan(plan)) return { phase: 'components-created', problems: [] };
     const instanceIds: string[] = [];
     for (const [index, c] of value.comparisons.entries()) {
       const expected = plan.plan.samples.cases[index];
@@ -647,45 +762,109 @@ export function createNativeOperationJobs(
   const componentObservationInput = (
     state: State,
     plan: Plan,
-  ): NativeSourceObservationInput => {
+  ): NativeInspectionInput => {
+    if (isComparisonPlan(plan)) fail('root-observation-required');
     if (!state.identity || !state.componentCreation)
       fail("component-allocation-identity-unavailable");
     return {
       operation: plan.plan.operation,
       planRevision: plan.revision,
       component: plan.plan.component,
-      projection: plan.plan.sourceProjection,
-      samples: plan.plan.samples,
+      ...(isReactPlan(plan) ? { projection: plan.plan.projection } : {
+        projection: plan.plan.sourceProjection, samples: plan.plan.samples,
+      }),
+      ...('graphComponents' in plan.plan ? { graphComponents: plan.plan.graphComponents } : {}),
       tokenInput: plan.plan.tokenInput,
       tokenIdentity: state.identity,
       creation: state.componentCreation,
       allocationAnchor: state.allocationAnchor,
     };
   };
+  const comparisonObservationInput = (state: State, plan: ComparisonPlan): NativeContractComparisonObservationInput => {
+    const refreshed:ReturnType<typeof refreshedComparisonPlan>=state.comparisonRefresh?refreshedComparisonPlan(plan,state.comparisonRefresh.request,state.comparisonRefresh):plan;
+    if (!state.identity || !state.componentCreation) fail('component-allocation-identity-unavailable');
+    const mainMigrations=refreshed.mainMigrations;
+    const migrated=state.comparisonMigration&&state.repairRevisionsWritten?.includes(state.comparisonMigration.revision);
+    const creation=migrated?state.comparisonMigration!.input.creation:mainMigrations?rebaseComparisonCreation(state.componentCreation,mainMigrations):state.componentCreation;
+    return { operation: refreshed.plan.operation, planRevision: refreshed.revision, comparison: refreshed.plan.comparison,
+      tokenInput: refreshed.plan.tokenInput, tokenIdentity: state.identity, creation,...(mainMigrations?{mainMigrations}:{}) };
+  };
+  const recoveryInput = (state: State, plan: Plan) => {
+    if (!isComparisonPlan(plan) || !state.identity || !state.partialCreation) fail('comparison-partial-required');
+    return comparisonObservationInput({...state,componentCreation:state.partialCreation},plan);
+  };
+  const canRecover = (state: State, plan: Plan) => {
+    if (state.pending || state.recoveryWritten || !['component-partial-allocation','comparison-recovery-refused'].includes(state.phase)) return false;
+    try { emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan)); return true; } catch { return false; }
+  };
+  const repairWasWritten=(state:State,repair:NativeComparisonRepairPlan)=>repair.version===1
+    ? state.repairWritten===true : state.repairRevisionsWritten?.includes(repair.revision)===true;
+  const repairPlan = (state: State, plan: Plan) => {
+    if(!isComparisonPlan(plan)) fail('comparison-repair-unavailable');
+    if(state.phase==='comparison-repair-refused'&&state.comparisonRepair&&!repairWasWritten(state,state.comparisonRepair))return state.comparisonRepair;
+    if(!['component-structure-observed','component-observation-refused'].includes(state.phase)||!state.imageReadback)fail('comparison-repair-observation-required');
+    const input=comparisonObservationInput(state,plan);
+    if(input.mainMigrations?.length&&!(state.comparisonMigration&&repairWasWritten(state,state.comparisonMigration))){
+      const migration=prepareNativeComparisonMigrationRepair(input,state.imageReadback.result);
+      if(!repairWasWritten(state,migration))return migration;
+    }
+    // A fresh supported observation can expose a diagnostic-frame defect even
+    // after a previous, separately claimed correction of linked instances.
+    try {
+      const frame=prepareNativeComparisonFrameRepair(input,state.imageReadback.result);
+      if(!repairWasWritten(state,frame))return frame;
+    } catch { /* Other differences must pass the existing bounded planner. */ }
+    if(state.repairWritten||state.comparisonRefresh)fail('comparison-repair-unavailable');
+    return prepareNativeComparisonRepair(input,state.imageReadback.result);
+  };
+  const availableRepair = (state: State,plan: Plan) => {
+    if(state.pending || !['component-structure-observed','component-observation-refused','comparison-repair-refused'].includes(state.phase)) return undefined;
+    try{return repairPlan(state,plan);}catch{return undefined;}
+  };
   const observeComponent = (
     result: unknown,
     state: State,
     plan: Plan,
   ): Pick<State, "phase" | "problems" | "componentObservation"> => {
-    const checked = verifyNativeSourceReadback(
-      componentObservationInput(state, plan),
-      result,
+    const checked = isComparisonPlan(plan) ? verifyNativeContractComparisonReadback(comparisonObservationInput(state, plan), result) : verifyNativeInspectionReadback(
+      componentObservationInput(state, plan), result,
     );
     return {
       phase:
-        checked.status === "supported-structure-observed"
+        checked.status !== "refused"
           ? "component-structure-observed"
           : "component-observation-refused",
       // Keep exact node diagnostics in the private readback. Public snapshots
       // identify the boundary without exposing native IDs or plugin metadata.
       problems:
-        checked.status === "supported-structure-observed"
+        checked.status !== "refused"
           ? []
           : ["native-operation-component-readback-refused"],
       componentObservation: checked,
     };
   };
-  const load = (id: string) => {
+  // A display response can visit the same dependency many times. Reuse its
+  // checked observation only within this synchronous, non-authorizing scope.
+  // Nothing survives into another request or a native command's authorization.
+  let readSnapshot: Map<string, unknown> | undefined;
+  const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
+  function withReadSnapshot<T>(read: () => T): T {
+    const outer = readSnapshot;
+    readSnapshot ??= new Map();
+    try {
+      const result = read();
+      if (result && typeof (result as any).then === 'function') fail('async-read-snapshot');
+      return result;
+    } finally { readSnapshot = outer; }
+  }
+  function readOnce<T>(key: string, read: () => T): T {
+    if (!readSnapshot) return read();
+    if (readSnapshot.has(key)) return structuredClone(readSnapshot.get(key)) as T;
+    const value = read();
+    readSnapshot.set(key, structuredClone(value));
+    return value;
+  }
+  const loadFresh = (id: string) => {
     directories();
     ensure(dir(id));
     ensure(path.join(dir(id), "events"));
@@ -696,8 +875,8 @@ export function createNativeOperationJobs(
       header.version !== 1 ||
       header.id !== id ||
       !date(header.startedAt) ||
-      !isBindingEvidenceRequest(header.request) ||
-      !same(header.policy, POLICY) ||
+      !validRequest(header.request) ||
+      !same(header.policy, policyFor(header.request)) ||
       !pin(header.visual) ||
       !pin(header.preparation) ||
       !REVISION.test(header.planRevision) ||
@@ -707,7 +886,7 @@ export function createNativeOperationJobs(
       fail("header-invalid");
     // Atomic publication reserves exactly one operation for a source baseline.
     // Unpublished partial preparations can never dispatch. They remain on disk.
-    if (!bytes(pointer(header.request.baseline.id)).equals(headerBytes))
+    if (!bytes(pointer(reservation(header.request))).equals(headerBytes))
       fail("baseline-reservation-mismatch");
     const planBytes = bytes(path.join(dir(id), "plan.json"));
     const scriptBytes = bytes(path.join(dir(id), "token-create.js"));
@@ -720,6 +899,7 @@ export function createNativeOperationJobs(
     validatePlan(
       { visual: header.visual, preparation: header.preparation, plan },
       id,
+      header.request,
     );
     if (plan.revision !== header.planRevision) fail("compiled-plan-changed");
     // Historical commands are immutable evidence. Recompiling them with a new
@@ -738,6 +918,12 @@ export function createNativeOperationJobs(
     const componentClaim = componentClaimBytes
       ? JSON.parse(componentClaimBytes.toString())
       : null;
+    const recoveryClaimPath=path.join(dir(id),"comparison-recovery.json");
+    const recoveryClaim=present(recoveryClaimPath)?JSON.parse(bytes(recoveryClaimPath).toString()):null;
+    const repairClaimPath=path.join(dir(id),"comparison-repair.json");
+    const repairClaim=present(repairClaimPath)?JSON.parse(bytes(repairClaimPath).toString()):null;
+    const revisionRepairClaims=Object.fromEntries(readdirSync(dir(id)).filter(name=>/^comparison-repair-[a-f0-9]{64}\.json$/.test(name)).sort()
+      .map(name=>['sha256:'+name.slice(18,-5),JSON.parse(bytes(path.join(dir(id),name)).toString())]));
     const events: Event[] = [];
     const digests: string[] = [];
     let previous = sha(headerBytes);
@@ -764,6 +950,13 @@ export function createNativeOperationJobs(
         fail("journal-chain-invalid");
       if (event.kind === "dispatch") {
         const c = event.command;
+        if (event.comparisonRefresh) {
+          if (c.phase !== "component-readback" || !c.readOnly || !isComparisonPlan(plan) || !isReactComparisonRequest(header.request)) fail("comparison-refresh-read-only");
+          refreshedComparisonPlan(plan,header.request,event.comparisonRefresh);
+          state.comparisonRefresh=structuredClone(event.comparisonRefresh);
+          // Preserve the issued reader across compiler upgrades. Its bytes are
+          // hash-bound below; the independent verifier uses the pinned input.
+        }
         if (sequence === 0 && (!same(c, claim) || c.phase !== "token-create"))
           fail("creation-claim-mismatch");
         if (
@@ -772,7 +965,7 @@ export function createNativeOperationJobs(
           c.version !== 1 ||
           c.kind !== "SOURCE-NATIVE-OPERATION" ||
           c.operationId !== id ||
-          c.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+          c.fileKey !== header.policy.fileKey ||
           c.planRevision !== plan.revision ||
           !UUID.test(c.attemptId) ||
           !HASH.test(c.nonce) ||
@@ -808,6 +1001,22 @@ export function createNativeOperationJobs(
           )
             fail("component-creation-precondition-invalid");
           state.dispatchedComponent = true;
+        } else if(c.phase==='comparison-repair-preflight-readback'){
+          if(!availableRepair(state,plan)||c.readOnly!==true||!event.comparisonRepair||!same(event.comparisonRepair,repairPlan(state,plan)))fail('repair-read-precondition-invalid');
+          state.comparisonRepair=structuredClone(event.comparisonRepair);
+          if(event.comparisonRepair.version===3)state.comparisonMigration=structuredClone(event.comparisonRepair);
+        } else if(c.phase==='comparison-repair-apply'){
+          if(state.phase!=='comparison-repair-observed'||!state.comparisonRepair||repairWasWritten(state,state.comparisonRepair)||c.readOnly!==false||!same(c,state.comparisonRepair.version===1?repairClaim:revisionRepairClaims[state.comparisonRepair.revision]))fail('repair-write-precondition-invalid');
+          if(state.comparisonRepair.version===1)state.repairWritten=true;
+          else (state.repairRevisionsWritten??=[]).push(state.comparisonRepair.revision);
+        } else if (c.phase === 'comparison-recovery-readback') {
+          // Stored reader bytes are hash-bound above. Compiler upgrades can
+          // change the reader; its result still must pass the independent
+          // recovery planner below against the unchanged pinned input.
+          if (!canRecover(state,plan) || c.readOnly!==true) fail('recovery-read-precondition-invalid');
+        } else if (c.phase === 'comparison-recovery-apply') {
+          if (state.phase!=='comparison-recovery-observed' || !state.recovery || state.recoveryWritten || c.readOnly!==false || !same(c,recoveryClaim)) fail('recovery-write-precondition-invalid');
+          state.recoveryWritten=true;
         } else if (c.phase === "component-readback") {
           if (
             !state.identity ||
@@ -827,13 +1036,27 @@ export function createNativeOperationJobs(
       } else if (event.kind === "result") {
         if (!state.pending) fail("unsolicited-result");
         correlate(event.envelope, state.pending);
-        const outcome =
+        let recoveryOutcome: Pick<State,'phase'|'problems'> | undefined;
+        if(state.pending.phase==='comparison-recovery-readback') {
+          try {state.recovery=prepareNativeComparisonRecovery(recoveryInput(state,plan),event.envelope.result);recoveryOutcome={phase:'comparison-recovery-observed',problems:[]};}
+          catch {delete state.recovery;recoveryOutcome={phase:'comparison-recovery-refused',problems:['native-operation-recovery-preflight-refused']};}
+        }
+        if(state.pending.phase==='comparison-repair-preflight-readback'){
+          const r=event.envelope.result as any;
+          recoveryOutcome=r?.status==='preflight-observed'&&nativeComparisonRepairMatches(state.comparisonRepair!,r.observation)
+            ?{phase:'comparison-repair-observed',problems:[]}:{phase:'comparison-repair-refused',problems:['native-operation-comparison-repair-preflight-refused']};
+        }
+        if(state.pending.phase==='comparison-repair-apply'){
+          const r=event.envelope.result as any;
+          recoveryOutcome={phase:'components-created',problems:['updated','no-op'].includes(r?.status)?[]:['native-operation-comparison-repair-'+String(r?.status??'unknown')]};
+        }
+        const outcome = recoveryOutcome ?? (
           state.pending.phase === "token-create"
             ? acceptCreation(
                 event.envelope.result as NativeTokenCreationResult,
                 plan,
               )
-            : state.pending.phase === "component-create"
+            : ["component-create","comparison-recovery-apply"].includes(state.pending.phase)
               ? acceptComponentCreation(event.envelope.result, plan, id)
               : state.pending.phase === "component-readback"
                 ? observeComponent(event.envelope.result, state, plan)
@@ -841,9 +1064,10 @@ export function createNativeOperationJobs(
                     event.envelope.result as NativeTokenReadbackResult,
                     state.identity!,
                     plan,
-                  );
+                  ));
+        if(state.pending.phase==='component-create' && outcome.phase==='component-partial-allocation') state.partialCreation=structuredClone(event.envelope.result);
         if (
-          state.pending.phase === "component-create" &&
+          ["component-create","comparison-recovery-apply"].includes(state.pending.phase) &&
           outcome.phase === "components-created"
         )
           state.componentCreation = structuredClone(event.envelope.result);
@@ -854,7 +1078,7 @@ export function createNativeOperationJobs(
           // using it; newer writers carry durable allocation stamps themselves.
           const r = event.envelope.result as any;
           if (
-            !state.allocationAnchor &&
+            !isComparisonPlan(plan) && !state.allocationAnchor &&
             outcome.phase === "component-structure-observed" &&
             same(
               r.nodes.map((n: any) => n.id).sort(),
@@ -867,7 +1091,7 @@ export function createNativeOperationJobs(
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
         if (
-          !["token-readback", "component-readback"].includes(
+          !["token-readback", "component-readback", "comparison-recovery-readback", "comparison-repair-preflight-readback"].includes(
             state.pending?.phase ?? "",
           ) ||
           state.pending?.attemptId !== event.attemptId
@@ -878,7 +1102,7 @@ export function createNativeOperationJobs(
         delete state.componentObservation;
         delete state.imageReadback;
         state.phase =
-          phase === "component-readback"
+          phase === "comparison-repair-preflight-readback" ? "comparison-repair-refused" : phase === "comparison-recovery-readback" ? "comparison-recovery-refused" : phase === "component-readback"
             ? "component-observation-refused"
             : "observation-refused";
         state.problems = ["native-operation-observation-interrupted"];
@@ -899,6 +1123,8 @@ export function createNativeOperationJobs(
     }
     if (!!componentClaim !== state.dispatchedComponent)
       fail("component-creation-journal-incomplete");
+    if (!!repairClaim !== !!state.repairWritten) fail("repair-write-journal-incomplete");
+    if (!!recoveryClaim !== !!state.recoveryWritten) fail("recovery-write-journal-incomplete");
     const fingerprint = sha(
       encode({
         header: sha(headerBytes),
@@ -906,37 +1132,43 @@ export function createNativeOperationJobs(
         script: sha(scriptBytes),
         claim: claimBytes ? sha(claimBytes) : null,
         componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
+        ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
+        ...(Object.keys(revisionRepairClaims).length?{revisionRepairClaims:sha(encode(revisionRepairClaims))}:{}),
+        ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
         digests,
       }),
     );
     return { header, plan, script, state, events, previous, fingerprint };
   };
-  type Loaded = ReturnType<typeof load>;
-  const authenticate = (loaded: Loaded) => {
-    const current = options.prepare(structuredClone(loaded.header.request), {
+  type Loaded = ReturnType<typeof loadFresh>;
+  const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));
+  const authenticate = (loaded: Loaded) => readOnce('source:'+loaded.header.id+':'+loaded.fingerprint, () => {
+    const current = prepareInput(structuredClone(loaded.state.comparisonRefresh?.request ?? loaded.header.request), {
       id: loaded.header.id,
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: loaded.header.policy.fileKey,
     });
-    if (validatePreparation(current, loaded.header.id) !== loaded.script)
+    if (validatePreparation(current, loaded.header.id, loaded.header.request) !== loaded.script)
       fail("compiled-script-changed");
     if (
       !same(current.visual, loaded.header.visual) ||
       !same(current.preparation, loaded.header.preparation) ||
-      !same(current.plan, loaded.plan)
+      !same(current.plan, loaded.state.comparisonRefresh?.plan ?? loaded.plan)
     )
       fail("source-plan-stale");
-    if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
+    if (loadFresh(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("evidence-changed-during-validation");
-  };
+    return current.sourceCompatibility;
+  });
   // The journal is authoritative. Re-derive exports from its current readback;
   // old exports remain private history and cannot survive a retry as current.
   const imageArtifacts = (loaded: Loaded) => {
     const envelope = loaded.state.imageReadback;
     if (!envelope) return null;
-    const collected = collectNativeImages(
-      componentObservationInput(loaded.state, loaded.plan),
-      envelope.result,
-    );
+    const collected = isComparisonPlan(loaded.plan) ? collectExpectedNativeImages(
+      { operation: loaded.plan.plan.operation, planRevision: loaded.plan.revision },
+      [{ id: loaded.plan.plan.comparison.caseId, instanceId: loaded.state.componentCreation!.comparisons[0].instanceId }],
+      (envelope.result as Record<string, any>).content,
+    ) : collectNativeImages(componentObservationInput(loaded.state, loaded.plan), envelope.result);
     if (collected.bytes.size) {
       const directory = path.join(dir(loaded.header.id), "images");
       ensure(directory, true);
@@ -967,12 +1199,20 @@ export function createNativeOperationJobs(
   const snapshot = (
     loaded: Loaded,
     sourceCurrent: boolean,
+    sourceCompatibility?: 'identity-opacity-omission',
   ): NativeOperationSnapshot => {
     const images = imageArtifacts(loaded);
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
+      ...(loaded.state.comparisonRefresh ? {comparisonBaselineRefreshed:true}:{}),
+      canResumeComparison: sourceCurrent && canRecover(loaded.state,loaded.plan),
+      ...(sourceCurrent && availableRepair(loaded.state,loaded.plan) ? {comparisonRepair:{changes:structuredClone(availableRepair(loaded.state,loaded.plan)!.changes)}} : {}),
+      ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.instanceWidth !== undefined
+        ? {comparisonWidth:loaded.plan.plan.comparison.instanceWidth} : {}),
       phase: loaded.state.phase,
+      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
+        ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),
       ...(loaded.state.pending
         ? {
             pendingPhase: loaded.state.pending.phase,
@@ -1004,12 +1244,14 @@ export function createNativeOperationJobs(
           }
         : {}),
       sourceCurrent,
+      ...(isReactNativeRequest(loaded.header.request) && loaded.header.request.compilation === 'current' ? { sourceCompilerRecompiled: true } : {}),
+      ...(sourceCurrent && sourceCompatibility ? {sourceCompatibility} : {}),
       acceptedContract: null,
       nativeQualification: "unqualified",
       counters: {
-        variants: loaded.plan.plan.component.variants.length,
-        sourceCases: loaded.plan.plan.samples.cases.length,
-        loweredCases: loaded.plan.plan.samples.cases.filter(
+        variants: isComparisonPlan(loaded.plan) ? 0 : loaded.plan.plan.component.variants.length,
+        sourceCases: isReactPlan(loaded.plan) || isComparisonPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
+        loweredCases: isComparisonPlan(loaded.plan) ? 1 : isReactPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
           (c) => c.status === "lowered",
         ).length,
         variables: loaded.plan.plan.tokenPreparation.variables.length,
@@ -1033,11 +1275,12 @@ export function createNativeOperationJobs(
   const append = (
     loaded: Loaded,
     event:
-      | { kind: "dispatch"; command: Dispatch }
+      | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan; comparisonRefresh?: ReactComparisonRefresh }
       | { kind: "result"; envelope: NativeOperationResult }
       | { kind: "abandon-observation"; attemptId: string }
       | { kind: "retry-refused-creation" },
   ) => {
+    assertWriteScope();
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("journal-changed");
     const sequence = loaded.events.length;
@@ -1052,6 +1295,10 @@ export function createNativeOperationJobs(
         encode(event.command),
       );
     }
+    if(event.kind==='dispatch' && event.command.phase==='comparison-repair-apply')
+      write(path.join(dir(loaded.header.id),loaded.state.comparisonRepair!.version===1?'comparison-repair.json':`comparison-repair-${loaded.state.comparisonRepair!.revision.slice(7)}.json`),encode(event.command));
+    if(event.kind==='dispatch' && event.command.phase==='comparison-recovery-apply')
+      write(path.join(dir(loaded.header.id),'comparison-recovery.json'),encode(event.command));
     if (sequence === 0) {
       if (event.kind !== "dispatch" || event.command.phase !== "token-create")
         fail("first-dispatch-invalid");
@@ -1080,11 +1327,12 @@ export function createNativeOperationJobs(
     );
   };
   const prepare = (
-    request: BindingEvidenceRequest,
+    request: OperationRequest,
   ): NativeOperationSnapshot => {
-    if (!isBindingEvidenceRequest(request)) fail("request-invalid");
+    assertWriteScope();
+    if (!validRequest(request)) fail("request-invalid");
     directories(true);
-    const target = pointer(request.baseline.id);
+    const target = pointer(reservation(request));
     if (present(target)) {
       const header = JSON.parse(bytes(target).toString()) as Header;
       if (!same(header.request, request)) fail("baseline-already-reserved");
@@ -1094,21 +1342,21 @@ export function createNativeOperationJobs(
     }
     // A missing index is not permission to create a replacement scope. An
     // earlier prepared/dispatched operation may still own native objects.
-    if (priorBaseline(request.baseline.id))
+    if (priorBaseline(reservation(request)))
       fail("baseline-reservation-missing");
     const id = randomUUID();
-    const prepared = options.prepare(structuredClone(request), {
+    const prepared = prepareInput(structuredClone(request), {
       id,
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: policyFor(request).fileKey,
     });
-    const script = validatePreparation(prepared, id),
+    const script = validatePreparation(prepared, id, request),
       planBytes = encode(prepared.plan);
     const header: Header = {
       version: 1,
       id,
       startedAt: new Date().toISOString(),
       request: structuredClone(request),
-      policy: POLICY,
+      policy: policyFor(request),
       visual: prepared.visual,
       preparation: prepared.preparation,
       planRevision: prepared.plan.revision,
@@ -1118,9 +1366,9 @@ export function createNativeOperationJobs(
     // Recheck source before publishing any executable operation identity.
     if (
       !same(
-        options.prepare(structuredClone(request), {
+        prepareInput(structuredClone(request), {
           id,
-          fileKey: SOURCE_NATIVE_FILE_KEY,
+          fileKey: policyFor(request).fileKey,
         }),
         prepared,
       )
@@ -1144,10 +1392,13 @@ export function createNativeOperationJobs(
     }
     return snapshot(load(id), true);
   };
-  const get = (id: string): NativeOperationSnapshot => {
+  const get = (id: string): NativeOperationSnapshot => readOnce('snapshot:'+id, () => {
     const loaded = load(id);
-    return snapshot(loaded, current(loaded));
-  };
+    let compatibility;
+    try { compatibility = authenticate(loaded); }
+    catch { return snapshot(loaded, false); }
+    return snapshot(loaded, true, compatibility);
+  });
   const forBaseline = (baseline: string): NativeOperationSnapshot | null => {
     if (!present(root)) return null;
     try {
@@ -1181,9 +1432,13 @@ export function createNativeOperationJobs(
     id: string,
     phase: NativeOperationPhase,
   ): NativeOperationCommand => {
+    assertWriteScope();
     const loaded = load(id);
     if (loaded.state.pending) fail("native-outcome-unknown");
     let script: string;
+    let comparisonRepair: NativeComparisonRepairPlan | undefined;
+    let comparisonRefresh: ReactComparisonRefresh | undefined;
+    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&[2,3].includes(loaded.state.comparisonRepair?.version??0))) fail("comparison-refresh-read-only");
     if (phase === "token-create") {
       if (loaded.state.dispatchedCreate) fail("creation-already-dispatched");
       authenticate(loaded);
@@ -1198,17 +1453,36 @@ export function createNativeOperationJobs(
         loaded.plan.plan.tokenInput,
         loaded.state.identity,
       );
+    } else if(phase==='comparison-repair-preflight-readback'){
+      comparisonRepair=availableRepair(loaded.state,loaded.plan);if(!comparisonRepair)fail('comparison-repair-unavailable');
+      authenticate(loaded);script=emitNativeComparisonRepairScript(comparisonRepair,true);
+    } else if(phase==='comparison-repair-apply'){
+      if(loaded.state.phase!=='comparison-repair-observed'||!loaded.state.comparisonRepair||repairWasWritten(loaded.state,loaded.state.comparisonRepair))fail('comparison-repair-unavailable');
+      authenticate(loaded);script=emitNativeComparisonRepairScript(loaded.state.comparisonRepair);
+    } else if (phase === 'comparison-recovery-readback') {
+      if(!canRecover(loaded.state,loaded.plan)) fail('comparison-recovery-refused');
+      authenticate(loaded);
+      script=emitNativeComparisonRecoveryReadbackScript(recoveryInput(loaded.state,loaded.plan));
+    } else if (phase === 'comparison-recovery-apply') {
+      if(loaded.state.phase!=='comparison-recovery-observed' || loaded.state.recoveryWritten || !loaded.state.recovery || !isReactComparisonRequest(loaded.header.request) || !options.reactComparison) fail('comparison-recovery-refused');
+      authenticate(loaded);
+      const recovery=loaded.state.recovery;
+      const built=options.reactComparison.buildComponent(loaded.header.request,{
+        operation:loaded.plan.plan.operation,planRevision:loaded.plan.revision,journalRevision:loaded.fingerprint,
+        tokens:{input:loaded.plan.plan.tokenInput,identity:loaded.state.identity!,receipt:(recovery.observation as any).content.tokens.receipt},comparisonRecovery:recovery,
+      });
+      if(built.planRevision!==loaded.plan.revision || typeof built.script!=='string' || !built.script.trim() || Buffer.byteLength(built.script)>4*1024*1024) fail('component-script-invalid');
+      authenticate(loaded);script=built.script;
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (!options.buildComponent) fail("component-writer-unavailable");
+      if (isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
-      const built = options.buildComponent(
-        structuredClone(loaded.header.request),
-        context,
-      );
+      const request = structuredClone(loaded.header.request);
+      const built = isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+        : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
         typeof built.script !== "string" ||
@@ -1223,9 +1497,17 @@ export function createNativeOperationJobs(
       // Known allocations remain inspectable when the source changes. This
       // observes the saved plan only; sourceCurrent is checked separately and
       // observation never authorizes admission, allocation or baseline changes.
-      script = emitNativeSourceReadbackScript(
-        componentObservationInput(loaded.state, loaded.plan),
-        true,
+      if(isComparisonPlan(loaded.plan) && isReactComparisonRequest(loaded.header.request) && options.reactComparison?.refresh) {
+        try {
+          const fresh=options.reactComparison.refresh(structuredClone(loaded.header.request),loaded.plan.plan.operation);
+          refreshedComparisonPlan(loaded.plan,loaded.header.request,fresh);
+          if(loadFresh(id).fingerprint!==loaded.fingerprint) fail('evidence-changed-during-validation');
+          if (!same(fresh.plan,loaded.plan)) comparisonRefresh=fresh;
+        } catch { /* Historical reads remain possible; freshness still refuses. */ }
+      }
+      script = isComparisonPlan(loaded.plan) ? emitNativeContractComparisonReadbackScript(comparisonObservationInput({...loaded.state,...(comparisonRefresh?{comparisonRefresh}:{})}, loaded.plan), true) : emitNativeInspectionReadbackScript(
+        componentObservationInput(loaded.state, loaded.plan), true,
+        isReactCallerNativeRequest(loaded.header.request),
       );
     } else fail("phase-invalid");
     const command: NativeOperationCommand = {
@@ -1235,19 +1517,20 @@ export function createNativeOperationJobs(
       phase,
       attemptId: randomUUID(),
       nonce: randomBytes(32).toString("hex"),
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: loaded.header.policy.fileKey,
       planRevision: loaded.plan.revision,
       scriptSha256: sha(script),
-      readOnly: phase === "token-readback" || phase === "component-readback",
+      readOnly: phase.endsWith("-readback"),
       script,
     };
-    append(loaded, { kind: "dispatch", command });
+    append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}),...(comparisonRefresh?{comparisonRefresh}:{}) });
     return structuredClone(command);
   };
   const accept = (
     id: string,
     envelope: NativeOperationResult,
   ): NativeOperationSnapshot => {
+    assertWriteScope();
     const serialized = encode(envelope);
     if (Buffer.byteLength(serialized) > 4 * 1024 * 1024)
       fail("result-too-large");
@@ -1272,6 +1555,7 @@ export function createNativeOperationJobs(
     return snapshot(next, current(next));
   };
   const retryObservation = (id: string) => {
+    assertWriteScope();
     const loaded = load(id);
     const phase =
       loaded.state.pending?.phase ??
@@ -1281,7 +1565,7 @@ export function createNativeOperationJobs(
             loaded.state.phase === "component-structure-observed"
           ? "component-readback"
           : undefined);
-    if (phase !== "token-readback" && phase !== "component-readback")
+    if (phase !== "token-readback" && phase !== "component-readback" && phase !== "comparison-recovery-readback" && phase !== "comparison-repair-preflight-readback")
       fail("observation-retry-refused");
     if (loaded.state.pending) {
       append(loaded, {
@@ -1292,6 +1576,7 @@ export function createNativeOperationJobs(
     return dispatch(id, phase);
   };
   const retryCreation = (id: string) => {
+    assertWriteScope();
     const loaded = load(id);
     if (
       loaded.state.pending ||
@@ -1329,7 +1614,7 @@ export function createNativeOperationJobs(
     )
       fail("verified-token-observation-required");
     return structuredClone({
-      operation: { id, fileKey: SOURCE_NATIVE_FILE_KEY },
+      operation: { id, fileKey: loaded.header.policy.fileKey },
       planRevision: loaded.plan.revision,
       journalRevision: loaded.fingerprint,
       tokens: {
@@ -1340,6 +1625,7 @@ export function createNativeOperationJobs(
     });
   };
   return {
+    withReadSnapshot,
     prepare,
     get,
     forBaseline,
@@ -1348,11 +1634,106 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    reactInitialRequest(id: string): ReactInitialNativeRequest {
+      const { header } = load(id);
+      if (!isReactInitialNativeRequest(header.request)) fail('react-initial-operation-required');
+      return structuredClone(header.request);
+    },
+    reactUpdateBaseline(id: string) {
+      const loaded = load(id);
+      if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
+          !isReactPlan(loaded.plan) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) ||
+          loaded.state.pending || !loaded.state.imageReadback)
+        fail('react-update-verified-baseline-required');
+      // The old compiler plan is historical evidence, not write authority.
+      // An update must separately authenticate and pin its current desired input.
+      const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
+      delete input.allocationAnchor;
+      const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      if (loaded.state.phase !== 'component-structure-observed' && !nativeDefaultFillRepairBaseline(input, receipt))
+        fail('react-update-verified-baseline-required');
+      return structuredClone({ input, receipt, request: loaded.header.request, journalRevision: loaded.fingerprint });
+    },
+    reactRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      if (!isReactNativeRequest(header.request)) fail('react-operation-required');
+      return structuredClone(header.request);
+    },
+    reactSourceRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      const request = isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      if (!isReactNativeRequest(request)) fail('react-operation-required');
+      return structuredClone(request);
+    },
+    verifiedReactObservation(id: string) {
+      const loaded = load(id);
+      if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
+        fail('react-parent-observation-required');
+      const updated = options.react?.updatedObservation?.(id);
+      if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
+      authenticate(loaded);
+      const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
+      delete input.allocationAnchor;
+      const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      return structuredClone({ input, receipt, request: loaded.header.request });
+    },
+    verifiedReactInitialObservation(id: string) {
+      const loaded = load(id);
+      if (!isReactInitialNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
+        fail('react-parent-observation-required');
+      const updated = options.react?.updatedObservation?.(id);
+      if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
+      authenticate(loaded);
+      const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
+      delete input.allocationAnchor;
+      const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      return structuredClone({ input, receipt, request: loaded.header.request });
+    },
+    reactIdentity(id: string) {
+      const { header } = load(id);
+      if (isReactCallerNativeRequest(header.request)) return {
+        referenceId: header.request.referenceId, caseId: header.request.caseId,
+        ownershipId: header.request.ownership.id, fileKey: header.policy.fileKey,
+      };
+      const request = isReactInitialNativeRequest(header.request) ? { ...header.request.anchor, caseId: header.request.caseId } : isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      if (!isReactNativeRequest(request)) fail('react-operation-required');
+      return { referenceId: request.referenceId, caseId: request.caseId,
+        ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
+    },
+    listReact(referenceId: string, kind?: 'root' | 'mains') {
+      return withReadSnapshot(() => {
+      if (!HASH.test(referenceId)) fail('request-invalid');
+      if (!present(root)) return [];
+      directories();
+      return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
+        const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
+        if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
+        const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
+        const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
+        const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
+        if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
+        // get() verifies the saved journal and separately reports source freshness.
+        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
+          ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
+          ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
+          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),
+          fileKey: header.policy.fileKey, operation: get(id) }];
+      });
+      });
+    },
     /** Transport scheduling only. Freshness is intentionally absent; writes
      * still authenticate their source during dispatch and first delivery. */
     deliveryState(id: string) {
-      const { state } = load(id);
-      return { phase: state.phase, pendingPhase: state.pending?.phase };
+      const { state, header } = load(id);
+      return { phase: state.phase, pendingPhase: state.pending?.phase, fileKey: header.policy.fileKey };
     },
     abandonedObservationPhase(id: string, attemptId: string) {
       const loaded = load(id);
@@ -1386,6 +1767,7 @@ export function createNativeOperationJobs(
     /** Trusted transport only. Never include executable bytes in a public
      * snapshot. Reauthenticate write inputs immediately before first delivery. */
     pendingCommand(id: string): NativeOperationCommand | null {
+      assertWriteScope();
       const loaded = load(id);
       if (!loaded.state.pending) return null;
       if (!loaded.state.pending.readOnly) authenticate(loaded);
