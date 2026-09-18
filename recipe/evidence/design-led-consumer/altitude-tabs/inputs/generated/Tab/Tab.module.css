@@ -14,16 +14,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-style: solid;
+  border: 0;
   height: var(--imported-stub-tab-2-root-height);
   background-color: var(--imported-stub-tab-2-root-background-color);
-  border-width: var(--imported-stub-tab-2-root-border-width);
-}
-
-.active-yes {
-  border-color: var(--imported-stub-tab-2-root-border-color-yes);
-}
-
-.active-no {
-  border-color: var(--imported-stub-tab-2-root-border-color-no);
 }
