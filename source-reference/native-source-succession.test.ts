@@ -42,6 +42,9 @@ test('only the same source case and request shape can succeed; nested child root
  assert.throws(()=>successions.adopt(PARENT,root('a'),initial('b')),/succession-case-mismatch/);
  assert.throws(()=>successions.adopt(PARENT,initial('a'),root('b')),/succession-case-mismatch/);
  assert.throws(()=>successions.adopt(PARENT,initial('a'),initial('b','checkbox-checked')),/succession-case-mismatch/);
+ // A positional `instance-N` can move onto another element when the source changes.
+ const positional={...initial('a'),version:2 as const,instanceId:'instance-2'};
+ assert.throws(()=>successions.adopt(PARENT,positional,{...initial('b'),version:2 as const,instanceId:'instance-2'}),/succession-kind-unsupported/);
  const nested={...root('a'),version:2 as const,selection:{instanceId:'button'}};
  assert.throws(()=>successions.adopt(PARENT,nested,root('b')),/succession-kind-unsupported/);
  assert.throws(()=>successions.adopt('not-an-operation',root('a'),root('b')),/succession-parent-invalid/);
@@ -57,6 +60,9 @@ test('an altered, reordered, foreign or re-seeded succession journal fails close
  writeFileSync(first,bytes.replace('b'.repeat(64),'e'.repeat(64)));
  assert.throws(()=>successions.effective(PARENT,original),/journal-chain-invalid/);
  writeFileSync(first,bytes);assert.deepEqual(successions.effective(PARENT,original),root('c'));
+ writeFileSync(path.join(dir,'.DS_Store'),'');
+ assert.throws(()=>successions.effective(PARENT,original),/journal-sequence-invalid/,'a stray file fails THIS operation closed');
+ rmSync(path.join(dir,'.DS_Store'));
  writeFileSync(path.join(dir,'00000003.json'),bytes);
  assert.throws(()=>successions.effective(PARENT,original),/journal-sequence-invalid/);
  assert.throws(()=>successions.adopt(PARENT,original,root('f')),/journal-sequence-invalid/);

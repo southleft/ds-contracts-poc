@@ -371,6 +371,14 @@ async function nativePoll() {
         command.attemptId === heldReadback.attemptId || delivery.supersedesReadbackAttemptId !== heldReadback.attemptId)) {
       nativeStatus('refused', 'The app did not confirm replacement of the interrupted readback. Nothing executed.'); return;
     }
+    // Ask before executing a write. The app refuses once it has dispatched a
+    // read to settle this same write, so a command that was handed out but
+    // held up can never run after the app has judged it from the canvas.
+    // Nothing has executed and no marker exists yet, so a refusal leaves no trace.
+    if (!command.readOnly) {
+      try { await request('begin', { attemptId: command.attemptId }); }
+      catch (e) { nativeStatus('refused', 'The app did not confirm this write may begin. Nothing executed. Inspect the operation in the app.'); return; }
+    }
     // Await a durable received marker BEFORE any native API call. Reopening the
     // plugin with this marker cannot rerun a command whose outcome is unknown.
     // A new read-only attempt may replace it only after the app journal has
@@ -461,6 +469,14 @@ figma.ui.onmessage = async (msg) => {
   }
   if (msg.type === 'ui-ready') {
     post({ type: 'init', fileKey: figma.fileKey || '' });
+    // Resume by itself ONLY to finish something this plugin already holds: a
+    // saved result to deliver or an interrupted command to settle. Taking new
+    // commands still waits for Connect / resume.
+    try {
+      const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
+      const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);
+      if (match && await figma.clientStorage.getAsync('ds_native_receipt:' + match[1])) post({ type: 'native-resume' });
+    } catch (e) { /* Storage unavailable: the operator can still connect by hand. */ }
     return;
   }
   if (msg.type === 'bridge-poll') {

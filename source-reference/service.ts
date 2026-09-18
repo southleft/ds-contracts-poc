@@ -882,7 +882,7 @@ export function createReferenceService(
       .replace(/^\/api\/source-reference\/?/, "");
     // The plugin is a different origin. Only these two routes accept its
     // high-entropy pairing capability; no general service CORS exemption.
-    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|result)$/.exec(route);
+    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|begin|result)$/.exec(route);
     const body = async (limit: number) => {
       if (!req.headers["content-type"]?.startsWith("application/json"))
         throw Error("JSON required");
@@ -928,9 +928,17 @@ export function createReferenceService(
       }
       try {
         const payload = await body(
-          pluginRoute[2] === "claim" ? 2048 : 4 * 1024 * 1024,
+          pluginRoute[2] === "result" ? 4 * 1024 * 1024 : 2048,
         );
-        if (pluginRoute[2] === "claim") {
+        if (pluginRoute[2] === "begin") {
+          // Asked immediately before a write executes; refused once a canvas
+          // read has been dispatched to settle that same write.
+          if (!object(payload) || Object.keys(payload).join() !== "attemptId" || typeof payload.attemptId !== "string" || !UUID.test(payload.attemptId)) {
+            json(res, 400, { error: "Only the write attempt identity is accepted." });
+            return;
+          }
+          json(res, 200, deliveryTransport(pluginRoute[1]).begin(pluginRoute[1], secret, payload.attemptId));
+        } else if (pluginRoute[2] === "claim") {
           if (
             !object(payload) ||
             Object.keys(payload).some(

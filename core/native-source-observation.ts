@@ -864,7 +864,7 @@ function verifyReadback(
       } else if (
         v.fills?.length !== 1 ||
         !paint(v.fills[0].color, spec.textFillLit) ||
-        (v.fills[0].opacity ?? 1) !== (spec.textFillLit?.a ?? 1) ||
+        !numeric(v.fills[0].opacity ?? 1, spec.textFillLit?.a ?? 1) ||
         Object.keys(v.fills[0].boundVariables ?? {}).length
       )
         issue("native-source-observation-text-paint", n);

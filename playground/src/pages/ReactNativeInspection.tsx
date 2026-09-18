@@ -29,6 +29,8 @@ interface MovedOperation { operationId: string; caseId: string; kind: 'root' | '
 function updateProblem(problem: string) {
   const [name, ...node] = problem.split(':'), nodeId = node.join(':');
   if (name === 'native-update-observation-refused') return 'The canvas did not match what this update expected. Nothing further was written.';
+  if (name === 'native-update-write-begun-outcome-unresolved') return 'The companion had begun this write, but the canvas still shows the earlier values. It may still land. Nothing is retried; inspect again once the companion has settled.';
+  if (name === 'native-update-late-write-result-contradicts-canvas') return 'A result arrived for a write that was already settled from the canvas, and it disagrees with that reading. Inspect the update again before anything else is applied.';
   if (name === 'native-update-baseline-conflict') return 'Another property of these components changed in Figma after the last verified readback. Restore it, or review it as a design change, then inspect again.';
   if (name === 'native-update-node-missing') return `Node ${nodeId} no longer exists in the file.`;
   if (name === 'native-update-file-mismatch') return 'The companion is connected to a different Figma file.';
@@ -36,7 +38,7 @@ function updateProblem(problem: string) {
   return problem;
 }
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial' | 'nested'; sourceRevisions?: string[];
+  kind: 'root' | 'comparison' | 'initial' | 'nested'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
@@ -147,6 +149,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.comparisonBaselineRefreshed && <p>This read-only inspection checks the retained instance against verified main corrections. Original creation records and node identities are preserved.</p>}
         {op.sourceCompilerRecompiled && <p>This new draft uses the current compiler with the unchanged, verified source observations. The original capture remains intact. This prepared output is pinned before creation; existing Figma operations are not replaced.</p>}
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
+        {row.successionProblem && <p role="alert">This operation's source-succession record cannot be read, so its updates are refused until that is repaired. <code>{row.successionProblem}</code></p>}
         {(row.sourceRevisions?.length ?? 0) > 1 && <p>This operation has followed {row.sourceRevisions!.length} source revisions ({row.sourceRevisions!.map(r => r.slice(0, 8)).join(' → ')}). Its creation evidence belongs to the first; changes since then arrive only as reviewed updates to the same nodes. Content and comparison inspections recorded against an earlier revision are unavailable here.</p>}
         {!comparison && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
@@ -167,10 +170,14 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               </>}
               {!update.operation.superseded && (update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>
-                <p>A write is awaiting its result. Keep the companion connected: a saved result is delivered when it reconnects. If the result is lost, settle it by reading the canvas. The write is never sent again.</p>
+                <p>A write is awaiting its result. Keep the companion connected: a saved result is delivered when it reconnects. If the result is lost, settle it by reading the canvas. That write is never sent again, and the companion is refused permission to begin it from then on.</p>
                 <button type="button" disabled={busy||!update.connection?.paired} onClick={()=>void action(`native-operation/${id}/update/${update.id}/resolve-write`)}>Resolve by reading the canvas</button>
               </>}
-              {update.operation.unresolvedWrite==='reading-canvas' && <p>Reading the actual nodes to settle an interrupted write. If the values were written, verification continues; if nothing changed, the update returns to a fresh preflight; anything else needs recovery.</p>}
+              {update.operation.unresolvedWrite==='reading-canvas' && <p>Reading the actual nodes to settle an interrupted write. If the values were written, verification continues. If nothing changed and the companion never began the write, the update stops and waits for your decision. Anything else needs recovery.</p>}
+              {update.operation.phase==='update-write-untouched' && <>
+                <p>The interrupted write never began and did not reach the canvas. It is closed. Nothing further is sent unless you choose to: sending again runs a fresh preflight and then <strong>a new write</strong> under its own claim.</p>
+                <button type="button" disabled={busy||!update.operation.sourceCurrent} onClick={()=>void action(`native-operation/${id}/update/${update.id}/rearm-write`)}>Preflight again and send a new write</button>
+              </>}
               {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{updateProblem(p)} <code>{p}</code></li>)}</ul>}
               {!!update.operation.imageObservation?.images.length && <details open><summary>Updated native exports · diagnostic only</summary>
                 <p>Fresh exports of the same native nodes at original pixel scale. Recorded source and native layout origins align when export bounds are available; missing geometry remains unaligned. The original creation exports below remain historical evidence.</p>

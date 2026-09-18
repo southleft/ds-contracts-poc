@@ -1668,9 +1668,12 @@ export function createNativeOperationJobs(
     },
     /** Creation pin of an operation that can follow a later source observation. */
     reactSuccessionSubject(id: string) {
-      const { header } = load(id);
+      const loaded = load(id), { header } = loaded;
       if (!isReactInitialNativeRequest(header.request) && !(isReactNativeRequest(header.request) && header.request.version === 1))
         fail('react-succession-kind-unsupported');
+      // Only a finished, observed operation can follow another source revision.
+      if (loaded.state.pending || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase))
+        fail('react-succession-operation-unsettled');
       return structuredClone(header.request);
     },
     reactRequest(id: string): ReactNativeRequest {
@@ -1739,7 +1742,8 @@ export function createNativeOperationJobs(
       return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const loaded = load(id), creation = loaded.header.request;
         if (!isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
-        const pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest;
+        let pin: ReactNativeRequest | ReactInitialNativeRequest;
+        try { pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest; } catch { return []; }
         const followed = isReactInitialNativeRequest(pin) ? pin.anchor.referenceId : pin.referenceId;
         if (followed === referenceId || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
         return [{ operationId: id, caseId: pin.caseId, kind: isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
@@ -1756,12 +1760,16 @@ export function createNativeOperationJobs(
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
-        const pin = comparison ? undefined : effectiveSource(id, header.request);
+        // One unreadable succession journal fails THAT operation closed (its
+        // update planning refuses by name); it must not take the listing down.
+        let pin: unknown, successionProblem: string | undefined;
+        try { pin = comparison ? undefined : effectiveSource(id, header.request); }
+        catch (error) { pin = header.request; successionProblem = (error instanceof Error ? error.message : 'native-source-succession-unreadable') + ':' + id; }
         const initial = isReactInitialNativeRequest(pin) ? pin : undefined;
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? pin;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
+        return [{ ...(successionProblem ? { successionProblem } : {}), caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
           ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),

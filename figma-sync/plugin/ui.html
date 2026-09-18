@@ -2027,17 +2027,17 @@
     if (msg.type === 'init') {
       currentFileKey = msg.fileKey || '';
       syncSurfaces();
-      // A reopened or reloaded plugin resumes a saved local-app connection by
-      // itself. Polling only ever takes commands the app has started for that
-      // paired operation; with nothing saved the first poll reports
-      // "disconnected" and the timer below is cleared again.
-      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
-      startNativePolling();
+
       // The remembered "drift last checked" line is per FILE — a timestamp
       // from another file would be a small lie.
       parent.postMessage({ pluginMessage: { type: 'ui-state-load', key: DRIFT_STATE_KEY + ':' + currentFileKey } }, '*');
     } else if (msg.type === 'ui-state') {
       if (msg.key === DRIFT_STATE_KEY + ':' + currentFileKey) showDriftLastChecked(msg.value);
+    } else if (msg.type === 'native-resume') {
+      // The controller holds a saved result or an interrupted command for this
+      // file. Finishing that needs no new consent; anything new still does.
+      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
+      startNativePolling();
     } else if (msg.type === 'native-status') {
       $('native-status').textContent = msg.message || msg.status;
       if (msg.status === 'disconnected') {

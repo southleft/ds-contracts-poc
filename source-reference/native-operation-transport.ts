@@ -32,6 +32,8 @@ export interface NativeDeliveryJobs {
   retryObservation(id: string): unknown;
   /** Journals that can settle an unresolved write by reading the canvas. */
   resolveWriteOutcome?(id: string): NativeOperationCommand;
+  beginWrite?(id: string, attemptId: string): void;
+  rearmWrite?(id: string): void;
   writeOutcomeRead?(id: string): { writeAttemptId: string; readAttemptId: string } | null;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
@@ -253,5 +255,20 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (!status(id).started || !jobs.resolveWriteOutcome) fail("write-outcome-resolution-refused");
     jobs.resolveWriteOutcome(id);
   };
-  return { pair, start, status, authorize, claim, accept, retryObservation, resolveWriteOutcome };
+  /** The companion asks before executing a write it was handed. Journals
+   * without the handshake (creation) answer yes, as they always have. */
+  const begin = (id: string, secret: string, attemptId: string) => {
+    authorize(id, secret);
+    if (!UUID.test(attemptId)) fail("begin-invalid");
+    const record = read(path.join(directory(id), `${attemptId}.json`));
+    if (record.version !== 1 || record.id !== id || record.attemptId !== attemptId) fail("claim-invalid");
+    jobs.beginWrite?.(id, attemptId);
+    return { status: "begun" as const };
+  };
+  const rearmWrite = (id: string) => {
+    connection(id);
+    if (!status(id).started || !jobs.rearmWrite) fail("write-rearm-refused");
+    jobs.rearmWrite(id);
+  };
+  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite };
 }

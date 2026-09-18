@@ -33,9 +33,12 @@ const identity = (pin: NativeSourcePin) => {
 /** Same source case and request shape. Only the sealed evidence may differ. */
 function assertSuccessor(original: NativeSourcePin, successor: NativeSourcePin) {
   if (isReactInitialNativeRequest(original)) {
-    if (!isReactInitialNativeRequest(successor) || successor.version !== original.version || successor.caseId !== original.caseId ||
-        successor.anchor.caseId !== original.anchor.caseId ||
-        (original.version === 2 && successor.version === 2 && successor.instanceId !== original.instanceId)) fail('case-mismatch');
+    // `instance-N` is positional: a source edit that inserts a sibling moves it
+    // onto another element. Until an instance has a stable descriptor, only
+    // root-level initial states can follow a later observation.
+    if (original.version !== 1) fail('kind-unsupported');
+    if (!isReactInitialNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId ||
+        successor.anchor.caseId !== original.anchor.caseId) fail('case-mismatch');
   } else if (isReactNativeRequest(original)) {
     // Nested child roots pin a selection inside their parent's observation.
     if (original.version !== 1) fail('kind-unsupported');
