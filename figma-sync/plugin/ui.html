@@ -2202,7 +2202,17 @@
 //                      one rides it). Carried alone or over a SOLID drawn
 //                      below it (CSS background-color under background-image).
 //                      RADIAL/ANGULAR/DIAMOND stay paint-unsupported receipts.
-//   strokeWeight       literal stroke weight (bound weights appear in `bound`)
+//   strokeWeight       literal stroke weight (bound weights appear in `bound`).
+//                      ABSENT when the four sides differ (dump v1.34) — see
+//                      strokeWeights; one stroke carries one spelling.
+//   strokeWeights      { top, right, bottom, left } literal side weights in px
+//                      (dump v1.34) — written ONLY when the sides are not all
+//                      equal (Figma reports strokeWeight as figma.mixed then),
+//                      INSTEAD of strokeWeight. A side's 0 is a drawn fact and
+//                      is kept. Lowers to CSS border-top-width /
+//                      border-right-width / border-bottom-width /
+//                      border-left-width. Absence means not captured (dump
+//                      ≤ v1.33 receipted stroke-weights-nonuniform), never 0.
 //   strokeAlign        INSIDE | CENTER | OUTSIDE (dump v1.11) — where the
 //                      weight is drawn relative to the node box. Captured on
 //                      EVERY stroke, INSIDE included: an absent field was
@@ -2912,7 +2922,17 @@ async function dumpNode(node, nodePath, parent) {
   const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke', node) : null;
   if (stroke) {
     out.stroke = stroke;
-    if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // dump v1.34: a stroke whose sides differ has no uniform weight — Figma
+    // reports strokeWeight as figma.mixed — so the four side weights ride
+    // `strokeWeights` INSTEAD (twin of perSideStrokeWeights in
+    // extract/figma/rest/map.ts). Four readable, equal sides are a uniform
+    // stroke and keep riding strokeWeight. One stroke, one spelling.
+    const sideWeights = [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight];
+    const sidesReadable = sideWeights.every(function (v) { return typeof v === 'number' && isFinite(v) && v >= 0; });
+    const sidesDiffer = sidesReadable && sideWeights.some(function (v) { return v !== sideWeights[0]; });
+    if (typeof node.strokeWeight === 'number' && !sidesDiffer) out.strokeWeight = node.strokeWeight;
+    else if (sidesDiffer) out.strokeWeights = { top: sideWeights[0], right: sideWeights[1], bottom: sideWeights[2], left: sideWeights[3] };
+    else if (sidesReadable) out.strokeWeight = sideWeights[0];
     // dump v1.11: EVERY stroke carries its ALIGNMENT — the channel that
     // decides whether the weight is drawn inside the node box, centred on
     // its edge, or outside it. INSIDE is captured too, explicitly, because
@@ -2930,8 +2950,11 @@ async function dumpNode(node, nodePath, parent) {
     // styling belongs to the child contract; the Slot utility's dashed
     // border is the utility's own) — no receipt for an unconsumed channel.
     if (node.type !== 'INSTANCE') {
-      if (typeof node.strokeWeight !== 'number') {
-        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight].join(', ') + '] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) — dump v1 carries a uniform border-width (strokeWeight) only');
+      // dump v1.34: per-side weights are CARRIED above. The receipt survives
+      // only for the residue with no pixel value: no single weight AND a side
+      // that is not a finite non-negative number.
+      if (out.strokeWeight === undefined && out.strokeWeights === undefined) {
+        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + sideWeights.map(String).join(', ') + '] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) — no single strokeWeight and a side is not a finite non-negative number, so the four weights cannot be carried as strokeWeights (dump v1.34); per-side weights dropped');
       }
       if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
         degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] (CSS border-style: dashed) — dashed strokes have no dump v1 projection; the stroke renders as border-style: solid');
@@ -3424,7 +3447,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.33',
+    dumpVersion: '1.34',
   },
 };
 dumps._degradations = degradations;

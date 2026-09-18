@@ -29,6 +29,9 @@
  *   fills[].boundVariables.color (VARIABLE_ALIAS)   fill { var: name } via the variables response, else { hex } + degradation;
  *                                                   effective opacity (color.a × paint opacity) rides { alpha } when < 1 (dump v1.1)
  *   strokes[…] (same shape)                         stroke, strokeWeight (literal, only when a stroke is emitted)
+ *   individualStrokeWeights {top,right,bottom,left} strokeWeights (dump v1.34 — only when the four sides are NOT all equal, and then
+ *                                                   INSTEAD of strokeWeight: REST reports strokeWeight 0 for sides [1,0,1,0], which
+ *                                                   is not a drawn fact); an unreadable side keeps stroke-weights-nonuniform
  *   boundVariables.size.x / .y                      bound.width / bound.height
  *   boundVariables.individualStrokeWeights.top…     bound.strokeTopWeight / …Right / …Bottom / …Left
  *   boundVariables.rectangleCornerRadii
@@ -1201,6 +1204,22 @@ function mapShape(
 
 /** Channels a node can carry that dump v1.2 still has NO projection for —
  *  each becomes a degradation receipt (STYLE-FIDELITY audit: zero silence). */
+/** dump v1.34 — the four side weights of a stroke whose sides are NOT all
+ *  equal. `undefined` when the node reports no per-side weights or reports
+ *  four equal ones (a uniform stroke keeps riding `strokeWeight`, byte for
+ *  byte); `'unreadable'` when a side is not a finite non-negative number (the
+ *  residue that keeps its `stroke-weights-nonuniform` receipt). Twin of the
+ *  strokeTopWeight/…/strokeLeftWeight read in extract/figma/dump.plugin.js. */
+function perSideStrokeWeights(node: RestNode): NonNullable<DumpNode['strokeWeights']> | 'unreadable' | undefined {
+  const w = node.individualStrokeWeights;
+  if (!w) return undefined;
+  const { top, right, bottom, left } = w;
+  const readable = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v >= 0;
+  if (!readable(top) || !readable(right) || !readable(bottom) || !readable(left)) return 'unreadable';
+  if (top === right && right === bottom && bottom === left) return undefined;
+  return { top, right, bottom, left };
+}
+
 function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, strokeEmitted: boolean, shapeCarried: boolean) {
   if (node.blendMode !== undefined && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     ctx.report.degradations.push({
@@ -1231,16 +1250,18 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
   // is the utility's own) — no receipt needed for a channel that is
   // deliberately not consumed.
   const strokeDetail = strokeEmitted && node.type !== 'INSTANCE';
+  // dump v1.34: per-side weights are CARRIED (`strokeWeights`, written beside
+  // the stroke in mapNode). The receipt survives only for the residue that
+  // cannot be carried — a side Figma did not report as a finite, non-negative
+  // number has no pixel value, and inventing 0 for it would draw a rule the
+  // designer may not have drawn (or erase one they did).
   const w = node.individualStrokeWeights;
-  if (w && node.type !== 'INSTANCE') {
-    const values = [w.top ?? 0, w.right ?? 0, w.bottom ?? 0, w.left ?? 0];
-    if (new Set(values).size > 1) {
-      ctx.report.degradations.push({
-        code: 'stroke-weights-nonuniform',
-        nodePath,
-        message: `per-side stroke weights [${values.join(', ')}] — dump v1 carries a uniform strokeWeight only; per-side weights dropped`,
-      });
-    }
+  if (w && node.type !== 'INSTANCE' && perSideStrokeWeights(node) === 'unreadable') {
+    ctx.report.degradations.push({
+      code: 'stroke-weights-nonuniform',
+      nodePath,
+      message: `per-side stroke weights [${[w.top, w.right, w.bottom, w.left].map((v) => String(v)).join(', ')}] — a side is not a finite non-negative number, so the four weights cannot be carried as strokeWeights (dump v1.34); per-side weights dropped`,
+    });
   }
   if (strokeDetail && Array.isArray(node.strokeDashes) && node.strokeDashes.length > 0) {
     ctx.report.degradations.push({
@@ -1482,7 +1503,14 @@ function mapNode(
   const stroke = mapPaint(node.strokes, ctx, nodePath, 'stroke');
   if (stroke) {
     out.stroke = stroke;
-    if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // dump v1.34: sides that differ ride `strokeWeights` and the uniform
+    // `strokeWeight` is NOT written beside them — REST reports strokeWeight 0
+    // for sides [1, 0, 1, 0], and a consumer reading that 0 draws a correctly
+    // coloured invisible border (the design-led Tabs header). One stroke, one
+    // spelling; the plugin reader agrees (its strokeWeight is figma.mixed).
+    const sideWeights = perSideStrokeWeights(node);
+    if (sideWeights !== undefined && sideWeights !== 'unreadable') out.strokeWeights = sideWeights;
+    else if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
   }
   const shape = mapShape(node, ctx, nodePath, parentBox);
   if (shape) out.shape = shape;
@@ -1734,7 +1762,10 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.33';
+export const REST_DUMP_VERSION = '1.34';
+// 1.34 (design-led fidelity): per-side stroke weights carried as `strokeWeights`
+//      (in place of the uniform `strokeWeight`) instead of being named
+//      `stroke-weights-nonuniform`.
 // 1.33 (design-led fidelity): text `letterSpacing` carried in pixels instead of
 //      being named `text-channel-unsupported`.
 // 1.32 (design→code census): set-level `description` + `documentationLinks`
