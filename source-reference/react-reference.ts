@@ -557,7 +557,15 @@ export function createReactReferenceService(
               jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
             } else if (nativeAction[3] === 'repair-comparison') jobs.dispatch(id,'comparison-repair-preflight-readback');
             else if (nativeAction[3] === 'resume-comparison') jobs.dispatch(id,'comparison-recovery-readback');
-            else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+            else if (nativeAction[3] === 'retry-observation') {
+              // A correction chain pins the journal of the operation it corrects, and
+              // the creation reader judges the corrected canvas against the creation
+              // plan. Re-reading the parent after a written correction would therefore
+              // call correct nodes "refused" and strand every later update. The latest
+              // correction carries the independent readback; inspect that instead.
+              if (native().updateJobs?.updateHistory(id).length) throw Error('react-parent-observation-superseded-by-correction');
+              transport.retryObservation(id);
+            }
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
