@@ -661,6 +661,8 @@ async function dumpNode(node, nodePath, parent) {
       columnGap: node.gridColumnGap,
     };
     if (node.gridItemsPositioning === 'ROW_AUTO_FLOW') grid.flow = 'row';
+    const flowRows = node.getSharedPluginData('ds_contracts', 'gridFlowRows');
+    if (flowRows) { try { grid.flowRows = JSON.parse(flowRows); } catch (_) { grid.flowRows = flowRows; } }
     out.layout = {
       mode: 'GRID',
       padding: [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft],
@@ -1394,6 +1396,16 @@ for (const page of figma.root.children) {
         const raw = node.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
         if (!raw) return {};
         try { return { unsetVariantAxes: JSON.parse(raw) }; } catch (e) { return { unsetVariantAxes: raw }; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'rootSlot');
+        if (!raw) return {};
+        try { return { rootSlot: JSON.parse(raw) }; } catch (e) { return { rootSlot: raw }; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'codeValueAxes');
+        if (!raw) return {};
+        try { return { codeValueAxes: JSON.parse(raw) }; } catch (e) { return { codeValueAxes: raw }; }
       })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'semantics');

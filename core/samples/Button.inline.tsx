@@ -13,14 +13,17 @@
 import { forwardRef } from 'react';
 import type { CSSProperties, ButtonHTMLAttributes } from 'react';
 
-const ICONS: Record<string, string> = {
-  "spinner": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>",
+const SIZED_ICONS: Record<number, Record<string, string>> = {
+  "14": {
+    "spinner": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M 10 2.5 A 7.5 7.5 0 0 1 17.5 10\" stroke-linecap=\"round\"/></svg>"
+  }
 };
 
 const KEYFRAMES = "@keyframes ds-inline-spin { to { transform: rotate(360deg); } }";
 
 const S: Record<string, CSSProperties> = {
   "root": {
+    "boxSizing": "border-box",
     "display": "inline-flex",
     "flexDirection": "row",
     "alignItems": "center",
@@ -33,11 +36,14 @@ const S: Record<string, CSSProperties> = {
     "fontWeight": 500
   },
   "loadingSpinner": {
+    "boxSizing": "border-box",
     "display": "inline-flex",
     "flexShrink": 0,
     "animation": "ds-inline-spin 0.8s linear infinite"
   },
-  "label": {}
+  "label": {
+    "boxSizing": "border-box"
+  }
 };
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
@@ -96,7 +102,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   return (
     <button ref={ref} style={{ ...S.root, ...(V[`variant-${variant}:root`] ?? {}), ...(V[`size-${size}:root`] ?? {}), ...(disabled ? DISABLED_STYLE : {}), ...style }} disabled={disabled} data-loading={loading || undefined} {...rest}>
       <style>{KEYFRAMES}</style>
-      {loading ? (<span style={{ ...S.loadingSpinner }} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS["spinner"] }} />) : null}
+      {loading ? (<span style={{ ...S.loadingSpinner }} aria-hidden="true" dangerouslySetInnerHTML={{ __html: SIZED_ICONS[14]["spinner"] }} />) : null}
 <span style={{ ...S.label }}>{children}</span>
     </button>
   );

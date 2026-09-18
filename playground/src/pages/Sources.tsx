@@ -1,3 +1,4 @@
+import { ReactSourceReference } from './ReactSourceReference';
 import { useEffect, useState } from "react";
 import type { SourceContractPlan } from "../../../source-reference/contract-plan";
 import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
@@ -721,6 +722,9 @@ export function Sources() {
     <div className="source-workspace">
       <p className="source-eyebrow">Code → design · source connection</p>
       <h1>Verify the source before generating design.</h1>
+      <ReactSourceReference />
+      <details className="parked-source-evaluation">
+      <summary>Lit evaluation archive — parked for V1.1</summary>
       <p>
         Connect the original styled Storybook. Keep its fonts, theme, assets and
         states intact; compare a fresh, network-isolated replay before treating
@@ -1890,6 +1894,7 @@ export function Sources() {
           </div>
         </>
       )}
+      </details>
     </div>
   );
 }

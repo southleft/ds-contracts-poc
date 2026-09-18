@@ -286,7 +286,7 @@ let busy = false; // one run at a time, across both modes
 // caller script. Exclusive host handoff prevents another client from receiving
 // an already delivered creation; durable receipts recover lost acknowledgments.
 const NATIVE_APP_BASE = 'http://localhost:5181/api/source-reference/native/';
-const NATIVE_SCRATCH = 'byMp6lt0Ij9b2QbkDGFwBh';
+const NATIVE_TARGETS = ['byMp6lt0Ij9b2QbkDGFwBh', 'T56aKuRnoay1L7CKAjSWRO'];
 const NATIVE_UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const NATIVE_PAIR = new RegExp('^dscn_(' + NATIVE_UUID + ')\\.([a-f0-9]{64})$');
 const nativeConnectionKey = () => 'ds_native_connection:' + String(figma.fileKey || '');
@@ -297,12 +297,12 @@ function nativeEnvelope(command, result) {
     planRevision: command.planRevision, scriptSha256: command.scriptSha256, result };
 }
 function nativeCommandValid(c, operationId) {
-  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback'];
+  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback', 'update-preflight-readback', 'update-apply', 'update-readback', 'comparison-recovery-readback', 'comparison-recovery-apply', 'comparison-repair-preflight-readback', 'comparison-repair-apply'];
   return c && c.version === 1 && c.kind === 'SOURCE-NATIVE-OPERATION' &&
     c.operationId === operationId && phases.includes(c.phase) &&
     new RegExp('^' + NATIVE_UUID + '$').test(c.attemptId) &&
     /^[a-f0-9]{64}$/.test(c.nonce) && /^sha256:[a-f0-9]{64}$/.test(c.planRevision) &&
-    c.fileKey === NATIVE_SCRATCH && figma.fileKey === NATIVE_SCRATCH &&
+    NATIVE_TARGETS.includes(c.fileKey) && figma.fileKey === c.fileKey &&
     c.readOnly === c.phase.endsWith('-readback') && typeof c.script === 'string' &&
     c.script.length > 0 && c.script.length <= 4 * 1024 * 1024 && sha256Hex(c.script) === c.scriptSha256;
 }
@@ -313,7 +313,7 @@ async function nativePoll() {
     const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
     const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);
     if (!match) { nativeStatus('disconnected', 'Paste the connection from the local app.'); return; }
-    if (figma.fileKey !== NATIVE_SCRATCH) { nativeStatus('refused', 'This source workflow is limited to Scratch.'); return; }
+    if (!NATIVE_TARGETS.includes(figma.fileKey)) { nativeStatus('refused', 'Open the authorized target shown in the local app.'); return; }
     const operationId = match[1], secret = match[2];
     const receiptKey = 'ds_native_receipt:' + operationId;
     const request = async (route, payload) => {
@@ -333,7 +333,7 @@ async function nativePoll() {
     let heldReadback = null;
     if (saved) {
       const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
-      const readback = identity && ['token-readback', 'component-readback'].includes(identity.phase);
+      const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback', 'comparison-recovery-readback', 'comparison-repair-preflight-readback'].includes(identity.phase);
       if (saved.stage === 'result' && saved.envelope) {
         try { await deliver(saved.envelope); return; }
         catch (e) { if (!readback) throw e; }
@@ -368,7 +368,7 @@ async function nativePoll() {
     // A new read-only attempt may replace it only after the app journal has
     // explicitly abandoned the old readback. Creation markers never qualify.
     await figma.clientStorage.setAsync(receiptKey, { stage: 'received', identity: nativeEnvelope(command, null) });
-    nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : 'Creating the scoped native candidate…');
+    nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : command.phase === 'update-apply' ? 'Applying the reviewed changes to existing nodes…' : 'Creating the scoped native candidate…');
     let result;
     try { result = toPlain(await runScript(command.script, { readOnly: command.readOnly })); }
     catch (e) { result = { status: 'native-execution-outcome-unknown' }; }
@@ -439,8 +439,8 @@ figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
   if (msg.type === 'native-connect') {
     const value = typeof msg.connection === 'string' ? msg.connection.trim() : '';
-    if (!NATIVE_PAIR.test(value) || figma.fileKey !== NATIVE_SCRATCH) {
-      nativeStatus('refused', 'Use the connection from the local app in the authorized Scratch file.'); return;
+    if (!NATIVE_PAIR.test(value) || !NATIVE_TARGETS.includes(figma.fileKey)) {
+      nativeStatus('refused', 'Use the connection in the authorized target shown in the local app.'); return;
     }
     try { await figma.clientStorage.setAsync(nativeConnectionKey(), value); await nativePoll(); }
     catch (e) { nativeStatus('unavailable', 'The connection could not be saved.'); }

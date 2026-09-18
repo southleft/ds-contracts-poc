@@ -1,0 +1,131 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Tag: al-badge\n\nProps\n- isDot: boolean — isDot boolean\n- variant: info | success | warning | danger — State variant\n  - default: Displays a badge with the default state\n\nSlots\n- (default) — The badge content\n\nAccessibility\n- element: <div>\n\nDocs: https://altitude.pages.dev/docs/components/badge/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/badge/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "neutral",
+          "danger",
+          "info",
+          "success",
+          "warning"
+        ]
+      },
+      "default": "neutral",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "neutral": "Neutral",
+            "danger": "Danger",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "label",
+          "dot"
+        ]
+      },
+      "default": "label",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "label": "Label",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Badge",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Badge": {
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "content": {
+            "prop": "text"
+          },
+          "visibleWhen": {
+            "prop": "shape",
+            "equals": "label"
+          },
+          "tokens": {
+            "color": "{imported.badge.badge.color.{variant}}",
+            "font-size": "{imported.text.typography-body-xs-semibold.font-size}",
+            "font-weight": "{imported.text.typography-body-xs-semibold.font-weight}",
+            "line-height": "{imported.text.typography-body-xs-semibold.line-height}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.badge.root.background-color.{variant}}",
+        "padding-inline": "{imported.badge.root.padding-inline.{shape}}",
+        "border-radius": "{imported.badge.root.border-radius.{shape}}",
+        "width": "{imported.badge.root.width.{shape}}",
+        "height": "{imported.badge.root.height.{shape}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "fbb55b875347b47ec62ef9ed1727903eb3fc499d",
+        "nodeId": "3538:35772"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Badge",
+        "export": "Badge"
+      }
+    }
+  }
+}

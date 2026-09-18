@@ -1,3 +1,10 @@
+import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
+import { createNativeUpdatePlans } from './native-update-plans.js';
+import { createNativeUpdateJobs } from './native-update-jobs.js';
+import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
+import { createReactReferenceService } from './react-reference.js';
+import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
+import { prepareReactCallerNativePlan, buildReactCallerNativeWrite } from './react-caller-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
@@ -103,6 +110,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -119,9 +127,65 @@ export function createReferenceService(
       candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
   });
-  const nativeJobs = createNativeOperationJobs(
+  const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactInitial: {
+        prepare: (request, operation) => ({
+          visual: { id: request.anchor.ownership.id, reportSha256: request.anchor.ownership.sha256 },
+          preparation: { id: request.observation.id, reportSha256: request.observation.reportSha256 },
+          plan: prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(request), operation }),
+        }),
+        buildComponent: (request, context) => buildReactInitialNativeWrite({
+          ...reactReference.initialNativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
+      reactComparison: {
+        refresh: (request, operation) => {
+          const fresh = reactReference.refreshComparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          return {request:fresh.request,plan:prepareReactComparisonPlan({...fresh.evidence,operation})};
+        },
+        prepare: (request, operation) => {
+          const evidence = reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          return {
+            visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
+            preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
+            plan: prepareReactComparisonPlan({ ...evidence, operation }),
+            ...(evidence.sourceCompatibility ? { sourceCompatibility: evidence.sourceCompatibility } : {}),
+          };
+        },
+        buildComponent: (request, context) => buildReactComparisonWrite({
+          ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, comparisonRecovery:context.comparisonRecovery,
+        }),
+      },
+      react: {
+        updatedObservation: id => nativeUpdateJobs.verifiedForParent(id),
+        prepare: (request, operation) => ({
+          visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+          preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
+          plan: (request.compilation === 'current' ? prepareReactNativeFreshPlan : prepareReactNativePlan)({ ...reactReference.nativeEvidence(request), operation }),
+        }),
+        buildComponent: (request, context) => (request.compilation === 'current' ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({
+          ...reactReference.nativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
+      reactCaller: {
+        prepare: (request, operation) => {
+          const evidence = reactReference.callerNativeEvidence(request);
+          return {
+            visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+            preparation: { id: request.ownership.id, reportSha256: request.graphRevision.slice(7) },
+            plan: prepareReactCallerNativePlan({ ...evidence, operation }),
+          };
+        },
+        buildComponent: (request, context) => buildReactCallerNativeWrite({
+          ...reactReference.callerNativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
       prepare: (request, operation) =>
         prepareVerifiedNativeOperation(
           repoRoot,
@@ -698,6 +762,19 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
+    const baseline = nativeJobs.reactUpdateBaseline(id);
+    const desired = baseline.request.kind === 'react-initial-draft'
+      ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation })
+      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.request), operation: baseline.input.operation });
+    return { parentJournalRevision: baseline.journalRevision, input: {
+      before: baseline.input, baseline: baseline.receipt,
+      desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
+    } };
+  }, id => nativeUpdateJobs.updateHistory(id));
+  const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
+  const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
+  const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
     const candidates = candidateJobs.list(job.id);
@@ -836,7 +913,7 @@ export function createReferenceService(
         /^Bearer ([a-f0-9]{64})$/.exec(req.headers.authorization ?? "")?.[1] ??
         "";
       try {
-        nativeTransport.authorize(pluginRoute[1], secret);
+        deliveryTransport(pluginRoute[1]).authorize(pluginRoute[1], secret);
       } catch {
         json(res, 403, { error: "Native connection refused." });
         return;
@@ -865,7 +942,7 @@ export function createReferenceService(
           json(
             res,
             200,
-            nativeTransport.claim(
+            deliveryTransport(pluginRoute[1]).claim(
               pluginRoute[1],
               secret,
               payload.fileKey,
@@ -876,7 +953,7 @@ export function createReferenceService(
           json(
             res,
             200,
-            nativeTransport.accept(pluginRoute[1], secret, payload),
+            deliveryTransport(pluginRoute[1]).accept(pluginRoute[1], secret, payload),
           );
         }
       } catch {
@@ -889,6 +966,10 @@ export function createReferenceService(
     }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
+      return;
+    }
+    if (route === "react" || route.startsWith("react/")) {
+      await reactReference(req, res, route);
       return;
     }
     const framingRoute =
@@ -1333,6 +1414,7 @@ export function createReferenceService(
   return {
     handle,
     close() {
+      reactReference.close();
       candidateJobs.close();
       bindingJobs.close();
       if (active) {

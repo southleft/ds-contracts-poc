@@ -1,0 +1,142 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tabs",
+  "name": "Tabs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Tag: al-tabs\n\nProps\n- variant — Tabs variant\n  - default: Tabs are left-aligned, and the width of each tab is defined by the length of its content\n  - stretch: Tabs stretch horizontally to have equal widths, which is calculated by the width of the screen divided by the number of tabs\n\nSlots\n- (default) — The tab items for the tabs\n- panel — The tab panels that correspond to the slotted tab items\n\nAccessibility\n- element: <div>\n- key ArrowRight: Activates the next tab.\n- key ArrowLeft: Activates the previous tab.\n- key Home: Activates the first tab.\n- key End: Activates the last tab.\n- focus: Roving focus across the tab list: the arrow keys move focus and activation together, so the list is a single tab stop and the panel is the next one.\n\nDocs: https://altitude.pages.dev/docs/components/tabs/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/tabs/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "stretch"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "stretch": "Stretch"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "items",
+      "type": {
+        "arrayOf": {
+          "text": "text"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "items"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "alCTabsHeader": {
+          "layout": {
+            "direction": "row"
+          },
+          "parts": {
+            "alCTabsList": {
+              "layout": {
+                "direction": "row"
+              },
+              "parts": {
+                "alTab": {
+                  "component": {
+                    "id": "ds.tab-2",
+                    "props": {
+                      "state": "default"
+                    }
+                  },
+                  "repeat": {
+                    "itemsProp": "items",
+                    "sample": [
+                      {
+                        "text": "Tab label"
+                      },
+                      {
+                        "text": "Tab label"
+                      },
+                      {
+                        "text": "Tab label"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "tokens": {
+            "border-color": "{imported.tabs.al-c-tabs-header.border-color}",
+            "border-width": "{imported.tabs.al-c-tabs-header.border-width}"
+          }
+        },
+        "alCTabsBody": {
+          "layout": {
+            "direction": "column"
+          },
+          "parts": {
+            "alTabPanel": {
+              "component": {
+                "id": "ds.tab-panel",
+                "props": {
+                  "state": "default"
+                }
+              }
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "b0fcf6c30821ef8e3eea377860944361ffc600a6",
+        "nodeId": "3558:61955"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Tabs",
+        "export": "Tabs"
+      }
+    }
+  }
+}

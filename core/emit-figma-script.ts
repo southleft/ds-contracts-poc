@@ -1,3 +1,8 @@
+import { lowerPaddingBoxBackground } from './figma-background-clip.js';
+import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
+import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
+import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
+import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
  * Contract → Figma sync-script text — the PURE core of scripts/generate-figma.ts.
  *
@@ -52,6 +57,7 @@ import {
   statePreviewSubstProps,
   withStateSegment,
   baseTwinName,
+  sortByDependencies,
   walkAnatomy,
   type Contract,
   type Part,
@@ -60,12 +66,12 @@ import {
   omittedCodeBindingConflicts,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime, okColorToRgba } from './token-set.js';
 import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
-import { canonicalJson } from './contract-provenance.js';
+import { canonicalJson, revisionOf } from './contract-provenance.js';
 import {
   resolveNativeSourceProjection,
   type NativeSourcePartIdentity,
@@ -103,6 +109,7 @@ export interface LayoutSpec {
     rowGap: number;
     columnGap: number;
     flow?: 'ROW_AUTO_FLOW';
+    flowRows?: GridFlowRows;
     /** G8 (2026-08-08) — an INTRINSICALLY SIZED axis: the contract's
      *  `literals.width/height: "fit-content"` lowered to the canvas's
      *  layoutSizing{Horizontal,Vertical} = 'HUG'. `primary/counterAxisSizingMode`
@@ -119,14 +126,23 @@ export interface LayoutSpec {
 
 export interface NodeSpec {
   type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
+  backgroundClip?: 'padding-box';
+  /** Synthetic, independently verified paint plane; not a content/API part. */
+  backgroundPaint?: {inset:number;radius:number};
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
   /** Private compile-only source identity; never inferred from a layer name. */
   nativeSourcePart?: NativeSourcePartIdentity;
+  nativeContractPart?: NativeContractPartIdentity;
+  nativeContractSample?: NativeContractSampleIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
   nativeSourceVisible?: false;
+  /** Synthetic native content container; never a new React element. */
+  rootSlotContent?: true;
+  /** Synthetic grid inside a root SLOT; sized after the slot joins its root. */
+  rootSlotGridContent?: true;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
@@ -325,6 +341,8 @@ export interface NodeSpec {
    *  preview renders width:100%; the sync runtime keeps hug sizing — a named
    *  preview-only stage fact (the component has no intrinsic width). */
   blockRoot?: boolean;
+  /** Full-width reusable root; its standalone canvas width is a preview only. */
+  rootFillWidth?: true;
   /** CARBON LIVE-DEFECT ROUND (D5): the root is a VIEWPORT-PINNED overlay
    *  scrim (`inset: 0` on all four edges) whose captured width/height
    *  measured the CAPTURE STAGE, not the component. The canvas box is bound
@@ -441,6 +459,10 @@ export interface NodeSpec {
    *  Absent whenever textFill is set (a bound paint wins). */
   textFillLit?: { r: number; g: number; b: number; a?: number };
   contentProp?: string;
+  /** Caller-owned text inside an INSTANCE SLOT cannot reference an enclosing
+   * component property. It remains a directly editable native TEXT node and
+   * carries this exact contract-property identity for deterministic readback. */
+  callerContentProp?: string;
   // instance
   dep?: string;
   /** Authoritative semantic identity for a nested component. Names are only
@@ -449,6 +471,13 @@ export interface NodeSpec {
   /** Stable Figma identity when the child contract already has an anchor. */
   depAnchorKey?: string;
   depProps?: Record<string, string | boolean>;
+  /** Authored mount-only mapping; depProps is its static fresh-mount preview,
+   * not evidence that a canvas property implements React state lifetime. */
+  depInitialProps?: Record<string, string>;
+  /** Reuse this slot on the containing child instance; never create a parent
+   * slot property or replace the child main. Children belong to the caller. */
+  callerSlotProperty?: string;
+  callerRootFillWidth?: true;
   // slot
   slotProperty?: string;
   slotOptional?: boolean;
@@ -610,6 +639,7 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
   nativeSourceCandidate?: {
@@ -636,6 +666,9 @@ export interface ComponentData {
    *  StatusDot.label) — added as unbound TEXT properties so the API surface
    *  matches the contract. */
   textProps: Array<{ property: string; default: string }>;
+  /** Expose existing child controls; never invent a parent property alias.
+   * Included in the spec hash so earlier compositions receive this update. */
+  nestedPropertyControls?: 1;
   fontStyles: string[];
   variants: VariantSpec[];
   /** bindings.figma.statePreviews: canvas-only preview variants carrying the "State"
@@ -674,6 +707,11 @@ export interface ComponentData {
    *  answer instead of a convention. Omitted when no prop declares a Figma
    *  binding. */
   propNames?: Record<string, string>;
+  /** Canonical native options retain exact typed React values. */
+  codeValueAxes?: CodeValueAxes;
+  rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
+    { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' } |
+    { version: 4; property: string; display: 'block'; width: 'fill' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -884,7 +922,8 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
     remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
-      Boolean(${specExpr}.fixedWidth), Boolean(${specExpr}.fixedHeight));
+      Boolean(${specExpr}.rootFillWidth || ${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
+      Boolean(${specExpr}.fixedHeight || (${specExpr}.lits && ${specExpr}.lits.height !== undefined)));
   }`
     : '';
 
@@ -896,7 +935,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+export const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -906,6 +945,53 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
     ctx.fileKey,
     ctx.mintedTokens,
   );
+}
+
+/** Native Figma cannot bind an enclosing component's properties to content
+ * inside an instance slot. Insertion strips existing references; rebinding
+ * throws. Keep compilation inspectable, but refuse writes before allocation. */
+export function nativeCallerPropertyBlockers(data: ComponentData) {
+  const found = new Map<string, { property: string; kind: 'TEXT' | 'BOOLEAN'; nodeName: string }>();
+  const visit = (node: NodeSpec, insideCallerSlot: boolean) => {
+    const inside = insideCallerSlot || node.callerSlotProperty !== undefined;
+    if (inside) for (const [property, kind] of [[node.contentProp, 'TEXT'], [node.visibleProp, 'BOOLEAN']] as const) {
+      if (property) found.set(JSON.stringify([property, kind, node.name]), { property, kind, nodeName: node.name });
+    }
+    node.children?.forEach(child => visit(child, inside));
+  };
+  [...data.variants, ...(data.stateVariants ?? [])].forEach(variant => visit(variant.spec, false));
+  return [...found.values()];
+}
+
+/** Promote parent TEXT mappings inside caller slots to direct canvas editing.
+ * Figma strips or rejects enclosing component-property references at this
+ * boundary, while the TEXT node itself remains editable. BOOLEAN visibility
+ * mappings still require a different representation and remain blockers. */
+function lowerNativeCallerContentSpecs(variants: VariantSpec[]) {
+  const visit = (node: NodeSpec, insideCallerSlot: boolean) => {
+    const inside = insideCallerSlot || node.callerSlotProperty !== undefined;
+    if (inside && node.contentProp !== undefined) {
+      if (node.type !== 'text' || node.callerContentProp !== undefined)
+        throw Error('FIGMA_CALLER_SLOT_TEXT_MAPPING_INVALID');
+      node.callerContentProp = node.contentProp;
+      delete node.contentProp;
+    }
+    node.children?.forEach(child => visit(child, inside));
+  };
+  variants.forEach(variant => visit(variant.spec, false));
+}
+
+export function nativeCallerContentMappings(data: ComponentData) {
+  const found = new Map<string, { property: string; nodeName: string }>();
+  const visit = (node: NodeSpec) => {
+    if (node.callerContentProp)
+      found.set(JSON.stringify([node.callerContentProp, node.name]), {
+        property: node.callerContentProp, nodeName: node.name,
+      });
+    node.children?.forEach(visit);
+  };
+  [...data.variants, ...(data.stateVariants ?? [])].forEach(variant => visit(variant.spec));
+  return [...found.values()];
 }
 
 /**
@@ -918,6 +1004,7 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   // post-hoc layer-name walk cannot establish this identity (names can repeat,
   // and layout lowering may reorder or expand nodes).
   const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  const compilingCallerDeps = new Set<string>();
   const compiledData = new WeakMap<ComponentData, string>();
   const nativeCandidateData = new WeakSet<ComponentData>();
   const variableCollection = input.variableCollection;
@@ -1561,8 +1648,11 @@ function splitTopLevel(value: string): string[] {
   return out;
 }
 
-/** A CSS color literal (hex / rgb() / rgba()) → RGBA floats. */
+/** A CSS color literal → RGBA floats, using the shared OKLab conversion. */
 function parseCssColor(v: string): { r: number; g: number; b: number; a?: number } | undefined {
+  const modern = okColorToRgba(v);
+  if (modern) return Object.values(modern).every(Number.isFinite)
+    ? { r: modern.r / 255, g: modern.g / 255, b: modern.b / 255, a: modern.a } : undefined;
   return parseLitColor(v);
 }
 
@@ -1587,7 +1677,7 @@ function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
       inner = true;
       rest = rest.replace(/(^| )inset( |$)/, ' ').trim();
     }
-    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
+    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|(?:rgba?|oklab|oklch)\([^)]*\))/);
     if (!colorMatch) return undefined;
     const color = parseCssColor(colorMatch[1]);
     if (!color) return undefined;
@@ -1759,6 +1849,24 @@ const GRID_ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
   end: 'MAX',
 };
 
+/** Grid gaps are two independent, bindable fields. Apply declarations in the
+ * same order as CSS: layout, tokens, then literals; a shorthand sets both. */
+function applyGridGap(spec: NodeSpec, channel: string, value: number | undefined, variable?: string): boolean {
+  if (spec.layout?.mode !== 'GRID' || !['gap', 'row-gap', 'column-gap'].includes(channel)) return false;
+  if (value === undefined || !Number.isFinite(value) || value < 0)
+    throw new Error(`FIGMA_GRID_GAP_UNSUPPORTED: ${channel} needs a nonnegative resolved length`);
+  const grid = spec.layout.grid!;
+  for (const [css, key, field] of [
+    ['row-gap', 'rowGap', 'gridRowGap'], ['column-gap', 'columnGap', 'gridColumnGap'],
+  ] as const) {
+    if (channel !== 'gap' && channel !== css) continue;
+    grid[key] = value;
+    if (variable) (spec.bindings ??= {})[field] = variable;
+    else if (spec.bindings) delete spec.bindings[field];
+  }
+  return true;
+}
+
 function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
@@ -1791,6 +1899,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
         // Under flow, rows are re-declared per compiled variant by
         // stampGridCells (ceil of the ACTUAL child count — G5/P9).
         rows: (l.rows ?? []).map(toTrack),
+        ...(l.autoRows ? { flowRows: { version: 1 as const, rows: (l.rows ?? []).map(toTrack), autoRows: toTrack(l.autoRows) } } : {}),
         columns: (l.columns ?? []).map(toTrack),
         // @lower emit.grid-gap-pair-kept
         rowGap: gapPx(l.gap?.row),
@@ -2046,6 +2155,10 @@ function applyTokens(
       tokenPath = tokenPath.replaceAll(`{${propName}}`, value);
     }
     const varName = figmaName(tokenPath);
+    if (spec.layout?.mode === 'GRID' && ['gap', 'row-gap', 'column-gap'].includes(cssProp)) {
+      applyGridGap(spec, cssProp, parseLitPx(String(resolveLiteral(tokenPath))), varName);
+      continue;
+    }
     switch (cssProp) {
       // `background` carries the same single-token binding as
       // `background-color` (the promotion's CSS-shorthand color layer; the
@@ -2639,6 +2752,10 @@ function applyLiterals(
   const next: TextCtx = { ...ctx };
   const li = () => (spec.lits ??= {});
   for (const [cssProp, value] of Object.entries(lits)) {
+    if (spec.layout?.mode === 'GRID' && ['gap', 'row-gap', 'column-gap'].includes(cssProp)) {
+      applyGridGap(spec, cssProp, parseLitPx(value));
+      continue;
+    }
     switch (cssProp) {
       // R7 LITERAL INK — the case this switch never had. The text twin of
       // the `background-color` literal above: a literal SOLID paint on the
@@ -3210,6 +3327,16 @@ function applyStyling(
   ctx: TextCtx,
 ): TextCtx {
   const tokens = resolveTokens(part, subst);
+  if (spec.layout?.mode === 'GRID') {
+    const gap = resolveLayout(part, subst)?.gap;
+    for (const [axis, channel] of [['row', 'row-gap'], ['column', 'column-gap']] as const) {
+      const value = gap?.[axis];
+      if (typeof value !== 'string') continue;
+      let path = value.slice(1, -1);
+      for (const [name, val] of Object.entries(subst)) path = path.replaceAll(`{${name}}`, val);
+      applyGridGap(spec, channel, parseLitPx(String(resolveLiteral(path))), figmaName(path));
+    }
+  }
   // R7: both passes read the SAME absolute gate the placement pass uses
   // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
   // that absolutePartPlacement lowers is never named as an in-flow drop.
@@ -3488,7 +3615,7 @@ function svgSinglePaintVar(markup: string, hex: string, paintPath: string | unde
   return paints.size === 1 && paints.has(hex) ? figmaName(paintPath) : undefined;
 }
 
-function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): string {
+function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): { markup: string; paintPath?: string; paintHex: string } {
   let asset = part.icon!.asset;
   const ref = asset.match(PARENT_PROP_REF);
   if (ref) {
@@ -3499,15 +3626,17 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   }
   const svg = iconAssets.get(asset);
   if (!svg) throw new Error(`Unknown icon asset "${asset}" (expected assets/icons/${asset}.svg)`);
-  // Round 4: glyph paint priority — the part's own `fill` channel (promoted
-  // svg hosts), else the text color; currentColor AND attribute-less paths
-  // (CSS-inherited fill) both bake to the resolved literal.
+  // Inherited SVG fill and CSS currentColor are independent paint channels.
+  // A stroke using currentColor follows `color`, even when an ancestor's
+  // initial SVG fill is black. Attribute-less filled shapes use `fill`.
   const paintPath = ctx.glyphFillPath ?? ctx.textFillPath;
   // R7: a LITERAL ink (literals.color on the part or an ancestor) bakes into
   // the glyph exactly as the token path's resolved literal does.
   const hex = paintPath ? String(resolveLiteral(paintPath)) : (ctx.textFillLitCss ?? '#000000');
   const hasPaint = paintPath !== undefined || ctx.textFillLitCss !== undefined;
-  let out = svg.replaceAll('currentColor', hex);
+  const currentHex = ctx.textFillPath ? String(resolveLiteral(ctx.textFillPath)) : (ctx.textFillLitCss ?? '#000000');
+  const usesCurrentColor = svg.includes('currentColor');
+  let out = svg.replaceAll('currentColor', currentHex);
   // Bake the resolved paint as a `fill` ONLY for icons that declare no fill
   // anywhere — pure CSS-inherited glyphs. If the <svg> tag itself already sets
   // fill (e.g. stroke-based icons carry `fill="none"`, coloured via the
@@ -3538,13 +3667,21 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
     // floor-reconstructed glyphs) that was a path's stroke-width, so the
     // Checkbox check drew at stroke-width 14 (a blob) and the Avatar xl
     // silhouette at stroke-width 40 (a filled square). Assets without a
-    // root width/height keep their markup; the renderers/runtime size the
-    // node from iconSize.
-    out = out
-      .replace(/^(<svg\b[^>]*?)\swidth="[^"]*"/, `$1 width="${part.icon!.size}"`)
-      .replace(/^(<svg\b[^>]*?)\sheight="[^"]*"/, `$1 height="${part.icon!.size}"`);
+    // root width/height must receive an explicit viewport too: resizing a
+    // Figma SVG frame after import scales its paths but leaves strokes at
+    // their original weight. Import at the intended viewport so viewBox
+    // geometry, strokes and preserveAspectRatio are evaluated together.
+    out = out.replace(/^<svg\b[^>]*>/, tag => {
+      for (const dimension of ['width', 'height']) {
+        const attribute = new RegExp(`\\s${dimension}=(?:"[^"]*"|'[^']*')`);
+        tag = attribute.test(tag)
+          ? tag.replace(attribute, ` ${dimension}="${part.icon!.size}"`)
+          : tag.replace(/^<svg\b/, `<svg ${dimension}="${part.icon!.size}"`);
+      }
+      return tag;
+    });
   }
-  return out;
+  return { markup: out, paintPath: usesCurrentColor ? ctx.textFillPath : paintPath, paintHex: usesCurrentColor ? currentHex : hex };
 }
 
 const PLACEHOLDER_ATTR_REF = /^\{([a-z][\w-]*)\}$/;
@@ -3762,6 +3899,7 @@ function mapDepProps(
   /** Named-loss sink (single-variant-dep-collapse): the caller appends these
    *  to the instance spec's channelMiss footnote — never a silent drop. */
   ledger?: CodeOnlyFactSeed[],
+  parent?: Contract,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -3795,10 +3933,19 @@ function mapDepProps(
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
       if (parentRef) {
+        const parentProp = parent?.props.find(p => p.name === parentRef[1]);
+        if (parentProp?.type === 'text') {
+          throw new Error(`FIGMA_NESTED_TEXT_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child text links in Figma; an editable nested-control projection must be qualified first.`);
+        }
+        if (parentProp?.type === 'boolean' && !isVariantBool(parentProp)) {
+          throw new Error(`FIGMA_NESTED_BOOLEAN_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child BOOLEAN links in Figma; use an explicit VARIANT state axis or qualify an editable nested-control projection.`);
+        }
         const resolved = subst[parentRef[1]];
-        if (resolved === undefined)
+        if (resolved === undefined) {
+          if (parentProp && (parentProp.type === 'boolean' || isEnum(parentProp)) && parentProp.bindings.figma.unsetValue !== undefined) continue;
           throw new Error(`Cannot resolve parent prop mapping "{${parentRef[1]}}"`);
-        value = resolved;
+        }
+        value = parentProp?.type === 'boolean' ? resolved === 'true' : resolved;
       }
     }
     const fig = depProp.bindings.figma;
@@ -3853,6 +4000,103 @@ function mapDepProps(
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
+}
+
+function orderedVariantValues(p: Prop): Array<string | null> {
+    if (!isEnum(p)) return p.bindings.figma.unsetValue === undefined ? boolAxisValues(p) : [null, ...boolAxisValues(p)];
+    const values = [...p.type.enum];
+    const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
+    if (i > 0) {
+      values.splice(i, 1);
+      values.unshift(String(p.default));
+    }
+    return p.bindings.figma.unsetValue === undefined ? values : [null, ...values];
+}
+const axisLabel = (p: Prop, value: string | null): string =>
+    value === null ? p.bindings.figma.unsetValue! : (p.bindings.figma.values?.[value] ?? value);
+
+/** Compile caller content in parent property scope and child typography scope.
+ * The child compiler remains authoritative for slot geometry and variant layout. */
+function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string | boolean>,
+  parent: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>) {
+  const fail = (why: string): never => { throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: ' + why); };
+  const slots = walkAnatomy(dep).filter(w => w.part.slot?.name === 'children');
+  if (slots.length !== 1) fail('dependency needs one children slot');
+  const slot = slots[0].part.slot!;
+  if (slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined)
+    fail('constrained caller slots need a separate projection');
+  if (part.repeat || part.component!.text !== undefined || part.slot || part.content || part.text !== undefined || part.icon || part.meter ||
+      dep.props.some(p => p.bindings.code.prop === 'children' && Object.hasOwn(part.component!.props ?? {}, p.name)))
+    fail('competing caller content');
+  const childSubst: Record<string, string> = {}, names: string[] = [];
+  for (const axis of dep.props.filter(p => isEnum(p) || isVariantBool(p))) {
+    if (axis.bindings.figma.kind !== 'VARIANT') fail('child axis has no native variant binding');
+    const values = orderedVariantValues(axis), wanted = props[axis.bindings.figma.property!];
+    const selected = wanted === undefined ? [values[0]] : values.filter(v => axisLabel(axis, v) === String(wanted));
+    if (selected.length !== 1) fail('child variant is ambiguous');
+    const value = selected[0];
+    if (value !== null) childSubst[axis.name] = value;
+    names.push(`${axis.bindings.figma.property}=${axisLabel(axis, value)}`);
+  }
+  if (compilingCallerDeps.has(dep.id)) fail('cyclic caller dependency');
+  compilingCallerDeps.add(dep.id);
+  let data: ComponentData;
+  try { data = compileComponentData(dep, byId); }
+  finally { compilingCallerDeps.delete(dep.id); }
+  const variant = data.variants.find(v => v.name === (names.join(', ') || dep.name));
+  if (!variant) fail('child variant is unavailable');
+  const property = slotFigmaProperty(slot), matches: NodeSpec[] = [];
+  const visit = (spec: NodeSpec) => { if (spec.type === 'slot' && spec.slotProperty === property) matches.push(spec); (spec.children ?? []).forEach(visit); };
+  visit(variant!.spec);
+  if (matches.length !== 1) fail('selected variant has no unique caller slot');
+  let childCtx = ctx;
+  const path = slots[0].path;
+  for (const entry of walkAnatomy(dep)) if (entry.path.length <= path.length && entry.path.every((p, i) => p === path[i]))
+    childCtx = applyStyling({ type: 'frame', name: entry.name }, entry.part, childSubst, childCtx);
+  const children = variantParts(part.parts!, subst).flatMap(([name, child]) => partToSpecs(name, child, parent, byId, childCtx, subst));
+  const result = structuredClone(matches[0]);
+  result.callerSlotProperty = property;
+  delete result.slotDefault;
+  if (result.children?.[0]?.rootSlotGridContent) {
+    const carrier = result.children[0], grid = carrier.layout!.grid!;
+    if (result.children.length !== 1 || grid.flow !== 'ROW_AUTO_FLOW') fail('unsupported content carrier');
+    carrier.children = children;
+    if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, children.length);
+    if (children.length > grid.rows.length * grid.columns.length) fail('caller content exceeds declared grid capacity');
+  } else {
+    if (result.children?.length) fail('unsupported existing slot anatomy');
+    result.children = children;
+  }
+  return { slot: result, root: variant!.spec };
+}
+
+/** A canvas variant depicts a fresh mount, not a running React instance.
+ * Resolve declared finite initializers independently, then let supplied
+ * controlled values win. Never reinterpret text/visibility as state. */
+function mapDepInitialProps(dep: Contract, initial: Record<string, string>,
+  subst: Record<string, string>, parent: Contract): Record<string, string | boolean> {
+  const values: Record<string, string> = {};
+  for (const [name, raw] of Object.entries(initial)) {
+    const child = dep.props.find(p => p.name === name);
+    if (!child || !isEnum(child) || !child.bindings.code.initial || child.bindings.figma.kind !== 'VARIANT')
+      throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializer needs a declared child enum and native variant');
+    const ref = raw.match(PARENT_PROP_REF);
+    let value = raw;
+    if (ref) {
+      const prop = parent.props.find(p => p.name === ref[1]);
+      if (!prop || !isEnum(prop) || prop.bindings.figma.kind !== 'VARIANT' ||
+          prop.type.enum.some(v => !child.type.enum.includes(v)))
+        throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: parent initializer domain is not a compatible variant axis');
+      const resolved = subst[prop.name] ?? child.bindings.code.initial.default ?? child.default;
+      // Match React's initializer fallback while retaining true omission.
+      if (resolved === undefined) continue;
+      value = String(resolved);
+    }
+    if (!child.type.enum.includes(value))
+      throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializer value is outside the child domain');
+    values[name] = value;
+  }
+  return mapDepProps(dep, values, subst, undefined, undefined, parent);
 }
 
 /** visibleWhen on a boolean prop → runtime visibility binding fields.
@@ -4138,7 +4382,9 @@ function variantParts(
     if (vw && vw.equals !== undefined) {
       const value = subst[vw.prop];
       const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
-      if (value !== undefined && !eqs.includes(value)) return false;
+      // Omission cannot satisfy an explicit equality predicate. In particular,
+      // an optional enum's native unset plane must not acquire its "on" icon.
+      if (value === undefined || !eqs.includes(value)) return false;
     } else if (vw && subst[vw.prop] !== undefined && subst[vw.prop] !== 'true') {
       // Boolean visibleWhen over a VARIANT-bound bool: the bool is a variant
       // axis, so its value is in subst — the part exists only in the 'true'
@@ -4217,7 +4463,10 @@ function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, 
     // written verbatim — GP6/GP6b measured ROW_AUTO_FLOW and declared
     // gridRowSizes coexisting natively. Only an OMITTED row list is derived,
     // so every pre-G5′ flow contract compiles to the same bytes.
-    if (g.rows.length === 0) {
+    // @lower emit.grid-managed-flow-rows
+    if (g.flowRows) {
+      g.rows = materializeFlowRows(g.flowRows, g.columns.length, children.filter(c => !c.overlay && !c.insetOverlay && !c.absolute).length);
+    } else if (g.rows.length === 0) {
       const inFlow = children.filter((c) => !c.overlay && !c.insetOverlay && !c.absolute).length;
       const rowsN = Math.max(1, Math.ceil(inFlow / Math.max(1, g.columns.length)));
       g.rows = Array.from({ length: rowsN }, () => ({ type: 'FLEX' as const, value: 1 }));
@@ -4284,7 +4533,7 @@ function partToSpecs(
         dep: dep.name,
         depContractId: dep.id,
         ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
+        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract),
       };
       applyVisibleWhen(spec, part, contract);
       return spec;
@@ -4423,11 +4672,9 @@ function partToSpecInner(
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
-    const markup = iconSvg(part, subst, iconCtx);
-    const paintPath = iconCtx.glyphFillPath ?? iconCtx.textFillPath;
+    const { markup, paintPath, paintHex } = iconSvg(part, subst, iconCtx);
     // R7: a literal ink has no variable to re-bind (svgPaintVar stays unset);
     // the baked hex is the literal itself.
-    const paintHex = paintPath ? String(resolveLiteral(paintPath)) : (iconCtx.textFillLitCss ?? '#000000');
     const paintVar = svgSinglePaintVar(markup, paintHex, paintPath);
     // FC-SVG-ROTATION: declared transform rotate(<n>deg) on bare (and
     // box-hosted) icon parts — Polaris Spinner capture gaps at 12 o'clock
@@ -4607,6 +4854,9 @@ function partToSpecInner(
   }
   if (part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    const initialProps = part.component.initialProps
+      ? mapDepInitialProps(dep, part.component.initialProps, subst, contract) : undefined;
+
     const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
       type: 'instance',
@@ -4614,8 +4864,17 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
+      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
+      ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
+    if (part.parts !== undefined) {
+      const caller = callerSlotSpec(part, dep, spec.depProps!, contract, byId, ctx, subst);
+      spec.children = [caller.slot];
+      spec.layout = structuredClone(caller.root.layout);
+      if (caller.root.fixedWidth) spec.fixedWidth = structuredClone(caller.root.fixedWidth);
+      if (caller.root.lits?.width !== undefined) spec.lits = { width: caller.root.lits.width };
+      if (caller.root.rootFillWidth) spec.callerRootFillWidth = true;
+    }
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
     // natively a resize / image-fill / paint override on THIS instance, but
@@ -4879,6 +5138,58 @@ function nestedSlotNames(part: Part): string[] {
   return out;
 }
 
+/** Keep the source box on the component; its sole native slot owns only
+ * child flow. Padding/paint/borders stay on the source box and are not doubled.
+ * Runtime sizing is selected after append from the actual parent axes. */
+function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>): NodeSpec {
+  if (!rootSpec.layout || rootSpec.layout.wrap || isReversed(root, subst))
+    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root content requires supported forward flow');
+  if (root.declared?.display === 'block' && !root.layout &&
+      (rootSpec.bindings?.itemSpacing || rootSpec.lits?.itemSpacing))
+    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: block flow has no flex gap');
+  const spec = partToSpecs('root-content', { slot: root.slot } as Part, contract, byId, ctx, subst)[0];
+  if (!spec || spec.type !== 'slot') throw new Error('FIGMA_ROOT_SLOT_INVALID: no native slot projection');
+  spec.rootSlotContent = true;
+  // @lower emit.root-content-parent-width
+  if (resolveLiterals(root, subst).width === '100%') {
+    if (rootSpec.fixedWidth) throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_BOUND_SIZE_CONFLICT');
+    rootSpec.rootFillWidth = true;
+  }
+  if (rootSpec.layout.mode === 'GRID') {
+    const grid = rootSpec.layout.grid!;
+    if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, 0);
+    if (!grid.rows.length || !grid.columns.length || grid.flow !== 'ROW_AUTO_FLOW' || spec.slotDefault?.length)
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content requires declared tracks, row flow and no default content');
+    if ((!grid.hugWidth && !rootSpec.rootFillWidth && !rootSpec.fixedWidth && rootSpec.lits?.width === undefined) ||
+        (!grid.hugHeight && !rootSpec.fixedHeight && rootSpec.lits?.height === undefined))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content axes need declared fixed or intrinsic sizing');
+    // GRID is illegal directly on SLOT. A neutral slot holds the grid frame;
+    // the source root alone retains its paint, padding and declared dimensions.
+    const carrier: NodeSpec = { type: 'frame', name: 'Content layout', rootSlotContent: true,
+      rootSlotGridContent: true, layout: structuredClone(rootSpec.layout), children: [] };
+    spec.layout = { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN' };
+    rootSpec.layout = { ...spec.layout };
+    spec.children = [carrier];
+    // Move the two gap bindings with their drawn grid facts. Neutral wrappers
+    // must not retain bindings that would become active after a token edit.
+    for (const field of ['gridRowGap', 'gridColumnGap']) {
+      if (rootSpec.bindings?.[field] !== undefined) {
+        (carrier.bindings ??= {})[field] = rootSpec.bindings[field];
+        delete rootSpec.bindings[field];
+      }
+    }
+    return spec;
+  }
+  spec.layout = { ...rootSpec.layout };
+  // Figma ignores the minimum gap under SPACE_BETWEEN. Refuse that semantic
+  // mismatch rather than silently overlap changing caller content.
+  if (spec.layout.primary === 'SPACE_BETWEEN')
+    throw new Error('FIGMA_ROOT_SLOT_DISTRIBUTION_UNSUPPORTED: native space-between does not preserve the CSS minimum gap');
+  if (rootSpec.bindings?.itemSpacing !== undefined) spec.bindings = { itemSpacing: rootSpec.bindings.itemSpacing };
+  if (rootSpec.lits?.itemSpacing !== undefined) spec.lits = { itemSpacing: rootSpec.lits.itemSpacing };
+  return spec;
+}
+
 /** The SLOT property `description` — Figma's only surface for a slot fact it
  *  cannot enforce. `accepts` carries functionally as `preferredValues`, which
  *  is a PICKER HINT: it sorts the listed components to the top of the swap
@@ -4925,7 +5236,11 @@ function slotPropertyDescription(slot: NonNullable<Part['slot']>): string {
  *  resolve at all are refused here. */
 function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>): void {
   const errors: string[] = [];
-  for (const { name, part } of walkAnatomy(contract)) {
+  for (const { name, part, path } of walkAnatomy(contract)) {
+    if (part.component && (path.length === 1 || part.repeat)) {
+      if (part.parts !== undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: caller parts require a non-repeated nested instance');
+      if (part.component.initialProps) errors.push('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializers require a non-repeated nested instance');
+    }
     if (part.component && !byId.has(part.component.id)) {
       errors.push(
         `${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`,
@@ -4950,7 +5265,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
     // schema-valid and legal CSS, so they are refused HERE (canvas emission)
     // rather than in the shared contract validator: the code surface renders
     // them fine.
-    if (part.slot && part.layout?.display === 'grid') {
+    if (part.slot && part.layout?.display === 'grid' && part !== contract.anatomy.root) {
       errors.push(
         // @lower emit.slot-grid-refused
         `${contract.id}: slot "${part.slot.name}" declares display:grid — Figma refuses it verbatim ("GRID layoutMode cannot be applied to Slot frames"); a slot interior is NONE/HORIZONTAL/VERTICAL only`,
@@ -5014,6 +5329,7 @@ function annotateFillW(rootSpec: NodeSpec): void {
   const hasOwnWidth = (s: NodeSpec): boolean =>
     s.fixedWidth !== undefined || s.lits?.width !== undefined || s.pct != null;
   const canHug = (s: NodeSpec): boolean => {
+    if (s.callerRootFillWidth && !hasOwnWidth(s)) return false;
     if (hasOwnWidth(s) || s.type === 'text' || s.type === 'svg' || s.type === 'instance' || s.shape !== undefined) {
       return true;
     }
@@ -5072,7 +5388,7 @@ function annotateFillW(rootSpec: NodeSpec): void {
       !hasOwnWidth(c) &&
       // @lower emit.size-text-hug-vs-fill
       !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
-      (c.grow === true ||
+      (c.callerRootFillWidth === true || c.grow === true ||
         (s.layout?.stretchChildren === true &&
           (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
           c.type !== 'instance'));
@@ -5089,6 +5405,9 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // tracks size the cell the way a fixed width sizes a box).
     const gridParent = s.layout?.mode === 'GRID';
     for (const c of kids) {
+      if (c.callerRootFillWidth && (!ready || (!gridParent && s.layout?.mode !== 'VERTICAL')))
+        throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid' +
+          ` (child ${c.name}, parent ${s.name}, mode ${s.layout?.mode ?? 'none'}, width established ${ready})`);
       const fills = !gridParent && ready && isCandidate(c);
       if (fills) {
         c.fillW = true;
@@ -5100,7 +5419,12 @@ function annotateFillW(rootSpec: NodeSpec): void {
       // runtime skips FILL for it — CSS justify-self beats the stretch
       // default), so its subtree is NOT width-established; treating it as
       // established FILLed the dialog's Close button into its whole cell.
-      walk(c, fills || hasOwnWidth(c) || (gridParent && c.cell?.hAlign === undefined));
+      // Root content slots and their neutral grid carriers inherit an already
+      // established source box through sizeRootContent. They do not create a
+      // new intrinsic width; carrying that fact lets nested full-width
+      // instances use the same known width without inventing a fixed size.
+      walk(c, fills || hasOwnWidth(c) || (c.rootSlotContent === true && established) ||
+        (gridParent && c.cell?.hAlign === undefined));
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec));
@@ -5142,6 +5466,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   if (aliasConflicts.length) throw new Error(`FIGMA_UNSET_BINDING_COLLISION: ${aliasConflicts.join(', ')} collides with a prop, slot, event or generated event binding`);
   refuseUnresolvableRefs(contract, byId);
   refuseMissingRequiredFacts(contract);
+  if (contract.anatomy.root?.slot) {
+    const r = contract.anatomy.root;
+    if (r.slot!.name !== 'children' || r.parts || r.content || r.text !== undefined || r.icon || r.component || r.optional)
+      throw new Error('FIGMA_ROOT_SLOT_SHAPE_UNSUPPORTED: root content must be one unconditional children slot');
+    const blockContent = r.declared?.display === 'block' && !r.layout &&
+      r.literals?.width === '100%' && r.literals?.height === 'fit-content' && !r.layoutByProp;
+    if (!blockContent && (!r.layout || !['flex', 'inline-flex', 'grid'].includes(r.layout.display ?? '') || r.layout.wrap || r.layout.direction?.endsWith('-reverse')))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots require supported forward flex or grid layout');
+    if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
+  }
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
@@ -5185,19 +5520,6 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 
   // null is an internal discriminant only; it is never written to subst or
   // the public enum. Omission therefore resolves the actual base carriers.
-  const orderedValues = (p: Prop): Array<string | null> => {
-    if (!isEnum(p)) return p.bindings.figma.unsetValue === undefined ? boolAxisValues(p) : [null, ...boolAxisValues(p)];
-    const values = [...p.type.enum];
-    const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
-    if (i > 0) {
-      values.splice(i, 1);
-      values.unshift(String(p.default));
-    }
-    return p.bindings.figma.unsetValue === undefined ? values : [null, ...values];
-  };
-  const axisLabel = (p: Prop, value: string | null): string =>
-    value === null ? p.bindings.figma.unsetValue! : (p.bindings.figma.values?.[value] ?? value);
-
   const root = contract.anatomy.root;
   /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
   const scrimNotes: CodeOnlyFactObservation[] = [];
@@ -5212,7 +5534,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // amend paths both rely on that ordering invariant.
   // Grid mapping: rows = axis 0's values; columns = the ordered cartesian
   // product of axes 1..n (a 5×3×2 component renders 5 rows × 6 columns).
-  const axes = axisProps.map((p) => ({ prop: p, values: orderedValues(p) }));
+  const axes = axisProps.map((p) => ({ prop: p, values: orderedVariantValues(p) }));
   let combos: number[][] = [[]];
   for (const axis of axes) {
     const next: number[][] = [];
@@ -5290,7 +5612,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ) {
       rootSpec.blockRoot = true;
     }
-    if (root.icon && Object.keys(root.parts ?? {}).length === 0) {
+    if (root.slot) {
+      rootSpec.children = [rootContentSlot(root, rootSpec, contract, byId, ctx, subst)];
+    } else if (root.icon && Object.keys(root.parts ?? {}).length === 0) {
       // FC-ROOT-ICON-NOT-EMITTED (Flowbite Spinner, 2026-08-14).
       //
       // A contract may promote the icon onto the ROOT itself — Flowbite's
@@ -5464,7 +5788,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         ) {
           rootSpec.blockRoot = true;
         }
-        if (root.parts || hostsRootText) {
+        if (root.slot) {
+          rootSpec.children = [rootContentSlot(root, rootSpec, contract, byId, ctx, subst)];
+        } else if (root.parts || hostsRootText) {
           // v13: part-level state overrides apply INSIDE the preview variant
           // (withPartStateOverrides) — the State=Disabled cell draws the
           // disabled label color, mirroring .root:disabled .label on the CSS
@@ -5558,10 +5884,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  // Caller text remains native and editable inside the instance slot, but it
+  // cannot reference the enclosing component's property. Lower that boundary
+  // before classifying unbound properties so no inert parent TEXT control is
+  // minted for content represented directly on the canvas.
+  lowerNativeCallerContentSpecs([...variants, ...stateVariants]);
+
   // Text props bound to a text node somewhere in the compiled specs.
   const boundTextProps = new Set<string>();
   const collectBound = (s: NodeSpec) => {
     if (s.contentProp) boundTextProps.add(s.contentProp);
+    if (s.callerContentProp) boundTextProps.add(s.callerContentProp);
     (s.children ?? []).forEach(collectBound);
   };
   variants.forEach((v) => collectBound(v.spec));
@@ -5590,12 +5923,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // feeding one trailing `†`: 279 channel misses and 19 declared facts on
   // the eight Flowbite contracts collapsed to 8 bare daggers, and nothing a
   // designer could open named a single one of them.
+  const backgroundLowering=new Map<Part,boolean[]>();
+  const lowerBackground=(spec:NodeSpec) => {
+    (spec.children??[]).forEach(lowerBackground);
+    const part=nativePartOrigins.get(spec);
+    if(part?.declared?.['background-clip']!=='padding-box')return;
+    // @lower emit.padding-box-background-plane
+    const lowered=lowerPaddingBoxBackground(spec,name=>{
+      try{return pxOrNull(resolveLiteral(name.split('/').join('.')))??undefined;}catch{return undefined;}
+    });
+    backgroundLowering.set(part,[...backgroundLowering.get(part)??[],lowered]);
+  };
+  variants.forEach(v=>lowerBackground(v.spec));
   const facts: CodeOnlyFactObservation[] = [];
   // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
   // natively and need no receipt; state-plane declared facts are always
   // code-only (state previews do not draw declared facts yet — a named limit).
   for (const { name: partName, part } of walkAnatomy(contract)) {
     const note = (channel: string, value: string, state?: string) => {
+      if(channel==='background-clip'&&!state&&value==='padding-box'&&backgroundLowering.get(part)?.every(Boolean))return;
       const reg = DECLARED_CHANNELS[channel];
       // R8 (2026-08-22): a channel the registry does not know used to
       // `return` here — "refused upstream by validateContract" — which is
@@ -5929,7 +6275,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  const fillRootSlot = [...variants, ...stateVariants].some(v => v.spec.rootFillWidth);
+  if (fillRootSlot && ![...variants, ...stateVariants].every(v => v.spec.rootFillWidth))
+    throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
   const data: ComponentData = {
+    ...([...variants, ...stateVariants].some(v => specSome(v.spec, n => n.type === 'instance'))
+      ? { nestedPropertyControls: 1 as const } : {}),
     ...(nativeSource ? {
       nativeSourceCandidate: {
         revision: nativeSource.revision,
@@ -5954,7 +6305,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ...(contract.documentationLinks && contract.documentationLinks.length > 0
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
-    isSet: variants.length + stateVariants.length > 1,
+    isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
+    ...(contract.anatomy.root?.slot ? { rootSlot: contract.anatomy.root.declared?.display === 'block' && !contract.anatomy.root.layout
+      ? { version: 4 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'block' as const, width: 'fill' as const }
+      : fillRootSlot
+      ? { version: 3 as const, property: slotFigmaProperty(contract.anatomy.root.slot), width: 'fill' as const, display: contract.anatomy.root.layout?.display ?? 'flex' }
+      : contract.anatomy.root.layout?.display === 'grid'
+      ? { version: 2 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'grid' as const }
+      : { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
+    ...(codeValueAxes(contract) ? { codeValueAxes: codeValueAxes(contract) } : {}),
     boolProps: boolPropsData,
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
@@ -6273,7 +6632,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6289,7 +6648,7 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
     // v9 shape (#42): a REAL parametric node with native rotation.
     node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
-      : figma.createPolygon();
+      : figma.createPolygon();${nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
     node.resize(spec.shape.width, spec.shape.height);
 ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
@@ -6709,6 +7068,7 @@ function applyGridFrame(node, l) {
   // value can never recover). HUG is written as the bare type, never valued.
   const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
   node.gridRowSizes = g.rows.map(trackWrite);
+  node.setSharedPluginData('ds_contracts', 'gridFlowRows', g.flowRows ? JSON.stringify(g.flowRows) : '');
   node.gridColumnSizes = g.columns.map(trackWrite);
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;
@@ -7252,8 +7612,8 @@ function buildComponentScript(
  * not a supported writer boundary; callers must compile their Contracts. */
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   for (const data of datas) {
-    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
-        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
+    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') || Object.hasOwn(data, 'nativeContractDraft') ||
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractSample') || Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
     }
     // Raw or mutated ComponentData cannot provide a route around guarded
@@ -7309,13 +7669,147 @@ function buildNativeSourceComponentScript(
   }));
 }
 
+/** Host inspection path for a normal Contract draft. This deliberately does not
+ * synthesize the paused retained-runtime candidate's template/binding identity.
+ * Recompile on every call; annotations and serialized data are not authority. */
+function compileNativeContractDraft(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+) {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, input.icons);
+  if (errors.length) throw Error('NATIVE_CONTRACT_DRAFT_INVALID: ' + errors.join('; '));
+  const data = compileComponentData(contract, byId);
+  if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  // Current observed React drafts carry one exact token tree. Do not silently
+  // claim a theme/brand overlay belongs to the independently observed variables.
+  if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
+      Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
+    throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
+  return prepareNativeContractDraft(contract, data, source, revisionOf(input.tokens.primitives), {
+    mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  });
+}
+
+function buildNativeContractDraftScript(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  context: NativeSourceWriteContext,
+): string {
+  if (context.comparisons) throw Error('NATIVE_CONTRACT_DRAFT_COMPARISON_MAPPING_REQUIRED');
+  const draft = compileNativeContractDraft(contract, byId, source);
+  const prepared = prepareNativeSourceWrite(draft.projection, context, draft.boundNames);
+  const scoped = { ...draft.component, contractId: prepared.descriptor.machineId, anchorKey: null };
+  return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
+    preamble: '', nativeSource: true,
+  }), draft.fonts);
+}
+
+function scopeNativeGraphComponent(data: ComponentData, ids: Map<string, string>) {
+  const scoped = structuredClone(data);
+  scoped.contractId = ids.get(data.contractId)!;
+  const visit = (spec: NodeSpec) => {
+    if (spec.depContractId) {
+      const id = ids.get(spec.depContractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      spec.depContractId = id;
+      delete spec.depAnchorKey;
+    }
+    for (const item of spec.slotDefault ?? []) {
+      const id = ids.get(item.contractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      item.contractId = id;
+      delete item.anchorKey;
+    }
+    for (const item of spec.slotAccepts ?? []) {
+      const id = ids.get(item.contractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      item.contractId = id;
+      delete item.anchorKey;
+    }
+    spec.children?.forEach(visit);
+  };
+  [...scoped.variants, ...(scoped.stateVariants ?? [])].forEach(variant => visit(variant.spec));
+  return scoped;
+}
+
+/** Compile a closed React component graph into one operation-owned native
+ * draft. Dependencies are emitted first; every semantic identity is scoped to
+ * this operation, while nativeContractPart keeps the original contract
+ * revision. The parent remains the readback target. */
+function compileNativeContractGraphDraft(
+  parent: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  operationId: string,
+) {
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent)
+    throw Error('NATIVE_CONTRACT_GRAPH_IDENTITY_REQUIRED');
+  const ordered = sortByDependencies([...byId.values()]);
+  if (ordered.at(-1)?.id !== parent.id)
+    throw Error('NATIVE_CONTRACT_GRAPH_PARENT_ORDER_UNQUALIFIED');
+  const compiled = ordered.map(contract => compileNativeContractDraft(contract, byId, source));
+  const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
+  const components = compiled.map(row => scopeNativeGraphComponent(row.component, ids));
+  const parentIndex = ordered.findIndex(contract => contract.id === parent.id);
+  return {
+    projection: compiled[parentIndex].projection,
+    component: components[parentIndex],
+    components,
+    componentRevisions: components.map(component => ({ contractId: component.contractId, revision: revisionOf(component) })),
+    boundNames: [...new Set(compiled.flatMap(row => row.boundNames))].sort(),
+    fonts: [...new Map(compiled.flatMap(row => row.fonts).map(font => [JSON.stringify(font), font])).values()],
+  };
+}
+
+function buildNativeContractGraphDraftScript(
+  parent: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  context: NativeSourceWriteContext,
+) {
+  if (context.comparisons) throw Error('NATIVE_CONTRACT_GRAPH_COMPARISON_MAPPING_REQUIRED');
+  const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id);
+  const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames);
+  return wrapNativeSourceWrite(prepared, buildSyncScript(graph.components, context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped unaccepted Contract graph.',
+    preamble: '', nativeSource: true,
+  }), graph.fonts);
+}
+
+/** Create comparison instances referencing existing observed mains. The content
+ * contract is recompiled here; serialized specs are never executable input. */
+function buildNativeContractComparisonScript(contract: Contract, byId: Map<string, Contract>,
+  source: NativeContractDraftSource, context: NativeSourceWriteContext, comparison: NativeContractComparisonInput): string {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, input.icons);
+  if (errors.length) throw Error('NATIVE_CONTRACT_COMPARISON_INVALID: ' + errors.join('; '));
+  if (context.comparisons || context.operation.fileKey !== comparison.parent.operation.fileKey ||
+      (context.operation.id === comparison.parent.operation.id || comparison.instances?.some(ref => ref.parent.operation.id === context.operation.id))) throw Error('NATIVE_CONTRACT_COMPARISON_SCOPE_INVALID');
+  if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
+      Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
+    throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
+  const data = compileComponentData(contract, byId);
+  const compiled = prepareNativeContractComparison(contract, data, source, revisionOf(input.tokens.primitives), {
+    mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  }, comparison);
+  const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
+  return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
+    header: '// Shared renderer: caller content in an instance of an existing observed main.',
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSourceOwnedComparison: !!compiled.instances?.some(ref => ref.contentMode === 'source-owned'), nativeInstanceWidthComparison: compiled.instanceWidth !== undefined, nativeComparisonRecovery: !!context.comparisonRecovery, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
+  }));
+}
+
 /** The ONE sync runtime (create + in-place amend), shared by the batch
  *  script and (#60 fix 2) every per-component script. `preamble` carries the
  *  minted-variable upsert for playground per-component emissions. */
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -7323,7 +7817,12 @@ function buildSyncScript(
     ...datas[0], stateVariants: undefined,
     variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
   }] : datas;
+  const callerPropertyBlockers = featureDatas.flatMap(data => nativeCallerPropertyBlockers(data)
+    .map(blocker => `${data.contractId}:${blocker.property}:${blocker.nodeName}`));
+  if (callerPropertyBlockers.length)
+    throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
+  const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
@@ -7351,6 +7850,11 @@ function buildSyncScript(
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
+  const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
+  const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
+  const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
+  const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
   // It survives on ANY childless auto-layout node that reports HUG, because a
   // node with no children never triggers the relayout that would dissolve it.
@@ -7402,7 +7906,27 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 
 await figma.loadAllPagesAsync();
 
-${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
+${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
+  if (!spec.rootSlotContent) return;${hasRootGridSlot ? `
+  // The grid must wait until its enclosing slot has its final parent sizing.
+  if (spec.rootSlotGridContent) return;` : ''}
+  // FILL under HUG can retain a stale extent (live probe 2026-09-16).
+  // Select from the current root after its size and bindings are applied.
+  const horizontal = parent.layoutMode === 'HORIZONTAL';
+  child.layoutSizingHorizontal = (horizontal ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
+  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';${hasRootGridSlot ? `
+  if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
+    const grid = child.children[0];
+    grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
+    grid.layoutSizingVertical = child.layoutSizingVertical;
+  }` : ''}
+}
+` : ''}${hasCallerSlots && hasRootSlot ? `const callerSlotsByInstance = new WeakMap();
+function sizeCallerSlots(node) {
+  for (const entry of callerSlotsByInstance.get(node) || []) sizeRootContent(node, entry.slot, entry.spec);
+  for (const child of node.children || []) sizeCallerSlots(child);
+}
+` : ''}${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
 const varByName = ${opts.nativeSource ? 'Object.create(null)' : '{}'};
 for (const v of allVars) varByName[v.name] = v;
 // FC-THEME-ISO: a multi-library file carries colliding variable names across
@@ -7835,7 +8359,11 @@ function dsDeclaredClipStops(n) {
   // unclipping anything above it.
   return dsDeclaredClip.has(n.id);
 }
-function applyFrameSpec(node, spec) {
+function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
+  // Seed an empty synthetic carrier below Figma's 100px birth box. The
+  // declared track and parent sizing writes below determine its final size.
+  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
   // (axis aligns, layoutWrap) are not grid facts and are never written.
@@ -7846,6 +8374,12 @@ function applyFrameSpec(node, spec) {
   }` : ''}
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -7861,7 +8395,10 @@ function applyFrameSpec(node, spec) {
   // collision is one contract away and a silent revert is indistinguishable
   // from the fact never having been carried.
   if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
-  if (node.type === 'FRAME') node.fills = [];
+  if (node.type === 'FRAME') node.fills = [];${opts.nativeSource ? `
+  // Fresh native draft roots must not inherit Figma's invisible white birth
+  // fill when their paint lives on a separate padding-box layer.
+  if (spec.nativeContractPart && spec.type === 'root' && !spec.fill && !spec.lits?.fillColor && !spec.gradient) node.fills = [];` : ''}
   // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
   //
   // This function only ever SET what the spec declares, so on the AMEND path
@@ -7915,7 +8452,14 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}
+  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}${hasGrid ? `
+  // Resizing can replace HUG tracks with FLEX. Restore the declaration after
+  // all bound/literal size writes, before appending or placing any children.
+  if (l.mode === 'GRID') applyGridFrame(node, l);` : ''}${hasGridGapBindings ? `
+  // Rebind after the last literal grid write so variable identity survives.
+  if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
+    node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
+  }` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -7936,9 +8480,28 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
-async function buildNode(spec, registry) {
-  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}
-  if (spec.type === 'svg') {
+${hasCallerSlots ? `function callerCanExpose(instance) {
+  for (let parent = instance.parent; parent; parent = parent.parent) {
+    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'COMPONENT') return true;
+  }
+  return false;
+}
+` : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
+  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
+  ${hasCallerSlots ? `if (spec.callerSlotProperty) {
+    if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
+    const main = await caller.getMainComponentAsync();
+    if (!main) throw Error('CALLER_SLOT_MAIN_UNAVAILABLE');
+    const owner = main.parent?.type === 'COMPONENT_SET' ? main.parent : main;
+    const keys = Object.entries(owner.componentPropertyDefinitions).filter(([key, def]) =>
+      def.type === 'SLOT' && (key === spec.callerSlotProperty || key.startsWith(spec.callerSlotProperty + '#'))).map(([key]) => key);
+    if (keys.length !== 1) throw Error('CALLER_SLOT_PROPERTY_AMBIGUOUS');
+    const slots = caller.findAll(n => n.type === 'SLOT' && n.componentPropertyReferences?.slotContentId === keys[0]);
+    if (slots.length !== 1) throw Error('CALLER_SLOT_NODE_AMBIGUOUS');
+    node = slots[0];
+    for (const child of [...node.children]) child.remove();
+  } else ` : ''}if (spec.type === 'svg') {
     node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fills = [];
     node.clipsContent = false;
@@ -7987,7 +8550,10 @@ async function buildNode(spec, registry) {
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
-    }
+    }${hasCallerContent ? `
+    if (spec.callerContentProp) {
+      node.setSharedPluginData('ds_contracts', 'callerContentProperty', spec.callerContentProp);
+    }` : ''}
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
@@ -8036,8 +8602,9 @@ async function buildNode(spec, registry) {
       false,
     );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-    node = main.createInstance();
-    if (spec.depProps) setInstanceProps(node, spec.depProps, target);
+    node = main.createInstance();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${hasNestedPropertyControls ? `
+    (registry.nestedControls || (registry.nestedControls = [])).push(node);` : ''}
   } else if (spec.type === 'slot') {
     // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
     // the slot is minted by the variant component that owns it and moved into
@@ -8071,7 +8638,7 @@ async function buildNode(spec, registry) {
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it
@@ -8081,14 +8648,33 @@ async function buildNode(spec, registry) {
 ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: renaming the
   // layer renames the linked SLOT property (probe 2b), so the contract's
   // slot.bindings.figma.property is spelled here and nowhere else.
-  node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
+  ${hasCallerSlots ? 'if (!spec.callerSlotProperty) ' : ''}node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
-  const built = [];
+${hasCallerSlots ? `  // Attach before populating caller slots. Moving an already-populated
+  // instance into another instance's slot invalidates its private sublayers
+  // in native Figma. Frames carrying such instances must also be built in place.
+  if (parent && !spec.callerSlotProperty) parent.appendChild(node);
+  if (spec.type === 'instance' && spec.children) {
+    for (const child of spec.children) {
+      if (!child.callerSlotProperty) throw Error('CALLER_SLOT_SPEC_REQUIRED');
+      const slot = await buildNode(child, registry, node);
+      ${hasRootSlot ? `sizeRootContent(node, slot, child);
+      const entries = callerSlotsByInstance.get(node) || [];
+      entries.push({ slot, spec: child }); callerSlotsByInstance.set(node, entries);` : ''}
+    }
+    ${opts.nativeSource ? `// Inherited instance sublayers are private Figma nodes. Writing plugin
+    // data to one can invalidate every sibling handle. The independent readback
+    // authenticates them through this owned instance and its owned main.` : ''}
+    // The dependency already owns its layout and private descendants. Do not
+    // position the inherited slot as a new direct child of this instance.
+    return node;
+  }
+` : ''}  const built = [];
   for (const child of spec.children || []) {
-    const childNode = await buildNode(child, registry);
-    node.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'node')}
+    const childNode = await buildNode(child, registry${hasCallerSlots ? ', undefined, node' : ''});
+    ${hasCallerSlots ? 'if (childNode.parent !== node) ' : ''}node.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'node')}
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
     if (child.pct != null) {
@@ -8103,7 +8689,7 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
-      child.type === 'frame' && (!child.children || child.children.length === 0) &&
+      child.type === 'frame' && (!child.children || child.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      child.nativeContractSample?.instance === undefined &&' : ''}
       !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
       // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
       // sizing is meaningless there (real Figma drops it the moment
@@ -8125,8 +8711,8 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
+    }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -8240,6 +8826,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  set.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -8336,7 +8923,7 @@ async function amendSet(set, C) {
     let comp = existingByName.get(v.name);
     const registry = { texts: [], slots: [], visibles: [] };
     if (!comp) {
-      comp = await buildNode(v.spec, registry);
+      comp = await buildNode(v.spec, registry${hasCallerSlots ? ', undefined, set' : ''});
       set.appendChild(comp);
       report.addedVariants.push(v.name);
     } else {
@@ -8345,15 +8932,15 @@ async function amendSet(set, C) {
       registry.owner = comp;` : ''}
       const built = [];
       for (const childSpec of v.spec.children || []) {
-        const childNode = await buildNode(childSpec, registry);
-        comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
+        const childNode = await buildNode(childSpec, registry${hasCallerSlots ? ', undefined, comp' : ''});
+        ${hasCallerSlots ? 'if (childNode.parent !== comp) ' : ''}comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
-          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      childSpec.nativeContractSample?.instance === undefined &&' : ''}
           !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
@@ -8362,10 +8949,11 @@ async function amendSet(set, C) {
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-        }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
-      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
+        }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
+      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n      sizeCallerSlots(comp);' : ''}
       report.rebuiltVariants++;
-    }
+    }${hasNestedPropertyControls ? `
+    for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -8501,6 +9089,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  comp.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -8546,15 +9135,15 @@ async function amendComponent(comp, C) {
   registry.owner = comp;` : ''}
   const built = [];
   for (const childSpec of v.spec.children || []) {
-    const childNode = await buildNode(childSpec, registry);
-    comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
+    const childNode = await buildNode(childSpec, registry${hasCallerSlots ? ', undefined, comp' : ''});
+    ${hasCallerSlots ? 'if (childNode.parent !== comp) ' : ''}comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
-      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      childSpec.nativeContractSample?.instance === undefined &&' : ''}
       !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
@@ -8563,9 +9152,10 @@ async function amendComponent(comp, C) {
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
-  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
-  for (const t of registry.texts) {
+    }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
+  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n  sizeCallerSlots(comp);' : ''}
+  ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;
+  ` : ''}for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
     else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
@@ -8658,6 +9248,20 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -8703,7 +9307,8 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   const built = [];
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
-    const comp = await buildNode(v.spec, registry);
+    const comp = await buildNode(v.spec, registry${hasCallerSlots ? ', undefined, compPage' : ''});${hasNestedPropertyControls ? `
+    for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
     built.push({ v, comp, registry });
   }
 
@@ -8805,6 +9410,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  target.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -8823,14 +9429,16 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-const results = [];
+${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison, !!opts.nativeSourceOwnedComparison, !!opts.nativeInstanceWidthComparison, !!opts.nativeComparisonRecovery) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${hasSlot && !opts.nativeSource ? `
+}${opts.nativeSource && datas.length > 1 ? `
+NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key }));
+` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
 const slotUtility = retireSlotUtility();` : ''}
@@ -8844,6 +9452,11 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildComponentScript,
     buildBatchScript,
     buildNativeSourceComponentScript,
+    compileNativeContractDraft,
+    buildNativeContractDraftScript,
+    compileNativeContractGraphDraft,
+    buildNativeContractGraphDraftScript,
+    buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */

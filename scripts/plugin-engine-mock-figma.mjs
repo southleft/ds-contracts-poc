@@ -1047,6 +1047,21 @@ export function createFigmaMock(options = {}) {
     }
 
     // --- component/instance ------------------------------------------------
+    get isExposedInstance() { return this._exposedInstance === true; }
+    set isExposedInstance(value) {
+      if (this.type !== 'INSTANCE' || typeof value !== 'boolean') throw new Error('isExposedInstance requires an instance and boolean');
+      let owner = this.parent;
+      while (owner && owner.type !== 'COMPONENT' && owner.type !== 'COMPONENT_SET') {
+        if (owner.type === 'INSTANCE') throw new Error('isExposedInstance is inherited on nested instances');
+        owner = owner.parent;
+      }
+      if (!owner) throw new Error('isExposedInstance requires a containing component');
+      this._exposedInstance = value;
+    }
+    get exposedInstances() {
+      if (this.type !== 'INSTANCE') throw new Error('exposedInstances requires an instance');
+      return this.findAll(n => n.type === 'INSTANCE' && n.isExposedInstance);
+    }
     get defaultVariant() {
       return this.children?.[0] ?? null;
     }
@@ -1065,7 +1080,7 @@ export function createFigmaMock(options = {}) {
         'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
         'layoutSizingHorizontal', 'layoutSizingVertical', 'layoutPositioning', 'constraints',
         'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'clipsContent',
-        '_w', '_h', '_resized', 'x', 'y',
+        '_w', '_h', '_resized', 'x', 'y', '_exposedInstance',
       ]) {
         if (this[field] !== undefined) clone[field] = structuredClone(this[field]);
       }
@@ -1084,6 +1099,10 @@ export function createFigmaMock(options = {}) {
       }
       clone.boundVariables = structuredClone(this.boundVariables);
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
+      // Live Figma inherits shared plugin data onto an instance's private
+      // sublayers (measured on nested TEXT content, 2026-09-17). Preserve it
+      // so correspondence metadata is testable on the actual editable layer.
+      clone._shared = new Map(this._shared);
       if (this.type === 'TEXT') {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
           clone[field] = this[field];

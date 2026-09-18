@@ -147,7 +147,10 @@ export function omittedCodeBindingConflicts(contract: unknown, aliases: readonly
   const add = (value: unknown): void => { if (typeof value === 'string') counts.set(value, (counts.get(value) ?? 0) + 1); };
   const codeName = (value: unknown): unknown => record(value) && record(value.bindings) && record(value.bindings.code) ? value.bindings.code.prop : undefined;
   const props = Array.isArray(contract.props) ? contract.props.filter(record) : [];
-  props.forEach(p => add(codeName(p)));
+  props.forEach(p => {
+    add(codeName(p));
+    if (record(p.bindings) && record(p.bindings.code) && record(p.bindings.code.initial)) add(p.bindings.code.initial.prop);
+  });
   const walkPart = (part: unknown): void => {
     if (!record(part)) return;
     if (record(part.slot)) add(part.slot.name);
@@ -199,6 +202,15 @@ export const PropSchema = z
       }),
       code: z.strictObject({
         prop: z.string(),
+        /** React uncontrolled initializer for this state axis. Values use the
+         * same public mapping; the optional fallback is a canonical enum key. */
+        initial: z.strictObject({
+          prop: z.string().refine(name => isSupportedOmittedCodeBinding(name) && !['constructor','prototype'].includes(name), 'unsupported initial code prop identifier'),
+          default: z.string().optional(),
+        }).optional(),
+        /** Canonical enum option -> exact public code value. This is an
+         * explicit bijection, never a truthiness/string coercion. */
+        values: z.record(z.string(), z.union([z.string(), z.boolean(), z.number().finite(), z.null()])).optional(),
       }),
     }),
   })
@@ -222,6 +234,30 @@ export const PropSchema = z
     },
   )
   .superRefine((p, ctx) => {
+    const codeValues = p.bindings.code.values;
+    if (codeValues !== undefined) {
+      const issue = (message: string) => ctx.addIssue({ code: 'custom', path: ['bindings', 'code', 'values'], message });
+      if (typeof p.type !== 'object' || !('enum' in p.type) || p.bindings.figma.kind !== 'VARIANT') {
+        issue('code values require an enum with a VARIANT binding');
+      } else {
+        const keys = Object.keys(codeValues);
+        if (keys.length !== p.type.enum.length || !p.type.enum.every(v => Object.hasOwn(codeValues, v)))
+          issue('code values must cover exactly every canonical enum option');
+        if (p.type.enum.some(v => !/^[a-zA-Z][a-zA-Z0-9-]*$/.test(v))) issue('mapped canonical options must be safe identifiers; code values may use arbitrary strings');
+        if (!p.required && p.default === undefined && p.bindings.figma.unsetValue === undefined)
+          issue('optional mapped enums without defaults require an explicit native omission option');
+        if (p.bindings.figma.property !== p.bindings.figma.property?.trim()) issue('mapped native property must be trimmed');
+        const labels = p.type.enum.map(v => p.bindings.figma.values?.[v] ?? v);
+        if (new Set(labels).size !== labels.length || labels.some(v => !v.trim() || v !== v.trim() || /[,=\r\n]/.test(v)) || !p.bindings.figma.property?.trim() || /[,=\r\n]/.test(p.bindings.figma.property))
+          issue('mapped values require distinct unambiguous native labels and property identity');
+        if (Object.values(codeValues).some(v => Object.is(v, -0))) issue('negative zero is not a distinct supported code value');
+        const identities = Object.values(codeValues).map(v => JSON.stringify(v));
+        if (new Set(identities).size !== identities.length) issue('code values must be distinct typed scalar values');
+        if (p.default !== undefined && (typeof p.default !== 'string' || !p.type.enum.includes(p.default)))
+          issue('mapped enum default must name a canonical enum option');
+        if (!isSupportedOmittedCodeBinding(p.bindings.code.prop)) issue('unsupported mapped code prop identifier');
+      }
+    }
     const label = p.bindings.figma.unsetValue;
     if (label === undefined) return;
     const path = ['bindings', 'figma', 'unsetValue'];
@@ -501,6 +537,8 @@ export const LayoutSchema = z
      *  ordering, P2, is an EMITTER obligation, not a schema concern). */
     rows: z.array(GridTrackSchema).min(1).optional(),
     columns: z.array(GridTrackSchema).min(1).optional(),
+    /** Sizing of extra rows; managed native writes materialize the row count. */
+    autoRows: GridTrackSchema.optional(),
     /** G1 — the independent gap pair (see GridGapSchema). */
     gap: GridGapSchema.optional(),
     /** G4 — named areas as slot anchors (see GridAreaSchema). */
@@ -530,6 +568,10 @@ export const LayoutSchema = z
             'display: "grid" requires a declared "columns" track list — the declared tracks ARE the contract fact (G1)',
         });
       }
+      if (l.autoRows !== undefined && l.flow !== "row") {
+        ctx.addIssue({ code: "custom", path: ["autoRows"],
+          message: 'autoRows requires flow: "row"' });
+      }
       if (l.flow === "row") {
         // G5′ (2026-08-08): `rows` MAY be declared under flow. GP6/GP6b measured
         // gridItemsPositioning='ROW_AUTO_FLOW' and declared gridRowSizes coexisting
@@ -557,7 +599,7 @@ export const LayoutSchema = z
         });
       }
     } else {
-      for (const f of ["rows", "columns", "gap", "areas", "flow"] as const) {
+      for (const f of ["rows", "columns", "autoRows", "gap", "areas", "flow"] as const) {
         if (l[f] !== undefined) {
           ctx.addIssue({
             code: "custom",
@@ -1951,13 +1993,19 @@ export const ComponentRefSchema = z.strictObject({
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
    *  contract's bindings on each surface. A string value of the form
-   *  "{parentProp}" maps the PARENT's enum prop into the child per variant
-   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo).
+   *  "{parentProp}" forwards a parent enum, text or boolean prop to the child
+   *  (code: `childProp={parentProp}`). Text and boolean forwarding must retain
+   *  their types. Figma resolves variant axes per combo; dynamic nested TEXT
+   *  and BOOLEAN links need a supported target projection or refuse by name.
    *  The object form (PropByPropSchema) is the same idea through a per-value
    *  LOOKUP when the child's spelling differs from the parent's. */
   props: z
     .record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema]))
     .optional(),
+  /** React mount-only inputs, keyed by canonical child enum property.
+   *  Targets bindings.code.initial.prop instead of the controlled prop.
+   *  Values are canonical literals or {parentEnum} references. */
+  initialProps: z.record(z.string(), z.string()).optional(),
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),
@@ -2220,7 +2268,7 @@ export function checkGridAxesDefinite(
     (tracks ?? []).some((t) => "fr" in t);
   // Under flow with `rows` OMITTED the emitter derives ceil(n/cols) × {fr:1},
   // so the ROW axis carries fr even though the contract spells no track.
-  const rowsAreFlex = l.flow === "row" && l.rows === undefined ? true : hasFr(l.rows);
+  const rowsAreFlex = hasFr(l.rows) || (l.autoRows ? hasFr([l.autoRows]) : l.flow === "row" && l.rows === undefined);
   for (const [axis, axisHasFr] of [
     ["width", hasFr(l.columns)],
     ["height", rowsAreFlex],
@@ -2333,7 +2381,7 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
     // GP10 measured 5 children over 2 columns with 2 declared rows: anchors
     // reached row 2 while gridRowCount stayed 2 and gridRowSizes stayed two
     // entries — P9's lossy readback, reproduced under declared rows.
-    if (l.rows !== undefined && cols > 0) {
+    if (l.rows !== undefined && l.autoRows === undefined && cols > 0) {
       const needed = Math.max(1, Math.ceil(inFlow.length / cols));
       if (rows < needed) {
         issue(
@@ -2489,6 +2537,11 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v4, gap G1. */
     visibleWhen: VisibleWhenSchema.optional(),
     optional: z.boolean().optional(),
+    /** Nested anatomy. On a component reference, these are caller-owned
+     *  React children supplied to the dependency's unique, unconstrained
+     *  children slot, evaluated in the parent contract's scope. An explicit
+     *  empty object supplies an empty Fragment; omission leaves children unset. Other
+     *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart),
 );
@@ -2509,7 +2562,12 @@ export const EventSchema = z.strictObject({
   name: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
   description: z.string().optional(),
   bindings: z.strictObject({
-    code: z.strictObject({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
+    code: z.strictObject({
+      prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/),
+      /** React callback receives the next public value of toggles.prop.
+       * Omission preserves the existing zero-argument callback API. */
+      argument: z.literal("next-value").optional(),
+    }),
   }),
   /** Anatomy part (by name) whose activation fires the event; 'root' allowed. */
   trigger: z.string(),
@@ -2753,6 +2811,29 @@ export const ContractSchema = z.strictObject({
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
+  for (const [index, event] of (c.events ?? []).entries()) {
+    if (event.bindings.code.argument !== 'next-value') continue;
+    const prop = c.props.find(p => p.name === event.toggles?.prop);
+    const values = prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+    if (!event.toggles || !values ||
+        event.toggles.between[0] === event.toggles.between[1] ||
+        event.toggles.between.some(value => !values.includes(value))) {
+      ctx.addIssue({ code: 'custom', path: ['events', index, 'bindings', 'code', 'argument'],
+        message: 'next-value requires a toggle between two distinct values of an existing enum prop' });
+    }
+  }
+  const initialProps = c.props.filter(p => p.bindings.code.initial);
+  for (const prop of initialProps) {
+    const initial = prop.bindings.code.initial!;
+    const values = typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+    const toggles = c.events?.filter(e => e.toggles?.prop === prop.name) ?? [];
+    if (!values || toggles.length !== 1 || toggles[0]?.toggles?.between[0] === toggles[0]?.toggles?.between[1] || toggles[0]?.toggles?.between.some(value => !values?.includes(value)) || prop.required || !isSupportedOmittedCodeBinding(prop.bindings.code.prop) ||
+        (initial.default !== undefined && !values.includes(initial.default)) ||
+        (initial.default !== undefined && prop.default !== undefined && initial.default !== prop.default))
+      ctx.addIssue({code:'custom',path:['props',c.props.indexOf(prop),'bindings','code','initial'],message:'initial code binding requires one optional enum toggle and a valid, consistent canonical default'});
+  }
+  for (const alias of omittedCodeBindingConflicts(c, initialProps.map(p => p.bindings.code.initial!.prop)))
+    ctx.addIssue({code:'custom',path:['props'],message:`initial code binding "${alias}" collides with another prop, slot, event or generated binding`});
   const omissionAliases = c.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop);
   for (const alias of omittedCodeBindingConflicts(c, omissionAliases)) {
     ctx.addIssue({ code: 'custom', path: ['props'], message: `omitted-plane code binding "${alias}" collides with another prop, slot, event or generated event binding` });
@@ -2797,6 +2878,7 @@ export interface ResolvedLayout {
    *  always survive resolution unchanged. */
   rows?: GridTrack[];
   columns?: GridTrack[];
+  autoRows?: GridTrack;
   gap?: { row: number | string; column: number | string };
   areas?: Record<string, GridArea>;
   flow?: "row";

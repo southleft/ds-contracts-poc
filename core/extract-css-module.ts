@@ -471,6 +471,16 @@ function invertDecls(
       else if (parsed.refusal) notes.push(`css: ${selector} { grid-auto-flow: ${value} } — ${parsed.refusal}`);
       continue;
     }
+    if (prop === 'grid-auto-rows' && isGrid &&
+        decls.filter(d => d.prop === 'grid-auto-flow').every(d => d.value === 'row')) {
+      const { tracks, receipts } = parseGridTrackList(value);
+      for (const r of receipts.refusals) notes.push(`css: ${selector} { ${prop}: ${value} } — ${r}`);
+      for (const l of receipts.lowered) notes.push(`css: ${selector} { ${prop} } — LOWERED: ${l}`);
+      if (tracks?.length === 1) {
+        layout.autoRows = tracks[0]; layout.flow = 'row';
+      } else notes.push(`css: ${selector} { ${prop}: ${value} } — grid-auto-rows requires one supported repeated track`);
+      continue;
+    }
     if (prop === 'grid-auto-rows' || prop === 'grid-auto-columns') {
       notes.push(`css: ${selector} { ${prop}: ${value} } — ${GRID_REFUSALS['grid-implicit-tracks']}`);
       continue;
@@ -2027,7 +2037,7 @@ function refereeGridParts(name: string, part: ExtractedPart, notes: string[]): v
   // ROW_AUTO_FLOW and declared gridRowSizes coexisting natively. They must
   // COVER the flow, though: GP10 measured children flowing past the declared
   // list while gridRowCount stayed put (P9's lossy readback under declared rows).
-  if (flowRow && l.rows && l.columns) {
+  if (flowRow && l.rows && l.columns && !l.autoRows) {
     const needed = Math.max(1, Math.ceil(inFlow.length / l.columns.length));
     if (l.rows.length < needed) {
       problems.push(`flow: "row" over ${l.columns.length} column(s) with ${inFlow.length} child(ren) needs ${needed} declared row track(s), found ${l.rows.length} — children would flow past the declared list (grid-implicit-tracks, P9/GP10; G5′)`);
@@ -2099,7 +2109,8 @@ function refereeGridParts(name: string, part: ExtractedPart, notes: string[]): v
   if (problems.length === 0) {
     const hasFr = (tracks: Array<Record<string, unknown>> | undefined): boolean =>
       (tracks ?? []).some((t) => t !== null && typeof t === 'object' && 'fr' in t);
-    const rowsAreFlex = flowRow && !l.rows ? true : hasFr(l.rows as Array<Record<string, unknown>> | undefined);
+    const rowsAreFlex = hasFr(l.rows as Array<Record<string, unknown>> | undefined) ||
+      (l.autoRows ? hasFr([l.autoRows]) : flowRow && !l.rows);
     for (const [axis, axisHasFr] of [
       ['width', hasFr(l.columns as Array<Record<string, unknown>> | undefined)],
       ['height', rowsAreFlex],
