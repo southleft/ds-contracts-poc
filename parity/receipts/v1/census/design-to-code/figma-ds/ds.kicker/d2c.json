@@ -5,10 +5,10 @@
   "nodeId": "53:4497",
   "mode": "reviewable-inversion",
   "variantCount": 2,
-  "contractSha256": "0f020ac1945c0f2a1b0d83dbdb2584881ca7233f3c6001d7b49a7384730d1b16",
+  "contractSha256": "c6070ee0e3484861c73b25797f9e62b4c78403d036d48b5dc8c2bdce501b656c",
   "carriage": {
-    "carried": 24,
-    "named": 16,
+    "carried": 26,
+    "named": 14,
     "silent": 0
   },
   "silentRows": [],
@@ -109,8 +109,8 @@
       0
     ],
     "text letterSpacing": [
-      0,
       2,
+      0,
       0
     ],
     "text textCase": [
@@ -151,14 +151,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Kicker/Kicker.module.css": "ea8183dc4a614ba2961d0c8cafa89292526c938a80ed245efb8b57e62e21b235",
+    "react/Kicker/Kicker.module.css": "5fabe0afba26c62a6da2a2aade344634a82eb631d3f10ce7c3a967a4f3ac9c6f",
     "react/Kicker/Kicker.stories.tsx": "9cfd466cae4713698bc5c4bdca3502b8b7509c83c48f076807d0206b597ee092",
     "react/Kicker/Kicker.tsx": "8c1f3f5724b7d24785a8f8d2355f61a8464acbcf1b01231b9f67dc81f114f64c",
     "react/Kicker/index.ts": "117e14dd493d055f90de6b5502720c6dd185d3c571381ba71e662708a3a182e8",
     "wc/ds-kicker.ts": "31e77b4c8bad1ebca96c35926542aac10700717e22dbbc8ad08dae31d547422b",
-    "wc/ds-kicker.css.ts": "c4fc775453742dd9050e3e9ab6936d2bae0cdf980bdb1caf36298c32a3b0a857",
+    "wc/ds-kicker.css.ts": "6ede7d465614931b1220c1ad9190e32b41e52054d38f13569b28e6ebd11530ee",
     "wc/ds-kicker.demo.html": "92be59fd05e3ba521d8a88a7d75c5df33823e1efe737447859e51478d580c9ab",
     "wc/ds-kicker.custom-elements.json": "b30c235cc4018484879bdfe6859e6e1eda0b91a8e322fb45f7477cc52c9a8348"
   },
-  "notesCount": 20
+  "notesCount": 19
 }
