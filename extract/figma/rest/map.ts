@@ -1069,7 +1069,12 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
-  if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
+  // dump v1.33: letter spacing is CARRIED. REST reports it already resolved to
+  // pixels, and the proposer (carryLetterSpacing), the `letter-spacing` literal
+  // channel and the CSS emitter all existed; only this reader still named it a
+  // loss, so a design-led label rendered ~1px per glyph too narrow. Absent
+  // still means not captured, never zero.
+  if (typeof s.letterSpacing === 'number' && Number.isFinite(s.letterSpacing) && s.letterSpacing !== 0) text.letterSpacing = s.letterSpacing;
   // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase — the canvas
   // fact behind CSS text-transform); other spellings stay receipts.
   if (s.textCase === 'UPPER' || s.textCase === 'LOWER' || s.textCase === 'TITLE') text.textCase = s.textCase;
@@ -1729,7 +1734,9 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.32';
+export const REST_DUMP_VERSION = '1.33';
+// 1.33 (design-led fidelity): text `letterSpacing` carried in pixels instead of
+//      being named `text-channel-unsupported`.
 // 1.32 (design→code census): set-level `description` + `documentationLinks`
 // (response components/componentSets metadata) and — with `plugin_data=shared`
 // now riding every fetch — the ds_contracts emit stamps (contractId/specHash/
