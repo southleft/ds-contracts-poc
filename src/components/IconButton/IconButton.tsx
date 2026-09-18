@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/icon-button.contract.json (ds.icon-button v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './IconButton.module.css';
 
-export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /** Visual style. Ghost sits on the surface wash (transparent tokens are a documented gap). */
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
   /** Square control size. */
@@ -22,16 +25,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 /** A button showing only an icon, for toolbars, table rows, and compact UI. API mirrors industry convention (Astryx IconButton): the required label is the accessible name and is never rendered visibly. */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  {
-    variant = 'secondary',
-    size = 'md',
-    isDisabled = false,
-    label,
-    icon,
-    className,
-    children,
-    ...rest
-  },
+  { variant = 'secondary', size = 'md', isDisabled = false, label, icon, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`variant-${variant}`], styles[`size-${size}`], className]

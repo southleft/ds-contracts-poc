@@ -725,6 +725,7 @@ export function generateTsx(
       .join('\n      ');
     const mrTypeImports = [meta.attrs, ...(slots.length > 0 ? ['ReactNode'] : [])].join(', ');
     const mrDepImports = deps.map((depName) => `import { ${depName} } from '../${depName}';`).join('\n');
+    const mr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, rootsJsx + prelude.join('\n'), meta);
     return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -733,17 +734,17 @@ export function generateTsx(
  * MULTI-ROOT composite — the anatomy declares ${topRoots(contract).length} top-level roots
  * (${topRoots(contract).map(([n]) => n).join(', ')}). They render as SIBLINGS in a
  * Fragment; there is no single wrapping element (a Modal's backdrop + dialog
- * are position-driven siblings). Each root's class is styles.<rootName>.${omittedNote}
+ * are position-driven siblings). Each root's class is styles.<rootName>.${mr.omittedNote}
  */
 import type { ${mrTypeImports} } from 'react';
 ${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}export interface ${name}Props extends ${propsBase} {
+${iconsConst}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
 }
 
 /** ${contract.description}${seeLines(contract)} */
-export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
+export function ${name}({ ${mr.destructured.join(', ')} }: ${name}Props) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
       ${rootsJsx}
@@ -778,23 +779,24 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
   const depImports = deps
     .map((depName) => `import { ${depName} } from '../${depName}';`)
     .join('\n');
+  const sr = refuseUnrenderedChildren(propsBase, omittedNote, destructured, rootInner + elementAttrs.join(' ') + prelude.join('\n'), meta);
 
   return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
- * Regenerate with: npm run generate${omittedNote}
+ * Regenerate with: npm run generate${sr.omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${propsBase} {
+${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}
 }
 
 /** ${contract.description}${seeLines(contract)} */
 export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
-  { ${destructured.join(', ')} },
+  { ${sr.destructured.join(', ')} },
   ref,
 ) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
@@ -805,6 +807,18 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}  const classe
   );
 });
 `;
+}
+
+/** A component whose JSX never renders `children` must not accept them: a
+ *  consumer's children would be silently discarded (an accepted-but-discarded
+ *  prop). Omit them from the props type and the destructure; the header names
+ *  the omission. Components that render `children` are byte-identical. */
+function refuseUnrenderedChildren(propsBase: string, omittedNote: string, destructured: string[], jsx: string, meta: { attrs: string; el: string }) {
+  if (/\bchildren\b/.test(jsx)) return { propsBase, omittedNote, destructured };
+  const plain = `${meta.attrs}<${meta.el}>`;
+  const base = propsBase.startsWith('Omit<') ? propsBase.replace(`Omit<${plain}, `, `Omit<${plain}, 'children' | `) : `Omit<${plain}, 'children'>`;
+  const note = omittedNote + `\n *\n * \`children\` OMITTED from ${plain} — the contract declares no slot or\n * children-bound text, so JSX children would be discarded; the type refuses them.`;
+  return { propsBase: base, omittedNote: note, destructured: destructured.filter((d) => !/^children\b/.test(d)) };
 }
 
 // ---------------------------------------------------------------------------

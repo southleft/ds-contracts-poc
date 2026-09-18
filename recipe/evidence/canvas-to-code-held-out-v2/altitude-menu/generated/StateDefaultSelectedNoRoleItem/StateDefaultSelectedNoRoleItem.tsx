@@ -6,6 +6,9 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLSpanElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   role
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -13,7 +16,7 @@ import styles from './StateDefaultSelectedNoRoleItem.module.css';
 
 export interface StateDefaultSelectedNoRoleItemProps extends Omit<
   HTMLAttributes<HTMLSpanElement>,
-  'role'
+  'children' | 'role'
 > {
   role?: 'item';
   selected?: 'no';
@@ -26,15 +29,7 @@ export const StateDefaultSelectedNoRoleItem = forwardRef<
   HTMLSpanElement,
   StateDefaultSelectedNoRoleItemProps
 >(function StateDefaultSelectedNoRoleItem(
-  {
-    role = 'item',
-    selected = 'no',
-    state = 'default',
-    text = 'Menu item',
-    className,
-    children,
-    ...rest
-  },
+  { role = 'item', selected = 'no', state = 'default', text = 'Menu item', className, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): role, selected, state — no `.<axis>-*` rule

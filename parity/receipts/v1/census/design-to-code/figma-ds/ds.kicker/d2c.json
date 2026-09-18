@@ -153,7 +153,7 @@
   "generatedFiles": {
     "react/Kicker/Kicker.module.css": "ea8183dc4a614ba2961d0c8cafa89292526c938a80ed245efb8b57e62e21b235",
     "react/Kicker/Kicker.stories.tsx": "9cfd466cae4713698bc5c4bdca3502b8b7509c83c48f076807d0206b597ee092",
-    "react/Kicker/Kicker.tsx": "a07419d79156cb7229b67ce1fb0809c665ed0d388fda1b648eedd3e4c2d1bea5",
+    "react/Kicker/Kicker.tsx": "8c1f3f5724b7d24785a8f8d2355f61a8464acbcf1b01231b9f67dc81f114f64c",
     "react/Kicker/index.ts": "117e14dd493d055f90de6b5502720c6dd185d3c571381ba71e662708a3a182e8",
     "wc/ds-kicker.ts": "31e77b4c8bad1ebca96c35926542aac10700717e22dbbc8ad08dae31d547422b",
     "wc/ds-kicker.css.ts": "c4fc775453742dd9050e3e9ab6936d2bae0cdf980bdb1caf36298c32a3b0a857",

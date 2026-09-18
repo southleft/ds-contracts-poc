@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/toolbar.contract.json (ds.toolbar v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './Toolbar.module.css';
 
-export interface ToolbarProps extends HTMLAttributes<HTMLDivElement> {
+export interface ToolbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Minimum toolbar height; children keep their own sizes. */
   size?: 'sm' | 'md' | 'lg';
   /** Accessible label for the toolbar. */
@@ -22,7 +25,7 @@ export interface ToolbarProps extends HTMLAttributes<HTMLDivElement> {
 
 /** General-purpose toolbar container with start, center, and end content areas for contextual actions. API mirrors industry convention (Astryx Toolbar); roving-tabindex keyboard behavior is a declared boundary. */
 export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(function Toolbar(
-  { size = 'md', label, startContent, centerContent, endContent, className, children, ...rest },
+  { size = 'md', label, startContent, centerContent, endContent, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
