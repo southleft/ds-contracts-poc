@@ -4,6 +4,8 @@ import type { ReactCallerNativeCompilation } from '../../../source-reference/rea
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactInitialInspection } from '../../../source-reference/react-initial-inspection';
 import type { ReactCallbackInspection } from '../../../source-reference/react-callback-inspection';
+import type { SourceFrame } from '../../../source-reference/source-framing';
+import { nativeImageFraming } from '../native-image-framing';
 
 function ContextualInspection({ url, name }: { url: string; name: string }) {
   const [initial, setInitial] = useState<ReactInitialInspection | null>(null);
@@ -66,6 +68,7 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
   const [draft, setDraft] = useState<ReactCallerComposition>(), [busy, setBusy] = useState(false), [error, setError] = useState(''), [preview, setPreview] = useState(false);
   const [native, setNative] = useState<ReactCallerNativeCompilation>();
   const [delivery, setDelivery] = useState<{ operation: NativeOperationSnapshot | null; connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean } | null }>();
+  const [sourceFrame, setSourceFrame] = useState<SourceFrame>();
   const [connectionCode, setConnectionCode] = useState('');
   const url = `${root}/native-operation/${operationId}/caller-react`;
   const deliveryActive = !!delivery?.connection?.started && !delivery.connection.finished;
@@ -75,7 +78,13 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
     const refresh = async () => {
       if (pending) return; pending = true;
       try { const response = await fetch(`${url}/native-operation`), result = await response.json();
-        if (response.ok && active) setDelivery(result); }
+        if (response.ok && active) {
+          setDelivery(result);
+          if (result.operation?.phase === 'component-structure-observed' && result.operation.imageObservation?.images.length) {
+            const framed = await fetch(`${url}/source-frame`), body = await framed.json();
+            if (framed.ok && active) setSourceFrame(body.frame);
+          }
+        } }
       finally { pending = false; }
     };
     void refresh();
@@ -117,6 +126,15 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
         ? result.connection : result.connection?.code ?? result.connection?.url ?? JSON.stringify(result.connection));
       const refreshed = await fetch(`${url}/native-operation`), body = await refreshed.json();
       if (refreshed.ok) setDelivery(body);
+    } catch (error) { setError(error instanceof Error ? error.message : String(error)); }
+    finally { setBusy(false); }
+  }
+  async function measureSourceFrame() {
+    setBusy(true); setError('');
+    try {
+      const response = await fetch(`${url}/source-frame`, { method: 'POST' }), result = await response.json();
+      if (!response.ok) throw Error(result.error);
+      setSourceFrame(result.frame);
     } catch (error) { setError(error instanceof Error ? error.message : String(error)); }
     finally { setBusy(false); }
   }
@@ -164,6 +182,38 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
                 <button type="button" disabled={busy} onClick={() => void deliveryAction('retry-observation')}>Inspect native graph again</button>}
               {delivery.operation.structuralObservation && <p>Structure: {delivery.operation.structuralObservation.status.replaceAll('-', ' ')}.</p>}
               {!!delivery.operation.problems.length && <p role="alert">{delivery.operation.problems.join(', ')}</p>}
+              {delivery.operation.phase === 'component-structure-observed' && delivery.operation.imageObservation?.images.length && <section aria-label="React and native visual review">
+                <h6>Review the unchanged React source and native result</h6>
+                <table><tbody>
+                  <tr><th scope="row">Source</th><td>{delivery.operation.sourceCurrent ? 'Current and authenticated' : 'Changed or unavailable'}</td></tr>
+                  <tr><th scope="row">Structure</th><td>{delivery.operation.structuralObservation?.status.replaceAll('-', ' ') ?? 'Unavailable'}</td></tr>
+                  <tr><th scope="row">Editability</th><td>{native.components.reduce((sum, component) => sum + component.editableTextProperties.length + component.editableCanvasText.length, 0)} text controls; nested Boolean state is carried by native variants</td></tr>
+                  <tr><th scope="row">Visual fidelity</th><td>Review available; qualification pending</td></tr>
+                </tbody></table>
+                {!sourceFrame && <button type="button" disabled={busy || !delivery.operation.sourceCurrent} onClick={() => void measureSourceFrame()}>Frame unchanged React source</button>}
+                <p>{sourceFrame ? 'Both images are shown at one image pixel per CSS pixel, aligned only from recorded layout geometry when available.' : 'Frame the archived original to compare at its real pixel scale. This does not rerun conversion or create Figma objects.'}</p>
+                {(() => {
+                  const image = delivery.operation!.imageObservation!.images.find(row => row.caseId === `variant:${native.observedVariant}`);
+                  if (!image) return <p role="alert">The native export for the observed source defaults is unavailable.</p>;
+                  const framing = nativeImageFraming(sourceFrame, image);
+                  return <div style={{display:'flex',flexWrap:'wrap',gap:24,alignItems:'flex-start'}}>
+                    <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Original React · unchanged source{sourceFrame && <><br />Layout: {sourceFrame.bounds.width.toFixed(2)} × {sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
+                      <div style={{...framing.source,width:'max-content',backgroundColor:'white'}}><img alt="Original React composed Card" style={{display:'block',maxWidth:'none',backgroundColor:'white',...(sourceFrame?{width:sourceFrame.crop.width,height:sourceFrame.crop.height}:{})}}
+                        src={`${root}/native-operation/${operationId}/${sourceFrame ? `source-frame/${sourceFrame.imageSha256}.png` : 'source.png'}`} /></div></figure>
+                    <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Native Figma · observed source defaults<br />{native.observedVariant}</figcaption>
+                      <div style={{paddingRight:sourceFrame?8:0,paddingBottom:sourceFrame?8:0,...framing.native,width:'max-content',backgroundColor:'white'}}><img alt="Native Figma composed Card at observed source defaults" style={{display:'block',maxWidth:'none',width:image.width,height:image.height}}
+                        src={`/api/source-reference/native/${delivery.operation!.id}/images/${delivery.operation!.imageObservation!.attemptId}/${image.sha256}.png`} /></div></figure>
+                  </div>;
+                })()}
+                <details><summary>Review every native state · {delivery.operation.imageObservation.images.length}</summary>
+                  <div style={{display:'flex',flexWrap:'wrap',gap:24,alignItems:'flex-start'}}>{delivery.operation.imageObservation.images.map(image => <figure key={image.caseId} style={{margin:0,maxWidth:'100%',overflow:'auto'}}>
+                    <figcaption>{image.caseId.replace(/^variant:/,'')}</figcaption><img loading="lazy" alt={`Native Figma ${image.caseId}`} style={{display:'block',maxWidth:'none',width:image.width,height:image.height}}
+                      src={`/api/source-reference/native/${delivery.operation!.id}/images/${delivery.operation!.imageObservation!.attemptId}/${image.sha256}.png`} />
+                  </figure>)}</div>
+                </details>
+                <p>Images and structural readback are evidence for review. A fidelity pass still requires a deterministic score for the frozen cohort.</p>
+                {!delivery.operation.imageObservation.images.some(image => image.layoutOffset) && <button type="button" disabled={busy} onClick={() => void deliveryAction('retry-observation')}>Refresh native framing evidence</button>}
+              </section>}
             </>}
           </section>}
           {!!native.unsupportedPropertyBindings?.length && <div role="alert">

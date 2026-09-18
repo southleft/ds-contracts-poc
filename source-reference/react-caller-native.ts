@@ -11,6 +11,9 @@ export interface ReactCallerNativeCompilation {
   inputRevision: string;
   graphRevision: string;
   observedWidth: number;
+  /** The first native variant is the contract-default combination and therefore
+   * depicts the unchanged source inputs used to derive this composition. */
+  observedVariant: string;
   components: Array<{ contractId: string; name: string; variants: number; editableTextProperties: string[];
     editableCanvasText: Array<{ property: string; nodeName: string }> }>;
   resources: Array<{ contractId: string; tokens: number; assets: number }>;
@@ -40,6 +43,7 @@ export function compileReactCallerNative(graph: ReturnType<typeof projectReactCa
   const report: ReactCallerNativeCompilation = {
     status: 'compiled-draft', inputRevision: draft.inputRevision,
     graphRevision: revisionOf({ resources: scoped.revision, components }), observedWidth: draft.observedWidth!,
+    observedVariant: components.find(component => component.contractId === parent.id)!.variants[0].name,
     components: components.map(c => ({ contractId: c.contractId, name: c.setName, variants: c.variants.length,
       editableTextProperties: scoped.contracts.get(c.contractId)!.props
         .filter(p => p.type === 'text' && p.bindings.figma.kind === 'TEXT' &&

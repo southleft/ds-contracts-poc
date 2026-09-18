@@ -81,6 +81,7 @@ test('source caller projection preserves editable content and distinct generated
   assert.deepEqual(graph, before, 'native projection cannot mutate the source-derived React graph');
   assert.equal(native.report.components.length, 2);
   assert.equal(native.report.observedWidth, 240);
+  assert.equal(native.report.observedVariant, native.components.find(c => c.contractId === draft.contract!.id)!.variants[0].name);
   const nativeParent = native.report.components.find(c => c.contractId === draft.contract!.id)!;
   assert.equal(nativeParent.editableTextProperties.length, 1, 'direct parent text remains a property-panel control');
   assert.equal(nativeParent.editableCanvasText.length, 1);

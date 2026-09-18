@@ -1507,6 +1507,7 @@ export function createNativeOperationJobs(
       }
       script = isComparisonPlan(loaded.plan) ? emitNativeContractComparisonReadbackScript(comparisonObservationInput({...loaded.state,...(comparisonRefresh?{comparisonRefresh}:{})}, loaded.plan), true) : emitNativeInspectionReadbackScript(
         componentObservationInput(loaded.state, loaded.plan), true,
+        isReactCallerNativeRequest(loaded.header.request),
       );
     } else fail("phase-invalid");
     const command: NativeOperationCommand = {

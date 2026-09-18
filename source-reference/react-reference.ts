@@ -288,12 +288,22 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Contextual inspection requires an unchanged saved composition and its exact nested source instance.' }); }
       return;
     }
-    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation|\/native-operation)?$/.exec(route);
+    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation|\/native-operation|\/source-frame)?$/.exec(route);
     if (callerReact) {
       try {
-        if (!['GET', ...(callerReact[3] === '/native-operation' ? ['POST'] : [])].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
+        if (!['GET', ...(['/native-operation', '/source-frame'].includes(callerReact[3] ?? '') ? ['POST'] : [])].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
             !native || !reference || reference.id !== callerReact[1] || !reactReferenceUnchanged(reference))
           throw Error('react-caller-request-invalid');
+        if (callerReact[3] === '/source-frame') {
+          const request = native().jobs.reactRequest(callerReact[2]);
+          if (request.referenceId !== reference.id || request.caseId !== 'card-composed')
+            throw Error('react-caller-source-frame-mismatch');
+          const frame = req.method === 'POST'
+            ? await frames.create(reference.id, callerReact[2])
+            : frames.read(reference.id, callerReact[2]);
+          if (!reactReferenceUnchanged(reference)) throw Error('react-caller-source-changed');
+          json(res, 200, { frame }); return;
+        }
         const current = callerGraph(callerReact[2]);
         const { graph } = current;
         const { draft } = graph;
