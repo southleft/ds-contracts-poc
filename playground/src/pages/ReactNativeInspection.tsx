@@ -12,6 +12,14 @@ import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
 
+/** Any recorded native value, shown without assuming its shape. */
+function designValue(value: unknown) {
+  if (value === null || value === undefined) return '—';
+  if (typeof value === 'number') return String(Number(value.toFixed(4)));
+  if (typeof value === 'string' || typeof value === 'boolean') return String(value);
+  const text = JSON.stringify(value);
+  return text.length > 120 ? text.slice(0, 117) + '…' : text;
+}
 function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before'] | NativeContractUpdatePlan['changes'][number]['after']) {
   if (typeof value === 'string') return value;
   if (typeof value === 'number') return Number(value.toFixed(4));
@@ -171,6 +179,15 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 <button type="button" disabled={busy||!update.operation.sourceCurrent||!update.connection?.paired||update.connection.started} onClick={()=>void action(`native-operation/${id}/update/${update.id}/start`)}>Apply and verify correction</button>
               </>}
               {!update.operation.superseded && (update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
+              {!update.operation.superseded && update.operation.phase==='update-verified' && <section aria-label="Design changes">
+                <button type="button" disabled={busy||!update.connection?.paired||!!update.operation.pendingPhase} onClick={()=>void action(`native-operation/${id}/update/${update.id}/observe-design`)}>Read design changes from the canvas</button>
+                {update.operation.designRead && <p role="status">Reading the actual nodes. This only reads; the verified state is not affected. Keep the companion connected.</p>}
+                {update.operation.designChanges && (update.operation.designChanges.total||update.operation.designChanges.added.length||update.operation.designChanges.removed.length ? <>
+                  <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Nothing was written and nothing is accepted. To carry a change to React, change the source so it renders the observed value, then follow the changed source: when both sides agree the update verifies without writing to Figma. To keep the code's value instead, restore it on the canvas. Until then, a code update that touches the same property is refused by name.</p>
+                  <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Node</th><th>Property</th><th>Verified value</th><th>On the canvas now</th></tr></thead>
+                    <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a></td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
+                </> : <p>The canvas matches the verified values: no design changes since verification.</p>)}
+              </section>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>
                 <p>A write is awaiting its result. Keep the companion connected: a saved result is delivered when it reconnects. If the result is lost, settle it by reading the canvas. That write is never sent again, and the companion is refused permission to begin it from then on.</p>
                 <button type="button" disabled={busy||!update.connection?.paired} onClick={()=>void action(`native-operation/${id}/update/${update.id}/resolve-write`)}>Resolve by reading the canvas</button>

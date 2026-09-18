@@ -435,7 +435,7 @@ export function createReactReferenceService(
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const caseComparisonRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/compare-case\/([a-z-]+)$/.exec(route);
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
-    const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write)$/.exec(route);
+    const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
     if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
       try {
@@ -501,6 +501,7 @@ export function createReactReferenceService(
             if(action==='retry-observation') updateTransport.retryObservation(update.id);
             if(action==='resolve-write') updateTransport.resolveWriteOutcome(update.id);
             if(action==='rearm-write') updateTransport.rearmWrite(update.id);
+            if(action==='observe-design') updateTransport.observeDesign(update.id);
           } else if (initialNativeRoute) {
             jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
           } else if (nativeRoute?.[2]) {

@@ -33,6 +33,7 @@ export interface NativeDeliveryJobs {
   /** Journals that can settle an unresolved write by reading the canvas. */
   resolveWriteOutcome?(id: string): NativeOperationCommand;
   beginWrite?(id: string, attemptId: string): void;
+  observeDesign?(id: string): NativeOperationCommand;
   rearmWrite?(id: string): void;
   writeOutcomeRead?(id: string): { writeAttemptId: string; readAttemptId: string } | null;
 }
@@ -274,10 +275,15 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     jobs.beginWrite?.(id, attemptId);
     return { status: "begun" as const };
   };
+  const observeDesign = (id: string) => {
+    connection(id);
+    if (!status(id).started || !jobs.observeDesign) fail("design-observation-refused");
+    jobs.observeDesign(id);
+  };
   const rearmWrite = (id: string) => {
     connection(id);
     if (!status(id).started || !jobs.rearmWrite) fail("write-rearm-refused");
     jobs.rearmWrite(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite };
+  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite, observeDesign };
 }

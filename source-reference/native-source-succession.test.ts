@@ -135,3 +135,16 @@ test('a canvas edit made after the succession still refuses the write at preflig
  assert.throws(()=>p.jobs.dispatch(operation.id,'update-apply'),/phase-refused/);
  assert.equal(p.f.nodes[0].opacity,0.8,'the conflicting canvas value is left alone');
 });
+
+test('a design change the code then adopts verifies without writing to the canvas',async t=>{
+ const p=await pipeline(t);await p.apply();
+ // The designer moves every variant to the value the source will render next.
+ for(const node of p.f.nodes as any[])node.opacity=0.125;
+ p.source('b');p.successions.adopt(p.parent,p.original,root('b'));
+ const proposal=p.plans.prepare(p.parent),operation=p.jobs.prepare(p.parent,proposal.id),statuses:string[]=[];
+ for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const){
+  const c=p.jobs.dispatch(operation.id,phase),result=await p.f.run(c.script);statuses.push(result.status);p.jobs.accept(operation.id,{...c,result});}
+ assert.deepEqual(statuses.slice(0,2),['preflight-observed','no-op'],'both sides already agree, so the write program changes nothing');
+ assert.equal(p.jobs.get(operation.id).phase,'update-verified');
+ assert.equal(p.jobs.verifiedForParent(p.parent)!.input.component.variants[0].spec.opacity,0.125,'and the shared baseline advances');
+});

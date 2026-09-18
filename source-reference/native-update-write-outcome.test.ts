@@ -201,3 +201,20 @@ test('any late result after an untouched settlement names a companion that wrote
  assert.equal(g.jobs().get(g.id).phase,'update-verified');
  assert.equal(g.jobs().accept(g.id,{...begun,result:{status:'rolled-back'}}).phase,'update-recovery-required','verified must not survive its own write reporting a rollback');
 });
+
+// Design-led direction, first half: name what a designer changed, change nothing.
+test('a design read names a canvas edit without moving the verified state, and the chain stays usable',async t=>{
+ const f=await fixture(t);for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const)await f.run(phase);
+ const observe=async()=>{const c=f.jobs().observeDesign(f.id);assert.equal(f.jobs().get(f.id).designRead,true);return f.jobs().accept(f.id,{...c,result:await f.run_script(c.script)});};
+ assert.equal((await observe()).designChanges!.total,0,'an untouched canvas reports nothing');
+ f.nodes[0].opacity=0.8;
+ const seen=await observe();
+ assert.equal(seen.phase,'update-verified');assert.deepEqual(seen.problems,[]);
+ assert.deepEqual(seen.designChanges!.changes.map(c=>[c.nodeId,c.channel,c.recorded,c.observed]),[[f.nodes[0].id,'opacity',0.25,0.8]]);
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.component.variants[0].spec.opacity,0.25,'the verified observation is still the chain\'s truth');
+ assert.equal(f.writes(),1);assert.equal(f.nodes[0].opacity,0.8,'the designer\'s value is left alone');
+ f.restart();assert.equal(f.jobs().get(f.id).designChanges!.total,1);
+ // Only a verified, idle update can be read this way; an interrupted read is simply dropped.
+ f.jobs().observeDesign(f.id);assert.throws(()=>f.jobs().observeDesign(f.id),/design-observation-refused/);
+ f.jobs().retryObservation(f.id);
+});
