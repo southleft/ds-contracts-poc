@@ -58,14 +58,14 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.heading` | Heading | 42 | 342 | 294 | 0 | recognisable | FC-FONT-SUBSTRATE |
 | figma-ds | `ds.image` | Image | 1 | 13 | 11 | 0 | recognisable | VECTOR-GLYPH-NAMED |
-| figma-ds | `ds.kicker` | Kicker | 2 | 24 | 16 | 0 | recognisable | FC-FONT-SUBSTRATE; TEXT-LETTER-SPACING-NAMED |
+| figma-ds | `ds.kicker` | Kicker | 2 | 26 | 14 | 0 | recognisable | FC-FONT-SUBSTRATE; TEXT-LETTER-SPACING-NAMED |
 | figma-ds | `ds.button-group` | Button Group | 2 | 15 | 11 | 0 | NOT recognisable | SLOT-CONTENT-NAMED |
 | figma-ds | `ds.section-header` | Section Header | 2 | 38 | 26 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; GRID-CELL-NAMED |
 | figma-ds | `ds.section-footer` | Section Footer | 1 | 21 | 15 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.toast` | Toast | 5 | 135 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.card` | Card | 2 | 39 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 21 | 20 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **2855** | **3987** | **0** | | |
+| **all** | | 23 sets | | **2857** | **3985** | **0** | | |
 
 ## Renders
 
