@@ -58,7 +58,7 @@ function parseArgs(argv: string[]): Args {
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const run = (cmd: string, args: string[], cwd: string) => {
-  try { return execFileSync(cmd, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', env: { ...process.env, npm_config_update_notifier: 'false' } }); }
+  try { return execFileSync(cmd, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', env: { ...Object.fromEntries(Object.entries(process.env).filter(([k]) => k !== 'FIGMA_TOKEN')), npm_config_update_notifier: 'false' } }); }
   catch (error: any) { throw new Error(`${path.basename(cmd)} ${args.slice(0, 2).join(' ')} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`); }
 };
 
@@ -83,20 +83,25 @@ function deriveCases(dump: any, contract: any, component: string): Case[] {
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
   const samples = arraySamples(contract);
-  return set.variants.map((variant: any) => {
+  const cases: Case[] = set.variants.map((variant: any) => {
     const props: Record<string, unknown> = { ...samples };
     for (const segment of String(variant.name).split(',').map((s: string) => s.trim())) {
       const eq = segment.indexOf('='); if (eq <= 0) continue;
       const property = segment.slice(0, eq), value = segment.slice(eq + 1);
       const prop = variantProps.find(p => p.bindings.figma.property === property);
-      if (!prop) continue;
+      if (!prop) { unmapped.add(`${property} (no VARIANT prop)`); continue; }
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
-      if (entry) props[prop.name] = entry[0];
+      if (entry) props[prop.name] = entry[0]; else unmapped.add(`${property}=${value}`);
     }
     const key = Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
     return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name };
   });
+  const keys = cases.map(c => c.key);
+  for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
+  return cases;
 }
+/** Figma axes or values the contract does not map; reported, never skipped. */
+const unmapped = new Set<string>();
 
 function packageLibrary(generatedDir: string, component: string, work: string) {
   const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
@@ -204,12 +209,12 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
+  const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
   cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract))); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
-  const problems: string[] = [];
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'single component set; composition, nested instances and instance swaps are not exercised here',
@@ -233,9 +238,14 @@ async function main() {
     run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], consumer);
     // The consumer must not resolve anything from this repository.
     const lockfile = readFileSync(path.join(consumer, 'package-lock.json'), 'utf8');
-    if (lockfile.includes(ROOT)) throw new Error('consumer lockfile references the repository');
-    const installed = JSON.parse(readFileSync(path.join(consumer, 'node_modules', ...lib.name.split('/'), 'package.json'), 'utf8'));
-    receipt.consumer = { react: installed.peerDependencies?.react ?? null, installedVersion: installed.version, lockfileSha256: sha256(lockfile), repoPathInLockfile: false };
+    const installedDir = path.join(consumer, 'node_modules', ...lib.name.split('/'));
+    const installed = JSON.parse(readFileSync(path.join(installedDir, 'package.json'), 'utf8'));
+    const installedFiles: string[] = readdirSync(path.join(installedDir, 'dist'), { recursive: true }).map(String).filter(f => !statSync(path.join(installedDir, 'dist', f)).isDirectory());
+    const repoPathInInstalled = installedFiles.filter(f => readFileSync(path.join(installedDir, 'dist', f), 'utf8').includes(ROOT));
+    receipt.consumer = { react: installed.peerDependencies?.react ?? null, installedVersion: installed.version, lockfileSha256: sha256(lockfile),
+      repoPathInLockfile: lockfile.includes(ROOT), repoPathInInstalledFiles: repoPathInInstalled };
+    if (receipt.consumer.repoPathInLockfile) throw new Error('consumer lockfile references the repository');
+    if (repoPathInInstalled.length) throw new Error(`installed files reference the repository: ${repoPathInInstalled.join(', ')}`);
     run(path.join(consumer, 'node_modules', '.bin', 'vite'), ['build', '--logLevel', 'error'], consumer);
     const built = path.join(consumer, 'dist', 'index.html');
     if (!existsSync(built)) throw new Error('vite build produced no index.html');
@@ -317,10 +327,15 @@ async function main() {
       // Behavior: React children. If the contract declares no slot, the component
       // must not silently accept and discard them; if it declares one, they must render.
       {
-        const declaresSlot = JSON.stringify(contract.anatomy ?? {}).includes('"slot"');
+        const declaresSlot = (function find(node: any): boolean {
+          if (!node || typeof node !== 'object') return false;
+          if (node.slot && typeof node.slot === 'object' && typeof node.slot.name === 'string') return true;
+          return Object.values(node).some(find);
+        })(contract.anatomy);
         const marker = 'Consumer child content';
         await page.evaluate(([m]) => (window as any).__consumer.setVariantOverride({ children: m }), [marker] as const);
-        const shown = (await page.locator('[data-cell]').first().innerText()).includes(marker);
+        const cellTexts = await Promise.all(cases.map(async c => page.locator(`[data-cell="${c.key}"]`).innerText()));
+        const shown = cellTexts.length > 0 && cellTexts.every(t => t.includes(marker));
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         // The installed declaration is the API a TypeScript consumer sees.
         const declaration = readFileSync(path.join(consumer, 'node_modules', ...lib.name.split('/'), 'dist', args.component, `${args.component}.d.ts`), 'utf8');
@@ -344,6 +359,7 @@ async function main() {
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
         receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key) });
+        if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
         if (didChange.length !== shouldChange.length) {
           // The emitter ledgers an axis whose values drew no style difference on the canvas; name that reader outcome apart from a dropped prop.
           const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
