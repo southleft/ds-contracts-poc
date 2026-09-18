@@ -30,6 +30,9 @@ export interface NativeDeliveryJobs {
   abandonedObservationPhase(id: string, attemptId: string): NativeOperationPhase | null;
   accept(id: string, result: NativeOperationResult): unknown;
   retryObservation(id: string): unknown;
+  /** Journals that can settle an unresolved write by reading the canvas. */
+  resolveWriteOutcome?(id: string): NativeOperationCommand;
+  writeOutcomeRead?(id: string): { writeAttemptId: string; readAttemptId: string } | null;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const SECRET = /^[a-f0-9]{64}$/;
@@ -154,8 +157,16 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     secret: string,
     fileKey: string,
     replaceReadbackAttemptId?: string,
+    resolveWriteAttemptId?: string,
   ) => {
     authorize(id, secret);
+    // A companion that died mid-write holds that write's marker and will run
+    // nothing else. It may take exactly one thing: the read that settles it.
+    if (resolveWriteAttemptId !== undefined && (replaceReadbackAttemptId !== undefined || !UUID.test(resolveWriteAttemptId) ||
+        jobs.writeOutcomeRead?.(id)?.writeAttemptId !== resolveWriteAttemptId)) {
+      seen.set(id, Date.now());
+      return { status: "awaiting-result" as const };
+    }
     if (fileKey !== jobs.deliveryState(id).fileKey) fail("file-refused");
     seen.set(id, Date.now());
     const dir = directory(id),
@@ -211,6 +222,7 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       ...(replaceReadbackAttemptId === undefined
         ? {}
         : { supersedesReadbackAttemptId: replaceReadbackAttemptId }),
+      ...(resolveWriteAttemptId === undefined ? {} : { resolvesWriteAttemptId: resolveWriteAttemptId }),
     };
   };
   const accept = (
@@ -236,5 +248,10 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (!status(id).started) fail("observation-retry-refused");
     jobs.retryObservation(id);
   };
-  return { pair, start, status, authorize, claim, accept, retryObservation };
+  const resolveWriteOutcome = (id: string) => {
+    connection(id);
+    if (!status(id).started || !jobs.resolveWriteOutcome) fail("write-outcome-resolution-refused");
+    jobs.resolveWriteOutcome(id);
+  };
+  return { pair, start, status, authorize, claim, accept, retryObservation, resolveWriteOutcome };
 }

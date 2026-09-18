@@ -934,12 +934,11 @@ export function createReferenceService(
           if (
             !object(payload) ||
             Object.keys(payload).some(
-              (key) => !["fileKey", "replaceReadbackAttemptId"].includes(key),
+              (key) => !["fileKey", "replaceReadbackAttemptId", "resolveWriteAttemptId"].includes(key),
             ) ||
             typeof payload.fileKey !== "string" ||
-            (payload.replaceReadbackAttemptId !== undefined &&
-              (typeof payload.replaceReadbackAttemptId !== "string" ||
-                !UUID.test(payload.replaceReadbackAttemptId)))
+            [payload.replaceReadbackAttemptId, payload.resolveWriteAttemptId].some(
+              (attempt) => attempt !== undefined && (typeof attempt !== "string" || !UUID.test(attempt)))
           ) {
             json(res, 400, {
               error:
@@ -954,7 +953,8 @@ export function createReferenceService(
               pluginRoute[1],
               secret,
               payload.fileKey,
-              payload.replaceReadbackAttemptId,
+              payload.replaceReadbackAttemptId as string | undefined,
+              payload.resolveWriteAttemptId as string | undefined,
             ),
           );
         } else {

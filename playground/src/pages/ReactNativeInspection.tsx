@@ -166,7 +166,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 <button type="button" disabled={busy||!update.operation.sourceCurrent||!update.connection?.paired||update.connection.started} onClick={()=>void action(`native-operation/${id}/update/${update.id}/start`)}>Apply and verify correction</button>
               </>}
               {!update.operation.superseded && (update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
-              {update.operation.pendingPhase==='update-apply' && <p>A write is awaiting its result. Keep the companion connected; this write will not be repeated automatically.</p>}
+              {update.operation.unresolvedWrite==='awaiting-result' && <>
+                <p>A write is awaiting its result. Keep the companion connected: a saved result is delivered when it reconnects. If the result is lost, settle it by reading the canvas. The write is never sent again.</p>
+                <button type="button" disabled={busy||!update.connection?.paired} onClick={()=>void action(`native-operation/${id}/update/${update.id}/resolve-write`)}>Resolve by reading the canvas</button>
+              </>}
+              {update.operation.unresolvedWrite==='reading-canvas' && <p>Reading the actual nodes to settle an interrupted write. If the values were written, verification continues; if nothing changed, the update returns to a fresh preflight; anything else needs recovery.</p>}
               {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{updateProblem(p)} <code>{p}</code></li>)}</ul>}
               {!!update.operation.imageObservation?.images.length && <details open><summary>Updated native exports · diagnostic only</summary>
                 <p>Fresh exports of the same native nodes at original pixel scale. Recorded source and native layout origins align when export bounds are available; missing geometry remains unaligned. The original creation exports below remain historical evidence.</p>

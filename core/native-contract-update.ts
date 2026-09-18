@@ -110,6 +110,16 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
   return result;
 }
 
+/** True only when a fresh readback is the saved baseline itself: no part of the
+ * update reached the canvas and nothing else moved. Conservative by design; a
+ * readback that is neither this nor the completed update stays unresolved. */
+export function nativeContractUpdateUntouched(plan: NativeContractUpdatePlan, receipt: unknown): boolean {
+  try {
+    const normalized = structuredClone(receipt) as NativeSourceReadback;
+    delete normalized.images;
+    return equal(normalized, plan.baseline) && verifyNativeContractReadback(plan.before, normalized).status === 'supported-structure-observed';
+  } catch { return false; }
+}
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {

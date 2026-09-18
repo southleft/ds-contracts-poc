@@ -330,7 +330,7 @@ async function nativePoll() {
       nativeStatus('connected', 'Result saved by the app. Continuing the inspection.');
     };
     const saved = await figma.clientStorage.getAsync(receiptKey);
-    let heldReadback = null;
+    let heldReadback = null, heldWrite = null;
     if (saved) {
       const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
       const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback', 'comparison-recovery-readback', 'comparison-repair-preflight-readback'].includes(identity.phase);
@@ -339,13 +339,18 @@ async function nativePoll() {
         catch (e) { if (!readback) throw e; }
       }
       if (readback) heldReadback = identity;
-      else {
-        nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; creation will not repeat.');
-        return;
-      }
+      else heldWrite = identity;
     }
+    // An interrupted write is never run again. The only command this plugin
+    // will take while holding its marker is the app's read of the actual
+    // nodes that settles it; the app confirms which write that read resolves.
     const delivery = await request('claim', { fileKey: figma.fileKey,
-      ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}) });
+      ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}),
+      ...(heldWrite ? { resolveWriteAttemptId: heldWrite.attemptId } : {}) });
+    if (heldWrite && delivery.status !== 'command') {
+      nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; it will not be repeated.');
+      return;
+    }
     if (delivery.status !== 'command') {
       const messages = {
         ready: 'Connected. Start Create and inspect in the local app.',
@@ -358,6 +363,9 @@ async function nativePoll() {
     const command = delivery.command;
     if (!nativeCommandValid(command, operationId)) {
       nativeStatus('refused', 'The operation identity, active file or script integrity did not match. Nothing executed.'); return;
+    }
+    if (heldWrite && (!command.readOnly || delivery.resolvesWriteAttemptId !== heldWrite.attemptId)) {
+      nativeStatus('refused', 'The app did not confirm which interrupted write this read resolves. Nothing executed.'); return;
     }
     if (heldReadback && (!command.readOnly || command.phase !== heldReadback.phase ||
         command.attemptId === heldReadback.attemptId || delivery.supersedesReadbackAttemptId !== heldReadback.attemptId)) {
