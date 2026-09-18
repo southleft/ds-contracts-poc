@@ -2,13 +2,19 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/social-button.contract.json (ds.social-button v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import { SocialIcon } from '../SocialIcon';
 import styles from './SocialButton.module.css';
 
-export interface SocialButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface SocialButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
   social?: 'facebook' | 'google' | 'apple' | 'figma' | 'dribbble' | 'x';
   supportingText?: boolean;
   theme?: 'brand' | 'colorWithBrand' | 'color';
@@ -23,7 +29,6 @@ export const SocialButton = forwardRef<HTMLButtonElement, SocialButtonProps>(fun
     state = 'default',
     supportingText = true,
     className,
-    children,
     ...rest
   },
   ref,

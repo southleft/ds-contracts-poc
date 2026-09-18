@@ -2,18 +2,21 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/icons-check-circle.contract.json (ds.icons-check-circle v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './IconsCheckCircle.module.css';
 
-export interface IconsCheckCircleProps extends HTMLAttributes<HTMLSpanElement> {
+export interface IconsCheckCircleProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   size?: '20';
 }
 
 /** STUB contract auto-proposed for the nested "Icons/Check Circle" instances of Molecules/Alert — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub. */
 export const IconsCheckCircle = forwardRef<HTMLSpanElement, IconsCheckCircleProps>(
-  function IconsCheckCircle({ size = '20', className, children, ...rest }, ref) {
+  function IconsCheckCircle({ size = '20', className, ...rest }, ref) {
     // axis-inert (ledgered, not a throw): size — no `.<axis>-*` rule
     // exists in IconsCheckCircle.module.css, so no class is composed for it. A reference
     // to an unemitted class resolves to `undefined` and is filtered out, so emitting

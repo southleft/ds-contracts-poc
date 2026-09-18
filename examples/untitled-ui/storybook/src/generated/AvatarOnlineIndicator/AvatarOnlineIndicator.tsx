@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/avatar-online-indicator.contract.json (ds.avatar-online-indicator v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,17 +15,17 @@ const ICONS: Record<string, string> = {
     '<svg width="100%" height="100%" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">\n<rect x="0.75" y="0.75" width="15.5" height="15.5" rx="7.75" fill="#22C55E"/>\n<rect x="0.75" y="0.75" width="15.5" height="15.5" rx="7.75" stroke="white" stroke-width="1.5"/>\n</svg>',
 };
 
-export interface AvatarOnlineIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
+export interface AvatarOnlineIndicatorProps extends Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  'children'
+> {
   size?: 'xl' | '2xl' | 'lg' | 'md' | 'sm' | 'xs';
   online?: 'true';
 }
 
 /** STUB contract auto-proposed for the nested "_Avatar online indicator" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub. */
 export const AvatarOnlineIndicator = forwardRef<HTMLSpanElement, AvatarOnlineIndicatorProps>(
-  function AvatarOnlineIndicator(
-    { size = 'xl', online = 'true', className, children, ...rest },
-    ref,
-  ) {
+  function AvatarOnlineIndicator({ size = 'xl', online = 'true', className, ...rest }, ref) {
     // axis-inert (ledgered, not a throw): online — no `.<axis>-*` rule
     // exists in AvatarOnlineIndicator.module.css, so no class is composed for it. A reference
     // to an unemitted class resolves to `undefined` and is filtered out, so emitting
