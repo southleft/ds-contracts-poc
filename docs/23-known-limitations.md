@@ -5588,3 +5588,19 @@ missing keys and conflicting file evidence. They qualify identity behavior,
 not visual fidelity. Existing sessions cannot recover an entry already evicted
 by the old rule; import that capture again. To reverse, restore the workspace's
 source/name identity and remove the proposer's anchored-id reuse and file guard.
+
+
+### D.41 follow-up — variant effects include descendants
+
+**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
+previously compared only root styles, bounds and class names. A parent prop
+forwarded to a child could visibly work while the check reported
+`variant-prop-discarded`; an unused root class could imply an effect with no
+changed drawing. The probe now records subtree paint, rendered text and exact
+geometry relative to the root. It excludes class names. Browser probes verify
+changed descendant color, rearrangement at fixed root bounds, and equal-width
+text replacement against actual different screenshots; an unused class stays
+inert. This does not change the image scorer or its 5% limit. Existing receipts
+remain historical until remeasured. Reversal: restore the former root-only
+observer in `scripts/design-consumer-check.ts`, retaining these known false
+positive and false negative cases in the limitation ledger.

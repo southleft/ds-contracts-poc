@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -223,4 +223,36 @@ test('rewriteWorkPaths: whole path occurrences only — absolute and relative sp
   );
   // A relative spelling that is a bare word is only replaced at a path boundary.
   assert.equal(rewriteWorkPaths('out/x layout/y "out/z"', '/abs/out', 'out'), './x layout/y "./z"');
+});
+
+
+test('variant observation catches descendant paint, arrangement and text without counting a class-name-only change', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>
+      .root { width: 120px; height: 40px; display: flex; color: black; background: white; font: 16px monospace }
+      .root span { width: 30px; height: 20px }
+      .tone span { color: red }
+      .reorder { flex-direction: row-reverse }
+    </style><div class="root"><span>AA</span><span>BB</span></div>`);
+    const root = page.locator('.root');
+    const baseline = await root.evaluate(variantPaintOf);
+    const before = await root.screenshot();
+    const box = await root.boundingBox();
+    await root.evaluate(el => el.classList.add('unreferenced-class'));
+    assert.equal(await root.evaluate(variantPaintOf), baseline, 'a different class is not an observed visual effect');
+    for (const cls of ['tone', 'reorder']) {
+      await root.evaluate((el, name) => el.classList.add(name), cls);
+      assert.deepEqual(await root.boundingBox(), box, 'root bounds did not explain the change');
+      assert.notEqual(await root.evaluate(variantPaintOf), baseline, cls + ' changes descendant paint or relative placement');
+      assert.notDeepEqual(await root.screenshot(), before, cls + ' actually changes browser pixels');
+      await root.evaluate((el, name) => el.classList.remove(name), cls);
+      assert.equal(await root.evaluate(variantPaintOf), baseline, 'restoring the variant restores the observation');
+    }
+    await root.locator('span').first().evaluate(el => { el.textContent = 'CC'; });
+    assert.deepEqual(await root.boundingBox(), box);
+    assert.notEqual(await root.evaluate(variantPaintOf), baseline, 'equal-width replacement text is still a rendered difference');
+    assert.notDeepEqual(await root.screenshot(), before);
+  } finally { await browser.close(); }
 });
