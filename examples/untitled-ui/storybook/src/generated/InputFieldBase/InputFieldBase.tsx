@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/input-field-base.contract.json (ds.input-field-base v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -10,17 +13,14 @@ import { PaymentMethodIcon } from '../PaymentMethodIcon';
 import { Mail } from '../Mail';
 import styles from './InputFieldBase.module.css';
 
-export interface InputFieldBaseProps extends HTMLAttributes<HTMLDivElement> {
+export interface InputFieldBaseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   type?: 'default' | 'paymentInput' | 'leadingDropdown' | 'leadingText' | 'trailingDropdown';
   destructive?: boolean;
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const InputFieldBase = forwardRef<HTMLDivElement, InputFieldBaseProps>(
-  function InputFieldBase(
-    { type = 'default', destructive = false, className, children, ...rest },
-    ref,
-  ) {
+  function InputFieldBase({ type = 'default', destructive = false, className, ...rest }, ref) {
     const classes = [styles.root, styles[`type-${type}`], className].filter(Boolean).join(' ');
     return (
       <div ref={ref} className={classes} data-destructive={destructive || undefined} {...rest}>

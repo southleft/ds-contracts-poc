@@ -306,7 +306,9 @@ function nativeCommandValid(c, operationId) {
     c.readOnly === c.phase.endsWith('-readback') && typeof c.script === 'string' &&
     c.script.length > 0 && c.script.length <= 4 * 1024 * 1024 && sha256Hex(c.script) === c.scriptSha256;
 }
-async function nativePoll() {
+// `resumeOnly`: opened without a click. Finish what this plugin already holds
+// (deliver a saved result, settle an interrupted command) and take nothing new.
+async function nativePoll(resumeOnly) {
   if (busy) { nativeStatus('busy', 'Another plugin operation is running. Waiting.'); return; }
   busy = true;
   try {
@@ -330,7 +332,7 @@ async function nativePoll() {
       nativeStatus('connected', 'Result saved by the app. Continuing the inspection.');
     };
     const saved = await figma.clientStorage.getAsync(receiptKey);
-    let heldReadback = null;
+    let heldReadback = null, heldWrite = null;
     if (saved) {
       const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
       const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback', 'comparison-recovery-readback', 'comparison-repair-preflight-readback'].includes(identity.phase);
@@ -339,18 +341,29 @@ async function nativePoll() {
         catch (e) { if (!readback) throw e; }
       }
       if (readback) heldReadback = identity;
-      else {
-        nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; creation will not repeat.');
-        return;
-      }
+      else heldWrite = identity;
     }
-    const delivery = await request('claim', { fileKey: figma.fileKey,
-      ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}) });
+    // An interrupted write is never run again. The only command this plugin
+    // will take while holding its marker is the app's read of the actual
+    // nodes that settles it; the app confirms which write that read resolves.
+    if (resumeOnly && !heldReadback && !heldWrite) {
+      nativeStatus('resume-complete', saved ? 'Saved result delivered. Press Connect / resume to continue this operation.' : 'Nothing left to finish. Press Connect / resume to continue.');
+      return;
+    }
+    // protocol 2: this companion asks the app before executing any write.
+    const delivery = await request('claim', { fileKey: figma.fileKey, protocol: 2,
+      ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}),
+      ...(heldWrite ? { resolveWriteAttemptId: heldWrite.attemptId } : {}) });
+    if (heldWrite && delivery.status !== 'command') {
+      nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; it will not be repeated.');
+      return;
+    }
     if (delivery.status !== 'command') {
       const messages = {
         ready: 'Connected. Start Create and inspect in the local app.',
         'awaiting-result': 'The app is waiting for a previously delivered result. Creation will not repeat.',
         finished: 'Inspection stopped or finished. Review the result and remaining checks in the app.',
+        'companion-upgrade-required': 'This companion is older than the local app. Close and reopen the plugin.',
       };
       nativeStatus(delivery.status, messages[delivery.status] || 'Unexpected response from the app.');
       return;
@@ -359,9 +372,20 @@ async function nativePoll() {
     if (!nativeCommandValid(command, operationId)) {
       nativeStatus('refused', 'The operation identity, active file or script integrity did not match. Nothing executed.'); return;
     }
+    if (heldWrite && (!command.readOnly || delivery.resolvesWriteAttemptId !== heldWrite.attemptId)) {
+      nativeStatus('refused', 'The app did not confirm which interrupted write this read resolves. Nothing executed.'); return;
+    }
     if (heldReadback && (!command.readOnly || command.phase !== heldReadback.phase ||
         command.attemptId === heldReadback.attemptId || delivery.supersedesReadbackAttemptId !== heldReadback.attemptId)) {
       nativeStatus('refused', 'The app did not confirm replacement of the interrupted readback. Nothing executed.'); return;
+    }
+    // Ask before executing a write. The app refuses once it has dispatched a
+    // read to settle this same write, so a command that was handed out but
+    // held up can never run after the app has judged it from the canvas.
+    // Nothing has executed and no marker exists yet, so a refusal leaves no trace.
+    if (!command.readOnly) {
+      try { await request('begin', { attemptId: command.attemptId }); }
+      catch (e) { nativeStatus('refused', 'The app did not confirm this write may begin. Nothing executed. Inspect the operation in the app.'); return; }
     }
     // Await a durable received marker BEFORE any native API call. Reopening the
     // plugin with this marker cannot rerun a command whose outcome is unknown.
@@ -446,13 +470,22 @@ figma.ui.onmessage = async (msg) => {
     catch (e) { nativeStatus('unavailable', 'The connection could not be saved.'); }
     return;
   }
-  if (msg.type === 'native-poll') { await nativePoll(); return; }
+  if (msg.type === 'native-poll') { await nativePoll(msg.resumeOnly === true); return; }
   if (msg.type === 'native-disconnect') {
     await figma.clientStorage.deleteAsync(nativeConnectionKey());
     nativeStatus('disconnected', 'Disconnected. Saved operation receipts are retained.'); return;
   }
   if (msg.type === 'ui-ready') {
     post({ type: 'init', fileKey: figma.fileKey || '' });
+    // Resume by itself ONLY to finish something this plugin already holds: a
+    // saved result to deliver or an interrupted command to settle. Those polls
+    // are resume-only and stop when nothing is held; the next phase of the
+    // operation, including any write, still waits for Connect / resume.
+    try {
+      const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
+      const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);
+      if (match && await figma.clientStorage.getAsync('ds_native_receipt:' + match[1])) post({ type: 'native-resume' });
+    } catch (e) { /* Storage unavailable: the operator can still connect by hand. */ }
     return;
   }
   if (msg.type === 'bridge-poll') {

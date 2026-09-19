@@ -301,7 +301,8 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
   const fetch = async (url: string, init: any) => {
     assert(url.startsWith(`http://localhost:5181/api/source-reference/native/${first.id}/`));
     const payload = JSON.parse(init.body), supplied = init.headers.Authorization.slice(7);
-    const response = url.endsWith('/claim') ? transport.claim(first.id, supplied, payload.fileKey, payload.replaceReadbackAttemptId)
+    const response = url.endsWith('/begin') ? transport.begin(first.id, supplied, payload.attemptId)
+      : url.endsWith('/claim') ? transport.claim(first.id, supplied, payload.fileKey, payload.replaceReadbackAttemptId, payload.resolveWriteAttemptId, payload.protocol)
       : transport.accept(first.id, supplied, payload);
     return { ok: true, json: async () => JSON.parse(JSON.stringify(response)) };
   };

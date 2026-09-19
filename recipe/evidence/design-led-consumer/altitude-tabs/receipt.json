@@ -6,17 +6,17 @@
   "component": "Tabs",
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
-    "Tab/Tab.module.css": "67b44b34f96087fb91b0a1168aa93b79b27372980506802509be911c2f4bfbf3",
-    "Tab/Tab.tsx": "959da0d23764ab75be05b453880c5e4e48a35b19c5b4839c09daea86f2bc7267",
+    "Tab/Tab.module.css": "e255161450308911e9e3c97a4b877cef7bfc56da163fe438de43885dc0ee0f3b",
+    "Tab/Tab.tsx": "908e70bd0b804a368ee8267788d712feca20120de98e9b44ad994f57dda9b319",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
     "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
     "TabPanel/TabPanel.tsx": "6cfdf56c5b1157179f752cdd195923b44391fe6a0faeb71422a30897e90a4373",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
-    "Tabs/Tabs.module.css": "9badb84f00a42d96cc86d2bcddb7f60eb14b90ac421f00630c28594abaa45e28",
-    "Tabs/Tabs.tsx": "0300f4078c792a14b18bd02a2c24731a7c32d411eae089bd6c5a5adb8f51ce7d",
+    "Tabs/Tabs.module.css": "ca18eb69b185c859c6182f24129759941b825334db291fb7785429a6dbfebaae",
+    "Tabs/Tabs.tsx": "f3a052842c61d770c1210f61bfa9d7e628d4cdc0e54a768fb76f40f975089e2b",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
     "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
-    "tokens.css": "ab3d2c40dfb58663524539d4ee0dd07aa65a3e48940196453c2e6f210c305c1c"
+    "tokens.css": "5feaf0812b2976d1a9113df7a7a6cace30040c1eef144c03fd28c47a1446aa76"
   },
   "cases": [
     {
@@ -42,7 +42,7 @@
         "backgroundColor": "rgba(0, 0, 0, 0)",
         "color": "rgb(0, 0, 0)",
         "width": 439,
-        "height": 174,
+        "height": 176,
         "tag": "div",
         "role": null,
         "font": {
@@ -77,7 +77,7 @@
         "backgroundColor": "rgba(0, 0, 0, 0)",
         "color": "rgb(0, 0, 0)",
         "width": 439,
-        "height": 174,
+        "height": 176,
         "tag": "div",
         "role": null,
         "font": {
@@ -118,7 +118,9 @@
         "cellsExpectedToChange": [
           "variant-stretch"
         ],
-        "cellsChanged": []
+        "cellsChanged": [
+          "variant-stretch"
+        ]
       }
     ]
   },
@@ -131,16 +133,16 @@
       {
         "key": "variant-default",
         "figmaImage": "figma-3558_61901.png",
-        "mismatchPercent": 5.66628701594533,
+        "mismatchPercent": 5.327189894388072,
         "withinLimit": false,
         "inkCoveragePercent": {
-          "consumer": 1.41,
+          "consumer": 2.53,
           "figma": 12.72
         },
         "contentSize": {
           "consumer": {
             "width": 439,
-            "height": 174
+            "height": 176
           },
           "figma": {
             "width": 438,
@@ -150,7 +152,7 @@
         "screenshotSize": {
           "consumer": {
             "width": 439,
-            "height": 174
+            "height": 176
           },
           "figma": {
             "width": 439,
@@ -161,16 +163,16 @@
       {
         "key": "variant-stretch",
         "figmaImage": "figma-3558_61928.png",
-        "mismatchPercent": 6.141281838890039,
+        "mismatchPercent": 5.004918202526403,
         "withinLimit": false,
         "inkCoveragePercent": {
-          "consumer": 1.41,
+          "consumer": 2.53,
           "figma": 13.26
         },
         "contentSize": {
           "consumer": {
             "width": 439,
-            "height": 174
+            "height": 176
           },
           "figma": {
             "width": 439,
@@ -180,7 +182,7 @@
         "screenshotSize": {
           "consumer": {
             "width": 439,
-            "height": 174
+            "height": 176
           },
           "figma": {
             "width": 439,
@@ -192,9 +194,8 @@
   },
   "problems": [
     "children-accepted-but-discarded",
-    "variant-axis-inert-ledgered:variant",
-    "image-difference-above-limit:variant-default:5.67%",
-    "image-difference-above-limit:variant-stretch:6.14%"
+    "image-difference-above-limit:variant-default:5.33%",
+    "image-difference-above-limit:variant-stretch:5.00%"
   ],
   "limitations": [
     "single component set; composition, nested instances and instance swaps are not exercised here",
@@ -204,8 +205,7 @@
   "inputs": {
     "degradations": {
       "variables-unavailable": 1,
-      "variable-unresolved": 44,
-      "stroke-weights-nonuniform": 2
+      "variable-unresolved": 44
     },
     "stubContracts": [
       "ds-tab-2.stub.contract.proposed.json",
@@ -219,7 +219,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "3b0877d4c55552fe5c2a61cb8a72213203b067ce016aaaaba3142eee3a201545",
+    "tarballSha256": "1bc1d321105e05564c74eb4132624cd9c3dc6df17dbdce320185afba83fa3882",
     "distFiles": [
       "Tab",
       "Tab/Tab.d.ts",
@@ -247,13 +247,13 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "ecb85befa4d038a9746b7e471115df7d34c36114d7fb660086a1a18b7f089d39",
+    "lockfileSha256": "6b2ce5a5ad8a27800b9e334dbe1f04bf3b24e187bd68807b065c2cf00788baef",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 15719,
-      "tokenDefinitions": 291,
-      "tokenDefinitionsExpected": 291
+      "bytes": 15392,
+      "tokenDefinitions": 287,
+      "tokenDefinitionsExpected": 287
     }
   },
   "outcome": "refused-or-failed"

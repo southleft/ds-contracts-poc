@@ -6,12 +6,15 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   autoFocus, inputMode, onFocus, role, spellCheck
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './TextField.module.css';
 
-export interface TextFieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'autoFocus' | 'inputMode' | 'onFocus' | 'role' | 'spellCheck'> {
+export interface TextFieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'autoFocus' | 'inputMode' | 'onFocus' | 'role' | 'spellCheck'> {
   /** Hint text to display */
   placeholder?: string;
   /** Initial value for the input */
@@ -90,7 +93,7 @@ export interface TextFieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'au
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function TextField(
-  { type = 'text', inputMode, align, variant = 'inherit', size = 'medium', labelHidden, disabled, clearButton, selectTextOnFocus, readOnly, autoFocus, focused, spellCheck, ariaExpanded, showCharacterCount, requiredIndicator, monospaced, autoSize, loading, withPrefix = false, withSuffix = false, step, largeStep, maxLength, minLength, placeholder = 'Example', value = '', suggestion, name, role, autoComplete, pattern, ariaOwns, ariaControls, ariaActiveDescendant, ariaAutocomplete, onFocus, className, children, ...rest },
+  { type = 'text', inputMode, align, variant = 'inherit', size = 'medium', labelHidden, disabled, clearButton, selectTextOnFocus, readOnly, autoFocus, focused, spellCheck, ariaExpanded, showCharacterCount, requiredIndicator, monospaced, autoSize, loading, withPrefix = false, withSuffix = false, step, largeStep, maxLength, minLength, placeholder = 'Example', value = '', suggestion, name, role, autoComplete, pattern, ariaOwns, ariaControls, ariaActiveDescendant, ariaAutocomplete, onFocus, className, ...rest },
   ref,
 ) {
   const handleFocus = () => { onFocus?.(); };

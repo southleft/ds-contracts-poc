@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/button.contract.json (astryx.button v0.3.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /** The visual style variant of the button. */
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
   /** The size of the button. */
@@ -32,7 +35,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     isIconOnly = false,
     label,
     className,
-    children,
     ...rest
   },
   ref,

@@ -63,9 +63,25 @@
       },
       "parts": {
         "alCTabsHeader": {
+          "literals": {
+            "border-top-width": "1px",
+            "border-right-width": "0px",
+            "border-bottom-width": "1px",
+            "border-left-width": "0px"
+          },
           "layout": {
             "direction": "row"
           },
+          "literalsByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "stretch": {
+                  "width": "100%"
+                }
+              }
+            }
+          ],
           "parts": {
             "alCTabsList": {
               "layout": {
@@ -98,8 +114,7 @@
             }
           },
           "tokens": {
-            "border-color": "{imported.tabs.al-c-tabs-header.border-color}",
-            "border-width": "{imported.tabs.al-c-tabs-header.border-width}"
+            "border-color": "{imported.tabs.al-c-tabs-header.border-color}"
           }
         },
         "alCTabsBody": {

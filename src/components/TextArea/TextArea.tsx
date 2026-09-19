@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/text-area.contract.json (ds.text-area v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { LabelHTMLAttributes } from 'react';
@@ -12,7 +15,7 @@ const ICONS: Record<string, string> = {
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="4.5" x2="10" y2="15.5" stroke-linecap="round"/><line x1="5.2" y1="7.2" x2="14.8" y2="12.8" stroke-linecap="round"/><line x1="14.8" y1="7.2" x2="5.2" y2="12.8" stroke-linecap="round"/></svg>',
 };
 
-export interface TextAreaProps extends LabelHTMLAttributes<HTMLLabelElement> {
+export interface TextAreaProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'children'> {
   /** Control size scale (affects padding and text size). */
   size?: 'sm' | 'md' | 'lg';
   /** Marks the field required. */
@@ -34,7 +37,6 @@ export const TextArea = forwardRef<HTMLLabelElement, TextAreaProps>(function Tex
     description = 'Helper text that explains the expected content.',
     placeholder = 'Write something…',
     className,
-    children,
     ...rest
   },
   ref,

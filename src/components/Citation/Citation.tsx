@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/citation.contract.json (ds.citation v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from AnchorHTMLAttributes<HTMLAnchorElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { AnchorHTMLAttributes } from 'react';
 import styles from './Citation.module.css';
 
-export interface CitationProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface CitationProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {
   /** Label chip with the source title, or a compact numbered badge. Don't mix both in one paragraph. */
   variant?: 'label' | 'number';
   /** The source's display title (label variant). */
@@ -26,7 +29,6 @@ export const Citation = forwardRef<HTMLAnchorElement, CitationProps>(function Ci
     number = '1',
     href = 'https://example.com',
     className,
-    children,
     ...rest
   },
   ref,

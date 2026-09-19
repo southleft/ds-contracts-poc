@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/chat-message-metadata.contract.json (ds.chat-message-metadata v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -18,7 +21,7 @@ const ICONS: Record<string, string> = {
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7.5"/><line x1="7.2" y1="7.2" x2="12.8" y2="12.8" stroke-linecap="round"/><line x1="12.8" y1="7.2" x2="7.2" y2="12.8" stroke-linecap="round"/></svg>',
 };
 
-export interface ChatMessageMetadataProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChatMessageMetadataProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Delivery status — drives the leading icon. */
   status?: 'sending' | 'sent' | 'delivered' | 'read' | 'error';
   /** Display timestamp text. */
@@ -30,7 +33,7 @@ export interface ChatMessageMetadataProps extends HTMLAttributes<HTMLDivElement>
 /** Metadata row for a chat message: delivery status, timestamp, and footer content. API mirrors industry convention (Astryx ChatMessageMetadata): status drives the icon. */
 export const ChatMessageMetadata = forwardRef<HTMLDivElement, ChatMessageMetadataProps>(
   function ChatMessageMetadata(
-    { status = 'sent', timestamp = '2:14 PM', footer, className, children, ...rest },
+    { status = 'sent', timestamp = '2:14 PM', footer, className, ...rest },
     ref,
   ) {
     // axis-inert (ledgered, not a throw): status — no `.<axis>-*` rule

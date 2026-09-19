@@ -1,4 +1,5 @@
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
+import { createNativeSourceSuccessions } from './native-source-succession.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
@@ -110,7 +111,8 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
-  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport }));
+  const nativeSuccessions = createNativeSourceSuccessions(repoRoot);
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport, successions: nativeSuccessions }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -161,6 +163,7 @@ export function createReferenceService(
         }),
       },
       react: {
+        effectiveSource: (id, original) => nativeSuccessions.effective(id, original),
         updatedObservation: id => nativeUpdateJobs.verifiedForParent(id),
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
@@ -764,9 +767,14 @@ export function createReferenceService(
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
     const baseline = nativeJobs.reactUpdateBaseline(id);
-    const desired = baseline.request.kind === 'react-initial-draft'
-      ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation })
-      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.request), operation: baseline.input.operation });
+    // `source` is the creation pin unless a recorded succession moved this
+    // operation onto a later sealed observation of the same case. The operation
+    // identity, and therefore every existing allocation, stays the same.
+    const desired = baseline.source.kind === 'react-initial-draft'
+      // The existing component keeps its name and token namespace; for an
+      // unchanged source this equals the content-derived name.
+      ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })
+      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source), operation: baseline.input.operation });
     return { parentJournalRevision: baseline.journalRevision, input: {
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
@@ -874,7 +882,7 @@ export function createReferenceService(
       .replace(/^\/api\/source-reference\/?/, "");
     // The plugin is a different origin. Only these two routes accept its
     // high-entropy pairing capability; no general service CORS exemption.
-    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|result)$/.exec(route);
+    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|begin|result)$/.exec(route);
     const body = async (limit: number) => {
       if (!req.headers["content-type"]?.startsWith("application/json"))
         throw Error("JSON required");
@@ -920,18 +928,26 @@ export function createReferenceService(
       }
       try {
         const payload = await body(
-          pluginRoute[2] === "claim" ? 2048 : 4 * 1024 * 1024,
+          pluginRoute[2] === "result" ? 4 * 1024 * 1024 : 2048,
         );
-        if (pluginRoute[2] === "claim") {
+        if (pluginRoute[2] === "begin") {
+          // Asked immediately before a write executes; refused once a canvas
+          // read has been dispatched to settle that same write.
+          if (!object(payload) || Object.keys(payload).join() !== "attemptId" || typeof payload.attemptId !== "string" || !UUID.test(payload.attemptId)) {
+            json(res, 400, { error: "Only the write attempt identity is accepted." });
+            return;
+          }
+          json(res, 200, deliveryTransport(pluginRoute[1]).begin(pluginRoute[1], secret, payload.attemptId));
+        } else if (pluginRoute[2] === "claim") {
           if (
             !object(payload) ||
             Object.keys(payload).some(
-              (key) => !["fileKey", "replaceReadbackAttemptId"].includes(key),
+              (key) => !["fileKey", "replaceReadbackAttemptId", "resolveWriteAttemptId", "protocol"].includes(key),
             ) ||
             typeof payload.fileKey !== "string" ||
-            (payload.replaceReadbackAttemptId !== undefined &&
-              (typeof payload.replaceReadbackAttemptId !== "string" ||
-                !UUID.test(payload.replaceReadbackAttemptId)))
+            (payload.protocol !== undefined && payload.protocol !== 2) ||
+            [payload.replaceReadbackAttemptId, payload.resolveWriteAttemptId].some(
+              (attempt) => attempt !== undefined && (typeof attempt !== "string" || !UUID.test(attempt)))
           ) {
             json(res, 400, {
               error:
@@ -946,7 +962,9 @@ export function createReferenceService(
               pluginRoute[1],
               secret,
               payload.fileKey,
-              payload.replaceReadbackAttemptId,
+              payload.replaceReadbackAttemptId as string | undefined,
+              payload.resolveWriteAttemptId as string | undefined,
+              payload.protocol as number | undefined,
             ),
           );
         } else {

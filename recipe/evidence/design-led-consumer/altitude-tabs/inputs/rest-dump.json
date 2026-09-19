@@ -2,8 +2,8 @@
   "_provenance": {
     "fileKey": "y83n4o9LOGs74oAoguFcGS",
     "extractedAt": "2026-09-18",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.32) for design→contract proposal.",
-    "dumpVersion": "1.32",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.34) for design→contract proposal.",
+    "dumpVersion": "1.34",
     "captureGaps": [
       "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
       "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
@@ -90,7 +90,12 @@
             "stroke": {
               "hex": "3c3c35"
             },
-            "strokeWeight": 0,
+            "strokeWeights": {
+              "top": 1,
+              "right": 0,
+              "bottom": 1,
+              "left": 0
+            },
             "children": [
               {
                 "name": "al-c-tabs__list",
@@ -135,7 +140,12 @@
                     "stroke": {
                       "hex": "8ea6ff"
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "instanceOf": "Tab",
                     "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -174,7 +184,12 @@
                       "hex": "000000",
                       "alpha": 0
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -213,7 +228,12 @@
                       "hex": "000000",
                       "alpha": 0
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -328,7 +348,12 @@
             "stroke": {
               "hex": "3c3c35"
             },
-            "strokeWeight": 0,
+            "strokeWeights": {
+              "top": 1,
+              "right": 0,
+              "bottom": 1,
+              "left": 0
+            },
             "fillWidth": true,
             "children": [
               {
@@ -375,7 +400,12 @@
                     "stroke": {
                       "hex": "8ea6ff"
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
@@ -415,7 +445,12 @@
                       "hex": "000000",
                       "alpha": 0
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
@@ -455,7 +490,12 @@
                       "hex": "000000",
                       "alpha": 0
                     },
-                    "strokeWeight": 0,
+                    "strokeWeights": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 2,
+                      "left": 0
+                    },
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
@@ -540,11 +580,6 @@
       "code": "variable-unresolved",
       "nodePath": "Tabs:Variant=Default/al-c-tabs__header",
       "message": "stroke: variable id VariableID:386:756 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
-    },
-    {
-      "code": "stroke-weights-nonuniform",
-      "nodePath": "Tabs:Variant=Default/al-c-tabs__header",
-      "message": "per-side stroke weights [1, 0, 1, 0] — dump v1 carries a uniform strokeWeight only; per-side weights dropped"
     },
     {
       "code": "variable-unresolved",
@@ -655,11 +690,6 @@
       "code": "variable-unresolved",
       "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header",
       "message": "stroke: variable id VariableID:386:756 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
-    },
-    {
-      "code": "stroke-weights-nonuniform",
-      "nodePath": "Tabs:Variant=Stretch/al-c-tabs__header",
-      "message": "per-side stroke weights [1, 0, 1, 0] — dump v1 carries a uniform strokeWeight only; per-side weights dropped"
     },
     {
       "code": "variable-unresolved",
