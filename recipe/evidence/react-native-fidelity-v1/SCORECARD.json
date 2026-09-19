@@ -1,0 +1,2700 @@
+{
+  "artifactVersion": "react-native-fidelity-scorecard-v1",
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "scorerPins": {
+    "whiteTrim": 250,
+    "maskInflate": 4
+  },
+  "rows": [
+    {
+      "id": "button-initial/disabled=false, variant=null",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=null",
+      "historical": {
+        "pct": 9.19452887537994,
+        "exactPct": 40.045592705167174,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 302.98,
+        "source": 343.282,
+        "sourceOverNative": 1.133
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=default",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=default",
+      "historical": {
+        "pct": 3.9215686274509802,
+        "exactPct": 14.834881320949433,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 95.6656346749226
+      },
+      "aligned": {
+        "pct": 2.2144522144522143,
+        "mismatchedPixels": 152,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 280.831,
+        "source": 380.42,
+        "sourceOverNative": 1.3546
+      },
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=outline",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=outline",
+      "historical": {
+        "pct": 2.6328052190121154,
+        "exactPct": 16.216216216216218,
+        "nativePx": "116x37",
+        "sourcePx": "116x37",
+        "inkNativePct": 22.204100652376514,
+        "inkSourcePct": 23.43895619757689
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 66.54,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 303.286,
+        "source": 343.282,
+        "sourceOverNative": 1.1319
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=secondary",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=secondary",
+      "historical": {
+        "pct": 2.863777089783282,
+        "exactPct": 14.422084623323014,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 98.91640866873065,
+        "inkSourcePct": 98.76160990712074
+      },
+      "aligned": {
+        "pct": 1.617132867132867,
+        "mismatchedPixels": 111,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 274.722,
+        "source": 311.122,
+        "sourceOverNative": 1.1325
+      },
+      "interior": {
+        "native": [
+          245,
+          245,
+          245
+        ],
+        "source": [
+          245,
+          245,
+          245
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=ghost",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=ghost",
+      "historical": {
+        "pct": 9.19452887537994,
+        "exactPct": 40.045592705167174,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 302.98,
+        "source": 343.282,
+        "sourceOverNative": 1.133
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=destructive",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=destructive",
+      "historical": {
+        "pct": 2.4251805985552117,
+        "exactPct": 96.7750257997936,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 99.17440660474716,
+        "inkSourcePct": 99.17440660474716
+      },
+      "aligned": {
+        "pct": 1.3694638694638694,
+        "mismatchedPixels": 94,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 193.646,
+        "source": 218.472,
+        "sourceOverNative": 1.1282
+      },
+      "interior": {
+        "native": [
+          253,
+          229,
+          230
+        ],
+        "source": [
+          252,
+          229,
+          230
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=link",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=link",
+      "historical": {
+        "pct": 9.042553191489363,
+        "exactPct": 39.96960486322189,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.617132867132867,
+        "mismatchedPixels": 111,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 286.984,
+        "source": 325.043,
+        "sourceOverNative": 1.1326
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=false, variant=(unset)",
+      "cohort": "button-initial",
+      "variant": "disabled=false, variant=(unset)",
+      "historical": {
+        "pct": 3.9215686274509802,
+        "exactPct": 14.834881320949433,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 95.6656346749226
+      },
+      "aligned": {
+        "pct": 2.2144522144522143,
+        "mismatchedPixels": 152,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 280.831,
+        "source": 380.42,
+        "sourceOverNative": 1.3546
+      },
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=null",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=null",
+      "historical": {
+        "pct": 4.25531914893617,
+        "exactPct": 46.6565349544073,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 43.00911854103344
+      },
+      "aligned": {
+        "pct": 0.7867132867132867,
+        "mismatchedPixels": 54,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 151.835,
+        "source": 173.176,
+        "sourceOverNative": 1.1406
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=default",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=default",
+      "historical": {
+        "pct": 2.5799793601651184,
+        "exactPct": 96.49122807017544,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 94.3498452012384
+      },
+      "aligned": {
+        "pct": 1.456876456876457,
+        "mismatchedPixels": 100,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 140.22,
+        "source": 190.553,
+        "sourceOverNative": 1.359
+      },
+      "interior": {
+        "native": [
+          139,
+          139,
+          139
+        ],
+        "source": [
+          138,
+          138,
+          138
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=outline",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=outline",
+      "historical": {
+        "pct": 1.4367816091954022,
+        "exactPct": 22.82088122605364,
+        "nativePx": "116x36",
+        "sourcePx": "116x36",
+        "inkNativePct": 19.923371647509576,
+        "inkSourcePct": 20.71360153256705
+      },
+      "aligned": {
+        "pct": 0.8741258741258742,
+        "mismatchedPixels": 60,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 68.39,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 151.867,
+        "source": 174.4,
+        "sourceOverNative": 1.1484
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=secondary",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=secondary",
+      "historical": {
+        "pct": 6.166150670794634,
+        "exactPct": 99.17440660474716,
+        "nativePx": "92x14",
+        "sourcePx": "114x34",
+        "inkNativePct": 13.777089783281735,
+        "inkSourcePct": 98.14241486068111
+      },
+      "aligned": {
+        "pct": 0.6264568764568764,
+        "mismatchedPixels": 43,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 137.024,
+        "source": 155.537,
+        "sourceOverNative": 1.1351
+      },
+      "interior": {
+        "native": [
+          250,
+          250,
+          250
+        ],
+        "source": [
+          249,
+          249,
+          249
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "named-other",
+      "class": "alignment-trim-threshold",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=ghost",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=ghost",
+      "historical": {
+        "pct": 4.25531914893617,
+        "exactPct": 46.6565349544073,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 43.00911854103344
+      },
+      "aligned": {
+        "pct": 0.7867132867132867,
+        "mismatchedPixels": 54,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 151.835,
+        "source": 173.176,
+        "sourceOverNative": 1.1406
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=destructive",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=destructive",
+      "historical": {
+        "pct": 0.7223942208462332,
+        "exactPct": 99.32920536635706,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 99.01960784313727,
+        "inkSourcePct": 98.91640866873065
+      },
+      "aligned": {
+        "pct": 0.40792540792540793,
+        "mismatchedPixels": 28,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 97.519,
+        "source": 109.531,
+        "sourceOverNative": 1.1232
+      },
+      "interior": {
+        "native": [
+          254,
+          242,
+          243
+        ],
+        "source": [
+          253,
+          242,
+          242
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=link",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=link",
+      "historical": {
+        "pct": 3.64741641337386,
+        "exactPct": 46.58054711246201,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 43.00911854103344
+      },
+      "aligned": {
+        "pct": 0.6701631701631702,
+        "mismatchedPixels": 46,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 143.271,
+        "source": 163.718,
+        "sourceOverNative": 1.1427
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=true, variant=(unset)",
+      "cohort": "button-initial",
+      "variant": "disabled=true, variant=(unset)",
+      "historical": {
+        "pct": 2.5799793601651184,
+        "exactPct": 96.49122807017544,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 94.3498452012384
+      },
+      "aligned": {
+        "pct": 1.456876456876457,
+        "mismatchedPixels": 100,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 140.22,
+        "source": 190.553,
+        "sourceOverNative": 1.359
+      },
+      "interior": {
+        "native": [
+          139,
+          139,
+          139
+        ],
+        "source": [
+          138,
+          138,
+          138
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=null",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=null",
+      "historical": {
+        "pct": 9.19452887537994,
+        "exactPct": 40.045592705167174,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 302.98,
+        "source": 343.282,
+        "sourceOverNative": 1.133
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=default",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=default",
+      "historical": {
+        "pct": 3.9215686274509802,
+        "exactPct": 14.834881320949433,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 95.6656346749226
+      },
+      "aligned": {
+        "pct": 2.2144522144522143,
+        "mismatchedPixels": 152,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 280.831,
+        "source": 380.42,
+        "sourceOverNative": 1.3546
+      },
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=outline",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=outline",
+      "historical": {
+        "pct": 2.6328052190121154,
+        "exactPct": 16.216216216216218,
+        "nativePx": "116x37",
+        "sourcePx": "116x37",
+        "inkNativePct": 22.204100652376514,
+        "inkSourcePct": 23.43895619757689
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 66.54,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 303.286,
+        "source": 343.282,
+        "sourceOverNative": 1.1319
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=secondary",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=secondary",
+      "historical": {
+        "pct": 2.863777089783282,
+        "exactPct": 14.422084623323014,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 98.91640866873065,
+        "inkSourcePct": 98.76160990712074
+      },
+      "aligned": {
+        "pct": 1.617132867132867,
+        "mismatchedPixels": 111,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 274.722,
+        "source": 311.122,
+        "sourceOverNative": 1.1325
+      },
+      "interior": {
+        "native": [
+          245,
+          245,
+          245
+        ],
+        "source": [
+          245,
+          245,
+          245
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=ghost",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=ghost",
+      "historical": {
+        "pct": 9.19452887537994,
+        "exactPct": 40.045592705167174,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.6462703962703962,
+        "mismatchedPixels": 113,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 302.98,
+        "source": 343.282,
+        "sourceOverNative": 1.133
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=destructive",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=destructive",
+      "historical": {
+        "pct": 2.4251805985552117,
+        "exactPct": 96.7750257997936,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 99.17440660474716,
+        "inkSourcePct": 99.17440660474716
+      },
+      "aligned": {
+        "pct": 1.3694638694638694,
+        "mismatchedPixels": 94,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 193.646,
+        "source": 218.472,
+        "sourceOverNative": 1.1282
+      },
+      "interior": {
+        "native": [
+          253,
+          229,
+          230
+        ],
+        "source": [
+          252,
+          229,
+          230
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=link",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=link",
+      "historical": {
+        "pct": 9.042553191489363,
+        "exactPct": 39.96960486322189,
+        "nativePx": "92x14",
+        "sourcePx": "94x14",
+        "inkNativePct": 40.577507598784194,
+        "inkSourcePct": 44.224924012158056
+      },
+      "aligned": {
+        "pct": 1.617132867132867,
+        "mismatchedPixels": 111,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": null,
+        "maskCoveragePct": 100,
+        "textBoxes": 1,
+        "textOnlyCell": true
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 286.984,
+        "source": 325.043,
+        "sourceOverNative": 1.1326
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    },
+    {
+      "id": "button-initial/disabled=(unset), variant=(unset)",
+      "cohort": "button-initial",
+      "variant": "disabled=(unset), variant=(unset)",
+      "historical": {
+        "pct": 3.9215686274509802,
+        "exactPct": 14.834881320949433,
+        "nativePx": "114x34",
+        "sourcePx": "114x34",
+        "inkNativePct": 96.64602683178535,
+        "inkSourcePct": 95.6656346749226
+      },
+      "aligned": {
+        "pct": 2.2144522144522143,
+        "mismatchedPixels": 152,
+        "pixelsCompared": 6864,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 73.68,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.1875,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 280.831,
+        "source": 380.42,
+        "sourceOverNative": 1.3546
+      },
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-false, disabled=false",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-false, disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 38.970588235294116,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 27.941176470588236,
+        "inkSourcePct": 27.941176470588236
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-false, disabled=true",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-false, disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 46.09375,
+        "nativePx": "16x16",
+        "sourcePx": "16x16",
+        "inkNativePct": 23.4375,
+        "inkSourcePct": 23.4375
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-false, disabled=(unset)",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-false, disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 38.970588235294116,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 27.941176470588236,
+        "inkSourcePct": 27.941176470588236
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-true, disabled=false",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-true, disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 28.676470588235293,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 96.69117647058823,
+        "inkSourcePct": 96.69117647058823
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-true, disabled=true",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-true, disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 97.265625,
+        "nativePx": "16x16",
+        "sourcePx": "16x16",
+        "inkNativePct": 98.046875,
+        "inkSourcePct": 98.046875
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          139,
+          139,
+          139
+        ],
+        "source": [
+          138,
+          138,
+          138
+        ],
+        "maxChannelDelta": 1
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=boolean-true, disabled=(unset)",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=boolean-true, disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 28.676470588235293,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 96.69117647058823,
+        "inkSourcePct": 96.69117647058823
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=indeterminate, disabled=false",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=indeterminate, disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 61.39705882352941,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 40.07352941176471,
+        "inkSourcePct": 40.07352941176471
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=indeterminate, disabled=true",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=indeterminate, disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 66.015625,
+        "nativePx": "16x16",
+        "sourcePx": "16x16",
+        "inkNativePct": 36.328125,
+        "inkSourcePct": 35.9375
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=indeterminate, disabled=(unset)",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=indeterminate, disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 61.39705882352941,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 40.07352941176471,
+        "inkSourcePct": 40.07352941176471
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=(unset), disabled=false",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=(unset), disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 38.970588235294116,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 27.941176470588236,
+        "inkSourcePct": 27.941176470588236
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=(unset), disabled=true",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=(unset), disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 46.09375,
+        "nativePx": "16x16",
+        "sourcePx": "16x16",
+        "inkNativePct": 23.4375,
+        "inkSourcePct": 23.4375
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "checkbox-initial/defaultChecked=(unset), disabled=(unset)",
+      "cohort": "checkbox-initial",
+      "variant": "defaultChecked=(unset), disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 38.970588235294116,
+        "nativePx": "16x17",
+        "sourcePx": "16x17",
+        "inkNativePct": 27.941176470588236,
+        "inkSourcePct": 27.941176470588236
+      },
+      "aligned": {
+        "pct": 0,
+        "mismatchedPixels": 0,
+        "pixelsCompared": 1024,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=boolean-false, control5Disabled=false",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=boolean-false, control5Disabled=false",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.754608610032274,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.197746293966413,
+        "inkSourcePct": 10.420655325201029
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=boolean-false, control5Disabled=true",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=boolean-false, control5Disabled=true",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.74640336961873,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.186805973415021,
+        "inkSourcePct": 10.398774684098244
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=boolean-true, control5Disabled=false",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=boolean-true, control5Disabled=false",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.6958043870685415,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.464416607406598,
+        "inkSourcePct": 10.675017778020896
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=boolean-true, control5Disabled=true",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=boolean-true, control5Disabled=true",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.958372080301952,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.448006126579509,
+        "inkSourcePct": 10.65997483726273
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=indeterminate, control5Disabled=false",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=indeterminate, control5Disabled=false",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.831190853892019,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.242875116240906,
+        "inkSourcePct": 10.464416607406598
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-variants/control5DefaultChecked=indeterminate, control5Disabled=true",
+      "cohort": "card-composed-variants",
+      "variant": "control5DefaultChecked=indeterminate, control5Disabled=true",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.820250533340627,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.231934795689513,
+        "inkSourcePct": 10.442535966303813
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-composed-frame/card-composed",
+      "cohort": "card-composed-frame",
+      "variant": "card-composed",
+      "historical": {
+        "pct": 1.3442918877523111,
+        "exactPct": 5.6958043870685415,
+        "nativePx": "362x202",
+        "sourcePx": "362x202",
+        "inkNativePct": 10.464416607406598,
+        "inkSourcePct": 10.675017778020896
+      },
+      "aligned": {
+        "pct": 1.2103526398739164,
+        "mismatchedPixels": 983,
+        "pixelsCompared": 81216,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 21.6,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 1434.071,
+        "source": 1744.141,
+        "sourceOverNative": 1.2162
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical-family-not-resolved",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "card-content-frame/card-content",
+      "cohort": "card-content-frame",
+      "variant": "card-content",
+      "historical": {
+        "pct": 2.5188617596388045,
+        "exactPct": 8.453632745202876,
+        "nativePx": "362x186",
+        "sourcePx": "362x186",
+        "inkNativePct": 7.896691023584626,
+        "inkSourcePct": 8.45511792312719
+      },
+      "aligned": {
+        "pct": 2.25531914893617,
+        "mismatchedPixels": 1696,
+        "pixelsCompared": 75200,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 6,
+            "y": 7
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 33.93,
+        "textBoxes": 4,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 2022.22,
+        "source": 2395.525,
+        "sourceOverNative": 1.1846
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical-family-not-resolved",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    }
+  ],
+  "totals": {
+    "button-initial": {
+      "measured": 24,
+      "pass": 17,
+      "named-font-residual": 6,
+      "named-other": 1,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "checkbox-initial": {
+      "measured": 12,
+      "pass": 12,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "card-composed-variants": {
+      "measured": 6,
+      "pass": 6,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "card-composed-frame": {
+      "measured": 1,
+      "pass": 1,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "card-content-frame": {
+      "measured": 1,
+      "pass": 1,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "button-root-matrix": {
+      "measured": 0,
+      "pass": 0,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 63
+    }
+  }
+}
