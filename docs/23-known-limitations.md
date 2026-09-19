@@ -5151,6 +5151,15 @@ content pass.
   to a `div` (children cannot mount in a void element) is a `div` in the snapshot,
   so a structural parent around it keeps its `button`.
 - *The single-set `proposeFromDump` entry* (no batch) applies no Rule A.
+- *A stub is read by its name, including a kit's path prefix.* The canvas-to-code
+  exam's Altitude `Button` draws a stub of `__button/helper/loading / spinner`
+  (contract name `ButtonHelperLoadingSpinner1`), which the table reads as a
+  `button`: the Button stays a `button` and gains a nesting note it does not
+  deserve (recipe/evidence/canvas-to-code-v1 `receipt.json`: proposal notes 51 →
+  52, re-recorded with `tsx recipe/canvas-to-code.ts --write`; the contract is
+  unchanged). Under a STRUCTURAL parent the same name would withhold its `button`
+  guess. The stub keeps no other trace of its path, and the description is not
+  read, so this is named, not fixed.
 - *A set that IS the control and wraps a real control* now proposes a `div`; the
   reviewer re-roots it or stamps the element.
 - *The dead `:disabled` plane on a non-native root — the next gap, NOT fixed here.*
