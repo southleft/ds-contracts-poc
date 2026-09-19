@@ -25,3 +25,14 @@ export function usedLayoutUnits(used: string): number | undefined {
   const value = Number(m[1]), units = Math.round(value * 64);
   return Number((units / 64).toPrecision(6)) === value ? units : undefined;
 }
+
+/** Recover a used length only when exactly one 1/64 px value serializes to
+ * that CSSOM string. At large magnitudes six digits can describe several
+ * layout units; those strings do not establish an exact size. */
+export function exactUsedLayoutLength(used: string): string | undefined {
+  const units = usedLayoutUnits(used);
+  if (units === undefined || !Number.isSafeInteger(units)) return undefined;
+  const value = Number(px.exec(normalizeValue(used))![1]);
+  if ([units - 1, units + 1].some(n => Number((n / 64).toPrecision(6)) === value)) return undefined;
+  return `${units / 64}px`;
+}

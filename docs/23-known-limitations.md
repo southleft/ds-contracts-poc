@@ -6064,3 +6064,32 @@ prior ledgers and CLI logs are retained in `private/filled-path-sync-138-4chmmd3
 Reversal must restore the prior observation grammar and baseline records together;
 never compare fingerprints across grammar versions or relabel unresolved drift
 as a successful reconciliation.
+
+
+## D.61 Used CSS sizes retain their exact browser layout units
+
+**AGENT decision, 2026-09-19.** Component-owned fixed width and height in an
+observed React initial-state or owned-child draft now recover the exact browser
+layout unit before token minting. Chromium serializes the 1177/64 px layout size
+as `18.3906px`; writing that rounded string back into CSS produces `18.375px`.
+The native value previously carried that serialization as a float32 number.
+The draft now emits `18.390625px` and native 18.390625 for that observation.
+
+This is exact reconstruction, not a numeric tolerance. The reader accepts only a
+unique 1/64 px value with the observed six-significant-digit serialization; it
+refuses ambiguous large values and strings that cannot establish such a unit.
+Only sizes already proved component-owned and fixed are eligible. Sampled,
+content-derived and unproved descendant sizes keep their existing boundaries.
+The compiler works on copies; sealed captures and source-variable observations
+retain their original bytes. Each recovered size receives a named receipt.
+
+Focused tests cover native values, emitted browser dimensions, descendants,
+ambiguous inputs and immutable observations. Recompiling the authenticated
+nine-state independent Switch archive produces exact 32 by 18.390625 native
+plans; this is a compilation diagnostic until the updated plans complete the
+application's write and independent readback. Evidence is retained in
+`private/native-matched-capture-2026-09-19-uOSM5Q/`.
+
+Reverse by removing `exactUsedLayoutLength` and the owned-size copy adapter in
+`compileObservedContentSweep`; retain archived receipts and restore the named
+CSSOM replay defect. No pixel threshold or scorer is changed.
