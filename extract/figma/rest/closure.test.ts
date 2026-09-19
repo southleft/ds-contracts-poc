@@ -322,7 +322,7 @@ test("a cycle A → B → A terminates, fetches each set once and names the cut 
   );
 });
 
-test("a standalone COMPONENT is followed by its own id; a set referencing its own variants follows nothing", async () => {
+test("a standalone COMPONENT is followed by its own id; a same-set reference is cut without another fetch", async () => {
   const S = entry(
     set("1:0", "S", [[inst("self", "1:0v0"), inst("p", "7:7")]]),
     {
@@ -345,7 +345,10 @@ test("a standalone COMPONENT is followed by its own id; a set referencing its ow
     closure.pulled.map((p) => [p.nodeId, p.type]),
     [["7:7", "COMPONENT"]],
   );
-  assert.deepEqual(closure.unresolved, []);
+  assert.deepEqual(
+    closure.unresolved.map((u) => [u.targetId, u.reason, u.referencedFrom]),
+    [["1:0", "cycle-cut", ["S:V=0/self"]]],
+  );
 });
 
 test("the cap refuses BY NAME past its limit, in sorted id order — never a silent truncation", async () => {
@@ -657,143 +660,170 @@ test("the propose CLI: a refusing CLOSURE child falls back to its stub, named cl
 // Review fixes
 // ---------------------------------------------------------------------------
 
-test("review H2: a cross-set cycle proposes AND generates — the cut edge is a distinct stub, so generate sees no cycle", async () => {
-  const work = mkdtempSync(path.join(tmpdir(), "closure-cycle-"));
-  try {
-    const box = (w: number, h: number) => ({ x: 0, y: 0, width: w, height: h });
-    const cInst = (name: string, componentId: string) =>
-      ({
-        id: `i-${name}`,
-        name,
-        type: "INSTANCE",
-        componentId,
-        absoluteBoundingBox: box(20, 20),
-        children: [],
-      }) as RestNode;
-    // The reviewer's probe (probe-cycle.mts): Holder's Md variant instances
-    // Chip; Chip instances Holder's Sm variant — legal in Figma.
-    const H = {
-      document: {
-        id: "1:0",
-        name: "Holder",
-        type: "COMPONENT_SET",
-        componentPropertyDefinitions: {
-          Size: {
-            type: "VARIANT",
-            defaultValue: "Md",
-            variantOptions: ["Md", "Sm"],
+for (const selfReference of [false, true])
+  test(`review H2: a ${selfReference ? "same-set" : "cross-set"} cycle proposes AND generates — the cut edge is a distinct stub, so generate sees no cycle`, async () => {
+    const work = mkdtempSync(path.join(tmpdir(), "closure-cycle-"));
+    try {
+      const box = (w: number, h: number) => ({
+        x: 0,
+        y: 0,
+        width: w,
+        height: h,
+      });
+      const cInst = (name: string, componentId: string) =>
+        ({
+          id: `i-${name}`,
+          name,
+          type: "INSTANCE",
+          componentId,
+          absoluteBoundingBox: box(20, 20),
+          children: [],
+        }) as RestNode;
+      // The reviewer's probe (probe-cycle.mts): Holder's Md variant instances
+      // Chip; Chip instances Holder's Sm variant — legal in Figma.
+      const H = {
+        document: {
+          id: "1:0",
+          name: "Holder",
+          type: "COMPONENT_SET",
+          componentPropertyDefinitions: {
+            Size: {
+              type: "VARIANT",
+              defaultValue: "Md",
+              variantOptions: ["Md", "Sm"],
+            },
+          },
+          children: [
+            {
+              id: "1:1",
+              name: "Size=Md",
+              type: "COMPONENT",
+              layoutMode: "HORIZONTAL",
+              absoluteBoundingBox: box(40, 20),
+              children: [
+                cInst(
+                  selfReference ? "holder" : "chip",
+                  selfReference ? "1:2" : "2:1",
+                ),
+              ],
+            },
+            {
+              id: "1:2",
+              name: "Size=Sm",
+              type: "COMPONENT",
+              layoutMode: "HORIZONTAL",
+              absoluteBoundingBox: box(20, 20),
+              children: [],
+            },
+          ],
+        } as RestNode,
+        components: {
+          [selfReference ? "1:2" : "2:1"]: {
+            name: selfReference ? "Size=Sm" : "Tone=A",
+            componentSetId: selfReference ? "1:0" : "2:0",
           },
         },
-        children: [
-          {
-            id: "1:1",
-            name: "Size=Md",
-            type: "COMPONENT",
-            layoutMode: "HORIZONTAL",
-            absoluteBoundingBox: box(40, 20),
-            children: [cInst("chip", "2:1")],
+        componentSets: {
+          [selfReference ? "1:0" : "2:0"]: {
+            name: selfReference ? "Holder" : "Chip",
           },
-          {
-            id: "1:2",
-            name: "Size=Sm",
-            type: "COMPONENT",
-            layoutMode: "HORIZONTAL",
-            absoluteBoundingBox: box(20, 20),
-            children: [],
-          },
-        ],
-      } as RestNode,
-      components: { "2:1": { name: "Tone=A", componentSetId: "2:0" } },
-      componentSets: { "2:0": { name: "Chip" } },
-    };
-    const C = {
-      document: {
-        id: "2:0",
-        name: "Chip",
-        type: "COMPONENT_SET",
-        componentPropertyDefinitions: {
-          Tone: { type: "VARIANT", defaultValue: "A", variantOptions: ["A"] },
         },
-        children: [
-          {
-            id: "2:1",
-            name: "Tone=A",
-            type: "COMPONENT",
-            layoutMode: "HORIZONTAL",
-            absoluteBoundingBox: box(20, 20),
-            children: [cInst("holder", "1:2")],
+      };
+      const C = {
+        document: {
+          id: "2:0",
+          name: "Chip",
+          type: "COMPONENT_SET",
+          componentPropertyDefinitions: {
+            Tone: { type: "VARIANT", defaultValue: "A", variantOptions: ["A"] },
           },
-        ],
-      } as RestNode,
-      components: { "1:2": { name: "Size=Sm", componentSetId: "1:0" } },
-      componentSets: { "1:0": { name: "Holder" } },
-    };
-    const f = await followInstances(
-      { name: "Kit", nodes: { "1:0": H } },
-      ["1:0"],
-      async (ids) => ({
-        name: "Kit",
-        nodes: Object.fromEntries(
-          ids.map((id) => [id, id === "2:0" ? C : null]),
-        ),
-      }),
-    );
-    writeFileSync(
-      path.join(work, "dump.json"),
-      JSON.stringify(
-        mapRestToDump(f.response, { closure: f.closure, fileKey: "k" }).dump,
-      ),
-    );
-    const tokens = TOKENS;
-    const out = path.join(work, "p");
-    const prop = spawnSync(
-      process.execPath,
-      [
-        "--import",
-        "tsx",
-        path.join(ROOT, "extract/figma/propose.ts"),
+          children: [
+            {
+              id: "2:1",
+              name: "Tone=A",
+              type: "COMPONENT",
+              layoutMode: "HORIZONTAL",
+              absoluteBoundingBox: box(20, 20),
+              children: [cInst("holder", "1:2")],
+            },
+          ],
+        } as RestNode,
+        components: { "1:2": { name: "Size=Sm", componentSetId: "1:0" } },
+        componentSets: { "1:0": { name: "Holder" } },
+      };
+      const f = await followInstances(
+        { name: "Kit", nodes: { "1:0": H } },
+        ["1:0"],
+        async (ids) => ({
+          name: "Kit",
+          nodes: Object.fromEntries(
+            ids.map((id) => [id, id === "2:0" ? C : null]),
+          ),
+        }),
+      );
+      assert.equal(
+        f.closure.cycles.length,
+        1,
+        "a same-set reference is a cycle too",
+      );
+      assert.equal(f.closure.cycles[0].from, selfReference ? "Holder" : "Chip");
+      assert.equal(f.closure.cycles[0].to, "Holder");
+      writeFileSync(
         path.join(work, "dump.json"),
-        "--out",
-        out,
-        "--tokens",
-        tokens,
-      ],
-      { cwd: ROOT, encoding: "utf8" },
-    );
-    assert.equal(prop.status, 0, prop.stderr);
-    const files = readdirSync(out)
-      .filter((x) => x.endsWith(".contract.proposed.json"))
-      .sort();
-    assert.deepEqual(files, [
-      "chip.contract.proposed.json",
-      "ds-holder-cycle-cut.stub.contract.proposed.json",
-      "holder.contract.proposed.json",
-    ]);
-    const gen = spawnSync(
-      process.execPath,
-      [
-        "--import",
-        "tsx",
-        path.join(ROOT, "packages/cli/src/cli.ts"),
-        "generate",
-        ...files.map((x) => path.join(out, x)),
-        "--out",
-        path.join(work, "gen"),
-        "--tokens",
-        `${tokens},${path.join(out, "minted.dtcg.json")}`,
-      ],
-      { cwd: ROOT, encoding: "utf8" },
-    );
-    assert.equal(gen.status, 0, gen.stdout + gen.stderr);
-    assert.doesNotMatch(
-      gen.stdout + gen.stderr,
-      /Circular contract dependency/,
-    );
-    assert.ok(existsSync(path.join(work, "gen", "Holder", "Holder.tsx")));
-  } finally {
-    rmSync(work, { recursive: true, force: true });
-  }
-});
+        JSON.stringify(
+          mapRestToDump(f.response, { closure: f.closure, fileKey: "k" }).dump,
+        ),
+      );
+      const tokens = TOKENS;
+      const out = path.join(work, "p");
+      const prop = spawnSync(
+        process.execPath,
+        [
+          "--import",
+          "tsx",
+          path.join(ROOT, "extract/figma/propose.ts"),
+          path.join(work, "dump.json"),
+          "--out",
+          out,
+          "--tokens",
+          tokens,
+        ],
+        { cwd: ROOT, encoding: "utf8" },
+      );
+      assert.equal(prop.status, 0, prop.stderr);
+      const files = readdirSync(out)
+        .filter((x) => x.endsWith(".contract.proposed.json"))
+        .sort();
+      assert.deepEqual(files, [
+        ...(selfReference ? [] : ["chip.contract.proposed.json"]),
+        "ds-holder-cycle-cut.stub.contract.proposed.json",
+        "holder.contract.proposed.json",
+      ]);
+      const gen = spawnSync(
+        process.execPath,
+        [
+          "--import",
+          "tsx",
+          path.join(ROOT, "packages/cli/src/cli.ts"),
+          "generate",
+          ...files.map((x) => path.join(out, x)),
+          "--out",
+          path.join(work, "gen"),
+          "--tokens",
+          `${tokens},${path.join(out, "minted.dtcg.json")}`,
+        ],
+        { cwd: ROOT, encoding: "utf8" },
+      );
+      assert.equal(gen.status, 0, gen.stdout + gen.stderr);
+      assert.doesNotMatch(
+        gen.stdout + gen.stderr,
+        /Circular contract dependency/,
+      );
+      assert.ok(existsSync(path.join(work, "gen", "Holder", "Holder.tsx")));
+    } finally {
+      rmSync(work, { recursive: true, force: true });
+    }
+  });
 
 test("review C1: the requested contract is picked by its anchor node id — never by position — and refused by name when absent or ambiguous", () => {
   const c = (file: string, nodeId?: string) => ({
