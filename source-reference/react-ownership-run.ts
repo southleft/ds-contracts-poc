@@ -27,8 +27,6 @@ import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
 } from "./react-source-program.js";
-import { reactReferenceCases } from "./react-reference-cases.js";
-import { reactReferenceProfile } from "./react-reference-profiles.js";
 import { captureValidatedTree } from "./capture.js";
 import { watchSourceFailures } from "./observe.js";
 import {
@@ -84,7 +82,7 @@ export function startReactOwnership(
     referenceId: reference.id,
     state: "running",
     acceptedContract: null,
-    denominator: reactReferenceCases.length,
+    denominator: reference.cohort.cases.length,
     matched: 0,
     rows: [],
     sourceUnchanged: false,
@@ -130,6 +128,7 @@ export function startReactOwnership(
           "capture.ts",
           "react-reference-profiles.ts",
           "react-reference-cases.ts",
+          "react-cohort.ts",
         ].map((f) => [f, evidenceSha(readFileSync(path.join(root, f)))]),
       );
       writeFileSync(
@@ -139,7 +138,7 @@ export function startReactOwnership(
       );
       browser = await chromium.launch();
       if (stopped) throw Error("react-ownership-interrupted");
-      for (const c of reactReferenceCases) {
+      for (const c of reference.cohort.cases) {
         if (stopped || !unchanged())
           throw Error("react-ownership-interrupted-or-source-changed");
         const row: ReactOwnershipRow = {
@@ -179,7 +178,7 @@ export function startReactOwnership(
               );
               const page = await context.newPage(),
                 failures = watchSourceFailures(page),
-                profile = reactReferenceProfile(c.id);
+                profile = reference.cohort.profile(c.id);
               await page.goto(url);
               await page.locator(profile.path[0]).waitFor({ timeout: 15000 });
               const tree = await captureValidatedTree(

@@ -24,11 +24,32 @@ The claims rule is the first of seven. The others are what make it hold:
 
 ## The gates
 
+**On a cold tree, build the workspace packages first.** Every package's `dist/` is
+git-ignored, so a fresh clone has none. CI runs the steps below before any gate, and
+`npm run ci:lane fast` prints them as prerequisites without running them:
+
+```bash
+npm ci                                                  # not npm install, which rewrites package-lock.json under npm 10.8.2
+npx playwright-core install chromium                    # the browser-driven gates; CI adds --with-deps on Linux
+npm --prefix packages/schema run build
+npm --prefix packages/core run build                    # needs the schema dist
+npm --prefix packages/cli run build
+npm --prefix packages/emitter-web-components run build
+```
+
+Without the four builds, `npx tsc --noEmit` fails with
+`extract/figma/census/design-to-code.ts(297,33): error TS2307: Cannot find module '@ds-contracts/emitter-web-components'`,
+the eval suite gains one red that the named-red ledger does not carry (`paste-door-open`:
+`Cannot find module …/packages/cli/dist/cli.js`), and `publish:check` refuses with
+`packages/core/dist is not built`. `npm run prep:schema` is the schema build alone: the
+run-locally steps use it, and it is not enough for the gates. Use the Node version in
+`.nvmrc`, which is the version CI pins.
+
 Every change must leave these green:
 
 ```bash
 npm run build      # tokens → schema → all components, contract-validated
-npm run eval       # the full deterministic suite (see docs/07)
+npm run eval       # the full deterministic suite (see docs/07); 15 to 20 minutes on a recent laptop
 npm run docs:check # every number the docs quote, re-derived from the repo
 npx tsc --noEmit   # src, scripts, extract, parity, evals
 ```
@@ -38,6 +59,19 @@ second hard-coded command list: `npm run ci:lane fast`, `npm run ci:lane full`,
 and `npm run ci:lane catalog-visual`. `npm run ci:lanes` derives current gate
 coverage and refuses an unwired check. [docs/25](docs/25-reading-a-red-ci.md)
 maps each lane and red gate to its local reproducer.
+
+**The local fast lane differs from CI in one way you will see.** The local runner
+executes every guarded step and does not evaluate a step's `hashFiles(...)` condition.
+CI skips the `recipe:input-field:comparison*` steps when
+`recipe/sandboxes/input-field-mui/node_modules` is absent, which on a CI runner is
+always. Locally, `recipe:input-field:comparison:check`,
+`recipe:input-field:comparison:v2:check` and
+`recipe:input-field:comparison:v2:multi-rater:check` fail with `ENOENT` at
+`recipe/sandboxes/input-field-mui/node_modules/@mui/material` until the sandboxes are
+installed: `npm --prefix recipe/sandboxes/input-field-mui ci` and
+`npm --prefix recipe/sandboxes/input-field-polaris ci`. On a tree without those
+sandboxes, these three reds are not your change. `publish:check` runs in the same lane
+and refuses until the package builds above have run.
 
 **`npm run parity` is deliberately NOT in that list, and it used to be.** The
 differ compares contracts against committed *snapshots* of the live Figma file,
@@ -53,6 +87,13 @@ reason (`.github/scripts/lane-coverage.ts` carries the exclusion and its
 justification, so the exclusion itself cannot rot silently).
 
 Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:onboarding`.
+
+**Worker (`workers/assist/`).** It is outside the npm workspaces and has its own
+`package.json`. `npm run test:worker` and `npm run typecheck:worker` run from the root
+install with no further setup, which is how CI runs them. Only the Worker's `wrangler`
+commands (`npm --prefix workers/assist run dev` and `run deploy`) need
+`npm --prefix workers/assist install` first; deployment is an owner act. See
+[workers/assist/README.md](workers/assist/README.md).
 
 If you touched `recipe/` or recipe-path docs: `npm run recipe:pivot-status:check`
 and the archetype gate you changed (`recipe:button:check`,

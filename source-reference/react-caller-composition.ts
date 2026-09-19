@@ -41,6 +41,13 @@ export interface ReactCallerComposition {
   children: Array<{ instanceId: string; sourcePath: string; exportName: string; contractId: string; behavior: boolean }>;
   contextDifferences: Array<{ sourcePath: string; field: string; generated: string; source: string }>;
 }
+/** What makes an operation a caller-composition root is the observed structure:
+ * sealed evidence that generates a composition with nested component children.
+ * A case name is never that fact; a root with no nested children is refused. */
+export function requireReactCallerComposition(draft: ReactCallerComposition) {
+  if (draft.status !== 'generated-draft' || !draft.children.length)
+    throw Error('react-caller-source-frame-composition-required');
+}
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 const omitted = (value: unknown) => value === undefined || same(value, { kind: 'undefined' });
 /** A preview may expose a non-painting typography discrepancy explicitly.

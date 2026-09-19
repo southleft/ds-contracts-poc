@@ -1,6 +1,7 @@
 /** Observed root projections, not reusable source contracts. The source API,
  * behavior, caller composition and unobserved planes remain separate work. */
 import { observeReactSourceBindings } from './react-source-bindings.js';
+import { authoredLengthIsUsed } from './layout-unit.js';
 import type { ReactStyleOrigin, ReactSizeOrigin } from './react-style-origin.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
@@ -137,7 +138,7 @@ export function projectReactRootVisual(
         const callerStyle=['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'}));
         result.sourceSizing=origin.sizes?.map(size=>callerStyle
           ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
-          : size.status==='fixed'&&normalizeValue(size.value??'')!==root.style[size.channel]
+          : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',root.style[size.channel]??'')
             ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
         if(sizing) {
           if(callerStyle) throw Error('react-child-context-caller-style-unqualified');
