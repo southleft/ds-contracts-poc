@@ -5832,3 +5832,54 @@ spans. These controls establish the instrument, not complete V1 acceptance.
 Reversal: remove the recorded-frame instrument and restore historical
 independent-trim verdicts. Preserve both measurements and their immutable
 receipts. Do not reclassify earlier frozen evidence using this decision.
+
+
+## D.56 Native exports need an explicit raster coordinate model
+
+**AGENT measurement decision (2026-09-19).** A controlled Scratch experiment
+exported four identical editable 32 by 18.390625 frames at canvas phases 0,
+0.25, 0.5 and 0.75. All eight scale-one PNGs (default export and explicit
+useAbsoluteBounds) were byte-identical 32 by 19 images. Thus floor/ceil of
+absolute canvas bounds does not describe these node-local exports. The probe
+contains no shadows, text or rotation and does not establish those mappings
+or the REST image route. Native structure and the unobstructed Desktop canvas
+were inspected; no existing product node changed.
+
+The declared Switch cohort's existing aligned refusals remain. Its browser
+captures also have genuinely fractional layout origins, so correcting only the
+native origin would not establish an integer alignment. New comparison work
+must measure each producer's raster origin explicitly; it may not resample old
+PNGs or search for a better alignment. The earlier images, scores and refusals
+are retained. D.55's successful consumer comparisons use integral recorded
+origins; this experiment does not replace their source evidence.
+
+Reversal: retain the original absolute-span interpretation only if broader
+controlled exports establish it for the actual capture route. Preserve the
+probe and require matching capture-phase evidence before qualification.
+
+
+## D.57 Non-layout stroke compositing still has a measured residual
+
+**AGENT engineering decision (2026-09-19).** The CBDS Badge consumer remains
+66/72 under both unmasked comparison backgrounds. Six small rounded outline
+variants exceed 5% on black. The inset-shadow spelling preserves layout but
+composites stroke and fill edges differently from native Figma. A controlled
+browser-only substitution of a real border, subtracting its width from all
+four paddings, preserved root and label geometry exactly for all 72 cases and
+measured all 72 below 5% (maximum black 4.427083%). That diagnostic is not the
+delivered component and does not qualify the product.
+
+Do not replace the shared stroke rule with that substitution without proving
+the general behavior: padding smaller than a stroke, caller width overrides,
+token changes and code-to-contract recovery can invalidate the compensation.
+An isolated pseudo-element paint layer also improved the worst measured case
+without changing its geometry, but introduces containing-block and stacking
+semantics that likewise need independent qualification. An additional inset
+fill layer did not change the residual; clipping the root did not pass both
+backgrounds. These experiments justify continued implementation work, not a
+tolerance change or a component-specific exception.
+
+Reversal: replace the inset stroke only with a shared lowering whose layout,
+paint, caller overrides and reverse extraction are demonstrated by adversarial
+cases and a fresh app-delivered consumer. Keep the diagnostic and original
+archive measurements separate.
