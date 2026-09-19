@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { contractGraph, deriveCases, enterState, findDumpSet, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { contractGraph, deriveCases, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -123,27 +123,56 @@ test('the text-masked number only NAMES an over-limit row: at the limit is text-
 // docs/23 §D.43 — a closure dump holds several sets; the mounted one is found by
 // key, set name, or the contract's own anchor node id (`Checkbox Group` generates
 // `CheckboxGroup`, so the name alone never matched and needed an alias key).
-test('the mounted set is resolved by the contract anchor when --component is the generated name', () => {
+test('the mounted set is resolved by the contract anchor, and a name hit that contradicts the anchor REFUSES (review M2)', () => {
   const multi = { _provenance: {}, Checkbox: { setName: 'Checkbox', nodeId: '1:1', variants: [] }, 'Checkbox Group': { setName: 'Checkbox Group', nodeId: '2:2', variants: [{ name: 'size=large, rounded=false' }] } };
   const anchored = { ...contract, bindings: { figma: { anchors: { nodeId: '2:2' } } } };
   assert.equal(findDumpSet(multi, anchored, 'CheckboxGroup')?.setName, 'Checkbox Group');
-  assert.equal(findDumpSet(multi, anchored, 'Checkbox')?.setName, 'Checkbox');
+  assert.equal(findDumpSet(multi, anchored, 'Checkbox Group')?.setName, 'Checkbox Group');
+  // The child's set name with the GROUP's contract: one set's variants would be
+  // mounted against another's contract — refused by name, never returned.
+  assert.throws(() => findDumpSet(multi, anchored, 'Checkbox'), /dump-set-anchor-mismatch:Checkbox: .*node 1:1 .*anchored to 2:2/);
+  // No anchor on the contract: the name lookup stands; no anchor match → none.
+  assert.equal(findDumpSet(multi, contract, 'Checkbox')?.setName, 'Checkbox');
   assert.equal(findDumpSet(multi, contract, 'CheckboxGroup'), undefined);
   assert.equal(deriveCases(multi, anchored, 'CheckboxGroup').length, 1);
 });
 
-test('the contract graph names every transitively referenced component, stub or real, and an unclaimed id', () => {
+test('the contract graph follows the generator\'s own edges — component refs, slot accepts AND slot defaultContent (review M3) — and names an unclaimed id', () => {
   const ref = (id: string) => ({ component: { id } });
   const root = { id: 'ds.tabs', anatomy: { root: { parts: { tab: ref('ds.tab'), panel: ref('ds.tab-panel') } } } };
   const siblings = [
     { id: 'ds.tab', name: 'Tab', anatomy: {}, __stub: true },
     { id: 'ds.tab-panel', name: 'TabPanel', anatomy: { root: { parts: { b: ref('ds.button'), gone: ref('ds.missing') } } } },
-    { id: 'ds.button', name: 'Button', anatomy: { root: { parts: { i: ref('ds.tab-panel') } } } },
+    { id: 'ds.button', name: 'Button', anatomy: { root: { parts: { i: ref('ds.icon') } } } },
+    // Altitude's Icon: its glyph is slot DEFAULT CONTENT, not a component ref.
+    { id: 'ds.icon', name: 'Icon', anatomy: { root: { parts: { box: { slot: { name: 'icon', accepts: ['ds.star'], defaultContent: [{ id: 'ds.arrow-arc-left' }] } } } } } },
+    { id: 'ds.arrow-arc-left', name: 'ArrowArcLeft', anatomy: {}, __stub: true },
   ];
   assert.deepEqual(contractGraph(root, siblings), [
+    { id: 'ds.arrow-arc-left', name: 'ArrowArcLeft', stub: true },
     { id: 'ds.button', name: 'Button', stub: false },
+    { id: 'ds.icon', name: 'Icon', stub: false },
     { id: 'ds.missing', name: null, stub: false },
+    { id: 'ds.star', name: null, stub: false },
     { id: 'ds.tab', name: 'Tab', stub: true },
     { id: 'ds.tab-panel', name: 'TabPanel', stub: false },
   ]);
+});
+
+test('interactive content nested in interactive content is found in the page; a label around its control is not (review H1)', async (t) => {
+  let browser;
+  try { browser = await chromium.launch(); } catch { t.skip('chromium unavailable'); return; }
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`
+            <div data-cell="link"><a href="#">x <input type="checkbox"></a></div>
+      <div data-cell="focus"><div role="tab"><span tabindex="0">t</span></div></div>
+      <div data-cell="ok"><fieldset><label><input type="checkbox"> a</label><button>b</button></fieldset></div>`);
+    // The HTML PARSER closes an open <button> at a nested one; React builds the
+    // DOM with createElement, which does not — so build the panel the same way.
+    await page.evaluate(`(() => { const cell = document.createElement('div'); cell.setAttribute('data-cell', 'panel');
+      const outer = document.createElement('button'); const inner = document.createElement('button'); inner.textContent = 'Button';
+      outer.append(document.createElement('span'), inner); cell.append(outer); document.body.prepend(cell); })()`);
+    assert.deepEqual(await page.evaluate(nestedInteractiveScript), ['panel:button>button', 'link:a>input', 'focus:div[role=tab]>span']);
+  } finally { await browser.close(); }
 });

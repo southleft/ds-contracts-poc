@@ -53,6 +53,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
+import { contractDependencyEdges } from './contract-schema.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
@@ -115,22 +116,32 @@ const variantValues = (prop: any): unknown[] =>
 /** The dump set this run mounts: the key or set name `--component` names, else
  *  the set whose `nodeId` is the contract's own Figma anchor — so a set whose
  *  name has a space (`Checkbox Group` → generated `CheckboxGroup`) needs no
- *  alias key, and a closure dump holding several sets is never guessed from. */
+ *  alias key, and a closure dump holding several sets is never guessed from.
+ *  When the contract carries an anchor node id and the set found by key or
+ *  name has a DIFFERENT node id, it refuses by name (review M2: a closure dump
+ *  holds `Checkbox` beside `Checkbox Group`, and `--component Checkbox` with
+ *  the group's contract must not mount the child's variants). */
 export function findDumpSet(dump: any, contract: any, component: string): any {
   const isSet = (v: any) => v && typeof v === 'object' && Array.isArray(v.variants);
-  if (isSet(dump[component])) return dump[component];
-  const byName = Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
-  if (byName) return byName;
   const anchor = contract?.bindings?.figma?.anchors?.nodeId;
+  const byName = isSet(dump[component]) ? dump[component] : Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
+  if (byName) {
+    if (typeof anchor === 'string' && typeof byName.nodeId === 'string' && byName.nodeId !== anchor) {
+      throw new Error(`design:consumer:check — dump-set-anchor-mismatch:${component}: the dump set "${byName.setName ?? component}" is node ${byName.nodeId} but the contract is anchored to ${anchor}; refusing to mount one set's variants against another's contract`);
+    }
+    return byName;
+  }
   return typeof anchor === 'string' ? Object.values(dump).find((v: any) => isSet(v) && v.nodeId === anchor) : undefined;
 }
 
-/** Every component id the contract graph reaches through `anatomy…component.id`,
- *  transitively through the other contracts beside it, with the generated
- *  folder each resolves to (`null` = no contract in the folder claims the id). */
+/** Every contract id the mounted contract depends on, transitively through
+ *  the contracts beside it, by the generator's own edges
+ *  (`contractDependencyEdges`: component refs, slot `accepts`, slot
+ *  `defaultContent`), with the generated folder each resolves to (`null` = no
+ *  contract in the folder claims the id). */
 export function contractGraph(root: any, siblings: any[]): Array<{ id: string; name: string | null; stub: boolean }> {
   const byId = new Map(siblings.filter(c => typeof c?.id === 'string').map(c => [c.id, c]));
-  const refs = (c: any): string[] => { const out: string[] = []; const walk = (node: any) => { if (!node || typeof node !== 'object') return; if (typeof node.component?.id === 'string') out.push(node.component.id); for (const v of Object.values(node)) if (v && typeof v === 'object') walk(v); }; walk(c?.anatomy); return out; };
+  const refs = (c: any): string[] => { try { return contractDependencyEdges(c).map(e => e.id); } catch { return []; } };
   const seen = new Map<string, { id: string; name: string | null; stub: boolean }>();
   const queue = refs(root);
   while (queue.length) {
@@ -142,6 +153,31 @@ export function contractGraph(root: any, siblings: any[]): Array<{ id: string; n
   }
   return [...seen.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }
+
+/** Interactive content nested inside interactive content (HTML's content
+ *  model forbids it: a <button> inside a <button> is invalid, and the inner
+ *  control is a spurious tab stop / swallowed click). Runs in the page; one
+ *  entry per cell and parent>child pair. Review H1 (docs/23 §D.43): the real
+ *  Tab Panel rendered as a <button> around Button's <button>. */
+/** HTML's rule: an `a` or `button` (and a widget role that stands in for one)
+ *  may contain no interactive content and no element with a `tabindex`. A
+ *  `label` around its own control, `details`/`summary` are NOT flagged. */
+export const INTERACTIVE_OUTER = 'a[href], button, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="switch"], [role="radio"]';
+export const INTERACTIVE_INNER = 'a[href], button, input:not([type="hidden"]), select, textarea, iframe, embed, [tabindex], [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="switch"], [role="radio"], [contenteditable=""], [contenteditable="true"]';
+export const nestedInteractiveScript = `(() => {
+  const OUTER = ${JSON.stringify(INTERACTIVE_OUTER)}, INNER = ${JSON.stringify(INTERACTIVE_INNER)};
+  const spell = (el) => el.tagName.toLowerCase() + (el.getAttribute('role') ? '[role=' + el.getAttribute('role') + ']' : '');
+  const out = [];
+  for (const cell of document.querySelectorAll('[data-cell]')) {
+    const pairs = new Set();
+    for (const el of cell.querySelectorAll(INNER)) {
+      const outer = el.parentElement && el.parentElement.closest(OUTER);
+      if (outer && cell.contains(outer)) pairs.add(spell(outer) + '>' + spell(el));
+    }
+    for (const p of [...pairs].sort()) out.push(cell.getAttribute('data-cell') + ':' + p);
+  }
+  return out;
+})()`;
 
 export function deriveCases(dump: any, contract: any, component: string): Case[] {
   const set = findDumpSet(dump, contract, component);
@@ -373,7 +409,10 @@ async function main() {
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
-  cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract))); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
+  cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract)));
+  // Low (review): every contract beside it — the followed children and stubs —
+  // and the minted tree ride the committed inputs, so the run reproduces from them.
+  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f)); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
@@ -464,6 +503,11 @@ async function main() {
       })()`) as string[];
       // A root its own CSS places off the pixel grid (a fractional margin or transform) is named, never hidden.
       for (const key of misaligned) problems.push(`root-origin-off-pixel-grid:${key}`);
+      // Interactive content inside interactive content is invalid HTML a clean
+      // consumer would ship (docs/23 §D.43, review H1) — a named problem.
+      const nested = await page.evaluate(nestedInteractiveScript) as string[];
+      receipt.consumer.interactiveNesting = nested;
+      for (const entry of nested) problems.push(`interactive-content-nested:${entry}`);
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
       const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
