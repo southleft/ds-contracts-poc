@@ -6,7 +6,7 @@
   "component": "Badge",
   "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
   "generatedSha256": {
-    "Badge/Badge.module.css": "f6889fab0ccaee552fcc892bbae374b0a1ad56c1fd4bdf5e4b7aeef720deaebb",
+    "Badge/Badge.module.css": "a0ddeccc38f4b1bf93527849fbe151e24df330dca135d89ee2bebf48ade0b15e",
     "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
     "Badge/Badge.tsx": "2c72fe86021573d757b44d7add97e29097256cfe6aaafe6cf4f7b5d72e2d0da4",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
@@ -4850,7 +4850,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "720e8aa4228f35b4b7cd2e9060a8cb1fa0e7b4d3e4f6425bc8b90321b37c5fca",
+    "tarballSha256": "d16869d92c3666609d8aed3d0d480122af3ec648df81c0f36f30a5fa1311361e",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -4872,11 +4872,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "f1a5bdd070863771ef0806814a956d4ec353958464c01b40777272db953aa787",
+    "lockfileSha256": "37fc81b6f3d4d4a8f49c3485c419583a22c31405cbaef52b26a08438b9892a27",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 26213,
+      "bytes": 26238,
       "tokenDefinitions": 355,
       "tokenDefinitionsExpected": 355
     }
