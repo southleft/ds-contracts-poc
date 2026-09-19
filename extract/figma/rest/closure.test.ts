@@ -25,11 +25,23 @@ import {
   closureDegradations,
   followInstances,
   partitionClosureRefusals,
+  pickRequestedContract,
   type FetchNodesBatch,
 } from "./closure.js";
-import { importFromUrl, type FetchLike } from "./fetch.js";
+import {
+  fetchNodes,
+  importFromUrl,
+  MAX_RETRY_AFTER_SECONDS,
+  type FetchLike,
+} from "./fetch.js";
 import { mapRestToDump, type RestNode, type RestNodesResponse } from "./map.js";
 
+const TOKENS = [
+  "tokens/primitives.tokens.json",
+  "tokens/semantic.tokens.json",
+  "tokens/modes/semantic.light.tokens.json",
+  "tokens/modes/brand.default.tokens.json",
+].join(",");
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
 const recorded = JSON.parse(
@@ -284,7 +296,26 @@ test("a cycle A → B → A terminates, fetches each set once and names the cut 
   );
   assert.deepEqual(calls, [["2:0"]]);
   assert.deepEqual(Object.keys(response.nodes), ["2:0", "1:0"]);
-  assert.deepEqual(closure.cycles, [["B", "A"]]);
+  assert.deepEqual(closure.cycles, [
+    { from: "B", to: "A", fromNodeId: "2:0", toNodeId: "1:0" },
+  ]);
+  // The cut edge is named per instance, as a stub of its own.
+  assert.deepEqual(
+    closure.unresolved.map((u) => [u.targetId, u.reason, u.referencedFrom]),
+    [["1:0", "cycle-cut", ["B:V=0/a"]]],
+  );
+  // The mapper spells that instance under a DISTINCT name with no keys, so
+  // the proposer can never link it to A's real id.
+  const mapped = mapRestToDump(response, { closure, fileKey: "k" }).dump;
+  const bInst = (
+    mapped.B as {
+      variants: Array<{
+        children?: Array<{ instanceOf?: string; instanceKey?: string }>;
+      }>;
+    }
+  ).variants[0].children![0];
+  assert.equal(bInst.instanceOf, "A (cycle cut)");
+  assert.equal(bInst.instanceKey, undefined);
   assert.deepEqual(
     closure.pulled.map((p) => p.name),
     ["B"],
@@ -552,12 +583,7 @@ test("the propose CLI: a refusing CLOSURE child falls back to its stub, named cl
       fileKey: "k",
     }).dump;
     writeFileSync(path.join(work, "closure.json"), JSON.stringify(withClosure));
-    const tokens = [
-      "tokens/primitives.tokens.json",
-      "tokens/semantic.tokens.json",
-      "tokens/modes/semantic.light.tokens.json",
-      "tokens/modes/brand.default.tokens.json",
-    ].join(",");
+    const tokens = TOKENS;
     const propose = (dumpFile: string, out: string) =>
       spawnSync(
         process.execPath,
@@ -625,4 +651,268 @@ test("the propose CLI: a refusing CLOSURE child falls back to its stub, named cl
   } finally {
     rmSync(work, { recursive: true, force: true });
   }
+});
+
+// ---------------------------------------------------------------------------
+// Review fixes
+// ---------------------------------------------------------------------------
+
+test("review H2: a cross-set cycle proposes AND generates — the cut edge is a distinct stub, so generate sees no cycle", async () => {
+  const work = mkdtempSync(path.join(tmpdir(), "closure-cycle-"));
+  try {
+    const box = (w: number, h: number) => ({ x: 0, y: 0, width: w, height: h });
+    const cInst = (name: string, componentId: string) =>
+      ({
+        id: `i-${name}`,
+        name,
+        type: "INSTANCE",
+        componentId,
+        absoluteBoundingBox: box(20, 20),
+        children: [],
+      }) as RestNode;
+    // The reviewer's probe (probe-cycle.mts): Holder's Md variant instances
+    // Chip; Chip instances Holder's Sm variant — legal in Figma.
+    const H = {
+      document: {
+        id: "1:0",
+        name: "Holder",
+        type: "COMPONENT_SET",
+        componentPropertyDefinitions: {
+          Size: {
+            type: "VARIANT",
+            defaultValue: "Md",
+            variantOptions: ["Md", "Sm"],
+          },
+        },
+        children: [
+          {
+            id: "1:1",
+            name: "Size=Md",
+            type: "COMPONENT",
+            layoutMode: "HORIZONTAL",
+            absoluteBoundingBox: box(40, 20),
+            children: [cInst("chip", "2:1")],
+          },
+          {
+            id: "1:2",
+            name: "Size=Sm",
+            type: "COMPONENT",
+            layoutMode: "HORIZONTAL",
+            absoluteBoundingBox: box(20, 20),
+            children: [],
+          },
+        ],
+      } as RestNode,
+      components: { "2:1": { name: "Tone=A", componentSetId: "2:0" } },
+      componentSets: { "2:0": { name: "Chip" } },
+    };
+    const C = {
+      document: {
+        id: "2:0",
+        name: "Chip",
+        type: "COMPONENT_SET",
+        componentPropertyDefinitions: {
+          Tone: { type: "VARIANT", defaultValue: "A", variantOptions: ["A"] },
+        },
+        children: [
+          {
+            id: "2:1",
+            name: "Tone=A",
+            type: "COMPONENT",
+            layoutMode: "HORIZONTAL",
+            absoluteBoundingBox: box(20, 20),
+            children: [cInst("holder", "1:2")],
+          },
+        ],
+      } as RestNode,
+      components: { "1:2": { name: "Size=Sm", componentSetId: "1:0" } },
+      componentSets: { "1:0": { name: "Holder" } },
+    };
+    const f = await followInstances(
+      { name: "Kit", nodes: { "1:0": H } },
+      ["1:0"],
+      async (ids) => ({
+        name: "Kit",
+        nodes: Object.fromEntries(
+          ids.map((id) => [id, id === "2:0" ? C : null]),
+        ),
+      }),
+    );
+    writeFileSync(
+      path.join(work, "dump.json"),
+      JSON.stringify(
+        mapRestToDump(f.response, { closure: f.closure, fileKey: "k" }).dump,
+      ),
+    );
+    const tokens = TOKENS;
+    const out = path.join(work, "p");
+    const prop = spawnSync(
+      process.execPath,
+      [
+        "--import",
+        "tsx",
+        path.join(ROOT, "extract/figma/propose.ts"),
+        path.join(work, "dump.json"),
+        "--out",
+        out,
+        "--tokens",
+        tokens,
+      ],
+      { cwd: ROOT, encoding: "utf8" },
+    );
+    assert.equal(prop.status, 0, prop.stderr);
+    const files = readdirSync(out)
+      .filter((x) => x.endsWith(".contract.proposed.json"))
+      .sort();
+    assert.deepEqual(files, [
+      "chip.contract.proposed.json",
+      "ds-holder-cycle-cut.stub.contract.proposed.json",
+      "holder.contract.proposed.json",
+    ]);
+    const gen = spawnSync(
+      process.execPath,
+      [
+        "--import",
+        "tsx",
+        path.join(ROOT, "packages/cli/src/cli.ts"),
+        "generate",
+        ...files.map((x) => path.join(out, x)),
+        "--out",
+        path.join(work, "gen"),
+        "--tokens",
+        `${tokens},${path.join(out, "minted.dtcg.json")}`,
+      ],
+      { cwd: ROOT, encoding: "utf8" },
+    );
+    assert.equal(gen.status, 0, gen.stdout + gen.stderr);
+    assert.doesNotMatch(
+      gen.stdout + gen.stderr,
+      /Circular contract dependency/,
+    );
+    assert.ok(existsSync(path.join(work, "gen", "Holder", "Holder.tsx")));
+  } finally {
+    rmSync(work, { recursive: true, force: true });
+  }
+});
+
+test("review C1: the requested contract is picked by its anchor node id — never by position — and refused by name when absent or ambiguous", () => {
+  const c = (file: string, nodeId?: string) => ({
+    file,
+    contract: {
+      id: file,
+      bindings: { figma: { anchors: nodeId ? { nodeId } : {} } },
+    },
+  });
+  // Altitude Tabs' folder: alphabetically, button sorts first.
+  const folder = [
+    c("button.contract.proposed.json", "3538:36730"),
+    c("ds-tab-2.stub.contract.proposed.json", "3558:61955"),
+    c("icon.contract.proposed.json", "3598:836"),
+    c("tabs.contract.proposed.json", "3558:61955"),
+  ];
+  assert.deepEqual(pickRequestedContract(folder, "3558:61955"), {
+    file: "tabs.contract.proposed.json",
+  });
+  assert.match(
+    (pickRequestedContract(folder, "9:9") as { refusal: string }).refusal,
+    /^requested-contract-not-found:9:9/,
+  );
+  assert.match(
+    (
+      pickRequestedContract(
+        [...folder, c("tabs-2.contract.proposed.json", "3558:61955")],
+        "3558:61955",
+      ) as { refusal: string }
+    ).refusal,
+    /^requested-contract-ambiguous:3558:61955 — 2 /,
+  );
+});
+
+test("review (low): an integer-like set name is never followed — JavaScript would reorder it ahead of its dependencies", async () => {
+  const P = entry(set("1:0", "P", [[inst("x", "2:1"), inst("y", "3:1")]]), {
+    "2:1": { name: "x", componentSetId: "2:0" },
+    "3:1": { name: "y", componentSetId: "3:0" },
+  });
+  const { closure } = await followInstances(
+    resp("1:0", P),
+    ["1:0"],
+    batches({
+      "2:0": entry(set("2:0", "42", [[]])),
+      "3:0": entry(set("3:0", "Fine", [[]])),
+    }),
+  );
+  assert.deepEqual(
+    closure.pulled.map((p) => p.name),
+    ["Fine"],
+  );
+  assert.deepEqual(
+    closure.unresolved.map((u) => [u.targetId, u.reason]),
+    [["2:0", "set-name-integer-like"]],
+  );
+  // A REQUESTED set named like an index follows nothing, by name.
+  const N = entry(set("1:0", "7", [[inst("y", "3:1")]]), {
+    "3:1": { name: "y", componentSetId: "3:0" },
+  });
+  const calls: string[][] = [];
+  const r = await followInstances(
+    resp("1:0", N),
+    ["1:0"],
+    batches({ "3:0": entry(set("3:0", "Fine", [[]])) }, calls),
+  );
+  assert.deepEqual(calls, []);
+  assert.deepEqual(
+    r.closure.unresolved.map((u) => [u.targetId, u.reason]),
+    [["3:0", "set-name-integer-like"]],
+  );
+});
+
+test("review M4: a 429 waits what Retry-After says up to the cap, announced each time; a longer wait REFUSES by name", async () => {
+  const answers = (retryAfter: string, then: "ok" | "429") => {
+    let n = 0;
+    return (async () => {
+      n += 1;
+      const limited = n === 1 || then === "429";
+      const body = limited ? "rate limited" : JSON.stringify({ nodes: {} });
+      return {
+        ok: !limited,
+        status: limited ? 429 : 200,
+        headers: {
+          get: (h: string) =>
+            h.toLowerCase() === "retry-after" ? retryAfter : null,
+        },
+        json: async () => JSON.parse(body),
+        text: async () => body,
+      };
+    }) as FetchLike;
+  };
+  const waits: number[] = [];
+  const announced: string[] = [];
+  const ok = await fetchNodes("k", ["1:0"], "t", {
+    fetchImpl: answers("2", "ok"),
+    sleep: async (ms) => void waits.push(ms),
+    onRateLimited: (i) => announced.push(`${i.attempt}:${i.waitSeconds}`),
+  });
+  assert.deepEqual(ok, { nodes: {} });
+  assert.deepEqual(waits, [2000]);
+  assert.deepEqual(announced, ["1:2"]);
+  await assert.rejects(
+    fetchNodes("k", ["1:0"], "t", {
+      fetchImpl: answers(String(MAX_RETRY_AFTER_SECONDS + 1), "ok"),
+      sleep: async (ms) => void waits.push(ms),
+      onRateLimited: () => {},
+    }),
+    /rate-limit-wait-exceeds-cap: Retry-After 61 s is over the 60 s/,
+  );
+  assert.deepEqual(waits, [2000]); // never slept on the refused one
+  // Every retry 429s: three announced waits, then the 429 throws as an HTTP error.
+  const many: string[] = [];
+  await assert.rejects(
+    fetchNodes("k", ["1:0"], "t", {
+      fetchImpl: answers("1", "429"),
+      sleep: async () => {},
+      onRateLimited: (i) => many.push(String(i.attempt)),
+    }),
+    /Figma API 429/,
+  );
+  assert.deepEqual(many, ["1", "2", "3"]);
 });

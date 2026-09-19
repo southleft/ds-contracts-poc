@@ -109,7 +109,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import { closureDegradations, type DumpClosure } from './closure.js';
+import { closureDegradations, cycleCutInstanceName, type DumpClosure } from './closure.js';
 import type { DumpDegradation, DumpEffect, DumpFile, DumpFixedSwap, DumpGradient, DumpGridTrack, DumpHostOverride, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpReaction, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
 
 // ---------------------------------------------------------------------------
@@ -599,6 +599,9 @@ interface Ctx {
    *  here; an id outside the document stays an id). */
   nodeNameById: Map<string, string>;
   report: MapReport;
+  /** Dependency closure (docs/23 §D.43): target set ids whose instances in
+   *  THIS set sit on a cut cycle edge — spelled as a distinct stub. */
+  cycleCutTargets?: Map<string, string>;
 }
 
 /** The per-binding consequence, naming the REAL cause (Phase 2 exam: the
@@ -1661,7 +1664,14 @@ function mapNode(
   if (node.type === 'INSTANCE') {
     const componentId = node.componentId;
     const component = componentId ? ctx.components.get(componentId) : undefined;
-    if (component) {
+    const cutTo = component ? ctx.cycleCutTargets?.get(component.componentSetId ?? componentId!) : undefined;
+    if (component && cutTo !== undefined) {
+      // A cut cycle edge (closure.ts): a distinct name and no identity keys,
+      // so the proposer stubs it under its OWN id and never links it to the
+      // real contract that references this set back. The closure record's
+      // `cycle-cut` row names it.
+      out.instanceOf = cycleCutInstanceName(cutTo);
+    } else if (component) {
       const owningSet = component.componentSetId ? ctx.componentSets.get(component.componentSetId) : undefined;
       out.instanceOf = owningSet?.name ?? component.name;
       // dump v1.5: rename-safe identity — the main component's publish key
@@ -1977,6 +1987,13 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
       nodeNameById,
       report,
+      ...(options.closure?.cycles.some((c) => c.fromNodeId === doc.id)
+        ? {
+            cycleCutTargets: new Map(
+              options.closure.cycles.filter((c) => c.fromNodeId === doc.id).map((c) => [c.toNodeId, c.to] as const),
+            ),
+          }
+        : {}),
     };
 
     const variants: RestDumpNode[] =

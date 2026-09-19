@@ -21,6 +21,12 @@
  *   unreadable                the /nodes request for the target failed
  *   cap-exceeded              following it would pull more than
  *                             CLOSURE_SET_CAP sets
+ *   set-name-integer-like     the set (or the requested set) is named like an
+ *                             array index ("1", "42"): the dump is a JSON
+ *                             object keyed by set name and JavaScript orders
+ *                             such keys ahead of every other, which would
+ *                             break the dependencies-first order below
+ *   cycle-cut                 the reference closes a cycle (below)
  *
  * WHICH instances. The INSTANCE nodes the mapper itself maps — every INSTANCE
  * inside a variant that is NOT inside another INSTANCE. The mapper never
@@ -34,10 +40,14 @@
  * proposer session-links a set only to siblings proposed EARLIER in the batch
  * (core/propose-figma.ts proposeBatchFromDump). Fetch rounds visit targets in
  * sorted id order, so the dump is byte-stable across runs. A cycle (A → B →
- * A) is cut where the walk re-enters a set already on its stack and named in
- * `cycles` as [from, to]: `from` is proposed first, so its reference to `to`
- * is an auto-proposed stub (the propose CLI skips that stub file when `to`'s
- * real contract claims the same id).
+ * A, legal in Figma through different variants) is cut where the walk
+ * re-enters a set already on its stack, recorded in `cycles` as
+ * { from, to, fromNodeId, toNodeId }. `from` is proposed first; each of its
+ * instances of `to` is listed under `unresolved` as `cycle-cut`, and the
+ * mapper spells it `instanceOf: "<to> (cycle cut)"` with no component keys, so
+ * the proposer gives it a stub with its OWN id (`<prefix>.<to>-cycle-cut`)
+ * instead of `to`'s real id — `generate` then sees no cycle (review H2: with
+ * the real id it refused "Circular contract dependency").
  *
  * Browser-pure: no node builtins; the fetch is injected.
  */
@@ -58,7 +68,24 @@ export type ClosureUnresolvedReason =
   | "utility-slot-set"
   | "set-name-collision"
   | "unreadable"
-  | "cap-exceeded";
+  | "cap-exceeded"
+  | "set-name-integer-like"
+  | "cycle-cut";
+
+/** A cut back-edge: `from`'s instances of `to` become a distinct stub. */
+export interface ClosureCycleCut {
+  from: string;
+  to: string;
+  fromNodeId: string;
+  toNodeId: string;
+}
+
+/** What the mapper writes as `instanceOf` for an instance on a cut edge. */
+export const cycleCutInstanceName = (to: string): string => `${to} (cycle cut)`;
+
+/** A set name JavaScript would order ahead of every other object key. */
+export const integerLikeSetName = (name: string): boolean =>
+  /^(0|[1-9]\d*)$/.test(name) && Number(name) < 4294967295;
 
 export interface ClosureSet {
   nodeId: string;
@@ -94,8 +121,8 @@ export interface DumpClosure {
   requested: ClosureSet[];
   pulled: ClosurePulledSet[];
   unresolved: ClosureUnresolved[];
-  /** Each cut back-edge as [from set name, to set name]. */
-  cycles: Array<[string, string]>;
+  /** Each cut back-edge (see `ClosureCycleCut`). */
+  cycles: ClosureCycleCut[];
 }
 
 type Entry = NonNullable<RestNodesResponse["nodes"][string]>;
@@ -198,6 +225,15 @@ export async function followInstances(
     unresolved.set(targetId, rec);
   };
 
+  // Review (low): a dump is a JSON object keyed by set name. An integer-like
+  // name is ordered ahead of every other key by JavaScript, so the
+  // dependencies-first order cannot hold — refused by name, never reordered.
+  const integerLikeRequested = requested.find((r) =>
+    integerLikeSetName(r.name),
+  );
+  const integerDetail = (name: string) =>
+    `set "${name}" is named like an array index — the dump is a JSON object keyed by set name and JavaScript orders such a key ahead of every other, so the dependencies-first order the proposer needs cannot hold; not followed (rename the set, or import it by its own node-id)`;
+
   let frontier = [...requested.map((r) => r.nodeId)];
   let round = 0;
   let pulledCount = 0;
@@ -264,6 +300,12 @@ export async function followInstances(
           }
           continue;
         }
+        if (integerLikeRequested && !failed.has(targetId)) {
+          failed.set(targetId, {
+            reason: "set-name-integer-like",
+            detail: integerDetail(integerLikeRequested.name),
+          });
+        }
         const known = failed.get(targetId);
         if (known) {
           noteUnresolved(
@@ -329,6 +371,9 @@ export async function followInstances(
         } else if (entry.document.name === "Slot") {
           reason = "utility-slot-set";
           detail = `${id} is the utility set "Slot", which the mapper never maps`;
+        } else if (integerLikeSetName(entry.document.name)) {
+          reason = "set-name-integer-like";
+          detail = `${id}: ${integerDetail(entry.document.name)}`;
         } else if (nameOwner.has(entry.document.name)) {
           reason = "set-name-collision";
           detail = `${id} "${entry.document.name}" has the same name as set ${nameOwner.get(entry.document.name)} already in this dump (the dump is keyed by set name)`;
@@ -368,16 +413,42 @@ export async function followInstances(
   const order: string[] = [];
   const done = new Set<string>();
   const onStack = new Set<string>();
-  const cycles: Array<[string, string]> = [];
+  const cycles: ClosureCycleCut[] = [];
   const visit = (id: string) => {
     if (done.has(id)) return;
     onStack.add(id);
     for (const target of [...(edges.get(id) ?? [])].sort(byString)) {
       if (onStack.has(target)) {
-        cycles.push([
-          entries.get(id)!.document.name,
-          entries.get(target)!.document.name,
-        ]);
+        const cut: ClosureCycleCut = {
+          from: entries.get(id)!.document.name,
+          to: entries.get(target)!.document.name,
+          fromNodeId: id,
+          toNodeId: target,
+        };
+        cycles.push(cut);
+        // Every instance of `to` inside `from` is a distinct cycle-cut stub.
+        const fromEntry = entries.get(id)!;
+        for (const ref of mappedInstanceRefs(fromEntry.document)) {
+          const meta = ref.componentId
+            ? fromEntry.components?.[ref.componentId]
+            : undefined;
+          if (!meta || (meta.componentSetId ?? ref.componentId) !== target)
+            continue;
+          const key = `${target}@${id}`;
+          const rec = unresolved.get(key) ?? {
+            targetId: target,
+            componentIds: [],
+            name: cut.to,
+            reason: "cycle-cut" as const,
+            detail: `"${cut.from}" → "${cut.to}" closes a cycle ("${cut.to}" also instances "${cut.from}"); "${cut.from}" is proposed first and this instance becomes the distinct stub "${cycleCutInstanceName(cut.to)}", so generate sees no cycle`,
+            referencedFrom: [],
+          };
+          if (!rec.componentIds.includes(ref.componentId!))
+            rec.componentIds.push(ref.componentId!);
+          if (!rec.referencedFrom.includes(ref.nodePath))
+            rec.referencedFrom.push(ref.nodePath);
+          unresolved.set(key, rec);
+        }
         continue;
       }
       visit(target);
@@ -416,7 +487,11 @@ export async function followInstances(
         componentIds: [...u.componentIds].sort(byString),
         referencedFrom: [...u.referencedFrom].sort(byString),
       }))
-      .sort((a, b) => byString(a.targetId, b.targetId)),
+      .sort(
+        (a, b) =>
+          byString(a.targetId, b.targetId) ||
+          byString(a.referencedFrom[0] ?? "", b.referencedFrom[0] ?? ""),
+      ),
     cycles,
   };
   return {
@@ -508,4 +583,33 @@ export function dumpClosure(dump: {
     (c as DumpClosure).rule === "follow-instances"
     ? (c as DumpClosure)
     : undefined;
+}
+
+/**
+ * Review C1: with a closure a propose folder holds the REQUESTED set's
+ * contract AND every followed child's, so "the" contract is never the first
+ * non-stub file (alphabetically, Altitude Tabs' folder starts with
+ * `button.contract.proposed.json`). The requested one is the contract whose
+ * `bindings.figma.anchors.nodeId` is the requested node id — exactly one, or
+ * a refusal by name.
+ */
+export function pickRequestedContract(
+  candidates: Array<{ file: string; contract: unknown }>,
+  nodeId: string,
+): { file: string } | { refusal: string } {
+  const anchorOf = (c: unknown): unknown =>
+    (c as { bindings?: { figma?: { anchors?: { nodeId?: unknown } } } })
+      ?.bindings?.figma?.anchors?.nodeId;
+  const hits = candidates.filter(
+    (c) =>
+      !/\.stub\.contract(\.proposed)?\.json$/.test(c.file) &&
+      anchorOf(c.contract) === nodeId,
+  );
+  if (hits.length === 1) return { file: hits[0].file };
+  return {
+    refusal:
+      hits.length === 0
+        ? `requested-contract-not-found:${nodeId} — no proposed contract is anchored to the requested node (bindings.figma.anchors.nodeId); ${candidates.length} file(s) considered, none picked by position`
+        : `requested-contract-ambiguous:${nodeId} — ${hits.length} proposed contracts are anchored to the requested node (${hits.map((h) => h.file).join(", ")})`,
+  };
 }
