@@ -71,6 +71,8 @@ export {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  drawsStrokeRing,
+  lowerStrokeRings,
   enumProps,
   holderDeclaresPosition,
   isArrayType,

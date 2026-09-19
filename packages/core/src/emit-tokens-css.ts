@@ -248,11 +248,22 @@ export function emitTokensCss(layers: TokensCssLayer[], opts: TokensCssOptions =
 const VAR_REF_REQUIRED = /var\(\s*(--[a-zA-Z0-9_-]+)\s*\)/g;
 const VAR_REF_ANY = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
 
-/** Every `var(--x)` name the stylesheet REQUIRES — referenced with no fallback (sorted, unique). */
+/** Every `var(--x)` name the stylesheet REQUIRES FROM tokens.css — referenced
+ *  with no fallback (sorted, unique).
+ *
+ *  An EMITTER-PRIVATE variable the sheet declares ITSELF is not one of them.
+ *  `strokesIncludedInLayout: false` composes its inset ring from `--_stroke-*`
+ *  variables (anatomy.ts lowerStrokeRings), which the part's own base rule
+ *  always states; demanding them of tokens.css refused the very contract the
+ *  lowering exists for. The exemption is as narrow as the fact: the name must
+ *  start `--_` — an underscore is refused in a token path (TokenRefSchema), so
+ *  no token can ever be spelled that way — AND the same sheet must declare it.
+ *  A `--_x` that is only ever referenced is still missing, and still named. */
 export function referencedCssVars(cssText: string): string[] {
   const names = new Set<string>();
   for (const m of cssText.matchAll(VAR_REF_REQUIRED)) names.add(m[1]!);
-  return [...names].sort();
+  const declaredHere = (name: string) => new RegExp(`(^|[\\s;{])${name}\\s*:`).test(cssText);
+  return [...names].filter((name) => !(name.startsWith('--_') && declaredHere(name))).sort();
 }
 
 /** Every `var(--x…` name mentioned at all, fallback-carrying or not (sorted, unique). */

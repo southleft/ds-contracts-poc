@@ -34,6 +34,7 @@ import {
   isStructural,
   JUSTIFY_CSS,
   layoutOverrideDecls,
+  lowerStrokeRings,
   OVERLAY_CSS,
   placeholdersIn,
   rootElementsOf,
@@ -84,7 +85,13 @@ function splitDecl(decl: string): [string, string] {
   return [decl.slice(0, i), decl.slice(i + 2)];
 }
 
-export function generateCss(contract: Contract, tokenInventory: Set<string>, errors: string[]): string {
+export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[]): string {
+  // `strokesIncludedInLayout: false` — a stroke that takes no layout space is
+  // drawn as an inset box-shadow ring, not a border (anatomy.ts
+  // lowerStrokeRings, which says why it is a rewrite BEFORE the rules are
+  // written and not a guard at each of their push sites). The same object
+  // comes back when no part is flagged.
+  const contract = lowerStrokeRings(input);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const lines: string[] = [
     `/* GENERATED FILE — DO NOT EDIT.`,

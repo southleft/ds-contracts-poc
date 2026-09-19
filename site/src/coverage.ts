@@ -304,6 +304,8 @@ reg("layout", "placement", [
 ]);
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
 reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
+// dump v1.35: a CAPTURED canvas fact — the part's stroke takes no layout space.
+reg("layout", "strokes-included-in-layout", ["part.strokesIncludedInLayout"]);
 reg("layout", "layout-by-prop", [
   "part.layoutByProp",
   "layoutByProp.prop",

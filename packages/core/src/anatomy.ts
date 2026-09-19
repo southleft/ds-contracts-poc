@@ -256,6 +256,146 @@ export function defaultFontFamilyParts(contract: Contract): Set<Part> {
 }
 export const DEFAULT_FONT_FAMILY_DECL = `font-family: ${DEFAULT_FONT_STACK}`;
 
+/** A STROKE THAT TAKES NO LAYOUT SPACE — `Part.strokesIncludedInLayout: false`
+ *  (dump v1.35), on every STYLESHEET surface.
+ *
+ *  A designer's Figma stroke paints over the padding and leaves the box at
+ *  content + padding; a CSS `border` grows the box. Measured on the 72-variant
+ *  CBDS Badge: all 24 outline variants 4px too wide, and the 16px-high small
+ *  one 20px high (8+8 padding plus a 2px border cannot fit a 16px border box
+ *  at all — which is also why "padding minus border" was never an option, on
+ *  top of destroying the padding's variable binding).
+ *
+ *  CSS has no property that says "border, but take no space". What it has is
+ *  an INSET `box-shadow` with zero blur: painted inside the border box, over
+ *  the background and under the content, following `border-radius`, taking no
+ *  space. (`outline` + a negative offset draws the same ring and is NOT used:
+ *  it is the focus ring's property, and a `:focus-visible` rule would erase
+ *  the border.) So for a flagged part the SAME `border-width` / `border-color`
+ *  channels are drawn as that ring.
+ *
+ *  HOW, AND WHY IT IS A CONTRACT REWRITE AND NOT A GUARD AT EACH PUSH SITE.
+ *  Width, colour and a real shadow each vary on their OWN axis — width by
+ *  size, colour by type × style, shadow by state — and `box-shadow` is one
+ *  property, so no rule can state the ring without knowing the other two.
+ *  Custom properties are the CSS spelling of exactly that: every holder keeps
+ *  saying what it said, under a private name (`border-width: X` →
+ *  `--_stroke-width: X`, wherever it sits: tokens, tokensByProp, literals,
+ *  literalsByProp, states, statesByProp), and the part's BASE rule composes
+ *  them once. The emitters write `<channel>: <value>` generically at some
+ *  forty sites across two files; renaming the channel before they run reaches
+ *  every one of them, and none can route around it (the finishStylesheet
+ *  reasoning, one step earlier). With the width gone from the maps, nothing
+ *  synthesises `border-style: solid` for the part, and a root falls to its
+ *  ordinary `border: 0` reset — which a `<button>` root needs.
+ *
+ *  · The names carry an UNDERSCORE, which TokenRefSchema refuses in a token
+ *    path, so no token's `var(--…)` can ever collide with them.
+ *  · Custom properties INHERIT. The base rule therefore always states every
+ *    variable the ring reads (`0px` / `currentColor` — CSS's own completion of
+ *    a colourless border — / a no-op shadow) unless the part's own base
+ *    channel already does, so a flagged part nested in another flagged part,
+ *    or a flagged component inside one, never draws its ancestor's stroke.
+ *  · A real `box-shadow` on the part rides `--_stroke-shadow` and is composed
+ *    AFTER the ring, so both survive in every state. `none` is not a list
+ *    item, so a literal `none` becomes the no-op layer `0 0 #0000`.
+ *    NAMED LIMIT: a shadow TOKEN that resolves to `none` cannot be seen here
+ *    and would invalidate the whole declaration in that state.
+ *  · Per-side weights (`border-<side>-width`, dump v1.34) draw one layer per
+ *    side; a uniform width on such a part feeds all four. Layers overlap at
+ *    the corners, which a translucent colour would double (NAMED LIMIT).
+ *
+ *  `outline-*` channels are untouched: an outline never takes layout space.
+ *  Returns the SAME object when no part is flagged — every other contract
+ *  keeps its bytes. validateContract refuses what has no ring spelling
+ *  (per-side colours, a declared or conditional border style). */
+const STROKE_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+const STROKE_WIDTH_VAR = '--_stroke-width';
+const STROKE_COLOR_VAR = '--_stroke-color';
+const STROKE_SHADOW_VAR = '--_stroke-shadow';
+const strokeSideVar = (side: string) => `--_stroke-${side}-width`;
+const NO_SHADOW = '0 0 #0000';
+/** Every channel → value map a part can carry a stroke or shadow channel in. */
+function strokeHolderMaps(part: Part): Array<Record<string, string>> {
+  const tbp = part.tokensByProp ? (Array.isArray(part.tokensByProp) ? part.tokensByProp : [part.tokensByProp]) : [];
+  return [
+    part.tokens, part.literals, ...Object.values(part.states ?? {}),
+    ...tbp.flatMap((e) => Object.values(e.map)),
+    ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+    ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
+  ].filter((m): m is Record<string, string> => m !== undefined);
+}
+/** The `border-*` channels `strokesIncludedInLayout: false` redraws. */
+export const isStrokeRingChannel = (channel: string): boolean =>
+  channel === 'border-width' || channel === 'border-color' || STROKE_SIDES.some((s) => channel === `border-${s}-width`);
+/** Does this part draw ANY stroke (border or outline vocabulary, any holder)?
+ *  validateContract: the flag qualifies a stroke and nothing else. */
+export const partCarriesStroke = (part: Part): boolean =>
+  strokeHolderMaps(part).some((m) => Object.keys(m).some((c) => /^(border|outline)(-(top|right|bottom|left))?-(width|color)$/.test(c)));
+/** Is this part's border REDRAWN as a ring? The flag, plus a `border-*`
+ *  channel for it to qualify (an outline-only part has nothing to redraw). */
+export const drawsStrokeRing = (part: Part): boolean =>
+  part.strokesIncludedInLayout === false && strokeHolderMaps(part).some((m) => Object.keys(m).some(isStrokeRingChannel));
+export function lowerStrokeRings(contract: Contract): Contract {
+  let touched = false;
+  const lower = (part: Part): Part => {
+    const parts = part.parts && Object.fromEntries(Object.entries(part.parts).map(([n, p]) => [n, lower(p)]));
+    const own: Part = parts ? { ...part, parts } : part;
+    if (!drawsStrokeRing(part)) return own;
+    const maps = strokeHolderMaps(part);
+    touched = true;
+    const perSide = maps.some((m) => STROKE_SIDES.some((s) => `border-${s}-width` in m));
+    const hasShadow = maps.some((m) => 'box-shadow' in m);
+    const rename = (m: Record<string, string>): Record<string, string> => {
+      const out: Record<string, string> = {};
+      for (const [channel, value] of Object.entries(m)) {
+        const side = STROKE_SIDES.find((s) => channel === `border-${s}-width`);
+        if (channel === 'border-width' && perSide) for (const s of STROKE_SIDES) out[strokeSideVar(s)] = value;
+        else if (channel === 'border-width') out[STROKE_WIDTH_VAR] = value;
+        else if (side) out[strokeSideVar(side)] = value;
+        else if (channel === 'border-color') out[STROKE_COLOR_VAR] = value;
+        else if (channel === 'box-shadow') out[STROKE_SHADOW_VAR] = value.trim() === 'none' ? NO_SHADOW : value;
+        else out[channel] = value;
+      }
+      return out;
+    };
+    const renameIn = <T extends { map: Record<string, Record<string, string>> }>(e: T): T =>
+      ({ ...e, map: Object.fromEntries(Object.entries(e.map).map(([v, m]) => [v, rename(m)])) });
+    const tokens = part.tokens && rename(part.tokens);
+    const literals = rename(part.literals ?? {});
+    // A base channel states its variable in the base rule only when it is a
+    // literal or a placeholder-free token — a substituted ref lands in the
+    // per-value rules, and the base rule still owes the default.
+    const stated = (v: string) => v in literals || (tokens?.[v] !== undefined && placeholdersIn(stripBraces(tokens[v])).length === 0);
+    const w = (v: string) => `var(${v})`;
+    const c = w(STROKE_COLOR_VAR);
+    for (const v of perSide ? STROKE_SIDES.map(strokeSideVar) : [STROKE_WIDTH_VAR]) if (!stated(v)) literals[v] = '0px';
+    if (!stated(STROKE_COLOR_VAR)) literals[STROKE_COLOR_VAR] = 'currentColor';
+    if (hasShadow && !stated(STROKE_SHADOW_VAR)) literals[STROKE_SHADOW_VAR] = NO_SHADOW;
+    const layers = perSide
+      ? [
+          `inset 0 ${w(strokeSideVar('top'))} 0 0 ${c}`,
+          `inset 0 calc(-1 * ${w(strokeSideVar('bottom'))}) 0 0 ${c}`,
+          `inset ${w(strokeSideVar('left'))} 0 0 0 ${c}`,
+          `inset calc(-1 * ${w(strokeSideVar('right'))}) 0 0 0 ${c}`,
+        ]
+      : [`inset 0 0 0 ${w(STROKE_WIDTH_VAR)} ${c}`];
+    literals['box-shadow'] = [...layers, ...(hasShadow ? [w(STROKE_SHADOW_VAR)] : [])].join(', ');
+    const tbp = part.tokensByProp;
+    return {
+      ...own,
+      ...(tokens ? { tokens } : {}),
+      literals,
+      ...(tbp ? { tokensByProp: Array.isArray(tbp) ? tbp.map(renameIn) : renameIn(tbp) } : {}),
+      ...(part.literalsByProp ? { literalsByProp: part.literalsByProp.map(renameIn) as Part['literalsByProp'] } : {}),
+      ...(part.states ? { states: Object.fromEntries(Object.entries(part.states).map(([st, m]) => [st, rename(m)])) } : {}),
+      ...(part.statesByProp ? { statesByProp: part.statesByProp.map(renameIn) as Part['statesByProp'] } : {}),
+    };
+  };
+  const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([n, p]) => [n, lower(p)]));
+  return touched ? { ...contract, anatomy } : contract;
+}
+
 export const isStructural = (part: Part) =>
   Boolean(part.parts || part.slot || part.layout || part.layoutByProp) &&
   !part.content &&

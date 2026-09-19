@@ -65,6 +65,7 @@ import {
   UA_MARGIN_ELEMENTS,
   validateContract,
   defaultFontFamilyParts,
+  drawsStrokeRing,
   ELEMENT_META,
   holderDeclaresPosition,
 } from './emit-react.js';
@@ -124,6 +125,34 @@ const isStructural = (part: Part) =>
   !part.component;
 
 type StyleRecord = Record<string, string | number>;
+
+/** `strokesIncludedInLayout: false` ON THE INLINE SURFACE — the stroke is an
+ *  inset box-shadow ring that takes no layout space (packages/core anatomy.ts
+ *  lowerStrokeRings says why a ring and why not an outline). The stylesheet
+ *  surfaces compose the ring from custom properties; this one cannot — a
+ *  `--x` key is not a CSSProperties key, and its whole claim is resolved
+ *  literals — so the SAME composition happens at render time, over the style
+ *  object the base, per-variant and disabled records have already merged into:
+ *  width, colour and a real shadow each arrive from their own record, and only
+ *  the merge knows all three. The consumer's own `style` is spread AFTER it
+ *  and is never rewritten. Emitted only when a part is flagged. */
+const STROKE_RING_RUNTIME = `/** strokesIncludedInLayout: false — this part's stroke takes no layout space, so it
+ *  is painted as an inset ring (over the padding, following the radius) instead
+ *  of a border; a real box-shadow is kept after it. */
+const strokeRing = ({
+  border: _border, borderStyle: _style, borderTopStyle: _top, borderRightStyle: _right, borderBottomStyle: _bottom, borderLeftStyle: _left,
+  borderWidth: w = 0, borderColor: c = 'currentColor',
+  borderTopWidth: t = w, borderRightWidth: r = w, borderBottomWidth: b = w, borderLeftWidth: l = w,
+  boxShadow, ...rest
+}: CSSProperties): CSSProperties => {
+  const px = (v: string | number) => (typeof v === 'number' ? \`\${v}px\` : v);
+  const ring = t === r && r === b && b === l
+    ? [\`inset 0 0 0 \${px(t)} \${c}\`]
+    : [\`inset 0 \${px(t)} 0 0 \${c}\`, \`inset 0 calc(-1 * \${px(b)}) 0 0 \${c}\`, \`inset \${px(l)} 0 0 0 \${c}\`, \`inset calc(-1 * \${px(r)}) 0 0 0 \${c}\`];
+  return { ...rest, border: 0, boxShadow: [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
+};
+
+`;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
   validateReactInitialBindings(contract);
@@ -215,6 +244,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     ...bools.map((p) => [p.name, ['true', 'false']] as [string, readonly string[]]),
   ]);
   const usedAnimations = new Set<string>();
+  /** Part names whose border is redrawn as a ring (STROKE_RING_RUNTIME). */
+  const strokeRingParts = new Set<string>();
 
   /** Slot-wrapper floor predicate (live-gauntlet class ⑤) — see the root
    *  max-width handling below; shared with the tokensByProp per-value pass. */
@@ -228,6 +259,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // Contract dimensions are outer box dimensions, as on the CSS-module
     // and native surfaces. Do not depend on the consumer's global reset.
     const s: StyleRecord = { boxSizing: 'border-box' };
+    if (drawsStrokeRing(part)) strokeRingParts.add(partName);
     // A2 grid (G2/G4): this part's cell under its grid parent — resolved
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).
@@ -682,6 +714,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (isRoot && Object.keys(disabledStyle).length > 0) {
       pieces.push(`...(${codePropOf('disabled')} ? DISABLED_STYLE : {})`);
     }
+    // A flagged part's merged record is redrawn as a ring; the consumer's own
+    // `style` stays outside it (STROKE_RING_RUNTIME).
+    if (strokeRingParts.has(partName)) {
+      const ring = `strokeRing({ ${pieces.join(', ')} })`;
+      return isRoot ? `{{ ...${ring}, ...style }}` : `{${ring}}`;
+    }
     if (isRoot) pieces.push('...style');
     return `{{ ${pieces.join(', ')} }}`;
   };
@@ -1083,7 +1121,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
@@ -1119,7 +1157,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};

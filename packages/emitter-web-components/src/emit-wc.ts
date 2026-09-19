@@ -79,6 +79,7 @@ import {
   enumProps,
   finishStylesheet,
   generateCss,
+  lowerStrokeRings,
   isArrayType,
   isEnum,
   kebab,
@@ -229,7 +230,11 @@ function layoutDecls(part: Part): string[] {
   return d;
 }
 
-export function shadowCss(contract: Contract): string {
+export function shadowCss(input: Contract): string {
+  // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
+  // that takes no layout space — core lowerStrokeRings, the same rewrite
+  // generateCss applies, so the two sheets cannot disagree about a border.
+  const contract = lowerStrokeRings(input);
   const k = kebab(contract.name);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
