@@ -37,6 +37,9 @@ import {
 import { isTourId, TOURS, type StepId, type TourId } from '../engine/tours';
 import { FlowPanel, type FlowView } from '../components/FlowPanel';
 import type { DumpSet } from '../../../extract/figma/types.js';
+import { dumpClosure } from '../../../extract/figma/rest/closure.js';
+import { recordFigmaClosure } from '../engine/figma-import-workspace';
+import type { RecordImportResult } from '../engine/workspace';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
   capturedTokensFromDump,
@@ -1127,7 +1130,7 @@ export function Playground() {
     ];
   };
 
-  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
+  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource, saved?: RecordImportResult) => {
     const contractText = pretty(proposal.contract);
     const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
     const minted: MintedTokenLayer | null =
@@ -1162,7 +1165,7 @@ export function Playground() {
         : [];
     // A successful design import lands in the session workspace, receipts
     // and all — re-applying the same set refreshes its entry.
-    const recorded = recordImport({
+    const recorded = saved ?? recordImport({
       name: proposal.setName,
       contractId: contractIdOf(proposal.contract),
       source: wsSource,
@@ -1178,7 +1181,8 @@ export function Playground() {
     setText(contractText);
     setProvenance(provenanceLine);
     setPristine({ text: contractText, provenance: provenanceLine });
-    setReceipts(recorded.receipts);
+    setReceipts(saved && recorded.receipts ? { ...recorded.receipts,
+      groups: [...recorded.receipts.groups, ...capturedGroups, ...stubGroups] } : recorded.receipts);
     setActiveExample(null);
     setExpectedRefusal(null);
     setWsLoaded(null);
@@ -1217,13 +1221,17 @@ export function Playground() {
       if (groups.length > 0) setReceipts({ source: origin, groups });
       return;
     }
+    const captured = capturedTokensFromDump(result.dump as Record<string, unknown>);
+    const closure = dumpClosure(result.dump);
+    const family = closure ? recordFigmaClosure(batch, closure,
+      proposal => ({ source: origin, groups: [...groups, ...proposalGroups(proposal)] }), captured) : undefined;
     importGroupsRef.current = groups;
     figmaOriginRef.current = { origin, ws: 'figma' };
     // REST dumps carry no `_variables` (Enterprise-only endpoint) — this is
     // null there and the minted route stays the degraded fallback.
-    capturedRef.current = capturedTokensFromDump(result.dump as Record<string, unknown>);
+    capturedRef.current = captured;
     setFigmaProposals(batch.proposals);
-    applyProposal(batch.proposals[0], origin, 'figma');
+    applyProposal(family?.proposal ?? batch.proposals[0], origin, 'figma', family?.recorded);
   };
 
   // ------------------------------------------------------ plugin bridge state
@@ -1538,11 +1546,15 @@ export function Playground() {
           if (groups.length > 0) setReceipts({ source: 'pasted Figma dump', groups });
           return;
         }
+        const captured = capturedTokensFromDump(parsed as Record<string, unknown>);
+        const closure = dumpClosure(parsed as FigmaImportResult['dump']);
+        const family = closure ? recordFigmaClosure(batch, closure,
+          proposal => ({ source: 'pasted Figma dump', groups: [...groups, ...proposalGroups(proposal)] }), captured, 'json') : undefined;
         importGroupsRef.current = groups;
         figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
-        capturedRef.current = capturedTokensFromDump(parsed as Record<string, unknown>);
+        capturedRef.current = captured;
         setFigmaProposals(batch.proposals);
-        applyProposal(batch.proposals[0], 'pasted Figma dump', 'json');
+        applyProposal(family?.proposal ?? batch.proposals[0], 'pasted Figma dump', 'json', family?.recorded);
       } catch (e) {
         // Same rule as the bridge path: plain words, detail expandable.
         setJsonError(plainWordsError(e));

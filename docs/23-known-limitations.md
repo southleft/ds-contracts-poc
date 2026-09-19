@@ -4846,8 +4846,9 @@ already requested and the closure adds none. No other caller selects a contract
 by position.
 
 **Library callers.** `importFromUrl` follows only when asked (`closure: true`); the
-CLI asks. The Playground's URL import, `core/emitters-check.ts`, the fidelity
-matrix and every fixture-backed caller keep their bytes and their request count,
+CLI and Playground URL import ask. The Playground fixture demo uses that same
+option. `core/emitters-check.ts`, the fidelity matrix and the other
+fixture-backed callers keep their bytes and their request count,
 and the sync spine maps its own responses (`mapRestToDump` directly) without a
 closure, so no ledger baseline moves and the dump grammar stays v1.36 (a closure
 adds sets and provenance; it changes no set's projection). With `--no-closure`
@@ -4938,7 +4939,9 @@ graph at emit time — the next gap, named. **To reverse:** delete the
   designer drew the real set. Tested on synthetic REST bytes only (no measured set
   has a cycle).
 - A closure child that fails at `generate` refuses its parent (above).
-- The Playground's URL import does not follow instances (library default off).
+- The Playground retains at most 30 imported components in a session. A larger
+  family refuses atomically instead of evicting a child during import; the REST
+  walk still has its separate 64-child cap.
 
 **Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,
 fast lane — a recorded CBDS response for the transitive + standalone case; synthetic
@@ -4967,3 +4970,19 @@ probe runs both shapes through proposal and generation; neither produces a
 circular contract graph. This preserves the named geometry fallback, not the
 nested variant's full content. Reversal: restore the `targetId !== setId` filter
 in `followInstances` and the previous self-reference expectation.
+
+**Application family retention (AGENT decision, 2026-09-19).** The URL import
+now opts into the same closure walk. A closure-backed REST result or pasted
+REST dump is saved as one atomic workspace family, including each component's
+own minted/captured token layer and any named provisional stubs. The initially
+selected parent is found by its requested Figma node id; dependency-first
+ordering must not silently open the first child. A missing, ambiguous or refused
+requested parent leaves the workspace unchanged. A refused dependency remains a
+named stub. The existing 30-component workspace cap applies to the whole family.
+
+A recorded CBDS Icon/Placeholder replay exercises the application transport,
+storage, parent selection and React/HTML emission from the restored session
+graph, plus repeats, refused children, oversized batches and requested-parent
+refusals. This is integration evidence, not a new live fidelity measurement or
+a clean-consumer application proof. Reverse by removing the application closure
+option and family recording calls; the CLI rule and old evidence stay intact.
