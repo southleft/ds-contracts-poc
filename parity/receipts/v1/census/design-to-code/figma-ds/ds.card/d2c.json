@@ -235,12 +235,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Card/Card.module.css": "adda80cd03885ac5ea4cd0d85921cc5c26dc5eda8728f3fd77497c99f0c6c383",
+    "react/Card/Card.module.css": "7367a56739f6ca9cf27fa3e485fcf972ea3f407795a69fb1a3bdcddad3406102",
     "react/Card/Card.stories.tsx": "b8d6e30ea1e174f3b1ee77b61857899e1cd00156f77eb9bd8c880704fa814414",
     "react/Card/Card.tsx": "5ab7e2d90a106a57c4b0917f0448d1040ca60001ecc6886779139c22fd3f4726",
     "react/Card/index.ts": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
     "wc/ds-card.ts": "2cd6ccfa711e9697ce9b5e6a54cd258a78fc4eb205a63658a96a372586f97aeb",
-    "wc/ds-card.css.ts": "5172548607e4c3fbb2650dbc26d47e5fe231365f3f77af2395d5ee8787308c07",
+    "wc/ds-card.css.ts": "c9370f37d4bc06db4ef58c511701742896e9da99816e44e40fdbcb83c7e46e69",
     "wc/ds-card.demo.html": "5dd5ee96c8e414429f515caf26b688f88b1326693312653276cda8a4bb3c93a8",
     "wc/ds-card.custom-elements.json": "6ac746f276599d4160d17a3b6e292571329437eca88f2620cf2e12f364617b86"
   },
