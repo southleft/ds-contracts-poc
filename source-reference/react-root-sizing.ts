@@ -4,9 +4,9 @@ import {flattenTokens,makeResolveLiteral} from '../core/tokens.js';
 import {mintTokens,type MintObservation} from '../core/mint-tokens.js';
 import {tokensByPropEntries,resolveTokens,resolveLiterals,type Contract} from '../scripts/contract-schema.js';
 import type {ReactRootVisual} from './react-root-visual.js';
-export interface ReactSizingReport {channel:string;status:'retained'|'intrinsic'|'unresolved';reason?:string}
+export interface ReactSizingReport {channel:string;status:'retained'|'intrinsic'|'fill'|'unresolved';reason?:string}
 export function prepareReactRootSizing(axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,roots:Map<string,CapturedNode>,projections:Map<string,Pick<ReactRootVisual['roots'][number],'sourceSizing'>>){
- const enumeration=enumerate(axes,[],256,baseAxisValues),channels=new Set<string>(),reports:ReactSizingReport[]=[];
+ const enumeration=enumerate(axes,[],256,baseAxisValues),channels=new Set<string>(),fill=new Set<string>(),reports:ReactSizingReport[]=[];
  const conditional:Array<{channel:string;prop:string;values:Array<{value:string;px:number}>}>=[];
  for(const channel of ['width','height'] as const){
   const rows=enumeration.combos.map(combo=>({combo,fact:projections.get(combo.key)?.sourceSizing?.find(s=>s.channel===channel)}));
@@ -14,6 +14,12 @@ export function prepareReactRootSizing(axes:EnumAxisSpec[],baseAxisValues:Record
    reports.push({channel,status:'unresolved',reason:[...new Set(rows.filter(r=>!r.fact||r.fact.status==='unresolved').map(r=>r.fact?.reason??'source-size-evidence-missing'))].sort().join(',')});continue;
   }
   if(rows.every(r=>r.fact!.status==='auto')){reports.push({channel,status:'intrinsic'});continue;}
+  // An own declared fill is never a fixed or automatic plane. It stays named
+  // here until the assembling layout proves it can carry a parent's width.
+  if(rows.some(r=>r.fact!.status==='fill')){
+   const every=rows.every(r=>r.fact!.status==='fill'&&r.fact!.value==='100%');if(every)fill.add(channel);
+   reports.push({channel,status:'unresolved',reason:every?'own-declared-fill-needs-layout-qualification':'fill-size-presence-needs-joint-mapping'});continue;
+  }
   if(rows.every(r=>r.fact!.status==='fixed')){
    for(const {combo,fact} of rows){if(roots.get(combo.key)?.style[channel]!==fact!.value)throw Error('react-root-sizing-observation-mismatch');}
    channels.add(channel);reports.push({channel,status:'retained'});continue;
@@ -28,7 +34,7 @@ export function prepareReactRootSizing(axes:EnumAxisSpec[],baseAxisValues:Record
   if(fixed.some(f=>!Number.isFinite(f.px)||f.px<0))throw Error('react-root-sizing-invalid-fixed-value');
   conditional.push({channel,prop:axis.prop,values:fixed});reports.push({channel,status:'retained'});
  }
- return {channels,reports,verify:(contract:Contract,tokens:Record<string,unknown>)=>{
+ return {channels,fill,reports,verify:(contract:Contract,tokens:Record<string,unknown>)=>{
   const literal=makeResolveLiteral(flattenTokens(tokens));
   for(const report of reports.filter(r=>r.status==='retained'))for(const combo of enumeration.combos){
    const fact=projections.get(combo.key)!.sourceSizing!.find(s=>s.channel===report.channel)!;

@@ -11,7 +11,7 @@ import { isReactComparisonRequest, reactComparisonContentOperation, type ReactCo
 import { recompileSavedObservedContent } from './observed-content.js';
 import type { NativeContractObservationInput, NativeSourceReadback } from '../core/native-source-observation.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
-import {reactComparisonInstanceWidth} from './react-comparison-context.js';
+import {reactComparisonInstanceWidth,reactComparisonContainerWidth} from './react-comparison-context.js';
 
 export function selectReactComparisonRequest(repoRoot: string, reference: ReactReference, root: ReactNativeRequest, parentOperationId: string, composition?: ReturnType<typeof readReactCompositionEvidence>): ReactComparisonRequest {
   const saved = readReactContentInspection(repoRoot, reference, root, parentOperationId);
@@ -64,10 +64,13 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   const originPath=path.join(repoRoot,'private/react-source-ownership',request.root.referenceId,request.root.ownership.id,request.root.caseId,'style-origin.json');
   // The original reader authenticated this inventory above. Pin the current
   // caller width into the comparison plan, leaving the main plan unchanged.
-  const instanceWidth=reactComparisonInstanceWidth(captured.tree,JSON.parse(readFileSync(originPath,'utf8')));
+  const origin=JSON.parse(readFileSync(originPath,'utf8')),instanceWidth=reactComparisonInstanceWidth(captured.tree,origin);
+  // Only a fill-width main asks for its caller's place; any other root keeps
+  // its own sizing and an own-100% case compares exactly as it always did.
+  const containerWidth=variant.spec.rootFillWidth ? reactComparisonContainerWidth(captured.tree,origin) : undefined;
   return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.composition ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0],
-      ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(request.composition ? { instances: composition!.references } : {}) } };
+      ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(containerWidth!==undefined ? {containerWidth} : {}), ...(request.composition ? { instances: composition!.references } : {}) } };
 }
 
 /** Select only a new read-only mapping revision from the SAME archived input. */

@@ -4,6 +4,7 @@ import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactStyleOrigin} from './react-style-origin.js';
 import {observeReactPropertyMatrix,type ReactPropertyMatrix} from './react-property-matrix.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
+import {observeGridConstraints,hasGridContainer,type GridConstraintEvidence} from './grid-constraints.js';
 import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
 import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
 import { chromium, type Browser } from "playwright-core";
@@ -114,6 +115,8 @@ export function startReactOwnership(
           "react-source-anatomy.ts",
           "react-root-visual.ts",
           "react-style-origin.ts",
+          "grid-constraints.ts",
+          "react-child-context.ts",
           "react-property-probe.ts",
           "react-property-effects.ts",
           "react-root-variants.ts",
@@ -150,7 +153,7 @@ export function startReactOwnership(
         const rowDir = path.join(dir, c.id);
         mkdirSync(rowDir);
         try {
-          const pair: Array<{styleOrigin?:ReactStyleOrigin; tree:string; root:CapturedNode; png:string; ownership?:ReactOwnership}> = [];
+          const pair: Array<{styleOrigin?:ReactStyleOrigin; gridConstraints?:GridConstraintEvidence; tree:string; root:CapturedNode; png:string; ownership?:ReactOwnership}> = [];
           for (const instrumented of [false, true]) {
             const side = instrumented ? "observed" : "source";
             const context = await browser.newContext({
@@ -233,6 +236,13 @@ export function startReactOwnership(
                   throw Error("react-ownership-subject-root-unmatched");
               }
               const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership) : undefined;
+              // Same read-only witness the content inspection takes for composed
+              // children. The app never re-opens this file: it is the sealed INPUT
+              // of the row's sealed `rootVisual`, kept (like style-origin.json) so
+              // that projection can be re-derived from the archive alone; the test
+              // suite re-derives it. The stability check below covers the read.
+              const gridConstraints = ownership && hasGridContainer(tree.tree) ? await observeGridConstraints(page, profile.path, tree.tree) : undefined;
+              if (gridConstraints) writeFileSync(path.join(rowDir, "grid-constraints.json"), JSON.stringify(gridConstraints,null,2)+"\n", {flag:"wx"});
               if (styleOrigin) {
                 const repeat = await readReactStyleOrigin(page, profile.path[0], ownership!);
                 if (JSON.stringify(styleOrigin) !== JSON.stringify(repeat) ||
@@ -250,6 +260,7 @@ export function startReactOwnership(
               }
               pair.push({
                 styleOrigin,
+                gridConstraints,
                 tree: tree.treeSha256,
                 root: tree.tree,
                 png: tree.sourcePngSha256,
@@ -267,7 +278,7 @@ export function startReactOwnership(
           row.treeSha256 = pair[0].tree;
           row.ownership = pair[1].ownership;
           row.anatomy = linkReactSourceAnatomy(program, pair[1].ownership!, pair[0].root);
-          row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root, pair[1].styleOrigin);
+          row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root, pair[1].styleOrigin, undefined, undefined, pair[1].gridConstraints);
           if(row.propertyMatrix){
             const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyMatrix.rows
               .filter(effect=>effect.status==="observed")
