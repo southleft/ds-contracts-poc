@@ -142,6 +142,80 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
   for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
   return cases;
 }
+// ---------------------------------------------------------------------------
+// INTERACTION STATES (docs/23 §D.41) — reached the way a user reaches them.
+// ---------------------------------------------------------------------------
+/** What a cell PAINTS, as one string: taken at rest and again in the state, so
+ *  a state the contract declares but the generated CSS never reaches is caught
+ *  by name, not by pixels. Every channel a state plane may carry rides it —
+ *  all four borders, the radii, text decoration, transform, weight, filter and
+ *  the box itself (review, PR 131 M4: the first cut read one border and no
+ *  decoration, so an underline-on-hover link read `state-inert`).
+ *  Serialized as text: tsx would otherwise inject its __name helper into the page. */
+export const paintOf = new Function('el', `
+  const K = ['backgroundColor', 'backgroundImage', 'color', 'opacity', 'boxShadow', 'filter', 'transform', 'visibility', 'cursor',
+    'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth',
+    'borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle',
+    'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
+    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
+  return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
+`) as (el: Element) => string;
+/** Keyboard-modality focus on the component's own focus target: the root when
+ *  it is focusable, else its first focusable descendant. Returns whether
+ *  :focus-visible really matches — nothing is forced. */
+const focusVisibly = new Function('el', `
+  const root = el.firstElementChild; if (!root) return false;
+  const focusable = n => n.tabIndex >= 0 && !n.disabled;
+  const target = focusable(root) ? root : [...root.querySelectorAll('*')].find(focusable);
+  if (!target) return false;
+  target.focus();
+  return target.matches(':focus-visible');
+`) as (el: Element) => boolean;
+/** Whether the cell's root REALLY matches the pseudo-class the pointer was
+ *  meant to produce. A box is not reach: a root under an overlay, or with
+ *  pointer-events:none, has a box and never matches :hover — that is
+ *  `state-unreachable`, not `state-inert` (review, PR 131 M4). */
+const matchesPseudo = new Function('el', 'pseudo', `const root = el.firstElementChild; return !!root && root.matches(pseudo);`) as (el: Element, pseudo: string) => boolean;
+export const REACHED_BY = { hover: 'pointer hover', active: 'pointer down', 'focus-visible': 'keyboard-modality focus', none: 'nothing' } as const;
+type PageLike = import('playwright-core').Page; type LocatorLike = import('playwright-core').Locator;
+
+/** Put ONE cell into its state. `cell` is the `[data-cell]` wrapper; its first
+ *  element child is the component root. Returns the rest-state paint (read
+ *  before anything moved) and whether the state was really reached. */
+export async function enterState(page: PageLike, cell: LocatorLike, interaction: Interaction): Promise<{ restPaint: string | null; reached: boolean }> {
+  if (interaction === 'none') return { restPaint: null, reached: true };
+  const restPaint = await cell.evaluate(paintOf);
+  const root = cell.locator(':scope > *').first();
+  if (interaction === 'focus-visible') { await page.keyboard.press('Tab'); return { restPaint, reached: await cell.evaluate(focusVisibly) }; }
+  // A real pointer, as extract/figma/visual-parity/render.ts does it.
+  await root.scrollIntoViewIfNeeded();
+  const box = await root.boundingBox();
+  if (!box) return { restPaint, reached: false };
+  await page.mouse.move(box.x + (box.width > 0 ? box.width / 2 : 2), box.y + (box.height > 0 ? box.height / 2 : 2));
+  if (interaction === 'active') await page.mouse.down();
+  return { restPaint, reached: await cell.evaluate(matchesPseudo, interaction === 'hover' ? ':hover' : ':active') };
+}
+
+/** Leave no residue for the next cell — and synthesise NO CLICK: the pointer is
+ *  parked off every component BEFORE the button is released, so mouseup lands
+ *  on the page, never on the component (the first cut released over the root:
+ *  a real click on every pressed cell, a navigation on an \`a[href]\`). */
+export async function leaveState(page: PageLike, interaction: Interaction): Promise<void> {
+  if (interaction === 'none') return;
+  await page.mouse.move(0, 0);
+  if (interaction === 'active') await page.mouse.up();
+  await page.evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+}
+
+/** The three NAMED state problems for one exercised cell (the pixels judge the rest). */
+export function stateProblems(c: { key: string; interaction: Interaction; state?: string }, declaredStates: readonly string[], reached: boolean, paintChanged: boolean): string[] {
+  const out: string[] = [];
+  if (c.state && !declaredStates.includes(c.state)) out.push(`state-not-carried:${c.state}`);
+  if (c.interaction !== 'none' && !reached) out.push(`state-unreachable:${c.interaction}:${c.key}`);
+  if (c.interaction !== 'none' && reached && !paintChanged && declaredStates.includes(c.interaction)) out.push(`state-inert:${c.interaction}:${c.key}`);
+  return out;
+}
+
 /** Figma axes or values the contract does not map; reported, never skipped. */
 const unmapped = new Set<string>();
 
@@ -260,7 +334,7 @@ async function main() {
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'single component set; composition, nested instances and instance swaps are not exercised here',
-      'declared behavior beyond text and variant props is not exercised',
+      'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
     ] };
   const walk = (dir: string, base = dir): void => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p, base) : (receipt.generatedSha256[path.relative(base, p)] = sha256(readFileSync(p))); } };
@@ -316,43 +390,14 @@ async function main() {
       const cells = await page.$$('[data-cell]');
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
-      // INTERACTION STATES (docs/23 §D.41). What the cell PAINTS, as one string:
-      // taken at rest and again in the state, so a state the contract declares
-      // but the generated CSS never reaches is caught by name, not by pixels.
-      // Serialized as text: tsx would otherwise inject its __name helper into the page.
-      const paintOf = new Function('el', `
-        return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n); return [s.backgroundColor, s.color, s.borderTopColor, s.borderTopWidth, s.outlineStyle, s.outlineWidth, s.outlineColor, s.boxShadow, s.opacity, s.fill, s.stroke].join('|'); }).join('/');
-      `) as (el: Element) => string;
-      // Keyboard-modality focus on the component's own focus target: the root
-      // when it is focusable, else its first focusable descendant. Returns
-      // whether :focus-visible really matches — nothing is forced.
-      const focusVisibly = new Function('el', `
-        const root = el.firstElementChild; if (!root) return false;
-        const focusable = n => n.tabIndex >= 0 && !n.disabled;
-        const target = focusable(root) ? root : [...root.querySelectorAll('*')].find(focusable);
-        if (!target) return false;
-        target.focus();
-        return target.matches(':focus-visible');
-      `) as (el: Element) => boolean;
       const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
       const paints: Record<string, string> = {};
-      const stateProblems = new Set<string>();
+      const notCarried = new Set<string>();
       receipt.behavior.states = [];
       for (const c of cases) {
         const cell = page.locator(`[data-cell="${c.key}"]`);
         const root = cell.locator(':scope > *').first();
-        if (c.state && !declaredStates.includes(c.state)) stateProblems.add(`state-not-carried:${c.state} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`);
-        const restPaint = c.interaction === 'none' ? null : await cell.evaluate(paintOf);
-        let reached = true;
-        if (c.interaction === 'hover' || c.interaction === 'active') {
-          // A real pointer, as extract/figma/visual-parity/render.ts does it.
-          await root.scrollIntoViewIfNeeded();
-          const box = await root.boundingBox();
-          if (!box) reached = false;
-          else { await page.mouse.move(box.x + (box.width > 0 ? box.width / 2 : 2), box.y + (box.height > 0 ? box.height / 2 : 2)); if (c.interaction === 'active') await page.mouse.down(); }
-        }
-        if (c.interaction === 'focus-visible') { await page.keyboard.press('Tab'); reached = await cell.evaluate(focusVisibly); }
-        if (!reached) problems.push(`state-unreachable:${c.interaction}:${c.key}`);
+        const entered = await enterState(page, cell, c.interaction);
         const style = await root.evaluate(el => { const s = getComputedStyle(el); return { backgroundColor: s.backgroundColor, color: s.color, width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height, tag: el.tagName.toLowerCase(), role: el.getAttribute('role') }; });
         // Fonts: the family the generated CSS asks for on text, and whether the
         // clean consumer could actually satisfy it. An unavailable family is a
@@ -375,14 +420,12 @@ async function main() {
         const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
         paints[c.key] = await cell.evaluate(paintOf);
         if (c.interaction !== 'none') {
-          const changed = paints[c.key] !== restPaint;
-          receipt.behavior.states.push({ key: c.key, state: c.state, reachedBy: c.interaction === 'hover' ? 'pointer hover' : c.interaction === 'active' ? 'pointer down' : 'keyboard-modality focus', reached, paintChanged: changed });
-          if (reached && !changed && declaredStates.includes(c.interaction)) problems.push(`state-inert:${c.interaction}:${c.key}`);
-          // Leave no residue for the next cell: release, move off every component, drop focus.
-          if (c.interaction === 'active') await page.mouse.up();
-          await page.mouse.move(0, 0);
-          await page.evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+          const changed = paints[c.key] !== entered.restPaint;
+          receipt.behavior.states.push({ key: c.key, state: c.state, reachedBy: REACHED_BY[c.interaction], reached: entered.reached, paintChanged: changed });
+          await leaveState(page, c.interaction);
         }
+        // state-not-carried is one line per STATE (the contract declares no such state — its cells render the rest state and the pixels judge).
+        for (const p of stateProblems(c, declaredStates, entered.reached, paints[c.key] !== entered.restPaint)) p.startsWith('state-not-carried:') ? notCarried.add(`${p} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`) : problems.push(p);
         receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot) });
       }
       // `disabled` is a prop, not an interaction: its cell is compared with the
@@ -396,7 +439,7 @@ async function main() {
         receipt.behavior.states.push({ key: c.key, state: 'disabled', reachedBy: 'the disabled prop', reached: true, paintChanged: changed, comparedWith: rest.key });
         if (!changed && declaredStates.includes('disabled')) problems.push(`state-inert:disabled:${c.key}`);
       }
-      problems.push(...stateProblems);
+      problems.push(...notCarried);
       // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
       if (cases[0]?.textProp) {
         const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));

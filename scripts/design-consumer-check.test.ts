@@ -2,7 +2,8 @@
  *  false fidelity failure. These cover case derivation only (no browser). */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { deriveCases, variantPropValue } from './design-consumer-check.js';
+import { chromium } from 'playwright-core';
+import { deriveCases, enterState, leaveState, paintOf, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -43,4 +44,68 @@ test('a state-axis variant is MOUNTED: hover / pressed / focus as the real inter
 
 test('a plain variant set derives exactly what it always did (no state, no interaction)', () => {
   assert.deepEqual(deriveCases(dump, contract, 'Badge').map(c => [c.interaction, c.state]), [['none', undefined], ['none', undefined]]);
+});
+
+// ---------------------------------------------------------------------------
+// The three NAMED state problems, on a local page (no Figma token, no build).
+// Review, PR 131 M4: hover/active used to count as reached whenever the root had
+// a box; the paint string read one border and no decoration; releasing the mouse
+// over the root synthesised a real click on every pressed cell.
+// ---------------------------------------------------------------------------
+const FIXTURE = `<!doctype html><html><head><style>
+  body{margin:0} [data-cell]{display:inline-block;margin:24px;position:relative}
+  button,a,div.c{display:inline-block;padding:4px 8px;background:#ddd;color:#111;border:0;text-decoration:none}
+  .paints:hover{background:#900} .paints:active{background:#600} .paints:focus-visible{outline:2px solid #00f}
+  .underline:hover{text-decoration:underline} .bottom:hover{border-bottom:2px solid #00f} .moves:active{transform:scale(.98)}
+  .veil{position:absolute;inset:0;z-index:2} .ghost{pointer-events:none}
+</style></head><body>
+  <div data-cell="paints"><button class="paints">x</button></div>
+  <div data-cell="covered"><button class="paints">x</button><span class="veil"></span></div>
+  <div data-cell="ghost"><button class="paints ghost">x</button></div>
+  <div data-cell="inert"><button>x</button></div>
+  <div data-cell="underline"><a class="underline" href="#navigated-underline">x</a></div>
+  <div data-cell="bottom"><button class="bottom">x</button></div>
+  <div data-cell="moves"><a class="moves" href="#navigated">x</a></div>
+  <div data-cell="unfocusable"><div class="c">x</div></div>
+  <div data-cell="focusable"><button class="paints">x</button></div>
+</body></html>`;
+
+test('state cells on a local page: reach is the REAL pseudo-class, paint is every channel a state may carry, and no click is ever synthesised', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 900, height: 400 } });
+    await page.setContent(FIXTURE);
+    const clicks: string[] = [];
+    await page.exposeFunction('__clicked', (what: string) => { clicks.push(what); });
+    await page.evaluate("document.addEventListener('click', e => window.__clicked(e.target.closest('[data-cell]')?.dataset.cell ?? e.target.tagName), true)");
+    const ALL = ['hover', 'active', 'focus-visible', 'disabled'];
+    const exercise = async (key: string, interaction: Interaction, declared: string[] = ALL) => {
+      const cell = page.locator(`[data-cell="${key}"]`);
+      const entered = await enterState(page, cell, interaction);
+      const changed = (await cell.evaluate(paintOf)) !== entered.restPaint;
+      await leaveState(page, interaction);
+      return { reached: entered.reached, changed, problems: stateProblems({ key, interaction, state: interaction === 'none' ? undefined : interaction }, declared, entered.reached, changed) };
+    };
+    // Reached and painted: no problem.
+    assert.deepEqual(await exercise('paints', 'hover'), { reached: true, changed: true, problems: [] });
+    assert.deepEqual(await exercise('paints', 'active'), { reached: true, changed: true, problems: [] });
+    assert.deepEqual(await exercise('focusable', 'focus-visible'), { reached: true, changed: true, problems: [] });
+    // state-unreachable: a box is not reach — a covered root and a pointer-events:none root never match :hover / :active.
+    assert.deepEqual((await exercise('covered', 'hover')).problems, ['state-unreachable:hover:covered']);
+    assert.deepEqual((await exercise('ghost', 'active')).problems, ['state-unreachable:active:ghost']);
+    assert.deepEqual((await exercise('unfocusable', 'focus-visible')).problems, ['state-unreachable:focus-visible:unfocusable'], 'nothing in the cell can take keyboard focus');
+    // state-inert: reached, the contract declares the state, and nothing the cell paints changed.
+    assert.deepEqual(await exercise('inert', 'hover'), { reached: true, changed: false, problems: ['state-inert:hover:inert'] });
+    // …but a state that changes ONLY text-decoration, ONLY the bottom border, or ONLY transform is not inert.
+    assert.deepEqual((await exercise('underline', 'hover')).problems, []);
+    assert.deepEqual((await exercise('bottom', 'hover')).problems, []);
+    assert.deepEqual((await exercise('moves', 'active')).problems, []);
+    // state-not-carried: the contract declares no such state (the cell renders rest; the pixels judge) — and then inert is NOT claimed.
+    assert.deepEqual((await exercise('inert', 'hover', ['focus-visible'])).problems, ['state-not-carried:hover']);
+    // The pressed cells were released with the pointer parked off the component: no click on any cell, no navigation.
+    assert.deepEqual(clicks.filter((c) => c !== 'HTML' && c !== 'BODY'), [], `clicks landed on: ${clicks.join(', ')}`);
+    assert.equal(await page.evaluate('location.hash'), '');
+    // No residue: nothing is hovered or focused after the last cell.
+    assert.equal(await page.evaluate("document.querySelectorAll('[data-cell]:hover, [data-cell] :hover').length + (document.activeElement === document.body ? 0 : 1)"), 0);
+  } finally { await browser.close(); }
 });
