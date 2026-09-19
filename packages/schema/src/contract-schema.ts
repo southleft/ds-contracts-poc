@@ -2164,24 +2164,28 @@ export interface Part {
    *  changes when the field is absent.
    *
    *  `WIDTH_AND_HEIGHT` lowers, on the code surfaces, to the same box Figma
-   *  draws: `inline-size: calc-size(max-content, round(up, size, 1px))` on the
-   *  text element — its max-content inline size rounded up to the pixel, as a
-   *  PROGRESSIVE ENHANCEMENT: a browser without `calc-size()` drops the
-   *  declaration at parse and keeps today's fractional box (< 1 px narrower).
-   *  Logical `inline-size`, so vertical and RTL writing modes round the axis
-   *  the text runs along. The canvas writer sets `textAutoResize =
-   *  'WIDTH_AND_HEIGHT'` on the node it builds — which is also what
-   *  `figma.createText()` is born with, so a set this pipeline wrote reads
-   *  the fact back and proposes it (Figma has no fractional text box, so the
-   *  re-read is the truth about the canvas; docs/23 §D.42 names it).
+   *  draws: `inline-size: calc-size(fit-content, round(up, size, 1px))` on the
+   *  text element — its fit-content inline size (less its own px / em / rem
+   *  trailing letter spacing) rounded up to the pixel, clamped to its
+   *  container, as a PROGRESSIVE ENHANCEMENT: a browser without `calc-size()`
+   *  drops the declaration at parse and keeps today's fractional box (< 1 px
+   *  narrower). fit-content, not max-content: a runtime string that does not
+   *  fit still WRAPS (review, PR 132). Logical properties, so vertical and RTL
+   *  writing modes round the axis the text runs along. The canvas writer sets
+   *  `textAutoResize = 'WIDTH_AND_HEIGHT'` on the node it builds — which is
+   *  also what `figma.createText()` is born with, so a set this pipeline wrote
+   *  reads the fact back and proposes it: NOT a fixed point in the flagless
+   *  direction (Figma has no fractional text box; docs/23 §D.42 names it).
    *
    *  The fact qualifies a text box that HUGS its text: a part that carries
    *  it must own text (`text` / `content` / `textByProp`) and must not carry
    *  a `width` / `inline-size` / `flex` channel, `layout.grow`, or a
    *  truncation channel (`text-overflow`, `-webkit-line-clamp`) — a filled,
-   *  fixed or truncated box is not sized by its text (validateContract
-   *  refuses, the hugsBelowMaxWidth discipline). The root never carries it:
-   *  its box is padding plus content, and the fact lives on the text part. */
+   *  fixed or truncated box is not sized by its text; its tracking must be
+   *  its own px / em / rem length (never inherited, a %, or unitless); and it
+   *  must be block-level where it sits (validateContract refuses each by
+   *  name, the hugsBelowMaxWidth discipline). The root never carries it: its
+   *  box is padding plus content, and the fact lives on the text part. */
   textAutoResize?: "WIDTH_AND_HEIGHT";
   /** v18 (text-indent off-box round) — MEASURED sizing evidence, never
    *  hand-authored. The enum-axis values on which this element's own

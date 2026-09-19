@@ -4,10 +4,15 @@
 // browser lays the same run out at its fractional advance and adds tracking after
 // every glyph. Measured by the design-led consumer check on the 72-variant CBDS
 // Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every
-// content size equal (a 47.40625 px root against Figma's 48). The emitters now
-// give the text element the same box — `inline-size: calc-size(max-content,
-// round(up, size[ - <letter-spacing>], 1px))`, a progressive enhancement — and
-// these tests MEASURE the box in Chromium rather than read the stylesheet's intent.
+// content size equal (a 47.40625 px root against Figma's 48). The emitters give
+// the text element the same box —
+//   inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px));
+//   max-inline-size: 100%;            (unless the part carries its own max)
+//   align-self: flex-start;           (only under a stretching flex column)
+// — a progressive enhancement, and these tests MEASURE the box in Chromium rather
+// than read the stylesheet's intent. Review (PR 132): the first cut used
+// max-content, which made a runtime string non-wrapping (the flowbite Card grew to
+// 596 px in a 240 px container); the wrap tests below are that finding, pinned.
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
@@ -20,126 +25,232 @@ import { tokenInventoryFromJson } from './tokens.js';
 
 const tokens = { primitives: {
   paint: { ground: { $type: 'color', $value: '#0e61ba' }, ink: { $type: 'color', $value: '#fcfeff' } },
-  track: { wide: { $type: 'dimension', $value: '1px' } },
+  track: { wide: { $type: 'dimension', $value: '1px' }, pct: { $type: 'dimension', $value: '-0.5%' }, zero: { $type: 'dimension', $value: '0' }, flat: { $type: 'dimension', $value: '0px' } },
 }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
 const TONE = { name: 'tone', type: { enum: ['brand', 'danger'] }, default: 'brand', bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone', values: { brand: 'Brand', danger: 'Danger' } } } };
+const TEXT = { name: 'label', type: 'text', default: 'Label', bindings: { code: { prop: 'label' }, figma: { kind: 'TEXT', property: 'Label' } } };
 /** The Badge's shape: a hug root with 8px inline padding around one text part. */
-const LABEL = { text: 'Label', tokens: { color: '{paint.ink}' }, literals: { 'font-size': '14px', 'line-height': '16px' } };
+const LABEL = { content: { prop: 'label' }, tokens: { color: '{paint.ink}' }, literals: { 'font-size': '14px', 'line-height': '16px' } };
 const ROOT = { layout: { display: 'inline-flex', direction: 'row', align: 'center', justify: 'center' }, tokens: { 'background-color': '{paint.ground}' }, literals: { 'padding-inline': '8px', 'padding-block': '0px', width: 'fit-content' } };
+/** A fixed-width COLUMN with no cross-axis alignment — the Card's label wrapper. */
+const COLUMN = (width: string) => ({ layout: { display: 'flex', direction: 'column' }, literals: { width } });
 function contract(label: Record<string, unknown>, root: Record<string, unknown> = ROOT): Contract {
   return ContractSchema.parse({
     id: 'probe.text-box', name: 'TextBoxProbe', version: '1.0.0', archetype: 'none',
     description: 'Whole-pixel text-box conformance, not a qualified source component.',
-    semantics: { element: 'div' }, props: [TONE], states: [],
+    semantics: { element: 'div' }, props: [TONE, TEXT], states: [],
     anatomy: { root: { ...root, parts: { caption: label } } },
     bindings: { code: { anchors: { importPath: './TextBoxProbe', export: 'TextBoxProbe' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
   });
 }
 const ctx = (c: Contract) => ({ contracts: new Map([[c.id, c]]), icons: new Map<string, string>() });
-const modules = (c: Contract) => emitReact(c, { ...ctx(c), tokens: tokenInventoryFromJson([tokens.primitives]), tokenValues: tokens });
+const modules = (c: Contract, values: unknown = tokens) => emitReact(c, { ...ctx(c), tokens: tokenInventoryFromJson([tokens.primitives]), tokenValues: values });
 const inline = (c: Contract) => emitReactInline(c, { ...ctx(c), tokens } as never);
 const rule = (css: string, selector: string) => css.match(new RegExp(`(^|\\n)${selector.replace(/[.[\]=':()]/g, '\\$&')} \\{[^}]*\\}`))?.[0] ?? '';
-const flagged = (extra: Record<string, unknown> = {}) => contract({ ...LABEL, ...extra, textAutoResize: 'WIDTH_AND_HEIGHT' });
-const VALUE = 'calc-size(max-content, round(up, size, 1px))';
-const TRIMMED = 'calc-size(max-content, round(up, size - 1px, 1px))';
+const flagged = (extra: Record<string, unknown> = {}, root?: Record<string, unknown>) => contract({ ...LABEL, ...extra, textAutoResize: 'WIDTH_AND_HEIGHT' }, root);
+const VALUE = 'calc-size(fit-content, round(up, size, 1px))';
+const TRIMMED = 'calc-size(fit-content, round(up, size - 1px, 1px))';
 const errorsOf = (c: Contract) => { const errors: string[] = []; validateContract(c, new Map([[c.id, c]]), errors, new Map()); return errors.join('\n'); };
 
-test('without the flag every surface emits what it always did — no calc-size, no inline-size, byte for byte the sheet of a contract that never heard of it', () => {
-  const plain = contract(LABEL);
-  for (const out of [modules(plain).css, shadowCss(plain), inline(plain).tsx]) assert.doesNotMatch(out, /calc-size|inline-size|inlineSize|textAutoResize/, out);
+test('without the flag every surface emits what it always did — no calc-size, no inline-size, no clamp, byte for byte the sheet of a contract that never heard of it', () => {
+  for (const plain of [contract(LABEL), contract(LABEL, COLUMN('200px'))]) {
+    for (const out of [modules(plain).css, shadowCss(plain), inline(plain).tsx]) assert.doesNotMatch(out, /calc-size|inline-size|inlineSize|align-self|alignSelf|textAutoResize/, out);
+  }
 });
 
-test('CSS modules, the web-component sheet and the inline style give the flagged text part its whole-pixel box, and nothing else moves', () => {
+test('CSS modules, the web-component sheet and the inline style give the flagged text part its whole-pixel FIT-CONTENT box and the container clamp, and nothing else moves', () => {
   const c = flagged();
-  assert.match(rule(modules(c).css, '.caption'), /\n  inline-size: calc-size\(max-content, round\(up, size, 1px\)\);\n/);
-  assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(max-content, round\(up, size, 1px\)\);\n/);
-  assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`), inline(c).tsx);
+  assert.match(rule(modules(c).css, '.caption'), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n\}/);
+  assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n/);
+  assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`) && inline(c).tsx.includes('"maxInlineSize": "100%"'), inline(c).tsx);
+  assert.doesNotMatch(modules(c).css + shadowCss(c) + inline(c).tsx, /max-content/, 'never max-content: a runtime string must still wrap');
   // The root — the part that does NOT carry the fact — is untouched on every surface.
   const plain = contract(LABEL);
   assert.equal(rule(modules(c).css, '.root'), rule(modules(plain).css, '.root'));
   assert.equal(rule(shadowCss(c), "[part='root']"), rule(shadowCss(plain), "[part='root']"));
-  // One declaration is the whole difference between the two sheets.
-  assert.equal(modules(c).css.replace(`  inline-size: ${VALUE};\n`, ''), modules(plain).css);
+  assert.equal(modules(c).css.replace(`  inline-size: ${VALUE};\n  max-inline-size: 100%;\n`, ''), modules(plain).css, 'two declarations are the whole difference under a row parent');
 });
 
-test('the letter spacing CSS adds after the LAST glyph — which Figma\'s box does not have — is shed before rounding: a literal verbatim, a token as its var() on the sheets and its value inline (letter-spacing is a literal or token channel, never declared)', () => {
+test('the clamp yields to the author: a part carrying its own max-width keeps it and gets no max-inline-size (the same property, same rule — ours would win)', () => {
+  const capped = flagged({ declared: { 'max-width': '60px' } });
+  const css = rule(modules(capped).css, '.caption');
+  assert.match(css, /max-width: 60px;/);
+  assert.doesNotMatch(css, /max-inline-size/);
+  assert.doesNotMatch(inline(capped).tsx, /maxInlineSize/);
+});
+
+test('align-self: flex-start (an AGENT decision, docs/23 §D.42) — only under a flex column that would STRETCH the box; never under a row, an aligned column, a per-variant layout or an absolutely placed part', () => {
+  const inColumn = flagged({}, COLUMN('200px'));
+  assert.match(rule(modules(inColumn).css, '.caption'), /\n  align-self: flex-start;\n/);
+  assert.match(rule(shadowCss(inColumn), "[part='caption']"), /\n  align-self: flex-start;\n/);
+  assert.ok(inline(inColumn).tsx.includes('"alignSelf": "flex-start"'));
+  assert.match(rule(modules(flagged({}, { ...COLUMN('200px'), layout: { display: 'flex', direction: 'column', align: 'stretch' } })).css, '.caption'), /align-self: flex-start;/, 'an explicit stretch is the same stretch');
+  for (const [why, root] of [
+    ['a row', ROOT],
+    ['a column aligned center', { ...COLUMN('200px'), layout: { display: 'flex', direction: 'column', align: 'center' } }],
+    ['a column whose layout varies by variant', { ...COLUMN('200px'), layoutByProp: { prop: 'tone', map: { danger: { align: 'center' } } } }],
+  ] as const) assert.doesNotMatch(modules(flagged({}, root as never)).css, /align-self/, why);
+  assert.doesNotMatch(modules(flagged({ declared: { position: 'absolute' } }, COLUMN('200px'))).css, /align-self/, 'an absolutely placed part is not a flex item');
+});
+
+test('the letter spacing CSS adds after the LAST glyph — which Figma\'s box does not have — is shed before rounding: only a px / em / rem length; a token by its var() on the sheets and its value inline', () => {
   const literal = flagged({ literals: { ...LABEL.literals, 'letter-spacing': '1px' } });
   assert.ok(rule(modules(literal).css, '.caption').includes(`inline-size: ${TRIMMED};`), modules(literal).css);
   assert.ok(rule(shadowCss(literal), "[part='caption']").includes(`inline-size: ${TRIMMED};`));
   assert.ok(inline(literal).tsx.includes(`"inlineSize": "${TRIMMED}"`));
   const em = flagged({ literals: { ...LABEL.literals, 'letter-spacing': '0.05em' } });
-  assert.ok(rule(modules(em).css, '.caption').includes('inline-size: calc-size(max-content, round(up, size - 0.05em, 1px));'));
+  assert.ok(rule(modules(em).css, '.caption').includes('inline-size: calc-size(fit-content, round(up, size - 0.05em, 1px));'));
   const token = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.wide}' } });
-  assert.ok(rule(modules(token).css, '.caption').includes('inline-size: calc-size(max-content, round(up, size - var(--track-wide), 1px));'), modules(token).css);
+  assert.ok(rule(modules(token).css, '.caption').includes('inline-size: calc-size(fit-content, round(up, size - var(--track-wide), 1px));'), modules(token).css);
   assert.ok(inline(token).tsx.includes(`"inlineSize": "${TRIMMED}"`), 'the inline surface resolves the token to its literal');
-  // A zero adds nothing after the last glyph: nothing to shed (`normal` is not a literal the schema accepts).
-  assert.ok(rule(modules(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '0' } })).css, '.caption').includes(`inline-size: ${VALUE};`));
-  assert.ok(rule(modules(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '0px' } })).css, '.caption').includes(`inline-size: ${VALUE};`));
+  assert.ok(rule(modules(flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.flat}' } })).css, '.caption').includes('size - var(--track-flat)'), '`0px` is a length and subtracts nothing');
+  // A zero literal adds nothing after the last glyph: nothing to shed.
+  for (const zero of ['0', '0px']) assert.ok(rule(modules(flagged({ literals: { ...LABEL.literals, 'letter-spacing': zero } })).css, '.caption').includes(`inline-size: ${VALUE};`));
 });
 
-test('validateContract refuses a stray flag and what the box cannot be at the same time, by name; the schema spells only the auto-width value', () => {
+test('a letter-spacing TOKEN is judged by its VALUE: a % or a unitless value is refused by name on every surface, and so is a token with no values to judge (review M3)', () => {
+  for (const [ref, shows] of [['{track.pct}', /resolves to -0\.5%/], ['{track.zero}', /resolves to 0 —/]] as const) {
+    const c = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': ref } });
+    assert.equal(errorsOf(c), '', 'the path alone cannot decide — the refusal is the emitter\'s, which holds the values');
+    assert.throws(() => modules(c), shows);
+    assert.throws(() => inline(c), shows);
+  }
+  const token = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.wide}' } });
+  assert.throws(() => modules(token, null), /no token VALUES were supplied/);
+});
+
+test('validateContract refuses a flag that would be wrong or inert, by name; the schema spells only the auto-width value', () => {
   assert.equal(errorsOf(flagged()), '');
-  assert.match(errorsOf(contract({ layout: { display: 'flex' }, textAutoResize: 'WIDTH_AND_HEIGHT', tokens: { 'background-color': '{paint.ground}' } })), /carries textAutoResize but owns no text/);
-  assert.match(errorsOf(contract(LABEL, { ...ROOT, text: undefined, textAutoResize: 'WIDTH_AND_HEIGHT' })), /is a top-level root and carries textAutoResize/);
-  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, width: '40px' } })), /textAutoResize: WIDTH_AND_HEIGHT together with width —/);
-  assert.match(errorsOf(flagged({ layout: { grow: true } })), /together with layout\.grow —/);
-  assert.match(errorsOf(flagged({ declared: { 'text-overflow': 'ellipsis' } })), /together with text-overflow —/, 'a truncated box is not sized by its text');
-  assert.match(errorsOf(flagged({ literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] })), /together with letter-spacing \(per variant or state\)/, 'the trailing tracking to shed has no single spelling');
+  assert.match(errorsOf(contract({ layout: { display: 'flex' }, textAutoResize: 'WIDTH_AND_HEIGHT', tokens: { 'background-color': '{paint.ground}' } })), /owns no text/);
+  assert.match(errorsOf(ContractSchema.parse({ ...flagged(), anatomy: { root: { ...ROOT, textAutoResize: 'WIDTH_AND_HEIGHT', content: { prop: 'label' } } } })), /is a top-level root/);
+  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, width: '40px' } })), /carries width — a box that is sized/);
+  assert.match(errorsOf(flagged({ layout: { grow: true } })), /carries layout\.grow —/);
+  assert.match(errorsOf(flagged({ declared: { 'text-overflow': 'ellipsis' } })), /carries text-overflow —/, 'a truncated box is not sized by its text');
+  assert.match(errorsOf(flagged({ literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] })), /letter-spacing \(per variant or state\)/);
   assert.match(errorsOf(flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.{tone}}' } })), /letter-spacing \(placeholder token\)/);
+  // Review M3: tracking that is not a subtractable length.
+  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '5%' } })), /letter-spacing "5%", which is not a px \/ em \/ rem length/);
+  // Review M2: tracking the part INHERITS — a root's per-variant 2px drew a 42px box where Figma's is 40.
+  const inherits = flagged({}, { ...ROOT, literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] });
+  assert.match(errorsOf(inherits), /inherits letter-spacing from "root" and states none of its own/);
+  assert.match(errorsOf(flagged({}, { ...ROOT, literals: { ...ROOT.literals, 'letter-spacing': '2px' } })), /inherits letter-spacing from "root"/);
+  assert.equal(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '1px' } }, { ...ROOT, literals: { ...ROOT.literals, 'letter-spacing': '2px' } })), '', 'a part that states its own tracking does not inherit');
+  // Review (low): an inline-level element — inline-size does nothing there.
+  assert.match(errorsOf(flagged({ declared: { display: 'inline' } })), /declares display: inline — inline-size does not apply/);
+  assert.match(errorsOf(flagged({ declared: { display: 'contents' } })), /declares display: contents/);
+  assert.match(errorsOf(flagged({}, { ...ROOT, declared: { display: 'block' } })), /sits in a parent laid out as display: block/);
+  assert.equal(errorsOf(flagged({ declared: { display: 'block' } }, { ...ROOT, declared: { display: 'block' } })), '', 'a part that is block-level itself is fine');
+  assert.equal(errorsOf(flagged({ declared: { position: 'absolute' } }, { ...ROOT, declared: { display: 'block', position: 'relative' } })), '', 'absolute placement blockifies');
   assert.throws(() => contract({ ...LABEL, textAutoResize: 'HEIGHT' }), 'only the value that lowers is spelled');
   assert.throws(() => contract({ ...LABEL, textAutoResize: 'TRUNCATE' }));
 });
+
+// --- measured -------------------------------------------------------------
+const FONT = { 'font-size': '13px', 'line-height': '16px', 'letter-spacing': '0.35px' };
+const FACE = { 'font-family': 'Arial' };
+const LONG = 'Please review the updated terms before continuing with your purchase today.';
+/** Strip the calc-size declaration from every rule and inline style: an engine without calc-size(). */
+const withoutCalcSize = (root: HTMLElement) => {
+  for (const sheet of Array.from(document.styleSheets)) for (const r of Array.from(sheet.cssRules) as CSSStyleRule[]) if (r.style?.inlineSize?.startsWith('calc-size')) r.style.removeProperty('inline-size');
+  const el = root.firstElementChild as HTMLElement;
+  if (el.style.inlineSize.startsWith('calc-size')) el.style.removeProperty('inline-size');
+};
+type Seen = { width: number; height: number; root: number; rootHeight: number; runWidth: number; leftGap: number; rightGap: number; lines: number; overflow: number; x: number };
+async function measurer(browser: import('playwright-core').Browser, surface: 'css-module' | 'inline') {
+  return async (subject: Contract, props: Record<string, unknown> = {}, decorate: (root: HTMLElement) => void = () => {}): Promise<Seen> => {
+    const out = surface === 'inline' ? { ...inline(subject), css: '' } : modules(subject);
+    assert.deepEqual(generatedTypeErrors(subject.name, out.tsx), []);
+    const p = await browser.newPage();
+    try {
+      const render = await mountGenerated(p, subject.name, out.tsx, out.css);
+      await render({ tone: 'brand', ...props });
+      return await p.locator('#root > :first-child').evaluate((root, decorateSrc) => {
+        (new Function('root', `(${decorateSrc})(root)`))(root);
+        const el = root.firstElementChild as HTMLElement;
+        const range = document.createRange(); range.selectNodeContents(el);
+        const box = el.getBoundingClientRect(), run = range.getBoundingClientRect(), r = root.getBoundingClientRect();
+        const rs = getComputedStyle(root);
+        const contentRight = r.right - parseFloat(rs.paddingRight) - parseFloat(rs.borderRightWidth);
+        return {
+          width: box.width, height: box.height, root: r.width, rootHeight: r.height, runWidth: run.width,
+          leftGap: run.left - box.left, rightGap: box.right - run.right,
+          lines: new Set(Array.from(range.getClientRects(), (x) => Math.round(x.top))).size,
+          overflow: box.right - contentRight, x: box.left - r.left - parseFloat(rs.paddingLeft) - parseFloat(rs.borderLeftWidth),
+        };
+      }, decorate.toString());
+    } finally { await p.close(); }
+  };
+}
 
 test('MEASURED in Chromium: the flagged box is the run rounded up to the pixel (less the trailing tracking), the hug root follows, a centred run stays centred, RTL and vertical writing round the inline axis; the unflagged box keeps its fractional advance — both React surfaces', async (t) => {
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
-    try {
-      assert.equal(await page.evaluate((v) => CSS.supports('inline-size', v), TRIMMED), true, 'the lowering rests on calc-size(); this Chromium has it');
-      // A font every Chromium has, at a size and tracking that make the advance fractional.
-      const font = { 'font-size': '13px', 'line-height': '16px', 'letter-spacing': '0.35px' };
-      const face = { 'font-family': 'Arial' };
-      for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
-        const plain = contract({ ...LABEL, literals: font, declared: face });
-        const c = flagged({ literals: font, declared: face });
-        const measure = async (subject: Contract, decorate: (root: HTMLElement) => void = () => {}) => {
-          const out = surface === 'inline' ? { ...inline(subject), css: '' } : modules(subject);
-          assert.deepEqual(generatedTypeErrors(subject.name, out.tsx), []);
-          const p = await browser.newPage();
-          try {
-            const render = await mountGenerated(p, subject.name, out.tsx, out.css);
-            await render({ tone: 'brand' });
-            return await p.locator('#root > :first-child').evaluate((root, decorateSrc) => {
-              (new Function('root', `(${decorateSrc})(root)`))(root);
-              const el = root.firstElementChild as HTMLElement;
-              const range = document.createRange(); range.selectNodeContents(el);
-              const box = el.getBoundingClientRect(), run = range.getBoundingClientRect(), r = root.getBoundingClientRect();
-              return { width: box.width, height: box.height, root: r.width, rootHeight: r.height, runWidth: run.width, leftGap: run.left - box.left, rightGap: box.right - run.right, inlineSize: getComputedStyle(el).inlineSize };
-            }, decorate.toString());
-          } finally { await p.close(); }
-        };
-        const before = await measure(plain);
-        const after = await measure(c);
-        const n = 'Label'.length, ls = 0.35;
-        assert.equal(after.runWidth, before.runWidth, 'the glyph run itself does not move');
-        assert.ok(!Number.isInteger(before.width), `the control must have a fractional advance for this to prove anything (${before.width})`);
-        assert.equal(after.width, Math.ceil(before.width - ls - 1e-6), `Figma's box: the run less the trailing tracking, rounded up (${before.width} → ${after.width})`);
-        assert.ok(after.width < before.width + 1, 'never a whole pixel wider than the browser run');
-        assert.equal(after.root, after.width + 16, 'the hug root is a whole number: padding plus the whole-pixel box');
-        assert.equal(after.rootHeight, before.rootHeight, 'the block axis is untouched');
-        // Centred: the run sits in the middle of the wider box; left-aligned (the default): at its start.
-        const centred = await measure(flagged({ literals: font, declared: { ...face, 'text-align': 'center' } }));
-        assert.ok(Math.abs(centred.leftGap - centred.rightGap) < 0.02, `centred run: ${centred.leftGap} vs ${centred.rightGap}`);
-        assert.ok(after.leftGap < 0.02 && after.rightGap >= 0, 'left-aligned run at the start edge');
-        // RTL: `inline-size` is the same axis, and the run starts at the right edge.
-        const rtl = await measure(c, (root) => { root.dir = 'rtl'; });
-        assert.equal(rtl.width, after.width);
-        assert.ok(rtl.rightGap < 0.02, `RTL run at the right edge (${rtl.rightGap})`);
-        // Vertical writing: the INLINE axis is now vertical, so the height is the whole-pixel one and the width is the line.
-        const vertical = await measure(c, (root) => { root.style.writingMode = 'vertical-rl'; });
-        assert.equal(vertical.height, after.width, 'logical inline-size rounds the axis the text runs along');
-        assert.equal(vertical.width, 16);
-      });
-    } finally { await page.close(); }
+    try { assert.equal(await page.evaluate((v) => CSS.supports('inline-size', v), TRIMMED), true, 'the lowering rests on calc-size(); this Chromium has it'); } finally { await page.close(); }
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      const measure = await measurer(browser, surface);
+      const plain = contract({ ...LABEL, literals: FONT, declared: FACE });
+      const c = flagged({ literals: FONT, declared: FACE });
+      const before = await measure(plain);
+      const after = await measure(c);
+      const ls = 0.35;
+      assert.equal(after.runWidth, before.runWidth, 'the glyph run itself does not move');
+      assert.ok(!Number.isInteger(before.width), `the control must have a fractional advance for this to prove anything (${before.width})`);
+      assert.equal(after.width, Math.ceil(before.width - ls - 1e-6), `Figma's box: the run less the trailing tracking, rounded up (${before.width} → ${after.width})`);
+      assert.ok(after.width < before.width + 1, 'never a whole pixel wider than the browser run');
+      assert.equal(after.root, after.width + 16, 'the hug root is a whole number: padding plus the whole-pixel box');
+      assert.equal(after.rootHeight, before.rootHeight, 'the block axis is untouched');
+      const centred = await measure(flagged({ literals: FONT, declared: { ...FACE, 'text-align': 'center' } }));
+      assert.ok(Math.abs(centred.leftGap - centred.rightGap) < 0.02, `centred run: ${centred.leftGap} vs ${centred.rightGap}`);
+      assert.ok(after.leftGap < 0.02 && after.rightGap >= 0, 'left-aligned run at the start edge');
+      const rtl = await measure(c, {}, (root) => { root.dir = 'rtl'; });
+      assert.equal(rtl.width, after.width);
+      assert.ok(rtl.rightGap < 0.02, `RTL run at the right edge (${rtl.rightGap})`);
+      const vertical = await measure(c, {}, (root) => { root.style.writingMode = 'vertical-rl'; });
+      assert.equal(vertical.height, after.width, 'logical inline-size rounds the axis the text runs along');
+      assert.equal(vertical.width, 16);
+    });
+  } finally { await browser.close(); }
+});
+
+test('MEASURED in Chromium (review H1): a long runtime string still WRAPS exactly as without the fact and never overflows — in a fixed fractional-width flex column and in a fixed-width grid parent — both React surfaces', async (t) => {
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      const measure = await measurer(browser, surface);
+      const grid = (root: HTMLElement) => { root.style.display = 'grid'; root.style.width = '120.5px'; root.style.alignItems = ''; root.style.justifyContent = ''; };
+      for (const [where, root, decorate] of [
+        ['flex column 120.5px', COLUMN('120.5px'), () => {}],
+        ['flex column 240px', COLUMN('240px'), () => {}],
+        ['grid 120.5px', ROOT, grid],
+      ] as const) {
+        const plain = await measure(contract({ ...LABEL, literals: FONT, declared: FACE }, root), { label: LONG }, decorate);
+        const flag = await measure(flagged({ literals: FONT, declared: FACE }, root), { label: LONG }, decorate);
+        assert.ok(plain.lines > 1, `${where}: the control wraps (${plain.lines} lines)`);
+        assert.equal(flag.lines, plain.lines, `${where}: the same wrap as without the fact`);
+        assert.equal(flag.height, plain.height, `${where}: the same block size`);
+        assert.ok(flag.overflow <= 0.001, `${where}: no overflow past the parent's content edge (${flag.overflow})`);
+        assert.ok(flag.root <= plain.root + 0.001, `${where}: the component does not grow (${plain.root} → ${flag.root})`);
+      }
+    });
+  } finally { await browser.close(); }
+});
+
+test('MEASURED in Chromium (review M1): under a flex column that would stretch it, the flagged box starts at the start edge — the Figma hug box — with calc-size() AND in an engine without it; the unflagged box is stretched', async (t) => {
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      const measure = await measurer(browser, surface);
+      const centred = { literals: FONT, declared: { ...FACE, 'text-align': 'center' } };
+      const plain = await measure(contract({ ...LABEL, ...centred }, COLUMN('200px')));
+      const flag = await measure(flagged(centred, COLUMN('200px')));
+      const bare = await measure(flagged(centred, COLUMN('200px')), {}, withoutCalcSize);
+      assert.equal(plain.width, 200, 'CSS stretches the unflagged label across the column');
+      assert.ok(plain.leftGap > 80, `…and centres the run in it (${plain.leftGap})`);
+      assert.equal(flag.x, 0);
+      assert.equal(flag.width, Math.ceil(flag.runWidth - 0.35 - 1e-6));
+      assert.equal(bare.x, 0, 'align-self keeps an engine without calc-size() at the same start edge');
+      assert.ok(bare.width < flag.width && flag.width - bare.width < 1, `…with its fractional box, under a pixel narrower (${bare.width} vs ${flag.width})`);
+    });
   } finally { await browser.close(); }
 });

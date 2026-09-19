@@ -80,9 +80,8 @@ import {
   finishStylesheet,
   generateCss,
   lowerStrokeRings,
-  drawsWholePixelTextBox,
   settleStrokeShadows,
-  wholePixelTextBoxValue,
+  wholePixelTextBoxPlan,
   isArrayType,
   isEnum,
   kebab,
@@ -245,6 +244,9 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // that takes no layout space — core lowerStrokeRings, the same rewrite
   // generateCss applies, so the two sheets cannot disagree about a border.
   const contract = lowerStrokeRings(input);
+  // dump v1.36: the whole-pixel text box, the same declarations generateCss
+  // writes (which also refuses an unsubtractable tracking token by name).
+  const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
   const k = kebab(contract.name);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
@@ -607,9 +609,9 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
     // dump v1.36: the whole-pixel text box — the same declaration generateCss
-    // writes (core anatomy.ts drawsWholePixelTextBox), so the two sheets
+    // writes (core anatomy.ts wholePixelTextBoxDecls), so the two sheets
     // cannot disagree about a text box.
-    if (drawsWholePixelTextBox(part)) decls.push(`inline-size: ${wholePixelTextBoxValue(part, cssVar)}`);
+    decls.push(...(textBoxes.get(part) ?? []));
     if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
       decls.push('width: 100%', 'height: 100%');
     }

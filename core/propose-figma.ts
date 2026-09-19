@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -39,6 +39,7 @@ import {
   type ExactVariantRow,
 } from './exact-projection.js';
 import { validateContract } from '../packages/core/src/validate.js';
+import { textBoxStaticRefusals } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
@@ -5127,6 +5128,24 @@ function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ct
   };
   for (const [name, part] of Object.entries(anatomy)) visit(name, part);
 }
+/** dump v1.36: a flag the finished contract cannot honour — inherited or
+ *  unsubtractable tracking, an inline-level element, a sizing channel the
+ *  part picked up elsewhere — is WITHDRAWN by name rather than proposed into
+ *  a contract validateContract refuses (the settleStrokeLayout discipline;
+ *  one rule, anatomy.ts textBoxStaticRefusals). */
+function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void {
+  const c = contract as unknown as Contract;
+  for (const { name, part, path } of walkAnatomy(c)) {
+    if (part.textAutoResize === undefined) continue;
+    const reasons = textBoxStaticRefusals(c, part, path);
+    // @door propose.text-box-unhonourable-withdrawn
+    if (reasons.length === 0) continue;
+    delete (part as Record<string, unknown>).textAutoResize;
+    ctx.notes.push(
+      `${name}: textAutoResize WIDTH_AND_HEIGHT was captured but the part ${reasons.join('; and ')} — the whole-pixel box is WITHDRAWN and the text keeps the browser's fractional advance`,
+    );
+  }
+}
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
  * captured spacing cannot use a uniform literal. */
@@ -5216,7 +5235,7 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
  *  The designer's numbers are KEPT. The part records the one captured fact,
  *  under Figma's own name and only in the value that lowers —
  *  `textAutoResize: 'WIDTH_AND_HEIGHT'` — for the code emitters to give the
- *  text element the same box (`inline-size: calc-size(max-content,
+ *  text element the same box (`inline-size: calc-size(fit-content,
  *  round(up, size, 1px))`, a progressive enhancement: a browser without
  *  calc-size() keeps today's fractional box) and the writer to set back.
  *
@@ -5226,25 +5245,31 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
  *     always did;
  *   · NONE / HEIGHT / TRUNCATE are a fixed or filled box; the width and fill
  *     vocabulary already carries those, so nothing is written;
- *   · a node auto-width in some variants and not in others has no single
- *     spelling (the fact is per part, not per variant) and is NAMED;
+ *   · a node auto-width in some variants and not in others — or reporting
+ *     nothing in some (REST may omit its default) — has no single spelling
+ *     (the fact is per part, not per variant) and is NAMED;
  *   · a node that says WIDTH_AND_HEIGHT and FILL at once contradicts itself
  *     (Figma turns a filled text box to HEIGHT) — the dump is NAMED, never
  *     guessed at, and the part keeps the fill it would have had.
- *  validateContract refuses the flag beside a width / fill / truncation
- *  channel, so the writer's own compile (a hugging text part) is the only
- *  shape that ever carries it. */
+ *  validateContract refuses the flag wherever it would be wrong or inert
+ *  (anatomy.ts textBoxStaticRefusals); settleTextAutoResize withdraws, by
+ *  name, a flag the finished contract could not honour. */
 function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
-  const captured = m.occ.filter((o) => o.node.text?.textAutoResize !== undefined);
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  const captured = textOcc.filter((o) => o.node.text!.textAutoResize !== undefined);
   // @door propose.text-box-absent-is-fractional
   if (captured.length === 0) return; // not captured (dump ≤ v1.35) — the browser's own fractional box
-  const modes = [...new Set(captured.map((o) => o.node.text!.textAutoResize!))];
+  const auto = captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length;
   // @door propose.text-box-not-auto-width-unchanged
-  if (!modes.includes('WIDTH_AND_HEIGHT')) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  if (auto === 0) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  // A variant whose text reports NOTHING beside ones that report a value is
+  // not evidence of auto-width (REST may omit its default) — it counts as the
+  // mixed case, never as agreement (review, PR 132).
   // @door propose.text-box-mixed-refused
-  if (modes.length > 1) {
+  if (auto < textOcc.length) {
+    const others = [...new Set(textOcc.filter((o) => o.node.text!.textAutoResize !== 'WIDTH_AND_HEIGHT').map((o) => o.node.text!.textAutoResize ?? 'not captured'))];
     ctx.notes.push(
-      `${where}: the text box sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) in ${captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length} of ${captured.length} variants and is ${modes.filter((v) => v !== 'WIDTH_AND_HEIGHT').join(' / ')} in the rest — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the text keeps the browser's fractional advance (up to 1px narrower than Figma's whole-pixel box; review)`,
+      `${where}: the text box sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) in ${auto} of ${textOcc.length} variants and is ${others.join(' / ')} in the rest — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the text keeps the browser's fractional advance (up to 1px narrower than Figma's whole-pixel box; review)`,
     );
     return;
   }
@@ -5258,7 +5283,7 @@ function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ct
   }
   holder.textAutoResize = 'WIDTH_AND_HEIGHT';
   ctx.notes.push(
-    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's max-content inline size up to the pixel where calc-size() is supported, and the writer sets the field back on the node`,
+    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's fit-content inline size up to the pixel where calc-size() is supported (a label that does not fit still wraps), and the writer sets the field back on the node`,
   );
 }
 
@@ -12688,6 +12713,7 @@ function proposeFromDumpFenced(
   }
 
   settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
+  settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); // dump v1.36
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);

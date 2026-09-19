@@ -83,10 +83,11 @@
  *                                                     drawn" and "not captured" stay different facts)
  *   style.textAlignHorizontal                       text.textAlign (dump v1.31 — CENTER | RIGHT | JUSTIFIED; LEFT is
  *                                                     the CSS default and is omitted, as the plugin dump omits it)
- *   style.textAutoResize                            text.textAutoResize (dump v1.36 — NONE | HEIGHT | WIDTH_AND_HEIGHT |
- *                                                     TRUNCATE, verbatim on every text node; a box that sizes itself to
- *                                                     its text is a whole number of pixels wide, so WIDTH_AND_HEIGHT
- *                                                     inverts to Part.textAutoResize; absent = not captured)
+ *   style.textAutoResize (absent = NONE)            text.textAutoResize (dump v1.36 — NONE | HEIGHT | WIDTH_AND_HEIGHT |
+ *                                                     TRUNCATE on every text node; a box that sizes itself to its text is
+ *                                                     a whole number of pixels wide, so WIDTH_AND_HEIGHT inverts to
+ *                                                     Part.textAutoResize; REST omits its default, so an absent RESPONSE
+ *                                                     key is NONE here; absent in the DUMP is not captured)
  *   node.styles.effect → styles metadata map        effectStyle / effectStyleKey (dump v1.31 — the EffectStyle's name
  *                                                     and publish key), else effect-style-unresolved
  *   effects[].boundVariables.{radius,spread,color,  effects[].bound.<channel> (dump v1.31) via the variables response,
@@ -1102,8 +1103,21 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // complete and lowered by nothing here. An ABSENT dump field means not
   // captured (dump ≤ v1.35), never auto-width. Twin of the same write in
   // extract/figma/dump.plugin.js.
+  //
+  // ABSENT IN THE RESPONSE IS READ AS `NONE` (review, PR 132 — an AGENT
+  // decision). REST omits defaults (strokesIncludedInLayout is the measured
+  // precedent) and `NONE` is this field's default; two read-only GETs on the
+  // designer files (Altitude Radio 3543:47540, CBDS Avatar 284:11) returned
+  // WIDTH_AND_HEIGHT and HEIGHT explicitly and never NONE, which is what an
+  // omitted default looks like but does not prove it. The reading is chosen
+  // because it is SAFE under either truth: if REST does send NONE, absence
+  // never happens; if it omits it, a fixed box beside auto-width variants is
+  // the mixed case (refused by name), never a silent auto-width. The same
+  // unknown spelling is not copied. INVERSE: delete the `else` branch.
   if (s.textAutoResize === 'NONE' || s.textAutoResize === 'HEIGHT' || s.textAutoResize === 'WIDTH_AND_HEIGHT' || s.textAutoResize === 'TRUNCATE') {
     text.textAutoResize = s.textAutoResize;
+  } else if (s.textAutoResize === undefined) {
+    text.textAutoResize = 'NONE';
   }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];

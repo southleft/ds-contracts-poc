@@ -47,16 +47,17 @@ const partOf = (result: { contract: unknown }, name = 'Label') => (result.contra
 const without = (set: DumpSet): DumpSet => { const copy = structuredClone(set); for (const v of copy.variants) delete labelOf(v as DumpNode).text!.textAutoResize; return copy; };
 const AUTO = { resize: 'WIDTH_AND_HEIGHT', sizing: 'HUG' };
 
-test('the REST reader carries textAutoResize verbatim on every text node — all four values — and writes nothing where the response says nothing', () => {
-  const { set, provenance } = mapped([AUTO, { resize: 'HEIGHT', sizing: 'FILL' }, { resize: 'NONE', sizing: 'FIXED' }]);
+test('the REST reader carries textAutoResize on every text node — an ABSENT response key is NONE, REST\'s default (review M4) — and never copies an unknown spelling', () => {
+  // A fixed box is built BY OMISSION, as REST is believed to report it: NONE is the field's default.
+  const { set, provenance } = mapped([AUTO, { resize: 'HEIGHT', sizing: 'FILL' }, { sizing: 'FIXED' }]);
   assert.equal(provenance.dumpVersion, '1.36');
   assert.deepEqual(set.variants.map((v) => labelOf(v as DumpNode).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', 'NONE']);
+  assert.equal(labelOf(mapped([{ resize: 'NONE', sizing: 'FIXED' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'NONE', 'an explicit NONE reads the same');
   assert.equal(labelOf(mapped([{ resize: 'TRUNCATE' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'TRUNCATE', 'the deprecated value is captured too, so nothing is guessed at');
-  assert.equal('textAutoResize' in labelOf(mapped([{}]).set.variants[0] as DumpNode).text!, false, 'absent in the response stays absent — "not captured", never auto-width');
-  assert.equal('textAutoResize' in labelOf(mapped([{ resize: 'SOMETHING_NEW' }]).set.variants[0] as DumpNode).text!, false, 'an unknown spelling is not copied');
+  assert.equal('textAutoResize' in labelOf(mapped([{ resize: 'SOMETHING_NEW' }]).set.variants[0] as DumpNode).text!, false, 'an unknown spelling is not copied (and is not read as NONE)');
   // The new field is the ONLY thing that moved on the node.
   const { textAutoResize: _a, ...rest } = labelOf(mapped([AUTO]).set.variants[0] as DumpNode).text!;
-  const { textAutoResize: _b, ...same } = labelOf(mapped([{ sizing: 'HUG' }]).set.variants[0] as DumpNode).text!;
+  const { textAutoResize: _b, ...same } = labelOf(mapped([{ resize: 'HEIGHT', sizing: 'HUG' }]).set.variants[0] as DumpNode).text!;
   assert.deepEqual(rest, same);
 });
 
@@ -94,7 +95,7 @@ test('reader → proposer: an auto-width text box proposes textAutoResize: WIDTH
   const errors: string[] = [];
   const css = generateCss(result.contract as never, inventory, errors);
   assert.deepEqual(errors, []);
-  assert.match(css, /\n\.Label \{[^}]*\n  inline-size: calc-size\(max-content, round\(up, size, 1px\)\);/, 'no tracking on this label: nothing to shed before rounding');
+  assert.match(css, /\n\.Label \{[^}]*\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;/, 'no tracking on this label: nothing to shed before rounding');
   assert.doesNotMatch(generateCss(plain.contract as never, inventory, []), /calc-size|inline-size/, 'not captured: the bytes it always emitted');
 });
 
@@ -102,7 +103,7 @@ test('not captured, or not auto-width, proposes exactly what it did before — a
   const legacy = propose(without(mapped([AUTO, AUTO]).set));
   assert.equal('textAutoResize' in partOf(legacy), false, 'absent is not captured, never auto-width');
   assert.equal(legacy.notes.some((n) => /textAutoResize/.test(n)), false, 'and nothing is said about it');
-  const fixed = propose(mapped([{ resize: 'NONE', sizing: 'FIXED' }, { resize: 'NONE', sizing: 'FIXED' }]).set);
+  const fixed = propose(mapped([{ sizing: 'FIXED' }, { sizing: 'FIXED' }]).set);
   assert.equal('textAutoResize' in partOf(fixed), false, 'a fixed box is not sized by its text');
   assert.equal(fixed.notes.some((n) => /textAutoResize/.test(n)), false);
   const filled = propose(mapped([{ resize: 'HEIGHT', sizing: 'FILL' }, { resize: 'HEIGHT', sizing: 'FILL' }]).set);
@@ -122,6 +123,15 @@ test('mixed evidence and a contradicting dump are NAMED, never guessed', () => {
   assert.equal('textAutoResize' in partOf(contradiction), false);
   assert.ok(contradiction.notes.some((n) => /WIDTH_AND_HEIGHT is captured beside layoutSizingHorizontal FILL in 2 of 2 variants .* REFUSED BY NAME/.test(n)));
   ContractSchema.parse(contradiction.contract);
+  // Review M4: a variant whose text reports NOTHING beside auto-width ones is the mixed case, never agreement —
+  // on the REST route the omitted default reads NONE; on a dump with a hole it is "not captured".
+  const omitted = propose(mapped([AUTO, { sizing: 'FIXED' }]).set);
+  assert.equal('textAutoResize' in partOf(omitted), false);
+  assert.ok(omitted.notes.some((n) => /in 1 of 2 variants and is NONE in the rest .* REFUSED BY NAME/.test(n)));
+  const hole = mapped([AUTO, AUTO]).set; delete labelOf(hole.variants[1] as DumpNode).text!.textAutoResize;
+  const holed = propose(hole);
+  assert.equal('textAutoResize' in partOf(holed), false);
+  assert.ok(holed.notes.some((n) => /in 1 of 2 variants and is not captured in the rest .* REFUSED BY NAME/.test(n)));
 });
 
 test('a sole root text node named "label" is hoisted into anatomy.root.text — the fact is NAMED there, not carried onto the root', () => {

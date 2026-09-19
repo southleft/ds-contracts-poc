@@ -195,7 +195,7 @@ export interface DumpText {
    *  absoluteBoundingBox.width 32 where Chromium lays the same run out at
    *  31.40625) — so WIDTH_AND_HEIGHT inverts to `Part.textAutoResize:
    *  'WIDTH_AND_HEIGHT'` and the code surfaces round the element's
-   *  max-content inline size up to the pixel. The other values are a fixed
+   *  fit-content inline size up to the pixel. The other values are a fixed
    *  or filled box, which fillWidth / the width vocabulary already carry;
    *  they are copied so the fact is captured, and propose lowers none of
    *  them. Absence in older dumps means not captured (dump ≤ v1.35), never
