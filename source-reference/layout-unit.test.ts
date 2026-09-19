@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { authoredLengthIsUsed } from './layout-unit.js';
+import { authoredLengthIsUsed, usedLayoutUnits } from './layout-unit.js';
 
 test('an authored fractional length matches its 1/64 px layout-unit reading, and nothing looser', () => {
   assert.equal(authoredLengthIsUsed('18.4px', '18.3906px'), true); // 1177/64, six significant digits
@@ -12,4 +12,10 @@ test('an authored fractional length matches its 1/64 px layout-unit reading, and
   assert.equal(authoredLengthIsUsed('18.4px', '18px'), false);
   assert.equal(authoredLengthIsUsed('1.15rem', '18.3906px'), false); // only px is an authored pixel length
   assert.equal(authoredLengthIsUsed('auto', '18.3906px'), false);
+});
+
+test('a used length reads as whole layout units only when it is the serialization of one', () => {
+  assert.deepEqual(['32px', '18.3906px', '118.391px', '0px', '-8px', '0.5px'].map(usedLayoutUnits), [2048, 1177, 7577, 0, -512, 32]);
+  assert.deepEqual(['18.4px', '18.39px', '0.01px', 'auto', '50%', 'calc(100% - 2px)', ''].map(usedLayoutUnits), Array(7).fill(undefined));
+  assert.equal(usedLayoutUnits('32px')! - 2 * usedLayoutUnits('1px')! - usedLayoutUnits('16px')!, 14 * 64, 'box arithmetic is integer arithmetic');
 });
