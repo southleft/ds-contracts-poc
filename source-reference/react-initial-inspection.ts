@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync, renameSync } from '
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { chromium } from 'playwright-core';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
@@ -39,18 +40,30 @@ type Request = ReactInspectionRequest;
 export const reactInitialObserverModules = ['react-initial-inspection.ts', 'react-initial-state.ts', 'react-program-proposal.ts',
   'react-property-effects.ts', 'react-property-probe.ts', 'react-ownership.ts', 'react-source-anatomy.ts', 'react-style-origin.ts', 'layout-unit.ts',
   'grid-constraints.ts', 'text-fonts.ts', 'svg-viewports.ts', 'source-framing.ts', 'capture.ts', 'observe.ts', 'react-reference.ts',
-  '../extract/computed/capture.ts', '../extract/computed/lib.ts'] as const;
+  '../extract/computed/capture.ts', '../extract/computed/lib.ts',
+  // What is SEALED is spelled by these two: every image/tree hash and inventory (evidenceSha) and every treeRevision (revisionOf).
+  'react-validation-evidence.ts', '../core/contract-provenance.ts'] as const;
+export const observerIdentityUnavailable = 'observer-identity-unavailable';
+/** Module hashes plus the browser that renders the mounts (a Chromium upgrade changes what an observation says).
+ * Where the sources or the browser manifest cannot be read (a bundled deployment), the identity is the one named
+ * marker: such a store never calls a saved run stale. */
 export function reactInitialObserverIdentity(): Record<string, string> {
-  const root = path.dirname(fileURLToPath(import.meta.url));
-  return Object.fromEntries(reactInitialObserverModules.map(f => [f, evidenceSha(readFileSync(path.join(root, f)))]));
+  try {
+    const root = path.dirname(fileURLToPath(import.meta.url)), manifest = createRequire(import.meta.url).resolve('playwright-core/package.json');
+    const chromiumBuild = (JSON.parse(readFileSync(path.join(path.dirname(manifest), 'browsers.json'), 'utf8')).browsers as Array<{ name: string; revision: string; browserVersion: string }>).find(b => b.name === 'chromium')!;
+    return { ...Object.fromEntries(reactInitialObserverModules.map(f => [f, evidenceSha(readFileSync(path.join(root, f)))])),
+      'playwright-core': `${JSON.parse(readFileSync(manifest, 'utf8')).version} chromium ${chromiumBuild.browserVersion} r${chromiumBuild.revision}` };
+  } catch { return { [observerIdentityUnavailable]: 'sources-or-browser-manifest-unreadable' }; }
 }
-/** May a COMPLETE run be observed again? Only when its recorded observer is not the current one, or when it
- * records none AND today's assembler names evidence it never observed. An unrecorded run that assembles, or that
+/** May a COMPLETE run be observed again? Only when its recorded observer is not the current one, or when
+ * today's assembler names evidence it never observed (whether or not an observer was recorded). An unrecorded run that assembles, or that
  * refuses for any reason a new mount cannot answer, stays final. `report.draft` must be today's derivation. */
 export function reactInitialReobservable(report: ReactInitialInspection, observer: Record<string, string>): ReactInitialInspection['reobservable'] {
-  return report.phase !== 'complete' ? undefined
-    : report.observer ? canonicalJson(report.observer) !== canonicalJson(observer) ? 'observer-changed' : undefined
-    : report.draft?.problems.some(reactInitialEvidenceUnobserved) ? 'observer-unrecorded-and-evidence-unobserved' : undefined;
+  if (report.phase !== 'complete' || Object.hasOwn(observer, observerIdentityUnavailable)) return undefined;
+  if (report.observer && canonicalJson(report.observer) !== canonicalJson(observer)) return 'observer-changed';
+  // Evidence can come to be read from a reader OUTSIDE the module list: an equal recorded observer must not strand the run.
+  return !report.draft?.problems.some(reactInitialEvidenceUnobserved) ? undefined
+    : report.observer ? 'evidence-unobserved-by-recorded-observer' : 'observer-unrecorded-and-evidence-unobserved';
 }
 export interface ReactInitialInspection {
   id: string; caseId: string; phase: 'running' | 'complete' | 'failed'; sourceUnchanged: boolean;
@@ -61,7 +74,7 @@ export interface ReactInitialInspection {
   draft?: ReturnType<typeof compileReactInitialContract>;
   /** Derived on read, never saved. Why this COMPLETE run may be observed again; absent means it is final.
    * A run with no recorded observer that still assembles is not stale: nothing says a new mount would differ. */
-  reobservable?: 'observer-changed' | 'observer-unrecorded-and-evidence-unobserved';
+  reobservable?: 'observer-changed' | 'evidence-unobserved-by-recorded-observer' | 'observer-unrecorded-and-evidence-unobserved';
   /** Derived on read: a later observation of this key that failed. It replaced nothing. */
   lastAttempt?: { id: string; problems: string[] };
 }

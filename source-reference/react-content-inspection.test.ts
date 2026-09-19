@@ -15,7 +15,7 @@ import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
-import { createReactInitialInspectionStore, reactInitialObserverIdentity, reactInitialObserverModules, reactInitialReobservable } from './react-initial-inspection.js';
+import { createReactInitialInspectionStore, observerIdentityUnavailable, reactInitialObserverIdentity, reactInitialObserverModules, reactInitialReobservable } from './react-initial-inspection.js';
 import { builtinReactCohort } from './react-cohort.js';
 
 test('targeted content preparation matches sealed rendering, survives reopening and refuses changed evidence', async t => {
@@ -127,9 +127,13 @@ test('targeted content preparation matches sealed rendering, survives reopening 
     reactInitialReobservable({ ...reopened, draft: draftOf([]) }, now), reactInitialReobservable({ ...reopened, draft: draftOf(['react-initial-contract-root-sizing-unqualified:height']) }, now),
     reactInitialReobservable({ ...reopened, draft: draftOf(['react-initial-contract-descendant-evidence-unobserved']) }, now),
     reactInitialReobservable({ ...reopened, observer: was, draft: draftOf([]) }, now), reactInitialReobservable({ ...reopened, observer: now, draft: draftOf(['react-initial-contract-descendant-evidence-unobserved']) }, now),
-    reactInitialReobservable({ ...reopened, phase: 'failed', observer: was }, now),
-  ], [undefined, undefined, 'observer-unrecorded-and-evidence-unobserved', 'observer-changed', undefined, undefined]);
-  assert.deepEqual(Object.keys(reactInitialObserverIdentity()), [...reactInitialObserverModules]);
+    reactInitialReobservable({ ...reopened, observer: now, draft: draftOf([]) }, now), reactInitialReobservable({ ...reopened, phase: 'failed', observer: was }, now),
+    reactInitialReobservable({ ...reopened, observer: was, draft: draftOf([]) }, { [observerIdentityUnavailable]: 'x' }),
+  ], [undefined, undefined, 'observer-unrecorded-and-evidence-unobserved', 'observer-changed', 'evidence-unobserved-by-recorded-observer', undefined, undefined, undefined],
+    'evidence can come to be read from a reader outside the module list: an equal recorded observer must not strand the run; an unavailable identity calls nothing stale');
+  const identity = reactInitialObserverIdentity();
+  assert.deepEqual(Object.keys(identity), [...reactInitialObserverModules, 'playwright-core']);
+  assert.match(identity['playwright-core'], /^\d+\.\d+\.\d+\S* chromium \d+(\.\d+)+ r\d+$/, 'the browser that renders the mounts is part of what an observation says');
   assert.ok(!reactInitialObserverModules.some(f => /initial-contract|descendant-geometry|observed-content|emit-figma|fuse/.test(f)), 'assembly re-runs on read: it is not the observer');
   // A run that RECORDS its observer: final under the same observer, observable again under another one.
   const recordedId = '44444444-4444-4444-8444-444444444444', recordedDir = path.join(initialRoot, recordedId);

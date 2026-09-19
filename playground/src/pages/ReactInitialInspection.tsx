@@ -45,6 +45,7 @@ export function ReactInitialInspection({ referenceId, caseId, available, prepare
     </button>
     {result?.reobservable && <p>{result.reobservable === 'observer-changed'
       ? 'The observer has changed since this observation was saved.'
+      : result.reobservable === 'evidence-unobserved-by-recorded-observer' ? 'The current assembler names evidence this observation never recorded.'
       : 'This observation was saved before observer versions were recorded, and the current assembler names evidence it never observed.'} Observing again saves a new run beside it; the saved run and any operation that pins it are unchanged.</p>}
     {result?.lastAttempt && <p role="alert">The latest observation attempt failed ({result.lastAttempt.problems.join(', ') || 'no problem recorded'}). The saved observation above is unchanged.</p>}
     {!available && <p>Prepare a supported Figma root from the structure observation first; its saved source archive also contains this cohort’s stateful cases.</p>}
