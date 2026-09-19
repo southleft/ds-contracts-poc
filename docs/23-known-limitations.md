@@ -4956,3 +4956,14 @@ graph through `defaultContent` and `accepts`, and the nesting query in Chromium)
 `extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set
 import, byte-identical; the proposer partition is inert without
 `_provenance.closure`; the harness lookup and graph are additive.
+
+**Same-set cycle correction (AGENT decision, 2026-09-19).** A variant can
+contain an instance of another main in its own component set. The closure walk
+previously discarded that self-edge; the proposer then named the self-reference
+but emitted an empty part, with no child contract or geometry stub. Self-edges
+now enter the existing cycle walk and produce the same `cycle-cut` record and
+distinct stub as a cross-set cycle. They fetch no additional set. The bounded
+probe runs both shapes through proposal and generation; neither produces a
+circular contract graph. This preserves the named geometry fallback, not the
+nested variant's full content. Reversal: restore the `targetId !== setId` filter
+in `followInstances` and the previous self-reference expectation.
