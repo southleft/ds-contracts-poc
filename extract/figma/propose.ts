@@ -481,7 +481,7 @@ function main() {
             (u) =>
               `- not followed [${u.reason}] ${u.name ?? u.targetId} (${u.targetId}) ← ${u.referencedFrom.length} instance(s): ${u.detail}`,
           ),
-          ...closure.cycles.map(([from, to]) => `- cycle ${from} → ${to} (cut; the reference back resolves by id)`),
+          ...closure.cycles.map(([from, to]) => `- cycle cut at ${from} → ${to}: ${from} is proposed first, so its reference to ${to} is a stub (skipped above when ${to}'s real contract claims the same id)`),
         ]
       : []),
     ...(usedFallbackCorpus

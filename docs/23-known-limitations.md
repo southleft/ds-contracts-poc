@@ -4852,8 +4852,11 @@ with no children; the designer's current set is `3570:2154` on the same page.)
   ones (Tabs pulls the 120-variant `Button`; its dump is 1.7 MB), and each is
   proposed and generated.
 - A cycle is cut where the post-order walk re-enters a set on its stack
-  (`cycles`); the set proposed first references the other as a stub that the CLI
-  never writes, because the real contract claims the id.
+  (`cycles`, `[from, to]`): `from` is proposed first, so its reference to `to` is
+  an auto-proposed stub. The propose CLI skips a stub file whose id a real
+  proposal claims; when the proposer suffixed one of the two ids (a collision
+  with an in-scope contract), the stub is written and named like any other.
+  Untested on a live file (no measured set has a cycle).
 - The Playground's URL import does not follow instances (library default off).
 
 **Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,

@@ -70,7 +70,7 @@ function main(): Promise<void> {
       for (const u of c.unresolved) {
         console.error(`closure: not followed [${u.reason}] ${u.name ?? u.targetId} (${u.targetId}) ← ${u.referencedFrom.length} instance(s): ${u.detail}`);
       }
-      for (const [from, to] of c.cycles) console.error(`closure: cycle ${from} → ${to} — ${to} is proposed before ${from} references it; the reference back is proposed as a stub the real contract replaces by id`);
+      for (const [from, to] of c.cycles) console.error(`closure: cycle cut at ${from} → ${to} — ${from} is proposed first, so its reference to ${to} is an auto-proposed stub; the propose CLI skips that stub file when ${to}'s real contract claims the same id`);
     } else if (!closure) {
       console.log('- closure: off (--no-closure) — instances of other sets stay auto-proposed stubs');
     }

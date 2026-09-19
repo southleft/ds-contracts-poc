@@ -35,8 +35,9 @@
  * (core/propose-figma.ts proposeBatchFromDump). Fetch rounds visit targets in
  * sorted id order, so the dump is byte-stable across runs. A cycle (A → B →
  * A) is cut where the walk re-enters a set already on its stack and named in
- * `cycles`; the set proposed first then references the other as a stub the
- * CLI never writes (the real contract claims the id).
+ * `cycles` as [from, to]: `from` is proposed first, so its reference to `to`
+ * is an auto-proposed stub (the propose CLI skips that stub file when `to`'s
+ * real contract claims the same id).
  *
  * Browser-pure: no node builtins; the fetch is injected.
  */
