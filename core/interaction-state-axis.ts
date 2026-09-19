@@ -9,7 +9,10 @@
  * `anatomy.*.states`, the `disabled` boolean) — deterministically, by this
  * table and nothing else. Matching is case-, space- and underscore-insensitive
  * and EXACT per token: "Focus Visible" is `focus-visible`, "Focused" is not in
- * the table and is never guessed at.
+ * the table and is never guessed at. Two guards (review, PR 131 H2): the axis
+ * must be NAMED state / states / interaction, and `active` is a press only with
+ * `hover` or `pressed` beside it — otherwise the axis stays the designer's own
+ * enum prop, by name.
  *
  * The table is what the contract can already express and both code emitters
  * already render (packages/core/src/anatomy.ts STATE_SELECTORS: hover, active,
@@ -37,8 +40,13 @@ export const INTERACTION_STATE_BY_VALUE: Readonly<Record<string, InteractionStat
 /** "Focus Visible" / "focus_visible" / " FOCUS-VISIBLE " → "focus-visible". */
 export const normStateValue = (v: string): string => v.trim().toLowerCase().replace(/[\s_]+/g, '-');
 
-/** The axis NAME says "state": `state`, `State`, `states`. */
-export const isStateAxisName = (property: string): boolean => /^states?$/i.test(property.trim());
+/** The axis NAME says it is interaction state: `state`, `State`, `states`,
+ *  `Interaction`. REQUIRED for any projection (review, PR 131 H2): a pure-table
+ *  value set on an axis called `Status`, `Type`, `Kind` or `Mode` is an account
+ *  status or a nav item's kind far more often than it is :hover, and the name
+ *  is the only thing on the canvas that tells them apart. */
+export const isStateAxisName = (property: string): boolean =>
+  ['state', 'states', 'interaction'].includes(property.trim().toLowerCase().replace(/[\s_-]+/g, ''));
 
 export const interactionStateOf = (value: string): InteractionState | undefined =>
   Object.prototype.hasOwnProperty.call(INTERACTION_STATE_BY_VALUE, normStateValue(value))
@@ -58,8 +66,26 @@ export type StateAxisRefusal =
   | 'state-axis-duplicate-state'
   /** Two axes of one set both read as pure interaction-state axes. */
   | 'state-axis-multiple'
-  /** Not named "state" and fewer than two non-rest values: weak evidence. */
-  | 'state-axis-unnamed-incomplete';
+  /** Every value is in the table but the axis NAME does not say state
+   *  (`Status[Default|Active|Disabled]`): kept as the designer's enum prop. */
+  | 'state-axis-unnamed'
+  /** `active` with neither `hover` nor `pressed` beside it: a designer's
+   *  "Active" is a SELECTED tab / CURRENT page / OPEN field at least as often
+   *  as a held mouse button, and nothing on the axis says which. Kept as the
+   *  designer's enum prop — the faithful outcome — never `:active`. */
+  | 'state-axis-value-ambiguous';
+
+/** Reasons that mean "this axis stays the designer's own enum prop" (a NOTE).
+ *  The other two — `state-axis-duplicate-state`, `state-axis-multiple` — are
+ *  REFUSALS in exact mode: there the axis IS interaction state and the
+ *  projection has no single answer. */
+export const STATE_AXIS_KEPT_AS_ENUM: ReadonlySet<StateAxisRefusal> = new Set<StateAxisRefusal>([
+  'state-axis-value-outside-vocabulary',
+  'state-axis-no-rest-value',
+  'state-axis-no-state-value',
+  'state-axis-unnamed',
+  'state-axis-value-ambiguous',
+]);
 
 export interface StateAxisProjection {
   /** The Figma variant property, as the designer spelled it. */
@@ -111,11 +137,21 @@ export function readStateAxis(property: string, values: readonly string[]): Stat
         }
       : { kind: 'not-a-state-axis' };
   }
-  if (!named && nonRest.length < 2) {
+  if (!named) {
     return {
       kind: 'refused',
-      reason: 'state-axis-unnamed-incomplete',
-      detail: `variant axis "${property}" (${values.join('|')}): its values are interaction states but the axis is not named "state" and draws fewer than two non-rest states — too little evidence that it is not API`,
+      reason: 'state-axis-unnamed',
+      detail: `variant axis "${property}" (${values.join('|')}): every value is in the interaction-state table, but the axis is not named state / states / interaction — a "${property}" of ${nonRest.map((m) => m.value).join(' | ')} is as likely a status or a kind as a platform state, and only the name tells them apart`,
+    };
+  }
+  // `active` is projected as PRESSED only with corroboration on the same axis.
+  const literalActive = pure.find((m) => normStateValue(m.value) === 'active');
+  const corroborated = pure.some((m) => ['hover', 'pressed'].includes(normStateValue(m.value)));
+  if (literalActive && !corroborated) {
+    return {
+      kind: 'refused',
+      reason: 'state-axis-value-ambiguous',
+      detail: `state-axis-value-ambiguous:active — variant axis "${property}" (${values.join('|')}): "${literalActive.value}" stands alone (no hover, no pressed beside it), and a designer's "Active" means selected / current / open at least as often as a held mouse button — it is NOT projected to :active`,
     };
   }
   const seen = new Map<InteractionState, string>();
@@ -147,6 +183,21 @@ export function readStateAxes(
       detail: `variant axes ${projected.map((p) => `"${p.projection.property}"`).join(' and ')} both consist purely of interaction states — a component has one interaction state at a time, and which axis the platform runs is not drawn`,
     };
   }
+  // A duplicate-state axis IS an interaction-state axis with no single answer:
+  // it outranks a sibling that projects (the set is not cleanly readable).
+  const hard = readings.find((r) => r.kind === 'refused' && !STATE_AXIS_KEPT_AS_ENUM.has(r.reason));
+  if (hard) return hard;
   if (projected.length === 1) return projected[0]!;
   return readings.find((r) => r.kind === 'refused') ?? { kind: 'not-a-state-axis' };
+}
+
+/** Every axis of a set that LOOKS like interaction state and stays an enum
+ *  prop, with why — so the proposal can name each one. */
+export function keptAsEnumStateAxes(
+  axes: ReadonlyArray<{ property: string; values: readonly string[] }>,
+): Array<{ property: string; reason: StateAxisRefusal; detail: string }> {
+  return axes.flatMap((a) => {
+    const r = readStateAxis(a.property, a.values);
+    return r.kind === 'refused' && STATE_AXIS_KEPT_AS_ENUM.has(r.reason) ? [{ property: a.property, reason: r.reason, detail: r.detail }] : [];
+  });
 }

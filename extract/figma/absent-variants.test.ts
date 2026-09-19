@@ -543,7 +543,7 @@ test('validateContract: absent-variants-no-axes', () => {
 });
 
 test('proposer: a PROMOTED interaction-state axis on a sparse set keeps its refusal in both modes unless it is a DESIGNER\'s axis (docs/23 §D.41, extract/figma/state-axis.test.ts)', () => {
-  const cells = ['Default', 'Hover', 'Disabled'].flatMap((State) => ['A', 'B'].filter((Tone) => !(State === 'Disabled' && Tone === 'B')).map((Tone) => ({ at: { State, Tone }, fill: State === 'Hover' ? FILL.B : FILL.A, padding: 8 })));
+  const cells = ['Default', 'Hover', 'Disabled'].flatMap((State) => ['A', 'B'].filter((Tone) => !(State === 'Disabled' && Tone === 'B')).map((Tone) => ({ at: { State, Tone }, fill: State === 'Hover' ? FILL.B : State === 'Disabled' ? FILL.C : FILL.A, padding: 8 })));
   const set = designerSet('Pill', { State: ['Default', 'Hover', 'Disabled'], Tone: ['A', 'B'] }, cells);
   // Without the designer fact "unstamped" proves nothing: the ragged refusal stands, as it did (the sparse wall comes first).
   for (const projectionMode of ['exact', 'reviewable-inversion'] as const) {
