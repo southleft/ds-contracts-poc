@@ -325,3 +325,10 @@ control's differing font-size/line-height may be displayed as an explicit
 preview discrepancy; other subtree differences refuse reuse. This grants no
 native write or fidelity qualification. General layout/API coverage, shared
 package token assembly, native mappings and clean installation remain open.
+
+Declared React workspaces need `package.json`, `package-lock.json` and
+`tsconfig.json`, plus the modules, styles and witness files named by their
+declaration. They do not need the built-in sandbox's unused `src/index.css` or
+`capture-input.css`. If either exists it remains part of source identity for
+backward compatibility; its appearance, removal or byte change requires a new
+reference. Imported stylesheet bytes always remain part of the reference.
