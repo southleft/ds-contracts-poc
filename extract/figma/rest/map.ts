@@ -518,6 +518,15 @@ export interface MapOptions {
   target?: string;
   /** File key for _provenance (it rides the URL, not the nodes response). */
   fileKey?: string | null;
+  /** The REQUEST carried `plugin_data=shared`, so a `ds_contracts/*` stamp on
+   *  any node WOULD be in this response. Only the caller knows: the parameter
+   *  is not echoed, and a response with no `sharedPluginData` anywhere is what
+   *  both "asked, nothing stamped" and "never asked" look like. Default false
+   *  — nothing is written and every existing mapped fixture keeps its bytes.
+   *  `true` writes `_provenance.stampsObservable: true`, the positive fact the
+   *  proposer requires before an unstamped ragged set may declare its undrawn
+   *  combinations (core/propose-figma.ts dumpStampsObservable). */
+  stampsObservable?: boolean;
 }
 
 /** dump v1.1 node as the REST mapper emits it (`hidden` lives on DumpNode
@@ -1852,6 +1861,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
       ...REST_CAPTURE_GAPS,
     ],
+    ...(options.stampsObservable === true ? { stampsObservable: true as const } : {}),
     // The variables channel's own receipt: what answered, or why nothing did.
     variables: options.variables
       ? {

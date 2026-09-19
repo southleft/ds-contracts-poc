@@ -651,6 +651,12 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  /** bindings.figma.absentVariants as canvas variant NAMES. Present only when
+   *  the contract declares any, so every other contract's data (and specHash)
+   *  is byte-identical. The writer never DELETES a variant; the amend path uses
+   *  this to keep saying so, on every sync, while a set written earlier still
+   *  holds one (docs/23 §D.40). */
+  absentVariants?: string[];
   nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
@@ -5590,15 +5596,23 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // emitted variant is still the all-defaults one. No declaration → the
   // filter is never built and `combos` is untouched, byte-identically.
   const absentKeys = absentVariantKeys(contract);
+  /** The canvas NAMES of the declared-absent combinations, in enumeration
+   *  order — what the amend path needs to recognise a variant the contract
+   *  says is undrawn but a set written earlier still holds. */
+  const absentVariantNames: string[] = [];
   if (absentKeys.size > 0) {
     const absenceAxes = absentVariantAxes(contract);
     combos = combos.filter((combo) => {
       const tuple: Record<string, string | boolean | null> = {};
+      const nameParts: string[] = [];
       axes.forEach(({ prop, values }, a) => {
         const v = values[combo[a]!] ?? null;
         tuple[prop.name] = v === null ? null : prop.type === 'boolean' ? v === 'true' : v;
+        nameParts.push(`${prop.bindings.figma.property}=${axisLabel(prop, v)}`);
       });
-      return !absentKeys.has(absentVariantKey(absenceAxes, tuple));
+      const absent = absentKeys.has(absentVariantKey(absenceAxes, tuple));
+      if (absent) absentVariantNames.push(nameParts.join(', '));
+      return !absent;
     });
   }
   const fontStyles = new Set<string>(['Medium']);
@@ -6406,6 +6420,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       : {}),
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
     ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
+    ...(absentVariantNames.length > 0 ? { absentVariants: absentVariantNames } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
     ...(hasCodeOnlyFacts ? { codeOnlyFacts } : {}),
     colW: Math.max(
@@ -7909,6 +7924,10 @@ function buildSyncScript(
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  // bindings.figma.absentVariants: the "still holds a declared-absent variant"
+  // receipt on the skip path is emitted only for a script that carries such a
+  // contract — every other script keeps its bytes.
+  const hasAbsentVariants = featureDatas.some((d) => (d.absentVariants?.length ?? 0) > 0);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
@@ -8938,7 +8957,20 @@ async function amendSet(set, C) {
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
     if (!fpSkip || fpSkip.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(set);
-    }
+    }${hasAbsentVariants ? `
+    // The contract has not changed, but the CANVAS may still hold a variant
+    // the contract declares undrawn (a set written before the declaration:
+    // the writer never deletes a designer-visible variant). That is not
+    // "unchanged" — it is a standing disagreement, and it is named on EVERY
+    // sync until someone removes the variant or the declaration. The design
+    // → contract read-back refuses the same state (EXACT_MATRIX_RAGGED).
+    if (C.absentVariants && C.absentVariants.length) {
+      const held = set.children.map((ch) => ch.name).filter((n) => C.absentVariants.indexOf(n) >= 0);
+      if (held.length) {
+        return { name: C.setName, contractId: C.contractId, skipped: true,
+          reason: 'unchanged-with-extra-variants:[' + held.join(' | ') + ']', extraVariants: held, nodeId: set.id, key: set.key };
+      }
+    }` : ''}
     return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,

@@ -11,8 +11,8 @@ rather than stopping on it.
 (`y83n4o9LOGs74oAoguFcGS`) and the CBDS UI Kit (`WofZT8xaxXuc2Q6Je9S4XE`) in
 Figma Desktop with the Desktop Bridge; twenty-four published component sets were
 observed read-only (zero writes, REST version pinned before and after, two
-identical observes per set) and put through the canvas→code path. **6
-accounting-clean, 18 refused by name, nothing silent** (6 and 18 since 2026-09-19: CBDS Alert, 30 of 40 cells, was the one ragged-matrix refusal and is accounting-clean now that its 10 undrawn cells are declared — docs/23 §D.40; the dated receipt records the 5 / 19 measured on 2026-09-13). Receipt: [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](CANVAS-TO-CODE-DESIGNER-EXAM.md);
+identical observes per set) and put through the canvas→code path. **5
+accounting-clean, 19 refused by name, nothing silent.** Receipt: [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](CANVAS-TO-CODE-DESIGNER-EXAM.md);
 gate `npm run recipe:canvas-to-code:held-out:v2:check`.
 
 One thing I recorded below was **wrong**, left visible: "point me at such a

@@ -15,16 +15,18 @@ import { readFileSync } from 'node:fs';
 import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
 import { mapRestToDump } from './rest/map.js';
 import {
+  dumpStampsObservable,
   proposeBatchFromDump,
   proposeFromDump,
   SparseMatrixInferenceError,
   ExactProjectionError,
 } from '../../core/propose-figma.js';
-import { deriveAbsentVariants, validateExactVariantProjection, type ExactDumpSet } from '../../core/exact-projection.js';
+import { deriveAbsentVariants, EXACT_ABSENT_VARIANTS_MAX_PRODUCT, validateExactVariantProjection, type ExactDumpSet } from '../../core/exact-projection.js';
+import { compareContracts } from './roundtrip.js';
 import { createFigmaEngine } from '../../core/emit-figma-script.js';
 import { emitReact, validateContract } from '../../core/emit-react.js';
 import { tokenCorpusFromJson } from '../../core/token-corpus.js';
-import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { ABSENT_VARIANTS_MAX_PRODUCT, absentVariantIssues, ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import type { DumpSet } from './types.js';
 
 // ---------------------------------------------------------------------------
@@ -155,7 +157,10 @@ test('validateContract: a sound declaration is accepted; every unsound one is re
   named([{ ...CL_TRUE, nope: 'x' }], /absent-variant-non-variant-axis: .*"nope", which is not a prop/);
   named([{ tone: 'a', size: 's', flag: false }], /absent-variants-default-tuple/);
   named([CL_TRUE, { tone: 'c', size: 's', flag: true }], /absent-variants-order/); // tuples out of enumeration order
-  named([{ size: 'l', tone: 'c', flag: true }], /absent-variants-order/); // keys out of prop order
+  // KEY order inside a tuple is NOT validity (a JSON object is unordered; jq -S / canonicalJson sort keys).
+  assert.deepEqual(refusals(seed([{ size: 'l', tone: 'c', flag: true }])), []);
+  assert.deepEqual(refusals(seed([{ flag: true, size: 'l', tone: 'b' }, { size: 'l', flag: true, tone: 'c' }])), [], 'tuple order still holds with shuffled keys');
+  named([{ flag: true, size: 'l', tone: 'c' }, { size: 'l', flag: true, tone: 'b' }], /absent-variants-order/);
   named(
     [{ tone: 'c', size: 's', flag: false }, { tone: 'c', size: 's', flag: true }, { tone: 'c', size: 'l', flag: false }, CL_TRUE],
     /absent-variants-erase-axis-value: .*"tone" = "c"/,
@@ -203,7 +208,8 @@ const designerSet = (name: string, axes: Record<string, string[]>, cells: Array<
   return (result.dump as unknown as Record<string, DumpSet>)[name];
 };
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
-const exact = (set: DumpSet) => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true });
+/** A DESIGNER's set: unstamped, read by a reader that COULD have seen a stamp (the fact fetch.ts records). */
+const exact = (set: DumpSet, stampsObservable = true) => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true, stampsObservable });
 const FILL = { A: 'cc0000', B: '00aa00', C: '0000cc' } as Record<string, string>;
 const PAD = { S: 8, L: 16 } as Record<string, number>;
 const tagCells = (keep: (tone: string, size: string) => boolean) =>
@@ -252,7 +258,7 @@ test('proposer: an inference the undrawn cells make AMBIGUOUS refuses the set by
     return true;
   });
   // The batch names it in the skip headline (never "a technical error").
-  const batch = proposeBatchFromDump({ Chip: set } as never, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true });
+  const batch = proposeBatchFromDump({ Chip: set } as never, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true, stampsObservable: true });
   assert.equal(batch.proposals.length, 0);
   assert.match(batch.skipped[0].reason, /could not be proposed: sparse-matrix-inference-ambiguous:background-color@Chip:root — /);
   // The SAME two cells with a uniform fill infer nothing per axis, so nothing is ambiguous.
@@ -265,7 +271,7 @@ test('proposer: extra or invalid rows keep the ragged refusal; reviewable invers
   const doubled = structuredClone(set);
   doubled.variants.push(structuredClone(doubled.variants[0]));
   assert.throws(() => exact(doubled), (error: unknown) => error instanceof ExactProjectionError && error.code === 'EXACT_TUPLE_DUPLICATE');
-  const reviewable = proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
+  const reviewable = proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true, stampsObservable: true });
   assert.equal(reviewable.projection.status, 'verified-exact');
   assert.deepEqual(reviewable.contract, exact(set).contract);
 });
@@ -285,17 +291,21 @@ async function canvas() {
   const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
   const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 }) as Promise<unknown>;
   await run(engine.buildTokensScript(null));
+  const sync = (c: Contract) => run(engine.buildComponentScript(c, new Map([[c.id, c]]))) as Promise<{ results: Array<Record<string, unknown>> }>;
   const write = async (c: Contract) => {
-    await run(engine.buildComponentScript(c, new Map([[c.id, c]])));
+    await sync(c);
     type Found = { type: string; getSharedPluginData(ns: string, key: string): string };
     return root.findOne((n: Found) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === c.id) as unknown as CanvasNode;
   };
   const read = async (node: CanvasNode) => {
     const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
       .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify([node.name])};`);
-    return JSON.parse(JSON.stringify((await run(source) as Record<string, unknown>)[node.name])) as DumpSet;
+    const dumps = await run(source) as Record<string, unknown>;
+    lastProvenance = JSON.parse(JSON.stringify(dumps._provenance));
+    return JSON.parse(JSON.stringify(dumps[node.name])) as DumpSet;
   };
-  return { write, read };
+  let lastProvenance: unknown;
+  return { write, read, sync, provenance: () => lastProvenance as Parameters<typeof dumpStampsObservable>[0] };
 }
 const writerCorpus = tokenCorpusFromJson({ primitives, semantic: {}, light: {}, brandDefault: {} });
 /** Propose a set back. `scope` = the contracts in scope: a set this pipeline drew takes its declaration from its OWN stamped contract, never from its rows. */
@@ -364,11 +374,44 @@ test('writer: an instance that selects a combination its child declares undrawn 
   assert.doesNotThrow(() => build(parent({ tone: 'c' })), 'size falls to the child default (s), which is drawn');
 });
 
-test('NAMED DIVERGENCE (docs/23 §D.40), pinned so it cannot become silent: amending a set written BEFORE the declaration reports the now-undrawn variant, it does not delete it', async () => {
-  const { write } = await canvas();
+test('NAMED DIVERGENCE (docs/23 §D.40), pinned so it can never be silent: a set written BEFORE the declaration keeps the variant — and the writer says so on EVERY sync, the read-back refuses, the comparer sees it', async () => {
+  const { write, sync, read } = await canvas();
+  const declared = writable([{ tone: 'c', size: 'l' }]);
   await write(writable());
-  const node = await write(writable([{ tone: 'c', size: 'l' }])); // amend: same contract id, same set
-  assert.equal(node.children.length, 6, 'the writer never deletes a designer-visible variant; the amend report lists it under extraVariants');
+  const plainJson = <T,>(value: T): T => JSON.parse(JSON.stringify(value)) as T; // results come from the vm realm
+  const amend = plainJson((await sync(declared)).results[0]); // same contract id, same set
+  assert.deepEqual(amend.extraVariants, ['Tone=C, Size=L'], 'the writer never deletes a designer-visible variant; the amend report names it');
+  const repeat = plainJson((await sync(declared)).results[0]);
+  assert.equal(repeat.skipped, true);
+  assert.equal(repeat.reason, 'unchanged-with-extra-variants:[Tone=C, Size=L]', 'a standing disagreement is not "unchanged"');
+  assert.deepEqual(repeat.extraVariants, ['Tone=C, Size=L']);
+  assert.equal((await sync(declared)).results[0].reason, 'unchanged-with-extra-variants:[Tone=C, Size=L]', '…named again, every time');
+  const node = await write(declared);
+  assert.equal(node.children.length, 6);
+  // THE READ-BACK. A full product passes the Cartesian check; the scoped declaration is consulted ANYWAY,
+  // so the drawn cell the contract calls absent is an extra row — it used to read verified-exact and drop the declaration.
+  const set = await read(node);
+  assert.equal(validateExactVariantProjection(set).status, 'source-matrix-verified');
+  for (const projectionMode of ['exact', 'reviewable-inversion'] as const) {
+    assert.throws(
+      () => proposeFromDump(set, { corpus: writerCorpus, contractIdByName: new Map([[declared.name, declared.id]]), contractsById: new Map([[declared.id, declared as never]]), fileKey: null, projectionMode, mintUnbound: false }),
+      (error: unknown) => error instanceof ExactProjectionError && error.code === 'EXACT_MATRIX_RAGGED' && /6 rows; Cartesian definitions minus 1 declared absent variant\(s\) require 5/.test(error.message),
+    );
+  }
+  // Without the declaring contract in scope the canvas is simply a full set — and the COMPARER is what catches the dropped declaration.
+  const dropped = back(set);
+  assert.equal('absentVariants' in dropped.bindings.figma, false);
+  const finding = (shipping: Contract, proposed: Contract) => compareContracts(shipping as never, proposed as never, writerCorpus).filter((f) => f.subject === 'bindings.figma.absentVariants');
+  assert.deepEqual(finding(declared, dropped).map((f) => f.status), ['mismatch'], 'a DROPPED declaration is a difference');
+  assert.deepEqual(finding(declared, writable([{ tone: 'b', size: 'l' }])).map((f) => f.status), ['mismatch'], 'a MOVED declaration is a difference');
+  assert.deepEqual(finding(writable(), declared).map((f) => f.status), ['mismatch'], 'a GAINED declaration is a difference');
+  assert.deepEqual(finding(declared, ContractSchema.parse(JSON.parse(JSON.stringify(declared).replace('{"tone":"c","size":"l"}', '{"size":"l","tone":"c"}')))).map((f) => f.status), ['matched'], 'key order is not a difference');
+  assert.deepEqual(finding(writable(), writable()), [], 'no declaration on either side adds no row to any existing report');
+  // A contract that declares nothing keeps the plain skip reason and an unchanged script.
+  const plain = await canvas();
+  await plain.write(writable());
+  assert.equal((await plain.sync(writable())).results[0].reason, 'unchanged');
+  assert.doesNotMatch(engine.buildComponentScript(writable(), new Map([[writable().id, writable()]])), /unchanged-with-extra-variants/);
 });
 
 // ---------------------------------------------------------------------------
@@ -381,7 +424,178 @@ test('code: the declaration changes no rule — the component still renders ever
   const declared = emit(writable([{ tone: 'c', size: 'l' }]));
   assert.equal(declared.css, plain.css, 'the stylesheet is byte-identical: .tone-c and .size-l still compose');
   assert.doesNotMatch(plain.tsx, /undrawn-combination/);
-  assert.match(declared.tsx, /\/\/ undrawn-combination-rendered-by-composition: the design does not draw 1 of this\n\s+\/\/ component's prop combinations \(bindings\.figma\.absentVariants: tone=c size=l\)/);
+  assert.match(declared.tsx, /\/\/ undrawn-combination-rendered-by-composition: the design does not draw 1 of this\n\s+\/\/ component's prop combinations \(bindings\.figma\.absentVariants: tone="c" size="l"\)/);
   const strip = (tsx: string) => tsx.split('\n').filter((l) => !/^\s*\/\/ (undrawn-combination|component's prop combinations|Nothing here refuses|drawn variants, which)/.test(l)).join('\n');
   assert.equal(strip(declared.tsx), plain.tsx, 'the note is the only difference');
+});
+
+// ---------------------------------------------------------------------------
+// 6. H2 — "unstamped" is evidence of a designer ONLY when a stamp could have been seen
+// ---------------------------------------------------------------------------
+test('stamps observable is a POSITIVE reader fact: the plugin reader always, REST only when the fetch layer says the request carried the plane, everything else fails closed', async () => {
+  assert.equal(dumpStampsObservable(undefined), false);
+  assert.equal(dumpStampsObservable({}), false);
+  assert.equal(dumpStampsObservable({ dumpVersion: '1.35', note: 'hand-authored fixture' }), false);
+  assert.equal(dumpStampsObservable({ dumpVersion: '1.25', note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.25)' }), false, 'before the contract-id stamp was carried');
+  assert.equal(dumpStampsObservable({ dumpVersion: '1.35', note: 'mapped from the Figma REST API (extract/figma/rest/map.ts)' }), false);
+  assert.equal(dumpStampsObservable({ dumpVersion: '1.35', note: 'x', stampsObservable: 'true' }), false, 'only the boolean the mapper writes');
+  assert.equal(dumpStampsObservable({ dumpVersion: '1.35', note: 'x', stampsObservable: true }), true);
+  const live = await canvas();
+  await live.read(await live.write(writable()));
+  assert.equal(dumpStampsObservable(live.provenance()), true, 'the REAL plugin reader says who it is');
+
+  // The mapper writes the key ONLY when told, so every fixture mapped without it keeps its bytes.
+  const response = { name: 'fixture', nodes: { '1:1': { document: { id: '1:1', name: 'Tag', type: 'COMPONENT_SET', children: [] } } } };
+  const bare = mapRestToDump(response as never).dump as { _provenance: Record<string, unknown> };
+  const told = mapRestToDump(response as never, { stampsObservable: true }).dump as { _provenance: Record<string, unknown> };
+  assert.equal('stampsObservable' in bare._provenance, false);
+  assert.equal(told._provenance.stampsObservable, true);
+  const { stampsObservable: _dropped, ...rest } = told._provenance;
+  assert.deepEqual(rest, bare._provenance, 'the one key is the only difference');
+  assert.equal(bare._provenance.dumpVersion, '1.35', 'a provenance fact, not a grammar change');
+});
+
+test('the SAME pipeline-written set that lost a variant refuses whether or not the REST response carried sharedPluginData', () => {
+  const lost = (stamped: boolean) => {
+    const doc = { id: '1:1', name: 'Tag', type: 'COMPONENT_SET',
+      ...(stamped ? { sharedPluginData: { ds_contracts: { contractId: 'ds.tag', semantics: JSON.stringify({ element: 'div' }) } } } : {}),
+      componentPropertyDefinitions: { Tone: { type: 'VARIANT', defaultValue: 'A', variantOptions: ['A', 'B', 'C'] }, Size: { type: 'VARIANT', defaultValue: 'S', variantOptions: ['S', 'L'] } },
+      children: tagCells((t, s) => !(t === 'B' && s === 'L')).map((c, i) => restVariant(`1:${i + 2}`, `Tone=${c.at.Tone}, Size=${c.at.Size}`, c.fill, c.padding)) };
+    return (options: { stampsObservable?: boolean }) => mapRestToDump({ name: 'fixture', nodes: { '1:1': { document: doc } } } as never, options).dump as unknown as Record<string, unknown>;
+  };
+  const opts = { corpus, contractIdByName: new Map<string, string>(), fileKey: null, projectionMode: 'exact' as const, mintUnbound: true };
+  const skip = (dump: Record<string, unknown>) => proposeBatchFromDump(dump, opts).skipped.map((s) => s.reason).join(' ');
+  assert.match(skip(lost(true)({ stampsObservable: true })), /Source matrix has 5 rows; Cartesian definitions require 6\.$/, 'stamped: a generated set that lost a variant, as always');
+  assert.match(skip(lost(true)({})), /Cartesian definitions require 6\.$/);
+  // UNSTAMPED response, nothing said about the request: this used to propose absentVariants=[{tone:b,size:l}] as verified-exact.
+  assert.match(skip(lost(false)({})), /Cartesian definitions require 6\. stamps-not-observable: /);
+  assert.throws(() => exact(lost(false)({}).Tag as DumpSet, false), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /stamps-not-observable/.test(e.message));
+  // The fetch layer asked for the plane and nothing is stamped: a designer's set. The batch reads the fact from the dump itself.
+  const observed = proposeBatchFromDump(lost(false)({ stampsObservable: true }), opts);
+  assert.deepEqual(observed.skipped, []);
+  assert.deepEqual((observed.proposals[0].contract.bindings as { figma: { absentVariants: unknown } }).figma.absentVariants, [{ tone: 'b', size: 'l' }]);
+});
+
+// ---------------------------------------------------------------------------
+// 7. M1 — the encoding grows with the PRODUCT: bounds that are about meaning, and a referee that cannot be a memory DoS
+// ---------------------------------------------------------------------------
+const starSet = (axisCount: number, options: number): DumpSet => {
+  const axes = Object.fromEntries(Array.from({ length: axisCount }, (_, a) => [`Ax${a}`, Array.from({ length: options }, (_, o) => `v${o}`)]));
+  const base = Object.fromEntries(Object.keys(axes).map((k) => [k, 'v0']));
+  const cells = [base, ...Object.keys(axes).flatMap((k) => axes[k].slice(1).map((v) => ({ ...base, [k]: v })))];
+  return designerSet('Star', axes, cells.map((at) => ({ at, fill: FILL.A, padding: 8 })));
+};
+
+test('a "star" set (the default plus each axis varied alone) is not a product with holes: refused by name, in milliseconds, before any product is materialised', () => {
+  const started = Date.now();
+  // 3 axes × 3: 7 of 27 drawn — more undrawn than drawn.
+  assert.throws(() => exact(starSet(3, 3)), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /sparse-matrix-mostly-undrawn: 7 of 27 combinations are drawn and 20 are not/.test(e.message));
+  // 13 axes × 2 = 8192 > 4096: the cap, not the ratio, and no 8192-cell walk.
+  assert.throws(() => exact(starSet(13, 2)), (e: unknown) => e instanceof ExactProjectionError && /sparse-matrix-product-too-large: the variant axes multiply to 8192 combinations, above the 4096/.test(e.message));
+  assert.ok(Date.now() - started < 5_000);
+  assert.equal(deriveAbsentVariants(starSet(13, 2)), null, 'the reader door holds the same cap');
+  // Exactly half undrawn is still a product with holes (2 of 4 — the diagonal sets above); one more undrawn is not.
+  assert.equal(EXACT_ABSENT_VARIANTS_MAX_PRODUCT, ABSENT_VARIANTS_MAX_PRODUCT, 'one bound, two doors');
+});
+
+test('referee: mostly-undrawn and product-too-large are refused by name, and validating ONE tuple over a huge product costs nothing', () => {
+  // 3 × 2 × 2 = 12 cells; 7 undrawn > 5 drawn.
+  const seven = [
+    { tone: 'a', size: 'l', flag: true }, { tone: 'b', size: 's', flag: true }, { tone: 'b', size: 'l', flag: false }, { tone: 'b', size: 'l', flag: true },
+    { tone: 'c', size: 's', flag: false }, { tone: 'c', size: 'l', flag: false }, { tone: 'c', size: 'l', flag: true },
+  ];
+  assert.ok(refusals(seed(seven)).some((e) => /absent-variants-mostly-undrawn: .*leaves 5 of 12 combinations drawn and 7 undrawn/.test(e)));
+  assert.deepEqual(refusals(seed(seven.slice(0, 6))), [], 'six of twelve undrawn is still a product with holes');
+  const wide = seed([{}], (c) => {
+    c.props = Array.from({ length: 13 }, (_, i) => ({ name: `b${i}`, type: 'boolean', default: false, bindings: { code: { prop: `b${i}` }, figma: { kind: 'VARIANT', property: `B${i}`, values: { true: 'True', false: 'False' } } } }));
+    c.bindings.figma.absentVariants = [Object.fromEntries(c.props.map((p: { name: string }) => [p.name, true]))];
+    c.anatomy.root.tokens = {};
+  });
+  const started = Date.now();
+  const issues = absentVariantIssues(wide);
+  assert.ok(Date.now() - started < 200, 'no product walk');
+  assert.equal(issues.length, 1);
+  assert.match(issues[0], /^absent-variants-product-too-large: .*ranges over 8192 combinations .*refused above 4096/);
+});
+
+test('code: the emitted note is CAPPED and its values are JSON-spelled — an enum value holding a newline cannot end the comment', () => {
+  const evil = 'l\n  ; globalThis.PWNED = 1; //';
+  const c = seed([{ tone: 'a', size: evil }, { tone: 'b', size: evil }, { tone: 'c', size: 's' }, { tone: 'c', size: 'm' }], (raw) => {
+    raw.props = [enumProp('tone', 'Tone', ['a', 'b', 'c']), enumProp('size', 'Size', ['s', 'm', evil])];
+    raw.anatomy.root.tokens = { 'background-color': '{paint.{tone}}' };
+  });
+  const { tsx } = emitReact(c, { tokens: new Set(['paint.a', 'paint.b', 'paint.c']), icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const lines = tsx.split('\n');
+  const at = lines.findIndex((l) => l.includes('undrawn-combination-rendered-by-composition'));
+  assert.ok(at >= 0);
+  assert.deepEqual(lines.slice(at, at + 4).map((l) => l.trimStart().startsWith('//')), [true, true, true, true], 'four comment lines, none broken open');
+  assert.match(lines[at + 1], /size="l\\n  ; globalThis\.PWNED = 1; \/\/"/);
+  assert.match(lines[at + 1], /; … 1 more in the contract\)\.$/, 'the comment names the limit; the contract carries the list');
+  assert.match(lines[at + 4], /^\s*const classes = /);
+});
+
+// ---------------------------------------------------------------------------
+// 8. the remaining named refusals, and every fenced call-site category
+// ---------------------------------------------------------------------------
+test('validateContract: absent-variants-no-axes', () => {
+  const c = seed([{}], (raw) => { raw.props = [raw.props[3]]; raw.anatomy.root.tokens = {}; });
+  assert.ok(refusals(c).some((e) => /absent-variants-no-axes: .*no variant axis/.test(e)));
+});
+
+test('proposer: a PROMOTED interaction-state axis on a sparse set keeps its refusal in both modes — an undrawn cell naming a promoted value has no spelling', () => {
+  const cells = ['Default', 'Hover', 'Disabled'].flatMap((State) => ['A', 'B'].filter((Tone) => !(State === 'Disabled' && Tone === 'B')).map((Tone) => ({ at: { State, Tone }, fill: State === 'Hover' ? FILL.B : FILL.A, padding: 8 })));
+  const set = designerSet('Pill', { State: ['Default', 'Hover', 'Disabled'], Tone: ['A', 'B'] }, cells);
+  assert.throws(() => exact(set), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS', 'exact: the interaction-state wall (a separate refusal, untouched)');
+  assert.throws(
+    () => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true, stampsObservable: true }),
+    (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED',
+    'reviewable: promotion would drop the axis the undrawn cell is spelled in',
+  );
+});
+
+test('the fence has no arity bound: f(A) against parity(B,C,D,E) over five binary axes is found and refused (it used to stop at triples and propose {a})', () => {
+  const names = ['A', 'B', 'C', 'D', 'E'];
+  const cells: Array<{ at: Record<string, string>; fill: string; padding: number }> = [];
+  for (let m = 0; m < 32; m++) {
+    const bits = names.map((_, i) => (m >> (4 - i)) & 1);
+    const parity = (bits[1] + bits[2] + bits[3] + bits[4]) % 2;
+    if (bits[0] !== parity) continue; // drawn only where A equals the parity of the other four: 16 of 32
+    cells.push({ at: Object.fromEntries(names.map((k, i) => [k, String(bits[i])])), fill: bits[0] ? FILL.B : FILL.A, padding: 8 });
+  }
+  const set = designerSet('Parity', Object.fromEntries(names.map((k) => [k, ['0', '1']])), cells);
+  assert.throws(() => exact(set), (e: unknown) => {
+    assert.ok(e instanceof SparseMatrixInferenceError);
+    assert.deepEqual(e.inferences, ['background-color@Parity:root']);
+    assert.match(e.message, /a function of "A" and equally of "B" × "C" × "D" × "E" on every drawn variant/);
+    return true;
+  });
+});
+
+test('every fenced call-site category refuses BY ITS OWN NAME on a confounded set (A×S and B×L only): fill, padding, gap, radius, stroke, text, text colour, presence, hidden, opacity', () => {
+  type Knob = 'fill' | 'pad' | 'gap' | 'radius' | 'stroke' | 'text' | 'textFill' | 'icon' | 'hidden' | 'opacity';
+  const cell = (i: number, name: string, second: boolean, k: Knob) => ({ id: `1:${i}`, name, type: 'COMPONENT', layoutMode: 'HORIZONTAL', primaryAxisAlignItems: 'CENTER', counterAxisAlignItems: 'CENTER',
+    paddingTop: 4, paddingBottom: 4, paddingLeft: k === 'pad' && second ? 16 : 8, paddingRight: k === 'pad' && second ? 16 : 8, itemSpacing: k === 'gap' && second ? 12 : 4, cornerRadius: k === 'radius' && second ? 10 : 2,
+    strokes: SOLID('222222'), strokeWeight: k === 'stroke' && second ? 3 : 1, strokeAlign: 'INSIDE', opacity: k === 'opacity' && second ? 0.5 : 1,
+    absoluteBoundingBox: { x: 0, y: 0, width: 120, height: 24 }, fills: SOLID(k === 'fill' && second ? '00aa00' : 'cc0000'),
+    children: [
+      { id: `1:${i}1`, name: 'Label', type: 'TEXT', characters: k === 'text' && second ? 'Beta' : 'Alpha', style: { fontFamily: 'Inter', fontWeight: 400, fontSize: 12, lineHeightPx: 16, lineHeightUnit: 'PIXELS' },
+        fills: SOLID(k === 'textFill' && second ? '0000cc' : '111111'), absoluteBoundingBox: { x: 8, y: 4, width: 30, height: 16 } },
+      ...(k === 'icon' && !second ? [] : [{ id: `1:${i}2`, name: 'Icon', type: 'RECTANGLE', fills: SOLID('333333'), absoluteBoundingBox: { x: 40, y: 4, width: 16, height: 16 } }]),
+      { id: `1:${i}3`, name: 'Dot', type: 'ELLIPSE', layoutPositioning: 'ABSOLUTE', constraints: { horizontal: 'LEFT', vertical: 'TOP' }, fills: SOLID('999999'),
+        absoluteBoundingBox: { x: 60, y: 8, width: 8, height: 8 }, ...(k === 'hidden' && second ? { visible: false } : {}) },
+    ] });
+  const expected: Record<Knob, string> = { fill: 'background-color@Cat:root', pad: 'padding-inline@Cat:root', gap: 'gap@Cat:root', radius: 'border-radius@Cat:root', stroke: 'border-width@Cat:root',
+    text: 'text@Cat:root/Label', textFill: 'color@Cat:root/Label', icon: 'presence@Cat:root/Icon', hidden: 'visibility@Cat:root/Dot', opacity: 'opacity@Cat:root' };
+  for (const [knob, label] of Object.entries(expected) as Array<[Knob, string]>) {
+    const first = knob === 'opacity' ? ['Flag', 'False', 'True'] : ['Tone', 'A', 'B'];
+    const doc = { id: '1:1', name: 'Cat', type: 'COMPONENT_SET',
+      componentPropertyDefinitions: { [first[0]]: { type: 'VARIANT', defaultValue: first[1], variantOptions: [first[1], first[2]] }, Size: { type: 'VARIANT', defaultValue: 'S', variantOptions: ['S', 'L'] } },
+      children: [cell(2, `${first[0]}=${first[1]}, Size=S`, false, knob), cell(3, `${first[0]}=${first[2]}, Size=L`, true, knob)] };
+    const set = (mapRestToDump({ name: 'fixture', nodes: { '1:1': { document: doc } } } as never).dump as unknown as Record<string, DumpSet>).Cat;
+    assert.throws(
+      () => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'exact', mintUnbound: true, stampsObservable: true, hiddenCaptured: true }),
+      (e: unknown) => e instanceof SparseMatrixInferenceError && e.inferences.includes(label),
+      `${knob} → ${label}`,
+    );
+  }
 });

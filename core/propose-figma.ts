@@ -32,6 +32,7 @@ import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } fro
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
   deriveAbsentVariants,
+  EXACT_ABSENT_VARIANTS_MAX_PRODUCT,
   validateExactVariantProjection,
   type ExactProjectionRefusalCode,
   type ExactProjectionResult,
@@ -179,6 +180,39 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
   return /dump v1\.[1-9]/.test(prov.note ?? '');
 };
 
+/** WERE THE `ds_contracts/*` STAMPS OBSERVABLE to the reader that produced
+ *  this dump? A POSITIVE fact, never inferred from their absence on a set —
+ *  "no stamp" only means "a designer drew this" when the reader could have seen
+ *  one. It decides whether an unstamped ragged set may declare its undrawn
+ *  combinations by what it draws (bindings.figma.absentVariants, docs/23
+ *  §D.40): the SAME pipeline-written set that lost a variant refused when the
+ *  REST response carried `sharedPluginData` and proposed a declaration when it
+ *  did not, because `mapRestToDump` is a public entry and cannot see whether
+ *  the request asked for `plugin_data=shared`.
+ *
+ *   · the plugin reader always reads them — it says who it is in the
+ *     provenance note it has always written, and carries the contract-id
+ *     stamp since dump v1.26. No dump byte changes.
+ *   · the REST mapper writes `_provenance.stampsObservable: true` ONLY when its
+ *     caller says the request carried the plane (`MapOptions.stampsObservable`;
+ *     `extract/figma/rest/fetch.ts` always requests it and says so). A bare
+ *     `mapRestToDump(response)` writes nothing, so every committed fixture
+ *     mapped that way keeps its bytes — and keeps the ragged refusal.
+ *   · anything else (a hand-authored fixture, a bridge that never read plugin
+ *     data) is NOT observable: fail closed. */
+export const dumpStampsObservable = (
+  prov?: { note?: string; dumpVersion?: string; stampsObservable?: unknown } | null,
+): boolean => {
+  if (!prov) return false;
+  if (prov.stampsObservable === true) return true;
+  const version = /^1\.(\d+)$/.exec(prov.dumpVersion ?? '');
+  return (
+    version !== null &&
+    Number(version[1]) >= 26 &&
+    (prov.note ?? '').includes('extract/figma/dump.plugin.js')
+  );
+};
+
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types.
  * `anchors` (dump v1.5) lets the resolver refuse a NAME-coincidence link when
@@ -283,8 +317,9 @@ const axisValuesOf = (variantName: string): Record<string, string> => {
 //
 // THE CONDITION (one rule, applied wherever an axis-conditioned inference is
 // ACCEPTED): over the rows the inference was read from, take every MINIMAL
-// set of up to three variant axes the observed value is a function of (no
-// proper subset also fits). If there is more than one, and two of them
+// set of variant axes the observed value is a function of (no proper subset
+// also fits) — EVERY subset of the axes that vary over those rows, no arity
+// bound: the product cap leaves at most twelve, so at most 4,096 subsets. If there is more than one, and two of them
 // predict DIFFERENT values for some declared-absent combination (or one
 // predicts a value where the other has none), the inference is ambiguous
 // BECAUSE of the absence and the whole set is refused by name:
@@ -336,7 +371,23 @@ function fenceSparseInference(
   if (fence === null || fence.ambiguous.has(label) || rows.length < 2) return;
   const keyed = rows.map((r) => ({ at: axisValuesOf(r.variant), value: JSON.stringify(r.value) ?? 'undefined' }));
   if (keyed.every((r) => r.value === keyed[0]!.value)) return;
-  const usable = axes.filter((a) => keyed.every((r) => r.at[a.property] !== undefined));
+  // Only an axis that VARIES over these rows can explain anything. With the
+  // product capped (EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096 = 2^12) at most
+  // twelve axes vary, so EVERY subset is enumerated — at most 4,096 — and the
+  // condition has no arity bound to hide behind: an explanation over four axes
+  // (the reviewer's parity(B,C,D,E) against f(A)) is found like any other.
+  const usable = axes.filter(
+    (a) =>
+      keyed.every((r) => r.at[a.property] !== undefined) &&
+      new Set(keyed.map((r) => r.at[a.property])).size > 1,
+  );
+  if (usable.length > 12) {
+    fence.ambiguous.set(
+      label,
+      `${usable.length} variant axes vary over the rows this inference was read from — more than the 12 the fence enumerates exhaustively, so uniqueness cannot be established (sparse-matrix-inference-unbounded)`,
+    );
+    return;
+  }
   const cellOf = (subset: readonly Axis[], at: Readonly<Record<string, string>>): string =>
     JSON.stringify(subset.map((a) => at[a.property]));
   const fit = (subset: readonly Axis[]): Map<string, string> | null => {
@@ -350,15 +401,13 @@ function fenceSparseInference(
     return byCell;
   };
   const minimal: Array<{ subset: Axis[]; byCell: Map<string, string> }> = [];
-  const subsets: Axis[][] = [];
-  for (let i = 0; i < usable.length; i++) {
-    subsets.push([usable[i]!]);
-  }
-  for (let i = 0; i < usable.length; i++)
-    for (let j = i + 1; j < usable.length; j++) subsets.push([usable[i]!, usable[j]!]);
-  for (let i = 0; i < usable.length; i++)
-    for (let j = i + 1; j < usable.length; j++)
-      for (let k = j + 1; k < usable.length; k++) subsets.push([usable[i]!, usable[j]!, usable[k]!]);
+  // Every non-empty subset, smallest first (so a fitting subset prunes its
+  // supersets and what survives is exactly the MINIMAL explanations).
+  const popcount = (m: number): number => { let n = 0; for (let x = m; x; x &= x - 1) n++; return n; };
+  const masks = Array.from({ length: (1 << usable.length) - 1 }, (_, i) => i + 1).sort(
+    (x, y) => popcount(x) - popcount(y) || x - y,
+  );
+  const subsets: Axis[][] = masks.map((m) => usable.filter((_, i) => (m >> i) & 1));
   for (const subset of subsets) {
     if (minimal.some((m) => m.subset.every((a) => subset.includes(a)))) continue; // a fitting subset already explains it
     const byCell = fit(subset);
@@ -10878,6 +10927,12 @@ function proposeFromDumpFenced(
      *  reviewable mode preserves legacy name-based inversion while still
      *  refusing any structured evidence that is invalid or ragged. */
     projectionMode?: 'exact' | 'reviewable-inversion';
+    /** The reader could have seen a `ds_contracts/*` stamp on this set
+     *  (dumpStampsObservable over the dump's `_provenance`). Default FALSE —
+     *  fail closed: only then may an unstamped strict-subset set declare its
+     *  undrawn combinations by what it draws. proposeBatchFromDump derives it
+     *  from the dump it is handed unless the caller says otherwise. */
+    stampsObservable?: boolean;
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
@@ -10920,12 +10975,55 @@ function proposeFromDumpFenced(
       (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
       readStampedContractId(set),
   );
-  const absentVariants =
-    cartesianProjection.status === 'refused' && cartesianProjection.code === 'EXACT_MATRIX_RAGGED'
-      ? pipelineDrew
-        ? scopedAbsentVariants(set, opts.contractsById)
-        : deriveAbsentVariants(set)
+  //
+  // A PIPELINE-DRAWN set reads its scoped declaration ALWAYS — not only after
+  // the Cartesian check refuses. A canvas that draws the FULL product while
+  // its contract declares an absence is the amend state (a set written before
+  // the declaration: the writer never deletes a variant), and a full product
+  // passes the Cartesian check; consulting the declaration only on a ragged
+  // source read that state back `verified-exact` and dropped the declaration
+  // without a word. Held to the product minus the declaration, the drawn cell
+  // the contract calls absent IS an extra row and refuses by name.
+  //
+  // An UNSTAMPED set may declare by its rows only when the reader could have
+  // SEEN a stamp (dumpStampsObservable) — otherwise "unstamped" is not
+  // evidence of a designer, and the ragged refusal stands, with the reason.
+  const ragged =
+    cartesianProjection.status === 'refused' && cartesianProjection.code === 'EXACT_MATRIX_RAGGED';
+  const stampsObservable = opts.stampsObservable === true;
+  const absentVariants = pipelineDrew
+    ? scopedAbsentVariants(set, opts.contractsById)
+    : ragged && stampsObservable
+      ? deriveAbsentVariants(set)
       : null;
+  // MEANING BOUNDS on declaring by rows (docs/23 §D.40), read from the ragged
+  // refusal's own counts BEFORE any product is materialised. A declaration
+  // says "this set is the product of its axes, minus a few cells": above the
+  // referee's product cap, or when MORE cells are undrawn than drawn (a "star"
+  // set — the default plus each axis varied alone — is not a product with
+  // holes; 7 axes × 5 proposed 78,096 tuples), the axes are not a description
+  // of the set and the ragged refusal stands, with the reason.
+  if (ragged && !pipelineDrew) {
+    const counts = cartesianProjection.refusals[0];
+    const product = counts?.expected ?? 0;
+    const drawn = counts?.actual ?? 0;
+    const why =
+      product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+        ? `sparse-matrix-product-too-large: the variant axes multiply to ${product} combinations, above the ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} a declaration of complete tuples may range over`
+        : product - drawn > drawn
+          ? `sparse-matrix-mostly-undrawn: ${drawn} of ${product} combinations are drawn and ${product - drawn} are not — more undrawn than drawn, so the product of these axes does not describe the set; nothing is declared`
+          : null;
+    if (why !== null) {
+      throw new ExactProjectionError('EXACT_MATRIX_RAGGED', `${counts?.message ?? ''} ${why}`.trim(), cartesianProjection);
+    }
+  }
+  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
+    throw new ExactProjectionError(
+      'EXACT_MATRIX_RAGGED',
+      `${cartesianProjection.refusals[0]?.message ?? ''} stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`.trim(),
+      cartesianProjection,
+    );
+  }
   const sourceProjection =
     absentVariants === null
       ? cartesianProjection
@@ -12440,6 +12538,9 @@ export function proposeBatchFromDump(
   };
   const setOpts = {
     ...opts,
+    stampsObservable:
+      opts.stampsObservable ??
+      dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     capturedValues,
     contractIdByName,
     contractsById,

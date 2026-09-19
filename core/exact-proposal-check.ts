@@ -116,12 +116,20 @@ const ragged: DumpSet = {
     variant("Size=Lg, Tone=Neutral", { Size: "Lg", Tone: "Neutral" }),
   ],
 };
-// bindings.figma.absentVariants (docs/23 §D.40). The VALIDATOR still refuses
-// this matrix — nothing declares its hole — and that is what these two rows
-// used to observe through the proposer. A DESIGNER's strict-subset set now
-// proposes WITH the hole declared on the contract and is verified exact
-// against the product minus that declaration; what keeps the ragged refusal
-// is pinned in the rows that follow.
+for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
+  check(
+    `${projectionMode} refuses a structured ragged matrix`,
+    refusalCode(() =>
+      proposeFromDump(ragged, { ...baseOpts, projectionMode }),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+}
+// bindings.figma.absentVariants (docs/23 §D.40). The two rows above are the
+// ORIGINAL ones and still hold: nothing here says a reader could have seen a
+// ds_contracts stamp, so "unstamped" is not evidence of a designer and the
+// ragged refusal stands (now naming why). Only with that POSITIVE reader fact
+// does a designer's strict-subset set propose, its hole declared on the
+// contract and verified exact against the product minus the declaration.
 check(
   "the validator refuses a structured ragged matrix that nothing declares",
   (() => {
@@ -130,12 +138,13 @@ check(
   })(),
 );
 for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
-  const proposed = proposeFromDump(ragged, { ...baseOpts, projectionMode });
+  const observed = { ...baseOpts, projectionMode, stampsObservable: true };
+  const proposed = proposeFromDump(ragged, observed);
   const declared = (
     proposed.contract.bindings as { figma: { absentVariants?: unknown } }
   ).figma.absentVariants;
   check(
-    `${projectionMode} proposes a designer's strict-subset matrix with the undrawn combination DECLARED, verified exact at 3 rows`,
+    `${projectionMode} proposes a designer's strict-subset matrix (stamps observable, none present) with the undrawn combination DECLARED, verified exact at 3 rows`,
     JSON.stringify(declared) ===
       JSON.stringify([{ size: "lg", tone: "danger" }]) &&
       proposed.projection.status === "verified-exact" &&
@@ -154,17 +163,17 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
             variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" }),
           ],
         },
-        { ...baseOpts, projectionMode },
+        observed,
       ),
     ) === "EXACT_MATRIX_RAGGED",
   );
   check(
     `${projectionMode} still refuses a ragged set THIS PIPELINE stamped when no contract in scope declares the hole`,
     refusalCode(() =>
-      proposeFromDump({ ...ragged, contractId: "check.ragged" } as DumpSet, {
-        ...baseOpts,
-        projectionMode,
-      }),
+      proposeFromDump(
+        { ...ragged, contractId: "check.ragged" } as DumpSet,
+        observed,
+      ),
     ) === "EXACT_MATRIX_RAGGED",
   );
 }

@@ -266,6 +266,7 @@ export { camel, canonicalPropName } from "./figma-names.js";
 export {
   EXACT_PROJECTION_REFUSAL_CODES,
   deriveAbsentVariants,
+  EXACT_ABSENT_VARIANTS_MAX_PRODUCT,
   validateExactProjection,
   validateExactVariantProjection,
   type AbsentVariantTuple,
@@ -291,6 +292,7 @@ export {
   idSlugSanitized,
   plainWordsProposalError,
   dumpCapturesHidden,
+  dumpStampsObservable,
   proposeBatchFromDump,
   proposeFromDump,
   proposeFromDump as proposeFromFigmaDump,

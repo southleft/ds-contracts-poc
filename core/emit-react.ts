@@ -482,9 +482,14 @@ export function generateTsx(
     undrawn.length === 0
       ? ''
       : `  // undrawn-combination-rendered-by-composition: the design does not draw ${undrawn.length} of this\n` +
+        // Values are JSON-spelled (an enum value holding a newline would end a
+        // line comment and inject code) and the list is CAPPED: the comment
+        // names the limit, the contract carries the list.
         `  // component's prop combinations (bindings.figma.absentVariants: ${undrawn
-          .map((t) => Object.entries(t).map(([k, v]) => `${k}=${String(v)}`).join(' '))
-          .join('; ')}).\n` +
+          .slice(0, 3)
+          .map((t) => Object.entries(t).map(([k, v]) => `${k}=${JSON.stringify(v)}`).join(' '))
+          .join('; ')
+          .replace(/[\u2028\u2029]/g, ' ')}${undrawn.length > 3 ? `; … ${undrawn.length - 3} more in the contract` : ''}).\n` +
         `  // Nothing here refuses them: they render by composing the per-axis rules read from the\n` +
         `  // drawn variants, which is a rendering nobody designed or measured.\n`;
 

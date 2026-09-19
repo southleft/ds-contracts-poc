@@ -3875,10 +3875,13 @@ canonical value, a boolean axis a JSON boolean, an axis with `unsetValue` may ta
 `null` for that canvas-only option. **Why tuples and not patterns:** the measured
 holes are slices (`state=disabled × error=true`), and a pattern would be shorter —
 but a pattern list has many spellings for one set of cells and a tuple list has
-exactly one. The list is canonical (keys in prop order, tuples in the product's
-enumeration order, first axis slowest, options as declared) and duplicate-free, so
-two contracts that leave the same cells undrawn are byte-equal and a round trip is
-a fixed point. **Why prop names and canonical values, not Figma labels:** the
+exactly one. The list is canonical (tuples in the product's enumeration order,
+first axis slowest, options as declared) and duplicate-free, so a round trip is a
+fixed point. The order of KEYS inside a tuple is deliberately NOT part of validity
+(review, PR 130): a JSON object is unordered, and any tool that sorts keys — `jq
+-S`, this repo's own `canonicalJson` — must not turn a sound contract into a
+refused one; every reader keys a tuple in axis order regardless
+(`absentVariantKey`). **Why prop names and canonical values, not Figma labels:** the
 referee can hold the list to the contract's own props without a second vocabulary,
 and re-labelling a Figma option does not invalidate it; the writer, the proposer
 and the exact projection translate through the props' `VARIANT` bindings. One
@@ -3899,22 +3902,77 @@ only fall back to the stricter reading, never widen what counts as exact. A set
 that declares a state-preview matrix keeps that expectation and the list is not
 composed with it.
 
-**Who may declare.** A DESIGNER's set — one carrying no `ds_contracts/*` stamp —
-declares by what it draws: when its rows are a STRICT SUBSET of the product (every
-row valid, none duplicated, none outside the product), the proposer reads the
-undrawn cells once (`deriveAbsentVariants`), writes them into the proposed
-contract, and the source and the returned rows are both held to the product minus
-that list. A set THIS PIPELINE drew does not declare by its rows: its declaration
-is the stamped contract's own `absentVariants`, read from the contract in scope
-and translated through its bindings (`scopedAbsentVariants`). So a generated set
-that LOST a variant, a generated sparse set whose contract is not in scope, and a
-contract that declares a different cell all still refuse `EXACT_MATRIX_RAGGED` —
-canvas damage is never laundered into a declaration
-(`core/figma-unset.test.ts` still pins the first case, unchanged). A promoted mode
-or interaction-state axis leaves the API, so an undrawn cell naming one of its
-values has no spelling: the ragged refusal stands there too. The default
-combination undrawn, or an axis value with no drawn variant, refuses by name
-through the referee.
+**Who may declare.** A DESIGNER's set declares by what it draws: when its rows are
+a STRICT SUBSET of the product (every row valid, none duplicated, none outside the
+product), the proposer reads the undrawn cells once (`deriveAbsentVariants`), writes
+them into the proposed contract, and the source and the returned rows are both held
+to the product minus that list. "A designer's set" means: no `ds_contracts/*` stamp
+**and a reader that could have SEEN one.** The review (PR 130, H2) measured the hole
+in the first cut: `mapRestToDump` is a public entry and stamps dump v1.35
+identically whether or not the REST response carried `sharedPluginData`, so the
+SAME pipeline-written set that lost a variant refused with the plane and proposed
+`absentVariants` as `verified-exact` without it. "Unstamped" is evidence of a
+designer only when a stamp was observable, and that is now a POSITIVE reader fact
+(`dumpStampsObservable`, `opts.stampsObservable`, default false — fail closed):
+
+- the plugin reader always reads the stamps; it is recognised by the provenance
+  note it has always written plus dump ≥ v1.26 (the contract-id stamp);
+- the REST mapper writes `_provenance.stampsObservable: true` ONLY when its caller
+  says the request carried `plugin_data=shared` (`MapOptions.stampsObservable`). The
+  request parameter is not echoed in the response, so only the fetch layer can
+  know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
+- anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
+  bridge that never read plugin data — is not observable, and a strict-subset set
+  refuses `EXACT_MATRIX_RAGGED … stamps-not-observable`.
+
+**This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
+file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
+reader stamps and every other consumer ignores), not a node or set field; it is
+written only on a fetched read, so every committed fixture mapped from a committed
+response keeps its bytes (the committed `extract/figma/rest/fixtures/*.rest.json`
+carry zero `sharedPluginData` and are mapped without the option); and
+`dump.plugin.js` is untouched, so the embedded plugin dump source did not move.
+
+A set THIS PIPELINE drew never declares by its rows. Its declaration is the stamped
+contract's own `absentVariants`, read from the contract in scope
+(`scopedAbsentVariants`) — and read ALWAYS, not only after the Cartesian check
+refuses (review H1). A canvas that draws the FULL product while its contract
+declares an absence is exactly the amend state below, and a full product passes the
+Cartesian check: the first cut read that state back `verified-exact` and dropped
+the declaration without a note. Held to the product minus the declaration, the
+drawn cell the contract calls absent IS an extra row ("6 rows; Cartesian definitions
+minus 1 declared absent variant(s) require 5"). So a generated set that lost a
+variant, a sparse generated set whose contract is not in scope, a contract that
+declares a different (or a MOVED) cell, and a full canvas under a declaring contract
+all refuse `EXACT_MATRIX_RAGGED` — canvas damage is never laundered into a
+declaration, and a declaration is never silently dropped. The round-trip comparer
+(`extract/figma/roundtrip.ts`) treats a dropped, gained or moved
+`bindings.figma.absentVariants` as a mismatch. A promoted mode or interaction-state
+axis leaves the API, so an undrawn cell naming one of its values has no spelling:
+the ragged refusal stands there too.
+
+**Bounds that are about meaning (review M1).** The tuple encoding grows with the
+PRODUCT, not with what is drawn: a "star" set — the default plus each axis varied
+alone — on 7 axes × 5 proposed 78,096 tuples in a 6 MB contract, and the referee
+walked the whole product to validate one tuple. Two rules, both by name:
+
+- **more undrawn than drawn is refused** (`sparse-matrix-mostly-undrawn` at the
+  proposer, `absent-variants-mostly-undrawn` at the referee). A declaration says
+  "this set is the product of its axes, minus a few cells". When the undrawn cells
+  outnumber the drawn ones the product is not the model of the set: most of what
+  the code surfaces would render is a composition nobody drew, and every per-axis
+  inference rests on a minority of the cells it claims to explain. Exactly half is
+  still allowed (a 2-of-4 diagonal is the smallest set the fence is tested on).
+  Every measured real set is on the allowed side, drawn / undrawn: Alert 30/10,
+  Checkbox 26/4, Progress 10/6, Radio 18/2, Checkbox-icon 42/6, Menu Item 16/2.
+- **a product above 4,096 combinations is refused**
+  (`sparse-matrix-product-too-large` / `absent-variants-product-too-large`;
+  `ABSENT_VARIANTS_MAX_PRODUCT`, one bound at both doors, pinned equal by a test).
+  The largest product among the 984 tracked contracts is 216. Both doors multiply
+  before they materialise anything, and `absentVariantIssues` no longer builds the
+  product at all — each tuple is checked against the axes and ranked by mixed
+  radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
+  under a millisecond.
 
 **The ambiguity fence.** Every per-axis inversion rule ("this value is a function
 of axis A") was written for full coverage, where the explanation is unique: if a
@@ -3924,9 +3982,12 @@ axis sets can each explain every drawn variant, and "first axis that fits" becom
 a guess decided by axis order — which the code surfaces then render at the undrawn
 combination. THE CONDITION, one rule (`fenceSparseInference`,
 `core/propose-figma.ts`), applied wherever an axis-conditioned inference is
-ACCEPTED: over the rows the inference was read from, take every MINIMAL set of up
-to three variant axes the observed value is a function of (no proper subset also
-fits); if there is more than one, and two of them predict DIFFERENT values for some
+ACCEPTED: over the rows the inference was read from, take every MINIMAL set of
+variant axes the observed value is a function of (no proper subset also fits) —
+EVERY subset of the axes that vary over those rows, with no arity bound: the
+product cap leaves at most twelve varying axes, so at most 4,096 subsets, and the
+first cut's "up to three" let f(A) against parity(B,C,D,E) over five binary axes
+propose `{a}` (review F4; now refused by name). If there is more than one, and two of them predict DIFFERENT values for some
 declared-absent combination (or one predicts a value where the other has none),
 the set is refused by name —
 `sparse-matrix-inference-ambiguous:<channel>@<part>`
@@ -3958,7 +4019,8 @@ compile, `FIGMA_COMPONENT_REF_ABSENT_VARIANT`, instead of throwing mid-paste.
 **Refused by name** (`validateContract`, through `absentVariantIssues`):
 `absent-variant-not-in-product`, `absent-variant-incomplete`,
 `absent-variant-non-variant-axis`, `absent-variant-duplicate`,
-`absent-variants-order`, `absent-variants-default-tuple` (Figma reads every axis
+`absent-variants-order` (TUPLE order only), `absent-variants-mostly-undrawn`,
+`absent-variants-product-too-large`, `absent-variants-default-tuple` (Figma reads every axis
 default from that variant, positionally), `absent-variants-erase-axis-value` (a
 variant option exists on the canvas only while some variant carries it, so the
 prop's binding could not round-trip), `absent-variants-cover-product`,
@@ -3993,18 +4055,34 @@ unchanged 5 % limit):
 | auto-proposed STUBS (the parent read alone) | 2 of 12 | 4.85 / 6.45 / 7.40 % |
 | the REAL sparse child | **12 of 12** | 2.23 / 2.97 / 3.87 % |
 
-**CBDS `Alert` (30 of 40) through the committed designer-file exam.** The exam's
-one ragged-matrix refusal — and the unlock its own 2026-09-13 receipt predicted
-("a sparse-matrix proposal with the absent cells named would unlock it"). Its 10
-undrawn cells are every `action=false × inlineAction=true` combination (an inline
-action without an action); with them declared, the committed observe runs the whole
-path — bridge, propose, React emit, Chromium computed-style diff on all 30 variants
-— to **accounting-zero-silent: 0 silent, 0 unexplained**. Re-recorded with the
-gate's own command (`tsx recipe/canvas-to-code-held-out-v2.ts --write --subject
-cbds-alert`); exactly one subject of 24 moved in `index.json`, the tally goes 5 / 19
-→ **6 accounting-clean, 18 refused by name**, and the three current-status lines
-`docs:check` derives from it follow. The dated receipt
-(`CANVAS-TO-CODE-DESIGNER-EXAM.md`) is left as the record of that day.
+**CBDS `Alert` (30 of 40) — the committed designer-file exam — still REFUSES, and
+that is the fail-closed rule working.** The exam reads a canvas through a read-only
+observe whose scene read-back ignores plugin data by design
+(`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose, its
+message now carrying the reason (`… Cartesian definitions require 40.
+stamps-not-observable: …`; one line in each of four evidence files, re-recorded with
+the gate's own `--write --subject cbds-alert`), the tally stays **5 accounting-clean,
+19 refused by name**, and the three derived status lines are unchanged. The first
+cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
+that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
+ground it stood on. A fresh observe that reads the stamps — it needs the owner's
+Figma Desktop — would let it declare.
+
+**What Alert would still lack (review M2, measured on the committed observe).** Its
+10 undrawn cells are every `action=false × inlineAction=true` combination. Its
+`Actions` block is drawn in exactly the 10 variants where `action=true` AND
+`inlineAction=false` — absent in the 10 `true × true` and the 10 `false × false`
+ones — so its presence IS a function of the two axes whose combination is undrawn,
+but of their CONJUNCTION with one side NEGATED. The proposer's presence vocabulary
+is one axis (a value, a value subset, or a truthy boolean): `visibleWhen` has no
+conjunction of two props and no negated boolean form (the latter already a named
+door, `propose.visible-when-no-negated-form`). Neither single axis predicts it (10
+present / 10 absent on each), so the part is a NAMED omission ("DEGRADATION part
+omitted — present in only 10/30 variants"), and an accounting-clean row would still
+render 10 of 30 variants without their action block. Closing it needs a
+two-condition `visibleWhen` with a negated side in the schema, both code emitters
+and the writer — not attempted here.
 
 `Radio Group`: 10 of 12 (2.45 / 3.87 / 5.22 %). Neither PASSES the check: all 12
 cells of each fail `content-size-mismatch` (Checkbox Group renders 148 px high
@@ -4030,25 +4108,41 @@ glyph are an uncaptured nested instance). No evidence is committed.
   proposal (the `bindings.figma.absentVariants:` note) and in the emitted React
   component (a comment beside the `axis-inert` ledger); the web-component, inline
   and HTML files carry no such note.
-- **Amend does not delete.** A set written BEFORE its contract declared an absence
-  keeps the now-undrawn variant; the amend report lists it under `extraVariants`
-  (the writer never removes a designer-visible variant). Pinned in the test.
+- **Amend does not delete — and says so every time.** A set written BEFORE its
+  contract declared an absence keeps the now-undrawn variant (the writer never
+  removes a designer-visible variant). The amend report lists it under
+  `extraVariants`; every LATER sync, which used to answer plain `unchanged`, answers
+  `unchanged-with-extra-variants:[Tone=C, Size=L]` with the same list (runtime text
+  emitted only into a script that carries a declaring contract, so every other
+  script keeps its bytes); and the design → contract read-back of that canvas
+  refuses `EXACT_MATRIX_RAGGED` instead of reading `verified-exact` (review H1).
+  Someone has to delete the variant or the declaration. Pinned in the test.
+- The note in the emitted React component is capped (the count, the first three
+  tuples, "… N more in the contract") and its values are JSON-spelled, so an enum
+  value holding a newline cannot end the comment. The reviewer's probe also shows
+  such a value breaking the generated TYPE UNION (`size?: 's' | 'l⏎…'`) — that is the
+  enum emitter's own, pre-existing, and not touched here.
+- `validateExactVariantProjection` still materialises the full Cartesian of ANY set
+  it is handed (8 axes × 5: ~0.5 s before the named refusal). Pre-existing, the same
+  for a full matrix; not changed here.
 - The design:consumer:check harness takes one `--component` for both the dump's set
   name and the generated directory, so a set whose name has a space
   (`Checkbox Group` → `CheckboxGroup`) needs an alias key in the dump. Not changed
   here.
-- `accuracy/grammar.json`'s `cartesian-fill` sentence ("a contract with independent
-  axes emits the complete Cartesian product") is now true only of a contract that
-  declares no absence. Not edited (a pinned grammar).
 
-**To reverse.** Delete the `pipelineDrew ? scopedAbsentVariants : deriveAbsentVariants`
-branch in `proposeFromDumpFenced` (`absentVariants` is then always null: every
-ragged set refuses as before, the fence never arms, and no contract gains the
-field); the writer filter, the referee block and the schema field are inert without
-a declaration and can stay. The two rows of `core/exact-proposal-check.ts` that
-observed the old refusal through the proposer were rewritten and return with it.
+**To reverse.** Make `absentVariants` in `proposeFromDumpFenced` always null (delete
+the `pipelineDrew ? scopedAbsentVariants(…) : ragged && stampsObservable ?
+deriveAbsentVariants(set) : null` expression): every ragged set refuses as before,
+the fence never arms, and no contract gains the field. The writer filter, the
+referee block and the schema field are inert without a declaration and can stay; so
+can `_provenance.stampsObservable` (nothing but the proposer reads it).
+`accuracy/grammar.json`'s `cartesian-fill` sentence was made true of a declaring
+contract and reads correctly either way.
 **Gates:** `extract/figma/absent-variants.test.ts` (`npm run exact-proposal:check`
 — exact projection, referee, proposer on synthetic designer sets incl. the named
 ambiguity, writer round trip through the real plugin reader on the mock canvas,
-the pipeline-drawn refusals, the code-surface note) and the rewritten rows of
-`core/exact-proposal-check.ts`.
+the pipeline-drawn refusals, the amend state end to end, the stamps-observable fact
+at both readers, the meaning bounds, every fenced call-site category by its own
+label, the code-surface note) and `core/exact-proposal-check.ts` (the two ORIGINAL
+ragged-refusal rows hold again unchanged; the declared-absence rows run under the
+observable fact).

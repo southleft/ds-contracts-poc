@@ -124,7 +124,7 @@ blocker, superseded by the designer-file exam below, says:
 
 **That exam has now run (2026-09-13)** on two files this repo never wrote — the
 Altitude Design System and the CBDS UI Kit, twenty-four sets, observed
-read-only: **6 accounting-clean, 18 refused by name, nothing silent** (6 and 18 since 2026-09-19: CBDS Alert, 30 of 40 cells, was the one ragged-matrix refusal and is accounting-clean now that its 10 undrawn cells are declared — docs/23 §D.40; the dated receipt records the 5 / 19 measured on 2026-09-13). The refusals are verbatim in
+read-only: **5 accounting-clean, 19 refused by name, nothing silent.** The refusals are verbatim in
 [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](CANVAS-TO-CODE-DESIGNER-EXAM.md): a State
 axis the mount step cannot drive (Chip, Link), frames without auto-layout
 (Checkbox, Radio, Toggle), children inside `<textarea>` (Textarea), and two sets

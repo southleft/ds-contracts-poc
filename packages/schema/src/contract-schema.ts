@@ -2706,9 +2706,10 @@ export const ContractBindingsSchema = z.strictObject({
      *  `null` for its canvas-only omission option. Complete tuples, never
      *  patterns: a pattern (`{state: disabled, error: true}`) has many
      *  spellings for one set of cells, a tuple list has exactly one — so the
-     *  list is canonical (axes in prop order, values in declared order) and
-     *  duplicate-free, and two contracts that leave the same cells undrawn
-     *  are byte-equal.
+     *  list is canonical (tuples in the product's enumeration order) and
+     *  duplicate-free. The order of KEYS inside a tuple is not part of
+     *  validity: a JSON object is unordered and key-sorting tools must not
+     *  turn a sound contract into a refused one.
      *
      *  Semantics: those combinations are NOT DRAWN ON THE CANVAS — the Figma
      *  writer emits no variant for them and the exact variant projection
@@ -2720,8 +2721,11 @@ export const ContractBindingsSchema = z.strictObject({
      *
      *  validateContract refuses, by name: a tuple that is not a member of the
      *  product, a duplicate, a non-canonical order, the default tuple, a list
-     *  that leaves an axis value (or the whole product) undrawn, and the
-     *  field together with `statePreviews` or a `native` representation. */
+     *  that leaves an axis value (or the whole product) undrawn, a list that
+     *  leaves MORE cells undrawn than drawn (the product is then not a
+     *  description of the set), a product above ABSENT_VARIANTS_MAX_PRODUCT,
+     *  and the field together with `statePreviews` or a `native`
+     *  representation. */
     absentVariants: z
       .array(z.record(z.string(), z.union([z.string(), z.boolean(), z.null()])))
       .min(1)
@@ -3335,8 +3339,17 @@ export function absentVariantKeys(contract: Contract): Set<string> {
   return new Set(list.map((t) => absentVariantKey(axes, t)));
 }
 
+/** The largest variant product a declaration may range over. A bound on the
+ *  REFEREE's work, not on design: the tuple encoding grows with the product
+ *  (not with what is drawn), so without it a "star" set on 8 axes × 5 values is
+ *  a 35 MB contract and validating one tuple walked 1.68 M cells. The largest
+ *  product among this repo's 984 tracked contracts is 216. */
+export const ABSENT_VARIANTS_MAX_PRODUCT = 4096;
+
 /** Every reason a declared absence list is not acceptable, each NAMED. Empty
- *  when the field is absent or sound. */
+ *  when the field is absent or sound. Never materialises the product: each
+ *  tuple is checked against the axes directly and ranked by mixed radix, so
+ *  the work is O(tuples × axes). */
 export function absentVariantIssues(contract: Contract): string[] {
   const list = contract.bindings?.figma?.absentVariants;
   if (list === undefined) return [];
@@ -3365,11 +3378,17 @@ export function absentVariantIssues(contract: Contract): string[] {
     );
     return issues;
   }
+  const productSize = axes.reduce((n, a) => n * a.options.length, 1);
+  if (productSize > ABSENT_VARIANTS_MAX_PRODUCT) {
+    issues.push(
+      `absent-variants-product-too-large: ${at} ranges over ${productSize} combinations (${axes.map((a) => `${a.prop.name}×${a.options.length}`).join(" · ")}); a declaration is a list of complete tuples and is refused above ${ABSENT_VARIANTS_MAX_PRODUCT} — a set that large is not described by "a product with a few holes"`,
+    );
+    return issues;
+  }
   const axisNames = new Set(axes.map((a) => a.prop.name));
   const spell = (t: Record<string, unknown>) => JSON.stringify(t);
-  const seen = new Set<string>();
-  const sound: string[] = [];
-  let ordered = true;
+  const seen = new Set<number>();
+  const ranks: number[] = [];
   list.forEach((tuple, i) => {
     const here = `${at}[${i}] ${spell(tuple)}`;
     let ok = true;
@@ -3390,55 +3409,74 @@ export function absentVariantIssues(contract: Contract): string[] {
         `absent-variant-incomplete: ${here} does not name ${missing.map((m) => `"${m}"`).join(", ")} — an entry is ONE complete combination over every variant axis, never a pattern`,
       );
     }
+    // Mixed-radix rank in the product's enumeration order (first axis slowest).
+    let rank = 0;
     for (const a of axes) {
       if (!Object.hasOwn(tuple, a.prop.name)) continue;
       const value = tuple[a.prop.name] as string | boolean | null;
-      if (a.options.some((o) => o === value)) continue;
+      const index = a.options.findIndex((o) => o === value);
+      if (index >= 0) {
+        rank = rank * a.options.length + index;
+        continue;
+      }
       ok = false;
       issues.push(
         `absent-variant-not-in-product: ${here} gives "${a.prop.name}" the value ${JSON.stringify(value)}, which is not one of its options (${a.options.map((o) => JSON.stringify(o)).join(", ")})`,
       );
     }
     if (!ok) return;
-    if (Object.keys(tuple).some((k, n) => k !== axes[n]!.prop.name)) ordered = false;
-    const key = absentVariantKey(axes, tuple);
-    if (seen.has(key)) {
+    if (seen.has(rank)) {
       issues.push(`absent-variant-duplicate: ${here} repeats an earlier entry`);
       return;
     }
-    seen.add(key);
-    sound.push(key);
+    seen.add(rank);
+    ranks.push(rank);
   });
   if (issues.length > 0) return issues;
-  // Canonical order = the product's own enumeration order (first axis
-  // slowest, options as declared).
-  let product: Array<Array<string | boolean | null>> = [[]];
-  for (const a of axes) product = product.flatMap((row) => a.options.map((o) => [...row, o]));
-  const rank = new Map(product.map((row, n) => [JSON.stringify(row), n]));
-  if (!ordered || sound.some((k, n) => n > 0 && rank.get(sound[n - 1]!)! > rank.get(k)!)) {
+  // Canonical order = the product's own enumeration order (first axis slowest,
+  // options as declared). TUPLE order only: the order of KEYS inside a tuple is
+  // not part of validity — a JSON object is unordered, and any tool that sorts
+  // keys (jq -S, canonicalJson) must not turn a sound contract into a refused
+  // one. absentVariantKey reads every tuple in axis order regardless.
+  if (ranks.some((r, n) => n > 0 && ranks[n - 1]! > r)) {
     issues.push(
-      `absent-variants-order: ${at} is not in canonical order — list each tuple's keys in prop order (${axes.map((a) => a.prop.name).join(", ")}) and the tuples in the product's enumeration order (first axis slowest, options as declared), so one set of undrawn cells has one spelling`,
+      `absent-variants-order: ${at} is not in canonical order — list the tuples in the product's enumeration order (axes ${axes.map((a) => a.prop.name).join(", ")}; first axis slowest, options as declared), so one set of undrawn cells has one spelling`,
     );
   }
-  if (seen.size >= product.length) {
-    issues.push(`absent-variants-cover-product: ${at} names all ${product.length} combinations — nothing would be drawn`);
+  if (seen.size >= productSize) {
+    issues.push(`absent-variants-cover-product: ${at} names all ${productSize} combinations — nothing would be drawn`);
     return issues;
   }
-  const dflt = absentVariantKey(axes, defaultVariantTuple(axes));
-  if (seen.has(dflt)) {
+  // MEANING, not convenience: a declaration says "this set is the product of
+  // its axes, minus a few cells". When MORE cells are undrawn than drawn the
+  // product is not the model of the set (a "star" — the default plus each axis
+  // varied alone — is not a product with holes), most of what the code
+  // surfaces would render is a composition nobody drew, and the per-axis
+  // inferences rest on a minority of the cells they claim to explain.
+  const drawn = productSize - seen.size;
+  if (seen.size > drawn) {
     issues.push(
-      `absent-variants-default-tuple: ${at} names the default combination ${dflt} — the default variant is the one Figma reads every axis default from and must be drawn`,
+      `absent-variants-mostly-undrawn: ${at} leaves ${drawn} of ${productSize} combinations drawn and ${seen.size} undrawn — more undrawn than drawn, so the product of these axes is not a description of the set; model the drawn combinations with fewer or different axes`,
     );
   }
-  axes.forEach((a, n) => {
+  const defaults = defaultVariantTuple(axes);
+  let defaultRank = 0;
+  for (const a of axes) defaultRank = defaultRank * a.options.length + a.options.findIndex((o) => o === defaults[a.prop.name]);
+  if (seen.has(defaultRank)) {
+    issues.push(
+      `absent-variants-default-tuple: ${at} names the default combination ${absentVariantKey(axes, defaults)} — the default variant is the one Figma reads every axis default from and must be drawn`,
+    );
+  }
+  for (const a of axes) {
+    const cellsPerOption = productSize / a.options.length;
     for (const option of a.options) {
-      const cells = product.filter((row) => row[n] === option);
-      if (cells.every((row) => seen.has(JSON.stringify(row)))) {
+      const undrawn = list.filter((t) => (t[a.prop.name] ?? null) === option).length;
+      if (undrawn >= cellsPerOption) {
         issues.push(
           `absent-variants-erase-axis-value: ${at} leaves no drawn combination with "${a.prop.name}" = ${JSON.stringify(option)} — a variant option exists on the canvas only while some variant carries it, so the prop's VARIANT binding could not round-trip`,
         );
       }
     }
-  });
+  }
   return issues;
 }

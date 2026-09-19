@@ -282,6 +282,12 @@ const statePreviewTuples = (
  *  SOURCE rows — a declaration can never be inferred by this validator. */
 export type AbsentVariantTuple = Readonly<Record<string, string>>;
 
+/** The largest variant product a declaration may range over — the same bound
+ *  the referee holds (`ABSENT_VARIANTS_MAX_PRODUCT`, contract-schema.ts; a
+ *  test pins the two equal). Checked by multiplication BEFORE any product is
+ *  materialised, so neither door can be driven into a memory blow-up. */
+export const EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096;
+
 export interface ExactProjectionOptions {
   /** `bindings.figma.absentVariants` in Figma terms. Absent → full Cartesian. */
   absentVariants?: unknown;
@@ -294,6 +300,11 @@ const absentVariantTuples = (
   if (!Array.isArray(value) || value.length === 0 || axes.length === 0)
     return null;
   const names = axes.map((axis) => axis.name);
+  if (
+    axes.reduce((n, axis) => n * axis.options.length, 1) >
+    EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+  )
+    return null;
   const out: string[] = [];
   for (const raw of value) {
     if (!isRecord(raw)) return null;
@@ -332,6 +343,11 @@ export function deriveAbsentVariants(
   if (source.refusals.length > 0 || source.tuples.length === 0) return null;
   const drawn = new Set(source.tuples);
   const names = axes.map((axis) => axis.name);
+  if (
+    axes.reduce((n, axis) => n * axis.options.length, 1) >
+    EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+  )
+    return null;
   let product: Record<string, string>[] = [{}];
   for (const axis of axes) {
     product = product.flatMap((row) =>
