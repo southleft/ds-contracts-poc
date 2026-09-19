@@ -455,22 +455,9 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `css.ua-padding-undeclared-side-zero` | `implemented` | `css.ts:286` | padding-top / -right / -bottom / -left: 0 for every side the contract does not declare, on a root or part rendering as an element the user agent pads (button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium) → a frame whose undeclared padding fields are 0 (Figma's default; nothing is written) | padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces | **none** | `untested` |
 | `emit.padding-longhand-bound` | `implemented` | `emit-figma-script.ts:2087` | padding-left / -right / -top / -bottom bound to a token → bindings.paddingLeft (and siblings) bound to the same variable | the logical shorthand when both sides agree, longhands otherwise | **none** | `round-tripped` |
 | `emit.padding-shorthand-registry-hole` | `proposed` | `emit-figma-script.ts:2424` | any token-bound channel with no case in the switch — including the `padding` shorthand itself → nothing | a named refusal for every unhandled channel, whether or not a registry row exists | `channel-miss` | `untested` |
-
-#### `css.ua-padding-undeclared-side-zero`
-
-**Context.** `undeclaredPaddingSides` (packages/core anatomy.ts) reads tokens, literals, declared, tokensByProp and literalsByProp — a shorthand or a logical pair covers its sides. `generateCss` pushes the zeros on the root (this site) and on nested parts through `uaPaddingPartDecls`; the web-components `shadowCss` and the inline surface's style record do the same. A part whose own chrome already wrote `padding: 0` (event-trigger buttons, text-entry controls, native checkables, icon buttons) gets nothing more.
-
-**Inverse** (`propose-figma.ts`, padding-* proposed from the frame's padding fields; a zero side proposes no channel) emits the canonical form: no channel for a zero side.
-
-**Lost.**
-- a side declared by only SOME values of an enum (tokensByProp / literalsByProp) counts as declared for every value, so the other values keep the user agent's padding on that side — named, not closed
-- `select` is not listed: Chromium gives it no padding; other engines were not measured
-- the static HTML preview (core/emit-html.ts) carries no UA reset of its own, the same as the margin reset
-
-**Why.** A Figma frame's undeclared padding is 0; a `<button>` root the contract pads on one side only rendered the user agent's 1px 6px on the others. Measured: Altitude Tab Panel (a `<button>` root declaring only padding-top) rendered 453 px wide against the canvas's 441 in the design-led clean-consumer check. The emitter adds zeros only where the contract is silent, so a contract declaring all four sides keeps its bytes. Same shape as the UA margin reset and the UA paint reset. Held by core/react-ua-padding.test.ts, which re-measures the element list in Chromium. docs/23 §D.44.
+| `propose.ua-padding-drawn-zero-explicit` | `implemented` | `propose-figma.ts:1284` | padding-top / -right / -bottom / -left: 0px written as root literals on the proposed contract for every side every variant draws 0 and the proposal does not declare, when the root renders as an element the user agent pads (measured in Chromium) → a frame whose padding field is 0 on that side | padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named | `notes` | `untested` |
 
 #### `emit.padding-longhand-bound`
 
@@ -494,6 +481,20 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 
 **Why.** A receipt guarded by the wrong condition. The literal side of the same switch calls literalMiss() in ALL branches including the catch-all else, and has no such hole. This matters beyond padding: it is the general escape through which any unregistered token channel leaves without a word, which is the shape of the tab-size incident that once made validateContract refuse 32 whole components.
 
+#### `propose.ua-padding-drawn-zero-explicit`
+
+**Context.** `settleUaPadding` (core/propose-figma.ts) runs at the end of every proposal and again after the batch's interactive-content pass, which it follows (it takes its own zeros back when that pass withholds the element). Declared means tokens, literals, declared, tokensByProp or literalsByProp; a shorthand or a logical pair covers its sides, a single logical side its own. A side drawn NONZERO but undeclared was refused upstream: it is not zeroed, and a `ua-padding:` note says the user agent's default renders there. The emitters add nothing.
+
+**Inverse** (`emit-figma-script.ts`, the padding literals lower to the frame's padding fields) emits the canonical form: each 0px literal lowers to a frame padding field of 0, which this rule reads back as the same literal.
+
+**Lost.**
+- a side refused by the proposal keeps the user agent's padding in code (named, not closed) — Eventz Atoms/Tag's inline padding
+- only the ROOT is settled; a nested part the proposer gives a padded element keeps UA padding on its undeclared sides
+- a side declared by only SOME enum values counts as declared, so no base zero is written for the others
+- hand-written contracts are untouched by design; `select` is not listed (0 in Chromium, other engines unmeasured)
+
+**Why.** A Figma frame's undeclared padding is 0, but "undeclared" in a PROPOSED contract also means "refused", so an emitter that reads undeclared as 0 zeroes padding the designer drew — the first cut of this rule did exactly that to Eventz Atoms/Tag (6/12 drawn, inline refused). The proposer is the one place that knows which, so it carries the zero as a fact. Held by extract/figma/ua-padding.test.ts, which re-measures the element list in Chromium. docs/23 §D.44.
+
 ### `size` — 8 rules (7 implemented, 1 proposed, 0 wall)
 
 Contains both the best and the weakest reasoning in the register. `hugEvidence` and the text hug/fill rule ask real measurements and refuse by name when the measurement is not uniform. The text-part geometry exclusion asks presence-of-ink instead — a proxy standing in for a question the same file already knows how to ask.
@@ -501,7 +502,7 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:96` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
-| `css.text-box-whole-pixel` | `implemented` | `css.ts:1097` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
+| `css.text-box-whole-pixel` | `implemented` | `css.ts:1086` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2326` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2355` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:5026` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |

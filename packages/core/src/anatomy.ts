@@ -131,69 +131,19 @@ export const UA_PAINT_CHANNELS = ['background', 'background-color', 'background-
  *    fieldset 5.6 12 10 12 · legend 0 2 0 2 · ul/ol/menu 0 0 0 40 (inline
  *    start) · dialog[open] 16 16 16 16 · td/th 1 1 1 1.
  *  Every other element the emitters can render (div, span, a, label, p,
- *  h1-h6, li, select, section, …) measured 0 on all four sides. `select` is
- *  0 in Chromium; other engines may pad it — not listed, because not measured.
- *  Same reasoning as UA_MARGIN_ELEMENTS: a Figma frame's undeclared padding
- *  is 0, so a side the contract does not declare must not be finished by the
- *  user agent (Altitude Tab Panel: a `<button>` root declaring only
- *  padding-top rendered 6 px of UA padding on each inline side, 453 px wide
- *  against the canvas's 441). */
+ *  h1-h6, li, select, section, …) measured 0 on all four sides. `select` is 0
+ *  in Chromium; Safari and Firefox were NOT measured and may pad it, so it is
+ *  not listed (named in docs/23 §D.44).
+ *
+ *  READ BY THE PROPOSER, NOT THE EMITTERS (review of §D.44, H2): a Figma
+ *  frame's padding side is a DRAWN fact, so core/propose-figma.ts writes an
+ *  explicit `padding-<side>: 0px` literal where the canvas drew 0 on a set it
+ *  proposes as one of these elements. An emitter-side "undeclared means 0"
+ *  reset was wrong whenever the proposer REFUSED a side (Eventz Atoms/Tag
+ *  draws 6/12 and its inline padding is refused): undeclared is not zero. */
 export const UA_PADDING_ELEMENTS = new Set([
   'button', 'input', 'textarea', 'option', 'fieldset', 'legend', 'ul', 'ol', 'menu', 'dialog', 'td', 'th',
 ]);
-
-const PADDING_SIDES = ['top', 'right', 'bottom', 'left'] as const;
-/** Which physical sides a padding property states (logical properties are
- *  read for the horizontal-tb writing mode the emitters draw in; the block
- *  and inline pairs cover both of their sides, so the start/end ambiguity
- *  of a single logical side is resolved conservatively — it counts as
- *  declaring both sides of its axis). */
-const PADDING_PROPERTY_SIDES: Record<string, ReadonlyArray<(typeof PADDING_SIDES)[number]>> = {
-  padding: PADDING_SIDES,
-  'padding-top': ['top'],
-  'padding-right': ['right'],
-  'padding-bottom': ['bottom'],
-  'padding-left': ['left'],
-  'padding-block': ['top', 'bottom'],
-  'padding-block-start': ['top', 'bottom'],
-  'padding-block-end': ['top', 'bottom'],
-  'padding-inline': ['left', 'right'],
-  'padding-inline-start': ['left', 'right'],
-  'padding-inline-end': ['left', 'right'],
-};
-
-/** The padding longhands (`padding-top`, …) a part does NOT declare in any of
- *  its unconditional or per-prop-value channels — tokens, literals, declared,
- *  tokensByProp, literalsByProp (the same holders the UA-paint check reads).
- *  A side stated only under a state (:hover, declaredStates) still counts as
- *  undeclared: the rest state has no value for it, and the state rule comes
- *  later in every sheet, so it still wins while active. Pure; the emitters
- *  spell each returned side as `<side>: 0` when the part renders as a
- *  UA_PADDING_ELEMENTS element. Empty when every side is stated. */
-export function undeclaredPaddingSides(part: Part): string[] {
-  const declared = new Set<string>();
-  const read = (o: Record<string, unknown> | undefined): void => {
-    for (const k of Object.keys(o ?? {})) for (const s of PADDING_PROPERTY_SIDES[k] ?? []) declared.add(s);
-  };
-  read(part.tokens);
-  read(part.literals);
-  read(part.declared);
-  const byProp = part.tokensByProp === undefined ? [] : Array.isArray(part.tokensByProp) ? part.tokensByProp : [part.tokensByProp];
-  for (const e of byProp) for (const o of Object.values(e.map)) read(o);
-  for (const e of part.literalsByProp ?? []) for (const o of Object.values(e.map)) read(o);
-  return PADDING_SIDES.filter((s) => !declared.has(s)).map((s) => `padding-${s}`);
-}
-
-/** The nested-part spelling of the same reset: `<side>: 0` for every
- *  undeclared side of a part rendering as a UA_PADDING_ELEMENTS element,
- *  unless the emitter's own chrome for that part already zeroed ALL padding
- *  (`padding: 0` — event-trigger buttons, text-entry controls, native
- *  checkables, icon buttons), in which case nothing is added. */
-export function uaPaddingPartDecls(part: Part, decls: readonly string[]): string[] {
-  if (!part.element || !UA_PADDING_ELEMENTS.has(part.element)) return [];
-  if (decls.includes('padding: 0')) return [];
-  return undeclaredPaddingSides(part).map((side) => `${side}: 0`);
-}
 
 /** Every element the contract's root can render as. */
 export function rootElementsOf(contract: Contract): string[] {

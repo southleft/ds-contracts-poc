@@ -100,7 +100,7 @@
       "stage": "css",
       "status": "proposed",
       "file": "packages/core/src/css.ts",
-      "ruleLine": 259,
+      "ruleLine": 255,
       "ruleText": "rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');",
       "css": {
         "construct": "the CSS emitted for a contract whose root carries no layout block",
@@ -128,8 +128,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 100,
-      "ruleLine": 101,
+      "line": 97,
+      "ruleLine": 98,
       "ruleText": "const contract = lowerStrokeRings(input);",
       "css": {
         "construct": "border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0",
@@ -167,8 +167,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 1096,
-      "ruleLine": 1097,
+      "line": 1085,
+      "ruleLine": 1086,
       "ruleText": "decls.push(...(textBoxes.get(part) ?? []));",
       "css": {
         "construct": "inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box",
@@ -204,41 +204,6 @@
         "propose.text-box-unhonourable-withdrawn"
       ],
       "why": "CSS lays a text run out at its fractional advance and adds letter spacing after every glyph; Figma's auto-width text box is the advance rounded up with no spacing after the last glyph. Measured on the 72-variant CBDS Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every content size equal because the hug root rendered 47.40625 px against Figma's 48; and on the committed REST fixtures rendered in Chromium (Manrope Kicker, 6 px tracking: Figma 95 / 87 = ceil less the trailing spacing, 101 / 93 with it). calc-size() is the only CSS that can round an intrinsic size, and an unsupporting parser drops the declaration. The basis is fit-content, not max-content: max-content made a runtime string non-wrapping (review, PR 132 — the flowbite Card grew to 596 px in a 240 px container); fit-content is the max-content box when the text fits and the available width when it does not, and the 100 % clamp removes the sub-pixel overflow rounding a fractional available width would cause. The fact is carried under Figma's own name and only in the value that lowers; absent keeps every existing byte. Untested by the conformance kit; held by extract/figma/whole-pixel-text-box.test.ts and core/react-whole-pixel-text-box.test.ts, which measure the box in Chromium."
-    },
-    {
-      "id": "css.ua-padding-undeclared-side-zero",
-      "family": "padding",
-      "stage": "css",
-      "status": "implemented",
-      "file": "packages/core/src/css.ts",
-      "line": 285,
-      "ruleLine": 286,
-      "ruleText": "if (rootElementsOf(contract).some((el) => UA_PADDING_ELEMENTS.has(el))) {",
-      "css": {
-        "construct": "padding-top / -right / -bottom / -left: 0 for every side the contract does not declare, on a root (semantics.element or any elementByProp value) or part rendering as an element the user agent pads (UA_PADDING_ELEMENTS: button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium)",
-        "context": "packages/core anatomy.ts undeclaredPaddingSides reads tokens, literals, declared, tokensByProp and literalsByProp (a shorthand or a logical pair covers its sides); generateCss pushes the zeros on the root (this site) and on nested parts through uaPaddingPartDecls (single- and multi-root), the web-components shadowCss does the same, and the inline surface writes the same longhands into the style record; a part whose own chrome already wrote `padding: 0` gets nothing more"
-      },
-      "figma": {
-        "construct": "a frame whose undeclared padding fields are 0 — Figma's default, so nothing is written"
-      },
-      "inverse": {
-        "file": "core/propose-figma.ts",
-        "site": "padding-* proposed from the frame's padding fields; a zero side proposes no channel",
-        "emits": "padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces (Figma's frame default, spelled explicitly in CSS where the user agent would otherwise pad)"
-      },
-      "lost": [
-        "a side declared by only SOME values of an enum (tokensByProp / literalsByProp) counts as declared for every value, so the other values keep the user agent's padding on that side — named, not closed",
-        "select is not listed: Chromium gives it no padding; other engines were not measured",
-        "the static HTML preview (core/emit-html.ts) carries no UA reset of its own, the same as the margin reset"
-      ],
-      "canonical": "padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces (Figma's frame default, spelled explicitly in CSS where the user agent would otherwise pad)",
-      "receipt": {
-        "channel": "none"
-      },
-      "roundTrip": "untested",
-      "cases": [],
-      "doors": [],
-      "why": "A Figma frame's undeclared padding is 0; a <button> root the contract pads on one side only rendered the user agent's 1px 6px on the others. Measured: Altitude Tab Panel (a <button> root declaring only padding-top) rendered 453 px wide against the canvas's 441 in the design-led clean-consumer check. The side list is the one fact the emitter adds, and it adds it only where the contract is silent, so a contract declaring all four sides keeps its bytes. Same shape as the UA margin reset (UA_MARGIN_ELEMENTS) and the UA paint reset one block down."
     },
     {
       "id": "emit.axis-adjacent-inlines-unnamed",
@@ -1863,8 +1828,8 @@
       "stage": "propose",
       "status": "implemented",
       "file": "core/propose-figma.ts",
-      "line": 6817,
-      "ruleLine": 6818,
+      "line": 7055,
+      "ruleLine": 7056,
       "ruleText": "if (!m.rootContent && direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {",
       "css": {
         "construct": "a canvas root drawn at exactly row / center / center",
@@ -1887,6 +1852,43 @@
         "propose.root-default-layout-elided"
       ],
       "why": "It does not re-inflate to the same shape, and that is the finding. The proposer elides at `flex` / row / center / center; packages/core/src/css.ts, seeing no root layout, emits `inline-flex` / center / center. The display keyword flips from flex to inline-flex on every round trip, with nothing receipting it — an elision whose premise about its own partner is false. Compiler-owned root content keeps an explicit flex layout so its empty reusable slot remains generatable; the default-elision rule excludes that verified projection."
+    },
+    {
+      "id": "propose.ua-padding-drawn-zero-explicit",
+      "family": "padding",
+      "stage": "propose",
+      "status": "implemented",
+      "file": "core/propose-figma.ts",
+      "line": 1283,
+      "ruleLine": 1284,
+      "ruleText": "const next = { ...literals };",
+      "css": {
+        "construct": "padding-top / -right / -bottom / -left: 0px written as root literals on the PROPOSED contract, for every side every variant draws 0 and the proposal does not declare, when the root renders (semantics.element or any elementByProp value) as an element the user agent pads (UA_PADDING_ELEMENTS: button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium)",
+        "context": "settleUaPadding, run at the end of every proposal and again after the batch's interactive-content pass (it undoes its own zeros when that pass withholds the element); declared = tokens, literals, declared, tokensByProp and literalsByProp (a shorthand or a logical pair covers its sides, a single logical side its own). A side drawn nonzero but undeclared was refused upstream: it is NOT zeroed, and a `ua-padding:` note names that the user agent's default renders there. The emitters add nothing"
+      },
+      "figma": {
+        "construct": "a frame whose padding field is 0 on that side"
+      },
+      "inverse": {
+        "file": "core/emit-figma-script.ts",
+        "site": "the padding literals lower to the frame's padding fields",
+        "emits": "padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named"
+      },
+      "lost": [
+        "a side refused by the proposal keeps the user agent's padding in code (named by a ua-padding note, not closed) — Eventz Atoms/Tag's inline padding",
+        "only the ROOT is settled: a nested part the proposer gives a padded element keeps UA padding on its undeclared sides",
+        "a side declared by only SOME enum values counts as declared, so no base zero is written for the others",
+        "hand-written contracts are untouched by design; select is not listed (0 in Chromium, other engines unmeasured)"
+      ],
+      "canonical": "padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named",
+      "receipt": {
+        "channel": "notes",
+        "marker": "ua-padding: padding-"
+      },
+      "roundTrip": "untested",
+      "cases": [],
+      "doors": [],
+      "why": "A Figma frame's undeclared padding is 0, but 'undeclared' in a PROPOSED contract also means 'refused', so an emitter that reads undeclared as 0 zeroes padding the designer drew (the first cut of this rule did exactly that to Eventz Atoms/Tag, 6/12 drawn, inline refused). The proposer is the one place that knows which: it reads the drawn value and carries the zero as a fact. Measured defect it closes: a <button> the canvas pads on one side only renders the user agent's 1px 6px on the others. docs/23 §D.44."
     },
     {
       "id": "schema.display-block-to-vertical-stack",

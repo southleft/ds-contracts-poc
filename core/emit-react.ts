@@ -95,11 +95,8 @@ export {
   topRootNames,
   topRoots,
   UA_MARGIN_ELEMENTS,
-  UA_PADDING_ELEMENTS,
   UA_PAINT_CHANNELS,
   UA_PAINTED_ROOT_ELEMENTS,
-  uaPaddingPartDecls,
-  undeclaredPaddingSides,
 } from '../packages/core/src/anatomy.js';
 export {
   GRID_SELF_ALIGN,

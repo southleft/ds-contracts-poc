@@ -63,8 +63,6 @@ import {
   textProps,
   topRoots,
   UA_MARGIN_ELEMENTS,
-  UA_PADDING_ELEMENTS,
-  undeclaredPaddingSides,
   validateContract,
   defaultFontFamilyParts,
   drawsStrokeRing,
@@ -328,11 +326,6 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       // component's box is contract-governed — h1-h6/p/hr/ul/… UA margins
       // never leak into the composing layout.
       if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) s.margin = 0;
-      // UA-padding neutralization (core UA_PADDING_ELEMENTS): only the sides
-      // the contract does not declare — a Figma frame's undeclared padding is 0.
-      if (rootElementsOf(contract).some((el) => UA_PADDING_ELEMENTS.has(el))) {
-        for (const side of undeclaredPaddingSides(part)) s[camel(side)] = 0;
-      }
       // ROUND 9 — carry both or withhold both (emit-react's root rule, same
       // words): a border COLOUR with no width used to emit the style keyword
       // and let the UA's `medium` (3px) complete it. The keyword rides the
@@ -426,11 +419,6 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             border: 'none', padding: 0, color: 'inherit', cursor: 'pointer',
           });
         }
-      }
-      // UA-padding neutralization on NESTED parts (css.ts uaPaddingPartDecls):
-      // skipped when the part's own chrome above already zeroed all padding.
-      if (part.element && UA_PADDING_ELEMENTS.has(part.element) && s.padding === undefined) {
-        for (const side of undeclaredPaddingSides(part)) s[camel(side)] = 0;
       }
       if (part.animation) {
         s.animation = part.animation === 'spin'

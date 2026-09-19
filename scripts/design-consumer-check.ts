@@ -411,8 +411,21 @@ async function main() {
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
   cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract)));
   // Low (review): every contract beside it — the followed children and stubs —
-  // and the minted tree ride the committed inputs, so the run reproduces from them.
-  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f)); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
+  // and the minted tree ride the committed inputs, so the run reproduces from them. The
+  // proposer's report (figma-proposals.md) rides too: it is where every semantics decision
+  // is said in words (an inferred or WITHHELD element, docs/23 §D.44), which a contract
+  // cannot carry.
+  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f));
+  // The report names the operator's work directory; rewritten to `.` (the report sits beside
+  // the contracts it names) so no machine path reaches committed evidence.
+  const report = path.join(path.dirname(args.contract), 'figma-proposals.md');
+  if (existsSync(report)) {
+    const dir = path.resolve(path.dirname(args.contract));
+    const spellings = [...new Set([dir, path.relative(process.cwd(), dir), path.relative(process.cwd(), dir).replace(/^(\.\.\/)+/, '/')])].filter(Boolean).sort((a, b) => b.length - a.length);
+    let text = readFileSync(report, 'utf8');
+    for (const s of spellings) text = text.split(s).join('.');
+    writeFileSync(path.join(inputs, 'figma-proposals.md'), text);
+  } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [

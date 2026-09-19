@@ -10,7 +10,7 @@
     "ArrowArcLeft/ArrowArcLeft.stories.tsx": "b022c8cc09358a4b173f1ebd94669046eed3e6fb477b2cc1db0d3455815d3210",
     "ArrowArcLeft/ArrowArcLeft.tsx": "39597f11d55b2b53db37ba9c9ea4462b0dda22170120a99665859d0322bf4453",
     "ArrowArcLeft/index.ts": "021f109a0fd7f2c7dd65788a99fbabd22294650592315f389ad6c3e32ee09119",
-    "Button/Button.module.css": "f6b9ef84df26155a1fa0f32ca3bfebc109c586ddd1aa3b2352c300c7da5a3718",
+    "Button/Button.module.css": "3149134732e81509ebec5908029c0e47599717a6fa60b54b8a21f9d510fe315c",
     "Button/Button.stories.tsx": "fed612ebb7c8dedcba3cc13dbbb9fac757c10c138cd699f5a189763b09902458",
     "Button/Button.tsx": "88e28f2eab365d5ace637699f33bf541227b9d60bb5ee1ece61afecdbf6e7b34",
     "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
@@ -302,7 +302,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "d9b9cfe6d22b8f71b863cbb9a871a33a4a04547cc112bdffdc0c4aa78140824f",
+    "tarballSha256": "dd20d0c00d74c1e23912f6224770b9df1f8d5719ff9d15b5e4b76ac34c28178e",
     "distFiles": [
       "ArrowArcLeft",
       "ArrowArcLeft/ArrowArcLeft.d.ts",
@@ -354,11 +354,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "335eed5b7ac9c777ceeaad5f69a96ade3306bb9198963fac69f53c95d0701c4f",
+    "lockfileSha256": "81c6fc0666b005c5748992773407a64d0ef751226eb93bb08255c979dd9b3b8a",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 25571,
+      "bytes": 25575,
       "tokenDefinitions": 346,
       "tokenDefinitionsExpected": 346
     },
