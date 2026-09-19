@@ -11,10 +11,27 @@
 }
 
 .root {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   border: 0;
-  width: var(--imported-stub-tab-panel-root-width);
-  height: var(--imported-stub-tab-panel-root-height);
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  gap: var(--imported-tab-panel-root-gap);
+  padding-top: var(--imported-tab-panel-root-padding-top);
+  width: fit-content;
+  height: fit-content;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:focus-visible {
+  border-color: var(--imported-tab-panel-state-focus-visible-border-color);
+}
+
+.root:focus-visible {
+  border-width: var(--imported-tab-panel-state-focus-visible-border-width);
 }

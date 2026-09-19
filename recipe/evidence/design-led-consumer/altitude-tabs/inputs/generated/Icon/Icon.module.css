@@ -1,0 +1,31 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/icon.contract.json (ds.icon v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-icon-root-width);
+  height: var(--imported-icon-root-height);
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--imported-icon-icon-container-gap);
+  height: 100%;
+}

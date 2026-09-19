@@ -6,20 +6,36 @@
   "component": "Tabs",
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
+    "ArrowArcLeft/ArrowArcLeft.module.css": "373b2d58cb5a9cc8fd61d1232b628ae7d4b210a01c3f3f7aeb4acd39200dcf7f",
+    "ArrowArcLeft/ArrowArcLeft.stories.tsx": "b022c8cc09358a4b173f1ebd94669046eed3e6fb477b2cc1db0d3455815d3210",
+    "ArrowArcLeft/ArrowArcLeft.tsx": "39597f11d55b2b53db37ba9c9ea4462b0dda22170120a99665859d0322bf4453",
+    "ArrowArcLeft/index.ts": "021f109a0fd7f2c7dd65788a99fbabd22294650592315f389ad6c3e32ee09119",
+    "Button/Button.module.css": "78f7c80c32571c3101d25f059671c18361c709fb94010d3e45bd001c39c840e3",
+    "Button/Button.stories.tsx": "fed612ebb7c8dedcba3cc13dbbb9fac757c10c138cd699f5a189763b09902458",
+    "Button/Button.tsx": "88e28f2eab365d5ace637699f33bf541227b9d60bb5ee1ece61afecdbf6e7b34",
+    "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
+    "Icon/Icon.module.css": "f76f77daaa4ca71b221c05f34bd1a697d60ebdb46aee13cd5f1870b5d88135a1",
+    "Icon/Icon.stories.tsx": "99cc4a2461093d521d45d79739d0ba0ad12917391ac4910d0ba28b7844cd35d6",
+    "Icon/Icon.tsx": "2738f4f1a179a62cc18872e1ccdfbd77d81dcc0872672933c56eadf0b6607d1a",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
     "Tab/Tab.module.css": "d717af6a21d03c814b8356961d7997d6becb9b8c1ea7f0eafe7f3e8b04b836a7",
     "Tab/Tab.stories.tsx": "9e9b66ed43f31c4ed653ab44529c0b65d7330edb230f77e337c8660004ed5c0c",
     "Tab/Tab.tsx": "4b185773266a2f9c3f4eac059396e6d144fa5e06bb3839d2cd1ef6c4c732913b",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
-    "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
-    "TabPanel/TabPanel.stories.tsx": "1c00dcf69eea38607454b8ae5eed436032f611ce1e1a5fc43d5d1f824479ae6c",
-    "TabPanel/TabPanel.tsx": "ad86f9bb84bd079445ec8f238ebed8d66301c1166b070bffac150696e6ffa914",
+    "TabPanel/TabPanel.module.css": "5e053b3aa2a3c3e96a2da0c49a71b44526a1c16a41e3104cc027b806c4f7f21c",
+    "TabPanel/TabPanel.stories.tsx": "328deb1ea8b4165dadffa2a1ee57f97c5f172544e23000e9f9dd4aef269d7cd4",
+    "TabPanel/TabPanel.tsx": "f6a07f7d138f309ad5082f60fa71b42336b89a69c0d507da5b59751f8ba57d2e",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
     "Tabs/Tabs.module.css": "ca18eb69b185c859c6182f24129759941b825334db291fb7785429a6dbfebaae",
     "Tabs/Tabs.stories.tsx": "516decb7a0c6ed884356cedfbe4bfc84e5880dda395434990f9c65a58d32d9f0",
-    "Tabs/Tabs.tsx": "911b619876e0b743fa72767fe26958eaad379499c78166e7ab71697cd96e73c3",
+    "Tabs/Tabs.tsx": "797bbe7e3190640170358b263e04ae697db14c425699892804b9247d28f9e2b3",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
-    "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
-    "tokens.css": "5feaf0812b2976d1a9113df7a7a6cace30040c1eef144c03fd28c47a1446aa76"
+    "TextPassage/TextPassage.module.css": "870c9182120ff405f4319844442839a1977916fef2aaeec4bb9891112c61fa09",
+    "TextPassage/TextPassage.stories.tsx": "69b7fbffd2433792d28b3e6f3e0b76e3fba030b764c880069dd426c3ae542e83",
+    "TextPassage/TextPassage.tsx": "342812ce858385ed758f47a76011a0f109cc0a3fba7e029c2448bc750a50bb05",
+    "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
+    "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
+    "tokens.css": "6e82495bfeb000864f46b91edb38a459be994033d54bf34713a513e6ad9e2ead"
   },
   "cases": [
     {
@@ -41,11 +57,11 @@
         "variant": "default"
       },
       "rendered": {
-        "text": "Tab label\nTab label\nTab label",
+        "text": "Tab label\nTab label\nTab label\nButton",
         "backgroundColor": "rgba(0, 0, 0, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 439,
-        "height": 176,
+        "width": 453,
+        "height": 177,
         "tag": "div",
         "role": null,
         "font": {
@@ -76,11 +92,11 @@
         "variant": "stretch"
       },
       "rendered": {
-        "text": "Tab label\nTab label\nTab label",
+        "text": "Tab label\nTab label\nTab label\nButton",
         "backgroundColor": "rgba(0, 0, 0, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 439,
-        "height": 176,
+        "width": 453,
+        "height": 177,
         "tag": "div",
         "role": null,
         "font": {
@@ -137,19 +153,18 @@
       {
         "key": "variant-default",
         "figmaImage": "figma-3558_61901.png",
-        "mismatchPercent": 5.538154897494305,
-        "withinLimit": false,
-        "textMaskedPercent": 4.965858845917054,
-        "textMaskCoveragePercent": 7.501553116587285,
-        "residual": "text-only",
+        "mismatchPercent": 1.7996782280091292,
+        "withinLimit": true,
+        "textMaskedPercent": 0.8167852101577382,
+        "textMaskCoveragePercent": 8.99464960526808,
         "inkCoveragePercent": {
-          "consumer": 2.79,
+          "consumer": 6.79,
           "figma": 12.72
         },
         "contentSize": {
           "consumer": {
-            "width": 439,
-            "height": 176
+            "width": 453,
+            "height": 177
           },
           "figma": {
             "width": 438,
@@ -158,8 +173,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 439,
-            "height": 176
+            "width": 453,
+            "height": 177
           },
           "figma": {
             "width": 439,
@@ -170,19 +185,18 @@
       {
         "key": "variant-stretch",
         "figmaImage": "figma-3558_61928.png",
-        "mismatchPercent": 5.189997929177884,
-        "withinLimit": false,
-        "textMaskedPercent": 4.660827223372698,
-        "textMaskCoveragePercent": 7.501553116587285,
-        "residual": "text-only",
+        "mismatchPercent": 1.4467267806587596,
+        "withinLimit": true,
+        "textMaskedPercent": 0.5180282037577602,
+        "textMaskCoveragePercent": 8.99464960526808,
         "inkCoveragePercent": {
-          "consumer": 2.79,
+          "consumer": 6.79,
           "figma": 13.26
         },
         "contentSize": {
           "consumer": {
-            "width": 439,
-            "height": 176
+            "width": 453,
+            "height": 177
           },
           "figma": {
             "width": 439,
@@ -191,8 +205,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 439,
-            "height": 176
+            "width": 453,
+            "height": 177
           },
           "figma": {
             "width": 439,
@@ -203,33 +217,114 @@
     ]
   },
   "problems": [
-    "image-difference-above-limit:variant-default:5.54%",
-    "image-difference-above-limit:variant-stretch:5.19%"
+    "interactive-content-nested:variant-default:button>button",
+    "interactive-content-nested:variant-stretch:button>button",
+    "content-size-mismatch:variant-default:453x177 vs 438x176",
+    "content-size-mismatch:variant-stretch:453x177 vs 439x176"
   ],
   "limitations": [
-    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
     "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
   "inputs": {
     "degradations": {
       "variables-unavailable": 1,
-      "variable-unresolved": 44
+      "variable-unresolved": 1915,
+      "instance-prop-unsupported": 240,
+      "stroke-style-unsupported": 30,
+      "instance-closure-unresolved": 1
     },
     "stubContracts": [
+      "ds-arrow-arc-left.stub.contract.proposed.json",
       "ds-tab-2.stub.contract.proposed.json",
-      "ds-tab-panel.stub.contract.proposed.json"
+      "ds-text-passage.stub.contract.proposed.json"
     ],
     "componentFolders": [
+      "ArrowArcLeft",
+      "Button",
+      "Icon",
       "Tab",
       "TabPanel",
-      "Tabs"
+      "Tabs",
+      "TextPassage"
+    ],
+    "closure": {
+      "requested": [
+        "Tabs"
+      ],
+      "followed": [
+        "Tab",
+        "Text Passage",
+        "Icon",
+        "Button",
+        "Tab Panel"
+      ],
+      "notFollowed": [
+        "remote-library-component:ArrowArcLeft"
+      ]
+    },
+    "contractGraph": [
+      {
+        "id": "ds.arrow-arc-left",
+        "name": "ArrowArcLeft",
+        "stub": true,
+        "packaged": true
+      },
+      {
+        "id": "ds.button",
+        "name": "Button",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.icon",
+        "name": "Icon",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.tab-2",
+        "name": "Tab",
+        "stub": true,
+        "packaged": true
+      },
+      {
+        "id": "ds.tab-panel",
+        "name": "TabPanel",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.text-passage",
+        "name": "TextPassage",
+        "stub": true,
+        "packaged": true
+      }
     ]
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "4ffa6eb3714be63f4b7a024746bc0170c71748843fb375363a6f14962a5a00cb",
+    "tarballSha256": "f772dcf53826ba3cfda4db602d039f70a3c8050c54b1689808b06814f1f923ea",
     "distFiles": [
+      "ArrowArcLeft",
+      "ArrowArcLeft/ArrowArcLeft.d.ts",
+      "ArrowArcLeft/ArrowArcLeft.js",
+      "ArrowArcLeft/ArrowArcLeft.module.css",
+      "ArrowArcLeft/index.d.ts",
+      "ArrowArcLeft/index.js",
+      "Button",
+      "Button/Button.d.ts",
+      "Button/Button.js",
+      "Button/Button.module.css",
+      "Button/index.d.ts",
+      "Button/index.js",
+      "Icon",
+      "Icon/Icon.d.ts",
+      "Icon/Icon.js",
+      "Icon/Icon.module.css",
+      "Icon/index.d.ts",
+      "Icon/index.js",
       "Tab",
       "Tab/Tab.d.ts",
       "Tab/Tab.js",
@@ -248,6 +343,12 @@
       "Tabs/Tabs.module.css",
       "Tabs/index.d.ts",
       "Tabs/index.js",
+      "TextPassage",
+      "TextPassage/TextPassage.d.ts",
+      "TextPassage/TextPassage.js",
+      "TextPassage/TextPassage.module.css",
+      "TextPassage/index.d.ts",
+      "TextPassage/index.js",
       "index.d.ts",
       "index.js",
       "tokens.css"
@@ -256,14 +357,18 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "a43209b1f1c7c5673183c967021fcdaa92ab21653bb43d6f31baa1be6d75060f",
+    "lockfileSha256": "0dc1b95fbccba79caacb35263805da921d95e6a3d2c73c230e9a874ba51c9e8a",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 15458,
-      "tokenDefinitions": 287,
-      "tokenDefinitionsExpected": 287
-    }
+      "bytes": 25591,
+      "tokenDefinitions": 346,
+      "tokenDefinitionsExpected": 346
+    },
+    "interactiveNesting": [
+      "variant-default:button>button",
+      "variant-stretch:button>button"
+    ]
   },
   "outcome": "refused-or-failed"
 }

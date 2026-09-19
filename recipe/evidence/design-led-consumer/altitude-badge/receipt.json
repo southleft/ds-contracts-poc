@@ -640,7 +640,7 @@
   },
   "problems": [],
   "limitations": [
-    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
     "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
@@ -652,7 +652,15 @@
     "stubContracts": [],
     "componentFolders": [
       "Badge"
-    ]
+    ],
+    "closure": {
+      "requested": [
+        "Badge"
+      ],
+      "followed": [],
+      "notFollowed": []
+    },
+    "contractGraph": []
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
@@ -672,14 +680,15 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "b1f39b4e65e9666b138e08402a76e0bb44e0528b33044853f7ca05203cd3a84f",
+    "lockfileSha256": "76ed463c037329ed0b231ac1f5b696b945cc9b5466b8e9dc71510f1be711cfd8",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
       "bytes": 16674,
       "tokenDefinitions": 303,
       "tokenDefinitionsExpected": 303
-    }
+    },
+    "interactiveNesting": []
   },
   "outcome": "consumer-mounted-behaved-and-compared"
 }

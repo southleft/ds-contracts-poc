@@ -15,40 +15,15 @@ const meta = {
     docs: {
       description: {
         component:
-          'STUB contract auto-proposed for the nested "Tab Panel" instances of Tabs — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.',
+          'Tag: al-tab-panel\n\nSlots\n- (default) — The tab panel content\n\nAccessibility\n- element: <div>\n\nDocs: https://altitude.pages.dev/docs/components/tab-panel/\n\nDocumentation: https://altitude.pages.dev/docs/components/tab-panel/',
       },
     },
   },
-  argTypes: {
-    state: { control: 'select', options: ['default'] },
-  },
-  args: {
-    state: 'default',
-  },
+  argTypes: {},
+  args: {},
 } satisfies Meta<typeof TabPanel>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
-
-export const Default: Story = {
-  args: { state: 'default' },
-};
-/** Every legal combination the contract defines. */
-export const Matrix: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gap: 16,
-        gridTemplateColumns: 'repeat(1, max-content)',
-        alignItems: 'center',
-        justifyItems: 'start',
-      }}
-    >
-      <TabPanel state="default" />
-    </div>
-  ),
-};

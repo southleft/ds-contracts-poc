@@ -53,7 +53,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
         </div>
       </div>
       <div className={styles.alCTabsBody}>
-        <TabPanel state="default" />
+        <TabPanel />
       </div>
     </div>
   );

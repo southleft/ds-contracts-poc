@@ -1,0 +1,220 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  width: fit-content;
+  height: fit-content;
+}
+
+.alCCheckboxContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--imported-checkbox-al-c-checkbox-container-gap);
+}
+
+.alCCheckboxCheckbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-background-color
+  );
+}
+
+.focusRing {
+  display: flex;
+  flex-direction: row;
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-border-color
+  );
+  padding-inline: var(--imported-shared-size-2);
+  padding-block: var(--imported-shared-size-2);
+  border-width: var(--imported-shared-size-2);
+  border-style: solid;
+}
+
+.alCCheckboxCustomCheck {
+  display: flex;
+  border-radius: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-radius
+  );
+  border-width: var(--imported-shared-size-2);
+  border-style: solid;
+}
+
+.checked-off .alCCheckboxCustomCheck {
+  background-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-background-color-off
+  );
+}
+
+.checked-indeterminate .alCCheckboxCustomCheck {
+  background-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-background-color-indeterminate
+  );
+}
+
+.checked-on .alCCheckboxCustomCheck {
+  background-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-background-color-on
+  );
+}
+
+.state-default.checked-off .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-default-off
+  );
+}
+
+.state-default.checked-indeterminate .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-default-indeterminate
+  );
+}
+
+.state-default.checked-on .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-default-on
+  );
+}
+
+.state-disabled.checked-off .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-disabled-off
+  );
+}
+
+.state-disabled.checked-indeterminate .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-disabled-indeterminate
+  );
+}
+
+.state-disabled.checked-on .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-disabled-on
+  );
+}
+
+.state-focus.checked-off .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-focus-off
+  );
+}
+
+.state-focus.checked-indeterminate .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-focus-indeterminate
+  );
+}
+
+.state-focus.checked-on .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-focus-on
+  );
+}
+
+.state-hover.checked-off .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-hover-off
+  );
+}
+
+.state-hover.checked-indeterminate .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-hover-indeterminate
+  );
+}
+
+.state-hover.checked-on .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-hover-on
+  );
+}
+
+.state-error.checked-off .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-error-off
+  );
+}
+
+.state-error.checked-indeterminate .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-error-indeterminate
+  );
+}
+
+.state-error.checked-on .alCCheckboxCustomCheck {
+  border-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-border-color-error-on
+  );
+}
+
+.state-default .alCCheckboxCustomCheck {
+  opacity: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-opacity-default
+  );
+}
+
+.state-disabled .alCCheckboxCustomCheck {
+  opacity: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-opacity-disabled
+  );
+}
+
+.state-focus .alCCheckboxCustomCheck {
+  opacity: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-opacity-focus
+  );
+}
+
+.state-hover .alCCheckboxCustomCheck {
+  opacity: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-opacity-hover
+  );
+}
+
+.state-error .alCCheckboxCustomCheck {
+  opacity: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-opacity-error
+  );
+}
+
+.Frame {
+  display: flex;
+}
+
+.Vector {
+  background-color: var(
+    --imported-checkbox-al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-frame-vector-background-color
+  );
+}
+
+.alCCheckboxLabel {
+  display: flex;
+  flex-direction: row;
+}
+
+.Label {
+  color: var(--imported-checkbox-al-c-checkbox-container-al-c-checkbox-label-label-color);
+  font-size: var(--imported-text-typography-body-sm-regular-font-size);
+  font-weight: var(--imported-text-typography-body-sm-regular-font-weight);
+  line-height: var(--imported-text-typography-body-sm-regular-line-height);
+  font-family: Public Sans;
+  inline-size: calc-size(fit-content, round(up, size, 1px));
+  max-inline-size: 100%;
+}

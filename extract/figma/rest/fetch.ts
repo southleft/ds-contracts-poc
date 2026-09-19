@@ -27,6 +27,7 @@ import {
   type RestVariablesResponse,
   type VariablesUnavailable,
 } from './map.js';
+import { followInstances, CLOSURE_SET_CAP, type DumpClosure } from './closure.js';
 
 export const FIGMA_API_BASE = 'https://api.figma.com';
 
@@ -87,9 +88,20 @@ export function parseFigmaUrl(url: string): ParsedFigmaUrl {
 export type FetchLike = (url: string, init?: { headers?: Record<string, string> }) => Promise<{
   ok: boolean;
   status: number;
+  /** Read for `Retry-After` on a 429 only; optional so fixture transports need not carry it. */
+  headers?: { get(name: string): string | null };
   json(): Promise<unknown>;
   text(): Promise<string>;
 }>;
+
+/** A 429 is retried at most this many times, waiting what `Retry-After` says
+ *  (5 s when absent) — the same policy extract/figma/visual-truth/rest.mjs and
+ *  visual-parity/figma-api.ts apply. The fourth 429 throws like any HTTP error. */
+export const MAX_429_RETRIES = 3;
+/** The longest single `Retry-After` wait honoured (seconds). A 429 asking for
+ *  more REFUSES by name instead of sleeping for an unbounded time (review M4:
+ *  Figma answers hours-long Retry-After values on an exhausted plan budget). */
+export const MAX_RETRY_AFTER_SECONDS = 60;
 
 export interface ClientOptions {
   /** Injectable for tests / non-browser runtimes. Defaults to global fetch. */
@@ -115,13 +127,40 @@ export interface ClientOptions {
    * `classifyVariablesRefusal`.
    */
   onVariablesUnavailable?: (info: VariablesRefusal) => void;
+  /** Injectable wait for the 429 back-off (tests pass a no-op). */
+  sleep?: (ms: number) => Promise<void>;
+  /** Where each 429 wait is announced (default: console.error — stderr in the
+   *  CLI). Never silent. */
+  onRateLimited?: (info: { path: string; attempt: number; waitSeconds: number }) => void;
 }
 
 async function get(path: string, token: string, opts: ClientOptions): Promise<unknown> {
   const fetchImpl = opts.fetchImpl ?? (fetch as unknown as FetchLike);
-  const res = await fetchImpl(`${opts.apiBase ?? FIGMA_API_BASE}${path}`, {
-    headers: { 'X-Figma-Token': token },
-  });
+  const sleep = opts.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
+  const call = () =>
+    fetchImpl(`${opts.apiBase ?? FIGMA_API_BASE}${path}`, {
+      headers: { 'X-Figma-Token': token },
+    });
+  let res = await call();
+  for (let attempt = 0; res.status === 429 && attempt < MAX_429_RETRIES; attempt++) {
+    const raw = res.headers?.get('retry-after');
+    const retryAfter = Number(raw ?? '5');
+    const waitSeconds = Number.isFinite(retryAfter) && retryAfter >= 0 ? retryAfter : 5;
+    if (waitSeconds > MAX_RETRY_AFTER_SECONDS) {
+      const err = new Error(
+        `Figma API 429 on ${path} — rate-limit-wait-exceeds-cap: Retry-After ${raw} s is over the ${MAX_RETRY_AFTER_SECONDS} s this import waits (MAX_RETRY_AFTER_SECONDS); refused instead of sleeping — re-run later`,
+      );
+      (err as Error & { status?: number }).status = 429;
+      throw err;
+    }
+    const announce =
+      opts.onRateLimited ??
+      ((info: { path: string; attempt: number; waitSeconds: number }) =>
+        console.error(`figma API 429 on ${info.path} — waiting ${info.waitSeconds} s (Retry-After), retry ${info.attempt} of ${MAX_429_RETRIES}`));
+    announce({ path, attempt: attempt + 1, waitSeconds });
+    await sleep(waitSeconds * 1000);
+    res = await call();
+  }
   if (!res.ok) {
     const body = await res.text().catch(() => '');
     const err = new Error(`Figma API ${res.status} on ${path}${body ? ` — ${body.slice(0, 200)}` : ''}`);
@@ -304,6 +343,16 @@ export async function fetchFile(fileKey: string, token: string, opts: ClientOpti
 export interface ImportOptions extends ClientOptions {
   /** Set/component name to map when the URL has no node-id (or to filter). */
   target?: string;
+  /**
+   * Follow the instances (docs/23 §D.43): every same-file component set an
+   * INSTANCE in the imported set references is fetched — transitively, in
+   * further /nodes rounds — and mapped into the same dump, so the proposer
+   * resolves it to a real contract instead of a stub. The `extract:figma:rest`
+   * CLI turns this ON by default (`--no-closure` turns it off); a library
+   * caller opts in, so every fixture-backed caller keeps its bytes and its
+   * request count. `cap` bounds the pulled sets (default CLOSURE_SET_CAP).
+   */
+  closure?: boolean | { cap?: number };
 }
 
 const findSets = (node: RestNode, out: RestNode[] = []): RestNode[] => {
@@ -349,9 +398,21 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
     ...(stampsObservableOn(opts) ? { stampsObservable: true } : {}),
   };
 
+  const withClosure = async (first: RestNodesResponse, requestedIds: string[]): Promise<MapResult> => {
+    if (!opts.closure) return mapRestToDump(first, mapOptions);
+    const cap = typeof opts.closure === 'object' && opts.closure.cap !== undefined ? opts.closure.cap : CLOSURE_SET_CAP;
+    const { response, closure } = await followInstances(
+      first,
+      requestedIds,
+      (ids) => fetchNodes(parsed.fileKey, ids, token, opts),
+      { cap },
+    );
+    return mapRestToDump(response, { ...mapOptions, closure });
+  };
+
   if (parsed.nodeId) {
     const nodes = await fetchNodes(parsed.fileKey, [parsed.nodeId], token, opts);
-    return mapRestToDump(nodes, mapOptions);
+    return withClosure(nodes, [parsed.nodeId]);
   }
 
   // No node-id: fetch the document and synthesize a nodes-response around the
@@ -375,5 +436,7 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
       ]),
     ),
   };
-  return mapRestToDump(synthesized, mapOptions);
+  return withClosure(synthesized, sets.map((s) => s.id));
 }
+
+export type { DumpClosure };

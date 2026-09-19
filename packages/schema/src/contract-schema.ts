@@ -3232,6 +3232,33 @@ export const slotFigmaProperty = (slot: Slot) =>
 export const slotVisibilityProperty = (slot: Slot) =>
   `Show ${slotFigmaProperty(slot)}`;
 
+/** Every contract id a contract depends on, in the order `sortByDependencies`
+ *  visits them: anatomy component refs, then per slot its `accepts` entries
+ *  and its `defaultContent` items. ONE walk, so a tool that needs "what must
+ *  ship beside this contract" (the clean-consumer check) reads the same edges
+ *  generation orders by. */
+export function contractDependencyEdges(
+  contract: Contract,
+): Array<
+  | { kind: "component"; id: string }
+  | { kind: "accepts"; id: string; slot: Slot }
+  | { kind: "defaultContent"; id: string; slot: Slot }
+> {
+  const out: Array<
+    | { kind: "component"; id: string }
+    | { kind: "accepts"; id: string; slot: Slot }
+    | { kind: "defaultContent"; id: string; slot: Slot }
+  > = [];
+  for (const { ref } of componentRefsOf(contract))
+    out.push({ kind: "component", id: ref.id });
+  for (const { slot } of slotsOf(contract)) {
+    for (const id of slot.accepts ?? []) out.push({ kind: "accepts", id, slot });
+    for (const item of slot.defaultContent ?? [])
+      out.push({ kind: "defaultContent", id: item.id, slot });
+  }
+  return out;
+}
+
 /** Topologically sort contracts by composition dependencies; throws on
  *  cycles and unknown references — invalid states are refused, not rendered. */
 export function sortByDependencies(contracts: Contract[]): Contract[] {
@@ -3252,18 +3279,19 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
       );
     }
     state.set(c.id, "visiting");
-    for (const { ref } of componentRefsOf(c)) {
-      const dep = byId.get(ref.id);
-      if (!dep)
-        throw new Error(`${c.id}: references unknown contract "${ref.id}"`);
-      visit(dep, [...chain, c.id]);
-    }
-    for (const { slot } of slotsOf(c)) {
-      for (const acceptedId of slot.accepts ?? []) {
-        const dep = byId.get(acceptedId);
+    for (const edge of contractDependencyEdges(c)) {
+      const dep = byId.get(edge.id);
+      if (edge.kind === "component") {
+        if (!dep)
+          throw new Error(`${c.id}: references unknown contract "${edge.id}"`);
+        visit(dep, [...chain, c.id]);
+        continue;
+      }
+      const slot = edge.slot;
+      if (edge.kind === "accepts") {
         if (!dep) {
           throw new Error(
-            `${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`,
+            `${c.id}: slot "${slot.name}" accepts unknown contract "${edge.id}"`,
           );
         }
         // G10 — THE `accepts` ORDERING PROPERTY, stated. `accepts` induces a
@@ -3275,27 +3303,25 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
         // Runtime-side, an entry pointing OUTSIDE the emitted subset is a named
         // DEFERRAL (`slot-accepts-deferred`, emit-figma-script slotPreferredValues),
         // never a throw — preferredValues is a picker hint and refuses nothing.
-        viaAccepts.add(acceptedId);
+        viaAccepts.add(edge.id);
         visit(dep, [...chain, c.id]);
+        continue;
       }
-      for (const item of slot.defaultContent ?? []) {
-        const dep = byId.get(item.id);
-        if (!dep) {
-          throw new Error(
-            `${c.id}: slot "${slot.name}" defaultContent references unknown contract "${item.id}"`,
-          );
-        }
-        if (
-          slot.accepts &&
-          slot.accepts.length > 0 &&
-          !slot.accepts.includes(item.id)
-        ) {
-          throw new Error(
-            `${c.id}: slot "${slot.name}" defaultContent includes "${item.id}" which is not in accepts`,
-          );
-        }
-        visit(dep, [...chain, c.id]);
+      if (!dep) {
+        throw new Error(
+          `${c.id}: slot "${slot.name}" defaultContent references unknown contract "${edge.id}"`,
+        );
       }
+      if (
+        slot.accepts &&
+        slot.accepts.length > 0 &&
+        !slot.accepts.includes(edge.id)
+      ) {
+        throw new Error(
+          `${c.id}: slot "${slot.name}" defaultContent includes "${edge.id}" which is not in accepts`,
+        );
+      }
+      visit(dep, [...chain, c.id]);
     }
     state.set(c.id, "done");
     sorted.push(c);

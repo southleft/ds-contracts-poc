@@ -1,0 +1,91 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tab-panel",
+  "name": "TabPanel",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Tag: al-tab-panel\n\nSlots\n- (default) — The tab panel content\n\nAccessibility\n- element: <div>\n\nDocs: https://altitude.pages.dev/docs/components/tab-panel/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/tab-panel/"
+    }
+  ],
+  "semantics": {
+    "element": "button"
+  },
+  "props": [],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "alTextBlock": {
+          "component": {
+            "id": "ds.text-passage",
+            "props": {
+              "state": "default",
+              "width": "default"
+            }
+          }
+        },
+        "alTextBlock2": {
+          "component": {
+            "id": "ds.text-passage",
+            "props": {
+              "state": "default",
+              "width": "default"
+            }
+          }
+        },
+        "alButton": {
+          "component": {
+            "id": "ds.button",
+            "props": {
+              "slotBefore": false,
+              "slotAfter": false,
+              "text": "Button",
+              "variant": "primary",
+              "size": "md",
+              "shape": "default"
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "tokens": {
+        "gap": "{imported.tab-panel.root.gap}",
+        "padding-top": "{imported.tab-panel.root.padding-top}"
+      },
+      "states": {
+        "focus-visible": {
+          "border-color": "{imported.tab-panel.state-focus-visible.border-color}",
+          "border-width": "{imported.tab-panel.state-focus-visible.border-width}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "0423a06e233beace25a2404fb4c288ac576defd1",
+        "nodeId": "3543:47875"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/TabPanel",
+        "export": "TabPanel"
+      }
+    }
+  }
+}

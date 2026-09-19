@@ -41,7 +41,10 @@
  * <dir from `ds-contracts generate`> --component <Name> --out <dir>
  * [--token <figma token>] (else FIGMA_TOKEN; without a token the image
  * comparison is recorded as `figma-images-unavailable`, never as a pass).
+ * --keep-built-consumer retains the isolated production build in out/review-site
+ * for visible browser inspection; it does not change the comparison or score.
  */
+import { packageReactLibrary } from './package-react-library.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -53,6 +56,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
+import { contractDependencyEdges } from './contract-schema.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
@@ -70,12 +74,12 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
   return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
 }
 
-type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
+type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean };
 function parseArgs(argv: string[]): Args {
   const read = (flag: string) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : undefined; };
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
-    out: required('--out'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
+    out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
@@ -112,9 +116,75 @@ export function variantPropValue(prop: { type?: unknown }, key: string): unknown
 const variantValues = (prop: any): unknown[] =>
   prop.type === 'boolean' ? Object.keys(prop.bindings?.figma?.values ?? {}).map(key => variantPropValue(prop, key)) : prop.type?.enum ?? [];
 
+/** The dump set this run mounts: the key or set name `--component` names, else
+ *  the set whose `nodeId` is the contract's own Figma anchor — so a set whose
+ *  name has a space (`Checkbox Group` → generated `CheckboxGroup`) needs no
+ *  alias key, and a closure dump holding several sets is never guessed from.
+ *  When the contract carries an anchor node id and the set found by key or
+ *  name has a DIFFERENT node id, it refuses by name (review M2: a closure dump
+ *  holds `Checkbox` beside `Checkbox Group`, and `--component Checkbox` with
+ *  the group's contract must not mount the child's variants). */
+export function findDumpSet(dump: any, contract: any, component: string): any {
+  const isSet = (v: any) => v && typeof v === 'object' && Array.isArray(v.variants);
+  const anchor = contract?.bindings?.figma?.anchors?.nodeId;
+  const byName = isSet(dump[component]) ? dump[component] : Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
+  if (byName) {
+    if (typeof anchor === 'string' && typeof byName.nodeId === 'string' && byName.nodeId !== anchor) {
+      throw new Error(`design:consumer:check — dump-set-anchor-mismatch:${component}: the dump set "${byName.setName ?? component}" is node ${byName.nodeId} but the contract is anchored to ${anchor}; refusing to mount one set's variants against another's contract`);
+    }
+    return byName;
+  }
+  return typeof anchor === 'string' ? Object.values(dump).find((v: any) => isSet(v) && v.nodeId === anchor) : undefined;
+}
+
+/** Every contract id the mounted contract depends on, transitively through
+ *  the contracts beside it, by the generator's own edges
+ *  (`contractDependencyEdges`: component refs, slot `accepts`, slot
+ *  `defaultContent`), with the generated folder each resolves to (`null` = no
+ *  contract in the folder claims the id). */
+export function contractGraph(root: any, siblings: any[]): Array<{ id: string; name: string | null; stub: boolean }> {
+  const byId = new Map(siblings.filter(c => typeof c?.id === 'string').map(c => [c.id, c]));
+  const refs = (c: any): string[] => { try { return contractDependencyEdges(c).map(e => e.id); } catch { return []; } };
+  const seen = new Map<string, { id: string; name: string | null; stub: boolean }>();
+  const queue = refs(root);
+  while (queue.length) {
+    const id = queue.shift()!;
+    if (seen.has(id) || id === root?.id) continue;
+    const c = byId.get(id);
+    seen.set(id, { id, name: typeof c?.name === 'string' ? c.name : null, stub: c?.__stub === true });
+    if (c) queue.push(...refs(c));
+  }
+  return [...seen.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
+/** Interactive content nested inside interactive content (HTML's content
+ *  model forbids it: a <button> inside a <button> is invalid, and the inner
+ *  control is a spurious tab stop / swallowed click). Runs in the page; one
+ *  entry per cell and parent>child pair. Review H1 (docs/23 §D.43): the real
+ *  Tab Panel rendered as a <button> around Button's <button>. */
+/** HTML's rule: an `a` or `button` (and a widget role that stands in for one)
+ *  may contain no interactive content and no element with a `tabindex`. A
+ *  `label` around its own control, `details`/`summary` are NOT flagged. */
+export const INTERACTIVE_OUTER = 'a[href], button, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="switch"], [role="radio"]';
+export const INTERACTIVE_INNER = 'a[href], button, input:not([type="hidden"]), select, textarea, iframe, embed, [tabindex], [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="switch"], [role="radio"], [contenteditable=""], [contenteditable="true"]';
+export const nestedInteractiveScript = `(() => {
+  const OUTER = ${JSON.stringify(INTERACTIVE_OUTER)}, INNER = ${JSON.stringify(INTERACTIVE_INNER)};
+  const spell = (el) => el.tagName.toLowerCase() + (el.getAttribute('role') ? '[role=' + el.getAttribute('role') + ']' : '');
+  const out = [];
+  for (const cell of document.querySelectorAll('[data-cell]')) {
+    const pairs = new Set();
+    for (const el of cell.querySelectorAll(INNER)) {
+      const outer = el.parentElement && el.parentElement.closest(OUTER);
+      if (outer && cell.contains(outer)) pairs.add(spell(outer) + '>' + spell(el));
+    }
+    for (const p of [...pairs].sort()) out.push(cell.getAttribute('data-cell') + ':' + p);
+  }
+  return out;
+})()`;
+
 export function deriveCases(dump: any, contract: any, component: string): Case[] {
-  const set = dump[component] ?? Object.values(dump).find((v: any) => v && typeof v === 'object' && v.setName === component);
-  if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}"`);
+  const set = findDumpSet(dump, contract, component);
+  if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}" (by key, set name or the contract's anchor node id)`);
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
   const samples = arraySamples(contract);
@@ -231,45 +301,6 @@ export function stateProblems(c: { key: string; interaction: Interaction; state?
 /** Figma axes or values the contract does not map; reported, never skipped. */
 const unmapped = new Set<string>();
 
-function packageLibrary(generatedDir: string, component: string, work: string) {
-  const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
-  mkdirSync(src, { recursive: true }); mkdirSync(dist, { recursive: true });
-  // Copy generated sources except stories (a Storybook consumer is a different check).
-  const copy = (from: string, to: string) => {
-    for (const entry of readdirSync(from)) {
-      const source = path.join(from, entry), target = path.join(to, entry);
-      if (statSync(source).isDirectory()) { mkdirSync(target, { recursive: true }); copy(source, target); }
-      else if (!/\.stories\.[tj]sx?$/.test(entry)) cpSync(source, target);
-    }
-  };
-  copy(generatedDir, src);
-  if (!existsSync(path.join(src, 'index.ts')) || !existsSync(path.join(src, component))) throw new Error('design:consumer:check — generated dir lacks index.ts or the component folder');
-  // Transpile TS/TSX → ESM JS, file by file (no bundling), and copy CSS as files.
-  const sources: string[] = [];
-  const walk = (dir: string) => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p) : sources.push(p); } };
-  walk(src);
-  const tsSources = sources.filter(f => /\.tsx?$/.test(f));
-  run(path.join(ROOT, 'node_modules', '.bin', 'esbuild'), [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', `--outbase=${src}`, `--outdir=${dist}`], ROOT);
-  for (const f of sources.filter(f => f.endsWith('.css'))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
-  // Declarations, so a TypeScript consumer sees the contract-derived props.
-  writeFileSync(path.join(pkgDir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { declaration: true, emitDeclarationOnly: true, jsx: 'react-jsx', module: 'ESNext', moduleResolution: 'Bundler',
-    target: 'ES2022', strict: true, skipLibCheck: true, outDir: 'dist', rootDir: 'src', types: [],
-    // Declaration emission needs React's types. This packaging step is the
-    // repository's tool; only the consumer below must stay free of repo paths.
-    paths: { react: [path.join(ROOT, 'node_modules', '@types', 'react', 'index.d.ts')], 'react/jsx-runtime': [path.join(ROOT, 'node_modules', '@types', 'react', 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
-  writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
-  run(path.join(ROOT, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], pkgDir);
-  const name = `@ds-contracts-generated/${component.toLowerCase()}`;
-  writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
-    description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
-    files: ['dist'], main: './dist/index.js', types: './dist/index.d.ts',
-    exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' }, './tokens.css': './dist/tokens.css', './package.json': './package.json' },
-    // The barrel imports tokens.css on purpose; a consumer bundler must not drop it.
-    sideEffects: ['./dist/index.js', '**/*.css'], peerDependencies: { react: '>=18', 'react-dom': '>=18' } }, null, 2));
-  const packed = run('npm', ['pack', '--json', '--pack-destination', work], pkgDir);
-  const tarball = path.join(work, JSON.parse(packed)[0].filename as string);
-  return { name, tarball, tarballSha256: sha256(readFileSync(tarball)), dist };
-}
 
 function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string) {
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
@@ -342,11 +373,14 @@ async function main() {
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
-  cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract))); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
+  cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract)));
+  // Low (review): every contract beside it — the followed children and stubs —
+  // and the minted tree ride the committed inputs, so the run reproduces from them.
+  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f)); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
-      'single component set; composition, nested instances and instance swaps are not exercised here',
+      'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
     ] };
@@ -359,8 +393,21 @@ async function main() {
     stubContracts: readdirSync(path.dirname(args.contract)).filter(f => /\.stub\.contract(\.proposed)?\.json$/.test(f)),
     componentFolders: readdirSync(args.generated).filter(f => statSync(path.join(args.generated, f)).isDirectory()),
   };
+  // docs/23 §D.43 — the REST import's dependency closure, when one ran, and the
+  // contract graph the mounted component needs: every referenced component is
+  // packaged (the whole generated folder ships), and a reference no generated
+  // folder holds is a named problem, never a silent blank.
+  const closure = dump._provenance?.closure;
+  if (closure) receipt.inputs.closure = { requested: closure.requested.map((r: any) => r.name), followed: closure.pulled.map((p: any) => p.name),
+    notFollowed: closure.unresolved.map((u: any) => `${u.reason}:${u.name ?? u.targetId}`) };
+  const contractDir = path.dirname(args.contract);
+  const siblings = readdirSync(contractDir).filter(f => /\.contract(\.proposed)?\.json$/.test(f)).map(f => {
+    try { const c = JSON.parse(readFileSync(path.join(contractDir, f), 'utf8')); return { ...c, __stub: /\.stub\.contract/.test(f) }; } catch { return null; }
+  }).filter(Boolean);
+  receipt.inputs.contractGraph = contractGraph(contract, siblings).map(ref => ({ ...ref, packaged: ref.name !== null && receipt.inputs.componentFolders.includes(ref.name) }));
+  for (const ref of receipt.inputs.contractGraph) if (!ref.packaged) problems.push(`dependency-not-packaged:${ref.id}`);
   try {
-    const lib = packageLibrary(args.generated, args.component, work);
+    const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
     const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
     const consumer = writeConsumer(work, lib, args.component, cases, reactVersion);
@@ -378,6 +425,12 @@ async function main() {
     run(path.join(consumer, 'node_modules', '.bin', 'vite'), ['build', '--logLevel', 'error'], consumer);
     const built = path.join(consumer, 'dist', 'index.html');
     if (!existsSync(built)) throw new Error('vite build produced no index.html');
+    if (args.keepBuiltConsumer) {
+      const review = path.join(args.out, 'review-site');
+      if (existsSync(review)) throw new Error('consumer review-site already exists; use a new evidence directory');
+      cpSync(path.join(consumer, 'dist'), review, { recursive: true, errorOnExist: true, force: false });
+      receipt.consumer.reviewSite = 'review-site';
+    }
     const builtCss = readdirSync(path.join(consumer, 'dist', 'assets')).filter(f => f.endsWith('.css')).map(f => readFileSync(path.join(consumer, 'dist', 'assets', f), 'utf8')).join('\n');
     writeFileSync(path.join(args.out, 'consumer-built.css'), builtCss);
     const tokenNames = [...readFileSync(path.join(args.generated, 'tokens.css'), 'utf8').matchAll(/^\s*(--[a-z0-9-]+):/gim)].map(m => m[1]);
@@ -420,6 +473,11 @@ async function main() {
       })()`) as string[];
       // A root its own CSS places off the pixel grid (a fractional margin or transform) is named, never hidden.
       for (const key of misaligned) problems.push(`root-origin-off-pixel-grid:${key}`);
+      // Interactive content inside interactive content is invalid HTML a clean
+      // consumer would ship (docs/23 §D.43, review H1) — a named problem.
+      const nested = await page.evaluate(nestedInteractiveScript) as string[];
+      receipt.consumer.interactiveNesting = nested;
+      for (const entry of nested) problems.push(`interactive-content-nested:${entry}`);
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
       const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
@@ -554,7 +612,7 @@ async function main() {
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }
     // Compare with Figma's own renders.
-    const setNodeId: string | undefined = (dump[args.component] ?? {}).nodeId;
+    const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
     const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
