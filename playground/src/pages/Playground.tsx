@@ -39,6 +39,7 @@ import { FlowPanel, type FlowView } from '../components/FlowPanel';
 import type { DumpSet } from '../../../extract/figma/types.js';
 import { dumpClosure } from '../../../extract/figma/rest/closure.js';
 import { recordFigmaClosure } from '../engine/figma-import-workspace';
+import { reactLibraryFamily } from '../engine/react-library';
 import type { RecordImportResult } from '../engine/workspace';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
@@ -2395,6 +2396,33 @@ export function Playground() {
   const emittable =
     validation.status === 'valid' || validation.status === 'violations' ? validation : null;
 
+  const [libraryBusy, setLibraryBusy] = useState(false);
+  const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
+  const downloadReactLibrary = async () => {
+    if (!emittable || validation.status !== 'valid' || libraryBusy) return;
+    setLibraryBusy(true); setLibraryNotice(null);
+    try {
+      const scope = linkedImportScope(emittable.contract, emittable.contracts,
+        sessionRegistry().layersByContractId, tokenSource.inventory);
+      const response = await fetch('/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rootId: emittable.contract.id,
+          contracts: reactLibraryFamily(emittable.contract, emittable.contracts),
+          tokens: applyLinkedScope(tokenSource.tree, scope), icons: [...icons] }) });
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        throw Error(detail?.error ?? `React library preparation failed (${response.status}).`);
+      }
+      const filename = response.headers.get('Content-Disposition')?.match(/filename="([A-Za-z0-9._-]+)"/)?.[1];
+      if (!filename || !response.headers.get('Content-Type')?.startsWith('application/gzip')) throw Error('React library response did not contain an installable archive.');
+      const url = URL.createObjectURL(await response.blob());
+      const anchor = document.createElement('a'); anchor.href = url; anchor.download = filename;
+      document.body.append(anchor); anchor.click(); anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      setLibraryNotice(`Downloaded ${filename}. Install it in your React app with npm install ./path/to/${filename}.`);
+    } catch (error) { setLibraryNotice(error instanceof Error ? error.message : String(error)); }
+    finally { setLibraryBusy(false); }
+  };
+
   const emitted = useMemo(() => {
     if (outputTab === 'preview' || !emittable) return null;
     const emitter = emitters.find((e) => e.name === outputTab);
@@ -3924,6 +3952,15 @@ export function Playground() {
             </div>
           ) : (
             <div className="output__files">
+              {outputTab === 'react' && import.meta.env.DEV && (
+                <div className="pane__body">
+                  <button type="button" className="btn--primary" disabled={libraryBusy || validation.status !== 'valid'} onClick={() => void downloadReactLibrary()}>
+                    {libraryBusy ? 'Preparing React library…' : 'Download React library'}
+                  </button>
+                  <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>
+                  {libraryNotice && <p role="status">{libraryNotice}</p>}
+                </div>
+              )}
               {!emittable ? (
                 <div className="pane__body hint">A schema-valid contract flows here.</div>
               ) : emitted?.error ? (

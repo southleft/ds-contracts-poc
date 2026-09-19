@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildPluginZip } from "../scripts/build-plugin-zip.mjs";
 import { createReferenceService } from "../source-reference/service.js";
+import { createReactLibraryService } from "./server/react-library.js";
 
 const playgroundRoot = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(playgroundRoot, "..");
@@ -18,7 +19,12 @@ const sourceReferences: PluginOption = {
       resolve(repoRoot, "product"),
     ]);
     const service = createReferenceService(repoRoot);
+    const library = createReactLibraryService(repoRoot);
     server.middlewares.use((req, res, next) => {
+      if (req.url?.split('?')[0] === '/api/react-library') {
+        void library(req, res).catch(() => { res.statusCode = 500; res.end('React library preparation failed.'); });
+        return;
+      }
       if (!req.url?.startsWith("/api/source-reference")) return next();
       void service.handle(req, res).catch(() => {
         res.statusCode = 500;
