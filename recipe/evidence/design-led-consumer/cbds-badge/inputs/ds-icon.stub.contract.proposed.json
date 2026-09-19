@@ -1,0 +1,60 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icon",
+  "name": "Icon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Icon\" instances of Badge — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "xsmall"
+        ]
+      },
+      "default": "small",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "small": "small",
+            "xsmall": "xsmall"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-icon.root.width.{size}}",
+        "height": "{imported.stub-icon.root.height.{size}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+        "componentSetKey": "c1c68aeb7b95222cf0755a02f63751df49e3af30"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Icon",
+        "export": "Icon"
+      }
+    }
+  }
+}
