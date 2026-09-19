@@ -32,6 +32,10 @@ export interface NativeContractComparisonInput {
   slotSpecPath: number[];
   /** Authenticated width of this caller usage, never a reusable main size. */
   instanceWidth?: number;
+  /** Observed content width of the containing block a fill-width root took in
+   * the original render. It sizes the app-owned frame (the caller's place);
+   * the instance stays FILL and neither the main nor its contract learns it. */
+  containerWidth?: number;
   /** Host-selected source ownership mappings; never inferred by component name or paint. */
   instances?: NativeContractComparisonReference[];
 }
@@ -86,7 +90,19 @@ export function prepareNativeContractComparison(contract: Contract, component: C
 
   };
   const selected = select(input);
-  if (selected.fillWidth) fail('root-fill-width-needs-parent-context');
+  // A fill-width root has no width of its own. `instanceWidth` would pin the
+  // INSTANCE as FIXED, contradicting its main; only a parent can supply it.
+  if (selected.fillWidth && input.containerWidth === undefined) fail('root-fill-width-needs-parent-context');
+  if (input.containerWidth !== undefined) {
+    const root = input.parent.component.variants.find(v => v.name === input.variantName)!.spec;
+    // Figma's resize throws below 0.01, and it would throw AFTER allocation.
+    // (A max-width has no literal spelling on a spec: only the binding and the
+    // measured hug-ceiling fact below can carry one.)
+    if (!selected.fillWidth || input.instanceWidth !== undefined || !Number.isFinite(input.containerWidth) ||
+        input.containerWidth < 0.01 || input.containerWidth > 100000 || !['VERTICAL', 'GRID'].includes(root.layout?.mode ?? '') ||
+        root.fixedWidth || root.hugCeiling || root.lits?.width !== undefined || root.lits?.minWidth !== undefined ||
+        ['width','minWidth','maxWidth'].some(k => root.bindings?.[k])) fail('container-width-unqualified');
+  }
   if (input.instanceWidth !== undefined) {
     const root = input.parent.component.variants.find(v => v.name === input.variantName)!.spec;
     let slot = root;
@@ -255,6 +271,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
     caseId: input.caseId, ...selected, ...(contentRows ? { contentRows } : {}), variantName: input.variantName,
     slotSpecPath: [...input.slotSpecPath], ...(input.instanceWidth !== undefined ? {instanceWidth:input.instanceWidth} : {}),
+    ...(input.containerWidth !== undefined ? {containerWidth:input.containerWidth} : {}),
     ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
     revision: revisionOf({ contract, component, source, tokenRevision, context, input: { ...input, receipt } }) };
 }
@@ -393,7 +410,7 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false): string {
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false, containerWidth = false): string {
   let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
   if (recovery) {
     script = script.replace("  const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);",
@@ -428,6 +445,21 @@ export function nativeContractComparisonRuntime(nested: boolean, gridContent: bo
   ).replace("if (nativeCanonical(identity.specPath) !== nativeCanonical(path))", "if (c.contentMode !== 'source-owned' && nativeCanonical(identity.specPath) !== nativeCanonical(path))")
     .replace("node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);",
       "if (c.contentMode !== 'source-owned' || Object.hasOwn(source.explicitVariableModes || {}, parentCollection.id)) node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);");
+  // The app-owned frame plays the caller's containing block: FIXED at the
+  // observed width, the root instance FILL inside it. Set before any nested
+  // FILL below, which needs its outer parents definite first.
+  if (containerWidth) script = script.replace('  dsStampFingerprints(inst);', `
+  if (c.containerWidth !== undefined) {
+    if (inst.parent !== board || board.layoutMode !== 'VERTICAL') nativeRefuse('comparison-container-width-frame');
+    board.resize(c.containerWidth, board.height);
+    board.counterAxisSizingMode = 'FIXED';
+    board.primaryAxisSizingMode = 'AUTO';
+    inst.layoutSizingHorizontal = 'FILL';
+    if (Math.abs(board.width - c.containerWidth) > 0.001 || board.counterAxisSizingMode !== 'FIXED' ||
+        inst.layoutSizingHorizontal !== 'FILL' || Math.abs(inst.width - c.containerWidth) > 0.001)
+      nativeRefuse('comparison-container-width-refused');
+  }
+  dsStampFingerprints(inst);`);
   if (fillWidth) script = script.replace('  dsStampFingerprints(inst);', `
   // Construction uses a temporary page parent. Set FILL only after every
   // nested instance is attached, from outer parents toward inner children.
