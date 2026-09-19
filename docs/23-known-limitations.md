@@ -5563,3 +5563,28 @@ and manifest byte. Run `npm run react:native:declared:check` offline. Remove the
 Badge named residual to make its historical failure red again. Replace a pair
 only with a new authenticated observation and reviewed denominator; never
 rewrite the frozen historical lineage to fit a new measurement.
+
+
+## D.47 Re-imports keep the anchored Figma component identity
+
+**AGENT decision (2026-09-19).** The live JSON import walkthrough loaded
+Altitude Badge, then CBDS Badge with its two children. The second Badge
+correctly received a collision suffix, but the workspace replaced the first
+library's entry by display name. Repeating CBDS then silently changed its id
+from `ds.badge-2` to `ds.badge`. A displayed single entry was not repeat safety.
+
+Anchored Figma imports now refresh by file and node (set key when no node was
+captured), across JSON and URL entry paths. Different files with the same label
+coexist. Before allocating a name-derived id, the proposer reuses one uniquely
+matching session contract's component key and compatible file, or its file/node
+when the key was not captured. A conflicting file cannot borrow that identity;
+ambiguous claims refuse. A valid canvas-stamped contract id retains precedence.
+Unanchored entries keep the existing source/name rule. No source filename or
+component name receives a special case.
+
+The bounded probes reproduce the old failure and cover alternating imports,
+removing the original collision, renaming the set, different input doors,
+missing keys and conflicting file evidence. They qualify identity behavior,
+not visual fidelity. Existing sessions cannot recover an entry already evicted
+by the old rule; import that capture again. To reverse, restore the workspace's
+source/name identity and remove the proposer's anchored-id reuse and file guard.
