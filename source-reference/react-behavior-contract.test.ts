@@ -147,7 +147,7 @@ test('the application preview runs emitted behavior with real consumer controls 
   const output=await buildReactBehaviorPreview(process.cwd(),draft);
   const browser=await chromium.launch();t.after(()=>browser.close());
   const page=await browser.newPage();
-  await page.setContent(reactReferenceHtml({id:'preview',files:{},...output}));
+  await page.setContent(reactReferenceHtml(output));
   const control=page.getByRole('region',{name:'Generated component'}).getByRole('checkbox');
   const value=page.getByLabel('Input value'),mode=page.getByLabel('State management');
   const remount=page.getByRole('button',{name:'Remount with current inputs'});
@@ -187,6 +187,48 @@ test("observed relationships produce a typed React draft while retaining the ori
   assert(
     draft.limitations.includes("controlled-source-appearance-not-compared"),
   );
+});
+test("the generated root claims the role that was observed, never an assumed one", () => {
+  const checkboxException = "Source root independently observed as a button-backed checkbox.";
+  // Evidence sealed before roles were recorded could only have been a checkbox.
+  const legacy = projectReactBehaviorContract(observations().initial, observations().behavior);
+  assert.deepEqual([legacy.contract!.semantics.role, legacy.contract!.semantics.roleException], ["checkbox", checkboxException]);
+  const recorded = observations();
+  (recorded.behavior.observation as { role?: string }).role = "checkbox";
+  const checkbox = projectReactBehaviorContract(recorded.initial, recorded.behavior);
+  assert.deepEqual(checkbox.contract, legacy.contract, "recording the role changes nothing for a checkbox");
+  assert.equal(checkbox.tsx, legacy.tsx);
+  // A two-state switch: the same evidence without any mixed value.
+  const twoState = () => {
+    const value = observations();
+    const prop = value.initial.draft!.compiled!.contract!.props[0] as any;
+    prop.type = { enum: ["off", "on"] };
+    delete prop.bindings.code.values.mixed;
+    const observation = value.behavior.observation as any;
+    observation.role = "switch";
+    observation.rows = observation.rows.filter((row: any) => row.value !== "indeterminate");
+    observation.candidates[0].values = observation.candidates[0].values.filter((v: unknown) => v !== "indeterminate");
+    value.initial.observation!.rows = value.initial.observation!.rows.filter((row: any) =>
+      Object.values(row.changes).every((change: any) => change.value !== "indeterminate")) as any;
+    return value;
+  };
+  const switched = twoState();
+  const draft = projectReactBehaviorContract(switched.initial, switched.behavior);
+  assert.equal(draft.status, "generated-draft", draft.problems.join("\n"));
+  assert.deepEqual([draft.contract!.semantics.role, draft.contract!.semantics.roleException],
+    ["switch", "Source root independently observed as a button-backed switch."]);
+  assert.match(draft.tsx!, /role="switch"/);
+  assert.doesNotMatch(draft.tsx!, /role="checkbox"/);
+  assert.deepEqual(generatedTypeErrors(draft.contract!.name, draft.tsx!), []);
+  // Stored evidence is not trusted to have been refused by the observer.
+  const mixedSwitch = observations();
+  (mixedSwitch.behavior.observation as { role?: string }).role = "switch";
+  const refused = projectReactBehaviorContract(mixedSwitch.initial, mixedSwitch.behavior);
+  assert.equal(refused.status, "refused");
+  assert.deepEqual(refused.problems, ["behavior-contract-state-unsupported-for-role"]);
+  const unknown = observations();
+  (unknown.behavior.observation as { role?: string }).role = "radio";
+  assert.deepEqual(projectReactBehaviorContract(unknown.initial, unknown.behavior).problems, ["behavior-contract-role-unsupported"]);
 });
 test("summary labels alone cannot admit changed, ambiguous or incomplete callback/default evidence", () => {
   const mutations = [

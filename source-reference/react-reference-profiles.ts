@@ -22,19 +22,25 @@ export const reactWitnessFiles: Record<string, string> = {
     "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
 };
 export function reactWitnessesMatch(reference: ReactReference) {
-  const roots = Object.keys(reference.files)
-    .filter((f) => f.endsWith("/src/index.css"))
-    .map((f) => f.slice(0, -"/src/index.css".length));
   return (
-    roots.length === 1 &&
-    Object.entries(reactWitnessFiles).every(
-      ([file, hash]) => reference.files[path.join(roots[0], file)] === hash,
+    Object.keys(reference.cohort.witnessFiles).length > 0 &&
+    Object.entries(reference.cohort.witnessFiles).every(
+      ([file, hash]) => reference.files[path.join(reference.sourceRoot, file)] === hash,
     )
   );
 }
+/** The built-in cohort's witnesses. Readers take a profile from the cohort of
+ * the reference they read, never from this function directly. */
 export function reactReferenceProfile(id: string): SourceProfile {
   const selected = reactReferenceCases.find((c) => c.id === id);
   if (!selected) throw Error("react-reference-case-unknown");
+  return reactReferenceProfileFor(selected);
+}
+export function reactReferenceProfileFor(selected: {
+  id: string;
+  subject: string;
+}): SourceProfile {
+  const id = selected.id;
   const base = {
     id,
     provenance:
@@ -113,6 +119,10 @@ export function reactReferenceProfile(id: string): SourceProfile {
           : {}),
       },
     };
+  // A subject without an authored witness is refused. Borrowing another
+  // subject's witness would judge the wrong component and could pass.
+  if (selected.subject !== "Card")
+    throw Error("react-reference-subject-unwitnessed");
   return {
     ...base,
     path: ['[data-slot="card"]'],

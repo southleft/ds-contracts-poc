@@ -10,18 +10,16 @@ export const negativeControlNames = [
   "missing-root",
   "hidden-root",
 ] as const;
-export const negativeCaseIds = [
-  "button-default",
-  "checkbox-unchecked",
-  "card-composed",
-] as const;
+/** The cases that must reject every corruption come from the cohort that was
+ * validated. An empty list proves nothing and is never complete. */
 export function completeNegativeControls(
   rows: {
     id: string;
     negativeControls?: { name: string; rejected: boolean }[];
   }[],
+  negativeCaseIds: readonly string[],
 ) {
-  return negativeCaseIds.every((id) => {
+  return negativeCaseIds.length > 0 && negativeCaseIds.every((id) => {
     const matches = rows.filter((row) => row.id === id);
     const controls = matches[0]?.negativeControls;
     return (

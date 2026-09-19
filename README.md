@@ -49,24 +49,28 @@ There is existing table and other composed-component implementation evidence in 
 
 - **Explore contracts and deterministic generation.** The local playground runs the checked-out engine. Supported contracts can produce code and native Figma writer programs.
 - **Try React source import.** The code-import view accepts static TSX/CSS experiments and reports supported facts and limitations. It is not yet a general repository import or a verified React-to-Figma journey.
-- **Inspect original React sources.** The local `/sources` workflow opens a configured Button, Checkbox and composed Card cohort, verifies original styling and states, proposes installed API facts, and can deliver supported root or composed component graphs to the authorized Figma evaluation file through the companion plugin. The composed Card graph has passed live independent readback of its parent structure, with dependency mains verified by identity only, and a repeat run created no duplicates. This remains a configured preset rather than general repository onboarding, and visual qualification is still in progress. Earlier Lit work remains in a collapsed V1.1 archive.
+- **Inspect original React sources.** The local `/sources` workflow opens a configured Button, Checkbox and composed Card cohort, verifies original styling and states, proposes installed API facts, and can deliver supported root or composed component graphs to the authorized Figma evaluation file through the companion plugin. The composed Card graph has passed live independent readback of its parent structure, with dependency mains verified by identity only, and a repeat run created no duplicates. This remains a configured preset rather than general repository onboarding, and visual qualification is still in progress. Earlier Lit work remains in a collapsed V1.1 archive. **This workflow does not run from a fresh clone.** It needs a prepared shadcn React source sandbox with its installed dependencies, and that sandbox is not in the repository. Without it, **Load React originals** answers 409 and names `DS_CONTRACTS_REACT_SOURCE_ROOT`, the environment variable that points the dev server at the sandbox ([source-reference/README.md](source-reference/README.md)). The only recreate recipe, [examples/shadcn/RECON.md](examples/shadcn/RECON.md) §1, is manual: it needs hand-written host files, and its registry fetch is not reproducible (§2.2). On a fresh clone with no credentials, the static code import on `/playground` and **Demo import (Badge fixture)** both run.
 - **Evaluate existing import and generation paths.** CLI and plugin workflows expose proposals and named limitations. They require setup and review; they do not yet deliver the full automatic journeys above.
 
 **Still unfinished:** visual qualification and a cohesive application review for the React-to-Figma journey, a qualified design-only reusable-library journey, and reliable two-way repair with recovery and rollback. A matching screenshot, passing engine test or historical component demo does not establish those outcomes.
 
 ### Run locally
 
-Requires Node.js 20 or later and npm.
+Requires npm and Node.js 20.19 or later on the 20.x line, or 22.12 or later. That is the range Vite 8.3.0 declares (`^20.19.0 || >=22.12.0`); earlier Node 20 releases are outside it and untested here. CI runs 20.19.4, and `.nvmrc` pins the same version.
 
 ```bash
-npm install
+npm ci
 npm run prep:schema
 npm run playground
 ```
 
-Open [the local start guide](http://localhost:5181/start), then choose code import for a React experiment. Read `/system` for the current plan. The `/sources` presets require their configured local source libraries and dependencies; they do not yet provide an arbitrary repository picker.
+Use `npm ci`, as CI does: it installs exactly what `package-lock.json` records. `npm install` under npm 10.8.2 rewrites that tracked lockfile (it drops the `libc` fields); `git restore package-lock.json` discards the change.
 
-For other development commands, worker setup and validation gates, see [CONTRIBUTING.md](CONTRIBUTING.md). For the existing contract-first walkthrough, see [Getting Started](docs/00-getting-started.md).
+The app must run on port 5181: the port is strict, and the companion plugin's local connection is fixed to `http://localhost:5181`. If the port is busy, stop the other process. `npm run playground -- --port <n>` starts the app on another port for browsing, but the plugin will not reach it.
+
+Open [the local start guide](http://localhost:5181/start), then choose code import for a React experiment. Read `/system` for the current plan. The `/sources` presets require their configured local source libraries and dependencies; they do not yet provide an arbitrary repository picker. None of the steps above needs a Figma token. A live Figma import, the image comparison of the clean consumer check and the REST-based scripts do; see [what needs a Figma token](docs/USER-JOURNEYS.md#figma-token).
+
+For other development commands, the cold-tree build step, worker setup and validation gates, see [CONTRIBUTING.md](CONTRIBUTING.md). For the existing contract-first walkthrough, see [Getting Started](docs/00-getting-started.md).
 
 The [hosted playground](https://ds-contracts-playground.pages.dev) and [documentation site](https://ds-contracts-spec.pages.dev) may run a different revision. Published packages, the checked-out source and deployed demos have separate release lifecycles.
 

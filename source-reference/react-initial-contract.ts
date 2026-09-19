@@ -1,6 +1,7 @@
 /** Assemble a complete observed initial-state domain through the shared computed
  * compiler. Runtime behavior and reusable child identities are separate work. */
 import { revisionOf } from '../core/contract-provenance.js';
+import { authoredLengthIsUsed } from './layout-unit.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { enumerate, comboKey, normalizeValue, flatten, type CapturedNode } from '../extract/computed/lib.js';
 import type { PropSpace, SweepResult } from '../extract/computed/capture.js';
@@ -115,7 +116,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
           root.style['flex-shrink'] === '0' && root.style['flex-basis'] === 'auto' &&
           root.style['min-width'] === '0px' && root.style['max-width'] === 'none' &&
           root.style['writing-mode'] === 'horizontal-tb' && root.style.position === 'static';
-        if (!intrinsic && (size?.status !== 'fixed' || !size.value || normalizeValue(size.value) !== root.style[channel]))
+        if (!intrinsic && (size?.status !== 'fixed' || !size.value || !authoredLengthIsUsed(size.value, root.style[channel])))
           throw Error('react-initial-contract-root-sizing-unqualified:' + channel);
         const mode = intrinsic ? 'intrinsic' : 'fixed';
         if (sizeModes.has(channel) && sizeModes.get(channel) !== mode)

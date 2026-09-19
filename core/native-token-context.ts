@@ -516,6 +516,16 @@ export function verifyNativeTokenContextReceipt(args: {
           })
         )
           continue;
+        // Number variables are float32 too: a planned 18.3906 was read back
+        // from Figma as 18.390600204467773 (live, 2026-09-18). Every earlier
+        // number was float32-exact (integers, 0.5). The same policy applies:
+        // exactly that representation, never a tolerance.
+        if (
+          typeof expectedValue === "number" &&
+          typeof actualValue === "number" &&
+          actualValue === Math.fround(expectedValue)
+        )
+          continue;
         fail("variable-value");
       }
     }

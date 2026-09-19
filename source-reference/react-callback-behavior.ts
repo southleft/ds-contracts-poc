@@ -2,6 +2,7 @@ import type { Page } from "playwright-core";
 import type { ReactSourceProgram } from "./react-source-program.js";
 import { reactOwnershipRead, type ReactOwnership } from "./react-ownership.js";
 import { revisionOf } from '../core/contract-provenance.js';
+import { checkedToggleRole, checkedStateValid, type CheckedToggleRole } from './control-behavior.js';
 import {
   reactCallbackCandidate,
   type ReactCallbackCandidate,
@@ -16,7 +17,11 @@ import {
 type Scalar = string | number | boolean | null;
 type Control = { checked: string; disabled: boolean };
 export interface ReactCallbackBehavior {
+  /** A recorded identifier, kept as first written so sealed observations stay
+   * readable. `role` names the observed member of the checked-toggle class;
+   * observations sealed before it was recorded could only be a checkbox. */
   qualification: "observed-source-checkbox-behavior-only";
+  role?: CheckedToggleRole;
   target?: { instanceId: string; source: ReactOwnership['components'][number]['source']; rootPath: string };
   candidates: ReactCallbackCandidate[];
   rows: Array<{
@@ -37,7 +42,8 @@ export interface ReactCallbackBehavior {
   }>;
   problems: string[];
 }
-/** Exercise semantic checkbox controls, irrespective of component/export names.
+/** Exercise semantic checked-state toggles (checkbox, switch) by their observed
+ * role, irrespective of component/export names.
  * Relationships require all finite values, two real activations, live input
  * updates, callback payloads, and independent restoration by the host. They are
  * bounded observations, not proof of arbitrary runtime behavior. */
@@ -92,20 +98,22 @@ export async function observeReactCallbackBehavior(input: {
         target.roots.length !== 1 || target.roots[0] !== rootPath) throw Error('callback-control-identity-changed');
     if ((await page.locator(controlSelector).count()) !== 1)
       throw Error("callback-control-ambiguous");
-    return page.locator(controlSelector).evaluate((element) => {
+    // The page reports facts; class membership is judged here so a refusal
+    // leaves as a clean identifier, not wrapped in browser error text.
+    const observed = await page.locator(controlSelector).evaluate((element) => {
       const native =
         element instanceof HTMLInputElement && element.type === "checkbox";
-      if (!native && element.getAttribute("role") !== "checkbox")
-        throw Error("callback-control-role-unsupported");
-      const checked = native
-        ? element.indeterminate
-          ? "mixed"
-          : String(element.checked)
-        : element.getAttribute("aria-checked");
-      if (!["false", "true", "mixed"].includes(checked ?? ""))
-        throw Error("callback-control-state-unsupported");
       return {
-        checked: checked!,
+        role: native
+          ? element.getAttribute("role") === "switch"
+            ? "switch"
+            : "checkbox"
+          : element.getAttribute("role"),
+        checked: native
+          ? element.indeterminate
+            ? "mixed"
+            : String(element.checked)
+          : element.getAttribute("aria-checked"),
         disabled:
           element instanceof HTMLInputElement ||
           element instanceof HTMLButtonElement
@@ -113,6 +121,17 @@ export async function observeReactCallbackBehavior(input: {
             : element.getAttribute("aria-disabled") === "true",
       };
     });
+    const role = checkedToggleRole(observed.role);
+    if (!role) throw Error("callback-control-role-unsupported");
+    if (!["false", "true", "mixed"].includes(observed.checked ?? ""))
+      throw Error("callback-control-state-unsupported");
+    if (!checkedStateValid(role, observed.checked))
+      throw Error("callback-control-state-unsupported-for-role");
+    // The member observed first is the member for every trial that follows.
+    if (result.role && result.role !== role)
+      throw Error("callback-control-role-changed");
+    result.role = role;
+    return { checked: observed.checked!, disabled: observed.disabled };
   };
   const activate = async (
     action: "space" | "associated-label",
