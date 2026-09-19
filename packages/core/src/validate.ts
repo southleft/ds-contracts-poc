@@ -14,6 +14,7 @@ import {
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
+  absentVariantIssues,
   isNativeCheckablePart,
   statePreviewSubstProps,
   tokensByPropEntries,
@@ -1126,6 +1127,11 @@ export function validateContract(
       );
     }
   }
+
+  // bindings.figma.absentVariants: the declared undrawn combinations. Every
+  // refusal is named by the shared reader (schema: absentVariantIssues) so
+  // the writer and the proposer hold the list to the same rules.
+  for (const issue of absentVariantIssues(contract)) errors.push(`${contract.id}: ${issue}`);
 
   // v7 elementByProp: the dynamic-tag lookup must be total and honest —
   // the prop must be a declared enum, the map must cover every value, and

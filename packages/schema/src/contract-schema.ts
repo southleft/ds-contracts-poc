@@ -2693,6 +2693,39 @@ export const ContractBindingsSchema = z.strictObject({
     /** OPT-IN canvas-only interaction previews — the rules are documented on
      *  the contract's `states` field above. (v16: figmaStatePreviews) */
     statePreviews: z.boolean().optional(),
+    /** DECLARED UNDRAWN COMBINATIONS (additive, optional). A designer's
+     *  component set is often not the full Cartesian product of its variant
+     *  axes (a checkbox icon with no `disabled` + `error` cell). Each entry is
+     *  ONE complete tuple over the contract's variant axes — every enum prop
+     *  and every VARIANT-bound boolean prop, keyed by PROP NAME:
+     *
+     *      { "selection": "checked", "size": "small", "state": "disabled", "error": true }
+     *
+     *  An enum axis takes a canonical enum value, a VARIANT-bound boolean a
+     *  JSON boolean, and an axis carrying `bindings.figma.unsetValue` may take
+     *  `null` for its canvas-only omission option. Complete tuples, never
+     *  patterns: a pattern (`{state: disabled, error: true}`) has many
+     *  spellings for one set of cells, a tuple list has exactly one — so the
+     *  list is canonical (axes in prop order, values in declared order) and
+     *  duplicate-free, and two contracts that leave the same cells undrawn
+     *  are byte-equal.
+     *
+     *  Semantics: those combinations are NOT DRAWN ON THE CANVAS — the Figma
+     *  writer emits no variant for them and the exact variant projection
+     *  expects the product MINUS this list, exactly (a drawn cell the list
+     *  calls absent is an extra row; an undrawn cell it does not name is a
+     *  missing row). It is a canvas fact only: the code surfaces render any
+     *  prop combination by composition and do not read this field
+     *  (`undrawn-combination-rendered-by-composition`, docs/23 §D.40).
+     *
+     *  validateContract refuses, by name: a tuple that is not a member of the
+     *  product, a duplicate, a non-canonical order, the default tuple, a list
+     *  that leaves an axis value (or the whole product) undrawn, and the
+     *  field together with `statePreviews` or a `native` representation. */
+    absentVariants: z
+      .array(z.record(z.string(), z.union([z.string(), z.boolean(), z.null()])))
+      .min(1)
+      .optional(),
     /** (v16: anchors.figma) */
     anchors: FigmaAnchorsSchema,
   }),
@@ -3233,3 +3266,179 @@ export const DEFAULT_FONT_FAMILY = "Inter";
  *  disagree with the canvas. The face itself is the consumer's to provide
  *  (FC-FONT-SUBSTRATE); the generic tail keeps an absent face sans-serif. */
 export const DEFAULT_FONT_STACK = `${DEFAULT_FONT_FAMILY}, system-ui, sans-serif`;
+
+// ---------------------------------------------------------------------------
+// bindings.figma.absentVariants — the ONE reading of a declared absence list.
+// The referee (validateContract), the Figma writer and the design→contract
+// proposer all go through these, so the three cannot disagree about which
+// props are variant axes, how a tuple is keyed, or what canonical order is.
+// ---------------------------------------------------------------------------
+
+/** One variant axis as the absence vocabulary sees it: the prop, and its
+ *  options in DECLARED order (`null` = the canvas-only `unsetValue` option,
+ *  first; an enum's values as declared; a VARIANT-bound boolean false, true). */
+export interface AbsentVariantAxis {
+  prop: Prop;
+  options: Array<string | boolean | null>;
+}
+
+/** Every enum prop and every VARIANT-bound boolean prop, in prop order — the
+ *  same axis list the Figma writer multiplies. */
+export function absentVariantAxes(contract: Contract): AbsentVariantAxis[] {
+  return contract.props
+    .filter(
+      (p) =>
+        (typeof p.type === "object" && "enum" in p.type) ||
+        (p.type === "boolean" && p.bindings.figma.kind === "VARIANT"),
+    )
+    .map((prop) => {
+      const own: Array<string | boolean> =
+        typeof prop.type === "object" && "enum" in prop.type
+          ? [...prop.type.enum]
+          : [false, true];
+      return {
+        prop,
+        options:
+          prop.bindings.figma.unsetValue === undefined ? own : [null, ...own],
+      };
+    });
+}
+
+/** The identity of one combination: each axis's option in axis order. A
+ *  boolean and the string of the same spelling are different options. */
+export const absentVariantKey = (
+  axes: readonly AbsentVariantAxis[],
+  tuple: Readonly<Record<string, string | boolean | null>>,
+): string => JSON.stringify(axes.map((a) => tuple[a.prop.name] ?? null));
+
+/** The default combination — the variant the writer emits FIRST, which Figma
+ *  reads positionally as the set's default variant. */
+export function defaultVariantTuple(
+  axes: readonly AbsentVariantAxis[],
+): Record<string, string | boolean | null> {
+  return Object.fromEntries(
+    axes.map(({ prop, options }) => {
+      if (prop.bindings.figma.unsetValue !== undefined) return [prop.name, null];
+      if (prop.type === "boolean") return [prop.name, prop.default === true];
+      const declared = options.find((o) => o === String(prop.default));
+      return [prop.name, prop.default !== undefined && declared !== undefined ? declared : options[0]!];
+    }),
+  );
+}
+
+/** Keys of the declared absences, or an empty set when the contract declares
+ *  none. Reads the list as-is: call only on a contract the referee accepted. */
+export function absentVariantKeys(contract: Contract): Set<string> {
+  const list = contract.bindings?.figma?.absentVariants;
+  if (!list || list.length === 0) return new Set();
+  const axes = absentVariantAxes(contract);
+  return new Set(list.map((t) => absentVariantKey(axes, t)));
+}
+
+/** Every reason a declared absence list is not acceptable, each NAMED. Empty
+ *  when the field is absent or sound. */
+export function absentVariantIssues(contract: Contract): string[] {
+  const list = contract.bindings?.figma?.absentVariants;
+  if (list === undefined) return [];
+  const at = "bindings.figma.absentVariants";
+  const issues: string[] = [];
+  if (contract.bindings.figma.representation === "native") {
+    issues.push(
+      `absent-variants-native-representation: ${at} describes a generated component set — bindings.figma.representation "native" declares there is none`,
+    );
+  }
+  // The two sparse shapes do not compose. State previews draw ONE row per
+  // state per primary-axis value with every other axis PINNED to its first
+  // value, and the preview axis is not a contract prop — so a tuple over the
+  // props cannot address a preview row, and an absent base cell a preview row
+  // is pinned to would leave "is its preview drawn?" undefined. Refused rather
+  // than guessed; the exact projection ignores the list on such a set too.
+  if (contract.bindings.figma.statePreviews) {
+    issues.push(
+      `absent-variants-with-state-previews: ${at} cannot be combined with bindings.figma.statePreviews — the preview matrix is already sparse by its own rule (one row per state per primary value, other axes pinned) and a tuple over the props cannot address a preview row`,
+    );
+  }
+  const axes = absentVariantAxes(contract);
+  if (axes.length === 0) {
+    issues.push(
+      `absent-variants-no-axes: ${at} is declared but the contract has no variant axis (no enum prop, no VARIANT-bound boolean)`,
+    );
+    return issues;
+  }
+  const axisNames = new Set(axes.map((a) => a.prop.name));
+  const spell = (t: Record<string, unknown>) => JSON.stringify(t);
+  const seen = new Set<string>();
+  const sound: string[] = [];
+  let ordered = true;
+  list.forEach((tuple, i) => {
+    const here = `${at}[${i}] ${spell(tuple)}`;
+    let ok = true;
+    for (const key of Object.keys(tuple)) {
+      if (axisNames.has(key)) continue;
+      ok = false;
+      const prop = contract.props.find((p) => p.name === key);
+      issues.push(
+        prop
+          ? `absent-variant-non-variant-axis: ${here} names prop "${key}", which is not a variant axis (figma kind ${prop.bindings.figma.kind}) — only enum props and VARIANT-bound booleans multiply the component set`
+          : `absent-variant-non-variant-axis: ${here} names "${key}", which is not a prop of this contract`,
+      );
+    }
+    const missing = axes.filter((a) => !Object.hasOwn(tuple, a.prop.name)).map((a) => a.prop.name);
+    if (missing.length > 0) {
+      ok = false;
+      issues.push(
+        `absent-variant-incomplete: ${here} does not name ${missing.map((m) => `"${m}"`).join(", ")} — an entry is ONE complete combination over every variant axis, never a pattern`,
+      );
+    }
+    for (const a of axes) {
+      if (!Object.hasOwn(tuple, a.prop.name)) continue;
+      const value = tuple[a.prop.name] as string | boolean | null;
+      if (a.options.some((o) => o === value)) continue;
+      ok = false;
+      issues.push(
+        `absent-variant-not-in-product: ${here} gives "${a.prop.name}" the value ${JSON.stringify(value)}, which is not one of its options (${a.options.map((o) => JSON.stringify(o)).join(", ")})`,
+      );
+    }
+    if (!ok) return;
+    if (Object.keys(tuple).some((k, n) => k !== axes[n]!.prop.name)) ordered = false;
+    const key = absentVariantKey(axes, tuple);
+    if (seen.has(key)) {
+      issues.push(`absent-variant-duplicate: ${here} repeats an earlier entry`);
+      return;
+    }
+    seen.add(key);
+    sound.push(key);
+  });
+  if (issues.length > 0) return issues;
+  // Canonical order = the product's own enumeration order (first axis
+  // slowest, options as declared).
+  let product: Array<Array<string | boolean | null>> = [[]];
+  for (const a of axes) product = product.flatMap((row) => a.options.map((o) => [...row, o]));
+  const rank = new Map(product.map((row, n) => [JSON.stringify(row), n]));
+  if (!ordered || sound.some((k, n) => n > 0 && rank.get(sound[n - 1]!)! > rank.get(k)!)) {
+    issues.push(
+      `absent-variants-order: ${at} is not in canonical order — list each tuple's keys in prop order (${axes.map((a) => a.prop.name).join(", ")}) and the tuples in the product's enumeration order (first axis slowest, options as declared), so one set of undrawn cells has one spelling`,
+    );
+  }
+  if (seen.size >= product.length) {
+    issues.push(`absent-variants-cover-product: ${at} names all ${product.length} combinations — nothing would be drawn`);
+    return issues;
+  }
+  const dflt = absentVariantKey(axes, defaultVariantTuple(axes));
+  if (seen.has(dflt)) {
+    issues.push(
+      `absent-variants-default-tuple: ${at} names the default combination ${dflt} — the default variant is the one Figma reads every axis default from and must be drawn`,
+    );
+  }
+  axes.forEach((a, n) => {
+    for (const option of a.options) {
+      const cells = product.filter((row) => row[n] === option);
+      if (cells.every((row) => seen.has(JSON.stringify(row)))) {
+        issues.push(
+          `absent-variants-erase-axis-value: ${at} leaves no drawn combination with "${a.prop.name}" = ${JSON.stringify(option)} — a variant option exists on the canvas only while some variant carries it, so the prop's VARIANT binding could not round-trip`,
+        );
+      }
+    }
+  });
+  return issues;
+}

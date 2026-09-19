@@ -178,6 +178,8 @@ reg("props", "props", ["contract.props"]);
 reg("anatomy", "anatomy", ["contract.anatomy"]);
 reg("states", "declared-states", ["contract.states"]);
 reg("states", "state-previews", ["contract.bindings.figma.statePreviews"]);
+// Additive (docs/23 §D.40): the undrawn combinations of a sparse variant matrix.
+reg("contract", "absent-variants", ["contract.bindings.figma.absentVariants"]);
 reg("events", "events", ["contract.events"]);
 
 // --- Semantics -------------------------------------------------------------

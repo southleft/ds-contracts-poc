@@ -21,7 +21,7 @@ One contract per component, at `contracts/<component>.contract.json`. The author
 | `states` | `("hover" \| "focus-visible" \| "disabled")[]` | Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (canvas). |
 | `anatomy` | `Record<partName, Part>` | Named internal parts with **token bindings** — where all styling decisions live. |
 | `a11y` | object | Executable accessibility requirements (`focusVisible`, `minHitArea`, `contrast`). Phase 1 records them; later phases enforce them. |
-| `bindings` | `{ figma: { representation?, statePreviews?, anchors }, code: { anchors } }` | **Schema 17.** The contract-level per-surface bindings — the same `bindings.<surface>` namespace every prop and slot uses, hoisted to the document. Everything one tool owns lives under its own key (identity anchors, canvas representation, canvas-only state previews); the vendor-neutral core carries no tool name at any level. See [Bindings](#bindings--per-surface-anchors-and-canvas-facts). |
+| `bindings` | `{ figma: { representation?, statePreviews?, absentVariants?, anchors }, code: { anchors } }` | **Schema 17.** The contract-level per-surface bindings — the same `bindings.<surface>` namespace every prop and slot uses, hoisted to the document. Everything one tool owns lives under its own key (identity anchors, canvas representation, canvas-only state previews); the vendor-neutral core carries no tool name at any level. See [Bindings](#bindings--per-surface-anchors-and-canvas-facts). |
 
 ## Props
 
@@ -251,6 +251,9 @@ Bounds and refusals: previews multiply only the *primary* enum axis (the one the
   "figma": {
     "representation": "component",   // optional; "native" = the concept IS a canvas capability, no set is generated
     "statePreviews": true,            // optional; the canvas-only State preview axis (see above)
+    "absentVariants": [               // optional; the combinations the design does NOT draw (see below)
+      { "variant": "ghost", "size": "lg" }   // ONE complete tuple over every variant axis, never a pattern
+    ],
     "anchors": { "fileKey": "…", "componentSetKey": "…", "nodeId": "4:412" }
   },
   "code": {
@@ -258,6 +261,8 @@ Bounds and refusals: previews multiply only the *primary* enum axis (the one the
   }
 }
 ```
+
+`absentVariants` (additive, optional; [docs/23 §D.40](23-known-limitations.md)) declares the variant combinations a designer's set does not draw — a component set is often not the full Cartesian product of its axes. Each entry is **one complete tuple** over the contract's variant axes (every enum prop and every `VARIANT`-bound boolean, keyed by prop name; an enum value, a JSON boolean, or `null` for an axis's `unsetValue` option), listed in canonical order: keys in prop order, tuples in the product's enumeration order. It is a canvas fact only: the Figma writer emits no variant for a listed combination, the exact variant projection expects the product minus the list **exactly** (a set with no declaration is still held to the full product), and the code surfaces do not read it — they render any prop combination by composition (`undrawn-combination-rendered-by-composition`, named in the emitted component). `validateContract` refuses by name a tuple outside the product, an incomplete or duplicate tuple, a non-variant axis, a non-canonical order, the default combination, a list that erases an axis value or the whole product, and the field together with `statePreviews` or a `native` representation.
 
 One rule, at every level of the document: a fact that only one tool owns is spelled under `bindings.<surface>` — on a prop (`bindings.figma.property`, `bindings.code.prop`), on a slot (`bindings.figma.property`), and, since schema 17, on the contract itself. The surface keys are the same short names the prop level established (`figma`, `code`); a DTCG-style `$extensions` bag was considered and rejected because the design surface is a first-class conformance target of this spec, not a foreign extension, and two namespacing conventions in one document would be worse than one. Unknown surface keys are refused by name: a misspelled surface must never pass as a new tool, so adding a surface is a schema change.
 
