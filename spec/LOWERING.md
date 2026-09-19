@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **63** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **64** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -412,7 +412,7 @@ The stage where the two directions disagree about a keyword. The proposer elides
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `css.display-absent-root-inflates-inline-flex` | `proposed` | `css.ts:236` | the CSS emitted for a contract whose root carries no layout block → n/a — this is the CSS the contract renders to | the two defaults must be the SAME keyword, or the elision is not an elision | **none** | `untested` |
+| `css.display-absent-root-inflates-inline-flex` | `proposed` | `css.ts:276` | the CSS emitted for a contract whose root carries no layout block → n/a — this is the CSS the contract renders to | the two defaults must be the SAME keyword, or the elision is not an elision | **none** | `untested` |
 | `propose.display-root-layout-elided` | `implemented` | `propose-figma.ts:5794` | a canvas root drawn at exactly row / center / center → n/a — this is the return leg: the Figma fact is dropped rather than proposed | the elision is only sound if the absence re-inflates to the SAME shape it elided | **none** | `untested` |
 | `schema.display-block-to-vertical-stack` | `implemented` | `contract-schema.ts:1049` | display: inline \| block \| list-item → frame nesting; a block-level box lowers to a vertical stack | a block-level box lowers to a vertical stack | **none** | `named` |
 
@@ -501,8 +501,8 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:96` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
-| `css.text-box-whole-pixel` | `implemented` | `css.ts:1086` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
+| `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:110` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
+| `css.text-box-whole-pixel` | `implemented` | `css.ts:1107` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2326` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2355` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:5026` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |
@@ -788,14 +788,28 @@ Rules that exist purely to work around platform behaviour — the kind of knowle
 
 **Why.** The right shape for a platform wall: it names the construct, quotes the API’s verbatim refusal, and states what a slot interior CAN be. A reader hitting this does not have to go and rediscover the constraint.
 
-### `state` — 2 rules (2 implemented, 0 proposed, 0 wall)
+### `state` — 3 rules (3 implemented, 0 proposed, 0 wall)
 
 The honest half of the story. When the state plane is not drawn, every part×state×channel is named individually rather than dropped in bulk. The unset-plane rule applies to defaultless axes without an explicit `bindings.figma.unsetValue`: their loss propagates INTO the inverse, which reads the first variant cell as a default the library never declared. Opted-in axes instead draw a separate omitted plane and require corroborated readback metadata; they are outside this legacy refusal's scope.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
+| `css.disabled-state-rendered-attribute` | `implemented` | `css.ts:123` | the disabled state's selector and the hover / active guards that exclude it: `:disabled` on a root rendered as a native form control, `[data-disabled]` (the attribute the component renders for the prop) on every other root, `:is(:disabled, [data-disabled])` where one elementByProp root renders both; parts ride the root's selector → a State=Disabled variant (or the disabled state plane) of the component set | a `disabled` boolean prop and a disabled state block on the root (and part states under it); `[data-disabled]` on the root class reads back as that state, exactly as `:disabled` does | **none** | `untested` |
 | `emit.state-plane-undrawn` | `implemented` | `emit-figma-script.ts:5782` | :hover, :focus, :active and every other state’s channel values → nothing — the state plane is not drawn | a named refusal per channel (FC-STATE-PLANE-UNDRAWN) | `emit-facts` | `untested` |
 | `emit.state-unset-plane-undrawn` | `implemented` | `emit-figma-script.ts:5771` | the library’s rendering when a defaultless enum prop is not supplied at all → nothing — there is no variant cell for the unset case | a named refusal (FC-UNSET-PLANE-UNDRAWN), one per defaultless axis without an explicit unsetValue | `emit-facts` | `untested` |
+
+#### `css.disabled-state-rendered-attribute`
+
+**Context.** reactRootDisabledSelector (css.ts) for the React CSS module: the native attribute only on a single-element root whose ELEMENT_META entry supportsDisabled; an elementByProp root renders `data-disabled` on every value. wcRootDisabledSelector (emit-wc.ts) and htmlRootDisabledSelector (core/emit-html.ts, which also counts a root projected to a `div`) decide per rendered tag. packages/core anatomy.ts `disabledStateSelector` + `stateSelectorsFor` build the table; a native root gets `STATE_SELECTORS` itself, byte-identical. Every state, declaredStates, statesByProp and bool-placeholder rule, root and part, reads it. React inline is untouched: its disabled plane rides the prop.
+
+**Inverse** (`propose-figma.ts`, the state-axis projection) emits a `disabled` boolean prop and a disabled state block on the root; the element is never read from the state. The code → contract reader (core/extract-css-module.ts `rootDisabledAsPseudo`) reads `[data-disabled]` on the root class back as the disabled state, exactly as it reads `:disabled`, so a generated `div` component re-extracts with the same `hover` and `disabled` blocks.
+
+**Lost.**
+- a disabled state on a non-native root with no `disabled` prop (26 of the 52 committed contracts that emitted the dead rule) is reachable only by passing `data-disabled` through the rest props; before this rule it was not reachable at all
+- behaviour: a `div` with `data-disabled` still takes focus and fires its handlers; no handler is guarded and no `aria-disabled` is rendered (AGENT decision, docs/23 §D.45)
+- web components and static HTML select a `disabled` stylesWhen / bool placeholder on a NATIVE root as `[data-disabled]`, which they do not render there: the mirror-image dead rule, left because native roots stay byte-identical (antd Button, 2 committed contracts)
+
+**Why.** `:disabled` matches only a form control. The generated TSX renders `data-disabled` for the `disabled` prop on every other root, so the `.root:disabled { … }` it shipped beside it never matched: 52 of the 64 committed contracts with a disabled state on a non-native root emitted that dead rule, and their `:hover:not(:disabled)` guards never excluded the disabled state. §D.44's Rule A now sends former `<button>` sets into it. Specificity is unchanged, so no rule moves in the cascade. Held by core/react-disabled-state-selector.test.ts (the paint MEASURED on a mounted `div` in Chromium) and extract/figma/state-axis.test.ts. docs/23 §D.45.
 
 #### `emit.state-plane-undrawn`
 

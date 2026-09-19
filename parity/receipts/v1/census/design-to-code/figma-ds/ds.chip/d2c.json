@@ -301,12 +301,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Chip/Chip.module.css": "6bad0e285d245a7bb3c67497979524dc96cf231e335e69f1bf3f0f06474b2b0d",
+    "react/Chip/Chip.module.css": "68f4a382d918fe91252e6e7d5ec538b2dcc4b42ef343b76520b8a4f7229a5e9a",
     "react/Chip/Chip.stories.tsx": "ca61fdee0da6fe61d3cad01750f571e0fbdc9e8be80b0d2f4ce40aa8c83be0ff",
     "react/Chip/Chip.tsx": "4d4e2d92ab9b4d877013faf0999bf0c3aef0e9c4ee9f24d122a2687b83d59e45",
     "react/Chip/index.ts": "746419f2d2117cbcc865908573d71d3f7cd68faf21931422456e4200c760fa7b",
     "wc/ds-chip.ts": "149e042787b0313fa51405561060e83952bafe0e6285953e6f6075d096aab8ec",
-    "wc/ds-chip.css.ts": "5212ff0f512d1e5367809f8196567a6508acd9cb98103f815347c1a46f61b4b3",
+    "wc/ds-chip.css.ts": "02cb60fef0ef7c4cd3404c186ce5a5968f7ec2f3fe9f214232ffb5026088ae4c",
     "wc/ds-chip.demo.html": "7ec34bdb0c30107721a0eb3c9531c439b2a4c3ebcb481c46aed24bde35049d87",
     "wc/ds-chip.custom-elements.json": "cb33a966adc13cb77baa56fd241b9c3930e81223da3a0ecc679e737ef0ef5f44"
   },
