@@ -379,7 +379,7 @@ function equivalentVariantFixture() {
     { key: 'rest', nodeId: '1:1', interaction: 'none', props: { state: 'default', checked: false } },
     { key: 'hover', nodeId: '1:2', interaction: 'none', props: { state: 'hover', checked: false } },
   ];
-  const images = { '1:1': image, '1:2': Buffer.from(image) };
+  const images: Record<'1:1' | '1:2', Buffer> = { '1:1': image, '1:2': Buffer.from(image) };
   const frame = (x: number): FigmaFrame => ({ layout: { x, y: 10, width: 20, height: 20 }, render: { x, y: 10, width: 20, height: 20 }, pngSha256: imageSha256(image) });
   const frames = { '1:1': frame(100), '1:2': frame(200) };
   const inspect = () => sourceEquivalentTransitions(cases, 'state', 'default', ['hover'], images, frames);
@@ -430,4 +430,43 @@ test('the counterpart is unique, type-exact, and holds every other axis and inte
   ]) { const f = equivalentVariantFixture(); mutate(f); assert.deepEqual(f.inspect(), []); }
   const f = equivalentVariantFixture();
   assert.deepEqual(sourceEquivalentTransitions(f.cases, 'checked', 'false', ['hover'], f.images, f.frames), []);
+});
+
+test('explicit full-bounds Figma exports use their local origin at every canvas phase; legacy receipts keep their refusal', () => {
+  const bytes = frameBytes(32, 19, p => rect(p, 0, 0, 32, 18));
+  const layout = { x: 10, y: 20, width: 32, height: 18.390625 };
+  const consumer = { layout, capture: enclosingFrame(layout), deviceScaleFactor: 1, pngSha256: imageSha256(bytes) };
+  for (const phase of [0, .25, .5, .75]) {
+    const native = { x: 132 + phase, y: 140 + phase, width: 32, height: 18.390625 };
+    const frame: FigmaFrame = { layout: native, render: native, pngSha256: imageSha256(bytes), raster: { kind: 'figma-rest-full-bounds-v1', scale: 1 } };
+    const compared = alignRecordedFrames(bytes, bytes, consumer, frame, 0);
+    assert.ok('aligned' in compared); assert.equal(diffPair(compared.aligned, []).unmaskedPct, 0);
+    if (phase) { const legacy = { ...frame }; delete legacy.raster; assert.ok('refused' in alignRecordedFrames(bytes, bytes, consumer, legacy, 0)); }
+  }
+});
+
+test('full bounds keep empty layout space as the origin instead of independently aligning visible paint', () => {
+  const a = frameBytes(40, 40, p => rect(p, 10, 4, 20, 20));
+  const b = frameBytes(40, 40, p => rect(p, 11, 4, 20, 20));
+  const layout = { x: 10, y: 20, width: 40, height: 40 };
+  const consumer = { layout, capture: enclosingFrame(layout), deviceScaleFactor: 1, pngSha256: imageSha256(a) };
+  const native = { x: 100.5, y: 200.25, width: 40, height: 40 };
+  const frame: FigmaFrame = { layout: native, render: { x:111.5,y:204.25,width:20,height:20 }, pngSha256: imageSha256(b), raster: { kind:'figma-rest-full-bounds-v1',scale:1 } };
+  const compared = alignRecordedFrames(a, b, consumer, frame, 0);
+  assert.ok('aligned' in compared); assert.ok(diffPair(compared.aligned, []).unmaskedPct > 5);
+  assert.deepEqual(compared.placement.commonCrop, {x:10,y:4,width:21,height:20});
+});
+
+test('explicit raster metadata cannot permit fractional browser shifts, clipped overflow, unknown models or unexpected pixel spans', () => {
+  const bytes = frameBytes(40, 40, p => rect(p, 0, 0, 40, 40));
+  const layout = {x:10,y:20,width:40,height:40};
+  const consumer = {layout,capture:enclosingFrame(layout),deviceScaleFactor:1,pngSha256:imageSha256(bytes)};
+  const frame: FigmaFrame = {layout:{...layout,x:100.5},render:{...layout,x:100.5},pngSha256:imageSha256(bytes),raster:{kind:'figma-rest-full-bounds-v1',scale:1}};
+  const shifted = {...consumer, layout:{...layout,x:10.25}}; shifted.capture = enclosingFrame(shifted.layout);
+  const wider = frameBytes(41,40,p=>rect(p,0,0,40,40)); shifted.pngSha256 = imageSha256(wider);
+  assert.deepEqual(alignRecordedFrames(wider,bytes,shifted,frame,0),{refused:'fractional-layout-translation'});
+  assert.deepEqual(alignRecordedFrames(bytes,bytes,consumer,{...frame,render:{...frame.render,x:99.5,width:42}},0),{refused:'render-outside-layout-capture-unqualified'});
+  assert.deepEqual(alignRecordedFrames(bytes,bytes,consumer,{...frame,raster:{kind:'unknown',scale:1}} as unknown as FigmaFrame,0),{refused:'figma-raster-model-unsupported'});
+  const big = frameBytes(80,80,()=>{});
+  assert.deepEqual(alignRecordedFrames(bytes,big,consumer,{...frame,pngSha256:imageSha256(big)},0),{refused:'figma-image-span-mismatch'});
 });

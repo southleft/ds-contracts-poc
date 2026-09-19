@@ -5913,3 +5913,37 @@ The older seven passing historical comparisons remain in their receipt.
 Reversal: remove the exact-equivalence adjudication, restoring the unconditional
 change assertion and its known false positives. Preserve original receipts,
 source PNGs and all failing visual comparisons.
+
+
+## D.59 Explicit full-bounds REST exports carry a local raster origin
+
+**AGENT measurement decision (2026-09-19).** New consumer comparisons request
+scale-one PNGs with contents_only=true and use_absolute_bounds=true. The
+[Figma endpoint documentation](https://developers.figma.com/docs/rest-api/file-endpoints/)
+defines the latter as retaining the node's full dimensions, including empty
+space. The receipt records those settings and a versioned raster model. Its
+native layout origin is (0,0), with PNG dimensions ceil(width) by ceil(height).
+This is an explicit producer contract, never inferred from a convenient image
+size. Earlier receipts without the model retain their original interpretation.
+
+The Scratch control in D.56 was repeated through REST: all eight PNGs across
+four canvas phases and two bounds settings were byte-identical within that
+route, with unchanged before/after node snapshots. REST and plugin pixels
+differ, so their bytes remain separate evidence. Both routes demonstrated
+phase invariance for the controlled frame; neither result licenses resampling.
+
+Adversarial controls preserve a real one-pixel content shift despite empty
+layout space and reject fractional browser origins, unexpected pixel spans,
+unknown raster models and native render bounds extending outside the captured
+layout. The common nonzero-alpha crop and both unmasked 5% comparisons stay
+unchanged. No image search, translation selected by score, or threshold change
+is introduced.
+
+Fresh app-archive consumers retain Altitude Badge 10/10, CBDS Badge 66/72 and
+Checkbox Group 12/12. Standalone Checkbox now measures all 26 cases without a
+framing refusal; 7/26 pass both backgrounds. Its glyph and rendering failures
+remain visible. Every archive hash matches the earlier app delivery.
+
+Reversal: remove the explicit export request and raster model together, keeping
+the old absolute-span refusals. Preserve both sets of receipts and their source
+images; do not reinterpret historical PNGs as explicit full-bounds exports.

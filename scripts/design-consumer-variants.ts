@@ -47,6 +47,7 @@ export function sourceEquivalentTransitions(
     const af = frames[from.nodeId],
       bf = frames[to.nodeId];
     if (!a || !b || !af || !bf || !a.equals(b)) continue;
+    if (!isDeepStrictEqual(af.raster, bf.raster)) continue;
     const hash = imageSha256(a);
     if (hash !== af.pngSha256 || hash !== bf.pngSha256) continue;
     const geometry = (f: FigmaFrame) => {

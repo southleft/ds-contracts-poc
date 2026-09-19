@@ -21,7 +21,14 @@ export interface FigmaFrame {
   layout: FrameBox;
   render: FrameBox;
   pngSha256: string;
+  /** Only attached by a producer that explicitly requested full node bounds.
+   * Earlier receipts retain their original absolute-span interpretation. */
+  raster?: { kind: "figma-rest-full-bounds-v1"; scale: 1 };
 }
+export const FIGMA_REST_FULL_BOUNDS = {
+  kind: "figma-rest-full-bounds-v1",
+  scale: 1,
+} as const;
 export interface FramePlacement {
   consumer: { x: number; y: number };
   figma: { x: number; y: number };
@@ -96,8 +103,21 @@ export function alignRecordedFrames(
     return { refused: "image-frame-hash-mismatch" };
   const ours = PNG.sync.read(consumerBytes),
     theirs = PNG.sync.read(figmaBytes);
+  if (
+    figma.raster &&
+    (figma.raster.kind !== FIGMA_REST_FULL_BOUNDS.kind ||
+      figma.raster.scale !== 1)
+  )
+    return { refused: "figma-raster-model-unsupported" };
   const capture = enclosingFrame(consumer.layout),
-    exported = enclosingFrame(figma.render);
+    exported = figma.raster
+      ? {
+          x: 0,
+          y: 0,
+          width: Math.ceil(figma.layout.width),
+          height: Math.ceil(figma.layout.height),
+        }
+      : enclosingFrame(figma.render);
   if (!sameBox(consumer.capture, capture))
     return { refused: "consumer-capture-span-mismatch" };
   if (ours.width !== capture.width || ours.height !== capture.height)
@@ -117,7 +137,9 @@ export function alignRecordedFrames(
     x: consumer.layout.x - capture.x,
     y: consumer.layout.y - capture.y,
   };
-  const fa = { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y };
+  const fa = figma.raster
+    ? { x: 0, y: 0 }
+    : { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };
@@ -176,6 +198,7 @@ export function figmaFramesFromSnapshots(
   before: any,
   after: any,
   images: Record<string, Buffer>,
+  raster?: FigmaFrame["raster"],
 ): { frames: Record<string, FigmaFrame>; refused?: string } {
   if (
     typeof before?.version !== "string" ||
@@ -215,6 +238,7 @@ export function figmaFramesFromSnapshots(
       layout: a.absoluteBoundingBox,
       render: a.absoluteRenderBounds,
       pngSha256: imageSha256(bytes),
+      ...(raster ? { raster: { ...raster } } : {}),
     };
   }
   return { frames };
