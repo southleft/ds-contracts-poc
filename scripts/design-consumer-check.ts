@@ -65,6 +65,20 @@ const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a f
  *  text itself). `beyond-text` = something outside the glyphs is wrong too.
  *  `text-covers-canvas` = the mask left nothing to measure; no claim is made. */
 export type ResidualClass = 'text-only' | 'beyond-text' | 'text-covers-canvas' | 'no-text';
+/** Rewrite the operator's work directory to `.` in a proposer report — WHOLE path
+ *  occurrences only: each spelling (the absolute directory, and its relative form,
+ *  longest first — the absolute directory is itself a substring of the relative one)
+ *  is replaced only where a path STARTS (line start, whitespace, a bracket, a quote,
+ *  a list comma or `=`) and only when `/` follows. A bare substring ("out" inside
+ *  "layout") is never touched. */
+export function rewriteWorkPaths(text: string, absoluteDir: string, relativeDir: string): string {
+  const escape = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const spelling of [relativeDir, absoluteDir].filter((x) => x && x !== '.').sort((a, b) => b.length - a.length)) {
+    text = text.replace(new RegExp(`(^|[\\s(\\[\`'",=])${escape(spelling)}/`, 'gm'), '$1./');
+  }
+  return text;
+}
+
 export function residualClass(maskedPct: number | null, maskCoveragePct: number): ResidualClass {
   if (maskedPct === null) return 'text-covers-canvas';
   if (!(maskCoveragePct > 0)) return 'no-text';
@@ -421,9 +435,7 @@ async function main() {
   const report = path.join(path.dirname(args.contract), 'figma-proposals.md');
   if (existsSync(report)) {
     const dir = path.resolve(path.dirname(args.contract));
-    const spellings = [...new Set([dir, path.relative(process.cwd(), dir), path.relative(process.cwd(), dir).replace(/^(\.\.\/)+/, '/')])].filter(Boolean).sort((a, b) => b.length - a.length);
-    let text = readFileSync(report, 'utf8');
-    for (const s of spellings) text = text.split(s).join('.');
+    const text = rewriteWorkPaths(readFileSync(report, 'utf8'), dir, path.relative(process.cwd(), dir));
     writeFileSync(path.join(inputs, 'figma-proposals.md'), text);
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));

@@ -1,15 +1,14 @@
-// THE INFERRED <button> NEVER HOLDS INTERACTIVE CONTENT (docs/23 §D.44, as
-// revised by its adversarial review). HTML forbids interactive content inside
-// <button> and <a>. A child counts as interactive content only on a FACT (a
-// declared element/role, an authored nested interactive part / role /
-// tabindex, a text-drawing set whose button/a comes from its own name, a stub
-// whose name ends in "button"), never on a structural or icon-name GUESS.
-// Only a STRUCTURAL parent is demoted; inside a NAME-matched parent a child's
-// interactive guess is withheld instead. The pass runs over the whole batch,
-// so the result does not depend on dump order.
+// THE INFERRED <button> NEVER HOLDS INTERACTIVE CONTENT (docs/23 §D.44, final
+// form after two adversarial reviews). A snapshot of every set's ORIGINAL element
+// is taken first; a name-matched or declared element is never changed; a
+// STRUCTURAL (state-axis) `button` guess is withheld when its drawing contains any
+// interactive content by the snapshot (guesses included); a kept button / a that
+// still nests interactive content is NAMED. Every expectation runs in both dump
+// orders.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { interactiveContentOf, interactiveFactOf, nameWords, proposeBatchFromDump } from '../../core/propose-figma.js';
+import { interactiveContentOf, nameWords, proposeBatchFromDump } from '../../core/propose-figma.js';
+import { readFileSync } from 'node:fs';
 import { tokenCorpusFromJson } from '../../core/token-corpus.js';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
@@ -45,110 +44,132 @@ const bySet = (r: ReturnType<typeof propose>, name: string) => {
   return p!;
 };
 const elementOf = (p: { contract: unknown }) => (p.contract as { semantics: { element: string } }).semantics.element;
-const withheld = (p: { notes: string[] }) => p.notes.find((n) => / withheld — /.test(n));
-
-/** The Tabs shape: a named, text-drawing Button, and a structural panel that holds it. */
+const semNotes = (p: { notes: string[] }) => p.notes.filter((n) => n.startsWith('semantics:'));
+const withheld = (p: { notes: string[] }) => p.notes.find((n) => n.startsWith('semantics: structural "button" withheld'));
+const nested = (p: { notes: string[] }) => p.notes.find((n) => n.startsWith('semantics: nested interactive content left in place'));
+/** Propose in the given order AND reversed; assert both give identical semantics + semantics notes; return the first. */
+const both = (dump: Record<string, unknown>) => {
+  const fwd = propose(dump);
+  const rev = propose(Object.fromEntries(Object.entries(dump).reverse()));
+  for (const p of fwd.proposals) {
+    const q = bySet(rev, p.setName);
+    assert.deepEqual((q.contract as { semantics: unknown }).semantics, (p.contract as { semantics: unknown }).semantics, `${p.setName}: semantics in reversed order`);
+    assert.deepEqual(semNotes(q), semNotes(p), `${p.setName}: semantics notes in reversed order`);
+  }
+  return fwd;
+};
 const Button = set('Button', 'Size', ['Sm', 'Md'], () => [text('Go')]);
-const Panel = set('Tab Panel', 'State', ['Default', 'Focus'], () => [text('Body'), instance('Button')]);
 
-test('Tabs: a STRUCTURAL button holding a named, text-drawing Button is demoted to a div, by name — in either dump order', () => {
-  for (const dump of [{ Button, 'Tab Panel': Panel }, { 'Tab Panel': Panel, Button }]) {
-    const r = propose(dump);
-    assert.equal(elementOf(bySet(r, 'Button')), 'button');
-    const panel = bySet(r, 'Tab Panel');
-    assert.equal(elementOf(panel), 'div', Object.keys(dump).join(' → '));
-    const note = withheld(panel)!;
-    assert.match(note, /^semantics: structural "button" withheld — the set contains interactive content \(an instance of "ds\.button" — its element "button" comes from its own name "Button" and it draws text\)/);
-    assert.match(note, /no keyboard access, no focus and no :disabled behaviour/);
-    assert.ok(!panel.notes.some((n) => n.includes('inferred STRUCTURALLY')), 'the structural note is replaced, not duplicated');
-  }
+test('Tab Panel(State) > Button → Tab Panel div, with the withhold note (keyboard / focus / :disabled)', () => {
+  const r = both({ Button, 'Tab Panel': set('Tab Panel', 'State', ['Default', 'Focus'], () => [text('Body'), instance('Button')]) });
+  assert.equal(elementOf(bySet(r, 'Button')), 'button');
+  const panel = bySet(r, 'Tab Panel');
+  assert.equal(elementOf(panel), 'div');
+  assert.match(withheld(panel)!, /^semantics: structural "button" withheld — the set draws interactive content \("Button": <button>\); HTML forbids interactive content inside <button>, so the set is proposed as the default container "div" — a div provides no keyboard access, no focus and no :disabled behaviour of its own/);
+  assert.ok(!panel.notes.some((n) => n.includes('inferred STRUCTURALLY')), 'the structural note is replaced, not duplicated');
 });
 
-test('H1: a named Button holding an Icon with a State axis STAYS a button; the Icon\'s structural guess is withheld instead', () => {
-  for (const states of [['Default', 'Disabled'], ['Default', 'Hover']]) {
-    const r = propose({ Icon: set('Icon', 'State', states, () => []), Button: set('Button', 'Size', ['Sm', 'Md'], () => [instance('Icon'), text('Go')]) });
-    assert.equal(elementOf(bySet(r, 'Button')), 'button');
-    const icon = bySet(r, 'Icon');
-    assert.equal(elementOf(icon), 'div');
-    assert.match(withheld(icon)!, /^semantics: structural "button" withheld — the set is drawn inside "Button", whose "button" comes from its own name; a thing drawn inside a button is not itself a control/);
-  }
+test('T1: Tab Panel(State) > Button > Label instance → Tab Panel div', () => {
+  const r = both({ Label: set('Label', 'Tone', ['A', 'B'], () => [text('Go')]), Button: set('Button', 'Size', ['Sm', 'Md'], () => [instance('Label')]), 'Tab Panel': set('Tab Panel', 'State', ['Default', 'Focus'], () => [text('Body'), instance('Button')]) });
+  assert.equal(elementOf(bySet(r, 'Tab Panel')), 'div');
+  assert.equal(elementOf(bySet(r, 'Button')), 'button');
 });
 
-test('H1: icon children named like controls never demote a named Button; their own guess is withheld', () => {
-  for (const [iconName, guess] of [['Link', 'a'], ['external-link', 'a'], ['Dropdown Arrow', 'select'], ['Select Arrow', 'select'], ['Toggle Thumb', 'input'], ['Checkbox Icon', 'input']] as const) {
-    const r = propose({ [iconName]: set(iconName, 'Tone', ['A', 'B'], () => []), 'Dropdown Button': set('Dropdown Button', 'Size', ['Sm', 'Md'], () => [text('Go'), instance(iconName)]) });
-    assert.equal(elementOf(bySet(r, 'Dropdown Button')), 'button', iconName);
-    const icon = bySet(r, iconName);
-    assert.equal(elementOf(icon), 'div', iconName);
-    assert.match(withheld(icon)!, new RegExp(`^semantics: name-matched \\(set "${iconName}"\\) "${guess}" withheld`));
-  }
+test('Button > Icon(State=Disabled) → Button stays button, Icon unchanged (its own guess), the nesting named', () => {
+  const r = both({ Icon: set('Icon', 'State', ['Default', 'Disabled'], () => []), Button: set('Button', 'Size', ['Sm', 'Md'], () => [instance('Icon'), text('Go')]) });
+  assert.equal(elementOf(bySet(r, 'Button')), 'button');
+  assert.equal(elementOf(bySet(r, 'Icon')), 'button');
+  assert.equal(withheld(bySet(r, 'Icon')), undefined, 'the Icon draws no interactive content, so its guess stands');
+  assert.match(nested(bySet(r, 'Button'))!, /"Button" is a <button> and draws "Icon" \(<button>\); HTML forbids this; author one of them/);
 });
 
-test('H1: a structural Card holding a structural Text Label is unchanged from before §D.44 (a guess is never evidence)', () => {
-  const r = propose({ 'Text Label': set('Text Label', 'State', ['Default', 'Disabled'], () => [text('x')]), Card: set('Card', 'State', ['Default', 'Hover'], () => [instance('Text Label')]) });
-  assert.equal(elementOf(bySet(r, 'Card')), 'button');
+test('Dropdown Button > Dropdown Arrow → both unchanged (name-matched), the nesting named', () => {
+  const r = both({ 'Dropdown Arrow': set('Dropdown Arrow', 'Tone', ['A', 'B'], () => []), 'Dropdown Button': set('Dropdown Button', 'Size', ['Sm', 'Md'], () => [text('Go'), instance('Dropdown Arrow')]) });
+  assert.equal(elementOf(bySet(r, 'Dropdown Button')), 'button');
+  assert.equal(elementOf(bySet(r, 'Dropdown Arrow')), 'select');
+  assert.match(nested(bySet(r, 'Dropdown Button'))!, /draws "Dropdown Arrow" \(<select>\)/);
+});
+
+test('Split Button > Icon Button and Toolbar > Icon Button → Icon Button button; Split Button button + nesting note; Toolbar unchanged', () => {
+  const r = both({
+    'Icon Button': set('Icon Button', 'Size', ['Sm', 'Md'], () => []),
+    'Split Button': set('Split Button', 'Size', ['Sm', 'Md'], () => [text('Save'), instance('Icon Button')]),
+    Toolbar: set('Toolbar', 'Size', ['Sm', 'Md'], () => [instance('Icon Button'), instance('Icon Button')]),
+  });
+  assert.equal(elementOf(bySet(r, 'Icon Button')), 'button');
+  assert.equal(nested(bySet(r, 'Icon Button')), undefined);
+  assert.equal(elementOf(bySet(r, 'Split Button')), 'button');
+  assert.match(nested(bySet(r, 'Split Button'))!, /"Split Button" is a <button> and draws "Icon Button" \(<button>\)/);
+  assert.equal(elementOf(bySet(r, 'Toolbar')), 'div');
+  assert.deepEqual(semNotes(bySet(r, 'Toolbar')).filter((n) => /withheld|nested/.test(n)), []);
+});
+
+test('Tab Item(State) > Close Button (icon-only) → Tab Item div; List Row(State) > Checkbox → Row div', () => {
+  const tab = both({ 'Close Button': set('Close Button', 'Size', ['Sm', 'Md'], () => []), 'Tab Item': set('Tab Item', 'State', ['Default', 'Hover'], () => [text('T'), instance('Close Button')]) });
+  assert.equal(elementOf(bySet(tab, 'Tab Item')), 'div');
+  assert.equal(elementOf(bySet(tab, 'Close Button')), 'button');
+  const row = both({ Checkbox: set('Checkbox', 'Tone', ['A', 'B'], () => []), 'List Row': set('List Row', 'State', ['Default', 'Hover'], () => [instance('Checkbox'), text('Row')]) });
+  assert.equal(elementOf(bySet(row, 'List Row')), 'div');
+  assert.match(withheld(bySet(row, 'List Row'))!, /\("Checkbox": <input>\)/);
+});
+
+test('Card(State) > Text Label(State) → Card div (a guess withheld because of a guess, noted); Text Label unchanged', () => {
+  const r = both({ 'Text Label': set('Text Label', 'State', ['Default', 'Disabled'], () => [text('x')]), Card: set('Card', 'State', ['Default', 'Hover'], () => [instance('Text Label')]) });
+  assert.equal(elementOf(bySet(r, 'Card')), 'div');
+  assert.match(withheld(bySet(r, 'Card'))!, /\("Text Label": <button>\)/);
   assert.equal(elementOf(bySet(r, 'Text Label')), 'button');
-  for (const name of ['Card', 'Text Label']) assert.equal(withheld(bySet(r, name)), undefined);
+  assert.equal(withheld(bySet(r, 'Text Label')), undefined);
 });
 
-test('a named button holding a named, text-drawing button leaves both in place and NAMES the nesting on the parent', () => {
-  const r = propose({ 'Radio button': set('Radio button', 'Size', ['Sm', 'Md'], () => [text('Option')]), 'Radio button-icon': set('Radio button-icon', 'Size', ['Sm', 'Md'], () => [instance('Radio button')]) });
-  assert.equal(elementOf(bySet(r, 'Radio button')), 'button');
-  const parent = bySet(r, 'Radio button-icon');
-  assert.equal(elementOf(parent), 'button');
-  assert.ok(parent.notes.some((n) => n.startsWith('semantics: nested interactive content LEFT IN PLACE — "Radio button-icon"')));
-});
-
-test('M1: the result does not depend on dump order — two named Buttons over an unproposed "Link" come out the same', () => {
-  const r = propose({
-    'Primary Button': set('Primary Button', 'Size', ['Sm', 'Md'], () => [instance('Link')]),
-    'Secondary Button': set('Secondary Button', 'Size', ['Sm', 'Md'], () => [instance('Link')]),
+test('Alpha Button ↔ Beta Button cycle → both button, a nesting note on both, identical in either order', () => {
+  const r = both({
+    'Alpha Button': set('Alpha Button', 'Size', ['Sm', 'Md'], () => [instance('Beta Button')]),
+    'Beta Button': set('Beta Button', 'Size', ['Sm', 'Md'], (v) => (v === 'Sm' ? [instance('Alpha Button')] : [])),
   });
   assert.deepEqual(r.proposals.map(elementOf), ['button', 'button']);
+  assert.match(nested(bySet(r, 'Alpha Button'))!, /draws "Beta Button"/);
+  assert.match(nested(bySet(r, 'Beta Button'))!, /draws "Alpha Button"/);
 });
 
-test('M2: stubs named IconButton / CloseButton are evidence (PascalCase split); a stub named Link is not', () => {
-  for (const [child, demoted] of [['IconButton', true], ['CloseButton', true], ['close_btn', true], ['Link', false], ['external-link', false]] as const) {
+test('the real CBDS dump in file order and reversed: identical semantics and semantics notes on every set; Radio button ↔ Radio button-icon both kept and both named', () => {
+  const dump = JSON.parse(readFileSync('extract/figma/fixtures/cbds-plugin-all-sets.dump.json', 'utf8')) as Record<string, unknown>;
+  const r = both(dump);
+  for (const [name, other] of [['Radio button', 'Radio button-icon'], ['Radio button-icon', 'Radio button']]) {
+    const p = bySet(r, name);
+    assert.equal(elementOf(p), 'button', name);
+    assert.equal(nested(p), `semantics: nested interactive content left in place — "${name}" is a <button> and draws "${other}" (<button>); HTML forbids this; author one of them`);
+  }
+});
+
+test('stubs are read by their name with camel / Pascal case split; own and nested parts, attrs and summary count', () => {
+  for (const [child, demoted] of [['IconButton', true], ['CloseButton', true], ['close_btn', true], ['Link', true], ['Chevron', false]] as const) {
     const r = propose({ Panel: set('Panel', 'State', ['Default', 'Hover'], () => [instance(child)]) });
     assert.equal(elementOf(bySet(r, 'Panel')), demoted ? 'div' : 'button', child);
   }
   assert.deepEqual(nameWords('IconButton'), ['icon', 'button']);
   assert.deepEqual(nameWords('HTMLButton v2'), ['html', 'button', 'v2']);
-});
-
-test('interactiveContentOf / interactiveFactOf: declared facts, nested parts, attrs, summary, own parts, transitivity, cycles', () => {
   const root = (ids: string[]) => ({ parts: Object.fromEntries(ids.map((id, i) => [`p${i}`, { component: { id } }])) });
   const byId = new Map<string, unknown>([
-    ['x.link', { id: 'x.link', name: 'Anchor', semantics: { element: 'a' }, props: [] }],
-    ['x.tab', { id: 'x.tab', name: 'Tab', semantics: { element: 'div', role: 'tab' }, props: [] }],
-    ['x.row', { id: 'x.row', name: 'Row', semantics: { element: 'div' }, states: ['hover'], props: [] }],
-    ['x.chip', { id: 'x.chip', name: 'Chip', semantics: { element: 'div' }, props: [], anatomy: { root: { parts: { close: { element: 'button' } } } } }],
-    ['x.tabbable', { id: 'x.tabbable', name: 'Card', semantics: { element: 'div' }, props: [], anatomy: { root: { attrs: { tabindex: '0' } } } }],
-    ['x.attrrole', { id: 'x.attrrole', name: 'Thing', semantics: { element: 'div' }, props: [], anatomy: { root: { attrs: { role: 'button' } } } }],
-    ['x.summary', { id: 'x.summary', name: 'S', semantics: { element: 'div' }, props: [], anatomy: { root: { parts: { s: { element: 'summary' } } } } }],
-    ['x.plain', { id: 'x.plain', name: 'Plain', semantics: { element: 'div' }, props: [] }],
-    ['x.wrap', { id: 'x.wrap', name: 'Wrap', semantics: { element: 'div' }, props: [], anatomy: { root: root(['x.plain', 'x.link']) } }],
-    ['x.loop', { id: 'x.loop', name: 'Loop', semantics: { element: 'div' }, props: [], anatomy: { root: root(['x.loop']) } }],
-    ['x.slotted', { id: 'x.slotted', name: 'Slotted', semantics: { element: 'div' }, props: [], anatomy: { root: { parts: { s: { slot: { name: 's', defaultContent: [{ id: 'x.tab' }] } } } } } }],
+    ['x.link', { id: 'x.link', name: 'Anchor', semantics: { element: 'a' } }],
+    ['x.tab', { id: 'x.tab', name: 'Tab', semantics: { element: 'div', role: 'tab' } }],
+    ['x.chip', { id: 'x.chip', name: 'Chip', semantics: { element: 'div' }, anatomy: { root: { parts: { close: { element: 'button' } } } } }],
+    ['x.tabbable', { id: 'x.tabbable', name: 'Card', semantics: { element: 'div' }, anatomy: { root: { attrs: { tabindex: '0' } } } }],
+    ['x.summary', { id: 'x.summary', name: 'S', semantics: { element: 'summary' } }],
+    ['x.plain', { id: 'x.plain', name: 'Plain', semantics: { element: 'div' } }],
+    ['x.wrap', { id: 'x.wrap', name: 'Wrap', semantics: { element: 'div' }, anatomy: { root: root(['x.plain', 'x.link']) } }],
+    ['x.loop', { id: 'x.loop', name: 'Loop', semantics: { element: 'div' }, anatomy: { root: root(['x.loop']) } }],
+    ['x.slotted', { id: 'x.slotted', name: 'Slotted', semantics: { element: 'div' }, anatomy: { root: { parts: { s: { slot: { name: 's', defaultContent: [{ id: 'x.tab' }] } } } } } }],
   ]);
-  // Contracts the proposer did not propose are DECLARED facts.
   const of = (ids: string[]) => interactiveContentOf(root(ids), byId);
-  assert.match(of(['x.link'])!, /"x\.link" — its declared element is "a"/);
-  assert.match(of(['x.tab'])!, /its declared role is "tab"/);
-  assert.equal(of(['x.row']), null, 'interaction states are the structural guess\'s own evidence, not a fact about a child');
-  assert.match(of(['x.chip'])!, /part "close" is a <button>/);
-  assert.match(of(['x.tabbable'])!, /part "root" carries tabindex/);
-  assert.match(of(['x.attrrole'])!, /part "root" carries role "button"/);
-  assert.match(of(['x.summary'])!, /part "s" is a <summary>/);
+  assert.deepEqual(of(['x.link']), { child: 'Anchor', what: '<a>' });
+  assert.deepEqual(of(['x.tab']), { child: 'Tab', what: 'role "tab"' });
+  assert.deepEqual(of(['x.chip']), { child: 'Chip', what: 'part "close" is a <button>' });
+  assert.deepEqual(of(['x.tabbable']), { child: 'Card', what: 'part "root" carries tabindex' });
+  assert.deepEqual(of(['x.summary']), { child: 'S', what: '<summary>' });
   assert.equal(of(['x.plain']), null);
-  assert.match(of(['x.wrap'])!, /an instance of "x\.wrap" → "x\.link"/);
+  assert.deepEqual(of(['x.wrap']), { child: 'Anchor', what: '<a>' }, 'transitive');
   assert.equal(of(['x.loop']), null, 'a cycle terminates');
-  assert.match(of(['x.slotted'])!, /"x\.slotted" → "x\.tab"/, 'slot defaultContent renders, so it counts');
-  assert.equal(of(['x.unknown']), null, 'a contract nobody holds is not assumed interactive');
-  assert.match(interactiveContentOf({ parts: { close: { element: 'button' } } }, byId)!, /^its own part "close" is a <button>/);
-  // Session-proposed guesses are not facts; a name match is a fact only when it draws text.
-  const named = { name: 'Link', semantics: { element: 'a' }, anatomy: { root: {} } };
-  assert.equal(interactiveFactOf(named, 'name', false), null);
-  assert.match(interactiveFactOf({ ...named, anatomy: { root: { parts: { l: { content: { prop: 'label' } } } } } }, 'name', false)!, /comes from its own name/);
-  assert.equal(interactiveFactOf({ name: 'Action', semantics: { element: 'button' }, anatomy: { root: { parts: { l: { text: 'Go' } } } } }, 'structural', false), null);
+  assert.deepEqual(of(['x.slotted']), { child: 'Tab', what: 'role "tab"' }, 'slot defaultContent renders');
+  assert.equal(of(['x.unknown']), null);
+  assert.deepEqual(interactiveContentOf({ parts: { close: { element: 'button' } } }, byId), { child: 'its own anatomy', what: 'part "close" is a <button>' });
 });

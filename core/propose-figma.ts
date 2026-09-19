@@ -39,7 +39,7 @@ import {
   type ExactVariantRow,
 } from './exact-projection.js';
 import { validateContract } from '../packages/core/src/validate.js';
-import { textBoxStaticRefusals, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
+import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
@@ -935,63 +935,43 @@ export function inferSemantics(setName: string, axes: Axis[], interactive: boole
 
 // ---------------------------------------------------------------------------
 // Interactive content — AGENT DECISION (2026-09-19, under the owner's
-// delegation; revised after the adversarial review of §D.44).
+// delegation; final form after two adversarial reviews of §D.44).
 //
 // HTML forbids interactive content inside <button> and <a>. Measured: Altitude
-// `Tab Panel` carries a State axis and no name signal, so the structural row
-// of the table made it a <button>; its variants hold an instance of
-// Altitude's `Button`, itself a <button> — the generated DOM was
-// <button><button>…. The review showed the first cut demoted genuine buttons
-// on a GUESS about their children (an Icon with a State axis, an icon named
-// "Link" or "Dropdown Arrow"), which removes keyboard access — worse than the
-// nesting it fixed. The rule, as settled:
+// `Tab Panel` carries a State axis and no name signal, so the STRUCTURAL row
+// of the table guessed <button>; its variants hold Altitude's `Button`, itself
+// a <button> — the generated DOM was <button><button>…. Two earlier cuts
+// weighed evidence case by case (which child is "really" interactive, which
+// side gives way) and each review found new edge cases. The rule is now the
+// conservative one:
 //
-//   EVIDENCE. A child counts as interactive content only on a FACT, never on
-//   a guess:
-//     · a DECLARED contract (the caller's scope, or a stamped set) whose root
-//       element / elementByProp / role is interactive;
-//     · any contract with a nested part (or root) whose `element` is
-//       interactive, whose `attrs.role` is a widget role, or which carries
-//       `attrs.tabindex` — these are authored facts, not inferences;
-//     · a set proposed in this dump whose element is `button` or `a` from ITS
-//       OWN NAME (whole words, camel/Pascal case split) AND which draws text —
-//       a text-less leaf named "Link" or "Chevron Dropdown" is an icon;
-//     · an auto-proposed STUB (its set was not in the dump) whose name's last
-//       word is `button` / `btn` (IconButton, CloseButton) — a stub has no
-//       anatomy, so its name is all there is, and only the strongest word
-//       counts ("link" names icons as often as links);
-//     · transitively, through any child that renders one.
-//   A structural (state-axis) guess NEVER counts; a name-table match to
-//   input/select/textarea/switch NEVER counts (Toggle Thumb, Select Arrow
-//   and Checkbox Icon are icons far more often than controls).
+//   1. SNAPSHOT FIRST. Every proposed set's ORIGINAL element and how it was
+//      decided (name-match / structural / declared) are read once, before any
+//      change. Every decision reads only that snapshot; changes are applied
+//      afterwards. So the result does not depend on the order the batch
+//      decides in (cycles included).
+//   2. A NAME-MATCHED OR DECLARED ELEMENT IS NEVER CHANGED, as parent or as
+//      child.
+//   3. A STRUCTURAL `button` guess is withheld (→ the default `div`) when its
+//      drawing contains ANY interactive content by the snapshot: a child
+//      instance, own part, nested part or stub whose element is button / a /
+//      input / select / textarea / summary / label, or which carries an ARIA
+//      widget role or tabindex — name-matched, declared and structural alike,
+//      transitively. It only ever removes a GUESS, the weakest claim.
+//   4. NEVER NEST SILENTLY. A `button` / `a` that is kept and still contains
+//      interactive content gets a note on its proposal saying so.
 //
-//   PARENT DEMOTED. Only a parent whose `button` is the STRUCTURAL guess is
-//   demoted to the default `div` when that evidence exists (Tab Panel). A
-//   parent whose element comes from its own name ("…Button…"), or from a
-//   stamp, is never demoted.
-//
-//   CHILD WITHHELD. Inside a parent whose `button`/`a` is its own NAME match,
-//   a child set proposed in this dump whose interactive element is itself a
-//   GUESS (structural, or a name match that is not evidence above) loses the
-//   guess and becomes the default `div`: a thing drawn inside a button is not
-//   itself a control. A child that IS evidence (a named, text-bearing button
-//   inside a named button — CBDS "Radio button" inside "Radio button-icon")
-//   is left in place and the nesting is NAMED on the parent, not resolved.
-//
-//   ORDER-FREE. The decision is a post-pass over the WHOLE batch
-//   (settleInteractiveContent), so it is a function of the dump, not of the
-//   order its sets arrive in.
-//
-// Free-text descriptions ("element: <div>") are never read. Every withhold is
-// a note that says what a div does NOT provide (keyboard access, focus,
-// :disabled). TO REVERSE: delete the settleInteractiveContent call in
-// proposeBatchFromDump.
+// A stub (an instance whose set is not in the batch) has only its name: its
+// element is the table's reading of the name with camel/Pascal case split
+// (IconButton → "Icon Button" → button). Free-text descriptions are never
+// read. TO REVERSE: delete the settleInteractiveContent call in
+// proposeBatchFromDump (the snapshot origin map is then unused).
 // ---------------------------------------------------------------------------
 
+/** HTML interactive content, cut to what a contract can spell. */
+const INTERACTIVE_CONTENT_ELEMENTS = new Set(['a', 'button', 'input', 'select', 'textarea', 'summary', 'label']);
 /** Elements whose content model forbids interactive-content descendants. */
 const NO_INTERACTIVE_DESCENDANTS = new Set(['button', 'a']);
-/** HTML interactive content, cut to what a contract can spell. */
-const INTERACTIVE_CONTENT_ELEMENTS = new Set(['a', 'button', 'input', 'select', 'textarea', 'label', 'details', 'summary']);
 /** ARIA widget roles — an element carrying one is interactive content. */
 const INTERACTIVE_ROLES = new Set([
   'button', 'checkbox', 'combobox', 'gridcell', 'link', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option',
@@ -1000,9 +980,9 @@ const INTERACTIVE_ROLES = new Set([
 /** What a withheld interactive element costs, said on every withhold note. */
 const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled behaviour of its own';
 
-/** How a proposed contract's semantics.element was decided. Keyed by the
- *  contract object the proposal returns; read only by the batch post-pass. */
-type SemanticsOrigin = 'stamp' | 'name' | 'structural' | 'reroot' | 'default';
+/** How proposeFromDumpFenced decided a contract's semantics.element. Written
+ *  once per proposal, never mutated; read by the batch post-pass. */
+type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
 const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
 
 /** "IconButton" / "close_button" / "Split Button A" → lower-case words. */
@@ -1031,14 +1011,14 @@ function renderedRefIds(part: unknown, out: string[] = []): string[] {
 }
 
 /** An authored interactive fact on a part tree itself (not through refs):
- *  a nested part's element, its attrs.role, its attrs.tabindex. `skipRoot`
+ *  a part's element, its attrs.role, its attrs.tabindex. `skipRootElement`
  *  leaves the root's own element to the caller. */
-export function interactivePartFact(root: unknown, skipRoot = false): string | null {
+export function interactivePartFact(root: unknown, skipRootElement = false): string | null {
   const visit = (part: unknown, name: string, isRoot: boolean): string | null => {
     if (!part || typeof part !== 'object') return null;
     const p = part as { element?: unknown; attrs?: Record<string, unknown>; parts?: Record<string, unknown> };
-    if (!(isRoot && skipRoot)) {
-      if (typeof p.element === 'string' && INTERACTIVE_CONTENT_ELEMENTS.has(p.element)) return `part "${name}" is a <${p.element}>`;
+    if (!(isRoot && skipRootElement) && typeof p.element === 'string' && INTERACTIVE_CONTENT_ELEMENTS.has(p.element)) {
+      return `part "${name}" is a <${p.element}>`;
     }
     const role = p.attrs?.role;
     if (typeof role === 'string' && INTERACTIVE_ROLES.has(role)) return `part "${name}" carries role "${role}"`;
@@ -1052,19 +1032,6 @@ export function interactivePartFact(root: unknown, skipRoot = false): string | n
   return visit(root, 'root', true);
 }
 
-/** Does a contract's anatomy draw text (a text-bound or literal-text part)? */
-function drawsText(anatomy: unknown): boolean {
-  let found = false;
-  const visit = (part: unknown): void => {
-    if (found || !part || typeof part !== 'object') return;
-    const p = part as { content?: unknown; text?: unknown; parts?: Record<string, unknown> };
-    if (p.content !== undefined || p.text !== undefined) found = true;
-    for (const child of Object.values(p.parts ?? {})) visit(child);
-  };
-  for (const root of Object.values((anatomy as Record<string, unknown> | undefined) ?? {})) visit(root);
-  return found;
-}
-
 interface ContractLike {
   id?: unknown;
   name?: unknown;
@@ -1072,140 +1039,117 @@ interface ContractLike {
   anatomy?: Record<string, unknown>;
 }
 
-/** Why a contract is interactive content, as a plain-words reason, or null.
- *  `origin` is how the proposer decided its element (undefined = a contract
- *  the proposer did not propose: a declared fact); `stub` marks an
- *  auto-proposed child stub. See the block comment above. */
-export function interactiveFactOf(c: ContractLike, origin: SemanticsOrigin | undefined, stub: boolean): string | null {
-  const sem = c.semantics ?? {};
-  const elements = [sem.element, ...Object.values(sem.elementByProp?.map ?? {})].filter((e): e is string => typeof e === 'string');
-  const part = Object.values(c.anatomy ?? {})
-    .map((r) => interactivePartFact(r, true))
-    .find((x) => x !== null);
-  if (part) return `its contract's ${part}`;
+/** The element(s) and role a contract is taken to render, by the snapshot:
+ *  a stub by its name (camel case split), anything else by its semantics. */
+function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]; role?: string } {
   if (stub) {
-    const words = nameWords(typeof c.name === 'string' ? c.name : '');
-    const last = words[words.length - 1];
-    return last === 'button' || last === 'btn' ? `it is a stub whose name "${String(c.name)}" ends in "${last}"` : null;
+    const read = inferSemantics(nameWords(typeof c.name === 'string' ? c.name : '').join(' '), [], false);
+    return { elements: read ? [read.element] : [], ...(read?.role ? { role: read.role } : {}) };
   }
-  if (origin === undefined || origin === 'stamp') {
-    const el = elements.find((e) => INTERACTIVE_CONTENT_ELEMENTS.has(e));
-    if (el) return `its declared element is "${el}"`;
-    if (typeof sem.role === 'string' && INTERACTIVE_ROLES.has(sem.role)) return `its declared role is "${sem.role}"`;
-    return null;
-  }
-  if (origin === 'name') {
-    const el = elements.find((e) => NO_INTERACTIVE_DESCENDANTS.has(e));
-    if (el && drawsText(c.anatomy)) return `its element "${el}" comes from its own name "${String(c.name)}" and it draws text`;
+  const sem = c.semantics ?? {};
+  return {
+    elements: [sem.element, ...Object.values(sem.elementByProp?.map ?? {})].filter((e): e is string => typeof e === 'string'),
+    ...(typeof sem.role === 'string' ? { role: sem.role } : {}),
+  };
+}
+
+/** Why one contract IS interactive content by itself, or null. */
+function interactiveSelf(c: ContractLike, semantics: { elements: string[]; role?: string }): string | null {
+  const el = semantics.elements.find((e) => INTERACTIVE_CONTENT_ELEMENTS.has(e));
+  if (el) return `<${el}>`;
+  if (semantics.role !== undefined && INTERACTIVE_ROLES.has(semantics.role)) return `role "${semantics.role}"`;
+  for (const root of Object.values(c.anatomy ?? {})) {
+    const fact = interactivePartFact(root, true);
+    if (fact) return fact;
   }
   return null;
 }
 
-/** The first interactive content a part tree renders (its own authored parts,
- *  then its refs, transitively), as a reason naming the chain, or null. */
+/** The first interactive content a part tree draws — its own parts, then its
+ *  refs, transitively — as `{ child, what }` naming the first hit, or null.
+ *  `semanticsOf` supplies each referenced contract's elements/role. */
 export function interactiveContentOf(
   root: unknown,
   contractsById: ReadonlyMap<string, unknown> | undefined,
-  originOf: (c: object) => SemanticsOrigin | undefined = (c) => semanticsOriginOf.get(c)?.origin,
-  isStub: (c: object) => boolean = () => false,
-): string | null {
+  semanticsOf: (c: ContractLike) => { elements: string[]; role?: string } = (c) => snapshotSemantics(c, false),
+  nameOf: (c: ContractLike, id: string) => string = (c, id) => (typeof c.name === 'string' ? c.name : id),
+): { child: string; what: string } | null {
   const own = interactivePartFact(root, true);
-  if (own) return `its own ${own}`;
+  if (own) return { child: 'its own anatomy', what: own };
   if (!contractsById) return null;
-  const visit = (ids: string[], chain: string[], seen: Set<string>): string | null => {
+  const seen = new Set<string>();
+  const visit = (ids: string[]): { child: string; what: string } | null => {
     for (const id of ids) {
       if (seen.has(id)) continue;
       seen.add(id);
       const c = contractsById.get(id) as ContractLike | undefined;
       if (!c) continue;
-      const path = [...chain, `"${id}"`];
-      const direct = interactiveFactOf(c, originOf(c), isStub(c));
-      if (direct) return `an instance of ${path.join(' → ')} — ${direct}`;
-      const nested = Object.values(c.anatomy ?? {}).flatMap((r) => renderedRefIds(r));
-      const deeper = visit(nested, path, seen);
+      const what = interactiveSelf(c, semanticsOf(c));
+      if (what) return { child: nameOf(c, id), what };
+      const deeper = visit(Object.values(c.anatomy ?? {}).flatMap((r) => renderedRefIds(r)));
       if (deeper) return deeper;
     }
     return null;
   };
-  return visit(renderedRefIds(root), [], new Set());
-}
-
-/** Rewrite a proposal's semantics to the default container, replacing the
- *  inference note it carried (or prepending when none is found). */
-function withholdSemantics(proposal: { contract: unknown; notes: string[] }, note: string): void {
-  const contract = proposal.contract as { semantics: Record<string, unknown> };
-  const prior = semanticsOriginOf.get(contract);
-  contract.semantics = { element: 'div' };
-  const at = prior?.note ? proposal.notes.indexOf(prior.note) : -1;
-  if (at >= 0) proposal.notes[at] = note;
-  else proposal.notes.unshift(note);
-  semanticsOriginOf.set(contract, { origin: 'default', note });
+  return visit(renderedRefIds(root));
 }
 
 /** THE BATCH POST-PASS (see the block comment above). Mutates proposals in
- *  place; deterministic in the proposals' own order, and independent of it
- *  because every decision reads the final session map. */
+ *  place; every decision reads the snapshot taken first. */
 export function settleInteractiveContent(
   proposals: Array<{ setName: string; contract: unknown; notes: string[]; childStubs?: unknown[] }>,
   contractsById: ReadonlyMap<string, unknown>,
 ): void {
   const stubs = new WeakSet<object>();
   for (const p of proposals) for (const s of p.childStubs ?? []) if (s && typeof s === 'object') stubs.add(s);
-  const originOf = (c: object) => semanticsOriginOf.get(c)?.origin;
-  const isStub = (c: object) => stubs.has(c);
-  const sessionProposal = new Map<object, (typeof proposals)[number]>();
-  for (const p of proposals) sessionProposal.set(p.contract as object, p);
-  const elementOf = (c: unknown) => (c as ContractLike).semantics?.element;
-  // 1. A STRUCTURAL button with interactive content → the default container.
+  const displayName = new Map<object, string>();
+  for (const p of proposals) displayName.set(p.contract as object, p.setName);
+  // 1. SNAPSHOT — before any change.
+  const snapshot = new Map<object, { elements: string[]; role?: string }>();
+  const semanticsOf = (c: ContractLike): { elements: string[]; role?: string } => {
+    const key = c as object;
+    let s = snapshot.get(key);
+    if (!s) snapshot.set(key, (s = snapshotSemantics(c, stubs.has(key))));
+    return s;
+  };
+  for (const c of contractsById.values()) if (c && typeof c === 'object') semanticsOf(c as ContractLike);
+  for (const p of proposals) semanticsOf(p.contract as ContractLike);
+  const nameOf = (c: ContractLike, id: string) => displayName.get(c as object) ?? (typeof c.name === 'string' ? c.name : id);
+  const decisions: Array<{ proposal: (typeof proposals)[number]; kind: 'withhold'; hit: { child: string; what: string } }> = [];
+  // 3. Structural button guesses with interactive content, by the snapshot.
   for (const p of proposals) {
     const c = p.contract as ContractLike & object;
-    if (originOf(c) !== 'structural' || !NO_INTERACTIVE_DESCENDANTS.has(String(elementOf(c)))) continue;
-    const root = (c.anatomy ?? {}).root;
-    const why = interactiveContentOf(root, contractsById, originOf, isStub);
+    const origin = semanticsOriginOf.get(c)?.origin;
+    if (origin !== 'structural' || c.semantics?.element !== 'button') continue;
+    const hit = interactiveContentOf((c.anatomy ?? {}).root, contractsById, semanticsOf, nameOf);
     // @door propose.semantics-interactive-content-withheld
-    if (why === null) continue;
-    withholdSemantics(
-      p,
-      `semantics: structural "${String(elementOf(c))}" withheld — the set contains interactive content (${why}); HTML forbids interactive content inside <${String(elementOf(c))}>, so the set is proposed as the default container "div" — ${DIV_COSTS}; review (make the interactive child the control, or stamp the element)`,
-    );
+    if (hit === null) continue;
+    decisions.push({ proposal: p, kind: 'withhold', hit });
   }
-  // 2. Inside a NAME-matched button/a: a child's interactive GUESS is withheld;
-  //    a child that is evidence stays and the nesting is named on the parent.
+  // Apply.
+  const withheld = new WeakSet<object>();
+  for (const { proposal, hit } of decisions) {
+    const contract = proposal.contract as { semantics: Record<string, unknown> } & object;
+    const prior = semanticsOriginOf.get(contract);
+    contract.semantics = { element: 'div' };
+    withheld.add(contract);
+    const note = `semantics: structural "button" withheld — the set draws interactive content ("${hit.child}": ${hit.what}); HTML forbids interactive content inside <button>, so the set is proposed as the default container "div" — ${DIV_COSTS}; review (make the interactive child the control, or stamp the element)`;
+    const at = prior?.note ? proposal.notes.indexOf(prior.note) : -1;
+    if (at >= 0) proposal.notes[at] = note;
+    else proposal.notes.unshift(note);
+  }
+  // 4. Never nest silently — read the state AFTER step 3 (the snapshot minus
+  //    the withheld guesses), which is itself a function of the snapshot.
+  const afterOf = (c: ContractLike) => (withheld.has(c as object) ? { elements: ['div'] } : semanticsOf(c));
   for (const p of proposals) {
     const c = p.contract as ContractLike & object;
-    if (originOf(c) !== 'name' || !NO_INTERACTIVE_DESCENDANTS.has(String(elementOf(c)))) continue;
-    const seen = new Set<string>();
-    const nestedKept: string[] = [];
-    const walk = (ids: string[]): void => {
-      for (const id of ids) {
-        if (seen.has(id)) continue;
-        seen.add(id);
-        const child = contractsById.get(id) as (ContractLike & object) | undefined;
-        if (!child || child === c) continue;
-        const childProposal = sessionProposal.get(child);
-        const childOrigin = originOf(child);
-        const el = String(elementOf(child));
-        const guessed = childOrigin === 'structural' || childOrigin === 'name';
-        if (childProposal && guessed && INTERACTIVE_CONTENT_ELEMENTS.has(el)) {
-          const fact = interactiveFactOf(child, childOrigin, false);
-          if (fact === null) {
-            withholdSemantics(
-              childProposal,
-              `semantics: ${childOrigin === 'structural' ? 'structural' : `name-matched (set "${childProposal.setName}")`} "${el}" withheld — the set is drawn inside "${p.setName}", whose "${String(elementOf(c))}" comes from its own name; a thing drawn inside a button is not itself a control (HTML forbids interactive content inside <${String(elementOf(c))}>), so it is proposed as the default container "div" — ${DIV_COSTS}; review (stamp the element if it IS a control)`,
-            );
-          } else {
-            nestedKept.push(`"${id}" (${fact})`);
-          }
-        }
-        walk(Object.values(child.anatomy ?? {}).flatMap((r) => renderedRefIds(r)));
-      }
-    };
-    walk(renderedRefIds((c.anatomy ?? {}).root));
-    if (nestedKept.length > 0) {
-      p.notes.push(
-        `semantics: nested interactive content LEFT IN PLACE — "${p.setName}" is a <${String(elementOf(c))}> from its own name and renders ${nestedKept.join(', ')}; both are name facts, so neither is withheld, and the generated DOM nests interactive content (invalid HTML, an extra tab stop) — review`,
-      );
-    }
+    const el = String(c.semantics?.element);
+    if (withheld.has(c) || !NO_INTERACTIVE_DESCENDANTS.has(el)) continue;
+    const hit = interactiveContentOf((c.anatomy ?? {}).root, contractsById, afterOf, nameOf);
+    if (hit === null) continue;
+    p.notes.push(
+      `semantics: nested interactive content left in place — "${p.setName}" is a <${el}> and draws "${hit.child}" (${hit.what}); HTML forbids this; author one of them`,
+    );
   }
 }
 
@@ -1224,12 +1168,6 @@ export function settleInteractiveContent(
 // settleUaPadding calls (proposeFromDumpFenced, proposeBatchFromDump).
 // ---------------------------------------------------------------------------
 
-const UA_PADDING_BY_ELEMENT: Record<string, [string, string, string, string]> = {
-  button: ['1px', '6px', '1px', '6px'], input: ['1px', '2px', '1px', '2px'], textarea: ['2px', '2px', '2px', '2px'],
-  option: ['0', '2px', '1px', '2px'], fieldset: ['5.6px', '12px', '10px', '12px'], legend: ['0', '2px', '0', '2px'],
-  ul: ['0', '0', '0', '40px'], ol: ['0', '0', '0', '40px'], menu: ['0', '0', '0', '40px'], dialog: ['16px', '16px', '16px', '16px'],
-  td: ['1px', '1px', '1px', '1px'], th: ['1px', '1px', '1px', '1px'],
-};
 const PADDING_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 const PADDING_PROPERTY_SIDES: Record<string, ReadonlyArray<(typeof PADDING_SIDES)[number]>> = {
   padding: PADDING_SIDES,
@@ -1291,8 +1229,13 @@ export function settleUaPadding(proposal: { contract: unknown; notes: string[] }
   }
   for (const side of refused) {
     const values = [...new Set(drawn[PADDING_SIDES.indexOf(side as never)])].sort((a, b) => a - b);
+    // Say "refused" only when a refusal for that side is actually on record.
+    const field = `padding${side[0].toUpperCase()}${side.slice(1)}`;
+    const refusalNoted = proposal.notes.some(
+      (n) => !n.startsWith('ua-padding:') && (n.includes(field) || n.includes(`padding-${side}`)) && /not proposed|refus|not carried|dropped|NAMED/i.test(n),
+    );
     proposal.notes.push(
-      `ua-padding: padding-${side} is NOT declared although the canvas draws ${values.join(' / ')}px there (the value was refused above) — on a <${el}> root the user agent's default (${UA_PADDING_BY_ELEMENT[el][PADDING_SIDES.indexOf(side as never)]}) renders on that side in code, not the drawn value; review`,
+      `ua-padding: padding-${side} is not declared (${refusalNoted ? 'the value was refused above' : 'no value carried'}) although the canvas draws ${values.join(' / ')}px there — on a <${el}> root the user agent's default (${UA_PADDING_BY_ELEMENT[el][PADDING_SIDES.indexOf(side as never)]}) renders on that side in code, not the drawn value; review`,
     );
   }
   if (zeroed.length === 0 && refused.length > 0) uaPaddingAdded.set(contract as object, []);
@@ -13138,7 +13081,7 @@ function proposeFromDumpFenced(
   // How the element was decided — read by the batch's interactive-content
   // post-pass (settleInteractiveContent), never serialized.
   semanticsOriginOf.set(contract, {
-    origin: stampNote ? 'stamp' : inferred ? (inferred !== inferredRaw ? 'reroot' : inferred.structural ? 'structural' : 'name') : 'default',
+    origin: stampNote ? 'declared' : inferred ? (inferred !== inferredRaw ? 'reroot' : inferred.structural ? 'structural' : 'name') : 'default',
     note: stampNote ?? inferred?.note ?? null,
   });
   if (stampNote) {

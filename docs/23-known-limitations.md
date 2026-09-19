@@ -4958,7 +4958,7 @@ graph through `defaultContent` and `accepts`, and the nesting query in Chromium)
 import, byte-identical; the proposer partition is inert without
 `_provenance.closure`; the harness lookup and graph are additive.
 
-## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (revised after adversarial review); nested guesses under a structural parent, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
+## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (final form after two adversarial reviews); a named nesting, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
 
 **2026-09-19. Two AGENT decisions under the owner's standing delegation (never a
 grade, never a tolerance), each recorded with its reverse. The first cut was
@@ -4972,82 +4972,90 @@ hold an instance of Altitude's `Button`, itself a `<button>`. And its contract
 declares only `padding-top`, so the user agent's `button` padding (1 px 6 px)
 stayed on the other three sides: 441 + 6 + 6 = 453.
 
-### Rule A — an inferred `button` never holds interactive content (proposer)
+### Rule A — a state-axis `button` guess never holds interactive content (proposer)
 
 HTML forbids interactive content inside `<button>` and `<a>`.
 
-*What the review found in the first cut (H1, M1, M2, H3).* It demoted genuine
-buttons on a GUESS about their children — an `Icon` with a `State=Default|Disabled`
-axis (itself the structural `button` guess), icons named `Link`, `Dropdown
-Arrow`, `Toggle Thumb`, `Checkbox Icon`, `Select Arrow` (name-table matches), a
-`Card(State)` around a `Text Label(State)` — and losing `<button>` removes keyboard
-access, which is worse than the nesting it fixed. The result depended on dump order
-(M1). It missed a child's nested `button` part, `attrs.role` / `attrs.tabindex`,
-PascalCase stubs (`IconButton`), the set's own nested parts and `summary` (M2).
-And the withhold note reached no committed artifact (H3).
+*What two reviews found.* The first cut demoted genuine buttons on a guess about a
+child (an `Icon` with a `State` axis, icons named `Link` / `Dropdown Arrow`) and
+depended on dump order. The second cut weighed evidence case by case (which child
+is "really" interactive, which side gives way, a "draws text" test, an origin
+taxonomy) and each probe found another edge case, including a chain whose outcome
+changed with the order the post-pass decided in. **AGENT decision:** replace both
+with the conservative rule below. It only ever removes a GUESS.
 
-**Evidence — a FACT, never a guess.** A child counts as interactive content only when:
-- it is a contract the proposer did NOT propose (the caller's scope) or a stamped
-  set, and its root element / `elementByProp` value is interactive (`a`, `button`,
-  `input`, `select`, `textarea`, `label`, `details`, `summary`) or its role is an
-  ARIA widget role;
-- any of its parts — or the set's OWN parts — is an interactive element, carries a
-  widget `attrs.role`, or carries `attrs.tabindex` (authored facts);
-- it is a set proposed in the same dump whose `button`/`a` comes from ITS OWN NAME
-  (whole words; camel and Pascal case split first, so `IconButton` is `icon
-  button`) AND it draws text — a text-less leaf named `Link` is an icon;
-- it is an auto-proposed STUB (its set is not in the dump) whose name's LAST word is
-  `button` or `btn` (`IconButton`, `CloseButton`, `close_btn`) — a stub has no
-  anatomy, so its name is all there is, and only the strongest word counts (`link`
-  names icons as often as links; `external-link` is not evidence);
-- or it renders one of those, transitively (slot `defaultContent` included; cycles
-  terminate).
-A structural (state-axis) guess is NEVER evidence; a name-table match to
-`input` / `select` / `textarea` / `switch` is NEVER evidence.
+**Rule** (`settleInteractiveContent`, core/propose-figma.ts, a post-pass over the
+whole batch):
+1. *Snapshot first.* Every set's ORIGINAL element and how it was decided
+   (`name`-match / `structural` / `declared` by a stamp or the caller's scope) are
+   read once, before any change. Every decision reads only that snapshot; the
+   changes are applied afterwards. A stub (an instance whose set is not in the
+   batch) is read by its name with camel / Pascal case split first (`IconButton` →
+   `Icon Button` → `button`).
+2. *A name-matched or declared element is never changed*, as parent or as child
+   (`Icon Button`, `Close Button`, `Radio button-icon`, `Checkbox`, `Link`).
+3. *A STRUCTURAL `button` guess is withheld* (→ the default `div`) when its drawing
+   contains ANY interactive content by the snapshot: a child instance (slot
+   `defaultContent` included), own part, nested part or stub whose element is
+   `button` / `a` / `input` / `select` / `textarea` / `summary` / `label`, or which
+   carries an ARIA widget role or `tabindex` — name-matched, declared and
+   structural guesses alike, transitively. An icon-only `Close Button` inside a
+   `Tab Item(State)` makes the tab a `div`; a `Card(State)` around a `Text
+   Label(State)` becomes a `div` (a guess withheld because of a guess, noted).
+4. *Never nest silently.* A `button` / `a` that is kept and, after step 3, still
+   draws interactive content gets a note:
+   `semantics: nested interactive content left in place — "Radio button" is a <button> and draws "Radio button-icon" (<button>); HTML forbids this; author one of them`.
 
-**The decision — which side gives way.** I chose the narrower of the two options the
-review offered, and wrote it down here:
-1. *Parent demoted* only when the parent's `button` is the STRUCTURAL guess and the
-   evidence above exists → the default `div` (Altitude `Tab Panel`).
-2. *Parent never demoted* when its `button`/`a` comes from its own name or a stamp.
-   Inside such a parent, a child set proposed in the same dump whose interactive
-   element is itself a GUESS (structural, or a name match that is not evidence)
-   loses the guess and becomes the default `div`: a thing drawn inside a button is
-   not itself a control. A child that IS evidence (a named, text-drawing button
-   inside a named button) is left in place and the nesting is NAMED on the parent
-   (`semantics: nested interactive content LEFT IN PLACE — …`), not resolved.
-
-*Order-free.* The rule is a post-pass over the WHOLE batch
-(`settleInteractiveContent`, core/propose-figma.ts), reading the final session map,
-so a set's element is a function of the dump, not of the order its sets arrive in
-(tested both ways on the Tabs shape; the review's two identical Buttons over an
-unproposed `Link` now come out identical).
-
-*Persisted (H3).* Every withhold replaces the inference note and says what a div
-does NOT give: `semantics: structural "button" withheld — the set contains
-interactive content (an instance of "ds.button" — its element "button" comes from
-its own name "Button" and it draws text); HTML forbids interactive content inside
-<button>, so the set is proposed as the default container "div" — a div provides
-no keyboard access, no focus and no :disabled behaviour of its own; review …`.
-Neighbouring semantics notes (`inferred STRUCTURALLY`, the void re-root) live in the
-proposer's report, `figma-proposals.md`; the clean-consumer check now copies that
-report into `inputs/` beside the contracts (machine paths rewritten to `.`), so the
-reason is committed with the evidence.
-
-Free-text descriptions (`Accessibility - element: <div>`) are never read; a stamp
-is never overridden. Registered as door
+Every withhold replaces the inference note and says what a `div` does not give:
+`semantics: structural "button" withheld — the set draws interactive content
+("Button": <button>); HTML forbids interactive content inside <button>, so the set
+is proposed as the default container "div" — a div provides no keyboard access, no
+focus and no :disabled behaviour of its own; review …`. Both notes are proposal
+notes, so they reach `figma-proposals.md`; the clean-consumer check copies that
+report into `inputs/` (machine paths rewritten to `./`, whole occurrences only).
+Free-text descriptions are never read. Registered as door
 `propose.semantics-interactive-content-withheld`. **To reverse:** delete the
-`settleInteractiveContent` call in `proposeBatchFromDump`.
+`settleInteractiveContent` call in `proposeBatchFromDump`; nothing else reads the
+snapshot origin map.
 
-*Churn, measured* over every committed dump (964 dumps, 5,289 proposed sets, empty
-caller scope): **two** distinct sets change element.
-- Altitude `Tab Panel` → `div` (rule 1; the evidence dump).
-- CBDS `Radio button-icon` → `div` (rule 2): a text-less set whose `button` came
-  from its name, drawn inside CBDS `Radio button` (whose `button` is its own name).
-  Four committed dumps hold it (`cbds-plugin-all-sets` and its v14 / v16 twins, the
-  session-collision fixture). No committed contract, census row or generated tree is
-  built from it.
-Nothing is left in place by name (no named-inside-named nesting in the corpus).
+*Order.* The SEMANTICS decision is a function of the batch's final contracts, not of
+the order the post-pass visits them — tested for every expectation below in both
+dump orders, and on the real CBDS dump (1,618 sets) in file order and reversed:
+every set's `semantics` and every `semantics:` note is identical. The contract
+BYTES are not order-free, and were not before §D.44: the proposer links an
+instance only to a set proposed EARLIER in the batch (the closure orders
+dependencies first for exactly this reason), so 44 of those 1,618 CBDS contracts
+differ between the two orders in their component links. And where two sets
+sanitize to one id (CBDS `Radio button` and Phosphor `RadioButton`), swapping only
+those two keys changes which set an instance links to, and so which note it gets —
+the pre-existing id collision (§D.43), not this rule.
+
+*Expected outcomes, all tests (each in both orders):* `Tab Panel(State)` >
+Altitude `Button` → `div`; `Tab Panel(State)` > `Button` > `Label` instance →
+`div`; `Button` > `Icon(State=Disabled)` → `Button` a button, `Icon` unchanged,
+nesting named; `Dropdown Button` > `Dropdown Arrow` → both unchanged, nesting named;
+`Split Button` > `Icon Button` and `Toolbar` > `Icon Button` → `Icon Button` a
+button, `Split Button` a button with the note, `Toolbar` unchanged; `Tab
+Item(State)` > `Close Button` → `div`; `List Row(State)` > `Checkbox` → `div`;
+`Card(State)` > `Text Label(State)` → `Card` `div`, `Text Label` unchanged; the
+`Alpha Button` ↔ `Beta Button` cycle → both buttons, a note on both; CBDS `Radio
+button` ↔ `Radio button-icon` (the real dump's own cycle) → both buttons, a note on
+both.
+
+*Churn, measured* over every committed dump (the review's `churnB`: 378 dumps,
+5,285 proposed sets): two distinct sets change element — Altitude `Tab Panel`
+(1 dump) and Untitled UI `_Dropdown list item` (4 dumps: a structural `button`
+around UUI's `Checkbox`, an `<input>`). Six nestings are left in place, every one
+NAMED (CBDS `Radio button` > `Radio button-icon` in 4 dumps, the reverse edge in
+2), none silent (the pre-§D.44 engine left 2 silent). In the design-to-code census, figma-ds `Chip`
+(a structural `button` whose dismissible variants draw the kit's `Button/Icon
+default sm`) is now a `div`: its `d2c.json` contract and generated hashes move. Its
+committed code PNGs and `verdict.json` were rendered and graded before this change
+and are NOT re-rendered here (a re-render also moves Figma's canvas PNGs by bytes,
+and a re-grade is not this change's to take) — named. No committed contract or
+generated tree is built by re-proposing these: UUI's committed
+`dropdown-list-item.contract.json` was proposed before and stays a `button` holding
+the `Checkbox` until it is re-proposed — named here.
 
 ### Rule B — a padding side the canvas draws as 0 is carried as 0 (proposer)
 
@@ -5065,9 +5073,13 @@ variant draws 0 on a side the contract does not declare, the proposer writes
 (`ua-padding: padding-top / padding-bottom = 0px carried as literals — …`). A side
 the canvas draws NONZERO that the proposal left undeclared was refused upstream: it
 is NOT zeroed, and a note says the user agent's default renders there
-(`ua-padding: padding-left is NOT declared although the canvas draws 8 / 12px there
-(the value was refused above) — on a <button> root the user agent's default (6px)
-renders on that side in code, not the drawn value; review`). The emitters add
+(`ua-padding: padding-left is not declared (the value was refused above) although
+the canvas draws 8 / 12px there — on a <button> root the user agent's default (6px)
+renders on that side in code, not the drawn value; review`; it says `no value
+carried` instead unless a refusal note for that side is on record). The per-side
+values the note quotes come from ONE table, `UA_PADDING_BY_ELEMENT` in
+packages/core `anatomy.ts` (`UA_PADDING_ELEMENTS` is its key set), and the test
+re-measures every value in Chromium. The emitters add
 nothing; a hand-written `<button>` with partial padding keeps UA padding, exactly as
 CSS does. `settleUaPadding` runs at the end of every proposal and again after
 Rule A's pass, and takes its own zeros back when that pass withholds the element
@@ -5133,14 +5145,12 @@ rule. Tabs is still a pass by the scorer with named content gaps (§D.43 H1), no
 content pass.
 
 **Limits, named.**
-- *Nested guesses under a structural parent stay nested.* `Card(State)` around a
-  `Text Label(State)`, or a `Panel(State)` around an `Action(State)`, are two
-  guesses: neither is evidence, nothing moves, and the DOM nests `<button>` in
-  `<button>` exactly as before §D.44.
-- *Rule 2 changes a child by who draws it.* A child's element can depend on which
-  sets in the SAME dump draw it (CBDS `Radio button-icon` is a `button` alone and a
-  `div` beside `Radio button`). It is a function of the dump, not of its order, and
-  the single-set `proposeFromDump` entry (no batch) applies neither rule.
+- *A named or declared nesting is kept, not resolved* (step 4 names it): CBDS
+  `Radio button` ↔ `Radio button-icon`, a `Split Button` around an `Icon Button`.
+- *A void re-root reads as a container.* A `Text Input` whose `input` was re-rooted
+  to a `div` (children cannot mount in a void element) is a `div` in the snapshot,
+  so a structural parent around it keeps its `button`.
+- *The single-set `proposeFromDump` entry* (no batch) applies no Rule A.
 - *A set that IS the control and wraps a real control* now proposes a `div`; the
   reviewer re-roots it or stamps the element.
 - *The dead `:disabled` plane on a non-native root — the next gap, NOT fixed here.*
@@ -5155,13 +5165,11 @@ content pass.
   Chromium.
 
 **Gates:** `extract/figma/interactive-content.test.ts` and
-`extract/figma/ua-padding.test.ts` (`npm run exact-proposal:check`): the Tabs shape
-in both dump orders; a named Button over an `Icon(State=Default|Disabled)` and
-`(Default|Hover)` stays a button and the Icon's guess is withheld; a named `Dropdown
-Button` over icons named `Link`, `external-link`, `Dropdown Arrow`, `Select Arrow`,
-`Toggle Thumb`, `Checkbox Icon` stays a button; `Card(State)` + `Text Label(State)`
-unchanged; named-inside-named left in place and named; order independence; PascalCase
-stubs; declared, nested-part, attrs, `summary`, own-part, transitive and cyclic
-evidence; the element list re-measured in Chromium; drawn zeros carried and emitted;
-all four drawn and `div` roots untouched; a refused side named and idempotent;
-per-value and logical sides; Tab Panel's zeros taken back.
+`extract/figma/ua-padding.test.ts` (`npm run exact-proposal:check`): every Rule A
+expectation above in both dump orders; the real CBDS dump forward and reversed;
+camel-case stubs, own and nested parts, `attrs.role`, `tabindex`, `summary`, slot
+`defaultContent`, transitivity and a cycle; the UA padding element list AND its
+per-side values re-measured in Chromium; drawn zeros carried and emitted; four drawn
+sides and `div` roots untouched; a side with no value named as `no value carried`
+and one with a refusal on record as refused; per-value and logical sides; Tab
+Panel's zeros taken back.

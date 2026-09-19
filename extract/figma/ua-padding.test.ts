@@ -14,7 +14,7 @@ import { tokenCorpusFromJson } from '../../core/token-corpus.js';
 import { emitReact } from '../../core/emit-react.js';
 import { tokenInventoryFromJson } from '../../core/tokens.js';
 import { ContractSchema } from '../../scripts/contract-schema.js';
-import { UA_PADDING_ELEMENTS } from '../../packages/core/src/anatomy.js';
+import { UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../../packages/core/src/anatomy.js';
 import type { DumpSet } from './types.js';
 
 const corpus = tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} });
@@ -50,6 +50,17 @@ test('the element list is the Chromium measurement, not a recollection', async (
       return out;
     }, ['a', 'button', 'div', 'span', 'label', 'p', 'h2', 'li', 'section', 'select', 'input', 'textarea', 'fieldset', 'legend', 'ul', 'ol', 'menu', 'dialog', 'td', 'th', 'option']);
     assert.deepEqual(new Set(padded), UA_PADDING_ELEMENTS);
+    // …and the per-side values the notes quote are the measured ones (one table, anatomy.ts).
+    const measured = await page.evaluate((tags) => tags.map((tag) => {
+      const el = document.createElement(tag);
+      if (tag === 'td' || tag === 'th') document.body.appendChild(document.createElement('table')).insertRow().appendChild(el);
+      else if (tag === 'legend') document.body.appendChild(document.createElement('fieldset')).appendChild(el);
+      else if (tag === 'option') document.body.appendChild(document.createElement('select')).appendChild(el);
+      else { if (tag === 'dialog') el.setAttribute('open', ''); document.body.appendChild(el); }
+      const cs = getComputedStyle(el);
+      return ['top', 'right', 'bottom', 'left'].map((s) => cs.getPropertyValue(`padding-${s}`).replace(/^0px$/, '0'));
+    }), Object.keys(UA_PADDING_BY_ELEMENT));
+    assert.deepEqual(measured, Object.values(UA_PADDING_BY_ELEMENT));
   } finally {
     await browser.close();
   }
@@ -87,12 +98,17 @@ test('H2: a side the canvas DRAWS but the proposal left undeclared (refused) is 
   settleUaPadding(p, dumpSet);
   assert.equal((p.contract.anatomy.root as { literals?: unknown }).literals, undefined, 'nothing is zeroed');
   assert.deepEqual(p.notes, [
-    'ua-padding: padding-right is NOT declared although the canvas draws 8 / 12px there (the value was refused above) — on a <button> root the user agent\'s default (6px) renders on that side in code, not the drawn value; review',
-    'ua-padding: padding-left is NOT declared although the canvas draws 8 / 12px there (the value was refused above) — on a <button> root the user agent\'s default (6px) renders on that side in code, not the drawn value; review',
+    'ua-padding: padding-right is not declared (no value carried) although the canvas draws 8 / 12px there — on a <button> root the user agent\'s default (6px) renders on that side in code, not the drawn value; review',
+    'ua-padding: padding-left is not declared (no value carried) although the canvas draws 8 / 12px there — on a <button> root the user agent\'s default (6px) renders on that side in code, not the drawn value; review',
   ]);
   // Idempotent.
   settleUaPadding(p, dumpSet);
   assert.equal(p.notes.length, 2);
+  // "refused" only when a refusal for that side is on record.
+  const refusedP = { contract: { semantics: { element: 'button' }, anatomy: { root: { tokens: { 'padding-top': '{x}', 'padding-bottom': '{x}' } } } }, notes: ['Tag:root paddingLeft: bindings differ across variants … NAMED, not proposed'] };
+  settleUaPadding(refusedP, dumpSet);
+  assert.match(refusedP.notes[1], /^ua-padding: padding-right is not declared \(no value carried\)/);
+  assert.match(refusedP.notes[2], /^ua-padding: padding-left is not declared \(the value was refused above\)/);
 });
 
 test('a side declared by only SOME enum values is declared (no base zero); a single logical side counts only its own physical side', () => {

@@ -141,9 +141,13 @@ export const UA_PAINT_CHANNELS = ['background', 'background-color', 'background-
  *  proposes as one of these elements. An emitter-side "undeclared means 0"
  *  reset was wrong whenever the proposer REFUSED a side (Eventz Atoms/Tag
  *  draws 6/12 and its inline padding is refused): undeclared is not zero. */
-export const UA_PADDING_ELEMENTS = new Set([
-  'button', 'input', 'textarea', 'option', 'fieldset', 'legend', 'ul', 'ol', 'menu', 'dialog', 'td', 'th',
-]);
+export const UA_PADDING_BY_ELEMENT: Readonly<Record<string, readonly [string, string, string, string]>> = {
+  button: ['1px', '6px', '1px', '6px'], input: ['1px', '2px', '1px', '2px'], textarea: ['2px', '2px', '2px', '2px'],
+  option: ['0', '2px', '1px', '2px'], fieldset: ['5.6px', '12px', '10px', '12px'], legend: ['0', '2px', '0', '2px'],
+  ul: ['0', '0', '0', '40px'], ol: ['0', '0', '0', '40px'], menu: ['0', '0', '0', '40px'], dialog: ['16px', '16px', '16px', '16px'],
+  td: ['1px', '1px', '1px', '1px'], th: ['1px', '1px', '1px', '1px'],
+};
+export const UA_PADDING_ELEMENTS: ReadonlySet<string> = new Set(Object.keys(UA_PADDING_BY_ELEMENT));
 
 /** Every element the contract's root can render as. */
 export function rootElementsOf(contract: Contract): string[] {
