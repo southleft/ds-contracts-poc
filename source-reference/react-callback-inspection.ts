@@ -27,7 +27,6 @@ import {
   reactOwnershipRead,
   type ReactOwnership,
 } from "./react-ownership.js";
-import { reactReferenceProfile } from "./react-reference-profiles.js";
 import { captureValidatedTree } from "./capture.js";
 import { watchSourceFailures } from "./observe.js";
 import {
@@ -220,7 +219,7 @@ export function createReactCallbackInspectionStore(
           );
           const page = await context.newPage(),
             failures = watchSourceFailures(page),
-            profile = reactReferenceProfile(caseId);
+            profile = value.reference.cohort.profile(caseId);
           const assertCurrent = () => {
             if (
               !reactReferenceUnchanged(value.reference) ||

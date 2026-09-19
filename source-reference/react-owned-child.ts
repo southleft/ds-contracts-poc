@@ -1,6 +1,7 @@
 /** Complete source-owned leaf at one authenticated usage. No interaction or
  * wider property domain is inferred from this observed initial rendering. */
 import { revisionOf } from '../core/contract-provenance.js';
+import { authoredLengthIsUsed } from './layout-unit.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { enumerate, flatten, normalizeValue, type CapturedNode } from '../extract/computed/lib.js';
@@ -34,7 +35,7 @@ export function deriveReactOwnedChild(program: ReactSourceProgram, ownership: Re
   const origin = styleOrigin.roots.find(r => r.path === rootPath && r.tag === root.tag);
   for (const channel of ['width','height']) {
     const size = origin?.sizes?.find(s => s.channel === channel);
-    if (size?.status !== 'fixed' || !size.value || normalizeValue(size.value) !== root.style[channel])
+    if (size?.status !== 'fixed' || !size.value || !authoredLengthIsUsed(size.value, root.style[channel]))
       throw Error('react-owned-child-source-size-required:' + channel);
   }
   if (['flex','inline-flex'].includes(root.style.display)) for (const key of ['row-gap','column-gap'])

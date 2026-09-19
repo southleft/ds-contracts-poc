@@ -24,13 +24,14 @@ import { gridConstraintChannels } from './grid-constraints.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
-import { projectReactCallerComposition, projectReactCallerCompositionGraph, compareReactCallerContext } from './react-caller-composition.js';
+import { projectReactCallerComposition, projectReactCallerCompositionGraph, compareReactCallerContext, requireReactCallerComposition } from './react-caller-composition.js';
 import { compileReactCallerNative } from './react-caller-native.js';
 import { isReactCallerNativeRequest, reactCallerNativeReservation } from './react-caller-native-request.js';
 import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
 import type { NodeSpec } from '../core/emit-figma-script.js';
+import { builtinReactCohort } from './react-cohort.js';
 
 test('caller text preserves its observed font when a component boundary replaces its inherited CSS alias', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
@@ -56,6 +57,13 @@ test('caller text preserves its observed font when a component boundary replaces
   assert.deepEqual(input, original, 'source and font observations stay immutable');
   const stale = structuredClone(input); stale.fonts.rows[0].cssFamily = 'Different alias';
   assert.equal(projectReactCallerCompositionGraph(stale).draft.status, 'refused');
+  // The caller source frame is admitted by observed structure, never by a case
+  // name: a generated composition with nested children passes; evidence that
+  // generates none, and a root with no nested component children, are refused.
+  assert.ok(graph.draft.children.length > 0);
+  assert.doesNotThrow(() => requireReactCallerComposition(graph.draft));
+  assert.throws(() => requireReactCallerComposition(projectReactCallerCompositionGraph(stale).draft), /^Error: react-caller-source-frame-composition-required$/);
+  assert.throws(() => requireReactCallerComposition({ ...graph.draft, children: [] }), /^Error: react-caller-source-frame-composition-required$/);
 });
 
 test('source caller projection preserves editable content and distinct generated label IDs in the real consumer', async t => {
@@ -202,7 +210,7 @@ test('context child requests reopen pinned evidence and refuse substitution with
   const f = await fixture();
   try {
     const source = path.join(f.dir, 'components.tsx');
-    const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) }, javascript: '', css: '' };
+    const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) }, javascript: '', css: '', cohort: builtinReactCohort, sourceRoot: f.dir };
     const ownershipId = '10000000-0000-4000-8000-000000000001';
     const operationId = '10000000-0000-4000-8000-000000000002';
     const inspectionId = '10000000-0000-4000-8000-000000000003';
