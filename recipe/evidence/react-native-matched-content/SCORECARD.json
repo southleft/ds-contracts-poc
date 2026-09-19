@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "rows": [
+    {
+      "id": "0",
+      "variant": "alert-default",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 3.063725490196078,
+          "differingPixels": 750,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 8,
+              "y": 8,
+              "width": 360,
+              "height": 68
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 3.1004901960784315,
+          "differingPixels": 759,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 8,
+              "y": 8,
+              "width": 360,
+              "height": 68
+            }
+          }
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

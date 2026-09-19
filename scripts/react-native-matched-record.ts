@@ -4,26 +4,28 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual as same } from 'node:util';
+import { resolveNativeSlotIdentities } from '../core/native-slot-identity.js';
 import type { DeclaredSpec } from './react-native-declared-record.js';
 import { variantCandidates } from './react-native-fidelity-pair.js';
 import { cropSourceFrame } from '../source-reference/source-framing.js';
 import { REPO, QUALIFICATION, sha256 } from './react-native-fidelity-check.js';
 import { MATCHED_INSTRUMENTS, checkMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
 
+export type MatchedSpec = Omit<DeclaredSpec, 'source'> & { source: Extract<DeclaredSpec['source'], {kind: 'initial'}> | {kind: 'comparison'; bounds: {x: number; y: number; width: number; height: number}} };
+
 /** Authenticate source/native identity without assigning a raster origin to
  * the operation's old unframed PNGs. Those images are not measured here. */
-export function authenticateMatchedOperation(privateRoot: string, spec: DeclaredSpec) {
+export function authenticateMatchedOperation(privateRoot: string, spec: MatchedSpec) {
   const bytes = (file: string) => {
     if (path.isAbsolute(file) || file.split(/[\\/]/).includes('..')) throw Error('matched-record-archive-path');
     return readFileSync(path.join(privateRoot, file));
   };
   const parse = (file: string) => JSON.parse(bytes(file).toString());
-  if (spec.source.kind !== 'initial' || spec.journal !== 'source-native-app/operations/' + spec.operation) throw Error('matched-record-initial-operation-required');
-  const inspection = spec.source.inspection;
+  if (spec.journal !== 'source-native-app/operations/' + spec.operation) throw Error('matched-record-original-operation-required');
   const headerBytes = bytes(spec.journal + '/operation.json'), header = JSON.parse(headerBytes.toString());
   if (header.id !== spec.operation || sha256(bytes(spec.journal + '/plan.json')) !== header.planSha256 ||
       sha256(bytes(spec.journal + '/token-create.js')) !== header.tokenScriptSha256) throw Error('matched-record-plan-changed');
-  let previous = sha256(headerBytes), selected: any;
+  let previous = sha256(headerBytes), selected: any, creation: any;
   const commands = new Map<string, any>();
   const events = readdirSync(path.join(privateRoot, spec.journal, 'events')).sort();
   for (const [sequence, name] of events.entries()) {
@@ -37,6 +39,10 @@ export function authenticateMatchedOperation(privateRoot: string, spec: Declared
     } else if (event.kind === 'result') {
       const e = event.envelope, c = commands.get(e.attemptId);
       if (!c || ['phase', 'nonce', 'scriptSha256', 'operationId', 'planRevision', 'fileKey'].some(k => e[k] !== c[k])) throw Error('matched-record-result-uncorrelated');
+      if (c.phase === 'component-create') {
+        if (creation || e.result?.operationId !== header.id || e.result?.fileKey !== header.policy.fileKey) throw Error('matched-record-creation-invalid');
+        creation = e.result;
+      }
       if (name === spec.event) {
         if (!c.readOnly || c.phase !== 'component-readback') throw Error('matched-record-readback-required');
         selected = { result: e.result, eventSha256: sha256(data), recordedAt: event.recordedAt };
@@ -44,11 +50,52 @@ export function authenticateMatchedOperation(privateRoot: string, spec: Declared
     } else throw Error('matched-record-event-kind');
     previous = sha256(data);
   }
-  const r = selected?.result, pin = header.request.observation;
+  const comparison = spec.source.kind === 'comparison';
+  const r = comparison ? selected?.result?.content : selected?.result, pin = header.request.observation;
   if (!r || r.status !== 'native-readback-collected' || r.receiptKind !== 'independent-native-component-readback' ||
       r.operationId !== header.id || r.planRevision !== header.planRevision || r.fileKey !== header.policy.fileKey ||
-      r.nativeQualification !== 'unqualified' || r.acceptedContract !== null || r.problems.length ||
-      !pin || path.basename(spec.source.inspection) !== pin.id) throw Error('matched-record-readback-unverified');
+      r.nativeQualification !== 'unqualified' || r.acceptedContract !== null || r.problems.length) throw Error('matched-record-readback-unverified');
+  const native = { operationId: header.id, journalEvent: spec.event, journalEventSha256: selected.eventSha256,
+    journalHeadSha256: previous, journalEventsVerified: events.length, planRevision: header.planRevision, recordedAt: selected.recordedAt };
+  if (spec.source.kind === 'comparison') {
+    const root = header.request.root, outer = selected.result;
+    if (header.request.kind !== 'react-content-comparison' || !root || outer.status !== 'native-comparison-readback-collected' ||
+        outer.operationId !== header.id || outer.fileKey !== header.policy.fileKey || outer.planRevision !== header.planRevision ||
+        outer.acceptedContract !== null || outer.nativeQualification !== 'unqualified' || outer.problems.length ||
+        !creation || creation.status !== 'created-candidate' || creation.problems.length || r.images.length !== 1) throw Error('matched-record-comparison-unverified');
+    const archive = 'react-source-ownership/' + root.referenceId + '/' + root.ownership.id;
+    const seal = parse(archive + '/integrity.json');
+    if (sha256(bytes(archive + '/integrity.json')) !== root.inventorySha256 || seal.version !== 1) throw Error('matched-record-source-inventory');
+    const read = (name: string) => { const data = bytes(archive + '/' + name);
+      if (sha256(data) !== seal.files[name]) throw Error('matched-record-source-changed:' + name); return data; };
+    const reportBytes = read('report.json'), report = JSON.parse(reportBytes.toString());
+    if (sha256(reportBytes) !== root.ownership.sha256 || report.id !== root.ownership.id || report.referenceId !== root.referenceId ||
+        report.state !== 'complete') throw Error('matched-record-source-request');
+    const rows = report.rows.filter((row: any) => row.id === root.caseId), original = read(root.caseId + '/source.png');
+    const tree = JSON.parse(read(root.caseId + '/source-tree.json').toString());
+    if (rows.length !== 1 || !rows[0].matched || rows[0].problems.length || rows[0].sourceImage !== sha256(original) ||
+        rows[0].observedImage !== sha256(original) || tree.status !== 'captured' || tree.sourcePngSha256 !== sha256(original)) throw Error('matched-record-original-changed');
+    const board = r.nodes.find((n: any) => n.id === creation.comparisonBoardId);
+    const image = r.images[0], child = r.nodes.find((n: any) => n.id === image.nodeId);
+    if (!board || board.type !== 'FRAME' || !child || child.type !== 'INSTANCE' || child.parentId !== board.id ||
+        !same(board.childIds, [child.id]) || child.values.x !== 0 || child.values.y !== 0 ||
+        !same([board.values.width, board.values.height], [child.values.width, child.values.height]) ||
+        ['fills','strokes','effects'].some(k => board.values[k]?.length) || board.values.opacity !== 1 || !board.values.visible ||
+        board.values.layoutMode !== 'VERTICAL' || board.values.clipsContent !== false ||
+        ['paddingTop','paddingBottom','paddingLeft','paddingRight','itemSpacing','cornerRadius'].some(k => board.values[k] !== 0) ||
+        Object.keys(board.values.boundVariables ?? {}).length || Object.keys(board.values.explicitVariableModes ?? {}).length ||
+        !same(board.values.relativeTransform, [[1,0,board.values.x],[0,1,board.values.y]]) ||
+        !same(child.values.relativeTransform, [[1,0,0],[0,1,0]])) throw Error('matched-record-comparison-container');
+    const bounds = spec.source.bounds, crop = cropSourceFrame(original, bounds).crop;
+    return { id: spec.id, component: spec.component,
+      sourceRequest: root, readback: outer, creation,
+      pairs: [{ observation: '0', variant: root.caseId, native: {nodeId: board.id},
+        source: {originalSha256: sha256(original), bounds, crop} }],
+      source: {referenceId: root.referenceId, ownershipId: root.ownership.id, caseId: root.caseId,
+        inventorySha256: root.inventorySha256, reportSha256: root.ownership.sha256}, native };
+  }
+  const inspection = spec.source.inspection;
+  if (!pin || path.basename(inspection) !== pin.id) throw Error('matched-record-readback-unverified');
   const sealBytes = bytes(spec.source.inspection + '/integrity.json'), seal = JSON.parse(sealBytes.toString());
   if (sha256(sealBytes) !== pin.inventorySha256 || seal.version !== 1) throw Error('matched-record-source-inventory');
   const sourceBytes = (name: string) => {
@@ -72,28 +119,39 @@ export function authenticateMatchedOperation(privateRoot: string, spec: Declared
       source: { originalSha256: row.image, bounds: state.bounds, crop: cropSourceFrame(original, state.bounds).crop } };
   });
   if (claimed.size !== r.images.length) throw Error('matched-record-unpaired-native');
-  return { id: spec.id, component: spec.component, pairs,
+  return { id: spec.id, component: spec.component, pairs, sourceRequest: header.request, readback: r, creation,
     source: { referenceId: header.request.anchor.referenceId, caseId: request.caseId, inspectionId: pin.id,
       inventorySha256: pin.inventorySha256, reportSha256: pin.reportSha256 },
-    native: { operationId: header.id, journalEvent: spec.event, journalEventSha256: selected.eventSha256,
-      journalHeadSha256: previous, journalEventsVerified: events.length, planRevision: header.planRevision, recordedAt: selected.recordedAt } };
+    native };
 }
 
-export function collectMatchedEvidence(privateRoot: string, sourceCapture: string, nativeCapture: string, spec: DeclaredSpec) {
+/** Settled slot IDs are accepted only by the existing allocation/topology
+ * resolver. Every property outside those IDs still compares exactly. */
+export function normalizeMatchedReadback(creation: any, anchor: any, value: any, kind: 'initial' | 'comparison') {
+  if (kind === 'initial') return value;
+  const out = structuredClone(value);
+  if (!out?.content?.nodes) throw Error('matched-record-native-baseline-changed');
+  out.content.nodes = resolveNativeSlotIdentities(creation, out.content.nodes, anchor.content.nodes);
+  if (!out.content.nodes) throw Error('matched-record-slot-identity-invalid');
+  return out;
+}
+
+export function collectMatchedEvidence(privateRoot: string, sourceCapture: string, nativeCapture: string, spec: MatchedSpec) {
   const authenticated = authenticateMatchedOperation(privateRoot, spec);
   const json = (dir: string, name: string) => JSON.parse(readFileSync(path.join(dir, name), 'utf8'));
   const probe = json(nativeCapture, 'native-probe.json');
   const current = json(nativeCapture, 'current-original-readback.json');
   const restored = json(nativeCapture, 'repeat-and-restoration.json');
   const event = json(path.join(privateRoot, spec.journal, 'events'), spec.event);
-  if (!probe.response.success || !same(current.response.result, event.envelope.result) ||
-      !same(restored.afterReadback.result, event.envelope.result)) throw Error('matched-record-native-baseline-changed');
+  const normalize = (r: any) => normalizeMatchedReadback(authenticated.creation, authenticated.readback, r, spec.source.kind);
+  if (!probe.response.success || !same(normalize(current.response.result), event.envelope.result) ||
+      !same(normalize(restored.afterReadback.result), event.envelope.result)) throw Error('matched-record-native-baseline-changed');
   const summary = json(sourceCapture, 'source-summary.json');
   if (!summary.sourceFilesUnchanged || !summary.ownershipOriginalMatched ||
       summary.referenceId !== authenticated.source.referenceId ||
       summary.receipts.length !== authenticated.pairs.length ||
       probe.response.result.rows.length !== authenticated.pairs.length) throw Error('matched-record-source-unverified');
-  const nodes = new Map<string, any>(event.envelope.result.nodes.map((n: any) => [n.id, n]));
+  const nodes = new Map<string, any>((spec.source.kind === 'comparison' ? event.envelope.result.content.nodes : event.envelope.result.nodes).map((n: any) => [n.id, n]));
   function authenticSnapshot(snapshot: any, id: string, root = true) {
     const n = nodes.get(id);
     if (!n || n.type !== snapshot.type || n.name !== snapshot.name) throw Error('matched-record-node-mismatch');
@@ -103,6 +161,9 @@ export function collectMatchedEvidence(privateRoot: string, sourceCapture: strin
     }
     for (const key of ['width', 'height', 'fills', 'strokes', 'opacity', 'boundVariables', 'resolvedVariableModes'])
       if (!same(snapshot[key], n.values[key])) throw Error('matched-record-node-value-missing:' + key);
+    if (n.type === 'TEXT') for (const key of ['characters','fontName','fontSize','lineHeight','letterSpacing','textAlignHorizontal','textCase','textDecoration'])
+      if (!Object.hasOwn(snapshot, key) || !same(snapshot[key], n.values[key])) throw Error('matched-record-text-value-missing:' + key);
+    if (n.type === 'INSTANCE' && !same(snapshot.componentProperties, n.componentProperties)) throw Error('matched-record-instance-properties');
     if ((snapshot.children?.length ?? 0) !== (n.childIds?.length ?? 0)) throw Error('matched-record-child-count');
     (snapshot.children ?? []).forEach((child: any, index: number) => authenticSnapshot(child, n.childIds[index], false));
   }

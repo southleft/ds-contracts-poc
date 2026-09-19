@@ -14,7 +14,8 @@ import { REPO, QUALIFICATION, sha256 } from './react-native-fidelity-check.js';
 import type { Cohort } from './react-native-fidelity-check.js';
 
 export const MATCHED_EVIDENCE = 'recipe/evidence/react-native-matched-capture';
-export const MATCHED_COVERAGE = { 'family-switch': 9 };
+export const MATCHED_EVIDENCE_DIRS = [MATCHED_EVIDENCE, 'recipe/evidence/react-native-matched-content'];
+export const MATCHED_COVERAGE = { 'family-switch': 9, 'family-alert': 1 };
 export const MATCHED_INSTRUMENTS = ['source-reference/transparent-source-frame.ts', 'source-reference/source-framing.ts',
   'scripts/design-consumer-framing.ts', 'extract/figma/visual-parity/img.ts'] as const;
 type Receipt = Awaited<ReturnType<typeof captureTransparentSourceFrame>>['receipt'];
@@ -118,6 +119,6 @@ export function checkMatchedEvidence(dir: string, writeDerived = false) {
   return scorecard;
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const rows = checkMatchedEvidence(path.join(REPO, MATCHED_EVIDENCE), process.argv.includes('--write-derived')).rows;
+  const rows = MATCHED_EVIDENCE_DIRS.flatMap(dir => checkMatchedEvidence(path.join(REPO, dir), process.argv.includes('--write-derived')).rows);
   console.log(`Matched native frames: ${rows.length} pairs measured on both backgrounds; no owner grade.`);
 }

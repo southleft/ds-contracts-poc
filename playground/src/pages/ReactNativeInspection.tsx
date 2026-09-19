@@ -336,14 +336,22 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.recordedMeasurement && <section aria-label="Recorded matched-frame measurement">
           <button type="button" disabled={busy} onClick={() => void reviewMeasurement(id)}>Review recorded matched frames</button>
           {measurements[id] && <>
-            <p>{measurements[id].rows.filter(r => r.pass).length} / {measurements[id].rows.length} recorded pairs meet the 5% limit on both backgrounds. Geometry checks passed. Recorded {new Date(measurements[id].recordedAt).toLocaleString()}.</p>
+            <p>{measurements[id].rows.filter(r => r.pass).length} / {measurements[id].rows.length} recorded pairs meet the 5% limit on both backgrounds. Geometry checks passed. Operation observed {new Date(measurements[id].recordedAt).toLocaleString()}.</p>
             <p>These saved captures describe the recorded baseline. Opening this review does not inspect the current canvas or test interaction behavior. Images are shown at their original pixel size.</p>
             <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 8px',textAlign:'left'}}>
-              <thead><tr><th>Initial state</th><th>React · white</th><th>Figma · white</th><th>White difference</th><th>React · black</th><th>Figma · black</th><th>Black difference</th></tr></thead>
-              <tbody>{measurements[id].rows.map(measurement => <tr key={measurement.id}>
-                <th scope="row">{measurement.variant}</th>
-                {(['white','black'] as const).map(background => <MeasurementImages key={background} measurement={measurement} background={background} />)}
-              </tr>)}</tbody>
+              {measurements[id].scope === 'recorded-caller-content' ? <>
+                <thead><tr><th>Caller content</th><th>React</th><th>Figma</th><th>Difference</th></tr></thead>
+                <tbody>{measurements[id].rows.flatMap(measurement => (['white','black'] as const).map(background => <tr key={`${measurement.id}-${background}`}>
+                  <th scope="row">{measurement.variant}<br />{background} background</th>
+                  <MeasurementImages measurement={measurement} background={background} />
+                </tr>))}</tbody>
+              </> : <>
+                <thead><tr><th>Initial state</th><th>React · white</th><th>Figma · white</th><th>White difference</th><th>React · black</th><th>Figma · black</th><th>Black difference</th></tr></thead>
+                <tbody>{measurements[id].rows.map(measurement => <tr key={measurement.id}>
+                  <th scope="row">{measurement.variant}</th>
+                  {(['white','black'] as const).map(background => <MeasurementImages key={background} measurement={measurement} background={background} />)}
+                </tr>)}</tbody>
+              </>}
             </table></div>
           </>}
         </section>}
