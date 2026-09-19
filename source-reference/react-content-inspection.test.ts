@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { chromium } from 'playwright-core';
@@ -15,7 +15,7 @@ import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
-import { createReactInitialInspectionStore } from './react-initial-inspection.js';
+import { createReactInitialInspectionStore, reactInitialObserverIdentity, reactInitialObserverModules, reactInitialReobservable } from './react-initial-inspection.js';
 import { builtinReactCohort } from './react-cohort.js';
 
 test('targeted content preparation matches sealed rendering, survives reopening and refuses changed evidence', async t => {
@@ -120,6 +120,48 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(diagnosticDraft?.status, 'refused', 'a persistence-only fixture does not qualify a source contract');
   const repeated = initialStore().start(reference.id, 'button-default'); await repeated.promise;
   assert.equal(repeated.state.id, initialId, 'a completed observation reopens without a new mount');
+  // OBSERVER IDENTITY. The run above records no observer and refuses for reasons a new mount cannot answer: it stays final.
+  assert.equal(reopened.reobservable, undefined, 'an unrecorded observer alone is not stale');
+  const draftOf = (problems: string[]) => ({ problems }) as NonNullable<typeof reopened.draft>, was = { x: '1' }, now = { x: '2' };
+  assert.deepEqual([
+    reactInitialReobservable({ ...reopened, draft: draftOf([]) }, now), reactInitialReobservable({ ...reopened, draft: draftOf(['react-initial-contract-root-sizing-unqualified:height']) }, now),
+    reactInitialReobservable({ ...reopened, draft: draftOf(['react-initial-contract-descendant-evidence-unobserved']) }, now),
+    reactInitialReobservable({ ...reopened, observer: was, draft: draftOf([]) }, now), reactInitialReobservable({ ...reopened, observer: now, draft: draftOf(['react-initial-contract-descendant-evidence-unobserved']) }, now),
+    reactInitialReobservable({ ...reopened, phase: 'failed', observer: was }, now),
+  ], [undefined, undefined, 'observer-unrecorded-and-evidence-unobserved', 'observer-changed', undefined, undefined]);
+  assert.deepEqual(Object.keys(reactInitialObserverIdentity()), [...reactInitialObserverModules]);
+  assert.ok(!reactInitialObserverModules.some(f => /initial-contract|descendant-geometry|observed-content|emit-figma|fuse/.test(f)), 'assembly re-runs on read: it is not the observer');
+  // A run that RECORDS its observer: final under the same observer, observable again under another one.
+  const recordedId = '44444444-4444-4444-8444-444444444444', recordedDir = path.join(initialRoot, recordedId);
+  mkdirSync(path.join(recordedDir, 'states'), { recursive: true });
+  for (const file of ['request.json', 'states/0.png', 'states/0.json']) writeFileSync(path.join(recordedDir, file), readFileSync(path.join(initialDir, file)));
+  writeFileSync(path.join(recordedDir, 'report.json'), JSON.stringify({ ...initialReport, id: recordedId, observer: was }));
+  const recordedSeal = JSON.stringify({ version: 1, files: inventoryEvidence(recordedDir) });
+  writeFileSync(path.join(recordedDir, 'integrity.json'), recordedSeal);
+  const latestBytes = JSON.stringify({ id: recordedId, inventorySha256: evidenceSha(recordedSeal) });
+  writeFileSync(path.join(initialRoot, 'latest.json'), latestBytes);
+  const observedBy = (observer: Record<string, string>) => createReactInitialInspectionStore(repo, repo, () => ({ reference, anchor: request }), observer);
+  assert.equal(observedBy(was).read(reference.id, 'button-default')!.reobservable, undefined);
+  assert.equal(observedBy(was).start(reference.id, 'button-default').state.id, recordedId, 'the same observer would say the same: final');
+  const changed = observedBy(now), runs = () => readdirSync(initialRoot).filter(f => f !== 'latest.json').sort();
+  assert.equal(changed.read(reference.id, 'button-default')!.reobservable, 'observer-changed');
+  const kept = [initialDir, recordedDir].map(dir => JSON.stringify(inventoryEvidence(dir))), before = runs();
+  const again = changed.start(reference.id, 'button-default');
+  assert.deepEqual([again.state.phase, again.state.observer, again.state.id === recordedId], ['running', now, false], 'a NEW run under the same key');
+  assert.equal(changed.start(reference.id, 'button-default'), again, 'a second request while it runs is the running one');
+  assert.equal(changed.read(reference.id, 'button-default')!.id, again.state.id);
+  assert.equal(changed.running({ version: 1, anchor: request, caseId: 'button-default' })!.id, again.state.id);
+  await again.promise;
+  // This fixture's source cannot be mounted, so the attempt FAILS: it is kept and reported, and it replaces nothing.
+  assert.equal(again.state.phase, 'failed'); assert.ok(again.state.problems.length);
+  assert.deepEqual(runs(), [...before, again.state.id].sort());
+  assert.deepEqual([initialDir, recordedDir].map(dir => JSON.stringify(inventoryEvidence(dir))), kept, 'earlier runs are byte-for-byte untouched');
+  assert.equal(readFileSync(path.join(initialRoot, 'latest.json'), 'utf8'), latestBytes, 'a failed attempt does not move latest');
+  const sealedAttempt = JSON.parse(readFileSync(path.join(initialRoot, again.state.id, 'report.json'), 'utf8'));
+  assert.deepEqual([sealedAttempt.phase, sealedAttempt.observer, sealedAttempt.reobservable], ['failed', now, undefined], 'the run records its observer; the derived fact is never saved');
+  const after = changed.read(reference.id, 'button-default')!;
+  assert.deepEqual([after.id, after.reobservable, after.lastAttempt], [recordedId, 'observer-changed', { id: again.state.id, problems: again.state.problems }]);
+  writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
   assert.deepEqual(PNG.sync.read(initialStore().image(reference.id, 'button-default', initialId, '0')).data, framedPixels.data);
   assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '../0'), /row-invalid/);
   const pinned = { version: 1 as const, kind: 'react-initial-draft' as const, anchor: request, caseId: 'button-default',

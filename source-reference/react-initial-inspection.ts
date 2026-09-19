@@ -4,8 +4,9 @@ import {evidenceReadOnce} from './evidence-read-snapshot.js';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, renameSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
-import { revisionOf } from '../core/contract-provenance.js';
+import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
 import { readReactNativeEvidence } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
@@ -17,7 +18,7 @@ import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
 import { cropSourceFrame, type SourceFrame } from './source-framing.js';
-import { compileReactInitialContract, reactInitialObservedRoot } from './react-initial-contract.js';
+import { compileReactInitialContract, reactInitialObservedRoot, reactInitialEvidenceUnobserved } from './react-initial-contract.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 
 export type ReactInspectionRequest = { anchor: ReactNativeRequest; caseId: string } & ({ version: 1 } | { version: 2; instanceId: string });
@@ -26,11 +27,43 @@ export function reactInspectionRequest(anchor: ReactNativeRequest, caseId: strin
   return instanceId === undefined ? { version: 1, anchor, caseId } : { version: 2, anchor, caseId, instanceId };
 }
 type Request = ReactInspectionRequest;
+/** The modules whose change alters what an initial-mount observation SAYS: the
+ * run and its page, the planned domain, the fresh-mount probe, and every reader
+ * whose output is sealed into `states/` (tree, ownership, anatomy link, style
+ * origin and descendant sizes with their layout-unit rule, grids, fonts, SVG
+ * viewports, bounds). ASSEMBLY is deliberately absent: react-initial-contract,
+ * react-descendant-geometry, observed-content and the compiler re-run on every
+ * read of the sealed observation, so their change never needs a new mount. The
+ * root-visual `projection` saved beside a state is a by-product no initial-state
+ * consumer reads, so its compiler is not the observer either. */
+export const reactInitialObserverModules = ['react-initial-inspection.ts', 'react-initial-state.ts', 'react-program-proposal.ts',
+  'react-property-effects.ts', 'react-property-probe.ts', 'react-ownership.ts', 'react-source-anatomy.ts', 'react-style-origin.ts', 'layout-unit.ts',
+  'grid-constraints.ts', 'text-fonts.ts', 'svg-viewports.ts', 'source-framing.ts', 'capture.ts', 'observe.ts', 'react-reference.ts',
+  '../extract/computed/capture.ts', '../extract/computed/lib.ts'] as const;
+export function reactInitialObserverIdentity(): Record<string, string> {
+  const root = path.dirname(fileURLToPath(import.meta.url));
+  return Object.fromEntries(reactInitialObserverModules.map(f => [f, evidenceSha(readFileSync(path.join(root, f)))]));
+}
+/** May a COMPLETE run be observed again? Only when its recorded observer is not the current one, or when it
+ * records none AND today's assembler names evidence it never observed. An unrecorded run that assembles, or that
+ * refuses for any reason a new mount cannot answer, stays final. `report.draft` must be today's derivation. */
+export function reactInitialReobservable(report: ReactInitialInspection, observer: Record<string, string>): ReactInitialInspection['reobservable'] {
+  return report.phase !== 'complete' ? undefined
+    : report.observer ? canonicalJson(report.observer) !== canonicalJson(observer) ? 'observer-changed' : undefined
+    : report.draft?.problems.some(reactInitialEvidenceUnobserved) ? 'observer-unrecorded-and-evidence-unobserved' : undefined;
+}
 export interface ReactInitialInspection {
   id: string; caseId: string; phase: 'running' | 'complete' | 'failed'; sourceUnchanged: boolean;
   instanceId?: string;
+  /** Sealed with the run: the observer it was made with. Runs saved before this field carry none. */
+  observer?: Record<string, string>;
   observation?: Awaited<ReturnType<typeof observeReactInitialStates>>; problems: string[];
   draft?: ReturnType<typeof compileReactInitialContract>;
+  /** Derived on read, never saved. Why this COMPLETE run may be observed again; absent means it is final.
+   * A run with no recorded observer that still assembles is not stale: nothing says a new mount would differ. */
+  reobservable?: 'observer-changed' | 'observer-unrecorded-and-evidence-unobserved';
+  /** Derived on read: a later observation of this key that failed. It replaced nothing. */
+  lastAttempt?: { id: string; problems: string[] };
 }
 export function readReactInspectionOriginal(repo: string, reference: ReactReference, request: Request) {
   reference.cohort.profile(request.caseId);
@@ -49,8 +82,12 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
-  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] }) {
+  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] },
+  /** Read once: the identity of the observer this process loaded. */
+  observer: Record<string, string> = reactInitialObserverIdentity()) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void>; request: Request }>();
+  const attempts = new Map<string, NonNullable<ReactInitialInspection['lastAttempt']>>();
+  const reobservable = (report: ReactInitialInspection) => reactInitialReobservable(report, observer);
   const from = (reference: ReactReference, request: Request) => {
     const source = readReactInspectionOriginal(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
@@ -110,7 +147,9 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     const value = input(referenceId, caseId, instanceId), running = active.get(value.key);
     if (running) return structuredClone(running.state);
     const record = saved(value);
-    return record ? derive(value, record) : undefined;
+    if (!record) return undefined;
+    const report = derive(value, record), again = reobservable(report), attempt = attempts.get(value.key);
+    return { ...report, ...(again ? { reobservable: again } : {}), ...(attempt && attempt.id !== report.id ? { lastAttempt: attempt } : {}) };
   };
   const framedImage = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
       const row = record?.report.observation?.rows.find(r => r.id === rowId && r.status === 'observed');
@@ -185,8 +224,10 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       const value = input(referenceId, caseId, instanceId), existing = active.get(value.key);
       if (existing) return existing;
       const prior = saved(value);
-      if (prior?.report.phase === 'complete') return { state: prior.report, promise: Promise.resolve() };
-      const state: ReactInitialInspection = { id: randomUUID(), caseId, ...(instanceId ? { instanceId } : {}), phase: 'running', sourceUnchanged: false, problems: [] };
+      // A complete run is final UNLESS its observer is not this one (or is unrecorded and the assembler names
+      // evidence it never observed). Then a NEW run is made beside it; the old run is never rewritten or removed.
+      if (prior?.report.phase === 'complete' && !reobservable(derive(value, prior))) return { state: prior.report, promise: Promise.resolve() };
+      const state: ReactInitialInspection = { id: randomUUID(), caseId, ...(instanceId ? { instanceId } : {}), phase: 'running', sourceUnchanged: false, observer, problems: [] };
       const dir = path.join(value.root, state.id); mkdirSync(dir, { recursive: true });
       const save = (file: string, data: unknown) => writeFileSync(path.join(dir, file), JSON.stringify(data, null, 2) + '\n', { flag: 'wx' });
       save('request.json', value.request);
@@ -226,8 +267,12 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
           try {
             await browser?.close(); save('report.json', state);
             save('integrity.json', { version: 1, files: inventoryEvidence(dir) });
-            writeFileSync(path.join(value.root, 'latest.tmp'), JSON.stringify({ id: state.id, inventorySha256: evidenceSha(readFileSync(path.join(dir, 'integrity.json'))) }));
-            renameSync(path.join(value.root, 'latest.tmp'), path.join(value.root, 'latest.json'));
+            // A failed observation AGAIN replaces nothing: the complete run stays latest and the attempt is reported beside it.
+            if (state.phase === 'complete' || prior?.report.phase !== 'complete') {
+              writeFileSync(path.join(value.root, 'latest.tmp'), JSON.stringify({ id: state.id, inventorySha256: evidenceSha(readFileSync(path.join(dir, 'integrity.json'))) }));
+              renameSync(path.join(value.root, 'latest.tmp'), path.join(value.root, 'latest.json'));
+              attempts.delete(value.key);
+            } else attempts.set(value.key, { id: state.id, problems: [...state.problems] });
           } finally { active.delete(value.key); }
         }
       })();

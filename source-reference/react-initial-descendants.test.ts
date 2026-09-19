@@ -137,7 +137,6 @@ test('a part below the root keeps its own fixed size, and a translation by exact
     ['parent-justification-not-start', (s: Snapshots[string]) => { s.tree.style['justify-content'] = 'center'; }],
     ['child-positioned', (s: Snapshots[string]) => { child(s).style.position = 'relative'; }],
     ['child-main-size-not-own-fixed', (s: Snapshots[string]) => { s.descendantSizes!.nodes[0].sizes = [{ channel: 'width', status: 'unresolved', authoredValue: '16px', selectors: ['#w > *'], reason: 'size-declared-by-outer-selector' }, fixed('height', '16px')]; }],
-    ['child-main-size-not-own-fixed', () => {}, false],
     ['parent-not-observed-root', (s: Snapshots[string], on: boolean) => { const moved = child(s).style.translate; child(s).style.translate = 'none';
       child(s).nodes = [{ t: 'el', el: { tag: 'b', classes: [], pseudo: {}, nodes: [], style: { display: 'block', position: 'static', width: '4px', height: '4px', translate: on ? moved : '0px' } } }];
       s.ownership.nodes.push({ path: '0.0', tag: 'b', nearestComponent: 'instance-0', createdBy: 'instance-0' }); s.descendantSizes!.nodes.push({ path: '0.0', tag: 'b', sizes: [] }); }],
@@ -145,6 +144,7 @@ test('a part below the root keeps its own fixed size, and a translation by exact
     const refused = build(edit, evidence ?? true);
     assert.deepEqual([refused.status, refused.problems], ['refused', [refusal + reason]], reason);
   }
+  assert.deepEqual(build(() => {}, false).problems, ['react-initial-contract-descendant-evidence-unobserved'], 'an observation older than the reader never saw the size: only a new observation answers it');
   // An absolutely placed decoration beside the part does not take flow space, so the part is still alone in flow.
   const decorated = build(s => { const extra = sibling(); extra.el.style.position = 'absolute'; s.tree.nodes.push(extra);
     s.ownership.nodes.push({ path: '1', tag: 'i', nearestComponent: 'instance-0', createdBy: 'instance-0' }); s.descendantSizes!.nodes.push({ path: '1', tag: 'i', sizes: [] }); });

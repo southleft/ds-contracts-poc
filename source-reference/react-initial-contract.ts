@@ -23,6 +23,9 @@ import { descendantFixedSizes, descendantTranslateRefusal, lowerDescendantTransl
 
 type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence };
 const unjoined = 'descendant-sizes-not-joined:census-differs-from-captured-tree';
+/** The refusal CLASS that says the observation lacks evidence this assembler reads (an older observer made it):
+ * any problem named `…-evidence-unobserved`. Only a new observation can answer it; assembly cannot. */
+export const reactInitialEvidenceUnobserved = (problem: string) => problem.endsWith('-evidence-unobserved');
 export function reactInitialObservedRoot(snapshot: Snapshot, instanceId: string) {
   const instance = snapshot.ownership.components.find(c => c.id === instanceId);
   if (!instance || instance.roots.length !== 1) throw Error('react-initial-contract-source-root-mismatch');
@@ -140,7 +143,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     if (enumeration.combos.some(c => !roots.has(c.key)) || new Set([...roots.values()].map(r => r.tag)).size !== 1)
       throw Error('react-initial-contract-host-or-domain-changed');
     // After every plane is sized: a translated descendant lowers to a per-plane main-axis alignment or refuses.
-    const alignments = lowerDescendantTranslations(new Map([...planes].map(([key, plane]) => [key, { root: roots.get(key)!, sizing: plane.sizing }])), sizes);
+    const alignments = lowerDescendantTranslations(new Map([...planes].map(([key, plane]) => [key, { root: roots.get(key)!, sizing: plane.sizing, observed: !!plane.snapshot.descendantSizes }])), sizes);
     const admitted = [...planes.values()].flatMap(plane => [...plane.sizing].map(([path, channels]) => ({ observation: plane.rowId, path, channels: [...channels].sort() })));
     // Named only when something was admitted: a re-observed component this rule does not touch keeps its draft revision.
     if (alignments.length || admitted.length) result.descendants = { sizes: admitted, alignments };

@@ -104,7 +104,7 @@ const outOfFlow = (s: Record<string, string>) => ['absolute', 'fixed'].includes(
  * variants. `sizing` and `rootFixed` name the sizes the contract carries as
  * source facts. A rotation or scale on an element that never translates is
  * outside this rule and is left exactly as before. */
-export function lowerDescendantTranslations(planes: Map<string, { root: CapturedNode; sizing: DescendantSizing }>,
+export function lowerDescendantTranslations(planes: Map<string, { root: CapturedNode; sizing: DescendantSizing; observed?: boolean }>,
   rootFixed: ReadonlySet<string>): DescendantAlignment[] {
   const refuse = (reason: string): never => { throw Error(descendantTranslateRefusal + ':' + reason); };
   const moved = new Set<string>();
@@ -113,6 +113,8 @@ export function lowerDescendantTranslations(planes: Map<string, { root: Captured
     const t = translation(row.node.style);
     if (!t || t.x || t.y) moved.add(row.path);
   }
+  // A translated part in an observation made before descendant sizes were read: not "not own", never observed.
+  if (moved.size && [...planes.values()].some(plane => plane.observed === false)) throw Error('react-initial-contract-descendant-evidence-unobserved');
   const out: DescendantAlignment[] = [];
   for (const path of [...moved].sort()) {
     if (path.includes('.')) refuse('parent-not-observed-root');
