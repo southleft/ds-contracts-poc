@@ -5793,3 +5793,42 @@ adds no gate exclusion and changes no protected private artifact.
 
 Reversal: restore recursive manifest discovery in lane-map.ts and filter its
 results afterward. Preserve private evidence even if that traversal fails.
+
+
+## D.55 Consumer images align by recorded layout origins
+
+**AGENT measurement decision (2026-09-19).** The clean-consumer instrument
+records the browser root's document bounds and PNG hash, plus Figma layout and
+render bounds with PNG hashes. REST node snapshots bracket image retrieval and
+must retain the same file version, modification time, node identity and node
+contents. Missing or changed facts, unexpected image spans, non-unit scale and
+fractional required translations refuse by name. A native render extending
+beyond the browser's captured layout box remains unqualified.
+
+After integer translation by those origins, both images use one common crop
+covering every nonzero-alpha pixel on either side. There is no image search,
+resampling, independent ink alignment or added transparent padding. Both
+unmasked white and black comparisons must satisfy the unchanged 5% limit with
+the existing pixelmatch threshold 0.1. Historical independent alpha-trim scores
+and text-mask diagnostics remain in every receipt; frozen scorers and evidence
+are unchanged.
+
+Evidence: the app-delivered CheckboxGroup package remains byte-identical at
+SHA256 d38a3829fc911ea8e26d1fba2ffbcb6ed6e66bc0e69e3ea323d3d72b02716ab1.
+Its browser's first ink begins at y=3 and Figma's at y=4, although both recorded
+layout origins are integral and matching checkbox geometry shares the same y.
+Independent trims move that geometry. Fresh bracketing REST snapshots are
+byte-identical. The common-crop measurement passes all 12 variants on both
+backgrounds (maximum black 4.263799%), while the three historical shown-column
+black scores remain 5.455–5.749%. The common crop, dimensions and translations
+are recorded per case; no font substitution was used.
+
+Adversarial controls keep a real one-pixel geometry shift over the limit, prove
+transparent padding cannot dilute a score, preserve faint paint in the crop,
+expose missing white paint on black, and reject stale hashes, changed file
+versions, changed nodes, missing bounds, fractional origins and impossible PNG
+spans. These controls establish the instrument, not complete V1 acceptance.
+
+Reversal: remove the recorded-frame instrument and restore historical
+independent-trim verdicts. Preserve both measurements and their immutable
+receipts. Do not reclassify earlier frozen evidence using this decision.

@@ -295,3 +295,79 @@ test('a second background exposes missing pale ink while the original white comp
   assert.equal(diffPair(alignPair(source, source, 0), []).unmaskedPct, 0);
   assert.equal(diffPair(alignPair(source, source), []).unmaskedPct, 0);
 });
+
+// Authenticated layout origins must not let an independent ink crop move geometry.
+import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, type FrameBox } from './design-consumer-framing.js';
+const frameBytes=(width:number,height:number,paint:(p:PNG)=>void)=>{const p=new PNG({width,height});paint(p);return PNG.sync.write(p);};
+const rect=(p:PNG,x:number,y:number,w:number,h:number,rgba=[10,80,150,255])=>{
+  for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)for(let c=0;c<4;c++)p.data[(yy*p.width+xx)*4+c]=rgba[c];
+};
+const framed=(a:Buffer,b:Buffer,layout:FrameBox={x:10,y:20,width:40,height:40},native:FrameBox=layout,background:0|255=0)=>alignRecordedFrames(a,b,
+ {layout,capture:enclosingFrame(layout),deviceScaleFactor:1,pngSha256:imageSha256(a)},
+ {layout:native,render:native,pngSha256:imageSha256(b)},background);
+
+test('recorded-origin comparison preserves matching geometry when the first ink differs',()=>{
+ const a=frameBytes(40,40,p=>{rect(p,2,12,20,20);rect(p,2,3,1,1);});
+ const b=frameBytes(40,40,p=>{rect(p,2,12,20,20);rect(p,2,4,1,1);});
+ const pair=framed(a,b);assert.ok('aligned' in pair);
+ assert.equal(diffPair(pair.aligned,[]).diffCount,2);
+ assert.deepEqual(pair.placement.commonCrop,{x:2,y:3,width:20,height:29});
+ assert.ok(diffPair(alignPair(readPngForTest(a),readPngForTest(b),0),[]).diffCount>2,'historical independent crop shifts the matching large rectangle');
+});
+function readPngForTest(bytes:Buffer){return PNG.sync.read(bytes);}
+
+test('a real geometry shift remains a mismatch; transparent padding cannot dilute it',()=>{
+ const a=frameBytes(40,40,p=>rect(p,2,3,20,20));
+ const b=frameBytes(40,40,p=>rect(p,3,3,20,20));
+ const pair=framed(a,b);assert.ok('aligned' in pair);const first=diffPair(pair.aligned,[]);
+ assert.ok(first.unmaskedPct>5);
+ const ap=frameBytes(140,140,p=>rect(p,2,3,20,20)),bp=frameBytes(140,140,p=>rect(p,3,3,20,20));
+ const padded=framed(ap,bp,{x:10,y:20,width:140,height:140});assert.ok('aligned' in padded);
+ assert.equal(diffPair(padded.aligned,[]).unmaskedPct,first.unmaskedPct);
+ assert.deepEqual(padded.placement.commonCrop,pair.placement.commonCrop);
+});
+
+test('pale and low-alpha paint survives common cropping and contrasting backgrounds',()=>{
+ const a=frameBytes(40,40,p=>rect(p,0,0,30,30,[255,255,255,255]));
+ const b=frameBytes(40,40,p=>{rect(p,0,0,30,30,[255,255,255,255]);rect(p,30,0,10,40,[255,255,255,16]);});
+ const pale=framed(a,b);assert.ok('aligned' in pale);
+ assert.equal(pale.aligned.width,40);assert.equal(pale.aligned.height,40);
+ const empty=frameBytes(40,40,()=>{}),black=framed(empty,a),white=framed(empty,a,undefined,undefined,255);
+ assert.ok('aligned' in black&&'aligned' in white);
+ assert.ok(diffPair(black.aligned,[]).unmaskedPct>5);
+ assert.equal(diffPair(white.aligned,[]).unmaskedPct,0);
+ assert.deepEqual(framed(empty,empty),{refused:'comparison-has-no-paint'});
+});
+
+test('missing, stale, fractional and impossible layout records refuse without resampling',()=>{
+ const a=frameBytes(40,40,p=>rect(p,0,0,40,40));
+ const layout={x:10,y:20,width:40,height:40};
+ const c={layout,capture:enclosingFrame(layout),deviceScaleFactor:1,pngSha256:imageSha256(a)};
+ const f={layout,render:layout,pngSha256:imageSha256(a)};
+ assert.deepEqual(alignRecordedFrames(a,a,undefined,f,0),{refused:'layout-origin-not-recorded'});
+ assert.deepEqual(alignRecordedFrames(a,a,{...c,pngSha256:'stale'},f,0),{refused:'image-frame-hash-mismatch'});
+ assert.deepEqual(alignRecordedFrames(a,a,{...c,deviceScaleFactor:2},f,0),{refused:'consumer-scale-not-one'});
+ assert.deepEqual(alignRecordedFrames(a,a,{...c,capture:{...c.capture,x:9}},f,0),{refused:'consumer-capture-span-mismatch'});
+ assert.deepEqual(alignRecordedFrames(a,a,c,{...f,render:{...layout,width:39}},0),{refused:'figma-image-span-mismatch'});
+ const frac={x:10.5,y:20,width:39.5,height:40};
+ assert.deepEqual(framed(a,a,layout,frac),{refused:'fractional-layout-translation'});
+ assert.deepEqual(alignRecordedFrames(a,a,c,{...f,render:{...layout,x:9.5,width:40.5}},0),{refused:'figma-image-span-mismatch'});
+ const larger=frameBytes(41,40,p=>rect(p,0,0,41,40));
+ assert.deepEqual(alignRecordedFrames(a,larger,c,{...f,render:{...layout,x:9,width:41},pngSha256:imageSha256(larger)},0),{refused:'render-outside-layout-capture-unqualified'});
+});
+
+
+test('export bounds require a stable file version and the same returned node around image retrieval',()=>{
+ const image=frameBytes(40,40,p=>rect(p,0,0,40,40)),layout={x:10,y:20,width:40,height:40};
+ const before={version:'v1',lastModified:'2026-09-19',nodes:{'1:2':{document:{id:'1:2',name:'Drawn',absoluteBoundingBox:layout,absoluteRenderBounds:layout}}}};
+ const images={'1:2':image};
+ const result=figmaFramesFromSnapshots(before,structuredClone(before),images);
+ assert.equal(result.refused,undefined);assert.deepEqual(result.frames['1:2'],{layout,render:layout,pngSha256:imageSha256(image)});
+ assert.equal(figmaFramesFromSnapshots({...before,version:undefined},before,images).refused,'figma-file-version-not-recorded');
+ assert.equal(figmaFramesFromSnapshots(before,{...before,version:'v2'},images).refused,'figma-file-changed-during-export');
+ const changed=structuredClone(before);changed.nodes['1:2'].document.absoluteBoundingBox={...layout,width:39};
+ assert.equal(figmaFramesFromSnapshots(before,changed,images).refused,'figma-bounds-changed-during-export:1:2');
+ const renamed=structuredClone(before);renamed.nodes['1:2'].document.name='Changed';
+ assert.equal(figmaFramesFromSnapshots(before,renamed,images).refused,'figma-node-changed-during-export:1:2');
+ assert.equal(figmaFramesFromSnapshots(before,{...before,nodes:{}},images).refused,'figma-export-bounds-not-recorded:1:2');
+});
