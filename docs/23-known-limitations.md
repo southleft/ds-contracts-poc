@@ -4067,7 +4067,7 @@ designer only when a stamp was observable, and that is now a POSITIVE reader fac
   know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
 - anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
   bridge that never read plugin data — is not observable, and a strict-subset set
-  refuses `EXACT_MATRIX_RAGGED … stamps-not-observable`.
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
 
 **This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
 file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
@@ -4216,10 +4216,10 @@ unchanged 5 % limit):
 that is the fail-closed rule working.** The exam reads a canvas through a read-only
 observe whose scene read-back ignores plugin data by design
 (`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
-"unstamped" proves nothing: the receipt stays `refused-by-name` at propose, its
-message now carrying the reason (`… Cartesian definitions require 40.
-stamps-not-observable: …`; one line in each of four evidence files, re-recorded with
-the gate's own `--write --subject cbds-alert`), the tally stays **5 accounting-clean,
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
 19 refused by name**, and the three derived status lines are unchanged. The first
 cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
 that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
