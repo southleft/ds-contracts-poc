@@ -10,7 +10,10 @@ import type { NativeSourceReadback } from './native-source-observation.js';
 
 export interface NativeDesignChange {
   nodeId: string; node: string; variant?: string;
-  /** A key of the node's recorded values, or `name`, `children`, `variantProperties`. */
+  /** A key of the node's recorded values, or `name`, `children`, `variantProperties`.
+   * For the operation's own variables `nodeId` is the variable (or collection)
+   * id and the channel is `variable:<field>` / `variable:value:<modeId>` /
+   * `collection:<field>`: the same generic comparison, no channel list. */
   channel: string; recorded: unknown; observed: unknown;
 }
 export interface NativeDesignChanges {
@@ -54,6 +57,25 @@ export function nativeDesignChanges(recorded: NativeSourceReadback, observed: Na
     compare('variantProperties', row.variantProperties, now.variantProperties);
     const values = row.values as Record<string, unknown>, fresh = now.values as Record<string, unknown>;
     for (const channel of [...new Set([...Object.keys(values ?? {}), ...Object.keys(fresh ?? {})])].sort()) compare(channel, values?.[channel], fresh?.[channel]);
+  }
+  // The operation's own variables are recorded facts too. A designer who edits
+  // a value that no node is bound to changes nothing a node row can show.
+  const record = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
+  const fields = (scope: string, label: { nodeId: string; node: string }, a: Record<string, unknown>, b: Record<string, unknown>, skip: string[] = []) => {
+    for (const key of [...new Set([...Object.keys(a), ...Object.keys(b)])].filter(key => !skip.includes(key)).sort())
+      if (!equal(a[key], b[key])) changes.push({ ...label, channel: `${scope}:${key}`, recorded: a[key] ?? null, observed: b[key] ?? null });
+  };
+  const wasTokens = record(record(recorded.tokens).receipt), nowTokens = record(record(observed.tokens).receipt);
+  if (Object.keys(wasTokens).length || Object.keys(nowTokens).length) {
+    const wasCollection = record(wasTokens.collection), nowCollection = record(nowTokens.collection);
+    fields('collection', { nodeId: String(wasCollection.id ?? nowCollection.id ?? ''), node: String(wasCollection.name ?? nowCollection.name ?? '') }, wasCollection, nowCollection);
+    const list = (value: unknown) => new Map((Array.isArray(value) ? value : []).map(v => [String(record(v).id), record(v)]));
+    const was = list(wasTokens.variables), now = list(nowTokens.variables);
+    for (const id of [...new Set([...was.keys(), ...now.keys()])].sort()) {
+      const a = was.get(id) ?? {}, b = now.get(id) ?? {}, label = { nodeId: id, node: String(a.name ?? b.name ?? '') };
+      fields('variable', label, a, b, ['valuesByMode']);
+      fields('variable:value', label, record(a.valuesByMode), record(b.valuesByMode));
+    }
   }
   return { version: 1, kind: 'native-design-changes', acceptedContract: null, changes,
     added: [...after.keys()].filter(id => !before.has(id)).sort(), removed: [...before.keys()].filter(id => !after.has(id)).sort() };
