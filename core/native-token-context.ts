@@ -25,6 +25,10 @@ export interface NativeTokenContextInput {
   source: {
     revision: string;
     sourceProgramSha256: string;
+    /** The hash of the token trees at ALLOCATION time, stamped into ownership
+     * metadata. After a carried value update (`allocatedValues`) it still names
+     * the allocation and no longer describes the current trees; each mode's
+     * `tokenTreeRevision` does. */
     tokensSha256: string;
   };
   /** Exact requested paths. Alias dependencies are added, never same-value peers. */
@@ -36,6 +40,18 @@ export interface NativeTokenContextInput {
     nativeModeName: string;
     tokens: Record<string, unknown>;
     tokenTreeRevision: string;
+  }[];
+  /** Present only after a verified value update. The trees carry the CURRENT
+   * values; these are the raw `$value`s the same leaves held when the collection
+   * was allocated. Ownership stamps on the collection and on every owned node
+   * name the allocation revision, so it is re-derived by restoring these leaves,
+   * never taken from a caller. Only a requested `number` leaf (one FLOAT
+   * variable) may differ, and neither side may be an alias. */
+  allocatedValues?: {
+    sourceMode: string;
+    brand: string;
+    tokenPath: string;
+    value: unknown;
   }[];
 }
 export interface NativeTokenPreparation {
@@ -66,6 +82,9 @@ export interface NativeTokenPreparation {
     resolvedType: NativeType;
     values: { sourceMode: string; brand: string; value: PlannedValue }[];
   }[];
+  /** The ALLOCATION revision: what ownership metadata was stamped with. With
+   * `allocatedValues` it is NOT a hash of this body's current values: two value
+   * states of one allocation share it. Compare values, never this, for content. */
   revision: string;
 }
 
@@ -188,6 +207,96 @@ export function nativeTokenCollectionName(scopeId: string): string {
 export function prepareNativeTokenContext(
   input: NativeTokenContextInput,
 ): NativeTokenPreparation {
+  const body = prepareBody(input);
+  if (input.allocatedValues === undefined)
+    return clone({ ...body, revision: revisionOf(body) });
+  // A value succession. Re-derive the allocation by restoring the recorded
+  // leaves; everything except a non-alias scalar value must be identical.
+  const allocation = prepareNativeTokenContext(restoreAllocatedValues(input));
+  const shape = (p: Omit<NativeTokenPreparation, "revision">) => ({
+    ...p,
+    modes: p.modes.map((m) => ({ ...m, tokenTreeRevision: null, rows: null })),
+    variables: p.variables.map((v) => ({
+      ...v,
+      values: v.values.map((row) =>
+        row.value && typeof row.value === "object" && "type" in row.value
+          ? row
+          : { ...row, value: null },
+      ),
+    })),
+  });
+  const { revision: allocationRevision, ...allocationBody } = allocation;
+  if (!same(shape(body), shape(allocationBody))) fail("allocated-value-structure");
+  // Each succession is one FLOAT variable in both states.
+  for (const row of input.allocatedValues)
+    for (const prepared of [body, allocationBody])
+      if (prepared.variables.find((v) => v.tokenPath === row.tokenPath)?.resolvedType !== "FLOAT")
+        fail("allocated-value-type");
+  return clone({ ...body, revision: allocationRevision });
+}
+
+/** The single writer of a token leaf's `$value`, addressed the way
+ * flattenTokens names it. Exactly one leaf must answer to the path; a tree
+ * that passed assertTree always has one, so anything else is refused here. */
+export function setNativeTokenLeafValue(
+  tree: Record<string, unknown>,
+  tokenPath: string,
+  value: unknown,
+): void {
+  let written = 0;
+  const walk = (node: Record<string, unknown>, prefix: string[]) => {
+    for (const [key, child] of Object.entries(node)) {
+      if (key.startsWith("$") || !child || typeof child !== "object" || Array.isArray(child)) continue;
+      const entry = child as Record<string, unknown>, next = [...prefix, key];
+      if (Object.hasOwn(entry, "$value")) {
+        if (next.join(".") === tokenPath) { entry.$value = value; written++; }
+      } else walk(entry, next);
+    }
+  };
+  walk(tree, []);
+  if (written !== 1) fail("token-path-ambiguous");
+}
+
+function restoreAllocatedValues(
+  input: NativeTokenContextInput,
+): NativeTokenContextInput {
+  const rows = input.allocatedValues;
+  if (!Array.isArray(rows) || !rows.length) fail("allocated-value-invalid");
+  const key = (r: { sourceMode: string; brand: string; tokenPath: string }) =>
+    JSON.stringify([r.sourceMode, r.brand, r.tokenPath]);
+  if (rows!.some((r) => !r || !nonempty(r.sourceMode) || !nonempty(r.brand) ||
+      !nonempty(r.tokenPath) || !pathPattern.test(r.tokenPath) || r.value === undefined))
+    fail("allocated-value-invalid");
+  unique(rows!.map(key), "allocated-value-ambiguous");
+  // One canonical order, so the same succession always has the same bytes.
+  if (!same(rows!.map(key), rows!.map(key).sort())) fail("allocated-value-order");
+  const restored = clone({ ...input, allocatedValues: undefined });
+  delete restored.allocatedValues;
+  for (const row of rows!) {
+    const mode = restored.modes?.find(
+      (m) => m.sourceMode === row.sourceMode && m.brand === row.brand,
+    );
+    if (!mode) fail("allocated-value-mode");
+    assertTree(mode!.tokens);
+    const current = flattenTokens(mode!.tokens).get(row.tokenPath);
+    if (!current) fail("allocated-value-path");
+    // Only an allocated number leaf: never a dimension, colour, string, or a
+    // leaf that was never requested (and so never had a variable of its own).
+    if (!input.tokenPaths.includes(row.tokenPath)) fail("allocated-value-unrequested");
+    if (current!.type !== "number") fail("allocated-value-type");
+    if (aliasTarget(current!.value) !== null || aliasTarget(row.value) !== null)
+      fail("allocated-value-alias");
+    // A recorded value equal to the current one is not a succession.
+    if (same(current!.value, row.value)) fail("allocated-value-redundant");
+    setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value));
+  }
+  for (const mode of restored.modes) mode.tokenTreeRevision = revisionOf(mode.tokens);
+  return restored;
+}
+
+function prepareBody(
+  input: NativeTokenContextInput,
+): Omit<NativeTokenPreparation, "revision"> {
   if (!input || !nonempty(input.fileKey)) fail("file-key");
   const collectionName = nativeTokenCollectionName(input.scopeId);
   if (
@@ -341,7 +450,7 @@ export function prepareNativeTokenContext(
     modes,
     variables,
   };
-  return clone({ ...body, revision: revisionOf(body) });
+  return body;
 }
 
 /** Re-derive values, then compare exact ID/key/collection/mode and alias target
