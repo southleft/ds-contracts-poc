@@ -1513,6 +1513,54 @@ it. Making it a CI-visible number means either committing the sandbox (large,
 and the reason it is ignored) or a lane step that installs the pinned package
 before the check — neither has been scheduled.
 
+## B.40 A revoked update write can still execute late
+
+*Synthetic-only until shown live.* A native update write runs only after the companion asks the app to
+`begin` it. If that companion then dies, an operator can **attest the companion
+is gone** (`…/update/<proposal>/attest-dead`). The journal records
+`update-attempt-attested-dead`, revokes the attempt, and a canvas read dispatched
+afterwards settles the write like any other unknown write. [CURRENT](CURRENT.md)
+row 3 lists the refusals.
+
+**What the attestation guarantees.** The app never accepts a result for a revoked
+attempt: it is journaled as `late-result-after-revocation` and never becomes the
+outcome. It never lets the revoked attempt `begin` again. The settling read
+runs only after the attestation and is final for the journal.
+
+**What it does not guarantee.** It cannot stop a companion that is in fact alive
+and already past `begin`. The companion runs inside the Figma plugin sandbox,
+and its program cannot reach the app synchronously before it assigns a value.
+Such a program can land after the settling read. Three things bound the damage.
+The pinned program writes only when each node holds the exact saved or proposed
+value and everything else matches the saved baseline, so over a verified canvas
+it is a `no-op` and over a designer's edit it refuses. If it lands after an
+untouched settlement, the next preflight names it
+(`native-update-canvas-moved-after-revoked-settlement`) and the name stays on
+the record. Once the chain has moved on, the next correction's preflight or a
+design read sees the changed values as a conflict or a design change. The one
+case it can still write is a later reverse correction that has returned every
+node to this write's saved values. There the late program lands its proposed
+values again, and only a design read or the next correction notices.
+
+**Why there is no canvas-side revocation token (AGENT decision, 2026-09-19).**
+One stronger design was considered: a per-attempt token in plugin data that the
+settling read overwrites and the write program checks just before it assigns.
+It was rejected for three reasons:
+
+1. The write program is pinned byte for byte in every saved update journal.
+   Adding a check would change every program and make every prepared update
+   report `source-or-compiler-changed`.
+2. Stamping the token would turn the read-only settling read into a canvas
+   write. That write could itself be interrupted, which is the problem it is
+   meant to solve.
+3. Two Figma clients do not share a transaction. A check followed by a write in
+   one client is not atomic against a stamp from another client, so the token
+   would narrow the window without closing it.
+
+*Reverse:* add a plugin-data stamp phase and a token check to the update
+program, re-record every open update journal under the new program, and re-record
+the plugin engine receipt.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one
