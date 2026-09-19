@@ -24,6 +24,10 @@
   border-color: var(--theme-color-border-neutral-default);
 }
 
+.variant-stretch .alCTabsHeader {
+  width: 100%;
+}
+
 .alCTabsList {
   display: flex;
   flex-direction: row;

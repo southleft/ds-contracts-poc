@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/top-nav.contract.json (ds.top-nav v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './TopNav.module.css';
 
-export interface TopNavProps extends HTMLAttributes<HTMLElement> {
+export interface TopNavProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
   /** Accessible label for the navigation landmark. */
   label: string;
   /** Logo or brand at the start edge. */
@@ -20,7 +23,7 @@ export interface TopNavProps extends HTMLAttributes<HTMLElement> {
 
 /** Horizontal main navigation bar with heading, start, center, and end areas. API mirrors industry convention (Astryx TopNav); hover menus and mega-menus are behavior-layer boundaries. */
 export const TopNav = forwardRef<HTMLElement, TopNavProps>(function TopNav(
-  { label, heading, startContent, endContent, className, children, ...rest },
+  { label, heading, startContent, endContent, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

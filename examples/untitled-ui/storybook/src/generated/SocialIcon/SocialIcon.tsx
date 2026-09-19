@@ -6,6 +6,9 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLSpanElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   style
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -26,7 +29,10 @@ const ICONS: Record<string, string> = {
     '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path fill-rule="evenodd" clip-rule="evenodd" d="M15.9455 23L10.396 15.0901L3.44886 23H0.509766L9.09209 13.2311L0.509766 1H8.05571L13.286 8.45502L19.8393 1H22.7784L14.5943 10.3165L23.4914 23H15.9455ZM19.2185 20.77H17.2398L4.71811 3.23H6.6971L11.7121 10.2532L12.5793 11.4719L19.2185 20.77Z" fill="currentColor"/>\n</svg>',
 };
 
-export interface SocialIconProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'style'> {
+export interface SocialIconProps extends Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  'children' | 'style'
+> {
   platform?: 'facebook' | 'google' | 'apple' | 'figma' | 'dribbble' | 'xtwitter';
   state?: 'default';
   style?: 'white' | 'brand';
@@ -34,7 +40,7 @@ export interface SocialIconProps extends Omit<HTMLAttributes<HTMLSpanElement>, '
 
 /** STUB contract auto-proposed for the nested "Social icon" instances of Social button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub. */
 export const SocialIcon = forwardRef<HTMLSpanElement, SocialIconProps>(function SocialIcon(
-  { platform = 'facebook', state = 'default', style = 'white', className, children, ...rest },
+  { platform = 'facebook', state = 'default', style = 'white', className, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): platform, state, style — no `.<axis>-*` rule

@@ -6,6 +6,9 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   title
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -22,7 +25,7 @@ const ICONS: Record<string, string> = {
     '<svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M 21.801 10 A 10 10 0 1 1 17 3.335" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 9 11 L 12 14 L 22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'title'> {
   /** Status type controlling the icon and color scheme. */
   status?: 'info' | 'warning' | 'error' | 'success';
   /** How the banner is contained. */
@@ -44,7 +47,6 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
     title = 'A new software update is available.',
     description = 'See what changed in this version.',
     className,
-    children,
     ...rest
   },
   ref,

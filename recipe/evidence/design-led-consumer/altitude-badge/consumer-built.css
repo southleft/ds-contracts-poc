@@ -325,77 +325,78 @@
  * Regenerate with: npm run generate
  */
 
-._root_704mr_6,
-._root_704mr_6 *,
-._root_704mr_6 *::before,
-._root_704mr_6 *::after {
+._root_1tm7v_6,
+._root_1tm7v_6 *,
+._root_1tm7v_6 *::before,
+._root_1tm7v_6 *::after {
   box-sizing: border-box;
 }
 
-._root_704mr_6 {
+._root_1tm7v_6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;
 }
 
-._variant-neutral_704mr_20 {
+._variant-neutral_1tm7v_20 {
   background-color: var(--imported-badge-root-background-color-neutral);
 }
 
-._variant-danger_704mr_24 {
+._variant-danger_1tm7v_24 {
   background-color: var(--imported-badge-root-background-color-danger);
 }
 
-._variant-info_704mr_28 {
+._variant-info_1tm7v_28 {
   background-color: var(--imported-badge-root-background-color-info);
 }
 
-._variant-success_704mr_32 {
+._variant-success_1tm7v_32 {
   background-color: var(--imported-badge-root-background-color-success);
 }
 
-._variant-warning_704mr_36 {
+._variant-warning_1tm7v_36 {
   background-color: var(--imported-badge-root-background-color-warning);
 }
 
-._shape-label_704mr_40 {
+._shape-label_1tm7v_40 {
   padding-inline: var(--imported-badge-root-padding-inline-label);
   border-radius: var(--imported-badge-root-border-radius-label);
   width: var(--imported-badge-root-width-label);
   height: var(--imported-badge-root-height-label);
 }
 
-._shape-dot_704mr_47 {
+._shape-dot_1tm7v_47 {
   padding-inline: var(--imported-badge-root-padding-inline-dot);
   border-radius: var(--imported-badge-root-border-radius-dot);
   width: var(--imported-badge-root-width-dot);
   height: var(--imported-badge-root-height-dot);
 }
 
-._Badge_704mr_54 {
+._Badge_1tm7v_54 {
   font-size: var(--imported-text-typography-body-xs-semibold-font-size);
   font-weight: var(--imported-text-typography-body-xs-semibold-font-weight);
   line-height: var(--imported-text-typography-body-xs-semibold-line-height);
+  letter-spacing: 1px;
   font-family: Public Sans;
 }
 
-._variant-neutral_704mr_20 ._Badge_704mr_54 {
+._variant-neutral_1tm7v_20 ._Badge_1tm7v_54 {
   color: var(--imported-badge-badge-color-neutral);
 }
 
-._variant-danger_704mr_24 ._Badge_704mr_54 {
+._variant-danger_1tm7v_24 ._Badge_1tm7v_54 {
   color: var(--imported-badge-badge-color-danger);
 }
 
-._variant-info_704mr_28 ._Badge_704mr_54 {
+._variant-info_1tm7v_28 ._Badge_1tm7v_54 {
   color: var(--imported-badge-badge-color-info);
 }
 
-._variant-success_704mr_32 ._Badge_704mr_54 {
+._variant-success_1tm7v_32 ._Badge_1tm7v_54 {
   color: var(--imported-badge-badge-color-success);
 }
 
-._variant-warning_704mr_36 ._Badge_704mr_54 {
+._variant-warning_1tm7v_36 ._Badge_1tm7v_54 {
   color: var(--imported-badge-badge-color-warning);
 }

@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/bento-grid.contract.json (ds.bento-grid v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './BentoGrid.module.css';
 
-export interface BentoGridProps extends HTMLAttributes<HTMLDivElement> {
+export interface BentoGridProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Full-bleed banner region — one row, all four columns. */
   header?: ReactNode;
   /** Stationary 160px rail on the left, spanning both content rows. */
@@ -22,7 +25,7 @@ export interface BentoGridProps extends HTMLAttributes<HTMLDivElement> {
 
 /** The span matrix (G2) addressed through named areas (G4): a 3x4 bento whose five regions span rows and columns and whose area names ARE the slot anchors. Mixed px/fr tracks on both axes and independent row/column gaps. */
 export const BentoGrid = forwardRef<HTMLDivElement, BentoGridProps>(function BentoGrid(
-  { header, sidebar, main, rail, footer, className, children, ...rest },
+  { header, sidebar, main, rail, footer, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

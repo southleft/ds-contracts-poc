@@ -515,6 +515,7 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string, carriage?: M
   if (JSON.stringify(a.layout ?? null) !== JSON.stringify(b.layout ?? null)) return `${path}: auto-layout differs`;
   if ((a.cornerRadius ?? null) !== (b.cornerRadius ?? null)) return `${path}: corner radius differs`;
   if ((a.strokeWeight ?? null) !== (b.strokeWeight ?? null)) return `${path}: stroke weight differs`;
+  if (sideWeightsKey(a) !== sideWeightsKey(b)) return `${path}: per-side stroke weights differ`;
   if ((a.opacity ?? 1) !== (b.opacity ?? 1)) return `${path}: node opacity differs`;
   if ((a.hidden ?? false) !== (b.hidden ?? false)) return `${path}: visibility differs`;
   for (const dim of ['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const) {
@@ -1563,6 +1564,10 @@ interface StubCapture {
     instancePrimaryFill?: DumpPaint & { stroke?: boolean; weight?: number; ellipse?: boolean; src?: number; align?: string };
     stroke?: DumpPaint;
     strokeWeight?: number;
+    /** dump v1.34: the occurrence draws PER-SIDE weights (no uniform
+     *  `strokeWeight` beside them). The stub geometry carries a border only
+     *  for one shared uniform weight, so these are NAMED, never minted. */
+    strokeWeights?: DumpNode['strokeWeights'];
     cornerRadius?: number;
     /** dump v1.7: the node's first visible fill is an IMAGE paint — the stub
      *  renders the neutral placeholder gradient (bytes stay unexported).
@@ -2062,11 +2067,15 @@ function unifyPaint(
  *  not-captured (a pre-v1.11 dump), which lands on the same border spelling
  *  those dumps already produced. Same bytes for old dumps, new truth for new
  *  ones. */
-function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
-  const drawn = m.occ.filter((o) => o.node.stroke !== undefined);
-  const aligns = new Set(
-    drawn.map((o) => o.node.strokeAlign).filter((a): a is NonNullable<typeof a> => a !== undefined),
+const drawnStrokeAligns = (m: Merged) =>
+  new Set(
+    m.occ
+      .filter((o) => o.node.stroke !== undefined)
+      .map((o) => o.node.strokeAlign)
+      .filter((a): a is NonNullable<typeof a> => a !== undefined),
   );
+function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
+  const aligns = drawnStrokeAligns(m);
   // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
   // @door propose.stroke-align-mixed-refused
@@ -2491,6 +2500,11 @@ function invertNodeTokens(
   if (
     !weights.some((w) => fields.has(w)) &&
     !fields.has('strokeWeight') &&
+    // dump v1.34: a node that draws per-side weights in ANY variant belongs to
+    // carryPerSideStrokeWeights (its uniform variants expand to four equal
+    // sides there) — minting a uniform border-width beside the per-side
+    // literals would contradict them.
+    !hasLiteralSideWeights(m) &&
     m.occ.some((o) => o.node.strokeWeight !== undefined && o.node.stroke !== undefined)
   ) {
     const stroked = m.occ.find((o) => o.node.strokeWeight !== undefined && o.node.stroke !== undefined)!;
@@ -2938,6 +2952,39 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
  *  in the shape-part literals grammar — same as placement offsets — not a
  *  dump-slug mint. Bound paints stay tokens. Uncorrelated variance keeps
  *  the mint. FC-DUMP-PROPOSE-SHAPE-PAINT. */
+/** The FIRST non-boolean enum axis a per-variant literal is a function of:
+ *  every variant names a value on it, no axis value maps to two literals,
+ *  every declared axis value was observed, and the literal actually varies
+ *  along it. `literalsByProp` is keyed by one prop's enum values, so a
+ *  literal that fits no single axis has no spelling there. */
+function fitLiteralAxis(
+  ctx: Ctx,
+  values: Array<{ variant: string; value: string }>,
+): { axis: Axis; byValue: Map<string, string> } | null {
+  for (const axis of ctx.axes) {
+    if (isBooleanAxis(axis)) continue;
+    const byValue = new Map<string, string>();
+    let fits = true;
+    for (const row of values) {
+      const value = axisValuesOf(row.variant)[axis.property];
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen && seen !== row.value) {
+        fits = false;
+        break;
+      }
+      if (!seen) byValue.set(value, row.value);
+    }
+    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    if (new Set(byValue.values()).size < 2) continue;
+    return { axis, byValue };
+  }
+  return null;
+}
+
 function liftUnboundShapePaintsToLiterals(
   m: Merged,
   part: Record<string, unknown>,
@@ -2977,29 +3024,11 @@ function liftUnboundShapePaintsToLiterals(
       part.literals = literals;
     } else {
       let axisFit: { propName: string; map: Record<string, Record<string, string>> } | null = null;
-      for (const axis of ctx.axes) {
-        if (isBooleanAxis(axis)) continue;
-        const byValue = new Map<string, string>();
-        let fits = true;
-        for (const row of values) {
-          const value = axisValuesOf(row.variant)[axis.property];
-          if (value === undefined) {
-            fits = false;
-            break;
-          }
-          const seen = byValue.get(value);
-          if (seen && seen !== row.value) {
-            fits = false;
-            break;
-          }
-          if (!seen) byValue.set(value, row.value);
-        }
-        if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
-        if (new Set(byValue.values()).size < 2) continue;
+      const fit = fitLiteralAxis(ctx, values);
+      if (fit) {
         const map: Record<string, Record<string, string>> = {};
-        for (const value of axis.values) map[axisValue(axis, value)] = { [cssProp]: byValue.get(value)! };
-        axisFit = { propName: axis.propName, map };
-        break;
+        for (const value of fit.axis.values) map[axisValue(fit.axis, value)] = { [cssProp]: fit.byValue.get(value)! };
+        axisFit = { propName: fit.axis.propName, map };
       }
       // @door propose.shape-paint-lift-no-axis-fit
       if (!axisFit) return;
@@ -4476,6 +4505,122 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
  *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
  *  Inter with no receipt (rest-text-font-family). */
 const DEFAULT_FONT_FAMILY = 'Inter';
+/** dump v1.34 — LITERAL per-side stroke weights (`DumpNode.strokeWeights`).
+ *  A stroke whose sides differ (a header rule drawn top 1 / right 0 /
+ *  bottom 1 / left 0) has no uniform weight, so it cannot ride `border-width`;
+ *  it rides the four `border-<side>-width` LITERAL channels. Literal, not
+ *  minted: `borderStyleDecls` (packages/schema) synthesises
+ *  `border-<side>-style: solid` for a per-side LITERAL only — a per-side
+ *  TOKEN ref renders no border at all — and the canvas bound no variable, so
+ *  there is no token identity to recover (the same reading as
+ *  carryLetterSpacing).
+ *
+ *  THE RULE, for any node of any component:
+ *   · every variant contributes four numbers: its `strokeWeights`; or its
+ *     uniform `strokeWeight` on all four sides (a uniform weight IS four equal
+ *     sides); or four zeros when it draws no stroke (the width half of
+ *     propose.stroke-absent-is-zero-width, whose colour half mints
+ *     transparent there);
+ *   · a side that draws nothing is carried as `0px`, never omitted: the zero
+ *     is a drawn fact, `borderStyleDecls` writes no style keyword for a zero
+ *     width so CSS paints nothing, and the return leg (emit-figma-script
+ *     `strokeSides`) writes only the sides it is handed — an omitted side
+ *     would keep Figma's default weight and draw a rule nobody drew;
+ *   · four-tuples equal in every variant → `literals`; four-tuples that are a
+ *     function of ONE enum axis → `literalsByProp` on that axis (the same
+ *     fit liftUnboundShapePaintsToLiterals uses);
+ *   · anything else — a stroked variant with no captured weight, a
+ *     non-finite side, weights bound in some variants, an OUTSIDE stroke
+ *     (CSS outline has no per-side widths), or tuples that fit no single
+ *     axis — is NAMED in the notes and nothing is proposed. Never guessed.
+ *
+ *  `invertNodeTokens` stands its uniform `border-width` mint down for exactly
+ *  the nodes this function owns (hasLiteralSideWeights), so one node can never
+ *  carry a per-side literal AND a contradictory uniform width. */
+const STROKE_SIDE_CHANNELS = [
+  ['border-top-width', 'top'],
+  ['border-right-width', 'right'],
+  ['border-bottom-width', 'bottom'],
+  ['border-left-width', 'left'],
+] as const;
+const STROKE_WEIGHT_BOUND_FIELDS = ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+const sideWeightsKey = (n: Pick<DumpNode, 'strokeWeights'>): string =>
+  n.strokeWeights === undefined ? '' : STROKE_SIDE_CHANNELS.map(([, side]) => n.strokeWeights![side]).join(',');
+const hasLiteralSideWeights = (m: Merged): boolean =>
+  m.occ.some((o) => o.node.stroke !== undefined && o.node.strokeWeights !== undefined);
+function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  if (!hasLiteralSideWeights(m)) return;
+  const channels = STROKE_SIDE_CHANNELS.map(([cssProp]) => cssProp).join('/');
+  const seen = [...new Set(m.occ.map((o) => (o.node.strokeWeights ? `[${sideWeightsKey(o.node).replace(/,/g, ', ')}]` : o.node.stroke === undefined ? 'no stroke' : typeof o.node.strokeWeight === 'number' ? `uniform ${o.node.strokeWeight}` : 'not captured')))].join(' / ');
+  const bound = (n: DumpNode) => STROKE_WEIGHT_BOUND_FIELDS.filter((f) => n.bound?.[f] !== undefined);
+  if (m.occ.some((o) => bound(o.node).length > 0)) {
+    const fullyBound = (n: DumpNode) => n.bound?.strokeWeight !== undefined || bound(n).length === STROKE_SIDE_CHANNELS.length;
+    // Every side rides a variable: the literal is that variable's resolved
+    // value and the binding path above already carried it. Nothing to name.
+    if (m.occ.every((o) => o.node.strokeWeights === undefined || fullyBound(o.node))) return;
+    ctx.notes.push(
+      `${where}: literal per-side stroke weights (${seen}; top, right, bottom, left) drawn where stroke-weight variables are bound on some sides or variants only — the unbound sides have no single spelling beside the bindings; ${channels} literals NOT proposed, NAMED for review`,
+    );
+    return;
+  }
+  if (drawnStrokeAligns(m).size === 1 && drawnStrokeAligns(m).has('OUTSIDE')) {
+    ctx.notes.push(
+      `${where}: per-side stroke weights (${seen}; top, right, bottom, left) on an OUTSIDE stroke — the stroke lowers to the CSS outline vocabulary, which has no per-side widths; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const rows: Array<{ variant: string; value: string }> = [];
+  for (const o of m.occ) {
+    const n = o.node;
+    const sides = n.stroke === undefined
+      ? [0, 0, 0, 0]
+      : n.strokeWeights !== undefined
+        ? STROKE_SIDE_CHANNELS.map(([, side]) => n.strokeWeights![side])
+        : typeof n.strokeWeight === 'number'
+          ? [n.strokeWeight, n.strokeWeight, n.strokeWeight, n.strokeWeight]
+          : null;
+    if (sides === null || sides.some((v) => typeof v !== 'number' || !Number.isFinite(v) || v < 0)) {
+      ctx.notes.push(
+        `${where}: per-side stroke weights are mixed, partial, or invalid across variants (${seen}; top, right, bottom, left) — no ${channels} literals proposed; NAMED for review`,
+      );
+      return;
+    }
+    rows.push({ variant: o.variant, value: sides.join(',') });
+  }
+  const decls = (tuple: string): Record<string, string> =>
+    Object.fromEntries(tuple.split(',').map((v, i) => [STROKE_SIDE_CHANNELS[i][0], `${v}px`]));
+  const zeroNote = 'a side drawn at 0 is carried as 0px (a drawn fact; omitting it would let the return leg keep Figma\'s default weight there)';
+  if (new Set(rows.map((r) => r.value)).size === 1) {
+    const literals = (holder.literals as Record<string, string> | undefined) ?? {};
+    for (const [cssProp, value] of Object.entries(decls(rows[0].value))) if (literals[cssProp] === undefined) literals[cssProp] = value;
+    holder.literals = literals;
+    ctx.notes.push(
+      `${where}: per-side stroke weights [${rows[0].value.replace(/,/g, ', ')}] (top, right, bottom, left) drawn in every variant (dump v1.34) — carried as ${channels} pixel literals, not token identities; ${zeroNote}`,
+    );
+    return;
+  }
+  const fit = fitLiteralAxis(ctx, rows);
+  if (!fit) {
+    ctx.notes.push(
+      `${where}: per-side stroke weights are mixed across variants (${seen}; top, right, bottom, left) and are not a function of one enum axis — no ${channels} literals proposed; NAMED for review`,
+    );
+    return;
+  }
+  const lbp = (holder.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+  let entry = lbp.find((e) => e.prop === fit.axis.propName);
+  if (!entry) {
+    entry = { prop: fit.axis.propName, map: {} };
+    lbp.push(entry);
+  }
+  for (const value of fit.axis.values) {
+    const key = axisValue(fit.axis, value);
+    entry.map[key] = { ...(entry.map[key] ?? {}), ...decls(fit.byValue.get(value)!) };
+  }
+  holder.literalsByProp = lbp;
+  ctx.notes.push(
+    `${where}: per-side stroke weights vary with "${fit.axis.propName}" (${seen}; top, right, bottom, left — dump v1.34) — carried as ${channels} pixel literalsByProp, not token identities; ${zeroNote}`,
+  );
+}
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
  * captured spacing cannot use a uniform literal. */
@@ -4987,11 +5132,8 @@ function carryCrossAxisFill(
     return;
   }
   if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
-  // @door propose.cross-axis-fill-partial-refused
   if (filling !== m.occ.length) {
-    ctx.notes.push(
-      `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${filling}/${m.occ.length} variant occurrence(s) only — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
-    );
+    carryPartialCrossAxisFill(dim, base, m, parentModes, part, ctx, where);
     return;
   }
   if (dim === 'width') {
@@ -5016,6 +5158,149 @@ function carryCrossAxisFill(
   ctx.notes.push(
     `${where}: drawn FILL-height under a ROW parent with a DEFINITE height (dump v1.31 fillHeight; the parent's other children hug, so the parent's \`align: stretch\` cannot carry it) — carried as the part literal \`height: 100%\` (the cross-axis stretch against the parent's definite box, the same carrier crossAxisFillByProp uses for width)`,
   );
+}
+
+/** What an occurrence that does NOT draw the FILL contributes to the axis fit
+ *  below. It is a correlation key only and is never written: a non-filling
+ *  value gets NO literal (see carryPartialCrossAxisFill). Non-empty on
+ *  purpose — fitLiteralAxis reads an empty value as "not seen yet". */
+const NOT_FILLING = 'not-filling';
+
+/** G3b — a cross-axis FILL drawn in only SOME variant occurrences under a
+ *  parent with ONE auto-layout mode (field case: a designer's Tabs header
+ *  that FILLs its COLUMN root under Variant=Stretch and hugs under
+ *  Variant=Default). `literalsByProp` already spells it — `.variant-stretch
+ *  .header { width: 100% }` — so the fact is CARRIED exactly when "fills /
+ *  does not fill" is a pure function of ONE declared ENUM axis with full value
+ *  coverage (fitLiteralAxis: the same test per-side strokes and shape paints
+ *  ride; the layoutByProp discipline crossAxisFillByProp states). The carrier
+ *  is the one crossAxisFillByProp uses for its COLUMN planes and
+ *  carryCrossAxisFill for a whole-set FILL-height: `100%` on the cross
+ *  dimension, which the return leg lowers back to FILL (emit-figma-script).
+ *
+ *  The NON-filling values get NOTHING, deliberately. "Does not fill" is not
+ *  the fact "width: auto": that variant's size is whatever its own rules say
+ *  (hug, or a fixed size with its own carrier), an explicit `auto` would
+ *  override such a carrier and is not in the literal grammar, and an absent
+ *  key is what makes the return leg leave those variants un-filled instead of
+ *  inventing a FILL there.
+ *
+ *  Anything less correlated — a split across two axes, an axis value that
+ *  fills in some occurrences and not others, a declared value never observed,
+ *  a boolean axis (literalsByProp is enum-keyed) — stays the NAMED note it
+ *  was. A FILL-height keeps the definite-parent rule of the whole-set path. */
+function carryPartialCrossAxisFill(
+  dim: 'width' | 'height',
+  base: 'HORIZONTAL' | 'VERTICAL',
+  m: Merged,
+  parentModes: ParentModes,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const fillField = dim === 'height' ? 'fillHeight' : 'fillWidth';
+  const fillingOcc = m.occ.filter((o) => o.node[fillField] === true);
+  const drawn = `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${fillingOcc.length}/${m.occ.length} variant occurrence(s) only`;
+  const fit = fitLiteralAxis(
+    ctx,
+    m.occ.map((o) => ({ variant: o.variant, value: o.node[fillField] === true ? '100%' : NOT_FILLING })),
+  );
+  // @door propose.cross-axis-fill-partial-refused
+  if (!fit) {
+    ctx.notes.push(
+      `${drawn}, and "fills / does not fill" is not a pure function of ONE declared enum axis with full value coverage (it splits across two axes, an axis value fills in some occurrences and not others, a declared value was never observed, or the only fitting axis is boolean — literalsByProp is enum-keyed) — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (dim === 'height') {
+    const hugging = fillingOcc.filter((o) => parentModes.crossDefiniteByVariant?.get(o.variant) !== true);
+    // @door propose.cross-axis-fill-partial-hugging-parent
+    if (hugging.length > 0) {
+      ctx.notes.push(
+        `${drawn} (a function of axis "${fit.axis.property}") under a parent that HUGS its height on ${hugging.map((o) => o.variant).join(', ')} — \`height: 100%\` of an auto height is auto and the parent's \`align: stretch\` would stretch its other children, so no grammar spelling is exact; the cross-axis stretch is NAMED, not carried (review)`,
+      );
+      return;
+    }
+  }
+  const lbp =
+    (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+  // The referee's channel+prop rule (crossAxisFillByPropOn): a second claimant
+  // of this dimension on another prop would make the cascade order the meaning.
+  // @door propose.cross-axis-fill-partial-second-claimant
+  if (lbp.some((e) => e.prop !== fit.axis.propName && Object.values(e.map).some((o) => dim in o))) {
+    ctx.notes.push(
+      `${drawn} (a function of axis "${fit.axis.property}"), but another prop already claims \`${dim}\` through literalsByProp on this part — two props writing one dimension would make the cascade order the meaning; the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  const entry = lbp.find((e) => e.prop === fit.axis.propName) ?? { prop: fit.axis.propName, map: {} };
+  const stretched: string[] = [];
+  const claimed: string[] = [];
+  for (const value of fit.axis.values) {
+    if (fit.byValue.get(value) !== '100%') continue; // a non-filling value gets nothing
+    const key = axisValue(fit.axis, value);
+    if (entry.map[key]?.[dim] !== undefined) {
+      claimed.push(key); // an observed size already claims it
+      continue;
+    }
+    (entry.map[key] ??= {})[dim] = '100%';
+    stretched.push(key);
+  }
+  // @door propose.cross-axis-fill-partial-size-claimed
+  if (stretched.length === 0) {
+    ctx.notes.push(
+      `${drawn} (a function of axis "${fit.axis.property}"), but an observed \`${dim}\` literal already claims every filling value (${claimed.join(', ')}) — the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (!lbp.includes(entry)) lbp.push(entry);
+  part.literalsByProp = lbp;
+  const hugging = fit.axis.values.filter((v) => fit.byValue.get(v) !== '100%').map((v) => axisValue(fit.axis, v));
+  ctx.notes.push(
+    `${drawn} — a pure function of axis "${fit.axis.property}" with full value coverage, so the cross-axis stretch is carried as ${dim}: 100% through literalsByProp on \`${fit.axis.propName}\` (${stretched.join(', ')}); the value(s) that do not fill (${hugging.join(', ')}) get NO literal — their size is whatever their own rules say, and an absent key is what keeps the return leg from inventing a FILL there${claimed.length > 0 ? `; ${claimed.join(', ')} kept the observed size that already claims it` : ''}`,
+  );
+}
+
+/** G3b, the PRIMARY-axis twin — a FILL drawn ALONG the parent's primary axis
+ *  in only some variant occurrences (field case: the same Tabs set's list
+ *  under its ROW header, and each tab under the ROW list, FILL under
+ *  Variant=Stretch only). Along the primary axis a FILL is `layout.grow`
+ *  (`flex: 1 1 auto`), NOT a `100%` literal: three siblings at `width: 100%`
+ *  each claim the whole row, where three growers share it. `grow` is a
+ *  per-part invariant — primaryAxisGrow carries it only when EVERY occurrence
+ *  fills, and the per-variant layout vocabulary (VariantLayoutSchema:
+ *  display / direction / align / justify) has no `grow` — so the per-variant
+ *  case has no spelling today. It used to fall through primaryAxisGrow with no
+ *  note at all (the SILENT-LOSS class); it is NAMED here, once per part (a
+ *  repeat run's siblings share one path, so they share one note), with the
+ *  axis it follows when it follows one, so the schema change that would carry
+ *  it is a recorded gap rather than a guess. Each occurrence is read against
+ *  ITS OWN parent mode. Called from buildChildParts, above every branch of
+ *  buildPart and beside buildRepeatPart, so no part class can return past it. */
+function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes | null, ctx: Ctx, where: string): void {
+  if (!parentModes) return;
+  const facts = new Map<string, number>();
+  for (const m of siblings) {
+    const rows = m.occ.flatMap((o) => {
+      const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
+      if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') return [];
+      const dim = mode === 'HORIZONTAL' ? 'width' : 'height';
+      return [{ variant: o.variant, dim, mode, fills: o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] === true }];
+    });
+    const filling = rows.filter((r) => r.fills);
+    if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
+    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })));
+    const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
+    const correlation = fit
+      ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
+      : 'not a pure function of one declared enum axis';
+    const fact = `drawn ${planes.join(' and ')} in ${filling.length}/${rows.length} variant occurrence(s) only — ${correlation}. Along the primary axis a FILL is \`layout.grow\` (\`flex: 1 1 auto\`), not a \`100%\` literal (siblings at 100% each claim the whole row; growers share it), and \`grow\` is a per-part invariant: the per-variant layout vocabulary (layoutByProp / VariantLayoutSchema) has no \`grow\`, so the per-variant primary-axis FILL has no spelling; NAMED, not carried — nothing grows this part along that axis in any variant (review)`;
+    // @door propose.primary-axis-fill-partial-refused
+    facts.set(fact, (facts.get(fact) ?? 0) + 1);
+  }
+  for (const [fact, count] of facts) {
+    ctx.notes.push(`${where}: ${count > 1 ? `${count} repeated siblings each ` : ''}${fact}`);
+  }
 }
 
 /** PER-VARIANT accounting for the cross-axis FILL under a parent whose
@@ -6303,6 +6588,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
         ...(o.node.instancePrimaryFill ? { instancePrimaryFill: o.node.instancePrimaryFill } : {}),
         ...(o.node.stroke ? { stroke: o.node.stroke } : {}),
         ...(o.node.strokeWeight !== undefined ? { strokeWeight: o.node.strokeWeight } : {}),
+        ...(o.node.strokeWeights !== undefined ? { strokeWeights: o.node.strokeWeights } : {}),
         ...(o.node.cornerRadius !== undefined ? { cornerRadius: o.node.cornerRadius } : {}),
         ...(o.node.imageFill !== undefined ? { imageFill: o.node.imageFill } : {}),
       });
@@ -7354,9 +7640,16 @@ function buildChildParts(
   // placement fact is child order (G5) and repeat runs stay legal.
   const manualGrid = mode?.grid?.carried === true && !mode.grid.flow;
   let i = 0;
+  let primaryFillNamedThrough = 0;
   while (i < children.length) {
     const child = children[i];
     const run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
+    // G3b primary-axis twin — once per child; a run that falls back to fixed
+    // parts below re-enters this loop for its later siblings, already named.
+    if (i >= primaryFillNamedThrough) {
+      namePartialPrimaryAxisFill(run ?? [child], mode, ctx, `${where}/${child.name}`);
+      primaryFillNamedThrough = i + (run?.length ?? 1);
+    }
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
       const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
@@ -7547,6 +7840,7 @@ function buildPart(
     const slotByProp: ByPropCollector = { map: {} };
     const slotDeclared: Record<string, string> = {};
     const slotTokens = invertNodeTokens(m, false, ctx, where, slotByProp, part, slotDeclared);
+    carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
     if (Object.keys(slotDeclared).length > 0) {
       part.declared = { ...(part.declared as Record<string, string> | undefined), ...slotDeclared };
     }
@@ -8016,6 +8310,7 @@ function buildPart(
   const partByProp: ByPropCollector = { map: {} };
   const partDeclared: Record<string, string> = {};
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
+  carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
@@ -8344,7 +8639,15 @@ function flattenBaseInstances(variants: DumpNode[], ctx: Ctx): BaseInstanceCaptu
     if (inst.fill) variant.fill = inst.fill;
     if (inst.stroke) {
       variant.stroke = inst.stroke;
-      if (inst.strokeWeight !== undefined) variant.strokeWeight = inst.strokeWeight;
+      // One stroke, one weight spelling (dump v1.34): whichever the instance
+      // carries replaces BOTH of the wrapper's.
+      if (inst.strokeWeight !== undefined) {
+        variant.strokeWeight = inst.strokeWeight;
+        delete variant.strokeWeights;
+      } else if (inst.strokeWeights !== undefined) {
+        variant.strokeWeights = inst.strokeWeights;
+        delete variant.strokeWeight;
+      }
     }
     if (inst.bound) variant.bound = { ...(variant.bound ?? {}), ...inst.bound };
     if (inst.fillWidth !== undefined) variant.fillWidth = inst.fillWidth;
@@ -8548,6 +8851,12 @@ function stubGeometry(
     ctx.notes.push(
       `stub ${capture.id}: stroke drawn on ${geo.filter((o) => o.stroke).length}/${geo.length} observed occurrence(s) (or var-bound/non-uniform) — border not carried on the stub geometry (presence is not a function of the stub's axes), review`,
     );
+    const sided = [...new Set(geo.filter((o) => o.strokeWeights !== undefined).map((o) => `[${sideWeightsKey(o).replace(/,/g, ', ')}]`))];
+    if (sided.length > 0) {
+      ctx.notes.push(
+        `stub ${capture.id}: the observed stroke draws PER-SIDE weights ${sided.join(' / ')} (top, right, bottom, left — dump v1.34 strokeWeights) — the stub geometry carries one uniform border-width only, so the per-side rule is NAMED, not drawn; it belongs to the referenced component's own contract (review)`,
+      );
+    }
   }
   const observations: MintObservation[] = [];
   const push = (cssProperty: string, kind: MintObservation['kind'], value: (o: StubCapture['observed'][number]) => string | number | null, sparse?: string) => {
@@ -9450,7 +9759,19 @@ function proposeStateDiffs(
 
   paintChannel('background-color', 'fill', boxFillOf);
   paintChannel('border-color', 'stroke', (n) => n.stroke);
-  numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight']);
+  // dump v1.34: where a state plane or its base draws PER-SIDE literal weights
+  // there is no uniform number to compare (`strokeWeight` is absent there, and
+  // reading that absence as 0 would mint a state `border-width: 0` nobody
+  // drew). A per-side state override has no vocabulary yet — NAMED.
+  if (occs.some((o) => o.node.strokeWeights !== undefined || o.base.strokeWeights !== undefined)) {
+    if (occs.some((o) => sideWeightsKey(o.node) !== sideWeightsKey(o.base) || (o.node.strokeWeight ?? null) !== (o.base.strokeWeight ?? null))) {
+      ctx.notes.push(
+        `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — a per-side state override has no contract vocabulary; NAMED, not proposed (review)`,
+      );
+    }
+  } else {
+    numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, [...STROKE_WEIGHT_BOUND_FIELDS]);
+  }
   numberChannel('border-radius', 'cornerRadius', 'px', (n) => n.cornerRadius, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
   numberChannel('opacity', 'opacity', 'number', (n) => n.opacity, 1, ['opacity']);
 
@@ -10045,7 +10366,13 @@ function proposeStateDiffs(
           }
         }
         const weightFields = ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
-        if (differs((n) => n.strokeWeight ?? 0) || differs((n) => weightFields.map((f) => n.bound?.[f]))) {
+        if (d.some((x) => x.node.strokeWeights !== undefined || x.base.strokeWeights !== undefined)) {
+          // dump v1.34: no uniform number exists on a per-side plane — reading
+          // its absent strokeWeight as 0 would carry a width nobody drew.
+          if (differs((n) => n.strokeWeights) || differs((n) => n.strokeWeight)) {
+            nameOnly('strokeWeights', 'a per-side stroke weight state override has no contract vocabulary');
+          }
+        } else if (differs((n) => n.strokeWeight ?? 0) || differs((n) => weightFields.map((f) => n.bound?.[f]))) {
           const obs = numberObs((n) => n.strokeWeight, 0, weightFields);
           if (obs === 'mixed') nameOnly('strokeWeight', 'per-side stroke weight bindings are not one uniform width');
           else carry('border-width', 'strokeWeight', 'px', obs);
@@ -10547,6 +10874,7 @@ export function proposeFromDump(
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootDeclared: Record<string, string> = {};
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp, undefined, rootDeclared);
+  carryPerSideStrokeWeights(merged, root, ctx, where); // dump v1.34
   if (Object.keys(rootDeclared).length > 0) {
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }

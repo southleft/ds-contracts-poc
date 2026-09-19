@@ -6,6 +6,9 @@
  * DOM attrs OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   onToggle
+ *
+ * `children` OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef, useState } from 'react';
 import type { LabelHTMLAttributes } from 'react';
@@ -17,7 +20,10 @@ const ICONS: Record<string, string> = {
   dash: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="10" x2="14.5" y2="10" stroke-linecap="round"/></svg>',
 };
 
-export interface CheckboxProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onToggle'> {
+export interface CheckboxProps extends Omit<
+  LabelHTMLAttributes<HTMLLabelElement>,
+  'children' | 'onToggle'
+> {
   /** Checked, unchecked, or indeterminate (partial selection in a group). */
   value?: 'unchecked' | 'checked' | 'indeterminate';
   /** Control size. */
@@ -39,7 +45,6 @@ export const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(function Che
     description = 'Supporting detail for this option.',
     onToggle,
     className,
-    children,
     ...rest
   },
   ref,
