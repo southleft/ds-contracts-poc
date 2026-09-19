@@ -5,9 +5,9 @@
   "nodeId": "1565:4005",
   "mode": "reviewable-inversion",
   "variantCount": 20,
-  "contractSha256": "9a43a7cce12c37aa1b0ecaab36e45044e29a3e2b26cc97767fac9f7685d2dbfa",
+  "contractSha256": "85cdee76b7a78cdec9190b40ed025882abf8491889f7a29c6876c651605fbb5a",
   "carriage": {
-    "carried": 219,
+    "carried": 229,
     "named": 541,
     "silent": 0
   },
@@ -168,6 +168,11 @@
       10,
       0
     ],
+    "text textAutoResize (whole-pixel auto-width box)": [
+      10,
+      0,
+      0
+    ],
     "styles.text (TextStyle identity)": [
       10,
       0,
@@ -237,14 +242,14 @@
     }
   ],
   "generatedFiles": {
-    "react/ButtonContract/ButtonContract.module.css": "11c95a6068c2b6123c60f447accfa4c186db02cd8717a1a7d0ddfbc7f28222d7",
+    "react/ButtonContract/ButtonContract.module.css": "e0be3d92ace254b086d856cb7a675be973b69f0d1084be8f4a638bac48e185e5",
     "react/ButtonContract/ButtonContract.stories.tsx": "6662845bfb03a4ccd3eb862aa070d75f6f910fd29ad5a53f9aec511a4fce09a2",
     "react/ButtonContract/ButtonContract.tsx": "4b42440336a77b27c1d653a0b194e439bb03565210f758cca0231b43c351c6ee",
     "react/ButtonContract/index.ts": "325759cf96ce5e3b27a155e03e3725749102e5b3034830a9b17e1b9c2d4bb1ee",
     "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
-    "wc/ds-button-contract.css.ts": "c6e5d97f02f35e9dcb535c2284d0786482cd759796147a896982f86004850ae9",
+    "wc/ds-button-contract.css.ts": "79ef805930d69871bd470f81df8e4e9f5504e62b327516685060acbe911d16b8",
     "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
     "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c"
   },
-  "notesCount": 375
+  "notesCount": 376
 }

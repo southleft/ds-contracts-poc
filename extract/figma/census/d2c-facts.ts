@@ -651,6 +651,17 @@ export function accountSet(inputs: AccountInputs): SetAccount {
         classify(path, "text textAutoResize (fixed-box text)", tr,
           partCarries(part, ["width"]) ? "width channel on the text part" : null,
           note("textAutoResize") ?? gap("fixed sizes"));
+      // dump v1.36: a text box that sizes itself to its text is a WHOLE number
+      // of pixels wide (the advance rounded up, no tracking after the last
+      // glyph); the browser's is fractional. Lost without a row until the
+      // design-led consumer check measured it on a designer's Badge (26 of 72
+      // variants over the limit with every content size equal). Carried as
+      // Part.textAutoResize: WIDTH_AND_HEIGHT; a hoisted root label, a mixed
+      // or contradicting dump is NAMED by the proposer.
+      if (tr === "WIDTH_AND_HEIGHT" && lsh !== "FILL")
+        classify(path, "text textAutoResize (whole-pixel auto-width box)", tr,
+          partCarries(part, ["textAutoResize"]) ? `part "${part!.name}" textAutoResize: WIDTH_AND_HEIGHT → inline-size rounded up to the pixel` : null,
+          note("textAutoResize") ?? note("whole-pixel"));
       const tt = s.textTruncation as string | undefined;
       if (tt && tt !== "DISABLED")
         classify(path, "text textTruncation", `${tt} maxLines=${String(s.maxLines)}`,

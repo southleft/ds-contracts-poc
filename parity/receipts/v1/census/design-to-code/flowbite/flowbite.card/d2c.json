@@ -5,9 +5,9 @@
   "nodeId": "120:1999",
   "mode": "exact",
   "variantCount": 1,
-  "contractSha256": "349b5930ff0b9b3c3e1b737554c779f07e42c5097769d85c3c7ca04a09164ace",
+  "contractSha256": "b50ef37fd7a781d692537e35dca60372cacea50f87231e998296473256c0f9e6",
   "carriage": {
-    "carried": 23,
+    "carried": 24,
     "named": 20,
     "silent": 0
   },
@@ -178,6 +178,11 @@
       0,
       0
     ],
+    "text textAutoResize (whole-pixel auto-width box)": [
+      1,
+      0,
+      0
+    ],
     "stamp ds_contracts/fontWeightVar": [
       1,
       0,
@@ -264,14 +269,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Card/Card.module.css": "cfe1812bcb07a972d4011e1e9b5f766a137810d2058fb2392a81dd5025fd4a2b",
+    "react/Card/Card.module.css": "a2a56d98c604c2ccd1456c2b23bc9a520cb54ac2382f9c49e654738851b5e51e",
     "react/Card/Card.stories.tsx": "43e7643c324ad6b934ce320cffe3e6a52b625bbb684a0717c40474114e08a354",
     "react/Card/Card.tsx": "ab3e2b4890e055ed2b3db9d473975509e3628376d31bc51c8d57209d643c3fe3",
     "react/Card/index.ts": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
     "wc/flowbite-card.ts": "5d9cfbd52c2d4e5ea01893dbf63247a074241ddc88609ad3d37b36d880f2845c",
-    "wc/flowbite-card.css.ts": "5760aac23f4d3f9fe159ec4de1b8cce1e87c5479525eb69ac3fb58987a4ddbbb",
+    "wc/flowbite-card.css.ts": "e36777b95241cb3ae2a262cb9eef164e4b6d0b02cc40684f3d49459aa21df809",
     "wc/flowbite-card.demo.html": "d5bd662522f30e5493aba2774b0275f296465fe77400bea91209e1417600fa91",
     "wc/flowbite-card.custom-elements.json": "640161ef1de2cc00da41e5d4cdd0ef439fdf4499c504b8fffeb6237af1449c58"
   },
-  "notesCount": 37
+  "notesCount": 38
 }
