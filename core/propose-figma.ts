@@ -4621,6 +4621,68 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
     `${where}: per-side stroke weights vary with "${fit.axis.propName}" (${seen}; top, right, bottom, left — dump v1.34) — carried as ${channels} pixel literalsByProp, not token identities; ${zeroNote}`,
   );
 }
+/** dump v1.35 — DOES THE STROKE TAKE LAYOUT SPACE? Found by the design-led
+ *  consumer check on a designer's Badge: all 24 outline variants rendered 4px
+ *  wider than Figma drew them, and the 16px-high small one 20px high. A Figma
+ *  stroke on an auto-layout frame takes no layout space unless the frame says
+ *  `strokesIncludedInLayout`; the CSS `border` it lowers to always does.
+ *
+ *  The designer's numbers are KEPT. Rewriting padding to "padding minus
+ *  border" would destroy the padding's variable binding (and cannot fit a 16px
+ *  box around 8+8 padding plus a 2px border at all), so the stroke keeps riding
+ *  the border channels and the part records the one fact that differs —
+ *  `strokesIncludedInLayout: false` — for the code emitters to draw as an
+ *  inset ring (packages/core anatomy.ts lowerStrokeRings) and the writer to
+ *  set back on the frame.
+ *
+ *  Only `false` is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.34, or the mock
+ *     canvas), never `false` — those dumps propose the bytes they always did;
+ *   · `true` is what a frame THIS pipeline generated reads back as, and it is
+ *     what an absent flag already means — so a generated set proposes back to
+ *     exactly its own contract;
+ *   · a node drawn both ways across its variants has no single spelling (the
+ *     flag is per part, not per variant) and is NAMED; it keeps the border.
+ *  Occurrences that draw no stroke, or are not auto-layout frames, carry no
+ *  evidence either way and do not vote. settleStrokeLayout withdraws the flag
+ *  from a part whose stroke channels were all refused. */
+function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const captured = m.occ.filter((o) => o.node.stroke !== undefined && o.node.strokesIncludedInLayout !== undefined);
+  // @door propose.stroke-layout-absent-is-border
+  if (captured.length === 0) return; // not captured, or nothing drawn
+  const outside = captured.filter((o) => o.node.strokesIncludedInLayout === false);
+  if (outside.length === 0) return; // in layout everywhere — the border every contract already means
+  // @door propose.stroke-layout-mixed-refused
+  if (outside.length < captured.length) {
+    ctx.notes.push(
+      `${where}: the stroke takes layout space in ${captured.length - outside.length} of ${captured.length} stroked variants and none in the other ${outside.length} (strokesIncludedInLayout, dump v1.35) — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the stroke carries as a space-taking border; the ${outside.length} variants render wider/taller by their stroke weight per side (review)`,
+    );
+    return;
+  }
+  holder.strokesIncludedInLayout = false;
+  ctx.notes.push(
+    `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
+  );
+}
+/** A part that ended up carrying NO stroke channel (every one refused by
+ *  name upstream) has nothing for the flag to qualify, and validateContract
+ *  refuses a stray one — withdraw it, and say so. */
+function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ctx: Ctx): void {
+  const maps = (v: unknown): Array<Record<string, unknown>> =>
+    v === null || typeof v !== 'object' ? [] : Array.isArray(v) ? v.flatMap(maps) : [v as Record<string, unknown>, ...Object.values(v).flatMap(maps)];
+  const visit = (name: string, part: Record<string, unknown>): void => {
+    const { parts, ...own } = part;
+    // @door propose.stroke-layout-without-stroke-withdrawn
+    if (own.strokesIncludedInLayout === false && !maps(own).some((h) => Object.keys(h).some((c) => /^(border|outline)(-(top|right|bottom|left))?-(width|color)$/.test(c)))) {
+      delete part.strokesIncludedInLayout;
+      ctx.notes.push(
+        `${name}: strokesIncludedInLayout false was captured but no stroke channel survived on this part (each refusal is named above) — the flag qualifies a stroke and is WITHDRAWN with it`,
+      );
+    }
+    for (const [child, p] of Object.entries((parts as Record<string, Record<string, unknown>> | undefined) ?? {})) visit(child, p);
+  };
+  for (const [name, part] of Object.entries(anatomy)) visit(name, part);
+}
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
  * captured spacing cannot use a uniform literal. */
@@ -7841,6 +7903,7 @@ function buildPart(
     const slotDeclared: Record<string, string> = {};
     const slotTokens = invertNodeTokens(m, false, ctx, where, slotByProp, part, slotDeclared);
     carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+    carryStrokeLayout(m, part, ctx, where); // dump v1.35
     if (Object.keys(slotDeclared).length > 0) {
       part.declared = { ...(part.declared as Record<string, string> | undefined), ...slotDeclared };
     }
@@ -8311,6 +8374,7 @@ function buildPart(
   const partDeclared: Record<string, string> = {};
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
   carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+  carryStrokeLayout(m, part, ctx, where); // dump v1.35
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
@@ -10875,6 +10939,7 @@ export function proposeFromDump(
   const rootDeclared: Record<string, string> = {};
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp, undefined, rootDeclared);
   carryPerSideStrokeWeights(merged, root, ctx, where); // dump v1.34
+  carryStrokeLayout(merged, root, ctx, where); // dump v1.35
   if (Object.keys(rootDeclared).length > 0) {
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }
@@ -11771,6 +11836,7 @@ export function proposeFromDump(
     }
   }
 
+  settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);

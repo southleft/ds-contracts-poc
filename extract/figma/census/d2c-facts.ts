@@ -439,6 +439,17 @@ export function accountSet(inputs: AccountInputs): SetAccount {
             : null,
           note("stroke") ?? note("outline"));
       }
+      // dump v1.35: a stroke on an auto-layout frame that takes NO layout
+      // space. REST omits the default, so the ABSENT key is the fact here —
+      // and it was lost without a row until the design-led consumer check
+      // measured it (a designer's outline Badge rendered 4px too wide). The
+      // in-layout value (`true`) is what a border already means and is no
+      // more a separate fact than strokeAlign INSIDE is.
+      const autoLayout = n.layoutMode === "HORIZONTAL" || n.layoutMode === "VERTICAL" || n.layoutMode === "GRID";
+      if (autoLayout && n.strokesIncludedInLayout !== true)
+        classify(path, "strokesIncludedInLayout", false,
+          partCarries(part, ["strokesIncludedInLayout"]) ? `part "${part!.name}" strokesIncludedInLayout: false → inset ring, no layout space` : null,
+          note("layout space") ?? note("strokesIncludedInLayout"));
       const align = n.strokeAlign as string | undefined;
       if (align && align !== "INSIDE")
         classify(path, "strokeAlign", align,

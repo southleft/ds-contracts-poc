@@ -71,6 +71,9 @@ export {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  drawsStrokeRing,
+  lowerStrokeRings,
+  settleStrokeShadows,
   enumProps,
   holderDeclaresPosition,
   isArrayType,
@@ -1106,7 +1109,7 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   validateReactInitialBindings(contract);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
-  const css = generateCss(contract, ctx.tokens, errors);
+  const css = generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }

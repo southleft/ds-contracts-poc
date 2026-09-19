@@ -689,6 +689,16 @@ function layoutPage(): { route: string; html: string } {
         ]),
     ),
     section(
+      "strokes-included-in-layout",
+      "strokesIncludedInLayout — a stroke that takes no layout space",
+      ["curated"],
+      `<p><code>strokesIncludedInLayout: false</code> on a part records one captured canvas fact about that part's stroke: <em>it is drawn without taking layout space</em>. It is Figma's auto-layout field of the same name, and only the non-default value is spelled. A designer's frame at Figma's default paints its stroke <strong>over the padding</strong> and sizes the box as content + padding; a CSS <code>border</code> grows the box instead. Measured on a designer's 72-variant Badge: every outline variant rendered 4px too wide, and the 16px-high small one 20px high — 8 + 8px of padding plus a 2px border cannot fit a 16px border box at all.</p><p><strong>Absent</strong> is the meaning every contract already had: the <code>border-*</code> channels are a CSS border under <code>box-sizing: border-box</code>, which is also what a frame this pipeline generates reads back as. So <code>true</code> is never written, a generated set proposes back to exactly its own contract, and no existing contract changes meaning.</p><p>The designer's numbers are kept. <code>border-width</code> / <code>border-color</code> (and the per-side widths) keep carrying the stroke, tokens stay bound, and the padding stays the padding — rewriting it to "padding minus border" would destroy its variable binding. What changes is how each surface <em>draws</em> the stroke: the code emitters paint an inset <code>box-shadow</code> ring (zero blur, following <code>border-radius</code>, composed <em>before</em> any real shadow so both survive) instead of a border; the canvas writer sets the field back on the frame. <code>outline-*</code> channels never take layout space in CSS, so the code surfaces ignore the flag for them. The flag is <strong>captured, never inferred</strong>: a dump that did not capture the field (dump ≤ v1.34) proposes the space-taking border it always did, and a node drawn both ways across its variants is named and keeps the border.</p>` +
+        refusals("Refusals:", [
+          "a part carrying <code>strokesIncludedInLayout</code> with no stroke channel (<code>border-*</code> / <code>outline-*</code> width or colour) — the flag qualifies a stroke and qualifies nothing else",
+          "the flag together with a per-side border colour, or a declared / conditional <code>border-style</code> — the ring is one-colour and solid, so neither has a spelling",
+        ]),
+    ),
+    section(
       "layout-by-prop",
       "Layout by prop",
       ["generated", "curated"],

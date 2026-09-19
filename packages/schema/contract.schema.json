@@ -1321,6 +1321,10 @@
         "hugsBelowMaxWidth": {
           "type": "boolean"
         },
+        "strokesIncludedInLayout": {
+          "type": "boolean",
+          "const": false
+        },
         "textOutOfBox": {
           "type": "object",
           "properties": {
