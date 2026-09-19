@@ -2399,9 +2399,14 @@ export function Playground() {
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
   const [libraryArtifact, setLibraryArtifact] = useState<{ filename: string; name: string; downloadUrl: string } | null>(null);
-  useEffect(() => { setLibraryArtifact(null); setLibraryNotice(null); }, [text]);
+  const libraryRevision = useRef(0);
+  useEffect(() => {
+    libraryRevision.current++;
+    setLibraryArtifact(null); setLibraryNotice(null);
+  }, [text, tokenSource.tree, icons, emittable?.contracts]);
   const downloadReactLibrary = async () => {
     if (!emittable || validation.status !== 'valid' || libraryBusy) return;
+    const revision = libraryRevision.current;
     setLibraryBusy(true); setLibraryNotice(null); setLibraryArtifact(null);
     try {
       const scope = linkedImportScope(emittable.contract, emittable.contracts,
@@ -2418,9 +2423,12 @@ export function Playground() {
       if (typeof artifact.filename !== 'string' || !/^[A-Za-z0-9._-]+\.tgz$/.test(artifact.filename) ||
         typeof artifact.name !== 'string' || typeof artifact.downloadUrl !== 'string' ||
         !/^\/api\/react-library\/download\/[a-f0-9-]+$/.test(artifact.downloadUrl)) throw Error('React library response did not contain an installable archive.');
+      if (revision !== libraryRevision.current) return;
       setLibraryArtifact(artifact);
       setLibraryNotice('React library ready. Download it, then install the saved file in your app.');
-    } catch (error) { setLibraryNotice(error instanceof Error ? error.message : String(error)); }
+    } catch (error) {
+      if (revision === libraryRevision.current) setLibraryNotice(error instanceof Error ? error.message : String(error));
+    }
     finally { setLibraryBusy(false); }
   };
 
