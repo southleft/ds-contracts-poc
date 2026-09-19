@@ -47,7 +47,7 @@ test('an unbound number token and the literals that show it are carried in one p
   assert.ok(script.includes('variable.setValueForMode(change.modeId, target)') && script.includes("'native-update-token-value-conflict:'") &&
     script.includes('getVariableByIdAsync(change.variableId)') && !/\.find\(v => v\.name|\.name ===/.test(script) &&
     // The local variables are read only to refuse an alias, never to choose what is written.
-    script.includes('const foreign = locals.filter(') && !/variables\.set\([^)]*foreign|foreign\.(find|forEach)/.test(script), 'a guarded write by pinned id, never a name search');
+    script.includes('locals.some(') && !/variables\.set\([^)]*locals|locals\.(find|forEach)/.test(script), 'a guarded write by pinned id, never a name search');
   const writes = script.slice(script.indexOf("out.status = 'preflight-observed'"), script.indexOf('out.observation = await')).replace(/^\s*\/\/.*$/gm, '');
   assert.ok(writes.includes('setValueForMode') && writes.includes('node.opacity = target') && !/\bawait\b/.test(writes), 'no await between the final checks and the assignments');
 
@@ -355,6 +355,38 @@ test('a local variable outside the collection that aliases a written variable re
   assert.equal(applied.status, 'updated', JSON.stringify(applied.problems));
   const script = emitNativeContractUpdateScript(plan), writes = script.slice(script.indexOf('getLocalVariablesAsync()'), script.indexOf('out.observation = await'));
   assert.equal((writes.replace(/^\s*\/\/.*$/gm, '').match(/\bawait\b/g) ?? []).length, 0, 'the local variables are the last read; nothing is awaited after them before the writes');
+});
+
+test('bindings or aliases introduced during the final async read refuse before any assignment', async () => {
+  for (const attack of ['local-alias', 'existing-node-binding', 'new-node-binding', 'file-change'] as const) {
+    const f = await tokenFixture(0.4, { other: { $type: 'number', $value: 0.2 } }), plan = f.prepare();
+    const other = await f.figma.variables.getVariableByIdAsync(f.tokenIdentity.variables.find((v: any) => v.tokenPath === 'other').id);
+    const read = f.figma.variables.getLocalVariablesAsync.bind(f.figma.variables);
+    const writes: unknown[] = [], set = f.variable.setValueForMode.bind(f.variable);
+    f.variable.setValueForMode = (mode: string, value: unknown) => { writes.push(value); set(mode, value); };
+    let injected = false;
+    f.figma.variables.getLocalVariablesAsync = async () => {
+      const locals = await read();
+      if (!injected) {
+        injected = true;
+        if (attack === 'local-alias') other.setValueForMode(f.modeId, { type: 'VARIABLE_ALIAS', id: f.variableId });
+        else if (attack === 'file-change') f.figma.fileKey = 'another-file';
+        else {
+          const node = attack === 'existing-node-binding' ? f.nodes[0] : f.figma.createRectangle();
+          if (attack === 'new-node-binding') f.figma.currentPage.appendChild(node);
+          node.boundVariables = { ...node.boundVariables, cornerRadius: { type: 'VARIABLE_ALIAS', id: f.variableId } };
+        }
+      }
+      return locals;
+    };
+    const result = await f.run(emitNativeContractUpdateScript(plan));
+    assert.equal(result.status, 'refused', attack + ': ' + JSON.stringify(result.problems));
+    assert.deepEqual(result.problems, [attack === 'file-change' ? 'native-update-file-mismatch' :
+      (attack === 'local-alias' ? 'native-update-token-aliased:' : 'native-update-token-bound:') + f.variableId]);
+    assert.deepEqual(writes, [], attack + ': even a subsequently rolled-back variable write is forbidden');
+    assert.equal(f.variable.valuesByMode[f.modeId], 0.5);
+    assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+  }
 });
 
 test('a node on another page is not checked, and every proposal that writes a variable says so', async t => {

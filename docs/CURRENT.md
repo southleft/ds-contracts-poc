@@ -128,6 +128,17 @@ The owner's React-only V1 asks for five demonstrations. Each row names what the 
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 
+**AGENT decision — variable-update preconditions.** After the last asynchronous
+read, a variable update rechecks the file, all local aliases and live bindings
+on the operation's page before assigning anything. An earlier snapshot is not
+enough: a bounded probe added an alias or binding during that read and observed
+a temporary write followed by rollback. The guard now refuses with zero
+assignments; `core/native-contract-token-update.test.ts` covers those races.
+Other-page bindings remain unchecked, as named on the proposal. This guard is
+synthetically verified; the successful live Switch cycle above predates it.
+To reverse, remove the final live checks in `emitTokenValueUpdateScript` and
+their race probes; doing so restores the demonstrated transient-write defect.
+
 ### React V1 acceptance surface
 
 These are requirements to verify, not a list of features already qualified:
