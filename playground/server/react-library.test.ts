@@ -40,8 +40,9 @@ test('the local download route refuses cross-origin, hostile Host, non-JSON and 
   });
   const server = createServer((req, res) => { void service(req, res); });
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
-  const url = `http://127.0.0.1:${(server.address() as any).port}`;
-  const options = { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: url }, body: JSON.stringify(request()) };
+  const origin = `http://127.0.0.1:${(server.address() as any).port}`;
+  const url = origin + '/api/react-library';
+  const options = { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: origin }, body: JSON.stringify(request()) };
   try {
     assert.equal((await fetch(url, { ...options, headers: { ...options.headers, Origin: 'https://foreign.invalid' } })).status, 403);
     assert.equal(await new Promise<number>(resolve => { const req = httpRequest(url, { method: 'POST', headers: { Host: 'foreign.invalid', 'Content-Type': 'application/json' } }, response => { response.resume(); resolve(response.statusCode!); }); req.end(JSON.stringify(request())); }), 403);
@@ -55,8 +56,13 @@ test('the local download route refuses cross-origin, hostile Host, non-JSON and 
     assert.equal((await fetch(url, options)).status, 409);
     release();
     const response = await first;
-    assert.equal(response.headers.get('Content-Disposition'), 'attachment; filename="library.tgz"');
-    assert.equal(await response.text(), 'test'); assert.equal(calls, 1);
+    const artifact = await response.json();
+    assert.match(artifact.downloadUrl, /^\/api\/react-library\/download\/[a-f0-9-]+$/);
+    const archive = await fetch(origin + artifact.downloadUrl);
+    assert.equal(archive.headers.get('Content-Disposition'), 'attachment; filename="library.tgz"');
+    assert.equal(await archive.text(), 'test'); assert.equal(calls, 1);
+    assert.equal((await fetch(origin + artifact.downloadUrl, { headers: { Origin: 'https://foreign.invalid' } })).status, 403);
+    assert.equal((await fetch(origin + '/api/react-library/download/ffffffff-ffff-ffff-ffff-ffffffffffff')).status, 404);
   } finally { release(); server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())); }
 });
 

@@ -2398,9 +2398,11 @@ export function Playground() {
 
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
+  const [libraryArtifact, setLibraryArtifact] = useState<{ filename: string; name: string; downloadUrl: string } | null>(null);
+  useEffect(() => { setLibraryArtifact(null); setLibraryNotice(null); }, [text]);
   const downloadReactLibrary = async () => {
     if (!emittable || validation.status !== 'valid' || libraryBusy) return;
-    setLibraryBusy(true); setLibraryNotice(null);
+    setLibraryBusy(true); setLibraryNotice(null); setLibraryArtifact(null);
     try {
       const scope = linkedImportScope(emittable.contract, emittable.contracts,
         sessionRegistry().layersByContractId, tokenSource.inventory);
@@ -2412,13 +2414,12 @@ export function Playground() {
         const detail = await response.json().catch(() => null);
         throw Error(detail?.error ?? `React library preparation failed (${response.status}).`);
       }
-      const filename = response.headers.get('Content-Disposition')?.match(/filename="([A-Za-z0-9._-]+)"/)?.[1];
-      if (!filename || !response.headers.get('Content-Type')?.startsWith('application/gzip')) throw Error('React library response did not contain an installable archive.');
-      const url = URL.createObjectURL(await response.blob());
-      const anchor = document.createElement('a'); anchor.href = url; anchor.download = filename;
-      document.body.append(anchor); anchor.click(); anchor.remove();
-      window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
-      setLibraryNotice(`Downloaded ${filename}. Install it in your React app with npm install ./path/to/${filename}.`);
+      const artifact = await response.json();
+      if (typeof artifact.filename !== 'string' || !/^[A-Za-z0-9._-]+\.tgz$/.test(artifact.filename) ||
+        typeof artifact.name !== 'string' || typeof artifact.downloadUrl !== 'string' ||
+        !/^\/api\/react-library\/download\/[a-f0-9-]+$/.test(artifact.downloadUrl)) throw Error('React library response did not contain an installable archive.');
+      setLibraryArtifact(artifact);
+      setLibraryNotice('React library ready. Download it, then install the saved file in your app.');
     } catch (error) { setLibraryNotice(error instanceof Error ? error.message : String(error)); }
     finally { setLibraryBusy(false); }
   };
@@ -3955,10 +3956,14 @@ export function Playground() {
               {outputTab === 'react' && import.meta.env.DEV && (
                 <div className="pane__body">
                   <button type="button" className="btn--primary" disabled={libraryBusy || validation.status !== 'valid'} onClick={() => void downloadReactLibrary()}>
-                    {libraryBusy ? 'Preparing React library…' : 'Download React library'}
+                    {libraryBusy ? 'Preparing React library…' : 'Prepare React library'}
                   </button>
                   <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>
                   {libraryNotice && <p role="status">{libraryNotice}</p>}
+                  {libraryArtifact && <>
+                    <p><a href={libraryArtifact.downloadUrl} download={libraryArtifact.filename}>Download {libraryArtifact.filename}</a></p>
+                    <p className="hint">Install: <code>npm install ./path/to/{libraryArtifact.filename}</code><br />Import from <code>{libraryArtifact.name}</code>.</p>
+                  </>}
                 </div>
               )}
               {!emittable ? (
