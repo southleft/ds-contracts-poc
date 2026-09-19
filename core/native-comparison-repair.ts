@@ -18,8 +18,11 @@ export function prepareNativeComparisonFrameRepair(input:NativeContractCompariso
   const before=clean(receipt),after=structuredClone(before);
   if(verifyNativeContractComparisonReadback(input,before).status!=='supported-comparison-structure-observed')fail('frame-observation-required');
   const board=after.content.nodes.find((n:Row)=>n.id===input.creation.comparisonBoardId),v=board?.values;
+  // Two named framings: a hugging frame, or the caller's place pinned FIXED at
+  // the plan's observed containing width (already verified by the reader above).
+  const width=input.comparison.containerWidth;
   if(!board||board.type!=='FRAME'||board.name!=='Observed caller content'||v.clipsContent!==true||
-      v.visible!==true||v.opacity!==1||v.layoutMode!=='VERTICAL'||v.primaryAxisSizingMode!=='AUTO'||v.counterAxisSizingMode!=='AUTO'||
+      v.visible!==true||v.opacity!==1||v.layoutMode!=='VERTICAL'||v.primaryAxisSizingMode!=='AUTO'||v.counterAxisSizingMode!==(width===undefined?'AUTO':'FIXED')||
       ['fills','strokes','effects','reactions'].some(k=>v[k]?.length)||Object.keys(v.boundVariables??{}).length||Object.keys(v.explicitVariableModes??{}).length||
       ['itemSpacing','paddingTop','paddingRight','paddingBottom','paddingLeft','cornerRadius','topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'].some(k=>v[k]!==0)||
       ['minWidth','minHeight','maxWidth','maxHeight'].some(k=>v[k]!=null))fail('frame-context-unqualified');

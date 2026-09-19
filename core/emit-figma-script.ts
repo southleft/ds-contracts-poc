@@ -7872,7 +7872,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
   return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
     header: '// Shared renderer: caller content in an instance of an existing observed main.',
-    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSourceOwnedComparison: !!compiled.instances?.some(ref => ref.contentMode === 'source-owned'), nativeInstanceWidthComparison: compiled.instanceWidth !== undefined, nativeComparisonRecovery: !!context.comparisonRecovery, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSourceOwnedComparison: !!compiled.instances?.some(ref => ref.contentMode === 'source-owned'), nativeInstanceWidthComparison: compiled.instanceWidth !== undefined, nativeContainerWidthComparison: compiled.containerWidth !== undefined, nativeComparisonRecovery: !!context.comparisonRecovery, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
   }));
 }
 
@@ -7882,7 +7882,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -9547,7 +9547,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison, !!opts.nativeSourceOwnedComparison, !!opts.nativeInstanceWidthComparison, !!opts.nativeComparisonRecovery) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
+${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison, !!opts.nativeSourceOwnedComparison, !!opts.nativeInstanceWidthComparison, !!opts.nativeComparisonRecovery, !!opts.nativeContainerWidthComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run

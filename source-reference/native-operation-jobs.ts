@@ -141,6 +141,8 @@ export interface NativeOperationSnapshot {
   componentName?: string;
   sourceOwnedContent?: boolean;
   comparisonWidth?: number;
+  /** Observed containing width framing a fill-width root; never the main's size. */
+  comparisonContainerWidth?: number;
   canResumeComparison?: boolean;
   comparisonRepair?: {changes: NativeComparisonRepairPlan["changes"]};
   operation: "source-native-inspection";
@@ -1218,6 +1220,8 @@ export function createNativeOperationJobs(
       ...(sourceCurrent && availableRepair(loaded.state,loaded.plan) ? {comparisonRepair:{changes:structuredClone(availableRepair(loaded.state,loaded.plan)!.changes)}} : {}),
       ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.instanceWidth !== undefined
         ? {comparisonWidth:loaded.plan.plan.comparison.instanceWidth} : {}),
+      ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.containerWidth !== undefined
+        ? {comparisonContainerWidth:loaded.plan.plan.comparison.containerWidth} : {}),
       phase: loaded.state.phase,
       ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
         ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),
