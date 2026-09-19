@@ -6,7 +6,7 @@ import { ContractSchema } from '../scripts/contract-schema.js';
 import { enumerate, comboKey, normalizeValue, flatten, type CapturedNode } from '../extract/computed/lib.js';
 import type { PropSpace, SweepResult } from '../extract/computed/capture.js';
 import type { ReactSourceProgram } from './react-source-program.js';
-import type { ReactOwnership } from './react-ownership.js';
+import { reactOwnershipMatchesTree, type ReactOwnership } from './react-ownership.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import type { SvgViewportEvidence } from './svg-viewports.js';
@@ -19,8 +19,10 @@ import { observeReactSourceBindings, type ReactSourceBindingProjection } from '.
 import { retainReactRootSourceBindings } from './react-root-sweep.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
+import { descendantFixedSizes, descendantTranslateRefusal, lowerDescendantTranslations, type DescendantAlignment, type DescendantSizing } from './react-descendant-geometry.js';
 
 type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence };
+const unjoined = 'descendant-sizes-not-joined:census-differs-from-captured-tree';
 export function reactInitialObservedRoot(snapshot: Snapshot, instanceId: string) {
   const instance = snapshot.ownership.components.find(c => c.id === instanceId);
   if (!instance || instance.roots.length !== 1) throw Error('react-initial-contract-source-root-mismatch');
@@ -35,13 +37,15 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
    * are that component's identity; a later observation of the same source case
    * compiles under them instead of minting a name from its own content. */
   identity?: string) {
-  const result = { version: 1 as const, qualification: 'observed-initial-state-contract' as const,
+  const draft = { version: 1 as const, qualification: 'observed-initial-state-contract' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const, status: 'refused' as 'refused' | 'compiled-draft',
     problems: [] as string[], limitations: ['observed-initial-inputs-only', 'runtime-interactions-not-projected',
       'nested-component-identity-not-projected', 'source-variable-modes-and-aliases-not-assembled', 'descendant-source-bindings-not-observed', 'native-output-not-verified'],
     sourceBindings: [] as Array<{ observation: string; bindings: ReactSourceBindingProjection['sourceBindings'] }>,
     nativeVariants: [] as Array<{ observation: string; variant: string }>,
     compiled: undefined as ReturnType<typeof compileObservedContentSweep> | undefined };
+  /** `descendants` exists only when something below the root was admitted: own fixed sizes per plane, and lowered translations. */
+  const result: typeof draft & { descendants?: { sizes: Array<{ observation: string; path: string; channels: string[] }>; alignments: DescendantAlignment[] } } = draft;
   try {
     const expected = planReactInitialStates(program, ownership, tree, observation.instanceId);
     const originalInstance = ownership.components.find(c => c.id === observation.instanceId)!;
@@ -75,7 +79,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     if (enumeration.policy !== 'full-cartesian' || enumeration.combos.length !== observation.rows.length) throw Error('react-initial-contract-domain-incomplete');
     const roots = new Map<string, CapturedNode>(), sizes = new Set<string>();
     const sizeModes = new Map<string, string>();
-    const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string; rootPath: string }>();
+    const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string; rootPath: string; sizing: DescendantSizing }>();
     for (const row of observation.rows) {
       const snap = snapshots[row.id];
       if (row.status !== 'observed' || !row.restored || !snap || snap.image !== row.image || snap.treeSha256 !== row.treeSha256 ||
@@ -128,10 +132,18 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       if (['flex', 'inline-flex'].includes(root.style.display)) for (const channel of ['row-gap', 'column-gap'])
         if (root.style[channel] === 'normal') root.style[channel] = '0px';
       roots.set(key, root);
-      planes.set(key, { snapshot: snap, assignment, rowId: row.id, rootPath });
+      // Evidence paths are browser child indices: they join the captured tree only when the whole path/tag census agrees.
+      const joined = !snap.descendantSizes || reactOwnershipMatchesTree(snap.ownership, snap.tree);
+      if (!joined && !result.limitations.includes(unjoined)) result.limitations.push(unjoined);
+      planes.set(key, { snapshot: snap, assignment, rowId: row.id, rootPath, sizing: descendantFixedSizes(root, rootPath, joined ? snap.descendantSizes : undefined) });
     }
     if (enumeration.combos.some(c => !roots.has(c.key)) || new Set([...roots.values()].map(r => r.tag)).size !== 1)
       throw Error('react-initial-contract-host-or-domain-changed');
+    // After every plane is sized: a translated descendant lowers to a per-plane main-axis alignment or refuses.
+    const alignments = lowerDescendantTranslations(new Map([...planes].map(([key, plane]) => [key, { root: roots.get(key)!, sizing: plane.sizing }])), sizes);
+    const admitted = [...planes.values()].flatMap(plane => [...plane.sizing].map(([path, channels]) => ({ observation: plane.rowId, path, channels: [...channels].sort() })));
+    // Named only when something was admitted: a re-observed component this rule does not touch keeps its draft revision.
+    if (alignments.length || admitted.length) result.descendants = { sizes: admitted, alignments };
     const existing = identity === undefined ? undefined : /^observed\.react-initial-([a-f0-9]{16})$/.exec(identity)?.[1];
     if (identity !== undefined && !existing) throw Error('react-initial-contract-identity-invalid');
     const suffix = existing ?? revisionOf({ source: expected.source, axes, observations: observation.rows }).slice(7, 23), name = `InitialStates${suffix}`;
@@ -146,7 +158,8 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     const baseComboKey = enumeration.combos.find(c => axes.every(a => c.axisValues[a.prop] === baseAxisValues[a.prop]))!.key;
     const space: PropSpace = { contract, axes, presence: new Map(), stateProps: [], enumeration, baseComboKey, baseAxisValues, heldFixed: [] };
     result.compiled = compileObservedContentSweep(space, { name, importName: name, contract: '', sampleText: '', axes: axes.map(a => a.prop) },
-      { captures: enumeration.combos.map(c => ({ combo: `${name}:${c.key}`, interaction: 'default', root: roots.get(c.key)! })) } as SweepResult, [...sizes.keys()]);
+      { captures: enumeration.combos.map(c => ({ combo: `${name}:${c.key}`, interaction: 'default', root: roots.get(c.key)! })) } as SweepResult, [...sizes.keys()],
+      false, [], new Map([...planes].map(([key, plane]) => [key, plane.sizing])));
     result.problems.push(...result.compiled.problems);
     if (result.compiled.contract && result.compiled.tokens && !result.problems.length) {
       const projections = new Map<string, ReactSourceBindingProjection>();
@@ -169,6 +182,12 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
           new Set(result.nativeVariants.map(v => v.variant)).size !== result.nativeVariants.length ||
           result.nativeVariants.some(v => !result.compiled!.component!.variants.some(c => c.name === v.variant)))
         throw Error('react-initial-contract-native-domain-mismatch');
+      // The lowering is believed only as COMPILED: each plane's variant must hold the alignment it was given.
+      for (const alignment of alignments) for (const [key, plane] of planes) {
+        const variant = result.nativeVariants.find(v => v.observation === plane.rowId)!;
+        if (result.compiled.component.variants.find(c => c.name === variant.variant)!.spec.layout?.primary !== (alignment.planes[key] === 'end' ? 'MAX' : 'MIN'))
+          throw Error(descendantTranslateRefusal + ':alignment-not-carried');
+      }
     }
     if (result.compiled.contract) validateContract(result.compiled.contract,
       new Map([[result.compiled.contract.id, result.compiled.contract]]), result.problems, new Map(result.compiled.assets));
