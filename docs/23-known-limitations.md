@@ -6179,3 +6179,26 @@ Reverse by removing the supplemental capture instrument, its application
 review and its added check invocation; retain the new and historical evidence
 and restore the named measurement gap. The existing scorer, tolerance and
 historical refusal receipts are unchanged.
+
+
+## D.63 Native auto-width text and fractional source width
+
+**AGENT decision, 2026-09-19: preserve editable auto-width behavior and keep the
+exact-dimension refusal.** The retained Badge comparison has a 26px native text
+box and a 44px root, while the current React source root is 43.875px. An isolated
+clone in Evaluations tested a fixed 25.875px text box, preserving font, size,
+line height, paint, spacing and bindings. Its root became exactly 43.875px, but
+its rendered label clipped from “New” to “Ne”. A longer text edit kept the same
+root width and clipped too. Restoring native auto-width restored the complete
+label and 44px root. Matching the observed dimensions by fixing this text box
+would therefore lose both content and its intrinsic resizing behavior.
+
+No converter rule or tolerance changed. The original component, variables and
+operation journal were untouched; the clone was restored, its native structure
+recorded and the unobstructed canvas inspected. Private evidence:
+`badge-text-width-probe-kap69tf2/` (script, four snapshots/exports and canvas
+screenshot). This diagnostic uses the retained older-reference comparison;
+it does not authenticate a new comparison against the current React reference.
+The Badge remains unqualified. To revisit the decision, demonstrate a general
+native text rule that preserves the complete label, exact source dimensions and
+subsequent text edits, then remeasure through a current authenticated operation.
