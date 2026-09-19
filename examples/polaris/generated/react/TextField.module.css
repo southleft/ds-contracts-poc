@@ -235,6 +235,7 @@
   overflow-y: clip;
   position: relative;
   text-rendering: auto;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .variant-borderless .input {
