@@ -4580,6 +4580,17 @@ referee, the emitted React, the planner), four rows in
 (`npm run design:consumer:test`, incl. the browser test of the three named state
 problems).
 
+**Consumer observation correction (AGENT decision, 2026-09-19).** A browser
+probe changed only the font size of a fixed-size control on real hover. Its
+pixels changed, but the check reported `state-inert` because its computed paint
+snapshot omitted font size. The same gap affected font family and line height.
+The snapshot now includes those three properties; a browser regression checks
+each with different before/after screenshots and unchanged control dimensions.
+The pixel scorer, 5% limit, source pairing and frozen evidence are unchanged.
+This corrects a measurement failure, not a product fidelity result. Reversal:
+remove the three computed properties from `paintOf` and the typography probe;
+the rest of the state-axis rule is independent.
+
 ## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
 
 **2026-09-19. A lowering decision taken by the agent under the owner's standing

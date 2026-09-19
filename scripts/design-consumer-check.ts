@@ -250,7 +250,8 @@ export const paintOf = new Function('el', `
     'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth',
     'borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle',
     'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
-    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
+    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
+    'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
   return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
 `) as (el: Element) => string;
 /** Keyboard-modality focus on the component's own focus target: the root when
