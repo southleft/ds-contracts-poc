@@ -65,7 +65,7 @@ test('the plugin reader carries the same field from node.strokesIncludedInLayout
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RingedBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.36');
+  assert.equal(dumps._provenance.dumpVersion, '1.37');
   const variants = Array.from(dumps.RingedBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
   assert.deepEqual(variants.map((v) => v.strokesIncludedInLayout), [false, true, undefined, undefined], 'unreported, or not an auto-layout frame: not captured, never false');
 });

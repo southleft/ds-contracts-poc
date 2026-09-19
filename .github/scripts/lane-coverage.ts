@@ -31,10 +31,20 @@
  * to weaken a lane and keep this green.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import assert from "node:assert/strict";
 import path from "node:path";
 import {
   collectLaneMap,
+  workspaceManifestDirs,
   RUN_RE,
   type Job,
   type ManifestEntry,
@@ -375,6 +385,42 @@ const validateReportingJobs = (
 };
 
 if (process.argv.includes("--self-test")) {
+  const workspaceFixture = mkdtempSync(path.join(tmpdir(), "lane-workspaces-"));
+  try {
+    for (const name of [
+      "packages/a",
+      "packages/b",
+      "packages/a/nested",
+      "extras/c",
+    ]) {
+      mkdirSync(path.join(workspaceFixture, name), { recursive: true });
+      writeFileSync(path.join(workspaceFixture, name, "package.json"), "{}");
+    }
+    // Unrelated evidence is outside the configured prefixes. packages/*
+    // also excludes the nested manifest, while ** explicitly includes it.
+    writeFileSync(path.join(workspaceFixture, "private"), "preserved evidence");
+    symlinkSync(
+      workspaceFixture,
+      path.join(workspaceFixture, "packages", "cycle"),
+      "dir",
+    );
+    const names = (pattern: string) =>
+      workspaceManifestDirs(workspaceFixture, pattern).map((dir) =>
+        path.relative(workspaceFixture, dir),
+      );
+    assert.deepEqual(names("packages/*"), ["packages/a", "packages/b"]);
+    assert.deepEqual(names("packages/**"), [
+      "packages/a",
+      "packages/a/nested",
+      "packages/b",
+    ]);
+    assert.deepEqual(names("packages/**/nested"), ["packages/a/nested"]);
+    assert.deepEqual(names("extras/c/"), ["extras/c"]);
+    assert.deepEqual(names("missing/*"), []);
+    assert.throws(() => names("../*"), /unsupported workspace path/);
+  } finally {
+    rmSync(workspaceFixture, { recursive: true, force: true });
+  }
   const chain = parseComposite(
     "npm run a:check && npm run b && npm run c:fresh",
   );

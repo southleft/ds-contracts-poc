@@ -5673,8 +5673,9 @@ lowering consume these facts; no component-specific behavior is added.
 The live read-only REST response for Altitude Checkbox's manual indicator
 explicitly declares FIXED on both axes and an 18 by 18 box. Previously REST
 captured neither dimension, leaving a border-sized box in the generated React.
-The plugin route already captures this class. Its current dump grammar remains
-1.36; old REST observations must not be treated as comparable 1.37 observations
+The plugin route captures the same class and now also writes grammar 1.37,
+carrying fractions exactly and rejecting incomplete fixed axes at any nonzero
+rotation. Old observations must not be treated as comparable 1.37 observations
 without a fresh read. Fixed auto-layout child geometry remains its separately
 named limitation; this rule does not admit arbitrary observed dimensions.
 
@@ -5774,3 +5775,21 @@ Reversal: remove the direct-wrapper reader and optional wrapper fact, restoring
 be reverted separately, restoring the incorrect runtime-component refusals for
 interfaces. Preserve the diagnostic and live journey evidence; these source
 facts are not release acceptance.
+
+
+## D.54 Workspace discovery follows configured paths
+
+**AGENT decision (2026-09-19).** Lane discovery walks only paths that can still
+match a configured workspace pattern. A single star matches one directory;
+a double star explicitly permits recursion. Symbolic links, node_modules and
+.git remain outside traversal, and parent-directory escapes are rejected.
+Explicit workflow prefixes continue to load their own package manifest.
+
+The integration lane previously recursed into an unrelated preserved consumer
+review tree and failed four checks with ENAMETOOLONG. The configured packages/*
+workspace never includes that evidence. Bounding discovery by the configuration
+preserves every configured package and avoids reading unrelated content; it
+adds no gate exclusion and changes no protected private artifact.
+
+Reversal: restore recursive manifest discovery in lane-map.ts and filter its
+results afterward. Preserve private evidence even if that traversal fails.

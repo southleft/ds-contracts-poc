@@ -575,10 +575,12 @@ async function dumpNode(node, nodePath, parent) {
       && node.absoluteBoundingBox && 'layoutSizingHorizontal' in node) {
     const hFixed = node.layoutSizingHorizontal === 'FIXED';
     const vFixed = node.layoutSizingVertical === 'FIXED';
-    const rotated = 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6;
+    const rotated = 'rotation' in node && typeof node.rotation === 'number' && node.rotation !== 0;
     const fixed = {};
-    if (hFixed && (vFixed || !rotated)) fixed.width = round2(node.absoluteBoundingBox.width);
-    if (vFixed && (hFixed || !rotated)) fixed.height = round2(node.absoluteBoundingBox.height);
+    // dump v1.37: keep the measured number exactly, matching REST.
+    const { width, height } = node.absoluteBoundingBox;
+    if (hFixed && (vFixed || !rotated) && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
 
@@ -1370,7 +1372,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.36',
+    dumpVersion: '1.37',
   },
 };
 dumps._degradations = degradations;
