@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -31,6 +31,8 @@ import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './capt
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
+  deriveAbsentVariants,
+  EXACT_ABSENT_VARIANTS_MAX_PRODUCT,
   validateExactVariantProjection,
   type ExactProjectionRefusalCode,
   type ExactProjectionResult,
@@ -178,6 +180,39 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
   return /dump v1\.[1-9]/.test(prov.note ?? '');
 };
 
+/** WERE THE `ds_contracts/*` STAMPS OBSERVABLE to the reader that produced
+ *  this dump? A POSITIVE fact, never inferred from their absence on a set —
+ *  "no stamp" only means "a designer drew this" when the reader could have seen
+ *  one. It decides whether an unstamped ragged set may declare its undrawn
+ *  combinations by what it draws (bindings.figma.absentVariants, docs/23
+ *  §D.40): the SAME pipeline-written set that lost a variant refused when the
+ *  REST response carried `sharedPluginData` and proposed a declaration when it
+ *  did not, because `mapRestToDump` is a public entry and cannot see whether
+ *  the request asked for `plugin_data=shared`.
+ *
+ *   · the plugin reader always reads them — it says who it is in the
+ *     provenance note it has always written, and carries the contract-id
+ *     stamp since dump v1.26. No dump byte changes.
+ *   · the REST mapper writes `_provenance.stampsObservable: true` ONLY when its
+ *     caller says the request carried the plane (`MapOptions.stampsObservable`;
+ *     `extract/figma/rest/fetch.ts` always requests it and says so). A bare
+ *     `mapRestToDump(response)` writes nothing, so every committed fixture
+ *     mapped that way keeps its bytes — and keeps the ragged refusal.
+ *   · anything else (a hand-authored fixture, a bridge that never read plugin
+ *     data) is NOT observable: fail closed. */
+export const dumpStampsObservable = (
+  prov?: { note?: string; dumpVersion?: string; stampsObservable?: unknown } | null,
+): boolean => {
+  if (!prov) return false;
+  if (prov.stampsObservable === true) return true;
+  const version = /^1\.(\d+)$/.exec(prov.dumpVersion ?? '');
+  return (
+    version !== null &&
+    Number(version[1]) >= 26 &&
+    (prov.note ?? '').includes('extract/figma/dump.plugin.js')
+  );
+};
+
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types.
  * `anchors` (dump v1.5) lets the resolver refuse a NAME-coincidence link when
@@ -263,6 +298,141 @@ const axisValuesOf = (variantName: string): Record<string, string> => {
   }
   return out;
 };
+
+// ---------------------------------------------------------------------------
+// THE SPARSE-MATRIX INFERENCE FENCE (bindings.figma.absentVariants)
+// ---------------------------------------------------------------------------
+//
+// Every per-axis inversion rule in this file ("the value is a function of
+// axis A") was written for a set that draws the FULL Cartesian product of its
+// axes. There the explanation is unique: if an observation that is not
+// uniform were a function of A alone AND of B alone, then v(a,b) = g(a) = h(b)
+// over every (a,b) makes it constant — so at most one minimal set of axes can
+// explain it, and "first axis that fits" is the only axis that fits.
+//
+// A designer's set with UNDRAWN combinations breaks that. With the
+// disambiguating tuple missing, two different axis sets can each explain every
+// drawn variant, and "first that fits" becomes a guess decided by axis order —
+// which the code surfaces would then render at the undrawn combination.
+//
+// THE CONDITION (one rule, applied wherever an axis-conditioned inference is
+// ACCEPTED): over the rows the inference was read from, take every MINIMAL
+// set of variant axes the observed value is a function of (no proper subset
+// also fits) — EVERY subset of the axes that vary over those rows, no arity
+// bound: the product cap leaves at most twelve, so at most 4,096 subsets. If there is more than one, and two of them
+// predict DIFFERENT values for some declared-absent combination (or one
+// predicts a value where the other has none), the inference is ambiguous
+// BECAUSE of the absence and the whole set is refused by name:
+//
+//     sparse-matrix-inference-ambiguous:<channel>@<part>
+//
+// Two explanations that agree on every undrawn combination are not a guess —
+// nothing observable depends on the choice — and a set with no undrawn
+// combination never arms the fence, so every full-matrix proposal is
+// byte-identical.
+interface SparseFence {
+  /** The undrawn combinations, in FIGMA terms (variant property → option). */
+  absent: ReadonlyArray<Readonly<Record<string, string>>>;
+  /** `<channel>@<part>` → the two explanations and the tuple they split on. */
+  ambiguous: Map<string, string>;
+}
+
+/** Armed by proposeFromDump for the duration of ONE sparse set's proposal
+ *  (synchronous; saved and restored, so a nested call cannot leak it). */
+let sparseFence: SparseFence | null = null;
+
+/** Stable refusal code when an undrawn combination makes an inference
+ *  ambiguous. */
+export const SPARSE_MATRIX_INFERENCE_AMBIGUOUS = 'sparse-matrix-inference-ambiguous' as const;
+
+export class SparseMatrixInferenceError extends Error {
+  readonly code = SPARSE_MATRIX_INFERENCE_AMBIGUOUS;
+  /** `<channel>@<part>` for every ambiguous inference, sorted. */
+  readonly inferences: readonly string[];
+
+  constructor(setName: string, ambiguous: ReadonlyMap<string, string>) {
+    const keys = [...ambiguous.keys()].sort();
+    super(
+      `${keys.map((k) => `${SPARSE_MATRIX_INFERENCE_AMBIGUOUS}:${k}`).join('; ')} — "${setName}" does not draw every combination of its variant axes, and ${keys.length} inference(s) have more than one explanation that the undrawn combinations would have told apart: ${keys
+        .map((k) => `${k} (${ambiguous.get(k)})`)
+        .join('; ')}. Nothing is guessed: draw a disambiguating variant, or author the contract by hand`,
+    );
+    this.name = 'SparseMatrixInferenceError';
+    this.inferences = keys;
+  }
+}
+
+function fenceSparseInference(
+  axes: readonly Axis[],
+  label: string,
+  rows: ReadonlyArray<{ variant: string; value: unknown }>,
+): void {
+  const fence = sparseFence;
+  if (fence === null || fence.ambiguous.has(label) || rows.length < 2) return;
+  const keyed = rows.map((r) => ({ at: axisValuesOf(r.variant), value: JSON.stringify(r.value) ?? 'undefined' }));
+  if (keyed.every((r) => r.value === keyed[0]!.value)) return;
+  // Only an axis that VARIES over these rows can explain anything. With the
+  // product capped (EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096 = 2^12) at most
+  // twelve axes vary, so EVERY subset is enumerated — at most 4,096 — and the
+  // condition has no arity bound to hide behind: an explanation over four axes
+  // (the reviewer's parity(B,C,D,E) against f(A)) is found like any other.
+  const usable = axes.filter(
+    (a) =>
+      keyed.every((r) => r.at[a.property] !== undefined) &&
+      new Set(keyed.map((r) => r.at[a.property])).size > 1,
+  );
+  if (usable.length > 12) {
+    fence.ambiguous.set(
+      label,
+      `${usable.length} variant axes vary over the rows this inference was read from — more than the 12 the fence enumerates exhaustively, so uniqueness cannot be established (sparse-matrix-inference-unbounded)`,
+    );
+    return;
+  }
+  const cellOf = (subset: readonly Axis[], at: Readonly<Record<string, string>>): string =>
+    JSON.stringify(subset.map((a) => at[a.property]));
+  const fit = (subset: readonly Axis[]): Map<string, string> | null => {
+    const byCell = new Map<string, string>();
+    for (const r of keyed) {
+      const cell = cellOf(subset, r.at);
+      const seen = byCell.get(cell);
+      if (seen !== undefined && seen !== r.value) return null;
+      byCell.set(cell, r.value);
+    }
+    return byCell;
+  };
+  const minimal: Array<{ subset: Axis[]; byCell: Map<string, string> }> = [];
+  // Every non-empty subset, smallest first (so a fitting subset prunes its
+  // supersets and what survives is exactly the MINIMAL explanations).
+  const popcount = (m: number): number => { let n = 0; for (let x = m; x; x &= x - 1) n++; return n; };
+  const masks = Array.from({ length: (1 << usable.length) - 1 }, (_, i) => i + 1).sort(
+    (x, y) => popcount(x) - popcount(y) || x - y,
+  );
+  const subsets: Axis[][] = masks.map((m) => usable.filter((_, i) => (m >> i) & 1));
+  for (const subset of subsets) {
+    if (minimal.some((m) => m.subset.every((a) => subset.includes(a)))) continue; // a fitting subset already explains it
+    const byCell = fit(subset);
+    if (byCell !== null) minimal.push({ subset, byCell });
+  }
+  if (minimal.length < 2) return;
+  const names = (subset: readonly Axis[]) => subset.map((a) => `"${a.property}"`).join(' × ');
+  for (let i = 0; i < minimal.length; i++) {
+    for (let j = i + 1; j < minimal.length; j++) {
+      for (const t of fence.absent) {
+        const a = minimal[i]!.byCell.get(cellOf(minimal[i]!.subset, t));
+        const b = minimal[j]!.byCell.get(cellOf(minimal[j]!.subset, t));
+        if (a === undefined && b === undefined) continue;
+        if (a === b) continue;
+        fence.ambiguous.set(
+          label,
+          `a function of ${names(minimal[i]!.subset)} and equally of ${names(minimal[j]!.subset)} on every drawn variant; at the undrawn ${Object.entries(t)
+            .map(([k, v]) => `${k}=${v}`)
+            .join(', ')} they give ${a ?? 'no value'} vs ${b ?? 'no value'}`,
+        );
+        return;
+      }
+    }
+  }
+}
 
 function parseAxes(variantNames: string[]): Axis[] {
   const axes: Axis[] = [];
@@ -935,6 +1105,8 @@ interface BoolAxisFn {
 function unifyRefs(
   obs: Array<{ variant: string; path?: string }>,
   axes: Axis[],
+  /** `<channel>@<part>` for the sparse-matrix inference fence. */
+  label = 'binding',
 ): Unified {
   const defined = obs.filter((o): o is { variant: string; path: string } => o.path !== undefined);
   if (defined.length === 0) return { kind: 'none' };
@@ -975,6 +1147,7 @@ function unifyRefs(
           return value !== undefined && segs[k][i] === camel(value);
         });
         if (fits) {
+          fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
           const parts = [...segs[0]];
           parts[i] = `{${axis.propName}}`;
           return { kind: 'ref', ref: `{${parts.join('.')}}` };
@@ -1007,6 +1180,7 @@ function unifyRefs(
       byValue.set(value, o.path);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
     return {
       kind: 'per-value',
       perValue: {
@@ -1041,6 +1215,7 @@ function unifyRefs(
       byValue.set(value, o.path);
     }
     if (!fits || !byValue.has('true') || !byValue.has('false')) continue;
+    fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
     const whenFalse = byValue.get('false')!;
     const whenTrue = byValue.get('true')!;
     return {
@@ -1073,6 +1248,7 @@ function unifyStampedTextVar(
       return { variant: o.variant, path: raw ? dotPath(raw) : undefined };
     }),
     axes,
+    `text-style-variable@${occs[0]?.node.name ?? 'text'}`,
   );
   return u.kind === 'ref' ? u.ref : undefined;
 }
@@ -1264,6 +1440,88 @@ const semanticProjectionRefusal = (
   );
 };
 
+/** The declaration of a set THIS PIPELINE drew: the stamped contract's own
+ *  `bindings.figma.absentVariants`, translated into Figma terms through that
+ *  contract's VARIANT bindings (the writer's own spelling). Null — and so the
+ *  ragged refusal — when the set carries no legal id stamp, the contract is
+ *  not in scope, it declares nothing, or the referee would not accept what it
+ *  declares. Whether it MATCHES the canvas is the exact projection's call. */
+function scopedAbsentVariants(
+  set: { contractId?: unknown },
+  contractsById: ReadonlyMap<string, MinimalChildContract> | undefined,
+): Array<Record<string, string>> | null {
+  const id = readStampedContractId(set);
+  const authored = id === null ? undefined : (contractsById?.get(id) as unknown as Contract | undefined);
+  const list = authored?.bindings?.figma?.absentVariants;
+  if (!authored || !Array.isArray(list) || list.length === 0) return null;
+  try {
+    if (absentVariantIssues(authored).length > 0) return null;
+    const axes = absentVariantAxes(authored);
+    return list.map((tuple) =>
+      Object.fromEntries(
+        axes.map((a) => {
+          const fig = a.prop.bindings.figma;
+          const option = tuple[a.prop.name] ?? null;
+          return [fig.property ?? '', option === null ? (fig.unsetValue ?? '') : (fig.values?.[String(option)] ?? String(option))];
+        }),
+      ),
+    );
+  } catch {
+    return null; // a contract slice this reader cannot walk declares nothing
+  }
+}
+
+/** Write the undrawn combinations onto the proposed contract as
+ *  `bindings.figma.absentVariants`: each Figma-term tuple read back through the
+ *  FINAL props' own VARIANT bindings into prop names and canonical options,
+ *  in the canonical order the referee demands. Anything that does not map — an
+ *  axis that is not a VARIANT prop of the proposal, an option no binding
+ *  spells — keeps the ragged refusal, by name; so does a declaration the
+ *  referee would not accept (the default combination undrawn, an axis value
+ *  with no drawn variant). */
+function declareAbsentVariants(
+  contract: Record<string, unknown>,
+  absent: ReadonlyArray<Readonly<Record<string, string>>>,
+  ragged: ExactProjectionResult,
+): void {
+  const refuse = (why: string): never => {
+    throw new ExactProjectionError(
+      'EXACT_MATRIX_RAGGED',
+      `${ragged.status === 'refused' ? ragged.refusals[0]?.message ?? '' : ''} The undrawn combinations cannot be declared on the proposed contract: ${why}`.trim(),
+      ragged,
+    );
+  };
+  const typed = contract as unknown as Contract;
+  const axes = absentVariantAxes(typed);
+  const byProperty = new Map(axes.map((a) => [a.prop.bindings.figma.property ?? '', a] as const));
+  const tuples = absent.map((figmaTuple) => {
+    const properties = Object.keys(figmaTuple);
+    const stray = properties.find((property) => !byProperty.has(property));
+    if (stray !== undefined) refuse(`variant property "${stray}" is not a VARIANT-bound prop of the proposal`);
+    const out: Record<string, string | boolean | null> = {};
+    for (const a of axes) {
+      const fig = a.prop.bindings.figma;
+      const label = figmaTuple[fig.property ?? ''];
+      if (label === undefined) refuse(`prop "${a.prop.name}" is a variant axis of the proposal but not of the drawn set`);
+      const option = a.options.find((o) =>
+        o === null ? fig.unsetValue === label : (fig.values?.[String(o)] ?? String(o)) === label,
+      );
+      if (option === undefined) refuse(`"${fig.property}=${label}" is not an option prop "${a.prop.name}" binds`);
+      out[a.prop.name] = option as string | boolean | null;
+    }
+    return out;
+  });
+  let product: Array<Array<string | boolean | null>> = [[]];
+  for (const a of axes) product = product.flatMap((row) => a.options.map((o) => [...row, o]));
+  const rank = new Map(product.map((row, n) => [JSON.stringify(row), n]));
+  tuples.sort((x, y) => rank.get(absentVariantKey(axes, x))! - rank.get(absentVariantKey(axes, y))!);
+  const bindings = contract.bindings as { figma: Record<string, unknown> };
+  const { anchors, ...rest } = bindings.figma;
+  bindings.figma = { ...rest, absentVariants: tuples, anchors };
+  const issues = absentVariantIssues(typed);
+  if (issues.length > 0) refuse(issues.join('; '));
+}
+
 /** Reconstruct the rows the proposed contract would emit using only its
  *  Figma VARIANT bindings. This deliberately does not inspect variant names. */
 function exactRowsFromProposedContract(
@@ -1278,6 +1536,9 @@ function exactRowsFromProposedContract(
 ): ExactVariantRow[] {
   const props = Array.isArray(contract.props) ? contract.props : [];
   const axes: Array<{ property: string; values: string[] }> = [];
+  /** prop name → how one of its options is spelled on the canvas, for the
+   *  declared absent variants below. */
+  const labelOf = new Map<string, { property: string; label: (option: unknown) => string | undefined }>();
   for (const raw of props) {
     if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) continue;
     const bindings = (raw as { bindings?: unknown }).bindings;
@@ -1290,6 +1551,17 @@ function exactRowsFromProposedContract(
     const values = Object.values(binding.values).filter((value): value is string => typeof value === 'string');
     if (typeof binding.unsetValue === 'string') values.unshift(binding.unsetValue);
     axes.push({ property: binding.property, values });
+    const name = (raw as { name?: unknown }).name;
+    if (typeof name === 'string') {
+      const byOption = binding.values as Record<string, unknown>;
+      labelOf.set(name, {
+        property: binding.property,
+        label: (option) =>
+          option === null
+            ? typeof binding.unsetValue === 'string' ? binding.unsetValue : undefined
+            : typeof byOption[String(option)] === 'string' ? (byOption[String(option)] as string) : undefined,
+      });
+    }
   }
 
   let tuples: Record<string, string>[] = [{}];
@@ -1297,6 +1569,30 @@ function exactRowsFromProposedContract(
     tuples = tuples.flatMap((tuple) =>
       axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
     );
+  }
+
+  // bindings.figma.absentVariants: the contract declares which combinations it
+  // does NOT draw, so the rows it would emit are the product minus that list
+  // — read through the props' own VARIANT bindings, exactly as the writer
+  // does. An entry that does not resolve to a real cell subtracts nothing, so
+  // a bad declaration can only make the returned rows DISAGREE with the source.
+  const declaredAbsent = (contract.bindings as { figma?: { absentVariants?: unknown } } | undefined)?.figma?.absentVariants;
+  if (Array.isArray(declaredAbsent) && declaredAbsent.length > 0) {
+    const cell = (t: Record<string, string>) => JSON.stringify(axes.map((a) => t[a.property]));
+    const absentCells = new Set<string>();
+    for (const entry of declaredAbsent) {
+      if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) continue;
+      const figmaTuple: Record<string, string> = {};
+      let resolved = Object.keys(entry).length === axes.length;
+      for (const [name, option] of Object.entries(entry as Record<string, unknown>)) {
+        const spelled = labelOf.get(name);
+        const label = spelled?.label(option);
+        if (!spelled || label === undefined) { resolved = false; break; }
+        figmaTuple[spelled.property] = label;
+      }
+      if (resolved) absentCells.add(cell(figmaTuple));
+    }
+    tuples = tuples.filter((t) => !absentCells.has(cell(t)));
   }
 
   // A promoted contract re-emits the STATE PREVIEW axis, so the rows it would
@@ -1780,6 +2076,7 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedR
   const u = unifyRefs(
     m.occ.map((o) => ({ variant: o.variant, path: o.node.bound?.[field] ? dotPath(o.node.bound[field]) : undefined })),
     ctx.axes,
+    `${field}@${where}`,
   );
   if (u.kind === 'ref') return u.ref;
   if (u.kind === 'per-value') return u.perValue;
@@ -1996,6 +2293,7 @@ function unifyPaint(
   const u = unifyRefs(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
+    `${mint?.cssProperty ?? paintName}@${where}`,
   );
   if (u.kind === 'ref' || u.kind === 'per-value') {
     // @door propose.paint-alpha-not-representable
@@ -2649,6 +2947,7 @@ function invertNodeOpacity(
       const whenTrue = side('true');
       const whenFalse = side('false');
       if (whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1 && !whenTrue.has(1)) {
+        fenceSparseInference(ctx.axes, `opacity@${where}`, occ);
         const value = [...whenTrue][0];
         const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
         stylesWhen.push({ prop: axis.propName, styles: { opacity: String(value) } });
@@ -2960,6 +3259,8 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
 function fitLiteralAxis(
   ctx: Ctx,
   values: Array<{ variant: string; value: string }>,
+  /** `<channel>@<part>` for the sparse-matrix inference fence. */
+  label = 'literal',
 ): { axis: Axis; byValue: Map<string, string> } | null {
   for (const axis of ctx.axes) {
     if (isBooleanAxis(axis)) continue;
@@ -2980,6 +3281,7 @@ function fitLiteralAxis(
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
     if (new Set(byValue.values()).size < 2) continue;
+    fenceSparseInference(ctx.axes, label, values);
     return { axis, byValue };
   }
   return null;
@@ -3024,7 +3326,7 @@ function liftUnboundShapePaintsToLiterals(
       part.literals = literals;
     } else {
       let axisFit: { propName: string; map: Record<string, Record<string, string>> } | null = null;
-      const fit = fitLiteralAxis(ctx, values);
+      const fit = fitLiteralAxis(ctx, values, `${cssProp}@${where}`);
       if (fit) {
         const map: Record<string, Record<string, string>> = {};
         for (const value of fit.axis.values) map[axisValue(fit.axis, value)] = { [cssProp]: fit.byValue.get(value)! };
@@ -3137,6 +3439,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
         return (o.node.hidden === true) === (v === 'false');
       });
       if (fits) {
+        fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
         part.visibleWhen = { prop: axis.propName };
         ctx.notes.push(
           `${where}: hidden exactly where "${axis.property}" is false — proposed as visibleWhen { prop: ${axis.propName} } (dump v1.1 hidden channel)`,
@@ -3152,6 +3455,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
       );
       const only = visibleValues.size === 1 ? [...visibleValues][0] : undefined;
       if (only !== undefined && !hiddenValues.has(only)) {
+        fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
         part.visibleWhen = { prop: axis.propName, equals: camel(only) };
         ctx.notes.push(
           `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${camel(only)} }`,
@@ -3308,6 +3612,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       }
       if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
       if (new Set([...byValue.values()].map((d) => `${d.width}×${d.height}`)).size < 2) continue;
+      fenceSparseInference(ctx.axes, `shape-size@${where}`, shapes.map((s) => ({ variant: s.variant, value: `${s.sh.width}×${s.sh.height}` })));
       const map: Record<string, { width: string; height: string }> = {};
       for (const value of axis.values) {
         const d = byValue.get(value)!;
@@ -3416,6 +3721,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       if (!seen) byValue.set(value, s);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `shape-placement@${where}`, shapes.map((s) => ({ variant: s.variant, value: specOf(s) })));
     const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
     let emitted = 0;
     let suppressed = 0;
@@ -4499,12 +4805,12 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
 /** dump v1.31 — the text node's font FAMILY (fontName.family / REST
  *  style.fontFamily) → the declared `font-family` channel (DECLARED_CHANNELS,
  *  canvas: draw — the emitter sets fontName.family from the first stack
- *  entry). Inter is the pipeline's own default (every emitter renders Inter
- *  when nothing is declared), so Inter is not a fact to carry; any other
- *  family drawn in every variant carries, a mixed axis is NAMED (no
- *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
- *  Inter with no receipt (rest-text-font-family). */
-const DEFAULT_FONT_FAMILY = 'Inter';
+ *  entry). Inter is the pipeline's own default (DEFAULT_FONT_FAMILY, schema package): the Figma
+ *  writer draws it and the React + web-components emitters DECLARE it on every text-drawing part
+ *  when nothing is declared (core defaultFontFamilyParts; false for code until 2026-09-18 — a clean
+ *  consumer rendered the browser serif), so Inter is not a fact to carry; any other family drawn in
+ *  every variant carries, a mixed axis is NAMED (no per-variant declared vocabulary). Phase 2 exam:
+ *  44 Manrope nodes rendered Inter with no receipt (rest-text-font-family). */
 /** dump v1.34 — LITERAL per-side stroke weights (`DumpNode.strokeWeights`).
  *  A stroke whose sides differ (a header rule drawn top 1 / right 0 /
  *  bottom 1 / left 0) has no uniform weight, so it cannot ride `border-width`;
@@ -4599,7 +4905,7 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
     );
     return;
   }
-  const fit = fitLiteralAxis(ctx, rows);
+  const fit = fitLiteralAxis(ctx, rows, `border-side-widths@${where}`);
   if (!fit) {
     ctx.notes.push(
       `${where}: per-side stroke weights are mixed across variants (${seen}; top, right, bottom, left) and are not a function of one enum axis — no ${channels} literals proposed; NAMED for review`,
@@ -4620,6 +4926,68 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
   ctx.notes.push(
     `${where}: per-side stroke weights vary with "${fit.axis.propName}" (${seen}; top, right, bottom, left — dump v1.34) — carried as ${channels} pixel literalsByProp, not token identities; ${zeroNote}`,
   );
+}
+/** dump v1.35 — DOES THE STROKE TAKE LAYOUT SPACE? Found by the design-led
+ *  consumer check on a designer's Badge: all 24 outline variants rendered 4px
+ *  wider than Figma drew them, and the 16px-high small one 20px high. A Figma
+ *  stroke on an auto-layout frame takes no layout space unless the frame says
+ *  `strokesIncludedInLayout`; the CSS `border` it lowers to always does.
+ *
+ *  The designer's numbers are KEPT. Rewriting padding to "padding minus
+ *  border" would destroy the padding's variable binding (and cannot fit a 16px
+ *  box around 8+8 padding plus a 2px border at all), so the stroke keeps riding
+ *  the border channels and the part records the one fact that differs —
+ *  `strokesIncludedInLayout: false` — for the code emitters to draw as an
+ *  inset ring (packages/core anatomy.ts lowerStrokeRings) and the writer to
+ *  set back on the frame.
+ *
+ *  Only `false` is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.34, or the mock
+ *     canvas), never `false` — those dumps propose the bytes they always did;
+ *   · `true` is what a frame THIS pipeline generated reads back as, and it is
+ *     what an absent flag already means — so a generated set proposes back to
+ *     exactly its own contract;
+ *   · a node drawn both ways across its variants has no single spelling (the
+ *     flag is per part, not per variant) and is NAMED; it keeps the border.
+ *  Occurrences that draw no stroke, or are not auto-layout frames, carry no
+ *  evidence either way and do not vote. settleStrokeLayout withdraws the flag
+ *  from a part whose stroke channels were all refused. */
+function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const captured = m.occ.filter((o) => o.node.stroke !== undefined && o.node.strokesIncludedInLayout !== undefined);
+  // @door propose.stroke-layout-absent-is-border
+  if (captured.length === 0) return; // not captured, or nothing drawn
+  const outside = captured.filter((o) => o.node.strokesIncludedInLayout === false);
+  if (outside.length === 0) return; // in layout everywhere — the border every contract already means
+  // @door propose.stroke-layout-mixed-refused
+  if (outside.length < captured.length) {
+    ctx.notes.push(
+      `${where}: the stroke takes layout space in ${captured.length - outside.length} of ${captured.length} stroked variants and none in the other ${outside.length} (strokesIncludedInLayout, dump v1.35) — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the stroke carries as a space-taking border; the ${outside.length} variants render wider/taller by their stroke weight per side (review)`,
+    );
+    return;
+  }
+  holder.strokesIncludedInLayout = false;
+  ctx.notes.push(
+    `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
+  );
+}
+/** A part that ended up carrying NO stroke channel (every one refused by
+ *  name upstream) has nothing for the flag to qualify, and validateContract
+ *  refuses a stray one — withdraw it, and say so. */
+function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ctx: Ctx): void {
+  const maps = (v: unknown): Array<Record<string, unknown>> =>
+    v === null || typeof v !== 'object' ? [] : Array.isArray(v) ? v.flatMap(maps) : [v as Record<string, unknown>, ...Object.values(v).flatMap(maps)];
+  const visit = (name: string, part: Record<string, unknown>): void => {
+    const { parts, ...own } = part;
+    // @door propose.stroke-layout-without-stroke-withdrawn
+    if (own.strokesIncludedInLayout === false && !maps(own).some((h) => Object.keys(h).some((c) => /^(border|outline)(-(top|right|bottom|left))?-(width|color)$/.test(c)))) {
+      delete part.strokesIncludedInLayout;
+      ctx.notes.push(
+        `${name}: strokesIncludedInLayout false was captured but no stroke channel survived on this part (each refusal is named above) — the flag qualifies a stroke and is WITHDRAWN with it`,
+      );
+    }
+    for (const [child, p] of Object.entries((parts as Record<string, Record<string, unknown>> | undefined) ?? {})) visit(child, p);
+  };
+  for (const [name, part] of Object.entries(anatomy)) visit(name, part);
 }
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
@@ -5204,6 +5572,7 @@ function carryPartialCrossAxisFill(
   const fit = fitLiteralAxis(
     ctx,
     m.occ.map((o) => ({ variant: o.variant, value: o.node[fillField] === true ? '100%' : NOT_FILLING })),
+    `${dim}-fill@${where}`,
   );
   // @door propose.cross-axis-fill-partial-refused
   if (!fit) {
@@ -5289,7 +5658,7 @@ function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes
     });
     const filling = rows.filter((r) => r.fills);
     if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
-    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })));
+    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })), `primary-axis-fill@${where}`);
     const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
     const correlation = fit
       ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
@@ -5962,6 +6331,7 @@ function crossAxisFillByPropOn(
       byValue.set(value, x.mode);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `${dim}-fill@${where}`, modes.map((x) => ({ variant: x.variant, value: x.mode })));
     const lbp =
       (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
     // The referee's channel+prop rule: a second claimant on the axis would
@@ -6244,6 +6614,7 @@ function invertLayoutByProp(
       byValue.set(value, t.tuple!);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `layout@${where}`, tuples.map((t) => ({ variant: t.variant, value: key(t.tuple!) })));
     const map: Record<string, Record<string, string>> = {};
     for (const value of axis.values) {
       const t = byValue.get(value)!;
@@ -6272,6 +6643,7 @@ function invertLayoutByProp(
       byValue.set(value, t.tuple!);
     }
     if (!fits || byValue.size !== 2) continue;
+    fenceSparseInference(ctx.axes, `layout@${where}`, tuples.map((t) => ({ variant: t.variant, value: key(t.tuple!) })));
     // Which drawn value spells TRUE? isBoolAxis guarantees a literal
     // true/false pair; the variant-name spelling is the axis's own casing.
     const trueValue = [...byValue.keys()].find((v) => /^true$/i.test(v));
@@ -6336,6 +6708,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
       }
     }
     if (!pure || byValue.size <= 1) continue;
+    fenceSparseInference(ctx.axes, `text@${where}`, obs.map((o) => ({ variant: o.variant, value: o.chars })));
     // Base = the axis's first OBSERVED value (axis declaration order); the
     // other values ride textByProp as deviations.
     const observedValues = axis.values.filter((v) => byValue.has(v));
@@ -6375,6 +6748,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
         return is === present.has(v);
       });
       if (!matches) continue;
+      fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
       // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
       // `equals: "true"` would refuse at the referee (visibleWhen.equals is
       // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
@@ -6410,6 +6784,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
       (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
     );
     if (!matches) continue;
+    fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
     ctx.notes.push(
       `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
     );
@@ -6661,6 +7036,7 @@ function threadInstanceProps(
       }),
     );
     if (axis) {
+      fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
       base[propName] = `{${axis.propName}}`;
       ctx.notes.push(
         `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the "${axis.propName}" axis exactly across all ${values.length} occurrence(s) — threaded as "{${axis.propName}}" (the child follows the parent per variant)`,
@@ -6698,6 +7074,7 @@ function threadInstanceProps(
       break;
     }
     if (lookup) {
+      fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
       base[propName] = { prop: lookup.axis.propName, map: lookup.map };
       ctx.notes.push(
         `${where}: applied prop "${propName}" of the nested "${instanceOf}" is a pure function of the "${lookup.axis.propName}" axis (${Object.entries(
@@ -6831,6 +7208,7 @@ function carryTextOverrides(
       else if (prev !== v.value) { pure = false; break; }
     }
     if (!pure || byValue.size <= 1) continue;
+    fenceSparseInference(ctx.axes, `text-override-${propName}@${where}`, values);
     const map: Record<string, string> = {};
     for (const value of axis.values) {
       const hit = byValue.get(value);
@@ -7841,6 +8219,7 @@ function buildPart(
     const slotDeclared: Record<string, string> = {};
     const slotTokens = invertNodeTokens(m, false, ctx, where, slotByProp, part, slotDeclared);
     carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+    carryStrokeLayout(m, part, ctx, where); // dump v1.35
     if (Object.keys(slotDeclared).length > 0) {
       part.declared = { ...(part.declared as Record<string, string> | undefined), ...slotDeclared };
     }
@@ -8311,6 +8690,7 @@ function buildPart(
   const partDeclared: Record<string, string> = {};
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
   carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+  carryStrokeLayout(m, part, ctx, where); // dump v1.35
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
@@ -10460,7 +10840,23 @@ function stripNonScalarAppliedProps(set: DumpSet, receipts: string[]): DumpSet {
   return clone;
 }
 
+/** Design → contract for ONE set. The sparse-matrix inference fence is
+ *  module state armed inside the proposal; this door saves and restores it so
+ *  one set's undrawn combinations can never fence another's inferences. */
 export function proposeFromDump(
+  set: DumpSet,
+  opts: Parameters<typeof proposeFromDumpFenced>[1],
+): FigmaProposalResult {
+  const outer = sparseFence;
+  sparseFence = null;
+  try {
+    return proposeFromDumpFenced(set, opts);
+  } finally {
+    sparseFence = outer;
+  }
+}
+
+function proposeFromDumpFenced(
   set: DumpSet,
   opts: {
     corpus: TokenCorpus;
@@ -10531,6 +10927,12 @@ export function proposeFromDump(
      *  reviewable mode preserves legacy name-based inversion while still
      *  refusing any structured evidence that is invalid or ragged. */
     projectionMode?: 'exact' | 'reviewable-inversion';
+    /** The reader could have seen a `ds_contracts/*` stamp on this set
+     *  (dumpStampsObservable over the dump's `_provenance`). Default FALSE —
+     *  fail closed: only then may an unstamped strict-subset set declare its
+     *  undrawn combinations by what it draws. proposeBatchFromDump derives it
+     *  from the dump it is handed unless the caller says otherwise. */
+    stampsObservable?: boolean;
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
@@ -10547,7 +10949,86 @@ export function proposeFromDump(
   const typedAxes = readCodeValueAxes(set);
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
-  const sourceProjection = validateExactVariantProjection(set);
+  /** The verdict on the set AS DRAWN, against the full Cartesian. */
+  const cartesianProjection = validateExactVariantProjection(set);
+  // DECLARED ABSENT VARIANTS (bindings.figma.absentVariants). A designer's set
+  // whose rows are a STRICT SUBSET of the product — every row valid, none
+  // duplicated, none outside the product — is not refused for being ragged:
+  // the undrawn combinations are read once, WRITTEN INTO THE PROPOSED CONTRACT
+  // as its declaration, and the matrix is then held to the product minus that
+  // list exactly, source and returned rows both. The validator itself never
+  // infers a declaration (a ragged source handed to it without one refuses as
+  // before); an extra, invalid or duplicate row, a set that declares a
+  // state-preview matrix, and a promoted mode / interaction-state axis all
+  // keep the EXACT_MATRIX_RAGGED refusal. What changes is only that the
+  // absence becomes a reviewable line of the contract instead of a wall.
+  //
+  // WHO MAY DECLARE. A DESIGNER's set (no `ds_contracts/*` stamp) declares by
+  // what it draws. A set THIS PIPELINE drew does not: its declaration is the
+  // stamped contract's own `bindings.figma.absentVariants`, read from the
+  // contract in scope and held to the canvas exactly — so a generated set that
+  // LOST a variant (or whose contract is not in scope) still refuses ragged,
+  // as it always did, instead of laundering canvas damage into a declaration.
+  const pipelineDrew = Boolean(
+    (set as { propNames?: unknown }).propNames ||
+      (set as { semantics?: unknown }).semantics ||
+      (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
+      readStampedContractId(set),
+  );
+  //
+  // A PIPELINE-DRAWN set reads its scoped declaration ALWAYS — not only after
+  // the Cartesian check refuses. A canvas that draws the FULL product while
+  // its contract declares an absence is the amend state (a set written before
+  // the declaration: the writer never deletes a variant), and a full product
+  // passes the Cartesian check; consulting the declaration only on a ragged
+  // source read that state back `verified-exact` and dropped the declaration
+  // without a word. Held to the product minus the declaration, the drawn cell
+  // the contract calls absent IS an extra row and refuses by name.
+  //
+  // An UNSTAMPED set may declare by its rows only when the reader could have
+  // SEEN a stamp (dumpStampsObservable) — otherwise "unstamped" is not
+  // evidence of a designer, and the ragged refusal stands, with the reason.
+  const ragged =
+    cartesianProjection.status === 'refused' && cartesianProjection.code === 'EXACT_MATRIX_RAGGED';
+  const stampsObservable = opts.stampsObservable === true;
+  const absentVariants = pipelineDrew
+    ? scopedAbsentVariants(set, opts.contractsById)
+    : ragged && stampsObservable
+      ? deriveAbsentVariants(set)
+      : null;
+  // MEANING BOUNDS on declaring by rows (docs/23 §D.40), read from the ragged
+  // refusal's own counts BEFORE any product is materialised. A declaration
+  // says "this set is the product of its axes, minus a few cells": above the
+  // referee's product cap, or when MORE cells are undrawn than drawn (a "star"
+  // set — the default plus each axis varied alone — is not a product with
+  // holes; 7 axes × 5 proposed 78,096 tuples), the axes are not a description
+  // of the set and the ragged refusal stands, with the reason.
+  if (ragged && !pipelineDrew) {
+    const counts = cartesianProjection.refusals[0];
+    const product = counts?.expected ?? 0;
+    const drawn = counts?.actual ?? 0;
+    const why =
+      product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+        ? `sparse-matrix-product-too-large: the variant axes multiply to ${product} combinations, above the ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} a declaration of complete tuples may range over`
+        : product - drawn > drawn
+          ? `sparse-matrix-mostly-undrawn: ${drawn} of ${product} combinations are drawn and ${product - drawn} are not — more undrawn than drawn, so the product of these axes does not describe the set; nothing is declared`
+          : null;
+    if (why !== null) {
+      throw new ExactProjectionError('EXACT_MATRIX_RAGGED', `${counts?.message ?? ''} ${why}`.trim(), cartesianProjection);
+    }
+  }
+  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
+    throw new ExactProjectionError(
+      'EXACT_MATRIX_RAGGED',
+      `${cartesianProjection.refusals[0]?.message ?? ''} stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`.trim(),
+      cartesianProjection,
+    );
+  }
+  const sourceProjection =
+    absentVariants === null
+      ? cartesianProjection
+      : validateExactVariantProjection(set, undefined, { absentVariants });
+  if (absentVariants !== null) sparseFence = { absent: absentVariants, ambiguous: new Map() };
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
    *  only trusted where it agrees with the axes — see
@@ -10607,6 +11088,10 @@ export function proposeFromDump(
   if (projectionMode === 'exact' && modePromo) {
     semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
   }
+  // A promoted axis leaves the API, so an undrawn combination that names one
+  // of its values has no spelling in the declaration — the ragged refusal
+  // stands (reviewable inversion included).
+  if (absentVariants !== null && modePromo) assertExactProjection(cartesianProjection, 'source-matrix-verified');
   let sourceVariants = set.variants;
   if (modePromo) {
     sourceVariants = set.variants
@@ -10679,6 +11164,7 @@ export function proposeFromDump(
     }
   }
 
+  if (absentVariants !== null && statePromo) assertExactProjection(cartesianProjection, 'source-matrix-verified');
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
   for (const mapped of typedAxes) {
@@ -10875,6 +11361,7 @@ export function proposeFromDump(
   const rootDeclared: Record<string, string> = {};
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp, undefined, rootDeclared);
   carryPerSideStrokeWeights(merged, root, ctx, where); // dump v1.34
+  carryStrokeLayout(merged, root, ctx, where); // dump v1.35
   if (Object.keys(rootDeclared).length > 0) {
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }
@@ -11501,6 +11988,16 @@ export function proposeFromDump(
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];
+      // The mint classifier takes the FIRST axis / pair / triple that fits
+      // (mint-tokens `classify`). A carried binding is an accepted inference,
+      // so it goes through the sparse-matrix fence like every other one.
+      if (binding.ref) {
+        fenceSparseInference(
+          ctx.axes,
+          `${obs.cssProperty}@${obs.nodePath}`,
+          obs.occurrences.map((o) => ({ variant: o.variant, value: o.value })),
+        );
+      }
       if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
       else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
       // A carried-but-unwitnessed pair is BOUND, so it takes the ref above —
@@ -11771,9 +12268,23 @@ export function proposeFromDump(
     }
   }
 
+  settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  if (absentVariants !== null) {
+    // Refuse BEFORE the declaration is written: an ambiguous inference means
+    // the contract's bindings are a guess, however exact its matrix is.
+    if (sparseFence !== null && sparseFence.ambiguous.size > 0) {
+      throw new SparseMatrixInferenceError(set.setName, sparseFence.ambiguous);
+    }
+    declareAbsentVariants(contract, absentVariants, cartesianProjection);
+    ctx.notes.unshift(
+      `bindings.figma.absentVariants: the set draws ${set.variants.length} of the ${set.variants.length + absentVariants.length} combinations of its variant axes — the ${absentVariants.length} undrawn one(s) are DECLARED on the contract (${absentVariants
+        .map((t) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', '))
+        .join(' | ')}), so the Figma writer emits no variant for them and the exact projection expects the product minus this list, exactly. undrawn-combination-rendered-by-composition: the code surfaces render ANY prop combination by composing the per-axis rules read from the drawn variants — at an undrawn combination that rendering is a composition nobody drew, never a measured one`,
+    );
+  }
   ContractSchema.parse(contract);
   for (const stub of childStubs) ContractSchema.parse(stub);
   if (stampNote) {
@@ -11799,13 +12310,18 @@ export function proposeFromDump(
   let projection: ExactProjectionResult;
   if (projectionMode === 'exact') {
     projection = assertExactProjection(
-      validateExactVariantProjection(set, exactRowsFromProposedContract(contract, declaredSparseAxis)),
+      validateExactVariantProjection(
+        set,
+        exactRowsFromProposedContract(contract, declaredSparseAxis),
+        absentVariants === null ? {} : { absentVariants },
+      ),
       'verified-exact',
     );
   } else if (sourceProjection.status === 'source-matrix-verified') {
     const returned = validateExactVariantProjection(
       set,
       exactRowsFromProposedContract(contract, declaredSparseAxis),
+      absentVariants === null ? {} : { absentVariants },
     );
     projection =
       returned.status === 'verified-exact'
@@ -11871,6 +12387,14 @@ export function plainWordsProposalError(e: unknown): { headline: string; detail?
     return {
       headline: `the proposed contract did not fit the contract schema — field "${path || 'the contract root'}": ${message}${rest}.`,
       detail: e instanceof Error ? e.message : JSON.stringify(issues, null, 2),
+    };
+  }
+  // A sparse-matrix ambiguity keeps its NAME in the headline however many
+  // inferences it lists; the explanations ride the detail.
+  if (e instanceof SparseMatrixInferenceError) {
+    return {
+      headline: `${e.inferences.map((k) => `${SPARSE_MATRIX_INFERENCE_AMBIGUOUS}:${k}`).join('; ')} — the set does not draw every combination of its variant axes and ${e.inferences.length} inference(s) have more than one explanation the undrawn combinations would have told apart; nothing is guessed.`,
+      detail: e.message,
     };
   }
   const message = e instanceof Error ? e.message : String(e);
@@ -12014,6 +12538,9 @@ export function proposeBatchFromDump(
   };
   const setOpts = {
     ...opts,
+    stampsObservable:
+      opts.stampsObservable ??
+      dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     capturedValues,
     contractIdByName,
     contractsById,

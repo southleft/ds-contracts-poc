@@ -5,9 +5,9 @@
   "nodeId": "53:2775",
   "mode": "reviewable-inversion",
   "variantCount": 25,
-  "contractSha256": "803ee56673b938bcc1cf7abec667de77e011b587d0f484a26604c7d5172ac3b2",
+  "contractSha256": "fab7c204ba55b73c58af4a8d08ecc08b7bc0cbfa0f7bb735bb5ce4c27254ebd3",
   "carriage": {
-    "carried": 441,
+    "carried": 466,
     "named": 852,
     "silent": 0
   },
@@ -121,6 +121,11 @@
     "strokes[0] + strokeWeight": [
       25,
       5,
+      0
+    ],
+    "strokesIncludedInLayout": [
+      25,
+      0,
       0
     ],
     "cornerRadius": [
@@ -350,12 +355,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "986dbc6279dce3aa3b5b67e7ce11de162975ccf7e6dd312ffe1385a91949af1f",
+    "react/Button/Button.module.css": "5ac6d0bee8737a52eb6cf04c4b9df6bc38bb58408901f02f126073acd0aa8b11",
     "react/Button/Button.stories.tsx": "89116f45c629db0ee76ce94f0e37c64cde5fc43da2f4d4cb9afb3e48237fafd4",
     "react/Button/Button.tsx": "c2ad51a851a2a8f467028a51a8c5218af854db36fb54320aa1547e94c402bd63",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/ds-button.ts": "8bb69300dfeb9b4723e305cb3ac3c6acc2ee777fdb5e9e0056c4f2c769e78b04",
-    "wc/ds-button.css.ts": "44eac862a750d84aa6a02f30ca4995605d06e51e8eda5498b86a20f10666dff2",
+    "wc/ds-button.css.ts": "067a785ea1d50eead580d51b793bff1c86dcfedeff701031073339c261980614",
     "wc/ds-button.demo.html": "282713a1393f1b8af1686effe04f50094eefff69513d368314100b6f5c043a62",
     "wc/ds-button.custom-elements.json": "73ed67e0b677baea879ce3bf6ec1371d4f2fbc438da32b6d13e84841cf77dd51",
     "wc/ds-button-icon.ts": "22e6b99caabc9523b9afff95d253ab6c6eda345a051de3c6b89e5de385c332ad",
@@ -363,7 +368,7 @@
     "wc/ds-button-icon.demo.html": "71ca11e0a588a953352d30d35d12b54255b3dbffc208ddc7a745b3ac0df64262",
     "wc/ds-button-icon.custom-elements.json": "607b3ff5fddf9931c0ab803bedbfacd66f13133e8dfee5883cd28d6d55e4847b",
     "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
-    "wc/ds-button-contract.css.ts": "01a110143d8ddb21c97690dcf754a253f9ba262b66b561d86cd76ec44121bd5b",
+    "wc/ds-button-contract.css.ts": "c6e5d97f02f35e9dcb535c2284d0786482cd759796147a896982f86004850ae9",
     "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
     "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c",
     "wc/ds-button-icon-default-sm.ts": "f701ebbd91c9ed405cb3461d2211a34b35e0160013a6d0e876b0761461db6edd",
@@ -375,5 +380,5 @@
     "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
     "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
   },
-  "notesCount": 603
+  "notesCount": 604
 }

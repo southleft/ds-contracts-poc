@@ -264,6 +264,105 @@ const statePreviewTuples = (
   return out.sort();
 };
 
+/** DECLARED ABSENT VARIANTS — a designer's set is often NOT the full Cartesian
+ *  of its axes (CBDS Checkbox-icon draws 42 of 48: no `state=disabled` with
+ *  `error=true`; Altitude Menu Item 16 of 18). The contract may DECLARE which
+ *  combinations are not drawn (`bindings.figma.absentVariants`), and the caller
+ *  hands that declaration here in FIGMA terms: one COMPLETE tuple per undrawn
+ *  combination, `{ <variant property>: <option> }` over every VARIANT axis.
+ *
+ *  Same discipline as the state-preview descriptor above. The expectation
+ *  becomes DECLARED rather than assumed and the matrix must still equal it
+ *  EXACTLY — a drawn row the declaration calls absent is an extra row, an
+ *  undrawn row it does not name is a missing row. A declaration that does not
+ *  agree with the axes actually present is IGNORED (the full Cartesian is
+ *  expected, which then refuses): not an array, an empty list, a tuple that is
+ *  not complete over the axes, an unknown property or option, a duplicate
+ *  tuple, or a list that leaves nothing to draw. Nothing here reads the
+ *  SOURCE rows — a declaration can never be inferred by this validator. */
+export type AbsentVariantTuple = Readonly<Record<string, string>>;
+
+/** The largest variant product a declaration may range over — the same bound
+ *  the referee holds (`ABSENT_VARIANTS_MAX_PRODUCT`, contract-schema.ts; a
+ *  test pins the two equal). Checked by multiplication BEFORE any product is
+ *  materialised, so neither door can be driven into a memory blow-up. */
+export const EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096;
+
+export interface ExactProjectionOptions {
+  /** `bindings.figma.absentVariants` in Figma terms. Absent → full Cartesian. */
+  absentVariants?: unknown;
+}
+
+const absentVariantTuples = (
+  axes: readonly Axis[],
+  value: unknown,
+): string[] | null => {
+  if (!Array.isArray(value) || value.length === 0 || axes.length === 0)
+    return null;
+  const names = axes.map((axis) => axis.name);
+  if (
+    axes.reduce((n, axis) => n * axis.options.length, 1) >
+    EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+  )
+    return null;
+  const out: string[] = [];
+  for (const raw of value) {
+    if (!isRecord(raw)) return null;
+    const keys = Object.keys(raw);
+    if (keys.length !== names.length) return null;
+    for (const axis of axes) {
+      const option = raw[axis.name];
+      if (typeof option !== "string" || !axis.options.includes(option))
+        return null;
+    }
+    out.push(canonicalTuple(names, raw as Record<string, string>));
+  }
+  if (new Set(out).size !== out.length) return null;
+  const total = axes.reduce((n, axis) => n * axis.options.length, 1);
+  if (out.length >= total) return null;
+  return out.sort();
+};
+
+/** The undrawn combinations of a set whose rows are a STRICT SUBSET of its
+ *  Cartesian product, as Figma-term tuples in canonical order — or null when
+ *  the set is anything else (unstructured, contradictory definitions, an
+ *  invalid / duplicate / extra row, a full matrix, a declared state-preview
+ *  matrix). This is what a PROPOSER reads to write the declaration into the
+ *  contract it proposes; `validateExactVariantProjection` never calls it, so
+ *  the validator itself still refuses every undeclared ragged source. */
+export function deriveAbsentVariants(
+  set: ExactDumpSet,
+): AbsentVariantTuple[] | null {
+  if (set.type === "COMPONENT") return null;
+  if (!isRecord(set.propertyDefinitions)) return null;
+  if (set.statePreviewAxis !== undefined && set.statePreviewAxis !== null)
+    return null;
+  const { axes, refusals } = readAxes(set.propertyDefinitions);
+  if (refusals.length > 0 || axes.length === 0) return null;
+  const source = checkRows(set.variants, axes, "source", false);
+  if (source.refusals.length > 0 || source.tuples.length === 0) return null;
+  const drawn = new Set(source.tuples);
+  const names = axes.map((axis) => axis.name);
+  if (
+    axes.reduce((n, axis) => n * axis.options.length, 1) >
+    EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+  )
+    return null;
+  let product: Record<string, string>[] = [{}];
+  for (const axis of axes) {
+    product = product.flatMap((row) =>
+      axis.options.map((option) => ({ ...row, [axis.name]: option })),
+    );
+  }
+  if (source.tuples.length >= product.length) return null;
+  const absent = product
+    .map((row) => ({ row, key: canonicalTuple(names, row) }))
+    .filter(({ key }) => !drawn.has(key))
+    .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
+    .map(({ row }) => row);
+  return absent.length > 0 ? absent : null;
+}
+
 const definitionRefusal = (message: string): ExactProjectionRefusal => ({
   code: "EXACT_DEFINITION_CONTRADICTORY",
   message,
@@ -485,6 +584,7 @@ const rowsFrom = (
 export function validateExactVariantProjection(
   set: ExactDumpSet,
   returned?: ExactProjectionRows,
+  options: ExactProjectionOptions = {},
 ): ExactProjectionResult {
   const standalone = set.type === "COMPONENT";
   const definitionsPresent = own(set, "propertyDefinitions");
@@ -536,9 +636,21 @@ export function validateExactVariantProjection(
   // An unreadable or disagreeing descriptor falls through to the Cartesian —
   // fail-closed, so a marker can never widen what counts as exact.
   const declaredSparse = readStatePreviewAxis(set.statePreviewAxis);
+  const previewTuples = declaredSparse
+    ? statePreviewTuples(axes, declaredSparse)
+    : null;
+  // DECLARED ABSENT VARIANTS subtract from the full Cartesian ONLY. A set that
+  // also declares a state-preview matrix keeps that expectation untouched:
+  // the two sparse shapes do not compose (validateContract refuses the pair
+  // by name), so the absence list is ignored there rather than trusted.
+  const declaredAbsent =
+    previewTuples === null && set.statePreviewAxis == null
+      ? absentVariantTuples(axes, options.absentVariants)
+      : null;
+  const absentSet = new Set(declaredAbsent ?? []);
   const expectedTuples =
-    (declaredSparse && statePreviewTuples(axes, declaredSparse)) ??
-    cartesianTuples(axes);
+    previewTuples ??
+    cartesianTuples(axes).filter((tuple) => !absentSet.has(tuple));
   const expectedSet = new Set(expectedTuples);
   const source = checkRows(set.variants, axes, "source", standaloneWithoutAxes);
   if (source.refusals.length > 0) return refused(source.refusals);
@@ -554,7 +666,10 @@ export function validateExactVariantProjection(
     return refused([
       {
         code: "EXACT_MATRIX_RAGGED",
-        message: `Source matrix has ${source.tuples.length} rows; Cartesian definitions require ${expectedTuples.length}.`,
+        message:
+          declaredAbsent === null
+            ? `Source matrix has ${source.tuples.length} rows; Cartesian definitions require ${expectedTuples.length}.`
+            : `Source matrix has ${source.tuples.length} rows; Cartesian definitions minus ${declaredAbsent.length} declared absent variant(s) require ${expectedTuples.length}.`,
         tuples: [...sourceMissing, ...sourceExtra].sort(),
         expected: expectedTuples.length,
         actual: source.tuples.length,

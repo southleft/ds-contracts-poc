@@ -29,6 +29,9 @@
  *   fills[].boundVariables.color (VARIABLE_ALIAS)   fill { var: name } via the variables response, else { hex } + degradation;
  *                                                   effective opacity (color.a × paint opacity) rides { alpha } when < 1 (dump v1.1)
  *   strokes[…] (same shape)                         stroke, strokeWeight (literal, only when a stroke is emitted)
+ *   strokesIncludedInLayout (absent = false)         strokesIncludedInLayout (dump v1.35 — ONLY on an auto-layout frame that emits a
+ *                                                   stroke, and then always, `false` included: REST omits the default, so on this
+ *                                                   route absence in the RESPONSE is the fact `false`; absence in the DUMP is not)
  *   individualStrokeWeights {top,right,bottom,left} strokeWeights (dump v1.34 — only when the four sides are NOT all equal, and then
  *                                                   INSTEAD of strokeWeight: REST reports strokeWeight 0 for sides [1,0,1,0], which
  *                                                   is not a drawn fact); an unreadable side keeps stroke-weights-nonuniform
@@ -322,6 +325,10 @@ export interface RestNode {
   strokeAlign?: string;
   strokeDashes?: number[];
   individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Auto-layout frames only. REST OMITS the default (`false`) — measured on
+   *  the committed census responses: every frame this pipeline generated
+   *  reports `true`, every designer-drawn one omits the key. */
+  strokesIncludedInLayout?: boolean;
   minWidth?: number | null;
   maxWidth?: number | null;
   minHeight?: number | null;
@@ -511,6 +518,15 @@ export interface MapOptions {
   target?: string;
   /** File key for _provenance (it rides the URL, not the nodes response). */
   fileKey?: string | null;
+  /** The REQUEST carried `plugin_data=shared`, so a `ds_contracts/*` stamp on
+   *  any node WOULD be in this response. Only the caller knows: the parameter
+   *  is not echoed, and a response with no `sharedPluginData` anywhere is what
+   *  both "asked, nothing stamped" and "never asked" look like. Default false
+   *  — nothing is written and every existing mapped fixture keeps its bytes.
+   *  `true` writes `_provenance.stampsObservable: true`, the positive fact the
+   *  proposer requires before an unstamped ragged set may declare its undrawn
+   *  combinations (core/propose-figma.ts dumpStampsObservable). */
+  stampsObservable?: boolean;
 }
 
 /** dump v1.1 node as the REST mapper emits it (`hidden` lives on DumpNode
@@ -1511,6 +1527,15 @@ function mapNode(
     const sideWeights = perSideStrokeWeights(node);
     if (sideWeights !== undefined && sideWeights !== 'unreadable') out.strokeWeights = sideWeights;
     else if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // dump v1.35: does the stroke take LAYOUT SPACE? Only an auto-layout frame
+    // has the fact and only a drawn stroke makes it visible, so it is written
+    // exactly there — and then always, because the two values lower to different
+    // CSS (`true` = a border that grows the box, `false` = a ring painted over
+    // the padding). REST omits its default, so the ABSENT response key is read
+    // as `false` HERE, where the route's rule is known; downstream an absent
+    // dump field still means "not captured" (dump ≤ v1.34), never `false`.
+    // Twin of the same write in extract/figma/dump.plugin.js.
+    if (out.layout !== undefined) out.strokesIncludedInLayout = node.strokesIncludedInLayout === true;
   }
   const shape = mapShape(node, ctx, nodePath, parentBox);
   if (shape) out.shape = shape;
@@ -1762,7 +1787,10 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.34';
+export const REST_DUMP_VERSION = '1.35';
+// 1.35 (design-led fidelity): `strokesIncludedInLayout` carried on every
+//      auto-layout frame that draws a stroke — a designer's stroke takes no
+//      layout space (Figma's default) while the CSS border it lowered to does.
 // 1.34 (design-led fidelity): per-side stroke weights carried as `strokeWeights`
 //      (in place of the uniform `strokeWeight`) instead of being named
 //      `stroke-weights-nonuniform`.
@@ -1833,6 +1861,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
       ...REST_CAPTURE_GAPS,
     ],
+    ...(options.stampsObservable === true ? { stampsObservable: true as const } : {}),
     // The variables channel's own receipt: what answered, or why nothing did.
     variables: options.variables
       ? {

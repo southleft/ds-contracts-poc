@@ -228,6 +228,31 @@ export function compareContracts(
     absent("states", "interaction states are code-side (CSS pseudo-classes)");
   }
 
+  // bindings.figma.absentVariants — the declared undrawn combinations ARE
+  // canvas-recoverable (a set draws them or it does not), so a declaration the
+  // return trip DROPPED, GAINED or MOVED is a difference, never a silence.
+  // Compared as a set of tuples, key order irrelevant. A finding is recorded
+  // only when either side declares, so every existing report keeps its rows.
+  {
+    const declared = (c: J): string[] | null => {
+      const list = ((c.bindings as J | undefined)?.figma as J | undefined)?.absentVariants;
+      if (!Array.isArray(list)) return null;
+      return list
+        .map((t) => JSON.stringify(Object.entries(t as J).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))))
+        .sort();
+    };
+    const s = declared(shipping);
+    const p = declared(proposed);
+    if (s !== null || p !== null) {
+      if (deepEqual(s, p)) matched("bindings.figma.absentVariants", `${s!.length} undrawn combination(s)`);
+      else
+        mismatch(
+          "bindings.figma.absentVariants",
+          `${s === null ? "not declared" : `${s.length} declared ${s.join(" ")}`} vs ${p === null ? "not declared" : `${p.length} proposed back ${p.join(" ")}`}`,
+        );
+    }
+  }
+
   // Props (order-insensitive, matched by name)
   const sProps = (shipping.props as J[]) ?? [];
   const pProps = (proposed.props as J[]) ?? [];

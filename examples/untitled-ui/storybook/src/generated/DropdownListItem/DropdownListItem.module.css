@@ -69,6 +69,7 @@
   color: var(--imported-dropdown-list-item-content-text-color);
   font-size: var(--imported-dropdown-list-item-content-text-font-size);
   line-height: var(--imported-dropdown-list-item-content-text-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .root:disabled .Text {
@@ -80,6 +81,7 @@
   font-size: var(--imported-text-text-xs-regular-font-size);
   font-weight: var(--imported-text-text-xs-regular-font-weight);
   line-height: var(--imported-text-text-xs-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .root:disabled .Shortcut {

@@ -74,9 +74,13 @@ import {
 } from '../../schema/src/contract-schema.js';
 import {
   boolProps,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumProps,
   finishStylesheet,
   generateCss,
+  lowerStrokeRings,
+  settleStrokeShadows,
   isArrayType,
   isEnum,
   kebab,
@@ -133,6 +137,13 @@ export interface WcEmitCtx {
    * CSS unchecked.
    */
   tokens?: Set<string>;
+  /** The DTCG trees themselves (core TokenTreeInput), when the caller has
+   *  them. One fact needs a token's VALUE, not its path: a part with
+   *  `strokesIncludedInLayout: false` composes its real shadow after the inset
+   *  ring, and a shadow token that resolves to `none` would void the whole
+   *  declaration (core settleStrokeShadows). Absent → that one case is left
+   *  as written, the limit the core function names. */
+  tokenValues?: unknown;
 }
 
 export interface EmitWcResult {
@@ -227,10 +238,15 @@ function layoutDecls(part: Part): string[] {
   return d;
 }
 
-export function shadowCss(contract: Contract): string {
+export function shadowCss(input: Contract, tokenValues?: unknown, errors: string[] = []): string {
+  // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
+  // that takes no layout space — core lowerStrokeRings, the same rewrite
+  // generateCss applies, so the two sheets cannot disagree about a border.
+  const contract = lowerStrokeRings(input);
   const k = kebab(contract.name);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
+  const defaultFamily = defaultFontFamilyParts(contract);
 
   // MULTI-PLACEHOLDER REFS (P0 2026-08-22). A substituted ref expands to one
   // rule per value tuple — the cartesian of its placeholders in DECLARED
@@ -402,6 +418,10 @@ export function shadowCss(contract: Contract): string {
     }
     rootDecls.push(`${cssProp}: ${value}`);
   }
+  // No declared family = the pipeline default (core defaultFontFamilyParts):
+  // a shadow root inherits the HOST page's font through the host element.
+  // After the UA resets — `font: inherit` would erase a family before it.
+  if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, lit] of Object.entries(overrides)) {
@@ -583,6 +603,7 @@ export function shadowCss(contract: Contract): string {
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
     }
+    if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
     if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
       decls.push('width: 100%', 'height: 100%');
     }
@@ -688,7 +709,10 @@ export function shadowCss(contract: Contract): string {
   // unnamed, and `placeholder-color` (css: 'pseudo-element') would have.
   // Latent only because no first-party WC sample is a switch or a text field.
   // One shared exit, so a new disposition can never be forgotten here again.
-  return finishStylesheet(lines.join('\n'));
+  // finishStylesheet also restores a ring part's boundary under forced colors;
+  // a ring's real shadow whose token is `none` is settled where values are known.
+  const finished = finishStylesheet(lines.join('\n'));
+  return contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
 }
 
 // ---------------------------------------------------------------------------
@@ -1340,8 +1364,8 @@ ${noOps.map((n) => ` *   · ${n}`).join('\n')}${
 // Stylesheet module — the shadow CSS as a constructable sheet.
 // ---------------------------------------------------------------------------
 
-function generateStylesheetModule(contract: Contract): string {
-  const css = shadowCss(contract);
+function generateStylesheetModule(contract: Contract, tokenValues?: unknown): string {
+  const css = shadowCss(contract, tokenValues);
   return [
     `/**`,
     ` * ${contract.name} — constructable shadow stylesheet from contract`,
@@ -1553,7 +1577,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
         `Pass WcEmitCtx.tokens (core/tokens.ts tokenInventoryFromJson). Emitting unchecked would ship dangling var(--…) references that render as nothing, silently.`,
     );
   } else {
-    generateCss(contract, ctx.tokens, errors);
+    generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
   }
 
   if (errors.length > 0) {
@@ -1563,7 +1587,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   }
   return {
     element: generateElement(contract, ctx),
-    stylesheet: generateStylesheetModule(contract),
+    stylesheet: generateStylesheetModule(contract, ctx.tokenValues),
     demo: generateDemo(contract),
     manifest: generateManifest(contract),
   };

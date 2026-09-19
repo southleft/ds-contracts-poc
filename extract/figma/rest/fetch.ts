@@ -325,6 +325,10 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
     ...(refusal ? { variablesUnavailable: refusal } : {}),
     ...(opts.target ? { target: opts.target } : {}),
     fileKey: parsed.fileKey,
+    // fetchNodes and fetchFile (below) both request `plugin_data=shared`, so a
+    // stamp on any set WOULD be in these responses — said here because the
+    // mapper cannot see the request.
+    stampsObservable: true,
   };
 
   if (parsed.nodeId) {

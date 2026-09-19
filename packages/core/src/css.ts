@@ -24,6 +24,8 @@ import {
   ALIGN_CSS,
   boolProps,
   cssVar,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumCombos,
   enumProps,
   holderDeclaresPosition,
@@ -32,9 +34,11 @@ import {
   isStructural,
   JUSTIFY_CSS,
   layoutOverrideDecls,
+  lowerStrokeRings,
   OVERLAY_CSS,
   placeholdersIn,
   rootElementsOf,
+  settleStrokeShadows,
   STATE_SELECTORS,
   stripBraces,
   UA_MARGIN_ELEMENTS,
@@ -82,7 +86,18 @@ function splitDecl(decl: string): [string, string] {
   return [decl.slice(0, i), decl.slice(i + 2)];
 }
 
-export function generateCss(contract: Contract, tokenInventory: Set<string>, errors: string[]): string {
+export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown): string {
+  // `strokesIncludedInLayout: false` — a stroke that takes no layout space is
+  // drawn as an inset box-shadow ring, not a border (anatomy.ts
+  // lowerStrokeRings, which says why it is a rewrite BEFORE the rules are
+  // written and not a guard at each of their push sites). The same object
+  // comes back when no part is flagged.
+  // @lower css.stroke-outside-layout-inset-ring
+  const contract = lowerStrokeRings(input);
+  // …and a ring's real shadow whose TOKEN resolves to `none` is settled on the
+  // finished text, the first place a token's VALUE is known (`tokenValues`:
+  // the DTCG trees, when the caller has them — anatomy.ts settleStrokeShadows).
+  const settle = (css: string) => (contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id));
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const lines: string[] = [
     `/* GENERATED FILE — DO NOT EDIT.`,
@@ -111,6 +126,11 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     '  box-sizing: border-box;',
     '}',
   );
+
+  // NO DECLARED FAMILY = THE PIPELINE DEFAULT (anatomy.ts defaultFontFamilyParts).
+  // Pushed LAST in a part's base rule: the UA resets above spell `font:
+  // inherit`, a shorthand that would erase a family written before it.
+  const defaultFamily = defaultFontFamilyParts(contract);
 
   const checkToken = (tokenPath: string, context: string): boolean => {
     if (!tokenInventory.has(tokenPath)) {
@@ -192,6 +212,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       }
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
+      if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
       if (decls.length > 0) {
         lines.push('', `.${cssIdentifier(name)} {`, ...decls.map((d) => `  ${d};`), '}');
       }
@@ -199,7 +220,9 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       // parent's rule — the placement is visible with nothing in it.
       lines.push(...gridPlaceholderRules(name));
     }
-    return lines.join('\n') + '\n';
+    // The multi-root sheet never took finishStylesheet; a ring part still owes
+    // its forced-colors boundary (a no-op, byte for byte, without one).
+    return settle(lowerStrokeRingForcedColors(lines.join('\n') + '\n'));
   }
 
   // Root: static/layout base + non-substituted tokens, then enum classes,
@@ -647,6 +670,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
     rootDecls.push(`${cssProp}: ${value}`);
   }
+  if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
 
   // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
   // standard non-visual hit-target extension (an absolutely centered ::before
@@ -1040,6 +1064,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
     }
+    if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
     // img) fills its inset box — for replaced elements, auto width under
     // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.
@@ -1142,7 +1167,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
-  return finishStylesheet(lines.join('\n') + '\n');
+  return settle(finishStylesheet(lines.join('\n') + '\n'));
 }
 
 /** THE ONE EXIT EVERY STYLESHEET SURFACE TAKES.
@@ -1163,7 +1188,76 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
  *  shadow sheet as the invalid declaration, unnamed, and the referee could no
  *  longer catch it. `translate-x`/`translate-y` had exactly that latent hole. */
 export function finishStylesheet(css: string): string {
-  return lowerPseudoElementChannels(stripCanvasOnlyChannels(css));
+  return lowerStrokeRingForcedColors(lowerPseudoElementChannels(stripCanvasOnlyChannels(css)));
+}
+
+/** FORCED COLORS ERASES THE RING — `strokesIncludedInLayout: false`, the
+ *  accessibility half (anatomy.ts lowerStrokeRings draws the stroke as an
+ *  inset `box-shadow`).
+ *
+ *  In forced-colors mode (Windows High Contrast) the user agent forces
+ *  `box-shadow: none`; a `border` survives. So the very parts this lowering
+ *  exists for — an OUTLINED badge, chip or button, whose stroke is its only
+ *  edge — would have NO boundary at all there, where the border they had
+ *  before kept one. Measured in Chromium (`emulateMedia({ forcedColors:
+ *  'active' })`): edge pixel = page background.
+ *
+ *  A real border would take layout space again, which is the defect the ring
+ *  fixed. What takes none and is NOT forced away is an `outline` drawn inward:
+ *  `outline: <w> solid CanvasText; outline-offset: calc(-1 * <w>)`, inside
+ *  `@media (forced-colors: active)` ONLY — outside that mode the property stays
+ *  the focus ring's, which is why the ring is not an outline everywhere.
+ *
+ *  · FOCUS STILL WINS. The rule selects `:not(:focus-visible)`, so a focused
+ *    element is left to whichever focus ring applies — the contract's own
+ *    `:focus-visible` rule, or the USER AGENT's, which an author `outline`
+ *    would otherwise outrank by origin. (The `:has(> …:focus-visible)` idiom a
+ *    checkable box carries is more specific than this rule and wins too.)
+ *  · PER-SIDE STROKES get a FULL outline at the widest side. An outline has no
+ *    sides; drawing four edges where the designer drew one is an approximation,
+ *    taken because a boundary that is too complete is a smaller loss, in the
+ *    one mode whose whole point is visible boundaries, than none. NAMED LIMIT.
+ *  · `CanvasText` is a system colour, so the mode does not replace it.
+ *
+ *  Applied to the FINISHED text and keyed on the composed declaration itself
+ *  (the only `box-shadow: inset … var(--_stroke-…` a sheet can contain), so the
+ *  CSS-module sheet and the web-components shadow sheet — different selectors,
+ *  different builders — cannot disagree and no rule site can route around it;
+ *  emitted directly after the rule it came out of, like the pseudo-element
+ *  lowering. A sheet with no ring is returned unchanged. The INLINE surface
+ *  cannot carry a media query and has no boundary in this mode — NAMED LIMIT
+ *  (docs/23 §D.39). */
+export function lowerStrokeRingForcedColors(css: string): string {
+  if (!css.includes('var(--_stroke-')) return css;
+  const ringRe = /^\s*box-shadow:\s*inset [^\n]*var\(--_stroke-/;
+  const out: string[] = [];
+  let openSelector: string[] | null = null;
+  let ring: 'uniform' | 'sides' | null = null;
+  for (const line of css.split('\n')) {
+    out.push(line);
+    if (openSelector === null) {
+      if (/\{\s*$/.test(line) && !/^\s*@/.test(line)) {
+        const selLines: string[] = [line.replace(/\s*\{\s*$/, '')];
+        for (let j = out.length - 2; j >= 0 && /,\s*$/.test(out[j]); j--) selLines.unshift(out[j].replace(/,\s*$/, ''));
+        openSelector = selLines;
+        ring = null;
+      }
+      continue;
+    }
+    if (ringRe.test(line)) ring = line.includes('--_stroke-top-width') ? 'sides' : 'uniform';
+    if (!/^\s*\}\s*$/.test(line)) continue;
+    if (ring) {
+      const width = ring === 'sides'
+        ? 'max(var(--_stroke-top-width), var(--_stroke-right-width), var(--_stroke-bottom-width), var(--_stroke-left-width))'
+        : 'var(--_stroke-width)';
+      const selectors = openSelector.map((s) => s.trim()).filter((s) => s.length > 0).map((s) => `${s}:not(:focus-visible)`);
+      out.push('', '@media (forced-colors: active) {', `  ${selectors.join(',\n  ')} {`,
+        `    outline: ${width} solid CanvasText;`, `    outline-offset: calc(-1 * ${width});`, '  }', '}');
+    }
+    openSelector = null;
+    ring = null;
+  }
+  return out.join('\n');
 }
 
 /** RC7 — A PSEUDO-ELEMENT CHANNEL BECOMES ITS RULE, NOT A DECLARATION.

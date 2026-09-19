@@ -294,12 +294,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Badge/Badge.module.css": "3b06cdb89eeda840a1703870e5ca0deb79627b8983e67e4f16c26bf5a691fdb1",
+    "react/Badge/Badge.module.css": "98021fea1bf006d085d9eb8373b177d4116a6968860d6d42bb0ebbcf4ddd9728",
     "react/Badge/Badge.stories.tsx": "a825a0c165d066351e9dc0d08917308f87f2b24cfde47df66d4a7e40fa3e79eb",
     "react/Badge/Badge.tsx": "d9949f7b1664acbff29b03382438a5b232a6a24a675bb8e61ef4eb7e13ef1076",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "wc/flowbite-badge.ts": "e45fb5f9381ada2a0495fc98135b3efb75a81b83944fd426f827bae60fe92037",
-    "wc/flowbite-badge.css.ts": "5d5efa63610c70df5e6878d96428bf4a1091ad337b0f8a88ad80d73e74d5f5f6",
+    "wc/flowbite-badge.css.ts": "19b890d2757a886f4b6f9431eb70a8cb388dc6d2f69c2551023d7d56ff613a9b",
     "wc/flowbite-badge.demo.html": "6802e42e1e723ef0b4af5de396bd79a6b2ca5b051e97d5de249a770fa93d78d7",
     "wc/flowbite-badge.custom-elements.json": "8caccf740d222eb3420b357c8dc25b886d4c87fb2b92c0722ad7cc18e8689da1"
   },

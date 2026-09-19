@@ -28,6 +28,7 @@
   row-gap: var(--imported-badge-root-row-gap);
   padding-block: var(--spacing-0);
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .variant-blue {

@@ -253,6 +253,7 @@
   line-height: var(--p-text-heading-sm-font-line-height);
   letter-spacing: var(--p-text-heading-sm-font-letter-spacing);
   display: block;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .tone-critical .title {
@@ -397,6 +398,7 @@
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: inline;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .buttongroup {
@@ -473,4 +475,5 @@
   cursor: pointer;
   text-align: center;
   user-select: none;
+  font-family: Inter, system-ui, sans-serif;
 }

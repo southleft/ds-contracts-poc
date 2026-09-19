@@ -17,3 +17,7 @@
   border: 0;
   height: var(--imported-stub-state-default-active-no-root-height);
 }
+
+.text {
+  font-family: Inter, system-ui, sans-serif;
+}
