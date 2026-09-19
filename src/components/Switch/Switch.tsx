@@ -6,12 +6,18 @@
  * DOM attrs OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   onToggle
+ *
+ * `children` OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef, useState } from 'react';
 import type { LabelHTMLAttributes } from 'react';
 import styles from './Switch.module.css';
 
-export interface SwitchProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onToggle'> {
+export interface SwitchProps extends Omit<
+  LabelHTMLAttributes<HTMLLabelElement>,
+  'children' | 'onToggle'
+> {
   /** On or off — drives the track color and thumb position. */
   value?: 'off' | 'on';
   /** Always rendered — users must know what they are toggling. */
@@ -30,7 +36,6 @@ export const Switch = forwardRef<HTMLLabelElement, SwitchProps>(function Switch(
     description = 'Takes effect immediately.',
     onToggle,
     className,
-    children,
     ...rest
   },
   ref,

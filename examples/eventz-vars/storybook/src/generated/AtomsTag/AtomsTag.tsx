@@ -2,13 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/atoms-tag.contract.json (ds.atoms-tag v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import { IconsPlaceholder } from '../IconsPlaceholder';
 import styles from './AtomsTag.module.css';
 
-export interface AtomsTagProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AtomsTagProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   isInteractive?: boolean;
   variant?: 'parent' | 'child';
   isActive?: boolean;
@@ -23,7 +26,6 @@ export const AtomsTag = forwardRef<HTMLButtonElement, AtomsTagProps>(function At
     isActive = true,
     label = 'Label',
     className,
-    children,
     ...rest
   },
   ref,

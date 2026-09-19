@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/atoms-checkbox.contract.json (ds.atoms-checkbox v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -9,7 +12,7 @@ import { IconsCheckbox } from '../IconsCheckbox';
 import { InlineHint } from '../InlineHint';
 import styles from './AtomsCheckbox.module.css';
 
-export interface AtomsCheckboxProps extends HTMLAttributes<HTMLDivElement> {
+export interface AtomsCheckboxProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   isChecked?: boolean;
   isDisabled?: boolean;
   label?: string;
@@ -18,15 +21,7 @@ export interface AtomsCheckboxProps extends HTMLAttributes<HTMLDivElement> {
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const AtomsCheckbox = forwardRef<HTMLDivElement, AtomsCheckboxProps>(function AtomsCheckbox(
-  {
-    isChecked = false,
-    isDisabled = false,
-    hasHint = true,
-    label = 'Label',
-    className,
-    children,
-    ...rest
-  },
+  { isChecked = false, isDisabled = false, hasHint = true, label = 'Label', className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
