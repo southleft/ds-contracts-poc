@@ -3642,3 +3642,205 @@ surface outside the React + WC core scope; named here, not fixed.
 `emit-react-inline.ts`, `emit-wc.ts` ×2) and regenerate; or make the proposer
 carry Inter and accept the round-trip cost. **Gate:**
 `core/react-default-font-family.test.ts` (`npm run react:conformance:check`).
+
+## D.39 A designer's Figma stroke takes no layout space; the CSS border it lowered to did — CLOSED for React, React inline and web components; OPEN on static HTML
+
+**2026-09-18. A lowering decision the owner delegated; recorded so it can be
+reversed.** On an auto-layout frame a Figma stroke takes layout space only when
+the frame says `strokesIncludedInLayout`; a designer-drawn frame defaults to
+`false`, so the stroke paints over the padding and the box is content + padding.
+Neither reader captured the field, the proposer lowered every stroke to
+`border-width` / `border-color`, and a CSS border grows the box. Measured with
+`npm run design:consumer:check` on the 72-variant CBDS Badge (after §D.38): all
+24 outline variants failed on size — 4 px too wide, and the 16 px-high small one
+20 px high, because 8 + 8 px padding plus a 2 px border cannot fit a 16 px border
+box at all.
+
+**Decision.** Keep the designer's numbers. Padding stays the contract's padding:
+it is usually bound to a spacing variable, and rewriting it to "padding minus
+border" destroys the binding (and still cannot fit the 16 px box). The contract
+records the one fact that differs, under Figma's own name, and only its
+non-default value: `Part.strokesIncludedInLayout: false`. The stroke keeps riding
+`border-width` / `border-color` (and the per-side widths of dump v1.34), tokens
+stay bound, and each surface draws it without taking space.
+
+**What absent means, and why nothing already minted changes.** The Figma writer
+has never set the field. Frames it creates read back `true`: measured on the
+committed census responses (`extract/figma/fixtures/census-d2c/*.rest-nodes.json`),
+160 of 160 auto-layout frames in pipeline-generated sets report `true` and 0 of
+the designer-drawn ones do (REST omits `false`). `true` is also exactly what a
+CSS border under `box-sizing: border-box` means. So ABSENT = in layout = every
+existing contract's meaning; `true` is never written; a generated set proposes
+back to its own contract; and the writer's script is byte-identical for every
+contract without the flag (the runtime names the field only when a spec carries
+it, and then writes it both ways so an amended root is put back). A designer can
+also choose `true` — the Altitude Tabs header does, which is why its 1 px rules
+occupying layout matched Figma's 176 px in §CURRENT row 2 — and that proposes no
+flag.
+
+**Readers (dump v1.35).** Both write `strokesIncludedInLayout` on an auto-layout
+frame that draws a visible stroke, and then always, `false` included (REST: an
+absent response key is the fact `false`; plugin: the node's boolean). An ABSENT
+dump field still means "not captured" (dump ≤ v1.34, or a canvas that reports
+nothing), never `false`: older dumps propose the bytes they always did. A node
+drawn both ways across its variants is NAMED and keeps the border
+(`propose.stroke-layout-mixed-refused`); a flag whose stroke channels were all
+refused is withdrawn by name.
+
+**Form.** An inset `box-shadow` ring: `inset 0 0 0 <w> <c>`, or one layer per side
+(`inset 0 <t> 0 0`, `inset 0 -<b> 0 0`, `inset <l> 0 0 0`, `inset -<r> 0 0 0`) when
+the part carries per-side widths. It paints inside the border box, under the
+content, follows `border-radius`, and takes no space. Not `outline` with a
+negative offset: that is the focus ring's property, and a `:focus-visible` rule
+would erase the border. Because width, colour and a real shadow each vary on their
+own axis and `box-shadow` is one property, the stylesheet surfaces rename the
+channels to private custom properties wherever they sit (`--_stroke-width`,
+`--_stroke-color`, `--_stroke-<side>-width`, `--_stroke-shadow` — an underscore is
+refused in a token path, so no token can collide) and the part's base rule
+composes them once, the ring BEFORE any real shadow so both survive in every
+state (`lowerStrokeRings`, `packages/core/src/anatomy.ts`). Token-bound values stay
+`var(--token)`. The base rule always states every variable it reads, so a nested
+flagged part never inherits its ancestor's stroke. With the width gone from the
+maps nothing synthesises `border-style: solid`, and a root falls to its ordinary
+`border: 0` reset. The inline surface cannot use custom properties (not
+`CSSProperties` keys; its claim is resolved literals), so it composes the same ring
+at render time over the merged style record, the consumer's `style` included
+(`strokeRing`). `outline-*` channels are untouched: an outline never takes
+layout space. `generate`'s tokens.css gate no longer demands a `--_` variable the
+sheet itself declares.
+
+**Refused by name** (`validateContract`): the flag on a part with no stroke
+channel; the flag together with a per-side border colour or a declared /
+conditional `border-style` — the ring is one-colour and solid.
+
+**Measured after.** Same check, fresh read-only REST read of the same set (the
+dump differs from PR 124's only by the new field, on the 24 outline variants),
+same unchanged 5 % limit: **28 of 72 pass** (was 18), 1.16–17.09 %, median 5.47 %
+(was 1.91–51.54 %, median 9.01 %).
+
+| style × size | pass before | pass after | before (min / median / max) | after (min / median / max) |
+|---|---|---|---|---|
+| fill × large | 6/12 | 6/12 | 3.42 / 4.84 / 8.27 % | unchanged to the digit |
+| fill × small | 3/12 | 3/12 | 4.04 / 7.10 / 11.86 % | unchanged to the digit |
+| tonal × large | 8/12 | 8/12 | 1.91 / 4.23 / 6.18 % | unchanged to the digit |
+| tonal × small | 1/12 | 1/12 | 4.43 / 10.16 / 15.05 % | unchanged to the digit |
+| outline × large | 0/12 | **7/12** | 9.17 / 10.83 / 13.40 % | 1.16 / 3.56 / 7.86 % |
+| outline × small | 0/12 | **3/12** | 36.35 / 44.49 / 51.54 % | 2.21 / 11.07 / 17.09 % |
+
+"Before" is the same contract with the flag removed, generated and scored in the
+same session — it reproduces §D.38's 18 of 72 (1.91–51.54 %, median 9.01 %)
+exactly. The 72 × 3 images are not committed here: the set's evidence directory
+belongs to the change that introduced it (PR 124), and the receipts of both runs
+were produced by the check itself.
+
+Every outline variant now has the height Figma drew (24 / 16 px), and the outline
+rows have exactly the size profile of the fill and tonal rows (13 of 24 equal, 11
+one pixel wider): what is left is the shared small-text metric, not the stroke.
+The design-to-code census now counts the fact (47 occurrences on the figma-ds
+designer sets, all carried; 2,857 → 2,904 carried, 0 silent); the Flowbite sets —
+generated by this pipeline — did not move.
+
+**Hardened after an adversarial review (PR 128, same day).** Each was measured
+in Chromium before and after:
+
+- **Forced colors.** Windows High Contrast forces `box-shadow: none` while a
+  border survives, so an outlined control lost its ONLY boundary. Every ring
+  part now carries, directly after its base rule on the CSS-module and
+  web-component sheets, `@media (forced-colors: active) { <part>:not(:focus-visible)
+  { outline: <w> solid CanvasText; outline-offset: calc(-1 * <w>) } }` — an inward
+  outline takes no layout space and is not forced away, and it exists inside
+  that media query only, so everywhere else `outline` stays the focus ring's.
+  `:not(:focus-visible)` makes focus win, including the USER AGENT's ring, which
+  an author `outline` would otherwise outrank. Per-side strokes get a FULL
+  outline at the widest side (`max(...)`): an outline has no sides, and in the
+  one mode whose point is visible boundaries a too-complete edge is the smaller
+  loss — **named, an approximation**.
+- **Nested native elements.** Only the single root had a `border: 0` reset, so a
+  flagged `<button>` / `<fieldset>` PART showed the UA's 2px outset / groove
+  border again. Every ring part now states `border: 0` on all three surfaces.
+- **A unitless `0` side** made `calc(-1 * 0)` a number, not a length, and voided
+  the whole declaration; literal zero widths are composed as `0px` (both
+  composition sites).
+- **A shadow TOKEN that resolves to `none`** — 60+ in this repo's corpora,
+  concentrated on outlined variants — voided `<ring>, none` and took the stroke
+  with it. The emitters that are handed the token trees (every registered one)
+  now settle it on the finished sheet: inside the ring's private variable ONLY,
+  a reference to such a token becomes the no-op layer; tokens.css and ordinary
+  `box-shadow: var(--x)` keep their bytes. A token that is `none` in one mode
+  and a shadow in the other is REFUSED BY NAME, and so is a ring that binds a
+  shadow token when no values were supplied (a bare `emitReact`): the deciding
+  fact cannot be checked from paths, and the pipeline does not guess. The
+  inline surface resolves values and drops `none` at render time, so the two
+  agree.
+- **Inline consumer `style`.** Spread after the ring, a caller's `boxShadow`
+  silently deleted the stroke and a caller's `borderColor` did nothing. The
+  caller's style now joins the merge BEFORE the ring is composed: `borderColor` /
+  `borderWidth` / per-side widths restyle the ring (they are the same contract
+  channels), `boxShadow` follows the ring, and a `border` shorthand is passed
+  through untouched (the record's own is only ever the `0` reset).
+- **The tokens.css gate's `--_` exemption** matched file text; it now requires a
+  DECLARATION of that exact property (after `{` or `;`, comments removed), so a
+  comment, a longer name or a bare token value no longer exempts anything.
+- The lowering is registered (`css.stroke-outside-layout-inset-ring`,
+  `spec/lowering.json`) with its declared inverse, `carryStrokeLayout`.
+
+**Named limits.**
+
+- **The contract cannot take the flag back OFF an existing set.** A script for a
+  contract with no flagged part never names the field — that is what keeps
+  every existing contract's script byte-identical — and amend reuses the variant
+  nodes, so a canvas that once held `false` keeps it, and the next read proposes
+  the flag back. It is a contract/canvas DIVERGENCE the contract cannot
+  currently fix (a designer can, in Figma's auto-layout settings); not silent —
+  the proposal shows it — and pinned by a test so it cannot become so. Inside one
+  script that carries the fact, unflagged flex frames ARE written `true`. The
+  amend path has no prior-canvas read to key a wider fix on, and none was
+  invented. The plugin's drift snapshot does not list the field either.
+- **Paint order, UNMEASURED.** The ring paints UNDER the part's children; a Figma
+  frame stroke is believed to paint OVER them. It matters exactly where a child
+  reaches the stroke: padding smaller than the stroke weight, or an edge-to-edge
+  child (measured in Chromium: a full-bleed child covers the ring; the border it
+  replaced pushed the child inward instead). Left as is until measured on a
+  canvas; an `::after` overlay (inset 0, `pointer-events: none`) is the candidate
+  fix, at the cost of a positioning context and no spelling on void elements.
+- **Inline surface, forced colors.** Inline styles cannot carry a media query
+  (the emitter's only media-dependent output is the `<style>` it injects for
+  keyframes, a child a void root cannot hold), so a flagged part has NO boundary
+  in Windows High Contrast there.
+- A declared `transition: border-color` no longer animates the ring (the colour
+  rides an unregistered custom property). Printing usually drops box-shadows
+  with background graphics, where a border prints. The flag on a SHAPE part is
+  accepted and meaningless (shapes are not auto-layout frames). The Playground's
+  canvas preview (`playground/src/engine/canvas-preview.ts`) ignores the flag.
+- A width TOKEN that resolves to a unitless `0` on a per-side part cannot be seen
+  by the emitter. Per-side layers overlap at the corners, so a translucent stroke
+  colour doubles there. The mock canvas does not model the field (it reports
+  nothing, which reads as "not captured"). An OUTSIDE (outline) stroke records
+  the flag for the canvas's sake; its frames born `true` are a pre-existing
+  difference this change does not touch. An unflagged GRID frame inside a
+  flagged script is deliberately not written (the Plugin API documents the
+  field for HORIZONTAL / VERTICAL layout); a FLAGGED one is.
+- **Exercised live.** The writer line ran on a real canvas on 2026-09-18, on
+  COMPONENT, `createSlot()` SLOT and GRID nodes, with no throw, and a REST
+  readback matched the predicted boxes exactly: a hugging root 60×37 → 56×33,
+  a FILL slot 180×60 → 184×64, a root hugging a fixed grid 140×60 → 136×56.
+  The unflagged controls read `true` on root, slot and grid — the premise
+  "absent = in layout" holds on the canvas, not only in the committed census
+  responses — and the flagged GRID frame's key is absent from REST, i.e. Figma
+  honours the write on GRID. The evidence is private.
+
+**Still open.** `core/emit-html.ts` ignores the flag and still draws a
+space-taking border: a preview surface outside the React + WC core scope (and the
+surface the computed gate scores through); named here, not fixed. The code-led
+native path (`source-reference/`, `core/native-*`) is unchanged by design.
+
+**To reverse.** Delete `carryStrokeLayout` / `settleStrokeLayout` and their three
+doors in `core/propose-figma.ts` (no contract then carries the flag and every
+surface emits what it did); or keep the capture and delete the
+`lowerStrokeRings(input)` calls (`css.ts`, `emit-wc.ts`) and the `strokeRing` wrap
+in `emit-react-inline.ts` to fall back to a space-taking border. The schema field
+and the dump field are additive and can stay. **Gates:**
+`extract/figma/stroke-outside-layout.test.ts` (`npm run exact-proposal:check` —
+both readers, proposer, writer round trip through the real plugin reader) and
+`core/react-stroke-outside-layout.test.ts` (`npm run react:conformance:check` —
+all three surfaces, box and shadow MEASURED in Chromium).

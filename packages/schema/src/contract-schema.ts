@@ -2113,6 +2113,37 @@ export interface Part {
    *  Emitted by extract/computed (fuse.ts `hugEvidence`); a part with no
    *  `max-width` channel must not carry it (validateContract refuses). */
   hugsBelowMaxWidth?: boolean;
+  /** Design-led round (dump v1.35) — a CAPTURED canvas fact, never
+   *  hand-inferred: this part's stroke is drawn WITHOUT taking layout space.
+   *  It is Figma's auto-layout `strokesIncludedInLayout`, under its own name,
+   *  and only the non-default value is spelled.
+   *
+   *  ABSENT is the meaning every contract already had: the part's `border-*`
+   *  channels are a CSS border under `box-sizing: border-box` — the box grows
+   *  by the weight — which is what the code emitters write and what a frame
+   *  THIS pipeline generates reads back as (`true`, measured on the committed
+   *  census responses: 160 of 160 generated auto-layout frames, 0 of the
+   *  designer-drawn ones). So `true` is never written, a generated set
+   *  proposes back to exactly its own contract, and no existing contract
+   *  changes meaning.
+   *
+   *  `false` is a designer's frame at Figma's default: the stroke paints OVER
+   *  the padding and the box is content + padding. The `border-width` /
+   *  `border-color` channels (and their per-side longhands) keep carrying the
+   *  stroke — tokens stay bound, the padding stays the designer's number —
+   *  and what changes is how each surface DRAWS them: the code emitters paint
+   *  an inset `box-shadow` ring instead of a `border` (strokeRingLowering —
+   *  there is no CSS property that says "border, but take no space"); the
+   *  canvas writer sets `strokesIncludedInLayout = false` on the frame it
+   *  builds. The rejected alternative — rewriting padding to "padding minus
+   *  border" — destroys the padding's variable binding and cannot fit a 16px
+   *  box around 8+8 padding plus a 2px border at all.
+   *
+   *  `outline-*` channels (an OUTSIDE stroke) never take layout space in CSS,
+   *  so the code surfaces ignore the flag for them; the canvas still honours
+   *  it. A part that carries no stroke channel must not carry the flag
+   *  (validateContract refuses — the hugsBelowMaxWidth discipline). */
+  strokesIncludedInLayout?: false;
   /** v18 (text-indent off-box round) — MEASURED sizing evidence, never
    *  hand-authored. The enum-axis values on which this element's own
    *  `text-indent` lays its first line ENTIRELY OUTSIDE its content box
@@ -2497,6 +2528,9 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
       .optional(),
     /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
     hugsBelowMaxWidth: z.boolean().optional(),
+    /** dump v1.35: the stroke takes NO layout space — see the Part interface.
+     *  Only `false` is spelled; absent keeps the space-taking border. */
+    strokesIncludedInLayout: z.literal(false).optional(),
     /** v18: MEASURED text-indent evidence — see the Part interface. */
     textOutOfBox: z
       .strictObject({

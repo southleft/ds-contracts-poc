@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **60** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **61** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -412,7 +412,7 @@ The stage where the two directions disagree about a keyword. The proposer elides
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
-| `css.display-absent-root-inflates-inline-flex` | `proposed` | `css.ts:229` | the CSS emitted for a contract whose root carries no layout block → n/a — this is the CSS the contract renders to | the two defaults must be the SAME keyword, or the elision is not an elision | **none** | `untested` |
+| `css.display-absent-root-inflates-inline-flex` | `proposed` | `css.ts:236` | the CSS emitted for a contract whose root carries no layout block → n/a — this is the CSS the contract renders to | the two defaults must be the SAME keyword, or the elision is not an elision | **none** | `untested` |
 | `propose.display-root-layout-elided` | `implemented` | `propose-figma.ts:5794` | a canvas root drawn at exactly row / center / center → n/a — this is the return leg: the Figma fact is dropped rather than proposed | the elision is only sound if the absence re-inflates to the SAME shape it elided | **none** | `untested` |
 | `schema.display-block-to-vertical-stack` | `implemented` | `contract-schema.ts:1049` | display: inline \| block \| list-item → frame nesting; a block-level box lowers to a vertical stack | a block-level box lowers to a vertical stack | **none** | `named` |
 
@@ -480,18 +480,32 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 
 **Why.** A receipt guarded by the wrong condition. The literal side of the same switch calls literalMiss() in ALL branches including the catch-all else, and has no such hole. This matters beyond padding: it is the general escape through which any unregistered token channel leaves without a word, which is the shape of the tab-size incident that once made validateContract refuse 32 whole components.
 
-### `size` — 6 rules (5 implemented, 1 proposed, 0 wall)
+### `size` — 7 rules (6 implemented, 1 proposed, 0 wall)
 
 Contains both the best and the weakest reasoning in the register. `hugEvidence` and the text hug/fill rule ask real measurements and refuse by name when the measurement is not uniform. The text-part geometry exclusion asks presence-of-ink instead — a proxy standing in for a question the same file already knows how to ask.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
+| `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:96` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2326` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2355` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:5026` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |
 | `fuse.size-geometry-admit-disjunction` | `implemented` | `fuse.ts:1046` | width / height and the inset quartet on any part → a carried dimension when a door opens; otherwise the box sizes from its content, padding and min/max channels | admit a dimension when it is a library fact, refuse it when it is an environment measurement | `receipts` | `untested` |
 | `fuse.size-hug-evidence` | `implemented` | `fuse.ts:1691` | the relationship between a part’s used width and its max-width → a boolean the max-width lowering consumes to decide ceiling-versus-fixed | a measured, uniform, per-part verdict or no verdict at all | `receipts` | `round-tripped` |
 | `fuse.size-text-part-geometry-excluded` | `proposed` | `fuse.ts:195` | width, height and all four insets on any part carrying a non-empty direct text run → nothing — no geometry reaches the canvas for that part | exclude geometry that is a font-metric artifact, carry geometry the library authored — decided by measurement, not by the presence of ink | `receipts` | `untested` |
+
+#### `css.stroke-outside-layout-inset-ring`
+
+**Context.** packages/core anatomy.ts lowerStrokeRings, applied by generateCss and the web-components shadowCss before any rule is written (the inline surface composes the same ring at render time): the part carries the flag AND a border channel in some holder; outline-* channels are left alone
+
+**Inverse** (`propose-figma.ts`, carryStrokeLayout) emits `border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged` — the canonical form: a designer's set proposes the flag and the writer sets it back; a set this pipeline generated reads back `true` and proposes no flag.
+
+**Lost.**
+- paint order, unmeasured: the ring paints UNDER the part's children, so a child that reaches the edge (padding smaller than the stroke) covers it — docs/23 §D.39
+- forced colors: the user agent erases box-shadow, so an inward outline at the widest side stands in inside @media (forced-colors: active); per-side strokes draw all four edges there
+- per-side border colours and non-solid border styles have no ring spelling and are refused by validateContract
+
+**Why.** CSS has no property that says "border, but take no layout space", and a Figma stroke on a designer-drawn auto-layout frame takes none by default. Rewriting padding to padding-minus-border destroys the padding's variable binding and cannot fit a 16px box around 8+8 padding plus a 2px border at all, so the contract keeps the designer's numbers and records the one fact that differs; this rule is where that fact becomes CSS. Absent means in layout — a CSS border under border-box, and what a frame this pipeline writes reads back as — so the fixed point holds in both directions: a generated set proposes no flag, a designer's set proposes the flag and writes it back. Untested by the conformance kit; held by extract/figma/stroke-outside-layout.test.ts and core/react-stroke-outside-layout.test.ts, which measure the box in Chromium.
 
 #### `emit.size-maxwidth-ceiling-or-fixed`
 
