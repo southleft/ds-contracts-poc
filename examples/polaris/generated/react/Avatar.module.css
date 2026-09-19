@@ -87,6 +87,7 @@
   position: absolute;
   aspect-ratio: 1 / 1;
   user-select: none;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-lg .initials {
