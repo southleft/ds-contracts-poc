@@ -34,10 +34,12 @@ import {
   NATIVE_ROLE_HOSTS,
   PART_STATE_CHANNELS,
   partCarriesStroke,
+  partOwnsText,
   placeholdersIn,
   rootElementsOf,
   STATE_SELECTORS,
   stripBraces,
+  textBoxConflicts,
   textProps,
   topRootNames,
   topRoots,
@@ -580,6 +582,31 @@ export function validateContract(
             `${contract.id}: part "${name}" carries strokesIncludedInLayout: false together with ${unspellable.join(', ')} — a stroke outside layout is drawn as a one-colour solid inset ring on the code surfaces, which has no per-side colour and no border style; remove the flag or the channel`,
           );
         }
+      }
+    }
+    // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` qualifies a TEXT BOX
+    // THAT SIZES ITSELF TO ITS TEXT — the same discipline again: a part that
+    // owns no text has nothing for it to qualify; a box sized, filled or
+    // truncated by a channel is not sized by its text, and the two would
+    // contradict rather than compose; a top-level root's box is padding plus
+    // content, so the fact lives on the text part (the proposer names the
+    // hoisted-label case instead of carrying it). Refused BY NAME, never
+    // silently dropped.
+    if (part.textAutoResize !== undefined) {
+      if (p.length === 1) {
+        errors.push(
+          `${contract.id}: part "${name}" is a top-level root and carries textAutoResize — the whole-pixel text box qualifies a text part's own element; a root's box is its padding plus its content`,
+        );
+      } else if (!partOwnsText(part)) {
+        errors.push(
+          `${contract.id}: part "${name}" carries textAutoResize but owns no text (no text / content / textByProp) — the fact qualifies a text box and qualifies nothing here`,
+        );
+      }
+      const conflicts = textBoxConflicts(part);
+      if (conflicts.length > 0) {
+        errors.push(
+          `${contract.id}: part "${name}" carries textAutoResize: WIDTH_AND_HEIGHT together with ${conflicts.join(', ')} — a box that is sized, filled or truncated by a channel is not sized by its text; remove the flag or the channel`,
+        );
       }
     }
     // v18 (mint round): text evidence describes ONE channel and withholds

@@ -66,8 +66,10 @@ import {
   validateContract,
   defaultFontFamilyParts,
   drawsStrokeRing,
+  drawsWholePixelTextBox,
   ELEMENT_META,
   holderDeclaresPosition,
+  wholePixelTextBoxValue,
 } from './emit-react.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
@@ -522,6 +524,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // No declared family = the pipeline default (defaultFontFamilyParts) —
     // an inline style inherits the host page's font exactly as a class does.
     if (defaultFamily.has(part)) s.fontFamily = DEFAULT_FONT_STACK;
+    // dump v1.36: the whole-pixel text box — the same value the stylesheet
+    // surfaces write (anatomy.ts drawsWholePixelTextBox). An inline style is
+    // set through the CSSOM, where an unsupported value is ignored, and a
+    // server-rendered `style` attribute is parsed like a sheet, where it is
+    // dropped: either way a browser without calc-size() keeps today's box,
+    // so no @supports guard is needed and none could be spelled here.
+    if (drawsWholePixelTextBox(part)) s.inlineSize = wholePixelTextBoxValue(part, (ref) => { const v = resolveValue(ref); return typeof v === 'number' ? `${v}px` : v; });
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {

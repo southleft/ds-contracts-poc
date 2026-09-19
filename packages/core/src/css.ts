@@ -35,6 +35,8 @@ import {
   JUSTIFY_CSS,
   layoutOverrideDecls,
   lowerStrokeRings,
+  drawsWholePixelTextBox,
+  wholePixelTextBoxValue,
   OVERLAY_CSS,
   placeholdersIn,
   rootElementsOf,
@@ -213,6 +215,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
       if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+      // dump v1.36: the whole-pixel text box (anatomy.ts drawsWholePixelTextBox
+      // says why this exact declaration; the single-root site below carries
+      // the lowering marker).
+      if (drawsWholePixelTextBox(part)) decls.push(`inline-size: ${wholePixelTextBoxValue(part, cssVar)}`);
       if (decls.length > 0) {
         lines.push('', `.${cssIdentifier(name)} {`, ...decls.map((d) => `  ${d};`), '}');
       }
@@ -1065,6 +1071,13 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` — a Figma text box that
+    // sizes itself to its text is a whole number of pixels wide (the advance
+    // rounded up); the element gets the same box, as a progressive
+    // enhancement a browser without calc-size() drops at parse
+    // (anatomy.ts drawsWholePixelTextBox says why this exact declaration).
+    // @lower css.text-box-whole-pixel
+    if (drawsWholePixelTextBox(part)) decls.push(`inline-size: ${wholePixelTextBoxValue(part, cssVar)}`);
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
     // img) fills its inset box — for replaced elements, auto width under
     // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.

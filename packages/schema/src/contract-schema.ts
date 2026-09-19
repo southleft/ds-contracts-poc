@@ -2144,6 +2144,45 @@ export interface Part {
    *  it. A part that carries no stroke channel must not carry the flag
    *  (validateContract refuses — the hugsBelowMaxWidth discipline). */
   strokesIncludedInLayout?: false;
+  /** Design-led round (dump v1.36) — a CAPTURED canvas fact, never
+   *  hand-inferred: this TEXT part's box sizes itself to its text, and a
+   *  Figma text box that does so is a WHOLE number of pixels wide — the
+   *  glyph advance rounded UP. It is Figma's `textAutoResize`, under its own
+   *  name, and only the value the code surfaces lower is spelled:
+   *  `WIDTH_AND_HEIGHT` (auto width and height). `NONE`, `HEIGHT` and the
+   *  deprecated `TRUNCATE` are a fixed or filled box, which the width /
+   *  fill vocabulary already carries, and are never written here.
+   *
+   *  ABSENT is the meaning every contract already had: the text element is
+   *  as wide as its glyph run at the FRACTIONAL advance the browser lays it
+   *  out at (`Label` in Inter Semi Bold 14: 31.40625 px where Figma's box is
+   *  32). Measured with the design-led consumer check on the 72-variant CBDS
+   *  Badge: 26 of the 48 × 16 px `size=small` variants missed the 5 % limit
+   *  at 4.4–7.3 % with every content size equal, because the hug root
+   *  rendered 47.40625 px wide against Figma's 48 and the right edge
+   *  antialiased across two columns. No existing contract or emitted byte
+   *  changes when the field is absent.
+   *
+   *  `WIDTH_AND_HEIGHT` lowers, on the code surfaces, to the same box Figma
+   *  draws: `inline-size: calc-size(max-content, round(up, size, 1px))` on the
+   *  text element — its max-content inline size rounded up to the pixel, as a
+   *  PROGRESSIVE ENHANCEMENT: a browser without `calc-size()` drops the
+   *  declaration at parse and keeps today's fractional box (< 1 px narrower).
+   *  Logical `inline-size`, so vertical and RTL writing modes round the axis
+   *  the text runs along. The canvas writer sets `textAutoResize =
+   *  'WIDTH_AND_HEIGHT'` on the node it builds — which is also what
+   *  `figma.createText()` is born with, so a set this pipeline wrote reads
+   *  the fact back and proposes it (Figma has no fractional text box, so the
+   *  re-read is the truth about the canvas; docs/23 §D.42 names it).
+   *
+   *  The fact qualifies a text box that HUGS its text: a part that carries
+   *  it must own text (`text` / `content` / `textByProp`) and must not carry
+   *  a `width` / `inline-size` / `flex` channel, `layout.grow`, or a
+   *  truncation channel (`text-overflow`, `-webkit-line-clamp`) — a filled,
+   *  fixed or truncated box is not sized by its text (validateContract
+   *  refuses, the hugsBelowMaxWidth discipline). The root never carries it:
+   *  its box is padding plus content, and the fact lives on the text part. */
+  textAutoResize?: "WIDTH_AND_HEIGHT";
   /** v18 (text-indent off-box round) — MEASURED sizing evidence, never
    *  hand-authored. The enum-axis values on which this element's own
    *  `text-indent` lays its first line ENTIRELY OUTSIDE its content box
@@ -2531,6 +2570,10 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** dump v1.35: the stroke takes NO layout space — see the Part interface.
      *  Only `false` is spelled; absent keeps the space-taking border. */
     strokesIncludedInLayout: z.literal(false).optional(),
+    /** dump v1.36: the text box sizes itself to its text and is a whole
+     *  number of pixels wide — see the Part interface. Only the auto-width
+     *  value is spelled; absent keeps the browser's fractional box. */
+    textAutoResize: z.literal("WIDTH_AND_HEIGHT").optional(),
     /** v18: MEASURED text-indent evidence — see the Part interface. */
     textOutOfBox: z
       .strictObject({

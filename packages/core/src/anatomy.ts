@@ -434,6 +434,123 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *  passes the trees; a bare generateCss / emitReact call is the case this
  *  catches). The inline surface resolves values itself and drops `none` at
  *  render time. */
+/** A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF PIXELS WIDE —
+ *  `Part.textAutoResize: 'WIDTH_AND_HEIGHT'` (dump v1.36), on every code
+ *  surface.
+ *
+ *  Figma's auto-width text box is the glyph advance rounded UP: `Label` in
+ *  Inter Semi Bold 14 reports absoluteBoundingBox.width 32 where Chromium
+ *  lays the same run out at 31.40625. The hug root around it therefore
+ *  rendered 47.40625 px against Figma's 48 and its right edge antialiased
+ *  across two columns — measured by the design-led consumer check on the
+ *  72-variant CBDS Badge: 26 of the 48 × 16 px small variants missed the 5 %
+ *  limit at 4.4–7.3 % with every content size equal.
+ *
+ *  The lowering gives the text element the same box: its max-content inline
+ *  size, less the letter spacing CSS adds after the LAST glyph, rounded up to
+ *  the pixel —
+ *
+ *      inline-size: calc-size(max-content, round(up, size, 1px));
+ *      inline-size: calc-size(max-content, round(up, size - <letter-spacing>, 1px));
+ *
+ *  · The trailing tracking is MEASURED, not assumed: CSS `letter-spacing`
+ *    is added after every character including the last, Figma's box has no
+ *    spacing after the last glyph. On the committed REST fixtures rendered in
+ *    Chromium with the fonts loaded: Eventz Kicker, Manrope 700 18 / 16 px,
+ *    UPPER, 6 px tracking — Figma 95 / 87, ceil(all six spacings) 101 / 93,
+ *    ceil(less the last) 95 / 87; Altitude Badge label, Public Sans 600 12 px,
+ *    1 px tracking — Figma 41, ceil(all) 42, ceil(less the last) 41. Without
+ *    tracking the two forms are the same number (23 of 23 such samples).
+ *    The tracking is the part's own uniform `letter-spacing` (a literal or a
+ *    token, spelled into the calc as written or as its var()); a per-variant
+ *    or per-state tracking has no single spelling in
+ *    the base rule and is refused beside the fact (textBoxConflicts).
+ *  · `calc-size()` is the only CSS that can round an INTRINSIC size; a plain
+ *    `round()` cannot take `max-content`. A browser without it drops the
+ *    declaration at parse (a stylesheet) or ignores the assignment (CSSOM,
+ *    the inline surface), so the element keeps today's fractional box — a
+ *    PROGRESSIVE ENHANCEMENT, < 1 px narrower where unsupported, never wider
+ *    and never a different layout. No `@supports` guard is needed for that.
+ *  · Logical `inline-size`, so a vertical or RTL writing mode rounds the
+ *    axis the text runs along, which is the axis Figma rounds.
+ *  · The declaration only takes effect on a box that is NOT inline-level: a
+ *    text part is rendered as its own element inside a parent every emitter
+ *    lays out as flex or grid (a root with no `layout` is `inline-flex`; a
+ *    nested part with children is `flex`), which blockifies it; an
+ *    absolutely positioned text part is blockified too. So it is emitted
+ *    bare, and a part that does not carry the fact is not touched.
+ *  · `text-align` composes: the box is up to 1 px wider than the glyph run
+ *    and the run is aligned inside it, as Figma aligns the run inside its
+ *    whole-pixel box. `max-width` composes: `inline-size` is clamped by it.
+ *    `white-space` composes: max-content is the unwrapped run either way.
+ *  · A box that is sized by something OTHER than its text has no business
+ *    with the fact: a `width` / `inline-size` / `flex*` channel, `layout.grow`
+ *    and a truncation channel (`text-overflow`, `-webkit-line-clamp`) are
+ *    refused beside it by validateContract (textBoxConflicts), as is a part
+ *    that owns no text and a top-level root (its box is padding + content;
+ *    the fact lives on the text part).
+ *
+ *  Emitted only when a part carries the fact — every other contract keeps
+ *  its bytes. TO REVERSE: delete the three drawsWholePixelTextBox pushes
+ *  (css.ts ×2, emit-wc.ts) and the inline assignment (emit-react-inline.ts). */
+export const WHOLE_PIXEL_TEXT_BOX_VALUE = 'calc-size(max-content, round(up, size, 1px))';
+export const WHOLE_PIXEL_TEXT_BOX_DECL = `inline-size: ${WHOLE_PIXEL_TEXT_BOX_VALUE}`;
+/** The part owns text of its own — the only kind of part the fact qualifies. */
+export function partOwnsText(part: Part): boolean {
+  return part.text !== undefined || part.content !== undefined || part.textByProp !== undefined;
+}
+/** The part carries the whole-pixel text-box fact. */
+export function drawsWholePixelTextBox(part: Part): boolean {
+  return part.textAutoResize === 'WIDTH_AND_HEIGHT';
+}
+/** The part's own UNIFORM letter spacing — the tracking CSS adds after the
+ *  last glyph and Figma's box does not have — as the base holders spell it:
+ *  a literal verbatim, a token as its `{ref}` (letter-spacing is a literal /
+ *  token channel, never a declared one). A zero adds nothing and reads as
+ *  none. */
+export function textBoxLetterSpacing(part: Part): { kind: 'literal'; value: string } | { kind: 'token'; ref: string } | undefined {
+  const literal = part.literals?.['letter-spacing'];
+  if (literal !== undefined) {
+    const v = String(literal).trim();
+    return /^[-+]?0*\.?0+(px|em|rem|%)?$/.test(v) ? undefined : { kind: 'literal', value: v };
+  }
+  const token = part.tokens?.['letter-spacing'];
+  return token !== undefined ? { kind: 'token', ref: stripBraces(token) } : undefined;
+}
+/** The declaration VALUE for a flagged part: `tokenCss` spells a token path
+ *  the way the surface reads tokens (`var(--x)` on a stylesheet, the
+ *  resolved literal on the inline surface). */
+export function wholePixelTextBoxValue(part: Part, tokenCss: (tokenPath: string) => string): string {
+  const ls = textBoxLetterSpacing(part);
+  const trim = ls === undefined ? '' : ` - ${ls.kind === 'token' ? tokenCss(ls.ref) : ls.value}`;
+  return `calc-size(max-content, round(up, size${trim}, 1px))`;
+}
+/** Channels that size, fill or truncate the box instead of letting the text
+ *  size it — a box carrying one of these is not `WIDTH_AND_HEIGHT`. `min-*`
+ *  and `max-*` are not listed: Figma's auto-width text can carry a min/max
+ *  and CSS clamps `inline-size` by them the same way. */
+const TEXT_BOX_CONFLICT_CHANNEL = /^(width|inline-size|flex|flex-grow|flex-basis|text-overflow|-webkit-line-clamp|line-clamp)$/;
+/** Every channel (and `layout.grow`) on the part that contradicts the fact,
+ *  sorted — empty when the box is sized by its text alone. A `letter-spacing`
+ *  that varies by variant or state, or rides a placeholder token, is listed
+ *  too: the trailing tracking the box must shed has no single spelling then. */
+export function textBoxConflicts(part: Part): string[] {
+  const base: Array<Record<string, unknown> | undefined> = [part.tokens, part.literals, part.declared];
+  const perValue: Array<Record<string, unknown> | undefined> = [
+    ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+    ...(Array.isArray(part.tokensByProp) ? part.tokensByProp : part.tokensByProp ? [part.tokensByProp] : []).flatMap((e) => Object.values(e.map)),
+    ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+    ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
+    ...(part.stylesWhen ?? []).map((sw) => sw.styles),
+  ];
+  const channels = new Set([...base, ...perValue].flatMap((h) => Object.keys(h ?? {})).filter((c) => TEXT_BOX_CONFLICT_CHANNEL.test(c)));
+  if (part.layout?.grow) channels.add('layout.grow');
+  if (perValue.some((h) => h !== undefined && 'letter-spacing' in h)) channels.add('letter-spacing (per variant or state)');
+  const ls = textBoxLetterSpacing(part);
+  if (ls?.kind === 'token' && placeholdersIn(ls.ref).length > 0) channels.add('letter-spacing (placeholder token)');
+  return [...channels].sort();
+}
+
 export function noneShadowVars(tokens: unknown): { none: Set<string>; mixed: Set<string> } {
   const out = { none: new Set<string>(), mixed: new Set<string>() };
   const t = tokens as Partial<TokenTreeInput> | undefined;
