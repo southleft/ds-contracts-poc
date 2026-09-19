@@ -13,6 +13,7 @@ import { emitReactInline } from './emit-react-inline.js';
 import { mountGenerated } from './react-test-runtime.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { walkAnatomy } from '../scripts/contract-schema.js';
+import { fetchObservation } from '../sync/observe.js';
 
 const triangle = { data: 'M0 0L12 0L6 10Z', windingRule: 'NONZERO' as const };
 const inset = { data: 'M0 0L12 0L12 10L0 10Z M3 3L9 3L9 7L3 7Z', windingRule: 'EVENODD' as const };
@@ -45,6 +46,30 @@ test('REST carries original path bytes and fractional local placement, refusing 
     const refused = mapped([{ ...vector(), ...patch } as RestNode]);
     assert.ok(refused.report.degradations.some((d) => d.code === 'vector-geometry-unsupported'));
   }
+});
+
+test('live sync observation detects a path-only edit with unchanged bounds and stamp', async () => {
+  let currentPath = triangle;
+  const fetchImpl = async (url: string) => {
+    const u = new URL(url);
+    if (!u.pathname.endsWith('/nodes')) return new Response(JSON.stringify({ version: '1' }));
+    assert.equal(u.searchParams.get('plugin_data'), 'shared');
+    const mark = vector(currentPath);
+    if (u.searchParams.get('geometry') !== 'paths') delete mark.fillGeometry;
+    return new Response(JSON.stringify({ name: 'Probe', nodes: { '1:1': { document: {
+      id: '1:1', name: 'PathProbe', type: 'COMPONENT_SET',
+      sharedPluginData: { ds_contracts: { canvasFingerprint: 'v6:unchanged' } },
+      children: [{ id: '2:1', name: 'State=Default', type: 'COMPONENT',
+        absoluteBoundingBox: { x: 0, y: 0, width: 20, height: 20 }, children: [mark] }],
+    } } } }));
+  };
+  const before = await fetchObservation('synthetic', ['1:1'], 'test-only', { fetchImpl });
+  currentPath = { ...triangle, data: 'M0 0L12 0L12 10Z' };
+  const after = await fetchObservation('synthetic', ['1:1'], 'test-only', { fetchImpl });
+  assert.equal(before.observations.length, 1);
+  assert.equal(after.observations.length, 1);
+  assert.equal(before.observations[0]!.stamp, after.observations[0]!.stamp);
+  assert.notEqual(before.observations[0]!.dumpFingerprint, after.observations[0]!.dumpFingerprint);
 });
 
 test('unsupported path paints cannot enter through conditional or state channels', () => {

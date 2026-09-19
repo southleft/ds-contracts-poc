@@ -1228,8 +1228,7 @@ export function Playground() {
       proposal => ({ source: origin, groups: [...groups, ...proposalGroups(proposal)] }), captured) : undefined;
     importGroupsRef.current = groups;
     figmaOriginRef.current = { origin, ws: 'figma' };
-    // REST dumps carry no `_variables` (Enterprise-only endpoint) — this is
-    // null there and the minted route stays the degraded fallback.
+    // Captures without variable metadata use the provisional-name fallback.
     capturedRef.current = captured;
     setFigmaProposals(batch.proposals);
     applyProposal(family?.proposal ?? batch.proposals[0], origin, 'figma', family?.recorded);
@@ -2988,31 +2987,22 @@ export function Playground() {
             <div className="rail__group">
               <div className="rail__group-title">Bring a component in from Figma</div>
               <p className="hint">
-                Two ways in, and a third that is currently switched off. <strong>Start with
-                the URL route below</strong> — paste a component URL and a token and you get a
-                proposed contract. Know the ladder: this route is a <em>partial</em> capture
-                (REST) — the plugin dump (<code>extract/figma/dump.plugin.js</code>, via the{' '}
-                <strong>JSON</strong> tab) is the full one; both write dump grammar v{PRODUCER_DUMP_GRAMMAR}.
-                What the REST reader cannot see (image fills, flex wrap,
-                strokeAlign, instance text overrides, multi-mode variable values, fixed sizes,
-                absolute placement, constraints) is NAMED in the proposal notes rather than
-                guessed; token <em>names</em> additionally degrade outside Enterprise plans,
-                each one receipted. For full capture on any plan, paste a{' '}
-                <code>extract/figma/dump.plugin.js</code> dump into the <strong>JSON</strong>{' '}
-                tab instead.
+                <strong>Import a component URL below</strong>, or load a captured Figma file
+                through the <strong>JSON</strong> tab. Both routes produce a proposed contract
+                with capture limits and unresolved tokens listed for review. The plugin can
+                read additional design data; unsupported features remain named limitations
+                on either route. Both readers use capture version {PRODUCER_DUMP_GRAMMAR}.
               </p>
             </div>
 
             <div className="rail__group" style={{ marginTop: 16 }}>
               <div className="rail__group-title">From a figma.com URL + token — quick</div>
               <p className="hint">
-                No install, partial capture. The style facts this route CAN read come through
-                exactly; the channels it cannot read at all (the proposal notes name them:
-                &ldquo;this dump&rsquo;s reader could not see: &hellip;&rdquo;) are absent as a
-                read limit of the route, not evidence about the design. Variable (token){' '}
-                <em>names</em> additionally degrade outside Enterprise plans — receipted,
-                never invented. For the full capture (the plugin dump) and true-to-form token
-                names, use the JSON dump route named above.
+                No Figma plugin installation is needed. Each import lists the design data
+                it could not capture. Variable names require authorized Variables API access;
+                a missing token scope and other API refusals are reported separately. When
+                names are unavailable, captured values can receive provisional names that
+                need review. A plugin capture loaded through JSON is another available route.
               </p>
             </div>
             <div className="field">
@@ -3082,7 +3072,7 @@ export function Playground() {
                 onChange={(e) => setFigmaDegraded(e.target.checked)}
               />
               <label htmlFor="figma-degraded" style={{ margin: 0 }}>
-                Simulate a non-Enterprise plan (variables endpoint 403s)
+                Simulate unavailable variable metadata (HTTP 403)
               </label>
             </div>
             <button type="button" disabled={figmaBusy} onClick={() => void runFigmaDemo(figmaDegraded)}>

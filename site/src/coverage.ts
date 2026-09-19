@@ -392,6 +392,14 @@ reg("shape", "arc", [
   "shape.arc.end",
   "shape.arc.innerRadius",
 ]);
+reg("shape", "filled-paths", [
+  "shape.paths",
+  "shape.paths.data",
+  "shape.paths.windingRule",
+  "shape.pathsByProp",
+  "shape.pathsByProp.prop",
+  "shape.pathsByProp.map",
+]);
 
 // --- Composition -----------------------------------------------------------
 reg("composition", "slots", [

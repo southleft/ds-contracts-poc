@@ -6036,3 +6036,29 @@ bytes leave the score unchanged; antialiased smoothing still exceeds 5% (5.692%)
 Neither is an adopted override. This isolates the remaining rendering gap but
 does not excuse it or establish the source font bytes. Evidence:
 `private/filled-path-label-raster-probe-2026-09-19-8CPGmR/`.
+
+The subsequent application journey imported a fresh v1.38 REST capture, prepared
+the React library, and installed the exact downloaded archive in a clean consumer
+(SHA256 `826073b06963e22fe255ad042255d3c3cbb2d080e7e73569133ed7e34c8d0595`).
+It reproduces **13/26** passing variants: all label-hidden variants pass, while
+all thirteen labeled variants fail on black at 5.503–8.561%; every white comparison
+and framing check passes. Repeat import preserves identical contract bytes and
+the same seven workspace entries. Text and declared prop changes were observed;
+form interaction and accessibility are not qualified by those observations.
+The installed consumer and source/before/after comparison were inspected visibly.
+An initial stale-server schema refusal required restarting the sole Vite server;
+that refusal remains in the evidence. The application journey is preserved in
+`private/design-led-app-2026-09-19-D75s7P2Q/checkbox-filled-path-app.AH5c7m/`.
+No threshold, scorer, source-image bytes or font smoothing override was changed.
+
+Sync REST observations also request <code>geometry=paths</code>; otherwise a
+path-only edit with unchanged dimensions and canvas stamp would be invisible to
+the observed dump fingerprint. A bounded transport probe demonstrates this
+failure without the query and detection with it. Live REST GET re-observation
+refreshes 25 baselines to grammar 1.38, preserving all 128 record identities,
+53 historical adoptions and six unresolved pending dispositions. The four-row
+synthetic drift fixture retains its intentional mismatches. Migration inputs,
+prior ledgers and CLI logs are retained in `private/filled-path-sync-138-4chmmd31/`.
+Reversal must restore the prior observation grammar and baseline records together;
+never compare fingerprints across grammar versions or relabel unresolved drift
+as a successful reconciliation.

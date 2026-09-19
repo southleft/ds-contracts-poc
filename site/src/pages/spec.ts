@@ -473,7 +473,7 @@ function anatomyPage(): { route: string; html: string } {
           overlay:
             'Out-of-flow edge attachment — see <a href="/spec/conditionals/#overlay">Conditionals</a>.',
           shape:
-            'Parametric leaf decor — see <a href="/spec/shape/">Shape parts</a>.',
+            'Parametric or closed filled-path leaf decor — see <a href="/spec/shape/">Shape parts</a>.',
           tokens:
             'CSS property → token reference — see <a href="/spec/tokens/">Token bindings</a>.',
           tokensByProp:
@@ -1064,9 +1064,11 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "shape",
       "Shape parts",
       ["generated", "curated"],
-      `<p>A leaf decor part that is a parametric vector, not a box — the projection of capture-geometry into the contract (field case: a tooltip’s pointer triangle). Bounded by construction: exactly three kinds — polygon by side count, ellipse, rect — an explicit intrinsic size, and a CSS-clockwise rotation. Everything else about a shape rides existing channels: fill via <code>tokens.background-color</code>, per-variant placement via <code>stylesWhen</code>, visibility via <code>visibleWhen</code>.</p>` +
+      `<p>A leaf decor part with explicit intrinsic geometry: polygon by side count, ellipse, rect, or a <a href="#filled-paths">closed filled path</a>. Parametric shapes carry CSS-clockwise rotation. Fill uses the existing <code>tokens.background-color</code> or literal channel, placement uses <code>stylesWhen</code>, and visibility uses <code>visibleWhen</code>.</p>` +
         fieldList(ShapeSchema as AnySchema, {
-          kind: "polygon | ellipse | rect.",
+          kind: "polygon | ellipse | rect | path.",
+          paths: 'Closed filled-path geometry — see <a href="#filled-paths">filled paths</a>.',
+          pathsByProp: 'Complete enum-conditioned path geometry — see <a href="#filled-paths">filled paths</a>.',
           sides:
             "Polygon point count, ≥ 3. A polygon with no captured side count renders the canvas default (3) — and the proposer names that assumption in its notes.",
           width: "Intrinsic (pre-rotation) width, px.",
@@ -1074,7 +1076,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           rotation: "CSS-clockwise degrees. Omit for 0.",
           arc: 'Ellipse-only partial sweep — see <a href="#arc">ellipse arcs</a>.',
         }) +
-        `<p>Projections: code surfaces render width/height + <code>clip-path: polygon(…)</code> (or <code>border-radius: 50%</code>) + <code>transform: rotate(…)</code> — one shared implementation (<code>shapeCssDecls</code> in the schema module) so the projection cannot fork across emitters; the canvas generator constructs a <em>real</em> RegularPolygon/Ellipse/Rectangle node with native rotation.</p>` +
+        `<p>Parametric projections: code surfaces render width/height + <code>clip-path: polygon(…)</code> (or <code>border-radius: 50%</code>) + <code>transform: rotate(…)</code>. The shared <code>shapeCssDecls</code> implementation keeps the emitters consistent; the canvas generator constructs an editable RegularPolygon/Ellipse/Rectangle node with native rotation.</p>` +
         refusals("Refusals:", [
           "a shape part must be a leaf — no <code>parts</code>, <code>slot</code>, <code>component</code>, <code>content</code>, <code>text</code>, <code>icon</code>, or <code>meter</code> alongside it",
           "<code>sides</code> only on polygons — side count is polygon vocabulary",
@@ -1084,6 +1086,31 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           "proposed at build time by the import engine from the committed live capture extract/figma/fixtures/cbds-tooltip.rest-dump.json — the CBDS Tooltip pointer: a real triangle with per-placement stylesWhen insets and rotation",
         ) +
         `<p class="section-note">Every value above — the 12×12 intrinsic size, each inset, each rotation — comes from the captured file, not from this page. The standing receipt for this field case is <code>npm run extract:figma:tooltip:check</code>.</p>`,
+    ),
+    section(
+      "filled-paths",
+      "Closed filled paths",
+      ["generated", "curated"],
+      `<p><code>kind: "path"</code> requires <code>paths</code>: an array containing exactly one compound path. Its <code>data</code> accepts absolute <code>M</code>, <code>L</code>, <code>C</code>, <code>Q</code> and <code>Z</code> commands; every contour must be closed and nonempty. <code>windingRule</code> is <code>NONZERO</code> or <code>EVENODD</code>, including cutouts within that compound path. Width and height are positive intrinsic dimensions. Path data is limited to 65,536 characters and 16,384 command/number tokens, with finite coordinates whose absolute value is at most 1,000,000.</p>` +
+        fieldList(ShapeSchema as AnySchema, {
+          paths: "One compound closed path, containing data and windingRule.",
+          pathsByProp: "A prop name and map of enum values to complete width, height and paths geometry.",
+        }, { only: ["paths", "pathsByProp"] }) +
+        `<p><code>pathsByProp.prop</code> names an enum prop. <code>pathsByProp.map</code> must cover every enum value with its own <code>{ width, height, paths }</code>. Capture proposes a single-axis map only when all observed geometry agrees with that axis. An exact ancestor visibility gate may make an enum value unreachable; any base-geometry completion for such a value is named in the proposal.</p>` +
+        `<p>Code output uses an encoded SVG mask and the part’s fill. Native output creates an editable VECTOR and checks its intrinsic dimensions exactly or against the intended float32 values before proceeding; it refuses a mismatch instead of resizing the path. Figma may normalize path serialization on readback. The supported capture class has one visible solid fill, normal blending, no strokes, effects or rounded corners, and unrotated transform axes. Fractional translation is retained.</p>` +
+        refusals("Filled-path boundaries:", [
+          "relative commands, arcs, open contours, malformed separators, XML and external assets",
+          "multiple path records, incomplete enum maps, or geometry that cannot be represented by one enum axis",
+          "path fields on a non-path shape, or border, shadow, background-image, clip-path and mask overrides on a path part",
+        ]) +
+        illustrativeExample(PartSchema, {
+          shape: {
+            kind: "path", width: 12, height: 10,
+            paths: [{ data: "M 0 0 L 12 0 L 6 10 Z", windingRule: "NONZERO" }],
+          },
+          literals: { "background-color": "#111827" },
+        }, "Schema-validated illustrative filled triangle; not a fidelity acceptance receipt.") +
+        fidelity(`<p>Editable geometry and repeat-safe native generation have bounded engineering evidence. Complete application fidelity and responsive SCALE constraints remain unqualified; see the current acceptance ledger and limitation D.60.</p>`),
     ),
     section(
       "arc",
