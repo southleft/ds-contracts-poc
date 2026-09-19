@@ -6086,9 +6086,20 @@ retain their original bytes. Each recovered size receives a named receipt.
 Focused tests cover native values, emitted browser dimensions, descendants,
 ambiguous inputs and immutable observations. Recompiling the authenticated
 nine-state independent Switch archive produces exact 32 by 18.390625 native
-plans; this is a compilation diagnostic until the updated plans complete the
-application's write and independent readback. Evidence is retained in
+plans. A fresh observation of the declared checked case completed creation
+through the application and companion in Evaluations (`7f0b10e4…`): all nine
+editable mains read back at those exact dimensions. Repeating inspection
+returned the identical 29-node, nine-image result without another creation.
+The plugin was closed and the native canvas inspected. This establishes size
+delivery, not visual qualification; guarded matched-frame capture and its
+application integration remain outstanding. Evidence is retained in
 `private/native-matched-capture-2026-09-19-uOSM5Q/`.
+
+The older unchecked operation cannot yet receive this correction in place:
+its height variable is bound, and update review refuses
+`native-update-bound-token-change-unsupported`. Re-observation retained its
+existing operation and the duplicate-preparation guard. Fresh creation of a
+different already-declared case does not close that update gap.
 
 Reverse by removing `exactUsedLayoutLength` and the owned-size copy adapter in
 `compileObservedContentSweep`; retain archived receipts and restore the named
