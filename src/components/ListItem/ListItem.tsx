@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/list-item.contract.json (ds.list-item v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from LiHTMLAttributes<HTMLLIElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { LiHTMLAttributes, ReactNode } from 'react';
 import styles from './ListItem.module.css';
 
-export interface ListItemProps extends LiHTMLAttributes<HTMLLIElement> {
+export interface ListItemProps extends Omit<LiHTMLAttributes<HTMLLIElement>, 'children'> {
   /** Primary text. */
   label: string;
   /** Secondary content below the label. */
@@ -26,7 +29,6 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListIt
     startContent,
     endContent,
     className,
-    children,
     ...rest
   },
   ref,

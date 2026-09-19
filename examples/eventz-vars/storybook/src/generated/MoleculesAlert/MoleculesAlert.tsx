@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/molecules-alert.contract.json (ds.molecules-alert v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -10,7 +13,7 @@ import { AtomsTextLink } from '../AtomsTextLink';
 import { IconsClose } from '../IconsClose';
 import styles from './MoleculesAlert.module.css';
 
-export interface MoleculesAlertProps extends HTMLAttributes<HTMLDivElement> {
+export interface MoleculesAlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   variant?: 'success' | 'info' | 'warning' | 'danger';
   titleText?: string;
   descriptionText?: string;
@@ -32,7 +35,6 @@ export const MoleculesAlert = forwardRef<HTMLDivElement, MoleculesAlertProps>(
       titleText = 'Title',
       descriptionText = 'Description',
       className,
-      children,
       ...rest
     },
     ref,

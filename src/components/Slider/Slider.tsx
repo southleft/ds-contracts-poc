@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/slider.contract.json (ds.slider v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Slider.module.css';
 
-export interface SliderProps extends HTMLAttributes<HTMLDivElement> {
+export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Current value — positions the thumb. */
   value?: number;
   /** Maximum value. */
@@ -18,7 +21,7 @@ export interface SliderProps extends HTMLAttributes<HTMLDivElement> {
 
 /** Numeric selection within bounds — the static surface of a slider: label, filled track to the current value, and thumb. API mirrors industry convention (Astryx Slider); drag behavior and range mode are declared boundaries. */
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
-  { value = 40, max = 100, label, className, children, ...rest },
+  { value = 40, max = 100, label, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

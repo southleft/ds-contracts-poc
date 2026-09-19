@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/atoms-text-link.contract.json (ds.atoms-text-link v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './AtomsTextLink.module.css';
 
-export interface AtomsTextLinkProps extends HTMLAttributes<HTMLSpanElement> {
+export interface AtomsTextLinkProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   hasStartIcon?: boolean;
   hasEndIcon?: boolean;
   text?: string;
@@ -24,7 +27,6 @@ export const AtomsTextLink = forwardRef<HTMLSpanElement, AtomsTextLinkProps>(fun
     hasEndIcon = false,
     text = 'Label',
     className,
-    children,
     ...rest
   },
   ref,

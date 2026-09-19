@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/text-input.contract.json (astryx.text-input v0.3.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './TextInput.module.css';
 
-export interface TextInputProps extends HTMLAttributes<HTMLDivElement> {
+export interface TextInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The input type. */
   type?: 'text' | 'password' | 'email';
   /** The field label. */
@@ -35,7 +38,6 @@ export const TextInput = forwardRef<HTMLDivElement, TextInputProps>(function Tex
     label,
     placeholder = 'you@example.com',
     className,
-    children,
     ...rest
   },
   ref,

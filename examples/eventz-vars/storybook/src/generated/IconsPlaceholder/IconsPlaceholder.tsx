@@ -2,18 +2,21 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/icons-placeholder.contract.json (ds.icons-placeholder v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './IconsPlaceholder.module.css';
 
-export interface IconsPlaceholderProps extends HTMLAttributes<HTMLSpanElement> {
+export interface IconsPlaceholderProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   size?: '20';
 }
 
 /** STUB contract auto-proposed for the nested "Icons/Placeholder" instances of Atoms/Badge — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub. */
 export const IconsPlaceholder = forwardRef<HTMLSpanElement, IconsPlaceholderProps>(
-  function IconsPlaceholder({ size = '20', className, children, ...rest }, ref) {
+  function IconsPlaceholder({ size = '20', className, ...rest }, ref) {
     // axis-inert (ledgered, not a throw): size — no `.<axis>-*` rule
     // exists in IconsPlaceholder.module.css, so no class is composed for it. A reference
     // to an unemitted class resolves to `undefined` and is filtered out, so emitting

@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/progress-bar.contract.json (astryx.progress-bar v0.3.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './ProgressBar.module.css';
 
-export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
+export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Current progress value. */
   value?: number;
   /** Maximum progress value. */
@@ -32,7 +35,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
     max = 100,
     label,
     className,
-    children,
     ...rest
   },
   ref,

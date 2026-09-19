@@ -2,12 +2,18 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/atoms-button.contract.json (ds.atoms-button v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './AtomsButton.module.css';
 
-export interface AtomsButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AtomsButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children'
+> {
   variant?: 'primary' | 'knockout' | 'secondary' | 'bare';
   isDisabled?: boolean;
   text?: string;
@@ -30,7 +36,6 @@ export const AtomsButton = forwardRef<HTMLButtonElement, AtomsButtonProps>(funct
     startIcon,
     endIcon,
     className,
-    children,
     ...rest
   },
   ref,

@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/checkbox-input.contract.json (astryx.checkbox-input v0.3.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -14,7 +17,7 @@ const ICONS: Record<string, string> = {
     '<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M 8.5 2.5 L 4 7.5 L 1.5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-export interface CheckboxInputProps extends HTMLAttributes<HTMLDivElement> {
+export interface CheckboxInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The checkbox label. */
   label: string;
   /** The control size. */
@@ -36,7 +39,6 @@ export const CheckboxInput = forwardRef<HTMLDivElement, CheckboxInputProps>(func
     isRequired = false,
     label,
     className,
-    children,
     ...rest
   },
   ref,

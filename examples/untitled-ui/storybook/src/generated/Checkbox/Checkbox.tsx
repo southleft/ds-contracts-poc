@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/checkbox.contract.json (ds.checkbox v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,7 +15,7 @@ const ICONS: Record<string, string> = {
     '<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">\n<rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="white"/>\n<rect x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="#D4D4D4"/>\n</svg>',
 };
 
-export interface CheckboxProps extends HTMLAttributes<HTMLSpanElement> {
+export interface CheckboxProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   checked?: 'false';
   indeterminate?: 'false';
   size?: 'sm';
@@ -33,7 +36,6 @@ export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Chec
     supportingText = 'false',
     state = 'default',
     className,
-    children,
     ...rest
   },
   ref,
