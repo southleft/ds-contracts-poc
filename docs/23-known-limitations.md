@@ -6148,6 +6148,33 @@ Frame preparation remains operator-run. Runtime behavior, the rest of the
 independent family, and bound height-variable updates remain unqualified.
 Live evidence is in `private/native-matched-capture-2026-09-19-uOSM5Q/`.
 
+**Caller-content extension, same AGENT decision.** The recorded app review also
+supports an authenticated comparison operation and its neutral presentation
+frame. It joins the sealed source PNG and ownership pin to the operation's
+readback and checks the image-to-node pairing. The wrapper must contain exactly
+one unchanged instance at the same origin and size, with no paint, clipping,
+padding, extra children, transform or variable-mode change. The existing
+slot-identity resolver handles Figma's settled descendant IDs; metadata,
+topology, properties and images remain exact. Text properties and instance
+properties are included in clone validation.
+
+The composed Alert (`59f1c1b7…`) measured **3.064% on white / 3.100% on black**,
+360 × 68 on both sides. New evidence lives in
+`recipe/evidence/react-native-matched-content/`; the app's one-pair review was
+inspected live. Its first clone check refused while Figma settled layout.
+No recapture allocation was made: a later read-only check found identical
+snapshots, and two exports matched exactly. Original readback was unchanged
+before and after. The preserved private evidence is
+`private/native-family-remaining-2026-09-19-owpib5w3/`.
+
+The same source instrument recorded the current Badge and its actual painted
+Inter font. Its 43.875 px source width disagrees exactly with the historical
+44 px native width; that old operation also belongs to an earlier source
+reference. Neither a passing pixel score nor identical PNG bytes authorize
+borrowing a new source pin or rounding the width. This remains unqualified.
+The review's date names when the baseline operation was observed, not when
+its later supplemental frame was captured.
+
 Reverse by removing the supplemental capture instrument, its application
 review and its added check invocation; retain the new and historical evidence
 and restore the named measurement gap. The existing scorer, tolerance and

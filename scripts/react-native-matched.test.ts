@@ -5,10 +5,10 @@ import path from 'node:path';
 import os from 'node:os';
 import { PNG } from 'pngjs';
 import { MATCHED_EVIDENCE, checkMatchedEvidence, scoreMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
-import { authenticateMatchedOperation } from './react-native-matched-record.js';
+import { authenticateMatchedOperation, normalizeMatchedReadback } from './react-native-matched-record.js';
 import { REPO, sha256 } from './react-native-fidelity-check.js';
-import type { DeclaredSpec } from './react-native-declared-record.js';
-import { hasRecordedNativeMeasurement, readRecordedNativeMeasurement } from '../source-reference/matched-native-review.js';
+import type { MatchedSpec } from './react-native-matched-record.js';
+import { hasRecordedNativeMeasurement, readRecordedNativeMeasurement, assertMatchedManifestBinding } from '../source-reference/matched-native-review.js';
 import type { ReactInitialNativeRequest } from '../source-reference/react-initial-native-request.js';
 
 const evidence = path.join(REPO, MATCHED_EVIDENCE);
@@ -94,7 +94,7 @@ function fixture(dir: string) {
   put(op + '/events/00000001.json', { sequence: 1, previousSha256: sha256(dispatch), kind: 'result', envelope: { ...command,
     result: { status: 'native-readback-collected', receiptKind: 'independent-native-component-readback', operationId: 'probe', fileKey: 'file',
       planRevision: 'revision', nativeQualification: 'unqualified', acceptedContract: null, problems: [], images: [{ caseId: 'variant:enabled=false', nodeId: 'main' }] } } });
-  const spec: DeclaredSpec = { id: 'cohort', component: 'Component', description: 'probe', operation: 'probe', journal: op,
+  const spec: MatchedSpec = { id: 'cohort', component: 'Component', description: 'probe', operation: 'probe', journal: op,
     event: '00000001.json', source: { kind: 'initial', inspection } };
   return { spec, put, op, inspection };
 }
@@ -117,5 +117,95 @@ test('changed plan, script hash, result identity and source pairing are refused'
       f.put(f.op + '/events/' + name, e);
     }
     assert.throws(() => authenticateMatchedOperation(dir, f.spec), reason);
+  });
+});
+
+function comparisonFixture(dir: string) {
+  const put = (name: string, value: unknown) => {
+    const file = path.join(dir, name); mkdirSync(path.dirname(file), {recursive:true});
+    const data = Buffer.isBuffer(value) ? value : Buffer.from(JSON.stringify(value)+'\n');
+    writeFileSync(file,data); return data;
+  };
+  const op='source-native-app/operations/composed', archive='react-source-ownership/reference/owner';
+  const png=PNG.sync.write(new PNG({width:30,height:30})), imageHash=sha256(png);
+  const report={id:'owner',referenceId:'reference',state:'complete',rows:[{id:'content',matched:true,problems:[],sourceImage:imageHash,observedImage:imageHash}]};
+  const inputs={'report.json':report,'content/source.png':png,'content/source-tree.json':{status:'captured',sourcePngSha256:imageHash}};
+  const files=Object.fromEntries(Object.entries(inputs).map(([k,v])=>[k,sha256(put(archive+'/'+k,v))]));
+  const inventorySha256=sha256(put(archive+'/integrity.json',{version:1,files}));
+  const root={kind:'react-root-draft',referenceId:'reference',caseId:'content',ownership:{id:'owner',sha256:files['report.json']},inventorySha256};
+  const plan=put(op+'/plan.json',{}),script=put(op+'/token-create.js',Buffer.from('creation'));
+  const header={id:'composed',policy:{fileKey:'file'},planRevision:'revision',planSha256:sha256(plan),tokenScriptSha256:sha256(script),request:{kind:'react-content-comparison',root}};
+  const creation={status:'created-candidate',operationId:'composed',fileKey:'file',problems:[],comparisonBoardId:'board'};
+  const board={id:'board',type:'FRAME',childIds:['child'],values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]],fills:[],strokes:[],effects:[],opacity:1,visible:true,layoutMode:'VERTICAL',clipsContent:false,paddingTop:0,paddingBottom:0,paddingLeft:0,paddingRight:0,itemSpacing:0,cornerRadius:0}};
+  const child={id:'child',type:'INSTANCE',parentId:'board',values:{x:0,y:0,width:5,height:5,relativeTransform:[[1,0,0],[0,1,0]]}};
+  const common={operationId:'composed',fileKey:'file',planRevision:'revision',nativeQualification:'unqualified',acceptedContract:null,problems:[]};
+  const readback={...common,status:'native-comparison-readback-collected',content:{...common,status:'native-readback-collected',receiptKind:'independent-native-component-readback',nodes:[board,child],images:[{nodeId:'child'}]}};
+  const save=()=>{
+    let previous=sha256(put(op+'/operation.json',header));let sequence=0;
+    for(const [phase,result] of [['component-create',creation],['component-readback',readback]] as const){
+      const command={...common,attemptId:phase,nonce:phase,phase,readOnly:phase==='component-readback',script:phase,scriptSha256:sha256(phase)};
+      for(const value of [{kind:'dispatch',command},{kind:'result',envelope:{...command,result}}]){
+        previous=sha256(put(op+'/events/'+String(sequence).padStart(8,'0')+'.json',{sequence,previousSha256:previous,...value}));sequence++;
+      }
+    }
+  };save();
+  const spec={id:'sample',component:'Composed',description:'fixture',operation:'composed',journal:op,event:'00000003.json',source:{kind:'comparison' as const,bounds:{x:10,y:10,width:5,height:5}}};
+  return {put,save,archive,spec,board,child,readback,header};
+}
+test('caller content pairs its sealed original only with the authenticated neutral presentation frame',()=>temp(dir=>{
+  const f=comparisonFixture(dir),r=authenticateMatchedOperation(dir,f.spec);
+  assert.equal(r.pairs.length,1);assert.equal(r.pairs[0]!.native.nodeId,'board');
+  assert.equal(r.source.caseId,'content');
+  f.put(f.archive+'/content/source.png',Buffer.from('changed'));
+  assert.throws(()=>authenticateMatchedOperation(dir,f.spec),/source-changed/);
+}));
+test('caller-content measurement refuses shifted roots, painted or clipped wrappers, changed ownership and unrelated images',()=>{
+  for(const mutate of [
+    (f:ReturnType<typeof comparisonFixture>)=>{f.child.values.x=1;},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.child.values.relativeTransform[0]![0]=-1;},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.board.values.opacity=.5;},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.board.values.clipsContent=true;},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.board.values.paddingLeft=1;},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.board.childIds.push('unrelated');},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.readback.content.images[0]!.nodeId='unrelated';},
+    (f:ReturnType<typeof comparisonFixture>)=>{f.header.request.root.ownership.sha256='0'.repeat(64);},
+  ])temp(dir=>{const f=comparisonFixture(dir);mutate(f);f.save();assert.throws(()=>authenticateMatchedOperation(dir,f.spec),/matched-record-/);});
+});
+
+
+test('recorded image identities must match authenticated source-to-native pairs', () => {
+  const m=manifest(), pairs=m.rows.map(r=>({observation:r.id,variant:r.variant,native:{nodeId:r.native.originalId},source:{originalSha256:r.source.originalSha256,bounds:r.source.bounds,crop:r.source.crop}}));
+  assert.doesNotThrow(()=>assertMatchedManifestBinding(m,pairs));
+  for(const mutate of [
+    (p:typeof pairs)=>{p.pop();},
+    (p:typeof pairs)=>{p[0]!.native.nodeId='another-node';},
+    (p:typeof pairs)=>{p[0]!.variant='another-state';},
+    (p:typeof pairs)=>{p[0]!.source.originalSha256='0'.repeat(64);},
+    (p:typeof pairs)=>{p[0]!.source.bounds.x+=1;},
+  ]){const changed=structuredClone(pairs);mutate(changed);assert.throws(()=>assertMatchedManifestBinding(m,changed),/pairing-mismatch/);}
+});
+test('settled slot IDs resolve by durable ownership and topology while property changes stay visible',()=>{
+  const creation={nodes:[{id:'slot',type:'SLOT'},{id:'text',type:'TEXT',slotIdentity:{slotId:'slot',path:[0]}}],comparisons:[{status:'created-comparison',slots:[{nodeId:'slot'}]}]};
+  const anchor={content:{nodes:[{id:'slot',type:'SLOT',parentId:'root',childIds:['text'],metadata:{}},{id:'text',type:'TEXT',parentId:'slot',childIds:[],metadata:{nativeSourceAllocation:'text'},values:{characters:'Original'}}]}};
+  const live=structuredClone(anchor);live.content.nodes[0]!.childIds=['slot;settled'];live.content.nodes[1]!.id='slot;settled';
+  assert.deepEqual(normalizeMatchedReadback(creation,anchor,live,'comparison'),anchor);
+  const forged=structuredClone(live);forged.content.nodes[1]!.metadata.nativeSourceAllocation='foreign';
+  assert.throws(()=>normalizeMatchedReadback(creation,anchor,forged,'comparison'),/slot-identity-invalid/);
+  const changed=structuredClone(live);changed.content.nodes[1]!.values!.characters='Changed';
+  assert.notDeepEqual(normalizeMatchedReadback(creation,anchor,changed,'comparison'),anchor);
+});
+
+test('caller-content evidence stays a separate one-pair denominator and ambiguous app catalog entries refuse',()=>{
+  const dir=path.join(REPO,'recipe/evidence/react-native-matched-content');
+  const r=checkMatchedEvidence(dir);assert.equal(r.rows.length,1);assert(r.rows.every(row=>row.pass));
+  const m=JSON.parse(readFileSync(path.join(dir,'manifest.json'),'utf8')) as MatchedManifest;
+  const request={kind:'react-root-draft',version:1,referenceId:m.cohort.source.referenceId,caseId:'another-case',ownership:{id:m.cohort.source.ownershipId,sha256:m.cohort.source.reportSha256},inventorySha256:m.cohort.source.inventorySha256} as import('../source-reference/react-native-request.js').ReactNativeRequest;
+  assert.throws(()=>readRecordedNativeMeasurement(REPO,String(m.cohort.native.operationId),request),/operation-mismatch/);
+  temp(repo=>{
+    for(const relative of [MATCHED_EVIDENCE,'recipe/evidence/react-native-matched-content']){
+      mkdirSync(path.join(repo,relative),{recursive:true});writeFileSync(path.join(repo,relative,'manifest.json'),JSON.stringify(m));
+    }
+    assert(!hasRecordedNativeMeasurement(repo,String(m.cohort.native.operationId),String(m.cohort.source.referenceId)));
+    assert.throws(()=>readRecordedNativeMeasurement(repo,String(m.cohort.native.operationId),{...request,caseId:String(m.cohort.source.caseId)}),/operation-mismatch/);
   });
 });
