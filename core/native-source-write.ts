@@ -113,6 +113,7 @@ export function prepareNativeSourceWrite(
       caseId: contractComparison.caseId, mainId: contractComparison.mainId,
       variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
       ...(contractComparison.instanceWidth !== undefined ? {instanceWidth:contractComparison.instanceWidth} : {}),
+      ...(contractComparison.containerWidth !== undefined ? {containerWidth:contractComparison.containerWidth} : {}),
       ...(contractComparison.contentSpecPath ? { contentSpecPath: contractComparison.contentSpecPath } : {}),
       ...(contractComparison.contentRows ? { contentRows: contractComparison.contentRows } : {}),
       specs: contractComparison.specs, fonts: contractComparison.fonts, nodeTypes: contractComparison.nodeTypes,

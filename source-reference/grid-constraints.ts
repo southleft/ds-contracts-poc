@@ -21,6 +21,8 @@ export interface GridConstraintEvidence {
 }
 const gridNodes = (tree: CapturedNode) => flatten(tree).filter(({ node }) =>
   ['grid', 'inline-grid'].includes(node.style.display));
+/** A tree without a grid container has nothing to witness: observers skip the read. */
+export const hasGridContainer = (tree: CapturedNode) => gridNodes(tree).length > 0;
 
 /** CSS Typed OM returns computed tracks before layout turns them into pixels.
  * Read both planes twice and require correspondence with the captured tree.
