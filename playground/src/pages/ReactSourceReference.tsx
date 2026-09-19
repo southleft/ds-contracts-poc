@@ -384,7 +384,7 @@ export function ReactSourceReference() {
                           <summary>{draft.properties.join(" × ")}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
                           {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
                           {draft.contract?.props.map(prop=><p key={prop.name}>{prop.name}: {Object.values(prop.bindings.code.values ?? (typeof prop.type==="object" && "enum" in prop.type ? Object.fromEntries(prop.type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}</p>)}
-                          {draft.sizing?.map(size=><p key={size.channel}>{size.channel}: {size.status==="retained"?"source constraint retained":size.status==="intrinsic"?"automatic sizing; sample dimensions not fixed":`not projected (${size.reason})`}</p>)}
+                          {draft.sizing?.map(size=><p key={size.channel}>{size.channel}: {size.status==="retained"?"source constraint retained":size.status==="intrinsic"?"automatic sizing; sample dimensions not fixed":size.status==="fill"?"own 100% declaration; fills the width its parent supplies":`not projected (${size.reason})`}</p>)}
                           {!!draft.lowerings.length && <p>{draft.lowerings.length} normal flex-gap values use equivalent zero spacing.</p>}
                           {!!draft.residuals?.length && <details><summary>Unprojected styling</summary><ul>{draft.residuals.map((r,i)=><li key={i}>{r.channel}: {r.reason}</li>)}</ul></details>}
                         </details>)}
