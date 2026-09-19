@@ -4100,7 +4100,9 @@ glyph are an uncaptured nested instance). No evidence is committed.
   carry those children. In a scratch copy with that axis renamed so the wall does
   not fire, `Checkbox-icon` proposes with 6 declared absences and `Menu Item` with
   2, neither with an ambiguous inference — the sparse path itself is ready for
-  them.
+  them. **Closed for a designer's axis by §D.41** (both now propose in exact mode,
+  without renaming anything; the sentence above "promotion + sparse refuses" now
+  holds only for an axis this pipeline drew or one read without the designer fact).
 - **`undrawn-combination-rendered-by-composition`.** The code surfaces are
   unchanged and do not read the field: they render any prop combination by
   composing the per-axis rules read from the drawn variants, so an undrawn
@@ -4146,3 +4148,192 @@ at both readers, the meaning bounds, every fenced call-site category by its own
 label, the code-surface note) and `core/exact-proposal-check.ts` (the two ORIGINAL
 ragged-refusal rows hold again unchanged; the declared-absence rows run under the
 observable fact).
+
+## D.41 A designer's interaction-state variant axis was refused by exact mode — CLOSED for a designer's axis read with the designer fact; the generated `disabled` plane on a non-native root, the undeclared stub override and the exam's own mount stay NAMED
+
+**2026-09-19. A projection decision the owner delegated; recorded so it can be
+reversed.** A canvas cannot run a pseudo-class, so a designer DRAWS what the
+platform runs — `State = Default | Hover | Focus | Disabled`. Exact mode refused
+every such set, `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS` (commit 26399346a: exact
+promises that the proposed contract's `VARIANT` rows ARE the source matrix, a
+promoted axis is no longer a prop, and "it cannot tell a generator-emitted preview
+axis from a real API enum"; the one exemption was a set that DECLARES the axis as
+this pipeline's `statePreviewAxis`). Reviewable inversion has always promoted the
+same axis by a closed table — the machinery existed; only exact refused. Measured
+read-only through `extract/figma/rest/fetch.ts` (stamps observable), axis names and
+values exactly as drawn:
+
+| set | axis | drawn |
+|---|---|---|
+| CBDS `Checkbox-icon` `271:2241` | `state[default\|hover\|focus\|disabled]` (+ `error[false\|true]`, a separate boolean axis) | 42 / 48 |
+| Altitude `Menu Item` `3543:47347` | `State[Default\|Disabled\|Focus]` | 16 / 18 |
+| Altitude `Chip` `3540:43526` | `State[Default\|Focus]` | 40 / 40 |
+| Altitude `Link` `3543:47075`, `Toggle` `3543:48094` | `State[Default\|Focus\|Hover\|Disabled]` | 4 / 4, 8 / 8 |
+| CBDS `Toggle` `272:730` | `state[default\|disabled\|hover\|focus]` | 16 / 16 |
+| CBDS `Checkbox` `272:96` (the PARENT) | `state[default\|error\|disabled\|hover\|focus]` — **`error` is not an interaction state** | 20 / 20 |
+
+Both sparse children lose cells ONLY in a non-rest state (`state=disabled ×
+error=true`, 6; `State=Disabled × Role=Header`, 2): every combination of the other
+axes is drawn at rest.
+
+**Decision.** What made the axis ambiguous was never the value table — it was not
+knowing WHOSE axis it is. §D.40 made "a designer drew this" a positive fact (no
+`ds_contracts/*` stamp AND a reader that could have seen one). With that fact, a
+variant axis whose EVERY value is in the closed table is projected in EXACT mode,
+by table lookup, onto the state vocabulary the contract already has:
+
+| drawn value (case-, space-, underscore-insensitive; exact per token) | contract |
+|---|---|
+| `default` | the REST state — the base every state is read against |
+| `hover` | `states: hover` → `:hover:not(:disabled)` |
+| `pressed`, `active` | `states: active` → `:active:not(:disabled)` |
+| `focus`, `focus-visible` | `states: focus-visible` → `:focus-visible` |
+| `disabled` | the `disabled` BOOLEAN prop (Figma `BOOLEAN` "Disabled", the native attribute on elements that have one) + the `disabled` state block → `:disabled` |
+
+The table is ONE module (`core/interaction-state-axis.ts`) — the proposer, the
+visual-parity planner (it kept a hand mirror) and the consumer check all read it.
+**It is exactly the table reviewable inversion already used, and exactly what
+`STATE_SELECTORS` renders; nothing was added.** `rest`, `enabled`, `normal`,
+`hovered`, `focused` are NOT in it: adding a synonym flips sets that propose today
+with the axis as an enum prop (Untitled UI draws `Focused` on 12 committed sets) and
+no measured set in scope needs one. It is one line per synonym when one does.
+**How `disabled` is modelled** was found, not chosen: `disabled` is a boolean PROP
+plus a `disabled` STATE block (`core/propose-figma.ts`, the promotion's own rule);
+both code emitters pass the prop as the native attribute where
+`ELEMENT_META[element].supportsDisabled` and select the block with `:disabled`.
+
+The mapping is a **named decision on the proposal**: `result.stateAxisProjection`
+(`decision: 'designer-state-axis-projected'`, the property, the rest value, every
+value → state with `carried`, and `undrawnStateCells`) and a
+`state-axis-projected (DECISION …)` note. `carried: false` says the state's drawing
+produced no override the vocabulary carries — the existing named drop, never silent
+(`Checkbox-icon`'s hover lives on a nested icon instance's internals: named).
+
+**Exact stays exact.** `exactRowsFromProposedContract` rebuilds the source matrix as
+the CONTRACT's own `VARIANT` cells (minus its declared absences) × the axis's
+values, minus the undrawn state cells — so a dropped, invented or re-spelled API
+axis still disagrees with the source, the axis coming back as a prop disables the
+model, and the `disabled` rows exist only while the contract really has the
+`disabled` boolean. Reviewable inversion WITH the designer fact derives the same
+contract and now proves the same matrix (`verified-exact`); without it, it is what
+it was (`legacy-unverified`).
+
+**Refused by name — never a guess.** All `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`, the
+old sentence unchanged, then the slug:
+
+- `state-axis-stamps-not-observable` — the reader could not have seen a stamp, so
+  "unstamped" is not evidence of a designer (a pipeline preview axis with one API
+  axis is a FULL matrix and reads the same; projecting it would invent a `disabled`
+  boolean from a `State=Disabled` preview cell, FC-DUMP-PROPOSE-DISABLED-INVENTED).
+  **This is why no committed fixture moves, and why the designer exam — read through
+  an observe that ignores plugin data — keeps every verdict.**
+- `state-axis-pipeline-drawn-undeclared` — a stamped set whose axis it does not
+  declare as its `statePreviewAxis`.
+- `state-axis-duplicate-state` — `Pressed` and `Active` on one axis (reviewable
+  inversion keeps the first and drops the second's variants; exact will not).
+- `state-axis-multiple` — two pure state axes on one set.
+- `state-axis-disabled-prop-collision` — the set already has a `disabled` boolean.
+- `state-axis-orphan-state-cell` — a state drawn where its rest cell is not.
+
+NOT refused, and unchanged: an axis with a value OUTSIDE the table (`error`,
+`selected`, `filled`, `open`, `Focused`, …), an axis with no rest value, or an axis
+not named "state" with fewer than two non-rest values stays **the designer's own
+enum prop** — a faithful projection, and the note names the value. That is what
+every such committed set does today and what the CBDS `Checkbox` parent needs
+(`state=error` is API). `readStateAxis` gives each of those conditions a slug
+(`state-axis-value-outside-vocabulary`, `-no-rest-value`, `-no-state-value`,
+`-unnamed-incomplete`) for the harnesses that must say why they cannot mount one.
+
+**Sparse sets (§D.40) — the declaration vocabulary is untouched.** The undrawn cells
+are partitioned by plane. Undrawn at REST → a contract absence over the REMAINING
+axes, `bindings.figma.absentVariants` exactly as §D.40 defines it (the state axis is
+not a prop and has no spelling there); every state must leave that cell undrawn too
+(else `state-axis-orphan-state-cell`), and `statePreviews` is then NOT set, by name
+(`absent-variants-with-state-previews` stands). Undrawn ONLY in a non-rest state →
+no prop combination is missing, so nothing is declared on the contract; the cells
+ride `stateAxisProjection.undrawnStateCells` and a
+`state-axis-undrawn-state-cells` note beside `undrawn-combination-rendered-by-
+composition`. **The fence is over ALL undrawn cells, spelled over the remaining
+axes** (the state planes are read under state-stripped names): a plane that draws a
+cell fits it identically under every explanation, so a cell another plane lacks can
+never refuse it, and a plane with a hole is held to the same uniqueness rule — the
+state-diff sites §D.40 called unreachable are now reached and fenced (tested: a
+hover fill two axes explain equally refuses `sparse-matrix-inference-ambiguous`).
+
+**Round trip.** The proposed contract opts into `statePreviews` where its own rules
+allow; the writer draws ITS axis (`State = Default | Hover | Active | Focus Visible`,
+a rename the note has always carried), stamped and declared, and that set proposes
+back to the same `states` / props / root overrides through the DECLARED path —
+`stateAxisProjection` is absent on the way back, so the two axes are never confused
+(tested on the mock canvas through the real plugin reader; the same canvas with
+stamps stripped and no observable fact refuses).
+
+**Mounting a state-axis variant.** `scripts/design-consumer-check.ts` reported every
+such variant as `State (no VARIANT prop)`. It now reads the axis by the same table
+and mounts a state cell the way a user reaches it — the mechanism
+`extract/figma/visual-parity/render.ts` already used, not a second one: a real
+pointer hover, a held mouse button, keyboard-modality focus on the component's own
+focus target, or the `disabled` prop. Nothing is forced that a user could not do
+(no `data-state` hook exists in the emitted CSS and none was added, no CDP pseudo
+forcing): `state-unreachable:<state>:<cell>`, `state-inert:<state>:<cell>` (the
+contract declares the state and nothing the cell paints changed) and
+`state-not-carried:<state>` are named problems.
+
+**Differential (nothing already generated changes).** All 984 tracked
+`*.contract.json`, six surfaces, base tree vs this change: byte-identical (no emitter
+was touched). Every tracked dump-shaped JSON, every set, BOTH modes — 5,279 sets,
+10,558 rows of verdict + contract hash + notes hash: **zero changed**. No committed
+fixture is a structured, unstamped, stamps-observable designer set with a pure state
+axis, so no census row, exam receipt or golden moved.
+
+**Measured on the real closures** (read-only REST, exact mode, unchanged 5 % limit;
+no evidence committed):
+
+| parent / set | proposes | children | images within 5 % | min / median / max |
+|---|---|---|---|---|
+| Altitude `Menu` + `Menu Item` | both | REAL `ds.menu-item`, no stub | 1 of 2 | 0.00 / 9.36 / 18.71 % |
+| Altitude `Menu Item` (16 cells, all mounted) | yes, 2 undrawn state cells | — | 10 of 16 — rest 6/6, disabled 4/4, focus 0/6 | 0.00 / 1.30 / 14.16 % |
+| CBDS `Checkbox` + `Checkbox-icon` + `Icon` | all three | REAL `ds.checkbox-icon` and `ds.icon`; 4 icon-glyph stubs remain (`Square`, `CheckSquare`, `MinusSquare`, `Placeholder` — an icon library outside the closure) | 2 of 20 (SCRATCH, below) | 4.76 / 10.43 / 20.24 % |
+| Altitude `Chip` (40, all mounted; was "cannot mount") | yes | 1 icon stub | 17 of 40 — rest 17/20, focus 0/20 | 0.00 / 9.19 / 26.61 % |
+| Altitude `Link` (4) | yes | 1 icon stub | 2 of 4 | 0.66 / 4.93 / 19.55 % |
+
+None PASSES the check. Focus cells fail on ring geometry (Chip's drawn ring adds
+4 px to the box, the carried `border` is inset); `Menu Item`'s ring carries its
+colour on a part but not its width.
+
+**Still open, named.**
+- **`ds-contracts generate` refuses the CBDS `Checkbox-icon` proposal**, by name:
+  `part "CheckSquare" overrides "size" but ds.check-square does not declare it
+  overridable`. Pre-existing and independent of the state axis (PR 130's scratch
+  proposal carries the same override): the proposer's ROUND 10 self-claimed-stub
+  size override is gated on `mintUnbound` alone, while the stub declares
+  `overridable` only under the `instanceOverrides` opt-in no CLI passes. The CBDS
+  numbers above come from a SCRATCH copy whose three stubs were given
+  `overridable: ["size"]`; the unmodified proposal does not generate. Read alone
+  (child stubbed) the parent does not even type-check in the consumer.
+- **`states.disabled` on a root with no native `disabled`** (`a`, `div`, `label`, …)
+  compiles to `.root:disabled`, which never matches; the boolean is delivered as
+  `data-disabled`. Pre-existing on 64 tracked contracts, so not touched here (it
+  would change their emitted CSS). The consumer check now names it
+  (`state-inert:disabled` on Altitude `Link` and CBDS `Toggle`), and
+  `state-unreachable:focus-visible` names a root nothing can focus (`Link`'s `a`
+  without `href`, `Checkbox-icon`'s `div`).
+- **The designer exam's own mount** (`recipe/canvas-to-code.ts` `mountCells`) still
+  says `variant axis State has no contract prop` for Chip and Link. Its observe
+  cannot see stamps, its proposals are reviewable inversions, and its receipts are
+  dated: not moved here. The tally stays 5 accounting-clean, 19 refused by name.
+- Part-level state channels stay colour-kind plus the four box channels
+  (`PART_STATE_CHANNELS`); a state whose drawing lives inside a nested instance is
+  named, not carried.
+
+**To reverse.** In `proposeFromDumpFenced` restore the single line the wall was —
+`if (projectionMode === 'exact' && !declaredThisAxis) semanticProjectionRefusal(…)`
+— and leave `designerStateAxis` null: exact refuses every undeclared state axis
+again, sparse + promoted refuses ragged in both modes, and
+`exactRowsFromProposedContract` ignores its third argument. The shared table and
+the consumer check's mounting are independent of the proposer and can stay.
+**Gates:** `extract/figma/state-axis.test.ts` (`npm run exact-proposal:check` — 11 of
+its 14 tests are red on the base proposer: every table value, every refusal, the
+three sparse shapes and the fence inside a state plane, the writer round trip, the
+emitted React, the planner) and `scripts/design-consumer-check.test.ts`
+(`npm run design:consumer:test`).
