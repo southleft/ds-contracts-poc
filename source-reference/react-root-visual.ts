@@ -84,21 +84,25 @@ export function projectReactRootVisual(
           instance.roots[0].correspondence === 'runtime-dependent')
         throw Error('react-root-visual-source-content-unqualified');
       const observation = instance.roots[0].observation;
-      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
-      let grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
-      if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
       // Judge caller `style`/`className` before any size fact is trusted.
-      const sourceFacts = () => {
+      const judged = (at: string, observed: Pick<CapturedNode, 'tag' | 'style'>, owners: string[]) => {
         if (styleOrigin!.version !== 1) throw Error('react-root-visual-style-origin-version');
-        const origin = styleOrigin!.roots.find(r => r.path === instance.roots[0].path);
-        if (!origin || origin.tag !== observation.tag) throw Error('react-root-visual-style-origin-mismatch');
-        const props=ownership.components.find(c=>c.id===instance.instanceId)!.props;
-        const callerStyle=['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'}));
+        const origin = styleOrigin!.roots.find(r => r.path === at);
+        if (!origin || origin.tag !== observed.tag) throw Error('react-root-visual-style-origin-mismatch');
+        const callerStyle=ownership.components.filter(c=>owners.includes(c.id)).some(({props})=>['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'})));
         return {callerStyle,sourceSizing:origin.sizes?.map(size=>callerStyle
           ? {...size,status:'unresolved' as const,reason:'caller-style-input-needs-ownership-proof'}
-          : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',normalizeValue(observation.style[size.channel]??''))
+          : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',normalizeValue(observed.style[size.channel]??''))
             ? {...size,status:'unresolved' as const,reason:'size-observation-mismatch'} : size)};
       };
+      const sourceFacts = () => judged(instance.roots[0].path, observation, [instance.instanceId]);
+      // A composed child of a traced GRID root takes its width from the root
+      // rule, so every component rooted there answers for a caller width.
+      const rootWidth = childContext && styleOrigin && instance.roots[0].path && tree.style.display === 'grid'
+        ? judged('', tree, ownership.components.filter(c => c.roots.includes('')).map(c => c.id)).sourceSizing?.find(size => size.channel === 'width') : undefined;
+      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext,rootWidth) : undefined;
+      let grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
       // A traced top-level grid root takes the child path's bounded lowering.
       // Substituted evidence refuses outright; an unqualified grid keeps its
       // prepared styles and names the refusal where the compiler used to.

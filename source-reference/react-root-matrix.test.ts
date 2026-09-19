@@ -14,6 +14,9 @@ import {observeReactPropertyMatrix} from './react-property-matrix.js';
 import {assembleReactRootMatrix} from './react-root-matrix.js';
 import {reactChildContextGrid} from './react-child-context.js';
 import {projectReactRootVisual} from './react-root-visual.js';
+import {deriveReactChildRoot} from './react-child-root.js';
+import {readReactStyleOrigin} from './react-style-origin.js';
+import {observeGridConstraints} from './grid-constraints.js';
 import {revisionOf} from '../core/contract-provenance.js';
 import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
@@ -117,12 +120,21 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   const exportsList=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');
   const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[${exportsList}];flushSync(()=>createRoot(document.getElementById('root')).render(<Notice><NoticeTitle>Heads up</NoticeTitle><NoticeBody>A description long enough to wrap onto a second line inside the fixed column.</NoticeBody></Notice>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
-  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}body{margin:0;font:14px/20px Arial}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}*{box-sizing:border-box}body{margin:0;font:14px/20px Arial}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
   const selector='#root > div',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
   const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
   const instanceId=ownership.components.find(c=>c.source.exportName==='Notice')!.id;
+  // Composed children of this grid ROOT get the same parent-width proof an auto-sized grid child gives its own children.
+  const styleOrigin=await readReactStyleOrigin(page,selector,ownership),childContext={gridConstraints:await observeGridConstraints(page,[selector],tree)};
+  for(const name of ['NoticeTitle','NoticeBody']){
+   const child=deriveReactChildRoot(program,ownership,tree,styleOrigin,ownership.components.find(c=>c.source.exportName===name)!.id,childContext);
+   assert.equal(child.draft.status,'native-compiled',name);assert.deepEqual(child.draft.contract!.anatomy.root.literals,{width:'100%',height:'fit-content'},name);
+   assert.ok(child.draft.limitations.includes('parent-stretch-current-source-context-only'));
+   const styled=structuredClone(ownership);styled.components.find(c=>c.id===instanceId)!.props.style={kind:'object'};
+   assert.throws(()=>deriveReactChildRoot(program,styled,tree,styleOrigin,child.instanceId,childContext),/^Error: react-child-root-projection-unavailable:react-root-grid-width-unqualified$/,'a caller-owned root width proves nothing to its children');
+  }
   const effects=await observeReactPropertyMatrix({page,program,ownership,tree,image,selector,instanceId,dir:path.join(dir,'effects'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
   assert.ok(effects.rows.every(r=>r.status==='observed'),JSON.stringify(effects));
   const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(effects.rows.map(r=>[r.id,JSON.parse(readFileSync(path.join(dir,'effects',r.id+'.json'),'utf8'))]));

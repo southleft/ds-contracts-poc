@@ -6,8 +6,12 @@ import type { Contract } from '../scripts/contract-schema.js';
 
 export interface ReactChildContext { gridConstraints: GridConstraintEvidence }
 
+/** `rootWidth` is the traced root's width fact AFTER caller-input ownership has
+ * been judged. It matters only when the grid container giving a child its
+ * context IS that root: no parent proves the root's width, so the root rule
+ * does (own fixed length or own declared fill), never "both sizes automatic". */
 export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOrigin,
-  path: string, context: ReactChildContext): { width: '100%'; height: 'fit-content' } | undefined {
+  path: string, context: ReactChildContext, rootWidth?: ReactSizeOrigin): { width: '100%'; height: 'fit-content' } | undefined {
   const grids=verifiedGridConstraints(tree,context.gridConstraints);
   const nodes=new Map(flatten(tree).map(row=>[row.path,row.node]));
   const root=nodes.get(path);
@@ -19,8 +23,10 @@ export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOr
   const parent=nodes.get(parentPath), parentOrigin=origin.roots.find(row=>row.path===parentPath);
   if(!parent || !parentOrigin) return;
   const width=parentOrigin.sizes?.find(f=>f.channel==='width');
-  const parentGrid=parent.style.display==='grid' ? reactChildContextGrid(tree,origin,parentPath,context) : undefined;
-  const inheritedGridWidth=parentGrid && parentPath && reactChildContextSizing(tree,origin,parentPath,context);
+  const parentGrid=parent.style.display!=='grid' ? undefined : parentPath ? reactChildContextGrid(tree,origin,parentPath,context)
+    : reactRootGrid(tree,origin,context.gridConstraints,rootWidth);
+  // A qualified root grid has already proven its one column's definite width.
+  const inheritedGridWidth=parentGrid && (parentPath ? reactChildContextSizing(tree,origin,parentPath,context,rootWidth) : true);
   if(!inheritedGridWidth && (width?.status!=='fixed' || width.value!==parent.style.width)) return;
   // A constrained parent block axis can shrink its children. Intrinsic height
   // must not be inferred from a single sample in that context.

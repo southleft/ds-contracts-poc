@@ -143,6 +143,18 @@ test('a top-level grid root takes the child lowering only on its own fixed width
   assert.equal(width(filled.origin)!.status,'fill');
   assert.deepEqual(reactRootGrid(filled.tree,filled.origin,filled.evidence,width(filled.origin)),layout);
   assert.throws(()=>reactRootGrid(filled.tree,filled.origin,filled.evidence,{...width(filled.origin)!,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}),/react-root-grid-width-unqualified/);
+  // Children of a grid that IS the traced root take their width from the root rule, judged after caller inputs.
+  for(const root of [f,filled]){
+   const context={gridConstraints:root.evidence},before=structuredClone(root);
+   for(const child of ['0','1'])assert.deepEqual(reactChildContextSizing(root.tree,root.origin,child,context,width(root.origin)),{width:'100%',height:'fit-content'});
+   assert.throws(()=>reactChildContextSizing(root.tree,root.origin,'0',context),/^Error: react-root-grid-width-unqualified$/,'no judged root width, no proof');
+   assert.throws(()=>reactChildContextSizing(root.tree,root.origin,'0',context,{...width(root.origin)!,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}),/^Error: react-root-grid-width-unqualified$/);
+   assert.deepEqual(root,before);
+  }
+  const floored=await observe('min-height:200px');
+  assert.throws(()=>reactChildContextSizing(floored.tree,floored.origin,'0',{gridConstraints:floored.evidence},width(floored.origin)),/^Error: react-root-grid-constraints-unqualified$/);
+  const indefiniteRoot=await observe('','width:auto');
+  assert.throws(()=>reactChildContextSizing(indefiniteRoot.tree,indefiniteRoot.origin,'0',{gridConstraints:indefiniteRoot.evidence},width(indefiniteRoot.origin)),/^Error: react-root-grid-width-unqualified$/);
   for(const [own,css] of [['width:calc(100% - 8px)',''],['width:50%',''],['width:100%','max-width:200px'],['width:100%','max-width:900px'],['width:100%','min-width:40px'],
     ['width:100%','box-sizing:content-box'],['width:100%','margin-left:8px'],['width:100%','position:absolute'],['width:100%','transform:translateX(1px)']]){
    const other=await observe(css,own);
