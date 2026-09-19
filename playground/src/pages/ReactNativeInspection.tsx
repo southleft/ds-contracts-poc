@@ -37,8 +37,10 @@ interface MovedOperation { operationId: string; caseId: string; kind: 'root' | '
 function updateProblem(problem: string) {
   const [name, ...node] = problem.split(':'), nodeId = node.join(':');
   if (name === 'native-update-observation-refused') return 'The canvas did not match what this update expected. Nothing further was written.';
-  if (name === 'native-update-write-begun-outcome-unresolved') return 'The companion had begun this write, but the canvas still shows the earlier values. It may still land. Nothing is retried; inspect again once the companion has settled.';
+  if (name === 'native-update-write-begun-outcome-unresolved') return 'The companion had begun this write, but the canvas still shows the earlier values. It may still land. Nothing is retried; inspect again once the companion has settled or, if every companion window for this file is closed, attest that the companion is gone.';
   if (name === 'native-update-late-write-result-contradicts-canvas') return 'A result arrived for a write that was already settled from the canvas, and it disagrees with that reading. Inspect the update again before anything else is applied.';
+  if (name === 'native-update-late-result-after-revocation') return 'A result arrived from a write you attested dead, so that companion was alive. The result was kept as evidence and not counted. The canvas may have changed after it was settled: inspect the update again, or read design changes, before relying on it.';
+  if (name === 'native-update-canvas-moved-after-revoked-settlement') return 'The canvas changed between settling the write you attested dead and the next preflight. The revoked write may have run late, or someone edited these nodes. The update continues only through its own checks; review the values on the canvas.';
   if (name === 'native-update-write-ran-without-begin') return 'A companion older than this app executed a write without asking. Close every open companion window and reopen the plugin, then inspect this update again.';
   if (name === 'native-update-baseline-conflict') return 'Another property of these components changed in Figma after the last verified readback. Restore it, or review it as a design change, then inspect again.';
   if (name === 'native-update-node-missing') return `Node ${nodeId} no longer exists in the file.`;
@@ -204,8 +206,14 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 <button type="button" disabled={busy||!update.connection?.paired} onClick={()=>void action(`native-operation/${id}/update/${update.id}/resolve-write`)}>Resolve by reading the canvas</button>
               </>}
               {update.operation.unresolvedWrite==='reading-canvas' && <p>Reading the actual nodes to settle an interrupted write. If the values were written, verification continues. If nothing changed and the companion never began the write, the update stops and waits for your decision. Anything else needs recovery.</p>}
+              {update.operation.canAttestDead && <section aria-label="Attest the companion is gone">
+                <p>The companion was given permission to begin this write and has not reported back. Until you say otherwise, the app treats the write as possibly still running, and the update and this component's corrections stay blocked.</p>
+                <p><strong>Only do this if every companion window for this file is closed</strong> (or Figma was quit). Attesting revokes this write: the app will never accept its result, and the companion is refused if it asks to begin it again. You then settle the write by reading the canvas. If a companion is in fact still alive, it can still execute the write after that reading; the app cannot stop a program that already started. That late change is named on the next inspection and never accepted silently.</p>
+                <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/attest-dead`)}>Attest the companion is gone</button>
+              </section>}
+              {update.operation.attestedDead && update.operation.unresolvedWrite==='awaiting-result' && <p>You attested on {new Date(update.operation.attestedDead.at).toLocaleString()} that the companion running this write is gone. The write is revoked. Settle it by reading the canvas.</p>}
               {update.operation.phase==='update-write-untouched' && <>
-                <p>The interrupted write never began and did not reach the canvas. It is closed. Nothing further is sent unless you choose to: sending again runs a fresh preflight and then <strong>a new write</strong> under its own claim.</p>
+                <p>{update.operation.attestedDead ? 'You attested that the companion running this write was gone, and the canvas read found the nodes untouched. The write is revoked and closed.' : 'The interrupted write never began and did not reach the canvas. It is closed.'} Nothing further is sent unless you choose to: sending again runs a fresh preflight and then <strong>a new write</strong> under its own claim.</p>
                 <button type="button" disabled={busy||!update.operation.sourceCurrent} onClick={()=>void action(`native-operation/${id}/update/${update.id}/rearm-write`)}>Preflight again and send a new write</button>
               </>}
               {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{updateProblem(p)} <code>{p}</code></li>)}</ul>}
