@@ -192,3 +192,15 @@ test('stub namespace segments do not become control names, while the observed le
     }
   }
 });
+
+test('an observed control layer name survives a variant-qualified main name', () => {
+  for (const controlName of ['Button (Icon)', 'Controls / CloseButton']) {
+    const control = () => ({...instance('Button (Icon)/Default/sm'), name:controlName});
+    const r=both({
+      Panel:set('Panel','State',['Default','Hover'],()=>[control()]),
+      Button:set('Button','Size',['Sm','Md'],()=>[control(),text('Go')]),
+    });
+    assert.equal(elementOf(bySet(r,'Panel')),'div',controlName);
+    assert.ok(nested(bySet(r,'Button')),controlName);
+  }
+});
