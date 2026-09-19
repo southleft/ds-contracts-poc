@@ -150,7 +150,7 @@
   "generatedFiles": {
     "react/Heading/Heading.module.css": "2d63bd31f666e8af92fdda60568d2e8a05257dcd7ae6f1402a70a2e309d9b82a",
     "react/Heading/Heading.stories.tsx": "26590246a69940ccde0530555151ea29921a12b64534b2043337d5d0ae74a5eb",
-    "react/Heading/Heading.tsx": "d160049b34e76d2cc95b7ee7de9b45cb47616b492730284014c963a6e3e42581",
+    "react/Heading/Heading.tsx": "5eba1912c4aba781bf411e75547851868bdb62047fe2dc2d8d77486cc26388e8",
     "react/Heading/index.ts": "a96aced14233168f26fa7b4ea2e644ea72828c4f56e12596f418c8b206f87fca",
     "wc/ds-heading.ts": "80911bfbd74785ff5cacfb801436ef297f873b735755b684ba2fee53cdc03520",
     "wc/ds-heading.css.ts": "95caf90ec9a0b7cd9a4b9d8dde0ba0092b934289990cf8d9dd66586f3b456249",

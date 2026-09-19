@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/badge.contract.json (polaris.badge v0.4.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -13,7 +16,7 @@ const ICONS: Record<string, string> = {
   "badge-icon-3-complete": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 10 C 6 9.07 6 8.605 6.102 8.224 A 3 3 0 0 1 8.223 6.102 C 8.605 6 9.07 6 10 6 C 10.93 6 11.395 6 11.776 6.102 A 3 3 0 0 1 13.898 8.224 C 14 8.605 14 9.07 14 10 S 14 11.395 13.898 11.777 A 3 3 0 0 1 11.776 13.897 C 11.395 14 10.93 14 10 14 S 8.605 14 8.223 13.898 A 3 3 0 0 1 6.103 11.777 C 6 11.395 6 10.93 6 10 Z\"/></svg>",
 };
 
-export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   /** Colors and labels the badge with the given tone (round 4: enumerated from the real @shopify/polaris@13.9.5 Badge API — the static extraction had missed the styling axes entirely). */
   tone?: 'info' | 'success' | 'warning' | 'critical' | 'attention' | 'new' | 'magic' | 'info-strong' | 'success-strong' | 'warning-strong' | 'critical-strong' | 'attention-strong' | 'read-only' | 'enabled';
   /** Render a pip showing the progress of a given task (round 4: real Badge API axis). */
@@ -24,7 +27,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: single-tone static bindings on root (background-color/color/font-weight) and label typography REMOVED — the real tone/progress axes contest them per value; the computed floor rebuilds these channels from browser truth (S2 base + per-axis mint). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-  { tone, progress = 'none', toneAndProgressLabelOverride, className, children, ...rest },
+  { tone, progress = 'none', toneAndProgressLabelOverride, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, tone === undefined ? undefined : styles[`tone-${tone}`], styles[`progress-${progress}`], className].filter(Boolean).join(' ');

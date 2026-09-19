@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/grid-gallery.contract.json (ds.grid-gallery v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './GridGallery.module.css';
 
-export interface GridGalleryProps extends HTMLAttributes<HTMLDivElement> {
+export interface GridGalleryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Gallery cell 1 — placed by order, not by anchor. */
   item1?: ReactNode;
   /** Gallery cell 2 — placed by order, not by anchor. */
@@ -24,7 +27,7 @@ export interface GridGalleryProps extends HTMLAttributes<HTMLDivElement> {
 
 /** Three equal fr columns filled by row auto-flow (G5) — the placement fact is CHILD ORDER, not an anchor. Six repeated slots flow into two derived rows. */
 export const GridGallery = forwardRef<HTMLDivElement, GridGalleryProps>(function GridGallery(
-  { item1, item2, item3, item4, item5, item6, className, children, ...rest },
+  { item1, item2, item3, item4, item5, item6, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

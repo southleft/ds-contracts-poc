@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/button-base.contract.json (ds.button-base v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -9,14 +12,14 @@ import { Dot } from '../Dot';
 import { Circle } from '../Circle';
 import styles from './ButtonBase.module.css';
 
-export interface ButtonBaseProps extends HTMLAttributes<HTMLDivElement> {
+export interface ButtonBaseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   size?: 'md' | 'lg' | 'xl' | 'sm';
   icon?: 'leading' | 'only' | 'false' | 'trailing' | 'dot';
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const ButtonBase = forwardRef<HTMLDivElement, ButtonBaseProps>(function ButtonBase(
-  { size = 'md', icon = 'leading', className, children, ...rest },
+  { size = 'md', icon = 'leading', className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`size-${size}`], styles[`icon-${icon}`], className]

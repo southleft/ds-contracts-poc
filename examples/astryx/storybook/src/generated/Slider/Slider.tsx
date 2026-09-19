@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/slider.contract.json (astryx.slider v0.3.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Slider.module.css';
 
-export interface SliderProps extends HTMLAttributes<HTMLDivElement> {
+export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The slider label. */
   label: string;
   /** Slider orientation. */
@@ -29,7 +32,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     isRequired = false,
     label,
     className,
-    children,
     ...rest
   },
   ref,

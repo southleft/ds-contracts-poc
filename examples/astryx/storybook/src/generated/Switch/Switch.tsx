@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/switch.contract.json (astryx.switch v0.2.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Switch.module.css';
 
-export interface SwitchProps extends HTMLAttributes<HTMLDivElement> {
+export interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The switch label. */
   label: string;
   /** Whether the switch is on or off. */
@@ -29,7 +32,6 @@ export const Switch = forwardRef<HTMLDivElement, SwitchProps>(function Switch(
     isRequired = false,
     label,
     className,
-    children,
     ...rest
   },
   ref,

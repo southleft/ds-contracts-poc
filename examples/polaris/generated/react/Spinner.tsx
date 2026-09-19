@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/spinner.contract.json (polaris.spinner v0.4.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,7 +15,7 @@ const ICONS: Record<string, string> = {
   "spinner-root-large": "<svg viewBox=\"0 0 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.542 1.487 A 21.507 21.507 0 0 0 0.5 22 C 0.5 33.874 10.126 43.5 22 43.5 C 31.847 43.5 40.364 36.825 42.809 27.428 A 1.5 1.5 0 0 0 39.905 26.672 C 37.803 34.755 30.473 40.5 22 40.5 C 11.783 40.5 3.5 32.217 3.5 22 C 3.5 13.863 8.8 6.753 16.442 4.35 A 1.5 1.5 0 1 0 15.542 1.487 Z\" fill=\"currentColor\"/></svg>",
 };
 
-export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
+export interface SpinnerProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   /** Size of spinner */
   size?: 'small' | 'large';
   /** Accessible label for the spinner */
@@ -23,7 +26,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Spinner/Spinner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(function Spinner(
-  { size = 'large', hasFocusableParent, accessibilityLabel, className, children, ...rest },
+  { size = 'large', hasFocusableParent, accessibilityLabel, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');

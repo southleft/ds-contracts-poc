@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/breadcrumb-item.contract.json (ds.breadcrumb-item v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,7 +15,7 @@ const ICONS: Record<string, string> = {
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="7.8,5.5 12.3,10 7.8,14.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-export interface BreadcrumbItemProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BreadcrumbItemProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   /** Leading separator — off for the first item in a trail. */
   hasSeparator?: boolean;
   /** The crumb text. */
@@ -23,10 +26,7 @@ export interface BreadcrumbItemProps extends HTMLAttributes<HTMLSpanElement> {
 
 /** One link in a breadcrumb trail with its leading separator. API mirrors industry convention (Astryx BreadcrumbItem); the first item is authored with hasSeparator off (positional part logic is a documented gap), and aria-current needs conditional attributes — also documented. */
 export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
-  function BreadcrumbItem(
-    { hasSeparator = true, label, href = '#', className, children, ...rest },
-    ref,
-  ) {
+  function BreadcrumbItem({ hasSeparator = true, label, href = '#', className, ...rest }, ref) {
     const classes = [styles.root, className].filter(Boolean).join(' ');
     return (
       <span ref={ref} className={classes} data-has-separator={hasSeparator || undefined} {...rest}>

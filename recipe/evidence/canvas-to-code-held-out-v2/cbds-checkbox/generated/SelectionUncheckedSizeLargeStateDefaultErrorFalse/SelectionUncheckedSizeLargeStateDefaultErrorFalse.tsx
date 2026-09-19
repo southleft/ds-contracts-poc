@@ -2,12 +2,18 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/selection-unchecked-size-large-state-default-error-false.contract.json (ds.selection-unchecked-size-large-state-default-error-false v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './SelectionUncheckedSizeLargeStateDefaultErrorFalse.module.css';
 
-export interface SelectionUncheckedSizeLargeStateDefaultErrorFalseProps extends HTMLAttributes<HTMLSpanElement> {
+export interface SelectionUncheckedSizeLargeStateDefaultErrorFalseProps extends Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  'children'
+> {
   error?: boolean;
   selection?: 'unchecked';
   size?: 'large' | 'small';
@@ -19,15 +25,7 @@ export const SelectionUncheckedSizeLargeStateDefaultErrorFalse = forwardRef<
   HTMLSpanElement,
   SelectionUncheckedSizeLargeStateDefaultErrorFalseProps
 >(function SelectionUncheckedSizeLargeStateDefaultErrorFalse(
-  {
-    selection = 'unchecked',
-    size = 'large',
-    state = 'default',
-    error = false,
-    className,
-    children,
-    ...rest
-  },
+  { selection = 'unchecked', size = 'large', state = 'default', error = false, className, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): selection, state — no `.<axis>-*` rule
