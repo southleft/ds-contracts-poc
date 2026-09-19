@@ -10,11 +10,12 @@ import { emitNativeContractReadbackScript, type NativeContractObservationInput }
 import type { NativeTokenContextInput } from './native-token-context.js';
 import { prepareNativeContractUpdate } from './native-contract-update.js';
 
-export async function nativeUpdateFixture() {
+/** `extraTokens` are allocated beside the defaults and bound to nothing. With none, every byte is as before. */
+export async function nativeUpdateFixture(extraTokens: Record<string, unknown> = {}) {
   const { figma } = nativeFixtureHost(), proto = Object.getPrototypeOf(figma.currentPage);
   proto.setExplicitVariableModeForCollection = function(c: any, mode: string) { this.explicitVariableModes = { [c.id]: mode }; };
   const run = async (script: string) => JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`, { figma, console }, { timeout: 5000 })));
-  const tokens = { size: { $type: 'dimension', $value: '16px' }, opacity: { $type: 'number', $value: 0.5 } };
+  const tokens: Record<string, any> = { size: { $type: 'dimension', $value: '16px' }, opacity: { $type: 'number', $value: 0.5 }, ...structuredClone(extraTokens) };
   const context = (t: Record<string,unknown>) => ({ tokens: { primitives: t, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map<string,string>() });
   const engine = createFigmaEngine(context(tokens));
   const contract = ContractSchema.parse({ id: 'fixture.update', name: 'Update', version: '0.1.0', status: 'draft', description: 'Bounded update fixture', states: [], semantics: { element: 'div' },
@@ -38,5 +39,12 @@ export async function nativeUpdateFixture() {
   const nextEngine = createFigmaEngine(context(nextTokens)), next = nextEngine.compileNativeContractDraft(nextContract, new Map([[nextContract.id,nextContract]]), source);
   const desired = { component: next.component, revision: revisionOf(next), tokenInput: { ...tokenInput, modes: [{ ...tokenInput.modes[0], tokens: nextTokens }] } };
   const input = { before, baseline, desired }, { plan } = prepareNativeContractUpdate(input);
-  return { figma, run, input, plan, nodes: await Promise.all(creation.variants.map((v: any) => figma.getNodeByIdAsync(v.id))) };
+  /** The same contract compiled by the same engine against another token tree: what a changed source produces. */
+  const desiredFor = (changed: Record<string, unknown>) => {
+    const compiledNext = createFigmaEngine(context(changed)).compileNativeContractDraft(contract, byId, source);
+    return { component: compiledNext.component, revision: revisionOf(compiledNext),
+      tokenInput: { ...tokenInput, tokenPaths: [...flattenTokens(changed).keys()].sort(),
+        modes: [{ ...tokenInput.modes[0], tokens: changed, tokenTreeRevision: revisionOf(changed) }] } };
+  };
+  return { figma, run, input, plan, tokens, tokenIdentity: made.creationIdentity, desiredFor, nodes: await Promise.all(creation.variants.map((v: any) => figma.getNodeByIdAsync(v.id))) };
 }
