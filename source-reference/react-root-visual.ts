@@ -14,7 +14,8 @@ import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
-import { reactChildContextSizing, reactChildContextGrid, type ReactChildContext } from './react-child-context.js';
+import { reactChildContextSizing, reactChildContextGrid, reactRootGrid, type ReactChildContext } from './react-child-context.js';
+import { verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 
 export interface ReactRootVisual {
   version: 1;
@@ -60,9 +61,12 @@ export function projectReactRootVisual(
   styleOrigin?: ReactStyleOrigin,
   instanceIds?: ReadonlySet<string>,
   childContext?: ReactChildContext,
+  /** Sealed with the observation it describes; consulted only for a traced
+   * top-level root that is itself a grid. Absent evidence changes nothing. */
+  rootGrid?: GridConstraintEvidence,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
-    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}) }), roots: [], problems: [] };
+    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}), ...(rootGrid ? {rootGrid} : {}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
@@ -80,9 +84,35 @@ export function projectReactRootVisual(
           instance.roots[0].correspondence === 'runtime-dependent')
         throw Error('react-root-visual-source-content-unqualified');
       const observation = instance.roots[0].observation;
-      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
-      const grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      // Judge caller `style`/`className` before any size fact is trusted.
+      const judged = (at: string, observed: Pick<CapturedNode, 'tag' | 'style'>, owners: string[]) => {
+        if (styleOrigin!.version !== 1) throw Error('react-root-visual-style-origin-version');
+        const origin = styleOrigin!.roots.find(r => r.path === at);
+        if (!origin || origin.tag !== observed.tag) throw Error('react-root-visual-style-origin-mismatch');
+        const callerStyle=ownership.components.filter(c=>owners.includes(c.id)).some(({props})=>['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'})));
+        return {callerStyle,sourceSizing:origin.sizes?.map(size=>callerStyle
+          ? {...size,status:'unresolved' as const,reason:'caller-style-input-needs-ownership-proof'}
+          : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',normalizeValue(observed.style[size.channel]??''))
+            ? {...size,status:'unresolved' as const,reason:'size-observation-mismatch'} : size)};
+      };
+      const sourceFacts = () => judged(instance.roots[0].path, observation, [instance.instanceId]);
+      // A composed child of a traced GRID root takes its width from the root
+      // rule, so every component rooted there answers for a caller width.
+      const rootWidth = childContext && styleOrigin && instance.roots[0].path && tree.style.display === 'grid'
+        ? judged('', tree, ownership.components.filter(c => c.roots.includes('')).map(c => c.id)).sourceSizing?.find(size => size.channel === 'width') : undefined;
+      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext,rootWidth) : undefined;
+      let grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
       if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
+      // A traced top-level grid root takes the child path's bounded lowering.
+      // Substituted evidence refuses outright; an unqualified grid keeps its
+      // prepared styles and names the refusal where the compiler used to.
+      let rootGridRefusal: string | undefined;
+      if (!childContext && rootGrid && styleOrigin && instance.roots[0].path === '' &&
+          ['grid', 'inline-grid'].includes(observation.style.display)) {
+        if (rootGrid.status === 'observed') verifiedGridConstraints(tree, rootGrid);
+        try { grid = reactRootGrid(tree, styleOrigin, rootGrid, sourceFacts().sourceSizing?.find(size => size.channel === 'width')); }
+        catch (error) { rootGridRefusal = error instanceof Error ? error.message : String(error); }
+      }
       const captured = flatten(tree).find(row => row.path === instance.roots[0].path)!.node;
       if (observation.style.display === 'block' && (!sizing || captured.nodes.some(node => node.t !== 'text') ||
           observation.style['writing-mode'] !== 'horizontal-tb' || observation.style.direction !== 'ltr'))
@@ -96,7 +126,7 @@ export function projectReactRootVisual(
       const contract = ContractSchema.parse({ id: `observed.react-${suffix}`, name, version: '0.1.0', status: 'draft',
         description: 'Observed source root only; API, behavior and composition are not projected.',
         props: [], states: [], semantics: { element: root.tag }, anatomy: { root: { slot: { name: 'children' },
-          ...(grid ? { layout: grid, literals: sizing } : {}) } },
+          ...(grid ? { layout: grid, literals: sizing ?? { height: 'fit-content' } } : {}) } },
         bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } },
           code: { anchors: { importPath: `observed/${suffix}`, export: name } } } });
       const enumeration = enumerate([], [], 1, {}), combo = enumeration.combos[0].key;
@@ -131,21 +161,24 @@ export function projectReactRootVisual(
           enriched.anatomy.root.slot?.name !== 'children') throw Error('react-root-visual-content-boundary-changed');
       const tokens = structuredClone(minted.tree);
       if (styleOrigin) {
-        if (styleOrigin.version !== 1) throw Error('react-root-visual-style-origin-version');
-        const origin = styleOrigin.roots.find(r => r.path === instance.roots[0].path);
-        if (!origin || origin.tag !== root.tag) throw Error('react-root-visual-style-origin-mismatch');
-        const props=ownership.components.find(c=>c.id===instance.instanceId)!.props;
-        const callerStyle=['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'}));
-        result.sourceSizing=origin.sizes?.map(size=>callerStyle
-          ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
-          : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',root.style[size.channel]??'')
-            ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
+        const {callerStyle,sourceSizing}=sourceFacts();
+        result.sourceSizing=sourceSizing;
         if(sizing) {
           if(callerStyle) throw Error('react-child-context-caller-style-unqualified');
           enriched.anatomy.root.literals={...enriched.anatomy.root.literals,...sizing};
           result.limitations.push('parent-stretch-current-source-context-only');
         }
         if (grid) result.limitations.push('intrinsic-row-lowering-observed-block-content-only');
+        // The single observation carries the same authenticated fixed width the
+        // matrix sizing assembly retains; it is never the measured box.
+        if (grid && !sizing) {
+          const width=sourceSizing!.find(size=>size.channel==='width')!;
+          enriched.anatomy.root.literals={...enriched.anatomy.root.literals,width:width.value!};
+          result.limitations.push(width.status==='fill'?'root-grid-fill-width-parent-supplied-by-caller':'root-grid-own-fixed-width-current-case-only');
+          // Rules conditioned on content (`:has(> svg)` tracks or placements) never
+          // match this sample, and only matching rules are observable: named, not inferred.
+          result.limitations.push('grid-tracks-observed-for-this-content-only');
+        }
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;
         for (const binding of bindings.sourceBindings) if (binding.tokenPath)
@@ -160,6 +193,7 @@ export function projectReactRootVisual(
       result.tokens = tokens;
       result.residuals = [...prep.codeOnly, ...prep.stateCodeOnly];
       result.status = 'style-prepared';
+      if (rootGridRefusal) throw Error(rootGridRefusal);
       const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
       result.native = engine.compileComponentData(enriched, new Map([[enriched.id, enriched]]));
       result.status = 'native-compiled';
