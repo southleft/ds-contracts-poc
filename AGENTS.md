@@ -18,21 +18,32 @@ over component-specific converters. Existing regression gates remain required.
 ## Repository instructions
 
 This is `ds-contracts-poc` ("Design System Contracts"), an npm-workspaces monorepo.
-Node `>=20` is required (see `engines` in `package.json`). Standard commands live in
-`package.json` scripts and `CONTRIBUTING.md`; the notes below are only the
-non-obvious things.
+Use the Node version in `.nvmrc` (20.19.4, the version CI pins). `engines` in
+`package.json` says `>=20`, but Vite 8.3.0 declares `^20.19.0 || >=22.12.0`. Install
+with `npm ci`; `npm install` under npm 10.8.2 rewrites the tracked `package-lock.json`.
+Standard commands live in `package.json` scripts and `CONTRIBUTING.md`; the notes below
+are only the non-obvious things.
 
 ### Environment / setup gotchas
 - **npm workspaces only cover `packages/*`.** `workers/assist/` has its own
-  `package.json` and is NOT installed by the root `npm install`. Run
-  `npm --prefix workers/assist install` before `npm run test:worker` /
-  `npm run typecheck:worker`. (The startup update script already does this.)
+  `package.json` and is not installed by the root `npm ci`. `npm run test:worker` and
+  `npm run typecheck:worker` do not need that install: they resolve `tsx` and `tsc`
+  from the root `node_modules`, and CI runs them with no separate install. Only the
+  Worker's `wrangler` commands (`dev`, `deploy`) need
+  `npm --prefix workers/assist install`.
 - **`packages/schema/dist` is gitignored and must be built.** Anything importing
   `@ds-contracts/schema` (root `npm run typecheck`, the CLI package, `extract/*`)
   fails with `Cannot find module '@ds-contracts/schema'` until you run
   `npm run prep:schema` (compiles `packages/schema` → `dist`). The startup update
   script builds it; if you re-clone or wipe `packages/schema/dist`, re-run
   `npm run prep:schema`.
+- **The gates need all four package builds on a cold tree**, in this order:
+  `npm --prefix packages/schema run build`, `npm --prefix packages/core run build`,
+  `npm --prefix packages/cli run build`,
+  `npm --prefix packages/emitter-web-components run build`. Without them
+  `npx tsc --noEmit` fails on `@ds-contracts/emitter-web-components`, the
+  `paste-door-open` eval fails on the missing `packages/cli/dist/cli.js`, and
+  `publish:check` refuses. `CONTRIBUTING.md` §"The gates" has the full cold-tree step.
 - **`npm run build` is NOT required to run the apps.** The generated output it
   produces (`src/components/**`, `tokens/**` CSS, `catalog/`) is committed and
   regenerates byte-identically, so `git status` stays clean after a build. The
