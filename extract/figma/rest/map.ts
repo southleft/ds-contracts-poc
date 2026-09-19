@@ -109,6 +109,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
+import { closureDegradations, type DumpClosure } from './closure.js';
 import type { DumpDegradation, DumpEffect, DumpFile, DumpFixedSwap, DumpGradient, DumpGridTrack, DumpHostOverride, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpReaction, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
 
 // ---------------------------------------------------------------------------
@@ -489,7 +490,12 @@ export type MapDegradationCode =
   | 'host-override-unlocated'
   // Two overridden TEXT descendants share one name path — both character
   // overrides refused (the plugin dump's own code, dump v1.10).
-  | 'text-override-ambiguous-path';
+  | 'text-override-ambiguous-path'
+  // Dependency closure (docs/23 §D.43): an INSTANCE whose main component's set
+  // the import could not follow into this dump (remote library component,
+  // not found, cap exceeded, …) — the reason is the message's first word; the
+  // instance stays an auto-proposed stub.
+  | 'instance-closure-unresolved';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -534,6 +540,12 @@ export interface MapOptions {
    *  proposer requires before an unstamped ragged set may declare its undrawn
    *  combinations (core/propose-figma.ts dumpStampsObservable). */
   stampsObservable?: boolean;
+  /** The dependency closure the fetch layer ran (extract/figma/rest/closure.ts).
+   *  Written verbatim to `_provenance.closure`; every unresolved reference
+   *  becomes one `instance-closure-unresolved` degradation row; a PULLED set
+   *  is mapped even when `target` names another set. Absent (`--no-closure`,
+   *  or any caller that did not follow) → nothing is written. */
+  closure?: DumpClosure;
 }
 
 /** dump v1.1 node as the REST mapper emits it (`hidden` lives on DumpNode
@@ -1898,6 +1910,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...REST_CAPTURE_GAPS,
     ],
     ...(options.stampsObservable === true ? { stampsObservable: true as const } : {}),
+    ...(options.closure ? { closure: options.closure } : {}),
     // The variables channel's own receipt: what answered, or why nothing did.
     variables: options.variables
       ? {
@@ -1920,6 +1933,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   const dump: DumpFile = {
     _provenance: provenance,
   };
+  const closurePulled = new Set((options.closure?.pulled ?? []).map((p) => p.nodeId));
 
   for (const entry of Object.values(nodesResponse.nodes ?? {})) {
     if (!entry) continue; // REST returns null for ids not in the file
@@ -1931,7 +1945,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       continue;
     }
     if (doc.name === 'Slot') continue; // utility, never a contract component (dump.plugin.js rule)
-    if (options.target && doc.name !== options.target) continue;
+    if (options.target && doc.name !== options.target && !closurePulled.has(doc.id)) continue;
 
     const styleById = new Map<string, { name: string; key?: string }>();
     for (const [id, s] of Object.entries(entry.styles ?? {})) {
@@ -2202,6 +2216,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
         : 'no variables response was passed to the mapper (/v1/files/:key/variables/local was not fetched) — every variable binding on this dump is a resolved literal',
     });
   }
+
+  if (options.closure) report.degradations.push(...closureDegradations(options.closure));
 
   // Phase 2 exam: the MapReport used to live only on stderr — the dump
   // carried no `_degradations` on the REST route, so propose could not

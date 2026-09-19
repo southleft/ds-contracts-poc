@@ -143,6 +143,7 @@ import {
   proposeFromDump,
   type FigmaProposalResult,
 } from "../../core/propose-figma.js";
+import { dumpClosure, partitionClosureRefusals } from "./rest/closure.js";
 
 // The inversion engine itself is the pure core module — re-exported here so
 // existing importers (extract/figma/roundtrip.ts) keep their import path.
@@ -305,11 +306,22 @@ function main() {
   // computed and then dropped by this CLI. They print, and they ride the
   // report below.
   for (const n of batch.notes) console.error(`note: ${n}`);
-  if (batch.skipped.length > 0) {
+  // DEPENDENCY CLOSURE (docs/23 §D.43, AGENT decision): a set the REST
+  // import pulled in only because an instance referenced it does not refuse
+  // the import when IT refuses — its instances stay today's stub, named
+  // `closure-child-refused:<set>:<reason>`. A requested set (or any set of a
+  // dump no closure produced) refuses exactly as before.
+  const closure = dumpClosure(dump as { _provenance?: unknown });
+  const { refused, closureChildren } = partitionClosureRefusals(
+    batch.skipped,
+    closure,
+  );
+  for (const child of closureChildren) console.error(`note: ${child.note}`);
+  if (refused.length > 0) {
     console.error(
-      `REFUSED: ${batch.skipped.length} component set(s) could not be proposed; no proposal artifacts were written.`,
+      `REFUSED: ${refused.length} component set(s) could not be proposed; no proposal artifacts were written.`,
     );
-    for (const skip of batch.skipped) {
+    for (const skip of refused) {
       console.error(
         `  - ${skip.setName}: ${skip.reason}${skip.detail ? ` — ${skip.detail}` : ""}`,
       );
@@ -456,6 +468,21 @@ function main() {
         ]),
     ...(batch.notes.length > 0
       ? ["", "## Batch notes (receipts no single set owns)", "", ...batch.notes.map((n) => `- ${n}`)]
+      : []),
+    ...(closure
+      ? [
+          "",
+          "## Dependency closure (the REST import followed its instances)",
+          "",
+          `- requested: ${closure.requested.map((r) => `${r.name} (${r.nodeId})`).join(", ") || "(none)"}`,
+          `- followed into this dump: ${closure.pulled.length ? closure.pulled.map((p) => `${p.name} (${p.nodeId}, round ${p.round}, referenced by ${p.referencedBy.join(", ")})`).join("; ") : "none"}`,
+          ...closureChildren.map((c) => `- ${c.note}`),
+          ...closure.unresolved.map(
+            (u) =>
+              `- not followed [${u.reason}] ${u.name ?? u.targetId} (${u.targetId}) ← ${u.referencedFrom.length} instance(s): ${u.detail}`,
+          ),
+          ...closure.cycles.map(([from, to]) => `- cycle ${from} → ${to} (cut; the reference back resolves by id)`),
+        ]
       : []),
     ...(usedFallbackCorpus
       ? [
