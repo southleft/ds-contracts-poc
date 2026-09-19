@@ -3,7 +3,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { deriveCases, enterState, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { PNG } from 'pngjs';
+import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
+import { NODE_SCREENSHOT_OPTIONS, deriveCases, enterState, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -176,4 +178,41 @@ test('variant observation catches descendant paint, arrangement and text without
     assert.notEqual(await root.evaluate(variantPaintOf), baseline, 'equal-width replacement text is still a rendered difference');
     assert.notDeepEqual(await root.screenshot(), before);
   } finally { await browser.close(); }
+});
+
+
+test('node capture preserves transparent margins and actual geometry while restoring the review page background', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent('<style>body{background:#fff}#sample{padding:10px;width:40px;height:20px}#ink{width:40px;height:20px;background:#f1f0ea}</style><div id="sample"><div id="ink"></div></div>');
+    const root = page.locator('#sample');
+    const shot = PNG.sync.read(await root.screenshot(NODE_SCREENSHOT_OPTIONS));
+    assert.equal(shot.data[3], 0, 'the opaque review page is not part of the node export');
+    assert.deepEqual(contentBox(shot), { x: 10, y: 10, width: 40, height: 20 });
+    assert.equal(await page.locator('body').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(255, 255, 255)', 'screenshot-only style is restored');
+    await page.locator('#ink').evaluate(el => (el as HTMLElement).style.width = '44px');
+    const changed = PNG.sync.read(await root.screenshot(NODE_SCREENSHOT_OPTIONS));
+    assert.equal(contentBox(changed).width, 44, 'a real geometry error remains measurable; capture does not normalize it');
+  } finally { await browser.close(); }
+});
+
+
+test('a second background exposes missing pale ink while the original white comparison stays unchanged', () => {
+  const source = new PNG({ width: 20, height: 20 });
+  const missing = new PNG({ width: 20, height: 20 });
+  for (const png of [source, missing]) {
+    for (const [x, y] of [[0, 0], [19, 19]]) { const i = (y * 20 + x) * 4; png.data[i + 3] = 255; }
+  }
+  for (let y = 5; y < 15; y++) for (let x = 5; x < 15; x++) {
+    const i = (y * 20 + x) * 4; source.data[i] = 241; source.data[i + 1] = 240; source.data[i + 2] = 234; source.data[i + 3] = 255;
+  }
+  const white = alignPair(missing, source);
+  const explicitWhite = alignPair(missing, source, 255);
+  assert.deepEqual(white.a.data, explicitWhite.a.data, 'default consumer pixels remain the explicit white compositor');
+  assert.deepEqual(white.b.data, explicitWhite.b.data, 'default source pixels remain the explicit white compositor');
+  assert.ok(diffPair(white, []).unmaskedPct <= 5, 'the planted pale block is missed on white');
+  assert.ok(diffPair(alignPair(missing, source, 0), []).unmaskedPct > 5, 'the same unchanged pixel metric sees the missing block on black');
+  assert.equal(diffPair(alignPair(source, source, 0), []).unmaskedPct, 0);
+  assert.equal(diffPair(alignPair(source, source), []).unmaskedPct, 0);
 });
