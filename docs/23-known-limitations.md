@@ -5604,3 +5604,32 @@ inert. This does not change the image scorer or its 5% limit. Existing receipts
 remain historical until remeasured. Reversal: restore the former root-only
 observer in `scripts/design-consumer-check.ts`, retaining these known false
 positive and false negative cases in the limitation ledger.
+
+
+## D.48 Text visibility follows complete captured evidence
+
+**AGENT decision (2026-09-19).** The proposer now applies the existing
+hidden-pattern rule to TEXT parts present in every captured variant. A complete
+pattern that matches a single enum value or a truthy boolean axis becomes the
+existing `visibleWhen` predicate. A uniform explicit BOOLEAN visibility binding
+uses the captured property default through the existing binding rule. No new
+schema vocabulary or visual tolerance is introduced.
+
+The concrete defect was Altitude Checkbox Group: its Label exists in all twelve
+variants but is marked hidden in the six Legend=Hidden variants. The proposal
+previously emitted it unconditionally because only shape parts consumed this
+channel. A synthetic unrelated Notice set demonstrates the same shared rule in
+actual generated React: its caption disappears and returns as the prop changes.
+
+Partial presence can require a conjunction of conditions. That extra visibility
+channel remains named and uncarried, preserving the existing presence result.
+Inconsistent or partially missing property references are named rather than
+choosing the first reference. Always-hidden helpers and uncorrelated or inverted
+boolean patterns remain named limitations. The variant probe separately observes
+descendant paint, text and geometry (D.41 follow-up); that measurement correction
+does not establish that the component's size or visibility is correct.
+
+Reversal: remove the TEXT visibility block in `buildPart` and its test entry.
+The prior unconditional text behavior returns; shape visibility remains intact.
+Keep the before/after consumer receipts as historical evidence. This rule is
+engineering behavior, not V1 acceptance or an owner grade.

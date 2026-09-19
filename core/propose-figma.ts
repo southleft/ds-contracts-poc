@@ -3871,7 +3871,7 @@ function liftUnboundTextPaintsToLiterals(
   );
 }
 
-/** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape parts):
+/** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape/text parts):
  *  a node drawn in EVERY variant but hidden exactly where one boolean axis
  *  is false (Tooltip pointer=false), or visible for exactly one enum value,
  *  becomes visibleWhen. Anything else is a NAMED note. */
@@ -3907,9 +3907,9 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
       const only = visibleValues.size === 1 ? [...visibleValues][0] : undefined;
       if (only !== undefined && !hiddenValues.has(only)) {
         fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
-        part.visibleWhen = { prop: axis.propName, equals: camel(only) };
+        part.visibleWhen = { prop: axis.propName, equals: axisValue(axis, only) };
         ctx.notes.push(
-          `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${camel(only)} }`,
+          `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${axisValue(axis, only)} }`,
         );
         return;
       }
@@ -8682,6 +8682,25 @@ function buildPart(
     carryAbsPlacement(m, part, tokens, ctx, where, { text: true });
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
+    const visibilityRefs = new Set(m.occ.map((o) => o.node.propRefs?.visible));
+    const hasVisibilityRef = [...visibilityRefs].some((ref) => ref !== undefined);
+    const hasHiddenText = m.occ.some((o) => o.node.hidden === true);
+    if (hasVisibilityRef || hasHiddenText) {
+      if (m.occ.length !== ctx.totalVariants.length) {
+        // Presence and drawn visibility can require a conjunction that the
+        // contract does not express. Keep the existing presence result and
+        // name the additional channel instead of guessing from a subset.
+        ctx.notes.push(`${where}: TEXT visibility with partial variant presence is not carried — combined presence/visibility requires review`);
+      } else if (hasVisibilityRef) {
+        if (visibilityRefs.size === 1) {
+          applyVisibleBinding(part, [...visibilityRefs][0]!, ctx, where, m);
+        } else {
+          ctx.notes.push(`${where}: TEXT visibility property reference differs or is missing across variants — visibility binding not carried, review`);
+        }
+      } else {
+        invertHiddenVisibility(m, part, ctx, where);
+      }
+    }
     return part;
   }
 
