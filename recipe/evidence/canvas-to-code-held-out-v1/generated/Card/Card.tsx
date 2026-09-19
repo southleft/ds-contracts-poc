@@ -2,19 +2,22 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/card.contract.json (ds.card v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Card.module.css';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   size?: 'default' | 'small';
   variant?: 'outlined' | 'borderless';
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { size = 'default', variant = 'outlined', className, children, ...rest },
+  { size = 'default', variant = 'outlined', className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`size-${size}`], styles[`variant-${variant}`], className]

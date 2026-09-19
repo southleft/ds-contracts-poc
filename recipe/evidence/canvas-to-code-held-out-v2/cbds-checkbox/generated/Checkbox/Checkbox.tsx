@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/checkbox.contract.json (ds.checkbox v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -9,7 +12,7 @@ import { SelectionUncheckedSizeLargeStateDefaultErrorFalse } from '../SelectionU
 import { SizeXsmall } from '../SizeXsmall';
 import styles from './Checkbox.module.css';
 
-export interface CheckboxProps extends HTMLAttributes<HTMLDivElement> {
+export interface CheckboxProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   alignment?: 'left' | 'right';
   size?: 'large' | 'small';
   state?: 'default' | 'error' | 'disabled' | 'hover' | 'focus';
@@ -17,7 +20,7 @@ export interface CheckboxProps extends HTMLAttributes<HTMLDivElement> {
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(function Checkbox(
-  { alignment = 'left', size = 'large', state = 'default', className, children, ...rest },
+  { alignment = 'left', size = 'large', state = 'default', className, ...rest },
   ref,
 ) {
   const classes = [

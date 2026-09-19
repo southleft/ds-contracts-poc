@@ -6,6 +6,9 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   content
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -14,7 +17,10 @@ import { InlineDanger } from '../InlineDanger';
 import { InlineHint } from '../InlineHint';
 import styles from './AtomsInput.module.css';
 
-export interface AtomsInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content'> {
+export interface AtomsInputProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children' | 'content'
+> {
   isFilled?: boolean;
   hasError?: boolean;
   isDisabled?: boolean;
@@ -41,7 +47,6 @@ export const AtomsInput = forwardRef<HTMLDivElement, AtomsInputProps>(function A
     startIcon,
     endIcon,
     className,
-    children,
     ...rest
   },
   ref,

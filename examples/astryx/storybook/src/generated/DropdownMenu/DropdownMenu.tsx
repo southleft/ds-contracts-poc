@@ -7,13 +7,16 @@
  * (trigger, menu). They render as SIBLINGS in a
  * Fragment; there is no single wrapping element (a Modal's backdrop + dialog
  * are position-driven siblings). Each root's class is styles.<rootName>.
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import type { HTMLAttributes } from 'react';
 import { Button } from '../Button';
 import { DropdownMenuItem } from '../DropdownMenuItem';
 import styles from './DropdownMenu.module.css';
 
-export interface DropdownMenuProps extends HTMLAttributes<HTMLDivElement> {
+export interface DropdownMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The menu's item records — one astryx.dropdown-menu-item per record (the extracted repeat channel). */
   items?: Array<{ label: string }>;
   /** Whether the trigger shows the dropdown chevron (extracted, default true). */
@@ -21,13 +24,7 @@ export interface DropdownMenuProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /** PROMOTED from the Phase B composition-tier extraction (round 2) — the flagship composition exhibit: a MULTI-ROOT component (trigger + menu overlay) whose menu holds a REPEATED astryx.dropdown-menu-item collection over the `items` prop. The extraction recovered exactly this shape from Meta's source (fragment root → trigger Button ref + popover.render overlay carrying the items repeat AND the children slot). Curation receipts: (1) the DUAL MODE — items-array XOR compound children — is mutually exclusive in code; the contract carries the DATA mode (repeat), the canvas-projectable one; (2) the DropdownMenuContext provider ref was dropped (context is a code mechanism, not anatomy); (3) the popover overlay projects as a sibling root below the trigger — live placement/anchoring is a design-tool behavior outside the contract (same convention as the composite Modal's roots); (4) the repeat sample is authored (design-time values are not decidable from code — the extractor said so by name). */
-export function DropdownMenu({
-  hasChevron = true,
-  items,
-  className,
-  children,
-  ...rest
-}: DropdownMenuProps) {
+export function DropdownMenu({ hasChevron = true, items, className, ...rest }: DropdownMenuProps) {
   return (
     <>
       <Button label="Options" />

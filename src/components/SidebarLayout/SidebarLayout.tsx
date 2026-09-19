@@ -2,12 +2,15 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/sidebar-layout.contract.json (ds.sidebar-layout v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './SidebarLayout.module.css';
 
-export interface SidebarLayoutProps extends HTMLAttributes<HTMLDivElement> {
+export interface SidebarLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Stationary 240px column — a FIXED track, never redistributed. */
   sidebar?: ReactNode;
   /** Fluid main column — the single fr track absorbs all remaining width. */
@@ -16,7 +19,7 @@ export interface SidebarLayoutProps extends HTMLAttributes<HTMLDivElement> {
 
 /** A stationary px sidebar column beside an fr main column — mixed track kinds in one declared list (G1). The sidebar never reflows; main absorbs the remainder. */
 export const SidebarLayout = forwardRef<HTMLDivElement, SidebarLayoutProps>(function SidebarLayout(
-  { sidebar, main, className, children, ...rest },
+  { sidebar, main, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
