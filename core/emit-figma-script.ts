@@ -41,6 +41,9 @@ import { prepareNativeContractDraft, type NativeContractDraftSource, type Native
  */
 import {
   DECLARED_CHANNELS,
+  absentVariantAxes,
+  absentVariantKey,
+  absentVariantKeys,
   channelDraws,
   TOKEN_CHANNELS,
   gridAxisSizing,
@@ -4013,6 +4016,28 @@ function mapDepProps(
       });
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
+  // bindings.figma.absentVariants (child side): an instance can only select a
+  // variant the child set DRAWS. The wired values plus the child's defaults
+  // for every axis left unwired name one combination; when the child declares
+  // it absent the runtime setProperties would throw mid-paste, so it refuses
+  // here BY NAME instead. Only a dep that declares absences enters this block.
+  const depAbsent = absentVariantKeys(dep);
+  if (depAbsent.size > 0 && !standalone) {
+    const depAxes = absentVariantAxes(dep);
+    const tuple: Record<string, string | boolean | null> = {};
+    for (const { prop } of depAxes) {
+      const wired = out[prop.bindings.figma.property!];
+      const chosen = orderedVariantValues(prop).find((v) =>
+        wired === undefined ? true : axisLabel(prop, v) === String(wired));
+      if (chosen === undefined) { tuple[prop.name] = '\u0000unresolved'; continue; }
+      tuple[prop.name] = chosen === null ? null : prop.type === 'boolean' ? chosen === 'true' : chosen;
+    }
+    if (depAbsent.has(absentVariantKey(depAxes, tuple))) {
+      throw new Error(
+        `FIGMA_COMPONENT_REF_ABSENT_VARIANT: ${parent?.id ?? 'a parent'} places ${dep.id} at ${JSON.stringify(tuple)}, a combination ${dep.id} declares undrawn (bindings.figma.absentVariants) — there is no variant to instantiate; draw it (remove the entry) or change the reference`,
+      );
+    }
+  }
   return out;
 }
 
@@ -5556,6 +5581,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       for (let i = 0; i < axis.values.length; i++) next.push([...combo, i]);
     }
     combos = next;
+  }
+  // bindings.figma.absentVariants: the declared undrawn combinations emit NO
+  // variant — so the generated set is the product minus the list, which is
+  // exactly what the exact variant projection expects of it. Grid cells keep
+  // their Cartesian row/col (an undrawn cell is a hole, never a reflow), and
+  // the default combo is never absent (validateContract), so the first
+  // emitted variant is still the all-defaults one. No declaration → the
+  // filter is never built and `combos` is untouched, byte-identically.
+  const absentKeys = absentVariantKeys(contract);
+  if (absentKeys.size > 0) {
+    const absenceAxes = absentVariantAxes(contract);
+    combos = combos.filter((combo) => {
+      const tuple: Record<string, string | boolean | null> = {};
+      axes.forEach(({ prop, values }, a) => {
+        const v = values[combo[a]!] ?? null;
+        tuple[prop.name] = v === null ? null : prop.type === 'boolean' ? v === 'true' : v;
+      });
+      return !absentKeys.has(absentVariantKey(absenceAxes, tuple));
+    });
   }
   const fontStyles = new Set<string>(['Medium']);
 

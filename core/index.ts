@@ -265,9 +265,12 @@ export {
 export { camel, canonicalPropName } from "./figma-names.js";
 export {
   EXACT_PROJECTION_REFUSAL_CODES,
+  deriveAbsentVariants,
   validateExactProjection,
   validateExactVariantProjection,
+  type AbsentVariantTuple,
   type ExactDumpSet,
+  type ExactProjectionOptions,
   type ExactProjectionRefusal,
   type ExactProjectionRefusalCode,
   type ExactProjectionResult,
@@ -291,6 +294,8 @@ export {
   proposeBatchFromDump,
   proposeFromDump,
   proposeFromDump as proposeFromFigmaDump,
+  SPARSE_MATRIX_INFERENCE_AMBIGUOUS,
+  SparseMatrixInferenceError,
   TEXT_STYLE_IDENTITY_REFUSED,
   TextStyleIdentityError,
   type DumpBatchResult,

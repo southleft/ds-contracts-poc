@@ -1,5 +1,6 @@
 import type { DumpLayout, DumpNode, DumpSet } from "../extract/figma/types.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
+import { validateExactVariantProjection } from "./exact-projection.js";
 import {
   CAPTURED_VARIABLES_ABSENT_RECEIPT,
   capturedTokensDocument,
@@ -115,11 +116,47 @@ const ragged: DumpSet = {
     variant("Size=Lg, Tone=Neutral", { Size: "Lg", Tone: "Neutral" }),
   ],
 };
+// bindings.figma.absentVariants (docs/23 §D.40). The VALIDATOR still refuses
+// this matrix — nothing declares its hole — and that is what these two rows
+// used to observe through the proposer. A DESIGNER's strict-subset set now
+// proposes WITH the hole declared on the contract and is verified exact
+// against the product minus that declaration; what keeps the ragged refusal
+// is pinned in the rows that follow.
+check(
+  "the validator refuses a structured ragged matrix that nothing declares",
+  (() => {
+    const result = validateExactVariantProjection(ragged);
+    return result.status === "refused" && result.code === "EXACT_MATRIX_RAGGED";
+  })(),
+);
 for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
+  const proposed = proposeFromDump(ragged, { ...baseOpts, projectionMode });
+  const declared = (
+    proposed.contract.bindings as { figma: { absentVariants?: unknown } }
+  ).figma.absentVariants;
   check(
-    `${projectionMode} refuses a structured ragged matrix`,
+    `${projectionMode} proposes a designer's strict-subset matrix with the undrawn combination DECLARED, verified exact at 3 rows`,
+    JSON.stringify(declared) === JSON.stringify([{ size: "lg", tone: "danger" }]) &&
+      proposed.projection.status === "verified-exact" &&
+      proposed.projection.observedCount === 3 &&
+      proposed.projection.expectedCount === 3,
+  );
+  check(
+    `${projectionMode} still refuses a ragged matrix whose DEFAULT combination is the undrawn one`,
     refusalCode(() =>
-      proposeFromDump(ragged, { ...baseOpts, projectionMode }),
+      proposeFromDump(
+        { ...ragged, variants: [ragged.variants[1], ragged.variants[2], variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" })] },
+        { ...baseOpts, projectionMode },
+      ),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+  check(
+    `${projectionMode} still refuses a ragged set THIS PIPELINE stamped when no contract in scope declares the hole`,
+    refusalCode(() =>
+      proposeFromDump(
+        { ...ragged, contractId: "check.ragged" } as DumpSet,
+        { ...baseOpts, projectionMode },
+      ),
     ) === "EXACT_MATRIX_RAGGED",
   );
 }
