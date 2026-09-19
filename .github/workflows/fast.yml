@@ -954,6 +954,9 @@ jobs:
       - name: flowbite-dump-propose:check (maintain — the fixture Flowbite dumps still propose the recorded contracts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run flowbite-dump-propose:check
+      - name: design:consumer:test (maintain — the clean-consumer check mounts each Figma variant with correctly typed props)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run design:consumer:test
       - name: host-placement:check (maintain — a minted host section never collides with a sibling, a designer's hand-moved section survives an amend, and placement is a fixed point across two runs)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run host-placement:check
