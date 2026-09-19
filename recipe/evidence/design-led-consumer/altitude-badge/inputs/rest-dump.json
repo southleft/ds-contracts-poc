@@ -14,6 +14,20 @@
       "the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types"
     ],
     "stampsObservable": true,
+    "closure": {
+      "rule": "follow-instances",
+      "cap": 64,
+      "requested": [
+        {
+          "nodeId": "3538:35772",
+          "name": "Badge",
+          "type": "COMPONENT_SET"
+        }
+      ],
+      "pulled": [],
+      "unresolved": [],
+      "cycles": []
+    },
     "variables": {
       "status": "unavailable",
       "cause": "scope",

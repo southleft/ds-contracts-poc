@@ -10,12 +10,16 @@
     "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
     "Badge/Badge.tsx": "2c72fe86021573d757b44d7add97e29097256cfe6aaafe6cf4f7b5d72e2d0da4",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
-    "Icon/Icon.module.css": "e2bda912f4ae0bca42c533c5ab5e8b141fab371209283128a6a62cc2c7b93382",
-    "Icon/Icon.stories.tsx": "e36c0aa86ef8eeba4d96b27f80cf42c049f339dce5287bd50b7a23d37ca7b988",
-    "Icon/Icon.tsx": "a216e49465310f863ca8e13a73685b104994163d23336919141af2b7fa002800",
+    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.stories.tsx": "5efb21d37082bbbd15c867bfd449ea1899174094ec30bc65b32865aeeb5042d4",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "index.ts": "82c5420cf4865583dedd077305c90a9925a720cb8fbfac2a0d3328f69c1e98c2",
-    "tokens.css": "a5d6616ba9a9573f0963542d00c8b40aceda1852d5dfd94191eaa3df0cdcf0e1"
+    "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
+    "Placeholder/Placeholder.stories.tsx": "b6932deddecfac468e0cc5dde35f6f51bab01ad503493f26535247a3ee0bc0de",
+    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
+    "tokens.css": "fedc129ff2befce79d64206612dc963797c38e8b98c25d524f33a38133fb9ef2"
   },
   "cases": [
     {
@@ -4831,26 +4835,44 @@
   },
   "problems": [],
   "limitations": [
-    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
     "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
   "inputs": {
     "degradations": {
       "variables-unavailable": 1,
-      "variable-unresolved": 1320
+      "variable-unresolved": 1333,
+      "vector-geometry-unsupported": 1
     },
-    "stubContracts": [
-      "ds-icon.stub.contract.proposed.json"
-    ],
+    "stubContracts": [],
     "componentFolders": [
       "Badge",
-      "Icon"
+      "Icon",
+      "Placeholder"
+    ],
+    "closure": {
+      "requested": [
+        "Badge"
+      ],
+      "followed": [
+        "Placeholder",
+        "Icon"
+      ],
+      "notFollowed": []
+    },
+    "contractGraph": [
+      {
+        "id": "ds.icon",
+        "name": "Icon",
+        "stub": false,
+        "packaged": true
+      }
     ]
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "d16869d92c3666609d8aed3d0d480122af3ec648df81c0f36f30a5fa1311361e",
+    "tarballSha256": "09d260c258511bca164c9ccdb63368879f79dce6b5a28782b454ac3d7e3d4301",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -4864,6 +4886,12 @@
       "Icon/Icon.module.css",
       "Icon/index.d.ts",
       "Icon/index.js",
+      "Placeholder",
+      "Placeholder/Placeholder.d.ts",
+      "Placeholder/Placeholder.js",
+      "Placeholder/Placeholder.module.css",
+      "Placeholder/index.d.ts",
+      "Placeholder/index.js",
       "index.d.ts",
       "index.js",
       "tokens.css"
@@ -4872,13 +4900,13 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "37fc81b6f3d4d4a8f49c3485c419583a22c31405cbaef52b26a08438b9892a27",
+    "lockfileSha256": "8e4f0199726ad95e41d82c04570feb01852e1a2c58cdd12ae8827d47bc4e18f4",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 26238,
-      "tokenDefinitions": 355,
-      "tokenDefinitionsExpected": 355
+      "bytes": 27249,
+      "tokenDefinitions": 366,
+      "tokenDefinitionsExpected": 366
     }
   },
   "outcome": "consumer-mounted-behaved-and-compared"

@@ -1,0 +1,1070 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "CheckboxGroup",
+  "fileKey": "y83n4o9LOGs74oAoguFcGS",
+  "generatedSha256": {
+    "Checkbox/Checkbox.module.css": "1ca0461a2eb3d8ab0d5aa625d52ea5ce91a32d2bfa010f8d3d78cb5fa50a434b",
+    "Checkbox/Checkbox.stories.tsx": "04fdea2d656ca6c5e0f9820a26479512f621c7d211fe7f50367af54f7ecb86a5",
+    "Checkbox/Checkbox.tsx": "ffecf1121ded216654d8e93d80a894cd73a87e09d1f29c597e99fe823ee8d729",
+    "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
+    "CheckboxGroup/CheckboxGroup.module.css": "fb3a874731a4cd4a6b8c53d6f7b74a1e1e40121ba3d688648112288292ad6941",
+    "CheckboxGroup/CheckboxGroup.stories.tsx": "cd3a8829a7b2fe3c1922a8b6795b3f76df3cde77d9dba80dac71f22fd8600816",
+    "CheckboxGroup/CheckboxGroup.tsx": "17dcdebd1f3eb93b4be78c1e9032ac2d1c9a310a26fa477aef9dba181ffe185c",
+    "CheckboxGroup/index.ts": "de52aa1c080db069bd4340d58ab4961a6f1d2718d0e5a27eb7b4374424f39dcb",
+    "FieldNote/FieldNote.module.css": "a4f179b41acd6a5d9c103908c8c68bbc9c1ed74a09900e9e0b4598a2cfa88786",
+    "FieldNote/FieldNote.stories.tsx": "61ea899e4d969ac9a2b4d89774198fb28b6f11f166d450f5fea31bdab2882b84",
+    "FieldNote/FieldNote.tsx": "ea6038357a95974a588b5e2c6a6b2c7ccae572e7c0a25b3c2b2fb9f8b3058b12",
+    "FieldNote/index.ts": "9e1f5ae71d66b523d1a0a9870dcd95244e42a0740ed901ebc1597cfd43a17008",
+    "index.ts": "7b82cb8279d8763060d926c9f21fd33fc2ec4b9cb6e8a07e3c2ad3fbc03ef080",
+    "tokens.css": "121a427218a0fccf9cf8e08c102f3245fe8ec2e99aad20d764a71f16902522b7"
+  },
+  "cases": [
+    {
+      "key": "legend-shown_orientation-column_state-default",
+      "figmaName": "Legend=Shown, Orientation=Column, State=Default",
+      "nodeId": "3570:1918",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "column",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-column_state-default.png"
+    },
+    {
+      "key": "legend-shown_orientation-column_state-disabled",
+      "figmaName": "Legend=Shown, Orientation=Column, State=Disabled",
+      "nodeId": "3570:1956",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "column",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-column_state-disabled.png"
+    },
+    {
+      "key": "legend-shown_orientation-column_state-error",
+      "figmaName": "Legend=Shown, Orientation=Column, State=Error",
+      "nodeId": "3570:1995",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "column",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-column_state-error.png"
+    },
+    {
+      "key": "legend-shown_orientation-row_state-default",
+      "figmaName": "Legend=Shown, Orientation=Row, State=Default",
+      "nodeId": "3570:2036",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "row",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-row_state-default.png"
+    },
+    {
+      "key": "legend-shown_orientation-row_state-disabled",
+      "figmaName": "Legend=Shown, Orientation=Row, State=Disabled",
+      "nodeId": "3570:2074",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "row",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-row_state-disabled.png"
+    },
+    {
+      "key": "legend-shown_orientation-row_state-error",
+      "figmaName": "Legend=Shown, Orientation=Row, State=Error",
+      "nodeId": "3570:2113",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "shown",
+        "orientation": "row",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-shown_orientation-row_state-error.png"
+    },
+    {
+      "key": "legend-hidden_orientation-column_state-default",
+      "figmaName": "Legend=Hidden, Orientation=Column, State=Default",
+      "nodeId": "3646:23533",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "column",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-column_state-default.png"
+    },
+    {
+      "key": "legend-hidden_orientation-column_state-disabled",
+      "figmaName": "Legend=Hidden, Orientation=Column, State=Disabled",
+      "nodeId": "3646:23541",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "column",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-column_state-disabled.png"
+    },
+    {
+      "key": "legend-hidden_orientation-column_state-error",
+      "figmaName": "Legend=Hidden, Orientation=Column, State=Error",
+      "nodeId": "3646:23549",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "column",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 190,
+        "height": 148,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-column_state-error.png"
+    },
+    {
+      "key": "legend-hidden_orientation-row_state-default",
+      "figmaName": "Legend=Hidden, Orientation=Row, State=Default",
+      "nodeId": "3646:23557",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "row",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-row_state-default.png"
+    },
+    {
+      "key": "legend-hidden_orientation-row_state-disabled",
+      "figmaName": "Legend=Hidden, Orientation=Row, State=Disabled",
+      "nodeId": "3646:23565",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "row",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-row_state-disabled.png"
+    },
+    {
+      "key": "legend-hidden_orientation-row_state-error",
+      "figmaName": "Legend=Hidden, Orientation=Row, State=Error",
+      "nodeId": "3646:23573",
+      "props": {
+        "items": [
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          },
+          {
+            "text": "Checkbox label"
+          }
+        ],
+        "legend": "hidden",
+        "orientation": "row",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox group legend label\nCheckbox label\nCheckbox label\nCheckbox label\nHelper text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 383,
+        "height": 92,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-legend-hidden_orientation-row_state-error.png"
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": "text",
+      "textBearingCells": [
+        "legend-shown_orientation-column_state-default",
+        "legend-shown_orientation-column_state-disabled",
+        "legend-shown_orientation-column_state-error",
+        "legend-shown_orientation-row_state-default",
+        "legend-shown_orientation-row_state-disabled",
+        "legend-shown_orientation-row_state-error",
+        "legend-hidden_orientation-column_state-default",
+        "legend-hidden_orientation-column_state-disabled",
+        "legend-hidden_orientation-column_state-error",
+        "legend-hidden_orientation-row_state-default",
+        "legend-hidden_orientation-row_state-disabled",
+        "legend-hidden_orientation-row_state-error"
+      ],
+      "changedCells": [
+        "legend-shown_orientation-column_state-default",
+        "legend-shown_orientation-column_state-disabled",
+        "legend-shown_orientation-column_state-error",
+        "legend-shown_orientation-row_state-default",
+        "legend-shown_orientation-row_state-disabled",
+        "legend-shown_orientation-row_state-error",
+        "legend-hidden_orientation-column_state-default",
+        "legend-hidden_orientation-column_state-disabled",
+        "legend-hidden_orientation-column_state-error",
+        "legend-hidden_orientation-row_state-default",
+        "legend-hidden_orientation-row_state-disabled",
+        "legend-hidden_orientation-row_state-error"
+      ]
+    },
+    "arrays": [
+      {
+        "prop": "items",
+        "textField": "text",
+        "items": 3,
+        "cellsRenderingAllItems": [
+          "legend-shown_orientation-column_state-default",
+          "legend-shown_orientation-column_state-disabled",
+          "legend-shown_orientation-column_state-error",
+          "legend-shown_orientation-row_state-default",
+          "legend-shown_orientation-row_state-disabled",
+          "legend-shown_orientation-row_state-error",
+          "legend-hidden_orientation-column_state-default",
+          "legend-hidden_orientation-column_state-disabled",
+          "legend-hidden_orientation-column_state-error",
+          "legend-hidden_orientation-row_state-default",
+          "legend-hidden_orientation-row_state-disabled",
+          "legend-hidden_orientation-row_state-error"
+        ]
+      }
+    ],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": true
+    },
+    "variants": [
+      {
+        "prop": "legend",
+        "switchedTo": "shown",
+        "cellsExpectedToChange": [
+          "legend-hidden_orientation-column_state-default",
+          "legend-hidden_orientation-column_state-disabled",
+          "legend-hidden_orientation-column_state-error",
+          "legend-hidden_orientation-row_state-default",
+          "legend-hidden_orientation-row_state-disabled",
+          "legend-hidden_orientation-row_state-error"
+        ],
+        "cellsChanged": []
+      },
+      {
+        "prop": "orientation",
+        "switchedTo": "column",
+        "cellsExpectedToChange": [
+          "legend-shown_orientation-row_state-default",
+          "legend-shown_orientation-row_state-disabled",
+          "legend-shown_orientation-row_state-error",
+          "legend-hidden_orientation-row_state-default",
+          "legend-hidden_orientation-row_state-disabled",
+          "legend-hidden_orientation-row_state-error"
+        ],
+        "cellsChanged": [
+          "legend-shown_orientation-row_state-default",
+          "legend-shown_orientation-row_state-disabled",
+          "legend-shown_orientation-row_state-error",
+          "legend-hidden_orientation-row_state-default",
+          "legend-hidden_orientation-row_state-disabled",
+          "legend-hidden_orientation-row_state-error"
+        ]
+      },
+      {
+        "prop": "state",
+        "switchedTo": "default",
+        "cellsExpectedToChange": [
+          "legend-shown_orientation-column_state-disabled",
+          "legend-shown_orientation-column_state-error",
+          "legend-shown_orientation-row_state-disabled",
+          "legend-shown_orientation-row_state-error",
+          "legend-hidden_orientation-column_state-disabled",
+          "legend-hidden_orientation-column_state-error",
+          "legend-hidden_orientation-row_state-disabled",
+          "legend-hidden_orientation-row_state-error"
+        ],
+        "cellsChanged": []
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render's text boxes masked (inflated by the scorer's own 4 px) and only classifies an over-limit row",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "legend-shown_orientation-column_state-default",
+        "figmaImage": "figma-3570_1918.png",
+        "mismatchPercent": 2.7098150782361308,
+        "withinLimit": true,
+        "textMaskedPercent": 1.6177739430543574,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.61,
+          "figma": 12.3
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 190,
+            "height": 142
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 191,
+            "height": 148
+          }
+        }
+      },
+      {
+        "key": "legend-shown_orientation-column_state-disabled",
+        "figmaImage": "figma-3570_1956.png",
+        "mismatchPercent": 2.4644381223328593,
+        "withinLimit": true,
+        "textMaskedPercent": 1.6177739430543574,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.35,
+          "figma": 12.19
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 190,
+            "height": 142
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 191,
+            "height": 148
+          }
+        }
+      },
+      {
+        "key": "legend-shown_orientation-column_state-error",
+        "figmaImage": "figma-3570_1995.png",
+        "mismatchPercent": 2.756045519203414,
+        "withinLimit": true,
+        "textMaskedPercent": 1.6177739430543574,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.63,
+          "figma": 12.3
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 190,
+            "height": 142
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 191,
+            "height": 148
+          }
+        }
+      },
+      {
+        "key": "legend-shown_orientation-row_state-default",
+        "figmaImage": "figma-3570_2036.png",
+        "mismatchPercent": 3.157608695652174,
+        "withinLimit": true,
+        "textMaskedPercent": 1.1252009287372746,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.27,
+          "figma": 9.43
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 86
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 92
+          }
+        }
+      },
+      {
+        "key": "legend-shown_orientation-row_state-disabled",
+        "figmaImage": "figma-3570_2074.png",
+        "mismatchPercent": 2.8505434782608696,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0716199321307376,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.06,
+          "figma": 9.34
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 86
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 92
+          }
+        }
+      },
+      {
+        "key": "legend-shown_orientation-row_state-error",
+        "figmaImage": "figma-3570_2113.png",
+        "mismatchPercent": 3.214673913043478,
+        "withinLimit": true,
+        "textMaskedPercent": 1.1252009287372746,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.28,
+          "figma": 9.43
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 86
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 92
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-column_state-default",
+        "figmaImage": "figma-3646_23533.png",
+        "mismatchPercent": 3.8229018492176388,
+        "withinLimit": true,
+        "textMaskedPercent": 2.6962899050905955,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.61,
+          "figma": 17.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 122,
+            "height": 109
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 123,
+            "height": 112
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-column_state-disabled",
+        "figmaImage": "figma-3646_23541.png",
+        "mismatchPercent": 3.4601706970128023,
+        "withinLimit": true,
+        "textMaskedPercent": 2.372735116479724,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.35,
+          "figma": 17.51
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 122,
+            "height": 109
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 123,
+            "height": 112
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-column_state-error",
+        "figmaImage": "figma-3646_23549.png",
+        "mismatchPercent": 3.830014224751067,
+        "withinLimit": true,
+        "textMaskedPercent": 2.7897612884670693,
+        "textMaskCoveragePercent": 50.54054054054053,
+        "inkCoveragePercent": {
+          "consumer": 11.63,
+          "figma": 17.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 122,
+            "height": 109
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 190,
+            "height": 148
+          },
+          "figma": {
+            "width": 123,
+            "height": 112
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-row_state-default",
+        "figmaImage": "figma-3646_23557.png",
+        "mismatchPercent": 2.9157608695652173,
+        "withinLimit": true,
+        "textMaskedPercent": 1.687801393105912,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.27,
+          "figma": 10.88
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 53
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 56
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-row_state-disabled",
+        "figmaImage": "figma-3646_23565.png",
+        "mismatchPercent": 2.6385869565217392,
+        "withinLimit": true,
+        "textMaskedPercent": 1.477942489730309,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.06,
+          "figma": 10.74
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 53
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 56
+          }
+        }
+      },
+      {
+        "key": "legend-hidden_orientation-row_state-error",
+        "figmaImage": "figma-3646_23573.png",
+        "mismatchPercent": 2.921195652173913,
+        "withinLimit": true,
+        "textMaskedPercent": 1.7458474727629933,
+        "textMaskCoveragePercent": 39.141304347826086,
+        "inkCoveragePercent": {
+          "consumer": 9.28,
+          "figma": 10.88
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 400,
+            "height": 53
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 383,
+            "height": 92
+          },
+          "figma": {
+            "width": 401,
+            "height": 56
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "variant-axis-inert-ledgered:legend",
+    "variant-prop-discarded:state",
+    "content-size-mismatch:legend-shown_orientation-column_state-default:190x148 vs 190x142",
+    "content-size-mismatch:legend-shown_orientation-column_state-disabled:190x148 vs 190x142",
+    "content-size-mismatch:legend-shown_orientation-column_state-error:190x148 vs 190x142",
+    "content-size-mismatch:legend-shown_orientation-row_state-default:383x92 vs 400x86",
+    "content-size-mismatch:legend-shown_orientation-row_state-disabled:383x92 vs 400x86",
+    "content-size-mismatch:legend-shown_orientation-row_state-error:383x92 vs 400x86",
+    "content-size-mismatch:legend-hidden_orientation-column_state-default:190x148 vs 122x109",
+    "content-size-mismatch:legend-hidden_orientation-column_state-disabled:190x148 vs 122x109",
+    "content-size-mismatch:legend-hidden_orientation-column_state-error:190x148 vs 122x109",
+    "content-size-mismatch:legend-hidden_orientation-row_state-default:383x92 vs 400x53",
+    "content-size-mismatch:legend-hidden_orientation-row_state-disabled:383x92 vs 400x53",
+    "content-size-mismatch:legend-hidden_orientation-row_state-error:383x92 vs 400x53"
+  ],
+  "limitations": [
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 416,
+      "vector-geometry-unsupported": 16
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "Checkbox",
+      "CheckboxGroup",
+      "FieldNote"
+    ],
+    "closure": {
+      "requested": [
+        "Checkbox Group"
+      ],
+      "followed": [
+        "Checkbox",
+        "Field Note"
+      ],
+      "notFollowed": []
+    },
+    "contractGraph": [
+      {
+        "id": "ds.checkbox",
+        "name": "Checkbox",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.field-note",
+        "name": "FieldNote",
+        "stub": false,
+        "packaged": true
+      }
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/checkboxgroup",
+    "tarballSha256": "a345bd4585049968138ec65002d548da10e6ae2bf947165e58fe7e97f6dafdf4",
+    "distFiles": [
+      "Checkbox",
+      "Checkbox/Checkbox.d.ts",
+      "Checkbox/Checkbox.js",
+      "Checkbox/Checkbox.module.css",
+      "Checkbox/index.d.ts",
+      "Checkbox/index.js",
+      "CheckboxGroup",
+      "CheckboxGroup/CheckboxGroup.d.ts",
+      "CheckboxGroup/CheckboxGroup.js",
+      "CheckboxGroup/CheckboxGroup.module.css",
+      "CheckboxGroup/index.d.ts",
+      "CheckboxGroup/index.js",
+      "FieldNote",
+      "FieldNote/FieldNote.d.ts",
+      "FieldNote/FieldNote.js",
+      "FieldNote/FieldNote.module.css",
+      "FieldNote/index.d.ts",
+      "FieldNote/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "bc7c028f70a3e831ae86b0a68c0a7d5c2785a10f003a8fc3ed202fcaecc40f4b",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "builtCss": {
+      "bytes": 28484,
+      "tokenDefinitions": 326,
+      "tokenDefinitionsExpected": 326
+    }
+  },
+  "outcome": "refused-or-failed"
+}
