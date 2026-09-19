@@ -34,6 +34,7 @@ import {
 } from "./react-reference.js";
 import { buildReactOwnershipReference } from "./react-ownership.js";
 import type { ReactSourceProgram } from "./react-source-program.js";
+import { inventoryEvidence } from "./react-validation-evidence.js";
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -435,6 +436,55 @@ test("a loaded built-in reference is refused once a declaration appears; operati
     server.close();
     rmSync(root, { recursive: true, force: true });
     rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test("same-named cases from another workspace cannot follow the loaded source through the HTTP action", async () => {
+  const { root, put } = fixture();
+  put(reactCasesFile, JSON.stringify(declaration()));
+  const repo = mkdtempSync(path.join(tmpdir(), "react-succession-route-"));
+  const current = await buildReactReference(root);
+  const sourceFile = Object.keys(current.files).find(file => file.endsWith("/src/components/ui/badge.tsx"))!;
+  const archivedPin = (n: number, file: string) => {
+    const referenceId = sha(String(n)), id = `10000000-0000-4000-8000-00000000000${n}`;
+    const source = { module: "src/components/ui/badge.tsx", exportName: "Badge", sourceSha256: sha(badgeSource), span: { start: 0, end: 10 } };
+    const report = { id, referenceId, state: "complete", sourceUnchanged: true, rows: [{ id: "badge-default", matched: true, problems: [],
+      ownership: { components: [{ id: "instance-0", source, roots: [""] }], problems: [] } }] };
+    const dir = path.join(repo, "private/react-source-ownership", referenceId, id);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(path.join(dir, "report.json"), JSON.stringify(report));
+    writeFileSync(path.join(dir, "program.json"), JSON.stringify({ version: 1, problems: [], files: { [file]: sha(badgeSource) }, components: [source] }));
+    const seal = JSON.stringify({ version: 1, files: inventoryEvidence(dir) });
+    writeFileSync(path.join(dir, "integrity.json"), seal);
+    return { version: 1, kind: "react-root-draft", referenceId, caseId: "badge-default", ownership: { id, sha256: sha(JSON.stringify(report)) },
+      inventorySha256: sha(seal), matrixRevision: "sha256:" + referenceId };
+  };
+  const pins = [archivedPin(1, sourceFile), archivedPin(2, path.join(repo, "foreign/src/components/ui/badge.tsx")), archivedPin(3, sourceFile)];
+  pins[2].inventorySha256 = "0".repeat(64);
+  const moved = pins.map(pin => ({ operationId: pin.ownership.id, caseId: pin.caseId, kind: "root", followedReferenceId: pin.referenceId,
+    fileKey: "test", phase: "component-structure-observed" }));
+  const adopted: string[] = [];
+  const handle = createReactReferenceService(repo, root, () => ({ jobs: { listReact: () => [], listReactMoved: () => moved,
+    withReadSnapshot: (read: () => unknown) => read(), reactSuccessionSubject: (id: string) => pins.find(pin => pin.ownership.id === id) },
+    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => [] } }) as any);
+  const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.slice(1)));
+  server.listen(0, "127.0.0.1"); await once(server, "listening");
+  const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  try {
+    const loaded = await (await fetch(base + "/react", { method: "POST" })).json();
+    const offered = await (await fetch(base + `/react/${loaded.id}/native`)).json();
+    assert.deepEqual(offered.moved.map((row: { operationId: string }) => row.operationId), [pins[0].ownership.id, pins[2].ownership.id]);
+    assert.equal(offered.moved[0].successionProblem, undefined);
+    assert.equal(offered.moved[1].successionProblem, "react-source-succession-identity-unavailable", "unreadable evidence stays visible and disabled");
+    for (const [index, reason] of [[1, "react-source-succession-component-mismatch"], [2, "react-source-succession-identity-unavailable"]] as const) {
+      const response = await fetch(base + `/react/${loaded.id}/native-operation/${pins[index].ownership.id}/adopt-source`, { method: "POST" });
+      assert.equal(response.status, 409);
+      assert.equal((await response.json()).reason, reason);
+    }
+    assert.deepEqual(adopted, [], "neither request appends a source succession");
+  } finally {
+    handle.close(); server.close();
+    rmSync(root, { recursive: true, force: true }); rmSync(repo, { recursive: true, force: true });
   }
 });
 
