@@ -42,6 +42,7 @@
  * [--token <figma token>] (else FIGMA_TOKEN; without a token the image
  * comparison is recorded as `figma-images-unavailable`, never as a pass).
  */
+import { packageReactLibrary } from './package-react-library.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -313,45 +314,6 @@ export function stateProblems(c: { key: string; interaction: Interaction; state?
 /** Figma axes or values the contract does not map; reported, never skipped. */
 const unmapped = new Set<string>();
 
-function packageLibrary(generatedDir: string, component: string, work: string) {
-  const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
-  mkdirSync(src, { recursive: true }); mkdirSync(dist, { recursive: true });
-  // Copy generated sources except stories (a Storybook consumer is a different check).
-  const copy = (from: string, to: string) => {
-    for (const entry of readdirSync(from)) {
-      const source = path.join(from, entry), target = path.join(to, entry);
-      if (statSync(source).isDirectory()) { mkdirSync(target, { recursive: true }); copy(source, target); }
-      else if (!/\.stories\.[tj]sx?$/.test(entry)) cpSync(source, target);
-    }
-  };
-  copy(generatedDir, src);
-  if (!existsSync(path.join(src, 'index.ts')) || !existsSync(path.join(src, component))) throw new Error('design:consumer:check — generated dir lacks index.ts or the component folder');
-  // Transpile TS/TSX → ESM JS, file by file (no bundling), and copy CSS as files.
-  const sources: string[] = [];
-  const walk = (dir: string) => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p) : sources.push(p); } };
-  walk(src);
-  const tsSources = sources.filter(f => /\.tsx?$/.test(f));
-  run(path.join(ROOT, 'node_modules', '.bin', 'esbuild'), [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', `--outbase=${src}`, `--outdir=${dist}`], ROOT);
-  for (const f of sources.filter(f => f.endsWith('.css'))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
-  // Declarations, so a TypeScript consumer sees the contract-derived props.
-  writeFileSync(path.join(pkgDir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { declaration: true, emitDeclarationOnly: true, jsx: 'react-jsx', module: 'ESNext', moduleResolution: 'Bundler',
-    target: 'ES2022', strict: true, skipLibCheck: true, outDir: 'dist', rootDir: 'src', types: [],
-    // Declaration emission needs React's types. This packaging step is the
-    // repository's tool; only the consumer below must stay free of repo paths.
-    paths: { react: [path.join(ROOT, 'node_modules', '@types', 'react', 'index.d.ts')], 'react/jsx-runtime': [path.join(ROOT, 'node_modules', '@types', 'react', 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
-  writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
-  run(path.join(ROOT, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], pkgDir);
-  const name = `@ds-contracts-generated/${component.toLowerCase()}`;
-  writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
-    description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
-    files: ['dist'], main: './dist/index.js', types: './dist/index.d.ts',
-    exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' }, './tokens.css': './dist/tokens.css', './package.json': './package.json' },
-    // The barrel imports tokens.css on purpose; a consumer bundler must not drop it.
-    sideEffects: ['./dist/index.js', '**/*.css'], peerDependencies: { react: '>=18', 'react-dom': '>=18' } }, null, 2));
-  const packed = run('npm', ['pack', '--json', '--pack-destination', work], pkgDir);
-  const tarball = path.join(work, JSON.parse(packed)[0].filename as string);
-  return { name, tarball, tarballSha256: sha256(readFileSync(tarball)), dist };
-}
 
 function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string) {
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
@@ -469,7 +431,7 @@ async function main() {
   receipt.inputs.contractGraph = contractGraph(contract, siblings).map(ref => ({ ...ref, packaged: ref.name !== null && receipt.inputs.componentFolders.includes(ref.name) }));
   for (const ref of receipt.inputs.contractGraph) if (!ref.packaged) problems.push(`dependency-not-packaged:${ref.id}`);
   try {
-    const lib = packageLibrary(args.generated, args.component, work);
+    const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
     const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
     const consumer = writeConsumer(work, lib, args.component, cases, reactVersion);
