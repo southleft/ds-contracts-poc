@@ -330,6 +330,18 @@ jobs:
       - name: recipe:fidelity:plugin:check (the paste-verb program of every proposed row, re-scored offline against the same reference; parity with the gate row)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:fidelity:plugin:check
+      # The CODE-LED twin of the row above: React -> contract -> native Figma.
+      # Offline: from the committed bytes in recipe/evidence/react-native-fidelity-v1/
+      # it recomputes, per variant, the historical ink-trim score, the
+      # layout-origin-aligned score and the glyph-masked score with the existing
+      # scorers unchanged, applies the F1 row policy (a failing row must be a named,
+      # measured font residual or a proven trim-threshold artefact), and holds the
+      # shrink-only ratchet, every sha256 and the generated REPORT.md. Measured, not
+      # graded. Re-recording needs the private operation archive and is a separate
+      # local step (npm run react:native:fidelity:record).
+      - name: react:native:fidelity:check (React originals vs native Figma exports - three numbers per variant recomputed from committed bytes; ratchet and tamper tests)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run react:native:fidelity:check
       - name: typecheck:recipe (the current recipe surface typechecks; frozen lineage files named, not edited)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run typecheck:recipe
