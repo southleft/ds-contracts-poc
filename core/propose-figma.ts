@@ -985,7 +985,7 @@ const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled 
 type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
 const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
 // Observation-only provenance: generated identifiers flatten namespace separators.
-const stubObservedNames = new WeakMap<object, string>();
+const stubObservedNames = new WeakMap<object, string[]>();
 
 /** "IconButton" / "close_button" / "Split Button A" → lower-case words. */
 export function nameWords(name: string): string[] {
@@ -1046,9 +1046,16 @@ interface ContractLike {
 function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]; role?: string } {
   if (stub) {
     const observed = stubObservedNames.get(c as object);
-    const leaf = observed === undefined ? (typeof c.name === 'string' ? c.name : '') : observed.split('/').map(part => part.trim()).filter(Boolean).at(-1) ?? '';
-    const read = inferSemantics(nameWords(leaf).join(' '), [], false);
-    return { elements: read ? [read.element] : [], ...(read?.role ? { role: read.role } : {}) };
+    // Main names may end in variant values (Button/Icon/Default/sm); the
+    // actual instance layer can still say Button (Icon). Keep both observed
+    // leaf names, without treating a namespace segment as a control name.
+    const names = observed ?? [typeof c.name === 'string' ? c.name : ''];
+    const reads = names.map(name => {
+      const leaf = observed === undefined ? name : name.split('/').map(part => part.trim()).filter(Boolean).at(-1) ?? '';
+      return inferSemantics(nameWords(leaf).join(' '), [], false);
+    }).filter((read): read is NonNullable<typeof read> => read !== null);
+    const role = reads.find(read => read.role && INTERACTIVE_ROLES.has(read.role))?.role;
+    return { elements: [...new Set(reads.map(read => read.element))], ...(role ? { role } : {}) };
   }
   const sem = c.semantics ?? {};
   return {
@@ -2301,6 +2308,8 @@ export interface StubIconAsset {
 interface StubCapture {
   id: string;
   instanceOf: string;
+  /** Observation-only layer names; never serialized as stub semantics. */
+  instanceNames?: string[];
   /** The observed owning-set publish key (dump v1.5) — carried onto the
    *  stub's bindings.figma.anchors.componentSetKey so importing the real set later
    *  LINKS back to this identity by key. */
@@ -7552,6 +7561,8 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
+    capture.instanceNames ??= [];
+    if (!capture.instanceNames.includes(o.node.name)) capture.instanceNames.push(o.node.name);
     if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
     if (o.node.bbox) {
       capture.observed.push({
@@ -13151,7 +13162,7 @@ function proposeFromDumpFenced(
   const childStubs: Array<Record<string, unknown>> = [];
   for (const capture of ctx.stubs.values()) {
     const built = buildChildStub(capture, ctx, opts.fileKey ?? null);
-    stubObservedNames.set(built.contract, capture.instanceOf);
+    stubObservedNames.set(built.contract, [...new Set([capture.instanceOf, ...(capture.instanceNames ?? [])])].sort());
     childStubs.push(built.contract);
     if (built.geometry) {
       if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
