@@ -40,9 +40,14 @@ export function ReactInitialInspection({ referenceId, caseId, available, prepare
   return <section aria-label="Initial state inspection">
     <h3>Inspect initial states</h3>
     <p>Vary finite caller-supplied inputs on fresh mounts of the original component, then verify the original rendering is restored. This distinguishes initial values from live updates. It does not create Figma components or qualify interaction behavior.</p>
-    <button type="button" disabled={!available || busy || result?.phase === 'running' || result?.phase === 'complete'} onClick={() => void start()}>
-      {result?.phase === 'complete' ? 'Initial observations saved' : result?.phase === 'running' || busy ? 'Inspecting initial states…' : `Inspect ${caseId} initial states`}
+    <button type="button" disabled={!available || busy || result?.phase === 'running' || result?.phase === 'complete' && !result.reobservable} onClick={() => void start()}>
+      {result?.phase === 'running' || busy ? 'Inspecting initial states…' : result?.phase === 'complete' ? result.reobservable ? 'Observe again with the current observer' : 'Initial observations saved' : `Inspect ${caseId} initial states`}
     </button>
+    {result?.reobservable && <p>{result.reobservable === 'observer-changed'
+      ? 'The observer has changed since this observation was saved.'
+      : result.reobservable === 'evidence-unobserved-by-recorded-observer' ? 'The current assembler names evidence this observation never recorded.'
+      : 'This observation was saved before observer versions were recorded, and the current assembler names evidence it never observed.'} Observing again saves a new run beside it; the saved run and any operation that pins it are unchanged.</p>}
+    {result?.lastAttempt && <p role="alert">The latest observation attempt failed ({result.lastAttempt.problems.join(', ') || 'no problem recorded'}). The saved observation above is unchanged.</p>}
     {!available && <p>Prepare a supported Figma root from the structure observation first; its saved source archive also contains this cohort’s stateful cases.</p>}
     {error && <p role="alert">{error}</p>}
     {result && <>

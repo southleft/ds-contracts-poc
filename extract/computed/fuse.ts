@@ -1929,12 +1929,12 @@ export function enrichLayout(
   const staticParts = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const out: LayoutEnrichment = { handled: new Map(), enriched: [], contradictions: [], receipts: [] };
   const enabled = space.enumeration.combos.filter(isEnabled);
-  // The props a layoutByProp map may legally ride: validate.ts:310 requires a
-  // declared ENUM. `space.axes` also carries presence axes, which fuse into
-  // BOOLEAN props.
+  // The props a layoutByProp map may legally ride (validate.ts): a declared ENUM, or the ONE boolean with drawn planes — optional, VARIANT-bound,
+  // with an omitted plane (tokensByProp's rule). `space.axes` also carries presence axes, which fuse into plain
+  // BOOLEAN props and stay refused.
   const enumAxisProps = new Set(
     [...(contract.props ?? []), ...(space.contract.props ?? [])]
-      .filter((pr) => Array.isArray((pr as { type?: { enum?: unknown } }).type?.enum))
+      .filter((pr) => Array.isArray((pr as { type?: { enum?: unknown } }).type?.enum) || (pr.type === 'boolean' && pr.bindings?.figma?.kind === 'VARIANT' && pr.bindings.figma.unsetValue !== undefined))
       .map((pr) => pr.name),
   );
   for (let pi = 0; pi < a.baseFlat.length; pi++) {

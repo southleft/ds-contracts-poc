@@ -3923,7 +3923,7 @@ designer only when a stamp was observable, and that is now a POSITIVE reader fac
   know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
 - anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
   bridge that never read plugin data — is not observable, and a strict-subset set
-  refuses `EXACT_MATRIX_RAGGED … stamps-not-observable`.
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
 
 **This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
 file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
@@ -3973,6 +3973,19 @@ walked the whole product to validate one tuple. Two rules, both by name:
   product at all — each tuple is checked against the axes and ranked by mixed
   radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
   under a millisecond.
+
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
 
 **The ambiguity fence.** Every per-axis inversion rule ("this value is a function
 of axis A") was written for full coverage, where the explanation is unique: if a
@@ -4059,10 +4072,10 @@ unchanged 5 % limit):
 that is the fail-closed rule working.** The exam reads a canvas through a read-only
 observe whose scene read-back ignores plugin data by design
 (`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
-"unstamped" proves nothing: the receipt stays `refused-by-name` at propose, its
-message now carrying the reason (`… Cartesian definitions require 40.
-stamps-not-observable: …`; one line in each of four evidence files, re-recorded with
-the gate's own `--write --subject cbds-alert`), the tally stays **5 accounting-clean,
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
 19 refused by name**, and the three derived status lines are unchanged. The first
 cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
 that part of the old refusal had merely MOVED (next paragraph), and H2 removed the

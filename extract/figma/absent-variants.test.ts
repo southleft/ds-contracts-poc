@@ -468,8 +468,9 @@ test('the SAME pipeline-written set that lost a variant refuses whether or not t
   assert.match(skip(lost(true)({ stampsObservable: true })), /Source matrix has 5 rows; Cartesian definitions require 6\.$/, 'stamped: a generated set that lost a variant, as always');
   assert.match(skip(lost(true)({})), /Cartesian definitions require 6\.$/);
   // UNSTAMPED response, nothing said about the request: this used to propose absentVariants=[{tone:b,size:l}] as verified-exact.
-  assert.match(skip(lost(false)({})), /Cartesian definitions require 6\. stamps-not-observable: /);
-  assert.throws(() => exact(lost(false)({}).Tag as DumpSet, false), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /stamps-not-observable/.test(e.message));
+  assert.match(skip(lost(false)({})), /Cartesian definitions require 6\.$/);
+  assert.match(proposeBatchFromDump(lost(false)({}), opts).skipped[0].detail!, /^stamps-not-observable: /);
+  assert.throws(() => exact(lost(false)({}).Tag as DumpSet, false), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /stamps-not-observable/.test(e.detail ?? '') && e.message === 'Source matrix has 5 rows; Cartesian definitions require 6.');
   // The fetch layer asked for the plane and nothing is stamped: a designer's set. The batch reads the fact from the dump itself.
   const observed = proposeBatchFromDump(lost(false)({ stampsObservable: true }), opts);
   assert.deepEqual(observed.skipped, []);
@@ -496,6 +497,44 @@ test('a "star" set (the default plus each axis varied alone) is not a product wi
   assert.equal(deriveAbsentVariants(starSet(13, 2)), null, 'the reader door holds the same cap');
   // Exactly half undrawn is still a product with holes (2 of 4 — the diagonal sets above); one more undrawn is not.
   assert.equal(EXACT_ABSENT_VARIANTS_MAX_PRODUCT, ABSENT_VARIANTS_MAX_PRODUCT, 'one bound, two doors');
+});
+
+test('the initial exactness check refuses an oversized sparse product before expanding it', () => {
+  const set = starSet(13, 2), flatMap = Array.prototype.flatMap;
+  // A bounded sentry makes the pre-fix expansion fail without risking an OOM.
+  // The public proposer calls this validator before its own product limit.
+  Array.prototype.flatMap = function (this: unknown[], ...args: Parameters<typeof flatMap>) {
+    const result = flatMap.apply(this, args);
+    assert.ok(result.length <= EXACT_ABSENT_VARIANTS_MAX_PRODUCT, 'expanded a product beyond the declared limit');
+    return result;
+  } as typeof flatMap;
+  try {
+    const result = validateExactVariantProjection(set);
+    assert.equal(result.status, 'refused');
+    if (result.status !== 'refused') throw Error('expected refusal');
+    assert.equal(result.code, 'EXACT_MATRIX_RAGGED');
+    assert.equal(result.refusals[0].expected, 8192);
+    assert.equal(result.refusals[0].actual, 14);
+    assert.equal(result.refusals[0].tuples, undefined, 'oversized missing tuples are counted, not enumerated');
+    assert.throws(() => exact(set), /sparse-matrix-product-too-large/);
+  } finally { Array.prototype.flatMap = flatMap; }
+});
+
+test('a fully observed large product still verifies, and its returned rows must remain complete', () => {
+  const set = starSet(13, 2), names = Object.keys(set.propertyDefinitions!);
+  set.variants = Array.from({ length: 8192 }, (_, mask) => ({
+    ...set.variants[0],
+    variantProperties: Object.fromEntries(names.map((name, index) => [name, `v${(mask >>> index) & 1}`])),
+  }));
+  const full = validateExactVariantProjection(set, set.variants);
+  assert.equal(full.status, 'verified-exact');
+  if (full.status !== 'verified-exact') throw Error('expected full coverage');
+  assert.equal(full.expectedCount, 8192);
+  assert.equal(full.observedCount, 8192);
+  const missing = validateExactVariantProjection(set, set.variants.slice(1));
+  assert.equal(missing.status, 'refused');
+  if (missing.status !== 'refused') throw Error('expected missing-row refusal');
+  assert.equal(missing.code, 'EXACT_ROWS_MISSING');
 });
 
 test('referee: mostly-undrawn and product-too-large are refused by name, and validating ONE tuple over a huge product costs nothing', () => {
