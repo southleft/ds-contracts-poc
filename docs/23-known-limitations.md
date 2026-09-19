@@ -1515,7 +1515,7 @@ before the check — neither has been scheduled.
 
 ## B.40 A revoked update write can still execute late
 
-*Synthetic-only until shown live.* A native update write runs only after the companion asks the app to
+*The landed-write recovery was shown live on 2026-09-19; the untouched and late-execution interleavings below remain synthetic.* A native update write runs only after the companion asks the app to
 `begin` it. If that companion then dies, an operator can **attest the companion
 is gone** (`…/update/<proposal>/attest-dead`). The journal records
 `update-attempt-attested-dead`, revokes the attempt, and a canvas read dispatched
@@ -1539,6 +1539,28 @@ or `no-op` stops it. A stopped update is `update-recovery-required` with
 `native-update-late-write-result-contradicts-canvas`, and every chain guard
 treats it as a written, unverified correction. The settling read is final
 only until such a result arrives.
+
+**Live recovery and a corrected inference (AGENT decision, 2026-09-19).** In
+Evaluations, Switch update `b5b224ff…` began its reviewed 0.5 → 0.4 correction
+before the local server was interrupted and the companion closed. The journal
+contained `begin` without a result. After restart, the operator attested through
+the application, reopened the companion and chose **Resolve by reading the
+canvas**. The companion replayed its saved result after revocation; it was kept
+as evidence only. The settling canvas read found all three existing disabled
+variants and their owned variable at float32 0.4, and a separate read verified
+the update. A late delivery therefore does not prove a companion was alive at
+attestation time or establish when its write ran. The review copy now describes
+that uncertainty and directs an unresolved write to its canvas read. The alarm
+and conservative settlement rules are unchanged. Reversal: revert the copy and
+comment correction; no journal migration is needed. Evidence:
+`private/begun-write-recovery-2026-09-19-kg6h29ab/`, original append-only update
+journal, and the visible application review. This qualifies this recovery path,
+not the complete product or visual fidelity.
+The source was then restored byte-for-byte; reverse update `4b663716…` verified
+the same three components and variable back at 0.5. With the plugin closed, the
+nine native Switch variants were inspected on the live canvas. No native node
+was created by this trial. Three checked-state source/native pairs still lack
+alignment metadata, so their displayed exports remain diagnostic.
 
 **What it does not guarantee.** It cannot stop a companion that is in fact alive
 and already past `begin`. The companion runs inside the Figma plugin sandbox,

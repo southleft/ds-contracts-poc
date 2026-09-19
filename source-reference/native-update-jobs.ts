@@ -255,7 +255,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         if(!state.revoked.has(event.envelope?.attemptId) || write?.kind!=='dispatch' ||
             events.some(e=>e.kind==='late-result-after-revocation'&&e.envelope.attemptId===event.envelope.attemptId)) fail('late-result-invalid');
         correlate(event.envelope,write.command);
-        // Any result proves the attestation was wrong: that companion was alive.
+        // A result can be a saved response delivered after reconnecting. Its
+        // arrival does not establish when the write ran or disprove the attestation.
         state.alarms=[...new Set([...state.alarms,'native-update-late-result-after-revocation'])];
         // Before settlement it is evidence only: the canvas read still decides.
         // After settlement it is judged like any late write result, by the same allow-list.
