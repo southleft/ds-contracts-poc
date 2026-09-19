@@ -5352,8 +5352,9 @@ content pass.
   so a structural parent around it keeps its `button`.
 - *The single-set `proposeFromDump` entry* (no batch) applies no Rule A.
 - *Stub names remain provisional semantic evidence.* The in-memory observed name
-  retains slash-delimited namespaces; only its final component segment enters
-  the control-name inference. A namespace such as `Button / Decoration` does
+  retains slash-delimited namespaces; only the final component segment and the observed instance layer leaf
+  enter the control-name inference. A main ending in variant values such as
+  `Button (Icon)/Default/sm` retains the actual `Button (Icon)` layer signal. A namespace such as `Button / Decoration` does
   not make its `Chevron` leaf interactive, while `Controls / CloseButton`
   remains a control signal. The generated stub contract and its serialized name
   are unchanged. External stubs without that observation retain the existing
