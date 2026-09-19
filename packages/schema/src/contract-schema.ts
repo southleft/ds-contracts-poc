@@ -937,6 +937,20 @@ export const channelDraws = (channel: string, value: string): boolean => {
 
 const kw = (...words: string[]) => new RegExp(`^(${words.join("|")})$`);
 
+/** THE PIPELINE DEFAULT FAMILY — what "no font-family on the contract" MEANS.
+ *  The Figma writer draws every text node in it unless a family is carried,
+ *  and the proposer therefore does not carry it (door
+ *  propose.font-family-inter-is-default). One definition: the proposer, the
+ *  React emitters and the web-components emitter all read this. */
+export const DEFAULT_FONT_FAMILY = "Inter";
+/** The CSS spelling of that default. A LITERAL stack, not a token ref: a
+ *  foreign corpus (design-led `imported.*` tokens) defines no family token, a
+ *  `var()` naming one would be an undefined custom property in a clean
+ *  consumer, and a corpus whose sans token is not Inter would make code
+ *  disagree with the canvas. The face itself is the consumer's to provide
+ *  (FC-FONT-SUBSTRATE); the generic tail keeps an absent face sans-serif. */
+export const DEFAULT_FONT_STACK = `${DEFAULT_FONT_FAMILY}, system-ui, sans-serif`;
+
 export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   // -- absolute-position round (MUI Slider/Switch): overlay-anatomy facts ---
   transform: {

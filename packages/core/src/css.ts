@@ -24,6 +24,8 @@ import {
   ALIGN_CSS,
   boolProps,
   cssVar,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumCombos,
   enumProps,
   holderDeclaresPosition,
@@ -112,6 +114,11 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     '}',
   );
 
+  // NO DECLARED FAMILY = THE PIPELINE DEFAULT (anatomy.ts defaultFontFamilyParts).
+  // Pushed LAST in a part's base rule: the UA resets above spell `font:
+  // inherit`, a shorthand that would erase a family written before it.
+  const defaultFamily = defaultFontFamilyParts(contract);
+
   const checkToken = (tokenPath: string, context: string): boolean => {
     if (!tokenInventory.has(tokenPath)) {
       errors.push(
@@ -192,6 +199,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       }
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
+      if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
       if (decls.length > 0) {
         lines.push('', `.${cssIdentifier(name)} {`, ...decls.map((d) => `  ${d};`), '}');
       }
@@ -647,6 +655,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     }
     rootDecls.push(`${cssProp}: ${value}`);
   }
+  if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
 
   // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
   // standard non-visual hit-target extension (an absolutely centered ::before
@@ -1040,6 +1049,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
     }
+    if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
     // img) fills its inset box — for replaced elements, auto width under
     // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.
