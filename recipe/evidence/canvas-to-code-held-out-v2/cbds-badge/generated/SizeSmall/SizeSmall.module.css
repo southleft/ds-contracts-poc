@@ -26,3 +26,7 @@
   width: var(--imported-stub-size-small-root-width-xsmall);
   height: var(--imported-stub-size-small-root-height-xsmall);
 }
+
+.iconSwap {
+  font-family: Inter, system-ui, sans-serif;
+}

@@ -33,6 +33,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, m
 import { rootContentJsx, literalTextJsx } from './root-content.js';
 import {
   TOKEN_CHANNELS,
+  DEFAULT_FONT_STACK,
   borderStyleDecls,
   isNativeCheckablePart,
   pascal,
@@ -63,6 +64,7 @@ import {
   topRoots,
   UA_MARGIN_ELEMENTS,
   validateContract,
+  defaultFontFamilyParts,
   ELEMENT_META,
   holderDeclaresPosition,
 } from './emit-react.js';
@@ -176,6 +178,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // Style compilation: base per part + per-enum-value overrides per part.
   // -------------------------------------------------------------------------
   const baseStyles: Record<string, StyleRecord> = {};
+  const defaultFamily = defaultFontFamilyParts(contract);
   /** `${prop}-${value}` → partName → overrides. */
   const variantStyles: Record<string, Record<string, StyleRecord>> = {};
   const partVariantProps = new Map<string, Set<string>>();
@@ -460,6 +463,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       s[camel(cssProp)] = value;
     }
+    // No declared family = the pipeline default (defaultFontFamilyParts) —
+    // an inline style inherits the host page's font exactly as a class does.
+    if (defaultFamily.has(part)) s.fontFamily = DEFAULT_FONT_STACK;
     // layoutByProp: per-enum-value layout overrides merged over the base.
     if (part.layoutByProp) {
       for (const [value, _override] of Object.entries(part.layoutByProp.map)) {

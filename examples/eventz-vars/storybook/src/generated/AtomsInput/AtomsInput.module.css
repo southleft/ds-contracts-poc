@@ -47,6 +47,7 @@
   font-size: var(--imported-text-body-sm-font-size);
   font-weight: var(--imported-text-body-sm-font-weight);
   line-height: var(--imported-text-body-sm-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .endIcon {

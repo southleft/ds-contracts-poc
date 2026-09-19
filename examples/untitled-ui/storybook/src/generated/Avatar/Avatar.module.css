@@ -238,6 +238,7 @@
   right: var(--imported-avatar-text-right);
   text-align: center;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-xl .Text {

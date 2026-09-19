@@ -542,4 +542,5 @@
   font-size: var(--imported-text-text-sm-medium-font-size);
   font-weight: var(--imported-text-text-sm-medium-font-weight);
   line-height: var(--imported-text-text-sm-medium-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }

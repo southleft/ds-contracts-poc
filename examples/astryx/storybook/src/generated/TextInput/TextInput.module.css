@@ -113,6 +113,7 @@
   cursor: text;
   overflow-x: clip;
   overflow-y: clip;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .part-1-0-0::placeholder {

@@ -120,6 +120,7 @@
   overflow-y: hidden;
   position: absolute;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-large .label {

@@ -5411,9 +5411,9 @@
       "line": 4656,
       "kind": "subtractive",
       "ruleLine": 4657,
-      "premise": "Inter is the pipeline's own default in every emitter, so Inter is not a fact.",
+      "premise": "Inter is the pipeline's own default (schema DEFAULT_FONT_FAMILY): the Figma writer draws it and the React CSS-modules, React inline and web-components emitters declare it on every text-drawing part with no family (core defaultFontFamilyParts), so Inter is not a fact.",
       "effect": "Drops the observed family.",
-      "counterExample": "If any downstream emitter's default is ever not Inter this is a silent wrong render.",
+      "counterExample": "LIVE until 2026-09-18: the code emitters declared nothing, so a clean consumer rendered the host's serif (CBDS Badge, 0 of 72 variants inside 5 %; 18 of 72 once declared). Still open on core/emit-html.ts, which declares no family and emits no declared facts at all.",
       "receipt": {
         "channel": "none"
       }

@@ -164,6 +164,7 @@
   display: inline;
   cursor: pointer;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .root[data-clickable] .label-2 {
@@ -207,6 +208,7 @@
   min-width: var(--imported-shared-size-0);
   display: inline;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .root[data-linked] .label {
