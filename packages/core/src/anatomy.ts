@@ -244,7 +244,9 @@ export function defaultFontFamilyParts(contract: Contract): Set<Part> {
     const { parts, ...own } = part;
     const entry = !TEXTLESS_INPUT_TYPES.has(part.attrs?.type ?? '') && elements.some((e) => e !== undefined && TEXT_ENTRY_ELEMENTS.has(e));
     const rootChildren = top && single && !parts && !part.slot && childrenText;
-    const draws = part.content !== undefined || part.text !== undefined || entry || rootChildren;
+    // `text: ""` is intentional emptiness (a skeleton block) — no glyph, no family.
+    const staticText = [part.text, ...Object.values(part.textByProp?.map ?? {})].some((t) => typeof t === 'string' && t !== '');
+    const draws = part.content !== undefined || staticText || entry || rootChildren;
     const spoken = inherited || namesFamily(own);
     if (draws && !spoken) out.add(part);
     for (const child of Object.values(parts ?? {})) visit(child, [child.element], false, spoken || out.has(part));

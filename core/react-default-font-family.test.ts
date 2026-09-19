@@ -72,6 +72,7 @@ test("a textless component, a slot and a native checkable gain nothing", () => {
   for (const anatomy of [
     {},
     { slot: { name: "children" } },
+    { parts: { block: { element: "span", text: "" } } }, // intentional emptiness draws no glyph
     { parts: { box: { tokens: { "background-color": "{paint.base}" } }, native: { element: "input", attrs: { type: "checkbox" } } } },
   ]) {
     const s = surfaces(contract(anatomy));
