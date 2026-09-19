@@ -11,6 +11,8 @@ import { revisionOf } from '../core/contract-provenance.js';
 import { evidenceSha } from './react-validation-evidence.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { emitHtml } from '../core/emit-html.js';
+import { emitTokensCss } from '../packages/core/src/emit-tokens-css.js';
+import { chromium } from 'playwright-core';
 
 // A track with one part below it: the part is sized by the component's own rule
 // under an ancestor condition, and moves to the far end in one state.
@@ -57,8 +59,11 @@ function domain(t: { after(fn: () => void): void }, exportName: 'Track' | 'Requi
       snapshots[id] = snapshot;
       return { id, ...entry, status: 'observed' as const, restored: true, image: snapshot.image, treeSha256: snapshot.treeSha256 };
     });
-    return compileReactInitialContract(program, ownership, tree, { version: 1 as const, qualification: 'finite-initial-mounts-only' as const, acceptedContract: null,
+    const sealed = JSON.stringify(snapshots);
+    const result = compileReactInitialContract(program, ownership, tree, { version: 1 as const, qualification: 'finite-initial-mounts-only' as const, acceptedContract: null,
       instanceId: 'instance-0', ...facts, planned: plan.length, problems: [], rows }, snapshots);
+    assert.equal(JSON.stringify(snapshots), sealed, 'compilation preserves the original observation bytes');
+    return result;
   };
   const child = (s: Snapshots[string]) => (s.tree.nodes[0] as { el: CapturedNode }).el;
   return { build, child, plan };
@@ -69,6 +74,7 @@ test('a part below the root keeps its own fixed size, and a translation by exact
   assert.equal(plan.length, 3, 'omitted, false and true');
   const result = build(); assert.equal(result.status, 'compiled-draft', result.problems.join('\n'));
   for (const variant of result.compiled!.component!.variants) {
+    assert.equal(variant.spec.fixedHeight?.px, 1177 / 64, 'the native root keeps the actual layout unit, not its rounded CSSOM text');
     const part = variant.spec.children![0];
     assert.deepEqual([part.fixedWidth?.px, part.fixedHeight?.px], [16, 16], 'the own declared size reaches the native part');
     assert.equal(variant.spec.layout?.primary, variant.name === 'on=true' ? 'MAX' : 'MIN', variant.name);
@@ -194,4 +200,31 @@ test('a per-state alignment needs a drawn plane to ride: a required boolean has 
   contract.anatomy.root.layoutByProp!.map = { maybe: { justify: 'end' } };
   const unknown: string[] = []; validateContract(contract, new Map([[contract.id, contract]]), unknown, new Map());
   assert.ok(unknown.some(e => e.includes('layoutByProp map key "maybe" is not a value of prop "on"')), unknown.join('\n'));
+});
+
+
+test('used size recovery preserves emitted browser geometry and refuses ambiguous serialized sizes', async t => {
+  const {build,child}=domain(t,'Track');
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  const page=await browser.newPage();
+  for(const [used,exact] of [['18.3906px',1177/64],['118.391px',7577/64]] as const){
+    const result=build(s=>{
+      child(s).style.translate='none';s.tree.style.height=used;
+      s.styleOrigin.roots[0].sizes![1]=fixed('height',used);
+    });
+    assert.equal(result.status,'compiled-draft',result.problems.join(','));
+    for(const v of result.compiled!.component!.variants)assert.equal(v.spec.fixedHeight?.px,exact);
+    const c=result.compiled!.contract!,h=emitHtml(c,{contracts:new Map([[c.id,c]]),icons:new Map(),tokens:result.compiled!.tokens} as never);
+    const tokens=emitTokensCss([{name:'default',selector:':root',parts:[{slot:'observed',tree:result.compiled!.tokens!}]}]);
+    await page.setContent('<style>'+tokens.css+'\n'+h.css+'</style>'+h.html);
+    const heights=await page.locator('.showcase__item > button').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().height));
+    assert.ok(heights.length>0);assert.ok(heights.every(height=>height===exact),JSON.stringify(heights));
+  }
+  const nested=build(s=>{child(s).style.translate='none';child(s).style.height='18.3906px';s.descendantSizes!.nodes[0].sizes[1]=fixed('height','18.3906px');});
+  assert.equal(nested.status,'compiled-draft');
+  for(const v of nested.compiled!.component!.variants)assert.equal(v.spec.children![0].fixedHeight?.px,1177/64);
+  for(const invalid of ['10000px','18.39px']){
+    const result=build(s=>{child(s).style.translate='none';s.tree.style.height=invalid;s.styleOrigin.roots[0].sizes![1]=fixed('height',invalid);});
+    assert.deepEqual(result.problems,['observed-content-used-size-unqualified:root:height']);
+  }
 });
