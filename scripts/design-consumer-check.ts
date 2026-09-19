@@ -77,7 +77,16 @@ function arraySamples(contract: any): Record<string, unknown[]> {
   return out;
 }
 
-function deriveCases(dump: any, contract: any, component: string): Case[] {
+/** A VARIANT axis may back a BOOLEAN prop (`rounded=false`). Its mapping keys
+ *  are strings; passing "false" to a boolean prop is truthy and mounts the
+ *  wrong variant, so the key is typed by the prop it feeds. */
+export function variantPropValue(prop: { type?: unknown }, key: string): unknown {
+  return prop.type === 'boolean' && (key === 'true' || key === 'false') ? key === 'true' : key;
+}
+const variantValues = (prop: any): unknown[] =>
+  prop.type === 'boolean' ? Object.keys(prop.bindings?.figma?.values ?? {}).map(key => variantPropValue(prop, key)) : prop.type?.enum ?? [];
+
+export function deriveCases(dump: any, contract: any, component: string): Case[] {
   const set = dump[component] ?? Object.values(dump).find((v: any) => v && typeof v === 'object' && v.setName === component);
   if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}"`);
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
@@ -91,7 +100,7 @@ function deriveCases(dump: any, contract: any, component: string): Case[] {
       const prop = variantProps.find(p => p.bindings.figma.property === property);
       if (!prop) { unmapped.add(`${property} (no VARIANT prop)`); continue; }
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
-      if (entry) props[prop.name] = entry[0]; else unmapped.add(`${property}=${value}`);
+      if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
     const key = Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
     return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name };
@@ -345,11 +354,11 @@ async function main() {
         if (declaresSlot && !shown) problems.push('children-slot-discarded');
         if (!declaresSlot && !shown && !refusedByType) problems.push('children-accepted-but-discarded');
       }
-      // Behavior: switching an enum prop must change the computed root style of every cell whose variant differs.
-      const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT' && p.type?.enum?.length > 1);
+      // Behavior: switching a variant prop (enum or boolean axis) must change the computed root style of every cell whose variant differs.
+      const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT' && variantValues(p).length > 1);
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
-        const values: string[] = prop.type.enum;
+        const values = variantValues(prop);
         const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(el => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return JSON.stringify([s.backgroundColor, s.color, s.borderColor, s.borderRadius, r.width, r.height, el.className]); });
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
@@ -402,4 +411,4 @@ async function main() {
   console.log(`${problems.length ? '✘' : '✔'} design:consumer:check ${args.component}: ${receipt.outcome}${problems.length ? '\n  - ' + problems.join('\n  - ') : ''}\n  receipt → ${path.join(args.out, 'receipt.json')}`);
   process.exit(problems.length ? 1 : 0);
 }
-main();
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) main();
