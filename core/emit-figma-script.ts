@@ -243,7 +243,7 @@ export interface NodeSpec {
    *  — the same radians the dump captured. An AXIS-VARYING sweep rides
    *  stylesWhen `mask` rules, which the canvas slice does not compile — the
    *  documented canvas stylesWhen fidelity limit. */
-  shape?: { kind: 'polygon' | 'ellipse' | 'rect'; sides?: number; width: number; height: number; rotation?: number; arc?: { start: number; end: number; innerRadius: number } };
+  shape?: { kind: 'polygon' | 'ellipse' | 'rect' | 'path'; paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>; sides?: number; width: number; height: number; rotation?: number; arc?: { start: number; end: number; innerRadius: number } };
   /** v9 shape placement — compiled from the part's stylesWhen entries whose
    *  condition holds for this combo (the proposer's closed placement
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
@@ -4857,7 +4857,16 @@ function partToSpecInner(
   // v9 shape (#42): a REAL parametric node — geometry from the contract,
   // fill from tokens, placement/rotation from the compiled stylesWhen.
   if (part.shape) {
-    const spec: NodeSpec = { type: 'shape', name, shape: { ...part.shape } };
+    const { pathsByProp, ...baseShape } = part.shape;
+    let selected = baseShape;
+    if (pathsByProp) {
+      const prop = contract.props.find((p) => p.name === pathsByProp.prop);
+      const value = subst[pathsByProp.prop] ?? prop?.default;
+      const geometry = typeof value === 'string' ? pathsByProp.map[value] : undefined;
+      if (!geometry) throw new Error(`filled-path-variant-missing:${pathsByProp.prop}:${String(value)}`);
+      selected = { ...baseShape, ...geometry };
+    }
+    const spec: NodeSpec = { type: 'shape', name, shape: selected };
     applyStyling(spec, part, subst, ctx);
     // Wave B.1 — per-variant shape resize. `literalsByProp` may carry
     // width/height when size factors by one enum axis (Tailwind
@@ -6719,7 +6728,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6733,11 +6742,17 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
       if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;${effects}
     } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
-    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+    node = ${hasFilledPath ? "spec.shape.kind === 'path' ? figma.createVector() : " : ''}spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
       : figma.createPolygon();${nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
-    node.resize(spec.shape.width, spec.shape.height);
+${hasFilledPath ? `    if (spec.shape.kind === 'path') {
+      node.vectorPaths = spec.shape.paths;
+      node.strokes = [];
+      if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
+          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height))
+        throw new Error('filled-path-native-size-mismatch:' + node.id);
+    } else ` : '    '}node.resize(spec.shape.width, spec.shape.height);
 ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
     // exact radians the dump captured (Figma ArcData semantics both ways).
     if (spec.shape.kind === 'ellipse' && spec.shape.arc) {
@@ -7910,6 +7925,7 @@ function buildSyncScript(
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
+  const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
@@ -8767,7 +8783,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it

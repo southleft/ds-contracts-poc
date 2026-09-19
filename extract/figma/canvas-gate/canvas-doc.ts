@@ -1,3 +1,4 @@
+import { filledPathMask } from '../../../scripts/contract-schema.js';
 /**
  * CANVAS SIDE — the playground canvas-preview renderer, vendored headless.
  *
@@ -323,6 +324,7 @@ function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   const d = [`width: ${sh.width}px`, `height: ${sh.height}px`, 'flex-shrink: 0'];
   if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
   if (sh.kind === 'ellipse') d.push('border-radius: 50%');
+  if (sh.kind === 'path' && sh.paths) d.push(`mask: ${filledPathMask({ ...sh, paths: sh.paths })}`);
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
   d.push(...strokeCss(spec));
   // B-3 finding 3 companion (Round 5 canvas-gate finding): the sync runtime

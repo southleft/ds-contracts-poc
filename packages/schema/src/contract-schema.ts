@@ -27,6 +27,8 @@
  *      the child contract's own bindings). Composition never duplicates a
  *      child's definition.
  */
+import { filledPathMask } from './filled-path.js';
+export { filledPathIssue, filledPathMask, type FilledPath } from './filled-path.js';
 import * as z from "zod";
 import { DECLARABLE_ARCHETYPES } from "./archetype.js";
 
@@ -1735,8 +1737,20 @@ export const OverlaySchema = z.strictObject({
  *  RegularPolygon/Ellipse/Rectangle node with native rotation. Refusal
  *  rules (emit-react validateContract): a shape part must be a leaf (no
  *  parts/slot/component/content/text/icon/meter), sides only on polygons. */
+const FilledPathSchema = z.strictObject({
+  data: z.string().min(1).max(65536).regex(/^[MLCQZ0-9eE+.,\s-]+$/),
+  windingRule: z.enum(["NONZERO", "EVENODD"]),
+});
+const FilledGeometrySchema = z.strictObject({
+  width: z.number().positive(), height: z.number().positive(),
+  paths: z.array(FilledPathSchema).length(1),
+});
 export const ShapeSchema = z.strictObject({
-  kind: z.enum(["polygon", "ellipse", "rect"]),
+  kind: z.enum(["polygon", "ellipse", "rect", "path"]),
+  paths: z.array(FilledPathSchema).length(1).optional(),
+  pathsByProp: z.strictObject({
+    prop: z.string(), map: z.record(z.string(), FilledGeometrySchema),
+  }).optional(),
   /** Polygon point count, ≥3. Figma's REGULAR_POLYGON default is 3. */
   sides: z.number().int().min(3).optional(),
   /** Intrinsic (pre-rotation) size, px. */
@@ -1877,6 +1891,7 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
     `height: ${shape.height}px`,
     "flex-shrink: 0",
   ];
+  if (shape.kind === "path" && shape.paths) d.push(`mask: ${filledPathMask({ ...shape, paths: shape.paths })}`);
   if (shape.kind === "polygon")
     d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
   if (shape.kind === "ellipse") d.push("border-radius: 50%");
@@ -3552,4 +3567,25 @@ export function absentVariantIssues(contract: Contract): string[] {
     }
   }
   return issues;
+}
+
+/** Code-only projection; native compilation resolves the structured paths.
+ * Preserve identity when no path variants occur so existing output is stable. */
+export function lowerFilledPathVariants(contract: Contract): Contract {
+  let changed = false;
+  const visit = (part: Part): Part => {
+    const parts = part.parts && Object.fromEntries(Object.entries(part.parts).map(([key, value]) => [key, visit(value)]));
+    const by = part.shape?.pathsByProp;
+    if (!by) return parts ? { ...part, parts } : part;
+    changed = true;
+    return { ...part, ...(parts ? { parts } : {}), stylesWhen: [
+      ...(part.stylesWhen ?? []),
+      ...Object.entries(by.map).map(([equals, geometry]) => ({
+        prop: by.prop, equals,
+        styles: { mask: filledPathMask(geometry), width: `${geometry.width}px`, height: `${geometry.height}px` },
+      })),
+    ] };
+  };
+  const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([key, part]) => [key, visit(part)]));
+  return changed ? { ...contract, anatomy } : contract;
 }

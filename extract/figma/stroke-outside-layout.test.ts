@@ -41,10 +41,10 @@ const without = (set: DumpSet): DumpSet => { const copy = structuredClone(set); 
 
 test('the REST reader writes the fact on every stroked auto-layout frame — false included, because REST omits its default — and nowhere else', () => {
   const { set, provenance } = mapped([{}, { included: true }, { strokes: false }]);
-  assert.equal(provenance.dumpVersion, '1.37');
+  assert.equal(provenance.dumpVersion, '1.38');
   assert.deepEqual(set.variants.map((v) => (v as DumpNode).strokesIncludedInLayout), [false, true, undefined], 'a strokeless frame draws nothing the fact could move');
-  // Not an auto-layout frame: the field does not exist there, so nothing is written — absent stays "not captured".
-  assert.equal('strokesIncludedInLayout' in (mapped([{ layoutMode: 'NONE' }]).set.variants[0] as DumpNode), false);
+  // A free frame's stroke never insets the child coordinate origin.
+  assert.equal((mapped([{ layoutMode: 'NONE' }]).set.variants[0] as DumpNode).strokesIncludedInLayout, false);
   // The new field is the ONLY thing that moved on the node.
   const { strokesIncludedInLayout: _f, ...rest } = mapped([{}]).set.variants[0] as DumpNode;
   const { strokesIncludedInLayout: _t, ...same } = mapped([{ included: true }]).set.variants[0] as DumpNode;
@@ -65,9 +65,9 @@ test('the plugin reader carries the same field from node.strokesIncludedInLayout
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RingedBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.37');
+  assert.equal(dumps._provenance.dumpVersion, '1.38');
   const variants = Array.from(dumps.RingedBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
-  assert.deepEqual(variants.map((v) => v.strokesIncludedInLayout), [false, true, undefined, undefined], 'unreported, or not an auto-layout frame: not captured, never false');
+  assert.deepEqual(variants.map((v) => v.strokesIncludedInLayout), [false, true, undefined, false], 'unreported auto-layout stays unknown; a free frame has no stroke inset');
 });
 
 test('reader → proposer: a stroke outside layout proposes strokesIncludedInLayout: false and keeps every number the designer drew', () => {

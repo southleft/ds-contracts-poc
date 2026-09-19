@@ -2414,7 +2414,72 @@ const round2 = (n) => Math.round(n * 100) / 100;
 // Placement (ABSOLUTE nodes only) comes from absoluteBoundingBox deltas,
 // spelled center-preserving exactly like the REST mapper; constraints are
 // normalized to the REST spelling (MIN→LEFT/TOP, MAX→RIGHT/BOTTOM).
+// Same bounded syntax gate as schema filledPathIssue; route parity is tested.
+function filledPathIssue(data) {
+  if (typeof data !== 'string' || data.length === 0 || data.length > 65536) return 'filled-path-size';
+  const token = /[MLCQZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  let at = 0; const tokens = [];
+  while (at < data.length) {
+    if (/\s/.test(data[at])) { at++; continue; }
+    if (data[at] === ',') {
+      if (typeof tokens[tokens.length - 1] !== 'number') return 'filled-path-separator';
+      at++;
+      while (at < data.length && /\s/.test(data[at])) at++;
+      if (at === data.length || !/[-+.0-9]/.test(data[at])) return 'filled-path-separator';
+    }
+    token.lastIndex = at;
+    const match = token.exec(data);
+    if (!match) return 'filled-path-command-or-character';
+    const value = match[0];
+    if (/^[MLCQZ]$/.test(value)) tokens.push(value);
+    else { const n = Number(value); if (!Number.isFinite(n) || Math.abs(n) > 1e6) return 'filled-path-coordinate'; tokens.push(n); }
+    if (tokens.length > 16384) return 'filled-path-complexity';
+    at = token.lastIndex;
+  }
+  let open = false, drawn = false, subpaths = 0;
+  for (let i = 0; i < tokens.length;) {
+    const command = tokens[i++];
+    if (typeof command !== 'string') return 'filled-path-missing-command';
+    if (command === 'Z') { if (!open || !drawn) return 'filled-path-empty-subpath'; open = false; subpaths++; continue; }
+    if (command === 'M') { if (open) return 'filled-path-open-subpath'; open = true; drawn = false; }
+    else if (!open) return 'filled-path-missing-move';
+    const start = i;
+    while (i < tokens.length && typeof tokens[i] === 'number') i++;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    if (count === 0 || count % arity !== 0) return 'filled-path-arity';
+    if (command !== 'M' || count > 2) drawn = true;
+  }
+  if (open) return 'filled-path-open-subpath';
+  if (!subpaths) return 'filled-path-empty';
+}
+
 function dumpShape(node, parent) {
+  if (node.type === 'VECTOR') {
+    const paths = node.vectorPaths;
+    const fills = Array.isArray(node.fills) ? node.fills.filter((p) => p.visible !== false) : [];
+    const t = node.relativeTransform;
+    const readable = Number.isFinite(node.width) && node.width > 0 && Number.isFinite(node.height) && node.height > 0 &&
+      Array.isArray(paths) && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
+      t && t.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
+      t[0][0] === 1 && t[0][1] === 0 && t[1][0] === 0 && t[1][1] === 1 &&
+      fills.length === 1 && fills[0].type === 'SOLID' &&
+      (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
+      (node.cornerRadius === undefined || node.cornerRadius === 0) &&
+      !(node.strokes || []).some((p) => p.visible !== false) && !(node.effects || []).some((p) => p.visible !== false);
+    if (!readable) return null;
+    const shape = { kind: 'path', width: node.width, height: node.height, paths: paths.map((p) => ({ data: p.data, windingRule: p.windingRule })) };
+    const parentAuto = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
+    if (parent && (node.layoutPositioning === 'ABSOLUTE' || !parentAuto)) {
+      shape.x = t[0][2]; shape.y = t[1][2];
+      shape.right = parent.width - shape.x - shape.width; shape.bottom = parent.height - shape.y - shape.height;
+      if (node.constraints) {
+        const horizontal = CONSTRAINT_H[node.constraints.horizontal], vertical = CONSTRAINT_V[node.constraints.vertical];
+        if (horizontal && vertical) shape.constraints = { horizontal, vertical };
+      }
+    }
+    return shape;
+  }
+
   const kind = SHAPE_KIND_BY_TYPE[node.type];
   if (!kind) return null;
   const rotation = round2(-(typeof node.rotation === 'number' ? node.rotation : 0));
@@ -2791,7 +2856,7 @@ async function dumpNode(node, nodePath, parent) {
   if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' (CSS transform: rotate()) has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
-  if (VECTOR_TYPES.indexOf(node.type) >= 0) {
+  if (VECTOR_TYPES.indexOf(node.type) >= 0 && !shape) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }
 
@@ -2981,6 +3046,7 @@ async function dumpNode(node, nodePath, parent) {
     // false = a ring painted over the padding) and an ABSENT field must keep
     // meaning "not captured". Twin of the same write in extract/figma/rest/map.ts.
     if (out.layout !== undefined && typeof node.strokesIncludedInLayout === 'boolean') out.strokesIncludedInLayout = node.strokesIncludedInLayout;
+    else if (['FRAME', 'COMPONENT', 'COMPONENT_SET'].indexOf(node.type) >= 0 && node.layoutMode === 'NONE') out.strokesIncludedInLayout = false;
     // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
     // styling belongs to the child contract; the Slot utility's dashed
     // border is the utility's own) — no receipt for an unconsumed channel.
@@ -3494,7 +3560,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.37',
+    dumpVersion: '1.38',
   },
 };
 dumps._degradations = degradations;

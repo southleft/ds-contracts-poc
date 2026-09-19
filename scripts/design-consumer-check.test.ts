@@ -470,3 +470,19 @@ test('explicit raster metadata cannot permit fractional browser shifts, clipped 
   const big = frameBytes(80,80,()=>{});
   assert.deepEqual(alignRecordedFrames(bytes,big,consumer,{...frame,pngSha256:imageSha256(big)},0),{refused:'figma-image-span-mismatch'});
 });
+
+
+test('same-size mask-only geometry changes are visible to state and variant observers', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent('<!doctype html><style>#shape{width:20px;height:20px;background:black;mask:linear-gradient(90deg,black 50%,transparent 50%)}#shape.changed{mask:linear-gradient(0deg,black 50%,transparent 50%)}</style><div id="shape"></div>');
+    const shape = page.locator('#shape');
+    const before = { paint: await shape.evaluate(paintOf), variant: await shape.evaluate(variantPaintOf), bounds: await shape.boundingBox(), png: await shape.screenshot() };
+    await shape.evaluate(el => el.classList.add('changed'));
+    assert.deepEqual(await shape.boundingBox(), before.bounds);
+    assert.notDeepEqual(await shape.screenshot(), before.png);
+    assert.notEqual(await shape.evaluate(paintOf), before.paint);
+    assert.notEqual(await shape.evaluate(variantPaintOf), before.variant);
+  } finally { await browser.close(); }
+});
