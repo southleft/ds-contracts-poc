@@ -19,3 +19,7 @@
   height: var(--imported-stub-inline-danger-root-height);
   background-color: var(--color-background-default);
 }
+
+.supportingText {
+  font-family: Inter, system-ui, sans-serif;
+}

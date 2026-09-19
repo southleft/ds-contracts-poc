@@ -55,4 +55,5 @@
   font-weight: var(--imported-text-caption-lg-allcaps-bold-font-weight);
   line-height: var(--imported-text-caption-lg-allcaps-bold-line-height);
   text-transform: uppercase;
+  font-family: Inter, system-ui, sans-serif;
 }

@@ -164,6 +164,7 @@
   font-weight: var(--imported-banner-label-font-weight);
   line-height: var(--imported-banner-label-line-height);
   display: block;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .status-error .label {
@@ -187,6 +188,7 @@
   font-weight: var(--imported-banner-label-2-font-weight);
   line-height: var(--imported-banner-label-2-line-height);
   display: block;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .status-error .label-2 {

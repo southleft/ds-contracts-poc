@@ -63,6 +63,7 @@
   line-height: var(--imported-shared-size-20-0004);
   row-gap: var(--imported-shared-size-4);
   cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .slider {
@@ -554,6 +555,7 @@
   display: block;
   cursor: pointer;
   user-select: none;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .valueDisplay-text .label-2 {
@@ -571,6 +573,7 @@
   line-height: var(--imported-slider-label-3-line-height);
   display: block;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .orientation-vertical .label-3 {

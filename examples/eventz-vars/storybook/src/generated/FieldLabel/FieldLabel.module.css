@@ -19,3 +19,7 @@
   height: var(--imported-stub-field-label-root-height);
   background-color: var(--color-background-default);
 }
+
+.labelText {
+  font-family: Inter, system-ui, sans-serif;
+}
