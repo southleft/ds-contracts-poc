@@ -16,6 +16,7 @@ import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceF
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
+import { builtinReactCohort } from './react-cohort.js';
 
 test('targeted content preparation matches sealed rendering, survives reopening and refuses changed evidence', async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-content-'));
@@ -25,6 +26,7 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) },
     css: `@font-face{font-family:'Alias';src:url(data:font/woff2;base64,${font});font-weight:100 900}:root{--primary:oklch(0.205 0 0);--input:oklch(0.922 0 0);--card:oklch(1 0 0);--radius:0.625rem}button{display:inline-flex;height:36px;border-radius:8px;font:500 14px/20px 'Alias';background-color:oklch(0.205 0 0);color:white;opacity:1}`,
     javascript: `document.querySelector('#root').innerHTML='<button data-slot="button">Fixture label</button>';`,
+    cohort: builtinReactCohort, sourceRoot: repo,
   };
   const browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 900, height: 600 }, deviceScaleFactor: 1, colorScheme: 'light' });

@@ -2,6 +2,7 @@ import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
 import {canonicalJson, revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
+import {requireReactCallerComposition} from './react-caller-composition.js';
 import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
 import { selectReactComparisonCase } from './react-comparison-case.js';
@@ -33,13 +34,10 @@ import {
 import { startReactValidation } from "./react-reference-validation.js";
 import { build, type Loader } from "esbuild";
 import { createHash } from "node:crypto";
-import { readFileSync, mkdirSync, writeFileSync, realpathSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync, realpathSync, lstatSync } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import {
-  reactReferenceCases,
-  reactReferenceEntry,
-} from "./react-reference-cases.js";
+import { loadReactCohort, reactCasesFile, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -60,16 +58,28 @@ export interface ReactReference {
   files: Record<string, string>;
   javascript: string;
   css: string;
+  /** The cohort these bytes were built from. Readers take cases and witnesses
+   * from here so that they always belong to the reference being read. */
+  cohort: ReactCohort;
+  /** The real path of the host-configured root these bytes were read from.
+   * Like the cohort it is never serialized; provenance names its own fields. */
+  sourceRoot: string;
 }
 
 /** A host-configured source root; no browser request can choose a filesystem
  * path, executable or dependency. esbuild parses source; it never executes it. */
 export async function buildReactReference(
   sourceRoot: string,
-  entry: string = reactReferenceEntry,
+  cohort?: ReactCohort,
+  entry?: string,
 ): Promise<ReactReference> {
   sourceRoot = realpathSync(sourceRoot);
+  cohort ??= loadReactCohort(sourceRoot);
+  entry ??= cohort.entry;
   const files: Record<string, string> = {};
+  // A declaration selects the cases and authors the witnesses, so its bytes
+  // are source: editing it is a new reference. Absent, identity is unchanged.
+  if (cohort.declaration) files[cohort.declaration.file] = cohort.declaration.sha256;
   for (const file of [
     "package.json",
     "package-lock.json",
@@ -119,6 +129,9 @@ export async function buildReactReference(
     if (!files[path.resolve(sourceRoot, input)])
       throw Error(`react-reference-input-unrecorded: ${input}`);
   }
+  if (cohort.declared)
+    requireWitnessedModules(cohort, new Map((output.metafile!.inputs["react-reference.tsx"]?.imports ?? [])
+      .flatMap((i) => i.original ? [[i.original, path.relative(sourceRoot, path.resolve(sourceRoot, i.path)).split(path.sep).join("/")] as const] : [])));
   const javascript = output.outputFiles.find((f) =>
     f.path.endsWith(".js"),
   )?.text;
@@ -140,6 +153,8 @@ export async function buildReactReference(
     ),
     javascript,
     css,
+    cohort,
+    sourceRoot,
   };
   if (!reactReferenceUnchanged(reference))
     throw Error("react-reference-source-changed");
@@ -147,6 +162,16 @@ export async function buildReactReference(
 }
 export function reactReferenceUnchanged(reference: ReactReference) {
   try {
+    // Which cohort a root selects is itself source. A built-in reference
+    // records no declaration path, so its absence is checked directly: anything
+    // now at that path, even unreadable or refused, makes the reference stale.
+    const declaration = path.join(reference.sourceRoot, reactCasesFile);
+    if (reference.cohort.declaration) {
+      if (reference.cohort.declaration.file !== declaration || !lstatSync(declaration).isFile()) return false;
+    } else {
+      try { lstatSync(declaration); return false; }
+      catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") return false; }
+    }
     return Object.entries(reference.files).every(
       ([file, hash]) => sha(readFileSync(file)) === hash,
     );
@@ -154,9 +179,13 @@ export function reactReferenceUnchanged(reference: ReactReference) {
     return false;
   }
 }
-export function reactReferenceHtml(reference: ReactReference) {
+export function reactReferenceHtml(reference: Pick<ReactReference, 'css' | 'javascript'>) {
   // Script/style raw-text elements must not let source literals close their tags.
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>${reference.css.replace(/<\/style/gi, "<\\/style")}</style></head><body style="padding:32px"><div id="root"></div><script>${reference.javascript.replace(/<\/script/gi, "<\\/script")}</script></body></html>`;
+  // `<!--` is escaped too: it alone opens the escaped script state, from which a
+  // later `<script` swallows the real closing tag and the page mounts nothing.
+  // `<script` is left as written because without `<!--` it is inert, and the
+  // built-in bundle contains it: rewriting it would change recorded HTML bytes.
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>${reference.css.replace(/<\/style/gi, "<\\/style")}</style></head><body style="padding:32px"><div id="root"></div><script>${reference.javascript.replace(/<\/script/gi, "<\\/script").replace(/<!--/g, "\\x3C!--")}</script></body></html>`;
 }
 
 /** Called only after the source service's loopback and same-origin checks. */
@@ -305,8 +334,10 @@ export function createReactReferenceService(
           throw Error('react-caller-request-invalid');
         if (callerReact[3] === '/source-frame') {
           const request = native().jobs.reactRequest(callerReact[2]);
-          if (request.referenceId !== reference.id || request.caseId !== 'card-composed')
-            throw Error('react-caller-source-frame-mismatch');
+          if (request.referenceId !== reference.id) throw Error('react-caller-source-frame-mismatch');
+          // This frame reviews a caller composition, so it exists only for an
+          // operation whose sealed evidence generates one with nested children.
+          requireReactCallerComposition(callerGraph(callerReact[2]).graph.draft);
           const frame = req.method === 'POST'
             ? await frames.create(reference.id, callerReact[2])
             : frames.read(reference.id, callerReact[2]);
@@ -518,6 +549,7 @@ export function createReactReferenceService(
             const id = nativeAction[2], { successions, updateJobs } = native();
             if (!successions || !updateJobs) throw Error('react-source-succession-unavailable');
             const original = jobs.reactSuccessionSubject(id);
+            if (!reference.cohort.cases.some(c => c.id === original.caseId)) throw Error('react-source-succession-case-not-in-cohort');
             // A written correction must settle against the inputs it was planned from.
             if (updateJobs.updateHistory(id).some(entry => entry.pending || entry.phase !== 'update-verified'))
               throw Error('react-source-succession-update-unresolved');
@@ -570,7 +602,11 @@ export function createReactReferenceService(
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { moved: jobs.listReactMoved(reference.id), operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
+        // An operation can follow this source only through a case this cohort
+        // has. One from another cohort is not offered: no such case exists here,
+        // so it can neither follow nor be prepared a second time.
+        const inCohort = (caseId: string) => reference!.cohort.cases.some(c => c.id === caseId);
+        json(res, 200, { moved: jobs.listReactMoved(reference.id).filter(m => inCohort(m.caseId)), operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
@@ -651,9 +687,9 @@ export function createReactReferenceService(
                 id: reference.id,
                 sourceRoot,
                 files: reference.files,
-                entrySha256: sha(reactReferenceEntry),
+                entrySha256: sha(reference.cohort.entry),
                 qualification: "unqualified",
-                cases: reactReferenceCases,
+                cases: reference.cohort.cases,
               },
               null,
               2,
@@ -671,21 +707,26 @@ export function createReactReferenceService(
         }
         json(res, 200, {
           id: reference.id,
-          source: "shadcn source sandbox",
-          theme: "Light (sandbox stylesheet)",
+          source: reference.cohort.source,
+          theme: reference.cohort.theme,
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
           validation: validations.get(reference.id)?.report() ?? null,
           ownership: savedOwnership(reference)?.report() ?? null,
-          cases: reactReferenceCases.map((c) => ({
+          cases: reference.cohort.cases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
           })),
         });
-      } catch {
+      } catch (error) {
+        // A refused declaration is named so its author can correct it. Only an
+        // identifier leaves the host: no path, file content or parser text.
+        const message = error instanceof Error ? error.message : "";
+        const reason = /^react-cases-[a-z-]{2,60}$/.test(message) ? message : undefined;
         json(res, 409, {
           error:
-            "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with the existing shadcn source sandbox and its installed dependencies; source files are never modified by this action.",
+            "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with a source workspace and its installed dependencies; source files are never modified by this action.",
+          ...(reason ? { reason } : {}),
         });
       } finally {
         loading = undefined;
@@ -947,7 +988,7 @@ export function createReactReferenceService(
       req.method !== "GET" ||
       !match ||
       reference?.id !== match[1] ||
-      !reactReferenceCases.some((c) => c.id === caseId)
+      !reference.cohort.cases.some((c) => c.id === caseId)
     ) {
       json(res, 404, {
         error: "React reference not found. Load originals in the application.",

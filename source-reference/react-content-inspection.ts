@@ -6,7 +6,6 @@ import path from 'node:path';
 import { chromium, type Browser } from 'playwright-core';
 import { revisionOf } from '../core/contract-provenance.js';
 import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
-import { reactReferenceProfile } from './react-reference-profiles.js';
 import { readReactNativeContentEvidence, readReactNativeEvidence } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { captureValidatedTree } from './capture.js';
@@ -50,7 +49,7 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         headers: { 'Content-Security-Policy': "sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'" },
         body: reactReferenceHtml(reference),
       }) : route.abort());
-      const page = await context.newPage(), failures = watchSourceFailures(page), profile = reactReferenceProfile(request.caseId);
+      const page = await context.newPage(), failures = watchSourceFailures(page), profile = reference.cohort.profile(request.caseId);
       try {
         await page.goto(url);
         await page.locator(profile.path[0]).waitFor({ timeout: 15000 });

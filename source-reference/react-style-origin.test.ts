@@ -55,6 +55,10 @@ test('typed size provenance distinguishes authored constraints from measured aut
    rows=await read(`.subject{width:${value}}`);
    assert.equal(rows.find(r=>r.channel==='width')!.status,'unresolved',value);
   }
+  // A fractional declaration is used in 1/64 px layout units. It is still the
+  // author's fixed size; a clamp (below) is not.
+  rows=await read('.subject{height:18.4px}');
+  assert.deepEqual([rows.find(r=>r.channel==='height')!.status,rows.find(r=>r.channel==='height')!.value],['fixed','18.3906px']);
   rows=await read('.subject{width:40px;min-width:80px}');
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'size-clamped-or-layout-dependent');
   rows=await read('.subject{width:40px;inline-size:50px}');

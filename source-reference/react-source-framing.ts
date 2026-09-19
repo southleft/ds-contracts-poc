@@ -6,7 +6,6 @@ import { chromium, type Page } from 'playwright-core';
 import { revisionOf } from '../core/contract-provenance.js';
 import { reactReferenceHtml, type ReactReference } from './react-reference.js';
 import { readReactNativeContentEvidence } from './react-native-evidence.js';
-import { reactReferenceProfile } from './react-reference-profiles.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
@@ -26,13 +25,13 @@ export function loadReactFrameInput(repoRoot: string, reference: ReactReference,
     source: readFileSync(path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id, request.caseId, 'source.png')) };
 }
 export async function measureReactSourceFrame(input: ReturnType<typeof loadReactFrameInput>) {
-  return inspectOriginal(input, page => sourceBounds(page, reactReferenceProfile(input.request.caseId)));
+  return inspectOriginal(input, page => sourceBounds(page, input.reference.cohort.profile(input.request.caseId)));
 }
 /** Read glyph advances from the unchanged original. Family-name equality is
  * not proof of matching font binaries or glyph metrics across renderers. */
 export async function measureReactSourceTypography(input: ReturnType<typeof loadReactFrameInput>): Promise<SourceTypography> {
   const rows = await inspectOriginal(input, async page => {
-    const profile = reactReferenceProfile(input.request.caseId);
+    const profile = input.reference.cohort.profile(input.request.caseId);
     const fonts = await observeTextFonts(page, profile.path, input.captured.tree);
     if (fonts.status !== 'observed' || fonts.problems.length) throw Error('react-source-typography-fonts-unavailable');
     return page.evaluate(({ selectors, rows }) => rows.map(row => {
@@ -60,7 +59,7 @@ async function inspectOriginal<T>(input: ReturnType<typeof loadReactFrameInput>,
       headers: { 'Content-Security-Policy': "sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'" },
       body: reactReferenceHtml(input.reference),
     }) : route.abort());
-    const page = await context.newPage(), failures = watchSourceFailures(page), profile = reactReferenceProfile(input.request.caseId);
+    const page = await context.newPage(), failures = watchSourceFailures(page), profile = input.reference.cohort.profile(input.request.caseId);
     try {
       await page.goto(url);
       await page.locator(profile.path[0]).waitFor({ state: 'attached', timeout: 15000 });

@@ -802,7 +802,7 @@ test("recorded native float32 color channels verify under an explicit pinned pre
   }
 });
 
-test("float32 color allowance preserves alpha and cannot authorize numeric-variable rounding", () => {
+test("float32 color allowance preserves alpha; a number variable verifies as itself or its exact float32, never a neighbour", () => {
   const args = fixture();
   for (const v of args.receipt.variables.filter((v) =>
     v.name.startsWith("palette/"),
@@ -827,8 +827,18 @@ test("float32 color allowance preserves alpha and cannot authorize numeric-varia
     verifyNativeTokenContextReceipt(args).status,
     "native-token-context-observed",
   );
+  // Figma stores number variables as float32 (a planned 18.3906 read back as
+  // 18.390600204467773 on the live canvas). That one representation verifies.
   weight.valuesByMode["7:0"] = Math.fround(0.1);
-  assert.deepEqual(verifyNativeTokenContextReceipt(args).problems, [
-    "native-token-context-variable-value",
-  ]);
+  assert.equal(
+    verifyNativeTokenContextReceipt(args).status,
+    "native-token-context-observed",
+  );
+  // The adjacent float32, a rounded decimal and a numeric string still refuse.
+  for (const drifted of [Math.fround(0.1) + 2 ** -26, 0.10000000149, 0.1000001, "0.1"]) {
+    weight.valuesByMode["7:0"] = drifted as number;
+    assert.deepEqual(verifyNativeTokenContextReceipt(args).problems, [
+      "native-token-context-variable-value",
+    ], String(drifted));
+  }
 });

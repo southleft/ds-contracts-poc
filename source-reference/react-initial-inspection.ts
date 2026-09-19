@@ -12,7 +12,6 @@ import type { ReactNativeRequest } from './react-native-request.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
 import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead, type ReactOwnership } from './react-ownership.js';
-import { reactReferenceProfile } from './react-reference-profiles.js';
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
@@ -34,7 +33,7 @@ export interface ReactInitialInspection {
   draft?: ReturnType<typeof compileReactInitialContract>;
 }
 export function readReactInspectionOriginal(repo: string, reference: ReactReference, request: Request) {
-  reactReferenceProfile(request.caseId);
+  reference.cohort.profile(request.caseId);
   readReactNativeEvidence(repo, reference, request.anchor);
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, request.anchor.ownership.id);
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactOwnershipReport;
@@ -202,7 +201,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
           await context.route('**/*', r => r.request().url() === url ? r.fulfill({ status: 200, contentType: 'text/html',
             headers: { 'Content-Security-Policy': "sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'" }, body: reactReferenceHtml(observed),
           }) : r.abort());
-          const page = await context.newPage(), failures = watchSourceFailures(page), profile = reactReferenceProfile(caseId);
+          const page = await context.newPage(), failures = watchSourceFailures(page), profile = value.reference.cohort.profile(caseId);
           try {
             await page.goto(url); await page.locator(profile.path[0]).waitFor({ state: 'attached', timeout: 15000 });
             const captured = await captureValidatedTree(page, profile, failures, '#root', '--');
