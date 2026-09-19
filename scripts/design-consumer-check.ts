@@ -27,7 +27,7 @@
  *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
  *                 text changes in every text-bearing cell; switch every
  *                 variant-bearing cell to another variant and assert its
- *                 computed root style changes. A prop the component accepts
+ *                 rendered subtree paint, text or relative geometry changes. A prop the component accepts
  *                 but discards fails here.
  *   5. compare  — fetch Figma's own PNG of each variant node (REST
  *                 /v1/images, read-only) and score it against the consumer's
@@ -172,6 +172,18 @@ export const paintOf = new Function('el', `
     'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
     'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
   return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
+`) as (el: Element) => string;
+/** Observe actual variant effects across the rendered subtree. Class names
+ * alone prove nothing; relative positions catch a rearrangement whose root
+ * dimensions stay fixed. Text also matters when glyph advances are equal. */
+export const variantPaintOf = new Function('el', `
+  const paint = ${paintOf.toString()};
+  const root = el.getBoundingClientRect();
+  const boxes = [el, ...el.querySelectorAll('*')].map(node => {
+    const r = node.getBoundingClientRect();
+    return [node.tagName, r.x - root.x, r.y - root.y, r.width, r.height];
+  });
+  return JSON.stringify([paint(el), el.innerText ?? el.textContent, boxes]);
 `) as (el: Element) => string;
 /** Keyboard-modality focus on the component's own focus target: the root when
  *  it is focusable, else its first focusable descendant. Returns whether
@@ -536,7 +548,7 @@ async function main() {
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
         const values = variantValues(prop);
-        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(el => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return JSON.stringify([s.backgroundColor, s.color, s.borderColor, s.borderRadius, r.width, r.height, el.className]); });
+        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
         await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop.name, target] as const);
