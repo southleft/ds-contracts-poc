@@ -1307,16 +1307,19 @@ export type TextStyleIdentityRefusalCode = typeof TEXT_STYLE_IDENTITY_REFUSED;
 export class ExactProjectionError extends Error {
   readonly code: ExactProposalRefusalCode;
   readonly projection: ExactProjectionResult;
+  readonly detail?: string;
 
   constructor(
     code: ExactProposalRefusalCode,
     message: string,
     projection: ExactProjectionResult,
+    detail?: string,
   ) {
     super(message);
     this.name = 'ExactProjectionError';
     this.code = code;
     this.projection = projection;
+    this.detail = detail;
   }
 }
 
@@ -11020,8 +11023,9 @@ function proposeFromDumpFenced(
   if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
     throw new ExactProjectionError(
       'EXACT_MATRIX_RAGGED',
-      `${cartesianProjection.refusals[0]?.message ?? ''} stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`.trim(),
+      cartesianProjection.refusals[0]?.message ?? 'Source matrix is ragged.',
       cartesianProjection,
+      `stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`,
     );
   }
   const sourceProjection =
@@ -12376,6 +12380,9 @@ export function figmaProposalsReport(
  *  zod issue array rendered verbatim in the playground rail); the verbatim
  *  technical text always survives as `detail`. */
 export function plainWordsProposalError(e: unknown): { headline: string; detail?: string } {
+  // Preserve stable refusal headlines used by historical evidence; additive
+  // reader diagnostics use the existing technical-detail channel.
+  if (e instanceof ExactProjectionError && e.detail) return { headline: e.message, detail: e.detail };
   const issues = (e as { issues?: unknown } | null)?.issues;
   if (Array.isArray(issues) && issues.length > 0 && issues.every((i) => i && typeof i === 'object')) {
     const first = issues[0] as { path?: unknown[]; message?: unknown };
