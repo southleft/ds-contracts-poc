@@ -481,6 +481,7 @@
   font-size: var(--imported-text-text-md-semibold-font-size);
   font-weight: var(--imported-text-text-md-semibold-font-weight);
   line-height: var(--imported-text-text-md-semibold-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .social-facebook.theme-brand .Text {

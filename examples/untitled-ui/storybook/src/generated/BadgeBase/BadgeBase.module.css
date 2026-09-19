@@ -97,6 +97,7 @@
   font-size: var(--imported-text-text-xs-medium-font-size);
   font-weight: var(--imported-text-text-xs-medium-font-weight);
   line-height: var(--imported-text-text-xs-medium-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .arrowRight {
