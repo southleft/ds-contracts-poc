@@ -46,6 +46,9 @@ import {
   UA_MARGIN_ELEMENTS,
   UA_PAINT_CHANNELS,
   UA_PAINTED_ROOT_ELEMENTS,
+  UA_PADDING_ELEMENTS,
+  uaPaddingPartDecls,
+  undeclaredPaddingSides,
 } from './anatomy.js';
 import { ELEMENT_META } from './elements.js';
 import { gridCellPlan, gridChildCrossAxisDecls, gridParentDecls } from './grid.js';
@@ -201,6 +204,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         decls.push('appearance: none', 'background: none', 'border: none', 'font: inherit',
           'color: inherit', 'cursor: pointer');
       }
+      decls.push(...uaPaddingPartDecls(part, decls));
       if (part.icon) {
         decls.push('display: inline-flex', 'flex-shrink: 0');
         if (part.icon.size) {
@@ -275,6 +279,12 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // UA-margin neutralization: see UA_MARGIN_ELEMENTS.
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
+  }
+  // UA-padding neutralization: see UA_PADDING_ELEMENTS. Only the sides the
+  // contract does not declare — a Figma frame's undeclared padding is 0.
+  // @lower css.ua-padding-undeclared-side-zero
+  if (rootElementsOf(contract).some((el) => UA_PADDING_ELEMENTS.has(el))) {
+    rootDecls.push(...undeclaredPaddingSides(root).map((side) => `${side}: 0`));
   }
   // GAP-CLOSING ROUND 9 — A STYLE KEYWORD IS NOT A BORDER; A WIDTH IS.
   //
@@ -944,6 +954,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         );
       }
     }
+    decls.push(...uaPaddingPartDecls(part, decls));
     const nestedSubRules: string[] = [];
     if (part.animation) {
       decls.push(

@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **62** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **63** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -449,14 +449,28 @@ The stage where the two directions disagree about a keyword. The proposer elides
 
 **Why.** This rule was already WRITTEN DOWN — in a schema comment, in prose, ungated — and the emitter has three separate defaults that contradict it. That gap is the whole argument for this register: six such prose rules exist in contract-schema.ts, none of them was machine-checked against the code, and the forward file that is supposed to obey them has no markers at all.
 
-### `padding` — 2 rules (1 implemented, 1 proposed, 0 wall)
+### `padding` — 3 rules (2 implemented, 1 proposed, 0 wall)
 
 The cleanest lowering in the tree, and the standard the rest of the register is measured against — four CSS longhands, four Figma fields, the same meaning. Both padding conformance cases round-trip.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
+| `css.ua-padding-undeclared-side-zero` | `implemented` | `css.ts:286` | padding-top / -right / -bottom / -left: 0 for every side the contract does not declare, on a root or part rendering as an element the user agent pads (button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium) → a frame whose undeclared padding fields are 0 (Figma's default; nothing is written) | padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces | **none** | `untested` |
 | `emit.padding-longhand-bound` | `implemented` | `emit-figma-script.ts:2087` | padding-left / -right / -top / -bottom bound to a token → bindings.paddingLeft (and siblings) bound to the same variable | the logical shorthand when both sides agree, longhands otherwise | **none** | `round-tripped` |
 | `emit.padding-shorthand-registry-hole` | `proposed` | `emit-figma-script.ts:2424` | any token-bound channel with no case in the switch — including the `padding` shorthand itself → nothing | a named refusal for every unhandled channel, whether or not a registry row exists | `channel-miss` | `untested` |
+
+#### `css.ua-padding-undeclared-side-zero`
+
+**Context.** `undeclaredPaddingSides` (packages/core anatomy.ts) reads tokens, literals, declared, tokensByProp and literalsByProp — a shorthand or a logical pair covers its sides. `generateCss` pushes the zeros on the root (this site) and on nested parts through `uaPaddingPartDecls`; the web-components `shadowCss` and the inline surface's style record do the same. A part whose own chrome already wrote `padding: 0` (event-trigger buttons, text-entry controls, native checkables, icon buttons) gets nothing more.
+
+**Inverse** (`propose-figma.ts`, padding-* proposed from the frame's padding fields; a zero side proposes no channel) emits the canonical form: no channel for a zero side.
+
+**Lost.**
+- a side declared by only SOME values of an enum (tokensByProp / literalsByProp) counts as declared for every value, so the other values keep the user agent's padding on that side — named, not closed
+- `select` is not listed: Chromium gives it no padding; other engines were not measured
+- the static HTML preview (core/emit-html.ts) carries no UA reset of its own, the same as the margin reset
+
+**Why.** A Figma frame's undeclared padding is 0; a `<button>` root the contract pads on one side only rendered the user agent's 1px 6px on the others. Measured: Altitude Tab Panel (a `<button>` root declaring only padding-top) rendered 453 px wide against the canvas's 441 in the design-led clean-consumer check. The emitter adds zeros only where the contract is silent, so a contract declaring all four sides keeps its bytes. Same shape as the UA margin reset and the UA paint reset. Held by core/react-ua-padding.test.ts, which re-measures the element list in Chromium. docs/23 §D.44.
 
 #### `emit.padding-longhand-bound`
 
@@ -487,7 +501,7 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:96` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
-| `css.text-box-whole-pixel` | `implemented` | `css.ts:1086` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
+| `css.text-box-whole-pixel` | `implemented` | `css.ts:1097` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2326` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2355` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:5026` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |

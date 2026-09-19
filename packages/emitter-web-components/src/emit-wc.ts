@@ -89,6 +89,9 @@ import {
   rootElementsOf,
   textProps,
   UA_MARGIN_ELEMENTS,
+  UA_PADDING_ELEMENTS,
+  uaPaddingPartDecls,
+  undeclaredPaddingSides,
   validateContract,
   wcHostAttributeEffect,
   wcHostCollisions,
@@ -336,6 +339,11 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
   }
+  // UA-padding neutralization (core UA_PADDING_ELEMENTS): only the sides the
+  // contract does not declare — a Figma frame's undeclared padding is 0.
+  if (rootElementsOf(contract).some((el) => UA_PADDING_ELEMENTS.has(el))) {
+    rootDecls.push(...undeclaredPaddingSides(root).map((side) => `${side}: 0`));
+  }
   if ('border-width' in rootTokens || 'border-color' in rootTokens) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
   if ('max-width' in rootTokens) rootDecls.push('width: 100%', 'min-width: fit-content');
@@ -564,6 +572,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
           'border: none', 'padding: 0', 'color: inherit', 'cursor: pointer');
       }
     }
+    decls.push(...uaPaddingPartDecls(part, decls));
     if (part.animation) {
       decls.push(
         part.animation === 'spin'

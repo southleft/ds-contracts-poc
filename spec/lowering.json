@@ -100,7 +100,7 @@
       "stage": "css",
       "status": "proposed",
       "file": "packages/core/src/css.ts",
-      "ruleLine": 255,
+      "ruleLine": 259,
       "ruleText": "rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');",
       "css": {
         "construct": "the CSS emitted for a contract whose root carries no layout block",
@@ -128,8 +128,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 97,
-      "ruleLine": 98,
+      "line": 100,
+      "ruleLine": 101,
       "ruleText": "const contract = lowerStrokeRings(input);",
       "css": {
         "construct": "border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0",
@@ -167,8 +167,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 1085,
-      "ruleLine": 1086,
+      "line": 1096,
+      "ruleLine": 1097,
       "ruleText": "decls.push(...(textBoxes.get(part) ?? []));",
       "css": {
         "construct": "inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box",
@@ -204,6 +204,41 @@
         "propose.text-box-unhonourable-withdrawn"
       ],
       "why": "CSS lays a text run out at its fractional advance and adds letter spacing after every glyph; Figma's auto-width text box is the advance rounded up with no spacing after the last glyph. Measured on the 72-variant CBDS Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every content size equal because the hug root rendered 47.40625 px against Figma's 48; and on the committed REST fixtures rendered in Chromium (Manrope Kicker, 6 px tracking: Figma 95 / 87 = ceil less the trailing spacing, 101 / 93 with it). calc-size() is the only CSS that can round an intrinsic size, and an unsupporting parser drops the declaration. The basis is fit-content, not max-content: max-content made a runtime string non-wrapping (review, PR 132 — the flowbite Card grew to 596 px in a 240 px container); fit-content is the max-content box when the text fits and the available width when it does not, and the 100 % clamp removes the sub-pixel overflow rounding a fractional available width would cause. The fact is carried under Figma's own name and only in the value that lowers; absent keeps every existing byte. Untested by the conformance kit; held by extract/figma/whole-pixel-text-box.test.ts and core/react-whole-pixel-text-box.test.ts, which measure the box in Chromium."
+    },
+    {
+      "id": "css.ua-padding-undeclared-side-zero",
+      "family": "padding",
+      "stage": "css",
+      "status": "implemented",
+      "file": "packages/core/src/css.ts",
+      "line": 285,
+      "ruleLine": 286,
+      "ruleText": "if (rootElementsOf(contract).some((el) => UA_PADDING_ELEMENTS.has(el))) {",
+      "css": {
+        "construct": "padding-top / -right / -bottom / -left: 0 for every side the contract does not declare, on a root (semantics.element or any elementByProp value) or part rendering as an element the user agent pads (UA_PADDING_ELEMENTS: button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium)",
+        "context": "packages/core anatomy.ts undeclaredPaddingSides reads tokens, literals, declared, tokensByProp and literalsByProp (a shorthand or a logical pair covers its sides); generateCss pushes the zeros on the root (this site) and on nested parts through uaPaddingPartDecls (single- and multi-root), the web-components shadowCss does the same, and the inline surface writes the same longhands into the style record; a part whose own chrome already wrote `padding: 0` gets nothing more"
+      },
+      "figma": {
+        "construct": "a frame whose undeclared padding fields are 0 — Figma's default, so nothing is written"
+      },
+      "inverse": {
+        "file": "core/propose-figma.ts",
+        "site": "padding-* proposed from the frame's padding fields; a zero side proposes no channel",
+        "emits": "padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces (Figma's frame default, spelled explicitly in CSS where the user agent would otherwise pad)"
+      },
+      "lost": [
+        "a side declared by only SOME values of an enum (tokensByProp / literalsByProp) counts as declared for every value, so the other values keep the user agent's padding on that side — named, not closed",
+        "select is not listed: Chromium gives it no padding; other engines were not measured",
+        "the static HTML preview (core/emit-html.ts) carries no UA reset of its own, the same as the margin reset"
+      ],
+      "canonical": "padding-* declared only for the sides the canvas draws with padding; an undeclared side is 0 on both surfaces (Figma's frame default, spelled explicitly in CSS where the user agent would otherwise pad)",
+      "receipt": {
+        "channel": "none"
+      },
+      "roundTrip": "untested",
+      "cases": [],
+      "doors": [],
+      "why": "A Figma frame's undeclared padding is 0; a <button> root the contract pads on one side only rendered the user agent's 1px 6px on the others. Measured: Altitude Tab Panel (a <button> root declaring only padding-top) rendered 453 px wide against the canvas's 441 in the design-led clean-consumer check. The side list is the one fact the emitter adds, and it adds it only where the contract is silent, so a contract declaring all four sides keeps its bytes. Same shape as the UA margin reset (UA_MARGIN_ELEMENTS) and the UA paint reset one block down."
     },
     {
       "id": "emit.axis-adjacent-inlines-unnamed",

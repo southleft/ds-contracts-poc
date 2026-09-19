@@ -454,7 +454,7 @@
     "anchors:writeback": "node scripts/anchors-writeback.mjs",
     "golden:update": "node scripts/update-golden.mjs",
     "emitters:check": "tsx core/emitters-check.ts",
-    "react:conformance:check": "node --import tsx --test core/react-attributes.test.ts core/react-initial-value.test.ts core/react-css-identifiers.test.ts core/react-icon-size.test.ts core/react-event-callback.test.ts core/react-root-toggle.test.ts core/react-defaultless.test.ts core/react-children-refusal.test.ts core/react-default-font-family.test.ts core/react-stroke-outside-layout.test.ts core/react-whole-pixel-text-box.test.ts core/react-optional-bool-style.test.ts core/root-content.test.ts core/composition-scalars.test.ts core/code-values.test.ts",
+    "react:conformance:check": "node --import tsx --test core/react-attributes.test.ts core/react-initial-value.test.ts core/react-css-identifiers.test.ts core/react-icon-size.test.ts core/react-event-callback.test.ts core/react-root-toggle.test.ts core/react-defaultless.test.ts core/react-children-refusal.test.ts core/react-default-font-family.test.ts core/react-stroke-outside-layout.test.ts core/react-whole-pixel-text-box.test.ts core/react-ua-padding.test.ts core/react-optional-bool-style.test.ts core/root-content.test.ts core/composition-scalars.test.ts core/code-values.test.ts",
     "figma:unset:check": "node --import tsx --test core/figma-unset.test.ts core/figma-visible-when.test.ts core/figma-context.test.ts core/figma-root-slot.test.ts core/grid-flow-rows.test.ts",
     "code-connect:check": "tsx core/code-connect-check.ts",
     "canvas:binding:check": "tsx core/canvas-binding-check.ts",
