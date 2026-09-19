@@ -15,6 +15,15 @@
  *                 `vite build`. Nothing resolves into this repo.
  *   3. mount    — open the built app in Chromium (file://). One cell per Figma
  *                 variant, props derived from the contract's VARIANT mappings.
+ *                 A designer's INTERACTION-STATE axis (docs/23 §D.41) is not a
+ *                 prop: its values are read by the same closed table the
+ *                 proposer projects by (core/interaction-state-axis.ts) and a
+ *                 state cell is mounted the way a user reaches that state — a
+ *                 real pointer hover, a held mouse button, real keyboard-
+ *                 modality focus, or the `disabled` prop — before it is
+ *                 screenshotted. Nothing is forced that a user could not do: a
+ *                 state that cannot be reached, or that changes nothing the
+ *                 contract says it changes, is a NAMED problem.
  *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
  *                 text changes in every text-bearing cell; switch every
  *                 variant-bearing cell to another variant and assert its
@@ -43,6 +52,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
+import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
@@ -62,7 +72,11 @@ const run = (cmd: string, args: string[], cwd: string) => {
   catch (error: any) { throw new Error(`${path.basename(cmd)} ${args.slice(0, 2).join(' ')} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`); }
 };
 
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string }
+/** How a state cell is reached before its screenshot. `none` = the rest state
+ *  (and `disabled`, which is a prop, not an interaction). */
+export type Interaction = 'none' | Exclude<InteractionState, 'default' | 'disabled'>;
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string;
+  interaction: Interaction; /** the contract state this cell draws, when it draws one */ state?: Exclude<InteractionState, 'default'> }
 
 /** Array props (`arrayOf`) take the design's own repeat sample from the
  * contract anatomy; the consumer supplies no content of its own. */
@@ -92,18 +106,37 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
   const samples = arraySamples(contract);
+  // The set's variant axes the contract does NOT bind as VARIANT props, read
+  // by the proposer's own closed table: at most one may be the interaction-
+  // state axis (two refuse there, and are unmapped here).
+  const segmentsOf = (name: unknown) => String(name).split(',').map((s: string) => s.trim()).flatMap((segment: string) => { const eq = segment.indexOf('='); return eq <= 0 ? [] : [[segment.slice(0, eq), segment.slice(eq + 1)] as const]; });
+  const unbound = new Map<string, string[]>();
+  for (const variant of set.variants) for (const [property, value] of segmentsOf(variant.name)) {
+    if (variantProps.some(p => p.bindings.figma.property === property)) continue;
+    const values = unbound.get(property) ?? []; if (!values.includes(value)) values.push(value); unbound.set(property, values);
+  }
+  const reading = readStateAxes([...unbound].map(([property, values]) => ({ property, values })));
+  const stateAxis = reading.kind === 'projected' ? reading.projection : null;
+  const disabledProp = (contract.props as any[]).find(p => p.name === 'disabled' && p.type === 'boolean');
   const cases: Case[] = set.variants.map((variant: any) => {
     const props: Record<string, unknown> = { ...samples };
-    for (const segment of String(variant.name).split(',').map((s: string) => s.trim())) {
-      const eq = segment.indexOf('='); if (eq <= 0) continue;
-      const property = segment.slice(0, eq), value = segment.slice(eq + 1);
+    let interaction: Interaction = 'none', state: Case['state'];
+    for (const [property, value] of segmentsOf(variant.name)) {
       const prop = variantProps.find(p => p.bindings.figma.property === property);
-      if (!prop) { unmapped.add(`${property} (no VARIANT prop)`); continue; }
+      if (!prop && stateAxis?.property === property) {
+        const projected = stateAxis.values.find(v => v.value === value)!.state;
+        if (projected === 'default') continue;
+        state = projected;
+        if (projected === 'disabled') { if (disabledProp) props[disabledProp.name] = true; else unmapped.add(`${property}=${value} (state axis: the contract has no \`disabled\` boolean)`); }
+        else interaction = projected;
+        continue;
+      }
+      if (!prop) { unmapped.add(`${property} (no VARIANT prop${reading.kind === 'refused' ? `; ${reading.reason}` : ''})`); continue; }
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
-    const key = Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
-    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name };
+    const key = [...Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`), ...(interaction === 'none' ? [] : [`state-${interaction}`])].join('_') || 'default';
+    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}) };
   });
   const keys = cases.map(c => c.key);
   for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
@@ -283,9 +316,43 @@ async function main() {
       const cells = await page.$$('[data-cell]');
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
+      // INTERACTION STATES (docs/23 §D.41). What the cell PAINTS, as one string:
+      // taken at rest and again in the state, so a state the contract declares
+      // but the generated CSS never reaches is caught by name, not by pixels.
+      // Serialized as text: tsx would otherwise inject its __name helper into the page.
+      const paintOf = new Function('el', `
+        return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n); return [s.backgroundColor, s.color, s.borderTopColor, s.borderTopWidth, s.outlineStyle, s.outlineWidth, s.outlineColor, s.boxShadow, s.opacity, s.fill, s.stroke].join('|'); }).join('/');
+      `) as (el: Element) => string;
+      // Keyboard-modality focus on the component's own focus target: the root
+      // when it is focusable, else its first focusable descendant. Returns
+      // whether :focus-visible really matches — nothing is forced.
+      const focusVisibly = new Function('el', `
+        const root = el.firstElementChild; if (!root) return false;
+        const focusable = n => n.tabIndex >= 0 && !n.disabled;
+        const target = focusable(root) ? root : [...root.querySelectorAll('*')].find(focusable);
+        if (!target) return false;
+        target.focus();
+        return target.matches(':focus-visible');
+      `) as (el: Element) => boolean;
+      const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
+      const paints: Record<string, string> = {};
+      const stateProblems = new Set<string>();
+      receipt.behavior.states = [];
       for (const c of cases) {
         const cell = page.locator(`[data-cell="${c.key}"]`);
         const root = cell.locator(':scope > *').first();
+        if (c.state && !declaredStates.includes(c.state)) stateProblems.add(`state-not-carried:${c.state} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`);
+        const restPaint = c.interaction === 'none' ? null : await cell.evaluate(paintOf);
+        let reached = true;
+        if (c.interaction === 'hover' || c.interaction === 'active') {
+          // A real pointer, as extract/figma/visual-parity/render.ts does it.
+          await root.scrollIntoViewIfNeeded();
+          const box = await root.boundingBox();
+          if (!box) reached = false;
+          else { await page.mouse.move(box.x + (box.width > 0 ? box.width / 2 : 2), box.y + (box.height > 0 ? box.height / 2 : 2)); if (c.interaction === 'active') await page.mouse.down(); }
+        }
+        if (c.interaction === 'focus-visible') { await page.keyboard.press('Tab'); reached = await cell.evaluate(focusVisibly); }
+        if (!reached) problems.push(`state-unreachable:${c.interaction}:${c.key}`);
         const style = await root.evaluate(el => { const s = getComputedStyle(el); return { backgroundColor: s.backgroundColor, color: s.color, width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height, tag: el.tagName.toLowerCase(), role: el.getAttribute('role') }; });
         // Fonts: the family the generated CSS asks for on text, and whether the
         // clean consumer could actually satisfy it. An unavailable family is a
@@ -306,8 +373,30 @@ async function main() {
         // The root element's layout box on a white page, the same comparison
         // basis the application uses; Figma's export is the node's own bounds.
         const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
-        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, rendered: { text, ...style, font }, screenshot: path.basename(shot) });
+        paints[c.key] = await cell.evaluate(paintOf);
+        if (c.interaction !== 'none') {
+          const changed = paints[c.key] !== restPaint;
+          receipt.behavior.states.push({ key: c.key, state: c.state, reachedBy: c.interaction === 'hover' ? 'pointer hover' : c.interaction === 'active' ? 'pointer down' : 'keyboard-modality focus', reached, paintChanged: changed });
+          if (reached && !changed && declaredStates.includes(c.interaction)) problems.push(`state-inert:${c.interaction}:${c.key}`);
+          // Leave no residue for the next cell: release, move off every component, drop focus.
+          if (c.interaction === 'active') await page.mouse.up();
+          await page.mouse.move(0, 0);
+          await page.evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+        }
+        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot) });
       }
+      // `disabled` is a prop, not an interaction: its cell is compared with the
+      // rest cell that has the same other props.
+      for (const c of cases.filter(x => x.state === 'disabled')) {
+        const { disabled: _omit, ...others } = c.props as Record<string, unknown>;
+        const sorted = (o: Record<string, unknown>) => JSON.stringify(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)));
+        const rest = cases.find(x => !x.state && sorted(x.props) === sorted(others));
+        if (!rest) continue;
+        const changed = paints[c.key] !== paints[rest.key];
+        receipt.behavior.states.push({ key: c.key, state: 'disabled', reachedBy: 'the disabled prop', reached: true, paintChanged: changed, comparedWith: rest.key });
+        if (!changed && declaredStates.includes('disabled')) problems.push(`state-inert:disabled:${c.key}`);
+      }
+      problems.push(...stateProblems);
       // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
       if (cases[0]?.textProp) {
         const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
