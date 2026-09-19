@@ -1,0 +1,43 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.placeholder",
+  "name": "Placeholder",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Vector": {
+          "tokens": {
+            "background-color": "{imported.placeholder.vector.background-color}"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.placeholder.root.width}",
+        "height": "{imported.placeholder.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+        "componentSetKey": "2a4fc81b3de2d664f9b15ba75f39e5bcc97938a6",
+        "nodeId": "187:877"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Placeholder",
+        "export": "Placeholder"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox-group.contract.json (ds.checkbox-group v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  gap: var(--imported-checkbox-group-root-gap);
+  width: fit-content;
+  height: fit-content;
+}
+
+.Label {
+  color: var(--imported-checkbox-group-label-color);
+  font-size: var(--imported-text-typography-body-sm-regular-font-size);
+  font-weight: var(--imported-text-typography-body-sm-regular-font-weight);
+  line-height: var(--imported-text-typography-body-sm-regular-line-height);
+  font-family: Public Sans;
+  inline-size: calc-size(fit-content, round(up, size, 1px));
+  max-inline-size: 100%;
+  align-self: flex-start;
+}
+
+.alLayoutsetUnresolved {
+  display: flex;
+  flex-direction: column;
+}
+
+.orientation-column .alLayoutsetUnresolved {
+  gap: var(--imported-checkbox-group-al-layout-set-unresolved-gap-column);
+}
+
+.orientation-row .alLayoutsetUnresolved {
+  gap: var(--imported-checkbox-group-al-layout-set-unresolved-gap-row);
+}
+
+.orientation-row .alLayoutsetUnresolved {
+  flex-direction: row;
+  align-items: center;
+}

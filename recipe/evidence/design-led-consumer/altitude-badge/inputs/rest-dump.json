@@ -1,9 +1,9 @@
 {
   "_provenance": {
     "fileKey": "y83n4o9LOGs74oAoguFcGS",
-    "extractedAt": "2026-09-18",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.33) for design→contract proposal.",
-    "dumpVersion": "1.33",
+    "extractedAt": "2026-09-19",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.36) for design→contract proposal.",
+    "dumpVersion": "1.36",
     "captureGaps": [
       "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
       "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
@@ -13,6 +13,21 @@
       "layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line",
       "the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types"
     ],
+    "stampsObservable": true,
+    "closure": {
+      "rule": "follow-instances",
+      "cap": 64,
+      "requested": [
+        {
+          "nodeId": "3538:35772",
+          "name": "Badge",
+          "type": "COMPONENT_SET"
+        }
+      ],
+      "pulled": [],
+      "unresolved": [],
+      "cycles": []
+    },
     "variables": {
       "status": "unavailable",
       "cause": "scope",
@@ -93,6 +108,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
@@ -145,6 +161,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
@@ -197,6 +214,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
@@ -249,6 +267,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
@@ -301,6 +320,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"

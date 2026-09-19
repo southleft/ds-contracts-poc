@@ -38,6 +38,7 @@ export const webComponentsEmitter: Emitter = {
       // task #47: the registered target now hands the emitter the SAME
       // inventory the React target validates against, built the same way.
       tokens: tokenInventoryFromJson([ctx.tokens.primitives, ctx.tokens.semantic, ctx.tokens.light, ctx.tokens.dark]),
+      tokenValues: ctx.tokens,
     });
     return [
       { path: `${tag}.ts`, contents: result.element },

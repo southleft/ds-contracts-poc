@@ -2113,6 +2113,80 @@ export interface Part {
    *  Emitted by extract/computed (fuse.ts `hugEvidence`); a part with no
    *  `max-width` channel must not carry it (validateContract refuses). */
   hugsBelowMaxWidth?: boolean;
+  /** Design-led round (dump v1.35) — a CAPTURED canvas fact, never
+   *  hand-inferred: this part's stroke is drawn WITHOUT taking layout space.
+   *  It is Figma's auto-layout `strokesIncludedInLayout`, under its own name,
+   *  and only the non-default value is spelled.
+   *
+   *  ABSENT is the meaning every contract already had: the part's `border-*`
+   *  channels are a CSS border under `box-sizing: border-box` — the box grows
+   *  by the weight — which is what the code emitters write and what a frame
+   *  THIS pipeline generates reads back as (`true`, measured on the committed
+   *  census responses: 160 of 160 generated auto-layout frames, 0 of the
+   *  designer-drawn ones). So `true` is never written, a generated set
+   *  proposes back to exactly its own contract, and no existing contract
+   *  changes meaning.
+   *
+   *  `false` is a designer's frame at Figma's default: the stroke paints OVER
+   *  the padding and the box is content + padding. The `border-width` /
+   *  `border-color` channels (and their per-side longhands) keep carrying the
+   *  stroke — tokens stay bound, the padding stays the designer's number —
+   *  and what changes is how each surface DRAWS them: the code emitters paint
+   *  an inset `box-shadow` ring instead of a `border` (strokeRingLowering —
+   *  there is no CSS property that says "border, but take no space"); the
+   *  canvas writer sets `strokesIncludedInLayout = false` on the frame it
+   *  builds. The rejected alternative — rewriting padding to "padding minus
+   *  border" — destroys the padding's variable binding and cannot fit a 16px
+   *  box around 8+8 padding plus a 2px border at all.
+   *
+   *  `outline-*` channels (an OUTSIDE stroke) never take layout space in CSS,
+   *  so the code surfaces ignore the flag for them; the canvas still honours
+   *  it. A part that carries no stroke channel must not carry the flag
+   *  (validateContract refuses — the hugsBelowMaxWidth discipline). */
+  strokesIncludedInLayout?: false;
+  /** Design-led round (dump v1.36) — a CAPTURED canvas fact, never
+   *  hand-inferred: this TEXT part's box sizes itself to its text, and a
+   *  Figma text box that does so is a WHOLE number of pixels wide — the
+   *  glyph advance rounded UP. It is Figma's `textAutoResize`, under its own
+   *  name, and only the value the code surfaces lower is spelled:
+   *  `WIDTH_AND_HEIGHT` (auto width and height). `NONE`, `HEIGHT` and the
+   *  deprecated `TRUNCATE` are a fixed or filled box, which the width /
+   *  fill vocabulary already carries, and are never written here.
+   *
+   *  ABSENT is the meaning every contract already had: the text element is
+   *  as wide as its glyph run at the FRACTIONAL advance the browser lays it
+   *  out at (`Label` in Inter Semi Bold 14: 31.40625 px where Figma's box is
+   *  32). Measured with the design-led consumer check on the 72-variant CBDS
+   *  Badge: 26 of the 48 × 16 px `size=small` variants missed the 5 % limit
+   *  at 4.4–7.3 % with every content size equal, because the hug root
+   *  rendered 47.40625 px wide against Figma's 48 and the right edge
+   *  antialiased across two columns. No existing contract or emitted byte
+   *  changes when the field is absent.
+   *
+   *  `WIDTH_AND_HEIGHT` lowers, on the code surfaces, to the same box Figma
+   *  draws: `inline-size: calc-size(fit-content, round(up, size, 1px))` on the
+   *  text element — its fit-content inline size (less its own px / em / rem
+   *  trailing letter spacing) rounded up to the pixel, clamped to its
+   *  container, as a PROGRESSIVE ENHANCEMENT: a browser without `calc-size()`
+   *  drops the declaration at parse and keeps today's fractional box (< 1 px
+   *  narrower). fit-content, not max-content: a runtime string that does not
+   *  fit still WRAPS (review, PR 132). Logical properties, so vertical and RTL
+   *  writing modes round the axis the text runs along. The canvas writer sets
+   *  `textAutoResize = 'WIDTH_AND_HEIGHT'` on the node it builds — which is
+   *  also what `figma.createText()` is born with, so a set this pipeline wrote
+   *  reads the fact back and proposes it: NOT a fixed point in the flagless
+   *  direction (Figma has no fractional text box; docs/23 §D.42 names it).
+   *
+   *  The fact qualifies a text box that HUGS its text: a part that carries
+   *  it must own text (`text` / `content` / `textByProp`) and must not carry
+   *  a `width` / `inline-size` / `flex` channel, `layout.grow`, or a
+   *  truncation channel (`text-overflow`, `-webkit-line-clamp`) — a filled,
+   *  fixed or truncated box is not sized by its text; its tracking must be
+   *  its own px / em / rem length (never inherited, a %, or unitless); and it
+   *  must be block-level where it sits (validateContract refuses each by
+   *  name, the hugsBelowMaxWidth discipline). The root never carries it: its
+   *  box is padding plus content, and the fact lives on the text part. */
+  textAutoResize?: "WIDTH_AND_HEIGHT";
   /** v18 (text-indent off-box round) — MEASURED sizing evidence, never
    *  hand-authored. The enum-axis values on which this element's own
    *  `text-indent` lays its first line ENTIRELY OUTSIDE its content box
@@ -2497,6 +2571,13 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
       .optional(),
     /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
     hugsBelowMaxWidth: z.boolean().optional(),
+    /** dump v1.35: the stroke takes NO layout space — see the Part interface.
+     *  Only `false` is spelled; absent keeps the space-taking border. */
+    strokesIncludedInLayout: z.literal(false).optional(),
+    /** dump v1.36: the text box sizes itself to its text and is a whole
+     *  number of pixels wide — see the Part interface. Only the auto-width
+     *  value is spelled; absent keeps the browser's fractional box. */
+    textAutoResize: z.literal("WIDTH_AND_HEIGHT").optional(),
     /** v18: MEASURED text-indent evidence — see the Part interface. */
     textOutOfBox: z
       .strictObject({
@@ -2659,6 +2740,43 @@ export const ContractBindingsSchema = z.strictObject({
     /** OPT-IN canvas-only interaction previews — the rules are documented on
      *  the contract's `states` field above. (v16: figmaStatePreviews) */
     statePreviews: z.boolean().optional(),
+    /** DECLARED UNDRAWN COMBINATIONS (additive, optional). A designer's
+     *  component set is often not the full Cartesian product of its variant
+     *  axes (a checkbox icon with no `disabled` + `error` cell). Each entry is
+     *  ONE complete tuple over the contract's variant axes — every enum prop
+     *  and every VARIANT-bound boolean prop, keyed by PROP NAME:
+     *
+     *      { "selection": "checked", "size": "small", "state": "disabled", "error": true }
+     *
+     *  An enum axis takes a canonical enum value, a VARIANT-bound boolean a
+     *  JSON boolean, and an axis carrying `bindings.figma.unsetValue` may take
+     *  `null` for its canvas-only omission option. Complete tuples, never
+     *  patterns: a pattern (`{state: disabled, error: true}`) has many
+     *  spellings for one set of cells, a tuple list has exactly one — so the
+     *  list is canonical (tuples in the product's enumeration order) and
+     *  duplicate-free. The order of KEYS inside a tuple is not part of
+     *  validity: a JSON object is unordered and key-sorting tools must not
+     *  turn a sound contract into a refused one.
+     *
+     *  Semantics: those combinations are NOT DRAWN ON THE CANVAS — the Figma
+     *  writer emits no variant for them and the exact variant projection
+     *  expects the product MINUS this list, exactly (a drawn cell the list
+     *  calls absent is an extra row; an undrawn cell it does not name is a
+     *  missing row). It is a canvas fact only: the code surfaces render any
+     *  prop combination by composition and do not read this field
+     *  (`undrawn-combination-rendered-by-composition`, docs/23 §D.40).
+     *
+     *  validateContract refuses, by name: a tuple that is not a member of the
+     *  product, a duplicate, a non-canonical order, the default tuple, a list
+     *  that leaves an axis value (or the whole product) undrawn, a list that
+     *  leaves MORE cells undrawn than drawn (the product is then not a
+     *  description of the set), a product above ABSENT_VARIANTS_MAX_PRODUCT,
+     *  and the field together with `statePreviews` or a `native`
+     *  representation. */
+    absentVariants: z
+      .array(z.record(z.string(), z.union([z.string(), z.boolean(), z.null()])))
+      .min(1)
+      .optional(),
     /** (v16: anchors.figma) */
     anchors: FigmaAnchorsSchema,
   }),
@@ -3114,6 +3232,33 @@ export const slotFigmaProperty = (slot: Slot) =>
 export const slotVisibilityProperty = (slot: Slot) =>
   `Show ${slotFigmaProperty(slot)}`;
 
+/** Every contract id a contract depends on, in the order `sortByDependencies`
+ *  visits them: anatomy component refs, then per slot its `accepts` entries
+ *  and its `defaultContent` items. ONE walk, so a tool that needs "what must
+ *  ship beside this contract" (the clean-consumer check) reads the same edges
+ *  generation orders by. */
+export function contractDependencyEdges(
+  contract: Contract,
+): Array<
+  | { kind: "component"; id: string }
+  | { kind: "accepts"; id: string; slot: Slot }
+  | { kind: "defaultContent"; id: string; slot: Slot }
+> {
+  const out: Array<
+    | { kind: "component"; id: string }
+    | { kind: "accepts"; id: string; slot: Slot }
+    | { kind: "defaultContent"; id: string; slot: Slot }
+  > = [];
+  for (const { ref } of componentRefsOf(contract))
+    out.push({ kind: "component", id: ref.id });
+  for (const { slot } of slotsOf(contract)) {
+    for (const id of slot.accepts ?? []) out.push({ kind: "accepts", id, slot });
+    for (const item of slot.defaultContent ?? [])
+      out.push({ kind: "defaultContent", id: item.id, slot });
+  }
+  return out;
+}
+
 /** Topologically sort contracts by composition dependencies; throws on
  *  cycles and unknown references — invalid states are refused, not rendered. */
 export function sortByDependencies(contracts: Contract[]): Contract[] {
@@ -3134,18 +3279,19 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
       );
     }
     state.set(c.id, "visiting");
-    for (const { ref } of componentRefsOf(c)) {
-      const dep = byId.get(ref.id);
-      if (!dep)
-        throw new Error(`${c.id}: references unknown contract "${ref.id}"`);
-      visit(dep, [...chain, c.id]);
-    }
-    for (const { slot } of slotsOf(c)) {
-      for (const acceptedId of slot.accepts ?? []) {
-        const dep = byId.get(acceptedId);
+    for (const edge of contractDependencyEdges(c)) {
+      const dep = byId.get(edge.id);
+      if (edge.kind === "component") {
+        if (!dep)
+          throw new Error(`${c.id}: references unknown contract "${edge.id}"`);
+        visit(dep, [...chain, c.id]);
+        continue;
+      }
+      const slot = edge.slot;
+      if (edge.kind === "accepts") {
         if (!dep) {
           throw new Error(
-            `${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`,
+            `${c.id}: slot "${slot.name}" accepts unknown contract "${edge.id}"`,
           );
         }
         // G10 — THE `accepts` ORDERING PROPERTY, stated. `accepts` induces a
@@ -3157,27 +3303,25 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
         // Runtime-side, an entry pointing OUTSIDE the emitted subset is a named
         // DEFERRAL (`slot-accepts-deferred`, emit-figma-script slotPreferredValues),
         // never a throw — preferredValues is a picker hint and refuses nothing.
-        viaAccepts.add(acceptedId);
+        viaAccepts.add(edge.id);
         visit(dep, [...chain, c.id]);
+        continue;
       }
-      for (const item of slot.defaultContent ?? []) {
-        const dep = byId.get(item.id);
-        if (!dep) {
-          throw new Error(
-            `${c.id}: slot "${slot.name}" defaultContent references unknown contract "${item.id}"`,
-          );
-        }
-        if (
-          slot.accepts &&
-          slot.accepts.length > 0 &&
-          !slot.accepts.includes(item.id)
-        ) {
-          throw new Error(
-            `${c.id}: slot "${slot.name}" defaultContent includes "${item.id}" which is not in accepts`,
-          );
-        }
-        visit(dep, [...chain, c.id]);
+      if (!dep) {
+        throw new Error(
+          `${c.id}: slot "${slot.name}" defaultContent references unknown contract "${edge.id}"`,
+        );
       }
+      if (
+        slot.accepts &&
+        slot.accepts.length > 0 &&
+        !slot.accepts.includes(edge.id)
+      ) {
+        throw new Error(
+          `${c.id}: slot "${slot.name}" defaultContent includes "${edge.id}" which is not in accepts`,
+        );
+      }
+      visit(dep, [...chain, c.id]);
     }
     state.set(c.id, "done");
     sorted.push(c);
@@ -3199,3 +3343,213 @@ export const DEFAULT_FONT_FAMILY = "Inter";
  *  disagree with the canvas. The face itself is the consumer's to provide
  *  (FC-FONT-SUBSTRATE); the generic tail keeps an absent face sans-serif. */
 export const DEFAULT_FONT_STACK = `${DEFAULT_FONT_FAMILY}, system-ui, sans-serif`;
+
+// ---------------------------------------------------------------------------
+// bindings.figma.absentVariants — the ONE reading of a declared absence list.
+// The referee (validateContract), the Figma writer and the design→contract
+// proposer all go through these, so the three cannot disagree about which
+// props are variant axes, how a tuple is keyed, or what canonical order is.
+// ---------------------------------------------------------------------------
+
+/** One variant axis as the absence vocabulary sees it: the prop, and its
+ *  options in DECLARED order (`null` = the canvas-only `unsetValue` option,
+ *  first; an enum's values as declared; a VARIANT-bound boolean false, true). */
+export interface AbsentVariantAxis {
+  prop: Prop;
+  options: Array<string | boolean | null>;
+}
+
+/** Every enum prop and every VARIANT-bound boolean prop, in prop order — the
+ *  same axis list the Figma writer multiplies. */
+export function absentVariantAxes(contract: Contract): AbsentVariantAxis[] {
+  return contract.props
+    .filter(
+      (p) =>
+        (typeof p.type === "object" && "enum" in p.type) ||
+        (p.type === "boolean" && p.bindings.figma.kind === "VARIANT"),
+    )
+    .map((prop) => {
+      const own: Array<string | boolean> =
+        typeof prop.type === "object" && "enum" in prop.type
+          ? [...prop.type.enum]
+          : [false, true];
+      return {
+        prop,
+        options:
+          prop.bindings.figma.unsetValue === undefined ? own : [null, ...own],
+      };
+    });
+}
+
+/** The identity of one combination: each axis's option in axis order. A
+ *  boolean and the string of the same spelling are different options. */
+export const absentVariantKey = (
+  axes: readonly AbsentVariantAxis[],
+  tuple: Readonly<Record<string, string | boolean | null>>,
+): string => JSON.stringify(axes.map((a) => tuple[a.prop.name] ?? null));
+
+/** The default combination — the variant the writer emits FIRST, which Figma
+ *  reads positionally as the set's default variant. */
+export function defaultVariantTuple(
+  axes: readonly AbsentVariantAxis[],
+): Record<string, string | boolean | null> {
+  return Object.fromEntries(
+    axes.map(({ prop, options }) => {
+      if (prop.bindings.figma.unsetValue !== undefined) return [prop.name, null];
+      if (prop.type === "boolean") return [prop.name, prop.default === true];
+      const declared = options.find((o) => o === String(prop.default));
+      return [prop.name, prop.default !== undefined && declared !== undefined ? declared : options[0]!];
+    }),
+  );
+}
+
+/** Keys of the declared absences, or an empty set when the contract declares
+ *  none. Reads the list as-is: call only on a contract the referee accepted. */
+export function absentVariantKeys(contract: Contract): Set<string> {
+  const list = contract.bindings?.figma?.absentVariants;
+  if (!list || list.length === 0) return new Set();
+  const axes = absentVariantAxes(contract);
+  return new Set(list.map((t) => absentVariantKey(axes, t)));
+}
+
+/** The largest variant product a declaration may range over. A bound on the
+ *  REFEREE's work, not on design: the tuple encoding grows with the product
+ *  (not with what is drawn), so without it a "star" set on 8 axes × 5 values is
+ *  a 35 MB contract and validating one tuple walked 1.68 M cells. The largest
+ *  product among this repo's 984 tracked contracts is 216. */
+export const ABSENT_VARIANTS_MAX_PRODUCT = 4096;
+
+/** Every reason a declared absence list is not acceptable, each NAMED. Empty
+ *  when the field is absent or sound. Never materialises the product: each
+ *  tuple is checked against the axes directly and ranked by mixed radix, so
+ *  the work is O(tuples × axes). */
+export function absentVariantIssues(contract: Contract): string[] {
+  const list = contract.bindings?.figma?.absentVariants;
+  if (list === undefined) return [];
+  const at = "bindings.figma.absentVariants";
+  const issues: string[] = [];
+  if (contract.bindings.figma.representation === "native") {
+    issues.push(
+      `absent-variants-native-representation: ${at} describes a generated component set — bindings.figma.representation "native" declares there is none`,
+    );
+  }
+  // The two sparse shapes do not compose. State previews draw ONE row per
+  // state per primary-axis value with every other axis PINNED to its first
+  // value, and the preview axis is not a contract prop — so a tuple over the
+  // props cannot address a preview row, and an absent base cell a preview row
+  // is pinned to would leave "is its preview drawn?" undefined. Refused rather
+  // than guessed; the exact projection ignores the list on such a set too.
+  if (contract.bindings.figma.statePreviews) {
+    issues.push(
+      `absent-variants-with-state-previews: ${at} cannot be combined with bindings.figma.statePreviews — the preview matrix is already sparse by its own rule (one row per state per primary value, other axes pinned) and a tuple over the props cannot address a preview row`,
+    );
+  }
+  const axes = absentVariantAxes(contract);
+  if (axes.length === 0) {
+    issues.push(
+      `absent-variants-no-axes: ${at} is declared but the contract has no variant axis (no enum prop, no VARIANT-bound boolean)`,
+    );
+    return issues;
+  }
+  const productSize = axes.reduce((n, a) => n * a.options.length, 1);
+  if (productSize > ABSENT_VARIANTS_MAX_PRODUCT) {
+    issues.push(
+      `absent-variants-product-too-large: ${at} ranges over ${productSize} combinations (${axes.map((a) => `${a.prop.name}×${a.options.length}`).join(" · ")}); a declaration is a list of complete tuples and is refused above ${ABSENT_VARIANTS_MAX_PRODUCT} — a set that large is not described by "a product with a few holes"`,
+    );
+    return issues;
+  }
+  const axisNames = new Set(axes.map((a) => a.prop.name));
+  const spell = (t: Record<string, unknown>) => JSON.stringify(t);
+  const seen = new Set<number>();
+  const ranks: number[] = [];
+  list.forEach((tuple, i) => {
+    const here = `${at}[${i}] ${spell(tuple)}`;
+    let ok = true;
+    for (const key of Object.keys(tuple)) {
+      if (axisNames.has(key)) continue;
+      ok = false;
+      const prop = contract.props.find((p) => p.name === key);
+      issues.push(
+        prop
+          ? `absent-variant-non-variant-axis: ${here} names prop "${key}", which is not a variant axis (figma kind ${prop.bindings.figma.kind}) — only enum props and VARIANT-bound booleans multiply the component set`
+          : `absent-variant-non-variant-axis: ${here} names "${key}", which is not a prop of this contract`,
+      );
+    }
+    const missing = axes.filter((a) => !Object.hasOwn(tuple, a.prop.name)).map((a) => a.prop.name);
+    if (missing.length > 0) {
+      ok = false;
+      issues.push(
+        `absent-variant-incomplete: ${here} does not name ${missing.map((m) => `"${m}"`).join(", ")} — an entry is ONE complete combination over every variant axis, never a pattern`,
+      );
+    }
+    // Mixed-radix rank in the product's enumeration order (first axis slowest).
+    let rank = 0;
+    for (const a of axes) {
+      if (!Object.hasOwn(tuple, a.prop.name)) continue;
+      const value = tuple[a.prop.name] as string | boolean | null;
+      const index = a.options.findIndex((o) => o === value);
+      if (index >= 0) {
+        rank = rank * a.options.length + index;
+        continue;
+      }
+      ok = false;
+      issues.push(
+        `absent-variant-not-in-product: ${here} gives "${a.prop.name}" the value ${JSON.stringify(value)}, which is not one of its options (${a.options.map((o) => JSON.stringify(o)).join(", ")})`,
+      );
+    }
+    if (!ok) return;
+    if (seen.has(rank)) {
+      issues.push(`absent-variant-duplicate: ${here} repeats an earlier entry`);
+      return;
+    }
+    seen.add(rank);
+    ranks.push(rank);
+  });
+  if (issues.length > 0) return issues;
+  // Canonical order = the product's own enumeration order (first axis slowest,
+  // options as declared). TUPLE order only: the order of KEYS inside a tuple is
+  // not part of validity — a JSON object is unordered, and any tool that sorts
+  // keys (jq -S, canonicalJson) must not turn a sound contract into a refused
+  // one. absentVariantKey reads every tuple in axis order regardless.
+  if (ranks.some((r, n) => n > 0 && ranks[n - 1]! > r)) {
+    issues.push(
+      `absent-variants-order: ${at} is not in canonical order — list the tuples in the product's enumeration order (axes ${axes.map((a) => a.prop.name).join(", ")}; first axis slowest, options as declared), so one set of undrawn cells has one spelling`,
+    );
+  }
+  if (seen.size >= productSize) {
+    issues.push(`absent-variants-cover-product: ${at} names all ${productSize} combinations — nothing would be drawn`);
+    return issues;
+  }
+  // MEANING, not convenience: a declaration says "this set is the product of
+  // its axes, minus a few cells". When MORE cells are undrawn than drawn the
+  // product is not the model of the set (a "star" — the default plus each axis
+  // varied alone — is not a product with holes), most of what the code
+  // surfaces would render is a composition nobody drew, and the per-axis
+  // inferences rest on a minority of the cells they claim to explain.
+  const drawn = productSize - seen.size;
+  if (seen.size > drawn) {
+    issues.push(
+      `absent-variants-mostly-undrawn: ${at} leaves ${drawn} of ${productSize} combinations drawn and ${seen.size} undrawn — more undrawn than drawn, so the product of these axes is not a description of the set; model the drawn combinations with fewer or different axes`,
+    );
+  }
+  const defaults = defaultVariantTuple(axes);
+  let defaultRank = 0;
+  for (const a of axes) defaultRank = defaultRank * a.options.length + a.options.findIndex((o) => o === defaults[a.prop.name]);
+  if (seen.has(defaultRank)) {
+    issues.push(
+      `absent-variants-default-tuple: ${at} names the default combination ${absentVariantKey(axes, defaults)} — the default variant is the one Figma reads every axis default from and must be drawn`,
+    );
+  }
+  for (const a of axes) {
+    const cellsPerOption = productSize / a.options.length;
+    for (const option of a.options) {
+      const undrawn = list.filter((t) => (t[a.prop.name] ?? null) === option).length;
+      if (undrawn >= cellsPerOption) {
+        issues.push(
+          `absent-variants-erase-axis-value: ${at} leaves no drawn combination with "${a.prop.name}" = ${JSON.stringify(option)} — a variant option exists on the canvas only while some variant carries it, so the prop's VARIANT binding could not round-trip`,
+        );
+      }
+    }
+  }
+  return issues;
+}

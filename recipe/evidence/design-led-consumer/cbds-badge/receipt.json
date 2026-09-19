@@ -6,16 +6,20 @@
   "component": "Badge",
   "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
   "generatedSha256": {
-    "Badge/Badge.module.css": "d949ef044ad77f7b4aac34dac0dc17baf026d1a13d83e31eb3efb2727965f70a",
+    "Badge/Badge.module.css": "a0ddeccc38f4b1bf93527849fbe151e24df330dca135d89ee2bebf48ade0b15e",
     "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
-    "Badge/Badge.tsx": "9c96b5d22eda3805f6c7e1f2ed2c5424db276d743023ca138732534dd8805f4e",
+    "Badge/Badge.tsx": "2c72fe86021573d757b44d7add97e29097256cfe6aaafe6cf4f7b5d72e2d0da4",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
-    "Icon/Icon.module.css": "e2bda912f4ae0bca42c533c5ab5e8b141fab371209283128a6a62cc2c7b93382",
-    "Icon/Icon.stories.tsx": "e36c0aa86ef8eeba4d96b27f80cf42c049f339dce5287bd50b7a23d37ca7b988",
-    "Icon/Icon.tsx": "ed8bfa9d059ea8ae70ee60fd5dc611c69f013597ca15f095d7bddaf11f4693ed",
+    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.stories.tsx": "5efb21d37082bbbd15c867bfd449ea1899174094ec30bc65b32865aeeb5042d4",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
     "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
-    "index.ts": "82c5420cf4865583dedd077305c90a9925a720cb8fbfac2a0d3328f69c1e98c2",
-    "tokens.css": "a5d6616ba9a9573f0963542d00c8b40aceda1852d5dfd94191eaa3df0cdcf0e1"
+    "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
+    "Placeholder/Placeholder.stories.tsx": "b6932deddecfac468e0cc5dde35f6f51bab01ad503493f26535247a3ee0bc0de",
+    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
+    "tokens.css": "fedc129ff2befce79d64206612dc963797c38e8b98c25d524f33a38133fb9ef2"
   },
   "cases": [
     {
@@ -32,12 +36,12 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -59,12 +63,12 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -86,12 +90,12 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -113,12 +117,12 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -140,12 +144,12 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -167,12 +171,12 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -194,12 +198,12 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -221,12 +225,12 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -248,12 +252,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -275,12 +279,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -302,12 +306,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -329,12 +333,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -356,12 +360,12 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -383,12 +387,12 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -410,12 +414,12 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -437,12 +441,12 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -464,12 +468,12 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -491,12 +495,12 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -518,12 +522,12 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -545,12 +549,12 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -572,12 +576,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -599,12 +603,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -626,12 +630,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -653,12 +657,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -680,12 +684,12 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -707,12 +711,12 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -734,12 +738,12 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -761,12 +765,12 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -788,12 +792,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -815,12 +819,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -842,12 +846,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -869,12 +873,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -896,12 +900,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -923,12 +927,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -950,12 +954,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -977,12 +981,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1004,12 +1008,12 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1031,12 +1035,12 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1058,12 +1062,12 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1085,12 +1089,12 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1112,12 +1116,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1139,12 +1143,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1166,12 +1170,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1193,12 +1197,12 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1220,12 +1224,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1247,12 +1251,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1274,12 +1278,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1301,12 +1305,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1328,12 +1332,12 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1355,12 +1359,12 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1382,12 +1386,12 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1409,12 +1413,12 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1436,12 +1440,12 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1463,12 +1467,12 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1490,12 +1494,12 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1517,12 +1521,12 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1544,12 +1548,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1571,12 +1575,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1598,12 +1602,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1625,12 +1629,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1652,12 +1656,12 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1679,12 +1683,12 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1706,12 +1710,12 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1733,12 +1737,12 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1760,12 +1764,12 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1787,12 +1791,12 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 58.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1814,12 +1818,12 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1841,12 +1845,12 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 45.34375,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1868,12 +1872,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1895,12 +1899,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 62.234375,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "14px",
           "available": true
@@ -1922,12 +1926,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1949,12 +1953,12 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 49.34375,
-        "height": 20,
+        "width": 48,
+        "height": 16,
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "600",
           "size": "12px",
           "available": true
@@ -1964,6 +1968,7 @@
     }
   ],
   "behavior": {
+    "states": [],
     "text": {
       "prop": "text",
       "textBearingCells": [
@@ -2119,7 +2124,7 @@
     "children": {
       "contractDeclaresSlot": false,
       "renderedAtRuntime": false,
-      "refusedByType": false
+      "refusedByType": true
     },
     "variants": [
       {
@@ -2519,21 +2524,23 @@
   "images": {
     "status": "figma-images-collected",
     "reason": null,
-    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)",
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render's text boxes masked (inflated by the scorer's own 4 px) and only classifies an over-limit row",
     "limitPercent": 5,
     "cases": [
       {
         "key": "type-brand_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_861.png",
-        "mismatchPercent": 14.549180327868852,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 92.37,
+          "consumer": 92.28,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2543,7 +2550,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2555,15 +2562,17 @@
       {
         "key": "type-brand_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_917.png",
-        "mismatchPercent": 12.773224043715848,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 86.3,
+          "consumer": 86.27,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2573,7 +2582,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2585,15 +2594,17 @@
       {
         "key": "type-brand_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_825.png",
-        "mismatchPercent": 16.796875,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.26,
+          "consumer": 89.45,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2603,7 +2614,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2615,15 +2626,17 @@
       {
         "key": "type-brand_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_919.png",
-        "mismatchPercent": 15.755208333333334,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 83.24,
+          "consumer": 85.03,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2633,7 +2646,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2645,15 +2658,17 @@
       {
         "key": "type-brand_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_863.png",
-        "mismatchPercent": 12.021857923497267,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 98.02,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2663,7 +2678,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2675,15 +2690,17 @@
       {
         "key": "type-brand_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_921.png",
-        "mismatchPercent": 12.363387978142077,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 92.66,
+          "consumer": 92.9,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2693,7 +2710,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2705,15 +2722,17 @@
       {
         "key": "type-brand_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_827.png",
-        "mismatchPercent": 16.666666666666664,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.28,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2723,7 +2742,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2735,15 +2754,17 @@
       {
         "key": "type-brand_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_923.png",
-        "mismatchPercent": 15.234375,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 90.03,
+          "consumer": 94.4,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2753,7 +2774,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2765,15 +2786,17 @@
       {
         "key": "type-brand_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_865.png",
-        "mismatchPercent": 17.724867724867725,
-        "withinLimit": false,
+        "mismatchPercent": 1.2295081967213115,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 37.96,
+          "consumer": 40.3,
           "figma": 37.77
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2783,7 +2806,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2795,15 +2818,17 @@
       {
         "key": "type-brand_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_829.png",
-        "mismatchPercent": 12.103174603174603,
-        "withinLimit": false,
+        "mismatchPercent": 1.0245901639344261,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 39.75,
+          "consumer": 42.35,
           "figma": 38.87
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2813,7 +2838,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2825,16 +2850,18 @@
       {
         "key": "type-brand_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1011.png",
-        "mismatchPercent": 47.84313725490196,
-        "withinLimit": false,
+        "mismatchPercent": 2.604166666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 43.73,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -2843,8 +2870,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -2855,16 +2882,18 @@
       {
         "key": "type-brand_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1013.png",
-        "mismatchPercent": 42,
-        "withinLimit": false,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 45.3,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -2873,8 +2902,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -2885,15 +2914,17 @@
       {
         "key": "type-success_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_867.png",
-        "mismatchPercent": 13.866120218579233,
-        "withinLimit": false,
+        "mismatchPercent": 3.278688524590164,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 93.86,
+          "consumer": 92.28,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2903,7 +2934,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2915,15 +2946,17 @@
       {
         "key": "type-success_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_1047.png",
-        "mismatchPercent": 11.885245901639344,
-        "withinLimit": false,
+        "mismatchPercent": 3.278688524590164,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 85.03,
+          "consumer": 86.27,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2933,7 +2966,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -2945,15 +2978,17 @@
       {
         "key": "type-success_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_831.png",
-        "mismatchPercent": 17.317708333333336,
-        "withinLimit": false,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 88.56,
+          "consumer": 89.45,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2963,7 +2998,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2975,15 +3010,17 @@
       {
         "key": "type-success_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1049.png",
-        "mismatchPercent": 16.015625,
-        "withinLimit": false,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 85.73,
+          "consumer": 85.03,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -2993,7 +3030,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3005,15 +3042,17 @@
       {
         "key": "type-success_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_869.png",
-        "mismatchPercent": 14.754098360655737,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 99.72,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3023,7 +3062,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3035,15 +3074,17 @@
       {
         "key": "type-success_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_833.png",
-        "mismatchPercent": 11.953551912568305,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 91.1,
+          "consumer": 93.03,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3053,7 +3094,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3065,15 +3106,17 @@
       {
         "key": "type-success_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1065.png",
-        "mismatchPercent": 18.619791666666664,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 95.21,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3083,7 +3126,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3095,15 +3138,17 @@
       {
         "key": "type-success_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1067.png",
-        "mismatchPercent": 15.104166666666666,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 94.84,
+          "consumer": 95.05,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3113,7 +3158,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3125,15 +3170,17 @@
       {
         "key": "type-success_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_871.png",
-        "mismatchPercent": 14.351851851851851,
-        "withinLimit": false,
+        "mismatchPercent": 1.5027322404371584,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 37.76,
+          "consumer": 40.3,
           "figma": 37.77
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3143,7 +3190,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3155,15 +3202,17 @@
       {
         "key": "type-success_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_1081.png",
-        "mismatchPercent": 12.5,
-        "withinLimit": false,
+        "mismatchPercent": 1.2978142076502732,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 39.42,
+          "consumer": 42.35,
           "figma": 38.87
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3173,7 +3222,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3185,16 +3234,18 @@
       {
         "key": "type-success_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1083.png",
-        "mismatchPercent": 47.549019607843135,
-        "withinLimit": false,
+        "mismatchPercent": 3.2552083333333335,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 43.92,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3203,8 +3254,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3215,16 +3266,18 @@
       {
         "key": "type-success_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_835.png",
-        "mismatchPercent": 45.9,
-        "withinLimit": false,
+        "mismatchPercent": 2.994791666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 45.8,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3233,8 +3286,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3245,15 +3298,17 @@
       {
         "key": "type-warning_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_873.png",
-        "mismatchPercent": 13.797814207650273,
-        "withinLimit": false,
+        "mismatchPercent": 2.663934426229508,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 90.4,
+          "consumer": 92.01,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3263,7 +3318,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3275,15 +3330,17 @@
       {
         "key": "type-warning_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_1145.png",
-        "mismatchPercent": 12.021857923497267,
-        "withinLimit": false,
+        "mismatchPercent": 2.663934426229508,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 83.47,
+          "consumer": 86,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3293,7 +3350,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3305,15 +3362,17 @@
       {
         "key": "type-warning_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_837.png",
-        "mismatchPercent": 17.317708333333336,
-        "withinLimit": false,
+        "mismatchPercent": 3.3854166666666665,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 88.86,
+          "consumer": 89.06,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3323,7 +3382,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3335,15 +3394,17 @@
       {
         "key": "type-warning_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1147.png",
-        "mismatchPercent": 15.364583333333334,
-        "withinLimit": false,
+        "mismatchPercent": 3.3854166666666665,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 87.36,
+          "consumer": 84.64,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3353,7 +3414,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3365,15 +3426,17 @@
       {
         "key": "type-warning_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_875.png",
-        "mismatchPercent": 10.245901639344263,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 96.39,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3383,7 +3446,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3395,15 +3458,17 @@
       {
         "key": "type-warning_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_1149.png",
-        "mismatchPercent": 11.953551912568305,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 90.96,
+          "consumer": 92.9,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3413,7 +3478,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3425,15 +3490,17 @@
       {
         "key": "type-warning_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_839.png",
-        "mismatchPercent": 15.234375,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.28,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3443,7 +3510,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3455,15 +3522,17 @@
       {
         "key": "type-warning_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1151.png",
-        "mismatchPercent": 14.453125,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 94.57,
+          "consumer": 94.79,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3473,7 +3542,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3485,15 +3554,17 @@
       {
         "key": "type-warning_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_877.png",
-        "mismatchPercent": 13.029100529100528,
-        "withinLimit": false,
+        "mismatchPercent": 1.2978142076502732,
+        "withinLimit": true,
+        "textMaskedPercent": 0.78125,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 36.77,
+          "consumer": 40.23,
           "figma": 37.77
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3503,7 +3574,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3515,15 +3586,17 @@
       {
         "key": "type-warning_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_841.png",
-        "mismatchPercent": 13.020833333333334,
-        "withinLimit": false,
+        "mismatchPercent": 1.092896174863388,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 38.02,
+          "consumer": 42.21,
           "figma": 38.87
         },
         "contentSize": {
           "consumer": {
-            "width": 64,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3533,7 +3606,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 64,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3545,16 +3618,18 @@
       {
         "key": "type-warning_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1153.png",
-        "mismatchPercent": 51.2,
-        "withinLimit": false,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 44.7,
+          "consumer": 57.16,
           "figma": 56.38
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3563,8 +3638,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3575,16 +3650,18 @@
       {
         "key": "type-warning_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1155.png",
-        "mismatchPercent": 42,
-        "withinLimit": false,
+        "mismatchPercent": 2.083333333333333,
+        "withinLimit": true,
+        "textMaskedPercent": 0.78125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 46,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3593,8 +3670,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3605,15 +3682,17 @@
       {
         "key": "type-danger_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_879.png",
-        "mismatchPercent": 14.412568306010929,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 89.38,
+          "consumer": 92.08,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3623,7 +3702,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3635,15 +3714,17 @@
       {
         "key": "type-danger_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_1157.png",
-        "mismatchPercent": 12.363387978142077,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 86.51,
+          "consumer": 86.07,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3653,7 +3734,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3665,15 +3746,17 @@
       {
         "key": "type-danger_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_843.png",
-        "mismatchPercent": 17.057291666666664,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 91.58,
+          "consumer": 89.06,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3683,7 +3766,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3695,15 +3778,17 @@
       {
         "key": "type-danger_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1159.png",
-        "mismatchPercent": 17.708333333333336,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 84.24,
+          "consumer": 84.64,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3713,7 +3798,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3725,15 +3810,17 @@
       {
         "key": "type-danger_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_881.png",
-        "mismatchPercent": 14.549180327868852,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 98.02,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3743,7 +3830,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3755,15 +3842,17 @@
       {
         "key": "type-danger_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_845.png",
-        "mismatchPercent": 13.319672131147541,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 90.96,
+          "consumer": 92.9,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3773,7 +3862,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3785,15 +3874,17 @@
       {
         "key": "type-danger_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1161.png",
-        "mismatchPercent": 18.880208333333336,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 99.46,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3803,7 +3894,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3815,15 +3906,17 @@
       {
         "key": "type-danger_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1163.png",
-        "mismatchPercent": 16.40625,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 89.36,
+          "consumer": 93.88,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3833,7 +3926,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -3845,15 +3938,17 @@
       {
         "key": "type-danger_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_883.png",
-        "mismatchPercent": 14.351851851851851,
-        "withinLimit": false,
+        "mismatchPercent": 1.366120218579235,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 37.3,
+          "consumer": 40.23,
           "figma": 37.77
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3863,7 +3958,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3875,15 +3970,17 @@
       {
         "key": "type-danger_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_847.png",
-        "mismatchPercent": 12.235449735449736,
-        "withinLimit": false,
+        "mismatchPercent": 1.1612021857923498,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 38.69,
+          "consumer": 42.28,
           "figma": 38.87
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3893,7 +3990,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3905,16 +4002,18 @@
       {
         "key": "type-danger_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1165.png",
-        "mismatchPercent": 52.1,
-        "withinLimit": false,
+        "mismatchPercent": 2.994791666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 44.8,
+          "consumer": 57.16,
           "figma": 56.38
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3923,8 +4022,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3935,16 +4034,18 @@
       {
         "key": "type-danger_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1167.png",
-        "mismatchPercent": 43,
-        "withinLimit": false,
+        "mismatchPercent": 2.734375,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 46,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3953,8 +4054,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -3965,15 +4066,17 @@
       {
         "key": "type-neutral_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_885.png",
-        "mismatchPercent": 14.549180327868852,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 90.63,
+          "consumer": 92.21,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3983,7 +4086,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 60,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -3995,15 +4098,17 @@
       {
         "key": "type-neutral_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_1169.png",
-        "mismatchPercent": 12.841530054644808,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 86.02,
+          "consumer": 86.2,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4013,7 +4118,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4025,15 +4130,17 @@
       {
         "key": "type-neutral_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_849.png",
-        "mismatchPercent": 16.40625,
-        "withinLimit": false,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.26,
+          "consumer": 89.32,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4043,7 +4150,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4055,15 +4162,17 @@
       {
         "key": "type-neutral_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1171.png",
-        "mismatchPercent": 15.755208333333334,
-        "withinLimit": false,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 82.85,
+          "consumer": 84.9,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4073,7 +4182,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4085,15 +4194,17 @@
       {
         "key": "type-neutral_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_887.png",
-        "mismatchPercent": 15.573770491803279,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 98.02,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4103,7 +4214,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4115,15 +4226,17 @@
       {
         "key": "type-neutral_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_851.png",
-        "mismatchPercent": 12.704918032786885,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 92.51,
+          "consumer": 92.76,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4133,7 +4246,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4145,15 +4258,17 @@
       {
         "key": "type-neutral_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1173.png",
-        "mismatchPercent": 20.442708333333336,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.28,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4163,7 +4278,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4175,15 +4290,17 @@
       {
         "key": "type-neutral_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1175.png",
-        "mismatchPercent": 17.578125,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 89.36,
+          "consumer": 93.75,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4193,7 +4310,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4205,15 +4322,17 @@
       {
         "key": "type-neutral_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_889.png",
-        "mismatchPercent": 13.88888888888889,
-        "withinLimit": false,
+        "mismatchPercent": 0.9562841530054645,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 37.37,
+          "consumer": 40.3,
           "figma": 37.5
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4223,7 +4342,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4235,15 +4354,17 @@
       {
         "key": "type-neutral_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_853.png",
-        "mismatchPercent": 14.484126984126986,
-        "withinLimit": false,
+        "mismatchPercent": 0.9562841530054645,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 39.22,
+          "consumer": 41.67,
           "figma": 38.59
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4253,7 +4374,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4265,16 +4386,18 @@
       {
         "key": "type-neutral_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1177.png",
-        "mismatchPercent": 47.74509803921569,
-        "withinLimit": false,
+        "mismatchPercent": 2.213541666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 43.63,
+          "consumer": 57.29,
           "figma": 55.86
         },
         "contentSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4283,8 +4406,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4295,16 +4418,18 @@
       {
         "key": "type-neutral_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1179.png",
-        "mismatchPercent": 41.699999999999996,
-        "withinLimit": false,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 45.5,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4313,8 +4438,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4325,15 +4450,17 @@
       {
         "key": "type-accent_style-fill_size-large_rounded-false",
         "figmaImage": "figma-277_891.png",
-        "mismatchPercent": 14.549180327868852,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 92.16,
+          "consumer": 92.21,
           "figma": 95.08
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4343,7 +4470,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4355,15 +4482,17 @@
       {
         "key": "type-accent_style-fill_size-large_rounded-true",
         "figmaImage": "figma-277_1181.png",
-        "mismatchPercent": 13.046448087431695,
-        "withinLimit": false,
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 86.02,
+          "consumer": 86.07,
           "figma": 89.07
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4373,7 +4502,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4385,15 +4514,17 @@
       {
         "key": "type-accent_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_855.png",
-        "mismatchPercent": 16.927083333333336,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.12,
+          "consumer": 89.32,
           "figma": 95.18
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4403,7 +4534,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4415,15 +4546,17 @@
       {
         "key": "type-accent_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1183.png",
-        "mismatchPercent": 15.885416666666666,
-        "withinLimit": false,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 82.85,
+          "consumer": 84.9,
           "figma": 91.54
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4433,7 +4566,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4445,15 +4578,17 @@
       {
         "key": "type-accent_style-tonal_size-large_rounded-false",
         "figmaImage": "figma-277_893.png",
-        "mismatchPercent": 15.778688524590164,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 98.02,
+          "consumer": 99.73,
           "figma": 99.73
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4463,7 +4598,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4475,15 +4610,17 @@
       {
         "key": "type-accent_style-tonal_size-large_rounded-true",
         "figmaImage": "figma-277_857.png",
-        "mismatchPercent": 12.636612021857923,
-        "withinLimit": false,
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 92.44,
+          "consumer": 92.69,
           "figma": 93.72
         },
         "contentSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4493,7 +4630,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 59,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4505,15 +4642,17 @@
       {
         "key": "type-accent_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1185.png",
-        "mismatchPercent": 20.703125,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.28,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4523,7 +4662,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 46,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4535,15 +4674,17 @@
       {
         "key": "type-accent_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1187.png",
-        "mismatchPercent": 17.1875,
-        "withinLimit": false,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 89.36,
+          "consumer": 93.75,
           "figma": 95.83
         },
         "contentSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4553,7 +4694,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 47,
+            "width": 48,
             "height": 16
           },
           "figma": {
@@ -4565,15 +4706,17 @@
       {
         "key": "type-accent_style-outline_size-large_rounded-false",
         "figmaImage": "figma-277_895.png",
-        "mismatchPercent": 17.79100529100529,
-        "withinLimit": false,
+        "mismatchPercent": 1.4344262295081966,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 37.83,
+          "consumer": 40.3,
           "figma": 37.77
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4583,7 +4726,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4595,15 +4738,17 @@
       {
         "key": "type-accent_style-outline_size-large_rounded-true",
         "figmaImage": "figma-277_859.png",
-        "mismatchPercent": 12.3015873015873,
-        "withinLimit": false,
+        "mismatchPercent": 1.2295081967213115,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
         "inkCoveragePercent": {
-          "consumer": 39.29,
+          "consumer": 42.35,
           "figma": 38.87
         },
         "contentSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4613,7 +4758,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 63,
+            "width": 61,
             "height": 24
           },
           "figma": {
@@ -4625,16 +4770,18 @@
       {
         "key": "type-accent_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1189.png",
-        "mismatchPercent": 47.84313725490196,
-        "withinLimit": false,
+        "mismatchPercent": 3.125,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 43.63,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4643,8 +4790,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 51,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4655,16 +4802,18 @@
       {
         "key": "type-accent_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1191.png",
-        "mismatchPercent": 42.1,
-        "withinLimit": false,
+        "mismatchPercent": 2.864583333333333,
+        "withinLimit": true,
+        "textMaskedPercent": 3.90625,
+        "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 45.2,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4673,8 +4822,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 50,
-            "height": 20
+            "width": 48,
+            "height": 16
           },
           "figma": {
             "width": 48,
@@ -4684,115 +4833,52 @@
       }
     ]
   },
-  "problems": [
-    "children-accepted-but-discarded",
-    "image-difference-above-limit:type-brand_style-fill_size-large_rounded-false:14.55%",
-    "image-difference-above-limit:type-brand_style-fill_size-large_rounded-true:12.77%",
-    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-false:16.80%",
-    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-true:15.76%",
-    "image-difference-above-limit:type-brand_style-tonal_size-large_rounded-false:12.02%",
-    "image-difference-above-limit:type-brand_style-tonal_size-large_rounded-true:12.36%",
-    "image-difference-above-limit:type-brand_style-tonal_size-small_rounded-false:16.67%",
-    "image-difference-above-limit:type-brand_style-tonal_size-small_rounded-true:15.23%",
-    "image-difference-above-limit:type-brand_style-outline_size-large_rounded-false:17.72%",
-    "image-difference-above-limit:type-brand_style-outline_size-large_rounded-true:12.10%",
-    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-false:47.84%",
-    "content-size-mismatch:type-brand_style-outline_size-small_rounded-false:51x20 vs 48x16",
-    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-true:42.00%",
-    "content-size-mismatch:type-brand_style-outline_size-small_rounded-true:50x20 vs 48x16",
-    "image-difference-above-limit:type-success_style-fill_size-large_rounded-false:13.87%",
-    "image-difference-above-limit:type-success_style-fill_size-large_rounded-true:11.89%",
-    "image-difference-above-limit:type-success_style-fill_size-small_rounded-false:17.32%",
-    "image-difference-above-limit:type-success_style-fill_size-small_rounded-true:16.02%",
-    "image-difference-above-limit:type-success_style-tonal_size-large_rounded-false:14.75%",
-    "image-difference-above-limit:type-success_style-tonal_size-large_rounded-true:11.95%",
-    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-false:18.62%",
-    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-true:15.10%",
-    "image-difference-above-limit:type-success_style-outline_size-large_rounded-false:14.35%",
-    "image-difference-above-limit:type-success_style-outline_size-large_rounded-true:12.50%",
-    "image-difference-above-limit:type-success_style-outline_size-small_rounded-false:47.55%",
-    "content-size-mismatch:type-success_style-outline_size-small_rounded-false:51x20 vs 48x16",
-    "image-difference-above-limit:type-success_style-outline_size-small_rounded-true:45.90%",
-    "content-size-mismatch:type-success_style-outline_size-small_rounded-true:50x20 vs 48x16",
-    "image-difference-above-limit:type-warning_style-fill_size-large_rounded-false:13.80%",
-    "image-difference-above-limit:type-warning_style-fill_size-large_rounded-true:12.02%",
-    "image-difference-above-limit:type-warning_style-fill_size-small_rounded-false:17.32%",
-    "image-difference-above-limit:type-warning_style-fill_size-small_rounded-true:15.36%",
-    "image-difference-above-limit:type-warning_style-tonal_size-large_rounded-false:10.25%",
-    "image-difference-above-limit:type-warning_style-tonal_size-large_rounded-true:11.95%",
-    "image-difference-above-limit:type-warning_style-tonal_size-small_rounded-false:15.23%",
-    "image-difference-above-limit:type-warning_style-tonal_size-small_rounded-true:14.45%",
-    "image-difference-above-limit:type-warning_style-outline_size-large_rounded-false:13.03%",
-    "image-difference-above-limit:type-warning_style-outline_size-large_rounded-true:13.02%",
-    "content-size-mismatch:type-warning_style-outline_size-large_rounded-true:64x24 vs 61x24",
-    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-false:51.20%",
-    "content-size-mismatch:type-warning_style-outline_size-small_rounded-false:50x20 vs 48x16",
-    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-true:42.00%",
-    "content-size-mismatch:type-warning_style-outline_size-small_rounded-true:50x20 vs 48x16",
-    "image-difference-above-limit:type-danger_style-fill_size-large_rounded-false:14.41%",
-    "image-difference-above-limit:type-danger_style-fill_size-large_rounded-true:12.36%",
-    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-false:17.06%",
-    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-true:17.71%",
-    "image-difference-above-limit:type-danger_style-tonal_size-large_rounded-false:14.55%",
-    "image-difference-above-limit:type-danger_style-tonal_size-large_rounded-true:13.32%",
-    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-false:18.88%",
-    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-true:16.41%",
-    "image-difference-above-limit:type-danger_style-outline_size-large_rounded-false:14.35%",
-    "image-difference-above-limit:type-danger_style-outline_size-large_rounded-true:12.24%",
-    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-false:52.10%",
-    "content-size-mismatch:type-danger_style-outline_size-small_rounded-false:50x20 vs 48x16",
-    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-true:43.00%",
-    "content-size-mismatch:type-danger_style-outline_size-small_rounded-true:50x20 vs 48x16",
-    "image-difference-above-limit:type-neutral_style-fill_size-large_rounded-false:14.55%",
-    "image-difference-above-limit:type-neutral_style-fill_size-large_rounded-true:12.84%",
-    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-false:16.41%",
-    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-true:15.76%",
-    "image-difference-above-limit:type-neutral_style-tonal_size-large_rounded-false:15.57%",
-    "image-difference-above-limit:type-neutral_style-tonal_size-large_rounded-true:12.70%",
-    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-false:20.44%",
-    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-true:17.58%",
-    "image-difference-above-limit:type-neutral_style-outline_size-large_rounded-false:13.89%",
-    "image-difference-above-limit:type-neutral_style-outline_size-large_rounded-true:14.48%",
-    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-false:47.75%",
-    "content-size-mismatch:type-neutral_style-outline_size-small_rounded-false:51x20 vs 48x16",
-    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-true:41.70%",
-    "content-size-mismatch:type-neutral_style-outline_size-small_rounded-true:50x20 vs 48x16",
-    "image-difference-above-limit:type-accent_style-fill_size-large_rounded-false:14.55%",
-    "image-difference-above-limit:type-accent_style-fill_size-large_rounded-true:13.05%",
-    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-false:16.93%",
-    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-true:15.89%",
-    "image-difference-above-limit:type-accent_style-tonal_size-large_rounded-false:15.78%",
-    "image-difference-above-limit:type-accent_style-tonal_size-large_rounded-true:12.64%",
-    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-false:20.70%",
-    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-true:17.19%",
-    "image-difference-above-limit:type-accent_style-outline_size-large_rounded-false:17.79%",
-    "image-difference-above-limit:type-accent_style-outline_size-large_rounded-true:12.30%",
-    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-false:47.84%",
-    "content-size-mismatch:type-accent_style-outline_size-small_rounded-false:51x20 vs 48x16",
-    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-true:42.10%",
-    "content-size-mismatch:type-accent_style-outline_size-small_rounded-true:50x20 vs 48x16"
-  ],
+  "problems": [],
   "limitations": [
-    "single component set; composition, nested instances and instance swaps are not exercised here",
-    "declared behavior beyond text and variant props is not exercised",
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
   "inputs": {
     "degradations": {
       "variables-unavailable": 1,
-      "variable-unresolved": 1320
+      "variable-unresolved": 1333,
+      "vector-geometry-unsupported": 1
     },
-    "stubContracts": [
-      "ds-icon.stub.contract.proposed.json"
-    ],
+    "stubContracts": [],
     "componentFolders": [
       "Badge",
-      "Icon"
+      "Icon",
+      "Placeholder"
+    ],
+    "closure": {
+      "requested": [
+        "Badge"
+      ],
+      "followed": [
+        "Placeholder",
+        "Icon"
+      ],
+      "notFollowed": []
+    },
+    "contractGraph": [
+      {
+        "id": "ds.icon",
+        "name": "Icon",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.placeholder",
+        "name": "Placeholder",
+        "stub": false,
+        "packaged": true
+      }
     ]
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "483f38b53dfdc9b71edfb394e321e8a5aa0109e74339b92be5de09005a143947",
+    "tarballSha256": "09d260c258511bca164c9ccdb63368879f79dce6b5a28782b454ac3d7e3d4301",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -4806,6 +4892,12 @@
       "Icon/Icon.module.css",
       "Icon/index.d.ts",
       "Icon/index.js",
+      "Placeholder",
+      "Placeholder/Placeholder.d.ts",
+      "Placeholder/Placeholder.js",
+      "Placeholder/Placeholder.module.css",
+      "Placeholder/index.d.ts",
+      "Placeholder/index.js",
       "index.d.ts",
       "index.js",
       "tokens.css"
@@ -4814,14 +4906,15 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "5f2471dbfc199ea277544070e2d566f7523f480164b89db00a0a32652eb9d0a1",
+    "lockfileSha256": "adb4301741c8135800f63d9e5425afef36576fbd7dd6dc072c56a15e7335e051",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 25744,
-      "tokenDefinitions": 355,
-      "tokenDefinitionsExpected": 355
-    }
+      "bytes": 27249,
+      "tokenDefinitions": 366,
+      "tokenDefinitionsExpected": 366
+    },
+    "interactiveNesting": []
   },
-  "outcome": "refused-or-failed"
+  "outcome": "consumer-mounted-behaved-and-compared"
 }

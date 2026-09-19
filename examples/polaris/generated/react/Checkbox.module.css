@@ -28,7 +28,7 @@
   outline-offset: 2px;
 }
 
-.root:disabled {
+.root[data-disabled] {
   cursor: default;
 }
 
@@ -42,7 +42,7 @@
   cursor: pointer;
 }
 
-.root:disabled .choice__control {
+.root[data-disabled] .choice__control {
   cursor: default;
 }
 
@@ -65,7 +65,7 @@
   position: relative;
 }
 
-.root:disabled .checkbox {
+.root[data-disabled] .checkbox {
   cursor: default;
 }
 
@@ -110,7 +110,7 @@
   outline-style: auto;
 }
 
-.root:disabled .input {
+.root[data-disabled] .input {
   color: var(--imported-checkbox-input-color-state-disabled);
 }
 
@@ -175,7 +175,7 @@
   border-left-width: 0px;
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   cursor: default;
 }
 
@@ -183,11 +183,11 @@
   outline-style: solid;
 }
 
-.root:hover:not(:disabled) .backdrop {
+.root:hover:not([data-disabled]) .backdrop {
   border-color: var(--p-color-input-border-hover);
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   background-color: var(--imported-checkbox-backdrop-background-color-state-disabled);
 }
 
@@ -436,11 +436,11 @@
   cursor: pointer;
 }
 
-.root:disabled .choice__label {
+.root[data-disabled] .choice__label {
   cursor: default;
 }
 
-.root:disabled .choice__label {
+.root[data-disabled] .choice__label {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -456,10 +456,10 @@
   font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-.root:disabled .label {
+.root[data-disabled] .label {
   cursor: default;
 }
 
-.root:disabled .label {
+.root[data-disabled] .label {
   color: var(--imported-shared-color-b5b5b5);
 }
