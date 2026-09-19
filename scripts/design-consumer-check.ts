@@ -57,6 +57,18 @@ import { readStateAxes, type InteractionState } from '../core/interaction-state-
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
+/** What an OVER-LIMIT row's second number says. It names, it never excuses: the
+ *  verdict stays `withinLimit: false` and the check stays red. `text-only` = with
+ *  the render's text boxes painted out on both sides the rest is within the same
+ *  limit, so what is wrong is inside the glyph boxes (rasteriser, metrics, or the
+ *  text itself). `beyond-text` = something outside the glyphs is wrong too.
+ *  `text-covers-canvas` = the mask left nothing to measure; no claim is made. */
+export type ResidualClass = 'text-only' | 'beyond-text' | 'text-covers-canvas' | 'no-text';
+export function residualClass(maskedPct: number | null, maskCoveragePct: number): ResidualClass {
+  if (maskedPct === null) return 'text-covers-canvas';
+  if (!(maskCoveragePct > 0)) return 'no-text';
+  return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
+}
 
 type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
 function parseArgs(argv: string[]): Args {
@@ -279,7 +291,7 @@ function App() {
       const props = { ...cell.props };
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
-      return <div data-cell={cell.key} key={cell.key} style={{ display: 'inline-block', margin: 8, padding: 4, minWidth: 1, minHeight: 1, verticalAlign: 'top' }}><${component} {...props} /></div>;
+      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
     })}
   </div>;
 }
@@ -326,6 +338,7 @@ async function main() {
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
+  const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
@@ -388,6 +401,25 @@ async function main() {
       try { await page.waitForSelector('[data-cell]', { timeout: 15000 }); }
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }
       const cells = await page.$$('[data-cell]');
+      // THE INSTRUMENT, not the product: cells used to flow inline, so a root 47.4 px
+      // wide pushed every later root onto a fractional x and 33 of 72 CBDS Badge
+      // shots came out one pixel wider with a shifted antialiased edge — while
+      // Figma exports every node from its own integer origin. Each cell is now its
+      // own block (same shrink-to-fit width), and a fractional HEIGHT above is
+      // absorbed in the wrapper's margin so every root starts on a whole pixel.
+      const misaligned = await page.evaluate(`(() => {
+        const off = [];
+        for (const cell of document.querySelectorAll('[data-cell]')) {
+          const root = cell.firstElementChild; if (!root) continue;
+          const top = root.getBoundingClientRect().top, frac = top - Math.floor(top);
+          if (frac > 0) cell.style.marginTop = (8 + 1 - frac) + 'px';
+          const r = root.getBoundingClientRect();
+          if (Math.abs(r.top - Math.round(r.top)) > 0.001 || Math.abs(r.left - Math.round(r.left)) > 0.001) off.push(cell.getAttribute('data-cell'));
+        }
+        return off;
+      })()`) as string[];
+      // A root its own CSS places off the pixel grid (a fractional margin or transform) is named, never hidden.
+      for (const key of misaligned) problems.push(`root-origin-off-pixel-grid:${key}`);
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
       const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
@@ -418,6 +450,18 @@ async function main() {
         // The root element's layout box on a white page, the same comparison
         // basis the application uses; Figma's export is the node's own bounds.
         const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
+        // Where this render draws text, in the screenshot's own pixels (the root's
+        // layout box). The same walk extract/figma/visual-parity/render.ts makes.
+        // Serialized as text for the same reason as the font probe above.
+        textRects[c.key] = await root.evaluate(new Function('el', `
+          const origin = el.getBoundingClientRect(), rects = [], walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+          for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+            if (!n.textContent || !n.textContent.trim()) continue;
+            const range = document.createRange(); range.selectNodeContents(n);
+            for (const r of range.getClientRects()) if (r.width && r.height) rects.push({ x: r.left - origin.left, y: r.top - origin.top, width: r.width, height: r.height });
+          }
+          return rects;
+        `) as (el: Element) => unknown) as Array<{ x: number; y: number; width: number; height: number }>;
         paints[c.key] = await cell.evaluate(paintOf);
         if (c.interaction !== 'none') {
           const changed = paints[c.key] !== entered.restPaint;
@@ -515,19 +559,25 @@ async function main() {
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
-    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render\'s text boxes masked (inflated by the scorer\'s own 4 px) and only classifies an over-limit row', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
-      const aligned = alignPair(ours, theirs), diff = diffPair(aligned, []);
+      const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
       const percent = diff.unmaskedPct;
       if (!Number.isFinite(percent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
       // Share of non-white, non-transparent pixels on each side: a mostly
       // white surface can score under the limit while drawing far less ink.
       const ink = (png: import('pngjs').PNG) => { let n = 0; for (let i = 0; i < png.data.length; i += 4) if (png.data[i + 3] > 8 && (png.data[i] < 247 || png.data[i + 1] < 247 || png.data[i + 2] < 247)) n++; return Math.round(10000 * n / (png.width * png.height)) / 100; };
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT, inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
+      // A SECOND number, never the verdict: the same diff with this render's text
+      // boxes painted out on both sides. It answers one question about a row that
+      // is over the limit — is anything wrong OUTSIDE the glyphs? `null` = the
+      // mask covers the whole canvas, so the number would be vacuous.
+      const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT,
+        textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
       if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
       // Mostly-white surfaces can score under the pixel limit while the

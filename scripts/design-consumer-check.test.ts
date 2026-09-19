@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { deriveCases, enterState, leaveState, paintOf, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { deriveCases, enterState, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -108,4 +108,14 @@ test('state cells on a local page: reach is the REAL pseudo-class, paint is ever
     // No residue: nothing is hovered or focused after the last cell.
     assert.equal(await page.evaluate("document.querySelectorAll('[data-cell]:hover, [data-cell] :hover').length + (document.activeElement === document.body ? 0 : 1)"), 0);
   } finally { await browser.close(); }
+});
+
+test('the text-masked number only NAMES an over-limit row: at the limit is text-only, a hair over is beyond-text, a full mask claims nothing', () => {
+  assert.equal(residualClass(0, 40), 'text-only');
+  assert.equal(residualClass(5, 40), 'text-only');
+  assert.equal(residualClass(5.0001, 40), 'beyond-text');
+  // The mask covered every pixel: there is no remainder to measure, so no font claim is made.
+  assert.equal(residualClass(null, 100), 'text-covers-canvas');
+  // No text was drawn: an over-limit row cannot be a text residual.
+  assert.equal(residualClass(12, 0), 'no-text');
 });

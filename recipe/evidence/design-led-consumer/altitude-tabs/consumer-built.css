@@ -309,20 +309,24 @@
  * Regenerate with: npm run generate
  */
 
-._root_1cy4r_6,
-._root_1cy4r_6 *,
-._root_1cy4r_6 *::before,
-._root_1cy4r_6 *::after {
+._root_1n3m2_6,
+._root_1n3m2_6 *,
+._root_1n3m2_6 *::before,
+._root_1n3m2_6 *::after {
   box-sizing: border-box;
 }
 
-._root_1cy4r_6 {
+._root_1n3m2_6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;
   height: var(--imported-stub-tab-2-root-height);
   background-color: var(--imported-stub-tab-2-root-background-color);
+}
+
+._text_1n3m2_22 {
+  font-family: Inter, system-ui, sans-serif;
 }
 /* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tab-panel.contract.json (ds.tab-panel v0.1.0)
