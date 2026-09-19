@@ -468,8 +468,9 @@ test('the SAME pipeline-written set that lost a variant refuses whether or not t
   assert.match(skip(lost(true)({ stampsObservable: true })), /Source matrix has 5 rows; Cartesian definitions require 6\.$/, 'stamped: a generated set that lost a variant, as always');
   assert.match(skip(lost(true)({})), /Cartesian definitions require 6\.$/);
   // UNSTAMPED response, nothing said about the request: this used to propose absentVariants=[{tone:b,size:l}] as verified-exact.
-  assert.match(skip(lost(false)({})), /Cartesian definitions require 6\. stamps-not-observable: /);
-  assert.throws(() => exact(lost(false)({}).Tag as DumpSet, false), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /stamps-not-observable/.test(e.message));
+  assert.match(skip(lost(false)({})), /Cartesian definitions require 6\.$/);
+  assert.match(proposeBatchFromDump(lost(false)({}), opts).skipped[0].detail!, /^stamps-not-observable: /);
+  assert.throws(() => exact(lost(false)({}).Tag as DumpSet, false), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED' && /stamps-not-observable/.test(e.detail ?? '') && e.message === 'Source matrix has 5 rows; Cartesian definitions require 6.');
   // The fetch layer asked for the plane and nothing is stamped: a designer's set. The batch reads the fact from the dump itself.
   const observed = proposeBatchFromDump(lost(false)({ stampsObservable: true }), opts);
   assert.deepEqual(observed.skipped, []);
