@@ -150,7 +150,25 @@ test('contract → writer → REAL plugin reader → proposer: the flag sets str
   assert.equal(back.anatomy.root.strokesIncludedInLayout, false);
   assert.deepEqual(back.anatomy.root.tokens, c.anatomy.root.tokens, 'the stroke channels return as they left');
   // A second trip is a fixed point: same compiled specs, same script.
-  assert.equal(engine.buildComponentScript(back, new Map([[back.id, back]])).includes('node.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;'), true);
+  const again = engine.buildComponentScript(back, new Map([[back.id, back]]));
+  assert.ok(again.includes('if (spec.strokesIncludedInLayout === false) node.strokesIncludedInLayout = false;') && /"strokesIncludedInLayout": false/.test(again), 'the proposed-back contract compiles the fact again');
+});
+
+test('NAMED DIVERGENCE (docs/23 §D.39), pinned so it cannot become silent: a contract that drops the flag cannot take it off a set it already wrote', async () => {
+  const { figma, root } = createFigmaMock();
+  const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 }) as Promise<unknown>;
+  await run(engine.buildTokensScript(null));
+  const flagged = seed(true), dropped = seed(false);
+  await run(engine.buildComponentScript(flagged, new Map([[flagged.id, flagged]])));
+  await run(engine.buildComponentScript(dropped, new Map([[dropped.id, dropped]]))); // amend: the variant nodes are reused
+  type Node = { type: string; getSharedPluginData(ns: string, key: string): string };
+  const set = root.findOne((n: Node) => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === flagged.id) as unknown as { children: Array<{ strokesIncludedInLayout?: boolean }> };
+  // The unflagged script never names the field (byte-identical for every existing contract), so false stays…
+  assert.deepEqual(set.children.map((v) => v.strokesIncludedInLayout), [false, false]);
+  // …while ONE script mixing flagged and unflagged parts does write both ways.
+  const script = engine.buildComponentScript(flagged, new Map([[flagged.id, flagged]]));
+  assert.ok(script.includes("else if (node.layoutMode !== 'GRID') node.strokesIncludedInLayout = true;"), 'an unflagged GRID frame is left alone; a flex one is put back');
 });
 
 test('a contract without the flag emits the script it always did — the runtime never names the field — and proposes back without it', async () => {

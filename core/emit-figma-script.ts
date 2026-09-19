@@ -8394,11 +8394,26 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // dump v1.35 — THE STROKE TAKES NO LAYOUT SPACE where the contract says so
   // (Part.strokesIncludedInLayout: false, a designer's frame at Figma's
   // default): the stroke paints over the padding and the box stays content +
-  // padding. Written BOTH ways once any spec in this script carries the fact,
-  // so an AMENDED root whose contract dropped it is put back; a script with no
-  // such spec never touches the field (the golden discipline), and its frames
-  // keep the value they are born with, which reads back true.
-  node.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;` : ''}
+  // padding. The field is on AutoLayoutMixin, which every node type reaching
+  // this function has (FRAME, COMPONENT, SLOT — @figma/plugin-typings 1.135),
+  // so the write is not gated on the node; nothing here is wrapped in a
+  // silent try/catch either — a canvas that refuses it must say so.
+  //
+  // WHAT THIS CAN AND CANNOT PUT BACK. Inside a script that carries the fact,
+  // an unflagged flex frame is written true, so ONE contract mixing flagged
+  // and unflagged parts amends both ways. A contract that drops the flag
+  // ENTIRELY emits a script that never names the field (the golden
+  // discipline: every existing contract's script stays byte-identical), and
+  // amend reuses the variant nodes — so a canvas that once held false KEEPS
+  // it, and the next read proposes the flag back. The contract cannot turn
+  // the flag off on an existing set; that divergence is named in docs/23
+  // §D.39, not closed. An unflagged GRID frame is left alone: the Plugin API
+  // documents the field as applicable to HORIZONTAL / VERTICAL layout, and an
+  // unnecessary write is not worth a throw (a FLAGGED grid is still written —
+  // exercised live 2026-09-18 on COMPONENT, SLOT and GRID nodes, REST readback
+  // as predicted; docs/23 §D.39).
+  if (spec.strokesIncludedInLayout === false) node.strokesIncludedInLayout = false;
+  else if (node.layoutMode !== 'GRID') node.strokesIncludedInLayout = true;` : ''}
   if (spec.rootFillWidth) {
     node.resize(fillPreviewWidth, Math.max(1, node.height));
     node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
