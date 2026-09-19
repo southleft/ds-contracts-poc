@@ -10,6 +10,7 @@ import type { CapturedNode } from '../extract/computed/lib.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { evidenceSha } from './react-validation-evidence.js';
 import { validateContract } from '../packages/core/src/validate.js';
+import { emitHtml } from '../core/emit-html.js';
 
 // A track with one part below it: the part is sized by the component's own rule
 // under an ancestor condition, and moves to the far end in one state.
@@ -96,10 +97,18 @@ test('a part below the root keeps its own fixed size, and a translation by exact
     ['percentage', (s: Snapshots[string]) => { s.descendantSizes!.nodes[0].sizes = (['width', 'height'] as const).map(channel => ({ channel, status: 'unresolved', authoredValue: '50%', selectors: ['.part'], reason: 'responsive-or-unsupported-size-expression' })); }],
     ['measured automatic box', (s: Snapshots[string]) => { s.descendantSizes!.nodes[0].sizes = (['width', 'height'] as const).map(channel => ({ channel, status: 'auto', value: 'auto', selectors: [] })); }],
     ['a declaration the box does not use', (s: Snapshots[string]) => { s.descendantSizes!.nodes[0].sizes = [fixed('width', '20px'), fixed('height', '20px')]; }],
+    // Evidence sealed by the reader that did not yet measure the box says `fixed` for all of these; the captured styles say otherwise.
+    ['an inline box, where width and height do not apply', (s: Snapshots[string]) => { child(s).style.display = 'inline'; }],
+    ['display: contents, which has no box', (s: Snapshots[string]) => { child(s).style.display = 'contents'; }],
+    ['a content-box size, which is not the border box', (s: Snapshots[string]) => { Object.assign(child(s).style, { 'box-sizing': 'content-box', 'padding-left': '2px', 'padding-right': '2px', 'padding-top': '2px', 'padding-bottom': '2px',
+      'border-left-width': '1px', 'border-right-width': '1px', 'border-top-width': '1px', 'border-bottom-width': '1px' }); }],
+    ['a content-box size whose edges cannot be read', (s: Snapshots[string]) => { child(s).style['box-sizing'] = 'content-box'; }],
+    ['a zoomed part', (s: Snapshots[string]) => { child(s).style.zoom = '2'; }],
+    ['a part under a zoomed root', (s: Snapshots[string]) => { s.tree.style.zoom = '2'; }],
   ] as const) {
     const unsized = still(edit); assert.equal(unsized.status, 'compiled-draft', name + ': ' + unsized.problems.join('\n'));
     for (const variant of unsized.compiled!.component!.variants)
-      assert.deepEqual([variant.spec.children![0].fixedWidth, variant.spec.children![0].fixedHeight], [undefined, undefined], name);
+      assert.deepEqual([variant.spec.children?.[0]?.fixedWidth, variant.spec.children?.[0]?.fixedHeight, unsized.descendants], [undefined, undefined, undefined], name);
   }
   const archived = still(() => {}, false);
   assert.equal(archived.status, 'compiled-draft'); assert.equal(archived.descendants, undefined, 'an archive older than the reader derives exactly as before');
@@ -122,6 +131,12 @@ test('a part below the root keeps its own fixed size, and a translation by exact
     ['partial-free-space', (s: Snapshots[string], on: boolean) => { if (on) child(s).style.translate = '10px'; }],
     ['partial-free-space', (s: Snapshots[string], on: boolean) => { if (on) child(s).style.translate = '-14px'; }],
     ['partial-free-space', (s: Snapshots[string]) => { s.tree.style['padding-right'] = '1px'; }],
+    // A main-axis margin moves the part and is not carried: it is never folded into the free space (a used `auto` margin reads as px).
+    ['main-axis-margin-present', (s: Snapshots[string]) => { child(s).style['margin-left'] = '2px'; }],
+    ['main-axis-margin-present', (s: Snapshots[string]) => { child(s).style['margin-right'] = '-2px'; }],
+    ['conditional-element', (s: Snapshots[string], on: boolean) => { if (!on) { s.tree.nodes = []; s.ownership.nodes.pop(); s.descendantSizes!.nodes = []; } }],
+    ['parent-not-single-line-flex', (s: Snapshots[string]) => { s.tree.style['flex-wrap'] = 'wrap'; }],
+    ['main-axis-differs-between-planes', (s: Snapshots[string], on: boolean) => { if (on) { s.tree.style['flex-direction'] = 'column'; child(s).style.translate = '0px 14px'; } }],
     ['cross-axis-translation', (s: Snapshots[string], on: boolean) => { if (on) child(s).style.translate = 'calc(100% - 2px) 1px'; }],
     ['rotation-or-scale-present', (s: Snapshots[string], on: boolean) => { if (on) child(s).style.rotate = '45deg'; }],
     ['rotation-or-scale-present', (s: Snapshots[string], on: boolean) => { if (on) child(s).style.transform = 'matrix(0.5, 0, 0, 0.5, 0, 0)'; }],
@@ -145,6 +160,16 @@ test('a part below the root keeps its own fixed size, and a translation by exact
     assert.deepEqual([refused.status, refused.problems], ['refused', [refusal + reason]], reason);
   }
   assert.deepEqual(build(() => {}, false).problems, ['react-initial-contract-descendant-evidence-unobserved'], 'an observation older than the reader never saw the size: only a new observation answers it');
+  // The same move by its other spellings: a margin or a relative inset that differs across planes is carried by nothing below the root.
+  for (const [channel, edit] of [
+    ['margin-left', (s: Snapshots[string], on: boolean) => { child(s).style.translate = 'none'; child(s).style['margin-left'] = on ? '14px' : '0px'; }],
+    ['left', (s: Snapshots[string], on: boolean) => { child(s).style.translate = 'none'; Object.assign(child(s).style, { position: 'relative', left: on ? '14px' : '0px', right: on ? '-14px' : '0px' }); }],
+    ['margin-left', (s: Snapshots[string], on: boolean) => { child(s).style['margin-left'] = on ? '0px' : '14px'; }],
+  ] as Array<[string, (s: Snapshots[string], on: boolean) => void]>)
+    assert.deepEqual(build(edit).problems, ['react-initial-contract-descendant-offset-unexplained:' + channel], channel);
+  const pinnedAbsolute = build(s => { const extra = { t: 'el' as const, el: { tag: 'i', classes: [], pseudo: {}, nodes: [], style: { display: 'block', position: 'absolute', width: '2px', height: '2px', left: '0px', right: s.ownership.components[0].props.on === true ? '30px' : '29px' } } };
+    s.tree.nodes.push(extra); s.ownership.nodes.push({ path: '1', tag: 'i', nearestComponent: 'instance-0', createdBy: 'instance-0' }); s.descendantSizes!.nodes.push({ path: '1', tag: 'i', sizes: [] }); });
+  assert.equal(pinnedAbsolute.status, 'compiled-draft', 'an absolute box\'s far inset follows its container: another door, not this rule');
   // An absolutely placed decoration beside the part does not take flow space, so the part is still alone in flow.
   const decorated = build(s => { const extra = sibling(); extra.el.style.position = 'absolute'; s.tree.nodes.push(extra);
     s.ownership.nodes.push({ path: '1', tag: 'i', nearestComponent: 'instance-0', createdBy: 'instance-0' }); s.descendantSizes!.nodes.push({ path: '1', tag: 'i', sizes: [] }); });
@@ -160,6 +185,12 @@ test('a per-state alignment needs a drawn plane to ride: a required boolean has 
   assert.deepEqual([required.status, required.problems], ['refused', [refusal + 'alignment-not-carried']]);
   const lenient = domain(t, 'Track').build(), contract = structuredClone(lenient.compiled!.contract!), errors: string[] = [];
   validateContract(contract, new Map([[contract.id, contract]]), errors, new Map()); assert.deepEqual(errors, []);
+  // The static HTML surface carries a boolean as the root's data attribute, never as an enum modifier class: a by-prop
+  // rule under `--on-true` selects nothing and the moved part silently renders at the start.
+  const html = emitHtml(contract, { contracts: new Map([[contract.id, contract]]), icons: new Map(lenient.compiled!.assets ?? []), tokens: lenient.compiled!.tokens } as never);
+  const rules = html.css.split('}').filter(rule => /justify-content: flex-end|\[data-on\]|--on-/.test(rule)).map(rule => rule.trim().split(' {')[0]);
+  assert.ok(rules.length > 0 && rules.every(selector => /^\.[a-z0-9-]+(:not\(\[data-on\]\)|\[data-on\])( |$)/.test(selector)), JSON.stringify(rules));
+  assert.match(html.css, /\.[a-z0-9-]+\[data-on\] \{[^}]*justify-content: flex-end/);
   contract.anatomy.root.layoutByProp!.map = { maybe: { justify: 'end' } };
   const unknown: string[] = []; validateContract(contract, new Map([[contract.id, contract]]), unknown, new Map());
   assert.ok(unknown.some(e => e.includes('layoutByProp map key "maybe" is not a value of prop "on"')), unknown.join('\n'));

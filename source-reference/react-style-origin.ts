@@ -128,6 +128,8 @@ export function resolveReactStyleOrigin(matched:Matched,layers:Layers,channel:st
     : {channel,status:'unresolved' as const,selectors,reason:'winning-value-not-direct-variable'};
 }
 
+/** Displays whose (non-replaced) boxes take no width and/or height: a mismatch there is named for what it is. */
+const boxless=new Set(['inline','contents','table-row','table-row-group','table-header-group','table-footer-group','table-column','table-column-group']);
 /** Only absolute px and theme-relative rem arithmetic is admitted. Values
  * depending on a viewport, container, percentage, font metric or fallback
  * stay unresolved. The browser, not this grammar, evaluates the expression. */
@@ -202,9 +204,9 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
         const sizeDeclarations=(['width','height'] as const).map(channel=>({channel,declaration:resolveReactStyleDeclaration(matched,layers,channel,['inline-size','block-size'])}));
         const variables=channels.flatMap(c=>c.variable?[c.variable]:[]);
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}return {tag:this.localName,fill:fill(),animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
-        const value=read.result.value as {tag:string;fill:{depth?:number;problem?:string};animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
+        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
         let fillDepth:number|undefined;
         const sizes:ReactSizeOrigin[]=sizeDeclarations.map(({channel,declaration})=>{
@@ -225,8 +227,15 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
           }
           if(!fixedSizeExpression(declaration.value,value.variables))return {...base,status:'unresolved',reason:'responsive-or-unsupported-size-expression'};
           if(typed.unit!=='px'||!Number.isFinite(typed.value)||typed.value!<0)return {...base,status:'unresolved',reason:'fixed-size-not-pixels'};
+          // Zoom scales the box but not the computed length: named first, whatever else it then disturbs.
+          if(value.box.zoomed)return {...base,status:'unresolved',reason:'size-zoomed-context'};
           // The used length may be the declared one in 1/64 px layout units (18.4px reads 18.3906px).
           if(Math.abs(parseFloat(value.values[channel])-typed.value!)>0.001&&!authoredLengthIsUsed(typed.value+'px',value.values[channel]))return {...base,status:'unresolved',reason:'size-clamped-or-layout-dependent'};
+          // The declaration must BE the box. getComputedStyle answers with the computed value wherever width/height do
+          // not apply, so the check above passes vacuously there: compare the MEASURED border box, in whole layout units.
+          const declared=Math.trunc(typed.value!*64),measured=value.box[channel];
+          if(measured!==declared)return {...base,status:'unresolved',reason:boxless.has(value.box.display)?'size-declaration-does-not-apply'
+            :value.box.contentBox&&measured===declared+value.box.edges[channel]?'size-is-content-box':'size-clamped-or-layout-dependent'};
           return {...base,status:'fixed',value:value.values[channel]};
         });
         out.roots.push({path,tag:value.tag,sizes,...(fillDepth!==undefined?{fillWidthContainer:{depth:fillDepth}}:{}),channels:channels.map(c=>value.animated

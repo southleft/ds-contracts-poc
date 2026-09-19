@@ -49,6 +49,14 @@ test('own sizes are read below the root, and the END-alignment rule is exactly w
    assert.deepEqual([off.start,on.end,on.start],[0,0,14],attr);
    assert.deepEqual(lower({off,on}),[{path:'0',axis:'x',planes:{off:'start',on:'end'}}],attr);
   }
+  // The reader measures the part's border box: a declared size that is not the box is never `fixed` (so never admitted).
+  for(const [rule,reason,box] of [['display:inline}.group{display:block','size-declaration-does-not-apply',[0,0]],['display:contents','size-declaration-does-not-apply',[0,0]],
+    ['box-sizing:content-box;padding:2px;border:1px solid','size-is-content-box',[22,22]],['zoom:2;flex-shrink:0','size-zoomed-context',[32,32]]] as const){
+   await page.setContent(page_('').replace('</style>',`.group[data-size=default] .part{${rule}}</style>`));
+   const sizes=(await readReactDescendantSizes(page,'#subject',ownership)).nodes[0].sizes;
+   assert.deepEqual(sizes.map(s=>[s.status,s.reason]),[['unresolved',reason],['unresolved',reason]],rule);
+   assert.deepEqual(await page.evaluate(`(()=>{const r=document.querySelector('.part').getBoundingClientRect();return [r.width,r.height]})()`),box,'the box the declared 16 x 16 is not');
+  }
   const short=await observe('data-short');assert.notEqual(short.end,0);
   assert.throws(()=>lower({off,short}),{message:descendantTranslateRefusal+':partial-free-space'});
  }finally{await browser.close()}

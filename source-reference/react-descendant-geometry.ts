@@ -9,18 +9,30 @@
  * main axis by exactly the root's free space, IS main-axis END alignment; the
  * planes where it does not move are START. Every operand is a declared or
  * used CSS length compared in whole 1/64 px layout units. Anything else that
- * translates refuses by name; nothing is approximated and no offset is minted. */
+ * translates refuses by name; nothing is approximated and no offset is minted.
+ * A margin or inset that differs across planes is the same move by another
+ * spelling and refuses `…-descendant-offset-unexplained:<channel>`. */
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
 import { authoredLengthIsUsed, usedLayoutUnits } from './layout-unit.js';
 import type { ReactDescendantSizes } from './react-style-origin.js';
 
 export const descendantTranslateRefusal = 'react-initial-contract-descendant-translate-unqualified';
+export const descendantOffsetRefusal = 'react-initial-contract-descendant-offset-unexplained';
+const displacement = ['margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'left', 'right', 'top', 'bottom'];
 export type DescendantSizing = Map<string, Set<'width' | 'height'>>;
 const insideSvg = (rows: ReturnType<typeof flatten>, path: string) =>
   rows.some(r => r.node.tag === 'svg' && (path === r.path || path.startsWith(r.path === '' ? '' : r.path + '.')));
+const boxless = new Set(['inline', 'contents', 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-column', 'table-column-group']);
 /** Text boxes keep their own (font-dependent) sizing path; only boxes without direct text are sized here. */
 const holdsText = (node: CapturedNode) => node.nodes.some(c => c.t === 'text' && c.v.trim().length > 0);
 
+const units = (style: Record<string, string>, channels: string[]) => {
+  let sum = 0;
+  for (const channel of channels) { const n = usedLayoutUnits(style[channel] ?? ''); if (n === undefined) return undefined; sum += n; }
+  return sum;
+};
+const sides = { x: ['left', 'right'], y: ['top', 'bottom'] } as const, size = { x: 'width', y: 'height' } as const;
+const edges = (axis: 'x' | 'y') => sides[axis].flatMap(s => [`padding-${s}`, `border-${s}-width`]);
 /** Paths are relative to the observed root. Absent evidence (an archive older
  * than this reader) admits nothing, exactly as before. */
 export function descendantFixedSizes(root: CapturedNode, rootPath: string, evidence?: ReactDescendantSizes): DescendantSizing {
@@ -33,8 +45,13 @@ export function descendantFixedSizes(root: CapturedNode, rootPath: string, evide
     const origin = evidence.nodes.find(n => n.path === (rootPath === '' ? row.path : rootPath + '.' + row.path));
     if (!origin || origin.tag !== row.node.tag) throw Error('react-initial-contract-descendant-evidence-mismatch');
     if (holdsText(row.node)) continue;
+    // The reader measures the box; evidence sealed before it did is held to what the captured styles can still say:
+    // the declaration applies to this display, no zoom on the way up, and the declared length IS the border box.
+    const chain = rows.filter(r => r.path === '' || row.path === r.path || row.path.startsWith(r.path + '.'));
+    if (boxless.has(row.node.style.display) || chain.some(r => (r.node.style.zoom ?? '1') !== '1')) continue;
     for (const channel of ['width', 'height'] as const) {
       const size = origin.sizes.find(s => s.channel === channel);
+      if (row.node.style['box-sizing'] !== 'border-box' && units(row.node.style, edges(channel === 'width' ? 'x' : 'y')) !== 0) continue;
       if (size?.status === 'fixed' && size.value && authoredLengthIsUsed(size.value, row.node.style[channel]))
         (out.get(row.path) ?? out.set(row.path, new Set()).get(row.path)!).add(channel);
     }
@@ -62,13 +79,6 @@ const lengthPercent = (token: string, box: number | undefined): number | undefin
   if ((m = new RegExp(`^calc\\(${number}% ([+-]) ${number}px\\)$`).exec(token))) return Number(m[1]) / 100 * box + (m[2] === '-' ? -1 : 1) * Number(m[3]) * 64;
   return undefined;
 };
-const units = (style: Record<string, string>, channels: string[]) => {
-  let sum = 0;
-  for (const channel of channels) { const n = usedLayoutUnits(style[channel] ?? ''); if (n === undefined) return undefined; sum += n; }
-  return sum;
-};
-const sides = { x: ['left', 'right'], y: ['top', 'bottom'] } as const, size = { x: 'width', y: 'height' } as const;
-const edges = (axis: 'x' | 'y') => sides[axis].flatMap(s => [`padding-${s}`, `border-${s}-width`]);
 const borderBox = (style: Record<string, string>, axis: 'x' | 'y') =>
   units(style, [size[axis], ...(style['box-sizing'] === 'border-box' ? [] : edges(axis))]);
 
@@ -107,6 +117,18 @@ const outOfFlow = (s: Record<string, string>) => ['absolute', 'fixed'].includes(
 export function lowerDescendantTranslations(planes: Map<string, { root: CapturedNode; sizing: DescendantSizing; observed?: boolean }>,
   rootFixed: ReadonlySet<string>): DescendantAlignment[] {
   const refuse = (reason: string): never => { throw Error(descendantTranslateRefusal + ':' + reason); };
+  // The same defect class by its other CSS spellings: a part displaced differently across planes by a margin or an
+  // inset. The contract carries neither below the root, so the move would vanish. Read from the captured STYLES (the
+  // tree holds no boxes), for the element at the same path with the same tag; translate has its own rule below.
+  const displaced = new Map<string, Set<string>>();
+  for (const plane of planes.values()) for (const row of flatten(plane.root)) if (row.path !== '') for (const channel of displacement) {
+    // An inset displaces only a relatively placed box; an absolute box's far insets follow its container and are another door.
+    if (!channel.startsWith('margin-') && !['relative', 'sticky'].includes(row.node.style.position)) continue;
+    const key = row.path + ' ' + row.node.tag + ' ' + channel;
+    (displaced.get(key) ?? displaced.set(key, new Set()).get(key)!).add(row.node.style[channel] ?? '');
+  }
+  for (const [key, values] of [...displaced].sort(([a], [b]) => a.localeCompare(b)))
+    if (values.size > 1) throw Error(descendantOffsetRefusal + ':' + key.split(' ')[2]);
   const moved = new Set<string>();
   for (const plane of planes.values()) for (const row of flatten(plane.root)) {
     if (row.path === '') continue;
@@ -132,7 +154,7 @@ export function lowerDescendantTranslations(planes: Map<string, { root: Captured
       if ((parent.direction ?? 'ltr') !== 'ltr' || (parent['writing-mode'] ?? 'horizontal-tb') !== 'horizontal-tb') refuse('rtl-or-vertical-writing');
       if (!['normal', 'flex-start'].includes(parent['justify-content'])) refuse('parent-justification-not-start');
       const axis = direction === 'row' ? 'x' : 'y';
-      if (Object.keys(alignment.planes).length && alignment.axis !== axis) refuse('parent-not-single-line-flex');
+      if (Object.keys(alignment.planes).length && alignment.axis !== axis) refuse('main-axis-differs-between-planes');
       alignment.axis = axis;
       if (children.some(c => c !== child && !outOfFlow(c.style)) || holdsText(root) ||
           Object.entries(root.pseudo).some(([name, s]) => ['::before', '::after'].includes(name) && s && !outOfFlow(s)))
@@ -141,11 +163,12 @@ export function lowerDescendantTranslations(planes: Map<string, { root: Captured
       if (t[axis === 'x' ? 'y' : 'x']) refuse('cross-axis-translation');
       if (!rootFixed.has(size[axis])) refuse('parent-main-size-not-fixed');
       if (!plane.sizing.get(path)?.has(size[axis])) refuse('child-main-size-not-own-fixed');
-      const container = borderBox(parent, axis), inner = units(parent, edges(axis)), box = borderBox(child.style, axis),
-        margins = units(child.style, sides[axis].map(s => `margin-${s}`));
-      if (container === undefined || inner === undefined || box === undefined || margins === undefined) return refuse('translation-unresolved');
+      // A main-axis margin (a used `auto` margin reads as its px) moves the part and is not carried: never folded into free space.
+      if (sides[axis].some(s => usedLayoutUnits(child.style[`margin-${s}`] ?? '') !== 0)) refuse('main-axis-margin-present');
+      const container = borderBox(parent, axis), inner = units(parent, edges(axis)), box = borderBox(child.style, axis);
+      if (container === undefined || inner === undefined || box === undefined) return refuse('translation-unresolved');
       // Free space is whole layout units; the translation must BE it, not be near it.
-      if (t[axis] !== 0 && t[axis] !== container - inner - box - margins) refuse('partial-free-space');
+      if (t[axis] !== 0 && t[axis] !== container - inner - box) refuse('partial-free-space');
       alignment.planes[key] = t[axis] === 0 ? 'start' : 'end';
     }
     // `normal` is start in a flex container; spell both so the variance factors on the driving axis.
