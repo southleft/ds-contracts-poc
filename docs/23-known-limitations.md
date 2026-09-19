@@ -1522,25 +1522,53 @@ is gone** (`…/update/<proposal>/attest-dead`). The journal records
 afterwards settles the write like any other unknown write. [CURRENT](CURRENT.md)
 row 3 lists the refusals.
 
-**What the attestation guarantees.** The app never accepts a result for a revoked
-attempt: it is journaled as `late-result-after-revocation` and never becomes the
-outcome. It never lets the revoked attempt `begin` again. The settling read
-runs only after the attestation and is final for the journal.
+**When it is accepted.** Only when the latest write was begun and is unresolved,
+and only while no companion for this update has polled within the transport's
+15-second liveness window (`native-update-attest-dead-companion-connected`
+otherwise). The review page also waits one minute after `begin` before offering
+it. Neither check proves the companion is gone: a companion busy executing a
+program does not poll. The operator's statement is the proof.
+
+**What the attestation guarantees.** The revoked attempt may never `begin`
+again. Its result is journaled as `late-result-after-revocation` and is never
+the outcome. Before the settling read, the result is evidence only: the read
+decides. After the read, the result is judged by the same allow-list as any
+late write result. After an untouched settlement, anything but `no-op` or
+`refused` stops the update. After a landed settlement, anything but `updated`
+or `no-op` stops it. A stopped update is `update-recovery-required` with
+`native-update-late-write-result-contradicts-canvas`, and every chain guard
+treats it as a written, unverified correction. The settling read is final
+only until such a result arrives.
 
 **What it does not guarantee.** It cannot stop a companion that is in fact alive
 and already past `begin`. The companion runs inside the Figma plugin sandbox,
 and its program cannot reach the app synchronously before it assigns a value.
-Such a program can land after the settling read. Three things bound the damage.
-The pinned program writes only when each node holds the exact saved or proposed
-value and everything else matches the saved baseline, so over a verified canvas
-it is a `no-op` and over a designer's edit it refuses. If it lands after an
-untouched settlement, the next preflight names it
-(`native-update-canvas-moved-after-revoked-settlement`) and the name stays on
-the record. Once the chain has moved on, the next correction's preflight or a
-design read sees the changed values as a conflict or a design change. The one
-case it can still write is a later reverse correction that has returned every
-node to this write's saved values. There the late program lands its proposed
-values again, and only a design read or the next correction notices.
+Such a program can land after the settling read. What bounds the damage:
+
+- The pinned program writes only when each node holds the exact saved or
+  proposed value and everything else matches the saved baseline. Over a
+  verified canvas it is a `no-op`; over a designer's edit it refuses.
+- If it reports back, its result is judged as above.
+- If it writes without reporting after an untouched settlement, detection
+  happens only if a later preflight runs on this operation, which means the
+  operator re-arms. The first preflight that actually reads the canvas after
+  the settlement names `native-update-canvas-moved-after-revoked-settlement`
+  when the canvas is not the saved baseline, or when the program refused after
+  reading it. A preflight that never returned, or that ran in another file,
+  concludes nothing, and the next one is checked instead. The name stays on the
+  record.
+- If nobody re-arms, nothing in this operation detects it. A design read is
+  offered only on a verified update. A later proposal's preflight on the same
+  nodes sees the changed values as a conflict.
+- **The P3 interleave is benign.** The revoked write can land after the
+  re-armed write's preflight and before its execution. Both programs write the
+  same proposed values, so the re-armed program finds them already there,
+  reports `no-op`, and the independent readback verifies. No preflight saw the
+  canvas move, so nothing is named, and nothing needs to be.
+- The one case it can still write unseen is a later reverse correction that
+  has returned every node to this write's saved values. There the late program
+  lands its proposed values again, and only a design read or the next
+  correction notices.
 
 **Why there is no canvas-side revocation token (AGENT decision, 2026-09-19).**
 One stronger design was considered: a per-attempt token in plugin data that the

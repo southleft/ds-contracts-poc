@@ -35,7 +35,7 @@ type Entry = { sequence: number; previous: string } & (
   // The companion asks before executing a write. Once a canvas read has been
   // dispatched to settle that write, asking is refused: a write that was handed
   // out but never begun is then provably dead, however slow its holder is.
-  { kind: 'begin'; attemptId: string } |
+  { kind: 'begin'; attemptId: string; at?: string } |
   // An operator's explicit decision to send a NEW write after one was settled as untouched.
   { kind: 'rearm' } |
   { kind: 'abandon-observation'; attemptId: string } |
@@ -48,17 +48,18 @@ type Entry = { sequence: number; previous: string } & (
   { kind: 'late-result-after-revocation'; envelope: NativeOperationResult });
 type Settlement = 'landed' | 'untouched' | 'unresolved';
 type State = { phase: string; write?: NativeOperationCommand; answered?: boolean; revoked: Set<string>; attested?: { attemptId: string; at: string };
-  revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: NativeDesignChanges & { attemptId: string }; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; claims: number; settled: Map<string, Settlement>;
+  revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: NativeDesignChanges & { attemptId: string }; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; begunAt?: string; claims: number; settled: Map<string, Settlement>;
   wrote: boolean; observation?: unknown; observationScriptSha256?: string; problems: string[] };
 function fail(message: string): never { throw Error('native-update-' + message); }
 /** The operator's statement, recorded verbatim with every attestation. The route takes no body. */
 export const NATIVE_UPDATE_ATTEST_DEAD_STATEMENT = 'The operator attests that the companion granted permission to begin this write is gone and will not execute it. This attempt is revoked; the canvas decides what happened.';
 /** Whether the latest write may be attested dead: begun, never answered, not settled.
- * 'attested' means it already was (a second attestation records nothing). */
+ * 'attested' means it already was and is still unsettled (a second attestation records
+ * nothing). Once a canvas read has settled it, attesting it again is refused by name. */
 function attestable(state: State): 'ok' | 'attested' | 'no-write' | 'write-not-begun' | 'write-answered' | 'observation-in-flight' | 'write-settled' {
   const w = state.write?.attemptId;
   if (!w) return 'no-write';
-  if (state.revoked.has(w)) return 'attested';
+  if (state.revoked.has(w)) return state.settled.has(w) ? 'write-settled' : 'attested';
   if (state.begun !== w) return 'write-not-begun';
   if (state.answered) return 'write-answered';
   if (state.pending?.attemptId === w || state.unresolved?.attemptId === w) return 'ok';
@@ -152,12 +153,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         } else if (c.script !== header.scripts[p].script || c.scriptSha256 !== header.scripts[p].sha256) fail('dispatch-invalid');
         if(p==='update-apply') {
           if(state.wrote || state.phase!=='update-preflight-observed' || !same(JSON.parse(read(path.join(dir,claimFile(state.claims)))),c)) fail('write-precondition-invalid');
-          state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.revokedUntouched;
+          state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.revokedUntouched;delete state.begunAt;
         } else if(p==='update-preflight-readback' ? state.wrote : !state.wrote) fail('readback-precondition-invalid');
         attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;
       } else if(event.kind==='begin') {
-        if(state.unresolved || state.pending?.phase!=='update-apply' || event.attemptId!==state.pending.attemptId || state.begun) fail('begin-invalid');
-        state.begun=event.attemptId;
+        if(state.unresolved || state.pending?.phase!=='update-apply' || event.attemptId!==state.pending.attemptId || state.begun ||
+            (event.at!==undefined && (typeof event.at!=='string' || !Number.isFinite(Date.parse(event.at))))) fail('begin-invalid');
+        state.begun=event.attemptId;if(event.at!==undefined) state.begunAt=event.at;
       } else if(event.kind==='rearm') {
         if(state.pending || state.phase!=='update-write-untouched') fail('rearm-invalid');
         state.phase='update-prepared';
@@ -211,9 +213,14 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           state.phase=r?.status==='preflight-observed' && nativeContractUpdateMatches(plan,r.observation) ? 'update-preflight-observed' : 'update-refused';
           // A revoked write settled as untouched may still have executed later. The
           // first preflight after that settlement names any canvas that moved since.
-          if(state.revokedUntouched && r?.status==='preflight-observed' && !nativeContractUpdateUntouched(plan,r.observation))
-            state.alarms=[...new Set([...state.alarms,'native-update-canvas-moved-after-revoked-settlement'])];
-          delete state.revokedUntouched;
+          // Kept until a preflight actually reads the canvas: an observed one that is
+          // not the saved baseline, or one the program refused after reading it.
+          const refusedAfterReading=r?.status==='refused' && !(Array.isArray(r?.problems) && r.problems.includes('native-update-file-mismatch'));
+          if(state.revokedUntouched && (r?.status==='preflight-observed' || refusedAfterReading)) {
+            if(refusedAfterReading || !nativeContractUpdateUntouched(plan,r.observation))
+              state.alarms=[...new Set([...state.alarms,'native-update-canvas-moved-after-revoked-settlement'])];
+            delete state.revokedUntouched;
+          }
         } else if(p==='update-apply') {
           state.answered=true;
           // Acknowledgement never qualifies success. A separate read observes
@@ -249,8 +256,18 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
             events.some(e=>e.kind==='late-result-after-revocation'&&e.envelope.attemptId===event.envelope.attemptId)) fail('late-result-invalid');
         correlate(event.envelope,write.command);
         // Any result proves the attestation was wrong: that companion was alive.
-        // It moves nothing; the next read-only observation decides.
         state.alarms=[...new Set([...state.alarms,'native-update-late-result-after-revocation'])];
+        // Before settlement it is evidence only: the canvas read still decides.
+        // After settlement it is judged like any late write result, by the same allow-list.
+        const settlement=state.settled.get(event.envelope.attemptId);
+        if(settlement) {
+          if(state.pending) fail('late-result-invalid');
+          const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:['updated','no-op'];
+          if(!benign.includes(status)) {
+            state.phase='update-recovery-required';state.wrote=true;delete state.revokedUntouched;
+            state.problems=[...new Set([...state.problems,'native-update-late-write-result-contradicts-canvas'])];
+          }
+        }
       } else if(event.kind==='abandon-observation') {
         if(!state.pending?.readOnly || event.attemptId!==state.pending.attemptId) fail('observation-abandon-refused');
         // Abandoning an outcome read leaves the write exactly as unknown as before.
@@ -306,6 +323,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       acceptedContract:null,nativeQualification:'unqualified' as const,problems:[...new Set([...l.state.problems,...l.state.alarms])],
       // The operator's attestation that a begun write's companion is gone, and whether one is possible now.
       attestedDead:l.state.attested&&l.state.attested.attemptId===l.state.write?.attemptId?{...l.state.attested}:undefined,canAttestDead:attestable(l.state)==='ok',
+      begunAt:l.state.begun&&l.state.begun===l.state.write?.attemptId?l.state.begunAt:undefined,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};
   };
   const get=(id:string)=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id)));
@@ -399,6 +417,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         // attempt's result is evidence only, whatever it says and whenever it arrives.
         const write=current.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===envelope.attemptId);
         if(write?.kind!=='dispatch') fail('unsolicited-result');correlate(envelope,write.command);
+        // Once settled, as for an unrevoked late result: judged only while nothing else is pending.
+        if(current.state.settled.has(envelope.attemptId)&&current.state.pending) fail('unsolicited-result');
         append(current,{kind:'late-result-after-revocation',envelope});return get(id);
       }
       if(current.state.unresolved&&envelope?.attemptId===current.state.unresolved.attemptId) {
@@ -444,7 +464,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       if(l.state.revoked.has(attemptId)) fail('write-begin-refused');
       if(l.state.begun===attemptId&&l.state.pending?.attemptId===attemptId&&!l.state.unresolved) return;
       if(l.state.unresolved||l.state.pending?.phase!=='update-apply'||l.state.pending.attemptId!==attemptId||l.state.begun) fail('write-begin-refused');
-      append(l,{kind:'begin',attemptId});
+      append(l,{kind:'begin',attemptId,at:new Date().toISOString()});
     },
     /** Operator attestation: the companion that began the latest write is gone.
      * Revokes that attempt; the write is then settled by a canvas read dispatched

@@ -351,7 +351,9 @@ test('the actual companion: a write begun by a companion that then died is attes
   f.transport().resolveWriteOutcome(f.id);await f.poll();
   assert.equal(f.jobs().get(f.id).phase,'update-recovery-required','without attestation a begun write is never treated as dead');
   assert.deepEqual(f.jobs().get(f.id).problems,['native-update-write-begun-outcome-unresolved']);
-  f.transport().attestDead(f.id);
+  // The reopened plugin just polled: it is visibly alive, so the attestation is refused until it is closed.
+  assert.throws(()=>f.transport().attestDead(f.id),/native-update-attest-dead-companion-connected/);
+  f.transport().attestDead(f.id,Date.now()+16_000);
   assert.equal(f.jobs().get(f.id).unresolvedWrite,'awaiting-result');
   assert.throws(()=>f.transport().begin(f.id,f.secret,write.attemptId),/write-begin-refused/);
   await f.poll();assert.equal(f.jobs().get(f.id).pendingPhase,'update-apply','polling alone neither resends nor settles it');
