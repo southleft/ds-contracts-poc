@@ -1,0 +1,11 @@
+{
+  "_marker": "Shrink-only named measurement residuals, evaluated by the unchanged React-native fidelity verdict rule. No owner grade.",
+  "qualification": "measured-not-graded",
+  "failures": {
+    "family-badge/badge-default": {
+      "class": "font-substrate",
+      "cause": "The historical unmasked score remains 6.250%. All 55 aligned differing pixels lie inside the native text box; aligned 2.546296%, glyph-masked 0%. Computed weight, size, line height and letter spacing agree; the ownership source archive did not record the actual Chromium font. This is a named text-rendering residual, not a pixel pass or proof of identical resolved fonts.",
+      "measured": "The committed pair and recomputed SCORECARD preserve the unmasked miss and unresolved source family; reverse by removing this row and rerunning the check."
+    }
+  }
+}

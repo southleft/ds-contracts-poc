@@ -101,6 +101,8 @@ const EXCLUDED: Record<string, string> = {
   // and IS laned (fast).
   "root:react:native:fidelity:record":
     "needs the private operation archive (hash-chained journals and source inspections that are never committed); its offline half react:native:fidelity:check is laned (fast)",
+  "root:react:native:declared:record":
+    "needs explicit private journal/source references and a new output directory; its offline half react:native:declared:check is laned (fast)",
   "root:eval":
     "run by the full lane through eval:carried:check, which records to the same path; wiring it separately would run the suite twice",
   // These three `--check` scripts are NOT checks. Every build-*-live-proof-vN.ts

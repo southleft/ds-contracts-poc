@@ -1611,6 +1611,25 @@ It was rejected for three reasons:
 program, re-record every open update journal under the new program, and re-record
 the plugin engine receipt.
 
+## B.41 Declared React workspaces no longer require unused sandbox CSS inputs
+
+**AGENT decision (2026-09-19).** The first Radix Themes application load failed
+before bundling because `buildReactReference` always opened `src/index.css`
+and `capture-input.css`. Those names belong to the original sandbox, not the
+declared-cohort contract. Declared workspaces may omit them. If present they
+remain pinned exactly as before, preserving existing reference identities;
+adding or removing one invalidates a saved reference. A dangling symlink or
+unreadable present file still refuses. The built-in preset continues to
+require both. Imported CSS, installed dependencies, the declaration, project
+metadata and source witnesses remain authenticated.
+
+Evidence: the minimal declared-workspace test failed on the old reader, then
+passed without either unused file. The original seven-case family still builds
+reference `77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c`;
+the new four-case Radix workspace builds without placeholder files. This is
+source intake, not proof of conversion or visual fidelity. Reverse by removing
+the conditional omission and presence check; old evidence needs no rewrite.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one
@@ -3741,21 +3760,32 @@ surface outside the React + WC core scope; named here, not fixed.
 carry Inter and accept the round-trip cost. **Gate:**
 `core/react-default-font-family.test.ts` (`npm run react:conformance:check`).
 
-## B.41 Declared React workspaces no longer require unused sandbox CSS inputs
+## D.46 Declared-family fidelity is additive; incomplete alignment stays visible
 
-**AGENT decision (2026-09-19).** The first Radix Themes application load failed
-before bundling because `buildReactReference` always opened `src/index.css`
-and `capture-input.css`. Those names belong to the original sandbox, not the
-declared-cohort contract. Declared workspaces may omit them. If present they
-remain pinned exactly as before, preserving existing reference identities;
-adding or removing one invalidates a saved reference. A dangling symlink or
-unreadable present file still refuses. The built-in preset continues to
-require both. Imported CSS, installed dependencies, the declaration, project
-metadata and source witnesses remain authenticated.
+**AGENT decision (2026-09-19).** Record workspace-declared families in a new
+`recipe/evidence/react-native-declared-family/` directory. The historical V1
+fixture remains byte-identical. The recorder accepts explicit operation/read
+event and sealed source references, verifies the complete journal chains and
+correlation, and refuses a readback whose plan revision differs from the source
+operation. Every native image and source observation must pair uniquely. It
+records only after authentication; existing output directories refuse. The
+shared source crop, native text geometry and typography routines are the same
+ones used by the historical recorder. No component-name conversion rule is added.
 
-Evidence: the minimal declared-workspace test failed on the old reader, then
-passed without either unused file. The original seven-case family still builds
-reference `77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c`;
-the new four-case Radix workspace builds without placeholder files. This is
-source intake, not proof of conversion or visual fidelity. Reverse by removing
-the conditional omission and presence check; old evidence needs no rewrite.
+The committed denominator is Switch 9, Alert 1 and Badge 1. The unchanged
+historical 5% score passes Switch and Alert; Badge stays at 6.25%, with all 55
+aligned differing pixels inside its text box (aligned 2.546296%, masked 0%).
+The existing font-substrate classification names that residual; it does not
+turn the historical score into a pass. Computed typography agrees, but the
+source ownership archive did not record the actual Chromium font. All Switch
+aligned scores refuse: six need fractional translation and three exports are
+36×23 despite recorded render bounds spanning 36×24. No resampling or widened
+tolerance is used. Low-contrast thumb placement still needs separate geometry
+and live visual evidence. This lane qualifies evidence integrity, not V1.
+
+**Reverse/reproduce.** Run `npm run react:native:declared:record` with the checked-in
+specification, private archive and a NEW output directory; compare every image
+and manifest byte. Run `npm run react:native:declared:check` offline. Remove the
+Badge named residual to make its historical failure red again. Replace a pair
+only with a new authenticated observation and reviewed denominator; never
+rewrite the frozen historical lineage to fit a new measurement.

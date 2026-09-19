@@ -544,7 +544,9 @@
     "design:consumer:check": "tsx scripts/design-consumer-check.ts",
     "design:consumer:test": "node --import tsx --test scripts/design-consumer-check.test.ts",
     "react:native:fidelity:check": "tsx scripts/react-native-fidelity-check.ts && node --import tsx --test scripts/react-native-fidelity-check.test.ts",
-    "react:native:fidelity:record": "tsx scripts/react-native-fidelity-record.ts"
+    "react:native:fidelity:record": "tsx scripts/react-native-fidelity-record.ts",
+    "react:native:declared:record": "tsx scripts/react-native-declared-record.ts",
+    "react:native:declared:check": "tsx scripts/react-native-declared-check.ts && node --import tsx --test scripts/react-native-declared.test.ts"
   },
   "engines": {
     "node": ">=20"
