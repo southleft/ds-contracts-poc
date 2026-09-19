@@ -5883,3 +5883,33 @@ Reversal: replace the inset stroke only with a shared lowering whose layout,
 paint, caller overrides and reverse extraction are demonstrated by adversarial
 cases and a fresh app-delivered consumer. Keep the diagnostic and original
 archive measurements separate.
+
+
+## D.58 Visually identical source variants cannot prove a prop was discarded
+
+**AGENT measurement decision (2026-09-19).** The clean-consumer check still
+switches every variant-bearing cell and records every changed subtree. An
+unchanged cell is no longer called a discarded prop when exactly one source
+counterpart holds all other props and the interaction fixed, both distinct
+native nodes have identical PNG bytes, their recorded layout sizes and relative
+render bounds match exactly, and both PNG hashes match the authenticated frame
+records. File-version and node snapshots must remain unchanged across export.
+
+The receipt names these source-equivalent transitions separately. They prove
+only that unchanged paint is expected; they do not prove that the component
+consumed the prop or implements interaction semantics. Missing or ambiguous
+counterparts, missing frames, stale hashes, different dimensions or offsets,
+invalid images, and even a one-pixel low-alpha source difference preserve the
+discarded-prop failure. No tolerant image score participates in equivalence.
+
+Evidence: all six standalone Checkbox Hover/Default source pairs are
+byte-identical. The unchanged app-delivered archive (SHA256
+88ad4959448f4d41d71d16e562d5d9b04953d4f914f5e9af8f14d00fbc5a7cfc)
+changes all 14 remaining state transitions and retains all six equivalent ones.
+Its fresh consumer remains unqualified: 13 hidden-label comparisons refuse the
+native export-span assumption and 13 shown-label comparisons exceed 5% on black.
+The older seven passing historical comparisons remain in their receipt.
+
+Reversal: remove the exact-equivalence adjudication, restoring the unconditional
+change assertion and its known false positives. Preserve original receipts,
+source PNGs and all failing visual comparisons.

@@ -45,6 +45,7 @@
  * for visible browser inspection; it does not change the comparison or score.
  */
 import { packageReactLibrary } from './package-react-library.js';
+import { sourceEquivalentTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -657,7 +658,8 @@ async function main() {
         if (declaresSlot && !shown) problems.push('children-slot-discarded');
         if (!declaresSlot && !shown && !refusedByType) problems.push('children-accepted-but-discarded');
       }
-      // Behavior: switching a variant prop (enum or boolean axis) must change the computed root style of every cell whose variant differs.
+      // Observe every differing variant value. An unchanged render needs exact
+      // source equivalence, adjudicated after authenticated Figma export below.
       const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT' && variantValues(p).length > 1);
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
@@ -670,13 +672,9 @@ async function main() {
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
-        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key) });
+        const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
+        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert });
         if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
-        if (didChange.length !== shouldChange.length) {
-          // The emitter ledgers an axis whose values drew no style difference on the canvas; name that reader outcome apart from a dropped prop.
-          const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
-          problems.push(inert ? `variant-axis-inert-ledgered:${prop.name}` : `variant-prop-discarded:${prop.name}`);
-        }
       }
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }
@@ -686,6 +684,17 @@ async function main() {
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: unresolved }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
+    const sourceImages: Record<string, Buffer> = Object.fromEntries(Object.entries(figma.files).map(([id, file]) => [id, readFileSync(file)]));
+    for (const row of receipt.behavior.variants ?? []) {
+      const unchanged = row.cellsSwitched.filter((key: string) => !row.cellsChanged.includes(key));
+      const equivalent = sourceEquivalentTransitions(cases, row.prop, row.switchedTo, unchanged, sourceImages, figma.frames);
+      row.sourceEquivalentTransitions = equivalent;
+      const keys = new Set(equivalent.map(e => e.from));
+      row.cellsExpectedToChange = row.cellsSwitched.filter((key: string) => !keys.has(key));
+      row.cellsUnchangedWithoutEquivalentSource = unchanged.filter((key: string) => !keys.has(key));
+      if (row.cellsUnchangedWithoutEquivalentSource.length)
+        problems.push(row.axisInertLedgered ? `variant-axis-inert-ledgered:${row.prop}` : `variant-prop-discarded:${row.prop}`);
+    }
     receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];

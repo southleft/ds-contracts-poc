@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
+import { sourceEquivalentTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
 import { NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
@@ -297,7 +298,7 @@ test('a second background exposes missing pale ink while the original white comp
 });
 
 // Authenticated layout origins must not let an independent ink crop move geometry.
-import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, type FrameBox } from './design-consumer-framing.js';
+import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, type FrameBox, type FigmaFrame } from './design-consumer-framing.js';
 const frameBytes=(width:number,height:number,paint:(p:PNG)=>void)=>{const p=new PNG({width,height});paint(p);return PNG.sync.write(p);};
 const rect=(p:PNG,x:number,y:number,w:number,h:number,rgba=[10,80,150,255])=>{
   for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)for(let c=0;c<4;c++)p.data[(yy*p.width+xx)*4+c]=rgba[c];
@@ -370,4 +371,63 @@ test('export bounds require a stable file version and the same returned node aro
  const renamed=structuredClone(before);renamed.nodes['1:2'].document.name='Changed';
  assert.equal(figmaFramesFromSnapshots(before,renamed,images).refused,'figma-node-changed-during-export:1:2');
  assert.equal(figmaFramesFromSnapshots(before,{...before,nodes:{}},images).refused,'figma-export-bounds-not-recorded:1:2');
+});
+
+function equivalentVariantFixture() {
+  const image = frameBytes(20, 20, p => rect(p, 2, 2, 16, 16));
+  const cases = [
+    { key: 'rest', nodeId: '1:1', interaction: 'none', props: { state: 'default', checked: false } },
+    { key: 'hover', nodeId: '1:2', interaction: 'none', props: { state: 'hover', checked: false } },
+  ];
+  const images = { '1:1': image, '1:2': Buffer.from(image) };
+  const frame = (x: number): FigmaFrame => ({ layout: { x, y: 10, width: 20, height: 20 }, render: { x, y: 10, width: 20, height: 20 }, pngSha256: imageSha256(image) });
+  const frames = { '1:1': frame(100), '1:2': frame(200) };
+  const inspect = () => sourceEquivalentTransitions(cases, 'state', 'default', ['hover'], images, frames);
+  return { image, cases, images, frames, inspect };
+}
+
+test('an unchanged variant needs exact source paint and relative geometry, with both identities receipted', () => {
+  const f = equivalentVariantFixture();
+  assert.deepEqual(f.inspect(), [{ from: 'hover', to: 'rest', fromNodeId: '1:2', toNodeId: '1:1', pngSha256: imageSha256(f.image), layoutSize: { width: 20, height: 20 } }]);
+  // Absolute placement on the design canvas is not the variant's own layout.
+  f.frames['1:2'].layout.y += 100; f.frames['1:2'].render.y += 100;
+  assert.equal(f.inspect().length, 1);
+});
+
+test('source paint differences, even a single faint pixel below the image tolerance, never excuse a discarded prop', () => {
+  const f = equivalentVariantFixture();
+  const changed = PNG.sync.read(f.image); changed.data[3] = 1;
+  f.images['1:2'] = PNG.sync.write(changed); f.frames['1:2'].pngSha256 = imageSha256(f.images['1:2']);
+  assert.deepEqual(f.inspect(), []);
+});
+
+test('identical raster bytes cannot excuse a different fractional layout size or render offset', () => {
+  for (const mutate of [
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.frames['1:2'].layout.width += 0.125; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.frames['1:2'].render.x += 0.25; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.frames['1:2'].render.height += 0.125; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.frames['1:2'].layout.height = NaN; },
+  ]) { const f = equivalentVariantFixture(); mutate(f); assert.deepEqual(f.inspect(), []); }
+});
+
+test('missing, stale, invalid and reused source evidence cannot establish variant equivalence', () => {
+  for (const mutate of [
+    (f: ReturnType<typeof equivalentVariantFixture>) => { delete (f.frames as Partial<typeof f.frames>)['1:1']; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { delete (f.images as Partial<typeof f.images>)['1:2']; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.frames['1:2'].pngSha256 = '0'.repeat(64); },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases[1].nodeId = f.cases[0].nodeId; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { const bytes = Buffer.from('not a PNG'); f.images['1:1'] = bytes; f.images['1:2'] = bytes; f.frames['1:1'].pngSha256 = f.frames['1:2'].pngSha256 = imageSha256(bytes); },
+  ]) { const f = equivalentVariantFixture(); mutate(f); assert.deepEqual(f.inspect(), []); }
+});
+
+test('the counterpart is unique, type-exact, and holds every other axis and interaction fixed', () => {
+  for (const mutate of [
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases[0].props.checked = true; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases[0].interaction = 'hover'; },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases.push({ ...f.cases[0], key: 'duplicate' }); },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases.push({ ...f.cases[1] }); },
+    (f: ReturnType<typeof equivalentVariantFixture>) => { f.cases.splice(0, 1); },
+  ]) { const f = equivalentVariantFixture(); mutate(f); assert.deepEqual(f.inspect(), []); }
+  const f = equivalentVariantFixture();
+  assert.deepEqual(sourceEquivalentTransitions(f.cases, 'checked', 'false', ['hover'], f.images, f.frames), []);
 });
