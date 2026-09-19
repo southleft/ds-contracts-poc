@@ -68,12 +68,51 @@ export function enumCombos(
   return out;
 }
 
+/** The state vocabulary and its selectors on a root that carries the NATIVE
+ *  `disabled` attribute (a form control). Every other root takes
+ *  `stateSelectorsFor(disabledStateSelector(…))` — see below. */
 export const STATE_SELECTORS: Record<string, string> = {
   hover: ':hover:not(:disabled)',
   active: ':active:not(:disabled)',
   'focus-visible': ':focus-visible',
   disabled: ':disabled',
 };
+
+/** A disabled state styles what the element actually exposes: `:disabled` for
+ *  a native form control, and the attribute the component renders
+ *  (`[data-disabled]`, the boolean prop's data attribute) for every other root
+ *  and part. `:disabled` never matches a `div` / `span` / `a` / `label` / a
+ *  custom element, so a `.root:disabled` rule there is dead and a
+ *  `:hover:not(:disabled)` guard never excludes the disabled state.
+ *
+ *  `native` / `attribute`: whether ANY rendering of this root carries the
+ *  native attribute / the data attribute. They differ from one another only
+ *  for a root whose element is chosen per prop value (elementByProp) on a
+ *  surface that renders `disabled` on the native values and `data-disabled`
+ *  on the rest; that root takes both, as one selector at the same specificity.
+ *  A root with no rendering of either (unreachable) takes the attribute.
+ *  Lowering register: css.disabled-state-rendered-attribute. */
+export function disabledStateSelector(native: boolean, attribute: boolean): string {
+  if (native && attribute) return ':is(:disabled, [data-disabled])';
+  return native ? ':disabled' : '[data-disabled]';
+}
+
+/** STATE_SELECTORS for a root whose disabled state is `disabled` (from
+ *  disabledStateSelector): the disabled state itself, and the hover / active
+ *  guards that exclude it. `:disabled` returns the native table itself, so a
+ *  form-control root emits the same bytes as before. The specificity of every
+ *  entry is unchanged (an attribute selector and a pseudo-class weigh the
+ *  same; `:is()` takes its heaviest argument), so no rule's place in the
+ *  cascade moves. */
+export function stateSelectorsFor(disabled: string): Record<string, string> {
+  if (disabled === STATE_SELECTORS.disabled) return STATE_SELECTORS;
+  return {
+    hover: `:hover:not(${disabled})`,
+    active: `:active:not(${disabled})`,
+    'focus-visible': ':focus-visible',
+    disabled,
+  };
+}
 
 /** v13 (P18 second half): the channels a NON-root part's `states` may carry —
  *  color-kind only, bounded by the field evidence (the CBDS disabled label

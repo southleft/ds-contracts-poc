@@ -54,6 +54,7 @@ export {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  disabledStateSelector,
   drawsStrokeRing,
   drawsWholePixelTextBox,
   isStrokeRingChannel,
@@ -62,6 +63,7 @@ export {
   partCarriesStroke,
   partOwnsText,
   settleStrokeShadows,
+  stateSelectorsFor,
   textBoxConflicts,
   textBoxLetterSpacing,
   textBoxStaticRefusals,
@@ -109,7 +111,7 @@ export {
 // The deep referee (appends to `errors`; takes the icon map) and the shared
 // stylesheet every code target emits.
 export { validateContract } from './validate.js';
-export { generateCss, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from './css.js';
+export { generateCss, reactRootDisabledSelector, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from './css.js';
 
 // Optional provenance + stale-source state machine (browser-safe).
 export {

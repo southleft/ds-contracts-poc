@@ -683,6 +683,22 @@ const STATE_SELECTOR_INV: Record<string, string> = {
 const STATE_GUARD_RE = /:not\(\s*(?::(?:active|disabled|hover)\s*,?\s*)+\)/g;
 const stateOfPseudo = (pseudo: string): string | undefined =>
   STATE_SELECTOR_INV[pseudo.replace(STATE_GUARD_RE, '')];
+/** The inverse of packages/core disabledStateSelector: on a root that is not a
+ *  native form control the generator spells the disabled state as the
+ *  attribute the component renders — `.root[data-disabled]`, guards
+ *  `:not([data-disabled])`, and `:is(:disabled, [data-disabled])` where an
+ *  elementByProp root renders both. On the ROOT class or one of its enum
+ *  modifier classes that attribute IS the disabled state, read exactly as
+ *  `:disabled` is; anywhere else the selector is left as written. */
+function rootDisabledAsPseudo(selector: string, isRootClass: (cls: string) => boolean): string {
+  const m = selector.match(/^\.([\w-]+)/);
+  if (!m || !isRootClass(m[1])) return selector;
+  const head = m[0];
+  // Only the root's own compound (up to the first descendant combinator).
+  const rest = selector.slice(head.length).replaceAll(':is(:disabled, [data-disabled])', ':disabled');
+  const lead = rest.match(/^[^\s]*/)![0];
+  return head + lead.replaceAll('[data-disabled]', ':disabled') + rest.slice(lead.length);
+}
 /** A pseudo suffix is "simple" when it is only chained pseudo-classes (with
  *  optional parenthesized arguments) — no descendants, no extra classes. */
 const SIMPLE_PSEUDO_RE = /^(?::[\w-]+(?:\([^)]*\))?)*$/;
@@ -824,7 +840,8 @@ function analyzeCss(
   };
 
   for (const rule of rules) {
-    const sel = rule.selector;
+    const sel = rootDisabledAsPseudo(rule.selector,
+      cls => cls === 'root' || cls === classes.rootClass || axisValueOf(cls) !== null);
     let m: RegExpMatchArray | null;
 
     // `.x > * + *` — overlap gap emitted as negative-margin sibling rule

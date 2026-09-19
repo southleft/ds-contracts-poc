@@ -47,7 +47,6 @@ import { kebab } from '../extract/types.js';
 import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import {
   boolProps,
-  ELEMENT_META,
   enumProps,
   gridCellPlan,
   gridChildCrossAxisDecls,
@@ -63,18 +62,55 @@ import {
   type EmitCtx,
   type GridCellPlan,
 } from './emit-react.js';
+import { disabledStateSelector, stateSelectorsFor } from '../packages/core/src/anatomy.js';
 
 const stripBraces = (ref: string) => ref.slice(1, -1);
 const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`;
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 
-const STATE_SELECTORS: Record<string, string> = {
-  hover: ':hover:not(:disabled)',
-  active: ':active:not(:disabled)',
-  'focus-visible': ':focus-visible',
-  disabled: ':disabled',
-};
+/** Content-model honesty at the ROOT (see renderContract): a root whose
+ *  inferred element cannot host the drawn anatomy renders as a `<div>`. One
+ *  predicate, read by the renderer AND by the stylesheet's disabled selector
+ *  (a projected `<textarea>` is a `<div>` on the page, so `:disabled` is dead
+ *  on it). */
+const VOID_ELEMENTS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+const hostsStructure = (p: Part): boolean =>
+  p.parts !== undefined ||
+  p.component !== undefined ||
+  p.icon !== undefined ||
+  p.slot !== undefined ||
+  p.repeat !== undefined ||
+  p.meter !== undefined ||
+  (p.element !== undefined && p.element !== 'option' && p.element !== 'optgroup');
+function projectsRootToDiv(root: Part, inferredEl: string): boolean {
+  const rootParts = Object.entries(root.parts ?? {});
+  return (
+    rootParts.length > 0 &&
+    (inferredEl === 'textarea' ||
+      VOID_ELEMENTS.has(inferredEl) ||
+      (inferredEl === 'select' && rootParts.some(([, p]) => hostsStructure(p))))
+  );
+}
+
+/** The selector this showcase's root takes for a disabled state — the
+ *  attribute renderContract puts on the element it actually renders: the
+ *  native `disabled` on a form-control tag, `data-disabled="true"` on every
+ *  other (elementByProp: per value, so a map mixing both kinds takes both;
+ *  a projected root is a `div`). packages/core disabledStateSelector says why.
+ *  Lowering register: css.disabled-state-rendered-attribute. */
+export function htmlRootDisabledSelector(contract: Contract): string {
+  const root = contract.anatomy.root ?? {};
+  const inferred = contract.semantics.elementByProp
+    ? [...Object.values(contract.semantics.elementByProp.map), contract.semantics.element]
+    : [contract.semantics.element];
+  const rendered = inferred.map((el) => (projectsRootToDiv(root, el) ? 'div' : el));
+  return disabledStateSelector(
+    rendered.some((el) => HTML_SUPPORTS_DISABLED.includes(el)),
+    rendered.some((el) => !HTML_SUPPORTS_DISABLED.includes(el)),
+  );
+}
+const HTML_SUPPORTS_DISABLED = ['button', 'input', 'textarea', 'select', 'fieldset'];
 const OVERLAY_CSS: Record<string, string[]> = {
   top: ['bottom: 100%', 'left: 0'],
   bottom: ['top: 100%', 'left: 0'],
@@ -145,6 +181,10 @@ function componentCss(contract: Contract): string[] {
   const partCls = (name: string) => `.${k}__${name}`;
   const enumCls = (prop: string, value: string) => `.${k}--${prop}-${value}`;
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  // A disabled state styles what the rendered root actually exposes
+  // (htmlRootDisabledSelector); every state rule, root and part, reads it.
+  const disabledSel = htmlRootDisabledSelector(contract);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
   // N-PLACEHOLDER REFS over enum AND boolean props (the states residual of the
   // multi-axis fix, 2026-08-22). Round 10's enumCombos expanded enums only: a
   // boolean placeholder — and any `states` ref with two placeholders — fell
@@ -159,8 +199,7 @@ function componentCss(contract: Contract): string[] {
   const substValues = (ph: string): string[] | undefined =>
     enums.get(ph) ?? (boolNames.has(ph) ? ['true', 'false'] : undefined);
   const boolFrag = (ph: string, value: string): string => {
-    const nativeDisabled = ph === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
-    const sel = nativeDisabled ? ':disabled' : `[data-${ph.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
+    const sel = ph === 'disabled' ? disabledSel : `[data-${ph.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
     return value === 'true' ? sel : `:not(${sel})`;
   };
   /** Enum values as the compound modifier classes (byte-identical to the
@@ -500,7 +539,7 @@ function componentCss(contract: Contract): string[] {
     rule(`${rootCls}:focus-visible`, ['outline-style: solid', 'outline-offset: 2px']);
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
-    rule(`${rootCls}:disabled`, ['cursor: not-allowed']);
+    rule(`${rootCls}${disabledSel}`, ['cursor: not-allowed']);
   }
   for (const { prop, value, decls } of enumRules.values()) {
     rule(enumCls(prop, value), decls);
@@ -1223,21 +1262,7 @@ function renderComponentHtml(
   // projection is NAMED in an emitted comment. Leaf text still renders
   // through escapeHtml everywhere: markup reaches the page ONLY as
   // renderPart-built structure, never from contract text values.
-  const VOID_ELEMENTS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
-  const hostsStructure = (p: Part): boolean =>
-    p.parts !== undefined ||
-    p.component !== undefined ||
-    p.icon !== undefined ||
-    p.slot !== undefined ||
-    p.repeat !== undefined ||
-    p.meter !== undefined ||
-    (p.element !== undefined && p.element !== 'option' && p.element !== 'optgroup');
-  const rootParts = Object.entries(root.parts ?? {});
-  const projected =
-    rootParts.length > 0 &&
-    (inferredEl === 'textarea' ||
-      VOID_ELEMENTS.has(inferredEl) ||
-      (inferredEl === 'select' && rootParts.some(([, p]) => hostsStructure(p))));
+  const projected = projectsRootToDiv(root, inferredEl);
   const el = projected ? 'div' : inferredEl;
   const projectionComment = projected
     ? `${indent}<!-- root element "${escapeHtmlComment(inferredEl)}" cannot host the drawn anatomy (${
@@ -1270,7 +1295,7 @@ function renderComponentHtml(
       : v;
     attrs.push(`${attr}="${escapeHtml(safe)}"`);
   }
-  const supportsDisabled = ['button', 'input', 'textarea', 'select', 'fieldset'].includes(el);
+  const supportsDisabled = HTML_SUPPORTS_DISABLED.includes(el);
   for (const p of boolProps(contract)) {
     if (!state.bools[p.name]) continue;
     if (p.name === 'disabled' && supportsDisabled) { attrs.push('disabled'); continue; }

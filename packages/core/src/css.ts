@@ -41,7 +41,8 @@ import {
   placeholdersIn,
   rootElementsOf,
   settleStrokeShadows,
-  STATE_SELECTORS,
+  disabledStateSelector,
+  stateSelectorsFor,
   stripBraces,
   UA_MARGIN_ELEMENTS,
   UA_PAINT_CHANNELS,
@@ -53,6 +54,19 @@ import { gridCellPlan, gridChildCrossAxisDecls, gridParentDecls } from './grid.j
 // ---------------------------------------------------------------------------
 // CSS generation
 // ---------------------------------------------------------------------------
+
+/** The selector the React surfaces' ROOT takes for its disabled state — the
+ *  attribute the generated component renders for the `disabled` prop.
+ *  emit-react / emit-react-inline render the NATIVE `disabled` attribute only
+ *  on a single-element root whose element carries it
+ *  (ELEMENT_META.supportsDisabled); every other root — and an elementByProp
+ *  root on every value (its ref is typed HTMLElement) — renders
+ *  `data-disabled`. anatomy.ts disabledStateSelector says why.
+ *  Lowering register: css.disabled-state-rendered-attribute. */
+export function reactRootDisabledSelector(contract: Contract): string {
+  const native = !contract.semantics.elementByProp && Boolean(ELEMENT_META[contract.semantics.element]?.supportsDisabled);
+  return disabledStateSelector(native, !native);
+}
 
 /** v7 stylesWhen rules for one part. Boolean conditions select on the
  *  root's existing per-boolean data attribute (native disabled uses
@@ -66,10 +80,8 @@ function stylesWhenRules(contract: Contract, partName: string, part: Part, isRoo
     if (isEnum(prop)) {
       base = `.${sw.prop}-${sw.equals}`;
     } else {
-      const nativeDisabled =
-        prop.name === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
       const dataName = prop.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-      base = nativeDisabled ? '.root:disabled' : `.root[data-${dataName}]`;
+      base = prop.name === 'disabled' ? `.root${reactRootDisabledSelector(contract)}` : `.root[data-${dataName}]`;
     }
     const selector = isRootPart ? base : `${base} .${cssIdentifier(partName)}`;
     const decls = Object.entries(sw.styles)
@@ -101,6 +113,15 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // the DTCG trees, when the caller has them — anatomy.ts settleStrokeShadows).
   const settle = (css: string) => (contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id));
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  // A disabled state styles what the element actually exposes (anatomy.ts
+  // disabledStateSelector): `:disabled` on a native form-control root, the
+  // `[data-disabled]` the TSX renders on every other root. Every state rule —
+  // the root's, and each part's (a part's state rule is a descendant of the
+  // ROOT's state selector, so the root's element decides it) — reads this
+  // table; a form-control root gets the native table itself, byte-identical.
+  // @lower css.disabled-state-rendered-attribute
+  const disabledSel = reactRootDisabledSelector(contract);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
   // dump v1.36: the whole-pixel text box — the declarations per flagged part
   // (anatomy.ts wholePixelTextBoxDecls), and a letter-spacing TOKEN whose
   // value cannot be subtracted refused by name before any rule is written.
@@ -432,7 +453,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // fix extended to the bool plane): a root-token placeholder may name a
   // BOOLEAN prop; each side renders as a data-attribute selector on the
   // root element the TSX already emits for every boolean
-  // (`[data-x]` / `:not([data-x])`; native disabled uses `:disabled`).
+  // (`[data-x]` / `:not([data-x])`; `disabled` uses the root's disabledSel —
+  // `:disabled` only where the TSX renders the native attribute).
   // A defaultless bool has THREE runtime states, however: omission must not
   // select false. Its explicit values use modifier classes, leaving truthy
   // data/native attributes unchanged for stylesWhen and native behavior.
@@ -444,8 +466,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     enums.get(p) ?? (boolNames.has(p) ? ['true', 'false'] : undefined);
   const boolFrag = (p: string, v: string): string => {
     if (optionalBoolNames.has(p)) return `.${p}-${v}`;
-    const nativeDisabled = p === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
-    const sel = nativeDisabled ? ':disabled' : `[data-${p.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
+    const sel = p === 'disabled' ? disabledSel : `[data-${p.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
     return v === 'true' ? sel : `:not(${sel})`;
   };
   /** Selector key for a value combination: enum values as compound classes
@@ -722,7 +743,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     lines.push('', '.root:focus-visible {', '  outline-style: solid;', '  outline-offset: 2px;', '}');
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
-    lines.push('', '.root:disabled {', '  cursor: not-allowed;', '}');
+    lines.push('', `.root${disabledSel} {`, '  cursor: not-allowed;', '}');
   }
 
   for (const [cls, decls] of enumRules) {
@@ -1104,8 +1125,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     const partStatesByProp = part.statesByProp ?? [];
     // v13 part-level states (P18 second half): descendant rules under the
     // root's STATE selector — .root:disabled .label { color: … } — the same
-    // STATE_SELECTORS the root states ride (native :disabled; hover/active
-    // gated :not(:disabled)). Single-placeholder refs expand per enum value
+    // STATE_SELECTORS the root states ride (native :disabled, else the
+    // rendered [data-disabled]; hover/active gated on it). The ROOT's element
+    // decides, never the part's own. Single-placeholder refs expand per enum value
     // on the root's enum class, exactly like the root's own state rules.
     for (const [state, overrides] of Object.entries(part.states ?? {})) {
       const sel = STATE_SELECTORS[state];

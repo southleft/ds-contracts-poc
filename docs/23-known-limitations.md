@@ -4399,6 +4399,8 @@ Menu family can.
   `Menu Item`, a `button`, is live) — the consumer check names it
   (`state-inert:disabled`), and `state-unreachable:focus-visible` names a root
   nothing can focus (`Link`'s `a` without `href`, `Checkbox-icon`'s `div`).
+  **The dead plane is closed by §D.45** (re-measured there on `Link` and both
+  Toggles); the unfocusable root is not.
 - **The designer exam's own mount** (`recipe/canvas-to-code.ts` `mountCells`) still
   says `variant axis State has no contract prop` for Chip and Link. Its observe
   cannot see stamps, its proposals are reviewable inversions, and its receipts are
@@ -5162,13 +5164,9 @@ content pass.
   read, so this is named, not fixed.
 - *A set that IS the control and wraps a real control* now proposes a `div`; the
   reviewer re-roots it or stamps the element.
-- *The dead `:disabled` plane on a non-native root — the next gap, NOT fixed here.*
-  A withheld set with a `State=Disabled` axis keeps its `disabled` prop, which a
-  `div` renders as `data-disabled`, while its CSS is `.root:disabled { … }`, which
-  never matches a `div` (the review's probe A4; the same pre-existing emitter bug
-  the review counts on 64 contracts). Rule A can now send ex-button sets into it;
-  fixing it (a state selector that matches the rendered attribute on non-form-control
-  roots) is emitter churn of its own and is left, named, for the next change.
+- *The dead `:disabled` plane on a non-native root* (the review's probe A4): a
+  withheld set keeps its `disabled` prop, rendered as `data-disabled` on a `div`.
+  **Closed by §D.45** — the state selector is now the attribute the component renders.
 - *Padding:* only the ROOT is settled; a refused side keeps UA padding (named);
   per-value-only sides and non-LTR directions as above; `select` unmeasured outside
   Chromium.
@@ -5182,3 +5180,158 @@ per-side values re-measured in Chromium; drawn zeros carried and emitted; four d
 sides and `div` roots untouched; a side with no value named as `no value carried`
 and one with a refusal on record as refused; per-value and logical sides; Tab
 Panel's zeros taken back.
+
+## D.45 A disabled state on a root that is not a form control compiled to `:disabled`, which never matches it — CLOSED on React CSS modules, web components and static HTML; behaviour (focus, handlers) and a no-prop disabled state stay NAMED
+
+**2026-09-19. One AGENT emitter rule under the owner's standing delegation (never a
+grade, never a tolerance), and one AGENT accessibility decision, each recorded with
+its reverse.** `:disabled` matches only a form control (`button`, `input`, `select`,
+`textarea`, `fieldset`, `optgroup`, `option`, a form-associated custom element). The
+generated TSX renders the `disabled` prop as the native attribute only on those; on
+every other root (`div`, `span`, `a`, `label`, `li`, `section`, …) it renders
+`data-disabled`. The CSS shipped beside it said `.root:disabled { … }`, so the
+disabled look never rendered, and `.root:hover:not(:disabled)` never excluded the
+disabled state (a disabled `div` still took its hover paint). §D.44's Rule A made it
+reachable from new sets: a withheld `button` guess keeps its `disabled` prop.
+
+**Rule** (lowering `css.disabled-state-rendered-attribute`): *a disabled state styles
+what the element actually exposes — `:disabled` for a native form control, and the
+attribute the component renders for every other root and part.*
+
+| surface | native root (`button`, `input`, `textarea`, `select`, `fieldset`) | every other root | `elementByProp` root |
+|---|---|---|---|
+| React CSS module (`generateCss`, `reactRootDisabledSelector`) | `:disabled`, `:hover:not(:disabled)` — byte-identical | `[data-disabled]`, `:hover:not([data-disabled])`, `:active:not([data-disabled])` | `[data-disabled]`: the TSX types the ref `HTMLElement` and renders `data-disabled` on every value, `<button>` included |
+| web components (`shadowCss`, `wcRootDisabledSelector`) | `:disabled` — byte-identical | `[data-disabled]` (the internal root renders `data-disabled=""`) | per rendered tag: `:is(:disabled, [data-disabled])` when the map mixes both kinds |
+| static HTML (`core/emit-html.ts`, `htmlRootDisabledSelector`) | `:disabled` — byte-identical | `[data-disabled]` (the showcase renders `data-disabled="true"`) | per rendered tag, counting a root projected to a `div` (`textarea` / void / structural `select` with parts) as a `div` |
+| React inline | unchanged — its disabled plane rides the prop (`DISABLED_STYLE`), no selector | | |
+
+`packages/core` `anatomy.ts` `disabledStateSelector` + `stateSelectorsFor` build the
+table; a native root gets `STATE_SELECTORS` itself, so its bytes cannot move. Every
+rule that selects the disabled state reads it: `states`, `declaredStates`,
+`statesByProp`, a `{disabled}` bool placeholder, the button-only `cursor:
+not-allowed` rule and the React `stylesWhen` `disabled` condition. **Parts:** a part's
+state rule is a descendant of the ROOT's state selector (`.root[data-disabled]
+.label`), because the disabled state is the root's; the part's own element never
+decides. **Specificity is unchanged** (an attribute selector weighs what a
+pseudo-class does; `:is()` takes its heaviest argument), so no rule moves in the
+cascade. **The inverse:** the code → contract reader (`core/extract-css-module.ts`
+`rootDisabledAsPseudo`) reads `[data-disabled]` / `:not([data-disabled])` on the root
+class and its enum modifier classes back as the disabled / hover states, exactly
+as it reads `:disabled`; without it a generated `div` component re-extracted with
+neither.
+
+**Adversarial review, 2026-09-19.** The first inverse recognised only the root's
+base class. A generated enum-dependent state (`.tone-a[data-disabled]`,
+`.tone-a:hover:not([data-disabled])`) lost both state bindings on re-extraction;
+the same contract preserved both on the parent branch and on a native `button`.
+**AGENT decision:** use the reader's existing enum-class identity resolver for
+this inverse too, including JSX-discovered BEM modifiers. An unrelated part's
+`[data-disabled]` remains a named unsupported selector and cannot become a root
+state. The regression probe failed before the fix and passes afterwards with
+both generated and BEM class spellings and the native control. Emitted files
+are unchanged by this reader fix. **To reverse:** restrict
+`rootDisabledAsPseudo` to the root's base class again; enum-dependent disabled
+and guarded hover/active states will be lost by name on re-extraction.
+
+**AGENT decision — no `aria-disabled`.** Neither React surface nor web components
+renders `aria-disabled` for the prop; this change does not add it. In the committed
+corpus no affected root is interactive: none of the 52 has a role, a root click event
+or a `tabindex` — they are wrappers (`label`, `span`, `div`) around an inner native
+control, which carries its own `disabled`. `aria-disabled` on a role-less element is
+not supported in ARIA 1.2, and on a root whose handlers still fire it would announce
+a state the element does not honour. The honest fix for an interactive non-native
+root is behaviour and announcement together (guard the handlers, drop the tab stop,
+`aria-disabled="true"` where the role supports it) — a separate rule. **To reverse:**
+push `aria-disabled={disabled || undefined}` beside `data-disabled` for a non-native
+root in `core/emit-react.ts` and `core/emit-react-inline.ts`, and `aria-disabled="true"`
+beside `data-disabled=""` in `emit-wc.ts` `generateElement`; native roots keep the
+native attribute only.
+
+**Measured on the committed corpus** (all 984 tracked `*.contract.json`, the React
+module sheet with every token admitted): 128 declare a disabled state, **64** on a
+root that is not a form control (none under `elementByProp`); **52 emitted a dead
+`:disabled` before, 0 after** — the other 12 declare the state with no rule to
+select. The same 64 after, on the other sheets: web components 0 `:disabled` (64
+of 64 emitted); static HTML 0 on its own rules (45 emitted — 19 refuse to emit for
+reasons unrelated to this rule, e.g. unresolved component refs). Of the 52, 26 have a `disabled` prop (the look now renders when it is set)
+and 26 do not (Carbon, Fluent, shadcn, Astryx wrappers): their state is reachable
+only by passing `data-disabled` through the rest props — unreachable before, named
+below. One tracked contract uses `elementByProp`; it has no `disabled` prop.
+
+**Churn, every file** (regenerated with the repo's own commands):
+- `examples/polaris/generated/react/{Checkbox,RadioButton,Tag,TextField}.module.css`
+  and `…/html/{checkbox,radio-button,tag,text-field}.css` (`npx tsx
+  examples/polaris/generate.ts`, the command `figma:fresh` checks): `span` / `div`
+  roots with a `disabled` prop and state, and part states under it. **These now
+  render a disabled look they never rendered.** The committed Polaris receipts
+  render the default combo only (`receipts/*/default.png`, rest state), so no
+  committed PNG shows a disabled cell; nothing re-rendered.
+- `examples/eventz-vars/storybook/src/generated/AtomsInput/AtomsInput.module.css`
+  (the `generated:fresh` command): a `div` root with a hover part state and no
+  disabled state or prop — the guard's spelling only; nothing renders differently.
+- `parity/receipts/v1/census/design-to-code/figma-ds/ds.chip/d2c.json` (`npm run
+  census:d2c:record`): `Chip`, a `div` since §D.44, with `hover` + `disabled` states
+  and a `disabled` prop — React and WC sheet hashes move; **its disabled look now
+  renders**. Its committed PNGs are `state-default` cells only and are not
+  re-rendered (a re-render also moves Figma's canvas PNGs by bytes, §D.44).
+- `parity/receipts/v1/census/design-to-code/flowbite/flowbite.badge/d2c.json`: a
+  `span` root with `hover` / `active` states and no disabled state or prop — the
+  guard's spelling only.
+- `figma-sync/plugin/engine.receipt.json` re-recorded; `spec/lowering.json` +
+  `spec/LOWERING.md` (64 rules; the three `css.*` rules the insertion displaced
+  follow).
+- Unchanged: `generated:fresh` (astryx, untitled-ui), every other `figma:fresh` row,
+  frozen lineages, the fidelity lane, the drift pins, `evals/`.
+
+**Measured live** (read-only REST, closure on, the product's own commands, the
+unchanged 5 % limit). The four design-led sets are **unchanged to the byte**: every
+generated file hashes as committed and every score and problem is identical (only
+the consumer's npm lockfile hash differs), so their evidence folders are not
+re-recorded. None of them carries a disabled state on a non-native root: Tabs'
+`Tab Panel` draws `Default | Focus` only (the reviewer's A4 was a withheld probe
+with `State=Disabled`), Tabs' `Button` is a native `button`, and Checkbox Group's
+`State` axis is an enum prop (`default | disabled | error`, not an interaction axis),
+so its `variant-prop-discarded:state` is the group not forwarding `state` to its
+children — untouched by this rule. The sets §D.41 named with the dead plane,
+re-measured before (the pre-change engine on the same dumps and proposals) and after
+(`--reviewable-inversion`, as §D.41):
+
+| set | disabled cells | `state-inert:disabled` before → after | disabled cells' difference before → after | problems |
+|---|---|---|---|---|
+| Altitude `Link` `3543:47075` (`a`) | 1 | 1 → **0** | 8.83 % → 7.99 % | 12 → 11 |
+| Altitude `Toggle` `3543:48094` (`div`) | 2 | 2 → **0** | 56.52 / 44.02 % → 25.65 / 25.65 % | 15 → 13 |
+| CBDS `Toggle` `272:730` (`div`, a part state) | 4 | 4 → **0** | 21.48 / 18.43 / 21.00 / 16.10 % → 19.07 / 17.43 / 18.92 / 12.90 % | 42 → 38 |
+
+Every disabled cell is now reached through the prop AND paints differently; no
+other row moved. None of the three passes: they still fail on other axes (hover not
+carried, unfocusable roots, size, the rest images), as §D.41 recorded. No evidence
+committed for them.
+
+**Limits, named.**
+- *Behaviour.* A `div` / `span` with `data-disabled` still takes focus if focusable
+  and still fires its handlers: the generated component guards no handler. The
+  disabled look now renders on an element that still acts; before, it neither looked
+  nor acted disabled.
+- *A disabled state with no `disabled` prop* (26 contracts) is reachable only by the
+  consumer passing `data-disabled`.
+- *The mirror image on native roots.* Web components and static HTML select a
+  `disabled` `stylesWhen` (or a `{disabled}` placeholder's `false` side) on a NATIVE
+  root as `[data-disabled]`, which those surfaces do not render there (they render
+  `disabled`). Two tracked contracts (antd `Button`, both copies). Left: native roots
+  stay byte-identical in this change.
+- *The attribute name is the prop's.* Only a boolean prop named `disabled` renders
+  `data-disabled`; a contract whose disabled boolean is named otherwise gets a state
+  the prop never reaches (none in the corpus).
+
+**Gates:** `core/react-disabled-state-selector.test.ts` (`npm run
+react:conformance:check`): the selector table; a `div` root → `[data-disabled]` and
+the TSX's `data-disabled`; a `button` root unchanged; `span` / `a` / `label` / `li` /
+`section`; `elementByProp` on all three sheets; web components and static HTML, root
+and part; React inline untouched; the reader's inverse; and **the paint MEASURED in
+Chromium on a mounted `div`** (disabled background and part colour apply, hover no
+longer overrides them; the `button` root behaves as before).
+`extract/figma/state-axis.test.ts` (`npm run exact-proposal:check`): a designer's
+`State` axis on a `div` emits `[data-disabled]` and guards on it. **To reverse:**
+make `reactRootDisabledSelector`, `wcRootDisabledSelector` and
+`htmlRootDisabledSelector` return `':disabled'`, delete `rootDisabledAsPseudo`, and
+regenerate.

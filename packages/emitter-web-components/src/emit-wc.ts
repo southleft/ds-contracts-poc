@@ -76,11 +76,13 @@ import {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  disabledStateSelector,
   enumProps,
   finishStylesheet,
   generateCss,
   lowerStrokeRings,
   settleStrokeShadows,
+  stateSelectorsFor,
   wholePixelTextBoxPlan,
   isArrayType,
   isEnum,
@@ -176,12 +178,21 @@ const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 
-const STATE_SELECTORS: Record<string, string> = {
-  hover: ':hover:not(:disabled)',
-  active: ':active:not(:disabled)',
-  'focus-visible': ':focus-visible',
-  disabled: ':disabled',
-};
+/** The selector this surface's internal root takes for a disabled state —
+ *  the attribute generateElement renders for the `disabled` prop: the native
+ *  `disabled` on a form-control tag, `data-disabled=""` on every other tag,
+ *  and per rendered tag under elementByProp (so a map mixing both kinds takes
+ *  both). core disabledStateSelector says why `:disabled` alone is dead on a
+ *  `div`. Lowering register: css.disabled-state-rendered-attribute. */
+export function wcRootDisabledSelector(contract: Contract): string {
+  const tags = contract.semantics.elementByProp
+    ? [...Object.values(contract.semantics.elementByProp.map), contract.semantics.element]
+    : [contract.semantics.element];
+  return disabledStateSelector(
+    tags.some((t) => SUPPORTS_DISABLED.includes(t)),
+    tags.some((t) => !SUPPORTS_DISABLED.includes(t)),
+  );
+}
 const OVERLAY_CSS: Record<string, string[]> = {
   top: ['bottom: 100%', 'left: 0'],
   bottom: ['top: 100%', 'left: 0'],
@@ -248,6 +259,11 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // writes (which also refuses an unsubtractable tracking token by name).
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
   const k = kebab(contract.name);
+  // A disabled state styles what the internal root actually exposes
+  // (wcRootDisabledSelector); every state rule, root and part, reads it — a
+  // part's state rule hangs off the ROOT's state selector.
+  const disabledSel = wcRootDisabledSelector(contract);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
   const defaultFamily = defaultFontFamilyParts(contract);
@@ -264,15 +280,15 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // referee) resolves per value and passes, so nothing refused. Enum
   // placeholders select on the mirrored data-attribute; a boolean placeholder
   // expands to true/false on attribute presence (emit-react's `substValues`
-  // + `boolFrag`, `:disabled` where the element carries the native attribute).
+  // + `boolFrag`; `disabled` takes disabledSel — `:disabled` only where the
+  // internal root renders the native attribute).
   // A placeholder naming neither has NO host attribute to hang a selector on
   // and is REFUSED BY NAME — braces inside var() are never written.
   const placeholderValues = (ph: string): string[] | undefined =>
     enums.get(ph) ?? (boolNames.has(ph) ? ['true', 'false'] : undefined);
   const placeholderCond = (ph: string, value: string): string => {
     if (enums.has(ph)) return enumCond(ph, value);
-    const sel =
-      ph === 'disabled' && SUPPORTS_DISABLED.includes(contract.semantics.element) ? ':disabled' : boolCond(ph);
+    const sel = ph === 'disabled' ? disabledSel : boolCond(ph);
     return value === 'true' ? sel : `:not(${sel})`;
   };
   const rootWithCombo = (combo: Array<[string, string]>, lead: string[] = []) =>
@@ -463,7 +479,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     rule(`${ROOT_SEL}:focus-visible`, ['outline-style: solid', 'outline-offset: 2px']);
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
-    rule(`${ROOT_SEL}:disabled`, ['cursor: not-allowed']);
+    rule(`${ROOT_SEL}${disabledSel}`, ['cursor: not-allowed']);
   }
   for (const { prop, value, decls } of enumRules.values()) {
     rule(rootWithEnum(prop, value), decls);
