@@ -175,6 +175,9 @@ export function projectReactRootVisual(
           const width=sourceSizing!.find(size=>size.channel==='width')!;
           enriched.anatomy.root.literals={...enriched.anatomy.root.literals,width:width.value!};
           result.limitations.push(width.status==='fill'?'root-grid-fill-width-parent-supplied-by-caller':'root-grid-own-fixed-width-current-case-only');
+          // Rules conditioned on content (`:has(> svg)` tracks or placements) never
+          // match this sample, and only matching rules are observable: named, not inferred.
+          result.limitations.push('grid-tracks-observed-for-this-content-only');
         }
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;

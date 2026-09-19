@@ -95,9 +95,12 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   if (selected.fillWidth && input.containerWidth === undefined) fail('root-fill-width-needs-parent-context');
   if (input.containerWidth !== undefined) {
     const root = input.parent.component.variants.find(v => v.name === input.variantName)!.spec;
+    // Figma's resize throws below 0.01, and it would throw AFTER allocation.
+    // (A max-width has no literal spelling on a spec: only the binding and the
+    // measured hug-ceiling fact below can carry one.)
     if (!selected.fillWidth || input.instanceWidth !== undefined || !Number.isFinite(input.containerWidth) ||
-        input.containerWidth <= 0 || input.containerWidth > 100000 || !['VERTICAL', 'GRID'].includes(root.layout?.mode ?? '') ||
-        root.fixedWidth || root.lits?.width !== undefined || root.lits?.minWidth !== undefined ||
+        input.containerWidth < 0.01 || input.containerWidth > 100000 || !['VERTICAL', 'GRID'].includes(root.layout?.mode ?? '') ||
+        root.fixedWidth || root.hugCeiling || root.lits?.width !== undefined || root.lits?.minWidth !== undefined ||
         ['width','minWidth','maxWidth'].some(k => root.bindings?.[k])) fail('container-width-unqualified');
   }
   if (input.instanceWidth !== undefined) {

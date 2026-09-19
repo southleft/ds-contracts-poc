@@ -237,7 +237,10 @@ export function startReactOwnership(
               }
               const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership) : undefined;
               // Same read-only witness the content inspection takes for composed
-              // children, sealed with this row. The stability check below covers it.
+              // children. The app never re-opens this file: it is the sealed INPUT
+              // of the row's sealed `rootVisual`, kept (like style-origin.json) so
+              // that projection can be re-derived from the archive alone; the test
+              // suite re-derives it. The stability check below covers the read.
               const gridConstraints = ownership && hasGridContainer(tree.tree) ? await observeGridConstraints(page, profile.path, tree.tree) : undefined;
               if (gridConstraints) writeFileSync(path.join(rowDir, "grid-constraints.json"), JSON.stringify(gridConstraints,null,2)+"\n", {flag:"wx"});
               if (styleOrigin) {

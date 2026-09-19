@@ -140,12 +140,13 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       issue('comparison-roots'); return report();
     }
     // The frame is the caller's place, never part of the component: FIXED at
-    // the observed containing width exactly when the plan pinned one.
+    // the observed containing width exactly when the plan pinned one, and
+    // hugging (as every writer creates it) whenever the plan pinned none.
     if (p.containerWidth !== undefined
       ? !numeric(board.values.width, p.containerWidth) || board.values.counterAxisSizingMode !== 'FIXED' ||
         board.values.primaryAxisSizingMode !== 'AUTO' || !numeric(instance.values.width, p.containerWidth) ||
         instance.values.layoutSizingHorizontal !== 'FILL'
-      : board.values.counterAxisSizingMode === 'FIXED' && instance.values.layoutSizingHorizontal === 'FILL') issue('container-width', board);
+      : board.values.counterAxisSizingMode !== 'AUTO') issue('container-width', board);
     checked.add(page.id); checked.add(board.id);
     const parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]));
     const variableByName = new Map<string, string>(content.tokens.receipt.variables.map((v: Row) => [v.name, v.id]));

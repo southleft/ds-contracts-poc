@@ -42,6 +42,10 @@ test('a fill-width root\'s comparison frame is the observed content width of its
     const fractional=await observe('width:301.5px');
     assert.equal(reactComparisonContainerWidth(fractional.tree,fractional.origin),301.5);
     // A shrink-to-fit place sizes itself from this box: nothing definite was observed, so nothing is pinned.
+    // Nothing but the harness viewport bounds this chain: a harness fact is never presented as the caller's place.
+    const unplaced=await observe('');
+    assert.equal(unplaced.origin.roots[0].sizes![0].reason,'declared-fill-width-containing-block-viewport-only');
+    assert.equal(reactComparisonContainerWidth(unplaced.tree,unplaced.origin),undefined);
     for(const wrapper of ['display:inline-block','float:left','position:absolute','display:inline-grid']){
       const circular=await observe(wrapper);
       assert.deepEqual([circular.origin.roots[0].sizes![0].status,circular.origin.roots[0].sizes![0].reason],['unresolved','declared-fill-width-containing-block-indefinite'],wrapper);

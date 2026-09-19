@@ -78,7 +78,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const read=()=>page.evaluate(captureJs(args.stageSelector??'#root',undefined,'--',[selector])) as Promise<CapturedNode>;
   const current=await read(),png=await page.screenshot({fullPage:true,caret:'initial'});
   const own=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
-  const styles=await readReactStyleOrigin(page,selector,own);
+  const styles=await readReactStyleOrigin(page,selector,own,args.stageSelector??'#root');
   // Declared tracks exist only before layout; a plane without a grid container records nothing.
   const grids=current&&hasGridContainer(current)?{gridConstraints:await observeGridConstraints(page,[selector],current)}:{};
   const contentEvidence=args.observationMode==='initial-mount'?{

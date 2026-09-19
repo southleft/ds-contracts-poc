@@ -76,13 +76,15 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const sizing=prepareReactRootSizing(axes,baseAxisValues,roots,projections);result.sizing=sizing.reports;
    // A grid root carries the bounded row-flow lowering only when EVERY observed
    // plane proved the same one. Flex layout is re-derived by the sweep below.
-   const gridRefusal=planes.flatMap(p=>p.problems).find(p=>p.startsWith('react-root-grid-'));
-   const grids=planes.map(p=>p.contract!.anatomy.root.layout?.display==='grid'?p.contract!.anatomy.root.layout:undefined),grid=gridRefusal?undefined:grids[0];
-   if(!gridRefusal&&grids.some(g=>JSON.stringify(g)!==JSON.stringify(grid)))throw Error('react-root-matrix-grid-layout-differs');
-   const fills=!!grid&&sizing.fill.has('width');
-   if(grid&&!fills&&!sizing.channels.has('width'))throw Error('react-root-grid-width-unqualified');
+   let gridRefusal=planes.flatMap(p=>p.problems).find(p=>p.startsWith('react-root-grid-'));
+   const grids=planes.map(p=>p.contract!.anatomy.root.layout?.display==='grid'?p.contract!.anatomy.root.layout:undefined);
+   if(!gridRefusal&&grids.some(g=>JSON.stringify(g)!==JSON.stringify(grids[0])))throw Error('react-root-matrix-grid-layout-differs');
+   // Planes that each qualify but do not share ONE width kind (fixed here, fill
+   // there) refuse like any other unqualified width: prepared styles stay visible.
+   if(!gridRefusal&&grids[0]&&!sizing.fill.has('width')&&!sizing.channels.has('width'))gridRefusal='react-root-grid-width-unqualified';
+   const grid=gridRefusal?undefined:grids[0],fills=!!grid&&sizing.fill.has('width');
    if(fills)result.sizing=sizing.reports.map(r=>r.channel==='width'?{channel:'width',status:'fill'}:r);
-   if(grid)result.limitations.push('intrinsic-row-lowering-observed-block-content-only');
+   if(grid)result.limitations.push('intrinsic-row-lowering-observed-block-content-only','grid-tracks-observed-for-this-content-only');
    const suffix=revisionOf({sizing:[...projections].map(([key,p])=>[key,p.sourceSizing]),source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),

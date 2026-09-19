@@ -118,11 +118,12 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   writeFileSync(path.join(dir,'notice.tsx'),source);
   const program=readReactSourceProgram(dir,['notice.tsx']);assert.deepEqual(program.problems,[]);
   const exportsList=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');
-  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[${exportsList}];flushSync(()=>createRoot(document.getElementById('root')).render(<Notice><NoticeTitle>Heads up</NoticeTitle><NoticeBody>A description long enough to wrap onto a second line inside the fixed column.</NoticeBody></Notice>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[${exportsList}];flushSync(()=>createRoot(document.getElementById('root')).render(<div style={{width:400}}><Notice><NoticeTitle>Heads up</NoticeTitle><NoticeBody>A description long enough to wrap onto a second line inside the fixed column.</NoticeBody></Notice></div>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
   await page.setContent('<style>:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}*{box-sizing:border-box}body{margin:0;font:14px/20px Arial}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
-  const selector='#root > div',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+  // A fill needs a caller-sized place: the bare harness stage and viewport are never one.
+  const selector='#root > div > div',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
   const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
   const instanceId=ownership.components.find(c=>c.source.exportName==='Notice')!.id;
@@ -160,11 +161,12 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   assert.equal(draft.native!.rootSlot?.display,'grid');assert.equal(draft.native!.variants.length,2);
   for(const variant of draft.native!.variants){
    assert.equal(variant.spec.fixedWidth?.px,own==='fixed'?320:undefined,variant.name);assert.equal(variant.spec.rootFillWidth,own==='fixed'?undefined:true,variant.name);
-   assert.equal(JSON.stringify(variant.spec).includes('"width":'+(await page.evaluate(()=>document.querySelector('#root > div')!.getBoundingClientRect().width))),false,'the measured box is nowhere in the plan');
+   assert.equal(JSON.stringify(variant.spec).includes('"width":'+(await page.evaluate(()=>document.querySelector('#root > div > div')!.getBoundingClientRect().width))),false,'the measured box is nowhere in the plan');
    const carrier=variant.spec.children![0].children![0];
    assert.equal(carrier.layout?.mode,'GRID',variant.name);assert.equal(carrier.layout?.grid?.columns.length,1);assert.equal(carrier.layout?.grid?.flow,'ROW_AUTO_FLOW');
   }
   assert.ok(draft.limitations.includes('intrinsic-row-lowering-observed-block-content-only'));
+  assert.ok(draft.limitations.includes('grid-tracks-observed-for-this-content-only'),'content-conditional tracks are invisible to a property matrix: named on the draft');
   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,snapshots),result,'repeat assembly is deterministic');
 
   // An archive sealed before this witness existed reads exactly as it always did.
@@ -182,6 +184,13 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   assert.equal(refused.contract!.anatomy.root.layout,undefined);assert.equal(refused.native,undefined);
   assert.deepEqual(refused.sizing?.find(s=>s.channel==='width'),{channel:'width',status:'unresolved',reason:'caller-style-input-needs-ownership-proof'});
 
+  // Planes that each qualify but share no ONE width kind refuse like any other unqualified width: styles stay prepared.
+  const mixed=structuredClone(snapshots),loud=effects.rows.find(r=>r.changes.tone.kind==='set'&&r.changes.tone.value==='loud')!.id;
+  mixed[loud].styleOrigin.roots[0].sizes![0]=own==='fill'?{channel:'width',selectors:['<inline>'],authoredValue:mixed[loud].tree.style.width,status:'fixed',value:mixed[loud].tree.style.width}
+   :{channel:'width',selectors:['<inline>'],authoredValue:'100%',status:'fill',value:'100%'};
+  const uneven=assembleReactRootMatrix(program,ownership,tree,effects,mixed).draft!;
+  assert.deepEqual([uneven.status,uneven.problems,!!uneven.contract,uneven.contract?.anatomy.root.layout,uneven.native],['style-prepared',['react-root-grid-width-unqualified'],true,undefined,undefined]);
+  assert.deepEqual(uneven.sizing?.find(s=>s.channel==='width'),{channel:'width',status:'unresolved',reason:'fill-size-presence-needs-joint-mapping'});
   const differs=structuredClone(snapshots);differs[effects.rows[0].id].gridConstraints!.rows[0].computed['row-gap']='6px';
   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,differs).draft!.problems,['react-root-matrix-grid-layout-differs']);
   const columns=structuredClone(snapshots);columns[effects.rows[0].id].gridConstraints!.rows[0].computed['grid-template-columns']='1fr 1fr';
