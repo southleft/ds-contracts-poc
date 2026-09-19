@@ -1433,6 +1433,7 @@ export function Playground() {
   // ------------------------------------------------------------- json state
   const [jsonText, setJsonText] = useState('');
   const [jsonError, setJsonError] = useState<PlainError | null>(null);
+  const [jsonReading, setJsonReading] = useState(false);
 
   const loadJson = () => {
     setJsonError(null);
@@ -1543,18 +1544,18 @@ export function Playground() {
                 )
               : notice('No component set found in the pasted dump.'),
           );
-          if (groups.length > 0) setReceipts({ source: 'pasted Figma dump', groups });
+          if (groups.length > 0) setReceipts({ source: 'Figma JSON import', groups });
           return;
         }
         const captured = capturedTokensFromDump(parsed as Record<string, unknown>);
         const closure = dumpClosure(parsed as FigmaImportResult['dump']);
         const family = closure ? recordFigmaClosure(batch, closure,
-          proposal => ({ source: 'pasted Figma dump', groups: [...groups, ...proposalGroups(proposal)] }), captured, 'json') : undefined;
+          proposal => ({ source: 'Figma JSON import', groups: [...groups, ...proposalGroups(proposal)] }), captured, 'json') : undefined;
         importGroupsRef.current = groups;
-        figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
+        figmaOriginRef.current = { origin: 'Figma JSON import', ws: 'json' };
         capturedRef.current = captured;
         setFigmaProposals(batch.proposals);
-        applyProposal(family?.proposal ?? batch.proposals[0], 'pasted Figma dump', 'json', family?.recorded);
+        applyProposal(family?.proposal ?? batch.proposals[0], 'Figma JSON import', 'json', family?.recorded);
       } catch (e) {
         // Same rule as the bridge path: plain words, detail expandable.
         setJsonError(plainWordsError(e));
@@ -3324,10 +3325,23 @@ export function Playground() {
         {sourceTab === 'json' && (
           <div className="rail__section">
             <div className="field">
+              <label htmlFor="json-file">Choose a JSON file</label>
+              <input id="json-file" type="file" accept=".json,application/json" disabled={jsonReading}
+                onChange={async event => {
+                  const file = event.currentTarget.files?.[0]; event.currentTarget.value = '';
+                  if (!file) return;
+                  setJsonReading(true); setJsonError(null); setJsonText('');
+                  try { setJsonText(await file.text()); } catch (error) { setJsonError(plainWordsError(error)); }
+                  finally { setJsonReading(false); }
+                }} />
+              <p className="hint">The file is read in this tab. Review it below, then choose Load.</p>
+            </div>
+            <div className="field">
               <label htmlFor="json-paste">Contract JSON, a Figma dump, or a CONTRACT-PROPOSAL envelope</label>
               <textarea
                 id="json-paste"
                 rows={14}
+                disabled={jsonReading}
                 value={jsonText}
                 onChange={(e) => setJsonText(e.target.value)}
                 placeholder='{ "id": "ds.badge", … }  — or a plugin/REST dump'
@@ -3342,7 +3356,7 @@ export function Playground() {
                 the envelope&rsquo;s own notes, minted tokens and provenance as receipts.
               </p>
             </div>
-            <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
+            <button type="button" className="btn--primary" disabled={jsonReading || !jsonText.trim()} onClick={loadJson}>
               Load
             </button>
             <ErrorNotice error={jsonError} />
