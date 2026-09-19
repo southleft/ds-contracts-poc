@@ -50,7 +50,7 @@ const AUTO = { resize: 'WIDTH_AND_HEIGHT', sizing: 'HUG' };
 test('the REST reader carries textAutoResize on every text node — an ABSENT response key is NONE, REST\'s default (review M4) — and never copies an unknown spelling', () => {
   // A fixed box is built BY OMISSION, as REST is believed to report it: NONE is the field's default.
   const { set, provenance } = mapped([AUTO, { resize: 'HEIGHT', sizing: 'FILL' }, { sizing: 'FIXED' }]);
-  assert.equal(provenance.dumpVersion, '1.36');
+  assert.equal(provenance.dumpVersion, '1.37');
   assert.deepEqual(set.variants.map((v) => labelOf(v as DumpNode).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', 'NONE']);
   assert.equal(labelOf(mapped([{ resize: 'NONE', sizing: 'FIXED' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'NONE', 'an explicit NONE reads the same');
   assert.equal(labelOf(mapped([{ resize: 'TRUNCATE' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'TRUNCATE', 'the deprecated value is captured too, so nothing is guessed at');

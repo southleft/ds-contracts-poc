@@ -41,7 +41,7 @@ const without = (set: DumpSet): DumpSet => { const copy = structuredClone(set); 
 
 test('the REST reader writes the fact on every stroked auto-layout frame — false included, because REST omits its default — and nowhere else', () => {
   const { set, provenance } = mapped([{}, { included: true }, { strokes: false }]);
-  assert.equal(provenance.dumpVersion, '1.36');
+  assert.equal(provenance.dumpVersion, '1.37');
   assert.deepEqual(set.variants.map((v) => (v as DumpNode).strokesIncludedInLayout), [false, true, undefined], 'a strokeless frame draws nothing the fact could move');
   // Not an auto-layout frame: the field does not exist there, so nothing is written — absent stays "not captured".
   assert.equal('strokesIncludedInLayout' in (mapped([{ layoutMode: 'NONE' }]).set.variants[0] as DumpNode), false);

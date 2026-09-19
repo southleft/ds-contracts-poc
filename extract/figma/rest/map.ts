@@ -1587,6 +1587,22 @@ function mapNode(
   }
   const shape = mapShape(node, ctx, nodePath, parentBox);
   if (shape) out.shape = shape;
+  // REST now carries the plugin's existing fixedSize channel for the same
+  // bounded class: an in-flow, non-auto-layout box inside auto-layout.
+  // Explicit FIXED sizing is evidence; an omitted sizing field is not.
+  const parentAutoLayout = parent?.layoutMode !== undefined && parent.layoutMode !== 'NONE';
+  const nodeAutoLayout = node.layoutMode !== undefined && node.layoutMode !== 'NONE';
+  if (!shape && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE' &&
+      parentAutoLayout && !nodeAutoLayout && node.layoutPositioning !== 'ABSOLUTE' && node.absoluteBoundingBox) {
+    const hFixed = node.layoutSizingHorizontal === 'FIXED';
+    const vFixed = node.layoutSizingVertical === 'FIXED';
+    const rotated = typeof node.rotation === 'number' && node.rotation !== 0;
+    const fixed: NonNullable<DumpNode['fixedSize']> = {};
+    const { width, height } = node.absoluteBoundingBox;
+    if (hFixed && (vFixed || !rotated) && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
+    if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
+  }
   nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
   // dump v1.4: literal min/max sizing carries as style facts (a drawn
   // minHeight 44 is a tap-target fact) — previously a named degradation.
@@ -1842,7 +1858,9 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.36';
+export const REST_DUMP_VERSION = '1.37';
+// 1.37: fixedSize on explicit FIXED, in-flow, non-auto-layout boxes inside
+//       auto-layout; exact drawn dimensions use the existing dump channel.
 // 1.36 (design-led fidelity): `text.textAutoResize` carried verbatim on every
 //      text node — a Figma text box that sizes itself to its text is a whole
 //      number of pixels wide (the advance rounded up), the browser's is not.
@@ -1863,7 +1881,6 @@ export const REST_DUMP_VERSION = '1.36';
 const REST_CAPTURE_GAPS: readonly string[] = [
   'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
   'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
-  'fixed sizes on plain rectangles (dump v1.8 fixedSize): not captured on this route — a drawn width/height is lost and the node sizes to content',
   // 'instance text overrides (dump v1.10 textOverrides)' left this list in
   // dump v1.31: REST returns overrides[] AND the instance subtree, so the
   // channel is captured here (mapNode, INSTANCE branch) — the old line was a

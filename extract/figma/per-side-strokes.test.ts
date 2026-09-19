@@ -47,7 +47,7 @@ const stripWeights = (n: DumpNode) => { const { strokeWeight: _w, strokeWeights:
 test('the REST reader carries sides [1, 0, 1, 0] as strokeWeights, writes no uniform weight beside them, and names nothing', () => {
   // `strokeWeight: 0` is what Figma REST really reports for these sides.
   const { headers, receipts, provenance } = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }, { sides: HEADER_RULE, strokeWeight: 0 }]);
-  assert.equal(provenance.dumpVersion, '1.36');
+  assert.equal(provenance.dumpVersion, '1.37');
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, HEADER_RULE]);
   assert.deepEqual(headers.map(h => 'strokeWeight' in h), [false, false], 'one stroke, one spelling — the reported 0 is not a drawn fact');
   assert.deepEqual(receipts, []);

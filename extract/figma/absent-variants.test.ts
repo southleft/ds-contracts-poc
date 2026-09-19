@@ -452,7 +452,7 @@ test('stamps observable is a POSITIVE reader fact: the plugin reader always, RES
   assert.equal(told._provenance.stampsObservable, true);
   const { stampsObservable: _dropped, ...rest } = told._provenance;
   assert.deepEqual(rest, bare._provenance, 'the one key is the only difference');
-  assert.equal(bare._provenance.dumpVersion, '1.36', 'a provenance fact, not a grammar change');
+  assert.equal(bare._provenance.dumpVersion, '1.37', 'a provenance fact, not a grammar change');
 });
 
 test('the SAME pipeline-written set that lost a variant refuses whether or not the REST response carried sharedPluginData', () => {

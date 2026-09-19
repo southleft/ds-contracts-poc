@@ -5657,3 +5657,28 @@ Reversal: remove the painted-candidate guard from `foldWrapperUnion` and the
 wrapper-paint probe. Preserve existing receipts; do not rewrite historical
 results. This addresses fabricated wrapper paint only; fixed geometry capture
 and other design-led content gaps remain separate.
+
+
+## D.50 REST carries explicit fixed manual-box dimensions
+
+**AGENT decision (2026-09-19).** REST dump grammar 1.37 fills a capture gap
+using the existing `fixedSize` channel. Only in-flow children of an auto-layout
+parent that are not themselves auto-layout, text, instances, roots or captured
+shapes qualify. An axis must explicitly declare FIXED sizing; absent, HUG and
+FILL dimensions are not inferred. A rotated box requires both axes fixed.
+Finite nonnegative bounding-box dimensions are carried exactly, without rounding
+or an epsilon that erases a small rotation. The existing proposer and token
+lowering consume these facts; no component-specific behavior is added.
+
+The live read-only REST response for Altitude Checkbox's manual indicator
+explicitly declares FIXED on both axes and an 18 by 18 box. Previously REST
+captured neither dimension, leaving a border-sized box in the generated React.
+The plugin route already captures this class. Its current dump grammar remains
+1.36; old REST observations must not be treated as comparable 1.37 observations
+without a fresh read. Fixed auto-layout child geometry remains its separately
+named limitation; this rule does not admit arbitrary observed dimensions.
+
+Reversal: remove the fixedSize mapping block and restore the REST capture-gap
+note, then bump the grammar for that changed projection and re-observe affected
+sync baselines. Preserve old dumps and consumer receipts. This is an engineering
+capture rule, not an owner qualification or a widened fidelity tolerance.
