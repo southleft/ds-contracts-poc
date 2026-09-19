@@ -1,4 +1,5 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
+import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
 import {canonicalJson, revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
@@ -453,6 +454,16 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Original typography could not be measured unchanged. Mixed text and nested inline content are not yet supported by this diagnostic.' }); }
       return;
     }
+    const matchedReview = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/matched-review$/.exec(route);
+    if (matchedReview && req.method === 'GET') {
+      try {
+        if (!native || !reference || reference.id !== matchedReview[1] || !reactReferenceUnchanged(reference)) throw Error('matched-review-source-unavailable');
+        const request = native().jobs.reactInitialRequest(matchedReview[2]);
+        if (request.anchor.referenceId !== reference.id) throw Error('matched-review-reference-mismatch');
+        json(res, 200, { measurement: readRecordedNativeMeasurement(repoRoot, matchedReview[2], request) });
+      } catch { json(res, 409, { error: 'The recorded measurement could not be matched to this operation and its unchanged evidence.' }); }
+      return;
+    }
     const initialImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/initial-source\/(\d+)\.png$/.exec(route);
     if (initialImage && req.method === 'GET') {
       try {
@@ -673,6 +684,7 @@ export function createReactReferenceService(
             try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
             catch { /* An unreadable succession journal already fails identity above. */ }
           return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
+            recordedMeasurement: row.kind === 'initial' && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
