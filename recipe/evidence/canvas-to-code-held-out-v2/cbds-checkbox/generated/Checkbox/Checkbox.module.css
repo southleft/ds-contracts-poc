@@ -43,6 +43,7 @@
 .checkboxLabel {
   color: var(--text-primary);
   font-weight: var(--imported-checkbox-content-top-checkbox-label-font-weight);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-large .checkboxLabel {
@@ -95,4 +96,5 @@
   font-size: var(--body-font-small);
   line-height: var(--body-line-height-small);
   font-weight: var(--imported-checkbox-error-text-error-text-font-weight);
+  font-family: Inter, system-ui, sans-serif;
 }

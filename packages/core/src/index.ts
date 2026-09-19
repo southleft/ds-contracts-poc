@@ -52,6 +52,8 @@ export { kebab } from './naming.js';
 export {
   arrayProps,
   boolProps,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumProps,
   holderDeclaresPosition,
   isArrayType,

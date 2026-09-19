@@ -69,6 +69,8 @@ import { refuseRetainedRuntime, type RuntimeEmissionContext } from '../packages/
 export {
   arrayProps,
   boolProps,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumProps,
   holderDeclaresPosition,
   isArrayType,

@@ -206,6 +206,7 @@
   font-size: var(--imported-text-text-xs-semibold-font-size);
   font-weight: var(--imported-text-text-xs-semibold-font-weight);
   line-height: var(--imported-text-text-xs-semibold-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .theme-light .Text {
@@ -220,6 +221,7 @@
   font-size: var(--imported-text-text-xs-regular-font-size);
   font-weight: var(--imported-text-text-xs-regular-font-weight);
   line-height: var(--imported-text-text-xs-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .theme-light .supportingText {

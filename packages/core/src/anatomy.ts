@@ -14,7 +14,7 @@
  * layoutOverrideDecls) are exported for the sibling validate/css/grid modules
  * and are deliberately NOT re-exported from the package index.
  */
-import { slotsOf, type Contract, type Part, type Prop } from '@ds-contracts/schema';
+import { DEFAULT_FONT_STACK, slotsOf, type Contract, type Part, type Prop } from '@ds-contracts/schema';
 
 
 /** v11 SEMANTIC LINT — roles that RE-CREATE a control the platform already
@@ -217,6 +217,44 @@ export function textDefault(contract: Contract): string {
   const text = textProps(contract).find((p) => p.bindings.code.prop === 'children');
   return typeof text?.default === 'string' ? text.default : contract.name;
 }
+
+/** NO DECLARED FAMILY = THE PIPELINE DEFAULT FAMILY, on every code surface.
+ *  The proposer never carries Inter (door propose.font-family-inter-is-default:
+ *  "absence already renders it") and the Figma writer honours that, but the
+ *  code emitters declared nothing, so the text inherited the HOST page's font
+ *  — the browser's serif in a clean consumer (CBDS Badge 2026-09-18: 0 of 72
+ *  variants inside 5 %). These are the parts that must say the default
+ *  themselves: a part that DRAWS text (content / text / the root's children
+ *  text prop / a text-entry control) where neither it nor an ancestor part
+ *  names `font-family` in ANY holder — a family stated anywhere, even per
+ *  variant or per state, is the contract speaking and is left alone. Slots
+ *  and instances are other people's text and gain nothing; a textless
+ *  contract yields the empty set and keeps its bytes. */
+const namesFamily = (v: unknown): boolean =>
+  typeof v === 'object' && v !== null &&
+  Object.entries(v).some(([k, x]) => k === 'font-family' || namesFamily(x));
+const TEXT_ENTRY_ELEMENTS = new Set(['input', 'textarea', 'select']);
+const TEXTLESS_INPUT_TYPES = new Set(['checkbox', 'radio', 'range', 'color', 'hidden']);
+export function defaultFontFamilyParts(contract: Contract): Set<Part> {
+  const out = new Set<Part>();
+  const single = !isMultiRoot(contract);
+  const childrenText = textProps(contract).some((p) => p.bindings.code.prop === 'children');
+  const visit = (part: Part, elements: Array<string | undefined>, top: boolean, inherited: boolean): void => {
+    if (part.component) return; // an instance styles itself from its own contract
+    const { parts, ...own } = part;
+    const entry = !TEXTLESS_INPUT_TYPES.has(part.attrs?.type ?? '') && elements.some((e) => e !== undefined && TEXT_ENTRY_ELEMENTS.has(e));
+    const rootChildren = top && single && !parts && !part.slot && childrenText;
+    // `text: ""` is intentional emptiness (a skeleton block) — no glyph, no family.
+    const staticText = [part.text, ...Object.values(part.textByProp?.map ?? {})].some((t) => typeof t === 'string' && t !== '');
+    const draws = part.content !== undefined || staticText || entry || rootChildren;
+    const spoken = inherited || namesFamily(own);
+    if (draws && !spoken) out.add(part);
+    for (const child of Object.values(parts ?? {})) visit(child, [child.element], false, spoken || out.has(part));
+  };
+  for (const [, root] of topRoots(contract)) visit(root, single ? rootElementsOf(contract) : [root.element], true, false);
+  return out;
+}
+export const DEFAULT_FONT_FAMILY_DECL = `font-family: ${DEFAULT_FONT_STACK}`;
 
 export const isStructural = (part: Part) =>
   Boolean(part.parts || part.slot || part.layout || part.layoutByProp) &&

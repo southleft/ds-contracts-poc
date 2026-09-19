@@ -120,6 +120,7 @@
   overflow-y: hidden;
   position: absolute;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .icon {
@@ -409,6 +410,7 @@
   overflow-y: hidden;
   position: absolute;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .tone-attention .label-3 {
@@ -752,6 +754,7 @@
   font-weight: var(--imported-badge-label-font-weight-none);
   line-height: var(--imported-badge-label-line-height);
   display: block;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .tone-attention .label {

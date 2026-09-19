@@ -31,6 +31,7 @@
   font-size: var(--imported-text-text-sm-medium-font-size);
   font-weight: var(--imported-text-text-sm-medium-font-weight);
   line-height: var(--imported-text-text-sm-medium-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .Input {
@@ -163,6 +164,7 @@
   font-size: var(--imported-text-text-md-regular-font-size);
   font-weight: var(--imported-text-text-md-regular-font-weight);
   line-height: var(--imported-text-text-md-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .Dropdown {
@@ -180,6 +182,7 @@
   font-size: var(--imported-text-text-md-regular-font-size);
   font-weight: var(--imported-text-text-md-regular-font-weight);
   line-height: var(--imported-text-text-md-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .chevronDown {
@@ -402,6 +405,7 @@
   font-size: var(--imported-text-text-md-regular-font-size);
   font-weight: var(--imported-text-text-md-regular-font-weight);
   line-height: var(--imported-text-text-md-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .textInputText {
@@ -409,10 +413,12 @@
   font-size: var(--imported-text-text-md-regular-font-size);
   font-weight: var(--imported-text-text-md-regular-font-weight);
   line-height: var(--imported-text-text-md-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .hintText {
   font-size: var(--imported-text-text-sm-regular-font-size);
   font-weight: var(--imported-text-text-sm-regular-font-weight);
   line-height: var(--imported-text-text-sm-regular-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }

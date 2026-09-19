@@ -165,6 +165,7 @@
 .Text {
   color: var(--imported-button-base-text-color);
   font-weight: var(--imported-button-base-text-font-weight);
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-md .Text {

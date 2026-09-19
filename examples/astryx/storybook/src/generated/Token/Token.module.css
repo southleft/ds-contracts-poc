@@ -102,6 +102,7 @@
   overflow-y: hidden;
   text-overflow: ellipsis;
   text-wrap-mode: nowrap;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .color-blue .label {

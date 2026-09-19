@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -4499,12 +4499,12 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
 /** dump v1.31 — the text node's font FAMILY (fontName.family / REST
  *  style.fontFamily) → the declared `font-family` channel (DECLARED_CHANNELS,
  *  canvas: draw — the emitter sets fontName.family from the first stack
- *  entry). Inter is the pipeline's own default (every emitter renders Inter
- *  when nothing is declared), so Inter is not a fact to carry; any other
- *  family drawn in every variant carries, a mixed axis is NAMED (no
- *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
- *  Inter with no receipt (rest-text-font-family). */
-const DEFAULT_FONT_FAMILY = 'Inter';
+ *  entry). Inter is the pipeline's own default (DEFAULT_FONT_FAMILY, schema package): the Figma
+ *  writer draws it and the React + web-components emitters DECLARE it on every text-drawing part
+ *  when nothing is declared (core defaultFontFamilyParts; false for code until 2026-09-18 — a clean
+ *  consumer rendered the browser serif), so Inter is not a fact to carry; any other family drawn in
+ *  every variant carries, a mixed axis is NAMED (no per-variant declared vocabulary). Phase 2 exam:
+ *  44 Manrope nodes rendered Inter with no receipt (rest-text-font-family). */
 /** dump v1.34 — LITERAL per-side stroke weights (`DumpNode.strokeWeights`).
  *  A stroke whose sides differ (a header rule drawn top 1 / right 0 /
  *  bottom 1 / left 0) has no uniform weight, so it cannot ride `border-width`;

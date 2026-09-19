@@ -391,13 +391,17 @@ try {
     variables.set(change.variableId, variable);
   }
   const current = await (async () => { ${emitNativeContractReadbackScript(plan.before)} })();
-  // The last await before the writes. The readback sees only this operation's
-  // page and collection; a designer's variable elsewhere in the file may alias
-  // ours. The objects are gathered here and their live values read below.
+  // The last await before the writes. Re-read live bindings afterward: the
+  // page or this collection may change while local variables are loading.
   const locals = await figma.variables.getLocalVariablesAsync();
+  if (figma.fileKey !== plan.before.operation.fileKey) throw Error('native-update-file-mismatch');
   if (!Array.isArray(locals)) throw Error('native-update-token-api-unavailable');
-  const foreign = locals.filter(v => v && v.variableCollectionId !== collectionId);
+  const page = figma.root.children.find(n => n.id === plan.before.creation.pageId);
+  if (!page || page.type !== 'PAGE') throw Error('native-update-page-missing');
+  const liveNodes = [page, ...page.findAll(() => true)];
+  if (liveNodes.length > 10000) throw Error('native-update-scope-too-large');
   const normalized = clean(current);
+  const recordedNodes = new Map((normalized.nodes || []).map(n => [n.id, n]));
   const states = [], tokenStates = [];
   for (const change of plan.tokenChanges) {
     const variable = variables.get(change.variableId);
@@ -409,9 +413,19 @@ try {
       throw Error('native-update-token-value-conflict:' + change.variableId);
     if ((normalized.nodes || []).some(n => references(n, change.variableId)) || normalized.tokens.receipt.variables.some(v => v.id !== change.variableId && references(v.valuesByMode, change.variableId)))
       throw Error('native-update-token-bound:' + change.variableId);
-    // Synchronous re-check of the live objects: no await separates it from the writes.
-    if (foreign.some(v => references(v.valuesByMode, change.variableId)))
+    // Check every local variable, including aliases introduced in our own
+    // collection during the final await. Use them only to refuse, never to select a target.
+    if (locals.some(v => v && references(v.valuesByMode, change.variableId)))
       throw Error('native-update-token-aliased:' + change.variableId);
+    // Include newly inserted nodes and newly added binding fields. The snapshot
+    // alone cannot prove a variable stayed unbound across the final await.
+    for (const node of liveNodes) {
+      const recorded = recordedNodes.get(node.id);
+      const fields = new Set([...(Object.keys(recorded?.values || {})), 'boundVariables', 'fills', 'strokes', 'effects', ...(node.type === 'INSTANCE' ? ['componentProperties'] : [])]);
+      if ([...fields].some(field => field in node && references(node[field], change.variableId)) ||
+          Object.keys(recorded?.metadata || {}).some(key => node.getSharedPluginData('ds_contracts', key) === variable.name))
+        throw Error('native-update-token-bound:' + change.variableId);
+    }
     tokenStates.push({ variableId: change.variableId, modeId: change.modeId, value });
     row.valuesByMode[change.modeId] = change.before;
   }
