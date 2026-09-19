@@ -1320,14 +1320,18 @@ function foldWrapperUnion(
     firstNode: DumpNode;
     childKeys: Set<string>;
     present: Set<Occ>;
+    painted: boolean;
   }
   const candidates = new Map<string, Candidate>();
   for (const o of occ) {
     for (const c of childrenOf.get(o)!) {
       if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
       let e = candidates.get(c.name);
-      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set() }));
+      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set(), painted: false }));
       e.present.add(o);
+      e.painted ||= c.fill !== undefined || c.stroke !== undefined || c.imageFill !== undefined ||
+        (c.opacity !== undefined && c.opacity !== 1) || (c.effects?.length ?? 0) > 0 ||
+        ['background-color', 'border-color', 'opacity', 'box-shadow'].some((key) => c.bound?.[key] !== undefined);
       for (const cc of c.children ?? []) e.childKeys.add(keyOf(cc));
     }
   }
@@ -1350,6 +1354,12 @@ function foldWrapperUnion(
   }
   for (const [wName, w] of candidates) {
     if (w.present.size === occ.length || w.present.size === 0) continue;
+    if (w.painted) {
+      // A real wrapper's paint is not an observation in a flat variant.
+      // Keep both paths so the ordinary presence rule can gate them.
+      notes.push(`${where}: painted wrapper "${wName}" is absent in some variants — wrapper and flat children remain separate for variant-presence projection; no synthetic paint copied`);
+      continue;
+    }
     const foldableKeys = new Set([...w.childKeys].filter((k) => !tainted.has(k)));
     if (foldableKeys.size === 0) continue;
     for (const o of occ) {

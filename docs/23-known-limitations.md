@@ -5633,3 +5633,27 @@ Reversal: remove the TEXT visibility block in `buildPart` and its test entry.
 The prior unconditional text behavior returns; shape visibility remains intact.
 Keep the before/after consumer receipts as historical evidence. This rule is
 engineering behavior, not V1 acceptance or an owner grade.
+
+
+## D.49 Painted wrappers remain local to their drawn variants
+
+**AGENT decision (2026-09-19).** Wrapper union may synthesize an unpainted
+structural wrapper around matching flat children to preserve their identity.
+It now excludes wrappers that carry fills, strokes, image fills, effects,
+non-unit opacity or bound paint. Copying their channels into a variant that
+never drew the wrapper fabricated paint. The wrapper and flat paths remain
+separate; the existing presence projection gates them from the actual source
+variant observations. Unpredictable presence still follows its existing named
+limitations rather than implying full support.
+
+Altitude Checkbox's focus-only wrapper exposed this defect: its blue focus ring
+appeared in the generated Default variant. A separate Notice probe with one
+caption directly in Plain and inside a painted Ring in Ring proves the generic
+rule in generated React: exactly one caption remains visible, and the wrapper
+exists only in Ring. Fill and opacity probes establish the same boundary; an
+unpainted structural wrapper still folds. No new schema or tolerance is used.
+
+Reversal: remove the painted-candidate guard from `foldWrapperUnion` and the
+wrapper-paint probe. Preserve existing receipts; do not rewrite historical
+results. This addresses fabricated wrapper paint only; fixed geometry capture
+and other design-led content gaps remain separate.
