@@ -8608,7 +8608,33 @@ function buildChildParts(
   return parts;
 }
 
+/** Annotate mint coverage only after the emitted part's own visibility gate is
+ * known. Missing capture data is not proof of non-rendering. */
 function buildPart(
+  m: Merged, parentMode: ParentModes | null, ctx: Ctx, where: string, selfKey: string,
+): Record<string, unknown> | null {
+  const part = buildPartFromEvidence(m, parentMode, ctx, where, selfKey);
+  const gate = part?.visibleWhen as { prop?: string; equals?: string | string[] } | undefined;
+  if (ctx.mint && gate?.prop && ctx.mint.axes.some((axis) => axis.propName === gate.prop)) {
+    const present = new Set(m.occ.map((o) => o.variant));
+    const absent = ctx.totalVariants.filter((v) => !present.has(v));
+    const combos = absent.map((v) => ctx.mint!.axisValuesByVariant.get(v));
+    const excluded = combos.every((combo) => {
+      const value = combo?.[gate.prop!];
+      if (value === undefined) return false;
+      return gate.equals === undefined ? value === 'false'
+        : Array.isArray(gate.equals) ? !gate.equals.includes(value) : gate.equals !== value;
+    });
+    if (absent.length > 0 && excluded) {
+      for (const observation of ctx.mint.observations) {
+        if (observation.nodePath === where) observation.partAbsentCombos = combos as Record<string, string>[];
+      }
+    }
+  }
+  return part;
+}
+
+function buildPartFromEvidence(
   m: Merged,
   parentMode: ParentModes | null,
   ctx: Ctx,

@@ -5713,3 +5713,34 @@ Reversal: restore ordinary opaque screenshots and remove the additional black
 comparison in `design-consumer-check.ts`; the original white-default scorer
 remains available. Such a reversal restores the known measurement errors and
 must not turn those historical results into acceptance evidence.
+
+
+## D.52 Paint coverage on visibility-gated parts
+
+**AGENT decision (2026-09-19).** A part's absent variants can close token
+coverage only when the emitted part's own `visibleWhen` predicate excludes
+those variants. The Figma proposer attaches complete canonical tuples after
+building that predicate. Unconditional majority-presence fallbacks and unknown
+or incomplete conditions supply no absence proof.
+
+The token classifier admits single-axis or two-axis values only when every
+drawn tuple is observed or proven absent. Partial tuples, contradictory absence
+claims and missing visible observations retain the refusal. Fully measured pairs
+still take precedence. Supplied leaves use the lowest declared observed tuple,
+independent of source order, and receipts distinguish absent parts from variant
+combinations the set never drew. No threshold, schema or component-specific
+conversion rule changes.
+
+The defect appeared in Altitude Checkbox: its flat indicator is absent in Focus,
+where a separate focus wrapper contains the indicator. Requiring a border color
+on the absent flat part discarded the measured Default/Disabled/Hover/Error
+colors and React painted its default black border. A separate synthetic Signal
+family proves the same rule through generated React, including four distinct
+border colors across two axes. Adversarial probes remove visible observations,
+truncate an absence tuple, omit a third-axis plane, contradict an absence and
+reverse input order. A missing visible tuple initially passed and caused the
+complete-account requirement above.
+
+Reversal: remove the post-build absence annotation in `buildPart` and restore the
+previous token coverage rule. Preserve before/after app archives and measurements.
+This engineering rule alone does not establish visual acceptance of the family.

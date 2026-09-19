@@ -33,7 +33,7 @@ The gate re-runs exactly this pipeline in memory from the committed fixtures (`e
 
 ## Determinism — the idempotence proof
 
-- **flowbite**: propose twice → byte-identical: **true**; generate twice (React + stories + WC, every file sha256-compared) → identical: **true**. React 8 component(s) + WC 8; per-file sha256 pinned in each row's d2c.json — engine drift flips this gate red by name. Minted-tree prune: 15 freshly-minted leaf/leaves already defined by the kit corpus were dropped (the corpus value wins; REST rounds geometry to 2dp): imported.helper-text.root.width, imported.kbd.root.background-color, imported.kbd.root.width, imported.label.root.width, ….
+- **flowbite**: propose twice → byte-identical: **true**; generate twice (React + stories + WC, every file sha256-compared) → identical: **true**. React 8 component(s) + WC 8; per-file sha256 pinned in each row's d2c.json — engine drift flips this gate red by name. Minted-tree prune: 16 freshly-minted leaf/leaves already defined by the kit corpus were dropped (the corpus value wins; REST rounds geometry to 2dp): imported.helper-text.root.width, imported.kbd.root.background-color, imported.kbd.root.width, imported.label.root.width, ….
 - **figma-ds**: propose twice → byte-identical: **true**; generate twice (React + stories + WC, every file sha256-compared) → identical: **true**. React 20 component(s) + WC 20; per-file sha256 pinned in each row's d2c.json — engine drift flips this gate red by name.
 
 ## Carriage — every Figma-side fact, accounted
@@ -42,7 +42,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 
 | kit | id | set | variants | carried | named | SILENT | verdict | walls |
 |---|---|---|---|---|---|---|---|---|
-| flowbite | `flowbite.alert` | Alert (flowbite.alert) | 4 | 100 | 111 | 0 | recognisable | — |
+| flowbite | `flowbite.alert` | Alert (flowbite.alert) | 4 | 124 | 87 | 0 | recognisable | — |
 | flowbite | `flowbite.badge` | Badge (flowbite.badge) | 24 | 278 | 345 | 0 | recognisable | — |
 | flowbite | `flowbite.button` | Button (flowbite.button) | 45 | 569 | 733 | 0 | recognisable | — |
 | flowbite | `flowbite.card` | Card (flowbite.card) | 1 | 24 | 20 | 0 | recognisable | — |
@@ -53,7 +53,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.badge` | Badge | 10 | 124 | 139 | 0 | recognisable | — |
 | figma-ds | `ds.button` | Button | 25 | 491 | 852 | 0 | recognisable | — |
 | figma-ds | `ds.button-icon` | Button (Icon) | 5 | 31 | 79 | 0 | NOT recognisable | VECTOR-GLYPH-NAMED |
-| figma-ds | `ds.button-contract` | Button (contract) | 20 | 229 | 541 | 0 | recognisable | VECTOR-GLYPH-NAMED |
+| figma-ds | `ds.button-contract` | Button (contract) | 20 | 309 | 461 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.chip` | Chip | 10 | 174 | 318 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.heading` | Heading | 42 | 384 | 294 | 0 | recognisable | FC-FONT-SUBSTRATE |
@@ -65,7 +65,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.card` | Card | 2 | 41 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 21 | 20 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **3009** | **4065** | **0** | | |
+| **all** | | 23 sets | | **3113** | **3961** | **0** | | |
 
 ## Renders
 

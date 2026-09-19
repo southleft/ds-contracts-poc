@@ -131,7 +131,7 @@ export interface MintObservation {
    *  drawn). Absent (every existing caller) — coverage rules unchanged. */
   sparse?: string;
   /** REJECTED-SETS ROUND — enabled combos where THIS PART did not render
-   *  (presence-hidden planes), as axis-value records. Lets the single-axis
+   *  (presence-hidden planes), as COMPLETE axis-value records. Lets a single-axis or pair
    *  fit fill a missing axis value whose EVERY combo is provably part-absent
    *  (the polaris.checkbox icon: top/left = f(checked), part absent at
    *  unchecked — the old refusal claimed the values "differ without
@@ -319,6 +319,8 @@ type Classified =
        *  so the pair can carry at all (see the ragged-matrix branch below).
        *  Named on the binding — never silent. */
       undrawn?: string[];
+      /** Subset of supplied pair cells whose drawn variants omit this part. */
+      partAbsent?: string[];
     }
   | { kind: 'variant3'; axes: [MintAxis, MintAxis, MintAxis]; byValue: Map<string, string | number> }
   | { kind: 'none'; reason: string };
@@ -347,6 +349,25 @@ function classify(
   // enum-only vocabulary — their refusals stay named).
   // @door mint.bool-axis-root-only
   const axes = obs.part === '' ? allAxes : allAxes.filter((a) => !a.bool);
+  // A partial tuple cannot establish absence for a complete variant. Ignore
+  // contradictory evidence as well: an observed tuple cannot also be absent.
+  const completeKey = (combo: Record<string, string>): string | undefined =>
+    allAxes.length > 0 && allAxes.every((axis) => axis.values.includes(combo[axis.propName]))
+      ? JSON.stringify(allAxes.map((axis) => combo[axis.propName])) : undefined;
+  const observedKeys = new Set(obs.occurrences.map((o) => completeKey(o.axisValues)));
+  const absenceClaims = (obs.partAbsentCombos ?? []).map(completeKey);
+  const absentKeys = new Set(absenceClaims.filter((key): key is string => key !== undefined));
+  if (absenceClaims.some((key) => key !== undefined && observedKeys.has(key))) absentKeys.clear();
+  // New absence-based admission requires a complete account of every drawn
+  // tuple: either this channel was measured there or the part cannot render.
+  if (realizedCombos?.some((combo) => {
+    const key = completeKey(combo);
+    return key === undefined || (!observedKeys.has(key) && !absentKeys.has(key));
+  })) absentKeys.clear();
+  const isAbsent = (combo: Record<string, string>): boolean => {
+    const key = completeKey(combo);
+    return key !== undefined && absentKeys.has(key);
+  };
   for (const axis of axes) {
     const byValue = new Map<string, string | number>();
     let fits = true;
@@ -382,7 +403,17 @@ function classify(
       if (
         obs.partAbsentCombos !== undefined &&
         missing.length < axis.values.length &&
-        missing.every((v) => obs.partAbsentCombos!.some((c) => c[axis.propName] === v))
+        missing.every((v) => {
+          if (realizedCombos !== undefined) {
+            const plane = realizedCombos.filter((c) => c[axis.propName] === v);
+            return plane.length > 0 && plane.every(isAbsent);
+          }
+          // Without a realized-set inventory, prove the entire cartesian plane.
+          const planeSize = allAxes.filter((a) => a !== axis).reduce((n, a) => n * a.values.length, 1);
+          const keys = new Set((obs.partAbsentCombos ?? [])
+            .filter((c) => c[axis.propName] === v && isAbsent(c)).map(completeKey));
+          return keys.size === planeSize;
+        })
       ) {
         const rank = (o: MintOccurrence): string =>
           allAxes
@@ -545,13 +576,16 @@ function classify(
         const missing = cellsMissing(a, b, byValue);
         if (missing.length === 0) continue; // pass 1 already returned it
         const realized = new Set<string>();
+        const setRealized = new Set<string>();
         let judgeable = true;
         // @door mint.ragged-judgeability-fence
         for (const c of realizedCombos) {
           const va = c[a.propName];
           const vb = c[b.propName];
           if (va === undefined || vb === undefined) { judgeable = false; break; }
-          realized.add(pairKey(va, vb));
+          const key = pairKey(va, vb);
+          setRealized.add(key);
+          if (!isAbsent(c)) realized.add(key);
         }
         // EVERY hole must be unrealized. One genuinely-drawn-but-unobserved
         // cell means the observation really is incomplete, and that keeps the
@@ -591,6 +625,8 @@ function classify(
           byValue,
           unwitnessed: obs.occurrences.length <= drawnCells,
           undrawn: missing,
+          ...(missing.some((key) => setRealized.has(key))
+            ? { partAbsent: missing.filter((key) => setRealized.has(key)) } : {}),
         };
       }
     }
@@ -855,7 +891,9 @@ export function mintTokens(
           `${groupBase}.${key}`,
           obs.kind,
           value,
-          undrawnKeys.has(key)
+          c.kind === 'variant2' && c.partAbsent?.includes(key)
+            ? `${site} (${siteSuffix(key)} — PART ABSENT in drawn variants under its visibility gate; base value supplied)`
+            : undrawnKeys.has(key)
             ? `${site} (${siteSuffix(key)} — NOT DRAWN in the variant set; base value supplied so the pair can carry)`
             : `${site} (${siteSuffix(key)})`,
           textStyleForKey(key),
@@ -867,7 +905,7 @@ export function mintTokens(
       // they are both said rather than one shadowing the other.
       const caveats: string[] = [];
       const undrawnCount = c.kind === 'variant2' ? (c.undrawn?.length ?? 0) : 0;
-      if (c.kind === 'variant2' && c.undrawn !== undefined && undrawnCount > 0) {
+      if (c.kind === 'variant2' && c.undrawn !== undefined && undrawnCount > 0 && !c.partAbsent?.length) {
         const drawn = cells2 - undrawnCount;
         const supplied = c.byValue.get(c.undrawn[0])!;
         caveats.push(
@@ -879,6 +917,17 @@ export function mintTokens(
             'generated component still RENDERS them if it is called with that prop combination (the emitted prop types ' +
             'permit every combination; the Figma variant set does not have every combination). Give them a reviewed ' +
             'value or constrain the props — the drawn cells are the contract.',
+        );
+      }
+      if (c.kind === 'variant2' && c.partAbsent?.length) {
+        const absent = c.partAbsent;
+        const undrawn = c.undrawn!.filter((key) => !absent.includes(key));
+        caveats.push(
+          `the pair "${axisProps[0]}" x "${axisProps[1]}" is PRESENCE-RAGGED — the part is NOT RENDERED in the drawn variants at ` +
+          `${absent.length} cell(s) (${absent.map(siteSuffix).join('; ')}). Those leaves carry the lowest DECLARED observed combination's value ` +
+          'only to resolve the substituted ref; they are SUPPLIED, not measured, and the visibility gate excludes them in those variants.' +
+          (undrawn.length ? ` Another ${undrawn.length} cell(s) (${undrawn.map(siteSuffix).join('; ')}) are NOT DRAWN by the set; ` +
+            'their supplied values may render if callers request an undrawn combination. Review or constrain those props.' : ''),
         );
       }
       if (c.kind === 'variant' && c.undrawn !== undefined && c.undrawn.length > 0) {
