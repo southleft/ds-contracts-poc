@@ -57,6 +57,7 @@
   line-height: var(--imported-text-typography-body-xs-semibold-line-height);
   letter-spacing: 1px;
   font-family: Public Sans;
+  inline-size: calc-size(max-content, round(up, size - 1px, 1px));
 }
 
 .variant-neutral .Badge {

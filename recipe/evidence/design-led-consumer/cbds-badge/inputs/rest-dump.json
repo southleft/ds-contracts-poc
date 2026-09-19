@@ -2,8 +2,8 @@
   "_provenance": {
     "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
     "extractedAt": "2026-09-19",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.35) for design→contract proposal.",
-    "dumpVersion": "1.35",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.36) for design→contract proposal.",
+    "dumpVersion": "1.36",
     "captureGaps": [
       "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
       "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
@@ -160,6 +160,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -287,6 +288,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -414,6 +416,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -541,6 +544,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -668,6 +672,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -795,6 +800,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -922,6 +928,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -1049,6 +1056,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -1181,6 +1189,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -1313,6 +1322,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -1445,6 +1455,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -1577,6 +1588,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -1704,6 +1716,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -1831,6 +1844,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -1958,6 +1972,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -2085,6 +2100,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -2212,6 +2228,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -2339,6 +2356,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -2466,6 +2484,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -2593,6 +2612,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -2725,6 +2745,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -2857,6 +2878,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -2989,6 +3011,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -3121,6 +3144,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -3248,6 +3272,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -3375,6 +3400,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -3502,6 +3528,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -3629,6 +3656,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -3756,6 +3784,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -3883,6 +3912,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -4010,6 +4040,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -4137,6 +4168,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -4269,6 +4301,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -4401,6 +4434,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -4533,6 +4567,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -4665,6 +4700,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -4792,6 +4828,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -4919,6 +4956,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -5046,6 +5084,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -5173,6 +5212,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -5300,6 +5340,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -5427,6 +5468,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -5554,6 +5596,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -5681,6 +5724,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -5813,6 +5857,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -5945,6 +5990,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -6077,6 +6123,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -6209,6 +6256,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -6336,6 +6384,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -6463,6 +6512,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -6590,6 +6640,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -6717,6 +6768,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -6844,6 +6896,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -6971,6 +7024,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -7098,6 +7152,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -7225,6 +7280,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -7357,6 +7413,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -7489,6 +7546,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -7621,6 +7679,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -7753,6 +7812,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -7880,6 +7940,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -8007,6 +8068,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -8134,6 +8196,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -8261,6 +8324,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -8388,6 +8452,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -8515,6 +8580,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -8642,6 +8708,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -8769,6 +8836,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -8901,6 +8969,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -9033,6 +9102,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Medium",
               "styleKey": "8bcfb67f78b9d1e69e3bb35aa1da4b9659f864bb"
             },
@@ -9165,6 +9235,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
@@ -9297,6 +9368,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 16,
               "fontFamily": "Inter",
+              "textAutoResize": "WIDTH_AND_HEIGHT",
               "style": "Label/Small",
               "styleKey": "e14989d5eee53250969245aa75440a6a392a1ab5"
             },
