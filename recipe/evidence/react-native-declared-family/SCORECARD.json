@@ -1,0 +1,459 @@
+{
+  "artifactVersion": "react-native-fidelity-scorecard-v1",
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "scorerPins": {
+    "whiteTrim": 250,
+    "maskInflate": 4
+  },
+  "rows": [
+    {
+      "id": "family-switch/defaultChecked=false, disabled=false",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=false, disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 27.500000000000004,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 58.4375,
+        "inkSourcePct": 56.25
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1.3906021118164062) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=false, disabled=true",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=false, disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 61.67763157894737,
+        "nativePx": "32x19",
+        "sourcePx": "32x18",
+        "inkNativePct": 55.42763157894737,
+        "inkSourcePct": 51.973684210526315
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1.3906021118164062) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=false, disabled=(unset)",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=false, disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 27.500000000000004,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 58.4375,
+        "inkSourcePct": 56.25
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1.3906021118164062) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=true, disabled=false",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=true, disabled=false",
+      "historical": {
+        "pct": 3.4375000000000004,
+        "exactPct": 29.6875,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 61.09375,
+        "inkSourcePct": 59.21875
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "scale-mismatch: native export is 36x23 but its recorded render bounds span 36x24 layout px"
+      },
+      "glyphMasked": {
+        "pct": 3.44,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=true, disabled=true",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=true, disabled=true",
+      "historical": {
+        "pct": 3.453947368421053,
+        "exactPct": 65.29605263157895,
+        "nativePx": "32x19",
+        "sourcePx": "32x18",
+        "inkNativePct": 61.51315789473685,
+        "inkSourcePct": 57.89473684210527
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "scale-mismatch: native export is 36x23 but its recorded render bounds span 36x24 layout px"
+      },
+      "glyphMasked": {
+        "pct": 3.45,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=true, disabled=(unset)",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=true, disabled=(unset)",
+      "historical": {
+        "pct": 3.4375000000000004,
+        "exactPct": 29.6875,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 61.09375,
+        "inkSourcePct": 59.21875
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "scale-mismatch: native export is 36x23 but its recorded render bounds span 36x24 layout px"
+      },
+      "glyphMasked": {
+        "pct": 3.44,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=(unset), disabled=false",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=(unset), disabled=false",
+      "historical": {
+        "pct": 0,
+        "exactPct": 27.500000000000004,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 58.4375,
+        "inkSourcePct": 56.25
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=(unset), disabled=true",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=(unset), disabled=true",
+      "historical": {
+        "pct": 0,
+        "exactPct": 61.67763157894737,
+        "nativePx": "32x19",
+        "sourcePx": "32x18",
+        "inkNativePct": 55.42763157894737,
+        "inkSourcePct": 51.973684210526315
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-switch/defaultChecked=(unset), disabled=(unset)",
+      "cohort": "family-switch",
+      "variant": "defaultChecked=(unset), disabled=(unset)",
+      "historical": {
+        "pct": 0,
+        "exactPct": 27.500000000000004,
+        "nativePx": "32x20",
+        "sourcePx": "32x19",
+        "inkNativePct": 58.4375,
+        "inkSourcePct": 56.25
+      },
+      "aligned": {
+        "pct": null,
+        "refused": "fractional-translation: native layout origin (2,1) and source layout origin (8,8.796875) need a sub-pixel shift; rasters are never resampled"
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 0,
+        "textBoxes": 0,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": null,
+      "interior": null,
+      "typography": "no-text",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-alert/alert-default",
+      "cohort": "family-alert",
+      "variant": "alert-default",
+      "historical": {
+        "pct": 3.063725490196078,
+        "exactPct": 9.26062091503268,
+        "nativePx": "360x68",
+        "sourcePx": "360x68",
+        "inkNativePct": 10.559640522875817,
+        "inkSourcePct": 11.22140522875817
+      },
+      "aligned": {
+        "pct": 2.3746200607902734,
+        "mismatchedPixels": 750,
+        "pixelsCompared": 31584,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 37.7,
+        "textBoxes": 2,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 692.173,
+        "source": 829.918,
+        "sourceOverNative": 1.199
+      },
+      "interior": {
+        "native": [
+          255,
+          255,
+          255
+        ],
+        "source": [
+          255,
+          255,
+          255
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical-family-not-resolved",
+      "verdict": "pass",
+      "class": null,
+      "reasons": []
+    },
+    {
+      "id": "family-badge/badge-default",
+      "cohort": "family-badge",
+      "variant": "badge-default",
+      "historical": {
+        "pct": 6.25,
+        "exactPct": 25.227272727272727,
+        "nativePx": "44x20",
+        "sourcePx": "44x20",
+        "inkNativePct": 90.11363636363636,
+        "inkSourcePct": 87.61363636363636
+      },
+      "aligned": {
+        "pct": 2.5462962962962963,
+        "mismatchedPixels": 55,
+        "pixelsCompared": 2160,
+        "outsideNativeTextBoxes": 0,
+        "translation": {
+          "native": {
+            "x": 8,
+            "y": 8
+          },
+          "source": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      "glyphMasked": {
+        "pct": 0,
+        "maskCoveragePct": 77.27,
+        "textBoxes": 1,
+        "textOnlyCell": false
+      },
+      "layoutSizeDelta": {
+        "width": 0.125,
+        "height": 0
+      },
+      "inkMass": {
+        "native": 71.788,
+        "source": 100.286,
+        "sourceOverNative": 1.397
+      },
+      "interior": {
+        "native": [
+          23,
+          23,
+          23
+        ],
+        "source": [
+          23,
+          23,
+          23
+        ],
+        "maxChannelDelta": 0
+      },
+      "typography": "identical-family-not-resolved",
+      "verdict": "named-font-residual",
+      "class": "font-substrate",
+      "reasons": []
+    }
+  ],
+  "totals": {
+    "family-switch": {
+      "measured": 9,
+      "pass": 9,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "family-alert": {
+      "measured": 1,
+      "pass": 1,
+      "named-font-residual": 0,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    },
+    "family-badge": {
+      "measured": 1,
+      "pass": 0,
+      "named-font-residual": 1,
+      "named-other": 0,
+      "fail": 0,
+      "not-measured": 0
+    }
+  }
+}

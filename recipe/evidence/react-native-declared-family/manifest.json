@@ -1,0 +1,961 @@
+{
+  "artifactVersion": "react-native-declared-fidelity-v1",
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "harness": {
+    "viewport": {
+      "width": 900,
+      "height": 600
+    },
+    "deviceScaleFactor": 1,
+    "cite": "source-reference/react-initial-inspection.ts (browser.newContext viewport 900x600, deviceScaleFactor 1) and source-reference/replay.ts"
+  },
+  "cohorts": [
+    {
+      "id": "family-switch",
+      "component": "Switch",
+      "description": "Nine initial states from a workspace-declared React family; original source and restored native values after the live recovery trial.",
+      "source": {
+        "referenceId": "77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c",
+        "ownershipId": "ed7e13e6-7ad6-4faa-80b8-ad7b2d3e560c",
+        "caseId": "switch-unchecked",
+        "inspectionId": "686f2371-1ff5-4902-b15c-209a66903136",
+        "inventorySha256": "b62e008e074d9b4f369403c883e97ca843eca1c1aea07b8790510b99b619774c",
+        "reportSha256": "fbdbbe2b137d74d92e532afd19779dba2b54ae3d0572032ea955fa3a56858b1b"
+      },
+      "native": {
+        "operationId": "a9e6d704-4337-4ed2-a390-b9f73ca3e2aa",
+        "journalEvent": "4b663716-62e1-b1ba-5aab-36933ae935ad/events/00000006.json",
+        "journalEventSha256": "ad361ffd08a8e6627ea7306e9c9dbd6699eb31c3647deb24ded098938a2f3d5a",
+        "journalEventsVerified": 7,
+        "journalHeadSha256": "ad361ffd08a8e6627ea7306e9c9dbd6699eb31c3647deb24ded098938a2f3d5a",
+        "attemptId": "4affac69-679d-4321-97d1-b6b98f6bc845",
+        "phase": "update-readback",
+        "recordedAt": null,
+        "planRevision": "sha256:7843e9483b4a3635209c1d3c70e089677deeac8871dda830cdd3d93bfdc635c6",
+        "images": 9,
+        "nodes": 29
+      },
+      "pairs": [
+        {
+          "id": "family-switch/defaultChecked=false, disabled=false",
+          "variant": "defaultChecked=false, disabled=false",
+          "observation": "0",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/0.native.png",
+              "sha256": "eddc144db6609fdc527d72176db591fcfd033cf6b57ac4a3455afed8d5004391",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/0.source.png",
+              "sha256": "297a983ce9cd85cd5abb5d32927f415650785ed73d2c9aac0a1c2b3c461228b5",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:819",
+            "caseId": "variant:defaultChecked=false, disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 112,
+                "y": 98.3906021118164,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 110,
+                "y": 97.3906021118164,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.3906021118164062
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "ceea0c8d942ce7e374f5913b340d669f3810e51ee4c69f8ac26b5d77cc53aa46",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/0.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=false, disabled=true",
+          "variant": "defaultChecked=false, disabled=true",
+          "observation": "1",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/1.native.png",
+              "sha256": "ce2b9e6df6a12349720f5eae741a143a67695b25f64a1c9f05d50f519dbffd43",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/1.source.png",
+              "sha256": "ea1b32f36885b7f0989fc65702cee667df778b5b646c860be2c6eac8df40ac62",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:822",
+            "caseId": "variant:defaultChecked=false, disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 184,
+                "y": 98.3906021118164,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 182,
+                "y": 97.3906021118164,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.3906021118164062
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "9271bf8818222af65a4c14ab77019856d91946b027abfe343e6b460dcd954d30",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/1.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=false, disabled=(unset)",
+          "variant": "defaultChecked=false, disabled=(unset)",
+          "observation": "2",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/2.native.png",
+              "sha256": "eddc144db6609fdc527d72176db591fcfd033cf6b57ac4a3455afed8d5004391",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/2.source.png",
+              "sha256": "297a983ce9cd85cd5abb5d32927f415650785ed73d2c9aac0a1c2b3c461228b5",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:816",
+            "caseId": "variant:defaultChecked=false, disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 98.3906021118164,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 38,
+                "y": 97.3906021118164,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.3906021118164062
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "ceea0c8d942ce7e374f5913b340d669f3810e51ee4c69f8ac26b5d77cc53aa46",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/2.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=true, disabled=false",
+          "variant": "defaultChecked=true, disabled=false",
+          "observation": "3",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/3.native.png",
+              "sha256": "158fd8aeabb07ff117d7f7ed68cde790bd369e64b84b7c2c56b37348ad7c9439",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/3.source.png",
+              "sha256": "0d07b78f6be7d1e459e8cbe463e4aa5d308374d6deebc23425121ac5135d5186",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:828",
+            "caseId": "variant:defaultChecked=true, disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 112,
+                "y": 156.7812042236328,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 110,
+                "y": 155.7812042236328,
+                "width": 36,
+                "height": 22.390594482421875
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.7812042236328125
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "87d83684cf7493a41e21af64903da08afa08d7efaf29d0e44e60b16bf758890b",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/3.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=true, disabled=true",
+          "variant": "defaultChecked=true, disabled=true",
+          "observation": "4",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/4.native.png",
+              "sha256": "f53f4a424c62657a06adae2a562cd41d26821a1fcafd412428d048b1efcb7005",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/4.source.png",
+              "sha256": "f64de2d319427d8e82dc66893f32f43bdca17b58a57aa96c9d972d0ceae60c62",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:831",
+            "caseId": "variant:defaultChecked=true, disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 184,
+                "y": 156.7812042236328,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 182,
+                "y": 155.7812042236328,
+                "width": 36,
+                "height": 22.390594482421875
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.7812042236328125
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "9a77f0df44bd23aaf039f1d8c25c00cd11914d6c11c374f3690849e184fd065b",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/4.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=true, disabled=(unset)",
+          "variant": "defaultChecked=true, disabled=(unset)",
+          "observation": "5",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/5.native.png",
+              "sha256": "158fd8aeabb07ff117d7f7ed68cde790bd369e64b84b7c2c56b37348ad7c9439",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/5.source.png",
+              "sha256": "0d07b78f6be7d1e459e8cbe463e4aa5d308374d6deebc23425121ac5135d5186",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:825",
+            "caseId": "variant:defaultChecked=true, disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 156.7812042236328,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 38,
+                "y": 155.7812042236328,
+                "width": 36,
+                "height": 22.390594482421875
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1.7812042236328125
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "87d83684cf7493a41e21af64903da08afa08d7efaf29d0e44e60b16bf758890b",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/5.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=(unset), disabled=false",
+          "variant": "defaultChecked=(unset), disabled=false",
+          "observation": "6",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/6.native.png",
+              "sha256": "eddc144db6609fdc527d72176db591fcfd033cf6b57ac4a3455afed8d5004391",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/6.source.png",
+              "sha256": "297a983ce9cd85cd5abb5d32927f415650785ed73d2c9aac0a1c2b3c461228b5",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:810",
+            "caseId": "variant:defaultChecked=(unset), disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 112,
+                "y": 40,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 110,
+                "y": 39,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "ceea0c8d942ce7e374f5913b340d669f3810e51ee4c69f8ac26b5d77cc53aa46",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/6.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=(unset), disabled=true",
+          "variant": "defaultChecked=(unset), disabled=true",
+          "observation": "7",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/7.native.png",
+              "sha256": "ce2b9e6df6a12349720f5eae741a143a67695b25f64a1c9f05d50f519dbffd43",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/7.source.png",
+              "sha256": "ea1b32f36885b7f0989fc65702cee667df778b5b646c860be2c6eac8df40ac62",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:813",
+            "caseId": "variant:defaultChecked=(unset), disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 184,
+                "y": 40,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 182,
+                "y": 39,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "9271bf8818222af65a4c14ab77019856d91946b027abfe343e6b460dcd954d30",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/7.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "family-switch/defaultChecked=(unset), disabled=(unset)",
+          "variant": "defaultChecked=(unset), disabled=(unset)",
+          "observation": "8",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-switch/8.native.png",
+              "sha256": "eddc144db6609fdc527d72176db591fcfd033cf6b57ac4a3455afed8d5004391",
+              "width": 36,
+              "height": 23
+            },
+            "source": {
+              "path": "family-switch/8.source.png",
+              "sha256": "297a983ce9cd85cd5abb5d32927f415650785ed73d2c9aac0a1c2b3c461228b5",
+              "width": 48,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "81:807",
+            "caseId": "variant:defaultChecked=(unset), disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 40,
+                "width": 32,
+                "height": 18.390600204467773
+              },
+              "render": {
+                "x": 38,
+                "y": 39,
+                "width": 36,
+                "height": 22.390602111816406
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 32,
+              "height": 18.390600204467773
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "ceea0c8d942ce7e374f5913b340d669f3810e51ee4c69f8ac26b5d77cc53aa46",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 34.796875,
+              "width": 32,
+              "height": 18.390625
+            },
+            "crop": {
+              "x": 24,
+              "y": 26,
+              "width": 48,
+              "height": 36
+            },
+            "boundsRecord": "states/8.json bounds",
+            "typography": []
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "family-alert",
+      "component": "Alert",
+      "description": "Retained caller-content comparison from the workspace-declared React family.",
+      "source": {
+        "referenceId": "77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c",
+        "ownershipId": "ed7e13e6-7ad6-4faa-80b8-ad7b2d3e560c",
+        "caseId": "alert-default",
+        "inventorySha256": "02c1bb3454658692ce06f84ba5e001987ae9464bcf3726fd8b84bade7582debf",
+        "reportSha256": "f654f8500681da5a6e3ba449fa828a49554b7ff252d63f7e009e54008a1dabc7"
+      },
+      "native": {
+        "operationId": "59f1c1b7-ab53-4c33-925b-af33fc26bb04",
+        "journalEvent": "59f1c1b7-ab53-4c33-925b-af33fc26bb04/events/00000007.json",
+        "journalEventSha256": "cb242e59b6d0f548aa73fa359cd97ba77203cf7dd6293111525aeb5434458efa",
+        "journalEventsVerified": 8,
+        "journalHeadSha256": "cb242e59b6d0f548aa73fa359cd97ba77203cf7dd6293111525aeb5434458efa",
+        "attemptId": "c923d506-37f3-477a-89b2-cd4a5a194d0b",
+        "phase": "component-readback",
+        "recordedAt": "2026-09-19T00:36:56.051Z",
+        "planRevision": "sha256:fd23e4c7676729c4849323d0b3008697bcc674486fcc8b0d2728bd1842e48c03",
+        "images": 1,
+        "nodes": 11
+      },
+      "pairs": [
+        {
+          "id": "family-alert/alert-default",
+          "variant": "alert-default",
+          "observation": "0",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-alert/0.native.png",
+              "sha256": "e51965cab8816b594fb1a6039a58b4dbba42cc0f4ac8fd7469a77ff9d15a175e",
+              "width": 360,
+              "height": 68
+            },
+            "source": {
+              "path": "family-alert/0.source.png",
+              "sha256": "bc8ce5749b020dbdc7aa7125d776bb7d40a7e52be28dbab9d5e4da405ba5b70e",
+              "width": 376,
+              "height": 84
+            }
+          },
+          "native": {
+            "nodeId": "79:722",
+            "caseId": "alert-default",
+            "exportBounds": {
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 360,
+                "height": 68
+              },
+              "render": {
+                "x": 0,
+                "y": 0,
+                "width": 360,
+                "height": 68
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 68
+            },
+            "textRects": [
+              {
+                "nodeId": "79:729",
+                "characters": "Payment received",
+                "x": 17,
+                "y": 13,
+                "width": 120,
+                "height": 20
+              },
+              {
+                "nodeId": "79:735",
+                "characters": "Your invoice has been paid in full.",
+                "x": 17,
+                "y": 35,
+                "width": 221,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Payment received",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Your invoice has been paid in full.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "decec5f33bf6e16b3d2e44edac8d54fc2d68ddff50464c0ed3229efdf46cf256",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 68
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 84
+            },
+            "boundsRecord": "source-framing/ee6f759764e8a85fcd074fe5a177e27686203e8c6b91c3582a5417456911794f.json",
+            "typography": [
+              {
+                "text": "Payment received",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Your invoice has been paid in full.",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "family-badge",
+      "component": "Badge",
+      "description": "Retained caller-content comparison from the workspace-declared React family.",
+      "source": {
+        "referenceId": "c5577a8f0831ec316d56ffc5071d4718f7ab2b698f02644da6640bfd36d58de2",
+        "ownershipId": "799f780b-3230-4b39-8624-f5afc80cdf3d",
+        "caseId": "badge-default",
+        "inventorySha256": "d9987355ea4c3ae75d6a4ce7e3a97c5b70185fdb51c235ee4a49ddae88729b60",
+        "reportSha256": "be2ebb8368178914b32ab3087fee3db0e32b2edcb527bf4c363a16c471a52cd0"
+      },
+      "native": {
+        "operationId": "645ddacf-925d-4925-8f5f-4f30ca27b606",
+        "journalEvent": "645ddacf-925d-4925-8f5f-4f30ca27b606/events/00000007.json",
+        "journalEventSha256": "a098890d4d87358ac798f653a0f908137bec6e4fa2de09dafcd0606471ffa881",
+        "journalEventsVerified": 8,
+        "journalHeadSha256": "a098890d4d87358ac798f653a0f908137bec6e4fa2de09dafcd0606471ffa881",
+        "attemptId": "ee2698b5-7898-490d-8be8-997852ec62de",
+        "phase": "component-readback",
+        "recordedAt": "2026-09-18T22:51:12.080Z",
+        "planRevision": "sha256:f5eec9690a8d0d50944358e579e8e959c525bfec3eb5140e43a26fc2f4651929",
+        "images": 1,
+        "nodes": 5
+      },
+      "pairs": [
+        {
+          "id": "family-badge/badge-default",
+          "variant": "badge-default",
+          "observation": "0",
+          "pairedBy": "authenticated operation source; unique property assignment or single caller frame",
+          "files": {
+            "native": {
+              "path": "family-badge/0.native.png",
+              "sha256": "a399baf9f0fb0daae066de6fb8a5fa89a3ed8829a6670d2a13eec2b81563a35e",
+              "width": 44,
+              "height": 20
+            },
+            "source": {
+              "path": "family-badge/0.source.png",
+              "sha256": "f400934c941e37573ab169fa434e26ac28c5baebe4a94d6e9e7824e8a6a009c3",
+              "width": 60,
+              "height": 36
+            }
+          },
+          "native": {
+            "nodeId": "76:558",
+            "caseId": "badge-default",
+            "exportBounds": {
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 44,
+                "height": 20
+              },
+              "render": {
+                "x": 0,
+                "y": 0,
+                "width": 44,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 44,
+              "height": 20
+            },
+            "textRects": [
+              {
+                "nodeId": "76:560",
+                "characters": "New",
+                "x": 9,
+                "y": 2,
+                "width": 26,
+                "height": 16
+              }
+            ],
+            "typography": [
+              {
+                "characters": "New",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 12,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 16
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "6dab373c3f2bd566c8929014331bb2ab984ed595a5377330809ab6ae305477b4",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 43.875,
+              "height": 20
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 60,
+              "height": 36
+            },
+            "boundsRecord": "source-framing/6cbf1fc64c30bdb183c5bf779836f1fa62e0a9c06f630129d43e8f9671a9c54f.json",
+            "typography": [
+              {
+                "text": "New",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "12px",
+                "lineHeight": "16px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    }
+  ]
+}

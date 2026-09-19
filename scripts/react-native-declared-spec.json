@@ -1,0 +1,38 @@
+[
+  {
+    "id": "family-switch",
+    "component": "Switch",
+    "description": "Nine initial states from a workspace-declared React family; original source and restored native values after the live recovery trial.",
+    "operation": "a9e6d704-4337-4ed2-a390-b9f73ca3e2aa",
+    "journal": "source-native-updates/4b663716-62e1-b1ba-5aab-36933ae935ad",
+    "event": "00000006.json",
+    "source": {
+      "kind": "initial",
+      "inspection": "react-initial-inspections/eb33e14430cc3b68383910606e83fdb1030d76aeb9da4263bae095aaca6caeeb/686f2371-1ff5-4902-b15c-209a66903136"
+    }
+  },
+  {
+    "id": "family-alert",
+    "component": "Alert",
+    "description": "Retained caller-content comparison from the workspace-declared React family.",
+    "operation": "59f1c1b7-ab53-4c33-925b-af33fc26bb04",
+    "journal": "source-native-app/operations/59f1c1b7-ab53-4c33-925b-af33fc26bb04",
+    "event": "00000007.json",
+    "source": {
+      "kind": "comparison",
+      "framing": "source-framing/ee6f759764e8a85fcd074fe5a177e27686203e8c6b91c3582a5417456911794f.json"
+    }
+  },
+  {
+    "id": "family-badge",
+    "component": "Badge",
+    "description": "Retained caller-content comparison from the workspace-declared React family.",
+    "operation": "645ddacf-925d-4925-8f5f-4f30ca27b606",
+    "journal": "source-native-app/operations/645ddacf-925d-4925-8f5f-4f30ca27b606",
+    "event": "00000007.json",
+    "source": {
+      "kind": "comparison",
+      "framing": "source-framing/6cbf1fc64c30bdb183c5bf779836f1fa62e0a9c06f630129d43e8f9671a9c54f.json"
+    }
+  }
+]
