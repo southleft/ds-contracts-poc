@@ -655,18 +655,23 @@ export function validateExactVariantProjection(
   // is eligible. Count first: expanding the product here defeats its size cap.
   // Valid, unique rows with the full cardinality already prove full coverage;
   // otherwise an oversized product is ragged without listing every missing row.
-  const oversized = previewTuples === null && product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT;
+  const oversized =
+    previewTuples === null && product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT;
   if (oversized && source.tuples.length !== product) {
-    return refused([{
-      code: "EXACT_MATRIX_RAGGED",
-      message: `Source matrix has ${source.tuples.length} rows; Cartesian definitions require ${product}. Missing tuples are not enumerated above ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} combinations.`,
-      expected: product,
-      actual: source.tuples.length,
-    }]);
+    return refused([
+      {
+        code: "EXACT_MATRIX_RAGGED",
+        message: `Source matrix has ${source.tuples.length} rows; Cartesian definitions require ${product}. Missing tuples are not enumerated above ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} combinations.`,
+        expected: product,
+        actual: source.tuples.length,
+      },
+    ]);
   }
   const expectedTuples =
     previewTuples ??
-    (oversized ? source.tuples : cartesianTuples(axes).filter((tuple) => !absentSet.has(tuple)));
+    (oversized
+      ? source.tuples
+      : cartesianTuples(axes).filter((tuple) => !absentSet.has(tuple)));
   const expectedSet = new Set(expectedTuples);
 
   const sourceSet = new Set(source.tuples);
