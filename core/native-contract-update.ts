@@ -39,6 +39,12 @@ export interface NativeTokenValueChange {
  * exactly or as its float32 image. Anything else is refused by name. */
 const CARRIED_TOKEN_TYPES = new Set(['number']);
 const label = (text: string) => text.replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 60);
+/** Every string anywhere inside a value. */
+const strings = (value: unknown, out = new Set<string>()): Set<string> => {
+  if (typeof value === 'string') out.add(value);
+  else if (value && typeof value === 'object') for (const v of Object.values(value)) strings(v, out);
+  return out;
+};
 /** Any `{ type: 'VARIABLE_ALIAS', id }` anywhere inside a recorded value. */
 const references = (value: unknown, id: string): boolean => Array.isArray(value) ? value.some(v => references(v, id))
   : !!value && typeof value === 'object' && (((value as any).type === 'VARIABLE_ALIAS' && (value as any).id === id) ||
@@ -85,12 +91,27 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues
     for (const [name, value] of oldTokens) {
       const next = newTokens.get(name);
       if (!next) throw Error('native-update-bound-token-change-unsupported:removed;' + label(name));
-      const requested = input.before.tokenInput.tokenPaths.includes(name);
-      if (requested !== input.desired.tokenInput.tokenPaths.includes(name))
-        throw Error('native-update-token-allocation-change-unsupported:' + (requested ? 'released' : 'requested') + ';' + label(name));
       if (!equal(value, next)) valueChanges.push({ modeIndex, tokenPath: name, value: next.value });
     }
+    // A leaf new to the source is allocated by nothing here. Production requests
+    // every leaf (so it refuses by the path check below). A new leaf the source
+    // does NOT request stays additive only while the desired component never
+    // names it: the shared fixture's `nextOpacity` feeds a literal opacity and
+    // is named nowhere in the compiled component. A leaf the component names
+    // (any string, no channel list; conservative on short names) would need a
+    // variable this update cannot create.
+    const named = strings(input.desired.component);
+    for (const name of newTokens.keys())
+      if (!oldTokens.has(name) && (named.has(name) || named.has(name.replaceAll('.', '/'))))
+        throw Error('native-update-token-allocation-change-unsupported:requested;' + label(name));
   });
+  // The allocation is the requested set. Adding or releasing a path would
+  // allocate or orphan a variable; neither is an update.
+  const wasRequested = new Set(input.before.tokenInput.tokenPaths), nowRequested = new Set(input.desired.tokenInput.tokenPaths);
+  for (const path of [...nowRequested].sort()) if (!wasRequested.has(path))
+    throw Error('native-update-token-allocation-change-unsupported:requested;' + label(path));
+  for (const path of [...wasRequested].sort()) if (!nowRequested.has(path))
+    throw Error('native-update-token-allocation-change-unsupported:released;' + label(path));
   const before = structuredClone(input.before); delete before.allocationAnchor;
   const tokenUpdate = valueChanges.length ? prepareTokenValueChanges(input, valueChanges, carryTokenValues) : undefined;
   const after = structuredClone(before), desired = structuredClone(input.desired.component);
@@ -168,8 +189,7 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
   for (const change of valueChanges) {
     const mode = next.modes[change.modeIndex], key = JSON.stringify([mode.sourceMode, mode.brand, change.tokenPath]);
     const previous = flattenTokens(mode.tokens).get(change.tokenPath)!.value;
-    if (setNativeTokenLeafValue(mode.tokens, change.tokenPath, structuredClone(change.value)) !== 1)
-      throw Error('native-update-token-path-ambiguous:' + label(change.tokenPath));
+    setNativeTokenLeafValue(mode.tokens, change.tokenPath, structuredClone(change.value));
     if (!allocated.has(key)) allocated.set(key, { sourceMode: mode.sourceMode, brand: mode.brand, tokenPath: change.tokenPath, value: structuredClone(previous) });
     if (equal(allocated.get(key)!.value, change.value)) allocated.delete(key);
     mode.tokenTreeRevision = revisionOf(mode.tokens);
@@ -358,7 +378,7 @@ const collectionId = plan.before.tokenIdentity.collection.id;
 const owned = (variable, change) => variable.id === change.variableId && variable.variableCollectionId === collectionId && variable.resolvedType === 'FLOAT' && variable.remote === false && !!variable.valuesByMode && typeof variable.valuesByMode[change.modeId] === 'number';
 try {
   if (figma.fileKey !== plan.before.operation.fileKey) throw Error('native-update-file-mismatch');
-  if (!figma.variables || typeof figma.variables.getVariableByIdAsync !== 'function') throw Error('native-update-token-api-unavailable');
+  if (!figma.variables || typeof figma.variables.getVariableByIdAsync !== 'function' || typeof figma.variables.getLocalVariablesAsync !== 'function') throw Error('native-update-token-api-unavailable');
   const nodes = new Map(), variables = new Map();
   for (const change of plan.changes) {
     const node = await figma.getNodeByIdAsync(change.nodeId);
@@ -371,6 +391,12 @@ try {
     variables.set(change.variableId, variable);
   }
   const current = await (async () => { ${emitNativeContractReadbackScript(plan.before)} })();
+  // The last await before the writes. The readback sees only this operation's
+  // page and collection; a designer's variable elsewhere in the file may alias
+  // ours. The objects are gathered here and their live values read below.
+  const locals = await figma.variables.getLocalVariablesAsync();
+  if (!Array.isArray(locals)) throw Error('native-update-token-api-unavailable');
+  const foreign = locals.filter(v => v && v.variableCollectionId !== collectionId);
   const normalized = clean(current);
   const states = [], tokenStates = [];
   for (const change of plan.tokenChanges) {
@@ -383,6 +409,9 @@ try {
       throw Error('native-update-token-value-conflict:' + change.variableId);
     if ((normalized.nodes || []).some(n => references(n, change.variableId)) || normalized.tokens.receipt.variables.some(v => v.id !== change.variableId && references(v.valuesByMode, change.variableId)))
       throw Error('native-update-token-bound:' + change.variableId);
+    // Synchronous re-check of the live objects: no await separates it from the writes.
+    if (foreign.some(v => references(v.valuesByMode, change.variableId)))
+      throw Error('native-update-token-aliased:' + change.variableId);
     tokenStates.push({ variableId: change.variableId, modeId: change.modeId, value });
     row.valuesByMode[change.modeId] = change.before;
   }

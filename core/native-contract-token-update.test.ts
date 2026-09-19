@@ -4,7 +4,7 @@
  * number token that no node binds refused every source change to its value. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { nativeUpdateFixture } from './native-contract-update-test-fixture.js';
@@ -15,7 +15,7 @@ import { prepareNativeTokenContext, verifyNativeTokenContextReceipt } from './na
 import { emitNativeTokenContextScript } from './token-set.js';
 import { nativeDesignChanges } from './native-design-changes.js';
 import { revisionOf } from './contract-provenance.js';
-import { createNativeUpdatePlans } from '../source-reference/native-update-plans.js';
+import { createNativeUpdatePlans, NATIVE_TOKEN_VALUE_SCOPE_LIMITATION } from '../source-reference/native-update-plans.js';
 import { createNativeUpdateJobs } from '../source-reference/native-update-jobs.js';
 
 /** The developer changed the value the unbound `opacity` token records. */
@@ -45,7 +45,9 @@ test('an unbound number token and the literals that show it are carried in one p
 
   const script = emitNativeContractUpdateScript(plan);
   assert.ok(script.includes('variable.setValueForMode(change.modeId, target)') && script.includes("'native-update-token-value-conflict:'") &&
-    script.includes('getVariableByIdAsync(change.variableId)') && !/getLocalVariables|\.find\(v => v\.name/.test(script), 'a guarded write by pinned id, never a name search');
+    script.includes('getVariableByIdAsync(change.variableId)') && !/\.find\(v => v\.name|\.name ===/.test(script) &&
+    // The local variables are read only to refuse an alias, never to choose what is written.
+    script.includes('const foreign = locals.filter(') && !/variables\.set\([^)]*foreign|foreign\.(find|forEach)/.test(script), 'a guarded write by pinned id, never a name search');
   const writes = script.slice(script.indexOf("out.status = 'preflight-observed'"), script.indexOf('out.observation = await')).replace(/^\s*\/\/.*$/gm, '');
   assert.ok(writes.includes('setValueForMode') && writes.includes('node.opacity = target') && !/\bawait\b/.test(writes), 'no await between the final checks and the assignments');
 
@@ -209,6 +211,16 @@ test('ineligible token changes are refused by name, with the token path', async 
   // A pinned identity without the variable never reaches eligibility: the baseline itself is unverified.
   assert.equal(refusal(() => { const i = structuredClone(f.input); i.before.tokenIdentity.variables = i.before.tokenIdentity.variables.filter((v: any) => v.tokenPath !== 'opacity'); prepareNativeContractUpdate(i); }),
     'native-update-verified-baseline-required', 'an identity without the variable is not a verified baseline');
+  // A leaf new to the source is allocated by nothing here: requested, it refuses by name...
+  assert.equal(refusal(() => prepareNativeContractUpdate({ ...f.input, desired: f.desiredFor({ ...structuredClone(f.tokens), brandNew: { $type: 'number', $value: 0.7 } }) })),
+    'native-update-token-allocation-change-unsupported:requested;brandNew');
+  assert.equal(refusal(() => prepareNativeContractUpdate({ ...f.input, desired: f.desiredFor({ ...structuredClone(f.tokens), faded: { $type: 'number', $value: 0.2 }, brandNew: { $type: 'number', $value: 0.7 } }) })),
+    'native-update-token-allocation-change-unsupported:requested;brandNew', 'also beside an eligible value change');
+  // ...and unrequested, it refuses once the desired component names it anywhere.
+  const referenced = structuredClone(f.input);
+  (referenced.desired.tokenInput.modes[0].tokens as any).brandNew = { $type: 'number', $value: 0.7 };
+  referenced.desired.component.variants[0].spec.bindings = { ...referenced.desired.component.variants[0].spec.bindings, opacity: 'brandNew' };
+  assert.equal(refusal(() => prepareNativeContractUpdate(referenced)), 'native-update-token-allocation-change-unsupported:requested;brandNew');
   // Two eligible values are carried together, in the pinned order of the token tree.
   const both = structuredClone(f.input); (both.desired.tokenInput.modes[0].tokens as any).faded.$value = 0.2;
   assert.deepEqual((prepareNativeContractUpdate(both).plan as NativeOpacityUpdatePlan).tokenChanges?.map(c => [c.tokenPath, c.before, c.after]), [['opacity', 0.5, 0.4], ['faded', 0.3, 0.2]]);
@@ -229,7 +241,7 @@ test('a value succession re-derives its allocation and refuses anything but a sc
   const f = await tokenFixture(), plan = f.prepare(), input = plan.after.tokenInput;
   const prepared = prepareNativeTokenContext(input);
   assert.equal(prepared.revision, f.tokenIdentity.preparationRevision);
-  assert.equal(prepared.valuesRevision, revisionOf({ ...prepared, revision: undefined, valuesRevision: undefined }));
+  assert.equal('valuesRevision' in prepared, false, 'the allocation revision is the only revision; values are compared, never hashed');
   assert.equal(prepared.variables.find(v => v.tokenPath === 'opacity')!.values[0].value, 0.4);
   const code = (edit: (next: any) => void) => { const next = structuredClone(input); edit(next); return refusal(() => prepareNativeTokenContext(next)); };
   assert.equal(code(n => { n.allocatedValues[0].value = 0.4; }), 'native-token-context-allocated-value-redundant');
@@ -238,7 +250,7 @@ test('a value succession re-derives its allocation and refuses anything but a sc
   assert.equal(code(n => { n.allocatedValues = []; }), 'native-token-context-allocated-value-invalid');
   assert.equal(code(n => { n.allocatedValues.push({ ...n.allocatedValues[0] }); }), 'native-token-context-allocated-value-ambiguous');
   assert.equal(code(n => { n.allocatedValues.unshift({ ...n.allocatedValues[0], tokenPath: 'size', value: '12px' }); }), 'native-token-context-allocated-value-order');
-  assert.equal(code(n => { n.allocatedValues[0].value = '{size}'; }), 'native-token-context-alias-type-mismatch', 'an allocation that was an alias is not a value succession');
+  assert.equal(code(n => { n.allocatedValues[0].value = '{size}'; }), 'native-token-context-allocated-value-alias', 'an allocation that was an alias is not a value succession');
   // A wrong remembered value derives a different allocation: the canvas ownership then refuses it.
   const wrong = structuredClone(input); wrong.allocatedValues![0].value = 0.6;
   assert.notEqual(prepareNativeTokenContext(wrong).revision, f.tokenIdentity.preparationRevision);
@@ -285,4 +297,81 @@ test('an unknown write that changed only the variable, or only some literals, is
       assert.throws(() => jobs.verifiedForParent(parent), /effective-observation-unavailable/);
     }
   }
+});
+
+test('a new leaf the source neither requests nor names stays additive: the shared fixture relies on it', async () => {
+  const f = await nativeUpdateFixture(), desired = f.input.desired.tokenInput;
+  assert.ok('nextOpacity' in (desired.modes[0].tokens as any) && !desired.tokenPaths.includes('nextOpacity'));
+  assert.equal(JSON.stringify(f.input.desired.component).includes('nextOpacity'), false, 'the compiled component carries the literal, never the name');
+  assert.equal(f.plan.kind, 'native-contract-opacity-update'); assert.equal(f.plan.changes.length, 2);
+  assert.equal('tokenChanges' in f.plan, false);
+});
+
+// Found in review (probe-a): the trust core accepted successions for leaves the
+// update never writes. Only a requested number leaf, and no alias, may differ.
+test('a value succession is limited to a requested number leaf, and everything else is refused by name', async () => {
+  const f = await nativeUpdateFixture({ faded: { $type: 'number', $value: 0.3 }, tint: { $type: 'color', $value: '#ff0000' }, label: { $type: 'string', $value: 'abc' } });
+  const orig = f.input.before.tokenInput, rev = f.tokenIdentity.preparationRevision;
+  const succession = (path: string, now: unknown, was: unknown, edit: (i: any) => void = () => {}) => {
+    const i = structuredClone(orig) as any; i.modes[0].tokens[path].$value = now; i.modes[0].tokenTreeRevision = revisionOf(i.modes[0].tokens);
+    i.allocatedValues = [{ sourceMode: 'light', brand: 'default', tokenPath: path, value: was }]; edit(i); return i;
+  };
+  assert.equal(prepareNativeTokenContext(succession('faded', 0.9, 0.3)).revision, rev);
+  // The dimension `size` is bound on the canvas; a colour and a string are not one FLOAT.
+  for (const [path, now, was] of [['size', '17px', '16px'], ['tint', '#00ff00', '#ff0000'], ['label', 'xyz', 'abc']] as const)
+    assert.equal(refusal(() => prepareNativeTokenContext(succession(path, now, was))), 'native-token-context-allocated-value-type', path);
+  // So the verifier no longer accepts the bound `size` holding 17 under the original ownership stamp.
+  const receipt = structuredClone(f.input.baseline.tokens!.receipt), sizeId = f.tokenIdentity.variables.find((v: any) => v.tokenPath === 'size').id;
+  receipt.variables.find((v: any) => v.id === sizeId).valuesByMode[f.tokenIdentity.modes[0].modeId] = 17;
+  const verified = verifyNativeTokenContextReceipt({ input: succession('size', '17px', '16px'), expectedIdentity: f.tokenIdentity, receipt });
+  assert.deepEqual([verified.status, verified.problems], ['refused', ['native-token-context-allocated-value-type']]);
+  // A leaf that was never requested had no variable of its own to carry a value.
+  const unrequested = (i: any) => { i.tokenPaths = i.tokenPaths.filter((p: string) => p !== 'faded'); };
+  assert.equal(refusal(() => prepareNativeTokenContext(succession('faded', 0.9, 0.3, unrequested))), 'native-token-context-allocated-value-unrequested');
+  // Neither side may be an alias; a value that does not compile is refused by the compiler.
+  assert.equal(refusal(() => prepareNativeTokenContext(succession('faded', 0.9, '{opacity}'))), 'native-token-context-allocated-value-alias');
+  assert.equal(refusal(() => prepareNativeTokenContext(succession('faded', '{opacity}', 0.3))), 'native-token-context-allocated-value-alias');
+  for (const was of [null, { a: 1 }, [1], true])
+    assert.equal(refusal(() => prepareNativeTokenContext(succession('faded', 0.9, was))), 'native-token-context-token-compilation-refused', JSON.stringify(was));
+  // A different spelling of the recorded number is still that number: accepted.
+  assert.equal(prepareNativeTokenContext(succession('faded', '0.3', 0.3)).revision, rev);
+});
+
+// Found in review (probe-c): the readback sees one page and one collection.
+test('a local variable outside the collection that aliases a written variable refuses the write by name', async () => {
+  const f = await tokenFixture(), plan = f.prepare();
+  const collection = f.figma.variables.createVariableCollection('Designer semantic');
+  const alias = f.figma.variables.createVariable('disabled-opacity', collection, 'FLOAT');
+  alias.setValueForMode(collection.modes[0].modeId, { type: 'VARIABLE_ALIAS', id: f.variableId });
+  for (const readOnly of [true, false]) {
+    const refused = await f.run(emitNativeContractUpdateScript(plan, 'apply', readOnly));
+    assert.equal(refused.status, 'refused'); assert.deepEqual(refused.problems, ['native-update-token-aliased:' + f.variableId]);
+    assert.deepEqual([refused.changes, refused.tokenChanges], [[], []]);
+  }
+  assert.equal(f.variable.valuesByMode[f.modeId], 0.5); assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+  // Once nothing aliases it, the same plan writes.
+  alias.setValueForMode(collection.modes[0].modeId, 0.5);
+  const applied = await f.run(emitNativeContractUpdateScript(plan));
+  assert.equal(applied.status, 'updated', JSON.stringify(applied.problems));
+  const script = emitNativeContractUpdateScript(plan), writes = script.slice(script.indexOf('getLocalVariablesAsync()'), script.indexOf('out.observation = await'));
+  assert.equal((writes.replace(/^\s*\/\/.*$/gm, '').match(/\bawait\b/g) ?? []).length, 0, 'the local variables are the last read; nothing is awaited after them before the writes');
+});
+
+test('a node on another page is not checked, and every proposal that writes a variable says so', async t => {
+  const f = await tokenFixture(), plan = f.prepare();
+  // The named limitation, measured: a binding on another page does not stop the write.
+  const page = f.figma.createPage(); page.name = 'Designer page';
+  const rect = f.figma.createRectangle(); page.appendChild(rect);
+  rect.boundVariables = { opacity: { type: 'VARIABLE_ALIAS', id: f.variableId } };
+  assert.equal((await f.run(emitNativeContractUpdateScript(plan))).status, 'updated');
+  const proposal = (input: any) => {
+    const repo = mkdtempSync(path.join(tmpdir(), 'native-token-scope-'));
+    t.after(() => rmSync(repo, { recursive: true, force: true }));
+    return createNativeUpdatePlans(repo, () => ({ parentJournalRevision: 'a'.repeat(64), input })).prepare(input.before.operation.id);
+  };
+  assert.ok(proposal(f.input).limitations.includes(NATIVE_TOKEN_VALUE_SCOPE_LIMITATION));
+  assert.equal(proposal((await nativeUpdateFixture()).input).limitations.includes(NATIVE_TOKEN_VALUE_SCOPE_LIMITATION), false, 'only a variable write carries it');
+  const page_ = readFileSync(new URL('../playground/src/pages/ReactNativeInspection.tsx', import.meta.url), 'utf8');
+  assert.ok(page_.includes("It writes one only if no node on this operation's page binds it and no local variable aliases it. Nodes on other pages are not checked"));
+  assert.equal(page_.includes('No node is bound to'), false, 'the review never claims more than is measured');
 });

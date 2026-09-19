@@ -25,6 +25,10 @@ export interface NativeTokenContextInput {
   source: {
     revision: string;
     sourceProgramSha256: string;
+    /** The hash of the token trees at ALLOCATION time, stamped into ownership
+     * metadata. After a carried value update (`allocatedValues`) it still names
+     * the allocation and no longer describes the current trees; each mode's
+     * `tokenTreeRevision` does. */
     tokensSha256: string;
   };
   /** Exact requested paths. Alias dependencies are added, never same-value peers. */
@@ -41,7 +45,8 @@ export interface NativeTokenContextInput {
    * values; these are the raw `$value`s the same leaves held when the collection
    * was allocated. Ownership stamps on the collection and on every owned node
    * name the allocation revision, so it is re-derived by restoring these leaves,
-   * never taken from a caller. Only scalar values may differ between the two. */
+   * never taken from a caller. Only a requested `number` leaf (one FLOAT
+   * variable) may differ, and neither side may be an alias. */
   allocatedValues?: {
     sourceMode: string;
     brand: string;
@@ -77,11 +82,10 @@ export interface NativeTokenPreparation {
     resolvedType: NativeType;
     values: { sourceMode: string; brand: string; value: PlannedValue }[];
   }[];
-  /** The ALLOCATION revision: what ownership metadata was stamped with. It is
-   * the hash of this body unless `valuesRevision` is present. */
+  /** The ALLOCATION revision: what ownership metadata was stamped with. With
+   * `allocatedValues` it is NOT a hash of this body's current values: two value
+   * states of one allocation share it. Compare values, never this, for content. */
   revision: string;
-  /** Only with `allocatedValues`: the hash of this body's current values. */
-  valuesRevision?: string;
 }
 
 /** IDs come from a host-pinned prior identity or the actual create calls, not
@@ -223,20 +227,22 @@ export function prepareNativeTokenContext(
   });
   const { revision: allocationRevision, ...allocationBody } = allocation;
   if (!same(shape(body), shape(allocationBody))) fail("allocated-value-structure");
-  return clone({
-    ...body,
-    revision: allocationRevision,
-    valuesRevision: revisionOf(body),
-  });
+  // Each succession is one FLOAT variable in both states.
+  for (const row of input.allocatedValues)
+    for (const prepared of [body, allocationBody])
+      if (prepared.variables.find((v) => v.tokenPath === row.tokenPath)?.resolvedType !== "FLOAT")
+        fail("allocated-value-type");
+  return clone({ ...body, revision: allocationRevision });
 }
 
 /** The single writer of a token leaf's `$value`, addressed the way
- * flattenTokens names it. Exactly one leaf must answer to the path. */
+ * flattenTokens names it. Exactly one leaf must answer to the path; a tree
+ * that passed assertTree always has one, so anything else is refused here. */
 export function setNativeTokenLeafValue(
   tree: Record<string, unknown>,
   tokenPath: string,
   value: unknown,
-): number {
+): void {
   let written = 0;
   const walk = (node: Record<string, unknown>, prefix: string[]) => {
     for (const [key, child] of Object.entries(node)) {
@@ -248,7 +254,7 @@ export function setNativeTokenLeafValue(
     }
   };
   walk(tree, []);
-  return written;
+  if (written !== 1) fail("token-path-ambiguous");
 }
 
 function restoreAllocatedValues(
@@ -274,10 +280,15 @@ function restoreAllocatedValues(
     assertTree(mode!.tokens);
     const current = flattenTokens(mode!.tokens).get(row.tokenPath);
     if (!current) fail("allocated-value-path");
+    // Only an allocated number leaf: never a dimension, colour, string, or a
+    // leaf that was never requested (and so never had a variable of its own).
+    if (!input.tokenPaths.includes(row.tokenPath)) fail("allocated-value-unrequested");
+    if (current!.type !== "number") fail("allocated-value-type");
+    if (aliasTarget(current!.value) !== null || aliasTarget(row.value) !== null)
+      fail("allocated-value-alias");
     // A recorded value equal to the current one is not a succession.
     if (same(current!.value, row.value)) fail("allocated-value-redundant");
-    if (setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value)) !== 1)
-      fail("allocated-value-path");
+    setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value));
   }
   for (const mode of restored.modes) mode.tokenTreeRevision = revisionOf(mode.tokens);
   return restored;

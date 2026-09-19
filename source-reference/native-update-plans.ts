@@ -8,6 +8,8 @@ import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { prepareNativeContractUpdate, nativeContractUpdateMatches, nativeContractUpdateAfter, type NativeContractUpdateInput } from '../core/native-contract-update.js';
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
+/** Named on every proposal that writes a variable value. */
+export const NATIVE_TOKEN_VALUE_SCOPE_LIMITATION = 'variable-bindings-on-other-pages-unchecked';
 const HASH = /^[a-f0-9]{64}$/;
 export interface NativeUpdateHistoryEntry {
   proposalId: string; journalRevision: string; phase: string; pending: boolean;
@@ -78,7 +80,11 @@ export function createNativeUpdatePlans(repo: string,
     changes:structuredClone(record.update.plan.changes),
     // Variable values this update writes. Absent for every plan without them.
     ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges)} : {}),
-    limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
+    limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified',
+      // Measured before a variable write: this operation's page and every local
+      // variable. A node on another page bound to it is not read (a full-file
+      // walk is not affordable on large files), so it would follow the new value.
+      ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ? [NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
   return {
     prepare(parentId: string) {
       assertOutsideEvidenceSnapshot();
