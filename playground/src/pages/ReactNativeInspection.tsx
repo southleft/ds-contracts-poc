@@ -11,6 +11,15 @@ import { ReactCallbackInspection } from './ReactCallbackInspection';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan, NativeTokenValueChange } from '../../../core/native-contract-update';
+import type { RecordedNativeMeasurement } from '../../../source-reference/matched-native-review';
+
+function MeasurementImages({measurement, background}: {measurement: RecordedNativeMeasurement['rows'][number]; background: 'white' | 'black'}) {
+  return <>
+    <td style={{background,padding:8}}><img alt={`Recorded React ${measurement.variant} on ${background}`} src={measurement.sourceImage} width={measurement.width} height={measurement.height} style={{display:'block',maxWidth:'none'}} /></td>
+    <td style={{background,padding:8}}><img alt={`Recorded Figma ${measurement.variant} on ${background}`} src={measurement.nativeImage} width={measurement.width} height={measurement.height} style={{display:'block',maxWidth:'none'}} /></td>
+    <td>{(background === 'white' ? measurement.whiteMismatch : measurement.blackMismatch).toFixed(3)}%</td>
+  </>;
+}
 
 /** Any recorded native value, shown without assuming its shape. */
 function designValue(value: unknown) {
@@ -63,6 +72,7 @@ interface Operation {
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
   sourceFrame?: SourceFrame; sourceFrameProblem?: string;
+  recordedMeasurement?: boolean;
   composition?: ReactCompositionReview; compositionProblem?: string;
 }
 export function ReactNativeInspection({ referenceId, selectedCase, ownership }: {
@@ -73,9 +83,19 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
+  const [measurements, setMeasurements] = useState<Record<string, RecordedNativeMeasurement>>({});
   const root = `/api/source-reference/react/${referenceId}`;
   const active = rows.some(r => (r.connection.paired && r.connection.started && !r.connection.finished) || r.content?.phase === 'running' ||
     r.updates?.some(u => u.connection?.paired && u.connection.started && !u.connection.finished));
+  async function reviewMeasurement(id: string) {
+    setBusy(true); setError('');
+    try {
+      const response = await fetch(`${root}/native-operation/${id}/matched-review`), result = await response.json();
+      if (!response.ok) throw Error(result.error);
+      setMeasurements(old => ({ ...old, [id]: result.measurement }));
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    finally { setBusy(false); }
+  }
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {
@@ -313,6 +333,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {[...row.content.problems, ...(row.content.content?.problems ?? [])].length > 0 && <ul>{[...row.content.problems, ...(row.content.content?.problems ?? [])].map((p, i) => <li key={i}>{p}</li>)}</ul>}
         </section>}
         {currentProblems.length > 0 && <ul>{currentProblems.map(p => <li key={p}>{p}</li>)}</ul>}
+        {row.recordedMeasurement && <section aria-label="Recorded matched-frame measurement">
+          <button type="button" disabled={busy} onClick={() => void reviewMeasurement(id)}>Review recorded matched frames</button>
+          {measurements[id] && <>
+            <p>{measurements[id].rows.filter(r => r.pass).length} / {measurements[id].rows.length} recorded pairs meet the 5% limit on both backgrounds. Geometry checks passed. Recorded {new Date(measurements[id].recordedAt).toLocaleString()}.</p>
+            <p>These saved captures describe the recorded baseline. Opening this review does not inspect the current canvas or test interaction behavior. Images are shown at their original pixel size.</p>
+            <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 8px',textAlign:'left'}}>
+              <thead><tr><th>Initial state</th><th>React · white</th><th>Figma · white</th><th>White difference</th><th>React · black</th><th>Figma · black</th><th>Black difference</th></tr></thead>
+              <tbody>{measurements[id].rows.map(measurement => <tr key={measurement.id}>
+                <th scope="row">{measurement.variant}</th>
+                {(['white','black'] as const).map(background => <MeasurementImages key={background} measurement={measurement} background={background} />)}
+              </tr>)}</tbody>
+            </table></div>
+          </>}
+        </section>}
         {!!op.imageObservation?.images.length && <details open={comparison || initial}><summary>{initial ? 'Native initial-state exports' : comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
           <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : op.sourceOwnedContent ? 'These mains retain the component’s own observed internal content. Other inputs, runtime interactions and visual fidelity remain unqualified.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
           {comparison && <>

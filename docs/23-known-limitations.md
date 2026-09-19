@@ -6091,8 +6091,8 @@ through the application and companion in Evaluations (`7f0b10e4…`): all nine
 editable mains read back at those exact dimensions. Repeating inspection
 returned the identical 29-node, nine-image result without another creation.
 The plugin was closed and the native canvas inspected. This establishes size
-delivery, not visual qualification; guarded matched-frame capture and its
-application integration remain outstanding. Evidence is retained in
+delivery; the separate guarded visual measurement and its remaining limits
+are recorded in D.62. Evidence is retained in
 `private/native-matched-capture-2026-09-19-uOSM5Q/`.
 
 The older unchecked operation cannot yet receive this correction in place:
@@ -6104,3 +6104,51 @@ different already-declared case does not close that update gap.
 Reverse by removing `exactUsedLayoutLength` and the owned-size copy adapter in
 `compileObservedContentSweep`; retain archived receipts and restore the named
 CSSOM replay defect. No pixel threshold or scorer is changed.
+
+## D.62 Guarded matched frames preserve source phase and original evidence
+
+**AGENT measurement decision, 2026-09-19.** A supplemental capture instrument
+now measures a fresh app-created initial-state set without reusing the old
+exports' ambiguous raster origins. `captureTransparentSourceFrame` first
+authenticates the full original PNG. It refuses ancestor opacity, transforms,
+clipping and paint, and component or ancestor blend, filter, backdrop and mask
+dependencies. Only the plain html/body backgrounds are made transparent.
+External siblings are hidden only when the entire component crop remains
+byte-identical; overlapping paint refuses. Component geometry, markup and
+computed styles, including pseudo-elements, must remain exact. Two captures
+must match, paint must fit strictly inside the crop, and the original render
+must return byte-exactly after restoring the capture context.
+
+Native components are copied into persistent transparent frames at the
+source-derived fractional offsets. The original and clone snapshots, bindings,
+resolved modes and root dimensions match exactly; native render bounds stay
+inside integer-origin frames. Exports explicitly use scale one, absolute
+bounds and contents only. Current original readback matches the authenticated
+operation both before and after capture. These are Plugin API frame exports;
+no REST raster model is attributed to them.
+
+The new `recipe/evidence/react-native-matched-capture/` records all nine states
+of operation `7f0b10e4…`: maximum white mismatch 4.167%, black 2.399%, all below
+the unchanged 5% limit. `npm run react:native:declared:check` recomputes the new
+measurements alongside the unchanged historical family evidence. The new
+recorder authenticates the complete operation chain, source inventory and
+state-to-native pairing without inventing origins for the earlier unframed
+PNGs. It only writes a new output directory. Instrument and image hashes are
+pinned; changed geometry, coverage, bytes, capture spans or sibling contribution
+refuse. A one-pixel movement can pass the existing pixel score, so exact root
+geometry remains an independent gate. This does not establish pixel identity:
+transparent compositing can differ from direct opaque rasterization by one
+channel value.
+
+The application’s **Review recorded matched frames** reauthenticates the
+operation and source pin, recomputes the scores, and shows both backgrounds at
+original image size. The nine-row view was inspected live. It describes a
+recorded baseline and performs no Figma write or current canvas inspection.
+Frame preparation remains operator-run. Runtime behavior, the rest of the
+independent family, and bound height-variable updates remain unqualified.
+Live evidence is in `private/native-matched-capture-2026-09-19-uOSM5Q/`.
+
+Reverse by removing the supplemental capture instrument, its application
+review and its added check invocation; retain the new and historical evidence
+and restore the named measurement gap. The existing scorer, tolerance and
+historical refusal receipts are unchanged.
