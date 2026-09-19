@@ -4130,7 +4130,8 @@ glyph are an uncaptured nested instance). No evidence is committed.
 - The design:consumer:check harness takes one `--component` for both the dump's set
   name and the generated directory, so a set whose name has a space
   (`Checkbox Group` → `CheckboxGroup`) needs an alias key in the dump. Not changed
-  here.
+  here. **Closed by §D.43** (the set is found by the contract's anchor node id,
+  and the REST import now fetches the child sets itself).
 
 **To reverse.** Make `absentVariants` in `proposeFromDumpFenced` always null (delete
 the `pipelineDrew ? scopedAbsentVariants(…) : ragged && stampsObservable ?
@@ -4701,7 +4702,9 @@ hoisted root label and count as named). Evidence:
 whole-pixel box, no clamp, no `align-self` — and draws the fractional box:
 a preview surface outside the React + WC core scope (the surface the computed
 gate scores through); named here, not fixed. Altitude Tabs' labels are inside
-child instance stubs and out of reach until stub content is captured.
+child instance stubs and out of reach until stub content is captured. (§D.43: the
+import now follows the `Tab` child, which REFUSES on the §D.41 wall and so stays a
+named stub.)
 
 **To reverse.** Delete `carryTextAutoResize` and its four doors, the hoisted
 note and `settleTextAutoResize`, in `core/propose-figma.ts` (no contract then carries the flag and every
@@ -4717,3 +4720,152 @@ reader, the flagless re-read pinned) and `core/react-whole-pixel-text-box.test.t
 every validator refusal, and the box MEASURED in Chromium: rounded up less the
 trailing tracking, the hug root following, a centred run centred, RTL at the right
 edge, vertical writing rounding the block dimension).
+
+## D.43 A REST import read one set; every instance of another set became a geometry-only stub with no content — CLOSED for same-file sets; a remote (library) component, a set that refuses to propose and anything past the cap stay stubs, each NAMED
+
+**2026-09-19. A reader decision taken by the agent under the owner's standing
+delegation (never a grade, never a tolerance); recorded so it can be reversed.**
+`npm run extract:figma:rest -- <url>?node-id=<set>` fetched exactly one node. Every
+INSTANCE of another component inside it reached the proposer as an unresolved
+reference and was auto-proposed as a STUB contract — a box with the instance's
+bounding size and nothing inside — so the generated React rendered empty children.
+Measured on designer files: Altitude `Tabs` missed the unchanged 5 % limit at
+5.54 % / 5.19 % with every tab label and the tab panel's content inside stubs, and
+§D.40 had shown by hand that fetching the CHILD sets together with the parent took
+Altitude `Checkbox Group` from 2 / 12 to 12 / 12. The mechanism already existed
+(`fetchNodes` takes several ids, `mapRestToDump` maps them all, the proposer
+session-links an instance to a set proposed earlier in the same dump); only the
+operator knew to pass the child ids.
+
+**Rule.** A REST import follows its instances. After the requested node is fetched,
+every INSTANCE the mapper maps (every one inside a variant that is not itself
+inside another instance — the mapper never recurses into an instance, so a set
+seen only inside an instance subtree has no reference in the dump to resolve) is
+read for its `componentId`; the response's own `components` / `componentSets`
+metadata gives the owning set (`componentSetId`, else the standalone component's
+own id) and `remote`. Every local target not yet in the dump is fetched in a
+further `/nodes` round — 30 ids per request (the batching `visual-truth/rest.mjs`
+already uses), a 429 retried up to three times after `Retry-After` — and the new
+sets are walked the same way until nothing new is referenced (a fixpoint; a cycle
+terminates because a set is fetched once). The merged response lists sets
+DEPENDENCIES FIRST — a post-order walk from the requested id, targets in sorted id
+order — because the proposer session-links a set only to siblings proposed
+earlier in the batch; rounds visit targets in sorted order, so the dump is
+byte-stable across runs (two live runs of Tabs: identical bytes). Code:
+`extract/figma/rest/closure.ts` (`followInstances`), wired through
+`importFromUrl({ closure })` in `fetch.ts`; the CLI turns it ON by default and
+`--no-closure` turns it off.
+
+**What it records.** `_provenance.closure` = `{ rule: 'follow-instances', cap,
+requested: [{nodeId, name, type}], pulled: [{nodeId, name, type, round,
+referencedBy}], unresolved: [{targetId, componentIds, name, reason, detail,
+referencedFrom}], cycles }`, and one `_degradations` row per referencing instance
+path with the new code `instance-closure-unresolved` (message starts with the
+reason), so the proposer attaches it to the parent set's notes exactly like every
+other capture receipt. The reasons: `remote-library-component` (`remote: true` on
+the component or its set), `not-found` (no metadata, or `/nodes` answered null),
+`not-a-component`, `utility-slot-set` (a set named `Slot`, which the mapper never
+maps), `set-name-collision` (the dump is keyed by set name), `unreadable` (the
+request failed) and `cap-exceeded`. The CLI prints each on stderr; `extract:figma`
+prints a "Dependency closure" section in `figma-proposals.md`; the clean-consumer
+receipt carries `inputs.closure` and `inputs.contractGraph`.
+
+**The cap.** `CLOSURE_SET_CAP = 64` pulled sets (requested sets not counted). A
+target past it is not fetched and every reference to it is named `cap-exceeded`
+(targets are admitted in sorted id order per round, so which ones is
+deterministic). **AGENT decision:** past the cap the import still writes the dump,
+with those references refused BY NAME, rather than refusing the whole import: the
+sets inside the cap are real either way, and a whole-import refusal would leave
+the operator only `--no-closure`, which makes EVERY child a stub. **To reverse:**
+throw in `followInstances` where it now records `cap-exceeded`.
+
+**A closure child that refuses.** The propose CLI writes nothing when any set
+refuses. A set the closure pulled in is not one the operator asked for; letting it
+refuse the parent would make the closure strictly worse than today on every file
+with one unproposable child (Altitude `Tab` and `Text Passage` both refuse — below).
+**AGENT decision:** a set named in `_provenance.closure.pulled` that refuses does
+not refuse the run. It is not proposed; the parent, proposed after it, finds no
+contract for the instance and auto-proposes today's stub; and the fall-back is
+named on stderr and in the report as
+`closure-child-refused:<set>:<the refusal, verbatim>` (`partitionClosureRefusals`).
+A REQUESTED set's refusal — and any refusal in a dump no closure produced — refuses
+exactly as before. A closure child's refusal never becomes a stub without that
+name. **To reverse:** make `partitionClosureRefusals` return every skip as
+`refused` (one line); the closure then refuses any dump holding an unproposable
+child, as a hand-assembled multi-set dump always did.
+
+**Library callers.** `importFromUrl` follows only when asked (`closure: true`); the
+CLI asks. The Playground's URL import, `core/emitters-check.ts`, the fidelity
+matrix and every fixture-backed caller keep their bytes and their request count,
+and the sync spine maps its own responses (`mapRestToDump` directly) without a
+closure, so no ledger baseline moves and the dump grammar stays v1.36 (a closure
+adds sets and provenance; it changes no set's projection). With `--no-closure`
+the CLI's dump is byte-identical to the one it wrote before this change: measured
+against the committed Altitude Tabs and CBDS Badge dumps (`cmp` clean).
+
+**The harness.** `design:consumer:check` already packaged the whole generated
+folder, so real children install with the parent. It now finds the mounted set by
+the contract's own anchor node id when `--component` is the generated name (the
+§D.40 note: `Checkbox Group` generates `CheckboxGroup` and needed an alias key),
+and it lists the contract graph — every transitively referenced component, real or
+stub — naming any reference no generated folder holds
+(`dependency-not-packaged:<id>`). It still mounts and scores only the requested set.
+
+**Measured live** (read-only REST, the product's own commands in order, the
+unchanged 5 % limit; "before" is the same pipeline with `--no-closure`, the same
+day, the same file version):
+
+| set | children followed | within 5 % before → after | check |
+|---|---|---|---|
+| Altitude `Tabs` `3558:61955` | `Tab Panel`, `Button`, `Icon` real; `Tab`, `Text Passage` refused → named stubs; `ArrowArcLeft` remote → stub | 0 / 2 (5.54 / 5.19 %) → **2 / 2** (1.80 / 1.45 %) | still exit 1 — a NEW `content-size-mismatch` (453 vs 438 px) |
+| Altitude `Checkbox Group` `3570:2154` | `Checkbox`, `Field Note` real | 2 / 12 (4.85 / 6.45 / 7.47 %) → **12 / 12** (2.46 / 2.92 / 3.83 %) | still exit 1 — `content-size-mismatch`, `legend` inert, `state` discarded, all present before |
+| Altitude `Badge` `3538:35772` | none referenced | 10 / 10 → 10 / 10, every score identical | exit 0 |
+| CBDS `Badge` `277:822` | `Icon` (was a stub), `Placeholder` real | 72 / 72 → 72 / 72, every score identical | exit 0 |
+
+Checkbox Group is reproduced WITHOUT passing a child id. (The set id published by
+`/component_sets`, `3442:25022`, is an older generation that `/nodes` returns
+with no children; the designer's current set is `3570:2154` on the same page.)
+
+**Why Tabs still fails, measured — the next gaps, none tuned here.**
+1. `Tab Panel` is now a real contract and renders its `Button` and its two text
+   blocks' boxes; it is emitted as a `<button>` (the proposer reads its
+   `State` axis as interactive although the designer's description says
+   `element: <div>`), and the generated CSS zeroes the border and appearance but
+   not the user-agent inline padding: 441 px of content + 6 + 6 = the 453 px the
+   check measures against Figma's 438.
+2. `Tab` refuses in exact mode: its `State` axis draws `Active`, a state the
+   contract cannot carry (`state-axis-state-not-carried:active`, the §D.41
+   wall). Its three instances stay stubs — the labels render as bare text with
+   no padding and no active underline (most of the remaining text-masked diff).
+3. `Text Passage` refuses because REST returns the set with NO children
+   (`/nodes` for `3435:888` answers a COMPONENT_SET with an empty `children`,
+   at this version and the previous one), so exact mode has no variant evidence.
+   Its two instances stay 441 × 24 stubs with no text.
+4. `ArrowArcLeft` (the Button's icon glyph) is a remote library component.
+
+**Limits, named.**
+- Remote (library) components stay stubs; this import reads one file.
+- `cap-exceeded` past 64 pulled sets (above).
+- Instances nested inside another instance are not followed (the mapper does not
+  map them); an `INSTANCE_SWAP` value (`fixedSwaps`) is not followed either.
+- The closure brings in every child the parent's instances name, including large
+  ones (Tabs pulls the 120-variant `Button`; its dump is 1.7 MB), and each is
+  proposed and generated.
+- A cycle is cut where the post-order walk re-enters a set on its stack
+  (`cycles`); the set proposed first references the other as a stub that the CLI
+  never writes, because the real contract claims the id.
+- The Playground's URL import does not follow instances (library default off).
+
+**Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,
+fast lane — a recorded CBDS response for the transitive + standalone case; synthetic
+REST-shaped responses for transitive chains, a cycle, remote refs by component and
+by set, a standalone component, a self-reference, the cap, request batching, every
+unresolved reason, nested instances, deterministic order and the byte-identical
+opt-out; the propose CLI end to end on a refusing closure child and on the same set
+requested) and `scripts/design-consumer-check.test.ts` (`npm run
+design:consumer:test` — the anchor lookup and the contract graph).
+
+**To reverse (the whole rule).** Make the CLI default `closure = false` in
+`extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set
+import, byte-identical; the proposer partition is inert without
+`_provenance.closure`; the harness lookup and graph are additive.
