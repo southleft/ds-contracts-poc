@@ -78,6 +78,11 @@ test('typed size provenance distinguishes authored constraints from measured aut
   await fill('height:100%','height:200px');
   assert.deepEqual((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(r=>r.channel==='height'),
    {channel:'height',selectors:['.subject'],authoredValue:'100%',status:'unresolved',reason:'responsive-or-unsupported-size-expression'},'only the inline axis has a fill rule');
+  // The containing width must itself be definite: up through in-flow block-level boxes to an own px length or the viewport.
+  for(const host of ['width:auto','width:50%','width:auto;display:flex;flex-direction:column'])assert.equal((await fill('width:100%',host)).status,'fill',host);
+  for(const host of ['width:auto;display:inline-block','width:auto;float:left','width:auto;position:absolute','width:fit-content']){
+   const row=await fill('width:100%',host);assert.deepEqual([row.status,row.reason],['unresolved','declared-fill-width-containing-block-indefinite'],host);
+  }
   for(const css of ['width:calc(100% - 8px)','width:50%','width:calc(100%)','width:100vw','--w:100%;width:var(--w)']){
    const row=await fill(css);assert.equal(row.status,'unresolved',css);assert.equal(row.reason,'responsive-or-unsupported-size-expression',css);
   }

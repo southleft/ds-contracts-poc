@@ -8,7 +8,7 @@ const matchedStyles = (cdp: CDPSession, nodeId: number) => cdp.send('CSS.getMatc
 const layerTree = (cdp: CDPSession, nodeId: number) => cdp.send('CSS.getLayersForNode', {nodeId});
 type Matched = Awaited<ReturnType<typeof matchedStyles>>;
 type Layers = Awaited<ReturnType<typeof layerTree>>;
-/** `fill` is an own `width:100%` whose used width IS the containing width. It is
+/** `fill` is an own `width:100%` whose used width IS a DEFINITE containing width. It is
  * neither a fixed nor an automatic size: a consumer must qualify its layout. */
 export interface ReactSizeOrigin {
  channel:'width'|'height';status:'fixed'|'auto'|'fill'|'unresolved';value?:string;authoredValue?:string;selectors:string[];reason?:string;
@@ -121,9 +121,9 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
         const sizeDeclarations=(['width','height'] as const).map(channel=>({channel,declaration:resolveReactStyleDeclaration(matched,layers,channel,['inline-size','block-size'])}));
         const variables=channels.flatMap(c=>c.variable?[c.variable]:[]);
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.(),parent=this.parentElement&&getComputedStyle(this.parentElement),edges=s=>['padding-left','padding-right','border-left-width','border-right-width'].reduce((n,k)=>n+parseFloat(s.getPropertyValue(k)),0);return {tag:this.localName,fillsContainingWidth:!!parent&&Math.abs(parseFloat(style.width)+(style.boxSizing==='border-box'?0:edges(style))-(parseFloat(parent.width)-(parent.boxSizing==='border-box'?edges(parent):0)))<=0.001,animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.(),parent=this.parentElement&&getComputedStyle(this.parentElement),edges=s=>['padding-left','padding-right','border-left-width','border-right-width'].reduce((n,k)=>n+parseFloat(s.getPropertyValue(k)),0);const block=d=>['block','flow-root','list-item'].includes(d),definite=()=>{for(let a=this.parentElement;a;a=a.parentElement){if(a===document.documentElement)return true;const s=getComputedStyle(a),w=a.computedStyleMap?.().get('width'),level=block(s.display)||['flex','grid'].includes(s.display);if(w instanceof CSSUnitValue&&w.unit==='px')return level||s.display==='inline-block';if(!(w instanceof CSSKeywordValue&&w.value==='auto'||w instanceof CSSUnitValue&&w.unit==='percent'||w instanceof CSSMathValue)||!level||s.float!=='none'||!['static','relative'].includes(s.position)||!a.parentElement||!block(getComputedStyle(a.parentElement).display))return false;}return false;};return {tag:this.localName,containingWidthDefinite:definite(),fillsContainingWidth:!!parent&&Math.abs(parseFloat(style.width)+(style.boxSizing==='border-box'?0:edges(style))-(parseFloat(parent.width)-(parent.boxSizing==='border-box'?edges(parent):0)))<=0.001,animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
-        const value=read.result.value as {tag:string;fillsContainingWidth:boolean;animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
+        const value=read.result.value as {tag:string;fillsContainingWidth:boolean;containingWidthDefinite:boolean;animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
         const sizes:ReactSizeOrigin[]=sizeDeclarations.map(({channel,declaration})=>{
           const typed=value.sizes[channel],base={channel,selectors:declaration.selectors,...(declaration.status==='resolved'?{authoredValue:declaration.value}:{})};
@@ -135,8 +135,13 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
           // Exactly `100%`, and only while the box really takes its containing
           // width: calc(), other percentages and an active clamp name nothing new.
           // (border box against the parent's content box, the file's px epsilon)
-          if(channel==='width'&&declaration.value==='100%')return typed.unit==='percent'&&typed.value===100&&value.fillsContainingWidth
-            ? {...base,status:'fill',value:'100%'} : {...base,status:'unresolved',reason:'declared-fill-width-not-used'};
+          // A shrink-to-fit ancestor sizes itself FROM this box: the percentage is
+          // cyclic and the observed width proves no fill. Walk up to an own px
+          // length or the viewport through in-flow block-level boxes only.
+          if(channel==='width'&&declaration.value==='100%')return !(typed.unit==='percent'&&typed.value===100&&value.fillsContainingWidth)
+            ? {...base,status:'unresolved',reason:'declared-fill-width-not-used'}
+            : value.containingWidthDefinite ? {...base,status:'fill',value:'100%'}
+            : {...base,status:'unresolved',reason:'declared-fill-width-containing-block-indefinite'};
           if(!fixedSizeExpression(declaration.value,value.variables))return {...base,status:'unresolved',reason:'responsive-or-unsupported-size-expression'};
           if(typed.unit!=='px'||!Number.isFinite(typed.value)||typed.value!<0)return {...base,status:'unresolved',reason:'fixed-size-not-pixels'};
           // The used length may be the declared one in 1/64 px layout units (18.4px reads 18.3906px).

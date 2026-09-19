@@ -9,6 +9,7 @@ import type { ReactComparisonRequest } from '../source-reference/react-compariso
 import type { ObservedContentDraft } from '../source-reference/observed-content.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from './native-contract-comparison-observation.js';
 import test from 'node:test';
+import { prepareNativeComparisonFrameRepair } from './native-comparison-repair.js';
 import assert from 'node:assert/strict';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { revisionOf } from './contract-provenance.js';
@@ -395,6 +396,55 @@ for (const grid of [false, 'flow'] as const) test(`nested full-width content use
   const count=f.figma.root.findAll(()=>true).length;
   assert.equal((await f.run(f.emit())).allocationAttempted,false);
   assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+
+test('a fill-width root is compared inside the caller\'s observed containing width: the frame is FIXED, the instance stays FILL, the main learns nothing',async()=>{
+  const f=await nestedFixture('flow',true);
+  // The fill-width managed-grid main is the ROOT here, holding two linked fill-width instances in its grid carrier.
+  const selected:NativeContractComparisonInput={...f.reference,caseId:'fill-root',containerWidth:360,instances:[[0],[1]].map(specPath=>({...f.reference,specPath}))};
+  const before=await f.run(emitNativeContractReadbackScript(f.reference.parent));
+  const component=f.engine.compileComponentData(f.content,new Map([[f.content.id,f.content]]));
+  const prepare=(selection:NativeContractComparisonInput)=>prepareNativeContractComparison(f.content,component,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},selection);
+  const comparison=prepare(selected);
+  assert.deepEqual([comparison.containerWidth,comparison.fillWidth,comparison.instanceWidth,comparison.contentSpecPath,comparison.contentRows?.length],[360,true,undefined,[0,0],2]);
+  assert.notEqual(comparison.revision,prepare({...selected,containerWidth:361}).revision,'the pinned plan names the caller\'s width');
+  const missing={...selected};delete missing.containerWidth;
+  assert.throws(()=>prepare(missing),/^Error: native-contract-comparison-root-fill-width-needs-parent-context$/);
+  for(const containerWidth of [0,-1,NaN,Infinity,100001])assert.throws(()=>prepare({...selected,containerWidth}),/^Error: native-contract-comparison-container-width-unqualified$/);
+  assert.throws(()=>prepare({...selected,instanceWidth:360}),/container-width-unqualified/,'a FIXED instance would contradict its fill main');
+  assert.throws(()=>prepare({...f.comparison,containerWidth:360}),/container-width-unqualified/,'a root with its own width takes no parent width');
+  const creation=await f.run(f.emit(f.content,selected));
+  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const board=await f.figma.getNodeByIdAsync(creation.comparisonBoardId),inst=await f.figma.getNodeByIdAsync(creation.comparisons[0].instanceId);
+  assert.deepEqual([board.width,board.counterAxisSizingMode,board.primaryAxisSizingMode,board.clipsContent],[360,'FIXED','AUTO',false]);
+  assert.deepEqual([inst.width,inst.layoutSizingHorizontal,inst.parent.id],[360,'FILL',board.id]);
+  const carrier=inst.children[0].children[0];
+  assert.deepEqual([carrier.layoutMode,carrier.children.length,carrier.gridRowCount],['GRID',2,2]);
+  for(const record of creation.comparisons[0].nested){const node=await f.figma.getNodeByIdAsync(record.instanceId);assert.deepEqual([node.layoutSizingHorizontal,node.parent.id],['FILL',carrier.id]);}
+  const main=await f.figma.getNodeByIdAsync(comparison.mainId);
+  assert.notEqual(main.width,360);assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),before,'the reusable main is untouched');
+  const input:NativeContractComparisonObservationInput={operation:f.supplemental.operation,planRevision:revisionOf('fill root'),comparison,
+    tokenInput:f.supplemental.tokens.input,tokenIdentity:f.supplemental.tokens.identity,creation};
+  const receipt=await f.run(emitNativeContractComparisonReadbackScript(input));
+  const report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify(report));
+  for(const [id,change] of [[board.id,(v:any)=>{v.width=359}],[board.id,(v:any)=>{v.counterAxisSizingMode='AUTO'}],[board.id,(v:any)=>{v.primaryAxisSizingMode='FIXED'}],
+    [inst.id,(v:any)=>{v.layoutSizingHorizontal='HUG'}],[inst.id,(v:any)=>{v.layoutSizingHorizontal='FIXED'}],[inst.id,(v:any)=>{v.width=300}]] as const){
+    const wrong=structuredClone(receipt);change(wrong.content.nodes.find((n:any)=>n.id===id).values);
+    assert.ok(verifyNativeContractComparisonReadback(input,wrong).problems.some(problem=>/container-width|nested-fill-width/.test(problem)),id);
+  }
+  // A plan that pinned no width never accepts a frame someone fixed afterwards.
+  const unpinned=structuredClone(input);delete (unpinned.comparison as {containerWidth?:number}).containerWidth;
+  assert.ok(verifyNativeContractComparisonReadback(unpinned,receipt).problems.some(problem=>problem.includes('container-width')));
+  // The frame repair planner names the same two framings the reader does.
+  const clipped=structuredClone(receipt);
+  // (per-corner defaults are absent from the minimal API mock, as in the repair suite)
+  Object.assign(clipped.content.nodes.find((n:any)=>n.id===board.id).values,{clipsContent:true,topLeftRadius:0,topRightRadius:0,bottomLeftRadius:0,bottomRightRadius:0});
+  assert.deepEqual(prepareNativeComparisonFrameRepair(input,clipped).changes,[{nodeId:board.id,kind:'comparison-clipping',before:true,after:false}]);
+  const hugging=structuredClone(clipped);hugging.content.nodes.find((n:any)=>n.id===board.id).values.counterAxisSizingMode='AUTO';
+  assert.throws(()=>prepareNativeComparisonFrameRepair(input,hugging),/frame-observation-required/);
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit(f.content,selected))).allocationAttempted,false);assert.equal(f.figma.root.findAll(()=>true).length,count,'repeat creates no duplicate');
 });
 
 test('caller width establishes the containing block for nested full-width instances',async()=>{
