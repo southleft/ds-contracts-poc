@@ -155,6 +155,15 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
+  /** dump v1.35 — `Part.strokesIncludedInLayout: false`: the stroke paints
+   *  over the padding and takes NO layout space (a designer's frame at Figma's
+   *  default). Only `false` is ever carried. The runtime writes it on the
+   *  auto-layout frame; with no spec carrying it the runtime is byte-identical
+   *  and the frame keeps what it is born with, which reads back `true`
+   *  (measured: 160 of 160 generated auto-layout frames in the committed
+   *  census responses) — the space-taking CSS border every other contract
+   *  means. */
+  strokesIncludedInLayout?: false;
   /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
    *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
   dashPattern?: number[];
@@ -3365,6 +3374,11 @@ function applyStyling(
     const v = part.declared?.[axis];
     if (v !== undefined && channelDraws(axis, v)) spec.clipsContent = true;
   }
+  // dump v1.35: a stroke that takes no layout space is a FRAME fact, not a
+  // stroke fact — it holds whichever vocabulary draws the stroke (border or
+  // outline, token or literal, this combo or another), so it is read here,
+  // beside the other spec-level facts, and not in the stroke cases above.
+  if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
   // squares whose real height rides a pseudo-element padding hack).
@@ -7886,6 +7900,9 @@ function buildSyncScript(
   // without these facts emit byte-identical scripts (the golden discipline).
   const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
+  // dump v1.35: same discipline — a contract with no stroke outside layout
+  // emits the runtime it always did.
+  const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout === false));
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = featureDatas.some((d) =>
     dataSome(
@@ -8373,7 +8390,15 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}${hasGrid ? `
   }` : ''}
   node.primaryAxisSizingMode = 'AUTO';
-  node.counterAxisSizingMode = 'AUTO';
+  node.counterAxisSizingMode = 'AUTO';${hasStrokeOutsideLayout ? `
+  // dump v1.35 — THE STROKE TAKES NO LAYOUT SPACE where the contract says so
+  // (Part.strokesIncludedInLayout: false, a designer's frame at Figma's
+  // default): the stroke paints over the padding and the box stays content +
+  // padding. Written BOTH ways once any spec in this script carries the fact,
+  // so an AMENDED root whose contract dropped it is put back; a script with no
+  // such spec never touches the field (the golden discipline), and its frames
+  // keep the value they are born with, which reads back true.
+  node.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;` : ''}
   if (spec.rootFillWidth) {
     node.resize(fillPreviewWidth, Math.max(1, node.height));
     node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
@@ -8586,7 +8611,9 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
       if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = ${strokeAlignJs(hasStrokeOutside)}; }
-      if (spec.characters) wrap.appendChild(node); else node.remove();
+${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto-layout box — see applyFrameSpec.
+      wrap.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;
+` : ''}      if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
