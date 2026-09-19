@@ -1,0 +1,4827 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Badge",
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "generatedSha256": {
+    "Badge/Badge.module.css": "d949ef044ad77f7b4aac34dac0dc17baf026d1a13d83e31eb3efb2727965f70a",
+    "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
+    "Badge/Badge.tsx": "9c96b5d22eda3805f6c7e1f2ed2c5424db276d743023ca138732534dd8805f4e",
+    "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "Icon/Icon.module.css": "e2bda912f4ae0bca42c533c5ab5e8b141fab371209283128a6a62cc2c7b93382",
+    "Icon/Icon.stories.tsx": "e36c0aa86ef8eeba4d96b27f80cf42c049f339dce5287bd50b7a23d37ca7b988",
+    "Icon/Icon.tsx": "ed8bfa9d059ea8ae70ee60fd5dc611c69f013597ca15f095d7bddaf11f4693ed",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "index.ts": "82c5420cf4865583dedd077305c90a9925a720cb8fbfac2a0d3328f69c1e98c2",
+    "tokens.css": "a5d6616ba9a9573f0963542d00c8b40aceda1852d5dfd94191eaa3df0cdcf0e1"
+  },
+  "cases": [
+    {
+      "key": "type-brand_style-fill_size-large_rounded-false",
+      "figmaName": "type=brand, style=fill, size=large, rounded=false",
+      "nodeId": "277:861",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-large_rounded-true",
+      "figmaName": "type=brand, style=fill, size=large, rounded=true",
+      "nodeId": "277:917",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-small_rounded-false",
+      "figmaName": "type=brand, style=fill, size=small, rounded=false",
+      "nodeId": "277:825",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-small_rounded-true",
+      "figmaName": "type=brand, style=fill, size=small, rounded=true",
+      "nodeId": "277:919",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-large_rounded-false",
+      "figmaName": "type=brand, style=tonal, size=large, rounded=false",
+      "nodeId": "277:863",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-large_rounded-true",
+      "figmaName": "type=brand, style=tonal, size=large, rounded=true",
+      "nodeId": "277:921",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-small_rounded-false",
+      "figmaName": "type=brand, style=tonal, size=small, rounded=false",
+      "nodeId": "277:827",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-small_rounded-true",
+      "figmaName": "type=brand, style=tonal, size=small, rounded=true",
+      "nodeId": "277:923",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-large_rounded-false",
+      "figmaName": "type=brand, style=outline, size=large, rounded=false",
+      "nodeId": "277:865",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-large_rounded-true",
+      "figmaName": "type=brand, style=outline, size=large, rounded=true",
+      "nodeId": "277:829",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-small_rounded-false",
+      "figmaName": "type=brand, style=outline, size=small, rounded=false",
+      "nodeId": "277:1011",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-small_rounded-true",
+      "figmaName": "type=brand, style=outline, size=small, rounded=true",
+      "nodeId": "277:1013",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-fill_size-large_rounded-false",
+      "figmaName": "type=success, style=fill, size=large, rounded=false",
+      "nodeId": "277:867",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-fill_size-large_rounded-true",
+      "figmaName": "type=success, style=fill, size=large, rounded=true",
+      "nodeId": "277:1047",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-fill_size-small_rounded-false",
+      "figmaName": "type=success, style=fill, size=small, rounded=false",
+      "nodeId": "277:831",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-fill_size-small_rounded-true",
+      "figmaName": "type=success, style=fill, size=small, rounded=true",
+      "nodeId": "277:1049",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-large_rounded-false",
+      "figmaName": "type=success, style=tonal, size=large, rounded=false",
+      "nodeId": "277:869",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-large_rounded-true",
+      "figmaName": "type=success, style=tonal, size=large, rounded=true",
+      "nodeId": "277:833",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-small_rounded-false",
+      "figmaName": "type=success, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1065",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-small_rounded-true",
+      "figmaName": "type=success, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1067",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-outline_size-large_rounded-false",
+      "figmaName": "type=success, style=outline, size=large, rounded=false",
+      "nodeId": "277:871",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-outline_size-large_rounded-true",
+      "figmaName": "type=success, style=outline, size=large, rounded=true",
+      "nodeId": "277:1081",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-outline_size-small_rounded-false",
+      "figmaName": "type=success, style=outline, size=small, rounded=false",
+      "nodeId": "277:1083",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-outline_size-small_rounded-true",
+      "figmaName": "type=success, style=outline, size=small, rounded=true",
+      "nodeId": "277:835",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-large_rounded-false",
+      "figmaName": "type=warning, style=fill, size=large, rounded=false",
+      "nodeId": "277:873",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-large_rounded-true",
+      "figmaName": "type=warning, style=fill, size=large, rounded=true",
+      "nodeId": "277:1145",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-small_rounded-false",
+      "figmaName": "type=warning, style=fill, size=small, rounded=false",
+      "nodeId": "277:837",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-small_rounded-true",
+      "figmaName": "type=warning, style=fill, size=small, rounded=true",
+      "nodeId": "277:1147",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-large_rounded-false",
+      "figmaName": "type=warning, style=tonal, size=large, rounded=false",
+      "nodeId": "277:875",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-large_rounded-true",
+      "figmaName": "type=warning, style=tonal, size=large, rounded=true",
+      "nodeId": "277:1149",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-small_rounded-false",
+      "figmaName": "type=warning, style=tonal, size=small, rounded=false",
+      "nodeId": "277:839",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-small_rounded-true",
+      "figmaName": "type=warning, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1151",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-large_rounded-false",
+      "figmaName": "type=warning, style=outline, size=large, rounded=false",
+      "nodeId": "277:877",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-large_rounded-true",
+      "figmaName": "type=warning, style=outline, size=large, rounded=true",
+      "nodeId": "277:841",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-small_rounded-false",
+      "figmaName": "type=warning, style=outline, size=small, rounded=false",
+      "nodeId": "277:1153",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-small_rounded-true",
+      "figmaName": "type=warning, style=outline, size=small, rounded=true",
+      "nodeId": "277:1155",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-large_rounded-false",
+      "figmaName": "type=danger, style=fill, size=large, rounded=false",
+      "nodeId": "277:879",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-large_rounded-true",
+      "figmaName": "type=danger, style=fill, size=large, rounded=true",
+      "nodeId": "277:1157",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-small_rounded-false",
+      "figmaName": "type=danger, style=fill, size=small, rounded=false",
+      "nodeId": "277:843",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-small_rounded-true",
+      "figmaName": "type=danger, style=fill, size=small, rounded=true",
+      "nodeId": "277:1159",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-large_rounded-false",
+      "figmaName": "type=danger, style=tonal, size=large, rounded=false",
+      "nodeId": "277:881",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-large_rounded-true",
+      "figmaName": "type=danger, style=tonal, size=large, rounded=true",
+      "nodeId": "277:845",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-small_rounded-false",
+      "figmaName": "type=danger, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1161",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-small_rounded-true",
+      "figmaName": "type=danger, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1163",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-large_rounded-false",
+      "figmaName": "type=danger, style=outline, size=large, rounded=false",
+      "nodeId": "277:883",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-large_rounded-true",
+      "figmaName": "type=danger, style=outline, size=large, rounded=true",
+      "nodeId": "277:847",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-small_rounded-false",
+      "figmaName": "type=danger, style=outline, size=small, rounded=false",
+      "nodeId": "277:1165",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-small_rounded-true",
+      "figmaName": "type=danger, style=outline, size=small, rounded=true",
+      "nodeId": "277:1167",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-large_rounded-false",
+      "figmaName": "type=neutral, style=fill, size=large, rounded=false",
+      "nodeId": "277:885",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-large_rounded-true",
+      "figmaName": "type=neutral, style=fill, size=large, rounded=true",
+      "nodeId": "277:1169",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-small_rounded-false",
+      "figmaName": "type=neutral, style=fill, size=small, rounded=false",
+      "nodeId": "277:849",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-small_rounded-true",
+      "figmaName": "type=neutral, style=fill, size=small, rounded=true",
+      "nodeId": "277:1171",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-large_rounded-false",
+      "figmaName": "type=neutral, style=tonal, size=large, rounded=false",
+      "nodeId": "277:887",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-large_rounded-true",
+      "figmaName": "type=neutral, style=tonal, size=large, rounded=true",
+      "nodeId": "277:851",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-small_rounded-false",
+      "figmaName": "type=neutral, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1173",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-small_rounded-true",
+      "figmaName": "type=neutral, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1175",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-large_rounded-false",
+      "figmaName": "type=neutral, style=outline, size=large, rounded=false",
+      "nodeId": "277:889",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-large_rounded-true",
+      "figmaName": "type=neutral, style=outline, size=large, rounded=true",
+      "nodeId": "277:853",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-small_rounded-false",
+      "figmaName": "type=neutral, style=outline, size=small, rounded=false",
+      "nodeId": "277:1177",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-small_rounded-true",
+      "figmaName": "type=neutral, style=outline, size=small, rounded=true",
+      "nodeId": "277:1179",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-large_rounded-false",
+      "figmaName": "type=accent, style=fill, size=large, rounded=false",
+      "nodeId": "277:891",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-large_rounded-true",
+      "figmaName": "type=accent, style=fill, size=large, rounded=true",
+      "nodeId": "277:1181",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-small_rounded-false",
+      "figmaName": "type=accent, style=fill, size=small, rounded=false",
+      "nodeId": "277:855",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-small_rounded-true",
+      "figmaName": "type=accent, style=fill, size=small, rounded=true",
+      "nodeId": "277:1183",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-large_rounded-false",
+      "figmaName": "type=accent, style=tonal, size=large, rounded=false",
+      "nodeId": "277:893",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-large_rounded-true",
+      "figmaName": "type=accent, style=tonal, size=large, rounded=true",
+      "nodeId": "277:857",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 58.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-small_rounded-false",
+      "figmaName": "type=accent, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1185",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-small_rounded-true",
+      "figmaName": "type=accent, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1187",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 45.34375,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-large_rounded-false",
+      "figmaName": "type=accent, style=outline, size=large, rounded=false",
+      "nodeId": "277:895",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-large_rounded-true",
+      "figmaName": "type=accent, style=outline, size=large, rounded=true",
+      "nodeId": "277:859",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 62.234375,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-small_rounded-false",
+      "figmaName": "type=accent, style=outline, size=small, rounded=false",
+      "nodeId": "277:1189",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-small_rounded-true",
+      "figmaName": "type=accent, style=outline, size=small, rounded=true",
+      "nodeId": "277:1191",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 49.34375,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-small_rounded-true.png"
+    }
+  ],
+  "behavior": {
+    "text": {
+      "prop": "text",
+      "textBearingCells": [
+        "type-brand_style-fill_size-large_rounded-false",
+        "type-brand_style-fill_size-large_rounded-true",
+        "type-brand_style-fill_size-small_rounded-false",
+        "type-brand_style-fill_size-small_rounded-true",
+        "type-brand_style-tonal_size-large_rounded-false",
+        "type-brand_style-tonal_size-large_rounded-true",
+        "type-brand_style-tonal_size-small_rounded-false",
+        "type-brand_style-tonal_size-small_rounded-true",
+        "type-brand_style-outline_size-large_rounded-false",
+        "type-brand_style-outline_size-large_rounded-true",
+        "type-brand_style-outline_size-small_rounded-false",
+        "type-brand_style-outline_size-small_rounded-true",
+        "type-success_style-fill_size-large_rounded-false",
+        "type-success_style-fill_size-large_rounded-true",
+        "type-success_style-fill_size-small_rounded-false",
+        "type-success_style-fill_size-small_rounded-true",
+        "type-success_style-tonal_size-large_rounded-false",
+        "type-success_style-tonal_size-large_rounded-true",
+        "type-success_style-tonal_size-small_rounded-false",
+        "type-success_style-tonal_size-small_rounded-true",
+        "type-success_style-outline_size-large_rounded-false",
+        "type-success_style-outline_size-large_rounded-true",
+        "type-success_style-outline_size-small_rounded-false",
+        "type-success_style-outline_size-small_rounded-true",
+        "type-warning_style-fill_size-large_rounded-false",
+        "type-warning_style-fill_size-large_rounded-true",
+        "type-warning_style-fill_size-small_rounded-false",
+        "type-warning_style-fill_size-small_rounded-true",
+        "type-warning_style-tonal_size-large_rounded-false",
+        "type-warning_style-tonal_size-large_rounded-true",
+        "type-warning_style-tonal_size-small_rounded-false",
+        "type-warning_style-tonal_size-small_rounded-true",
+        "type-warning_style-outline_size-large_rounded-false",
+        "type-warning_style-outline_size-large_rounded-true",
+        "type-warning_style-outline_size-small_rounded-false",
+        "type-warning_style-outline_size-small_rounded-true",
+        "type-danger_style-fill_size-large_rounded-false",
+        "type-danger_style-fill_size-large_rounded-true",
+        "type-danger_style-fill_size-small_rounded-false",
+        "type-danger_style-fill_size-small_rounded-true",
+        "type-danger_style-tonal_size-large_rounded-false",
+        "type-danger_style-tonal_size-large_rounded-true",
+        "type-danger_style-tonal_size-small_rounded-false",
+        "type-danger_style-tonal_size-small_rounded-true",
+        "type-danger_style-outline_size-large_rounded-false",
+        "type-danger_style-outline_size-large_rounded-true",
+        "type-danger_style-outline_size-small_rounded-false",
+        "type-danger_style-outline_size-small_rounded-true",
+        "type-neutral_style-fill_size-large_rounded-false",
+        "type-neutral_style-fill_size-large_rounded-true",
+        "type-neutral_style-fill_size-small_rounded-false",
+        "type-neutral_style-fill_size-small_rounded-true",
+        "type-neutral_style-tonal_size-large_rounded-false",
+        "type-neutral_style-tonal_size-large_rounded-true",
+        "type-neutral_style-tonal_size-small_rounded-false",
+        "type-neutral_style-tonal_size-small_rounded-true",
+        "type-neutral_style-outline_size-large_rounded-false",
+        "type-neutral_style-outline_size-large_rounded-true",
+        "type-neutral_style-outline_size-small_rounded-false",
+        "type-neutral_style-outline_size-small_rounded-true",
+        "type-accent_style-fill_size-large_rounded-false",
+        "type-accent_style-fill_size-large_rounded-true",
+        "type-accent_style-fill_size-small_rounded-false",
+        "type-accent_style-fill_size-small_rounded-true",
+        "type-accent_style-tonal_size-large_rounded-false",
+        "type-accent_style-tonal_size-large_rounded-true",
+        "type-accent_style-tonal_size-small_rounded-false",
+        "type-accent_style-tonal_size-small_rounded-true",
+        "type-accent_style-outline_size-large_rounded-false",
+        "type-accent_style-outline_size-large_rounded-true",
+        "type-accent_style-outline_size-small_rounded-false",
+        "type-accent_style-outline_size-small_rounded-true"
+      ],
+      "changedCells": [
+        "type-brand_style-fill_size-large_rounded-false",
+        "type-brand_style-fill_size-large_rounded-true",
+        "type-brand_style-fill_size-small_rounded-false",
+        "type-brand_style-fill_size-small_rounded-true",
+        "type-brand_style-tonal_size-large_rounded-false",
+        "type-brand_style-tonal_size-large_rounded-true",
+        "type-brand_style-tonal_size-small_rounded-false",
+        "type-brand_style-tonal_size-small_rounded-true",
+        "type-brand_style-outline_size-large_rounded-false",
+        "type-brand_style-outline_size-large_rounded-true",
+        "type-brand_style-outline_size-small_rounded-false",
+        "type-brand_style-outline_size-small_rounded-true",
+        "type-success_style-fill_size-large_rounded-false",
+        "type-success_style-fill_size-large_rounded-true",
+        "type-success_style-fill_size-small_rounded-false",
+        "type-success_style-fill_size-small_rounded-true",
+        "type-success_style-tonal_size-large_rounded-false",
+        "type-success_style-tonal_size-large_rounded-true",
+        "type-success_style-tonal_size-small_rounded-false",
+        "type-success_style-tonal_size-small_rounded-true",
+        "type-success_style-outline_size-large_rounded-false",
+        "type-success_style-outline_size-large_rounded-true",
+        "type-success_style-outline_size-small_rounded-false",
+        "type-success_style-outline_size-small_rounded-true",
+        "type-warning_style-fill_size-large_rounded-false",
+        "type-warning_style-fill_size-large_rounded-true",
+        "type-warning_style-fill_size-small_rounded-false",
+        "type-warning_style-fill_size-small_rounded-true",
+        "type-warning_style-tonal_size-large_rounded-false",
+        "type-warning_style-tonal_size-large_rounded-true",
+        "type-warning_style-tonal_size-small_rounded-false",
+        "type-warning_style-tonal_size-small_rounded-true",
+        "type-warning_style-outline_size-large_rounded-false",
+        "type-warning_style-outline_size-large_rounded-true",
+        "type-warning_style-outline_size-small_rounded-false",
+        "type-warning_style-outline_size-small_rounded-true",
+        "type-danger_style-fill_size-large_rounded-false",
+        "type-danger_style-fill_size-large_rounded-true",
+        "type-danger_style-fill_size-small_rounded-false",
+        "type-danger_style-fill_size-small_rounded-true",
+        "type-danger_style-tonal_size-large_rounded-false",
+        "type-danger_style-tonal_size-large_rounded-true",
+        "type-danger_style-tonal_size-small_rounded-false",
+        "type-danger_style-tonal_size-small_rounded-true",
+        "type-danger_style-outline_size-large_rounded-false",
+        "type-danger_style-outline_size-large_rounded-true",
+        "type-danger_style-outline_size-small_rounded-false",
+        "type-danger_style-outline_size-small_rounded-true",
+        "type-neutral_style-fill_size-large_rounded-false",
+        "type-neutral_style-fill_size-large_rounded-true",
+        "type-neutral_style-fill_size-small_rounded-false",
+        "type-neutral_style-fill_size-small_rounded-true",
+        "type-neutral_style-tonal_size-large_rounded-false",
+        "type-neutral_style-tonal_size-large_rounded-true",
+        "type-neutral_style-tonal_size-small_rounded-false",
+        "type-neutral_style-tonal_size-small_rounded-true",
+        "type-neutral_style-outline_size-large_rounded-false",
+        "type-neutral_style-outline_size-large_rounded-true",
+        "type-neutral_style-outline_size-small_rounded-false",
+        "type-neutral_style-outline_size-small_rounded-true",
+        "type-accent_style-fill_size-large_rounded-false",
+        "type-accent_style-fill_size-large_rounded-true",
+        "type-accent_style-fill_size-small_rounded-false",
+        "type-accent_style-fill_size-small_rounded-true",
+        "type-accent_style-tonal_size-large_rounded-false",
+        "type-accent_style-tonal_size-large_rounded-true",
+        "type-accent_style-tonal_size-small_rounded-false",
+        "type-accent_style-tonal_size-small_rounded-true",
+        "type-accent_style-outline_size-large_rounded-false",
+        "type-accent_style-outline_size-large_rounded-true",
+        "type-accent_style-outline_size-small_rounded-false",
+        "type-accent_style-outline_size-small_rounded-true"
+      ]
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": false
+    },
+    "variants": [
+      {
+        "prop": "type",
+        "switchedTo": "brand",
+        "cellsExpectedToChange": [
+          "type-success_style-fill_size-large_rounded-false",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-false",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-false",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-false",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-false",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-success_style-fill_size-large_rounded-false",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-false",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-false",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-false",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-false",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "style",
+        "switchedTo": "fill",
+        "cellsExpectedToChange": [
+          "type-brand_style-tonal_size-large_rounded-false",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-false",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-tonal_size-large_rounded-false",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-false",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "size",
+        "switchedTo": "large",
+        "cellsExpectedToChange": [
+          "type-brand_style-fill_size-small_rounded-false",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-fill_size-small_rounded-false",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "rounded",
+        "switchedTo": false,
+        "cellsExpectedToChange": [
+          "type-brand_style-fill_size-large_rounded-true",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-fill_size-large_rounded-true",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "type-brand_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_861.png",
+        "mismatchPercent": 14.549180327868852,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.37,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_917.png",
+        "mismatchPercent": 12.773224043715848,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 86.3,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_825.png",
+        "mismatchPercent": 16.796875,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.26,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_919.png",
+        "mismatchPercent": 15.755208333333334,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 83.24,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_863.png",
+        "mismatchPercent": 12.021857923497267,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 98.02,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_921.png",
+        "mismatchPercent": 12.363387978142077,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.66,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_827.png",
+        "mismatchPercent": 16.666666666666664,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 97.28,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_923.png",
+        "mismatchPercent": 15.234375,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.03,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_865.png",
+        "mismatchPercent": 17.724867724867725,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 37.96,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_829.png",
+        "mismatchPercent": 12.103174603174603,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 39.75,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1011.png",
+        "mismatchPercent": 47.84313725490196,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 43.73,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1013.png",
+        "mismatchPercent": 42,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 45.3,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_867.png",
+        "mismatchPercent": 13.866120218579233,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 93.86,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1047.png",
+        "mismatchPercent": 11.885245901639344,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 85.03,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_831.png",
+        "mismatchPercent": 17.317708333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 88.56,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1049.png",
+        "mismatchPercent": 16.015625,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 85.73,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_869.png",
+        "mismatchPercent": 14.754098360655737,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 99.72,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_833.png",
+        "mismatchPercent": 11.953551912568305,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.1,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1065.png",
+        "mismatchPercent": 18.619791666666664,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 95.21,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1067.png",
+        "mismatchPercent": 15.104166666666666,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 94.84,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_871.png",
+        "mismatchPercent": 14.351851851851851,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 37.76,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_1081.png",
+        "mismatchPercent": 12.5,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 39.42,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1083.png",
+        "mismatchPercent": 47.549019607843135,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 43.92,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_835.png",
+        "mismatchPercent": 45.9,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 45.8,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_873.png",
+        "mismatchPercent": 13.797814207650273,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.4,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1145.png",
+        "mismatchPercent": 12.021857923497267,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 83.47,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_837.png",
+        "mismatchPercent": 17.317708333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 88.86,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1147.png",
+        "mismatchPercent": 15.364583333333334,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 87.36,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_875.png",
+        "mismatchPercent": 10.245901639344263,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 96.39,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_1149.png",
+        "mismatchPercent": 11.953551912568305,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.96,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_839.png",
+        "mismatchPercent": 15.234375,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 97.28,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1151.png",
+        "mismatchPercent": 14.453125,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 94.57,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_877.png",
+        "mismatchPercent": 13.029100529100528,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 36.77,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_841.png",
+        "mismatchPercent": 13.020833333333334,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 38.02,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 64,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 64,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1153.png",
+        "mismatchPercent": 51.2,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 44.7,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1155.png",
+        "mismatchPercent": 42,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 46,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_879.png",
+        "mismatchPercent": 14.412568306010929,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 89.38,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1157.png",
+        "mismatchPercent": 12.363387978142077,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 86.51,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_843.png",
+        "mismatchPercent": 17.057291666666664,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.58,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1159.png",
+        "mismatchPercent": 17.708333333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 84.24,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_881.png",
+        "mismatchPercent": 14.549180327868852,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 98.02,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_845.png",
+        "mismatchPercent": 13.319672131147541,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.96,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1161.png",
+        "mismatchPercent": 18.880208333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 99.46,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1163.png",
+        "mismatchPercent": 16.40625,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 89.36,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_883.png",
+        "mismatchPercent": 14.351851851851851,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 37.3,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_847.png",
+        "mismatchPercent": 12.235449735449736,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 38.69,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1165.png",
+        "mismatchPercent": 52.1,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 44.8,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1167.png",
+        "mismatchPercent": 43,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 46,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_885.png",
+        "mismatchPercent": 14.549180327868852,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.63,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 60,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1169.png",
+        "mismatchPercent": 12.841530054644808,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 86.02,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_849.png",
+        "mismatchPercent": 16.40625,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.26,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1171.png",
+        "mismatchPercent": 15.755208333333334,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 82.85,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_887.png",
+        "mismatchPercent": 15.573770491803279,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 98.02,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_851.png",
+        "mismatchPercent": 12.704918032786885,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.51,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1173.png",
+        "mismatchPercent": 20.442708333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 97.28,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1175.png",
+        "mismatchPercent": 17.578125,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 89.36,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_889.png",
+        "mismatchPercent": 13.88888888888889,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 37.37,
+          "figma": 37.5
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_853.png",
+        "mismatchPercent": 14.484126984126986,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 39.22,
+          "figma": 38.59
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1177.png",
+        "mismatchPercent": 47.74509803921569,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 43.63,
+          "figma": 55.86
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1179.png",
+        "mismatchPercent": 41.699999999999996,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 45.5,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_891.png",
+        "mismatchPercent": 14.549180327868852,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.16,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1181.png",
+        "mismatchPercent": 13.046448087431695,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 86.02,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_855.png",
+        "mismatchPercent": 16.927083333333336,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.12,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1183.png",
+        "mismatchPercent": 15.885416666666666,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 82.85,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_893.png",
+        "mismatchPercent": 15.778688524590164,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 98.02,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_857.png",
+        "mismatchPercent": 12.636612021857923,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 92.44,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 59,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1185.png",
+        "mismatchPercent": 20.703125,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 97.28,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 46,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1187.png",
+        "mismatchPercent": 17.1875,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 89.36,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 47,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_895.png",
+        "mismatchPercent": 17.79100529100529,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 37.83,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_859.png",
+        "mismatchPercent": 12.3015873015873,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 39.29,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 63,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1189.png",
+        "mismatchPercent": 47.84313725490196,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 43.63,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 51,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1191.png",
+        "mismatchPercent": 42.1,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 45.2,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 50,
+            "height": 20
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "children-accepted-but-discarded",
+    "image-difference-above-limit:type-brand_style-fill_size-large_rounded-false:14.55%",
+    "image-difference-above-limit:type-brand_style-fill_size-large_rounded-true:12.77%",
+    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-false:16.80%",
+    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-true:15.76%",
+    "image-difference-above-limit:type-brand_style-tonal_size-large_rounded-false:12.02%",
+    "image-difference-above-limit:type-brand_style-tonal_size-large_rounded-true:12.36%",
+    "image-difference-above-limit:type-brand_style-tonal_size-small_rounded-false:16.67%",
+    "image-difference-above-limit:type-brand_style-tonal_size-small_rounded-true:15.23%",
+    "image-difference-above-limit:type-brand_style-outline_size-large_rounded-false:17.72%",
+    "image-difference-above-limit:type-brand_style-outline_size-large_rounded-true:12.10%",
+    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-false:47.84%",
+    "content-size-mismatch:type-brand_style-outline_size-small_rounded-false:51x20 vs 48x16",
+    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-true:42.00%",
+    "content-size-mismatch:type-brand_style-outline_size-small_rounded-true:50x20 vs 48x16",
+    "image-difference-above-limit:type-success_style-fill_size-large_rounded-false:13.87%",
+    "image-difference-above-limit:type-success_style-fill_size-large_rounded-true:11.89%",
+    "image-difference-above-limit:type-success_style-fill_size-small_rounded-false:17.32%",
+    "image-difference-above-limit:type-success_style-fill_size-small_rounded-true:16.02%",
+    "image-difference-above-limit:type-success_style-tonal_size-large_rounded-false:14.75%",
+    "image-difference-above-limit:type-success_style-tonal_size-large_rounded-true:11.95%",
+    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-false:18.62%",
+    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-true:15.10%",
+    "image-difference-above-limit:type-success_style-outline_size-large_rounded-false:14.35%",
+    "image-difference-above-limit:type-success_style-outline_size-large_rounded-true:12.50%",
+    "image-difference-above-limit:type-success_style-outline_size-small_rounded-false:47.55%",
+    "content-size-mismatch:type-success_style-outline_size-small_rounded-false:51x20 vs 48x16",
+    "image-difference-above-limit:type-success_style-outline_size-small_rounded-true:45.90%",
+    "content-size-mismatch:type-success_style-outline_size-small_rounded-true:50x20 vs 48x16",
+    "image-difference-above-limit:type-warning_style-fill_size-large_rounded-false:13.80%",
+    "image-difference-above-limit:type-warning_style-fill_size-large_rounded-true:12.02%",
+    "image-difference-above-limit:type-warning_style-fill_size-small_rounded-false:17.32%",
+    "image-difference-above-limit:type-warning_style-fill_size-small_rounded-true:15.36%",
+    "image-difference-above-limit:type-warning_style-tonal_size-large_rounded-false:10.25%",
+    "image-difference-above-limit:type-warning_style-tonal_size-large_rounded-true:11.95%",
+    "image-difference-above-limit:type-warning_style-tonal_size-small_rounded-false:15.23%",
+    "image-difference-above-limit:type-warning_style-tonal_size-small_rounded-true:14.45%",
+    "image-difference-above-limit:type-warning_style-outline_size-large_rounded-false:13.03%",
+    "image-difference-above-limit:type-warning_style-outline_size-large_rounded-true:13.02%",
+    "content-size-mismatch:type-warning_style-outline_size-large_rounded-true:64x24 vs 61x24",
+    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-false:51.20%",
+    "content-size-mismatch:type-warning_style-outline_size-small_rounded-false:50x20 vs 48x16",
+    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-true:42.00%",
+    "content-size-mismatch:type-warning_style-outline_size-small_rounded-true:50x20 vs 48x16",
+    "image-difference-above-limit:type-danger_style-fill_size-large_rounded-false:14.41%",
+    "image-difference-above-limit:type-danger_style-fill_size-large_rounded-true:12.36%",
+    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-false:17.06%",
+    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-true:17.71%",
+    "image-difference-above-limit:type-danger_style-tonal_size-large_rounded-false:14.55%",
+    "image-difference-above-limit:type-danger_style-tonal_size-large_rounded-true:13.32%",
+    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-false:18.88%",
+    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-true:16.41%",
+    "image-difference-above-limit:type-danger_style-outline_size-large_rounded-false:14.35%",
+    "image-difference-above-limit:type-danger_style-outline_size-large_rounded-true:12.24%",
+    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-false:52.10%",
+    "content-size-mismatch:type-danger_style-outline_size-small_rounded-false:50x20 vs 48x16",
+    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-true:43.00%",
+    "content-size-mismatch:type-danger_style-outline_size-small_rounded-true:50x20 vs 48x16",
+    "image-difference-above-limit:type-neutral_style-fill_size-large_rounded-false:14.55%",
+    "image-difference-above-limit:type-neutral_style-fill_size-large_rounded-true:12.84%",
+    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-false:16.41%",
+    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-true:15.76%",
+    "image-difference-above-limit:type-neutral_style-tonal_size-large_rounded-false:15.57%",
+    "image-difference-above-limit:type-neutral_style-tonal_size-large_rounded-true:12.70%",
+    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-false:20.44%",
+    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-true:17.58%",
+    "image-difference-above-limit:type-neutral_style-outline_size-large_rounded-false:13.89%",
+    "image-difference-above-limit:type-neutral_style-outline_size-large_rounded-true:14.48%",
+    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-false:47.75%",
+    "content-size-mismatch:type-neutral_style-outline_size-small_rounded-false:51x20 vs 48x16",
+    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-true:41.70%",
+    "content-size-mismatch:type-neutral_style-outline_size-small_rounded-true:50x20 vs 48x16",
+    "image-difference-above-limit:type-accent_style-fill_size-large_rounded-false:14.55%",
+    "image-difference-above-limit:type-accent_style-fill_size-large_rounded-true:13.05%",
+    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-false:16.93%",
+    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-true:15.89%",
+    "image-difference-above-limit:type-accent_style-tonal_size-large_rounded-false:15.78%",
+    "image-difference-above-limit:type-accent_style-tonal_size-large_rounded-true:12.64%",
+    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-false:20.70%",
+    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-true:17.19%",
+    "image-difference-above-limit:type-accent_style-outline_size-large_rounded-false:17.79%",
+    "image-difference-above-limit:type-accent_style-outline_size-large_rounded-true:12.30%",
+    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-false:47.84%",
+    "content-size-mismatch:type-accent_style-outline_size-small_rounded-false:51x20 vs 48x16",
+    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-true:42.10%",
+    "content-size-mismatch:type-accent_style-outline_size-small_rounded-true:50x20 vs 48x16"
+  ],
+  "limitations": [
+    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "declared behavior beyond text and variant props is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 1320
+    },
+    "stubContracts": [
+      "ds-icon.stub.contract.proposed.json"
+    ],
+    "componentFolders": [
+      "Badge",
+      "Icon"
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/badge",
+    "tarballSha256": "483f38b53dfdc9b71edfb394e321e8a5aa0109e74339b92be5de09005a143947",
+    "distFiles": [
+      "Badge",
+      "Badge/Badge.d.ts",
+      "Badge/Badge.js",
+      "Badge/Badge.module.css",
+      "Badge/index.d.ts",
+      "Badge/index.js",
+      "Icon",
+      "Icon/Icon.d.ts",
+      "Icon/Icon.js",
+      "Icon/Icon.module.css",
+      "Icon/index.d.ts",
+      "Icon/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "5f2471dbfc199ea277544070e2d566f7523f480164b89db00a0a32652eb9d0a1",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "builtCss": {
+      "bytes": 25744,
+      "tokenDefinitions": 355,
+      "tokenDefinitionsExpected": 355
+    }
+  },
+  "outcome": "refused-or-failed"
+}
