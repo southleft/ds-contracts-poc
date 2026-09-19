@@ -3974,6 +3974,19 @@ walked the whole product to validate one tuple. Two rules, both by name:
   radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
   under a millisecond.
 
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
+
 **The ambiguity fence.** Every per-axis inversion rule ("this value is a function
 of axis A") was written for full coverage, where the explanation is unique: if a
 non-uniform observation were a function of A alone and of B alone then
