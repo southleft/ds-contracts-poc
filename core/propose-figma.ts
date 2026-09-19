@@ -984,6 +984,8 @@ const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled 
  *  once per proposal, never mutated; read by the batch post-pass. */
 type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
 const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
+// Observation-only provenance: generated identifiers flatten namespace separators.
+const stubObservedNames = new WeakMap<object, string>();
 
 /** "IconButton" / "close_button" / "Split Button A" → lower-case words. */
 export function nameWords(name: string): string[] {
@@ -1040,10 +1042,12 @@ interface ContractLike {
 }
 
 /** The element(s) and role a contract is taken to render, by the snapshot:
- *  a stub by its name (camel case split), anything else by its semantics. */
+ *  a stub by its observed leaf name (camel case split), anything else by its semantics. */
 function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]; role?: string } {
   if (stub) {
-    const read = inferSemantics(nameWords(typeof c.name === 'string' ? c.name : '').join(' '), [], false);
+    const observed = stubObservedNames.get(c as object);
+    const leaf = observed === undefined ? (typeof c.name === 'string' ? c.name : '') : observed.split('/').map(part => part.trim()).filter(Boolean).at(-1) ?? '';
+    const read = inferSemantics(nameWords(leaf).join(' '), [], false);
     return { elements: read ? [read.element] : [], ...(read?.role ? { role: read.role } : {}) };
   }
   const sem = c.semantics ?? {};
@@ -13147,6 +13151,7 @@ function proposeFromDumpFenced(
   const childStubs: Array<Record<string, unknown>> = [];
   for (const capture of ctx.stubs.values()) {
     const built = buildChildStub(capture, ctx, opts.fileKey ?? null);
+    stubObservedNames.set(built.contract, capture.instanceOf);
     childStubs.push(built.contract);
     if (built.geometry) {
       if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
