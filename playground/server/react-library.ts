@@ -2,6 +2,7 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { randomUUID } from 'node:crypto';
 import { ContractSchema, contractDependencyEdges, type Contract } from '../../scripts/contract-schema.js';
 import { generateComponents } from '../../scripts/generate-components.js';
 import { packageReactLibrary } from '../../scripts/package-react-library.js';
@@ -85,6 +86,7 @@ export async function buildReactLibrary(repoRoot: string, input: ReturnType<type
 
 export function createReactLibraryService(repoRoot: string, build = buildReactLibrary) {
   let busy = false;
+  const downloads = new Map<string, Awaited<ReturnType<typeof buildReactLibrary>>>();
   const json = (res: ServerResponse, status: number, error: string) => { res.statusCode = status; res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store'); res.end(JSON.stringify({ error })); };
   return async (req: IncomingMessage, res: ServerResponse) => {
     let host: URL;
@@ -93,6 +95,16 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
       if (!['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress ?? '') || !['localhost', '127.0.0.1', '[::1]'].includes(host.hostname) || host.username || host.password) throw Error();
     } catch { json(res, 403, 'Local access only.'); return; }
     if ((req.headers.origin && req.headers.origin !== host.origin) || req.headers['sec-fetch-site'] === 'cross-site') { json(res, 403, 'Same-origin access required.'); return; }
+    const route = (req.url ?? '').split('?')[0];
+    const download = /^\/api\/react-library\/download\/([a-f0-9-]+)$/.exec(route);
+    if (req.method === 'GET' && download) {
+      const result = downloads.get(download[1]);
+      if (!result) { json(res, 404, 'Download expired. Prepare the React library again.'); return; }
+      res.setHeader('Content-Type', 'application/gzip'); res.setHeader('Content-Disposition', `attachment; filename="${result.filename}"`);
+      res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Artifact-Sha256', result.tarballSha256);
+      res.end(result.bytes); return;
+    }
+    if (route !== '/api/react-library') { json(res, 404, 'Unknown React library route.'); return; }
     if (req.method !== 'POST') { json(res, 405, 'Use POST.'); return; }
     if (!req.headers['content-type']?.startsWith('application/json')) { json(res, 415, 'Send JSON.'); return; }
     if (Number(req.headers['content-length']) > MAX_BYTES) { json(res, 413, 'React library request exceeds 5 MB.'); return; }
@@ -105,9 +117,10 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
       try { input = parseLibraryRequest(JSON.parse(Buffer.concat(chunks).toString('utf8'))); }
       catch (error) { json(res, 400, error instanceof Error ? error.message : 'Invalid React library input.'); return; }
       const result = await build(repoRoot, input);
-      res.setHeader('Content-Type', 'application/gzip'); res.setHeader('Content-Disposition', `attachment; filename="${result.filename}"`);
-      res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Artifact-Sha256', result.tarballSha256);
-      res.end(result.bytes);
+      const id = randomUUID(); downloads.set(id, result);
+      if (downloads.size > 10) downloads.delete(downloads.keys().next().value!);
+      res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store');
+      res.end(JSON.stringify({ filename: result.filename, name: result.name, sha256: result.tarballSha256, downloadUrl: `/api/react-library/download/${id}` }));
     } catch (error) { json(res, 422, error instanceof Error ? error.message : 'React library generation failed.'); }
     finally { busy = false; }
   };

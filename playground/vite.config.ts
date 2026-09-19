@@ -21,7 +21,7 @@ const sourceReferences: PluginOption = {
     const service = createReferenceService(repoRoot);
     const library = createReactLibraryService(repoRoot);
     server.middlewares.use((req, res, next) => {
-      if (req.url?.split('?')[0] === '/api/react-library') {
+      if (req.url?.split('?')[0] === '/api/react-library' || req.url?.startsWith('/api/react-library/download/')) {
         void library(req, res).catch(() => { res.statusCode = 500; res.end('React library preparation failed.'); });
         return;
       }
