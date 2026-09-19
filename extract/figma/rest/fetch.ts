@@ -98,6 +98,10 @@ export type FetchLike = (url: string, init?: { headers?: Record<string, string> 
  *  (5 s when absent) — the same policy extract/figma/visual-truth/rest.mjs and
  *  visual-parity/figma-api.ts apply. The fourth 429 throws like any HTTP error. */
 export const MAX_429_RETRIES = 3;
+/** The longest single `Retry-After` wait honoured (seconds). A 429 asking for
+ *  more REFUSES by name instead of sleeping for an unbounded time (review M4:
+ *  Figma answers hours-long Retry-After values on an exhausted plan budget). */
+export const MAX_RETRY_AFTER_SECONDS = 60;
 
 export interface ClientOptions {
   /** Injectable for tests / non-browser runtimes. Defaults to global fetch. */
@@ -125,6 +129,9 @@ export interface ClientOptions {
   onVariablesUnavailable?: (info: VariablesRefusal) => void;
   /** Injectable wait for the 429 back-off (tests pass a no-op). */
   sleep?: (ms: number) => Promise<void>;
+  /** Where each 429 wait is announced (default: console.error — stderr in the
+   *  CLI). Never silent. */
+  onRateLimited?: (info: { path: string; attempt: number; waitSeconds: number }) => void;
 }
 
 async function get(path: string, token: string, opts: ClientOptions): Promise<unknown> {
@@ -136,8 +143,22 @@ async function get(path: string, token: string, opts: ClientOptions): Promise<un
     });
   let res = await call();
   for (let attempt = 0; res.status === 429 && attempt < MAX_429_RETRIES; attempt++) {
-    const retryAfter = Number(res.headers?.get('retry-after') ?? '5');
-    await sleep((Number.isFinite(retryAfter) && retryAfter >= 0 ? retryAfter : 5) * 1000);
+    const raw = res.headers?.get('retry-after');
+    const retryAfter = Number(raw ?? '5');
+    const waitSeconds = Number.isFinite(retryAfter) && retryAfter >= 0 ? retryAfter : 5;
+    if (waitSeconds > MAX_RETRY_AFTER_SECONDS) {
+      const err = new Error(
+        `Figma API 429 on ${path} — rate-limit-wait-exceeds-cap: Retry-After ${raw} s is over the ${MAX_RETRY_AFTER_SECONDS} s this import waits (MAX_RETRY_AFTER_SECONDS); refused instead of sleeping — re-run later`,
+      );
+      (err as Error & { status?: number }).status = 429;
+      throw err;
+    }
+    const announce =
+      opts.onRateLimited ??
+      ((info: { path: string; attempt: number; waitSeconds: number }) =>
+        console.error(`figma API 429 on ${info.path} — waiting ${info.waitSeconds} s (Retry-After), retry ${info.attempt} of ${MAX_429_RETRIES}`));
+    announce({ path, attempt: attempt + 1, waitSeconds });
+    await sleep(waitSeconds * 1000);
     res = await call();
   }
   if (!res.ok) {
