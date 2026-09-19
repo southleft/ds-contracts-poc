@@ -112,9 +112,40 @@ export function variantPropValue(prop: { type?: unknown }, key: string): unknown
 const variantValues = (prop: any): unknown[] =>
   prop.type === 'boolean' ? Object.keys(prop.bindings?.figma?.values ?? {}).map(key => variantPropValue(prop, key)) : prop.type?.enum ?? [];
 
+/** The dump set this run mounts: the key or set name `--component` names, else
+ *  the set whose `nodeId` is the contract's own Figma anchor — so a set whose
+ *  name has a space (`Checkbox Group` → generated `CheckboxGroup`) needs no
+ *  alias key, and a closure dump holding several sets is never guessed from. */
+export function findDumpSet(dump: any, contract: any, component: string): any {
+  const isSet = (v: any) => v && typeof v === 'object' && Array.isArray(v.variants);
+  if (isSet(dump[component])) return dump[component];
+  const byName = Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
+  if (byName) return byName;
+  const anchor = contract?.bindings?.figma?.anchors?.nodeId;
+  return typeof anchor === 'string' ? Object.values(dump).find((v: any) => isSet(v) && v.nodeId === anchor) : undefined;
+}
+
+/** Every component id the contract graph reaches through `anatomy…component.id`,
+ *  transitively through the other contracts beside it, with the generated
+ *  folder each resolves to (`null` = no contract in the folder claims the id). */
+export function contractGraph(root: any, siblings: any[]): Array<{ id: string; name: string | null; stub: boolean }> {
+  const byId = new Map(siblings.filter(c => typeof c?.id === 'string').map(c => [c.id, c]));
+  const refs = (c: any): string[] => { const out: string[] = []; const walk = (node: any) => { if (!node || typeof node !== 'object') return; if (typeof node.component?.id === 'string') out.push(node.component.id); for (const v of Object.values(node)) if (v && typeof v === 'object') walk(v); }; walk(c?.anatomy); return out; };
+  const seen = new Map<string, { id: string; name: string | null; stub: boolean }>();
+  const queue = refs(root);
+  while (queue.length) {
+    const id = queue.shift()!;
+    if (seen.has(id) || id === root?.id) continue;
+    const c = byId.get(id);
+    seen.set(id, { id, name: typeof c?.name === 'string' ? c.name : null, stub: c?.__stub === true });
+    if (c) queue.push(...refs(c));
+  }
+  return [...seen.values()].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
 export function deriveCases(dump: any, contract: any, component: string): Case[] {
-  const set = dump[component] ?? Object.values(dump).find((v: any) => v && typeof v === 'object' && v.setName === component);
-  if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}"`);
+  const set = findDumpSet(dump, contract, component);
+  if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}" (by key, set name or the contract's anchor node id)`);
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
   const samples = arraySamples(contract);
@@ -346,7 +377,7 @@ async function main() {
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
-      'single component set; composition, nested instances and instance swaps are not exercised here',
+      'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
     ] };
@@ -359,6 +390,19 @@ async function main() {
     stubContracts: readdirSync(path.dirname(args.contract)).filter(f => /\.stub\.contract(\.proposed)?\.json$/.test(f)),
     componentFolders: readdirSync(args.generated).filter(f => statSync(path.join(args.generated, f)).isDirectory()),
   };
+  // docs/23 §D.43 — the REST import's dependency closure, when one ran, and the
+  // contract graph the mounted component needs: every referenced component is
+  // packaged (the whole generated folder ships), and a reference no generated
+  // folder holds is a named problem, never a silent blank.
+  const closure = dump._provenance?.closure;
+  if (closure) receipt.inputs.closure = { requested: closure.requested.map((r: any) => r.name), followed: closure.pulled.map((p: any) => p.name),
+    notFollowed: closure.unresolved.map((u: any) => `${u.reason}:${u.name ?? u.targetId}`) };
+  const contractDir = path.dirname(args.contract);
+  const siblings = readdirSync(contractDir).filter(f => /\.contract(\.proposed)?\.json$/.test(f)).map(f => {
+    try { const c = JSON.parse(readFileSync(path.join(contractDir, f), 'utf8')); return { ...c, __stub: /\.stub\.contract/.test(f) }; } catch { return null; }
+  }).filter(Boolean);
+  receipt.inputs.contractGraph = contractGraph(contract, siblings).map(ref => ({ ...ref, packaged: ref.name !== null && receipt.inputs.componentFolders.includes(ref.name) }));
+  for (const ref of receipt.inputs.contractGraph) if (!ref.packaged) problems.push(`dependency-not-packaged:${ref.id}`);
   try {
     const lib = packageLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
@@ -554,7 +598,7 @@ async function main() {
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }
     // Compare with Figma's own renders.
-    const setNodeId: string | undefined = (dump[args.component] ?? {}).nodeId;
+    const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
     const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };

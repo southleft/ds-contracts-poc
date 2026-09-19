@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { deriveCases, enterState, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { contractGraph, deriveCases, enterState, findDumpSet, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -118,4 +118,32 @@ test('the text-masked number only NAMES an over-limit row: at the limit is text-
   assert.equal(residualClass(null, 100), 'text-covers-canvas');
   // No text was drawn: an over-limit row cannot be a text residual.
   assert.equal(residualClass(12, 0), 'no-text');
+});
+
+// docs/23 §D.43 — a closure dump holds several sets; the mounted one is found by
+// key, set name, or the contract's own anchor node id (`Checkbox Group` generates
+// `CheckboxGroup`, so the name alone never matched and needed an alias key).
+test('the mounted set is resolved by the contract anchor when --component is the generated name', () => {
+  const multi = { _provenance: {}, Checkbox: { setName: 'Checkbox', nodeId: '1:1', variants: [] }, 'Checkbox Group': { setName: 'Checkbox Group', nodeId: '2:2', variants: [{ name: 'size=large, rounded=false' }] } };
+  const anchored = { ...contract, bindings: { figma: { anchors: { nodeId: '2:2' } } } };
+  assert.equal(findDumpSet(multi, anchored, 'CheckboxGroup')?.setName, 'Checkbox Group');
+  assert.equal(findDumpSet(multi, anchored, 'Checkbox')?.setName, 'Checkbox');
+  assert.equal(findDumpSet(multi, contract, 'CheckboxGroup'), undefined);
+  assert.equal(deriveCases(multi, anchored, 'CheckboxGroup').length, 1);
+});
+
+test('the contract graph names every transitively referenced component, stub or real, and an unclaimed id', () => {
+  const ref = (id: string) => ({ component: { id } });
+  const root = { id: 'ds.tabs', anatomy: { root: { parts: { tab: ref('ds.tab'), panel: ref('ds.tab-panel') } } } };
+  const siblings = [
+    { id: 'ds.tab', name: 'Tab', anatomy: {}, __stub: true },
+    { id: 'ds.tab-panel', name: 'TabPanel', anatomy: { root: { parts: { b: ref('ds.button'), gone: ref('ds.missing') } } } },
+    { id: 'ds.button', name: 'Button', anatomy: { root: { parts: { i: ref('ds.tab-panel') } } } },
+  ];
+  assert.deepEqual(contractGraph(root, siblings), [
+    { id: 'ds.button', name: 'Button', stub: false },
+    { id: 'ds.missing', name: null, stub: false },
+    { id: 'ds.tab', name: 'Tab', stub: true },
+    { id: 'ds.tab-panel', name: 'TabPanel', stub: false },
+  ]);
 });
