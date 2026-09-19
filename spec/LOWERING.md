@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **61** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **62** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -480,13 +480,14 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 
 **Why.** A receipt guarded by the wrong condition. The literal side of the same switch calls literalMiss() in ALL branches including the catch-all else, and has no such hole. This matters beyond padding: it is the general escape through which any unregistered token channel leaves without a word, which is the shape of the tab-size incident that once made validateContract refuse 32 whole components.
 
-### `size` — 7 rules (6 implemented, 1 proposed, 0 wall)
+### `size` — 8 rules (7 implemented, 1 proposed, 0 wall)
 
 Contains both the best and the weakest reasoning in the register. `hugEvidence` and the text hug/fill rule ask real measurements and refuse by name when the measurement is not uniform. The text-part geometry exclusion asks presence-of-ink instead — a proxy standing in for a question the same file already knows how to ask.
 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `css.stroke-outside-layout-inset-ring` | `implemented` | `css.ts:96` | border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0 → strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field) | border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged | **none** | `untested` |
+| `css.text-box-whole-pixel` | `implemented` | `css.ts:1086` | inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box → a TEXT node with textAutoResize WIDTH_AND_HEIGHT — the box sizes itself to its text and is a whole number of pixels wide, the advance rounded up with no letter spacing after the last glyph (core/emit-figma-script.ts writes the field on the text node; createText is born with it) | textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged | **none** | `untested` |
 | `emit.size-maxwidth-ceiling-or-fixed` | `implemented` | `emit-figma-script.ts:2326` | max-width → bindings.maxWidth when the ceiling holds; spec.fixedWidth when it does not | maxWidth as a ceiling; a cap that cannot be carried refused by name rather than baked | **none** | `round-tripped` |
 | `emit.size-minheight-dropped-under-height` | `implemented` | `emit-figma-script.ts:2355` | min-height alongside a height token → nothing — the min-height is dropped in favour of the fixed height | both facts carried — Figma has minHeight and a fixed height and they compose | **none** | `untested` |
 | `emit.size-text-hug-vs-fill` | `implemented` | `emit-figma-script.ts:5026` | a text child inside a container that grants FILL → alignment-safe non-truncating text HUGS; alignment-displaced text keeps FILL and carries fillText | text hugs unless hugging would move it | `emit-facts` | `named` |
@@ -506,6 +507,21 @@ Contains both the best and the weakest reasoning in the register. `hugEvidence` 
 - per-side border colours and non-solid border styles have no ring spelling and are refused by validateContract
 
 **Why.** CSS has no property that says "border, but take no layout space", and a Figma stroke on a designer-drawn auto-layout frame takes none by default. Rewriting padding to padding-minus-border destroys the padding's variable binding and cannot fit a 16px box around 8+8 padding plus a 2px border at all, so the contract keeps the designer's numbers and records the one fact that differs; this rule is where that fact becomes CSS. Absent means in layout — a CSS border under border-box, and what a frame this pipeline writes reads back as — so the fixed point holds in both directions: a generated set proposes no flag, a designer's set proposes the flag and writes it back. Untested by the conformance kit; held by extract/figma/stroke-outside-layout.test.ts and core/react-stroke-outside-layout.test.ts, which measure the box in Chromium.
+
+#### `css.text-box-whole-pixel`
+
+**Context.** packages/core anatomy.ts wholePixelTextBoxDecls, planned per part (wholePixelTextBoxPlan) and pushed into the part's base rule by generateCss (this site and its multi-root twin), the web-components shadowCss and, as the same declarations with tokens resolved, the inline surface's style record; textBoxStaticRefusals (validateContract) and textBoxTokenRefusals (the emitters, which hold the token values) refuse what would be wrong or inert
+
+**Inverse** (`propose-figma.ts`, carryTextAutoResize) emits `textAutoResize: WIDTH_AND_HEIGHT on the text part — the designer's text, tracking and typography channels unchanged` — the canonical form: a designer's auto-width label proposes the flag and the writer sets the field on the text node it builds. The container clamp and `align-self: flex-start` are chrome of the flag and are never read back. NOT a fixed point in the flagless direction: a set this pipeline wrote reads the same value back (createText is born WIDTH_AND_HEIGHT), so a flagless contract's re-read proposes the flag — additive, named in docs/23 §D.42, and pinned by a test.
+
+**Lost.**
+- a browser without calc-size() keeps the fractional box (< 1 px narrower than Figma's, never wider, never a wrap change); align-self: flex-start makes such an engine agree on the POSITION under a stretching column — docs/23 §D.42
+- a part carrying its own max-width gets no container clamp, so in a fractional-width container its wrapped box can overflow by < 1 px
+- the two engines' raw advances still differ by font version: on 8 of 15 Inter samples Figma's box is 1 px wider than ceil(Chromium's advance) — the rule closes the rounding, not the font substrate (FC-FONT-SUBSTRATE)
+- NOT a fixed point in the flagless direction: createText is born WIDTH_AND_HEIGHT and Figma has no fractional text box, so a flagless contract written to the canvas reads the flag back (docs/23 §D.42)
+- a sole root label hoisted into anatomy.root.text is named, not carried; the static HTML preview (core/emit-html.ts) ignores the flag
+
+**Why.** CSS lays a text run out at its fractional advance and adds letter spacing after every glyph; Figma's auto-width text box is the advance rounded up with no spacing after the last glyph. Measured on the 72-variant CBDS Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every content size equal because the hug root rendered 47.40625 px against Figma's 48; and on the committed REST fixtures rendered in Chromium (Manrope Kicker, 6 px tracking: Figma 95 / 87 = ceil less the trailing spacing, 101 / 93 with it). calc-size() is the only CSS that can round an intrinsic size, and an unsupporting parser drops the declaration. The basis is fit-content, not max-content: max-content made a runtime string non-wrapping (review, PR 132 — the flowbite Card grew to 596 px in a 240 px container); fit-content is the max-content box when the text fits and the available width when it does not, and the 100 % clamp removes the sub-pixel overflow rounding a fractional available width would cause. The fact is carried under Figma's own name and only in the value that lowers; absent keeps every existing byte. Untested by the conformance kit; held by extract/figma/whole-pixel-text-box.test.ts and core/react-whole-pixel-text-box.test.ts, which measure the box in Chromium.
 
 #### `emit.size-maxwidth-ceiling-or-fixed`
 

@@ -172,6 +172,8 @@
   font-weight: var(--imported-badge-label-font-weight);
   line-height: var(--imported-badge-label-line-height);
   font-family: Inter, system-ui, sans-serif;
+  inline-size: calc-size(fit-content, round(up, size, 1px));
+  max-inline-size: 100%;
 }
 
 .type-brand.style-fill .Label {

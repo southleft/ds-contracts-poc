@@ -1342,6 +1342,10 @@
           "type": "boolean",
           "const": false
         },
+        "textAutoResize": {
+          "type": "string",
+          "const": "WIDTH_AND_HEIGHT"
+        },
         "textOutOfBox": {
           "type": "object",
           "properties": {

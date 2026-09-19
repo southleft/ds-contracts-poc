@@ -256,7 +256,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "afbd50fb4d0ffc019d5a1cd10d1d14851ea6ade7dc722aed41f27cc27735d914",
+    "lockfileSha256": "a43209b1f1c7c5673183c967021fcdaa92ab21653bb43d6f31baa1be6d75060f",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {

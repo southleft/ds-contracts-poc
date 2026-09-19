@@ -6,7 +6,7 @@
   "component": "Badge",
   "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
   "generatedSha256": {
-    "Badge/Badge.module.css": "369b53da70b0cc21a5ca3e5ff2fbcadb00fbafc6432ca453f7d6ccb60059bdae",
+    "Badge/Badge.module.css": "a0ddeccc38f4b1bf93527849fbe151e24df330dca135d89ee2bebf48ade0b15e",
     "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
     "Badge/Badge.tsx": "2c72fe86021573d757b44d7add97e29097256cfe6aaafe6cf4f7b5d72e2d0da4",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
@@ -32,7 +32,7 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -59,7 +59,7 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -86,7 +86,7 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -113,7 +113,7 @@
         "text": "Label",
         "backgroundColor": "rgb(14, 97, 186)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -140,7 +140,7 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -167,7 +167,7 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -194,7 +194,7 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -221,7 +221,7 @@
         "text": "Label",
         "backgroundColor": "rgb(214, 241, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -248,7 +248,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -275,7 +275,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -302,7 +302,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -329,7 +329,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -356,7 +356,7 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -383,7 +383,7 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -410,7 +410,7 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -437,7 +437,7 @@
         "text": "Label",
         "backgroundColor": "rgb(3, 129, 66)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -464,7 +464,7 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -491,7 +491,7 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -518,7 +518,7 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -545,7 +545,7 @@
         "text": "Label",
         "backgroundColor": "rgb(196, 253, 225)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -572,7 +572,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -599,7 +599,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -626,7 +626,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -653,7 +653,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -680,7 +680,7 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -707,7 +707,7 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -734,7 +734,7 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -761,7 +761,7 @@
         "text": "Label",
         "backgroundColor": "rgb(182, 115, 0)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -788,7 +788,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -815,7 +815,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -842,7 +842,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -869,7 +869,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 246, 204)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -896,7 +896,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -923,7 +923,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -950,7 +950,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -977,7 +977,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1004,7 +1004,7 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1031,7 +1031,7 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1058,7 +1058,7 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1085,7 +1085,7 @@
         "text": "Label",
         "backgroundColor": "rgb(181, 24, 51)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1112,7 +1112,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1139,7 +1139,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1166,7 +1166,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1193,7 +1193,7 @@
         "text": "Label",
         "backgroundColor": "rgb(255, 218, 227)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1220,7 +1220,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1247,7 +1247,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1274,7 +1274,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1301,7 +1301,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1328,7 +1328,7 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1355,7 +1355,7 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1382,7 +1382,7 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1409,7 +1409,7 @@
         "text": "Label",
         "backgroundColor": "rgb(58, 71, 91)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1436,7 +1436,7 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1463,7 +1463,7 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1490,7 +1490,7 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1517,7 +1517,7 @@
         "text": "Label",
         "backgroundColor": "rgb(223, 227, 235)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1544,7 +1544,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1571,7 +1571,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1598,7 +1598,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1625,7 +1625,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1652,7 +1652,7 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1679,7 +1679,7 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1706,7 +1706,7 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1733,7 +1733,7 @@
         "text": "Label",
         "backgroundColor": "rgb(41, 45, 150)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1760,7 +1760,7 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1787,7 +1787,7 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1814,7 +1814,7 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1841,7 +1841,7 @@
         "text": "Label",
         "backgroundColor": "rgb(224, 225, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1868,7 +1868,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1895,7 +1895,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 60.640625,
+        "width": 61,
         "height": 24,
         "tag": "div",
         "role": null,
@@ -1922,7 +1922,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -1949,7 +1949,7 @@
         "text": "Label",
         "backgroundColor": "rgb(252, 254, 255)",
         "color": "rgb(0, 0, 0)",
-        "width": 47.40625,
+        "width": 48,
         "height": 16,
         "tag": "div",
         "role": null,
@@ -2590,13 +2590,12 @@
       {
         "key": "type-brand_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_825.png",
-        "mismatchPercent": 5.859375,
-        "withinLimit": false,
-        "textMaskedPercent": 9.375,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 87.37,
+          "consumer": 89.45,
           "figma": 95.18
         },
         "contentSize": {
@@ -2623,13 +2622,12 @@
       {
         "key": "type-brand_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_919.png",
-        "mismatchPercent": 5.46875,
-        "withinLimit": false,
-        "textMaskedPercent": 10.15625,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 82.94,
+          "consumer": 85.03,
           "figma": 91.54
         },
         "contentSize": {
@@ -2725,7 +2723,7 @@
         "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -2757,7 +2755,7 @@
         "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.32,
+          "consumer": 94.4,
           "figma": 95.83
         },
         "contentSize": {
@@ -2848,13 +2846,12 @@
       {
         "key": "type-brand_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1011.png",
-        "mismatchPercent": 5.46875,
-        "withinLimit": false,
-        "textMaskedPercent": 26.5625,
+        "mismatchPercent": 2.604166666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.77,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
@@ -2881,13 +2878,12 @@
       {
         "key": "type-brand_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1013.png",
-        "mismatchPercent": 6.640625,
-        "withinLimit": false,
-        "textMaskedPercent": 25.78125,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 58.07,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
@@ -2978,13 +2974,12 @@
       {
         "key": "type-success_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_831.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 9.375,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 87.37,
+          "consumer": 89.45,
           "figma": 95.18
         },
         "contentSize": {
@@ -3011,13 +3006,12 @@
       {
         "key": "type-success_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1049.png",
-        "mismatchPercent": 5.338541666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 10.15625,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 82.94,
+          "consumer": 85.03,
           "figma": 91.54
         },
         "contentSize": {
@@ -3108,13 +3102,12 @@
       {
         "key": "type-success_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1065.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 7.8125,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -3141,12 +3134,12 @@
       {
         "key": "type-success_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1067.png",
-        "mismatchPercent": 4.817708333333334,
+        "mismatchPercent": 4.427083333333334,
         "withinLimit": true,
-        "textMaskedPercent": 2.34375,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.97,
+          "consumer": 95.05,
           "figma": 95.83
         },
         "contentSize": {
@@ -3237,13 +3230,12 @@
       {
         "key": "type-success_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1083.png",
-        "mismatchPercent": 6.119791666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 26.5625,
+        "mismatchPercent": 3.2552083333333335,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.77,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
@@ -3270,13 +3262,12 @@
       {
         "key": "type-success_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_835.png",
-        "mismatchPercent": 7.291666666666667,
-        "withinLimit": false,
-        "textMaskedPercent": 25.78125,
+        "mismatchPercent": 2.994791666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 58.07,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
@@ -3367,12 +3358,12 @@
       {
         "key": "type-warning_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_837.png",
-        "mismatchPercent": 4.947916666666666,
+        "mismatchPercent": 3.3854166666666665,
         "withinLimit": true,
-        "textMaskedPercent": 9.375,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 86.98,
+          "consumer": 89.06,
           "figma": 95.18
         },
         "contentSize": {
@@ -3399,12 +3390,12 @@
       {
         "key": "type-warning_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1147.png",
-        "mismatchPercent": 4.557291666666666,
+        "mismatchPercent": 3.3854166666666665,
         "withinLimit": true,
-        "textMaskedPercent": 7.8125,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 82.55,
+          "consumer": 84.64,
           "figma": 91.54
         },
         "contentSize": {
@@ -3500,7 +3491,7 @@
         "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -3532,7 +3523,7 @@
         "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 92.71,
+          "consumer": 94.79,
           "figma": 95.83
         },
         "contentSize": {
@@ -3623,13 +3614,12 @@
       {
         "key": "type-warning_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1153.png",
-        "mismatchPercent": 5.208333333333334,
-        "withinLimit": false,
-        "textMaskedPercent": 25,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.64,
+          "consumer": 57.16,
           "figma": 56.38
         },
         "contentSize": {
@@ -3656,13 +3646,12 @@
       {
         "key": "type-warning_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1155.png",
-        "mismatchPercent": 6.380208333333333,
-        "withinLimit": false,
-        "textMaskedPercent": 22.65625,
+        "mismatchPercent": 2.083333333333333,
+        "withinLimit": true,
+        "textMaskedPercent": 0.78125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 57.94,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
@@ -3753,13 +3742,12 @@
       {
         "key": "type-danger_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_843.png",
-        "mismatchPercent": 5.859375,
-        "withinLimit": false,
-        "textMaskedPercent": 9.375,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 86.98,
+          "consumer": 89.06,
           "figma": 95.18
         },
         "contentSize": {
@@ -3786,13 +3774,12 @@
       {
         "key": "type-danger_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1159.png",
-        "mismatchPercent": 5.46875,
-        "withinLimit": false,
-        "textMaskedPercent": 10.15625,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 82.55,
+          "consumer": 84.64,
           "figma": 91.54
         },
         "contentSize": {
@@ -3883,13 +3870,12 @@
       {
         "key": "type-danger_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1161.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 7.8125,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -3916,12 +3902,12 @@
       {
         "key": "type-danger_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1163.png",
-        "mismatchPercent": 4.6875,
+        "mismatchPercent": 4.427083333333334,
         "withinLimit": true,
-        "textMaskedPercent": 1.5625,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 91.8,
+          "consumer": 93.88,
           "figma": 95.83
         },
         "contentSize": {
@@ -4012,13 +3998,12 @@
       {
         "key": "type-danger_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1165.png",
-        "mismatchPercent": 5.859375,
-        "withinLimit": false,
-        "textMaskedPercent": 26.5625,
+        "mismatchPercent": 2.994791666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.64,
+          "consumer": 57.16,
           "figma": 56.38
         },
         "contentSize": {
@@ -4045,13 +4030,12 @@
       {
         "key": "type-danger_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1167.png",
-        "mismatchPercent": 7.03125,
-        "withinLimit": false,
-        "textMaskedPercent": 25.78125,
+        "mismatchPercent": 2.734375,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 57.94,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
@@ -4142,13 +4126,12 @@
       {
         "key": "type-neutral_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_849.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 9.375,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 87.24,
+          "consumer": 89.32,
           "figma": 95.18
         },
         "contentSize": {
@@ -4175,13 +4158,12 @@
       {
         "key": "type-neutral_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1171.png",
-        "mismatchPercent": 5.338541666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 10.15625,
+        "mismatchPercent": 4.166666666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 82.81,
+          "consumer": 84.9,
           "figma": 91.54
         },
         "contentSize": {
@@ -4272,13 +4254,12 @@
       {
         "key": "type-neutral_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1173.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 7.8125,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -4305,12 +4286,12 @@
       {
         "key": "type-neutral_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1175.png",
-        "mismatchPercent": 4.6875,
+        "mismatchPercent": 4.427083333333334,
         "withinLimit": true,
-        "textMaskedPercent": 1.5625,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 91.67,
+          "consumer": 93.75,
           "figma": 95.83
         },
         "contentSize": {
@@ -4401,13 +4382,12 @@
       {
         "key": "type-neutral_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1177.png",
-        "mismatchPercent": 5.208333333333334,
-        "withinLimit": false,
-        "textMaskedPercent": 21.09375,
+        "mismatchPercent": 2.213541666666667,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.77,
+          "consumer": 57.29,
           "figma": 55.86
         },
         "contentSize": {
@@ -4434,13 +4414,12 @@
       {
         "key": "type-neutral_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1179.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 14.84375,
+        "mismatchPercent": 2.34375,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 57.94,
+          "consumer": 58.46,
           "figma": 57.42
         },
         "contentSize": {
@@ -4531,13 +4510,12 @@
       {
         "key": "type-accent_style-fill_size-small_rounded-false",
         "figmaImage": "figma-277_855.png",
-        "mismatchPercent": 5.859375,
-        "withinLimit": false,
-        "textMaskedPercent": 9.375,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 87.24,
+          "consumer": 89.32,
           "figma": 95.18
         },
         "contentSize": {
@@ -4564,13 +4542,12 @@
       {
         "key": "type-accent_style-fill_size-small_rounded-true",
         "figmaImage": "figma-277_1183.png",
-        "mismatchPercent": 5.46875,
-        "withinLimit": false,
-        "textMaskedPercent": 10.15625,
+        "mismatchPercent": 4.296875,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 82.81,
+          "consumer": 84.9,
           "figma": 91.54
         },
         "contentSize": {
@@ -4661,13 +4638,12 @@
       {
         "key": "type-accent_style-tonal_size-small_rounded-false",
         "figmaImage": "figma-277_1185.png",
-        "mismatchPercent": 5.729166666666666,
-        "withinLimit": false,
-        "textMaskedPercent": 7.8125,
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 97.4,
+          "consumer": 99.48,
           "figma": 99.48
         },
         "contentSize": {
@@ -4694,12 +4670,12 @@
       {
         "key": "type-accent_style-tonal_size-small_rounded-true",
         "figmaImage": "figma-277_1187.png",
-        "mismatchPercent": 4.6875,
+        "mismatchPercent": 4.427083333333334,
         "withinLimit": true,
-        "textMaskedPercent": 1.5625,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 83.33333333333334,
         "inkCoveragePercent": {
-          "consumer": 91.67,
+          "consumer": 93.75,
           "figma": 95.83
         },
         "contentSize": {
@@ -4790,13 +4766,12 @@
       {
         "key": "type-accent_style-outline_size-small_rounded-false",
         "figmaImage": "figma-277_1189.png",
-        "mismatchPercent": 5.989583333333334,
-        "withinLimit": false,
-        "textMaskedPercent": 26.5625,
+        "mismatchPercent": 3.125,
+        "withinLimit": true,
+        "textMaskedPercent": 3.125,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 56.77,
+          "consumer": 57.29,
           "figma": 56.38
         },
         "contentSize": {
@@ -4823,13 +4798,12 @@
       {
         "key": "type-accent_style-outline_size-small_rounded-true",
         "figmaImage": "figma-277_1191.png",
-        "mismatchPercent": 7.161458333333333,
-        "withinLimit": false,
-        "textMaskedPercent": 26.5625,
+        "mismatchPercent": 2.864583333333333,
+        "withinLimit": true,
+        "textMaskedPercent": 3.90625,
         "textMaskCoveragePercent": 83.33333333333334,
-        "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 58.07,
+          "consumer": 58.59,
           "figma": 57.42
         },
         "contentSize": {
@@ -4855,34 +4829,7 @@
       }
     ]
   },
-  "problems": [
-    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-false:5.86%",
-    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-true:5.47%",
-    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-false:5.47%",
-    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-true:6.64%",
-    "image-difference-above-limit:type-success_style-fill_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-success_style-fill_size-small_rounded-true:5.34%",
-    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-success_style-outline_size-small_rounded-false:6.12%",
-    "image-difference-above-limit:type-success_style-outline_size-small_rounded-true:7.29%",
-    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-false:5.21%",
-    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-true:6.38%",
-    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-false:5.86%",
-    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-true:5.47%",
-    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-false:5.86%",
-    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-true:7.03%",
-    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-true:5.34%",
-    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-false:5.21%",
-    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-true:5.73%",
-    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-false:5.86%",
-    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-true:5.47%",
-    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-false:5.73%",
-    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-false:5.99%",
-    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-true:7.16%"
-  ],
+  "problems": [],
   "limitations": [
     "single component set; composition, nested instances and instance swaps are not exercised here",
     "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
@@ -4903,7 +4850,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "ac69a101925c7824df957dd9fa3b180f4dc2a266ca70eed27f89078cd793e1d6",
+    "tarballSha256": "d16869d92c3666609d8aed3d0d480122af3ec648df81c0f36f30a5fa1311361e",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -4925,14 +4872,14 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "1fce855ed9a505ed76dbe57d275a0bb5bbb168f752479c702174065559945155",
+    "lockfileSha256": "37fc81b6f3d4d4a8f49c3485c419583a22c31405cbaef52b26a08438b9892a27",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 26152,
+      "bytes": 26238,
       "tokenDefinitions": 355,
       "tokenDefinitionsExpected": 355
     }
   },
-  "outcome": "refused-or-failed"
+  "outcome": "consumer-mounted-behaved-and-compared"
 }

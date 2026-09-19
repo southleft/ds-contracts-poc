@@ -5,9 +5,9 @@
   "nodeId": "53:4186",
   "mode": "reviewable-inversion",
   "variantCount": 10,
-  "contractSha256": "b9ac1ba2af5b9e1444935ff52e49fce226de9d23ca4037117e0b4b7949019eb3",
+  "contractSha256": "0c25fb207d0245dd896b3e79d47c78a4e187dc0ac38764d0bedb9006f866cb32",
   "carriage": {
-    "carried": 164,
+    "carried": 174,
     "named": 318,
     "silent": 0
   },
@@ -198,6 +198,11 @@
       0,
       0
     ],
+    "text textAutoResize (whole-pixel auto-width box)": [
+      10,
+      0,
+      0
+    ],
     "boundVariables.size": [
       0,
       20,
@@ -296,14 +301,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Chip/Chip.module.css": "84746e8f22b5ff61843dc61b593040e8388387c49f8e27e23ab3ec88c21d0dbe",
+    "react/Chip/Chip.module.css": "07e6dea2526ad301b7d23bc4b771a2e0ddc17fc98136715642de364ad58bcdd2",
     "react/Chip/Chip.stories.tsx": "ca61fdee0da6fe61d3cad01750f571e0fbdc9e8be80b0d2f4ce40aa8c83be0ff",
     "react/Chip/Chip.tsx": "afb632fbbf233a1afee3f3ff606de8d60784d7ecc6ef3265179cbdd469df4119",
     "react/Chip/index.ts": "746419f2d2117cbcc865908573d71d3f7cd68faf21931422456e4200c760fa7b",
     "wc/ds-chip.ts": "e9b0bce04af4a5c468c85579241d7c5a984f496fc556e777f75a01900e6f9a58",
-    "wc/ds-chip.css.ts": "b579214b40ed7de122cb5184ebc34d076701c3154c6cae89eb4e59eb05e8c3e5",
+    "wc/ds-chip.css.ts": "a30807250f09aed98ac0fb7938b9d7e08fddf8334c0c355ba22f9eef39a04c33",
     "wc/ds-chip.demo.html": "7ec34bdb0c30107721a0eb3c9531c439b2a4c3ebcb481c46aed24bde35049d87",
     "wc/ds-chip.custom-elements.json": "cb33a966adc13cb77baa56fd241b9c3930e81223da3a0ecc679e737ef0ef5f44"
   },
-  "notesCount": 269
+  "notesCount": 270
 }

@@ -6,7 +6,7 @@
   "component": "Badge",
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
-    "Badge/Badge.module.css": "0e60fef0e14c2ac547a9e1669321164c14b2980b7bc940d93f682ac187e3c092",
+    "Badge/Badge.module.css": "5d2b5cb6350ccdebe722fa6214c635e34023f6a122c851f7f3c7be90aa0d340c",
     "Badge/Badge.stories.tsx": "fdd105f527688631b8b7732444139ec580bbf97300d9d81dda53e050ccc268ee",
     "Badge/Badge.tsx": "2771bb72c487d40966c20a3ae086bf6c6e8648a21286db6e727fd3f09e1862c8",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
@@ -26,7 +26,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(56, 25, 28)",
         "color": "rgb(0, 0, 0)",
-        "width": 57.265625,
+        "width": 57,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -51,7 +51,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(121, 116, 105)",
         "color": "rgb(0, 0, 0)",
-        "width": 57.265625,
+        "width": 57,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -76,7 +76,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(43, 58, 99)",
         "color": "rgb(0, 0, 0)",
-        "width": 57.265625,
+        "width": 57,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -101,7 +101,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(20, 48, 31)",
         "color": "rgb(0, 0, 0)",
-        "width": 57.265625,
+        "width": 57,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -126,7 +126,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(47, 38, 16)",
         "color": "rgb(0, 0, 0)",
-        "width": 57.265625,
+        "width": 57,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -319,17 +319,17 @@
       {
         "key": "variant-danger_shape-label",
         "figmaImage": "figma-3538_35762.png",
-        "mismatchPercent": 3.189655172413793,
+        "mismatchPercent": 3.245614035087719,
         "withinLimit": true,
         "textMaskedPercent": 0,
-        "textMaskCoveragePercent": 86.20689655172413,
+        "textMaskCoveragePercent": 87.71929824561403,
         "inkCoveragePercent": {
-          "consumer": 92.59,
+          "consumer": 94.21,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -339,7 +339,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -351,17 +351,17 @@
       {
         "key": "variant-neutral_shape-label",
         "figmaImage": "figma-3538_35764.png",
-        "mismatchPercent": 4.310344827586207,
+        "mismatchPercent": 4.385964912280701,
         "withinLimit": true,
         "textMaskedPercent": 0,
-        "textMaskCoveragePercent": 86.20689655172413,
+        "textMaskCoveragePercent": 87.71929824561403,
         "inkCoveragePercent": {
-          "consumer": 92.41,
+          "consumer": 94.04,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -371,7 +371,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -383,17 +383,17 @@
       {
         "key": "variant-info_shape-label",
         "figmaImage": "figma-3538_35766.png",
-        "mismatchPercent": 3.9655172413793105,
+        "mismatchPercent": 4.035087719298246,
         "withinLimit": true,
         "textMaskedPercent": 0,
-        "textMaskCoveragePercent": 86.20689655172413,
+        "textMaskCoveragePercent": 87.71929824561403,
         "inkCoveragePercent": {
-          "consumer": 92.59,
+          "consumer": 94.21,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -403,7 +403,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -415,17 +415,17 @@
       {
         "key": "variant-success_shape-label",
         "figmaImage": "figma-3538_35768.png",
-        "mismatchPercent": 4.224137931034483,
+        "mismatchPercent": 4.298245614035088,
         "withinLimit": true,
         "textMaskedPercent": 0,
-        "textMaskCoveragePercent": 86.20689655172413,
+        "textMaskCoveragePercent": 87.71929824561403,
         "inkCoveragePercent": {
-          "consumer": 92.59,
+          "consumer": 94.21,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -435,7 +435,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -447,17 +447,17 @@
       {
         "key": "variant-warning_shape-label",
         "figmaImage": "figma-3538_35770.png",
-        "mismatchPercent": 4.741379310344827,
+        "mismatchPercent": 4.824561403508771,
         "withinLimit": true,
         "textMaskedPercent": 0,
-        "textMaskCoveragePercent": 86.20689655172413,
+        "textMaskCoveragePercent": 87.71929824561403,
         "inkCoveragePercent": {
-          "consumer": 92.59,
+          "consumer": 94.21,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -467,7 +467,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 58,
+            "width": 57,
             "height": 20
           },
           "figma": {
@@ -656,7 +656,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "cb08456cc0aba053b56ff328cefe8f49120d8a64ba26ba43bfa22751936ccf5c",
+    "tarballSha256": "c95428da787ace7e5101440b1eaf28ffd1375bd8d052e3fdf7167557bffadb44",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -672,11 +672,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "7c9f4b81c8423672f9c6aa484591be37a8a797e7b3e61e883a31335557b7443c",
+    "lockfileSha256": "b1f39b4e65e9666b138e08402a76e0bb44e0528b33044853f7ca05203cd3a84f",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 16582,
+      "bytes": 16674,
       "tokenDefinitions": 303,
       "tokenDefinitionsExpected": 303
     }

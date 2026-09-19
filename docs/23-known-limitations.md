@@ -4419,3 +4419,301 @@ referee, the emitted React, the planner), four rows in
 `core/exact-proposal-check.ts`, and `scripts/design-consumer-check.test.ts`
 (`npm run design:consumer:test`, incl. the browser test of the three named state
 problems).
+
+## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+
+**2026-09-19. A lowering decision taken by the agent under the owner's standing
+delegation (never a grade, never a tolerance); recorded so it can be reversed.**
+After §D.39 the design-led consumer check on the 72-variant CBDS Badge still
+missed the unchanged 5 % limit on 26 variants — every `size=small` one, 48 × 16 px,
+at 4.4–7.3 % — with every content size equal. Verified through Figma REST: the
+TEXT node `Label` has `style.textAutoResize: "WIDTH_AND_HEIGHT"` and
+`absoluteBoundingBox.width = 32.0`. Figma's auto-width text box is a WHOLE number
+of pixels: the glyph advance rounded up. Chromium lays the same run (Inter Semi
+Bold 14) out at 31.40625 px, so the hug root rendered 47.40625 px wide where
+Figma's is 48 and the right border antialiased across two columns. Neither reader
+captured how the box sizes itself, so the proposer could not lower it.
+
+**Decision.** Keep the designer's numbers. The text part records the one captured
+fact, under Figma's own name and only in the value that lowers:
+`Part.textAutoResize: "WIDTH_AND_HEIGHT"`. `NONE`, `HEIGHT` and the deprecated
+`TRUNCATE` are a fixed or filled box, which the width and fill vocabulary already
+carries, and are never written. ABSENT is the meaning every contract already had —
+the element as wide as its fractional browser advance — so no existing contract or
+emitted byte changes; `figma:fresh` and `generated:fresh` are green.
+
+**Form** (revised after the adversarial review — see below). The code surfaces
+give the text element the same box Figma draws:
+
+```
+inline-size: calc-size(fit-content, round(up, size, 1px));
+inline-size: calc-size(fit-content, round(up, size - <letter-spacing>, 1px));   /* a tracked label */
+max-inline-size: 100%;        /* unless the part carries its own max-width */
+align-self: flex-start;       /* only under a flex column that would stretch it */
+```
+
+`calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
+cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
+available))`: a label that fits is its max-content box rounded up; a string that
+does not fit wraps at the available width exactly as it does without the fact.
+`max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
+box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
+A browser without `calc-size()` drops the `inline-size` declaration at parse (a
+stylesheet) or ignores the assignment (the CSSOM, i.e. the inline surface) and
+keeps today's fractional box, under 1 px narrower — never wider and never a wrap
+change; no `@supports` guard is needed and none could be spelled inline. Logical
+properties, so a vertical or RTL writing mode rounds the axis the text runs along.
+The declaration takes effect because every emitter renders a text part as its own
+element inside a parent it lays out as flex or grid (blockified), and an absolutely
+positioned one is blockified too; where that is not true the flag is refused (see
+below). `text-align` composes (the run is aligned inside the up-to-1-px-wider box,
+as Figma aligns it inside its whole-pixel box). Emitted by `generateCss` (both
+sites), the web components' `shadowCss` and, as the same declarations with tokens
+resolved, the inline surface's style record (`wholePixelTextBoxDecls`,
+`packages/core/src/anatomy.ts`); the lowering is registered as
+`css.text-box-whole-pixel` with its inverse `carryTextAutoResize`.
+
+**The tracking finding, measured before it was coded.** The first cut rounded the
+raw `max-content` and REGRESSED the Altitude Badge from 10 / 10 to 9 / 10: its
+label (`Badge`, Public Sans 600 12 px, 1 px letter spacing) is 41 px in Figma and
+41.27 px in Chromium, so rounding up gave 42. CSS adds `letter-spacing` after
+EVERY glyph, the last included; Figma's box has none after the last. On the
+committed REST fixtures rendered in Chromium with the fonts loaded:
+
+| text | Figma box | Chromium max-content | ceil, all spacings | ceil, less the last |
+|---|---:|---:|---:|---:|
+| Eventz Kicker, Manrope 700 18 px, UPPER, 6 px tracking | 95 | 100.05 | 101 | **95** |
+| Eventz Kicker, Manrope 700 16 px, UPPER, 6 px tracking | 87 | 92.94 | 93 | **87** |
+| Altitude Badge label, Public Sans 600 12 px, 1 px tracking | 41 | 41.27 | 42 | **41** |
+
+Three of three tracked samples: Figma's box is the run less the trailing spacing,
+rounded up. The part's own uniform `letter-spacing` is therefore shed before
+rounding — a literal verbatim, a token as its `var()` on the sheets and as its
+resolved value inline. A `letter-spacing` that varies by variant or state, or
+rides a placeholder token, has no single spelling in the base rule and is refused
+beside the flag. On the 23 untracked samples the two forms are the same number.
+
+**The premise, measured on 26 samples.** Every WIDTH_AND_HEIGHT text node in the
+committed REST fixtures whose font could be loaded (Inter locally; Manrope, Geist
+and Public Sans from Google Fonts): the rule reproduces Figma's box exactly on 18
+(7 / 7 Manrope headings, 3 / 3 tracked, 7 / 15 Inter, Geist). The 8 misses are all
+Inter and all in the SAME direction — Figma 1 px wider than the rounded Chromium
+run, by 1.16–1.77 px before rounding: a different Inter build in Figma than the
+one installed here, the font substrate `FC-FONT-SUBSTRATE` already names. On none
+of the 26 is the rounded box wider than Figma's. The rule closes the rounding, not
+the font.
+
+**Readers (dump v1.36).** Both write `text.textAutoResize` verbatim on every text
+node (REST `style.textAutoResize`; plugin `node.textAutoResize`; the four Plugin
+API spellings and nothing else). An ABSENT dump field means "not captured" (dump
+≤ v1.35, or a canvas that reports nothing — the mock), never auto-width: older
+dumps propose the bytes they always did. On the REST route an absent RESPONSE key
+is read as `NONE` (see the review, M4). Re-pinned by the previous bump's recipe:
+`plugin-engine-check.mjs` ×2, `flowbite-dump-propose-check.ts`,
+`sync/fixtures/ledger.fixture.json` ×4, the reader tests, `ui.html` re-embedded
+(`npm run plugin:embed-dump`), the engine receipt re-recorded, the door register
+re-derived, 69 lowering citations re-located by marker id and exact rule text.
+
+**Proposer** (`carryTextAutoResize`, beside `carryTextAlign`; five doors):
+WIDTH_AND_HEIGHT in every captured variant → the flag
+(`propose.text-box-absent-is-fractional` and
+`propose.text-box-not-auto-width-unchanged` are the two silent no-ops: not
+captured, or a fixed / filled box); auto-width in some variants and not others —
+including a variant that reports nothing — is NAMED
+(`propose.text-box-mixed-refused`); WIDTH_AND_HEIGHT beside
+`layoutSizingHorizontal: FILL` is a dump that contradicts itself — Figma turns a
+filled text box to HEIGHT — and is NAMED, the part keeping the fill it carries
+(`propose.text-box-fill-contradiction-refused`). On every committed REST fixture
+(352 text nodes with a sizing field) WIDTH_AND_HEIGHT pairs only with HUG, and
+HEIGHT only with FILL or FIXED. A sole root text node named `label` is hoisted into
+`anatomy.root.text`; the fact is NAMED there, not carried
+(`propose.text-box-hoisted-root-named`): the root's box is padding plus content,
+and rounding padding + advance is a different number whenever the padding is
+fractional. A flag the finished contract could not honour (the refusals below)
+is WITHDRAWN by name (`propose.text-box-unhonourable-withdrawn`, the same function
+validateContract uses) rather than proposed into a contract that is then refused.
+
+**Writer.** `core/emit-figma-script.ts` had never set `textAutoResize`;
+`figma.createText()` is born `WIDTH_AND_HEIGHT` (measured: 203 of 203 text nodes
+with a sizing field in the pipeline-generated census sets read it back, all HUG).
+A part carrying the flag compiles it onto its text spec (the bare text, the
+`content` text and the text inside a boxed-text wrapper — never inherited by a
+nested child) and the runtime writes `node.textAutoResize = 'WIDTH_AND_HEIGHT'`,
+feature-gated so a script for any contract without the flag is byte-identical.
+Contract → writer → REAL plugin reader → proposer is a fixed point for the flag
+(`extract/figma/whole-pixel-text-box.test.ts`, on the mock canvas, where the field
+exists only where the writer set it). **It is NOT a fixed point in the other
+direction**, stated plainly: `createText` is born `WIDTH_AND_HEIGHT`, so every
+hugging text part of a FLAGLESS contract, written to a real canvas and read back,
+proposes the flag. code → canvas → code therefore adds the fact. That is the truth
+about the canvas (Figma has no fractional text box) and, with `fit-content`, it
+changes nothing but the sub-pixel box of a text that fits; checked: it churns no
+committed pin — the mock canvas the committed round-trip gates run on does not
+model the field, and no live round-trip receipt was re-recorded in this change.
+
+**Refused by name** (`validateContract`): the flag on a top-level root; on a part
+that owns no text (`text` / `content` / `textByProp`); beside a `width` /
+`inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
+truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
+that is sized, filled or truncated by a channel is not sized by its text; beside a
+per-variant / per-state or placeholder-token `letter-spacing`; beside a literal
+`letter-spacing` that is not a px / em / rem length; when the part INHERITS
+`letter-spacing` from any ancestor holder (root or part; literal, token or
+per-variant) and states none of its own; on an inline-level element (the part
+declared `display: inline` / `contents`, or a parent that is not a flex / grid
+box, unless the part is absolutely placed or itself block-level). The emitters,
+which hold the token VALUES, refuse a letter-spacing TOKEN that resolves to
+anything but a px / em / rem length in any mode (a `%`, a unitless `0`, `normal`),
+and a token when no values were supplied (the §D.39 shadow precedent). The schema
+spells only `"WIDTH_AND_HEIGHT"`.
+
+**Revised after an adversarial review (PR 132, same day; fix-then-merge).** Each
+finding was reproduced by the reviewer's probes and each fix re-measured with
+them in Chromium:
+
+- **H1 — `max-content` made runtime text non-wrapping.** The first cut spelled
+  `calc-size(max-content, …)`, a definite, unwrappable box. On the shipped
+  `flowbite.card` the proposer carries the fact onto `label-text` (bound to
+  `children`), and a long runtime string grew the card to 596 px inside a 240 px
+  container; a fixed-width column or grid parent stopped wrapping the same way —
+  while Safari and Firefox, which drop the declaration, wrapped. Now
+  `calc-size(fit-content, …)`: the card is back to 240 px with the same three
+  lines, the badge unchanged at 50 / 34. `fit-content` alone still rounded a
+  WRAPPED box's fractional available width up (a 120.5 px column: 121, 0.5 px
+  over), so `max-inline-size: 100%` clamps it — measured 120.5 in a flex column,
+  a flex row, a grid and a fit-content card, and unchanged for every label that
+  fits. (`min(…, 100%)` inside `calc-size()` collapsed the badge to 0 and was
+  rejected.) A part that carries its own `max-width` keeps it and gets no clamp:
+  both spell one property in one rule, and ours would override the author's.
+  Pinned: long text in a 120.5 px and a 240 px flex column and a 120.5 px grid,
+  both React surfaces — the same line count and block size as without the fact,
+  no overflow, the component not wider.
+- **H2 — code → canvas → code adds the fact.** Stated plainly under **Writer**
+  above: not a fixed point in the flagless direction; acceptable only because,
+  after H1, the fact changes nothing but the sub-pixel box of a text that fits.
+  It churns no committed pin (the round-trip gates run on a mock canvas that
+  does not model the field).
+- **M1 — "never a different layout" was false.** Under a flex column with no
+  cross-axis alignment CSS STRETCHES a text item. With `calc-size()` the
+  explicit inline-size stops the stretch (a centred label at x = 0); without it
+  the box stretched and the centred run sat at x = 84 in a 200 px column — the
+  engines disagreed. **AGENT decision:** a flagged part under such a parent (a
+  flex column whose `align` is absent or `stretch`, with no `layoutByProp`, the
+  part not absolutely placed and declaring no `align-self`) also gets
+  `align-self: flex-start`. It is Figma's own geometry: a text box that sizes
+  itself to its text is a HUG child and sits at a MIN-drawn column's start
+  edge — a CENTER- or MAX-drawn column already proposes an `align` and is left
+  alone. Now both kinds of engine draw x = 0 (pinned, with the calc-size
+  declaration stripped to stand in for an engine without it). It is chrome of the
+  flag: the proposer never reads it back. **To reverse:** drop the `align-self`
+  push in `wholePixelTextBoxDecls`; the M1 split returns as a named limit.
+- **M2 — inherited tracking.** A root's per-variant `letter-spacing: 2px`,
+  inherited by the flagged label, was neither subtracted nor refused: a 42 px box
+  where Figma's is 40. Now refused by name whenever any ancestor holder (root or
+  part; literal, token, per-variant or per-state) states `letter-spacing` and the
+  part states none of its own.
+- **M3 — tracking that cannot be subtracted.** A `%` subtracts against the
+  containing block (a `-0.5 %` token gave a box wider than Figma's); a token
+  resolving to a unitless `0` or `normal` made `size - var(…)` invalid at
+  computed-value time — a silent no-op. Only a px / em / rem length is
+  subtracted now; a literal of any other kind is refused by validateContract, a
+  token by the emitters from its resolved VALUE in every mode (they hold the
+  token trees), and a token with no values supplied is refused too.
+- **M4 — does REST omit `NONE`?** Two read-only GETs (Altitude Radio
+  `3543:47540`: 9 labels; CBDS Avatar `284:11`: 20 texts) found no `NONE` node to
+  settle it: every text reported `WIDTH_AND_HEIGHT` or `HEIGHT` explicitly. REST
+  omits defaults elsewhere (`strokesIncludedInLayout`), and `NONE` is this
+  field's default. **AGENT decision:** the REST reader reads an absent key as
+  `NONE`, and the proposer treats any variant reporting nothing beside
+  auto-width ones as the mixed case. Safe under either truth — if REST sends
+  `NONE`, absence never happens; if it omits it, a fixed box beside auto-width
+  variants is refused by name, never a silent auto-width. **To reverse:** delete
+  the `else` branch in `mapText` (`extract/figma/rest/map.ts`). UNVERIFIED on a
+  real `NONE` node; named here.
+- **Low — inline-level elements.** A part declared `display: inline` /
+  `contents`, or one whose parent is not a flex / grid box (a root declared
+  `display: block`), made the rule a silent no-op; refused by name. A flag the
+  proposer captured but the finished contract could not honour is withdrawn by
+  name (`propose.text-box-unhonourable-withdrawn`).
+
+**Measured after** (re-measured after the review fixes, fresh read-only REST reads
+under dump v1.36, same unchanged 5 % limit — every row equal to the digit to the
+first cut, because every label on these sets fits):
+
+| set | before | after |
+|---|---|---|
+| CBDS Badge `277:822`, 72 variants | 46 / 72; 0.96–7.29 %, median 3.92 % | **72 / 72**; 0.96–4.43 %, median 3.06 %; every rendered width exactly Figma's (36 × 61, 36 × 48) |
+| Altitude Badge `3538:35772`, 10 variants | 10 / 10; 0.00–4.74 % | **10 / 10**; 0.00–4.82 %; the label box now 57 px against Figma's 57 (was 58); the five label rows move by +0.06–0.08 points (Public Sans rendering), the five dots stay 0.00 |
+| Altitude Tabs `3558:61955`, 2 variants | 0 / 2; 5.54 % / 5.19 % | 0 / 2; **unchanged to the digit** — its text lives inside child instance stubs the dump does not capture, so no part carries the fact |
+
+| CBDS style × size | pass before | pass after | before (min / median / max) | after (min / median / max) |
+|---|---|---|---|---|
+| fill × large | 12/12 | 12/12 | 2.66 / 3.42 / 3.42 % | unchanged to the digit |
+| fill × small | 2/12 | **12/12** | 4.56 / 5.47 / 5.86 % | 3.39 / 4.23 / 4.30 % |
+| tonal × large | 12/12 | 12/12 | 1.91 / 1.91 / 1.91 % | unchanged to the digit |
+| tonal × small | 8/12 | **12/12** | 4.43 / 4.69 / 5.73 % | 4.43 / 4.43 / 4.43 % |
+| outline × large | 12/12 | 12/12 | 0.96 / 1.23 / 1.50 % | unchanged to the digit |
+| outline × small | 0/12 | **12/12** | 5.21 / 6.05 / 7.29 % | 2.08 / 2.67 / 3.26 % |
+
+All 36 large rows are unchanged to the digit (their `Label` rounds to the same
+61 either way). The design-to-code census counts the fact: 3,009 carried, 4,065
+named, 0 silent (was 2,904 / 3,985 after §D.39; the Flowbite sets' labels are the
+hoisted root label and count as named). Evidence:
+`recipe/evidence/design-led-consumer/{cbds-badge,altitude-badge,altitude-tabs}/`.
+
+**Named limits.**
+
+- **Browsers without `calc-size()`** keep the fractional box: under 1 px narrower
+  than Figma's, never wider and never a wrap change — the defect this closes, not
+  a new one. Their POSITION agrees under a stretching column because of
+  `align-self` (M1); where that declaration is not written (a column whose
+  alignment varies by variant) the two kinds of engine still place a centred
+  label differently.
+- **A part with its own `max-width`** gets no container clamp, so its WRAPPED box
+  in a fractional-width container can overflow by under 1 px.
+- **Trailing tracking sits outside the box.** The subtracted letter spacing after
+  the last glyph still paints as empty space, so a Range over the text reports it
+  past the box edge (0.06 px at 0.05em in a probe); no ink overflows — Figma's box
+  has no such spacing. Support is
+  not enumerated here; the Chromium `playwright-core` pins has it (asserted by the
+  React test), and the consumer check measures in that Chromium only.
+- **The font substrate stays.** Where the two engines disagree on the RAW advance
+  by more than the rounding slack (8 of 15 Inter samples, 1.16–1.77 px), Figma's
+  box is still 1 px wider than the rounded browser run. `FC-FONT-SUBSTRATE`.
+- **A flagless contract's text reads the fact back.** `createText` is born
+  `WIDTH_AND_HEIGHT` and Figma has no fractional text box, so a set this pipeline
+  wrote from a contract without the flag proposes the flag on its re-read — the
+  truth about the canvas, additive, and pinned by a test so it cannot become
+  silent. This is the one place the fixed point is one-directional: the flag
+  round-trips; its absence does not. The census on the pipeline-generated
+  figma-ds sets reflects it (carried), and no committed proposal changed (every
+  committed dump predates the field).
+- **The hoisted root label** (a sole root text node named `label`) is named, not
+  carried; the root keeps the fractional advance.
+- **A tracked label with per-variant or per-state tracking** is refused beside the
+  flag rather than given a private custom property; the proposer never writes
+  per-variant tracking (a mixed `letter-spacing` is already named), so the
+  refusal reaches only hand-written contracts.
+- The mock canvas does not model the field (it reports nothing, which reads as
+  "not captured"). The Playground's canvas preview ignores the flag.
+
+**Still open.** `core/emit-html.ts` (the static HTML preview) ignores the flag — no
+whole-pixel box, no clamp, no `align-self` — and draws the fractional box:
+a preview surface outside the React + WC core scope (the surface the computed
+gate scores through); named here, not fixed. Altitude Tabs' labels are inside
+child instance stubs and out of reach until stub content is captured.
+
+**To reverse.** Delete `carryTextAutoResize` and its four doors, the hoisted
+note and `settleTextAutoResize`, in `core/propose-figma.ts` (no contract then carries the flag and every
+surface emits what it did); or keep the capture and delete the three
+`wholePixelTextBoxPlan` pushes (`css.ts` ×2, `emit-wc.ts`) and the
+`applyDeclStrings(s, textBoxes…)` line in `emit-react-inline.ts` to fall back to
+the fractional box. The two review decisions reverse on their own (above). The schema
+field and the dump field are additive and can stay. **Gates:**
+`extract/figma/whole-pixel-text-box.test.ts` (`npm run exact-proposal:check` — both
+readers, proposer incl. every refusal, writer round trip through the real plugin
+reader, the flagless re-read pinned) and `core/react-whole-pixel-text-box.test.ts`
+(`npm run react:conformance:check` — all three surfaces, the tracking spellings,
+every validator refusal, and the box MEASURED in Chromium: rounded up less the
+trailing tracking, the hug root following, a centred run centred, RTL at the right
+edge, vertical writing rounding the block dimension).

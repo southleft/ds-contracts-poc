@@ -380,6 +380,15 @@ export interface NodeSpec {
   textAlignH?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
   fontFamily?: string;
   textTruncation?: boolean;
+  /** dump v1.36 — `Part.textAutoResize: 'WIDTH_AND_HEIGHT'`: the text box
+   *  sizes itself to its text, and a Figma text box that does so is a whole
+   *  number of pixels wide. The runtime writes `node.textAutoResize` on the
+   *  TEXT node — the value `figma.createText()` is born with, so a script
+   *  with no spec carrying it is byte-identical and its text nodes read the
+   *  same value back (a set this pipeline wrote proposes the fact; docs/23
+   *  §D.42). Only this value is ever carried; it is the part's own fact and
+   *  is never inherited by a nested text child. */
+  textAutoResize?: 'WIDTH_AND_HEIGHT';
   /** v14 literals: literal-fidelity channels resolved from component-private
    *  source literals (schema `literals`/`literalsByProp`) — there is no
    *  variable to bind, so the runtime applies plain values. Colors are
@@ -5012,6 +5021,9 @@ function partToSpecInner(
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
     Object.assign(textSpec, textExtras(textCtx));
+    // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
+    // the box that sizes itself to its text, so the fact rides the text spec.
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
     // MOLECULE round (Tooltip finding): a text part can CONTAIN parts — the
     // Tooltip bubble's label carries the absolute-positioned arrow span. The
     // old text lowering silently DROPPED child parts; here they compile
@@ -5057,6 +5069,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -5105,6 +5118,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     spec.contentProp = prop.bindings.figma.property;
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -7966,6 +7980,9 @@ function buildSyncScript(
   // dump v1.35: same discipline — a contract with no stroke outside layout
   // emits the runtime it always did.
   const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout === false));
+  // dump v1.36: same discipline — a contract with no whole-pixel text box
+  // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
+  const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = featureDatas.some((d) =>
     dataSome(
@@ -8615,7 +8632,14 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
     node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}${hasTextBox ? `
+    // dump v1.36 — THE TEXT BOX SIZES ITSELF TO ITS TEXT where the contract
+    // says so (Part.textAutoResize: WIDTH_AND_HEIGHT): a whole-pixel box, the
+    // advance rounded up. It is the value createText is born with, so a
+    // script with no such spec never names the field (the golden discipline)
+    // and reads the same value back; it is written explicitly here so an
+    // AMENDED node that had been filled or fixed is put back.
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

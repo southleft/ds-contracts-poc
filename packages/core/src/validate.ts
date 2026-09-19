@@ -38,6 +38,7 @@ import {
   rootElementsOf,
   STATE_SELECTORS,
   stripBraces,
+  textBoxStaticRefusals,
   textProps,
   topRootNames,
   topRoots,
@@ -580,6 +581,19 @@ export function validateContract(
             `${contract.id}: part "${name}" carries strokesIncludedInLayout: false together with ${unspellable.join(', ')} — a stroke outside layout is drawn as a one-colour solid inset ring on the code surfaces, which has no per-side colour and no border style; remove the flag or the channel`,
           );
         }
+      }
+    }
+    // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` qualifies a TEXT BOX
+    // THAT SIZES ITSELF TO ITS TEXT — the hugsBelowMaxWidth discipline: a
+    // stray or inert flag is a contract error, not a no-op. Every refusal is
+    // decided in one place (anatomy.ts textBoxStaticRefusals, which the
+    // proposer also uses to withdraw a flag it cannot honour): a top-level
+    // root, a part that owns no text, a box sized / filled / truncated by a
+    // channel, tracking that is not a px / em / rem length or that the part
+    // inherits, and an inline-level element where inline-size does nothing.
+    if (part.textAutoResize !== undefined) {
+      for (const reason of textBoxStaticRefusals(contract, part, p)) {
+        errors.push(`${contract.id}: part "${name}" carries textAutoResize: WIDTH_AND_HEIGHT and ${reason}`);
       }
     }
     // v18 (mint round): text evidence describes ONE channel and withholds
