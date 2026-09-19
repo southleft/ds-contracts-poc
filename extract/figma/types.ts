@@ -795,6 +795,11 @@ export interface DumpFile {
      *  hand-authored fixtures — absence adds no note, so committed corpora
      *  are byte-stable. */
     captureGaps?: string[];
+    /** The reader's request could have returned `ds_contracts/*` stamps (REST:
+     *  the fetch layer asked for `plugin_data=shared` and says so). Written
+     *  only as `true`; absent = not established, never false-by-default
+     *  evidence that a set is designer-drawn. */
+    stampsObservable?: true;
     /** The variables channel's own receipt (REST route, Phase 2 exam
      *  2026-08-22): what `/v1/files/:key/variables/local` answered, or WHY it
      *  did not — `cause` is `scope` (the token lacks `file_variables:read`,

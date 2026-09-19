@@ -229,6 +229,20 @@ function contractPage(): { route: string; html: string } {
         }),
     ),
     section(
+      "absent-variants",
+      "bindings.figma.absentVariants — declared undrawn combinations",
+      ["curated"],
+      `<p>A designer’s component set is often <em>not</em> the full Cartesian product of its variant axes: a checkbox icon with no <code>disabled</code> + <code>error</code> cell, a menu item whose header role has no disabled state. <code>bindings.figma.absentVariants</code> declares those cells. Each entry is <strong>one complete combination</strong> over the contract’s variant axes — every enum prop and every <code>VARIANT</code>-bound boolean, keyed by prop name: an enum axis takes a canonical value, a boolean axis a JSON boolean, and an axis carrying <code>unsetValue</code> may take <code>null</code> for its canvas-only omission option.</p><pre><code>"absentVariants": [{ "selection": "checked", "size": "small", "state": "disabled", "error": true }]</code></pre><p>Complete tuples, never patterns: a pattern has many spellings for one set of cells, a tuple list has exactly one, so the list is canonical (tuples in the product’s enumeration order) and duplicate-free. The order of <em>keys</em> inside a tuple is not part of validity: a JSON object is unordered, and a key-sorting tool must not turn a sound contract into a refused one.</p><p><strong>It is a canvas fact only.</strong> The Figma writer emits no variant for a declared combination, and the exact variant projection expects the product <em>minus</em> the list, exactly — a drawn cell the list calls absent is an extra row, an undrawn cell it does not name is a missing row, and a set with no declaration is still held to the full product. The design→contract proposer writes the declaration for a designer set whose rows are a strict subset of the product — only when the reader could have <em>seen</em> a pipeline stamp and found none (otherwise “unstamped” is not evidence of a designer: <code>stamps-not-observable</code>) — and refuses the set by name (<code>sparse-matrix-inference-ambiguous:&lt;channel&gt;@&lt;part&gt;</code>) when an undrawn cell leaves a per-axis inference with more than one explanation. The code surfaces do not read the field: they render any prop combination by composing the per-axis rules, so an undrawn combination renders as a composition nobody drew (<code>undrawn-combination-rendered-by-composition</code>).</p>` +
+        refusals("The declaration is refused by name when:", [
+          "a tuple gives an axis a value that is not one of its options (<code>absent-variant-not-in-product</code>), leaves an axis out (<code>absent-variant-incomplete</code>), or names something that is not a variant axis (<code>absent-variant-non-variant-axis</code>)",
+          "a tuple repeats (<code>absent-variant-duplicate</code>) or the list is not in canonical order (<code>absent-variants-order</code>)",
+          "the default combination is listed (<code>absent-variants-default-tuple</code>) — Figma reads every axis default from that variant",
+          "the list leaves an axis value with no drawn combination (<code>absent-variants-erase-axis-value</code>) or names the whole product (<code>absent-variants-cover-product</code>)",
+          "more combinations are undrawn than drawn (<code>absent-variants-mostly-undrawn</code> — the product of these axes is then not a description of the set; a “star” that varies each axis alone is not a product with holes), or the axes multiply past 4,096 combinations (<code>absent-variants-product-too-large</code>)",
+          "it is combined with <code>statePreviews</code> (<code>absent-variants-with-state-previews</code> — the preview matrix is already sparse by its own rule and a tuple over the props cannot address a preview row) or with a <code>native</code> representation",
+        ]),
+    ),
+    section(
       "provenance",
       "Provenance — stale-source protection",
       ["generated", "curated"],

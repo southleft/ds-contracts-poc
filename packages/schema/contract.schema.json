@@ -486,6 +486,23 @@
             "statePreviews": {
               "type": "boolean"
             },
+            "absentVariants": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": [
+                    "string",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              }
+            },
             "anchors": {
               "type": "object",
               "properties": {

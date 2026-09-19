@@ -1,5 +1,6 @@
 import type { DumpLayout, DumpNode, DumpSet } from "../extract/figma/types.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
+import { validateExactVariantProjection } from "./exact-projection.js";
 import {
   CAPTURED_VARIABLES_ABSENT_RECEIPT,
   capturedTokensDocument,
@@ -120,6 +121,59 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
     `${projectionMode} refuses a structured ragged matrix`,
     refusalCode(() =>
       proposeFromDump(ragged, { ...baseOpts, projectionMode }),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+}
+// bindings.figma.absentVariants (docs/23 §D.40). The two rows above are the
+// ORIGINAL ones and still hold: nothing here says a reader could have seen a
+// ds_contracts stamp, so "unstamped" is not evidence of a designer and the
+// ragged refusal stands (now naming why). Only with that POSITIVE reader fact
+// does a designer's strict-subset set propose, its hole declared on the
+// contract and verified exact against the product minus the declaration.
+check(
+  "the validator refuses a structured ragged matrix that nothing declares",
+  (() => {
+    const result = validateExactVariantProjection(ragged);
+    return result.status === "refused" && result.code === "EXACT_MATRIX_RAGGED";
+  })(),
+);
+for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
+  const observed = { ...baseOpts, projectionMode, stampsObservable: true };
+  const proposed = proposeFromDump(ragged, observed);
+  const declared = (
+    proposed.contract.bindings as { figma: { absentVariants?: unknown } }
+  ).figma.absentVariants;
+  check(
+    `${projectionMode} proposes a designer's strict-subset matrix (stamps observable, none present) with the undrawn combination DECLARED, verified exact at 3 rows`,
+    JSON.stringify(declared) ===
+      JSON.stringify([{ size: "lg", tone: "danger" }]) &&
+      proposed.projection.status === "verified-exact" &&
+      proposed.projection.observedCount === 3 &&
+      proposed.projection.expectedCount === 3,
+  );
+  check(
+    `${projectionMode} still refuses a ragged matrix whose DEFAULT combination is the undrawn one`,
+    refusalCode(() =>
+      proposeFromDump(
+        {
+          ...ragged,
+          variants: [
+            ragged.variants[1],
+            ragged.variants[2],
+            variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" }),
+          ],
+        },
+        observed,
+      ),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+  check(
+    `${projectionMode} still refuses a ragged set THIS PIPELINE stamped when no contract in scope declares the hole`,
+    refusalCode(() =>
+      proposeFromDump(
+        { ...ragged, contractId: "check.ragged" } as DumpSet,
+        observed,
+      ),
     ) === "EXACT_MATRIX_RAGGED",
   );
 }

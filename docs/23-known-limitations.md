@@ -3844,3 +3844,318 @@ and the dump field are additive and can stay. **Gates:**
 both readers, proposer, writer round trip through the real plugin reader) and
 `core/react-stroke-outside-layout.test.ts` (`npm run react:conformance:check` —
 all three surfaces, box and shadow MEASURED in Chromium).
+
+## D.40 A designer's component set is rarely the full product of its axes; the exact projection refused every one — CLOSED for undeclared sparseness; the interaction-state wall and the code-side composition stay NAMED
+
+**2026-09-19. A schema decision the owner delegated; recorded so it can be
+reversed.** `core/exact-projection.ts` holds a structured Figma component set to
+the full Cartesian product of its VARIANT axes and refuses anything else as
+`EXACT_MATRIX_RAGGED`. That strictness was deliberate (commit 8f879e147) and is
+kept. But designer-authored sets are often not a product. Measured read-only on
+two designer files: CBDS `Checkbox-icon` 42 of 48 (no `state=disabled` with
+`error=true`), CBDS `Alert` 30 of 40, and in Altitude 7 of 40 sets — `Menu Item`
+16 of 18, `Breadcrumbs Item` 10/12, `Checkbox` 26/30, `Pagination Item` 12/16,
+`Progress` 10/16 (a bar is drawn at one size, a circle at four), `Radio` 18/20,
+`Toggle Button` 20/24. Every one refused, so a composed family could never
+replace its auto-proposed child STUB with the real child set.
+
+**Decision.** The contract DECLARES what is not drawn, as a Figma-only fact where
+schema 17 puts Figma-only facts:
+
+```jsonc
+"bindings": { "figma": { "absentVariants": [
+  { "state": "error", "checked": "on", "label": "shown" },
+  { "state": "error", "checked": "on", "label": "hidden" }
+], "anchors": { … } } }
+```
+
+Each entry is ONE COMPLETE tuple over the contract's variant axes — every enum
+prop and every `VARIANT`-bound boolean, keyed by PROP NAME; an enum axis takes a
+canonical value, a boolean axis a JSON boolean, an axis with `unsetValue` may take
+`null` for that canvas-only option. **Why tuples and not patterns:** the measured
+holes are slices (`state=disabled × error=true`), and a pattern would be shorter —
+but a pattern list has many spellings for one set of cells and a tuple list has
+exactly one. The list is canonical (tuples in the product's enumeration order,
+first axis slowest, options as declared) and duplicate-free, so a round trip is a
+fixed point. The order of KEYS inside a tuple is deliberately NOT part of validity
+(review, PR 130): a JSON object is unordered, and any tool that sorts keys — `jq
+-S`, this repo's own `canonicalJson` — must not turn a sound contract into a
+refused one; every reader keys a tuple in axis order regardless
+(`absentVariantKey`). **Why prop names and canonical values, not Figma labels:** the
+referee can hold the list to the contract's own props without a second vocabulary,
+and re-labelling a Figma option does not invalidate it; the writer, the proposer
+and the exact projection translate through the props' `VARIANT` bindings. One
+reader serves all three (`absentVariantAxes` / `absentVariantKey` /
+`absentVariantIssues`, `packages/schema/src/contract-schema.ts`). Additive and
+optional: no schema version bump, following `strokesIncludedInLayout` (§D.39).
+
+**Nothing is weakened.** `validateExactVariantProjection(set, returned, {
+absentVariants })` expects the product MINUS the declaration, exactly: a drawn
+cell the list calls absent is an extra row, an undrawn cell it does not name is a
+missing row, and a returned contract that would draw an undrawn cell is
+`EXACT_ROWS_EXTRA`. The validator never infers a declaration — a ragged source
+handed to it without one refuses with the same code AND the same message as
+before. An unreadable or disagreeing declaration (not a list, empty, a partial
+tuple, an unknown property or option, a duplicate, a list that leaves nothing) is
+IGNORED and the full product is expected, which then refuses: a declaration can
+only fall back to the stricter reading, never widen what counts as exact. A set
+that declares a state-preview matrix keeps that expectation and the list is not
+composed with it.
+
+**Who may declare.** A DESIGNER's set declares by what it draws: when its rows are
+a STRICT SUBSET of the product (every row valid, none duplicated, none outside the
+product), the proposer reads the undrawn cells once (`deriveAbsentVariants`), writes
+them into the proposed contract, and the source and the returned rows are both held
+to the product minus that list. "A designer's set" means: no `ds_contracts/*` stamp
+**and a reader that could have SEEN one.** The review (PR 130, H2) measured the hole
+in the first cut: `mapRestToDump` is a public entry and stamps dump v1.35
+identically whether or not the REST response carried `sharedPluginData`, so the
+SAME pipeline-written set that lost a variant refused with the plane and proposed
+`absentVariants` as `verified-exact` without it. "Unstamped" is evidence of a
+designer only when a stamp was observable, and that is now a POSITIVE reader fact
+(`dumpStampsObservable`, `opts.stampsObservable`, default false — fail closed):
+
+- the plugin reader always reads the stamps; it is recognised by the provenance
+  note it has always written plus dump ≥ v1.26 (the contract-id stamp);
+- the REST mapper writes `_provenance.stampsObservable: true` ONLY when its caller
+  says the request carried `plugin_data=shared` (`MapOptions.stampsObservable`). The
+  request parameter is not echoed in the response, so only the fetch layer can
+  know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
+- anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
+  bridge that never read plugin data — is not observable, and a strict-subset set
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
+
+**This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
+file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
+reader stamps and every other consumer ignores), not a node or set field; it is
+written only on a fetched read, so every committed fixture mapped from a committed
+response keeps its bytes (the committed `extract/figma/rest/fixtures/*.rest.json`
+carry zero `sharedPluginData` and are mapped without the option); and
+`dump.plugin.js` is untouched, so the embedded plugin dump source did not move.
+
+A set THIS PIPELINE drew never declares by its rows. Its declaration is the stamped
+contract's own `absentVariants`, read from the contract in scope
+(`scopedAbsentVariants`) — and read ALWAYS, not only after the Cartesian check
+refuses (review H1). A canvas that draws the FULL product while its contract
+declares an absence is exactly the amend state below, and a full product passes the
+Cartesian check: the first cut read that state back `verified-exact` and dropped
+the declaration without a note. Held to the product minus the declaration, the
+drawn cell the contract calls absent IS an extra row ("6 rows; Cartesian definitions
+minus 1 declared absent variant(s) require 5"). So a generated set that lost a
+variant, a sparse generated set whose contract is not in scope, a contract that
+declares a different (or a MOVED) cell, and a full canvas under a declaring contract
+all refuse `EXACT_MATRIX_RAGGED` — canvas damage is never laundered into a
+declaration, and a declaration is never silently dropped. The round-trip comparer
+(`extract/figma/roundtrip.ts`) treats a dropped, gained or moved
+`bindings.figma.absentVariants` as a mismatch. A promoted mode or interaction-state
+axis leaves the API, so an undrawn cell naming one of its values has no spelling:
+the ragged refusal stands there too.
+
+**Bounds that are about meaning (review M1).** The tuple encoding grows with the
+PRODUCT, not with what is drawn: a "star" set — the default plus each axis varied
+alone — on 7 axes × 5 proposed 78,096 tuples in a 6 MB contract, and the referee
+walked the whole product to validate one tuple. Two rules, both by name:
+
+- **more undrawn than drawn is refused** (`sparse-matrix-mostly-undrawn` at the
+  proposer, `absent-variants-mostly-undrawn` at the referee). A declaration says
+  "this set is the product of its axes, minus a few cells". When the undrawn cells
+  outnumber the drawn ones the product is not the model of the set: most of what
+  the code surfaces would render is a composition nobody drew, and every per-axis
+  inference rests on a minority of the cells it claims to explain. Exactly half is
+  still allowed (a 2-of-4 diagonal is the smallest set the fence is tested on).
+  Every measured real set is on the allowed side, drawn / undrawn: Alert 30/10,
+  Checkbox 26/4, Progress 10/6, Radio 18/2, Checkbox-icon 42/6, Menu Item 16/2.
+- **a product above 4,096 combinations is refused**
+  (`sparse-matrix-product-too-large` / `absent-variants-product-too-large`;
+  `ABSENT_VARIANTS_MAX_PRODUCT`, one bound at both doors, pinned equal by a test).
+  The largest product among the 984 tracked contracts is 216. Both doors multiply
+  before they materialise anything, and `absentVariantIssues` no longer builds the
+  product at all — each tuple is checked against the axes and ranked by mixed
+  radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
+  under a millisecond.
+
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
+
+**The ambiguity fence.** Every per-axis inversion rule ("this value is a function
+of axis A") was written for full coverage, where the explanation is unique: if a
+non-uniform observation were a function of A alone and of B alone then
+v(a,b) = g(a) = h(b) over every (a,b) makes it constant. With undrawn cells two
+axis sets can each explain every drawn variant, and "first axis that fits" becomes
+a guess decided by axis order — which the code surfaces then render at the undrawn
+combination. THE CONDITION, one rule (`fenceSparseInference`,
+`core/propose-figma.ts`), applied wherever an axis-conditioned inference is
+ACCEPTED: over the rows the inference was read from, take every MINIMAL set of
+variant axes the observed value is a function of (no proper subset also fits) —
+EVERY subset of the axes that vary over those rows, with no arity bound: the
+product cap leaves at most twelve varying axes, so at most 4,096 subsets, and the
+first cut's "up to three" let f(A) against parity(B,C,D,E) over five binary axes
+propose `{a}` (review F4; now refused by name). If there is more than one, and two of them predict DIFFERENT values for some
+declared-absent combination (or one predicts a value where the other has none),
+the set is refused by name —
+`sparse-matrix-inference-ambiguous:<channel>@<part>`
+(`SparseMatrixInferenceError`; every ambiguous inference is listed, each with the
+two explanations and the undrawn tuple they split on). Two explanations that agree
+on every undrawn cell are not a guess: nothing observable depends on the choice.
+A set with no undrawn cell never arms the fence, so every full-matrix proposal is
+byte-identical. Fenced sites: bound-variable unification (name substitution,
+per-value, boolean function), every carried mint binding (single axis, pair,
+triple, root and nested), part presence (`visibleWhen` value and value-subset),
+hidden visibility, text by axis, boolean opacity, shape size and shape placement,
+literal-axis fits (unbound paints, per-side stroke widths, partial cross-axis and
+primary-axis fills), cross-axis fill by parent mode, `layoutByProp` (enum and
+boolean), threaded and per-value instance props, host text overrides. NOT fenced,
+named: the base-slice projection of a refused channel (`projectRefusedOnAxis` — it
+already ranks candidate axes by span, a pre-existing heuristic that full coverage
+does not make unique either) and child-stub geometry (it correlates against the
+STUB's own applied props, not the parent's axes). The state-plane diff sites are
+unreachable on a sparse set (promotion + sparse refuses, above).
+
+**Writer.** `core/emit-figma-script.ts` drops the declared combinations from the
+compiled variant list; grid cells keep their Cartesian row/column (an undrawn cell
+is a hole, never a reflow) and the default combination, which may not be declared
+absent, is still emitted first. The runtime text is unchanged — only the compiled
+data differs — so a contract with no declaration emits the script it always did.
+An instance that selects a combination its child declares undrawn refuses at
+compile, `FIGMA_COMPONENT_REF_ABSENT_VARIANT`, instead of throwing mid-paste.
+
+**Refused by name** (`validateContract`, through `absentVariantIssues`):
+`absent-variant-not-in-product`, `absent-variant-incomplete`,
+`absent-variant-non-variant-axis`, `absent-variant-duplicate`,
+`absent-variants-order` (TUPLE order only), `absent-variants-mostly-undrawn`,
+`absent-variants-product-too-large`, `absent-variants-default-tuple` (Figma reads every axis
+default from that variant, positionally), `absent-variants-erase-axis-value` (a
+variant option exists on the canvas only while some variant carries it, so the
+prop's binding could not round-trip), `absent-variants-cover-product`,
+`absent-variants-no-axes`, `absent-variants-native-representation`, and
+`absent-variants-with-state-previews`. **Why the last is refused rather than
+composed:** the preview matrix is already sparse by its own rule — one row per
+state per PRIMARY-axis value, every other axis PINNED to its first value — and the
+preview axis is not a contract prop, so a tuple over the props cannot address a
+preview row, and an absent base cell a preview row is pinned to would leave "is its
+preview drawn?" undefined. No measured set needs both; it can be lifted when one
+does.
+
+**Differential (nothing already generated changes).** All 984 tracked
+`*.contract.json`, base tree vs this change, six surfaces each — `validateContract`
+errors, React (`tsx` + CSS module + stories), React inline, static HTML, web
+components, the Figma script — hashed output or hashed error: byte-identical, every
+file, every surface (835 / 465 / 834 / 833 / 471 emit, the rest refuse identically:
+a foreign corpus is not in scope of a bare emit). `figma:fresh` and
+`generated:fresh` are green on the committed scripts and surfaces.
+
+**Measured on real designer sets** (read-only REST, exact mode, the product's own
+`extract:figma`). Altitude `Checkbox` (26/30 → 4 declared), `Progress` (10/16 → 6)
+and `Radio` (18/20 → 2) now propose, 0 ambiguous inferences; before, each refused
+ragged and — because the CLI writes nothing when any set refuses — so did every
+dump that contained one. Two real closures follow: `Checkbox Group` and
+`Radio Group` now reference the REAL `ds.checkbox` / `ds.radio` contracts instead
+of stubs. `npm run design:consumer:check` on `Checkbox Group` (12 variants, same
+unchanged 5 % limit):
+
+| children | images within 5 % | min / median / max |
+|---|---|---|
+| auto-proposed STUBS (the parent read alone) | 2 of 12 | 4.85 / 6.45 / 7.40 % |
+| the REAL sparse child | **12 of 12** | 2.23 / 2.97 / 3.87 % |
+
+**CBDS `Alert` (30 of 40) — the committed designer-file exam — still REFUSES, and
+that is the fail-closed rule working.** The exam reads a canvas through a read-only
+observe whose scene read-back ignores plugin data by design
+(`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
+19 refused by name**, and the three derived status lines are unchanged. The first
+cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
+that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
+ground it stood on. A fresh observe that reads the stamps — it needs the owner's
+Figma Desktop — would let it declare.
+
+**What Alert would still lack (review M2, measured on the committed observe).** Its
+10 undrawn cells are every `action=false × inlineAction=true` combination. Its
+`Actions` block is drawn in exactly the 10 variants where `action=true` AND
+`inlineAction=false` — absent in the 10 `true × true` and the 10 `false × false`
+ones — so its presence IS a function of the two axes whose combination is undrawn,
+but of their CONJUNCTION with one side NEGATED. The proposer's presence vocabulary
+is one axis (a value, a value subset, or a truthy boolean): `visibleWhen` has no
+conjunction of two props and no negated boolean form (the latter already a named
+door, `propose.visible-when-no-negated-form`). Neither single axis predicts it (10
+present / 10 absent on each), so the part is a NAMED omission ("DEGRADATION part
+omitted — present in only 10/30 variants"), and an accounting-clean row would still
+render 10 of 30 variants without their action block. Closing it needs a
+two-condition `visibleWhen` with a negated side in the schema, both code emitters
+and the writer — not attempted here.
+
+`Radio Group`: 10 of 12 (2.45 / 3.87 / 5.22 %). Neither PASSES the check: all 12
+cells of each fail `content-size-mismatch` (Checkbox Group renders 148 px high
+where Figma draws 142) and both carry `variant-axis-inert-ledgered:legend` and
+`variant-prop-discarded:state`; the `Checkbox` child alone is 3 of 26 (its box and
+glyph are an uncaptured nested instance). No evidence is committed.
+
+**Still open, named.**
+- **The interaction-state wall.** CBDS `Checkbox-icon` and Altitude `Menu Item` —
+  the two sets this round was opened for — no longer refuse ragged, and still do
+  not propose: both carry a pure interaction-state axis
+  (`state[default|hover|focus|disabled]`), and exact mode refuses to promote one
+  (`EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`, a separate deliberate refusal this change
+  does not touch). So the CBDS Checkbox and Altitude Menu families still cannot
+  carry those children. In a scratch copy with that axis renamed so the wall does
+  not fire, `Checkbox-icon` proposes with 6 declared absences and `Menu Item` with
+  2, neither with an ambiguous inference — the sparse path itself is ready for
+  them.
+- **`undrawn-combination-rendered-by-composition`.** The code surfaces are
+  unchanged and do not read the field: they render any prop combination by
+  composing the per-axis rules read from the drawn variants, so an undrawn
+  combination renders as a composition nobody drew or measured. Named on the
+  proposal (the `bindings.figma.absentVariants:` note) and in the emitted React
+  component (a comment beside the `axis-inert` ledger); the web-component, inline
+  and HTML files carry no such note.
+- **Amend does not delete — and says so every time.** A set written BEFORE its
+  contract declared an absence keeps the now-undrawn variant (the writer never
+  removes a designer-visible variant). The amend report lists it under
+  `extraVariants`; every LATER sync, which used to answer plain `unchanged`, answers
+  `unchanged-with-extra-variants:[Tone=C, Size=L]` with the same list (runtime text
+  emitted only into a script that carries a declaring contract, so every other
+  script keeps its bytes); and the design → contract read-back of that canvas
+  refuses `EXACT_MATRIX_RAGGED` instead of reading `verified-exact` (review H1).
+  Someone has to delete the variant or the declaration. Pinned in the test.
+- The note in the emitted React component is capped (the count, the first three
+  tuples, "… N more in the contract") and its values are JSON-spelled, so an enum
+  value holding a newline cannot end the comment. The reviewer's probe also shows
+  such a value breaking the generated TYPE UNION (`size?: 's' | 'l⏎…'`) — that is the
+  enum emitter's own, pre-existing, and not touched here.
+- `validateExactVariantProjection` still materialises the full Cartesian of ANY set
+  it is handed (8 axes × 5: ~0.5 s before the named refusal). Pre-existing, the same
+  for a full matrix; not changed here.
+- The design:consumer:check harness takes one `--component` for both the dump's set
+  name and the generated directory, so a set whose name has a space
+  (`Checkbox Group` → `CheckboxGroup`) needs an alias key in the dump. Not changed
+  here.
+
+**To reverse.** Make `absentVariants` in `proposeFromDumpFenced` always null (delete
+the `pipelineDrew ? scopedAbsentVariants(…) : ragged && stampsObservable ?
+deriveAbsentVariants(set) : null` expression): every ragged set refuses as before,
+the fence never arms, and no contract gains the field. The writer filter, the
+referee block and the schema field are inert without a declaration and can stay; so
+can `_provenance.stampsObservable` (nothing but the proposer reads it).
+`accuracy/grammar.json`'s `cartesian-fill` sentence was made true of a declaring
+contract and reads correctly either way.
+**Gates:** `extract/figma/absent-variants.test.ts` (`npm run exact-proposal:check`
+— exact projection, referee, proposer on synthetic designer sets incl. the named
+ambiguity, writer round trip through the real plugin reader on the mock canvas,
+the pipeline-drawn refusals, the amend state end to end, the stamps-observable fact
+at both readers, the meaning bounds, every fenced call-site category by its own
+label, the code-surface note) and `core/exact-proposal-check.ts` (the two ORIGINAL
+ragged-refusal rows hold again unchanged; the declared-absence rows run under the
+observable fact).
