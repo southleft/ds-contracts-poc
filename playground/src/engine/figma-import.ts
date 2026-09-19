@@ -9,7 +9,7 @@
  * byte the live path; only the transport is swapped. That is deliberate:
  * what CI referees (roundtrip-rest) is what the demo shows.
  */
-import { importFromUrl } from '../../../extract/figma/rest/fetch.js';
+import { importFigmaUrl } from './figma-url-import.js';
 import { dumpCapturesHidden, proposeBatchFromDump, proposeFromFigmaDump } from '../../../core/index.js';
 
 // Captured tokens (dump v1.4 `_variables`) — the designer's real variables,
@@ -19,16 +19,14 @@ import { contractIdByKey, contractIdByName, contractsById } from './data.js';
 import { sessionRegistry } from './session-registry.js';
 import { activeTokens } from './token-source.js';
 
-export type FigmaImportResult = Awaited<ReturnType<typeof importFromUrl>>;
+export type FigmaImportResult = Awaited<ReturnType<typeof importFigmaUrl>>;
 export type FigmaProposal = ReturnType<typeof proposeFromFigmaDump> & { setName: string };
 
 /** The fixture canvas: the repo's own Badge set, REST-shaped (fixtures/badge.rest.json). */
 export const DEMO_URL =
   'https://www.figma.com/design/8nim1d0IPnehMxA7B7SYxC/DS-Contracts-POC?node-id=101-1';
 
-export function importFigmaUrl(url: string, token: string): Promise<FigmaImportResult> {
-  return importFromUrl(url, token);
-}
+export { importFigmaUrl };
 
 /** Demo import: same importFromUrl, fixture-backed fetch. `degraded` answers
  *  the variables endpoint with the 403 a non-Enterprise plan returns. */
@@ -53,7 +51,7 @@ export async function importFigmaDemo(opts: { degraded: boolean }): Promise<Figm
     if (url.includes('/nodes?ids=')) return respond(200, nodes.default);
     return respond(404, { err: 'not served by the demo fixture' });
   };
-  return importFromUrl(DEMO_URL, 'demo-fixture-token', { fetchImpl });
+  return importFigmaUrl(DEMO_URL, 'demo-fixture-token', { fetchImpl });
 }
 
 export type DumpProposalBatch = ReturnType<typeof proposeBatchFromDump>;
