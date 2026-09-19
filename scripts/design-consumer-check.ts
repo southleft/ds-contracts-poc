@@ -41,6 +41,8 @@
  * <dir from `ds-contracts generate`> --component <Name> --out <dir>
  * [--token <figma token>] (else FIGMA_TOKEN; without a token the image
  * comparison is recorded as `figma-images-unavailable`, never as a pass).
+ * --keep-built-consumer retains the isolated production build in out/review-site
+ * for visible browser inspection; it does not change the comparison or score.
  */
 import { packageReactLibrary } from './package-react-library.js';
 import { execFileSync } from 'node:child_process';
@@ -72,12 +74,12 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
   return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
 }
 
-type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
+type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean };
 function parseArgs(argv: string[]): Args {
   const read = (flag: string) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : undefined; };
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
-    out: required('--out'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
+    out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
@@ -423,6 +425,12 @@ async function main() {
     run(path.join(consumer, 'node_modules', '.bin', 'vite'), ['build', '--logLevel', 'error'], consumer);
     const built = path.join(consumer, 'dist', 'index.html');
     if (!existsSync(built)) throw new Error('vite build produced no index.html');
+    if (args.keepBuiltConsumer) {
+      const review = path.join(args.out, 'review-site');
+      if (existsSync(review)) throw new Error('consumer review-site already exists; use a new evidence directory');
+      cpSync(path.join(consumer, 'dist'), review, { recursive: true, errorOnExist: true, force: false });
+      receipt.consumer.reviewSite = 'review-site';
+    }
     const builtCss = readdirSync(path.join(consumer, 'dist', 'assets')).filter(f => f.endsWith('.css')).map(f => readFileSync(path.join(consumer, 'dist', 'assets', f), 'utf8')).join('\n');
     writeFileSync(path.join(args.out, 'consumer-built.css'), builtCss);
     const tokenNames = [...readFileSync(path.join(args.generated, 'tokens.css'), 'utf8').matchAll(/^\s*(--[a-z0-9-]+):/gim)].map(m => m[1]);
