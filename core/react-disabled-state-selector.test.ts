@@ -21,6 +21,8 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { extractReactTsx } from '../extract/adapters/react-tsx.js';
+import ts from 'typescript';
+import { extractAnatomy, tokenIndexFromJson } from './extract-css-module.js';
 
 const tokens = {
   primitives: {
@@ -152,6 +154,41 @@ test('the inverse: code → contract reads the generated [data-disabled] / :not(
       assert.deepEqual(back.anatomy?.root?.states, { hover: { 'background-color': '{paint.hover}' }, disabled: { 'background-color': '{paint.muted}' } }, element);
     } finally { rmSync(dir, { recursive: true, force: true }); }
   }
+});
+
+test('the inverse preserves enum-dependent root states and guards on generated and BEM modifier classes', () => {
+  const tone = { name: 'tone', type: { enum: ['a', 'b'] }, default: 'a', bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone', values: { a: 'A', b: 'B' } } } };
+  const palette = { paint: {
+    a: { muted: { $type: 'color', $value: '#111111' }, hover: { $type: 'color', $value: '#333333' } },
+    b: { muted: { $type: 'color', $value: '#222222' }, hover: { $type: 'color', $value: '#444444' } },
+  } };
+  for (const element of ['div', 'button']) for (const bem of [false, true]) {
+    const c = contract(element, { props: [tone] });
+    c.anatomy.root = { states: { disabled: { color: '{paint.{tone}.muted}' }, hover: { color: '{paint.{tone}.hover}' } } };
+    const emitted = emitReact(c, { ...ctx(c), tokens: tokenInventoryFromJson([palette]) });
+    const src = bem ? emitted.tsx.replace('className={classes}', 'className={clsx(styles.control, tone && styles[`control--${tone}`])}') : emitted.tsx;
+    const css = bem ? emitted.css.replaceAll('.root', '.control').replaceAll('.tone-', '.control--') : emitted.css;
+    const back = extractAnatomy({
+      sf: ts.createSourceFile('DisabledProbe.tsx', src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
+      src, componentName: c.name, css, tokens: tokenIndexFromJson([palette]),
+      props: [{ name: 'tone', kind: 'enum', values: ['a', 'b'], default: 'a', optional: true, confidence: 'declared' },
+        { name: 'disabled', kind: 'boolean', default: false, optional: true, confidence: 'declared' }],
+    });
+    assert.deepEqual(back?.root.states, c.anatomy.root.states, `${element}, BEM=${bem}: ${back?.notes.join('; ')}`);
+    assert.deepEqual(back?.states, ['hover', 'disabled']);
+  }
+});
+
+test('the inverse does not promote a nested part data-disabled attribute to the root state', () => {
+  const src = "import styles from './Probe.module.css'; export function Probe() { return <div className={styles.root}><span className={styles.label} /></div>; }";
+  const back = extractAnatomy({
+    sf: ts.createSourceFile('Probe.tsx', src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
+    src, componentName: 'Probe', props: [], tokens: tokenIndexFromJson([tokens.primitives]),
+    css: '.label[data-disabled] { color: var(--paint-muted); } .root .label[data-disabled] { color: var(--paint-faded); }',
+  });
+  assert.deepEqual(back?.states, []);
+  assert.equal(back?.root.states, undefined);
+  assert.equal(back?.notes.filter(note => note.includes('not extractable into anatomy')).length, 2);
 });
 
 test('MEASURED in Chromium: on a mounted div root the disabled paint applies, hover no longer overrides it, and the part follows; a button root behaves as before', async (t) => {

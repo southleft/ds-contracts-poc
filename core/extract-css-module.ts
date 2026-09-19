@@ -687,12 +687,12 @@ const stateOfPseudo = (pseudo: string): string | undefined =>
  *  native form control the generator spells the disabled state as the
  *  attribute the component renders — `.root[data-disabled]`, guards
  *  `:not([data-disabled])`, and `:is(:disabled, [data-disabled])` where an
- *  elementByProp root renders both. On the ROOT class that attribute IS the
- *  disabled state, read exactly as `:disabled` is; anywhere else the selector
- *  is left as written. */
-function rootDisabledAsPseudo(selector: string, rootClass: string | null): string {
+ *  elementByProp root renders both. On the ROOT class or one of its enum
+ *  modifier classes that attribute IS the disabled state, read exactly as
+ *  `:disabled` is; anywhere else the selector is left as written. */
+function rootDisabledAsPseudo(selector: string, isRootClass: (cls: string) => boolean): string {
   const m = selector.match(/^\.([\w-]+)/);
-  if (!m || (m[1] !== 'root' && m[1] !== rootClass)) return selector;
+  if (!m || !isRootClass(m[1])) return selector;
   const head = m[0];
   // Only the root's own compound (up to the first descendant combinator).
   const rest = selector.slice(head.length).replaceAll(':is(:disabled, [data-disabled])', ':disabled');
@@ -840,7 +840,8 @@ function analyzeCss(
   };
 
   for (const rule of rules) {
-    const sel = rootDisabledAsPseudo(rule.selector, classes.rootClass);
+    const sel = rootDisabledAsPseudo(rule.selector,
+      cls => cls === 'root' || cls === classes.rootClass || axisValueOf(cls) !== null);
     let m: RegExpMatchArray | null;
 
     // `.x > * + *` — overlap gap emitted as negative-margin sibling rule

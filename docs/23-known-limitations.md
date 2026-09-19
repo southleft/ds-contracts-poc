@@ -5216,8 +5216,22 @@ decides. **Specificity is unchanged** (an attribute selector weighs what a
 pseudo-class does; `:is()` takes its heaviest argument), so no rule moves in the
 cascade. **The inverse:** the code → contract reader (`core/extract-css-module.ts`
 `rootDisabledAsPseudo`) reads `[data-disabled]` / `:not([data-disabled])` on the root
-class back as the disabled / hover states, exactly as it reads `:disabled`; without
-it a generated `div` component re-extracted with neither.
+class and its enum modifier classes back as the disabled / hover states, exactly
+as it reads `:disabled`; without it a generated `div` component re-extracted with
+neither.
+
+**Adversarial review, 2026-09-19.** The first inverse recognised only the root's
+base class. A generated enum-dependent state (`.tone-a[data-disabled]`,
+`.tone-a:hover:not([data-disabled])`) lost both state bindings on re-extraction;
+the same contract preserved both on the parent branch and on a native `button`.
+**AGENT decision:** use the reader's existing enum-class identity resolver for
+this inverse too, including JSX-discovered BEM modifiers. An unrelated part's
+`[data-disabled]` remains a named unsupported selector and cannot become a root
+state. The regression probe failed before the fix and passes afterwards with
+both generated and BEM class spellings and the native control. Emitted files
+are unchanged by this reader fix. **To reverse:** restrict
+`rootDisabledAsPseudo` to the root's base class again; enum-dependent disabled
+and guarded hover/active states will be lost by name on re-extraction.
 
 **AGENT decision — no `aria-disabled`.** Neither React surface nor web components
 renders `aria-disabled` for the prop; this change does not add it. In the committed
