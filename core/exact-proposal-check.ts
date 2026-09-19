@@ -227,6 +227,35 @@ check(
   refusalCode(() => proposeFromDump(states, baseOpts)) ===
     "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
 );
+// docs/23 §D.41 — the refusal above was about WHOSE axis it is. With the
+// positive designer fact (no stamp AND a reader that could have seen one) the
+// same set is projected by the closed table, and the matrix is still exact.
+{
+  const projected = proposeFromDump(states, {
+    ...baseOpts,
+    stampsObservable: true,
+  });
+  check(
+    "exact mode PROJECTS a designer's interaction-state axis under the stamps-observable fact: verified exact at 2 rows, the axis is not a prop, the decision is named",
+    projected.projection.status === "verified-exact" &&
+      projected.projection.observedCount === 2 &&
+      projected.stateAxisProjection?.decision ===
+        "designer-state-axis-projected" &&
+      projected.stateAxisProjection.property === "State" &&
+      !(projected.contract.props as Array<{ name: string }>).some(
+        (p) => p.name === "state",
+      ),
+  );
+  check(
+    "exact mode still refuses the same axis on a set THIS PIPELINE stamped without declaring it",
+    refusalCode(() =>
+      proposeFromDump({ ...states, contractId: "check.control" } as DumpSet, {
+        ...baseOpts,
+        stampsObservable: true,
+      }),
+    ) === "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
+  );
+}
 
 console.log("\n4. Verified exact success");
 const exact = proposeFromDump(exactSet(), baseOpts);

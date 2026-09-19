@@ -284,6 +284,22 @@ export {
   type VerifiedExactProjection,
 } from "./exact-projection.js";
 
+// The interaction-state axis vocabulary — ONE closed table for the proposer
+// and for every harness that mounts a state-axis variant (docs/23 §D.41).
+export {
+  INTERACTION_STATE_BY_VALUE,
+  interactionStateOf,
+  isStateAxisName,
+  normStateValue,
+  readStateAxes,
+  readStateAxis,
+  type InteractionState,
+  type StateAxisProjection,
+  type StateAxisReading,
+  type StateAxisRefusal,
+} from "./interaction-state-axis.js";
+export type { DesignerStateAxisProjection } from "./propose-figma.js";
+
 // Design → contract (proposals from a canvas dump).
 export {
   componentIdSlug,

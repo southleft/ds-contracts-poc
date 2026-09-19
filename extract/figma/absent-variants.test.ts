@@ -542,15 +542,24 @@ test('validateContract: absent-variants-no-axes', () => {
   assert.ok(refusals(c).some((e) => /absent-variants-no-axes: .*no variant axis/.test(e)));
 });
 
-test('proposer: a PROMOTED interaction-state axis on a sparse set keeps its refusal in both modes — an undrawn cell naming a promoted value has no spelling', () => {
+test('proposer: a PROMOTED interaction-state axis on a sparse set keeps its refusal in both modes unless it is a DESIGNER\'s axis (docs/23 §D.41, extract/figma/state-axis.test.ts)', () => {
   const cells = ['Default', 'Hover', 'Disabled'].flatMap((State) => ['A', 'B'].filter((Tone) => !(State === 'Disabled' && Tone === 'B')).map((Tone) => ({ at: { State, Tone }, fill: State === 'Hover' ? FILL.B : FILL.A, padding: 8 })));
   const set = designerSet('Pill', { State: ['Default', 'Hover', 'Disabled'], Tone: ['A', 'B'] }, cells);
-  assert.throws(() => exact(set), (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS', 'exact: the interaction-state wall (a separate refusal, untouched)');
-  assert.throws(
-    () => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true, stampsObservable: true }),
-    (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED',
-    'reviewable: promotion would drop the axis the undrawn cell is spelled in',
-  );
+  // Without the designer fact "unstamped" proves nothing: the ragged refusal stands, as it did (the sparse wall comes first).
+  for (const projectionMode of ['exact', 'reviewable-inversion'] as const) {
+    assert.throws(
+      () => proposeFromDump(set, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode, mintUnbound: true, stampsObservable: false }),
+      (e: unknown) => e instanceof ExactProjectionError && e.code === 'EXACT_MATRIX_RAGGED',
+      `${projectionMode}: an undrawn cell naming a promoted value has no spelling`,
+    );
+  }
+  // A set THIS PIPELINE stamped keeps the interaction-state wall whatever the reader saw.
+  assert.throws(() => exact({ ...set, contractId: 'ds.pill' } as DumpSet), (e: unknown) => e instanceof ExactProjectionError && (e.code === 'EXACT_MATRIX_RAGGED' || e.code === 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS'));
+  // WITH the fact, the axis is a designer's drawing of the platform's states and the hole is a state cell, not a contract absence.
+  const projected = exact(set);
+  assert.equal(projected.projection.status, 'verified-exact');
+  assert.deepEqual(projected.stateAxisProjection?.undrawnStateCells, [{ State: 'Disabled', Tone: 'B' }]);
+  assert.equal('absentVariants' in (projected.contract.bindings as { figma: object }).figma, false);
 });
 
 test('the fence has no arity bound: f(A) against parity(B,C,D,E) over five binary axes is found and refused (it used to stop at triples and propose {a})', () => {
