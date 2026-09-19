@@ -169,11 +169,27 @@ const fillWitness = (stage: string) => `const fill=()=>{
   return no(indefinite);};`;
 
 export async function readReactStyleOrigin(page: Page, selector: string, ownership: ReactOwnership, stage = '#root'): Promise<ReactStyleOrigin> {
-  const out: ReactStyleOrigin={version:1,roots:[]};
+  return {version:1,roots:await readOrigins(page,selector,ownership,stage,[...new Set(ownership.components.flatMap(c=>c.roots))].sort())};
+}
+
+/** The same own-size rule, read for the host elements BELOW the component
+ * roots: a part's size may be declared by the component's own rule under an
+ * ancestor condition (`.group[data-size=default] .thumb`). Only sizes are
+ * read; SVG subtrees keep their separate viewport evidence. A consumer may
+ * carry `fixed` alone: every other status names why the size is not the
+ * element's own used declaration. */
+export interface ReactDescendantSizes { version: 1; nodes: Array<{path: string; tag: string; sizes: ReactSizeOrigin[]}> }
+export async function readReactDescendantSizes(page: Page, selector: string, ownership: ReactOwnership, stage = '#root'): Promise<ReactDescendantSizes> {
+  const roots=new Set(ownership.components.flatMap(c=>c.roots)),svg=ownership.nodes.filter(n=>n.tag==='svg').map(n=>n.path);
+  const paths=ownership.nodes.map(n=>n.path).filter(p=>!roots.has(p)&&!svg.some(s=>p===s||p.startsWith(s===''?'':s+'.'))).sort();
+  return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths)).map(({path,tag,sizes})=>({path,tag,sizes:sizes??[]}))};
+}
+
+async function readOrigins(page: Page, selector: string, ownership: ReactOwnership, stage: string, paths: string[]): Promise<ReactStyleOrigin['roots']> {
+  const out: {roots: ReactStyleOrigin['roots']}={roots:[]};
   const cdp=await page.context().newCDPSession(page);
   try {
     await cdp.send('DOM.enable');await cdp.send('CSS.enable');await cdp.send('DOM.getDocument');
-    const paths=[...new Set(ownership.components.flatMap(c=>c.roots))].sort();
     for(const path of paths) {
       const expression=`(()=>{let node=document.querySelector(${JSON.stringify(selector)});for(const i of ${JSON.stringify(path===''?[]:path.split('.').map(Number))})node=node?.children[i];return node;})()`;
       const handle=await cdp.send('Runtime.evaluate',{expression});
@@ -220,5 +236,5 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
       } finally {await cdp.send('Runtime.releaseObject',{objectId});}
     }
   } finally {await cdp.detach();}
-  return out;
+  return out.roots;
 }
