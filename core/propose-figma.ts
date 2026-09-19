@@ -2155,6 +2155,7 @@ interface Ctx {
   setName: string;
   axes: Axis[];
   totalVariants: string[];
+  presenceVariants?: string[];
   corpus: TokenCorpus;
   contractIdByName: Map<string, string>;
   contractsById?: Map<string, MinimalChildContract>;
@@ -3945,7 +3946,7 @@ function shapePlacementOf(sh: NonNullable<DumpNode['shape']>): ShapePlacement | 
   const styles: Record<string, string> = { position: 'absolute' };
   const translate: string[] = [];
   let centerResidue: number | undefined;
-  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  const px = (n: number) => `${sh.kind === 'path' ? n : Math.round(n * 100) / 100}px`;
   const h = sh.constraints?.horizontal ?? 'LEFT';
   if (h === 'RIGHT' && sh.right !== undefined) styles.right = px(sh.right);
   else if (h === 'CENTER' && sh.right !== undefined) {
@@ -3968,8 +3969,14 @@ function shapePlacementOf(sh: NonNullable<DumpNode['shape']>): ShapePlacement | 
 /** Invert captured DumpShape geometry into part.shape (+ per-variant
  *  placement/rotation stylesWhen). Values are EXACT from the dump. */
 function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
+  const observedAxisValue = (axis: Axis, value: string) =>
+    (ctx.presenceVariants ?? ctx.totalVariants).some((v) => axisValuesOf(v)[axis.property] === value);
   const withShape = m.occ.filter((o) => o.node.shape !== undefined);
   if (withShape.length === 0) return;
+  if (withShape.some((o) => o.node.shape?.kind === 'path') && withShape.length !== m.occ.length) {
+    ctx.notes.push(`${where}: filled-path-incomplete-capture — geometry not carried for partially captured paths`);
+    return;
+  }
   if (withShape.length !== m.occ.length) {
     // Overlay-flattened class (round 2 iteration 2): a node that is a
     // parametric shape in SOME variants and an arbitrary-path node in others
@@ -4038,6 +4045,39 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     }
   }
   const shape: Record<string, unknown> = { kind: first.kind, width: first.width, height: first.height };
+  if (first.kind === 'path') {
+    if (shapes.some((s) => !s.sh.paths?.length)) {
+      ctx.notes.push(`${where}: filled-path-missing-geometry`);
+      return;
+    }
+    shape.paths = first.paths;
+    const geometry = (s: (typeof shapes)[number]) => ({ width: s.sh.width, height: s.sh.height, paths: s.sh.paths! });
+    if (new Set(shapes.map((s) => JSON.stringify(geometry(s)))).size > 1) {
+      let carried = false;
+      for (const axis of ctx.axes) {
+        if (isBooleanAxis(axis)) continue;
+        const byValue = new Map<string, ReturnType<typeof geometry>>();
+        let fits = true;
+        for (const s of shapes) {
+          const value = axisValuesOf(s.variant)[axis.property];
+          const g = geometry(s);
+          if (value === undefined || (byValue.has(value) && JSON.stringify(byValue.get(value)) !== JSON.stringify(g))) { fits = false; break; }
+          byValue.set(value, g);
+        }
+        if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
+        fenceSparseInference(ctx.axes, `filled-path@${where}`, shapes.map((s) => ({ variant: s.variant, value: JSON.stringify(geometry(s)) })));
+        shape.pathsByProp = { prop: axis.propName, map: Object.fromEntries(axis.values.map((v) => [axisValue(axis, v), byValue.get(v) ?? geometry(shapes[0])])) };
+        const absent = axis.values.filter((v) => !byValue.has(v));
+        if (absent.length) ctx.notes.push(`${where}: filled-path geometry at ${absent.join(', ')} is unreachable under the parent presence gate; base geometry supplies the non-rendered branch only`);
+        carried = true;
+        break;
+      }
+      if (!carried) {
+        ctx.notes.push(`${where}: filled-path-variant-geometry-unresolved — no complete, unambiguous enum axis; paths not carried`);
+        return;
+      }
+    }
+  }
   if (anyArc && !arcVaries && partialArcs.every((a) => a !== undefined)) {
     const a = partialArcs[0]!;
     shape.arc = { start: a.start, end: a.end, innerRadius: a.innerRadius };
@@ -4071,12 +4111,13 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
         }
         if (!seen) byValue.set(value, { width: s.sh.width, height: s.sh.height });
       }
-      if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+      if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
       if (new Set([...byValue.values()].map((d) => `${d.width}×${d.height}`)).size < 2) continue;
       fenceSparseInference(ctx.axes, `shape-size@${where}`, shapes.map((s) => ({ variant: s.variant, value: `${s.sh.width}×${s.sh.height}` })));
       const map: Record<string, { width: string; height: string }> = {};
       for (const value of axis.values) {
-        const d = byValue.get(value)!;
+        const d = byValue.get(value);
+        if (!d) continue;
         map[axisValue(axis, value)] = { width: `${d.width}px`, height: `${d.height}px` };
       }
       sizeByAxis = { propName: axis.propName, map };
@@ -4181,7 +4222,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       }
       if (!seen) byValue.set(value, s);
     }
-    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
     fenceSparseInference(ctx.axes, `shape-placement@${where}`, shapes.map((s) => ({ variant: s.variant, value: specOf(s) })));
     const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
     let emitted = 0;
@@ -7282,17 +7323,25 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
 const OMIT_PART: Record<string, unknown> = { OMIT: true };
 
 function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<string, unknown> | undefined {
-  if (m.occ.length === ctx.totalVariants.length) return undefined;
   const present = new Set(m.occ.map((o) => o.variant));
+  // Keep an already-exact global gate, including a redundant child gate.
+  // Parent scoping extends what can be expressed; it must not rewrite an
+  // existing contract merely because its child repeats the parent's gate.
+  const globallyExplained = ctx.axes.some((axis) => {
+    const values = axis.values.filter((value) => ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value));
+    return values.length > 0 && values.length < axis.values.length && ctx.totalVariants.every((v) => values.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v));
+  });
+  const domain = globallyExplained ? ctx.totalVariants : (ctx.presenceVariants ?? ctx.totalVariants);
+  if (m.occ.length === domain.length) return undefined;
   let boolFalseSide: Axis | undefined;
   for (const axis of ctx.axes) {
     for (const value of axis.values) {
-      const matches = ctx.totalVariants.every((v) => {
+      const matches = domain.every((v) => {
         const is = axisValuesOf(v)[axis.property] === value;
         return is === present.has(v);
       });
       if (!matches) continue;
-      fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
+      fenceSparseInference(ctx.axes, `presence@${where}`, domain.map((v) => ({ variant: v, value: present.has(v) })));
       // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
       // `equals: "true"` would refuse at the referee (visibleWhen.equals is
       // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
@@ -7321,14 +7370,14 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   for (const axis of ctx.axes) {
     if (isBooleanAxis(axis)) continue;
     const presentValues = axis.values.filter((value) =>
-      ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
+      domain.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
     );
     if (presentValues.length < 2 || presentValues.length === axis.values.length) continue;
-    const matches = ctx.totalVariants.every(
+    const matches = domain.every(
       (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
     );
     if (!matches) continue;
-    fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
+    fenceSparseInference(ctx.axes, `presence@${where}`, domain.map((v) => ({ variant: v, value: present.has(v) })));
     ctx.notes.push(
       `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
     );
@@ -7344,7 +7393,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // Absences fully explained by base-instance-flattened variants are a
   // declared fidelity limit (the base component's internals are not captured
   // in those variants), not structural drift — named, but not alarmed.
-  if (ctx.totalVariants.every((v) => present.has(v) || ctx.flattenedVariants.has(v))) {
+  if (domain.every((v) => present.has(v) || ctx.flattenedVariants.has(v))) {
     ctx.notes.push(
       `${where}: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional`,
     );
@@ -7359,15 +7408,15 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // floating tooltips in 20/55) OMITS the part as a NAMED degradation —
   // @door propose.part-kept-majority-presence
   // unconditional emission would draw it in variants that never carried it.
-  if (m.occ.length * 2 > ctx.totalVariants.length) {
+  if (m.occ.length * 2 > domain.length) {
     ctx.notes.push(
-      `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
+      `${where}: present in ${m.occ.length}/${domain.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
     );
     return undefined;
   }
   ctx.notes.push(
     // @door propose.part-omitted-minority-presence
-    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${ctx.totalVariants.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
+    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${domain.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
   );
   return OMIT_PART;
 }
@@ -9397,7 +9446,16 @@ function buildPartFromEvidence(
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = parentModesOf(m, ctx.mint !== undefined);
   // Pre-order key claiming + P9 run detection — see buildChildParts.
-  const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
+  const previousPresence = ctx.presenceVariants;
+  const parentDomain = previousPresence ?? ctx.totalVariants;
+  // Restrict only after an exact presence gate, or when this parent exists
+  // throughout its inherited domain. A named unconditional approximation
+  // must never become evidence that the parent is absent.
+  if (visibleWhen || parentDomain.every((v) => m.occ.some((o) => o.variant === v)))
+    ctx.presenceVariants = m.occ.map((o) => o.variant).filter((v) => parentDomain.includes(v));
+  let parts: Record<string, unknown>;
+  try { parts = buildChildParts(m.children, mode, ctx, where, selfKey); }
+  finally { ctx.presenceVariants = previousPresence; }
   // RC7: a form control's placeholder TEXT node folds back to the channel it
   // came from — ELEMENT-guarded (see foldPlaceholderTextChild).
   foldPlaceholderTextChild(part, parts, ctx, where);

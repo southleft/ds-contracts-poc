@@ -8,6 +8,7 @@
  */
 import {
   PropSchema,
+  filledPathIssue,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -815,6 +816,31 @@ export function validateContract(
           errors.push(`${contract.id}: part "${name}" is a shape (leaf decor) — it cannot also carry "${field}"`);
         }
       }
+      const shape = part.shape;
+      if (shape.kind === 'path') {
+        if (!shape.paths?.length) errors.push(`${contract.id}: ${name}: filled-path-missing-geometry`);
+        const paintMaps = [part.tokens, part.literals, part.declared,
+          ...Object.values(part.states ?? {}),
+          ...tokensByPropEntries(part).flatMap((entry) => Object.values(entry.map)),
+          ...(part.statesByProp ?? []).flatMap((entry) => Object.values(entry.map)),
+          ...(part.stylesWhen ?? []).map((rule) => rule.styles),
+          ...(part.literalsByProp ?? []).flatMap((entry) => Object.values(entry.map))];
+        if (paintMaps.some((map) => Object.keys(map ?? {}).some((key) => /^(border|box-shadow|background-image|clip-path|mask)/.test(key))))
+          errors.push(`${contract.id}: ${name}: filled-path-unsupported-paint-or-mask`);
+        const geometries = [shape, ...Object.values(shape.pathsByProp?.map ?? {})];
+        for (const geometry of geometries) for (const path of geometry.paths ?? []) {
+          const issue = filledPathIssue(path.data);
+          if (issue) errors.push(`${contract.id}: ${name}: ${issue}`);
+        }
+        const by = shape.pathsByProp;
+        if (by) {
+          const prop = contract.props.find((p) => p.name === by.prop);
+          if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type))
+            errors.push(`${contract.id}: ${name}: filled-path-axis-must-be-enum`);
+          else if (Object.keys(by.map).length !== prop.type.enum.length || prop.type.enum.some((value) => !Object.hasOwn(by.map, value)))
+            errors.push(`${contract.id}: ${name}: filled-path-axis-coverage`);
+        }
+      } else if (shape.paths || shape.pathsByProp) errors.push(`${contract.id}: ${name}: filled-path-on-non-path-shape`);
       if (part.shape.sides !== undefined && part.shape.kind !== 'polygon') {
         errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare sides — side count is polygon vocabulary`);
       }

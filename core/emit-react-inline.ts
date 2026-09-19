@@ -1,3 +1,4 @@
+import { lowerFilledPathVariants } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
@@ -193,6 +194,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
 
+  contract = lowerFilledPathVariants(contract);
   const mode = ctx.mode ?? 'light';
   const primitives = flattenTokens(ctx.tokens.primitives);
   const semantic = flattenTokens(ctx.tokens.semantic);

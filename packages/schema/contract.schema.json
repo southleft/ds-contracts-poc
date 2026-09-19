@@ -1114,8 +1114,103 @@
               "enum": [
                 "polygon",
                 "ellipse",
-                "rect"
+                "rect",
+                "path"
               ]
+            },
+            "paths": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 65536,
+                    "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                  },
+                  "windingRule": {
+                    "type": "string",
+                    "enum": [
+                      "NONZERO",
+                      "EVENODD"
+                    ]
+                  }
+                },
+                "required": [
+                  "data",
+                  "windingRule"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "pathsByProp": {
+              "type": "object",
+              "properties": {
+                "prop": {
+                  "type": "string"
+                },
+                "map": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "width": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "height": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "paths": {
+                        "minItems": 1,
+                        "maxItems": 1,
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 65536,
+                              "pattern": "^[MLCQZ0-9eE+.,\\s-]+$"
+                            },
+                            "windingRule": {
+                              "type": "string",
+                              "enum": [
+                                "NONZERO",
+                                "EVENODD"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "data",
+                            "windingRule"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "width",
+                      "height",
+                      "paths"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "prop",
+                "map"
+              ],
+              "additionalProperties": false
             },
             "sides": {
               "type": "integer",

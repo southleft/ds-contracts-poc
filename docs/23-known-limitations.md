@@ -5947,3 +5947,92 @@ remain visible. Every archive hash matches the earlier app delivery.
 Reversal: remove the explicit export request and raster model together, keeping
 the old absolute-span refusals. Preserve both sets of receipts and their source
 images; do not reinterpret historical PNGs as explicit full-bounds exports.
+
+
+## D.60 Closed filled paths retain variant geometry; qualification remains pending
+
+**AGENT decision, 2026-09-19.** The standalone designer Checkbox loses its
+check and minus glyphs because arbitrary VECTOR geometry had no carrier.
+REST GET with `geometry=paths` established that these are single-solid filled
+paths, with no stroke or effect. Dump v1.38 captures that bounded class through
+both REST and the plugin. It preserves path bytes, winding rule, intrinsic
+size and unrotated relative-transform placement; unsupported syntax, missing
+geometry, multiple fills, effects, strokes and non-identity transform axes
+keep the vector-geometry refusal.
+
+The additive `shape.kind: path` grammar carries one compound closed absolute M/L/C/Q/Z
+path and NONZERO/EVENODD winding rules. A complete enum-conditioned geometry
+map keeps differing glyphs and dimensions explicit. Code surfaces share an
+encoded SVG mask with the existing fill/opacity channels. Native output uses
+editable VECTOR nodes and refuses an unexpected intrinsic size before any
+resize; it does not approximate curves. Input length, command count and
+coordinates are bounded. XML, relative commands, arcs and open contours are
+refused. A geometry map cannot silently freeze an observed differing path.
+Unobserved values receive a base geometry only when an exact ancestor presence
+gate makes that value unreachable; the proposal names this non-rendered
+completion. Responsive SCALE constraints are not established by this work.
+
+Nested presence is evaluated within the domain of an exactly gated parent.
+Previously a child present in four of its parent's six variants was counted
+against all twenty-six variants, including twenty where that parent did not
+exist. An unconditional approximation cannot narrow this domain. This is a
+structural rule, with no component-name branch. Fractional path placement is
+carried without the older parametric-shape two-decimal rounding.
+
+Synthetic tests exercise malformed paths, incomplete maps, both React surfaces,
+evenodd paths and nested presence. In authorized Scratch, native VECTOR nodes
+323:4368 and 323:4370 preserve the source dimensions exactly; the bridge was
+closed and the live canvas inspected. Figma normalizes path serialization on
+readback, so byte-identical path round-trip is not claimed. Evidence:
+`private/filled-path-native-probe-2026-09-19-2056/`. This probe is engineering
+evidence; full application delivery and family fidelity remain unqualified.
+
+The consumer observer now includes masks and clip paths: a same-size path-only
+change must be observable. A browser control proves changed pixels at unchanged
+bounds. The image scorer, raster framing and 5% threshold are unchanged.
+
+**Reversal:** remove the path shape fields, both capture branches, shared mask
+lowering, native VECTOR branch and path-specific tests; restore dump v1.37.
+Reverse the parent-domain presence rule separately if needed, retaining the
+omission as a named limitation. Preserve all historical source and consumer
+receipts. The additive source-citation writer (`lowering:check -- --rederive`)
+updates only source locations/text after auditing the result; it refuses
+removed or ambiguous sites and does not alter registered decisions.
+
+
+The first clean-consumer diagnostic retained only 6/26 passing variants:
+the captured glyph was shifted exactly 2px right and down by a CSS border.
+A free Figma FRAME/COMPONENT has no auto-layout stroke inset, so dump v1.38
+now records its effective `strokesIncludedInLayout: false` too (REST omits
+the default NONE layout mode). The existing ring lowering preserves its child
+origin. This is an extension of §D.39, not a padding rewrite. With that rule,
+a second diagnostic passes **13/26**, including every label-hidden variant;
+all thirteen label-shown variants still exceed the black-background limit.
+Both receipts remain in `private/filled-path-consumer-diagnostic-2026-09-19-*`.
+These were direct engine diagnostics, not yet the application delivery journey.
+To reverse this extension separately, remove the non-auto-layout branches in
+both readers and restore their earlier regression expectations; the two-pixel
+child displacement becomes a named limitation again.
+
+The actual generated writer also created a two-variant synthetic set in Scratch
+(page 323:4371, section 323:4372, set 323:4377, editable vectors 323:4374 and
+323:4376). Both native leaves read back at exactly 12×10, including an EVENODD
+cutout. Repeating the same script returned unchanged with no new node IDs;
+the unobstructed canvas was inspected. Evidence:
+`private/filled-path-generated-native-2026-09-19-YSOMnY/`.
+
+Adversarial review found that parent scoping initially removed redundant global
+child gates from a frozen historical contract. Global gates that already explain
+presence now retain precedence; the parent domain is used only when it expands
+expressibility. This preserves the historical contract bytes without rewriting
+the frozen receipt. Bounded controls also refuse a partial geometry capture and
+two-axis XOR geometry, and prevent an unconditional majority parent from narrowing
+the child domain. The native runtime size guard accepts exact/float32 dimensions
+and refuses mismatches without resizing.
+
+A diagnostic on the unchanged labeled consumer localized its 8.515% black score
+to the text box: masking that box leaves 0.309%. Explicit installed Regular font
+bytes leave the score unchanged; antialiased smoothing still exceeds 5% (5.692%).
+Neither is an adopted override. This isolates the remaining rendering gap but
+does not excuse it or establish the source font bytes. Evidence:
+`private/filled-path-label-raster-probe-2026-09-19-8CPGmR/`.

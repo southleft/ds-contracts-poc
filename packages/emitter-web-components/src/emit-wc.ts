@@ -1,3 +1,4 @@
+import { lowerFilledPathVariants } from '@ds-contracts/schema';
 /**
  * Contract → vanilla Custom Element — a pure emitter over the SAME contract
  * semantics the React/HTML generators render, for surfaces that want real
@@ -254,7 +255,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
   // that takes no layout space — core lowerStrokeRings, the same rewrite
   // generateCss applies, so the two sheets cannot disagree about a border.
-  const contract = lowerStrokeRings(input);
+  const contract = lowerStrokeRings(lowerFilledPathVariants(input));
   // dump v1.36: the whole-pixel text box, the same declarations generateCss
   // writes (which also refuses an unsubtractable tracking token by name).
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);

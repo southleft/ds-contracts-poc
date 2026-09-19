@@ -1,3 +1,4 @@
+import { filledPathIssue } from '../../../scripts/contract-schema.js';
 /**
  * REST → dump v1: map a Figma REST API nodes response onto the Plugin-API
  * dump format (extract/figma/types.ts) that extract/figma/propose.ts consumes.
@@ -244,6 +245,10 @@ export interface RestComponentPropertyDefinition {
 }
 
 export interface RestNode {
+  size?: { x: number; y: number };
+  relativeTransform?: number[][];
+  fillGeometry?: Array<{ path: string; windingRule: 'NONZERO' | 'EVENODD' }>;
+
   id: string;
   name: string;
   type: string;
@@ -1222,7 +1227,33 @@ function mapShape(
   ctx: Ctx,
   nodePath: string,
   parentBox: { x: number; y: number; width: number; height: number } | null,
+  parent?: RestNode | null,
 ): DumpShape | undefined {
+  if (node.type === 'VECTOR') {
+    const paths = node.fillGeometry?.map((p) => ({ data: p.path, windingRule: p.windingRule }));
+    const fills = node.fills?.filter((p) => p.visible !== false) ?? [];
+    const t = node.relativeTransform;
+    const width = node.size?.x, height = node.size?.y;
+    const readable = typeof width === 'number' && Number.isFinite(width) && width > 0 &&
+      typeof height === 'number' && Number.isFinite(height) && height > 0 &&
+      paths && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
+      t?.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
+      t[0]![0] === 1 && t[0]![1] === 0 && t[1]![0] === 0 && t[1]![1] === 1 &&
+      fills.length === 1 && fills[0]!.type === 'SOLID' &&
+      (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
+      (node.cornerRadius === undefined || node.cornerRadius === 0) &&
+      !(node.strokes ?? []).some((p) => p.visible !== false) &&
+      !(node.effects ?? []).some((p) => p.visible !== false) && !(node.children?.length);
+    if (!readable) return undefined;
+    const shape: DumpShape = { kind: 'path', width, height, paths };
+    if (parentBox && (node.layoutPositioning === 'ABSOLUTE' || !parent || !parent.layoutMode || parent.layoutMode === 'NONE')) {
+      shape.x = t[0]![2]!; shape.y = t[1]![2]!;
+      shape.right = parentBox.width - shape.x - width;
+      shape.bottom = parentBox.height - shape.y - height;
+      if (node.constraints) shape.constraints = { ...node.constraints };
+    }
+    return shape;
+  }
   const kind = SHAPE_KIND_BY_TYPE[node.type];
   if (kind === undefined) return undefined;
   const rotation = restRotationToCssDeg(node.rotation);
@@ -1302,7 +1333,7 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
       message: `rotation ${node.rotation} on a ${node.type} has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)`,
     });
   }
-  if (VECTOR_TYPES.has(node.type)) {
+  if (VECTOR_TYPES.has(node.type) && !shapeCarried) {
     ctx.report.degradations.push({
       code: 'vector-geometry-unsupported',
       nodePath,
@@ -1584,8 +1615,13 @@ function mapNode(
     // dump field still means "not captured" (dump ≤ v1.34), never `false`.
     // Twin of the same write in extract/figma/dump.plugin.js.
     if (out.layout !== undefined) out.strokesIncludedInLayout = node.strokesIncludedInLayout === true;
+    else if (['FRAME', 'COMPONENT', 'COMPONENT_SET'].includes(node.type) && (node.layoutMode === undefined || node.layoutMode === 'NONE')) {
+      // REST omits layoutMode NONE. A free frame has no auto-layout stroke
+      // inset: its children's coordinate origin remains the frame origin.
+      out.strokesIncludedInLayout = false;
+    }
   }
-  const shape = mapShape(node, ctx, nodePath, parentBox);
+  const shape = mapShape(node, ctx, nodePath, parentBox, parent);
   if (shape) out.shape = shape;
   // REST now carries the plugin's existing fixedSize channel for the same
   // bounded class: an in-flow, non-auto-layout box inside auto-layout.
@@ -1858,7 +1894,8 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.37';
+export const REST_DUMP_VERSION = '1.38';
+// 1.38: bounded closed filled VECTOR paths, exact local size and placement.
 // 1.37: fixedSize on explicit FIXED, in-flow, non-auto-layout boxes inside
 //       auto-layout; exact drawn dimensions use the existing dump channel.
 // 1.36 (design-led fidelity): `text.textAutoResize` carried verbatim on every

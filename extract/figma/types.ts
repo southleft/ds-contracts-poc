@@ -292,7 +292,8 @@ export interface DumpShape {
    *  ABSOLUTE (field case: Untitled UI slider/progress tracks, which
    *  collapsed to 0×0 with only fill+radius surviving). Inside auto-layout
    *  an unrotated rect still returns no shape (existing channels carry it). */
-  kind: 'polygon' | 'ellipse' | 'rect';
+  kind: 'polygon' | 'ellipse' | 'rect' | 'path';
+  paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
   /** Polygon point count (Plugin API pointCount). The REST surface does not
    *  expose it — ABSENT means not captured; the proposer assumes the Figma
    *  default of 3 with a named review note, never silently. */

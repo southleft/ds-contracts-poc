@@ -74,7 +74,8 @@
  * carrying — the same discipline as scripts/door-register-check.ts. Every
  * `proposed` rule in the register is a decision the owner still has to take.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -335,6 +336,50 @@ export function templateTextLines(text: string): Set<number> {
     i++;
   }
   return out;
+}
+
+/** Relocate citations only. Ambiguous text requires unchanged surrounding
+ * source from the prior revision; a removed/changed rule is never guessed. */
+export function rederiveLowering(
+  input: LoweringRegister,
+  read: (file: string) => string | null,
+  previous: (file: string) => string | null,
+  previousRegister: LoweringRegister = input,
+): LoweringRegister {
+  const reg = structuredClone(input);
+  for (const rule of reg.rules) {
+    const text = read(rule.file);
+    if (text === null) throw Error(`lowering-source-missing:${rule.file}`);
+    const lines = text.split('\n');
+    const marker = `// @lower ${rule.id}`;
+    const markers = lines.flatMap((line, i) => line.trim() === marker ? [i + 1] : []);
+    if (markers.length > 1) throw Error(`lowering-marker-ambiguous:${rule.id}`);
+    if (rule.status === 'implemented' && markers.length === 1) {
+      rule.line = markers[0]!;
+      rule.ruleLine = rule.line + 1;
+      rule.ruleText = lines[rule.ruleLine - 1]!.trim();
+      delete rule.markerOutsideRule;
+      continue;
+    }
+    let candidates = lines.flatMap((line, i) => line.trim() === rule.ruleText ? [i + 1] : []);
+    if (candidates.length > 1) {
+      const old = previous(rule.file)?.split('\n');
+      const anchor = previousRegister.rules.find((prior) => prior.id === rule.id && prior.file === rule.file);
+      if (!old || !anchor || anchor.ruleText !== rule.ruleText || old[anchor.ruleLine - 1]?.trim() !== rule.ruleText)
+        throw Error(`lowering-prior-anchor-missing:${rule.id}`);
+      for (let radius = 1; radius <= 20 && candidates.length > 1; radius++) {
+        const from = Math.max(0, anchor.ruleLine - 1 - radius);
+        const before = anchor.ruleLine - 1 - from;
+        const context = old.slice(from, anchor.ruleLine + radius).join('\n');
+        candidates = candidates.filter((line) => lines.slice(line - 1 - before, line + radius).join('\n') === context);
+      }
+    }
+    if (candidates.length !== 1) throw Error(`lowering-rule-unresolved:${rule.id}:${candidates.length}`);
+    rule.ruleLine = candidates[0]!;
+    // Keep meaning and the existing template rationale. The normal audit
+    // must validate that the relocated source still has that classification.
+  }
+  return reg;
 }
 
 /** Every check except the doc and the corpus cross-references — pure over
@@ -898,6 +943,27 @@ function selfTest(): number {
       console.log(`      expected a red matching ${c.expect}; got: ${reds.length === 0 ? '(all green — the gate did NOT refuse)' : reds.slice(0, 3).join(' | ')}`);
     }
   }
+  try {
+    const moved = rederiveLowering(real, (file) => `// harmless relocation\n${read(file)}`, read);
+    const sameDecisions = (reg: LoweringRegister) => JSON.stringify(reg.rules.map(({ line, ruleLine, ruleText, ...meaning }) => meaning));
+    if (sameDecisions(real) !== sameDecisions(moved) || moved.rules.some((rule, i) => rule.ruleLine !== real.rules[i]!.ruleLine + 1))
+      throw Error('citation relocation changed a decision or missed a moved site');
+    const repeated = rederiveLowering(moved, (file) => `// harmless relocation\n${read(file)}`, read, real);
+    if (JSON.stringify(repeated) !== JSON.stringify(moved)) throw Error('citation re-derivation is not idempotent');
+    let refused = 0;
+    const wall = real.rules.find((rule) => rule.status === 'wall')!;
+    for (const broken of [
+      (file: string) => file === wall.file ? read(file)!.split(wall.ruleText).join('REMOVED_RULE') : read(file),
+      (file: string) => file === wall.file ? read(file)! + '\n' + read(file)! : read(file),
+    ]) {
+      try { rederiveLowering(real, broken, read); } catch { refused++; }
+    }
+    if (refused !== 2) throw Error('removed or ambiguous rule was not refused');
+    console.log('  ✔ citation re-derivation preserves decisions and refuses removed/ambiguous sites');
+  } catch (error) {
+    failures++;
+    console.log(`  ✖ citation re-derivation: ${String(error)}`);
+  }
   const clean = auditRules(real, read, doorIds, caseIds, baseline).filter((f) => !f.ok);
   if (clean.length > 0) {
     failures++;
@@ -919,7 +985,19 @@ if (!existsSync(REGISTER)) {
   process.exit(1);
 }
 const raw = readFileSync(REGISTER, 'utf8');
-const reg = JSON.parse(raw) as LoweringRegister;
+let reg = JSON.parse(raw) as LoweringRegister;
+if (process.argv.includes('--rederive')) {
+  const priorRegister = JSON.parse(execFileSync('git', ['show', 'HEAD:spec/lowering.json'], { cwd: REPO, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })) as LoweringRegister;
+  reg = rederiveLowering(reg, readRepo, (file) => {
+    try { return execFileSync('git', ['show', `HEAD:${file}`], { cwd: REPO, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); }
+    catch { return null; }
+  }, priorRegister);
+  const invalid = auditRules(reg, readRepo, loadDoorIds(), loadCaseIds(), loadBaseline()).filter((f) => !f.ok);
+  if (invalid.length) throw Error(invalid.map((f) => f.label).join('\n'));
+  writeFileSync(REGISTER, JSON.stringify(reg, null, 2) + '\n');
+  console.log('✔ lowering citations re-derived and audited; rule decisions unchanged');
+  return;
+}
 
 console.log('\n1. the register is byte-stable');
 {
