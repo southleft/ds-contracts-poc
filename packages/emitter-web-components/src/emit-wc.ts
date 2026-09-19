@@ -74,6 +74,8 @@ import {
 } from '../../schema/src/contract-schema.js';
 import {
   boolProps,
+  DEFAULT_FONT_FAMILY_DECL,
+  defaultFontFamilyParts,
   enumProps,
   finishStylesheet,
   generateCss,
@@ -231,6 +233,7 @@ export function shadowCss(contract: Contract): string {
   const k = kebab(contract.name);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
+  const defaultFamily = defaultFontFamilyParts(contract);
 
   // MULTI-PLACEHOLDER REFS (P0 2026-08-22). A substituted ref expands to one
   // rule per value tuple — the cartesian of its placeholders in DECLARED
@@ -402,6 +405,10 @@ export function shadowCss(contract: Contract): string {
     }
     rootDecls.push(`${cssProp}: ${value}`);
   }
+  // No declared family = the pipeline default (core defaultFontFamilyParts):
+  // a shadow root inherits the HOST page's font through the host element.
+  // After the UA resets — `font: inherit` would erase a family before it.
+  if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, lit] of Object.entries(overrides)) {
@@ -583,6 +590,7 @@ export function shadowCss(contract: Contract): string {
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       decls.push(`${cssProp}: ${value}`);
     }
+    if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
     if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
       decls.push('width: 100%', 'height: 100%');
     }

@@ -114,6 +114,7 @@
   border-top-style: none;
   cursor: pointer;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-md .part-0-0-0 {
@@ -269,4 +270,5 @@
   line-height: var(--imported-checkbox-input-label-line-height);
   row-gap: var(--imported-checkbox-input-label-row-gap);
   cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
 }

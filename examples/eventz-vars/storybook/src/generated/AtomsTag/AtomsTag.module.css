@@ -39,4 +39,5 @@
 .Label {
   font-size: var(--imported-atoms-tag-label-font-size);
   line-height: var(--imported-atoms-tag-label-line-height);
+  font-family: Inter, system-ui, sans-serif;
 }

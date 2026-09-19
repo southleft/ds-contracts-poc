@@ -376,6 +376,7 @@
   top: var(--imported-slider-progress-left-control-left-number-top);
   text-align: center;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .leftControl-0 .leftNumber {
@@ -531,6 +532,7 @@
   line-height: var(--imported-text-text-md-medium-line-height);
   top: var(--imported-slider-progress-right-control-right-number-top);
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .rightControl-25 .rightNumber {

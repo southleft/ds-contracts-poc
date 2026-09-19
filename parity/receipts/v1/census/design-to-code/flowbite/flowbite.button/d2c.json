@@ -309,12 +309,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "b4a46d16f80b2bd75f543320ef8ff569b82498556c0fb609dd2fd0b41b4a5b52",
+    "react/Button/Button.module.css": "e387d7f774750b5b4a7f89a308b7af01faf8642f19793853cf056aeba4824e62",
     "react/Button/Button.stories.tsx": "391a96a111fe2c1cad8fc7db929d1e25c5dcf0dd7367189810a21b5ec5befd30",
     "react/Button/Button.tsx": "eb2f1789ddcd6cb6f287c3c797e95ddb7169d4d3928fa3887d7c5f1a4f5d4824",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/flowbite-button.ts": "60124528db35b03c0b2681fd253ee2d1bf6c4f7b4e04915013759531f5b95d69",
-    "wc/flowbite-button.css.ts": "7cb4d10d05133b5833d644f2cf9a6cc1d544a42aee12e811b08e65f553a10770",
+    "wc/flowbite-button.css.ts": "0a093e5e0fde18538f9376e93a335b4fbd3ae6377531aca3349b793e18218f7e",
     "wc/flowbite-button.demo.html": "20832062212272e4182289c823cd2a3f10c8f4ac2c73d9a758e11ff99d9fafac",
     "wc/flowbite-button.custom-elements.json": "3ac6858009a9d2dd19b71a5e024662ad47ba31fb123613029418161a1af513ae"
   },

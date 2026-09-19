@@ -19,3 +19,7 @@
   height: var(--imported-stub-atoms-text-link-root-height);
   background-color: var(--comp-button-primary-color-content-default);
 }
+
+.text {
+  font-family: Inter, system-ui, sans-serif;
+}

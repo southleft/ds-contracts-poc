@@ -253,6 +253,7 @@
   color: var(--imported-progress-circle-group-3-label-color);
   font-weight: var(--imported-progress-circle-group-3-label-font-weight);
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-md .Label {
@@ -357,6 +358,7 @@
   left: 82px;
   top: 109px;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .size-md .Number {

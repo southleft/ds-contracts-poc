@@ -20,6 +20,7 @@
   font-size: var(--imported-text-root-font-size-none);
   line-height: var(--imported-text-root-line-height-none);
   display: block;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .tone-success {

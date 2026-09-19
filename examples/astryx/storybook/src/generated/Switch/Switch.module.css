@@ -95,6 +95,7 @@
   border-top-style: none;
   cursor: pointer;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .switch {
@@ -223,6 +224,7 @@
   border-top-style: none;
   cursor: pointer;
   position: absolute;
+  font-family: Inter, system-ui, sans-serif;
 }
 
 .switch-2 {
