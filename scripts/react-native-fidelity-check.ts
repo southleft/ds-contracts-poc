@@ -437,9 +437,9 @@ export const EXPECTED_COVERAGE: Record<string, { measured: number; notMeasured: 
   "button-root-matrix": { measured: 0, notMeasured: 63 },
 };
 
-export function verifyBytes(dir: string, manifest: Manifest): void {
+export function verifyBytes(dir: string, manifest: Pick<Manifest, "cohorts">, coverage = EXPECTED_COVERAGE): void {
   const got = Object.fromEntries(manifest.cohorts.map((c) => [c.id, { measured: c.pairs.length, notMeasured: c.notMeasured.length }]));
-  if (JSON.stringify(got) !== JSON.stringify(EXPECTED_COVERAGE)) throw new Error(`coverage-changed: the manifest measures ${JSON.stringify(got)}, the lane pins ${JSON.stringify(EXPECTED_COVERAGE)}`);
+  if (JSON.stringify(got) !== JSON.stringify(coverage)) throw new Error(`coverage-changed: the manifest measures ${JSON.stringify(got)}, the lane pins ${JSON.stringify(coverage)}`);
   for (const cohort of manifest.cohorts) {
     if (new Set(cohort.pairs.map((p) => p.id)).size !== cohort.pairs.length || new Set(cohort.notMeasured.map((n) => n.variant)).size !== cohort.notMeasured.length) throw new Error(`coverage-changed: ${cohort.id} names a variant twice`);
     if (cohort.notMeasured.some((n) => !n.reason) || (cohort.notMeasured.length > 0 && !cohort.notMeasuredReason)) throw new Error(`not-measured-without-reason: ${cohort.id}`);
@@ -461,7 +461,7 @@ export function verifyBytes(dir: string, manifest: Manifest): void {
       }
 }
 
-export function buildScorecard(dir: string, manifest: Manifest, known: KnownFile): Scorecard {
+export function buildScorecard(dir: string, manifest: Pick<Manifest, "qualification" | "acceptedContract" | "cohorts">, known: KnownFile): Scorecard {
   if (manifest.qualification !== QUALIFICATION || manifest.acceptedContract !== null) throw new Error("manifest-qualification-invalid: the manifest must stay measured-not-graded with acceptedContract null");
   if (known.qualification !== QUALIFICATION) throw new Error("ratchet-qualification-invalid: KNOWN-FAILURES.json must stay measured-not-graded");
   const tmp = mkdtempSync(path.join(os.tmpdir(), "react-native-fidelity-"));

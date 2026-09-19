@@ -3740,3 +3740,33 @@ surface outside the React + WC core scope; named here, not fixed.
 `emit-react-inline.ts`, `emit-wc.ts` ×2) and regenerate; or make the proposer
 carry Inter and accept the round-trip cost. **Gate:**
 `core/react-default-font-family.test.ts` (`npm run react:conformance:check`).
+
+## D.46 Declared-family fidelity is additive; incomplete alignment stays visible
+
+**AGENT decision (2026-09-19).** Record workspace-declared families in a new
+`recipe/evidence/react-native-declared-family/` directory. The historical V1
+fixture remains byte-identical. The recorder accepts explicit operation/read
+event and sealed source references, verifies the complete journal chains and
+correlation, and refuses a readback whose plan revision differs from the source
+operation. Every native image and source observation must pair uniquely. It
+records only after authentication; existing output directories refuse. The
+shared source crop, native text geometry and typography routines are the same
+ones used by the historical recorder. No component-name conversion rule is added.
+
+The committed denominator is Switch 9, Alert 1 and Badge 1. The unchanged
+historical 5% score passes Switch and Alert; Badge stays at 6.25%, with all 55
+aligned differing pixels inside its text box (aligned 2.546296%, masked 0%).
+The existing font-substrate classification names that residual; it does not
+turn the historical score into a pass. Computed typography agrees, but the
+source ownership archive did not record the actual Chromium font. All Switch
+aligned scores refuse: six need fractional translation and three exports are
+36×23 despite recorded render bounds spanning 36×24. No resampling or widened
+tolerance is used. Low-contrast thumb placement still needs separate geometry
+and live visual evidence. This lane qualifies evidence integrity, not V1.
+
+**Reverse/reproduce.** Run `npm run react:native:declared:record` with the checked-in
+specification, private archive and a NEW output directory; compare every image
+and manifest byte. Run `npm run react:native:declared:check` offline. Remove the
+Badge named residual to make its historical failure red again. Replace a pair
+only with a new authenticated observation and reviewed denominator; never
+rewrite the frozen historical lineage to fit a new measurement.
