@@ -680,14 +680,15 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "be129f9c9429cd68173173d4547b4272be6cdbf330951ff2649ee32b19731098",
+    "lockfileSha256": "76ed463c037329ed0b231ac1f5b696b945cc9b5466b8e9dc71510f1be711cfd8",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
       "bytes": 16674,
       "tokenDefinitions": 303,
       "tokenDefinitionsExpected": 303
-    }
+    },
+    "interactiveNesting": []
   },
   "outcome": "consumer-mounted-behaved-and-compared"
 }

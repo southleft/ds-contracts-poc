@@ -4867,6 +4867,12 @@
         "name": "Icon",
         "stub": false,
         "packaged": true
+      },
+      {
+        "id": "ds.placeholder",
+        "name": "Placeholder",
+        "stub": false,
+        "packaged": true
       }
     ]
   },
@@ -4900,14 +4906,15 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "8e4f0199726ad95e41d82c04570feb01852e1a2c58cdd12ae8827d47bc4e18f4",
+    "lockfileSha256": "df7cd6bac9d1dd600134ce1ffe7c5690f926315df39b36c10ea150555250fecf",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
       "bytes": 27249,
       "tokenDefinitions": 366,
       "tokenDefinitionsExpected": 366
-    }
+    },
+    "interactiveNesting": []
   },
   "outcome": "consumer-mounted-behaved-and-compared"
 }

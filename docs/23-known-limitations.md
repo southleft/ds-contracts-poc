@@ -4745,7 +4745,9 @@ read for its `componentId`; the response's own `components` / `componentSets`
 metadata gives the owning set (`componentSetId`, else the standalone component's
 own id) and `remote`. Every local target not yet in the dump is fetched in a
 further `/nodes` round — 30 ids per request (the batching `visual-truth/rest.mjs`
-already uses), a 429 retried up to three times after `Retry-After` — and the new
+already uses), a 429 retried up to three times after `Retry-After`, each wait
+printed to stderr, and a `Retry-After` over 60 s REFUSED by name
+(`rate-limit-wait-exceeds-cap`) instead of slept on — and the new
 sets are walked the same way until nothing new is referenced (a fixpoint; a cycle
 terminates because a set is fetched once). The merged response lists sets
 DEPENDENCIES FIRST — a post-order walk from the requested id, targets in sorted id
@@ -4759,14 +4761,15 @@ byte-stable across runs (two live runs of Tabs: identical bytes). Code:
 **What it records.** `_provenance.closure` = `{ rule: 'follow-instances', cap,
 requested: [{nodeId, name, type}], pulled: [{nodeId, name, type, round,
 referencedBy}], unresolved: [{targetId, componentIds, name, reason, detail,
-referencedFrom}], cycles }`, and one `_degradations` row per referencing instance
+referencedFrom}], cycles: [{from, to, fromNodeId, toNodeId}] }`, and one `_degradations` row per referencing instance
 path with the new code `instance-closure-unresolved` (message starts with the
 reason), so the proposer attaches it to the parent set's notes exactly like every
 other capture receipt. The reasons: `remote-library-component` (`remote: true` on
 the component or its set), `not-found` (no metadata, or `/nodes` answered null),
 `not-a-component`, `utility-slot-set` (a set named `Slot`, which the mapper never
 maps), `set-name-collision` (the dump is keyed by set name), `unreadable` (the
-request failed) and `cap-exceeded`. The CLI prints each on stderr; `extract:figma`
+request failed), `cap-exceeded`, `set-name-integer-like` (below) and `cycle-cut`
+(below). The CLI prints each on stderr; `extract:figma`
 prints a "Dependency closure" section in `figma-proposals.md`; the clean-consumer
 receipt carries `inputs.closure` and `inputs.contractGraph`.
 
@@ -4794,6 +4797,54 @@ name. **To reverse:** make `partitionClosureRefusals` return every skip as
 `refused` (one line); the closure then refuses any dump holding an unproposable
 child, as a hand-assembled multi-set dump always did.
 
+**A closure child that proposes but refuses at GENERATE — a named limit (review
+M1).** The partition above sees propose-time refusals only. A pulled child that
+proposes and then fails `ds-contracts generate` (an unresolvable token, a schema
+refusal) takes its parent down with it through the generator's refusal ledger
+(`RefusalLedger.propagate()`: a parent whose child is refused is refused), exactly
+as a hand-assembled multi-set run would. Falling back to the stub there is not
+contained: `generate` has no closure provenance, and the stub it would need was
+never written (the real proposal claimed its id). No measured set hits it (all
+seven proposed children of the four sets generate); the operator's recourse is
+`--no-closure`. Named, not fixed.
+
+**Integer-like set names (review, low).** The dump is a JSON object keyed by set
+name, and JavaScript orders an array-index-like key (`"1"`, `"42"`) ahead of every
+other key, so the dependencies-first order could silently break. A pulled set with
+such a name is not followed, and a REQUESTED set with such a name follows nothing;
+each reference is named `set-name-integer-like`.
+
+**Cycles (review H2).** A cross-set cycle is legal in Figma through different
+variants (a Holder's Md variant instances Chip, Chip instances Holder's Sm
+variant). The first cut let the proposer link the back reference to the REAL
+contract, and `generate` refused the requested set "Circular contract
+dependency" — where without the closure it generated. The walk now cuts the edge
+where it re-enters a set on its stack (`cycles: [{from, to, …}]`), `from` is
+proposed first, and every instance of `to` inside `from` is written by the mapper
+as `instanceOf: "<to> (cycle cut)"` with no component keys and listed under
+`unresolved` as `cycle-cut`: the proposer gives it a stub with its own id
+(`ds.holder-cycle-cut`), so `generate` sees no cycle and emits all three (the
+reviewer's probe, and a gate test that runs propose + generate on it).
+
+**Callers of the REST import (review C1).** `extract/figma/census/first-pass-run.ts`
+ran the REST CLI (closure on) and then graded "the" contract as the first non-stub
+`*.contract.proposed.json` by name — on Tabs that is `button.contract.proposed.json`,
+and it would have graded Button as Tabs and recorded `ok`. It now takes the
+contract anchored to the requested node (`bindings.figma.anchors.nodeId`,
+`pickRequestedContract`) and refuses by name when there is none
+(`requested-contract-not-found:<id>`) or more than one
+(`requested-contract-ambiguous:<id>`). **AGENT decision:** the exam keeps the
+closure on — it runs the product's own documented command, and a followed child
+is exactly what a designer running it gets. Every other caller was checked:
+`core/emitters-check.ts`, the Playground import, the fidelity matrix,
+`state-axis.test.ts` and the sync spine call the library (closure OFF by default)
+or `mapRestToDump` directly; the census `design-to-code` pipeline maps committed
+fixtures in-process; the design-led README names the mounted contract explicitly;
+the documented command lines (`canvas-census-check.ts`, `census/design-to-code.ts`,
+`site/src/diagrams.ts`) read a whole file without a node id, where every set is
+already requested and the closure adds none. No other caller selects a contract
+by position.
+
 **Library callers.** `importFromUrl` follows only when asked (`closure: true`); the
 CLI asks. The Playground's URL import, `core/emitters-check.ts`, the fidelity
 matrix and every fixture-backed caller keep their bytes and their request count,
@@ -4808,8 +4859,18 @@ folder, so real children install with the parent. It now finds the mounted set b
 the contract's own anchor node id when `--component` is the generated name (the
 §D.40 note: `Checkbox Group` generates `CheckboxGroup` and needed an alias key),
 and it lists the contract graph — every transitively referenced component, real or
-stub — naming any reference no generated folder holds
-(`dependency-not-packaged:<id>`). It still mounts and scores only the requested set.
+stub, by the generator's OWN edges (`contractDependencyEdges` in the schema, which
+`sortByDependencies` now walks too: component refs, slot `accepts`, slot
+`defaultContent` — the first cut missed Icon's `defaultContent` glyph and CBDS's
+Placeholder, review M3) — naming any reference no generated folder holds
+(`dependency-not-packaged:<id>`). A `--component` that names a set by key or name
+whose node id contradicts the contract's anchor refuses
+(`dump-set-anchor-mismatch`, review M2; the first cut's test asserted the wrong
+answer). It copies every contract beside the mounted one and `minted.dtcg.json`
+into `inputs/`. And it fails, by name, on interactive content nested in
+interactive content (`interactive-content-nested:<cell>:<outer>><inner>`, HTML's
+rule for `a` and `button`; a `label` around its own control is not flagged).
+It still mounts and scores only the requested set.
 
 **Measured live** (read-only REST, the product's own commands in order, the
 unchanged 5 % limit; "before" is the same pipeline with `--no-closure`, the same
@@ -4817,7 +4878,7 @@ day, the same file version):
 
 | set | children followed | within 5 % before → after | check |
 |---|---|---|---|
-| Altitude `Tabs` `3558:61955` | `Tab Panel`, `Button`, `Icon` real; `Tab`, `Text Passage` refused → named stubs; `ArrowArcLeft` remote → stub | 0 / 2 (5.54 / 5.19 %) → **2 / 2** (1.80 / 1.45 %) | still exit 1 — a NEW `content-size-mismatch` (453 vs 438 px) |
+| Altitude `Tabs` `3558:61955` | `Tab Panel`, `Button`, `Icon` real; `Tab`, `Text Passage` refused → named stubs; `ArrowArcLeft` remote → stub | 0 / 2 (5.54 / 5.19 %) → 2 / 2 by the scorer (1.80 / 1.45 %) — **a pass by the scorer with named content gaps, not a content pass** (below) | still exit 1 — NEW: `interactive-content-nested:…:button>button` and `content-size-mismatch` (453 vs 438 px) |
 | Altitude `Checkbox Group` `3570:2154` | `Checkbox`, `Field Note` real | 2 / 12 (4.85 / 6.45 / 7.47 %) → **12 / 12** (2.46 / 2.92 / 3.83 %) | still exit 1 — `content-size-mismatch`, `legend` inert, `state` discarded, all present before |
 | Altitude `Badge` `3538:35772` | none referenced | 10 / 10 → 10 / 10, every score identical | exit 0 |
 | CBDS `Badge` `277:822` | `Icon` (was a stub), `Placeholder` real | 72 / 72 → 72 / 72, every score identical | exit 0 |
@@ -4825,6 +4886,28 @@ day, the same file version):
 Checkbox Group is reproduced WITHOUT passing a child id. (The set id published by
 `/component_sets`, `3442:25022`, is an older generation that `/nodes` returns
 with no children; the designer's current set is `3570:2154` on the same page.)
+
+**The Tabs headline, caveated (review H1).** Almost all of the 0 / 2 → 2 / 2 gain
+is the real `Button` now drawing inside the panel. The tab labels are still bare
+text (gap 2 below) and the two `Text Passage` lines are still absent (gap 3). Figma
+draws that text near-white, `rgb(241, 240, 234)`, on a TRANSPARENT background; the
+scorer flattens both images onto white, so text Figma draws and the consumer omits
+barely registers — a **scorer blind spot for near-white-on-transparent references**,
+named here and deliberately not changed. The ink coverage is the honest number:
+6.79 % in the consumer against 12.72 % / 13.26 % in Figma. Tabs is a pass by the
+scorer with named content gaps, not a content pass.
+
+**A new defect the closure made reachable — refused by the check.** The real
+`Tab Panel` is emitted as a `<button>` and now contains `Button`'s `<button>`:
+invalid HTML (a `button` may hold no interactive content) and a spurious tab stop.
+**AGENT decision:** it FAILS the clean-consumer check by name
+(`interactive-content-nested:variant-default:button>button`, a DOM query for
+interactive descendants of an `a`/`button`/widget-role element in the consumer),
+rather than being shipped silently. The emitter does not refuse it yet: the root
+cause is the proposer choosing `<button>` for a set whose own description says
+`element: <div>` (gap 1), and an emitter-side refusal needs the whole contract
+graph at emit time — the next gap, named. **To reverse:** delete the
+`interactive-content-nested` push in `scripts/design-consumer-check.ts`.
 
 **Why Tabs still fails, measured — the next gaps, none tuned here.**
 1. `Tab Panel` is now a real contract and renders its `Button` and its two text
@@ -4851,12 +4934,10 @@ with no children; the designer's current set is `3570:2154` on the same page.)
 - The closure brings in every child the parent's instances name, including large
   ones (Tabs pulls the 120-variant `Button`; its dump is 1.7 MB), and each is
   proposed and generated.
-- A cycle is cut where the post-order walk re-enters a set on its stack
-  (`cycles`, `[from, to]`): `from` is proposed first, so its reference to `to` is
-  an auto-proposed stub. The propose CLI skips a stub file whose id a real
-  proposal claims; when the proposer suffixed one of the two ids (a collision
-  with an in-scope contract), the stub is written and named like any other.
-  Untested on a live file (no measured set has a cycle).
+- A cut cycle edge draws a geometry-only stub (`<to> (cycle cut)`) where the
+  designer drew the real set. Tested on synthetic REST bytes only (no measured set
+  has a cycle).
+- A closure child that fails at `generate` refuses its parent (above).
 - The Playground's URL import does not follow instances (library default off).
 
 **Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,
@@ -4865,8 +4946,11 @@ REST-shaped responses for transitive chains, a cycle, remote refs by component a
 by set, a standalone component, a self-reference, the cap, request batching, every
 unresolved reason, nested instances, deterministic order and the byte-identical
 opt-out; the propose CLI end to end on a refusing closure child and on the same set
-requested) and `scripts/design-consumer-check.test.ts` (`npm run
-design:consumer:test` — the anchor lookup and the contract graph).
+requested; after the review: the cycle proposed AND generated, the
+cycle-cut stub spelling, the anchor pick with both refusals, integer-like names,
+the 429 cap and its announcements) and `scripts/design-consumer-check.test.ts`
+(`npm run design:consumer:test` — the anchor lookup and its refusal, the contract
+graph through `defaultContent` and `accepts`, and the nesting query in Chromium).
 
 **To reverse (the whole rule).** Make the CLI default `closure = false` in
 `extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set

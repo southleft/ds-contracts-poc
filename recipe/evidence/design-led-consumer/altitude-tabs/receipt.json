@@ -217,6 +217,8 @@
     ]
   },
   "problems": [
+    "interactive-content-nested:variant-default:button>button",
+    "interactive-content-nested:variant-stretch:button>button",
     "content-size-mismatch:variant-default:453x177 vs 438x176",
     "content-size-mismatch:variant-stretch:453x177 vs 439x176"
   ],
@@ -263,6 +265,12 @@
       ]
     },
     "contractGraph": [
+      {
+        "id": "ds.arrow-arc-left",
+        "name": "ArrowArcLeft",
+        "stub": true,
+        "packaged": true
+      },
       {
         "id": "ds.button",
         "name": "Button",
@@ -349,14 +357,18 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "60d758a1a14f71e67cd792c12f86ccb5110dc5fc90bc5f64002820a194faf202",
+    "lockfileSha256": "0dc1b95fbccba79caacb35263805da921d95e6a3d2c73c230e9a874ba51c9e8a",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
       "bytes": 25591,
       "tokenDefinitions": 346,
       "tokenDefinitionsExpected": 346
-    }
+    },
+    "interactiveNesting": [
+      "variant-default:button>button",
+      "variant-stretch:button>button"
+    ]
   },
   "outcome": "refused-or-failed"
 }

@@ -1057,14 +1057,15 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "bc7c028f70a3e831ae86b0a68c0a7d5c2785a10f003a8fc3ed202fcaecc40f4b",
+    "lockfileSha256": "62288978fec438842a627e88a5c284d24224dfbf4ef5105f89eeba3afe06a05f",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
       "bytes": 28484,
       "tokenDefinitions": 326,
       "tokenDefinitionsExpected": 326
-    }
+    },
+    "interactiveNesting": []
   },
   "outcome": "refused-or-failed"
 }

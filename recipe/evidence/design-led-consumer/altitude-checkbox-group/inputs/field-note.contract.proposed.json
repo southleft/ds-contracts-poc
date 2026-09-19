@@ -1,0 +1,106 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.field-note",
+  "name": "FieldNote",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Tag: al-field-note\n\nProps\n- isDisabled: boolean — Disabled attribute\n- isError: boolean — Error state\n\nSlots\n- (default) — The field note content\n\nAccessibility\n- element: <div>\n\nDocs: https://altitude.pages.dev/docs/components/field-note/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/field-note/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "error",
+          "disabled"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "error": "Error",
+            "disabled": "Disabled"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Helper text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "helperText": {
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "content": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{imported.field-note.helper-text.color.{state}}",
+            "font-size": "{imported.text.typography-body-sm-regular.font-size}",
+            "font-weight": "{imported.text.typography-body-sm-regular.font-weight}",
+            "line-height": "{imported.text.typography-body-sm-regular.line-height}",
+            "opacity": "{imported.field-note.helper-text.opacity.{state}}"
+          }
+        }
+      },
+      "literals": {
+        "height": "fit-content"
+      },
+      "tokens": {
+        "width": "{imported.field-note.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "a79ebe6d4c0ca1c6618ec3790d2e27e498e7eebe",
+        "nodeId": "3543:46961"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/FieldNote",
+        "export": "FieldNote"
+      }
+    }
+  }
+}
