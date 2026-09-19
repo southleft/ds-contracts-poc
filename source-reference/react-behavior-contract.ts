@@ -3,6 +3,7 @@ import { revisionOf } from "../core/contract-provenance.js";
 import { emitReactInline } from "../core/emit-react-inline.js";
 import type { ReactInitialInspection } from "./react-initial-inspection.js";
 import type { ReactCallbackInspection } from "./react-callback-inspection.js";
+import { checkedToggleRole, checkedStateValid } from './control-behavior.js';
 
 export interface ReactBehaviorContract {
   status: "generated-draft" | "refused";
@@ -52,6 +53,14 @@ export function projectReactBehaviorContract(
         (observed.target.instanceId !== initial.observation.instanceId ||
          revisionOf(observed.target.source) !== revisionOf(initial.observation.source))))
       throw Error('behavior-contract-source-target-mismatch');
+    // Stored evidence is judged again here; the observer's refusal is not
+    // assumed. Observations sealed before the role was recorded could only
+    // have been a checkbox: the observer then refused every other role.
+    const role = observed.role === undefined ? "checkbox" : checkedToggleRole(observed.role);
+    if (!role) throw Error("behavior-contract-role-unsupported");
+    if (observed.rows.some((row) => [row.initial, row.live, ...row.steps.map((step) => step.control)]
+        .some((control) => !checkedStateValid(role, control.checked))))
+      throw Error("behavior-contract-state-unsupported-for-role");
     const controlled = observed.relationships.filter(
         (r) => r.status === "controlled-observed",
       ),
@@ -212,9 +221,8 @@ export function projectReactBehaviorContract(
     };
     contract.semantics = {
       ...contract.semantics,
-      role: "checkbox",
-      roleException:
-        "Source root independently observed as a button-backed checkbox.",
+      role,
+      roleException: `Source root independently observed as a button-backed ${role}.`,
     };
     const name = control.callback.slice(2);
     contract.events = [

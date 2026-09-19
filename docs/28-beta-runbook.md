@@ -256,7 +256,7 @@ the differ refuses to trust one older than 14 days (`MAX_SNAPSHOT_AGE_DAYS`)
 — **by design**, because an untouched snapshot would otherwise report green
 forever. The parity output itself now says so when staleness is the only
 finding class. Contract↔code and contract↔token checks still run and should
-be clean. Details: [README §Working in this repository](../README.md) ·
+be clean. Details: [CONTRIBUTING § The gates](../CONTRIBUTING.md#the-gates) ·
 [docs/25 — Reading a Red CI](25-reading-a-red-ci.md).
 
 ---

@@ -199,10 +199,10 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
                   const framing = nativeImageFraming(sourceFrame, image);
                   return <div style={{display:'flex',flexWrap:'wrap',gap:24,alignItems:'flex-start'}}>
                     <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Original React · unchanged source{sourceFrame && <><br />Layout: {sourceFrame.bounds.width.toFixed(2)} × {sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
-                      <div style={{...framing.source,width:'max-content',backgroundColor:'white'}}><img alt="Original React composed Card" style={{display:'block',maxWidth:'none',backgroundColor:'white',...(sourceFrame?{width:sourceFrame.crop.width,height:sourceFrame.crop.height}:{})}}
+                      <div style={{...framing.source,width:'max-content',backgroundColor:'white'}}><img alt="Original React composition" style={{display:'block',maxWidth:'none',backgroundColor:'white',...(sourceFrame?{width:sourceFrame.crop.width,height:sourceFrame.crop.height}:{})}}
                         src={`${root}/native-operation/${operationId}/${sourceFrame ? `source-frame/${sourceFrame.imageSha256}.png` : 'source.png'}`} /></div></figure>
                     <figure style={{margin:0,maxWidth:'100%',overflow:'auto'}}><figcaption>Native Figma · observed source defaults<br />{native.observedVariant}</figcaption>
-                      <div style={{paddingRight:sourceFrame?8:0,paddingBottom:sourceFrame?8:0,...framing.native,width:'max-content',backgroundColor:'white'}}><img alt="Native Figma composed Card at observed source defaults" style={{display:'block',maxWidth:'none',width:image.width,height:image.height}}
+                      <div style={{paddingRight:sourceFrame?8:0,paddingBottom:sourceFrame?8:0,...framing.native,width:'max-content',backgroundColor:'white'}}><img alt="Native Figma composition at observed source defaults" style={{display:'block',maxWidth:'none',width:image.width,height:image.height}}
                         src={`/api/source-reference/native/${delivery.operation!.id}/images/${delivery.operation!.imageObservation!.attemptId}/${image.sha256}.png`} /></div></figure>
                   </div>;
                 })()}

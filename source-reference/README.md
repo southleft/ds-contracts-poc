@@ -4,6 +4,74 @@ The local app's `/sources` page now starts with **React originals**. **Load Reac
 
 Configure `DS_CONTRACTS_REACT_SOURCE_ROOT` on the dev-server process to point to an existing shadcn source sandbox with its installed dependencies. The local owner setup defaults to the original `ds-contracts-poc/examples/shadcn/.shadcn-sandbox` sibling checkout. Requests cannot choose a filesystem path or executable. This preset is not automatic onboarding for an arbitrary React repository.
 
+## Declaring a workspace's own cases
+
+Without a declaration the built-in shadcn cohort above is used, and its entry bytes, case records and reference identity are unchanged. A source workspace can instead declare its own cohort in an optional `ds-contracts.react.json` at the configured source root, so a component family can be brought to the app without editing application code. This path is covered by automated tests in `react-cohort.test.ts`; it has not been demonstrated live against Figma.
+
+```json
+{
+  "version": 1,
+  "source": "Acme source workspace",
+  "theme": "Light",
+  "fontFamily": "Inter",
+  "sideEffectImports": ["@fontsource-variable/inter", "./tailwind.css"],
+  "requiredTokens": { "--primary": "oklch(0.205 0 0)" },
+  "witnessFiles": { "src/components/ui/badge.tsx": "<sha256 of that file>" },
+  "cases": [
+    {
+      "id": "badge-default",
+      "subject": "Badge",
+      "label": "Default",
+      "negativeControl": true,
+      "mount": {
+        "module": "./src/components/ui/badge",
+        "export": "Badge",
+        "props": { "variant": "default" },
+        "children": ["New"]
+      },
+      "witness": {
+        "path": ["[data-slot=\"badge\"]"],
+        "requiredStyles": { "display": "inline-flex", "font-size": "12px" }
+      }
+    }
+  ]
+}
+```
+
+A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from. It must include the resolved source file of every `./`-relative module the cases mount (`./src/components/ui/badge` resolves to `src/components/ui/badge.tsx`; resolution is the bundler's, recorded by the build), so a changed component source always forces renewed witnesses. It cannot name the declaration itself.
+
+Witnesses are authored by the workspace owner from the source's own CSS, tokens and font metadata. They are an independent check of the capture and must never be sampled from converter output. A changed source file requires renewed witnesses.
+
+The entry program is generated deterministically: component imports are deduplicated, sorted and aliased, side-effect imports keep their declared order because stylesheet order is cascade order, elements are built with `React.createElement`, and every declared string reaches the program only through `JSON.stringify`. The declaration's bytes are recorded with the other source files, so editing or removing it produces a new reference identity and invalidates the loaded reference. The reverse holds too: once anything exists at the declaration path, usable or not, a reference loaded from the built-in cohort is stale and must be reloaded.
+
+The workspace must still provide `package.json`, `package-lock.json`, `tsconfig.json`, `src/index.css` and `capture-input.css`, which the reference records unconditionally, and component modules must live under `src/` as `.tsx` for the API and structure readers to select them.
+
+A declaration is refused by name rather than partially applied. **Load React originals** reports the identifier:
+
+| Refusal | Cause |
+| --- | --- |
+| `react-cases-not-regular-file`, `react-cases-unreadable` | The declaration is a symlink, a directory or cannot be read. |
+| `react-cases-too-large` | More than 256 KiB, or more than 64 cases. |
+| `react-cases-json-invalid`, `react-cases-shape-invalid`, `react-cases-case-invalid` | Not JSON, or an unknown or missing key. Unknown keys are refused, not ignored. |
+| `react-cases-version-unsupported` | `version` is not `1`. |
+| `react-cases-label-invalid` | `source`, `theme`, `fontFamily` or a case `label` is empty, too long or multi-line. |
+| `react-cases-side-effect-import-invalid`, `react-cases-module-invalid` | A specifier is neither `./`-relative without `..` segments nor a bare package specifier. |
+| `react-cases-export-invalid`, `react-cases-subject-invalid` | Not a JavaScript identifier. |
+| `react-cases-subject-not-mounted` | The case's `mount` never instantiates its `subject`. |
+| `react-cases-tag-invalid` | Not a lowercase host tag, or one of `script`, `style`, `iframe`, `object`, `embed`, `link`, `meta`. |
+| `react-cases-props-invalid` | Not plain JSON, deeper than 12 levels, or a key that starts with `on`, or is `ref`, `key`, `children`, `dangerouslySetInnerHTML` or `__proto__`. |
+| `react-cases-mount-invalid`, `react-cases-children-invalid`, `react-cases-too-deep` | A malformed element, or nesting deeper than 12 levels. |
+| `react-cases-id-invalid`, `react-cases-id-duplicate` | A case id must match `^[a-z][a-z-]{0,79}$` and be unique. |
+| `react-cases-negative-control-required` | Each distinct `subject` needs exactly one case with `"negativeControl": true`. |
+| `react-cases-tokens-invalid`, `react-cases-witness-files-invalid`, `react-cases-witness-invalid` | Empty or malformed tokens, pinned files or witness, or a pinned path that is the declaration itself. |
+| `react-cases-witness-files-incomplete` | A mounted `./`-relative module resolves to a source file that `witnessFiles` does not pin. Reported when the reference is built. |
+
+Two limits of a declaration are the owner's responsibility, not something the app can check. A `subject` is matched by export name only: two different components exported under one name from different modules count as one subject. And one negative control per subject is only as strong as the owner's honesty about subjects: declaring unlike components under one subject reduces how many cases must reject every corruption.
+
+Native operations created from another cohort are not offered for **Follow the current source** when the loaded cohort has no case with that id, and the action refuses them with `react-source-succession-case-not-in-cohort`.
+
+Interaction and callback observation covers the ARIA checked-state toggle class by observed role: `checkbox`, and `switch` with `true`/`false` only, since ARIA defines no mixed switch. A witness that states `probes.state.properties.ariaChecked` (with `disabled` and `associatedLabelText`) has its label and Space-key interactions exercised; one that states none is not treated as a toggle. Other roles are refused by name. Switch observation is covered by automated tests and has not been demonstrated live.
+
 The reference identity includes the fixture entry, package/lock/config files, exact loaded source/dependency bytes, CSS and font bytes, and emitted runtime assets. The reference runs in a sandbox without same-origin privileges or network access. Inputs are rechecked before serving; changing an input requires a new reference. Immutable private artifacts are stored under `private/react-source-references/<identity>/`. After a server restart, loading the same unchanged source reconstructs the same reference; older archived artifacts are not presented as fresh validation.
 
 **Validate React sources** runs the existing source-readiness and measured-tree reader on all ten originals, archives the loaded resources, then replays them in a fresh browser context without network fallback. Original/replay screenshots and trees must match. Pinned source modules, theme rules and font metadata supply independent style/state/font witnesses. A textless Checkbox requires its uniquely associated visible label, not arbitrary adjacent text.
@@ -16,7 +84,7 @@ Results are provisional until source-integrity and control-completeness checks f
 
 Callback facts include installed parameter types, optional/rest parameters, overloads, generics and whether the return is void. Only a checker-proven zero-argument void callback fits the existing source event proposal. Callbacks with arguments are retained as named omissions instead of silently changing their public API. `react-callback-candidates.ts` matches finite parameter domains against source properties without assuming a relationship from names. For example, `checked` and `defaultChecked` are both type-compatible candidates for `onCheckedChange`; observation must distinguish controlled updates from initial values. Required undefined, arbitrary strings, overloads and generic callbacks remain unsupported. Historical snapshots without signature facts are not reinterpreted or rewritten. The application shows the candidates alongside the incomplete proposal.
 
-`react-callback-inspection.ts` exposes a targeted callback observation through the application, using an existing sealed ownership archive. It reads fresh checker metadata only when the source-file inventory and component identities match that archive. `react-callback-behavior.ts` exercises semantic checkbox controls with each finite candidate input, two label/Space activations, live input updates and callback payload observations. The observer delegates an existing caller callback with its receiver, return and exceptions intact. Each trial verifies restored structure and ownership, then replays the unchanged source page and requires its pixels to match the archive exactly. Same-mount pixel differences are retained separately; this is disposable reference isolation, not business-state rollback. Results and fresh checker facts are saved separately under ignored `private/react-callback-inspections`; original records remain intact. Controlled and initial-only relationships are observations for the tested values, not automatic contract acceptance or proof of arbitrary behavior. Disabled cases must suppress activation and cannot alone establish the enabled-state relationship.
+`react-callback-inspection.ts` exposes a targeted callback observation through the application, using an existing sealed ownership archive. It reads fresh checker metadata only when the source-file inventory and component identities match that archive. `react-callback-behavior.ts` exercises semantic checked-state toggles (observed role `checkbox` or `switch`, never a component name) with each finite candidate input, two label/Space activations, live input updates and callback payload observations. The observer delegates an existing caller callback with its receiver, return and exceptions intact. Each trial verifies restored structure and ownership, then replays the unchanged source page and requires its pixels to match the archive exactly. Same-mount pixel differences are retained separately; this is disposable reference isolation, not business-state rollback. Results and fresh checker facts are saved separately under ignored `private/react-callback-inspections`; original records remain intact. Controlled and initial-only relationships are observations for the tested values, not automatic contract acceptance or proof of arbitrary behavior. Disabled cases must suppress activation and cannot alone establish the enabled-state relationship.
 
 Source readiness is separate from dependency-build reproducibility, Figma fidelity, editability, behavior and workflow completion. **Trace React structure** now feeds supported combined root drafts into **Inspect editable Figma roots** through the shared native operation journal. New observations seal their complete archive in `integrity.json`; preparation pins that seal, report and matrix, and every write reopens the unchanged source/evidence. Existing operations recover after restart when unchanged originals are loaded. The authorized React target is DS Contracts Evaluations; historical Scratch operations retain their original policy. Native root readback checks structure and exposes diagnostic exports; a separate live Button caller-text comparison also passed independent readback. A saved Checkbox initial-state draft also passed live native structural readback. Full content coverage, Checkbox interactions, the composed Card and visual qualification remain unfinished. The earlier Lit workflow below is parked for V1.1 and remains available under the collapsed archive section.
 
