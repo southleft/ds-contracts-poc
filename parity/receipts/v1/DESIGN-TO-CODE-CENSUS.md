@@ -50,11 +50,11 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | flowbite | `flowbite.kbd` | Kbd | 1 | 20 | 22 | 0 | recognisable | — |
 | flowbite | `flowbite.label` | Label | 5 | 55 | 23 | 0 | recognisable | FC-GEOMETRY-EXCLUDED:root-width |
 | flowbite | `flowbite.toggleswitch` | ToggleSwitch | 6 | 132 | 123 | 0 | NOT recognisable | FC-GEOMETRY-EXCLUDED:track-height; STATE-DRIVER:checked-styles |
-| figma-ds | `ds.badge` | Badge | 10 | 114 | 139 | 0 | recognisable | — |
-| figma-ds | `ds.button` | Button | 25 | 441 | 852 | 0 | recognisable | — |
+| figma-ds | `ds.badge` | Badge | 10 | 119 | 139 | 0 | recognisable | — |
+| figma-ds | `ds.button` | Button | 25 | 466 | 852 | 0 | recognisable | — |
 | figma-ds | `ds.button-icon` | Button (Icon) | 5 | 31 | 79 | 0 | NOT recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.button-contract` | Button (contract) | 20 | 219 | 541 | 0 | recognisable | VECTOR-GLYPH-NAMED |
-| figma-ds | `ds.chip` | Chip | 10 | 154 | 318 | 0 | recognisable | VECTOR-GLYPH-NAMED |
+| figma-ds | `ds.chip` | Chip | 10 | 164 | 318 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.heading` | Heading | 42 | 342 | 294 | 0 | recognisable | FC-FONT-SUBSTRATE |
 | figma-ds | `ds.image` | Image | 1 | 13 | 11 | 0 | recognisable | VECTOR-GLYPH-NAMED |
@@ -62,10 +62,10 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.button-group` | Button Group | 2 | 15 | 11 | 0 | NOT recognisable | SLOT-CONTENT-NAMED |
 | figma-ds | `ds.section-header` | Section Header | 2 | 38 | 26 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; GRID-CELL-NAMED |
 | figma-ds | `ds.section-footer` | Section Footer | 1 | 21 | 15 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
-| figma-ds | `ds.toast` | Toast | 5 | 135 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
-| figma-ds | `ds.card` | Card | 2 | 39 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
+| figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
+| figma-ds | `ds.card` | Card | 2 | 41 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 21 | 20 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **2857** | **3985** | **0** | | |
+| **all** | | 23 sets | | **2904** | **3985** | **0** | | |
 
 ## Renders
 

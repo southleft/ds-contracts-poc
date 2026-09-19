@@ -5,9 +5,9 @@
   "nodeId": "91:4928",
   "mode": "reviewable-inversion",
   "variantCount": 10,
-  "contractSha256": "7e588a912e0f772effb840abe3624c29eda5515ba50ac79ec128d0c7528c66be",
+  "contractSha256": "56c512106cf7386265971e1b0edbc8e2256560a72638ee17159fc067a7510655",
   "carriage": {
-    "carried": 114,
+    "carried": 119,
     "named": 139,
     "silent": 0
   },
@@ -143,6 +143,11 @@
       0,
       0
     ],
+    "strokesIncludedInLayout": [
+      5,
+      0,
+      0
+    ],
     "boundVariables.lineHeight": [
       0,
       5,
@@ -251,14 +256,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Badge/Badge.module.css": "d8a9e14c65fd8e1f50022a092b4c3e23db5a89f696c4bb6ebc1226f3a762e744",
+    "react/Badge/Badge.module.css": "83cbcced0562d7decd9d45dadd031e2d2f77cbb4d34ce583dde4aff461f52200",
     "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
     "react/Badge/Badge.tsx": "75f0d2fd45b2025c8de748ea149ab82a658d48795b6c909c6782c1121bf0705a",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "wc/ds-badge.ts": "9ec9d31a4388794c50bcf7af1623d40a31b3dff8f8038bc25df47e6266b4b54d",
-    "wc/ds-badge.css.ts": "230d7896cce82e442f8b28ebe2bfc2037adba53c442d47d9e1bbdf674003e0a2",
+    "wc/ds-badge.css.ts": "772ee4cce5079dd9f27ce659ef66f823aa82298c10148eddc078e6179f295a59",
     "wc/ds-badge.demo.html": "36708d8c35ce5bbf764ed5bd5101fa44c6cbd96c5a503d4818bd1612cbbc1697",
     "wc/ds-badge.custom-elements.json": "512070c152381b5b6a09cefef49a90235b2264ee7dd1108a77da711665710703"
   },
-  "notesCount": 145
+  "notesCount": 146
 }

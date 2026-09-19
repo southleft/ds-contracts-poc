@@ -5,9 +5,9 @@
   "nodeId": "53:2775",
   "mode": "reviewable-inversion",
   "variantCount": 25,
-  "contractSha256": "803ee56673b938bcc1cf7abec667de77e011b587d0f484a26604c7d5172ac3b2",
+  "contractSha256": "fab7c204ba55b73c58af4a8d08ecc08b7bc0cbfa0f7bb735bb5ce4c27254ebd3",
   "carriage": {
-    "carried": 441,
+    "carried": 466,
     "named": 852,
     "silent": 0
   },
@@ -121,6 +121,11 @@
     "strokes[0] + strokeWeight": [
       25,
       5,
+      0
+    ],
+    "strokesIncludedInLayout": [
+      25,
+      0,
       0
     ],
     "cornerRadius": [
@@ -350,12 +355,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "1fb2a84abd60a17bdbba9b61f6d9d427b7dc3da5b854b1d3284605fa12b8e22f",
+    "react/Button/Button.module.css": "7c71f80793174061ed86343694337fe5000862f116635b61e6d53a8cd6eef622",
     "react/Button/Button.stories.tsx": "89116f45c629db0ee76ce94f0e37c64cde5fc43da2f4d4cb9afb3e48237fafd4",
     "react/Button/Button.tsx": "c2ad51a851a2a8f467028a51a8c5218af854db36fb54320aa1547e94c402bd63",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/ds-button.ts": "8bb69300dfeb9b4723e305cb3ac3c6acc2ee777fdb5e9e0056c4f2c769e78b04",
-    "wc/ds-button.css.ts": "c70823fe38b0450c905ba3a7da8649d6fd64225089038721dee938c0563768e5",
+    "wc/ds-button.css.ts": "af88b71f730bd9af87206e8d9fee0379383aac72a6018c22a2b949c9e5373c24",
     "wc/ds-button.demo.html": "282713a1393f1b8af1686effe04f50094eefff69513d368314100b6f5c043a62",
     "wc/ds-button.custom-elements.json": "73ed67e0b677baea879ce3bf6ec1371d4f2fbc438da32b6d13e84841cf77dd51",
     "wc/ds-button-icon.ts": "22e6b99caabc9523b9afff95d253ab6c6eda345a051de3c6b89e5de385c332ad",
@@ -375,5 +380,5 @@
     "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
     "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
   },
-  "notesCount": 603
+  "notesCount": 604
 }
