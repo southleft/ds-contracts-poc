@@ -83,6 +83,10 @@
  *                                                     drawn" and "not captured" stay different facts)
  *   style.textAlignHorizontal                       text.textAlign (dump v1.31 — CENTER | RIGHT | JUSTIFIED; LEFT is
  *                                                     the CSS default and is omitted, as the plugin dump omits it)
+ *   style.textAutoResize                            text.textAutoResize (dump v1.36 — NONE | HEIGHT | WIDTH_AND_HEIGHT |
+ *                                                     TRUNCATE, verbatim on every text node; a box that sizes itself to
+ *                                                     its text is a whole number of pixels wide, so WIDTH_AND_HEIGHT
+ *                                                     inverts to Part.textAutoResize; absent = not captured)
  *   node.styles.effect → styles metadata map        effectStyle / effectStyleKey (dump v1.31 — the EffectStyle's name
  *                                                     and publish key), else effect-style-unresolved
  *   effects[].boundVariables.{radius,spread,color,  effects[].bound.<channel> (dump v1.31) via the variables response,
@@ -148,6 +152,8 @@ export interface RestTypeStyle {
   lineHeightPx?: number;
   /** dump v1.31: LEFT | CENTER | RIGHT | JUSTIFIED → text.textAlign. */
   textAlignHorizontal?: string;
+  /** dump v1.36: NONE | HEIGHT | WIDTH_AND_HEIGHT | TRUNCATE → text.textAutoResize. */
+  textAutoResize?: string;
 }
 
 /** HasBoundVariablesTrait (api_types.ts) — the spellings that differ from the
@@ -1086,6 +1092,19 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   if (s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
     text.textAlign = s.textAlignHorizontal;
   }
+  // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — style.textAutoResize,
+  // verbatim, on every text node. A Figma text box that sizes itself to its
+  // text (WIDTH_AND_HEIGHT) is a WHOLE number of pixels wide, the glyph
+  // advance rounded up, while the browser lays the same run out at its
+  // fractional advance; the proposer lowers that one value to
+  // Part.textAutoResize and the code surfaces round the box up to match. The
+  // other values (a fixed or filled box) are copied so the capture is
+  // complete and lowered by nothing here. An ABSENT dump field means not
+  // captured (dump ≤ v1.35), never auto-width. Twin of the same write in
+  // extract/figma/dump.plugin.js.
+  if (s.textAutoResize === 'NONE' || s.textAutoResize === 'HEIGHT' || s.textAutoResize === 'WIDTH_AND_HEIGHT' || s.textAutoResize === 'TRUNCATE') {
+    text.textAutoResize = s.textAutoResize;
+  }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   // dump v1.33: letter spacing is CARRIED. REST reports it already resolved to
@@ -1787,7 +1806,10 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.35';
+export const REST_DUMP_VERSION = '1.36';
+// 1.36 (design-led fidelity): `text.textAutoResize` carried verbatim on every
+//      text node — a Figma text box that sizes itself to its text is a whole
+//      number of pixels wide (the advance rounded up), the browser's is not.
 // 1.35 (design-led fidelity): `strokesIncludedInLayout` carried on every
 //      auto-layout frame that draws a stroke — a designer's stroke takes no
 //      layout space (Figma's default) while the CSS border it lowered to does.

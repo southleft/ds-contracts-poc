@@ -5203,6 +5203,65 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   );
 }
 
+/** dump v1.36 — A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF
+ *  PIXELS WIDE. Found by the design-led consumer check on a designer's Badge:
+ *  26 of the 48 × 16 px `size=small` variants missed the 5 % limit at
+ *  4.4–7.3 % with every content size equal. Figma's auto-width text box
+ *  (`textAutoResize: WIDTH_AND_HEIGHT`) is the glyph advance rounded UP
+ *  (`Label`, Inter Semi Bold 14: 32 px) while the browser lays the same run
+ *  out at its fractional advance (31.40625 px), so the hug root rendered
+ *  47.40625 px wide against Figma's 48 and its right edge antialiased across
+ *  two columns.
+ *
+ *  The designer's numbers are KEPT. The part records the one captured fact,
+ *  under Figma's own name and only in the value that lowers —
+ *  `textAutoResize: 'WIDTH_AND_HEIGHT'` — for the code emitters to give the
+ *  text element the same box (`inline-size: calc-size(max-content,
+ *  round(up, size, 1px))`, a progressive enhancement: a browser without
+ *  calc-size() keeps today's fractional box) and the writer to set back.
+ *
+ *  Only WIDTH_AND_HEIGHT is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.35, or a canvas that
+ *     reports nothing), never auto-width — those dumps propose the bytes they
+ *     always did;
+ *   · NONE / HEIGHT / TRUNCATE are a fixed or filled box; the width and fill
+ *     vocabulary already carries those, so nothing is written;
+ *   · a node auto-width in some variants and not in others has no single
+ *     spelling (the fact is per part, not per variant) and is NAMED;
+ *   · a node that says WIDTH_AND_HEIGHT and FILL at once contradicts itself
+ *     (Figma turns a filled text box to HEIGHT) — the dump is NAMED, never
+ *     guessed at, and the part keeps the fill it would have had.
+ *  validateContract refuses the flag beside a width / fill / truncation
+ *  channel, so the writer's own compile (a hugging text part) is the only
+ *  shape that ever carries it. */
+function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const captured = m.occ.filter((o) => o.node.text?.textAutoResize !== undefined);
+  // @door propose.text-box-absent-is-fractional
+  if (captured.length === 0) return; // not captured (dump ≤ v1.35) — the browser's own fractional box
+  const modes = [...new Set(captured.map((o) => o.node.text!.textAutoResize!))];
+  // @door propose.text-box-not-auto-width-unchanged
+  if (!modes.includes('WIDTH_AND_HEIGHT')) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  // @door propose.text-box-mixed-refused
+  if (modes.length > 1) {
+    ctx.notes.push(
+      `${where}: the text box sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) in ${captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length} of ${captured.length} variants and is ${modes.filter((v) => v !== 'WIDTH_AND_HEIGHT').join(' / ')} in the rest — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the text keeps the browser's fractional advance (up to 1px narrower than Figma's whole-pixel box; review)`,
+    );
+    return;
+  }
+  // @door propose.text-box-fill-contradiction-refused
+  const filled = captured.filter((o) => o.node.fillWidth === true);
+  if (filled.length > 0) {
+    ctx.notes.push(
+      `${where}: textAutoResize WIDTH_AND_HEIGHT is captured beside layoutSizingHorizontal FILL in ${filled.length} of ${captured.length} variants (dump v1.36) — a filled text box is not sized by its text, and the two facts contradict; REFUSED BY NAME, the text keeps the fill it carries and the browser's fractional advance (review the dump)`,
+    );
+    return;
+  }
+  holder.textAutoResize = 'WIDTH_AND_HEIGHT';
+  ctx.notes.push(
+    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's max-content inline size up to the pixel where calc-size() is supported, and the writer sets the field back on the node`,
+  );
+}
+
 /** FC-DUMP-PROPOSE-ITALIC-DROPPED. The slant is part of the face NAME
  *  (fontName.style "Italic" / "Medium Italic"), and the weight reader was
  *  the only place that looked at it — so a node whose weight was STAMPED
@@ -8244,6 +8303,7 @@ function buildPart(
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
+    carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     nameEffectProvenance(m, ctx, where); // dump v1.31
@@ -11732,6 +11792,17 @@ function proposeFromDumpFenced(
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
+    // the text element's own box; the root's box is padding plus content and
+    // already hugs through its own vocabulary, so a root-level flag would
+    // have to round padding + advance instead of the advance — a different
+    // number whenever the padding is fractional. NAMED, never applied.
+    // @door propose.text-box-hoisted-root-named
+    if (only.occ.some((o) => o.node.text?.textAutoResize === 'WIDTH_AND_HEIGHT')) {
+      ctx.notes.push(
+        `${where}/label: the sole root text node sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) but is hoisted into anatomy.root.text, and the whole-pixel text-box fact qualifies a text PART's own element — the root's box is padding plus content; NAMED, not carried, the label keeps the browser's fractional advance (up to 1px narrower than Figma's box)`,
+      );
+    }
 
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
