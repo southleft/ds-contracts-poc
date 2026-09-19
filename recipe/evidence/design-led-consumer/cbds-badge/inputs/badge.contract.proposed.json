@@ -1,0 +1,233 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "A versatile badge component for labeling, categorizing, or highlighting content with support for 6 semantic color types, 3 visual styles, 2 sizes, optional rounded corners, and optional leading/trailing icons. \n\n\nPURPOSE: Badges are non-interactive status indicators used to communicate categorical information, counts, or states at a glance. They support semantic intent through color types (brand, success, warning, danger, neutral, accent) and visual weight through style variants (fill, tonal, outline). \n\n\nBEHAVIOR: This component is purely presentational with no interactive states — it does not respond to hover, focus, or press events. Icon visibility is controlled via boolean toggles for left and right positions independently. \n\n\nCOMPOSITION: Contains two Icon instances (left and right positions, each wrapping a Placeholder instance with a vector icon) and a Label text node. AI code generators should search the codebase for existing Icon and Placeholder sub-components before creating new ones — these are likely shared primitives used across the design system. \n\n\nUSAGE: Use badges to annotate UI elements with status, category, or metadata. Choose 'fill' for high-emphasis labels, 'tonal' for medium-emphasis on light backgrounds, and 'outline' for low-emphasis or when background contrast is a concern. Use 'rounded=true' for pill-style badges common in tag or chip contexts. Prefer 'large' for standalone use and 'small' for dense or inline contexts. \n\n\nCODE GENERATION NOTES: The component produces 72 total variants (6 types × 3 styles × 2 sizes × 2 rounded states). Icon visibility should be implemented via conditional rendering driven by the iconLeft and iconRight boolean props. The iconLeft and iconRight props are booleans that reveal nested Icon instance slots. All 47 design tokens are fully applied with zero hard-coded values, indicating a mature, token-complete component.\n\nACCESSIBILITY: A badge is almost always non-interactive text — it needs no role, but its meaning must not depend on color alone (WCAG 1.4.1). type=success and type=danger differ only by hue, so the label must carry the meaning (\"Active\", \"Failed\"), never a bare color swatch. Ensure the label meets 4.5:1 against the badge fill in all three styles; the outline style is the tightest case. If a badge is dismissible or filterable it becomes a control and needs a button, a name, and a focus state.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "brand",
+          "success",
+          "warning",
+          "danger",
+          "neutral",
+          "accent"
+        ]
+      },
+      "default": "brand",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "type",
+          "values": {
+            "brand": "brand",
+            "success": "success",
+            "warning": "warning",
+            "danger": "danger",
+            "neutral": "neutral",
+            "accent": "accent"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "style",
+      "type": {
+        "enum": [
+          "fill",
+          "tonal",
+          "outline"
+        ]
+      },
+      "default": "fill",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "style",
+          "values": {
+            "fill": "fill",
+            "tonal": "tonal",
+            "outline": "outline"
+          }
+        },
+        "code": {
+          "prop": "style"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "rounded",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "rounded",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "rounded"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "iconLeft",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "iconLeft"
+        },
+        "code": {
+          "prop": "iconLeft"
+        }
+      }
+    },
+    {
+      "name": "iconRight",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "iconRight"
+        },
+        "code": {
+          "prop": "iconRight"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "strokesIncludedInLayout": false,
+      "parts": {
+        "Icon": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": {
+                "prop": "size",
+                "map": {
+                  "large": "small",
+                  "small": "xsmall"
+                }
+              }
+            }
+          },
+          "visibleWhen": {
+            "prop": "iconLeft"
+          }
+        },
+        "Label": {
+          "content": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{imported.badge.label.color.{type}.{style}}",
+            "font-size": "{imported.badge.label.font-size.{size}}",
+            "font-weight": "{imported.badge.label.font-weight}",
+            "line-height": "{imported.badge.label.line-height}"
+          }
+        },
+        "icon2": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": {
+                "prop": "size",
+                "map": {
+                  "large": "small",
+                  "small": "xsmall"
+                }
+              }
+            }
+          },
+          "visibleWhen": {
+            "prop": "iconRight"
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content"
+      },
+      "tokens": {
+        "background-color": "{imported.badge.root.background-color.{type}.{style}}",
+        "border-color": "{imported.badge.root.border-color.{type}.{style}}",
+        "gap": "{imported.badge.root.gap}",
+        "padding-inline": "{imported.badge.root.padding-inline.{size}}",
+        "padding-block": "{imported.badge.root.padding-block}",
+        "border-radius": "{imported.badge.root.border-radius.{rounded}}",
+        "border-width": "{imported.badge.root.border-width.{style}}",
+        "height": "{imported.badge.root.height.{size}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+        "componentSetKey": "4a31520d1022e8dc345d02a22cc5833b19b3241e",
+        "nodeId": "277:822"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Badge",
+        "export": "Badge"
+      }
+    }
+  }
+}

@@ -6,14 +6,17 @@
   "component": "Tabs",
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
-    "Tab/Tab.module.css": "e255161450308911e9e3c97a4b877cef7bfc56da163fe438de43885dc0ee0f3b",
-    "Tab/Tab.tsx": "908e70bd0b804a368ee8267788d712feca20120de98e9b44ad994f57dda9b319",
+    "Tab/Tab.module.css": "d717af6a21d03c814b8356961d7997d6becb9b8c1ea7f0eafe7f3e8b04b836a7",
+    "Tab/Tab.stories.tsx": "9e9b66ed43f31c4ed653ab44529c0b65d7330edb230f77e337c8660004ed5c0c",
+    "Tab/Tab.tsx": "4b185773266a2f9c3f4eac059396e6d144fa5e06bb3839d2cd1ef6c4c732913b",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
     "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
-    "TabPanel/TabPanel.tsx": "6cfdf56c5b1157179f752cdd195923b44391fe6a0faeb71422a30897e90a4373",
+    "TabPanel/TabPanel.stories.tsx": "1c00dcf69eea38607454b8ae5eed436032f611ce1e1a5fc43d5d1f824479ae6c",
+    "TabPanel/TabPanel.tsx": "ad86f9bb84bd079445ec8f238ebed8d66301c1166b070bffac150696e6ffa914",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
     "Tabs/Tabs.module.css": "ca18eb69b185c859c6182f24129759941b825334db291fb7785429a6dbfebaae",
-    "Tabs/Tabs.tsx": "f3a052842c61d770c1210f61bfa9d7e628d4cdc0e54a768fb76f40f975089e2b",
+    "Tabs/Tabs.stories.tsx": "516decb7a0c6ed884356cedfbe4bfc84e5880dda395434990f9c65a58d32d9f0",
+    "Tabs/Tabs.tsx": "911b619876e0b743fa72767fe26958eaad379499c78166e7ab71697cd96e73c3",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
     "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
     "tokens.css": "5feaf0812b2976d1a9113df7a7a6cace30040c1eef144c03fd28c47a1446aa76"
@@ -46,7 +49,7 @@
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "400",
           "size": "16px",
           "available": true
@@ -81,7 +84,7 @@
         "tag": "div",
         "role": null,
         "font": {
-          "family": "Times",
+          "family": "Inter, system-ui, sans-serif",
           "weight": "400",
           "size": "16px",
           "available": true
@@ -91,6 +94,7 @@
     }
   ],
   "behavior": {
+    "states": [],
     "text": {
       "prop": null,
       "note": "contract declares no TEXT-bound prop"
@@ -109,7 +113,7 @@
     "children": {
       "contractDeclaresSlot": false,
       "renderedAtRuntime": false,
-      "refusedByType": false
+      "refusedByType": true
     },
     "variants": [
       {
@@ -127,16 +131,19 @@
   "images": {
     "status": "figma-images-collected",
     "reason": null,
-    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)",
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render's text boxes masked (inflated by the scorer's own 4 px) and only classifies an over-limit row",
     "limitPercent": 5,
     "cases": [
       {
         "key": "variant-default",
         "figmaImage": "figma-3558_61901.png",
-        "mismatchPercent": 5.327189894388072,
+        "mismatchPercent": 5.538154897494305,
         "withinLimit": false,
+        "textMaskedPercent": 4.965858845917054,
+        "textMaskCoveragePercent": 7.501553116587285,
+        "residual": "text-only",
         "inkCoveragePercent": {
-          "consumer": 2.53,
+          "consumer": 2.79,
           "figma": 12.72
         },
         "contentSize": {
@@ -163,10 +170,13 @@
       {
         "key": "variant-stretch",
         "figmaImage": "figma-3558_61928.png",
-        "mismatchPercent": 5.004918202526403,
+        "mismatchPercent": 5.189997929177884,
         "withinLimit": false,
+        "textMaskedPercent": 4.660827223372698,
+        "textMaskCoveragePercent": 7.501553116587285,
+        "residual": "text-only",
         "inkCoveragePercent": {
-          "consumer": 2.53,
+          "consumer": 2.79,
           "figma": 13.26
         },
         "contentSize": {
@@ -193,13 +203,12 @@
     ]
   },
   "problems": [
-    "children-accepted-but-discarded",
-    "image-difference-above-limit:variant-default:5.33%",
-    "image-difference-above-limit:variant-stretch:5.00%"
+    "image-difference-above-limit:variant-default:5.54%",
+    "image-difference-above-limit:variant-stretch:5.19%"
   ],
   "limitations": [
     "single component set; composition, nested instances and instance swaps are not exercised here",
-    "declared behavior beyond text and variant props is not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
   "inputs": {
@@ -219,7 +228,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "1bc1d321105e05564c74eb4132624cd9c3dc6df17dbdce320185afba83fa3882",
+    "tarballSha256": "4ffa6eb3714be63f4b7a024746bc0170c71748843fb375363a6f14962a5a00cb",
     "distFiles": [
       "Tab",
       "Tab/Tab.d.ts",
@@ -247,11 +256,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "6b2ce5a5ad8a27800b9e334dbe1f04bf3b24e187bd68807b065c2cf00788baef",
+    "lockfileSha256": "afbd50fb4d0ffc019d5a1cd10d1d14851ea6ade7dc722aed41f27cc27735d914",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 15392,
+      "bytes": 15458,
       "tokenDefinitions": 287,
       "tokenDefinitionsExpected": 287
     }

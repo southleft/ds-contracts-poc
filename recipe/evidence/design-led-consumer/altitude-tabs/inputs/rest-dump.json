@@ -1,9 +1,9 @@
 {
   "_provenance": {
     "fileKey": "y83n4o9LOGs74oAoguFcGS",
-    "extractedAt": "2026-09-18",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.34) for design→contract proposal.",
-    "dumpVersion": "1.34",
+    "extractedAt": "2026-09-19",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.35) for design→contract proposal.",
+    "dumpVersion": "1.35",
     "captureGaps": [
       "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
       "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
@@ -13,6 +13,7 @@
       "layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line",
       "the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types"
     ],
+    "stampsObservable": true,
     "variables": {
       "status": "unavailable",
       "cause": "scope",
@@ -96,6 +97,7 @@
               "bottom": 1,
               "left": 0
             },
+            "strokesIncludedInLayout": true,
             "children": [
               {
                 "name": "al-c-tabs__list",
@@ -146,6 +148,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "instanceOf": "Tab",
                     "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -190,6 +193,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -234,6 +238,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
                     "instanceSetKey": "9b4d618b48f31d1f5c372bf0edca65d98fd5e52e",
@@ -354,6 +359,7 @@
               "bottom": 1,
               "left": 0
             },
+            "strokesIncludedInLayout": true,
             "fillWidth": true,
             "children": [
               {
@@ -406,6 +412,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "089b62021c82dfbcca93d75b6558998695f26dd2",
@@ -451,6 +458,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",
@@ -496,6 +504,7 @@
                       "bottom": 2,
                       "left": 0
                     },
+                    "strokesIncludedInLayout": true,
                     "fillWidth": true,
                     "instanceOf": "Tab",
                     "instanceKey": "dd3f3b16935666e56b316a6b9c9ddea3354d3f67",

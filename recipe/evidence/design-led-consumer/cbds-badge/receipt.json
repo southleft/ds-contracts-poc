@@ -1,0 +1,4938 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Badge",
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "generatedSha256": {
+    "Badge/Badge.module.css": "369b53da70b0cc21a5ca3e5ff2fbcadb00fbafc6432ca453f7d6ccb60059bdae",
+    "Badge/Badge.stories.tsx": "4b887fe026446739ae83e5305784905c5ae3b3de97e07b26683aec2b2dc15452",
+    "Badge/Badge.tsx": "2c72fe86021573d757b44d7add97e29097256cfe6aaafe6cf4f7b5d72e2d0da4",
+    "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "Icon/Icon.module.css": "e2bda912f4ae0bca42c533c5ab5e8b141fab371209283128a6a62cc2c7b93382",
+    "Icon/Icon.stories.tsx": "e36c0aa86ef8eeba4d96b27f80cf42c049f339dce5287bd50b7a23d37ca7b988",
+    "Icon/Icon.tsx": "a216e49465310f863ca8e13a73685b104994163d23336919141af2b7fa002800",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "index.ts": "82c5420cf4865583dedd077305c90a9925a720cb8fbfac2a0d3328f69c1e98c2",
+    "tokens.css": "a5d6616ba9a9573f0963542d00c8b40aceda1852d5dfd94191eaa3df0cdcf0e1"
+  },
+  "cases": [
+    {
+      "key": "type-brand_style-fill_size-large_rounded-false",
+      "figmaName": "type=brand, style=fill, size=large, rounded=false",
+      "nodeId": "277:861",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-large_rounded-true",
+      "figmaName": "type=brand, style=fill, size=large, rounded=true",
+      "nodeId": "277:917",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-small_rounded-false",
+      "figmaName": "type=brand, style=fill, size=small, rounded=false",
+      "nodeId": "277:825",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-fill_size-small_rounded-true",
+      "figmaName": "type=brand, style=fill, size=small, rounded=true",
+      "nodeId": "277:919",
+      "props": {
+        "type": "brand",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(14, 97, 186)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-large_rounded-false",
+      "figmaName": "type=brand, style=tonal, size=large, rounded=false",
+      "nodeId": "277:863",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-large_rounded-true",
+      "figmaName": "type=brand, style=tonal, size=large, rounded=true",
+      "nodeId": "277:921",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-small_rounded-false",
+      "figmaName": "type=brand, style=tonal, size=small, rounded=false",
+      "nodeId": "277:827",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-tonal_size-small_rounded-true",
+      "figmaName": "type=brand, style=tonal, size=small, rounded=true",
+      "nodeId": "277:923",
+      "props": {
+        "type": "brand",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(214, 241, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-large_rounded-false",
+      "figmaName": "type=brand, style=outline, size=large, rounded=false",
+      "nodeId": "277:865",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-large_rounded-true",
+      "figmaName": "type=brand, style=outline, size=large, rounded=true",
+      "nodeId": "277:829",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-small_rounded-false",
+      "figmaName": "type=brand, style=outline, size=small, rounded=false",
+      "nodeId": "277:1011",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-brand_style-outline_size-small_rounded-true",
+      "figmaName": "type=brand, style=outline, size=small, rounded=true",
+      "nodeId": "277:1013",
+      "props": {
+        "type": "brand",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-brand_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-fill_size-large_rounded-false",
+      "figmaName": "type=success, style=fill, size=large, rounded=false",
+      "nodeId": "277:867",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-fill_size-large_rounded-true",
+      "figmaName": "type=success, style=fill, size=large, rounded=true",
+      "nodeId": "277:1047",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-fill_size-small_rounded-false",
+      "figmaName": "type=success, style=fill, size=small, rounded=false",
+      "nodeId": "277:831",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-fill_size-small_rounded-true",
+      "figmaName": "type=success, style=fill, size=small, rounded=true",
+      "nodeId": "277:1049",
+      "props": {
+        "type": "success",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(3, 129, 66)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-large_rounded-false",
+      "figmaName": "type=success, style=tonal, size=large, rounded=false",
+      "nodeId": "277:869",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-large_rounded-true",
+      "figmaName": "type=success, style=tonal, size=large, rounded=true",
+      "nodeId": "277:833",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-small_rounded-false",
+      "figmaName": "type=success, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1065",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-tonal_size-small_rounded-true",
+      "figmaName": "type=success, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1067",
+      "props": {
+        "type": "success",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(196, 253, 225)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-outline_size-large_rounded-false",
+      "figmaName": "type=success, style=outline, size=large, rounded=false",
+      "nodeId": "277:871",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-outline_size-large_rounded-true",
+      "figmaName": "type=success, style=outline, size=large, rounded=true",
+      "nodeId": "277:1081",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-success_style-outline_size-small_rounded-false",
+      "figmaName": "type=success, style=outline, size=small, rounded=false",
+      "nodeId": "277:1083",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-success_style-outline_size-small_rounded-true",
+      "figmaName": "type=success, style=outline, size=small, rounded=true",
+      "nodeId": "277:835",
+      "props": {
+        "type": "success",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-success_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-large_rounded-false",
+      "figmaName": "type=warning, style=fill, size=large, rounded=false",
+      "nodeId": "277:873",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-large_rounded-true",
+      "figmaName": "type=warning, style=fill, size=large, rounded=true",
+      "nodeId": "277:1145",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-small_rounded-false",
+      "figmaName": "type=warning, style=fill, size=small, rounded=false",
+      "nodeId": "277:837",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-fill_size-small_rounded-true",
+      "figmaName": "type=warning, style=fill, size=small, rounded=true",
+      "nodeId": "277:1147",
+      "props": {
+        "type": "warning",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(182, 115, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-large_rounded-false",
+      "figmaName": "type=warning, style=tonal, size=large, rounded=false",
+      "nodeId": "277:875",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-large_rounded-true",
+      "figmaName": "type=warning, style=tonal, size=large, rounded=true",
+      "nodeId": "277:1149",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-small_rounded-false",
+      "figmaName": "type=warning, style=tonal, size=small, rounded=false",
+      "nodeId": "277:839",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-tonal_size-small_rounded-true",
+      "figmaName": "type=warning, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1151",
+      "props": {
+        "type": "warning",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 246, 204)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-large_rounded-false",
+      "figmaName": "type=warning, style=outline, size=large, rounded=false",
+      "nodeId": "277:877",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-large_rounded-true",
+      "figmaName": "type=warning, style=outline, size=large, rounded=true",
+      "nodeId": "277:841",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-small_rounded-false",
+      "figmaName": "type=warning, style=outline, size=small, rounded=false",
+      "nodeId": "277:1153",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-warning_style-outline_size-small_rounded-true",
+      "figmaName": "type=warning, style=outline, size=small, rounded=true",
+      "nodeId": "277:1155",
+      "props": {
+        "type": "warning",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-warning_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-large_rounded-false",
+      "figmaName": "type=danger, style=fill, size=large, rounded=false",
+      "nodeId": "277:879",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-large_rounded-true",
+      "figmaName": "type=danger, style=fill, size=large, rounded=true",
+      "nodeId": "277:1157",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-small_rounded-false",
+      "figmaName": "type=danger, style=fill, size=small, rounded=false",
+      "nodeId": "277:843",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-fill_size-small_rounded-true",
+      "figmaName": "type=danger, style=fill, size=small, rounded=true",
+      "nodeId": "277:1159",
+      "props": {
+        "type": "danger",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(181, 24, 51)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-large_rounded-false",
+      "figmaName": "type=danger, style=tonal, size=large, rounded=false",
+      "nodeId": "277:881",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-large_rounded-true",
+      "figmaName": "type=danger, style=tonal, size=large, rounded=true",
+      "nodeId": "277:845",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-small_rounded-false",
+      "figmaName": "type=danger, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1161",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-tonal_size-small_rounded-true",
+      "figmaName": "type=danger, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1163",
+      "props": {
+        "type": "danger",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(255, 218, 227)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-large_rounded-false",
+      "figmaName": "type=danger, style=outline, size=large, rounded=false",
+      "nodeId": "277:883",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-large_rounded-true",
+      "figmaName": "type=danger, style=outline, size=large, rounded=true",
+      "nodeId": "277:847",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-small_rounded-false",
+      "figmaName": "type=danger, style=outline, size=small, rounded=false",
+      "nodeId": "277:1165",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-danger_style-outline_size-small_rounded-true",
+      "figmaName": "type=danger, style=outline, size=small, rounded=true",
+      "nodeId": "277:1167",
+      "props": {
+        "type": "danger",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-danger_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-large_rounded-false",
+      "figmaName": "type=neutral, style=fill, size=large, rounded=false",
+      "nodeId": "277:885",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-large_rounded-true",
+      "figmaName": "type=neutral, style=fill, size=large, rounded=true",
+      "nodeId": "277:1169",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-small_rounded-false",
+      "figmaName": "type=neutral, style=fill, size=small, rounded=false",
+      "nodeId": "277:849",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-fill_size-small_rounded-true",
+      "figmaName": "type=neutral, style=fill, size=small, rounded=true",
+      "nodeId": "277:1171",
+      "props": {
+        "type": "neutral",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(58, 71, 91)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-large_rounded-false",
+      "figmaName": "type=neutral, style=tonal, size=large, rounded=false",
+      "nodeId": "277:887",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-large_rounded-true",
+      "figmaName": "type=neutral, style=tonal, size=large, rounded=true",
+      "nodeId": "277:851",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-small_rounded-false",
+      "figmaName": "type=neutral, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1173",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-tonal_size-small_rounded-true",
+      "figmaName": "type=neutral, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1175",
+      "props": {
+        "type": "neutral",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(223, 227, 235)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-large_rounded-false",
+      "figmaName": "type=neutral, style=outline, size=large, rounded=false",
+      "nodeId": "277:889",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-large_rounded-true",
+      "figmaName": "type=neutral, style=outline, size=large, rounded=true",
+      "nodeId": "277:853",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-small_rounded-false",
+      "figmaName": "type=neutral, style=outline, size=small, rounded=false",
+      "nodeId": "277:1177",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-neutral_style-outline_size-small_rounded-true",
+      "figmaName": "type=neutral, style=outline, size=small, rounded=true",
+      "nodeId": "277:1179",
+      "props": {
+        "type": "neutral",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-neutral_style-outline_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-large_rounded-false",
+      "figmaName": "type=accent, style=fill, size=large, rounded=false",
+      "nodeId": "277:891",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-large_rounded-true",
+      "figmaName": "type=accent, style=fill, size=large, rounded=true",
+      "nodeId": "277:1181",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-small_rounded-false",
+      "figmaName": "type=accent, style=fill, size=small, rounded=false",
+      "nodeId": "277:855",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-fill_size-small_rounded-true",
+      "figmaName": "type=accent, style=fill, size=small, rounded=true",
+      "nodeId": "277:1183",
+      "props": {
+        "type": "accent",
+        "style": "fill",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(41, 45, 150)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-fill_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-large_rounded-false",
+      "figmaName": "type=accent, style=tonal, size=large, rounded=false",
+      "nodeId": "277:893",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-large_rounded-true",
+      "figmaName": "type=accent, style=tonal, size=large, rounded=true",
+      "nodeId": "277:857",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-small_rounded-false",
+      "figmaName": "type=accent, style=tonal, size=small, rounded=false",
+      "nodeId": "277:1185",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-tonal_size-small_rounded-true",
+      "figmaName": "type=accent, style=tonal, size=small, rounded=true",
+      "nodeId": "277:1187",
+      "props": {
+        "type": "accent",
+        "style": "tonal",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(224, 225, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-tonal_size-small_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-large_rounded-false",
+      "figmaName": "type=accent, style=outline, size=large, rounded=false",
+      "nodeId": "277:895",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "large",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-large_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-large_rounded-true",
+      "figmaName": "type=accent, style=outline, size=large, rounded=true",
+      "nodeId": "277:859",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "large",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 60.640625,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-large_rounded-true.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-small_rounded-false",
+      "figmaName": "type=accent, style=outline, size=small, rounded=false",
+      "nodeId": "277:1189",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "small",
+        "rounded": false
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-small_rounded-false.png"
+    },
+    {
+      "key": "type-accent_style-outline_size-small_rounded-true",
+      "figmaName": "type=accent, style=outline, size=small, rounded=true",
+      "nodeId": "277:1191",
+      "props": {
+        "type": "accent",
+        "style": "outline",
+        "size": "small",
+        "rounded": true
+      },
+      "rendered": {
+        "text": "Label",
+        "backgroundColor": "rgb(252, 254, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 47.40625,
+        "height": 16,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-type-accent_style-outline_size-small_rounded-true.png"
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": "text",
+      "textBearingCells": [
+        "type-brand_style-fill_size-large_rounded-false",
+        "type-brand_style-fill_size-large_rounded-true",
+        "type-brand_style-fill_size-small_rounded-false",
+        "type-brand_style-fill_size-small_rounded-true",
+        "type-brand_style-tonal_size-large_rounded-false",
+        "type-brand_style-tonal_size-large_rounded-true",
+        "type-brand_style-tonal_size-small_rounded-false",
+        "type-brand_style-tonal_size-small_rounded-true",
+        "type-brand_style-outline_size-large_rounded-false",
+        "type-brand_style-outline_size-large_rounded-true",
+        "type-brand_style-outline_size-small_rounded-false",
+        "type-brand_style-outline_size-small_rounded-true",
+        "type-success_style-fill_size-large_rounded-false",
+        "type-success_style-fill_size-large_rounded-true",
+        "type-success_style-fill_size-small_rounded-false",
+        "type-success_style-fill_size-small_rounded-true",
+        "type-success_style-tonal_size-large_rounded-false",
+        "type-success_style-tonal_size-large_rounded-true",
+        "type-success_style-tonal_size-small_rounded-false",
+        "type-success_style-tonal_size-small_rounded-true",
+        "type-success_style-outline_size-large_rounded-false",
+        "type-success_style-outline_size-large_rounded-true",
+        "type-success_style-outline_size-small_rounded-false",
+        "type-success_style-outline_size-small_rounded-true",
+        "type-warning_style-fill_size-large_rounded-false",
+        "type-warning_style-fill_size-large_rounded-true",
+        "type-warning_style-fill_size-small_rounded-false",
+        "type-warning_style-fill_size-small_rounded-true",
+        "type-warning_style-tonal_size-large_rounded-false",
+        "type-warning_style-tonal_size-large_rounded-true",
+        "type-warning_style-tonal_size-small_rounded-false",
+        "type-warning_style-tonal_size-small_rounded-true",
+        "type-warning_style-outline_size-large_rounded-false",
+        "type-warning_style-outline_size-large_rounded-true",
+        "type-warning_style-outline_size-small_rounded-false",
+        "type-warning_style-outline_size-small_rounded-true",
+        "type-danger_style-fill_size-large_rounded-false",
+        "type-danger_style-fill_size-large_rounded-true",
+        "type-danger_style-fill_size-small_rounded-false",
+        "type-danger_style-fill_size-small_rounded-true",
+        "type-danger_style-tonal_size-large_rounded-false",
+        "type-danger_style-tonal_size-large_rounded-true",
+        "type-danger_style-tonal_size-small_rounded-false",
+        "type-danger_style-tonal_size-small_rounded-true",
+        "type-danger_style-outline_size-large_rounded-false",
+        "type-danger_style-outline_size-large_rounded-true",
+        "type-danger_style-outline_size-small_rounded-false",
+        "type-danger_style-outline_size-small_rounded-true",
+        "type-neutral_style-fill_size-large_rounded-false",
+        "type-neutral_style-fill_size-large_rounded-true",
+        "type-neutral_style-fill_size-small_rounded-false",
+        "type-neutral_style-fill_size-small_rounded-true",
+        "type-neutral_style-tonal_size-large_rounded-false",
+        "type-neutral_style-tonal_size-large_rounded-true",
+        "type-neutral_style-tonal_size-small_rounded-false",
+        "type-neutral_style-tonal_size-small_rounded-true",
+        "type-neutral_style-outline_size-large_rounded-false",
+        "type-neutral_style-outline_size-large_rounded-true",
+        "type-neutral_style-outline_size-small_rounded-false",
+        "type-neutral_style-outline_size-small_rounded-true",
+        "type-accent_style-fill_size-large_rounded-false",
+        "type-accent_style-fill_size-large_rounded-true",
+        "type-accent_style-fill_size-small_rounded-false",
+        "type-accent_style-fill_size-small_rounded-true",
+        "type-accent_style-tonal_size-large_rounded-false",
+        "type-accent_style-tonal_size-large_rounded-true",
+        "type-accent_style-tonal_size-small_rounded-false",
+        "type-accent_style-tonal_size-small_rounded-true",
+        "type-accent_style-outline_size-large_rounded-false",
+        "type-accent_style-outline_size-large_rounded-true",
+        "type-accent_style-outline_size-small_rounded-false",
+        "type-accent_style-outline_size-small_rounded-true"
+      ],
+      "changedCells": [
+        "type-brand_style-fill_size-large_rounded-false",
+        "type-brand_style-fill_size-large_rounded-true",
+        "type-brand_style-fill_size-small_rounded-false",
+        "type-brand_style-fill_size-small_rounded-true",
+        "type-brand_style-tonal_size-large_rounded-false",
+        "type-brand_style-tonal_size-large_rounded-true",
+        "type-brand_style-tonal_size-small_rounded-false",
+        "type-brand_style-tonal_size-small_rounded-true",
+        "type-brand_style-outline_size-large_rounded-false",
+        "type-brand_style-outline_size-large_rounded-true",
+        "type-brand_style-outline_size-small_rounded-false",
+        "type-brand_style-outline_size-small_rounded-true",
+        "type-success_style-fill_size-large_rounded-false",
+        "type-success_style-fill_size-large_rounded-true",
+        "type-success_style-fill_size-small_rounded-false",
+        "type-success_style-fill_size-small_rounded-true",
+        "type-success_style-tonal_size-large_rounded-false",
+        "type-success_style-tonal_size-large_rounded-true",
+        "type-success_style-tonal_size-small_rounded-false",
+        "type-success_style-tonal_size-small_rounded-true",
+        "type-success_style-outline_size-large_rounded-false",
+        "type-success_style-outline_size-large_rounded-true",
+        "type-success_style-outline_size-small_rounded-false",
+        "type-success_style-outline_size-small_rounded-true",
+        "type-warning_style-fill_size-large_rounded-false",
+        "type-warning_style-fill_size-large_rounded-true",
+        "type-warning_style-fill_size-small_rounded-false",
+        "type-warning_style-fill_size-small_rounded-true",
+        "type-warning_style-tonal_size-large_rounded-false",
+        "type-warning_style-tonal_size-large_rounded-true",
+        "type-warning_style-tonal_size-small_rounded-false",
+        "type-warning_style-tonal_size-small_rounded-true",
+        "type-warning_style-outline_size-large_rounded-false",
+        "type-warning_style-outline_size-large_rounded-true",
+        "type-warning_style-outline_size-small_rounded-false",
+        "type-warning_style-outline_size-small_rounded-true",
+        "type-danger_style-fill_size-large_rounded-false",
+        "type-danger_style-fill_size-large_rounded-true",
+        "type-danger_style-fill_size-small_rounded-false",
+        "type-danger_style-fill_size-small_rounded-true",
+        "type-danger_style-tonal_size-large_rounded-false",
+        "type-danger_style-tonal_size-large_rounded-true",
+        "type-danger_style-tonal_size-small_rounded-false",
+        "type-danger_style-tonal_size-small_rounded-true",
+        "type-danger_style-outline_size-large_rounded-false",
+        "type-danger_style-outline_size-large_rounded-true",
+        "type-danger_style-outline_size-small_rounded-false",
+        "type-danger_style-outline_size-small_rounded-true",
+        "type-neutral_style-fill_size-large_rounded-false",
+        "type-neutral_style-fill_size-large_rounded-true",
+        "type-neutral_style-fill_size-small_rounded-false",
+        "type-neutral_style-fill_size-small_rounded-true",
+        "type-neutral_style-tonal_size-large_rounded-false",
+        "type-neutral_style-tonal_size-large_rounded-true",
+        "type-neutral_style-tonal_size-small_rounded-false",
+        "type-neutral_style-tonal_size-small_rounded-true",
+        "type-neutral_style-outline_size-large_rounded-false",
+        "type-neutral_style-outline_size-large_rounded-true",
+        "type-neutral_style-outline_size-small_rounded-false",
+        "type-neutral_style-outline_size-small_rounded-true",
+        "type-accent_style-fill_size-large_rounded-false",
+        "type-accent_style-fill_size-large_rounded-true",
+        "type-accent_style-fill_size-small_rounded-false",
+        "type-accent_style-fill_size-small_rounded-true",
+        "type-accent_style-tonal_size-large_rounded-false",
+        "type-accent_style-tonal_size-large_rounded-true",
+        "type-accent_style-tonal_size-small_rounded-false",
+        "type-accent_style-tonal_size-small_rounded-true",
+        "type-accent_style-outline_size-large_rounded-false",
+        "type-accent_style-outline_size-large_rounded-true",
+        "type-accent_style-outline_size-small_rounded-false",
+        "type-accent_style-outline_size-small_rounded-true"
+      ]
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": true
+    },
+    "variants": [
+      {
+        "prop": "type",
+        "switchedTo": "brand",
+        "cellsExpectedToChange": [
+          "type-success_style-fill_size-large_rounded-false",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-false",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-false",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-false",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-false",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-success_style-fill_size-large_rounded-false",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-false",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-false",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-false",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-false",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "style",
+        "switchedTo": "fill",
+        "cellsExpectedToChange": [
+          "type-brand_style-tonal_size-large_rounded-false",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-false",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-tonal_size-large_rounded-false",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-false",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-false",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-false",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-false",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-false",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-false",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-false",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-false",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-false",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-false",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-false",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "size",
+        "switchedTo": "large",
+        "cellsExpectedToChange": [
+          "type-brand_style-fill_size-small_rounded-false",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-fill_size-small_rounded-false",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-false",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-small_rounded-false",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-small_rounded-false",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-small_rounded-false",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-small_rounded-false",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-small_rounded-false",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-false",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-small_rounded-false",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-small_rounded-false",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-false",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-small_rounded-false",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-false",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-false",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-false",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-small_rounded-false",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-false",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-small_rounded-false",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      },
+      {
+        "prop": "rounded",
+        "switchedTo": false,
+        "cellsExpectedToChange": [
+          "type-brand_style-fill_size-large_rounded-true",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-true"
+        ],
+        "cellsChanged": [
+          "type-brand_style-fill_size-large_rounded-true",
+          "type-brand_style-fill_size-small_rounded-true",
+          "type-brand_style-tonal_size-large_rounded-true",
+          "type-brand_style-tonal_size-small_rounded-true",
+          "type-brand_style-outline_size-large_rounded-true",
+          "type-brand_style-outline_size-small_rounded-true",
+          "type-success_style-fill_size-large_rounded-true",
+          "type-success_style-fill_size-small_rounded-true",
+          "type-success_style-tonal_size-large_rounded-true",
+          "type-success_style-tonal_size-small_rounded-true",
+          "type-success_style-outline_size-large_rounded-true",
+          "type-success_style-outline_size-small_rounded-true",
+          "type-warning_style-fill_size-large_rounded-true",
+          "type-warning_style-fill_size-small_rounded-true",
+          "type-warning_style-tonal_size-large_rounded-true",
+          "type-warning_style-tonal_size-small_rounded-true",
+          "type-warning_style-outline_size-large_rounded-true",
+          "type-warning_style-outline_size-small_rounded-true",
+          "type-danger_style-fill_size-large_rounded-true",
+          "type-danger_style-fill_size-small_rounded-true",
+          "type-danger_style-tonal_size-large_rounded-true",
+          "type-danger_style-tonal_size-small_rounded-true",
+          "type-danger_style-outline_size-large_rounded-true",
+          "type-danger_style-outline_size-small_rounded-true",
+          "type-neutral_style-fill_size-large_rounded-true",
+          "type-neutral_style-fill_size-small_rounded-true",
+          "type-neutral_style-tonal_size-large_rounded-true",
+          "type-neutral_style-tonal_size-small_rounded-true",
+          "type-neutral_style-outline_size-large_rounded-true",
+          "type-neutral_style-outline_size-small_rounded-true",
+          "type-accent_style-fill_size-large_rounded-true",
+          "type-accent_style-fill_size-small_rounded-true",
+          "type-accent_style-tonal_size-large_rounded-true",
+          "type-accent_style-tonal_size-small_rounded-true",
+          "type-accent_style-outline_size-large_rounded-true",
+          "type-accent_style-outline_size-small_rounded-true"
+        ]
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render's text boxes masked (inflated by the scorer's own 4 px) and only classifies an over-limit row",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "type-brand_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_861.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.28,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_917.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86.27,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_825.png",
+        "mismatchPercent": 5.859375,
+        "withinLimit": false,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 87.37,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_919.png",
+        "mismatchPercent": 5.46875,
+        "withinLimit": false,
+        "textMaskedPercent": 10.15625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 82.94,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_863.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_921.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.9,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_827.png",
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_923.png",
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 92.32,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_865.png",
+        "mismatchPercent": 1.2295081967213115,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.3,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_829.png",
+        "mismatchPercent": 1.0245901639344261,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 42.35,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1011.png",
+        "mismatchPercent": 5.46875,
+        "withinLimit": false,
+        "textMaskedPercent": 26.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.77,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1013.png",
+        "mismatchPercent": 6.640625,
+        "withinLimit": false,
+        "textMaskedPercent": 25.78125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 58.07,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_867.png",
+        "mismatchPercent": 3.278688524590164,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.28,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1047.png",
+        "mismatchPercent": 3.278688524590164,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86.27,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_831.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 87.37,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1049.png",
+        "mismatchPercent": 5.338541666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 10.15625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 82.94,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_869.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_833.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 93.03,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1065.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 7.8125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1067.png",
+        "mismatchPercent": 4.817708333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 2.34375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 92.97,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_871.png",
+        "mismatchPercent": 1.5027322404371584,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.3,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_1081.png",
+        "mismatchPercent": 1.2978142076502732,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 42.35,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1083.png",
+        "mismatchPercent": 6.119791666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 26.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.77,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_835.png",
+        "mismatchPercent": 7.291666666666667,
+        "withinLimit": false,
+        "textMaskedPercent": 25.78125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 58.07,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_873.png",
+        "mismatchPercent": 2.663934426229508,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.01,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1145.png",
+        "mismatchPercent": 2.663934426229508,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_837.png",
+        "mismatchPercent": 4.947916666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 86.98,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1147.png",
+        "mismatchPercent": 4.557291666666666,
+        "withinLimit": true,
+        "textMaskedPercent": 7.8125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 82.55,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_875.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_1149.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.9,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_839.png",
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1151.png",
+        "mismatchPercent": 4.427083333333334,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 92.71,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_877.png",
+        "mismatchPercent": 1.2978142076502732,
+        "withinLimit": true,
+        "textMaskedPercent": 0.78125,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.23,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_841.png",
+        "mismatchPercent": 1.092896174863388,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 42.21,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1153.png",
+        "mismatchPercent": 5.208333333333334,
+        "withinLimit": false,
+        "textMaskedPercent": 25,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.64,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1155.png",
+        "mismatchPercent": 6.380208333333333,
+        "withinLimit": false,
+        "textMaskedPercent": 22.65625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 57.94,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_879.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.08,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1157.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86.07,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_843.png",
+        "mismatchPercent": 5.859375,
+        "withinLimit": false,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 86.98,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1159.png",
+        "mismatchPercent": 5.46875,
+        "withinLimit": false,
+        "textMaskedPercent": 10.15625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 82.55,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_881.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_845.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.9,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1161.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 7.8125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1163.png",
+        "mismatchPercent": 4.6875,
+        "withinLimit": true,
+        "textMaskedPercent": 1.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 91.8,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_883.png",
+        "mismatchPercent": 1.366120218579235,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.23,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_847.png",
+        "mismatchPercent": 1.1612021857923498,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 42.28,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1165.png",
+        "mismatchPercent": 5.859375,
+        "withinLimit": false,
+        "textMaskedPercent": 26.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.64,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1167.png",
+        "mismatchPercent": 7.03125,
+        "withinLimit": false,
+        "textMaskedPercent": 25.78125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 57.94,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_885.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.21,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1169.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86.2,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_849.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 87.24,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1171.png",
+        "mismatchPercent": 5.338541666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 10.15625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 82.81,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_887.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_851.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.76,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1173.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 7.8125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1175.png",
+        "mismatchPercent": 4.6875,
+        "withinLimit": true,
+        "textMaskedPercent": 1.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 91.67,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_889.png",
+        "mismatchPercent": 0.9562841530054645,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.3,
+          "figma": 37.5
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_853.png",
+        "mismatchPercent": 0.9562841530054645,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 41.67,
+          "figma": 38.59
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1177.png",
+        "mismatchPercent": 5.208333333333334,
+        "withinLimit": false,
+        "textMaskedPercent": 21.09375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.77,
+          "figma": 55.86
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1179.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 14.84375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 57.94,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-false",
+        "figmaImage": "figma-277_891.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.21,
+          "figma": 95.08
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-true",
+        "figmaImage": "figma-277_1181.png",
+        "mismatchPercent": 3.415300546448088,
+        "withinLimit": true,
+        "textMaskedPercent": 0.26041666666666663,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 86.07,
+          "figma": 89.07
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-false",
+        "figmaImage": "figma-277_855.png",
+        "mismatchPercent": 5.859375,
+        "withinLimit": false,
+        "textMaskedPercent": 9.375,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 87.24,
+          "figma": 95.18
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-true",
+        "figmaImage": "figma-277_1183.png",
+        "mismatchPercent": 5.46875,
+        "withinLimit": false,
+        "textMaskedPercent": 10.15625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 82.81,
+          "figma": 91.54
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-false",
+        "figmaImage": "figma-277_893.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 99.73,
+          "figma": 99.73
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-true",
+        "figmaImage": "figma-277_857.png",
+        "mismatchPercent": 1.912568306010929,
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 92.69,
+          "figma": 93.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-false",
+        "figmaImage": "figma-277_1185.png",
+        "mismatchPercent": 5.729166666666666,
+        "withinLimit": false,
+        "textMaskedPercent": 7.8125,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 97.4,
+          "figma": 99.48
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-true",
+        "figmaImage": "figma-277_1187.png",
+        "mismatchPercent": 4.6875,
+        "withinLimit": true,
+        "textMaskedPercent": 1.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "inkCoveragePercent": {
+          "consumer": 91.67,
+          "figma": 95.83
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-false",
+        "figmaImage": "figma-277_895.png",
+        "mismatchPercent": 1.4344262295081966,
+        "withinLimit": true,
+        "textMaskedPercent": 1.0416666666666665,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 40.3,
+          "figma": 37.77
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-true",
+        "figmaImage": "figma-277_859.png",
+        "mismatchPercent": 1.2295081967213115,
+        "withinLimit": true,
+        "textMaskedPercent": 1.3020833333333335,
+        "textMaskCoveragePercent": 73.77049180327869,
+        "inkCoveragePercent": {
+          "consumer": 42.35,
+          "figma": 38.87
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 61,
+            "height": 24
+          },
+          "figma": {
+            "width": 61,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-false",
+        "figmaImage": "figma-277_1189.png",
+        "mismatchPercent": 5.989583333333334,
+        "withinLimit": false,
+        "textMaskedPercent": 26.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 56.77,
+          "figma": 56.38
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-true",
+        "figmaImage": "figma-277_1191.png",
+        "mismatchPercent": 7.161458333333333,
+        "withinLimit": false,
+        "textMaskedPercent": 26.5625,
+        "textMaskCoveragePercent": 83.33333333333334,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 58.07,
+          "figma": 57.42
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 48,
+            "height": 16
+          },
+          "figma": {
+            "width": 48,
+            "height": 16
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-false:5.86%",
+    "image-difference-above-limit:type-brand_style-fill_size-small_rounded-true:5.47%",
+    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-false:5.47%",
+    "image-difference-above-limit:type-brand_style-outline_size-small_rounded-true:6.64%",
+    "image-difference-above-limit:type-success_style-fill_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-success_style-fill_size-small_rounded-true:5.34%",
+    "image-difference-above-limit:type-success_style-tonal_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-success_style-outline_size-small_rounded-false:6.12%",
+    "image-difference-above-limit:type-success_style-outline_size-small_rounded-true:7.29%",
+    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-false:5.21%",
+    "image-difference-above-limit:type-warning_style-outline_size-small_rounded-true:6.38%",
+    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-false:5.86%",
+    "image-difference-above-limit:type-danger_style-fill_size-small_rounded-true:5.47%",
+    "image-difference-above-limit:type-danger_style-tonal_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-false:5.86%",
+    "image-difference-above-limit:type-danger_style-outline_size-small_rounded-true:7.03%",
+    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-neutral_style-fill_size-small_rounded-true:5.34%",
+    "image-difference-above-limit:type-neutral_style-tonal_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-false:5.21%",
+    "image-difference-above-limit:type-neutral_style-outline_size-small_rounded-true:5.73%",
+    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-false:5.86%",
+    "image-difference-above-limit:type-accent_style-fill_size-small_rounded-true:5.47%",
+    "image-difference-above-limit:type-accent_style-tonal_size-small_rounded-false:5.73%",
+    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-false:5.99%",
+    "image-difference-above-limit:type-accent_style-outline_size-small_rounded-true:7.16%"
+  ],
+  "limitations": [
+    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 1320
+    },
+    "stubContracts": [
+      "ds-icon.stub.contract.proposed.json"
+    ],
+    "componentFolders": [
+      "Badge",
+      "Icon"
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/badge",
+    "tarballSha256": "ac69a101925c7824df957dd9fa3b180f4dc2a266ca70eed27f89078cd793e1d6",
+    "distFiles": [
+      "Badge",
+      "Badge/Badge.d.ts",
+      "Badge/Badge.js",
+      "Badge/Badge.module.css",
+      "Badge/index.d.ts",
+      "Badge/index.js",
+      "Icon",
+      "Icon/Icon.d.ts",
+      "Icon/Icon.js",
+      "Icon/Icon.module.css",
+      "Icon/index.d.ts",
+      "Icon/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "1fce855ed9a505ed76dbe57d275a0bb5bbb168f752479c702174065559945155",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "builtCss": {
+      "bytes": 26152,
+      "tokenDefinitions": 355,
+      "tokenDefinitionsExpected": 355
+    }
+  },
+  "outcome": "refused-or-failed"
+}
