@@ -35,6 +35,8 @@ export interface NativeDeliveryJobs {
   beginWrite?(id: string, attemptId: string): void;
   observeDesign?(id: string): NativeOperationCommand;
   rearmWrite?(id: string): void;
+  /** Operator attestation that the companion that began the latest write is gone. */
+  attestDead?(id: string): unknown;
   writeOutcomeRead?(id: string): { writeAttemptId: string; readAttemptId: string } | null;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
@@ -285,5 +287,17 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (!status(id).started || !jobs.rearmWrite) fail("write-rearm-refused");
     jobs.rearmWrite(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite, observeDesign };
+  /** The operator attests that the companion granted `begin` is gone. The
+   * journal revokes that attempt; the canvas read that settles it is a separate step. */
+  const attestDead = (id: string, observedAt = Date.now()) => {
+    connection(id);
+    const state = status(id, observedAt);
+    if (!state.started || !jobs.attestDead) fail("write-attestation-refused");
+    // A companion that polled within the liveness window is not gone. A companion
+    // busy executing does not poll, so this cannot prove absence: it only refuses
+    // an attestation that is visibly false.
+    if (state.connected) throw Error("native-update-attest-dead-companion-connected");
+    jobs.attestDead(id);
+  };
+  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite, attestDead, observeDesign };
 }

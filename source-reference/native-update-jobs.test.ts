@@ -340,6 +340,34 @@ test('the actual companion that died holding a write marker takes only the read 
   assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
 });
 
+// The gap the ledger named: permission to begin was granted, then the companion died.
+test('the actual companion: a write begun by a companion that then died is attested dead, settled by a canvas read, and re-armed only by the operator',async t=>{
+  const f=await fixture(t);await f.poll();f.lose('claim');await f.poll();
+  const write=f.jobs().pendingCommand(f.id)!;
+  // The plugin was granted begin and saved its "received" marker, then died before executing.
+  f.transport().begin(f.id,f.secret,write.attemptId);
+  f.storage.set('ds_native_receipt:'+f.id,{stage:'received',identity:{operationId:f.id,phase:write.phase,attemptId:write.attemptId}});
+  f.restart();
+  f.transport().resolveWriteOutcome(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-recovery-required','without attestation a begun write is never treated as dead');
+  assert.deepEqual(f.jobs().get(f.id).problems,['native-update-write-begun-outcome-unresolved']);
+  // The reopened plugin just polled: it is visibly alive, so the attestation is refused until it is closed.
+  assert.throws(()=>f.transport().attestDead(f.id),/native-update-attest-dead-companion-connected/);
+  f.transport().attestDead(f.id,Date.now()+16_000);
+  assert.equal(f.jobs().get(f.id).unresolvedWrite,'awaiting-result');
+  assert.throws(()=>f.transport().begin(f.id,f.secret,write.attemptId),/write-begin-refused/);
+  await f.poll();assert.equal(f.jobs().get(f.id).pendingPhase,'update-apply','polling alone neither resends nor settles it');
+  f.transport().resolveWriteOutcome(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
+  for(let i=0;i<2;i++)await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+  f.transport().rearmWrite(f.id);for(let i=0;i<3;i++)await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.25));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,2,'one revoked write that never ran, one operator-approved write');
+});
+
 test('the actual companion does not execute a write the app refuses to let it begin',async t=>{
   const f=await fixture(t);await f.poll();
   // The app has already dispatched a read to judge this write; a held-up holder asks too late.

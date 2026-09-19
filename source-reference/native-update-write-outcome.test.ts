@@ -218,3 +218,293 @@ test('a design read names a canvas edit without moving the verified state, and t
  f.jobs().observeDesign(f.id);assert.throws(()=>f.jobs().observeDesign(f.id),/design-observation-refused/);
  f.jobs().retryObservation(f.id);
 });
+
+// An operator may attest that a begun write's companion is gone. The attestation
+// revokes that attempt, so no late result or late begin is accepted, and the write
+// is then settled by a canvas read dispatched after it like any other unknown write.
+const events=(dir:string)=>readdirSync(path.join(dir,'events')).sort().map(file=>JSON.parse(readFileSync(path.join(dir,'events',file),'utf8')));
+async function begun(t:test.TestContext) {
+ const f=await fixture(t);await f.run('update-preflight-readback');
+ const write=f.jobs().dispatch(f.id,'update-apply');f.jobs().beginWrite(f.id,write.attemptId);
+ return {...f,write};
+}
+
+test('begun, then the companion died: an attestation revokes the write, the canvas read finds it untouched, and a re-armed write verifies',async t=>{
+ const f=await begun(t);
+ assert.equal(f.jobs().get(f.id).canAttestDead,true);
+ f.jobs().attestDead(f.id);
+ const attested=events(f.dir).at(-1);
+ assert.equal(attested.kind,'update-attempt-attested-dead');assert.equal(attested.attemptId,f.write.attemptId);
+ assert.match(attested.statement,/companion .* is gone/);assert.ok(Number.isFinite(Date.parse(attested.at)));
+ assert.equal(f.jobs().get(f.id).attestedDead!.attemptId,f.write.attemptId);
+ assert.equal(f.jobs().get(f.id).unresolvedWrite,'awaiting-result','attesting settles nothing by itself');
+ assert.throws(()=>f.jobs().beginWrite(f.id,f.write.attemptId),/write-begin-refused/,'a revoked write may not begin again');
+ assert.throws(()=>f.jobs().dispatch(f.id,'update-apply'),/dispatch-refused/,'and it is never sent again');
+ f.restart();const {snapshot}=await f.settle();
+ assert.equal(snapshot.phase,'update-write-untouched');assert.deepEqual(snapshot.problems,[]);
+ assert.equal(f.jobs().updateHistory(f.parent).length,0,'the chain is free: an untouched write holds no place in it');
+ f.jobs().rearmWrite(f.id);
+ for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const)await f.run(phase);
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.deepEqual(f.jobs().get(f.id).problems,[]);
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.component.variants[0].spec.opacity,0.25);
+ assert.equal(f.writes(),2);f.restart();assert.equal(f.jobs().get(f.id).phase,'update-verified');
+});
+
+test('the ledger\'s frozen case: a begun write settled as unresolved is unfrozen by attestation, and a write that had landed verifies with no second write',async t=>{
+ const f=await begun(t);
+ const first=await f.settle();
+ assert.equal(first.snapshot.phase,'update-recovery-required');
+ assert.deepEqual(first.snapshot.problems,['native-update-write-begun-outcome-unresolved']);
+ assert.throws(()=>f.jobs().verifiedForParent(f.parent),/effective-observation-unavailable/,'before: the chain is frozen');
+ // The companion executed after that read and died before reporting.
+ await f.run_script(f.write.script);
+ assert.equal(f.jobs().get(f.id).canAttestDead,true);
+ const reopened=f.jobs().attestDead(f.id);
+ assert.equal(reopened.unresolvedWrite,'awaiting-result','revoked, it is an unknown write again');
+ const {snapshot}=await f.settle();
+ assert.equal(snapshot.phase,'update-applied');
+ await f.run('update-readback');
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.equal(f.writes(),1);
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.component.variants[0].spec.opacity,0.25,'after: the chain continues from the verified correction');
+ const plans=createNativeUpdatePlans(f.repo,()=>({parentJournalRevision:'a'.repeat(64),input:f.input}),id=>f.jobs().updateHistory(id));
+ assert.doesNotThrow(()=>plans.prepare(f.parent),'the next proposal can be planned');
+ const count=events(f.dir).length;
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-settled$/,'a settled attestation is refused by name');
+ assert.equal(events(f.dir).length,count);
+});
+
+test('an attestation abandons a canvas read dispatched before it; only a read after it may judge the write',async t=>{
+ const f=await begun(t);const early=f.jobs().resolveWriteOutcome(f.id);
+ f.jobs().attestDead(f.id);
+ assert.deepEqual(events(f.dir).slice(-2).map(e=>[e.kind,e.attemptId]),[['abandon-observation',early.attemptId],['update-attempt-attested-dead',f.write.attemptId]]);
+ const answer=await f.run_script(early.script);
+ assert.throws(()=>f.jobs().accept(f.id,{...early,result:answer}),/result-correlation-invalid|unsolicited-result/,'the abandoned read can no longer answer');
+ assert.equal((await f.settle()).snapshot.phase,'update-write-untouched');
+});
+
+test('a partial landing after attestation still needs recovery, by name; attesting again adds no event',async t=>{
+ const f=await begun(t);f.jobs().attestDead(f.id);
+ const before=events(f.dir).length;f.jobs().attestDead(f.id);f.jobs().attestDead(f.id);
+ assert.equal(events(f.dir).length,before,'a second attestation of the unsettled write records nothing');
+ f.nodes[0].opacity=0.8;
+ const {snapshot}=await f.settle();
+ assert.equal(snapshot.phase,'update-recovery-required');assert.deepEqual(snapshot.problems,['native-update-write-outcome-unresolved']);
+ assert.equal(snapshot.canAttestDead,false);
+ const settled=events(f.dir).length;
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-settled$/);
+ assert.equal(events(f.dir).length,settled);
+ assert.equal(events(f.dir).filter(e=>e.kind==='update-attempt-attested-dead').length,1);
+ assert.throws(()=>f.jobs().rearmWrite(f.id),/write-rearm-refused/);
+ assert.throws(()=>f.jobs().verifiedForParent(f.parent),/effective-observation-unavailable/);
+});
+
+test('a late result after attestation is recorded as late and never counted as the outcome',async t=>{
+ // Before the read: it does not settle the write, however much it claims.
+ const f=await begun(t);f.jobs().attestDead(f.id);
+ const landed=await f.run_script(f.write.script);
+ const late=f.jobs().accept(f.id,{...f.write,result:landed});
+ assert.equal(events(f.dir).at(-1).kind,'late-result-after-revocation');
+ assert.equal(late.phase,'awaiting-native-result');assert.equal(late.unresolvedWrite,'awaiting-result');
+ assert.deepEqual(late.problems,['native-update-late-result-after-revocation']);
+ const count=events(f.dir).length;
+ assert.equal(f.jobs().accept(f.id,{...f.write,result:landed}).phase,'awaiting-native-result','a repeated delivery records nothing more');
+ assert.equal(events(f.dir).length,count);
+ assert.throws(()=>f.jobs().accept(f.id,{...f.write,result:{...landed,status:'no-op'}}),/result-replay-conflict/);
+ assert.equal(f.writes(),1);
+ // While the settling read is in flight: it does not outrank the read, as an unrevoked result would.
+ const g=await begun(t);g.jobs().attestDead(g.id);const read=g.jobs().resolveWriteOutcome(g.id);
+ const phase=g.jobs().get(g.id).phase,problems=g.jobs().get(g.id).problems;
+ g.jobs().accept(g.id,{...g.write,result:{status:'updated'}});
+ assert.equal(g.jobs().get(g.id).phase,phase);assert.equal(g.jobs().writeOutcomeRead(g.id)?.readAttemptId,read.attemptId,'the read is still the judge');
+ assert.deepEqual(g.jobs().get(g.id).problems,[...problems,'native-update-late-result-after-revocation']);
+ assert.equal(g.jobs().accept(g.id,{...read,result:await g.run_script(read.script)}).phase,'update-write-untouched','the canvas decides');
+ // After an untouched settlement: judged by the same allow-list as any late write result.
+ // "updated" contradicts the read, so the update stops for recovery as a written, unverified correction.
+ const h=await begun(t);h.jobs().attestDead(h.id);await h.settle();
+ const after=h.jobs().accept(h.id,{...h.write,result:{status:'updated'}});
+ assert.equal(after.phase,'update-recovery-required');
+ assert.deepEqual(after.problems,['native-update-late-write-result-contradicts-canvas','native-update-late-result-after-revocation']);
+ assert.equal(events(h.dir).at(-1).kind,'late-result-after-revocation','the event kind is kept');
+ h.restart();assert.equal(h.jobs().get(h.id).phase,'update-recovery-required');
+ assert.equal(h.jobs().updateHistory(h.parent).length,1);
+ assert.throws(()=>h.jobs().verifiedForParent(h.parent),/effective-observation-unavailable/);
+ // Benign after untouched: a refusal or a no-op agrees with the read.
+ for(const status of ['refused','no-op']) {
+  const k=await begun(t);k.jobs().attestDead(k.id);await k.settle();
+  const benign=k.jobs().accept(k.id,{...k.write,result:{status}});
+  assert.equal(benign.phase,'update-write-untouched',status);assert.deepEqual(benign.problems,['native-update-late-result-after-revocation']);
+ }
+});
+
+// Reviewer probe P1: the companion was alive; its program ran after the untouched read and reported.
+test('regression P1: a revoked write that really ran after an untouched settlement and reports it stops the update for recovery',async t=>{
+ const a=await begun(t);a.jobs().attestDead(a.id);await a.settle();
+ const real=await a.run_script(a.write.script);assert.equal(real.status,'updated');
+ const s=a.jobs().accept(a.id,{...a.write,result:real});
+ assert.equal(s.phase,'update-recovery-required');
+ assert.ok(s.problems.includes('native-update-late-write-result-contradicts-canvas'));
+ assert.equal(a.jobs().updateHistory(a.parent).length,1,'the correction chain sees a written, unverified correction');
+ assert.throws(()=>a.jobs().verifiedForParent(a.parent),/effective-observation-unavailable/);
+ assert.throws(()=>a.jobs().rearmWrite(a.id),/write-rearm-refused/);
+ // An independent read recovers it with no further write.
+ a.jobs().retryObservation(a.id);const read=a.jobs().pendingCommand(a.id)!;
+ assert.equal(a.jobs().accept(a.id,{...read,result:await a.run_script(read.script)}).phase,'update-verified');assert.equal(a.writes(),1);
+});
+
+// Reviewer probe P2: attested, read found it landed, verified; then the revoked program reports a real rollback.
+test('regression P2: a revoked write reporting a rollback after a landed settlement stops the update for recovery',async t=>{
+ const a=await begun(t);a.jobs().attestDead(a.id);
+ await a.run_script(a.write.script);await a.settle();await a.run('update-readback');
+ assert.equal(a.jobs().get(a.id).phase,'update-verified');
+ for(const n of a.nodes as any[]) n.opacity=0.5;
+ const s=a.jobs().accept(a.id,{...a.write,result:{status:'rolled-back'}});
+ assert.equal(s.phase,'update-recovery-required');
+ assert.deepEqual(s.problems,['native-update-late-write-result-contradicts-canvas','native-update-late-result-after-revocation']);
+ assert.throws(()=>a.jobs().verifiedForParent(a.parent),/effective-observation-unavailable/);
+ const b=await begun(t);b.jobs().attestDead(b.id);await b.run_script(b.write.script);await b.settle();await b.run('update-readback');
+ assert.equal(b.jobs().accept(b.id,{...b.write,result:{status:'updated'}}).phase,'update-verified','"updated" agrees with a landed settlement');
+});
+
+test('after re-arm, the revoked attempt can no longer be attested, and its late result waits while a new command is pending',async t=>{
+ const f=await begun(t);f.jobs().attestDead(f.id);await f.settle();f.jobs().rearmWrite(f.id);
+ const count=events(f.dir).length;
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-settled$/);
+ assert.equal(events(f.dir).length,count);assert.equal(f.jobs().get(f.id).canAttestDead,false);
+ f.jobs().dispatch(f.id,'update-preflight-readback');
+ assert.throws(()=>f.jobs().accept(f.id,{...f.write,result:{status:'updated'}}),/unsolicited-result/,'as for an unrevoked late result');
+ assert.equal(events(f.dir).length,count+1);
+});
+
+test('an attestation is refused by name unless the latest write was begun and is unresolved',async t=>{
+ const f=await fixture(t);
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-no-write$/);
+ await f.run('update-preflight-readback');const write=f.jobs().dispatch(f.id,'update-apply');
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-not-begun$/,'never begun: the canvas read already settles it');
+ assert.equal(f.jobs().get(f.id).canAttestDead,false);
+ f.jobs().beginWrite(f.id,write.attemptId);
+ f.jobs().accept(f.id,{...write,result:await f.run_script(write.script)});
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-answered$/,'a companion that reported is not gone');
+ await f.run('update-readback');
+ assert.throws(()=>f.jobs().attestDead(f.id),/^Error: native-update-attest-dead-write-answered$/);
+ // Begun, settled unresolved, then a separate read of the canvas is in flight.
+ const g=await begun(t);await g.settle();g.jobs().retryObservation(g.id);
+ assert.throws(()=>g.jobs().attestDead(g.id),/^Error: native-update-attest-dead-observation-in-flight$/);
+ // Begun, and a later readback verified it landed: nothing left to attest.
+ const pending=g.jobs().pendingCommand(g.id)!;await g.run_script(g.write.script);
+ g.jobs().accept(g.id,{...pending,result:await g.run_script(pending.script)});
+ assert.equal(g.jobs().get(g.id).phase,'update-verified');
+ assert.throws(()=>g.jobs().attestDead(g.id),/^Error: native-update-attest-dead-write-settled$/);
+});
+
+test('a forged attestation fails the journal closed, one check at a time',async t=>{
+ const {createHash}=await import('node:crypto');
+ const {NATIVE_UPDATE_ATTEST_DEAD_STATEMENT}=await import('./native-update-jobs.js');
+ // Appends a hand-written attestation to a journal whose last write is `write`, correctly chained.
+ const forge=async(begin:boolean,change:(e:any)=>any)=>{
+  const f=await fixture(t);await f.run('update-preflight-readback');const write=f.jobs().dispatch(f.id,'update-apply');
+  if(begin)f.jobs().beginWrite(f.id,write.attemptId);
+  const dir=path.join(f.dir,'events'),files=readdirSync(dir).sort();
+  const previous=createHash('sha256').update(readFileSync(path.join(dir,files.at(-1)!),'utf8')).digest('hex');
+  const event=change({kind:'update-attempt-attested-dead',attemptId:write.attemptId,statement:NATIVE_UPDATE_ATTEST_DEAD_STATEMENT,at:new Date().toISOString()});
+  writeFileSync(path.join(dir,String(files.length).padStart(8,'0')+'.json'),JSON.stringify({...event,sequence:files.length,previous}));
+  f.restart();return f;
+ };
+ const control=await forge(true,e=>e);
+ assert.equal(control.jobs().get(control.id).attestedDead?.attemptId!==undefined,true,'the well-formed event is accepted: each case below differs in one field');
+ const cases:[string,boolean,(e:any)=>any][]=[
+  ['write not begun',false,e=>e],
+  ['another attempt',true,e=>({...e,attemptId:'00000000-0000-4000-8000-000000000000'})],
+  ['another statement',true,e=>({...e,statement:'x'})],
+  ['unreadable time',true,e=>({...e,at:'yesterday'})],
+  ['missing time',true,({at,...e})=>e],
+ ];
+ for(const [name,begin,change] of cases) {
+  const f=await forge(begin,change);
+  assert.throws(()=>f.jobs().get(f.id),/attestation-invalid/,name);
+ }
+});
+
+test('a companion that is still polling cannot be attested gone',async t=>{
+ const f=await fixture(t),transport=createNativeOperationTransport(f.repo,f.jobs());
+ const secret=transport.pair(f.id).split('.')[1],fileKey=f.input.before.operation.fileKey;transport.start(f.id);
+ const preflight=transport.claim(f.id,secret,fileKey,undefined,undefined,2);
+ if(preflight.status==='command')transport.accept(f.id,secret,{...preflight.command,result:await f.run_script(preflight.command.script)});
+ const write=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.ok(write.status==='command'&&!write.command.readOnly);
+ if(write.status==='command')transport.begin(f.id,secret,write.command.attemptId);
+ const count=events(f.dir).length;
+ assert.throws(()=>transport.attestDead(f.id),/^Error: native-update-attest-dead-companion-connected$/);
+ assert.equal(events(f.dir).length,count);
+ transport.claim(f.id,secret,fileKey,undefined,write.status==='command'?write.command.attemptId:undefined,2);
+ assert.throws(()=>transport.attestDead(f.id,Date.now()+14_000),/companion-connected/,'a companion holding the marker polls too');
+ transport.attestDead(f.id,Date.now()+16_000);
+ assert.equal(events(f.dir).at(-1).kind,'update-attempt-attested-dead','after the liveness window it is accepted');
+ const g=await fixture(t),other=createNativeOperationTransport(g.repo,g.jobs());other.pair(g.id);
+ assert.throws(()=>other.attestDead(g.id),/write-attestation-refused/,'not started');
+});
+
+test('the canvas-moved alarm names a refused preflight too, and waits for a preflight that actually read the canvas',async t=>{
+ const f=await begun(t);f.jobs().attestDead(f.id);await f.settle();
+ f.nodes[0].opacity=0.8;f.jobs().rearmWrite(f.id);
+ // A preflight whose result never came is abandoned: nothing was read, nothing is concluded.
+ f.jobs().dispatch(f.id,'update-preflight-readback');f.jobs().retryObservation(f.id);
+ assert.deepEqual(f.jobs().get(f.id).problems,[]);
+ const c=f.jobs().pendingCommand(f.id)!;
+ const refused=f.jobs().accept(f.id,{...c,result:await f.run_script(c.script)});
+ assert.equal(refused.phase,'update-refused');
+ assert.ok(refused.problems.includes('native-update-canvas-moved-after-revoked-settlement'),JSON.stringify(refused.problems));
+ assert.ok(refused.problems.some(p=>p.startsWith('native-update-opacity-conflict:')));
+ // A preflight from the wrong file read nothing and concludes nothing.
+ const g=await begun(t);g.jobs().attestDead(g.id);await g.settle();g.jobs().rearmWrite(g.id);
+ const d=g.jobs().dispatch(g.id,'update-preflight-readback');
+ g.jobs().accept(g.id,{...d,result:{status:'refused',problems:['native-update-file-mismatch']}});
+ assert.ok(!g.jobs().get(g.id).problems.includes('native-update-canvas-moved-after-revoked-settlement'));
+ g.jobs().retryObservation(g.id);await g.run_script(g.write.script);
+ const e=g.jobs().pendingCommand(g.id)!;g.jobs().accept(g.id,{...e,result:await g.run_script(e.script)});
+ assert.ok(g.jobs().get(g.id).problems.includes('native-update-canvas-moved-after-revoked-settlement'),'the next preflight that reads still names it');
+});
+
+// Reviewer probe P3: a revoked write that lands between the re-armed write's preflight and its execution.
+test('regression P3: a revoked write landing inside the re-armed write is benign: both write the same values, the new write is a no-op',async t=>{
+ const f=await begun(t);f.jobs().attestDead(f.id);await f.settle();f.jobs().rearmWrite(f.id);await f.run('update-preflight-readback');
+ assert.deepEqual(f.jobs().get(f.id).problems,[],'the canvas was untouched when this preflight read it');
+ const B=f.jobs().dispatch(f.id,'update-apply');f.jobs().beginWrite(f.id,B.attemptId);
+ assert.equal((await f.run_script(f.write.script)).status,'updated','A lands late');
+ const rb=await f.run_script(B.script);assert.equal(rb.status,'no-op','B finds the proposed values already there');
+ f.jobs().accept(f.id,{...B,result:rb});await f.run('update-readback');
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.ok(f.nodes.every((n:any)=>n.opacity===0.25));
+});
+
+test('a revoked write that executes after its settlement is named by the next preflight, and the update converges without a second change',async t=>{
+ const f=await begun(t);f.jobs().attestDead(f.id);await f.settle();
+ assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+ // The companion was alive after all: its program runs after the canvas read.
+ const late=await f.run_script(f.write.script);
+ assert.equal(late.status,'updated');assert.ok(f.nodes.every((n:any)=>n.opacity===0.25));
+ f.jobs().rearmWrite(f.id);await f.run('update-preflight-readback');
+ const named=f.jobs().get(f.id);
+ assert.equal(named.phase,'update-preflight-observed');
+ assert.deepEqual(named.problems,['native-update-canvas-moved-after-revoked-settlement']);
+ await f.run('update-apply');await f.run('update-readback');
+ const verified=f.jobs().get(f.id);
+ assert.equal(verified.phase,'update-verified');
+ assert.deepEqual(verified.problems,['native-update-canvas-moved-after-revoked-settlement'],'the divergence stays on the record');
+ f.restart();assert.deepEqual(f.jobs().get(f.id).problems,['native-update-canvas-moved-after-revoked-settlement']);
+ // The pinned program is guarded and idempotent: running it again on the settled canvas writes nothing.
+ assert.equal((await f.run_script(f.write.script)).status,'no-op');
+ // And a late run over a designer's edit refuses by name instead of overwriting it.
+ f.nodes[0].opacity=0.8;const refused=await f.run_script(f.write.script);
+ assert.equal(refused.status,'refused');assert.equal(f.nodes[0].opacity,0.8);
+});
+
+test('a journal recorded before attestation existed replays unchanged: the frozen case still reads as frozen, and nothing is written by reading it',async t=>{
+ const f=await begun(t);await f.settle();
+ const bytes=()=>readdirSync(path.join(f.dir,'events')).sort().map(file=>readFileSync(path.join(f.dir,'events',file),'utf8')).join('\n');
+ const recorded=bytes();
+ assert.ok(!recorded.includes('attested')&&!recorded.includes('revocation'));
+ f.restart();const replayed=f.jobs().get(f.id);
+ assert.equal(replayed.phase,'update-recovery-required');
+ assert.deepEqual(replayed.problems,['native-update-write-begun-outcome-unresolved']);
+ assert.equal(replayed.attestedDead,undefined);assert.equal(replayed.canAttestDead,true);
+ assert.equal(f.jobs().updateHistory(f.parent)[0].phase,'update-recovery-required');
+ assert.equal(bytes(),recorded);
+});
