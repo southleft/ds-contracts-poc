@@ -37,7 +37,7 @@
 >   engine eight days before it was used as an exam subject, so that exam is a
 >   round trip on our own output. **Closed 2026-09-13:** the exam ran on the
 >   Altitude Design System and CBDS UI Kit files (designer-drawn, never written
->   by this repo), 24 sets, 5 accounting-clean, 19 refused by name — see
+>   by this repo), 24 sets, 6 accounting-clean, 18 refused by name (6 and 18 since 2026-09-19: CBDS Alert, 30 of 40 cells, was the one ragged-matrix refusal and is accounting-clean now that its 10 undrawn cells are declared — docs/23 §D.40; the dated receipt records the 5 / 19 measured on 2026-09-13) — see
 >   [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
 >
 > **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
@@ -250,8 +250,8 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   on our own output, not a stranger's artwork. **2026-09-13:** the exam on a
   stranger's artwork ran — Altitude Design System and CBDS UI Kit, 24
   designer-drawn sets, observed read-only through the Desktop Bridge:
-  **5 accounting-clean (Altitude Badge, Menu, Tabs; CBDS Checkbox, Badge),
-  19 refused by name, nothing silent**. Gate
+  **6 accounting-clean (Altitude Badge, Menu, Tabs; CBDS Checkbox, Badge, Alert),
+  18 refused by name, nothing silent** (6 and 18 since 2026-09-19: CBDS Alert, 30 of 40 cells, was the one ragged-matrix refusal and is accounting-clean now that its 10 undrawn cells are declared — docs/23 §D.40; the dated receipt records the 5 / 19 measured on 2026-09-13). Gate
   `recipe:canvas-to-code:held-out:v2:check`; receipt
   [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
   P1 is closed. The eight refusals (State axes, free-form frames, `<textarea>`

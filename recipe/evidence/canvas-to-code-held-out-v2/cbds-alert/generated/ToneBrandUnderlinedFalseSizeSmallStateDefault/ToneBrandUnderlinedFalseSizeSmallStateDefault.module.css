@@ -1,0 +1,24 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tone-brand-underlined-false-size-small-state-default.contract.json (ds.tone-brand-underlined-false-size-small-state-default v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-tone-brand-underlined-false-size-small-state-default-root-width);
+  height: var(--imported-stub-tone-brand-underlined-false-size-small-state-default-root-height);
+}
+
+.text {
+  font-family: Inter, system-ui, sans-serif;
+}

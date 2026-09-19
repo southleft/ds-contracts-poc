@@ -136,7 +136,8 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
   ).figma.absentVariants;
   check(
     `${projectionMode} proposes a designer's strict-subset matrix with the undrawn combination DECLARED, verified exact at 3 rows`,
-    JSON.stringify(declared) === JSON.stringify([{ size: "lg", tone: "danger" }]) &&
+    JSON.stringify(declared) ===
+      JSON.stringify([{ size: "lg", tone: "danger" }]) &&
       proposed.projection.status === "verified-exact" &&
       proposed.projection.observedCount === 3 &&
       proposed.projection.expectedCount === 3,
@@ -145,7 +146,14 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
     `${projectionMode} still refuses a ragged matrix whose DEFAULT combination is the undrawn one`,
     refusalCode(() =>
       proposeFromDump(
-        { ...ragged, variants: [ragged.variants[1], ragged.variants[2], variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" })] },
+        {
+          ...ragged,
+          variants: [
+            ragged.variants[1],
+            ragged.variants[2],
+            variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" }),
+          ],
+        },
         { ...baseOpts, projectionMode },
       ),
     ) === "EXACT_MATRIX_RAGGED",
@@ -153,10 +161,10 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
   check(
     `${projectionMode} still refuses a ragged set THIS PIPELINE stamped when no contract in scope declares the hole`,
     refusalCode(() =>
-      proposeFromDump(
-        { ...ragged, contractId: "check.ragged" } as DumpSet,
-        { ...baseOpts, projectionMode },
-      ),
+      proposeFromDump({ ...ragged, contractId: "check.ragged" } as DumpSet, {
+        ...baseOpts,
+        projectionMode,
+      }),
     ) === "EXACT_MATRIX_RAGGED",
   );
 }

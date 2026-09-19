@@ -1,0 +1,137 @@
+{
+  "bg": {
+    "danger": {
+      "weakest": {
+        "$value": "#ffe6ea",
+        "$type": "color"
+      }
+    },
+    "info": {
+      "weakest": {
+        "$value": "#e6f7ff",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "weakest": {
+        "$value": "#f5f7fa",
+        "$type": "color"
+      }
+    },
+    "positive": {
+      "weakest": {
+        "$value": "#e6fff2",
+        "$type": "color"
+      }
+    },
+    "surface-primary": {
+      "$value": "#fcfeff",
+      "$type": "color"
+    },
+    "warning": {
+      "weakest": {
+        "$value": "#fff6e6",
+        "$type": "color"
+      }
+    }
+  },
+  "body": {
+    "font-medium": {
+      "$value": "14px",
+      "$type": "dimension"
+    },
+    "line-height-medium": {
+      "$value": "20px",
+      "$type": "dimension"
+    }
+  },
+  "border": {
+    "brand": {
+      "default": {
+        "$value": "#0e61ba",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "#b51833",
+        "$type": "color"
+      }
+    },
+    "info": {
+      "default": {
+        "$value": "#0e61ba",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "default": {
+        "$value": "#a2aebf",
+        "$type": "color"
+      }
+    },
+    "positive": {
+      "default": {
+        "$value": "#038142",
+        "$type": "color"
+      }
+    },
+    "warning": {
+      "default": {
+        "$value": "#b67300",
+        "$type": "color"
+      }
+    }
+  },
+  "corner-radius": {
+    "100": {
+      "$value": "8px",
+      "$type": "dimension"
+    }
+  },
+  "label": {
+    "font-large": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "line-height-large": {
+      "$value": "20px",
+      "$type": "dimension"
+    }
+  },
+  "spacing": {
+    "100": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "200": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "400": {
+      "$value": "32px",
+      "$type": "dimension"
+    },
+    "025": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "050": {
+      "$value": "4px",
+      "$type": "dimension"
+    }
+  },
+  "text": {
+    "primary": {
+      "$value": "#050a0f",
+      "$type": "color"
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 23,
+      "skipped": []
+    }
+  }
+}

@@ -3993,6 +3993,19 @@ unchanged 5 % limit):
 | auto-proposed STUBS (the parent read alone) | 2 of 12 | 4.85 / 6.45 / 7.40 % |
 | the REAL sparse child | **12 of 12** | 2.23 / 2.97 / 3.87 % |
 
+**CBDS `Alert` (30 of 40) through the committed designer-file exam.** The exam's
+one ragged-matrix refusal — and the unlock its own 2026-09-13 receipt predicted
+("a sparse-matrix proposal with the absent cells named would unlock it"). Its 10
+undrawn cells are every `action=false × inlineAction=true` combination (an inline
+action without an action); with them declared, the committed observe runs the whole
+path — bridge, propose, React emit, Chromium computed-style diff on all 30 variants
+— to **accounting-zero-silent: 0 silent, 0 unexplained**. Re-recorded with the
+gate's own command (`tsx recipe/canvas-to-code-held-out-v2.ts --write --subject
+cbds-alert`); exactly one subject of 24 moved in `index.json`, the tally goes 5 / 19
+→ **6 accounting-clean, 18 refused by name**, and the three current-status lines
+`docs:check` derives from it follow. The dated receipt
+(`CANVAS-TO-CODE-DESIGNER-EXAM.md`) is left as the record of that day.
+
 `Radio Group`: 10 of 12 (2.45 / 3.87 / 5.22 %). Neither PASSES the check: all 12
 cells of each fail `content-size-mismatch` (Checkbox Group renders 148 px high
 where Figma draws 142) and both carry `variant-axis-inert-ledgered:legend` and

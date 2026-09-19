@@ -1,0 +1,122 @@
+{
+  "imported": {
+    "alert": {
+      "root": {
+        "background-color": {
+          "success": {
+            "fill": {
+              "$value": "#e6fff2",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "danger": {
+            "fill": {
+              "$value": "#ffe6ea",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "fill": {
+              "$value": "#fff6e6",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "info": {
+            "fill": {
+              "$value": "#e6f7ff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "neutral": {
+            "fill": {
+              "$value": "#f5f7fa",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          }
+        },
+        "border-color": {
+          "success": {
+            "$value": "#038142",
+            "$type": "color"
+          },
+          "danger": {
+            "$value": "#b51833",
+            "$type": "color"
+          },
+          "warning": {
+            "$value": "#b67300",
+            "$type": "color"
+          },
+          "info": {
+            "$value": "#0e61ba",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "#a2aebf",
+            "$type": "color"
+          }
+        },
+        "width": {
+          "$value": "560px",
+          "$type": "dimension"
+        }
+      },
+      "content-top-alert-title": {
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        }
+      },
+      "description-message": {
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        }
+      }
+    },
+    "stub-size-large": {
+      "root": {
+        "width": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "24px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-tone-brand-underlined-false-size-small-state-default": {
+      "root": {
+        "width": {
+          "$value": "52px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "36px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-v2.ts --write --subject cbds-alert
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --bg-danger-weakest: #ffe6ea;
+  --bg-info-weakest: #e6f7ff;
+  --bg-neutral-weakest: #f5f7fa;
+  --bg-positive-weakest: #e6fff2;
+  --bg-surface-primary: #fcfeff;
+  --bg-warning-weakest: #fff6e6;
+  --body-font-medium: 14px;
+  --body-line-height-medium: 20px;
+  --border-brand-default: #0e61ba;
+  --border-danger-default: #b51833;
+  --border-info-default: #0e61ba;
+  --border-neutral-default: #a2aebf;
+  --border-positive-default: #038142;
+  --border-warning-default: #b67300;
+  --corner-radius-100: 8px;
+  --imported-alert-content-top-alert-title-font-weight: 600;
+  --imported-alert-description-message-font-weight: 400;
+  --imported-alert-root-background-color-danger-fill: #ffe6ea;
+  --imported-alert-root-background-color-danger-outline: #fcfeff;
+  --imported-alert-root-background-color-info-fill: #e6f7ff;
+  --imported-alert-root-background-color-info-outline: #fcfeff;
+  --imported-alert-root-background-color-neutral-fill: #f5f7fa;
+  --imported-alert-root-background-color-neutral-outline: #fcfeff;
+  --imported-alert-root-background-color-success-fill: #e6fff2;
+  --imported-alert-root-background-color-success-outline: #fcfeff;
+  --imported-alert-root-background-color-warning-fill: #fff6e6;
+  --imported-alert-root-background-color-warning-outline: #fcfeff;
+  --imported-alert-root-border-color-danger: #b51833;
+  --imported-alert-root-border-color-info: #0e61ba;
+  --imported-alert-root-border-color-neutral: #a2aebf;
+  --imported-alert-root-border-color-success: #038142;
+  --imported-alert-root-border-color-warning: #b67300;
+  --imported-alert-root-width: 560px;
+  --imported-stub-size-large-root-height: 24px;
+  --imported-stub-size-large-root-width: 24px;
+  --imported-stub-tone-brand-underlined-false-size-small-state-default-root-height: 36px;
+  --imported-stub-tone-brand-underlined-false-size-small-state-default-root-width: 52px;
+  --label-font-large: 16px;
+  --label-line-height-large: 20px;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-100: 8px;
+  --spacing-200: 16px;
+  --spacing-400: 32px;
+  --text-primary: #050a0f;
+}
