@@ -5744,3 +5744,33 @@ complete-account requirement above.
 Reversal: remove the post-build absence annotation in `buildPart` and restore the
 previous token coverage rule. Preserve before/after app archives and measurements.
 This engineering rule alone does not establish visual acceptance of the family.
+
+## D.53 Direct React forwardRef source declarations
+
+**AGENT decision (2026-09-19).** The static reader recognizes an immutable
+component export initialized by a direct imported React `forwardRef` call with
+one inline function or arrow callback. Its complete export declaration remains
+the source identity; public props come from the installed wrapper signature,
+and root/children facts come from that callback. It records the wrapper by name.
+The source is never executed by the reader. The existing renderer observer joins
+the real exported object to its host; a Chromium probe verifies that the ref
+reaches the host and caller content remains caller-owned without changing pixels.
+
+Lookalike factories, computed factory accesses, mutable exports, indirect factory
+or callback aliases, escaped namespaces and reassigned factories remain refused.
+Type-only exports and interfaces are excluded from runtime component discovery;
+unsupported value exports retain their named refusals. Existing ordinary
+function declarations and arrows retain their original representation.
+
+This reads installed Radix Button, BaseButton and Switch declarations, but does
+not qualify their native conversion. Runtime JavaScript still needs an
+authenticated relationship to its separately distributed TypeScript source;
+BaseButton's transformed/conditional children and Switch's authored primitive
+remain unresolved by the existing content rules. No runtime-module alias,
+component-specific override, ownership relaxation or native write is introduced.
+
+Reversal: remove the direct-wrapper reader and optional wrapper fact, restoring
+`component-function-unresolved` for these declarations. The type-only filter can
+be reverted separately, restoring the incorrect runtime-component refusals for
+interfaces. Preserve the diagnostic and live journey evidence; these source
+facts are not release acceptance.
