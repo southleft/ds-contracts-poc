@@ -15,6 +15,7 @@
  * and are deliberately NOT re-exported from the package index.
  */
 import { DEFAULT_FONT_STACK, slotsOf, type Contract, type Part, type Prop } from '@ds-contracts/schema';
+import { flattenTokens, makeResolveLiteral, type TokenTreeInput } from './tokens.js';
 
 
 /** v11 SEMANTIC LINT — roles that RE-CREATE a control the platform already
@@ -298,12 +299,23 @@ export const DEFAULT_FONT_FAMILY_DECL = `font-family: ${DEFAULT_FONT_STACK}`;
  *    or a flagged component inside one, never draws its ancestor's stroke.
  *  · A real `box-shadow` on the part rides `--_stroke-shadow` and is composed
  *    AFTER the ring, so both survive in every state. `none` is not a list
- *    item, so a literal `none` becomes the no-op layer `0 0 #0000`.
- *    NAMED LIMIT: a shadow TOKEN that resolves to `none` cannot be seen here
- *    and would invalidate the whole declaration in that state.
+ *    item — `box-shadow: <ring>, none` is INVALID and voids the ring with it —
+ *    so a literal `none` becomes the no-op layer `0 0 #0000` here, and a
+ *    shadow TOKEN that resolves to `none` (60+ of them in this repo's own
+ *    corpora, concentrated on outlined variants) is settled on the finished
+ *    sheet by settleStrokeShadows, where the token VALUES are known.
  *  · Per-side weights (`border-<side>-width`, dump v1.34) draw one layer per
  *    side; a uniform width on such a part feeds all four. Layers overlap at
- *    the corners, which a translucent colour would double (NAMED LIMIT).
+ *    the corners, which a translucent colour would double (NAMED LIMIT). A
+ *    literal unitless `0` becomes `0px`: `calc(-1 * 0)` is a NUMBER, not a
+ *    length, and voided the whole declaration (a TOKEN resolving to a
+ *    unitless 0 cannot be seen here — NAMED LIMIT).
+ *  · EVERY ring part resets its own `border` (the single root already does):
+ *    a nested `<button>` / `<fieldset>` part otherwise shows the user agent's
+ *    2px outset / groove border again the moment the width leaves the maps.
+ *  · FORCED COLORS erases `box-shadow` (a border survives), so an outlined
+ *    control would have no boundary in Windows High Contrast; the finished
+ *    sheet restores one without layout (css.ts lowerStrokeRingForcedColors).
  *
  *  `outline-*` channels are untouched: an outline never takes layout space.
  *  Returns the SAME object when no part is flagged — every other contract
@@ -336,9 +348,12 @@ export const partCarriesStroke = (part: Part): boolean =>
  *  channel for it to qualify (an outline-only part has nothing to redraw). */
 export const drawsStrokeRing = (part: Part): boolean =>
   part.strokesIncludedInLayout === false && strokeHolderMaps(part).some((m) => Object.keys(m).some(isStrokeRingChannel));
+/** A literal width of unitless zero, as a LENGTH (see the per-side bullet). */
+const zeroAsLength = (v: string): string => (/^[-+]?0*\.?0+$/.test(v.trim()) ? '0px' : v);
 export function lowerStrokeRings(contract: Contract): Contract {
   let touched = false;
-  const lower = (part: Part): Part => {
+  const singleRoot = Object.keys(contract.anatomy).length === 1;
+  const lower = (part: Part, top = false): Part => {
     const parts = part.parts && Object.fromEntries(Object.entries(part.parts).map(([n, p]) => [n, lower(p)]));
     const own: Part = parts ? { ...part, parts } : part;
     if (!drawsStrokeRing(part)) return own;
@@ -350,9 +365,9 @@ export function lowerStrokeRings(contract: Contract): Contract {
       const out: Record<string, string> = {};
       for (const [channel, value] of Object.entries(m)) {
         const side = STROKE_SIDES.find((s) => channel === `border-${s}-width`);
-        if (channel === 'border-width' && perSide) for (const s of STROKE_SIDES) out[strokeSideVar(s)] = value;
-        else if (channel === 'border-width') out[STROKE_WIDTH_VAR] = value;
-        else if (side) out[strokeSideVar(side)] = value;
+        if (channel === 'border-width' && perSide) for (const s of STROKE_SIDES) out[strokeSideVar(s)] = zeroAsLength(value);
+        else if (channel === 'border-width') out[STROKE_WIDTH_VAR] = zeroAsLength(value);
+        else if (side) out[strokeSideVar(side)] = zeroAsLength(value);
         else if (channel === 'border-color') out[STROKE_COLOR_VAR] = value;
         else if (channel === 'box-shadow') out[STROKE_SHADOW_VAR] = value.trim() === 'none' ? NO_SHADOW : value;
         else out[channel] = value;
@@ -362,7 +377,9 @@ export function lowerStrokeRings(contract: Contract): Contract {
     const renameIn = <T extends { map: Record<string, Record<string, string>> }>(e: T): T =>
       ({ ...e, map: Object.fromEntries(Object.entries(e.map).map(([v, m]) => [v, rename(m)])) });
     const tokens = part.tokens && rename(part.tokens);
-    const literals = rename(part.literals ?? {});
+    // The single root's `border: 0` is the emitters' own reset; every other
+    // ring part states it here, FIRST, so nothing after it is erased.
+    const literals: Record<string, string> = { ...(top && singleRoot ? {} : { border: '0' }), ...rename(part.literals ?? {}) };
     // A base channel states its variable in the base rule only when it is a
     // literal or a placeholder-free token — a substituted ref lands in the
     // per-value rules, and the base rule still owes the default.
@@ -392,8 +409,62 @@ export function lowerStrokeRings(contract: Contract): Contract {
       ...(part.statesByProp ? { statesByProp: part.statesByProp.map(renameIn) as Part['statesByProp'] } : {}),
     };
   };
-  const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([n, p]) => [n, lower(p)]));
+  const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([n, p]) => [n, lower(p, true)]));
   return touched ? { ...contract, anatomy } : contract;
+}
+
+/** A RING'S REAL SHADOW WHOSE TOKEN RESOLVES TO `none` — settled on the
+ *  finished sheet, because that is the first place the fact is visible.
+ *
+ *  `box-shadow: <ring>, none` is not a value: `none` is the whole property or
+ *  nothing, so a `--_stroke-shadow: var(--shadow-x)` whose token is `none`
+ *  invalidates the composed declaration at computed-value time and the STROKE
+ *  vanishes with the shadow. CSS cannot test a variable's value, and the
+ *  lowering above sees token PATHS (often still carrying `{placeholders}`),
+ *  never values. The emitters that are handed the token trees therefore pass
+ *  them here: every `--_stroke-shadow: var(--x)` whose token resolves to
+ *  `none` is respelled as the no-op layer, inside the ring's private variable
+ *  ONLY — tokens.css and every ordinary `box-shadow: var(--x)` keep their
+ *  bytes. A token that is `none` in one mode and a real shadow in the other
+ *  has no single spelling and is REFUSED BY NAME rather than silently losing
+ *  the stroke in one mode or the shadow in the other. And a caller that hands
+ *  over NO trees while a ring binds its shadow to a token is refused by name
+ *  too: the one fact that decides whether the stroke survives cannot be
+ *  checked, and "probably not none" is a guess (every registered emitter
+ *  passes the trees; a bare generateCss / emitReact call is the case this
+ *  catches). The inline surface resolves values itself and drops `none` at
+ *  render time. */
+export function noneShadowVars(tokens: unknown): { none: Set<string>; mixed: Set<string> } {
+  const out = { none: new Set<string>(), mixed: new Set<string>() };
+  const t = tokens as Partial<TokenTreeInput> | undefined;
+  if (!t || typeof t !== 'object' || !t.primitives) return out;
+  const flat = (tree: Record<string, unknown> | undefined) => (tree ? flattenTokens(tree) : new Map());
+  const base = [...flat(t.primitives), ...flat(t.brands?.default), ...flat(t.semantic)];
+  const modes = [new Map([...base, ...flat(t.light)]), new Map([...base, ...flat(t.dark)])];
+  for (const path of new Set(modes.flatMap((m) => [...m.keys()]))) {
+    const seen = modes.filter((m) => m.has(path)).map((m) => {
+      try { const v = makeResolveLiteral(m)(path); return typeof v === 'string' && v.trim() === 'none'; } catch { return false; }
+    });
+    if (!seen.some(Boolean)) continue;
+    (seen.every(Boolean) ? out.none : out.mixed).add(cssVar(path).slice(4, -1));
+  }
+  return out;
+}
+export function settleStrokeShadows(css: string, tokens: unknown, errors: string[], contractId: string): string {
+  if (!css.includes(`${STROKE_SHADOW_VAR}:`)) return css;
+  const bound = [...new Set(Array.from(css.matchAll(new RegExp(`${STROKE_SHADOW_VAR}:\\s*var\\((--[\\w-]+)\\)`, 'g')), (m) => m[1]))];
+  if (bound.length > 0 && (tokens === undefined || tokens === null)) {
+    errors.push(`${contractId}: a part with strokesIncludedInLayout: false binds box-shadow to ${bound.join(', ')}, and no token VALUES were supplied — if one resolves to \`none\` the composed \`<ring>, none\` is invalid CSS and the stroke vanishes with the shadow, which cannot be checked from token paths alone; pass the DTCG trees (EmitCtx.tokenValues / WcEmitCtx.tokenValues / generateCss's fourth argument)`);
+    return css;
+  }
+  const { none, mixed } = noneShadowVars(tokens);
+  return css.replace(new RegExp(`(${STROKE_SHADOW_VAR}:\\s*)var\\((--[\\w-]+)\\)`, 'g'), (whole, lead: string, name: string) => {
+    if (mixed.has(name)) {
+      errors.push(`${contractId}: a part with strokesIncludedInLayout: false binds box-shadow to ${name}, which resolves to \`none\` in one mode and to a shadow in the other — the inset ring and the shadow share ONE box-shadow value and \`<ring>, none\` is invalid CSS, so this token has no single spelling there; give the token a zero shadow instead of \`none\`, or remove the flag`);
+      return whole;
+    }
+    return none.has(name) ? `${lead}${NO_SHADOW}` : whole;
+  });
 }
 
 export const isStructural = (part: Part) =>

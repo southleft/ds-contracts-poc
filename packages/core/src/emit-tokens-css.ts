@@ -257,12 +257,19 @@ const VAR_REF_ANY = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
  *  always states; demanding them of tokens.css refused the very contract the
  *  lowering exists for. The exemption is as narrow as the fact: the name must
  *  start `--_` — an underscore is refused in a token path (TokenRefSchema), so
- *  no token can ever be spelled that way — AND the same sheet must declare it.
- *  A `--_x` that is only ever referenced is still missing, and still named. */
+ *  no token can ever be spelled that way — AND the same sheet must DECLARE that
+ *  exact property: `--_x:` in declaration position (directly after a `{` or a
+ *  `;`), with comments removed first. A name that only appears in a comment, as
+ *  a prefix of a longer name, or in a bare value (the token VALUES
+ *  core/css-vars-check.ts passes through here declare nothing) is still
+ *  missing, and still named. */
 export function referencedCssVars(cssText: string): string[] {
   const names = new Set<string>();
   for (const m of cssText.matchAll(VAR_REF_REQUIRED)) names.add(m[1]!);
-  const declaredHere = (name: string) => new RegExp(`(^|[\\s;{])${name}\\s*:`).test(cssText);
+  const privateNames = [...names].filter((name) => name.startsWith('--_'));
+  if (privateNames.length === 0) return [...names].sort();
+  const code = cssText.replace(/\/\*[\s\S]*?\*\//g, '');
+  const declaredHere = (name: string) => new RegExp(`[{;]\\s*${name}\\s*:`).test(code);
   return [...names].filter((name) => !(name.startsWith('--_') && declaredHere(name))).sort();
 }
 

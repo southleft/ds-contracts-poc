@@ -100,7 +100,7 @@
       "stage": "css",
       "status": "proposed",
       "file": "packages/core/src/css.ts",
-      "ruleLine": 236,
+      "ruleLine": 244,
       "ruleText": "rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');",
       "css": {
         "construct": "the CSS emitted for a contract whose root carries no layout block",
@@ -121,6 +121,45 @@
       "cases": [],
       "doors": [],
       "why": "Reported as a defect of AGREEMENT rather than of either line alone. Neither default is wrong in isolation; together they guarantee that a root layout, once elided, comes back spelled differently. A contract that survives a round trip byte-for-byte is the property this whole exercise is for, and one keyword breaks it for every centered root."
+    },
+    {
+      "id": "css.stroke-outside-layout-inset-ring",
+      "family": "size",
+      "stage": "css",
+      "status": "implemented",
+      "file": "packages/core/src/css.ts",
+      "line": 95,
+      "ruleLine": 96,
+      "ruleText": "const contract = lowerStrokeRings(input);",
+      "css": {
+        "construct": "border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0",
+        "context": "packages/core anatomy.ts lowerStrokeRings, applied by generateCss and the web-components shadowCss before any rule is written (the inline surface composes the same ring at render time): the part carries the flag AND a border channel in some holder; outline-* channels are left alone"
+      },
+      "figma": {
+        "construct": "strokes[0] + strokeWeight on an auto-layout frame whose strokesIncludedInLayout is false — the stroke paints over the padding and takes no layout space (core/emit-figma-script.ts applyFrameSpec sets the field)"
+      },
+      "inverse": {
+        "file": "core/propose-figma.ts",
+        "site": "carryStrokeLayout",
+        "emits": "border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged"
+      },
+      "lost": [
+        "paint order, unmeasured: the ring paints UNDER the part's children, so a child that reaches the edge (padding smaller than the stroke) covers it — docs/23 §D.39",
+        "forced colors: the user agent erases box-shadow, so an inward outline at the widest side stands in inside @media (forced-colors: active); per-side strokes draw all four edges there",
+        "per-side border colours and non-solid border styles have no ring spelling and are refused by validateContract"
+      ],
+      "canonical": "border-width / border-color (and the per-side widths) beside strokesIncludedInLayout: false — the designer's padding and stroke numbers unchanged",
+      "receipt": {
+        "channel": "none"
+      },
+      "roundTrip": "untested",
+      "cases": [],
+      "doors": [
+        "propose.stroke-layout-absent-is-border",
+        "propose.stroke-layout-mixed-refused",
+        "propose.stroke-layout-without-stroke-withdrawn"
+      ],
+      "why": "CSS has no property that says \"border, but take no layout space\", and a Figma stroke on a designer-drawn auto-layout frame takes none by default. Rewriting padding to padding-minus-border destroys the padding's variable binding and cannot fit a 16px box around 8+8 padding plus a 2px border at all, so the contract keeps the designer's numbers and records the one fact that differs; this rule is where that fact becomes CSS. Absent means in layout — a CSS border under border-box, and what a frame this pipeline writes reads back as — so the fixed point holds in both directions: a generated set proposes no flag, a designer's set proposes the flag and writes it back. Untested by the conformance kit; held by extract/figma/stroke-outside-layout.test.ts and core/react-stroke-outside-layout.test.ts, which measure the box in Chromium."
     },
     {
       "id": "emit.axis-adjacent-inlines-unnamed",
@@ -681,7 +720,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 9183,
+      "ruleLine": 9198,
       "ruleText": "}${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\\n  sizeCallerSlots(comp);' : ''}",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1049,7 +1088,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 9064,
+      "ruleLine": 9079,
       "ruleText": "child.x = x; child.y = y;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1301,7 +1340,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8652,
+      "ruleLine": 8667,
       "ruleText": "if (!spec.fill) node.fills = [];",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1447,7 +1486,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8535,
+      "ruleLine": 8550,
       "ruleText": "if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {

@@ -134,22 +134,46 @@ type StyleRecord = Record<string, string | number>;
  *  literals — so the SAME composition happens at render time, over the style
  *  object the base, per-variant and disabled records have already merged into:
  *  width, colour and a real shadow each arrive from their own record, and only
- *  the merge knows all three. The consumer's own `style` is spread AFTER it
- *  and is never rewritten. Emitted only when a part is flagged. */
+ *  the merge knows all three.
+ *
+ *  THE CONSUMER'S `style` IS PART OF THAT MERGE, NOT AFTER IT. Spread after the
+ *  ring (the first cut) a consumer `boxShadow` silently DELETED the stroke and
+ *  a consumer `borderColor` silently did nothing — on an unflagged part the
+ *  same props replace the component's shadow and recolour its border. They are
+ *  the same contract channels, so they are read as such: `borderColor` /
+ *  `borderWidth` / a per-side width recolour and resize the RING, and
+ *  `boxShadow` replaces the component's real shadow AFTER the ring, which
+ *  stays. A consumer `border` SHORTHAND is passed through untouched: the merged
+ *  record's own `border` is only ever the `0` / `none` reset, so a value there
+ *  is the consumer asking for a real, space-taking border — their call.
+ *
+ *  `none` (a literal, or a shadow token RESOLVED to it — this surface sees
+ *  values) is dropped rather than listed: `<ring>, none` is invalid CSS. A
+ *  unitless `0` width becomes `0px`: `calc(-1 * 0)` is a number, not a length.
+ *
+ *  NAMED LIMIT — forced colors. The mode forces `box-shadow: none`, and an
+ *  inline style cannot carry the `@media (forced-colors: active)` fallback the
+ *  stylesheet surfaces emit (css.ts lowerStrokeRingForcedColors); the only
+ *  media-dependent output this emitter has is the `<style>` it injects for
+ *  keyframes, which is a child element a void root (`<input>`) cannot hold. A
+ *  flagged part has NO boundary in Windows High Contrast on this surface.
+ *
+ *  Emitted only when a part is flagged. */
 const STROKE_RING_RUNTIME = `/** strokesIncludedInLayout: false — this part's stroke takes no layout space, so it
  *  is painted as an inset ring (over the padding, following the radius) instead
- *  of a border; a real box-shadow is kept after it. */
+ *  of a border; a real box-shadow is kept after it. A caller's borderColor /
+ *  borderWidth restyle the ring and a caller's boxShadow follows it. */
 const strokeRing = ({
-  border: _border, borderStyle: _style, borderTopStyle: _top, borderRightStyle: _right, borderBottomStyle: _bottom, borderLeftStyle: _left,
+  border, borderStyle: _style, borderTopStyle: _top, borderRightStyle: _right, borderBottomStyle: _bottom, borderLeftStyle: _left,
   borderWidth: w = 0, borderColor: c = 'currentColor',
   borderTopWidth: t = w, borderRightWidth: r = w, borderBottomWidth: b = w, borderLeftWidth: l = w,
   boxShadow, ...rest
 }: CSSProperties): CSSProperties => {
-  const px = (v: string | number) => (typeof v === 'number' ? \`\${v}px\` : v);
+  const px = (v: string | number) => (typeof v === 'number' || /^[-+]?0*\\.?0+$/.test(v) ? \`\${Number(v)}px\` : v);
   const ring = t === r && r === b && b === l
     ? [\`inset 0 0 0 \${px(t)} \${c}\`]
     : [\`inset 0 \${px(t)} 0 0 \${c}\`, \`inset 0 calc(-1 * \${px(b)}) 0 0 \${c}\`, \`inset \${px(l)} 0 0 0 \${c}\`, \`inset calc(-1 * \${px(r)}) 0 0 0 \${c}\`];
-  return { ...rest, border: 0, boxShadow: [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
+  return { ...rest, border: border ?? 0, boxShadow: [...ring, ...(boxShadow && boxShadow !== 'none' ? [boxShadow] : [])].join(', ') };
 };
 
 `;
@@ -714,13 +738,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (isRoot && Object.keys(disabledStyle).length > 0) {
       pieces.push(`...(${codePropOf('disabled')} ? DISABLED_STYLE : {})`);
     }
-    // A flagged part's merged record is redrawn as a ring; the consumer's own
-    // `style` stays outside it (STROKE_RING_RUNTIME).
-    if (strokeRingParts.has(partName)) {
-      const ring = `strokeRing({ ${pieces.join(', ')} })`;
-      return isRoot ? `{{ ...${ring}, ...style }}` : `{${ring}}`;
-    }
     if (isRoot) pieces.push('...style');
+    // A flagged part's merged record — the consumer's `style` included, so
+    // their border/shadow props land on the ring — is redrawn as a ring
+    // (STROKE_RING_RUNTIME).
+    if (strokeRingParts.has(partName)) return `{strokeRing({ ${pieces.join(', ')} })}`;
     return `{{ ${pieces.join(', ')} }}`;
   };
 
