@@ -4916,6 +4916,7 @@ graph at emit time — the next gap, named. **To reverse:** delete the
    `element: <div>`), and the generated CSS zeroes the border and appearance but
    not the user-agent inline padding: 441 px of content + 6 + 6 = the 453 px the
    check measures against Figma's 438.
+   **Closed by §D.44** (both halves, as two general rules).
 2. `Tab` refuses in exact mode: its `State` axis draws `Active`, a state the
    contract cannot carry (`state-axis-state-not-carried:active`, the §D.41
    wall). Its three instances stay stubs — the labels render as bare text with
@@ -4956,3 +4957,129 @@ graph through `defaultContent` and `accepts`, and the nesting query in Chromium)
 `extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set
 import, byte-identical; the proposer partition is inert without
 `_provenance.closure`; the harness lookup and graph are additive.
+
+## D.44 An inferred `<button>` held a `<button>`, and a `<button>` that declares one padding side kept the user agent's padding on the other three — CLOSED as two general rules; a child the proposer does not hold yet, a side declared by only some enum values and `select` stay NAMED
+
+**2026-09-19. Two AGENT decisions under the owner's standing delegation (never a
+grade, never a tolerance), each recorded with its reverse.** Measured by the
+design-led clean-consumer check on Altitude `Tabs` after §D.43's closure made the
+real `Tab Panel` reachable: `interactive-content-nested:…:button>button` × 2 and
+`content-size-mismatch` 453 vs 438 px. `Tab Panel` has a `State` axis and no name
+signal, so the semantics table's STRUCTURAL row made it a `<button>`; its variants
+hold an instance of Altitude's `Button`, itself a `<button>`. And its contract
+declares only `padding-top`, so the user agent's `button` padding (1 px 6 px)
+stayed on the other three sides: 441 + 6 + 6 = 453.
+
+**Rule A (proposer, `core/propose-figma.ts`).** *The structural `button` inference
+never applies to a set whose drawing contains interactive content.* HTML forbids
+interactive content inside `<button>` and `<a>`; the rule covers both elements and
+BOTH rows of the table that produce them (the structural row and the name row: a
+set named "…Button…" that holds another button no longer nests either). A
+component ref the set renders — an anatomy instance or a slot's `defaultContent`
+— is interactive content when the contract the proposer already HOLDS for it (a
+set proposed EARLIER in the same dump, which is why the closure orders
+dependencies first, or a contract in the caller's scope):
+1. declares an interactive element on its root or any `elementByProp` value — `a`,
+   `button`, `input`, `select`, `textarea`, `label`, `details` (HTML's
+   interactive-content list cut to the emitters' element vocabulary) — or an ARIA
+   widget role;
+2. declares an interaction state (`hover`, `active`, `focus-visible`, `disabled`
+   — only an interaction-state axis produces them, the same fact that drives the
+   structural row);
+3. is a `div`/`span` with no role whose NAME the table reads as an interactive
+   element or role (a stub of an unimported "Button", a checkbox re-rooted to a
+   container); a contract that names a non-container element keeps its own word;
+4. or transitively renders one (cycles terminate).
+The set then stays the default container `div`, and the note says why, naming the
+chain: `semantics: structural "button" withheld — the set contains interactive
+content (an instance of "ds.button" — its contract's element is "button"); …`.
+Free-text descriptions (Altitude writes `Accessibility - element: <div>`) are one
+kit's documentation convention, not a canvas fact, and are never read. The stamp
+still outranks everything: a stamped element is never withheld. Registered as
+door `propose.semantics-interactive-content-withheld` (spec/DOOR-REGISTER.md).
+**To reverse:** delete the `interactiveContent` branch at the `inferSemantics` call
+site in `proposeFromDumpFenced`.
+
+*Churn, measured* (every committed dump in the tree — 964 dumps, 5,289 proposed
+sets — proposed with an empty caller scope): the rule fires on **three** sets.
+Altitude `Tab Panel` (the evidence dump) and CBDS `Radio button-icon` (in
+`cbds-plugin-all-sets.dump.json` and its v14 twin), which the name row made a
+`button` around an instance of `Radio button` — itself name-matched to `button`.
+No committed contract, census row or generated tree changes because of Rule A.
+
+**Rule B (emitters).** *An element with user-agent default padding gets explicit
+padding on every side the contract does not declare: a Figma frame's undeclared
+padding is 0.* `UA_PADDING_ELEMENTS` (packages/core `anatomy.ts`) is MEASURED with
+`getComputedStyle` on bare elements in the repo's Chromium (149.0.7827.55):
+`button` 1/6/1/6 px, `input` 1/2/1/2, `textarea` 2/2/2/2, `option` 0/2/1/2,
+`fieldset` 5.6/12/10/12, `legend` 0/2/0/2, `ul`/`ol`/`menu` 40 px inline start,
+`dialog[open]` 16 px, `td`/`th` 1 px; every other element the emitters render
+measured 0, `select` included. `undeclaredPaddingSides` reads tokens, literals,
+declared, `tokensByProp` and `literalsByProp` (a shorthand or a logical pair
+covers its sides; a side stated only under a state is undeclared at rest and the
+state rule still wins while active). The zeros are pushed wherever the margin
+reset is — the root on React modules, React inline and web components — and on
+nested parts on all three surfaces (the margin reset covers parts on the two CSS
+surfaces only); a part whose own chrome already writes `padding: 0` gets nothing
+more. A contract that declares all four sides is byte-identical. Registered as
+lowering `css.ua-padding-undeclared-side-zero` (spec/LOWERING.md). **To
+reverse:** delete the `undeclaredPaddingSides` / `uaPaddingPartDecls` pushes in
+`css.ts` (×3), `emit-wc.ts` (×2) and `emit-react-inline.ts` (×2).
+
+*Churn, measured:* seven committed CSS surfaces. `generated:fresh`: Eventz
+`AtomsTag` (+`padding-right: 0; padding-left: 0`) and Untitled UI
+`AvatarAddButton` (all four sides; its LEDGER hash follows). The design-to-code
+census re-hashes five rows whose React module and web-component CSS gain zeros:
+flowbite `Button`, figma-ds `ButtonContract` and `Chip` (`<button>` roots with
+inline padding only: `padding-top: 0; padding-bottom: 0`), flowbite `ToggleSwitch`
+(a `<button role="switch">` root with no padding: all four sides), and figma-ds
+`Button`, whose row carries its `ButtonContract` child's hashes. Every other
+committed generated surface kept its bytes (`generated:fresh`, the census, the
+frozen lineages' generated checks).
+
+**Measured live** (read-only REST, closure on, the product's own commands; every
+dump byte-identical to §D.43's run of the same file version, so "before" is the
+committed evidence):
+
+| set | within 5 % before → after | check before → after |
+|---|---|---|
+| Altitude `Tabs` `3558:61955` | 2 / 2 (1.80 / 1.45 %) → 2 / 2 (1.82 / 1.44 %) | `interactive-content-nested` × 2 + `content-size-mismatch` × 2 (453 vs 438 / 439) → `content-size-mismatch` × 1 (441 vs 438, `variant-default`; `variant-stretch` 441 vs 439 is inside the 2 px slack) |
+| Altitude `Checkbox Group` `3570:2154` | 12 / 12 → 12 / 12, every score identical | 14 problems → the same 14 |
+| Altitude `Badge` `3538:35772` | 10 / 10 → 10 / 10, every score identical | exit 0 → exit 0 |
+| CBDS `Badge` `277:822` | 72 / 72 → 72 / 72, every score identical | exit 0 → exit 0 |
+
+On Tabs the 12 px came off with Rule A (the panel is now a `<div>`, so no UA
+padding applies to it). Rule B's live effect there is Altitude `Button` (a
+`<button>` declaring only inline padding), which now emits `padding-top: 0;
+padding-bottom: 0`. What remains: the consumer is 441 px wide because the two
+`Text Passage` STUBS carry the 441 px box observed on `Tab Panel`'s main
+component, while the panel instance inside Tabs is 439 px (Figma's trimmed
+default render is 438) — §D.43's gap 3, not either rule. Tabs is still a pass by
+the scorer with named content gaps (§D.43 H1), not a content pass.
+
+**Limits, named.**
+- Interactive content is judged only from contracts the proposer HOLDS. A child
+  proposed LATER in the dump, or one the closure could not follow (a remote
+  component, a refused child) whose stub name the table does not read as a
+  control, is not assumed interactive — nothing is invented. A stub's source set
+  may carry an interaction-state axis the instance does not show (it applies one
+  value), so clause 2 cannot see it.
+- A set that genuinely IS the control and wraps a nested control (a split
+  button drawn as one set) now proposes a `div`; the reviewer re-roots it or
+  stamps the element. `Tab Panel` keeps its `focus-visible` state on a `div`,
+  where it is inert until a reviewer makes the panel focusable.
+- A padding side declared by only SOME values of an enum counts as declared for
+  every value; the others keep the user agent's padding on that side.
+- `select` is not listed (0 in Chromium; other engines were not measured). The
+  static HTML preview (`core/emit-html.ts`) carries no UA reset of its own, the
+  same as the margin reset.
+
+**Gates:** `extract/figma/interactive-content.test.ts` (`npm run
+exact-proposal:check` — the positive and negative sets, the name row, the
+order dependence, and `interactiveContentOf` on element, role, states, the name
+table, transitivity, slot `defaultContent`, a cycle and an unknown ref) and
+`core/react-ua-padding.test.ts` (`npm run react:conformance:check` — the element
+list re-measured in Chromium, the side reader, a `button` root with only
+`padding-top` on all three surfaces, all four sides and both logical pairs
+unzeroed, a `div` untouched, nested `ul` and event-trigger parts, and the box
+measured in Chromium).
