@@ -5682,3 +5682,34 @@ Reversal: remove the fixedSize mapping block and restore the REST capture-gap
 note, then bump the grammar for that changed projection and re-observe affected
 sync baselines. Preserve old dumps and consumer receipts. This is an engineering
 capture rule, not an owner qualification or a widened fidelity tolerance.
+
+
+## D.51 Comparable node alpha and contrasting-background measurement
+
+**AGENT measurement decision (2026-09-19).** Clean-consumer captures now exclude
+the review page background, matching Figma's node-export alpha. A screenshot-only
+style makes html/body transparent and is restored immediately afterward. The
+component's own backgrounds and geometry are untouched. Previously the opaque
+white React page could never trim its transparent margins, while Figma did:
+identical 148px layouts were reported as 148 versus 142 content pixels. A browser
+probe checks transparent margins, restoration of the white review page and a
+planted geometry change that remains detectable.
+
+Both source and consumer are then compared on white **and black**, using the same
+alignment, antialias-aware pixel metric and unchanged 5% limit on each. The
+existing default white comparator is byte-identical; black is an additional
+required check, never a replacement or an excuse. Masked text remains diagnostic.
+A planted missing pale block passes the white comparison and fails on black.
+
+This check found a real remaining defect in the app's CheckboxGroup archive:
+white comparison passed12/12 at at most3.18%, but black comparison exceeded5%
+in9/12. The split wrapper's default indicator lost its border-color and rendered
+black. The archive remains unqualified. Old opaque captures and their receipts
+are preserved as historical measurements; current acceptance must cite the
+capture metadata and both background scores. The work does not change frozen
+recipe receipts or OS-specific visual baselines.
+
+Reversal: restore ordinary opaque screenshots and remove the additional black
+comparison in `design-consumer-check.ts`; the original white-default scorer
+remains available. Such a reversal restores the known measurement errors and
+must not turn those historical results into acceptance evidence.

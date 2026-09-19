@@ -61,6 +61,12 @@ import { contractDependencyEdges } from './contract-schema.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
+/** Figma exports node alpha, excluding the editor page. Match that substrate
+ *  without changing the component or the page retained for visible review. */
+export const NODE_SCREENSHOT_OPTIONS = {
+  omitBackground: true,
+  style: 'html, body { background: transparent !important; }',
+};
 /** What an OVER-LIMIT row's second number says. It names, it never excuses: the
  *  verdict stays `withinLimit: false` and the check stays red. `text-only` = with
  *  the render's text boxes painted out on both sides the rest is within the same
@@ -417,7 +423,7 @@ async function main() {
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'] }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
@@ -543,9 +549,9 @@ async function main() {
         if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
-        // The root element's layout box on a white page, the same comparison
-        // basis the application uses; Figma's export is the node's own bounds.
-        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
+        // Match the Figma node export's transparent substrate. The scorer
+        // applies its shared background after trimming both alpha bounds.
+        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
         // Where this render draws text, in the screenshot's own pixels (the root's
         // layout box). The same walk extract/figma/visual-parity/render.ts makes.
         // Serialized as text for the same reason as the font probe above.
@@ -655,15 +661,18 @@ async function main() {
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
-    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render\'s text boxes masked (inflated by the scorer\'s own 4 px) and only classifies an over-limit row', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (alpha-trimmed, pixelmatch threshold 0.1). Both unmasked comparisons, on white and black, must meet the unchanged 5% limit. textMaskedPercent only classifies the white comparison and never excuses either score.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
       const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
+      const blackAligned = alignPair(ours, theirs, 0), blackDiff = diffPair(blackAligned, []);
+      writeTriptych(path.join(args.out, `triptych-black-${c.key}.png`), blackAligned, blackDiff.diff);
       const percent = diff.unmaskedPct;
-      if (!Number.isFinite(percent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
+      const blackPercent = blackDiff.unmaskedPct;
+      if (!Number.isFinite(percent) || !Number.isFinite(blackPercent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
       // Share of non-white, non-transparent pixels on each side: a mostly
       // white surface can score under the limit while drawing far less ink.
       const ink = (png: import('pngjs').PNG) => { let n = 0; for (let i = 0; i < png.data.length; i += 4) if (png.data[i + 3] > 8 && (png.data[i] < 247 || png.data[i + 1] < 247 || png.data[i + 2] < 247)) n++; return Math.round(10000 * n / (png.width * png.height)) / 100; };
@@ -672,10 +681,11 @@ async function main() {
       // is over the limit — is anything wrong OUTSIDE the glyphs? `null` = the
       // mask covers the whole canvas, so the number would be vacuous.
       const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT,
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, withinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
         textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
       if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
+      if (blackPercent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-on-black-above-limit:${c.key}:${blackPercent.toFixed(2)}%`);
       // Mostly-white surfaces can score under the pixel limit while the
       // rendered size is wrong; the trimmed content size must agree too.
       const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);
