@@ -10,7 +10,7 @@ import type { SourceTypography } from '../../../source-reference/react-source-fr
 import { ReactCallbackInspection } from './ReactCallbackInspection';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
-import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
+import type { NativeContractUpdatePlan, NativeTokenValueChange } from '../../../core/native-contract-update';
 
 /** Any recorded native value, shown without assuming its shape. */
 function designValue(value: unknown) {
@@ -43,13 +43,16 @@ function updateProblem(problem: string) {
   if (name === 'native-update-baseline-conflict') return 'Another property of these components changed in Figma after the last verified readback. Restore it, or review it as a design change, then inspect again.';
   if (name === 'native-update-node-missing') return `Node ${nodeId} no longer exists in the file.`;
   if (name === 'native-update-file-mismatch') return 'The companion is connected to a different Figma file.';
+  if (name === 'native-update-token-value-conflict') return `Variable ${nodeId}: its value is neither the saved value nor the proposed value. It was edited in Figma; this update will not overwrite it.`;
+  if (name === 'native-update-token-bound') return `Variable ${nodeId} is now bound to a node or aliased by another variable. Changing its value would change that design, so this update will not write it.`;
+  if (name === 'native-update-token-variable-missing' || name === 'native-update-token-variable-identity') return `Variable ${nodeId} no longer exists in this operation's own collection as a number variable.`;
   if (name.endsWith('-conflict')) return `${nodeId ? `Node ${nodeId}: t` : 'T'}he property this update changes holds a value that is neither the saved value nor the proposed value. It was edited in Figma; this update will not overwrite it.`;
   return problem;
 }
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
+  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -169,6 +172,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {reviewed[id] && <p role="status">{reviewed[id]}</p>}
           {row.updates?.map(update => <div key={update.id}>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            {!!update.tokenChanges?.length && <>
+              <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. No node is bound to {update.tokenChanges.length === 1 ? 'this variable' : 'these variables'}; the value is the recorded contract value.</p>
+              <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Token</th><th>Variable</th><th>Mode</th><th>Saved value</th><th>Proposed value</th></tr></thead>
+                <tbody>{update.tokenChanges.map(change => <tr key={change.variableId + ':' + change.modeId}><td>{change.tokenPath}</td><td>{change.variableId}</td><td>{change.sourceMode}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>
+            </>}
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
               <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + ('channel' in change ? change.channel : 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{'channel' in change ? change.channel==='unrequested-fill'?'Unrequested root paint':change.channel==='effects'?'Shadow stack':change.channel==='strokeWeight'?'Stroke width (px)':change.channel==='background-clip'?'Background paint area':change.channel : 'opacity'}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
@@ -188,7 +196,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 {update.operation.designChanges && (update.operation.designChanges.total||update.operation.designChanges.added.length||update.operation.designChanges.removed.length ? <>
                   <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Nothing was written and nothing is accepted. To carry a change to React, change the source so it renders the observed value, then follow the changed source: when both sides agree the update verifies without writing to Figma. To keep the code's value instead, restore it on the canvas. Until then, a code update that touches the same property is refused by name.</p>
                   <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Node</th><th>Property</th><th>Verified value</th><th>On the canvas now</th></tr></thead>
-                    <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a></td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
+                    <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td>{/^(variable|collection):/.test(change.channel) ? 'Variable' : <a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a>}</td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
                 </> : <p>The canvas matches the verified values: no design changes since verification.</p>)}
               </section>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>

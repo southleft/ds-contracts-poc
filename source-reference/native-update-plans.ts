@@ -75,12 +75,17 @@ export function createNativeUpdatePlans(repo: string,
   });
   const view = (record: Record) => ({ id: revisionOf(record).slice(7), parentId: record.parentId, status:'planned' as const,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
-    changes:structuredClone(record.update.plan.changes), limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
+    changes:structuredClone(record.update.plan.changes),
+    // Variable values this update writes. Absent for every plan without them.
+    ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges)} : {}),
+    limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
   return {
     prepare(parentId: string) {
       assertOutsideEvidenceSnapshot();
       const record=compile(parentId);
-      if(!record.update.plan.changes.length && record.predecessor) {
+      // A plan that writes only a variable value is not "no further changes".
+      const writesVariables='tokenChanges' in record.update.plan && !!record.update.plan.tokenChanges?.length;
+      if(!record.update.plan.changes.length && !writesVariables && record.predecessor) {
         const previous=read(parentId,record.predecessor.proposalId);
         if(same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
       }
