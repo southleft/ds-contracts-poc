@@ -868,6 +868,9 @@ export interface InferredSemantics {
   role?: string;
   elementByProp?: { prop: string; map: Record<string, string> };
   note: string;
+  /** True when the element came from the interaction-state axis, not the
+   *  name (the structural row of the table). */
+  structural?: true;
 }
 
 export function inferSemantics(setName: string, axes: Axis[], interactive: boolean): InferredSemantics | null {
@@ -923,10 +926,138 @@ export function inferSemantics(setName: string, axes: Axis[], interactive: boole
   if (interactive) {
     return {
       element: 'button',
+      structural: true,
       note: `semantics: element "button" inferred STRUCTURALLY — the set carries an interaction-state variant axis (hover/pressed/… are platform states of an interactive element) and the name gave no signal; review`,
     };
   }
   return null;
+}
+
+// ---------------------------------------------------------------------------
+// Interactive content — AGENT DECISION (2026-09-19, under the owner's
+// delegation): THE INFERRED `button` (OR `a`) NEVER APPLIES TO A SET WHOSE
+// DRAWING CONTAINS INTERACTIVE CONTENT.
+//
+// HTML forbids interactive content inside <button> and <a> (their content
+// models exclude interactive-content descendants). Measured: Altitude's
+// `Tab Panel` carries a State axis and no name signal, so the structural
+// inference made it a <button> — and its variants hold an instance of
+// Altitude's `Button`, itself a <button>. The generated DOM was
+// <button><button>…: invalid HTML, a spurious tab stop, and the UA padding of
+// the outer button leaking 12 px into the layout (the clean-consumer check's
+// `interactive-content-nested` and `content-size-mismatch`).
+//
+// "Interactive content" is decided ONLY from what the proposer already holds —
+// the contracts proposed EARLIER in this session (the dependency closure
+// proposes children first) and the caller's contracts in scope. A component
+// ref (anatomy instance or slot defaultContent) is interactive content when
+// the referenced contract:
+//   1. declares an interactive element (a, button, input, select, textarea,
+//      label, details — HTML's interactive-content list cut to the emitters'
+//      element vocabulary) on its root or any elementByProp value, or an
+//      interactive widget role;
+//   2. declares an interaction state (its set carried an interaction-state
+//      axis — the same fact that drives the structural inference here);
+//   3. is a `div`/`span` with no role whose NAME matches the element table
+//      above with an interactive element or role (a stub of an unimported
+//      "Button", a checkbox re-rooted to a container) — a contract that
+//      already names a non-container element keeps its own word;
+//   4. transitively holds a ref that is interactive content.
+// A ref to a contract the proposer does not hold is NOT assumed interactive
+// (nothing is invented). Free-text descriptions ("element: <div>") are one
+// kit's documentation convention, not a canvas fact, and are never read.
+//
+// The set then stays the default container (`div`) with a named note. The
+// stamp still outranks everything: a stamped element is never withheld.
+// TO REVERSE: delete the `interactiveContent` branch at the inferSemantics
+// call site in proposeFromDumpFenced (the helpers below are then unused).
+// ---------------------------------------------------------------------------
+
+/** Elements whose content model forbids interactive-content descendants. */
+const NO_INTERACTIVE_DESCENDANTS = new Set(['button', 'a']);
+/** HTML interactive content, cut to the emitters' element vocabulary. */
+const INTERACTIVE_CONTENT_ELEMENTS = new Set(['a', 'button', 'input', 'select', 'textarea', 'label', 'details']);
+/** ARIA widget roles — an element carrying one is interactive content. */
+const INTERACTIVE_ROLES = new Set([
+  'button', 'checkbox', 'combobox', 'gridcell', 'link', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option',
+  'radio', 'scrollbar', 'searchbox', 'slider', 'spinbutton', 'switch', 'tab', 'textbox', 'treeitem',
+]);
+/** Contract states that only an interaction-state axis produces. */
+const INTERACTION_STATES = new Set(['hover', 'active', 'focus-visible', 'disabled']);
+
+/** Every contract id a raw anatomy part tree renders: component refs and
+ *  slot defaultContent items, in anatomy order (deterministic). */
+function renderedRefIds(part: unknown, out: string[] = []): string[] {
+  if (!part || typeof part !== 'object') return out;
+  const p = part as {
+    component?: { id?: unknown };
+    slot?: { defaultContent?: Array<{ id?: unknown }> };
+    parts?: Record<string, unknown>;
+  };
+  if (typeof p.component?.id === 'string') out.push(p.component.id);
+  for (const item of p.slot?.defaultContent ?? []) if (typeof item?.id === 'string') out.push(item.id);
+  for (const child of Object.values(p.parts ?? {})) renderedRefIds(child, out);
+  return out;
+}
+
+/** The first interactive content a proposed anatomy renders, as a short
+ *  plain-words reason naming the chain, or null. See the block above. */
+export function interactiveContentOf(
+  root: unknown,
+  contractsById: ReadonlyMap<string, unknown> | undefined,
+  contractIdByName: ReadonlyMap<string, string> | undefined,
+): string | null {
+  if (!contractsById) return null;
+  const namesOf = (id: string, c: { name?: unknown }): string[] => {
+    const names = typeof c.name === 'string' ? [c.name] : [];
+    for (const [name, v] of contractIdByName ?? []) if (v === id && !names.includes(name)) names.push(name);
+    return names;
+  };
+  const why = (id: string): string | null => {
+    const c = contractsById.get(id) as
+      | {
+          name?: unknown;
+          semantics?: { element?: unknown; role?: unknown; elementByProp?: { map?: Record<string, unknown> } };
+          states?: unknown;
+        }
+      | undefined;
+    if (!c) return null;
+    const sem = c.semantics ?? {};
+    const elements = [sem.element, ...Object.values(sem.elementByProp?.map ?? {})].filter(
+      (e): e is string => typeof e === 'string',
+    );
+    const el = elements.find((e) => INTERACTIVE_CONTENT_ELEMENTS.has(e));
+    if (el) return `its contract's element is "${el}"`;
+    if (typeof sem.role === 'string' && INTERACTIVE_ROLES.has(sem.role)) return `its contract's role is "${sem.role}"`;
+    const states = Array.isArray(c.states) ? c.states.filter((s): s is string => INTERACTION_STATES.has(s)) : [];
+    if (states.length > 0) {
+      return `its contract declares interaction state(s) ${states.map((s) => `"${s}"`).join(', ')} (its set carries an interaction-state axis)`;
+    }
+    if (elements.every((e) => e === 'div' || e === 'span') && sem.role === undefined) {
+      for (const name of namesOf(id, c)) {
+        const hit = inferSemantics(name, [], false);
+        if (hit && (INTERACTIVE_CONTENT_ELEMENTS.has(hit.element) || (hit.role && INTERACTIVE_ROLES.has(hit.role)))) {
+          return `its name "${name}" matches the element table (${hit.role ? `role "${hit.role}"` : `element "${hit.element}"`})`;
+        }
+      }
+    }
+    return null;
+  };
+  const visit = (ids: string[], chain: string[], seen: Set<string>): string | null => {
+    for (const id of ids) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const path = [...chain, `"${id}"`];
+      const direct = why(id);
+      if (direct) return `an instance of ${path.join(' → ')} — ${direct}`;
+      const child = contractsById.get(id) as { anatomy?: Record<string, unknown> } | undefined;
+      const nested = Object.values(child?.anatomy ?? {}).flatMap((r) => renderedRefIds(r));
+      const deeper = visit(nested, path, seen);
+      if (deeper) return deeper;
+    }
+    return null;
+  };
+  return visit(renderedRefIds(root), [], new Set());
 }
 
 // ---------------------------------------------------------------------------
@@ -12263,7 +12394,25 @@ function proposeFromDumpFenced(
   // Deliberately NOT a synthetic <input> child part: the canvas did not draw
   // one, and inventing structure is the plausible-substitution failure mode
   // this pipeline refuses everywhere else.
-  const inferredRaw = inferSemantics(set.setName, axes, statePromo !== null);
+  const inferredTable = inferSemantics(set.setName, axes, statePromo !== null);
+  // INTERACTIVE CONTENT (see interactiveContentOf): an inferred <button>/<a>
+  // whose drawing renders interactive content stays the default container —
+  // nested interactive content is invalid HTML. Only the INFERENCE is
+  // withheld; a stamped element (below) still wins.
+  const interactiveContent =
+    inferredTable && NO_INTERACTIVE_DESCENDANTS.has(inferredTable.element)
+      ? interactiveContentOf(root, opts.contractsById, opts.contractIdByName)
+      : null;
+  const inferredRaw: InferredSemantics | null =
+    // @door propose.semantics-interactive-content-withheld
+    inferredTable && interactiveContent
+      ? {
+          element: 'div',
+          note: `semantics: ${
+            inferredTable.structural ? 'structural' : `name-matched (set "${set.setName}")`
+          } "${inferredTable.element}" withheld — the set contains interactive content (${interactiveContent}); HTML forbids interactive content inside <${inferredTable.element}>, so the set is proposed as the default container "div" — review (make the interactive child the control, or stamp the element)`,
+        }
+      : inferredTable;
   const rootPartCount = Object.keys((root.parts as Record<string, unknown> | undefined) ?? {}).length;
   const inferred: InferredSemantics | null =
     inferredRaw && VOID_ELEMENTS.has(inferredRaw.element) && rootPartCount > 0
