@@ -153,12 +153,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Heading/Heading.module.css": "8c52c284bdeb302a0785c1c556da8e176b7d300706ca441e1102ad5534cd1ffa",
+    "react/Heading/Heading.module.css": "a4787f56a6a49b1db14a4b4f92ae26bcafde3f4cea3a4cf8e78930fffd5b57c9",
     "react/Heading/Heading.stories.tsx": "26590246a69940ccde0530555151ea29921a12b64534b2043337d5d0ae74a5eb",
     "react/Heading/Heading.tsx": "5eba1912c4aba781bf411e75547851868bdb62047fe2dc2d8d77486cc26388e8",
     "react/Heading/index.ts": "a96aced14233168f26fa7b4ea2e644ea72828c4f56e12596f418c8b206f87fca",
     "wc/ds-heading.ts": "80911bfbd74785ff5cacfb801436ef297f873b735755b684ba2fee53cdc03520",
-    "wc/ds-heading.css.ts": "e42c634cd595efc9792f0bad1a8649f4277a67446f635d014590bbab1b8ae80d",
+    "wc/ds-heading.css.ts": "9773157faa91616b688013372cdfbc28694794630620724ff6e2cb726d063dd3",
     "wc/ds-heading.demo.html": "06c201985b003a9c634d6d63673e22bea9b6573c65cf3d31d431902f6eba6e49",
     "wc/ds-heading.custom-elements.json": "f34b345dfaea87a78cdb956ed8fc58ad6b81a3044ed09d327124ed94975fa58b"
   },

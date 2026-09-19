@@ -261,12 +261,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Badge/Badge.module.css": "e577527ad42106b9b38d9a4aac9022831c60181497954ee57146de85b577e4b1",
+    "react/Badge/Badge.module.css": "9cf041df510f6bc316a903ab34895901260a18e41e30c3eb000a266f429b2fb4",
     "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
     "react/Badge/Badge.tsx": "75f0d2fd45b2025c8de748ea149ab82a658d48795b6c909c6782c1121bf0705a",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "wc/ds-badge.ts": "9ec9d31a4388794c50bcf7af1623d40a31b3dff8f8038bc25df47e6266b4b54d",
-    "wc/ds-badge.css.ts": "614feabb3f30caf6342b51bc79fdd011e7dd64852a6d5ec6745d92c76475be89",
+    "wc/ds-badge.css.ts": "481367e59ab9950182149aa9c334640410a6cb56f5bb4dfb411d09f16d196a57",
     "wc/ds-badge.demo.html": "36708d8c35ce5bbf764ed5bd5101fa44c6cbd96c5a503d4818bd1612cbbc1697",
     "wc/ds-badge.custom-elements.json": "512070c152381b5b6a09cefef49a90235b2264ee7dd1108a77da711665710703"
   },
