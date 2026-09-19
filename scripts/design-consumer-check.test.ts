@@ -110,6 +110,32 @@ test('state cells on a local page: reach is the REAL pseudo-class, paint is ever
   } finally { await browser.close(); }
 });
 
+test('a fixed-size control with a typography-only hover is reached and visibly changes', async () => {
+  const browser = await chromium.launch();
+  try {
+    for (const [property, value] of [['font-size', '24px'], ['font-family', 'serif'], ['line-height', '30px']]) {
+      const page = await browser.newPage({ viewport: { width: 900, height: 400 } });
+      await page.setContent(`<!doctype html><style>
+        body { margin: 24px } [data-cell] { display: inline-block }
+        button { display: block; width: 140px; height: 80px; border: 0; font: 12px/14px monospace }
+        button:hover { ${property}: ${value} }
+      </style><div data-cell><button>One<br>two</button></div>`);
+      const cell = page.locator('[data-cell]');
+      const beforeBox = await cell.locator('button').boundingBox();
+      const before = await cell.screenshot();
+      const entered = await enterState(page, cell, 'hover');
+      const after = await cell.screenshot();
+      const changed = (await cell.evaluate(paintOf)) !== entered.restPaint;
+      assert.deepEqual(await cell.locator('button').boundingBox(), beforeBox, `${property}: the control kept its bounds`);
+      assert.notDeepEqual(after, before, `${property}: the browser really painted different text`);
+      assert.equal(await cell.locator('button').evaluate((el, name) => getComputedStyle(el).getPropertyValue(name), property), value);
+      assert.deepEqual(stateProblems({ key: property, interaction: 'hover', state: 'hover' }, ['hover'], entered.reached, changed), []);
+      await leaveState(page, 'hover');
+      await page.close();
+    }
+  } finally { await browser.close(); }
+});
+
 test('the text-masked number only NAMES an over-limit row: at the limit is text-only, a hair over is beyond-text, a full mask claims nothing', () => {
   assert.equal(residualClass(0, 40), 'text-only');
   assert.equal(residualClass(5, 40), 'text-only');
