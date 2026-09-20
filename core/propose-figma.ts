@@ -1,3 +1,4 @@
+import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './absolute-box.js';
 import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
@@ -1261,6 +1262,7 @@ export function settleUaPadding(proposal: { contract: unknown; notes: string[] }
 interface Occ {
   variant: string;
   node: DumpNode;
+  parent?: { node: DumpNode; occurrences: Occ[] };
 }
 
 interface Merged {
@@ -1425,7 +1427,7 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
     const childOcc: Occ[] = [];
     for (const o of occ) {
       const child = childrenOf.get(o)!.filter((c) => c.name === childName)[ord];
-      if (child) childOcc.push({ variant: o.variant, node: child });
+      if (child) childOcc.push({ variant: o.variant, node: child, parent: { node: o.node, occurrences: occ } });
     }
     // Duplicated sibling names need distinct merged names (they become note
     // paths and part keys): a swap-bound duplicate takes its INSTANCE_SWAP
@@ -3967,28 +3969,74 @@ interface ShapePlacement {
   centerResidue?: number;
 }
 
-function shapePlacementOf(sh: NonNullable<DumpNode['shape']>): ShapePlacement | null {
+function parentCssBorderInsets(o: Occ, ctx: Ctx): BoxInsets {
+  const parent = o.parent?.node;
+  if (!parent) return zeroInsets();
+  const drawn = o.parent!.occurrences.map(p => p.node).filter(n => n.stroke !== undefined);
+  // CENTER is already projected as an INSIDE CSS border, with the existing
+  // paint-loss receipt. Its CSS padding edge is still fully determined.
+  if (new Set(drawn.map(n => n.strokeAlign === 'OUTSIDE' ? 'OUTSIDE' : 'INSIDE')).size > 1 ||
+      new Set(drawn.map(n => n.strokesIncludedInLayout ?? true)).size > 1)
+    throw Error('absolute-box-parent-stroke-basis-unqualified');
+  if (parent.strokeAlign === 'OUTSIDE' || parent.strokesIncludedInLayout === false) return zeroInsets();
+  // The parent inverter withholds literal side widths when only SOME sides
+  // bind. Those raw widths therefore cannot be the emitted CSS border basis.
+  if (parent.strokeWeights !== undefined) {
+    verifyInsets(parent.strokeWeights);
+    const fields = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
+    const count = fields.filter(field => parent.bound?.[field] !== undefined).length;
+    if (count > 0 && count < 4 && !parent.bound?.strokeWeight)
+      throw Error('absolute-box-partial-border-binding-unqualified');
+    if (!parent.bound?.strokeWeight && count !== 4) {
+      const projected: Record<string, unknown> = {};
+      carryPerSideStrokeWeights({ name: parent.name, type: parent.type ?? 'FRAME', occ: o.parent!.occurrences, children: [] },
+        projected, { ...ctx, notes: [] }, 'absolute-parent');
+      if (!projected.literals && !projected.literalsByProp)
+        throw Error('absolute-box-parent-side-widths-not-carried');
+    }
+  }
+  const resolve = (name: string): number | undefined => {
+    const key = dotPath(name);
+    let value: unknown;
+    try { value = ctx.corpus.resolveLiteral(key); } catch { /* captured layer below */ }
+    value ??= ctx.capturedValues?.get(key);
+    return typeof value === 'string' && /^\d+(?:\.\d+)?px$/.test(value) ? Number.parseFloat(value) : undefined;
+  };
+  const value = (field: string, literal: number | undefined, fallback: number) =>
+    parent.bound?.[field] ? resolve(parent.bound[field]) : parent.stroke ? literal ?? fallback : 0;
+  const uniform = value('strokeWeight', parent.strokeWeight, 0);
+  const insets = Object.fromEntries((['top', 'right', 'bottom', 'left'] as const).map(side =>
+    [side, value('stroke' + side[0].toUpperCase() + side.slice(1) + 'Weight', parent.strokeWeights?.[side], uniform ?? NaN)])) as BoxInsets;
+  verifyInsets(insets);
+  if (Object.values(insets).some(n => n !== 0) && (parent as { __synthetic?: boolean }).__synthetic)
+    throw Error('absolute-box-synthetic-parent-unqualified');
+  return insets;
+}
+
+function shapePlacementOf(sh: NonNullable<DumpNode['shape']>, insets: BoxInsets): ShapePlacement | null {
   if (sh.x === undefined || sh.y === undefined) return null;
-  const styles: Record<string, string> = { position: 'absolute' };
-  const translate: string[] = [];
+  const styles: Record<string, string> = { position: 'absolute' }, translate: string[] = [];
   let centerResidue: number | undefined;
-  const px = (n: number) => `${sh.kind === 'path' ? n : Math.round(n * 100) / 100}px`;
+  const x = sh.x - insets.left, y = sh.y - insets.top,
+    right = sh.right === undefined ? undefined : sh.right - insets.right,
+    bottom = sh.bottom === undefined ? undefined : sh.bottom - insets.bottom;
+  const px = (n: number) => `${n}px`;
   const h = sh.constraints?.horizontal ?? 'LEFT';
-  if (h === 'RIGHT' && sh.right !== undefined) styles.right = px(sh.right);
-  else if (h === 'CENTER' && sh.right !== undefined) {
-    styles.left = '50%';
-    translate.push('translateX(-50%)');
-    const residue = Math.round(Math.abs(sh.x - sh.right) * 50) / 100;
-    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
-  } else styles.left = px(sh.x);
+  if (h === 'RIGHT' && right !== undefined) styles.right = px(right);
+  else if (h === 'CENTER' && right !== undefined && x === right) {
+    styles.left = '50%'; translate.push('translateX(-50%)');
+  } else {
+    styles.left = px(x);
+    if (h === 'CENTER' && right !== undefined) centerResidue = Math.abs(x - right) / 2;
+  }
   const v = sh.constraints?.vertical ?? 'TOP';
-  if (v === 'BOTTOM' && sh.bottom !== undefined) styles.bottom = px(sh.bottom);
-  else if (v === 'CENTER' && sh.bottom !== undefined) {
-    styles.top = '50%';
-    translate.push('translateY(-50%)');
-    const residue = Math.round(Math.abs(sh.y - sh.bottom) * 50) / 100;
-    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
-  } else styles.top = px(sh.y);
+  if (v === 'BOTTOM' && bottom !== undefined) styles.bottom = px(bottom);
+  else if (v === 'CENTER' && bottom !== undefined && y === bottom) {
+    styles.top = '50%'; translate.push('translateY(-50%)');
+  } else {
+    styles.top = px(y);
+    if (v === 'CENTER' && bottom !== undefined) centerResidue = Math.max(centerResidue ?? 0, Math.abs(y - bottom) / 2);
+  }
   return { styles, translate, centerResidue };
 }
 
@@ -4019,7 +4067,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     invertNodeShape(sub, part, ctx, where);
     return;
   }
-  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape! }));
+  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape!, insets: o.node.shape!.x !== undefined && o.node.shape!.y !== undefined ? parentCssBorderInsets(o, ctx) : zeroInsets() }));
   const kinds = [...new Set(shapes.map((s) => s.sh.kind))];
   if (kinds.length > 1) {
     ctx.notes.push(`${where}: shape kind differs across variants (${kinds.join(', ')}) — shape not carried; review`);
@@ -4215,7 +4263,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return a ? arcMaskCss(a.start, a.end) : null;
   };
   const specOf = (s: (typeof shapes)[number]): string => {
-    const p = shapePlacementOf(s.sh);
+    const p = shapePlacementOf(s.sh, s.insets);
     return JSON.stringify({
       p: p?.styles ?? null,
       t: p?.translate ?? [],
@@ -4223,10 +4271,10 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       a: arcVaries ? maskOf(s) : null,
     });
   };
-  const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh) !== null);
+  const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh, s.insets) !== null);
   if (!anyPlacement && !rotationVaries && !arcVaries) return; // in-flow, constant rotation/arc — done
   const buildStyles = (s: (typeof shapes)[number]): Record<string, string> | null => {
-    const p = shapePlacementOf(s.sh);
+    const p = shapePlacementOf(s.sh, s.insets);
     const transform: string[] = [...(p?.translate ?? [])];
     if (rotationVaries && (s.sh.rotation ?? 0) !== 0) transform.push(`rotate(${s.sh.rotation}deg)`);
     const styles: Record<string, string> = { ...(p?.styles ?? {}) };
@@ -4237,7 +4285,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     if (transform.length > 0) styles.transform = transform.join(' ');
     if (p?.centerResidue !== undefined) {
       ctx.notes.push(
-        `${where}: CENTER-constrained placement carried as 50% + translate — the drawn offset differs from the exact center by ${p.centerResidue}px (canvas pixel snap); review`,
+        `${where}: CENTER-constrained placement uses the exact measured offset because the drawn box differs from the CSS padding-box center by ${p.centerResidue}px; center tracking under resize is not carried; review`,
       );
     }
     return Object.keys(styles).length > 0 ? styles : null;
@@ -4372,7 +4420,7 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
         where,
         dim,
         'px',
-        m.occ.map((o) => ({ variant: o.variant, value: Math.round(o.node.shape![dim] * 100) / 100 })),
+        m.occ.map((o) => ({ variant: o.variant, value: o.node.shape![dim] })),
         undefined,
         // Presence-shaped coverage — same '0' fill as carryAbsPlacement: a
         // subset-present part never renders at the unobserved axis values
@@ -4384,7 +4432,7 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
       // mint pass).
       ctx.mint.absFallbacks.push({
         part, tokens, chan: dim,
-        value: Math.round(m.occ[0].node.shape![dim] * 100) / 100,
+        value: m.occ[0].node.shape![dim],
         where,
       });
     }
@@ -4570,7 +4618,10 @@ function carryAbsPlacement(
   where: string,
   opts: { text?: boolean; size?: boolean } = {},
 ): boolean {
-  const boxes = m.occ.map((o) => ({ variant: o.variant, box: absBoxOf(o.node) }));
+  const boxes = m.occ.map((o) => {
+    const native = absBoxOf(o.node);
+    return { variant: o.variant, box: native && cssBoxFromNative(native, parentCssBorderInsets(o, ctx)) };
+  });
   if (boxes.every((b) => b.box === undefined)) return false;
   // @door propose.abs-placement-ledger
   const ledger = (why: string): false => {
@@ -4675,7 +4726,6 @@ function carryAbsPlacement(
   if (!['LEFT', 'RIGHT', 'CENTER', 'STRETCH'].includes(hs[0]) || !['TOP', 'BOTTOM', 'CENTER', 'STRETCH'].includes(vs[0])) {
     return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling`);
   }
-  const px2 = (n: number) => Math.round(n * 100) / 100;
   // Presence-shaped coverage (round 2 iteration 6): a node ABSENT from some
   // variants yields no observation there, so a placement channel that is a
   // clean function of one axis still failed full-coverage classification and
@@ -4691,14 +4741,14 @@ function carryAbsPlacement(
   const mintChan = (chan: string, pick: (b: AbsBox) => number) => {
     mintObservation(
       ctx, tokens, where, chan, 'px',
-      boxes.map((b) => ({ variant: b.variant, value: px2(pick(b.box!)) })),
+      boxes.map((b) => ({ variant: b.variant, value: pick(b.box!) })),
       `${where}|abs-${chan}`,
       sparse,
     );
     // Base-combo literal fallback (the round-4 padding precedent): when the
     // per-variant values refuse classification in the mint pass, the FIRST
     // occurrence's value carries as a part literal — applied and NAMED there.
-    ctx.mint!.absFallbacks.push({ part, tokens, chan, value: px2(pick(boxes[0].box!)), where });
+    ctx.mint!.absFallbacks.push({ part, tokens, chan, value: pick(boxes[0].box!), where });
     channels.push(chan);
   };
   const declared = (part.declared as Record<string, string> | undefined) ?? {};

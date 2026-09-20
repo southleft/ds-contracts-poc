@@ -752,7 +752,8 @@ export function createReactReferenceService(
         // journals and source evidence across them, then discard that snapshot
         // before another request or any command authorization can use it.
         const listing = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
-        const moved = jobs.listReactMoved(reference!.id, currentStateApiRequest).filter(m => inCohort(m.caseId)).flatMap(m => {
+        const moved = jobs.listReactMoved(reference!.id, currentStateApiRequest,
+          caseId => initialStates.nativeRequest(reference!.id, caseId)).filter(m => inCohort(m.caseId)).flatMap(m => {
           try { return nativeSourceBelongsToReference(repoRoot, jobs.reactSuccessionSubject(m.operationId), reference!) ? [m] : []; }
           catch { return [{ ...m, successionProblem: m.successionProblem ?? 'react-source-succession-identity-unavailable' }]; }
         });

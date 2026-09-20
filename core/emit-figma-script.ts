@@ -1,3 +1,4 @@
+import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
@@ -6397,6 +6398,24 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  // Contract offsets are CSS padding-edge coordinates. Synthetic paint and
+  // SVG viewport planes already carry native coordinates and are excluded.
+  const lowerAbsolute = (parent: NodeSpec) => {
+    for (const child of parent.children ?? []) {
+      const part = nativePartOrigins.get(child);
+      const positioned = part?.declared?.position === 'absolute' ||
+        part?.stylesWhen?.some(sw => sw.styles.position === 'absolute');
+      if ((child.absolute || child.insetOverlay) && positioned && child.shape?.kind !== 'stroked-path') {
+        const insets = compiledBorderInsets(parent, name => {
+          try { return pxOrNull(resolveLiteral(name.replaceAll('/', '.'))) ?? undefined; } catch { return undefined; }
+        });
+        lowerAbsoluteInsets(child, insets);
+      }
+      lowerAbsolute(child);
+    }
+  };
+  [...variants, ...stateVariants].forEach(v => lowerAbsolute(v.spec));
+
   const fillRootSlot = [...variants, ...stateVariants].some(v => v.spec.rootFillWidth);
   if (fillRootSlot && ![...variants, ...stateVariants].every(v => v.spec.rootFillWidth))
     throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
@@ -7457,6 +7476,13 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
     // MAX pins right/bottom, CENTER centers):
     const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
     const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Unrotated nodes already expose local coordinates. Going through world
+    // bounding boxes introduces cancellation and loses fractional positions.
+    if (!childSpec.rotation && !(childSpec.shape && childSpec.shape.rotation)) {
+      childNode.x = a.left !== undefined ? a.left : a.right !== undefined ? parent.width - a.right - childNode.width : (parent.width - childNode.width) / 2;
+      childNode.y = a.top !== undefined ? a.top : a.bottom !== undefined ? parent.height - a.bottom - childNode.height : (parent.height - childNode.height) / 2;
+      return;
+    }
     // Rotation moves the measured box — correct against the actual bounds.
     const bb = childNode.absoluteBoundingBox;
     const pb = parent.absoluteBoundingBox;

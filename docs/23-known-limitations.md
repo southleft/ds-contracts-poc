@@ -7200,8 +7200,8 @@ rewrite old results or substitute an outlined silhouette for the stroke.
 
 ## D.85 Transparent pseudo geometry needs independent box evidence
 
-**AGENT finding and decision, 2026-09-20.** The unpainted absolute pseudo
-reader currently treats computed CSS dimensions and offsets as native geometry.
+**AGENT finding and decision, 2026-09-20.** The earlier unpainted absolute pseudo
+reader treated computed CSS dimensions and offsets as native geometry.
 That is insufficient even when the surrounding control passes its image test.
 In the retained state-API Switch, the native transparent box is 54 ×
 32.39059829711914 at approximately (-12, -8). An independent browser fixture
@@ -7223,19 +7223,70 @@ More decisively, authored offsets 1.0156249 px and 1.015625 px both serialize as
 The negative pair has the same ambiguity. No decoder of that CSS string alone
 can recover both results correctly.
 
-A read-only protocol prototype joins each pseudo-element to its actual host
-and obtains stable, exact border quads. Its scalar width and height fields are
-rounded integers and must not substitute for those quads. This is an
-investigation, not an integrated reader or a native repair. New box evidence
-still needs complete source-tree correspondence, stability and coordinate-space
-guards; measured boxes cannot establish authored sizing or responsive behavior.
-A future height update must account for every changed descendant and every
-variable consumer, or refuse. Do not relax the current bound-variable guard.
+Fresh React initial-state observations now join each unpainted pseudo-element
+to its actual host and read exact border quads. Scalar protocol sizes are rounded
+integers and are not used. The reader checks the complete source styles, element
+path, stable native browser identities and repeated geometry; shadow/slot/frame
+boundaries, transformed or zoomed ancestors, and ambiguous roots refuse. Older
+inspections without this evidence must be observed again before candidate assembly.
+Saved source observations remain unchanged.
+
+The fixed observed rectangle uses the existing contract dimensions and CSS
+padding-edge offsets. The native compiler adds the parent's resolved border
+insets; the inverse proposal subtracts the CSS border insets. Outlines and strokes
+excluded from layout use zero insets. Uncarried or contradictory parent stroke
+facts refuse. Rectangle dimensions and offsets retain their original precision;
+unrotated native placement uses local coordinates directly. An off-center native
+CENTER constraint keeps its measured offset and names the loss of center tracking.
+Centered CSS placement with asymmetric borders remains refused. Bordered inset
+overlays use the same padding-edge translation. Synthetic background planes and stroked-path viewports keep their
+own native coordinate basis.
+
+The regression probes cover 24 independently measured browser cases and 52 generated
+React layouts across rectangles/ellipses, near/far/center constraints, uniform and
+asymmetric borders, state-varying border sides, outlines and inset stroke rings. Initial-state assembly and
+native writer/readback checks also cover the measured pseudo box. These are bounded
+implementation checks. The application then observed all nine original Switch
+states with the new reader: each transparent hit area measured 54 × 32.390625 px,
+at −11, −7 relative to the host's outer edge. Its existing initial-state operation
+explicitly followed the newer authenticated observation without allocating another
+component. Initial-state listings now compare full observation pins, as state-API
+listings already did, and refresh after observation completes.
+
+The initial application review refused the unsupported child geometry channel.
+A subsequent bounded writer now corrects fixed, absolute rectangle/ellipse leaves
+with near-edge constraints, without changing their identities or other observed
+facts. Bindings, size limits, aspect locks, rotation, nonleaf topology and mixed
+channels refuse. The first live write used Figma's `resize()`, which silently kept
+32.39059829711914 instead of 32.390625. Exact readback rejected that result and
+restored all nine original tuples. An isolated native rectangle/ellipse probe
+showed that `resizeWithoutConstraints()` writes and restores these values exactly.
+New plans use that API; historical program bytes remain unchanged.
+
+The application then applied 27 scalar corrections to the same nine native nodes.
+Independent readback and a second inspection both matched −11, −7 and
+54 × 32.390625 exactly, with fixed sizing, near-edge constraints and no aspect lock.
+All nine pre/post PNGs and export bounds are byte-identical; the corrected boxes
+are transparent. The plugin was closed and the live component set inspected.
+The failed attempt remains in its journal. An answered failed write now closes
+only after independent readback proves the entire saved baseline was restored;
+uncertain outcomes and unrelated edits remain blocked. Polling does not retry it.
+Fresh native creation and the separate thumb geometry mismatch remain unqualified.
+The separate static-HTML emitter still adds a border in the inset-ring probe;
+that surface is not qualified by the React checks.
+
+Measured boxes do not establish authored sizing or responsive behavior. A future
+height update must account for every changed descendant and every variable consumer,
+or refuse. The current bound-variable guard remains unchanged.
 
 Private evidence: `bound-size-pseudo-geometry-investigation-20260920/`, with
 sealed source/native comparisons, the complete browser matrices and the
-protocol prototype. No source component, native object or historical receipt
-was changed. The decision is to retain the exactness gap and reject the
-CSS-string-only repair. Reversal requires new independent geometry evidence
-and a verified inverse representation; it never means changing the scorer or
-rewriting earlier measurements.
+protocol prototype. Integration probes and failed adversarial cases are retained
+in `pseudo-box-reader-20260920-1407/`; update journals `09048c90…` (rolled back)
+and `c8c24f72…` (verified twice) retain the complete native observations. Only the
+nine reviewed leaf geometries changed; original source and historical receipts
+remain intact. The AGENT decision is to use independently measured boxes, preserve
+the two coordinate bases, and apply exact leaf resizes without constraints. No
+public schema field or responsive rule is inferred. Reversal disables new plans
+and removes the reader/coordinate lowering while preserving historical program
+support and journals; it never changes the scorer or rewrites earlier measurements.

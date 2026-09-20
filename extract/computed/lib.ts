@@ -32,6 +32,9 @@ export interface CapturedNode {
   /** Optional independently observed SVG viewport. The computed CSS census
    * does not contain this attribute. Never infer it from path extents. */
   svgViewport?: { viewBox: [number, number, number, number]; preserveAspectRatio: string };
+  /** Independently observed used boxes, supplied only after source-evidence
+   * verification. CSS serialization alone cannot recover these coordinates. */
+  pseudoGeometry?: Partial<Record<'::before' | '::after', import('./unpainted-pseudo.js').ObservedPseudoBox>>;
   /** CONFORMANCE FRONTIER (R7): the reader looks at `READ_PSEUDOS`. The DECOR
    *  grammar still promotes `DECOR_PSEUDOS` only — reading is not carrying. */
   pseudo: Partial<Record<ReadPseudo, StyleMap>>;
@@ -435,6 +438,7 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     style,
     pseudo,
     ...(n.svgViewport !== undefined ? { svgViewport: structuredClone(n.svgViewport) } : {}),
+    ...(n.pseudoGeometry !== undefined ? { pseudoGeometry: structuredClone(n.pseudoGeometry) } : {}),
     // Portal-capture-only attributes: preserved when present, OMITTED when
     // undefined (the census case) so committed captures stay byte-identical.
     ...(n.role !== undefined ? { role: n.role } : {}),

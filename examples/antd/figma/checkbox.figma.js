@@ -225,8 +225,8 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "MIN",
-                        "left": 5.215400000000001,
-                        "top": 2.7517500000000004
+                        "left": 6.215400000000001,
+                        "top": 3.7517500000000004
                       }
                     }
                   ]
@@ -376,8 +376,8 @@ const COMPONENTS = [
                       "absolute": {
                         "h": "MIN",
                         "v": "MIN",
-                        "left": 4,
-                        "top": 4
+                        "left": 5,
+                        "top": 5
                       }
                     }
                   ]
@@ -1899,6 +1899,13 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
     // MAX pins right/bottom, CENTER centers):
     const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
     const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Unrotated nodes already expose local coordinates. Going through world
+    // bounding boxes introduces cancellation and loses fractional positions.
+    if (!childSpec.rotation && !(childSpec.shape && childSpec.shape.rotation)) {
+      childNode.x = a.left !== undefined ? a.left : a.right !== undefined ? parent.width - a.right - childNode.width : (parent.width - childNode.width) / 2;
+      childNode.y = a.top !== undefined ? a.top : a.bottom !== undefined ? parent.height - a.bottom - childNode.height : (parent.height - childNode.height) / 2;
+      return;
+    }
     // Rotation moves the measured box — correct against the actual bounds.
     const bb = childNode.absoluteBoundingBox;
     const pb = parent.absoluteBoundingBox;

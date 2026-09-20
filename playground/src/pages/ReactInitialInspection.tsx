@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { ReactInitialInspection as Inspection } from '../../../source-reference/react-initial-inspection';
-export function ReactInitialInspection({ referenceId, caseId, available, prepareNative, nativeSaved, nativeBusy }: { referenceId: string; caseId: string; available: boolean; prepareNative: () => void; nativeSaved: boolean; nativeBusy: boolean }) {
+export function ReactInitialInspection({ referenceId, caseId, available, prepareNative, nativeSaved, nativeBusy, onObservationChange }: { referenceId: string; caseId: string; available: boolean; prepareNative: () => void; nativeSaved: boolean; nativeBusy: boolean; onObservationChange?: () => void }) {
   const [result, setResult] = useState<Inspection | null>(null), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   const endpoint = `/api/source-reference/react/${referenceId}/initial-states/${caseId}`;
+  useEffect(() => {
+    if (result?.phase === 'complete') onObservationChange?.();
+  }, [result?.id, result?.phase, onObservationChange]);
   useEffect(() => {
     let stopped = false;
     setResult(null); setError('');

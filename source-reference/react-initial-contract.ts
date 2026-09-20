@@ -10,6 +10,7 @@ import { reactOwnershipMatchesTree, type ReactOwnership } from './react-ownershi
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import type { SvgViewportEvidence } from './svg-viewports.js';
+import { hasUnpaintedPseudoBoxes, type PseudoBoxEvidence } from './pseudo-boxes.js';
 import { classifyReactProperty } from './react-program-proposal.js';
 import { planReactInitialStates, type observeReactInitialStates } from './react-initial-state.js';
 import { prepareObservedContentTree, compileObservedContentSweep } from './observed-content.js';
@@ -21,7 +22,7 @@ import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import { descendantFixedSizes, descendantTranslateRefusal, lowerDescendantTranslations, type DescendantAlignment, type DescendantSizing } from './react-descendant-geometry.js';
 
-type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence };
+type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence; pseudoBoxes?: PseudoBoxEvidence };
 const unjoined = 'descendant-sizes-not-joined:census-differs-from-captured-tree';
 /** The refusal CLASS that says the observation lacks evidence this assembler reads (an older observer made it):
  * any problem named `…-evidence-unobserved`. Only a new observation can answer it; assembly cannot. */
@@ -29,7 +30,8 @@ export const reactInitialEvidenceUnobserved = (problem: string) => problem.endsW
 export function reactInitialObservedRoot(snapshot: Snapshot, instanceId: string) {
   const instance = snapshot.ownership.components.find(c => c.id === instanceId);
   if (!instance || instance.roots.length !== 1) throw Error('react-initial-contract-source-root-mismatch');
-  const rootPath = instance.roots[0], prepared = prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg);
+  if (hasUnpaintedPseudoBoxes(snapshot.tree) && !snapshot.pseudoBoxes) throw Error('pseudo-box-evidence-unobserved');
+  const rootPath = instance.roots[0], prepared = prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg, snapshot.pseudoBoxes);
   const root = flatten(prepared).find(row => row.path === rootPath)?.node;
   if (!root) throw Error('react-initial-contract-source-root-mismatch');
   return { rootPath, root: structuredClone(root) };
