@@ -39,6 +39,7 @@ import {
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
   nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
   OVERLAY_CSS,
   placeholdersIn,
@@ -162,7 +163,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // Pushed LAST in a part's base rule: the UA resets above spell `font:
   // inherit`, a shorthand that would erase a family written before it.
   const defaultFamily = defaultFontFamilyParts(contract);
-  const nativeTextRendering = nativeTextRenderingRoots(contract);
+  const nativeTextRendering = new Set([...nativeTextRenderingRoots(contract), ...nativeTextRenderingLeafParts(contract)]);
 
   const checkToken = (tokenPath: string, context: string): boolean => {
     if (!tokenInventory.has(tokenPath)) {
@@ -1103,6 +1104,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    if (nativeTextRendering.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
     // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` — a Figma text box that
     // sizes itself to its text is a whole number of pixels wide (the advance
     // rounded up); the element gets the same box, as a progressive

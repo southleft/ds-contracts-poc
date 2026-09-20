@@ -72,6 +72,7 @@ export {
   wholePixelTextBoxDecls,
   wholePixelTextBoxPlan,
   nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
   enumProps,
   holderDeclaresPosition,

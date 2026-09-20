@@ -7622,3 +7622,39 @@ No owner grade was written.
 To reverse the rendering decision, remove `nativeTextRenderingRoots` and its
 emitter calls; retain the independent font-input support and all prior receipts.
 Do not change historical contracts, font files, crop rules or fidelity limits.
+
+
+### D.90 Owned terminal text can keep a local rendering default
+
+**AGENT decision, 2026-09-20.** D.88 continues to exclude mixed roots from its
+inherited rendering default. A direct terminal child of such a root can now
+receive `text-rendering: geometricPrecision` when it carries captured
+`textAutoResize: "WIDTH_AND_HEIGHT"` and owns scalar contract text or a literal
+string. The hint stays on that child. Slots, component references, repeated
+parts, deeper wrappers, shapes and non-text content do not gain this fallback.
+Any authored text-rendering channel in the root's tree suppresses inference.
+No component names participate in this rule.
+
+Both React outputs forward an explicit caller `style.textRendering` to these
+owned leaves. Measured generated-component probes show that caller and component
+siblings keep their prior rendering, explicit `auto`, `optimizeSpeed` and
+`optimizeLegibility` overrides win, and the default versus `auto` preserves exact
+boxes. A contract that owns the code prop `style` keeps that API; the inline
+emitter now omits its extra HTML-style binding, avoiding a duplicate parameter
+and preserving the enum-driven variant. Web Components receive the equivalent
+owned-leaf declaration; this does not expand their V1 qualification or promise
+new host-style override behavior.
+
+Private evidence in `cbds-owned-text-leaf-probe-20260920/` preserves the original
+66/72 control, a label-only diagnostic, source snapshots and a reproduced invalid
+app-copied inline export. `cbds-owned-text-engine-20260920/` retains the actual
+engine-generated family: only the Badge label's CSS declaration differs from
+the control; all three inline outputs parse and typecheck. With the explicitly
+supplied, hashed Inter asset, the clean consumer passes 72/72 on both backgrounds
+at the unchanged 5% limit. These engine checks alone do not qualify the app
+journey; the acceptance ledger records its independently measured delivery.
+
+To reverse, remove `nativeTextRenderingLeafParts` and its emitter calls/explicit
+caller override forwarding. Keep the independent inline `style` collision fix,
+font-input support, D.88 root guard and all historical evidence. Do not alter
+source designs, crops, scorer thresholds or owner grades.

@@ -795,6 +795,27 @@ export function nativeTextRenderingRoots(contract: Contract): Set<Part> {
 }
 export const NATIVE_TEXT_RENDERING_DECL = 'text-rendering: geometricPrecision';
 
+/** A mixed root can still own a terminal scalar-text part next to a component
+ * or slot. Keep the inferred paint default on that leaf, never on its parent.
+ * Authored rendering channels suppress inference for the whole root as above.
+ * React emitters must carry an explicit caller root override onto these leaves. */
+export function nativeTextRenderingLeafParts(contract: Contract): Set<Part> {
+  const leaves = new Set<Part>();
+  const roots = nativeTextRenderingRoots(contract);
+  const anatomy = [...walkAnatomy(contract)];
+  for (const [name, root] of Object.entries(contract.anatomy)) {
+    if (roots.has(root) || root.component || root.slot || root.repeat) continue;
+    const tree = anatomy.filter(entry => entry.path[0] === name);
+    if (tree.some(({ part }) => { const { base, perValue } = textHolders(part); return holds([...base, ...perValue], 'text-rendering'); })) continue;
+    for (const part of Object.values(root.parts ?? {})) {
+      if (!drawsWholePixelTextBox(part) || part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.meter || part.attrs?.style) continue;
+      const scalarText = part.content && contract.props.some(prop => prop.type === 'text' && prop.bindings.code.prop === part.content!.prop);
+      if (scalarText || typeof part.text === 'string') leaves.add(part);
+    }
+  }
+  return leaves;
+}
+
 export function noneShadowVars(tokens: unknown): { none: Set<string>; mixed: Set<string> } {
   const out = { none: new Set<string>(), mixed: new Set<string>() };
   const t = tokens as Partial<TokenTreeInput> | undefined;

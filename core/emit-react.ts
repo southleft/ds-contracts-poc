@@ -50,6 +50,7 @@ import {
   isMultiRoot,
   namedSlots,
   namedTextProps,
+  nativeTextRenderingLeafParts,
   numberProps,
   textDefault,
   textProps,
@@ -89,6 +90,7 @@ export {
   isVariantBool,
   namedSlots,
   namedTextProps,
+  nativeTextRenderingLeafParts,
   NATIVE_ROLE_HOSTS,
   numberProps,
   PART_STATE_CHANNELS,
@@ -307,6 +309,9 @@ export function generateTsx(
   // in the header. Byte-identical when nothing collides.
   const { base: propsBase, omitted: omittedAttrs } = reactPropsBase(contract, meta);
   const omittedNote = reactOmittedNote(omittedAttrs, meta);
+  const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
+  const nativeTextLeafStyle = (part: Part) => nativeTextLeaves.has(part) && !omittedAttrs.includes('style')
+    ? ' style={{ textRendering: rest.style?.textRendering }}' : '';
 
   const events = contract.events ?? [];
   const toggledCodeProps = new Set(
@@ -708,7 +713,7 @@ export function generateTsx(
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part)}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -723,7 +728,7 @@ export function generateTsx(
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part)}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {

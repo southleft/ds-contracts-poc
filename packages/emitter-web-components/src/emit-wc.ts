@@ -86,6 +86,7 @@ import {
   stateSelectorsFor,
   wholePixelTextBoxPlan,
   nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
   isArrayType,
   isEnum,
@@ -261,6 +262,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // dump v1.36: the whole-pixel text box, the same declarations generateCss
   // writes (which also refuses an unsubtractable tracking token by name).
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
+  const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
   const k = kebab(contract.name);
   // A disabled state styles what the internal root actually exposes
   // (wcRootDisabledSelector); every state rule, root and part, reads it — a
@@ -628,6 +630,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    if (nativeTextLeaves.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
     // dump v1.36: the whole-pixel text box — the same declaration generateCss
     // writes (core anatomy.ts wholePixelTextBoxDecls), so the two sheets
     // cannot disagree about a text box.

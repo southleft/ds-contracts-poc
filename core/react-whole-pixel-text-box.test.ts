@@ -18,7 +18,7 @@ import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright-core';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
-import { emitReact, nativeTextRenderingRoots, validateContract } from './emit-react.js';
+import { emitReact, nativeTextRenderingRoots, nativeTextRenderingLeafParts, validateContract } from './emit-react.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { shadowCss } from '../packages/emitter-web-components/src/emit-wc.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
@@ -279,7 +279,11 @@ test('native text rendering is inherited from the root, leaves unflagged contrac
 test('native text rendering does not cross a caller-content or child-component ownership boundary', () => {
   const withSlot = flagged();
   withSlot.anatomy.root!.parts!.external = { slot: { name: 'children' } };
-  for (const output of [modules(withSlot).css, inline(withSlot).tsx, shadowCss(withSlot)]) assert.doesNotMatch(output, /geometricPrecision/);
+  assert.equal(nativeTextRenderingRoots(withSlot).size, 0);
+  assert.deepEqual([...nativeTextRenderingLeafParts(withSlot)], [withSlot.anatomy.root!.parts!.caption]);
+  assert.doesNotMatch(rule(modules(withSlot).css, '.root') + rule(modules(withSlot).css, '.external'), /geometricPrecision/);
+  assert.match(rule(modules(withSlot).css, '.caption'), /geometricPrecision/);
+  assert.match(rule(shadowCss(withSlot), "[part='caption']"), /geometricPrecision/);
   // A child still owns its own rendering policy; inspecting the parent's
   // analysis must not need to compile or rewrite that child's contract.
   const withChild = flagged();
@@ -326,4 +330,78 @@ test('MEASURED native text rendering: caller overrides win and text/element geom
       }
     });
   } finally { await browser.close(); }
+});
+
+
+test('owned leaf defaults stay on direct terminal text and yield to authored rendering channels', () => {
+  const c = flagged();
+  c.anatomy.root!.parts!.external = { slot: { name: 'children' } };
+  for (const changed of [
+    { ...c, anatomy: { root: { ...c.anatomy.root!, declared: { 'text-rendering': 'auto' } } } },
+    flagged({ ...LABEL, textAutoResize: undefined }),
+  ]) assert.equal(nativeTextRenderingLeafParts(changed).size, 0);
+  const nested = structuredClone(c);
+  nested.anatomy.root!.parts!.wrapper = { parts: { nested: nested.anatomy.root!.parts!.caption! } };
+  delete nested.anatomy.root!.parts!.caption;
+  assert.equal(nativeTextRenderingLeafParts(nested).size, 0, 'a deeper wrapper does not acquire the direct-leaf proof');
+  const authored = structuredClone(c);
+  authored.states = ['hover'];
+  authored.anatomy.root!.parts!.external.declaredStates = { hover: { 'text-rendering': 'optimizelegibility' } };
+  assert.equal(nativeTextRenderingLeafParts(authored).size, 0, 'any authored rendering plane suppresses inference');
+});
+
+test('MEASURED owned leaf hint leaves caller and component content untouched while caller rendering overrides win', async t => {
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      const c = flagged();
+      c.anatomy.root!.parts!.external = { slot: { name: 'children' } };
+      const child = contract(LABEL);
+      child.id = 'probe.external'; child.name = 'External';
+      c.anatomy.root!.parts!.child = { component: { id: child.id } };
+      const context = { contracts: new Map([[c.id,c],[child.id,child]]), icons: new Map<string,string>() };
+      const emit = (component: Contract) => surface === 'inline'
+        ? { ...emitReactInline(component, { ...context, tokens }), css: '' }
+        : emitReact(component, { ...context, tokens: tokenInventoryFromJson([tokens.primitives]), tokenValues: tokens });
+      const output = emit(c), dep = emit(child);
+      assert.deepEqual(generatedTypeErrors(c.name, output.tsx, { External: dep.tsx }), []);
+      const page = await browser.newPage();
+      try {
+        const render = await mountGenerated(page,c.name,output.tsx,output.css,{External:dep});
+        const observe = () => page.locator('#root > :first-child').evaluate(root => [root,...root.querySelectorAll('*')].map(el => ({text:el.textContent,rendering:getComputedStyle(el).textRendering,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));
+        await render({label:'Owned text',children:'Caller text'});
+        const before = await observe();
+        assert.deepEqual(before.map(x=>x.rendering), ['auto','geometricprecision','auto','auto','auto']);
+        for (const value of ['auto','optimizeSpeed','optimizeLegibility']) {
+          await render({label:'Owned text',children:'Caller text',style:{textRendering:value}});
+          const after = await observe();
+          assert.deepEqual(after.map(x=>x.rendering), after.map(()=>value.toLowerCase()));
+          if(value==='auto') assert.deepEqual(after.map(({rendering,...geometry})=>geometry),before.map(({rendering,...geometry})=>geometry));
+        }
+      } finally { await page.close(); }
+    });
+  } finally { await browser.close(); }
+});
+
+test('MEASURED a contract style axis stays an enum without a duplicate HTML style binding', async t => {
+  const browser=await chromium.launch();
+  try {
+    for(const surface of ['css-module','inline'] as const) await t.test(surface, async()=>{
+      const c=flagged();
+      c.props[0]={...c.props[0],name:'style',bindings:{...c.props[0].bindings,code:{prop:'style'}}};
+      c.anatomy.root!.literalsByProp=[{prop:'style',map:{brand:{'background-color':'#0000ff'},danger:{'background-color':'#ff0000'}}}];
+      c.anatomy.root!.parts!.external={slot:{name:'children'}};
+      const out=surface==='inline'?{...inline(c),css:''}:modules(c);
+      assert.deepEqual(generatedTypeErrors(c.name,out.tsx),[]);
+      const page=await browser.newPage();
+      try{
+        const render=await mountGenerated(page,c.name,out.tsx,out.css);
+        for(const [style,color] of [['brand','rgb(0, 0, 255)'],['danger','rgb(255, 0, 0)']]){
+          await render({style,label:'Owned label',children:'Caller label'});
+          assert.equal(await page.locator('#root > :first-child').evaluate(el=>getComputedStyle(el).backgroundColor),color);
+          assert.deepEqual(await page.locator('#root > :first-child > *').evaluateAll(els=>els.map(el=>getComputedStyle(el).textRendering)),['geometricprecision','auto']);
+        }
+      }finally{await page.close();}
+    });
+  }finally{await browser.close();}
 });
