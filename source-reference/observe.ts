@@ -39,6 +39,38 @@ export async function observeSource(page: Page, profile: SourceProfile,
     };
     const css = element ? getComputedStyle(element) : null;
     const rect = element?.getBoundingClientRect();
+    let textAbsence: SourceObservation['textAbsence'];
+    if (p.textContent === 'absent') {
+      const problems: string[] = [];
+      const pending: Node[] = element ? [element] : [];
+      let inspectedNodes = 0;
+      if (!element) problems.push('text-absence-root-missing');
+      while (pending.length) {
+        const node = pending.pop()!;
+        if (++inspectedNodes > 10_000) { problems.push('text-absence-scope-too-large'); break; }
+        if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) problems.push('unexpected-source-text');
+        if (node instanceof Element) {
+          // Closed/custom rendering and browser-generated form text cannot be
+          // established absent from ordinary light DOM. Refuse that scope.
+          if (node.shadowRoot || node.localName.includes('-') || node.hasAttribute('is') ||
+              ['slot','input','textarea','select','option','canvas','iframe','object','embed','video','audio','use','foreignObject'].includes(node.localName) ||
+              !['http://www.w3.org/1999/xhtml','http://www.w3.org/2000/svg'].includes(node.namespaceURI ?? ''))
+            problems.push('text-absence-scope-unavailable');
+          const style = getComputedStyle(node);
+          if (style.display === 'list-item') problems.push('text-absence-generated-content');
+          if (!['','none','normal','""',"''"].includes(style.content.trim())) problems.push('text-absence-generated-content');
+          for (const pseudo of ['::before','::after']) {
+            const content = getComputedStyle(node,pseudo).content.trim();
+            if (!['','none','normal','""',"''"].includes(content)) problems.push('text-absence-generated-content');
+          }
+        }
+        // Count all DOM nodes, including hidden text; an empty innerText alone
+        // cannot establish that the source intentionally has no text content.
+        if (pending.length + inspectedNodes + node.childNodes.length > 10_000) { problems.push('text-absence-scope-too-large'); break; }
+        pending.push(...node.childNodes);
+      }
+      textAbsence = {status:problems.length ? 'refused' : 'observed',inspectedNodes,problems:[...new Set(problems)]};
+    }
     // innerText includes the actual rendered text; slots need assigned content too.
     const slotText = element ? [...element.querySelectorAll('slot')]
       .flatMap(s => s.assignedNodes({flatten:true})).map(n => n.textContent ?? '').join(' ') : '';
@@ -47,6 +79,7 @@ export async function observeSource(page: Page, profile: SourceProfile,
       visible: !!element && element.checkVisibility({checkOpacity:true, checkVisibilityCSS:true}),
       width: rect?.width ?? 0, height: rect?.height ?? 0,
       text: associatedLabel ? associatedLabel.text : ((element as HTMLElement | null)?.innerText ?? element?.textContent ?? '') + slotText,
+      ...(textAbsence ? {textAbsence} : {}),
       ...(associatedLabel ? {associatedLabel} : {}),
       styles: Object.fromEntries(Object.keys(p.requiredStyles).map(k => [k, css?.getPropertyValue(k).trim() ?? ''])),
       tokens: Object.fromEntries(Object.keys(p.requiredTokens).map(k => [k, css?.getPropertyValue(k).trim() ?? ''])),
@@ -80,9 +113,36 @@ export async function observeSource(page: Page, profile: SourceProfile,
     await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     const expression = `(() => { let root = document, element = null; for (const s of ${JSON.stringify(profile.associatedLabelText === undefined ? profile.fontPath ?? profile.path : profile.path)}) { element = root?.querySelector(s); root = element?.shadowRoot; } return ${profile.associatedLabelText === undefined ? 'element' : 'element?.labels?.length === 1 ? element.labels[0] : null'}; })()`;
     const { result } = await cdp.send('Runtime.evaluate', {expression});
+    if (!result.objectId && profile.textContent === 'absent' && observed.textAbsence) {
+      // A disappearing root is unavailable evidence, not a zero-glyph result.
+      observed.textAbsence.status = 'refused';
+      observed.textAbsence.problems.push('text-absence-scope-unavailable');
+    }
     if (result.objectId) {
       await cdp.send('DOM.getDocument', {depth:-1, pierce:true});
       const { nodeId } = await cdp.send('DOM.requestNode', {objectId:result.objectId});
+      if (profile.textContent === 'absent' && observed.textAbsence?.status === 'observed') {
+        // Element.shadowRoot cannot reveal a closed shadow tree on an ordinary
+        // host such as <span>. Chromium's DOM protocol exposes that boundary.
+        const described = await cdp.send('DOM.describeNode', {nodeId,depth:-1,pierce:true});
+        const pending = [described.node];
+        let count = 0;
+        while (pending.length) {
+          const node = pending.pop()!;
+          let problem: string | undefined;
+          if (++count > 10_000 || count + pending.length + (node.children?.length ?? 0) > 10_000)
+            problem = 'text-absence-scope-too-large';
+          else if (node.shadowRoots?.length || node.contentDocument ||
+              (node.childNodeCount ?? 0) !== (node.children?.length ?? 0))
+            problem = 'text-absence-scope-unavailable';
+          if (problem) {
+            observed.textAbsence.status = 'refused';
+            observed.textAbsence.problems.push(problem);
+            break;
+          }
+          pending.push(...node.children ?? []);
+        }
+      }
       const resultFonts = await cdp.send('CSS.getPlatformFontsForNode', {nodeId});
       platformFonts = resultFonts.fonts.map(({familyName, glyphCount}) => ({familyName, glyphCount}));
       await cdp.send('Runtime.releaseObject', {objectId:result.objectId});

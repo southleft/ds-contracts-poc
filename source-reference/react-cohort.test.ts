@@ -132,6 +132,15 @@ const edited = (change: (d: any) => void) => {
   return JSON.stringify(d);
 };
 
+test('a declared textless witness is explicit and cannot borrow another text or font witness', () => {
+  const none=parseReactCases(edited(d => {d.cases[0].witness={...witness,textContent:'absent'};}));
+  assert.equal(none.profile('badge-row').textContent,'absent');
+  assert.equal(parseReactCases(JSON.stringify(declaration())).profile('badge-row').textContent,undefined);
+  for(const patch of [{textContent:'optional'},{textContent:false},{textContent:null},
+    {textContent:'absent',fontPath:['span']},{textContent:'absent',associatedLabelText:'Nearby'}])
+    assert.throws(()=>parseReactCases(edited(d=>{d.cases[0].witness={...witness,...patch};})),/^Error: react-cases-witness-invalid$/);
+});
+
 function fixture(withBuiltinSources = false) {
   const root = mkdtempSync(path.join(tmpdir(), "react-cohort-"));
   const put = (file: string, text: string) => {

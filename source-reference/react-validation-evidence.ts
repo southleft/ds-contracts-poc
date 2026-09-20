@@ -10,6 +10,9 @@ export const negativeControlNames = [
   "missing-root",
   "hidden-root",
 ] as const;
+export const textlessNegativeControlNames = [
+  "missing-css", "missing-theme", "unexpected-text", "missing-root", "hidden-root",
+] as const;
 /** The cases that must reject every corruption come from the cohort that was
  * validated. An empty list proves nothing and is never complete. */
 export function completeNegativeControls(
@@ -18,14 +21,17 @@ export function completeNegativeControls(
     negativeControls?: { name: string; rejected: boolean }[];
   }[],
   negativeCaseIds: readonly string[],
+  textlessCaseIds: readonly string[] = [],
 ) {
+  if (textlessCaseIds.some(id => !negativeCaseIds.includes(id))) return false;
   return negativeCaseIds.length > 0 && negativeCaseIds.every((id) => {
     const matches = rows.filter((row) => row.id === id);
     const controls = matches[0]?.negativeControls;
+    const expected = textlessCaseIds.includes(id) ? textlessNegativeControlNames : negativeControlNames;
     return (
       matches.length === 1 &&
-      controls?.length === negativeControlNames.length &&
-      negativeControlNames.every(
+      controls?.length === expected.length &&
+      expected.every(
         (name) =>
           controls.filter((c) => c.name === name && c.rejected).length === 1,
       )

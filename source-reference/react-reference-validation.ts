@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   negativeControlNames,
+  textlessNegativeControlNames,
   completeNegativeControls,
   inventoryEvidence,
   evidenceUnchanged,
@@ -68,6 +69,10 @@ export async function corruptReactReference(
 ) {
   await page.evaluate(
     ({ kind, selector }) => {
+      if (kind === "unexpected-text") {
+        document.querySelector(selector)?.append(document.createTextNode('Unexpected source text'));
+        return;
+      }
       if (kind === "missing-root") {
         document.querySelector(selector)?.remove();
         return;
@@ -77,10 +82,16 @@ export async function corruptReactReference(
         if (node) node.style.visibility = "hidden";
         return;
       }
-      const visit = (
-        rules: CSSRuleList,
-        owner: CSSStyleSheet | CSSGroupingRule,
-      ) => {
+      if (kind === "missing-css") {
+        document.querySelectorAll('style,link[rel="stylesheet"]').forEach((n) => n.remove());
+        return;
+      }
+      // Keep the browser closure self-contained when the host transpiler
+      // preserves function names; a nested named helper can capture __name.
+      const pending: Array<CSSStyleSheet | CSSGroupingRule> = [...document.styleSheets];
+      while (pending.length) {
+        const owner = pending.pop()!;
+        const rules = owner.cssRules;
         for (let i = rules.length - 1; i >= 0; i--) {
           const rule = rules[i];
           if (kind === "missing-font" && rule instanceof CSSFontFaceRule) {
@@ -91,16 +102,9 @@ export async function corruptReactReference(
             for (const key of [...rule.style])
               if (key.startsWith("--")) rule.style.removeProperty(key);
           if ("cssRules" in rule)
-            visit((rule as CSSGroupingRule).cssRules, rule as CSSGroupingRule);
+            pending.push(rule as CSSGroupingRule);
         }
-      };
-      if (kind === "missing-css")
-        document
-          .querySelectorAll('style,link[rel="stylesheet"]')
-          .forEach((n) => n.remove());
-      else
-        for (const sheet of [...document.styleSheets])
-          visit(sheet.cssRules, sheet);
+      }
     },
     { kind, selector },
   );
@@ -307,7 +311,7 @@ export function startReactValidation(
             : { status: "refused", problems: ["source-invalid"] };
           if (negativeCases.has(entry.id)) {
             row.negativeControls = [];
-            for (const name of negativeControlNames) {
+            for (const name of profile.textContent === 'absent' ? textlessNegativeControlNames : negativeControlNames) {
               const negative = await browser.newContext({
                 viewport: { width: 900, height: 600 },
                 deviceScaleFactor: 1,
@@ -337,6 +341,8 @@ export function startReactValidation(
                       ? "theme-token-missing:"
                       : name === "missing-font"
                         ? "font-substitution"
+                        : name === "unexpected-text"
+                          ? "unexpected-source-text"
                         : name === "missing-root"
                           ? "component-missing"
                           : "component-not-visible";
@@ -372,6 +378,7 @@ export function startReactValidation(
       const controlsProven = completeNegativeControls(
         state.rows,
         cohort.negativeCaseIds,
+        cohort.negativeCaseIds.filter(id => cohort.profile(id).textContent === 'absent'),
       );
       if (!controlsProven) state.problem = "negative-controls-incomplete";
       if (!state.sourceUnchanged)
