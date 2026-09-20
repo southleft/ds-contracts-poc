@@ -173,3 +173,34 @@ test('stubs are read by their name with camel / Pascal case split; own and neste
   assert.equal(of(['x.unknown']), null);
   assert.deepEqual(interactiveContentOf({ parts: { close: { element: 'button' } } }, byId), { child: 'its own anatomy', what: 'part "close" is a <button>' });
 });
+
+test('stub namespace segments do not become control names, while the observed leaf still identifies a control', () => {
+  for (const [child, interactive] of [
+    ['Button / Decoration / Chevron', false],
+    ['Controls / CloseButton', true],
+    ['__button/helper/loading / spinner', false],
+    ['Button / Icon / Link', true],
+  ] as const) {
+    const r = both({
+      Panel: set('Panel', 'State', ['Default', 'Hover'], () => [instance(child)]),
+      Button: set('Button', 'Size', ['Sm', 'Md'], () => [instance(child), text('Go')]),
+    });
+    assert.equal(elementOf(bySet(r, 'Panel')), interactive ? 'div' : 'button', child);
+    assert.equal(!!nested(bySet(r, 'Button')), interactive, child);
+    for (const p of r.proposals) for (const stub of p.childStubs ?? []) {
+      assert.equal((stub as {semantics:{element:string}}).semantics.element, 'span', 'name evidence does not rewrite the stub contract');
+    }
+  }
+});
+
+test('an observed control layer name survives a variant-qualified main name', () => {
+  for (const controlName of ['Button (Icon)', 'Controls / CloseButton']) {
+    const control = () => ({...instance('Button (Icon)/Default/sm'), name:controlName});
+    const r=both({
+      Panel:set('Panel','State',['Default','Hover'],()=>[control()]),
+      Button:set('Button','Size',['Sm','Md'],()=>[control(),text('Go')]),
+    });
+    assert.equal(elementOf(bySet(r,'Panel')),'div',controlName);
+    assert.ok(nested(bySet(r,'Button')),controlName);
+  }
+});

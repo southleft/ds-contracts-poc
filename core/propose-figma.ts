@@ -226,7 +226,7 @@ export interface MinimalChildContract {
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
-  bindings?: { figma?: { anchors?: { componentSetKey?: string | null } } };
+  bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } } };
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
    *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
@@ -984,6 +984,8 @@ const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled 
  *  once per proposal, never mutated; read by the batch post-pass. */
 type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
 const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
+// Observation-only provenance: generated identifiers flatten namespace separators.
+const stubObservedNames = new WeakMap<object, string[]>();
 
 /** "IconButton" / "close_button" / "Split Button A" → lower-case words. */
 export function nameWords(name: string): string[] {
@@ -1040,11 +1042,20 @@ interface ContractLike {
 }
 
 /** The element(s) and role a contract is taken to render, by the snapshot:
- *  a stub by its name (camel case split), anything else by its semantics. */
+ *  a stub by its observed leaf name (camel case split), anything else by its semantics. */
 function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]; role?: string } {
   if (stub) {
-    const read = inferSemantics(nameWords(typeof c.name === 'string' ? c.name : '').join(' '), [], false);
-    return { elements: read ? [read.element] : [], ...(read?.role ? { role: read.role } : {}) };
+    const observed = stubObservedNames.get(c as object);
+    // Main names may end in variant values (Button/Icon/Default/sm); the
+    // actual instance layer can still say Button (Icon). Keep both observed
+    // leaf names, without treating a namespace segment as a control name.
+    const names = observed ?? [typeof c.name === 'string' ? c.name : ''];
+    const reads = names.map(name => {
+      const leaf = observed === undefined ? name : name.split('/').map(part => part.trim()).filter(Boolean).at(-1) ?? '';
+      return inferSemantics(nameWords(leaf).join(' '), [], false);
+    }).filter((read): read is NonNullable<typeof read> => read !== null);
+    const role = reads.find(read => read.role && INTERACTIVE_ROLES.has(read.role))?.role;
+    return { elements: [...new Set(reads.map(read => read.element))], ...(role ? { role } : {}) };
   }
   const sem = c.semantics ?? {};
   return {
@@ -1669,16 +1680,19 @@ export type TextStyleIdentityRefusalCode = typeof TEXT_STYLE_IDENTITY_REFUSED;
 export class ExactProjectionError extends Error {
   readonly code: ExactProposalRefusalCode;
   readonly projection: ExactProjectionResult;
+  readonly detail?: string;
 
   constructor(
     code: ExactProposalRefusalCode,
     message: string,
     projection: ExactProjectionResult,
+    detail?: string,
   ) {
     super(message);
     this.name = 'ExactProjectionError';
     this.code = code;
     this.projection = projection;
+    this.detail = detail;
   }
 }
 
@@ -2283,6 +2297,8 @@ export interface StubIconAsset {
 interface StubCapture {
   id: string;
   instanceOf: string;
+  /** Observation-only layer names; never serialized as stub semantics. */
+  instanceNames?: string[];
   /** The observed owning-set publish key (dump v1.5) — carried onto the
    *  stub's bindings.figma.anchors.componentSetKey so importing the real set later
    *  LINKS back to this identity by key. */
@@ -7486,6 +7502,8 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
+    capture.instanceNames ??= [];
+    if (!capture.instanceNames.includes(o.node.name)) capture.instanceNames.push(o.node.name);
     if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
     if (o.node.bbox) {
       capture.observed.push({
@@ -11555,8 +11573,9 @@ function proposeFromDumpFenced(
   if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
     throw new ExactProjectionError(
       'EXACT_MATRIX_RAGGED',
-      `${cartesianProjection.refusals[0]?.message ?? ''} stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`.trim(),
+      cartesianProjection.refusals[0]?.message ?? 'Source matrix is ragged.',
       cartesianProjection,
+      `stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`,
     );
   }
   const sourceProjection =
@@ -11895,17 +11914,37 @@ function proposeFromDumpFenced(
   }
   const baseSelfId = stampedContractId ?? `${prefix}.${componentIdSlug(set.setName)}`;
   let selfId = baseSelfId;
+  let idSuffixedFrom: string | undefined;
   const ownKey = set.key ?? null;
-  if (opts.sessionClaimedIds && ownKey !== null) {
+  // A previously allocated id belongs to the drawn component, not its label.
+  // Preserve suffixes even when the original collision was removed or renamed.
+  // Consult real anchor evidence, not a name index or an unverified key index.
+  if (!stampedContractId && opts.sessionClaimedIds) {
+    const matches = [...opts.sessionClaimedIds].filter(id => {
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      if (!anchor || (opts.fileKey && anchor.fileKey && opts.fileKey !== anchor.fileKey)) return false;
+      return ownKey !== null ? anchor.componentSetKey === ownKey
+        : !!opts.fileKey && !!set.nodeId && anchor.fileKey === opts.fileKey && anchor.nodeId === set.nodeId;
+    });
+    if (matches.length > 1) throw Error('FIGMA_IMPORT_IDENTITY_AMBIGUOUS: several session contracts claim the same drawn component');
+    if (matches.length === 1) {
+      selfId = matches[0];
+      if (selfId !== baseSelfId) preNotes.push(`contract id: retained "${selfId}" for the same anchored Figma component; its drawn name does not replace an existing identity`);
+    }
+  }
+  if (opts.sessionClaimedIds && (ownKey !== null || (opts.fileKey && set.nodeId))) {
     const contradicts = (id: string): boolean => {
       if (!opts.sessionClaimedIds!.has(id)) return false;
-      const holderKey = opts.contractsById?.get(id)?.bindings?.figma?.anchors?.componentSetKey ?? null;
-      return holderKey !== null && holderKey !== ownKey;
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      const holderKey = anchor?.componentSetKey ?? null;
+      return (holderKey !== null && ownKey !== null && holderKey !== ownKey) || !!(opts.fileKey && anchor?.fileKey && (opts.fileKey !== anchor.fileKey || (ownKey === null && set.nodeId && anchor.nodeId && set.nodeId !== anchor.nodeId)));
     };
+    const allocated = selfId;
     for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
-    if (selfId !== baseSelfId) {
+    if (selfId !== allocated) {
+      idSuffixedFrom = baseSelfId;
       preNotes.push(
-        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (its componentSetKey contradicts this set's key ${ownKey}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
+        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (${ownKey !== null && opts.contractsById?.get(baseSelfId)?.bindings?.figma?.anchors?.componentSetKey !== ownKey ? `its componentSetKey contradicts this set's key ${ownKey}` : 'its file/node anchor contradicts this set'}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
       );
     }
   }
@@ -13010,6 +13049,7 @@ function proposeFromDumpFenced(
   const childStubs: Array<Record<string, unknown>> = [];
   for (const capture of ctx.stubs.values()) {
     const built = buildChildStub(capture, ctx, opts.fileKey ?? null);
+    stubObservedNames.set(built.contract, [...new Set([capture.instanceOf, ...(capture.instanceNames ?? [])])].sort());
     childStubs.push(built.contract);
     if (built.geometry) {
       if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
@@ -13226,7 +13266,7 @@ function proposeFromDumpFenced(
     projection,
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
-    ...(selfId !== baseSelfId ? { idSuffixedFrom: baseSelfId } : {}),
+    ...(idSuffixedFrom ? { idSuffixedFrom } : {}),
     ...(designerStateAxis !== null ? { stateAxisProjection: designerStateAxis } : {}),
   };
 }
@@ -13263,6 +13303,9 @@ export function figmaProposalsReport(
  *  zod issue array rendered verbatim in the playground rail); the verbatim
  *  technical text always survives as `detail`. */
 export function plainWordsProposalError(e: unknown): { headline: string; detail?: string } {
+  // Preserve stable refusal headlines used by historical evidence; additive
+  // reader diagnostics use the existing technical-detail channel.
+  if (e instanceof ExactProjectionError && e.detail) return { headline: e.message, detail: e.detail };
   const issues = (e as { issues?: unknown } | null)?.issues;
   if (Array.isArray(issues) && issues.length > 0 && issues.every((i) => i && typeof i === 'object')) {
     const first = issues[0] as { path?: unknown[]; message?: unknown };

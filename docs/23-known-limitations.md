@@ -3923,7 +3923,7 @@ designer only when a stamp was observable, and that is now a POSITIVE reader fac
   know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
 - anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
   bridge that never read plugin data — is not observable, and a strict-subset set
-  refuses `EXACT_MATRIX_RAGGED … stamps-not-observable`.
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
 
 **This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
 file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
@@ -3973,6 +3973,19 @@ walked the whole product to validate one tuple. Two rules, both by name:
   product at all — each tuple is checked against the axes and ranked by mixed
   radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
   under a millisecond.
+
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
 
 **The ambiguity fence.** Every per-axis inversion rule ("this value is a function
 of axis A") was written for full coverage, where the explanation is unique: if a
@@ -4059,10 +4072,10 @@ unchanged 5 % limit):
 that is the fail-closed rule working.** The exam reads a canvas through a read-only
 observe whose scene read-back ignores plugin data by design
 (`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
-"unstamped" proves nothing: the receipt stays `refused-by-name` at propose, its
-message now carrying the reason (`… Cartesian definitions require 40.
-stamps-not-observable: …`; one line in each of four evidence files, re-recorded with
-the gate's own `--write --subject cbds-alert`), the tally stays **5 accounting-clean,
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
 19 refused by name**, and the three derived status lines are unchanged. The first
 cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
 that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
@@ -4423,7 +4436,49 @@ referee, the emitted React, the planner), four rows in
 (`npm run design:consumer:test`, incl. the browser test of the three named state
 problems).
 
+**Consumer observation correction (AGENT decision, 2026-09-19).** A browser
+probe changed only the font size of a fixed-size control on real hover. Its
+pixels changed, but the check reported `state-inert` because its computed paint
+snapshot omitted font size. The same gap affected font family and line height.
+The snapshot now includes those three properties; a browser regression checks
+each with different before/after screenshots and unchanged control dimensions.
+The pixel scorer, 5% limit, source pairing and frozen evidence are unchanged.
+This corrects a measurement failure, not a product fidelity result. Reversal:
+remove the three computed properties from `paintOf` and the typography probe;
+the rest of the state-axis rule is independent.
+
+
+### D.41 follow-up — variant effects include descendants
+
+**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
+previously compared only root styles, bounds and class names. A parent prop
+forwarded to a child could visibly work while the check reported
+`variant-prop-discarded`; an unused root class could imply an effect with no
+changed drawing. The probe now records subtree paint, rendered text and exact
+geometry relative to the root. It excludes class names. Browser probes verify
+changed descendant color, rearrangement at fixed root bounds, and equal-width
+text replacement against actual different screenshots; an unused class stays
+inert. This does not change the image scorer or its 5% limit. Existing receipts
+remain historical until remeasured. Reversal: restore the former root-only
+observer in `scripts/design-consumer-check.ts`, retaining these known false
+positive and false negative cases in the limitation ledger.
+
+
 ## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+
+**Current integration measurement, 2026-09-19.** After merging the current
+state-axis and consumer-check changes, fresh REST reads and newly generated,
+installed consumers measure Altitude Badge **10/10**, CBDS Badge **66/72** and
+Altitude Tabs **0/2** on both white and black. All 72 CBDS rows pass white
+(maximum 4.427%); six small rounded outline rows fail black (maximum 6.120%).
+Altitude Badge's maximum is 4.825% on either background. Tabs retains missing
+child content, an ineffective variant change and a 40px versus 176px content
+height mismatch; its maxima are 7.081% white and 9.030% black. These are CLI
+consumer measurements, not a full application or semantic qualification.
+No source design, scorer or 5% limit changed. The 72/72 table below is the
+historical white-only result, retained with its original receipts. Both sides
+of the integration and the fresh measurements are preserved privately in
+`pr135-main-integration-c93fqc91/`; the new observation does not rewrite them.
 
 **2026-09-19. A lowering decision taken by the agent under the owner's standing
 delegation (never a grade, never a tolerance); recorded so it can be reversed.**
@@ -4848,8 +4903,9 @@ already requested and the closure adds none. No other caller selects a contract
 by position.
 
 **Library callers.** `importFromUrl` follows only when asked (`closure: true`); the
-CLI asks. The Playground's URL import, `core/emitters-check.ts`, the fidelity
-matrix and every fixture-backed caller keep their bytes and their request count,
+CLI and Playground URL import ask. The Playground fixture demo uses that same
+option. `core/emitters-check.ts`, the fidelity matrix and the other
+fixture-backed callers keep their bytes and their request count,
 and the sync spine maps its own responses (`mapRestToDump` directly) without a
 closure, so no ledger baseline moves and the dump grammar stays v1.36 (a closure
 adds sets and provenance; it changes no set's projection). With `--no-closure`
@@ -4874,9 +4930,10 @@ interactive content (`interactive-content-nested:<cell>:<outer>><inner>`, HTML's
 rule for `a` and `button`; a `label` around its own control is not flagged).
 It still mounts and scores only the requested set.
 
-**Measured live** (read-only REST, the product's own commands in order, the
+**Historical white-only measurement** (read-only REST, the product's own commands in order, the
 unchanged 5 % limit; "before" is the same pipeline with `--no-closure`, the same
-day, the same file version):
+day, the same file version). These receipts predate D.51; the fresh integration
+results below supersede their qualification claims:
 
 | set | children followed | within 5 % before → after | check |
 |---|---|---|---|
@@ -4941,7 +4998,9 @@ graph at emit time — the next gap, named. **To reverse:** delete the
   designer drew the real set. Tested on synthetic REST bytes only (no measured set
   has a cycle).
 - A closure child that fails at `generate` refuses its parent (above).
-- The Playground's URL import does not follow instances (library default off).
+- The Playground retains at most 30 imported components in a session. A larger
+  family refuses atomically instead of evicting a child during import; the REST
+  walk still has its separate 64-child cap.
 
 **Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,
 fast lane — a recorded CBDS response for the transitive + standalone case; synthetic
@@ -4959,6 +5018,68 @@ graph through `defaultContent` and `accepts`, and the nesting query in Chromium)
 `extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set
 import, byte-identical; the proposer partition is inert without
 `_provenance.closure`; the harness lookup and graph are additive.
+
+**Same-set cycle correction (AGENT decision, 2026-09-19).** A variant can
+contain an instance of another main in its own component set. The closure walk
+previously discarded that self-edge; the proposer then named the self-reference
+but emitted an empty part, with no child contract or geometry stub. Self-edges
+now enter the existing cycle walk and produce the same `cycle-cut` record and
+distinct stub as a cross-set cycle. They fetch no additional set. The bounded
+probe runs both shapes through proposal and generation; neither produces a
+circular contract graph. This preserves the named geometry fallback, not the
+nested variant's full content. Reversal: restore the `targetId !== setId` filter
+in `followInstances` and the previous self-reference expectation.
+
+**Application family retention (AGENT decision, 2026-09-19).** The URL import
+now opts into the same closure walk. A closure-backed REST result or pasted
+REST dump is saved as one atomic workspace family, including each component's
+own minted/captured token layer and any named provisional stubs. The initially
+selected parent is found by its requested Figma node id; dependency-first
+ordering must not silently open the first child. A missing, ambiguous or refused
+requested parent leaves the workspace unchanged. A refused dependency remains a
+named stub. The existing 30-component workspace cap applies to the whole family.
+
+A recorded CBDS Icon/Placeholder replay exercises the application transport,
+storage, parent selection and React/HTML emission from the restored session
+graph, plus repeats, refused children, oversized batches and requested-parent
+refusals. This is integration evidence, not a new live fidelity measurement or
+a clean-consumer application proof. Reverse by removing the application closure
+option and family recording calls; the CLI rule and old evidence stay intact.
+
+
+**Main integration measurement (2026-09-20).** Fresh REST GET-only reads of all
+four sets, followed by proposal, dependency generation, clean package installation
+and transparent captures on white and black, retain the unchanged 5% limit.
+Altitude Badge passes 10/10 (maximum 4.825% on either background). CBDS Badge
+passes 66/72: every white comparison passes (maximum 4.427%), while six small
+rounded outlines fail black (maximum 6.120%). Tabs passes both image comparisons
+at 2/2 (maximum 1.812% white / 3.525% black), but its consumer visibly omits text,
+contains nested buttons, discards the variant change and measures 453px wide
+against 438/439px native. Its checker still fails. Checkbox Group passes 12/12
+on white (maximum 4.011%) and 0/12 on black (maximum 10.364%); its hidden legend
+still renders, its legend axis is inert and nine content-size checks fail.
+
+The black triptychs were inspected. Their visible missing and incorrect content
+prevents treating a small whole-canvas difference as a completed journey. Both
+conflict versions and all new dumps, proposals, generated packages, receipts,
+images and built review consumers are retained under private
+`pr136-main-integration-s0jph0cm/`. No old receipt was rewritten. These are CLI
+integration measurements, not a new application acceptance or a visual grade.
+
+
+**Source-pairing guard (AGENT measurement decision, 2026-09-20).** The final
+integration review planted two contradictory inputs: a contract anchored to a
+different file with the same node id, and two dump sets claiming one anchor.
+The consumer checker previously accepted the first and selected the first match
+for the second. It now refuses conflicting captured file identities, duplicate
+set anchors or names, and a named set that cannot verify the contract's node
+anchor. A legacy input without anchors retains its unique name lookup; absent
+file provenance is not invented. Four genuine captures retain all 96 variant
+names and input combinations and agree on file/set identity. No image, scorer
+or tolerance changed. Reversal: restore the first-match lookup in
+`findDumpSet`; doing so restores the demonstrated source-pairing ambiguity.
+
+
 
 ## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (final form after two adversarial reviews); a named nesting, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
 
@@ -5153,15 +5274,17 @@ content pass.
   to a `div` (children cannot mount in a void element) is a `div` in the snapshot,
   so a structural parent around it keeps its `button`.
 - *The single-set `proposeFromDump` entry* (no batch) applies no Rule A.
-- *A stub is read by its name, including a kit's path prefix.* The canvas-to-code
-  exam's Altitude `Button` draws a stub of `__button/helper/loading / spinner`
-  (contract name `ButtonHelperLoadingSpinner1`), which the table reads as a
-  `button`: the Button stays a `button` and gains a nesting note it does not
-  deserve (recipe/evidence/canvas-to-code-v1 `receipt.json`: proposal notes 51 →
-  52, re-recorded with `tsx recipe/canvas-to-code.ts --write`; the contract is
-  unchanged). Under a STRUCTURAL parent the same name would withhold its `button`
-  guess. The stub keeps no other trace of its path, and the description is not
-  read, so this is named, not fixed.
+- *Stub names remain provisional semantic evidence.* The in-memory observed name
+  retains slash-delimited namespaces; only the final component segment and the observed instance layer leaf
+  enter the control-name inference. A main ending in variant values such as
+  `Button (Icon)/Default/sm` retains the actual `Button (Icon)` layer signal. A namespace such as `Button / Decoration` does
+  not make its `Chevron` leaf interactive, while `Controls / CloseButton`
+  remains a control signal. The generated stub contract and its serialized name
+  are unchanged. External stubs without that observation retain the existing
+  serialized-name inference. This AGENT correction removes a false nesting note
+  and keeps the frozen canvas-to-code-v1 receipt byte-identical to main; no
+  receipt is regenerated. Reverse by removing the private observed-name map and
+  restoring whole-identifier inference, preserving the historical evidence.
 - *A set that IS the control and wraps a real control* now proposes a `div`; the
   reviewer re-roots it or stamps the element.
 - *The dead `:disabled` plane on a non-native root* (the review's probe A4): a
@@ -5180,6 +5303,26 @@ per-side values re-measured in Chromium; drawn zeros carried and emitted; four d
 sides and `div` roots untouched; a side with no value named as `no value carried`
 and one with a refusal on record as refused; per-value and logical sides; Tab
 Panel's zeros taken back.
+
+
+**Current main integration measurement (2026-09-20).** After integrating the
+landed dependency-closure PR, fresh REST GET-only captures and isolated packaged
+consumers retain the unchanged white-and-black 5% criterion. Tabs has no nested
+interactive-content finding; its width is 441px rather than 453px. Both images
+pass (maximum 1.824% white / 3.593% black), but the variant change remains
+discarded, the default content width remains 441px versus 438px, and the two
+Text Passage lines are visibly missing. The tab labels also have incorrect
+color and spacing, and the native active indicator is absent. This is not a
+completed Tabs journey.
+Altitude Badge remains 10/10, CBDS Badge 66/72, and Checkbox Group 0/12 on the
+joint criterion (all 12 white comparisons pass; all 12 black comparisons fail).
+The six CBDS small rounded outlines, hidden Group legends and nine Group
+content-size failures remain. Private evidence `pr137-main-integration-tbx6mgdq/`
+preserves the actual merge conflicts, both sides, fresh inputs, generated
+packages, receipts and visible review. These are CLI integration measurements;
+they do not newly qualify the app workflow or independent child components.
+The frozen recipe lineages, owner results and OS-specific drift pins have no
+differences from landed main.
 
 ## D.45 A disabled state on a root that is not a form control compiled to `:disabled`, which never matches it — CLOSED on React CSS modules, web components and static HTML; behaviour (focus, handlers) and a no-prop disabled state stay NAMED
 
@@ -5335,3 +5478,58 @@ longer overrides them; the `button` root behaves as before).
 make `reactRootDisabledSelector`, `wcRootDisabledSelector` and
 `htmlRootDisabledSelector` return `':disabled'`, delete `rootDisabledAsPseudo`, and
 regenerate.
+
+## D.47 Re-imports keep the anchored Figma component identity
+
+**AGENT decision (2026-09-19).** The live JSON import walkthrough loaded
+Altitude Badge, then CBDS Badge with its two children. The second Badge
+correctly received a collision suffix, but the workspace replaced the first
+library's entry by display name. Repeating CBDS then silently changed its id
+from `ds.badge-2` to `ds.badge`. A displayed single entry was not repeat safety.
+
+Anchored Figma imports now refresh by file and node (set key when no node was
+captured), across JSON and URL entry paths. Different files with the same label
+coexist. Before allocating a name-derived id, the proposer reuses one uniquely
+matching session contract's component key and compatible file, or its file/node
+when the key was not captured. A conflicting file cannot borrow that identity;
+ambiguous claims refuse. A valid canvas-stamped contract id retains precedence.
+Unanchored entries keep the existing source/name rule. No source filename or
+component name receives a special case.
+
+The bounded probes reproduce the old failure and cover alternating imports,
+removing the original collision, renaming the set, different input doors,
+missing keys and conflicting file evidence. They qualify identity behavior,
+not visual fidelity. Existing sessions cannot recover an entry already evicted
+by the old rule; import that capture again. To reverse, restore the workspace's
+source/name identity and remove the proposer's anchored-id reuse and file guard.
+
+
+## D.51 Comparable node alpha and contrasting-background measurement
+
+**AGENT measurement decision (2026-09-19).** Clean-consumer captures now exclude
+the review page background, matching Figma's node-export alpha. A screenshot-only
+style makes html/body transparent and is restored immediately afterward. The
+component's own backgrounds and geometry are untouched. Previously the opaque
+white React page could never trim its transparent margins, while Figma did:
+identical 148px layouts were reported as 148 versus 142 content pixels. A browser
+probe checks transparent margins, restoration of the white review page and a
+planted geometry change that remains detectable.
+
+Both source and consumer are then compared on white **and black**, using the same
+alignment, antialias-aware pixel metric and unchanged 5% limit on each. The
+existing default white comparator is byte-identical; black is an additional
+required check, never a replacement or an excuse. Masked text remains diagnostic.
+A planted missing pale block passes the white comparison and fails on black.
+
+This check found a real remaining defect in the app's CheckboxGroup archive:
+white comparison passed12/12 at at most3.18%, but black comparison exceeded5%
+in9/12. The split wrapper's default indicator lost its border-color and rendered
+black. The archive remains unqualified. Old opaque captures and their receipts
+are preserved as historical measurements; current acceptance must cite the
+capture metadata and both background scores. The work does not change frozen
+recipe receipts or OS-specific visual baselines.
+
+Reversal: restore ordinary opaque screenshots and remove the additional black
+comparison in `design-consumer-check.ts`; the original white-default scorer
+remains available. Such a reversal restores the known measurement errors and
+must not turn those historical results into acceptance evidence.

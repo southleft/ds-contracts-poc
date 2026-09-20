@@ -289,15 +289,16 @@ export async function followInstances(
           continue;
         }
         if (entries.has(targetId)) {
-          if (targetId !== setId) {
-            (edges.get(setId) ?? edges.set(setId, new Set()).get(setId)!).add(
-              targetId,
-            );
-            (
-              referencedBy.get(targetId) ??
-              referencedBy.set(targetId, new Set()).get(targetId)!
-            ).add(setName);
-          }
+          // One variant can instance another main in its own set. Keep that
+          // self-edge so the cycle walk gives it the same named stub as any
+          // other cycle, rather than dropping the child from the contract.
+          (edges.get(setId) ?? edges.set(setId, new Set()).get(setId)!).add(
+            targetId,
+          );
+          (
+            referencedBy.get(targetId) ??
+            referencedBy.set(targetId, new Set()).get(targetId)!
+          ).add(setName);
           continue;
         }
         if (integerLikeRequested && !failed.has(targetId)) {

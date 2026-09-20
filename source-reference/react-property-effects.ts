@@ -12,7 +12,7 @@ import {probeReactProperties,probeReactInitialProperties,type ReactPropertyValue
 import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
 import {sourceBounds} from './source-framing.js';
-import {readReactStyleOrigin} from './react-style-origin.js';
+import {readReactDescendantSizes,readReactStyleOrigin} from './react-style-origin.js';
 import {observeGridConstraints,hasGridContainer} from './grid-constraints.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import {evidenceSha} from './react-validation-evidence.js';
@@ -84,6 +84,8 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const contentEvidence=args.observationMode==='initial-mount'?{
    fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
    bounds:await sourceBounds(page,{path:[selector]}),
+   // Where a part BELOW the root declares its own size. Initial mounts only: their contract assembles descendants.
+   descendantSizes:await readReactDescendantSizes(page,selector,own,args.stageSelector??'#root'),
   }:{};
   let initialSelection;
   if(args.observationMode==='initial-mount'){

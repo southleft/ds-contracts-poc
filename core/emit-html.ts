@@ -202,6 +202,8 @@ function componentCss(contract: Contract): string[] {
     const sel = ph === 'disabled' ? disabledSel : `[data-${ph.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
     return value === 'true' ? sel : `:not(${sel})`;
   };
+  /** A by-prop map's driving value, as the selector the markup really carries: an enum value is a modifier class, a boolean is the root's data attribute (boolFrag) — an enum class for a boolean selects nothing, and the plane silently never rendered. */
+  const propSel = (prop: string, value: string): string => boolNames.has(prop) ? rootCls + boolFrag(prop, value) : enumCls(prop, value);
   /** Enum values as the compound modifier classes (byte-identical to the
    *  former `enumCls…` join for all-enum combos); boolean fragments appended,
    *  on the root class when every participant is a boolean. */
@@ -453,7 +455,7 @@ function componentCss(contract: Contract): string[] {
           for (const phValue of enums.get(phs[0]) ?? []) {
             const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
             pairRules.push({
-              selector: `${enumCls(tbpProp, value)}${enumCls(phs[0], phValue)}`,
+              selector: `${propSel(tbpProp, value)}${enumCls(phs[0], phValue)}`,
               decls: floorMirror
                 ? [`${cssProp}: ${cssVar(resolved)}`, `min-width: ${cssVar(resolved)}`]
                 : [`${cssProp}: ${cssVar(resolved)}`],
@@ -542,14 +544,14 @@ function componentCss(contract: Contract): string[] {
     rule(`${rootCls}${disabledSel}`, ['cursor: not-allowed']);
   }
   for (const { prop, value, decls } of enumRules.values()) {
-    rule(enumCls(prop, value), decls);
+    rule(propSel(prop, value), decls);
   }
   // v7 layoutByProp on the root: the enum class sits on the root element
   // itself (emitted after the enum rules so the override wins at equal
   // specificity) — mirrors core/emit-react.ts generateCss.
   if (root.layoutByProp) {
     for (const [value, override] of Object.entries(root.layoutByProp.map)) {
-      rule(enumCls(root.layoutByProp.prop, value), layoutOverrideDecls(override));
+      rule(propSel(root.layoutByProp.prop, value), layoutOverrideDecls(override));
     }
   }
   for (const { selector, decls } of pairRules) rule(selector, decls);
@@ -583,7 +585,7 @@ function componentCss(contract: Contract): string[] {
     if (!sel) continue; // refused by validateContract
     for (const [value, overrides] of Object.entries(entry.map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
-        rule(`${enumCls(entry.prop, value)}${sel}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
+        rule(`${propSel(entry.prop, value)}${sel}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
       }
     }
   }
@@ -749,7 +751,7 @@ function componentCss(contract: Contract): string[] {
     for (const entry of part.literalsByProp ?? []) {
       for (const [value, overrides] of Object.entries(entry.map)) {
         subRules.push([
-          `${enumCls(entry.prop, value)} ${partCls(name)}`,
+          `${propSel(entry.prop, value)} ${partCls(name)}`,
           [
             ...Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
             // FC-BORDER-STYLE-NOT-SYNTHESISED — polaris TextField's backdrop
@@ -788,7 +790,7 @@ function componentCss(contract: Contract): string[] {
           if (phs.length === 1) {
             for (const phValue of enums.get(phs[0]) ?? []) {
               const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
-              rule(`${enumCls(entry.prop, value)}${enumCls(phs[0], phValue)} ${partCls(name)}`, [
+              rule(`${propSel(entry.prop, value)}${enumCls(phs[0], phValue)} ${partCls(name)}`, [
                 `${cssProp}: ${cssVar(resolved)}`,
               ]);
             }
@@ -799,7 +801,7 @@ function componentCss(contract: Contract): string[] {
         // FC-BORDER-STYLE-NOT-SYNTHESISED — per-variant SHORTHAND width on a
         // nested part.
         plain.push(...borderStyleDecls(overrides, 'tokens', part.declared));
-        if (plain.length > 0) rule(`${enumCls(entry.prop, value)} ${partCls(name)}`, plain);
+        if (plain.length > 0) rule(`${propSel(entry.prop, value)} ${partCls(name)}`, plain);
       }
     }
     // v13 part-level states (P18 second half): descendant rules under the
@@ -831,7 +833,7 @@ function componentCss(contract: Contract): string[] {
       if (!sel) continue; // refused by validateContract
       for (const [value, overrides] of Object.entries(entry.map)) {
         for (const [cssProp, ref] of Object.entries(overrides)) {
-          rule(`${enumCls(entry.prop, value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
+          rule(`${propSel(entry.prop, value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
         }
       }
     }
@@ -839,7 +841,7 @@ function componentCss(contract: Contract): string[] {
     // enum modifier class.
     if (part.layoutByProp) {
       for (const [value, override] of Object.entries(part.layoutByProp.map)) {
-        rule(`${enumCls(part.layoutByProp.prop, value)} ${partCls(name)}`, layoutOverrideDecls(override));
+        rule(`${propSel(part.layoutByProp.prop, value)} ${partCls(name)}`, layoutOverrideDecls(override));
       }
     }
     emitStylesWhen(part, partCls(name), false);

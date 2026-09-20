@@ -3,7 +3,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { PNG } from 'pngjs';
+import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
+import { NODE_SCREENSHOT_OPTIONS, contractGraph, findDumpSet, nestedInteractiveScript, deriveCases, rewriteWorkPaths, enterState, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -110,6 +112,32 @@ test('state cells on a local page: reach is the REAL pseudo-class, paint is ever
   } finally { await browser.close(); }
 });
 
+test('a fixed-size control with a typography-only hover is reached and visibly changes', async () => {
+  const browser = await chromium.launch();
+  try {
+    for (const [property, value] of [['font-size', '24px'], ['font-family', 'serif'], ['line-height', '30px']]) {
+      const page = await browser.newPage({ viewport: { width: 900, height: 400 } });
+      await page.setContent(`<!doctype html><style>
+        body { margin: 24px } [data-cell] { display: inline-block }
+        button { display: block; width: 140px; height: 80px; border: 0; font: 12px/14px monospace }
+        button:hover { ${property}: ${value} }
+      </style><div data-cell><button>One<br>two</button></div>`);
+      const cell = page.locator('[data-cell]');
+      const beforeBox = await cell.locator('button').boundingBox();
+      const before = await cell.screenshot();
+      const entered = await enterState(page, cell, 'hover');
+      const after = await cell.screenshot();
+      const changed = (await cell.evaluate(paintOf)) !== entered.restPaint;
+      assert.deepEqual(await cell.locator('button').boundingBox(), beforeBox, `${property}: the control kept its bounds`);
+      assert.notDeepEqual(after, before, `${property}: the browser really painted different text`);
+      assert.equal(await cell.locator('button').evaluate((el, name) => getComputedStyle(el).getPropertyValue(name), property), value);
+      assert.deepEqual(stateProblems({ key: property, interaction: 'hover', state: 'hover' }, ['hover'], entered.reached, changed), []);
+      await leaveState(page, 'hover');
+      await page.close();
+    }
+  } finally { await browser.close(); }
+});
+
 test('the text-masked number only NAMES an over-limit row: at the limit is text-only, a hair over is beyond-text, a full mask claims nothing', () => {
   assert.equal(residualClass(0, 40), 'text-only');
   assert.equal(residualClass(5, 40), 'text-only');
@@ -135,6 +163,20 @@ test('the mounted set is resolved by the contract anchor, and a name hit that co
   assert.equal(findDumpSet(multi, contract, 'Checkbox')?.setName, 'Checkbox');
   assert.equal(findDumpSet(multi, contract, 'CheckboxGroup'), undefined);
   assert.equal(deriveCases(multi, anchored, 'CheckboxGroup').length, 1);
+});
+
+test('source pairing refuses conflicting files, duplicate identities and an unverified named anchor', () => {
+  const root = { setName: 'Control', nodeId: '1:2', variants: [{ name: 'size=small' }] };
+  const anchored = { ...contract, bindings: { figma: { anchors: { fileKey: 'file-A', nodeId: '1:2' } } } };
+  const source = { _provenance: { fileKey: 'file-A' }, Control: root };
+  assert.equal(findDumpSet(source, anchored, 'Control'), root);
+  assert.equal(findDumpSet(source, anchored, 'GeneratedControl'), root);
+  assert.throws(() => deriveCases({ ...source, _provenance: { fileKey: 'file-B' } }, anchored, 'Control'), /dump-set-file-mismatch/);
+  assert.throws(() => findDumpSet({ ...source, Other: { ...root, setName: 'Other' } }, anchored, 'GeneratedControl'), /dump-set-anchor-ambiguous/);
+  assert.throws(() => findDumpSet({ ...source, Other: { ...root, setName: 'Other' } }, anchored, 'Control'), /dump-set-anchor-ambiguous/);
+  assert.throws(() => findDumpSet({ A: { ...root, nodeId: '1:3' }, B: root }, contract, 'Control'), /dump-set-name-ambiguous/);
+  assert.throws(() => findDumpSet({ Control: { ...root, nodeId: undefined } }, anchored, 'Control'), /dump-set-anchor-mismatch/);
+  assert.equal(findDumpSet({ Control: root }, contract, 'Control'), root, 'unanchored legacy inputs retain their unique name lookup');
 });
 
 test('the contract graph follows the generator\'s own edges — component refs, slot accepts AND slot defaultContent (review M3) — and names an unclaimed id', () => {
@@ -197,4 +239,73 @@ test('rewriteWorkPaths: whole path occurrences only — absolute and relative sp
   );
   // A relative spelling that is a bare word is only replaced at a path boundary.
   assert.equal(rewriteWorkPaths('out/x layout/y "out/z"', '/abs/out', 'out'), './x layout/y "./z"');
+});
+
+
+test('variant observation catches descendant paint, arrangement and text without counting a class-name-only change', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>
+      .root { width: 120px; height: 40px; display: flex; color: black; background: white; font: 16px monospace }
+      .root span { width: 30px; height: 20px }
+      .tone span { color: red }
+      .reorder { flex-direction: row-reverse }
+    </style><div class="root"><span>AA</span><span>BB</span></div>`);
+    const root = page.locator('.root');
+    const baseline = await root.evaluate(variantPaintOf);
+    const before = await root.screenshot();
+    const box = await root.boundingBox();
+    await root.evaluate(el => el.classList.add('unreferenced-class'));
+    assert.equal(await root.evaluate(variantPaintOf), baseline, 'a different class is not an observed visual effect');
+    for (const cls of ['tone', 'reorder']) {
+      await root.evaluate((el, name) => el.classList.add(name), cls);
+      assert.deepEqual(await root.boundingBox(), box, 'root bounds did not explain the change');
+      assert.notEqual(await root.evaluate(variantPaintOf), baseline, cls + ' changes descendant paint or relative placement');
+      assert.notDeepEqual(await root.screenshot(), before, cls + ' actually changes browser pixels');
+      await root.evaluate((el, name) => el.classList.remove(name), cls);
+      assert.equal(await root.evaluate(variantPaintOf), baseline, 'restoring the variant restores the observation');
+    }
+    await root.locator('span').first().evaluate(el => { el.textContent = 'CC'; });
+    assert.deepEqual(await root.boundingBox(), box);
+    assert.notEqual(await root.evaluate(variantPaintOf), baseline, 'equal-width replacement text is still a rendered difference');
+    assert.notDeepEqual(await root.screenshot(), before);
+  } finally { await browser.close(); }
+});
+
+
+test('node capture preserves transparent margins and actual geometry while restoring the review page background', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent('<style>body{background:#fff}#sample{padding:10px;width:40px;height:20px}#ink{width:40px;height:20px;background:#f1f0ea}</style><div id="sample"><div id="ink"></div></div>');
+    const root = page.locator('#sample');
+    const shot = PNG.sync.read(await root.screenshot(NODE_SCREENSHOT_OPTIONS));
+    assert.equal(shot.data[3], 0, 'the opaque review page is not part of the node export');
+    assert.deepEqual(contentBox(shot), { x: 10, y: 10, width: 40, height: 20 });
+    assert.equal(await page.locator('body').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(255, 255, 255)', 'screenshot-only style is restored');
+    await page.locator('#ink').evaluate(el => (el as HTMLElement).style.width = '44px');
+    const changed = PNG.sync.read(await root.screenshot(NODE_SCREENSHOT_OPTIONS));
+    assert.equal(contentBox(changed).width, 44, 'a real geometry error remains measurable; capture does not normalize it');
+  } finally { await browser.close(); }
+});
+
+
+test('a second background exposes missing pale ink while the original white comparison stays unchanged', () => {
+  const source = new PNG({ width: 20, height: 20 });
+  const missing = new PNG({ width: 20, height: 20 });
+  for (const png of [source, missing]) {
+    for (const [x, y] of [[0, 0], [19, 19]]) { const i = (y * 20 + x) * 4; png.data[i + 3] = 255; }
+  }
+  for (let y = 5; y < 15; y++) for (let x = 5; x < 15; x++) {
+    const i = (y * 20 + x) * 4; source.data[i] = 241; source.data[i + 1] = 240; source.data[i + 2] = 234; source.data[i + 3] = 255;
+  }
+  const white = alignPair(missing, source);
+  const explicitWhite = alignPair(missing, source, 255);
+  assert.deepEqual(white.a.data, explicitWhite.a.data, 'default consumer pixels remain the explicit white compositor');
+  assert.deepEqual(white.b.data, explicitWhite.b.data, 'default source pixels remain the explicit white compositor');
+  assert.ok(diffPair(white, []).unmaskedPct <= 5, 'the planted pale block is missed on white');
+  assert.ok(diffPair(alignPair(missing, source, 0), []).unmaskedPct > 5, 'the same unchanged pixel metric sees the missing block on black');
+  assert.equal(diffPair(alignPair(source, source, 0), []).unmaskedPct, 0);
+  assert.equal(diffPair(alignPair(source, source), []).unmaskedPct, 0);
 });
