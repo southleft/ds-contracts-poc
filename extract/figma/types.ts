@@ -2,7 +2,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 
 /** Canonical plugin capture includes original open vector centerlines, which
  * the REST producer cannot read. flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.40';
+export const PLUGIN_DUMP_VERSION = '1.41';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.

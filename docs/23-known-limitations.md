@@ -7775,3 +7775,48 @@ To reverse, remove the uniform-state-width exception and its solid-style
 carrier, restore the native state-preview side handling and remove this
 transition's explicit layout policy. Preserve the outside-layout behavior,
 D.91 pressed paint reset, all source captures and the failed app consumer.
+
+
+### D.93 Complete observed tracking can vary by prop
+
+**AGENT decision — 2026-09-20.** Both readers now retain explicitly observed
+zero letter spacing (REST dump 1.40, plugin dump 1.41). Missing or mixed data
+still means uncaptured. Fully observed, finite tracking that differs across
+variants uses the existing provisional-token axis classifier when minting is
+allowed. Uniform nonzero values retain the existing literal spelling; uniform
+zero adds no declaration. Missing cells, nonfinite values and varying input
+with minting disabled keep named limits. No component-specific rule was added.
+
+The actual JSON-import and React-package workflow produced an archive that
+matches the isolated installed package byte for byte. At the unchanged 5%
+limit, **8/10** native/React pairs pass on both backgrounds. All five selected
+appearances now pass. Unselected rest and pressed remain **15.38%** on black;
+the run is still refused. The source version and bracketing geometry hashes
+are identical before and after capture. Repeat import retains five workspace
+entries; normal reload restores the identical contract and package action.
+The comparison and installed consumer were inspected in the application.
+
+A generated update in Evaluations preserved the existing component set key
+and all ten variant IDs, rebuilt the contract-owned text interiors, and read
+back 0px or 1px on every label. The unchanged repeat created nothing. Existing
+page, collection and variable inventories and values did not change. Native
+tracking is a resolved value; this does not establish variable-binding
+identity for letter spacing. Only the owned Evaluations probe was amended.
+
+**Remaining sizing and rendering limit.** Per-prop tracking still conflicts
+with the whole-pixel text-box flag. The proposer names that conflict and
+withholds the flag; it does not bypass the emitter guard. The guarded native
+text-rendering default consequently does not apply to this label. Font assets
+are explicitly supplied and hashed, but Figma's font bytes remain unverified.
+An installed Public Sans 1.007 control also failed the same two appearances
+(15.51% black), so it was preserved as a failed control. No font, scorer,
+threshold, source design or generated CSS was tuned to obtain a pass.
+
+Evidence and the adversarial review remain in the append-only private
+`variant-letter-spacing-20260920/` journal, including eleven bounded controls,
+source captures, actual archive, clean-consumer receipts, native IDs and visible
+comparisons. Earlier D.91/D.92 failures remain intact. Tab and V1 remain
+unqualified. Reversal: revert the reader-version/capture and proposer changes
+together, rebuild the embedded dump and plugin receipt through their scripts,
+and retain all old captures and failed consumers. This restores the named
+varying-tracking loss rather than inventing zero for missing observations.

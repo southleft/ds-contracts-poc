@@ -1148,7 +1148,9 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // channel and the CSS emitter all existed; only this reader still named it a
   // loss, so a design-led label rendered ~1px per glyph too narrow. Absent
   // still means not captured, never zero.
-  if (typeof s.letterSpacing === 'number' && Number.isFinite(s.letterSpacing) && s.letterSpacing !== 0) text.letterSpacing = s.letterSpacing;
+  // v1.40 retains observed zero so per-variant tracking can distinguish it
+  // from an absent field. No missing value is filled with a default.
+  if (typeof s.letterSpacing === 'number' && Number.isFinite(s.letterSpacing)) text.letterSpacing = s.letterSpacing;
   // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase — the canvas
   // fact behind CSS text-transform); other spellings stay receipts.
   if (s.textCase === 'UPPER' || s.textCase === 'LOWER' || s.textCase === 'TITLE') text.textCase = s.textCase;
@@ -1903,7 +1905,7 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.39';
+export const REST_DUMP_VERSION = '1.40';
 // 1.39: vector masks cannot enter the ordinary filled-path projection.
 // 1.38: bounded closed filled VECTOR paths, exact local size and placement.
 // 1.37: fixedSize on explicit FIXED, in-flow, non-auto-layout boxes inside
