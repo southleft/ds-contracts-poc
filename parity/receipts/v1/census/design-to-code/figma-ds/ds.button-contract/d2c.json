@@ -242,12 +242,12 @@
     }
   ],
   "generatedFiles": {
-    "react/ButtonContract/ButtonContract.module.css": "b9b614848f5b072d3ebe482f23e8f7f576c88491b854180d19351d7538531bd8",
+    "react/ButtonContract/ButtonContract.module.css": "0616c97fe536be5ba9baf3fdb83879a34832b89a835bdf453cc3b6374ecbe274",
     "react/ButtonContract/ButtonContract.stories.tsx": "6662845bfb03a4ccd3eb862aa070d75f6f910fd29ad5a53f9aec511a4fce09a2",
     "react/ButtonContract/ButtonContract.tsx": "4b42440336a77b27c1d653a0b194e439bb03565210f758cca0231b43c351c6ee",
     "react/ButtonContract/index.ts": "325759cf96ce5e3b27a155e03e3725749102e5b3034830a9b17e1b9c2d4bb1ee",
     "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
-    "wc/ds-button-contract.css.ts": "c723de43722e703d75940fdf2d036a0e3ef1dd295a16a3ab88810e5a53f70353",
+    "wc/ds-button-contract.css.ts": "3fbcf9b07c49d4850305be1cde5685faaaa3c35e08f513158bebdc88871c4747",
     "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
     "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c"
   },

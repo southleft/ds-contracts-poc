@@ -292,12 +292,12 @@
     }
   ],
   "generatedFiles": {
-    "react/ToggleSwitch/ToggleSwitch.module.css": "8704979440dc69162be5bd66dea413b3ea65b23af4f7517bb38c5467b7cd28aa",
+    "react/ToggleSwitch/ToggleSwitch.module.css": "0fef1124d06ce66dd473560c9fb55061897875e880ba1c235c7e5695e72bd3d8",
     "react/ToggleSwitch/ToggleSwitch.stories.tsx": "afc9eef96d1359d299eddfbeadac8e1d6fcc487c7eb24ac6276879305a613f17",
     "react/ToggleSwitch/ToggleSwitch.tsx": "8a9fe182de42e91e3d27eab388397201e9bc2a844fb3ab8f4d457d520f54402c",
     "react/ToggleSwitch/index.ts": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
     "wc/flowbite-toggleswitch.ts": "4aa4980d8217c434f3e4b2cb0e07bb0012ee035c75129b04df1e2561ff39d13e",
-    "wc/flowbite-toggleswitch.css.ts": "899ebb26f1a3be1026a1751fcf1dc22f689c4e311eaeffc6fcd2f3ee85075bd4",
+    "wc/flowbite-toggleswitch.css.ts": "fae706270d6875a6d531237c07998a6f7d52c05f142e6f3b99ec0d4405efca9f",
     "wc/flowbite-toggleswitch.demo.html": "a9f2f2f85d0f599357f969a40e26cbbcfd20e6f3d2bc9d27cea7177146ca49f4",
     "wc/flowbite-toggleswitch.custom-elements.json": "97e0cf155692825443c4015142d0d029ffa5d201a1af4e07d86f1f2546f6e185"
   },
