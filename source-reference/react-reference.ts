@@ -499,9 +499,13 @@ export function createReactReferenceService(
       try {
         if (!native || !reference || reference.id !== matchedReview[1] || !reactReferenceUnchanged(reference)) throw Error('matched-review-source-unavailable');
         let request;
-        try { request = initialRequestForOperation(matchedReview[2]); }
-        catch { request = native().jobs.reactSourceRequest(matchedReview[2]); }
-        if ((request.kind === 'react-initial-draft' ? request.anchor.referenceId : request.referenceId) !== reference.id) throw Error('matched-review-reference-mismatch');
+        try { request = native().jobs.reactStateApiRequest(matchedReview[2]); }
+        catch {
+          try { request = native().jobs.reactInitialRequest(matchedReview[2]); }
+          catch { request = native().jobs.reactSourceRequest(matchedReview[2]); }
+        }
+        const sourceRequest = request.kind === 'react-state-api-draft' ? request.initial : request;
+        if ((sourceRequest.kind === 'react-initial-draft' ? sourceRequest.anchor.referenceId : sourceRequest.referenceId) !== reference.id) throw Error('matched-review-reference-mismatch');
         json(res, 200, { measurement: readRecordedNativeMeasurement(repoRoot, matchedReview[2], request) });
       } catch { json(res, 409, { error: 'The recorded measurement could not be matched to this operation and its unchanged evidence.' }); }
       return;
@@ -735,7 +739,7 @@ export function createReactReferenceService(
             try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
             catch { /* An unreadable succession journal already fails identity above. */ }
           return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
-            recordedMeasurement: (row.kind === 'initial' || row.kind === 'comparison') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
+            recordedMeasurement: (row.kind === 'initial' || row.kind === 'comparison' || row.kind === 'state-api') && hasRecordedNativeMeasurement(repoRoot, row.operation.id, reference!.id),
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};

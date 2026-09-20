@@ -10,8 +10,43 @@ import { variantCandidates } from './react-native-fidelity-pair.js';
 import { cropSourceFrame } from '../source-reference/source-framing.js';
 import { REPO, QUALIFICATION, sha256 } from './react-native-fidelity-check.js';
 import { MATCHED_INSTRUMENTS, checkMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
+import { revisionOf } from '../core/contract-provenance.js';
+import { isReactStateApiNativeRequest, type ReactStateApiNativeRequest } from '../source-reference/react-state-api-native-request.js';
+import { planReactStateApi } from '../source-reference/react-state-api.js';
+import { projectReactStateApiContract } from '../source-reference/react-state-api-contract.js';
 
 export type MatchedSpec = Omit<DeclaredSpec, 'source'> & { source: Extract<DeclaredSpec['source'], {kind: 'initial'}> | {kind: 'comparison'; bounds: {x: number; y: number; width: number; height: number}} };
+
+/** A recorded review reads the operation's immutable experiment, never today's
+ * latest pointer or source files. Both the appearance and state seals must join
+ * the exact draft used by this operation; an appearance pin alone is insufficient. */
+export function authenticateMatchedStateApi(bytes: (file: string) => Buffer, request: ReactStateApiNativeRequest, initialReport: any, initialRequest: any, nativePlan: any) {
+  if (!isReactStateApiNativeRequest(request)) throw Error('matched-record-state-api-request');
+  const pin = request.observation, archive = 'react-state-api-inspections/' + pin.key + '/' + pin.id;
+  const sealBytes = bytes(archive + '/integrity.json'), seal = JSON.parse(sealBytes.toString());
+  if (sha256(sealBytes) !== pin.inventorySha256 || seal.version !== 1 || !seal.files) throw Error('matched-record-state-api-inventory');
+  for (const [name, hash] of Object.entries(seal.files))
+    if (sha256(bytes(archive + '/' + name)) !== hash) throw Error('matched-record-state-api-changed:' + name);
+  const read = (name: string) => {
+    const data = bytes(archive + '/' + name);
+    if (sha256(data) !== seal.files[name]) throw Error('matched-record-state-api-changed:' + name);
+    return JSON.parse(data.toString());
+  };
+  const experiment = read('request.json'), report = read('report.json');
+  const initial = read('initial-input.json'), callback = read('callback-input.json');
+  const { draft: _draft, reobservable: _reobservable, ...recordedInitial } = initial;
+  if (revisionOf(experiment).slice(7) !== pin.key || sha256(bytes(archive + '/report.json')) !== pin.reportSha256 ||
+      !same(experiment.source, initialRequest) || !same(recordedInitial, initialReport) ||
+      revisionOf(initial) !== experiment.initialRevision || revisionOf(callback) !== experiment.callbackRevision ||
+      !same(planReactStateApi(initial, callback), experiment.plan) || !same(report.plan, experiment.plan) ||
+      report.id !== pin.id || report.caseId !== initialRequest.caseId || report.qualification !== 'bounded-checked-state-api-only')
+    throw Error('matched-record-state-api-evidence');
+  const draft = projectReactStateApiContract(initial, report);
+  if (draft.status !== 'generated-draft' || draft.problems.length || nativePlan.kind !== 'react-state-api-draft-inspection' ||
+      nativePlan.requestRevision !== revisionOf(request) || nativePlan.draftRevision !== revisionOf(draft) ||
+      nativePlan.projection.contractRevision !== revisionOf(draft.contract)) throw Error('matched-record-state-api-projection');
+  return structuredClone(pin);
+}
 
 /** Authenticate source/native identity without assigning a raster origin to
  * the operation's old unframed PNGs. Those images are not measured here. */
@@ -51,7 +86,10 @@ export function authenticateMatchedOperation(privateRoot: string, spec: MatchedS
     previous = sha256(data);
   }
   const comparison = spec.source.kind === 'comparison';
-  const r = comparison ? selected?.result?.content : selected?.result, pin = header.request.observation;
+  const stateApi = header.request.kind === 'react-state-api-draft';
+  if (stateApi && (!isReactStateApiNativeRequest(header.request) || comparison)) throw Error('matched-record-state-api-request');
+  const initialRequest = stateApi ? header.request.initial : header.request;
+  const r = comparison ? selected?.result?.content : selected?.result, pin = initialRequest.observation;
   if (!r || r.status !== 'native-readback-collected' || r.receiptKind !== 'independent-native-component-readback' ||
       r.operationId !== header.id || r.planRevision !== header.planRevision || r.fileKey !== header.policy.fileKey ||
       r.nativeQualification !== 'unqualified' || r.acceptedContract !== null || r.problems.length) throw Error('matched-record-readback-unverified');
@@ -104,8 +142,10 @@ export function authenticateMatchedOperation(privateRoot: string, spec: MatchedS
     return data;
   };
   const reportBytes = sourceBytes('report.json'), report = JSON.parse(reportBytes.toString()), request = JSON.parse(sourceBytes('request.json').toString());
-  if (sha256(reportBytes) !== pin.reportSha256 || !same(header.request, { ...request, kind: 'react-initial-draft', observation: pin }) ||
+  if (sha256(reportBytes) !== pin.reportSha256 || !same(initialRequest, { ...request, kind: 'react-initial-draft', observation: pin }) ||
       report.phase !== 'complete' || !report.sourceUnchanged || report.problems.length) throw Error('matched-record-source-request');
+  const stateApiObservation = stateApi
+    ? authenticateMatchedStateApi(bytes, header.request, report, request, parse(spec.journal + '/plan.json').plan) : undefined;
   const claimed = new Set<string>();
   const pairs = report.observation.rows.map((row: any) => {
     if (row.status !== 'observed' || !/^[0-9]+$/.test(row.id)) throw Error('matched-record-source-state');
@@ -120,8 +160,9 @@ export function authenticateMatchedOperation(privateRoot: string, spec: MatchedS
   });
   if (claimed.size !== r.images.length) throw Error('matched-record-unpaired-native');
   return { id: spec.id, component: spec.component, pairs, sourceRequest: header.request, readback: r, creation,
-    source: { referenceId: header.request.anchor.referenceId, caseId: request.caseId, inspectionId: pin.id,
-      inventorySha256: pin.inventorySha256, reportSha256: pin.reportSha256 },
+    source: { referenceId: initialRequest.anchor.referenceId, caseId: request.caseId, inspectionId: pin.id,
+      inventorySha256: pin.inventorySha256, reportSha256: pin.reportSha256,
+      ...(stateApiObservation ? { stateApiObservation } : {}) },
     native };
 }
 

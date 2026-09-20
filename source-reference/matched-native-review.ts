@@ -9,6 +9,7 @@ import { MATCHED_EVIDENCE_DIRS, scoreMatchedEvidence, type MatchedManifest } fro
 import { sha256 } from '../scripts/react-native-fidelity-check.js';
 import { authenticateMatchedOperation } from '../scripts/react-native-matched-record.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 
 function recorded(repo: string, operationId: string, referenceId: string) {
   const matches = MATCHED_EVIDENCE_DIRS.flatMap(relative => {
@@ -37,10 +38,13 @@ export function assertMatchedManifestBinding(m: MatchedManifest, pairs: Array<{o
       row.source.originalSha256 !== pair.source.originalSha256 || !same(row.source.bounds, pair.source.bounds) || !same(row.source.crop, pair.source.crop);
   })) throw Error('matched-review-pairing-mismatch');
 }
-export function readRecordedNativeMeasurement(repo: string, operationId: string, request: ReactInitialNativeRequest | ReactNativeRequest): RecordedNativeMeasurement {
+export function readRecordedNativeMeasurement(repo: string, operationId: string, operationRequest: ReactInitialNativeRequest | ReactNativeRequest | ReactStateApiNativeRequest): RecordedNativeMeasurement {
+  const stateApi = operationRequest.kind === 'react-state-api-draft';
+  const request = stateApi ? operationRequest.initial : operationRequest;
   const initial = request.kind === 'react-initial-draft';
   const referenceId = initial ? request.anchor.referenceId : request.referenceId;
   const {m, dir} = recorded(repo, operationId, referenceId);
+  if (!same(m.cohort.source.stateApiObservation, stateApi ? operationRequest.observation : undefined)) throw Error('matched-review-state-api-mismatch');
   const pin = initial ? request.observation : {id: request.ownership.id, reportSha256: request.ownership.sha256, inventorySha256: request.inventorySha256};
   if (m.cohort.source.caseId !== request.caseId ||
       (initial ? m.cohort.source.inspectionId : m.cohort.source.ownershipId) !== pin.id ||
@@ -54,7 +58,7 @@ export function readRecordedNativeMeasurement(repo: string, operationId: string,
     id: m.cohort.id, component: m.cohort.component, description: 'Recorded native measurement', operation: operationId,
     journal: 'source-native-app/operations/' + operationId, event: String(m.cohort.native.journalEvent), source,
   });
-  if (!same(current.sourceRequest, request)) throw Error('matched-review-source-request-mismatch');
+  if (!same(current.sourceRequest, operationRequest)) throw Error('matched-review-source-request-mismatch');
   if (current.native.journalEventSha256 !== m.cohort.native.journalEventSha256 ||
       current.native.planRevision !== m.cohort.native.planRevision) throw Error('matched-review-journal-mismatch');
   assertMatchedManifestBinding(m, current.pairs);
