@@ -74,6 +74,20 @@ export const NODE_SCREENSHOT_OPTIONS = {
  *  text itself). `beyond-text` = something outside the glyphs is wrong too.
  *  `text-covers-canvas` = the mask left nothing to measure; no claim is made. */
 export type ResidualClass = 'text-only' | 'beyond-text' | 'text-covers-canvas' | 'no-text';
+/** Rewrite the operator's work directory to `.` in a proposer report — WHOLE path
+ *  occurrences only: each spelling (the absolute directory, and its relative form,
+ *  longest first — the absolute directory is itself a substring of the relative one)
+ *  is replaced only where a path STARTS (line start, whitespace, a bracket, a quote,
+ *  a list comma or `=`) and only when `/` follows. A bare substring ("out" inside
+ *  "layout") is never touched. */
+export function rewriteWorkPaths(text: string, absoluteDir: string, relativeDir: string): string {
+  const escape = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const spelling of [relativeDir, absoluteDir].filter((x) => x && x !== '.').sort((a, b) => b.length - a.length)) {
+    text = text.replace(new RegExp(`(^|[\\s(\\[\`'",=])${escape(spelling)}/`, 'gm'), '$1./');
+  }
+  return text;
+}
+
 export function residualClass(maskedPct: number | null, maskCoveragePct: number): ResidualClass {
   if (maskedPct === null) return 'text-covers-canvas';
   if (!(maskCoveragePct > 0)) return 'no-text';
@@ -405,8 +419,19 @@ async function main() {
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
   cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract)));
   // Low (review): every contract beside it — the followed children and stubs —
-  // and the minted tree ride the committed inputs, so the run reproduces from them.
-  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f)); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
+  // and the minted tree ride the committed inputs, so the run reproduces from them. The
+  // proposer's report (figma-proposals.md) rides too: it is where every semantics decision
+  // is said in words (an inferred or WITHHELD element, docs/23 §D.44), which a contract
+  // cannot carry.
+  for (const f of readdirSync(path.dirname(args.contract))) if (/\.contract(\.proposed)?\.json$|^minted\.dtcg\.json$|^captured\.dtcg\.json$/.test(f) && f !== path.basename(args.contract)) cpSync(path.join(path.dirname(args.contract), f), path.join(inputs, f));
+  // The report names the operator's work directory; rewritten to `.` (the report sits beside
+  // the contracts it names) so no machine path reaches committed evidence.
+  const report = path.join(path.dirname(args.contract), 'figma-proposals.md');
+  if (existsSync(report)) {
+    const dir = path.resolve(path.dirname(args.contract));
+    const text = rewriteWorkPaths(readFileSync(report, 'utf8'), dir, path.relative(process.cwd(), dir));
+    writeFileSync(path.join(inputs, 'figma-proposals.md'), text);
+  } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
     component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'] }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [

@@ -1828,8 +1828,8 @@
       "stage": "propose",
       "status": "implemented",
       "file": "core/propose-figma.ts",
-      "line": 6689,
-      "ruleLine": 6690,
+      "line": 7014,
+      "ruleLine": 7015,
       "ruleText": "if (!m.rootContent && direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {",
       "css": {
         "construct": "a canvas root drawn at exactly row / center / center",
@@ -1852,6 +1852,43 @@
         "propose.root-default-layout-elided"
       ],
       "why": "It does not re-inflate to the same shape, and that is the finding. The proposer elides at `flex` / row / center / center; packages/core/src/css.ts, seeing no root layout, emits `inline-flex` / center / center. The display keyword flips from flex to inline-flex on every round trip, with nothing receipting it — an elision whose premise about its own partner is false. Compiler-owned root content keeps an explicit flex layout so its empty reusable slot remains generatable; the default-elision rule excludes that verified projection."
+    },
+    {
+      "id": "propose.ua-padding-drawn-zero-explicit",
+      "family": "padding",
+      "stage": "propose",
+      "status": "implemented",
+      "file": "core/propose-figma.ts",
+      "line": 1232,
+      "ruleLine": 1233,
+      "ruleText": "const next = { ...literals };",
+      "css": {
+        "construct": "padding-top / -right / -bottom / -left: 0px written as root literals on the PROPOSED contract, for every side every variant draws 0 and the proposal does not declare, when the root renders (semantics.element or any elementByProp value) as an element the user agent pads (UA_PADDING_ELEMENTS: button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium)",
+        "context": "settleUaPadding, run at the end of every proposal and again after the batch's interactive-content pass (it undoes its own zeros when that pass withholds the element); declared = tokens, literals, declared, tokensByProp and literalsByProp (a shorthand or a logical pair covers its sides, a single logical side its own). A side drawn nonzero but undeclared was refused upstream: it is NOT zeroed, and a `ua-padding:` note names that the user agent's default renders there. The emitters add nothing"
+      },
+      "figma": {
+        "construct": "a frame whose padding field is 0 on that side"
+      },
+      "inverse": {
+        "file": "core/emit-figma-script.ts",
+        "site": "the padding literals lower to the frame's padding fields",
+        "emits": "padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named"
+      },
+      "lost": [
+        "a side refused by the proposal keeps the user agent's padding in code (named by a ua-padding note, not closed) — Eventz Atoms/Tag's inline padding",
+        "only the ROOT is settled: a nested part the proposer gives a padded element keeps UA padding on its undeclared sides",
+        "a side declared by only SOME enum values counts as declared, so no base zero is written for the others",
+        "hand-written contracts are untouched by design; select is not listed (0 in Chromium, other engines unmeasured)"
+      ],
+      "canonical": "padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named",
+      "receipt": {
+        "channel": "notes",
+        "marker": "ua-padding: padding-"
+      },
+      "roundTrip": "untested",
+      "cases": [],
+      "doors": [],
+      "why": "A Figma frame's undeclared padding is 0, but 'undeclared' in a PROPOSED contract also means 'refused', so an emitter that reads undeclared as 0 zeroes padding the designer drew (the first cut of this rule did exactly that to Eventz Atoms/Tag, 6/12 drawn, inline refused). The proposer is the one place that knows which: it reads the drawn value and carries the zero as a fact. Measured defect it closes: a <button> the canvas pads on one side only renders the user agent's 1px 6px on the others. docs/23 §D.44."
     },
     {
       "id": "schema.display-block-to-vertical-stack",

@@ -5,7 +5,7 @@ import test from 'node:test';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { NODE_SCREENSHOT_OPTIONS, contractGraph, findDumpSet, nestedInteractiveScript, deriveCases, enterState, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { NODE_SCREENSHOT_OPTIONS, contractGraph, findDumpSet, nestedInteractiveScript, deriveCases, rewriteWorkPaths, enterState, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -217,6 +217,28 @@ test('interactive content nested in interactive content is found in the page; a 
       outer.append(document.createElement('span'), inner); cell.append(outer); document.body.prepend(cell); })()`);
     assert.deepEqual(await page.evaluate(nestedInteractiveScript), ['panel:button>button', 'link:a>input', 'focus:div[role=tab]>span']);
   } finally { await browser.close(); }
+});
+
+test('rewriteWorkPaths: whole path occurrences only — absolute and relative spellings, list commas, never a bare substring', () => {
+  const abs = '/private/tmp/work/out';
+  const rel = '../../../../private/tmp/work/out';
+  const text = [
+    `- contract: ${rel}/a.contract.proposed.json`,
+    `npx ds-contracts generate ${rel}/a.json --tokens tokens/x.json,${rel}/minted.dtcg.json --out ${abs}/generated`,
+    'layout: out/ stays, "without/" stays, checkout/x stays',
+    `quoted "${abs}/b.json" and (${abs}/c.json)`,
+  ].join('\n');
+  assert.equal(
+    rewriteWorkPaths(text, abs, rel),
+    [
+      '- contract: ./a.contract.proposed.json',
+      'npx ds-contracts generate ./a.json --tokens tokens/x.json,./minted.dtcg.json --out ./generated',
+      'layout: out/ stays, "without/" stays, checkout/x stays',
+      'quoted "./b.json" and (./c.json)',
+    ].join('\n'),
+  );
+  // A relative spelling that is a bare word is only replaced at a path boundary.
+  assert.equal(rewriteWorkPaths('out/x layout/y "out/z"', '/abs/out', 'out'), './x layout/y "./z"');
 });
 
 

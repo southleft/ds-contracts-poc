@@ -86,6 +86,8 @@ export {
   topRootNames,
   topRoots,
   UA_MARGIN_ELEMENTS,
+  UA_PADDING_BY_ELEMENT,
+  UA_PADDING_ELEMENTS,
   UA_PAINT_CHANNELS,
   UA_PAINTED_ROOT_ELEMENTS,
 } from './anatomy.js';

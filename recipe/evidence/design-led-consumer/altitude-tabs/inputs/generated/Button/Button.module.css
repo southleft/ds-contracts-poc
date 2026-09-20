@@ -19,6 +19,8 @@
   gap: var(--imported-button-root-gap);
   padding-inline: var(--imported-button-root-padding-inline);
   width: fit-content;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .root:focus-visible {

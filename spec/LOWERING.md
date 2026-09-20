@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **62** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **63** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -449,7 +449,7 @@ The stage where the two directions disagree about a keyword. The proposer elides
 
 **Why.** This rule was already WRITTEN DOWN — in a schema comment, in prose, ungated — and the emitter has three separate defaults that contradict it. That gap is the whole argument for this register: six such prose rules exist in contract-schema.ts, none of them was machine-checked against the code, and the forward file that is supposed to obey them has no markers at all.
 
-### `padding` — 2 rules (1 implemented, 1 proposed, 0 wall)
+### `padding` — 3 rules (2 implemented, 1 proposed, 0 wall)
 
 The cleanest lowering in the tree, and the standard the rest of the register is measured against — four CSS longhands, four Figma fields, the same meaning. Both padding conformance cases round-trip.
 
@@ -457,6 +457,7 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 |---|---|---|---|---|---|---|
 | `emit.padding-longhand-bound` | `implemented` | `emit-figma-script.ts:2087` | padding-left / -right / -top / -bottom bound to a token → bindings.paddingLeft (and siblings) bound to the same variable | the logical shorthand when both sides agree, longhands otherwise | **none** | `round-tripped` |
 | `emit.padding-shorthand-registry-hole` | `proposed` | `emit-figma-script.ts:2424` | any token-bound channel with no case in the switch — including the `padding` shorthand itself → nothing | a named refusal for every unhandled channel, whether or not a registry row exists | `channel-miss` | `untested` |
+| `propose.ua-padding-drawn-zero-explicit` | `implemented` | `propose-figma.ts:1222` | padding-top / -right / -bottom / -left: 0px written as root literals on the proposed contract for every side every variant draws 0 and the proposal does not declare, when the root renders as an element the user agent pads (measured in Chromium) → a frame whose padding field is 0 on that side | padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named | `notes` | `untested` |
 
 #### `emit.padding-longhand-bound`
 
@@ -479,6 +480,20 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 - the value, AND the receipt, for any channel the registry does not carry — the receipt is conditional on the very registry that failed to know about the channel
 
 **Why.** A receipt guarded by the wrong condition. The literal side of the same switch calls literalMiss() in ALL branches including the catch-all else, and has no such hole. This matters beyond padding: it is the general escape through which any unregistered token channel leaves without a word, which is the shape of the tab-size incident that once made validateContract refuse 32 whole components.
+
+#### `propose.ua-padding-drawn-zero-explicit`
+
+**Context.** `settleUaPadding` (core/propose-figma.ts) runs at the end of every proposal and again after the batch's interactive-content pass, which it follows (it takes its own zeros back when that pass withholds the element). Declared means tokens, literals, declared, tokensByProp or literalsByProp; a shorthand or a logical pair covers its sides, a single logical side its own. A side drawn NONZERO but undeclared was refused upstream: it is not zeroed, and a `ua-padding:` note says the user agent's default renders there. The emitters add nothing.
+
+**Inverse** (`emit-figma-script.ts`, the padding literals lower to the frame's padding fields) emits the canonical form: each 0px literal lowers to a frame padding field of 0, which this rule reads back as the same literal.
+
+**Lost.**
+- a side refused by the proposal keeps the user agent's padding in code (named, not closed) — Eventz Atoms/Tag's inline padding
+- only the ROOT is settled; a nested part the proposer gives a padded element keeps UA padding on its undeclared sides
+- a side declared by only SOME enum values counts as declared, so no base zero is written for the others
+- hand-written contracts are untouched by design; `select` is not listed (0 in Chromium, other engines unmeasured)
+
+**Why.** A Figma frame's undeclared padding is 0, but "undeclared" in a PROPOSED contract also means "refused", so an emitter that reads undeclared as 0 zeroes padding the designer drew — the first cut of this rule did exactly that to Eventz Atoms/Tag (6/12 drawn, inline refused). The proposer is the one place that knows which, so it carries the zero as a fact. Held by extract/figma/ua-padding.test.ts, which re-measures the element list in Chromium. docs/23 §D.44.
 
 ### `size` — 8 rules (7 implemented, 1 proposed, 0 wall)
 

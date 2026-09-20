@@ -124,6 +124,31 @@ export const UA_PAINTED_ROOT_ELEMENTS = new Set(['button']);
  *  would only move bytes. */
 export const UA_PAINT_CHANNELS = ['background', 'background-color', 'background-image'] as const;
 
+/** Elements the UA stylesheet gives default PADDING. MEASURED, not recalled:
+ *  `getComputedStyle` on each bare element in the repo's Chromium
+ *  (playwright-core, Chromium 149.0.7827.55, 2026-09-19), top/right/bottom/left:
+ *    button 1 6 1 6 · input 1 2 1 2 · textarea 2 2 2 2 · option 0 2 1 2 ·
+ *    fieldset 5.6 12 10 12 · legend 0 2 0 2 · ul/ol/menu 0 0 0 40 (inline
+ *    start) · dialog[open] 16 16 16 16 · td/th 1 1 1 1.
+ *  Every other element the emitters can render (div, span, a, label, p,
+ *  h1-h6, li, select, section, …) measured 0 on all four sides. `select` is 0
+ *  in Chromium; Safari and Firefox were NOT measured and may pad it, so it is
+ *  not listed (named in docs/23 §D.44).
+ *
+ *  READ BY THE PROPOSER, NOT THE EMITTERS (review of §D.44, H2): a Figma
+ *  frame's padding side is a DRAWN fact, so core/propose-figma.ts writes an
+ *  explicit `padding-<side>: 0px` literal where the canvas drew 0 on a set it
+ *  proposes as one of these elements. An emitter-side "undeclared means 0"
+ *  reset was wrong whenever the proposer REFUSED a side (Eventz Atoms/Tag
+ *  draws 6/12 and its inline padding is refused): undeclared is not zero. */
+export const UA_PADDING_BY_ELEMENT: Readonly<Record<string, readonly [string, string, string, string]>> = {
+  button: ['1px', '6px', '1px', '6px'], input: ['1px', '2px', '1px', '2px'], textarea: ['2px', '2px', '2px', '2px'],
+  option: ['0', '2px', '1px', '2px'], fieldset: ['5.6px', '12px', '10px', '12px'], legend: ['0', '2px', '0', '2px'],
+  ul: ['0', '0', '0', '40px'], ol: ['0', '0', '0', '40px'], menu: ['0', '0', '0', '40px'], dialog: ['16px', '16px', '16px', '16px'],
+  td: ['1px', '1px', '1px', '1px'], th: ['1px', '1px', '1px', '1px'],
+};
+export const UA_PADDING_ELEMENTS: ReadonlySet<string> = new Set(Object.keys(UA_PADDING_BY_ELEMENT));
+
 /** Every element the contract's root can render as. */
 export function rootElementsOf(contract: Contract): string[] {
   const ebp = contract.semantics.elementByProp;

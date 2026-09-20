@@ -11,7 +11,7 @@
     }
   ],
   "semantics": {
-    "element": "button"
+    "element": "div"
   },
   "props": [],
   "states": [
