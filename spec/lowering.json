@@ -100,8 +100,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 125,
-      "ruleLine": 126,
+      "line": 126,
+      "ruleLine": 127,
       "ruleText": "const disabledSel = reactRootDisabledSelector(contract);",
       "css": {
         "construct": "the disabled state's selector, and the hover / active guards that exclude it: `:disabled` / `:hover:not(:disabled)` on a root the component renders as a native form control (the TSX renders the native `disabled` attribute), `[data-disabled]` / `:hover:not([data-disabled])` on every other root (div, span, a, label, li, section, …, which render `data-disabled` for the prop), and `:is(:disabled, [data-disabled])` where one elementByProp root renders both (web components, static HTML). A part's state rule is a descendant of the ROOT's state selector, so the root's element decides for every part",
@@ -135,7 +135,7 @@
       "stage": "css",
       "status": "proposed",
       "file": "packages/core/src/css.ts",
-      "ruleLine": 281,
+      "ruleLine": 282,
       "ruleText": "rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');",
       "css": {
         "construct": "the CSS emitted for a contract whose root carries no layout block",
@@ -163,8 +163,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 112,
-      "ruleLine": 113,
+      "line": 113,
+      "ruleLine": 114,
       "ruleText": "const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledPathVariants(input)));",
       "css": {
         "construct": "border-width / border-color (and border-<side>-width) on a part flagged strokesIncludedInLayout: false, drawn as an inset box-shadow ring composed from private --_stroke-* variables, with border: 0",
@@ -202,8 +202,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 1112,
-      "ruleLine": 1113,
+      "line": 1114,
+      "ruleLine": 1115,
       "ruleText": "decls.push(...(textBoxes.get(part) ?? []));",
       "css": {
         "construct": "inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px)) on a text part flagged textAutoResize: WIDTH_AND_HEIGHT — its fit-content inline size, less the px / em / rem tracking CSS adds after the last glyph, rounded up to the pixel; max-inline-size: 100% unless the part carries its own max; align-self: flex-start under a flex column that would stretch it. A browser without calc-size() drops the inline-size and keeps today's fractional box",
