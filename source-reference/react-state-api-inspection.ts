@@ -116,6 +116,22 @@ export function readReactStateApiNativeRecord(root:string,request:ReactStateApiR
   return {pin,draft,initial,report,initialObservation:report.plan.initialObservation,initialDraftRevision:revisionOf(initial.draft)};
 }
 
+/** In-flight progress has no completion or native-write authority. Keep the
+ * same boundary while a terminal producer is closing and sealing its record. */
+export function readRunningStateApiProgress(
+  jobs: ReadonlyMap<string, { referenceId: string; state: ReactStateApiInspection }>,
+  referenceId: string,
+  caseId: string,
+): ReactStateApiInspection | undefined {
+  const matches = [...jobs.values()].filter(job => job.referenceId === referenceId && job.state.caseId === caseId);
+  if (matches.length > 1) throw Error('state-api-progress-ambiguous');
+  const state = matches[0]?.state;
+  if (!state) return undefined;
+  return { id: state.id, caseId: state.caseId, phase: 'running',
+    qualification: 'bounded-checked-state-api-only', plan: structuredClone(state.plan),
+    sourceUnchanged: false, restorationChecks: state.restorationChecks, problems: [] };
+}
+
 /** This writes a separate immutable experiment. It never changes the earlier
  * callback/initial records or a Figma operation, and a repeated completed
  * request reuses its sealed result without running another experiment. */
@@ -125,7 +141,7 @@ export function createReactStateApiInspectionStore(
   select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest },
   records: (referenceId: string, caseId: string) => { initial?: ReactInitialInspection; behavior?: ReactCallbackInspection },
 ) {
-  const active = new Map<string, { state: ReactStateApiInspection; promise: Promise<void> }>();
+  const active = new Map<string, { referenceId: string; state: ReactStateApiInspection; promise: Promise<void> }>();
   const input = (referenceId: string, caseId: string) => {
     const { reference, anchor } = select(referenceId, caseId), saved = records(referenceId, caseId);
     if (!saved.initial || !saved.behavior) throw Error('state-api-observations-unavailable');
@@ -144,6 +160,7 @@ export function createReactStateApiInspectionStore(
     return readReactStateApiNativeRecord(value.root,value.request);
   };
   return {
+    progress(referenceId: string, caseId: string) { return readRunningStateApiProgress(active, referenceId, caseId); },
     nativePin(referenceId: string, caseId: string) { return nativeRecord(referenceId,caseId).pin; },
     nativeEvidence(referenceId: string, caseId: string, pin:ReactStateApiNativePin) {
       const current=nativeRecord(referenceId,caseId);
@@ -232,7 +249,7 @@ export function createReactStateApiInspectionStore(
           } finally { active.delete(value.key); }
         }
       })();
-      const job = { state, promise }; active.set(value.key, job); return job;
+      const job = { referenceId, state, promise }; active.set(value.key, job); return job;
     },
   };
 }

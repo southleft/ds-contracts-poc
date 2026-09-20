@@ -292,6 +292,17 @@ trials or any failed restoration prevent contract generation. The generated
 preview offers the same typed values, with disabled remaining Boolean. Native
 creation, returned React behavior and visual qualification are separate steps.
 
+While this experiment runs, its status route returns progress for the exact
+reference and case without re-authenticating the whole source workspace on each
+poll. This response always remains `running`, with no source-restoration
+certificate, observation or generated draft. After the job seals its record,
+the route returns to the authoritative reader. Starting/reusing an experiment,
+previewing its draft and preparing native output still authenticate their
+inputs. A live three-state check completed all 96 trials and 144 restorations
+with Sources continuously open, and repeating the request reused the same
+record. Startup and terminal reads remain slow; see
+[D.83](../docs/23-known-limitations.md#d83-running-state-api-progress-cannot-certify-a-result).
+
 #### Geometry below the root of an initial-state domain
 
 Found by looking at the canvas of an independent stateful member (a switch): every variant drew its thumb as a 1 px sliver, and the checked variants did not move it. The structural readback cannot see either, because the plan itself was wrong. Both facts were OBSERVED (the saved trees hold `width: 16px` and `translate: calc(100% - 2px)`); both were lost at the same door: `observed-content.ts` keeps the sample-geometry exclusion (`width`, `height`, `translate`, …) for every part, and only the root had a source witness (`styleOrigin.roots`) that lifts it.

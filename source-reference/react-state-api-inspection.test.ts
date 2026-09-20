@@ -7,7 +7,7 @@ import { randomUUID } from 'node:crypto';
 import { revisionOf } from '../core/contract-provenance.js';
 import { stateApiEvidence, stateApiObservation } from './react-state-api-fixture.js';
 import { planReactStateApi } from './react-state-api.js';
-import { readReactStateApiNativeRecord, readReactStateApiInitialIdentity, readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
+import { readRunningStateApiProgress, readReactStateApiNativeRecord, readReactStateApiInitialIdentity, readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import type { ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 
@@ -42,6 +42,45 @@ function fixture() {
   seal();
   return { root, dir, source, initial, behavior, report, request, save, seal };
 }
+
+test('running progress isolates its exact target and never shares producer state', () => {
+  const f = fixture();
+  try {
+    const jobs = new Map([
+      ['first', { referenceId: 'first-reference', state: f.report }],
+      ['second', { referenceId: 'second-reference', state: { ...f.report, id: 'second-job' } }],
+    ]);
+    assert.equal(readRunningStateApiProgress(jobs, 'foreign-reference', f.report.caseId), undefined);
+    assert.equal(readRunningStateApiProgress(jobs, 'first-reference', 'other-case'), undefined);
+    const progress = readRunningStateApiProgress(jobs, 'first-reference', f.report.caseId)!;
+    assert.equal(progress.id, f.report.id);
+    assert.equal(progress.restorationChecks, f.report.restorationChecks);
+    progress.plan.cases.length = 0;
+    assert.equal(f.report.plan.cases.length, 27);
+    jobs.set('ambiguous', { referenceId: 'first-reference', state: { ...f.report, id: 'another-job' } });
+    assert.throws(() => readRunningStateApiProgress(jobs, 'first-reference', f.report.caseId), /progress-ambiguous/);
+    jobs.delete('ambiguous'); jobs.delete('first');
+    assert.equal(readRunningStateApiProgress(jobs, 'first-reference', f.report.caseId), undefined, 'settled jobs require the authoritative reader');
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
+
+test('terminal state awaiting sealing cannot certify source or expose a draft through progress', () => {
+  const f = fixture();
+  try {
+    for (const phase of ['running', 'complete', 'failed'] as const) {
+      const report = { ...f.report, phase, sourceUnchanged: true, problems: ['terminal-error'] };
+      Object.assign(report, { draft: { status: 'generated-draft' } });
+      const progress = readRunningStateApiProgress(new Map([['job', { referenceId: 'reference', state: report }]]), 'reference', report.caseId)!;
+      assert.equal(progress.phase, 'running');
+      assert.equal(progress.sourceUnchanged, false);
+      assert.equal(progress.draft, undefined);
+      assert.equal(progress.observation, undefined);
+      assert.deepEqual(progress.problems, []);
+    }
+    writeFileSync(f.source, 'changed');
+    assert.throws(() => readReactStateApiInspection(f.root, f.request), /program-changed/, 'terminal evidence still reauthenticates source');
+  } finally { rmSync(f.root, { recursive: true, force: true }); }
+});
 
 test('sealed state evidence reopens repeatedly and rejects changed requests, live source and file inventories', () => {
   const f = fixture();

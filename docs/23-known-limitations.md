@@ -7072,3 +7072,39 @@ directions. No owner grade or V1 release qualification is assigned.
 exact-geometry and 5% checks; do not replace historical Checkbox evidence or
 count the failed return as success. Reversal removes this cohort from active
 selection while retaining its immutable evidence and reported return losses.
+
+## D.83 Running state API progress cannot certify a result
+
+**AGENT decision, 2026-09-20.** Repeated status reads previously performed the
+expensive source and saved-evidence authentication while the observer was
+running. The state-API GET route now uses an in-memory progress snapshot only
+for an exact active reference/case pair. An ambiguous pair refuses. It clones
+the plan and returns the experiment identity and restoration count, always as
+`running`, with `sourceUnchanged: false` and no observation or draft. That rule
+also applies while a terminal producer closes its browser and seals the saved
+record. Once the job leaves the active map, the existing authoritative reader
+authenticates the result. Start/reuse, preview and native preparation keep
+their authenticated paths.
+
+A fresh application experiment completed **96/96 activation trials and 144
+exact restorations** with Sources continuously open and normal polling active.
+The final authenticated result confirms the original source restored. An
+unchanged repeat through the application reused the same experiment; all 85
+files across twelve saved experiments remained byte-identical.
+
+This is bounded progress evidence, not a general performance qualification.
+Of 28 sampled running reads, the first took **50.65 seconds**; the following 27
+took **1.05–192.64 ms** (median **1.38 ms**). Final authentication took **29.10
+seconds**. A separate PR validation lane ran concurrently, so these samples do
+not establish a controlled before/after speed comparison. Cold startup,
+terminal reads and other inspection routes remain unqualified. The earlier
+failed trial and navigation workaround in D.82 remain historical evidence.
+
+Adversarial checks cover target isolation, ambiguous jobs, mutation of the
+returned plan, terminal producer state before sealing and a changed source at
+authoritative read. Progress cannot authorize generation or a Figma write.
+Private evidence: `state-api-progress-20260920-1212/`, experiment `a50e83ba…`,
+including response timings, the completed app view and unchanged-repeat hashes.
+No native operation was created or modified for this change. Reversal removes
+the progress shortcut from the GET route and retains all sealed observations;
+no evidence rewrite or migration is required.
