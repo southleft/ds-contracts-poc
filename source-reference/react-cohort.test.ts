@@ -31,6 +31,7 @@ import {
   createReactReferenceService,
   reactReferenceHtml,
   reactReferenceUnchanged,
+  reactReferenceSourceModules,
   selectRecordedInspectionAnchor,
 } from "./react-reference.js";
 import { reactInspectionRequest } from './react-initial-inspection.js';
@@ -418,6 +419,53 @@ test("witnesses must pin the resolved source of every mounted workspace module; 
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+test("declared JSX is inspected from its actual resolved entry outside src, without following compiled-package source guesses", async t => {
+  const { root, put } = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const jsx = "node_modules/fixture-original/components/badge.tsx";
+  const compiled = "node_modules/fixture-original/components/compiled.js";
+  put(jsx, badgeSource);
+  put(compiled, "export const Compiled=()=>null;");
+  // A neighboring source is deliberately neither imported nor mounted.
+  put("node_modules/fixture-original/components/compiled.tsx", badgeSource);
+  const d = declaration() as any;
+  d.cases[0].mount.children[0].module = "./" + jsx.replace(/\.tsx$/, "");
+  d.cases[1].mount.module = "./" + jsx.replace(/\.tsx$/, "");
+  d.cases[0].mount.children.push({ module: "./" + compiled, export: "Compiled" });
+  delete d.witnessFiles["src/components/ui/badge.tsx"];
+  d.witnessFiles[jsx] = sha(badgeSource);
+  d.witnessFiles[compiled] = sha("export const Compiled=()=>null;");
+  put(reactCasesFile, JSON.stringify(d));
+  const reference = await buildReactReference(root);
+  assert.deepEqual(reactReferenceSourceModules(reference), [jsx, "src/components/ui/avatar.tsx"]);
+  assert.ok(reactWitnessesMatch(reference));
+  assert.equal((await buildReactReference(root)).id, reference.id);
+  // Selection metadata must not alter the frozen bundle/file identity.
+  const identity = { version: 1, entry: sha(reference.cohort.entry),
+    files: Object.entries(reference.files).map(([file, hash]) => [path.relative(reference.sourceRoot, file), hash]).sort(),
+    javascript: sha(reference.javascript), css: sha(reference.css) };
+  assert.equal(reference.id, sha(JSON.stringify(identity)));
+  const repo = mkdtempSync(path.join(tmpdir(), "react-cohort-entries-"));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const handle = createReactReferenceService(repo, root);
+  const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.slice(1)));
+  server.listen(0, "127.0.0.1"); await once(server, "listening");
+  t.after(() => { handle.close(); server.close(); });
+  const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  assert.equal((await fetch(base + "/react", { method: "POST" })).status, 200);
+  const response = await fetch(base + `/react/${reference.id}/program`, { method: "POST" });
+  assert.equal(response.status, 200, "the application uses the same resolved module selection");
+  const inspected = await response.json();
+  assert.ok(inspected.components.some((c: { module: string; exportName: string }) => c.module === jsx && c.exportName === "Badge"));
+  assert.ok(!inspected.components.some((c: { module: string }) => c.module.endsWith("compiled.tsx")));
+  put(jsx, badgeSource + "\n// changed");
+  assert.equal(reactReferenceUnchanged(reference), false);
+  assert.equal(reactWitnessesMatch(await buildReactReference(root)), false);
+  delete d.witnessFiles[jsx];
+  put(reactCasesFile, JSON.stringify(d));
+  await assert.rejects(buildReactReference(root), /^Error: react-cases-witness-files-incomplete$/);
 });
 
 test("a loaded built-in reference is refused once a declaration appears; operations of another cohort are not offered", async () => {
