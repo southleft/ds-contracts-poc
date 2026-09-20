@@ -28,7 +28,7 @@
   outline-offset: 2px;
 }
 
-.root:disabled {
+.root[data-disabled] {
   cursor: default;
 }
 
@@ -42,7 +42,7 @@
   cursor: pointer;
 }
 
-.root:disabled .choice__control {
+.root[data-disabled] .choice__control {
   cursor: default;
 }
 
@@ -65,7 +65,7 @@
   position: relative;
 }
 
-.root:disabled .radiobutton {
+.root[data-disabled] .radiobutton {
   cursor: default;
 }
 
@@ -111,7 +111,7 @@
   outline-style: auto;
 }
 
-.root:disabled .input {
+.root[data-disabled] .input {
   color: var(--imported-radio-button-input-color-state-disabled);
 }
 
@@ -167,7 +167,7 @@
   border-left-color: rgba(48, 48, 48, 1);
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   border-bottom-style: none;
   border-left-style: none;
   border-right-style: none;
@@ -179,7 +179,7 @@
   outline-style: solid;
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   background-color: var(--imported-radio-button-backdrop-background-color-state-disabled);
 }
 
@@ -213,11 +213,11 @@
   cursor: pointer;
 }
 
-.root:disabled .choice__label {
+.root[data-disabled] .choice__label {
   cursor: default;
 }
 
-.root:disabled .choice__label {
+.root[data-disabled] .choice__label {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -233,10 +233,10 @@
   font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-.root:disabled .label {
+.root[data-disabled] .label {
   cursor: default;
 }
 
-.root:disabled .label {
+.root[data-disabled] .label {
   color: var(--imported-shared-color-b5b5b5);
 }

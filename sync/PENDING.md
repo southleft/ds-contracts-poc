@@ -11,66 +11,66 @@ Every row below carries a **recorded** decision in `sync/ledger.json`. The sched
 ### `flowbite.alert`
 
 - **row**: `flowbite.alert@GnQnjSNBXtgtd2Ht0Hs1C8` — contract `examples/tailwind/contracts/alert.contract.json`, set `1:2098`
-- **kind**: pending-reapply (recorded 2026-09-18)
-- **why**: code is ahead: the dismiss button became a declared event (968958cd, 2026-08-16) after the last canvas write (2026-08-08); re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
+- **kind**: pending-reapply (recorded 2026-09-19)
+- **why**: code is ahead: the dismiss button became a declared event (968958cd, 2026-08-16) after the last canvas write (2026-08-08); re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/tailwind/figma/alert.figma.js (amend-capable: reconciles set 1:2098 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.alert --note "re-applied from 968958cd"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:2098` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:271205894 (grammar 1.34), file version 2390537264651373038
+  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:f289220abd4398ce6ca7bdf15bfa123e2992e93a5e6fd6f7263aaf8ff5edd7ab; observed stamp v6:941557944, dump dumpv1:734520230 (grammar 1.36), file version 2390537264651373038
 
 ### `flowbite.toggleswitch`
 
 - **row**: `flowbite.toggleswitch@GnQnjSNBXtgtd2Ht0Hs1C8` — contract `examples/tailwind/contracts/toggleswitch.contract.json`, set `1:2296`
-- **kind**: pending-reapply (recorded 2026-09-18)
-- **why**: genuine code-ahead: role=switch + onToggle event + root align landed in the contract (968958cd, 2026-08-16) and the canvas still carries the 2026-08-06 stamp; re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
+- **kind**: pending-reapply (recorded 2026-09-19)
+- **why**: genuine code-ahead: role=switch + onToggle event + root align landed in the contract (968958cd, 2026-08-16) and the canvas still carries the 2026-08-06 stamp; re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/tailwind/figma/toggle-switch.figma.js (amend-capable: reconciles set 1:2296 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.toggleswitch --note "re-applied from 968958cd"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:2296` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:3769229357 (grammar 1.34), file version 2390537264651373038
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3eb8702c078996ace0456795c60c9f623e60be89180fd3ef6fc11b8017b18794; observed stamp v6:3468428338, dump dumpv1:2416151069 (grammar 1.36), file version 2390537264651373038
 
 ### `mui.slider`
 
 - **row**: `mui.slider@59mLQlOMiD5w5za6SUcoO5` — contract `examples/mui/contracts/slider.contract.json`, set `21:509`
-- **kind**: pending-reapply (recorded 2026-09-18)
-- **why**: code is ahead: the slider-thumb shadow-pseudo fold landed in the contract (01aa5243, 2026-08-11T17:28Z) 1 h 48 min after the last canvas write (2026-08-11T15:40Z); re-applying is a Figma write to 59mLQlOMiD5w5za6SUcoO5 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
+- **kind**: pending-reapply (recorded 2026-09-19)
+- **why**: code is ahead: the slider-thumb shadow-pseudo fold landed in the contract (01aa5243, 2026-08-11T17:28Z) 1 h 48 min after the last canvas write (2026-08-11T15:40Z); re-applying is a Figma write to 59mLQlOMiD5w5za6SUcoO5 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
 - **command**: `Figma desktop → open file 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/slider.figma.js (amend-capable: reconciles set 21:509 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt mui.slider --note "re-applied from 01aa5243"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `21:509` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2373807250 (grammar 1.34), file version 2389961688576685812
+  - drift at decision time: conflict (canvas evidence stamp); contract hash sha256:1b2b04181f94513f19778a550508df0acbf2ff49bb79c96984fd6a111f97ddba; observed stamp v6:2972081627, dump dumpv1:2373807250 (grammar 1.36), file version 2389961688576685812
 
 ## Pending restamp — the set lost its v6 stamp; re-run its sync script (Figma write) (1)
 
 ### `altitude.avatar`
 
 - **row**: `altitude.avatar@GnQnjSNBXtgtd2Ht0Hs1C8` — contract `examples/altitude/contracts/avatar.contract.json`, set `1:10498`
-- **kind**: pending-restamp (recorded 2026-09-18)
-- **why**: the set carries no ds_contracts/canvasFingerprint stamp (content unchanged); restamping means re-running its sync script — a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
+- **kind**: pending-restamp (recorded 2026-09-19)
+- **why**: the set carries no ds_contracts/canvasFingerprint stamp (content unchanged); restamping means re-running its sync script — a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8 [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
 - **command**: `Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → "Paste a script" tab → paste examples/altitude/figma/avatar.figma.js (amend-capable: reconciles set 1:10498 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt altitude.avatar --note "restamped 2026-08-23"`
 - **writes to**: Figma file `GnQnjSNBXtgtd2Ht0Hs1C8`, set `1:10498` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:3205889121 (grammar 1.34), file version 2390537264651373038
+  - drift at decision time: code-ahead (canvas evidence none); contract hash sha256:5e1612af536e12c4db88467ccf5912d3a8a991cbfbc39492ef69b4beec7eba66; observed stamp none, dump dumpv1:248708489 (grammar 1.36), file version 2390537264651373038
 
 ## Pending reconcile — both halves moved; a human chooses which wins (2)
 
 ### `mui.fab`
 
 - **row**: `mui.fab@59mLQlOMiD5w5za6SUcoO5` — contract `examples/mui/contracts/fab.contract.json`, set `84:1743`
-- **kind**: pending-reconcile (recorded 2026-09-18)
-- **why**: both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
+- **kind**: pending-reconcile (recorded 2026-09-19)
+- **why**: both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. NOT REVIEWED: the contract hash had ALSO moved since this was recorded on 2026-08-23; this re-record keeps the marker pending and does not assess that change. Owner review still required.]
 - **command**: `CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.fab --note "canvas wins: 08-17 review fix kept"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/fab.figma.js (amends set 84:1743 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.fab --note "re-applied from 16889547"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `84:1743` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:343234876 (grammar 1.34), file version 2389961688576685812
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:42befa146883de73f556f4a13fb96a347f3f15245734d9053025e00935945166; observed stamp v6:2082406472, dump dumpv1:702901668 (grammar 1.36), file version 2389961688576685812
 
 ### `mui.link`
 
 - **row**: `mui.link@59mLQlOMiD5w5za6SUcoO5` — contract `examples/mui/contracts/link.contract.json`, set `84:1832`
-- **kind**: pending-reconcile (recorded 2026-09-18)
-- **why**: both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights). Only the grammar had moved for this row.]
+- **kind**: pending-reconcile (recorded 2026-09-19)
+- **why**: both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth [Re-recorded unchanged on 2026-09-18 because the dump grammar moved 1.32 → 1.34 (additive: letter spacing, per-side stroke weights) and again, the same day, 1.34 → 1.35 (additive: strokesIncludedInLayout), and on 2026-09-19 1.35 → 1.36 (additive: text textAutoResize) — grammar bump only. Only the grammar had moved for this row.]
 - **command**: `CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.link --note "canvas wins: 08-17 review fix kept"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → "Paste a script" tab → paste examples/mui/figma/link.figma.js (amends set 84:1832 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.link --note "re-applied from 16889547"`
 - **writes to**: Figma file `59mLQlOMiD5w5za6SUcoO5`, set `84:1832` — not the scratch file; a human runs it
 - **evidence**:
-  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:2044377465 (grammar 1.34), file version 2389961688576685812
+  - drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:2553000615 (grammar 1.36), file version 2389961688576685812
 
 ## Adopted (53) — canvas taken as the truth, row in-sync by construction
 

@@ -124,10 +124,7 @@
           "parts": {
             "alTabPanel": {
               "component": {
-                "id": "ds.tab-panel",
-                "props": {
-                  "state": "default"
-                }
+                "id": "ds.tab-panel"
               }
             }
           }

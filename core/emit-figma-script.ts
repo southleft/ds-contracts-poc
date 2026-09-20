@@ -41,6 +41,9 @@ import { prepareNativeContractDraft, type NativeContractDraftSource, type Native
  */
 import {
   DECLARED_CHANNELS,
+  absentVariantAxes,
+  absentVariantKey,
+  absentVariantKeys,
   channelDraws,
   TOKEN_CHANNELS,
   gridAxisSizing,
@@ -155,6 +158,15 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
+  /** dump v1.35 — `Part.strokesIncludedInLayout: false`: the stroke paints
+   *  over the padding and takes NO layout space (a designer's frame at Figma's
+   *  default). Only `false` is ever carried. The runtime writes it on the
+   *  auto-layout frame; with no spec carrying it the runtime is byte-identical
+   *  and the frame keeps what it is born with, which reads back `true`
+   *  (measured: 160 of 160 generated auto-layout frames in the committed
+   *  census responses) — the space-taking CSS border every other contract
+   *  means. */
+  strokesIncludedInLayout?: false;
   /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
    *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
   dashPattern?: number[];
@@ -368,6 +380,15 @@ export interface NodeSpec {
   textAlignH?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
   fontFamily?: string;
   textTruncation?: boolean;
+  /** dump v1.36 — `Part.textAutoResize: 'WIDTH_AND_HEIGHT'`: the text box
+   *  sizes itself to its text, and a Figma text box that does so is a whole
+   *  number of pixels wide. The runtime writes `node.textAutoResize` on the
+   *  TEXT node — the value `figma.createText()` is born with, so a script
+   *  with no spec carrying it is byte-identical and its text nodes read the
+   *  same value back (a set this pipeline wrote proposes the fact; docs/23
+   *  §D.42). Only this value is ever carried; it is the part's own fact and
+   *  is never inherited by a nested text child. */
+  textAutoResize?: 'WIDTH_AND_HEIGHT';
   /** v14 literals: literal-fidelity channels resolved from component-private
    *  source literals (schema `literals`/`literalsByProp`) — there is no
    *  variable to bind, so the runtime applies plain values. Colors are
@@ -639,6 +660,12 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  /** bindings.figma.absentVariants as canvas variant NAMES. Present only when
+   *  the contract declares any, so every other contract's data (and specHash)
+   *  is byte-identical. The writer never DELETES a variant; the amend path uses
+   *  this to keep saying so, on every sync, while a set written earlier still
+   *  holds one (docs/23 §D.40). */
+  absentVariants?: string[];
   nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
@@ -3365,6 +3392,11 @@ function applyStyling(
     const v = part.declared?.[axis];
     if (v !== undefined && channelDraws(axis, v)) spec.clipsContent = true;
   }
+  // dump v1.35: a stroke that takes no layout space is a FRAME fact, not a
+  // stroke fact — it holds whichever vocabulary draws the stroke (border or
+  // outline, token or literal, this combo or another), so it is read here,
+  // beside the other spec-level facts, and not in the stroke cases above.
+  if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
   // squares whose real height rides a pseudo-element padding hack).
@@ -3998,6 +4030,28 @@ function mapDepProps(
         reason: `not wired — ${dep.id} exposes no TEXT component property for it (the canvas carries such labels as raw instance overrides, which the contract vocabulary does not model)`,
       });
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
+  }
+  // bindings.figma.absentVariants (child side): an instance can only select a
+  // variant the child set DRAWS. The wired values plus the child's defaults
+  // for every axis left unwired name one combination; when the child declares
+  // it absent the runtime setProperties would throw mid-paste, so it refuses
+  // here BY NAME instead. Only a dep that declares absences enters this block.
+  const depAbsent = absentVariantKeys(dep);
+  if (depAbsent.size > 0 && !standalone) {
+    const depAxes = absentVariantAxes(dep);
+    const tuple: Record<string, string | boolean | null> = {};
+    for (const { prop } of depAxes) {
+      const wired = out[prop.bindings.figma.property!];
+      const chosen = orderedVariantValues(prop).find((v) =>
+        wired === undefined ? true : axisLabel(prop, v) === String(wired));
+      if (chosen === undefined) { tuple[prop.name] = '\u0000unresolved'; continue; }
+      tuple[prop.name] = chosen === null ? null : prop.type === 'boolean' ? chosen === 'true' : chosen;
+    }
+    if (depAbsent.has(absentVariantKey(depAxes, tuple))) {
+      throw new Error(
+        `FIGMA_COMPONENT_REF_ABSENT_VARIANT: ${parent?.id ?? 'a parent'} places ${dep.id} at ${JSON.stringify(tuple)}, a combination ${dep.id} declares undrawn (bindings.figma.absentVariants) — there is no variant to instantiate; draw it (remove the entry) or change the reference`,
+      );
+    }
   }
   return out;
 }
@@ -4967,6 +5021,9 @@ function partToSpecInner(
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
     Object.assign(textSpec, textExtras(textCtx));
+    // dump v1.36: the wrapper is the part's box; the TEXT NODE inside it is
+    // the box that sizes itself to its text, so the fact rides the text spec.
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') textSpec.textAutoResize = 'WIDTH_AND_HEIGHT';
     // MOLECULE round (Tooltip finding): a text part can CONTAIN parts — the
     // Tooltip bubble's label carries the absolute-positioned arrow span. The
     // old text lowering silently DROPPED child parts; here they compile
@@ -5012,6 +5069,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     applyAbsoluteThisCombo(spec, part, subst);
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -5060,6 +5118,7 @@ function partToSpecInner(
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
+    if (part.textAutoResize === 'WIDTH_AND_HEIGHT') spec.textAutoResize = 'WIDTH_AND_HEIGHT'; // dump v1.36 — the part's own box, never inherited
     spec.contentProp = prop.bindings.figma.property;
     applyVisibleWhen(spec, part, contract);
     return spec;
@@ -5542,6 +5601,33 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       for (let i = 0; i < axis.values.length; i++) next.push([...combo, i]);
     }
     combos = next;
+  }
+  // bindings.figma.absentVariants: the declared undrawn combinations emit NO
+  // variant — so the generated set is the product minus the list, which is
+  // exactly what the exact variant projection expects of it. Grid cells keep
+  // their Cartesian row/col (an undrawn cell is a hole, never a reflow), and
+  // the default combo is never absent (validateContract), so the first
+  // emitted variant is still the all-defaults one. No declaration → the
+  // filter is never built and `combos` is untouched, byte-identically.
+  const absentKeys = absentVariantKeys(contract);
+  /** The canvas NAMES of the declared-absent combinations, in enumeration
+   *  order — what the amend path needs to recognise a variant the contract
+   *  says is undrawn but a set written earlier still holds. */
+  const absentVariantNames: string[] = [];
+  if (absentKeys.size > 0) {
+    const absenceAxes = absentVariantAxes(contract);
+    combos = combos.filter((combo) => {
+      const tuple: Record<string, string | boolean | null> = {};
+      const nameParts: string[] = [];
+      axes.forEach(({ prop, values }, a) => {
+        const v = values[combo[a]!] ?? null;
+        tuple[prop.name] = v === null ? null : prop.type === 'boolean' ? v === 'true' : v;
+        nameParts.push(`${prop.bindings.figma.property}=${axisLabel(prop, v)}`);
+      });
+      const absent = absentKeys.has(absentVariantKey(absenceAxes, tuple));
+      if (absent) absentVariantNames.push(nameParts.join(', '));
+      return !absent;
+    });
   }
   const fontStyles = new Set<string>(['Medium']);
 
@@ -6348,6 +6434,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       : {}),
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
     ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
+    ...(absentVariantNames.length > 0 ? { absentVariants: absentVariantNames } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
     ...(hasCodeOnlyFacts ? { codeOnlyFacts } : {}),
     colW: Math.max(
@@ -7851,6 +7938,10 @@ function buildSyncScript(
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  // bindings.figma.absentVariants: the "still holds a declared-absent variant"
+  // receipt on the skip path is emitted only for a script that carries such a
+  // contract — every other script keeps its bytes.
+  const hasAbsentVariants = featureDatas.some((d) => (d.absentVariants?.length ?? 0) > 0);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
@@ -7886,6 +7977,12 @@ function buildSyncScript(
   // without these facts emit byte-identical scripts (the golden discipline).
   const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
+  // dump v1.35: same discipline — a contract with no stroke outside layout
+  // emits the runtime it always did.
+  const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout === false));
+  // dump v1.36: same discipline — a contract with no whole-pixel text box
+  // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
+  const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));
   const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
   const hasTextExtras = featureDatas.some((d) =>
     dataSome(
@@ -8373,7 +8470,30 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}${hasGrid ? `
   }` : ''}
   node.primaryAxisSizingMode = 'AUTO';
-  node.counterAxisSizingMode = 'AUTO';
+  node.counterAxisSizingMode = 'AUTO';${hasStrokeOutsideLayout ? `
+  // dump v1.35 — THE STROKE TAKES NO LAYOUT SPACE where the contract says so
+  // (Part.strokesIncludedInLayout: false, a designer's frame at Figma's
+  // default): the stroke paints over the padding and the box stays content +
+  // padding. The field is on AutoLayoutMixin, which every node type reaching
+  // this function has (FRAME, COMPONENT, SLOT — @figma/plugin-typings 1.135),
+  // so the write is not gated on the node; nothing here is wrapped in a
+  // silent try/catch either — a canvas that refuses it must say so.
+  //
+  // WHAT THIS CAN AND CANNOT PUT BACK. Inside a script that carries the fact,
+  // an unflagged flex frame is written true, so ONE contract mixing flagged
+  // and unflagged parts amends both ways. A contract that drops the flag
+  // ENTIRELY emits a script that never names the field (the golden
+  // discipline: every existing contract's script stays byte-identical), and
+  // amend reuses the variant nodes — so a canvas that once held false KEEPS
+  // it, and the next read proposes the flag back. The contract cannot turn
+  // the flag off on an existing set; that divergence is named in docs/23
+  // §D.39, not closed. An unflagged GRID frame is left alone: the Plugin API
+  // documents the field as applicable to HORIZONTAL / VERTICAL layout, and an
+  // unnecessary write is not worth a throw (a FLAGGED grid is still written —
+  // exercised live 2026-09-18 on COMPONENT, SLOT and GRID nodes, REST readback
+  // as predicted; docs/23 §D.39).
+  if (spec.strokesIncludedInLayout === false) node.strokesIncludedInLayout = false;
+  else if (node.layoutMode !== 'GRID') node.strokesIncludedInLayout = true;` : ''}
   if (spec.rootFillWidth) {
     node.resize(fillPreviewWidth, Math.max(1, node.height));
     node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
@@ -8512,7 +8632,14 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
     node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
+    node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}${hasTextBox ? `
+    // dump v1.36 — THE TEXT BOX SIZES ITSELF TO ITS TEXT where the contract
+    // says so (Part.textAutoResize: WIDTH_AND_HEIGHT): a whole-pixel box, the
+    // advance rounded up. It is the value createText is born with, so a
+    // script with no such spec never names the field (the golden discipline)
+    // and reads the same value back; it is written explicitly here so an
+    // AMENDED node that had been filled or fixed is put back.
+    if (spec.textAutoResize === 'WIDTH_AND_HEIGHT') node.textAutoResize = 'WIDTH_AND_HEIGHT';` : ''}
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -8586,7 +8713,9 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
       if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = ${strokeAlignJs(hasStrokeOutside)}; }
-      if (spec.characters) wrap.appendChild(node); else node.remove();
+${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto-layout box — see applyFrameSpec.
+      wrap.strokesIncludedInLayout = spec.strokesIncludedInLayout !== false;
+` : ''}      if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
         if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
@@ -8852,7 +8981,20 @@ async function amendSet(set, C) {
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
     if (!fpSkip || fpSkip.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(set);
-    }
+    }${hasAbsentVariants ? `
+    // The contract has not changed, but the CANVAS may still hold a variant
+    // the contract declares undrawn (a set written before the declaration:
+    // the writer never deletes a designer-visible variant). That is not
+    // "unchanged" — it is a standing disagreement, and it is named on EVERY
+    // sync until someone removes the variant or the declaration. The design
+    // → contract read-back refuses the same state (EXACT_MATRIX_RAGGED).
+    if (C.absentVariants && C.absentVariants.length) {
+      const held = set.children.map((ch) => ch.name).filter((n) => C.absentVariants.indexOf(n) >= 0);
+      if (held.length) {
+        return { name: C.setName, contractId: C.contractId, skipped: true,
+          reason: 'unchanged-with-extra-variants:[' + held.join(' | ') + ']', extraVariants: held, nodeId: set.id, key: set.key };
+      }
+    }` : ''}
     return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
   const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,

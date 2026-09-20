@@ -1,5 +1,79 @@
 {
   "imported": {
+    "placeholder": {
+      "vector": {
+        "background-color": {
+          "$value": "#050a0f",
+          "$type": "color"
+        }
+      },
+      "root": {
+        "width": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "24px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "icon": {
+      "root": {
+        "width": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "xlarge": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "2xlarge": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "xsmall": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "xlarge": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "2xlarge": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "xsmall": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
     "badge": {
       "root": {
         "background-color": {
@@ -347,30 +421,6 @@
         "line-height": {
           "$value": "16px",
           "$type": "dimension"
-        }
-      }
-    },
-    "stub-icon": {
-      "root": {
-        "width": {
-          "small": {
-            "$value": "16px",
-            "$type": "dimension"
-          },
-          "xsmall": {
-            "$value": "12px",
-            "$type": "dimension"
-          }
-        },
-        "height": {
-          "small": {
-            "$value": "16px",
-            "$type": "dimension"
-          },
-          "xsmall": {
-            "$value": "12px",
-            "$type": "dimension"
-          }
         }
       }
     }

@@ -1,0 +1,132 @@
+{
+  "imported": {
+    "badge": {
+      "root": {
+        "background-color": {
+          "danger": {
+            "$value": "#38191c",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "#797469",
+            "$type": "color"
+          },
+          "info": {
+            "$value": "#2b3a63",
+            "$type": "color"
+          },
+          "success": {
+            "$value": "#14301f",
+            "$type": "color"
+          },
+          "warning": {
+            "$value": "#2f2610",
+            "$type": "color"
+          }
+        },
+        "padding-inline": {
+          "label": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "dot": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "border-radius": {
+          "label": {
+            "$value": "999px",
+            "$type": "dimension"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "label": {
+            "$value": "fit-content"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "label": {
+            "$value": "fit-content"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "badge": {
+        "color": {
+          "danger": {
+            "$value": "#ff6d76",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "#f1f0ea",
+            "$type": "color"
+          },
+          "info": {
+            "$value": "#a3b5ff",
+            "$type": "color"
+          },
+          "success": {
+            "$value": "#4cd98a",
+            "$type": "color"
+          },
+          "warning": {
+            "$value": "#f5b942",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "text": {
+      "typography-body-xs-semibold": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/xs/semibold",
+                "key": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "600",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/xs/semibold",
+                "key": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/xs/semibold",
+                "key": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

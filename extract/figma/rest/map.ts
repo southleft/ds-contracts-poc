@@ -29,6 +29,9 @@
  *   fills[].boundVariables.color (VARIABLE_ALIAS)   fill { var: name } via the variables response, else { hex } + degradation;
  *                                                   effective opacity (color.a × paint opacity) rides { alpha } when < 1 (dump v1.1)
  *   strokes[…] (same shape)                         stroke, strokeWeight (literal, only when a stroke is emitted)
+ *   strokesIncludedInLayout (absent = false)         strokesIncludedInLayout (dump v1.35 — ONLY on an auto-layout frame that emits a
+ *                                                   stroke, and then always, `false` included: REST omits the default, so on this
+ *                                                   route absence in the RESPONSE is the fact `false`; absence in the DUMP is not)
  *   individualStrokeWeights {top,right,bottom,left} strokeWeights (dump v1.34 — only when the four sides are NOT all equal, and then
  *                                                   INSTEAD of strokeWeight: REST reports strokeWeight 0 for sides [1,0,1,0], which
  *                                                   is not a drawn fact); an unreadable side keeps stroke-weights-nonuniform
@@ -80,6 +83,11 @@
  *                                                     drawn" and "not captured" stay different facts)
  *   style.textAlignHorizontal                       text.textAlign (dump v1.31 — CENTER | RIGHT | JUSTIFIED; LEFT is
  *                                                     the CSS default and is omitted, as the plugin dump omits it)
+ *   style.textAutoResize (absent = NONE)            text.textAutoResize (dump v1.36 — NONE | HEIGHT | WIDTH_AND_HEIGHT |
+ *                                                     TRUNCATE on every text node; a box that sizes itself to its text is
+ *                                                     a whole number of pixels wide, so WIDTH_AND_HEIGHT inverts to
+ *                                                     Part.textAutoResize; REST omits its default, so an absent RESPONSE
+ *                                                     key is NONE here; absent in the DUMP is not captured)
  *   node.styles.effect → styles metadata map        effectStyle / effectStyleKey (dump v1.31 — the EffectStyle's name
  *                                                     and publish key), else effect-style-unresolved
  *   effects[].boundVariables.{radius,spread,color,  effects[].bound.<channel> (dump v1.31) via the variables response,
@@ -101,6 +109,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
+import { closureDegradations, cycleCutInstanceName, type DumpClosure } from './closure.js';
 import type { DumpDegradation, DumpEffect, DumpFile, DumpFixedSwap, DumpGradient, DumpGridTrack, DumpHostOverride, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpReaction, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
 
 // ---------------------------------------------------------------------------
@@ -145,6 +154,8 @@ export interface RestTypeStyle {
   lineHeightPx?: number;
   /** dump v1.31: LEFT | CENTER | RIGHT | JUSTIFIED → text.textAlign. */
   textAlignHorizontal?: string;
+  /** dump v1.36: NONE | HEIGHT | WIDTH_AND_HEIGHT | TRUNCATE → text.textAutoResize. */
+  textAutoResize?: string;
 }
 
 /** HasBoundVariablesTrait (api_types.ts) — the spellings that differ from the
@@ -322,6 +333,10 @@ export interface RestNode {
   strokeAlign?: string;
   strokeDashes?: number[];
   individualStrokeWeights?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Auto-layout frames only. REST OMITS the default (`false`) — measured on
+   *  the committed census responses: every frame this pipeline generated
+   *  reports `true`, every designer-drawn one omits the key. */
+  strokesIncludedInLayout?: boolean;
   minWidth?: number | null;
   maxWidth?: number | null;
   minHeight?: number | null;
@@ -475,7 +490,12 @@ export type MapDegradationCode =
   | 'host-override-unlocated'
   // Two overridden TEXT descendants share one name path — both character
   // overrides refused (the plugin dump's own code, dump v1.10).
-  | 'text-override-ambiguous-path';
+  | 'text-override-ambiguous-path'
+  // Dependency closure (docs/23 §D.43): an INSTANCE whose main component's set
+  // the import could not follow into this dump (remote library component,
+  // not found, cap exceeded, …) — the reason is the message's first word; the
+  // instance stays an auto-proposed stub.
+  | 'instance-closure-unresolved';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -511,6 +531,21 @@ export interface MapOptions {
   target?: string;
   /** File key for _provenance (it rides the URL, not the nodes response). */
   fileKey?: string | null;
+  /** The REQUEST carried `plugin_data=shared`, so a `ds_contracts/*` stamp on
+   *  any node WOULD be in this response. Only the caller knows: the parameter
+   *  is not echoed, and a response with no `sharedPluginData` anywhere is what
+   *  both "asked, nothing stamped" and "never asked" look like. Default false
+   *  — nothing is written and every existing mapped fixture keeps its bytes.
+   *  `true` writes `_provenance.stampsObservable: true`, the positive fact the
+   *  proposer requires before an unstamped ragged set may declare its undrawn
+   *  combinations (core/propose-figma.ts dumpStampsObservable). */
+  stampsObservable?: boolean;
+  /** The dependency closure the fetch layer ran (extract/figma/rest/closure.ts).
+   *  Written verbatim to `_provenance.closure`; every unresolved reference
+   *  becomes one `instance-closure-unresolved` degradation row; a PULLED set
+   *  is mapped even when `target` names another set. Absent (`--no-closure`,
+   *  or any caller that did not follow) → nothing is written. */
+  closure?: DumpClosure;
 }
 
 /** dump v1.1 node as the REST mapper emits it (`hidden` lives on DumpNode
@@ -564,6 +599,9 @@ interface Ctx {
    *  here; an id outside the document stays an id). */
   nodeNameById: Map<string, string>;
   report: MapReport;
+  /** Dependency closure (docs/23 §D.43): target set ids whose instances in
+   *  THIS set sit on a cut cycle edge — spelled as a distinct stub. */
+  cycleCutTargets?: Map<string, string>;
 }
 
 /** The per-binding consequence, naming the REAL cause (Phase 2 exam: the
@@ -1070,6 +1108,32 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   if (s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
     text.textAlign = s.textAlignHorizontal;
   }
+  // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — style.textAutoResize,
+  // verbatim, on every text node. A Figma text box that sizes itself to its
+  // text (WIDTH_AND_HEIGHT) is a WHOLE number of pixels wide, the glyph
+  // advance rounded up, while the browser lays the same run out at its
+  // fractional advance; the proposer lowers that one value to
+  // Part.textAutoResize and the code surfaces round the box up to match. The
+  // other values (a fixed or filled box) are copied so the capture is
+  // complete and lowered by nothing here. An ABSENT dump field means not
+  // captured (dump ≤ v1.35), never auto-width. Twin of the same write in
+  // extract/figma/dump.plugin.js.
+  //
+  // ABSENT IN THE RESPONSE IS READ AS `NONE` (review, PR 132 — an AGENT
+  // decision). REST omits defaults (strokesIncludedInLayout is the measured
+  // precedent) and `NONE` is this field's default; two read-only GETs on the
+  // designer files (Altitude Radio 3543:47540, CBDS Avatar 284:11) returned
+  // WIDTH_AND_HEIGHT and HEIGHT explicitly and never NONE, which is what an
+  // omitted default looks like but does not prove it. The reading is chosen
+  // because it is SAFE under either truth: if REST does send NONE, absence
+  // never happens; if it omits it, a fixed box beside auto-width variants is
+  // the mixed case (refused by name), never a silent auto-width. The same
+  // unknown spelling is not copied. INVERSE: delete the `else` branch.
+  if (s.textAutoResize === 'NONE' || s.textAutoResize === 'HEIGHT' || s.textAutoResize === 'WIDTH_AND_HEIGHT' || s.textAutoResize === 'TRUNCATE') {
+    text.textAutoResize = s.textAutoResize;
+  } else if (s.textAutoResize === undefined) {
+    text.textAutoResize = 'NONE';
+  }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   // dump v1.33: letter spacing is CARRIED. REST reports it already resolved to
@@ -1511,6 +1575,15 @@ function mapNode(
     const sideWeights = perSideStrokeWeights(node);
     if (sideWeights !== undefined && sideWeights !== 'unreadable') out.strokeWeights = sideWeights;
     else if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // dump v1.35: does the stroke take LAYOUT SPACE? Only an auto-layout frame
+    // has the fact and only a drawn stroke makes it visible, so it is written
+    // exactly there — and then always, because the two values lower to different
+    // CSS (`true` = a border that grows the box, `false` = a ring painted over
+    // the padding). REST omits its default, so the ABSENT response key is read
+    // as `false` HERE, where the route's rule is known; downstream an absent
+    // dump field still means "not captured" (dump ≤ v1.34), never `false`.
+    // Twin of the same write in extract/figma/dump.plugin.js.
+    if (out.layout !== undefined) out.strokesIncludedInLayout = node.strokesIncludedInLayout === true;
   }
   const shape = mapShape(node, ctx, nodePath, parentBox);
   if (shape) out.shape = shape;
@@ -1591,7 +1664,14 @@ function mapNode(
   if (node.type === 'INSTANCE') {
     const componentId = node.componentId;
     const component = componentId ? ctx.components.get(componentId) : undefined;
-    if (component) {
+    const cutTo = component ? ctx.cycleCutTargets?.get(component.componentSetId ?? componentId!) : undefined;
+    if (component && cutTo !== undefined) {
+      // A cut cycle edge (closure.ts): a distinct name and no identity keys,
+      // so the proposer stubs it under its OWN id and never links it to the
+      // real contract that references this set back. The closure record's
+      // `cycle-cut` row names it.
+      out.instanceOf = cycleCutInstanceName(cutTo);
+    } else if (component) {
       const owningSet = component.componentSetId ? ctx.componentSets.get(component.componentSetId) : undefined;
       out.instanceOf = owningSet?.name ?? component.name;
       // dump v1.5: rename-safe identity — the main component's publish key
@@ -1762,7 +1842,13 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.34';
+export const REST_DUMP_VERSION = '1.36';
+// 1.36 (design-led fidelity): `text.textAutoResize` carried verbatim on every
+//      text node — a Figma text box that sizes itself to its text is a whole
+//      number of pixels wide (the advance rounded up), the browser's is not.
+// 1.35 (design-led fidelity): `strokesIncludedInLayout` carried on every
+//      auto-layout frame that draws a stroke — a designer's stroke takes no
+//      layout space (Figma's default) while the CSS border it lowered to does.
 // 1.34 (design-led fidelity): per-side stroke weights carried as `strokeWeights`
 //      (in place of the uniform `strokeWeight`) instead of being named
 //      `stroke-weights-nonuniform`.
@@ -1833,6 +1919,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
       ...REST_CAPTURE_GAPS,
     ],
+    ...(options.stampsObservable === true ? { stampsObservable: true as const } : {}),
+    ...(options.closure ? { closure: options.closure } : {}),
     // The variables channel's own receipt: what answered, or why nothing did.
     variables: options.variables
       ? {
@@ -1855,6 +1943,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   const dump: DumpFile = {
     _provenance: provenance,
   };
+  const closurePulled = new Set((options.closure?.pulled ?? []).map((p) => p.nodeId));
 
   for (const entry of Object.values(nodesResponse.nodes ?? {})) {
     if (!entry) continue; // REST returns null for ids not in the file
@@ -1866,7 +1955,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       continue;
     }
     if (doc.name === 'Slot') continue; // utility, never a contract component (dump.plugin.js rule)
-    if (options.target && doc.name !== options.target) continue;
+    if (options.target && doc.name !== options.target && !closurePulled.has(doc.id)) continue;
 
     const styleById = new Map<string, { name: string; key?: string }>();
     for (const [id, s] of Object.entries(entry.styles ?? {})) {
@@ -1898,6 +1987,13 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
       nodeNameById,
       report,
+      ...(options.closure?.cycles.some((c) => c.fromNodeId === doc.id)
+        ? {
+            cycleCutTargets: new Map(
+              options.closure.cycles.filter((c) => c.fromNodeId === doc.id).map((c) => [c.toNodeId, c.to] as const),
+            ),
+          }
+        : {}),
     };
 
     const variants: RestDumpNode[] =
@@ -2137,6 +2233,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
         : 'no variables response was passed to the mapper (/v1/files/:key/variables/local was not fetched) — every variable binding on this dump is a resolved literal',
     });
   }
+
+  if (options.closure) report.degradations.push(...closureDegradations(options.closure));
 
   // Phase 2 exam: the MapReport used to live only on stderr — the dump
   // carried no `_degradations` on the REST route, so propose could not

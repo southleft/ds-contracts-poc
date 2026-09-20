@@ -1,0 +1,244 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "The system's action control. It renders a real `<button>` — or an `<a role=\"button\">` when `href` is set — so the element the user actually gets, and the keyboard behaviour that comes with it, follows the props rather than the styling. Everything else about a button is ranking: `variant` says how much weight this action carries against the others on screen.\n\nTag: al-button\n\nProps\n- isDisabled: boolean — Disabled attribute\n- isPill: boolean — Pill shape\n- label — Indicates the aria label to apply to the button.\n- size: sm | lg — Size variant\n  - omitted: renders the default 40px control with 14px text\n- variant: neutral | bare | secondary | tertiary — Style variant — an EMPHASIS axis, strongest to weakest.\n  - default: renders the primary button, the strongest emphasis\n\nSlots\n- (default) — The button text content.\n- after — Content to display after the button text, typically an icon.\n- before — Content to display before the button text, typically an icon.\n\nAccessibility\n- element: <button>\n\nDocs: https://altitude.pages.dev/docs/components/button/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/button/"
+    }
+  ],
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "primary",
+          "bare",
+          "neutral",
+          "secondary",
+          "tertiary"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "primary": "Primary",
+            "bare": "Bare",
+            "neutral": "Neutral",
+            "secondary": "Secondary",
+            "tertiary": "Tertiary"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "md",
+          "sm",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "md": "Md",
+            "sm": "Sm",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "default",
+          "pill"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "default": "Default",
+            "pill": "Pill"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Button",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "slotBefore",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Slot Before"
+        },
+        "code": {
+          "prop": "slotBefore"
+        }
+      }
+    },
+    {
+      "name": "slotAfter",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Slot After"
+        },
+        "code": {
+          "prop": "slotAfter"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "focus-visible",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "iconBefore": {
+          "component": {
+            "id": "ds.icon"
+          },
+          "visibleWhen": {
+            "prop": "slotBefore"
+          }
+        },
+        "Button": {
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "literals": {
+            "letter-spacing": "1px"
+          },
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "content": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{imported.button.button.color.{variant}}",
+            "font-size": "{imported.button.button.font-size.{size}}",
+            "font-weight": "{imported.button.button.font-weight}",
+            "line-height": "{imported.button.button.line-height.{size}}"
+          },
+          "states": {
+            "hover": {
+              "color": "{imported.button.button-state-hover.color.{variant}}"
+            }
+          }
+        },
+        "iconAfter": {
+          "component": {
+            "id": "ds.icon"
+          },
+          "visibleWhen": {
+            "prop": "slotAfter"
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "padding-top": "0px",
+        "padding-bottom": "0px"
+      },
+      "tokens": {
+        "background-color": "{imported.button.root.background-color.{variant}}",
+        "border-color": "{imported.button.root.border-color.{variant}}",
+        "gap": "{imported.button.root.gap}",
+        "padding-inline": "{imported.button.root.padding-inline}",
+        "border-radius": "{imported.button.root.border-radius.{shape}}",
+        "border-width": "{imported.button.root.border-width.{variant}}",
+        "min-height": "{imported.button.root.min-height.{size}}",
+        "height": "{imported.button.root.height.{size}}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{imported.button.state-hover.background-color.{variant}}"
+        },
+        "focus-visible": {
+          "border-color": "{imported.button.state-focus-visible.border-color}",
+          "border-width": "{imported.button.state-focus-visible.border-width}"
+        },
+        "disabled": {
+          "opacity": "{imported.button.state-disabled.opacity}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "09ca718cee9c8009d71b4878fcef07f32710dd5d",
+        "nodeId": "3538:36730"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Button",
+        "export": "Button"
+      }
+    }
+  }
+}

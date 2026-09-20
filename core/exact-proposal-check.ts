@@ -1,5 +1,6 @@
 import type { DumpLayout, DumpNode, DumpSet } from "../extract/figma/types.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
+import { validateExactVariantProjection } from "./exact-projection.js";
 import {
   CAPTURED_VARIABLES_ABSENT_RECEIPT,
   capturedTokensDocument,
@@ -123,6 +124,59 @@ for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
     ) === "EXACT_MATRIX_RAGGED",
   );
 }
+// bindings.figma.absentVariants (docs/23 §D.40). The two rows above are the
+// ORIGINAL ones and still hold: nothing here says a reader could have seen a
+// ds_contracts stamp, so "unstamped" is not evidence of a designer and the
+// ragged refusal stands (now naming why). Only with that POSITIVE reader fact
+// does a designer's strict-subset set propose, its hole declared on the
+// contract and verified exact against the product minus the declaration.
+check(
+  "the validator refuses a structured ragged matrix that nothing declares",
+  (() => {
+    const result = validateExactVariantProjection(ragged);
+    return result.status === "refused" && result.code === "EXACT_MATRIX_RAGGED";
+  })(),
+);
+for (const projectionMode of ["exact", "reviewable-inversion"] as const) {
+  const observed = { ...baseOpts, projectionMode, stampsObservable: true };
+  const proposed = proposeFromDump(ragged, observed);
+  const declared = (
+    proposed.contract.bindings as { figma: { absentVariants?: unknown } }
+  ).figma.absentVariants;
+  check(
+    `${projectionMode} proposes a designer's strict-subset matrix (stamps observable, none present) with the undrawn combination DECLARED, verified exact at 3 rows`,
+    JSON.stringify(declared) ===
+      JSON.stringify([{ size: "lg", tone: "danger" }]) &&
+      proposed.projection.status === "verified-exact" &&
+      proposed.projection.observedCount === 3 &&
+      proposed.projection.expectedCount === 3,
+  );
+  check(
+    `${projectionMode} still refuses a ragged matrix whose DEFAULT combination is the undrawn one`,
+    refusalCode(() =>
+      proposeFromDump(
+        {
+          ...ragged,
+          variants: [
+            ragged.variants[1],
+            ragged.variants[2],
+            variant("Size=Lg, Tone=Danger", { Size: "Lg", Tone: "Danger" }),
+          ],
+        },
+        observed,
+      ),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+  check(
+    `${projectionMode} still refuses a ragged set THIS PIPELINE stamped when no contract in scope declares the hole`,
+    refusalCode(() =>
+      proposeFromDump(
+        { ...ragged, contractId: "check.ragged" } as DumpSet,
+        observed,
+      ),
+    ) === "EXACT_MATRIX_RAGGED",
+  );
+}
 
 const collision: DumpSet = {
   setName: "Collision",
@@ -173,6 +227,70 @@ check(
   refusalCode(() => proposeFromDump(states, baseOpts)) ===
     "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
 );
+// docs/23 §D.41 — the refusal above was about WHOSE axis it is. With the
+// positive designer fact (no stamp AND a reader that could have seen one) the
+// axis is projected by the closed table — and the status is only
+// `verified-exact` when the CONTRACT carries every drawn state (review, PR 131
+// C1: the state half of the matrix is read from contract.states, not from the
+// source it is compared with).
+{
+  const observed = { ...baseOpts, stampsObservable: true, mintUnbound: true };
+  const painted = (name: string, State: string, hex: string): DumpNode => ({
+    ...variant(name, { State }),
+    fill: { hex },
+  });
+  const drawn: DumpSet = {
+    ...states,
+    variants: [
+      painted("State=Default", "Default", "#cc0000"),
+      painted("State=Hover", "Hover", "#990000"),
+    ],
+  };
+  const projected = proposeFromDump(drawn, observed);
+  check(
+    "exact mode PROJECTS a designer's interaction-state axis under the stamps-observable fact: verified exact at 2 rows, hover CARRIED by the contract, the axis is not a prop, the decision is named",
+    projected.projection.status === "verified-exact" &&
+      projected.projection.observedCount === 2 &&
+      JSON.stringify(projected.contract.states) === '["hover"]' &&
+      projected.stateAxisProjection?.decision ===
+        "designer-state-axis-projected" &&
+      projected.stateAxisProjection.property === "State" &&
+      !(projected.contract.props as Array<{ name: string }>).some(
+        (p) => p.name === "state",
+      ),
+  );
+  const notCarried = (() => {
+    try {
+      proposeFromDump(states, observed);
+      return "proposed";
+    } catch (error) {
+      return error instanceof ExactProjectionError
+        ? `${error.code} ${error.message}`
+        : String(error);
+    }
+  })();
+  check(
+    "exact mode REFUSES the same axis when a drawn state is not carried by the contract (Hover drawn identically to Default): state-axis-state-not-carried:hover — never verified-exact over dropped rows",
+    notCarried.startsWith("EXACT_SEMANTIC_PROJECTION_AMBIGUOUS ") &&
+      notCarried.includes("state-axis-state-not-carried:hover"),
+  );
+  check(
+    "reviewable inversion proposes that set as legacy-unverified (1 of its 2 source rows has no counterpart in the contract)",
+    proposeFromDump(states, {
+      ...observed,
+      projectionMode: "reviewable-inversion",
+    }).projection.status === "legacy-unverified",
+  );
+  check(
+    "exact mode still refuses the same axis on a set THIS PIPELINE stamped without declaring it",
+    refusalCode(() =>
+      proposeFromDump(
+        { ...drawn, contractId: "check.control" } as DumpSet,
+        observed,
+      ),
+    ) === "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
+  );
+}
 
 console.log("\n4. Verified exact success");
 const exact = proposeFromDump(exactSet(), baseOpts);

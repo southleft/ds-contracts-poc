@@ -62,6 +62,7 @@ import {
   type StageRecord,
   type StageStatus,
 } from "./first-pass.js";
+import { pickRequestedContract } from "../rest/closure.js";
 
 const TSX = path.join(REPO, "node_modules", ".bin", "tsx");
 
@@ -1063,8 +1064,22 @@ export async function runCanvasToCode(
           .filter((f) => f.endsWith(".contract.proposed.json"))
           .sort()
       : [];
-    const main =
-      proposed.find((f) => !f.endsWith(".stub.contract.proposed.json")) ?? null;
+    // Review C1 (docs/23 §D.43): the REST import follows instances, so this
+    // folder also holds every followed child's contract. The graded contract
+    // is the one ANCHORED to this set's node id — never the first by name.
+    const picked = pickRequestedContract(
+      proposed.map((f) => {
+        let contract: unknown = null;
+        try {
+          contract = JSON.parse(readFileSync(path.join(propOut, f), "utf8"));
+        } catch {
+          /* unreadable — never picked */
+        }
+        return { file: f, contract };
+      }),
+      doc.id,
+    );
+    const main = "file" in picked ? picked.file : null;
     if (
       !record(
         c,
@@ -1075,7 +1090,9 @@ export async function runCanvasToCode(
         prr.ok && main
           ? `${proposed.length} proposal file(s)`
           : prr.ok
-            ? "propose exited 0 and wrote no contract"
+            ? proposed.length === 0
+              ? "propose exited 0 and wrote no contract"
+              : (picked as { refusal: string }).refusal
             : refusalMessage(prr),
         proposed.map((f) => artifactOf(path.join(propOut, f), false)),
       )

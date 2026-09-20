@@ -186,6 +186,23 @@ export interface DumpText {
    *  older dumps means not captured (their captures receipted the channel as
    *  text-channel-unsupported). */
   textAlign?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
+  /** How the text box sizes itself (dump v1.36, additive) — Figma's
+   *  `textAutoResize`, verbatim, on EVERY text node: WIDTH_AND_HEIGHT (the
+   *  box hugs its text on both axes), HEIGHT (fixed width, auto height),
+   *  NONE (fixed box) or the deprecated TRUNCATE. A Figma text box that
+   *  sizes itself to its text is a WHOLE number of pixels wide — the glyph
+   *  advance rounded up (REST: `Label` in Inter Semi Bold 14 reports
+   *  absoluteBoundingBox.width 32 where Chromium lays the same run out at
+   *  31.40625) — so WIDTH_AND_HEIGHT inverts to `Part.textAutoResize:
+   *  'WIDTH_AND_HEIGHT'` and the code surfaces round the element's
+   *  fit-content inline size up to the pixel. The other values are a fixed
+   *  or filled box, which fillWidth / the width vocabulary already carry;
+   *  they are copied so the fact is captured, and propose lowers none of
+   *  them. Absence in older dumps means not captured (dump ≤ v1.35), never
+   *  auto-width: those dumps propose the bytes they always did. Found by the
+   *  design-led consumer check — 26 of the CBDS Badge's 48 × 16 px small
+   *  variants missed the limit with every content size equal. */
+  textAutoResize?: 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT' | 'TRUNCATE';
 }
 
 /** One visible effect (dump v1.2, additive). Shadows carry their full
@@ -383,6 +400,20 @@ export interface DumpNode {
    *  for eight rounds. OUTSIDE inverts to the outline vocabulary, INSIDE to
    *  border, CENTER is refused BY NAME (stroke-align-unsupported). */
   strokeAlign?: 'INSIDE' | 'CENTER' | 'OUTSIDE';
+  /** Whether the stroke takes LAYOUT SPACE (dump v1.35, additive) — Figma's
+   *  auto-layout `strokesIncludedInLayout`, written ONLY on an auto-layout
+   *  frame that draws a visible stroke (the one place the fact changes a
+   *  pixel), and then ALWAYS, `false` included. `false` is Figma's default for
+   *  a designer-drawn frame: the stroke paints over the padding and the box is
+   *  content + padding; `true` is CSS `border` under `box-sizing: border-box`
+   *  (the box grows by the weight) and is what every set THIS pipeline
+   *  generates reads back as. An ABSENT field means "not captured" (dump
+   *  ≤ v1.34), never `false`: those dumps keep lowering to a space-taking
+   *  border exactly as they did. Found by the design-led consumer check — the
+   *  24 outline variants of a designer's Badge rendered 4px wider, and the
+   *  16px-high small one 20px high. Inverts to `Part.strokesIncludedInLayout:
+   *  false`. */
+  strokesIncludedInLayout?: boolean;
   /** Literal min/max sizing in px (dump v1.4, additive) — carried as
    *  min-width/min-height/max-width/max-height style facts (a drawn
    *  minHeight 44 is a tap-target fact). Bound min/max variables ride
@@ -781,6 +812,11 @@ export interface DumpFile {
      *  hand-authored fixtures — absence adds no note, so committed corpora
      *  are byte-stable. */
     captureGaps?: string[];
+    /** The reader's request could have returned `ds_contracts/*` stamps (REST:
+     *  the fetch layer asked for `plugin_data=shared` and says so). Written
+     *  only as `true`; absent = not established, never false-by-default
+     *  evidence that a set is designer-drawn. */
+    stampsObservable?: true;
     /** The variables channel's own receipt (REST route, Phase 2 exam
      *  2026-08-22): what `/v1/files/:key/variables/local` answered, or WHY it
      *  did not — `cause` is `scope` (the token lacks `file_variables:read`,
@@ -801,6 +837,11 @@ export interface DumpFile {
           message: string;
           fix: string | null;
         };
+    /** The REST import's dependency closure (docs/23 §D.43): the sets the
+     *  caller requested, the same-file sets followed from their instances,
+     *  and every reference that could not be followed with its reason.
+     *  Absent when no closure ran (`--no-closure`, plugin dumps, fixtures). */
+    closure?: import('./rest/closure.js').DumpClosure;
   };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean).

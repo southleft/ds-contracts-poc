@@ -20,8 +20,12 @@ import type { DumpNode, DumpSet } from './types.js';
 type Sides = { top?: unknown; right?: unknown; bottom?: unknown; left?: unknown };
 type HeaderSpec = { sides?: Sides; strokeWeight?: number; type?: string; strokes?: boolean };
 const SOLID = (r: number, g: number, b: number) => [{ type: 'SOLID', color: { r, g, b, a: 1 } }];
+// `strokesIncludedInLayout: true` — this file is about WHICH SIDES draw, on a rule
+// that occupies layout (a CSS border). REST omits the field when it is false, and
+// since dump v1.35 that absence is the fact "the stroke takes no layout space",
+// which the emitters draw as an inset ring instead (stroke-outside-layout.test.ts).
 const restHeader = (id: string, spec: HeaderSpec) => ({ id, name: 'header', type: spec.type ?? 'FRAME', layoutMode: 'HORIZONTAL',
-  absoluteBoundingBox: { x: 0, y: 0, width: 200, height: 40 }, strokeAlign: 'INSIDE',
+  absoluteBoundingBox: { x: 0, y: 0, width: 200, height: 40 }, strokeAlign: 'INSIDE', strokesIncludedInLayout: true,
   ...(spec.strokes === false ? {} : { strokes: SOLID(0.2, 0.2, 0.2) }),
   ...(spec.strokeWeight !== undefined ? { strokeWeight: spec.strokeWeight } : {}),
   ...(spec.sides ? { individualStrokeWeights: spec.sides } : {}), children: [] });
@@ -43,7 +47,7 @@ const stripWeights = (n: DumpNode) => { const { strokeWeight: _w, strokeWeights:
 test('the REST reader carries sides [1, 0, 1, 0] as strokeWeights, writes no uniform weight beside them, and names nothing', () => {
   // `strokeWeight: 0` is what Figma REST really reports for these sides.
   const { headers, receipts, provenance } = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }, { sides: HEADER_RULE, strokeWeight: 0 }]);
-  assert.equal(provenance.dumpVersion, '1.34');
+  assert.equal(provenance.dumpVersion, '1.36');
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, HEADER_RULE]);
   assert.deepEqual(headers.map(h => 'strokeWeight' in h), [false, false], 'one stroke, one spelling — the reported 0 is not a drawn fact');
   assert.deepEqual(receipts, []);
@@ -89,7 +93,7 @@ test('the plugin reader carries the same field from strokeTopWeight…strokeLeft
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RuledTabs'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string }; _degradations: Array<{ code: string; nodePath: string }> };
-  assert.equal(dumps._provenance.dumpVersion, '1.34');
+  assert.equal(dumps._provenance.dumpVersion, '1.36');
   // The dump was built in the VM's realm; copy the values into this one.
   const headers = Array.from(dumps.RuledTabs.variants, v => JSON.parse(JSON.stringify(v.children![0])) as DumpNode);
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, undefined, undefined]);

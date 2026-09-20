@@ -1,0 +1,260 @@
+{
+  "imported": {
+    "checkbox": {
+      "al-c-checkbox-container": {
+        "gap": {
+          "$value": "4px",
+          "$type": "dimension"
+        }
+      },
+      "al-c-checkbox-container-al-c-checkbox-checkbox": {
+        "background-color": {
+          "$value": "#00000000",
+          "$type": "color"
+        }
+      },
+      "al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring": {
+        "border-color": {
+          "$value": "#8ea6ff",
+          "$type": "color"
+        }
+      },
+      "al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check": {
+        "background-color": {
+          "indeterminate": {
+            "$value": "#8ea6ff",
+            "$type": "color"
+          },
+          "off": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "on": {
+            "$value": "#8ea6ff",
+            "$type": "color"
+          }
+        },
+        "border-color": {
+          "default": {
+            "indeterminate": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            },
+            "off": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            }
+          },
+          "disabled": {
+            "indeterminate": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            },
+            "off": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            }
+          },
+          "focus": {
+            "indeterminate": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            },
+            "off": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            }
+          },
+          "hover": {
+            "indeterminate": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            },
+            "off": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#8ea6ff",
+              "$type": "color"
+            }
+          },
+          "error": {
+            "off": {
+              "$value": "#ff6d76",
+              "$type": "color"
+            },
+            "indeterminate": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            },
+            "on": {
+              "$value": "#f1f0ea",
+              "$type": "color"
+            }
+          }
+        },
+        "border-radius": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "opacity": {
+          "default": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "disabled": {
+            "$value": "0.4",
+            "$type": "number"
+          },
+          "focus": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "hover": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "error": {
+            "$value": "1",
+            "$type": "number"
+          }
+        }
+      },
+      "al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-frame-vector": {
+        "background-color": {
+          "$value": "#0e1834",
+          "$type": "color"
+        }
+      },
+      "al-c-checkbox-container-al-c-checkbox-label-label": {
+        "color": {
+          "$value": "#f1f0ea",
+          "$type": "color"
+        }
+      }
+    },
+    "shared": {
+      "size-2": {
+        "$value": "2px",
+        "$type": "dimension"
+      }
+    },
+    "text": {
+      "typography-body-sm-regular": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/sm/regular",
+                "key": "363062b14d2a18d5e410d0e2170dce9f374105b9"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/sm/regular",
+                "key": "363062b14d2a18d5e410d0e2170dce9f374105b9"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "typography/body/sm/regular",
+                "key": "363062b14d2a18d5e410d0e2170dce9f374105b9"
+              }
+            }
+          }
+        }
+      }
+    },
+    "field-note": {
+      "helper-text": {
+        "color": {
+          "default": {
+            "$value": "#a5a399",
+            "$type": "color"
+          },
+          "error": {
+            "$value": "#ff6d76",
+            "$type": "color"
+          },
+          "disabled": {
+            "$value": "#a5a399",
+            "$type": "color"
+          }
+        },
+        "opacity": {
+          "default": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "error": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "disabled": {
+            "$value": "0.4",
+            "$type": "number"
+          }
+        }
+      },
+      "root": {
+        "width": {
+          "$value": "84px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "checkbox-group": {
+      "root": {
+        "gap": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      },
+      "label": {
+        "color": {
+          "$value": "#a5a399",
+          "$type": "color"
+        }
+      },
+      "al-layout-set-unresolved": {
+        "gap": {
+          "column": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "row": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  }
+}
