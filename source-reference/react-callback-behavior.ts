@@ -40,6 +40,10 @@ export interface ReactCallbackBehavior {
     status: "controlled-observed" | "initial-only-observed" | "unresolved";
     reason: string;
   }>;
+  /** Restored, unobservable alternatives remain failures. Keeping their
+   * identity lets later independent inputs be inspected without qualifying an
+   * incomplete sweep or mistaking a partial trial for a relationship. */
+  refusals?: Array<{ callback: string; property: string; value: Scalar; problem: string }>;
   problems: string[];
 }
 /** Exercise semantic checked-state toggles (checkbox, switch) by their observed
@@ -191,70 +195,97 @@ export async function observeReactCallbackBehavior(input: {
               name === property ? { kind: "set", value } : { kind: "omit" },
             ]),
           );
-          const live = await probeReactProperties(
-            page,
-            selector,
-            program,
-            instanceId,
-            changes,
-            read,
-          );
-          if (!live.ownershipRestored)
-            throw Error("callback-live-ownership-not-restored");
-          await input.assertRestored();
-          for (const action of ["space", "associated-label"] as const) {
-            const trial = await probeReactInitialProperties(
+          const rows: ReactCallbackBehavior["rows"] = [];
+          let refusal: string | undefined;
+          try {
+            const live = await probeReactProperties(
               page,
               selector,
               program,
               instanceId,
               changes,
-              async (phase, callback) => {
-                await settle();
-                const initial = await read();
-                const steps: ReactCallbackBehavior["rows"][number]["steps"] =
-                  [];
-                if (phase === "changed") {
-                  const mounting = await callback();
-                  if (mounting.calls.length || mounting.problems.length)
-                    throw Error("callback-fired-before-activation");
-                  for (let count = 0; count < 2; count++) {
-                    await activate(action, initial.disabled);
-                    steps.push({
-                      control: await read(),
-                      callback: await callback(),
-                    });
-                  }
-                }
-                return { initial, steps };
-              },
-              candidate.callback,
+              read,
             );
-            if (!trial.ownershipRestored)
-              throw Error("callback-initial-ownership-not-restored");
+            if (!live.ownershipRestored)
+              throw Error("callback-live-ownership-not-restored");
+            await input.assertRestored();
+            for (const action of ["space", "associated-label"] as const) {
+              const trial = await probeReactInitialProperties(
+                page,
+                selector,
+                program,
+                instanceId,
+                changes,
+                async (phase, callback) => {
+                  await settle();
+                  const initial = await read();
+                  const steps: ReactCallbackBehavior["rows"][number]["steps"] =
+                    [];
+                  if (phase === "changed") {
+                    const mounting = await callback();
+                    if (mounting.calls.length || mounting.problems.length)
+                      throw Error("callback-fired-before-activation");
+                    for (let count = 0; count < 2; count++) {
+                      await activate(action, initial.disabled);
+                      steps.push({
+                        control: await read(),
+                        callback: await callback(),
+                      });
+                    }
+                  }
+                  return { initial, steps };
+                },
+                candidate.callback,
+              );
+              if (!trial.ownershipRestored)
+                throw Error("callback-initial-ownership-not-restored");
+              await input.assertRestored();
+              input.assertCurrent();
+              rows.push({
+                callback: candidate.callback,
+                property,
+                value,
+                action,
+                ...trial.changed,
+                live: live.changed,
+                restored: true,
+              });
+              if (
+                trial.changed.initial.disabled &&
+                trial.changed.steps.some(
+                  (step) =>
+                    !step.control.disabled ||
+                    step.control.checked !== trial.changed.initial.checked ||
+                    step.callback.calls.length ||
+                    step.callback.problems.length,
+                )
+              )
+                throw Error("callback-disabled-activation-not-suppressed");
+            }
+          } catch (error) {
+            const problem = error instanceof Error ? error.message : String(error);
+            // These are bounded observation failures, not identity, role,
+            // instrument or restoration failures. Every refusal still keeps
+            // the complete observation and contract projection unqualified.
+            if (![
+              'react-property-probe-render-unqualified:react-ownership-selected-root-missing',
+              'react-initial-probe-render-unqualified:react-ownership-selected-root-missing',
+              'callback-focus-mismatch',
+            ].includes(problem)) throw error;
+            refusal = problem;
+          }
+          if (refusal) {
+            input.assertCurrent();
+            const pending = await page.evaluate(() =>
+              (window as any).__DSC_REACT_OWNERSHIP?.propertyProbes?.size);
+            if (pending !== 0) throw Error('callback-refused-probe-not-restored');
+            // Do not reset away an uncertain state: the host independently
+            // checks original render/ownership before replaying the source.
             await input.assertRestored();
             input.assertCurrent();
-            result.rows.push({
-              callback: candidate.callback,
-              property,
-              value,
-              action,
-              ...trial.changed,
-              live: live.changed,
-              restored: true,
-            });
-            if (
-              trial.changed.initial.disabled &&
-              trial.changed.steps.some(
-                (step) =>
-                  !step.control.disabled ||
-                  step.control.checked !== trial.changed.initial.checked ||
-                  step.callback.calls.length ||
-                  step.callback.problems.length,
-              )
-            )
-              throw Error("callback-disabled-activation-not-suppressed");
-          }
+            (result.refusals ??= []).push({ callback: candidate.callback, property, value, problem: refusal });
+            result.problems.push(refusal);
+          } else result.rows.push(...rows);
         }
       for (const property of candidate.stateProperties) {
         const rows = result.rows.filter(

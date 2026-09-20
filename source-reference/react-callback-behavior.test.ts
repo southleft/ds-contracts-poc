@@ -228,16 +228,18 @@ for (const nested of [false, true]) test(`original ${nested ? 'nested' : 'root'}
 
 /** The observed role decides the class, never the export name: this fixture's
  * export is called Checkbox and renders a switch. */
-async function observeRole(role: string, partial: boolean, roleExpression = JSON.stringify(role)) {
+async function observeRole(role: string, partial: boolean, roleExpression = JSON.stringify(role),
+  options: { missing?: 'live' | 'initial' | 'focus'; failRestoration?: boolean } = {}) {
   mkdirSync("private", { recursive: true });
   const dir = mkdtempSync(path.join(process.cwd(), "private/callback-role-fixture-"));
   const browser = await chromium.launch();
   try {
     const source = `import React from 'react';
   type State=${partial ? "false|true|'partial'" : "false|true"};
-  export function Checkbox({value,initialValue=false,emit}:{value?:State;initialValue?:State;emit?:(value:State)=>void}){
+  export function Checkbox({value,initialValue=false,emit${options.missing ? ',absent=false' : ''}}:{value?:State;initialValue?:State;emit?:(value:State)=>void${options.missing ? ';absent?:State' : ''}}){
    const [local,setLocal]=React.useState<State>(initialValue);const current=value===undefined?local:value;
-   return <button id="control" type="button" role={${roleExpression}} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
+   ${options.missing && options.missing !== 'focus' ? `const [initialAbsent]=React.useState(absent);if(${options.missing === 'initial' ? 'initialAbsent' : 'absent'}){(window as any).__missingTrial=true;return null;}` : ''}
+   return <button id="control" type="button" ${options.missing === 'focus' ? 'inert={absent===true}' : ''} role={${roleExpression}} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
     const next=current===true?false:true;if(value===undefined)setLocal(next);emit?.(next);
    }}>Choose</button>;
   }`;
@@ -259,8 +261,15 @@ async function observeRole(role: string, partial: boolean, roleExpression = JSON
     await page.addScriptTag({ content: bundle.outputFiles[0].text });
     const ownership = (await page.evaluate(reactOwnershipRead("#control"))) as ReactOwnership;
     assert.deepEqual(ownership.problems, []);
+    const original = await page.locator('#mount').innerHTML();
     return await observeReactCallbackBehavior({ page, selector: "#control", program, ownership,
-      instanceId: ownership.components[0].id, assertRestored: async () => {}, assertCurrent: () => {} });
+      instanceId: ownership.components[0].id, assertRestored: async () => {
+        assert.equal(await page.locator('#mount').innerHTML(), original);
+        assert.deepEqual(await page.evaluate(reactOwnershipRead('#control')), ownership);
+        assert.equal(await page.evaluate(() => (window as any).__DSC_REACT_OWNERSHIP.propertyProbes.size), 0);
+        if (options.failRestoration && await page.evaluate(() => (window as any).__missingTrial))
+          throw Error('fixture-restoration-refused');
+      }, assertCurrent: () => {} });
   } finally {
     await browser.close();
     rmSync(dir, { recursive: true, force: true });
@@ -287,4 +296,25 @@ test("a switch is observed by its role like a checkbox; a mixed switch and roles
   assert.deepEqual(changing.problems, ["callback-control-role-changed"]);
   assert.equal(changing.role, "switch");
   assert.deepEqual(changing.relationships, []);
+});
+
+for (const missing of ['live', 'initial', 'focus'] as const)
+test(`an unavailable control during the ${missing} trial remains refused while restored independent inputs are inspected`, async () => {
+  const observed = await observeRole('switch', false, '"switch"', { missing });
+  const problem = missing === 'focus' ? 'callback-focus-mismatch' : `react-${missing === 'live' ? 'property' : 'initial'}-probe-render-unqualified:react-ownership-selected-root-missing`;
+  assert.deepEqual(observed.problems, [problem], 'the whole observation stays unqualified');
+  assert.deepEqual(observed.refusals, [{ callback: 'emit', property: 'absent', value: true, problem }]);
+  assert.equal(observed.rows.length, 10);
+  assert(!observed.rows.some(row => row.property === 'absent' && row.value === true), 'a partial trial contributes no relationship rows');
+  assert.deepEqual(observed.relationships.map(row => [row.property, row.status]), [
+    ['absent', 'unresolved'], ['initialValue', 'initial-only-observed'], ['value', 'controlled-observed'],
+  ]);
+});
+
+test('a host restoration refusal stops the sweep before any later independent input', async () => {
+  const observed = await observeRole('switch', false, '"switch"', { missing: 'live', failRestoration: true });
+  assert.deepEqual(observed.problems, ['fixture-restoration-refused']);
+  assert.equal(observed.refusals, undefined, 'an uncertain restoration is not recorded as a recovered refusal');
+  assert(observed.rows.every(row => row.property === 'absent' && row.value === false));
+  assert.deepEqual(observed.relationships, []);
 });
