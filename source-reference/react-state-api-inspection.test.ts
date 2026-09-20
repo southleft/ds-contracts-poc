@@ -7,13 +7,18 @@ import { randomUUID } from 'node:crypto';
 import { revisionOf } from '../core/contract-provenance.js';
 import { stateApiEvidence, stateApiObservation } from './react-state-api-fixture.js';
 import { planReactStateApi } from './react-state-api.js';
-import { readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
+import { readReactStateApiNativeRecord, readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 
 function fixture() {
   const root = mkdtempSync(path.join(tmpdir(), 'state-api-record-')), id = randomUUID(), dir = path.join(root, id);
   const source = path.join(root, 'source.tsx'); mkdirSync(dir); writeFileSync(source, 'source');
-  const { initial, behavior } = stateApiEvidence(), plan = planReactStateApi(initial, behavior), hash = 'a'.repeat(64);
+  const { initial, behavior } = stateApiEvidence();
+  for(const row of behavior.observation!.rows)row.callback='onNotify';
+  for(const row of behavior.observation!.relationships)row.callback='onNotify';
+  for(const row of behavior.observation!.candidates)row.callback='onNotify';
+  for(const row of behavior.observation!.refusals!)row.callback='onNotify';
+  const plan = planReactStateApi(initial, behavior), hash = 'a'.repeat(64);
   const request: ReactStateApiRequest = { version: 1, source: { version: 1, caseId: plan.caseId, anchor: {
     version: 1, kind: 'react-root-draft', caseId: plan.caseId, referenceId: hash, ownership: { id: randomUUID(), sha256: hash },
     inventorySha256: hash, matrixRevision: 'sha256:' + hash,
@@ -69,4 +74,21 @@ test('a producer cannot qualify duplicate trials, corrupted callback history, mi
       assert.throws(() => readReactStateApiInspection(f.root, f.request), /state-api-/);
     } finally { rmSync(f.root, { recursive: true, force: true }); }
   }
+});
+
+
+test('a native pin names the sealed state and appearance records and refuses failed or corrupted observations',()=>{
+  const f=fixture();
+  try {
+    const result=readReactStateApiNativeRecord(f.root,f.request);
+    assert.equal(result.pin.id,f.report.id);assert.equal(result.pin.key,revisionOf(f.request).slice(7));
+    assert.equal(result.pin.reportSha256,evidenceSha(readFileSync(path.join(f.dir,'report.json'))));
+    assert.equal(result.initialDraftRevision,revisionOf(f.initial.draft));assert.equal(result.draft.status,'generated-draft');
+    assert.deepEqual(readReactStateApiNativeRecord(f.root,f.request),result);
+    f.report.phase='failed';f.report.problems=['candidate-refused'];f.save('report.json',f.report);f.seal();
+    assert.throws(()=>readReactStateApiNativeRecord(f.root,f.request),/native-observation-required/);
+    f.report.phase='complete';f.report.problems=[];f.save('report.json',f.report);f.seal();
+    f.initial.draft!.compiled!.contract!.props[0].bindings.code.prop='substituted';f.save('initial-input.json',f.initial);
+    assert.throws(()=>readReactStateApiNativeRecord(f.root,f.request),/evidence-changed/);
+  }finally{rmSync(f.root,{recursive:true,force:true})}
 });

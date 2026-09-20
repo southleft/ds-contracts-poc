@@ -168,6 +168,9 @@ test("reference API retains all ten cases, isolates source execution and refuses
     assert.equal((await fetch(stateApiUrl, {method:'POST'})).status,409,'a loaded reference cannot replace authenticated state evidence');
     assert.equal((await fetch(stateApiUrl + '/preview')).status,409);
     assert.equal((await fetch(stateApiUrl + '/preview',{method:'POST',body:'{}'})).status,400);
+    const stateNativeUrl=base+`/react/${reference.id}/native-state-api/checkbox-unchecked`;
+    for(const init of [{method:'POST'},{method:'POST',body:JSON.stringify({contract:{},fileKey:'other'})}])
+      assert.equal((await fetch(stateNativeUrl,init)).status,409,'no sealed state evidence means no native operation');
     const callbackUrl = base + `/react/${reference.id}/callback-behavior/checkbox-unchecked`;
     assert.equal((await fetch(callbackUrl, {method:'POST',body:JSON.stringify({sourceRoot:'/etc',callback:'arbitrary'})})).status,400);
     assert.equal((await fetch(callbackUrl, {method:'DELETE'})).status,409);

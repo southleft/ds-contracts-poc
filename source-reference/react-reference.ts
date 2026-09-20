@@ -1,3 +1,4 @@
+import {isReactStateApiNativeRequest,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
@@ -289,6 +290,18 @@ export function createReactReferenceService(
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
   };
+  const thisStateApiEvidence = (request:ReactStateApiNativeRequest) => {
+    if(!reference||!isReactStateApiNativeRequest(request)||request.initial.anchor.referenceId!==reference.id)throw Error('state-api-native-reference-unavailable');
+    const evidence=stateApi.nativeEvidence(reference.id,request.initial.caseId,request.observation);
+    const initial=thisInitialEvidence(request.initial),compiled=initial.draft.compiled!;
+    if(evidence.initialObservation!==request.initial.observation.id||evidence.initialDraftRevision!==revisionOf(initial.draft))
+      throw Error('state-api-native-initial-evidence-changed');
+    return {source:initial.source,request,draft:evidence.draft,tokens:compiled.tokens!,assets:compiled.assets??[]};
+  };
+  const initialRequestForOperation = (id:string) => {
+    try { return native!().jobs.reactInitialRequest(id); }
+    catch { return native!().jobs.reactStateApiRequest(id).initial; }
+  };
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -486,7 +499,7 @@ export function createReactReferenceService(
       try {
         if (!native || !reference || reference.id !== matchedReview[1] || !reactReferenceUnchanged(reference)) throw Error('matched-review-source-unavailable');
         let request;
-        try { request = native().jobs.reactInitialRequest(matchedReview[2]); }
+        try { request = initialRequestForOperation(matchedReview[2]); }
         catch { request = native().jobs.reactSourceRequest(matchedReview[2]); }
         if ((request.kind === 'react-initial-draft' ? request.anchor.referenceId : request.referenceId) !== reference.id) throw Error('matched-review-reference-mismatch');
         json(res, 200, { measurement: readRecordedNativeMeasurement(repoRoot, matchedReview[2], request) });
@@ -497,7 +510,7 @@ export function createReactReferenceService(
     if (initialImage && req.method === 'GET') {
       try {
         if (!native || !reference || reference.id !== initialImage[1]) throw Error('react-initial-reference-unavailable');
-        const bytes = initialStates.nativeImage(reference, native().jobs.reactInitialRequest(initialImage[2]), initialImage[3]);
+        const bytes = initialStates.nativeImage(reference, initialRequestForOperation(initialImage[2]), initialImage[3]);
         res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
       } catch { json(res, 409, { error: 'Pinned original state image unavailable or changed.' }); }
       return;
@@ -522,6 +535,7 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Original source image unavailable or changed.' }); }
       return;
     }
+    const stateApiNativeRoute = /^react\/([a-f0-9]{64})\/native-state-api\/([a-z-]+)$/.exec(route);
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
@@ -529,9 +543,9 @@ export function createReactReferenceService(
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|attest-dead|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
-    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
+    if (nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? stateApiNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
         if (updateImage) {
           const { updateJobs }=native();
@@ -595,6 +609,10 @@ export function createReactReferenceService(
             if(action==='rearm-write') updateTransport.rearmWrite(update.id);
             if(action==='attest-dead') updateTransport.attestDead(update.id);
             if(action==='observe-design') updateTransport.observeDesign(update.id);
+          } else if (stateApiNativeRoute) {
+            const caseId=stateApiNativeRoute[2],initial=initialStates.nativeRequest(reference.id,caseId);
+            const request:ReactStateApiNativeRequest={version:1,kind:'react-state-api-draft',initial,observation:stateApi.nativePin(reference.id,caseId)};
+            thisStateApiEvidence(request);jobs.prepare(request);
           } else if (initialNativeRoute) {
             jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
           } else if (nativeRoute?.[2]) {
@@ -682,10 +700,10 @@ export function createReactReferenceService(
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
-          if (row.kind === 'initial') {
+          if (row.kind === 'initial' || row.kind === 'state-api') {
             // A corrected compiler plan differs from creation without changing
             // its pinned source archive. Authenticate that archive separately.
-            try { const evidence = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id));
+            try { const evidence = thisInitialEvidence(initialRequestForOperation(row.operation.id));
               initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
             catch { /* Image endpoints independently refuse unavailable source. */ }
           }
@@ -1107,6 +1125,7 @@ export function createReactReferenceService(
       return readReactNativeEvidence(repoRoot, reference, request);
     },
     callerNativeEvidence,
+    stateApiNativeEvidence:thisStateApiEvidence,
     close() {
       for (const job of validations.values()) job.close();
       for (const job of ownershipJobs.values()) job.close();

@@ -1,3 +1,4 @@
+import type { ReactStateApiNativePin } from './react-state-api-native-request.js';
 import type { ReactBehaviorContract } from './react-behavior-contract.js';
 import { projectReactStateApiContract } from './react-state-api-contract.js';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
@@ -75,6 +76,18 @@ export function readReactStateApiInspection(root: string, request: ReactStateApi
   return report;
 }
 
+export function readReactStateApiNativeRecord(root:string,request:ReactStateApiRequest) {
+  const report=readReactStateApiInspection(root,request);
+  if(report?.phase!=='complete')throw Error('state-api-native-observation-required');
+  const latest=JSON.parse(readFileSync(path.join(root,'latest.json'),'utf8'));
+  const pin:ReactStateApiNativePin={key:revisionOf(request).slice(7),id:report.id,inventorySha256:latest.inventorySha256,
+    reportSha256:evidenceSha(readFileSync(path.join(root,report.id,'report.json')))};
+  const initial=JSON.parse(readFileSync(path.join(root,report.id,'initial-input.json'),'utf8')) as ReactInitialInspection;
+  const draft=projectReactStateApiContract(initial,report);
+  if(draft.status!=='generated-draft')throw Error('state-api-native-projection-refused');
+  return {pin,draft,initialObservation:report.plan.initialObservation,initialDraftRevision:revisionOf(initial.draft)};
+}
+
 /** This writes a separate immutable experiment. It never changes the earlier
  * callback/initial records or a Figma operation, and a repeated completed
  * request reuses its sealed result without running another experiment. */
@@ -97,7 +110,18 @@ export function createReactStateApiInspectionStore(
     const key = revisionOf(request).slice(7), root = path.join(repo, 'private/react-state-api-inspections', key);
     return { reference, source, saved, request, key, root };
   };
+  const nativeRecord = (referenceId: string, caseId: string) => {
+    const value=input(referenceId,caseId);
+    if(active.has(value.key))throw Error('state-api-native-observation-running');
+    return readReactStateApiNativeRecord(value.root,value.request);
+  };
   return {
+    nativePin(referenceId: string, caseId: string) { return nativeRecord(referenceId,caseId).pin; },
+    nativeEvidence(referenceId: string, caseId: string, pin:ReactStateApiNativePin) {
+      const current=nativeRecord(referenceId,caseId);
+      if(revisionOf(current.pin)!==revisionOf(pin))throw Error('state-api-native-observation-changed');
+      return current;
+    },
     read(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId);
       const report = structuredClone(active.get(value.key)?.state ?? readReactStateApiInspection(value.root, value.request) ?? null);

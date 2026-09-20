@@ -1,3 +1,4 @@
+import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { createNativeSourceSuccessions } from './native-source-succession.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
@@ -132,6 +133,13 @@ export function createReferenceService(
   const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactStateApi: {
+        prepare:(request,operation)=>({visual:{id:request.initial.anchor.ownership.id,reportSha256:request.initial.anchor.ownership.sha256},
+          preparation:{id:request.observation.id,reportSha256:request.observation.reportSha256},
+          plan:prepareReactStateApiNativePlan({...reactReference.stateApiNativeEvidence(request),operation})}),
+        buildComponent:(request,context)=>buildReactStateApiNativeWrite({...reactReference.stateApiNativeEvidence(request),operation:context.operation,
+          tokensContext:context.tokens,expectedPlanRevision:context.planRevision}),
+      },
       reactInitial: {
         prepare: (request, operation) => ({
           visual: { id: request.anchor.ownership.id, reportSha256: request.anchor.ownership.sha256 },
