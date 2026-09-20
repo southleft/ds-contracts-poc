@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -38,6 +38,8 @@ import {
   type ExactProjectionResult,
   type ExactVariantRow,
 } from './exact-projection.js';
+import { validateContract } from '../packages/core/src/validate.js';
+import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
 // Shared spellings
@@ -434,6 +436,56 @@ function fenceSparseInference(
   }
 }
 
+/** Stable refusal code: exact mode proposed a contract that this repository's
+ *  own referee (`validateContract`) refuses. */
+export const PROPOSAL_REFUSED_BY_REFEREE = 'proposal-refused-by-referee' as const;
+
+/** EXACT MODE NEVER RETURNS A CONTRACT ITS OWN REFEREE REFUSES (docs/23 §D.41,
+ *  review PR 131 H1). `verified-exact` is a statement about the variant
+ *  matrix; it used to be returned for a contract `validateContract` /
+ *  `emitReact` throw on (two props named `disabled`, both bound to the same
+ *  design property). The referee now runs on every exact proposal that
+ *  projects a designer's state axis (the scope is argued at the call site) and
+ *  that it CAN judge — one whose component refs all resolve inside the proposal itself
+ *  (the contract and its own auto-proposed stubs): linked children in scope are
+ *  slices (`MinimalChildContract`), not contracts, so a proposal that links one
+ *  is not judged here and `generate` remains its referee. */
+export class ProposalRefereeError extends Error {
+  readonly code = PROPOSAL_REFUSED_BY_REFEREE;
+  readonly violations: readonly string[];
+  constructor(setName: string, violations: readonly string[]) {
+    super(
+      `${PROPOSAL_REFUSED_BY_REFEREE}: "${setName}" proposes a contract that validateContract refuses (${violations.length} violation(s)) — ${violations.slice(0, 4).join(' | ')}${violations.length > 4 ? ` | … ${violations.length - 4} more` : ''}. Exact mode returns no contract its own referee would refuse; --reviewable-inversion proposes it for review`,
+    );
+    this.name = 'ProposalRefereeError';
+    this.violations = violations;
+  }
+}
+
+/** A Map that owns every icon name: the proposer never sees the icon corpus,
+ *  so an icon it cannot check is not a violation it can name. */
+class EveryIcon extends Map<string, string> {
+  override has(): boolean {
+    return true;
+  }
+}
+
+function refereeViolations(contract: Contract, stubs: readonly Contract[]): string[] | null {
+  const scope = new Map<string, Contract>([[contract.id, contract], ...stubs.map((s) => [s.id, s] as const)]);
+  let selfContained = true;
+  const walk = (node: unknown): void => {
+    if (node === null || typeof node !== 'object') return;
+    const ref = (node as { component?: { id?: unknown } }).component;
+    if (ref && typeof ref === 'object' && typeof ref.id === 'string' && !scope.has(ref.id)) selfContained = false;
+    for (const v of Object.values(node as Record<string, unknown>)) walk(v);
+  };
+  walk(contract.anatomy);
+  if (!selfContained) return null;
+  const errors: string[] = [];
+  validateContract(contract, scope, errors, new EveryIcon());
+  return errors;
+}
+
 function parseAxes(variantNames: string[]): Axis[] {
   const axes: Axis[] = [];
   for (const name of variantNames) {
@@ -515,16 +567,9 @@ const isBoolAxis = (options: string[]): boolean => {
 // spellings, and the rename is DOCUMENTED in a note, never silent.
 // ---------------------------------------------------------------------------
 
-const INTERACTION_STATE_BY_VALUE: Record<string, 'default' | 'hover' | 'active' | 'focus-visible' | 'disabled'> = {
-  default: 'default',
-  hover: 'hover',
-  active: 'active',
-  pressed: 'active',
-  focus: 'focus-visible',
-  'focus-visible': 'focus-visible',
-  disabled: 'disabled',
-};
-const normStateValue = (v: string) => v.trim().toLowerCase().replace(/[\s_]+/g, '-');
+// The closed value table (INTERACTION_STATE_BY_VALUE, normStateValue) lives in
+// core/interaction-state-axis.ts — ONE table for this projection and for the
+// harnesses that mount a state-axis variant (docs/23 §D.41).
 
 type PromotedState = 'hover' | 'active' | 'focus-visible';
 
@@ -1292,6 +1337,10 @@ export interface FigmaProposalResult {
    *  plain stamped/name-derived one. proposeBatchFromDump names the
    *  collision at batch level when the holder is a sibling set. */
   idSuffixedFrom?: string;
+  /** The NAMED DECISION that projected a designer's interaction-state variant
+   *  axis onto the contract's state vocabulary (docs/23 §D.41). Present only
+   *  when that happened; the same facts are spelled in `notes`. */
+  stateAxisProjection?: DesignerStateAxisProjection;
 }
 
 export type ExactProposalRefusalCode =
@@ -1435,13 +1484,63 @@ const semanticProjectionRefusal = (
   projection: ExactProjectionResult,
   axis: Axis,
   semanticKind: 'interaction-state' | 'token-mode',
+  /** `<slug>: <what stopped it>` — the named condition (docs/23 §D.41). The
+   *  leading sentence is the one every existing receipt quotes, unchanged. */
+  why?: string,
 ): never => {
   throw new ExactProjectionError(
     'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS',
-    `Exact proposal cannot promote variant axis ${JSON.stringify(axis.property)} to ${semanticKind} semantics because that changes the authoritative Figma variant projection.`,
+    `Exact proposal cannot promote variant axis ${JSON.stringify(axis.property)} to ${semanticKind} semantics because that changes the authoritative Figma variant projection.${why ? ` ${why}` : ''}`,
     projection,
   );
 };
+
+/** Every prop-to-be of the set that already SPELLS "disabled" — a variant axis
+ *  or a BOOLEAN component property whose prop name or Figma property
+ *  normalises to `disabled` / `isdisabled` (case, spaces, `-`, `_`, the
+ *  `#id` suffix ignored). Read where a state axis's Disabled value would become
+ *  the `disabled` boolean (§D.41, PR 131 H1). */
+function disabledSpellings(ctx: { axes: Axis[]; boolProps: Array<{ name: string; property: string }> }): string[] {
+  const token = (s: string) => ['disabled', 'isdisabled'].includes(s.split('#')[0]!.toLowerCase().replace(/[^a-z0-9]/g, ''));
+  return [
+    ...ctx.axes.filter((a) => token(a.property) || token(a.propName)).map((a) => `VARIANT "${a.property}"`),
+    ...ctx.boolProps.filter((b) => token(b.property) || token(b.name)).map((b) => `BOOLEAN "${b.property}"`),
+  ];
+}
+
+/** A DESIGNER's interaction-state axis, projected (docs/23 §D.41). Read from
+ *  the SOURCE set by the closed table in core/interaction-state-axis.ts; it is
+ *  the descriptor the exact projection rebuilds the source matrix from — the
+ *  proposed contract's own VARIANT axes × these values, minus the state cells
+ *  the designer did not draw — and the named decision the proposal carries. */
+export interface DesignerStateAxisProjection {
+  /** The stable name of the decision. */
+  decision: 'designer-state-axis-projected';
+  /** The Figma variant property, in the designer's spelling. */
+  property: string;
+  /** The Figma value that is the rest state (the base every state is read against). */
+  restValue: string;
+  /** Figma value → contract state, in the axis's own order. `carried` is
+   *  filled once the proposal is built: false = the state's drawing produced
+   *  no override the vocabulary carries (named in the notes). The rest value
+   *  is always carried (it is the base); a `disabled` value always becomes the
+   *  `disabled` boolean prop, and `carried` says whether its STATE BLOCK did. */
+  values: Array<{ value: string; state: InteractionState; carried: boolean }>;
+  /** Complete Figma tuples (state property included) that are undrawn in a
+   *  NON-rest state while their rest-state cell IS drawn. Not a contract
+   *  absence — no prop combination is missing — so they live here, not in
+   *  `bindings.figma.absentVariants`. */
+  undrawnStateCells: Array<Record<string, string>>;
+  /** WRITE-BACK IS NOT THE DESIGNER'S MATRIX, and says so every time (review,
+   *  PR 131 H3). The contract vocabulary carries neither the designer's state
+   *  spelling nor the state cells they left undrawn, so regenerating the canvas
+   *  from this contract draws the WRITER's matrix: its own preview axis, one
+   *  row per carried state per value of one primary axis, every other axis
+   *  pinned. Computed by the writer's own rule, in the DESIGNER's spelling:
+   *  `completes` = cells it draws that the designer did not; `omits` = cells
+   *  the designer drew that it does not. Filled once the contract is built. */
+  writeBack: { draws: number; completes: Array<Record<string, string>>; omits: Array<Record<string, string>> };
+}
 
 /** The declaration of a set THIS PIPELINE drew: the stamped contract's own
  *  `bindings.figma.absentVariants`, translated into Figma terms through that
@@ -1536,6 +1635,8 @@ function exactRowsFromProposedContract(
     primary: string | null;
     pinned: Readonly<Record<string, string>>;
   } | null,
+  /** A designer's projected interaction-state axis (docs/23 §D.41). */
+  designerStateAxis?: DesignerStateAxisProjection | null,
 ): ExactVariantRow[] {
   const props = Array.isArray(contract.props) ? contract.props : [];
   const axes: Array<{ property: string; values: string[] }> = [];
@@ -1596,6 +1697,43 @@ function exactRowsFromProposedContract(
       if (resolved) absentCells.add(cell(figmaTuple));
     }
     tuples = tuples.filter((t) => !absentCells.has(cell(t)));
+  }
+
+  // A DESIGNER's projected interaction-state axis (docs/23 §D.41): the axis
+  // left the API by the closed table, so the source matrix is the contract's
+  // own VARIANT cells (already minus its declared absences) × THE STATES THE
+  // CONTRACT CARRIES, minus the state cells the designer did not draw.
+  //
+  // BOTH halves are read from the CONTRACT (review, PR 131 C1). The first cut
+  // took the state half from the decision — i.e. from the source — so it
+  // agreed with the source by construction: CBDS Checkbox-icon read
+  // verified-exact at 42 rows while its contract carried only focus-visible,
+  // 18 of the 42 (hover 12, disabled 6) in states the contract does not have.
+  // A state plane is a row of the returned matrix only when `contract.states`
+  // declares that state (validateContract makes a declared state carry at
+  // least one override) — and `disabled` additionally only while the contract
+  // really has the `disabled` boolean the table says it becomes. The decision
+  // supplies nothing but the designer's SPELLING of those states (which the
+  // contract vocabulary does not carry) and the undrawn state cells.
+  if (designerStateAxis) {
+    const d = designerStateAxis;
+    const cameBackAsProp = axes.some((a) => a.property === d.property);
+    const hasDisabledProp = props.some(
+      (p) => p !== null && typeof p === 'object' && (p as { name?: unknown; type?: unknown }).name === 'disabled' && (p as { type?: unknown }).type === 'boolean',
+    );
+    const contractCarries = new Set(
+      Array.isArray(contract.states) ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string') : [],
+    );
+    if (!cameBackAsProp) {
+      const order = [...axes.map((a) => a.property), d.property];
+      const cellOf = (t: Record<string, string>) => JSON.stringify(order.map((p) => t[p]));
+      const undrawn = new Set(d.undrawnStateCells.map(cellOf));
+      return d.values
+        .filter((v) => v.state === 'default' || (contractCarries.has(v.state) && (v.state !== 'disabled' || hasDisabledProp)))
+        .flatMap((v) => tuples.map((t) => ({ ...t, [d.property]: v.value })))
+        .filter((t) => !undrawn.has(cellOf(t)))
+        .map((variantProperties) => ({ variantProperties }));
+    }
   }
 
   // A promoted contract re-emits the STATE PREVIEW axis, so the rows it would
@@ -11039,6 +11177,26 @@ function proposeFromDumpFenced(
    *  core/exact-projection.ts. It is what makes promoting the State axis an
    *  inversion of a declared rule instead of a guess about someone's API. */
   const declaredSparseAxis = readDeclaredStatePreviewAxis(set);
+  // A DESIGNER-EDITED pipeline set (§D.41, review PR 131 M3): the stamp is
+  // plugin data and does not follow an edit, so a Pressed plane added to — or a
+  // Hover renamed on — a set this pipeline drew leaves a STALE statePreviewAxis
+  // behind. It used to surface as EXACT_TUPLE_INVALID_VALUE from the matrix
+  // check below; it is the named case: not a designer's set (it is stamped),
+  // and no longer the preview axis this pipeline declared.
+  if (declaredSparseAxis !== null) {
+    const drawn = [...new Set(set.variants.map((v) => axisValuesOf(v.name)[declaredSparseAxis.axis]).filter((v): v is string => v !== undefined))];
+    const declaredValues = [declaredSparseAxis.default, ...declaredSparseAxis.states];
+    const added = drawn.filter((v) => !declaredValues.includes(v));
+    const gone = declaredValues.filter((v) => !drawn.includes(v));
+    if (added.length > 0 || gone.length > 0) {
+      semanticProjectionRefusal(
+        cartesianProjection,
+        { property: declaredSparseAxis.axis, propName: declaredSparseAxis.axis, values: drawn } as Axis,
+        'interaction-state',
+        `state-axis-pipeline-drawn-undeclared: the set carries this pipeline's stamp and declares its "${declaredSparseAxis.axis}" preview axis as ${declaredValues.join('|')}, but it now draws ${drawn.join('|')}${added.length ? ` (added: ${added.join(', ')})` : ''}${gone.length ? ` (gone: ${gone.join(', ')})` : ''} — a pipeline-written set edited by hand. It is not a designer's set (it is stamped) and no longer the axis this pipeline declared, so it is read as neither. Re-sync it from its contract, or detach it (remove the ds_contracts stamps) and read it as a designer's.`,
+      );
+    }
+  }
   // Exact mode fails closed on unstructured/ragged variant matrices.
   // Reviewable-inversion may continue without structured definitions
   // (legacy name-based path) — but MUST still refuse when structured
@@ -11114,7 +11272,69 @@ function proposeFromDumpFenced(
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property)), preNotes);
+  const stateCandidateAxes = applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property));
+  // WHOSE AXIS IS IT (docs/23 §D.41). A DESIGNER's set — no ds_contracts stamp
+  // AND a reader that could have seen one (§D.40) — is read by the closed table
+  // in core/interaction-state-axis.ts, and ONLY by it: the axis must be NAMED
+  // state / states / interaction, every value must be in the table, `active`
+  // needs hover or pressed beside it, and exactly one axis may qualify.
+  // Anything else keeps the axis as the designer's own enum prop (named), or —
+  // when the axis IS interaction state and has no single answer — refuses.
+  // Every other set takes the legacy detector, exactly as before.
+  const designerReadable = !pipelineDrew && stampsObservable;
+  let designerReading: StateAxisProjection | null = null;
+  let statePromo: StatePromotion | null;
+  if (designerReadable) {
+    const readable = stateCandidateAxes.filter((a) => !isBooleanAxis(a));
+    const reading = readStateAxes(readable);
+    if (reading.kind === 'projected') {
+      designerReading = reading.projection;
+      const axis = readable.find((a) => a.property === reading.projection.property)!;
+      statePromo = {
+        axis,
+        defaultValue: reading.projection.restValue,
+        promoted: reading.projection.values
+          .filter((v) => v.state !== 'default' && v.state !== 'disabled')
+          .map((v) => ({ value: v.value, state: v.state as PromotedState })),
+        ...(reading.projection.values.some((v) => v.state === 'disabled')
+          ? { disabledValue: reading.projection.values.find((v) => v.state === 'disabled')!.value }
+          : {}),
+      };
+    } else if (reading.kind === 'refused' && !STATE_AXIS_KEPT_AS_ENUM.has(reading.reason)) {
+      // The axis IS interaction state and the table has no single answer.
+      if (projectionMode === 'exact') {
+        const culprit =
+          readable.find((a) => {
+            const r = readStateAxis(a.property, a.values);
+            return r.kind === 'projected' || (r.kind === 'refused' && !STATE_AXIS_KEPT_AS_ENUM.has(r.reason));
+          }) ?? readable[0]!;
+        semanticProjectionRefusal(sourceProjection, culprit, 'interaction-state', `${reading.reason}: ${reading.detail}.`);
+      }
+      statePromo = detectStateAxis(stateCandidateAxes, preNotes); // reviewable: what it always did, named
+    } else {
+      // Kept as the designer's own enum prop(s). The legacy detector still
+      // writes its near-miss notes (a named axis with a value outside the
+      // table); its verdict is NOT taken — an unnamed axis or a lone `active`
+      // it would have promoted stays API here, and says so.
+      detectStateAxis(stateCandidateAxes, preNotes);
+      for (const kept of keptAsEnumStateAxes(readable)) {
+        if (kept.reason === 'state-axis-unnamed' || kept.reason === 'state-axis-value-ambiguous') {
+          preNotes.push(`${kept.reason}: ${kept.detail} — kept as the designer's own enum prop (docs/23 §D.41), review`);
+        }
+      }
+      statePromo = null;
+    }
+  } else {
+    statePromo = detectStateAxis(stateCandidateAxes, preNotes);
+  }
+  /** Set when the promoted axis is a DESIGNER's, projected by the closed table
+   *  (docs/23 §D.41) — never for an axis this pipeline drew and declared. */
+  let designerStateAxis: DesignerStateAxisProjection | null = null;
+  /** The undrawn combinations the CONTRACT declares. Equal to the source's
+   *  own list unless a designer's state axis was projected: then only the
+   *  REST-state plane's undrawn cells are contract absences (spelled over the
+   *  remaining axes — the state axis is not a prop and has no spelling there). */
+  let contractAbsentVariants: Array<Record<string, string>> | null = absentVariants;
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
@@ -11136,8 +11356,29 @@ function proposeFromDumpFenced(
       // An absent, malformed, or disagreeing marker leaves the refusal armed.
       const declaredThisAxis =
         declaredSparseAxis !== null && declaredSparseAxis.axis === promo.axis.property;
-      if (projectionMode === 'exact' && !declaredThisAxis) {
-        semanticProjectionRefusal(sourceProjection, promo.axis, 'interaction-state');
+      if (!declaredThisAxis && designerReading !== null) {
+        designerStateAxis = {
+          decision: 'designer-state-axis-projected',
+          property: designerReading.property,
+          restValue: designerReading.restValue,
+          values: designerReading.values.map((v) => ({ ...v, carried: v.state === 'default' })),
+          undrawnStateCells: [],
+          writeBack: { draws: 0, completes: [], omits: [] },
+        };
+      } else if (!declaredThisAxis && projectionMode === 'exact') {
+        // What made this a refusal was never the table — it was not knowing
+        // WHOSE axis it is: a preview axis this pipeline drew reads the same on
+        // the canvas (and its State=Disabled is a preview cell, not a
+        // `disabled` boolean). Without the designer fact the refusal stands and
+        // says which half is missing.
+        semanticProjectionRefusal(
+          sourceProjection,
+          promo.axis,
+          'interaction-state',
+          pipelineDrew
+            ? `state-axis-pipeline-drawn-undeclared: the set carries a ds_contracts stamp, so it is not a designer's — and it declares no statePreviewAxis for "${promo.axis.property}", so this axis is not a preview this pipeline can read back either.`
+            : `state-axis-stamps-not-observable: every value of "${promo.axis.property}" is an interaction state, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn axis (a preview axis this pipeline drew reads the same). Re-read through the plugin dump or extract/figma/rest/fetch.ts.`,
+        );
       }
       const strip = (v: DumpNode): DumpNode => ({
         ...(JSON.parse(JSON.stringify(v)) as DumpNode),
@@ -11168,7 +11409,62 @@ function proposeFromDumpFenced(
     }
   }
 
-  if (absentVariants !== null && statePromo) assertExactProjection(cartesianProjection, 'source-matrix-verified');
+  // SPARSE + a promoted state axis. An axis THIS PIPELINE declared (or one
+  // promoted without the designer fact) keeps the ragged refusal: an undrawn
+  // cell naming a promoted value has no spelling in the declaration. A
+  // DESIGNER's projected axis partitions the undrawn cells instead (§D.41):
+  //   · undrawn in the REST plane → a contract absence over the REMAINING axes
+  //     (`bindings.figma.absentVariants`, the vocabulary unchanged). Every
+  //     state plane must leave that cell undrawn too — a state drawn where its
+  //     rest cell is not has nothing to be read against, and refuses by name;
+  //   · undrawn ONLY in a non-rest plane → no prop combination is missing, so
+  //     nothing is declared on the contract; the cells ride the decision and a
+  //     note (the code surfaces render that state there by composition).
+  // The fence is armed with EVERY undrawn cell, spelled over the remaining
+  // axes (the state planes are read under state-stripped names): a plane that
+  // draws a cell fits it identically under every explanation, so a cell
+  // another plane lacks can never refuse it — and a plane with a hole is held
+  // to the same uniqueness rule as any sparse set.
+  if (absentVariants !== null && statePromo && designerStateAxis === null) {
+    assertExactProjection(cartesianProjection, 'source-matrix-verified');
+  } else if (absentVariants !== null && statePromo && designerStateAxis !== null) {
+    const d: DesignerStateAxisProjection = designerStateAxis;
+    const stripState = (t: Readonly<Record<string, string>>): Record<string, string> =>
+      Object.fromEntries(Object.entries(t).filter(([k]) => k !== d.property));
+    const keyOf = (t: Readonly<Record<string, string>>) =>
+      JSON.stringify(Object.entries(stripState(t)).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+    const restAbsent = absentVariants.filter((t) => t[d.property] === d.restValue);
+    const restAbsentKeys = new Set(restAbsent.map(keyOf));
+    const drawnKeysByValue = new Map<string, Set<string>>();
+    for (const v of set.variants) {
+      const at = axisValuesOf(v.name);
+      const value = at[d.property];
+      if (value === undefined) continue;
+      let keys = drawnKeysByValue.get(value);
+      if (!keys) drawnKeysByValue.set(value, (keys = new Set()));
+      keys.add(keyOf(at));
+    }
+    const orphans: string[] = [];
+    for (const v of d.values) {
+      if (v.value === d.restValue) continue;
+      for (const key of drawnKeysByValue.get(v.value) ?? []) {
+        if (restAbsentKeys.has(key)) orphans.push(`${d.property}=${v.value} at ${(JSON.parse(key) as Array<[string, string]>).map(([k, x]) => `${k}=${x}`).join(', ')}`);
+      }
+    }
+    if (orphans.length > 0) {
+      semanticProjectionRefusal(
+        sourceProjection,
+        statePromo.axis,
+        'interaction-state',
+        `state-axis-orphan-state-cell: ${orphans.length} state variant(s) are drawn where the rest state ("${d.property}=${d.restValue}") is not (${orphans.slice(0, 4).join('; ')}${orphans.length > 4 ? `; … ${orphans.length - 4} more` : ''}) — a state is read AGAINST its rest-state variant, and there is none. Draw the rest-state variant, or remove the state variant.`,
+      );
+    }
+    d.undrawnStateCells = absentVariants.filter((t) => t[d.property] !== d.restValue && !restAbsentKeys.has(keyOf(t))).map((t) => ({ ...t }));
+    contractAbsentVariants = restAbsent.length > 0 ? restAbsent.map(stripState) : null;
+    const fenceCells = new Map<string, Record<string, string>>();
+    for (const t of absentVariants) if (!fenceCells.has(keyOf(t))) fenceCells.set(keyOf(t), stripState(t));
+    sparseFence = { absent: [...fenceCells.values()], ambiguous: new Map() };
+  }
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
   for (const mapped of typedAxes) {
@@ -11563,7 +11859,36 @@ function proposeFromDumpFenced(
         ctx.notes.push(
           `prop \`disabled\`: not invented from axis value "${statePromo.axis.property}=${statePromo.disabledValue}" — the set's statePreviewAxis already declares Disabled as a preview cell; the disabled STATE block still carries (FC-DUMP-PROPOSE-DISABLED-INVENTED)`,
         );
+      } else if (designerStateAxis !== null && disabledSpellings(ctx).length > 0) {
+        // §D.41 / PR 131 H1 — ANY prop that already spells "disabled" collides,
+        // VARIANT or BOOLEAN, whatever its case or `is` prefix: a VARIANT axis
+        // `Disabled[False|True]` beside State=Disabled proposed TWO props named
+        // `disabled` (emitReact threw on a `verified-exact` contract), and
+        // `isDisabled` / "Is Disabled" two booleans for one fact.
+        const spellings = disabledSpellings(ctx);
+        if (projectionMode === 'exact') {
+          semanticProjectionRefusal(
+            sourceProjection,
+            statePromo.axis,
+            'interaction-state',
+            `state-axis-disabled-prop-collision: "${statePromo.axis.property}=${statePromo.disabledValue}" projects to the \`disabled\` boolean, but the set already carries a \`disabled\` boolean property (${spellings.join(', ')}) — two spellings of one fact, and which one the prop follows is not drawn.`,
+          );
+        }
+        ctx.notes.push(
+          `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but the set already spells disabled (${spellings.join(', ')}) — not re-promoted, review (state-axis-disabled-prop-collision)`,
+        );
       } else if (ctx.boolProps.some((b) => b.name === 'disabled')) {
+        if (projectionMode === 'exact' && designerStateAxis !== null) {
+          // Exact never picks: the set already has a `disabled` boolean AND
+          // draws a Disabled value on the state axis — two spellings of one fact, and which
+          // one the code prop follows is not drawn.
+          semanticProjectionRefusal(
+            sourceProjection,
+            statePromo.axis,
+            'interaction-state',
+            `state-axis-disabled-prop-collision: "${statePromo.axis.property}=${statePromo.disabledValue}" projects to the \`disabled\` boolean, but the set already carries a \`disabled\` boolean property — two spellings of one fact, and which one the prop follows is not drawn.`,
+          );
+        }
         ctx.notes.push(
           `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but a \`disabled\` boolean already exists — not re-promoted, review`,
         );
@@ -12149,6 +12474,22 @@ function proposeFromDumpFenced(
         Object.keys(stateByProp[s] ?? {}).length > 0 ||
         partPresent.has(s),
     );
+    if (designerStateAxis !== null) {
+      // §D.41 — the NAMED DECISION, spelled once, first among this set's notes.
+      for (const v of designerStateAxis.values) if (present.includes(v.state)) v.carried = true;
+      const spelled = designerStateAxis.values
+        .map((v) =>
+          v.state === 'default'
+            ? `${v.value}→rest (the base every state is read against)`
+            : v.state === 'disabled'
+              ? `${v.value}→the \`disabled\` boolean prop${v.carried ? ' + the disabled state block' : ' (its state block NOT carried: no override recoverable, named below)'}`
+              : `${v.value}→${v.state}${v.carried ? '' : ' (NOT carried: no override recoverable, named below)'}`,
+        )
+        .join(', ');
+      ctx.notes.unshift(
+        `state-axis-projected (DECISION designer-state-axis-projected, docs/23 §D.41): variant axis "${designerStateAxis.property}" (${designerStateAxis.values.map((v) => v.value).join('|')}) is a DESIGNER's drawing of the platform's interaction states — every value is in the closed table (core/interaction-state-axis.ts), the set carries no ds_contracts stamp and its reader could have seen one. It is projected, not refused: ${spelled}. The axis is NOT a prop; the exact projection holds the source matrix to the contract's own variant axes × these ${designerStateAxis.values.length} values (minus any undrawn cells named on this proposal), exactly. A hand-authored enum prop is the way to keep the axis as API instead`,
+      );
+    }
     for (const s of declared) {
       if (!present.includes(s)) {
         ctx.notes.push(
@@ -12231,7 +12572,14 @@ function proposeFromDumpFenced(
       const statePropertyTaken = props.some(
         (p) => (p.bindings as { figma?: { property?: string } }).figma?.property === STATE_PREVIEW_PROPERTY,
       );
-      if (substProps.size <= 1 && !statePropertyTaken) {
+      if (contractAbsentVariants !== null) {
+        // validateContract refuses the pair by name (absent-variants-with-
+        // state-previews, §D.40): a preview row is pinned to base cells and
+        // an absent base cell would leave "is its preview drawn?" undefined.
+        ctx.notes.push(
+          `bindings.figma.statePreviews NOT set: the contract declares bindings.figma.absentVariants (rest-state combinations the designer did not draw), and the two are not composed (absent-variants-with-state-previews) — regenerating the canvas draws the rest-state grid only; the states still carry to the code surfaces`,
+        );
+      } else if (substProps.size <= 1 && !statePropertyTaken) {
         // Spelled BEFORE anchors — the schema's (and the codemod's) key order.
         const cb = contract.bindings as { figma: Record<string, unknown> };
         cb.figma = { statePreviews: true, ...cb.figma };
@@ -12276,7 +12624,26 @@ function proposeFromDumpFenced(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
-  if (absentVariants !== null) {
+  if (absentVariants !== null && designerStateAxis !== null) {
+    // §D.41 — the sparse set with a projected state axis: same refusal before
+    // anything is written, then only the REST-plane absences are declared.
+    if (sparseFence !== null && sparseFence.ambiguous.size > 0) {
+      throw new SparseMatrixInferenceError(set.setName, sparseFence.ambiguous);
+    }
+    const spell = (t: Readonly<Record<string, string>>) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', ');
+    if (contractAbsentVariants !== null) declareAbsentVariants(contract, contractAbsentVariants, cartesianProjection);
+    ctx.notes.unshift(
+      `bindings.figma.absentVariants + a projected state axis: the set draws ${set.variants.length} of the ${set.variants.length + absentVariants.length} combinations of its variant axes. ${
+        contractAbsentVariants !== null
+          ? `${contractAbsentVariants.length} combination(s) of the REMAINING axes are undrawn in the rest state ("${designerStateAxis.property}=${designerStateAxis.restValue}") and in every other state — DECLARED on the contract (${contractAbsentVariants.map(spell).join(' | ')}), over the remaining axes because the state axis is not a prop`
+          : `Every combination of the REMAINING axes is drawn in the rest state ("${designerStateAxis.property}=${designerStateAxis.restValue}"), so the contract declares NO absent variant`
+      }. ${
+        designerStateAxis.undrawnStateCells.length > 0
+          ? `state-axis-undrawn-state-cells: ${designerStateAxis.undrawnStateCells.length} combination(s) are undrawn ONLY in a non-rest state (${designerStateAxis.undrawnStateCells.map(spell).join(' | ')}) — no prop combination is missing, so nothing is declared for them; they ride this proposal's stateAxisProjection. `
+          : ''
+      }undrawn-combination-rendered-by-composition: the code surfaces render ANY prop combination in ANY state by composing the per-axis and per-state rules read from the drawn variants — at an undrawn combination that rendering is a composition nobody drew, never a measured one`,
+    );
+  } else if (absentVariants !== null) {
     // Refuse BEFORE the declaration is written: an ambiguous inference means
     // the contract's bindings are a guess, however exact its matrix is.
     if (sparseFence !== null && sparseFence.ambiguous.size > 0) {
@@ -12289,8 +12656,23 @@ function proposeFromDumpFenced(
         .join(' | ')}), so the Figma writer emits no variant for them and the exact projection expects the product minus this list, exactly. undrawn-combination-rendered-by-composition: the code surfaces render ANY prop combination by composing the per-axis rules read from the drawn variants — at an undrawn combination that rendering is a composition nobody drew, never a measured one`,
     );
   }
-  ContractSchema.parse(contract);
-  for (const stub of childStubs) ContractSchema.parse(stub);
+  const parsedContract = ContractSchema.parse(contract);
+  const parsedStubs = childStubs.map((stub) => ContractSchema.parse(stub));
+  // §D.41 / PR 131 M1 — a rest-plane hole and a states plane do not share a
+  // canvas: `absentVariants` is not composed with state previews (§D.40), so
+  // the writer draws the rest grid only and THIS read-back sees no State axis.
+  // `verified-exact` is true of the canvas it read — and says nothing about
+  // the states, which live in the contract in scope. Said here, every time.
+  if (pipelineDrew && !statePromo) {
+    const authoredId = readStampedContractId(set);
+    const authored = authoredId === null ? undefined : (opts.contractsById?.get(authoredId) as unknown as Contract | undefined);
+    const authoredStates = Array.isArray(authored?.states) ? authored.states : [];
+    if (authored && authoredStates.length > 0 && Array.isArray(authored.bindings?.figma?.absentVariants) && authored.bindings.figma.absentVariants.length > 0) {
+      ctx.notes.unshift(
+        `states-not-drawn-on-this-canvas: the stamped contract "${authored.id}" declares states [${authoredStates.join(', ')}] AND bindings.figma.absentVariants — the two are not composed (absent-variants-with-state-previews), so the writer drew the rest-state grid only and this read-back recovers NO state (states: []). The projection status is about the ${set.variants.length} variant(s) on the canvas; the states are carried by the contract in scope, not by this proposal — do not replace that contract with this one (extract/figma/roundtrip.ts lists them as code-side facts absent from the canvas)`,
+      );
+    }
+  }
   if (stampNote) {
     ctx.notes.unshift(stampNote);
   } else if (inferred) {
@@ -12311,12 +12693,100 @@ function proposeFromDumpFenced(
   // proposed rows still match; semantic promotions that change the tuple
   // set fall back to an explicit legacy receipt rather than emitting the
   // internal source-matrix-verified status (which receive rejects).
+  if (designerStateAxis !== null) {
+    // §D.41 / PR 131 H3 — what the WRITER would draw from this contract, by the
+    // writer's own rule (core/emit-figma-script.ts: statePreviews on → the base
+    // grid at State=Default + one row per contract state per PRIMARY-axis
+    // value, the primary being the one enum the state overrides substitute or
+    // else the first axis, every other axis pinned to its first option; off →
+    // the base grid only), translated into the designer's spelling and held
+    // against what the designer drew. Named on the decision AND in a note.
+    const d = designerStateAxis;
+    const typed = parsedContract;
+    const variantAxes = typed.props.filter((p) => p.bindings.figma.kind === 'VARIANT');
+    const firstLabel = (p: (typeof variantAxes)[number]): string => {
+      const fig = p.bindings.figma as { unsetValue?: string; values?: Record<string, string> };
+      return fig.unsetValue ?? Object.values(fig.values ?? {})[0] ?? '';
+    };
+    const previews = typed.bindings.figma.statePreviews === true && typed.states.length > 0;
+    const subst = previews ? statePreviewSubstProps(typed) : [];
+    const primaryIdx = Math.max(0, variantAxes.findIndex((p) => subst.includes(p.name)));
+    const primary = variantAxes[primaryIdx];
+    const writerRows = exactRowsFromProposedContract(
+      contract,
+      previews
+        ? {
+            axis: STATE_PREVIEW_PROPERTY,
+            default: 'Default',
+            states: typed.states.map((s) => statePreviewLabel(s)),
+            primary: primary?.bindings.figma.property ?? null,
+            pinned: Object.fromEntries(variantAxes.filter((_, i) => i !== primaryIdx || !primary).map((p) => [p.bindings.figma.property ?? '', firstLabel(p)])),
+          }
+        : null,
+    );
+    const designerValueOf = new Map<string, string>([['Default', d.restValue], ...d.values.filter((v) => v.state !== 'default').map((v) => [statePreviewLabel(v.state), v.value] as [string, string])]);
+    const inDesignerTerms = writerRows.map((row) => {
+      const { [STATE_PREVIEW_PROPERTY]: label, ...api } = row.variantProperties as Record<string, string>;
+      return { ...api, [d.property]: designerValueOf.get(label ?? 'Default') ?? label ?? d.restValue };
+    });
+    const keyOfRow = (t: Readonly<Record<string, string>>) => JSON.stringify(Object.entries(t).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+    const drawnRows = set.variants.map((v) => axisValuesOf(v.name));
+    const drawnKeys = new Set(drawnRows.map(keyOfRow));
+    const writerKeys = new Set(inDesignerTerms.map(keyOfRow));
+    d.writeBack = {
+      draws: writerRows.length,
+      completes: inDesignerTerms.filter((t) => !drawnKeys.has(keyOfRow(t))),
+      omits: drawnRows.filter((t) => !writerKeys.has(keyOfRow(t))),
+    };
+    const spellRow = (t: Readonly<Record<string, string>>) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', ');
+    const some = (rows: Array<Record<string, string>>) => `${rows.slice(0, 6).map(spellRow).join(' | ')}${rows.length > 6 ? ` | … ${rows.length - 6} more` : ''}`;
+    ctx.notes.push(
+      d.writeBack.completes.length === 0 && d.writeBack.omits.length === 0
+        ? `state-axis-write-back: regenerating the canvas from this contract draws the same ${writerRows.length} cell(s) the designer drew — under the WRITER's spelling ("${STATE_PREVIEW_PROPERTY}" = ${['Default', ...typed.states.map((s) => statePreviewLabel(s))].join('|')}), in a new stamped set; the designer's set is never edited`
+        : `state-axis-write-back-diverges: regenerating the canvas from this contract draws ${writerRows.length} variant(s) where the designer drew ${set.variants.length}. The contract vocabulary carries neither the designer's state spelling nor the state cells they left undrawn, so the writer draws ITS matrix (${previews ? `the rest grid + one "${STATE_PREVIEW_PROPERTY}" preview row per carried state per value of ${primary ? `"${primary.bindings.figma.property}"` : 'the set'}, every other axis pinned to its first option` : 'the rest grid only — statePreviews is not set'}), in a new stamped set (the designer's set is never edited).${d.writeBack.completes.length ? ` It DRAWS ${d.writeBack.completes.length} cell(s) the designer did NOT draw: ${some(d.writeBack.completes)}.` : ''}${d.writeBack.omits.length ? ` It does NOT draw ${d.writeBack.omits.length} cell(s) the designer drew: ${some(d.writeBack.omits)}.` : ''} NAMED divergence (docs/23 §D.41), listed on stateAxisProjection.writeBack`,
+    );
+  }
   let projection: ExactProjectionResult;
+  if (projectionMode === 'exact' && designerStateAxis !== null) {
+    // §D.41 / PR 131 C1 — a drawn state the contract does NOT carry is a drawn
+    // plane of the source the contract cannot reproduce: not exact, by name.
+    // (The generic check below would refuse the same set EXACT_ROWS_MISSING;
+    // this says WHICH state and WHY.) Reviewable inversion proposes the same
+    // contract and reads `legacy-unverified`.
+    const dropped = designerStateAxis.values.filter((v) => !v.carried);
+    if (dropped.length > 0) {
+      const rowsOf = (value: string) => set.variants.filter((v) => axisValuesOf(v.name)[designerStateAxis!.property] === value).length;
+      const why = (state: string): string => {
+        const named = ctx.notes.filter((n) => n.includes(`(state ${state})`) || n.includes(`state "${state}"`) || n.includes(`in state "${state}"`));
+        const first = named.find((n) => !n.startsWith(`state "${state}": promoted from the axis`)) ?? named[0];
+        return first ? first.slice(0, 260) + (first.length > 260 ? '…' : '') : 'no channel of its drawing differs from the rest state in anything this reader captures';
+      };
+      semanticProjectionRefusal(
+        sourceProjection,
+        statePromo!.axis,
+        'interaction-state',
+        `${dropped.map((v) => `state-axis-state-not-carried:${v.state}`).join(', ')} — ${dropped
+          .map((v) => `"${designerStateAxis!.property}=${v.value}" draws ${rowsOf(v.value)} of the ${set.variants.length} variants and the proposed contract carries no "${v.state}" state for them [${why(v.state)}]`)
+          .join('; ')}. Those rows would be counted as reproduced while dropped, so this is NOT an exact projection. --reviewable-inversion proposes the same contract as legacy-unverified, with every dropped state named.`,
+      );
+    }
+  }
+  // SCOPE, measured (docs/23 §D.41): run on EVERY exact proposal, the referee
+  // refuses 19 committed census sets that propose `verified-exact` today (17
+  // carry a stamped `semantics.roleException` no root role claim needs; antd
+  // Input roots children on a void <input>) — real, pre-existing, and a census
+  // re-record of their own. It is therefore armed where THIS change can mint a
+  // contract the referee has never seen — a projected designer state axis — and
+  // the general case is named, with its count, not silently widened.
+  if (projectionMode === 'exact' && designerStateAxis !== null) {
+    const violations = refereeViolations(parsedContract, parsedStubs);
+    if (violations !== null && violations.length > 0) throw new ProposalRefereeError(set.setName, violations);
+  }
   if (projectionMode === 'exact') {
     projection = assertExactProjection(
       validateExactVariantProjection(
         set,
-        exactRowsFromProposedContract(contract, declaredSparseAxis),
+        exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
         absentVariants === null ? {} : { absentVariants },
       ),
       'verified-exact',
@@ -12324,7 +12794,7 @@ function proposeFromDumpFenced(
   } else if (sourceProjection.status === 'source-matrix-verified') {
     const returned = validateExactVariantProjection(
       set,
-      exactRowsFromProposedContract(contract, declaredSparseAxis),
+      exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
       absentVariants === null ? {} : { absentVariants },
     );
     projection =
@@ -12345,6 +12815,7 @@ function proposeFromDumpFenced(
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
     ...(selfId !== baseSelfId ? { idSuffixedFrom: baseSelfId } : {}),
+    ...(designerStateAxis !== null ? { stateAxisProjection: designerStateAxis } : {}),
   };
 }
 
@@ -12405,6 +12876,11 @@ export function plainWordsProposalError(e: unknown): { headline: string; detail?
     };
   }
   const message = e instanceof Error ? e.message : String(e);
+  // A NAMED refusal keeps its name in the headline however long its reasons
+  // run (§D.41: a state-not-carried refusal lists every dropped state and why).
+  if ((e instanceof ExactProjectionError || e instanceof ProposalRefereeError) && message.length > 400) {
+    return { headline: `${message.slice(0, 380)}… (full text below)`, detail: message };
+  }
   if (/^\s*[[{"]/.test(message) || message.length > 400) {
     return { headline: 'the proposal failed with a technical error (full text below).', detail: message };
   }

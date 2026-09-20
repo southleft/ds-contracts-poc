@@ -15,10 +15,19 @@
  *                 `vite build`. Nothing resolves into this repo.
  *   3. mount    — open the built app in Chromium (file://). One cell per Figma
  *                 variant, props derived from the contract's VARIANT mappings.
+ *                 A designer's INTERACTION-STATE axis (docs/23 §D.41) is not a
+ *                 prop: its values are read by the same closed table the
+ *                 proposer projects by (core/interaction-state-axis.ts) and a
+ *                 state cell is mounted the way a user reaches that state — a
+ *                 real pointer hover, a held mouse button, real keyboard-
+ *                 modality focus, or the `disabled` prop — before it is
+ *                 screenshotted. Nothing is forced that a user could not do: a
+ *                 state that cannot be reached, or that changes nothing the
+ *                 contract says it changes, is a NAMED problem.
  *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
  *                 text changes in every text-bearing cell; switch every
  *                 variant-bearing cell to another variant and assert its
- *                 computed root style changes. A prop the component accepts
+ *                 rendered subtree paint, text or relative geometry changes. A prop the component accepts
  *                 but discards fails here.
  *   5. compare  — fetch Figma's own PNG of each variant node (REST
  *                 /v1/images, read-only) and score it against the consumer's
@@ -43,10 +52,29 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
+import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
+/** Figma exports node alpha, excluding the editor page. Match that substrate
+ *  without changing the component or the page retained for visible review. */
+export const NODE_SCREENSHOT_OPTIONS = {
+  omitBackground: true,
+  style: 'html, body { background: transparent !important; }',
+};
+/** What an OVER-LIMIT row's second number says. It names, it never excuses: the
+ *  verdict stays `withinLimit: false` and the check stays red. `text-only` = with
+ *  the render's text boxes painted out on both sides the rest is within the same
+ *  limit, so what is wrong is inside the glyph boxes (rasteriser, metrics, or the
+ *  text itself). `beyond-text` = something outside the glyphs is wrong too.
+ *  `text-covers-canvas` = the mask left nothing to measure; no claim is made. */
+export type ResidualClass = 'text-only' | 'beyond-text' | 'text-covers-canvas' | 'no-text';
+export function residualClass(maskedPct: number | null, maskCoveragePct: number): ResidualClass {
+  if (maskedPct === null) return 'text-covers-canvas';
+  if (!(maskCoveragePct > 0)) return 'no-text';
+  return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
+}
 
 type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
 function parseArgs(argv: string[]): Args {
@@ -62,7 +90,11 @@ const run = (cmd: string, args: string[], cwd: string) => {
   catch (error: any) { throw new Error(`${path.basename(cmd)} ${args.slice(0, 2).join(' ')} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`); }
 };
 
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string }
+/** How a state cell is reached before its screenshot. `none` = the rest state
+ *  (and `disabled`, which is a prop, not an interaction). */
+export type Interaction = 'none' | Exclude<InteractionState, 'default' | 'disabled'>;
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string;
+  interaction: Interaction; /** the contract state this cell draws, when it draws one */ state?: Exclude<InteractionState, 'default'> }
 
 /** Array props (`arrayOf`) take the design's own repeat sample from the
  * contract anatomy; the consumer supplies no content of its own. */
@@ -92,23 +124,129 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
   const samples = arraySamples(contract);
+  // The set's variant axes the contract does NOT bind as VARIANT props, read
+  // by the proposer's own closed table: at most one may be the interaction-
+  // state axis (two refuse there, and are unmapped here).
+  const segmentsOf = (name: unknown) => String(name).split(',').map((s: string) => s.trim()).flatMap((segment: string) => { const eq = segment.indexOf('='); return eq <= 0 ? [] : [[segment.slice(0, eq), segment.slice(eq + 1)] as const]; });
+  const unbound = new Map<string, string[]>();
+  for (const variant of set.variants) for (const [property, value] of segmentsOf(variant.name)) {
+    if (variantProps.some(p => p.bindings.figma.property === property)) continue;
+    const values = unbound.get(property) ?? []; if (!values.includes(value)) values.push(value); unbound.set(property, values);
+  }
+  const reading = readStateAxes([...unbound].map(([property, values]) => ({ property, values })));
+  const stateAxis = reading.kind === 'projected' ? reading.projection : null;
+  const disabledProp = (contract.props as any[]).find(p => p.name === 'disabled' && p.type === 'boolean');
   const cases: Case[] = set.variants.map((variant: any) => {
     const props: Record<string, unknown> = { ...samples };
-    for (const segment of String(variant.name).split(',').map((s: string) => s.trim())) {
-      const eq = segment.indexOf('='); if (eq <= 0) continue;
-      const property = segment.slice(0, eq), value = segment.slice(eq + 1);
+    let interaction: Interaction = 'none', state: Case['state'];
+    for (const [property, value] of segmentsOf(variant.name)) {
       const prop = variantProps.find(p => p.bindings.figma.property === property);
-      if (!prop) { unmapped.add(`${property} (no VARIANT prop)`); continue; }
+      if (!prop && stateAxis?.property === property) {
+        const projected = stateAxis.values.find(v => v.value === value)!.state;
+        if (projected === 'default') continue;
+        state = projected;
+        if (projected === 'disabled') { if (disabledProp) props[disabledProp.name] = true; else unmapped.add(`${property}=${value} (state axis: the contract has no \`disabled\` boolean)`); }
+        else interaction = projected;
+        continue;
+      }
+      if (!prop) { unmapped.add(`${property} (no VARIANT prop${reading.kind === 'refused' ? `; ${reading.reason}` : ''})`); continue; }
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
-    const key = Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
-    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name };
+    const key = [...Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`), ...(interaction === 'none' ? [] : [`state-${interaction}`])].join('_') || 'default';
+    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}) };
   });
   const keys = cases.map(c => c.key);
   for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
   return cases;
 }
+// ---------------------------------------------------------------------------
+// INTERACTION STATES (docs/23 §D.41) — reached the way a user reaches them.
+// ---------------------------------------------------------------------------
+/** What a cell PAINTS, as one string: taken at rest and again in the state, so
+ *  a state the contract declares but the generated CSS never reaches is caught
+ *  by name, not by pixels. Every channel a state plane may carry rides it —
+ *  all four borders, the radii, text decoration, transform, weight, filter and
+ *  the box itself (review, PR 131 M4: the first cut read one border and no
+ *  decoration, so an underline-on-hover link read `state-inert`).
+ *  Serialized as text: tsx would otherwise inject its __name helper into the page. */
+export const paintOf = new Function('el', `
+  const K = ['backgroundColor', 'backgroundImage', 'color', 'opacity', 'boxShadow', 'filter', 'transform', 'visibility', 'cursor',
+    'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth',
+    'borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle',
+    'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
+    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
+    'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
+  return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
+`) as (el: Element) => string;
+/** Observe actual variant effects across the rendered subtree. Class names
+ * alone prove nothing; relative positions catch a rearrangement whose root
+ * dimensions stay fixed. Text also matters when glyph advances are equal. */
+export const variantPaintOf = new Function('el', `
+  const paint = ${paintOf.toString()};
+  const root = el.getBoundingClientRect();
+  const boxes = [el, ...el.querySelectorAll('*')].map(node => {
+    const r = node.getBoundingClientRect();
+    return [node.tagName, r.x - root.x, r.y - root.y, r.width, r.height];
+  });
+  return JSON.stringify([paint(el), el.innerText ?? el.textContent, boxes]);
+`) as (el: Element) => string;
+/** Keyboard-modality focus on the component's own focus target: the root when
+ *  it is focusable, else its first focusable descendant. Returns whether
+ *  :focus-visible really matches — nothing is forced. */
+const focusVisibly = new Function('el', `
+  const root = el.firstElementChild; if (!root) return false;
+  const focusable = n => n.tabIndex >= 0 && !n.disabled;
+  const target = focusable(root) ? root : [...root.querySelectorAll('*')].find(focusable);
+  if (!target) return false;
+  target.focus();
+  return target.matches(':focus-visible');
+`) as (el: Element) => boolean;
+/** Whether the cell's root REALLY matches the pseudo-class the pointer was
+ *  meant to produce. A box is not reach: a root under an overlay, or with
+ *  pointer-events:none, has a box and never matches :hover — that is
+ *  `state-unreachable`, not `state-inert` (review, PR 131 M4). */
+const matchesPseudo = new Function('el', 'pseudo', `const root = el.firstElementChild; return !!root && root.matches(pseudo);`) as (el: Element, pseudo: string) => boolean;
+export const REACHED_BY = { hover: 'pointer hover', active: 'pointer down', 'focus-visible': 'keyboard-modality focus', none: 'nothing' } as const;
+type PageLike = import('playwright-core').Page; type LocatorLike = import('playwright-core').Locator;
+
+/** Put ONE cell into its state. `cell` is the `[data-cell]` wrapper; its first
+ *  element child is the component root. Returns the rest-state paint (read
+ *  before anything moved) and whether the state was really reached. */
+export async function enterState(page: PageLike, cell: LocatorLike, interaction: Interaction): Promise<{ restPaint: string | null; reached: boolean }> {
+  if (interaction === 'none') return { restPaint: null, reached: true };
+  const restPaint = await cell.evaluate(paintOf);
+  const root = cell.locator(':scope > *').first();
+  if (interaction === 'focus-visible') { await page.keyboard.press('Tab'); return { restPaint, reached: await cell.evaluate(focusVisibly) }; }
+  // A real pointer, as extract/figma/visual-parity/render.ts does it.
+  await root.scrollIntoViewIfNeeded();
+  const box = await root.boundingBox();
+  if (!box) return { restPaint, reached: false };
+  await page.mouse.move(box.x + (box.width > 0 ? box.width / 2 : 2), box.y + (box.height > 0 ? box.height / 2 : 2));
+  if (interaction === 'active') await page.mouse.down();
+  return { restPaint, reached: await cell.evaluate(matchesPseudo, interaction === 'hover' ? ':hover' : ':active') };
+}
+
+/** Leave no residue for the next cell — and synthesise NO CLICK: the pointer is
+ *  parked off every component BEFORE the button is released, so mouseup lands
+ *  on the page, never on the component (the first cut released over the root:
+ *  a real click on every pressed cell, a navigation on an \`a[href]\`). */
+export async function leaveState(page: PageLike, interaction: Interaction): Promise<void> {
+  if (interaction === 'none') return;
+  await page.mouse.move(0, 0);
+  if (interaction === 'active') await page.mouse.up();
+  await page.evaluate('document.activeElement && document.activeElement.blur && document.activeElement.blur()');
+}
+
+/** The three NAMED state problems for one exercised cell (the pixels judge the rest). */
+export function stateProblems(c: { key: string; interaction: Interaction; state?: string }, declaredStates: readonly string[], reached: boolean, paintChanged: boolean): string[] {
+  const out: string[] = [];
+  if (c.state && !declaredStates.includes(c.state)) out.push(`state-not-carried:${c.state}`);
+  if (c.interaction !== 'none' && !reached) out.push(`state-unreachable:${c.interaction}:${c.key}`);
+  if (c.interaction !== 'none' && reached && !paintChanged && declaredStates.includes(c.interaction)) out.push(`state-inert:${c.interaction}:${c.key}`);
+  return out;
+}
+
 /** Figma axes or values the contract does not map; reported, never skipped. */
 const unmapped = new Set<string>();
 
@@ -172,7 +310,7 @@ function App() {
       const props = { ...cell.props };
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
-      return <div data-cell={cell.key} key={cell.key} style={{ display: 'inline-block', margin: 8, padding: 4, minWidth: 1, minHeight: 1, verticalAlign: 'top' }}><${component} {...props} /></div>;
+      return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
     })}
   </div>;
 }
@@ -219,15 +357,16 @@ async function main() {
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
+  const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
   cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract))); cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'] }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'single component set; composition, nested instances and instance swaps are not exercised here',
-      'declared behavior beyond text and variant props is not exercised',
+      'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
     ] };
   const walk = (dir: string, base = dir): void => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p, base) : (receipt.generatedSha256[path.relative(base, p)] = sha256(readFileSync(p))); } };
@@ -281,11 +420,35 @@ async function main() {
       try { await page.waitForSelector('[data-cell]', { timeout: 15000 }); }
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }
       const cells = await page.$$('[data-cell]');
+      // THE INSTRUMENT, not the product: cells used to flow inline, so a root 47.4 px
+      // wide pushed every later root onto a fractional x and 33 of 72 CBDS Badge
+      // shots came out one pixel wider with a shifted antialiased edge — while
+      // Figma exports every node from its own integer origin. Each cell is now its
+      // own block (same shrink-to-fit width), and a fractional HEIGHT above is
+      // absorbed in the wrapper's margin so every root starts on a whole pixel.
+      const misaligned = await page.evaluate(`(() => {
+        const off = [];
+        for (const cell of document.querySelectorAll('[data-cell]')) {
+          const root = cell.firstElementChild; if (!root) continue;
+          const top = root.getBoundingClientRect().top, frac = top - Math.floor(top);
+          if (frac > 0) cell.style.marginTop = (8 + 1 - frac) + 'px';
+          const r = root.getBoundingClientRect();
+          if (Math.abs(r.top - Math.round(r.top)) > 0.001 || Math.abs(r.left - Math.round(r.left)) > 0.001) off.push(cell.getAttribute('data-cell'));
+        }
+        return off;
+      })()`) as string[];
+      // A root its own CSS places off the pixel grid (a fractional margin or transform) is named, never hidden.
+      for (const key of misaligned) problems.push(`root-origin-off-pixel-grid:${key}`);
       if (cells.length !== cases.length) problems.push(`mounted ${cells.length} cells for ${cases.length} cases`);
       const textDefault = String((contract.props as any[]).find(p => p.name === cases[0]?.textProp)?.default ?? '');
+      const declaredStates: string[] = Array.isArray(contract.states) ? contract.states : [];
+      const paints: Record<string, string> = {};
+      const notCarried = new Set<string>();
+      receipt.behavior.states = [];
       for (const c of cases) {
         const cell = page.locator(`[data-cell="${c.key}"]`);
         const root = cell.locator(':scope > *').first();
+        const entered = await enterState(page, cell, c.interaction);
         const style = await root.evaluate(el => { const s = getComputedStyle(el); return { backgroundColor: s.backgroundColor, color: s.color, width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height, tag: el.tagName.toLowerCase(), role: el.getAttribute('role') }; });
         // Fonts: the family the generated CSS asks for on text, and whether the
         // clean consumer could actually satisfy it. An unavailable family is a
@@ -303,11 +466,43 @@ async function main() {
         if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
-        // The root element's layout box on a white page, the same comparison
-        // basis the application uses; Figma's export is the node's own bounds.
-        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
-        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, rendered: { text, ...style, font }, screenshot: path.basename(shot) });
+        // Match the Figma node export's transparent substrate. The scorer
+        // applies its shared background after trimming both alpha bounds.
+        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
+        // Where this render draws text, in the screenshot's own pixels (the root's
+        // layout box). The same walk extract/figma/visual-parity/render.ts makes.
+        // Serialized as text for the same reason as the font probe above.
+        textRects[c.key] = await root.evaluate(new Function('el', `
+          const origin = el.getBoundingClientRect(), rects = [], walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+          for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+            if (!n.textContent || !n.textContent.trim()) continue;
+            const range = document.createRange(); range.selectNodeContents(n);
+            for (const r of range.getClientRects()) if (r.width && r.height) rects.push({ x: r.left - origin.left, y: r.top - origin.top, width: r.width, height: r.height });
+          }
+          return rects;
+        `) as (el: Element) => unknown) as Array<{ x: number; y: number; width: number; height: number }>;
+        paints[c.key] = await cell.evaluate(paintOf);
+        if (c.interaction !== 'none') {
+          const changed = paints[c.key] !== entered.restPaint;
+          receipt.behavior.states.push({ key: c.key, state: c.state, reachedBy: REACHED_BY[c.interaction], reached: entered.reached, paintChanged: changed });
+          await leaveState(page, c.interaction);
+        }
+        // state-not-carried is one line per STATE (the contract declares no such state — its cells render the rest state and the pixels judge).
+        for (const p of stateProblems(c, declaredStates, entered.reached, paints[c.key] !== entered.restPaint)) p.startsWith('state-not-carried:') ? notCarried.add(`${p} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`) : problems.push(p);
+        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot) });
       }
+      // `disabled` is a prop, not an interaction: its cell is compared with the
+      // rest cell that has the same other props.
+      for (const c of cases.filter(x => x.state === 'disabled')) {
+        const { disabled: _omit, ...others } = c.props as Record<string, unknown>;
+        const sorted = (o: Record<string, unknown>) => JSON.stringify(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)));
+        const rest = cases.find(x => !x.state && sorted(x.props) === sorted(others));
+        if (!rest) continue;
+        const changed = paints[c.key] !== paints[rest.key];
+        receipt.behavior.states.push({ key: c.key, state: 'disabled', reachedBy: 'the disabled prop', reached: true, paintChanged: changed, comparedWith: rest.key });
+        if (!changed && declaredStates.includes('disabled')) problems.push(`state-inert:disabled:${c.key}`);
+      }
+      problems.push(...notCarried);
       // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
       if (cases[0]?.textProp) {
         const before = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, (await page.locator(`[data-cell="${c.key}"]`).innerText()).trim()])));
@@ -359,7 +554,7 @@ async function main() {
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
         const values = variantValues(prop);
-        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(el => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return JSON.stringify([s.backgroundColor, s.color, s.borderColor, s.borderRadius, r.width, r.height, el.className]); });
+        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
         await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop.name, target] as const);
@@ -383,21 +578,31 @@ async function main() {
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
-    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (alpha-trimmed, pixelmatch threshold 0.1). Both unmasked comparisons, on white and black, must meet the unchanged 5% limit. textMaskedPercent only classifies the white comparison and never excuses either score.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
-      const aligned = alignPair(ours, theirs), diff = diffPair(aligned, []);
+      const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
+      const blackAligned = alignPair(ours, theirs, 0), blackDiff = diffPair(blackAligned, []);
+      writeTriptych(path.join(args.out, `triptych-black-${c.key}.png`), blackAligned, blackDiff.diff);
       const percent = diff.unmaskedPct;
-      if (!Number.isFinite(percent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
+      const blackPercent = blackDiff.unmaskedPct;
+      if (!Number.isFinite(percent) || !Number.isFinite(blackPercent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
       // Share of non-white, non-transparent pixels on each side: a mostly
       // white surface can score under the limit while drawing far less ink.
       const ink = (png: import('pngjs').PNG) => { let n = 0; for (let i = 0; i < png.data.length; i += 4) if (png.data[i + 3] > 8 && (png.data[i] < 247 || png.data[i + 1] < 247 || png.data[i + 2] < 247)) n++; return Math.round(10000 * n / (png.width * png.height)) / 100; };
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT, inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
+      // A SECOND number, never the verdict: the same diff with this render's text
+      // boxes painted out on both sides. It answers one question about a row that
+      // is over the limit — is anything wrong OUTSIDE the glyphs? `null` = the
+      // mask covers the whole canvas, so the number would be vacuous.
+      const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, withinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
+        textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
       if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
+      if (blackPercent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-on-black-above-limit:${c.key}:${blackPercent.toFixed(2)}%`);
       // Mostly-white surfaces can score under the pixel limit while the
       // rendered size is wrong; the trimmed content size must agree too.
       const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);

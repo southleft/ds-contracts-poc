@@ -2,8 +2,13 @@
 
 Read-only REST import of the `Badge` set (72 variants) from the CBDS UI Kit Demo
 file, proposed, generated and checked with `npm run design:consumer:check` on
-2026-09-18. No code was written for this set. `receipt.json` is the measurement;
-this note only explains what was seen.
+2026-09-18. No code was written for this set;
+this note only explains what was seen in that first run. The current receipt
+was remeasured on 2026-09-19 with whole-pixel consumer origins: 46 of 72 pass
+on white, with the remaining small variants above the same 5% limit. It
+predates the new contrasting-background check and is not a current qualification.
+The first-run receipt and captures remain in Git history and the private
+PR131 integration archive.
 
 **Result: installs, mounts and behaves; 0 of 72 variants pass the unchanged 5 % image limit (10.2–52.1 %).**
 Text replacement and all four variant axes (`type`, `style`, `size`, and the

@@ -96,6 +96,19 @@ export interface ClientOptions {
   fetchImpl?: FetchLike;
   apiBase?: string;
   /**
+   * ONLY an injected transport (`fetchImpl`) or a non-default `apiBase` reads
+   * this. `importFromUrl` records `_provenance.stampsObservable` — "a
+   * ds_contracts stamp on this set WOULD have been in the response" — and that
+   * is a fact about what ANSWERED the request, not about the query string this
+   * module wrote: a fixture transport replays whatever bytes it holds
+   * (the repo's own pipeline-written REST fixtures carry no `sharedPluginData`)
+   * and used to be reported observable all the same (review, PR 131 M2). A
+   * caller that injects the transport must assert the plane itself; default
+   * FALSE — fail closed, so an unstamped set is never taken for a designer's
+   * on a replay.
+   */
+  transportCarriesPluginData?: boolean;
+  /**
    * Called when the variables endpoint refuses. The refusal is still swallowed
    * (the import degrades, as it always has) but the CALLER can now tell the
    * user-fixable case from the one they cannot fix — see
@@ -307,6 +320,10 @@ const findSets = (node: RestNode, out: RestNode[] = []): RestNode[] => {
  * The whole no-plugin path: parse the URL, pull the component set, tolerate
  * the variables endpoint being unavailable, and map to dump v1 + MapReport.
  */
+/** Whether a read through `opts` could have SEEN a ds_contracts stamp. */
+export const stampsObservableOn = (opts: ClientOptions): boolean =>
+  opts.fetchImpl === undefined && opts.apiBase === undefined ? true : opts.transportCarriesPluginData === true;
+
 export async function importFromUrl(url: string, token: string, opts: ImportOptions = {}): Promise<MapResult> {
   const parsed = parseFigmaUrl(url);
   // The classified refusal reaches BOTH the caller's callback and the mapper
@@ -327,8 +344,9 @@ export async function importFromUrl(url: string, token: string, opts: ImportOpti
     fileKey: parsed.fileKey,
     // fetchNodes and fetchFile (below) both request `plugin_data=shared`, so a
     // stamp on any set WOULD be in these responses — said here because the
-    // mapper cannot see the request.
-    stampsObservable: true,
+    // mapper cannot see the request. True only when the REAL transport answered
+    // the REAL API; an injected one must assert it (transportCarriesPluginData).
+    ...(stampsObservableOn(opts) ? { stampsObservable: true } : {}),
   };
 
   if (parsed.nodeId) {

@@ -227,6 +227,70 @@ check(
   refusalCode(() => proposeFromDump(states, baseOpts)) ===
     "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
 );
+// docs/23 §D.41 — the refusal above was about WHOSE axis it is. With the
+// positive designer fact (no stamp AND a reader that could have seen one) the
+// axis is projected by the closed table — and the status is only
+// `verified-exact` when the CONTRACT carries every drawn state (review, PR 131
+// C1: the state half of the matrix is read from contract.states, not from the
+// source it is compared with).
+{
+  const observed = { ...baseOpts, stampsObservable: true, mintUnbound: true };
+  const painted = (name: string, State: string, hex: string): DumpNode => ({
+    ...variant(name, { State }),
+    fill: { hex },
+  });
+  const drawn: DumpSet = {
+    ...states,
+    variants: [
+      painted("State=Default", "Default", "#cc0000"),
+      painted("State=Hover", "Hover", "#990000"),
+    ],
+  };
+  const projected = proposeFromDump(drawn, observed);
+  check(
+    "exact mode PROJECTS a designer's interaction-state axis under the stamps-observable fact: verified exact at 2 rows, hover CARRIED by the contract, the axis is not a prop, the decision is named",
+    projected.projection.status === "verified-exact" &&
+      projected.projection.observedCount === 2 &&
+      JSON.stringify(projected.contract.states) === '["hover"]' &&
+      projected.stateAxisProjection?.decision ===
+        "designer-state-axis-projected" &&
+      projected.stateAxisProjection.property === "State" &&
+      !(projected.contract.props as Array<{ name: string }>).some(
+        (p) => p.name === "state",
+      ),
+  );
+  const notCarried = (() => {
+    try {
+      proposeFromDump(states, observed);
+      return "proposed";
+    } catch (error) {
+      return error instanceof ExactProjectionError
+        ? `${error.code} ${error.message}`
+        : String(error);
+    }
+  })();
+  check(
+    "exact mode REFUSES the same axis when a drawn state is not carried by the contract (Hover drawn identically to Default): state-axis-state-not-carried:hover — never verified-exact over dropped rows",
+    notCarried.startsWith("EXACT_SEMANTIC_PROJECTION_AMBIGUOUS ") &&
+      notCarried.includes("state-axis-state-not-carried:hover"),
+  );
+  check(
+    "reviewable inversion proposes that set as legacy-unverified (1 of its 2 source rows has no counterpart in the contract)",
+    proposeFromDump(states, {
+      ...observed,
+      projectionMode: "reviewable-inversion",
+    }).projection.status === "legacy-unverified",
+  );
+  check(
+    "exact mode still refuses the same axis on a set THIS PIPELINE stamped without declaring it",
+    refusalCode(() =>
+      proposeFromDump(
+        { ...drawn, contractId: "check.control" } as DumpSet,
+        observed,
+      ),
+    ) === "EXACT_SEMANTIC_PROJECTION_AMBIGUOUS",
+  );
+}
 
 console.log("\n4. Verified exact success");
 const exact = proposeFromDump(exactSet(), baseOpts);
