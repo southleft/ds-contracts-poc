@@ -47,7 +47,7 @@ type Entry = { sequence: number; previous: string } & (
   // A result for a revoked attempt. Kept as evidence, never counted as its outcome.
   { kind: 'late-result-after-revocation'; envelope: NativeOperationResult });
 type Settlement = 'landed' | 'untouched' | 'unresolved';
-type State = { phase: string; write?: NativeOperationCommand; answered?: boolean; revoked: Set<string>; attested?: { attemptId: string; at: string };
+type State = { phase: string; write?: NativeOperationCommand; answered?: boolean; writeStatus?:string; completedUnchanged?:'rolled-back'|'refused'; revoked: Set<string>; attested?: { attemptId: string; at: string };
   revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: NativeDesignChanges & { attemptId: string }; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; begunAt?: string; claims: number; settled: Map<string, Settlement>;
   wrote: boolean; observation?: unknown; observationScriptSha256?: string; observationParentRevision?: string; problems: string[] };
 function fail(message: string): never { throw Error('native-update-' + message); }
@@ -156,7 +156,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         } else if (c.script !== header.scripts[p].script || c.scriptSha256 !== header.scripts[p].sha256) fail('dispatch-invalid');
         if(p==='update-apply') {
           if(state.wrote || state.phase!=='update-preflight-observed' || !same(JSON.parse(read(path.join(dir,claimFile(state.claims)))),c)) fail('write-precondition-invalid');
-          state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.revokedUntouched;delete state.begunAt;
+          state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.writeStatus;delete state.completedUnchanged;delete state.revokedUntouched;delete state.begunAt;
         } else if(p==='update-preflight-readback' ? state.wrote : !state.wrote) fail('readback-precondition-invalid');
         attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;delete state.observationParentRevision;
       } else if(event.kind==='begin') {
@@ -225,7 +225,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
             delete state.revokedUntouched;
           }
         } else if(p==='update-apply') {
-          state.answered=true;
+          state.answered=true;state.writeStatus=String(r?.status);
           // Acknowledgement never qualifies success. A separate read observes
           // the actual nodes even after a refused or rolled-back write.
           state.phase='update-applied';
@@ -234,7 +234,15 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           state.observation=r;state.observationScriptSha256=state.pending.scriptSha256;
           const dispatch=events.find(e=>e.kind==='dispatch' && e.command.attemptId===state.pending!.attemptId);
           state.observationParentRevision=dispatch?.kind==='dispatch' ? dispatch.parentJournalRevision : undefined;
-          state.phase=nativeContractUpdateMatches(plan,r,true) ? 'update-verified' : 'update-recovery-required';
+          if(nativeContractUpdateMatches(plan,r,true)) state.phase='update-verified';
+          else if(state.answered && state.write && ['rolled-back','refused'].includes(state.writeStatus??'') && nativeContractUpdateUntouched(plan,r)) {
+            // A terminal answer alone is not evidence. This later independent
+            // read proves that every owned fact was restored. The answered
+            // attempt cannot begin again; a replay must match its saved answer.
+            state.phase='update-write-untouched';state.wrote=false;
+            state.completedUnchanged=state.writeStatus as 'rolled-back'|'refused';
+            state.settled.set(state.write.attemptId,'untouched');
+          } else state.phase='update-recovery-required';
         }
         if(['update-refused','update-recovery-required'].includes(state.phase)) {
           // The native program names the check that refused: a conflicting node,
@@ -336,6 +344,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       unresolvedWrite:l.state.unresolved?'reading-canvas' as const:l.state.pending?.phase==='update-apply'?'awaiting-result' as const:undefined,
       acceptedContract:null,nativeQualification:'unqualified' as const,problems:[...new Set([...l.state.problems,...l.state.alarms])],
       // The operator's attestation that a begun write's companion is gone, and whether one is possible now.
+      completedUnchanged:l.state.completedUnchanged,
       attestedDead:l.state.attested&&l.state.attested.attemptId===l.state.write?.attemptId?{...l.state.attested}:undefined,canAttestDead:attestable(l.state)==='ok',
       begunAt:l.state.begun&&l.state.begun===l.state.write?.attemptId?l.state.begunAt:undefined,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};

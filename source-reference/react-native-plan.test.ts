@@ -340,6 +340,15 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
     assert.deepEqual(jobs.reactInitialRequest(first.id), initialRequest);
     assert.deepEqual(jobs.verifiedReactInitialObservation(first.id).request, initialRequest);
     assert.throws(() => jobs.reactRequest(first.id), /react-operation-required/);
+    const successor = structuredClone(initialRequest);
+    successor.observation.id = '20000000-0000-4000-8000-000000000098';
+    assert.equal(jobs.listReactMoved(request.referenceId, undefined, () => initialRequest).length, 0);
+    assert.deepEqual(jobs.listReactMoved(request.referenceId, undefined, () => successor).map(row => ({
+      id: row.operationId, kind: row.kind, missing: row.observationRequired,
+    })), [{ id: first.id, kind: 'initial', missing: false }]);
+    assert.equal(jobs.listReactMoved(request.referenceId, undefined, () => { throw Error('observation-incomplete'); })[0].observationRequired, true);
+    assert.deepEqual(jobs.reactInitialRequest(first.id), initialRequest, 'listing a successor never adopts it or replaces creation evidence');
+    assert.equal(host.figma.root.findAll(() => true).length, before, 'a newer observation cannot allocate native output');
   }
   const baseline = jobs.reactUpdateBaseline(first.id);
   const operationDir = path.join(repo,'private/source-native-app/operations',first.id);

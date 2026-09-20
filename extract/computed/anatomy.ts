@@ -2255,7 +2255,7 @@ export function promoteAnatomy(
       if (!hostIsShapeLeaf && domain.length) {
         const boxes = domain.map(combo => {
           const node = union.alignedByKey.get(`${combo.key}__default`)![i]!.node;
-          return unpaintedPseudoBox(node.style, node.pseudo[pe]);
+          return unpaintedPseudoBox(node.style, node.pseudo[pe], node.pseudoGeometry?.[pe]);
         });
         if (boxes.every(box => box && JSON.stringify(box) === JSON.stringify(boxes[0]))) {
           const name = `${e.partName}-${pe.slice(2)}`;

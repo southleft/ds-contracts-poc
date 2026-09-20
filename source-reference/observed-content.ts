@@ -16,6 +16,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { reactRootStyleExclusion } from './react-root-visual.js';
 import { withPaintedTextFonts, type TextFontEvidence } from './text-fonts.js';
 import { verifiedSvgViewports, type SvgViewportEvidence } from './svg-viewports.js';
+import { observedPseudoGeometry, verifiedPseudoBoxes, type PseudoBoxEvidence } from './pseudo-boxes.js';
 
 export interface ObservedContentDraft {
   version: 1;
@@ -117,8 +118,13 @@ function compileContent(tree: CapturedNode, fonts: TextFontEvidence, svg: SvgVie
 }
 
 /** Shared preparation for single samples and complete observed property sweeps. */
-export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence) {
+export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence, pseudos?: PseudoBoxEvidence) {
   const root = withPaintedTextFonts(tree, fonts);
+  if (pseudos) for (const row of verifiedPseudoBoxes(tree, pseudos)) {
+    let node = root;
+    for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;
+    node.pseudoGeometry = { ...node.pseudoGeometry, [row.pseudo]: observedPseudoGeometry(row) };
+  }
   if (svg) for (const row of verifiedSvgViewports(tree, svg)) {
     let node = root;
     for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;

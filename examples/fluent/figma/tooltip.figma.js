@@ -85,10 +85,10 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 8.76562,
-                "right": 205.906,
-                "bottom": 8.76562,
-                "left": -4.242
+                "top": 9.76562,
+                "right": 206.906,
+                "bottom": 9.76562,
+                "left": -3.242
               },
               "bindings": {
                 "bottomLeftRadius": "imported/tooltip/part-0/border-bottom-left-radius",
@@ -173,10 +173,10 @@ const COMPONENTS = [
               },
               "insetOverlay": true,
               "insetOffsets": {
-                "top": 8.76562,
-                "right": 205.906,
-                "bottom": 8.76562,
-                "left": -4.242
+                "top": 9.76562,
+                "right": 206.906,
+                "bottom": 9.76562,
+                "left": -3.242
               },
               "bindings": {
                 "bottomLeftRadius": "imported/tooltip/part-0/border-bottom-left-radius",

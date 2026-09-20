@@ -1789,7 +1789,8 @@ export function createNativeOperationJobs(
     /** Existing operations for these source cases that follow another source
      * revision. They are candidates for an explicit succession, never listed
      * as current and never matched by recency. */
-    listReactMoved(referenceId: string, currentStateApi?: (caseId: string) => ReactStateApiNativeRequest) {
+    listReactMoved(referenceId: string, currentStateApi?: (caseId: string) => ReactStateApiNativeRequest,
+      currentInitial?: (caseId: string) => ReactInitialNativeRequest) {
       return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const loaded = load(id), creation = loaded.header.request;
         if (!isReactStateApiNativeRequest(creation) && !isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
@@ -1801,11 +1802,14 @@ export function createNativeOperationJobs(
         try { pin = effectiveSource(id, creation) as NativeSourcePin; }
         catch { pin = creation; successionProblem = 'native-source-succession-unreadable:' + id; }
         const followed = nativeSourcePinReference(pin);
-        // Observer changes can require a fresh state experiment without changing
-        // the React reference. Compare complete pins, not just reference IDs.
+        // Observer changes can require fresh initial states or a state experiment
+        // without changing the React reference. Compare complete pins.
         let stateExperimentChanged = false, observationRequired = false;
         if (isReactStateApiNativeRequest(pin) && currentStateApi) {
           try { stateExperimentChanged = !same(pin, currentStateApi(nativeSourcePinCase(pin))); }
+          catch { stateExperimentChanged = true; observationRequired = true; }
+        } else if (isReactInitialNativeRequest(pin) && currentInitial) {
+          try { stateExperimentChanged = !same(pin, currentInitial(nativeSourcePinCase(pin))); }
           catch { stateExperimentChanged = true; observationRequired = true; }
         }
         if ((followed === referenceId && !successionProblem && !stateExperimentChanged) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];

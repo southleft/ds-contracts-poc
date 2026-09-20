@@ -2091,29 +2091,29 @@
         },
         "left": {
           "xs": {
-            "$value": "0px",
+            "$value": "-1px",
             "$type": "dimension"
           },
           "sm": {
-            "$value": "4px",
+            "$value": "3px",
             "$type": "dimension"
           },
           "md": {
-            "$value": "8px",
+            "$value": "7px",
             "$type": "dimension"
           }
         },
         "top": {
           "xs": {
-            "$value": "0px",
+            "$value": "-1px",
             "$type": "dimension"
           },
           "sm": {
-            "$value": "4px",
+            "$value": "3px",
             "$type": "dimension"
           },
           "md": {
-            "$value": "8px",
+            "$value": "7px",
             "$type": "dimension"
           }
         },
