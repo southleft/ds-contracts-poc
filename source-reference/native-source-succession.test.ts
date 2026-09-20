@@ -79,12 +79,25 @@ test('state-API succession retains full experiment pins, including a new experim
  assert.deepEqual(successions.history(PARENT, original), ['a'.repeat(64), 'a'.repeat(64)]);
  assert.throws(() => successions.effective(PARENT, stateApi('a', 'c')), /journal-chain-invalid/);
  for (const bad of [initial('b'), root('b'), { ...stateApi('b'), initial: { ...initial('b'), caseId: 'other' } },
-   { ...stateApi('b'), initial: { ...initial('b'), anchor: root('b', 'other') } },
    { ...stateApi('b'), observation: { ...stateApi('b').observation, key: '../invalid' } }])
    assert.throws(() => successions.adopt(PARENT, original, bad), /case-mismatch/);
  assert.deepEqual(readdirSync(dir), ['00000000.json']);
  assert.equal(successions.adopt(PARENT, original, stateApi('c')).adopted, true);
  assert.equal(nativeSourcePinReference(successions.effective(PARENT, original)), 'c'.repeat(64));
+});
+
+test('initial and state-API source succession can use another cohort root as its archive anchor', t => {
+ for (const kind of ['initial', 'state-api'] as const) {
+  const {successions,dir}=store(t), original=kind==='initial'?initial('a'):stateApi('a');
+  const nextInitial={...initial('b'),anchor:root('b','another-archive-root')};
+  const next=kind==='initial'?nextInitial:{...stateApi('b'),initial:nextInitial};
+  assert.deepEqual(successions.adopt(PARENT,original,next),{adopted:true,sequence:0});
+  assert.deepEqual(successions.effective(PARENT,original),next);
+  assert.deepEqual(successions.adopt(PARENT,original,next),{adopted:false,sequence:1});
+  const before=readFileSync(path.join(dir,'00000000.json'));
+  assert.deepEqual(successions.adopt(PARENT,original,original),{adopted:true,sequence:1});
+  assert.deepEqual(readFileSync(path.join(dir,'00000000.json')),before);
+ }
 });
 
 // The service derives `desired` from the sealed observation an operation

@@ -1,3 +1,4 @@
+import { emitNativeTokenBindingScope } from './native-token-binding-scope.js';
 import {prepareNativeDefaultFillUpdate, nativeDefaultFillUpdateMatches, emitNativeDefaultFillUpdateScript, type NativeDefaultFillUpdatePlan} from './native-contract-default-fill-update.js';
 import {prepareNativeBackgroundUpdate, nativeBackgroundUpdateMatches, resolveNativeBackgroundUpdateInput, emitNativeBackgroundUpdateScript, type NativeBackgroundUpdatePlan} from './native-contract-background-update.js';
 import {prepareNativeSvgUpdate,emitNativeSvgUpdateScript,nativeSvgUpdateMatches,type NativeSvgUpdatePlan} from './native-contract-svg-update.js';
@@ -27,6 +28,8 @@ export interface NativeOpacityUpdatePlan {
   /** Absent unless a value of an owned, allocated, UNBOUND variable changed. A
    * plan without it is byte-identical to one prepared before this field existed. */
   tokenChanges?: NativeTokenValueChange[];
+  /** New variable writes inspect the whole document. Absent on historical plans. */
+  tokenBindingScope?: 'document-v1';
 }
 /** One variable value in one mode. The id and mode id come from the host-pinned
  * token identity, never from a name search. `before` is the value the verified
@@ -150,7 +153,7 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues
   });
   const plan: NativeOpacityUpdatePlan = { version: 1, kind: 'native-contract-opacity-update', acceptedContract: null,
     nativeQualification: 'unqualified', before, baseline, desiredRevision: input.desired.revision, changes, after,
-    ...(tokenUpdate?.tokenChanges.length ? { tokenChanges: tokenUpdate.tokenChanges } : {}) };
+    ...(tokenUpdate?.tokenChanges.length ? { tokenChanges: tokenUpdate.tokenChanges, tokenBindingScope: 'document-v1' } : {}) };
   const revision = revisionOf(plan);
   return { plan, revision };
 }
@@ -358,6 +361,8 @@ return out;`;
  * reverse and names what it could not restore. */
 function emitTokenValueUpdateScript(plan: NativeOpacityUpdatePlan, direction: 'apply' | 'rollback', readOnly: boolean) {
   const changes = plan.tokenChanges;
+  if (plan.tokenBindingScope !== undefined && plan.tokenBindingScope !== 'document-v1') throw Error('native-update-token-binding-scope-invalid');
+  const documentScoped = plan.tokenBindingScope === 'document-v1';
   if (!Array.isArray(changes) || !changes.length || new Set(changes.map(c => c.variableId + '\n' + c.modeId)).size !== changes.length ||
       changes.some(c => !c || typeof c.variableId !== 'string' || !c.variableId || typeof c.modeId !== 'string' || !c.modeId ||
         ![c.before, c.after].every(n => typeof n === 'number' && Number.isFinite(n)) ||
@@ -378,7 +383,9 @@ const collectionId = plan.before.tokenIdentity.collection.id;
 const owned = (variable, change) => variable.id === change.variableId && variable.variableCollectionId === collectionId && variable.resolvedType === 'FLOAT' && variable.remote === false && !!variable.valuesByMode && typeof variable.valuesByMode[change.modeId] === 'number';
 try {
   if (figma.fileKey !== plan.before.operation.fileKey) throw Error('native-update-file-mismatch');
-  if (!figma.variables || typeof figma.variables.getVariableByIdAsync !== 'function' || typeof figma.variables.getLocalVariablesAsync !== 'function') throw Error('native-update-token-api-unavailable');
+  if (!figma.variables || typeof figma.variables.getVariableByIdAsync !== 'function' || typeof figma.variables.getLocalVariablesAsync !== 'function') throw Error('native-update-token-api-unavailable');${documentScoped ? `
+  if (typeof figma.loadAllPagesAsync !== 'function') throw Error('native-update-document-scope-unavailable');
+  await figma.loadAllPagesAsync();` : ''}
   const nodes = new Map(), variables = new Map();
   for (const change of plan.changes) {
     const node = await figma.getNodeByIdAsync(change.nodeId);
@@ -393,13 +400,13 @@ try {
   const current = await (async () => { ${emitNativeContractReadbackScript(plan.before)} })();
   // The last await before the writes. Re-read live bindings afterward: the
   // page or this collection may change while local variables are loading.
-  const locals = await figma.variables.getLocalVariablesAsync();
+${documentScoped ? emitNativeTokenBindingScope() : `  const locals = await figma.variables.getLocalVariablesAsync();
   if (figma.fileKey !== plan.before.operation.fileKey) throw Error('native-update-file-mismatch');
   if (!Array.isArray(locals)) throw Error('native-update-token-api-unavailable');
   const page = figma.root.children.find(n => n.id === plan.before.creation.pageId);
   if (!page || page.type !== 'PAGE') throw Error('native-update-page-missing');
   const liveNodes = [page, ...page.findAll(() => true)];
-  if (liveNodes.length > 10000) throw Error('native-update-scope-too-large');
+  if (liveNodes.length > 10000) throw Error('native-update-scope-too-large');`}
   const normalized = clean(current);
   const recordedNodes = new Map((normalized.nodes || []).map(n => [n.id, n]));
   const states = [], tokenStates = [];
@@ -417,7 +424,9 @@ try {
     // collection during the final await. Use them only to refuse, never to select a target.
     if (locals.some(v => v && references(v.valuesByMode, change.variableId)))
       throw Error('native-update-token-aliased:' + change.variableId);
-    // Include newly inserted nodes and newly added binding fields. The snapshot
+${documentScoped ? `    if (references(styleBindings, change.variableId)) throw Error('native-update-token-style-bound:' + change.variableId);
+    if (references(bindingValues, change.variableId)) throw Error('native-update-token-bound:' + change.variableId);
+` : ''}    // Include newly inserted nodes and newly added binding fields. The snapshot
     // alone cannot prove a variable stayed unbound across the final await.
     for (const node of liveNodes) {
       const recorded = recordedNodes.get(node.id);

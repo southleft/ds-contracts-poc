@@ -6645,8 +6645,8 @@ this cycle adds no new image-fidelity score. Historical correction exports now
 omit current-source pairing and alignment: only a current, unsuperseded correction
 can display those source images. The separately authenticated D.71 matched review
 retains its original evidence. A fresh whole-file check found no consumers or
-aliases of this opacity variable; the product's write guard still checks node
-bindings only on the operation's page, as the review explicitly says.
+aliases of this opacity variable. This cycle used the earlier page-scoped write
+guard; new variable proposals use the document guard described in D.74.
 
 Reproducers: `native-source-succession.test.ts`, `native-source-identity.test.ts`,
 `react-state-api-inspection.test.ts`, `react-state-api-native.test.ts` and
@@ -6660,3 +6660,112 @@ snapshots, refusal, restoration and UI checks are retained in private
 To reverse this decision, remove state-API succession/update eligibility and its
 UI actions while preserving existing creation, succession and correction
 journals, historical readers and shared write guards.
+
+## D.74 Variable updates inspect document bindings before writing
+
+**AGENT decision, 2026-09-20:** new owned, unbound number-variable updates carry
+`tokenBindingScope: 'document-v1'`. Loading only the operation's page could miss
+a consumer elsewhere in the file. The new program loads every page, then checks
+all nodes, including hidden instance children, text ranges, vector-region paints,
+component-property definitions and instance properties. It also checks local
+paint, text, effect and grid styles and every local variable's aliases. A bound
+variable refuses before assignment. The 10,000-node limit now applies across the
+document; an oversized or unavailable scan refuses instead of claiming coverage.
+
+After the last asynchronous read, the program obtains synchronous inventories
+and reads live binding properties. No asynchronous pause separates those checks
+from the existing exact-value checks and assignments. This requires the Sync
+Runner's static document-access mode. The Desktop Bridge's dynamic-page mode
+rejects these synchronous APIs and cannot perform this write. The guard never
+changes access mode or disables hidden-instance filtering to make a check pass.
+
+Historical plans and programs keep their original bytes. Only authenticated
+written history can reconstruct the old plan shape for read-only recovery,
+verification and unchanged-repeat review. Unapplied legacy proposals are
+obsolete. Dispatch, pending-command delivery, re-arm and the begin handshake
+refuse new authority for a legacy variable writer, including an idempotent begin
+request. This does not stop a companion already executing past its old begin
+handshake; the residual risk in B.40 remains.
+
+**API feasibility:** a read-only plugin with Sync Runner's
+manifest mode scanned Evaluations' 63 pages, 1,465 nodes and 135 text nodes in
+319 ms, with 1,075 local variables and no local styles. It found no bindings or
+aliases of the opacity variable and found consumers of the height variable.
+The first probe exposed Figma's throwing property-definition getter on variant
+components; the implemented scan reads definitions only on component sets and
+standalone components. The plugin was closed and the canvas inspected. Evidence
+is retained in private `whole-file-binding-readonly-v2-k3p0xiqa/` and
+`sync-binding-api-probe-v2-nutrwyz9/`. The application then exercised the guard on the existing state-API Switch in
+Evaluations. A temporary consumer bound to its opacity variable on a separate
+page caused preflight to refuse `native-update-token-bound:VariableID:87:1059`
+after scanning 64 pages / 1,468 nodes. No apply claim or begin was recorded;
+independent readback found both owned pages, 30 variables and 19 PNGs unchanged.
+After removing the three recorded probe nodes, retrying the same proposal scanned
+63 pages / 1,465 nodes and changed exactly three disabled-root literals and their
+unbound allocated variable from 0.5 to `Math.fround(0.4)`. Only the three affected
+main exports changed. Restoring the source produced a separately verified reverse
+update to 0.5. Both owned pages, all 30 variables, 19 PNGs, three source files and
+17 original creation records restored exactly; the first refusal remains the
+forward journal's prefix. Plugins were closed and the before, changed and
+restored canvases inspected. Evidence and a visual review are retained in private
+`document-binding-live-lwtcu999/`. This is a bounded live refusal, retry and
+restoration proof; it adds no fidelity qualification.
+
+Adversarial coverage in `core/native-contract-token-update.test.ts` checks
+cross-page, hidden-instance, text, style, grid and property consumers, including
+aliases or styles inserted after the final asynchronous inventory, unavailable
+APIs and oversized scopes. `source-reference/native-update-legacy-scope.test.ts`
+checks old unapplied, pending, begun, landed and partial journals;
+`core/native-contract-update-bytes.test.ts` pins the historical programs.
+
+To reverse this decision, disable new variable-value proposals while retaining
+the legacy write-authority refusal and historical readers. Do not restore
+page-only variable writes or rewrite saved journals.
+
+## D.75 Stateful source identity does not depend on the archive anchor
+
+**AGENT decision, 2026-09-20:** an initial-state or state-API operation may follow
+fresh evidence whose saved root anchor is another case in the cohort. The anchor
+locates and authenticates the complete source archive; the stateful case selects
+the component. Requiring both case names to stay equal incorrectly refused a
+Switch observation anchored through Badge when its previous archive was anchored
+through Alert (`native-source-succession-case-mismatch`). The live refusal is
+preserved in private `document-binding-live-lwtcu999/`.
+
+The target stateful case, request shape and independently authenticated source
+module/export must still match. Every initial-state and callback experiment pin
+is checked and retained. Nested positional instances remain unsupported. This
+changes succession eligibility only; it grants no native write authority and
+rewrites no historical record. The changed-source adoption and the verified
+forward/reverse updates in D.74 demonstrate this path live.
+
+State inspectors also keep a common recorded anchor when another saved root
+becomes current. Within the exact same reference, ownership and inventory,
+selection prefers an anchor with both initial-state and callback records, then
+one with initial-state records. Both original and followed root pins are
+considered because historical keys retain their original compilation marker.
+Pointer presence selects a request only; readers still authenticate every seal
+and source file. Corrupt evidence refuses rather than silently selecting another
+record. A live repeat initially exposed this second defect and refused without
+changing any of 231 plan/update files. With the selection repair, the original
+Alert-anchored callback evidence reappeared, including its three broad-input
+refusals. Fresh observations completed nine initial states and 54 combined-state
+activation trials with 81 exact restorations. The existing native operation
+followed this evidence without creating another Figma component. Because the
+observation revision changed, review produced a zero-property proposal. The
+companion reported `no-op` and independent readback verified all 29 nodes,
+token data and nine main images exactly against the restored result. The app
+showed **update verified / pinned inputs match**. This advances evidence without
+assigning a native property; the earlier refusal and corrections remain intact.
+A subsequent review reused that verified result: no new plan, update event or
+succession, and all 269 plan/update/succession files remained byte-identical.
+
+Tests exercise alternate anchors, unchanged repeats, reversal, foreign-module
+refusal, immutable journal prefixes and exclusion of another reference, ownership,
+inventory or stateful case from anchor selection.
+
+To reverse, restore the anchor-case equality checks in
+`source-reference/native-source-succession.ts` and remove recorded-anchor
+selection from `source-reference/react-reference.ts`; keep existing succession entries
+readable and refuse only new adoptions with another anchor. Rejecting the saved
+entries would strand otherwise authenticated operations.

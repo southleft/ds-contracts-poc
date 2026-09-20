@@ -293,7 +293,12 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(load(l.id).previous!==l.previous) fail('journal-changed');
     return record;
   };
+  const requireCurrentWriteScope=(l:Loaded) => {
+    if(l.plan.kind==='native-contract-opacity-update' && l.plan.tokenChanges?.length && l.plan.tokenBindingScope!=='document-v1')
+      fail('legacy-token-write-scope-refused');
+  };
   const authenticate=(l:Loaded) => {
+    requireCurrentWriteScope(l);
     if (!same(scripts(authenticatePlan(l)),l.header.scripts)) fail('source-or-compiler-changed');
   };
   const authenticateObservation=(l:Loaded) => {
@@ -472,6 +477,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     beginWrite(id:string,attemptId:string) {
       assertOutsideEvidenceSnapshot();
       const l=load(id);
+      requireCurrentWriteScope(l);
       if(l.state.revoked.has(attemptId)) fail('write-begin-refused');
       if(l.state.begun===attemptId&&l.state.pending?.attemptId===attemptId&&!l.state.unresolved) return;
       if(l.state.unresolved||l.state.pending?.phase!=='update-apply'||l.state.pending.attemptId!==attemptId||l.state.begun) fail('write-begin-refused');

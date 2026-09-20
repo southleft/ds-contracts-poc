@@ -31,10 +31,40 @@ import {
   createReactReferenceService,
   reactReferenceHtml,
   reactReferenceUnchanged,
+  selectRecordedInspectionAnchor,
 } from "./react-reference.js";
+import { reactInspectionRequest } from './react-initial-inspection.js';
+import { revisionOf } from '../core/contract-provenance.js';
+import type { ReactNativeRequest } from './react-native-request.js';
 import { buildReactOwnershipReference } from "./react-ownership.js";
 import type { ReactSourceProgram } from "./react-source-program.js";
 import { inventoryEvidence } from "./react-validation-evidence.js";
+
+test('adding a saved root keeps state inspectors on their recorded cohort anchor without borrowing another archive', t => {
+  const repo=mkdtempSync(path.join(tmpdir(),'react-inspection-anchor-'));
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const anchor:ReactNativeRequest={version:1,kind:'react-root-draft',referenceId:'a'.repeat(64),caseId:'new-root',
+    ownership:{id:'11111111-2222-4333-8444-555555555555',sha256:'b'.repeat(64)},inventorySha256:'c'.repeat(64),matrixRevision:'sha256:'+'d'.repeat(64)};
+  const prior={...anchor,caseId:'prior-root',compilation:'current' as const},foreign={...prior,referenceId:'e'.repeat(64)};
+  const record=(pin:ReactNativeRequest,kind:'initial'|'callback',caseId='stateful')=>{
+    const dir=path.join(repo,`private/react-${kind}-inspections`,revisionOf(reactInspectionRequest(pin,caseId)).slice(7));
+    mkdirSync(dir,{recursive:true});writeFileSync(path.join(dir,'latest.json'),'untrusted pointer: selection is not authentication');
+  };
+  record(foreign,'initial');record(foreign,'callback');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[foreign],'stateful'),anchor);
+  record(prior,'initial');record(prior,'callback');record(anchor,'initial');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[foreign,prior],'stateful'),prior);
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior,foreign],'stateful'),prior);
+  const followed={...prior};delete (followed as Partial<typeof prior>).compilation;
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[followed,prior],'stateful'),prior,
+    'a succession can omit the compilation marker, but saved observations retain their original exact pin');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior],'another-state'),anchor);
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior]),anchor);
+  for(const changed of [{...prior,inventorySha256:'e'.repeat(64)},{...prior,ownership:{...prior.ownership,sha256:'e'.repeat(64)}}]){
+    record(changed,'initial');record(changed,'callback');
+    assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[changed],'stateful'),anchor);
+  }
+});
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");

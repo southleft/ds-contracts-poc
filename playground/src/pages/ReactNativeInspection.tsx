@@ -65,7 +65,7 @@ function updateProblem(problem: string) {
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[];
+  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -204,7 +204,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {row.updates?.map(update => <div key={update.id}>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.tokenChanges?.length && <>
-              <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. It writes one only if no node on this operation's page binds it and no local variable aliases it. Nodes on other pages are not checked: one bound to {update.tokenChanges.length === 1 ? 'this variable' : 'these variables'} would follow the new value.</p>
+              <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
+                ? 'Before writing, it checks nodes on every page, including hidden instance children and text ranges, local styles, and local variable aliases. A binding, unavailable scan, or more than 10,000 nodes stops the update.'
+                : "This historical proposal checked only this operation's page and local variable aliases. It cannot authorize another variable write; its results remain available for review and recovery."}</p>
               <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Token</th><th>Variable</th><th>Mode</th><th>Saved value</th><th>Proposed value</th></tr></thead>
                 <tbody>{update.tokenChanges.map(change => <tr key={change.variableId + ':' + change.modeId}><td>{change.tokenPath}</td><td>{change.variableId}</td><td>{change.sourceMode}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>
             </>}

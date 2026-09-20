@@ -67,9 +67,19 @@ export function createNativeUpdatePlans(repo: string,
     const source = derive(parentId, roots[0]?.parentJournalRevision);
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
     const tip=chain(parentId,source,written,self);
+    const update=prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline});
+    // Reconstruct only authenticated WRITTEN legacy history, never an unapplied
+    // proposal. The complete record still has to match below; compiler/source
+    // drift cannot be hidden by removing this version field.
+    if(self && written.some(entry=>entry.proposalId===self)) {
+      const saved=read(parentId,self).update.plan;
+      if(saved.kind==='native-contract-opacity-update' && saved.tokenChanges?.length && saved.tokenBindingScope===undefined &&
+          update.plan.kind==='native-contract-opacity-update' && update.plan.tokenBindingScope==='document-v1') {
+        delete update.plan.tokenBindingScope;update.revision=revisionOf(update.plan);
+      }
+    }
     return { version: 1, parentId, parentJournalRevision: source.parentJournalRevision,
-      ...(tip.predecessor ? {predecessor:tip.predecessor} : {}),
-      update: prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline}) };
+      ...(tip.predecessor ? {predecessor:tip.predecessor} : {}), update };
   };
   const read = (parentId: string, id: string): Record => evidenceReadOnce(displayScope, {parentId,id}, () => {
     if (!HASH.test(id)) throw Error('native-update-plan-id-invalid');
@@ -85,12 +95,12 @@ export function createNativeUpdatePlans(repo: string,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
     changes:structuredClone(record.update.plan.changes),
     // Variable values this update writes. Absent for every plan without them.
-    ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges)} : {}),
+    ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges),
+      ...(record.update.plan.tokenBindingScope ? {tokenBindingScope:record.update.plan.tokenBindingScope} : {})} : {}),
     limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified',
-      // Measured before a variable write: this operation's page and every local
-      // variable. A node on another page bound to it is not read (a full-file
-      // walk is not affordable on large files), so it would follow the new value.
-      ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ? [NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
+      // Historical plans keep their measured scope; they cannot authorize a new write.
+      ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ?
+        [record.update.plan.tokenBindingScope==='document-v1' ? 'document-binding-scan-required' : NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
   return {
     prepare(parentId: string) {
       assertOutsideEvidenceSnapshot();

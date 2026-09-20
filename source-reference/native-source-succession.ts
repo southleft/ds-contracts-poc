@@ -41,20 +41,22 @@ function assertSuccessor(original: NativeSourcePin, successor: NativeSourcePin) 
   if (isReactStateApiNativeRequest(original)) {
     // The complete state experiment remains part of the pin and journal seed.
     // It cannot be replaced by appearance evidence alone.
-    if (!isReactStateApiNativeRequest(successor) || successor.initial.caseId !== original.initial.caseId ||
-        successor.initial.anchor.caseId !== original.initial.anchor.caseId) fail('case-mismatch');
+    if (!isReactStateApiNativeRequest(successor) || successor.initial.caseId !== original.initial.caseId) fail('case-mismatch');
   } else if (isReactInitialNativeRequest(original)) {
     // `instance-N` is positional: a source edit that inserts a sibling moves it
     // onto another element. Until an instance has a stable descriptor, only
     // root-level initial states can follow a later observation.
     if (original.version !== 1) fail('kind-unsupported');
-    if (!isReactInitialNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId ||
-        successor.anchor.caseId !== original.anchor.caseId) fail('case-mismatch');
+    if (!isReactInitialNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId) fail('case-mismatch');
   } else if (isReactNativeRequest(original)) {
     // Nested child roots pin a selection inside their parent's observation.
     if (original.version !== 1) fail('kind-unsupported');
     if (!isReactNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId) fail('case-mismatch');
   } else fail('kind-unsupported');
+  // An initial/state-API anchor authenticates a whole cohort archive. Its root
+  // case is not the stateful component's identity. The service independently
+  // reads the target case in both sealed archives and requires the same source
+  // module/export before adoption; every experiment pin remains immutable.
 }
 
 export function createNativeSourceSuccessions(repo: string) {
