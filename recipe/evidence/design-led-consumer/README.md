@@ -2,6 +2,8 @@
 
 MEASURED, NOT GRADED. `acceptedContract: null` everywhere; no owner grade is recorded here.
 
+**Historical white-only receipts.** These files retain the original measurement substrate and are not current two-background acceptance evidence.
+
 Each folder is one run of `npm run design:consumer:check` on a designer-drawn set: a read-only REST re-read of the set
 (`inputs/rest-dump.json`), the proposed contract, the generated React (`inputs/generated/`), the clean consumer's
 screenshots, Figma's own renders, the triptychs and `receipt.json`.
@@ -29,3 +31,24 @@ npm run extract:figma -- <work>/set.rest-dump.json --out <work>/propose
 npx ds-contracts generate <work>/propose/*.contract.proposed.json --out <work>/propose/generated --stories --tokens <repo token files>,<work>/propose/minted.dtcg.json
 npm run design:consumer:check -- --dump <work>/set.rest-dump.json --contract <work>/propose/<set>.contract.proposed.json --generated <work>/propose/generated --component <Name> --out <work>/evidence
 ```
+
+## Current integration measurement
+
+Fresh REST GET-only captures after integrating the interactive-root and explicit
+zero-padding rules measure Altitude Badge 10/10, CBDS Badge 66/72, Tabs 2/2 by
+image score and Checkbox Group 0/12 on the joint white/black criterion. The 5%
+limit is unchanged. Maximum white/black mismatches are 4.825% / 4.825%,
+4.427% / 6.120%,1.824%/ 3.593% and4.011% / 10.364%, respectively.
+
+Tabs no longer nests a button inside its panel button. Its width falls from 453px
+to 441px, but the default content still measures 441px versus 438px. Its variant
+change is discarded and two text lines remain visibly missing. Checkbox Group
+passes white but every black comparison fails; hidden legends remain visible
+and nine content-size checks fail. Dependency children are included in the
+parent package but are not independently mounted or qualified.
+
+These CLI observations do not qualify the complete app journey or component
+semantics. Fresh receipts and both pre-merge source versions are preserved in
+private `pr137-main-integration-tbx6mgdq/`; the prior dependency-closure baseline
+remains in `pr136-main-integration-s0jph0cm/`. See docs/23 D.44 and D.51. The
+historical white-only artifacts above remain historical measurements.

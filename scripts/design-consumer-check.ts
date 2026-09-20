@@ -27,7 +27,7 @@
  *   4. behave   — replace the TEXT-bound prop at runtime and assert the DOM
  *                 text changes in every text-bearing cell; switch every
  *                 variant-bearing cell to another variant and assert its
- *                 computed root style changes. A prop the component accepts
+ *                 rendered subtree paint, text or relative geometry changes. A prop the component accepts
  *                 but discards fails here.
  *   5. compare  — fetch Figma's own PNG of each variant node (REST
  *                 /v1/images, read-only) and score it against the consumer's
@@ -41,7 +41,10 @@
  * <dir from `ds-contracts generate`> --component <Name> --out <dir>
  * [--token <figma token>] (else FIGMA_TOKEN; without a token the image
  * comparison is recorded as `figma-images-unavailable`, never as a pass).
+ * --keep-built-consumer retains the isolated production build in out/review-site
+ * for visible browser inspection; it does not change the comparison or score.
  */
+import { packageReactLibrary } from './package-react-library.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -58,6 +61,12 @@ import { contractDependencyEdges } from './contract-schema.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
 const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
+/** Figma exports node alpha, excluding the editor page. Match that substrate
+ *  without changing the component or the page retained for visible review. */
+export const NODE_SCREENSHOT_OPTIONS = {
+  omitBackground: true,
+  style: 'html, body { background: transparent !important; }',
+};
 /** What an OVER-LIMIT row's second number says. It names, it never excuses: the
  *  verdict stays `withinLimit: false` and the check stays red. `text-only` = with
  *  the render's text boxes painted out on both sides the rest is within the same
@@ -85,12 +94,12 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
   return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
 }
 
-type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
+type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean };
 function parseArgs(argv: string[]): Args {
   const read = (flag: string) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : undefined; };
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
-    out: required('--out'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
+    out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
@@ -137,15 +146,26 @@ const variantValues = (prop: any): unknown[] =>
  *  the group's contract must not mount the child's variants). */
 export function findDumpSet(dump: any, contract: any, component: string): any {
   const isSet = (v: any) => v && typeof v === 'object' && Array.isArray(v.variants);
-  const anchor = contract?.bindings?.figma?.anchors?.nodeId;
-  const byName = isSet(dump[component]) ? dump[component] : Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
+  const anchors = contract?.bindings?.figma?.anchors;
+  const anchor = anchors?.nodeId;
+  const file = dump?._provenance?.fileKey;
+  if (typeof file === 'string' && file && typeof anchors?.fileKey === 'string' && anchors.fileKey && file !== anchors.fileKey)
+    throw new Error(`design:consumer:check — dump-set-file-mismatch:${component}: the dump and contract identify different Figma files`);
+  const sets = [...new Set(Object.values(dump).filter(isSet))] as any[];
+  const anchored = typeof anchor === 'string' ? sets.filter(v => v.nodeId === anchor) : [];
+  if (anchored.length > 1)
+    throw new Error(`design:consumer:check — dump-set-anchor-ambiguous:${anchor}`);
+  const named = sets.filter(v => v === dump[component] || v.setName === component);
+  if (named.length > 1)
+    throw new Error(`design:consumer:check — dump-set-name-ambiguous:${component}`);
+  const byName = named[0];
   if (byName) {
-    if (typeof anchor === 'string' && typeof byName.nodeId === 'string' && byName.nodeId !== anchor) {
+    if (typeof anchor === 'string' && byName.nodeId !== anchor) {
       throw new Error(`design:consumer:check — dump-set-anchor-mismatch:${component}: the dump set "${byName.setName ?? component}" is node ${byName.nodeId} but the contract is anchored to ${anchor}; refusing to mount one set's variants against another's contract`);
     }
     return byName;
   }
-  return typeof anchor === 'string' ? Object.values(dump).find((v: any) => isSet(v) && v.nodeId === anchor) : undefined;
+  return anchored[0];
 }
 
 /** Every contract id the mounted contract depends on, transitively through
@@ -250,8 +270,21 @@ export const paintOf = new Function('el', `
     'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth',
     'borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle',
     'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
-    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
+    'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
+    'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
   return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
+`) as (el: Element) => string;
+/** Observe actual variant effects across the rendered subtree. Class names
+ * alone prove nothing; relative positions catch a rearrangement whose root
+ * dimensions stay fixed. Text also matters when glyph advances are equal. */
+export const variantPaintOf = new Function('el', `
+  const paint = ${paintOf.toString()};
+  const root = el.getBoundingClientRect();
+  const boxes = [el, ...el.querySelectorAll('*')].map(node => {
+    const r = node.getBoundingClientRect();
+    return [node.tagName, r.x - root.x, r.y - root.y, r.width, r.height];
+  });
+  return JSON.stringify([paint(el), el.innerText ?? el.textContent, boxes]);
 `) as (el: Element) => string;
 /** Keyboard-modality focus on the component's own focus target: the root when
  *  it is focusable, else its first focusable descendant. Returns whether
@@ -312,45 +345,6 @@ export function stateProblems(c: { key: string; interaction: Interaction; state?
 /** Figma axes or values the contract does not map; reported, never skipped. */
 const unmapped = new Set<string>();
 
-function packageLibrary(generatedDir: string, component: string, work: string) {
-  const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
-  mkdirSync(src, { recursive: true }); mkdirSync(dist, { recursive: true });
-  // Copy generated sources except stories (a Storybook consumer is a different check).
-  const copy = (from: string, to: string) => {
-    for (const entry of readdirSync(from)) {
-      const source = path.join(from, entry), target = path.join(to, entry);
-      if (statSync(source).isDirectory()) { mkdirSync(target, { recursive: true }); copy(source, target); }
-      else if (!/\.stories\.[tj]sx?$/.test(entry)) cpSync(source, target);
-    }
-  };
-  copy(generatedDir, src);
-  if (!existsSync(path.join(src, 'index.ts')) || !existsSync(path.join(src, component))) throw new Error('design:consumer:check — generated dir lacks index.ts or the component folder');
-  // Transpile TS/TSX → ESM JS, file by file (no bundling), and copy CSS as files.
-  const sources: string[] = [];
-  const walk = (dir: string) => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p) : sources.push(p); } };
-  walk(src);
-  const tsSources = sources.filter(f => /\.tsx?$/.test(f));
-  run(path.join(ROOT, 'node_modules', '.bin', 'esbuild'), [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', `--outbase=${src}`, `--outdir=${dist}`], ROOT);
-  for (const f of sources.filter(f => f.endsWith('.css'))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
-  // Declarations, so a TypeScript consumer sees the contract-derived props.
-  writeFileSync(path.join(pkgDir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { declaration: true, emitDeclarationOnly: true, jsx: 'react-jsx', module: 'ESNext', moduleResolution: 'Bundler',
-    target: 'ES2022', strict: true, skipLibCheck: true, outDir: 'dist', rootDir: 'src', types: [],
-    // Declaration emission needs React's types. This packaging step is the
-    // repository's tool; only the consumer below must stay free of repo paths.
-    paths: { react: [path.join(ROOT, 'node_modules', '@types', 'react', 'index.d.ts')], 'react/jsx-runtime': [path.join(ROOT, 'node_modules', '@types', 'react', 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
-  writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
-  run(path.join(ROOT, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], pkgDir);
-  const name = `@ds-contracts-generated/${component.toLowerCase()}`;
-  writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
-    description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
-    files: ['dist'], main: './dist/index.js', types: './dist/index.d.ts',
-    exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' }, './tokens.css': './dist/tokens.css', './package.json': './package.json' },
-    // The barrel imports tokens.css on purpose; a consumer bundler must not drop it.
-    sideEffects: ['./dist/index.js', '**/*.css'], peerDependencies: { react: '>=18', 'react-dom': '>=18' } }, null, 2));
-  const packed = run('npm', ['pack', '--json', '--pack-destination', work], pkgDir);
-  const tarball = path.join(work, JSON.parse(packed)[0].filename as string);
-  return { name, tarball, tarballSha256: sha256(readFileSync(tarball)), dist };
-}
 
 function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string) {
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
@@ -440,7 +434,7 @@ async function main() {
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'] }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
@@ -468,7 +462,7 @@ async function main() {
   receipt.inputs.contractGraph = contractGraph(contract, siblings).map(ref => ({ ...ref, packaged: ref.name !== null && receipt.inputs.componentFolders.includes(ref.name) }));
   for (const ref of receipt.inputs.contractGraph) if (!ref.packaged) problems.push(`dependency-not-packaged:${ref.id}`);
   try {
-    const lib = packageLibrary(args.generated, args.component, work);
+    const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
     const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
     const consumer = writeConsumer(work, lib, args.component, cases, reactVersion);
@@ -486,6 +480,12 @@ async function main() {
     run(path.join(consumer, 'node_modules', '.bin', 'vite'), ['build', '--logLevel', 'error'], consumer);
     const built = path.join(consumer, 'dist', 'index.html');
     if (!existsSync(built)) throw new Error('vite build produced no index.html');
+    if (args.keepBuiltConsumer) {
+      const review = path.join(args.out, 'review-site');
+      if (existsSync(review)) throw new Error('consumer review-site already exists; use a new evidence directory');
+      cpSync(path.join(consumer, 'dist'), review, { recursive: true, errorOnExist: true, force: false });
+      receipt.consumer.reviewSite = 'review-site';
+    }
     const builtCss = readdirSync(path.join(consumer, 'dist', 'assets')).filter(f => f.endsWith('.css')).map(f => readFileSync(path.join(consumer, 'dist', 'assets', f), 'utf8')).join('\n');
     writeFileSync(path.join(args.out, 'consumer-built.css'), builtCss);
     const tokenNames = [...readFileSync(path.join(args.generated, 'tokens.css'), 'utf8').matchAll(/^\s*(--[a-z0-9-]+):/gim)].map(m => m[1]);
@@ -560,9 +560,9 @@ async function main() {
         if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
-        // The root element's layout box on a white page, the same comparison
-        // basis the application uses; Figma's export is the node's own bounds.
-        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
+        // Match the Figma node export's transparent substrate. The scorer
+        // applies its shared background after trimming both alpha bounds.
+        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
         // Where this render draws text, in the screenshot's own pixels (the root's
         // layout box). The same walk extract/figma/visual-parity/render.ts makes.
         // Serialized as text for the same reason as the font probe above.
@@ -648,7 +648,7 @@ async function main() {
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
         const values = variantValues(prop);
-        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(el => { const s = getComputedStyle(el); const r = el.getBoundingClientRect(); return JSON.stringify([s.backgroundColor, s.color, s.borderColor, s.borderRadius, r.width, r.height, el.className]); });
+        const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
         await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop.name, target] as const);
@@ -672,15 +672,18 @@ async function main() {
     const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
-    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1). mismatchPercent is the UNMASKED run and alone decides withinLimit; textMaskedPercent is the same diff with this render\'s text boxes masked (inflated by the scorer\'s own 4 px) and only classifies an over-limit row', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (alpha-trimmed, pixelmatch threshold 0.1). Both unmasked comparisons, on white and black, must meet the unchanged 5% limit. textMaskedPercent only classifies the white comparison and never excuses either score.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
       const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
+      const blackAligned = alignPair(ours, theirs, 0), blackDiff = diffPair(blackAligned, []);
+      writeTriptych(path.join(args.out, `triptych-black-${c.key}.png`), blackAligned, blackDiff.diff);
       const percent = diff.unmaskedPct;
-      if (!Number.isFinite(percent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
+      const blackPercent = blackDiff.unmaskedPct;
+      if (!Number.isFinite(percent) || !Number.isFinite(blackPercent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
       // Share of non-white, non-transparent pixels on each side: a mostly
       // white surface can score under the limit while drawing far less ink.
       const ink = (png: import('pngjs').PNG) => { let n = 0; for (let i = 0; i < png.data.length; i += 4) if (png.data[i + 3] > 8 && (png.data[i] < 247 || png.data[i + 1] < 247 || png.data[i + 2] < 247)) n++; return Math.round(10000 * n / (png.width * png.height)) / 100; };
@@ -689,10 +692,11 @@ async function main() {
       // is over the limit — is anything wrong OUTSIDE the glyphs? `null` = the
       // mask covers the whole canvas, so the number would be vacuous.
       const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT,
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, withinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
         textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
       if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
+      if (blackPercent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-on-black-above-limit:${c.key}:${blackPercent.toFixed(2)}%`);
       // Mostly-white surfaces can score under the pixel limit while the
       // rendered size is wrong; the trimmed content size must agree too.
       const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);

@@ -59,6 +59,20 @@ test('typed size provenance distinguishes authored constraints from measured aut
   // author's fixed size; a clamp (below) is not.
   rows=await read('.subject{height:18.4px}');
   assert.deepEqual([rows.find(r=>r.channel==='height')!.status,rows.find(r=>r.channel==='height')!.value],['fixed','18.3906px']);
+  // The declaration must BE the box. Where width/height do not apply, getComputedStyle answers with the computed value
+  // itself, so a computed-vs-used comparison passes vacuously: the MEASURED border box decides.
+  const span:ReactOwnership={...ownership,nodes:[{...ownership.nodes[0],tag:'span'}]};
+  for(const display of ['inline','contents','table-row']){ // a button blockifies `inline`; a span in a block parent does not
+   await page.setContent(`<style>.subject{display:${display};width:16px;height:16px}</style><div style="display:${display==='table-row'?'table':'block'};width:100px"><span id="subject" class="subject">x</span></div>`);
+   assert.deepEqual((await readReactStyleOrigin(page,'#subject',span)).roots[0].sizes!.map(r=>[r.status,r.reason]),Array(2).fill(['unresolved',display==='table-row'?'size-clamped-or-layout-dependent':'size-declaration-does-not-apply']),display);
+  }
+  for(const [css,reason] of [
+    ['.subject{box-sizing:content-box;width:12px;height:12px;padding:2px;border:1px solid}','size-is-content-box'],['.subject{width:16px;height:16px;zoom:2}','size-zoomed-context'],
+    ['body{zoom:1.5}.subject{width:16px;height:16px}','size-zoomed-context'],['.subject{width:16px;height:16px;scale:2}','size-clamped-or-layout-dependent']]){
+   rows=await read(css);assert.deepEqual(rows.map(r=>[r.status,r.reason]),[['unresolved',reason],['unresolved',reason]],css);
+  }
+  for(const css of ['.subject{box-sizing:content-box;padding:0;border:0;width:16px;height:16px}','.subject{width:16px;height:16px;padding:2px;border:1px solid}','.subject{width:16px;height:18.4px;translate:40px}'])
+   assert.deepEqual((await read(css)).map(r=>r.status),['fixed','fixed'],css);
   rows=await read('.subject{width:40px;min-width:80px}');
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'size-clamped-or-layout-dependent');
   rows=await read('.subject{width:40px;inline-size:50px}');

@@ -37,6 +37,10 @@ import {
 import { isTourId, TOURS, type StepId, type TourId } from '../engine/tours';
 import { FlowPanel, type FlowView } from '../components/FlowPanel';
 import type { DumpSet } from '../../../extract/figma/types.js';
+import { dumpClosure } from '../../../extract/figma/rest/closure.js';
+import { recordFigmaClosure } from '../engine/figma-import-workspace';
+import { reactLibraryFamily } from '../engine/react-library';
+import type { RecordImportResult } from '../engine/workspace';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
   capturedTokensFromDump,
@@ -1127,7 +1131,7 @@ export function Playground() {
     ];
   };
 
-  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource) => {
+  const applyProposal = (proposal: FigmaProposal, origin: string, wsSource: WorkspaceSource, saved?: RecordImportResult) => {
     const contractText = pretty(proposal.contract);
     const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
     const minted: MintedTokenLayer | null =
@@ -1162,7 +1166,7 @@ export function Playground() {
         : [];
     // A successful design import lands in the session workspace, receipts
     // and all — re-applying the same set refreshes its entry.
-    const recorded = recordImport({
+    const recorded = saved ?? recordImport({
       name: proposal.setName,
       contractId: contractIdOf(proposal.contract),
       source: wsSource,
@@ -1178,7 +1182,8 @@ export function Playground() {
     setText(contractText);
     setProvenance(provenanceLine);
     setPristine({ text: contractText, provenance: provenanceLine });
-    setReceipts(recorded.receipts);
+    setReceipts(saved && recorded.receipts ? { ...recorded.receipts,
+      groups: [...recorded.receipts.groups, ...capturedGroups, ...stubGroups] } : recorded.receipts);
     setActiveExample(null);
     setExpectedRefusal(null);
     setWsLoaded(null);
@@ -1217,13 +1222,17 @@ export function Playground() {
       if (groups.length > 0) setReceipts({ source: origin, groups });
       return;
     }
+    const captured = capturedTokensFromDump(result.dump as Record<string, unknown>);
+    const closure = dumpClosure(result.dump);
+    const family = closure ? recordFigmaClosure(batch, closure,
+      proposal => ({ source: origin, groups: [...groups, ...proposalGroups(proposal)] }), captured) : undefined;
     importGroupsRef.current = groups;
     figmaOriginRef.current = { origin, ws: 'figma' };
     // REST dumps carry no `_variables` (Enterprise-only endpoint) — this is
     // null there and the minted route stays the degraded fallback.
-    capturedRef.current = capturedTokensFromDump(result.dump as Record<string, unknown>);
+    capturedRef.current = captured;
     setFigmaProposals(batch.proposals);
-    applyProposal(batch.proposals[0], origin, 'figma');
+    applyProposal(family?.proposal ?? batch.proposals[0], origin, 'figma', family?.recorded);
   };
 
   // ------------------------------------------------------ plugin bridge state
@@ -1425,6 +1434,7 @@ export function Playground() {
   // ------------------------------------------------------------- json state
   const [jsonText, setJsonText] = useState('');
   const [jsonError, setJsonError] = useState<PlainError | null>(null);
+  const [jsonReading, setJsonReading] = useState(false);
 
   const loadJson = () => {
     setJsonError(null);
@@ -1535,14 +1545,18 @@ export function Playground() {
                 )
               : notice('No component set found in the pasted dump.'),
           );
-          if (groups.length > 0) setReceipts({ source: 'pasted Figma dump', groups });
+          if (groups.length > 0) setReceipts({ source: 'Figma JSON import', groups });
           return;
         }
+        const captured = capturedTokensFromDump(parsed as Record<string, unknown>);
+        const closure = dumpClosure(parsed as FigmaImportResult['dump']);
+        const family = closure ? recordFigmaClosure(batch, closure,
+          proposal => ({ source: 'Figma JSON import', groups: [...groups, ...proposalGroups(proposal)] }), captured, 'json') : undefined;
         importGroupsRef.current = groups;
-        figmaOriginRef.current = { origin: 'pasted Figma dump', ws: 'json' };
-        capturedRef.current = capturedTokensFromDump(parsed as Record<string, unknown>);
+        figmaOriginRef.current = { origin: 'Figma JSON import', ws: 'json' };
+        capturedRef.current = captured;
         setFigmaProposals(batch.proposals);
-        applyProposal(batch.proposals[0], 'pasted Figma dump', 'json');
+        applyProposal(family?.proposal ?? batch.proposals[0], 'Figma JSON import', 'json', family?.recorded);
       } catch (e) {
         // Same rule as the bridge path: plain words, detail expandable.
         setJsonError(plainWordsError(e));
@@ -2381,6 +2395,42 @@ export function Playground() {
 
   const emittable =
     validation.status === 'valid' || validation.status === 'violations' ? validation : null;
+
+  const [libraryBusy, setLibraryBusy] = useState(false);
+  const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
+  const [libraryArtifact, setLibraryArtifact] = useState<{ filename: string; name: string; downloadUrl: string } | null>(null);
+  const libraryRevision = useRef(0);
+  useEffect(() => {
+    libraryRevision.current++;
+    setLibraryArtifact(null); setLibraryNotice(null);
+  }, [text, tokenSource.tree, icons, emittable?.contracts]);
+  const downloadReactLibrary = async () => {
+    if (!emittable || validation.status !== 'valid' || libraryBusy) return;
+    const revision = libraryRevision.current;
+    setLibraryBusy(true); setLibraryNotice(null); setLibraryArtifact(null);
+    try {
+      const scope = linkedImportScope(emittable.contract, emittable.contracts,
+        sessionRegistry().layersByContractId, tokenSource.inventory);
+      const response = await fetch('/api/react-library', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rootId: emittable.contract.id,
+          contracts: reactLibraryFamily(emittable.contract, emittable.contracts),
+          tokens: applyLinkedScope(tokenSource.tree, scope), icons: [...icons] }) });
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        throw Error(detail?.error ?? `React library preparation failed (${response.status}).`);
+      }
+      const artifact = await response.json();
+      if (typeof artifact.filename !== 'string' || !/^[A-Za-z0-9._-]+\.tgz$/.test(artifact.filename) ||
+        typeof artifact.name !== 'string' || typeof artifact.downloadUrl !== 'string' ||
+        !/^\/api\/react-library\/download\/[a-f0-9-]+$/.test(artifact.downloadUrl)) throw Error('React library response did not contain an installable archive.');
+      if (revision !== libraryRevision.current) return;
+      setLibraryArtifact(artifact);
+      setLibraryNotice('React library ready. Download it, then install the saved file in your app.');
+    } catch (error) {
+      if (revision === libraryRevision.current) setLibraryNotice(error instanceof Error ? error.message : String(error));
+    }
+    finally { setLibraryBusy(false); }
+  };
 
   const emitted = useMemo(() => {
     if (outputTab === 'preview' || !emittable) return null;
@@ -3312,10 +3362,23 @@ export function Playground() {
         {sourceTab === 'json' && (
           <div className="rail__section">
             <div className="field">
+              <label htmlFor="json-file">Choose a JSON file</label>
+              <input id="json-file" type="file" accept=".json,application/json" disabled={jsonReading}
+                onChange={async event => {
+                  const file = event.currentTarget.files?.[0]; event.currentTarget.value = '';
+                  if (!file) return;
+                  setJsonReading(true); setJsonError(null); setJsonText('');
+                  try { setJsonText(await file.text()); } catch (error) { setJsonError(plainWordsError(error)); }
+                  finally { setJsonReading(false); }
+                }} />
+              <p className="hint">The file is read in this tab. Review it below, then choose Load.</p>
+            </div>
+            <div className="field">
               <label htmlFor="json-paste">Contract JSON, a Figma dump, or a CONTRACT-PROPOSAL envelope</label>
               <textarea
                 id="json-paste"
                 rows={14}
+                disabled={jsonReading}
                 value={jsonText}
                 onChange={(e) => setJsonText(e.target.value)}
                 placeholder='{ "id": "ds.badge", … }  — or a plugin/REST dump'
@@ -3330,7 +3393,7 @@ export function Playground() {
                 the envelope&rsquo;s own notes, minted tokens and provenance as receipts.
               </p>
             </div>
-            <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
+            <button type="button" className="btn--primary" disabled={jsonReading || !jsonText.trim()} onClick={loadJson}>
               Load
             </button>
             <ErrorNotice error={jsonError} />
@@ -3898,6 +3961,19 @@ export function Playground() {
             </div>
           ) : (
             <div className="output__files">
+              {outputTab === 'react' && import.meta.env.DEV && (
+                <div className="pane__body">
+                  <button type="button" className="btn--primary" disabled={libraryBusy || validation.status !== 'valid'} onClick={() => void downloadReactLibrary()}>
+                    {libraryBusy ? 'Preparing React library…' : 'Prepare React library'}
+                  </button>
+                  <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>
+                  {libraryNotice && <p role="status">{libraryNotice}</p>}
+                  {libraryArtifact && <>
+                    <p><a href={libraryArtifact.downloadUrl} download={libraryArtifact.filename}>Download {libraryArtifact.filename}</a></p>
+                    <p className="hint">Install: <code>npm install ./path/to/{libraryArtifact.filename}</code><br />Import from <code>{libraryArtifact.name}</code>.</p>
+                  </>}
+                </div>
+              )}
               {!emittable ? (
                 <div className="pane__body hint">A schema-valid contract flows here.</div>
               ) : emitted?.error ? (
