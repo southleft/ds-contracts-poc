@@ -27,6 +27,18 @@ const currentUrl = () => window.location.pathname + window.location.search;
 export function RouterProvider({ children }: { children: ReactNode }) {
   const [url, setUrl] = useState(currentUrl);
   useEffect(() => {
+    // On a full navigation the browser tries the fragment before React has
+    // mounted the document. Retry once the route's content exists.
+    if (!window.location.hash) return;
+    let id: string;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch {
+      return;
+    }
+    document.getElementById(id)?.scrollIntoView();
+  }, [url]);
+  useEffect(() => {
     const onPop = () => setUrl(currentUrl());
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
