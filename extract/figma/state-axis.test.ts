@@ -303,9 +303,26 @@ test('sparse, the fence holds INSIDE a state plane: a hover fill two axes explai
 // 4. the writer round trip — a designer's axis and a pipeline preview axis are never confused
 // ---------------------------------------------------------------------------
 type CanvasNode = { name: string; type: string; children: CanvasNode[]; getSharedPluginData(ns: string, key: string): string };
-async function canvas(tokens: Record<string, unknown>) {
+async function canvas(tokens: Record<string, unknown>, perSideStrokes = false) {
   const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
   const { figma, root } = createFigmaMock();
+  if (perSideStrokes) {
+    // The shared mock has no per-side frame accessors. Model those native
+    // fields only for this probe; a uniform setter updates all four sides.
+    const create = figma.createComponent as () => Record<string, unknown>;
+    figma.createComponent = () => {
+      const node = create();
+      const sides: Record<string, number> = { Top: 1, Right: 1, Bottom: 1, Left: 1 };
+      for (const side of Object.keys(sides)) Object.defineProperty(node, `stroke${side}Weight`, {
+        configurable: true, get: () => sides[side], set: (value: number) => { sides[side] = value; },
+      });
+      Object.defineProperty(node, 'strokeWeight', { configurable: true,
+        get: () => new Set(Object.values(sides)).size === 1 ? sides.Top : figma.mixed,
+        set: (value: number) => { for (const side of Object.keys(sides)) sides[side] = value; },
+      });
+      return node;
+    };
+  }
   const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
   const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 }) as Promise<unknown>;
   await run(engine.buildTokensScript(null));
@@ -673,4 +690,126 @@ test('a new hover reset does not admit an unqualified multiple-axis specificity 
   const cells=states.flatMap(State=>['A','B'].flatMap(Tone=>['S','L'].map(Size=>({at:{State,Tone,Size},fill:State==='Hover' ? (Tone==='A' ? (Size==='S'?'990000':'880000') : (Size==='S'?'007700':'006600')) : 'abcdef'}))));
   const set=designerSet('MultipleAxes',{State:states,Tone:['A','B'],Size:['S','L']},cells);
   assert.match(refusalOf(()=>exact(set)).message,/state-axis-state-not-carried:active/);
+});
+
+function uniformStrokeStateSet(name = 'FocusBorder'): DumpSet {
+  const set = designerSet(name, { State: ['Default', 'Focus'], Tone: ['A', 'B'] },
+    pillCells(['Default', 'Focus']).map(c => ({ ...c, fill: REST[c.at.Tone] })));
+  for (const v of set.variants) {
+    v.stroke = { hex: '123456' };
+    v.strokesIncludedInLayout = true;
+    if (v.name.includes('State=Focus')) v.strokeWeight = 2;
+    else v.strokeWeights = { top: 0, right: 0, bottom: 2, left: 0 };
+  }
+  return set;
+}
+
+test('a uniform state stroke replaces per-side resting widths in browser and native previews', async () => {
+  const first = exact(uniformStrokeStateSet());
+  const c = ContractSchema.parse(first.contract);
+  assert.deepEqual(c.states, ['focus-visible']);
+  assert.deepEqual(c.anatomy.root.declaredStates, { 'focus-visible': { 'border-style': 'solid' } });
+  const ref = c.anatomy.root.states!['focus-visible']['border-width'];
+  const inventory = tokenInventoryFromJson([first.mintedTokens!.tree]);
+  const values = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  assert.equal(values.resolveLiteral(ref.slice(1, -1)), '2px');
+  const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    const vars = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${values.resolveLiteral(key)}`).join(';');
+    await page.setContent(`<!doctype html><style>:root{${vars}}${css}</style><button class="root tone-a">A</button>`);
+    const el = page.locator('button');
+    const widths = () => el.evaluate(n => { const s = getComputedStyle(n); return [s.borderTopWidth, s.borderRightWidth, s.borderBottomWidth, s.borderLeftWidth]; });
+    assert.deepEqual(await widths(), ['0px', '0px', '2px', '0px']);
+    await page.keyboard.press('Tab');
+    assert.equal(await el.evaluate(n => n.matches(':focus-visible')), true);
+    assert.deepEqual(await widths(), ['2px', '2px', '2px', '2px']);
+  } finally { await browser.close(); }
+  const { write, read } = await canvas(first.mintedTokens!.tree, true);
+  const native = await read(await write(c));
+  const focus = native.variants.filter(v => v.name.includes('State=Focus Visible'));
+  assert.equal(focus.length, 2);
+  for (const v of focus) {
+    assert.equal(v.strokeWeights, undefined, 'base sides must not overwrite the state shorthand');
+    assert.equal(v.bound?.strokeWeight, ref.slice(1, -1).replaceAll('.', '/'));
+    assert.equal(v.strokeWeight, 2);
+    assert.equal(v.strokesIncludedInLayout, true);
+  }
+  for (const v of native.variants.filter(v => v.name.includes('State=Default'))) {
+    assert.deepEqual(v.strokeWeights, { top: 0, right: 0, bottom: 2, left: 0 });
+    assert.equal(v.strokesIncludedInLayout, true);
+  }
+  const back = proposeFromDump(native, { ...opts('exact', true), corpus: values,
+    contractIdByName: new Map([[c.name, c.id]]), contractsById: new Map([[c.id, c as never]]), mintUnbound: false });
+  const recovered = ContractSchema.parse(back.contract);
+  assert.equal(recovered.anatomy.root.states?.['focus-visible']?.['border-width'], ref);
+  assert.equal(recovered.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+});
+
+test('distinct bound state-width identities retain solid style and native layout through per-value maps', async () => {
+  const tokens = { width: { thin: { $type: 'dimension', $value: '2px' }, heavy: { $type: 'dimension', $value: '2px' } } };
+  const source = uniformStrokeStateSet('BoundWidth');
+  for (const v of source.variants.filter(v => v.name.includes('State=Focus')))
+    v.bound = { strokeWeight: v.name.includes('Tone=A') ? 'width/thin' : 'width/heavy' };
+  const corpus = tokenCorpusFromJson({ primitives: tokens, semantic: {}, light: {}, brandDefault: {} });
+  const result = proposeFromDump(source, { ...opts('exact', true), corpus });
+  const c = ContractSchema.parse(result.contract);
+  assert.ok(c.anatomy.root.statesByProp?.some(e => e.state === 'focus-visible'));
+  assert.equal(c.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+  const allTokens = { ...tokens, ...result.mintedTokens!.tree };
+  const inventory = tokenInventoryFromJson([allTokens]);
+  const values = tokenCorpusFromJson({ primitives: allTokens, semantic: {}, light: {}, brandDefault: {} });
+  const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    const vars = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${values.resolveLiteral(key)}`).join(';');
+    await page.setContent(`<!doctype html><style>:root{${vars}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+    for (const tone of ['a', 'b']) {
+      await page.keyboard.press('Tab');
+      const el = page.locator('.tone-' + tone);
+      assert.equal(await el.evaluate(n => n.matches(':focus-visible')), true);
+      assert.deepEqual(await el.evaluate(n => { const s = getComputedStyle(n); return [s.borderTopWidth, s.borderRightWidth, s.borderBottomWidth, s.borderLeftWidth]; }), ['2px', '2px', '2px', '2px']);
+    }
+  } finally { await browser.close(); }
+  const { write, read } = await canvas(allTokens, true);
+  const native = await read(await write(c));
+  for (const v of native.variants) {
+    assert.equal(v.strokesIncludedInLayout, true);
+    if (v.name.includes('State=Focus Visible')) {
+      assert.equal(v.strokeWeight, 2);
+      assert.equal(v.strokeWeights, undefined);
+      assert.equal(v.bound?.strokeWeight, v.name.includes('Tone=A') ? 'width/thin' : 'width/heavy');
+    }
+  }
+  const back = proposeFromDump(native, { ...opts('exact', true), corpus: values,
+    contractIdByName: new Map([[c.name, c.id]]), contractsById: new Map([[c.id, c as never]]), mintUnbound: false });
+  const recovered = ContractSchema.parse(back.contract);
+  assert.deepEqual(recovered.anatomy.root.statesByProp, c.anatomy.root.statesByProp);
+  assert.equal(recovered.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+});
+
+test('uniform state stroke recovery refuses unsupported alignment, layout, incomplete and unequal widths', () => {
+  for (const mutate of [
+    (s: DumpSet) => { s.variants[2].strokeAlign = 'OUTSIDE'; },
+    (s: DumpSet) => { s.variants[2].strokeAlign = 'CENTER'; },
+    (s: DumpSet) => { s.variants[2].strokesIncludedInLayout = false; },
+    (s: DumpSet) => { delete s.variants[2].strokesIncludedInLayout; },
+    (s: DumpSet) => { delete s.variants[2].strokeWeight; },
+    (s: DumpSet) => { s.variants[2].strokeWeight = -1; },
+    (s: DumpSet) => { s.variants[2].strokeWeight = NaN; },
+    (s: DumpSet) => { s.variants[2].strokeWeight = 3; },
+    (s: DumpSet) => { delete s.variants[2].strokeWeight; s.variants[2].strokeWeights = { top: 1, right: 2, bottom: 3, left: 4 }; },
+    (s: DumpSet) => { s.variants[0].strokeWeights!.left = NaN; },
+    (s: DumpSet) => { for (const v of s.variants) if (v.strokeWeights) v.strokeWeights = { top: 2, right: 2, bottom: 2, left: 2 }; },
+    (s: DumpSet) => { s.variants[2].bound = { strokeTopWeight: 'missing/side' }; },
+  ]) {
+    const s = uniformStrokeStateSet('DifferentName'); mutate(s);
+    const r = proposeFromDump(s, opts('reviewable-inversion', true));
+    const c = ContractSchema.parse(r.contract);
+    assert.equal(c.anatomy.root.states?.['focus-visible']?.['border-width'], undefined);
+    assert.equal(c.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], undefined);
+    assert.ok(r.notes.some(n => n.includes('only a captured uniform INSIDE state stroke')));
+  }
 });

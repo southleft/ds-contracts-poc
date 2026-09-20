@@ -10741,6 +10741,8 @@ function proposeStateDiffs(
   /** A pointer press still matches :hover. Captured root paints must undo a
    *  hover paint even when the pressed value equals the resting value. */
   concurrentHoverByName?: ReadonlyMap<string, DumpNode>,
+  /** Captured solid strokes that replace a per-side base with one width. */
+  uniformStateStrokeStyles?: Set<string>,
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -10894,9 +10896,37 @@ function proposeStateDiffs(
   // drew). A per-side state override has no vocabulary yet — NAMED.
   if (occs.some((o) => o.node.strokeWeights !== undefined || o.base.strokeWeights !== undefined)) {
     if (occs.some((o) => sideWeightsKey(o.node) !== sideWeightsKey(o.base) || (o.node.strokeWeight ?? null) !== (o.base.strokeWeight ?? null))) {
-      ctx.notes.push(
-        `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — a per-side state override has no contract vocabulary; NAMED, not proposed (review)`,
-      );
+      // A uniform state stroke is already representable by border-width.
+      // Its base may have four different sides: do not read that missing
+      // shorthand as zero, and do not invent unequal state-side overrides.
+      const capturedUniform = uniformStateStrokeStyles && occs.every(({ node, base }) =>
+        node.stroke !== undefined && base.stroke !== undefined &&
+        node.strokeWeights === undefined && typeof node.strokeWeight === 'number' &&
+        Number.isFinite(node.strokeWeight) && node.strokeWeight >= 0 &&
+        (node.strokeAlign ?? 'INSIDE') === 'INSIDE' && (base.strokeAlign ?? 'INSIDE') === 'INSIDE' &&
+        node.strokesIncludedInLayout === true && base.strokesIncludedInLayout === true &&
+        (base.strokeWeights !== undefined
+          ? STROKE_SIDE_CHANNELS.every(([, side]) => Number.isFinite(base.strokeWeights![side]) && base.strokeWeights![side] >= 0)
+          : typeof base.strokeWeight === 'number' && Number.isFinite(base.strokeWeight) && base.strokeWeight >= 0)) &&
+        new Set(occs.map(({ node }) => node.strokeWeight)).size === 1 &&
+        occs.some(({ node, base }) => base.strokeWeights !== undefined
+          ? STROKE_SIDE_CHANNELS.some(([, side]) => base.strokeWeights![side] !== node.strokeWeight)
+          : base.strokeWeight !== node.strokeWeight);
+      const unbound = occs.every(({ node, base }) => STROKE_WEIGHT_BOUND_FIELDS.every(field =>
+        node.bound?.[field] === undefined && base.bound?.[field] === undefined));
+      const boundUniform = occs.every(({ node }) => node.bound?.strokeWeight !== undefined ||
+        STROKE_WEIGHT_BOUND_FIELDS.slice(1).every(field => node.bound?.[field] !== undefined && node.bound[field] === node.bound.strokeTopWeight));
+      if (capturedUniform && (ctx.mint && unbound || boundUniform)) {
+        if (unbound) mintStateObservation(ctx, target, state, 'border-width', 'px',
+          occs.map(({ variant, node }) => ({ variant, value: node.strokeWeight! })),
+          `${where} (state ${state})|strokeWeight`);
+        uniformStateStrokeStyles.add(state);
+        ctx.notes.push(`${where}: state "${state}" replaces captured per-side resting widths with a uniform ${occs[0].node.strokeWeight}px INSIDE stroke included in layout — carried as border-width with its solid border style`);
+      } else {
+        ctx.notes.push(
+          `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — only a captured uniform INSIDE state stroke included in layout, unbound or uniformly bound, can replace them; NAMED, not proposed (review)`,
+        );
+      }
     }
   } else {
     numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, [...STROKE_WEIGHT_BOUND_FIELDS]);
@@ -12467,6 +12497,7 @@ function proposeFromDumpFenced(
   /** v17 — state → prop → value → channel → ref, the root's per-enum-value
    *  state bindings (see StateByPropCollector). */
   const stateByProp: Record<string, StateByPropCollector> = {};
+  const uniformStateStrokeStyles = new Set<string>();
   const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
@@ -12488,6 +12519,7 @@ function proposeFromDumpFenced(
         partStateTargets,
         byProp,
         state === 'active' ? concurrentHoverByName : undefined,
+        uniformStateStrokeStyles,
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
@@ -13185,6 +13217,15 @@ function proposeFromDumpFenced(
       const rootPresent = present.filter((s) => Object.keys(stateOverrides[s]).length > 0);
       if (rootPresent.length > 0) {
         root.states = Object.fromEntries(rootPresent.map((s) => [s, stateOverrides[s]]));
+      }
+      for (const state of uniformStateStrokeStyles) {
+        // A failed mint must not leave a style-only state drawing a UA width.
+        const widthCarried = stateOverrides[state]['border-width'] !== undefined ||
+          Object.values(stateByProp[state] ?? {}).some(map => Object.values(map).every(value => value['border-width'] !== undefined));
+        if (!present.includes(state) || !widthCarried) continue;
+        const declaredStates = (root.declaredStates as Record<string, Record<string, string>> | undefined) ?? {};
+        (declaredStates[state] ??= {})['border-style'] = 'solid';
+        root.declaredStates = declaredStates;
       }
       // v17 — the root's per-enum-value state bindings, in declared state
       // order so the emitted sheet is a function of the contract alone.

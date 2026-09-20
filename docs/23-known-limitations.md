@@ -7723,3 +7723,55 @@ prior root token-rule ordering. Restore unconditional `state-inert` reporting
 if withdrawing the independent source-equivalence adjudication; keep its
 receipts and negative controls. Preserve the failed consumer and all native
 source evidence. Do not adjust tolerances or replace historical results.
+
+### D.92 A uniform state border can replace different resting side widths
+
+**AGENT decision, 2026-09-20.** A resting bottom-only border and a uniform
+focused border use existing contract channels, but the proposer previously
+named every state-width change involving resting side widths as unsupported.
+It now carries this bounded case as `border-width` and solid `border-style`:
+every compared root has a captured stroke, INSIDE alignment and an explicit
+`strokesIncludedInLayout: true`; resting widths are complete finite
+nonnegative numbers, and all state cells have one equal finite nonnegative
+uniform width that changes at least one resting side. Unbound widths need
+minting; uniformly bound widths retain their references, including distinct
+identities represented through the existing per-value state maps. A failed
+width recovery cannot leave a style-only override. Unequal state-side widths,
+missing layout evidence and other alignment policies remain outside this rule.
+No schema field, component-name branch or inferred width is added.
+
+Native state previews remove replaced resting side literals and bindings
+before applying the state shorthand. These transitions explicitly include
+strokes in layout on the resting and state frames; the public outside-layout
+flag still wins. The current Desktop probe starts with a different native
+layout default from older census observations, so relying on that default
+would lose the intended CSS border-box size. Other generated library scripts
+remain byte-fresh. Synthetic browser and native round trips cover common and
+per-value bound width identities and twelve unsupported input controls.
+
+The generated program was executed in a new isolated Evaluations page and
+collection. Its ten editable variants retain the bottom-only resting stroke
+and the two uniform 2px focus strokes. The canonical native dump and exact
+proposal recover the width references and solid style. Existing page and
+collection inventories and variable values are unchanged. The plugin window
+was closed before inspecting the live canvas. This is a bounded native engine
+probe, not a claim that the application completed the reverse journey.
+
+The actual Playground imported the same preserved source, prepared a React
+archive, and a clean consumer installed the byte-identical package. Tab now
+passes **4/10 image pairs on both backgrounds**, with **12 named problems**
+remaining. Unselected focus is 96 × 40 on both surfaces and measures 0% on
+white / 2.421875% on black. Selected focus is still 97 × 40 against native
+105 × 40 and fails on black. Text sizing and other text image differences
+remain unresolved; the two composed dependency gaps in D.91 also remain.
+Explicit Public Sans consumer assets do not authenticate Figma's font bytes.
+The original pixels, frame checks and 5% limit are unchanged. Repeating the
+import retains five entries and an identical Tab contract. A normal browser
+reload restores a schema-valid contract and an available package action.
+The comparison and installed consumer were inspected visibly on both
+backgrounds. Tab and V1 remain unqualified.
+
+To reverse, remove the uniform-state-width exception and its solid-style
+carrier, restore the native state-preview side handling and remove this
+transition's explicit layout policy. Preserve the outside-layout behavior,
+D.91 pressed paint reset, all source captures and the failed app consumer.
