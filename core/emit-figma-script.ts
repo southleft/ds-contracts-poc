@@ -9415,7 +9415,13 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
       const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
         axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
-      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version === 2) {
+        const canonical = value => value && typeof value === 'object'
+          ? Array.isArray(value) ? value.map(canonical) : Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+        if (!C.codeValueAxes || C.codeValueAxes.version !== 2 || JSON.stringify(canonical(previous)) !== JSON.stringify(canonical(C.codeValueAxes)))
+          throw new Error('FIGMA_STATE_API_RETIREMENT_REFUSED: changing or removing retained state inputs needs a verified migration or fresh lineage');
+      }
+` : ''}      if (${datas.some(d => d.codeValueAxes?.version === 2) ? '(previous.version !== 1 && previous.version !== 2)' : 'previous.version !== 1'} || !Array.isArray(previous.axes) || !previous.axes.length ||
           new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
           previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
         throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');

@@ -1,6 +1,7 @@
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
+import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
 /**
  * DESIGN → CONTRACT — the PURE core of extract/figma/propose.ts.
  *
@@ -11621,6 +11622,8 @@ function proposeFromDumpFenced(
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
   const typedAxes = readCodeValueAxes(set);
+  const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
+    ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
   /** The verdict on the set AS DRAWN, against the full Cartesian. */
@@ -13190,6 +13193,10 @@ function proposeFromDumpFenced(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  if (retainedApi) {
+    restoreFigmaStateApi(contract, retainedApi);
+    ctx.notes.push('retained-state-api: initializer and callback toggle recovered from validated non-executable metadata; drawn variants corroborate the input domain, not native interaction behavior');
+  }
   if (absentVariants !== null && designerStateAxis !== null) {
     // §D.41 — the sparse set with a projected state axis: same refusal before
     // anything is written, then only the REST-plane absences are declared.
