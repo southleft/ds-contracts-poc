@@ -362,6 +362,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {measurements[id] && <>
             <p>{measurements[id].rows.filter(r => r.pass).length} / {measurements[id].rows.length} recorded pairs meet the 5% limit on both backgrounds. Root sizes and capture positions checked. Operation observed {new Date(measurements[id].recordedAt).toLocaleString()}.</p>
             <p>These saved captures describe the recorded baseline. Opening this review does not inspect the current canvas or test interaction behavior. Images are shown at their original pixel size.</p>
+            {measurements[id].captureInspection === 'legacy-light-dom' && <p>Capture limitation: closed shadow content was not inspected in this recorded measurement.</p>}
             <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 8px',textAlign:'left'}}>
               {measurements[id].scope === 'recorded-caller-content' ? <>
                 <thead><tr><th>Caller content</th><th>React</th><th>Figma</th><th>Difference</th></tr></thead>

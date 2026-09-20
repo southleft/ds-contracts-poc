@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
-import { captureTransparentSourceFrame } from './transparent-source-frame.js';
+import { captureTransparentSourceFrame } from './transparent-source-frame-v2.js';
 
 const sha = (b: Buffer) => createHash('sha256').update(b).digest('hex');
 const html = `<!doctype html><style>
@@ -23,6 +23,8 @@ test('transparent frame authenticates and restores fractional-size source withou
     const first = await captureTransparentSourceFrame(page, '#target', sha(original));
     const repeat = await captureTransparentSourceFrame(page, '#target', sha(original));
     assert.deepEqual(first, repeat);
+    assert.equal(first.receipt.version, 2);
+    assert.deepEqual(first.receipt.component.opaqueScope, {kind:'chromium-light-tree-v1',targetNodes:2,ancestorNodes:3});
     assert.deepEqual(first.receipt.bounds, { x: 32, y: 32, width: 32, height: 18.390625 });
     assert.deepEqual(first.receipt.rootOffset, { x: 8, y: 8 });
     assert.deepEqual(first.receipt.crop, { x: 24, y: 24, width: 48, height: 35 });
@@ -85,5 +87,100 @@ test('capture refuses context dependence, external paint and clipped content whi
       assert((await page.screenshot({ fullPage: true, caret: 'initial' })).equals(original));
       await page.close();
     });
+  } finally { await browser.close(); }
+});
+
+
+test('capture detects open and closed shadow boundaries in its target and ancestor scope', async t => {
+  const browser = await chromium.launch();
+  try {
+    for (const scope of ['target', 'thumb', 'stage', 'body'] as const)
+      for (const mode of ['open', 'closed'] as const) await t.test(scope + ':' + mode, async () => {
+        const page = await browser.newPage({viewport:{width:160,height:120}});
+        try {
+          await page.setContent(html);
+          await page.evaluate(({scope,mode}) => {
+            const host = document.querySelector(scope === 'body' ? 'body' : '#' + scope)!;
+            host.attachShadow({mode}).innerHTML = scope === 'body' || scope === 'stage' ? '<slot></slot>' :
+              '<span style="display:block;width:16px;height:16px;background:white;mix-blend-mode:difference"></span>';
+          }, {scope,mode});
+          const original = await page.screenshot({fullPage:true,caret:'initial'});
+          await assert.rejects(captureTransparentSourceFrame(page,'#target',sha(original)), /opaque-content/);
+          assert((await page.screenshot({fullPage:true,caret:'initial'})).equals(original));
+        } finally { await page.close(); }
+      });
+  } finally { await browser.close(); }
+});
+
+test('separate closed shadow sibling keeps exact crop exclusion and restoration', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({viewport:{width:180,height:120}});
+    await page.setContent(html + '<span id="sibling" style="position:absolute;left:100px;top:32px"></span>');
+    await page.evaluate(() => document.querySelector('#sibling')!.attachShadow({mode:'closed'}).innerHTML =
+      '<span style="display:block;width:16px;height:16px;background:red"></span>');
+    const original = await page.screenshot({fullPage:true,caret:'initial'});
+    const result = await captureTransparentSourceFrame(page,'#target',sha(original));
+    assert.notEqual(result.receipt.contextSha256,result.receipt.transparentSha256);
+    assert((await page.screenshot({fullPage:true,caret:'initial'})).equals(original));
+  } finally { await browser.close(); }
+});
+
+test('browser-owned shadow content refuses without changing the source', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(); await page.setContent(html);
+    await page.evaluate(() => {
+      const input = document.createElement('input'); input.type = 'date'; input.value = '2026-09-20';
+      document.querySelector('#target')!.appendChild(input);
+    });
+    const original = await page.screenshot({fullPage:true,caret:'initial'});
+    await assert.rejects(captureTransparentSourceFrame(page,'#target',sha(original)), /opaque-content/);
+    assert((await page.screenshot({fullPage:true,caret:'initial'})).equals(original));
+  } finally { await browser.close(); }
+});
+
+test('unavailable Chromium scope cannot become successful capture evidence', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(); await page.setContent(html);
+    const original = await page.screenshot({fullPage:true,caret:'initial'});
+    await page.close();
+    await assert.rejects(captureTransparentSourceFrame(page,'#target',sha(original)), /scope-unavailable/);
+  } finally { await browser.close(); }
+});
+
+test('oversized target refuses before backdrop mutation', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(html);
+    await page.evaluate(() => {
+      const target = document.querySelector('#target')!;
+      for (let i=0;i<10_000;i++) target.appendChild(document.createElement('i'));
+    });
+    const original = await page.screenshot({fullPage:true,caret:'initial'});
+    await assert.rejects(captureTransparentSourceFrame(page,'#target',sha(original)), /scope-too-large/);
+    assert((await page.screenshot({fullPage:true,caret:'initial'})).equals(original));
+  } finally { await browser.close(); }
+});
+
+test('a shadow boundary appearing during capture refuses and the capture stylesheet is removed', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage(); await page.setContent(html);
+    const original = await page.screenshot({fullPage:true,caret:'initial'});
+    const styles = await page.locator('style').count();
+    await page.evaluate(() => {
+      const observer = new MutationObserver(() => {
+        if (![...document.querySelectorAll('style')].some(s => s.textContent?.includes('background: transparent !important'))) return;
+        observer.disconnect();
+        document.querySelector('#thumb')!.attachShadow({mode:'closed'}).innerHTML = '<span>New content</span>';
+      });
+      observer.observe(document.head,{childList:true,subtree:true,characterData:true});
+    });
+    await assert.rejects(captureTransparentSourceFrame(page,'#target',sha(original)), /opaque-content/);
+    assert.equal(await page.locator('style').count(),styles);
+    assert.equal(await page.evaluate(() => getComputedStyle(document.body).backgroundColor),'rgb(255, 255, 255)');
   } finally { await browser.close(); }
 });

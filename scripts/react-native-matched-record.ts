@@ -9,7 +9,7 @@ import type { DeclaredSpec } from './react-native-declared-record.js';
 import { variantCandidates } from './react-native-fidelity-pair.js';
 import { cropSourceFrame } from '../source-reference/source-framing.js';
 import { REPO, QUALIFICATION, sha256 } from './react-native-fidelity-check.js';
-import { MATCHED_INSTRUMENTS, checkMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
+import { CURRENT_MATCHED_INSTRUMENTS, assertCurrentMatchedCapture, checkMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { isReactStateApiNativeRequest, type ReactStateApiNativeRequest } from '../source-reference/react-state-api-native-request.js';
 import { planReactStateApi } from '../source-reference/react-state-api.js';
@@ -211,6 +211,7 @@ export function collectMatchedEvidence(privateRoot: string, sourceCapture: strin
   const files = new Map<string, Buffer>();
   const rows = authenticated.pairs.map((pair: any) => {
     const source = json(sourceCapture, pair.observation + '.source.json');
+    assertCurrentMatchedCapture(source as unknown);
     const hits = probe.response.result.rows.filter((r: any) => r.id === pair.observation && r.originalId === pair.native.nodeId);
     if (hits.length !== 1 || !source.componentUnchanged || !source.captureStable || !source.sourceRestored ||
         source.originalSha256 !== pair.source.originalSha256 || !same(source.bounds, pair.source.bounds) ||
@@ -234,7 +235,7 @@ export function collectMatchedEvidence(privateRoot: string, sourceCapture: strin
         export: { kind: 'figma-plugin-frame-v1' as const, scale: 1 as const, useAbsoluteBounds: true as const, contentsOnly: true as const } } };
   });
   const manifest: MatchedManifest = { version: 1, kind: 'react-native-matched-capture', qualification: QUALIFICATION, acceptedContract: null,
-    instruments: Object.fromEntries(MATCHED_INSTRUMENTS.map(f => [f, sha256(readFileSync(path.join(REPO, f)))])),
+    instruments: Object.fromEntries(CURRENT_MATCHED_INSTRUMENTS.map(f => [f, sha256(readFileSync(path.join(REPO, f)))])),
     cohort: { id: authenticated.id, component: authenticated.component, source: authenticated.source,
       native: { ...authenticated.native, captureScriptSha256: sha256(probe.code), originalReadbackUnchanged: true } }, rows };
   const bytes = JSON.stringify(manifest, null, 2) + '\n';

@@ -4,7 +4,7 @@ import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync, mkdirSync } f
 import path from 'node:path';
 import os from 'node:os';
 import { PNG } from 'pngjs';
-import { MATCHED_EVIDENCE, checkMatchedEvidence, scoreMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
+import { MATCHED_EVIDENCE, CURRENT_MATCHED_INSTRUMENTS, assertCurrentMatchedCapture, checkMatchedEvidence, scoreMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
 import { authenticateMatchedOperation, authenticateMatchedStateApi, normalizeMatchedReadback } from './react-native-matched-record.js';
 import { REPO, sha256 } from './react-native-fidelity-check.js';
 import type { MatchedSpec } from './react-native-matched-record.js';
@@ -288,4 +288,37 @@ test('caller-content evidence stays a separate one-pair denominator and ambiguou
     assert(!hasRecordedNativeMeasurement(repo,String(m.cohort.native.operationId),String(m.cohort.source.referenceId)));
     assert.throws(()=>readRecordedNativeMeasurement(repo,String(m.cohort.native.operationId),{...request,caseId:String(m.cohort.source.caseId)}),/operation-mismatch/);
   });
+});
+
+
+test('new recordings reject legacy capture receipts and malformed opaque-scope witnesses', () => {
+  const historical = manifest().rows[0]!.source;
+  assert.throws(() => assertCurrentMatchedCapture(historical), /current-source-required/);
+  const current = {...historical, version:2, component:{...historical.component,
+    opaqueScope:{kind:'chromium-light-tree-v1',targetNodes:2,ancestorNodes:3}}};
+  assert.doesNotThrow(() => assertCurrentMatchedCapture(current));
+  for (const opaqueScope of [undefined, {}, {kind:'other',targetNodes:2,ancestorNodes:3},
+    {kind:'chromium-light-tree-v1',targetNodes:0,ancestorNodes:3},
+    {kind:'chromium-light-tree-v1',targetNodes:2.5,ancestorNodes:3},
+    {kind:'chromium-light-tree-v1',targetNodes:2,ancestorNodes:-1},
+    {kind:'chromium-light-tree-v1',targetNodes:9_999,ancestorNodes:3}])
+    assert.throws(() => assertCurrentMatchedCapture({...current,component:{...current.component,opaqueScope}}), /current-source-required/);
+});
+
+test('synthetic versioned envelopes require the matching instrument and cannot mix old and current rows', () => {
+  // These in-memory envelopes test admission, not new measurement evidence.
+  const current = manifest();
+  current.rows = current.rows.map(row => ({...row,source:{...row.source,version:2,
+    component:{...row.source.component,opaqueScope:{kind:'chromium-light-tree-v1',targetNodes:2,ancestorNodes:3}}}}));
+  assert.throws(() => scoreMatchedEvidence(evidence,current), /instrument-changed/);
+  current.instruments = Object.fromEntries(CURRENT_MATCHED_INSTRUMENTS.map(file => [file,sha256(readFileSync(path.join(REPO,file)))]));
+  assert.deepEqual(scoreMatchedEvidence(evidence,current),scoreMatchedEvidence(evidence,manifest()),'pixel scoring and geometry remain identical');
+  const mixed = structuredClone(current); mixed.rows[0] = manifest().rows[0];
+  assert.throws(() => scoreMatchedEvidence(evidence,mixed), /capture-version/);
+  const missing = structuredClone(current);
+  Reflect.deleteProperty(missing.rows[0].source.component,'opaqueScope');
+  assert.throws(() => scoreMatchedEvidence(evidence,missing), /current-source-required/);
+  const wrongHash = structuredClone(current);
+  wrongHash.instruments['source-reference/transparent-source-frame-v2.ts'] = '0'.repeat(64);
+  assert.throws(() => scoreMatchedEvidence(evidence,wrongHash), /instrument-changed/);
 });
