@@ -19,6 +19,7 @@ import { assertNativeSourceIdentity, nativeSourceBelongsToReference } from './na
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
+import { buildReactStateApiPreview } from './react-state-api-preview.js';
 import { createReactStateApiInspectionStore } from './react-state-api-inspection.js';
 import { createReactInitialInspectionStore, reactInspectionRequest } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
@@ -414,11 +415,21 @@ export function createReactReferenceService(
       }
       return;
     }
-    const stateApiRoute = /^react\/([a-f0-9]{64})\/state-api\/([a-z-]+)$/.exec(route);
+    const stateApiRoute = /^react\/([a-f0-9]{64})\/state-api\/([a-z-]+)(\/preview)?$/.exec(route);
     if (stateApiRoute) {
       try {
         if (!['GET', 'POST'].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding']) {
           json(res, 400, { error: 'State input inspection accepts GET or POST with no request body.' }); return;
+        }
+        if (stateApiRoute[3]) {
+          if (req.method !== 'GET') throw Error('state-api-preview-method-invalid');
+          const draft = stateApi.read(stateApiRoute[1], stateApiRoute[2])?.draft;
+          if (!draft) throw Error('state-api-preview-observation-required');
+          const output = await buildReactStateApiPreview(repoRoot, draft);
+          if (!reference || reference.id !== stateApiRoute[1] || !reactReferenceUnchanged(reference)) throw Error('state-api-preview-source-changed');
+          res.setHeader('Content-Type','text/html; charset=utf-8');res.setHeader('Cache-Control','no-store');
+          res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
+          res.end(reactReferenceHtml(output));return;
         }
         if (req.method === 'POST') {
           const job = stateApi.start(stateApiRoute[1], stateApiRoute[2]); void job.promise.catch(() => {});

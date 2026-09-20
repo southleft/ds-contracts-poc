@@ -6408,3 +6408,42 @@ altered callback history, changed source and caller-supplied request bodies
 refuse. Earlier records are immutable. Reverse by removing this separate
 inspection action and store; retain its saved evidence and the original broad
 callback refusals. Do not relabel those earlier observations as successful.
+
+
+## D.69 Observed Boolean state inputs project into the existing toggle model
+
+**AGENT decision — preserve typed inputs and predicates.** The separate,
+authenticated simultaneous-input experiment in D.68 can supply a generated
+state draft. It must match its authenticated appearance record, source instance,
+complete transition matrix and restoration count. This does not promote the
+failed broad callback sweep or admit its excluded inputs.
+
+The appearance's Boolean initializer becomes an enum with canonical `false` and
+`true` options mapped to actual Boolean code values. The observed controlled
+and initial-only public names remain distinct. Boolean visibility and style
+conditions become explicit `equals: "true"` membership, so the string `false`
+cannot become truthy. An observed disabled input uses the model's canonical
+`disabled` semantic while retaining its source public name and appearance
+references. Existing role/attribute conflicts, unsupported composition, missing
+input evidence and corrupted transitions refuse. No schema or emitter rule is
+changed by this projection.
+
+The app's **Try the generated state control** embeds only emitted React and a
+normal consumer. Controlled, initial and disabled values can each be omitted,
+false or true. In the independent Switch app run, all **54 input/action trials**
+matched the recorded source states and callback values. Additional live actions
+confirmed that changing an initializer leaves mounted state unchanged, an
+uncontrolled control toggles, a caller can hold its value while receiving the
+next value, and a caller can accept that callback as a new controlled value.
+The current source experiment completed 81 exact restorations; repeating it
+reused one sealed record. Private `callback-candidate-isolation-nmtqn4yw/`
+contains the immutable input, live trial rows, additional actions, repeat hashes
+and inspected `state-api-generated-live.png`.
+
+This is **embedded generated-consumer behavior evidence**. It is not an isolated
+package-install result or a visual qualification. The consumer supplies its own
+label; source fonts, excluded inputs and native behavior remain unqualified.
+A private native compile still drops the initializer binding and retains the
+callback toggle only as a code-only fact, so the stateful native return remains
+an explicit product gap. Reverse by removing this projector and preview; retain
+the source experiment and all earlier broad refusals.
