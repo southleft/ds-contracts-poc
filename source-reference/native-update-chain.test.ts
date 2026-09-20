@@ -1,13 +1,14 @@
 import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,readFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
 import {nativeUpdateFixture} from '../core/native-contract-update-test-fixture.js';
 import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 
 async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof nativeBackgroundUpdateFixture=nativeUpdateFixture) {
  const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-chain-'));
@@ -25,6 +26,23 @@ async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof
  const next=()=>{for(const v of f.input.desired.component.variants)v.spec.opacity=0.125;f.input.desired.revision=revisionOf(f.input.desired.component);};
  return {...f,repo,parent,plans,prepare,step,finish,next,pins,moveParent:(revision='b'.repeat(64))=>{parentRevision=revision;},jobs:()=>jobs,stale:()=>{stale=true;},restart:()=>{jobs=createNativeUpdateJobs(repo,plans);}};
 }
+
+test('proposal lists isolate display copies and recheck altered proposals after the response',async t=>{
+ const f=await fixture(t),first=f.prepare();
+ const file=path.join(f.repo,'private/source-native-update-plans',f.parent,first.proposal.id+'.json');
+ const before=readFileSync(file,'utf8'),expected=f.plans.list(f.parent);
+ withEvidenceReadSnapshot(()=>{
+  const list=f.plans.list(f.parent);list[0].changes.length=0;
+  assert.deepEqual(f.plans.list(f.parent),expected,'a caller cannot mutate the shared display');
+  const changed=JSON.parse(before);changed.parentJournalRevision='f'.repeat(64);
+  writeFileSync(file,JSON.stringify(changed));
+  assert.deepEqual(f.plans.list(f.parent),expected,'one response retains its checked proposal list');
+  assert.throws(()=>f.plans.prepare(f.parent),/write-during-evidence-read-snapshot/);
+ });
+ assert.throws(()=>f.plans.list(f.parent),/native-update-plan-changed/);
+ assert.throws(()=>f.jobs().dispatch(first.operation.id,'update-preflight-readback'),/native-update-plan-changed/);
+ writeFileSync(file,before);assert.deepEqual(f.plans.list(f.parent),expected);
+});
 
 test('only written history pins the parent; later reads retain the first correction baseline',async t=>{
  const f=await fixture(t),first=f.prepare();

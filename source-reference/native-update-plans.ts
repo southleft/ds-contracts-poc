@@ -114,8 +114,10 @@ export function createNativeUpdatePlans(repo: string,
       return view(record);
     },
     list(parentId: string) {
+      return evidenceReadOnce(displayScope + ':list', parentId, () => {
       const dir=directory(parentId); if (!dir) return [];
       return readdirSync(dir).filter(f=>/^[a-f0-9]{64}\.json$/.test(f)).sort().map(f=>view(read(parentId,f.slice(0,-5))));
+      });
     },
     current(parentId: string,id: string) {
       return evidenceReadOnce(displayScope + ':current', {parentId,id}, () => {

@@ -643,11 +643,15 @@ export function createReactReferenceService(
         // has. One from another cohort is not offered: no such case exists here,
         // so it can neither follow nor be prepared a second time.
         const inCohort = (caseId: string) => reference!.cohort.cases.some(c => c.id === caseId);
-        const moved = withEvidenceReadSnapshot(() => jobs.listReactMoved(reference!.id).filter(m => inCohort(m.caseId)).flatMap(m => {
+        // Both lists describe one synchronous display response. Share checked
+        // journals and source evidence across them, then discard that snapshot
+        // before another request or any command authorization can use it.
+        const listing = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
+        const moved = jobs.listReactMoved(reference!.id).filter(m => inCohort(m.caseId)).flatMap(m => {
           try { return nativeSourceBelongsToReference(repoRoot, jobs.reactSuccessionSubject(m.operationId), reference!) ? [m] : []; }
           catch { return [{ ...m, successionProblem: m.successionProblem ?? 'react-source-succession-identity-unavailable' }]; }
-        }));
-        json(res, 200, { moved, operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
+        });
+        return { moved, operations: jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
@@ -691,7 +695,9 @@ export function createReactReferenceService(
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
             }), connection: transport.status(row.operation.id, observedAt) };
-        }))) });
+        }) };
+        }));
+        json(res, 200, listing);
       } catch (error) {
         // Refuse by name. Only identifier-shaped reasons leave the host: no
         // paths, no file contents, no free text from a dependency.

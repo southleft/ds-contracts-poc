@@ -6255,3 +6255,31 @@ source page's expensive refresh delayed requests; both interventions are
 recorded. The plugin was closed and the existing 63-component set inspected
 on the live canvas. This restores the correction chain's supported read/reuse
 path, not the family's still-missing image and interaction qualification.
+
+
+## D.65 Native review reuses evidence only within one response
+
+**AGENT decision, 2026-09-19: combine the moved/current operation display scopes
+and reuse their checked proposal lists and source-content records.** CPU
+profiling found repeated journal verification, canonical hashing and sealed
+content reads in a native listing. A synchronous display may share isolated
+copies of those results until it returns. Nothing is retained for a subsequent
+request; prepare, dispatch, acknowledgement and redelivery refuse within that
+scope and independently authenticate outside it. No verification, source file,
+journal entry or operation is omitted.
+
+With filesystem writes denied, the same retained shadcn listing returned
+424,024 identical bytes before and after: 32.7 seconds initially, 22.7 after
+combining scopes, and 17.4 after reusing proposal/content reads. The independent
+family returned the same 80,333 bytes in 7.8 versus 7.0 seconds. These single
+local measurements include the existing private history and are not a latency
+guarantee. The server remains synchronous and can delay companion requests.
+The app's existing Alert review was reopened and visually inspected after the
+change; its historical scores and qualifications are unchanged. Private evidence:
+`source-review-read-cost-3c5oumcb/` (write-denying harness, CPU profiles, response
+hashes and app screenshot).
+
+Adversarial checks mutate caller copies, source files and proposal records,
+verify refusal after the response ends, and reject mutation inside either
+snapshot scope. Reverse by separating the two route scopes and removing the
+proposal-list/source-content wrappers; retain the freshness and write guards.
