@@ -367,6 +367,17 @@ test('emitted React: the states plane renders as the platform\'s own pseudo-clas
   assert.match(tsx, /disabled=\{disabled\}/, 'the native attribute, so :disabled matches and the platform blocks interaction');
 });
 
+test('emitted React on a root that is NOT a native control (docs/23 §D.45): the same designer State axis on a `div` — the element §D.44 Rule A gives a set whose drawing holds interactive content — styles the `data-disabled` the component renders, and hover excludes it', () => {
+  const result = exact(designerSet('Pill', { State: ALL, Tone: ['A', 'B'] }, pillCells(ALL)));
+  const contract = ContractSchema.parse({ ...result.contract, semantics: { ...(result.contract as Contract).semantics, element: 'div' } });
+  const inventory = tokenInventoryFromJson([result.mintedTokens!.tree]);
+  const { tsx, css } = emitReact(contract, { tokens: inventory, icons: new Map(), contracts: new Map([[contract.id, contract]]) });
+  for (const selector of ['.tone-a:hover:not([data-disabled])', '.tone-b:hover:not([data-disabled])', '.tone-a:active:not([data-disabled])', '.tone-a:focus-visible', '.root[data-disabled]'])
+    assert.ok(css.includes(`${selector} {`), `${selector} in\n${css}`);
+  assert.doesNotMatch(css, /:disabled/, 'no :disabled selector, which can never match a div');
+  assert.match(tsx, /data-disabled=\{disabled \|\| undefined\}/, 'the attribute the selector names');
+});
+
 test('visual parity and the proposer read ONE table: a designer state variant plans as a real interaction, disabled as the prop', () => {
   const contract = ContractSchema.parse(exact(designerSet('Pill', { State: ALL, Tone: ['A', 'B'] }, pillCells(ALL))).contract);
   const plan = (name: string) => { const p = planVariant(contract, name); assert.ok(p.ok, name); return p as Extract<typeof p, { ok: true }>; };
