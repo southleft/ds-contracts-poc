@@ -1,0 +1,53 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/field-note.contract.json (ds.field-note v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  width: var(--imported-field-note-root-width);
+  height: fit-content;
+}
+
+.helperText {
+  font-size: var(--imported-text-typography-body-sm-regular-font-size);
+  font-weight: var(--imported-text-typography-body-sm-regular-font-weight);
+  line-height: var(--imported-text-typography-body-sm-regular-line-height);
+  font-family: Public Sans;
+  inline-size: calc-size(fit-content, round(up, size, 1px));
+  max-inline-size: 100%;
+}
+
+.state-default .helperText {
+  color: var(--imported-field-note-helper-text-color-default);
+}
+
+.state-error .helperText {
+  color: var(--imported-field-note-helper-text-color-error);
+}
+
+.state-disabled .helperText {
+  color: var(--imported-field-note-helper-text-color-disabled);
+}
+
+.state-default .helperText {
+  opacity: var(--imported-field-note-helper-text-opacity-default);
+}
+
+.state-error .helperText {
+  opacity: var(--imported-field-note-helper-text-opacity-error);
+}
+
+.state-disabled .helperText {
+  opacity: var(--imported-field-note-helper-text-opacity-disabled);
+}

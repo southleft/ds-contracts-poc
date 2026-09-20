@@ -15,6 +15,7 @@
  * skip.
  */
 import type { Contract } from '../../../core/index.js';
+import { INTERACTION_STATE_BY_VALUE as STATE_BY_VALUE, normStateValue as norm } from '../../../core/interaction-state-axis.js';
 
 export type Interaction = 'none' | 'hover' | 'active' | 'focus-visible';
 
@@ -28,18 +29,8 @@ export type VariantPlan =
     }
   | { ok: false; reason: string };
 
-const norm = (v: string) => v.trim().toLowerCase().replace(/[\s_]+/g, '-');
-
-/** Mirror of core/propose-figma.ts INTERACTION_STATE_BY_VALUE. */
-const STATE_BY_VALUE: Record<string, 'default' | 'hover' | 'active' | 'focus-visible' | 'disabled'> = {
-  default: 'default',
-  hover: 'hover',
-  active: 'active',
-  pressed: 'active',
-  focus: 'focus-visible',
-  'focus-visible': 'focus-visible',
-  disabled: 'disabled',
-};
+// The interaction-state table is core/interaction-state-axis.ts — the ONE
+// table the proposer projects by (it used to be mirrored here by hand).
 
 const axisValuesOf = (variantName: string): Record<string, string> => {
   if (!variantName.includes('=')) return {};

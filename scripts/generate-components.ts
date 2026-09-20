@@ -385,7 +385,7 @@ export async function generateComponents(
   const cssById = new Map<string, string>();
   for (const contract of ordered) {
     const errors: string[] = [];
-    const css = generateCss(contract, tokenInventory, errors);
+    const css = generateCss(contract, tokenInventory, errors, tokenTrees);
     if (errors.length > 0) ledger.refuse(contract.id, errors);
     else cssById.set(contract.id, css);
   }

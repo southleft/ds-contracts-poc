@@ -100,6 +100,23 @@
 //                      border-right-width / border-bottom-width /
 //                      border-left-width. Absence means not captured (dump
 //                      ≤ v1.33 receipted stroke-weights-nonuniform), never 0.
+//   strokesIncludedInLayout  true | false (dump v1.35) — whether the stroke
+//                      takes LAYOUT SPACE. Written ONLY on an auto-layout
+//                      frame that draws a visible stroke, and then always,
+//                      `false` included: false (Figma's default for a drawn
+//                      frame) paints the stroke over the padding and sizes the
+//                      box as content + padding; true is CSS `border` under
+//                      box-sizing: border-box. Absence means not captured
+//                      (dump ≤ v1.34), never false.
+//   text.textAutoResize  NONE | HEIGHT | WIDTH_AND_HEIGHT | TRUNCATE (dump
+//                      v1.36) — how the text box sizes itself, verbatim on
+//                      every text node. A box that sizes itself to its text
+//                      (WIDTH_AND_HEIGHT) is a WHOLE number of pixels wide —
+//                      the glyph advance rounded up — where the browser lays
+//                      the same run out at its fractional advance; propose
+//                      lowers that one value to Part.textAutoResize and the
+//                      code surfaces round the box up. Absence means not
+//                      captured (dump ≤ v1.35), never auto-width.
 //   strokeAlign        INSIDE | CENTER | OUTSIDE (dump v1.11) — where the
 //                      weight is drawn relative to the node box. Captured on
 //                      EVERY stroke, INSIDE included: an absent field was
@@ -833,6 +850,13 @@ async function dumpNode(node, nodePath, parent) {
     // (`stroke-style-unsupported`, shared with dashPattern) that no gate,
     // ledger or fixture could see the alignment was the cause.
     if (typeof node.strokeAlign === 'string') out.strokeAlign = node.strokeAlign;
+    // dump v1.35: does the stroke take LAYOUT SPACE? Only an auto-layout
+    // frame has the fact and only a drawn stroke makes it visible, so it is
+    // written exactly there — and then always, `false` included, because the
+    // two values lower to different CSS (true = a border that grows the box,
+    // false = a ring painted over the padding) and an ABSENT field must keep
+    // meaning "not captured". Twin of the same write in extract/figma/rest/map.ts.
+    if (out.layout !== undefined && typeof node.strokesIncludedInLayout === 'boolean') out.strokesIncludedInLayout = node.strokesIncludedInLayout;
     // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
     // styling belongs to the child contract; the Slot utility's dashed
     // border is the utility's own) — no receipt for an unconsumed channel.
@@ -1078,6 +1102,18 @@ async function dumpNode(node, nodePath, parent) {
     // (LEFT is the CSS default and is OMITTED — the REST twin omits it too).
     if (node.textAlignHorizontal === 'CENTER' || node.textAlignHorizontal === 'RIGHT' || node.textAlignHorizontal === 'JUSTIFIED') {
       text.textAlign = node.textAlignHorizontal;
+    }
+    // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — node.textAutoResize,
+    // verbatim. A box that sizes itself to its text (WIDTH_AND_HEIGHT) is a
+    // whole number of pixels wide (the advance rounded up) where the browser
+    // lays the same run out at its fractional advance; propose lowers that
+    // one value to Part.textAutoResize and the code surfaces round the box
+    // up. The other values are copied so the capture is complete and lowered
+    // by nothing. A canvas that reports nothing (the mock) writes nothing —
+    // absent stays "not captured". Twin of the same write in
+    // extract/figma/rest/map.ts.
+    if (node.textAutoResize === 'NONE' || node.textAutoResize === 'HEIGHT' || node.textAutoResize === 'WIDTH_AND_HEIGHT' || node.textAutoResize === 'TRUNCATE') {
+      text.textAutoResize = node.textAutoResize;
     }
     if (node.textStyleId && node.textStyleId !== figma.mixed) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
@@ -1334,7 +1370,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.34',
+    dumpVersion: '1.36',
   },
 };
 dumps._degradations = degradations;

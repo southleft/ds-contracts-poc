@@ -8,7 +8,7 @@
   "contractSha256": "2cf255b624e7d908a750c02e28bf6e054f953c183a548b26b6c8d3fa101f3c26",
   "carriage": {
     "carried": 20,
-    "named": 22,
+    "named": 23,
     "silent": 0
   },
   "silentRows": [],
@@ -173,6 +173,11 @@
       0,
       0
     ],
+    "text textAutoResize (whole-pixel auto-width box)": [
+      0,
+      1,
+      0
+    ],
     "stamp ds_contracts/fontWeightVar": [
       1,
       0,
@@ -268,5 +273,5 @@
     "wc/flowbite-kbd.demo.html": "d64b1a9450cd07db644d07906dd5d55149ffe01902c38c5de264abe0d42ca10f",
     "wc/flowbite-kbd.custom-elements.json": "9991a5cded1add7a6606360603d366194a059c021dde793baa9975779ffc1626"
   },
-  "notesCount": 37
+  "notesCount": 38
 }

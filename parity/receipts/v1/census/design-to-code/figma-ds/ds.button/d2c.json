@@ -5,9 +5,9 @@
   "nodeId": "53:2775",
   "mode": "reviewable-inversion",
   "variantCount": 25,
-  "contractSha256": "803ee56673b938bcc1cf7abec667de77e011b587d0f484a26604c7d5172ac3b2",
+  "contractSha256": "83003d41db0e9e6325b485d7aefc7fbee1a3931f5226041f1c0e649c434bac11",
   "carriage": {
-    "carried": 441,
+    "carried": 491,
     "named": 852,
     "silent": 0
   },
@@ -123,6 +123,11 @@
       5,
       0
     ],
+    "strokesIncludedInLayout": [
+      25,
+      0,
+      0
+    ],
     "cornerRadius": [
       25,
       5,
@@ -224,6 +229,11 @@
       0
     ],
     "text lineHeight": [
+      25,
+      0,
+      0
+    ],
+    "text textAutoResize (whole-pixel auto-width box)": [
       25,
       0,
       0
@@ -350,12 +360,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "1fb2a84abd60a17bdbba9b61f6d9d427b7dc3da5b854b1d3284605fa12b8e22f",
+    "react/Button/Button.module.css": "31fdf15c1ed1fe35d5ae424cd03d36f2d2183eab7b44b2aee8eac612984be36e",
     "react/Button/Button.stories.tsx": "89116f45c629db0ee76ce94f0e37c64cde5fc43da2f4d4cb9afb3e48237fafd4",
     "react/Button/Button.tsx": "c2ad51a851a2a8f467028a51a8c5218af854db36fb54320aa1547e94c402bd63",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/ds-button.ts": "8bb69300dfeb9b4723e305cb3ac3c6acc2ee777fdb5e9e0056c4f2c769e78b04",
-    "wc/ds-button.css.ts": "c70823fe38b0450c905ba3a7da8649d6fd64225089038721dee938c0563768e5",
+    "wc/ds-button.css.ts": "fd95fd5d64de59dbc3978d278d9c3be21e79e54482d3d7916e3a29d119b60631",
     "wc/ds-button.demo.html": "282713a1393f1b8af1686effe04f50094eefff69513d368314100b6f5c043a62",
     "wc/ds-button.custom-elements.json": "73ed67e0b677baea879ce3bf6ec1371d4f2fbc438da32b6d13e84841cf77dd51",
     "wc/ds-button-icon.ts": "22e6b99caabc9523b9afff95d253ab6c6eda345a051de3c6b89e5de385c332ad",
@@ -363,7 +373,7 @@
     "wc/ds-button-icon.demo.html": "71ca11e0a588a953352d30d35d12b54255b3dbffc208ddc7a745b3ac0df64262",
     "wc/ds-button-icon.custom-elements.json": "607b3ff5fddf9931c0ab803bedbfacd66f13133e8dfee5883cd28d6d55e4847b",
     "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
-    "wc/ds-button-contract.css.ts": "c6e5d97f02f35e9dcb535c2284d0786482cd759796147a896982f86004850ae9",
+    "wc/ds-button-contract.css.ts": "1fae9eb6c11a8f78bd70984dc8ab139f8e2669a96d2281d1a2ebe1159045b394",
     "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
     "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c",
     "wc/ds-button-icon-default-sm.ts": "f701ebbd91c9ed405cb3461d2211a34b35e0160013a6d0e876b0761461db6edd",
@@ -375,5 +385,5 @@
     "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
     "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
   },
-  "notesCount": 603
+  "notesCount": 605
 }

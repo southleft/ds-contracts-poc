@@ -95,7 +95,7 @@
   ],
   "normalizationRules": {
     "auto-layout-inert": "A frame whose children are all absolutely positioned may acquire an inert auto-layout direction without changing rendering.",
-    "cartesian-fill": "A contract with independent axes emits the complete Cartesian product; strict exact mode refuses a ragged source instead of applying this rule.",
+    "cartesian-fill": "A contract with independent axes emits the complete Cartesian product minus the combinations it declares undrawn (bindings.figma.absentVariants; none declared = the complete product); strict exact mode refuses a ragged source that nothing declares instead of applying this rule.",
     "declared-not-drawn": "The contract declares a property that the observed instance did not carry.",
     "duplicate-sibling-expansion": "Repeated same-named source siblings share one normalized path while regenerated siblings receive numbered paths; every extra fact remains counted.",
     "hug-vs-fixed": "Headless comparison cannot equate an observed hug measurement with a regenerated fixed or fill sizing mode.",

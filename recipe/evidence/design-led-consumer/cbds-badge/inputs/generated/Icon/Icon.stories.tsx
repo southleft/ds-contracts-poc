@@ -5,6 +5,7 @@
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import '../tokens.css';
+import { Placeholder } from '../Placeholder';
 import { Icon } from './Icon';
 
 const meta = {
@@ -15,12 +16,21 @@ const meta = {
     docs: {
       description: {
         component:
-          'STUB contract auto-proposed for the nested "Icon" instances of Badge — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.',
+          'PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.',
       },
     },
   },
+  render: (args) => (
+    <Icon {...args}>
+      <Placeholder />
+    </Icon>
+  ),
   argTypes: {
-    size: { control: 'select', options: ['small', 'xsmall'] },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large', 'xlarge', '2xlarge', 'xsmall'],
+    },
+    children: { control: false },
   },
   args: {
     size: 'small',
@@ -36,24 +46,22 @@ export const Small: Story = {
   args: { size: 'small' },
 };
 
+export const Medium: Story = {
+  args: { size: 'medium' },
+};
+
+export const Large: Story = {
+  args: { size: 'large' },
+};
+
+export const Xlarge: Story = {
+  args: { size: 'xlarge' },
+};
+
+export const Size2xlarge: Story = {
+  args: { size: '2xlarge' },
+};
+
 export const Xsmall: Story = {
   args: { size: 'xsmall' },
-};
-/** Every legal combination the contract defines. */
-export const Matrix: Story = {
-  parameters: { controls: { disable: true } },
-  render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gap: 16,
-        gridTemplateColumns: 'repeat(1, max-content)',
-        alignItems: 'center',
-        justifyItems: 'start',
-      }}
-    >
-      <Icon size="small" />
-      <Icon size="xsmall" />
-    </div>
-  ),
 };

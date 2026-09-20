@@ -42,7 +42,7 @@
   min-width: var(--imported-shared-size-0);
 }
 
-.root:disabled .labelled__labelwrapper {
+.root[data-disabled] .labelled__labelwrapper {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -53,7 +53,7 @@
   display: block;
 }
 
-.root:disabled .label {
+.root[data-disabled] .label {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -68,7 +68,7 @@
   cursor: default;
 }
 
-.root:disabled .label__text {
+.root[data-disabled] .label__text {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -84,7 +84,7 @@
   font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-.root:disabled .label-2 {
+.root[data-disabled] .label-2 {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -155,11 +155,11 @@
   height: var(--imported-text-field-textfield-height-slim);
 }
 
-.root:disabled .textfield {
+.root[data-disabled] .textfield {
   cursor: auto;
 }
 
-.root:disabled .textfield {
+.root[data-disabled] .textfield {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -254,11 +254,11 @@
   height: var(--imported-text-field-input-height-slim);
 }
 
-.root:disabled .input {
+.root[data-disabled] .input {
   cursor: default;
 }
 
-.root:disabled .input {
+.root[data-disabled] .input {
   color: var(--p-color-text-disabled);
 }
 
@@ -398,11 +398,11 @@
   height: var(--imported-text-field-backdrop-height-slim);
 }
 
-.root:active:not(:disabled) .backdrop {
+.root:active:not([data-disabled]) .backdrop {
   outline-style: solid;
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   cursor: auto;
 }
 
@@ -410,15 +410,15 @@
   outline-style: solid;
 }
 
-.root:active:not(:disabled) .backdrop {
+.root:active:not([data-disabled]) .backdrop {
   background-color: var(--imported-text-field-backdrop-background-color-state-active);
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   background-color: var(--imported-text-field-backdrop-background-color-state-disabled);
 }
 
-.root:disabled .backdrop {
+.root[data-disabled] .backdrop {
   color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -426,6 +426,6 @@
   background-color: var(--imported-text-field-backdrop-background-color-state-focus-visible);
 }
 
-.root:hover:not(:disabled) .backdrop {
+.root:hover:not([data-disabled]) .backdrop {
   background-color: var(--imported-text-field-backdrop-background-color-state-hover);
 }

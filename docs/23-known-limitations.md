@@ -3741,6 +3741,1842 @@ surface outside the React + WC core scope; named here, not fixed.
 carry Inter and accept the round-trip cost. **Gate:**
 `core/react-default-font-family.test.ts` (`npm run react:conformance:check`).
 
+## D.39 A designer's Figma stroke takes no layout space; the CSS border it lowered to did — CLOSED for React, React inline and web components; OPEN on static HTML
+
+**2026-09-18. A lowering decision the owner delegated; recorded so it can be
+reversed.** On an auto-layout frame a Figma stroke takes layout space only when
+the frame says `strokesIncludedInLayout`; a designer-drawn frame defaults to
+`false`, so the stroke paints over the padding and the box is content + padding.
+Neither reader captured the field, the proposer lowered every stroke to
+`border-width` / `border-color`, and a CSS border grows the box. Measured with
+`npm run design:consumer:check` on the 72-variant CBDS Badge (after §D.38): all
+24 outline variants failed on size — 4 px too wide, and the 16 px-high small one
+20 px high, because 8 + 8 px padding plus a 2 px border cannot fit a 16 px border
+box at all.
+
+**Decision.** Keep the designer's numbers. Padding stays the contract's padding:
+it is usually bound to a spacing variable, and rewriting it to "padding minus
+border" destroys the binding (and still cannot fit the 16 px box). The contract
+records the one fact that differs, under Figma's own name, and only its
+non-default value: `Part.strokesIncludedInLayout: false`. The stroke keeps riding
+`border-width` / `border-color` (and the per-side widths of dump v1.34), tokens
+stay bound, and each surface draws it without taking space.
+
+**What absent means, and why nothing already minted changes.** The Figma writer
+has never set the field. Frames it creates read back `true`: measured on the
+committed census responses (`extract/figma/fixtures/census-d2c/*.rest-nodes.json`),
+160 of 160 auto-layout frames in pipeline-generated sets report `true` and 0 of
+the designer-drawn ones do (REST omits `false`). `true` is also exactly what a
+CSS border under `box-sizing: border-box` means. So ABSENT = in layout = every
+existing contract's meaning; `true` is never written; a generated set proposes
+back to its own contract; and the writer's script is byte-identical for every
+contract without the flag (the runtime names the field only when a spec carries
+it, and then writes it both ways so an amended root is put back). A designer can
+also choose `true` — the Altitude Tabs header does, which is why its 1 px rules
+occupying layout matched Figma's 176 px in §CURRENT row 2 — and that proposes no
+flag.
+
+**Readers (dump v1.35).** Both write `strokesIncludedInLayout` on an auto-layout
+frame that draws a visible stroke, and then always, `false` included (REST: an
+absent response key is the fact `false`; plugin: the node's boolean). An ABSENT
+dump field still means "not captured" (dump ≤ v1.34, or a canvas that reports
+nothing), never `false`: older dumps propose the bytes they always did. A node
+drawn both ways across its variants is NAMED and keeps the border
+(`propose.stroke-layout-mixed-refused`); a flag whose stroke channels were all
+refused is withdrawn by name.
+
+**Form.** An inset `box-shadow` ring: `inset 0 0 0 <w> <c>`, or one layer per side
+(`inset 0 <t> 0 0`, `inset 0 -<b> 0 0`, `inset <l> 0 0 0`, `inset -<r> 0 0 0`) when
+the part carries per-side widths. It paints inside the border box, under the
+content, follows `border-radius`, and takes no space. Not `outline` with a
+negative offset: that is the focus ring's property, and a `:focus-visible` rule
+would erase the border. Because width, colour and a real shadow each vary on their
+own axis and `box-shadow` is one property, the stylesheet surfaces rename the
+channels to private custom properties wherever they sit (`--_stroke-width`,
+`--_stroke-color`, `--_stroke-<side>-width`, `--_stroke-shadow` — an underscore is
+refused in a token path, so no token can collide) and the part's base rule
+composes them once, the ring BEFORE any real shadow so both survive in every
+state (`lowerStrokeRings`, `packages/core/src/anatomy.ts`). Token-bound values stay
+`var(--token)`. The base rule always states every variable it reads, so a nested
+flagged part never inherits its ancestor's stroke. With the width gone from the
+maps nothing synthesises `border-style: solid`, and a root falls to its ordinary
+`border: 0` reset. The inline surface cannot use custom properties (not
+`CSSProperties` keys; its claim is resolved literals), so it composes the same ring
+at render time over the merged style record, the consumer's `style` included
+(`strokeRing`). `outline-*` channels are untouched: an outline never takes
+layout space. `generate`'s tokens.css gate no longer demands a `--_` variable the
+sheet itself declares.
+
+**Refused by name** (`validateContract`): the flag on a part with no stroke
+channel; the flag together with a per-side border colour or a declared /
+conditional `border-style` — the ring is one-colour and solid.
+
+**Measured after.** Same check, fresh read-only REST read of the same set (the
+dump differs from PR 124's only by the new field, on the 24 outline variants),
+same unchanged 5 % limit: **28 of 72 pass** (was 18), 1.16–17.09 %, median 5.47 %
+(was 1.91–51.54 %, median 9.01 %).
+
+| style × size | pass before | pass after | before (min / median / max) | after (min / median / max) |
+|---|---|---|---|---|
+| fill × large | 6/12 | 6/12 | 3.42 / 4.84 / 8.27 % | unchanged to the digit |
+| fill × small | 3/12 | 3/12 | 4.04 / 7.10 / 11.86 % | unchanged to the digit |
+| tonal × large | 8/12 | 8/12 | 1.91 / 4.23 / 6.18 % | unchanged to the digit |
+| tonal × small | 1/12 | 1/12 | 4.43 / 10.16 / 15.05 % | unchanged to the digit |
+| outline × large | 0/12 | **7/12** | 9.17 / 10.83 / 13.40 % | 1.16 / 3.56 / 7.86 % |
+| outline × small | 0/12 | **3/12** | 36.35 / 44.49 / 51.54 % | 2.21 / 11.07 / 17.09 % |
+
+"Before" is the same contract with the flag removed, generated and scored in the
+same session — it reproduces §D.38's 18 of 72 (1.91–51.54 %, median 9.01 %)
+exactly. The 72 × 3 images are not committed here: the set's evidence directory
+belongs to the change that introduced it (PR 124), and the receipts of both runs
+were produced by the check itself.
+
+Every outline variant now has the height Figma drew (24 / 16 px), and the outline
+rows have exactly the size profile of the fill and tonal rows (13 of 24 equal, 11
+one pixel wider): what is left is the shared small-text metric, not the stroke.
+The design-to-code census now counts the fact (47 occurrences on the figma-ds
+designer sets, all carried; 2,857 → 2,904 carried, 0 silent); the Flowbite sets —
+generated by this pipeline — did not move.
+
+**Hardened after an adversarial review (PR 128, same day).** Each was measured
+in Chromium before and after:
+
+- **Forced colors.** Windows High Contrast forces `box-shadow: none` while a
+  border survives, so an outlined control lost its ONLY boundary. Every ring
+  part now carries, directly after its base rule on the CSS-module and
+  web-component sheets, `@media (forced-colors: active) { <part>:not(:focus-visible)
+  { outline: <w> solid CanvasText; outline-offset: calc(-1 * <w>) } }` — an inward
+  outline takes no layout space and is not forced away, and it exists inside
+  that media query only, so everywhere else `outline` stays the focus ring's.
+  `:not(:focus-visible)` makes focus win, including the USER AGENT's ring, which
+  an author `outline` would otherwise outrank. Per-side strokes get a FULL
+  outline at the widest side (`max(...)`): an outline has no sides, and in the
+  one mode whose point is visible boundaries a too-complete edge is the smaller
+  loss — **named, an approximation**.
+- **Nested native elements.** Only the single root had a `border: 0` reset, so a
+  flagged `<button>` / `<fieldset>` PART showed the UA's 2px outset / groove
+  border again. Every ring part now states `border: 0` on all three surfaces.
+- **A unitless `0` side** made `calc(-1 * 0)` a number, not a length, and voided
+  the whole declaration; literal zero widths are composed as `0px` (both
+  composition sites).
+- **A shadow TOKEN that resolves to `none`** — 60+ in this repo's corpora,
+  concentrated on outlined variants — voided `<ring>, none` and took the stroke
+  with it. The emitters that are handed the token trees (every registered one)
+  now settle it on the finished sheet: inside the ring's private variable ONLY,
+  a reference to such a token becomes the no-op layer; tokens.css and ordinary
+  `box-shadow: var(--x)` keep their bytes. A token that is `none` in one mode
+  and a shadow in the other is REFUSED BY NAME, and so is a ring that binds a
+  shadow token when no values were supplied (a bare `emitReact`): the deciding
+  fact cannot be checked from paths, and the pipeline does not guess. The
+  inline surface resolves values and drops `none` at render time, so the two
+  agree.
+- **Inline consumer `style`.** Spread after the ring, a caller's `boxShadow`
+  silently deleted the stroke and a caller's `borderColor` did nothing. The
+  caller's style now joins the merge BEFORE the ring is composed: `borderColor` /
+  `borderWidth` / per-side widths restyle the ring (they are the same contract
+  channels), `boxShadow` follows the ring, and a `border` shorthand is passed
+  through untouched (the record's own is only ever the `0` reset).
+- **The tokens.css gate's `--_` exemption** matched file text; it now requires a
+  DECLARATION of that exact property (after `{` or `;`, comments removed), so a
+  comment, a longer name or a bare token value no longer exempts anything.
+- The lowering is registered (`css.stroke-outside-layout-inset-ring`,
+  `spec/lowering.json`) with its declared inverse, `carryStrokeLayout`.
+
+**Named limits.**
+
+- **The contract cannot take the flag back OFF an existing set.** A script for a
+  contract with no flagged part never names the field — that is what keeps
+  every existing contract's script byte-identical — and amend reuses the variant
+  nodes, so a canvas that once held `false` keeps it, and the next read proposes
+  the flag back. It is a contract/canvas DIVERGENCE the contract cannot
+  currently fix (a designer can, in Figma's auto-layout settings); not silent —
+  the proposal shows it — and pinned by a test so it cannot become so. Inside one
+  script that carries the fact, unflagged flex frames ARE written `true`. The
+  amend path has no prior-canvas read to key a wider fix on, and none was
+  invented. The plugin's drift snapshot does not list the field either.
+- **Paint order, UNMEASURED.** The ring paints UNDER the part's children; a Figma
+  frame stroke is believed to paint OVER them. It matters exactly where a child
+  reaches the stroke: padding smaller than the stroke weight, or an edge-to-edge
+  child (measured in Chromium: a full-bleed child covers the ring; the border it
+  replaced pushed the child inward instead). Left as is until measured on a
+  canvas; an `::after` overlay (inset 0, `pointer-events: none`) is the candidate
+  fix, at the cost of a positioning context and no spelling on void elements.
+- **Inline surface, forced colors.** Inline styles cannot carry a media query
+  (the emitter's only media-dependent output is the `<style>` it injects for
+  keyframes, a child a void root cannot hold), so a flagged part has NO boundary
+  in Windows High Contrast there.
+- A declared `transition: border-color` no longer animates the ring (the colour
+  rides an unregistered custom property). Printing usually drops box-shadows
+  with background graphics, where a border prints. The flag on a SHAPE part is
+  accepted and meaningless (shapes are not auto-layout frames). The Playground's
+  canvas preview (`playground/src/engine/canvas-preview.ts`) ignores the flag.
+- A width TOKEN that resolves to a unitless `0` on a per-side part cannot be seen
+  by the emitter. Per-side layers overlap at the corners, so a translucent stroke
+  colour doubles there. The mock canvas does not model the field (it reports
+  nothing, which reads as "not captured"). An OUTSIDE (outline) stroke records
+  the flag for the canvas's sake; its frames born `true` are a pre-existing
+  difference this change does not touch. An unflagged GRID frame inside a
+  flagged script is deliberately not written (the Plugin API documents the
+  field for HORIZONTAL / VERTICAL layout); a FLAGGED one is.
+- **Exercised live.** The writer line ran on a real canvas on 2026-09-18, on
+  COMPONENT, `createSlot()` SLOT and GRID nodes, with no throw, and a REST
+  readback matched the predicted boxes exactly: a hugging root 60×37 → 56×33,
+  a FILL slot 180×60 → 184×64, a root hugging a fixed grid 140×60 → 136×56.
+  The unflagged controls read `true` on root, slot and grid — the premise
+  "absent = in layout" holds on the canvas, not only in the committed census
+  responses — and the flagged GRID frame's key is absent from REST, i.e. Figma
+  honours the write on GRID. The evidence is private.
+
+**Still open.** `core/emit-html.ts` ignores the flag and still draws a
+space-taking border: a preview surface outside the React + WC core scope (and the
+surface the computed gate scores through); named here, not fixed. The code-led
+native path (`source-reference/`, `core/native-*`) is unchanged by design.
+
+**To reverse.** Delete `carryStrokeLayout` / `settleStrokeLayout` and their three
+doors in `core/propose-figma.ts` (no contract then carries the flag and every
+surface emits what it did); or keep the capture and delete the
+`lowerStrokeRings(input)` calls (`css.ts`, `emit-wc.ts`) and the `strokeRing` wrap
+in `emit-react-inline.ts` to fall back to a space-taking border. The schema field
+and the dump field are additive and can stay. **Gates:**
+`extract/figma/stroke-outside-layout.test.ts` (`npm run exact-proposal:check` —
+both readers, proposer, writer round trip through the real plugin reader) and
+`core/react-stroke-outside-layout.test.ts` (`npm run react:conformance:check` —
+all three surfaces, box and shadow MEASURED in Chromium).
+
+## D.40 A designer's component set is rarely the full product of its axes; the exact projection refused every one — CLOSED for undeclared sparseness; the interaction-state wall and the code-side composition stay NAMED
+
+**2026-09-19. A schema decision the owner delegated; recorded so it can be
+reversed.** `core/exact-projection.ts` holds a structured Figma component set to
+the full Cartesian product of its VARIANT axes and refuses anything else as
+`EXACT_MATRIX_RAGGED`. That strictness was deliberate (commit 8f879e147) and is
+kept. But designer-authored sets are often not a product. Measured read-only on
+two designer files: CBDS `Checkbox-icon` 42 of 48 (no `state=disabled` with
+`error=true`), CBDS `Alert` 30 of 40, and in Altitude 7 of 40 sets — `Menu Item`
+16 of 18, `Breadcrumbs Item` 10/12, `Checkbox` 26/30, `Pagination Item` 12/16,
+`Progress` 10/16 (a bar is drawn at one size, a circle at four), `Radio` 18/20,
+`Toggle Button` 20/24. Every one refused, so a composed family could never
+replace its auto-proposed child STUB with the real child set.
+
+**Decision.** The contract DECLARES what is not drawn, as a Figma-only fact where
+schema 17 puts Figma-only facts:
+
+```jsonc
+"bindings": { "figma": { "absentVariants": [
+  { "state": "error", "checked": "on", "label": "shown" },
+  { "state": "error", "checked": "on", "label": "hidden" }
+], "anchors": { … } } }
+```
+
+Each entry is ONE COMPLETE tuple over the contract's variant axes — every enum
+prop and every `VARIANT`-bound boolean, keyed by PROP NAME; an enum axis takes a
+canonical value, a boolean axis a JSON boolean, an axis with `unsetValue` may take
+`null` for that canvas-only option. **Why tuples and not patterns:** the measured
+holes are slices (`state=disabled × error=true`), and a pattern would be shorter —
+but a pattern list has many spellings for one set of cells and a tuple list has
+exactly one. The list is canonical (tuples in the product's enumeration order,
+first axis slowest, options as declared) and duplicate-free, so a round trip is a
+fixed point. The order of KEYS inside a tuple is deliberately NOT part of validity
+(review, PR 130): a JSON object is unordered, and any tool that sorts keys — `jq
+-S`, this repo's own `canonicalJson` — must not turn a sound contract into a
+refused one; every reader keys a tuple in axis order regardless
+(`absentVariantKey`). **Why prop names and canonical values, not Figma labels:** the
+referee can hold the list to the contract's own props without a second vocabulary,
+and re-labelling a Figma option does not invalidate it; the writer, the proposer
+and the exact projection translate through the props' `VARIANT` bindings. One
+reader serves all three (`absentVariantAxes` / `absentVariantKey` /
+`absentVariantIssues`, `packages/schema/src/contract-schema.ts`). Additive and
+optional: no schema version bump, following `strokesIncludedInLayout` (§D.39).
+
+**Nothing is weakened.** `validateExactVariantProjection(set, returned, {
+absentVariants })` expects the product MINUS the declaration, exactly: a drawn
+cell the list calls absent is an extra row, an undrawn cell it does not name is a
+missing row, and a returned contract that would draw an undrawn cell is
+`EXACT_ROWS_EXTRA`. The validator never infers a declaration — a ragged source
+handed to it without one refuses with the same code AND the same message as
+before. An unreadable or disagreeing declaration (not a list, empty, a partial
+tuple, an unknown property or option, a duplicate, a list that leaves nothing) is
+IGNORED and the full product is expected, which then refuses: a declaration can
+only fall back to the stricter reading, never widen what counts as exact. A set
+that declares a state-preview matrix keeps that expectation and the list is not
+composed with it.
+
+**Who may declare.** A DESIGNER's set declares by what it draws: when its rows are
+a STRICT SUBSET of the product (every row valid, none duplicated, none outside the
+product), the proposer reads the undrawn cells once (`deriveAbsentVariants`), writes
+them into the proposed contract, and the source and the returned rows are both held
+to the product minus that list. "A designer's set" means: no `ds_contracts/*` stamp
+**and a reader that could have SEEN one.** The review (PR 130, H2) measured the hole
+in the first cut: `mapRestToDump` is a public entry and stamps dump v1.35
+identically whether or not the REST response carried `sharedPluginData`, so the
+SAME pipeline-written set that lost a variant refused with the plane and proposed
+`absentVariants` as `verified-exact` without it. "Unstamped" is evidence of a
+designer only when a stamp was observable, and that is now a POSITIVE reader fact
+(`dumpStampsObservable`, `opts.stampsObservable`, default false — fail closed):
+
+- the plugin reader always reads the stamps; it is recognised by the provenance
+  note it has always written plus dump ≥ v1.26 (the contract-id stamp);
+- the REST mapper writes `_provenance.stampsObservable: true` ONLY when its caller
+  says the request carried `plugin_data=shared` (`MapOptions.stampsObservable`). The
+  request parameter is not echoed in the response, so only the fetch layer can
+  know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
+- anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
+  bridge that never read plugin data — is not observable, and a strict-subset set
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
+
+**This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
+file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
+reader stamps and every other consumer ignores), not a node or set field; it is
+written only on a fetched read, so every committed fixture mapped from a committed
+response keeps its bytes (the committed `extract/figma/rest/fixtures/*.rest.json`
+carry zero `sharedPluginData` and are mapped without the option); and
+`dump.plugin.js` is untouched, so the embedded plugin dump source did not move.
+
+A set THIS PIPELINE drew never declares by its rows. Its declaration is the stamped
+contract's own `absentVariants`, read from the contract in scope
+(`scopedAbsentVariants`) — and read ALWAYS, not only after the Cartesian check
+refuses (review H1). A canvas that draws the FULL product while its contract
+declares an absence is exactly the amend state below, and a full product passes the
+Cartesian check: the first cut read that state back `verified-exact` and dropped
+the declaration without a note. Held to the product minus the declaration, the
+drawn cell the contract calls absent IS an extra row ("6 rows; Cartesian definitions
+minus 1 declared absent variant(s) require 5"). So a generated set that lost a
+variant, a sparse generated set whose contract is not in scope, a contract that
+declares a different (or a MOVED) cell, and a full canvas under a declaring contract
+all refuse `EXACT_MATRIX_RAGGED` — canvas damage is never laundered into a
+declaration, and a declaration is never silently dropped. The round-trip comparer
+(`extract/figma/roundtrip.ts`) treats a dropped, gained or moved
+`bindings.figma.absentVariants` as a mismatch. A promoted mode or interaction-state
+axis leaves the API, so an undrawn cell naming one of its values has no spelling:
+the ragged refusal stands there too.
+
+**Bounds that are about meaning (review M1).** The tuple encoding grows with the
+PRODUCT, not with what is drawn: a "star" set — the default plus each axis varied
+alone — on 7 axes × 5 proposed 78,096 tuples in a 6 MB contract, and the referee
+walked the whole product to validate one tuple. Two rules, both by name:
+
+- **more undrawn than drawn is refused** (`sparse-matrix-mostly-undrawn` at the
+  proposer, `absent-variants-mostly-undrawn` at the referee). A declaration says
+  "this set is the product of its axes, minus a few cells". When the undrawn cells
+  outnumber the drawn ones the product is not the model of the set: most of what
+  the code surfaces would render is a composition nobody drew, and every per-axis
+  inference rests on a minority of the cells it claims to explain. Exactly half is
+  still allowed (a 2-of-4 diagonal is the smallest set the fence is tested on).
+  Every measured real set is on the allowed side, drawn / undrawn: Alert 30/10,
+  Checkbox 26/4, Progress 10/6, Radio 18/2, Checkbox-icon 42/6, Menu Item 16/2.
+- **a product above 4,096 combinations is refused**
+  (`sparse-matrix-product-too-large` / `absent-variants-product-too-large`;
+  `ABSENT_VARIANTS_MAX_PRODUCT`, one bound at both doors, pinned equal by a test).
+  The largest product among the 984 tracked contracts is 216. Both doors multiply
+  before they materialise anything, and `absentVariantIssues` no longer builds the
+  product at all — each tuple is checked against the axes and ranked by mixed
+  radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
+  under a millisecond.
+
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
+
+**The ambiguity fence.** Every per-axis inversion rule ("this value is a function
+of axis A") was written for full coverage, where the explanation is unique: if a
+non-uniform observation were a function of A alone and of B alone then
+v(a,b) = g(a) = h(b) over every (a,b) makes it constant. With undrawn cells two
+axis sets can each explain every drawn variant, and "first axis that fits" becomes
+a guess decided by axis order — which the code surfaces then render at the undrawn
+combination. THE CONDITION, one rule (`fenceSparseInference`,
+`core/propose-figma.ts`), applied wherever an axis-conditioned inference is
+ACCEPTED: over the rows the inference was read from, take every MINIMAL set of
+variant axes the observed value is a function of (no proper subset also fits) —
+EVERY subset of the axes that vary over those rows, with no arity bound: the
+product cap leaves at most twelve varying axes, so at most 4,096 subsets, and the
+first cut's "up to three" let f(A) against parity(B,C,D,E) over five binary axes
+propose `{a}` (review F4; now refused by name). If there is more than one, and two of them predict DIFFERENT values for some
+declared-absent combination (or one predicts a value where the other has none),
+the set is refused by name —
+`sparse-matrix-inference-ambiguous:<channel>@<part>`
+(`SparseMatrixInferenceError`; every ambiguous inference is listed, each with the
+two explanations and the undrawn tuple they split on). Two explanations that agree
+on every undrawn cell are not a guess: nothing observable depends on the choice.
+A set with no undrawn cell never arms the fence, so every full-matrix proposal is
+byte-identical. Fenced sites: bound-variable unification (name substitution,
+per-value, boolean function), every carried mint binding (single axis, pair,
+triple, root and nested), part presence (`visibleWhen` value and value-subset),
+hidden visibility, text by axis, boolean opacity, shape size and shape placement,
+literal-axis fits (unbound paints, per-side stroke widths, partial cross-axis and
+primary-axis fills), cross-axis fill by parent mode, `layoutByProp` (enum and
+boolean), threaded and per-value instance props, host text overrides. NOT fenced,
+named: the base-slice projection of a refused channel (`projectRefusedOnAxis` — it
+already ranks candidate axes by span, a pre-existing heuristic that full coverage
+does not make unique either) and child-stub geometry (it correlates against the
+STUB's own applied props, not the parent's axes). The state-plane diff sites are
+unreachable on a sparse set (promotion + sparse refuses, above).
+
+**Writer.** `core/emit-figma-script.ts` drops the declared combinations from the
+compiled variant list; grid cells keep their Cartesian row/column (an undrawn cell
+is a hole, never a reflow) and the default combination, which may not be declared
+absent, is still emitted first. The runtime text is unchanged — only the compiled
+data differs — so a contract with no declaration emits the script it always did.
+An instance that selects a combination its child declares undrawn refuses at
+compile, `FIGMA_COMPONENT_REF_ABSENT_VARIANT`, instead of throwing mid-paste.
+
+**Refused by name** (`validateContract`, through `absentVariantIssues`):
+`absent-variant-not-in-product`, `absent-variant-incomplete`,
+`absent-variant-non-variant-axis`, `absent-variant-duplicate`,
+`absent-variants-order` (TUPLE order only), `absent-variants-mostly-undrawn`,
+`absent-variants-product-too-large`, `absent-variants-default-tuple` (Figma reads every axis
+default from that variant, positionally), `absent-variants-erase-axis-value` (a
+variant option exists on the canvas only while some variant carries it, so the
+prop's binding could not round-trip), `absent-variants-cover-product`,
+`absent-variants-no-axes`, `absent-variants-native-representation`, and
+`absent-variants-with-state-previews`. **Why the last is refused rather than
+composed:** the preview matrix is already sparse by its own rule — one row per
+state per PRIMARY-axis value, every other axis PINNED to its first value — and the
+preview axis is not a contract prop, so a tuple over the props cannot address a
+preview row, and an absent base cell a preview row is pinned to would leave "is its
+preview drawn?" undefined. No measured set needs both; it can be lifted when one
+does.
+
+**Differential (nothing already generated changes).** All 984 tracked
+`*.contract.json`, base tree vs this change, six surfaces each — `validateContract`
+errors, React (`tsx` + CSS module + stories), React inline, static HTML, web
+components, the Figma script — hashed output or hashed error: byte-identical, every
+file, every surface (835 / 465 / 834 / 833 / 471 emit, the rest refuse identically:
+a foreign corpus is not in scope of a bare emit). `figma:fresh` and
+`generated:fresh` are green on the committed scripts and surfaces.
+
+**Measured on real designer sets** (read-only REST, exact mode, the product's own
+`extract:figma`). Altitude `Checkbox` (26/30 → 4 declared), `Progress` (10/16 → 6)
+and `Radio` (18/20 → 2) now propose, 0 ambiguous inferences; before, each refused
+ragged and — because the CLI writes nothing when any set refuses — so did every
+dump that contained one. Two real closures follow: `Checkbox Group` and
+`Radio Group` now reference the REAL `ds.checkbox` / `ds.radio` contracts instead
+of stubs. `npm run design:consumer:check` on `Checkbox Group` (12 variants, same
+unchanged 5 % limit):
+
+| children | images within 5 % | min / median / max |
+|---|---|---|
+| auto-proposed STUBS (the parent read alone) | 2 of 12 | 4.85 / 6.45 / 7.40 % |
+| the REAL sparse child | **12 of 12** | 2.23 / 2.97 / 3.87 % |
+
+**CBDS `Alert` (30 of 40) — the committed designer-file exam — still REFUSES, and
+that is the fail-closed rule working.** The exam reads a canvas through a read-only
+observe whose scene read-back ignores plugin data by design
+(`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
+19 refused by name**, and the three derived status lines are unchanged. The first
+cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
+that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
+ground it stood on. A fresh observe that reads the stamps — it needs the owner's
+Figma Desktop — would let it declare.
+
+**What Alert would still lack (review M2, measured on the committed observe).** Its
+10 undrawn cells are every `action=false × inlineAction=true` combination. Its
+`Actions` block is drawn in exactly the 10 variants where `action=true` AND
+`inlineAction=false` — absent in the 10 `true × true` and the 10 `false × false`
+ones — so its presence IS a function of the two axes whose combination is undrawn,
+but of their CONJUNCTION with one side NEGATED. The proposer's presence vocabulary
+is one axis (a value, a value subset, or a truthy boolean): `visibleWhen` has no
+conjunction of two props and no negated boolean form (the latter already a named
+door, `propose.visible-when-no-negated-form`). Neither single axis predicts it (10
+present / 10 absent on each), so the part is a NAMED omission ("DEGRADATION part
+omitted — present in only 10/30 variants"), and an accounting-clean row would still
+render 10 of 30 variants without their action block. Closing it needs a
+two-condition `visibleWhen` with a negated side in the schema, both code emitters
+and the writer — not attempted here.
+
+`Radio Group`: 10 of 12 (2.45 / 3.87 / 5.22 %). Neither PASSES the check: all 12
+cells of each fail `content-size-mismatch` (Checkbox Group renders 148 px high
+where Figma draws 142) and both carry `variant-axis-inert-ledgered:legend` and
+`variant-prop-discarded:state`; the `Checkbox` child alone is 3 of 26 (its box and
+glyph are an uncaptured nested instance). No evidence is committed.
+
+**Still open, named.**
+- **The interaction-state wall.** CBDS `Checkbox-icon` and Altitude `Menu Item` —
+  the two sets this round was opened for — no longer refuse ragged, and still do
+  not propose: both carry a pure interaction-state axis
+  (`state[default|hover|focus|disabled]`), and exact mode refuses to promote one
+  (`EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`, a separate deliberate refusal this change
+  does not touch). So the CBDS Checkbox and Altitude Menu families still cannot
+  carry those children. In a scratch copy with that axis renamed so the wall does
+  not fire, `Checkbox-icon` proposes with 6 declared absences and `Menu Item` with
+  2, neither with an ambiguous inference — the sparse path itself is ready for
+  them. **Closed for a designer's axis by §D.41** (both now propose in exact mode,
+  without renaming anything; the sentence above "promotion + sparse refuses" now
+  holds only for an axis this pipeline drew or one read without the designer fact).
+- **`undrawn-combination-rendered-by-composition`.** The code surfaces are
+  unchanged and do not read the field: they render any prop combination by
+  composing the per-axis rules read from the drawn variants, so an undrawn
+  combination renders as a composition nobody drew or measured. Named on the
+  proposal (the `bindings.figma.absentVariants:` note) and in the emitted React
+  component (a comment beside the `axis-inert` ledger); the web-component, inline
+  and HTML files carry no such note.
+- **Amend does not delete — and says so every time.** A set written BEFORE its
+  contract declared an absence keeps the now-undrawn variant (the writer never
+  removes a designer-visible variant). The amend report lists it under
+  `extraVariants`; every LATER sync, which used to answer plain `unchanged`, answers
+  `unchanged-with-extra-variants:[Tone=C, Size=L]` with the same list (runtime text
+  emitted only into a script that carries a declaring contract, so every other
+  script keeps its bytes); and the design → contract read-back of that canvas
+  refuses `EXACT_MATRIX_RAGGED` instead of reading `verified-exact` (review H1).
+  Someone has to delete the variant or the declaration. Pinned in the test.
+- The note in the emitted React component is capped (the count, the first three
+  tuples, "… N more in the contract") and its values are JSON-spelled, so an enum
+  value holding a newline cannot end the comment. The reviewer's probe also shows
+  such a value breaking the generated TYPE UNION (`size?: 's' | 'l⏎…'`) — that is the
+  enum emitter's own, pre-existing, and not touched here.
+- `validateExactVariantProjection` still materialises the full Cartesian of ANY set
+  it is handed (8 axes × 5: ~0.5 s before the named refusal). Pre-existing, the same
+  for a full matrix; not changed here.
+- The design:consumer:check harness takes one `--component` for both the dump's set
+  name and the generated directory, so a set whose name has a space
+  (`Checkbox Group` → `CheckboxGroup`) needs an alias key in the dump. Not changed
+  here. **Closed by §D.43** (the set is found by the contract's anchor node id,
+  and the REST import now fetches the child sets itself).
+
+**To reverse.** Make `absentVariants` in `proposeFromDumpFenced` always null (delete
+the `pipelineDrew ? scopedAbsentVariants(…) : ragged && stampsObservable ?
+deriveAbsentVariants(set) : null` expression): every ragged set refuses as before,
+the fence never arms, and no contract gains the field. The writer filter, the
+referee block and the schema field are inert without a declaration and can stay; so
+can `_provenance.stampsObservable` (nothing but the proposer reads it).
+`accuracy/grammar.json`'s `cartesian-fill` sentence was made true of a declaring
+contract and reads correctly either way.
+**Gates:** `extract/figma/absent-variants.test.ts` (`npm run exact-proposal:check`
+— exact projection, referee, proposer on synthetic designer sets incl. the named
+ambiguity, writer round trip through the real plugin reader on the mock canvas,
+the pipeline-drawn refusals, the amend state end to end, the stamps-observable fact
+at both readers, the meaning bounds, every fenced call-site category by its own
+label, the code-surface note) and `core/exact-proposal-check.ts` (the two ORIGINAL
+ragged-refusal rows hold again unchanged; the declared-absence rows run under the
+observable fact).
+
+## D.41 A designer's interaction-state variant axis was refused by exact mode — CLOSED for an axis named as state, read with the designer fact, whose every drawn state the contract CARRIES; a state that is not carried, write-back, the dead `:disabled` plane and the undeclared stub override stay NAMED
+
+**2026-09-19, revised the same day after the PR 131 review (one CRITICAL, three
+HIGH — each is marked below). A projection decision the owner delegated; recorded
+so it can be reversed.** A canvas cannot run a pseudo-class, so a designer DRAWS
+what the platform runs — `State = Default | Hover | Focus | Disabled`. Exact mode
+refused every such set, `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS` (commit 26399346a:
+exact promises that the proposed contract's `VARIANT` rows ARE the source matrix, a
+promoted axis is no longer a prop, and "it cannot tell a generator-emitted preview
+axis from a real API enum"; the one exemption was a set that DECLARES the axis as
+this pipeline's `statePreviewAxis`). Reviewable inversion has always promoted the
+same axis by a closed table — the machinery existed; only exact refused. Measured
+read-only through `extract/figma/rest/fetch.ts` (stamps observable), axis names and
+values exactly as drawn — every one is named `state` / `State`, none draws `active`:
+
+| set | axis | drawn | exact mode now |
+|---|---|---|---|
+| Altitude `Menu Item` `3543:47347` | `State[Default\|Disabled\|Focus]` | 16 / 18 | **`verified-exact`, 16 rows** — focus-visible and disabled carried |
+| Altitude `Chip` `3540:43526` | `State[Default\|Focus]` | 40 / 40 | **`verified-exact`, 40 rows** — focus-visible carried |
+| CBDS `Checkbox-icon` `271:2241` | `state[default\|hover\|focus\|disabled]` (+ `error[false\|true]`, a separate boolean axis) | 42 / 48 | **REFUSED** `state-axis-state-not-carried:hover, …:disabled` — 18 of 42 rows |
+| Altitude `Link` `3543:47075` | `State[Default\|Focus\|Hover\|Disabled]` | 4 / 4 | **REFUSED** `…-not-carried:hover` — 1 of 4 |
+| Altitude `Toggle` `3543:48094` | `State[Default\|Focus\|Hover\|Disabled]` | 8 / 8 | **REFUSED** `…-not-carried:hover` — 2 of 8 |
+| CBDS `Toggle` `272:730` | `state[default\|disabled\|hover\|focus]` | 16 / 16 | **REFUSED** `…-not-carried:hover, …:focus-visible` — 8 of 16 |
+| CBDS `Checkbox` `272:96` (the PARENT) | `state[default\|error\|disabled\|hover\|focus]` — **`error` is not an interaction state** | 20 / 20 | `verified-exact`, the axis stays its enum prop (unchanged) |
+
+Both sparse sets lose cells ONLY in a non-rest state (`state=disabled × error=true`,
+6; `State=Disabled × Role=Header`, 2): every combination of the other axes is drawn
+at rest.
+
+**Decision.** What made the axis ambiguous was never the value table — it was not
+knowing WHOSE axis it is. §D.40 made "a designer drew this" a positive fact (no
+`ds_contracts/*` stamp AND a reader that could have seen one). With that fact, a
+variant axis **named `state`, `states` or `interaction`** whose EVERY value is in
+the closed table is projected in EXACT mode, by table lookup, onto the state
+vocabulary the contract already has:
+
+| drawn value (case-, space-, underscore-insensitive; exact per token) | contract |
+|---|---|
+| `default` | the REST state — the base every state is read against |
+| `hover` | `states: hover` → `:hover:not(:disabled)` |
+| `pressed`; `active` ONLY with `hover` or `pressed` beside it | `states: active` → `:active:not(:disabled)` |
+| `focus`, `focus-visible` | `states: focus-visible` → `:focus-visible` |
+| `disabled` | the `disabled` BOOLEAN prop (Figma `BOOLEAN` "Disabled", the native attribute on elements that have one) + the `disabled` state block → `:disabled` |
+
+The table is ONE module (`core/interaction-state-axis.ts`) — the proposer, the
+visual-parity planner (it kept a hand mirror) and the consumer check all read it. It
+is what `STATE_SELECTORS` renders; nothing was added. `rest`, `enabled`, `normal`,
+`hovered`, `focused` are NOT in it. (The first cut argued this from Untitled UI's 12
+committed `Focused` sets "proposing today"; they do so in reviewable mode only — in
+exact mode they refuse `EXACT_DEFINITIONS_MISSING`, pre-v1.5 dumps. The reason that
+stands: no measured set in scope draws a synonym, and each one is one table line
+when a set does.) **How `disabled` is modelled** was found, not chosen: a boolean
+PROP plus a `disabled` STATE block; both code emitters pass the prop as the native
+attribute where `ELEMENT_META[element].supportsDisabled` and select the block with
+`:disabled`.
+
+**Two guards on the table (review H2).** The reviewer projected `Status[Default|
+Active|Disabled]` on an account badge, `Type[Default|Active|Focus]` on a nav item,
+and a Tab's `State[Default|Active]` (Active = SELECTED) into a mouse-held `:active`
+flash with no `selected` API, all `verified-exact`; in this repo's own committed
+CBDS dumps 8 of the 12 axes carrying `active` use it for editing / open and escaped
+only because `filled` or `error` share the axis. So: (1) **the axis NAME is
+required** — `state` / `states` / `interaction`, nothing else, however many states
+are drawn (`state-axis-unnamed`); (2) **`active` is a press only with `hover` or
+`pressed` on the same axis** — alone it is as likely selected / current / open
+(`state-axis-value-ambiguous:active`). Both keep the axis as **the designer's own
+enum prop with a note** — the faithful outcome, not a refusal. All six measured
+sets are named `state` / `State` and none draws `active`. RESIDUAL, named: an axis
+`state[default|hover|focus|active|disabled]` whose `active` means "editing" passes
+guard (2) and is projected as a press — the canvas does not say otherwise; a
+hand-authored enum prop is the way out.
+
+**EXACT IS TRUE OR IT IS NOT CLAIMED (review C1 — the first cut was wrong here).**
+`exactRowsFromProposedContract` rebuilt the STATE half of the matrix from the
+decision — i.e. from the source — so it agreed with the source by construction:
+`Checkbox-icon` read `verified-exact`, observed 42, while its contract carried only
+`focus-visible`; 29 of the 126 rows of the six real sets (23 %) were counted as
+reproduced while dropped. Now BOTH halves are read from the CONTRACT: the rows are
+the contract's own `VARIANT` cells (minus its declared absences) × **the states
+`contract.states` declares** (`disabled` additionally only while the contract has
+the `disabled` boolean), minus the undrawn state cells. The decision supplies only
+the designer's SPELLING of those states, which the contract vocabulary does not
+carry. A drawn state the contract does not carry **refuses in exact mode**, same
+code, slug `state-axis-state-not-carried:<state>[, …]`, with the row count and the
+note that says why; `--reviewable-inversion` proposes the same contract as
+`legacy-unverified` with `carried: false` on the decision. A refusal rather than a
+new status: `parseProposal` (`ds-contracts figma receive`) accepts exactly
+`verified-exact | legacy-unverified`, exact mode returns only the first, and a third
+status would have to be taught to every reader of the envelope before it could be
+trusted not to read as exact somewhere. WHY the four real sets drop a state: the
+drawing lives where the vocabulary does not reach — `Checkbox-icon`'s hover and
+disabled are fills INSIDE nested icon instances (host overrides on a child-owned
+node; carrying them needs per-state `component.overrides`, which does not exist —
+not cheap, not attempted); `Link`'s hover and the Toggles' hover / focus produce no
+root or depth-1 override in any channel the reader captures (the refusal quotes the
+first note the proposal wrote about that state, or says that nothing captured
+differs). Each is named in the refusal; none is guessed at.
+
+**What `verified-exact` attests for a projected axis, and what it does not (review
+H3).** It attests source → contract: every DRAWN row is the contract's own cell × a
+state the contract carries; nothing drawn is dropped. It does NOT attest contract →
+canvas. The contract vocabulary carries neither the designer's state spelling nor
+the state cells they left undrawn (`absentVariants` ranges over VARIANT props, and
+state is not a prop), so **write-back draws the WRITER's matrix, not the
+designer's**: its own `State = Default | Hover | Active | Focus Visible | Disabled`
+axis, the rest grid + one preview row per carried state per value of ONE primary
+axis, every other axis pinned. Carrying it would need a new `statePreviews`
+shape (full product + declared-absent state cells) through the schema, the referee,
+the writer, the plugin dump reader's `statePreviewAxis` stamp, the exact projection
+and the round-trip comparer — not small, not attempted. Instead it is **NAMED,
+every time, exactly**: the proposer computes the writer's matrix by the writer's own
+rule, in the designer's spelling, and puts it on the decision
+(`stateAxisProjection.writeBack = { draws, completes[], omits[] }`) and in a
+`state-axis-write-back-diverges` note listing the cells write-back DRAWS that the
+designer did not and the cells it does NOT draw that the designer did. Pinned by
+tests against the real writer on the mock canvas: a 5-of-6 set writes 6 and the
+completed cell is the one named; a two-axis set writes 6 of the designer's 8 and the
+two omitted cells are the ones named. Real: `Menu Item` writes 10 of 16 (completes
+0, omits 6), `Chip` 25 of 40 (omits 15). The designer's set is never edited — the
+writer creates its own stamped set. (The writer's OWN report cannot list them: the
+contract does not carry what the designer left undrawn, which is the point.)
+
+**Refused by name — never a guess.** `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`, the old
+sentence unchanged, then the slug:
+
+- `state-axis-state-not-carried:<state>` — above.
+- `state-axis-stamps-not-observable` — the reader could not have seen a stamp, so
+  "unstamped" is not evidence of a designer (a pipeline preview axis with one API
+  axis is a FULL matrix and reads the same; projecting it would invent a `disabled`
+  boolean from a `State=Disabled` preview cell). **This is why no committed fixture
+  moves, and why the designer exam — read through an observe that ignores plugin
+  data — keeps every verdict.** The fact itself was too generous (review M2):
+  `importFromUrl` recorded it even when the caller injected the transport, so a
+  replay of this repo's own pipeline-written REST fixtures read observable. It is
+  now recorded only for the real transport against the real API; an injected
+  `fetchImpl` / `apiBase` must assert `transportCarriesPluginData` (default false).
+  Still inherent, PR 130's boundary: a COPY of a pipeline set that lost its stamps,
+  read observably, is an unstamped set.
+- `state-axis-pipeline-drawn-undeclared` — a stamped set whose axis it does not
+  declare as its `statePreviewAxis`; **and** (review M3) a pipeline-written set
+  edited by hand — a Pressed plane added, Hover renamed — whose stale stamp no longer
+  matches what is drawn (it used to surface as `EXACT_TUPLE_INVALID_VALUE`).
+- `state-axis-duplicate-state` — `Pressed` and `Active` on one axis.
+- `state-axis-multiple` — two axes that both project.
+- `state-axis-disabled-prop-collision` — (review H1, widened) ANY prop that already
+  spells disabled — a VARIANT axis or a BOOLEAN property whose name normalises to
+  `disabled` / `isdisabled`. The first cut tested only a BOOLEAN literally named
+  `disabled`; `State[Default|Disabled]` × a VARIANT `Disabled[False|True]` proposed
+  two props named `disabled` and `emitReact` threw on a `verified-exact` contract.
+- `state-axis-orphan-state-cell` — a state drawn where its rest cell is not.
+- and one that is NOT a projection refusal: **`proposal-refused-by-referee`**
+  (`ProposalRefereeError`, review H1). Exact mode never returns, on this path, a
+  contract `validateContract` refuses: the referee runs on every exact proposal that
+  projects a designer's axis and whose component refs resolve inside the proposal
+  (linked children in scope are slices, not contracts). SCOPE, measured: armed for
+  EVERY exact proposal it refuses 19 committed census sets that propose
+  `verified-exact` today (17 carry a stamped `semantics.roleException` no root role
+  claim needs; antd `Input` roots children on a void `<input>`) — real, pre-existing,
+  a census re-record of its own, and named here rather than silently widened. It is
+  one condition in `proposeFromDumpFenced`.
+
+NOT refused: an axis with a value OUTSIDE the table (`error`, `selected`, `filled`,
+`open`, `Focused`, …), with no rest value, not named as state, or with a lone
+`active`, stays **the designer's own enum prop** — a faithful projection, and the
+note names the value or the condition (`state-axis-value-outside-vocabulary`,
+`-no-rest-value`, `-no-state-value`, `-unnamed`, `-value-ambiguous`). That is what
+the CBDS `Checkbox` parent needs (`state=error` is API).
+
+The mapping is a **named decision on the proposal**: `result.stateAxisProjection`
+(`decision: 'designer-state-axis-projected'`, the property, the rest value, every
+value → state with `carried`, `undrawnStateCells`, `writeBack`) and a
+`state-axis-projected (DECISION …)` note.
+
+**Sparse sets (§D.40) — the declaration vocabulary is untouched.** Undrawn at REST →
+a contract absence over the REMAINING axes, `bindings.figma.absentVariants` exactly
+as §D.40 defines it; every state must leave that cell undrawn too (else
+`state-axis-orphan-state-cell`), and `statePreviews` is then NOT set, by name.
+Undrawn ONLY in a non-rest state → no prop combination is missing, so nothing is
+declared on the contract; the cells ride `undrawnStateCells` — and are what
+write-back completes, above. **The fence is over ALL undrawn cells, spelled over the
+remaining axes**: a plane that draws a cell fits it identically under every
+explanation, so a cell another plane lacks can never refuse it, and a plane with a
+hole is held to the same uniqueness rule (tested inside a state plane). **A
+rest-plane hole + a states plane lose the states on the canvas round trip (review
+M1)**: the writer draws the rest grid only (3 variants in the test), the read-back
+is `verified-exact` OF THOSE 3 and recovers `states: []`. That status is true of
+the canvas it read and says nothing about the states; the read-back now says so
+first among its notes (`states-not-drawn-on-this-canvas`), and the first proposal's
+`writeBack.omits` lists the state cells that will not be drawn.
+
+**Round trip (full single-axis set).** The proposed contract opts into
+`statePreviews` where its own rules allow; the writer draws its stamped, declared
+axis, and that set proposes back to the same `states` / props / root overrides
+through the DECLARED path — `stateAxisProjection` is absent on the way back (tested
+through the real plugin reader; the same canvas with stamps stripped and no
+observable fact refuses).
+
+**Mounting a state-axis variant.** `scripts/design-consumer-check.ts` reported every
+such variant as `State (no VARIANT prop)`. It reads the axis by the same table and
+mounts a state cell the way a user reaches it — the mechanism
+`extract/figma/visual-parity/render.ts` already used: a real pointer hover, a held
+mouse button, keyboard-modality focus on the component's own focus target, or the
+`disabled` prop. Nothing is forced that a user could not do. After review M4: reach
+is the REAL pseudo-class (`:hover` / `:active` must match the root — a covered or
+`pointer-events:none` root is `state-unreachable`, not `state-inert`); the paint
+string carries every channel a state may change (all four borders, radii, text
+decoration, transform, weight, filter, the box); and a pressed cell is released with
+the pointer parked OFF the component, so no click is synthesised (the first cut
+clicked every pressed cell — a navigation on `a[href]`). `state-unreachable`,
+`state-inert` and `state-not-carried` are tested on a local page, no token.
+
+**Differential (nothing already generated changes).** All 984 tracked
+`*.contract.json`, six surfaces, base tree vs this change: byte-identical. Every
+tracked dump-shaped JSON, every set, BOTH modes — 5,279 sets, 10,558 rows of verdict
++ contract hash + notes hash: **zero changed**, before and after the review fixes.
+
+**Measured on the real closures** (read-only REST, unchanged 5 % limit; no evidence
+committed; the contracts are byte-identical between the two modes):
+
+| parent / set | exact | children | images within 5 % | min / median / max |
+|---|---|---|---|---|
+| Altitude `Menu` + `Menu Item` | both `verified-exact` | REAL `ds.menu-item`, no stub | 1 of 2 | 0.00 / 9.36 / 18.71 % |
+| Altitude `Menu Item` (16 cells, all mounted) | `verified-exact` | — | 10 of 16 — rest 6/6, disabled 4/4, focus 0/6 | 0.00 / 1.30 / 14.16 % |
+| Altitude `Chip` (40, all mounted; was "cannot mount") | `verified-exact` | 1 icon stub | 17 of 40 — rest 17/20, focus 0/20 | 0.00 / 9.19 / 26.61 % |
+| CBDS `Checkbox` + `Checkbox-icon` + `Icon` | **refuses** (the child drops hover + disabled); `--reviewable-inversion` proposes all three, the child `legacy-unverified` | REAL `ds.checkbox-icon` and `ds.icon`; 4 icon-glyph stubs remain | 2 of 20 (reviewable + SCRATCH, below) | 4.76 / 10.43 / 20.24 % |
+| Altitude `Link` (4) | **refuses** (hover); reviewable proposes | 1 icon stub | 2 of 4 | 0.66 / 4.93 / 19.55 % |
+
+None PASSES the check. **So the CBDS Checkbox family still cannot carry its real
+child in exact mode** — no longer because of the axis, but because two of the
+child's four states are drawn where the vocabulary cannot carry them; the Altitude
+Menu family can.
+
+**Still open, named.**
+- **`ds-contracts generate` refuses the CBDS `Checkbox-icon` proposal**, by name:
+  `part "CheckSquare" overrides "size" but ds.check-square does not declare it
+  overridable`. Pre-existing and independent of the state axis: the proposer's
+  ROUND 10 self-claimed-stub size override is gated on `mintUnbound` alone, while the
+  stub declares `overridable` only under the `instanceOverrides` opt-in no CLI
+  passes. (In exact mode the referee would now refuse that proposal too, behind the
+  state refusal.) The CBDS numbers above come from a SCRATCH copy whose three stubs
+  were given `overridable: ["size"]`.
+- **`states.disabled` on a root with no native `disabled`** (`a`, `div`, `label`, …)
+  compiles to `.root:disabled`, which never matches; the boolean is delivered as
+  `data-disabled`. Pre-existing on 64 tracked contracts, so not touched here (it
+  would change their emitted CSS). **Three of the four real sets that carry a
+  disabled block get this dead plane** (`Link` on `a`, both Toggles on `div`; only
+  `Menu Item`, a `button`, is live) — the consumer check names it
+  (`state-inert:disabled`), and `state-unreachable:focus-visible` names a root
+  nothing can focus (`Link`'s `a` without `href`, `Checkbox-icon`'s `div`).
+  **The dead plane is closed by §D.45** (re-measured there on `Link` and both
+  Toggles); the unfocusable root is not.
+- **The designer exam's own mount** (`recipe/canvas-to-code.ts` `mountCells`) still
+  says `variant axis State has no contract prop` for Chip and Link. Its observe
+  cannot see stamps, its proposals are reviewable inversions, and its receipts are
+  dated: not moved. The tally stays 5 accounting-clean, 19 refused by name.
+- Reviewable inversion WITHOUT the designer fact is the legacy detector, unchanged
+  (no name requirement, no `active` guard, first axis wins): changing it moves
+  committed proposals, and it never claims `verified-exact` for a promoted axis.
+
+**To reverse.** In `proposeFromDumpFenced` make `designerReadable` false: every set
+takes the legacy detector, exact refuses every undeclared state axis again
+(`semanticProjectionRefusal`), sparse + promoted refuses ragged in both modes, and
+`exactRowsFromProposedContract` ignores its third argument. The shared table, the
+fetch fact and the consumer check's mounting are independent and can stay.
+**Gates:** `extract/figma/state-axis.test.ts` (`npm run exact-proposal:check`, 23
+tests — the table and its guards, every refusal, carried / not carried, the three
+sparse shapes and the fence inside a state plane, the round trips incl. write-back
+held to the real writer, the hand-edited pipeline set, the transport fact, the
+referee, the emitted React, the planner), four rows in
+`core/exact-proposal-check.ts`, and `scripts/design-consumer-check.test.ts`
+(`npm run design:consumer:test`, incl. the browser test of the three named state
+problems).
+
+**Consumer observation correction (AGENT decision, 2026-09-19).** A browser
+probe changed only the font size of a fixed-size control on real hover. Its
+pixels changed, but the check reported `state-inert` because its computed paint
+snapshot omitted font size. The same gap affected font family and line height.
+The snapshot now includes those three properties; a browser regression checks
+each with different before/after screenshots and unchanged control dimensions.
+The pixel scorer, 5% limit, source pairing and frozen evidence are unchanged.
+This corrects a measurement failure, not a product fidelity result. Reversal:
+remove the three computed properties from `paintOf` and the typography probe;
+the rest of the state-axis rule is independent.
+
+
+### D.41 follow-up — variant effects include descendants
+
+**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
+previously compared only root styles, bounds and class names. A parent prop
+forwarded to a child could visibly work while the check reported
+`variant-prop-discarded`; an unused root class could imply an effect with no
+changed drawing. The probe now records subtree paint, rendered text and exact
+geometry relative to the root. It excludes class names. Browser probes verify
+changed descendant color, rearrangement at fixed root bounds, and equal-width
+text replacement against actual different screenshots; an unused class stays
+inert. This does not change the image scorer or its 5% limit. Existing receipts
+remain historical until remeasured. Reversal: restore the former root-only
+observer in `scripts/design-consumer-check.ts`, retaining these known false
+positive and false negative cases in the limitation ledger.
+
+
+## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+
+**Current integration measurement, 2026-09-19.** After merging the current
+state-axis and consumer-check changes, fresh REST reads and newly generated,
+installed consumers measure Altitude Badge **10/10**, CBDS Badge **66/72** and
+Altitude Tabs **0/2** on both white and black. All 72 CBDS rows pass white
+(maximum 4.427%); six small rounded outline rows fail black (maximum 6.120%).
+Altitude Badge's maximum is 4.825% on either background. Tabs retains missing
+child content, an ineffective variant change and a 40px versus 176px content
+height mismatch; its maxima are 7.081% white and 9.030% black. These are CLI
+consumer measurements, not a full application or semantic qualification.
+No source design, scorer or 5% limit changed. The 72/72 table below is the
+historical white-only result, retained with its original receipts. Both sides
+of the integration and the fresh measurements are preserved privately in
+`pr135-main-integration-c93fqc91/`; the new observation does not rewrite them.
+
+**2026-09-19. A lowering decision taken by the agent under the owner's standing
+delegation (never a grade, never a tolerance); recorded so it can be reversed.**
+After §D.39 the design-led consumer check on the 72-variant CBDS Badge still
+missed the unchanged 5 % limit on 26 variants — every `size=small` one, 48 × 16 px,
+at 4.4–7.3 % — with every content size equal. Verified through Figma REST: the
+TEXT node `Label` has `style.textAutoResize: "WIDTH_AND_HEIGHT"` and
+`absoluteBoundingBox.width = 32.0`. Figma's auto-width text box is a WHOLE number
+of pixels: the glyph advance rounded up. Chromium lays the same run (Inter Semi
+Bold 14) out at 31.40625 px, so the hug root rendered 47.40625 px wide where
+Figma's is 48 and the right border antialiased across two columns. Neither reader
+captured how the box sizes itself, so the proposer could not lower it.
+
+**Decision.** Keep the designer's numbers. The text part records the one captured
+fact, under Figma's own name and only in the value that lowers:
+`Part.textAutoResize: "WIDTH_AND_HEIGHT"`. `NONE`, `HEIGHT` and the deprecated
+`TRUNCATE` are a fixed or filled box, which the width and fill vocabulary already
+carries, and are never written. ABSENT is the meaning every contract already had —
+the element as wide as its fractional browser advance — so no existing contract or
+emitted byte changes; `figma:fresh` and `generated:fresh` are green.
+
+**Form** (revised after the adversarial review — see below). The code surfaces
+give the text element the same box Figma draws:
+
+```
+inline-size: calc-size(fit-content, round(up, size, 1px));
+inline-size: calc-size(fit-content, round(up, size - <letter-spacing>, 1px));   /* a tracked label */
+max-inline-size: 100%;        /* unless the part carries its own max-width */
+align-self: flex-start;       /* only under a flex column that would stretch it */
+```
+
+`calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
+cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
+available))`: a label that fits is its max-content box rounded up; a string that
+does not fit wraps at the available width exactly as it does without the fact.
+`max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
+box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
+A browser without `calc-size()` drops the `inline-size` declaration at parse (a
+stylesheet) or ignores the assignment (the CSSOM, i.e. the inline surface) and
+keeps today's fractional box, under 1 px narrower — never wider and never a wrap
+change; no `@supports` guard is needed and none could be spelled inline. Logical
+properties, so a vertical or RTL writing mode rounds the axis the text runs along.
+The declaration takes effect because every emitter renders a text part as its own
+element inside a parent it lays out as flex or grid (blockified), and an absolutely
+positioned one is blockified too; where that is not true the flag is refused (see
+below). `text-align` composes (the run is aligned inside the up-to-1-px-wider box,
+as Figma aligns it inside its whole-pixel box). Emitted by `generateCss` (both
+sites), the web components' `shadowCss` and, as the same declarations with tokens
+resolved, the inline surface's style record (`wholePixelTextBoxDecls`,
+`packages/core/src/anatomy.ts`); the lowering is registered as
+`css.text-box-whole-pixel` with its inverse `carryTextAutoResize`.
+
+**The tracking finding, measured before it was coded.** The first cut rounded the
+raw `max-content` and REGRESSED the Altitude Badge from 10 / 10 to 9 / 10: its
+label (`Badge`, Public Sans 600 12 px, 1 px letter spacing) is 41 px in Figma and
+41.27 px in Chromium, so rounding up gave 42. CSS adds `letter-spacing` after
+EVERY glyph, the last included; Figma's box has none after the last. On the
+committed REST fixtures rendered in Chromium with the fonts loaded:
+
+| text | Figma box | Chromium max-content | ceil, all spacings | ceil, less the last |
+|---|---:|---:|---:|---:|
+| Eventz Kicker, Manrope 700 18 px, UPPER, 6 px tracking | 95 | 100.05 | 101 | **95** |
+| Eventz Kicker, Manrope 700 16 px, UPPER, 6 px tracking | 87 | 92.94 | 93 | **87** |
+| Altitude Badge label, Public Sans 600 12 px, 1 px tracking | 41 | 41.27 | 42 | **41** |
+
+Three of three tracked samples: Figma's box is the run less the trailing spacing,
+rounded up. The part's own uniform `letter-spacing` is therefore shed before
+rounding — a literal verbatim, a token as its `var()` on the sheets and as its
+resolved value inline. A `letter-spacing` that varies by variant or state, or
+rides a placeholder token, has no single spelling in the base rule and is refused
+beside the flag. On the 23 untracked samples the two forms are the same number.
+
+**The premise, measured on 26 samples.** Every WIDTH_AND_HEIGHT text node in the
+committed REST fixtures whose font could be loaded (Inter locally; Manrope, Geist
+and Public Sans from Google Fonts): the rule reproduces Figma's box exactly on 18
+(7 / 7 Manrope headings, 3 / 3 tracked, 7 / 15 Inter, Geist). The 8 misses are all
+Inter and all in the SAME direction — Figma 1 px wider than the rounded Chromium
+run, by 1.16–1.77 px before rounding: a different Inter build in Figma than the
+one installed here, the font substrate `FC-FONT-SUBSTRATE` already names. On none
+of the 26 is the rounded box wider than Figma's. The rule closes the rounding, not
+the font.
+
+**Readers (dump v1.36).** Both write `text.textAutoResize` verbatim on every text
+node (REST `style.textAutoResize`; plugin `node.textAutoResize`; the four Plugin
+API spellings and nothing else). An ABSENT dump field means "not captured" (dump
+≤ v1.35, or a canvas that reports nothing — the mock), never auto-width: older
+dumps propose the bytes they always did. On the REST route an absent RESPONSE key
+is read as `NONE` (see the review, M4). Re-pinned by the previous bump's recipe:
+`plugin-engine-check.mjs` ×2, `flowbite-dump-propose-check.ts`,
+`sync/fixtures/ledger.fixture.json` ×4, the reader tests, `ui.html` re-embedded
+(`npm run plugin:embed-dump`), the engine receipt re-recorded, the door register
+re-derived, 69 lowering citations re-located by marker id and exact rule text.
+
+**Proposer** (`carryTextAutoResize`, beside `carryTextAlign`; five doors):
+WIDTH_AND_HEIGHT in every captured variant → the flag
+(`propose.text-box-absent-is-fractional` and
+`propose.text-box-not-auto-width-unchanged` are the two silent no-ops: not
+captured, or a fixed / filled box); auto-width in some variants and not others —
+including a variant that reports nothing — is NAMED
+(`propose.text-box-mixed-refused`); WIDTH_AND_HEIGHT beside
+`layoutSizingHorizontal: FILL` is a dump that contradicts itself — Figma turns a
+filled text box to HEIGHT — and is NAMED, the part keeping the fill it carries
+(`propose.text-box-fill-contradiction-refused`). On every committed REST fixture
+(352 text nodes with a sizing field) WIDTH_AND_HEIGHT pairs only with HUG, and
+HEIGHT only with FILL or FIXED. A sole root text node named `label` is hoisted into
+`anatomy.root.text`; the fact is NAMED there, not carried
+(`propose.text-box-hoisted-root-named`): the root's box is padding plus content,
+and rounding padding + advance is a different number whenever the padding is
+fractional. A flag the finished contract could not honour (the refusals below)
+is WITHDRAWN by name (`propose.text-box-unhonourable-withdrawn`, the same function
+validateContract uses) rather than proposed into a contract that is then refused.
+
+**Writer.** `core/emit-figma-script.ts` had never set `textAutoResize`;
+`figma.createText()` is born `WIDTH_AND_HEIGHT` (measured: 203 of 203 text nodes
+with a sizing field in the pipeline-generated census sets read it back, all HUG).
+A part carrying the flag compiles it onto its text spec (the bare text, the
+`content` text and the text inside a boxed-text wrapper — never inherited by a
+nested child) and the runtime writes `node.textAutoResize = 'WIDTH_AND_HEIGHT'`,
+feature-gated so a script for any contract without the flag is byte-identical.
+Contract → writer → REAL plugin reader → proposer is a fixed point for the flag
+(`extract/figma/whole-pixel-text-box.test.ts`, on the mock canvas, where the field
+exists only where the writer set it). **It is NOT a fixed point in the other
+direction**, stated plainly: `createText` is born `WIDTH_AND_HEIGHT`, so every
+hugging text part of a FLAGLESS contract, written to a real canvas and read back,
+proposes the flag. code → canvas → code therefore adds the fact. That is the truth
+about the canvas (Figma has no fractional text box) and, with `fit-content`, it
+changes nothing but the sub-pixel box of a text that fits; checked: it churns no
+committed pin — the mock canvas the committed round-trip gates run on does not
+model the field, and no live round-trip receipt was re-recorded in this change.
+
+**Refused by name** (`validateContract`): the flag on a top-level root; on a part
+that owns no text (`text` / `content` / `textByProp`); beside a `width` /
+`inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
+truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
+that is sized, filled or truncated by a channel is not sized by its text; beside a
+per-variant / per-state or placeholder-token `letter-spacing`; beside a literal
+`letter-spacing` that is not a px / em / rem length; when the part INHERITS
+`letter-spacing` from any ancestor holder (root or part; literal, token or
+per-variant) and states none of its own; on an inline-level element (the part
+declared `display: inline` / `contents`, or a parent that is not a flex / grid
+box, unless the part is absolutely placed or itself block-level). The emitters,
+which hold the token VALUES, refuse a letter-spacing TOKEN that resolves to
+anything but a px / em / rem length in any mode (a `%`, a unitless `0`, `normal`),
+and a token when no values were supplied (the §D.39 shadow precedent). The schema
+spells only `"WIDTH_AND_HEIGHT"`.
+
+**Revised after an adversarial review (PR 132, same day; fix-then-merge).** Each
+finding was reproduced by the reviewer's probes and each fix re-measured with
+them in Chromium:
+
+- **H1 — `max-content` made runtime text non-wrapping.** The first cut spelled
+  `calc-size(max-content, …)`, a definite, unwrappable box. On the shipped
+  `flowbite.card` the proposer carries the fact onto `label-text` (bound to
+  `children`), and a long runtime string grew the card to 596 px inside a 240 px
+  container; a fixed-width column or grid parent stopped wrapping the same way —
+  while Safari and Firefox, which drop the declaration, wrapped. Now
+  `calc-size(fit-content, …)`: the card is back to 240 px with the same three
+  lines, the badge unchanged at 50 / 34. `fit-content` alone still rounded a
+  WRAPPED box's fractional available width up (a 120.5 px column: 121, 0.5 px
+  over), so `max-inline-size: 100%` clamps it — measured 120.5 in a flex column,
+  a flex row, a grid and a fit-content card, and unchanged for every label that
+  fits. (`min(…, 100%)` inside `calc-size()` collapsed the badge to 0 and was
+  rejected.) A part that carries its own `max-width` keeps it and gets no clamp:
+  both spell one property in one rule, and ours would override the author's.
+  Pinned: long text in a 120.5 px and a 240 px flex column and a 120.5 px grid,
+  both React surfaces — the same line count and block size as without the fact,
+  no overflow, the component not wider.
+- **H2 — code → canvas → code adds the fact.** Stated plainly under **Writer**
+  above: not a fixed point in the flagless direction; acceptable only because,
+  after H1, the fact changes nothing but the sub-pixel box of a text that fits.
+  It churns no committed pin (the round-trip gates run on a mock canvas that
+  does not model the field).
+- **M1 — "never a different layout" was false.** Under a flex column with no
+  cross-axis alignment CSS STRETCHES a text item. With `calc-size()` the
+  explicit inline-size stops the stretch (a centred label at x = 0); without it
+  the box stretched and the centred run sat at x = 84 in a 200 px column — the
+  engines disagreed. **AGENT decision:** a flagged part under such a parent (a
+  flex column whose `align` is absent or `stretch`, with no `layoutByProp`, the
+  part not absolutely placed and declaring no `align-self`) also gets
+  `align-self: flex-start`. It is Figma's own geometry: a text box that sizes
+  itself to its text is a HUG child and sits at a MIN-drawn column's start
+  edge — a CENTER- or MAX-drawn column already proposes an `align` and is left
+  alone. Now both kinds of engine draw x = 0 (pinned, with the calc-size
+  declaration stripped to stand in for an engine without it). It is chrome of the
+  flag: the proposer never reads it back. **To reverse:** drop the `align-self`
+  push in `wholePixelTextBoxDecls`; the M1 split returns as a named limit.
+- **M2 — inherited tracking.** A root's per-variant `letter-spacing: 2px`,
+  inherited by the flagged label, was neither subtracted nor refused: a 42 px box
+  where Figma's is 40. Now refused by name whenever any ancestor holder (root or
+  part; literal, token, per-variant or per-state) states `letter-spacing` and the
+  part states none of its own.
+- **M3 — tracking that cannot be subtracted.** A `%` subtracts against the
+  containing block (a `-0.5 %` token gave a box wider than Figma's); a token
+  resolving to a unitless `0` or `normal` made `size - var(…)` invalid at
+  computed-value time — a silent no-op. Only a px / em / rem length is
+  subtracted now; a literal of any other kind is refused by validateContract, a
+  token by the emitters from its resolved VALUE in every mode (they hold the
+  token trees), and a token with no values supplied is refused too.
+- **M4 — does REST omit `NONE`?** Two read-only GETs (Altitude Radio
+  `3543:47540`: 9 labels; CBDS Avatar `284:11`: 20 texts) found no `NONE` node to
+  settle it: every text reported `WIDTH_AND_HEIGHT` or `HEIGHT` explicitly. REST
+  omits defaults elsewhere (`strokesIncludedInLayout`), and `NONE` is this
+  field's default. **AGENT decision:** the REST reader reads an absent key as
+  `NONE`, and the proposer treats any variant reporting nothing beside
+  auto-width ones as the mixed case. Safe under either truth — if REST sends
+  `NONE`, absence never happens; if it omits it, a fixed box beside auto-width
+  variants is refused by name, never a silent auto-width. **To reverse:** delete
+  the `else` branch in `mapText` (`extract/figma/rest/map.ts`). UNVERIFIED on a
+  real `NONE` node; named here.
+- **Low — inline-level elements.** A part declared `display: inline` /
+  `contents`, or one whose parent is not a flex / grid box (a root declared
+  `display: block`), made the rule a silent no-op; refused by name. A flag the
+  proposer captured but the finished contract could not honour is withdrawn by
+  name (`propose.text-box-unhonourable-withdrawn`).
+
+**Measured after** (re-measured after the review fixes, fresh read-only REST reads
+under dump v1.36, same unchanged 5 % limit — every row equal to the digit to the
+first cut, because every label on these sets fits):
+
+| set | before | after |
+|---|---|---|
+| CBDS Badge `277:822`, 72 variants | 46 / 72; 0.96–7.29 %, median 3.92 % | **72 / 72**; 0.96–4.43 %, median 3.06 %; every rendered width exactly Figma's (36 × 61, 36 × 48) |
+| Altitude Badge `3538:35772`, 10 variants | 10 / 10; 0.00–4.74 % | **10 / 10**; 0.00–4.82 %; the label box now 57 px against Figma's 57 (was 58); the five label rows move by +0.06–0.08 points (Public Sans rendering), the five dots stay 0.00 |
+| Altitude Tabs `3558:61955`, 2 variants | 0 / 2; 5.54 % / 5.19 % | 0 / 2; **unchanged to the digit** — its text lives inside child instance stubs the dump does not capture, so no part carries the fact |
+
+| CBDS style × size | pass before | pass after | before (min / median / max) | after (min / median / max) |
+|---|---|---|---|---|
+| fill × large | 12/12 | 12/12 | 2.66 / 3.42 / 3.42 % | unchanged to the digit |
+| fill × small | 2/12 | **12/12** | 4.56 / 5.47 / 5.86 % | 3.39 / 4.23 / 4.30 % |
+| tonal × large | 12/12 | 12/12 | 1.91 / 1.91 / 1.91 % | unchanged to the digit |
+| tonal × small | 8/12 | **12/12** | 4.43 / 4.69 / 5.73 % | 4.43 / 4.43 / 4.43 % |
+| outline × large | 12/12 | 12/12 | 0.96 / 1.23 / 1.50 % | unchanged to the digit |
+| outline × small | 0/12 | **12/12** | 5.21 / 6.05 / 7.29 % | 2.08 / 2.67 / 3.26 % |
+
+All 36 large rows are unchanged to the digit (their `Label` rounds to the same
+61 either way). The design-to-code census counts the fact: 3,009 carried, 4,065
+named, 0 silent (was 2,904 / 3,985 after §D.39; the Flowbite sets' labels are the
+hoisted root label and count as named). Evidence:
+`recipe/evidence/design-led-consumer/{cbds-badge,altitude-badge,altitude-tabs}/`.
+
+**Named limits.**
+
+- **Browsers without `calc-size()`** keep the fractional box: under 1 px narrower
+  than Figma's, never wider and never a wrap change — the defect this closes, not
+  a new one. Their POSITION agrees under a stretching column because of
+  `align-self` (M1); where that declaration is not written (a column whose
+  alignment varies by variant) the two kinds of engine still place a centred
+  label differently.
+- **A part with its own `max-width`** gets no container clamp, so its WRAPPED box
+  in a fractional-width container can overflow by under 1 px.
+- **Trailing tracking sits outside the box.** The subtracted letter spacing after
+  the last glyph still paints as empty space, so a Range over the text reports it
+  past the box edge (0.06 px at 0.05em in a probe); no ink overflows — Figma's box
+  has no such spacing. Support is
+  not enumerated here; the Chromium `playwright-core` pins has it (asserted by the
+  React test), and the consumer check measures in that Chromium only.
+- **The font substrate stays.** Where the two engines disagree on the RAW advance
+  by more than the rounding slack (8 of 15 Inter samples, 1.16–1.77 px), Figma's
+  box is still 1 px wider than the rounded browser run. `FC-FONT-SUBSTRATE`.
+- **A flagless contract's text reads the fact back.** `createText` is born
+  `WIDTH_AND_HEIGHT` and Figma has no fractional text box, so a set this pipeline
+  wrote from a contract without the flag proposes the flag on its re-read — the
+  truth about the canvas, additive, and pinned by a test so it cannot become
+  silent. This is the one place the fixed point is one-directional: the flag
+  round-trips; its absence does not. The census on the pipeline-generated
+  figma-ds sets reflects it (carried), and no committed proposal changed (every
+  committed dump predates the field).
+- **The hoisted root label** (a sole root text node named `label`) is named, not
+  carried; the root keeps the fractional advance.
+- **A tracked label with per-variant or per-state tracking** is refused beside the
+  flag rather than given a private custom property; the proposer never writes
+  per-variant tracking (a mixed `letter-spacing` is already named), so the
+  refusal reaches only hand-written contracts.
+- The mock canvas does not model the field (it reports nothing, which reads as
+  "not captured"). The Playground's canvas preview ignores the flag.
+
+**Still open.** `core/emit-html.ts` (the static HTML preview) ignores the flag — no
+whole-pixel box, no clamp, no `align-self` — and draws the fractional box:
+a preview surface outside the React + WC core scope (the surface the computed
+gate scores through); named here, not fixed. Altitude Tabs' labels are inside
+child instance stubs and out of reach until stub content is captured. (§D.43: the
+import now follows the `Tab` child, which REFUSES on the §D.41 wall and so stays a
+named stub.)
+
+**To reverse.** Delete `carryTextAutoResize` and its four doors, the hoisted
+note and `settleTextAutoResize`, in `core/propose-figma.ts` (no contract then carries the flag and every
+surface emits what it did); or keep the capture and delete the three
+`wholePixelTextBoxPlan` pushes (`css.ts` ×2, `emit-wc.ts`) and the
+`applyDeclStrings(s, textBoxes…)` line in `emit-react-inline.ts` to fall back to
+the fractional box. The two review decisions reverse on their own (above). The schema
+field and the dump field are additive and can stay. **Gates:**
+`extract/figma/whole-pixel-text-box.test.ts` (`npm run exact-proposal:check` — both
+readers, proposer incl. every refusal, writer round trip through the real plugin
+reader, the flagless re-read pinned) and `core/react-whole-pixel-text-box.test.ts`
+(`npm run react:conformance:check` — all three surfaces, the tracking spellings,
+every validator refusal, and the box MEASURED in Chromium: rounded up less the
+trailing tracking, the hug root following, a centred run centred, RTL at the right
+edge, vertical writing rounding the block dimension).
+
+## D.43 A REST import read one set; every instance of another set became a geometry-only stub with no content — CLOSED for same-file sets; a remote (library) component, a set that refuses to propose and anything past the cap stay stubs, each NAMED
+
+**2026-09-19. A reader decision taken by the agent under the owner's standing
+delegation (never a grade, never a tolerance); recorded so it can be reversed.**
+`npm run extract:figma:rest -- <url>?node-id=<set>` fetched exactly one node. Every
+INSTANCE of another component inside it reached the proposer as an unresolved
+reference and was auto-proposed as a STUB contract — a box with the instance's
+bounding size and nothing inside — so the generated React rendered empty children.
+Measured on designer files: Altitude `Tabs` missed the unchanged 5 % limit at
+5.54 % / 5.19 % with every tab label and the tab panel's content inside stubs, and
+§D.40 had shown by hand that fetching the CHILD sets together with the parent took
+Altitude `Checkbox Group` from 2 / 12 to 12 / 12. The mechanism already existed
+(`fetchNodes` takes several ids, `mapRestToDump` maps them all, the proposer
+session-links an instance to a set proposed earlier in the same dump); only the
+operator knew to pass the child ids.
+
+**Rule.** A REST import follows its instances. After the requested node is fetched,
+every INSTANCE the mapper maps (every one inside a variant that is not itself
+inside another instance — the mapper never recurses into an instance, so a set
+seen only inside an instance subtree has no reference in the dump to resolve) is
+read for its `componentId`; the response's own `components` / `componentSets`
+metadata gives the owning set (`componentSetId`, else the standalone component's
+own id) and `remote`. Every local target not yet in the dump is fetched in a
+further `/nodes` round — 30 ids per request (the batching `visual-truth/rest.mjs`
+already uses), a 429 retried up to three times after `Retry-After`, each wait
+printed to stderr, and a `Retry-After` over 60 s REFUSED by name
+(`rate-limit-wait-exceeds-cap`) instead of slept on — and the new
+sets are walked the same way until nothing new is referenced (a fixpoint; a cycle
+terminates because a set is fetched once). The merged response lists sets
+DEPENDENCIES FIRST — a post-order walk from the requested id, targets in sorted id
+order — because the proposer session-links a set only to siblings proposed
+earlier in the batch; rounds visit targets in sorted order, so the dump is
+byte-stable across runs (two live runs of Tabs: identical bytes). Code:
+`extract/figma/rest/closure.ts` (`followInstances`), wired through
+`importFromUrl({ closure })` in `fetch.ts`; the CLI turns it ON by default and
+`--no-closure` turns it off.
+
+**What it records.** `_provenance.closure` = `{ rule: 'follow-instances', cap,
+requested: [{nodeId, name, type}], pulled: [{nodeId, name, type, round,
+referencedBy}], unresolved: [{targetId, componentIds, name, reason, detail,
+referencedFrom}], cycles: [{from, to, fromNodeId, toNodeId}] }`, and one `_degradations` row per referencing instance
+path with the new code `instance-closure-unresolved` (message starts with the
+reason), so the proposer attaches it to the parent set's notes exactly like every
+other capture receipt. The reasons: `remote-library-component` (`remote: true` on
+the component or its set), `not-found` (no metadata, or `/nodes` answered null),
+`not-a-component`, `utility-slot-set` (a set named `Slot`, which the mapper never
+maps), `set-name-collision` (the dump is keyed by set name), `unreadable` (the
+request failed), `cap-exceeded`, `set-name-integer-like` (below) and `cycle-cut`
+(below). The CLI prints each on stderr; `extract:figma`
+prints a "Dependency closure" section in `figma-proposals.md`; the clean-consumer
+receipt carries `inputs.closure` and `inputs.contractGraph`.
+
+**The cap.** `CLOSURE_SET_CAP = 64` pulled sets (requested sets not counted). A
+target past it is not fetched and every reference to it is named `cap-exceeded`
+(targets are admitted in sorted id order per round, so which ones is
+deterministic). **AGENT decision:** past the cap the import still writes the dump,
+with those references refused BY NAME, rather than refusing the whole import: the
+sets inside the cap are real either way, and a whole-import refusal would leave
+the operator only `--no-closure`, which makes EVERY child a stub. **To reverse:**
+throw in `followInstances` where it now records `cap-exceeded`.
+
+**A closure child that refuses.** The propose CLI writes nothing when any set
+refuses. A set the closure pulled in is not one the operator asked for; letting it
+refuse the parent would make the closure strictly worse than today on every file
+with one unproposable child (Altitude `Tab` and `Text Passage` both refuse — below).
+**AGENT decision:** a set named in `_provenance.closure.pulled` that refuses does
+not refuse the run. It is not proposed; the parent, proposed after it, finds no
+contract for the instance and auto-proposes today's stub; and the fall-back is
+named on stderr and in the report as
+`closure-child-refused:<set>:<the refusal, verbatim>` (`partitionClosureRefusals`).
+A REQUESTED set's refusal — and any refusal in a dump no closure produced — refuses
+exactly as before. A closure child's refusal never becomes a stub without that
+name. **To reverse:** make `partitionClosureRefusals` return every skip as
+`refused` (one line); the closure then refuses any dump holding an unproposable
+child, as a hand-assembled multi-set dump always did.
+
+**A closure child that proposes but refuses at GENERATE — a named limit (review
+M1).** The partition above sees propose-time refusals only. A pulled child that
+proposes and then fails `ds-contracts generate` (an unresolvable token, a schema
+refusal) takes its parent down with it through the generator's refusal ledger
+(`RefusalLedger.propagate()`: a parent whose child is refused is refused), exactly
+as a hand-assembled multi-set run would. Falling back to the stub there is not
+contained: `generate` has no closure provenance, and the stub it would need was
+never written (the real proposal claimed its id). No measured set hits it (all
+seven proposed children of the four sets generate); the operator's recourse is
+`--no-closure`. Named, not fixed.
+
+**Integer-like set names (review, low).** The dump is a JSON object keyed by set
+name, and JavaScript orders an array-index-like key (`"1"`, `"42"`) ahead of every
+other key, so the dependencies-first order could silently break. A pulled set with
+such a name is not followed, and a REQUESTED set with such a name follows nothing;
+each reference is named `set-name-integer-like`.
+
+**Cycles (review H2).** A cross-set cycle is legal in Figma through different
+variants (a Holder's Md variant instances Chip, Chip instances Holder's Sm
+variant). The first cut let the proposer link the back reference to the REAL
+contract, and `generate` refused the requested set "Circular contract
+dependency" — where without the closure it generated. The walk now cuts the edge
+where it re-enters a set on its stack (`cycles: [{from, to, …}]`), `from` is
+proposed first, and every instance of `to` inside `from` is written by the mapper
+as `instanceOf: "<to> (cycle cut)"` with no component keys and listed under
+`unresolved` as `cycle-cut`: the proposer gives it a stub with its own id
+(`ds.holder-cycle-cut`), so `generate` sees no cycle and emits all three (the
+reviewer's probe, and a gate test that runs propose + generate on it).
+
+**Callers of the REST import (review C1).** `extract/figma/census/first-pass-run.ts`
+ran the REST CLI (closure on) and then graded "the" contract as the first non-stub
+`*.contract.proposed.json` by name — on Tabs that is `button.contract.proposed.json`,
+and it would have graded Button as Tabs and recorded `ok`. It now takes the
+contract anchored to the requested node (`bindings.figma.anchors.nodeId`,
+`pickRequestedContract`) and refuses by name when there is none
+(`requested-contract-not-found:<id>`) or more than one
+(`requested-contract-ambiguous:<id>`). **AGENT decision:** the exam keeps the
+closure on — it runs the product's own documented command, and a followed child
+is exactly what a designer running it gets. Every other caller was checked:
+`core/emitters-check.ts`, the Playground import, the fidelity matrix,
+`state-axis.test.ts` and the sync spine call the library (closure OFF by default)
+or `mapRestToDump` directly; the census `design-to-code` pipeline maps committed
+fixtures in-process; the design-led README names the mounted contract explicitly;
+the documented command lines (`canvas-census-check.ts`, `census/design-to-code.ts`,
+`site/src/diagrams.ts`) read a whole file without a node id, where every set is
+already requested and the closure adds none. No other caller selects a contract
+by position.
+
+**Library callers.** `importFromUrl` follows only when asked (`closure: true`); the
+CLI and Playground URL import ask. The Playground fixture demo uses that same
+option. `core/emitters-check.ts`, the fidelity matrix and the other
+fixture-backed callers keep their bytes and their request count,
+and the sync spine maps its own responses (`mapRestToDump` directly) without a
+closure, so no ledger baseline moves and the dump grammar stays v1.36 (a closure
+adds sets and provenance; it changes no set's projection). With `--no-closure`
+the CLI's dump is byte-identical to the one it wrote before this change: measured
+against the committed Altitude Tabs and CBDS Badge dumps (`cmp` clean).
+
+**The harness.** `design:consumer:check` already packaged the whole generated
+folder, so real children install with the parent. It now finds the mounted set by
+the contract's own anchor node id when `--component` is the generated name (the
+§D.40 note: `Checkbox Group` generates `CheckboxGroup` and needed an alias key),
+and it lists the contract graph — every transitively referenced component, real or
+stub, by the generator's OWN edges (`contractDependencyEdges` in the schema, which
+`sortByDependencies` now walks too: component refs, slot `accepts`, slot
+`defaultContent` — the first cut missed Icon's `defaultContent` glyph and CBDS's
+Placeholder, review M3) — naming any reference no generated folder holds
+(`dependency-not-packaged:<id>`). A `--component` that names a set by key or name
+whose node id contradicts the contract's anchor refuses
+(`dump-set-anchor-mismatch`, review M2; the first cut's test asserted the wrong
+answer). It copies every contract beside the mounted one and `minted.dtcg.json`
+into `inputs/`. And it fails, by name, on interactive content nested in
+interactive content (`interactive-content-nested:<cell>:<outer>><inner>`, HTML's
+rule for `a` and `button`; a `label` around its own control is not flagged).
+It still mounts and scores only the requested set.
+
+**Historical white-only measurement** (read-only REST, the product's own commands in order, the
+unchanged 5 % limit; "before" is the same pipeline with `--no-closure`, the same
+day, the same file version). These receipts predate D.51; the fresh integration
+results below supersede their qualification claims:
+
+| set | children followed | within 5 % before → after | check |
+|---|---|---|---|
+| Altitude `Tabs` `3558:61955` | `Tab Panel`, `Button`, `Icon` real; `Tab`, `Text Passage` refused → named stubs; `ArrowArcLeft` remote → stub | 0 / 2 (5.54 / 5.19 %) → 2 / 2 by the scorer (1.80 / 1.45 %) — **a pass by the scorer with named content gaps, not a content pass** (below) | still exit 1 — NEW: `interactive-content-nested:…:button>button` and `content-size-mismatch` (453 vs 438 px) |
+| Altitude `Checkbox Group` `3570:2154` | `Checkbox`, `Field Note` real | 2 / 12 (4.85 / 6.45 / 7.47 %) → **12 / 12** (2.46 / 2.92 / 3.83 %) | still exit 1 — `content-size-mismatch`, `legend` inert, `state` discarded, all present before |
+| Altitude `Badge` `3538:35772` | none referenced | 10 / 10 → 10 / 10, every score identical | exit 0 |
+| CBDS `Badge` `277:822` | `Icon` (was a stub), `Placeholder` real | 72 / 72 → 72 / 72, every score identical | exit 0 |
+
+Checkbox Group is reproduced WITHOUT passing a child id. (The set id published by
+`/component_sets`, `3442:25022`, is an older generation that `/nodes` returns
+with no children; the designer's current set is `3570:2154` on the same page.)
+
+**The Tabs headline, caveated (review H1).** Almost all of the 0 / 2 → 2 / 2 gain
+is the real `Button` now drawing inside the panel. The tab labels are still bare
+text (gap 2 below) and the two `Text Passage` lines are still absent (gap 3). Figma
+draws that text near-white, `rgb(241, 240, 234)`, on a TRANSPARENT background; the
+scorer flattens both images onto white, so text Figma draws and the consumer omits
+barely registers — a **scorer blind spot for near-white-on-transparent references**,
+named here and deliberately not changed. The ink coverage is the honest number:
+6.79 % in the consumer against 12.72 % / 13.26 % in Figma. Tabs is a pass by the
+scorer with named content gaps, not a content pass.
+
+**A new defect the closure made reachable — refused by the check.** The real
+`Tab Panel` is emitted as a `<button>` and now contains `Button`'s `<button>`:
+invalid HTML (a `button` may hold no interactive content) and a spurious tab stop.
+**AGENT decision:** it FAILS the clean-consumer check by name
+(`interactive-content-nested:variant-default:button>button`, a DOM query for
+interactive descendants of an `a`/`button`/widget-role element in the consumer),
+rather than being shipped silently. The emitter does not refuse it yet: the root
+cause is the proposer choosing `<button>` for a set whose own description says
+`element: <div>` (gap 1), and an emitter-side refusal needs the whole contract
+graph at emit time — the next gap, named. **To reverse:** delete the
+`interactive-content-nested` push in `scripts/design-consumer-check.ts`.
+
+**Why Tabs still fails, measured — the next gaps, none tuned here.**
+1. `Tab Panel` is now a real contract and renders its `Button` and its two text
+   blocks' boxes; it is emitted as a `<button>` (the proposer reads its
+   `State` axis as interactive although the designer's description says
+   `element: <div>`), and the generated CSS zeroes the border and appearance but
+   not the user-agent inline padding: 441 px of content + 6 + 6 = the 453 px the
+   check measures against Figma's 438.
+   **Closed by §D.44** (both halves, as two general rules).
+2. `Tab` refuses in exact mode: its `State` axis draws `Active`, a state the
+   contract cannot carry (`state-axis-state-not-carried:active`, the §D.41
+   wall). Its three instances stay stubs — the labels render as bare text with
+   no padding and no active underline (most of the remaining text-masked diff).
+3. `Text Passage` refuses because REST returns the set with NO children
+   (`/nodes` for `3435:888` answers a COMPONENT_SET with an empty `children`,
+   at this version and the previous one), so exact mode has no variant evidence.
+   Its two instances stay 441 × 24 stubs with no text.
+4. `ArrowArcLeft` (the Button's icon glyph) is a remote library component.
+
+**Limits, named.**
+- Remote (library) components stay stubs; this import reads one file.
+- `cap-exceeded` past 64 pulled sets (above).
+- Instances nested inside another instance are not followed (the mapper does not
+  map them); an `INSTANCE_SWAP` value (`fixedSwaps`) is not followed either.
+- The closure brings in every child the parent's instances name, including large
+  ones (Tabs pulls the 120-variant `Button`; its dump is 1.7 MB), and each is
+  proposed and generated.
+- A cut cycle edge draws a geometry-only stub (`<to> (cycle cut)`) where the
+  designer drew the real set. Tested on synthetic REST bytes only (no measured set
+  has a cycle).
+- A closure child that fails at `generate` refuses its parent (above).
+- The Playground retains at most 30 imported components in a session. A larger
+  family refuses atomically instead of evicting a child during import; the REST
+  walk still has its separate 64-child cap.
+
+**Gates:** `extract/figma/rest/closure.test.ts` (`npm run figma:rest:closure:check`,
+fast lane — a recorded CBDS response for the transitive + standalone case; synthetic
+REST-shaped responses for transitive chains, a cycle, remote refs by component and
+by set, a standalone component, a self-reference, the cap, request batching, every
+unresolved reason, nested instances, deterministic order and the byte-identical
+opt-out; the propose CLI end to end on a refusing closure child and on the same set
+requested; after the review: the cycle proposed AND generated, the
+cycle-cut stub spelling, the anchor pick with both refusals, integer-like names,
+the 429 cap and its announcements) and `scripts/design-consumer-check.test.ts`
+(`npm run design:consumer:test` — the anchor lookup and its refusal, the contract
+graph through `defaultContent` and `accepts`, and the nesting query in Chromium).
+
+**To reverse (the whole rule).** Make the CLI default `closure = false` in
+`extract/figma/rest/cli.ts` (or pass `--no-closure`): the import is the single-set
+import, byte-identical; the proposer partition is inert without
+`_provenance.closure`; the harness lookup and graph are additive.
+
+**Same-set cycle correction (AGENT decision, 2026-09-19).** A variant can
+contain an instance of another main in its own component set. The closure walk
+previously discarded that self-edge; the proposer then named the self-reference
+but emitted an empty part, with no child contract or geometry stub. Self-edges
+now enter the existing cycle walk and produce the same `cycle-cut` record and
+distinct stub as a cross-set cycle. They fetch no additional set. The bounded
+probe runs both shapes through proposal and generation; neither produces a
+circular contract graph. This preserves the named geometry fallback, not the
+nested variant's full content. Reversal: restore the `targetId !== setId` filter
+in `followInstances` and the previous self-reference expectation.
+
+**Application family retention (AGENT decision, 2026-09-19).** The URL import
+now opts into the same closure walk. A closure-backed REST result or pasted
+REST dump is saved as one atomic workspace family, including each component's
+own minted/captured token layer and any named provisional stubs. The initially
+selected parent is found by its requested Figma node id; dependency-first
+ordering must not silently open the first child. A missing, ambiguous or refused
+requested parent leaves the workspace unchanged. A refused dependency remains a
+named stub. The existing 30-component workspace cap applies to the whole family.
+
+A recorded CBDS Icon/Placeholder replay exercises the application transport,
+storage, parent selection and React/HTML emission from the restored session
+graph, plus repeats, refused children, oversized batches and requested-parent
+refusals. This is integration evidence, not a new live fidelity measurement or
+a clean-consumer application proof. Reverse by removing the application closure
+option and family recording calls; the CLI rule and old evidence stay intact.
+
+
+**Main integration measurement (2026-09-20).** Fresh REST GET-only reads of all
+four sets, followed by proposal, dependency generation, clean package installation
+and transparent captures on white and black, retain the unchanged 5% limit.
+Altitude Badge passes 10/10 (maximum 4.825% on either background). CBDS Badge
+passes 66/72: every white comparison passes (maximum 4.427%), while six small
+rounded outlines fail black (maximum 6.120%). Tabs passes both image comparisons
+at 2/2 (maximum 1.812% white / 3.525% black), but its consumer visibly omits text,
+contains nested buttons, discards the variant change and measures 453px wide
+against 438/439px native. Its checker still fails. Checkbox Group passes 12/12
+on white (maximum 4.011%) and 0/12 on black (maximum 10.364%); its hidden legend
+still renders, its legend axis is inert and nine content-size checks fail.
+
+The black triptychs were inspected. Their visible missing and incorrect content
+prevents treating a small whole-canvas difference as a completed journey. Both
+conflict versions and all new dumps, proposals, generated packages, receipts,
+images and built review consumers are retained under private
+`pr136-main-integration-s0jph0cm/`. No old receipt was rewritten. These are CLI
+integration measurements, not a new application acceptance or a visual grade.
+
+
+**Source-pairing guard (AGENT measurement decision, 2026-09-20).** The final
+integration review planted two contradictory inputs: a contract anchored to a
+different file with the same node id, and two dump sets claiming one anchor.
+The consumer checker previously accepted the first and selected the first match
+for the second. It now refuses conflicting captured file identities, duplicate
+set anchors or names, and a named set that cannot verify the contract's node
+anchor. A legacy input without anchors retains its unique name lookup; absent
+file provenance is not invented. Four genuine captures retain all 96 variant
+names and input combinations and agree on file/set identity. No image, scorer
+or tolerance changed. Reversal: restore the first-match lookup in
+`findDumpSet`; doing so restores the demonstrated source-pairing ambiguity.
+
+
+
+## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (final form after two adversarial reviews); a named nesting, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
+
+**2026-09-19. Two AGENT decisions under the owner's standing delegation (never a
+grade, never a tolerance), each recorded with its reverse. The first cut was
+reviewed adversarially (fix-then-merge) and is revised below; what the review
+found is kept, because it is why the rules read as they do.** Measured by the
+design-led clean-consumer check on Altitude `Tabs` after §D.43's closure made the
+real `Tab Panel` reachable: `interactive-content-nested:…:button>button` × 2 and
+`content-size-mismatch` 453 vs 438 px. `Tab Panel` has a `State` axis and no name
+signal, so the semantics table's STRUCTURAL row made it a `<button>`; its variants
+hold an instance of Altitude's `Button`, itself a `<button>`. And its contract
+declares only `padding-top`, so the user agent's `button` padding (1 px 6 px)
+stayed on the other three sides: 441 + 6 + 6 = 453.
+
+### Rule A — a state-axis `button` guess never holds interactive content (proposer)
+
+HTML forbids interactive content inside `<button>` and `<a>`.
+
+*What two reviews found.* The first cut demoted genuine buttons on a guess about a
+child (an `Icon` with a `State` axis, icons named `Link` / `Dropdown Arrow`) and
+depended on dump order. The second cut weighed evidence case by case (which child
+is "really" interactive, which side gives way, a "draws text" test, an origin
+taxonomy) and each probe found another edge case, including a chain whose outcome
+changed with the order the post-pass decided in. **AGENT decision:** replace both
+with the conservative rule below. It only ever removes a GUESS.
+
+**Rule** (`settleInteractiveContent`, core/propose-figma.ts, a post-pass over the
+whole batch):
+1. *Snapshot first.* Every set's ORIGINAL element and how it was decided
+   (`name`-match / `structural` / `declared` by a stamp or the caller's scope) are
+   read once, before any change. Every decision reads only that snapshot; the
+   changes are applied afterwards. A stub (an instance whose set is not in the
+   batch) is read by its name with camel / Pascal case split first (`IconButton` →
+   `Icon Button` → `button`).
+2. *A name-matched or declared element is never changed*, as parent or as child
+   (`Icon Button`, `Close Button`, `Radio button-icon`, `Checkbox`, `Link`).
+3. *A STRUCTURAL `button` guess is withheld* (→ the default `div`) when its drawing
+   contains ANY interactive content by the snapshot: a child instance (slot
+   `defaultContent` included), own part, nested part or stub whose element is
+   `button` / `a` / `input` / `select` / `textarea` / `summary` / `label`, or which
+   carries an ARIA widget role or `tabindex` — name-matched, declared and
+   structural guesses alike, transitively. An icon-only `Close Button` inside a
+   `Tab Item(State)` makes the tab a `div`; a `Card(State)` around a `Text
+   Label(State)` becomes a `div` (a guess withheld because of a guess, noted).
+4. *Never nest silently.* A `button` / `a` that is kept and, after step 3, still
+   draws interactive content gets a note:
+   `semantics: nested interactive content left in place — "Radio button" is a <button> and draws "Radio button-icon" (<button>); HTML forbids this; author one of them`.
+
+Every withhold replaces the inference note and says what a `div` does not give:
+`semantics: structural "button" withheld — the set draws interactive content
+("Button": <button>); HTML forbids interactive content inside <button>, so the set
+is proposed as the default container "div" — a div provides no keyboard access, no
+focus and no :disabled behaviour of its own; review …`. Both notes are proposal
+notes, so they reach `figma-proposals.md`; the clean-consumer check copies that
+report into `inputs/` (machine paths rewritten to `./`, whole occurrences only).
+Free-text descriptions are never read. Registered as door
+`propose.semantics-interactive-content-withheld`. **To reverse:** delete the
+`settleInteractiveContent` call in `proposeBatchFromDump`; nothing else reads the
+snapshot origin map.
+
+*Order.* The SEMANTICS decision is a function of the batch's final contracts, not of
+the order the post-pass visits them — tested for every expectation below in both
+dump orders, and on the real CBDS dump (1,618 sets) in file order and reversed:
+every set's `semantics` and every `semantics:` note is identical. The contract
+BYTES are not order-free, and were not before §D.44: the proposer links an
+instance only to a set proposed EARLIER in the batch (the closure orders
+dependencies first for exactly this reason), so 44 of those 1,618 CBDS contracts
+differ between the two orders in their component links. And where two sets
+sanitize to one id (CBDS `Radio button` and Phosphor `RadioButton`), swapping only
+those two keys changes which set an instance links to, and so which note it gets —
+the pre-existing id collision (§D.43), not this rule.
+
+*Expected outcomes, all tests (each in both orders):* `Tab Panel(State)` >
+Altitude `Button` → `div`; `Tab Panel(State)` > `Button` > `Label` instance →
+`div`; `Button` > `Icon(State=Disabled)` → `Button` a button, `Icon` unchanged,
+nesting named; `Dropdown Button` > `Dropdown Arrow` → both unchanged, nesting named;
+`Split Button` > `Icon Button` and `Toolbar` > `Icon Button` → `Icon Button` a
+button, `Split Button` a button with the note, `Toolbar` unchanged; `Tab
+Item(State)` > `Close Button` → `div`; `List Row(State)` > `Checkbox` → `div`;
+`Card(State)` > `Text Label(State)` → `Card` `div`, `Text Label` unchanged; the
+`Alpha Button` ↔ `Beta Button` cycle → both buttons, a note on both; CBDS `Radio
+button` ↔ `Radio button-icon` (the real dump's own cycle) → both buttons, a note on
+both.
+
+*Churn, measured* over every committed dump (the review's `churnB`: 378 dumps,
+5,285 proposed sets): two distinct sets change element — Altitude `Tab Panel`
+(1 dump) and Untitled UI `_Dropdown list item` (4 dumps: a structural `button`
+around UUI's `Checkbox`, an `<input>`). Six nestings are left in place, every one
+NAMED (CBDS `Radio button` > `Radio button-icon` in 4 dumps, the reverse edge in
+2), none silent (the pre-§D.44 engine left 2 silent). In the design-to-code census, figma-ds `Chip`
+(a structural `button` whose dismissible variants draw the kit's `Button/Icon
+default sm`) is now a `div`: its `d2c.json` contract and generated hashes move. Its
+committed code PNGs and `verdict.json` were rendered and graded before this change
+and are NOT re-rendered here (a re-render also moves Figma's canvas PNGs by bytes,
+and a re-grade is not this change's to take) — named. No committed contract or
+generated tree is built by re-proposing these: UUI's committed
+`dropdown-list-item.contract.json` was proposed before and stays a `button` holding
+the `Checkbox` until it is re-proposed — named here.
+
+### Rule B — a padding side the canvas draws as 0 is carried as 0 (proposer)
+
+*What the review found in the first cut (H2).* The first cut put the rule in the
+EMITTERS ("an undeclared side is 0") and zeroed padding the designer DREW: Eventz
+`Atoms/Tag` draws 6 / 12, the proposer REFUSED its inline padding
+(examples/eventz-vars/NOTES.md), and the reset emitted `padding-left/right: 0` — a
+visual regression the first churn note called "explained". Undeclared is not zero
+whenever a side was refused.
+
+**Rule.** The fact moves to where it is known. When a proposal's root renders (its
+element or any `elementByProp` value) as an element the user agent pads, and EVERY
+variant draws 0 on a side the contract does not declare, the proposer writes
+`padding-<side>: 0px` as a root literal and says so
+(`ua-padding: padding-top / padding-bottom = 0px carried as literals — …`). A side
+the canvas draws NONZERO that the proposal left undeclared was refused upstream: it
+is NOT zeroed, and a note says the user agent's default renders there
+(`ua-padding: padding-left is not declared (the value was refused above) although
+the canvas draws 8 / 12px there — on a <button> root the user agent's default (6px)
+renders on that side in code, not the drawn value; review`; it says `no value
+carried` instead unless a refusal note for that side is on record). The per-side
+values the note quotes come from ONE table, `UA_PADDING_BY_ELEMENT` in
+packages/core `anatomy.ts` (`UA_PADDING_ELEMENTS` is its key set), and the test
+re-measures every value in Chromium. The emitters add
+nothing; a hand-written `<button>` with partial padding keeps UA padding, exactly as
+CSS does. `settleUaPadding` runs at the end of every proposal and again after
+Rule A's pass, and takes its own zeros back when that pass withholds the element
+(Tab Panel ends a `div` with no zero). Registered as lowering
+`propose.ua-padding-drawn-zero-explicit` (the emitter rule
+`css.ua-padding-undeclared-side-zero` is withdrawn). **To reverse:** delete the two
+`settleUaPadding` calls.
+
+`UA_PADDING_ELEMENTS` (packages/core `anatomy.ts`) is MEASURED with
+`getComputedStyle` on bare elements in the repo's Chromium (149.0.7827.55):
+`button` 1/6/1/6 px, `input` 1/2/1/2, `textarea` 2/2/2/2, `option` 0/2/1/2,
+`fieldset` 5.6/12/10/12, `legend` 0/2/0/2, `ul`/`ol`/`menu` 40 px inline start,
+`dialog[open]` 16 px, `td`/`th` 1 px; every other element the emitters render
+measured 0. **`select` is 0 in Chromium; Safari and Firefox were NOT measured and
+may pad it — it is not listed, named here (L1).** The review's wider probe adds:
+`input[type=date]` pads only its left side (1 px) and an RTL `ul` pads the right,
+which a physical-side reading sees correctly only for LTR.
+
+*The review's leak cases (M3), under the proposer approach.* A side declared by
+only SOME enum values (`literalsByProp`) counts as declared, so no base zero is
+written and the other values keep the user agent's padding on that side — still
+named, not closed (the proposer would need per-value zeros). A single logical side
+(`padding-inline-start`) now counts only its own physical side (LTR). A state-only
+or `stylesWhen`-only padding is undeclared at rest, as before. The emitters no
+longer add anything, so none of the probe's emitter surfaces leak.
+
+*Churn, measured.* Over every committed dump: 14 distinct set names gain zeros (31
+dump occurrences) — Untitled UI `_Avatar add button`, CBDS `Radio button`,
+`Text Area`, `GitLab Button / Default`, flowbite `Button` and `ToggleSwitch`,
+shadcn `Button`, `Checkbox`, `Switch`, Carbon and first-party `IconButton`, the
+`base-instance` Button fixture, two conformance `Case` sets and the two fidelity
+`compiled` Buttons; two sets are named as refused (Eventz `Atoms/Tag` inline, MUI
+`Button` all four). Committed artifacts that move: the design-to-code census rows
+whose contracts are re-proposed in-process — flowbite `Button` (+ top/bottom),
+`ToggleSwitch` (+ all four), figma-ds `ButtonContract` (+ top/bottom) and `Chip`
+(+ top/bottom), and figma-ds `Button`, whose row carries its `ButtonContract`
+child's hashes (contract hash, generated hashes, notes count). Eventz `AtomsTag`
+and Untitled UI `AvatarAddButton` are generated from COMMITTED contracts, which this
+change does not re-propose: their generated CSS is byte-identical to before §D.44
+(the first cut's regression on `AtomsTag` is gone). The Altitude Tabs evidence's
+`Button` contract gains `padding-top/bottom: 0px`.
+
+### Measured live
+
+Read-only REST, closure on, the product's own commands; every dump byte-identical
+to §D.43's run of the same file version, so "before" is the evidence committed
+before §D.44:
+
+| set | within 5 % before → after | check before → after |
+|---|---|---|
+| Altitude `Tabs` `3558:61955` | 2 / 2 (1.80 / 1.45 %) → 2 / 2 (1.82 / 1.44 %) | `interactive-content-nested` × 2 + `content-size-mismatch` × 2 (453 vs 438 / 439) → `content-size-mismatch` × 1: 441 vs 438 on `variant-default` (`variant-stretch` is 441 vs 439, inside the check's unchanged 2 px slack) |
+| Altitude `Checkbox Group` `3570:2154` | 12 / 12 → 12 / 12, every score identical | the same 14 problems |
+| Altitude `Badge` `3538:35772` | 10 / 10 → 10 / 10, every score identical | exit 0 → exit 0 |
+| CBDS `Badge` `277:822` | 72 / 72 → 72 / 72, every score identical | exit 0 → exit 0 |
+
+On Tabs the 12 px came off with Rule A (the panel is a `<div>`, so no UA padding
+applies). Rule B's live effect is Altitude `Button`, whose contract now carries
+`padding-top: 0px; padding-bottom: 0px` (the same box as before). What remains is
+441 vs 438: the two `Text Passage` STUBS carry the 441 px box observed on `Tab
+Panel`'s main component, while the panel instance inside Tabs is 439 px and Figma's
+trimmed default render 438 — §D.43's gap 3 (`Text Passage` refuses), not either
+rule. Tabs is still a pass by the scorer with named content gaps (§D.43 H1), not a
+content pass.
+
+**Limits, named.**
+- *A named or declared nesting is kept, not resolved* (step 4 names it): CBDS
+  `Radio button` ↔ `Radio button-icon`, a `Split Button` around an `Icon Button`.
+- *A void re-root reads as a container.* A `Text Input` whose `input` was re-rooted
+  to a `div` (children cannot mount in a void element) is a `div` in the snapshot,
+  so a structural parent around it keeps its `button`.
+- *The single-set `proposeFromDump` entry* (no batch) applies no Rule A.
+- *Stub names remain provisional semantic evidence.* The in-memory observed name
+  retains slash-delimited namespaces; only the final component segment and the observed instance layer leaf
+  enter the control-name inference. A main ending in variant values such as
+  `Button (Icon)/Default/sm` retains the actual `Button (Icon)` layer signal. A namespace such as `Button / Decoration` does
+  not make its `Chevron` leaf interactive, while `Controls / CloseButton`
+  remains a control signal. The generated stub contract and its serialized name
+  are unchanged. External stubs without that observation retain the existing
+  serialized-name inference. This AGENT correction removes a false nesting note
+  and keeps the frozen canvas-to-code-v1 receipt byte-identical to main; no
+  receipt is regenerated. Reverse by removing the private observed-name map and
+  restoring whole-identifier inference, preserving the historical evidence.
+- *A set that IS the control and wraps a real control* now proposes a `div`; the
+  reviewer re-roots it or stamps the element.
+- *The dead `:disabled` plane on a non-native root* (the review's probe A4): a
+  withheld set keeps its `disabled` prop, rendered as `data-disabled` on a `div`.
+  **Closed by §D.45** — the state selector is now the attribute the component renders.
+- *Padding:* only the ROOT is settled; a refused side keeps UA padding (named);
+  per-value-only sides and non-LTR directions as above; `select` unmeasured outside
+  Chromium.
+
+**Gates:** `extract/figma/interactive-content.test.ts` and
+`extract/figma/ua-padding.test.ts` (`npm run exact-proposal:check`): every Rule A
+expectation above in both dump orders; the real CBDS dump forward and reversed;
+camel-case stubs, own and nested parts, `attrs.role`, `tabindex`, `summary`, slot
+`defaultContent`, transitivity and a cycle; the UA padding element list AND its
+per-side values re-measured in Chromium; drawn zeros carried and emitted; four drawn
+sides and `div` roots untouched; a side with no value named as `no value carried`
+and one with a refusal on record as refused; per-value and logical sides; Tab
+Panel's zeros taken back.
+
+
+**Current main integration measurement (2026-09-20).** After integrating the
+landed dependency-closure PR, fresh REST GET-only captures and isolated packaged
+consumers retain the unchanged white-and-black 5% criterion. Tabs has no nested
+interactive-content finding; its width is 441px rather than 453px. Both images
+pass (maximum 1.824% white / 3.593% black), but the variant change remains
+discarded, the default content width remains 441px versus 438px, and the two
+Text Passage lines are visibly missing. The tab labels also have incorrect
+color and spacing, and the native active indicator is absent. This is not a
+completed Tabs journey.
+Altitude Badge remains 10/10, CBDS Badge 66/72, and Checkbox Group 0/12 on the
+joint criterion (all 12 white comparisons pass; all 12 black comparisons fail).
+The six CBDS small rounded outlines, hidden Group legends and nine Group
+content-size failures remain. Private evidence `pr137-main-integration-tbx6mgdq/`
+preserves the actual merge conflicts, both sides, fresh inputs, generated
+packages, receipts and visible review. These are CLI integration measurements;
+they do not newly qualify the app workflow or independent child components.
+The frozen recipe lineages, owner results and OS-specific drift pins have no
+differences from landed main.
+
+## D.45 A disabled state on a root that is not a form control compiled to `:disabled`, which never matches it — CLOSED on React CSS modules, web components and static HTML; behaviour (focus, handlers) and a no-prop disabled state stay NAMED
+
+**2026-09-19. One AGENT emitter rule under the owner's standing delegation (never a
+grade, never a tolerance), and one AGENT accessibility decision, each recorded with
+its reverse.** `:disabled` matches only a form control (`button`, `input`, `select`,
+`textarea`, `fieldset`, `optgroup`, `option`, a form-associated custom element). The
+generated TSX renders the `disabled` prop as the native attribute only on those; on
+every other root (`div`, `span`, `a`, `label`, `li`, `section`, …) it renders
+`data-disabled`. The CSS shipped beside it said `.root:disabled { … }`, so the
+disabled look never rendered, and `.root:hover:not(:disabled)` never excluded the
+disabled state (a disabled `div` still took its hover paint). §D.44's Rule A made it
+reachable from new sets: a withheld `button` guess keeps its `disabled` prop.
+
+**Rule** (lowering `css.disabled-state-rendered-attribute`): *a disabled state styles
+what the element actually exposes — `:disabled` for a native form control, and the
+attribute the component renders for every other root and part.*
+
+| surface | native root (`button`, `input`, `textarea`, `select`, `fieldset`) | every other root | `elementByProp` root |
+|---|---|---|---|
+| React CSS module (`generateCss`, `reactRootDisabledSelector`) | `:disabled`, `:hover:not(:disabled)` — byte-identical | `[data-disabled]`, `:hover:not([data-disabled])`, `:active:not([data-disabled])` | `[data-disabled]`: the TSX types the ref `HTMLElement` and renders `data-disabled` on every value, `<button>` included |
+| web components (`shadowCss`, `wcRootDisabledSelector`) | `:disabled` — byte-identical | `[data-disabled]` (the internal root renders `data-disabled=""`) | per rendered tag: `:is(:disabled, [data-disabled])` when the map mixes both kinds |
+| static HTML (`core/emit-html.ts`, `htmlRootDisabledSelector`) | `:disabled` — byte-identical | `[data-disabled]` (the showcase renders `data-disabled="true"`) | per rendered tag, counting a root projected to a `div` (`textarea` / void / structural `select` with parts) as a `div` |
+| React inline | unchanged — its disabled plane rides the prop (`DISABLED_STYLE`), no selector | | |
+
+`packages/core` `anatomy.ts` `disabledStateSelector` + `stateSelectorsFor` build the
+table; a native root gets `STATE_SELECTORS` itself, so its bytes cannot move. Every
+rule that selects the disabled state reads it: `states`, `declaredStates`,
+`statesByProp`, a `{disabled}` bool placeholder, the button-only `cursor:
+not-allowed` rule and the React `stylesWhen` `disabled` condition. **Parts:** a part's
+state rule is a descendant of the ROOT's state selector (`.root[data-disabled]
+.label`), because the disabled state is the root's; the part's own element never
+decides. **Specificity is unchanged** (an attribute selector weighs what a
+pseudo-class does; `:is()` takes its heaviest argument), so no rule moves in the
+cascade. **The inverse:** the code → contract reader (`core/extract-css-module.ts`
+`rootDisabledAsPseudo`) reads `[data-disabled]` / `:not([data-disabled])` on the root
+class and its enum modifier classes back as the disabled / hover states, exactly
+as it reads `:disabled`; without it a generated `div` component re-extracted with
+neither.
+
+**Adversarial review, 2026-09-19.** The first inverse recognised only the root's
+base class. A generated enum-dependent state (`.tone-a[data-disabled]`,
+`.tone-a:hover:not([data-disabled])`) lost both state bindings on re-extraction;
+the same contract preserved both on the parent branch and on a native `button`.
+**AGENT decision:** use the reader's existing enum-class identity resolver for
+this inverse too, including JSX-discovered BEM modifiers. An unrelated part's
+`[data-disabled]` remains a named unsupported selector and cannot become a root
+state. The regression probe failed before the fix and passes afterwards with
+both generated and BEM class spellings and the native control. Emitted files
+are unchanged by this reader fix. **To reverse:** restrict
+`rootDisabledAsPseudo` to the root's base class again; enum-dependent disabled
+and guarded hover/active states will be lost by name on re-extraction.
+
+**AGENT decision — no `aria-disabled`.** Neither React surface nor web components
+renders `aria-disabled` for the prop; this change does not add it. In the committed
+corpus no affected root is interactive: none of the 52 has a role, a root click event
+or a `tabindex` — they are wrappers (`label`, `span`, `div`) around an inner native
+control, which carries its own `disabled`. `aria-disabled` on a role-less element is
+not supported in ARIA 1.2, and on a root whose handlers still fire it would announce
+a state the element does not honour. The honest fix for an interactive non-native
+root is behaviour and announcement together (guard the handlers, drop the tab stop,
+`aria-disabled="true"` where the role supports it) — a separate rule. **To reverse:**
+push `aria-disabled={disabled || undefined}` beside `data-disabled` for a non-native
+root in `core/emit-react.ts` and `core/emit-react-inline.ts`, and `aria-disabled="true"`
+beside `data-disabled=""` in `emit-wc.ts` `generateElement`; native roots keep the
+native attribute only.
+
+**Measured on the committed corpus** (all 984 tracked `*.contract.json`, the React
+module sheet with every token admitted): 128 declare a disabled state, **64** on a
+root that is not a form control (none under `elementByProp`); **52 emitted a dead
+`:disabled` before, 0 after** — the other 12 declare the state with no rule to
+select. The same 64 after, on the other sheets: web components 0 `:disabled` (64
+of 64 emitted); static HTML 0 on its own rules (45 emitted — 19 refuse to emit for
+reasons unrelated to this rule, e.g. unresolved component refs). Of the 52, 26 have a `disabled` prop (the look now renders when it is set)
+and 26 do not (Carbon, Fluent, shadcn, Astryx wrappers): their state is reachable
+only by passing `data-disabled` through the rest props — unreachable before, named
+below. One tracked contract uses `elementByProp`; it has no `disabled` prop.
+
+**Churn, every file** (regenerated with the repo's own commands):
+- `examples/polaris/generated/react/{Checkbox,RadioButton,Tag,TextField}.module.css`
+  and `…/html/{checkbox,radio-button,tag,text-field}.css` (`npx tsx
+  examples/polaris/generate.ts`, the command `figma:fresh` checks): `span` / `div`
+  roots with a `disabled` prop and state, and part states under it. **These now
+  render a disabled look they never rendered.** The committed Polaris receipts
+  render the default combo only (`receipts/*/default.png`, rest state), so no
+  committed PNG shows a disabled cell; nothing re-rendered.
+- `examples/eventz-vars/storybook/src/generated/AtomsInput/AtomsInput.module.css`
+  (the `generated:fresh` command): a `div` root with a hover part state and no
+  disabled state or prop — the guard's spelling only; nothing renders differently.
+- `parity/receipts/v1/census/design-to-code/figma-ds/ds.chip/d2c.json` (`npm run
+  census:d2c:record`): `Chip`, a `div` since §D.44, with `hover` + `disabled` states
+  and a `disabled` prop — React and WC sheet hashes move; **its disabled look now
+  renders**. Its committed PNGs are `state-default` cells only and are not
+  re-rendered (a re-render also moves Figma's canvas PNGs by bytes, §D.44).
+- `parity/receipts/v1/census/design-to-code/flowbite/flowbite.badge/d2c.json`: a
+  `span` root with `hover` / `active` states and no disabled state or prop — the
+  guard's spelling only.
+- `figma-sync/plugin/engine.receipt.json` re-recorded; `spec/lowering.json` +
+  `spec/LOWERING.md` (64 rules; the three `css.*` rules the insertion displaced
+  follow).
+- Unchanged: `generated:fresh` (astryx, untitled-ui), every other `figma:fresh` row,
+  frozen lineages, the fidelity lane, the drift pins, `evals/`.
+
+**Measured live** (read-only REST, closure on, the product's own commands, the
+unchanged 5 % limit). The four design-led sets are **unchanged to the byte**: every
+generated file hashes as committed and every score and problem is identical (only
+the consumer's npm lockfile hash differs), so their evidence folders are not
+re-recorded. None of them carries a disabled state on a non-native root: Tabs'
+`Tab Panel` draws `Default | Focus` only (the reviewer's A4 was a withheld probe
+with `State=Disabled`), Tabs' `Button` is a native `button`, and Checkbox Group's
+`State` axis is an enum prop (`default | disabled | error`, not an interaction axis),
+so its `variant-prop-discarded:state` is the group not forwarding `state` to its
+children — untouched by this rule. The sets §D.41 named with the dead plane,
+re-measured before (the pre-change engine on the same dumps and proposals) and after
+(`--reviewable-inversion`, as §D.41):
+
+| set | disabled cells | `state-inert:disabled` before → after | disabled cells' difference before → after | problems |
+|---|---|---|---|---|
+| Altitude `Link` `3543:47075` (`a`) | 1 | 1 → **0** | 8.83 % → 7.99 % | 12 → 11 |
+| Altitude `Toggle` `3543:48094` (`div`) | 2 | 2 → **0** | 56.52 / 44.02 % → 25.65 / 25.65 % | 15 → 13 |
+| CBDS `Toggle` `272:730` (`div`, a part state) | 4 | 4 → **0** | 21.48 / 18.43 / 21.00 / 16.10 % → 19.07 / 17.43 / 18.92 / 12.90 % | 42 → 38 |
+
+Every disabled cell is now reached through the prop AND paints differently; no
+other row moved. None of the three passes: they still fail on other axes (hover not
+carried, unfocusable roots, size, the rest images), as §D.41 recorded. No evidence
+committed for them.
+
+**Limits, named.**
+- *Behaviour.* A `div` / `span` with `data-disabled` still takes focus if focusable
+  and still fires its handlers: the generated component guards no handler. The
+  disabled look now renders on an element that still acts; before, it neither looked
+  nor acted disabled.
+- *A disabled state with no `disabled` prop* (26 contracts) is reachable only by the
+  consumer passing `data-disabled`.
+- *The mirror image on native roots.* Web components and static HTML select a
+  `disabled` `stylesWhen` (or a `{disabled}` placeholder's `false` side) on a NATIVE
+  root as `[data-disabled]`, which those surfaces do not render there (they render
+  `disabled`). Two tracked contracts (antd `Button`, both copies). Left: native roots
+  stay byte-identical in this change.
+- *The attribute name is the prop's.* Only a boolean prop named `disabled` renders
+  `data-disabled`; a contract whose disabled boolean is named otherwise gets a state
+  the prop never reaches (none in the corpus).
+
+**Gates:** `core/react-disabled-state-selector.test.ts` (`npm run
+react:conformance:check`): the selector table; a `div` root → `[data-disabled]` and
+the TSX's `data-disabled`; a `button` root unchanged; `span` / `a` / `label` / `li` /
+`section`; `elementByProp` on all three sheets; web components and static HTML, root
+and part; React inline untouched; the reader's inverse; and **the paint MEASURED in
+Chromium on a mounted `div`** (disabled background and part colour apply, hover no
+longer overrides them; the `button` root behaves as before).
+`extract/figma/state-axis.test.ts` (`npm run exact-proposal:check`): a designer's
+`State` axis on a `div` emits `[data-disabled]` and guards on it. **To reverse:**
+make `reactRootDisabledSelector`, `wcRootDisabledSelector` and
+`htmlRootDisabledSelector` return `':disabled'`, delete `rootDisabledAsPseudo`, and
+regenerate.
+
 ## D.46 Declared-family fidelity is additive; incomplete alignment stays visible
 
 **AGENT decision (2026-09-19).** Record workspace-declared families in a new
@@ -3770,3 +5606,58 @@ and manifest byte. Run `npm run react:native:declared:check` offline. Remove the
 Badge named residual to make its historical failure red again. Replace a pair
 only with a new authenticated observation and reviewed denominator; never
 rewrite the frozen historical lineage to fit a new measurement.
+
+## D.47 Re-imports keep the anchored Figma component identity
+
+**AGENT decision (2026-09-19).** The live JSON import walkthrough loaded
+Altitude Badge, then CBDS Badge with its two children. The second Badge
+correctly received a collision suffix, but the workspace replaced the first
+library's entry by display name. Repeating CBDS then silently changed its id
+from `ds.badge-2` to `ds.badge`. A displayed single entry was not repeat safety.
+
+Anchored Figma imports now refresh by file and node (set key when no node was
+captured), across JSON and URL entry paths. Different files with the same label
+coexist. Before allocating a name-derived id, the proposer reuses one uniquely
+matching session contract's component key and compatible file, or its file/node
+when the key was not captured. A conflicting file cannot borrow that identity;
+ambiguous claims refuse. A valid canvas-stamped contract id retains precedence.
+Unanchored entries keep the existing source/name rule. No source filename or
+component name receives a special case.
+
+The bounded probes reproduce the old failure and cover alternating imports,
+removing the original collision, renaming the set, different input doors,
+missing keys and conflicting file evidence. They qualify identity behavior,
+not visual fidelity. Existing sessions cannot recover an entry already evicted
+by the old rule; import that capture again. To reverse, restore the workspace's
+source/name identity and remove the proposer's anchored-id reuse and file guard.
+
+
+## D.51 Comparable node alpha and contrasting-background measurement
+
+**AGENT measurement decision (2026-09-19).** Clean-consumer captures now exclude
+the review page background, matching Figma's node-export alpha. A screenshot-only
+style makes html/body transparent and is restored immediately afterward. The
+component's own backgrounds and geometry are untouched. Previously the opaque
+white React page could never trim its transparent margins, while Figma did:
+identical 148px layouts were reported as 148 versus 142 content pixels. A browser
+probe checks transparent margins, restoration of the white review page and a
+planted geometry change that remains detectable.
+
+Both source and consumer are then compared on white **and black**, using the same
+alignment, antialias-aware pixel metric and unchanged 5% limit on each. The
+existing default white comparator is byte-identical; black is an additional
+required check, never a replacement or an excuse. Masked text remains diagnostic.
+A planted missing pale block passes the white comparison and fails on black.
+
+This check found a real remaining defect in the app's CheckboxGroup archive:
+white comparison passed12/12 at at most3.18%, but black comparison exceeded5%
+in9/12. The split wrapper's default indicator lost its border-color and rendered
+black. The archive remains unqualified. Old opaque captures and their receipts
+are preserved as historical measurements; current acceptance must cite the
+capture metadata and both background scores. The work does not change frozen
+recipe receipts or OS-specific visual baselines.
+
+Reversal: restore ordinary opaque screenshots and remove the additional black
+comparison in `design-consumer-check.ts`; the original white-default scorer
+remains available. Such a reversal restores the known measurement errors and
+must not turn those historical results into acceptance evidence.

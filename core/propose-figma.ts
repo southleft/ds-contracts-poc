@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -31,11 +31,16 @@ import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './capt
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
+  deriveAbsentVariants,
+  EXACT_ABSENT_VARIANTS_MAX_PRODUCT,
   validateExactVariantProjection,
   type ExactProjectionRefusalCode,
   type ExactProjectionResult,
   type ExactVariantRow,
 } from './exact-projection.js';
+import { validateContract } from '../packages/core/src/validate.js';
+import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
+import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
 // Shared spellings
@@ -178,6 +183,39 @@ export const dumpCapturesHidden = (prov?: { note?: string; dumpVersion?: string 
   return /dump v1\.[1-9]/.test(prov.note ?? '');
 };
 
+/** WERE THE `ds_contracts/*` STAMPS OBSERVABLE to the reader that produced
+ *  this dump? A POSITIVE fact, never inferred from their absence on a set —
+ *  "no stamp" only means "a designer drew this" when the reader could have seen
+ *  one. It decides whether an unstamped ragged set may declare its undrawn
+ *  combinations by what it draws (bindings.figma.absentVariants, docs/23
+ *  §D.40): the SAME pipeline-written set that lost a variant refused when the
+ *  REST response carried `sharedPluginData` and proposed a declaration when it
+ *  did not, because `mapRestToDump` is a public entry and cannot see whether
+ *  the request asked for `plugin_data=shared`.
+ *
+ *   · the plugin reader always reads them — it says who it is in the
+ *     provenance note it has always written, and carries the contract-id
+ *     stamp since dump v1.26. No dump byte changes.
+ *   · the REST mapper writes `_provenance.stampsObservable: true` ONLY when its
+ *     caller says the request carried the plane (`MapOptions.stampsObservable`;
+ *     `extract/figma/rest/fetch.ts` always requests it and says so). A bare
+ *     `mapRestToDump(response)` writes nothing, so every committed fixture
+ *     mapped that way keeps its bytes — and keeps the ragged refusal.
+ *   · anything else (a hand-authored fixture, a bridge that never read plugin
+ *     data) is NOT observable: fail closed. */
+export const dumpStampsObservable = (
+  prov?: { note?: string; dumpVersion?: string; stampsObservable?: unknown } | null,
+): boolean => {
+  if (!prov) return false;
+  if (prov.stampsObservable === true) return true;
+  const version = /^1\.(\d+)$/.exec(prov.dumpVersion ?? '');
+  return (
+    version !== null &&
+    Number(version[1]) >= 26 &&
+    (prov.note ?? '').includes('extract/figma/dump.plugin.js')
+  );
+};
+
 /** The slice of a child contract canonicalization needs — kept minimal so the
  * playground can pass its bundled contracts without importing the zod types.
  * `anchors` (dump v1.5) lets the resolver refuse a NAME-coincidence link when
@@ -188,7 +226,7 @@ export interface MinimalChildContract {
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
-  bindings?: { figma?: { anchors?: { componentSetKey?: string | null } } };
+  bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } } };
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
    *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
@@ -263,6 +301,191 @@ const axisValuesOf = (variantName: string): Record<string, string> => {
   }
   return out;
 };
+
+// ---------------------------------------------------------------------------
+// THE SPARSE-MATRIX INFERENCE FENCE (bindings.figma.absentVariants)
+// ---------------------------------------------------------------------------
+//
+// Every per-axis inversion rule in this file ("the value is a function of
+// axis A") was written for a set that draws the FULL Cartesian product of its
+// axes. There the explanation is unique: if an observation that is not
+// uniform were a function of A alone AND of B alone, then v(a,b) = g(a) = h(b)
+// over every (a,b) makes it constant — so at most one minimal set of axes can
+// explain it, and "first axis that fits" is the only axis that fits.
+//
+// A designer's set with UNDRAWN combinations breaks that. With the
+// disambiguating tuple missing, two different axis sets can each explain every
+// drawn variant, and "first that fits" becomes a guess decided by axis order —
+// which the code surfaces would then render at the undrawn combination.
+//
+// THE CONDITION (one rule, applied wherever an axis-conditioned inference is
+// ACCEPTED): over the rows the inference was read from, take every MINIMAL
+// set of variant axes the observed value is a function of (no proper subset
+// also fits) — EVERY subset of the axes that vary over those rows, no arity
+// bound: the product cap leaves at most twelve, so at most 4,096 subsets. If there is more than one, and two of them
+// predict DIFFERENT values for some declared-absent combination (or one
+// predicts a value where the other has none), the inference is ambiguous
+// BECAUSE of the absence and the whole set is refused by name:
+//
+//     sparse-matrix-inference-ambiguous:<channel>@<part>
+//
+// Two explanations that agree on every undrawn combination are not a guess —
+// nothing observable depends on the choice — and a set with no undrawn
+// combination never arms the fence, so every full-matrix proposal is
+// byte-identical.
+interface SparseFence {
+  /** The undrawn combinations, in FIGMA terms (variant property → option). */
+  absent: ReadonlyArray<Readonly<Record<string, string>>>;
+  /** `<channel>@<part>` → the two explanations and the tuple they split on. */
+  ambiguous: Map<string, string>;
+}
+
+/** Armed by proposeFromDump for the duration of ONE sparse set's proposal
+ *  (synchronous; saved and restored, so a nested call cannot leak it). */
+let sparseFence: SparseFence | null = null;
+
+/** Stable refusal code when an undrawn combination makes an inference
+ *  ambiguous. */
+export const SPARSE_MATRIX_INFERENCE_AMBIGUOUS = 'sparse-matrix-inference-ambiguous' as const;
+
+export class SparseMatrixInferenceError extends Error {
+  readonly code = SPARSE_MATRIX_INFERENCE_AMBIGUOUS;
+  /** `<channel>@<part>` for every ambiguous inference, sorted. */
+  readonly inferences: readonly string[];
+
+  constructor(setName: string, ambiguous: ReadonlyMap<string, string>) {
+    const keys = [...ambiguous.keys()].sort();
+    super(
+      `${keys.map((k) => `${SPARSE_MATRIX_INFERENCE_AMBIGUOUS}:${k}`).join('; ')} — "${setName}" does not draw every combination of its variant axes, and ${keys.length} inference(s) have more than one explanation that the undrawn combinations would have told apart: ${keys
+        .map((k) => `${k} (${ambiguous.get(k)})`)
+        .join('; ')}. Nothing is guessed: draw a disambiguating variant, or author the contract by hand`,
+    );
+    this.name = 'SparseMatrixInferenceError';
+    this.inferences = keys;
+  }
+}
+
+function fenceSparseInference(
+  axes: readonly Axis[],
+  label: string,
+  rows: ReadonlyArray<{ variant: string; value: unknown }>,
+): void {
+  const fence = sparseFence;
+  if (fence === null || fence.ambiguous.has(label) || rows.length < 2) return;
+  const keyed = rows.map((r) => ({ at: axisValuesOf(r.variant), value: JSON.stringify(r.value) ?? 'undefined' }));
+  if (keyed.every((r) => r.value === keyed[0]!.value)) return;
+  // Only an axis that VARIES over these rows can explain anything. With the
+  // product capped (EXACT_ABSENT_VARIANTS_MAX_PRODUCT = 4096 = 2^12) at most
+  // twelve axes vary, so EVERY subset is enumerated — at most 4,096 — and the
+  // condition has no arity bound to hide behind: an explanation over four axes
+  // (the reviewer's parity(B,C,D,E) against f(A)) is found like any other.
+  const usable = axes.filter(
+    (a) =>
+      keyed.every((r) => r.at[a.property] !== undefined) &&
+      new Set(keyed.map((r) => r.at[a.property])).size > 1,
+  );
+  if (usable.length > 12) {
+    fence.ambiguous.set(
+      label,
+      `${usable.length} variant axes vary over the rows this inference was read from — more than the 12 the fence enumerates exhaustively, so uniqueness cannot be established (sparse-matrix-inference-unbounded)`,
+    );
+    return;
+  }
+  const cellOf = (subset: readonly Axis[], at: Readonly<Record<string, string>>): string =>
+    JSON.stringify(subset.map((a) => at[a.property]));
+  const fit = (subset: readonly Axis[]): Map<string, string> | null => {
+    const byCell = new Map<string, string>();
+    for (const r of keyed) {
+      const cell = cellOf(subset, r.at);
+      const seen = byCell.get(cell);
+      if (seen !== undefined && seen !== r.value) return null;
+      byCell.set(cell, r.value);
+    }
+    return byCell;
+  };
+  const minimal: Array<{ subset: Axis[]; byCell: Map<string, string> }> = [];
+  // Every non-empty subset, smallest first (so a fitting subset prunes its
+  // supersets and what survives is exactly the MINIMAL explanations).
+  const popcount = (m: number): number => { let n = 0; for (let x = m; x; x &= x - 1) n++; return n; };
+  const masks = Array.from({ length: (1 << usable.length) - 1 }, (_, i) => i + 1).sort(
+    (x, y) => popcount(x) - popcount(y) || x - y,
+  );
+  const subsets: Axis[][] = masks.map((m) => usable.filter((_, i) => (m >> i) & 1));
+  for (const subset of subsets) {
+    if (minimal.some((m) => m.subset.every((a) => subset.includes(a)))) continue; // a fitting subset already explains it
+    const byCell = fit(subset);
+    if (byCell !== null) minimal.push({ subset, byCell });
+  }
+  if (minimal.length < 2) return;
+  const names = (subset: readonly Axis[]) => subset.map((a) => `"${a.property}"`).join(' × ');
+  for (let i = 0; i < minimal.length; i++) {
+    for (let j = i + 1; j < minimal.length; j++) {
+      for (const t of fence.absent) {
+        const a = minimal[i]!.byCell.get(cellOf(minimal[i]!.subset, t));
+        const b = minimal[j]!.byCell.get(cellOf(minimal[j]!.subset, t));
+        if (a === undefined && b === undefined) continue;
+        if (a === b) continue;
+        fence.ambiguous.set(
+          label,
+          `a function of ${names(minimal[i]!.subset)} and equally of ${names(minimal[j]!.subset)} on every drawn variant; at the undrawn ${Object.entries(t)
+            .map(([k, v]) => `${k}=${v}`)
+            .join(', ')} they give ${a ?? 'no value'} vs ${b ?? 'no value'}`,
+        );
+        return;
+      }
+    }
+  }
+}
+
+/** Stable refusal code: exact mode proposed a contract that this repository's
+ *  own referee (`validateContract`) refuses. */
+export const PROPOSAL_REFUSED_BY_REFEREE = 'proposal-refused-by-referee' as const;
+
+/** EXACT MODE NEVER RETURNS A CONTRACT ITS OWN REFEREE REFUSES (docs/23 §D.41,
+ *  review PR 131 H1). `verified-exact` is a statement about the variant
+ *  matrix; it used to be returned for a contract `validateContract` /
+ *  `emitReact` throw on (two props named `disabled`, both bound to the same
+ *  design property). The referee now runs on every exact proposal that
+ *  projects a designer's state axis (the scope is argued at the call site) and
+ *  that it CAN judge — one whose component refs all resolve inside the proposal itself
+ *  (the contract and its own auto-proposed stubs): linked children in scope are
+ *  slices (`MinimalChildContract`), not contracts, so a proposal that links one
+ *  is not judged here and `generate` remains its referee. */
+export class ProposalRefereeError extends Error {
+  readonly code = PROPOSAL_REFUSED_BY_REFEREE;
+  readonly violations: readonly string[];
+  constructor(setName: string, violations: readonly string[]) {
+    super(
+      `${PROPOSAL_REFUSED_BY_REFEREE}: "${setName}" proposes a contract that validateContract refuses (${violations.length} violation(s)) — ${violations.slice(0, 4).join(' | ')}${violations.length > 4 ? ` | … ${violations.length - 4} more` : ''}. Exact mode returns no contract its own referee would refuse; --reviewable-inversion proposes it for review`,
+    );
+    this.name = 'ProposalRefereeError';
+    this.violations = violations;
+  }
+}
+
+/** A Map that owns every icon name: the proposer never sees the icon corpus,
+ *  so an icon it cannot check is not a violation it can name. */
+class EveryIcon extends Map<string, string> {
+  override has(): boolean {
+    return true;
+  }
+}
+
+function refereeViolations(contract: Contract, stubs: readonly Contract[]): string[] | null {
+  const scope = new Map<string, Contract>([[contract.id, contract], ...stubs.map((s) => [s.id, s] as const)]);
+  let selfContained = true;
+  const walk = (node: unknown): void => {
+    if (node === null || typeof node !== 'object') return;
+    const ref = (node as { component?: { id?: unknown } }).component;
+    if (ref && typeof ref === 'object' && typeof ref.id === 'string' && !scope.has(ref.id)) selfContained = false;
+    for (const v of Object.values(node as Record<string, unknown>)) walk(v);
+  };
+  walk(contract.anatomy);
+  if (!selfContained) return null;
+  const errors: string[] = [];
+  validateContract(contract, scope, errors, new EveryIcon());
+  return errors;
+}
 
 function parseAxes(variantNames: string[]): Axis[] {
   const axes: Axis[] = [];
@@ -345,16 +568,9 @@ const isBoolAxis = (options: string[]): boolean => {
 // spellings, and the rename is DOCUMENTED in a note, never silent.
 // ---------------------------------------------------------------------------
 
-const INTERACTION_STATE_BY_VALUE: Record<string, 'default' | 'hover' | 'active' | 'focus-visible' | 'disabled'> = {
-  default: 'default',
-  hover: 'hover',
-  active: 'active',
-  pressed: 'active',
-  focus: 'focus-visible',
-  'focus-visible': 'focus-visible',
-  disabled: 'disabled',
-};
-const normStateValue = (v: string) => v.trim().toLowerCase().replace(/[\s_]+/g, '-');
+// The closed value table (INTERACTION_STATE_BY_VALUE, normStateValue) lives in
+// core/interaction-state-axis.ts — ONE table for this projection and for the
+// harnesses that mount a state-axis variant (docs/23 §D.41).
 
 type PromotedState = 'hover' | 'active' | 'focus-visible';
 
@@ -652,6 +868,9 @@ export interface InferredSemantics {
   role?: string;
   elementByProp?: { prop: string; map: Record<string, string> };
   note: string;
+  /** True when the element came from the interaction-state axis, not the
+   *  name (the structural row of the table). */
+  structural?: true;
 }
 
 export function inferSemantics(setName: string, axes: Axis[], interactive: boolean): InferredSemantics | null {
@@ -707,10 +926,330 @@ export function inferSemantics(setName: string, axes: Axis[], interactive: boole
   if (interactive) {
     return {
       element: 'button',
+      structural: true,
       note: `semantics: element "button" inferred STRUCTURALLY — the set carries an interaction-state variant axis (hover/pressed/… are platform states of an interactive element) and the name gave no signal; review`,
     };
   }
   return null;
+}
+
+// ---------------------------------------------------------------------------
+// Interactive content — AGENT DECISION (2026-09-19, under the owner's
+// delegation; final form after two adversarial reviews of §D.44).
+//
+// HTML forbids interactive content inside <button> and <a>. Measured: Altitude
+// `Tab Panel` carries a State axis and no name signal, so the STRUCTURAL row
+// of the table guessed <button>; its variants hold Altitude's `Button`, itself
+// a <button> — the generated DOM was <button><button>…. Two earlier cuts
+// weighed evidence case by case (which child is "really" interactive, which
+// side gives way) and each review found new edge cases. The rule is now the
+// conservative one:
+//
+//   1. SNAPSHOT FIRST. Every proposed set's ORIGINAL element and how it was
+//      decided (name-match / structural / declared) are read once, before any
+//      change. Every decision reads only that snapshot; changes are applied
+//      afterwards. So the result does not depend on the order the batch
+//      decides in (cycles included).
+//   2. A NAME-MATCHED OR DECLARED ELEMENT IS NEVER CHANGED, as parent or as
+//      child.
+//   3. A STRUCTURAL `button` guess is withheld (→ the default `div`) when its
+//      drawing contains ANY interactive content by the snapshot: a child
+//      instance, own part, nested part or stub whose element is button / a /
+//      input / select / textarea / summary / label, or which carries an ARIA
+//      widget role or tabindex — name-matched, declared and structural alike,
+//      transitively. It only ever removes a GUESS, the weakest claim.
+//   4. NEVER NEST SILENTLY. A `button` / `a` that is kept and still contains
+//      interactive content gets a note on its proposal saying so.
+//
+// A stub (an instance whose set is not in the batch) has only its name: its
+// element is the table's reading of the name with camel/Pascal case split
+// (IconButton → "Icon Button" → button). Free-text descriptions are never
+// read. TO REVERSE: delete the settleInteractiveContent call in
+// proposeBatchFromDump (the snapshot origin map is then unused).
+// ---------------------------------------------------------------------------
+
+/** HTML interactive content, cut to what a contract can spell. */
+const INTERACTIVE_CONTENT_ELEMENTS = new Set(['a', 'button', 'input', 'select', 'textarea', 'summary', 'label']);
+/** Elements whose content model forbids interactive-content descendants. */
+const NO_INTERACTIVE_DESCENDANTS = new Set(['button', 'a']);
+/** ARIA widget roles — an element carrying one is interactive content. */
+const INTERACTIVE_ROLES = new Set([
+  'button', 'checkbox', 'combobox', 'gridcell', 'link', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option',
+  'radio', 'scrollbar', 'searchbox', 'slider', 'spinbutton', 'switch', 'tab', 'textbox', 'treeitem',
+]);
+/** What a withheld interactive element costs, said on every withhold note. */
+const DIV_COSTS = 'a div provides no keyboard access, no focus and no :disabled behaviour of its own';
+
+/** How proposeFromDumpFenced decided a contract's semantics.element. Written
+ *  once per proposal, never mutated; read by the batch post-pass. */
+type SemanticsOrigin = 'declared' | 'name' | 'structural' | 'reroot' | 'default';
+const semanticsOriginOf = new WeakMap<object, { origin: SemanticsOrigin; note: string | null }>();
+// Observation-only provenance: generated identifiers flatten namespace separators.
+const stubObservedNames = new WeakMap<object, string[]>();
+
+/** "IconButton" / "close_button" / "Split Button A" → lower-case words. */
+export function nameWords(name: string): string[] {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+/** Every contract id a raw anatomy part tree renders: component refs and
+ *  slot defaultContent items, in anatomy order (deterministic). */
+function renderedRefIds(part: unknown, out: string[] = []): string[] {
+  if (!part || typeof part !== 'object') return out;
+  const p = part as {
+    component?: { id?: unknown };
+    slot?: { defaultContent?: Array<{ id?: unknown }> };
+    parts?: Record<string, unknown>;
+  };
+  if (typeof p.component?.id === 'string') out.push(p.component.id);
+  for (const item of p.slot?.defaultContent ?? []) if (typeof item?.id === 'string') out.push(item.id);
+  for (const child of Object.values(p.parts ?? {})) renderedRefIds(child, out);
+  return out;
+}
+
+/** An authored interactive fact on a part tree itself (not through refs):
+ *  a part's element, its attrs.role, its attrs.tabindex. `skipRootElement`
+ *  leaves the root's own element to the caller. */
+export function interactivePartFact(root: unknown, skipRootElement = false): string | null {
+  const visit = (part: unknown, name: string, isRoot: boolean): string | null => {
+    if (!part || typeof part !== 'object') return null;
+    const p = part as { element?: unknown; attrs?: Record<string, unknown>; parts?: Record<string, unknown> };
+    if (!(isRoot && skipRootElement) && typeof p.element === 'string' && INTERACTIVE_CONTENT_ELEMENTS.has(p.element)) {
+      return `part "${name}" is a <${p.element}>`;
+    }
+    const role = p.attrs?.role;
+    if (typeof role === 'string' && INTERACTIVE_ROLES.has(role)) return `part "${name}" carries role "${role}"`;
+    if (p.attrs && 'tabindex' in p.attrs) return `part "${name}" carries tabindex`;
+    for (const [k, child] of Object.entries(p.parts ?? {})) {
+      const hit = visit(child, k, false);
+      if (hit) return hit;
+    }
+    return null;
+  };
+  return visit(root, 'root', true);
+}
+
+interface ContractLike {
+  id?: unknown;
+  name?: unknown;
+  semantics?: { element?: unknown; role?: unknown; elementByProp?: { map?: Record<string, unknown> } };
+  anatomy?: Record<string, unknown>;
+}
+
+/** The element(s) and role a contract is taken to render, by the snapshot:
+ *  a stub by its observed leaf name (camel case split), anything else by its semantics. */
+function snapshotSemantics(c: ContractLike, stub: boolean): { elements: string[]; role?: string } {
+  if (stub) {
+    const observed = stubObservedNames.get(c as object);
+    // Main names may end in variant values (Button/Icon/Default/sm); the
+    // actual instance layer can still say Button (Icon). Keep both observed
+    // leaf names, without treating a namespace segment as a control name.
+    const names = observed ?? [typeof c.name === 'string' ? c.name : ''];
+    const reads = names.map(name => {
+      const leaf = observed === undefined ? name : name.split('/').map(part => part.trim()).filter(Boolean).at(-1) ?? '';
+      return inferSemantics(nameWords(leaf).join(' '), [], false);
+    }).filter((read): read is NonNullable<typeof read> => read !== null);
+    const role = reads.find(read => read.role && INTERACTIVE_ROLES.has(read.role))?.role;
+    return { elements: [...new Set(reads.map(read => read.element))], ...(role ? { role } : {}) };
+  }
+  const sem = c.semantics ?? {};
+  return {
+    elements: [sem.element, ...Object.values(sem.elementByProp?.map ?? {})].filter((e): e is string => typeof e === 'string'),
+    ...(typeof sem.role === 'string' ? { role: sem.role } : {}),
+  };
+}
+
+/** Why one contract IS interactive content by itself, or null. */
+function interactiveSelf(c: ContractLike, semantics: { elements: string[]; role?: string }): string | null {
+  const el = semantics.elements.find((e) => INTERACTIVE_CONTENT_ELEMENTS.has(e));
+  if (el) return `<${el}>`;
+  if (semantics.role !== undefined && INTERACTIVE_ROLES.has(semantics.role)) return `role "${semantics.role}"`;
+  for (const root of Object.values(c.anatomy ?? {})) {
+    const fact = interactivePartFact(root, true);
+    if (fact) return fact;
+  }
+  return null;
+}
+
+/** The first interactive content a part tree draws — its own parts, then its
+ *  refs, transitively — as `{ child, what }` naming the first hit, or null.
+ *  `semanticsOf` supplies each referenced contract's elements/role. */
+export function interactiveContentOf(
+  root: unknown,
+  contractsById: ReadonlyMap<string, unknown> | undefined,
+  semanticsOf: (c: ContractLike) => { elements: string[]; role?: string } = (c) => snapshotSemantics(c, false),
+  nameOf: (c: ContractLike, id: string) => string = (c, id) => (typeof c.name === 'string' ? c.name : id),
+): { child: string; what: string } | null {
+  const own = interactivePartFact(root, true);
+  if (own) return { child: 'its own anatomy', what: own };
+  if (!contractsById) return null;
+  const seen = new Set<string>();
+  const visit = (ids: string[]): { child: string; what: string } | null => {
+    for (const id of ids) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const c = contractsById.get(id) as ContractLike | undefined;
+      if (!c) continue;
+      const what = interactiveSelf(c, semanticsOf(c));
+      if (what) return { child: nameOf(c, id), what };
+      const deeper = visit(Object.values(c.anatomy ?? {}).flatMap((r) => renderedRefIds(r)));
+      if (deeper) return deeper;
+    }
+    return null;
+  };
+  return visit(renderedRefIds(root));
+}
+
+/** THE BATCH POST-PASS (see the block comment above). Mutates proposals in
+ *  place; every decision reads the snapshot taken first. */
+export function settleInteractiveContent(
+  proposals: Array<{ setName: string; contract: unknown; notes: string[]; childStubs?: unknown[] }>,
+  contractsById: ReadonlyMap<string, unknown>,
+): void {
+  const stubs = new WeakSet<object>();
+  for (const p of proposals) for (const s of p.childStubs ?? []) if (s && typeof s === 'object') stubs.add(s);
+  const displayName = new Map<object, string>();
+  for (const p of proposals) displayName.set(p.contract as object, p.setName);
+  // 1. SNAPSHOT — before any change.
+  const snapshot = new Map<object, { elements: string[]; role?: string }>();
+  const semanticsOf = (c: ContractLike): { elements: string[]; role?: string } => {
+    const key = c as object;
+    let s = snapshot.get(key);
+    if (!s) snapshot.set(key, (s = snapshotSemantics(c, stubs.has(key))));
+    return s;
+  };
+  for (const c of contractsById.values()) if (c && typeof c === 'object') semanticsOf(c as ContractLike);
+  for (const p of proposals) semanticsOf(p.contract as ContractLike);
+  const nameOf = (c: ContractLike, id: string) => displayName.get(c as object) ?? (typeof c.name === 'string' ? c.name : id);
+  const decisions: Array<{ proposal: (typeof proposals)[number]; kind: 'withhold'; hit: { child: string; what: string } }> = [];
+  // 3. Structural button guesses with interactive content, by the snapshot.
+  for (const p of proposals) {
+    const c = p.contract as ContractLike & object;
+    const origin = semanticsOriginOf.get(c)?.origin;
+    if (origin !== 'structural' || c.semantics?.element !== 'button') continue;
+    const hit = interactiveContentOf((c.anatomy ?? {}).root, contractsById, semanticsOf, nameOf);
+    // @door propose.semantics-interactive-content-withheld
+    if (hit === null) continue;
+    decisions.push({ proposal: p, kind: 'withhold', hit });
+  }
+  // Apply.
+  const withheld = new WeakSet<object>();
+  for (const { proposal, hit } of decisions) {
+    const contract = proposal.contract as { semantics: Record<string, unknown> } & object;
+    const prior = semanticsOriginOf.get(contract);
+    contract.semantics = { element: 'div' };
+    withheld.add(contract);
+    const note = `semantics: structural "button" withheld — the set draws interactive content ("${hit.child}": ${hit.what}); HTML forbids interactive content inside <button>, so the set is proposed as the default container "div" — ${DIV_COSTS}; review (make the interactive child the control, or stamp the element)`;
+    const at = prior?.note ? proposal.notes.indexOf(prior.note) : -1;
+    if (at >= 0) proposal.notes[at] = note;
+    else proposal.notes.unshift(note);
+  }
+  // 4. Never nest silently — read the state AFTER step 3 (the snapshot minus
+  //    the withheld guesses), which is itself a function of the snapshot.
+  const afterOf = (c: ContractLike) => (withheld.has(c as object) ? { elements: ['div'] } : semanticsOf(c));
+  for (const p of proposals) {
+    const c = p.contract as ContractLike & object;
+    const el = String(c.semantics?.element);
+    if (withheld.has(c) || !NO_INTERACTIVE_DESCENDANTS.has(el)) continue;
+    const hit = interactiveContentOf((c.anatomy ?? {}).root, contractsById, afterOf, nameOf);
+    if (hit === null) continue;
+    p.notes.push(
+      `semantics: nested interactive content left in place — "${p.setName}" is a <${el}> and draws "${hit.child}" (${hit.what}); HTML forbids this; author one of them`,
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// UA padding — AGENT DECISION (2026-09-19, §D.44 as revised by its review, H2).
+// A Figma frame's padding side is a DRAWN fact. When the proposal's root can
+// render as an element the user agent pads (UA_PADDING_ELEMENTS, measured in
+// Chromium) and EVERY variant draws 0 on a side the contract does not declare,
+// the proposer writes `padding-<side>: 0px` as a literal: the zero is carried,
+// not guessed by an emitter. A side the canvas draws NONZERO but the proposal
+// left undeclared was REFUSED upstream (its note says why); it stays
+// undeclared, and a note names that the user agent's default renders there.
+// Hand-written contracts are untouched (a `<button>` authored with partial
+// padding keeps UA padding, as CSS does). Idempotent, and undone when the
+// batch post-pass withholds the element. TO REVERSE: delete the
+// settleUaPadding calls (proposeFromDumpFenced, proposeBatchFromDump).
+// ---------------------------------------------------------------------------
+
+const PADDING_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+const PADDING_PROPERTY_SIDES: Record<string, ReadonlyArray<(typeof PADDING_SIDES)[number]>> = {
+  padding: PADDING_SIDES,
+  'padding-top': ['top'], 'padding-right': ['right'], 'padding-bottom': ['bottom'], 'padding-left': ['left'],
+  'padding-block': ['top', 'bottom'], 'padding-inline': ['left', 'right'],
+  'padding-block-start': ['top'], 'padding-block-end': ['bottom'], 'padding-inline-start': ['left'], 'padding-inline-end': ['right'],
+};
+const uaPaddingAdded = new WeakMap<object, string[]>();
+
+/** The sides a root declares in any unconditional or per-prop-value channel. */
+function declaredPaddingSides(root: Record<string, unknown>): Set<string> {
+  const out = new Set<string>();
+  const read = (o: unknown): void => {
+    for (const k of Object.keys((o as Record<string, unknown> | undefined) ?? {})) for (const s of PADDING_PROPERTY_SIDES[k] ?? []) out.add(s);
+  };
+  read(root.tokens);
+  read(root.literals);
+  read(root.declared);
+  const tbp = root.tokensByProp as unknown;
+  for (const e of tbp === undefined ? [] : Array.isArray(tbp) ? tbp : [tbp]) for (const o of Object.values((e as { map?: object }).map ?? {})) read(o);
+  for (const e of (root.literalsByProp as Array<{ map?: object }> | undefined) ?? []) for (const o of Object.values(e.map ?? {})) read(o);
+  return out;
+}
+
+export function settleUaPadding(proposal: { contract: unknown; notes: string[] }, set: DumpSet): void {
+  const contract = proposal.contract as { semantics?: { element?: string; elementByProp?: { map?: Record<string, string> } }; anatomy?: { root?: Record<string, unknown> } };
+  const root = contract.anatomy?.root;
+  if (!root) return;
+  // Undo a previous settle (the element may have been withheld since).
+  if (uaPaddingAdded.has(contract as object)) {
+    const lits = (root.literals as Record<string, string> | undefined) ?? {};
+    for (const side of uaPaddingAdded.get(contract as object) ?? []) delete lits[`padding-${side}`];
+    if (root.literals !== undefined && Object.keys(lits).length === 0) delete root.literals;
+    for (let i = proposal.notes.length - 1; i >= 0; i--) if (proposal.notes[i].startsWith('ua-padding:')) proposal.notes.splice(i, 1);
+    uaPaddingAdded.delete(contract as object);
+  }
+  const literals = (root.literals as Record<string, string> | undefined) ?? {};
+  const sem = contract.semantics ?? {};
+  const el = [sem.element, ...Object.values(sem.elementByProp?.map ?? {})].find((e): e is string => typeof e === 'string' && UA_PADDING_ELEMENTS.has(e));
+  if (!el) return;
+  const declared = declaredPaddingSides(root);
+  const drawn = PADDING_SIDES.map((_, i) => set.variants.map((v) => (v.layout?.padding ?? [0, 0, 0, 0])[i]));
+  const zeroed: string[] = [];
+  const refused: string[] = [];
+  PADDING_SIDES.forEach((side, i) => {
+    if (declared.has(side)) return;
+    if (drawn[i].every((px) => px === 0)) zeroed.push(side);
+    else refused.push(side);
+  });
+  if (zeroed.length > 0) {
+    // @lower propose.ua-padding-drawn-zero-explicit
+    const next = { ...literals };
+    for (const side of zeroed) next[`padding-${side}`] = '0px';
+    root.literals = next;
+    uaPaddingAdded.set(contract as object, zeroed);
+    proposal.notes.push(
+      `ua-padding: padding-${zeroed.join(' / padding-')} = 0px carried as literals — every variant draws 0 there, and the root renders as <${el}>, which the user agent pads (${UA_PADDING_BY_ELEMENT[el].join(' ')}) where a contract is silent`,
+    );
+  }
+  for (const side of refused) {
+    const values = [...new Set(drawn[PADDING_SIDES.indexOf(side as never)])].sort((a, b) => a - b);
+    // Say "refused" only when a refusal for that side is actually on record.
+    const field = `padding${side[0].toUpperCase()}${side.slice(1)}`;
+    const refusalNoted = proposal.notes.some(
+      (n) => !n.startsWith('ua-padding:') && (n.includes(field) || n.includes(`padding-${side}`)) && /not proposed|refus|not carried|dropped|NAMED/i.test(n),
+    );
+    proposal.notes.push(
+      `ua-padding: padding-${side} is not declared (${refusalNoted ? 'the value was refused above' : 'no value carried'}) although the canvas draws ${values.join(' / ')}px there — on a <${el}> root the user agent's default (${UA_PADDING_BY_ELEMENT[el][PADDING_SIDES.indexOf(side as never)]}) renders on that side in code, not the drawn value; review`,
+    );
+  }
+  if (zeroed.length === 0 && refused.length > 0) uaPaddingAdded.set(contract as object, []);
 }
 
 // ---------------------------------------------------------------------------
@@ -935,6 +1474,8 @@ interface BoolAxisFn {
 function unifyRefs(
   obs: Array<{ variant: string; path?: string }>,
   axes: Axis[],
+  /** `<channel>@<part>` for the sparse-matrix inference fence. */
+  label = 'binding',
 ): Unified {
   const defined = obs.filter((o): o is { variant: string; path: string } => o.path !== undefined);
   if (defined.length === 0) return { kind: 'none' };
@@ -975,6 +1516,7 @@ function unifyRefs(
           return value !== undefined && segs[k][i] === camel(value);
         });
         if (fits) {
+          fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
           const parts = [...segs[0]];
           parts[i] = `{${axis.propName}}`;
           return { kind: 'ref', ref: `{${parts.join('.')}}` };
@@ -1007,6 +1549,7 @@ function unifyRefs(
       byValue.set(value, o.path);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
     return {
       kind: 'per-value',
       perValue: {
@@ -1041,6 +1584,7 @@ function unifyRefs(
       byValue.set(value, o.path);
     }
     if (!fits || !byValue.has('true') || !byValue.has('false')) continue;
+    fenceSparseInference(axes, label, defined.map((o) => ({ variant: o.variant, value: o.path })));
     const whenFalse = byValue.get('false')!;
     const whenTrue = byValue.get('true')!;
     return {
@@ -1073,6 +1617,7 @@ function unifyStampedTextVar(
       return { variant: o.variant, path: raw ? dotPath(raw) : undefined };
     }),
     axes,
+    `text-style-variable@${occs[0]?.node.name ?? 'text'}`,
   );
   return u.kind === 'ref' ? u.ref : undefined;
 }
@@ -1116,6 +1661,10 @@ export interface FigmaProposalResult {
    *  plain stamped/name-derived one. proposeBatchFromDump names the
    *  collision at batch level when the holder is a sibling set. */
   idSuffixedFrom?: string;
+  /** The NAMED DECISION that projected a designer's interaction-state variant
+   *  axis onto the contract's state vocabulary (docs/23 §D.41). Present only
+   *  when that happened; the same facts are spelled in `notes`. */
+  stateAxisProjection?: DesignerStateAxisProjection;
 }
 
 export type ExactProposalRefusalCode =
@@ -1131,16 +1680,19 @@ export type TextStyleIdentityRefusalCode = typeof TEXT_STYLE_IDENTITY_REFUSED;
 export class ExactProjectionError extends Error {
   readonly code: ExactProposalRefusalCode;
   readonly projection: ExactProjectionResult;
+  readonly detail?: string;
 
   constructor(
     code: ExactProposalRefusalCode,
     message: string,
     projection: ExactProjectionResult,
+    detail?: string,
   ) {
     super(message);
     this.name = 'ExactProjectionError';
     this.code = code;
     this.projection = projection;
+    this.detail = detail;
   }
 }
 
@@ -1256,13 +1808,145 @@ const semanticProjectionRefusal = (
   projection: ExactProjectionResult,
   axis: Axis,
   semanticKind: 'interaction-state' | 'token-mode',
+  /** `<slug>: <what stopped it>` — the named condition (docs/23 §D.41). The
+   *  leading sentence is the one every existing receipt quotes, unchanged. */
+  why?: string,
 ): never => {
   throw new ExactProjectionError(
     'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS',
-    `Exact proposal cannot promote variant axis ${JSON.stringify(axis.property)} to ${semanticKind} semantics because that changes the authoritative Figma variant projection.`,
+    `Exact proposal cannot promote variant axis ${JSON.stringify(axis.property)} to ${semanticKind} semantics because that changes the authoritative Figma variant projection.${why ? ` ${why}` : ''}`,
     projection,
   );
 };
+
+/** Every prop-to-be of the set that already SPELLS "disabled" — a variant axis
+ *  or a BOOLEAN component property whose prop name or Figma property
+ *  normalises to `disabled` / `isdisabled` (case, spaces, `-`, `_`, the
+ *  `#id` suffix ignored). Read where a state axis's Disabled value would become
+ *  the `disabled` boolean (§D.41, PR 131 H1). */
+function disabledSpellings(ctx: { axes: Axis[]; boolProps: Array<{ name: string; property: string }> }): string[] {
+  const token = (s: string) => ['disabled', 'isdisabled'].includes(s.split('#')[0]!.toLowerCase().replace(/[^a-z0-9]/g, ''));
+  return [
+    ...ctx.axes.filter((a) => token(a.property) || token(a.propName)).map((a) => `VARIANT "${a.property}"`),
+    ...ctx.boolProps.filter((b) => token(b.property) || token(b.name)).map((b) => `BOOLEAN "${b.property}"`),
+  ];
+}
+
+/** A DESIGNER's interaction-state axis, projected (docs/23 §D.41). Read from
+ *  the SOURCE set by the closed table in core/interaction-state-axis.ts; it is
+ *  the descriptor the exact projection rebuilds the source matrix from — the
+ *  proposed contract's own VARIANT axes × these values, minus the state cells
+ *  the designer did not draw — and the named decision the proposal carries. */
+export interface DesignerStateAxisProjection {
+  /** The stable name of the decision. */
+  decision: 'designer-state-axis-projected';
+  /** The Figma variant property, in the designer's spelling. */
+  property: string;
+  /** The Figma value that is the rest state (the base every state is read against). */
+  restValue: string;
+  /** Figma value → contract state, in the axis's own order. `carried` is
+   *  filled once the proposal is built: false = the state's drawing produced
+   *  no override the vocabulary carries (named in the notes). The rest value
+   *  is always carried (it is the base); a `disabled` value always becomes the
+   *  `disabled` boolean prop, and `carried` says whether its STATE BLOCK did. */
+  values: Array<{ value: string; state: InteractionState; carried: boolean }>;
+  /** Complete Figma tuples (state property included) that are undrawn in a
+   *  NON-rest state while their rest-state cell IS drawn. Not a contract
+   *  absence — no prop combination is missing — so they live here, not in
+   *  `bindings.figma.absentVariants`. */
+  undrawnStateCells: Array<Record<string, string>>;
+  /** WRITE-BACK IS NOT THE DESIGNER'S MATRIX, and says so every time (review,
+   *  PR 131 H3). The contract vocabulary carries neither the designer's state
+   *  spelling nor the state cells they left undrawn, so regenerating the canvas
+   *  from this contract draws the WRITER's matrix: its own preview axis, one
+   *  row per carried state per value of one primary axis, every other axis
+   *  pinned. Computed by the writer's own rule, in the DESIGNER's spelling:
+   *  `completes` = cells it draws that the designer did not; `omits` = cells
+   *  the designer drew that it does not. Filled once the contract is built. */
+  writeBack: { draws: number; completes: Array<Record<string, string>>; omits: Array<Record<string, string>> };
+}
+
+/** The declaration of a set THIS PIPELINE drew: the stamped contract's own
+ *  `bindings.figma.absentVariants`, translated into Figma terms through that
+ *  contract's VARIANT bindings (the writer's own spelling). Null — and so the
+ *  ragged refusal — when the set carries no legal id stamp, the contract is
+ *  not in scope, it declares nothing, or the referee would not accept what it
+ *  declares. Whether it MATCHES the canvas is the exact projection's call. */
+function scopedAbsentVariants(
+  set: { contractId?: unknown },
+  contractsById: ReadonlyMap<string, MinimalChildContract> | undefined,
+): Array<Record<string, string>> | null {
+  const id = readStampedContractId(set);
+  const authored = id === null ? undefined : (contractsById?.get(id) as unknown as Contract | undefined);
+  const list = authored?.bindings?.figma?.absentVariants;
+  if (!authored || !Array.isArray(list) || list.length === 0) return null;
+  try {
+    if (absentVariantIssues(authored).length > 0) return null;
+    const axes = absentVariantAxes(authored);
+    return list.map((tuple) =>
+      Object.fromEntries(
+        axes.map((a) => {
+          const fig = a.prop.bindings.figma;
+          const option = tuple[a.prop.name] ?? null;
+          return [fig.property ?? '', option === null ? (fig.unsetValue ?? '') : (fig.values?.[String(option)] ?? String(option))];
+        }),
+      ),
+    );
+  } catch {
+    return null; // a contract slice this reader cannot walk declares nothing
+  }
+}
+
+/** Write the undrawn combinations onto the proposed contract as
+ *  `bindings.figma.absentVariants`: each Figma-term tuple read back through the
+ *  FINAL props' own VARIANT bindings into prop names and canonical options,
+ *  in the canonical order the referee demands. Anything that does not map — an
+ *  axis that is not a VARIANT prop of the proposal, an option no binding
+ *  spells — keeps the ragged refusal, by name; so does a declaration the
+ *  referee would not accept (the default combination undrawn, an axis value
+ *  with no drawn variant). */
+function declareAbsentVariants(
+  contract: Record<string, unknown>,
+  absent: ReadonlyArray<Readonly<Record<string, string>>>,
+  ragged: ExactProjectionResult,
+): void {
+  const refuse = (why: string): never => {
+    throw new ExactProjectionError(
+      'EXACT_MATRIX_RAGGED',
+      `${ragged.status === 'refused' ? ragged.refusals[0]?.message ?? '' : ''} The undrawn combinations cannot be declared on the proposed contract: ${why}`.trim(),
+      ragged,
+    );
+  };
+  const typed = contract as unknown as Contract;
+  const axes = absentVariantAxes(typed);
+  const byProperty = new Map(axes.map((a) => [a.prop.bindings.figma.property ?? '', a] as const));
+  const tuples = absent.map((figmaTuple) => {
+    const properties = Object.keys(figmaTuple);
+    const stray = properties.find((property) => !byProperty.has(property));
+    if (stray !== undefined) refuse(`variant property "${stray}" is not a VARIANT-bound prop of the proposal`);
+    const out: Record<string, string | boolean | null> = {};
+    for (const a of axes) {
+      const fig = a.prop.bindings.figma;
+      const label = figmaTuple[fig.property ?? ''];
+      if (label === undefined) refuse(`prop "${a.prop.name}" is a variant axis of the proposal but not of the drawn set`);
+      const option = a.options.find((o) =>
+        o === null ? fig.unsetValue === label : (fig.values?.[String(o)] ?? String(o)) === label,
+      );
+      if (option === undefined) refuse(`"${fig.property}=${label}" is not an option prop "${a.prop.name}" binds`);
+      out[a.prop.name] = option as string | boolean | null;
+    }
+    return out;
+  });
+  let product: Array<Array<string | boolean | null>> = [[]];
+  for (const a of axes) product = product.flatMap((row) => a.options.map((o) => [...row, o]));
+  const rank = new Map(product.map((row, n) => [JSON.stringify(row), n]));
+  tuples.sort((x, y) => rank.get(absentVariantKey(axes, x))! - rank.get(absentVariantKey(axes, y))!);
+  const bindings = contract.bindings as { figma: Record<string, unknown> };
+  const { anchors, ...rest } = bindings.figma;
+  bindings.figma = { ...rest, absentVariants: tuples, anchors };
+  const issues = absentVariantIssues(typed);
+  if (issues.length > 0) refuse(issues.join('; '));
+}
 
 /** Reconstruct the rows the proposed contract would emit using only its
  *  Figma VARIANT bindings. This deliberately does not inspect variant names. */
@@ -1275,9 +1959,14 @@ function exactRowsFromProposedContract(
     primary: string | null;
     pinned: Readonly<Record<string, string>>;
   } | null,
+  /** A designer's projected interaction-state axis (docs/23 §D.41). */
+  designerStateAxis?: DesignerStateAxisProjection | null,
 ): ExactVariantRow[] {
   const props = Array.isArray(contract.props) ? contract.props : [];
   const axes: Array<{ property: string; values: string[] }> = [];
+  /** prop name → how one of its options is spelled on the canvas, for the
+   *  declared absent variants below. */
+  const labelOf = new Map<string, { property: string; label: (option: unknown) => string | undefined }>();
   for (const raw of props) {
     if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) continue;
     const bindings = (raw as { bindings?: unknown }).bindings;
@@ -1290,6 +1979,17 @@ function exactRowsFromProposedContract(
     const values = Object.values(binding.values).filter((value): value is string => typeof value === 'string');
     if (typeof binding.unsetValue === 'string') values.unshift(binding.unsetValue);
     axes.push({ property: binding.property, values });
+    const name = (raw as { name?: unknown }).name;
+    if (typeof name === 'string') {
+      const byOption = binding.values as Record<string, unknown>;
+      labelOf.set(name, {
+        property: binding.property,
+        label: (option) =>
+          option === null
+            ? typeof binding.unsetValue === 'string' ? binding.unsetValue : undefined
+            : typeof byOption[String(option)] === 'string' ? (byOption[String(option)] as string) : undefined,
+      });
+    }
   }
 
   let tuples: Record<string, string>[] = [{}];
@@ -1297,6 +1997,67 @@ function exactRowsFromProposedContract(
     tuples = tuples.flatMap((tuple) =>
       axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
     );
+  }
+
+  // bindings.figma.absentVariants: the contract declares which combinations it
+  // does NOT draw, so the rows it would emit are the product minus that list
+  // — read through the props' own VARIANT bindings, exactly as the writer
+  // does. An entry that does not resolve to a real cell subtracts nothing, so
+  // a bad declaration can only make the returned rows DISAGREE with the source.
+  const declaredAbsent = (contract.bindings as { figma?: { absentVariants?: unknown } } | undefined)?.figma?.absentVariants;
+  if (Array.isArray(declaredAbsent) && declaredAbsent.length > 0) {
+    const cell = (t: Record<string, string>) => JSON.stringify(axes.map((a) => t[a.property]));
+    const absentCells = new Set<string>();
+    for (const entry of declaredAbsent) {
+      if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) continue;
+      const figmaTuple: Record<string, string> = {};
+      let resolved = Object.keys(entry).length === axes.length;
+      for (const [name, option] of Object.entries(entry as Record<string, unknown>)) {
+        const spelled = labelOf.get(name);
+        const label = spelled?.label(option);
+        if (!spelled || label === undefined) { resolved = false; break; }
+        figmaTuple[spelled.property] = label;
+      }
+      if (resolved) absentCells.add(cell(figmaTuple));
+    }
+    tuples = tuples.filter((t) => !absentCells.has(cell(t)));
+  }
+
+  // A DESIGNER's projected interaction-state axis (docs/23 §D.41): the axis
+  // left the API by the closed table, so the source matrix is the contract's
+  // own VARIANT cells (already minus its declared absences) × THE STATES THE
+  // CONTRACT CARRIES, minus the state cells the designer did not draw.
+  //
+  // BOTH halves are read from the CONTRACT (review, PR 131 C1). The first cut
+  // took the state half from the decision — i.e. from the source — so it
+  // agreed with the source by construction: CBDS Checkbox-icon read
+  // verified-exact at 42 rows while its contract carried only focus-visible,
+  // 18 of the 42 (hover 12, disabled 6) in states the contract does not have.
+  // A state plane is a row of the returned matrix only when `contract.states`
+  // declares that state (validateContract makes a declared state carry at
+  // least one override) — and `disabled` additionally only while the contract
+  // really has the `disabled` boolean the table says it becomes. The decision
+  // supplies nothing but the designer's SPELLING of those states (which the
+  // contract vocabulary does not carry) and the undrawn state cells.
+  if (designerStateAxis) {
+    const d = designerStateAxis;
+    const cameBackAsProp = axes.some((a) => a.property === d.property);
+    const hasDisabledProp = props.some(
+      (p) => p !== null && typeof p === 'object' && (p as { name?: unknown; type?: unknown }).name === 'disabled' && (p as { type?: unknown }).type === 'boolean',
+    );
+    const contractCarries = new Set(
+      Array.isArray(contract.states) ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string') : [],
+    );
+    if (!cameBackAsProp) {
+      const order = [...axes.map((a) => a.property), d.property];
+      const cellOf = (t: Record<string, string>) => JSON.stringify(order.map((p) => t[p]));
+      const undrawn = new Set(d.undrawnStateCells.map(cellOf));
+      return d.values
+        .filter((v) => v.state === 'default' || (contractCarries.has(v.state) && (v.state !== 'disabled' || hasDisabledProp)))
+        .flatMap((v) => tuples.map((t) => ({ ...t, [d.property]: v.value })))
+        .filter((t) => !undrawn.has(cellOf(t)))
+        .map((variantProperties) => ({ variantProperties }));
+    }
   }
 
   // A promoted contract re-emits the STATE PREVIEW axis, so the rows it would
@@ -1536,6 +2297,8 @@ export interface StubIconAsset {
 interface StubCapture {
   id: string;
   instanceOf: string;
+  /** Observation-only layer names; never serialized as stub semantics. */
+  instanceNames?: string[];
   /** The observed owning-set publish key (dump v1.5) — carried onto the
    *  stub's bindings.figma.anchors.componentSetKey so importing the real set later
    *  LINKS back to this identity by key. */
@@ -1780,6 +2543,7 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedR
   const u = unifyRefs(
     m.occ.map((o) => ({ variant: o.variant, path: o.node.bound?.[field] ? dotPath(o.node.bound[field]) : undefined })),
     ctx.axes,
+    `${field}@${where}`,
   );
   if (u.kind === 'ref') return u.ref;
   if (u.kind === 'per-value') return u.perValue;
@@ -1996,6 +2760,7 @@ function unifyPaint(
   const u = unifyRefs(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
+    `${mint?.cssProperty ?? paintName}@${where}`,
   );
   if (u.kind === 'ref' || u.kind === 'per-value') {
     // @door propose.paint-alpha-not-representable
@@ -2649,6 +3414,7 @@ function invertNodeOpacity(
       const whenTrue = side('true');
       const whenFalse = side('false');
       if (whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1 && !whenTrue.has(1)) {
+        fenceSparseInference(ctx.axes, `opacity@${where}`, occ);
         const value = [...whenTrue][0];
         const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
         stylesWhen.push({ prop: axis.propName, styles: { opacity: String(value) } });
@@ -2960,6 +3726,8 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
 function fitLiteralAxis(
   ctx: Ctx,
   values: Array<{ variant: string; value: string }>,
+  /** `<channel>@<part>` for the sparse-matrix inference fence. */
+  label = 'literal',
 ): { axis: Axis; byValue: Map<string, string> } | null {
   for (const axis of ctx.axes) {
     if (isBooleanAxis(axis)) continue;
@@ -2980,6 +3748,7 @@ function fitLiteralAxis(
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
     if (new Set(byValue.values()).size < 2) continue;
+    fenceSparseInference(ctx.axes, label, values);
     return { axis, byValue };
   }
   return null;
@@ -3024,7 +3793,7 @@ function liftUnboundShapePaintsToLiterals(
       part.literals = literals;
     } else {
       let axisFit: { propName: string; map: Record<string, Record<string, string>> } | null = null;
-      const fit = fitLiteralAxis(ctx, values);
+      const fit = fitLiteralAxis(ctx, values, `${cssProp}@${where}`);
       if (fit) {
         const map: Record<string, Record<string, string>> = {};
         for (const value of fit.axis.values) map[axisValue(fit.axis, value)] = { [cssProp]: fit.byValue.get(value)! };
@@ -3137,6 +3906,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
         return (o.node.hidden === true) === (v === 'false');
       });
       if (fits) {
+        fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
         part.visibleWhen = { prop: axis.propName };
         ctx.notes.push(
           `${where}: hidden exactly where "${axis.property}" is false — proposed as visibleWhen { prop: ${axis.propName} } (dump v1.1 hidden channel)`,
@@ -3152,6 +3922,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
       );
       const only = visibleValues.size === 1 ? [...visibleValues][0] : undefined;
       if (only !== undefined && !hiddenValues.has(only)) {
+        fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
         part.visibleWhen = { prop: axis.propName, equals: camel(only) };
         ctx.notes.push(
           `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${camel(only)} }`,
@@ -3308,6 +4079,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       }
       if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
       if (new Set([...byValue.values()].map((d) => `${d.width}×${d.height}`)).size < 2) continue;
+      fenceSparseInference(ctx.axes, `shape-size@${where}`, shapes.map((s) => ({ variant: s.variant, value: `${s.sh.width}×${s.sh.height}` })));
       const map: Record<string, { width: string; height: string }> = {};
       for (const value of axis.values) {
         const d = byValue.get(value)!;
@@ -3416,6 +4188,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       if (!seen) byValue.set(value, s);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `shape-placement@${where}`, shapes.map((s) => ({ variant: s.variant, value: specOf(s) })));
     const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
     let emitted = 0;
     let suppressed = 0;
@@ -4599,7 +5372,7 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
     );
     return;
   }
-  const fit = fitLiteralAxis(ctx, rows);
+  const fit = fitLiteralAxis(ctx, rows, `border-side-widths@${where}`);
   if (!fit) {
     ctx.notes.push(
       `${where}: per-side stroke weights are mixed across variants (${seen}; top, right, bottom, left) and are not a function of one enum axis — no ${channels} literals proposed; NAMED for review`,
@@ -4620,6 +5393,86 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
   ctx.notes.push(
     `${where}: per-side stroke weights vary with "${fit.axis.propName}" (${seen}; top, right, bottom, left — dump v1.34) — carried as ${channels} pixel literalsByProp, not token identities; ${zeroNote}`,
   );
+}
+/** dump v1.35 — DOES THE STROKE TAKE LAYOUT SPACE? Found by the design-led
+ *  consumer check on a designer's Badge: all 24 outline variants rendered 4px
+ *  wider than Figma drew them, and the 16px-high small one 20px high. A Figma
+ *  stroke on an auto-layout frame takes no layout space unless the frame says
+ *  `strokesIncludedInLayout`; the CSS `border` it lowers to always does.
+ *
+ *  The designer's numbers are KEPT. Rewriting padding to "padding minus
+ *  border" would destroy the padding's variable binding (and cannot fit a 16px
+ *  box around 8+8 padding plus a 2px border at all), so the stroke keeps riding
+ *  the border channels and the part records the one fact that differs —
+ *  `strokesIncludedInLayout: false` — for the code emitters to draw as an
+ *  inset ring (packages/core anatomy.ts lowerStrokeRings) and the writer to
+ *  set back on the frame.
+ *
+ *  Only `false` is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.34, or the mock
+ *     canvas), never `false` — those dumps propose the bytes they always did;
+ *   · `true` is what a frame THIS pipeline generated reads back as, and it is
+ *     what an absent flag already means — so a generated set proposes back to
+ *     exactly its own contract;
+ *   · a node drawn both ways across its variants has no single spelling (the
+ *     flag is per part, not per variant) and is NAMED; it keeps the border.
+ *  Occurrences that draw no stroke, or are not auto-layout frames, carry no
+ *  evidence either way and do not vote. settleStrokeLayout withdraws the flag
+ *  from a part whose stroke channels were all refused. */
+function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const captured = m.occ.filter((o) => o.node.stroke !== undefined && o.node.strokesIncludedInLayout !== undefined);
+  // @door propose.stroke-layout-absent-is-border
+  if (captured.length === 0) return; // not captured, or nothing drawn
+  const outside = captured.filter((o) => o.node.strokesIncludedInLayout === false);
+  if (outside.length === 0) return; // in layout everywhere — the border every contract already means
+  // @door propose.stroke-layout-mixed-refused
+  if (outside.length < captured.length) {
+    ctx.notes.push(
+      `${where}: the stroke takes layout space in ${captured.length - outside.length} of ${captured.length} stroked variants and none in the other ${outside.length} (strokesIncludedInLayout, dump v1.35) — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the stroke carries as a space-taking border; the ${outside.length} variants render wider/taller by their stroke weight per side (review)`,
+    );
+    return;
+  }
+  holder.strokesIncludedInLayout = false;
+  ctx.notes.push(
+    `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
+  );
+}
+/** A part that ended up carrying NO stroke channel (every one refused by
+ *  name upstream) has nothing for the flag to qualify, and validateContract
+ *  refuses a stray one — withdraw it, and say so. */
+function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ctx: Ctx): void {
+  const maps = (v: unknown): Array<Record<string, unknown>> =>
+    v === null || typeof v !== 'object' ? [] : Array.isArray(v) ? v.flatMap(maps) : [v as Record<string, unknown>, ...Object.values(v).flatMap(maps)];
+  const visit = (name: string, part: Record<string, unknown>): void => {
+    const { parts, ...own } = part;
+    // @door propose.stroke-layout-without-stroke-withdrawn
+    if (own.strokesIncludedInLayout === false && !maps(own).some((h) => Object.keys(h).some((c) => /^(border|outline)(-(top|right|bottom|left))?-(width|color)$/.test(c)))) {
+      delete part.strokesIncludedInLayout;
+      ctx.notes.push(
+        `${name}: strokesIncludedInLayout false was captured but no stroke channel survived on this part (each refusal is named above) — the flag qualifies a stroke and is WITHDRAWN with it`,
+      );
+    }
+    for (const [child, p] of Object.entries((parts as Record<string, Record<string, unknown>> | undefined) ?? {})) visit(child, p);
+  };
+  for (const [name, part] of Object.entries(anatomy)) visit(name, part);
+}
+/** dump v1.36: a flag the finished contract cannot honour — inherited or
+ *  unsubtractable tracking, an inline-level element, a sizing channel the
+ *  part picked up elsewhere — is WITHDRAWN by name rather than proposed into
+ *  a contract validateContract refuses (the settleStrokeLayout discipline;
+ *  one rule, anatomy.ts textBoxStaticRefusals). */
+function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void {
+  const c = contract as unknown as Contract;
+  for (const { name, part, path } of walkAnatomy(c)) {
+    if (part.textAutoResize === undefined) continue;
+    const reasons = textBoxStaticRefusals(c, part, path);
+    // @door propose.text-box-unhonourable-withdrawn
+    if (reasons.length === 0) continue;
+    delete (part as Record<string, unknown>).textAutoResize;
+    ctx.notes.push(
+      `${name}: textAutoResize WIDTH_AND_HEIGHT was captured but the part ${reasons.join('; and ')} — the whole-pixel box is WITHDRAWN and the text keeps the browser's fractional advance`,
+    );
+  }
 }
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
@@ -4694,6 +5547,71 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   holder.declared = declared;
   ctx.notes.push(
     `${where}: textAlignHorizontal ${drawn[0]} drawn in every variant (dump v1.31) — carried as declared text-align: ${value} (a canvas-drawable channel; the return leg writes textAlignHorizontal)`,
+  );
+}
+
+/** dump v1.36 — A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF
+ *  PIXELS WIDE. Found by the design-led consumer check on a designer's Badge:
+ *  26 of the 48 × 16 px `size=small` variants missed the 5 % limit at
+ *  4.4–7.3 % with every content size equal. Figma's auto-width text box
+ *  (`textAutoResize: WIDTH_AND_HEIGHT`) is the glyph advance rounded UP
+ *  (`Label`, Inter Semi Bold 14: 32 px) while the browser lays the same run
+ *  out at its fractional advance (31.40625 px), so the hug root rendered
+ *  47.40625 px wide against Figma's 48 and its right edge antialiased across
+ *  two columns.
+ *
+ *  The designer's numbers are KEPT. The part records the one captured fact,
+ *  under Figma's own name and only in the value that lowers —
+ *  `textAutoResize: 'WIDTH_AND_HEIGHT'` — for the code emitters to give the
+ *  text element the same box (`inline-size: calc-size(fit-content,
+ *  round(up, size, 1px))`, a progressive enhancement: a browser without
+ *  calc-size() keeps today's fractional box) and the writer to set back.
+ *
+ *  Only WIDTH_AND_HEIGHT is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.35, or a canvas that
+ *     reports nothing), never auto-width — those dumps propose the bytes they
+ *     always did;
+ *   · NONE / HEIGHT / TRUNCATE are a fixed or filled box; the width and fill
+ *     vocabulary already carries those, so nothing is written;
+ *   · a node auto-width in some variants and not in others — or reporting
+ *     nothing in some (REST may omit its default) — has no single spelling
+ *     (the fact is per part, not per variant) and is NAMED;
+ *   · a node that says WIDTH_AND_HEIGHT and FILL at once contradicts itself
+ *     (Figma turns a filled text box to HEIGHT) — the dump is NAMED, never
+ *     guessed at, and the part keeps the fill it would have had.
+ *  validateContract refuses the flag wherever it would be wrong or inert
+ *  (anatomy.ts textBoxStaticRefusals); settleTextAutoResize withdraws, by
+ *  name, a flag the finished contract could not honour. */
+function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  const captured = textOcc.filter((o) => o.node.text!.textAutoResize !== undefined);
+  // @door propose.text-box-absent-is-fractional
+  if (captured.length === 0) return; // not captured (dump ≤ v1.35) — the browser's own fractional box
+  const auto = captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length;
+  // @door propose.text-box-not-auto-width-unchanged
+  if (auto === 0) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  // A variant whose text reports NOTHING beside ones that report a value is
+  // not evidence of auto-width (REST may omit its default) — it counts as the
+  // mixed case, never as agreement (review, PR 132).
+  // @door propose.text-box-mixed-refused
+  if (auto < textOcc.length) {
+    const others = [...new Set(textOcc.filter((o) => o.node.text!.textAutoResize !== 'WIDTH_AND_HEIGHT').map((o) => o.node.text!.textAutoResize ?? 'not captured'))];
+    ctx.notes.push(
+      `${where}: the text box sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) in ${auto} of ${textOcc.length} variants and is ${others.join(' / ')} in the rest — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the text keeps the browser's fractional advance (up to 1px narrower than Figma's whole-pixel box; review)`,
+    );
+    return;
+  }
+  // @door propose.text-box-fill-contradiction-refused
+  const filled = captured.filter((o) => o.node.fillWidth === true);
+  if (filled.length > 0) {
+    ctx.notes.push(
+      `${where}: textAutoResize WIDTH_AND_HEIGHT is captured beside layoutSizingHorizontal FILL in ${filled.length} of ${captured.length} variants (dump v1.36) — a filled text box is not sized by its text, and the two facts contradict; REFUSED BY NAME, the text keeps the fill it carries and the browser's fractional advance (review the dump)`,
+    );
+    return;
+  }
+  holder.textAutoResize = 'WIDTH_AND_HEIGHT';
+  ctx.notes.push(
+    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's fit-content inline size up to the pixel where calc-size() is supported (a label that does not fit still wraps), and the writer sets the field back on the node`,
   );
 }
 
@@ -5204,6 +6122,7 @@ function carryPartialCrossAxisFill(
   const fit = fitLiteralAxis(
     ctx,
     m.occ.map((o) => ({ variant: o.variant, value: o.node[fillField] === true ? '100%' : NOT_FILLING })),
+    `${dim}-fill@${where}`,
   );
   // @door propose.cross-axis-fill-partial-refused
   if (!fit) {
@@ -5289,7 +6208,7 @@ function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes
     });
     const filling = rows.filter((r) => r.fills);
     if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
-    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })));
+    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })), `primary-axis-fill@${where}`);
     const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
     const correlation = fit
       ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
@@ -5962,6 +6881,7 @@ function crossAxisFillByPropOn(
       byValue.set(value, x.mode);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `${dim}-fill@${where}`, modes.map((x) => ({ variant: x.variant, value: x.mode })));
     const lbp =
       (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
     // The referee's channel+prop rule: a second claimant on the axis would
@@ -6244,6 +7164,7 @@ function invertLayoutByProp(
       byValue.set(value, t.tuple!);
     }
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    fenceSparseInference(ctx.axes, `layout@${where}`, tuples.map((t) => ({ variant: t.variant, value: key(t.tuple!) })));
     const map: Record<string, Record<string, string>> = {};
     for (const value of axis.values) {
       const t = byValue.get(value)!;
@@ -6272,6 +7193,7 @@ function invertLayoutByProp(
       byValue.set(value, t.tuple!);
     }
     if (!fits || byValue.size !== 2) continue;
+    fenceSparseInference(ctx.axes, `layout@${where}`, tuples.map((t) => ({ variant: t.variant, value: key(t.tuple!) })));
     // Which drawn value spells TRUE? isBoolAxis guarantees a literal
     // true/false pair; the variant-name spelling is the axis's own casing.
     const trueValue = [...byValue.keys()].find((v) => /^true$/i.test(v));
@@ -6336,6 +7258,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
       }
     }
     if (!pure || byValue.size <= 1) continue;
+    fenceSparseInference(ctx.axes, `text@${where}`, obs.map((o) => ({ variant: o.variant, value: o.chars })));
     // Base = the axis's first OBSERVED value (axis declaration order); the
     // other values ride textByProp as deviations.
     const observedValues = axis.values.filter((v) => byValue.has(v));
@@ -6375,6 +7298,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
         return is === present.has(v);
       });
       if (!matches) continue;
+      fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
       // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
       // `equals: "true"` would refuse at the referee (visibleWhen.equals is
       // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
@@ -6410,6 +7334,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
       (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
     );
     if (!matches) continue;
+    fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
     ctx.notes.push(
       `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
     );
@@ -6577,6 +7502,8 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
+    capture.instanceNames ??= [];
+    if (!capture.instanceNames.includes(o.node.name)) capture.instanceNames.push(o.node.name);
     if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
     if (o.node.bbox) {
       capture.observed.push({
@@ -6661,6 +7588,7 @@ function threadInstanceProps(
       }),
     );
     if (axis) {
+      fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
       base[propName] = `{${axis.propName}}`;
       ctx.notes.push(
         `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the "${axis.propName}" axis exactly across all ${values.length} occurrence(s) — threaded as "{${axis.propName}}" (the child follows the parent per variant)`,
@@ -6698,6 +7626,7 @@ function threadInstanceProps(
       break;
     }
     if (lookup) {
+      fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, values);
       base[propName] = { prop: lookup.axis.propName, map: lookup.map };
       ctx.notes.push(
         `${where}: applied prop "${propName}" of the nested "${instanceOf}" is a pure function of the "${lookup.axis.propName}" axis (${Object.entries(
@@ -6831,6 +7760,7 @@ function carryTextOverrides(
       else if (prev !== v.value) { pure = false; break; }
     }
     if (!pure || byValue.size <= 1) continue;
+    fenceSparseInference(ctx.axes, `text-override-${propName}@${where}`, values);
     const map: Record<string, string> = {};
     for (const value of axis.values) {
       const hit = byValue.get(value);
@@ -7728,6 +8658,7 @@ function buildPart(
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
+    carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     nameEffectProvenance(m, ctx, where); // dump v1.31
@@ -7841,6 +8772,7 @@ function buildPart(
     const slotDeclared: Record<string, string> = {};
     const slotTokens = invertNodeTokens(m, false, ctx, where, slotByProp, part, slotDeclared);
     carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+    carryStrokeLayout(m, part, ctx, where); // dump v1.35
     if (Object.keys(slotDeclared).length > 0) {
       part.declared = { ...(part.declared as Record<string, string> | undefined), ...slotDeclared };
     }
@@ -8311,6 +9243,7 @@ function buildPart(
   const partDeclared: Record<string, string> = {};
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
   carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
+  carryStrokeLayout(m, part, ctx, where); // dump v1.35
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
@@ -10460,7 +11393,23 @@ function stripNonScalarAppliedProps(set: DumpSet, receipts: string[]): DumpSet {
   return clone;
 }
 
+/** Design → contract for ONE set. The sparse-matrix inference fence is
+ *  module state armed inside the proposal; this door saves and restores it so
+ *  one set's undrawn combinations can never fence another's inferences. */
 export function proposeFromDump(
+  set: DumpSet,
+  opts: Parameters<typeof proposeFromDumpFenced>[1],
+): FigmaProposalResult {
+  const outer = sparseFence;
+  sparseFence = null;
+  try {
+    return proposeFromDumpFenced(set, opts);
+  } finally {
+    sparseFence = outer;
+  }
+}
+
+function proposeFromDumpFenced(
   set: DumpSet,
   opts: {
     corpus: TokenCorpus;
@@ -10531,6 +11480,12 @@ export function proposeFromDump(
      *  reviewable mode preserves legacy name-based inversion while still
      *  refusing any structured evidence that is invalid or ragged. */
     projectionMode?: 'exact' | 'reviewable-inversion';
+    /** The reader could have seen a `ds_contracts/*` stamp on this set
+     *  (dumpStampsObservable over the dump's `_provenance`). Default FALSE —
+     *  fail closed: only then may an unstamped strict-subset set declare its
+     *  undrawn combinations by what it draws. proposeBatchFromDump derives it
+     *  from the dump it is handed unless the caller says otherwise. */
+    stampsObservable?: boolean;
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
@@ -10547,13 +11502,113 @@ export function proposeFromDump(
   const typedAxes = readCodeValueAxes(set);
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
-  const sourceProjection = validateExactVariantProjection(set);
+  /** The verdict on the set AS DRAWN, against the full Cartesian. */
+  const cartesianProjection = validateExactVariantProjection(set);
+  // DECLARED ABSENT VARIANTS (bindings.figma.absentVariants). A designer's set
+  // whose rows are a STRICT SUBSET of the product — every row valid, none
+  // duplicated, none outside the product — is not refused for being ragged:
+  // the undrawn combinations are read once, WRITTEN INTO THE PROPOSED CONTRACT
+  // as its declaration, and the matrix is then held to the product minus that
+  // list exactly, source and returned rows both. The validator itself never
+  // infers a declaration (a ragged source handed to it without one refuses as
+  // before); an extra, invalid or duplicate row, a set that declares a
+  // state-preview matrix, and a promoted mode / interaction-state axis all
+  // keep the EXACT_MATRIX_RAGGED refusal. What changes is only that the
+  // absence becomes a reviewable line of the contract instead of a wall.
+  //
+  // WHO MAY DECLARE. A DESIGNER's set (no `ds_contracts/*` stamp) declares by
+  // what it draws. A set THIS PIPELINE drew does not: its declaration is the
+  // stamped contract's own `bindings.figma.absentVariants`, read from the
+  // contract in scope and held to the canvas exactly — so a generated set that
+  // LOST a variant (or whose contract is not in scope) still refuses ragged,
+  // as it always did, instead of laundering canvas damage into a declaration.
+  const pipelineDrew = Boolean(
+    (set as { propNames?: unknown }).propNames ||
+      (set as { semantics?: unknown }).semantics ||
+      (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
+      readStampedContractId(set),
+  );
+  //
+  // A PIPELINE-DRAWN set reads its scoped declaration ALWAYS — not only after
+  // the Cartesian check refuses. A canvas that draws the FULL product while
+  // its contract declares an absence is the amend state (a set written before
+  // the declaration: the writer never deletes a variant), and a full product
+  // passes the Cartesian check; consulting the declaration only on a ragged
+  // source read that state back `verified-exact` and dropped the declaration
+  // without a word. Held to the product minus the declaration, the drawn cell
+  // the contract calls absent IS an extra row and refuses by name.
+  //
+  // An UNSTAMPED set may declare by its rows only when the reader could have
+  // SEEN a stamp (dumpStampsObservable) — otherwise "unstamped" is not
+  // evidence of a designer, and the ragged refusal stands, with the reason.
+  const ragged =
+    cartesianProjection.status === 'refused' && cartesianProjection.code === 'EXACT_MATRIX_RAGGED';
+  const stampsObservable = opts.stampsObservable === true;
+  const absentVariants = pipelineDrew
+    ? scopedAbsentVariants(set, opts.contractsById)
+    : ragged && stampsObservable
+      ? deriveAbsentVariants(set)
+      : null;
+  // MEANING BOUNDS on declaring by rows (docs/23 §D.40), read from the ragged
+  // refusal's own counts BEFORE any product is materialised. A declaration
+  // says "this set is the product of its axes, minus a few cells": above the
+  // referee's product cap, or when MORE cells are undrawn than drawn (a "star"
+  // set — the default plus each axis varied alone — is not a product with
+  // holes; 7 axes × 5 proposed 78,096 tuples), the axes are not a description
+  // of the set and the ragged refusal stands, with the reason.
+  if (ragged && !pipelineDrew) {
+    const counts = cartesianProjection.refusals[0];
+    const product = counts?.expected ?? 0;
+    const drawn = counts?.actual ?? 0;
+    const why =
+      product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT
+        ? `sparse-matrix-product-too-large: the variant axes multiply to ${product} combinations, above the ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} a declaration of complete tuples may range over`
+        : product - drawn > drawn
+          ? `sparse-matrix-mostly-undrawn: ${drawn} of ${product} combinations are drawn and ${product - drawn} are not — more undrawn than drawn, so the product of these axes does not describe the set; nothing is declared`
+          : null;
+    if (why !== null) {
+      throw new ExactProjectionError('EXACT_MATRIX_RAGGED', `${counts?.message ?? ''} ${why}`.trim(), cartesianProjection);
+    }
+  }
+  if (ragged && !pipelineDrew && !stampsObservable && deriveAbsentVariants(set) !== null) {
+    throw new ExactProjectionError(
+      'EXACT_MATRIX_RAGGED',
+      cartesianProjection.refusals[0]?.message ?? 'Source matrix is ragged.',
+      cartesianProjection,
+      `stamps-not-observable: the rows are a strict subset of the variant product, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn set and nothing is declared from its rows. Re-read through the plugin dump or extract/figma/rest/fetch.ts.`,
+    );
+  }
+  const sourceProjection =
+    absentVariants === null
+      ? cartesianProjection
+      : validateExactVariantProjection(set, undefined, { absentVariants });
+  if (absentVariants !== null) sparseFence = { absent: absentVariants, ambiguous: new Map() };
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
    *  only trusted where it agrees with the axes — see
    *  core/exact-projection.ts. It is what makes promoting the State axis an
    *  inversion of a declared rule instead of a guess about someone's API. */
   const declaredSparseAxis = readDeclaredStatePreviewAxis(set);
+  // A DESIGNER-EDITED pipeline set (§D.41, review PR 131 M3): the stamp is
+  // plugin data and does not follow an edit, so a Pressed plane added to — or a
+  // Hover renamed on — a set this pipeline drew leaves a STALE statePreviewAxis
+  // behind. It used to surface as EXACT_TUPLE_INVALID_VALUE from the matrix
+  // check below; it is the named case: not a designer's set (it is stamped),
+  // and no longer the preview axis this pipeline declared.
+  if (declaredSparseAxis !== null) {
+    const drawn = [...new Set(set.variants.map((v) => axisValuesOf(v.name)[declaredSparseAxis.axis]).filter((v): v is string => v !== undefined))];
+    const declaredValues = [declaredSparseAxis.default, ...declaredSparseAxis.states];
+    const added = drawn.filter((v) => !declaredValues.includes(v));
+    const gone = declaredValues.filter((v) => !drawn.includes(v));
+    if (added.length > 0 || gone.length > 0) {
+      semanticProjectionRefusal(
+        cartesianProjection,
+        { property: declaredSparseAxis.axis, propName: declaredSparseAxis.axis, values: drawn } as Axis,
+        'interaction-state',
+        `state-axis-pipeline-drawn-undeclared: the set carries this pipeline's stamp and declares its "${declaredSparseAxis.axis}" preview axis as ${declaredValues.join('|')}, but it now draws ${drawn.join('|')}${added.length ? ` (added: ${added.join(', ')})` : ''}${gone.length ? ` (gone: ${gone.join(', ')})` : ''} — a pipeline-written set edited by hand. It is not a designer's set (it is stamped) and no longer the axis this pipeline declared, so it is read as neither. Re-sync it from its contract, or detach it (remove the ds_contracts stamps) and read it as a designer's.`,
+      );
+    }
+  }
   // Exact mode fails closed on unstructured/ragged variant matrices.
   // Reviewable-inversion may continue without structured definitions
   // (legacy name-based path) — but MUST still refuse when structured
@@ -10607,6 +11662,10 @@ export function proposeFromDump(
   if (projectionMode === 'exact' && modePromo) {
     semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
   }
+  // A promoted axis leaves the API, so an undrawn combination that names one
+  // of its values has no spelling in the declaration — the ragged refusal
+  // stands (reviewable inversion included).
+  if (absentVariants !== null && modePromo) assertExactProjection(cartesianProjection, 'source-matrix-verified');
   let sourceVariants = set.variants;
   if (modePromo) {
     sourceVariants = set.variants
@@ -10625,7 +11684,69 @@ export function proposeFromDump(
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property)), preNotes);
+  const stateCandidateAxes = applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property));
+  // WHOSE AXIS IS IT (docs/23 §D.41). A DESIGNER's set — no ds_contracts stamp
+  // AND a reader that could have seen one (§D.40) — is read by the closed table
+  // in core/interaction-state-axis.ts, and ONLY by it: the axis must be NAMED
+  // state / states / interaction, every value must be in the table, `active`
+  // needs hover or pressed beside it, and exactly one axis may qualify.
+  // Anything else keeps the axis as the designer's own enum prop (named), or —
+  // when the axis IS interaction state and has no single answer — refuses.
+  // Every other set takes the legacy detector, exactly as before.
+  const designerReadable = !pipelineDrew && stampsObservable;
+  let designerReading: StateAxisProjection | null = null;
+  let statePromo: StatePromotion | null;
+  if (designerReadable) {
+    const readable = stateCandidateAxes.filter((a) => !isBooleanAxis(a));
+    const reading = readStateAxes(readable);
+    if (reading.kind === 'projected') {
+      designerReading = reading.projection;
+      const axis = readable.find((a) => a.property === reading.projection.property)!;
+      statePromo = {
+        axis,
+        defaultValue: reading.projection.restValue,
+        promoted: reading.projection.values
+          .filter((v) => v.state !== 'default' && v.state !== 'disabled')
+          .map((v) => ({ value: v.value, state: v.state as PromotedState })),
+        ...(reading.projection.values.some((v) => v.state === 'disabled')
+          ? { disabledValue: reading.projection.values.find((v) => v.state === 'disabled')!.value }
+          : {}),
+      };
+    } else if (reading.kind === 'refused' && !STATE_AXIS_KEPT_AS_ENUM.has(reading.reason)) {
+      // The axis IS interaction state and the table has no single answer.
+      if (projectionMode === 'exact') {
+        const culprit =
+          readable.find((a) => {
+            const r = readStateAxis(a.property, a.values);
+            return r.kind === 'projected' || (r.kind === 'refused' && !STATE_AXIS_KEPT_AS_ENUM.has(r.reason));
+          }) ?? readable[0]!;
+        semanticProjectionRefusal(sourceProjection, culprit, 'interaction-state', `${reading.reason}: ${reading.detail}.`);
+      }
+      statePromo = detectStateAxis(stateCandidateAxes, preNotes); // reviewable: what it always did, named
+    } else {
+      // Kept as the designer's own enum prop(s). The legacy detector still
+      // writes its near-miss notes (a named axis with a value outside the
+      // table); its verdict is NOT taken — an unnamed axis or a lone `active`
+      // it would have promoted stays API here, and says so.
+      detectStateAxis(stateCandidateAxes, preNotes);
+      for (const kept of keptAsEnumStateAxes(readable)) {
+        if (kept.reason === 'state-axis-unnamed' || kept.reason === 'state-axis-value-ambiguous') {
+          preNotes.push(`${kept.reason}: ${kept.detail} — kept as the designer's own enum prop (docs/23 §D.41), review`);
+        }
+      }
+      statePromo = null;
+    }
+  } else {
+    statePromo = detectStateAxis(stateCandidateAxes, preNotes);
+  }
+  /** Set when the promoted axis is a DESIGNER's, projected by the closed table
+   *  (docs/23 §D.41) — never for an axis this pipeline drew and declared. */
+  let designerStateAxis: DesignerStateAxisProjection | null = null;
+  /** The undrawn combinations the CONTRACT declares. Equal to the source's
+   *  own list unless a designer's state axis was projected: then only the
+   *  REST-state plane's undrawn cells are contract absences (spelled over the
+   *  remaining axes — the state axis is not a prop and has no spelling there). */
+  let contractAbsentVariants: Array<Record<string, string>> | null = absentVariants;
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
@@ -10647,8 +11768,29 @@ export function proposeFromDump(
       // An absent, malformed, or disagreeing marker leaves the refusal armed.
       const declaredThisAxis =
         declaredSparseAxis !== null && declaredSparseAxis.axis === promo.axis.property;
-      if (projectionMode === 'exact' && !declaredThisAxis) {
-        semanticProjectionRefusal(sourceProjection, promo.axis, 'interaction-state');
+      if (!declaredThisAxis && designerReading !== null) {
+        designerStateAxis = {
+          decision: 'designer-state-axis-projected',
+          property: designerReading.property,
+          restValue: designerReading.restValue,
+          values: designerReading.values.map((v) => ({ ...v, carried: v.state === 'default' })),
+          undrawnStateCells: [],
+          writeBack: { draws: 0, completes: [], omits: [] },
+        };
+      } else if (!declaredThisAxis && projectionMode === 'exact') {
+        // What made this a refusal was never the table — it was not knowing
+        // WHOSE axis it is: a preview axis this pipeline drew reads the same on
+        // the canvas (and its State=Disabled is a preview cell, not a
+        // `disabled` boolean). Without the designer fact the refusal stands and
+        // says which half is missing.
+        semanticProjectionRefusal(
+          sourceProjection,
+          promo.axis,
+          'interaction-state',
+          pipelineDrew
+            ? `state-axis-pipeline-drawn-undeclared: the set carries a ds_contracts stamp, so it is not a designer's — and it declares no statePreviewAxis for "${promo.axis.property}", so this axis is not a preview this pipeline can read back either.`
+            : `state-axis-stamps-not-observable: every value of "${promo.axis.property}" is an interaction state, but this dump's reader did not establish that ds_contracts stamps were observable, so "unstamped" is not evidence of a designer-drawn axis (a preview axis this pipeline drew reads the same). Re-read through the plugin dump or extract/figma/rest/fetch.ts.`,
+        );
       }
       const strip = (v: DumpNode): DumpNode => ({
         ...(JSON.parse(JSON.stringify(v)) as DumpNode),
@@ -10679,6 +11821,62 @@ export function proposeFromDump(
     }
   }
 
+  // SPARSE + a promoted state axis. An axis THIS PIPELINE declared (or one
+  // promoted without the designer fact) keeps the ragged refusal: an undrawn
+  // cell naming a promoted value has no spelling in the declaration. A
+  // DESIGNER's projected axis partitions the undrawn cells instead (§D.41):
+  //   · undrawn in the REST plane → a contract absence over the REMAINING axes
+  //     (`bindings.figma.absentVariants`, the vocabulary unchanged). Every
+  //     state plane must leave that cell undrawn too — a state drawn where its
+  //     rest cell is not has nothing to be read against, and refuses by name;
+  //   · undrawn ONLY in a non-rest plane → no prop combination is missing, so
+  //     nothing is declared on the contract; the cells ride the decision and a
+  //     note (the code surfaces render that state there by composition).
+  // The fence is armed with EVERY undrawn cell, spelled over the remaining
+  // axes (the state planes are read under state-stripped names): a plane that
+  // draws a cell fits it identically under every explanation, so a cell
+  // another plane lacks can never refuse it — and a plane with a hole is held
+  // to the same uniqueness rule as any sparse set.
+  if (absentVariants !== null && statePromo && designerStateAxis === null) {
+    assertExactProjection(cartesianProjection, 'source-matrix-verified');
+  } else if (absentVariants !== null && statePromo && designerStateAxis !== null) {
+    const d: DesignerStateAxisProjection = designerStateAxis;
+    const stripState = (t: Readonly<Record<string, string>>): Record<string, string> =>
+      Object.fromEntries(Object.entries(t).filter(([k]) => k !== d.property));
+    const keyOf = (t: Readonly<Record<string, string>>) =>
+      JSON.stringify(Object.entries(stripState(t)).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+    const restAbsent = absentVariants.filter((t) => t[d.property] === d.restValue);
+    const restAbsentKeys = new Set(restAbsent.map(keyOf));
+    const drawnKeysByValue = new Map<string, Set<string>>();
+    for (const v of set.variants) {
+      const at = axisValuesOf(v.name);
+      const value = at[d.property];
+      if (value === undefined) continue;
+      let keys = drawnKeysByValue.get(value);
+      if (!keys) drawnKeysByValue.set(value, (keys = new Set()));
+      keys.add(keyOf(at));
+    }
+    const orphans: string[] = [];
+    for (const v of d.values) {
+      if (v.value === d.restValue) continue;
+      for (const key of drawnKeysByValue.get(v.value) ?? []) {
+        if (restAbsentKeys.has(key)) orphans.push(`${d.property}=${v.value} at ${(JSON.parse(key) as Array<[string, string]>).map(([k, x]) => `${k}=${x}`).join(', ')}`);
+      }
+    }
+    if (orphans.length > 0) {
+      semanticProjectionRefusal(
+        sourceProjection,
+        statePromo.axis,
+        'interaction-state',
+        `state-axis-orphan-state-cell: ${orphans.length} state variant(s) are drawn where the rest state ("${d.property}=${d.restValue}") is not (${orphans.slice(0, 4).join('; ')}${orphans.length > 4 ? `; … ${orphans.length - 4} more` : ''}) — a state is read AGAINST its rest-state variant, and there is none. Draw the rest-state variant, or remove the state variant.`,
+      );
+    }
+    d.undrawnStateCells = absentVariants.filter((t) => t[d.property] !== d.restValue && !restAbsentKeys.has(keyOf(t))).map((t) => ({ ...t }));
+    contractAbsentVariants = restAbsent.length > 0 ? restAbsent.map(stripState) : null;
+    const fenceCells = new Map<string, Record<string, string>>();
+    for (const t of absentVariants) if (!fenceCells.has(keyOf(t))) fenceCells.set(keyOf(t), stripState(t));
+    sparseFence = { absent: [...fenceCells.values()], ambiguous: new Map() };
+  }
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
   for (const mapped of typedAxes) {
@@ -10716,17 +11914,37 @@ export function proposeFromDump(
   }
   const baseSelfId = stampedContractId ?? `${prefix}.${componentIdSlug(set.setName)}`;
   let selfId = baseSelfId;
+  let idSuffixedFrom: string | undefined;
   const ownKey = set.key ?? null;
-  if (opts.sessionClaimedIds && ownKey !== null) {
+  // A previously allocated id belongs to the drawn component, not its label.
+  // Preserve suffixes even when the original collision was removed or renamed.
+  // Consult real anchor evidence, not a name index or an unverified key index.
+  if (!stampedContractId && opts.sessionClaimedIds) {
+    const matches = [...opts.sessionClaimedIds].filter(id => {
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      if (!anchor || (opts.fileKey && anchor.fileKey && opts.fileKey !== anchor.fileKey)) return false;
+      return ownKey !== null ? anchor.componentSetKey === ownKey
+        : !!opts.fileKey && !!set.nodeId && anchor.fileKey === opts.fileKey && anchor.nodeId === set.nodeId;
+    });
+    if (matches.length > 1) throw Error('FIGMA_IMPORT_IDENTITY_AMBIGUOUS: several session contracts claim the same drawn component');
+    if (matches.length === 1) {
+      selfId = matches[0];
+      if (selfId !== baseSelfId) preNotes.push(`contract id: retained "${selfId}" for the same anchored Figma component; its drawn name does not replace an existing identity`);
+    }
+  }
+  if (opts.sessionClaimedIds && (ownKey !== null || (opts.fileKey && set.nodeId))) {
     const contradicts = (id: string): boolean => {
       if (!opts.sessionClaimedIds!.has(id)) return false;
-      const holderKey = opts.contractsById?.get(id)?.bindings?.figma?.anchors?.componentSetKey ?? null;
-      return holderKey !== null && holderKey !== ownKey;
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      const holderKey = anchor?.componentSetKey ?? null;
+      return (holderKey !== null && ownKey !== null && holderKey !== ownKey) || !!(opts.fileKey && anchor?.fileKey && (opts.fileKey !== anchor.fileKey || (ownKey === null && set.nodeId && anchor.nodeId && set.nodeId !== anchor.nodeId)));
     };
+    const allocated = selfId;
     for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
-    if (selfId !== baseSelfId) {
+    if (selfId !== allocated) {
+      idSuffixedFrom = baseSelfId;
       preNotes.push(
-        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (its componentSetKey contradicts this set's key ${ownKey}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
+        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (${ownKey !== null && opts.contractsById?.get(baseSelfId)?.bindings?.figma?.anchors?.componentSetKey !== ownKey ? `its componentSetKey contradicts this set's key ${ownKey}` : 'its file/node anchor contradicts this set'}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
       );
     }
   }
@@ -10875,6 +12093,7 @@ export function proposeFromDump(
   const rootDeclared: Record<string, string> = {};
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp, undefined, rootDeclared);
   carryPerSideStrokeWeights(merged, root, ctx, where); // dump v1.34
+  carryStrokeLayout(merged, root, ctx, where); // dump v1.35
   if (Object.keys(rootDeclared).length > 0) {
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }
@@ -10949,6 +12168,17 @@ export function proposeFromDump(
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
+    // the text element's own box; the root's box is padding plus content and
+    // already hugs through its own vocabulary, so a root-level flag would
+    // have to round padding + advance instead of the advance — a different
+    // number whenever the padding is fractional. NAMED, never applied.
+    // @door propose.text-box-hoisted-root-named
+    if (only.occ.some((o) => o.node.text?.textAutoResize === 'WIDTH_AND_HEIGHT')) {
+      ctx.notes.push(
+        `${where}/label: the sole root text node sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) but is hoisted into anatomy.root.text, and the whole-pixel text-box fact qualifies a text PART's own element — the root's box is padding plus content; NAMED, not carried, the label keeps the browser's fractional advance (up to 1px narrower than Figma's box)`,
+      );
+    }
 
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
@@ -11072,7 +12302,36 @@ export function proposeFromDump(
         ctx.notes.push(
           `prop \`disabled\`: not invented from axis value "${statePromo.axis.property}=${statePromo.disabledValue}" — the set's statePreviewAxis already declares Disabled as a preview cell; the disabled STATE block still carries (FC-DUMP-PROPOSE-DISABLED-INVENTED)`,
         );
+      } else if (designerStateAxis !== null && disabledSpellings(ctx).length > 0) {
+        // §D.41 / PR 131 H1 — ANY prop that already spells "disabled" collides,
+        // VARIANT or BOOLEAN, whatever its case or `is` prefix: a VARIANT axis
+        // `Disabled[False|True]` beside State=Disabled proposed TWO props named
+        // `disabled` (emitReact threw on a `verified-exact` contract), and
+        // `isDisabled` / "Is Disabled" two booleans for one fact.
+        const spellings = disabledSpellings(ctx);
+        if (projectionMode === 'exact') {
+          semanticProjectionRefusal(
+            sourceProjection,
+            statePromo.axis,
+            'interaction-state',
+            `state-axis-disabled-prop-collision: "${statePromo.axis.property}=${statePromo.disabledValue}" projects to the \`disabled\` boolean, but the set already carries a \`disabled\` boolean property (${spellings.join(', ')}) — two spellings of one fact, and which one the prop follows is not drawn.`,
+          );
+        }
+        ctx.notes.push(
+          `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but the set already spells disabled (${spellings.join(', ')}) — not re-promoted, review (state-axis-disabled-prop-collision)`,
+        );
       } else if (ctx.boolProps.some((b) => b.name === 'disabled')) {
+        if (projectionMode === 'exact' && designerStateAxis !== null) {
+          // Exact never picks: the set already has a `disabled` boolean AND
+          // draws a Disabled value on the state axis — two spellings of one fact, and which
+          // one the code prop follows is not drawn.
+          semanticProjectionRefusal(
+            sourceProjection,
+            statePromo.axis,
+            'interaction-state',
+            `state-axis-disabled-prop-collision: "${statePromo.axis.property}=${statePromo.disabledValue}" projects to the \`disabled\` boolean, but the set already carries a \`disabled\` boolean property — two spellings of one fact, and which one the prop follows is not drawn.`,
+          );
+        }
         ctx.notes.push(
           `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but a \`disabled\` boolean already exists — not re-promoted, review`,
         );
@@ -11501,6 +12760,16 @@ export function proposeFromDump(
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];
+      // The mint classifier takes the FIRST axis / pair / triple that fits
+      // (mint-tokens `classify`). A carried binding is an accepted inference,
+      // so it goes through the sparse-matrix fence like every other one.
+      if (binding.ref) {
+        fenceSparseInference(
+          ctx.axes,
+          `${obs.cssProperty}@${obs.nodePath}`,
+          obs.occurrences.map((o) => ({ variant: o.variant, value: o.value })),
+        );
+      }
       if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
       else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
       // A carried-but-unwitnessed pair is BOUND, so it takes the ref above —
@@ -11648,6 +12917,22 @@ export function proposeFromDump(
         Object.keys(stateByProp[s] ?? {}).length > 0 ||
         partPresent.has(s),
     );
+    if (designerStateAxis !== null) {
+      // §D.41 — the NAMED DECISION, spelled once, first among this set's notes.
+      for (const v of designerStateAxis.values) if (present.includes(v.state)) v.carried = true;
+      const spelled = designerStateAxis.values
+        .map((v) =>
+          v.state === 'default'
+            ? `${v.value}→rest (the base every state is read against)`
+            : v.state === 'disabled'
+              ? `${v.value}→the \`disabled\` boolean prop${v.carried ? ' + the disabled state block' : ' (its state block NOT carried: no override recoverable, named below)'}`
+              : `${v.value}→${v.state}${v.carried ? '' : ' (NOT carried: no override recoverable, named below)'}`,
+        )
+        .join(', ');
+      ctx.notes.unshift(
+        `state-axis-projected (DECISION designer-state-axis-projected, docs/23 §D.41): variant axis "${designerStateAxis.property}" (${designerStateAxis.values.map((v) => v.value).join('|')}) is a DESIGNER's drawing of the platform's interaction states — every value is in the closed table (core/interaction-state-axis.ts), the set carries no ds_contracts stamp and its reader could have seen one. It is projected, not refused: ${spelled}. The axis is NOT a prop; the exact projection holds the source matrix to the contract's own variant axes × these ${designerStateAxis.values.length} values (minus any undrawn cells named on this proposal), exactly. A hand-authored enum prop is the way to keep the axis as API instead`,
+      );
+    }
     for (const s of declared) {
       if (!present.includes(s)) {
         ctx.notes.push(
@@ -11730,7 +13015,14 @@ export function proposeFromDump(
       const statePropertyTaken = props.some(
         (p) => (p.bindings as { figma?: { property?: string } }).figma?.property === STATE_PREVIEW_PROPERTY,
       );
-      if (substProps.size <= 1 && !statePropertyTaken) {
+      if (contractAbsentVariants !== null) {
+        // validateContract refuses the pair by name (absent-variants-with-
+        // state-previews, §D.40): a preview row is pinned to base cells and
+        // an absent base cell would leave "is its preview drawn?" undefined.
+        ctx.notes.push(
+          `bindings.figma.statePreviews NOT set: the contract declares bindings.figma.absentVariants (rest-state combinations the designer did not draw), and the two are not composed (absent-variants-with-state-previews) — regenerating the canvas draws the rest-state grid only; the states still carry to the code surfaces`,
+        );
+      } else if (substProps.size <= 1 && !statePropertyTaken) {
         // Spelled BEFORE anchors — the schema's (and the codemod's) key order.
         const cb = contract.bindings as { figma: Record<string, unknown> };
         cb.figma = { statePreviews: true, ...cb.figma };
@@ -11757,6 +13049,7 @@ export function proposeFromDump(
   const childStubs: Array<Record<string, unknown>> = [];
   for (const capture of ctx.stubs.values()) {
     const built = buildChildStub(capture, ctx, opts.fileKey ?? null);
+    stubObservedNames.set(built.contract, [...new Set([capture.instanceOf, ...(capture.instanceNames ?? [])])].sort());
     childStubs.push(built.contract);
     if (built.geometry) {
       if (!mintedTokens) mintedTokens = { tree: {}, count: 0, entries: [] };
@@ -11771,11 +13064,66 @@ export function proposeFromDump(
     }
   }
 
+  settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
+  settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); // dump v1.36
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
-  ContractSchema.parse(contract);
-  for (const stub of childStubs) ContractSchema.parse(stub);
+  if (absentVariants !== null && designerStateAxis !== null) {
+    // §D.41 — the sparse set with a projected state axis: same refusal before
+    // anything is written, then only the REST-plane absences are declared.
+    if (sparseFence !== null && sparseFence.ambiguous.size > 0) {
+      throw new SparseMatrixInferenceError(set.setName, sparseFence.ambiguous);
+    }
+    const spell = (t: Readonly<Record<string, string>>) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', ');
+    if (contractAbsentVariants !== null) declareAbsentVariants(contract, contractAbsentVariants, cartesianProjection);
+    ctx.notes.unshift(
+      `bindings.figma.absentVariants + a projected state axis: the set draws ${set.variants.length} of the ${set.variants.length + absentVariants.length} combinations of its variant axes. ${
+        contractAbsentVariants !== null
+          ? `${contractAbsentVariants.length} combination(s) of the REMAINING axes are undrawn in the rest state ("${designerStateAxis.property}=${designerStateAxis.restValue}") and in every other state — DECLARED on the contract (${contractAbsentVariants.map(spell).join(' | ')}), over the remaining axes because the state axis is not a prop`
+          : `Every combination of the REMAINING axes is drawn in the rest state ("${designerStateAxis.property}=${designerStateAxis.restValue}"), so the contract declares NO absent variant`
+      }. ${
+        designerStateAxis.undrawnStateCells.length > 0
+          ? `state-axis-undrawn-state-cells: ${designerStateAxis.undrawnStateCells.length} combination(s) are undrawn ONLY in a non-rest state (${designerStateAxis.undrawnStateCells.map(spell).join(' | ')}) — no prop combination is missing, so nothing is declared for them; they ride this proposal's stateAxisProjection. `
+          : ''
+      }undrawn-combination-rendered-by-composition: the code surfaces render ANY prop combination in ANY state by composing the per-axis and per-state rules read from the drawn variants — at an undrawn combination that rendering is a composition nobody drew, never a measured one`,
+    );
+  } else if (absentVariants !== null) {
+    // Refuse BEFORE the declaration is written: an ambiguous inference means
+    // the contract's bindings are a guess, however exact its matrix is.
+    if (sparseFence !== null && sparseFence.ambiguous.size > 0) {
+      throw new SparseMatrixInferenceError(set.setName, sparseFence.ambiguous);
+    }
+    declareAbsentVariants(contract, absentVariants, cartesianProjection);
+    ctx.notes.unshift(
+      `bindings.figma.absentVariants: the set draws ${set.variants.length} of the ${set.variants.length + absentVariants.length} combinations of its variant axes — the ${absentVariants.length} undrawn one(s) are DECLARED on the contract (${absentVariants
+        .map((t) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', '))
+        .join(' | ')}), so the Figma writer emits no variant for them and the exact projection expects the product minus this list, exactly. undrawn-combination-rendered-by-composition: the code surfaces render ANY prop combination by composing the per-axis rules read from the drawn variants — at an undrawn combination that rendering is a composition nobody drew, never a measured one`,
+    );
+  }
+  const parsedContract = ContractSchema.parse(contract);
+  const parsedStubs = childStubs.map((stub) => ContractSchema.parse(stub));
+  // §D.41 / PR 131 M1 — a rest-plane hole and a states plane do not share a
+  // canvas: `absentVariants` is not composed with state previews (§D.40), so
+  // the writer draws the rest grid only and THIS read-back sees no State axis.
+  // `verified-exact` is true of the canvas it read — and says nothing about
+  // the states, which live in the contract in scope. Said here, every time.
+  if (pipelineDrew && !statePromo) {
+    const authoredId = readStampedContractId(set);
+    const authored = authoredId === null ? undefined : (opts.contractsById?.get(authoredId) as unknown as Contract | undefined);
+    const authoredStates = Array.isArray(authored?.states) ? authored.states : [];
+    if (authored && authoredStates.length > 0 && Array.isArray(authored.bindings?.figma?.absentVariants) && authored.bindings.figma.absentVariants.length > 0) {
+      ctx.notes.unshift(
+        `states-not-drawn-on-this-canvas: the stamped contract "${authored.id}" declares states [${authoredStates.join(', ')}] AND bindings.figma.absentVariants — the two are not composed (absent-variants-with-state-previews), so the writer drew the rest-state grid only and this read-back recovers NO state (states: []). The projection status is about the ${set.variants.length} variant(s) on the canvas; the states are carried by the contract in scope, not by this proposal — do not replace that contract with this one (extract/figma/roundtrip.ts lists them as code-side facts absent from the canvas)`,
+      );
+    }
+  }
+  // How the element was decided — read by the batch's interactive-content
+  // post-pass (settleInteractiveContent), never serialized.
+  semanticsOriginOf.set(contract, {
+    origin: stampNote ? 'declared' : inferred ? (inferred !== inferredRaw ? 'reroot' : inferred.structural ? 'structural' : 'name') : 'default',
+    note: stampNote ?? inferred?.note ?? null,
+  });
   if (stampNote) {
     ctx.notes.unshift(stampNote);
   } else if (inferred) {
@@ -11796,16 +13144,109 @@ export function proposeFromDump(
   // proposed rows still match; semantic promotions that change the tuple
   // set fall back to an explicit legacy receipt rather than emitting the
   // internal source-matrix-verified status (which receive rejects).
+  if (designerStateAxis !== null) {
+    // §D.41 / PR 131 H3 — what the WRITER would draw from this contract, by the
+    // writer's own rule (core/emit-figma-script.ts: statePreviews on → the base
+    // grid at State=Default + one row per contract state per PRIMARY-axis
+    // value, the primary being the one enum the state overrides substitute or
+    // else the first axis, every other axis pinned to its first option; off →
+    // the base grid only), translated into the designer's spelling and held
+    // against what the designer drew. Named on the decision AND in a note.
+    const d = designerStateAxis;
+    const typed = parsedContract;
+    const variantAxes = typed.props.filter((p) => p.bindings.figma.kind === 'VARIANT');
+    const firstLabel = (p: (typeof variantAxes)[number]): string => {
+      const fig = p.bindings.figma as { unsetValue?: string; values?: Record<string, string> };
+      return fig.unsetValue ?? Object.values(fig.values ?? {})[0] ?? '';
+    };
+    const previews = typed.bindings.figma.statePreviews === true && typed.states.length > 0;
+    const subst = previews ? statePreviewSubstProps(typed) : [];
+    const primaryIdx = Math.max(0, variantAxes.findIndex((p) => subst.includes(p.name)));
+    const primary = variantAxes[primaryIdx];
+    const writerRows = exactRowsFromProposedContract(
+      contract,
+      previews
+        ? {
+            axis: STATE_PREVIEW_PROPERTY,
+            default: 'Default',
+            states: typed.states.map((s) => statePreviewLabel(s)),
+            primary: primary?.bindings.figma.property ?? null,
+            pinned: Object.fromEntries(variantAxes.filter((_, i) => i !== primaryIdx || !primary).map((p) => [p.bindings.figma.property ?? '', firstLabel(p)])),
+          }
+        : null,
+    );
+    const designerValueOf = new Map<string, string>([['Default', d.restValue], ...d.values.filter((v) => v.state !== 'default').map((v) => [statePreviewLabel(v.state), v.value] as [string, string])]);
+    const inDesignerTerms = writerRows.map((row) => {
+      const { [STATE_PREVIEW_PROPERTY]: label, ...api } = row.variantProperties as Record<string, string>;
+      return { ...api, [d.property]: designerValueOf.get(label ?? 'Default') ?? label ?? d.restValue };
+    });
+    const keyOfRow = (t: Readonly<Record<string, string>>) => JSON.stringify(Object.entries(t).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+    const drawnRows = set.variants.map((v) => axisValuesOf(v.name));
+    const drawnKeys = new Set(drawnRows.map(keyOfRow));
+    const writerKeys = new Set(inDesignerTerms.map(keyOfRow));
+    d.writeBack = {
+      draws: writerRows.length,
+      completes: inDesignerTerms.filter((t) => !drawnKeys.has(keyOfRow(t))),
+      omits: drawnRows.filter((t) => !writerKeys.has(keyOfRow(t))),
+    };
+    const spellRow = (t: Readonly<Record<string, string>>) => Object.entries(t).map(([k, v]) => `${k}=${v}`).join(', ');
+    const some = (rows: Array<Record<string, string>>) => `${rows.slice(0, 6).map(spellRow).join(' | ')}${rows.length > 6 ? ` | … ${rows.length - 6} more` : ''}`;
+    ctx.notes.push(
+      d.writeBack.completes.length === 0 && d.writeBack.omits.length === 0
+        ? `state-axis-write-back: regenerating the canvas from this contract draws the same ${writerRows.length} cell(s) the designer drew — under the WRITER's spelling ("${STATE_PREVIEW_PROPERTY}" = ${['Default', ...typed.states.map((s) => statePreviewLabel(s))].join('|')}), in a new stamped set; the designer's set is never edited`
+        : `state-axis-write-back-diverges: regenerating the canvas from this contract draws ${writerRows.length} variant(s) where the designer drew ${set.variants.length}. The contract vocabulary carries neither the designer's state spelling nor the state cells they left undrawn, so the writer draws ITS matrix (${previews ? `the rest grid + one "${STATE_PREVIEW_PROPERTY}" preview row per carried state per value of ${primary ? `"${primary.bindings.figma.property}"` : 'the set'}, every other axis pinned to its first option` : 'the rest grid only — statePreviews is not set'}), in a new stamped set (the designer's set is never edited).${d.writeBack.completes.length ? ` It DRAWS ${d.writeBack.completes.length} cell(s) the designer did NOT draw: ${some(d.writeBack.completes)}.` : ''}${d.writeBack.omits.length ? ` It does NOT draw ${d.writeBack.omits.length} cell(s) the designer drew: ${some(d.writeBack.omits)}.` : ''} NAMED divergence (docs/23 §D.41), listed on stateAxisProjection.writeBack`,
+    );
+  }
   let projection: ExactProjectionResult;
+  if (projectionMode === 'exact' && designerStateAxis !== null) {
+    // §D.41 / PR 131 C1 — a drawn state the contract does NOT carry is a drawn
+    // plane of the source the contract cannot reproduce: not exact, by name.
+    // (The generic check below would refuse the same set EXACT_ROWS_MISSING;
+    // this says WHICH state and WHY.) Reviewable inversion proposes the same
+    // contract and reads `legacy-unverified`.
+    const dropped = designerStateAxis.values.filter((v) => !v.carried);
+    if (dropped.length > 0) {
+      const rowsOf = (value: string) => set.variants.filter((v) => axisValuesOf(v.name)[designerStateAxis!.property] === value).length;
+      const why = (state: string): string => {
+        const named = ctx.notes.filter((n) => n.includes(`(state ${state})`) || n.includes(`state "${state}"`) || n.includes(`in state "${state}"`));
+        const first = named.find((n) => !n.startsWith(`state "${state}": promoted from the axis`)) ?? named[0];
+        return first ? first.slice(0, 260) + (first.length > 260 ? '…' : '') : 'no channel of its drawing differs from the rest state in anything this reader captures';
+      };
+      semanticProjectionRefusal(
+        sourceProjection,
+        statePromo!.axis,
+        'interaction-state',
+        `${dropped.map((v) => `state-axis-state-not-carried:${v.state}`).join(', ')} — ${dropped
+          .map((v) => `"${designerStateAxis!.property}=${v.value}" draws ${rowsOf(v.value)} of the ${set.variants.length} variants and the proposed contract carries no "${v.state}" state for them [${why(v.state)}]`)
+          .join('; ')}. Those rows would be counted as reproduced while dropped, so this is NOT an exact projection. --reviewable-inversion proposes the same contract as legacy-unverified, with every dropped state named.`,
+      );
+    }
+  }
+  // SCOPE, measured (docs/23 §D.41): run on EVERY exact proposal, the referee
+  // refuses 19 committed census sets that propose `verified-exact` today (17
+  // carry a stamped `semantics.roleException` no root role claim needs; antd
+  // Input roots children on a void <input>) — real, pre-existing, and a census
+  // re-record of their own. It is therefore armed where THIS change can mint a
+  // contract the referee has never seen — a projected designer state axis — and
+  // the general case is named, with its count, not silently widened.
+  if (projectionMode === 'exact' && designerStateAxis !== null) {
+    const violations = refereeViolations(parsedContract, parsedStubs);
+    if (violations !== null && violations.length > 0) throw new ProposalRefereeError(set.setName, violations);
+  }
   if (projectionMode === 'exact') {
     projection = assertExactProjection(
-      validateExactVariantProjection(set, exactRowsFromProposedContract(contract, declaredSparseAxis)),
+      validateExactVariantProjection(
+        set,
+        exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
+        absentVariants === null ? {} : { absentVariants },
+      ),
       'verified-exact',
     );
   } else if (sourceProjection.status === 'source-matrix-verified') {
     const returned = validateExactVariantProjection(
       set,
-      exactRowsFromProposedContract(contract, declaredSparseAxis),
+      exactRowsFromProposedContract(contract, declaredSparseAxis, designerStateAxis),
+      absentVariants === null ? {} : { absentVariants },
     );
     projection =
       returned.status === 'verified-exact'
@@ -11817,6 +13258,7 @@ export function proposeFromDump(
   } else {
     projection = sourceProjection;
   }
+  settleUaPadding({ contract, notes: ctx.notes }, set);
   return {
     contract,
     notes: ctx.notes,
@@ -11824,7 +13266,8 @@ export function proposeFromDump(
     projection,
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
-    ...(selfId !== baseSelfId ? { idSuffixedFrom: baseSelfId } : {}),
+    ...(idSuffixedFrom ? { idSuffixedFrom } : {}),
+    ...(designerStateAxis !== null ? { stateAxisProjection: designerStateAxis } : {}),
   };
 }
 
@@ -11860,6 +13303,9 @@ export function figmaProposalsReport(
  *  zod issue array rendered verbatim in the playground rail); the verbatim
  *  technical text always survives as `detail`. */
 export function plainWordsProposalError(e: unknown): { headline: string; detail?: string } {
+  // Preserve stable refusal headlines used by historical evidence; additive
+  // reader diagnostics use the existing technical-detail channel.
+  if (e instanceof ExactProjectionError && e.detail) return { headline: e.message, detail: e.detail };
   const issues = (e as { issues?: unknown } | null)?.issues;
   if (Array.isArray(issues) && issues.length > 0 && issues.every((i) => i && typeof i === 'object')) {
     const first = issues[0] as { path?: unknown[]; message?: unknown };
@@ -11873,7 +13319,20 @@ export function plainWordsProposalError(e: unknown): { headline: string; detail?
       detail: e instanceof Error ? e.message : JSON.stringify(issues, null, 2),
     };
   }
+  // A sparse-matrix ambiguity keeps its NAME in the headline however many
+  // inferences it lists; the explanations ride the detail.
+  if (e instanceof SparseMatrixInferenceError) {
+    return {
+      headline: `${e.inferences.map((k) => `${SPARSE_MATRIX_INFERENCE_AMBIGUOUS}:${k}`).join('; ')} — the set does not draw every combination of its variant axes and ${e.inferences.length} inference(s) have more than one explanation the undrawn combinations would have told apart; nothing is guessed.`,
+      detail: e.message,
+    };
+  }
   const message = e instanceof Error ? e.message : String(e);
+  // A NAMED refusal keeps its name in the headline however long its reasons
+  // run (§D.41: a state-not-carried refusal lists every dropped state and why).
+  if ((e instanceof ExactProjectionError || e instanceof ProposalRefereeError) && message.length > 400) {
+    return { headline: `${message.slice(0, 380)}… (full text below)`, detail: message };
+  }
   if (/^\s*[[{"]/.test(message) || message.length > 400) {
     return { headline: 'the proposal failed with a technical error (full text below).', detail: message };
   }
@@ -12014,6 +13473,9 @@ export function proposeBatchFromDump(
   };
   const setOpts = {
     ...opts,
+    stampsObservable:
+      opts.stampsObservable ??
+      dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     capturedValues,
     contractIdByName,
     contractsById,
@@ -12113,5 +13575,11 @@ export function proposeBatchFromDump(
       ),
   );
   if (unmatched.length > 0) notes.push(...unmatched.map(degradationNote));
+  // Order-free semantic passes over the whole batch (see their blocks).
+  settleInteractiveContent(proposals, contractsById);
+  for (const p of proposals) {
+    const set = (dump as Record<string, unknown>)[p.setName];
+    if (isDumpSet(set)) settleUaPadding(p, set);
+  }
   return { proposals, skipped, notes };
 }

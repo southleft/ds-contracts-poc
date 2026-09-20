@@ -1,0 +1,24 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/placeholder.contract.json (ds.placeholder v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-placeholder-root-width);
+  height: var(--imported-placeholder-root-height);
+}
+
+.Vector {
+  background-color: var(--imported-placeholder-vector-background-color);
+}

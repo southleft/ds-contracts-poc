@@ -1,0 +1,79 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.arrow-arc-left",
+  "name": "ArrowArcLeft",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"ArrowArcLeft\" instances of Icon — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "format",
+      "type": {
+        "enum": [
+          "outline"
+        ]
+      },
+      "default": "outline",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Format",
+          "values": {
+            "outline": "Outline"
+          }
+        },
+        "code": {
+          "prop": "format"
+        }
+      }
+    },
+    {
+      "name": "weight",
+      "type": {
+        "enum": [
+          "regular"
+        ]
+      },
+      "default": "regular",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Weight",
+          "values": {
+            "regular": "Regular"
+          }
+        },
+        "code": {
+          "prop": "weight"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-arrow-arc-left.root.width}",
+        "height": "{imported.stub-arrow-arc-left.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "1cac3364122f718ffb561bfccc64f56106c54f2b"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/ArrowArcLeft",
+        "export": "ArrowArcLeft"
+      }
+    }
+  }
+}
