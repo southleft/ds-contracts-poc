@@ -1,9 +1,19 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { nativeBoundCrossSizeObservationMatches as matches,
+import vm from 'node:vm';
+import {emitNativeBoundCrossSizeMatcher} from './native-contract-bound-cross-size-writer.js';
+import { nativeBoundCrossSizeObservationMatches as hostMatches,
   type NativeBoundCrossSizeObservationPlan } from './native-bound-cross-size-observation.js';
 import type { NativeSourceReadback } from './native-source-observation.js';
 import type { NativeCrossSizeTransition } from './native-fixed-cross-size.js';
+
+function matches(plan:NativeBoundCrossSizeObservationPlan, receipt:unknown, required:'partial'|'before'|'after'='partial') {
+  const expected=hostMatches(plan,receipt,required);
+  const actual=vm.runInNewContext(`(()=>{${emitNativeBoundCrossSizeMatcher()} return matches(receipt,required);})()`,
+    {plan,receipt,required},{timeout:1000});
+  assert.equal(actual,expected,'native emitted matcher must agree with the independent host matcher');
+  return expected;
+}
 
 function fixture(): NativeBoundCrossSizeObservationPlan {
   const derived = [0, 1].flatMap((i): NativeCrossSizeTransition[] => [

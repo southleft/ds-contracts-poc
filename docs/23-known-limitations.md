@@ -7492,7 +7492,34 @@ last registry warmup; unrelated instances with resolved mains remain admissible.
 The earlier read-only scope measurement predates this additional guard.
 A second live read resolved 164 unrelated instances across the same 68 pages;
 the stricter scope passed and the full app-owned baseline still matched exactly.
-Its refusal cases are executable tests, not a measured live instance mutation.
+That read-only run did not introduce a new instance; the writer probes below
+separately measure the resulting refusal.
+
+An isolated version-8 writer now consumes that plan. Its final whole-document
+scan and full native read share one uninterrupted turn with the assignments.
+Recovery reruns both checks and restores the actual pre-attempt state only
+while all recorded facts remain within the declared transition. Independent
+edits, new consumers or unknown propagation states require recovery without
+overwriting them. Synthetic failure tests exercise these branches.
+
+In a bounded live Evaluations experiment, this writer applied one variable,
+nine component sizes, nine derived flow positions and nine absolute-leaf
+heights. A repeat made no writes. Guarded reversal returned the full original
+29-node and 30-variable observation and all nine PNG exports byte-identically.
+The independent host matcher and verifier accepted each measured state. The
+runner was restored and the native set inspected with its window closed.
+Further native probes inserted controlled exceptions after the variable and
+first complete leaf assignments. Both rolled back to the exact original
+observation, including all nine PNGs. A controlled independent name edit was
+preserved with `recovery-required`; after the probe restored only its own name
+edit, the unmodified guarded reverse recovered the geometry. An instance on
+another page with its height binding removed still refused through resolved
+main-component identity. The earlier owned-page instance probe correctly hit
+the page-child baseline guard first; that evidence is retained separately.
+
+These are controlled native exception probes, not an interrupted application
+delivery. The writer remains isolated from production dispatch; its application
+journey, transport recovery and React fidelity remain unqualified.
 
 Reversal removes admission of the new protocol. If a future write has used it,
 first retain read-only verification of that authenticated history; never rewrite
