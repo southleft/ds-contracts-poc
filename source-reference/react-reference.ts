@@ -502,7 +502,8 @@ export function createReactReferenceService(
         if (req.method === 'POST') {
           const job = stateApi.start(stateApiRoute[1], stateApiRoute[2]); void job.promise.catch(() => {});
           json(res, 200, { inspection: job.state });
-        } else json(res, 200, { inspection: stateApi.read(stateApiRoute[1], stateApiRoute[2]) });
+        } else json(res, 200, { inspection: stateApi.progress(stateApiRoute[1], stateApiRoute[2]) ??
+          stateApi.read(stateApiRoute[1], stateApiRoute[2]) });
       } catch (error) { json(res, 409, { error: error instanceof Error ? error.message : 'State input inspection unavailable.' }); }
       return;
     }
