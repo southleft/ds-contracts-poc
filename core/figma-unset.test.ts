@@ -293,6 +293,51 @@ test('literal minting lowers its omitted placeholder to base plus public-value m
   assert.deepEqual(colors, ['#0055ff', '#889999', '#ee0011', '#889999', '#ee0011']);
 });
 
+test('minted omitted-axis values preserve independently bound paint maps on return', async () => {
+  const c = booleanSeed();
+  c.props.push(PropSchema.parse({ name: 'disabled', type: 'boolean', bindings: {
+    code: { prop: 'disabled' }, figma: { kind: 'VARIANT', property: 'Disabled',
+      unsetValue: '(unset)', values: { false: 'Enabled', true: 'Disabled' } },
+  } }));
+  const { set } = await roundTrip(c);
+  for (const variant of set.variants) variant.opacity = variant.variantProperties?.Disabled === 'Disabled' ? 0.5 : 1;
+  for (const variants of [set.variants, [...set.variants].reverse()]) {
+    const result = propose({ ...set, variants }, true);
+    const back = ContractSchema.parse(result.contract);
+    const replay = createFigmaEngine({ tokens: { ...tokens, semantic: result.mintedTokens?.tree ?? {} }, icons: new Map() });
+    for (const checked of [undefined, 'false', 'true']) for (const disabled of [undefined, 'false', 'true']) {
+      const props = { ...(checked === undefined ? {} : { checked }), ...(disabled === undefined ? {} : { disabled }) };
+      const resolved = resolveTokens(back.anatomy.root, props);
+      assert.equal(resolved['background-color'], checked === undefined ? '{blue}' : checked === 'false' ? '{gray}' : '{red}');
+      assert.equal(Number(replay.resolveTokenLiteral(resolved.opacity.slice(1, -1))), disabled === 'true' ? 0.5 : 1);
+    }
+    assert.deepEqual(replay.compileComponentData(back, new Map([[back.id, back]])).variants.map(v => v.name), compile(c).variants.map(v => v.name));
+  }
+});
+
+test('placeholder expansion retains singleton carriers and detects collisions before replacing them', () => {
+  const axis = { property: 'Choice', propName: 'choice', codeProp: 'choice', unsetValue: '(unset)', internalValue: 'unset', values: [{ value: 'on', label: 'On' }] };
+  for (const nested of [false, true]) for (const sameAxis of [false, true]) {
+    const part: Record<string, unknown> = {
+      tokens: { opacity: '{paint.{choice}}', 'background-color': '{base}' },
+      tokensByProp: { prop: sameAxis ? 'choice' : 'tone', map: { on: { 'background-color': '{accent}' } } },
+    };
+    const contract = { anatomy: { root: nested ? { parts: { detail: part } } : part } };
+    lowerUnsetProposal(contract, [axis]);
+    const maps = part.tokensByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }>;
+    assert.equal(maps.find(m => m.prop === (sameAxis ? 'choice' : 'tone'))!.map.on['background-color'], '{accent}');
+    assert.equal(maps.find(m => m.prop === 'choice')!.map.on.opacity, '{paint.on}');
+    assert.equal((part.tokens as Record<string, string>).opacity, '{paint.unset}');
+    assert.equal(maps.length, sameAxis ? 1 : 2);
+  }
+  for (const array of [false, true]) {
+    const existing = { prop: 'choice', map: { on: { opacity: '{bound}' } } };
+    assert.throws(() => lowerUnsetProposal({ anatomy: { root: {
+      tokens: { opacity: '{paint.{choice}}' }, tokensByProp: array ? [existing] : existing,
+    } } }, [axis]), /FIGMA_UNSET_PROJECTION_UNSUPPORTED/);
+  }
+});
+
 test('untrusted, stale, colliding or incompletely corroborated metadata refuses; absence never infers omission', async () => {
   const { set } = await roundTrip(seed());
   for (const raw of [null, '', '{broken', {}, { version: 2, axes: [] }, { version: 1, axes: [] }]) refusal(() => propose({ ...set, unsetVariantAxes: raw }));

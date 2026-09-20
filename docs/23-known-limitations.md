@@ -6283,3 +6283,41 @@ Adversarial checks mutate caller copies, source files and proposal records,
 verify refusal after the response ends, and reject mutation inside either
 snapshot scope. Reverse by separating the two route scopes and removing the
 proposal-list/source-content wrappers; retain the freshness and write guards.
+
+
+## D.66 Returning native fixed controls preserves dimensions and independent axes
+
+**AGENT decision, 2026-09-19:** preserve an existing singleton token map when
+expanding an omitted-prop token placeholder, and preserve a bound root width
+when every observed plane is FIXED and non-FILL. A separate maxWidth binding
+remains a separate maximum. Horizontal, vertical, grid and non-auto-layout
+frames use their own width axis. HUG, FILL, mixed or unknown sizing retains the
+historical max-width mapping with a review note; this change does not qualify
+those cases.
+
+The app-created independent Switch exposed both general defects on return.
+Its bound on-state paint disappeared when disabled opacity expanded into a
+second map. Its fixed 32px width became max-width, shrinking the installed
+consumer to 18px. The same unchanged plugin dump, reimported through the app
+and prepared as a fresh React archive, now mounts all nine planes at exactly
+32 × 18.390625 and carries both state maps. Two three-cell variant probes
+change actual paint/geometry. The package is installed in an isolated consumer;
+no component style is overridden. Native nodes and variables are unchanged.
+
+The clean-consumer case reader now mounts an explicitly declared omission
+plane with an absent prop, rather than reporting it as unmapped. A label alone
+does not declare omission. The image verdict remains refused on all nine rows:
+the native shadow extends outside the current layout-only consumer capture.
+No scorer or 5% threshold changed. The generated button also has no switch role
+or recovered click behavior, so this is not a qualified stateful return journey.
+The REST capture cannot recover the bound thumb dimensions with the existing
+token scope; the plugin capture retains eleven resolved variables. Capture
+execution and file upload remain manual engineering steps.
+
+Adversarial checks cover singleton/array collisions, shared and independent
+axes, nested parts, reversed native row order, two omitted boolean axes,
+separate maximums and FILL/HUG/mixed/unknown nonpromotion. Evidence:
+`independent-native-return-qz7pgw9f/` (unchanged native captures, original/fixed
+app contracts, exact archives, clean-consumer receipts and closed-plugin canvas).
+Reverse by restoring the previous map expansion, bound-width translation and
+consumer omission handling; retain these records and name the restored losses.
