@@ -4591,7 +4591,38 @@ This corrects a measurement failure, not a product fidelity result. Reversal:
 remove the three computed properties from `paintOf` and the typography probe;
 the rest of the state-axis rule is independent.
 
+
+### D.41 follow-up — variant effects include descendants
+
+**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
+previously compared only root styles, bounds and class names. A parent prop
+forwarded to a child could visibly work while the check reported
+`variant-prop-discarded`; an unused root class could imply an effect with no
+changed drawing. The probe now records subtree paint, rendered text and exact
+geometry relative to the root. It excludes class names. Browser probes verify
+changed descendant color, rearrangement at fixed root bounds, and equal-width
+text replacement against actual different screenshots; an unused class stays
+inert. This does not change the image scorer or its 5% limit. Existing receipts
+remain historical until remeasured. Reversal: restore the former root-only
+observer in `scripts/design-consumer-check.ts`, retaining these known false
+positive and false negative cases in the limitation ledger.
+
+
 ## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+
+**Historical integration measurement, 2026-09-19.** After merging the current
+state-axis and consumer-check changes, fresh REST reads and newly generated,
+installed consumers measure Altitude Badge **10/10**, CBDS Badge **66/72** and
+Altitude Tabs **0/2** on both white and black. All 72 CBDS rows pass white
+(maximum 4.427%); six small rounded outline rows fail black (maximum 6.120%).
+Altitude Badge's maximum is 4.825% on either background. Tabs retains missing
+child content, an ineffective variant change and a 40px versus 176px content
+height mismatch; its maxima are 7.081% white and 9.030% black. These are CLI
+consumer measurements, not a full application or semantic qualification.
+No source design, scorer or 5% limit changed. The 72/72 table below is the
+historical white-only result, retained with its original receipts. Both sides
+of the integration and the fresh measurements are preserved privately in
+`pr135-main-integration-c93fqc91/`; the new observation does not rewrite them.
 
 **2026-09-19. A lowering decision taken by the agent under the owner's standing
 delegation (never a grade, never a tolerance); recorded so it can be reversed.**
@@ -5043,9 +5074,10 @@ interactive content (`interactive-content-nested:<cell>:<outer>><inner>`, HTML's
 rule for `a` and `button`; a `label` around its own control is not flagged).
 It still mounts and scores only the requested set.
 
-**Measured live** (read-only REST, the product's own commands in order, the
+**Historical white-only measurement** (read-only REST, the product's own commands in order, the
 unchanged 5 % limit; "before" is the same pipeline with `--no-closure`, the same
-day, the same file version):
+day, the same file version). These receipts predate D.51; the fresh integration
+results below supersede their qualification claims:
 
 | set | children followed | within 5 % before → after | check |
 |---|---|---|---|
@@ -5157,6 +5189,27 @@ graph, plus repeats, refused children, oversized batches and requested-parent
 refusals. This is integration evidence, not a new live fidelity measurement or
 a clean-consumer application proof. Reverse by removing the application closure
 option and family recording calls; the CLI rule and old evidence stay intact.
+
+
+**Historical main integration measurement (2026-09-20).** Fresh REST GET-only reads of all
+four sets, followed by proposal, dependency generation, clean package installation
+and transparent captures on white and black, retain the unchanged 5% limit.
+Altitude Badge passes 10/10 (maximum 4.825% on either background). CBDS Badge
+passes 66/72: every white comparison passes (maximum 4.427%), while six small
+rounded outlines fail black (maximum 6.120%). Tabs passes both image comparisons
+at 2/2 (maximum 1.812% white / 3.525% black), but its consumer visibly omits text,
+contains nested buttons, discards the variant change and measures 453px wide
+against 438/439px native. Its checker still fails. Checkbox Group passes 12/12
+on white (maximum 4.011%) and 0/12 on black (maximum 10.364%); its hidden legend
+still renders, its legend axis is inert and nine content-size checks fail.
+
+The black triptychs were inspected. Their visible missing and incorrect content
+prevents treating a small whole-canvas difference as a completed journey. Both
+conflict versions and all new dumps, proposals, generated packages, receipts,
+images and built review consumers are retained under private
+`pr136-main-integration-s0jph0cm/`. No old receipt was rewritten. These are CLI
+integration measurements, not a new application acceptance or a visual grade.
+
 
 ## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (final form after two adversarial reviews); a named nesting, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
 
@@ -5381,6 +5434,26 @@ sides and `div` roots untouched; a side with no value named as `no value carried
 and one with a refusal on record as refused; per-value and logical sides; Tab
 Panel's zeros taken back.
 
+
+**Historical main integration measurement (2026-09-20).** After integrating the
+landed dependency-closure PR, fresh REST GET-only captures and isolated packaged
+consumers retain the unchanged white-and-black 5% criterion. Tabs has no nested
+interactive-content finding; its width is 441px rather than 453px. Both images
+pass (maximum 1.824% white / 3.593% black), but the variant change remains
+discarded, the default content width remains 441px versus 438px, and the two
+Text Passage lines are visibly missing. The tab labels also have incorrect
+color and spacing, and the native active indicator is absent. This is not a
+completed Tabs journey.
+Altitude Badge remains 10/10, CBDS Badge 66/72, and Checkbox Group 0/12 on the
+joint criterion (all 12 white comparisons pass; all 12 black comparisons fail).
+The six CBDS small rounded outlines, hidden Group legends and nine Group
+content-size failures remain. Private evidence `pr137-main-integration-tbx6mgdq/`
+preserves the actual merge conflicts, both sides, fresh inputs, generated
+packages, receipts and visible review. These are CLI integration measurements;
+they do not newly qualify the app workflow or independent child components.
+The frozen recipe lineages, owner results and OS-specific drift pins have no
+differences from landed main.
+
 ## D.45 A disabled state on a root that is not a form control compiled to `:disabled`, which never matches it — CLOSED on React CSS modules, web components and static HTML; behaviour (focus, handlers) and a no-prop disabled state stay NAMED
 
 **2026-09-19. One AGENT emitter rule under the owner's standing delegation (never a
@@ -5603,22 +5676,6 @@ missing keys and conflicting file evidence. They qualify identity behavior,
 not visual fidelity. Existing sessions cannot recover an entry already evicted
 by the old rule; import that capture again. To reverse, restore the workspace's
 source/name identity and remove the proposer's anchored-id reuse and file guard.
-
-
-### D.41 follow-up — variant effects include descendants
-
-**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
-previously compared only root styles, bounds and class names. A parent prop
-forwarded to a child could visibly work while the check reported
-`variant-prop-discarded`; an unused root class could imply an effect with no
-changed drawing. The probe now records subtree paint, rendered text and exact
-geometry relative to the root. It excludes class names. Browser probes verify
-changed descendant color, rearrangement at fixed root bounds, and equal-width
-text replacement against actual different screenshots; an unused class stays
-inert. This does not change the image scorer or its 5% limit. Existing receipts
-remain historical until remeasured. Reversal: restore the former root-only
-observer in `scripts/design-consumer-check.ts`, retaining these known false
-positive and false negative cases in the limitation ledger.
 
 
 ## D.48 Text visibility follows complete captured evidence
