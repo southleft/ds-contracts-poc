@@ -1,5 +1,5 @@
 /** Pure planning for one owned variable driving fixed flex cross-axis roots.
- * Not yet connected to the writer. Native dispatch must additionally establish
+ * Native dispatch must additionally establish
  * the complete document consumer scope and synchronously recheck all facts. */
 import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {flattenTokens} from './tokens.js';
@@ -13,7 +13,7 @@ import type {NativeContractUpdateInput, NativeOpacityUpdatePlan} from './native-
 
 export interface NativeBoundCrossSizeUpdatePlan extends Omit<NativeOpacityUpdatePlan,'version'|'kind'|'changes'>,
   NativeBoundCrossSizeObservationPlan {
-  version:8; kind:'native-contract-bound-cross-size-update';
+  version:9; kind:'native-contract-bound-cross-size-update';
   changes:NativeAbsoluteShapeUpdatePlan['changes'];
   scope:NativeBoundCrossSizeScope;
 }
@@ -39,7 +39,10 @@ export function prepareNativeBoundCrossSizeUpdate(input:NativeContractUpdateInpu
     for(const [channel,field] of [['width','fixedWidth'],['height','fixedHeight']] as const){
       const old=variant.spec[field],desired=next[field];
       if(same(old,desired))continue;
-      if(!old?.varName||!desired||!same({...old,px:0},{...desired,px:0}))fail('binding-change-unsupported');
+      // Unbound root sizes remain the existing literal-size writer's scope.
+      // A mixed literal edit is left unsanitized for base validation to refuse.
+      if(!old?.varName)continue;
+      if(!desired||!same({...old,px:0},{...desired,px:0}))fail('binding-change-unsupported');
       roots.push({index,channel,field,name:old.varName,before:old.px,after:desired.px});
       sanitized.desired.component.variants[index].spec[field]={...copy(old),varName:old.varName};
     }
@@ -92,7 +95,7 @@ export function prepareNativeBoundCrossSizeUpdate(input:NativeContractUpdateInpu
   if(nextTokens.allocatedValues?.some(row=>flattenTokens(nextTokens.modes[0].tokens).get(row.tokenPath)?.type==='dimension'))
     nextTokens.allocatedValueProtocol='px-dimension-v1';
   if(prepareNativeTokenContext(nextTokens).revision!==identity.preparationRevision)fail('allocation-identity-changed');
-  const plan:NativeBoundCrossSizeUpdatePlan={version:8,kind:'native-contract-bound-cross-size-update',
+  const plan:NativeBoundCrossSizeUpdatePlan={version:9,kind:'native-contract-bound-cross-size-update',
     acceptedContract:null,nativeQualification:'unqualified',before:base.before,baseline:base.baseline,
     desiredRevision:base.desiredRevision,after:base.after,
     changes:base.kind==='native-contract-absolute-shape-update'?copy(base.changes):[],

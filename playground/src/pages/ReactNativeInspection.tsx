@@ -48,6 +48,7 @@ interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
+    boundCrossSize?: boolean; layoutChanges?: Array<{nodeId:string;channel:'x'|'y';before:number;after:number}>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -197,13 +198,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.tokenChanges?.length && <>
               <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
-                ? 'Before writing, it checks nodes on every page, including hidden instance children and text ranges, local styles, and local variable aliases. A binding, unavailable scan, or more than 10,000 nodes stops the update.'
+                ? update.boundCrossSize
+                  ? 'Before writing, it checks the whole document. Only the listed component size bindings are allowed. Other consumers, instances of these components, unavailable evidence, or more than 10,000 nodes stop the update. The size change also moves the flow children listed below.'
+                  : 'Before writing, it checks nodes on every page, including hidden instance children and text ranges, local styles, and local variable aliases. A binding, unavailable scan, or more than 10,000 nodes stops the update.'
                 : "This historical proposal checked only this operation's page and local variable aliases. It cannot authorize another variable write; its results remain available for review and recovery."}</p>
               <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Token</th><th>Variable</th><th>Mode</th><th>Saved value</th><th>Proposed value</th></tr></thead>
                 <tbody>{update.tokenChanges.map(change => <tr key={change.variableId + ':' + change.modeId}><td>{change.tokenPath}</td><td>{change.variableId}</td><td>{change.sourceMode}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>
             </>}
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
               <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + ('channel' in change ? change.channel : 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{'channel' in change ? change.channel==='unrequested-fill'?'Unrequested root paint':change.channel==='effects'?'Shadow stack':change.channel==='strokeWeight'?'Stroke width (px)':change.channel==='background-clip'?'Background paint area':change.channel : 'opacity'}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>}
+            {!!update.layoutChanges?.length && <>
+              <p>Automatic layout movement from the shared size change:</p>
+              <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Flow child</th><th>Position</th><th>Saved value</th><th>Proposed value</th></tr></thead>
+                <tbody>{update.layoutChanges.map(change => <tr key={change.nodeId+':'+change.channel}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.nodeId}</a></td><td>{change.channel}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>
+            </>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
             {update.operation && <>
               <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.superseded ? 'Historical correction. Its result is preserved in a later correction chain.' : update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>

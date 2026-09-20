@@ -1,5 +1,4 @@
-/** Isolated version-8 writer. Production dispatch does not call this until
- * its native propagation and recovery behavior have been measured. */
+/** Version-9 writer for the measured, bounded native cross-size transition. */
 import {emitNativeContractReadbackScript, emitNativeFixedCrossSizeSyncReadback} from './native-source-observation.js';
 import {emitNativeBoundCrossSizeScope} from './native-bound-cross-size-scope.js';
 import {nativeBoundCrossSizeObservationMatches} from './native-bound-cross-size-observation.js';
@@ -37,7 +36,7 @@ const matches=(raw,required='partial')=>{try{
 
 export function emitNativeBoundCrossSizeUpdateScript(plan:NativeBoundCrossSizeUpdatePlan,
   direction:'apply'|'rollback'='apply',readOnly=false):string {
-  if(plan.version!==8||plan.kind!=='native-contract-bound-cross-size-update'||plan.acceptedContract!==null||
+  if(plan.version!==9||plan.kind!=='native-contract-bound-cross-size-update'||plan.acceptedContract!==null||
       plan.nativeQualification!=='unqualified'||!['apply','rollback'].includes(direction)||
       !nativeBoundCrossSizeObservationMatches(plan,plan.baseline,'before'))
     throw Error('native-update-bound-cross-size-plan-invalid');
@@ -53,7 +52,7 @@ try{
  if(figma.fileKey!==plan.before.operation.fileKey)throw Error('native-update-file-mismatch');
  const initial=await(async()=>{${emitNativeContractReadbackScript(plan.before)}})();
  if(!matches(initial))throw Error('native-update-bound-cross-size-baseline-conflict');
- await figma.loadAllPagesAsync();await figma.variables.getLocalVariableCollectionsAsync();figma.skipInvisibleInstanceChildren=false;
+ await figma.loadAllPagesAsync();await figma.variables.getLocalVariableCollectionsAsync();
  ${scope}
  // No yield from the final whole-document scan through every assignment.
  const current=(()=>{${sync}})();
@@ -80,7 +79,7 @@ try{
  // Recovery starts with another full consumer scan and exact live comparison.
  // An independent edit, foreign consumer or unknown propagation state is kept.
  try{
-  await figma.loadAllPagesAsync();await figma.variables.getLocalVariableCollectionsAsync();figma.skipInvisibleInstanceChildren=false;
+  await figma.loadAllPagesAsync();await figma.variables.getLocalVariableCollectionsAsync();
   ${scope}
   const current=(()=>{${sync}})();
   if(!matches(current))throw Error('native-update-bound-cross-size-recovery-conflict');

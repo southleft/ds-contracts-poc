@@ -18,7 +18,7 @@ test('bound cross-size planning compiles both orientations, coupled geometry, op
     const {input}=await fixture(channel,absolute),original=structuredClone(input);
     const prepared=prepareNativeBoundCrossSizeUpdate(input,base)!;
     assert.deepEqual(input,original,'planning cannot mutate the saved observation or desired source');
-    assert.equal(prepared.plan.version,8);assert.equal(prepared.plan.scope.channel,channel);
+    assert.equal(prepared.plan.version,9);assert.equal(prepared.plan.scope.channel,channel);
     assert.equal(prepared.plan.scope.nodeIds.length,2);
     assert.equal(prepared.plan.derived.length,4);assert.equal(prepared.plan.absolute.length,2*Number(absolute));
     assert.equal(prepared.plan.after.tokenInput.allocatedValueProtocol,'px-dimension-v1');

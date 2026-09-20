@@ -7436,13 +7436,14 @@ This is value-history support, not write authority. The existing scalar writer
 still refuses dimension changes and every bound token change. A bound-size
 writer must separately prove all document consumers, layout preconditions,
 derived child movement, explicit leaf corrections, complete postconditions and
-recovery. That writer and its application journey are not yet integrated.
+recovery. The version-9 writer described below is now integrated; its application
+journey remains unqualified.
 
 The token-history and historical-program checks pass. An offline replay also
 verifies the sealed native probe's original 18.390625px value and both observed
 20px states against the same allocation identity; a neighboring invented value
 refuses. No new Figma write was made for this replay. Independent predictor,
-structural matcher and document-scope prototypes remain isolated from the writer.
+structural matcher and document-scope checks now feed the version-9 writer below.
 The read-only scope prototype observed exactly nine consumers among 1,954 nodes
 on 68 pages in Evaluations. These measurements do not qualify a product update.
 
@@ -7469,12 +7470,12 @@ All 37 source files, 9,662 prior journal files and 34,326 protected recipe/parit
 and evaluation files stayed byte-identical. The app's stale-source warning and
 the unqualified bound-size writer remain explicit.
 
-An isolated planner now recognizes one pixel-dimension variable in one mode
+The version-9 planner recognizes one pixel-dimension variable in one mode
 driving fixed flex cross-axis roots, with optional fixed absolute-leaf
 corrections. It reuses existing correction validation and preserves allocation
 history on reversal. Its predicted nine-root/eighteen-derived/nine-leaf
 transition matches the saved live probe, including its incomplete variable-only
-state. The planner is not yet reachable from production dispatch.
+state. Production update dispatch now selects this planner for its bounded scope.
 
 A separate synchronous final reader reuses the complete observation fields and
 static token APIs after asynchronous page/registry loading. It refuses instances
@@ -7495,7 +7496,7 @@ the stricter scope passed and the full app-owned baseline still matched exactly.
 That read-only run did not introduce a new instance; the writer probes below
 separately measure the resulting refusal.
 
-An isolated version-8 writer now consumes that plan. Its final whole-document
+The version-9 writer consumes that plan. Its final whole-document
 scan and full native read share one uninterrupted turn with the assignments.
 Recovery reruns both checks and restores the actual pre-attempt state only
 while all recorded facts remain within the declared transition. Independent
@@ -7518,9 +7519,54 @@ main-component identity. The earlier owned-page instance probe correctly hit
 the page-child baseline guard first; that evidence is retained separately.
 
 These are controlled native exception probes, not an interrupted application
-delivery. The writer remains isolated from production dispatch; its application
-journey, transport recovery and React fidelity remain unqualified.
+delivery. The measured writer is now routed through native update planning,
+independent verification and companion dispatch. The application measurement
+below covers a bounded update and before-delivery interruption; lost-write
+transport recovery and React fidelity remain unqualified.
 
-Reversal removes admission of the new protocol. If a future write has used it,
+The first application preflight exposed a companion integration defect: the
+version-8 reader assigned `skipInvisibleInstanceChildren=false`, which the
+unchanged read-only guard refused before any document write. **AGENT decision,
+2026-09-20:** version 9 requires the traversal setting to already be false and
+never assigns it. The new plan version keeps the failed proposal and its pinned
+programs immutable. A regression runs preflight through the actual companion
+guard: complete traversal passes; hidden-child exclusion refuses without changing
+the setting. The native version-8 exception measurements above remain separate
+evidence. Reversal removes version-9 admission while retaining both journals.
+
+The corrected application journey followed the changed source with the existing
+nine-state set. Fresh source observations retained all seven structure cases,
+nine initial combinations, 54 combined-input activation trials and 81 exact
+restorations; the broad callback refusals remained visible. The review displayed
+one variable, eighteen property corrections and nine derived thumb movements.
+Preflight, one write and a separate readback verified 20px roots, 2px thumb
+positions and 34px hit-area heights on the same native IDs. An unchanged review
+planned and wrote nothing. All nine source root and pseudo-box measurements
+agreed; the selected original thumb's live DOM measurement also agreed. These
+are geometry observations, not a new pixel-fidelity grade.
+
+Restoring all 37 source-file hashes and refreshing the bounded state experiment
+produced a reverse proposal. The companion was closed after pairing and before
+start; the saved start request had no dispatched command. Reconnecting resumed
+that same request, dispatched one write, and independently verified the complete
+original 29-node and 30-variable observation plus nine byte-identical PNGs. The
+reverse removed the temporary dimension history while preserving allocation
+identity. A further review planned nothing. Both native canvases were inspected
+with the companion closed. Earlier 9,662 journal files and 34,326 protected
+recipe/parity/evaluation files stayed unchanged. The initial refused preflight,
+its old program bytes and both successful update journals remain recorded in
+`private/bound-cross-size-20260920-1656/application-update-v1/`.
+
+A separate disposable native probe exercised horizontal and vertical fixed
+cross-axis roots inside fixed, non-layout component sets. At 16, 32, 256 and
+16,384 pixels, the root size and centered child position matched the predictor;
+both parent sets and the containing section kept their exact bounds. Synchronous
+observations matched those after export, and restoring 20px returned the entire
+probe baseline. Its eleven nodes, variable and collection were removed, the
+original page-child list restored, and the original application canvas inspected.
+This bounds the parent-extent concern; it does not expand supported layout scope
+or provide a pixel-fidelity grade.
+
+Reversal removes admission of the new protocol. If a prior write has used it,
 first retain read-only verification of that authenticated history; never rewrite
 allocation stamps or discard its recorded original values.

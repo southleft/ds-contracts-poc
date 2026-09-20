@@ -1,15 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
 import {boundCrossSizeFixture} from './native-contract-bound-cross-size-test-fixture.js';
-import {prepareNativeBoundCrossSizeUpdate} from './native-contract-bound-cross-size-update.js';
-import {emitNativeBoundCrossSizeUpdateScript} from './native-contract-bound-cross-size-writer.js';
-import {prepareNativeContractUpdate,type NativeOpacityUpdatePlan} from './native-contract-update.js';
+import {prepareNativeContractUpdate,emitNativeContractUpdateScript,verifyNativeContractUpdate,
+  nativeContractUpdateMatches,nativeContractUpdateUntouched} from './native-contract-update.js';
 import {emitNativeContractReadbackScript,verifyNativeContractReadback} from './native-source-observation.js';
 import {nativeBoundCrossSizeObservationMatches} from './native-bound-cross-size-observation.js';
 
 async function fixture(channel:'width'|'height'='height') {
   const f=await boundCrossSizeFixture(channel,true);
-  const {plan}=prepareNativeBoundCrossSizeUpdate(f.input,input=>prepareNativeContractUpdate(input) as {plan:NativeOpacityUpdatePlan;revision:string})!;
+  const {plan}=prepareNativeContractUpdate(f.input);
+  if(plan.kind!=='native-contract-bound-cross-size-update')throw Error('bound-size plan did not reach production dispatcher');
   const nodes=new Map<string,any>(),stack=[f.figma.root];
   while(stack.length){const n=stack.pop();nodes.set(n.id,n);stack.push(...n.children??[]);}
   f.figma.getNodeById=(id:string)=>nodes.get(id);
@@ -29,7 +31,7 @@ async function fixture(channel:'width'|'height'='height') {
   for(const t of plan.absolute){const n=nodes.get(t.nodeId),resize=n.resizeWithoutConstraints.bind(n);
     n.resizeWithoutConstraints=(w:number,h:number)=>{writes.push(n.id);resize(w,h);};}
   const read=()=>f.run(emitNativeContractReadbackScript(plan.before));
-  const run=(direction:'apply'|'rollback'='apply',readOnly=false)=>f.run(emitNativeBoundCrossSizeUpdateScript(plan,direction,readOnly));
+  const run=(direction:'apply'|'rollback'='apply',readOnly=false)=>f.run(emitNativeContractUpdateScript(plan,direction,readOnly));
   return {...f,plan,nodes,variable,writes,read,run};
 }
 
@@ -39,11 +41,30 @@ test('isolated writer preflights, applies, repeats without writes and reverses b
     const applied=await f.run();assert.equal(applied.status,'updated',JSON.stringify(applied.problems));
     assert.equal(verifyNativeContractReadback(f.plan.after,applied.observation).status,'supported-structure-observed');
     assert(nativeBoundCrossSizeObservationMatches(f.plan,applied.observation,'after'));
+    assert(nativeContractUpdateMatches(f.plan,applied.observation,true));assert(!nativeContractUpdateUntouched(f.plan,applied.observation));
+    assert.equal(verifyNativeContractUpdate(f.plan,applied.observation).status,'supported-structure-observed');
     const count=f.writes.length;assert.equal((await f.run()).status,'no-op');assert.equal(f.writes.length,count);
     const reversed=await f.run('rollback');assert.equal(reversed.status,'updated',JSON.stringify(reversed.problems));
     assert(nativeBoundCrossSizeObservationMatches(f.plan,reversed.observation,'before'));
+    assert(nativeContractUpdateUntouched(f.plan,reversed.observation));assert(!nativeContractUpdateMatches(f.plan,reversed.observation,true));
+    assert.equal(verifyNativeContractUpdate(f.plan,reversed.observation,'rollback').status,'supported-structure-observed');
     const restored=structuredClone(reversed.observation);delete restored.images;
     assert.deepEqual(restored,f.plan.baseline);
+  }
+});
+
+test('preflight executes through the real companion read-only guard and never changes traversal scope',async()=>{
+  const code=readFileSync(new URL('../figma-sync/plugin/code.js',import.meta.url),'utf8');
+  const start=code.indexOf('// --- READ-ONLY GUARD (start)'),end=code.indexOf('// --- READ-ONLY GUARD (end)');
+  assert(start>=0&&end>start);
+  const guard=vm.runInNewContext(`${code.slice(start,end)}\ncreateReadOnlyFigma`);
+  for(const hidden of [false,true]){
+    const f=await fixture();f.figma.skipInvisibleInstanceChildren=hidden;
+    const result=await vm.runInNewContext(`(async()=>{${emitNativeContractUpdateScript(f.plan,'apply',true)}\n})()`,{figma:guard(f.figma),console});
+    assert.equal(result.status,hidden?'refused':'preflight-observed',JSON.stringify(result.problems));
+    assert.equal(f.figma.skipInvisibleInstanceChildren,hidden);
+    assert.deepEqual(f.writes,[]);
+    if(hidden)assert(result.problems.includes('native-update-document-scope-unavailable'));
   }
 });
 
