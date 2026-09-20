@@ -63,7 +63,7 @@ function updateProblem(problem: string) {
   return problem;
 }
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial' | 'nested'; sourceRevisions?: string[]; successionProblem?: string;
+  kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
@@ -171,17 +171,18 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       <button type="button" disabled={busy || loading || !!m.successionProblem} onClick={() => void action(`native-operation/${m.operationId}/adopt-source`)}>Follow the current source with the existing {m.caseId} {m.kind === 'initial' ? 'states' : 'roots'}</button>
     </section>)}
     {error && <p role="alert">{error}</p>}
-    <ReactCallbackInspection key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
+    <ReactCallbackInspection prepareStateApi={() => void action(`native-state-api/${selectedCase}`)} nativeBusy={busy} key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
     <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
-      const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';
+      const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api', initial = row.kind === 'initial' || stateApi;
       const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
       // A correction that reached, or may have reached, the canvas.
       const written = !!row.updates?.some(update => update.operation && !['update-prepared','update-preflight-observed','update-refused','update-write-untouched'].includes(update.operation.phase));
       const currentProblems = op.problems.filter(problem => !corrected || problem !== 'native-operation-source-evidence-unavailable');
       return <details key={id} open={row.caseId === selectedCase}>
-        <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
+        <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${stateApi ? '· retained state API' : initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
+        {stateApi && <p>This separate set retains the checked-state initializer and callback declarations from a completed source experiment. Figma variants remain editable visual states. Native interactivity, live updates, visual fidelity and the returned React consumer are not qualified by creation.</p>}
         {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
         {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
         {comparison && op.comparisonContainerWidth !== undefined && <p>This component fills its parent. The comparison frame is {op.comparisonContainerWidth} px wide: the content width of the container it filled in this case’s original render. The reusable main still fills whatever parent it is placed in.</p>}
@@ -191,7 +192,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
         {row.successionProblem && <p role="alert">This operation's source-succession record cannot be read, so its updates are refused until that is repaired. <code>{row.successionProblem}</code></p>}
         {(row.sourceRevisions?.length ?? 0) > 1 && <p>This operation has followed {row.sourceRevisions!.length} source revisions ({row.sourceRevisions!.map(r => r.slice(0, 8)).join(' → ')}). Its creation evidence belongs to the first; changes since then arrive only as reviewed updates to the same nodes. Content and comparison inspections recorded against an earlier revision are unavailable here.</p>}
-        {!comparison && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
+        {!comparison && !stateApi && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {reviewed[id] && <p role="status">{reviewed[id]}</p>}
           {row.updates?.map(update => <div key={update.id}>

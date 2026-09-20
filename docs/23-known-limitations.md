@@ -6476,8 +6476,63 @@ scripts are byte-identical in a before/after engine comparison; the committed
 Figma and Storybook freshness checks pass. Detailed records are under private
 `callback-candidate-isolation-nmtqn4yw/`.
 
-**Live stateful creation and native return remain unqualified.** This engine
-proof does not add an authenticated state-experiment operation to the app,
-qualify installation or visuals, or change the earlier appearance-only Figma
-operation. Reverse by removing the version 2 producer and reader integration;
-retain the prior metadata refusal so existing version 2 targets stay protected.
+The engine proof alone does not qualify a live journey. D.71 records the later
+app creation and installed native return; the earlier appearance-only operation
+remains unchanged. Reverse by removing the version 2 producer and reader
+integration; retain the prior metadata refusal so existing version 2 targets
+stay protected.
+
+
+## D.71 A separate app operation preserves the observed state API through native return
+
+**AGENT decision — authenticate a separate state experiment.** The app's
+**Prepare … state API for Figma** action combines the current sealed state
+experiment with its separately authenticated initial-state observation. The
+request accepts no arbitrary contract, script or file selector. It reserves one
+operation for that source/case, independently of the earlier appearance-only
+operation. Changing the experiment cannot allocate a duplicate under that
+reservation. The existing companion, token writer, component writer and
+independent readback perform the four native phases.
+
+The independent Switch journey was exercised through the application in
+Evaluations. Its source experiment records 54 activation trials and 81 exact
+restorations. The new native operation creates nine editable component mains
+with exact 32 × 18.390625 roots and retained checked/defaultChecked/disabled/
+onCheckedChange declarations. Independent readback reports no problems. A
+fresh native instance visits all nine variant combinations, then restores
+identical properties and PNG bytes. The plugin is closed for canvas inspection.
+Repeated preparation retains the same operation and eight journal events; all
+358 earlier operation files remain unchanged.
+
+Two canonical native dumps agree byte-for-byte. Loading that capture into the
+app's JSON importer and choosing **Prepare React library** produces an archive
+installed in a clean npm consumer. All 54 input/action trials match the source's
+initial state, live-input changes, two keyboard or associated-label activations,
+disabled behavior and callback arguments. Additional caller-held and
+caller-accepted controlled callbacks pass. The installed app was also operated
+visibly; it imports only its generated package and React dependencies.
+
+Separate guarded frames preserve the source's recorded fractional origin.
+Source → native images pass 9/9 on both backgrounds, maximum 4.167% white /
+2.399% black. Native → installed React also passes 9/9, maximum 4.167% white /
+2.273% black. The 5% limit and scorer are unchanged. Capture clones match their
+original native snapshots; repeated exports and browser captures are identical.
+No component CSS overrides supply missing geometry. Standard layout-only crops
+still refuse shadow overflow, and exact descendant geometry remains different:
+the thumb's local y is 1.1953125 in Figma and 1.1875 in the browser; the invisible
+hit-area decoration also differs. These are measured initial images, not pixel
+identity or all-state visual qualification.
+
+**Still unqualified:** live updates of this new operation, hover/focus,
+responsive and dark states, the nine excluded source inputs, deeper composition
+and the complete independent family. Figma retains behavior declarations; it
+does not execute React interactions. The earlier bound-height update refusal
+is unchanged. Detailed app journals, captures, exact package hash, lockfile,
+source-matched trials and visible review are preserved under private
+`stateful-native-return-1e6l8my3/`.
+
+Adversarial checks cover changed input seals, a newer failed observation,
+wrong-file delivery, stale source, altered metadata readback, operation reopen,
+repeat reservation and unsupported updates. Reverse the new app route and
+adapter to stop preparing these operations; preserve existing journals and the
+metadata reader/refusal so previously created targets remain recoverable.

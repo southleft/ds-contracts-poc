@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ReactStateApiInspection as Inspection } from '../../../source-reference/react-state-api-inspection';
 
-export function ReactStateApiInspection({ referenceId, caseId, available }: { referenceId: string; caseId: string; available: boolean }) {
+export function ReactStateApiInspection({ referenceId, caseId, available, prepareNative, nativeBusy }: { referenceId: string; caseId: string; available: boolean; prepareNative?:()=>void; nativeBusy?:boolean }) {
   const [result, setResult] = useState<Inspection | null>(null), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   const endpoint = `/api/source-reference/react/${referenceId}/state-api/${caseId}`;
   useEffect(() => {
@@ -64,6 +64,10 @@ export function ReactStateApiInspection({ referenceId, caseId, available }: { re
         {result.draft.status === 'generated-draft' && <details><summary>Try the generated state control</summary>
           <iframe title="Generated state API consumer" src={endpoint + '/preview'} sandbox="allow-scripts" style={{width:'100%',height:610,border:'1px solid #ddd'}}/>
         </details>}
+        {result.draft.status === 'generated-draft' && prepareNative && <>
+          <p>Prepare a separate editable Figma set that retains these checked-state inputs and callback declarations. Drawing the states does not make them interactive in Figma. Visual fidelity and the returned React consumer still need review.</p>
+          <button type="button" disabled={nativeBusy || busy || result.phase !== 'complete'} onClick={prepareNative}>Prepare {caseId} state API for Figma</button>
+        </>}
         {result.draft.problems.map(problem=><p key={problem} role="alert">{problem}</p>)}
       </section>}
       {[...result.problems, ...(result.observation?.problems ?? [])].map((problem, index) => <p key={index} role="alert">{problem}</p>)}
