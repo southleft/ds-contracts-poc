@@ -52,7 +52,11 @@ test("both product surfaces render the canonical document, including its scope a
   const html = renderProductOverview(markdown, "/assets/product-loop.svg");
   const site = systemPage();
   assert.equal(site.route, "system");
-  assert.ok(site.html.includes(`<article>${html}</article>`));
+  assert.ok(
+    site.html.includes(
+      `<article>${renderProductOverview(markdown, "/assets/product-loop.svg", "site")}</article>`,
+    ),
+  );
   assert.match(html, /v1 is not complete/i);
   assert.match(html, /does not automatically edit React source/);
   assert.match(html, /src="\/assets\/product-loop.svg"/);
