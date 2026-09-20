@@ -869,7 +869,8 @@ export function createNativeOperationJobs(
     readSnapshot.set(key, structuredClone(value));
     return value;
   }
-  const loadFresh = (id: string) => {
+  const loadFresh = (id: string, baselineRevision?: string) => {
+    if (baselineRevision !== undefined && !HASH.test(baselineRevision)) fail('baseline-revision-invalid');
     directories();
     ensure(dir(id));
     ensure(path.join(dir(id), "events"));
@@ -931,6 +932,16 @@ export function createNativeOperationJobs(
       .map(name=>['sha256:'+name.slice(18,-5),JSON.parse(bytes(path.join(dir(id),name)).toString())]));
     const events: Event[] = [];
     const digests: string[] = [];
+    const fingerprintOf = () => sha(encode({
+      header: sha(headerBytes), plan: sha(planBytes), script: sha(scriptBytes),
+      claim: claimBytes ? sha(claimBytes) : null,
+      componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
+      ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
+      ...(Object.keys(revisionRepairClaims).length ? {revisionRepairClaims:sha(encode(revisionRepairClaims))} : {}),
+      ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
+      digests,
+    }));
+    let pinned: {state: State; count: number; previous: string} | undefined;
     let previous = sha(headerBytes);
     const state: State = {
       phase: "prepared",
@@ -1125,24 +1136,28 @@ export function createNativeOperationJobs(
       previous = sha(data);
       digests.push(previous);
       events.push(event);
+      if (baselineRevision !== undefined && fingerprintOf() === baselineRevision)
+        pinned = {state: structuredClone(state), count: events.length, previous};
     }
     if (!!componentClaim !== state.dispatchedComponent)
       fail("component-creation-journal-incomplete");
     if (!!repairClaim !== !!state.repairWritten) fail("repair-write-journal-incomplete");
     if (!!recoveryClaim !== !!state.recoveryWritten) fail("recovery-write-journal-incomplete");
-    const fingerprint = sha(
-      encode({
-        header: sha(headerBytes),
-        plan: sha(planBytes),
-        script: sha(scriptBytes),
-        claim: claimBytes ? sha(claimBytes) : null,
-        componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
-        ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
-        ...(Object.keys(revisionRepairClaims).length?{revisionRepairClaims:sha(encode(revisionRepairClaims))}:{}),
-        ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
-        digests,
-      }),
-    );
+    const fingerprint = fingerprintOf();
+    if (baselineRevision !== undefined) {
+      // A written correction pins a historical parent observation. Later reads
+      // must remain in the validated journal, but cannot replace that baseline.
+      // Validate the COMPLETE journal above before admitting a historical prefix.
+      if (!pinned) fail('baseline-revision-unavailable');
+      if (state.pending || pinned.state.pending) fail('baseline-observation-unsettled');
+      const suffix = events.slice(pinned.count);
+      if (suffix.some(event => event.kind === 'dispatch'
+        ? event.command.phase !== 'component-readback' || !event.command.readOnly || !!event.comparisonRefresh || !!event.comparisonRepair
+        : event.kind !== 'result' && event.kind !== 'abandon-observation'))
+        fail('baseline-suffix-not-read-only');
+      return {header, plan, script, state: pinned.state, events: events.slice(0,pinned.count),
+        previous: pinned.previous, fingerprint: baselineRevision};
+    }
     return { header, plan, script, state, events, previous, fingerprint };
   };
   type Loaded = ReturnType<typeof loadFresh>;
@@ -1653,8 +1668,9 @@ export function createNativeOperationJobs(
       // observation this operation follows today.
       return structuredClone(effectiveSource(id, header.request) as ReactInitialNativeRequest);
     },
-    reactUpdateBaseline(id: string) {
-      const loaded = load(id);
+    reactUpdateBaseline(id: string, baselineRevision?: string) {
+      const loaded = baselineRevision === undefined ? load(id)
+        : readOnce('baseline:'+id+':'+baselineRevision, () => loadFresh(id,baselineRevision));
       if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
           !isReactPlan(loaded.plan) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) ||
           loaded.state.pending || !loaded.state.imageReadback)
@@ -1669,6 +1685,14 @@ export function createNativeOperationJobs(
         fail('react-update-verified-baseline-required');
       return structuredClone({ input, receipt, request: loaded.header.request, source: effectiveSource(id, loaded.header.request),
         journalRevision: loaded.fingerprint });
+    },
+    /** Current parent context for a fresh correction observation. No historical
+     * prefix is selected here, and an in-flight parent read cannot be ignored. */
+    reactUpdateJournalRevision(id: string) {
+      const loaded=load(id);
+      if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
+          loaded.state.pending) fail('react-update-parent-context-unavailable');
+      return loaded.fingerprint;
     },
     /** Creation pin of an operation that can follow a later source observation. */
     reactSuccessionSubject(id: string) {

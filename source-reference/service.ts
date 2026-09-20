@@ -765,8 +765,8 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
-  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
-    const baseline = nativeJobs.reactUpdateBaseline(id);
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision) => {
+    const baseline = nativeJobs.reactUpdateBaseline(id, parentJournalRevision);
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
     // identity, and therefore every existing allocation, stays the same.
@@ -779,7 +779,7 @@ export function createReferenceService(
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
     } };
-  }, id => nativeUpdateJobs.updateHistory(id));
+  }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

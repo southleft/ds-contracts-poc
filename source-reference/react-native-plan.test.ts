@@ -341,6 +341,40 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
     assert.deepEqual(jobs.verifiedReactInitialObservation(first.id).request, initialRequest);
     assert.throws(() => jobs.reactRequest(first.id), /react-operation-required/);
   }
+  const baseline = jobs.reactUpdateBaseline(first.id);
+  const operationDir = path.join(repo,'private/source-native-app/operations',first.id);
+  const headerFile = path.join(operationDir,'operation.json');
+  const originalHeader = readFileSync(headerFile,'utf8');
+  transport.retryObservation(first.id);
+  assert.throws(() => jobs.reactUpdateBaseline(first.id,baseline.journalRevision), /baseline-observation-unsettled/);
+  await send({type:'native-poll'});
+  const latest = jobs.reactUpdateBaseline(first.id);
+  assert.notEqual(latest.journalRevision,baseline.journalRevision);
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id,baseline.journalRevision),baseline,
+    'later readback remains recorded but does not replace the correction baseline');
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id),latest,'historical access cannot change the current observation');
+  const main = host.figma.root.findAll((node:any) => node.type==='COMPONENT')[0];
+  const opacity = main.opacity;main.opacity=0.75;
+  transport.retryObservation(first.id);await send({type:'native-poll'});
+  assert.equal(jobs.get(first.id).phase,'component-observation-refused');
+  assert.throws(() => jobs.reactUpdateBaseline(first.id),/react-update-verified-baseline-required/);
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id,baseline.journalRevision),baseline,
+    'the immutable historical receipt stays historical when a later read reports changed canvas');
+  main.opacity=opacity;
+  transport.retryObservation(first.id);await send({type:'native-poll'});
+  assert.equal(jobs.get(first.id).phase,'component-structure-observed');
+  assert.throws(() => jobs.reactUpdateBaseline(first.id,'f'.repeat(64)),/baseline-revision-unavailable/);
+  assert.throws(() => jobs.reactUpdateBaseline(first.id,'not-a-hash'),/baseline-revision-invalid/);
+  writeFileSync(headerFile,originalHeader.replace('"startedAt":','"unexpected":true,"startedAt":'));
+  assert.throws(() => jobs.reactUpdateBaseline(first.id,baseline.journalRevision),/journal-chain-invalid/,
+    'a saved prefix never bypasses complete current journal validation');
+  writeFileSync(headerFile,originalHeader);
+  const eventFile = path.join(operationDir,'events','00000009.json');
+  const originalEvent = readFileSync(eventFile,'utf8');
+  writeFileSync(eventFile,originalEvent.replace('"previousSha256": "','"previousSha256": "0'));
+  assert.throws(() => jobs.reactUpdateBaseline(first.id,baseline.journalRevision),/journal-chain-invalid/,
+    'corrupt later readback cannot be hidden behind an intact saved prefix');
+  writeFileSync(eventFile,originalEvent);
   current = false;
   if (kind === 'initial') assert.throws(() => jobs.verifiedReactInitialObservation(first.id));
   assert.equal(jobs.get(first.id).sourceCurrent, false);
