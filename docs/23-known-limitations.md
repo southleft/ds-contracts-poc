@@ -6347,6 +6347,16 @@ frames use their own width axis. HUG, FILL, mixed or unknown sizing retains the
 historical max-width mapping with a review note; this change does not qualify
 those cases.
 
+**AGENT correction, 2026-09-20:** the fixed-width rule also requires a finite,
+positive measured width on every plane. A legacy capture with no bounding box
+does not establish that evidence. The reference-site replay exposed the missing
+guard as two Card width/max-width disagreements; the same failure reproduced on
+the unchanged preceding commit. Requiring the measurement restores all three
+legacy round-trip rows without rewriting their receipts and leaves the measured
+fixed-control rule intact. Missing, zero, negative and nonfinite widths retain
+the review path. Reverse by removing this measurement guard and its negative
+cases; the legacy replay will report the disagreement again.
+
 The app-created independent Switch exposed both general defects on return.
 Its bound on-state paint disappeared when disabled opacity expanded into a
 second map. Its fixed 32px width became max-width, shrinking the installed
@@ -7024,6 +7034,9 @@ record as a Boolean experiment or rewrite prior evidence.
 
 ## D.82 Three-state native delivery passes appearance but the return loses stroked vectors
 
+Historical first return. The later stroked-path implementation and fresh application
+return are measured in [D.84](#d84-open-stroked-paths-retain-their-centerline-and-parent-viewport); the original failed archive and captures remain unchanged.
+
 **Measured through the application, 2026-09-20.** The built-in Checkbox's
 three-state experiment completes 96 activation trials and 144 restorations.
 The generated preview and the app-delivered archive installed in a clean React
@@ -7046,7 +7059,7 @@ black**. The authenticated twelve-row cohort is committed under
 **Review recorded matched frames**. Earlier captures remain immutable.
 
 The canonical native dump is imported through the application's JSON tab and
-exported using **Prepare React library**. This return remains visually
+exported using **Prepare React library**. That first return was visually
 unqualified: **6/12 appearances** pass, with maximum **10.75% white / 8% black**,
 despite exact outer bounds on all twelve. Every checked or mixed state loses
 its checkmark. The reader explicitly reports unsupported stroked-vector
@@ -7108,3 +7121,79 @@ including response timings, the completed app view and unchanged-repeat hashes.
 No native operation was created or modified for this change. Reversal removes
 the progress shortcut from the GET route and retains all sealed observations;
 no evidence rewrite or migration is required.
+
+
+## D.84 Open stroked paths retain their centerline and parent viewport
+
+**AGENT decision, 2026-09-20.** A decorative `shape.kind: "stroked-path"`
+retains one original open absolute M/L/C/Q path, its uniform cap, join and miter
+limit, and the exact local position and size of its free-layout parent viewport.
+The canonical Plugin API dump is version 1.40. REST remains 1.39 and refuses
+stroked vectors: its outlined stroke geometry is not the original centerline.
+Use the canonical desktop capture and import its JSON through the application.
+
+The supported native subset has one solid centered stroke, no fill, no dash,
+no effect, no mask or transform, zero corner radius, a uniform width profile,
+and SCALE constraints on both axes. The parent must be an unpadded, unclipped
+free-layout frame. The contract requires a fixed, undecorated relative parent
+containing only stroked-path leaves. Width and parent dimensions must be positive
+pixel measures; relative units, percentages, negative or zero values, and
+inherited stroke paint refuse. Native compilation also checks resolved token
+dimensions. Nonpositive bounds, incompatible parent
+channels or content, malformed geometry, changing geometry across variants,
+partial capture and nonmatching parent dimensions refuse by name. Polynomial
+extrema must agree with the declared local origin and bounds, exactly or as
+float32; no sampled approximation or tolerance is used. Only SVG space, tab,
+carriage return and line feed separators are accepted. A browser probe found
+that broader JavaScript whitespace accepted NBSP and vertical tabs while
+Chromium rendered an empty path; both parsers now refuse those characters.
+
+React, React inline, HTML and Web Component projections paint the original
+path in an SVG covering the parent viewport, with `non-scaling-stroke`.
+The existing border-color and border-width channels become SVG stroke paint
+and width only on code surfaces. Native emission creates editable VECTORs
+with those stroke bindings, cap, join and proportional constraints. It never
+resizes a mismatched path to conceal a geometry error. Parent dimensions are
+checked during compilation, then checked again against live Figma values.
+The browser canvas previews use the same viewport projection.
+
+A fresh canonical capture of the twelve-state native set from D.82 retained
+all six stroked vectors and reported no degradations. Importing that dump and
+choosing **Prepare React library** produced a new, unmodified archive. A clean
+consumer passed **96/96 behavior trials** and **12/12 visual pairs**, with all
+twelve root boxes exact and maximum **0% white / 2.25% black** mismatch under
+the unchanged 5% scorer. Visible interaction confirms the glyph, caller-held
+mixed state and callback acceptance. The older 6/12 return remains preserved.
+
+An independent generated native probe covers a polyline, cubic curve and
+quadratic curve with all three supported caps and joins. All nine combinations
+across three parent sizes have exact geometry and unchanged stroke width;
+all nine image pairs pass on both backgrounds (maximum **2.28%**). Color and
+width bindings survive native creation and resizing. A native centerline edit
+was restored exactly. Repeating the generated script created no nodes and
+retained the same component identity. Figma normalizes path serialization and
+converts quadratic segments to cubic segments; original string identity is
+not claimed. The bridge was closed before inspecting the native canvas.
+
+This qualifies a bounded code-originated return and the generic stroke rule,
+not designer-authored coverage, automatic source repair or complete V1.
+Source variable identity is retained where the existing inverse binding rules
+can represent it; variant-presence gaps can still produce named provisional
+paint tokens. Path-edit reconciliation and the older canvas fingerprint's
+geometry exclusion remain outside this evidence. HTML and Web Component
+markup conformance is checked; their interactive consumer journeys are not
+part of React V1. Development hot reload can clear session import tokens;
+reloading the saved dump restores that session layer.
+
+Private evidence: `stroked-path-implementation-20260920-1248/`, including the
+actual app contract and archive `d5163d72…`, 96 behavior rows, twelve image
+pairs, the original failed uniform-profile capture probe, nine generic pairs,
+editable-node readbacks and screenshots. Native probe writes are confined to
+Evaluations page `89:1364`, sections `89:1365` and `89:1376`, component
+`89:1369`, and their recorded descendants; its two probe variables are
+`89:1367` and `89:1368`. The earlier source-generated set is unchanged.
+
+Reversal removes the stroked-path schema, capture and emitter branches and
+restores an explicit unsupported-vector refusal. Preserve both archives,
+all earlier failures, canonical readbacks and native probe records; do not
+rewrite old results or substitute an outlined silhouette for the stroke.

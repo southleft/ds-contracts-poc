@@ -9,7 +9,7 @@ import type {
   ProjectionMode,
   RoundtripRows,
 } from '../engine/flow-engine';
-import { PRODUCER_DUMP_GRAMMAR, fixtureLabel } from '../engine/flow-engine';
+import { PRODUCER_DUMP_GRAMMAR, PLUGIN_DUMP_GRAMMAR, fixtureLabel } from '../engine/flow-engine';
 import type { TailwindBundle } from '../engine/flow-data';
 import { ENVELOPE_DOORS, HOPS, QUOTED_REFUSALS, type TourStep } from '../engine/tours';
 import { CopyButton } from './CopyButton';
@@ -431,7 +431,8 @@ function Body({ view }: { view: FlowView }) {
           <Kv
             rows={[
               ['fixture label', fixtureLabel(s)],
-              ['producers’ grammar today', `dump v${PRODUCER_DUMP_GRAMMAR} (REST_DUMP_VERSION, extract/figma/rest/map.ts; dump.plugin.js writes the same)`],
+              ['REST capture grammar', `dump v${PRODUCER_DUMP_GRAMMAR} (extract/figma/rest/map.ts)`],
+              ['plugin capture grammar', `dump v${PLUGIN_DUMP_GRAMMAR} (extract/figma/dump.plugin.js; includes original open vector centerlines)`],
               ['_provenance.fileKey', <Mono key="k">{s.fileKey ?? '—'}</Mono>],
               ['_provenance.extractedAt', s.extractedAt ?? '—'],
               [

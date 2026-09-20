@@ -33,13 +33,12 @@ import {
   type TokenTreeInput,
 } from '../../../core/index.js';
 import { REST_DUMP_VERSION } from '../../../extract/figma/rest/map.js';
-import type { DumpFile, DumpSet } from '../../../extract/figma/types.js';
+import { PLUGIN_DUMP_VERSION, type DumpFile, type DumpSet } from '../../../extract/figma/types.js';
 
-/** The dump grammar BOTH producers write today (extract/figma/dump.plugin.js
- *  and extract/figma/rest/map.ts) — read from the REST mapper's exported
- *  constant, never typed as a literal here. A fixture is labelled by its OWN
- *  `_provenance.dumpVersion`, which may be older. */
+/** Producer versions differ when only one API exposes a capture feature.
+ * A fixture is labelled by its own `_provenance.dumpVersion`, which may be older. */
 export const PRODUCER_DUMP_GRAMMAR: string = REST_DUMP_VERSION;
+export const PLUGIN_DUMP_GRAMMAR: string = PLUGIN_DUMP_VERSION;
 
 // ---------------------------------------------------------------------------
 // Hop 2 — compile (contract → canvas node specs + code-only facts)

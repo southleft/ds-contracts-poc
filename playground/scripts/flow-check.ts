@@ -45,7 +45,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, emitters, generateCss, tokenCorpusFromJson, tokenInventoryFromJson, validateContract, type Contract } from '../../core/index.js';
 import { REST_DUMP_VERSION } from '../../extract/figma/rest/map.js';
-import type { DumpSet } from '../../extract/figma/types.js';
+import { PLUGIN_DUMP_VERSION, type DumpSet } from '../../extract/figma/types.js';
 import {
   canvasProvenanceOf,
   compileReceipt,
@@ -57,6 +57,7 @@ import {
   fixtureLabel,
   parseRoundtripReceipt,
   PRODUCER_DUMP_GRAMMAR,
+  PLUGIN_DUMP_GRAMMAR,
   proposeFixtureSet,
   rootTokenAgreement,
   summarizeDump,
@@ -330,7 +331,11 @@ check(
 console.log('Dump grammar');
 check('PRODUCER_DUMP_GRAMMAR === REST_DUMP_VERSION', PRODUCER_DUMP_GRAMMAR === REST_DUMP_VERSION, `${PRODUCER_DUMP_GRAMMAR} vs ${REST_DUMP_VERSION}`);
 const pluginGrammar = read('extract/figma/dump.plugin.js').match(/dumpVersion:\s*'([\d.]+)'/)?.[1] ?? null;
-check('dump.plugin.js writes the same grammar as the REST mapper', pluginGrammar === REST_DUMP_VERSION, `${pluginGrammar} vs ${REST_DUMP_VERSION}`);
+check('dump.plugin.js writes its independently declared plugin grammar', pluginGrammar === PLUGIN_DUMP_VERSION && PLUGIN_DUMP_GRAMMAR === PLUGIN_DUMP_VERSION, `${pluginGrammar} vs ${PLUGIN_DUMP_VERSION}`);
+check('import and flow copy identify each producer version',
+  read('playground/src/pages/Playground.tsx').includes('plugin capture uses version {PLUGIN_DUMP_GRAMMAR}') &&
+  read('playground/src/components/FlowPanel.tsx').includes('plugin capture grammar') &&
+  !read('playground/src/pages/Playground.tsx').includes('Both readers use capture version'));
 // The tour COPY may never state a grammar version as a literal — it reads
 // PRODUCER_DUMP_GRAMMAR. (Playground.tsx's older "dump v1.4" notes name the
 // producer version a CHANNEL appeared in, which is a different claim.)

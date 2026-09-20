@@ -1,3 +1,4 @@
+import { strokedPathSvg, shapeCssDecls } from '../../../scripts/contract-schema.js';
 /**
  * Canvas preview — the DESIGN side of the contract, rendered as HTML.
  *
@@ -199,7 +200,8 @@ interface RenderCtx {
 
 function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   const d: string[] = [];
-  if (spec.layout) {
+  if (spec.strokeViewport) d.push('position: relative', 'display: block');
+  if (spec.layout && !spec.strokeViewport) {
     d.push('display: flex');
     d.push(`flex-direction: ${spec.layout.mode === 'VERTICAL' ? 'column' : 'row'}`);
     d.push(`justify-content: ${PRIMARY_CSS[spec.layout.primary]}`);
@@ -374,6 +376,12 @@ function renderInstance(
 function shapeStyle(spec: NodeSpec, ctx: RenderCtx): string {
   const sh = spec.shape!;
   ctx.used.add('shape');
+  if (sh.kind === 'stroked-path') {
+    const paint = [...strokeCss(spec), ...bindingCss(spec), ...litStyles(spec)]
+      .filter(d => !d.startsWith('border-style:'))
+      .map(d => d.replace(/^border-color:/, 'stroke:').replace(/^border-width:/, 'stroke-width:'));
+    return [...shapeCssDecls(sh), ...paint].join('; ');
+  }
   const d = [`width: ${sh.width}px`, `height: ${sh.height}px`, 'flex-shrink: 0'];
   if (sh.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(sh.sides ?? 3)}`);
   if (sh.kind === 'ellipse') d.push('border-radius: 50%');
@@ -420,7 +428,7 @@ function renderNode(
 
   if (spec.type === 'shape') {
     const style = [shapeStyle(spec, ctx), extraStyle].filter(Boolean).join('; ');
-    return `<div style="${style}"></div>`;
+    return `<div style="${style}">${spec.shape?.kind === 'stroked-path' ? strokedPathSvg(spec.shape) : ''}</div>`;
   }
 
   if (spec.type === 'svg') {

@@ -9,6 +9,8 @@
 import {
   PropSchema,
   filledPathIssue,
+  strokedPathGeometryIssue,
+  strokedPathDimensionOk,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -817,6 +819,57 @@ export function validateContract(
         }
       }
       const shape = part.shape;
+      if (shape.kind === 'stroked-path') {
+        const issue = strokedPathGeometryIssue(shape);
+        if (issue) errors.push(`${contract.id}: ${name}: ${issue}`);
+        if (shape.paths || shape.pathsByProp || shape.rotation || shape.arc || shape.sides || part.animation || part.repeat || part.textAutoResize || part.element || part.attrs || part.layout || part.layoutByProp ||
+            part.overlay || part.placement || part.textByProp || part.hugsBelowMaxWidth || part.textOutOfBox || part.strokesIncludedInLayout !== undefined)
+          errors.push(`${contract.id}: ${name}: stroked-path-conflicting-geometry-or-semantics`);
+        const maps = [part.tokens, part.literals, part.declared, ...Object.values(part.states ?? {}),
+          ...Object.values(part.declaredStates ?? {}),
+          ...tokensByPropEntries(part).flatMap(entry => Object.values(entry.map)),
+          ...(part.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+          ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+          ...(part.stylesWhen ?? []).map(rule => rule.styles)];
+        for (const map of maps) for (const [key, value] of Object.entries(map ?? {})) {
+          if (!['border-color', 'border-width', 'opacity', 'border-style', 'position', 'display'].includes(key) ||
+              key === 'border-style' && value !== 'solid' || key === 'position' && value !== 'absolute' ||
+              key === 'display' && !['block', 'none'].includes(value))
+            errors.push(`${contract.id}: ${name}: stroked-path-unsupported-channel:${key}`);
+          if (key === 'border-width' && !value.startsWith('{') && !strokedPathDimensionOk(value))
+            errors.push(`${contract.id}: ${name}: stroked-path-width-unsupported`);
+          if (key === 'border-color' && ['inherit', 'currentColor'].includes(value))
+            errors.push(`${contract.id}: ${name}: stroked-path-inherited-paint-unsupported`);
+        }
+        if (!['border-color', 'border-width'].every(key => key in (part.tokens ?? {}) || key in (part.literals ?? {})))
+          errors.push(`${contract.id}: ${name}: stroked-path-paint-or-width-missing`);
+        const parent = walkAnatomy(contract).find(w => w.path.length === p.length - 1 && w.path.every((key, i) => key === p[i]))?.part;
+        if (!parent || p.length < 3 || parent.declared?.position !== 'relative' || parent.layout || parent.layoutByProp || parent.shape ||
+            parent.element || parent.attrs || parent.animation || parent.overlay || parent.placement || parent.repeat || parent.slot || parent.component ||
+            parent.content || parent.text !== undefined || parent.textByProp || parent.icon || parent.meter || parent.textAutoResize || parent.hugsBelowMaxWidth || parent.textOutOfBox || parent.strokesIncludedInLayout !== undefined ||
+            Object.values(parent.parts ?? {}).some(child => child.shape?.kind !== 'stroked-path') ||
+            !['width', 'height'].every(key => key in (parent.tokens ?? {}) || key in (parent.literals ?? {})))
+          errors.push(`${contract.id}: ${name}: stroked-path-parent-basis-unsupported`);
+        if (parent) {
+          const baseMaps = [parent.tokens, parent.literals, parent.declared];
+          const dynamicMaps = [...Object.values(parent.states ?? {}), ...Object.values(parent.declaredStates ?? {}),
+            ...tokensByPropEntries(parent).flatMap(entry => Object.values(entry.map)),
+            ...(parent.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+            ...(parent.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+            ...(parent.stylesWhen ?? []).map(rule => rule.styles)];
+          for (const map of [...baseMaps, ...dynamicMaps]) for (const [key, value] of Object.entries(map ?? {})) {
+            if (!['width', 'height', 'opacity', 'position', 'display'].includes(key) ||
+                key === 'position' && value !== 'relative' || key === 'display' && !['block', 'none'].includes(value) ||
+                map && dynamicMaps.includes(map) && ['width', 'height'].includes(key))
+              errors.push(`${contract.id}: ${name}: stroked-path-parent-channel-unsupported:${key}`);
+            if (['width', 'height'].includes(key) && !value.startsWith('{') && !strokedPathDimensionOk(value))
+              errors.push(`${contract.id}: ${name}: stroked-path-parent-dimension-unsupported:${key}`);
+          }
+          if (shape.strokePath && Object.values(parent.parts ?? {}).some(child => child.shape?.kind === 'stroked-path' &&
+              (child.shape.strokePath?.viewport.width !== shape.strokePath!.viewport.width || child.shape.strokePath?.viewport.height !== shape.strokePath!.viewport.height)))
+            errors.push(`${contract.id}: ${name}: stroked-path-parent-basis-conflict`);
+        }
+      } else if (shape.strokePath) errors.push(`${contract.id}: ${name}: stroked-path-on-other-shape`);
       if (shape.kind === 'path') {
         if (!shape.paths?.length) errors.push(`${contract.id}: ${name}: filled-path-missing-geometry`);
         const paintMaps = [part.tokens, part.literals, part.declared,
