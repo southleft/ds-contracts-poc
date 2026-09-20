@@ -23,6 +23,18 @@ export function deriveLoweringLines<T extends { rules: LocatedRule[] }>(register
   return next;
 }
 
+
+/** Refresh every cited row, including a stale document beside a current register. */
+export function deriveLoweringDocument(text: string, rules: LocatedRule[]): string {
+  return text.split('\n').map(line => {
+    const rule = rules.find(r => line.startsWith(`| \`${r.id}\` |`));
+    if (!rule) return line;
+    const cells = line.split('|');
+    cells[3] = ` \`${path.basename(rule.file)}:${rule.ruleLine}\` `;
+    return cells.join('|');
+  }).join('\n');
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   if (process.argv.slice(2).join(' ') !== '--write') throw Error('Usage: tsx scripts/lowering-lines.ts --write');
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -31,11 +43,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const next = deriveLoweringLines(prior, (name) => readFileSync(path.join(root, name), 'utf8'));
   const moved = next.rules.filter((rule: LocatedRule, i: number) => rule.line !== prior.rules[i].line || rule.ruleLine !== prior.rules[i].ruleLine);
   const doc = path.join(root, 'spec/LOWERING.md');
-  const text = readFileSync(doc, 'utf8').split('\n').map(line => {
-    const rule = moved.find((r: LocatedRule) => line.startsWith(`| \`${r.id}\` |`));
-    if (!rule) return line;
-    const cells = line.split('|'); cells[3] = ` \`${path.basename(rule.file)}:${rule.ruleLine}\` `; return cells.join('|');
-  }).join('\n');
+  const text = deriveLoweringDocument(readFileSync(doc, 'utf8'), next.rules);
   // Derive everything before either write; no rule prose or acceptance changes.
   writeFileSync(file, JSON.stringify(next, null, 2) + '\n');
   writeFileSync(doc, text);
