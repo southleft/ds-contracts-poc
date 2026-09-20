@@ -1,0 +1,85 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icon",
+  "name": "Icon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large",
+          "xlarge",
+          "2xlarge",
+          "xsmall"
+        ]
+      },
+      "default": "small",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "small": "small",
+            "medium": "medium",
+            "large": "large",
+            "xlarge": "xlarge",
+            "2xlarge": "2xlarge",
+            "xsmall": "xsmall"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Placeholder": {
+          "slot": {
+            "name": "children",
+            "defaultContent": [
+              {
+                "id": "ds.placeholder"
+              }
+            ],
+            "bindings": {
+              "figma": {
+                "property": "iconSwap"
+              }
+            }
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.icon.root.width.{size}}",
+        "height": "{imported.icon.root.height.{size}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+        "componentSetKey": "c1c68aeb7b95222cf0755a02f63751df49e3af30",
+        "nodeId": "188:894"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Icon",
+        "export": "Icon"
+      }
+    }
+  }
+}

@@ -293,10 +293,21 @@
   --imported-badge-root-padding-block: 8px;
   --imported-badge-root-padding-inline-large: 12px;
   --imported-badge-root-padding-inline-small: 8px;
-  --imported-stub-icon-root-height-small: 16px;
-  --imported-stub-icon-root-height-xsmall: 12px;
-  --imported-stub-icon-root-width-small: 16px;
-  --imported-stub-icon-root-width-xsmall: 12px;
+  --imported-icon-root-height-2xlarge: 48px;
+  --imported-icon-root-height-large: 24px;
+  --imported-icon-root-height-medium: 20px;
+  --imported-icon-root-height-small: 16px;
+  --imported-icon-root-height-xlarge: 32px;
+  --imported-icon-root-height-xsmall: 12px;
+  --imported-icon-root-width-2xlarge: 48px;
+  --imported-icon-root-width-large: 24px;
+  --imported-icon-root-width-medium: 20px;
+  --imported-icon-root-width-small: 16px;
+  --imported-icon-root-width-xlarge: 32px;
+  --imported-icon-root-width-xsmall: 12px;
+  --imported-placeholder-root-height: 24px;
+  --imported-placeholder-root-width: 24px;
+  --imported-placeholder-vector-background-color: #050a0f;
   --opacity-disabled: 0.5;
   --radius-100: 4px;
   --radius-200: 8px;
@@ -377,28 +388,52 @@
  * Regenerate with: npm run generate
  */
 
-._root_woxz1_6,
-._root_woxz1_6 *,
-._root_woxz1_6 *::before,
-._root_woxz1_6 *::after {
+._root_qhthz_6,
+._root_qhthz_6 *,
+._root_qhthz_6 *::before,
+._root_qhthz_6 *::after {
   box-sizing: border-box;
 }
 
-._root_woxz1_6 {
+._root_qhthz_6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;
 }
 
-._size-small_woxz1_20 {
-  width: var(--imported-stub-icon-root-width-small);
-  height: var(--imported-stub-icon-root-height-small);
+._size-small_qhthz_20 {
+  width: var(--imported-icon-root-width-small);
+  height: var(--imported-icon-root-height-small);
 }
 
-._size-xsmall_woxz1_25 {
-  width: var(--imported-stub-icon-root-width-xsmall);
-  height: var(--imported-stub-icon-root-height-xsmall);
+._size-medium_qhthz_25 {
+  width: var(--imported-icon-root-width-medium);
+  height: var(--imported-icon-root-height-medium);
+}
+
+._size-large_qhthz_30 {
+  width: var(--imported-icon-root-width-large);
+  height: var(--imported-icon-root-height-large);
+}
+
+._size-xlarge_qhthz_35 {
+  width: var(--imported-icon-root-width-xlarge);
+  height: var(--imported-icon-root-height-xlarge);
+}
+
+._size-2xlarge_qhthz_40 {
+  width: var(--imported-icon-root-width-2xlarge);
+  height: var(--imported-icon-root-height-2xlarge);
+}
+
+._size-xsmall_qhthz_45 {
+  width: var(--imported-icon-root-width-xsmall);
+  height: var(--imported-icon-root-height-xsmall);
+}
+
+._Placeholder_qhthz_50 {
+  display: flex;
 }
 /* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/badge.contract.json (ds.badge v0.1.0)

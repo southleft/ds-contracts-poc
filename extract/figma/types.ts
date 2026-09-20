@@ -837,6 +837,11 @@ export interface DumpFile {
           message: string;
           fix: string | null;
         };
+    /** The REST import's dependency closure (docs/23 §D.43): the sets the
+     *  caller requested, the same-file sets followed from their instances,
+     *  and every reference that could not be followed with its reason.
+     *  Absent when no closure ran (`--no-closure`, plugin dumps, fixtures). */
+    closure?: import('./rest/closure.js').DumpClosure;
   };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean).

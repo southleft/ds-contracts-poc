@@ -1,0 +1,79 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.text-passage",
+  "name": "TextPassage",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Text Passage\" instances of Tab Panel — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "width",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Width",
+          "values": {
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "width"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-text-passage.root.width}",
+        "height": "{imported.stub-text-passage.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "fb7a83d7dba779ed160ca96aadbbb34eb5635f67"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/TextPassage",
+        "export": "TextPassage"
+      }
+    }
+  }
+}

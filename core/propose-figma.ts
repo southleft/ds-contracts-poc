@@ -226,7 +226,7 @@ export interface MinimalChildContract {
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
-  bindings?: { figma?: { anchors?: { componentSetKey?: string | null } } };
+  bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } } };
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
    *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
@@ -11587,17 +11587,37 @@ function proposeFromDumpFenced(
   }
   const baseSelfId = stampedContractId ?? `${prefix}.${componentIdSlug(set.setName)}`;
   let selfId = baseSelfId;
+  let idSuffixedFrom: string | undefined;
   const ownKey = set.key ?? null;
-  if (opts.sessionClaimedIds && ownKey !== null) {
+  // A previously allocated id belongs to the drawn component, not its label.
+  // Preserve suffixes even when the original collision was removed or renamed.
+  // Consult real anchor evidence, not a name index or an unverified key index.
+  if (!stampedContractId && opts.sessionClaimedIds) {
+    const matches = [...opts.sessionClaimedIds].filter(id => {
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      if (!anchor || (opts.fileKey && anchor.fileKey && opts.fileKey !== anchor.fileKey)) return false;
+      return ownKey !== null ? anchor.componentSetKey === ownKey
+        : !!opts.fileKey && !!set.nodeId && anchor.fileKey === opts.fileKey && anchor.nodeId === set.nodeId;
+    });
+    if (matches.length > 1) throw Error('FIGMA_IMPORT_IDENTITY_AMBIGUOUS: several session contracts claim the same drawn component');
+    if (matches.length === 1) {
+      selfId = matches[0];
+      if (selfId !== baseSelfId) preNotes.push(`contract id: retained "${selfId}" for the same anchored Figma component; its drawn name does not replace an existing identity`);
+    }
+  }
+  if (opts.sessionClaimedIds && (ownKey !== null || (opts.fileKey && set.nodeId))) {
     const contradicts = (id: string): boolean => {
       if (!opts.sessionClaimedIds!.has(id)) return false;
-      const holderKey = opts.contractsById?.get(id)?.bindings?.figma?.anchors?.componentSetKey ?? null;
-      return holderKey !== null && holderKey !== ownKey;
+      const anchor = opts.contractsById?.get(id)?.bindings?.figma?.anchors;
+      const holderKey = anchor?.componentSetKey ?? null;
+      return (holderKey !== null && ownKey !== null && holderKey !== ownKey) || !!(opts.fileKey && anchor?.fileKey && (opts.fileKey !== anchor.fileKey || (ownKey === null && set.nodeId && anchor.nodeId && set.nodeId !== anchor.nodeId)));
     };
+    const allocated = selfId;
     for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
-    if (selfId !== baseSelfId) {
+    if (selfId !== allocated) {
+      idSuffixedFrom = baseSelfId;
       preNotes.push(
-        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (its componentSetKey contradicts this set's key ${ownKey}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
+        `contract id: "${baseSelfId}" is already claimed in this session by a DIFFERENT drawn component (${ownKey !== null && opts.contractsById?.get(baseSelfId)?.bindings?.figma?.anchors?.componentSetKey !== ownKey ? `its componentSetKey contradicts this set's key ${ownKey}` : 'its file/node anchor contradicts this set'}) — proposed as "${selfId}" (deterministic arrival-order suffix, the stubIdFor contradicting-key discipline at proposal time; without it the session registry would rebind the earlier import's child refs onto this contract and the referee reports a cycle that is not drawn). Rename either component to reclaim the base id`,
       );
     }
   }
@@ -12911,7 +12931,7 @@ function proposeFromDumpFenced(
     projection,
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
-    ...(selfId !== baseSelfId ? { idSuffixedFrom: baseSelfId } : {}),
+    ...(idSuffixedFrom ? { idSuffixedFrom } : {}),
     ...(designerStateAxis !== null ? { stateAxisProjection: designerStateAxis } : {}),
   };
 }

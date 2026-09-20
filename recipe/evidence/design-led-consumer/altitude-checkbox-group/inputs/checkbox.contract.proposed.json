@@ -1,0 +1,261 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Tag: al-checkbox\n\nProps\n- hideLabel: boolean — Hide label?\n- isChecked: boolean — Checked attribute\n- isDisabled: boolean — Disabled attribute\n- isError: boolean — Error state\n- isIndeterminate: boolean — Indeterminate state\n\nSlots\n- (default) — The component content that appears next to the checkbox\n- error — If content is slotted, it will display in place of the errorNote property\n- field-note — If content is slotted, it will display in place of the fieldNote property\n\nAccessibility\n- element: <div>\n- key Enter: Toggles the checked state. Space is the native <input type=\"checkbox\"> activation and needs no handler here.\n- focus: The native input takes focus; the visible indicator is a 1px primary border edge plus a 3px soft halo of the same hue (--al-theme-color-border-primary-default / -weak), with outline: none. The solid edge carries the 3:1 WCAG non-text contrast - the halo is decoration.\n\nDocs: https://altitude.pages.dev/docs/components/checkbox/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/checkbox/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "disabled",
+          "focus",
+          "hover",
+          "error"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "disabled": "Disabled",
+            "focus": "Focus",
+            "hover": "Hover",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "off",
+          "indeterminate",
+          "on"
+        ]
+      },
+      "default": "off",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "off": "Off",
+            "indeterminate": "Indeterminate",
+            "on": "On"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": {
+        "enum": [
+          "shown",
+          "hidden"
+        ]
+      },
+      "default": "shown",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label",
+          "values": {
+            "shown": "Shown",
+            "hidden": "Hidden"
+          }
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Checkbox label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "alCCheckboxContainer": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "parts": {
+            "alCCheckboxCheckbox": {
+              "layout": {
+                "direction": "row",
+                "justify": "center",
+                "align": "center"
+              },
+              "parts": {
+                "focusRing": {
+                  "layout": {
+                    "direction": "row"
+                  },
+                  "parts": {
+                    "alCCheckboxCustomCheck": {
+                      "parts": {
+                        "Frame": {
+                          "parts": {
+                            "Vector": {
+                              "visibleWhen": {
+                                "prop": "checked",
+                                "equals": [
+                                  "indeterminate",
+                                  "on"
+                                ]
+                              },
+                              "tokens": {
+                                "background-color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check-frame-vector.background-color}"
+                              }
+                            }
+                          },
+                          "visibleWhen": {
+                            "prop": "checked",
+                            "equals": [
+                              "indeterminate",
+                              "on"
+                            ]
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "background-color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check.background-color.{checked}}",
+                        "border-color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check.border-color.{state}.{checked}}",
+                        "border-radius": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check.border-radius}",
+                        "border-width": "{imported.shared.size-2}",
+                        "opacity": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring-al-c-checkbox-custom-check.opacity.{state}}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "border-color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox-focus-ring.border-color}",
+                    "padding-inline": "{imported.shared.size-2}",
+                    "padding-block": "{imported.shared.size-2}",
+                    "border-width": "{imported.shared.size-2}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-checkbox.background-color}"
+              }
+            },
+            "alCCheckboxLabel": {
+              "layout": {
+                "direction": "row"
+              },
+              "parts": {
+                "Label": {
+                  "declared": {
+                    "font-family": "Public Sans"
+                  },
+                  "textAutoResize": "WIDTH_AND_HEIGHT",
+                  "content": {
+                    "prop": "text"
+                  },
+                  "visibleWhen": {
+                    "prop": "label",
+                    "equals": "shown"
+                  },
+                  "tokens": {
+                    "color": "{imported.checkbox.al-c-checkbox-container-al-c-checkbox-label-label.color}",
+                    "font-size": "{imported.text.typography-body-sm-regular.font-size}",
+                    "font-weight": "{imported.text.typography-body-sm-regular.font-weight}",
+                    "line-height": "{imported.text.typography-body-sm-regular.line-height}"
+                  }
+                }
+              },
+              "visibleWhen": {
+                "prop": "label",
+                "equals": "shown"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.checkbox.al-c-checkbox-container.gap}"
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "absentVariants": [
+        {
+          "state": "error",
+          "checked": "indeterminate",
+          "label": "shown"
+        },
+        {
+          "state": "error",
+          "checked": "indeterminate",
+          "label": "hidden"
+        },
+        {
+          "state": "error",
+          "checked": "on",
+          "label": "shown"
+        },
+        {
+          "state": "error",
+          "checked": "on",
+          "label": "hidden"
+        }
+      ],
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "c3978918f456ec7509c853203aabd597eb55d365",
+        "nodeId": "3539:42167"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Checkbox",
+        "export": "Checkbox"
+      }
+    }
+  }
+}

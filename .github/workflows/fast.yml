@@ -1025,6 +1025,15 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run figma:rest:refusal:check
 
+      # docs/23 §D.43 — a REST import follows its instances. Recorded CBDS bytes
+      # and REST-shaped synthetic responses through an injected transport, no
+      # network: transitive, cycle, remote, standalone, cap, deterministic order,
+      # the byte-identical opt-out, and the propose CLI turning a refusing
+      # closure child into a NAMED stub while a requested refusal still refuses.
+      - name: figma:rest:closure:check (the import follows its instances; what it cannot follow is named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run figma:rest:closure:check
+
       # CANVAS CENSUS (docs/23 §C.1.1 vocabulary; the owner's v1 bar, 2026-08-23):
       # the denominator is EVERY committed contract with a Figma script — the
       # manifest is regenerated and compared (a contract outside it refuses by

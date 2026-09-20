@@ -1,0 +1,70 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icon",
+  "name": "Icon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Reusable icon glyph component used inside Altitude controls. Choose the glyph for its meaning and inherit semantic content color. In code, use al-icon and the documented icon catalog. Decorative icons should be hidden from assistive technology; meaningful icon-only actions need an accessible label on their control.\n\nDocumentation: https://altitude.pages.dev/docs/icons/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/icons/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "iconContainer": {
+          "slot": {
+            "name": "children",
+            "defaultContent": [
+              {
+                "id": "ds.arrow-arc-left"
+              }
+            ],
+            "bindings": {
+              "figma": {
+                "property": "icon Container"
+              }
+            }
+          },
+          "layout": {
+            "direction": "row",
+            "justify": "space-between",
+            "align": "center",
+            "grow": true
+          },
+          "literals": {
+            "height": "100%"
+          },
+          "tokens": {
+            "gap": "{imported.icon.icon-container.gap}"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.icon.root.width}",
+        "height": "{imported.icon.root.height}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "782f396a88cf625fba8ddf53005fea3801f214f9",
+        "nodeId": "3598:836"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Icon",
+        "export": "Icon"
+      }
+    }
+  }
+}
