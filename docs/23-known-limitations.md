@@ -7417,3 +7417,83 @@ or qualify the composed source round trip.
 Reversal restores the old receipt expectation and its failing source-width
 comparison. Do not reverse by discarding measurements, restoring the guessed
 maximum in the converter, changing a tolerance, or rewriting historical evidence.
+
+## D.87 Pixel-dimension value history does not authorize a bound-size write
+
+The existing token update history only admits `number` leaves. A measured root
+height is a `dimension` leaf, so the history protocol could not retain its new
+value while preserving its original allocation identity.
+
+**AGENT decision, 2026-09-20.** A new explicit `px-dimension-v1` history protocol
+permits requested dimension leaves whose old and current values are finite
+literal `px` strings. Both compile to one FLOAT variable. Relative units,
+structured values, aliases, other types, unknown protocols and an unnecessary
+dimension-protocol marker refuse. Inputs without the marker keep the historical
+number-only behavior. The allocation revision is independently re-derived from
+the saved original values; variable identity and ownership metadata do not change.
+
+This is value-history support, not write authority. The existing scalar writer
+still refuses dimension changes and every bound token change. A bound-size
+writer must separately prove all document consumers, layout preconditions,
+derived child movement, explicit leaf corrections, complete postconditions and
+recovery. That writer and its application journey are not yet integrated.
+
+The token-history and historical-program checks pass. An offline replay also
+verifies the sealed native probe's original 18.390625px value and both observed
+20px states against the same allocation identity; a neighboring invented value
+refuses. No new Figma write was made for this replay. Independent predictor,
+structural matcher and document-scope prototypes remain isolated from the writer.
+The read-only scope prototype observed exactly nine consumers among 1,954 nodes
+on 68 pages in Evaluations. These measurements do not qualify a product update.
+
+A separate opt-in `fixedCrossSizeReadback` version 1 collects constraints,
+aspect ratio, alignment, growth and stroke-layout participation on pinned
+owned components and leaves. Missing APIs or missing returned facts refuse;
+historical readback inputs retain their exact programs. A live read of 27 owned
+nodes added 126 observed facts and nine export bounds. Projecting those newly
+requested channels away leaves the complete prior 29-node, token and nine-PNG
+readback identical. The plugin was closed and the unchanged native set inspected.
+The application now offers **Inspect sizing details** on an existing, observed
+React draft. Its journal pins the owned node IDs, requires the new facts on
+every subsequent read, and preserves older journal prefixes unchanged. The
+same parent-read guard blocks it after a written correction. It does not
+authorize a size update or clear a stale-source warning.
+
+The live companion delivered this read for the existing nine-variant set:
+27 strict layers, 126 added facts, and the complete prior 29-node, token and
+nine-PNG observation unchanged. The new facts also matched the independent
+Console read. Closing the companion, requesting another read, abandoning that
+undelivered attempt, and reconnecting produced an identical second result.
+This measured interruption was before delivery, not during a native write.
+All 37 source files, 9,662 prior journal files and 34,326 protected recipe/parity
+and evaluation files stayed byte-identical. The app's stale-source warning and
+the unqualified bound-size writer remain explicit.
+
+An isolated planner now recognizes one pixel-dimension variable in one mode
+driving fixed flex cross-axis roots, with optional fixed absolute-leaf
+corrections. It reuses existing correction validation and preserves allocation
+history on reversal. Its predicted nine-root/eighteen-derived/nine-leaf
+transition matches the saved live probe, including its incomplete variable-only
+state. The planner is not yet reachable from production dispatch.
+
+A separate synchronous final reader reuses the complete observation fields and
+static token APIs after asynchronous page/registry loading. It refuses instances
+and absent APIs; its emitted program contains no await. In a live read-only
+plugin, the whole-document scope guard and this reader matched all 29 native
+nodes, 30 variables and 27 strict layers exactly against the app's baseline.
+This closes the measured read gap; it does not qualify a writer or recovery.
+
+The scope prototype also checks every instance's resolved main component.
+Instances of a changed main refuse even when their size binding is overridden:
+they could still inherit absolute-child corrections. Missing or inaccessible
+main-component evidence refuses the whole scan. This conservative restriction
+also covers instances nested below invisible nodes and additions during the
+last registry warmup; unrelated instances with resolved mains remain admissible.
+The earlier read-only scope measurement predates this additional guard.
+A second live read resolved 164 unrelated instances across the same 68 pages;
+the stricter scope passed and the full app-owned baseline still matched exactly.
+Its refusal cases are executable tests, not a measured live instance mutation.
+
+Reversal removes admission of the new protocol. If a future write has used it,
+first retain read-only verification of that authenticated history; never rewrite
+allocation stamps or discard its recorded original values.

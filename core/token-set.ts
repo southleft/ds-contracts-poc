@@ -1233,6 +1233,7 @@ return result;
 export function emitNativeTokenContextReadbackScript(
   input: NativeTokenContextInput,
   identity: NativeTokenIdentity,
+  synchronous = false,
 ): string {
   const preparation = scopedTokenPreparation(input);
   // Use the pure verifier to validate the expectation's complete ID/mode/path
@@ -1269,8 +1270,8 @@ const result = { version: 1, status: 'refused', acceptedContract: null, nativeQu
   preparationRevision: PREPARATION.revision, receiptKind: 'independent-native-readback', problems: [] };
 try {
   fileGuard();
-  requireApi(['getVariableCollectionByIdAsync', 'getVariableByIdAsync']);
-  const collection = await figma.variables.getVariableCollectionByIdAsync(EXPECTED.collection.id);
+  requireApi(${synchronous ? "['getVariableCollectionById', 'getVariableById']" : "['getVariableCollectionByIdAsync', 'getVariableByIdAsync']"});
+  const collection = ${synchronous ? 'figma.variables.getVariableCollectionById' : 'await figma.variables.getVariableCollectionByIdAsync'}(EXPECTED.collection.id);
   fileGuard();
   if (!collection || collection.id !== EXPECTED.collection.id || collection.key !== EXPECTED.collection.key) refuse('readback-collection-identity');
   const expectedIds = EXPECTED.variables.map((v) => v.id).sort();
@@ -1278,7 +1279,7 @@ try {
     if (!Array.isArray(collection.variableIds) || JSON.stringify([...collection.variableIds].sort()) !== JSON.stringify(expectedIds)) refuse('readback-variable-inventory');
   };
   checkInventory();
-  const variables = await Promise.all(EXPECTED.variables.map((v) => figma.variables.getVariableByIdAsync(v.id)));
+  const variables = ${synchronous ? 'EXPECTED.variables.map((v) => figma.variables.getVariableById(v.id))' : 'await Promise.all(EXPECTED.variables.map((v) => figma.variables.getVariableByIdAsync(v.id)))'};
   fileGuard();
   checkInventory();
   if (variables.some((v, i) => !v || v.id !== EXPECTED.variables[i].id || v.key !== EXPECTED.variables[i].key || v.variableCollectionId !== collection.id)) refuse('readback-variable-identity');

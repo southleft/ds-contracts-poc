@@ -53,6 +53,9 @@ export interface NativeContractObservationInput extends Omit<NativeSourceObserva
   /** New geometry corrections require fresh constraint evidence. Absent on
    * historical inputs, so their pinned readback programs remain byte-identical. */
   absoluteShapeReadback?: {version:1|2|3;nodeIds:string[]};
+  /** Explicit layout evidence for a future bounded cross-axis update. Absent
+   * from historical inputs and programs; this readback grants no write. */
+  fixedCrossSizeReadback?: {version:1;nodeIds:string[]};
 }
 export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
 function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {
@@ -102,6 +105,13 @@ export function nativeShadowStackMatches(spec: NodeSpec, effects: unknown): bool
 
 function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
+  if (isContractDraft(input) && input.fixedCrossSizeReadback !== undefined) {
+    const guard = input.fixedCrossSizeReadback;
+    if (guard.version !== 1 || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
+        new Set(guard.nodeIds).size !== guard.nodeIds.length ||
+        guard.nodeIds.some(id => !c?.nodes?.some((n: any) => n.id === id && ['COMPONENT','FRAME','RECTANGLE','ELLIPSE'].includes(n.type))))
+      throw Error('native-fixed-cross-size-readback-input-invalid');
+  }
   if (isContractDraft(input) && input.absoluteShapeReadback !== undefined) {
     const guard = input.absoluteShapeReadback;
     if (![1,2,3].includes(guard.version) || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
@@ -160,8 +170,16 @@ export function emitNativeSourceReadbackScript(
 export function emitNativeContractReadbackScript(input: NativeContractObservationInput, captureImages = false, captureExportBounds = false): string {
   return emitNativeInspectionReadbackScript(input, captureImages, captureExportBounds);
 }
-export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false, captureExportBounds = false): string {
+/** Read every recorded field without yielding after a caller has loaded all
+ * pages and warmed the static registry APIs. No images or instances are allowed.
+ * This is a final live recheck, not a replacement for independent observation. */
+export function emitNativeFixedCrossSizeSyncReadback(input: NativeContractObservationInput): string {
+  return emitNativeInspectionReadbackScript(input, false, false, true);
+}
+export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false, captureExportBounds = false, synchronous = false): string {
   checkInput(input);
+  if(synchronous && (!isContractDraft(input) || !input.fixedCrossSizeReadback || captureImages || captureExportBounds))
+    throw Error('native-fixed-cross-size-sync-input-invalid');
   const expected = {
     operation: input.operation,
     planRevision: input.planRevision,
@@ -178,7 +196,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component),
     isContractDraft(input) ? input.absoluteShapeReadback?.nodeIds : undefined,
-    isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2);
+    isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2,
+    isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous);
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -187,7 +206,9 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false): string {
+  if(synchronous && (!fixedCrossSizeNodeIds.length || captureImages || captureExportBounds))
+    throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
     "visible",
     "opacity",
@@ -258,10 +279,10 @@ const stable = x => JSON.stringify((function order(v) {
   return Object.fromEntries(Object.keys(v).sort().map(k => [k, order(v[k])]));
 })(x));
 function guard() { if (figma.fileKey !== EXPECTED.operation.fileKey) throw Error('native-source-readback-file-mismatch'); }
-async function tokenRead() { return await (async () => {
-${emitNativeTokenContextReadbackScript(tokenInput, tokenIdentity)}
+${synchronous ? 'function tokenRead() { return (() => {' : 'async function tokenRead() { return await (async () => {'}
+${emitNativeTokenContextReadbackScript(tokenInput, tokenIdentity, synchronous)}
 })(); }
-async function read(page) {
+${synchronous ? '' : 'async '}function read(page) {
   const nodes = [page, ...page.findAll(() => true)];
   if (nodes.length > 10000) throw Error('native-source-readback-scope-too-large');
   const out = [];
@@ -279,23 +300,28 @@ async function read(page) {
       row.definitions = copy(node.componentPropertyDefinitions);
     if (node.type === 'COMPONENT' && node.parent.type === 'COMPONENT_SET') row.variantProperties = copy(node.variantProperties);
     if (node.type === 'INSTANCE') {
-      const main = await node.getMainComponentAsync(); guard();
+      const main = ${synchronous ? "(()=>{throw Error('native-fixed-cross-size-sync-instance-unsupported');})()" : 'await node.getMainComponentAsync()'}; guard();
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
     for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${extraMetadata.map(key => ", " + JSON.stringify(key)).join('')}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     ${backgroundParts.length ? `if (node.type === 'RECTANGLE' && row.metadata.nativeContractPart && ${JSON.stringify(backgroundParts)}.includes(stable(JSON.parse(row.metadata.nativeContractPart)))) { row.values.constraints = copy(node.constraints); const migration = node.getSharedPluginData('ds_contracts', 'nativeBackgroundMigration'); if (migration) row.metadata.nativeBackgroundMigration = migration; }` : ''}
-    ${absoluteShapeNodeIds.length ? `if (${JSON.stringify(absoluteShapeNodeIds)}.includes(node.id)) ${absoluteShapeAspectRatio === 'strict' ? `{row.values.constraints = copy(node.constraints);if(node.targetAspectRatio === undefined)throw Error('native-absolute-shape-aspect-ratio-unavailable');row.values.targetAspectRatio = copy(node.targetAspectRatio);}` : absoluteShapeAspectRatio ? `{row.values.constraints = copy(node.constraints);row.values.targetAspectRatio = node.targetAspectRatio ?? null;}` : `row.values.constraints = copy(node.constraints);`}` : ''}out.push(row);
+    ${absoluteShapeNodeIds.length ? `if (${JSON.stringify(absoluteShapeNodeIds)}.includes(node.id)) ${absoluteShapeAspectRatio === 'strict' ? `{row.values.constraints = copy(node.constraints);if(node.targetAspectRatio === undefined)throw Error('native-absolute-shape-aspect-ratio-unavailable');row.values.targetAspectRatio = copy(node.targetAspectRatio);}` : absoluteShapeAspectRatio ? `{row.values.constraints = copy(node.constraints);row.values.targetAspectRatio = node.targetAspectRatio ?? null;}` : `row.values.constraints = copy(node.constraints);`}` : ''}${fixedCrossSizeNodeIds.length ? `if (${JSON.stringify(fixedCrossSizeNodeIds)}.includes(node.id)) {
+      for (const field of ['constraints','targetAspectRatio','layoutAlign','layoutGrow',...(['COMPONENT','FRAME'].includes(node.type)?['strokesIncludedInLayout']:[])]) {
+        if (!(field in node) || node[field] === undefined) throw Error('native-fixed-cross-size-layout-unavailable:'+field);
+        row.values[field] = typeof node[field] === 'symbol' ? {mixed:true} : copy(node[field]);
+      }
+    }` : ''}out.push(row);
   }
   return out;
 }
 try {
   guard();
-  await figma.loadAllPagesAsync(); guard();
-  const page = await figma.getNodeByIdAsync(EXPECTED.pageId); guard();
+  ${synchronous ? "if(typeof figma.getNodeById!=='function')throw Error('native-fixed-cross-size-sync-api-unavailable');" : 'await figma.loadAllPagesAsync();'} guard();
+  const page = ${synchronous ? 'figma.getNodeById' : 'await figma.getNodeByIdAsync'}(EXPECTED.pageId); guard();
   if (!page || page.type !== 'PAGE' || page.id !== EXPECTED.pageId) throw Error('native-source-readback-page-missing');
-  const firstTokens = await tokenRead(), first = await read(page);
+  const firstTokens = ${synchronous ? '' : 'await '}tokenRead(), first = ${synchronous ? '' : 'await '}read(page);
   const images = []; let imageBytes = 0;
   ${
     captureImages
@@ -317,7 +343,7 @@ try {
   }
   // Async native reads and exports are not an atomic snapshot. Refuse changes
   // across the observation window instead of combining two different states.
-  const second = await read(page), secondTokens = await tokenRead(); guard();
+  const second = ${synchronous ? '' : 'await '}read(page), secondTokens = ${synchronous ? '' : 'await '}tokenRead(); guard();
   if (stable(first) !== stable(second) || stable(firstTokens) !== stable(secondTokens)) throw Error('native-source-readback-changed-during-observation');
   result.nodes = second; result.tokens = secondTokens; result.images = images;
   result.status = 'native-readback-collected';
@@ -478,6 +504,18 @@ function verifyReadback(
   const nodes = rowById;
   const issue = (code: string, node?: Record<string, any>) =>
     problems.push(`${code}${node ? `:${node.id}` : ""}`);
+  if (isContractDraft(input) && input.fixedCrossSizeReadback) {
+    for (const id of input.fixedCrossSizeReadback.nodeIds) {
+      const node = nodes.get(id), v = node?.values;
+      const constraint = (value: unknown) => ['MIN','CENTER','MAX','STRETCH','SCALE'].includes(value as string);
+      if (!node || !v || !object(v.constraints) || !constraint(v.constraints.horizontal) || !constraint(v.constraints.vertical) ||
+          !(v.targetAspectRatio === null || typeof v.targetAspectRatio === 'number' && Number.isFinite(v.targetAspectRatio) && v.targetAspectRatio > 0) ||
+          !['INHERIT','MIN','CENTER','MAX','STRETCH'].includes(v.layoutAlign) ||
+          typeof v.layoutGrow !== 'number' || !Number.isFinite(v.layoutGrow) ||
+          ['COMPONENT','FRAME'].includes(node.type) && typeof v.strokesIncludedInLayout !== 'boolean')
+        issue('native-fixed-cross-size-layout-unavailable', node);
+    }
+  }
   const meta = (node: Record<string, any>, key: string) => {
     try {
       return JSON.parse(node.metadata[key]);

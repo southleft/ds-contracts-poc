@@ -45,14 +45,18 @@ export interface NativeTokenContextInput {
    * values; these are the raw `$value`s the same leaves held when the collection
    * was allocated. Ownership stamps on the collection and on every owned node
    * name the allocation revision, so it is re-derived by restoring these leaves,
-   * never taken from a caller. Only a requested `number` leaf (one FLOAT
-   * variable) may differ, and neither side may be an alias. */
+   * never taken from a caller. A requested `number` leaf may differ. Pixel
+   * dimensions require the explicit protocol below. Both remain one FLOAT
+   * variable and neither side may be an alias. */
   allocatedValues?: {
     sourceMode: string;
     brand: string;
     tokenPath: string;
     value: unknown;
   }[];
+  /** Value-history support only, not write authority. Absent on historical
+   * inputs. A new bounded geometry writer must separately prove consumers. */
+  allocatedValueProtocol?: "px-dimension-v1";
 }
 export interface NativeTokenPreparation {
   version: 1;
@@ -207,6 +211,10 @@ export function nativeTokenCollectionName(scopeId: string): string {
 export function prepareNativeTokenContext(
   input: NativeTokenContextInput,
 ): NativeTokenPreparation {
+  if (input?.allocatedValueProtocol !== undefined && input.allocatedValueProtocol !== "px-dimension-v1")
+    fail("allocated-value-protocol");
+  if (input?.allocatedValueProtocol !== undefined && input.allocatedValues === undefined)
+    fail("allocated-value-protocol-empty");
   const body = prepareBody(input);
   if (input.allocatedValues === undefined)
     return clone({ ...body, revision: revisionOf(body) });
@@ -272,6 +280,10 @@ function restoreAllocatedValues(
   if (!same(rows!.map(key), rows!.map(key).sort())) fail("allocated-value-order");
   const restored = clone({ ...input, allocatedValues: undefined });
   delete restored.allocatedValues;
+  delete restored.allocatedValueProtocol;
+  let dimensionValues = 0;
+  const literalPixels = (value: unknown): boolean => typeof value === "string" &&
+    /^-?(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value) && Number.isFinite(Number(value.slice(0, -2)));
   for (const row of rows!) {
     const mode = restored.modes?.find(
       (m) => m.sourceMode === row.sourceMode && m.brand === row.brand,
@@ -280,16 +292,23 @@ function restoreAllocatedValues(
     assertTree(mode!.tokens);
     const current = flattenTokens(mode!.tokens).get(row.tokenPath);
     if (!current) fail("allocated-value-path");
-    // Only an allocated number leaf: never a dimension, colour, string, or a
-    // leaf that was never requested (and so never had a variable of its own).
+    // Historical inputs remain number-only. A dimension succession is a new
+    // explicit protocol, restricted to literal px on both sides: no relative
+    // unit conversion, structured value, alias or inferred type.
     if (!input.tokenPaths.includes(row.tokenPath)) fail("allocated-value-unrequested");
-    if (current!.type !== "number") fail("allocated-value-type");
+    if (current!.type !== "number") {
+      if (current!.type !== "dimension" || input.allocatedValueProtocol !== "px-dimension-v1")
+        fail("allocated-value-type");
+      if (!literalPixels(current!.value) || !literalPixels(row.value)) fail("allocated-value-pixels");
+      dimensionValues++;
+    }
     if (aliasTarget(current!.value) !== null || aliasTarget(row.value) !== null)
       fail("allocated-value-alias");
     // A recorded value equal to the current one is not a succession.
     if (same(current!.value, row.value)) fail("allocated-value-redundant");
     setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value));
   }
+  if (input.allocatedValueProtocol !== undefined && !dimensionValues) fail("allocated-value-protocol-empty");
   for (const mode of restored.modes) mode.tokenTreeRevision = revisionOf(mode.tokens);
   return restored;
 }

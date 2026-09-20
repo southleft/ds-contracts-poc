@@ -600,7 +600,7 @@ export function createReactReferenceService(
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const caseComparisonRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/compare-case\/([a-z-]+)$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|inspect-sizing|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|attest-dead|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
     if (nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
@@ -731,14 +731,15 @@ export function createReactReferenceService(
               jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
             } else if (nativeAction[3] === 'repair-comparison') jobs.dispatch(id,'comparison-repair-preflight-readback');
             else if (nativeAction[3] === 'resume-comparison') jobs.dispatch(id,'comparison-recovery-readback');
-            else if (nativeAction[3] === 'retry-observation') {
+            else if (nativeAction[3] === 'retry-observation' || nativeAction[3] === 'inspect-sizing') {
               // A correction chain pins the journal of the operation it corrects, and
               // the creation reader judges the corrected canvas against the creation
               // plan. Re-reading the parent after a written correction would therefore
               // call correct nodes "refused" and strand every later update. The latest
               // correction carries the independent readback; inspect that instead.
               if (native().updateJobs?.updateHistory(id).length) throw Error('react-parent-observation-superseded-by-correction');
-              transport.retryObservation(id);
+              if (nativeAction[3] === 'inspect-sizing') transport.inspectSizing(id);
+              else transport.retryObservation(id);
             }
             else transport.start(id);
           } else throw Error('react-native-action-invalid');

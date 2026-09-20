@@ -284,6 +284,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {written && <p>This operation has a written correction. Its own reader compares the canvas with the creation plan, so reading it again would call the corrected nodes wrong and strand later updates. Use <em>Inspect update again</em> or <em>Read design changes from the canvas</em> on the latest correction instead.</p>}
         {!corrected && !written && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
+        {!corrected && !written && ['root', 'initial', 'state-api'].includes(row.kind) && op.phase === 'component-structure-observed' && !op.sizingObservation && <button type="button" disabled={busy || !row.connection.paired}
+          onClick={() => void action(`native-operation/${id}/inspect-sizing`)}>Inspect sizing details</button>}
+        {op.sizingObservation && <p>Sizing details: {op.sizingObservation.status} for {op.sizingObservation.nodeCount} native layers. This read does not change the design; each proposed size update still requires its own checks.</p>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
         {op.structuralObservation && <p>Supported structure: {op.structuralObservation.status.replaceAll('-', ' ')}. Visual fidelity remains unverified.</p>}
         {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !op.sourceCurrent || row.content?.phase === 'running'}
