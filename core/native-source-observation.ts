@@ -52,7 +52,7 @@ export interface NativeContractObservationInput extends Omit<NativeSourceObserva
   backgroundMigration?: {desiredRevision:string;allocationRevision:string};
   /** New geometry corrections require fresh constraint evidence. Absent on
    * historical inputs, so their pinned readback programs remain byte-identical. */
-  absoluteShapeReadback?: {version:1|2;nodeIds:string[]};
+  absoluteShapeReadback?: {version:1|2|3;nodeIds:string[]};
 }
 export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
 function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {
@@ -104,7 +104,7 @@ function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
   if (isContractDraft(input) && input.absoluteShapeReadback !== undefined) {
     const guard = input.absoluteShapeReadback;
-    if (![1,2].includes(guard.version) || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
+    if (![1,2,3].includes(guard.version) || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
         new Set(guard.nodeIds).size !== guard.nodeIds.length ||
         guard.nodeIds.some(id => !c?.nodes?.some((n: any) => n.id === id && ['RECTANGLE','ELLIPSE'].includes(n.type))))
       throw Error('native-absolute-shape-readback-input-invalid');
@@ -178,7 +178,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component),
     isContractDraft(input) ? input.absoluteShapeReadback?.nodeIds : undefined,
-    isContractDraft(input) && input.absoluteShapeReadback?.version === 2);
+    isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2);
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -187,7 +187,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false): string {
   const fields = [
     "visible",
     "opacity",
@@ -286,7 +286,7 @@ async function read(page) {
     for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${extraMetadata.map(key => ", " + JSON.stringify(key)).join('')}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     ${backgroundParts.length ? `if (node.type === 'RECTANGLE' && row.metadata.nativeContractPart && ${JSON.stringify(backgroundParts)}.includes(stable(JSON.parse(row.metadata.nativeContractPart)))) { row.values.constraints = copy(node.constraints); const migration = node.getSharedPluginData('ds_contracts', 'nativeBackgroundMigration'); if (migration) row.metadata.nativeBackgroundMigration = migration; }` : ''}
-    ${absoluteShapeNodeIds.length ? `if (${JSON.stringify(absoluteShapeNodeIds)}.includes(node.id)) ${absoluteShapeAspectRatio ? `{row.values.constraints = copy(node.constraints);row.values.targetAspectRatio = node.targetAspectRatio ?? null;}` : `row.values.constraints = copy(node.constraints);`}` : ''}out.push(row);
+    ${absoluteShapeNodeIds.length ? `if (${JSON.stringify(absoluteShapeNodeIds)}.includes(node.id)) ${absoluteShapeAspectRatio === 'strict' ? `{row.values.constraints = copy(node.constraints);if(node.targetAspectRatio === undefined)throw Error('native-absolute-shape-aspect-ratio-unavailable');row.values.targetAspectRatio = copy(node.targetAspectRatio);}` : absoluteShapeAspectRatio ? `{row.values.constraints = copy(node.constraints);row.values.targetAspectRatio = node.targetAspectRatio ?? null;}` : `row.values.constraints = copy(node.constraints);`}` : ''}out.push(row);
   }
   return out;
 }
@@ -915,7 +915,7 @@ function verifyReadback(
       const parent=nodes.get(n.parentId),background=spec.backgroundPaint;
       if (isContractDraft(input) && input.absoluteShapeReadback?.nodeIds.includes(n.id) &&
           (!same(v.constraints,{horizontal:'MIN',vertical:'MIN'}) ||
-           input.absoluteShapeReadback.version === 2 && v.targetAspectRatio !== null ||
+           input.absoluteShapeReadback.version >= 2 && v.targetAspectRatio !== null ||
            v.layoutSizingHorizontal !== 'FIXED' || v.layoutSizingVertical !== 'FIXED' ||
            !['rect','ellipse'].includes(spec.shape!.kind) || spec.absolute?.h !== 'MIN' || spec.absolute?.v !== 'MIN'))
         issue('native-absolute-shape-observation-constraints',n);

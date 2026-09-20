@@ -21,6 +21,7 @@ async function fixture(kind:'rect'|'ellipse'='rect') {
  const before={operation:context.operation,planRevision:revisionOf(contract),projection:compiled.projection,component:compiled.component,tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
  // The shared mock defaults all scene nodes to HUG; real absolute leaves are FIXED.
  const leaf=await f.figma.getNodeByIdAsync(creation.variants[0].id);
+ leaf.children[0].targetAspectRatio=null;
  leaf.children[0].layoutSizingHorizontal='FIXED'; leaf.children[0].layoutSizingVertical='FIXED';
  Object.defineProperty(leaf.children[0],'relativeTransform',{get(){return [[1,0,this.x],[0,1,this.y]];}});
  const baseline=await f.run(emitNativeContractReadbackScript(before)),desired=structuredClone(before.component);
@@ -101,4 +102,16 @@ test('exact leaf resize avoids the native resize deadband and refuses aspect loc
   f.node.targetAspectRatio={x:54,y:32};
   const locked=await f.run(emitAbsoluteShape(f.plan));assert.equal(locked.status,'refused');assert.deepEqual(locked.changes,[]);
  }
+});
+
+
+test('an unavailable native aspect-ratio API refuses before any geometry write',async()=>{
+ const f=await fixture();delete f.node.targetAspectRatio;
+ const result=await f.run(emitAbsoluteShape(f.plan));
+ assert.equal(result.status,'refused');assert.deepEqual(result.changes,[]);
+ assert(result.problems.includes('native-update-absolute-shape-aspect-ratio-unavailable'));
+ assert.equal(f.node.x,f.plan.transitions[0].before.x);assert.equal(f.node.height,f.plan.transitions[0].before.height);
+ const read=await f.run(readShape(f.plan.after));
+ assert(read.problems.includes('native-absolute-shape-aspect-ratio-unavailable'));
+ assert(!nativeContractUpdateUntouched(f.plan,read));
 });
