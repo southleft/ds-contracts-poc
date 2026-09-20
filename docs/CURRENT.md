@@ -6,6 +6,12 @@ V1 targets React. Design System Contracts observes a team's original code or nat
 
 This page is the current acceptance ledger and work order, also rendered at `/system`. Start with the [user journey guide](USER-JOURNEYS.md) for installation and application steps, and the [React V1 scope](REACT-V1-SCOPE.md) for the required cohort. Earlier measurements remain evidence; they do not override current failures.
 
+The historical Card source round trip also loses responsive sizing: its CSS
+`max-width` was emitted as a fixed native width. The REST receipt now reports
+native agreement separately from the two explicit source-contract mismatches;
+it does not qualify lossless source recovery. See
+[D.86](23-known-limitations.md#d86-a-fixed-native-width-cannot-recover-a-lost-css-maximum).
+
 ## The whole loop
 
 ![V1 workflows: React to contract to editable Figma; Figma to contract to reusable React; and changes through comparison, authorized repair and independent verification.](assets/product-loop.svg)
