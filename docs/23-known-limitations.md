@@ -6297,6 +6297,22 @@ verify refusal after the response ends, and reject mutation inside either
 snapshot scope. Reverse by separating the two route scopes and removing the
 proposal-list/source-content wrappers; retain the freshness and write guards.
 
+**AGENT refinement, 2026-09-20:** the same display scope now also retains a
+plain `Error` refusal from a checked read. Historical operations otherwise
+repeat the same unsuccessful source authentication within one response. Each
+caller receives an isolated error; custom exception fields, subclasses,
+causes and uncloneable values are not reused. Both evidence and journal scopes
+discard successful and failed reads on return or error. Write authorization
+still runs outside either scope and reads fresh evidence.
+
+The later independent-family history returned the same 112,792 bytes in two
+uncontended probes: 11.59/11.55 seconds before and 9.71/9.84 after. Initial
+requests overlapping source reload or tests are retained separately, not
+included in that comparison. This remains a synchronous request, not a latency
+guarantee or a new companion-recovery result. Evidence:
+`review-failure-reuse-c8g88f1b/`. Reversal: stop retaining failed reads in the
+shared snapshot helper; keep successful-value isolation and all write guards.
+
 
 ## D.66 Returning native fixed controls preserves dimensions and independent axes
 
