@@ -313,6 +313,7 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
     return (m: any) => host.figma.ui.onmessage(m);
   };
   let send = boot();
+  assert.throws(() => transport.inspectSizing(first.id), /sizing-observation-refused/);
   await send({ type: 'native-connect', connection: pair }); assert.equal(messages.at(-1).status, 'ready');
   assert.throws(() => transport.claim(first.id, secret, SOURCE_NATIVE_FILE_KEY), /file-refused/);
   transport.start(first.id);
@@ -372,6 +373,42 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
   main.opacity=opacity;
   transport.retryObservation(first.id);await send({type:'native-poll'});
   assert.equal(jobs.get(first.id).phase,'component-structure-observed');
+  // The optional sizing reader is delivered by the real companion, and its
+  // required facts survive restart, interruption and a failed read. Old journal
+  // prefixes retain the old input and receipts exactly.
+  const sizingNodes = host.figma.root.findAll((node: any) =>
+    ['COMPONENT', 'FRAME', 'RECTANGLE', 'ELLIPSE'].includes(node.type));
+  for (const node of sizingNodes) Object.assign(node, {
+    constraints: {horizontal:'MIN',vertical:'MIN'}, targetAspectRatio:null,
+    layoutAlign:'INHERIT', layoutGrow:0, strokesIncludedInLayout:false,
+  });
+  assert.equal(jobs.get(first.id).sizingObservation, undefined);
+  transport.inspectSizing(first.id);
+  const strictCommand = jobs.pendingCommand(first.id)!;
+  assert.equal(strictCommand.phase, 'component-readback'); assert.equal(strictCommand.readOnly, true);
+  assert.ok(strictCommand.fixedCrossSizeReadback!.nodeIds.length);
+  assert.throws(() => jobs.reactUpdateBaseline(first.id), /react-update-verified-baseline-required/);
+  assert.equal(jobs.get(first.id).sizingObservation?.status, 'pending');
+  jobs = createNativeOperationJobs(repo, options); transport = createNativeOperationTransport(repo, jobs);
+  assert.deepEqual(jobs.pendingCommand(first.id), strictCommand);
+  transport.retryObservation(first.id);
+  assert.deepEqual(jobs.pendingCommand(first.id)!.fixedCrossSizeReadback, strictCommand.fixedCrossSizeReadback);
+  assert.notEqual(jobs.pendingCommand(first.id)!.attemptId, strictCommand.attemptId);
+  const abandonedResult = await host.run(strictCommand);
+  assert.throws(() => jobs.accept(first.id, abandonedResult), /result-correlation/);
+  await send({type:'native-poll'});
+  assert.equal(jobs.get(first.id).sizingObservation?.status, 'observed');
+  const strictBaseline = jobs.reactUpdateBaseline(first.id);
+  assert.deepEqual(strictBaseline.input.fixedCrossSizeReadback, strictCommand.fixedCrossSizeReadback);
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id,baseline.journalRevision), baseline);
+  delete main.targetAspectRatio;
+  transport.retryObservation(first.id); await send({type:'native-poll'});
+  assert.equal(jobs.get(first.id).sizingObservation?.status, 'refused');
+  assert.throws(() => jobs.reactUpdateBaseline(first.id), /react-update-verified-baseline-required/);
+  main.targetAspectRatio = null;
+  transport.retryObservation(first.id); await send({type:'native-poll'});
+  assert.equal(jobs.get(first.id).sizingObservation?.status, 'observed');
+  assert.equal(host.figma.root.findAll(() => true).length, before);
   assert.throws(() => jobs.reactUpdateBaseline(first.id,'f'.repeat(64)),/baseline-revision-unavailable/);
   assert.throws(() => jobs.reactUpdateBaseline(first.id,'not-a-hash'),/baseline-revision-invalid/);
   writeFileSync(headerFile,originalHeader.replace('"startedAt":','"unexpected":true,"startedAt":'));

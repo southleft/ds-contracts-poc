@@ -47,6 +47,7 @@ import {
   verifyNativeInspectionReadback,
   type NativeSourceObservationInput,
   type NativeInspectionInput,
+  type NativeContractObservationInput,
 } from "../core/native-source-observation.js";
 import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
@@ -125,6 +126,8 @@ export interface NativeOperationCommand {
   scriptSha256: string;
   readOnly: boolean;
   script: string;
+  /** Optional read-only protocol, pinned independently of executable bytes. */
+  fixedCrossSizeReadback?: NativeContractObservationInput['fixedCrossSizeReadback'];
 }
 export interface NativeOperationResult {
   version: 1;
@@ -141,6 +144,7 @@ export interface NativeOperationResult {
     | Record<string, unknown>;
 }
 export interface NativeOperationSnapshot {
+  sizingObservation?: { status: 'pending' | 'observed' | 'refused'; nodeCount: number };
   comparisonBaselineRefreshed?: boolean;
   id: string;
   componentName?: string;
@@ -217,6 +221,7 @@ type Event = {
   | { kind: "retry-refused-creation" }
 );
 interface State {
+  fixedCrossSizeReadback?: NativeContractObservationInput['fixedCrossSizeReadback'];
   phase: NativeOperationSnapshot["phase"];
   identity?: NativeTokenIdentity;
   componentCreation?: Record<string, any>;
@@ -778,6 +783,15 @@ export function createNativeOperationJobs(
     if (new Set(instanceIds).size !== instanceIds.length) return invalid;
     return { phase: "components-created", problems: [] };
   };
+  const sizingReadbackScope = (state: State, plan: Plan): NonNullable<NativeContractObservationInput['fixedCrossSizeReadback']> => {
+    if (!isReactPlan(plan) || 'graphComponents' in plan.plan || !state.componentCreation)
+      fail('sizing-observation-unavailable');
+    const nodeIds = state.componentCreation.nodes
+      .filter((node: any) => ['COMPONENT', 'FRAME', 'RECTANGLE', 'ELLIPSE'].includes(node.type))
+      .map((node: any) => node.id).sort();
+    if (!nodeIds.length) fail('sizing-observation-unavailable');
+    return { version: 1, nodeIds };
+  };
   const componentObservationInput = (
     state: State,
     plan: Plan,
@@ -797,6 +811,7 @@ export function createNativeOperationJobs(
       tokenIdentity: state.identity,
       creation: state.componentCreation,
       allocationAnchor: state.allocationAnchor,
+      ...(state.fixedCrossSizeReadback ? { fixedCrossSizeReadback: structuredClone(state.fixedCrossSizeReadback) } : {}),
     };
   };
   const comparisonObservationInput = (state: State, plan: ComparisonPlan): NativeContractComparisonObservationInput => {
@@ -1002,6 +1017,15 @@ export function createNativeOperationJobs(
           sha(c.script) !== c.scriptSha256
         )
           fail("dispatch-invalid");
+        if (c.fixedCrossSizeReadback !== undefined) {
+          if (c.phase !== 'component-readback' || c.readOnly !== true ||
+              (!state.fixedCrossSizeReadback && state.phase !== 'component-structure-observed') ||
+              !same(c.fixedCrossSizeReadback, sizingReadbackScope(state, plan)))
+            fail('sizing-observation-precondition-invalid');
+          state.fixedCrossSizeReadback = structuredClone(c.fixedCrossSizeReadback);
+        } else if (c.phase === 'component-readback' && state.fixedCrossSizeReadback) {
+          fail('sizing-observation-downgrade-refused');
+        }
         if (c.phase === "token-create") {
           if (
             state.dispatchedCreate ||
@@ -1249,6 +1273,10 @@ export function createNativeOperationJobs(
       ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.containerWidth !== undefined
         ? {comparisonContainerWidth:loaded.plan.plan.comparison.containerWidth} : {}),
       phase: loaded.state.phase,
+      ...(loaded.state.fixedCrossSizeReadback ? { sizingObservation: {
+        status: loaded.state.pending ? 'pending' as const : loaded.state.phase === 'component-structure-observed' ? 'observed' as const : 'refused' as const,
+        nodeCount: loaded.state.fixedCrossSizeReadback.nodeIds.length,
+      } } : {}),
       ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
         ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),
       ...(loaded.state.pending
@@ -1469,10 +1497,16 @@ export function createNativeOperationJobs(
   const dispatch = (
     id: string,
     phase: NativeOperationPhase,
+    inspectSizing = false,
   ): NativeOperationCommand => {
     assertWriteScope();
     const loaded = load(id);
     if (loaded.state.pending) fail("native-outcome-unknown");
+    if (inspectSizing && (phase !== 'component-readback' || loaded.state.phase !== 'component-structure-observed'))
+      fail('sizing-observation-precondition-invalid');
+    const fixedCrossSizeReadback = phase === 'component-readback'
+      ? inspectSizing ? sizingReadbackScope(loaded.state, loaded.plan) : loaded.state.fixedCrossSizeReadback
+      : undefined;
     let script: string;
     let comparisonRepair: NativeComparisonRepairPlan | undefined;
     let comparisonRefresh: ReactComparisonRefresh | undefined;
@@ -1544,7 +1578,7 @@ export function createNativeOperationJobs(
         } catch { /* Historical reads remain possible; freshness still refuses. */ }
       }
       script = isComparisonPlan(loaded.plan) ? emitNativeContractComparisonReadbackScript(comparisonObservationInput({...loaded.state,...(comparisonRefresh?{comparisonRefresh}:{})}, loaded.plan), true) : emitNativeInspectionReadbackScript(
-        componentObservationInput(loaded.state, loaded.plan), true,
+        componentObservationInput({ ...loaded.state, ...(fixedCrossSizeReadback ? { fixedCrossSizeReadback } : {}) }, loaded.plan), true,
         isReactCallerNativeRequest(loaded.header.request),
       );
     } else fail("phase-invalid");
@@ -1560,6 +1594,7 @@ export function createNativeOperationJobs(
       scriptSha256: sha(script),
       readOnly: phase.endsWith("-readback"),
       script,
+      ...(fixedCrossSizeReadback ? { fixedCrossSizeReadback } : {}),
     };
     append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}),...(comparisonRefresh?{comparisonRefresh}:{}) });
     return structuredClone(command);
@@ -1667,9 +1702,10 @@ export function createNativeOperationJobs(
     prepare,
     get,
     forBaseline,
-    dispatch,
+    dispatch: (id: string, phase: NativeOperationPhase) => dispatch(id, phase),
     accept,
     retryObservation,
+    inspectSizing: (id: string) => dispatch(id, 'component-readback', true),
     retryCreation,
     verifiedTokenContext,
     reactStateApiRequest(id:string):ReactStateApiNativeRequest {

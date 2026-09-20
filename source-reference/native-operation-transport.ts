@@ -30,6 +30,7 @@ export interface NativeDeliveryJobs {
   abandonedObservationPhase(id: string, attemptId: string): NativeOperationPhase | null;
   accept(id: string, result: NativeOperationResult): unknown;
   retryObservation(id: string): unknown;
+  inspectSizing?(id: string): NativeOperationCommand;
   /** Journals that can settle an unresolved write by reading the canvas. */
   resolveWriteOutcome?(id: string): NativeOperationCommand;
   beginWrite?(id: string, attemptId: string): void;
@@ -262,6 +263,11 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (!status(id).started) fail("observation-retry-refused");
     jobs.retryObservation(id);
   };
+  const inspectSizing = (id: string) => {
+    connection(id);
+    if (!status(id).started || !jobs.inspectSizing) fail('sizing-observation-refused');
+    jobs.inspectSizing(id);
+  };
   const resolveWriteOutcome = (id: string) => {
     connection(id);
     if (!status(id).started || !jobs.resolveWriteOutcome) fail("write-outcome-resolution-refused");
@@ -299,5 +305,5 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (state.connected) throw Error("native-update-attest-dead-companion-connected");
     jobs.attestDead(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, retryObservation, resolveWriteOutcome, rearmWrite, attestDead, observeDesign };
+  return { pair, start, status, authorize, claim, begin, accept, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign };
 }

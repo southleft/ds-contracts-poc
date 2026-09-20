@@ -49,6 +49,55 @@ function input(): NativeTokenContextInput {
   };
 }
 const rgba = { r: 0x12 / 255, g: 0x34 / 255, b: 0x56 / 255, a: 0x80 / 255 };
+
+test('explicit pixel-dimension history preserves allocation identity and carries the current FLOAT value', () => {
+  const before = input();
+  (before.modes[0].tokens.gap as any).$value = '18.390625px'; revise(before);
+  const allocation = prepareNativeTokenContext(before), after = copy(before);
+  (after.modes[0].tokens.gap as any).$value = '20px'; revise(after);
+  after.allocatedValues = [{ sourceMode: 'dark', brand: 'default', tokenPath: 'gap', value: '18.390625px' }];
+  assert.throws(() => prepareNativeTokenContext(after), /allocated-value-type/, 'the historical protocol stays number-only');
+  after.allocatedValueProtocol = 'px-dimension-v1';
+  const saved = copy(after), current = prepareNativeTokenContext(after);
+  assert.equal(current.revision, allocation.revision);
+  assert.equal(current.variables.find(v => v.tokenPath === 'gap')!.values[0].value, 20);
+  assert.equal(allocation.variables.find(v => v.tokenPath === 'gap')!.values[0].value, 18.390625);
+  assert.deepEqual(after, saved, 'history compilation cannot rewrite its evidence');
+  assert.deepEqual(current.source, allocation.source);
+  assert.deepEqual(current.variables.map(v => [v.tokenPath, v.name, v.resolvedType]),
+    allocation.variables.map(v => [v.tokenPath, v.name, v.resolvedType]));
+  const restored = copy(before);
+  assert.deepEqual(prepareNativeTokenContext(restored), allocation, 'returning to allocation needs no history extension');
+});
+
+test('pixel history refuses relative units, aliases, structured values, other types and empty or unknown protocols', () => {
+  const before = input(); (before.modes[0].tokens.gap as any).$value = '18.390625px'; revise(before);
+  const after = copy(before); (after.modes[0].tokens.gap as any).$value = '20px'; revise(after);
+  after.allocatedValueProtocol = 'px-dimension-v1';
+  after.allocatedValues = [{ sourceMode: 'dark', brand: 'default', tokenPath: 'gap', value: '18.390625px' }];
+  for (const value of ['1rem', '2em', '20%', 'auto', 'calc(20px)', '{weight}', { value: 20, unit: 'px' }, 20, 'Infinitypx', 'NaNpx']) {
+    for (const side of ['current', 'allocation']) {
+      const bad = copy(after);
+      if (side === 'current') { (bad.modes[0].tokens.gap as any).$value = value; revise(bad); }
+      else bad.allocatedValues![0].value = value;
+      assert.throws(() => prepareNativeTokenContext(bad), /native-token-context-/, `${side}: ${JSON.stringify(value)}`);
+    }
+  }
+  const wrong = copy(after); (wrong as any).allocatedValueProtocol = 'future';
+  assert.throws(() => prepareNativeTokenContext(wrong), /allocated-value-protocol$/);
+  const empty = copy(before); empty.allocatedValueProtocol = 'px-dimension-v1';
+  assert.throws(() => prepareNativeTokenContext(empty), /allocated-value-protocol-empty/);
+  const numberOnly = copy(before); (numberOnly.modes[0].tokens.weight as any).$value = 700; revise(numberOnly);
+  numberOnly.allocatedValues = [{ sourceMode: 'dark', brand: 'default', tokenPath: 'weight', value: 600 }];
+  const historical = prepareNativeTokenContext(numberOnly); assert.equal(historical.revision, prepareNativeTokenContext(before).revision);
+  numberOnly.allocatedValueProtocol = 'px-dimension-v1';
+  assert.throws(() => prepareNativeTokenContext(numberOnly), /allocated-value-protocol-empty/);
+  for (const type of ['string', 'color', 'boolean']) {
+    const bad = copy(after); (bad.modes[0].tokens.gap as any).$type = type; revise(bad);
+    assert.throws(() => prepareNativeTokenContext(bad), /native-token-context-/);
+  }
+});
+
 /** An independent readback fixture: values are explicit, not copied from plan. */
 function fixture() {
   const request = input(),
