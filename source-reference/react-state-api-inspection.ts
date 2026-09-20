@@ -1,4 +1,4 @@
-import type { ReactStateApiNativePin } from './react-state-api-native-request.js';
+import { isReactStateApiNativeRequest, type ReactStateApiNativePin, type ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 import type { ReactBehaviorContract } from './react-behavior-contract.js';
 import { projectReactStateApiContract } from './react-state-api-contract.js';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
@@ -52,6 +52,11 @@ export function readReactStateApiInspection(root: string, request: ReactStateApi
   const pointer = path.join(root, 'latest.json');
   if (!existsSync(pointer)) return;
   const latest = JSON.parse(readFileSync(pointer, 'utf8')) as { id: string; inventorySha256: string };
+  return readStateApiRecord(root, request, latest, true);
+}
+
+function readStateApiRecord(root: string, request: ReactStateApiRequest,
+  latest: { id: string; inventorySha256: string }, requireCurrentSource: boolean): ReactStateApiInspection {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id)) throw Error('state-api-record-invalid');
   const dir = path.join(root, latest.id), sealBytes = readFileSync(path.join(dir, 'integrity.json'));
   if (evidenceSha(sealBytes) !== latest.inventorySha256) throw Error('state-api-inventory-changed');
@@ -72,8 +77,31 @@ export function readReactStateApiInspection(root: string, request: ReactStateApi
   if (revisionOf(initial) !== request.initialRevision || revisionOf(behavior) !== request.callbackRevision ||
       revisionOf(planReactStateApi(initial, behavior)) !== revisionOf(request.plan)) throw Error('state-api-input-records-changed');
   const program = JSON.parse(readFileSync(path.join(dir, 'program.json'), 'utf8'));
-  if (!reactSourceProgramUnchanged(program)) throw Error('state-api-program-changed');
+  if (requireCurrentSource && !reactSourceProgramUnchanged(program)) throw Error('state-api-program-changed');
   return report;
+}
+
+/** Historical allocation identity only. This deliberately reads the exact
+ * creation archive, never latest.json, and grants no authority over live source.
+ * Update compilation must authenticate its fresh experiment separately. */
+export function readReactStateApiInitialIdentity(repo: string, pin: ReactStateApiNativeRequest): string {
+  if (!isReactStateApiNativeRequest(pin)) throw Error('state-api-creation-pin-invalid');
+  const root = path.join(repo, 'private/react-state-api-inspections', pin.observation.key);
+  const dir = path.join(root, pin.observation.id);
+  const request = JSON.parse(readFileSync(path.join(dir, 'request.json'), 'utf8')) as ReactStateApiRequest;
+  if (revisionOf(request).slice(7) !== pin.observation.key ||
+      revisionOf(request.source) !== revisionOf(reactInspectionRequest(pin.initial.anchor, pin.initial.caseId)))
+    throw Error('state-api-creation-request-changed');
+  const report = readStateApiRecord(root, request, pin.observation, false);
+  if (evidenceSha(readFileSync(path.join(dir, 'report.json'))) !== pin.observation.reportSha256 ||
+      report.plan.initialObservation !== pin.initial.observation.id)
+    throw Error('state-api-creation-report-changed');
+  const initial = JSON.parse(readFileSync(path.join(dir, 'initial-input.json'), 'utf8')) as ReactInitialInspection;
+  const projected = projectReactStateApiContract(initial, report);
+  const identity = initial.draft?.compiled?.contract?.id;
+  if (projected.status !== 'generated-draft' || !identity || !/^observed\.react-initial-[a-f0-9]{16}$/.test(identity))
+    throw Error('state-api-creation-identity-unavailable');
+  return identity;
 }
 
 export function readReactStateApiNativeRecord(root:string,request:ReactStateApiRequest) {
@@ -85,7 +113,7 @@ export function readReactStateApiNativeRecord(root:string,request:ReactStateApiR
   const initial=JSON.parse(readFileSync(path.join(root,report.id,'initial-input.json'),'utf8')) as ReactInitialInspection;
   const draft=projectReactStateApiContract(initial,report);
   if(draft.status!=='generated-draft')throw Error('state-api-native-projection-refused');
-  return {pin,draft,initialObservation:report.plan.initialObservation,initialDraftRevision:revisionOf(initial.draft)};
+  return {pin,draft,initial,report,initialObservation:report.plan.initialObservation,initialDraftRevision:revisionOf(initial.draft)};
 }
 
 /** This writes a separate immutable experiment. It never changes the earlier

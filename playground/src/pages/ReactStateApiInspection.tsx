@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { ReactStateApiInspection as Inspection } from '../../../source-reference/react-state-api-inspection';
 
-export function ReactStateApiInspection({ referenceId, caseId, available, prepareNative, nativeBusy }: { referenceId: string; caseId: string; available: boolean; prepareNative?:()=>void; nativeBusy?:boolean }) {
+export function ReactStateApiInspection({ referenceId, caseId, available, prepareNative, nativeBusy, onObservationChange }: { referenceId: string; caseId: string; available: boolean; prepareNative?:()=>void; nativeBusy?:boolean; onObservationChange?:()=>void }) {
   const [result, setResult] = useState<Inspection | null>(null), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   const endpoint = `/api/source-reference/react/${referenceId}/state-api/${caseId}`;
+  useEffect(() => {
+    if (result?.id) onObservationChange?.();
+  }, [result?.id, result?.phase, onObservationChange]);
   useEffect(() => {
     let stopped = false;
     setResult(null); setError('');
