@@ -7585,12 +7585,32 @@ owned elsewhere. Any authored text-rendering channel anywhere under the root,
 including a state channel, also suppresses the default. An ordinary caller
 `style={{ textRendering: 'auto' }}` overrides it on either React surface.
 
-The bounded geometry probe covered 1,200 cases across five fonts, sizes,
-tracking, kerning, wrapping and RTL; every measured element and text-line box
-was unchanged. Generated-component regression checks exercise font changes,
-runtime strings, wrapping, RTL, authored hints, caller styles and ownership
-boundaries. These are Chromium observations, not a guarantee of identical
-rasterization across browsers or platforms.
+The bounded **macOS Chromium** geometry probe covered 1,200 cases across five
+fonts, sizes, tracking, kerning, wrapping and RTL; every measured element and
+text-line box was unchanged. That result does not hold on Linux. Linux CI and
+a separate Linux ARM64 reproduction both measured different Inter advances for
+`auto` and `geometricPrecision` (94 versus 94.09375px and 12 versus 13.21875px).
+Chromium deliberately changes Linux font hinting and subpixel metrics for this
+policy. A caller switching policy may change text geometry and wrapping.
+
+**AGENT correction, 2026-09-20.** Retain this explicit output rendering policy
+within the existing ownership guards; withdraw the cross-platform paint-only
+assumption. Generated-component checks now compare the default and caller
+override with explicitly authored contracts using the **same** rendering policy.
+They require exact element and text-line geometry across fonts, runtime strings,
+wrapping and RTL on both React surfaces, after verifying font loading. They do
+not equate two different browser policies, loosen numerical comparison or qualify
+native-image fidelity. The original failing test/log remains preserved.
+
+The identical app-delivered Checkbox archive also ran in an isolated consumer
+using Linux Chromium and the same hashed font. It passes **13/26**, with maximum
+black difference **10.701%**, at the unchanged 5% limit. Its native PNG hashes and
+root dimensions match the macOS run. A research-only control removing the inferred
+hint also passes 13/26 (maximum black 11.969%); it is not a delivered library.
+Linux fidelity remains open. This policy is neither recovered Figma metadata nor
+a guarantee of identical geometry or rasterization across platforms. Evidence,
+the unmodified CI failure and the explicit control are in
+`native-text-linux-20260920/`.
 
 The clean-consumer command accepts an explicit hashed local-font manifest
 through `--fonts`; [the journey guide](USER-JOURNEYS.md) shows the format. The
@@ -7600,7 +7620,7 @@ still lack particular glyphs. No font is embedded in a generated library or
 installed on the host by this option. Component CSS and the existing 5% image
 limit are not changed by font provisioning.
 
-The fresh app journey is retained in `native-text-app-20260920/`: JSON import,
+The fresh macOS Chromium app journey is retained in `native-text-app-20260920/`: JSON import,
 React archive preparation, exact app-endpoint bytes, clean installation with
 the pinned Public Sans asset, unchanged repeat import and visible source/before/
 after inspection. All 26 variants pass on both backgrounds (maximum black
@@ -7638,9 +7658,10 @@ No component names participate in this rule.
 
 Both React outputs forward an explicit caller `style.textRendering` to these
 owned leaves. Measured generated-component probes show that caller and component
-siblings keep their prior rendering, explicit `auto`, `optimizeSpeed` and
-`optimizeLegibility` overrides win, and the default versus `auto` preserves exact
-boxes. A contract that owns the code prop `style` keeps that API; the inline
+siblings keep their prior rendering and explicit `auto`, `optimizeSpeed` and
+`optimizeLegibility` overrides win. The macOS geometry observations do not imply
+that switching policies preserves Linux metrics; see D.88's correction. A contract
+that owns the code prop `style` keeps that API; the inline
 emitter now omits its extra HTML-style binding, avoiding a duplicate parameter
 and preserving the enum-driven variant. Web Components receive the equivalent
 owned-leaf declaration; this does not expand their V1 qualification or promise
@@ -7662,8 +7683,17 @@ installs a byte-identical package in an isolated consumer. It passes 72/72
 and recorded layout frames agree with the control. Before/after source snapshots
 are identical. Repeat JSON import preserves contract bytes and all five current
 workspace entries. Live browser inspection covers both comparison backgrounds
-and the retained installed consumer. This closes the six bounded CBDS visual
-failures, while its reverse journey and broader V1 acceptance remain open.
+and the retained installed consumer. This closes the six bounded **macOS Chromium**
+CBDS visual failures, while its reverse journey and broader V1 acceptance remain open.
+
+The same app archive and font measured in Linux Chromium pass **36/72**, with
+maximum differences **6.967% white / 8.333% black**. Native PNG hashes, root
+dimensions and bracketing source snapshots match the macOS evidence. A separate
+research-only control removing the owned-leaf hint passes **37/72**, with maxima
+9.115% white / 10.026% black. Thus the default does not improve every Linux pair,
+and neither policy qualifies Linux fidelity. These failures remain open in the
+acceptance ledger; no scorer, limit or OS-specific pin changed. The private
+`native-text-linux-20260920/` journal retains both runs and the original CI failure.
 
 To reverse, remove `nativeTextRenderingLeafParts` and its emitter calls/explicit
 caller override forwarding. Keep the independent inline `style` collision fix,
