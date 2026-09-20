@@ -29,6 +29,9 @@ import {
 } from './native-operation-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 import { nativeFixtureHost } from './native-operation-test-fixture.js';
+import { createNativeSourceSuccessions } from './native-source-succession.js';
+import { createNativeUpdatePlans } from './native-update-plans.js';
+import { createNativeUpdateJobs } from './native-update-jobs.js';
 
 function fixture() {
   const { initial, behavior } = stateApiEvidence();
@@ -155,12 +158,15 @@ test('state API requests have a distinct, stable reservation and reject untruste
 test('state API journal and actual companion complete all phases, reopen, reject changed evidence and retain one output', async (t) => {
   const repo = mkdtempSync(path.join(tmpdir(), 'state-api-native-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
-  const f = fixture();
+  const f = fixture(), successions = createNativeSourceSuccessions(repo);
   let current = true;
   const options: NativeOperationJobsOptions = {
     prepare: () => {
       throw Error('legacy adapter must not run');
     },
+    react: { effectiveSource: (id, original) => successions.effective(id, original),
+      prepare: () => { throw Error('root adapter must not run'); },
+      buildComponent: () => { throw Error('root adapter must not run'); } },
     reactStateApi: {
       prepare: (request, operation) => {
         assert.deepEqual(request, f.request);
@@ -292,10 +298,8 @@ test('state API journal and actual companion complete all phases, reopen, reject
     () => jobs.reactInitialRequest(first.id),
     /initial-operation-required/,
   );
-  assert.throws(
-    () => jobs.reactUpdateBaseline(first.id),
-    /verified-baseline-required/,
-  );
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id).source, f.request);
+  assert.deepEqual(jobs.reactSuccessionSubject(first.id), f.request);
   assert.equal(
     jobs.forBaseline(reactStateApiNativeReservation(f.request))!.id,
     first.id,
@@ -312,6 +316,56 @@ test('state API journal and actual companion complete all phases, reopen, reject
       }),
     /baseline-already-reserved/,
   );
+  const originalPin = structuredClone(f.request), successor = structuredClone(f.request);
+  successor.observation.key = 'b'.repeat(64);
+  assert.equal(jobs.listReactMoved(f.request.initial.anchor.referenceId, () => originalPin).length, 0);
+  assert.equal(jobs.listReactMoved(f.request.initial.anchor.referenceId, () => successor)[0].kind, 'state-api');
+  assert.equal(jobs.listReactMoved(f.request.initial.anchor.referenceId, () => { throw Error('experiment-running'); })[0].observationRequired, true);
+  successions.adopt(first.id, originalPin, successor);
+  assert.equal(jobs.listReactMoved(f.request.initial.anchor.referenceId, () => successor).length, 0);
+  assert.deepEqual(jobs.reactStateApiRequest(first.id), originalPin, 'recorded review keeps creation evidence');
+  assert.deepEqual(jobs.reactEffectiveStateApiRequest(first.id), successor);
+  assert.deepEqual(jobs.reactUpdateBaseline(first.id).source, successor);
+
+  // The actual state-API baseline traverses the shared guarded correction
+  // journal. No state metadata or allocation may be changed by this route.
+  const baseline = jobs.reactUpdateBaseline(first.id), desired = structuredClone(baseline.input.component);
+  for (const variant of desired.variants) variant.spec.opacity = 0.4;
+  const plans = createNativeUpdatePlans(repo, (id, prefix) => {
+    const before = jobs.reactUpdateBaseline(id, prefix);
+    return { parentJournalRevision: before.journalRevision, input: { before: before.input, baseline: before.receipt,
+      desired: { component: desired, revision: revisionOf(desired), tokenInput: before.input.tokenInput } } };
+  }, id => updates.updateHistory(id), id => jobs.reactUpdateJournalRevision(id));
+  const updates = createNativeUpdateJobs(repo, plans);
+  const proposal = plans.prepare(first.id), update = updates.prepare(first.id, proposal.id);
+  for (const phase of ['update-preflight-readback', 'update-apply', 'update-readback'] as const) {
+    const command = updates.dispatch(update.id, phase);
+    updates.accept(update.id, await host.run(command as any));
+  }
+  assert.equal(updates.get(update.id).phase, 'update-verified');
+  assert.equal(host.figma.root.findAll(() => true).length, count, 'correction allocates nothing');
+  assert.equal(plans.prepare(first.id).id, proposal.id, 'repeat reuses the verified correction');
+  const retainedApi = structuredClone(desired.codeValueAxes!);
+  for (const change of [
+    (api: any) => { api.version = 1; },
+    (api: any) => { api.stateApi.events[0].bindings.code.prop = 'differentCallback'; },
+    (api: any) => { api.stateApi.props[0].bindings.code.initial.default = 'true'; },
+    (api: any) => { api.axes[0].values[0].code = true; },
+  ]) {
+    desired.codeValueAxes = structuredClone(retainedApi); change(desired.codeValueAxes);
+    assert.throws(() => plans.prepare(first.id), /component-change-unsupported/);
+    assert.equal(host.figma.root.findAll(() => true).length, count);
+  }
+  desired.codeValueAxes = retainedApi;
+  for (let i = 0; i < desired.variants.length; i++) desired.variants[i].spec.opacity = baseline.input.component.variants[i].spec.opacity;
+  const restore = plans.prepare(first.id), restoreUpdate = updates.prepare(first.id, restore.id);
+  for (const phase of ['update-preflight-readback', 'update-apply', 'update-readback'] as const) {
+    const command = updates.dispatch(restoreUpdate.id, phase);
+    updates.accept(restoreUpdate.id, await host.run(command as any));
+  }
+  assert.equal(updates.get(restoreUpdate.id).phase, 'update-verified');
+  assert.equal(host.figma.root.findAll(() => true).length, count);
+
   const set = host.figma.root.findOne((n: any) => n.type === 'COMPONENT_SET'),
     stamp = set.getSharedPluginData('ds_contracts', 'codeValueAxes'),
     metadata = JSON.parse(stamp);

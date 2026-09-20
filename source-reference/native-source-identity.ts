@@ -4,17 +4,15 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { evidenceSha, evidenceUnchanged } from './react-validation-evidence.js';
-import { isReactInitialNativeRequest } from './react-initial-native-request.js';
-import { isReactNativeRequest } from './react-native-request.js';
-import type { NativeSourcePin } from './native-source-succession.js';
+import { isNativeSourcePin, nativeSourcePinAnchor, nativeSourcePinCase, type NativeSourcePin } from './native-source-succession.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import type { ReactSourceProgram } from './react-source-program.js';
 import type { ReactReference } from './react-reference.js';
 
 const fail = (): never => { throw Error('react-source-succession-identity-unavailable'); };
 export function readNativeSourceIdentity(repo: string, pin: NativeSourcePin) {
-  if ((!isReactInitialNativeRequest(pin) && !isReactNativeRequest(pin)) || pin.version !== 1) fail();
-  const request = pin.kind === 'react-initial-draft' ? pin.anchor : pin;
+  if (!isNativeSourcePin(pin) || pin.version !== 1) fail();
+  const request = nativeSourcePinAnchor(pin);
   const dir = path.join(repo, 'private/react-source-ownership', request.referenceId, request.ownership.id);
   try {
     const sealBytes = readFileSync(path.join(dir, 'integrity.json'));
@@ -27,7 +25,7 @@ export function readNativeSourceIdentity(repo: string, pin: NativeSourcePin) {
     const reportBytes = readFileSync(path.join(dir, 'report.json'));
     if (evidenceSha(reportBytes) !== request.ownership.sha256) fail();
     const report = JSON.parse(reportBytes.toString()) as ReactOwnershipReport;
-    const rows = report.rows.filter(row => row.id === pin.caseId), row = rows[0];
+    const rows = report.rows.filter(row => row.id === nativeSourcePinCase(pin)), row = rows[0];
     if (report.id !== request.ownership.id || report.referenceId !== request.referenceId ||
         report.state !== 'complete' || !report.sourceUnchanged || report.problem || rows.length !== 1 ||
         !row.matched || row.problems.length || !row.ownership || row.ownership.problems.length) fail();

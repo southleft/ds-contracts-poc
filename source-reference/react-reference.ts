@@ -15,13 +15,14 @@ import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
-import type { createNativeSourceSuccessions } from './native-source-succession.js';
+import { nativeSourcePinCase, type NativeSourcePin, type createNativeSourceSuccessions } from './native-source-succession.js';
 import { assertNativeSourceIdentity, nativeSourceBelongsToReference } from './native-source-identity.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
 import { buildReactStateApiPreview } from './react-state-api-preview.js';
-import { createReactStateApiInspectionStore } from './react-state-api-inspection.js';
+import { createReactStateApiInspectionStore, readReactStateApiInitialIdentity } from './react-state-api-inspection.js';
+import { projectReactStateApiContract } from './react-state-api-contract.js';
 import { createReactInitialInspectionStore, reactInspectionRequest } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -290,17 +291,34 @@ export function createReactReferenceService(
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
   };
-  const thisStateApiEvidence = (request:ReactStateApiNativeRequest) => {
+  const thisStateApiEvidence = (request:ReactStateApiNativeRequest, creation?: ReactStateApiNativeRequest) => {
     if(!reference||!isReactStateApiNativeRequest(request)||request.initial.anchor.referenceId!==reference.id)throw Error('state-api-native-reference-unavailable');
     const evidence=stateApi.nativeEvidence(reference.id,request.initial.caseId,request.observation);
-    const initial=thisInitialEvidence(request.initial),compiled=initial.draft.compiled!;
+    const initial=thisInitialEvidence(request.initial);
     if(evidence.initialObservation!==request.initial.observation.id||evidence.initialDraftRevision!==revisionOf(initial.draft))
       throw Error('state-api-native-initial-evidence-changed');
-    return {source:initial.source,request,draft:evidence.draft,tokens:compiled.tokens!,assets:compiled.assets??[]};
+    // Authenticate the natural draft first. Recompilation changes only its
+    // allocation namespace, using the sealed creation identity, not a name
+    // guessed from today's draft or the state projection's suffixed identity.
+    if (creation) assertNativeSourceIdentity(repoRoot, creation, request);
+    const desired = creation ? initialStates.nativeEvidence(reference, request.initial,
+      readReactStateApiInitialIdentity(repoRoot, creation)) : initial;
+    const compiled = desired.draft.compiled!;
+    const draft = creation ? projectReactStateApiContract({ ...evidence.initial, draft: desired.draft }, evidence.report) : evidence.draft;
+    if (draft.status !== 'generated-draft') throw Error('state-api-native-projection-refused');
+    return {source:desired.source,request,draft,tokens:compiled.tokens!,assets:compiled.assets??[]};
+  };
+  const currentStateApiRequest = (caseId: string): ReactStateApiNativeRequest => {
+    if (!reference) throw Error('state-api-native-reference-unavailable');
+    const initial = initialStates.nativeRequest(reference.id, caseId);
+    const request: ReactStateApiNativeRequest = { version: 1, kind: 'react-state-api-draft', initial,
+      observation: stateApi.nativePin(reference.id, caseId) };
+    thisStateApiEvidence(request);
+    return request;
   };
   const initialRequestForOperation = (id:string) => {
     try { return native!().jobs.reactInitialRequest(id); }
-    catch { return native!().jobs.reactStateApiRequest(id).initial; }
+    catch { return native!().jobs.reactEffectiveStateApiRequest(id).initial; }
   };
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
@@ -614,9 +632,7 @@ export function createReactReferenceService(
             if(action==='attest-dead') updateTransport.attestDead(update.id);
             if(action==='observe-design') updateTransport.observeDesign(update.id);
           } else if (stateApiNativeRoute) {
-            const caseId=stateApiNativeRoute[2],initial=initialStates.nativeRequest(reference.id,caseId);
-            const request:ReactStateApiNativeRequest={version:1,kind:'react-state-api-draft',initial,observation:stateApi.nativePin(reference.id,caseId)};
-            thisStateApiEvidence(request);jobs.prepare(request);
+            jobs.prepare(currentStateApiRequest(stateApiNativeRoute[2]));
           } else if (initialNativeRoute) {
             jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
           } else if (nativeRoute?.[2]) {
@@ -632,22 +648,24 @@ export function createReactReferenceService(
             // written to Figma; the next update review compiles the difference.
             const id = nativeAction[2], { successions, updateJobs } = native();
             if (!successions || !updateJobs) throw Error('react-source-succession-unavailable');
-            const original = jobs.reactSuccessionSubject(id);
-            if (!reference.cohort.cases.some(c => c.id === original.caseId)) throw Error('react-source-succession-case-not-in-cohort');
+            const original = jobs.reactSuccessionSubject(id), caseId = nativeSourcePinCase(original);
+            if (!reference.cohort.cases.some(c => c.id === caseId)) throw Error('react-source-succession-case-not-in-cohort');
             if (!nativeSourceBelongsToReference(repoRoot, original, reference)) throw Error('react-source-succession-component-mismatch');
             // A written correction must settle against the inputs it was planned from.
             if (updateJobs.updateHistory(id).some(entry => entry.pending || entry.phase !== 'update-verified'))
               throw Error('react-source-succession-update-unresolved');
-            let successor: ReactNativeRequest | ReactInitialNativeRequest;
-            if (original.kind === 'react-initial-draft')
-              successor = initialStates.nativeRequest(reference.id, original.caseId, original.version === 2 ? original.instanceId : undefined);
+            let successor: NativeSourcePin;
+            if (original.kind === 'react-state-api-draft') successor = currentStateApiRequest(caseId);
+            else if (original.kind === 'react-initial-draft')
+              successor = initialStates.nativeRequest(reference.id, caseId, original.version === 2 ? original.instanceId : undefined);
             else {
               const job = ownershipJobs.get(reference.id);
               if (!job) throw Error('react-native-observation-required');
-              successor = selectReactNativeRequest(repoRoot, job.report(), original.caseId);
+              successor = selectReactNativeRequest(repoRoot, job.report(), caseId);
             }
             // Only a sealed observation readable from the live, unchanged source qualifies.
-            if (successor.kind === 'react-initial-draft') initialStates.nativeEvidence(reference, successor);
+            if (successor.kind === 'react-state-api-draft') thisStateApiEvidence(successor, original as ReactStateApiNativeRequest);
+            else if (successor.kind === 'react-initial-draft') initialStates.nativeEvidence(reference, successor);
             else readReactNativeEvidence(repoRoot, reference, successor);
             assertNativeSourceIdentity(repoRoot, original, successor);
             successions.adopt(id, original, successor);
@@ -696,11 +714,15 @@ export function createReactReferenceService(
         // journals and source evidence across them, then discard that snapshot
         // before another request or any command authorization can use it.
         const listing = withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => {
-        const moved = jobs.listReactMoved(reference!.id).filter(m => inCohort(m.caseId)).flatMap(m => {
+        const moved = jobs.listReactMoved(reference!.id, currentStateApiRequest).filter(m => inCohort(m.caseId)).flatMap(m => {
           try { return nativeSourceBelongsToReference(repoRoot, jobs.reactSuccessionSubject(m.operationId), reference!) ? [m] : []; }
           catch { return [{ ...m, successionProblem: m.successionProblem ?? 'react-source-succession-identity-unavailable' }]; }
         });
-        return { moved, operations: jobs.listReact(reference!.id).map(row => {
+        // A followed root can authenticate current source even though its
+        // historical creation plan is stale. Keep these two facts separate.
+        let inspectionSourceAvailable = false;
+        try { selectInspectionSource(reference!.id); inspectionSourceAvailable = true; } catch { /* Source checks remain disabled. */ }
+        return { moved, inspectionSourceAvailable, operations: jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
@@ -735,7 +757,7 @@ export function createReactReferenceService(
             } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
           }
           let sourceRevisions: string[] | undefined;
-          if (row.kind === 'root' || row.kind === 'initial')
+          if (row.kind === 'root' || row.kind === 'initial' || row.kind === 'state-api')
             try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
             catch { /* An unreadable succession journal already fails identity above. */ }
           return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,

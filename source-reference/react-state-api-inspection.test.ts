@@ -1,19 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { revisionOf } from '../core/contract-provenance.js';
 import { stateApiEvidence, stateApiObservation } from './react-state-api-fixture.js';
 import { planReactStateApi } from './react-state-api.js';
-import { readReactStateApiNativeRecord, readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
+import { readReactStateApiNativeRecord, readReactStateApiInitialIdentity, readReactStateApiInspection, type ReactStateApiRequest, type ReactStateApiInspection } from './react-state-api-inspection.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
+import type { ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 
 function fixture() {
   const root = mkdtempSync(path.join(tmpdir(), 'state-api-record-')), id = randomUUID(), dir = path.join(root, id);
   const source = path.join(root, 'source.tsx'); mkdirSync(dir); writeFileSync(source, 'source');
   const { initial, behavior } = stateApiEvidence();
+  initial.id = randomUUID();
+  initial.draft!.compiled!.contract!.id = 'observed.react-initial-0123456789abcdef';
   for(const row of behavior.observation!.rows)row.callback='onNotify';
   for(const row of behavior.observation!.relationships)row.callback='onNotify';
   for(const row of behavior.observation!.candidates)row.callback='onNotify';
@@ -91,4 +94,28 @@ test('a native pin names the sealed state and appearance records and refuses fai
     f.initial.draft!.compiled!.contract!.props[0].bindings.code.prop='substituted';f.save('initial-input.json',f.initial);
     assert.throws(()=>readReactStateApiNativeRecord(f.root,f.request),/evidence-changed/);
   }finally{rmSync(f.root,{recursive:true,force:true})}
+});
+
+
+test('update namespace comes from the exact sealed creation archive even after source and latest observation move', t => {
+  const f = fixture(); t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const record = readReactStateApiNativeRecord(f.root, f.request);
+  const pin: ReactStateApiNativeRequest = { version: 1, kind: 'react-state-api-draft',
+    initial: { version: 1, kind: 'react-initial-draft', anchor: f.request.source.anchor, caseId: f.initial.caseId,
+      observation: { id: f.initial.id, inventorySha256: 'a'.repeat(64), reportSha256: 'b'.repeat(64) } }, observation: record.pin };
+  const repo = path.join(f.root, 'archive-repo'), root = path.join(repo, 'private/react-state-api-inspections', record.pin.key);
+  mkdirSync(root, { recursive: true }); cpSync(f.dir, path.join(root, record.pin.id), { recursive: true });
+  writeFileSync(path.join(root, 'latest.json'), JSON.stringify({ id: 'failed-later-experiment' }));
+  writeFileSync(f.source, 'source changed');
+  assert.equal(readReactStateApiInitialIdentity(repo, pin), f.initial.draft!.compiled!.contract!.id);
+  assert.throws(() => readReactStateApiNativeRecord(f.root, f.request), /program-changed/, 'historical identity never makes a stale experiment writable');
+  for (const bad of [
+    { ...pin, observation: { ...pin.observation, reportSha256: 'f'.repeat(64) } },
+    { ...pin, observation: { ...pin.observation, inventorySha256: 'f'.repeat(64) } },
+    { ...pin, initial: { ...pin.initial, caseId: 'another' } },
+    { ...pin, initial: { ...pin.initial, observation: { ...pin.initial.observation, id: randomUUID() } } },
+  ]) assert.throws(() => readReactStateApiInitialIdentity(repo, bad), /state-api-/);
+  const initialFile = path.join(root, record.pin.id, 'initial-input.json');
+  writeFileSync(initialFile, readFileSync(initialFile, 'utf8').replace('0123456789abcdef', 'fedcba9876543210'));
+  assert.throws(() => readReactStateApiInitialIdentity(repo, pin), /evidence-changed/);
 });

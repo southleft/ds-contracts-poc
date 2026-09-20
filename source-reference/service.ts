@@ -778,7 +778,10 @@ export function createReferenceService(
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
     // identity, and therefore every existing allocation, stays the same.
-    const desired = baseline.source.kind === 'react-initial-draft'
+    const desired = baseline.source.kind === 'react-state-api-draft'
+      ? prepareReactStateApiNativePlan({ ...reactReference.stateApiNativeEvidence(baseline.source,
+        nativeJobs.reactStateApiRequest(id)), operation: baseline.input.operation })
+      : baseline.source.kind === 'react-initial-draft'
       // The existing component keeps its name and token namespace; for an
       // unchanged source this equals the content-derived name.
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })

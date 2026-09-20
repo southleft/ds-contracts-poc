@@ -5,12 +5,13 @@ import { ReactStateApiInspection } from './ReactStateApiInspection';
 export function ReactCallbackInspection({
   referenceId,
   caseId,
-  available, prepareStateApi, nativeBusy,
+  available, prepareStateApi, nativeBusy, onStateApiChange,
 }: {
   referenceId: string;
   caseId: string;
   available: boolean;
   prepareStateApi?:()=>void; nativeBusy?:boolean;
+  onStateApiChange?:()=>void;
 }) {
   const [result, setResult] = useState<Inspection | null>(null),
     [error, setError] = useState(""),
@@ -210,7 +211,7 @@ export function ReactCallbackInspection({
           )}
         </>
       )}
-      <ReactStateApiInspection referenceId={referenceId} caseId={caseId} prepareNative={prepareStateApi} nativeBusy={nativeBusy} available={available && !!result?.sourceUnchanged &&
+      <ReactStateApiInspection onObservationChange={onStateApiChange} referenceId={referenceId} caseId={caseId} prepareNative={prepareStateApi} nativeBusy={nativeBusy} available={available && !!result?.sourceUnchanged &&
         result.observation?.relationships.filter(r => r.status === 'controlled-observed').length === 1 &&
         result.observation?.relationships.filter(r => r.status === 'initial-only-observed').length === 1}/>
     </section>

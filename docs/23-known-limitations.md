@@ -6536,8 +6536,9 @@ the thumb's local y is 1.1953125 in Figma and 1.1875 in the browser; the invisib
 hit-area decoration also differs. These are measured initial images, not pixel
 identity or all-state visual qualification.
 
-**Still unqualified:** live updates of this new operation, hover/focus,
-responsive and dark states, the nine excluded source inputs, deeper composition
+**Still unqualified:** broader live updates of this operation (the bounded opacity
+cycle is now demonstrated in D.73), hover/focus, responsive and dark states, the
+nine excluded source inputs, deeper composition
 and the complete independent family. Figma retains behavior declarations; it
 does not execute React interactions. The earlier bound-height update refusal
 is unchanged. Detailed app journals, captures, exact package hash, lockfile,
@@ -6601,3 +6602,61 @@ are retained in private `stateful-design-update-s__b4c11/`.
 
 To reverse this measurement decision, remove this bounded acceptance claim while
 preserving its private evidence. No converter, scorer or tolerance changed.
+
+## D.73 State-API operations follow fresh source evidence without replacing their native set
+
+**AGENT identity and update decision.** State-API operations previously had no
+source-succession or compiler-update path. They now follow a complete, freshly
+authenticated state experiment on the same source module/export and case. The
+original creation pin remains immutable. Its exact sealed archive supplies only
+the initial contract's allocation identity; it grants no authority over current
+source. The current initial draft and state experiment are checked independently,
+then projected once under that original namespace. API, initializer, callback and
+value-map changes still refuse through the shared update planner. An observer
+change can require a new experiment even when source bytes are unchanged.
+
+**Measured through the app, 2026-09-20.** The existing nine-main state-API Switch
+from D.71 completed a guarded opacity cycle in Evaluations. A coherent source,
+stylesheet and declared exact-witness change from 0.5 to 0.4 was freshly observed:
+nine initial states and 54 simultaneous-input trials with 81 exact restorations.
+The app followed that evidence, reviewed three root corrections and one owned
+unbound variable, then ran preflight, one guarded write and independent readback.
+All four values were exactly `Math.fround(0.4)`. A repeat review planned and wrote
+nothing; all 197 saved update/plan files were unchanged. The original set, main
+identities, state API metadata and surrounding native structure stayed intact.
+
+Restoring all three source files byte-for-byte and refreshing the observations
+produced a reverse proposal on the same objects. Before applying it, a bounded
+native edit changed one root to `Math.fround(0.45)`. Preflight named
+`native-update-opacity-conflict:87:1077` and issued no write command. Independent
+before/after snapshots, variables and 19 PNGs were identical. Restoring that one
+test edit allowed **Inspect update again** to re-run preflight and complete the
+same proposal. The three roots and variable returned to 0.5. Both native pages,
+all 30 owned variables, API metadata and all 19 PNGs exactly match the original
+baseline. All 610 earlier creation files are unchanged; no native node was
+allocated. A final unchanged review leaves all 209 update/plan files identical.
+Plugin windows were closed for each canvas inspection.
+
+This qualifies this operation's bounded source-to-native opacity update,
+conflict refusal, retry and rollback. It does not qualify bound-height changes,
+broader state inputs, exact descendant geometry, hover/focus/dark/responsive
+states, or automatic two-way source editing. Updated exports are diagnostic;
+this cycle adds no new image-fidelity score. Historical correction exports now
+omit current-source pairing and alignment: only a current, unsuperseded correction
+can display those source images. The separately authenticated D.71 matched review
+retains its original evidence. A fresh whole-file check found no consumers or
+aliases of this opacity variable; the product's write guard still checks node
+bindings only on the operation's page, as the review explicitly says.
+
+Reproducers: `native-source-succession.test.ts`, `native-source-identity.test.ts`,
+`react-state-api-inspection.test.ts`, `react-state-api-native.test.ts` and
+`react-cohort.test.ts` under `source-reference/` cover full experiment pins,
+historical identity, pending/failed evidence, API refusals, same-node updates,
+repeat and restoration. The in-flight experiment refusal was also observed in
+the app before this cycle. Detailed source captures, immutable journals, native
+snapshots, refusal, restoration and UI checks are retained in private
+`state-api-source-update-x9yrm26v/`. No emitter, scorer or tolerance changed.
+
+To reverse this decision, remove state-API succession/update eligibility and its
+UI actions while preserving existing creation, succession and correction
+journals, historical readers and shared write guards.

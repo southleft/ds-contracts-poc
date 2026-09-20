@@ -464,9 +464,16 @@ test("same-named cases from another workspace cannot follow the loaded source th
   const moved = pins.map(pin => ({ operationId: pin.ownership.id, caseId: pin.caseId, kind: "root", followedReferenceId: pin.referenceId,
     fileKey: "test", phase: "component-structure-observed" }));
   const adopted: string[] = [];
+  let stateWrapped = false, unresolved: { pending: boolean; phase: string }[] = [];
   const handle = createReactReferenceService(repo, root, () => ({ jobs: { listReact: () => [], listReactMoved: () => moved,
-    withReadSnapshot: (read: () => unknown) => read(), reactSuccessionSubject: (id: string) => pins.find(pin => pin.ownership.id === id) },
-    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => [] } }) as any);
+    withReadSnapshot: (read: () => unknown) => read(), reactSuccessionSubject: (id: string) => {
+      const pin = pins.find(pin => pin.ownership.id === id)!;
+      return !stateWrapped ? pin : { version: 1, kind: 'react-state-api-draft',
+        initial: { version: 1, kind: 'react-initial-draft', anchor: pin, caseId: pin.caseId,
+          observation: { id: pin.ownership.id, inventorySha256: pin.inventorySha256, reportSha256: pin.ownership.sha256 } },
+        observation: { key: 'a'.repeat(64), id: pin.ownership.id, inventorySha256: 'b'.repeat(64), reportSha256: 'c'.repeat(64) } };
+    } },
+    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => unresolved } }) as any);
   const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.slice(1)));
   server.listen(0, "127.0.0.1"); await once(server, "listening");
   const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
@@ -481,7 +488,18 @@ test("same-named cases from another workspace cannot follow the loaded source th
       assert.equal(response.status, 409);
       assert.equal((await response.json()).reason, reason);
     }
-    assert.deepEqual(adopted, [], "neither request appends a source succession");
+    stateWrapped = true;
+    for (const entry of [{ pending: true, phase: 'update-verified' }, { pending: false, phase: 'update-prepared' },
+      { pending: false, phase: 'update-written' }]) {
+      unresolved = [entry];
+      const response = await fetch(base + `/react/${loaded.id}/native-operation/${pins[0].ownership.id}/adopt-source`, { method: 'POST' });
+      assert.equal(response.status, 409);
+      assert.equal((await response.json()).reason, 'react-source-succession-update-unresolved');
+    }
+    unresolved = [];
+    const missingExperiment = await fetch(base + `/react/${loaded.id}/native-operation/${pins[0].ownership.id}/adopt-source`, { method: 'POST' });
+    assert.equal(missingExperiment.status, 409, 'appearance or an older state pin cannot substitute for a fresh complete experiment');
+    assert.deepEqual(adopted, [], "refused requests never append a source succession");
   } finally {
     handle.close(); server.close();
     rmSync(root, { recursive: true, force: true }); rmSync(repo, { recursive: true, force: true });
