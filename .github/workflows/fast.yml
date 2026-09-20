@@ -75,7 +75,15 @@ jobs:
     # belongs in its own parallel job eventually; that is a bigger change than
     # letting the lane finish, and letting it finish is what unblocks every
     # verdict downstream.
-    timeout-minutes: 25
+    #
+    # 2026-09-19: 25 became the same cap. Fourteen consecutive runs: every pass
+    # took 16.5 to 25.0 minutes on identical work (runner speed is the spread),
+    # and five were cancelled at the 25-minute mark — run 35431055761 twice, mid-step, with
+    # every earlier step green. A cancelled required check blocks a merge that
+    # the full sweep and the catalog gate had already passed. 40 is headroom
+    # over the slowest observed pass, not a budget: the lane's content is
+    # unchanged, and splitting recipe:live:history:test out is still the fix.
+    timeout-minutes: 40
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

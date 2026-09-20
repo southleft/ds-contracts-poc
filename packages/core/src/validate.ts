@@ -344,16 +344,19 @@ export function validateContract(
     // v7 layoutByProp: the driving prop must be a declared enum and every
     // map key one of its values; component parts lay themselves out via
     // their own contract, so an override there would be silently dead.
+    // An optional boolean with an omitted VARIANT plane drives it exactly as
+    // it drives tokensByProp: the omitted plane is the base layout and the
+    // false/true planes are the map (a checked state that re-aligns a part).
     if (part.layoutByProp) {
       const lbp = part.layoutByProp;
       const lbpProp = contract.props.find((pr) => pr.name === lbp.prop);
       if (!lbpProp) {
         errors.push(`${contract.id}: part "${name}" layoutByProp references unknown prop "${lbp.prop}"`);
-      } else if (!isEnum(lbpProp)) {
-        errors.push(`${contract.id}: part "${name}" layoutByProp prop "${lbp.prop}" must be an enum prop`);
+      } else if (!isEnum(lbpProp) && !(isVariantBool(lbpProp) && lbpProp.bindings.figma.unsetValue !== undefined)) {
+        errors.push(`${contract.id}: part "${name}" layoutByProp prop "${lbp.prop}" must be an enum or an optional boolean with an omitted VARIANT plane`);
       } else {
         for (const k of Object.keys(lbp.map)) {
-          if (!lbpProp.type.enum.includes(k)) {
+          if (!(isEnum(lbpProp) ? lbpProp.type.enum : ['false', 'true']).includes(k)) {
             errors.push(`${contract.id}: part "${name}" layoutByProp map key "${k}" is not a value of prop "${lbp.prop}"`);
           }
         }

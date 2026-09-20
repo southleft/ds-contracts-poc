@@ -134,12 +134,15 @@ export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEv
 /** Shared anatomy/paint compiler. The caller authenticates and enumerates the
  * input domain; this routine does not turn samples into a supported source API. */
 export function compileObservedContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
-  rootSizing: string[] = [], includeSourcePaths = false, preserveTextBoxes: string[] = []) {
-  return compileContentSweep(space, comp, sweep, rootSizing, includeSourcePaths, preserveTextBoxes, false);
+  rootSizing: string[] = [], includeSourcePaths = false, preserveTextBoxes: string[] = [], partSizing?: PartSizing) {
+  return compileContentSweep(space, comp, sweep, rootSizing, includeSourcePaths, preserveTextBoxes, false, partSizing);
 }
+/** Combination key → element path below the capture root → the size channels
+ * the CALLER proved are that element's own used declarations in that plane. */
+export type PartSizing = Map<string, Map<string, ReadonlySet<string>>>;
 
 function compileContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
-  rootSizing: string[], includeSourcePaths: boolean, preserveTextBoxes: string[], omitIdentityOpacity: boolean) {
+  rootSizing: string[], includeSourcePaths: boolean, preserveTextBoxes: string[], omitIdentityOpacity: boolean, partSizing?: PartSizing) {
   const result: Pick<ObservedContentDraft, 'receipts' | 'problems' | 'residuals' | 'contract' | 'tokens' | 'assets' | 'component' | 'sourcePaths'> = {
     receipts: [], problems: [], residuals: [],
   };
@@ -153,7 +156,21 @@ function compileContentSweep(space: PropSpace, comp: ComponentConfig, sweep: Swe
   // diagnostic receipt, but never allow that guess to authorize a write.
   if (promoted.receipts.some(r => /^svg-viewbox-(?:reconstructed|bumped|circle-offset|unified):/.test(r)))
     result.problems.push('observed-content-svg-authored-viewport-required');
-  const styled = new Map(aligned.baseFlat.map(e => [e.partName, new Set(Object.keys(e.node.style).filter(c => !reactRootStyleExclusion(c) || e.partName === 'root' && rootSizing.includes(c)))]));
+  // A part below the root keeps the sample-geometry exclusion unless its size is
+  // proved own in EVERY plane where the part exists; a part sized in some planes only refuses.
+  const partSized = new Map<string, Set<string>>();
+  if (partSizing) aligned.partNames.forEach((partName, pi) => {
+    for (const channel of ['width', 'height']) {
+      const proved = [...partSizing].flatMap(([key, sizing]) => {
+        const el = aligned.getAligned(`${key}__default`)[pi];
+        return el ? [sizing.get(el.path)?.has(channel) === true] : [];
+      });
+      if (proved.length && proved.every(Boolean)) (partSized.get(partName) ?? partSized.set(partName, new Set()).get(partName)!).add(channel);
+      else if (proved.some(Boolean)) result.problems.push('observed-content-part-sizing-mixed:' + channel);
+    }
+  });
+  const styled = new Map(aligned.baseFlat.map(e => [e.partName, new Set(Object.keys(e.node.style).filter(c => !reactRootStyleExclusion(c) ||
+    e.partName === 'root' && rootSizing.includes(c) || partSized.get(e.partName)?.has(c)))]));
   if (omitIdentityOpacity) for (const channels of styled.values()) channels.delete('opacity');
   const consumed = new Set([...promoted.consumed].map(i => aligned.partNames[i]));
   const layout = enrichLayout(aligned, space, styled, promoted.contract);

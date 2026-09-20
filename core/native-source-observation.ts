@@ -1,6 +1,7 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
 import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
+import { positionedAs } from './native-float32.js';
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
@@ -908,7 +909,8 @@ function verifyReadback(
           !numeric(background.radius,Math.max(0,(parent?.values.cornerRadius??NaN)-background.inset))||
           !same(v.constraints,{horizontal:'STRETCH',vertical:'STRETCH'})||parent?.childIds[0]!==n.id))
         issue('native-contract-observation-background-geometry',n);
-      if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !numeric(v.x, spec.absolute.left!) || !numeric(v.y, spec.absolute.top!)))
+      if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !positionedAs(v.x, spec.absolute.left!, parent?.values.width, v.width) ||
+          !positionedAs(v.y, spec.absolute.top!, parent?.values.height, v.height)))
         issue('native-contract-observation-shape-position', n);
     }
     if (spec.type === "slot") {

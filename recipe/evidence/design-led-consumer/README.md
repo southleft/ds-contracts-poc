@@ -2,6 +2,8 @@
 
 MEASURED, NOT GRADED. `acceptedContract: null` everywhere; no owner grade is recorded here.
 
+**Historical white-only receipts.** These files retain the original measurement substrate and are not current two-background acceptance evidence.
+
 Each folder is one run of `npm run design:consumer:check` on a designer-drawn set: a read-only REST re-read of the set
 (`inputs/rest-dump.json`), the proposed contract, the generated React (`inputs/generated/`), the clean consumer's
 screenshots, Figma's own renders, the triptychs and `receipt.json`.
@@ -21,3 +23,15 @@ npm run extract:figma -- <work>/set.rest-dump.json --out <work>/propose
 npx ds-contracts generate <work>/propose/*.contract.proposed.json --out <work>/propose/generated --stories --tokens <repo token files>,<work>/propose/minted.dtcg.json
 npm run design:consumer:check -- --dump <work>/set.rest-dump.json --contract <work>/propose/<set>.contract.proposed.json --generated <work>/propose/generated --component <Name> --out <work>/evidence
 ```
+
+## Current integration measurement
+
+Fresh read-only REST captures, generation and clean-consumer installation after
+merging the current state-axis checks measure both backgrounds under the same
+5% limit. Altitude Badge passes 10/10; CBDS Badge passes 66/72 (all 72 on white,
+six small rounded outline failures on black); Tabs passes 0/2 and still has
+missing child content. Maximum white/black mismatch is 4.825%/4.825%,
+4.427%/6.120% and 7.081%/9.030%, respectively. These CLI observations do not
+qualify the complete app journey or component semantics. Fresh receipts and
+both pre-merge artifact versions are preserved in private
+`pr135-main-integration-c93fqc91/`. See docs/23 D.42 and D.51.

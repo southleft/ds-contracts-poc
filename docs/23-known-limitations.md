@@ -3923,7 +3923,7 @@ designer only when a stamp was observable, and that is now a POSITIVE reader fac
   know: `extract/figma/rest/fetch.ts` always requests the plane and says so;
 - anything else — a bare `mapRestToDump(response)`, a hand-authored fixture, a
   bridge that never read plugin data — is not observable, and a strict-subset set
-  refuses `EXACT_MATRIX_RAGGED … stamps-not-observable`.
+  refuses `EXACT_MATRIX_RAGGED`, with `stamps-not-observable` in its technical detail.
 
 **This is a provenance fact, not a grammar change: dump stays v1.35.** It is a
 file-level `_provenance` key (the `captureGaps` precedent: additive provenance one
@@ -3973,6 +3973,19 @@ walked the whole product to validate one tuple. Two rules, both by name:
   product at all — each tuple is checked against the axes and ranked by mixed
   radix, O(tuples × axes): one tuple over 1.68 M cells went from 2.8 s / ~1 GB to
   under a millisecond.
+
+**AGENT decision — enforce the bound at the first exactness check.** A further
+bounded probe found that `validateExactVariantProjection` still enumerated the
+full product before the proposer reached the bound above. Thirteen binary axes
+with fourteen drawn rows allocated 8,192 tuples; larger sparse inputs could
+exhaust memory before refusing. The validator now validates the observed rows
+and multiplies their axis cardinalities first. Above 4,096, a ragged source is
+refused with counts and no enumerated missing-tuple list. A fully observed large
+product still verifies from valid, unique rows whose count equals the product;
+its returned rows must remain complete. The declaration limit and exactness
+requirements are unchanged. To reverse, remove this cardinality branch from
+`core/exact-projection.ts` and the two boundary probes; that restores expansion
+before refusal. Evidence is synthetic, in `extract/figma/absent-variants.test.ts`.
 
 **The ambiguity fence.** Every per-axis inversion rule ("this value is a function
 of axis A") was written for full coverage, where the explanation is unique: if a
@@ -4059,10 +4072,10 @@ unchanged 5 % limit):
 that is the fail-closed rule working.** The exam reads a canvas through a read-only
 observe whose scene read-back ignores plugin data by design
 (`recipe/canvas-to-code.ts`), so on that path a stamp was never observable and
-"unstamped" proves nothing: the receipt stays `refused-by-name` at propose, its
-message now carrying the reason (`… Cartesian definitions require 40.
-stamps-not-observable: …`; one line in each of four evidence files, re-recorded with
-the gate's own `--write --subject cbds-alert`), the tally stays **5 accounting-clean,
+"unstamped" proves nothing: the receipt stays `refused-by-name` at propose. Its
+historical message and all four frozen evidence files remain byte-identical to
+main. The additional `stamps-not-observable` explanation rides the existing
+technical-detail channel on the batch refusal. The tally stays **5 accounting-clean,
 19 refused by name**, and the three derived status lines are unchanged. The first
 cut of this change had re-recorded Alert as accounting-clean; the review's M2 found
 that part of the old refusal had merely MOVED (next paragraph), and H2 removed the
@@ -4420,7 +4433,49 @@ referee, the emitted React, the planner), four rows in
 (`npm run design:consumer:test`, incl. the browser test of the three named state
 problems).
 
+**Consumer observation correction (AGENT decision, 2026-09-19).** A browser
+probe changed only the font size of a fixed-size control on real hover. Its
+pixels changed, but the check reported `state-inert` because its computed paint
+snapshot omitted font size. The same gap affected font family and line height.
+The snapshot now includes those three properties; a browser regression checks
+each with different before/after screenshots and unchanged control dimensions.
+The pixel scorer, 5% limit, source pairing and frozen evidence are unchanged.
+This corrects a measurement failure, not a product fidelity result. Reversal:
+remove the three computed properties from `paintOf` and the typography probe;
+the rest of the state-axis rule is independent.
+
+
+### D.41 follow-up — variant effects include descendants
+
+**AGENT measurement decision, 2026-09-19.** The clean-consumer variant probe
+previously compared only root styles, bounds and class names. A parent prop
+forwarded to a child could visibly work while the check reported
+`variant-prop-discarded`; an unused root class could imply an effect with no
+changed drawing. The probe now records subtree paint, rendered text and exact
+geometry relative to the root. It excludes class names. Browser probes verify
+changed descendant color, rearrangement at fixed root bounds, and equal-width
+text replacement against actual different screenshots; an unused class stays
+inert. This does not change the image scorer or its 5% limit. Existing receipts
+remain historical until remeasured. Reversal: restore the former root-only
+observer in `scripts/design-consumer-check.ts`, retaining these known false
+positive and false negative cases in the limitation ledger.
+
+
 ## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+
+**Current integration measurement, 2026-09-19.** After merging the current
+state-axis and consumer-check changes, fresh REST reads and newly generated,
+installed consumers measure Altitude Badge **10/10**, CBDS Badge **66/72** and
+Altitude Tabs **0/2** on both white and black. All 72 CBDS rows pass white
+(maximum 4.427%); six small rounded outline rows fail black (maximum 6.120%).
+Altitude Badge's maximum is 4.825% on either background. Tabs retains missing
+child content, an ineffective variant change and a 40px versus 176px content
+height mismatch; its maxima are 7.081% white and 9.030% black. These are CLI
+consumer measurements, not a full application or semantic qualification.
+No source design, scorer or 5% limit changed. The 72/72 table below is the
+historical white-only result, retained with its original receipts. Both sides
+of the integration and the fresh measurements are preserved privately in
+`pr135-main-integration-c93fqc91/`; the new observation does not rewrite them.
 
 **2026-09-19. A lowering decision taken by the agent under the owner's standing
 delegation (never a grade, never a tolerance); recorded so it can be reversed.**
@@ -4717,3 +4772,34 @@ reader, the flagless re-read pinned) and `core/react-whole-pixel-text-box.test.t
 every validator refusal, and the box MEASURED in Chromium: rounded up less the
 trailing tracking, the hug root following, a centred run centred, RTL at the right
 edge, vertical writing rounding the block dimension).
+
+
+## D.51 Comparable node alpha and contrasting-background measurement
+
+**AGENT measurement decision (2026-09-19).** Clean-consumer captures now exclude
+the review page background, matching Figma's node-export alpha. A screenshot-only
+style makes html/body transparent and is restored immediately afterward. The
+component's own backgrounds and geometry are untouched. Previously the opaque
+white React page could never trim its transparent margins, while Figma did:
+identical 148px layouts were reported as 148 versus 142 content pixels. A browser
+probe checks transparent margins, restoration of the white review page and a
+planted geometry change that remains detectable.
+
+Both source and consumer are then compared on white **and black**, using the same
+alignment, antialias-aware pixel metric and unchanged 5% limit on each. The
+existing default white comparator is byte-identical; black is an additional
+required check, never a replacement or an excuse. Masked text remains diagnostic.
+A planted missing pale block passes the white comparison and fails on black.
+
+This check found a real remaining defect in the app's CheckboxGroup archive:
+white comparison passed12/12 at at most3.18%, but black comparison exceeded5%
+in9/12. The split wrapper's default indicator lost its border-color and rendered
+black. The archive remains unqualified. Old opaque captures and their receipts
+are preserved as historical measurements; current acceptance must cite the
+capture metadata and both background scores. The work does not change frozen
+recipe receipts or OS-specific visual baselines.
+
+Reversal: restore ordinary opaque screenshots and remove the additional black
+comparison in `design-consumer-check.ts`; the original white-default scorer
+remains available. Such a reversal restores the known measurement errors and
+must not turn those historical results into acceptance evidence.
