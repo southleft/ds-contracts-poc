@@ -6337,3 +6337,36 @@ separate maximums and FILL/HUG/mixed/unknown nonpromotion. Evidence:
 app contracts, exact archives, clean-consumer receipts and closed-plugin canvas).
 Reverse by restoring the previous map expansion, bound-width translation and
 consumer omission handling; retain these records and name the restored losses.
+
+
+## D.67 Callback inspection retains restored candidate refusals
+
+**AGENT decision, 2026-09-19:** a type-compatible input that removes the
+selected root or prevents keyboard focus no longer stops every later input
+from being inspected. The probe registry must be present and empty, and the
+host must independently verify original source, render and ownership before
+continuing. A failed restoration, changed role or identity, unsupported state
+or instrument failure still stops the sweep. Both activation paths must finish
+before a value contributes relationship rows.
+
+This is diagnostic continuation, not behavior qualification. Every recovered
+refusal remains in the overall problems list and has its callback, input,
+value and reason displayed in the app. The contract projector still rejects
+an incomplete observation. No input is excluded by its name.
+
+The independent Switch app rerun retained **42 activation trials** across
+twelve compatible properties, versus two trials before this change. It
+observed `checked` as controlled and `defaultChecked` as initial-only.
+`asChild=true` removed the root; `hidden=true` and `inert=true` prevented
+keyboard focus. All three remain refusals. Every one of 68 independent
+restoration checks matched the original same-mount image, and source and
+ownership were restored. The report was inspected in the application.
+
+The complete behavior inspection remains failed. Generating and installing
+the behavior, qualifying its appearance and label composition, and preserving
+it through native metadata remain unfinished. Private evidence:
+`callback-candidate-isolation-nmtqn4yw/` (sealed report identity, summary and
+visible app result). Bounded probes cover disappearance during live and fresh
+mounts, inert focus, failed restoration, role changes and incomplete projection.
+Reverse by restoring the whole-sweep abort and removing the refusal display;
+keep these records and report the lost observation coverage.
