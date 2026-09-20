@@ -1,3 +1,5 @@
+import type { ReactBehaviorContract } from './react-behavior-contract.js';
+import { projectReactStateApiContract } from './react-state-api-contract.js';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -24,6 +26,7 @@ export interface ReactStateApiInspection {
   restorationChecks: number;
   observation?: ReactStateApiObservation;
   problems: string[];
+  draft?: ReactBehaviorContract;
 }
 
 const observerFiles = [
@@ -97,13 +100,15 @@ export function createReactStateApiInspectionStore(
   return {
     read(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId);
-      return structuredClone(active.get(value.key)?.state ?? readReactStateApiInspection(value.root, value.request) ?? null);
+      const report = structuredClone(active.get(value.key)?.state ?? readReactStateApiInspection(value.root, value.request) ?? null);
+      if (report?.phase === 'complete') report.draft = projectReactStateApiContract(value.saved.initial!, report);
+      return report;
     },
     start(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId), running = active.get(value.key);
       if (running) return running;
       const prior = readReactStateApiInspection(value.root, value.request);
-      if (prior?.phase === 'complete') return { state: prior, promise: Promise.resolve() };
+      if (prior?.phase === 'complete') return { state: { ...prior, draft: projectReactStateApiContract(value.saved.initial!, prior) }, promise: Promise.resolve() };
       const program = readReactSourceProgram(sourceRoot, [...new Set(value.source.program.components.map(c => c.module))]);
       const identities = (p: typeof program) => p.components.map(c =>
         ({ module: c.module, exportName: c.exportName, sourceSha256: c.sourceSha256, span: c.span }));

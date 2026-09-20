@@ -59,6 +59,13 @@ export function ReactStateApiInspection({ referenceId, caseId, available }: { re
           </tr>)}</tbody>
         </table>
       </details>}
+      {result.draft && <section aria-label="Generated state API draft"><h4>Generated state behavior: {result.draft.status}</h4>
+        <p>This draft uses the contract's existing state and callback model. The original broad inspection remains unchanged. Visual fidelity, excluded inputs and native behavior still require qualification.</p>
+        {result.draft.status === 'generated-draft' && <details><summary>Try the generated state control</summary>
+          <iframe title="Generated state API consumer" src={endpoint + '/preview'} sandbox="allow-scripts" style={{width:'100%',height:610,border:'1px solid #ddd'}}/>
+        </details>}
+        {result.draft.problems.map(problem=><p key={problem} role="alert">{problem}</p>)}
+      </section>}
       {[...result.problems, ...(result.observation?.problems ?? [])].map((problem, index) => <p key={index} role="alert">{problem}</p>)}
     </>}
   </section>;
