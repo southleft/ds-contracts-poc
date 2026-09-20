@@ -6807,3 +6807,47 @@ the actual HTTP API inspection, source changes and missing witnesses. A nearby
 unimported JSX file cannot stand in for a compiled package entry. To reverse,
 remove the additional mounted-file selection and its host-only metadata from
 `react-reference.ts`, retaining the historical `src` selection in both readers.
+
+## D.77 Textless originals require an explicit absence witness
+
+**AGENT decision, 2026-09-20: admit declared text absence only after independently
+observing it.** Source readiness previously required rendered text and an actual
+painted font for every root. The unmodified Radix Themes Separator therefore
+failed both declared cases with `text-witness-missing`, despite matching its
+source dimensions and styling. An unrelated nearby caption did not establish
+component text.
+
+A workspace can now declare `witness.textContent: "absent"`, without a font-path
+or associated-label witness. The observer checks up to 10,000 ordinary HTML/SVG
+DOM nodes, including hidden text, and requires no non-whitespace text, generated
+content, list markers or painted glyphs. Custom elements, shadow roots, slots,
+opaque rendering and native text surfaces refuse this proof. A root disappearing
+before the protocol read is unavailable evidence, never a zero-glyph result. Missing evidence,
+an oversized scope, missing/hidden/zero-size roots, wrong styles or tokens,
+resource failures and runtime errors still refuse. Existing declarations retain
+their visible-text and actual-font requirements and observation field shape.
+
+An explicitly textless representative must reject five corruptions: missing CSS,
+theme, root, hidden root and injected unexpected text. The authenticated
+declaration selects this set; recorded rows cannot exempt themselves from the
+original missing-font control. Font-bearing cases still reject that original
+five-control set. No fidelity threshold, scorer or original source styling changed.
+
+**Measured through the application:** a separate Radix Themes 3.3.0 Separator
+cohort now validates **2/2** original/replay cases, with all five applicable
+corruptions rejected and source inputs unchanged. Structure observation matches
+both original renders. Native conversion remains unqualified: the API read
+retains `unresolved-prop-type:inlist`, child ownership remains unresolved through
+the source spread, and both native roots refuse
+`react-root-visual-source-content-unqualified`. Native preparation stayed disabled;
+all 1,244 earlier native journal files remained identical. An empty observed
+sample does not prove that a component owns or discards arbitrary caller content.
+
+Private evidence `radix-separator-intake-fauiyy9s/` preserves the initial refused
+declaration, before/after application screenshots, final observer hashes,
+validation, ownership and API records. The final validation is `87c04d50…`;
+an earlier successful run against a superseded observer remains separate evidence.
+Browser regressions cover hidden/generated text, glyph disagreement, unavailable
+scope, disappearing roots, node bounds and both five-control sets. Reverse by removing the opt-in
+absence witness and its admission/control rules; preserve all receipts and
+restore the named textless-source limitation.
