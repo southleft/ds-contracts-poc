@@ -283,3 +283,126 @@ export const Panel=React.forwardRef<HTMLDivElement,{children?:React.ReactNode}>(
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("default exports in separate modules retain distinct source owners and reject runtime aliases", async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "react-default-owners-"));
+  const browser = await chromium.launch();
+  try {
+    for (const [file, tag] of [
+      ["outer.tsx", "section"],
+      ["inner.tsx", "div"],
+    ]) {
+      writeFileSync(
+        path.join(dir, file),
+        `import React from 'react';
+const Panel=({children}:{children?:React.ReactNode})=><${tag}>{children}</${tag}>;
+export default Panel;`,
+      );
+    }
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    const program = readReactSourceProgram(dir, ["outer.tsx", "inner.tsx"]);
+    assert.equal(program.status, "observed", JSON.stringify(program.problems));
+    assert.equal(program.components.length, 2);
+    assert.ok(
+      program.components.every(
+        (c) => c.name === "Panel" && c.exportName === "default",
+      ),
+    );
+    const entries = program.components.map((c) => ({
+      module: c.module,
+      exportName: c.exportName,
+      sourceSha256: c.sourceSha256,
+      span: c.span,
+    }));
+    const bundle = await build({
+      stdin: {
+        contents: `import React from 'react';import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';
+${entries.map((c, i) => `import * as Module${i} from ${JSON.stringify(path.join(dir, c.module))};`).join("\n")}
+const values=[${entries.map((_, i) => `Module${i}.default`).join(",")}];
+window.__DSC_REACT_EXPORTS=${JSON.stringify(entries)}.map((identity,i)=>({identity,value:values[i]}));
+const Outer=values[0],Inner=values[1];
+flushSync(()=>createRoot(document.getElementById('mount')).render(<Outer><Inner><span>Caller</span></Inner></Outer>));`,
+        resolveDir: process.cwd(),
+        loader: "tsx",
+      },
+      bundle: true,
+      write: false,
+      format: "iife",
+      nodePaths: [path.resolve("node_modules")],
+    });
+    const context = await browser.newContext();
+    try {
+      await context.addInitScript(reactOwnershipHook);
+      const page = await context.newPage();
+      await page.setContent('<div id="mount"></div>');
+      await page.addScriptTag({ content: bundle.outputFiles[0].text });
+      await page.evaluate(
+        "window.__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort()",
+      );
+      const tree = (await page.evaluate(
+        captureJs("#mount", undefined, "--", ["#mount > :first-child"]),
+      )) as CapturedNode;
+      const ownership = (await page.evaluate(
+        reactOwnershipRead("#mount > :first-child"),
+      )) as ReactOwnership;
+      assert.deepEqual(ownership.problems, []);
+      assert.deepEqual(
+        ownership.components.map((c) => [
+          c.source.module,
+          c.source.exportName,
+          c.roots,
+        ]),
+        [
+          [entries[0].module, "default", [""]],
+          [entries[1].module, "default", ["0"]],
+        ],
+      );
+      const linked = linkReactSourceAnatomy(program, ownership, tree);
+      assert.equal(linked.status, "linked", JSON.stringify(linked.problems));
+      assert.ok(
+        linked.instances.every(
+          (i) =>
+            i.content === "caller-slot" &&
+            i.roots[0].correspondence === "source-host",
+        ),
+      );
+      const impostor = structuredClone(ownership);
+      impostor.components[1].source.module = entries[0].module;
+      assert.deepEqual(
+        linkReactSourceAnatomy(program, impostor, tree).problems,
+        ["react-anatomy-source-identity-mismatch"],
+      );
+      await page.evaluate(
+        `window.__DSC_REACT_EXPORTS.push({identity:{...window.__DSC_REACT_EXPORTS[0].identity,exportName:'NamedAlias'},value:window.__DSC_REACT_EXPORTS[0].value})`,
+      );
+      assert.deepEqual(
+        (
+          (await page.evaluate(
+            reactOwnershipRead("#mount > :first-child"),
+          )) as ReactOwnership
+        ).problems,
+        ["react-ownership-export-alias-ambiguous"],
+      );
+    } finally {
+      await context.close();
+    }
+  } finally {
+    await browser.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

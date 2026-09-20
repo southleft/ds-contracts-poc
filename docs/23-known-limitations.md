@@ -7699,3 +7699,45 @@ To reverse, remove `nativeTextRenderingLeafParts` and its emitter calls/explicit
 caller override forwarding. Keep the independent inline `style` collision fix,
 font-input support, D.88 root guard and all historical evidence. Do not alter
 source designs, crops, scorer thresholds or owner grades.
+
+
+## D.94 Local default components keep their export identity
+
+**AGENT decision — 2026-09-20.** Source inspection previously filtered exports
+by an uppercase first character and silently skipped `default`. It now admits
+a local `const` whose initializer is a supported function or direct React
+`forwardRef` call. The module/export/hash/span identity remains unchanged:
+`default` is never replaced by the local variable name or `displayName`.
+
+Const alone is insufficient for a wrapper object: an adversarial probe replaced
+its `render` method with `Object.assign` while the initial reader still reported
+forwarded children. New default admission therefore also refuses local value
+mutations and escapes. Only declaration, local export, direct JSX, type query
+and literal `displayName` assignment uses are admitted. Anonymous export
+expressions, default function declarations, mutable bindings, indirect wrappers,
+external definitions and unsupported calls remain named refusals. Existing
+named-export behavior is unchanged. This is a bounded local proof, not analysis
+of every possible future consumer mutation.
+
+Tests retain true default import identity, direct children, callback/default
+metadata and non-execution of source. Two modules with the same local name and
+`default` export join distinct renderer owners; a substituted module identity
+and duplicate runtime alias refuse. Six wrapper mutation/escape controls refuse.
+The cohort still groups negative controls by the declared export-name subject;
+multiple default-exported modules do not automatically receive separate groups.
+
+The unchanged React DaisyUI 5.0.5 Badge source matches both npm source-map text
+and release `94869ab436cb72aea944972a8f931cb9b60e725e`. In the app, two declared
+cases pass source/replay checks and all five representative corruption controls.
+The published compiled entry independently matches both cases' exact DOM,
+computed styles, root bounds and PNG bytes. These finite observations do not
+establish package-wide semantics. The host declares DaisyUI's light theme and
+pinned Inter bytes under the standard `Inter Variable` CSS alias; the earlier
+`Inter` alias failed the missing-font control and remains preserved. The API
+read still names `unresolved-prop-type:inlist`; native fidelity and the complete
+second-library journey remain unqualified. Private evidence is retained in
+`daisyui-source-intake-20260920/`.
+
+To reverse, restore the uppercase-only export filter and remove the default-only
+binding/use guard and documentation. Preserve original source, declined cases,
+all private observations and the existing runtime identity/refusal checks.

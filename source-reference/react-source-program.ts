@@ -365,7 +365,7 @@ export function readReactSourceProgram(
       };
       for (const exported of checker.getExportsOfModule(moduleSymbol)) {
         const name = exported.getName();
-        if (!/^[A-Z]/.test(name)) continue;
+        if (!/^[A-Z]/.test(name) && name !== "default") continue;
         // Type-only re-exports may alias a value symbol, but emit no runtime
         // binding. Interfaces/type aliases likewise cannot identify a rendered
         // component. Keep unsupported VALUE exports on the named refusal path.
@@ -389,6 +389,78 @@ export function readReactSourceProgram(
         if (!declaration || declaration.getSourceFile() !== sf) {
           fail(`${name}:component-definition-outside-module`);
           continue;
+        }
+        // A default export keeps its actual module/export identity. Initially
+        // admit only a local immutable binding whose initializer is read below;
+        // export expressions, mutable bindings and function declarations remain
+        // named refusals. Never rename source or synthesize a named export.
+        if (
+          name === "default" &&
+          (!ts.isVariableDeclaration(declaration) ||
+            !ts.isIdentifier(declaration.name) ||
+            !ts.isVariableDeclarationList(declaration.parent) ||
+            !(declaration.parent.flags & ts.NodeFlags.Const))
+        ) {
+          fail("default:component-binding-not-immutable");
+          continue;
+        }
+        if (name === "default") {
+          // Const protects the binding, not a forwardRef object's render field.
+          // Follow only local uses that cannot replace the implementation. A
+          // literal displayName assignment is metadata on the React wrapper;
+          // arbitrary property access, aliases and calls need a separate proof.
+          let escaped = false;
+          const inspect = (node: ts.Node) => {
+            if (ts.isIdentifier(node)) {
+              let candidate = checker.getSymbolAtLocation(node);
+              if (candidate && candidate.flags & ts.SymbolFlags.Alias)
+                candidate = checker.getAliasedSymbol(candidate);
+              if (candidate === symbol) {
+                const parent = node.parent;
+                const localExport =
+                  ts.isExportSpecifier(parent) &&
+                  ts.isExportDeclaration(parent.parent.parent) &&
+                  !parent.parent.parent.moduleSpecifier;
+                const defaultExport =
+                  ts.isExportAssignment(parent) &&
+                  !parent.isExportEquals &&
+                  parent.expression === node;
+                const jsxTag =
+                  (ts.isJsxOpeningElement(parent) ||
+                    ts.isJsxClosingElement(parent) ||
+                    ts.isJsxSelfClosingElement(parent)) &&
+                  parent.tagName === node;
+                const label =
+                  ts.isPropertyAccessExpression(parent) &&
+                  parent.expression === node &&
+                  parent.name.text === "displayName" &&
+                  ts.isBinaryExpression(parent.parent) &&
+                  parent.parent.left === parent &&
+                  parent.parent.operatorToken.kind ===
+                    ts.SyntaxKind.EqualsToken &&
+                  (ts.isStringLiteral(parent.parent.right) ||
+                    ts.isNoSubstitutionTemplateLiteral(parent.parent.right));
+                if (
+                  !(
+                    ts.isVariableDeclaration(declaration) &&
+                    node === declaration.name
+                  ) &&
+                  !localExport &&
+                  !defaultExport &&
+                  !jsxTag &&
+                  !label &&
+                  !ts.isTypeQueryNode(parent)
+                )
+                  escaped = true;
+              }
+            }
+            ts.forEachChild(node, inspect);
+          };
+          inspect(sf);
+          if (escaped) {
+            fail("default:component-value-mutation-or-escape");
+            continue;
+          }
         }
         const wrappedBody = forwardRefBody(declaration);
         const fn = ts.isFunctionDeclaration(declaration)
