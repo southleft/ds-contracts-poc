@@ -7197,3 +7197,45 @@ Reversal removes the stroked-path schema, capture and emitter branches and
 restores an explicit unsupported-vector refusal. Preserve both archives,
 all earlier failures, canonical readbacks and native probe records; do not
 rewrite old results or substitute an outlined silhouette for the stroke.
+
+## D.85 Transparent pseudo geometry needs independent box evidence
+
+**AGENT finding and decision, 2026-09-20.** The unpainted absolute pseudo
+reader currently treats computed CSS dimensions and offsets as native geometry.
+That is insufficient even when the surrounding control passes its image test.
+In the retained state-API Switch, the native transparent box is 54 ×
+32.39059829711914 at approximately (-12, -8). An independent browser fixture
+with the recorded source rules has a 54 × 32.390625 box at (-11, -7): the
+computed height string loses precision, and absolute offsets start at the
+host's padding edge rather than its outer border edge. Changing the source
+height to 20 makes this box 34 high; changing only the native height variable
+leaves the old box height. The earlier image results remain valid measurements,
+but neither exact descendant geometry nor a complete source height update is
+qualified.
+
+The investigation covers twelve browser cases with zero, uniform and
+asymmetric borders, both writing directions, and fixed versus inset sizing.
+Adding the near border matches all six left-to-right cases; two overconstrained
+right-to-left cases choose the opposite inset and disagree. Seven fractional
+inset cases also show that computed offsets are not already used layout lengths.
+More decisively, authored offsets 1.0156249 px and 1.015625 px both serialize as
+`1.01562px`, while their actual local positions are 1 px and 1.015625 px.
+The negative pair has the same ambiguity. No decoder of that CSS string alone
+can recover both results correctly.
+
+A read-only protocol prototype joins each pseudo-element to its actual host
+and obtains stable, exact border quads. Its scalar width and height fields are
+rounded integers and must not substitute for those quads. This is an
+investigation, not an integrated reader or a native repair. New box evidence
+still needs complete source-tree correspondence, stability and coordinate-space
+guards; measured boxes cannot establish authored sizing or responsive behavior.
+A future height update must account for every changed descendant and every
+variable consumer, or refuse. Do not relax the current bound-variable guard.
+
+Private evidence: `bound-size-pseudo-geometry-investigation-20260920/`, with
+sealed source/native comparisons, the complete browser matrices and the
+protocol prototype. No source component, native object or historical receipt
+was changed. The decision is to retain the exactness gap and reject the
+CSS-string-only repair. Reversal requires new independent geometry evidence
+and a verified inverse representation; it never means changing the scorer or
+rewriting earlier measurements.
