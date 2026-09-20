@@ -6443,7 +6443,41 @@ and inspected `state-api-generated-live.png`.
 This is **embedded generated-consumer behavior evidence**. It is not an isolated
 package-install result or a visual qualification. The consumer supplies its own
 label; source fonts, excluded inputs and native behavior remain unqualified.
-A private native compile still drops the initializer binding and retains the
-callback toggle only as a code-only fact, so the stateful native return remains
-an explicit product gap. Reverse by removing this projector and preview; retain
+The earlier private native compile dropped the initializer binding and retained
+the callback toggle only as a code-only fact. D.70 adds a bounded metadata return,
+but the live stateful native journey remains an explicit product gap. Reverse by removing this projector and preview; retain
 the source experiment and all earlier broad refusals.
+
+## D.70 Retained state inputs survive a bounded native metadata return
+
+**AGENT decision — version the existing typed-axis envelope.** Checked controls
+with one typed controlled/initial input, one root next-value callback and an
+optional Boolean disabled variant retain those declarations inside version 2
+of `codeValueAxes`. The reader checks the non-executable contract fragment,
+semantic stamp, typed values, native property definitions and every Cartesian
+variant before restoring the initializer and callback. This is retained API
+metadata; drawn variants do not establish native interaction behavior.
+
+Malformed metadata, a changed or missing state, conflicting native semantics,
+unsupported composition and disagreement between the typed-axis and state
+fragments refuse. A writer with this metadata refuses any in-place removal or
+reinterpretation before touching the target. A matching version 1 typed axis
+can acquire the declaration. Older writers already refuse unknown versions, so
+they cannot silently erase the retained behavior. Use a fresh lineage for an
+intentional API change until an explicit migration exists.
+
+`core/figma-state-api.test.ts` executes the shared writer and dump in the Figma
+mock, returns a contract, then executes emitted React in a separate browser.
+It covers all 27 Boolean input combinations, initializer changes, callback
+values, checkbox indeterminate state, repeat identity and bounded corruption
+and retirement probes. The independent nine-variant source draft also returns
+its actual public API through that mock. All 54 existing repository component
+scripts are byte-identical in a before/after engine comparison; the committed
+Figma and Storybook freshness checks pass. Detailed records are under private
+`callback-candidate-isolation-nmtqn4yw/`.
+
+**Live stateful creation and native return remain unqualified.** This engine
+proof does not add an authenticated state-experiment operation to the app,
+qualify installation or visuals, or change the earlier appearance-only Figma
+operation. Reverse by removing the version 2 producer and reader integration;
+retain the prior metadata refusal so existing version 2 targets stay protected.
