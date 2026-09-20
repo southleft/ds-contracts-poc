@@ -34,7 +34,7 @@
   color: var(--color-nav-selected-foreground);
 }
 
-.root:hover:not(:disabled) {
+.root:hover:not([data-disabled]) {
   background-color: var(--color-surface-sunken);
 }
 
