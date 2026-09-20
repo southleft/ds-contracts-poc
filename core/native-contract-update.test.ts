@@ -94,7 +94,11 @@ test('owned scalar update preserves identities, verifies, repeats without writes
 test('updates refuse changed live fields and unsupported desired channels before any write', async () => {
   const f = await fixture();
   const changed = structuredClone(f.input); changed.desired.component.variants[0].spec.fixedWidth!.px = 17;
-  assert.throws(()=>prepareNativeContractUpdate(changed),/channel-change-unsupported/);
+  // Bound dimensions now reach the dedicated planner, but this historical
+  // observation has no strict sizing evidence and still cannot authorize one.
+  const unchanged = structuredClone(changed);
+  assert.throws(()=>prepareNativeContractUpdate(changed),/native-update-bound-cross-size-single-variable-mode-required/);
+  assert.deepEqual(changed,unchanged);
   const changedTokens = structuredClone(f.input); changedTokens.desired = structuredClone(f.input.desired);
   (changedTokens.desired.tokenInput.modes[0].tokens as any).size.$value = '17px';
   assert.throws(()=>prepareNativeContractUpdate(changedTokens),/token-change-unsupported/);
