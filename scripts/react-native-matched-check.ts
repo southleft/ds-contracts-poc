@@ -7,6 +7,7 @@ import { isDeepStrictEqual as same } from 'node:util';
 import { PNG } from 'pngjs';
 import { cropSourceFrame } from '../source-reference/source-framing.js';
 import type { captureTransparentSourceFrame } from '../source-reference/transparent-source-frame.js';
+import type { captureTransparentSourceFrame as currentCapture } from '../source-reference/transparent-source-frame-v2.js';
 import { alignRecordedFrames } from './design-consumer-framing.js';
 import { diffPair } from '../extract/figma/visual-parity/img.js';
 import { FIDELITY_BAR } from '../recipe/fidelity-score.js';
@@ -18,7 +19,19 @@ export const MATCHED_EVIDENCE_DIRS = [MATCHED_EVIDENCE, 'recipe/evidence/react-n
 export const MATCHED_COVERAGE = { 'family-switch': 9, 'family-alert': 1, 'family-switch-state-api': 9 };
 export const MATCHED_INSTRUMENTS = ['source-reference/transparent-source-frame.ts', 'source-reference/source-framing.ts',
   'scripts/design-consumer-framing.ts', 'extract/figma/visual-parity/img.ts'] as const;
-type Receipt = Awaited<ReturnType<typeof captureTransparentSourceFrame>>['receipt'];
+export const CURRENT_MATCHED_INSTRUMENTS = ['source-reference/transparent-source-frame-v2.ts', ...MATCHED_INSTRUMENTS.slice(1)] as const;
+type CurrentReceipt = Awaited<ReturnType<typeof currentCapture>>['receipt'];
+type Receipt = Awaited<ReturnType<typeof captureTransparentSourceFrame>>['receipt'] | CurrentReceipt;
+
+/** New records cannot borrow the historical instrument's missing scope proof. */
+export function assertCurrentMatchedCapture(receipt: unknown): asserts receipt is CurrentReceipt {
+  const r = receipt as Partial<CurrentReceipt> | null | undefined, scope = r?.component?.opaqueScope;
+  if (r?.version !== 2 || r.kind !== 'transparent-source-frame' || scope?.kind !== 'chromium-light-tree-v1' ||
+      !Number.isSafeInteger(scope.targetNodes) || scope.targetNodes < 1 ||
+      !Number.isSafeInteger(scope.ancestorNodes) || scope.ancestorNodes < 0 ||
+      scope.targetNodes + scope.ancestorNodes > 10_000) throw Error('matched-capture-current-source-required');
+}
+
 export interface MatchedManifest {
   version: 1; kind: 'react-native-matched-capture'; qualification: typeof QUALIFICATION; acceptedContract: null;
   instruments: Record<string, string>;
@@ -48,8 +61,11 @@ export function scoreMatchedEvidence(dir: string, manifest: MatchedManifest) {
       new Set(manifest.rows.map(r => r.variant)).size !== expected ||
       new Set(manifest.rows.map(r => r.native.originalId)).size !== expected ||
       manifest.rows.some(r => !/^[0-9]+$/.test(r.id))) fail('denominator-changed');
-  if (!same(Object.keys(manifest.instruments).sort(), [...MATCHED_INSTRUMENTS].sort()) ||
-      MATCHED_INSTRUMENTS.some(file => sha256(readFileSync(path.join(REPO, file))) !== manifest.instruments[file])) fail('instrument-changed');
+  const version = manifest.rows[0]!.source.version;
+  if (![1, 2].includes(version) || manifest.rows.some(row => row.source.version !== version)) fail('capture-version');
+  const instruments = version === 2 ? CURRENT_MATCHED_INSTRUMENTS : MATCHED_INSTRUMENTS;
+  if (!same(Object.keys(manifest.instruments).sort(), [...instruments].sort()) ||
+      instruments.some(file => sha256(readFileSync(path.join(REPO, file))) !== manifest.instruments[file])) fail('instrument-changed');
   return manifest.rows.map(row => {
     const data = Object.fromEntries(Object.entries(row.files).map(([name, hash]) => {
       if (!['original', 'context', 'transparent', 'source', 'native'].includes(name) || !/^[a-f0-9]{64}$/.test(hash)) fail('file-invalid');
@@ -58,7 +74,8 @@ export function scoreMatchedEvidence(dir: string, manifest: MatchedManifest) {
       return [name, bytes];
     }));
     const s = row.source, n = row.native;
-    if (s.version !== 1 || s.kind !== 'transparent-source-frame' || s.qualification !== 'unqualified' ||
+    if (s.version === 2) assertCurrentMatchedCapture(s);
+    if (s.kind !== 'transparent-source-frame' || s.qualification !== 'unqualified' ||
         s.originalSha256 !== row.files.original || s.contextSha256 !== row.files.context ||
         s.transparentSha256 !== row.files.transparent || s.imageSha256 !== row.files.source ||
         !same(s.bounds, s.component.bounds) ||

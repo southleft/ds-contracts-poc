@@ -6917,3 +6917,41 @@ reproduction and validation are in `private/filled-path-mask-refusal-wvt9lspr/`.
 Reverse the reader guard only with a demonstrated mask-composition model;
 restore observation baselines with their matching grammar, never by relabeling
 an older fingerprint.
+
+
+## D.79 Transparent captures must inspect closed shadow boundaries
+
+**AGENT measurement decision, 2026-09-20:** new matched-frame recordings require
+version 2 of the source capture instrument. A closed shadow root on an ordinary
+span hid a backdrop-dependent child from the original light-DOM inspection.
+The capture accepted a black source pixel turning white when the backdrop was
+removed, despite restoring the original screenshot exactly afterward.
+
+The new instrument inspects the target light tree and each ancestor through
+Chromium's DOM protocol. Open, closed and browser-owned shadow roots, embedded
+documents, incomplete protocol evidence and scopes exceeding 10,000 nodes
+refuse before measurement. The check repeats during capture and restoration.
+Independent sibling content retains the existing exact crop-exclusion proof.
+This is a bounded refusal, not shadow-content support. Pixel scoring, geometry
+requirements and the 5% limit are unchanged.
+
+The original instrument and 19 recorded source/native pairs remain byte-frozen
+historical evidence. Their existing scores still recompute against their pinned
+instrument, and application review names their missing closed-shadow inspection.
+New recordings cannot reuse those version-1 receipts as current capture proof.
+No old manifest receives a new code hash or an invented scope witness.
+
+A separate private recapture of all nine authenticated state-API Switch planes
+passed the new guard and recorder. All five PNGs per pair, native geometry,
+previous receipt fields and the derived scorecard stayed byte-identical. Fresh
+Evaluations exports and bracketed independent readbacks also matched the saved
+native baseline; no nodes changed, and the unobstructed canvas was inspected.
+The real recorder refused the old capture before creating an output directory.
+This verifies the strengthened measurement path, not the remaining V1 gaps.
+
+Adversarial evidence is retained in
+`private/transparent-closed-shadow-nlayfc6h/`: the before/after pixel probe,
+open/closed target and ancestor refusals, unchanged ordinary and sibling pixels,
+and source restoration checks. Reversal: restore the prior recorder admission
+and current-instrument choice while retaining all evidence and naming the
+closed-shadow measurement gap. Do not relabel historical captures as remeasured.

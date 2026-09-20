@@ -334,3 +334,21 @@ declaration. They do not need the built-in sandbox's unused `src/index.css` or
 `capture-input.css`. If either exists it remains part of source identity for
 backward compatibility; its appearance, removal or byte change requires a new
 reference. Imported stylesheet bytes always remain part of the reference.
+
+
+### Transparent matched-frame capture instruments
+
+New engineering captures use `captureTransparentSourceFrame` from
+`transparent-source-frame-v2.ts`. It inspects the target light tree and its
+ancestors through Chromium's DOM protocol before and during backdrop removal,
+refusing open, closed or browser-owned shadow boundaries, embedded documents,
+unavailable trees and scopes larger than 10,000 nodes. Independent sibling
+content still requires exact crop equality before exclusion. Original images,
+source styles and source pixels must restore exactly.
+
+`transparent-source-frame.ts` is the frozen version-1 instrument needed to
+verify historical receipts. It does not inspect closed shadow content and must
+not be used for new measurements. The matched-frame recorder requires version
+2 receipts; historical manifests and instrument hashes remain unchanged. The
+application identifies this limitation when opening a version-1 measurement.
+Neither version qualifies runtime interactions or the current native canvas.

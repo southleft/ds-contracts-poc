@@ -25,6 +25,7 @@ export function hasRecordedNativeMeasurement(repo: string, operationId: string, 
   try { recorded(repo, operationId, referenceId); return true; } catch { return false; }
 }
 export interface RecordedNativeMeasurement {
+  captureInspection: 'legacy-light-dom' | 'chromium-light-tree-v1';
   recordedAt: string; sourceCase: string; scope: 'recorded-initial-states' | 'recorded-caller-content';
   rows: Array<{ id: string; variant: string; width: number; height: number; sourceImage: string; nativeImage: string;
     whiteMismatch: number; blackMismatch: number; pass: boolean }>;
@@ -63,7 +64,8 @@ export function readRecordedNativeMeasurement(repo: string, operationId: string,
       current.native.planRevision !== m.cohort.native.planRevision) throw Error('matched-review-journal-mismatch');
   assertMatchedManifestBinding(m, current.pairs);
   const rows = scoreMatchedEvidence(dir, m);
-  return { recordedAt: String(m.cohort.native.recordedAt), sourceCase: request.caseId, scope: initial ? 'recorded-initial-states' : 'recorded-caller-content',
+  return { captureInspection: m.rows[0]!.source.version === 2 ? 'chromium-light-tree-v1' : 'legacy-light-dom',
+    recordedAt: String(m.cohort.native.recordedAt), sourceCase: request.caseId, scope: initial ? 'recorded-initial-states' : 'recorded-caller-content',
     rows: rows.map(row => {
       const s = m.rows.find(s => s.id === row.id)!;
       const image = (side: 'source' | 'native') => {

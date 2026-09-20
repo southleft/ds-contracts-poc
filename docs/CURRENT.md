@@ -16,7 +16,7 @@ This page is the current acceptance ledger and work order, also rendered at `/sy
 4. **Verify independently.** Compare structure, dimensions, pixels, editable content and declared behavior.
 5. **Maintain the agreement.** Observe both sides against a shared baseline, apply supported changes, verify again and prove an unchanged repeat writes nothing.
 
-The complete loop remains unqualified.
+The complete loop remains unqualified. Recorded matched-frame captures made with the original instrument did not inspect closed shadow content; the application now names that limitation. New recordings require the strengthened capture instrument ([D.79](23-known-limitations.md#d79-transparent-captures-must-inspect-closed-shadow-boundaries)).
 
 ## Where we are
 
