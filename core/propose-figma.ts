@@ -3168,19 +3168,25 @@ function invertNodeTokens(
     }
   }
   carry('gap', f('itemSpacing'));
-  // The root's bound width comes back as max-width (a component's outer
-  // dimension is fluid-up-to in code; the canvas can only draw the max). The
-  // TOKEN is unchanged, so nothing is lost — but the CHANNEL changed, and the
-  // run said so nowhere. A reader diffing the proposal against the contract
-  // then sees `width` missing and `max-width` invented, and counts a
-  // translation as two losses. It cost exactly that once (TJ-TEST.md §A7
-  // listed Label's width as a silent loss; it never was). Receipt it.
-  if (isRoot && f('width') !== undefined) {
+  // A uniformly FIXED, non-FILL root has an authored width, just like an
+  // unbound FIXED root below. Keep its variable on that exact channel. The
+  // older fluid-up-to translation shrank empty controls to their content.
+  const fixedRootWidth = isRoot && m.occ.length > 0 && m.occ.every(({ node }) => {
+    if (node.fillWidth === true) return false;
+    const layout = node.layout;
+    if (!layout) return true; // a non-auto-layout frame is fixed by construction
+    return (layout.mode === 'VERTICAL' ? layout.counterSizing : layout.primarySizing) === 'FIXED';
+  });
+  // Otherwise the root's bound width keeps the historical max-width mapping
+  // until its mixed, HUG or FILL behavior has a separate proved carrier.
+  if (fixedRootWidth && f('width') !== undefined) {
+    ctx.notes.push(`${where}: bound root width retained as width — every captured plane is FIXED and non-FILL; maxWidth remains a separate constraint`);
+  } else if (isRoot && f('width') !== undefined) {
     ctx.notes.push(
-      `${where}: root width binding ${f('width')} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped`,
+      `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — uniformly FIXED non-FILL sizing is not witnessed; mixed/HUG/FILL behavior requires review`,
     );
   }
-  carry(isRoot ? 'max-width' : 'width', f('width'));
+  carry(isRoot && !fixedRootWidth ? 'max-width' : 'width', f('width'));
   carry('height', f('height'));
   carry('min-width', f('minWidth'));
   carry('min-height', f('minHeight'));

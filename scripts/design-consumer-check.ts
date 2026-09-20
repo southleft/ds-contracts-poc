@@ -236,6 +236,9 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
         continue;
       }
       if (!prop) { unmapped.add(`${property} (no VARIANT prop${reading.kind === 'refused' ? `; ${reading.reason}` : ''})`); continue; }
+      // An explicitly declared omission plane mounts without the prop. The
+      // canvas label is not a public enum value or an implicit boolean false.
+      if (prop.bindings.figma.unsetValue === value) continue;
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }

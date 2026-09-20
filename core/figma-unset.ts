@@ -176,7 +176,11 @@ export function lowerUnsetProposal(
         if (!used.length) continue;
         if (used.length !== 1) fail(`${path}.${channel}`);
         const a = used[0];
-        const entries = Array.isArray(part[mapField]) ? part[mapField] as Record<string, unknown>[] : [];
+        // Both singleton and array carriers are legal. Preserve a previously
+        // observed binding when a minted placeholder adds another axis/channel;
+        // the collision check below must also see existing singleton rows.
+        const field = part[mapField];
+        const entries = Array.isArray(field) ? field as Record<string, unknown>[] : object(field) ? [field] : [];
         let entry = entries.find(e => e.prop === a.propName && e.state === state);
         if (!entry) { entry = { prop: a.propName, ...(state === undefined ? {} : { state }), map: {} }; entries.push(entry); }
         if (!object(entry.map)) fail(`${path}.${mapField}`);

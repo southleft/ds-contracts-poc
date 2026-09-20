@@ -25,6 +25,23 @@ test('only a boolean-typed prop is coerced; an enum value spelled "true" stays a
   assert.equal(variantPropValue({ type: 'boolean' }, 'on'), 'on');
 });
 
+test('declared omitted planes mount absent props and retain all nine boolean combinations', () => {
+  const props = ['checked', 'disabled'].map(name => ({ ...variantProp(name, 'boolean', ['false', 'true']),
+    bindings: { ...variantProp(name, 'boolean', ['false', 'true']).bindings,
+      figma: { kind: 'VARIANT', property: name, unsetValue: '(unset)', values: { false: 'Off', true: 'On' } } } }));
+  const variants = ['(unset)', 'Off', 'On'].flatMap((checked, i) => ['(unset)', 'Off', 'On'].map((disabled, j) => ({
+    name: `checked=${checked}, disabled=${disabled}`, nodeId: `${i}:${j}`,
+  })));
+  const cases = deriveCases({ Specimen: { setName: 'Specimen', variants } }, { props, anatomy: {} }, 'Specimen');
+  assert.equal(new Set(cases.map(c => c.key)).size, 9);
+  assert.deepEqual(cases.map(c => c.props), [{}, { disabled: false }, { disabled: true },
+    { checked: false }, { checked: false, disabled: false }, { checked: false, disabled: true },
+    { checked: true }, { checked: true, disabled: false }, { checked: true, disabled: true }]);
+  const literal = variantProp('label', { enum: ['(unset)', 'Other'] }, ['(unset)', 'Other']);
+  assert.deepEqual(deriveCases({ Specimen: { variants: [{ name: 'label=(unset)', nodeId: '1:1' }] } },
+    { props: [literal], anatomy: {} }, 'Specimen')[0].props, { label: '(unset)' }, 'a label alone never declares omission');
+});
+
 // docs/23 §D.41 — a designer's INTERACTION-STATE axis is not a prop. The check
 // reads it by the proposer's own table and mounts each state the way a user
 // reaches it; it used to report every such variant as "State (no VARIANT prop)".
