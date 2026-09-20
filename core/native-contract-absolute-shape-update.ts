@@ -10,7 +10,7 @@ interface Geometry { x:number; y:number; width:number; height:number; relativeTr
 export interface NativeAbsoluteShapeUpdatePlan extends Omit<NativeOpacityUpdatePlan, 'version'|'kind'|'changes'> {
  version:7; kind:'native-contract-absolute-shape-update';
  /** Absent on historical plans, whose pinned programs must remain byte-identical. */
- resizeProtocol?:'without-constraints-v1';
+ resizeProtocol?:'without-constraints-v1'|'without-constraints-v2';
  changes:Array<{nodeId:string;variant:string;part:string;channel:'x'|'y'|'width'|'height';before:number;after:number}>;
  transitions:Array<{nodeId:string;before:Geometry;after:Geometry;constraints:{horizontal:'MIN';vertical:'MIN'}}>;
 }
@@ -51,7 +51,7 @@ export function prepareNativeAbsoluteShapeUpdate(input:NativeContractUpdateInput
   if(!changes.length)return null;
   const base=prepareBase(sanitized).plan;
   if(base.kind!=='native-contract-opacity-update'||base.changes.length||base.tokenChanges?.length)fail('mixed-channels');
-  const plan:NativeAbsoluteShapeUpdatePlan={...base,version:7,kind:'native-contract-absolute-shape-update',resizeProtocol:'without-constraints-v1',changes:[],transitions:[]};
+  const plan:NativeAbsoluteShapeUpdatePlan={...base,version:7,kind:'native-contract-absolute-shape-update',resizeProtocol:'without-constraints-v2',changes:[],transitions:[]};
   for(const c of changes) {
     const rows=plan.baseline.nodes!.filter((n:any)=>same(identity(n),c.old.nativeContractPart));
     const row=rows[0],v=row?.values;
@@ -73,7 +73,7 @@ export function prepareNativeAbsoluteShapeUpdate(input:NativeContractUpdateInput
     for(const i of c.path)spec=spec.children![i];
     spec.shape=copy(c.next.shape);spec.absolute=copy(c.next.absolute);
   }
-  plan.after.absoluteShapeReadback={version:2,nodeIds:[...new Set([...(plan.before.absoluteShapeReadback?.nodeIds??[]),...plan.transitions.map((t:any)=>t.nodeId)])].sort()};
+  plan.after.absoluteShapeReadback={version:3,nodeIds:[...new Set([...(plan.before.absoluteShapeReadback?.nodeIds??[]),...plan.transitions.map((t:any)=>t.nodeId)])].sort()};
   return {plan,revision:revisionOf(plan)};
 }
 
@@ -83,7 +83,7 @@ function normalized(plan:NativeAbsoluteShapeUpdatePlan,raw:unknown,complete:bool
     const row=r.nodes?.find((n:any)=>n.id===id),baseline=plan.baseline.nodes!.find((n:any)=>n.id===id);
     if(!row||!baseline||!same(row.values.constraints,baseline.values.constraints??constraints))fail('constraints-conflict');
     if(baseline!.values.constraints===undefined)delete row.values.constraints;
-    if(plan.after.absoluteShapeReadback!.version===2){
+    if(plan.after.absoluteShapeReadback!.version>=2){
       if(row.values.targetAspectRatio!==null)fail('aspect-ratio-conflict');
       if(baseline!.values.targetAspectRatio===undefined)delete row.values.targetAspectRatio;
     }
@@ -125,11 +125,12 @@ const normalize=(raw,complete)=>{
 try {
  if(figma.fileKey!==plan.before.operation.fileKey)throw Error('native-update-file-mismatch');
  const nodes=new Map();for(const t of plan.transitions){const n=await figma.getNodeByIdAsync(t.nodeId);if(!n)throw Error('native-update-node-missing');nodes.set(t.nodeId,n);}
- const current=await(async()=>{${emitNativeContractReadbackScript(beforeRead)}})();
+ const current=await(async()=>{${emitNativeContractReadbackScript(beforeRead)}})();${plan.resizeProtocol === 'without-constraints-v2' ? `
+ if(current.problems?.includes('native-absolute-shape-aspect-ratio-unavailable'))throw Error('native-update-absolute-shape-aspect-ratio-unavailable');` : ''}
  if(!same(normalize(current,false),plan.baseline))throw Error('native-update-baseline-conflict');
  if(readOnly){out.status='preflight-observed';out.observation=current;return out;}
  for(const t of plan.transitions){const n=nodes.get(t.nodeId),r=current.nodes.find(r=>r.id===t.nodeId);
-  if(!same(geometry(n),geometry(r.values))||!same(n.constraints,t.constraints)||n.boundVariables?.width||n.boundVariables?.height${plan.resizeProtocol ? '||n.targetAspectRatio!=null' : ''}||n.layoutPositioning!=='ABSOLUTE'||n.layoutSizingHorizontal!=='FIXED'||n.layoutSizingVertical!=='FIXED')throw Error('native-update-absolute-shape-live-conflict');}
+  if(!same(geometry(n),geometry(r.values))||!same(n.constraints,t.constraints)||n.boundVariables?.width||n.boundVariables?.height${plan.resizeProtocol === 'without-constraints-v2' ? '||n.targetAspectRatio!==null' : plan.resizeProtocol ? '||n.targetAspectRatio!=null' : ''}||n.layoutPositioning!=='ABSOLUTE'||n.layoutSizingHorizontal!=='FIXED'||n.layoutSizingVertical!=='FIXED')throw Error('native-update-absolute-shape-live-conflict');}
  for(const t of plan.transitions){const n=nodes.get(t.nodeId),target=direction==='apply'?t.after:t.before;if(same(geometry(n),target))continue;
   attempted.push({node:n,previous:geometry(n),target,constraints:t.constraints});assign(n,target);out.changes.push(t.nodeId);}
  out.observation=await(async()=>{${emitNativeContractReadbackScript(expected)}})();
@@ -140,7 +141,7 @@ try {
 }catch(error){
  out.problems.push(error&&error.message?error.message:String(error));const unrestored=[];
  for(const a of attempted.reverse())try{
-  if(same(a.node.constraints,a.constraints)&&!a.node.boundVariables?.width&&!a.node.boundVariables?.height&&${plan.resizeProtocol ? 'a.node.targetAspectRatio==null&&' : ''}
+  if(same(a.node.constraints,a.constraints)&&!a.node.boundVariables?.width&&!a.node.boundVariables?.height&&${plan.resizeProtocol === 'without-constraints-v2' ? 'a.node.targetAspectRatio===null&&' : plan.resizeProtocol ? 'a.node.targetAspectRatio==null&&' : ''}
     ['x','y','width','height'].every(k=>a.node[k]===a.previous[k]||a.node[k]===a.target[k]))assign(a.node,a.previous);
   if(!same(geometry(a.node),a.previous))unrestored.push(a.node.id);
  }catch{unrestored.push(a.node.id);}

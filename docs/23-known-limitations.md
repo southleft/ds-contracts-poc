@@ -7261,7 +7261,8 @@ channels refuse. The first live write used Figma's `resize()`, which silently ke
 32.39059829711914 instead of 32.390625. Exact readback rejected that result and
 restored all nine original tuples. An isolated native rectangle/ellipse probe
 showed that `resizeWithoutConstraints()` writes and restores these values exactly.
-New plans use that API; historical program bytes remain unchanged.
+New plans use that API and refuse when aspect-ratio evidence is unavailable;
+historical program bytes remain unchanged.
 
 The application then applied 27 scalar corrections to the same nine native nodes.
 Independent readback and a second inspection both matched −11, −7 and
