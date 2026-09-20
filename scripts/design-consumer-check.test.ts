@@ -165,6 +165,20 @@ test('the mounted set is resolved by the contract anchor, and a name hit that co
   assert.equal(deriveCases(multi, anchored, 'CheckboxGroup').length, 1);
 });
 
+test('source pairing refuses conflicting files, duplicate identities and an unverified named anchor', () => {
+  const root = { setName: 'Control', nodeId: '1:2', variants: [{ name: 'size=small' }] };
+  const anchored = { ...contract, bindings: { figma: { anchors: { fileKey: 'file-A', nodeId: '1:2' } } } };
+  const source = { _provenance: { fileKey: 'file-A' }, Control: root };
+  assert.equal(findDumpSet(source, anchored, 'Control'), root);
+  assert.equal(findDumpSet(source, anchored, 'GeneratedControl'), root);
+  assert.throws(() => deriveCases({ ...source, _provenance: { fileKey: 'file-B' } }, anchored, 'Control'), /dump-set-file-mismatch/);
+  assert.throws(() => findDumpSet({ ...source, Other: { ...root, setName: 'Other' } }, anchored, 'GeneratedControl'), /dump-set-anchor-ambiguous/);
+  assert.throws(() => findDumpSet({ ...source, Other: { ...root, setName: 'Other' } }, anchored, 'Control'), /dump-set-anchor-ambiguous/);
+  assert.throws(() => findDumpSet({ A: { ...root, nodeId: '1:3' }, B: root }, contract, 'Control'), /dump-set-name-ambiguous/);
+  assert.throws(() => findDumpSet({ Control: { ...root, nodeId: undefined } }, anchored, 'Control'), /dump-set-anchor-mismatch/);
+  assert.equal(findDumpSet({ Control: root }, contract, 'Control'), root, 'unanchored legacy inputs retain their unique name lookup');
+});
+
 test('the contract graph follows the generator\'s own edges — component refs, slot accepts AND slot defaultContent (review M3) — and names an unclaimed id', () => {
   const ref = (id: string) => ({ component: { id } });
   const root = { id: 'ds.tabs', anatomy: { root: { parts: { tab: ref('ds.tab'), panel: ref('ds.tab-panel') } } } };

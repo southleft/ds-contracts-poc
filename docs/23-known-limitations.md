@@ -5064,6 +5064,19 @@ images and built review consumers are retained under private
 integration measurements, not a new application acceptance or a visual grade.
 
 
+**Source-pairing guard (AGENT measurement decision, 2026-09-20).** The final
+integration review planted two contradictory inputs: a contract anchored to a
+different file with the same node id, and two dump sets claiming one anchor.
+The consumer checker previously accepted the first and selected the first match
+for the second. It now refuses conflicting captured file identities, duplicate
+set anchors or names, and a named set that cannot verify the contract's node
+anchor. A legacy input without anchors retains its unique name lookup; absent
+file provenance is not invented. Four genuine captures retain all 96 variant
+names and input combinations and agree on file/set identity. No image, scorer
+or tolerance changed. Reversal: restore the first-match lookup in
+`findDumpSet`; doing so restores the demonstrated source-pairing ambiguity.
+
+
 ## D.47 Re-imports keep the anchored Figma component identity
 
 **AGENT decision (2026-09-19).** The live JSON import walkthrough loaded

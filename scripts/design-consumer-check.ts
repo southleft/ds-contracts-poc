@@ -132,15 +132,26 @@ const variantValues = (prop: any): unknown[] =>
  *  the group's contract must not mount the child's variants). */
 export function findDumpSet(dump: any, contract: any, component: string): any {
   const isSet = (v: any) => v && typeof v === 'object' && Array.isArray(v.variants);
-  const anchor = contract?.bindings?.figma?.anchors?.nodeId;
-  const byName = isSet(dump[component]) ? dump[component] : Object.values(dump).find((v: any) => isSet(v) && v.setName === component);
+  const anchors = contract?.bindings?.figma?.anchors;
+  const anchor = anchors?.nodeId;
+  const file = dump?._provenance?.fileKey;
+  if (typeof file === 'string' && file && typeof anchors?.fileKey === 'string' && anchors.fileKey && file !== anchors.fileKey)
+    throw new Error(`design:consumer:check — dump-set-file-mismatch:${component}: the dump and contract identify different Figma files`);
+  const sets = [...new Set(Object.values(dump).filter(isSet))] as any[];
+  const anchored = typeof anchor === 'string' ? sets.filter(v => v.nodeId === anchor) : [];
+  if (anchored.length > 1)
+    throw new Error(`design:consumer:check — dump-set-anchor-ambiguous:${anchor}`);
+  const named = sets.filter(v => v === dump[component] || v.setName === component);
+  if (named.length > 1)
+    throw new Error(`design:consumer:check — dump-set-name-ambiguous:${component}`);
+  const byName = named[0];
   if (byName) {
-    if (typeof anchor === 'string' && typeof byName.nodeId === 'string' && byName.nodeId !== anchor) {
+    if (typeof anchor === 'string' && byName.nodeId !== anchor) {
       throw new Error(`design:consumer:check — dump-set-anchor-mismatch:${component}: the dump set "${byName.setName ?? component}" is node ${byName.nodeId} but the contract is anchored to ${anchor}; refusing to mount one set's variants against another's contract`);
     }
     return byName;
   }
-  return typeof anchor === 'string' ? Object.values(dump).find((v: any) => isSet(v) && v.nodeId === anchor) : undefined;
+  return anchored[0];
 }
 
 /** Every contract id the mounted contract depends on, transitively through
