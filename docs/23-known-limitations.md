@@ -1630,6 +1630,33 @@ the new four-case Radix workspace builds without placeholder files. This is
 source intake, not proof of conversion or visual fidelity. Reverse by removing
 the conditional omission and presence check; old evidence needs no rewrite.
 
+## B.42 Source succession requires the same module and exported component
+
+**AGENT decision (2026-09-19).** Loading the second, Radix workspace showed
+an unrelated shadcn Switch as a candidate for **Follow the current source**:
+both declarations used `switch-unchecked`. The case-name guard did not prove
+component identity. No cross-workspace adoption was performed.
+
+The application now authenticates the journal-pinned ownership inventory,
+report and source program, selects the unique component owning the case root,
+and compares its absolute module path and export name with the successor.
+Source bytes and declaration spans may change during an ordinary edit. A
+matching relative filename in another workspace, or another export in the same
+file, is insufficient. An authenticated old module absent from the loaded
+reference is not offered. Missing or altered identity evidence stays visible
+with Follow disabled and refuses the action. The historical archive need not
+match current source bytes, and its files are never rewritten.
+
+This deliberately does not migrate a component after a module/workspace move.
+That needs an explicit identity migration design. Probes cover changed bytes,
+foreign workspaces, replaced exports, ambiguous roots, altered archives and the
+HTTP refusal without a succession write. A read-only probe of the real Switch
+archive accepted all four existing successions and the restored family, while
+excluding the Radix reference. The earlier same-node update and
+recovery evidence remains historical; this extra guard does not re-grade it.
+Reverse by removing the route identity guard and candidate filter, restoring
+case-name-only succession. No schema, native writer or old journal changes.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one

@@ -14,6 +14,7 @@ import type { ReactInitialNativeRequest } from './react-initial-native-request.j
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import type { createNativeSourceSuccessions } from './native-source-succession.js';
+import { assertNativeSourceIdentity, nativeSourceBelongsToReference } from './native-source-identity.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
@@ -571,6 +572,7 @@ export function createReactReferenceService(
             if (!successions || !updateJobs) throw Error('react-source-succession-unavailable');
             const original = jobs.reactSuccessionSubject(id);
             if (!reference.cohort.cases.some(c => c.id === original.caseId)) throw Error('react-source-succession-case-not-in-cohort');
+            if (!nativeSourceBelongsToReference(repoRoot, original, reference)) throw Error('react-source-succession-component-mismatch');
             // A written correction must settle against the inputs it was planned from.
             if (updateJobs.updateHistory(id).some(entry => entry.pending || entry.phase !== 'update-verified'))
               throw Error('react-source-succession-update-unresolved');
@@ -585,6 +587,7 @@ export function createReactReferenceService(
             // Only a sealed observation readable from the live, unchanged source qualifies.
             if (successor.kind === 'react-initial-draft') initialStates.nativeEvidence(reference, successor);
             else readReactNativeEvidence(repoRoot, reference, successor);
+            assertNativeSourceIdentity(repoRoot, original, successor);
             successions.adopt(id, original, successor);
           } else if (nativeAction) {
             const id = nativeAction[2];
@@ -627,7 +630,11 @@ export function createReactReferenceService(
         // has. One from another cohort is not offered: no such case exists here,
         // so it can neither follow nor be prepared a second time.
         const inCohort = (caseId: string) => reference!.cohort.cases.some(c => c.id === caseId);
-        json(res, 200, { moved: jobs.listReactMoved(reference.id).filter(m => inCohort(m.caseId)), operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
+        const moved = withEvidenceReadSnapshot(() => jobs.listReactMoved(reference!.id).filter(m => inCohort(m.caseId)).flatMap(m => {
+          try { return nativeSourceBelongsToReference(repoRoot, jobs.reactSuccessionSubject(m.operationId), reference!) ? [m] : []; }
+          catch { return [{ ...m, successionProblem: m.successionProblem ?? 'react-source-succession-identity-unavailable' }]; }
+        }));
+        json(res, 200, { moved, operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;

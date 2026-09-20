@@ -80,7 +80,8 @@ export function createNativeSourceSuccessions(repo: string) {
     history(parentId: string, original: NativeSourcePin) {
       return [original, ...load(parentId, original).entries.map(e => e.request)].map(pin => nativeSourcePinReference(pin));
     },
-    /** Callers must first prove `successor` is readable from the live source. */
+    /** Callers must first prove `successor` is readable from the live source
+     * and its pinned module/export identity matches the original operation. */
     adopt(parentId: string, original: NativeSourcePin, successor: NativeSourcePin) {
       assertSuccessor(original, successor);
       const loaded = load(parentId, original);
