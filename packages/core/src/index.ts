@@ -71,6 +71,8 @@ export {
   WHOLE_PIXEL_TEXT_BOX_BASIS,
   wholePixelTextBoxDecls,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  NATIVE_TEXT_RENDERING_DECL,
   enumProps,
   holderDeclaresPosition,
   isArrayType,

@@ -775,6 +775,26 @@ export function wholePixelTextBoxPlan(contract: Contract, tokenCss: (tokenPath: 
   return plan;
 }
 
+/** Native auto-width text establishes a Figma text substrate. Prefer glyph
+ * geometry to browser hinting on that root, using an inherited CSS hint, not
+ * a font substitution or a changed box. This is a lowering policy, not a
+ * captured Figma text-rendering property. Unflagged roots keep their output.
+ * Any authored rendering channel or component/slot ownership boundary in a
+ * root's tree opts the entire root out; caller content must not inherit this
+ * new policy. A caller's root style can override this ordinary default. */
+export function nativeTextRenderingRoots(contract: Contract): Set<Part> {
+  const roots = new Set<Part>();
+  for (const [name, root] of Object.entries(contract.anatomy)) {
+    const tree = [...walkAnatomy(contract)].filter(entry => entry.path[0] === name);
+    if (tree.some(({ part }) => part.component || part.slot)) continue;
+    if (!tree.some(({ part, path }) => path.length > 1 && drawsWholePixelTextBox(part))) continue;
+    if (tree.some(({ part }) => { const { base, perValue } = textHolders(part); return holds([...base, ...perValue], 'text-rendering'); })) continue;
+    roots.add(root);
+  }
+  return roots;
+}
+export const NATIVE_TEXT_RENDERING_DECL = 'text-rendering: geometricPrecision';
+
 export function noneShadowVars(tokens: unknown): { none: Set<string>; mixed: Set<string> } {
   const out = { none: new Set<string>(), mixed: new Set<string>() };
   const t = tokens as Partial<TokenTreeInput> | undefined;

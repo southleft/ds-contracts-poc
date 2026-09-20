@@ -15,9 +15,10 @@
 // 596 px in a 240 px container); the wrap tests below are that finding, pinned.
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright-core';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
-import { emitReact, validateContract } from './emit-react.js';
+import { emitReact, nativeTextRenderingRoots, validateContract } from './emit-react.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { shadowCss } from '../packages/emitter-web-components/src/emit-wc.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
@@ -64,11 +65,12 @@ test('CSS modules, the web-component sheet and the inline style give the flagged
   assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n/);
   assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`) && inline(c).tsx.includes('"maxInlineSize": "100%"'), inline(c).tsx);
   assert.doesNotMatch(modules(c).css + shadowCss(c) + inline(c).tsx, /max-content/, 'never max-content: a runtime string must still wrap');
-  // The root — the part that does NOT carry the fact — is untouched on every surface.
+  // The inherited native-text rendering default changes paint policy only.
+  const withoutRendering = (css: string) => css.replace('  text-rendering: geometricPrecision;\n', '');
   const plain = contract(LABEL);
-  assert.equal(rule(modules(c).css, '.root'), rule(modules(plain).css, '.root'));
-  assert.equal(rule(shadowCss(c), "[part='root']"), rule(shadowCss(plain), "[part='root']"));
-  assert.equal(modules(c).css.replace(`  inline-size: ${VALUE};\n  max-inline-size: 100%;\n`, ''), modules(plain).css, 'two declarations are the whole difference under a row parent');
+  assert.equal(withoutRendering(rule(modules(c).css, '.root')), rule(modules(plain).css, '.root'));
+  assert.equal(withoutRendering(rule(shadowCss(c), "[part='root']")), rule(shadowCss(plain), "[part='root']"));
+  assert.equal(withoutRendering(modules(c).css).replace(`  inline-size: ${VALUE};\n  max-inline-size: 100%;\n`, ''), modules(plain).css, 'only two sizing declarations and the inherited paint default differ');
 });
 
 test('the clamp yields to the author: a part carrying its own max-width keeps it and gets no max-inline-size (the same property, same rule — ours would win)', () => {
@@ -251,6 +253,77 @@ test('MEASURED in Chromium (review M1): under a flex column that would stretch i
       assert.equal(flag.width, Math.ceil(flag.runWidth - 0.35 - 1e-6));
       assert.equal(bare.x, 0, 'align-self keeps an engine without calc-size() at the same start edge');
       assert.ok(bare.width < flag.width && flag.width - bare.width < 1, `…with its fractional box, under a pixel narrower (${bare.width} vs ${flag.width})`);
+    });
+  } finally { await browser.close(); }
+});
+
+test('native text rendering is inherited from the root, leaves unflagged contracts alone, and yields to every authored rendering plane', () => {
+  const plain = contract(LABEL);
+  for (const output of [modules(plain).css, inline(plain).tsx, shadowCss(plain)]) assert.doesNotMatch(output, /text-rendering|textRendering/);
+  const automatic = flagged();
+  assert.match(rule(modules(automatic).css, '.root'), /text-rendering: geometricPrecision/);
+  assert.doesNotMatch(rule(modules(automatic).css, '.caption'), /text-rendering/);
+  assert.match(rule(shadowCss(automatic), "[part='root']"), /text-rendering: geometricPrecision/);
+  assert.ok(inline(automatic).tsx.includes('"textRendering": "geometricPrecision"'));
+  for (const c of [
+    flagged({ declared: { 'text-rendering': 'auto' } }),
+    flagged({}, { ...ROOT, declared: { 'text-rendering': 'optimizespeed' } }),
+    flagged({ declaredStates: { hover: { 'text-rendering': 'optimizelegibility' } } }),
+    flagged({}, { ...ROOT, declaredStates: { hover: { 'text-rendering': 'optimizespeed' } } }),
+  ]) {
+    c.states = ['hover'];
+    for (const output of [modules(c).css, inline(c).tsx, shadowCss(c)]) assert.doesNotMatch(output, /geometricPrecision/);
+  }
+});
+
+test('native text rendering does not cross a caller-content or child-component ownership boundary', () => {
+  const withSlot = flagged();
+  withSlot.anatomy.root!.parts!.external = { slot: { name: 'children' } };
+  for (const output of [modules(withSlot).css, inline(withSlot).tsx, shadowCss(withSlot)]) assert.doesNotMatch(output, /geometricPrecision/);
+  // A child still owns its own rendering policy; inspecting the parent's
+  // analysis must not need to compile or rewrite that child's contract.
+  const withChild = flagged();
+  withChild.anatomy.root!.parts!.external = { component: { id: 'probe.external' } };
+  assert.equal(nativeTextRenderingRoots(withChild).size, 0);
+  const multi = flagged();
+  multi.anatomy.second = structuredClone(contract(LABEL).anatomy.root!);
+  assert.deepEqual([...nativeTextRenderingRoots(multi)], [multi.anatomy.root]);
+  multi.anatomy.second.declared = { 'text-rendering': 'optimizespeed' };
+  assert.deepEqual([...nativeTextRenderingRoots(multi)], [multi.anatomy.root], 'another root cannot alter this root');
+});
+
+test('MEASURED native text rendering: caller overrides win and text/element geometry remains exact across fonts, runtime strings, wrapping and RTL on both React surfaces', async t => {
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      for (const file of ['inter/inter-latin-variable.woff2', 'roboto/roboto-latin-400-normal.woff2', 'ibm-plex-sans/IBMPlexSans-Regular.woff2']) {
+        const c = flagged({ declared: { 'font-family': 'Rendering Probe' } });
+        const output = surface === 'inline' ? { ...inline(c), css: '' } : modules(c);
+        const page = await browser.newPage();
+        try {
+          const render = await mountGenerated(page, c.name, output.tsx, output.css);
+          const font = readFileSync(new URL('../extract/computed/fonts/' + file, import.meta.url));
+          await page.addStyleTag({ content: `@font-face{font-family:"Rendering Probe";src:url(data:font/woff2;base64,${font.toString('base64')});font-weight:100 900}` });
+          await page.evaluate(() => document.fonts.ready);
+          const observe = () => page.locator('#root > :first-child').evaluate(root => {
+            const origin = root.getBoundingClientRect();
+            return [...[root], ...root.querySelectorAll('*')].map(el => {
+              const box = el.getBoundingClientRect(), range = document.createRange(); range.selectNodeContents(el);
+              return { x: box.x - origin.x, y: box.y - origin.y, width: box.width, height: box.height,
+                runs: [...range.getClientRects()].map(r => ({ x: r.x - origin.x, y: r.y - origin.y, width: r.width, height: r.height })) };
+            });
+          });
+          for (const label of ['AVATAR office ffi', 'Ångström naïve', LONG]) for (const dir of ['ltr', 'rtl']) {
+            const style = { width: '120px' };
+            await render({ label, dir, style });
+            assert.equal(await page.locator('#root > :first-child > :first-child').evaluate(el => getComputedStyle(el).textRendering), 'geometricprecision');
+            const natural = await observe();
+            await render({ label, dir, style: { ...style, textRendering: 'auto' } });
+            assert.equal(await page.locator('#root > :first-child > :first-child').evaluate(el => getComputedStyle(el).textRendering), 'auto');
+            assert.deepEqual(await observe(), natural, `${surface}: ${file}: ${label}: ${dir}`);
+          }
+        } finally { await page.close(); }
+      }
     });
   } finally { await browser.close(); }
 });

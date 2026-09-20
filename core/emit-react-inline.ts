@@ -71,6 +71,8 @@ import {
   holderDeclaresPosition,
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  NATIVE_TEXT_RENDERING_DECL,
 } from './emit-react.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
@@ -240,6 +242,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // -------------------------------------------------------------------------
   const baseStyles: Record<string, StyleRecord> = {};
   const defaultFamily = defaultFontFamilyParts(contract);
+  const nativeTextRendering = nativeTextRenderingRoots(contract);
   /** `${prop}-${value}` → partName → overrides. */
   const variantStyles: Record<string, Record<string, StyleRecord>> = {};
   const partVariantProps = new Map<string, Set<string>>();
@@ -530,6 +533,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // No declared family = the pipeline default (defaultFontFamilyParts) —
     // an inline style inherits the host page's font exactly as a class does.
     if (defaultFamily.has(part)) s.fontFamily = DEFAULT_FONT_STACK;
+    if (nativeTextRendering.has(part)) applyDeclStrings(s, [NATIVE_TEXT_RENDERING_DECL]);
     // dump v1.36: the whole-pixel text box — the same declarations the
     // stylesheet surfaces write (anatomy.ts wholePixelTextBoxDecls), a token
     // resolved to its literal. An inline style is set through the CSSOM,

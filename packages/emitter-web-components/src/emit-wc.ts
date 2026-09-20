@@ -85,6 +85,8 @@ import {
   settleStrokeShadows,
   stateSelectorsFor,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  NATIVE_TEXT_RENDERING_DECL,
   isArrayType,
   isEnum,
   kebab,
@@ -443,6 +445,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // a shadow root inherits the HOST page's font through the host element.
   // After the UA resets — `font: inherit` would erase a family before it.
   if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
+  if (nativeTextRenderingRoots(contract).has(root)) rootDecls.push(NATIVE_TEXT_RENDERING_DECL);
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, lit] of Object.entries(overrides)) {

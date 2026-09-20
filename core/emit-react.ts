@@ -79,6 +79,8 @@ export {
   textBoxTokenRefusals,
   WHOLE_PIXEL_TEXT_BOX_BASIS,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  NATIVE_TEXT_RENDERING_DECL,
   enumProps,
   holderDeclaresPosition,
   isArrayType,

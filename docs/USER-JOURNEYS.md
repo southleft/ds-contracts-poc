@@ -35,6 +35,25 @@ An approved, linted set is a good input. Approval establishes design intent; the
 
 **Clean consumer check (from this checkout):** `npm run design:consumer:check -- --dump <rest-dump.json> --contract <proposed contract> --generated <generated dir> --component <Name> --out <evidence dir>` packages the generated output as an installable library, installs it into a temporary Vite consumer with no path back to this repository, mounts every Figma variant in Chromium, replaces the TEXT-bound prop and switches variants at runtime, checks whether children the contract does not declare are refused or silently discarded, and scores each variant against Figma's own render. The first run on the designer-authored Altitude Badge set installed and behaved, except that React `children` are accepted by the generated type and discarded at render, a named failure (the emitter rule that refuses them by type is a separate change); its five dot variants scored 0% under the 5% limit (root box 9 × 8 px against Figma's 8 × 8), while its five text variants scored 15.8–18.8%: the same font family and weight are available in the consumer, yet the rendered label box is 53 px wide against Figma's 57 px, and the dump names five `text-channel-unsupported` degradations. A second run on the composed Altitude Tabs set, with its two auto-proposed child stubs, also installed and rendered its three items from the design's own sample and replaced their text at runtime; but undeclared children are again accepted and discarded, the reader had ledgered the Stretch axis as style-inert, per-side header strokes were dropped by name, the panel's sample content is not carried by a stub, and both variants scored 5.67% and 6.14% against the 5% limit while drawing 1.4% ink against the design's 12.7%. Both receipts live in `recipe/evidence/design-led-consumer/`; each records the dump's named degradations, the stub contracts used and the ink coverage of both renders, because a mostly white surface can score near the limit while missing most of the design.
 
+**Pin the consumer fonts.** Add `--fonts ./fonts.json` to the clean-consumer command when you have the design's font files. The manifest below names local files relative to itself (absolute local paths also work). Replace the hash with the file's SHA-256, for example from `shasum -a 256 ./fonts/ExampleSans.woff2`.
+
+```json
+{
+  "version": 1,
+  "fonts": [
+    {
+      "family": "Example Sans",
+      "weight": "400",
+      "style": "normal",
+      "file": "./fonts/ExampleSans.woff2",
+      "sha256": "<64 lowercase hexadecimal characters>"
+    }
+  ]
+}
+```
+
+Use the exact CSS family declared by the component. `weight` is a string containing one weight from 1 to 1000, or an increasing variable-weight range such as `"100 900"`; `style` is `"normal"` or `"italic"`. TTF, OTF, WOFF and WOFF2 are supported. Overlapping faces for the same family/style, a wrong hash, extra manifest fields or a browser font-loading failure refuse the check. The checker copies the authenticated files into the isolated consumer and `inputs/fonts/`, emits only `@font-face` rules, and records loaded faces in `receipt.json`. It does not install fonts, download replacements or alter component styles. Omit `--fonts` to use the environment's fonts. These inputs pin the consumer's assets; they do not prove which font bytes Figma used or prevent fallback for missing glyphs. The image comparison remains required.
+
 **Measured delivery.** The downloaded archives were installed in isolated consumers and inspected in the browser. Current comparisons require the unchanged 5% limit on **both white and black**, with authenticated layout origins and a shared crop: Altitude Badge passes 10/10 and Altitude Checkbox Group passes 12/12; CBDS Badge passes 66/72 and Altitude Checkbox passes 13/26. The remaining rows are failures, and the broader families remain unqualified. These pixel results do not establish keyboard behavior, accessibility or instance swaps. [CURRENT.md](CURRENT.md#v1-acceptance-evidence) records the exact evidence and remaining gaps.
 
 **Clean consumer check (from this checkout):** `npm run design:consumer:check -- --dump <rest-dump.json> --contract <proposed contract> --generated <generated dir> --component <Name> --out <new evidence dir>` packages generated output, installs it into a temporary Vite consumer with no path back to this repository, mounts source variants, exercises supported text, content, variant and state behavior, and compares against Figma exports. Use a new output directory to retain earlier measurements. Read the receipt's framing and capture metadata as well as its scores: historical independent ink crops and opaque browser captures are not interchangeable with a current full-bounds comparison. Text-masked scores are diagnostic and never replace the unmasked limit. See [the measurement decisions](23-known-limitations.md#d51-comparable-node-alpha-and-contrasting-background-measurement) and current acceptance evidence.

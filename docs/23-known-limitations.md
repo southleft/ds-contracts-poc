@@ -7570,3 +7570,45 @@ or provide a pixel-fidelity grade.
 Reversal removes admission of the new protocol. If a prior write has used it,
 first retain read-only verification of that authenticated history; never rewrite
 allocation stamps or discard its recorded original values.
+
+
+### D.88 Native text rendering and explicit consumer fonts
+
+**AGENT decision, 2026-09-20.** A contract root with captured auto-width text
+(`textAutoResize: "WIDTH_AND_HEIGHT"`) now receives an inherited
+`text-rendering: geometricPrecision` default on the code surfaces. This is a
+browser rendering policy, not a recovered Figma property or a font identity.
+It changes no font family, size, tracking or box declaration. Roots without that
+captured text retain their emitted bytes. A root containing any component
+reference or slot receives no default, because its descendants include content
+owned elsewhere. Any authored text-rendering channel anywhere under the root,
+including a state channel, also suppresses the default. An ordinary caller
+`style={{ textRendering: 'auto' }}` overrides it on either React surface.
+
+The bounded geometry probe covered 1,200 cases across five fonts, sizes,
+tracking, kerning, wrapping and RTL; every measured element and text-line box
+was unchanged. Generated-component regression checks exercise font changes,
+runtime strings, wrapping, RTL, authored hints, caller styles and ownership
+boundaries. These are Chromium observations, not a guarantee of identical
+rasterization across browsers or platforms.
+
+The clean-consumer command accepts an explicit hashed local-font manifest
+through `--fonts`; [the journey guide](USER-JOURNEYS.md) shows the format. The
+assets and loaded-face descriptors are retained with the receipt. A family and
+style name alone cannot authenticate source font bytes, and a loaded font can
+still lack particular glyphs. No font is embedded in a generated library or
+installed on the host by this option. Component CSS and the existing 5% image
+limit are not changed by font provisioning.
+
+Private prototype evidence is in `native-text-prototype-1cgl5_8q/` and
+`public-sans-source-fingerprint-20260920/`. The regenerated standalone Checkbox
+with the pinned official Public Sans asset passes 26/26 on both backgrounds
+(maximum black difference 3.279%); its previously app-delivered archive remains
+13/26 until a fresh app delivery is demonstrated. The initial broad inherited
+hint also affected composed roots; that prototype is not the supported rule.
+The ownership guard deliberately excludes such roots. No acceptance row or
+owner grade is advanced by these prototypes.
+
+To reverse the rendering decision, remove `nativeTextRenderingRoots` and its
+emitter calls; retain the independent font-input support and all prior receipts.
+Do not change historical contracts, font files, crop rules or fidelity limits.
