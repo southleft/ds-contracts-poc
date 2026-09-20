@@ -19,6 +19,7 @@ import { assertNativeSourceIdentity, nativeSourceBelongsToReference } from './na
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
+import { createReactStateApiInspectionStore } from './react-state-api-inspection.js';
 import { createReactInitialInspectionStore, reactInspectionRequest } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -253,6 +254,8 @@ export function createReactReferenceService(
   const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
   const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
     (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId,report.instanceId),report));
+  const stateApi = createReactStateApiInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
+    (referenceId,caseId) => ({ initial: initialStates.read(referenceId,caseId), behavior: callbacks.read(referenceId,caseId) }));
   const callerGraph = (operationId: string) => {
     if (!native || !reference || !reactReferenceUnchanged(reference)) throw Error('react-caller-source-unavailable');
     const current = reference;
@@ -409,6 +412,19 @@ export function createReactReferenceService(
       } catch {
         json(res, 409, { error: 'Generated React preview unavailable. A current verified behavior draft is required.' });
       }
+      return;
+    }
+    const stateApiRoute = /^react\/([a-f0-9]{64})\/state-api\/([a-z-]+)$/.exec(route);
+    if (stateApiRoute) {
+      try {
+        if (!['GET', 'POST'].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding']) {
+          json(res, 400, { error: 'State input inspection accepts GET or POST with no request body.' }); return;
+        }
+        if (req.method === 'POST') {
+          const job = stateApi.start(stateApiRoute[1], stateApiRoute[2]); void job.promise.catch(() => {});
+          json(res, 200, { inspection: job.state });
+        } else json(res, 200, { inspection: stateApi.read(stateApiRoute[1], stateApiRoute[2]) });
+      } catch (error) { json(res, 409, { error: error instanceof Error ? error.message : 'State input inspection unavailable.' }); }
       return;
     }
     const callbackRoute = /^react\/([a-f0-9]{64})\/callback-behavior\/([a-z-]+)$/.exec(route);

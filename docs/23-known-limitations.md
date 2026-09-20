@@ -6370,3 +6370,41 @@ visible app result). Bounded probes cover disappearance during live and fresh
 mounts, inert focus, failed restoration, role changes and incomplete projection.
 Reverse by restoring the whole-sweep abort and removing the refusal display;
 keep these records and report the lost observation coverage.
+
+
+## D.68 A separate check observes simultaneous state inputs
+
+**AGENT decision — bounded source observation, not full API qualification.** A
+restored callback sweep can identify one controlled input and one initial-only
+input even when an inherited input cannot be rendered or focused. The broad
+sweep stays failed. Its identified relationships only propose another,
+independently recorded experiment; a refusal involving a selected input,
+identity, instrumentation or restoration cannot authorize that experiment.
+
+The application now offers **Verify state inputs together**. For the observed
+Boolean state pair and, when present, one behaviorally observed disabled input,
+it tests every combination of omitted, false and true. Other compatible inputs
+are explicitly listed and held omitted. Each combination exercises a live
+input update, fresh-mount precedence, two keyboard activations and two actual
+associated-label activations. Callback arguments, controlled-state retention,
+uncontrolled transitions and disabled suppression must agree. Every probe
+requires exact original tree, ownership and screenshot restoration on the same
+mount before replaying and verifying the unchanged original again.
+
+The independent Switch app run completed **54 activation trials and 81 exact
+restoration checks** across 27 combinations. Its nine excluded inputs are
+listed in the UI; the earlier three refusals remain visible. Repeating the app
+action returned the same sealed record and left one job directory. Evidence:
+private `callback-candidate-isolation-nmtqn4yw/`, including the first/repeat
+record hashes and `state-api-app-complete.png`. This qualifies the recorded
+source-input experiment only. Generated behavior, all excluded inputs, native
+behavior metadata, interruption recovery and the stateful round trip remain
+unqualified.
+
+Each request pins the source archive, both input records, the derived matrix
+and observer files. Reopening authenticates all files, live source, complete
+transition semantics and restoration counts. Tampering, duplicate trials,
+altered callback history, changed source and caller-supplied request bodies
+refuse. Earlier records are immutable. Reverse by removing this separate
+inspection action and store; retain its saved evidence and the original broad
+callback refusals. Do not relabel those earlier observations as successful.

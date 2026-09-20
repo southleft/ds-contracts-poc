@@ -162,6 +162,10 @@ test("reference API retains all ten cases, isolates source execution and refuses
       (await (await fetch(base + "/react", { method: "POST" })).json()).id,
       reference.id,
     );
+    const stateApiUrl = base + `/react/${reference.id}/state-api/checkbox-unchecked`;
+    assert.equal((await fetch(stateApiUrl, {method:'POST',body:JSON.stringify({controlled:'arbitrary'})})).status,400);
+    assert.equal((await fetch(stateApiUrl, {method:'DELETE'})).status,400);
+    assert.equal((await fetch(stateApiUrl, {method:'POST'})).status,409,'a loaded reference cannot replace authenticated state evidence');
     const callbackUrl = base + `/react/${reference.id}/callback-behavior/checkbox-unchecked`;
     assert.equal((await fetch(callbackUrl, {method:'POST',body:JSON.stringify({sourceRoot:'/etc',callback:'arbitrary'})})).status,400);
     assert.equal((await fetch(callbackUrl, {method:'DELETE'})).status,409);
