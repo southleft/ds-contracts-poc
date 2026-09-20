@@ -3179,12 +3179,14 @@ function invertNodeTokens(
   });
   // Otherwise the root's bound width keeps the historical max-width mapping
   // until its mixed, HUG or FILL behavior has a separate proved carrier.
-  if (fixedRootWidth && f('width') !== undefined) {
-    ctx.notes.push(`${where}: bound root width retained as width — every captured plane is FIXED and non-FILL; maxWidth remains a separate constraint`);
-  } else if (isRoot && f('width') !== undefined) {
-    ctx.notes.push(
-      `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — uniformly FIXED non-FILL sizing is not witnessed; mixed/HUG/FILL behavior requires review`,
-    );
+  if (isRoot && f('width') !== undefined) {
+    if (fixedRootWidth) {
+      ctx.notes.push(`${where}: bound root width retained as width — every captured plane is FIXED and non-FILL; maxWidth remains a separate constraint`);
+    } else {
+      ctx.notes.push(
+        `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — uniformly FIXED non-FILL sizing is not witnessed; mixed/HUG/FILL behavior requires review`,
+      );
+    }
   }
   carry(isRoot && !fixedRootWidth ? 'max-width' : 'width', f('width'));
   carry('height', f('height'));

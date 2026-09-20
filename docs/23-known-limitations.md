@@ -6314,6 +6314,22 @@ The REST capture cannot recover the bound thumb dimensions with the existing
 token scope; the plugin capture retains eleven resolved variables. Capture
 execution and file upload remain manual engineering steps.
 
+A separate matched-frame consumer check includes the shadows: **9/9** corrected
+rows pass the unchanged 5% image limit (maximum **4.167% white / 2.273% black**),
+versus **0/9** before the fixes (maximum 42.929%). Actual app archives are
+installed in separate clean consumers. Host frames retain the previously
+recorded native root phase; repeat full-page screenshots are identical and no
+consumer paint lies outside each frame. A fresh native read proves original
+mains, capture clones, frame bounds and PNGs identical to the earlier record.
+The live review and installed consumer were both inspected.
+
+This does not establish exact descendant geometry: native thumb y is
+1.1953125, while the returned browser thumb is 1.1875. The invisible root-after
+rectangle also differs in offset and rounded height. These are named geometry
+gaps; passing images does not excuse them. Root size and phase alone match
+exactly. Captures and comparison remain operator-run, and stateful semantics
+remain unqualified.
+
 Adversarial checks cover singleton/array collisions, shared and independent
 axes, nested parts, reversed native row order, two omitted boolean axes,
 separate maximums and FILL/HUG/mixed/unknown nonpromotion. Evidence:

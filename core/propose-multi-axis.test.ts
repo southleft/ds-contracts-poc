@@ -201,7 +201,7 @@ test("fill, hug, mixed and unknown root sizing never gain a fixed binding from o
       variant.bound = { ...variant.bound, width: "radii/a" };
       variant.layout!.primarySizing = kind === "hug" || (kind === "mixed" && index === 1) ? "AUTO" : "FIXED";
       if (kind === "fill") variant.fillWidth = true;
-      if (kind === "unknown" && index === 1) delete variant.layout!.primarySizing;
+      if (kind === "unknown" && index === 1) Reflect.deleteProperty(variant.layout!, "primarySizing");
     });
     const result = proposeFromDump(dump, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: "reviewable-inversion", mintUnbound: true });
     const root = (result.contract.anatomy as { root: Part }).root;
