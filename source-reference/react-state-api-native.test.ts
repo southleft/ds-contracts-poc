@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import {
   stateApiEvidence,
   stateApiObservation,
+  mixedStateApiEvidence,
 } from './react-state-api-fixture.js';
 import { planReactStateApi } from './react-state-api.js';
 import { projectReactStateApiContract } from './react-state-api-contract.js';
@@ -33,8 +34,8 @@ import { createNativeSourceSuccessions } from './native-source-succession.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 
-function fixture() {
-  const { initial, behavior } = stateApiEvidence();
+function fixture(mixed = false) {
+  const { initial, behavior } = mixed ? mixedStateApiEvidence() : stateApiEvidence();
   for (const row of behavior.observation!.rows) row.callback = 'onNotify';
   for (const row of behavior.observation!.relationships)
     row.callback = 'onNotify';
@@ -60,7 +61,7 @@ function fixture() {
     qualification: plan.qualification,
     plan,
     sourceUnchanged: true,
-    restorationChecks: 81,
+    restorationChecks: plan.cases.length * 3,
     problems: [],
     observation: stateApiObservation(plan),
   });
@@ -153,6 +154,16 @@ test('state API requests have a distinct, stable reservation and reject untruste
     () => prepareReactStateApiNativePlan({ ...changed, operation }),
     /metadata-unavailable/,
   );
+});
+
+test('a three-state API retains its typed domain and twelve native variants without changing the write protocol', () => {
+  const f = fixture(true), operation = { id: '50000000-0000-4000-8000-000000000005', fileKey: REACT_NATIVE_FILE_KEY };
+  const prepared = prepareReactStateApiNativePlan({ ...f, operation });
+  assert.equal(prepared.plan.component.codeValueAxes?.version, 2);
+  assert.equal(prepared.plan.component.variants.length, 12);
+  assert.deepEqual(f.draft.contract!.props[0].bindings.code.values, { off: false, on: true, mixed: 'indeterminate' });
+  assert.deepEqual(f.draft.contract!.props[0].bindings.code.initial, { prop: 'seed', default: 'off' });
+  assert.equal(f.draft.contract!.semantics.role, 'checkbox');
 });
 
 test('state API journal and actual companion complete all phases, reopen, reject changed evidence and retain one output', async (t) => {

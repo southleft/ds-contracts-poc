@@ -10,9 +10,12 @@ import { checkedToggleRole, type CheckedToggleRole } from './control-behavior.js
 import { revisionOf } from '../core/contract-provenance.js';
 import { probeReactInitialProperties, probeReactProperties, type ReactPropertyChanges, type ReactCallbackObservation } from './react-property-probe.js';
 
-type Control = { checked: 'false' | 'true'; disabled: boolean };
+type StateValue = boolean | 'indeterminate';
+type Control = { checked: 'false' | 'true' | 'mixed'; disabled: boolean };
+const checkedValue = (value: unknown) => value === 'indeterminate' ? 'mixed' : String(value);
+const stateDomain = (version: number): StateValue[] => version === 2 ? [false, true, 'indeterminate'] : [false, true];
 export interface ReactStateApiPlan {
-  version: 1;
+  version: 1 | 2;
   qualification: 'bounded-checked-state-api-only';
   initialObservation: string;
   callbackObservation: string;
@@ -24,7 +27,7 @@ export interface ReactStateApiPlan {
   callback: string;
   controlled: string;
   initial: string;
-  defaultValue: boolean;
+  defaultValue: StateValue;
   disabled?: string;
   excludedInputs: string[];
   cases: Array<{ id: string; changes: ReactPropertyChanges }>;
@@ -64,16 +67,18 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
   const control = controlled[0], seed = seeds[0];
   const candidates = observed.candidates.filter(c => c.callback === control.callback && c.status === 'needs-observation');
   const candidate = candidates[0];
-  if (candidates.length !== 1 || !candidate.values || candidate.values.length !== 2 ||
-      !candidate.values.includes(false) || !candidate.values.includes(true) ||
+  const mixed = role === 'checkbox' && candidate?.values?.length === 3 && candidate.values.includes('indeterminate');
+  const values = stateDomain(mixed ? 2 : 1);
+  if (candidates.length !== 1 || !candidate.values || candidate.values.length !== values.length ||
+      !values.every(value => candidate.values!.includes(value)) ||
       new Set(candidate.stateProperties).size !== candidate.stateProperties.length ||
       ![control.property, seed.property].every(p => candidate.stateProperties.includes(p)))
     throw Error('state-api-boolean-domain-required');
   for (const property of [control.property, seed.property]) {
     const rows = observed.rows.filter(r => r.callback === control.callback && r.property === property);
-    if (rows.length !== 4 || new Set(rows.map(r => r.action + ':' + r.value)).size !== 4 ||
-        rows.some(r => !['space', 'associated-label'].includes(r.action) || typeof r.value !== 'boolean' ||
-          !r.restored || r.initial.disabled || r.live.disabled || r.initial.checked !== String(r.value) || r.steps.length !== 2 ||
+    if (rows.length !== values.length * 2 || new Set(rows.map(r => r.action + ':' + r.value)).size !== values.length * 2 ||
+        rows.some(r => !['space', 'associated-label'].includes(r.action) || !values.includes(r.value as StateValue) ||
+          !r.restored || r.initial.disabled || r.live.disabled || r.initial.checked !== checkedValue(r.value) || r.steps.length !== 2 ||
           (property === control.property && r.live.checked !== r.initial.checked) ||
           r.steps.some((step, index) => {
             const prior = property === control.property || index === 0 ? r.initial.checked : r.steps[index - 1].control.checked;
@@ -87,12 +92,15 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
       throw Error('state-api-initial-only-unverified');
   }
   const seedProp = appearance.props.find(p => p.bindings.code.prop === seed.property);
-  if (!seedProp || seedProp.type !== 'boolean' || seedProp.required || seedProp.bindings.code.initial ||
+  const appearanceValues = seedProp && typeof seedProp.type === 'object' && 'enum' in seedProp.type
+    ? seedProp.type.enum.map(key => seedProp.bindings.code.values?.[key]) : [];
+  if (!seedProp || (mixed ? appearanceValues.length !== values.length || !values.every(value => appearanceValues.includes(value))
+      : seedProp.type !== 'boolean') || seedProp.required || seedProp.bindings.code.initial ||
       appearance.props.some(p => p.bindings.code.prop === control.property))
     throw Error('state-api-appearance-domain-unavailable');
-  const omittedValue = (property: string): boolean => {
+  const omittedValue = (property: string, domain: StateValue[] = [false, true]): StateValue => {
     const omissions = initial.observation!.rows.filter(r => r.changes[property]?.kind === 'omit');
-    const equivalent = [false, true].filter(value => omissions.length && omissions.every(row => {
+    const equivalent = domain.filter(value => omissions.length && omissions.every(row => {
       const changes = { ...row.changes, [property]: { kind: 'set', value } };
       const explicit = initial.observation!.rows.find(other => revisionOf(other.changes) === revisionOf(changes));
       return explicit?.status === 'observed' && explicit.restored && row.status === 'observed' && row.restored &&
@@ -101,19 +109,23 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
     if (equivalent.length !== 1) throw Error('state-api-omitted-value-unverified');
     return equivalent[0];
   };
-  const defaultValue = omittedValue(seed.property);
+  const defaultValue = omittedValue(seed.property, values);
   const others = appearance.props.filter(p => p !== seedProp);
   let disabled: string | undefined;
   if (others.length > 1) throw Error('state-api-additional-appearance-inputs-unobserved');
   if (others.length) {
     const prop = others[0], property = prop.bindings.code.prop;
     const rows = observed.rows.filter(r => r.callback === control.callback && r.property === property);
-    if (prop.type !== 'boolean' || prop.required || prop.bindings.code.initial || rows.length !== 4 ||
+    // A three-state callback's type does not include a Boolean-only input.
+    // The new plan proposes that sole appearance input for independent testing;
+    // no disabled behavior is admitted until the full matrix verifies it.
+    const unobservedBooleanCandidate = mixed && rows.length === 0 && !candidate.stateProperties.includes(property);
+    if (prop.type !== 'boolean' || prop.required || prop.bindings.code.initial || (!unobservedBooleanCandidate && (rows.length !== 4 ||
         new Set(rows.map(r => r.action + ':' + r.value)).size !== 4 ||
         rows.some(r => typeof r.value !== 'boolean' || !r.restored || r.initial.disabled !== r.value ||
           r.live.disabled !== r.value || r.steps.length !== 2 || r.steps.some(step =>
             step.control.disabled !== r.value || step.callback.problems.length ||
-            (r.value && (step.control.checked !== r.initial.checked || step.callback.calls.length)))))
+            (r.value && (step.control.checked !== r.initial.checked || step.callback.calls.length)))))))
       throw Error('state-api-disabled-input-unverified');
     if (omittedValue(property)) throw Error('state-api-disabled-default-unsupported');
     disabled = property;
@@ -123,20 +135,20 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
       !candidate.values!.includes(r.value) || selected.includes(r.property)))
     throw Error('state-api-selected-input-refused');
   const cases: ReactStateApiPlan['cases'] = [];
-  for (const held of [undefined, false, true]) for (const start of [undefined, false, true])
+  for (const held of [undefined, ...values]) for (const start of [undefined, ...values])
     for (const stopped of disabled ? [undefined, false, true] : [undefined]) {
-      const values: Record<string, boolean | undefined> = { [control.property]: held, [seed.property]: start, ...(disabled ? { [disabled]: stopped } : {}) };
-      cases.push({ id: String(cases.length), changes: Object.fromEntries(candidate.stateProperties.map(property =>
+      const values: Record<string, StateValue | undefined> = { [control.property]: held, [seed.property]: start, ...(disabled ? { [disabled]: stopped } : {}) };
+      cases.push({ id: String(cases.length), changes: Object.fromEntries([...candidate.stateProperties, ...(disabled && !candidate.stateProperties.includes(disabled) ? [disabled] : [])].map(property =>
         [property, values[property] === undefined ? { kind: 'omit' } : { kind: 'set', value: values[property]! }])) });
     }
-  return { version: 1, qualification: 'bounded-checked-state-api-only', initialObservation: initial.id,
+  return { version: mixed ? 2 : 1, qualification: 'bounded-checked-state-api-only', initialObservation: initial.id,
     callbackObservation: behavior.id, caseId: initial.caseId, instanceId: target.instanceId, source: structuredClone(target.source),
     rootPath: target.rootPath, role, callback: control.callback, controlled: control.property, initial: seed.property,
     defaultValue, ...(disabled ? { disabled } : {}), excludedInputs: candidate.stateProperties.filter(p => !selected.includes(p)), cases };
 }
 
 export interface ReactStateApiObservation {
-  version: 1;
+  version: 1 | 2;
   qualification: 'bounded-checked-state-api-only';
   plan: ReactStateApiPlan;
   rows: Array<{ id: string; action: 'space' | 'associated-label'; initial: Control;
@@ -147,7 +159,8 @@ export interface ReactStateApiObservation {
 /** Authenticate the complete observation's meaning when reopening it, rather
  * than trusting a success label or a count of rows. */
 export function validateReactStateApiObservation(observation: ReactStateApiObservation, plan: ReactStateApiPlan): void {
-  if (observation.version !== 1 || observation.qualification !== 'bounded-checked-state-api-only' ||
+  if (![1, 2].includes(plan.version) || (plan.version === 2 && plan.role !== 'checkbox') ||
+      observation.version !== plan.version || observation.qualification !== 'bounded-checked-state-api-only' ||
       revisionOf(observation.plan) !== revisionOf(plan) || observation.problems.length ||
       observation.rows.length !== plan.cases.length * 2 ||
       new Set(observation.rows.map(row => row.id + ':' + row.action)).size !== observation.rows.length)
@@ -155,13 +168,13 @@ export function validateReactStateApiObservation(observation: ReactStateApiObser
   for (const item of plan.cases) {
     const scalar = (name: string | undefined) => { const change = name ? item.changes[name] : undefined; return change?.kind === 'set' ? change.value : undefined; };
     const supplied = scalar(plan.controlled), initialized = scalar(plan.initial), disabled = scalar(plan.disabled) === true;
-    const initial = String(supplied ?? initialized ?? plan.defaultValue);
+    const initial = checkedValue(supplied ?? initialized ?? plan.defaultValue);
     const pair = observation.rows.filter(row => row.id === item.id);
     for (const action of ['space', 'associated-label'] as const) {
       const row = pair.find(row => row.action === action);
       if (!row || !row.restored || row.initial.checked !== initial || row.initial.disabled !== disabled || row.steps.length !== 2 ||
-          !['false', 'true'].includes(row.live.before.checked) ||
-          row.live.changed.checked !== (supplied === undefined ? row.live.before.checked : String(supplied)) ||
+          !stateDomain(plan.version).map(checkedValue).includes(row.live.before.checked) ||
+          row.live.changed.checked !== (supplied === undefined ? row.live.before.checked : checkedValue(supplied)) ||
           row.live.changed.disabled !== disabled) throw Error('state-api-observation-row-invalid');
       let previous = initial;
       const calls: unknown[][] = [];
@@ -180,7 +193,7 @@ export function validateReactStateApiObservation(observation: ReactStateApiObser
 export async function observeReactStateApi(input: { page: Page; selector: string; program: ReactSourceProgram;
   ownership: ReactOwnership; plan: ReactStateApiPlan; assertCurrent: () => void; assertRestored: () => Promise<void> }): Promise<ReactStateApiObservation> {
   const { page, selector, program, plan } = input;
-  const result: ReactStateApiObservation = { version: 1, qualification: plan.qualification, plan: structuredClone(plan), rows: [], problems: [] };
+  const result: ReactStateApiObservation = { version: plan.version, qualification: plan.qualification, plan: structuredClone(plan), rows: [], problems: [] };
   const target = input.ownership.components.find(c => c.id === plan.instanceId);
   const controlSelector = selector + (plan.rootPath ? plan.rootPath.split('.').map(i => ' > :nth-child(' + (Number(i) + 1) + ')').join('') : '');
   const settle = () => page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
@@ -197,17 +210,18 @@ export async function observeReactStateApi(input: { page: Page; selector: string
         checked: native ? element.indeterminate ? 'mixed' : String(element.checked) : element.getAttribute('aria-checked'),
         disabled: element instanceof HTMLInputElement || element instanceof HTMLButtonElement ? element.disabled : element.getAttribute('aria-disabled') === 'true' };
     });
-    if (value.role !== plan.role || !['false', 'true'].includes(value.checked ?? '')) throw Error('state-api-control-state-unqualified');
+    if (value.role !== plan.role || !stateDomain(plan.version).map(checkedValue).includes(value.checked ?? '')) throw Error('state-api-control-state-unqualified');
     return { checked: value.checked as Control['checked'], disabled: value.disabled };
   };
   try {
     const selected = [plan.controlled, plan.initial, ...(plan.disabled ? [plan.disabled] : [])];
     const names = [...selected, ...plan.excludedInputs];
-    if (plan.version !== 1 || plan.qualification !== 'bounded-checked-state-api-only' || !checkedToggleRole(plan.role) ||
-        typeof plan.defaultValue !== 'boolean' || new Set(names).size !== names.length ||
-        plan.cases.length !== 3 ** selected.length || new Set(plan.cases.map(c => revisionOf(c.changes))).size !== plan.cases.length ||
+    if (![1, 2].includes(plan.version) || (plan.version === 2 && plan.role !== 'checkbox') || plan.qualification !== 'bounded-checked-state-api-only' || !checkedToggleRole(plan.role) ||
+        !stateDomain(plan.version).includes(plan.defaultValue) || new Set(names).size !== names.length ||
+        plan.cases.length !== (stateDomain(plan.version).length + 1) ** 2 * (plan.disabled ? 3 : 1) || new Set(plan.cases.map(c => revisionOf(c.changes))).size !== plan.cases.length ||
         plan.cases.some((c, index) => c.id !== String(index) || revisionOf(Object.keys(c.changes).sort()) !== revisionOf([...names].sort()) ||
-          Object.values(c.changes).some(v => v.kind !== 'omit' && (v.kind !== 'set' || typeof v.value !== 'boolean')) ||
+          Object.entries(c.changes).some(([name, v]) => v.kind !== 'omit' && (v.kind !== 'set' ||
+            !([plan.controlled, plan.initial].includes(name) ? stateDomain(plan.version) : [false, true]).includes(v.value as StateValue))) ||
           plan.excludedInputs.some(name => c.changes[name].kind !== 'omit')))
       throw Error('state-api-plan-domain-invalid');
     if (!target || revisionOf(target.source) !== revisionOf(plan.source) || revisionOf(target.roots) !== revisionOf([plan.rootPath]) ||
@@ -217,14 +231,14 @@ export async function observeReactStateApi(input: { page: Page; selector: string
       const scalar = (name: string | undefined) => { const value = name ? item.changes[name] : undefined; return value?.kind === 'set' ? value.value : undefined; };
       const supplied = scalar(plan.controlled), initialized = scalar(plan.initial), disabled = scalar(plan.disabled) === true;
       const live = await probeReactProperties(page, selector, program, plan.instanceId, item.changes, read);
-      if (!live.ownershipRestored || live.changed.checked !== (supplied === undefined ? live.before.checked : String(supplied)) ||
+      if (!live.ownershipRestored || live.changed.checked !== (supplied === undefined ? live.before.checked : checkedValue(supplied)) ||
           live.changed.disabled !== disabled) throw Error('state-api-live-input-response-unverified');
       await input.assertRestored(); input.assertCurrent();
       for (const action of ['space', 'associated-label'] as const) {
         const trial = await probeReactInitialProperties(page, selector, program, plan.instanceId, item.changes, async (phase, callback) => {
           const initial = await read(), steps: ReactStateApiObservation['rows'][number]['steps'] = [];
           if (phase !== 'changed') return { initial, steps };
-          if (initial.checked !== String(supplied ?? initialized ?? plan.defaultValue) || initial.disabled !== disabled)
+          if (initial.checked !== checkedValue(supplied ?? initialized ?? plan.defaultValue) || initial.disabled !== disabled)
             throw Error('state-api-initial-precedence-unverified');
           const mounted = await callback();
           if (mounted.calls.length || mounted.problems.length) throw Error('state-api-callback-before-activation');

@@ -280,6 +280,18 @@ React comparisons expose **Measure original comparison frame**, backed by `POST 
 
 `react-initial-contract.ts` authenticates the full planned domain and assembles its conditional anatomy through the same computed compiler used by caller-content samples. It preserves typed enum values, variant booleans and explicit canvas omission options without manufacturing public defaults. Source-proven fixed root sizes are required. Shared source-binding rules retain directly observed root CSS-variable identities across the domain, including different variable names with equal colors; an unresolved declared variable relationship refuses compilation. Descendant token identities, aliases/modes, nested source identities, runtime interactions and visual fidelity remain unqualified. The app derives this draft from saved, integrity-checked snapshots without modifying their archive and displays the retained root variable names.
 
+**Verify state inputs together** checks controlled and initial values independently,
+including omission and an optional disabled input. Boolean checkbox/switch inputs
+retain the existing two-state experiment. An observed checkbox with the exact
+typed domain `false`, `true`, `"indeterminate"` uses a separate three-state
+experiment: with a disabled input, all 48 combinations must complete both keyboard
+and associated-label activation and 144 exact restorations. A sole Boolean
+appearance input outside the callback's three-state type is only a candidate;
+the new experiment must independently establish its disabled behavior. Missing
+trials or any failed restoration prevent contract generation. The generated
+preview offers the same typed values, with disabled remaining Boolean. Native
+creation, returned React behavior and visual qualification are separate steps.
+
 #### Geometry below the root of an initial-state domain
 
 Found by looking at the canvas of an independent stateful member (a switch): every variant drew its thumb as a 1 px sliver, and the checked variants did not move it. The structural readback cannot see either, because the plan itself was wrong. Both facts were OBSERVED (the saved trees hold `width: 16px` and `translate: calc(100% - 2px)`); both were lost at the same door: `observed-content.ts` keeps the sample-geometry exclusion (`width`, `height`, `translate`, …) for every part, and only the root had a source witness (`styleOrigin.roots`) that lifts it.
