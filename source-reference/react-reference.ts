@@ -40,7 +40,7 @@ import {
 import { startReactValidation } from "./react-reference-validation.js";
 import { build, type Loader } from "esbuild";
 import { createHash } from "node:crypto";
-import { readFileSync, mkdirSync, writeFileSync, realpathSync, lstatSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync, realpathSync, lstatSync, existsSync } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { loadReactCohort, reactCasesFile, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
@@ -215,6 +215,20 @@ export function reactReferenceHtml(reference: Pick<ReactReference, 'css' | 'java
 }
 
 /** Called only after the source service's loopback and same-origin checks. */
+/** Keep all state inspectors on the same saved cohort anchor. Pointer presence
+ * only chooses a request; the readers still authenticate every seal and source
+ * file, and corrupt evidence refuses instead of falling through to another. */
+export function selectRecordedInspectionAnchor(repo: string, anchor: ReactNativeRequest,
+  anchors: ReactNativeRequest[], caseId?: string): ReactNativeRequest {
+  if (!caseId) return anchor;
+  const candidates = [anchor, ...anchors.filter(candidate => candidate.referenceId === anchor.referenceId &&
+    candidate.inventorySha256 === anchor.inventorySha256 && revisionOf(candidate.ownership) === revisionOf(anchor.ownership))];
+  const recorded = (candidate: ReactNativeRequest, kind: 'initial' | 'callback') => existsSync(path.join(repo,
+    `private/react-${kind}-inspections`, revisionOf(reactInspectionRequest(candidate, caseId)).slice(7), 'latest.json'));
+  return candidates.find(candidate => recorded(candidate, 'initial') && recorded(candidate, 'callback')) ??
+    candidates.find(candidate => recorded(candidate, 'initial')) ?? anchor;
+}
+
 export function createReactReferenceService(
   repoRoot: string,
   sourceRoot = process.env.DS_CONTRACTS_REACT_SOURCE_ROOT ??
@@ -229,7 +243,7 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactSourceRequest(operationId) };
   });
-  const selectInspectionSource = (referenceId: string) => {
+  const selectInspectionSource = (referenceId: string, caseId?: string) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
     // operation. No fresh property matrix or browser-supplied evidence paths.
@@ -248,11 +262,15 @@ export function createReactReferenceService(
       // Native plan compatibility is not source freshness. Initial-state reads
       // independently authenticate the old source archive, without authorizing
       // a native write or replacing that operation's pinned compiler output.
-      return { anchor: current[0], anchors: roots.map(r => native!().jobs.reactEffectiveRequest(r.operation.id)) };
+      // Original pins may retain a compilation marker omitted by a succession.
+      // Both address the same sealed source archive; saved inspection keys retain
+      // the exact pin. Keep both available for the readers to authenticate.
+      return { anchor: current[0], anchors: [...current, ...roots.flatMap(r =>
+        [native!().jobs.reactEffectiveRequest(r.operation.id), native!().jobs.reactRequest(r.operation.id)])] };
     }));
     const { anchor, anchors } = selected;
     if (!anchor) throw Error('react-initial-saved-observation-required');
-    return { reference, anchor, anchors };
+    return { reference, anchor: selectRecordedInspectionAnchor(repoRoot, anchor, anchors, caseId), anchors };
   };
   const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
   const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,

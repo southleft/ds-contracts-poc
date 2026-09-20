@@ -77,6 +77,11 @@ test('state-API wrappers use the archived initial case and refuse foreign module
     observation: { key: 'a'.repeat(64), id: a.request.ownership.id, inventorySha256: 'b'.repeat(64), reportSha256: 'c'.repeat(64) } });
   const original = wrap(f.archive()), changed = wrap(f.archive({ bytes: 'new appearance' }));
   assert.doesNotThrow(() => assertNativeSourceIdentity(f.repo, original, changed));
+  const reanchored={...changed,initial:{...changed.initial,anchor:{...changed.initial.anchor,caseId:'another-archive-root'}}};
+  assert.doesNotThrow(() => assertNativeSourceIdentity(f.repo, original, reanchored), 'identity is the state case, not the archive anchor case');
+  const foreign=wrap(f.archive({workspace:'foreign'}));
+  foreign.initial.anchor.caseId='another-archive-root';
+  assert.throws(() => assertNativeSourceIdentity(f.repo, original, foreign), /component-mismatch/);
   assert.throws(() => assertNativeSourceIdentity(f.repo, original, wrap(f.archive({ workspace: 'foreign' }))), /component-mismatch/);
   assert.throws(() => readNativeSourceIdentity(f.repo, { ...original, initial: { ...original.initial, caseId: 'missing' } }), /identity-unavailable/);
   assert.throws(() => readNativeSourceIdentity(f.repo, { ...original, observation: { ...original.observation, key: '../invalid' } }), /identity-unavailable/);

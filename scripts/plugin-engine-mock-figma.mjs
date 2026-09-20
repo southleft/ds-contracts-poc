@@ -1227,6 +1227,11 @@ export function createFigmaMock(options = {}) {
       return inst;
     }
 
+    getStyledTextSegments(fields) {
+      return [{ characters: this.characters ?? '', start: 0, end: (this.characters ?? '').length,
+        ...Object.fromEntries(fields.map(field => [field, this[field]])) }];
+    }
+
     async setTextStyleIdAsync(id) {
       this.textStyleId = id;
     }
@@ -1334,6 +1339,7 @@ export function createFigmaMock(options = {}) {
   const figma = {
     mixed,
     fileKey: null,
+    skipInvisibleInstanceChildren: false,
     root,
     currentPage: firstPage,
     notify() {},
@@ -1391,6 +1397,10 @@ export function createFigmaMock(options = {}) {
       allStyles.push(s);
       return s;
     },
+    getLocalPaintStyles() { return []; },
+    getLocalEffectStyles() { return []; },
+    getLocalGridStyles() { return []; },
+    getLocalTextStyles() { return [...allStyles]; },
     async getLocalTextStylesAsync() {
       return [...allStyles];
     },
@@ -1467,6 +1477,7 @@ export function createFigmaMock(options = {}) {
         }
         return { type: 'VARIABLE_ALIAS', id: variable.id };
       },
+      getLocalVariables() { return [...variables]; },
       async getLocalVariablesAsync() {
         return [...variables];
       },

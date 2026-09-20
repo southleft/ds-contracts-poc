@@ -389,21 +389,101 @@ test('bindings or aliases introduced during the final async read refuse before a
   }
 });
 
-test('a node on another page is not checked, and every proposal that writes a variable says so', async t => {
+test('a binding on another page refuses before any write and proposals declare the document scan', async t => {
   const f = await tokenFixture(), plan = f.prepare();
-  // The named limitation, measured: a binding on another page does not stop the write.
   const page = f.figma.createPage(); page.name = 'Designer page';
   const rect = f.figma.createRectangle(); page.appendChild(rect);
+  rect.visible = false;
   rect.boundVariables = { opacity: { type: 'VARIABLE_ALIAS', id: f.variableId } };
-  assert.equal((await f.run(emitNativeContractUpdateScript(plan))).status, 'updated');
-  const proposal = (input: any) => {
-    const repo = mkdtempSync(path.join(tmpdir(), 'native-token-scope-'));
-    t.after(() => rmSync(repo, { recursive: true, force: true }));
-    return createNativeUpdatePlans(repo, () => ({ parentJournalRevision: 'a'.repeat(64), input })).prepare(input.before.operation.id);
-  };
-  assert.ok(proposal(f.input).limitations.includes(NATIVE_TOKEN_VALUE_SCOPE_LIMITATION));
-  assert.equal(proposal((await nativeUpdateFixture()).input).limitations.includes(NATIVE_TOKEN_VALUE_SCOPE_LIMITATION), false, 'only a variable write carries it');
+  const result = await f.run(emitNativeContractUpdateScript(plan));
+  assert.equal(result.status, 'refused');
+  assert.deepEqual(result.problems, ['native-update-token-bound:' + f.variableId]);
+  assert.equal(f.variable.valuesByMode[f.modeId], 0.5);
+  assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+  const repo = mkdtempSync(path.join(tmpdir(), 'native-token-scope-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const proposal = createNativeUpdatePlans(repo, () => ({ parentJournalRevision: 'a'.repeat(64), input: f.input })).prepare(f.input.before.operation.id);
+  assert.equal(proposal.tokenBindingScope, 'document-v1');
+  assert.ok(proposal.limitations.includes('document-binding-scan-required'));
+  assert.equal(proposal.limitations.includes(NATIVE_TOKEN_VALUE_SCOPE_LIMITATION), false);
   const page_ = readFileSync(new URL('../playground/src/pages/ReactNativeInspection.tsx', import.meta.url), 'utf8');
-  assert.ok(page_.includes("It writes one only if no node on this operation's page binds it and no local variable aliases it. Nodes on other pages are not checked"));
-  assert.equal(page_.includes('No node is bound to'), false, 'the review never claims more than is measured');
+  assert.ok(page_.includes('Before writing, it checks nodes on every page'));
+  assert.ok(page_.includes('This historical proposal checked only'));
+});
+
+test('document scan sees binding surfaces omitted by the operation readback', async () => {
+  for (const attack of ['hidden-instance', 'text-range', 'layout-grid', 'property-definition', 'instance-property', 'vector-region', 'paint-style', 'text-style', 'effect-style', 'grid-style'] as const) {
+    const f = await tokenFixture(), plan = f.prepare(), alias = { type: 'VARIABLE_ALIAS', id: f.variableId };
+    const page = f.figma.createPage();
+    const node = attack === 'text-range' ? f.figma.createText() : f.figma.createFrame();
+    page.appendChild(node);
+    if (attack === 'hidden-instance') {
+      const inst = f.figma.createFrame(); inst.type = 'INSTANCE'; inst.visible = false; page.appendChild(inst); inst.appendChild(node); node.boundVariables = { opacity: alias };
+    } else if (attack === 'text-range') {
+      node.characters = 'Mixed'; node.getStyledTextSegments = () => [{ start: 1, end: 3, boundVariables: { fontSize: alias } }];
+    } else if (attack === 'layout-grid') node.layoutGrids = [{ pattern: 'GRID', boundVariables: { sectionSize: alias } }];
+    else if (attack === 'property-definition') { node.type = 'COMPONENT_SET'; Object.defineProperty(node, 'componentPropertyDefinitions', { value: { Caption: { boundVariables: { defaultValue: alias } } } }); }
+    else if (attack === 'instance-property') { node.type = 'INSTANCE'; node.componentProperties = { Caption: { boundVariables: { value: alias } } }; }
+    else if (attack === 'vector-region') { node.type = 'VECTOR'; node.vectorNetwork = { regions: [{ fills: [{ boundVariables: { color: alias } }] }] }; }
+    else {
+      const method = { 'paint-style': 'getLocalPaintStyles', 'text-style': 'getLocalTextStyles', 'effect-style': 'getLocalEffectStyles', 'grid-style': 'getLocalGridStyles' }[attack];
+      f.figma[method] = () => [{ boundVariables: { opacity: alias } }];
+    }
+    const writes: unknown[] = [], set = f.variable.setValueForMode.bind(f.variable);
+    f.variable.setValueForMode = (mode: string, value: unknown) => { writes.push(value); set(mode, value); };
+    const result = await f.run(emitNativeContractUpdateScript(plan));
+    assert.equal(result.status, 'refused', attack + ': ' + JSON.stringify(result));
+    assert.deepEqual(result.problems, [(attack.endsWith('-style') ? 'native-update-token-style-bound:' : 'native-update-token-bound:') + f.variableId]);
+    assert.deepEqual(writes, [], attack);
+    assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+  }
+});
+
+test('a new alias variable or style inserted after the final asynchronous inventory cannot escape the synchronous scan', async () => {
+  for (const attack of ['alias', 'style', 'other-page', 'hidden-scope'] as const) {
+    const f = await tokenFixture(), plan = f.prepare(), read = f.figma.variables.getLocalVariablesAsync.bind(f.figma.variables);
+    let injected = false;
+    f.figma.variables.getLocalVariablesAsync = async () => {
+      const stale = await read();
+      if (!injected) {
+        injected = true;
+        const alias = { type: 'VARIABLE_ALIAS', id: f.variableId };
+        if (attack === 'alias') {
+          const collection = f.figma.variables.createVariableCollection('late');
+          const variable = f.figma.variables.createVariable('late-alias', collection, 'FLOAT');
+          variable.setValueForMode(collection.modes[0].modeId, alias);
+        } else if (attack === 'style') f.figma.getLocalEffectStyles = () => [{ effects: [{ boundVariables: { radius: alias } }] }];
+        else if (attack === 'hidden-scope') f.figma.skipInvisibleInstanceChildren = true;
+        else { const page = f.figma.createPage(), node = f.figma.createRectangle(); page.appendChild(node); node.boundVariables = { opacity: alias }; }
+      }
+      return stale;
+    };
+    const result = await f.run(emitNativeContractUpdateScript(plan));
+    assert.equal(result.status, 'refused', attack);
+    assert.equal(f.variable.valuesByMode[f.modeId], 0.5, attack);
+    assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+    assert.deepEqual([result.changes, result.tokenChanges], [[], []]);
+  }
+});
+
+test('unavailable or oversized document scans refuse before assignments; variant definition getters are never used', async () => {
+  for (const attack of ['hidden', 'load-api', 'styles-api', 'variables-api', 'style-read', 'text-read', 'oversized'] as const) {
+    const f = await tokenFixture(), plan = f.prepare();
+    if (attack === 'hidden') f.figma.skipInvisibleInstanceChildren = true;
+    else if (attack === 'load-api') delete f.figma.loadAllPagesAsync;
+    else if (attack === 'styles-api') delete f.figma.getLocalGridStyles;
+    else if (attack === 'variables-api') delete f.figma.variables.getLocalVariables;
+    else if (attack === 'style-read') f.figma.getLocalTextStyles = () => { throw Error('style-api-refused'); };
+    else if (attack === 'text-read') { const n = f.figma.createText(); f.figma.currentPage.appendChild(n); n.getStyledTextSegments = undefined; }
+    else { const page = f.figma.createPage(); for (let i = 0; i < 10000; i++) page.appendChild(f.figma.createRectangle()); }
+    const result = await f.run(emitNativeContractUpdateScript(plan));
+    assert.equal(result.status, 'refused', attack + ': ' + JSON.stringify(result));
+    assert.equal(f.variable.valuesByMode[f.modeId], 0.5);
+    assert.ok(f.nodes.every((n: any) => n.opacity === 0.5));
+  }
+  const f = await tokenFixture();
+  for (const node of f.nodes) Object.defineProperty(node, 'componentPropertyDefinitions', { get() { throw Error('variant-definitions-unavailable'); } });
+  const result = await f.run(emitNativeContractUpdateScript(f.prepare()));
+  assert.equal(result.status, 'updated', JSON.stringify(result.problems));
+  assert.equal(result.bindingScope.version, 'document-v1');
 });
