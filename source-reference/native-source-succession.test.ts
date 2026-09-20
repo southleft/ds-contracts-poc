@@ -10,6 +10,7 @@ import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
 import type {ReactNativeRequest} from './react-native-request.js';
 import type {ReactInitialNativeRequest} from './react-initial-native-request.js';
+import type {ReactStateApiNativeRequest} from './react-state-api-native-request.js';
 
 const PARENT='11111111-2222-4333-8444-555555555555';
 const root=(reference:string,caseId='button-default'):ReactNativeRequest=>({version:1,kind:'react-root-draft',referenceId:reference.repeat(64),
@@ -17,6 +18,8 @@ const root=(reference:string,caseId='button-default'):ReactNativeRequest=>({vers
  matrixRevision:'sha256:'+reference.repeat(64)});
 const initial=(reference:string,caseId='checkbox-unchecked'):ReactInitialNativeRequest=>({version:1,kind:'react-initial-draft',anchor:root(reference,'checkbox-unchecked'),caseId,
  observation:{id:`${reference.repeat(8)}-0000-4000-8000-000000000001`,inventorySha256:reference.repeat(64),reportSha256:reference.repeat(64)}});
+const stateApi = (reference: string, experiment = reference): ReactStateApiNativeRequest => ({ version: 1, kind: 'react-state-api-draft', initial: initial(reference),
+ observation: { key: experiment.repeat(64), id: `${experiment.repeat(8)}-0000-4000-8000-000000000002`, inventorySha256: experiment.repeat(64), reportSha256: experiment.repeat(64) } });
 function store(t:test.TestContext) {
  const repo=mkdtempSync(path.join(tmpdir(),'native-source-succession-'));
  t.after(()=>rmSync(repo,{recursive:true,force:true}));
@@ -66,6 +69,35 @@ test('an altered, reordered, foreign or re-seeded succession journal fails close
  writeFileSync(path.join(dir,'00000003.json'),bytes);
  assert.throws(()=>successions.effective(PARENT,original),/journal-sequence-invalid/);
  assert.throws(()=>successions.adopt(PARENT,original,root('f')),/journal-sequence-invalid/);
+});
+
+test('state-API succession retains full experiment pins, including a new experiment for unchanged React source', t => {
+ const { successions, dir } = store(t), original = stateApi('a'), refreshed = stateApi('a', 'b');
+ assert.deepEqual(successions.adopt(PARENT, original, refreshed), { adopted: true, sequence: 0 });
+ assert.deepEqual(successions.effective(PARENT, original), refreshed);
+ assert.deepEqual(successions.adopt(PARENT, original, refreshed), { adopted: false, sequence: 1 });
+ assert.deepEqual(successions.history(PARENT, original), ['a'.repeat(64), 'a'.repeat(64)]);
+ assert.throws(() => successions.effective(PARENT, stateApi('a', 'c')), /journal-chain-invalid/);
+ for (const bad of [initial('b'), root('b'), { ...stateApi('b'), initial: { ...initial('b'), caseId: 'other' } },
+   { ...stateApi('b'), observation: { ...stateApi('b').observation, key: '../invalid' } }])
+   assert.throws(() => successions.adopt(PARENT, original, bad), /case-mismatch/);
+ assert.deepEqual(readdirSync(dir), ['00000000.json']);
+ assert.equal(successions.adopt(PARENT, original, stateApi('c')).adopted, true);
+ assert.equal(nativeSourcePinReference(successions.effective(PARENT, original)), 'c'.repeat(64));
+});
+
+test('initial and state-API source succession can use another cohort root as its archive anchor', t => {
+ for (const kind of ['initial', 'state-api'] as const) {
+  const {successions,dir}=store(t), original=kind==='initial'?initial('a'):stateApi('a');
+  const nextInitial={...initial('b'),anchor:root('b','another-archive-root')};
+  const next=kind==='initial'?nextInitial:{...stateApi('b'),initial:nextInitial};
+  assert.deepEqual(successions.adopt(PARENT,original,next),{adopted:true,sequence:0});
+  assert.deepEqual(successions.effective(PARENT,original),next);
+  assert.deepEqual(successions.adopt(PARENT,original,next),{adopted:false,sequence:1});
+  const before=readFileSync(path.join(dir,'00000000.json'));
+  assert.deepEqual(successions.adopt(PARENT,original,original),{adopted:true,sequence:1});
+  assert.deepEqual(readFileSync(path.join(dir,'00000000.json')),before);
+ }
 });
 
 // The service derives `desired` from the sealed observation an operation

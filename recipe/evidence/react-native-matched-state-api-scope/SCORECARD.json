@@ -1,0 +1,448 @@
+{
+  "version": 1,
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "rows": [
+    {
+      "id": "0",
+      "variant": "defaultChecked=false, disabled=false",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.398989898989899,
+          "differingPixels": 19,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "1",
+      "variant": "defaultChecked=false, disabled=true",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.0202020202020203,
+          "differingPixels": 16,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "2",
+      "variant": "defaultChecked=false, disabled=(unset)",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.398989898989899,
+          "differingPixels": 19,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "3",
+      "variant": "defaultChecked=true, disabled=false",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 4.166666666666666,
+          "differingPixels": 33,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "4",
+      "variant": "defaultChecked=true, disabled=true",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 2.272727272727273,
+          "differingPixels": 18,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "5",
+      "variant": "defaultChecked=true, disabled=(unset)",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 4.166666666666666,
+          "differingPixels": 33,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "6",
+      "variant": "defaultChecked=(unset), disabled=false",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.398989898989899,
+          "differingPixels": 19,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "7",
+      "variant": "defaultChecked=(unset), disabled=true",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.0202020202020203,
+          "differingPixels": 16,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "8",
+      "variant": "defaultChecked=(unset), disabled=(unset)",
+      "scores": [
+        {
+          "background": 255,
+          "mismatch": 0,
+          "differingPixels": 0,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        },
+        {
+          "background": 0,
+          "mismatch": 2.398989898989899,
+          "differingPixels": 19,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 6,
+              "y": 8,
+              "width": 36,
+              "height": 22
+            }
+          }
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

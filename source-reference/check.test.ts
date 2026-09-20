@@ -111,3 +111,75 @@ test('textless controls require their actual visible unique label and its painte
     ] as const){await page.setContent(original());await page.evaluate(()=>document.fonts.ready);await page.evaluate(mutation);const result=await check();if(problem)assert.ok(result.problems.includes(problem),JSON.stringify(result));else assert.equal(result.status,'valid',JSON.stringify(result));}
   }finally{failures.dispose();await browser.close();}
 });
+
+test('explicit text absence is independently observed and never inferred from empty rendered text', async () => {
+  const browser=await chromium.launch();const page=await browser.newPage();const failures=watchSourceFailures(page);
+  const absent:SourceProfile={id:'absence-probe',provenance:'bounded browser instrument',path:['#subject'],textContent:'absent',
+    requiredStyles:{display:'block',width:'16px',height:'1px'},requiredTokens:{'--paint':'#2850a0'},fontFamily:'Inter'};
+  const setup=async(markup:string,css='')=>{
+    await page.setContent(`<style>:root{--paint:#2850a0}#subject{display:block;box-sizing:border-box;width:16px;height:1px;background:var(--paint)}${css}</style>${markup}`);
+    await page.evaluate(()=>document.fonts.ready);
+  };
+  const read=()=>observeSource(page,absent,failures);
+  try {
+    for(const markup of ['<span id="subject"></span>','<span id="subject"><!-- source comment --></span>',
+      '<svg id="subject"><rect width="16" height="1"/></svg>']) {
+      await setup(markup);const observed=await read();assert.deepEqual(checkSource(absent,observed),{status:'valid',problems:[]});
+      assert.equal(observed.textAbsence?.status,'observed');assert.equal(observed.platformFonts.filter(f=>f.glyphCount>0).length,0);
+    }
+    await setup('<span id="subject"></span>');
+    const original={...absent};delete original.textContent;
+    const oldObserved=await observeSource(page,original,failures);
+    assert.equal(oldObserved.textAbsence,undefined,'old observations retain their field shape');
+    assert.ok(checkSource(original,oldObserved).problems.includes('text-witness-missing'));
+    assert.ok(checkSource(original,oldObserved).problems.includes('font-substitution'));
+    const observed=await read();
+    for(const textAbsence of [undefined,{status:'observed' as const,inspectedNodes:0,problems:[]},
+      {status:'observed' as const,inspectedNodes:10001,problems:[]}])
+      assert.ok(checkSource(absent,{...observed,textAbsence}).problems.includes('text-absence-unverified'));
+    assert.ok(checkSource(absent,{...observed,platformFonts:[{familyName:'Inter',glyphCount:1}]}).problems.includes('unexpected-source-glyphs'));
+    for(const extra of [{fontPath:['#nearby']},{associatedLabelText:'Nearby'}])
+      assert.ok(checkSource({...absent,...extra},observed).problems.includes('profile-incomplete'));
+    for(const [markup,css,problem] of [
+      ['<span id="subject">Visible</span>','','unexpected-source-text'],
+      ['<span id="subject"><b hidden>Hidden</b></span>','','unexpected-source-text'],
+      ['<span id="subject"></span>','#subject::before{content:"Generated"}','text-absence-generated-content'],
+      ['<span id="subject"></span>','#subject::after{content:attr(id)}','text-absence-generated-content'],
+      ['<span id="subject"></span>','#subject{content:"Replacement"}','text-absence-generated-content'],
+      ['<li id="subject"></li>','#subject{display:list-item}','text-absence-generated-content'],
+      ['<x-unknown id="subject"></x-unknown>','','text-absence-scope-unavailable'],
+      ['<span id="subject" is="x-customized"></span>','','text-absence-scope-unavailable'],
+      ['<span id="subject"><slot></slot></span>','','text-absence-scope-unavailable'],
+      ['<input id="subject" value="Native field text">','','text-absence-scope-unavailable'],
+      ['<svg id="subject"><use href="#external"/></svg>','','text-absence-scope-unavailable'],
+      ['<span id="subject">'+ '<!---->'.repeat(10000) +'</span>','','text-absence-scope-too-large'],
+      ['<span id="subject"></span>','#subject{visibility:hidden}','component-not-visible'],
+      ['<span id="subject"></span>','#subject{width:0}','component-not-visible'],
+      ['<span id="subject"></span>',':root{--paint:blue}','theme-token-mismatch:--paint'],
+      ['<span></span>','','component-missing'],
+    ]) {
+      await setup(markup,css);const result=checkSource(absent,await read());assert.ok(result.problems.includes(problem),`${problem}: ${JSON.stringify(result)}`);
+    }
+    await setup('<span id="subject"></span>');
+    await page.evaluate(()=>document.querySelector('#subject')!.attachShadow({mode:'open'}).innerHTML='<b>Shadow</b>');
+    assert.ok(checkSource(absent,await read()).problems.includes('text-absence-scope-unavailable'));
+    for(const nested of [false,true]) {
+      await setup(nested ? '<span id="subject"><span id="closed"></span></span>' : '<span id="subject"></span>');
+      await page.evaluate(nested=>{
+        document.querySelector(nested ? '#closed' : '#subject')!.attachShadow({mode:'closed'}).innerHTML='<canvas width="16" height="1"></canvas>';
+      },nested);
+      assert.ok(checkSource(absent,await read()).problems.includes('text-absence-scope-unavailable'),nested ? 'nested closed shadow' : 'root closed shadow');
+    }
+    await setup('<span id="subject"></span>');
+    await page.evaluate(()=>{
+      const query=document.querySelector.bind(document);let reads=0;
+      document.querySelector=((selector:string)=>{
+        const node=query(selector);
+        if(selector==='#subject' && ++reads===2) {node?.remove();return null;}
+        return node;
+      }) as typeof document.querySelector;
+    });
+    assert.ok(checkSource(absent,await read()).problems.includes('text-absence-scope-unavailable'),
+      'a root disappearing before the protocol read cannot establish zero painted glyphs');
+  } finally {failures.dispose();await browser.close();}
+});

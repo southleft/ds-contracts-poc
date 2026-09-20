@@ -109,7 +109,21 @@ test('display caching retains the fresh journal check during source authenticati
   const f=fixture(t,(request,operation)=>{change?.();change=undefined;return nativeFixturePrepare(request,operation);});
   const file=path.join(f.directory,'operation.json');
   change=()=>{const header=JSON.parse(readFileSync(file,'utf8'));header.startedAt='2025-01-01T00:00:00.000Z';writeFileSync(file,JSON.stringify(header));};
-  assert.equal(f.jobs.withReadSnapshot(()=>f.jobs.get(f.snapshot.id)).sourceCurrent,false);
+ assert.equal(f.jobs.withReadSnapshot(()=>f.jobs.get(f.snapshot.id)).sourceCurrent,false);
+});
+
+test('a failed journal stays refused only for the current display and is freshly read afterward',t=>{
+ const f=fixture(t),file=path.join(f.directory,'operation.json'),original=readFileSync(file);
+ const header=JSON.parse(original.toString());header.version=99;writeFileSync(file,JSON.stringify(header));
+ f.jobs.withReadSnapshot(()=>{
+  assert.throws(()=>f.jobs.get(f.snapshot.id),/native-operation-header-invalid/);
+  writeFileSync(file,original);
+  assert.throws(()=>f.jobs.deliveryState(f.snapshot.id),/native-operation-header-invalid/);
+  assert.throws(()=>f.jobs.dispatch(f.snapshot.id,'token-create'),/write-during-read-snapshot/);
+ });
+ assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent,true);
+ writeFileSync(file,JSON.stringify(header));
+ assert.throws(()=>f.jobs.dispatch(f.snapshot.id,'token-create'),/native-operation-header-invalid/);
 });
 
 test("private token accessor requires independent observation and returns isolated host context", async (t) => {

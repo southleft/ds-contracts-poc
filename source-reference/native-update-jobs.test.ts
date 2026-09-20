@@ -378,3 +378,35 @@ test('the actual companion does not execute a write the app refuses to let it be
   assert.equal(f.storage.has('ds_native_receipt:'+f.id),false,'and no marker was left behind');
   (f.transport() as any).begin=refuse;
 });
+
+
+test('a completed rollback requires independent unchanged evidence before a fresh operator write',async t=>{
+ const f=await fixture(t);await f.poll();
+ const first=f.nodes[0];let opacity=first.opacity,fail=true;
+ Object.defineProperty(first,'opacity',{configurable:true,get:()=>opacity,set:(v:number)=>{opacity=v;if(fail&&v===.25){fail=false;throw Error('isolated writer failure');}}});
+ await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-applied');
+ assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/effective-observation-unavailable/);
+ assert.throws(()=>f.transport().rearmWrite(f.id),/write-rearm-refused/);
+ await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+ assert.equal(f.jobs().get(f.id).completedUnchanged,'rolled-back');
+ assert.equal(f.jobs().verifiedForParent(f.proposal.parentId),undefined);
+ f.restart();await f.poll();assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+ const old=f.delivered.find(c=>!c.readOnly)!;
+ assert.throws(()=>f.transport().begin(f.id,f.secret,old.attemptId),/write-begin-refused/);
+ const envelope=JSON.parse(readFileSync(path.join(f.repo,'private','source-native-updates',f.id,'events','00000004.json'),'utf8')).envelope;
+ f.jobs().accept(f.id,envelope);
+ assert.throws(()=>f.jobs().accept(f.id,{...envelope,result:{...envelope.result,status:'updated'}}),/result-replay-conflict/);
+ f.transport().rearmWrite(f.id);for(let i=0;i<3;i++)await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');
+ assert.equal(f.jobs().get(f.id).completedUnchanged,undefined);
+ assert.equal(f.delivered.filter(c=>!c.readOnly).length,2);
+});
+
+test('a rollback answer cannot release recovery after an unrelated canvas edit',async t=>{
+ const f=await fixture(t);await f.poll();const first=f.nodes[0];let opacity=first.opacity,fail=true;
+ Object.defineProperty(first,'opacity',{configurable:true,get:()=>opacity,set:(v:number)=>{opacity=v;if(fail&&v===.25){fail=false;throw Error('isolated writer failure');}}});
+ await f.poll();first.name='Independent edit after rollback';await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-recovery-required');
+ assert.equal(f.jobs().get(f.id).completedUnchanged,undefined);
+ assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/effective-observation-unavailable/);
+});

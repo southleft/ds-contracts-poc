@@ -32,13 +32,13 @@ npx ds-contracts generate <work>/propose/*.contract.proposed.json --out <work>/p
 npm run design:consumer:check -- --dump <work>/set.rest-dump.json --contract <work>/propose/<set>.contract.proposed.json --generated <work>/propose/generated --component <Name> --out <work>/evidence
 ```
 
-## Current integration measurement
+## Historical integration measurement (2026-09-20)
 
 Fresh REST GET-only captures after integrating the interactive-root and explicit
 zero-padding rules measure Altitude Badge 10/10, CBDS Badge 66/72, Tabs 2/2 by
 image score and Checkbox Group 0/12 on the joint white/black criterion. The 5%
 limit is unchanged. Maximum white/black mismatches are 4.825% / 4.825%,
-4.427% / 6.120%,1.824%/ 3.593% and4.011% / 10.364%, respectively.
+4.427% / 6.120%, 1.824% / 3.593% and 4.011% / 10.364%, respectively.
 
 Tabs no longer nests a button inside its panel button. Its width falls from 453px
 to 441px, but the default content still measures 441px versus 438px. Its variant
@@ -52,3 +52,5 @@ semantics. Fresh receipts and both pre-merge source versions are preserved in
 private `pr137-main-integration-tbx6mgdq/`; the prior dependency-closure baseline
 remains in `pr136-main-integration-s0jph0cm/`. See docs/23 D.44 and D.51. The
 historical white-only artifacts above remain historical measurements.
+
+Current application acceptance and later measurements are recorded in [CURRENT.md](../../../docs/CURRENT.md#v1-acceptance-evidence).

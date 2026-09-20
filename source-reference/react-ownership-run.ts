@@ -22,6 +22,7 @@ import {
 import {
   reactReferenceHtml,
   reactReferenceUnchanged,
+  reactReferenceSourceModules,
   type ReactReference,
 } from "./react-reference.js";
 import {
@@ -70,13 +71,7 @@ export function startReactOwnership(
 ) {
   if (!reactReferenceUnchanged(reference))
     throw Error("react-ownership-source-changed");
-  const modules = Object.keys(reference.files)
-    .filter(
-      (f) =>
-        f.startsWith(path.join(sourceRoot, "src") + path.sep) &&
-        f.endsWith(".tsx"),
-    )
-    .map((f) => path.relative(sourceRoot, f));
+  const modules = reactReferenceSourceModules(reference);
   const program = readReactSourceProgram(sourceRoot, modules);
   const state: ReactOwnershipReport = {
     id: randomUUID(),

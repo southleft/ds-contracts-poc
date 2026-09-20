@@ -29,6 +29,9 @@ const PACKAGES = [
     // required-facts referee in @ds-contracts/core reads it. A consumer that
     // validates a v19 contract needs the enum, so this is public surface by
     // intent, not a build artifact that leaked.
+    // Reviewed 2026-09-20: contract-schema imports/re-exports the pure filled
+    // and stroked path validators. Their runtime modules and declarations
+    // must ship so installed consumers can load and validate path contracts.
     expected: [
       "README.md",
       "contract.schema.json",
@@ -36,10 +39,14 @@ const PACKAGES = [
       "dist/archetype.js",
       "dist/contract-schema.d.ts",
       "dist/contract-schema.js",
+      "dist/filled-path.d.ts",
+      "dist/filled-path.js",
       "dist/index.d.ts",
       "dist/index.js",
       "dist/migrate.d.ts",
       "dist/migrate.js",
+      "dist/stroked-path.d.ts",
+      "dist/stroked-path.js",
       "dist/validate.d.ts",
       "dist/validate.js",
       "package.json",

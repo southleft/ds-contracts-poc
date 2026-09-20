@@ -12,7 +12,7 @@ Use the existing shadcn source sandbox, not emitted contracts or regenerated com
 | Checkbox | Unchecked, checked, indeterminate, disabled | Native state, accessible label relationship, nested indicator and icon |
 | Card | Header/body/footer; same composition containing Checkbox and Button | Nested components, content regions and multiple dependencies |
 
-These ten cases are selected before qualification. Count all ten, including refused or failed captures. Source readiness, native visual fidelity, structure/editability, behavior and workflow completion are separate results. Radix Themes and the other held-out subjects remain reserved for their independent evaluations.
+These ten cases are selected before qualification. Count all ten, including refused or failed captures. Source readiness, native visual fidelity, structure/editability, behavior and workflow completion are separate results. Independent evaluations add coverage without replacing these ten cases. The declared Badge/Alert/Switch workspace has live native measurements and remaining failures. Radix Themes source validation passes four cases, while native drafts still refuse content-ownership proof. See the current ledger for evidence and denominators.
 
 ## Rules and boundaries
 

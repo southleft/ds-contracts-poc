@@ -1,3 +1,4 @@
+import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { createNativeSourceSuccessions } from './native-source-succession.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
@@ -132,6 +133,13 @@ export function createReferenceService(
   const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactStateApi: {
+        prepare:(request,operation)=>({visual:{id:request.initial.anchor.ownership.id,reportSha256:request.initial.anchor.ownership.sha256},
+          preparation:{id:request.observation.id,reportSha256:request.observation.reportSha256},
+          plan:prepareReactStateApiNativePlan({...reactReference.stateApiNativeEvidence(request),operation})}),
+        buildComponent:(request,context)=>buildReactStateApiNativeWrite({...reactReference.stateApiNativeEvidence(request),operation:context.operation,
+          tokensContext:context.tokens,expectedPlanRevision:context.planRevision}),
+      },
       reactInitial: {
         prepare: (request, operation) => ({
           visual: { id: request.anchor.ownership.id, reportSha256: request.anchor.ownership.sha256 },
@@ -765,12 +773,15 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
-  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
-    const baseline = nativeJobs.reactUpdateBaseline(id);
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision) => {
+    const baseline = nativeJobs.reactUpdateBaseline(id, parentJournalRevision);
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
     // identity, and therefore every existing allocation, stays the same.
-    const desired = baseline.source.kind === 'react-initial-draft'
+    const desired = baseline.source.kind === 'react-state-api-draft'
+      ? prepareReactStateApiNativePlan({ ...reactReference.stateApiNativeEvidence(baseline.source,
+        nativeJobs.reactStateApiRequest(id)), operation: baseline.input.operation })
+      : baseline.source.kind === 'react-initial-draft'
       // The existing component keeps its name and token namespace; for an
       // unchanged source this equals the content-derived name.
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })
@@ -779,7 +790,7 @@ export function createReferenceService(
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
     } };
-  }, id => nativeUpdateJobs.updateHistory(id));
+  }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

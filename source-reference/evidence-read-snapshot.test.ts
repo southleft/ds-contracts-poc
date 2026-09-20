@@ -32,3 +32,51 @@ test('archive validation keeps the captured inventory within a display and detec
  assert.equal(evidenceUnchanged(dir,seal),false);
  assert.equal(withEvidenceReadSnapshot(()=>evidenceUnchanged(dir,seal)),false);
 });
+
+test('plain refusals are isolated and reused only within one synchronous display',()=>{
+ let calls=0;
+ const read=()=>evidenceReadOnce('refusal',{pin:'a'},()=>{calls++;throw Error('native-update-input-changed');});
+ withEvidenceReadSnapshot(()=>{
+  try {read();assert.fail('expected refusal');} catch(error) {(error as Error).message='changed by caller';}
+  assert.throws(()=>withEvidenceReadSnapshot(read),{name:'Error',message:'native-update-input-changed'});
+  assert.equal(calls,1);
+  assert.throws(()=>evidenceReadOnce('refusal',{pin:'b'},()=>{calls++;throw Error('different-input');}),/different-input/);
+  assert.equal(calls,2);
+  assert.throws(assertOutsideEvidenceSnapshot,/write-during/);
+ });
+ assert.throws(read,/native-update-input-changed/);assert.equal(calls,3);
+ assert.throws(()=>withEvidenceReadSnapshot(read),/native-update-input-changed/);assert.equal(calls,4);
+ assert.throws(()=>withEvidenceReadSnapshot(read),/native-update-input-changed/);assert.equal(calls,5);
+ assert.doesNotThrow(assertOutsideEvidenceSnapshot);
+});
+
+test('custom errors and thrown values keep their original behavior without failure reuse',()=>{
+ const errors=[new TypeError('typed'),Object.assign(Error('custom'),{code:'custom-code'}),
+  Error('caused',{cause:'detail'}),new Proxy(Error('proxy'),{}),
+  {message:'not an Error'},'plain string'];
+ for(const error of errors) {
+  let calls=0;
+  withEvidenceReadSnapshot(()=>{
+   for(let i=0;i<2;i++) {
+    try {evidenceReadOnce('custom','same',()=>{calls++;throw error;});assert.fail('expected refusal');}
+    catch(actual) {assert.equal(actual,error);}
+   }
+  });
+  assert.equal(calls,2);
+ }
+});
+
+test('failed display reads do not hide repaired evidence in the next request',t=>{
+ const dir=mkdtempSync(path.join(tmpdir(),'evidence-refusal-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const file=path.join(dir,'original.json');writeFileSync(file,'original');const seal=inventoryEvidence(dir);
+ writeFileSync(file,'changed');
+ const read=()=>evidenceReadOnce('validated-archive',dir,()=>{
+  if(!evidenceUnchanged(dir,seal))throw Error('source-evidence-changed');return 'verified';
+ });
+ withEvidenceReadSnapshot(()=>{
+  assert.throws(read,/source-evidence-changed/);writeFileSync(file,'original');
+  assert.throws(read,/source-evidence-changed/);
+ });
+ assert.equal(read(),'verified');
+ writeFileSync(file,'changed');assert.throws(read,/source-evidence-changed/);
+});

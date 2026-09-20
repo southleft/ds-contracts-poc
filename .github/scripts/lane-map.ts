@@ -83,6 +83,43 @@ export const globPattern = (pattern: string) =>
       .replace(/\/+$/, "")}$`,
   );
 
+/** Walk only directories the configured pattern can still match. In particular,
+ * packages/* never enters private evidence, a consumer's files, or descendants
+ * of a package. A ** explicitly opts into recursive discovery. */
+export function workspaceManifestDirs(root: string, pattern: string): string[] {
+  const segments = pattern.replace(/\/+$/, "").split("/");
+  if (
+    segments.some((segment) => !segment || segment === "." || segment === "..")
+  )
+    throw new Error(`unsupported workspace path ${JSON.stringify(pattern)}`);
+  const matches = new Set<string>();
+  const visited = new Set<string>();
+  const walk = (dir: string, index: number): void => {
+    const key = `${dir}\0${index}`;
+    if (visited.has(key)) return;
+    visited.add(key);
+    if (index === segments.length) {
+      if (existsSync(path.join(dir, "package.json"))) matches.add(dir);
+      return;
+    }
+    const segment = segments[index]!;
+    if (segment === "**") walk(dir, index + 1);
+    const matcher = globPattern(segment);
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (
+        !entry.isDirectory() ||
+        entry.name === "node_modules" ||
+        entry.name === ".git"
+      )
+        continue;
+      if (segment === "**" || matcher.test(entry.name))
+        walk(path.join(dir, entry.name), segment === "**" ? index : index + 1);
+    }
+  };
+  walk(root, 0);
+  return [...matches].sort();
+}
+
 export function collectLaneMap(root: string = process.cwd()): LaneMap {
   const ROOT = root;
   const WF_DIR = path.join(ROOT, ".github", "workflows");
@@ -104,28 +141,9 @@ export function collectLaneMap(root: string = process.cwd()): LaneMap {
   const workspacePatterns = Array.isArray(pkg.workspaces)
     ? pkg.workspaces
     : (pkg.workspaces?.packages ?? []);
-  const packageManifestDirs: string[] = [];
-  const collectPackageManifestDirs = (dir: string) => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      if (
-        !entry.isDirectory() ||
-        entry.name === "node_modules" ||
-        entry.name === ".git"
-      )
-        continue;
-      const child = path.join(dir, entry.name);
-      if (existsSync(path.join(child, "package.json")))
-        packageManifestDirs.push(child);
-      collectPackageManifestDirs(child);
-    }
-  };
-  collectPackageManifestDirs(ROOT);
   const workspaceDirs = new Set<string>();
   for (const pattern of workspacePatterns) {
-    const matcher = globPattern(pattern);
-    const matches = packageManifestDirs.filter((dir) =>
-      matcher.test(path.relative(ROOT, dir).split(path.sep).join("/")),
-    );
+    const matches = workspaceManifestDirs(ROOT, pattern);
     if (matches.length === 0)
       throw new Error(
         `root workspace pattern ${JSON.stringify(pattern)} matches no package manifest`,

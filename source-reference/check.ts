@@ -6,6 +6,9 @@ export interface SourceProfile {
   path: string[];
   /** A painted text witness may live inside a slotted child's shadow root. */
   fontPath?: string[];
+  /** Opt in to an independently observed absence of DOM text and painted glyphs.
+   * Omission retains the original visible-text and actual-font requirement. */
+  textContent?: 'absent';
   /** For a textless labelable control, use its one native associated label.
    * Arbitrary nearby text is never a substitute for this relationship. */
   associatedLabelText?: string;
@@ -25,6 +28,7 @@ export interface SourceObservation {
   width: number;
   height: number;
   text: string;
+  textAbsence?: { status: 'observed' | 'refused'; inspectedNodes: number; problems: string[] };
   associatedLabel?: { text: string; visible: boolean; associated: boolean };
   styles: Record<string, string>;
   tokens: Record<string, string>;
@@ -48,7 +52,17 @@ export function checkSource(profile: SourceProfile, observed: SourceObservation)
   }
   if (!observed.found) problems.push('component-missing');
   if (!observed.visible || !(observed.width > 0) || !(observed.height > 0)) problems.push('component-not-visible');
-  if (!observed.text.trim()) problems.push('text-witness-missing');
+  if (profile.textContent === 'absent') {
+    if (profile.fontPath !== undefined || profile.associatedLabelText !== undefined) problems.push('profile-incomplete');
+    const proof = observed.textAbsence;
+    if (!proof || proof.status !== 'observed' || !Number.isSafeInteger(proof.inspectedNodes) ||
+        proof.inspectedNodes < 1 || proof.inspectedNodes > 10_000 || proof.problems.length)
+      problems.push('text-absence-unverified', ...(proof?.problems ?? []));
+    if (observed.text.trim()) problems.push('unexpected-source-text');
+  } else {
+    if (profile.textContent !== undefined) problems.push('profile-incomplete');
+    if (!observed.text.trim()) problems.push('text-witness-missing');
+  }
   if (profile.associatedLabelText !== undefined) {
     if (!profile.associatedLabelText.trim()) problems.push('profile-incomplete');
     if (!observed.associatedLabel?.associated) problems.push('label-association-invalid');
@@ -65,7 +79,9 @@ export function checkSource(profile: SourceProfile, observed: SourceObservation)
   }
   if (!observed.fontsReady) problems.push('fonts-not-ready');
   const used = observed.platformFonts.filter(f => f.glyphCount > 0);
-  if (!used.length || used.some(f => f.familyName !== profile.fontFamily)) problems.push('font-substitution');
+  if (profile.textContent === 'absent') {
+    if (used.length) problems.push('unexpected-source-glyphs');
+  } else if (!used.length || used.some(f => f.familyName !== profile.fontFamily)) problems.push('font-substitution');
   if (observed.failedResources.length) problems.push('resource-failure');
   if (observed.runtimeErrors.length) problems.push('runtime-error');
   for (const [name, probe] of Object.entries(profile.probes ?? {})) {

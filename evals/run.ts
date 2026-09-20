@@ -2270,7 +2270,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
-    // REST-mapped dump round-trips to the shipping contract (no plugin).
+    // REST agrees with the native fixture; source lowering loss stays visible.
     id: 'design-rest-roundtrip-zero-mismatch',
     claim: 'C5-extraction',
     run: () => {
@@ -2280,6 +2280,26 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       for (const c of ['Badge', 'Card'])
         if (!new RegExp(`\\| ${c} \\| \\d+ \\| \\d+ \\| 0 \\| 0 \\| ✅`).test(receipt))
           throw new Error(`${c} row is not zero-mismatch/zero-degradation`);
+      if (!receipt.includes('Card — source MISMATCH (2)') ||
+          !receipt.includes('**part root max-width** — {size.card.width} missing from proposal') ||
+          !receipt.includes('**part root width** — proposal has {size.card.width}, contract has nothing'))
+        throw new Error('Historical max-width lowering loss was concealed or changed');
+      const fixturePath = path.join(SCRATCH, 'extract/figma/rest/fixtures/card.rest.json');
+      const original = readFileSync(fixturePath, 'utf8');
+      // Neither erasing sizing evidence nor relabelling a width binding as
+      // a ceiling may make the independent native expectation pass.
+      for (const corrupt of [
+        (node: any) => { delete node.absoluteBoundingBox; },
+        (node: any) => { node.counterAxisSizingMode = 'AUTO'; },
+        (node: any) => { node.boundVariables.maxWidth = node.boundVariables.size.x; delete node.boundVariables.size; },
+      ]) {
+        const fixture = JSON.parse(original);
+        corrupt((Object.values(fixture.nodes)[0] as any).document);
+        writeFileSync(fixturePath, JSON.stringify(fixture));
+        const rejected = run(TSX, ['extract/figma/rest/roundtrip-rest.ts']);
+        if (rejected.status === 0 || !/Card: .*MISMATCH [1-9]/.test(rejected.out))
+          throw new Error(`Corrupted native width evidence passed:\n${rejected.out}`);
+      }
     },
   },
   {

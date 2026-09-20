@@ -4610,7 +4610,7 @@ positive and false negative cases in the limitation ledger.
 
 ## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
 
-**Current integration measurement, 2026-09-19.** After merging the current
+**Historical integration measurement, 2026-09-19.** After merging the current
 state-axis and consumer-check changes, fresh REST reads and newly generated,
 installed consumers measure Altitude Badge **10/10**, CBDS Badge **66/72** and
 Altitude Tabs **0/2** on both white and black. All 72 CBDS rows pass white
@@ -5191,7 +5191,7 @@ a clean-consumer application proof. Reverse by removing the application closure
 option and family recording calls; the CLI rule and old evidence stay intact.
 
 
-**Main integration measurement (2026-09-20).** Fresh REST GET-only reads of all
+**Historical main integration measurement (2026-09-20).** Fresh REST GET-only reads of all
 four sets, followed by proposal, dependency generation, clean package installation
 and transparent captures on white and black, retain the unchanged 5% limit.
 Altitude Badge passes 10/10 (maximum 4.825% on either background). CBDS Badge
@@ -5209,20 +5209,6 @@ conflict versions and all new dumps, proposals, generated packages, receipts,
 images and built review consumers are retained under private
 `pr136-main-integration-s0jph0cm/`. No old receipt was rewritten. These are CLI
 integration measurements, not a new application acceptance or a visual grade.
-
-
-**Source-pairing guard (AGENT measurement decision, 2026-09-20).** The final
-integration review planted two contradictory inputs: a contract anchored to a
-different file with the same node id, and two dump sets claiming one anchor.
-The consumer checker previously accepted the first and selected the first match
-for the second. It now refuses conflicting captured file identities, duplicate
-set anchors or names, and a named set that cannot verify the contract's node
-anchor. A legacy input without anchors retains its unique name lookup; absent
-file provenance is not invented. Four genuine captures retain all 96 variant
-names and input combinations and agree on file/set identity. No image, scorer
-or tolerance changed. Reversal: restore the first-match lookup in
-`findDumpSet`; doing so restores the demonstrated source-pairing ambiguity.
-
 
 
 ## D.44 An inferred `<button>` held a `<button>`, and a `<button>` the canvas pads on one side only kept the user agent's padding on the other three — CLOSED as two general rules (final form after two adversarial reviews); a named nesting, refused padding sides and the dead `:disabled` plane on a non-native root stay NAMED
@@ -5449,7 +5435,7 @@ and one with a refusal on record as refused; per-value and logical sides; Tab
 Panel's zeros taken back.
 
 
-**Current main integration measurement (2026-09-20).** After integrating the
+**Historical main integration measurement (2026-09-20).** After integrating the
 landed dependency-closure PR, fresh REST GET-only captures and isolated packaged
 consumers retain the unchanged white-and-black 5% criterion. Tabs has no nested
 interactive-content finding; its width is 441px rather than 453px. Both images
@@ -5653,6 +5639,20 @@ Badge named residual to make its historical failure red again. Replace a pair
 only with a new authenticated observation and reviewed denominator; never
 rewrite the frozen historical lineage to fit a new measurement.
 
+
+**Source-pairing guard (AGENT measurement decision, 2026-09-20).** The final
+integration review planted two contradictory inputs: a contract anchored to a
+different file with the same node id, and two dump sets claiming one anchor.
+The consumer checker previously accepted the first and selected the first match
+for the second. It now refuses conflicting captured file identities, duplicate
+set anchors or names, and a named set that cannot verify the contract's node
+anchor. A legacy input without anchors retains its unique name lookup; absent
+file provenance is not invented. Four genuine captures retain all 96 variant
+names and input combinations and agree on file/set identity. No image, scorer
+or tolerance changed. Reversal: restore the first-match lookup in
+`findDumpSet`; doing so restores the demonstrated source-pairing ambiguity.
+
+
 ## D.47 Re-imports keep the anchored Figma component identity
 
 **AGENT decision (2026-09-19).** The live JSON import walkthrough loaded
@@ -5676,6 +5676,85 @@ missing keys and conflicting file evidence. They qualify identity behavior,
 not visual fidelity. Existing sessions cannot recover an entry already evicted
 by the old rule; import that capture again. To reverse, restore the workspace's
 source/name identity and remove the proposer's anchored-id reuse and file guard.
+
+
+## D.48 Text visibility follows complete captured evidence
+
+**AGENT decision (2026-09-19).** The proposer now applies the existing
+hidden-pattern rule to TEXT parts present in every captured variant. A complete
+pattern that matches a single enum value or a truthy boolean axis becomes the
+existing `visibleWhen` predicate. A uniform explicit BOOLEAN visibility binding
+uses the captured property default through the existing binding rule. No new
+schema vocabulary or visual tolerance is introduced.
+
+The concrete defect was Altitude Checkbox Group: its Label exists in all twelve
+variants but is marked hidden in the six Legend=Hidden variants. The proposal
+previously emitted it unconditionally because only shape parts consumed this
+channel. A synthetic unrelated Notice set demonstrates the same shared rule in
+actual generated React: its caption disappears and returns as the prop changes.
+
+Partial presence can require a conjunction of conditions. That extra visibility
+channel remains named and uncarried, preserving the existing presence result.
+Inconsistent or partially missing property references are named rather than
+choosing the first reference. Always-hidden helpers and uncorrelated or inverted
+boolean patterns remain named limitations. The variant probe separately observes
+descendant paint, text and geometry (D.41 follow-up); that measurement correction
+does not establish that the component's size or visibility is correct.
+
+Reversal: remove the TEXT visibility block in `buildPart` and its test entry.
+The prior unconditional text behavior returns; shape visibility remains intact.
+Keep the before/after consumer receipts as historical evidence. This rule is
+engineering behavior, not V1 acceptance or an owner grade.
+
+
+## D.49 Painted wrappers remain local to their drawn variants
+
+**AGENT decision (2026-09-19).** Wrapper union may synthesize an unpainted
+structural wrapper around matching flat children to preserve their identity.
+It now excludes wrappers that carry fills, strokes, image fills, effects,
+non-unit opacity or bound paint. Copying their channels into a variant that
+never drew the wrapper fabricated paint. The wrapper and flat paths remain
+separate; the existing presence projection gates them from the actual source
+variant observations. Unpredictable presence still follows its existing named
+limitations rather than implying full support.
+
+Altitude Checkbox's focus-only wrapper exposed this defect: its blue focus ring
+appeared in the generated Default variant. A separate Notice probe with one
+caption directly in Plain and inside a painted Ring in Ring proves the generic
+rule in generated React: exactly one caption remains visible, and the wrapper
+exists only in Ring. Fill and opacity probes establish the same boundary; an
+unpainted structural wrapper still folds. No new schema or tolerance is used.
+
+Reversal: remove the painted-candidate guard from `foldWrapperUnion` and the
+wrapper-paint probe. Preserve existing receipts; do not rewrite historical
+results. This addresses fabricated wrapper paint only; fixed geometry capture
+and other design-led content gaps remain separate.
+
+
+## D.50 REST carries explicit fixed manual-box dimensions
+
+**AGENT decision (2026-09-19).** REST dump grammar 1.37 fills a capture gap
+using the existing `fixedSize` channel. Only in-flow children of an auto-layout
+parent that are not themselves auto-layout, text, instances, roots or captured
+shapes qualify. An axis must explicitly declare FIXED sizing; absent, HUG and
+FILL dimensions are not inferred. A rotated box requires both axes fixed.
+Finite nonnegative bounding-box dimensions are carried exactly, without rounding
+or an epsilon that erases a small rotation. The existing proposer and token
+lowering consume these facts; no component-specific behavior is added.
+
+The live read-only REST response for Altitude Checkbox's manual indicator
+explicitly declares FIXED on both axes and an 18 by 18 box. Previously REST
+captured neither dimension, leaving a border-sized box in the generated React.
+The plugin route captures the same class and now also writes grammar 1.37,
+carrying fractions exactly and rejecting incomplete fixed axes at any nonzero
+rotation. Old observations must not be treated as comparable 1.37 observations
+without a fresh read. Fixed auto-layout child geometry remains its separately
+named limitation; this rule does not admit arbitrary observed dimensions.
+
+Reversal: remove the fixedSize mapping block and restore the REST capture-gap
+note, then bump the grammar for that changed projection and re-observe affected
+sync baselines. Preserve old dumps and consumer receipts. This is an engineering
+capture rule, not an owner qualification or a widened fidelity tolerance.
 
 
 ## D.51 Comparable node alpha and contrasting-background measurement
@@ -5707,3 +5786,1634 @@ Reversal: restore ordinary opaque screenshots and remove the additional black
 comparison in `design-consumer-check.ts`; the original white-default scorer
 remains available. Such a reversal restores the known measurement errors and
 must not turn those historical results into acceptance evidence.
+
+
+## D.52 Paint coverage on visibility-gated parts
+
+**AGENT decision (2026-09-19).** A part's absent variants can close token
+coverage only when the emitted part's own `visibleWhen` predicate excludes
+those variants. The Figma proposer attaches complete canonical tuples after
+building that predicate. Unconditional majority-presence fallbacks and unknown
+or incomplete conditions supply no absence proof.
+
+The token classifier admits single-axis or two-axis values only when every
+drawn tuple is observed or proven absent. Partial tuples, contradictory absence
+claims and missing visible observations retain the refusal. Fully measured pairs
+still take precedence. Supplied leaves use the lowest declared observed tuple,
+independent of source order, and receipts distinguish absent parts from variant
+combinations the set never drew. No threshold, schema or component-specific
+conversion rule changes.
+
+The defect appeared in Altitude Checkbox: its flat indicator is absent in Focus,
+where a separate focus wrapper contains the indicator. Requiring a border color
+on the absent flat part discarded the measured Default/Disabled/Hover/Error
+colors and React painted its default black border. A separate synthetic Signal
+family proves the same rule through generated React, including four distinct
+border colors across two axes. Adversarial probes remove visible observations,
+truncate an absence tuple, omit a third-axis plane, contradict an absence and
+reverse input order. A missing visible tuple initially passed and caused the
+complete-account requirement above.
+
+Reversal: remove the post-build absence annotation in `buildPart` and restore the
+previous token coverage rule. Preserve before/after app archives and measurements.
+This engineering rule alone does not establish visual acceptance of the family.
+
+## D.53 Direct React forwardRef source declarations
+
+**AGENT decision (2026-09-19).** The static reader recognizes an immutable
+component export initialized by a direct imported React `forwardRef` call with
+one inline function or arrow callback. Its complete export declaration remains
+the source identity; public props come from the installed wrapper signature,
+and root/children facts come from that callback. It records the wrapper by name.
+The source is never executed by the reader. The existing renderer observer joins
+the real exported object to its host; a Chromium probe verifies that the ref
+reaches the host and caller content remains caller-owned without changing pixels.
+
+Lookalike factories, computed factory accesses, mutable exports, indirect factory
+or callback aliases, escaped namespaces and reassigned factories remain refused.
+Type-only exports and interfaces are excluded from runtime component discovery;
+unsupported value exports retain their named refusals. Existing ordinary
+function declarations and arrows retain their original representation.
+
+This reads installed Radix Button, BaseButton and Switch declarations, but does
+not qualify their native conversion. Runtime JavaScript still needs an
+authenticated relationship to its separately distributed TypeScript source;
+BaseButton's transformed/conditional children and Switch's authored primitive
+remain unresolved by the existing content rules. No runtime-module alias,
+component-specific override, ownership relaxation or native write is introduced.
+
+Reversal: remove the direct-wrapper reader and optional wrapper fact, restoring
+`component-function-unresolved` for these declarations. The type-only filter can
+be reverted separately, restoring the incorrect runtime-component refusals for
+interfaces. Preserve the diagnostic and live journey evidence; these source
+facts are not release acceptance.
+
+
+## D.54 Workspace discovery follows configured paths
+
+**AGENT decision (2026-09-19).** Lane discovery walks only paths that can still
+match a configured workspace pattern. A single star matches one directory;
+a double star explicitly permits recursion. Symbolic links, node_modules and
+.git remain outside traversal, and parent-directory escapes are rejected.
+Explicit workflow prefixes continue to load their own package manifest.
+
+The integration lane previously recursed into an unrelated preserved consumer
+review tree and failed four checks with ENAMETOOLONG. The configured packages/*
+workspace never includes that evidence. Bounding discovery by the configuration
+preserves every configured package and avoids reading unrelated content; it
+adds no gate exclusion and changes no protected private artifact.
+
+Reversal: restore recursive manifest discovery in lane-map.ts and filter its
+results afterward. Preserve private evidence even if that traversal fails.
+
+
+## D.55 Consumer images align by recorded layout origins
+
+**AGENT measurement decision (2026-09-19).** The clean-consumer instrument
+records the browser root's document bounds and PNG hash, plus Figma layout and
+render bounds with PNG hashes. REST node snapshots bracket image retrieval and
+must retain the same file version, modification time, node identity and node
+contents. Missing or changed facts, unexpected image spans, non-unit scale and
+fractional required translations refuse by name. A native render extending
+beyond the browser's captured layout box remains unqualified.
+
+After integer translation by those origins, both images use one common crop
+covering every nonzero-alpha pixel on either side. There is no image search,
+resampling, independent ink alignment or added transparent padding. Both
+unmasked white and black comparisons must satisfy the unchanged 5% limit with
+the existing pixelmatch threshold 0.1. Historical independent alpha-trim scores
+and text-mask diagnostics remain in every receipt; frozen scorers and evidence
+are unchanged.
+
+Evidence: the app-delivered CheckboxGroup package remains byte-identical at
+SHA256 d38a3829fc911ea8e26d1fba2ffbcb6ed6e66bc0e69e3ea323d3d72b02716ab1.
+Its browser's first ink begins at y=3 and Figma's at y=4, although both recorded
+layout origins are integral and matching checkbox geometry shares the same y.
+Independent trims move that geometry. Fresh bracketing REST snapshots are
+byte-identical. The common-crop measurement passes all 12 variants on both
+backgrounds (maximum black 4.263799%), while the three historical shown-column
+black scores remain 5.455–5.749%. The common crop, dimensions and translations
+are recorded per case; no font substitution was used.
+
+Adversarial controls keep a real one-pixel geometry shift over the limit, prove
+transparent padding cannot dilute a score, preserve faint paint in the crop,
+expose missing white paint on black, and reject stale hashes, changed file
+versions, changed nodes, missing bounds, fractional origins and impossible PNG
+spans. These controls establish the instrument, not complete V1 acceptance.
+
+Reversal: remove the recorded-frame instrument and restore historical
+independent-trim verdicts. Preserve both measurements and their immutable
+receipts. Do not reclassify earlier frozen evidence using this decision.
+
+
+## D.56 Native exports need an explicit raster coordinate model
+
+**AGENT measurement decision (2026-09-19).** A controlled Scratch experiment
+exported four identical editable 32 by 18.390625 frames at canvas phases 0,
+0.25, 0.5 and 0.75. All eight scale-one PNGs (default export and explicit
+useAbsoluteBounds) were byte-identical 32 by 19 images. Thus floor/ceil of
+absolute canvas bounds does not describe these node-local exports. The probe
+contains no shadows, text or rotation and does not establish those mappings
+or the REST image route. Native structure and the unobstructed Desktop canvas
+were inspected; no existing product node changed.
+
+The declared Switch cohort's existing aligned refusals remain. Its browser
+captures also have genuinely fractional layout origins, so correcting only the
+native origin would not establish an integer alignment. New comparison work
+must measure each producer's raster origin explicitly; it may not resample old
+PNGs or search for a better alignment. The earlier images, scores and refusals
+are retained. D.55's successful consumer comparisons use integral recorded
+origins; this experiment does not replace their source evidence.
+
+Reversal: retain the original absolute-span interpretation only if broader
+controlled exports establish it for the actual capture route. Preserve the
+probe and require matching capture-phase evidence before qualification.
+
+
+## D.57 Non-layout stroke compositing still has a measured residual
+
+**AGENT engineering decision (2026-09-19).** The CBDS Badge consumer remains
+66/72 under both unmasked comparison backgrounds. Six small rounded outline
+variants exceed 5% on black. The inset-shadow spelling preserves layout but
+composites stroke and fill edges differently from native Figma. A controlled
+browser-only substitution of a real border, subtracting its width from all
+four paddings, preserved root and label geometry exactly for all 72 cases and
+measured all 72 below 5% (maximum black 4.427083%). That diagnostic is not the
+delivered component and does not qualify the product.
+
+Do not replace the shared stroke rule with that substitution without proving
+the general behavior: padding smaller than a stroke, caller width overrides,
+token changes and code-to-contract recovery can invalidate the compensation.
+An isolated pseudo-element paint layer also improved the worst measured case
+without changing its geometry, but introduces containing-block and stacking
+semantics that likewise need independent qualification. An additional inset
+fill layer did not change the residual; clipping the root did not pass both
+backgrounds. These experiments justify continued implementation work, not a
+tolerance change or a component-specific exception.
+
+A later closed-text-only probe did not establish a safe pseudo-element rule.
+Adding `position: relative` activated a caller's previously inert `left: 8px`
+and `top: 3px`, moving both the root and its text. A caller's explicit
+`position: static` instead left the 180 × 100 ancestor as the stroke's
+containing block, although the component remained about 76 × 20. Limiting
+the content tree to text does not solve these override semantics. No lowering
+was adopted; evidence: `private/closed-stroke-boundary-18t8o8z2/`.
+
+Reversal: replace the inset stroke only with a shared lowering whose layout,
+paint, caller overrides and reverse extraction are demonstrated by adversarial
+cases and a fresh app-delivered consumer. Keep the diagnostic and original
+archive measurements separate.
+
+
+## D.58 Visually identical source variants cannot prove a prop was discarded
+
+**AGENT measurement decision (2026-09-19).** The clean-consumer check still
+switches every variant-bearing cell and records every changed subtree. An
+unchanged cell is no longer called a discarded prop when exactly one source
+counterpart holds all other props and the interaction fixed, both distinct
+native nodes have identical PNG bytes, their recorded layout sizes and relative
+render bounds match exactly, and both PNG hashes match the authenticated frame
+records. File-version and node snapshots must remain unchanged across export.
+
+The receipt names these source-equivalent transitions separately. They prove
+only that unchanged paint is expected; they do not prove that the component
+consumed the prop or implements interaction semantics. Missing or ambiguous
+counterparts, missing frames, stale hashes, different dimensions or offsets,
+invalid images, and even a one-pixel low-alpha source difference preserve the
+discarded-prop failure. No tolerant image score participates in equivalence.
+
+Evidence: all six standalone Checkbox Hover/Default source pairs are
+byte-identical. The unchanged app-delivered archive (SHA256
+88ad4959448f4d41d71d16e562d5d9b04953d4f914f5e9af8f14d00fbc5a7cfc)
+changes all 14 remaining state transitions and retains all six equivalent ones.
+Its fresh consumer remains unqualified: 13 hidden-label comparisons refuse the
+native export-span assumption and 13 shown-label comparisons exceed 5% on black.
+The older seven passing historical comparisons remain in their receipt.
+
+Reversal: remove the exact-equivalence adjudication, restoring the unconditional
+change assertion and its known false positives. Preserve original receipts,
+source PNGs and all failing visual comparisons.
+
+
+## D.59 Explicit full-bounds REST exports carry a local raster origin
+
+**AGENT measurement decision (2026-09-19).** New consumer comparisons request
+scale-one PNGs with contents_only=true and use_absolute_bounds=true. The
+[Figma endpoint documentation](https://developers.figma.com/docs/rest-api/file-endpoints/)
+defines the latter as retaining the node's full dimensions, including empty
+space. The receipt records those settings and a versioned raster model. Its
+native layout origin is (0,0), with PNG dimensions ceil(width) by ceil(height).
+This is an explicit producer contract, never inferred from a convenient image
+size. Earlier receipts without the model retain their original interpretation.
+
+The Scratch control in D.56 was repeated through REST: all eight PNGs across
+four canvas phases and two bounds settings were byte-identical within that
+route, with unchanged before/after node snapshots. REST and plugin pixels
+differ, so their bytes remain separate evidence. Both routes demonstrated
+phase invariance for the controlled frame; neither result licenses resampling.
+
+Adversarial controls preserve a real one-pixel content shift despite empty
+layout space and reject fractional browser origins, unexpected pixel spans,
+unknown raster models and native render bounds extending outside the captured
+layout. The common nonzero-alpha crop and both unmasked 5% comparisons stay
+unchanged. No image search, translation selected by score, or threshold change
+is introduced.
+
+Fresh app-archive consumers retain Altitude Badge 10/10, CBDS Badge 66/72 and
+Checkbox Group 12/12. Standalone Checkbox now measures all 26 cases without a
+framing refusal; 7/26 pass both backgrounds. Its glyph and rendering failures
+remain visible. Every archive hash matches the earlier app delivery.
+
+Reversal: remove the explicit export request and raster model together, keeping
+the old absolute-span refusals. Preserve both sets of receipts and their source
+images; do not reinterpret historical PNGs as explicit full-bounds exports.
+
+
+## D.60 Closed filled paths retain variant geometry; qualification remains pending
+
+**AGENT decision, 2026-09-19.** The standalone designer Checkbox loses its
+check and minus glyphs because arbitrary VECTOR geometry had no carrier.
+REST GET with `geometry=paths` established that these are single-solid filled
+paths, with no stroke or effect. Dump v1.38 captures that bounded class through
+both REST and the plugin. It preserves path bytes, winding rule, intrinsic
+size and unrotated relative-transform placement; unsupported syntax, missing
+geometry, multiple fills, effects, strokes and non-identity transform axes
+keep the vector-geometry refusal.
+
+The additive `shape.kind: path` grammar carries one compound closed absolute M/L/C/Q/Z
+path and NONZERO/EVENODD winding rules. A complete enum-conditioned geometry
+map keeps differing glyphs and dimensions explicit. Code surfaces share an
+encoded SVG mask with the existing fill/opacity channels. Native output uses
+editable VECTOR nodes and refuses an unexpected intrinsic size before any
+resize; it does not approximate curves. Input length, command count and
+coordinates are bounded. XML, relative commands, arcs and open contours are
+refused. A geometry map cannot silently freeze an observed differing path.
+Unobserved values receive a base geometry only when an exact ancestor presence
+gate makes that value unreachable; the proposal names this non-rendered
+completion. Responsive SCALE constraints are not established by this work.
+
+Nested presence is evaluated within the domain of an exactly gated parent.
+Previously a child present in four of its parent's six variants was counted
+against all twenty-six variants, including twenty where that parent did not
+exist. An unconditional approximation cannot narrow this domain. This is a
+structural rule, with no component-name branch. Fractional path placement is
+carried without the older parametric-shape two-decimal rounding.
+
+Synthetic tests exercise malformed paths, incomplete maps, both React surfaces,
+evenodd paths and nested presence. In authorized Scratch, native VECTOR nodes
+323:4368 and 323:4370 preserve the source dimensions exactly; the bridge was
+closed and the live canvas inspected. Figma normalizes path serialization on
+readback, so byte-identical path round-trip is not claimed. Evidence:
+`private/filled-path-native-probe-2026-09-19-2056/`. This probe is engineering
+evidence; full application delivery and family fidelity remain unqualified.
+
+The consumer observer now includes masks and clip paths: a same-size path-only
+change must be observable. A browser control proves changed pixels at unchanged
+bounds. The image scorer, raster framing and 5% threshold are unchanged.
+
+**Reversal:** remove the path shape fields, both capture branches, shared mask
+lowering, native VECTOR branch and path-specific tests; restore dump v1.37.
+Reverse the parent-domain presence rule separately if needed, retaining the
+omission as a named limitation. Preserve all historical source and consumer
+receipts. The additive source-citation writer (`lowering:check -- --rederive`)
+updates only source locations/text after auditing the result; it refuses
+removed or ambiguous sites and does not alter registered decisions.
+
+
+The first clean-consumer diagnostic retained only 6/26 passing variants:
+the captured glyph was shifted exactly 2px right and down by a CSS border.
+A free Figma FRAME/COMPONENT has no auto-layout stroke inset, so dump v1.38
+now records its effective `strokesIncludedInLayout: false` too (REST omits
+the default NONE layout mode). The existing ring lowering preserves its child
+origin. This is an extension of §D.39, not a padding rewrite. With that rule,
+a second diagnostic passes **13/26**, including every label-hidden variant;
+all thirteen label-shown variants still exceed the black-background limit.
+Both receipts remain in `private/filled-path-consumer-diagnostic-2026-09-19-*`.
+These were direct engine diagnostics, not yet the application delivery journey.
+To reverse this extension separately, remove the non-auto-layout branches in
+both readers and restore their earlier regression expectations; the two-pixel
+child displacement becomes a named limitation again.
+
+The actual generated writer also created a two-variant synthetic set in Scratch
+(page 323:4371, section 323:4372, set 323:4377, editable vectors 323:4374 and
+323:4376). Both native leaves read back at exactly 12×10, including an EVENODD
+cutout. Repeating the same script returned unchanged with no new node IDs;
+the unobstructed canvas was inspected. Evidence:
+`private/filled-path-generated-native-2026-09-19-YSOMnY/`.
+
+Adversarial review found that parent scoping initially removed redundant global
+child gates from a frozen historical contract. Global gates that already explain
+presence now retain precedence; the parent domain is used only when it expands
+expressibility. This preserves the historical contract bytes without rewriting
+the frozen receipt. Bounded controls also refuse a partial geometry capture and
+two-axis XOR geometry, and prevent an unconditional majority parent from narrowing
+the child domain. The native runtime size guard accepts exact/float32 dimensions
+and refuses mismatches without resizing.
+
+A diagnostic on the unchanged labeled consumer localized its 8.515% black score
+to the text box: masking that box leaves 0.309%. Explicit installed Regular font
+bytes leave the score unchanged; antialiased smoothing still exceeds 5% (5.692%).
+Neither is an adopted override. This isolates the remaining rendering gap but
+does not excuse it or establish the source font bytes. Evidence:
+`private/filled-path-label-raster-probe-2026-09-19-8CPGmR/`.
+
+The subsequent application journey imported a fresh v1.38 REST capture, prepared
+the React library, and installed the exact downloaded archive in a clean consumer
+(SHA256 `826073b06963e22fe255ad042255d3c3cbb2d080e7e73569133ed7e34c8d0595`).
+It reproduces **13/26** passing variants: all label-hidden variants pass, while
+all thirteen labeled variants fail on black at 5.503–8.561%; every white comparison
+and framing check passes. Repeat import preserves identical contract bytes and
+the same seven workspace entries. Text and declared prop changes were observed;
+form interaction and accessibility are not qualified by those observations.
+The installed consumer and source/before/after comparison were inspected visibly.
+An initial stale-server schema refusal required restarting the sole Vite server;
+that refusal remains in the evidence. The application journey is preserved in
+`private/design-led-app-2026-09-19-D75s7P2Q/checkbox-filled-path-app.AH5c7m/`.
+No threshold, scorer, source-image bytes or font smoothing override was changed.
+
+Sync REST observations also request <code>geometry=paths</code>; otherwise a
+path-only edit with unchanged dimensions and canvas stamp would be invisible to
+the observed dump fingerprint. A bounded transport probe demonstrates this
+failure without the query and detection with it. Live REST GET re-observation
+refreshes 25 baselines to grammar 1.38, preserving all 128 record identities,
+53 historical adoptions and six unresolved pending dispositions. The four-row
+synthetic drift fixture retains its intentional mismatches. Migration inputs,
+prior ledgers and CLI logs are retained in `private/filled-path-sync-138-4chmmd31/`.
+Reversal must restore the prior observation grammar and baseline records together;
+never compare fingerprints across grammar versions or relabel unresolved drift
+as a successful reconciliation.
+
+
+## D.61 Used CSS sizes retain their exact browser layout units
+
+**AGENT decision, 2026-09-19.** Component-owned fixed width and height in an
+observed React initial-state or owned-child draft now recover the exact browser
+layout unit before token minting. Chromium serializes the 1177/64 px layout size
+as `18.3906px`; writing that rounded string back into CSS produces `18.375px`.
+The native value previously carried that serialization as a float32 number.
+The draft now emits `18.390625px` and native 18.390625 for that observation.
+
+This is exact reconstruction, not a numeric tolerance. The reader accepts only a
+unique 1/64 px value with the observed six-significant-digit serialization; it
+refuses ambiguous large values and strings that cannot establish such a unit.
+Only sizes already proved component-owned and fixed are eligible. Sampled,
+content-derived and unproved descendant sizes keep their existing boundaries.
+The compiler works on copies; sealed captures and source-variable observations
+retain their original bytes. Each recovered size receives a named receipt.
+
+Focused tests cover native values, emitted browser dimensions, descendants,
+ambiguous inputs and immutable observations. Recompiling the authenticated
+nine-state independent Switch archive produces exact 32 by 18.390625 native
+plans. A fresh observation of the declared checked case completed creation
+through the application and companion in Evaluations (`7f0b10e4…`): all nine
+editable mains read back at those exact dimensions. Repeating inspection
+returned the identical 29-node, nine-image result without another creation.
+The plugin was closed and the native canvas inspected. This establishes size
+delivery; the separate guarded visual measurement and its remaining limits
+are recorded in D.62. Evidence is retained in
+`private/native-matched-capture-2026-09-19-uOSM5Q/`.
+
+The older unchecked operation cannot yet receive this correction in place:
+its height variable is bound, and update review refuses
+`native-update-bound-token-change-unsupported`. Re-observation retained its
+existing operation and the duplicate-preparation guard. Fresh creation of a
+different already-declared case does not close that update gap.
+
+Reverse by removing `exactUsedLayoutLength` and the owned-size copy adapter in
+`compileObservedContentSweep`; retain archived receipts and restore the named
+CSSOM replay defect. No pixel threshold or scorer is changed.
+
+## D.62 Guarded matched frames preserve source phase and original evidence
+
+**AGENT measurement decision, 2026-09-19.** A supplemental capture instrument
+now measures a fresh app-created initial-state set without reusing the old
+exports' ambiguous raster origins. `captureTransparentSourceFrame` first
+authenticates the full original PNG. It refuses ancestor opacity, transforms,
+clipping and paint, and component or ancestor blend, filter, backdrop and mask
+dependencies. Only the plain html/body backgrounds are made transparent.
+External siblings are hidden only when the entire component crop remains
+byte-identical; overlapping paint refuses. Component geometry, markup and
+computed styles, including pseudo-elements, must remain exact. Two captures
+must match, paint must fit strictly inside the crop, and the original render
+must return byte-exactly after restoring the capture context.
+
+Native components are copied into persistent transparent frames at the
+source-derived fractional offsets. The original and clone snapshots, bindings,
+resolved modes and root dimensions match exactly; native render bounds stay
+inside integer-origin frames. Exports explicitly use scale one, absolute
+bounds and contents only. Current original readback matches the authenticated
+operation both before and after capture. These are Plugin API frame exports;
+no REST raster model is attributed to them.
+
+The new `recipe/evidence/react-native-matched-capture/` records all nine states
+of operation `7f0b10e4…`: maximum white mismatch 4.167%, black 2.399%, all below
+the unchanged 5% limit. `npm run react:native:declared:check` recomputes the new
+measurements alongside the unchanged historical family evidence. The new
+recorder authenticates the complete operation chain, source inventory and
+state-to-native pairing without inventing origins for the earlier unframed
+PNGs. It only writes a new output directory. Instrument and image hashes are
+pinned; changed geometry, coverage, bytes, capture spans or sibling contribution
+refuse. A one-pixel movement can pass the existing pixel score, so exact root
+geometry remains an independent gate. This does not establish pixel identity:
+transparent compositing can differ from direct opaque rasterization by one
+channel value.
+
+The application’s **Review recorded matched frames** reauthenticates the
+operation and source pin, recomputes the scores, and shows both backgrounds at
+original image size. The nine-row view was inspected live. It describes a
+recorded baseline and performs no Figma write or current canvas inspection.
+Frame preparation remains operator-run. Runtime behavior, the rest of the
+independent family, and bound height-variable updates remain unqualified.
+Live evidence is in `private/native-matched-capture-2026-09-19-uOSM5Q/`.
+
+**Caller-content extension, same AGENT decision.** The recorded app review also
+supports an authenticated comparison operation and its neutral presentation
+frame. It joins the sealed source PNG and ownership pin to the operation's
+readback and checks the image-to-node pairing. The wrapper must contain exactly
+one unchanged instance at the same origin and size, with no paint, clipping,
+padding, extra children, transform or variable-mode change. The existing
+slot-identity resolver handles Figma's settled descendant IDs; metadata,
+topology, properties and images remain exact. Text properties and instance
+properties are included in clone validation.
+
+The composed Alert (`59f1c1b7…`) measured **3.064% on white / 3.100% on black**,
+360 × 68 on both sides. New evidence lives in
+`recipe/evidence/react-native-matched-content/`; the app's one-pair review was
+inspected live. Its first clone check refused while Figma settled layout.
+No recapture allocation was made: a later read-only check found identical
+snapshots, and two exports matched exactly. Original readback was unchanged
+before and after. The preserved private evidence is
+`private/native-family-remaining-2026-09-19-owpib5w3/`.
+
+The same source instrument recorded the current Badge and its actual painted
+Inter font. Its 43.875 px source width disagrees exactly with the historical
+44 px native width; that old operation also belongs to an earlier source
+reference. Neither a passing pixel score nor identical PNG bytes authorize
+borrowing a new source pin or rounding the width. This remains unqualified.
+The review's date names when the baseline operation was observed, not when
+its later supplemental frame was captured.
+
+Reverse by removing the supplemental capture instrument, its application
+review and its added check invocation; retain the new and historical evidence
+and restore the named measurement gap. The existing scorer, tolerance and
+historical refusal receipts are unchanged.
+
+
+## D.63 Native auto-width text and fractional source width
+
+**AGENT decision, 2026-09-19: preserve editable auto-width behavior and keep the
+exact-dimension refusal.** The retained Badge comparison has a 26px native text
+box and a 44px root, while the current React source root is 43.875px. An isolated
+clone in Evaluations tested a fixed 25.875px text box, preserving font, size,
+line height, paint, spacing and bindings. Its root became exactly 43.875px, but
+its rendered label clipped from “New” to “Ne”. A longer text edit kept the same
+root width and clipped too. Restoring native auto-width restored the complete
+label and 44px root. Matching the observed dimensions by fixing this text box
+would therefore lose both content and its intrinsic resizing behavior.
+
+A separate source-font probe on 2026-09-20 used a uniquely named local font
+whose glyph, metric, shaping and variation tables match the pinned source
+WOFF2; only naming and the font checksum changed. Chromium rendered the
+original and renamed fonts identically. In Figma, both the existing Inter
+face and the source-table copy still gave “New” a 26px auto-width box, against
+25.875px in Chromium. For “New message”, the source-table copy measured 82px
+in Figma and 81px in Chromium. Matching font tables alone therefore does not
+establish exact native text layout. Only a new diagnostic page in Evaluations
+was written; the original font, source and native operations were unchanged.
+No font mapping or converter rule was adopted. The font manifest, native IDs,
+matched frame exports and unobstructed canvas are retained in
+`private/source-font-probe-msuhjmza/`. Direct text exports cropped to ink were
+excluded from cross-surface pixel comparison; identical 100 × 32 frame crops
+replaced that diagnostic measurement.
+
+No converter rule or tolerance changed. The original component, variables and
+operation journal were untouched; the clone was restored, its native structure
+recorded and the unobstructed canvas inspected. Private evidence:
+`badge-text-width-probe-kap69tf2/` (script, four snapshots/exports and canvas
+screenshot). This diagnostic uses the retained older-reference comparison;
+it does not authenticate a new comparison against the current React reference.
+The Badge remains unqualified. To revisit the decision, demonstrate a general
+native text rule that preserves the complete label, exact source dimensions and
+subsequent text edits, then remeasure through a current authenticated operation.
+
+
+## D.64 A later parent read must not strand a verified correction
+
+**AGENT decision, 2026-09-19: recover the correction's pinned parent observation
+from its validated journal, then require a fresh contextual read before reuse.**
+Earlier versions allowed reading an operation's creation plan after a correction
+had changed its native nodes. That read correctly disagreed with the old plan,
+but also replaced the journal fingerprint used to authenticate the correction.
+The retained Button family was stranded despite its intact correction records.
+
+Only written correction history may select a saved parent fingerprint. The
+reader validates the complete current journal and then retrieves the matching
+prefix; the original input and receipt must pass their normal checks. A missing
+pin, unfinished read, malformed chain or suffix containing anything beyond
+component readbacks and their results/abandonments refuses. Unapplied proposals
+still authenticate against the latest parent. Current source, desired
+compilation, correction predecessors and write preflight remain independently
+checked. No historical file is rewritten.
+
+Recovering a prefix alone is insufficient: a later parent read may reveal real
+canvas changes. Before a corrected component can be reused, a new independent
+update read must match the verified correction and record the current parent
+journal revision in its host-owned dispatch. Another parent change during or
+after that read invalidates reuse. A differing native value refuses normally.
+Old readbacks remain historical until refreshed. The application uses its
+existing **Inspect update again** action; this never repeats the write.
+
+The real Button parent `e9bd4394…` has twelve events. Its first ten reproduce
+the correction's exact saved fingerprint; the last two are a later read and
+result. A read-only host probe recovered input and baseline receipt byte-exactly,
+without changing any parent file, and authenticated the unchanged shadcn source
+`0907e10c…`. Adversarial probes cover corrupted headers and later events,
+unavailable pins, pending reads, source drift, stale unapplied plans, changed
+native values and a parent changing while readback is in flight. Private
+evidence: `native-parent-baseline-recovery-tsv6lvyo/`.
+
+Reverse by removing historical parent selection and the contextual read marker
+from update planning and reuse authentication. Keep all journal events and
+restore the named recovery gap. Do not delete later observations or replace the
+original correction baseline.
+
+Live application verification used **Inspect update again** on correction
+`c620c0e9…` in Evaluations. Its contextual read returned **191 nodes and 63
+images**, matching all previous node values, token data and PNG bytes. The
+new image records add export bounds. The current source and correction
+authenticate again. The update still has one write dispatch; recovery appended
+only two read/result pairs. The parent remains twelve unchanged events.
+The companion was reconnected after the development server reloaded, and the
+source page's expensive refresh delayed requests; both interventions are
+recorded. The plugin was closed and the existing 63-component set inspected
+on the live canvas. This restores the correction chain's supported read/reuse
+path, not the family's still-missing image and interaction qualification.
+
+
+## D.65 Native review reuses evidence only within one response
+
+**AGENT decision, 2026-09-19: combine the moved/current operation display scopes
+and reuse their checked proposal lists and source-content records.** CPU
+profiling found repeated journal verification, canonical hashing and sealed
+content reads in a native listing. A synchronous display may share isolated
+copies of those results until it returns. Nothing is retained for a subsequent
+request; prepare, dispatch, acknowledgement and redelivery refuse within that
+scope and independently authenticate outside it. No verification, source file,
+journal entry or operation is omitted.
+
+With filesystem writes denied, the same retained shadcn listing returned
+424,024 identical bytes before and after: 32.7 seconds initially, 22.7 after
+combining scopes, and 17.4 after reusing proposal/content reads. The independent
+family returned the same 80,333 bytes in 7.8 versus 7.0 seconds. These single
+local measurements include the existing private history and are not a latency
+guarantee. The server remains synchronous and can delay companion requests.
+The app's existing Alert review was reopened and visually inspected after the
+change; its historical scores and qualifications are unchanged. Private evidence:
+`source-review-read-cost-3c5oumcb/` (write-denying harness, CPU profiles, response
+hashes and app screenshot).
+
+Adversarial checks mutate caller copies, source files and proposal records,
+verify refusal after the response ends, and reject mutation inside either
+snapshot scope. Reverse by separating the two route scopes and removing the
+proposal-list/source-content wrappers; retain the freshness and write guards.
+
+**AGENT refinement, 2026-09-20:** the same display scope now also retains a
+plain `Error` refusal from a checked read. Historical operations otherwise
+repeat the same unsuccessful source authentication within one response. Each
+caller receives an isolated error; custom exception fields, subclasses,
+causes and uncloneable values are not reused. Both evidence and journal scopes
+discard successful and failed reads on return or error. Write authorization
+still runs outside either scope and reads fresh evidence.
+
+The later independent-family history returned the same 112,792 bytes in two
+uncontended probes: 11.59/11.55 seconds before and 9.71/9.84 after. Initial
+requests overlapping source reload or tests are retained separately, not
+included in that comparison. This remains a synchronous request, not a latency
+guarantee or a new companion-recovery result. Evidence:
+`review-failure-reuse-c8g88f1b/`. Reversal: stop retaining failed reads in the
+shared snapshot helper; keep successful-value isolation and all write guards.
+
+
+## D.66 Returning native fixed controls preserves dimensions and independent axes
+
+**AGENT decision, 2026-09-19:** preserve an existing singleton token map when
+expanding an omitted-prop token placeholder, and preserve a bound root width
+when every observed plane is FIXED and non-FILL. A separate maxWidth binding
+remains a separate maximum. Horizontal, vertical, grid and non-auto-layout
+frames use their own width axis. HUG, FILL, mixed or unknown sizing retains the
+historical max-width mapping with a review note; this change does not qualify
+those cases.
+
+**AGENT correction, 2026-09-20:** the fixed-width rule also requires a finite,
+positive measured width on every plane. A legacy capture with no bounding box
+does not establish that evidence. The reference-site replay exposed the missing
+guard as two Card width/max-width disagreements; the same failure reproduced on
+the unchanged preceding commit. Requiring the measurement restores all three
+legacy round-trip rows without rewriting their receipts and leaves the measured
+fixed-control rule intact. Missing, zero, negative and nonfinite widths retain
+the review path. Reverse by removing this measurement guard and its negative
+cases; the legacy replay will report the disagreement again.
+
+The app-created independent Switch exposed both general defects on return.
+Its bound on-state paint disappeared when disabled opacity expanded into a
+second map. Its fixed 32px width became max-width, shrinking the installed
+consumer to 18px. The same unchanged plugin dump, reimported through the app
+and prepared as a fresh React archive, now mounts all nine planes at exactly
+32 × 18.390625 and carries both state maps. Two three-cell variant probes
+change actual paint/geometry. The package is installed in an isolated consumer;
+no component style is overridden. Native nodes and variables are unchanged.
+
+The clean-consumer case reader now mounts an explicitly declared omission
+plane with an absent prop, rather than reporting it as unmapped. A label alone
+does not declare omission. The image verdict remains refused on all nine rows:
+the native shadow extends outside the current layout-only consumer capture.
+No scorer or 5% threshold changed. The generated button also has no switch role
+or recovered click behavior, so this is not a qualified stateful return journey.
+The REST capture cannot recover the bound thumb dimensions with the existing
+token scope; the plugin capture retains eleven resolved variables. Capture
+execution and file upload remain manual engineering steps.
+
+A separate matched-frame consumer check includes the shadows: **9/9** corrected
+rows pass the unchanged 5% image limit (maximum **4.167% white / 2.273% black**),
+versus **0/9** before the fixes (maximum 42.929%). Actual app archives are
+installed in separate clean consumers. Host frames retain the previously
+recorded native root phase; repeat full-page screenshots are identical and no
+consumer paint lies outside each frame. A fresh native read proves original
+mains, capture clones, frame bounds and PNGs identical to the earlier record.
+The live review and installed consumer were both inspected.
+
+This does not establish exact descendant geometry: native thumb y is
+1.1953125, while the returned browser thumb is 1.1875. The invisible root-after
+rectangle also differs in offset and rounded height. These are named geometry
+gaps; passing images does not excuse them. Root size and phase alone match
+exactly. Captures and comparison remain operator-run, and stateful semantics
+remain unqualified.
+
+Adversarial checks cover singleton/array collisions, shared and independent
+axes, nested parts, reversed native row order, two omitted boolean axes,
+separate maximums and FILL/HUG/mixed/unknown nonpromotion. Evidence:
+`independent-native-return-qz7pgw9f/` (unchanged native captures, original/fixed
+app contracts, exact archives, clean-consumer receipts and closed-plugin canvas).
+Reverse by restoring the previous map expansion, bound-width translation and
+consumer omission handling; retain these records and name the restored losses.
+
+
+## D.67 Callback inspection retains restored candidate refusals
+
+**AGENT decision, 2026-09-19:** a type-compatible input that removes the
+selected root or prevents keyboard focus no longer stops every later input
+from being inspected. The probe registry must be present and empty, and the
+host must independently verify original source, render and ownership before
+continuing. A failed restoration, changed role or identity, unsupported state
+or instrument failure still stops the sweep. Both activation paths must finish
+before a value contributes relationship rows.
+
+This is diagnostic continuation, not behavior qualification. Every recovered
+refusal remains in the overall problems list and has its callback, input,
+value and reason displayed in the app. The contract projector still rejects
+an incomplete observation. No input is excluded by its name.
+
+The independent Switch app rerun retained **42 activation trials** across
+twelve compatible properties, versus two trials before this change. It
+observed `checked` as controlled and `defaultChecked` as initial-only.
+`asChild=true` removed the root; `hidden=true` and `inert=true` prevented
+keyboard focus. All three remain refusals. Every one of 68 independent
+restoration checks matched the original same-mount image, and source and
+ownership were restored. The report was inspected in the application.
+
+The complete behavior inspection remains failed. Generating and installing
+the behavior, qualifying its appearance and label composition, and preserving
+it through native metadata remain unfinished. Private evidence:
+`callback-candidate-isolation-nmtqn4yw/` (sealed report identity, summary and
+visible app result). Bounded probes cover disappearance during live and fresh
+mounts, inert focus, failed restoration, role changes and incomplete projection.
+Reverse by restoring the whole-sweep abort and removing the refusal display;
+keep these records and report the lost observation coverage.
+
+
+## D.68 A separate check observes simultaneous state inputs
+
+**AGENT decision — bounded source observation, not full API qualification.** A
+restored callback sweep can identify one controlled input and one initial-only
+input even when an inherited input cannot be rendered or focused. The broad
+sweep stays failed. Its identified relationships only propose another,
+independently recorded experiment; a refusal involving a selected input,
+identity, instrumentation or restoration cannot authorize that experiment.
+
+The application now offers **Verify state inputs together**. For the observed
+Boolean state pair and, when present, one behaviorally observed disabled input,
+it tests every combination of omitted, false and true. Other compatible inputs
+are explicitly listed and held omitted. Each combination exercises a live
+input update, fresh-mount precedence, two keyboard activations and two actual
+associated-label activations. Callback arguments, controlled-state retention,
+uncontrolled transitions and disabled suppression must agree. Every probe
+requires exact original tree, ownership and screenshot restoration on the same
+mount before replaying and verifying the unchanged original again.
+
+The independent Switch app run completed **54 activation trials and 81 exact
+restoration checks** across 27 combinations. Its nine excluded inputs are
+listed in the UI; the earlier three refusals remain visible. Repeating the app
+action returned the same sealed record and left one job directory. Evidence:
+private `callback-candidate-isolation-nmtqn4yw/`, including the first/repeat
+record hashes and `state-api-app-complete.png`. This qualifies the recorded
+source-input experiment only. Generated behavior, all excluded inputs, native
+behavior metadata, interruption recovery and the stateful round trip remain
+unqualified.
+
+Each request pins the source archive, both input records, the derived matrix
+and observer files. Reopening authenticates all files, live source, complete
+transition semantics and restoration counts. Tampering, duplicate trials,
+altered callback history, changed source and caller-supplied request bodies
+refuse. Earlier records are immutable. Reverse by removing this separate
+inspection action and store; retain its saved evidence and the original broad
+callback refusals. Do not relabel those earlier observations as successful.
+
+
+## D.69 Observed Boolean state inputs project into the existing toggle model
+
+**AGENT decision — preserve typed inputs and predicates.** The separate,
+authenticated simultaneous-input experiment in D.68 can supply a generated
+state draft. It must match its authenticated appearance record, source instance,
+complete transition matrix and restoration count. This does not promote the
+failed broad callback sweep or admit its excluded inputs.
+
+The appearance's Boolean initializer becomes an enum with canonical `false` and
+`true` options mapped to actual Boolean code values. The observed controlled
+and initial-only public names remain distinct. Boolean visibility and style
+conditions become explicit `equals: "true"` membership, so the string `false`
+cannot become truthy. An observed disabled input uses the model's canonical
+`disabled` semantic while retaining its source public name and appearance
+references. Existing role/attribute conflicts, unsupported composition, missing
+input evidence and corrupted transitions refuse. No schema or emitter rule is
+changed by this projection.
+
+The app's **Try the generated state control** embeds only emitted React and a
+normal consumer. Controlled, initial and disabled values can each be omitted,
+false or true. In the independent Switch app run, all **54 input/action trials**
+matched the recorded source states and callback values. Additional live actions
+confirmed that changing an initializer leaves mounted state unchanged, an
+uncontrolled control toggles, a caller can hold its value while receiving the
+next value, and a caller can accept that callback as a new controlled value.
+The current source experiment completed 81 exact restorations; repeating it
+reused one sealed record. Private `callback-candidate-isolation-nmtqn4yw/`
+contains the immutable input, live trial rows, additional actions, repeat hashes
+and inspected `state-api-generated-live.png`.
+
+This is **embedded generated-consumer behavior evidence**. It is not an isolated
+package-install result or a visual qualification. The consumer supplies its own
+label; source fonts, excluded inputs and native behavior remain unqualified.
+The earlier private native compile dropped the initializer binding and retained
+the callback toggle only as a code-only fact. D.70 adds a bounded metadata return,
+but the live stateful native journey remains an explicit product gap. Reverse by removing this projector and preview; retain
+the source experiment and all earlier broad refusals.
+
+## D.70 Retained state inputs survive a bounded native metadata return
+
+**AGENT decision — version the existing typed-axis envelope.** Checked controls
+with one typed controlled/initial input, one root next-value callback and an
+optional Boolean disabled variant retain those declarations inside version 2
+of `codeValueAxes`. The reader checks the non-executable contract fragment,
+semantic stamp, typed values, native property definitions and every Cartesian
+variant before restoring the initializer and callback. This is retained API
+metadata; drawn variants do not establish native interaction behavior.
+
+Malformed metadata, a changed or missing state, conflicting native semantics,
+unsupported composition and disagreement between the typed-axis and state
+fragments refuse. A writer with this metadata refuses any in-place removal or
+reinterpretation before touching the target. A matching version 1 typed axis
+can acquire the declaration. Older writers already refuse unknown versions, so
+they cannot silently erase the retained behavior. Use a fresh lineage for an
+intentional API change until an explicit migration exists.
+
+`core/figma-state-api.test.ts` executes the shared writer and dump in the Figma
+mock, returns a contract, then executes emitted React in a separate browser.
+It covers all 27 Boolean input combinations, initializer changes, callback
+values, checkbox indeterminate state, repeat identity and bounded corruption
+and retirement probes. The independent nine-variant source draft also returns
+its actual public API through that mock. All 54 existing repository component
+scripts are byte-identical in a before/after engine comparison; the committed
+Figma and Storybook freshness checks pass. Detailed records are under private
+`callback-candidate-isolation-nmtqn4yw/`.
+
+The engine proof alone does not qualify a live journey. D.71 records the later
+app creation and installed native return; the earlier appearance-only operation
+remains unchanged. Reverse by removing the version 2 producer and reader
+integration; retain the prior metadata refusal so existing version 2 targets
+stay protected.
+
+**AGENT compatibility decision — 2026-09-20.** Retained API eligibility must
+not block an existing native appearance projection. A control with additional
+text/identity inputs, a non-variant disabled input, or a callback without a
+declared next-value argument keeps version 1 typed-axis metadata. That metadata
+does not claim to return its initializer or callback. The full conformance lane
+exposed this boundary in an existing composed-control initializer case; its
+nine caller variants now compile again, and the broader-controls regression
+check repeats native generation without replacing identities. The strict
+version 2 reader still rejects an unsupported fragment, and changing an existing
+version 2 target to either broader form refuses before mutation. Reverse this
+eligibility guard only with support for the additional semantics, or an explicit
+decision to retire the older native appearance path.
+
+
+## D.71 A separate app operation preserves the observed state API through native return
+
+**AGENT decision — authenticate a separate state experiment.** The app's
+**Prepare … state API for Figma** action combines the current sealed state
+experiment with its separately authenticated initial-state observation. The
+request accepts no arbitrary contract, script or file selector. It reserves one
+operation for that source/case, independently of the earlier appearance-only
+operation. Changing the experiment cannot allocate a duplicate under that
+reservation. The existing companion, token writer, component writer and
+independent readback perform the four native phases.
+
+The independent Switch journey was exercised through the application in
+Evaluations. Its source experiment records 54 activation trials and 81 exact
+restorations. The new native operation creates nine editable component mains
+with exact 32 × 18.390625 roots and retained checked/defaultChecked/disabled/
+onCheckedChange declarations. Independent readback reports no problems. A
+fresh native instance visits all nine variant combinations, then restores
+identical properties and PNG bytes. The plugin is closed for canvas inspection.
+Repeated preparation retains the same operation and eight journal events; all
+358 earlier operation files remain unchanged.
+
+Two canonical native dumps agree byte-for-byte. Loading that capture into the
+app's JSON importer and choosing **Prepare React library** produces an archive
+installed in a clean npm consumer. All 54 input/action trials match the source's
+initial state, live-input changes, two keyboard or associated-label activations,
+disabled behavior and callback arguments. Additional caller-held and
+caller-accepted controlled callbacks pass. The installed app was also operated
+visibly; it imports only its generated package and React dependencies.
+
+Separate guarded frames preserve the source's recorded fractional origin.
+Source → native images pass 9/9 on both backgrounds, maximum 4.167% white /
+2.399% black. Native → installed React also passes 9/9, maximum 4.167% white /
+2.273% black. The 5% limit and scorer are unchanged. Capture clones match their
+original native snapshots; repeated exports and browser captures are identical.
+No component CSS overrides supply missing geometry. Standard layout-only crops
+still refuse shadow overflow, and exact descendant geometry remains different:
+the thumb's local y is 1.1953125 in Figma and 1.1875 in the browser; the invisible
+hit-area decoration also differs. These are measured initial images, not pixel
+identity or all-state visual qualification.
+
+**Still unqualified:** broader live updates of this operation (the bounded opacity
+cycle is now demonstrated in D.73), hover/focus, responsive and dark states, the
+nine excluded source inputs, deeper composition
+and the complete independent family. Figma retains behavior declarations; it
+does not execute React interactions. The earlier bound-height update refusal
+is unchanged. Detailed app journals, captures, exact package hash, lockfile,
+source-matched trials and visible review are preserved under private
+`stateful-native-return-1e6l8my3/`.
+
+The nine initial image pairs now have a separate committed denominator in
+`recipe/evidence/react-native-matched-state-api/`. The declared fidelity lane
+recomputes them with the same scorer. The app's **Review recorded matched
+frames** authenticates both the immutable initial observation and the pinned
+state experiment, including its exact projected draft, before displaying the
+images. New readbacks bracketed the frame exports and matched the operation
+journal exactly, with no node allocation or mutation. Source capture files are
+the unchanged, hash-verified historical capture of that same initial observation;
+they are not relabeled as a fresh source run. The recorded review does not use a
+newer experiment pointer or grant write authority. Root size and capture-position
+checks do not qualify the differing descendant geometry. Evidence and the
+source-capture selection refusal are retained in private
+`stateful-matched-record-xb0m61io/`.
+
+Adversarial checks cover changed input seals, a newer failed observation,
+wrong-file delivery, stale source, altered metadata readback, operation reopen,
+repeat reservation and unsupported updates. Reverse the new app route and
+adapter to stop preparing these operations; preserve existing journals and the
+metadata reader/refusal so previously created targets remain recoverable.
+
+## D.72 A native height edit returns as a package update without changing the state API
+
+**AGENT measurement decision — separate manual package replacement from automatic
+two-way repair.** The existing state-API set from D.71 was edited in Evaluations:
+its owned height variable changed from 18.390625 to 20 px. A fresh whole-file
+binding check found 19 consumers on the operation and capture pages, with no
+variable aliases. The edit affected 38 existing nodes through those bindings;
+nothing was created. A canonical native capture was loaded through the app's
+JSON importer, then exported with **Prepare React library**.
+
+The returned archive differs from the previous archive only in one token CSS
+value. Its package identity, JavaScript and type declarations are byte-identical.
+The clean consumer passes all 54 recorded state/callback trials. Replacing the
+package in the original consumer, without editing its source, also passes 54/54.
+All nine updated roots are exactly 32 × 20 px. Recorded-origin image comparison
+passes 9/9 on both backgrounds at the unchanged 5% limit, with maxima 2.662%
+white and 2.083% black. The installed control was activated visibly and emitted
+the expected callback.
+
+Restoring the native variable produces identical snapshots across both pages,
+identical bindings and ten identical PNGs. Restoring the original package passes
+54/54 again; consumer source and installed token bytes return exactly. npm
+normalizes the equivalent archive path from `file:./library.tgz` to
+`file:library.tgz`, so its package and lock files are not byte-identical.
+
+This is a measured designer edit → app import → installed package update and
+rollback. It requires manual capture transfer and package installation. It does
+not update the original hand-written React source, authorize a stale source
+observation, or qualify guarded source-to-native bound-height updates. Exact
+descendant geometry, hover/focus, dark/responsive states and excluded inputs
+remain outside this receipt. The native operation journal remains historical
+evidence; the temporary edit was restored before further work. Detailed captures,
+archive hashes, same-consumer tests, restoration checks and the visible review
+are retained in private `stateful-design-update-s__b4c11/`.
+
+To reverse this measurement decision, remove this bounded acceptance claim while
+preserving its private evidence. No converter, scorer or tolerance changed.
+
+## D.73 State-API operations follow fresh source evidence without replacing their native set
+
+**AGENT identity and update decision.** State-API operations previously had no
+source-succession or compiler-update path. They now follow a complete, freshly
+authenticated state experiment on the same source module/export and case. The
+original creation pin remains immutable. Its exact sealed archive supplies only
+the initial contract's allocation identity; it grants no authority over current
+source. The current initial draft and state experiment are checked independently,
+then projected once under that original namespace. API, initializer, callback and
+value-map changes still refuse through the shared update planner. An observer
+change can require a new experiment even when source bytes are unchanged.
+
+**Measured through the app, 2026-09-20.** The existing nine-main state-API Switch
+from D.71 completed a guarded opacity cycle in Evaluations. A coherent source,
+stylesheet and declared exact-witness change from 0.5 to 0.4 was freshly observed:
+nine initial states and 54 simultaneous-input trials with 81 exact restorations.
+The app followed that evidence, reviewed three root corrections and one owned
+unbound variable, then ran preflight, one guarded write and independent readback.
+All four values were exactly `Math.fround(0.4)`. A repeat review planned and wrote
+nothing; all 197 saved update/plan files were unchanged. The original set, main
+identities, state API metadata and surrounding native structure stayed intact.
+
+Restoring all three source files byte-for-byte and refreshing the observations
+produced a reverse proposal on the same objects. Before applying it, a bounded
+native edit changed one root to `Math.fround(0.45)`. Preflight named
+`native-update-opacity-conflict:87:1077` and issued no write command. Independent
+before/after snapshots, variables and 19 PNGs were identical. Restoring that one
+test edit allowed **Inspect update again** to re-run preflight and complete the
+same proposal. The three roots and variable returned to 0.5. Both native pages,
+all 30 owned variables, API metadata and all 19 PNGs exactly match the original
+baseline. All 610 earlier creation files are unchanged; no native node was
+allocated. A final unchanged review leaves all 209 update/plan files identical.
+Plugin windows were closed for each canvas inspection.
+
+This qualifies this operation's bounded source-to-native opacity update,
+conflict refusal, retry and rollback. It does not qualify bound-height changes,
+broader state inputs, exact descendant geometry, hover/focus/dark/responsive
+states, or automatic two-way source editing. Updated exports are diagnostic;
+this cycle adds no new image-fidelity score. Historical correction exports now
+omit current-source pairing and alignment: only a current, unsuperseded correction
+can display those source images. The separately authenticated D.71 matched review
+retains its original evidence. A fresh whole-file check found no consumers or
+aliases of this opacity variable. This cycle used the earlier page-scoped write
+guard; new variable proposals use the document guard described in D.74.
+
+Reproducers: `native-source-succession.test.ts`, `native-source-identity.test.ts`,
+`react-state-api-inspection.test.ts`, `react-state-api-native.test.ts` and
+`react-cohort.test.ts` under `source-reference/` cover full experiment pins,
+historical identity, pending/failed evidence, API refusals, same-node updates,
+repeat and restoration. The in-flight experiment refusal was also observed in
+the app before this cycle. Detailed source captures, immutable journals, native
+snapshots, refusal, restoration and UI checks are retained in private
+`state-api-source-update-x9yrm26v/`. No emitter, scorer or tolerance changed.
+
+To reverse this decision, remove state-API succession/update eligibility and its
+UI actions while preserving existing creation, succession and correction
+journals, historical readers and shared write guards.
+
+## D.74 Variable updates inspect document bindings before writing
+
+**AGENT decision, 2026-09-20:** new owned, unbound number-variable updates carry
+`tokenBindingScope: 'document-v1'`. Loading only the operation's page could miss
+a consumer elsewhere in the file. The new program loads every page, then checks
+all nodes, including hidden instance children, text ranges, vector-region paints,
+component-property definitions and instance properties. It also checks local
+paint, text, effect and grid styles and every local variable's aliases. A bound
+variable refuses before assignment. The 10,000-node limit now applies across the
+document; an oversized or unavailable scan refuses instead of claiming coverage.
+
+After the last asynchronous read, the program obtains synchronous inventories
+and reads live binding properties. No asynchronous pause separates those checks
+from the existing exact-value checks and assignments. This requires the Sync
+Runner's static document-access mode. The Desktop Bridge's dynamic-page mode
+rejects these synchronous APIs and cannot perform this write. The guard never
+changes access mode or disables hidden-instance filtering to make a check pass.
+
+Historical plans and programs keep their original bytes. Only authenticated
+written history can reconstruct the old plan shape for read-only recovery,
+verification and unchanged-repeat review. Unapplied legacy proposals are
+obsolete. Dispatch, pending-command delivery, re-arm and the begin handshake
+refuse new authority for a legacy variable writer, including an idempotent begin
+request. This does not stop a companion already executing past its old begin
+handshake; the residual risk in B.40 remains.
+
+**API feasibility:** a read-only plugin with Sync Runner's
+manifest mode scanned Evaluations' 63 pages, 1,465 nodes and 135 text nodes in
+319 ms, with 1,075 local variables and no local styles. It found no bindings or
+aliases of the opacity variable and found consumers of the height variable.
+The first probe exposed Figma's throwing property-definition getter on variant
+components; the implemented scan reads definitions only on component sets and
+standalone components. The plugin was closed and the canvas inspected. Evidence
+is retained in private `whole-file-binding-readonly-v2-k3p0xiqa/` and
+`sync-binding-api-probe-v2-nutrwyz9/`. The application then exercised the guard on the existing state-API Switch in
+Evaluations. A temporary consumer bound to its opacity variable on a separate
+page caused preflight to refuse `native-update-token-bound:VariableID:87:1059`
+after scanning 64 pages / 1,468 nodes. No apply claim or begin was recorded;
+independent readback found both owned pages, 30 variables and 19 PNGs unchanged.
+After removing the three recorded probe nodes, retrying the same proposal scanned
+63 pages / 1,465 nodes and changed exactly three disabled-root literals and their
+unbound allocated variable from 0.5 to `Math.fround(0.4)`. Only the three affected
+main exports changed. Restoring the source produced a separately verified reverse
+update to 0.5. Both owned pages, all 30 variables, 19 PNGs, three source files and
+17 original creation records restored exactly; the first refusal remains the
+forward journal's prefix. Plugins were closed and the before, changed and
+restored canvases inspected. Evidence and a visual review are retained in private
+`document-binding-live-lwtcu999/`. This is a bounded live refusal, retry and
+restoration proof; it adds no fidelity qualification.
+
+Adversarial coverage in `core/native-contract-token-update.test.ts` checks
+cross-page, hidden-instance, text, style, grid and property consumers, including
+aliases or styles inserted after the final asynchronous inventory, unavailable
+APIs and oversized scopes. `source-reference/native-update-legacy-scope.test.ts`
+checks old unapplied, pending, begun, landed and partial journals;
+`core/native-contract-update-bytes.test.ts` pins the historical programs.
+
+To reverse this decision, disable new variable-value proposals while retaining
+the legacy write-authority refusal and historical readers. Do not restore
+page-only variable writes or rewrite saved journals.
+
+## D.75 Stateful source identity does not depend on the archive anchor
+
+**AGENT decision, 2026-09-20:** an initial-state or state-API operation may follow
+fresh evidence whose saved root anchor is another case in the cohort. The anchor
+locates and authenticates the complete source archive; the stateful case selects
+the component. Requiring both case names to stay equal incorrectly refused a
+Switch observation anchored through Badge when its previous archive was anchored
+through Alert (`native-source-succession-case-mismatch`). The live refusal is
+preserved in private `document-binding-live-lwtcu999/`.
+
+The target stateful case, request shape and independently authenticated source
+module/export must still match. Every initial-state and callback experiment pin
+is checked and retained. Nested positional instances remain unsupported. This
+changes succession eligibility only; it grants no native write authority and
+rewrites no historical record. The changed-source adoption and the verified
+forward/reverse updates in D.74 demonstrate this path live.
+
+State inspectors also keep a common recorded anchor when another saved root
+becomes current. Within the exact same reference, ownership and inventory,
+selection prefers an anchor with both initial-state and callback records, then
+one with initial-state records. Both original and followed root pins are
+considered because historical keys retain their original compilation marker.
+Pointer presence selects a request only; readers still authenticate every seal
+and source file. Corrupt evidence refuses rather than silently selecting another
+record. A live repeat initially exposed this second defect and refused without
+changing any of 231 plan/update files. With the selection repair, the original
+Alert-anchored callback evidence reappeared, including its three broad-input
+refusals. Fresh observations completed nine initial states and 54 combined-state
+activation trials with 81 exact restorations. The existing native operation
+followed this evidence without creating another Figma component. Because the
+observation revision changed, review produced a zero-property proposal. The
+companion reported `no-op` and independent readback verified all 29 nodes,
+token data and nine main images exactly against the restored result. The app
+showed **update verified / pinned inputs match**. This advances evidence without
+assigning a native property; the earlier refusal and corrections remain intact.
+A subsequent review reused that verified result: no new plan, update event or
+succession, and all 269 plan/update/succession files remained byte-identical.
+
+Tests exercise alternate anchors, unchanged repeats, reversal, foreign-module
+refusal, immutable journal prefixes and exclusion of another reference, ownership,
+inventory or stateful case from anchor selection.
+
+To reverse, restore the anchor-case equality checks in
+`source-reference/native-source-succession.ts` and remove recorded-anchor
+selection from `source-reference/react-reference.ts`; keep existing succession entries
+readable and refuse only new adoptions with another anchor. Rejecting the saved
+entries would strand otherwise authenticated operations.
+
+## D.76 Declared JSX entry points need not live under src
+
+**AGENT decision (2026-09-20).** API inspection and structure tracing selected
+only bundled `.tsx` files beneath the workspace's `src/` directory. A valid
+declaration mounting original JSX from another directory could render and
+validate, yet expose no component modules to those readers.
+
+Both readers now retain that historical selection and additionally inspect
+explicitly mounted `.tsx` or `.jsx` files resolved by the same bundler run.
+Each declared entry must already be pinned by the declaration's witnesses and
+read into the reference. Resolution metadata stays on the host; the reference
+identity, entry, bundle and provenance format are unchanged. This does not
+discover package internals, follow source-map guesses or equate a compiled
+package export with a neighboring original source file.
+
+A separate workspace explicitly mounted Radix Themes 3.3.0's shipped Theme,
+Button and Switch JSX. Through the app, all four cases validated against
+network-isolated replay, with five negative controls rejected for each of the
+two representative subjects. API inspection recorded three component definitions
+and 202 source/declaration files, but remained incomplete:
+`ThemeContext:component-function-unresolved`. Structure tracing refused before
+matching any of the four cases with `react-ownership-source-changed-or-unreadable`.
+Native preparation remained disabled. The source facts also retain Button's
+delegation to BaseButton, Switch's replacement of caller children and Theme's
+unresolved return control flow. No native conversion is qualified by this run.
+
+Private evidence `radix-source-intake-umz12j_6/` retains the explicit declaration,
+the initial host-configuration refusal, its correction, the original library
+bytes, app records, DOM and inspected screenshot. All 1,244 existing native
+journal files remained identical. The earlier compiled-package workspace and its
+refusals remain separate evidence; no runtime-equivalence claim is made.
+
+The regression exercises an extensionless declared JSX import outside `src`,
+the actual HTTP API inspection, source changes and missing witnesses. A nearby
+unimported JSX file cannot stand in for a compiled package entry. To reverse,
+remove the additional mounted-file selection and its host-only metadata from
+`react-reference.ts`, retaining the historical `src` selection in both readers.
+
+## D.77 Textless originals require an explicit absence witness
+
+**AGENT decision, 2026-09-20: admit declared text absence only after independently
+observing it.** Source readiness previously required rendered text and an actual
+painted font for every root. The unmodified Radix Themes Separator therefore
+failed both declared cases with `text-witness-missing`, despite matching its
+source dimensions and styling. An unrelated nearby caption did not establish
+component text.
+
+A workspace can now declare `witness.textContent: "absent"`, without a font-path
+or associated-label witness. The observer checks up to 10,000 ordinary HTML/SVG
+DOM nodes, including hidden text, and requires no non-whitespace text, generated
+content, list markers or painted glyphs. Custom elements, shadow roots, slots,
+opaque rendering and native text surfaces refuse this proof. A root disappearing
+before the protocol read is unavailable evidence, never a zero-glyph result. Missing evidence,
+an oversized scope, missing/hidden/zero-size roots, wrong styles or tokens,
+resource failures and runtime errors still refuse. Existing declarations retain
+their visible-text and actual-font requirements and observation field shape.
+
+An explicitly textless representative must reject five corruptions: missing CSS,
+theme, root, hidden root and injected unexpected text. The authenticated
+declaration selects this set; recorded rows cannot exempt themselves from the
+original missing-font control. Font-bearing cases still reject that original
+five-control set. No fidelity threshold, scorer or original source styling changed.
+
+**Measured through the application:** a separate Radix Themes 3.3.0 Separator
+cohort now validates **2/2** original/replay cases, with all five applicable
+corruptions rejected and source inputs unchanged. Structure observation matches
+both original renders. Native conversion remains unqualified: the API read
+retains `unresolved-prop-type:inlist`, child ownership remains unresolved through
+the source spread, and both native roots refuse
+`react-root-visual-source-content-unqualified`. Native preparation stayed disabled;
+all 1,244 earlier native journal files remained identical. An empty observed
+sample does not prove that a component owns or discards arbitrary caller content.
+
+Private evidence `radix-separator-intake-fauiyy9s/` preserves the initial refused
+declaration, before/after application screenshots, final observer hashes,
+validation, ownership and API records. The final validation is `87c04d50…`;
+an earlier successful run against a superseded observer remains separate evidence.
+Browser regressions cover hidden/generated text, glyph disagreement, unavailable
+scope, disappearing roots, node bounds and both five-control sets. Reverse by removing the opt-in
+absence witness and its admission/control rules; preserve all receipts and
+restore the named textless-source limitation.
+
+## D.78 Vector masks must not become ordinary filled paths
+
+**AGENT decision, 2026-09-20: keep mask composition outside the filled-path
+projection.** Adversarial review found that both readers accepted a vector
+with `isMask: true` as an ordinary painted path. A [Figma mask](https://developers.figma.com/docs/plugins/api/properties/nodes-ismask/)
+changes its subsequent siblings; carrying its outline alone cannot preserve
+that meaning.
+
+REST grammar 1.39 and the canonical plugin dump now require an absent or
+explicitly false mask flag before carrying vector path geometry. True or
+malformed flags retain `vector-geometry-unsupported` and add
+`vector-mask-unsupported`. This is a named capture degradation, not support
+for mask composition or a claim that the remaining imported tree is faithful.
+The packaged companion embeds the same canonical reader. Alpha, vector and
+luminance mask cases, malformed flags and unchanged ordinary vectors are
+covered by bounded probes; source capture bytes remain unchanged.
+
+The sync CLI refreshed comparable baselines from new REST GET observations
+under the new grammar. All 128 record identities and historical adoptions
+remain intact; pending decisions stay unresolved. Previous ledger bytes and
+CLI logs are preserved in `private/filled-path-sync-139-m040ae9n/`. No canvas
+write, adoption or owner grade is part of this migration. The before-fix
+reproduction and validation are in `private/filled-path-mask-refusal-wvt9lspr/`.
+Reverse the reader guard only with a demonstrated mask-composition model;
+restore observation baselines with their matching grammar, never by relabeling
+an older fingerprint.
+
+
+## D.79 Transparent captures must inspect closed shadow boundaries
+
+**AGENT measurement decision, 2026-09-20:** new matched-frame recordings require
+version 2 of the source capture instrument. A closed shadow root on an ordinary
+span hid a backdrop-dependent child from the original light-DOM inspection.
+The capture accepted a black source pixel turning white when the backdrop was
+removed, despite restoring the original screenshot exactly afterward.
+
+The new instrument inspects the target light tree and each ancestor through
+Chromium's DOM protocol. Open, closed and browser-owned shadow roots, embedded
+documents, incomplete protocol evidence and scopes exceeding 10,000 nodes
+refuse before measurement. The check repeats during capture and restoration.
+Independent sibling content retains the existing exact crop-exclusion proof.
+This is a bounded refusal, not shadow-content support. Pixel scoring, geometry
+requirements and the 5% limit are unchanged.
+
+The original instrument and 19 recorded source/native pairs remain byte-frozen
+historical evidence. Their existing scores still recompute against their pinned
+instrument, and application review names their missing closed-shadow inspection.
+New recordings cannot reuse those version-1 receipts as current capture proof.
+No old manifest receives a new code hash or an invented scope witness.
+
+A separate private recapture of all nine authenticated state-API Switch planes
+passed the new guard and recorder. All five PNGs per pair, native geometry,
+previous receipt fields and the derived scorecard stayed byte-identical. Fresh
+Evaluations exports and bracketed independent readbacks also matched the saved
+native baseline; no nodes changed, and the unobstructed canvas was inspected.
+The real recorder refused the old capture before creating an output directory.
+This verifies the strengthened measurement path, not the remaining V1 gaps.
+
+The same recorder has now registered those nine new receipts separately in
+`recipe/evidence/react-native-matched-state-api-scope/`. Application review opens
+the capture with shadow-boundary checks and retains the original capture in an
+expandable history, including its limitation. Both receipts are authenticated
+and scored before either is returned; a duplicate instrument generation,
+mixed-version rows or invalid historical evidence refuses the whole review.
+The lane now checks 28 pairs across four records, representing the same 19
+distinct state/content comparisons. This recapture adds inspection evidence,
+not additional component coverage. Opening the review still performs no canvas
+inspection or write. To reverse this presentation decision, remove the new
+catalog entry and multiple-record view while preserving both capture folders.
+
+Adversarial evidence is retained in
+`private/transparent-closed-shadow-nlayfc6h/`: the before/after pixel probe,
+open/closed target and ancestor refusals, unchanged ordinary and sibling pixels,
+and source restoration checks. Reversal: restore the prior recorder admission
+and current-instrument choice while retaining all evidence and naming the
+closed-shadow measurement gap. Do not relabel historical captures as remeasured.
+
+
+## D.80 Native change review retains numeric precision
+
+**AGENT presentation decision, 2026-09-20:** the application displays numeric
+proposal endpoints and observed design values using their round-trippable
+JavaScript spelling. Four-decimal formatting previously made 0.40001 and
+0.40002 appear identical. Shadow color channels and opacity likewise retain
+their recorded values on the labeled 0–1 scale; byte and percentage rounding
+could conceal those changes. Long structured design values can be expanded to
+read the complete value instead of losing the tail after 120 characters.
+
+This changes review presentation only. Plans, authority checks, stored values,
+float32 verification, source identity, Figma writes and fidelity scores are
+unchanged. Regression checks render the actual review formatters and verify
+numeric round trips, distinguish small color/opacity changes, and retain escaped
+structured content beyond the preview. Reversal: restore the old formatters
+only alongside another visible way to inspect exact values before applying a
+correction; rounded labels alone are insufficient.
+
+
+## D.81 Three-state checked inputs require a separate complete experiment
+
+**AGENT decision, 2026-09-20:** the simultaneous-input adapter accepts an
+observed checkbox with the exact public domain `false`, `true`,
+`"indeterminate"`. Its plan and observation use version 2; existing Boolean
+checkbox/switch plans retain version 1 and their original serialized meaning.
+The contract's existing enum and checked-toggle model already represents this
+domain. The projection retains the appearance enum keys and typed code values,
+derives the off/on event endpoints from those values, and retains the observed
+initial default. Neither a component name nor a source property spelling
+selects this rule. No schema, emitter or Figma write protocol changes.
+
+A three-state callback type does not include an unrelated Boolean-only input.
+When the appearance draft has exactly one additional optional Boolean input,
+the plan may propose it as a disabled candidate. This is not an observed
+relationship. The full experiment must prove its disabled state, focus and
+activation suppression, callback silence, controlled precedence, initial-only
+updates, and restoration for every input combination. With that input present,
+there are 48 contexts, 96 activation trials and 144 restoration checks. A
+failure prevents the generated draft; a switch claiming mixed state refuses.
+
+Adversarial test-source probes reject incorrect mixed transitions, an ignored
+disabled input and incorrect simultaneous precedence, with source restoration.
+Generated React in those probes is independently exercised against the observed trials, and
+the preview retains mixed initial and controlled values. Nine existing
+historical plans and projected drafts remain byte-identical. These checks do
+not qualify native pixels, the returned installed package, excluded inputs or
+broader visual states. Those require separate application evidence.
+
+Reversal: refuse new version-2 plans while preserving their immutable records
+and native allocation identities. Keep the historical reader and enum metadata
+support for any already-created output; do not reinterpret a three-state
+record as a Boolean experiment or rewrite prior evidence.
+
+## D.82 Three-state native delivery passes appearance but the return loses stroked vectors
+
+Historical first return. The later stroked-path implementation and fresh application
+return are measured in [D.84](#d84-open-stroked-paths-retain-their-centerline-and-parent-viewport); the original failed archive and captures remain unchanged.
+
+**Measured through the application, 2026-09-20.** The built-in Checkbox's
+three-state experiment completes 96 activation trials and 144 restorations.
+The generated preview and the app-delivered archive installed in a clean React
+consumer each match all 96 source trials, including held mixed state, accepted
+callbacks, disabled suppression and controlled precedence. Visible browser
+interaction confirms mixed initial activation and controlled hold/accept.
+These are bounded behavior results, not complete interaction qualification.
+
+The companion creates twelve variants and fifty variables in Evaluations.
+Independent readback verifies all 44 native nodes. A new instance selects all
+twelve variant combinations and restores its properties, main identity and
+PNG exactly; original mains remain unchanged and a fresh readback equals the
+operation's final readback. The plugin is closed for canvas inspection.
+
+Fresh version-2 source captures and native clones preserve exact root bounds,
+offsets, geometry and bindings. All **12/12 source-to-native appearances** pass
+the unchanged 5% comparison on both backgrounds: maximum **0% white / 2.25%
+black**. The authenticated twelve-row cohort is committed under
+`recipe/evidence/react-native-matched-three-state-api/` and available through
+**Review recorded matched frames**. Earlier captures remain immutable.
+
+The canonical native dump is imported through the application's JSON tab and
+exported using **Prepare React library**. That first return was visually
+unqualified: **6/12 appearances** pass, with maximum **10.75% white / 8% black**,
+despite exact outer bounds on all twelve. Every checked or mixed state loses
+its checkmark. The reader explicitly reports unsupported stroked-vector
+geometry, centered stroke lowering and proportional (`SCALE`) placement.
+Recovered state metadata and passing behavior cannot override these named
+losses. This code-originated return is not designer-authored coverage.
+
+The first source experiment stopped after 40 trials and 60 restorations on a
+restoration capture timeout. Its refusal is preserved; final verification
+found the source restored. An unchanged retry completed. During that retry,
+the operator navigated away from Sources to stop expensive progress polling;
+normal unattended performance is not qualified. No source, scorer, threshold
+or conversion rule was changed to obtain these measurements.
+
+Private journal: `tristate-api-intake-d00ej81o/`, operation `1f12ad4e…`, source
+experiment `7ff5cbac…`, returned archive SHA-256
+`56cc91481c28afc9457d09c29e3e942bd64d0e15efdc6a7e0add652949bebd60`.
+It preserves the failed attempt, source/preview/consumer trials, exact package,
+native IDs, repeat capture, editability proof, screenshots and both visual
+directions. No owner grade or V1 release qualification is assigned.
+
+**AGENT decision:** register this separate twelve-row cohort with the existing
+exact-geometry and 5% checks; do not replace historical Checkbox evidence or
+count the failed return as success. Reversal removes this cohort from active
+selection while retaining its immutable evidence and reported return losses.
+
+## D.83 Running state API progress cannot certify a result
+
+**AGENT decision, 2026-09-20.** Repeated status reads previously performed the
+expensive source and saved-evidence authentication while the observer was
+running. The state-API GET route now uses an in-memory progress snapshot only
+for an exact active reference/case pair. An ambiguous pair refuses. It clones
+the plan and returns the experiment identity and restoration count, always as
+`running`, with `sourceUnchanged: false` and no observation or draft. That rule
+also applies while a terminal producer closes its browser and seals the saved
+record. Once the job leaves the active map, the existing authoritative reader
+authenticates the result. Start/reuse, preview and native preparation keep
+their authenticated paths.
+
+A fresh application experiment completed **96/96 activation trials and 144
+exact restorations** with Sources continuously open and normal polling active.
+The final authenticated result confirms the original source restored. An
+unchanged repeat through the application reused the same experiment; all 85
+files across twelve saved experiments remained byte-identical.
+
+This is bounded progress evidence, not a general performance qualification.
+Of 28 sampled running reads, the first took **50.65 seconds**; the following 27
+took **1.05–192.64 ms** (median **1.38 ms**). Final authentication took **29.10
+seconds**. A separate PR validation lane ran concurrently, so these samples do
+not establish a controlled before/after speed comparison. Cold startup,
+terminal reads and other inspection routes remain unqualified. The earlier
+failed trial and navigation workaround in D.82 remain historical evidence.
+
+Adversarial checks cover target isolation, ambiguous jobs, mutation of the
+returned plan, terminal producer state before sealing and a changed source at
+authoritative read. Progress cannot authorize generation or a Figma write.
+Private evidence: `state-api-progress-20260920-1212/`, experiment `a50e83ba…`,
+including response timings, the completed app view and unchanged-repeat hashes.
+No native operation was created or modified for this change. Reversal removes
+the progress shortcut from the GET route and retains all sealed observations;
+no evidence rewrite or migration is required.
+
+
+## D.84 Open stroked paths retain their centerline and parent viewport
+
+**AGENT decision, 2026-09-20.** A decorative `shape.kind: "stroked-path"`
+retains one original open absolute M/L/C/Q path, its uniform cap, join and miter
+limit, and the exact local position and size of its free-layout parent viewport.
+The canonical Plugin API dump is version 1.40. REST remains 1.39 and refuses
+stroked vectors: its outlined stroke geometry is not the original centerline.
+Use the canonical desktop capture and import its JSON through the application.
+
+The supported native subset has one solid centered stroke, no fill, no dash,
+no effect, no mask or transform, zero corner radius, a uniform width profile,
+and SCALE constraints on both axes. The parent must be an unpadded, unclipped
+free-layout frame. The contract requires a fixed, undecorated relative parent
+containing only stroked-path leaves. Width and parent dimensions must be positive
+pixel measures; relative units, percentages, negative or zero values, and
+inherited stroke paint refuse. Native compilation also checks resolved token
+dimensions. Nonpositive bounds, incompatible parent
+channels or content, malformed geometry, changing geometry across variants,
+partial capture and nonmatching parent dimensions refuse by name. Polynomial
+extrema must agree with the declared local origin and bounds, exactly or as
+float32; no sampled approximation or tolerance is used. Only SVG space, tab,
+carriage return and line feed separators are accepted. A browser probe found
+that broader JavaScript whitespace accepted NBSP and vertical tabs while
+Chromium rendered an empty path; both parsers now refuse those characters.
+
+React, React inline, HTML and Web Component projections paint the original
+path in an SVG covering the parent viewport, with `non-scaling-stroke`.
+The existing border-color and border-width channels become SVG stroke paint
+and width only on code surfaces. Native emission creates editable VECTORs
+with those stroke bindings, cap, join and proportional constraints. It never
+resizes a mismatched path to conceal a geometry error. Parent dimensions are
+checked during compilation, then checked again against live Figma values.
+The browser canvas previews use the same viewport projection.
+
+A fresh canonical capture of the twelve-state native set from D.82 retained
+all six stroked vectors and reported no degradations. Importing that dump and
+choosing **Prepare React library** produced a new, unmodified archive. A clean
+consumer passed **96/96 behavior trials** and **12/12 visual pairs**, with all
+twelve root boxes exact and maximum **0% white / 2.25% black** mismatch under
+the unchanged 5% scorer. Visible interaction confirms the glyph, caller-held
+mixed state and callback acceptance. The older 6/12 return remains preserved.
+
+An independent generated native probe covers a polyline, cubic curve and
+quadratic curve with all three supported caps and joins. All nine combinations
+across three parent sizes have exact geometry and unchanged stroke width;
+all nine image pairs pass on both backgrounds (maximum **2.28%**). Color and
+width bindings survive native creation and resizing. A native centerline edit
+was restored exactly. Repeating the generated script created no nodes and
+retained the same component identity. Figma normalizes path serialization and
+converts quadratic segments to cubic segments; original string identity is
+not claimed. The bridge was closed before inspecting the native canvas.
+
+This qualifies a bounded code-originated return and the generic stroke rule,
+not designer-authored coverage, automatic source repair or complete V1.
+Source variable identity is retained where the existing inverse binding rules
+can represent it; variant-presence gaps can still produce named provisional
+paint tokens. Path-edit reconciliation and the older canvas fingerprint's
+geometry exclusion remain outside this evidence. HTML and Web Component
+markup conformance is checked; their interactive consumer journeys are not
+part of React V1. Development hot reload can clear session import tokens;
+reloading the saved dump restores that session layer.
+
+Private evidence: `stroked-path-implementation-20260920-1248/`, including the
+actual app contract and archive `d5163d72…`, 96 behavior rows, twelve image
+pairs, the original failed uniform-profile capture probe, nine generic pairs,
+editable-node readbacks and screenshots. Native probe writes are confined to
+Evaluations page `89:1364`, sections `89:1365` and `89:1376`, component
+`89:1369`, and their recorded descendants; its two probe variables are
+`89:1367` and `89:1368`. The earlier source-generated set is unchanged.
+
+Reversal removes the stroked-path schema, capture and emitter branches and
+restores an explicit unsupported-vector refusal. Preserve both archives,
+all earlier failures, canonical readbacks and native probe records; do not
+rewrite old results or substitute an outlined silhouette for the stroke.
+
+## D.85 Transparent pseudo geometry needs independent box evidence
+
+**AGENT finding and decision, 2026-09-20.** The earlier unpainted absolute pseudo
+reader treated computed CSS dimensions and offsets as native geometry.
+That is insufficient even when the surrounding control passes its image test.
+In the retained state-API Switch, the native transparent box is 54 ×
+32.39059829711914 at approximately (-12, -8). An independent browser fixture
+with the recorded source rules has a 54 × 32.390625 box at (-11, -7): the
+computed height string loses precision, and absolute offsets start at the
+host's padding edge rather than its outer border edge. Changing the source
+height to 20 makes this box 34 high; changing only the native height variable
+leaves the old box height. The earlier image results remain valid measurements,
+but neither exact descendant geometry nor a complete source height update is
+qualified.
+
+The investigation covers twelve browser cases with zero, uniform and
+asymmetric borders, both writing directions, and fixed versus inset sizing.
+Adding the near border matches all six left-to-right cases; two overconstrained
+right-to-left cases choose the opposite inset and disagree. Seven fractional
+inset cases also show that computed offsets are not already used layout lengths.
+More decisively, authored offsets 1.0156249 px and 1.015625 px both serialize as
+`1.01562px`, while their actual local positions are 1 px and 1.015625 px.
+The negative pair has the same ambiguity. No decoder of that CSS string alone
+can recover both results correctly.
+
+Fresh React initial-state observations now join each unpainted pseudo-element
+to its actual host and read exact border quads. Scalar protocol sizes are rounded
+integers and are not used. The reader checks the complete source styles, element
+path, stable native browser identities and repeated geometry; shadow/slot/frame
+boundaries, transformed or zoomed ancestors, and ambiguous roots refuse. Older
+inspections without this evidence must be observed again before candidate assembly.
+Saved source observations remain unchanged.
+
+The fixed observed rectangle uses the existing contract dimensions and CSS
+padding-edge offsets. The native compiler adds the parent's resolved border
+insets; the inverse proposal subtracts the CSS border insets. Outlines and strokes
+excluded from layout use zero insets. Uncarried or contradictory parent stroke
+facts refuse. Rectangle dimensions and offsets retain their original precision;
+unrotated native placement uses local coordinates directly. An off-center native
+CENTER constraint keeps its measured offset and names the loss of center tracking.
+Centered CSS placement with asymmetric borders remains refused. Bordered inset
+overlays use the same padding-edge translation. Synthetic background planes and stroked-path viewports keep their
+own native coordinate basis.
+
+The regression probes cover 24 independently measured browser cases and 52 generated
+React layouts across rectangles/ellipses, near/far/center constraints, uniform and
+asymmetric borders, state-varying border sides, outlines and inset stroke rings. Initial-state assembly and
+native writer/readback checks also cover the measured pseudo box. These are bounded
+implementation checks. The application then observed all nine original Switch
+states with the new reader: each transparent hit area measured 54 × 32.390625 px,
+at −11, −7 relative to the host's outer edge. Its existing initial-state operation
+explicitly followed the newer authenticated observation without allocating another
+component. Initial-state listings now compare full observation pins, as state-API
+listings already did, and refresh after observation completes.
+
+The initial application review refused the unsupported child geometry channel.
+A subsequent bounded writer now corrects fixed, absolute rectangle/ellipse leaves
+with near-edge constraints, without changing their identities or other observed
+facts. Bindings, size limits, aspect locks, rotation, nonleaf topology and mixed
+channels refuse. The first live write used Figma's `resize()`, which silently kept
+32.39059829711914 instead of 32.390625. Exact readback rejected that result and
+restored all nine original tuples. An isolated native rectangle/ellipse probe
+showed that `resizeWithoutConstraints()` writes and restores these values exactly.
+New plans use that API and refuse when aspect-ratio evidence is unavailable;
+historical program bytes remain unchanged.
+
+The application then applied 27 scalar corrections to the same nine native nodes.
+Independent readback and a second inspection both matched −11, −7 and
+54 × 32.390625 exactly, with fixed sizing, near-edge constraints and no aspect lock.
+All nine pre/post PNGs and export bounds are byte-identical; the corrected boxes
+are transparent. The plugin was closed and the live component set inspected.
+The failed attempt remains in its journal. An answered failed write now closes
+only after independent readback proves the entire saved baseline was restored;
+uncertain outcomes and unrelated edits remain blocked. Polling does not retry it.
+The separate retained state-API operation then repeated the same application
+journey with a fresh source experiment: 54 activation trials and 81 exact
+restorations, with the nine excluded inputs preserved. Its new version-7 plan uses
+`without-constraints-v2` and strict version-3 aspect-ratio evidence. The application
+applied 27 corrections to its nine existing leaves. Two independent plugin reads
+verified the update, and a separate Console read matched the entire saved baseline
+apart from those reviewed geometries. All nine PNGs, export bounds and the variable
+inventory stayed identical. Repeating the compiler review reused the same plan and
+operation. The plugin was closed and the editable nine-variant set inspected on the
+live canvas. The original 37 source files and all 2,007 prior journal files in the
+two recorded inventories remained unchanged.
+
+Fresh creation is now measured through the application on the separate
+`switch-unchecked` state-API cohort. A new source observation and a separate
+54-trial experiment with 81 exact restorations prepared operation `62e0264f…`.
+The broad callback inspection still records its three refusals. The companion
+created nine editable variants and 30 variables, and two application readbacks
+agreed. An independent Console read confirmed all nine new hit areas at
+−11, −7 and 54 × 32.390625, with fixed sizing, near-edge constraints and no aspect
+lock. Repeating preparation left all 677 existing native-app files identical;
+repeating inspection returned the same complete snapshot and nine PNGs. Both
+earlier corrected sets, their variables and images remained identical. The
+plugin was closed and the new set inspected on the live canvas. All 37 source
+files stayed unchanged; only the initial-inspection latest pointer advanced
+among 2,033 previous journal/index files. Evidence is retained under
+`fresh-state-api-geometry-20260920-1633/`.
+
+This qualifies the measured fresh hit-area geometry, not the complete component.
+The separate thumb geometry mismatch remains unqualified.
+The separate static-HTML emitter still adds a border in the inset-ring probe;
+that surface is not qualified by the React checks.
+
+Measured boxes do not establish authored sizing or responsive behavior. A future
+height update must account for every changed descendant and every variable consumer,
+or refuse. The current bound-variable guard remains unchanged.
+
+Private evidence: `bound-size-pseudo-geometry-investigation-20260920/`, with
+sealed source/native comparisons, the complete browser matrices and the
+protocol prototype. Integration probes and failed adversarial cases are retained
+in `pseudo-box-reader-20260920-1407/`; update journals `09048c90…` (rolled back)
+and `c8c24f72…` (verified twice) retain the complete native observations. The
+separate `state-api-geometry-20260920-1606/` comparison and `aba2e971…` update
+journal retain the state-API repeat. Only the nine reviewed leaf geometries in
+each operation changed; original source and historical receipts
+remain intact. The AGENT decision is to use independently measured boxes, preserve
+the two coordinate bases, and apply exact leaf resizes without constraints. No
+public schema field or responsive rule is inferred. Reversal disables new plans
+and removes the reader/coordinate lowering while preserving historical program
+support and journals; it never changes the scorer or rewrites earlier measurements.
+
+## D.86 A fixed native width cannot recover a lost CSS maximum
+
+The historical Card REST fixture records a 320px, FIXED root whose `size.x`
+is bound to `size/card/width`. It has no `maxWidth` field or binding. The
+shipping source contract instead declares `max-width`. The emitter's existing
+unmeasured-root lowering bakes that maximum into a fixed native width; the
+original responsive meaning is absent from the fixture. The older plugin dump
+also lacks a bounding box, so its historical reviewable inversion cannot
+establish measured fixed sizing. Neither input proves a lossless source return.
+
+**AGENT decision, 2026-09-20.** Keep the measured fixed-root reader: a uniformly
+FIXED, non-FILL root retains its width binding, independently of any maximum.
+Correct the REST receipt's expected target to an independent native contract
+fixture carrying that width. Retain a separate, unmodified comparison against
+the shipping source, which explicitly reports both mismatches: missing
+`max-width` and added `width`. The comparator, original REST bytes, plugin dump,
+shipping contract, emitter lowering and frozen evaluation record are unchanged.
+Erasing the bounding box, changing the root to HUG, or replacing the width
+binding with a maximum must each fail native agreement. This changes a stale
+test expectation; it does not repair the historical emitter's responsive loss
+or qualify the composed source round trip.
+
+Reversal restores the old receipt expectation and its failing source-width
+comparison. Do not reverse by discarding measurements, restoring the guessed
+maximum in the converter, changing a tolerance, or rewriting historical evidence.

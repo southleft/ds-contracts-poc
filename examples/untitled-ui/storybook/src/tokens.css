@@ -2,16 +2,16 @@
 :root {
   --imported-avatar-add-button-content-border-radius: 12px;
   --imported-avatar-add-button-content-height: 24px;
-  --imported-avatar-add-button-content-left-md: 8px;
-  --imported-avatar-add-button-content-left-sm: 4px;
-  --imported-avatar-add-button-content-left-xs: 0px;
+  --imported-avatar-add-button-content-left-md: 7px;
+  --imported-avatar-add-button-content-left-sm: 3px;
+  --imported-avatar-add-button-content-left-xs: -1px;
   --imported-avatar-add-button-content-padding-block: 4px;
   --imported-avatar-add-button-content-padding-inline: 4px;
   --imported-avatar-add-button-content-plus-color: #a3a3a3;
   --imported-avatar-add-button-content-plus-size: 16px;
-  --imported-avatar-add-button-content-top-md: 8px;
-  --imported-avatar-add-button-content-top-sm: 4px;
-  --imported-avatar-add-button-content-top-xs: 0px;
+  --imported-avatar-add-button-content-top-md: 7px;
+  --imported-avatar-add-button-content-top-sm: 3px;
+  --imported-avatar-add-button-content-top-xs: -1px;
   --imported-avatar-add-button-content-width: 24px;
   --imported-avatar-add-button-root-background-color: #ffffff;
   --imported-avatar-add-button-root-border-color: #d4d4d4;

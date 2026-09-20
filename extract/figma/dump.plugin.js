@@ -292,7 +292,153 @@ const round2 = (n) => Math.round(n * 100) / 100;
 // Placement (ABSOLUTE nodes only) comes from absoluteBoundingBox deltas,
 // spelled center-preserving exactly like the REST mapper; constraints are
 // normalized to the REST spelling (MIN→LEFT/TOP, MAX→RIGHT/BOTTOM).
+// Same bounded syntax gate as schema filledPathIssue; route parity is tested.
+function filledPathIssue(data) {
+  if (typeof data !== 'string' || data.length === 0 || data.length > 65536) return 'filled-path-size';
+  const token = /[MLCQZ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  let at = 0; const tokens = [];
+  while (at < data.length) {
+    if (/\s/.test(data[at])) { at++; continue; }
+    if (data[at] === ',') {
+      if (typeof tokens[tokens.length - 1] !== 'number') return 'filled-path-separator';
+      at++;
+      while (at < data.length && /\s/.test(data[at])) at++;
+      if (at === data.length || !/[-+.0-9]/.test(data[at])) return 'filled-path-separator';
+    }
+    token.lastIndex = at;
+    const match = token.exec(data);
+    if (!match) return 'filled-path-command-or-character';
+    const value = match[0];
+    if (/^[MLCQZ]$/.test(value)) tokens.push(value);
+    else { const n = Number(value); if (!Number.isFinite(n) || Math.abs(n) > 1e6) return 'filled-path-coordinate'; tokens.push(n); }
+    if (tokens.length > 16384) return 'filled-path-complexity';
+    at = token.lastIndex;
+  }
+  let open = false, drawn = false, subpaths = 0;
+  for (let i = 0; i < tokens.length;) {
+    const command = tokens[i++];
+    if (typeof command !== 'string') return 'filled-path-missing-command';
+    if (command === 'Z') { if (!open || !drawn) return 'filled-path-empty-subpath'; open = false; subpaths++; continue; }
+    if (command === 'M') { if (open) return 'filled-path-open-subpath'; open = true; drawn = false; }
+    else if (!open) return 'filled-path-missing-move';
+    const start = i;
+    while (i < tokens.length && typeof tokens[i] === 'number') i++;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    if (count === 0 || count % arity !== 0) return 'filled-path-arity';
+    if (command !== 'M' || count > 2) drawn = true;
+  }
+  if (open) return 'filled-path-open-subpath';
+  if (!subpaths) return 'filled-path-empty';
+}
+
+function strokedPathIssue(data) {
+  if (typeof data !== 'string' || data.length === 0 || data.length > 65536)
+    return 'stroked-path-size';
+  const token = /[MLCQ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  let at = 0;
+  const tokens = [];
+  while (at < data.length) {
+    if (/[ \t\r\n]/.test(data[at])) { at++; continue; }
+    if (data[at] === ',') {
+      if (typeof tokens[tokens.length - 1] !== 'number') return 'stroked-path-separator';
+      at++;
+      while (at < data.length && /[ \t\r\n]/.test(data[at])) at++;
+      if (at === data.length || !/[-+.0-9]/.test(data[at])) return 'stroked-path-separator';
+    }
+    token.lastIndex = at;
+    const match = token.exec(data);
+    if (!match) return 'stroked-path-command-or-character';
+    const value = match[0];
+    if (/^[MLCQ]$/.test(value)) tokens.push(value);
+    else {
+      const number = Number(value);
+      if (!Number.isFinite(number) || Math.abs(number) > 1e6) return 'stroked-path-coordinate';
+      tokens.push(number);
+    }
+    if (tokens.length > 16384) return 'stroked-path-complexity';
+    at = token.lastIndex;
+  }
+  let moved = false, drawn = false;
+  for (let i = 0; i < tokens.length;) {
+    const command = tokens[i++];
+    if (typeof command !== 'string') return 'stroked-path-missing-command';
+    if (command === 'M') {
+      if (moved) return 'stroked-path-multiple-subpaths';
+      moved = true;
+    } else if (!moved) return 'stroked-path-missing-move';
+    const start = i;
+    while (i < tokens.length && typeof tokens[i] === 'number') i++;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    if (count === 0 || count % arity !== 0) return 'stroked-path-arity';
+    if (command !== 'M' || count > 2) drawn = true;
+  }
+  return drawn ? undefined : 'stroked-path-empty';
+}
+
+function dumpStrokedPath(node, parent) {
+  const paths = node.vectorPaths, t = node.relativeTransform, network = node.vectorNetwork;
+  const paints = value => Array.isArray(value) ? value.filter(p => p.visible !== false) : null;
+  const fills = paints(node.fills), strokes = paints(node.strokes), effects = paints(node.effects);
+  const identity = value => Array.isArray(value) && value.length === 2 && value.every(row => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)) &&
+    value[0][0] === 1 && value[0][1] === 0 && value[1][0] === 0 && value[1][1] === 1;
+  if (!parent || parent.type !== 'FRAME' || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
+      ![parent.width, parent.height, node.width, node.height].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) ||
+      ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
+      !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false ||
+      !identity(t) || Math.abs(t[0][2]) > 1e6 || Math.abs(t[1][2]) > 1e6 ||
+      node.isMask !== false || !fills || fills.length || !effects || effects.length ||
+      !strokes || strokes.length !== 1 || strokes[0].type !== 'SOLID' ||
+      strokes[0].blendMode !== 'NORMAL' || node.blendMode !== 'PASS_THROUGH' && node.blendMode !== 'NORMAL' ||
+      node.strokeAlign !== 'CENTER' || !Number.isFinite(node.strokeWeight) || node.strokeWeight <= 0 ||
+      !['NONE', 'ROUND', 'SQUARE'].includes(node.strokeCap) || !['MITER', 'ROUND', 'BEVEL'].includes(node.strokeJoin) ||
+      !Number.isFinite(node.strokeMiterLimit) || node.strokeMiterLimit < 1 || node.strokeMiterLimit > 1000 ||
+      !Array.isArray(node.dashPattern) || node.dashPattern.length || node.cornerRadius !== 0 ||
+      node.variableWidthStrokeProperties != null && (node.variableWidthStrokeProperties.widthProfile !== 'UNIFORM' || !Array.isArray(node.variableWidthStrokeProperties.variableWidthPoints) || node.variableWidthStrokeProperties.variableWidthPoints.length) ||
+      node.complexStrokeProperties != null && node.complexStrokeProperties.type !== 'BASIC' ||
+      Object.keys(node.boundVariables || {}).some(k => !['strokes', 'strokeWeight'].includes(k)) ||
+      !node.constraints || node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE' ||
+      !Array.isArray(paths) || paths.length !== 1 || paths[0].windingRule !== 'NONE' || strokedPathIssue(paths[0].data) ||
+      !network || !Array.isArray(network.vertices) || !network.vertices.length ||
+      (network.regions || []).length || network.vertices.some(v =>
+        v.strokeCap !== undefined && v.strokeCap !== node.strokeCap ||
+        v.strokeJoin !== undefined && v.strokeJoin !== node.strokeJoin ||
+        v.cornerRadius !== undefined && v.cornerRadius !== 0)) return null;
+  return { kind: 'stroked-path', width: node.width, height: node.height, strokePath: {
+    data: paths[0].data, cap: node.strokeCap, join: node.strokeJoin, miterLimit: node.strokeMiterLimit,
+    viewport: { width: parent.width, height: parent.height, x: t[0][2], y: t[1][2] },
+  } };
+}
+
 function dumpShape(node, parent) {
+  if (node.type === 'VECTOR') {
+    const stroked = dumpStrokedPath(node, parent);
+    if (stroked) return stroked;
+    const paths = node.vectorPaths;
+    const fills = Array.isArray(node.fills) ? node.fills.filter((p) => p.visible !== false) : [];
+    const t = node.relativeTransform;
+    const readable = (node.isMask === undefined || node.isMask === false) &&
+      Number.isFinite(node.width) && node.width > 0 && Number.isFinite(node.height) && node.height > 0 &&
+      Array.isArray(paths) && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
+      t && t.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
+      t[0][0] === 1 && t[0][1] === 0 && t[1][0] === 0 && t[1][1] === 1 &&
+      fills.length === 1 && fills[0].type === 'SOLID' &&
+      (node.blendMode === undefined || node.blendMode === 'NORMAL' || node.blendMode === 'PASS_THROUGH') &&
+      (node.cornerRadius === undefined || node.cornerRadius === 0) &&
+      !(node.strokes || []).some((p) => p.visible !== false) && !(node.effects || []).some((p) => p.visible !== false);
+    if (!readable) return null;
+    const shape = { kind: 'path', width: node.width, height: node.height, paths: paths.map((p) => ({ data: p.data, windingRule: p.windingRule })) };
+    const parentAuto = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
+    if (parent && (node.layoutPositioning === 'ABSOLUTE' || !parentAuto)) {
+      shape.x = t[0][2]; shape.y = t[1][2];
+      shape.right = parent.width - shape.x - shape.width; shape.bottom = parent.height - shape.y - shape.height;
+      if (node.constraints) {
+        const horizontal = CONSTRAINT_H[node.constraints.horizontal], vertical = CONSTRAINT_V[node.constraints.vertical];
+        if (horizontal && vertical) shape.constraints = { horizontal, vertical };
+      }
+    }
+    return shape;
+  }
+
   const kind = SHAPE_KIND_BY_TYPE[node.type];
   if (!kind) return null;
   const rotation = round2(-(typeof node.rotation === 'number' ? node.rotation : 0));
@@ -535,6 +681,9 @@ async function dumpNode(node, nodePath, parent) {
 
   // dump v1.3 (#42): parametric decor geometry is CARRIED (rotation rides it).
   const shape = dumpShape(node, parent);
+  if (node.type === 'VECTOR' && node.isMask !== undefined && node.isMask !== false) {
+    degrade('vector-mask-unsupported', nodePath, 'A vector mask changes subsequent siblings; its geometry cannot be carried as an ordinary filled path. Mask composition is not recovered.');
+  }
   if (shape) out.shape = shape;
 
   // dump v1.7: ABSOLUTE placement for ALL node types (TEXT/FRAME/INSTANCE),
@@ -575,10 +724,12 @@ async function dumpNode(node, nodePath, parent) {
       && node.absoluteBoundingBox && 'layoutSizingHorizontal' in node) {
     const hFixed = node.layoutSizingHorizontal === 'FIXED';
     const vFixed = node.layoutSizingVertical === 'FIXED';
-    const rotated = 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6;
+    const rotated = 'rotation' in node && typeof node.rotation === 'number' && node.rotation !== 0;
     const fixed = {};
-    if (hFixed && (vFixed || !rotated)) fixed.width = round2(node.absoluteBoundingBox.width);
-    if (vFixed && (hFixed || !rotated)) fixed.height = round2(node.absoluteBoundingBox.height);
+    // dump v1.37: keep the measured number exactly, matching REST.
+    const { width, height } = node.absoluteBoundingBox;
+    if (hFixed && (vFixed || !rotated) && Number.isFinite(width) && width >= 0) fixed.width = width;
+    if (vFixed && (hFixed || !rotated) && Number.isFinite(height) && height >= 0) fixed.height = height;
     if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
 
@@ -667,7 +818,7 @@ async function dumpNode(node, nodePath, parent) {
   if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' (CSS transform: rotate()) has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
-  if (VECTOR_TYPES.indexOf(node.type) >= 0) {
+  if (VECTOR_TYPES.indexOf(node.type) >= 0 && !shape) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }
 
@@ -857,6 +1008,7 @@ async function dumpNode(node, nodePath, parent) {
     // false = a ring painted over the padding) and an ABSENT field must keep
     // meaning "not captured". Twin of the same write in extract/figma/rest/map.ts.
     if (out.layout !== undefined && typeof node.strokesIncludedInLayout === 'boolean') out.strokesIncludedInLayout = node.strokesIncludedInLayout;
+    else if (['FRAME', 'COMPONENT', 'COMPONENT_SET'].indexOf(node.type) >= 0 && node.layoutMode === 'NONE') out.strokesIncludedInLayout = false;
     // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
     // styling belongs to the child contract; the Slot utility's dashed
     // border is the utility's own) — no receipt for an unconsumed channel.
@@ -876,7 +1028,7 @@ async function dumpNode(node, nodePath, parent) {
       // wholly outward. The FACT is carried above either way; what is
       // refused is the lowering, and it is refused under its OWN code so
       // the boundary is countable rather than folded into a shared one.
-      if (node.strokeAlign === 'CENTER') {
+      if (node.strokeAlign === 'CENTER' && (!shape || shape.kind !== 'stroked-path')) {
         degrade('stroke-align-unsupported', nodePath, 'strokeAlign CENTER — a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border');
       }
     }
@@ -1370,7 +1522,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.36',
+    dumpVersion: '1.40',
   },
 };
 dumps._degradations = degradations;

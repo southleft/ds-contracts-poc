@@ -16,8 +16,14 @@ import path from 'node:path';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import { isReactNativeRequest, type ReactNativeRequest } from './react-native-request.js';
+import { isReactStateApiNativeRequest, type ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 
-export type NativeSourcePin = ReactNativeRequest | ReactInitialNativeRequest;
+export type NativeSourcePin = ReactNativeRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
+export const isNativeSourcePin = (pin: unknown): pin is NativeSourcePin =>
+  isReactNativeRequest(pin) || isReactInitialNativeRequest(pin) || isReactStateApiNativeRequest(pin);
+export const nativeSourcePinCase = (pin: NativeSourcePin) => pin.kind === 'react-state-api-draft' ? pin.initial.caseId : pin.caseId;
+export const nativeSourcePinAnchor = (pin: NativeSourcePin): ReactNativeRequest =>
+  pin.kind === 'react-state-api-draft' ? pin.initial.anchor : pin.kind === 'react-initial-draft' ? pin.anchor : pin;
 type Entry = { version: 1; parentId: string; sequence: number; previous: string; request: NativeSourcePin };
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const sha = (s: string) => createHash('sha256').update(s).digest('hex');
@@ -25,25 +31,32 @@ const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 function fail(message: string): never { throw Error('native-source-succession-' + message); }
 
 export const nativeSourcePinReference = (pin: NativeSourcePin) =>
-  pin.kind === 'react-initial-draft' ? pin.anchor.referenceId : pin.referenceId;
+  nativeSourcePinAnchor(pin).referenceId;
 /** `compilation` selects a preparer at creation; it is not source identity. */
 const identity = (pin: NativeSourcePin) => {
   const { compilation: _compilation, ...rest } = pin as ReactNativeRequest; return rest;
 };
 /** Same source case and request shape. Only the sealed evidence may differ. */
 function assertSuccessor(original: NativeSourcePin, successor: NativeSourcePin) {
-  if (isReactInitialNativeRequest(original)) {
+  if (isReactStateApiNativeRequest(original)) {
+    // The complete state experiment remains part of the pin and journal seed.
+    // It cannot be replaced by appearance evidence alone.
+    if (!isReactStateApiNativeRequest(successor) || successor.initial.caseId !== original.initial.caseId) fail('case-mismatch');
+  } else if (isReactInitialNativeRequest(original)) {
     // `instance-N` is positional: a source edit that inserts a sibling moves it
     // onto another element. Until an instance has a stable descriptor, only
     // root-level initial states can follow a later observation.
     if (original.version !== 1) fail('kind-unsupported');
-    if (!isReactInitialNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId ||
-        successor.anchor.caseId !== original.anchor.caseId) fail('case-mismatch');
+    if (!isReactInitialNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId) fail('case-mismatch');
   } else if (isReactNativeRequest(original)) {
     // Nested child roots pin a selection inside their parent's observation.
     if (original.version !== 1) fail('kind-unsupported');
     if (!isReactNativeRequest(successor) || successor.version !== 1 || successor.caseId !== original.caseId) fail('case-mismatch');
   } else fail('kind-unsupported');
+  // An initial/state-API anchor authenticates a whole cohort archive. Its root
+  // case is not the stateful component's identity. The service independently
+  // reads the target case in both sealed archives and requires the same source
+  // module/export before adoption; every experiment pin remains immutable.
 }
 
 export function createNativeSourceSuccessions(repo: string) {

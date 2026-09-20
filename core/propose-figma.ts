@@ -1,6 +1,9 @@
+import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './absolute-box.js';
+import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
+import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
 /**
  * DESIGN → CONTRACT — the PURE core of extract/figma/propose.ts.
  *
@@ -1259,6 +1262,7 @@ export function settleUaPadding(proposal: { contract: unknown; notes: string[] }
 interface Occ {
   variant: string;
   node: DumpNode;
+  parent?: { node: DumpNode; occurrences: Occ[] };
 }
 
 interface Merged {
@@ -1331,14 +1335,18 @@ function foldWrapperUnion(
     firstNode: DumpNode;
     childKeys: Set<string>;
     present: Set<Occ>;
+    painted: boolean;
   }
   const candidates = new Map<string, Candidate>();
   for (const o of occ) {
     for (const c of childrenOf.get(o)!) {
       if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
       let e = candidates.get(c.name);
-      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set() }));
+      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set(), painted: false }));
       e.present.add(o);
+      e.painted ||= c.fill !== undefined || c.stroke !== undefined || c.imageFill !== undefined ||
+        (c.opacity !== undefined && c.opacity !== 1) || (c.effects?.length ?? 0) > 0 ||
+        ['background-color', 'border-color', 'opacity', 'box-shadow'].some((key) => c.bound?.[key] !== undefined);
       for (const cc of c.children ?? []) e.childKeys.add(keyOf(cc));
     }
   }
@@ -1361,6 +1369,12 @@ function foldWrapperUnion(
   }
   for (const [wName, w] of candidates) {
     if (w.present.size === occ.length || w.present.size === 0) continue;
+    if (w.painted) {
+      // A real wrapper's paint is not an observation in a flat variant.
+      // Keep both paths so the ordinary presence rule can gate them.
+      notes.push(`${where}: painted wrapper "${wName}" is absent in some variants — wrapper and flat children remain separate for variant-presence projection; no synthetic paint copied`);
+      continue;
+    }
     const foldableKeys = new Set([...w.childKeys].filter((k) => !tainted.has(k)));
     if (foldableKeys.size === 0) continue;
     for (const o of occ) {
@@ -1413,7 +1427,7 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
     const childOcc: Occ[] = [];
     for (const o of occ) {
       const child = childrenOf.get(o)!.filter((c) => c.name === childName)[ord];
-      if (child) childOcc.push({ variant: o.variant, node: child });
+      if (child) childOcc.push({ variant: o.variant, node: child, parent: { node: o.node, occurrences: occ } });
     }
     // Duplicated sibling names need distinct merged names (they become note
     // paths and part keys): a swap-bound duplicate takes its INSTANCE_SWAP
@@ -2159,6 +2173,7 @@ interface Ctx {
   setName: string;
   axes: Axis[];
   totalVariants: string[];
+  presenceVariants?: string[];
   corpus: TokenCorpus;
   contractIdByName: Map<string, string>;
   contractsById?: Map<string, MinimalChildContract>;
@@ -2853,7 +2868,7 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   const [align] = aligns;
   if (align === 'OUTSIDE') return 'outline';
   // @door propose.stroke-align-center-unsupported
-  if (align === 'CENTER') {
+  if (align === 'CENTER' && !m.occ.every(o => o.node.shape?.kind === 'stroked-path')) {
     ctx.notes.push(
       `${where}: strokeAlign CENTER — half the weight is drawn inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. REFUSED BY NAME (capture receipt stroke-align-unsupported); the stroke carries as an INSIDE border, off by half its weight per side (review)`,
     );
@@ -3157,19 +3172,27 @@ function invertNodeTokens(
     }
   }
   carry('gap', f('itemSpacing'));
-  // The root's bound width comes back as max-width (a component's outer
-  // dimension is fluid-up-to in code; the canvas can only draw the max). The
-  // TOKEN is unchanged, so nothing is lost — but the CHANNEL changed, and the
-  // run said so nowhere. A reader diffing the proposal against the contract
-  // then sees `width` missing and `max-width` invented, and counts a
-  // translation as two losses. It cost exactly that once (TJ-TEST.md §A7
-  // listed Label's width as a silent loss; it never was). Receipt it.
+  // A uniformly FIXED, non-FILL root has an authored width, just like an
+  // unbound FIXED root below. Keep its variable on that exact channel. The
+  // older fluid-up-to translation shrank empty controls to their content.
+  const fixedRootWidth = isRoot && m.occ.length > 0 && m.occ.every(({ node }) => {
+    if (node.fillWidth === true || !node.bbox || !Number.isFinite(node.bbox.width) || node.bbox.width <= 0) return false;
+    const layout = node.layout;
+    if (!layout) return true; // a non-auto-layout frame is fixed by construction
+    return (layout.mode === 'VERTICAL' ? layout.counterSizing : layout.primarySizing) === 'FIXED';
+  });
+  // Otherwise the root's bound width keeps the historical max-width mapping
+  // until its mixed, HUG or FILL behavior has a separate proved carrier.
   if (isRoot && f('width') !== undefined) {
-    ctx.notes.push(
-      `${where}: root width binding ${f('width')} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped`,
-    );
+    if (fixedRootWidth) {
+      ctx.notes.push(`${where}: bound root width retained as width — every captured plane is FIXED and non-FILL; maxWidth remains a separate constraint`);
+    } else {
+      ctx.notes.push(
+        `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — measured positive width and uniformly FIXED non-FILL sizing are not witnessed; incomplete or mixed/HUG/FILL behavior requires review`,
+      );
+    }
   }
-  carry(isRoot ? 'max-width' : 'width', f('width'));
+  carry(isRoot && !fixedRootWidth ? 'max-width' : 'width', f('width'));
   carry('height', f('height'));
   carry('min-width', f('minWidth'));
   carry('min-height', f('minHeight'));
@@ -3887,7 +3910,7 @@ function liftUnboundTextPaintsToLiterals(
   );
 }
 
-/** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape parts):
+/** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape/text parts):
  *  a node drawn in EVERY variant but hidden exactly where one boolean axis
  *  is false (Tooltip pointer=false), or visible for exactly one enum value,
  *  becomes visibleWhen. Anything else is a NAMED note. */
@@ -3923,9 +3946,9 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
       const only = visibleValues.size === 1 ? [...visibleValues][0] : undefined;
       if (only !== undefined && !hiddenValues.has(only)) {
         fenceSparseInference(ctx.axes, `visibility@${where}`, m.occ.map((o) => ({ variant: o.variant, value: o.node.hidden === true })));
-        part.visibleWhen = { prop: axis.propName, equals: camel(only) };
+        part.visibleWhen = { prop: axis.propName, equals: axisValue(axis, only) };
         ctx.notes.push(
-          `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${camel(only)} }`,
+          `${where}: visible only where "${axis.property}" = "${only}" — proposed as visibleWhen { prop: ${axis.propName}, equals: ${axisValue(axis, only)} }`,
         );
         return;
       }
@@ -3946,36 +3969,88 @@ interface ShapePlacement {
   centerResidue?: number;
 }
 
-function shapePlacementOf(sh: NonNullable<DumpNode['shape']>): ShapePlacement | null {
+function parentCssBorderInsets(o: Occ, ctx: Ctx): BoxInsets {
+  const parent = o.parent?.node;
+  if (!parent) return zeroInsets();
+  const drawn = o.parent!.occurrences.map(p => p.node).filter(n => n.stroke !== undefined);
+  // CENTER is already projected as an INSIDE CSS border, with the existing
+  // paint-loss receipt. Its CSS padding edge is still fully determined.
+  if (new Set(drawn.map(n => n.strokeAlign === 'OUTSIDE' ? 'OUTSIDE' : 'INSIDE')).size > 1 ||
+      new Set(drawn.map(n => n.strokesIncludedInLayout ?? true)).size > 1)
+    throw Error('absolute-box-parent-stroke-basis-unqualified');
+  if (parent.strokeAlign === 'OUTSIDE' || parent.strokesIncludedInLayout === false) return zeroInsets();
+  // The parent inverter withholds literal side widths when only SOME sides
+  // bind. Those raw widths therefore cannot be the emitted CSS border basis.
+  if (parent.strokeWeights !== undefined) {
+    verifyInsets(parent.strokeWeights);
+    const fields = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
+    const count = fields.filter(field => parent.bound?.[field] !== undefined).length;
+    if (count > 0 && count < 4 && !parent.bound?.strokeWeight)
+      throw Error('absolute-box-partial-border-binding-unqualified');
+    if (!parent.bound?.strokeWeight && count !== 4) {
+      const projected: Record<string, unknown> = {};
+      carryPerSideStrokeWeights({ name: parent.name, type: parent.type ?? 'FRAME', occ: o.parent!.occurrences, children: [] },
+        projected, { ...ctx, notes: [] }, 'absolute-parent');
+      if (!projected.literals && !projected.literalsByProp)
+        throw Error('absolute-box-parent-side-widths-not-carried');
+    }
+  }
+  const resolve = (name: string): number | undefined => {
+    const key = dotPath(name);
+    let value: unknown;
+    try { value = ctx.corpus.resolveLiteral(key); } catch { /* captured layer below */ }
+    value ??= ctx.capturedValues?.get(key);
+    return typeof value === 'string' && /^\d+(?:\.\d+)?px$/.test(value) ? Number.parseFloat(value) : undefined;
+  };
+  const value = (field: string, literal: number | undefined, fallback: number) =>
+    parent.bound?.[field] ? resolve(parent.bound[field]) : parent.stroke ? literal ?? fallback : 0;
+  const uniform = value('strokeWeight', parent.strokeWeight, 0);
+  const insets = Object.fromEntries((['top', 'right', 'bottom', 'left'] as const).map(side =>
+    [side, value('stroke' + side[0].toUpperCase() + side.slice(1) + 'Weight', parent.strokeWeights?.[side], uniform ?? NaN)])) as BoxInsets;
+  verifyInsets(insets);
+  if (Object.values(insets).some(n => n !== 0) && (parent as { __synthetic?: boolean }).__synthetic)
+    throw Error('absolute-box-synthetic-parent-unqualified');
+  return insets;
+}
+
+function shapePlacementOf(sh: NonNullable<DumpNode['shape']>, insets: BoxInsets): ShapePlacement | null {
   if (sh.x === undefined || sh.y === undefined) return null;
-  const styles: Record<string, string> = { position: 'absolute' };
-  const translate: string[] = [];
+  const styles: Record<string, string> = { position: 'absolute' }, translate: string[] = [];
   let centerResidue: number | undefined;
-  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  const x = sh.x - insets.left, y = sh.y - insets.top,
+    right = sh.right === undefined ? undefined : sh.right - insets.right,
+    bottom = sh.bottom === undefined ? undefined : sh.bottom - insets.bottom;
+  const px = (n: number) => `${n}px`;
   const h = sh.constraints?.horizontal ?? 'LEFT';
-  if (h === 'RIGHT' && sh.right !== undefined) styles.right = px(sh.right);
-  else if (h === 'CENTER' && sh.right !== undefined) {
-    styles.left = '50%';
-    translate.push('translateX(-50%)');
-    const residue = Math.round(Math.abs(sh.x - sh.right) * 50) / 100;
-    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
-  } else styles.left = px(sh.x);
+  if (h === 'RIGHT' && right !== undefined) styles.right = px(right);
+  else if (h === 'CENTER' && right !== undefined && x === right) {
+    styles.left = '50%'; translate.push('translateX(-50%)');
+  } else {
+    styles.left = px(x);
+    if (h === 'CENTER' && right !== undefined) centerResidue = Math.abs(x - right) / 2;
+  }
   const v = sh.constraints?.vertical ?? 'TOP';
-  if (v === 'BOTTOM' && sh.bottom !== undefined) styles.bottom = px(sh.bottom);
-  else if (v === 'CENTER' && sh.bottom !== undefined) {
-    styles.top = '50%';
-    translate.push('translateY(-50%)');
-    const residue = Math.round(Math.abs(sh.y - sh.bottom) * 50) / 100;
-    if (residue > 0.01) centerResidue = Math.max(centerResidue ?? 0, residue);
-  } else styles.top = px(sh.y);
+  if (v === 'BOTTOM' && bottom !== undefined) styles.bottom = px(bottom);
+  else if (v === 'CENTER' && bottom !== undefined && y === bottom) {
+    styles.top = '50%'; translate.push('translateY(-50%)');
+  } else {
+    styles.top = px(y);
+    if (v === 'CENTER' && bottom !== undefined) centerResidue = Math.max(centerResidue ?? 0, Math.abs(y - bottom) / 2);
+  }
   return { styles, translate, centerResidue };
 }
 
 /** Invert captured DumpShape geometry into part.shape (+ per-variant
  *  placement/rotation stylesWhen). Values are EXACT from the dump. */
 function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string) {
+  const observedAxisValue = (axis: Axis, value: string) =>
+    (ctx.presenceVariants ?? ctx.totalVariants).some((v) => axisValuesOf(v)[axis.property] === value);
   const withShape = m.occ.filter((o) => o.node.shape !== undefined);
   if (withShape.length === 0) return;
+  if (withShape.some((o) => ['path', 'stroked-path'].includes(o.node.shape!.kind)) && withShape.length !== m.occ.length) {
+    ctx.notes.push(`${where}: ${withShape.some(o => o.node.shape!.kind === 'stroked-path') ? 'stroked-path' : 'filled-path'}-incomplete-capture — geometry not carried for partially captured paths`);
+    return;
+  }
   if (withShape.length !== m.occ.length) {
     // Overlay-flattened class (round 2 iteration 2): a node that is a
     // parametric shape in SOME variants and an arbitrary-path node in others
@@ -3992,13 +4067,25 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     invertNodeShape(sub, part, ctx, where);
     return;
   }
-  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape! }));
+  const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape!, insets: o.node.shape!.x !== undefined && o.node.shape!.y !== undefined ? parentCssBorderInsets(o, ctx) : zeroInsets() }));
   const kinds = [...new Set(shapes.map((s) => s.sh.kind))];
   if (kinds.length > 1) {
     ctx.notes.push(`${where}: shape kind differs across variants (${kinds.join(', ')}) — shape not carried; review`);
     return;
   }
   const first = shapes[0].sh;
+  if (first.kind === 'stroked-path') {
+    const geometry = (sh: typeof first) => ({ kind: sh.kind, width: sh.width, height: sh.height, strokePath: sh.strokePath });
+    if (shapes.some(s => strokedPathGeometryIssue(s.sh) || s.sh.rotation || s.sh.paths || s.sh.arc || s.sh.sides || s.sh.x !== undefined || s.sh.constraints) ||
+        new Set(shapes.map(s => JSON.stringify(geometry(s.sh)))).size !== 1) {
+      ctx.notes.push(`${where}: stroked-path-inconsistent-or-unsupported-geometry — original centerline not carried`);
+      return;
+    }
+    part.shape = geometry(first);
+    part.declared = { ...(part.declared as Record<string, string> | undefined), position: 'absolute' };
+    ctx.notes.push(`${where}: original open centerline with uniform cap/join and exact SCALE/SCALE viewport carried; stroke paint uses the standard binding and provisional-token rules`);
+    return;
+  }
   // dump v1.7 ellipse arc (round 2 iteration 4): the sweep IS carried.
   // Grammar (mirrors the rotation discipline below):
   //   full sweep (≥ 2π)          → dropped as redundant (the plain ellipse);
@@ -4044,6 +4131,39 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     }
   }
   const shape: Record<string, unknown> = { kind: first.kind, width: first.width, height: first.height };
+  if (first.kind === 'path') {
+    if (shapes.some((s) => !s.sh.paths?.length)) {
+      ctx.notes.push(`${where}: filled-path-missing-geometry`);
+      return;
+    }
+    shape.paths = first.paths;
+    const geometry = (s: (typeof shapes)[number]) => ({ width: s.sh.width, height: s.sh.height, paths: s.sh.paths! });
+    if (new Set(shapes.map((s) => JSON.stringify(geometry(s)))).size > 1) {
+      let carried = false;
+      for (const axis of ctx.axes) {
+        if (isBooleanAxis(axis)) continue;
+        const byValue = new Map<string, ReturnType<typeof geometry>>();
+        let fits = true;
+        for (const s of shapes) {
+          const value = axisValuesOf(s.variant)[axis.property];
+          const g = geometry(s);
+          if (value === undefined || (byValue.has(value) && JSON.stringify(byValue.get(value)) !== JSON.stringify(g))) { fits = false; break; }
+          byValue.set(value, g);
+        }
+        if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
+        fenceSparseInference(ctx.axes, `filled-path@${where}`, shapes.map((s) => ({ variant: s.variant, value: JSON.stringify(geometry(s)) })));
+        shape.pathsByProp = { prop: axis.propName, map: Object.fromEntries(axis.values.map((v) => [axisValue(axis, v), byValue.get(v) ?? geometry(shapes[0])])) };
+        const absent = axis.values.filter((v) => !byValue.has(v));
+        if (absent.length) ctx.notes.push(`${where}: filled-path geometry at ${absent.join(', ')} is unreachable under the parent presence gate; base geometry supplies the non-rendered branch only`);
+        carried = true;
+        break;
+      }
+      if (!carried) {
+        ctx.notes.push(`${where}: filled-path-variant-geometry-unresolved — no complete, unambiguous enum axis; paths not carried`);
+        return;
+      }
+    }
+  }
   if (anyArc && !arcVaries && partialArcs.every((a) => a !== undefined)) {
     const a = partialArcs[0]!;
     shape.arc = { start: a.start, end: a.end, innerRadius: a.innerRadius };
@@ -4077,12 +4197,13 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
         }
         if (!seen) byValue.set(value, { width: s.sh.width, height: s.sh.height });
       }
-      if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+      if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
       if (new Set([...byValue.values()].map((d) => `${d.width}×${d.height}`)).size < 2) continue;
       fenceSparseInference(ctx.axes, `shape-size@${where}`, shapes.map((s) => ({ variant: s.variant, value: `${s.sh.width}×${s.sh.height}` })));
       const map: Record<string, { width: string; height: string }> = {};
       for (const value of axis.values) {
-        const d = byValue.get(value)!;
+        const d = byValue.get(value);
+        if (!d) continue;
         map[axisValue(axis, value)] = { width: `${d.width}px`, height: `${d.height}px` };
       }
       sizeByAxis = { propName: axis.propName, map };
@@ -4142,7 +4263,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return a ? arcMaskCss(a.start, a.end) : null;
   };
   const specOf = (s: (typeof shapes)[number]): string => {
-    const p = shapePlacementOf(s.sh);
+    const p = shapePlacementOf(s.sh, s.insets);
     return JSON.stringify({
       p: p?.styles ?? null,
       t: p?.translate ?? [],
@@ -4150,10 +4271,10 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       a: arcVaries ? maskOf(s) : null,
     });
   };
-  const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh) !== null);
+  const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh, s.insets) !== null);
   if (!anyPlacement && !rotationVaries && !arcVaries) return; // in-flow, constant rotation/arc — done
   const buildStyles = (s: (typeof shapes)[number]): Record<string, string> | null => {
-    const p = shapePlacementOf(s.sh);
+    const p = shapePlacementOf(s.sh, s.insets);
     const transform: string[] = [...(p?.translate ?? [])];
     if (rotationVaries && (s.sh.rotation ?? 0) !== 0) transform.push(`rotate(${s.sh.rotation}deg)`);
     const styles: Record<string, string> = { ...(p?.styles ?? {}) };
@@ -4164,7 +4285,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     if (transform.length > 0) styles.transform = transform.join(' ');
     if (p?.centerResidue !== undefined) {
       ctx.notes.push(
-        `${where}: CENTER-constrained placement carried as 50% + translate — the drawn offset differs from the exact center by ${p.centerResidue}px (canvas pixel snap); review`,
+        `${where}: CENTER-constrained placement uses the exact measured offset because the drawn box differs from the CSS padding-box center by ${p.centerResidue}px; center tracking under resize is not carried; review`,
       );
     }
     return Object.keys(styles).length > 0 ? styles : null;
@@ -4187,7 +4308,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       }
       if (!seen) byValue.set(value, s);
     }
-    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    if (!fits || !axis.values.every((v) => byValue.has(v) || (first.kind === 'path' && !observedAxisValue(axis, v)))) continue;
     fenceSparseInference(ctx.axes, `shape-placement@${where}`, shapes.map((s) => ({ variant: s.variant, value: specOf(s) })));
     const stylesWhen = (part.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
     let emitted = 0;
@@ -4299,7 +4420,7 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
         where,
         dim,
         'px',
-        m.occ.map((o) => ({ variant: o.variant, value: Math.round(o.node.shape![dim] * 100) / 100 })),
+        m.occ.map((o) => ({ variant: o.variant, value: o.node.shape![dim] })),
         undefined,
         // Presence-shaped coverage — same '0' fill as carryAbsPlacement: a
         // subset-present part never renders at the unobserved axis values
@@ -4311,7 +4432,7 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
       // mint pass).
       ctx.mint.absFallbacks.push({
         part, tokens, chan: dim,
-        value: Math.round(m.occ[0].node.shape![dim] * 100) / 100,
+        value: m.occ[0].node.shape![dim],
         where,
       });
     }
@@ -4497,7 +4618,10 @@ function carryAbsPlacement(
   where: string,
   opts: { text?: boolean; size?: boolean } = {},
 ): boolean {
-  const boxes = m.occ.map((o) => ({ variant: o.variant, box: absBoxOf(o.node) }));
+  const boxes = m.occ.map((o) => {
+    const native = absBoxOf(o.node);
+    return { variant: o.variant, box: native && cssBoxFromNative(native, parentCssBorderInsets(o, ctx)) };
+  });
   if (boxes.every((b) => b.box === undefined)) return false;
   // @door propose.abs-placement-ledger
   const ledger = (why: string): false => {
@@ -4602,7 +4726,6 @@ function carryAbsPlacement(
   if (!['LEFT', 'RIGHT', 'CENTER', 'STRETCH'].includes(hs[0]) || !['TOP', 'BOTTOM', 'CENTER', 'STRETCH'].includes(vs[0])) {
     return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling`);
   }
-  const px2 = (n: number) => Math.round(n * 100) / 100;
   // Presence-shaped coverage (round 2 iteration 6): a node ABSENT from some
   // variants yields no observation there, so a placement channel that is a
   // clean function of one axis still failed full-coverage classification and
@@ -4618,14 +4741,14 @@ function carryAbsPlacement(
   const mintChan = (chan: string, pick: (b: AbsBox) => number) => {
     mintObservation(
       ctx, tokens, where, chan, 'px',
-      boxes.map((b) => ({ variant: b.variant, value: px2(pick(b.box!)) })),
+      boxes.map((b) => ({ variant: b.variant, value: pick(b.box!) })),
       `${where}|abs-${chan}`,
       sparse,
     );
     // Base-combo literal fallback (the round-4 padding precedent): when the
     // per-variant values refuse classification in the mint pass, the FIRST
     // occurrence's value carries as a part literal — applied and NAMED there.
-    ctx.mint!.absFallbacks.push({ part, tokens, chan, value: px2(pick(boxes[0].box!)), where });
+    ctx.mint!.absFallbacks.push({ part, tokens, chan, value: pick(boxes[0].box!), where });
     channels.push(chan);
   };
   const declared = (part.declared as Record<string, string> | undefined) ?? {};
@@ -7288,17 +7411,25 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
 const OMIT_PART: Record<string, unknown> = { OMIT: true };
 
 function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<string, unknown> | undefined {
-  if (m.occ.length === ctx.totalVariants.length) return undefined;
   const present = new Set(m.occ.map((o) => o.variant));
+  // Keep an already-exact global gate, including a redundant child gate.
+  // Parent scoping extends what can be expressed; it must not rewrite an
+  // existing contract merely because its child repeats the parent's gate.
+  const globallyExplained = ctx.axes.some((axis) => {
+    const values = axis.values.filter((value) => ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value));
+    return values.length > 0 && values.length < axis.values.length && ctx.totalVariants.every((v) => values.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v));
+  });
+  const domain = globallyExplained ? ctx.totalVariants : (ctx.presenceVariants ?? ctx.totalVariants);
+  if (m.occ.length === domain.length) return undefined;
   let boolFalseSide: Axis | undefined;
   for (const axis of ctx.axes) {
     for (const value of axis.values) {
-      const matches = ctx.totalVariants.every((v) => {
+      const matches = domain.every((v) => {
         const is = axisValuesOf(v)[axis.property] === value;
         return is === present.has(v);
       });
       if (!matches) continue;
-      fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
+      fenceSparseInference(ctx.axes, `presence@${where}`, domain.map((v) => ({ variant: v, value: present.has(v) })));
       // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
       // `equals: "true"` would refuse at the referee (visibleWhen.equals is
       // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
@@ -7327,14 +7458,14 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   for (const axis of ctx.axes) {
     if (isBooleanAxis(axis)) continue;
     const presentValues = axis.values.filter((value) =>
-      ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
+      domain.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
     );
     if (presentValues.length < 2 || presentValues.length === axis.values.length) continue;
-    const matches = ctx.totalVariants.every(
+    const matches = domain.every(
       (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
     );
     if (!matches) continue;
-    fenceSparseInference(ctx.axes, `presence@${where}`, ctx.totalVariants.map((v) => ({ variant: v, value: present.has(v) })));
+    fenceSparseInference(ctx.axes, `presence@${where}`, domain.map((v) => ({ variant: v, value: present.has(v) })));
     ctx.notes.push(
       `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
     );
@@ -7350,7 +7481,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // Absences fully explained by base-instance-flattened variants are a
   // declared fidelity limit (the base component's internals are not captured
   // in those variants), not structural drift — named, but not alarmed.
-  if (ctx.totalVariants.every((v) => present.has(v) || ctx.flattenedVariants.has(v))) {
+  if (domain.every((v) => present.has(v) || ctx.flattenedVariants.has(v))) {
     ctx.notes.push(
       `${where}: absent only in base-instance-flattened variant(s), where the base component's internals are not captured — kept unconditional`,
     );
@@ -7365,15 +7496,15 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // floating tooltips in 20/55) OMITS the part as a NAMED degradation —
   // @door propose.part-kept-majority-presence
   // unconditional emission would draw it in variants that never carried it.
-  if (m.occ.length * 2 > ctx.totalVariants.length) {
+  if (m.occ.length * 2 > domain.length) {
     ctx.notes.push(
-      `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
+      `${where}: present in ${m.occ.length}/${domain.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
     );
     return undefined;
   }
   ctx.notes.push(
     // @door propose.part-omitted-minority-presence
-    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${ctx.totalVariants.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
+    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${domain.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
   );
   return OMIT_PART;
 }
@@ -8616,7 +8747,33 @@ function buildChildParts(
   return parts;
 }
 
+/** Annotate mint coverage only after the emitted part's own visibility gate is
+ * known. Missing capture data is not proof of non-rendering. */
 function buildPart(
+  m: Merged, parentMode: ParentModes | null, ctx: Ctx, where: string, selfKey: string,
+): Record<string, unknown> | null {
+  const part = buildPartFromEvidence(m, parentMode, ctx, where, selfKey);
+  const gate = part?.visibleWhen as { prop?: string; equals?: string | string[] } | undefined;
+  if (ctx.mint && gate?.prop && ctx.mint.axes.some((axis) => axis.propName === gate.prop)) {
+    const present = new Set(m.occ.map((o) => o.variant));
+    const absent = ctx.totalVariants.filter((v) => !present.has(v));
+    const combos = absent.map((v) => ctx.mint!.axisValuesByVariant.get(v));
+    const excluded = combos.every((combo) => {
+      const value = combo?.[gate.prop!];
+      if (value === undefined) return false;
+      return gate.equals === undefined ? value === 'false'
+        : Array.isArray(gate.equals) ? !gate.equals.includes(value) : gate.equals !== value;
+    });
+    if (absent.length > 0 && excluded) {
+      for (const observation of ctx.mint.observations) {
+        if (observation.nodePath === where) observation.partAbsentCombos = combos as Record<string, string>[];
+      }
+    }
+  }
+  return part;
+}
+
+function buildPartFromEvidence(
   m: Merged,
   parentMode: ParentModes | null,
   ctx: Ctx,
@@ -8700,6 +8857,25 @@ function buildPart(
     carryAbsPlacement(m, part, tokens, ctx, where, { text: true });
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
+    const visibilityRefs = new Set(m.occ.map((o) => o.node.propRefs?.visible));
+    const hasVisibilityRef = [...visibilityRefs].some((ref) => ref !== undefined);
+    const hasHiddenText = m.occ.some((o) => o.node.hidden === true);
+    if (hasVisibilityRef || hasHiddenText) {
+      if (m.occ.length !== ctx.totalVariants.length) {
+        // Presence and drawn visibility can require a conjunction that the
+        // contract does not express. Keep the existing presence result and
+        // name the additional channel instead of guessing from a subset.
+        ctx.notes.push(`${where}: TEXT visibility with partial variant presence is not carried — combined presence/visibility requires review`);
+      } else if (hasVisibilityRef) {
+        if (visibilityRefs.size === 1) {
+          applyVisibleBinding(part, [...visibilityRefs][0]!, ctx, where, m);
+        } else {
+          ctx.notes.push(`${where}: TEXT visibility property reference differs or is missing across variants — visibility binding not carried, review`);
+        }
+      } else {
+        invertHiddenVisibility(m, part, ctx, where);
+      }
+    }
     return part;
   }
 
@@ -9360,7 +9536,16 @@ function buildPart(
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = parentModesOf(m, ctx.mint !== undefined);
   // Pre-order key claiming + P9 run detection — see buildChildParts.
-  const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
+  const previousPresence = ctx.presenceVariants;
+  const parentDomain = previousPresence ?? ctx.totalVariants;
+  // Restrict only after an exact presence gate, or when this parent exists
+  // throughout its inherited domain. A named unconditional approximation
+  // must never become evidence that the parent is absent.
+  if (visibleWhen || parentDomain.every((v) => m.occ.some((o) => o.variant === v)))
+    ctx.presenceVariants = m.occ.map((o) => o.variant).filter((v) => parentDomain.includes(v));
+  let parts: Record<string, unknown>;
+  try { parts = buildChildParts(m.children, mode, ctx, where, selfKey); }
+  finally { ctx.presenceVariants = previousPresence; }
   // RC7: a form control's placeholder TEXT node folds back to the channel it
   // came from — ELEMENT-guarded (see foldPlaceholderTextChild).
   foldPlaceholderTextChild(part, parts, ctx, where);
@@ -11500,6 +11685,8 @@ function proposeFromDumpFenced(
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
   const typedAxes = readCodeValueAxes(set);
+  const retainedApi = set.codeValueAxes && typeof set.codeValueAxes === 'object' && (set.codeValueAxes as { version?: unknown }).version === 2
+    ? readFigmaStateApi((set.codeValueAxes as { stateApi?: unknown }).stateApi, set, typedAxes) : undefined;
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
   /** The verdict on the set AS DRAWN, against the full Cartesian. */
@@ -13069,6 +13256,10 @@ function proposeFromDumpFenced(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  if (retainedApi) {
+    restoreFigmaStateApi(contract, retainedApi);
+    ctx.notes.push('retained-state-api: initializer and callback toggle recovered from validated non-executable metadata; drawn variants corroborate the input domain, not native interaction behavior');
+  }
   if (absentVariants !== null && designerStateAxis !== null) {
     // §D.41 — the sparse set with a projected state axis: same refusal before
     // anything is written, then only the REST-plane absences are declared.

@@ -16,8 +16,9 @@ export interface NativeUpdateHistoryEntry {
   receipt?: NativeContractUpdateInput['baseline'];
 }
 export function createNativeUpdatePlans(repo: string,
-  derive: (parentId: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
-  history?: (parentId: string) => NativeUpdateHistoryEntry[]) {
+  derive: (parentId: string, parentJournalRevision?: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
+  history?: (parentId: string) => NativeUpdateHistoryEntry[],
+  currentParentRevision?: (parentId: string) => string) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
   const displayScope = 'native-update-plans:' + randomUUID();
   function directory(parentId: string, create = false) {
@@ -36,8 +37,8 @@ export function createNativeUpdatePlans(repo: string,
   const clean = (receipt: NativeContractUpdateInput['baseline']) => { const r=structuredClone(receipt);delete r.images;return r; };
   // Each written correction must be a single successor of the last verified
   // observation. Historical compiler output is evidence, not current authority.
-  const chain = (parentId: string, source: ReturnType<typeof derive>, self?: string) => {
-    const remaining = [...(history?.(parentId) ?? [])];
+  const chain = (parentId: string, source: ReturnType<typeof derive>, written: NativeUpdateHistoryEntry[], self?: string) => {
+    const remaining = [...written];
     let predecessor: Predecessor | undefined, before=source.input.before, baseline=clean(source.input.baseline);
     while (remaining.length) {
       const candidates=remaining.filter(e => same(read(parentId,e.proposalId).predecessor,predecessor));
@@ -58,12 +59,27 @@ export function createNativeUpdatePlans(repo: string,
     return {predecessor,before,baseline};
   };
   const compile = (parentId: string, self?: string): Record => {
-    const source = derive(parentId);
+    const written = history?.(parentId) ?? [];
+    const roots = written.map(entry => read(parentId,entry.proposalId)).filter(record => !record.predecessor);
+    if (written.length && roots.length !== 1) throw Error('native-update-history-branch-or-gap');
+    // Only a written correction can select a saved parent prefix. Unapplied
+    // proposals still require the latest observation and cannot pin stale data.
+    const source = derive(parentId, roots[0]?.parentJournalRevision);
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
-    const tip=chain(parentId,source,self);
+    const tip=chain(parentId,source,written,self);
+    const update=prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline});
+    // Reconstruct only authenticated WRITTEN legacy history, never an unapplied
+    // proposal. The complete record still has to match below; compiler/source
+    // drift cannot be hidden by removing this version field.
+    if(self && written.some(entry=>entry.proposalId===self)) {
+      const saved=read(parentId,self).update.plan;
+      if(saved.kind==='native-contract-opacity-update' && saved.tokenChanges?.length && saved.tokenBindingScope===undefined &&
+          update.plan.kind==='native-contract-opacity-update' && update.plan.tokenBindingScope==='document-v1') {
+        delete update.plan.tokenBindingScope;update.revision=revisionOf(update.plan);
+      }
+    }
     return { version: 1, parentId, parentJournalRevision: source.parentJournalRevision,
-      ...(tip.predecessor ? {predecessor:tip.predecessor} : {}),
-      update: prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline}) };
+      ...(tip.predecessor ? {predecessor:tip.predecessor} : {}), update };
   };
   const read = (parentId: string, id: string): Record => evidenceReadOnce(displayScope, {parentId,id}, () => {
     if (!HASH.test(id)) throw Error('native-update-plan-id-invalid');
@@ -79,12 +95,12 @@ export function createNativeUpdatePlans(repo: string,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
     changes:structuredClone(record.update.plan.changes),
     // Variable values this update writes. Absent for every plan without them.
-    ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges)} : {}),
+    ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges ? {tokenChanges:structuredClone(record.update.plan.tokenChanges),
+      ...(record.update.plan.tokenBindingScope ? {tokenBindingScope:record.update.plan.tokenBindingScope} : {})} : {}),
     limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified',
-      // Measured before a variable write: this operation's page and every local
-      // variable. A node on another page bound to it is not read (a full-file
-      // walk is not affordable on large files), so it would follow the new value.
-      ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ? [NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
+      // Historical plans keep their measured scope; they cannot authorize a new write.
+      ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ?
+        [record.update.plan.tokenBindingScope==='document-v1' ? 'document-binding-scan-required' : NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
   return {
     prepare(parentId: string) {
       assertOutsideEvidenceSnapshot();
@@ -108,8 +124,10 @@ export function createNativeUpdatePlans(repo: string,
       return view(record);
     },
     list(parentId: string) {
+      return evidenceReadOnce(displayScope + ':list', parentId, () => {
       const dir=directory(parentId); if (!dir) return [];
       return readdirSync(dir).filter(f=>/^[a-f0-9]{64}\.json$/.test(f)).sort().map(f=>view(read(parentId,f.slice(0,-5))));
+      });
     },
     current(parentId: string,id: string) {
       return evidenceReadOnce(displayScope + ':current', {parentId,id}, () => {
@@ -119,5 +137,11 @@ export function createNativeUpdatePlans(repo: string,
       });
     },
     saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
+    observationContext(parentId: string, id: string) {
+      const baselineRevision=read(parentId,id).parentJournalRevision;
+      const currentRevision=currentParentRevision?.(parentId) ?? baselineRevision;
+      if (!HASH.test(currentRevision)) throw Error('native-update-parent-journal-invalid');
+      return {baselineRevision,currentRevision};
+    },
   };
 }

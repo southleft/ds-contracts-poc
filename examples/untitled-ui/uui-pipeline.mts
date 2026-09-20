@@ -13,6 +13,8 @@
  *
  *   npx tsx examples/untitled-ui/uui-pipeline.mts            # verify only
  *   npx tsx examples/untitled-ui/uui-pipeline.mts --write    # rewrite both
+ *   npx tsx examples/untitled-ui/uui-pipeline.mts --absolute-insets-only --write
+ *     # refresh exclusively owned absolute inset tokens from fresh proposals
  *
  * FOUR THINGS ARE LOAD-BEARING. Each was measured, not guessed:
  *
@@ -514,8 +516,93 @@ function renderNotes(): string {
 const pathFor = (file: string): string =>
   file === 'minted.dtcg.json' ? MINTED : file === 'NOTES.md' ? path.join(CONTRACTS, file) : path.join(CONTRACTS, file);
 
+// A bounded migration for older proposals that stored native outer-edge
+// coordinates as CSS insets. Derive through the complete proposal pipeline,
+// but retain every reviewed contract and every unrelated token byte-for-byte.
+// Shared tokens refuse unless ALL contract uses are unchanged absolute-inset
+// references, and no other token aliases them. No component names are special.
+const insetsOnly = process.argv.includes('--absolute-insets-only');
+if (insetsOnly) {
+  const current = readJson(MINTED), oldLeaves = new Map<string, any>(), newLeaves = new Map<string, any>();
+  const flatten = (tree: any, prefix: string[], out: Map<string, any>) => {
+    for (const [key, value] of Object.entries(tree) as Array<[string, any]>) {
+      if (value && typeof value === 'object' && '$value' in value) out.set([...prefix, key].join('.'), value);
+      else if (value && typeof value === 'object') flatten(value, [...prefix, key], out);
+    }
+  };
+  flatten(current, [], oldLeaves); flatten(mintedTree, [], newLeaves);
+  const pattern = (ref: string) => {
+    if (!ref.startsWith('{') || !ref.endsWith('}')) return null;
+    return new RegExp('^' + ref.slice(1, -1).split(/(\{[^{}]+\})/).map(p =>
+      /^\{[^{}]+\}$/.test(p) ? '[^.]+' : p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('') + '$');
+  };
+  const uses: Array<{ ref: string; allowed: boolean }> = [];
+  const collect = (value: any, allowed: Set<any>) => {
+    if (!value || typeof value !== 'object') return;
+    for (const [key, child] of Object.entries(value)) {
+      if (typeof child === 'string' && pattern(child)) uses.push({ ref: child,
+        allowed: allowed.has(value) && ['top', 'right', 'bottom', 'left'].includes(key) });
+      else collect(child, allowed);
+    }
+  };
+  const canonical = (v: any): string => JSON.stringify(v && typeof v === 'object'
+    ? Array.isArray(v) ? v.map(x => JSON.parse(canonical(x)))
+      : Object.fromEntries(Object.keys(v).sort().map(k => [k, JSON.parse(canonical(v[k]))])) : v);
+  const basis = (node: any, leaves: Map<string, any>) => {
+    if (!node) return null;
+    const geometry = /^(?:position|display|box-sizing|transform|width|height|min-width|max-width|min-height|max-height|border(?:-(?:top|right|bottom|left))?-width)$/;
+    const plane: any = { layout: node.layout ?? null }, values: Record<string, any> = {};
+    const visit = (value: any): any => {
+      if (!value || typeof value !== 'object') return value;
+      return Object.fromEntries(Object.entries(value).filter(([key]) => geometry.test(key)).map(([key, v]) => {
+        if (typeof v === 'string' && pattern(v)) {
+          const matches = [...leaves].filter(([name]) => pattern(v)!.test(name));
+          if (!matches.length || matches.some(([, leaf]) => typeof leaf.$value === 'string' && pattern(leaf.$value)))
+            throw Error('absolute-inset-parent-basis-unresolved');
+          for (const [name, leaf] of matches) values[name] = leaf;
+        }
+        return [key, v];
+      }));
+    };
+    for (const channel of ['tokens','literals','declared']) plane[channel] = visit(node[channel] ?? {});
+    plane.states = Object.fromEntries(Object.entries(node.states ?? {}).map(([name, v]) => [name, visit(v)])
+      .filter(([, v]) => Object.keys(v as object).length));
+    return canonical({plane,values});
+  };
+  for (const file of readdirSync(CONTRACTS).filter(f => f.endsWith('.contract.json'))) {
+    const old = readJson(pathFor(file)), nextText = built.get(file), allowed = new Set<any>();
+    const visit = (a: any, b: any, parentA?: any, parentB?: any) => {
+      if (!a || !b) return;
+      if (a.declared?.position === 'absolute' && b.declared?.position === 'absolute' && a.tokens &&
+          ['top', 'right', 'bottom', 'left'].every(ch => a.tokens[ch] === b.tokens?.[ch])) {
+        if (basis(parentA, oldLeaves) !== basis(parentB, newLeaves))
+          throw Error('absolute-inset-parent-basis-changed:' + file);
+        allowed.add(a.tokens);
+      }
+      for (const [key, child] of Object.entries(a.parts ?? {})) visit(child, b.parts?.[key], a, b);
+    };
+    if (nextText) visit(old.anatomy.root, JSON.parse(nextText).anatomy.root);
+    collect(old, allowed);
+  }
+  collect(readJson(path.join(SB, 'tokens', 'captured.dtcg.json')), new Set());
+  collect(current, new Set()); // Includes aliases nested inside composite token values.
+  const changed: string[] = [];
+  for (const [name, old] of oldLeaves) {
+    const next = newLeaves.get(name), matching = uses.filter(u => pattern(u.ref)!.test(name));
+    if (!next || old.$value === next.$value || !matching.some(u => u.allowed)) continue;
+    if (matching.some(u => !u.allowed) || old.$type !== 'dimension' || next.$type !== 'dimension' ||
+        !/^-?\d+(?:\.\d+)?px$/.test(next.$value) ||
+        JSON.stringify({ ...old, $value: null }) !== JSON.stringify({ ...next, $value: null }) ||
+        [...oldLeaves.values()].some(v => typeof v.$value === 'string' && pattern(v.$value)?.test(name)))
+      throw Error('absolute-inset-token-migration-ambiguous:' + name);
+    old.$value = next.$value; changed.push(name);
+  }
+  built.clear(); built.set('minted.dtcg.json', JSON.stringify(current, null, 2) + '\n');
+  console.log(`Absolute inset refresh: ${changed.length} derived token value(s): ${changed.join(', ')}`);
+}
+
 const committed = new Set(readdirSync(CONTRACTS).filter((f) => f.endsWith('.contract.json')));
-const orphans = [...committed].filter((f) => !built.has(f));
+const orphans = insetsOnly ? [] : [...committed].filter((f) => !built.has(f));
 
 const drift: string[] = [];
 for (const [file, text] of built) {
@@ -530,13 +617,15 @@ for (const [file, text] of built) {
   if (WRITE) writeFileSync(pathFor(file), text);
 }
 
-const nContracts = built.size - 2; // minted.dtcg.json + NOTES.md
+const nContracts = insetsOnly ? committed.size : built.size - 2; // minted.dtcg.json + NOTES.md
 if (WRITE) {
   console.log(
     drift.length === 0
       ? `= unchanged — ${nContracts} contracts + minted.dtcg.json (${[...built.get('minted.dtcg.json')!.matchAll(/"\$value"/g)].length} leaves)`
       : `✎ rewrote ${drift.length} file(s) of ${built.size} — ${drift.join(', ')}`,
   );
+} else if (insetsOnly && drift.length === 0) {
+  console.log('✔ eligible absolute inset values match fresh proposals; other contract and token channels were not refreshed');
 } else if (drift.length === 0 && orphans.length === 0) {
   console.log(
     `✔ ${nContracts}/${nContracts} contracts byte-identical to a rebuild from dumps-v2/MERGED.dump.json\n` +

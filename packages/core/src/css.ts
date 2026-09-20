@@ -1,3 +1,4 @@
+import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
 /**
  * Contract → scoped CSS text — the stylesheet every code target shares
@@ -107,7 +108,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // written and not a guard at each of their push sites). The same object
   // comes back when no part is flagged.
   // @lower css.stroke-outside-layout-inset-ring
-  const contract = lowerStrokeRings(input);
+  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledPathVariants(input)));
   // …and a ring's real shadow whose TOKEN resolves to `none` is settled on the
   // finished text, the first place a token's VALUE is known (`tokenValues`:
   // the DTCG trees, when the caller has them — anatomy.ts settleStrokeShadows).

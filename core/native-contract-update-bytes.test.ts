@@ -25,6 +25,17 @@ if (process.env[SIBLING] === 'root-size') {
       apply: sha(emitNativeContractUpdateScript(p.plan)), preflight: sha(emitNativeContractUpdateScript(p.plan, 'apply', true)),
       rollback: sha(emitNativeContractUpdateScript(p.plan, 'rollback')) }));
   })();
+} else if (process.env[SIBLING] === 'legacy-token') {
+  void (async () => {
+    const f = await nativeUpdateFixture();
+    const changed = {...structuredClone(f.tokens), opacity: {$type:'number', $value:0.4}};
+    const prepared = prepareNativeContractUpdate({...f.input, desired:f.desiredFor(changed)});
+    assert.equal(prepared.plan.kind, 'native-contract-opacity-update');
+    if (prepared.plan.kind !== 'native-contract-opacity-update') throw Error('wrong-plan');
+    delete prepared.plan.tokenBindingScope;
+    process.stdout.write(JSON.stringify({plan:sha(JSON.stringify(prepared.plan)), apply:sha(emitNativeContractUpdateScript(prepared.plan)),
+      preflight:sha(emitNativeContractUpdateScript(prepared.plan,'apply',true)), rollback:sha(emitNativeContractUpdateScript(prepared.plan,'rollback'))}));
+  })();
 } else {
   // Measured on the parent commit (398318b16) with the unmodified modules: saved
   // plans and journals pin these bytes, and must keep authenticating.
@@ -57,4 +68,17 @@ if (process.env[SIBLING] === 'root-size') {
       rollback: 'c16633a4d45004a27c015827a96540fcd148e4d201d5408adba12ddf7b0463a5',
     });
   });
+  test('written legacy token plans retain their exact pinned programs', () => {
+    const child=spawnSync(process.execPath,['--import','tsx',fileURLToPath(import.meta.url)],
+      {env:{...process.env,[SIBLING]:'legacy-token'},encoding:'utf8',timeout:120000});
+    assert.equal(child.status,0,child.stderr);
+    // Measured before this change on b61474b15, first fixture in a fresh process.
+    assert.deepEqual(JSON.parse(child.stdout),{
+      plan:'8197ce593b4d34f823b97579b811c135779a39a8e970fdcb5f18a28ad0e9eed7',
+      apply:'ef5c1be67c2c7f84e9d33bc5b50057310c8c88aff163e7c86b2d604c3f18b29d',
+      preflight:'685e4ecfe7a1dfabceba4856a155fc85f1af80d51aa94d68c4bc48dfde0ef117',
+      rollback:'1be8dde856e620a4f5d0a9769e23b6451505c6ebf338b70253d929b25bf96d62',
+    });
+  });
+
 }

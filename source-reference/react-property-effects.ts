@@ -11,6 +11,7 @@ import {linkReactSourceAnatomy} from './react-source-anatomy.js';
 import {probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
 import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
+import {hasUnpaintedPseudoBoxes,observePseudoBoxes} from './pseudo-boxes.js';
 import {sourceBounds} from './source-framing.js';
 import {readReactDescendantSizes,readReactStyleOrigin} from './react-style-origin.js';
 import {observeGridConstraints,hasGridContainer} from './grid-constraints.js';
@@ -83,6 +84,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const grids=current&&hasGridContainer(current)?{gridConstraints:await observeGridConstraints(page,[selector],current)}:{};
   const contentEvidence=args.observationMode==='initial-mount'?{
    fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
+   ...(hasUnpaintedPseudoBoxes(current)?{pseudoBoxes:await observePseudoBoxes(page,[selector],current)}:{}),
    bounds:await sourceBounds(page,{path:[selector]}),
    // Where a part BELOW the root declares its own size. Initial mounts only: their contract assembles descendants.
    descendantSizes:await readReactDescendantSizes(page,selector,own,args.stageSelector??'#root'),

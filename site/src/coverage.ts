@@ -392,6 +392,26 @@ reg("shape", "arc", [
   "shape.arc.end",
   "shape.arc.innerRadius",
 ]);
+reg("shape", "filled-paths", [
+  "shape.paths",
+  "shape.paths.data",
+  "shape.paths.windingRule",
+  "shape.pathsByProp",
+  "shape.pathsByProp.prop",
+  "shape.pathsByProp.map",
+]);
+reg("shape", "stroked-paths", [
+  "shape.strokePath",
+  "shape.strokePath.data",
+  "shape.strokePath.cap",
+  "shape.strokePath.join",
+  "shape.strokePath.miterLimit",
+  "shape.strokePath.viewport",
+  "shape.strokePath.viewport.width",
+  "shape.strokePath.viewport.height",
+  "shape.strokePath.viewport.x",
+  "shape.strokePath.viewport.y",
+]);
 
 // --- Composition -----------------------------------------------------------
 reg("composition", "slots", [

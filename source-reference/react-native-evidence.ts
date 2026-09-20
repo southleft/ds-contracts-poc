@@ -98,6 +98,10 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
 }
 
 export function readReactNativeContentEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
+  return evidenceReadOnce('react-native-content', {repoRoot,referenceId:reference.id,files:reference.files,request},
+    () => readReactNativeContentEvidenceFresh(repoRoot, reference, request));
+}
+function readReactNativeContentEvidenceFresh(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
   if (request.version !== 1) throw Error('react-child-content-requires-parent-comparison');
   const original = readReactNativeEvidence(repoRoot, reference, request);
   const dir = path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id);

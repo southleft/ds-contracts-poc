@@ -1,7 +1,10 @@
+import { isNativeSourcePin, nativeSourcePinCase, nativeSourcePinReference, type NativeSourcePin } from './native-source-succession.js';
+import {isReactStateApiNativeRequest,reactStateApiNativeReservation,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
+import type {prepareReactStateApiNativePlan} from './react-state-api-native-plan.js';
 import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
 import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
 import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
-import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,readSnapshotValue,type EvidenceReadEntry} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
@@ -83,14 +86,16 @@ type ReactPlan = ReturnType<typeof prepareReactNativePlan>;
 type CallerGraphPlan = ReturnType<typeof prepareReactCallerNativePlan>;
 type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
 type InitialPlan = ReturnType<typeof prepareReactInitialNativePlan>;
-type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan;
+type StateApiPlan = ReturnType<typeof prepareReactStateApiNativePlan>;
+type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan;
+const isStateApiPlan = (p: Plan): p is StateApiPlan => 'kind' in p.plan && p.plan.kind === 'react-state-api-draft-inspection';
 const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
 const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
-type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest;
-const validRequest = (v: unknown): v is OperationRequest => isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
-const reservation = (r: OperationRequest) => isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
-const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
-const isReactPlan = (p: Plan): p is ReactPlan | CallerGraphPlan | InitialPlan => 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection');
+type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
+const reservation = (r: OperationRequest) => isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+const isReactPlan = (p: Plan): p is ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan => 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection' || p.plan.kind === 'react-state-api-draft-inspection');
 type Pin = { id: string; reportSha256: string };
 export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
@@ -232,6 +237,10 @@ interface State {
   comparisonRefresh?: ReactComparisonRefresh;
 }
 export interface NativeOperationJobsOptions {
+  reactStateApi?: {
+    prepare(request:ReactStateApiNativeRequest,operation:{id:string;fileKey:string}):NativeOperationPreparation<StateApiPlan>;
+    buildComponent(request:ReactStateApiNativeRequest,context:NativeOperationComponentContext):{planRevision:string;script:string};
+  };
   reactInitial?: {
     prepare(request: ReactInitialNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<InitialPlan>;
     buildComponent(request: ReactInitialNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
@@ -244,7 +253,7 @@ export interface NativeOperationJobsOptions {
   react?: {
     /** The sealed source observation an existing operation follows today. A
      * recorded succession may replace the creation pin; absent, it is the pin. */
-    effectiveSource?(id: string, original: ReactNativeRequest | ReactInitialNativeRequest): ReactNativeRequest | ReactInitialNativeRequest;
+    effectiveSource?(id: string, original: NativeSourcePin): NativeSourcePin;
     updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
       receipt: import('../core/native-source-observation.js').NativeSourceReadback } | undefined;
     prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
@@ -370,6 +379,10 @@ export function createNativeOperationJobs(
   options: NativeOperationJobsOptions,
 ) {
   const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if(isReactStateApiNativeRequest(request)) {
+      if(!options.reactStateApi)fail('react-state-api-adapter-unavailable');
+      return options.reactStateApi.prepare(request,operation);
+    }
     if (isReactInitialNativeRequest(request)) {
       if (!options.reactInitial) fail('react-initial-adapter-unavailable');
       return options.reactInitial.prepare(request, operation);
@@ -470,8 +483,9 @@ export function createNativeOperationJobs(
       plan.plan.acceptedContract !== null ||
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
-      isReactPlan(plan) !== (isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isReactPlan(plan) !== (isReactStateApiNativeRequest(request) || isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
       isInitialPlan(plan) !== isReactInitialNativeRequest(request) ||
+      isStateApiPlan(plan) !== isReactStateApiNativeRequest(request) ||
       isComparisonPlan(plan) !== isReactComparisonRequest(request) ||
       !same(plan.plan.operation, { id, fileKey }) ||
       plan.plan.tokenInput.fileKey !== fileKey ||
@@ -851,7 +865,7 @@ export function createNativeOperationJobs(
   // A display response can visit the same dependency many times. Reuse its
   // checked observation only within this synchronous, non-authorizing scope.
   // Nothing survives into another request or a native command's authorization.
-  let readSnapshot: Map<string, unknown> | undefined;
+  let readSnapshot: Map<string, EvidenceReadEntry> | undefined;
   const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
   function withReadSnapshot<T>(read: () => T): T {
     const outer = readSnapshot;
@@ -864,12 +878,10 @@ export function createNativeOperationJobs(
   }
   function readOnce<T>(key: string, read: () => T): T {
     if (!readSnapshot) return read();
-    if (readSnapshot.has(key)) return structuredClone(readSnapshot.get(key)) as T;
-    const value = read();
-    readSnapshot.set(key, structuredClone(value));
-    return value;
+    return readSnapshotValue(readSnapshot,key,read);
   }
-  const loadFresh = (id: string) => {
+  const loadFresh = (id: string, baselineRevision?: string) => {
+    if (baselineRevision !== undefined && !HASH.test(baselineRevision)) fail('baseline-revision-invalid');
     directories();
     ensure(dir(id));
     ensure(path.join(dir(id), "events"));
@@ -931,6 +943,16 @@ export function createNativeOperationJobs(
       .map(name=>['sha256:'+name.slice(18,-5),JSON.parse(bytes(path.join(dir(id),name)).toString())]));
     const events: Event[] = [];
     const digests: string[] = [];
+    const fingerprintOf = () => sha(encode({
+      header: sha(headerBytes), plan: sha(planBytes), script: sha(scriptBytes),
+      claim: claimBytes ? sha(claimBytes) : null,
+      componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
+      ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
+      ...(Object.keys(revisionRepairClaims).length ? {revisionRepairClaims:sha(encode(revisionRepairClaims))} : {}),
+      ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
+      digests,
+    }));
+    let pinned: {state: State; count: number; previous: string} | undefined;
     let previous = sha(headerBytes);
     const state: State = {
       phase: "prepared",
@@ -1125,32 +1147,36 @@ export function createNativeOperationJobs(
       previous = sha(data);
       digests.push(previous);
       events.push(event);
+      if (baselineRevision !== undefined && fingerprintOf() === baselineRevision)
+        pinned = {state: structuredClone(state), count: events.length, previous};
     }
     if (!!componentClaim !== state.dispatchedComponent)
       fail("component-creation-journal-incomplete");
     if (!!repairClaim !== !!state.repairWritten) fail("repair-write-journal-incomplete");
     if (!!recoveryClaim !== !!state.recoveryWritten) fail("recovery-write-journal-incomplete");
-    const fingerprint = sha(
-      encode({
-        header: sha(headerBytes),
-        plan: sha(planBytes),
-        script: sha(scriptBytes),
-        claim: claimBytes ? sha(claimBytes) : null,
-        componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
-        ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
-        ...(Object.keys(revisionRepairClaims).length?{revisionRepairClaims:sha(encode(revisionRepairClaims))}:{}),
-        ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
-        digests,
-      }),
-    );
+    const fingerprint = fingerprintOf();
+    if (baselineRevision !== undefined) {
+      // A written correction pins a historical parent observation. Later reads
+      // must remain in the validated journal, but cannot replace that baseline.
+      // Validate the COMPLETE journal above before admitting a historical prefix.
+      if (!pinned) fail('baseline-revision-unavailable');
+      if (state.pending || pinned.state.pending) fail('baseline-observation-unsettled');
+      const suffix = events.slice(pinned.count);
+      if (suffix.some(event => event.kind === 'dispatch'
+        ? event.command.phase !== 'component-readback' || !event.command.readOnly || !!event.comparisonRefresh || !!event.comparisonRepair
+        : event.kind !== 'result' && event.kind !== 'abandon-observation'))
+        fail('baseline-suffix-not-read-only');
+      return {header, plan, script, state: pinned.state, events: events.slice(0,pinned.count),
+        previous: pinned.previous, fingerprint: baselineRevision};
+    }
     return { header, plan, script, state, events, previous, fingerprint };
   };
   type Loaded = ReturnType<typeof loadFresh>;
   const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));
   // Creation evidence stays pinned to its own source revision. Only root and
-  // initial-state operations can follow a later observation of the same case.
-  const effectiveSource = <R>(id: string, request: R): R | ReactNativeRequest | ReactInitialNativeRequest =>
-    options.react?.effectiveSource && (isReactInitialNativeRequest(request) || (isReactNativeRequest(request) && request.version === 1))
+  // initial-state and state-API operations can follow a later observation of the same case.
+  const effectiveSource = <R>(id: string, request: R): R | NativeSourcePin =>
+    options.react?.effectiveSource && (isReactStateApiNativeRequest(request) || isReactInitialNativeRequest(request) || (isReactNativeRequest(request) && request.version === 1))
       ? options.react.effectiveSource(id, request) : request;
   const authenticate = (loaded: Loaded) => readOnce('source:'+loaded.header.id+':'+loaded.fingerprint, () => {
     const current = prepareInput(structuredClone(loaded.state.comparisonRefresh?.request ?? loaded.header.request), {
@@ -1488,12 +1514,12 @@ export function createNativeOperationJobs(
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
+      if (isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
       const request = structuredClone(loaded.header.request);
-      const built = isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+      const built = isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
         : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
@@ -1646,6 +1672,17 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    reactStateApiRequest(id:string):ReactStateApiNativeRequest {
+      const {header}=load(id);
+      if(!isReactStateApiNativeRequest(header.request))fail('react-state-api-operation-required');
+      return structuredClone(header.request);
+    },
+    /** Desired source; the original request above remains historical review evidence. */
+    reactEffectiveStateApiRequest(id: string): ReactStateApiNativeRequest {
+      const { header } = load(id);
+      if (!isReactStateApiNativeRequest(header.request)) fail('react-state-api-operation-required');
+      return structuredClone(effectiveSource(id, header.request) as ReactStateApiNativeRequest);
+    },
     reactInitialRequest(id: string): ReactInitialNativeRequest {
       const { header } = load(id);
       if (!isReactInitialNativeRequest(header.request)) fail('react-initial-operation-required');
@@ -1653,9 +1690,10 @@ export function createNativeOperationJobs(
       // observation this operation follows today.
       return structuredClone(effectiveSource(id, header.request) as ReactInitialNativeRequest);
     },
-    reactUpdateBaseline(id: string) {
-      const loaded = load(id);
-      if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
+    reactUpdateBaseline(id: string, baselineRevision?: string) {
+      const loaded = baselineRevision === undefined ? load(id)
+        : readOnce('baseline:'+id+':'+baselineRevision, () => loadFresh(id,baselineRevision));
+      if (!isNativeSourcePin(loaded.header.request) ||
           !isReactPlan(loaded.plan) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) ||
           loaded.state.pending || !loaded.state.imageReadback)
         fail('react-update-verified-baseline-required');
@@ -1670,10 +1708,18 @@ export function createNativeOperationJobs(
       return structuredClone({ input, receipt, request: loaded.header.request, source: effectiveSource(id, loaded.header.request),
         journalRevision: loaded.fingerprint });
     },
+    /** Current parent context for a fresh correction observation. No historical
+     * prefix is selected here, and an in-flight parent read cannot be ignored. */
+    reactUpdateJournalRevision(id: string) {
+      const loaded=load(id);
+      if (!isNativeSourcePin(loaded.header.request) ||
+          loaded.state.pending) fail('react-update-parent-context-unavailable');
+      return loaded.fingerprint;
+    },
     /** Creation pin of an operation that can follow a later source observation. */
     reactSuccessionSubject(id: string) {
       const loaded = load(id), { header } = loaded;
-      if (!isReactInitialNativeRequest(header.request) && !(isReactNativeRequest(header.request) && header.request.version === 1))
+      if (!isReactStateApiNativeRequest(header.request) && !isReactInitialNativeRequest(header.request) && !(isReactNativeRequest(header.request) && header.request.version === 1))
         fail('react-succession-kind-unsupported');
       // Only a finished, observed operation can follow another source revision.
       if (loaded.state.pending || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase))
@@ -1733,7 +1779,8 @@ export function createNativeOperationJobs(
         referenceId: header.request.referenceId, caseId: header.request.caseId,
         ownershipId: header.request.ownership.id, fileKey: header.policy.fileKey,
       };
-      const pin = isReactComparisonRequest(header.request) ? header.request.root : effectiveSource(id, header.request as ReactNativeRequest | ReactInitialNativeRequest);
+      const effective = isReactComparisonRequest(header.request) ? header.request.root : effectiveSource(id, header.request as NativeSourcePin);
+      const pin = isReactStateApiNativeRequest(effective) ? effective.initial : effective;
       const request = isReactInitialNativeRequest(pin) ? { ...pin.anchor, caseId: pin.caseId } : pin;
       if (!isReactNativeRequest(request)) fail('react-operation-required');
       return { referenceId: request.referenceId, caseId: request.caseId,
@@ -1742,20 +1789,31 @@ export function createNativeOperationJobs(
     /** Existing operations for these source cases that follow another source
      * revision. They are candidates for an explicit succession, never listed
      * as current and never matched by recency. */
-    listReactMoved(referenceId: string) {
+    listReactMoved(referenceId: string, currentStateApi?: (caseId: string) => ReactStateApiNativeRequest,
+      currentInitial?: (caseId: string) => ReactInitialNativeRequest) {
       return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const loaded = load(id), creation = loaded.header.request;
-        if (!isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
+        if (!isReactStateApiNativeRequest(creation) && !isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
         // Positional `instance-N` initial states cannot follow a later observation.
         if (isReactInitialNativeRequest(creation) && creation.version !== 1) return [];
-        let pin: ReactNativeRequest | ReactInitialNativeRequest, successionProblem: string | undefined;
+        let pin: NativeSourcePin, successionProblem: string | undefined;
         // An unreadable record must stay VISIBLE here: hidden, the only path left
         // under a changed source would allocate a second component.
-        try { pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest; }
+        try { pin = effectiveSource(id, creation) as NativeSourcePin; }
         catch { pin = creation; successionProblem = 'native-source-succession-unreadable:' + id; }
-        const followed = isReactInitialNativeRequest(pin) ? pin.anchor.referenceId : pin.referenceId;
-        if ((followed === referenceId && !successionProblem) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
-        return [{ ...(successionProblem ? { successionProblem } : {}), operationId: id, caseId: pin.caseId, kind: isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
+        const followed = nativeSourcePinReference(pin);
+        // Observer changes can require fresh initial states or a state experiment
+        // without changing the React reference. Compare complete pins.
+        let stateExperimentChanged = false, observationRequired = false;
+        if (isReactStateApiNativeRequest(pin) && currentStateApi) {
+          try { stateExperimentChanged = !same(pin, currentStateApi(nativeSourcePinCase(pin))); }
+          catch { stateExperimentChanged = true; observationRequired = true; }
+        } else if (isReactInitialNativeRequest(pin) && currentInitial) {
+          try { stateExperimentChanged = !same(pin, currentInitial(nativeSourcePinCase(pin))); }
+          catch { stateExperimentChanged = true; observationRequired = true; }
+        }
+        if ((followed === referenceId && !successionProblem && !stateExperimentChanged) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
+        return [{ ...(successionProblem ? { successionProblem } : {}), observationRequired, operationId: id, caseId: nativeSourcePinCase(pin), kind: isReactStateApiNativeRequest(pin) ? 'state-api' as const : isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
           followedReferenceId: followed, fileKey: loaded.header.policy.fileKey, phase: loaded.state.phase }];
       }));
     },
@@ -1778,12 +1836,14 @@ export function createNativeOperationJobs(
           // Identifier-shaped names only, as for every other refusal that reaches the browser.
           pin = header.request; successionProblem = (/^[a-z][a-z0-9-]{2,100}$/.test(message) ? message : 'native-source-succession-unreadable') + ':' + id;
         }
-        const initial = isReactInitialNativeRequest(pin) ? pin : undefined;
+        const stateApi = isReactStateApiNativeRequest(pin) ? pin : undefined;
+        const initial = stateApi?.initial ?? (isReactInitialNativeRequest(pin) ? pin : undefined);
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? pin;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ ...(successionProblem ? { successionProblem } : {}), caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
+        return [{ ...(successionProblem ? { successionProblem } : {}), caseId: request.caseId, ownershipId: request.ownership.id, kind: stateApi ? 'state-api' as const : initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
           ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
+          ...(stateApi ? { stateApiObservation: structuredClone(stateApi.observation) } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];

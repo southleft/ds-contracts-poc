@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import type { ReactCallbackInspection as Inspection } from "../../../source-reference/react-callback-inspection";
+import { ReactStateApiInspection } from './ReactStateApiInspection';
 
 export function ReactCallbackInspection({
   referenceId,
   caseId,
-  available,
+  available, prepareStateApi, nativeBusy, onStateApiChange,
 }: {
   referenceId: string;
   caseId: string;
   available: boolean;
+  prepareStateApi?:()=>void; nativeBusy?:boolean;
+  onStateApiChange?:()=>void;
 }) {
   const [result, setResult] = useState<Inspection | null>(null),
     [error, setError] = useState(""),
@@ -87,7 +90,7 @@ export function ReactCallbackInspection({
     <section aria-label="Callback behavior inspection">
       <h3>Inspect state and callback behavior</h3>
       <p>
-        Observe the original checkbox with each compatible input, real label and
+        Observe the original checkbox or switch with each compatible input, real label and
         keyboard activation, and live input updates. Each trial restores the
         original render. These observations inform the contract; generated
         behavior still needs verification.
@@ -147,6 +150,15 @@ export function ReactCallbackInspection({
               . {row.reason}
             </p>
           ))}
+          {!!result.observation?.refusals?.length && (
+            <section aria-label="Refused callback trials">
+              <h4>Inputs that could not be observed</h4>
+              <p>The original was restored before inspecting other inputs. These refusals keep the full behavior observation unqualified.</p>
+              <ul>{result.observation.refusals.map((row, index) => (
+                <li key={index}>{row.property}={JSON.stringify(row.value)} → {row.callback}: {row.problem}</li>
+              ))}</ul>
+            </section>
+          )}
           {!!result.observation?.rows.length && (
             <details>
               <summary>
@@ -199,6 +211,9 @@ export function ReactCallbackInspection({
           )}
         </>
       )}
+      <ReactStateApiInspection onObservationChange={onStateApiChange} referenceId={referenceId} caseId={caseId} prepareNative={prepareStateApi} nativeBusy={nativeBusy} available={available && !!result?.sourceUnchanged &&
+        result.observation?.relationships.filter(r => r.status === 'controlled-observed').length === 1 &&
+        result.observation?.relationships.filter(r => r.status === 'initial-only-observed').length === 1}/>
     </section>
   );
 }

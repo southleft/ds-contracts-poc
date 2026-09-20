@@ -1,3 +1,4 @@
+import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '@ds-contracts/schema';
 /**
  * Contract → vanilla Custom Element — a pure emitter over the SAME contract
  * semantics the React/HTML generators render, for surfaces that want real
@@ -254,7 +255,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
   // that takes no layout space — core lowerStrokeRings, the same rewrite
   // generateCss applies, so the two sheets cannot disagree about a border.
-  const contract = lowerStrokeRings(input);
+  const contract = lowerStrokeRings(lowerStrokedPathPaint(lowerFilledPathVariants(input)));
   // dump v1.36: the whole-pixel text box, the same declarations generateCss
   // writes (which also refuses an unsubtractable tracking token by name).
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
@@ -1021,6 +1022,8 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
 
   const genPart = (name: string, part: Part, parentEl: string): string => {
     const partAttr = ` part="${name}"`;
+    if (part.shape?.kind === 'stroked-path') return visibleWrap(part,
+      `<span${partAttr} aria-hidden="true">${tpl(strokedPathSvg(part.shape))}</span>`);
     const textEl = part.element ?? (parentEl === 'select' ? 'option' : 'span');
 
     if (part.icon) {

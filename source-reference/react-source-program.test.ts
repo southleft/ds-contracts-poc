@@ -287,3 +287,167 @@ export function SiblingDefault({children,x=(children='replaced')}:{children?:str
     assert.equal(fact("Changed").reason, "children-input-escape-or-mutation");
     assert.equal(fact("Early").reason, "children-control-flow-unresolved");
   }));
+
+test("React forwardRef callbacks retain source, public props and children facts without executing wrappers", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `
+import * as React from 'react';
+import { forwardRef as wrap } from 'react';
+export const Panel = React.forwardRef<HTMLDivElement, {children?:React.ReactNode; tone?:'quiet'|'loud'}>(
+  function PanelBody({tone='quiet', children}, ref) { return <div ref={ref} data-tone={tone}>{children}</div>; });
+export const Action = wrap<HTMLButtonElement, {children?:React.ReactNode; disabled?:boolean}>(
+  (props, ref) => <button {...props} ref={ref}/>);
+throw Error('static-reader-must-not-execute');
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    assert.deepEqual(
+      program.components.map((c) => c.exportName),
+      ["Panel", "Action"],
+    );
+    for (const component of program.components) {
+      assert.deepEqual(component.wrappers, ["forwardRef"]);
+      assert.equal(component.children.kind, "forwarded");
+      assert.ok(component.props.some((p) => p.name === "children"));
+      assert.ok(
+        component.props.some((p) => p.name === "ref"),
+        "public wrapper signature includes ref",
+      );
+      assert.equal(component.root.kind, "host");
+      assert.ok(component.span.end > component.span.start);
+    }
+    assert.deepEqual(program.components[0].defaults, { tone: "quiet" });
+    assert.ok(reactSourceProgramUnchanged(program));
+  }));
+
+test("lookalike, computed, mutable and indirect wrapper factories do not acquire React source proof", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    writeFileSync(
+      path.join(dir, "fake.ts"),
+      `export function forwardRef(fn:(props:{children?:string})=>unknown){return fn}`,
+    );
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `
+import * as React from 'react';
+import { forwardRef } from './fake';
+export const Imposter = forwardRef(props => <div>{props.children}</div>);
+export const Computed = React['forwardRef']<HTMLDivElement,{}>(() => <div/>);
+const indirect = React.forwardRef;
+export const Alias = indirect<HTMLDivElement,{}>(() => <div/>);
+const body = () => <div/>;
+export const Callback = React.forwardRef<HTMLDivElement,{}>(body);
+export let Mutable = React.forwardRef<HTMLDivElement,{}>(() => <div/>);
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    for (const name of ["Imposter", "Computed", "Alias", "Callback", "Mutable"])
+      assert.ok(
+        program.problems.includes(name + ":component-function-unresolved"),
+        program.problems.join("\n"),
+      );
+    assert.deepEqual(program.components, []);
+  }));
+
+test("escaped or reassigned React factories cannot establish the wrapper relation", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    for (const escape of [
+      `(React as any).forwardRef = (fn:unknown) => fn;`,
+      `Object.assign(React, {forwardRef: (fn:unknown) => fn});`,
+      `const escaped = React.forwardRef;`,
+      `import Alias from 'react'; Object.assign(Alias, {forwardRef: (fn:unknown) => fn});`,
+      `import {forwardRef as otherFactory} from 'react'; const escaped = otherFactory;`,
+    ]) {
+      writeFileSync(
+        path.join(dir, "components.tsx"),
+        `import * as React from 'react';
+${escape}
+export const Panel=React.forwardRef<HTMLDivElement,{children?:React.ReactNode}>((props, ref)=><div {...props} ref={ref}/>);`,
+      );
+      const program = readReactSourceProgram(dir, ["components.tsx"]);
+      assert.ok(
+        program.problems.includes("Panel:component-function-unresolved"),
+        escape,
+      );
+      assert.equal(program.components.length, 0);
+    }
+  }));
+
+test("type-only exports are not runtime components; unresolved value exports still refuse", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `import './primitive';
+export interface PublicProps {children?:string}
+export type Callback = (value:string)=>void;
+export type {Root as RootType} from './primitive';
+export {type Root as InlineType} from './primitive';
+export {Root as ExternalValue} from './primitive';
+export enum RuntimeFlags { Enabled }
+export const Panel=(props:PublicProps)=><div {...props}/>;
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(
+      program.components.map((c) => c.exportName),
+      ["Panel"],
+    );
+    assert.deepEqual(
+      program.problems.sort(),
+      [
+        "ExternalValue:component-definition-outside-module",
+        "RuntimeFlags:component-function-unresolved",
+      ].sort(),
+    );
+  }));

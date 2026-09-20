@@ -1,3 +1,4 @@
+import { lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 /**
  * Contract → static HTML + CSS — a pure emitter over the SAME contract
  * semantics the React generator renders, for surfaces with no build step
@@ -176,6 +177,7 @@ function layoutDecls(part: Part, gridWhere: string, isGridChild = false): string
 // ---------------------------------------------------------------------------
 
 function componentCss(contract: Contract): string[] {
+  contract = lowerStrokedPathPaint(contract);
   const k = kebab(contract.name);
   const rootCls = `.${k}`;
   const partCls = (name: string) => `.${k}__${name}`;
@@ -1050,6 +1052,7 @@ function renderComponentHtml(
   const renderPart = (name: string, part: Part, pad: string, parentEl = 'div'): string => {
     if (!visible(part)) return '';
     const cls = `${k}__${name}`;
+    if (part.shape?.kind === 'stroked-path') return `${pad}<span class="${cls}" aria-hidden="true">${strokedPathSvg(part.shape)}</span>`;
     // Content-model honesty: HTML parsers drop anything but <option>/<optgroup>
     // inside a <select>, so a content/text part with NO authored element
     // defaults to "option" there instead of "span" (an authored element is

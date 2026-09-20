@@ -7,6 +7,7 @@ import { assertNativeSourceIdentity, nativeSourceBelongsToReference, readNativeS
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { ReactStateApiNativeRequest } from './react-state-api-native-request.js';
 
 function fixture(t: test.TestContext) {
   const repo = mkdtempSync(path.join(tmpdir(), 'source-identity-'));
@@ -66,4 +67,22 @@ test('historical report, source program and inventory must retain the journal-pi
   const a = f.archive();
   assert.throws(() => readNativeSourceIdentity(f.repo, { ...a.request, ownership: { ...a.request.ownership, sha256: '0'.repeat(64) } }), /identity-unavailable/);
   assert.throws(() => readNativeSourceIdentity(f.repo, { ...a.request, referenceId: 'f'.repeat(64) }), /identity-unavailable/);
+});
+
+test('state-API wrappers use the archived initial case and refuse foreign modules and malformed experiment pins', t => {
+  const f = fixture(t);
+  const wrap = (a: ReturnType<typeof f.archive>): ReactStateApiNativeRequest => ({ version: 1, kind: 'react-state-api-draft',
+    initial: { version: 1, kind: 'react-initial-draft', anchor: a.request, caseId: 'widget-state',
+      observation: { id: a.request.ownership.id, inventorySha256: a.request.inventorySha256, reportSha256: a.request.ownership.sha256 } },
+    observation: { key: 'a'.repeat(64), id: a.request.ownership.id, inventorySha256: 'b'.repeat(64), reportSha256: 'c'.repeat(64) } });
+  const original = wrap(f.archive()), changed = wrap(f.archive({ bytes: 'new appearance' }));
+  assert.doesNotThrow(() => assertNativeSourceIdentity(f.repo, original, changed));
+  const reanchored={...changed,initial:{...changed.initial,anchor:{...changed.initial.anchor,caseId:'another-archive-root'}}};
+  assert.doesNotThrow(() => assertNativeSourceIdentity(f.repo, original, reanchored), 'identity is the state case, not the archive anchor case');
+  const foreign=wrap(f.archive({workspace:'foreign'}));
+  foreign.initial.anchor.caseId='another-archive-root';
+  assert.throws(() => assertNativeSourceIdentity(f.repo, original, foreign), /component-mismatch/);
+  assert.throws(() => assertNativeSourceIdentity(f.repo, original, wrap(f.archive({ workspace: 'foreign' }))), /component-mismatch/);
+  assert.throws(() => readNativeSourceIdentity(f.repo, { ...original, initial: { ...original.initial, caseId: 'missing' } }), /identity-unavailable/);
+  assert.throws(() => readNativeSourceIdentity(f.repo, { ...original, observation: { ...original.observation, key: '../invalid' } }), /identity-unavailable/);
 });

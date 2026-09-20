@@ -39,7 +39,8 @@ type Request = ReactInspectionRequest;
  * consumer reads, so its compiler is not the observer either. */
 export const reactInitialObserverModules = ['react-initial-inspection.ts', 'react-initial-state.ts', 'react-program-proposal.ts',
   'react-property-effects.ts', 'react-property-probe.ts', 'react-ownership.ts', 'react-source-anatomy.ts', 'react-style-origin.ts', 'layout-unit.ts',
-  'grid-constraints.ts', 'text-fonts.ts', 'svg-viewports.ts', 'source-framing.ts', 'capture.ts', 'observe.ts', 'react-reference.ts',
+  'grid-constraints.ts', 'text-fonts.ts', 'svg-viewports.ts', 'pseudo-boxes.ts', '../extract/computed/unpainted-pseudo.ts',
+  'source-framing.ts', 'capture.ts', 'observe.ts', 'react-reference.ts',
   '../extract/computed/capture.ts', '../extract/computed/lib.ts',
   // What is SEALED is spelled by these two: every image/tree hash and inventory (evidenceSha) and every treeRevision (revisionOf).
   'react-validation-evidence.ts', '../core/contract-provenance.ts'] as const;

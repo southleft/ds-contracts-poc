@@ -1,3 +1,4 @@
+import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
@@ -193,6 +194,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
 
+  contract = lowerStrokedPathPaint(lowerFilledPathVariants(contract));
   const mode = ctx.mode ?? 'light';
   const primitives = flattenTokens(ctx.tokens.primitives);
   const semantic = flattenTokens(ctx.tokens.semantic);
@@ -868,6 +870,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   };
 
   const renderPart = (partName: string, part: Part): string => {
+    if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
+      `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);

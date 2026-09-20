@@ -31,10 +31,41 @@ import {
   createReactReferenceService,
   reactReferenceHtml,
   reactReferenceUnchanged,
+  reactReferenceSourceModules,
+  selectRecordedInspectionAnchor,
 } from "./react-reference.js";
+import { reactInspectionRequest } from './react-initial-inspection.js';
+import { revisionOf } from '../core/contract-provenance.js';
+import type { ReactNativeRequest } from './react-native-request.js';
 import { buildReactOwnershipReference } from "./react-ownership.js";
 import type { ReactSourceProgram } from "./react-source-program.js";
 import { inventoryEvidence } from "./react-validation-evidence.js";
+
+test('adding a saved root keeps state inspectors on their recorded cohort anchor without borrowing another archive', t => {
+  const repo=mkdtempSync(path.join(tmpdir(),'react-inspection-anchor-'));
+  t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const anchor:ReactNativeRequest={version:1,kind:'react-root-draft',referenceId:'a'.repeat(64),caseId:'new-root',
+    ownership:{id:'11111111-2222-4333-8444-555555555555',sha256:'b'.repeat(64)},inventorySha256:'c'.repeat(64),matrixRevision:'sha256:'+'d'.repeat(64)};
+  const prior={...anchor,caseId:'prior-root',compilation:'current' as const},foreign={...prior,referenceId:'e'.repeat(64)};
+  const record=(pin:ReactNativeRequest,kind:'initial'|'callback',caseId='stateful')=>{
+    const dir=path.join(repo,`private/react-${kind}-inspections`,revisionOf(reactInspectionRequest(pin,caseId)).slice(7));
+    mkdirSync(dir,{recursive:true});writeFileSync(path.join(dir,'latest.json'),'untrusted pointer: selection is not authentication');
+  };
+  record(foreign,'initial');record(foreign,'callback');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[foreign],'stateful'),anchor);
+  record(prior,'initial');record(prior,'callback');record(anchor,'initial');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[foreign,prior],'stateful'),prior);
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior,foreign],'stateful'),prior);
+  const followed={...prior};delete (followed as Partial<typeof prior>).compilation;
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[followed,prior],'stateful'),prior,
+    'a succession can omit the compilation marker, but saved observations retain their original exact pin');
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior],'another-state'),anchor);
+  assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[prior]),anchor);
+  for(const changed of [{...prior,inventorySha256:'e'.repeat(64)},{...prior,ownership:{...prior.ownership,sha256:'e'.repeat(64)}}]){
+    record(changed,'initial');record(changed,'callback');
+    assert.deepEqual(selectRecordedInspectionAnchor(repo,anchor,[changed],'stateful'),anchor);
+  }
+});
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -100,6 +131,15 @@ const edited = (change: (d: any) => void) => {
   change(d);
   return JSON.stringify(d);
 };
+
+test('a declared textless witness is explicit and cannot borrow another text or font witness', () => {
+  const none=parseReactCases(edited(d => {d.cases[0].witness={...witness,textContent:'absent'};}));
+  assert.equal(none.profile('badge-row').textContent,'absent');
+  assert.equal(parseReactCases(JSON.stringify(declaration())).profile('badge-row').textContent,undefined);
+  for(const patch of [{textContent:'optional'},{textContent:false},{textContent:null},
+    {textContent:'absent',fontPath:['span']},{textContent:'absent',associatedLabelText:'Nearby'}])
+    assert.throws(()=>parseReactCases(edited(d=>{d.cases[0].witness={...witness,...patch};})),/^Error: react-cases-witness-invalid$/);
+});
 
 function fixture(withBuiltinSources = false) {
   const root = mkdtempSync(path.join(tmpdir(), "react-cohort-"));
@@ -390,6 +430,53 @@ test("witnesses must pin the resolved source of every mounted workspace module; 
   }
 });
 
+test("declared JSX is inspected from its actual resolved entry outside src, without following compiled-package source guesses", async t => {
+  const { root, put } = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const jsx = "node_modules/fixture-original/components/badge.tsx";
+  const compiled = "node_modules/fixture-original/components/compiled.js";
+  put(jsx, badgeSource);
+  put(compiled, "export const Compiled=()=>null;");
+  // A neighboring source is deliberately neither imported nor mounted.
+  put("node_modules/fixture-original/components/compiled.tsx", badgeSource);
+  const d = declaration() as any;
+  d.cases[0].mount.children[0].module = "./" + jsx.replace(/\.tsx$/, "");
+  d.cases[1].mount.module = "./" + jsx.replace(/\.tsx$/, "");
+  d.cases[0].mount.children.push({ module: "./" + compiled, export: "Compiled" });
+  delete d.witnessFiles["src/components/ui/badge.tsx"];
+  d.witnessFiles[jsx] = sha(badgeSource);
+  d.witnessFiles[compiled] = sha("export const Compiled=()=>null;");
+  put(reactCasesFile, JSON.stringify(d));
+  const reference = await buildReactReference(root);
+  assert.deepEqual(reactReferenceSourceModules(reference), [jsx, "src/components/ui/avatar.tsx"]);
+  assert.ok(reactWitnessesMatch(reference));
+  assert.equal((await buildReactReference(root)).id, reference.id);
+  // Selection metadata must not alter the frozen bundle/file identity.
+  const identity = { version: 1, entry: sha(reference.cohort.entry),
+    files: Object.entries(reference.files).map(([file, hash]) => [path.relative(reference.sourceRoot, file), hash]).sort(),
+    javascript: sha(reference.javascript), css: sha(reference.css) };
+  assert.equal(reference.id, sha(JSON.stringify(identity)));
+  const repo = mkdtempSync(path.join(tmpdir(), "react-cohort-entries-"));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const handle = createReactReferenceService(repo, root);
+  const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.slice(1)));
+  server.listen(0, "127.0.0.1"); await once(server, "listening");
+  t.after(() => { handle.close(); server.close(); });
+  const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  assert.equal((await fetch(base + "/react", { method: "POST" })).status, 200);
+  const response = await fetch(base + `/react/${reference.id}/program`, { method: "POST" });
+  assert.equal(response.status, 200, "the application uses the same resolved module selection");
+  const inspected = await response.json();
+  assert.ok(inspected.components.some((c: { module: string; exportName: string }) => c.module === jsx && c.exportName === "Badge"));
+  assert.ok(!inspected.components.some((c: { module: string }) => c.module.endsWith("compiled.tsx")));
+  put(jsx, badgeSource + "\n// changed");
+  assert.equal(reactReferenceUnchanged(reference), false);
+  assert.equal(reactWitnessesMatch(await buildReactReference(root)), false);
+  delete d.witnessFiles[jsx];
+  put(reactCasesFile, JSON.stringify(d));
+  await assert.rejects(buildReactReference(root), /^Error: react-cases-witness-files-incomplete$/);
+});
+
 test("a loaded built-in reference is refused once a declaration appears; operations of another cohort are not offered", async () => {
   const { root, put } = fixture(true);
   const repo = mkdtempSync(path.join(tmpdir(), "react-cohort-repo-"));
@@ -464,9 +551,16 @@ test("same-named cases from another workspace cannot follow the loaded source th
   const moved = pins.map(pin => ({ operationId: pin.ownership.id, caseId: pin.caseId, kind: "root", followedReferenceId: pin.referenceId,
     fileKey: "test", phase: "component-structure-observed" }));
   const adopted: string[] = [];
+  let stateWrapped = false, unresolved: { pending: boolean; phase: string }[] = [];
   const handle = createReactReferenceService(repo, root, () => ({ jobs: { listReact: () => [], listReactMoved: () => moved,
-    withReadSnapshot: (read: () => unknown) => read(), reactSuccessionSubject: (id: string) => pins.find(pin => pin.ownership.id === id) },
-    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => [] } }) as any);
+    withReadSnapshot: (read: () => unknown) => read(), reactSuccessionSubject: (id: string) => {
+      const pin = pins.find(pin => pin.ownership.id === id)!;
+      return !stateWrapped ? pin : { version: 1, kind: 'react-state-api-draft',
+        initial: { version: 1, kind: 'react-initial-draft', anchor: pin, caseId: pin.caseId,
+          observation: { id: pin.ownership.id, inventorySha256: pin.inventorySha256, reportSha256: pin.ownership.sha256 } },
+        observation: { key: 'a'.repeat(64), id: pin.ownership.id, inventorySha256: 'b'.repeat(64), reportSha256: 'c'.repeat(64) } };
+    } },
+    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => unresolved } }) as any);
   const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.slice(1)));
   server.listen(0, "127.0.0.1"); await once(server, "listening");
   const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
@@ -481,7 +575,18 @@ test("same-named cases from another workspace cannot follow the loaded source th
       assert.equal(response.status, 409);
       assert.equal((await response.json()).reason, reason);
     }
-    assert.deepEqual(adopted, [], "neither request appends a source succession");
+    stateWrapped = true;
+    for (const entry of [{ pending: true, phase: 'update-verified' }, { pending: false, phase: 'update-prepared' },
+      { pending: false, phase: 'update-written' }]) {
+      unresolved = [entry];
+      const response = await fetch(base + `/react/${loaded.id}/native-operation/${pins[0].ownership.id}/adopt-source`, { method: 'POST' });
+      assert.equal(response.status, 409);
+      assert.equal((await response.json()).reason, 'react-source-succession-update-unresolved');
+    }
+    unresolved = [];
+    const missingExperiment = await fetch(base + `/react/${loaded.id}/native-operation/${pins[0].ownership.id}/adopt-source`, { method: 'POST' });
+    assert.equal(missingExperiment.status, 409, 'appearance or an older state pin cannot substitute for a fresh complete experiment');
+    assert.deepEqual(adopted, [], "refused requests never append a source succession");
   } finally {
     handle.close(); server.close();
     rmSync(root, { recursive: true, force: true }); rmSync(repo, { recursive: true, force: true });

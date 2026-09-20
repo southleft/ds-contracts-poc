@@ -45,6 +45,8 @@
  * for visible browser inspection; it does not change the comparison or score.
  */
 import { packageReactLibrary } from './package-react-library.js';
+import { sourceEquivalentTransitions } from './design-consumer-variants.js';
+import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -245,6 +247,9 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
         continue;
       }
       if (!prop) { unmapped.add(`${property} (no VARIANT prop${reading.kind === 'refused' ? `; ${reading.reason}` : ''})`); continue; }
+      // An explicitly declared omission plane mounts without the prop. The
+      // canvas label is not a public enum value or an implicit boolean false.
+      if (prop.bindings.figma.unsetValue === value) continue;
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
@@ -271,7 +276,7 @@ export const paintOf = new Function('el', `
     'borderTopStyle', 'borderRightStyle', 'borderBottomStyle', 'borderLeftStyle',
     'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
     'outlineStyle', 'outlineWidth', 'outlineColor', 'outlineOffset', 'textDecorationLine', 'textDecorationColor', 'textDecorationStyle',
-    'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth'];
+    'fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'fontStyle', 'letterSpacing', 'fill', 'stroke', 'strokeWidth', 'maskImage', 'maskSize', 'maskPosition', 'maskRepeat', 'clipPath'];
   return [el, ...el.querySelectorAll('*')].map(n => { const s = getComputedStyle(n), r = n.getBoundingClientRect(); return K.map(k => s[k]).join('|') + '|' + Math.round(r.width * 100) / 100 + 'x' + Math.round(r.height * 100) / 100; }).join('/');
 `) as (el: Element) => string;
 /** Observe actual variant effects across the rendered subtree. Class names
@@ -394,18 +399,35 @@ async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: 
 }
 
 async function fetchFigmaImages(fileKey: string, ids: string[], token: string | undefined, out: string) {
-  if (!token) return { status: 'figma-images-unavailable' as const, reason: 'no token', files: {} as Record<string, string> };
-  const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1`;
+  const frames: Record<string,FigmaFrame> = {};
+  if (!token) return { status: 'figma-images-unavailable' as const, reason: 'no token', files: {} as Record<string, string>, frames, framingRefusal: 'no token' };
+  const boundsUrl = `https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}&depth=1`;
+  const readBounds = async (phase: string) => {
+    const response = await fetch(boundsUrl, { headers: { 'X-Figma-Token': token } });
+    if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
+    const bytes = Buffer.from(await response.arrayBuffer());
+    writeFileSync(path.join(out, `figma-bounds-${phase}.json`), bytes, {flag:'wx'});
+    return JSON.parse(bytes.toString('utf8'));
+  };
+  const before = await readBounds('before');
+  const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true`;
   const response = await fetch(url, { headers: { 'X-Figma-Token': token } });
-  if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string> };
+  if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
-  const files: Record<string, string> = {};
-  for (const [id, imageUrl] of Object.entries(body.images ?? {})) {
+  const files: Record<string, string> = {}, images: Record<string,Buffer> = {};
+  for (const id of ids) {
+    const imageUrl = body.images?.[id];
     if (!imageUrl) continue;
-    const png = Buffer.from(await (await fetch(imageUrl)).arrayBuffer());
-    const file = path.join(out, `figma-${id.replace(/[^a-z0-9]/gi, '_')}.png`); writeFileSync(file, png); files[id] = file;
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) throw new Error(`figma-image-download-failed:${id}:HTTP ${imageResponse.status}`);
+    const png = Buffer.from(await imageResponse.arrayBuffer());
+    const file = path.join(out, `figma-${id.replace(/[^a-z0-9]/gi, '_')}.png`); writeFileSync(file, png); files[id] = file; images[id] = png;
   }
-  return { status: 'figma-images-collected' as const, reason: null, files };
+  const after = await readBounds('after');
+  const verified = figmaFramesFromSnapshots(before, after, images, FIGMA_REST_FULL_BOUNDS);
+  return { status: 'figma-images-collected' as const, reason: null, files, frames: verified.frames, framingRefusal: verified.refused,
+    frameEvidence: { before: 'figma-bounds-before.json', after: 'figma-bounds-after.json', version: before.version, export: { format:'png', scale:1, contentsOnly:true, useAbsoluteBounds:true }, raster: FIGMA_REST_FULL_BOUNDS,
+      beforeSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-before.json'))), afterSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-after.json'))) } };
 }
 
 async function main() {
@@ -414,6 +436,7 @@ async function main() {
   const cases = deriveCases(dump, contract, args.component);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
   const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
+  const consumerFrames: Record<string, ConsumerFrame> = {};
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
@@ -434,7 +457,7 @@ async function main() {
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'] }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'], framing: 'recorded-layout-origins-common-alpha-union-v2', deviceScaleFactor: 1, nativeRaster: FIGMA_REST_FULL_BOUNDS }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
@@ -562,7 +585,13 @@ async function main() {
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
         // Match the Figma node export's transparent substrate. The scorer
         // applies its shared background after trimming both alpha bounds.
+        await root.scrollIntoViewIfNeeded();
+        const boundsOf = (el: Element) => {const b=el.getBoundingClientRect();return {x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height};};
+        const beforeCapture = await root.evaluate(boundsOf);
         const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
+        const afterCapture = await root.evaluate(boundsOf);
+        if(JSON.stringify(beforeCapture)!==JSON.stringify(afterCapture)) problems.push(`consumer-bounds-changed-during-capture:${c.key}`);
+        else consumerFrames[c.key]={layout:afterCapture,capture:enclosingFrame(afterCapture),deviceScaleFactor:1,pngSha256:imageSha256(readFileSync(shot))};
         // Where this render draws text, in the screenshot's own pixels (the root's
         // layout box). The same walk extract/figma/visual-parity/render.ts makes.
         // Serialized as text for the same reason as the font probe above.
@@ -583,7 +612,7 @@ async function main() {
         }
         // state-not-carried is one line per STATE (the contract declares no such state — its cells render the rest state and the pixels judge).
         for (const p of stateProblems(c, declaredStates, entered.reached, paints[c.key] !== entered.restPaint)) p.startsWith('state-not-carried:') ? notCarried.add(`${p} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`) : problems.push(p);
-        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot) });
+        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot), frame: consumerFrames[c.key] ?? null });
       }
       // `disabled` is a prop, not an interaction: its cell is compared with the
       // rest cell that has the same other props.
@@ -643,7 +672,8 @@ async function main() {
         if (declaresSlot && !shown) problems.push('children-slot-discarded');
         if (!declaresSlot && !shown && !refusedByType) problems.push('children-accepted-but-discarded');
       }
-      // Behavior: switching a variant prop (enum or boolean axis) must change the computed root style of every cell whose variant differs.
+      // Observe every differing variant value. An unchanged render needs exact
+      // source equivalence, adjudicated after authenticated Figma export below.
       const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT' && variantValues(p).length > 1);
       receipt.behavior.variants = [];
       for (const prop of variantProps) {
@@ -656,23 +686,30 @@ async function main() {
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
-        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key) });
+        const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
+        receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsSwitched: shouldChange.map(c => c.key), cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key), axisInertLedgered: inert });
         if (!shouldChange.length) { problems.push(`variant-axis-unexercised:${prop.name}`); continue; }
-        if (didChange.length !== shouldChange.length) {
-          // The emitter ledgers an axis whose values drew no style difference on the canvas; name that reader outcome apart from a dropped prop.
-          const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
-          problems.push(inert ? `variant-axis-inert-ledgered:${prop.name}` : `variant-prop-discarded:${prop.name}`);
-        }
       }
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }
     // Compare with Figma's own renders.
     const setNodeId: string | undefined = (findDumpSet(dump, contract, args.component) ?? {}).nodeId;
     const unresolved = fileKey && args.token && setNodeId && cases.some(c => !c.nodeId) ? await resolveVariantNodeIds(fileKey, setNodeId, args.token, cases) : (cases.some(c => !c.nodeId) ? 'variant node ids unavailable' : null);
-    const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {} }
-      : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {} };
+    const figma = unresolved ? { status: 'figma-images-unavailable' as const, reason: unresolved, files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: unresolved }
+      : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
-    receipt.images = { status: figma.status, reason: figma.reason, scorer: 'extract/figma/visual-parity/img.ts alignPair+diffPair (alpha-trimmed, pixelmatch threshold 0.1). Both unmasked comparisons, on white and black, must meet the unchanged 5% limit. textMaskedPercent only classifies the white comparison and never excuses either score.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    const sourceImages: Record<string, Buffer> = Object.fromEntries(Object.entries(figma.files).map(([id, file]) => [id, readFileSync(file)]));
+    for (const row of receipt.behavior.variants ?? []) {
+      const unchanged = row.cellsSwitched.filter((key: string) => !row.cellsChanged.includes(key));
+      const equivalent = sourceEquivalentTransitions(cases, row.prop, row.switchedTo, unchanged, sourceImages, figma.frames);
+      row.sourceEquivalentTransitions = equivalent;
+      const keys = new Set(equivalent.map(e => e.from));
+      row.cellsExpectedToChange = row.cellsSwitched.filter((key: string) => !keys.has(key));
+      row.cellsUnchangedWithoutEquivalentSource = unchanged.filter((key: string) => !keys.has(key));
+      if (row.cellsUnchangedWithoutEquivalentSource.length)
+        problems.push(row.axisInertLedgered ? `variant-axis-inert-ledgered:${row.prop}` : `variant-prop-discarded:${row.prop}`);
+    }
+    receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
@@ -692,11 +729,27 @@ async function main() {
       // is over the limit — is anything wrong OUTSIDE the glyphs? `null` = the
       // mask covers the whole canvas, so the number would be vacuous.
       const residual = percent > IMAGE_LIMIT_PERCENT ? residualClass(diff.maskedPct, diff.maskCoveragePct) : undefined;
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, withinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
+      const ourBytes=readFileSync(path.join(args.out,`consumer-${c.key}.png`)),figmaBytes=readFileSync(file);
+      const onWhite=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],figma.frames[c.nodeId],255);
+      const onBlack=alignRecordedFrames(ourBytes,figmaBytes,consumerFrames[c.key],figma.frames[c.nodeId],0);
+      let layoutAligned: any;
+      if (figma.framingRefusal || 'refused' in onWhite || 'refused' in onBlack) {
+        const reason=figma.framingRefusal || ('refused' in onWhite ? onWhite.refused : 'refused' in onBlack ? onBlack.refused : 'unknown');
+        layoutAligned={status:'refused',reason,withinLimit:false}; problems.push(`image-framing-unqualified:${c.key}:${reason}`);
+      } else {
+        const white=diffPair(onWhite.aligned,[]),black=diffPair(onBlack.aligned,[]);
+        layoutAligned={status:'measured',whiteMismatchPercent:white.unmaskedPct,blackMismatchPercent:black.unmaskedPct,
+          withinLimit:white.unmaskedPct<=IMAGE_LIMIT_PERCENT&&black.unmaskedPct<=IMAGE_LIMIT_PERCENT,placement:onWhite.placement,
+          pixelsCompared:onWhite.aligned.width*onWhite.aligned.height};
+        writeTriptych(path.join(args.out,`triptych-layout-white-${c.key}.png`),onWhite.aligned,white.diff);
+        writeTriptych(path.join(args.out,`triptych-layout-black-${c.key}.png`),onBlack.aligned,black.diff);
+        if (white.unmaskedPct>IMAGE_LIMIT_PERCENT) problems.push(`layout-image-difference-above-limit:${c.key}:${white.unmaskedPct.toFixed(2)}%`);
+        if (black.unmaskedPct>IMAGE_LIMIT_PERCENT) problems.push(`layout-image-difference-on-black-above-limit:${c.key}:${black.unmaskedPct.toFixed(2)}%`);
+      }
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, blackMismatchPercent: blackPercent, historicalWithinLimit: percent <= IMAGE_LIMIT_PERCENT && blackPercent <= IMAGE_LIMIT_PERCENT,
+        layoutAligned, figmaFrame:figma.frames[c.nodeId]??null, withinLimit:layoutAligned.withinLimit,
         textMaskedPercent: diff.maskedPct, textMaskCoveragePercent: diff.maskCoveragePct, ...(residual ? { residual } : {}), inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
-      if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
-      if (blackPercent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-on-black-above-limit:${c.key}:${blackPercent.toFixed(2)}%`);
       // Mostly-white surfaces can score under the pixel limit while the
       // rendered size is wrong; the trimmed content size must agree too.
       const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);

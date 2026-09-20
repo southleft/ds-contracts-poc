@@ -1,3 +1,4 @@
+import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
@@ -54,6 +55,7 @@ import {
   resolveLayout,
   resolveLiterals,
   resolveTokens,
+  strokedPathDimensionOk,
   slotFigmaProperty,
   slotVisibilityProperty,
   statePreviewLabel,
@@ -243,7 +245,9 @@ export interface NodeSpec {
    *  — the same radians the dump captured. An AXIS-VARYING sweep rides
    *  stylesWhen `mask` rules, which the canvas slice does not compile — the
    *  documented canvas stylesWhen fidelity limit. */
-  shape?: { kind: 'polygon' | 'ellipse' | 'rect'; sides?: number; width: number; height: number; rotation?: number; arc?: { start: number; end: number; innerRadius: number } };
+  shape?: Omit<NonNullable<Part['shape']>, 'pathsByProp'>;
+  /** Fixed free frame used by captured SCALE/SCALE open paths. */
+  strokeViewport?: true;
   /** v9 shape placement — compiled from the part's stylesWhen entries whose
    *  condition holds for this combo (the proposer's closed placement
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
@@ -4857,7 +4861,16 @@ function partToSpecInner(
   // v9 shape (#42): a REAL parametric node — geometry from the contract,
   // fill from tokens, placement/rotation from the compiled stylesWhen.
   if (part.shape) {
-    const spec: NodeSpec = { type: 'shape', name, shape: { ...part.shape } };
+    const { pathsByProp, ...baseShape } = part.shape;
+    let selected = baseShape;
+    if (pathsByProp) {
+      const prop = contract.props.find((p) => p.name === pathsByProp.prop);
+      const value = subst[pathsByProp.prop] ?? prop?.default;
+      const geometry = typeof value === 'string' ? pathsByProp.map[value] : undefined;
+      if (!geometry) throw new Error(`filled-path-variant-missing:${pathsByProp.prop}:${String(value)}`);
+      selected = { ...baseShape, ...geometry };
+    }
+    const spec: NodeSpec = { type: 'shape', name, shape: selected };
     applyStyling(spec, part, subst, ctx);
     // Wave B.1 — per-variant shape resize. `literalsByProp` may carry
     // width/height when size factors by one enum axis (Tailwind
@@ -4892,6 +4905,14 @@ function partToSpecInner(
       } else {
         spec.absolute = absFromLits;
       }
+    }
+    if (selected.kind === 'stroked-path') {
+      const ref = resolveTokens(part, subst)['border-width'];
+      const value = ref ? resolveLiteral(ref.slice(1, -1)) : resolveLiterals(part, subst)['border-width'];
+      if (!strokedPathDimensionOk(value)) throw new Error(`stroked-path-width-unsupported:${name}`);
+      if (!spec.stroke && !spec.lits?.strokeColor) throw new Error(`stroked-path-paint-unsupported:${name}`);
+      const v = selected.strokePath!.viewport;
+      spec.absolute = { h: 'MIN', v: 'MIN', left: v.x, top: v.y };
     }
     applyBarCollapseAbsolute(spec);
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
@@ -5129,6 +5150,7 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
+  if (Object.values(part.parts ?? {}).some(child => child.shape?.kind === 'stroked-path')) spec.strokeViewport = true;
   // B-3 finding 5: inset overlay parts lower to ABSOLUTE + STRETCH behind
   // the in-flow siblings instead of flowing as one (Round 5: non-zero
   // offsets carried too).
@@ -5159,6 +5181,21 @@ function partToSpecInner(
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
+  if (spec.strokeViewport) {
+    const refs = resolveTokens(part, subst), literals = resolveLiterals(part, subst);
+    for (const key of ['width', 'height']) {
+      const ref = refs[key];
+      if (!strokedPathDimensionOk(ref ? resolveLiteral(ref.slice(1, -1)) : literals[key]))
+        throw new Error(`stroked-path-parent-dimension-unsupported:${name}:${key}`);
+    }
+    const width = spec.lits?.width ?? spec.fixedWidth?.px;
+    const height = spec.lits?.height ?? spec.fixedHeight?.px;
+    for (const child of spec.children) {
+      const basis = child.shape?.strokePath?.viewport;
+      if (!basis || width !== basis.width || height !== basis.height)
+        throw new Error(`stroked-path-parent-basis-mismatch:${name}`);
+    }
+  }
   // @lower emit.axis-reverse-as-child-order
   if (isReversed(part, subst)) spec.children.reverse();
   centerStrokeGlyphsInHosts(spec.children);
@@ -6361,6 +6398,24 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  // Contract offsets are CSS padding-edge coordinates. Synthetic paint and
+  // SVG viewport planes already carry native coordinates and are excluded.
+  const lowerAbsolute = (parent: NodeSpec) => {
+    for (const child of parent.children ?? []) {
+      const part = nativePartOrigins.get(child);
+      const positioned = part?.declared?.position === 'absolute' ||
+        part?.stylesWhen?.some(sw => sw.styles.position === 'absolute');
+      if ((child.absolute || child.insetOverlay) && positioned && child.shape?.kind !== 'stroked-path') {
+        const insets = compiledBorderInsets(parent, name => {
+          try { return pxOrNull(resolveLiteral(name.replaceAll('/', '.'))) ?? undefined; } catch { return undefined; }
+        });
+        lowerAbsoluteInsets(child, insets);
+      }
+      lowerAbsolute(child);
+    }
+  };
+  [...variants, ...stateVariants].forEach(v => lowerAbsolute(v.spec));
+
   const fillRootSlot = [...variants, ...stateVariants].some(v => v.spec.rootFillWidth);
   if (fillRootSlot && ![...variants, ...stateVariants].every(v => v.spec.rootFillWidth))
     throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
@@ -6719,7 +6774,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false, hasStrokedPath = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6733,11 +6788,27 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
       if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;${effects}
     } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
-    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+    node = ${hasFilledPath || hasStrokedPath ? `${[hasFilledPath ? "spec.shape.kind === 'path'" : "", hasStrokedPath ? "spec.shape.kind === 'stroked-path'" : ""].filter(Boolean).join(" || ")} ? figma.createVector() : ` : ''}spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
       : figma.createPolygon();${nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
-    node.resize(spec.shape.width, spec.shape.height);
+${hasStrokedPath ? `    if (spec.shape.kind === 'stroked-path') {
+      const p = spec.shape.strokePath;
+      node.vectorPaths = [{ data: p.data, windingRule: 'NONE' }];
+      node.strokeCap = p.cap;
+      node.strokeJoin = p.join;
+      node.strokeMiterLimit = p.miterLimit;
+      node.dashPattern = [];
+      if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
+          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height))
+        throw new Error('stroked-path-native-size-mismatch:' + node.id);
+    } else ` : ''}${hasFilledPath ? `    if (spec.shape.kind === 'path') {
+      node.vectorPaths = spec.shape.paths;
+      node.strokes = [];
+      if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
+          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height))
+        throw new Error('filled-path-native-size-mismatch:' + node.id);
+    } else ` : '    '}node.resize(spec.shape.width, spec.shape.height);
 ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
     // exact radians the dump captured (Figma ArcData semantics both ways).
     if (spec.shape.kind === 'ellipse' && spec.shape.arc) {
@@ -6761,14 +6832,14 @@ ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcD
     // radio backdrop strokes and radii — the shim now lives at the source).
     if (spec.stroke) {
       node.strokes = [boundPaint(spec.stroke, node)];
-      node.strokeAlign = ${alignExpr};
+      node.strokeAlign = ${hasStrokedPath ? "spec.shape.kind === 'stroked-path' ? 'CENTER' : " : ''}${alignExpr};
     }${shapeLits ? `
     // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
     // Carbon checkbox box is a transparent square with a 1px border — a ring
     // with no paint, no weight and no radius is not a box.
     else if (spec.lits && spec.lits.strokeColor) {
       node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
-      node.strokeAlign = ${alignExpr};
+      node.strokeAlign = ${hasStrokedPath ? "spec.shape.kind === 'stroked-path' ? 'CENTER' : " : ''}${alignExpr};
     }
     if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
     if (spec.lits && spec.lits.strokeSides) {
@@ -7351,12 +7422,22 @@ const gridChildrenCall = (has: boolean, args: string): string =>
 
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
-const absoluteRuntime = (has: boolean): string =>
+const absoluteRuntime = (has: boolean, hasStrokedPath = false): string =>
   has
     ? `
 // v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
-  if (!childSpec.absolute) return;
+  if (!childSpec.absolute) return;${hasStrokedPath ? `
+  if (childSpec.shape && childSpec.shape.kind === 'stroked-path') {
+    const v = childSpec.shape.strokePath.viewport;
+    if (parent.layoutMode !== 'NONE' ||
+        parent.width !== v.width && parent.width !== Math.fround(v.width) ||
+        parent.height !== v.height && parent.height !== Math.fround(v.height))
+      throw new Error('stroked-path-native-parent-basis-mismatch:' + parent.id);
+    childNode.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+    childNode.x = v.x; childNode.y = v.y;
+    return;
+  }` : ''}
   try {
     // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
     // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
@@ -7395,6 +7476,13 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
     // MAX pins right/bottom, CENTER centers):
     const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
     const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Unrotated nodes already expose local coordinates. Going through world
+    // bounding boxes introduces cancellation and loses fractional positions.
+    if (!childSpec.rotation && !(childSpec.shape && childSpec.shape.rotation)) {
+      childNode.x = a.left !== undefined ? a.left : a.right !== undefined ? parent.width - a.right - childNode.width : (parent.width - childNode.width) / 2;
+      childNode.y = a.top !== undefined ? a.top : a.bottom !== undefined ? parent.height - a.bottom - childNode.height : (parent.height - childNode.height) / 2;
+      return;
+    }
     // Rotation moves the measured box — correct against the actual bounds.
     const bb = childNode.absoluteBoundingBox;
     const pb = parent.absoluteBoundingBox;
@@ -7910,6 +7998,8 @@ function buildSyncScript(
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
+  const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
+  const hasStrokedPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'stroked-path'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
@@ -8579,7 +8669,10 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // Rebind after the last literal grid write so variable identity survives.
   if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
     node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
-  }` : ''}
+  }` : ''}${hasStrokedPath ? `
+  // A path viewport owns coordinates, not child flow. Apply after size and
+  // variable bindings, before appending paths; resize preserves SCALE.
+  if (spec.strokeViewport) node.layoutMode = 'NONE';` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -8599,7 +8692,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
-${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+${absoluteRuntime(hasAbsolute, hasStrokedPath)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasCallerSlots ? `function callerCanExpose(instance) {
   for (let parent = instance.parent; parent; parent = parent.parent) {
     if (parent.type === 'INSTANCE') return false;
@@ -8767,7 +8860,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it
@@ -9399,7 +9492,13 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
       const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
         axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
-      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version === 2) {
+        const canonical = value => value && typeof value === 'object'
+          ? Array.isArray(value) ? value.map(canonical) : Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+        if (!C.codeValueAxes || C.codeValueAxes.version !== 2 || JSON.stringify(canonical(previous)) !== JSON.stringify(canonical(C.codeValueAxes)))
+          throw new Error('FIGMA_STATE_API_RETIREMENT_REFUSED: changing or removing retained state inputs needs a verified migration or fresh lineage');
+      }
+` : ''}      if (${datas.some(d => d.codeValueAxes?.version === 2) ? '(previous.version !== 1 && previous.version !== 2)' : 'previous.version !== 1'} || !Array.isArray(previous.axes) || !previous.axes.length ||
           new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
           previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
         throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');

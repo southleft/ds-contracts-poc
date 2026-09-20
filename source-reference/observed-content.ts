@@ -2,6 +2,7 @@
  * anatomy/layout/token pipeline. This is a comparison snapshot, never a main
  * component definition or evidence of reusable nested component semantics.
  */
+import {exactUsedLayoutLength} from './layout-unit.js';
 import {lowerPaddingBoxBackground} from '../core/figma-background-clip.js';
 import {flattenTokens,makeResolveLiteral,pxOrNull} from '../core/tokens.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
@@ -15,6 +16,7 @@ import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { reactRootStyleExclusion } from './react-root-visual.js';
 import { withPaintedTextFonts, type TextFontEvidence } from './text-fonts.js';
 import { verifiedSvgViewports, type SvgViewportEvidence } from './svg-viewports.js';
+import { observedPseudoGeometry, verifiedPseudoBoxes, type PseudoBoxEvidence } from './pseudo-boxes.js';
 
 export interface ObservedContentDraft {
   version: 1;
@@ -116,8 +118,13 @@ function compileContent(tree: CapturedNode, fonts: TextFontEvidence, svg: SvgVie
 }
 
 /** Shared preparation for single samples and complete observed property sweeps. */
-export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence) {
+export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence, pseudos?: PseudoBoxEvidence) {
   const root = withPaintedTextFonts(tree, fonts);
+  if (pseudos) for (const row of verifiedPseudoBoxes(tree, pseudos)) {
+    let node = root;
+    for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;
+    node.pseudoGeometry = { ...node.pseudoGeometry, [row.pseudo]: observedPseudoGeometry(row) };
+  }
   if (svg) for (const row of verifiedSvgViewports(tree, svg)) {
     let node = root;
     for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;
@@ -135,7 +142,27 @@ export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEv
  * input domain; this routine does not turn samples into a supported source API. */
 export function compileObservedContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
   rootSizing: string[] = [], includeSourcePaths = false, preserveTextBoxes: string[] = [], partSizing?: PartSizing) {
-  return compileContentSweep(space, comp, sweep, rootSizing, includeSourcePaths, preserveTextBoxes, false, partSizing);
+  // A six-digit CSSOM serialization can fall below its actual layout unit:
+  // writing 18.3906px back to CSS lays out at 18.375px, not 1177/64px.
+  // Only sizes already proved own and fixed are recovered. Keep sealed input
+  // observations and the caller's source-variable evidence unchanged.
+  const copies = structuredClone(sweep), recovered: string[] = [];
+  for (const capture of copies.captures) {
+    const key = capture.combo.startsWith(comp.name + ':') ? capture.combo.slice(comp.name.length + 1) : undefined;
+    for (const row of flatten(capture.root)) {
+      const channels = row.path === '' ? rootSizing : key === undefined ? [] : [...(partSizing?.get(key)?.get(row.path) ?? [])];
+      for (const channel of channels) {
+        if (channel !== 'width' && channel !== 'height') continue;
+        const used = row.node.style[channel], exact = exactUsedLayoutLength(used ?? '');
+        if (exact === undefined) throw Error(`observed-content-used-size-unqualified:${row.path || 'root'}:${channel}`);
+        if (exact !== used) recovered.push(`layout-unit-size:${capture.combo}:${row.path || 'root'}:${channel}:${used}->${exact}`);
+        row.node.style[channel] = exact;
+      }
+    }
+  }
+  const result = compileContentSweep(space, comp, copies, rootSizing, includeSourcePaths, preserveTextBoxes, false, partSizing);
+  result.receipts.push(...recovered);
+  return result;
 }
 /** Combination key → element path below the capture root → the size channels
  * the CALLER proved are that element's own used declarations in that plane. */

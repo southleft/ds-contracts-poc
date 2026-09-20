@@ -55,6 +55,8 @@ export interface ReactSourceComponent {
   exportName: string;
   module: string;
   sourceSha256: string;
+  /** Recognized React export wrapper; the span still identifies the complete declaration. */
+  wrappers?: Array<"forwardRef">;
   span: { start: number; end: number };
   props: ReactSourceProp[];
   root: ReactRootFact;
@@ -243,18 +245,152 @@ export function readReactSourceProgram(
                 export: el.propertyName?.text ?? el.name.text,
               });
         }
+      // Follow only direct immutable calls to the imported React factory. The
+      // returned export remains the ownership identity; the inline callback is
+      // the source body. Lookalike names and arbitrary higher-order functions
+      // do not establish this relationship.
+      const forwardRefBody = (
+        declaration: ts.Declaration,
+      ): ts.ArrowFunction | ts.FunctionExpression | undefined => {
+        if (
+          !ts.isVariableDeclaration(declaration) ||
+          !ts.isVariableDeclarationList(declaration.parent) ||
+          !(declaration.parent.flags & ts.NodeFlags.Const)
+        )
+          return undefined;
+        const call = declaration.initializer;
+        if (
+          !call ||
+          !ts.isCallExpression(call) ||
+          call.arguments.length !== 1 ||
+          (!ts.isArrowFunction(call.arguments[0]) &&
+            !ts.isFunctionExpression(call.arguments[0]))
+        )
+          return undefined;
+        const callee = call.expression;
+        const namespace =
+          ts.isPropertyAccessExpression(callee) &&
+          callee.name.text === "forwardRef" &&
+          ts.isIdentifier(callee.expression)
+            ? callee.expression
+            : undefined;
+        const direct = ts.isIdentifier(callee) ? callee : undefined;
+        const binding = namespace ?? direct;
+        if (!binding) return undefined;
+        const symbol = checker.getSymbolAtLocation(binding);
+        const imported = symbol?.declarations?.find((d) =>
+          namespace
+            ? ts.isNamespaceImport(d) || ts.isImportClause(d)
+            : ts.isImportSpecifier(d) &&
+              (d.propertyName ?? d.name).text === "forwardRef",
+        );
+        if (!imported) return undefined;
+        let parent: ts.Node | undefined = imported;
+        while (parent && !ts.isImportDeclaration(parent))
+          parent = parent.parent;
+        if (
+          !parent ||
+          !ts.isStringLiteral(parent.moduleSpecifier) ||
+          parent.moduleSpecifier.text !== "react"
+        )
+          return undefined;
+        // A factory/namespace that escapes or is replaced elsewhere in this
+        // module no longer proves that React wrapped this body.
+        const factoryBindings = new Map<
+          ts.Symbol,
+          { declaration: ts.Declaration; namespace: boolean }
+        >();
+        for (const statement of sf.statements) {
+          if (
+            !ts.isImportDeclaration(statement) ||
+            !ts.isStringLiteral(statement.moduleSpecifier) ||
+            statement.moduleSpecifier.text !== "react" ||
+            !statement.importClause
+          )
+            continue;
+          const clause = statement.importClause;
+          const add = (
+            name: ts.Identifier,
+            declaration: ts.Declaration,
+            namespace: boolean,
+          ) => {
+            const importedSymbol = checker.getSymbolAtLocation(name);
+            if (importedSymbol)
+              factoryBindings.set(importedSymbol, { declaration, namespace });
+          };
+          if (clause.name) add(clause.name, clause, true);
+          if (
+            clause.namedBindings &&
+            ts.isNamespaceImport(clause.namedBindings)
+          )
+            add(clause.namedBindings.name, clause.namedBindings, true);
+          else if (clause.namedBindings)
+            for (const specifier of clause.namedBindings.elements)
+              if (
+                (specifier.propertyName ?? specifier.name).text === "forwardRef"
+              )
+                add(specifier.name, specifier, false);
+        }
+        let escaped = false;
+        const inspect = (node: ts.Node) => {
+          const candidate = ts.isIdentifier(node)
+            ? checker.getSymbolAtLocation(node)
+            : undefined;
+          const factoryBinding = candidate && factoryBindings.get(candidate);
+          if (factoryBinding) {
+            if (node.parent === factoryBinding.declaration) return;
+            if (factoryBinding.namespace) {
+              if (ts.isQualifiedName(node.parent)) return; // type-only namespace use
+              if (
+                !ts.isPropertyAccessExpression(node.parent) ||
+                node.parent.expression !== node
+              )
+                escaped = true;
+              else if (
+                node.parent.name.text === "forwardRef" &&
+                (!ts.isCallExpression(node.parent.parent) ||
+                  node.parent.parent.expression !== node.parent)
+              )
+                escaped = true;
+            } else if (
+              !ts.isCallExpression(node.parent) ||
+              node.parent.expression !== node
+            )
+              escaped = true;
+          }
+          ts.forEachChild(node, inspect);
+        };
+        inspect(sf);
+        return escaped ? undefined : call.arguments[0];
+      };
       for (const exported of checker.getExportsOfModule(moduleSymbol)) {
         const name = exported.getName();
         if (!/^[A-Z]/.test(name)) continue;
+        // Type-only re-exports may alias a value symbol, but emit no runtime
+        // binding. Interfaces/type aliases likewise cannot identify a rendered
+        // component. Keep unsupported VALUE exports on the named refusal path.
+        if (
+          exported.declarations?.length &&
+          exported.declarations.every(
+            (d) =>
+              ts.isExportSpecifier(d) &&
+              (d.isTypeOnly ||
+                (ts.isExportDeclaration(d.parent.parent) &&
+                  d.parent.parent.isTypeOnly)),
+          )
+        )
+          continue;
         const symbol =
           exported.flags & ts.SymbolFlags.Alias
             ? checker.getAliasedSymbol(exported)
             : exported;
+        if (!(symbol.flags & ts.SymbolFlags.Value)) continue;
         const declaration = symbol.valueDeclaration;
         if (!declaration || declaration.getSourceFile() !== sf) {
           fail(`${name}:component-definition-outside-module`);
           continue;
         }
+        const wrappedBody = forwardRefBody(declaration);
         const fn = ts.isFunctionDeclaration(declaration)
           ? declaration
           : ts.isVariableDeclaration(declaration) &&
@@ -262,7 +398,7 @@ export function readReactSourceProgram(
               (ts.isArrowFunction(declaration.initializer) ||
                 ts.isFunctionExpression(declaration.initializer))
             ? declaration.initializer
-            : undefined;
+            : wrappedBody;
         if (!fn?.body) {
           fail(`${name}:component-function-unresolved`);
           continue;
@@ -275,6 +411,7 @@ export function readReactSourceProgram(
           exportName: name,
           module: path.relative(root, file),
           sourceSha256: sha(sf.text),
+          ...(wrappedBody ? { wrappers: ["forwardRef" as const] } : {}),
           span: { start: declaration.getStart(sf), end: declaration.end },
           props: [],
           root: { kind: "unresolved", reason: "single-jsx-return-required" },

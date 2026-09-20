@@ -1,3 +1,4 @@
+import { strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactToggleAria } from './react-toggle-aria.js';
@@ -608,6 +609,8 @@ export function generateTsx(
       .join('\n');
 
   const renderPart = (partName: string, part: Part): string => {
+    if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
+      `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);

@@ -184,7 +184,7 @@ export async function fetchNodes(
   // statePreviewAxis + the per-TEXT fontWeightVar/lineHeightVar token names).
   // Without it a REST dump of a stamped set forgets its own identity and
   // exact-mode proposal is impossible on this route.
-  return (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared`, token, opts)) as RestNodesResponse;
+  return (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared&geometry=paths`, token, opts)) as RestNodesResponse;
 }
 
 /**
