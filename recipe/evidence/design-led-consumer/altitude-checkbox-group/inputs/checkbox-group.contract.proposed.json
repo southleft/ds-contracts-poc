@@ -1,0 +1,226 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.checkbox-group",
+  "name": "CheckboxGroup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "A set of checkboxes that are one question. It exists for its semantics, not its spacing — it renders a real `<fieldset>` with a `<legend>`, carries one field note and one error note for the whole set, and cascades `isRequired` and `isDisabled` down to every checkbox inside it.\n\nTag: al-checkbox-group\n\nProps\n- direction: row | column — Direction\n- hideLegend: boolean — Hide legend?\n- isDisabled: boolean — Disabled attribute\n- isError: boolean — Error state\n- label — Label\n  - Displays: inside the legend\n\nSlots\n- (default) — The component content, a set of checkbox items.\n- error — If content is slotted, it will display in place of the errorNote property\n- field-note — If content is slotted, it will display in place of the fieldNote property\n\nAccessibility\n- element: <fieldset>\n\nDocs: https://altitude.pages.dev/docs/components/checkbox-group/",
+  "documentationLinks": [
+    {
+      "uri": "https://altitude.pages.dev/docs/components/checkbox-group/"
+    }
+  ],
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "legend",
+      "type": {
+        "enum": [
+          "shown",
+          "hidden"
+        ]
+      },
+      "default": "shown",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Legend",
+          "values": {
+            "shown": "Shown",
+            "hidden": "Hidden"
+          }
+        },
+        "code": {
+          "prop": "legend"
+        }
+      }
+    },
+    {
+      "name": "orientation",
+      "type": {
+        "enum": [
+          "column",
+          "row"
+        ]
+      },
+      "default": "column",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Orientation",
+          "values": {
+            "column": "Column",
+            "row": "Row"
+          }
+        },
+        "code": {
+          "prop": "orientation"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "disabled",
+          "error"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "disabled": "Disabled",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Checkbox group legend label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "items",
+      "type": {
+        "arrayOf": {
+          "text": "text"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "items"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "Label": {
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "textAutoResize": "WIDTH_AND_HEIGHT",
+          "content": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{imported.checkbox-group.label.color}",
+            "font-size": "{imported.text.typography-body-sm-regular.font-size}",
+            "font-weight": "{imported.text.typography-body-sm-regular.font-weight}",
+            "line-height": "{imported.text.typography-body-sm-regular.line-height}"
+          }
+        },
+        "alLayoutsetUnresolved": {
+          "layout": {
+            "direction": "column"
+          },
+          "layoutByProp": {
+            "prop": "orientation",
+            "map": {
+              "row": {
+                "direction": "row",
+                "align": "center"
+              }
+            }
+          },
+          "parts": {
+            "alCheckbox": {
+              "component": {
+                "id": "ds.checkbox",
+                "props": {
+                  "state": {
+                    "prop": "state",
+                    "map": {
+                      "default": "default",
+                      "disabled": "disabled",
+                      "error": "default"
+                    }
+                  },
+                  "checked": "off",
+                  "label": "shown"
+                }
+              },
+              "repeat": {
+                "itemsProp": "items",
+                "sample": [
+                  {
+                    "text": "Checkbox label"
+                  },
+                  {
+                    "text": "Checkbox label"
+                  },
+                  {
+                    "text": "Checkbox label"
+                  }
+                ]
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.checkbox-group.al-layout-set-unresolved.gap.{orientation}}"
+          }
+        },
+        "alFieldNote": {
+          "component": {
+            "id": "ds.field-note",
+            "props": {
+              "text": "Helper text",
+              "state": "{state}"
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "tokens": {
+        "gap": "{imported.checkbox-group.root.gap}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "y83n4o9LOGs74oAoguFcGS",
+        "componentSetKey": "c17fd306db467394fd2540f30523e580e4400560",
+        "nodeId": "3570:2154"
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/CheckboxGroup",
+        "export": "CheckboxGroup"
+      }
+    }
+  }
+}

@@ -71,6 +71,13 @@ export {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  drawsStrokeRing,
+  drawsWholePixelTextBox,
+  lowerStrokeRings,
+  settleStrokeShadows,
+  textBoxTokenRefusals,
+  WHOLE_PIXEL_TEXT_BOX_BASIS,
+  wholePixelTextBoxPlan,
   enumProps,
   holderDeclaresPosition,
   isArrayType,
@@ -469,6 +476,27 @@ export function generateTsx(
         `  // structure (a gated part, a per-value text/icon lookup, a child's own props) —\n` +
         `  // or, where the source drew no difference at all, nothing.\n`;
 
+  // bindings.figma.absentVariants (docs/23 §D.40) is a CANVAS fact: this
+  // component renders any prop combination by composing its per-axis rules,
+  // so a combination the design never drew still renders — as a composition
+  // nobody drew. Named in the emitted file, never silent; a contract with no
+  // declaration emits no note and keeps its bytes.
+  const undrawn = contract.bindings?.figma?.absentVariants ?? [];
+  const undrawnNote =
+    undrawn.length === 0
+      ? ''
+      : `  // undrawn-combination-rendered-by-composition: the design does not draw ${undrawn.length} of this\n` +
+        // Values are JSON-spelled (an enum value holding a newline would end a
+        // line comment and inject code) and the list is CAPPED: the comment
+        // names the limit, the contract carries the list.
+        `  // component's prop combinations (bindings.figma.absentVariants: ${undrawn
+          .slice(0, 3)
+          .map((t) => Object.entries(t).map(([k, v]) => `${k}=${JSON.stringify(v)}`).join(' '))
+          .join('; ')
+          .replace(/[\u2028\u2029]/g, ' ')}${undrawn.length > 3 ? `; … ${undrawn.length - 3} more in the contract` : ''}).\n` +
+        `  // Nothing here refuses them: they render by composing the per-axis rules read from the\n` +
+        `  // drawn variants, which is a rendering nobody designed or measured.\n`;
+
   // Root and nested attrs share typed native/ARIA projection with the inline emitter.
   const partAttrList = (part: Part | undefined): string[] =>
     reactPartAttrList(contract, part, codePropOf);
@@ -801,7 +829,7 @@ export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${sr.destructured.join(', ')} },
   ref,
 ) {
-${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}${undrawnNote}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
   return (
     <${el} ${elementAttrs.join(' ')}>
       ${rootInner}
@@ -1106,7 +1134,7 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   validateReactInitialBindings(contract);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
-  const css = generateCss(contract, ctx.tokens, errors);
+  const css = generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }

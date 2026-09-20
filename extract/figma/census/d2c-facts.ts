@@ -439,6 +439,17 @@ export function accountSet(inputs: AccountInputs): SetAccount {
             : null,
           note("stroke") ?? note("outline"));
       }
+      // dump v1.35: a stroke on an auto-layout frame that takes NO layout
+      // space. REST omits the default, so the ABSENT key is the fact here —
+      // and it was lost without a row until the design-led consumer check
+      // measured it (a designer's outline Badge rendered 4px too wide). The
+      // in-layout value (`true`) is what a border already means and is no
+      // more a separate fact than strokeAlign INSIDE is.
+      const autoLayout = n.layoutMode === "HORIZONTAL" || n.layoutMode === "VERTICAL" || n.layoutMode === "GRID";
+      if (autoLayout && n.strokesIncludedInLayout !== true)
+        classify(path, "strokesIncludedInLayout", false,
+          partCarries(part, ["strokesIncludedInLayout"]) ? `part "${part!.name}" strokesIncludedInLayout: false → inset ring, no layout space` : null,
+          note("layout space") ?? note("strokesIncludedInLayout"));
       const align = n.strokeAlign as string | undefined;
       if (align && align !== "INSIDE")
         classify(path, "strokeAlign", align,
@@ -640,6 +651,17 @@ export function accountSet(inputs: AccountInputs): SetAccount {
         classify(path, "text textAutoResize (fixed-box text)", tr,
           partCarries(part, ["width"]) ? "width channel on the text part" : null,
           note("textAutoResize") ?? gap("fixed sizes"));
+      // dump v1.36: a text box that sizes itself to its text is a WHOLE number
+      // of pixels wide (the advance rounded up, no tracking after the last
+      // glyph); the browser's is fractional. Lost without a row until the
+      // design-led consumer check measured it on a designer's Badge (26 of 72
+      // variants over the limit with every content size equal). Carried as
+      // Part.textAutoResize: WIDTH_AND_HEIGHT; a hoisted root label, a mixed
+      // or contradicting dump is NAMED by the proposer.
+      if (tr === "WIDTH_AND_HEIGHT" && lsh !== "FILL")
+        classify(path, "text textAutoResize (whole-pixel auto-width box)", tr,
+          partCarries(part, ["textAutoResize"]) ? `part "${part!.name}" textAutoResize: WIDTH_AND_HEIGHT → inline-size rounded up to the pixel` : null,
+          note("textAutoResize") ?? note("whole-pixel"));
       const tt = s.textTruncation as string | undefined;
       if (tt && tt !== "DISABLED")
         classify(path, "text textTruncation", `${tt} maxLines=${String(s.maxLines)}`,

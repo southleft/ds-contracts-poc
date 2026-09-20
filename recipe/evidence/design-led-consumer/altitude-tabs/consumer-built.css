@@ -224,10 +224,69 @@
   --font-weight-medium: 500;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
+  --imported-button-button-state-hover-color-bare: #a5a399;
+  --imported-button-button-state-hover-color-neutral: #f1f0ea;
+  --imported-button-button-state-hover-color-primary: #0e1834;
+  --imported-button-button-state-hover-color-secondary: #1d1d1a;
+  --imported-button-button-state-hover-color-tertiary: #a5a399;
+  --imported-button-button-color-bare: #f1f0ea;
+  --imported-button-button-color-neutral: #f1f0ea;
+  --imported-button-button-color-primary: #0e1834;
+  --imported-button-button-color-secondary: #1d1d1a;
+  --imported-button-button-color-tertiary: #f1f0ea;
+  --imported-button-button-font-size-lg: 16px;
+  --imported-button-button-font-size-md: 14px;
+  --imported-button-button-font-size-sm: 12px;
+  --imported-button-button-font-weight: 600;
+  --imported-button-button-line-height-lg: 24px;
+  --imported-button-button-line-height-md: 20px;
+  --imported-button-button-line-height-sm: 20px;
+  --imported-button-root-background-color-bare: #00000000;
+  --imported-button-root-background-color-neutral: #3c3c35;
+  --imported-button-root-background-color-primary: #8ea6ff;
+  --imported-button-root-background-color-secondary: #f1f0ea;
+  --imported-button-root-background-color-tertiary: #00000000;
+  --imported-button-root-border-color-bare: #00000000;
+  --imported-button-root-border-color-neutral: #00000000;
+  --imported-button-root-border-color-primary: #00000000;
+  --imported-button-root-border-color-secondary: #00000000;
+  --imported-button-root-border-color-tertiary: #3c3c35;
+  --imported-button-root-border-radius-default: 6px;
+  --imported-button-root-border-radius-pill: 999px;
+  --imported-button-root-border-width-bare: 0px;
+  --imported-button-root-border-width-neutral: 0px;
+  --imported-button-root-border-width-primary: 0px;
+  --imported-button-root-border-width-secondary: 0px;
+  --imported-button-root-border-width-tertiary: 1px;
+  --imported-button-root-gap: 8px;
+  --imported-button-root-height-lg: 48px;
+  --imported-button-root-height-md: 40px;
+  --imported-button-root-height-sm: 32px;
+  --imported-button-root-min-height-lg: 48px;
+  --imported-button-root-min-height-md: 40px;
+  --imported-button-root-min-height-sm: 32px;
+  --imported-button-root-padding-inline: 16px;
+  --imported-button-state-disabled-opacity: 0.4;
+  --imported-button-state-focus-visible-border-color: #8ea6ff;
+  --imported-button-state-focus-visible-border-width: 2px;
+  --imported-button-state-hover-background-color-bare: #00000000;
+  --imported-button-state-hover-background-color-neutral: #797469;
+  --imported-button-state-hover-background-color-primary: #8ea6ff;
+  --imported-button-state-hover-background-color-secondary: #a5a399;
+  --imported-button-state-hover-background-color-tertiary: #00000000;
+  --imported-icon-icon-container-gap: 10px;
+  --imported-icon-root-height: 20px;
+  --imported-icon-root-width: 20px;
+  --imported-stub-arrow-arc-left-root-height: 20px;
+  --imported-stub-arrow-arc-left-root-width: 20px;
   --imported-stub-tab-2-root-background-color: #00000000;
   --imported-stub-tab-2-root-height: 38px;
-  --imported-stub-tab-panel-root-height: 136px;
-  --imported-stub-tab-panel-root-width: 439px;
+  --imported-stub-text-passage-root-height: 24px;
+  --imported-stub-text-passage-root-width: 441px;
+  --imported-tab-panel-root-gap: 16px;
+  --imported-tab-panel-root-padding-top: 16px;
+  --imported-tab-panel-state-focus-visible-border-color: #8ea6ff;
+  --imported-tab-panel-state-focus-visible-border-width: 2px;
   --imported-tabs-al-c-tabs-header-border-color: #3c3c35;
   --opacity-disabled: 0.5;
   --radius-100: 4px;
@@ -305,18 +364,239 @@
   --space-table-cell-y-compact: var(--space-50);
 }
 /* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/icon.contract.json (ds.icon v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+._root_14shr_6,
+._root_14shr_6 *,
+._root_14shr_6 *::before,
+._root_14shr_6 *::after {
+  box-sizing: border-box;
+}
+
+._root_14shr_6 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-icon-root-width);
+  height: var(--imported-icon-root-height);
+}
+
+._iconContainer_14shr_22 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--imported-icon-icon-container-gap);
+  height: 100%;
+}
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button.contract.json (ds.button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+._root_1jn5l_6,
+._root_1jn5l_6 *,
+._root_1jn5l_6 *::before,
+._root_1jn5l_6 *::after {
+  box-sizing: border-box;
+}
+
+._root_1jn5l_6 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  cursor: pointer;
+  gap: var(--imported-button-root-gap);
+  padding-inline: var(--imported-button-root-padding-inline);
+  width: fit-content;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+._root_1jn5l_6:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+._root_1jn5l_6:disabled {
+  cursor: not-allowed;
+}
+
+._variant-primary_1jn5l_35 {
+  background-color: var(--imported-button-root-background-color-primary);
+  border-color: var(--imported-button-root-border-color-primary);
+  border-width: var(--imported-button-root-border-width-primary);
+}
+
+._variant-bare_1jn5l_41 {
+  background-color: var(--imported-button-root-background-color-bare);
+  border-color: var(--imported-button-root-border-color-bare);
+  border-width: var(--imported-button-root-border-width-bare);
+}
+
+._variant-neutral_1jn5l_47 {
+  background-color: var(--imported-button-root-background-color-neutral);
+  border-color: var(--imported-button-root-border-color-neutral);
+  border-width: var(--imported-button-root-border-width-neutral);
+}
+
+._variant-secondary_1jn5l_53 {
+  background-color: var(--imported-button-root-background-color-secondary);
+  border-color: var(--imported-button-root-border-color-secondary);
+  border-width: var(--imported-button-root-border-width-secondary);
+}
+
+._variant-tertiary_1jn5l_59 {
+  background-color: var(--imported-button-root-background-color-tertiary);
+  border-color: var(--imported-button-root-border-color-tertiary);
+  border-width: var(--imported-button-root-border-width-tertiary);
+}
+
+._shape-default_1jn5l_65 {
+  border-radius: var(--imported-button-root-border-radius-default);
+}
+
+._shape-pill_1jn5l_69 {
+  border-radius: var(--imported-button-root-border-radius-pill);
+}
+
+._size-md_1jn5l_73 {
+  min-height: var(--imported-button-root-min-height-md);
+  height: var(--imported-button-root-height-md);
+}
+
+._size-sm_1jn5l_78 {
+  min-height: var(--imported-button-root-min-height-sm);
+  height: var(--imported-button-root-height-sm);
+}
+
+._size-lg_1jn5l_83 {
+  min-height: var(--imported-button-root-min-height-lg);
+  height: var(--imported-button-root-height-lg);
+}
+
+._variant-primary_1jn5l_35:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-primary);
+}
+
+._variant-bare_1jn5l_41:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-bare);
+}
+
+._variant-neutral_1jn5l_47:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-neutral);
+}
+
+._variant-secondary_1jn5l_53:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-secondary);
+}
+
+._variant-tertiary_1jn5l_59:hover:not(:disabled) {
+  background-color: var(--imported-button-state-hover-background-color-tertiary);
+}
+
+._root_1jn5l_6:focus-visible {
+  border-color: var(--imported-button-state-focus-visible-border-color);
+}
+
+._root_1jn5l_6:focus-visible {
+  border-width: var(--imported-button-state-focus-visible-border-width);
+}
+
+._root_1jn5l_6:disabled {
+  opacity: var(--imported-button-state-disabled-opacity);
+}
+
+._Button_1jn5l_120 {
+  font-weight: var(--imported-button-button-font-weight);
+  letter-spacing: 1px;
+  font-family: Public Sans;
+  inline-size: calc-size(fit-content, round(up, size - 1px, 1px));
+  max-inline-size: 100%;
+}
+
+._variant-primary_1jn5l_35 ._Button_1jn5l_120 {
+  color: var(--imported-button-button-color-primary);
+}
+
+._variant-bare_1jn5l_41 ._Button_1jn5l_120 {
+  color: var(--imported-button-button-color-bare);
+}
+
+._variant-neutral_1jn5l_47 ._Button_1jn5l_120 {
+  color: var(--imported-button-button-color-neutral);
+}
+
+._variant-secondary_1jn5l_53 ._Button_1jn5l_120 {
+  color: var(--imported-button-button-color-secondary);
+}
+
+._variant-tertiary_1jn5l_59 ._Button_1jn5l_120 {
+  color: var(--imported-button-button-color-tertiary);
+}
+
+._size-md_1jn5l_73 ._Button_1jn5l_120 {
+  font-size: var(--imported-button-button-font-size-md);
+}
+
+._size-sm_1jn5l_78 ._Button_1jn5l_120 {
+  font-size: var(--imported-button-button-font-size-sm);
+}
+
+._size-lg_1jn5l_83 ._Button_1jn5l_120 {
+  font-size: var(--imported-button-button-font-size-lg);
+}
+
+._size-md_1jn5l_73 ._Button_1jn5l_120 {
+  line-height: var(--imported-button-button-line-height-md);
+}
+
+._size-sm_1jn5l_78 ._Button_1jn5l_120 {
+  line-height: var(--imported-button-button-line-height-sm);
+}
+
+._size-lg_1jn5l_83 ._Button_1jn5l_120 {
+  line-height: var(--imported-button-button-line-height-lg);
+}
+
+._variant-primary_1jn5l_35:hover:not(:disabled) ._Button_1jn5l_120 {
+  color: var(--imported-button-button-state-hover-color-primary);
+}
+
+._variant-bare_1jn5l_41:hover:not(:disabled) ._Button_1jn5l_120 {
+  color: var(--imported-button-button-state-hover-color-bare);
+}
+
+._variant-neutral_1jn5l_47:hover:not(:disabled) ._Button_1jn5l_120 {
+  color: var(--imported-button-button-state-hover-color-neutral);
+}
+
+._variant-secondary_1jn5l_53:hover:not(:disabled) ._Button_1jn5l_120 {
+  color: var(--imported-button-button-state-hover-color-secondary);
+}
+
+._variant-tertiary_1jn5l_59:hover:not(:disabled) ._Button_1jn5l_120 {
+  color: var(--imported-button-button-state-hover-color-tertiary);
+}
+/* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tab-2.contract.json (ds.tab-2 v0.1.0)
  * Regenerate with: npm run generate
  */
 
-._root_1cy4r_6,
-._root_1cy4r_6 *,
-._root_1cy4r_6 *::before,
-._root_1cy4r_6 *::after {
+._root_1n3m2_6,
+._root_1n3m2_6 *,
+._root_1n3m2_6 *::before,
+._root_1n3m2_6 *::after {
   box-sizing: border-box;
 }
 
-._root_1cy4r_6 {
+._root_1n3m2_6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -324,25 +604,63 @@
   height: var(--imported-stub-tab-2-root-height);
   background-color: var(--imported-stub-tab-2-root-background-color);
 }
+
+._text_1n3m2_22 {
+  font-family: Inter, system-ui, sans-serif;
+}
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/text-passage.contract.json (ds.text-passage v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+._root_efedp_6,
+._root_efedp_6 *,
+._root_efedp_6 *::before,
+._root_efedp_6 *::after {
+  box-sizing: border-box;
+}
+
+._root_efedp_6 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-text-passage-root-width);
+  height: var(--imported-stub-text-passage-root-height);
+}
 /* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tab-panel.contract.json (ds.tab-panel v0.1.0)
  * Regenerate with: npm run generate
  */
 
-._root_cvshf_6,
-._root_cvshf_6 *,
-._root_cvshf_6 *::before,
-._root_cvshf_6 *::after {
+._root_tgh1n_6,
+._root_tgh1n_6 *,
+._root_tgh1n_6 *::before,
+._root_tgh1n_6 *::after {
   box-sizing: border-box;
 }
 
-._root_cvshf_6 {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+._root_tgh1n_6 {
+  display: flex;
+  flex-direction: column;
   border: 0;
-  width: var(--imported-stub-tab-panel-root-width);
-  height: var(--imported-stub-tab-panel-root-height);
+  gap: var(--imported-tab-panel-root-gap);
+  padding-top: var(--imported-tab-panel-root-padding-top);
+  width: fit-content;
+  height: fit-content;
+}
+
+._root_tgh1n_6:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+._root_tgh1n_6:focus-visible {
+  border-color: var(--imported-tab-panel-state-focus-visible-border-color);
+}
+
+._root_tgh1n_6:focus-visible {
+  border-width: var(--imported-tab-panel-state-focus-visible-border-width);
 }
 /* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tabs.contract.json (ds.tabs v0.1.0)

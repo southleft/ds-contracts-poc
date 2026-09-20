@@ -8,8 +8,8 @@
  * Entries are capped at WORKSPACE_CAP: the oldest is evicted and NAMED in a
  * receipts line, never silently. A sessionStorage write the browser refuses
  * (quota) is also named — the workspace then lives in memory for the page.
- * One entry per (source, name): re-importing the same component refreshes
- * its entry instead of stacking duplicates.
+ * Anchored Figma imports are identified by file and node (or set key).
+ * Unanchored imports retain the (source, name) refresh rule.
  */
 import { useSyncExternalStore } from 'react';
 import type { ReceiptGroup, Receipts } from '../receipts.js';
@@ -122,6 +122,21 @@ export interface RecordImportResult {
   receipts: Receipts | null;
 }
 
+/** Drawn identity survives display-name changes and different import doors.
+ * Old stored entries need no migration: derive the key from their own contract. */
+function importIdentity(input: Pick<RecordImportInput, 'source' | 'name' | 'contractText'>): string {
+  if (input.source === 'figma' || input.source === 'json') {
+    try {
+      const anchor = JSON.parse(input.contractText)?.bindings?.figma?.anchors;
+      if (typeof anchor?.fileKey === 'string' && anchor.fileKey) {
+        if (typeof anchor.nodeId === 'string' && anchor.nodeId) return JSON.stringify(['figma-node', anchor.fileKey, anchor.nodeId]);
+        if (typeof anchor.componentSetKey === 'string' && anchor.componentSetKey) return JSON.stringify(['figma-key', anchor.fileKey, anchor.componentSetKey]);
+      }
+    } catch { /* An unparseable entry is a display record, not an identity claim. */ }
+  }
+  return JSON.stringify([input.source, input.name]);
+}
+
 /** Record a complete import family atomically. Input order is retained, so
  * the entry component stays first. Refuse an oversized family before changing
  * the workspace rather than evicting one of its dependencies during import. */
@@ -131,7 +146,7 @@ export function recordImports(inputs: RecordImportInput[]): RecordImportResult[]
   }
   const identities = new Set<string>();
   for (const input of inputs) {
-    const identity = JSON.stringify([input.source, input.name]);
+    const identity = importIdentity(input);
     if (identities.has(identity)) throw new Error(`workspace-duplicate-import: ${input.name} (${input.source}); no components were imported.`);
     identities.add(identity);
   }
@@ -149,7 +164,7 @@ export function recordImports(inputs: RecordImportInput[]): RecordImportResult[]
     importedAt: Date.now(),
   }));
   const notes: string[] = [];
-  const kept = entries.filter((e) => !identities.has(JSON.stringify([e.source, e.name])));
+  const kept = entries.filter((e) => !identities.has(importIdentity(e)));
   const next = [...imported, ...kept];
   if (next.length > WORKSPACE_CAP) {
     for (const old of next.splice(WORKSPACE_CAP)) {

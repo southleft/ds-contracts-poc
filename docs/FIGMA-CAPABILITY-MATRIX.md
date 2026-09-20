@@ -90,7 +90,7 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | grid areas, `minmax()`, `auto-fit/fill`, subgrid | **no** — no responsive track functions | — | named-gap-adjacent (B10 class) | CARRY-CODE-ONLY |
 | `overflow: hidden \| visible` | **native** — `clipsContent` [S1] | — | CARRIED 2026-08-10 (FC-OVERFLOW-CLIP-LOST) | CARRY-BOTH |
 | `overflow: scroll/auto` | **no** static equivalent (prototype scrolling is a presentation setting, not a rendered fact) | — | whitelisted (code) | CARRY-CODE-ONLY |
-| `box-sizing` | **approx** — Figma sizes as border-box only when `strokeAlign: INSIDE` (the emitter's standing choice [R3]) or `strokesIncludedInLayout: true` [S1] | — | implicit (emitter forces INSIDE) | CARRY-WITH-NAMED-LIMIT (document the mapping) |
+| `box-sizing` | **approx** — an auto-layout frame's stroke takes layout space only under `strokesIncludedInLayout: true` [S1]; frames this pipeline writes read back `true` (= CSS `border` under border-box), a designer's default is `false` | — | implicit (emitter forces INSIDE); `Part.strokesIncludedInLayout: false` (dump v1.35) carries the designer's default both ways — code draws an inset `box-shadow` ring, the writer sets the field | CARRY-WITH-NAMED-LIMIT (docs/23 §D.39) |
 
 ### 2 · Border & corners
 
@@ -158,6 +158,7 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `text-decoration-line: overline` | **no** — not in the enum [S8] | — | absent | CARRY-CODE-ONLY |
 | `text-decoration-style/-thickness/-offset/-color`, `skip-ink` | **native** — granular fields `textDecorationStyle (SOLID\|WAVY\|DOTTED) / textDecorationThickness / textDecorationOffset / textDecorationColor / textDecorationSkipInk` [S2]; CSS `double` style missing | — | absent | CARRY-BOTH (add with a.2; `double` named limit) |
 | `text-align` | **native** — `textAlignHorizontal: LEFT\|CENTER\|RIGHT\|JUSTIFIED` | — | named-gap A22 | CARRY-BOTH (add — § a.2) |
+| auto-width text box (the element as wide as its run) | **approx** — `textAutoResize: WIDTH_AND_HEIGHT` is a WHOLE number of pixels: the advance rounded up with no letter spacing after the last glyph, where the browser's max-content is the fractional advance plus tracking after every glyph | — | `Part.textAutoResize: WIDTH_AND_HEIGHT` (dump v1.36) carries the designer's box both ways — code gives the element `inline-size: calc-size(fit-content, round(up, size[ - letter-spacing], 1px))` (clamped to its container, so a long string still wraps) where `calc-size()` is supported, the writer sets the field (§D.42) | CARRY-BOTH (progressive enhancement) |
 | vertical centering of text in its box | **native** — `textAlignVertical` (TOP/CENTER/BOTTOM per typings; page 404'd on docs site — spelling **VERIFY-BY-SPIKE**, capability certain) | — | implicit (AL centering carries it today) | CARRY-BOTH |
 | `text-overflow: ellipsis` + `-webkit-line-clamp` | **native** — `textTruncation: 'ENDING'` + `maxLines` [S2] | — | whitelisted (`text-overflow` literal, code-only today) [R2] | CARRY-BOTH (add — § a.9) |
 | `white-space: nowrap` | **approx** — `textAutoResize: WIDTH_AND_HEIGHT` (box never wraps) [S2] | — | whitelisted (code) | CARRY-WITH-NAMED-LIMIT |

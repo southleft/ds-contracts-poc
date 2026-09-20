@@ -54,6 +54,23 @@ export {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  disabledStateSelector,
+  drawsStrokeRing,
+  drawsWholePixelTextBox,
+  isStrokeRingChannel,
+  lowerStrokeRings,
+  noneShadowVars,
+  partCarriesStroke,
+  partOwnsText,
+  settleStrokeShadows,
+  stateSelectorsFor,
+  textBoxConflicts,
+  textBoxLetterSpacing,
+  textBoxStaticRefusals,
+  textBoxTokenRefusals,
+  WHOLE_PIXEL_TEXT_BOX_BASIS,
+  wholePixelTextBoxDecls,
+  wholePixelTextBoxPlan,
   enumProps,
   holderDeclaresPosition,
   isArrayType,
@@ -71,6 +88,8 @@ export {
   topRootNames,
   topRoots,
   UA_MARGIN_ELEMENTS,
+  UA_PADDING_BY_ELEMENT,
+  UA_PADDING_ELEMENTS,
   UA_PAINT_CHANNELS,
   UA_PAINTED_ROOT_ELEMENTS,
 } from './anatomy.js';
@@ -92,7 +111,7 @@ export {
 // The deep referee (appends to `errors`; takes the icon map) and the shared
 // stylesheet every code target emits.
 export { validateContract } from './validate.js';
-export { generateCss, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from './css.js';
+export { generateCss, reactRootDisabledSelector, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from './css.js';
 
 // Optional provenance + stale-source state machine (browser-safe).
 export {

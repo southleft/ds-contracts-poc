@@ -152,6 +152,7 @@
   "states": [],
   "anatomy": {
     "root": {
+      "strokesIncludedInLayout": false,
       "parts": {
         "Icon": {
           "component": {
@@ -171,6 +172,7 @@
           }
         },
         "Label": {
+          "textAutoResize": "WIDTH_AND_HEIGHT",
           "content": {
             "prop": "text"
           },
