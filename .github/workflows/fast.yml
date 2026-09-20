@@ -350,6 +350,9 @@ jobs:
       - name: react:native:fidelity:check (React originals vs native Figma exports - three numbers per variant recomputed from committed bytes; ratchet and tamper tests)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run react:native:fidelity:check
+      - name: react:native:declared:check (declared-family pairs, unchanged scorer, journal and pairing refusal probes)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run react:native:declared:check
       - name: typecheck:recipe (the current recipe surface typechecks; frozen lineage files named, not edited)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run typecheck:recipe
