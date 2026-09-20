@@ -365,6 +365,11 @@ not be used for new measurements. The matched-frame recorder requires version
 application identifies this limitation when opening a version-1 measurement.
 The state-API Switch has a separate version-2 recapture. Review opens that
 measurement and retains the original in expandable history. Both generations
-must authenticate and recompute; duplicate generations refuse. The four capture
-records contain 28 pairs for 19 distinct state/content comparisons.
+must authenticate and recompute; duplicate generations refuse. Five capture
+records contain 40 pairs for 31 distinct state/content comparisons, including
+the twelve three-state Checkbox appearances. Those twelve source/native pairs
+pass both backgrounds; their native-to-React return passes only six because
+stroked vector geometry is not carried. The returned archive passes all 96
+observed state/callback trials, separately from appearance. See
+[D.82](../docs/23-known-limitations.md#d82-three-state-native-delivery-passes-appearance-but-the-return-loses-stroked-vectors).
 Neither version qualifies runtime interactions or the current native canvas.

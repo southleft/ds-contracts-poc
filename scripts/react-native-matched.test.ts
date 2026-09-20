@@ -44,6 +44,23 @@ test('state-API initial images retain a separate nine-state denominator and expe
   assert.throws(()=>readRecordedNativeMeasurement(REPO,m.cohort.native.operationId,request),/state-api-mismatch/);
 });
 
+test('three-state app evidence requires twelve complete current captures and its own experiment pin', () => {
+  const dir = path.join(REPO, 'recipe/evidence/react-native-matched-three-state-api');
+  const m = JSON.parse(readFileSync(path.join(dir, 'manifest.json'), 'utf8')) as MatchedManifest;
+  assert.equal(checkMatchedEvidence(dir).rows.length, 12);
+  assert(m.rows.every(row => row.source.version === 2));
+  assert.equal(m.rows.filter(row => row.variant.includes('=indeterminate,')).length, 3);
+  const observation = m.cohort.source.stateApiObservation as ReactStateApiNativeRequest['observation'];
+  assert.match(observation.reportSha256, /^[a-f0-9]{64}$/);
+  assert(hasRecordedNativeMeasurement(REPO, String(m.cohort.native.operationId), String(m.cohort.source.referenceId)));
+  const missing = structuredClone(m); missing.rows.pop();
+  assert.throws(() => scoreMatchedEvidence(dir, missing), /denominator-changed/);
+  const shifted = structuredClone(m); shifted.rows[6].native.rootPosition.x += 0.125;
+  assert.throws(() => scoreMatchedEvidence(dir, shifted), /geometry-changed/);
+  const unguarded = structuredClone(m); Reflect.deleteProperty(unguarded.rows[6].source.component, 'opaqueScope');
+  assert.throws(() => scoreMatchedEvidence(dir, unguarded), /current-source-required/);
+});
+
 function stateApiArchive() {
   const {initial, behavior} = stateApiEvidence(), hash = 'a'.repeat(64);
   for (const rows of [behavior.observation!.rows, behavior.observation!.relationships,

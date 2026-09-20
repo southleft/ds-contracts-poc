@@ -7021,3 +7021,54 @@ Reversal: refuse new version-2 plans while preserving their immutable records
 and native allocation identities. Keep the historical reader and enum metadata
 support for any already-created output; do not reinterpret a three-state
 record as a Boolean experiment or rewrite prior evidence.
+
+## D.82 Three-state native delivery passes appearance but the return loses stroked vectors
+
+**Measured through the application, 2026-09-20.** The built-in Checkbox's
+three-state experiment completes 96 activation trials and 144 restorations.
+The generated preview and the app-delivered archive installed in a clean React
+consumer each match all 96 source trials, including held mixed state, accepted
+callbacks, disabled suppression and controlled precedence. Visible browser
+interaction confirms mixed initial activation and controlled hold/accept.
+These are bounded behavior results, not complete interaction qualification.
+
+The companion creates twelve variants and fifty variables in Evaluations.
+Independent readback verifies all 44 native nodes. A new instance selects all
+twelve variant combinations and restores its properties, main identity and
+PNG exactly; original mains remain unchanged and a fresh readback equals the
+operation's final readback. The plugin is closed for canvas inspection.
+
+Fresh version-2 source captures and native clones preserve exact root bounds,
+offsets, geometry and bindings. All **12/12 source-to-native appearances** pass
+the unchanged 5% comparison on both backgrounds: maximum **0% white / 2.25%
+black**. The authenticated twelve-row cohort is committed under
+`recipe/evidence/react-native-matched-three-state-api/` and available through
+**Review recorded matched frames**. Earlier captures remain immutable.
+
+The canonical native dump is imported through the application's JSON tab and
+exported using **Prepare React library**. This return remains visually
+unqualified: **6/12 appearances** pass, with maximum **10.75% white / 8% black**,
+despite exact outer bounds on all twelve. Every checked or mixed state loses
+its checkmark. The reader explicitly reports unsupported stroked-vector
+geometry, centered stroke lowering and proportional (`SCALE`) placement.
+Recovered state metadata and passing behavior cannot override these named
+losses. This code-originated return is not designer-authored coverage.
+
+The first source experiment stopped after 40 trials and 60 restorations on a
+restoration capture timeout. Its refusal is preserved; final verification
+found the source restored. An unchanged retry completed. During that retry,
+the operator navigated away from Sources to stop expensive progress polling;
+normal unattended performance is not qualified. No source, scorer, threshold
+or conversion rule was changed to obtain these measurements.
+
+Private journal: `tristate-api-intake-d00ej81o/`, operation `1f12ad4e…`, source
+experiment `7ff5cbac…`, returned archive SHA-256
+`56cc91481c28afc9457d09c29e3e942bd64d0e15efdc6a7e0add652949bebd60`.
+It preserves the failed attempt, source/preview/consumer trials, exact package,
+native IDs, repeat capture, editability proof, screenshots and both visual
+directions. No owner grade or V1 release qualification is assigned.
+
+**AGENT decision:** register this separate twelve-row cohort with the existing
+exact-geometry and 5% checks; do not replace historical Checkbox evidence or
+count the failed return as success. Reversal removes this cohort from active
+selection while retaining its immutable evidence and reported return losses.

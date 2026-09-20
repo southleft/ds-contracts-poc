@@ -15,8 +15,8 @@ import { REPO, QUALIFICATION, sha256 } from './react-native-fidelity-check.js';
 import type { Cohort } from './react-native-fidelity-check.js';
 
 export const MATCHED_EVIDENCE = 'recipe/evidence/react-native-matched-capture';
-export const MATCHED_EVIDENCE_DIRS = [MATCHED_EVIDENCE, 'recipe/evidence/react-native-matched-content', 'recipe/evidence/react-native-matched-state-api', 'recipe/evidence/react-native-matched-state-api-scope'];
-export const MATCHED_COVERAGE = { 'family-switch': 9, 'family-alert': 1, 'family-switch-state-api': 9 };
+export const MATCHED_EVIDENCE_DIRS = [MATCHED_EVIDENCE, 'recipe/evidence/react-native-matched-content', 'recipe/evidence/react-native-matched-state-api', 'recipe/evidence/react-native-matched-state-api-scope', 'recipe/evidence/react-native-matched-three-state-api'];
+export const MATCHED_COVERAGE = { 'family-switch': 9, 'family-alert': 1, 'family-switch-state-api': 9, 'shadcn-checkbox-three-state-api': 12 };
 export const MATCHED_INSTRUMENTS = ['source-reference/transparent-source-frame.ts', 'source-reference/source-framing.ts',
   'scripts/design-consumer-framing.ts', 'extract/figma/visual-parity/img.ts'] as const;
 export const CURRENT_MATCHED_INSTRUMENTS = ['source-reference/transparent-source-frame-v2.ts', ...MATCHED_INSTRUMENTS.slice(1)] as const;
