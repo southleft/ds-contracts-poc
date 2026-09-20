@@ -6986,3 +6986,38 @@ numeric round trips, distinguish small color/opacity changes, and retain escaped
 structured content beyond the preview. Reversal: restore the old formatters
 only alongside another visible way to inspect exact values before applying a
 correction; rounded labels alone are insufficient.
+
+
+## D.81 Three-state checked inputs require a separate complete experiment
+
+**AGENT decision, 2026-09-20:** the simultaneous-input adapter accepts an
+observed checkbox with the exact public domain `false`, `true`,
+`"indeterminate"`. Its plan and observation use version 2; existing Boolean
+checkbox/switch plans retain version 1 and their original serialized meaning.
+The contract's existing enum and checked-toggle model already represents this
+domain. The projection retains the appearance enum keys and typed code values,
+derives the off/on event endpoints from those values, and retains the observed
+initial default. Neither a component name nor a source property spelling
+selects this rule. No schema, emitter or Figma write protocol changes.
+
+A three-state callback type does not include an unrelated Boolean-only input.
+When the appearance draft has exactly one additional optional Boolean input,
+the plan may propose it as a disabled candidate. This is not an observed
+relationship. The full experiment must prove its disabled state, focus and
+activation suppression, callback silence, controlled precedence, initial-only
+updates, and restoration for every input combination. With that input present,
+there are 48 contexts, 96 activation trials and 144 restoration checks. A
+failure prevents the generated draft; a switch claiming mixed state refuses.
+
+Adversarial test-source probes reject incorrect mixed transitions, an ignored
+disabled input and incorrect simultaneous precedence, with source restoration.
+Generated React in those probes is independently exercised against the observed trials, and
+the preview retains mixed initial and controlled values. Nine existing
+historical plans and projected drafts remain byte-identical. These checks do
+not qualify native pixels, the returned installed package, excluded inputs or
+broader visual states. Those require separate application evidence.
+
+Reversal: refuse new version-2 plans while preserving their immutable records
+and native allocation identities. Keep the historical reader and enum metadata
+support for any already-created output; do not reinterpret a three-state
+record as a Boolean experiment or rewrite prior evidence.

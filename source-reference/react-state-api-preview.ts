@@ -6,22 +6,27 @@ import type { ReactBehaviorContract } from './react-behavior-contract.js';
 export async function buildReactStateApiPreview(repo: string, draft: ReactBehaviorContract) {
   const contract = draft.contract, prop = contract?.props.find(p => p.bindings.code.initial);
   const event = contract?.events?.find(e => e.toggles?.prop === prop?.name);
+  const values = prop?.bindings.code.values;
+  const domain = values ? Object.values(values) : [];
   if (draft.status !== 'generated-draft' || draft.problems.length || !contract || !draft.tsx || !prop || !event ||
-      JSON.stringify(prop.bindings.code.values) !== JSON.stringify({false:false,true:true}))
+      domain.filter(v => v === false).length !== 1 || domain.filter(v => v === true).length !== 1 ||
+      domain.some(v => v !== false && v !== true && (contract?.semantics.role !== 'checkbox' || v !== 'indeterminate')) ||
+      domain.filter(v => v === 'indeterminate').length > 1)
     throw Error('state-api-preview-draft-unavailable');
   const config = { controlled: prop.bindings.code.prop, initial: prop.bindings.code.initial!.prop,
-    callback: event.bindings.code.prop, disabled: contract.props.find(p => p.name === 'disabled')?.bindings.code.prop };
+    callback: event.bindings.code.prop, values: domain, disabled: contract.props.find(p => p.name === 'disabled')?.bindings.code.prop };
   const built = await build({ absWorkingDir: repo, stdin: { resolveDir: repo, sourcefile: 'state-api-consumer.tsx', loader: 'tsx', contents: `
     import React,{useState} from 'react';import {createRoot} from 'react-dom/client';
     import {${contract.name} as Subject} from 'generated-state-api';
     const config=${JSON.stringify(config)};
-    const options=<><option value="omit">Omitted</option><option value="false">false</option><option value="true">true</option></>;
+    const options=<><option value="omit">Omitted</option>{config.values.map(value=><option key={String(value)} value={String(value)}>{String(value)}</option>)}</>;
+    const booleanOptions=<><option value="omit">Omitted</option><option value="false">false</option><option value="true">true</option></>;
     function Consumer(){
       const [held,setHeld]=useState('omit'),[initial,setInitial]=useState('omit'),[disabled,setDisabled]=useState('omit'),
         [accept,setAccept]=useState(false),[mount,setMount]=useState(0),[calls,setCalls]=useState([]);
       const props={};
       for(const [name,value] of [[config.controlled,held],[config.initial,initial],[config.disabled,disabled]])
-        if(name&&value!=='omit')props[name]=value==='true';
+        if(name&&value!=='omit')props[name]=value==='true'?true:value==='false'?false:value;
       props[config.callback]=(next)=>{setCalls(prior=>[...prior,next].slice(-32));if(accept&&held!=='omit')setHeld(String(next));};
       return <>
         <section aria-label="Generated state component" className="subject"><Subject key={mount} id="generated-state-control" {...props}/><label htmlFor="generated-state-control">State</label></section>
@@ -29,7 +34,7 @@ export async function buildReactStateApiPreview(repo: string, draft: ReactBehavi
           <p>Pass controlled and initial values independently. Initial values apply on a fresh mount; controlled values take precedence.</p>
           <label htmlFor="held">Controlled value</label><select id="held" value={held} onChange={e=>setHeld(e.target.value)}>{options}</select>
           <label htmlFor="initial">Initial value</label><select id="initial" value={initial} onChange={e=>setInitial(e.target.value)}>{options}</select>
-          {config.disabled&&<><label htmlFor="disabled">Disabled value</label><select id="disabled" value={disabled} onChange={e=>setDisabled(e.target.value)}>{options}</select></>}
+          {config.disabled&&<><label htmlFor="disabled">Disabled value</label><select id="disabled" value={disabled} onChange={e=>setDisabled(e.target.value)}>{booleanOptions}</select></>}
           <label><input type="checkbox" checked={accept} onChange={e=>setAccept(e.target.checked)}/> Accept callback values as controlled input</label>
           <button type="button" onClick={()=>{setMount(n=>n+1);setCalls([]);}}>Remount and clear callbacks</button>
           <p>Callback: <code>{config.callback}</code></p><output aria-label="Generated callback values">{JSON.stringify(calls)}</output>

@@ -26,8 +26,14 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
     validateReactStateApiObservation(inspection.observation, plan);
     const compiled = initial.draft.compiled, contract = structuredClone(initial.draft.compiled.contract);
     const prop = contract.props.find(p => p.bindings.code.prop === plan.initial);
-    if (!prop || prop.type !== 'boolean' || prop.default !== undefined || prop.required || prop.bindings.code.initial ||
-        prop.bindings.code.values || contract.events?.length || contract.bindings.code.runtime ||
+    const mixed = plan.version === 2;
+    const values = prop?.bindings.code.values;
+    const keys = prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : [];
+    const mapped = keys.map(key => values?.[key]);
+    if (!prop || (mixed ? plan.role !== 'checkbox' || keys.length !== 3 || !values ||
+        [false, true, 'indeterminate'].some(value => mapped.filter(other => other === value).length !== 1) ||
+        Object.keys(values).some(key => !keys.includes(key)) : prop.type !== 'boolean' || !!values) ||
+        prop.default !== undefined || prop.required || prop.bindings.code.initial || contract.events?.length || contract.bindings.code.runtime ||
         contract.props.some(p => p.bindings.code.prop === plan.controlled) || contract.props.length !== (plan.disabled ? 2 : 1))
       throw Error('state-api-contract-appearance-domain-unavailable');
     if (contract.semantics.element !== 'button' || contract.semantics.role || contract.semantics.roleByProp ||
@@ -54,7 +60,7 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
       // Boolean truthiness must become explicit enum membership. Otherwise
       // the canonical string "false" would incorrectly display a truthy part.
       for (const condition of [...(part.stylesWhen ?? []), part.visibleWhen])
-        if (condition?.prop === prop.name && condition.equals === undefined) condition.equals = 'true';
+        if (!mixed && condition?.prop === prop.name && condition.equals === undefined) condition.equals = 'true';
       if (oldDisabled && oldDisabled !== 'disabled') {
         const tokens = [part.tokens, ...Object.values(part.states ?? {}),
           ...(Array.isArray(part.tokensByProp) ? part.tokensByProp : part.tokensByProp ? [part.tokensByProp] : []).flatMap(e => Object.values(e.map)),
@@ -65,12 +71,18 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
       for (const child of Object.values(part.parts ?? {})) visit(child);
     };
     for (const root of Object.values(contract.anatomy)) visit(root);
-    prop.type = { enum: ['false', 'true'] };
-    prop.bindings.code = { ...prop.bindings.code, prop: plan.controlled, values: { false: false, true: true },
-      initial: { prop: plan.initial, default: String(plan.defaultValue) } };
+    const stateValues = mixed ? values! : { false: false, true: true };
+    const keyFor = (value: boolean | 'indeterminate') => {
+      const found = Object.keys(stateValues).filter(key => stateValues[key] === value);
+      if (found.length !== 1) throw Error('state-api-contract-state-mapping-unavailable');
+      return found[0];
+    };
+    prop.type = { enum: mixed ? keys : ['false', 'true'] };
+    prop.bindings.code = { ...prop.bindings.code, prop: plan.controlled, values: stateValues,
+      initial: { prop: plan.initial, default: keyFor(plan.defaultValue) } };
     contract.semantics = { ...contract.semantics, role: plan.role,
       roleException: `Independent simultaneous-input observations identify a button-backed ${plan.role}.` };
-    contract.events = [{ name: 'stateChange', trigger: 'root', toggles: { prop: prop.name, between: ['false', 'true'], aria: 'checked' },
+    contract.events = [{ name: 'stateChange', trigger: 'root', toggles: { prop: prop.name, between: [keyFor(false), keyFor(true)], aria: 'checked' },
       bindings: { code: { prop: plan.callback, argument: 'next-value' } } }];
     contract.id += '-state-api'; contract.name += 'StateApi'; contract.bindings.code.anchors.export = contract.name;
     contract.description = 'Bounded observed checked-state inputs applied to an initial appearance draft. Generated consumer, excluded inputs and native round-trip qualification remain pending.';
