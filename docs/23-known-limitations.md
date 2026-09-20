@@ -7645,6 +7645,8 @@ emitter now omits its extra HTML-style binding, avoiding a duplicate parameter
 and preserving the enum-driven variant. Web Components receive the equivalent
 owned-leaf declaration; this does not expand their V1 qualification or promise
 new host-style override behavior.
+The separate omitted-plane metadata guard still refuses reserved `style`
+aliases; ordinary style-enum emission does not expand that native admission.
 
 Private evidence in `cbds-owned-text-leaf-probe-20260920/` preserves the original
 66/72 control, a label-only diagnostic, source snapshots and a reproduced invalid
