@@ -4,7 +4,7 @@ import type {prepareReactStateApiNativePlan} from './react-state-api-native-plan
 import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
 import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
 import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
-import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,readSnapshotValue,type EvidenceReadEntry} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
@@ -865,7 +865,7 @@ export function createNativeOperationJobs(
   // A display response can visit the same dependency many times. Reuse its
   // checked observation only within this synchronous, non-authorizing scope.
   // Nothing survives into another request or a native command's authorization.
-  let readSnapshot: Map<string, unknown> | undefined;
+  let readSnapshot: Map<string, EvidenceReadEntry> | undefined;
   const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
   function withReadSnapshot<T>(read: () => T): T {
     const outer = readSnapshot;
@@ -878,10 +878,7 @@ export function createNativeOperationJobs(
   }
   function readOnce<T>(key: string, read: () => T): T {
     if (!readSnapshot) return read();
-    if (readSnapshot.has(key)) return structuredClone(readSnapshot.get(key)) as T;
-    const value = read();
-    readSnapshot.set(key, structuredClone(value));
-    return value;
+    return readSnapshotValue(readSnapshot,key,read);
   }
   const loadFresh = (id: string, baselineRevision?: string) => {
     if (baselineRevision !== undefined && !HASH.test(baselineRevision)) fail('baseline-revision-invalid');
