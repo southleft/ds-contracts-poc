@@ -648,12 +648,31 @@ export function validateExactVariantProjection(
       ? absentVariantTuples(axes, options.absentVariants)
       : null;
   const absentSet = new Set(declaredAbsent ?? []);
-  const expectedTuples =
-    previewTuples ??
-    cartesianTuples(axes).filter((tuple) => !absentSet.has(tuple));
-  const expectedSet = new Set(expectedTuples);
   const source = checkRows(set.variants, axes, "source", standaloneWithoutAxes);
   if (source.refusals.length > 0) return refused(source.refusals);
+  const product = axes.reduce((count, axis) => count * axis.options.length, 1);
+  // The proposer calls this check BEFORE deciding whether a sparse declaration
+  // is eligible. Count first: expanding the product here defeats its size cap.
+  // Valid, unique rows with the full cardinality already prove full coverage;
+  // otherwise an oversized product is ragged without listing every missing row.
+  const oversized =
+    previewTuples === null && product > EXACT_ABSENT_VARIANTS_MAX_PRODUCT;
+  if (oversized && source.tuples.length !== product) {
+    return refused([
+      {
+        code: "EXACT_MATRIX_RAGGED",
+        message: `Source matrix has ${source.tuples.length} rows; Cartesian definitions require ${product}. Missing tuples are not enumerated above ${EXACT_ABSENT_VARIANTS_MAX_PRODUCT} combinations.`,
+        expected: product,
+        actual: source.tuples.length,
+      },
+    ]);
+  }
+  const expectedTuples =
+    previewTuples ??
+    (oversized
+      ? source.tuples
+      : cartesianTuples(axes).filter((tuple) => !absentSet.has(tuple)));
+  const expectedSet = new Set(expectedTuples);
 
   const sourceSet = new Set(source.tuples);
   const sourceMissing = expectedTuples.filter((tuple) => !sourceSet.has(tuple));

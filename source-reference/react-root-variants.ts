@@ -9,7 +9,7 @@ import {enumerate,normalizeValue,type CapturedNode} from '../extract/computed/li
 import type {prepareMint} from '../extract/computed/fuse.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import type {ReactOwnership} from './react-ownership.js';
-import type {ReactStyleOrigin} from './react-style-origin.js';
+import type {ReactDescendantSizes,ReactStyleOrigin} from './react-style-origin.js';
 import type {GridConstraintEvidence} from './grid-constraints.js';
 import type {ReactPropertyEffects} from './react-property-effects.js';
 import {classifyReactProperty} from './react-program-proposal.js';
@@ -22,6 +22,8 @@ export interface ReactPropertySnapshot {
  tree:CapturedNode;treeSha256:string;image:string;ownership:ReactOwnership;styleOrigin:ReactStyleOrigin;
  /** Present only when this plane's tree holds a grid container; older archives never carry it. */
  gridConstraints?:GridConstraintEvidence;
+ /** Initial-mount planes only, and only since descendants are sized: older archives never carry it. */
+ descendantSizes?:ReactDescendantSizes;
 }
 export interface ReactRootVariants {
  version:1;qualification:'single-property-root-drafts';acceptedContract:null;

@@ -2,6 +2,8 @@
 
 MEASURED, NOT GRADED. `acceptedContract: null` everywhere; no owner grade is recorded here.
 
+**Historical white-only receipts.** These files retain the original measurement substrate and are not current two-background acceptance evidence.
+
 Each folder is one run of `npm run design:consumer:check` on a designer-drawn set: a read-only REST re-read of the set
 (`inputs/rest-dump.json`), the proposed contract, the generated React (`inputs/generated/`), the clean consumer's
 screenshots, Figma's own renders, the triptychs and `receipt.json`.
@@ -27,3 +29,21 @@ npm run extract:figma -- <work>/set.rest-dump.json --out <work>/propose
 npx ds-contracts generate <work>/propose/*.contract.proposed.json --out <work>/propose/generated --stories --tokens <repo token files>,<work>/propose/minted.dtcg.json
 npm run design:consumer:check -- --dump <work>/set.rest-dump.json --contract <work>/propose/<set>.contract.proposed.json --generated <work>/propose/generated --component <Name> --out <work>/evidence
 ```
+
+## Current integration measurement
+
+Fresh REST GET-only captures after integrating dependency closure with the
+transparent two-background checker measure Altitude Badge 10/10, CBDS Badge
+66/72, Tabs 2/2 by image score and Checkbox Group 0/12. The 5% limit is unchanged.
+Maximum white/black mismatches are 4.825%/4.825%, 4.427%/6.120%,
+1.812%/3.525% and 4.011%/10.364%, respectively.
+
+Tabs remains failed: visible text is missing, the emitted buttons nest, its
+variant change is discarded and content width differs. Checkbox Group passes
+white but every black comparison fails; hidden legends remain visible and nine
+content-size checks fail. Dependency children are included in the parent package
+but are not independently mounted or qualified. These CLI observations do not
+qualify the complete app journey or component semantics. Fresh receipts and
+both pre-merge source versions are preserved in private
+`pr136-main-integration-s0jph0cm/`. See docs/23 D.43 and D.51. The historical
+white-only artifacts above are unchanged.

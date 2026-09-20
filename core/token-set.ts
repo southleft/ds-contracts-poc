@@ -1137,6 +1137,8 @@ export function emitNativeTokenContextScript(input: NativeTokenContextInput): {
   preparation: NativeTokenPreparation;
   script: string;
 } {
+  // A value succession describes an EXISTING collection; it is never created.
+  if (input?.allocatedValues !== undefined) throw new Error('native-token-write-value-succession-not-creatable');
   const preparation = scopedTokenPreparation(input);
   const script = `// GENERATED scoped candidate token creation by the existing token-set writer.
 // Host-owned new collection only. Returned creation objects are NOT independent readback.

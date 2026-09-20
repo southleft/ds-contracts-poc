@@ -15,3 +15,13 @@ export function authoredLengthIsUsed(authored: string, used: string): boolean {
   if (!am || !um) return false;
   return Number((Math.trunc(Number(am[1]) * 64) / 64).toPrecision(6)) === Number(um[1]);
 }
+
+/** A used px length as a whole number of those 1/64 px units; undefined when
+ * the string is not the six-digit serialization of one. Box arithmetic done
+ * in units is integer arithmetic: no tolerance is involved. */
+export function usedLayoutUnits(used: string): number | undefined {
+  const m = px.exec(normalizeValue(used));
+  if (!m) return undefined;
+  const value = Number(m[1]), units = Math.round(value * 64);
+  return Number((units / 64).toPrecision(6)) === value ? units : undefined;
+}

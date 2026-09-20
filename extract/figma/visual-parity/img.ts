@@ -67,15 +67,15 @@ export interface Aligned {
 }
 
 /** Copy src's box onto a white canvas at (dx, dy), alpha-flattened. */
-function blitOnWhite(dst: PNG, src: PNG, box: Box, dx: number, dy: number): void {
+function blitOnBackground(dst: PNG, src: PNG, box: Box, dx: number, dy: number, background: 0 | 255): void {
   for (let y = 0; y < box.height; y++) {
     for (let x = 0; x < box.width; x++) {
       const si = ((box.y + y) * src.width + (box.x + x)) * 4;
       const di = ((dy + y) * dst.width + (dx + x)) * 4;
       const alpha = src.data[si + 3] / 255;
-      dst.data[di] = Math.round(src.data[si] * alpha + 255 * (1 - alpha));
-      dst.data[di + 1] = Math.round(src.data[si + 1] * alpha + 255 * (1 - alpha));
-      dst.data[di + 2] = Math.round(src.data[si + 2] * alpha + 255 * (1 - alpha));
+      dst.data[di] = Math.round(src.data[si] * alpha + background * (1 - alpha));
+      dst.data[di + 1] = Math.round(src.data[si + 1] * alpha + background * (1 - alpha));
+      dst.data[di + 2] = Math.round(src.data[si + 2] * alpha + background * (1 - alpha));
       dst.data[di + 3] = 255;
     }
   }
@@ -87,17 +87,23 @@ const whiteCanvas = (width: number, height: number): PNG => {
   return png;
 };
 
-export function alignPair(ours: PNG, figma: PNG): Aligned {
+export function alignPair(ours: PNG, figma: PNG, background: 0 | 255 = 255): Aligned {
   const boxA = contentBox(ours);
   const boxB = contentBox(figma);
   const width = Math.max(boxA.width, boxB.width);
   const height = Math.max(boxA.height, boxB.height);
   const a = whiteCanvas(width, height);
   const b = whiteCanvas(width, height);
+  if (background === 0) {
+    for (let i = 0; i < a.data.length; i += 4) {
+      a.data[i] = a.data[i + 1] = a.data[i + 2] = 0;
+      b.data[i] = b.data[i + 1] = b.data[i + 2] = 0;
+    }
+  }
   const aOffset = { x: Math.floor((width - boxA.width) / 2), y: Math.floor((height - boxA.height) / 2) };
   const bOffset = { x: Math.floor((width - boxB.width) / 2), y: Math.floor((height - boxB.height) / 2) };
-  blitOnWhite(a, ours, boxA, aOffset.x, aOffset.y);
-  blitOnWhite(b, figma, boxB, bOffset.x, bOffset.y);
+  blitOnBackground(a, ours, boxA, aOffset.x, aOffset.y, background);
+  blitOnBackground(b, figma, boxB, bOffset.x, bOffset.y, background);
   return {
     a,
     b,
