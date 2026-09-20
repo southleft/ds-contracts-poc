@@ -5894,6 +5894,14 @@ fill layer did not change the residual; clipping the root did not pass both
 backgrounds. These experiments justify continued implementation work, not a
 tolerance change or a component-specific exception.
 
+A later closed-text-only probe did not establish a safe pseudo-element rule.
+Adding `position: relative` activated a caller's previously inert `left: 8px`
+and `top: 3px`, moving both the root and its text. A caller's explicit
+`position: static` instead left the 180 × 100 ancestor as the stroke's
+containing block, although the component remained about 76 × 20. Limiting
+the content tree to text does not solve these override semantics. No lowering
+was adopted; evidence: `private/closed-stroke-boundary-18t8o8z2/`.
+
 Reversal: replace the inset stroke only with a shared lowering whose layout,
 paint, caller overrides and reverse extraction are demonstrated by adversarial
 cases and a fresh app-delivered consumer. Keep the diagnostic and original
@@ -6205,6 +6213,21 @@ its rendered label clipped from “New” to “Ne”. A longer text edit kept t
 root width and clipped too. Restoring native auto-width restored the complete
 label and 44px root. Matching the observed dimensions by fixing this text box
 would therefore lose both content and its intrinsic resizing behavior.
+
+A separate source-font probe on 2026-09-20 used a uniquely named local font
+whose glyph, metric, shaping and variation tables match the pinned source
+WOFF2; only naming and the font checksum changed. Chromium rendered the
+original and renamed fonts identically. In Figma, both the existing Inter
+face and the source-table copy still gave “New” a 26px auto-width box, against
+25.875px in Chromium. For “New message”, the source-table copy measured 82px
+in Figma and 81px in Chromium. Matching font tables alone therefore does not
+establish exact native text layout. Only a new diagnostic page in Evaluations
+was written; the original font, source and native operations were unchanged.
+No font mapping or converter rule was adopted. The font manifest, native IDs,
+matched frame exports and unobstructed canvas are retained in
+`private/source-font-probe-msuhjmza/`. Direct text exports cropped to ink were
+excluded from cross-surface pixel comparison; identical 100 × 32 frame crops
+replaced that diagnostic measurement.
 
 No converter rule or tolerance changed. The original component, variables and
 operation journal were untouched; the clone was restored, its native structure
@@ -6867,3 +6890,30 @@ Browser regressions cover hidden/generated text, glyph disagreement, unavailable
 scope, disappearing roots, node bounds and both five-control sets. Reverse by removing the opt-in
 absence witness and its admission/control rules; preserve all receipts and
 restore the named textless-source limitation.
+
+## D.78 Vector masks must not become ordinary filled paths
+
+**AGENT decision, 2026-09-20: keep mask composition outside the filled-path
+projection.** Adversarial review found that both readers accepted a vector
+with `isMask: true` as an ordinary painted path. A [Figma mask](https://developers.figma.com/docs/plugins/api/properties/nodes-ismask/)
+changes its subsequent siblings; carrying its outline alone cannot preserve
+that meaning.
+
+REST grammar 1.39 and the canonical plugin dump now require an absent or
+explicitly false mask flag before carrying vector path geometry. True or
+malformed flags retain `vector-geometry-unsupported` and add
+`vector-mask-unsupported`. This is a named capture degradation, not support
+for mask composition or a claim that the remaining imported tree is faithful.
+The packaged companion embeds the same canonical reader. Alpha, vector and
+luminance mask cases, malformed flags and unchanged ordinary vectors are
+covered by bounded probes; source capture bytes remain unchanged.
+
+The sync CLI refreshed comparable baselines from new REST GET observations
+under the new grammar. All 128 record identities and historical adoptions
+remain intact; pending decisions stay unresolved. Previous ledger bytes and
+CLI logs are preserved in `private/filled-path-sync-139-m040ae9n/`. No canvas
+write, adoption or owner grade is part of this migration. The before-fix
+reproduction and validation are in `private/filled-path-mask-refusal-wvt9lspr/`.
+Reverse the reader guard only with a demonstrated mask-composition model;
+restore observation baselines with their matching grammar, never by relabeling
+an older fingerprint.

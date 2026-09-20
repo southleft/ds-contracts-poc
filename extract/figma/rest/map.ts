@@ -245,6 +245,7 @@ export interface RestComponentPropertyDefinition {
 }
 
 export interface RestNode {
+  isMask?: boolean;
   size?: { x: number; y: number };
   relativeTransform?: number[][];
   fillGeometry?: Array<{ path: string; windingRule: 'NONZERO' | 'EVENODD' }>;
@@ -470,6 +471,7 @@ export type MapDegradationCode =
   | 'blend-mode-unsupported'
   | 'rotation-unsupported'
   | 'vector-geometry-unsupported'
+  | 'vector-mask-unsupported'
   // 'min-max-size-unsupported' retired in dump v1.4: literal min/max sizing
   // is CARRIED (minWidth/minHeight/maxWidth/maxHeight style facts) instead
   // of degraded away.
@@ -1234,7 +1236,8 @@ function mapShape(
     const fills = node.fills?.filter((p) => p.visible !== false) ?? [];
     const t = node.relativeTransform;
     const width = node.size?.x, height = node.size?.y;
-    const readable = typeof width === 'number' && Number.isFinite(width) && width > 0 &&
+    const readable = (node.isMask === undefined || node.isMask === false) &&
+      typeof width === 'number' && Number.isFinite(width) && width > 0 &&
       typeof height === 'number' && Number.isFinite(height) && height > 0 &&
       paths && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
       t?.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
@@ -1334,6 +1337,12 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
     });
   }
   if (VECTOR_TYPES.has(node.type) && !shapeCarried) {
+    if (node.type === 'VECTOR' && node.isMask !== undefined && node.isMask !== false) {
+      ctx.report.degradations.push({
+        code: 'vector-mask-unsupported', nodePath,
+        message: 'A vector mask changes subsequent siblings; its geometry cannot be carried as an ordinary filled path. Mask composition is not recovered.',
+      });
+    }
     ctx.report.degradations.push({
       code: 'vector-geometry-unsupported',
       nodePath,
@@ -1894,7 +1903,8 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.38';
+export const REST_DUMP_VERSION = '1.39';
+// 1.39: vector masks cannot enter the ordinary filled-path projection.
 // 1.38: bounded closed filled VECTOR paths, exact local size and placement.
 // 1.37: fixedSize on explicit FIXED, in-flow, non-auto-layout boxes inside
 //       auto-layout; exact drawn dimensions use the existing dump channel.

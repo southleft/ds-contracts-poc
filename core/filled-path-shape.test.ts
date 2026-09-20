@@ -48,6 +48,28 @@ test('REST carries original path bytes and fractional local placement, refusing 
   }
 });
 
+test('REST and plugin readers never promote a vector mask to an ordinary filled path', () => {
+  const end = plugin.indexOf('const capturedVariables', gateEnd);
+  assert.ok(end > gateEnd);
+  const pluginShape = vm.runInNewContext(`${plugin.slice(gateStart, end)}; dumpShape`) as (node: unknown, parent: unknown) => unknown;
+  const pluginNode = { ...vector(), width: 12, height: 10, vectorPaths: [triangle] };
+  for (const isMask of [undefined, false]) {
+    const result = mapped([{ ...vector(), isMask }]);
+    assert.equal((result.dump.GeometryProbe as any).variants[0].children[0].shape.kind, 'path');
+    assert.ok(pluginShape({ ...pluginNode, isMask }, null));
+  }
+  for (const [isMask, maskType] of [[true, 'ALPHA'], [true, 'VECTOR'], [true, 'LUMINANCE'], [null, 'ALPHA'], ['false', 'ALPHA']] as const) {
+    const input = { ...vector(), isMask, maskType } as RestNode;
+    const before = JSON.stringify(input);
+    const result = mapped([input]);
+    assert.equal(JSON.stringify(input), before, 'captured evidence stays unchanged');
+    assert.equal((result.dump.GeometryProbe as any).variants[0].children[0].shape, undefined);
+    assert.ok(result.report.degradations.some(d => d.code === 'vector-mask-unsupported'));
+    assert.ok(result.report.degradations.some(d => d.code === 'vector-geometry-unsupported'));
+    assert.equal(pluginShape({ ...pluginNode, isMask, maskType }, null), null);
+  }
+});
+
 test('live sync observation detects a path-only edit with unchanged bounds and stamp', async () => {
   let currentPath = triangle;
   const fetchImpl = async (url: string) => {

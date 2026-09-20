@@ -2458,7 +2458,8 @@ function dumpShape(node, parent) {
     const paths = node.vectorPaths;
     const fills = Array.isArray(node.fills) ? node.fills.filter((p) => p.visible !== false) : [];
     const t = node.relativeTransform;
-    const readable = Number.isFinite(node.width) && node.width > 0 && Number.isFinite(node.height) && node.height > 0 &&
+    const readable = (node.isMask === undefined || node.isMask === false) &&
+      Number.isFinite(node.width) && node.width > 0 && Number.isFinite(node.height) && node.height > 0 &&
       Array.isArray(paths) && paths.length === 1 && paths.every((p) => !filledPathIssue(p.data) && ['NONZERO', 'EVENODD'].includes(p.windingRule)) &&
       t && t.length === 2 && t.every((row) => row.length === 3 && row.every(Number.isFinite)) &&
       t[0][0] === 1 && t[0][1] === 0 && t[1][0] === 0 && t[1][1] === 1 &&
@@ -2722,6 +2723,9 @@ async function dumpNode(node, nodePath, parent) {
 
   // dump v1.3 (#42): parametric decor geometry is CARRIED (rotation rides it).
   const shape = dumpShape(node, parent);
+  if (node.type === 'VECTOR' && node.isMask !== undefined && node.isMask !== false) {
+    degrade('vector-mask-unsupported', nodePath, 'A vector mask changes subsequent siblings; its geometry cannot be carried as an ordinary filled path. Mask composition is not recovered.');
+  }
   if (shape) out.shape = shape;
 
   // dump v1.7: ABSOLUTE placement for ALL node types (TEXT/FRAME/INSTANCE),
@@ -3560,7 +3564,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.38',
+    dumpVersion: '1.39',
   },
 };
 dumps._degradations = degradations;
