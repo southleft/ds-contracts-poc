@@ -1513,6 +1513,104 @@ it. Making it a CI-visible number means either committing the sandbox (large,
 and the reason it is ignored) or a lane step that installs the pinned package
 before the check — neither has been scheduled.
 
+## B.40 A revoked update write can still execute late
+
+*The landed-write recovery was shown live on 2026-09-19; the untouched and late-execution interleavings below remain synthetic.* A native update write runs only after the companion asks the app to
+`begin` it. If that companion then dies, an operator can **attest the companion
+is gone** (`…/update/<proposal>/attest-dead`). The journal records
+`update-attempt-attested-dead`, revokes the attempt, and a canvas read dispatched
+afterwards settles the write like any other unknown write. [CURRENT](CURRENT.md)
+row 3 lists the refusals.
+
+**When it is accepted.** Only when the latest write was begun and is unresolved,
+and only while no companion for this update has polled within the transport's
+15-second liveness window (`native-update-attest-dead-companion-connected`
+otherwise). The review page also waits one minute after `begin` before offering
+it. Neither check proves the companion is gone: a companion busy executing a
+program does not poll. The operator's statement is the proof.
+
+**What the attestation guarantees.** The revoked attempt may never `begin`
+again. Its result is journaled as `late-result-after-revocation` and is never
+the outcome. Before the settling read, the result is evidence only: the read
+decides. After the read, the result is judged by the same allow-list as any
+late write result. After an untouched settlement, anything but `no-op` or
+`refused` stops the update. After a landed settlement, anything but `updated`
+or `no-op` stops it. A stopped update is `update-recovery-required` with
+`native-update-late-write-result-contradicts-canvas`, and every chain guard
+treats it as a written, unverified correction. The settling read is final
+only until such a result arrives.
+
+**Live recovery and a corrected inference (AGENT decision, 2026-09-19).** In
+Evaluations, Switch update `b5b224ff…` began its reviewed 0.5 → 0.4 correction
+before the local server was interrupted and the companion closed. The journal
+contained `begin` without a result. After restart, the operator attested through
+the application, reopened the companion and chose **Resolve by reading the
+canvas**. The companion replayed its saved result after revocation; it was kept
+as evidence only. The settling canvas read found all three existing disabled
+variants and their owned variable at float32 0.4, and a separate read verified
+the update. A late delivery therefore does not prove a companion was alive at
+attestation time or establish when its write ran. The review copy now describes
+that uncertainty and directs an unresolved write to its canvas read. The alarm
+and conservative settlement rules are unchanged. Reversal: revert the copy and
+comment correction; no journal migration is needed. Evidence:
+`private/begun-write-recovery-2026-09-19-kg6h29ab/`, original append-only update
+journal, and the visible application review. This qualifies this recovery path,
+not the complete product or visual fidelity.
+The source was then restored byte-for-byte; reverse update `4b663716…` verified
+the same three components and variable back at 0.5. With the plugin closed, the
+nine native Switch variants were inspected on the live canvas. No native node
+was created by this trial. Three checked-state source/native pairs still lack
+alignment metadata, so their displayed exports remain diagnostic.
+
+**What it does not guarantee.** It cannot stop a companion that is in fact alive
+and already past `begin`. The companion runs inside the Figma plugin sandbox,
+and its program cannot reach the app synchronously before it assigns a value.
+Such a program can land after the settling read. What bounds the damage:
+
+- The pinned program writes only when each node holds the exact saved or
+  proposed value and everything else matches the saved baseline. Over a
+  verified canvas it is a `no-op`; over a designer's edit it refuses.
+- If it reports back, its result is judged as above.
+- If it writes without reporting after an untouched settlement, detection
+  happens only if a later preflight runs on this operation, which means the
+  operator re-arms. The first preflight that actually reads the canvas after
+  the settlement names `native-update-canvas-moved-after-revoked-settlement`
+  when the canvas is not the saved baseline, or when the program refused after
+  reading it. A preflight that never returned, or that ran in another file,
+  concludes nothing, and the next one is checked instead. The name stays on the
+  record.
+- If nobody re-arms, nothing in this operation detects it. A design read is
+  offered only on a verified update. A later proposal's preflight on the same
+  nodes sees the changed values as a conflict.
+- **The P3 interleave is benign.** The revoked write can land after the
+  re-armed write's preflight and before its execution. Both programs write the
+  same proposed values, so the re-armed program finds them already there,
+  reports `no-op`, and the independent readback verifies. No preflight saw the
+  canvas move, so nothing is named, and nothing needs to be.
+- The one case it can still write unseen is a later reverse correction that
+  has returned every node to this write's saved values. There the late program
+  lands its proposed values again, and only a design read or the next
+  correction notices.
+
+**Why there is no canvas-side revocation token (AGENT decision, 2026-09-19).**
+One stronger design was considered: a per-attempt token in plugin data that the
+settling read overwrites and the write program checks just before it assigns.
+It was rejected for three reasons:
+
+1. The write program is pinned byte for byte in every saved update journal.
+   Adding a check would change every program and make every prepared update
+   report `source-or-compiler-changed`.
+2. Stamping the token would turn the read-only settling read into a canvas
+   write. That write could itself be interrupted, which is the problem it is
+   meant to solve.
+3. Two Figma clients do not share a transaction. A check followed by a write in
+   one client is not atomic against a stamp from another client, so the token
+   would narrow the window without closing it.
+
+*Reverse:* add a plugin-data stamp phase and a token check to the update
+program, re-record every open update journal under the new program, and re-record
+the plugin engine receipt.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one

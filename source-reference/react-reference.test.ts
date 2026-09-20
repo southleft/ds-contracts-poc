@@ -278,3 +278,50 @@ test("update image HTTP delivery uses the checked archive without a current-sour
   referenceId='c'.repeat(64);
   assert.equal((await fetch(base+route)).status,409);assert.equal(reads,1);
 });
+
+test("attest-dead is a bodiless POST that reaches only the update transport, and refuses by name", async t => {
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-attest-route-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const parent='10000000-0000-4000-8000-000000000008',proposal='a'.repeat(64),update='20000000-0000-4000-8000-000000000009';
+  let referenceId='',refusal:string|undefined;const calls:string[]=[];
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],listReactMoved:()=>[],withReadSnapshot:(f:()=>unknown)=>f(),reactIdentity:()=>({referenceId})},transport:{},
+    updateJobs:{forProposal:(p:string,id:string)=>{assert.equal(p,parent);assert.equal(id,proposal);return {id:update};},prepare:()=>{throw Error('must not prepare');}},
+    updateTransport:{attestDead:(id:string)=>{calls.push(id);if(refusal)throw Error(refusal);},
+      resolveWriteOutcome:()=>{throw Error('must not settle');},rearmWrite:()=>{throw Error('must not rearm');}}} as any));
+  const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
+  t.after(()=>server.close());
+  const base=`http://127.0.0.1:${(server.address() as {port:number}).port}`;
+  referenceId=(await (await fetch(base+'/react',{method:'POST'})).json()).id;
+  const route=`${base}/react/${referenceId}/native-operation/${parent}/update/${proposal}/attest-dead`;
+  const body=await fetch(route,{method:'POST',headers:{'content-type':'application/json'},body:'{"statement":"gone"}'});
+  assert.equal(body.status,409);assert.equal((await body.json()).reason,'react-native-body-refused');
+  assert.deepEqual(calls,[],'a body never reaches the journal');
+  refusal='native-transport-write-attestation-refused';
+  const notStarted=await fetch(route,{method:'POST'});
+  assert.equal(notStarted.status,409);assert.equal((await notStarted.json()).reason,'native-transport-write-attestation-refused');
+  refusal='native-update-attest-dead-companion-connected';
+  assert.equal((await (await fetch(route,{method:'POST'})).json()).reason,'native-update-attest-dead-companion-connected');
+  refusal=undefined;
+  assert.equal((await fetch(route,{method:'POST'})).status,200);
+  assert.deepEqual(calls,[update,update,update]);
+});
+
+test("attest-dead is behind the service's same-origin guard, and an unstarted update refuses by name", async t => {
+  const { createReferenceService } = await import("./service.js");
+  const { createNativeOperationTransport } = await import("./native-operation-transport.js");
+  const repo=mkdtempSync(path.join(tmpdir(),'react-attest-origin-'));t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  const service=createReferenceService(repo);
+  const server=createServer((req,res)=>{void service.handle(req,res);});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>server.close());
+  const base=`http://127.0.0.1:${(server.address() as {port:number}).port}/api/source-reference`;
+  const route=`${base}/react/${'c'.repeat(64)}/native-operation/10000000-0000-4000-8000-000000000008/update/${'a'.repeat(64)}/attest-dead`;
+  const foreign=await fetch(route,{method:'POST',headers:{origin:'http://evil.example'}});
+  assert.equal(foreign.status,403);assert.match((await foreign.json()).error,/Same-origin/);
+  // The transport refuses an update that was never started, whatever the journal says.
+  const id='30000000-0000-4000-8000-00000000000a';let reached=false;
+  const transport=createNativeOperationTransport(repo,{get:()=>({phase:'awaiting-native-result',sourceCurrent:true}),
+    deliveryState:()=>({phase:'awaiting-native-result',fileKey:'k'}),attestDead:()=>{reached=true;}} as any);
+  transport.pair(id);
+  assert.throws(()=>transport.attestDead(id),/^Error: native-transport-write-attestation-refused$/);assert.equal(reached,false);
+});
