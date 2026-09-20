@@ -93,7 +93,7 @@ test('the plugin reader carries the same field from strokeTopWeight…strokeLeft
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RuledTabs'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string }; _degradations: Array<{ code: string; nodePath: string }> };
-  assert.equal(dumps._provenance.dumpVersion, '1.39');
+  assert.equal(dumps._provenance.dumpVersion, '1.40');
   // The dump was built in the VM's realm; copy the values into this one.
   const headers = Array.from(dumps.RuledTabs.variants, v => JSON.parse(JSON.stringify(v.children![0])) as DumpNode);
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, undefined, undefined]);

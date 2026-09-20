@@ -331,8 +331,88 @@ function filledPathIssue(data) {
   if (!subpaths) return 'filled-path-empty';
 }
 
+function strokedPathIssue(data) {
+  if (typeof data !== 'string' || data.length === 0 || data.length > 65536)
+    return 'stroked-path-size';
+  const token = /[MLCQ]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/gy;
+  let at = 0;
+  const tokens = [];
+  while (at < data.length) {
+    if (/[ \t\r\n]/.test(data[at])) { at++; continue; }
+    if (data[at] === ',') {
+      if (typeof tokens[tokens.length - 1] !== 'number') return 'stroked-path-separator';
+      at++;
+      while (at < data.length && /[ \t\r\n]/.test(data[at])) at++;
+      if (at === data.length || !/[-+.0-9]/.test(data[at])) return 'stroked-path-separator';
+    }
+    token.lastIndex = at;
+    const match = token.exec(data);
+    if (!match) return 'stroked-path-command-or-character';
+    const value = match[0];
+    if (/^[MLCQ]$/.test(value)) tokens.push(value);
+    else {
+      const number = Number(value);
+      if (!Number.isFinite(number) || Math.abs(number) > 1e6) return 'stroked-path-coordinate';
+      tokens.push(number);
+    }
+    if (tokens.length > 16384) return 'stroked-path-complexity';
+    at = token.lastIndex;
+  }
+  let moved = false, drawn = false;
+  for (let i = 0; i < tokens.length;) {
+    const command = tokens[i++];
+    if (typeof command !== 'string') return 'stroked-path-missing-command';
+    if (command === 'M') {
+      if (moved) return 'stroked-path-multiple-subpaths';
+      moved = true;
+    } else if (!moved) return 'stroked-path-missing-move';
+    const start = i;
+    while (i < tokens.length && typeof tokens[i] === 'number') i++;
+    const count = i - start, arity = command === 'C' ? 6 : command === 'Q' ? 4 : 2;
+    if (count === 0 || count % arity !== 0) return 'stroked-path-arity';
+    if (command !== 'M' || count > 2) drawn = true;
+  }
+  return drawn ? undefined : 'stroked-path-empty';
+}
+
+function dumpStrokedPath(node, parent) {
+  const paths = node.vectorPaths, t = node.relativeTransform, network = node.vectorNetwork;
+  const paints = value => Array.isArray(value) ? value.filter(p => p.visible !== false) : null;
+  const fills = paints(node.fills), strokes = paints(node.strokes), effects = paints(node.effects);
+  const identity = value => Array.isArray(value) && value.length === 2 && value.every(row => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)) &&
+    value[0][0] === 1 && value[0][1] === 0 && value[1][0] === 0 && value[1][1] === 1;
+  if (!parent || parent.type !== 'FRAME' || parent.layoutMode !== 'NONE' || !identity(parent.relativeTransform) ||
+      ![parent.width, parent.height, node.width, node.height].every(n => Number.isFinite(n) && n > 0 && n <= 1e6) ||
+      ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].some(k => parent[k] !== 0) ||
+      !paints(parent.strokes) || paints(parent.strokes).length || parent.clipsContent !== false ||
+      !identity(t) || Math.abs(t[0][2]) > 1e6 || Math.abs(t[1][2]) > 1e6 ||
+      node.isMask !== false || !fills || fills.length || !effects || effects.length ||
+      !strokes || strokes.length !== 1 || strokes[0].type !== 'SOLID' ||
+      strokes[0].blendMode !== 'NORMAL' || node.blendMode !== 'PASS_THROUGH' && node.blendMode !== 'NORMAL' ||
+      node.strokeAlign !== 'CENTER' || !Number.isFinite(node.strokeWeight) || node.strokeWeight <= 0 ||
+      !['NONE', 'ROUND', 'SQUARE'].includes(node.strokeCap) || !['MITER', 'ROUND', 'BEVEL'].includes(node.strokeJoin) ||
+      !Number.isFinite(node.strokeMiterLimit) || node.strokeMiterLimit < 1 || node.strokeMiterLimit > 1000 ||
+      !Array.isArray(node.dashPattern) || node.dashPattern.length || node.cornerRadius !== 0 ||
+      node.variableWidthStrokeProperties != null && (node.variableWidthStrokeProperties.widthProfile !== 'UNIFORM' || !Array.isArray(node.variableWidthStrokeProperties.variableWidthPoints) || node.variableWidthStrokeProperties.variableWidthPoints.length) ||
+      node.complexStrokeProperties != null && node.complexStrokeProperties.type !== 'BASIC' ||
+      Object.keys(node.boundVariables || {}).some(k => !['strokes', 'strokeWeight'].includes(k)) ||
+      !node.constraints || node.constraints.horizontal !== 'SCALE' || node.constraints.vertical !== 'SCALE' ||
+      !Array.isArray(paths) || paths.length !== 1 || paths[0].windingRule !== 'NONE' || strokedPathIssue(paths[0].data) ||
+      !network || !Array.isArray(network.vertices) || !network.vertices.length ||
+      (network.regions || []).length || network.vertices.some(v =>
+        v.strokeCap !== undefined && v.strokeCap !== node.strokeCap ||
+        v.strokeJoin !== undefined && v.strokeJoin !== node.strokeJoin ||
+        v.cornerRadius !== undefined && v.cornerRadius !== 0)) return null;
+  return { kind: 'stroked-path', width: node.width, height: node.height, strokePath: {
+    data: paths[0].data, cap: node.strokeCap, join: node.strokeJoin, miterLimit: node.strokeMiterLimit,
+    viewport: { width: parent.width, height: parent.height, x: t[0][2], y: t[1][2] },
+  } };
+}
+
 function dumpShape(node, parent) {
   if (node.type === 'VECTOR') {
+    const stroked = dumpStrokedPath(node, parent);
+    if (stroked) return stroked;
     const paths = node.vectorPaths;
     const fills = Array.isArray(node.fills) ? node.fills.filter((p) => p.visible !== false) : [];
     const t = node.relativeTransform;
@@ -948,7 +1028,7 @@ async function dumpNode(node, nodePath, parent) {
       // wholly outward. The FACT is carried above either way; what is
       // refused is the lowering, and it is refused under its OWN code so
       // the boundary is countable rather than folded into a shared one.
-      if (node.strokeAlign === 'CENTER') {
+      if (node.strokeAlign === 'CENTER' && (!shape || shape.kind !== 'stroked-path')) {
         degrade('stroke-align-unsupported', nodePath, 'strokeAlign CENTER — a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border');
       }
     }
@@ -1442,7 +1522,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.39',
+    dumpVersion: '1.40',
   },
 };
 dumps._degradations = degradations;

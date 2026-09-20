@@ -1064,9 +1064,10 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "shape",
       "Shape parts",
       ["generated", "curated"],
-      `<p>A leaf decor part with explicit intrinsic geometry: polygon by side count, ellipse, rect, or a <a href="#filled-paths">closed filled path</a>. Parametric shapes carry CSS-clockwise rotation. Fill uses the existing <code>tokens.background-color</code> or literal channel, placement uses <code>stylesWhen</code>, and visibility uses <code>visibleWhen</code>.</p>` +
+      `<p>A leaf decor part with explicit intrinsic geometry: polygon by side count, ellipse, rect, a <a href="#filled-paths">closed filled path</a>, or an <a href="#stroked-paths">open stroked path</a>. Parametric shapes carry CSS-clockwise rotation. Fill uses the existing <code>tokens.background-color</code> or literal channel, placement uses <code>stylesWhen</code>, and visibility uses <code>visibleWhen</code>. Open stroked paths have the separate paint and placement rules below.</p>` +
         fieldList(ShapeSchema as AnySchema, {
-          kind: "polygon | ellipse | rect | path.",
+          kind: "polygon | ellipse | rect | path | stroked-path.",
+          strokePath: 'Original open centerline and parent coordinate basis — see <a href="#stroked-paths">stroked paths</a>.',
           paths: 'Closed filled-path geometry — see <a href="#filled-paths">filled paths</a>.',
           pathsByProp: 'Complete enum-conditioned path geometry — see <a href="#filled-paths">filled paths</a>.',
           sides:
@@ -1111,6 +1112,33 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           literals: { "background-color": "#111827" },
         }, "Schema-validated illustrative filled triangle; not a fidelity acceptance receipt.") +
         fidelity(`<p>Editable geometry and repeat-safe native generation have bounded engineering evidence. Complete application fidelity and responsive SCALE constraints remain unqualified; see the current acceptance ledger and limitation D.60.</p>`),
+    ),
+    section(
+      "stroked-paths",
+      "Open stroked paths",
+      ["generated", "curated"],
+      `<p><code>kind: "stroked-path"</code> requires <code>strokePath</code>. It retains one original open centerline with absolute <code>M</code>, <code>L</code>, <code>C</code> or <code>Q</code> commands. Shape width and height are the positive intrinsic centerline bounds, starting at local (0, 0); polynomial extrema must agree exactly or as float32 values. Path data is limited to 65,536 characters and 16,384 command/number tokens. Coordinates, dimensions and offsets have absolute values no greater than 1,000,000.</p>` +
+        fieldList(unwrap((ShapeSchema.shape as unknown as Record<string, AnySchema>).strokePath).schema, {
+          data: "One open subpath. Additional coordinate groups follow the command's usual SVG meaning.",
+          cap: "NONE (SVG butt), ROUND or SQUARE, uniform across the path.",
+          join: "MITER, ROUND or BEVEL, uniform across the path.",
+          miterLimit: "Finite miter ratio from 1 through 1,000.",
+          viewport: "The unpadded free-frame coordinate basis: positive width and height, and path-local x and y offsets within that parent.",
+        }) +
+        `<p><code>viewport.width</code> and <code>viewport.height</code> match the parent’s fixed dimensions. <code>viewport.x</code> and <code>viewport.y</code> retain fractional path placement. The parent must be a non-root part with <code>declared.position: "relative"</code>, fixed pixel width and height, and only stroked-path children using the same basis. It cannot carry flow layout, padding, other content or dynamic dimensions.</p>` +
+        `<p>Paint uses <code>border-color</code> and a positive pixel <code>border-width</code> in tokens or literals. Code projects them to SVG stroke paint and width inside a full-parent viewport, preserving fractional placement. Native output creates an editable VECTOR with CENTER stroke alignment, original cap/join, paint and weight bindings, and SCALE/SCALE constraints. Resizing the parent scales geometry while stroke width remains constant. Figma may normalize curve serialization on readback.</p>` +
+        `<p class="section-note">Validation refuses unsupported contract geometry and paint by name. The capture reader reports unsupported native features as degradations; they are not a supported stroked-path projection.</p><ul class="refusals"><li>Closed or multiple subpaths, relative commands, arcs, XML, malformed numbers, or mismatched intrinsic bounds.</li><li>Variable geometry, conflicting shape fields, semantic content, inherited paint, nonpositive or relative stroke widths.</li><li>Masks, effects, dashed or variable-width strokes, rotated/skewed axes, unsupported per-vertex properties, or a clipped/padded/flowing parent.</li><li>REST capture cannot supply this original centerline; supported capture uses the canonical plugin reader.</li></ul>` +
+        illustrativeExample(PartSchema, {
+          declared: { position: "relative" },
+          literals: { width: "20px", height: "16px" },
+          parts: { path: {
+            shape: { kind: "stroked-path", width: 10, height: 8,
+              strokePath: { data: "M 0 0 L 5 8 L 10 2", cap: "ROUND", join: "BEVEL", miterLimit: 4,
+                viewport: { width: 20, height: 16, x: 2.375, y: 3.125 } } },
+            literals: { "border-color": "#334455", "border-width": "1.25px" },
+          } },
+        }, "Schema-validated non-root viewport example; not a fidelity acceptance receipt.") +
+        fidelity(`<p>Bounded application evidence covers a twelve-appearance three-state React return and three path geometries at three native/browser sizes under the unchanged 5% image limit. Complete V1, native path-edit reconciliation and original React source repair remain unqualified. See <a href="${REPO_URL}/blob/main/docs/23-known-limitations.md#d84-open-stroked-paths-retain-their-centerline-and-parent-viewport">limitation D.84</a> and the current acceptance ledger.</p>`),
     ),
     section(
       "arc",

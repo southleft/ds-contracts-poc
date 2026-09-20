@@ -15,6 +15,7 @@ import {
   locateNeedle,
   parseRoundtripReceipt,
   PRODUCER_DUMP_GRAMMAR,
+  PLUGIN_DUMP_GRAMMAR,
   proposeFixtureSet,
   rootTokenAgreement,
   summarizeDump,
@@ -1204,7 +1205,7 @@ export function Playground() {
             kind: 'note',
             entries: [
               {
-                message: `REST-mapped dump (grammar v${dumpVersion}) — a PARTIAL capture of that grammar; the plugin dump (extract/figma/dump.plugin.js, grammar v${PRODUCER_DUMP_GRAMMAR}) is the full one. Every channel this route cannot read is named per set in the proposal notes ("this dump's reader could not see: …").`,
+                message: `REST-mapped dump (grammar v${dumpVersion}); the plugin reader (grammar v${PLUGIN_DUMP_GRAMMAR}) captures additional design data. Every channel this route cannot read is named per set in the proposal notes ("this dump's reader could not see: …").`,
               },
             ],
           },
@@ -2991,7 +2992,8 @@ export function Playground() {
                 through the <strong>JSON</strong> tab. Both routes produce a proposed contract
                 with capture limits and unresolved tokens listed for review. The plugin can
                 read additional design data; unsupported features remain named limitations
-                on either route. Both readers use capture version {PRODUCER_DUMP_GRAMMAR}.
+                on either route. REST capture uses version {PRODUCER_DUMP_GRAMMAR};
+                plugin capture uses version {PLUGIN_DUMP_GRAMMAR}.
               </p>
             </div>
 

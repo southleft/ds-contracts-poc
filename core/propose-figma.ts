@@ -1,3 +1,4 @@
+import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
@@ -2865,7 +2866,7 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   const [align] = aligns;
   if (align === 'OUTSIDE') return 'outline';
   // @door propose.stroke-align-center-unsupported
-  if (align === 'CENTER') {
+  if (align === 'CENTER' && !m.occ.every(o => o.node.shape?.kind === 'stroked-path')) {
     ctx.notes.push(
       `${where}: strokeAlign CENTER — half the weight is drawn inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. REFUSED BY NAME (capture receipt stroke-align-unsupported); the stroke carries as an INSIDE border, off by half its weight per side (review)`,
     );
@@ -3173,7 +3174,7 @@ function invertNodeTokens(
   // unbound FIXED root below. Keep its variable on that exact channel. The
   // older fluid-up-to translation shrank empty controls to their content.
   const fixedRootWidth = isRoot && m.occ.length > 0 && m.occ.every(({ node }) => {
-    if (node.fillWidth === true) return false;
+    if (node.fillWidth === true || !node.bbox || !Number.isFinite(node.bbox.width) || node.bbox.width <= 0) return false;
     const layout = node.layout;
     if (!layout) return true; // a non-auto-layout frame is fixed by construction
     return (layout.mode === 'VERTICAL' ? layout.counterSizing : layout.primarySizing) === 'FIXED';
@@ -3185,7 +3186,7 @@ function invertNodeTokens(
       ctx.notes.push(`${where}: bound root width retained as width — every captured plane is FIXED and non-FILL; maxWidth remains a separate constraint`);
     } else {
       ctx.notes.push(
-        `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — uniformly FIXED non-FILL sizing is not witnessed; mixed/HUG/FILL behavior requires review`,
+        `${where}: root width binding ${f('width')} carries through the historical **max-width** translation — measured positive width and uniformly FIXED non-FILL sizing are not witnessed; incomplete or mixed/HUG/FILL behavior requires review`,
       );
     }
   }
@@ -3998,8 +3999,8 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     (ctx.presenceVariants ?? ctx.totalVariants).some((v) => axisValuesOf(v)[axis.property] === value);
   const withShape = m.occ.filter((o) => o.node.shape !== undefined);
   if (withShape.length === 0) return;
-  if (withShape.some((o) => o.node.shape?.kind === 'path') && withShape.length !== m.occ.length) {
-    ctx.notes.push(`${where}: filled-path-incomplete-capture — geometry not carried for partially captured paths`);
+  if (withShape.some((o) => ['path', 'stroked-path'].includes(o.node.shape!.kind)) && withShape.length !== m.occ.length) {
+    ctx.notes.push(`${where}: ${withShape.some(o => o.node.shape!.kind === 'stroked-path') ? 'stroked-path' : 'filled-path'}-incomplete-capture — geometry not carried for partially captured paths`);
     return;
   }
   if (withShape.length !== m.occ.length) {
@@ -4025,6 +4026,18 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   const first = shapes[0].sh;
+  if (first.kind === 'stroked-path') {
+    const geometry = (sh: typeof first) => ({ kind: sh.kind, width: sh.width, height: sh.height, strokePath: sh.strokePath });
+    if (shapes.some(s => strokedPathGeometryIssue(s.sh) || s.sh.rotation || s.sh.paths || s.sh.arc || s.sh.sides || s.sh.x !== undefined || s.sh.constraints) ||
+        new Set(shapes.map(s => JSON.stringify(geometry(s.sh)))).size !== 1) {
+      ctx.notes.push(`${where}: stroked-path-inconsistent-or-unsupported-geometry — original centerline not carried`);
+      return;
+    }
+    part.shape = geometry(first);
+    part.declared = { ...(part.declared as Record<string, string> | undefined), position: 'absolute' };
+    ctx.notes.push(`${where}: original open centerline with uniform cap/join and exact SCALE/SCALE viewport carried; stroke paint uses the standard binding and provisional-token rules`);
+    return;
+  }
   // dump v1.7 ellipse arc (round 2 iteration 4): the sweep IS carried.
   // Grammar (mirrors the rotation discipline below):
   //   full sweep (≥ 2π)          → dropped as redundant (the plain ellipse);

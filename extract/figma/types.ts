@@ -1,3 +1,8 @@
+import type { StrokedPath } from '../../scripts/contract-schema.js';
+
+/** Canonical plugin capture includes original open vector centerlines, which
+ * the REST producer cannot read. flow-check pins the standalone script stamp. */
+export const PLUGIN_DUMP_VERSION = '1.40';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -292,7 +297,9 @@ export interface DumpShape {
    *  ABSOLUTE (field case: Untitled UI slider/progress tracks, which
    *  collapsed to 0×0 with only fill+radius surviving). Inside auto-layout
    *  an unrotated rect still returns no shape (existing channels carry it). */
-  kind: 'polygon' | 'ellipse' | 'rect' | 'path';
+  kind: 'polygon' | 'ellipse' | 'rect' | 'path' | 'stroked-path';
+  /** Plugin capture only: original open centerline and SCALE parent basis. */
+  strokePath?: StrokedPath;
   paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>;
   /** Polygon point count (Plugin API pointCount). The REST surface does not
    *  expose it — ABSENT means not captured; the proposer assumes the Figma

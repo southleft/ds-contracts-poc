@@ -193,8 +193,8 @@ test("uniform fixed root widths preserve their binding and an independent maximu
   }
 });
 
-test("fill, hug, mixed and unknown root sizing never gain a fixed binding from one plane", () => {
-  for (const kind of ["fill", "hug", "mixed", "unknown"] as const) {
+test("fill, hug, mixed, unknown and unmeasured root sizing never gain a fixed binding from one plane", () => {
+  for (const kind of ["fill", "hug", "mixed", "unknown", "unmeasured", "zero", "negative", "nonfinite"] as const) {
     const dump = specimen(false);
     dump.variants.forEach((variant, index) => {
       variant.bbox = { width: 4, height: 8 };
@@ -202,6 +202,12 @@ test("fill, hug, mixed and unknown root sizing never gain a fixed binding from o
       variant.layout!.primarySizing = kind === "hug" || (kind === "mixed" && index === 1) ? "AUTO" : "FIXED";
       if (kind === "fill") variant.fillWidth = true;
       if (kind === "unknown" && index === 1) Reflect.deleteProperty(variant.layout!, "primarySizing");
+      if (index === 1) {
+        if (kind === "unmeasured") delete variant.bbox;
+        if (kind === "zero") variant.bbox!.width = 0;
+        if (kind === "negative") variant.bbox!.width = -1;
+        if (kind === "nonfinite") variant.bbox!.width = Number.NaN;
+      }
     });
     const result = proposeFromDump(dump, { corpus, contractIdByName: new Map(), fileKey: null, projectionMode: "reviewable-inversion", mintUnbound: true });
     const root = (result.contract.anatomy as { root: Part }).root;

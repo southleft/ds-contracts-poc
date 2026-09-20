@@ -512,8 +512,9 @@ async function flowReplay(): Promise<FlowReplay> {
     plugin: sliceSource("extract/figma/dump.plugin.js", /dumpVersion: '(\d+\.\d+)'/, 1),
     rest: sliceSource("extract/figma/rest/map.ts", /export const REST_DUMP_VERSION = '(\d+\.\d+)'/, 1),
   };
-  if (dumpGrammar.plugin !== dumpGrammar.rest) {
-    throw new Error(`how-flow: dump grammar differs between producers (plugin ${dumpGrammar.plugin}, REST ${dumpGrammar.rest})`);
+  const declaredPluginGrammar = sliceSource("extract/figma/types.ts", /export const PLUGIN_DUMP_VERSION = '(\d+\.\d+)'/, 1);
+  if (dumpGrammar.plugin !== declaredPluginGrammar) {
+    throw new Error(`how-flow: plugin stamp ${dumpGrammar.plugin} disagrees with declared plugin grammar ${declaredPluginGrammar}`);
   }
 
   return { roundtrip: { rows, badge }, button, topNavItem, toggleSwitch: { contractId: ts.contractId, facts: ts.facts, byKind }, bundleFactTotal, refusals, dumpGrammar };

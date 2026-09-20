@@ -75,7 +75,7 @@ test('the plugin reader carries the same field from node.textAutoResize, and wri
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['WholePixelBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.39');
+  assert.equal(dumps._provenance.dumpVersion, '1.40');
   const variants = Array.from(dumps.WholePixelBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
   assert.deepEqual(variants.map((v) => labelOf(v).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', undefined], 'unreported: not captured, never auto-width');
 });

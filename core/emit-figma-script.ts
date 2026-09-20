@@ -54,6 +54,7 @@ import {
   resolveLayout,
   resolveLiterals,
   resolveTokens,
+  strokedPathDimensionOk,
   slotFigmaProperty,
   slotVisibilityProperty,
   statePreviewLabel,
@@ -243,7 +244,9 @@ export interface NodeSpec {
    *  — the same radians the dump captured. An AXIS-VARYING sweep rides
    *  stylesWhen `mask` rules, which the canvas slice does not compile — the
    *  documented canvas stylesWhen fidelity limit. */
-  shape?: { kind: 'polygon' | 'ellipse' | 'rect' | 'path'; paths?: Array<{ data: string; windingRule: 'NONZERO' | 'EVENODD' }>; sides?: number; width: number; height: number; rotation?: number; arc?: { start: number; end: number; innerRadius: number } };
+  shape?: Omit<NonNullable<Part['shape']>, 'pathsByProp'>;
+  /** Fixed free frame used by captured SCALE/SCALE open paths. */
+  strokeViewport?: true;
   /** v9 shape placement — compiled from the part's stylesWhen entries whose
    *  condition holds for this combo (the proposer's closed placement
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
@@ -4902,6 +4905,14 @@ function partToSpecInner(
         spec.absolute = absFromLits;
       }
     }
+    if (selected.kind === 'stroked-path') {
+      const ref = resolveTokens(part, subst)['border-width'];
+      const value = ref ? resolveLiteral(ref.slice(1, -1)) : resolveLiterals(part, subst)['border-width'];
+      if (!strokedPathDimensionOk(value)) throw new Error(`stroked-path-width-unsupported:${name}`);
+      if (!spec.stroke && !spec.lits?.strokeColor) throw new Error(`stroked-path-paint-unsupported:${name}`);
+      const v = selected.strokePath!.viewport;
+      spec.absolute = { h: 'MIN', v: 'MIN', left: v.x, top: v.y };
+    }
     applyBarCollapseAbsolute(spec);
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
     if (spec.shape!.rotation === undefined) delete spec.shape!.rotation;
@@ -5138,6 +5149,7 @@ function partToSpecInner(
     layout: layoutSpec(part, false, subst),
     grow: part.layout?.grow || undefined,
   };
+  if (Object.values(part.parts ?? {}).some(child => child.shape?.kind === 'stroked-path')) spec.strokeViewport = true;
   // B-3 finding 5: inset overlay parts lower to ABSOLUTE + STRETCH behind
   // the in-flow siblings instead of flowing as one (Round 5: non-zero
   // offsets carried too).
@@ -5168,6 +5180,21 @@ function partToSpecInner(
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
+  if (spec.strokeViewport) {
+    const refs = resolveTokens(part, subst), literals = resolveLiterals(part, subst);
+    for (const key of ['width', 'height']) {
+      const ref = refs[key];
+      if (!strokedPathDimensionOk(ref ? resolveLiteral(ref.slice(1, -1)) : literals[key]))
+        throw new Error(`stroked-path-parent-dimension-unsupported:${name}:${key}`);
+    }
+    const width = spec.lits?.width ?? spec.fixedWidth?.px;
+    const height = spec.lits?.height ?? spec.fixedHeight?.px;
+    for (const child of spec.children) {
+      const basis = child.shape?.strokePath?.viewport;
+      if (!basis || width !== basis.width || height !== basis.height)
+        throw new Error(`stroked-path-parent-basis-mismatch:${name}`);
+    }
+  }
   // @lower emit.axis-reverse-as-child-order
   if (isReversed(part, subst)) spec.children.reverse();
   centerStrokeGlyphsInHosts(spec.children);
@@ -6728,7 +6755,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false, hasStrokedPath = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6742,11 +6769,21 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
       if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;${effects}
     } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
-    node = ${hasFilledPath ? "spec.shape.kind === 'path' ? figma.createVector() : " : ''}spec.shape.kind === 'ellipse' ? figma.createEllipse()
+    node = ${hasFilledPath || hasStrokedPath ? `${[hasFilledPath ? "spec.shape.kind === 'path'" : "", hasStrokedPath ? "spec.shape.kind === 'stroked-path'" : ""].filter(Boolean).join(" || ")} ? figma.createVector() : ` : ''}spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
       : figma.createPolygon();${nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
-${hasFilledPath ? `    if (spec.shape.kind === 'path') {
+${hasStrokedPath ? `    if (spec.shape.kind === 'stroked-path') {
+      const p = spec.shape.strokePath;
+      node.vectorPaths = [{ data: p.data, windingRule: 'NONE' }];
+      node.strokeCap = p.cap;
+      node.strokeJoin = p.join;
+      node.strokeMiterLimit = p.miterLimit;
+      node.dashPattern = [];
+      if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
+          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height))
+        throw new Error('stroked-path-native-size-mismatch:' + node.id);
+    } else ` : ''}${hasFilledPath ? `    if (spec.shape.kind === 'path') {
       node.vectorPaths = spec.shape.paths;
       node.strokes = [];
       if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
@@ -6776,14 +6813,14 @@ ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcD
     // radio backdrop strokes and radii — the shim now lives at the source).
     if (spec.stroke) {
       node.strokes = [boundPaint(spec.stroke, node)];
-      node.strokeAlign = ${alignExpr};
+      node.strokeAlign = ${hasStrokedPath ? "spec.shape.kind === 'stroked-path' ? 'CENTER' : " : ''}${alignExpr};
     }${shapeLits ? `
     // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
     // Carbon checkbox box is a transparent square with a 1px border — a ring
     // with no paint, no weight and no radius is not a box.
     else if (spec.lits && spec.lits.strokeColor) {
       node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
-      node.strokeAlign = ${alignExpr};
+      node.strokeAlign = ${hasStrokedPath ? "spec.shape.kind === 'stroked-path' ? 'CENTER' : " : ''}${alignExpr};
     }
     if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
     if (spec.lits && spec.lits.strokeSides) {
@@ -7366,12 +7403,22 @@ const gridChildrenCall = (has: boolean, args: string): string =>
 
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
-const absoluteRuntime = (has: boolean): string =>
+const absoluteRuntime = (has: boolean, hasStrokedPath = false): string =>
   has
     ? `
 // v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
-  if (!childSpec.absolute) return;
+  if (!childSpec.absolute) return;${hasStrokedPath ? `
+  if (childSpec.shape && childSpec.shape.kind === 'stroked-path') {
+    const v = childSpec.shape.strokePath.viewport;
+    if (parent.layoutMode !== 'NONE' ||
+        parent.width !== v.width && parent.width !== Math.fround(v.width) ||
+        parent.height !== v.height && parent.height !== Math.fround(v.height))
+      throw new Error('stroked-path-native-parent-basis-mismatch:' + parent.id);
+    childNode.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+    childNode.x = v.x; childNode.y = v.y;
+    return;
+  }` : ''}
   try {
     // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
     // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
@@ -7926,6 +7973,7 @@ function buildSyncScript(
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
   const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
+  const hasStrokedPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'stroked-path'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
@@ -8595,7 +8643,10 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // Rebind after the last literal grid write so variable identity survives.
   if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
     node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
-  }` : ''}
+  }` : ''}${hasStrokedPath ? `
+  // A path viewport owns coordinates, not child flow. Apply after size and
+  // variable bindings, before appending paths; resize preserves SCALE.
+  if (spec.strokeViewport) node.layoutMode = 'NONE';` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -8615,7 +8666,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
-${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+${absoluteRuntime(hasAbsolute, hasStrokedPath)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasCallerSlots ? `function callerCanExpose(instance) {
   for (let parent = instance.parent; parent; parent = parent.parent) {
     if (parent.type === 'INSTANCE') return false;
@@ -8783,7 +8834,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it

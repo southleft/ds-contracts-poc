@@ -29,6 +29,7 @@
  */
 import { filledPathMask } from './filled-path.js';
 export { filledPathIssue, filledPathMask, type FilledPath } from './filled-path.js';
+export { strokedPathIssue, strokedPathGeometryIssue, strokedPathDimensionOk, strokedPathSvg, type StrokedPath } from './stroked-path.js';
 import * as z from "zod";
 import { DECLARABLE_ARCHETYPES } from "./archetype.js";
 
@@ -1745,8 +1746,20 @@ const FilledGeometrySchema = z.strictObject({
   width: z.number().positive(), height: z.number().positive(),
   paths: z.array(FilledPathSchema).length(1),
 });
+const StrokedPathSchema = z.strictObject({
+  data: z.string().min(1).max(65536).regex(/^[MLCQ0-9eE+., \t\r\n-]+$/),
+  cap: z.enum(['NONE', 'ROUND', 'SQUARE']),
+  join: z.enum(['MITER', 'ROUND', 'BEVEL']),
+  miterLimit: z.number().min(1).max(1000),
+  /** Exact unpadded free-frame basis; both native constraints are SCALE. */
+  viewport: z.strictObject({
+    width: z.number().positive(), height: z.number().positive(),
+    x: z.number(), y: z.number(),
+  }),
+});
 export const ShapeSchema = z.strictObject({
-  kind: z.enum(["polygon", "ellipse", "rect", "path"]),
+  kind: z.enum(["polygon", "ellipse", "rect", "path", "stroked-path"]),
+  strokePath: StrokedPathSchema.optional(),
   paths: z.array(FilledPathSchema).length(1).optional(),
   pathsByProp: z.strictObject({
     prop: z.string(), map: z.record(z.string(), FilledGeometrySchema),
@@ -1886,6 +1899,10 @@ export function borderStyleDecls(
  *  count renders the Figma default (3) — the proposer NAMES that assumption
  *  in its notes. */
 export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
+  if (shape.kind === 'stroked-path') return [
+    'position: absolute', 'left: 0', 'top: 0', 'width: 100%', 'height: 100%',
+    'display: block', 'overflow: visible', 'flex-shrink: 0',
+  ];
   const d = [
     `width: ${shape.width}px`,
     `height: ${shape.height}px`,
@@ -3585,6 +3602,34 @@ export function lowerFilledPathVariants(contract: Contract): Contract {
         styles: { mask: filledPathMask(geometry), width: `${geometry.width}px`, height: `${geometry.height}px` },
       })),
     ] };
+  };
+  const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([key, part]) => [key, visit(part)]));
+  return changed ? { ...contract, anatomy } : contract;
+}
+
+/** Code-only paint projection. Native paths retain border-channel token
+ * identities; an SVG stroke paints those channels without a CSS border box. */
+export function lowerStrokedPathPaint(contract: Contract): Contract {
+  let changed = false;
+  const paint = (map: Record<string, string>) => Object.fromEntries(Object.entries(map).flatMap(([key, value]) =>
+    key === 'border-style' ? [] : [[key === 'border-color' ? 'stroke' : key === 'border-width' ? 'stroke-width' : key, value]]));
+  const maps = (map: Record<string, Record<string, string>>) => Object.fromEntries(Object.entries(map).map(([key, value]) => [key, paint(value)]));
+  const visit = (part: Part): Part => {
+    const children = part.parts && Object.fromEntries(Object.entries(part.parts).map(([key, value]) => [key, visit(value)]));
+    if (part.shape?.kind !== 'stroked-path') return children ? { ...part, parts: children } : part;
+    changed = true;
+    const by = part.tokensByProp;
+    return { ...part, ...(children ? { parts: children } : {}),
+      ...(part.tokens ? { tokens: paint(part.tokens) } : {}),
+      ...(part.literals ? { literals: paint(part.literals) } : {}),
+      ...(part.declared ? { declared: paint(part.declared) } : {}),
+      ...(part.states ? { states: maps(part.states) } : {}),
+      ...(part.declaredStates ? { declaredStates: maps(part.declaredStates) } : {}),
+      ...(by ? { tokensByProp: Array.isArray(by) ? by.map(entry => ({ ...entry, map: maps(entry.map) })) : { ...by, map: maps(by.map) } } : {}),
+      ...(part.statesByProp ? { statesByProp: part.statesByProp.map(entry => ({ ...entry, map: maps(entry.map) })) } : {}),
+      ...(part.literalsByProp ? { literalsByProp: part.literalsByProp.map(entry => ({ ...entry, map: maps(entry.map) })) } : {}),
+      ...(part.stylesWhen ? { stylesWhen: part.stylesWhen.map(rule => ({ ...rule, styles: paint(rule.styles) })) } : {}),
+    };
   };
   const anatomy = Object.fromEntries(Object.entries(contract.anatomy).map(([key, part]) => [key, visit(part)]));
   return changed ? { ...contract, anatomy } : contract;

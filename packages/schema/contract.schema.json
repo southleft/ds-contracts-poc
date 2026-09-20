@@ -1115,8 +1115,75 @@
                 "polygon",
                 "ellipse",
                 "rect",
-                "path"
+                "path",
+                "stroked-path"
               ]
+            },
+            "strokePath": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 65536,
+                  "pattern": "^[MLCQ0-9eE+., \\t\\r\\n-]+$"
+                },
+                "cap": {
+                  "type": "string",
+                  "enum": [
+                    "NONE",
+                    "ROUND",
+                    "SQUARE"
+                  ]
+                },
+                "join": {
+                  "type": "string",
+                  "enum": [
+                    "MITER",
+                    "ROUND",
+                    "BEVEL"
+                  ]
+                },
+                "miterLimit": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 1000
+                },
+                "viewport": {
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "height": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "width",
+                    "height",
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "data",
+                "cap",
+                "join",
+                "miterLimit",
+                "viewport"
+              ],
+              "additionalProperties": false
             },
             "paths": {
               "minItems": 1,
