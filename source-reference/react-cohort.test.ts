@@ -516,3 +516,39 @@ test("the generated entry keeps the built-in runtime contract and accepts the st
   assert.deepEqual(unknown.errors, ["Unknown reference case"]);
   assert.equal(await unknown.page.locator("#root > *").count(), 0);
 });
+
+test("declared workspaces need no unused sandbox CSS inputs; presence changes invalidate a saved reference", async () => {
+  const { root, put } = fixture();
+  try {
+    put(reactCasesFile, JSON.stringify(declaration()));
+    rmSync(path.join(root, "src/index.css"));
+    rmSync(path.join(root, "capture-input.css"));
+    const first = await buildReactReference(root);
+    assert.ok(reactReferenceUnchanged(first));
+    assert.ok(first.css.includes("--original"), "the imported stylesheet is still bundled");
+    assert.ok(first.files[path.join(first.sourceRoot, "tailwind.css")], "the imported stylesheet is still pinned");
+    assert.equal(first.files[path.join(first.sourceRoot, "capture-input.css")], undefined);
+    assert.equal((await buildReactReference(root)).id, first.id);
+    put("capture-input.css", "/* optional legacy input now exists */");
+    assert.equal(reactReferenceUnchanged(first), false);
+    const added = await buildReactReference(root);
+    assert.notEqual(added.id, first.id);
+    assert.equal(added.files[path.join(added.sourceRoot, "capture-input.css")], sha("/* optional legacy input now exists */"));
+    rmSync(path.join(root, "capture-input.css"));
+    assert.equal(reactReferenceUnchanged(added), false);
+    assert.equal((await buildReactReference(root)).id, first.id);
+    put("tailwind.css", ":root{--original:blue}");
+    assert.equal(reactReferenceUnchanged(first), false);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("missing built-in inputs and unreadable declared inputs still refuse", async () => {
+  const { root, put } = fixture(true);
+  try {
+    rmSync(path.join(root, "capture-input.css"));
+    await assert.rejects(buildReactReference(root), /ENOENT/);
+    put(reactCasesFile, JSON.stringify(declaration()));
+    symlinkSync(path.join(root, "missing-target.css"), path.join(root, "capture-input.css"));
+    await assert.rejects(buildReactReference(root), /ENOENT/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

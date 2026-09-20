@@ -1611,6 +1611,25 @@ It was rejected for three reasons:
 program, re-record every open update journal under the new program, and re-record
 the plugin engine receipt.
 
+## B.41 Declared React workspaces no longer require unused sandbox CSS inputs
+
+**AGENT decision (2026-09-19).** The first Radix Themes application load failed
+before bundling because `buildReactReference` always opened `src/index.css`
+and `capture-input.css`. Those names belong to the original sandbox, not the
+declared-cohort contract. Declared workspaces may omit them. If present they
+remain pinned exactly as before, preserving existing reference identities;
+adding or removing one invalidates a saved reference. A dangling symlink or
+unreadable present file still refuses. The built-in preset continues to
+require both. Imported CSS, installed dependencies, the declaration, project
+metadata and source witnesses remain authenticated.
+
+Evidence: the minimal declared-workspace test failed on the old reader, then
+passed without either unused file. The original seven-case family still builds
+reference `77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c`;
+the new four-case Radix workspace builds without placeholder files. This is
+source intake, not proof of conversion or visual fidelity. Reverse by removing
+the conditional omission and presence check; old evidence needs no rewrite.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one

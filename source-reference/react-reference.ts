@@ -41,6 +41,7 @@ import { loadReactCohort, reactCasesFile, requireWitnessedModules, type ReactCoh
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
+const legacyBootstrapFiles = ["src/index.css", "capture-input.css"];
 const loaders: Record<string, Loader> = {
   ".js": "js",
   ".mjs": "js",
@@ -84,9 +85,18 @@ export async function buildReactReference(
     "package.json",
     "package-lock.json",
     "tsconfig.json",
-    "src/index.css",
-    "capture-input.css",
+    ...legacyBootstrapFiles,
   ]) {
+    // Keep existing reference identities byte-for-byte. Declared workspaces
+    // need not carry unused inputs from the built-in sandbox; imported CSS
+    // and declared witness files remain authenticated by their usual readers.
+    if (cohort.declared && legacyBootstrapFiles.includes(file)) {
+      try { lstatSync(path.join(sourceRoot, file)); }
+      catch (error) {
+        if ((error as NodeJS.ErrnoException).code === "ENOENT") continue;
+        throw error;
+      }
+    }
     files[path.join(sourceRoot, file)] = sha(
       readFileSync(path.join(sourceRoot, file)),
     );
@@ -168,6 +178,16 @@ export function reactReferenceUnchanged(reference: ReactReference) {
     const declaration = path.join(reference.sourceRoot, reactCasesFile);
     if (reference.cohort.declaration) {
       if (reference.cohort.declaration.file !== declaration || !lstatSync(declaration).isFile()) return false;
+      for (const file of legacyBootstrapFiles) {
+        const absolute = path.join(reference.sourceRoot, file);
+        let present = true;
+        try { lstatSync(absolute); }
+        catch (error) {
+          if ((error as NodeJS.ErrnoException).code !== "ENOENT") return false;
+          present = false;
+        }
+        if (present !== Object.hasOwn(reference.files, absolute)) return false;
+      }
     } else {
       try { lstatSync(declaration); return false; }
       catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") return false; }
