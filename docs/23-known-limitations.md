@@ -7329,6 +7329,18 @@ are transparent. The plugin was closed and the live component set inspected.
 The failed attempt remains in its journal. An answered failed write now closes
 only after independent readback proves the entire saved baseline was restored;
 uncertain outcomes and unrelated edits remain blocked. Polling does not retry it.
+The separate retained state-API operation then repeated the same application
+journey with a fresh source experiment: 54 activation trials and 81 exact
+restorations, with the nine excluded inputs preserved. Its new version-7 plan uses
+`without-constraints-v2` and strict version-3 aspect-ratio evidence. The application
+applied 27 corrections to its nine existing leaves. Two independent plugin reads
+verified the update, and a separate Console read matched the entire saved baseline
+apart from those reviewed geometries. All nine PNGs, export bounds and the variable
+inventory stayed identical. Repeating the compiler review reused the same plan and
+operation. The plugin was closed and the editable nine-variant set inspected on the
+live canvas. The original 37 source files and all 2,007 prior journal files in the
+two recorded inventories remained unchanged.
+
 Fresh native creation and the separate thumb geometry mismatch remain unqualified.
 The separate static-HTML emitter still adds a border in the inset-ring probe;
 that surface is not qualified by the React checks.
@@ -7341,8 +7353,10 @@ Private evidence: `bound-size-pseudo-geometry-investigation-20260920/`, with
 sealed source/native comparisons, the complete browser matrices and the
 protocol prototype. Integration probes and failed adversarial cases are retained
 in `pseudo-box-reader-20260920-1407/`; update journals `09048c90…` (rolled back)
-and `c8c24f72…` (verified twice) retain the complete native observations. Only the
-nine reviewed leaf geometries changed; original source and historical receipts
+and `c8c24f72…` (verified twice) retain the complete native observations. The
+separate `state-api-geometry-20260920-1606/` comparison and `aba2e971…` update
+journal retain the state-API repeat. Only the nine reviewed leaf geometries in
+each operation changed; original source and historical receipts
 remain intact. The AGENT decision is to use independently measured boxes, preserve
 the two coordinate bases, and apply exact leaf resizes without constraints. No
 public schema field or responsive rule is inferred. Reversal disables new plans
