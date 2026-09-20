@@ -308,6 +308,9 @@ reg("layout", "placement", [
 reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
 // dump v1.35: a CAPTURED canvas fact — the part's stroke takes no layout space.
 reg("layout", "strokes-included-in-layout", ["part.strokesIncludedInLayout"]);
+// dump v1.36: a CAPTURED canvas fact — the text box sizes itself to its text
+// and is a whole number of pixels wide.
+reg("layout", "text-auto-resize", ["part.textAutoResize"]);
 reg("layout", "layout-by-prop", [
   "part.layoutByProp",
   "layoutByProp.prop",

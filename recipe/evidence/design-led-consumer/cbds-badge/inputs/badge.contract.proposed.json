@@ -172,6 +172,7 @@
           }
         },
         "Label": {
+          "textAutoResize": "WIDTH_AND_HEIGHT",
           "content": {
             "prop": "text"
           },

@@ -8,7 +8,7 @@
   "contractSha256": "43acc508a7577b0c6b0ee34a3d755ab453d0991df0644c0588d612757c9f78e8",
   "carriage": {
     "carried": 569,
-    "named": 688,
+    "named": 733,
     "silent": 0
   },
   "silentRows": [],
@@ -178,6 +178,11 @@
       0,
       0
     ],
+    "text textAutoResize (whole-pixel auto-width box)": [
+      0,
+      45,
+      0
+    ],
     "stamp ds_contracts/fontWeightVar": [
       45,
       0,
@@ -318,5 +323,5 @@
     "wc/flowbite-button.demo.html": "20832062212272e4182289c823cd2a3f10c8f4ac2c73d9a758e11ff99d9fafac",
     "wc/flowbite-button.custom-elements.json": "3ac6858009a9d2dd19b71a5e024662ad47ba31fb123613029418161a1af513ae"
   },
-  "notesCount": 500
+  "notesCount": 501
 }

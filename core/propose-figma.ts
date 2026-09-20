@@ -23,7 +23,7 @@ import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './f
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -39,6 +39,7 @@ import {
   type ExactVariantRow,
 } from './exact-projection.js';
 import { validateContract } from '../packages/core/src/validate.js';
+import { textBoxStaticRefusals } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
 
 // ---------------------------------------------------------------------------
@@ -5130,6 +5131,24 @@ function settleStrokeLayout(anatomy: Record<string, Record<string, unknown>>, ct
   };
   for (const [name, part] of Object.entries(anatomy)) visit(name, part);
 }
+/** dump v1.36: a flag the finished contract cannot honour — inherited or
+ *  unsubtractable tracking, an inline-level element, a sizing channel the
+ *  part picked up elsewhere — is WITHDRAWN by name rather than proposed into
+ *  a contract validateContract refuses (the settleStrokeLayout discipline;
+ *  one rule, anatomy.ts textBoxStaticRefusals). */
+function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void {
+  const c = contract as unknown as Contract;
+  for (const { name, part, path } of walkAnatomy(c)) {
+    if (part.textAutoResize === undefined) continue;
+    const reasons = textBoxStaticRefusals(c, part, path);
+    // @door propose.text-box-unhonourable-withdrawn
+    if (reasons.length === 0) continue;
+    delete (part as Record<string, unknown>).textAutoResize;
+    ctx.notes.push(
+      `${name}: textAutoResize WIDTH_AND_HEIGHT was captured but the part ${reasons.join('; and ')} — the whole-pixel box is WITHDRAWN and the text keeps the browser's fractional advance`,
+    );
+  }
+}
 /** The bridge resolves spacing to pixels, without inventing a token identity.
  * Uniform spacing uses the existing literal channel. Mixed or partially
  * captured spacing cannot use a uniform literal. */
@@ -5203,6 +5222,71 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   holder.declared = declared;
   ctx.notes.push(
     `${where}: textAlignHorizontal ${drawn[0]} drawn in every variant (dump v1.31) — carried as declared text-align: ${value} (a canvas-drawable channel; the return leg writes textAlignHorizontal)`,
+  );
+}
+
+/** dump v1.36 — A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF
+ *  PIXELS WIDE. Found by the design-led consumer check on a designer's Badge:
+ *  26 of the 48 × 16 px `size=small` variants missed the 5 % limit at
+ *  4.4–7.3 % with every content size equal. Figma's auto-width text box
+ *  (`textAutoResize: WIDTH_AND_HEIGHT`) is the glyph advance rounded UP
+ *  (`Label`, Inter Semi Bold 14: 32 px) while the browser lays the same run
+ *  out at its fractional advance (31.40625 px), so the hug root rendered
+ *  47.40625 px wide against Figma's 48 and its right edge antialiased across
+ *  two columns.
+ *
+ *  The designer's numbers are KEPT. The part records the one captured fact,
+ *  under Figma's own name and only in the value that lowers —
+ *  `textAutoResize: 'WIDTH_AND_HEIGHT'` — for the code emitters to give the
+ *  text element the same box (`inline-size: calc-size(fit-content,
+ *  round(up, size, 1px))`, a progressive enhancement: a browser without
+ *  calc-size() keeps today's fractional box) and the writer to set back.
+ *
+ *  Only WIDTH_AND_HEIGHT is ever written, and only on evidence:
+ *   · an ABSENT dump field is "not captured" (dump ≤ v1.35, or a canvas that
+ *     reports nothing), never auto-width — those dumps propose the bytes they
+ *     always did;
+ *   · NONE / HEIGHT / TRUNCATE are a fixed or filled box; the width and fill
+ *     vocabulary already carries those, so nothing is written;
+ *   · a node auto-width in some variants and not in others — or reporting
+ *     nothing in some (REST may omit its default) — has no single spelling
+ *     (the fact is per part, not per variant) and is NAMED;
+ *   · a node that says WIDTH_AND_HEIGHT and FILL at once contradicts itself
+ *     (Figma turns a filled text box to HEIGHT) — the dump is NAMED, never
+ *     guessed at, and the part keeps the fill it would have had.
+ *  validateContract refuses the flag wherever it would be wrong or inert
+ *  (anatomy.ts textBoxStaticRefusals); settleTextAutoResize withdraws, by
+ *  name, a flag the finished contract could not honour. */
+function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  const captured = textOcc.filter((o) => o.node.text!.textAutoResize !== undefined);
+  // @door propose.text-box-absent-is-fractional
+  if (captured.length === 0) return; // not captured (dump ≤ v1.35) — the browser's own fractional box
+  const auto = captured.filter((o) => o.node.text!.textAutoResize === 'WIDTH_AND_HEIGHT').length;
+  // @door propose.text-box-not-auto-width-unchanged
+  if (auto === 0) return; // a fixed or filled box — sized by the width / fill vocabulary, not by its text
+  // A variant whose text reports NOTHING beside ones that report a value is
+  // not evidence of auto-width (REST may omit its default) — it counts as the
+  // mixed case, never as agreement (review, PR 132).
+  // @door propose.text-box-mixed-refused
+  if (auto < textOcc.length) {
+    const others = [...new Set(textOcc.filter((o) => o.node.text!.textAutoResize !== 'WIDTH_AND_HEIGHT').map((o) => o.node.text!.textAutoResize ?? 'not captured'))];
+    ctx.notes.push(
+      `${where}: the text box sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) in ${auto} of ${textOcc.length} variants and is ${others.join(' / ')} in the rest — the fact is per part, not per variant, so the mixed case is REFUSED BY NAME and the text keeps the browser's fractional advance (up to 1px narrower than Figma's whole-pixel box; review)`,
+    );
+    return;
+  }
+  // @door propose.text-box-fill-contradiction-refused
+  const filled = captured.filter((o) => o.node.fillWidth === true);
+  if (filled.length > 0) {
+    ctx.notes.push(
+      `${where}: textAutoResize WIDTH_AND_HEIGHT is captured beside layoutSizingHorizontal FILL in ${filled.length} of ${captured.length} variants (dump v1.36) — a filled text box is not sized by its text, and the two facts contradict; REFUSED BY NAME, the text keeps the fill it carries and the browser's fractional advance (review the dump)`,
+    );
+    return;
+  }
+  holder.textAutoResize = 'WIDTH_AND_HEIGHT';
+  ctx.notes.push(
+    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's fit-content inline size up to the pixel where calc-size() is supported (a label that does not fit still wraps), and the writer sets the field back on the node`,
   );
 }
 
@@ -8247,6 +8331,7 @@ function buildPart(
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
+    carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     nameEffectProvenance(m, ctx, where); // dump v1.31
@@ -11736,6 +11821,17 @@ function proposeFromDumpFenced(
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
+    // the text element's own box; the root's box is padding plus content and
+    // already hugs through its own vocabulary, so a root-level flag would
+    // have to round padding + advance instead of the advance — a different
+    // number whenever the padding is fractional. NAMED, never applied.
+    // @door propose.text-box-hoisted-root-named
+    if (only.occ.some((o) => o.node.text?.textAutoResize === 'WIDTH_AND_HEIGHT')) {
+      ctx.notes.push(
+        `${where}/label: the sole root text node sizes itself to its text (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) but is hoisted into anatomy.root.text, and the whole-pixel text-box fact qualifies a text PART's own element — the root's box is padding plus content; NAMED, not carried, the label keeps the browser's fractional advance (up to 1px narrower than Figma's box)`,
+      );
+    }
 
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
@@ -12621,6 +12717,7 @@ function proposeFromDumpFenced(
   }
 
   settleStrokeLayout(contract.anatomy as Record<string, Record<string, unknown>>, ctx); // dump v1.35
+  settleTextAutoResize(contract as unknown as Record<string, unknown>, ctx); // dump v1.36
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);

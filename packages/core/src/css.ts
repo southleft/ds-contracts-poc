@@ -35,6 +35,8 @@ import {
   JUSTIFY_CSS,
   layoutOverrideDecls,
   lowerStrokeRings,
+  textBoxTokenRefusals,
+  wholePixelTextBoxPlan,
   OVERLAY_CSS,
   placeholdersIn,
   rootElementsOf,
@@ -99,6 +101,11 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // the DTCG trees, when the caller has them — anatomy.ts settleStrokeShadows).
   const settle = (css: string) => (contract === input ? css : settleStrokeShadows(css, tokenValues, errors, contract.id));
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  // dump v1.36: the whole-pixel text box — the declarations per flagged part
+  // (anatomy.ts wholePixelTextBoxDecls), and a letter-spacing TOKEN whose
+  // value cannot be subtracted refused by name before any rule is written.
+  const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
+  if (textBoxes.size > 0) errors.push(...textBoxTokenRefusals(contract, tokenValues));
   const lines: string[] = [
     `/* GENERATED FILE — DO NOT EDIT.`,
     ` * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})`,
@@ -213,6 +220,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
       if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+      // dump v1.36: the whole-pixel text box (anatomy.ts wholePixelTextBoxDecls
+      // says why this exact declaration; the single-root site below carries
+      // the lowering marker).
+      decls.push(...(textBoxes.get(part) ?? []));
       if (decls.length > 0) {
         lines.push('', `.${cssIdentifier(name)} {`, ...decls.map((d) => `  ${d};`), '}');
       }
@@ -1065,6 +1076,14 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` — a Figma text box that
+    // sizes itself to its text is a whole number of pixels wide (the advance
+    // rounded up); the element gets the same box, as a progressive
+    // enhancement a browser without calc-size() drops at parse, clamped to
+    // its container and started at the column's start edge where CSS would
+    // stretch it (anatomy.ts wholePixelTextBoxDecls says why each one).
+    // @lower css.text-box-whole-pixel
+    decls.push(...(textBoxes.get(part) ?? []));
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail
     // img) fills its inset box — for replaced elements, auto width under
     // inset-0 resolves to the intrinsic size, so the fill is emitter chrome.

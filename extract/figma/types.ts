@@ -186,6 +186,23 @@ export interface DumpText {
    *  older dumps means not captured (their captures receipted the channel as
    *  text-channel-unsupported). */
   textAlign?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
+  /** How the text box sizes itself (dump v1.36, additive) — Figma's
+   *  `textAutoResize`, verbatim, on EVERY text node: WIDTH_AND_HEIGHT (the
+   *  box hugs its text on both axes), HEIGHT (fixed width, auto height),
+   *  NONE (fixed box) or the deprecated TRUNCATE. A Figma text box that
+   *  sizes itself to its text is a WHOLE number of pixels wide — the glyph
+   *  advance rounded up (REST: `Label` in Inter Semi Bold 14 reports
+   *  absoluteBoundingBox.width 32 where Chromium lays the same run out at
+   *  31.40625) — so WIDTH_AND_HEIGHT inverts to `Part.textAutoResize:
+   *  'WIDTH_AND_HEIGHT'` and the code surfaces round the element's
+   *  fit-content inline size up to the pixel. The other values are a fixed
+   *  or filled box, which fillWidth / the width vocabulary already carry;
+   *  they are copied so the fact is captured, and propose lowers none of
+   *  them. Absence in older dumps means not captured (dump ≤ v1.35), never
+   *  auto-width: those dumps propose the bytes they always did. Found by the
+   *  design-led consumer check — 26 of the CBDS Badge's 48 × 16 px small
+   *  variants missed the limit with every content size equal. */
+  textAutoResize?: 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT' | 'TRUNCATE';
 }
 
 /** One visible effect (dump v1.2, additive). Shadows carry their full

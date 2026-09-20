@@ -14,7 +14,7 @@
  * layoutOverrideDecls) are exported for the sibling validate/css/grid modules
  * and are deliberately NOT re-exported from the package index.
  */
-import { DEFAULT_FONT_STACK, slotsOf, type Contract, type Part, type Prop } from '@ds-contracts/schema';
+import { DEFAULT_FONT_STACK, slotsOf, walkAnatomy, type Contract, type Part, type Prop } from '@ds-contracts/schema';
 import { flattenTokens, makeResolveLiteral, type TokenTreeInput } from './tokens.js';
 
 
@@ -434,6 +434,283 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *  passes the trees; a bare generateCss / emitReact call is the case this
  *  catches). The inline surface resolves values itself and drops `none` at
  *  render time. */
+/** A TEXT BOX THAT SIZES ITSELF TO ITS TEXT IS A WHOLE NUMBER OF PIXELS WIDE —
+ *  `Part.textAutoResize: 'WIDTH_AND_HEIGHT'` (dump v1.36), on every code
+ *  surface.
+ *
+ *  Figma's auto-width text box is the glyph advance rounded UP, with no
+ *  letter spacing after the last glyph: `Label` in Inter Semi Bold 14 reports
+ *  absoluteBoundingBox.width 32 where Chromium lays the same run out at
+ *  31.40625. The hug root around it therefore rendered 47.40625 px against
+ *  Figma's 48 and its right edge antialiased across two columns — measured by
+ *  the design-led consumer check on the 72-variant CBDS Badge: 26 of the
+ *  48 × 16 px small variants missed the 5 % limit at 4.4–7.3 % with every
+ *  content size equal.
+ *
+ *  The lowering gives the text element the same box:
+ *
+ *      inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px));
+ *      max-inline-size: 100%;           (unless the part carries its own max-width)
+ *      align-self: flex-start;          (only under a stretching flex column)
+ *
+ *  · FIT-CONTENT, NOT MAX-CONTENT (review, PR 132). `max-content` gave the
+ *    element a definite, NON-WRAPPING box: the shipped `flowbite.card` label
+ *    carries the fact on a runtime `children` string, and a long one grew the
+ *    card to 596 px inside a 240 px container (a fixed-width column or grid
+ *    stopped wrapping the same way), while Safari and Firefox — which drop
+ *    the declaration — wrapped. `fit-content` is `min(max-content,
+ *    max(min-content, available))`: a label that fits is its max-content box
+ *    rounded up (the badge is unchanged, 34 px), a label that does not fit
+ *    wraps at the available width exactly as it does without the fact.
+ *  · MAX-INLINE-SIZE: 100%. Rounding a WRAPPED box rounds the available width
+ *    up, so a fractional container (120.5 px) overflowed by 0.5 px; the clamp
+ *    returns it to 120.5 (measured in column-flex, row-flex, grid and a
+ *    fit-content card) and changes nothing for a label that fits. A part that
+ *    carries its own `max-width` / `max-inline-size` keeps it, and the clamp is
+ *    not written (it would override the author's value in the same rule) —
+ *    there the sub-pixel overflow in a fractional container is a NAMED limit.
+ *    (`min(…, 100%)` inside `calc-size()` collapsed the badge to 0: rejected.)
+ *  · ALIGN-SELF: FLEX-START — an AGENT decision, recorded with its inverse in
+ *    docs/23 §D.42. A text box that sizes itself to its text is a HUG box in
+ *    Figma, so under a vertical auto-layout frame drawn MIN it sits at the
+ *    start edge; CSS's default `align-items: normal` STRETCHES it. With
+ *    calc-size() the explicit inline-size already stops the stretch; without
+ *    it (Safari, Firefox) the box stretched, and a centred label moved (x=84
+ *    against x=0 in a 200 px column). Emitted only when the parent is a flex
+ *    COLUMN whose cross-axis alignment is absent or `stretch` and carries no
+ *    `layoutByProp` (a per-variant alignment would be overridden), and the part
+ *    is not absolutely placed and declares no `align-self` of its own; every
+ *    engine then draws the Figma box's position. INVERSE: the proposer never
+ *    reads it back — it is chrome of the flag, like the ring's `border: 0`.
+ *  · The trailing tracking is MEASURED, not assumed: CSS `letter-spacing` is
+ *    added after every character including the last. On the committed REST
+ *    fixtures rendered in Chromium with the fonts loaded: Eventz Kicker,
+ *    Manrope 700 18 / 16 px, UPPER, 6 px tracking — Figma 95 / 87, ceil(all
+ *    six spacings) 101 / 93, ceil(less the last) 95 / 87; Altitude Badge label,
+ *    Public Sans 600 12 px, 1 px tracking — Figma 41, 42, 41. Only a px / em /
+ *    rem LENGTH is subtracted: a `%` subtracts against the containing block
+ *    (a -0.5 % token gave a box wider than Figma's), and a unitless value or
+ *    `normal` makes `size - x` invalid at computed-value time, a silent no-op.
+ *    Those are REFUSED by name (textBoxStaticRefusals for literals,
+ *    textBoxTokenRefusals for a token, whose VALUE decides). So is tracking
+ *    the part INHERITS from an ancestor holder while stating none of its own:
+ *    a root's per-variant 2 px gave a 42 px box where Figma's is 40.
+ *  · `calc-size()` is the only CSS that can round an INTRINSIC size. A
+ *    browser without it drops the `inline-size` declaration at parse (or
+ *    ignores the CSSOM assignment, the inline surface) and keeps today's
+ *    fractional box: under 1 px narrower than Figma's. That is NOT "no
+ *    different layout" in every context — see align-self above, which is why
+ *    that declaration exists — but it is never wider and never a wrap change.
+ *  · Logical properties, so vertical and RTL writing round and clamp the axis
+ *    the text runs along.
+ *  · The element must be BLOCK-LEVEL for `inline-size` to apply: every emitter
+ *    blockifies a text part inside a flex / grid parent or an absolutely
+ *    placed one. A parent declared `display: block` / `inline` / `contents`
+ *    (or a non-structural text parent), and a part declared `display: inline`
+ *    or `contents`, make the rule a silent no-op there — REFUSED by name.
+ *
+ *  Emitted only when a part carries the fact — every other contract keeps
+ *  its bytes. TO REVERSE: delete the three wholePixelTextBoxDecls pushes
+ *  (css.ts ×2, emit-wc.ts) and the inline assignment (emit-react-inline.ts). */
+export const WHOLE_PIXEL_TEXT_BOX_BASIS = 'fit-content';
+/** The part owns text of its own — the only kind of part the fact qualifies. */
+export function partOwnsText(part: Part): boolean {
+  return part.text !== undefined || part.content !== undefined || part.textByProp !== undefined;
+}
+/** The part carries the whole-pixel text-box fact. */
+export function drawsWholePixelTextBox(part: Part): boolean {
+  return part.textAutoResize === 'WIDTH_AND_HEIGHT';
+}
+type Holder = Record<string, unknown> | undefined;
+/** Every channel → value map a part can carry, split into the BASE holders
+ *  and the per-variant / per-state ones. */
+function textHolders(part: Part): { base: Holder[]; perValue: Holder[] } {
+  return {
+    base: [part.tokens, part.literals, part.declared],
+    perValue: [
+      ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+      ...(Array.isArray(part.tokensByProp) ? part.tokensByProp : part.tokensByProp ? [part.tokensByProp] : []).flatMap((e) => Object.values(e.map)),
+      ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+      ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
+      ...(part.stylesWhen ?? []).map((sw) => sw.styles),
+    ],
+  };
+}
+const holds = (hs: Holder[], channel: string | RegExp) =>
+  hs.some((h) => h !== undefined && Object.keys(h).some((k) => (typeof channel === 'string' ? k === channel : channel.test(k))));
+/** A tracking value that is only a zero adds nothing after the last glyph. */
+const ZERO_LENGTH = /^[-+]?(0+\.?0*|\.0+)(px|em|rem|%)?$/;
+/** A tracking LENGTH `size - x` can subtract: px / em / rem. */
+const TRACKING_LENGTH = /^[-+]?(\d+\.?\d*|\.\d+)(px|em|rem)$/;
+/** The part's own uniform letter spacing as the base holders spell it: a
+ *  literal verbatim, a token as its `{ref}` (letter-spacing is a literal /
+ *  token channel, never a declared one). A zero literal reads as none. */
+export function textBoxLetterSpacing(part: Part): { kind: 'literal'; value: string } | { kind: 'token'; ref: string } | undefined {
+  const literal = part.literals?.['letter-spacing'];
+  if (literal !== undefined) {
+    const v = String(literal).trim();
+    return ZERO_LENGTH.test(v) ? undefined : { kind: 'literal', value: v };
+  }
+  const token = part.tokens?.['letter-spacing'];
+  return token !== undefined ? { kind: 'token', ref: stripBraces(token) } : undefined;
+}
+/** Channels that size, fill or truncate the box instead of letting the text
+ *  size it — a box carrying one of these is not `WIDTH_AND_HEIGHT`. `min-*`
+ *  and `max-*` are not listed: Figma's auto-width text can carry a min/max
+ *  and CSS clamps `inline-size` by them the same way. */
+const TEXT_BOX_CONFLICT_CHANNEL = /^(width|inline-size|flex|flex-grow|flex-basis|text-overflow|-webkit-line-clamp|line-clamp)$/;
+/** Every channel (and `layout.grow`) on the part that contradicts the fact,
+ *  sorted — empty when the box is sized by its text alone. A `letter-spacing`
+ *  that varies by variant or state, or rides a placeholder token, is listed
+ *  too: the trailing tracking the box must shed has no single spelling then. */
+export function textBoxConflicts(part: Part): string[] {
+  const { base, perValue } = textHolders(part);
+  const channels = new Set([...base, ...perValue].flatMap((h) => Object.keys(h ?? {})).filter((c) => TEXT_BOX_CONFLICT_CHANNEL.test(c)));
+  if (part.layout?.grow) channels.add('layout.grow');
+  if (holds(perValue, 'letter-spacing')) channels.add('letter-spacing (per variant or state)');
+  const ls = textBoxLetterSpacing(part);
+  if (ls?.kind === 'token' && placeholdersIn(ls.ref).length > 0) channels.add('letter-spacing (placeholder token)');
+  return [...channels].sort();
+}
+const FLEX_OR_GRID = new Set(['flex', 'inline-flex', 'grid', 'inline-grid']);
+const BLOCK_LEVEL = new Set(['block', 'inline-block', 'flex', 'inline-flex', 'grid', 'inline-grid', 'flow-root', 'list-item', 'table']);
+const partAt = (contract: Contract, path: string[]): Part | undefined => {
+  let part: Part | undefined = contract.anatomy[path[0]!];
+  for (const name of path.slice(1)) part = part?.parts?.[name];
+  return part;
+};
+const absolutelyPlaced = (part: Part) =>
+  part.overlay !== undefined || ['absolute', 'fixed'].includes(String(part.declared?.['position'] ?? ''));
+/** The display the emitters give a PARENT part (css.ts / emit-wc.ts): a
+ *  declared display wins; a single root with no layout is inline-flex; a
+ *  structural part is its layout's display, flex by default; a text-bearing
+ *  or leaf parent gets none (its element's own, inline for a span). */
+function parentDisplay(contract: Contract, path: string[], parent: Part): string | undefined {
+  const declared = parent.declared?.['display'];
+  if (declared !== undefined) return String(declared);
+  const singleRoot = path.length === 1 && Object.keys(contract.anatomy).length === 1;
+  if (singleRoot) return parent.layout ? parent.layout.display ?? 'flex' : 'inline-flex';
+  return isStructural(parent) ? parent.layout?.display ?? 'flex' : undefined;
+}
+/** Everything that makes the fact wrong or inert on this part, decidable
+ *  from the contract alone (no token VALUES) — validateContract refuses each
+ *  by name, and the proposer withdraws a flag that would draw one. */
+export function textBoxStaticRefusals(contract: Contract, part: Part, path: string[]): string[] {
+  const out: string[] = [];
+  if (path.length === 1) {
+    out.push("is a top-level root — the whole-pixel text box qualifies a text part's own element; a root's box is its padding plus its content");
+    return out;
+  }
+  if (!partOwnsText(part)) out.push('owns no text (no text / content / textByProp) — the fact qualifies a text box and qualifies nothing here');
+  const conflicts = textBoxConflicts(part);
+  if (conflicts.length > 0) out.push(`carries ${conflicts.join(', ')} — a box that is sized, filled or truncated by a channel is not sized by its text; remove the flag or the channel`);
+  const ls = textBoxLetterSpacing(part);
+  if (ls?.kind === 'literal' && !TRACKING_LENGTH.test(ls.value)) {
+    out.push(`carries letter-spacing ${JSON.stringify(ls.value)}, which is not a px / em / rem length — the trailing tracking the box must shed cannot be subtracted from its size (a % resolves against the containing block, a unitless value invalidates the declaration)`);
+  }
+  // Inherited tracking: an ancestor that states letter-spacing anywhere, and
+  // a part that states none of its own in its base holders, inherits it —
+  // and the box would round the glyph run PLUS a trailing spacing nobody
+  // subtracts.
+  const own = textHolders(part);
+  if (!holds(own.base, 'letter-spacing')) {
+    const from: string[] = [];
+    for (let i = path.length - 1; i >= 1; i--) {
+      const ancestor = partAt(contract, path.slice(0, i));
+      if (!ancestor) continue;
+      const { base, perValue } = textHolders(ancestor);
+      if (holds([...base, ...perValue], 'letter-spacing')) from.push(path[i - 1]!);
+    }
+    if (from.length > 0) out.push(`inherits letter-spacing from ${from.map((n) => `"${n}"`).join(', ')} and states none of its own — the trailing tracking the box must shed is not the part's to subtract; state the tracking on the text part or remove the flag`);
+  }
+  // Inline-level: `inline-size` does nothing on an inline box.
+  const ownDisplay = part.declared?.['display'] === undefined ? undefined : String(part.declared['display']);
+  if (ownDisplay === 'inline' || ownDisplay === 'contents') {
+    out.push(`declares display: ${ownDisplay} — inline-size does not apply to that box, so the whole-pixel box would silently do nothing`);
+  } else if (!absolutelyPlaced(part) && !(ownDisplay !== undefined && BLOCK_LEVEL.has(ownDisplay))) {
+    const parentPath = path.slice(0, -1);
+    const parent = partAt(contract, parentPath);
+    const display = parent ? parentDisplay(contract, parentPath, parent) : undefined;
+    if (display === undefined || !FLEX_OR_GRID.has(display)) {
+      out.push(`sits in a parent laid out as ${display === undefined ? 'no flex or grid box' : `display: ${display}`} — the text element is inline-level there and inline-size does not apply, so the whole-pixel box would silently do nothing; give the parent a flex / grid layout or the part a block-level display`);
+    }
+  }
+  return out;
+}
+/** Resolve a token path to its VALUE in every mode the DTCG trees carry
+ *  (light and dark over primitives + brand + semantic), as CSS text. */
+function tokenModeValues(tokens: unknown, path: string): Array<string | undefined> {
+  const t = tokens as Partial<TokenTreeInput> | undefined;
+  if (!t || typeof t !== 'object' || !t.primitives) return [];
+  const flat = (tree: Record<string, unknown> | undefined) => (tree ? flattenTokens(tree) : new Map());
+  const base = [...flat(t.primitives), ...flat(t.brands?.default), ...flat(t.semantic)];
+  return [new Map([...base, ...flat(t.light)]), new Map([...base, ...flat(t.dark)])].map((m) => {
+    try { return trackingText(makeResolveLiteral(m)(path)); } catch { return undefined; }
+  });
+}
+/** A resolved DTCG value as CSS text: a number stays unitless (and is then
+ *  refused), a `{ value, unit }` dimension is joined. */
+function trackingText(v: unknown): string | undefined {
+  if (typeof v === 'string') return v.trim();
+  if (typeof v === 'number') return String(v);
+  if (v && typeof v === 'object' && 'value' in v && 'unit' in v) return `${(v as { value: unknown }).value}${(v as { unit: unknown }).unit}`;
+  return undefined;
+}
+/** A flagged part's letter-spacing TOKEN is spelled into the calc as its
+ *  var(), so its VALUE decides whether `size - var(--x)` is valid: every mode
+ *  must resolve to a px / em / rem length (`0px` included; a unitless `0`
+ *  is a number, not a length). No values → refused, the
+ *  settleStrokeShadows precedent: the deciding fact cannot be read from a
+ *  path. One message per offending part. */
+export function textBoxTokenRefusals(contract: Contract, tokens: unknown): string[] {
+  const out: string[] = [];
+  for (const { name, part } of walkAnatomy(contract)) {
+    if (!drawsWholePixelTextBox(part)) continue;
+    const ls = textBoxLetterSpacing(part);
+    if (ls?.kind !== 'token' || placeholdersIn(ls.ref).length > 0) continue;
+    if (tokens === undefined || tokens === null) {
+      out.push(`${contract.id}: part "${name}" carries textAutoResize and binds letter-spacing to {${ls.ref}}, and no token VALUES were supplied — whether \`size - var(…)\` is valid depends on the token's unit, which cannot be checked from the path; pass the DTCG trees`);
+      continue;
+    }
+    const values = tokenModeValues(tokens, ls.ref);
+    // `0px` is a length and subtracts nothing; a unitless `0` is a number and
+    // invalidates `size - var(…)` — so the unit decides, not the magnitude.
+    if (values.length === 0 || values.some((v) => v === undefined || !TRACKING_LENGTH.test(v))) {
+      out.push(`${contract.id}: part "${name}" carries textAutoResize and binds letter-spacing to {${ls.ref}}, which resolves to ${[...new Set(values.map((v) => v ?? 'nothing'))].join(' / ')} — only a px / em / rem length can be subtracted before rounding (a % resolves against the containing block, a unitless value or \`normal\` invalidates the declaration: a silent no-op); state the tracking as a length or remove the flag`);
+    }
+  }
+  return out;
+}
+/** The declarations a flagged part's base rule carries. `tokenCss` spells a
+ *  token path the way the surface reads tokens (`var(--x)` on a stylesheet,
+ *  the resolved literal on the inline surface). Refusals are decided by
+ *  validateContract / textBoxTokenRefusals before any rule is written. */
+export function wholePixelTextBoxDecls(contract: Contract, part: Part, path: string[], tokenCss: (tokenPath: string) => string): string[] {
+  const ls = textBoxLetterSpacing(part);
+  const trim = ls === undefined ? '' : ` - ${ls.kind === 'token' ? tokenCss(ls.ref) : ls.value}`;
+  const decls = [`inline-size: calc-size(${WHOLE_PIXEL_TEXT_BOX_BASIS}, round(up, size${trim}, 1px))`];
+  const { base, perValue } = textHolders(part);
+  if (!holds([...base, ...perValue], /^max-(width|inline-size)$/)) decls.push('max-inline-size: 100%');
+  const parent = partAt(contract, path.slice(0, -1));
+  if (
+    parent && !absolutelyPlaced(part) && part.declared?.['align-self'] === undefined &&
+    parent.layout !== undefined && parent.layout.display !== 'grid' && parent.declared?.['display'] === undefined &&
+    /^column/.test(parent.layout.direction ?? '') &&
+    (parent.layout.align === undefined || parent.layout.align === 'stretch') &&
+    parent.layoutByProp === undefined
+  ) decls.push('align-self: flex-start');
+  return decls;
+}
+/** The same declarations, looked up by part object — for emitters whose part
+ *  loop does not carry the anatomy path. */
+export function wholePixelTextBoxPlan(contract: Contract, tokenCss: (tokenPath: string) => string): Map<Part, string[]> {
+  const plan = new Map<Part, string[]>();
+  for (const { part, path } of walkAnatomy(contract)) {
+    if (drawsWholePixelTextBox(part) && path.length > 1) plan.set(part, wholePixelTextBoxDecls(contract, part, path, tokenCss));
+  }
+  return plan;
+}
+
 export function noneShadowVars(tokens: unknown): { none: Set<string>; mixed: Set<string> } {
   const out = { none: new Set<string>(), mixed: new Set<string>() };
   const t = tokens as Partial<TokenTreeInput> | undefined;
