@@ -7705,12 +7705,18 @@ The scorer, crop rules and 5% limit are unchanged. Disabled-state equivalence
 is not admitted by this rule.
 
 Read-only native evidence on Altitude Tab confirms both Active/Default pairs
-are byte-identical, with stable bracketing source snapshots. The revised CLI
-imports Tab as a real child instead of its former state-refusal stub. Its first
-clean consumer still fails selected text sizing and several image checks,
-including focus rendering; the press proof does not excuse those failures.
-Text Passage and ArrowArcLeft remain unresolved dependencies. This is bounded
-engineering evidence, not an application journey or V1 qualification.
+are byte-identical, with stable bracketing source snapshots. The application
+now imports Tab as a real child instead of its former state-refusal stub and
+prepares its React archive. A clean consumer installs a byte-identical package
+and reaches both pressed states. It still reports 16 image/content-size
+problems: only 3/10 image pairs meet both background limits, selected text is
+93px wide against 101px in the source, and focus reaches a 27.47% black-background
+mismatch. The press proof does not excuse those failures. The same JSON import
+repeated with exactly five workspace entries and an identical Tab contract.
+The visible comparison and installed consumer were inspected on both
+backgrounds; evidence is retained in
+`private/tab-active-reset-app-20260920/`. Text Passage and ArrowArcLeft remain
+unresolved dependencies. This failed application journey does not qualify V1.
 
 To reverse, remove the concurrent-hover root-paint comparison and restore the
 prior root token-rule ordering. Restore unconditional `state-inert` reporting
