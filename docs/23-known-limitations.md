@@ -7669,3 +7669,51 @@ To reverse, remove `nativeTextRenderingLeafParts` and its emitter calls/explicit
 caller override forwarding. Keep the independent inline `style` collision fix,
 font-input support, D.88 root guard and all historical evidence. Do not alter
 source designs, crops, scorer thresholds or owner grades.
+
+### D.91 Pressed root paint can equal rest while still needing a hover reset
+
+**AGENT decision, 2026-09-20.** A pointer press also matches `:hover`. Reading
+pressed paint only as a difference from rest loses a necessary override when
+the pressed drawing restores the resting background or border color. The
+proposer now compares these root paint channels with the uniquely matched
+hover cells too. It retains the captured pressed value, including a bound
+reference equal to the base reference, through the existing state vocabulary.
+It requires a hover peer for every compared pressed cell and at most one
+remaining variant axis. Multiple-axis hover selectors can outrank a uniform
+pressed selector and remain outside this bounded reset rule. No state, paint,
+property axis or component-specific behavior is invented. Other root channels,
+part-level resets, simultaneous keyboard focus and states with no recoverable
+override retain their existing limits and refusals.
+
+Root token-state CSS follows the declared interaction vocabulary order across
+uniform, substituted and per-value bindings. Stable ordering keeps per-value
+overrides after uniform bindings within each state. A browser counterexample
+showed a per-value hover rule overriding a uniform pressed rule at equal
+specificity; the corrected order restores the captured paint during a real
+pointer press. The synthetic native preview round trip retains the active
+state and its token references.
+
+A state need not change paint if the source explicitly draws the same paint
+at rest. The consumer check retains its `state-inert` finding unless a unique
+rest cell has exactly the same non-state props, a distinct native node ID,
+byte-identical valid PNG data, authenticated full-bounds scale-one captures,
+and exactly matching relative render geometry and layout size. The receipt
+names both nodes and their image hash. This only resolves the paint-change
+expectation: undeclared states and unreachable interactions still fail, and
+the consumer's own size and both unmasked image comparisons remain required.
+The scorer, crop rules and 5% limit are unchanged. Disabled-state equivalence
+is not admitted by this rule.
+
+Read-only native evidence on Altitude Tab confirms both Active/Default pairs
+are byte-identical, with stable bracketing source snapshots. The revised CLI
+imports Tab as a real child instead of its former state-refusal stub. Its first
+clean consumer still fails selected text sizing and several image checks,
+including focus rendering; the press proof does not excuse those failures.
+Text Passage and ArrowArcLeft remain unresolved dependencies. This is bounded
+engineering evidence, not an application journey or V1 qualification.
+
+To reverse, remove the concurrent-hover root-paint comparison and restore the
+prior root token-rule ordering. Restore unconditional `state-inert` reporting
+if withdrawing the independent source-equivalence adjudication; keep its
+receipts and negative controls. Preserve the failed consumer and all native
+source evidence. Do not adjust tolerances or replace historical results.

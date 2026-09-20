@@ -12,6 +12,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import { chromium } from 'playwright-core';
 import { readFileSync } from 'node:fs';
 import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
 import { mapRestToDump } from './rest/map.js';
@@ -575,4 +576,101 @@ test('M2: "stamps observable" is a fact about what ANSWERED the request — an i
   assert.match(batch.skipped[0].reason + (batch.skipped[0].detail ?? ''), /state-axis-stamps-not-observable/);
   const asserted = await importFromUrl(url, 'token', { fetchImpl: replay, transportCarriesPluginData: true });
   assert.equal(dumpStampsObservable(asserted.dump._provenance as never), true);
+});
+
+
+// A drawn press can restore rest while :hover is still true. Empty state
+// declarations remain refused; these are real paint overrides of hover.
+test('a captured pressed root paint restores rest across real hover and pointer-down, and round-trips through native previews', async () => {
+  const states = ['Default', 'Hover', 'Pressed'];
+  const cells = pillCells(states).map(c => c.at.State === 'Pressed' ? { ...c, fill: REST[c.at.Tone] } : c);
+  const first = exact(designerSet('ReturnPaint', { State: states, Tone: ['A', 'B'] }, cells));
+  const c1 = ContractSchema.parse(first.contract);
+  assert.deepEqual(c1.states, ['hover', 'active']);
+  assert.deepEqual(refusalsOf(c1), []);
+  assert.ok(first.notes.some(n => n.includes('a pointer press also matches :hover')));
+  const inventory = tokenInventoryFromJson([first.mintedTokens!.tree]);
+  const { css } = emitReact(c1, { tokens: inventory, icons: new Map(), contracts: new Map([[c1.id, c1]]) });
+  const paints = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  const values = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${paints.resolveLiteral(key)}`).join(';');
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>:root{${values}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+    for (const tone of ['a', 'b']) {
+      const el = page.locator('.tone-' + tone);
+      const paint = () => el.evaluate(n => getComputedStyle(n).backgroundColor);
+      await page.mouse.move(0, 0);
+      const rest = await paint();
+      const box = await el.boundingBox();
+      assert.ok(box);
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      assert.notEqual(await paint(), rest, tone + ': hover paints');
+      await page.mouse.down();
+      assert.equal(await el.evaluate(n => n.matches(':hover') && n.matches(':active')), true, JSON.stringify(await el.evaluate(n => ({tone:n.className,hover:n.matches(':hover'),active:n.matches(':active'),html:n.outerHTML,rect:n.getBoundingClientRect().toJSON(), css:[...document.styleSheets].flatMap(s=>[...s.cssRules].map(r=>r.cssText))}))));
+      assert.equal(await paint(), rest, tone + ': pressing restores captured rest paint');
+      await page.mouse.move(0, 0); await page.mouse.up();
+    }
+  } finally { await browser.close(); }
+  const { write, read } = await canvas(first.mintedTokens!.tree);
+  const node = await write(c1);
+  assert.equal(node.children.length, 6);
+  const set = await read(node);
+  const writerCorpus = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  const back = proposeFromDump(set, { corpus: writerCorpus, contractIdByName: new Map([[c1.name, c1.id]]), contractsById: new Map([[c1.id, c1 as never]]), fileKey: null, projectionMode: 'exact', mintUnbound: false });
+  const c2 = ContractSchema.parse(back.contract);
+  assert.equal(back.projection.status, 'verified-exact');
+  assert.deepEqual(c2.states, c1.states);
+  assert.deepEqual(c2.anatomy.root.states, c1.anatomy.root.states);
+});
+
+test('active root-paint resets need the captured matching hover plane; absent box fill restores transparent', () => {
+  const states = ['Default', 'Pressed'];
+  const noHover = designerSet('Quiet', { State: states, Tone: ['A', 'B'] }, pillCells(states).map(c => ({ ...c, fill: REST[c.at.Tone] })));
+  assert.match(refusalOf(() => exact(noHover)).message, /state-axis-state-not-carried:active/);
+  const absent = designerSet('NoPaint', { State: ['Default', 'Hover', 'Pressed'], Tone: ['A', 'B'] }, pillCells(['Default', 'Hover', 'Pressed']));
+  for (const v of absent.variants) if (!v.name.includes('State=Hover')) delete v.fill;
+  const transparent = exact(absent);
+  const c = ContractSchema.parse(transparent.contract);
+  const ref = c.anatomy.root.states!.active!['background-color'];
+  const paints = tokenCorpusFromJson({ primitives: transparent.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  assert.equal(paints.resolveLiteral(ref.slice(1, -1)), '#00000000');
+});
+
+
+test('a bound common pressed paint outranks per-value hover paints without replacing token identity', async () => {
+  const tokens = { paint: { rest: { $type: 'color', $value: '#abcdef' }, hot: { $type: 'color', $value: '#990000' }, cool: { $type: 'color', $value: '#007700' } } };
+  const set = designerSet('BoundReturn', { State: ['Default', 'Hover', 'Pressed'], Tone: ['A', 'B'] }, pillCells(['Default', 'Hover', 'Pressed']));
+  for (const v of set.variants) v.fill = { var: !v.name.includes('State=Hover') ? 'paint/rest' : v.name.includes('Tone=A') ? 'paint/hot' : 'paint/cool' };
+  const sourceCorpus = tokenCorpusFromJson({ primitives: tokens, semantic: {}, light: {}, brandDefault: {} });
+  const result = proposeFromDump(set, { ...opts('exact', true), corpus: sourceCorpus });
+  const c = ContractSchema.parse(result.contract);
+  assert.equal(c.anatomy.root.states!.active!['background-color'], '{paint.rest}');
+  assert.ok(c.anatomy.root.statesByProp?.some(x => x.state === 'hover'));
+  const inventory = tokenInventoryFromJson([tokens, result.mintedTokens!.tree]);
+  const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const all = tokenCorpusFromJson({ primitives: { ...tokens, ...result.mintedTokens!.tree }, semantic: {}, light: {}, brandDefault: {} });
+  const values = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${all.resolveLiteral(key)}`).join(';');
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>:root{${values}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+    for (const tone of ['a', 'b']) {
+      const el = page.locator('.tone-' + tone);
+      await el.hover();
+      assert.notEqual(await el.evaluate(n => getComputedStyle(n).backgroundColor), 'rgb(171, 205, 239)');
+      await page.mouse.down();
+      assert.equal(await el.evaluate(n => n.matches(':hover') && n.matches(':active')), true);
+      assert.equal(await el.evaluate(n => getComputedStyle(n).backgroundColor), 'rgb(171, 205, 239)');
+      await page.mouse.move(0, 0); await page.mouse.up();
+    }
+  } finally { await browser.close(); }
+});
+
+
+test('a new hover reset does not admit an unqualified multiple-axis specificity case', () => {
+  const states=['Default','Hover','Pressed'];
+  const cells=states.flatMap(State=>['A','B'].flatMap(Tone=>['S','L'].map(Size=>({at:{State,Tone,Size},fill:State==='Hover' ? (Tone==='A' ? (Size==='S'?'990000':'880000') : (Size==='S'?'007700':'006600')) : 'abcdef'}))));
+  const set=designerSet('MultipleAxes',{State:states,Tone:['A','B'],Size:['S','L']},cells);
+  assert.match(refusalOf(()=>exact(set)).message,/state-axis-state-not-carried:active/);
 });
