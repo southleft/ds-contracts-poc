@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ReactCallbackInspection as Inspection } from "../../../source-reference/react-callback-inspection";
+import { ReactStateApiInspection } from './ReactStateApiInspection';
 
 export function ReactCallbackInspection({
   referenceId,
@@ -208,6 +209,9 @@ export function ReactCallbackInspection({
           )}
         </>
       )}
+      <ReactStateApiInspection referenceId={referenceId} caseId={caseId} available={available && !!result?.sourceUnchanged &&
+        result.observation?.relationships.filter(r => r.status === 'controlled-observed').length === 1 &&
+        result.observation?.relationships.filter(r => r.status === 'initial-only-observed').length === 1}/>
     </section>
   );
 }
