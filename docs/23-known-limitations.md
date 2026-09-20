@@ -6967,3 +6967,22 @@ open/closed target and ancestor refusals, unchanged ordinary and sibling pixels,
 and source restoration checks. Reversal: restore the prior recorder admission
 and current-instrument choice while retaining all evidence and naming the
 closed-shadow measurement gap. Do not relabel historical captures as remeasured.
+
+
+## D.80 Native change review retains numeric precision
+
+**AGENT presentation decision, 2026-09-20:** the application displays numeric
+proposal endpoints and observed design values using their round-trippable
+JavaScript spelling. Four-decimal formatting previously made 0.40001 and
+0.40002 appear identical. Shadow color channels and opacity likewise retain
+their recorded values on the labeled 0–1 scale; byte and percentage rounding
+could conceal those changes. Long structured design values can be expanded to
+read the complete value instead of losing the tail after 120 characters.
+
+This changes review presentation only. Plans, authority checks, stored values,
+float32 verification, source identity, Figma writes and fidelity scores are
+unchanged. Regression checks render the actual review formatters and verify
+numeric round trips, distinguish small color/opacity changes, and retain escaped
+structured content beyond the preview. Reversal: restore the old formatters
+only alongside another visible way to inspect exact values before applying a
+correction; rounded labels alone are insufficient.

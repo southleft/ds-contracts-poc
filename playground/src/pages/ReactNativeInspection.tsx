@@ -12,6 +12,7 @@ import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan, NativeTokenValueChange } from '../../../core/native-contract-update';
 import type { RecordedNativeMeasurement } from '../../../source-reference/matched-native-review';
+import { designValue, correctionValue } from './NativeReviewValue';
 
 function MeasurementImages({measurement, background}: {measurement: RecordedNativeMeasurement['rows'][number]; background: 'white' | 'black'}) {
   return <>
@@ -19,25 +20,6 @@ function MeasurementImages({measurement, background}: {measurement: RecordedNati
     <td style={{background,padding:8}}><img alt={`Recorded Figma ${measurement.variant} on ${background}`} src={measurement.nativeImage} width={measurement.width} height={measurement.height} style={{display:'block',maxWidth:'none'}} /></td>
     <td>{(background === 'white' ? measurement.whiteMismatch : measurement.blackMismatch).toFixed(3)}%</td>
   </>;
-}
-
-/** Any recorded native value, shown without assuming its shape. */
-function designValue(value: unknown) {
-  if (value === null || value === undefined) return '—';
-  if (typeof value === 'number') return String(Number(value.toFixed(4)));
-  if (typeof value === 'string' || typeof value === 'boolean') return String(value);
-  const text = JSON.stringify(value);
-  return text.length > 120 ? text.slice(0, 117) + '…' : text;
-}
-function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before'] | NativeContractUpdatePlan['changes'][number]['after']) {
-  if (typeof value === 'string') return value;
-  if (typeof value === 'number') return Number(value.toFixed(4));
-  if (!value.length) return 'No shadows';
-  return <ol>{value.map((effect,index)=><li key={index}>
-    {effect.type==='INNER_SHADOW'?'Inner':'Outer'} shadow: offset {effect.offset.x}, {effect.offset.y} px;
-    blur {effect.radius} px; spread {effect.spread} px;
-    color rgb({[effect.color.r,effect.color.g,effect.color.b].map(c=>Math.round(c*255)).join(', ')}), {Math.round(effect.color.a*100)}% opacity
-  </li>)}</ol>;
 }
 
 /** An existing native operation for one of these source cases that still
