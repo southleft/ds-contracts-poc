@@ -5,11 +5,17 @@ import path from 'node:path';
 import os from 'node:os';
 import { PNG } from 'pngjs';
 import { MATCHED_EVIDENCE, checkMatchedEvidence, scoreMatchedEvidence, type MatchedManifest } from './react-native-matched-check.js';
-import { authenticateMatchedOperation, normalizeMatchedReadback } from './react-native-matched-record.js';
+import { authenticateMatchedOperation, authenticateMatchedStateApi, normalizeMatchedReadback } from './react-native-matched-record.js';
 import { REPO, sha256 } from './react-native-fidelity-check.js';
 import type { MatchedSpec } from './react-native-matched-record.js';
 import { hasRecordedNativeMeasurement, readRecordedNativeMeasurement, assertMatchedManifestBinding } from '../source-reference/matched-native-review.js';
 import type { ReactInitialNativeRequest } from '../source-reference/react-initial-native-request.js';
+import { revisionOf } from '../core/contract-provenance.js';
+import { stateApiEvidence, stateApiObservation } from '../source-reference/react-state-api-fixture.js';
+import { planReactStateApi } from '../source-reference/react-state-api.js';
+import { projectReactStateApiContract } from '../source-reference/react-state-api-contract.js';
+import type { ReactStateApiNativeRequest } from '../source-reference/react-state-api-native-request.js';
+import type { ReactStateApiInspection } from '../source-reference/react-state-api-inspection.js';
 
 const evidence = path.join(REPO, MATCHED_EVIDENCE);
 const manifest = (): MatchedManifest => JSON.parse(readFileSync(path.join(evidence, 'manifest.json'), 'utf8'));
@@ -21,6 +27,80 @@ test('new matched frames recompute on both backgrounds while historical evidence
   const result = checkMatchedEvidence(evidence);
   assert.equal(result.rows.length, 9);
   assert(result.rows.every(r => r.pass && r.scores.length === 2));
+});
+test('state-API initial images retain a separate nine-state denominator and experiment pin', () => {
+  const dir = path.join(REPO, 'recipe/evidence/react-native-matched-state-api');
+  assert.equal(checkMatchedEvidence(dir).rows.length, 9);
+  const m = JSON.parse(readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  assert.equal(m.cohort.id, 'family-switch-state-api');
+  assert.match(m.cohort.source.stateApiObservation.reportSha256, /^[a-f0-9]{64}$/);
+  assert.notEqual(m.cohort.native.operationId, manifest().cohort.native.operationId);
+  const initial = {kind:'react-initial-draft',version:1,caseId:m.cohort.source.caseId,
+    anchor:{referenceId:m.cohort.source.referenceId},observation:{id:m.cohort.source.inspectionId,
+      reportSha256:m.cohort.source.reportSha256,inventorySha256:m.cohort.source.inventorySha256}} as ReactInitialNativeRequest;
+  assert.throws(()=>readRecordedNativeMeasurement(REPO,m.cohort.native.operationId,initial),/state-api-mismatch/);
+  const request = {version:1,kind:'react-state-api-draft',initial,
+    observation:{...m.cohort.source.stateApiObservation,reportSha256:'0'.repeat(64)}} as ReactStateApiNativeRequest;
+  assert.throws(()=>readRecordedNativeMeasurement(REPO,m.cohort.native.operationId,request),/state-api-mismatch/);
+});
+
+function stateApiArchive() {
+  const {initial, behavior} = stateApiEvidence(), hash = 'a'.repeat(64);
+  for (const rows of [behavior.observation!.rows, behavior.observation!.relationships,
+    behavior.observation!.candidates, behavior.observation!.refusals!])
+    for (const row of rows) row.callback = 'onNotify';
+  initial.id = '20000000-0000-4000-8000-000000000002';
+  const plan = planReactStateApi(initial, behavior);
+  const report: ReactStateApiInspection = { id:'30000000-0000-4000-8000-000000000003', caseId:'source',
+    phase:'complete', qualification:plan.qualification, plan, sourceUnchanged:true,
+    restorationChecks:81, problems:[], observation:stateApiObservation(plan) };
+  const source = {version:1 as const, caseId:'source', anchor:{version:1 as const,kind:'react-root-draft' as const,
+    caseId:'source',referenceId:hash,inventorySha256:hash,matrixRevision:'sha256:'+hash,
+    ownership:{id:'10000000-0000-4000-8000-000000000001',sha256:hash}}};
+  const experiment = {version:1,source,initialRevision:revisionOf(initial),callbackRevision:revisionOf(behavior),observerRevision:'sha256:'+hash,plan};
+  const objects: Record<string, unknown> = {'request.json':experiment,'report.json':report,'initial-input.json':initial,
+    'callback-input.json':behavior,'program.json':{archived:true}};
+  const {draft:_draft,...initialReport} = initial;
+  const files = new Map<string, Buffer>();
+  const request: ReactStateApiNativeRequest = {version:1,kind:'react-state-api-draft',initial:{...source,kind:'react-initial-draft',
+    observation:{id:initial.id,inventorySha256:hash,reportSha256:hash}},observation:{key:'',id:report.id,inventorySha256:'',reportSha256:''}};
+  const nativePlan = {kind:'react-state-api-draft-inspection',requestRevision:'',draftRevision:'',projection:{contractRevision:''}};
+  const save = () => {
+    files.clear(); request.observation.key=revisionOf(experiment).slice(7);
+    const archive='react-state-api-inspections/'+request.observation.key+'/'+report.id;
+    const hashes=Object.fromEntries(Object.entries(objects).map(([name, value])=>{
+      const data=Buffer.from(JSON.stringify(value));files.set(archive+'/'+name,data);return [name,sha256(data)];
+    }));
+    const seal=Buffer.from(JSON.stringify({version:1,files:hashes}));files.set(archive+'/integrity.json',seal);
+    request.observation.inventorySha256=sha256(seal);request.observation.reportSha256=hashes['report.json'];
+    const draft=projectReactStateApiContract(initial,report);
+    nativePlan.requestRevision=revisionOf(request);nativePlan.draftRevision=revisionOf(draft);
+    nativePlan.projection.contractRevision=revisionOf(draft.contract);
+  };
+  save();
+  const read = () => authenticateMatchedStateApi(file=>{
+    const data=files.get(file); if(!data)throw Error('unexpected archive read:'+file);return data;
+  },request,initialReport,source,nativePlan);
+  return {request,report,experiment,initialReport,nativePlan,objects,files,save,read};
+}
+test('recorded state evidence authenticates its pinned archive independently of latest or live source files',()=>{
+  const f=stateApiArchive();assert.deepEqual(f.read(),f.request.observation);
+  f.files.set('react-state-api-inspections/'+f.request.observation.key+'/latest.json',Buffer.from('unrelated newer observation'));
+  assert.deepEqual(f.read(),f.request.observation);
+  const p=[...f.files.keys()].find(k=>k.endsWith('/program.json'))!;f.files.set(p,Buffer.from('changed'));
+  assert.throws(f.read,/state-api-changed:program.json/);
+});
+test('validly re-sealed but unrelated state evidence cannot borrow an appearance or native operation',()=>{
+  for(const mutate of [
+    (f:ReturnType<typeof stateApiArchive>)=>{f.report.id='40000000-0000-4000-8000-000000000004';f.save();},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.experiment.initialRevision='sha256:'+'0'.repeat(64);f.save();},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.initialReport.observation!.instanceId='other';},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.report.restorationChecks--;f.save();},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.report.observation!.rows[0].steps[0].callback.calls=[[false]];f.save();},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.nativePlan.requestRevision='sha256:'+'0'.repeat(64);},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.nativePlan.draftRevision='sha256:'+'0'.repeat(64);},
+    (f:ReturnType<typeof stateApiArchive>)=>{f.nativePlan.projection.contractRevision='sha256:'+'0'.repeat(64);},
+  ]) { const f=stateApiArchive(); mutate(f); assert.throws(f.read,/state-api-(evidence|projection)|unexpected archive read/); }
 });
 test('application review refuses another operation, source case or observation before reading private evidence', () => {
   const m = manifest(), operationId = String(m.cohort.native.operationId);

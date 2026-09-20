@@ -6531,6 +6531,20 @@ is unchanged. Detailed app journals, captures, exact package hash, lockfile,
 source-matched trials and visible review are preserved under private
 `stateful-native-return-1e6l8my3/`.
 
+The nine initial image pairs now have a separate committed denominator in
+`recipe/evidence/react-native-matched-state-api/`. The declared fidelity lane
+recomputes them with the same scorer. The app's **Review recorded matched
+frames** authenticates both the immutable initial observation and the pinned
+state experiment, including its exact projected draft, before displaying the
+images. New readbacks bracketed the frame exports and matched the operation
+journal exactly, with no node allocation or mutation. Source capture files are
+the unchanged, hash-verified historical capture of that same initial observation;
+they are not relabeled as a fresh source run. The recorded review does not use a
+newer experiment pointer or grant write authority. Root size and capture-position
+checks do not qualify the differing descendant geometry. Evidence and the
+source-capture selection refusal are retained in private
+`stateful-matched-record-xb0m61io/`.
+
 Adversarial checks cover changed input seals, a newer failed observation,
 wrong-file delivery, stale source, altered metadata readback, operation reopen,
 repeat reservation and unsupported updates. Reverse the new app route and
