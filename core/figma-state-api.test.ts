@@ -233,6 +233,19 @@ test('writer refuses retained-input retirement or reinterpretation before mutati
     set = await live.dump();
   for (const mutate of [
     (c: Contract) => {
+      delete c.events![0].bindings.code.argument;
+    },
+    (c: Contract) => {
+      c.props.push({
+        name: 'label',
+        type: 'text',
+        bindings: {
+          code: { prop: 'label' },
+          figma: { kind: 'TEXT', property: 'Label' },
+        },
+      });
+    },
+    (c: Contract) => {
       delete c.props[0].bindings.code.initial;
     },
     (c: Contract) => {
@@ -286,6 +299,39 @@ test('writer refuses retained-input retirement or reinterpretation before mutati
   );
   await live.run(live.script);
   assert.deepEqual(await live.dump(), set);
+});
+
+test('broader existing controls keep native appearance without claiming the bounded retained API', async () => {
+  for (const broader of [
+    'text-input',
+    'callback-without-next-value',
+  ] as const) {
+    const c = fixture();
+    if (broader === 'text-input') {
+      c.props.push({
+        name: 'label',
+        type: 'text',
+        default: 'Choose',
+        bindings: {
+          code: { prop: 'label' },
+          figma: { kind: 'TEXT', property: 'Label' },
+        },
+      });
+      c.anatomy.root.text = '{label}';
+    } else delete c.events![0].bindings.code.argument;
+    const live = await native(c),
+      set = await live.dump();
+    assert.equal((set.codeValueAxes as any).version, 1);
+    assert.equal((set.codeValueAxes as any).stateApi, undefined);
+    assert.equal(readCodeValueAxes(set).length, 1);
+    assert.equal(set.variants.length, 9);
+    await live.run(live.script);
+    assert.deepEqual(
+      await live.dump(),
+      set,
+      'unchanged appearance repeats in place',
+    );
+  }
 });
 
 test('returned React executes the retained state API independently of source code', async () => {

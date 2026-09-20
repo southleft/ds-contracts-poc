@@ -6601,6 +6601,19 @@ remains unchanged. Reverse by removing the version 2 producer and reader
 integration; retain the prior metadata refusal so existing version 2 targets
 stay protected.
 
+**AGENT compatibility decision — 2026-09-20.** Retained API eligibility must
+not block an existing native appearance projection. A control with additional
+text/identity inputs, a non-variant disabled input, or a callback without a
+declared next-value argument keeps version 1 typed-axis metadata. That metadata
+does not claim to return its initializer or callback. The full conformance lane
+exposed this boundary in an existing composed-control initializer case; its
+nine caller variants now compile again, and the broader-controls regression
+check repeats native generation without replacing identities. The strict
+version 2 reader still rejects an unsupported fragment, and changing an existing
+version 2 target to either broader form refuses before mutation. Reverse this
+eligibility guard only with support for the additional semantics, or an explicit
+decision to retire the older native appearance path.
+
 
 ## D.71 A separate app operation preserves the observed state API through native return
 
@@ -7341,7 +7354,23 @@ operation. The plugin was closed and the editable nine-variant set inspected on 
 live canvas. The original 37 source files and all 2,007 prior journal files in the
 two recorded inventories remained unchanged.
 
-Fresh native creation and the separate thumb geometry mismatch remain unqualified.
+Fresh creation is now measured through the application on the separate
+`switch-unchecked` state-API cohort. A new source observation and a separate
+54-trial experiment with 81 exact restorations prepared operation `62e0264f…`.
+The broad callback inspection still records its three refusals. The companion
+created nine editable variants and 30 variables, and two application readbacks
+agreed. An independent Console read confirmed all nine new hit areas at
+−11, −7 and 54 × 32.390625, with fixed sizing, near-edge constraints and no aspect
+lock. Repeating preparation left all 677 existing native-app files identical;
+repeating inspection returned the same complete snapshot and nine PNGs. Both
+earlier corrected sets, their variables and images remained identical. The
+plugin was closed and the new set inspected on the live canvas. All 37 source
+files stayed unchanged; only the initial-inspection latest pointer advanced
+among 2,033 previous journal/index files. Evidence is retained under
+`fresh-state-api-geometry-20260920-1633/`.
+
+This qualifies the measured fresh hit-area geometry, not the complete component.
+The separate thumb geometry mismatch remains unqualified.
 The separate static-HTML emitter still adds a border in the inset-ring probe;
 that surface is not qualified by the React checks.
 

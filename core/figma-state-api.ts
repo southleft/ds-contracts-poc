@@ -126,6 +126,25 @@ export function figmaStateApi(contract: Contract): FigmaStateApi | undefined {
     !['checkbox', 'switch'].includes(contract.semantics.role ?? '')
   )
     return;
+  // Retaining an entire API is narrower than compiling its native appearance.
+  // Older composed controls can have text/identity inputs or callbacks without
+  // a next-value declaration. Keep their existing typed-axis projection; do
+  // not claim that this bounded envelope carries those additional semantics.
+  // The writer still refuses replacing an existing v2 stamp with that v1 data.
+  const initial = contract.props.filter((p) => p.bindings.code.initial);
+  if (
+    initial.length !== 1 ||
+    contract.events?.length !== 1 ||
+    contract.events[0].bindings.code.argument !== 'next-value' ||
+    contract.props.some(
+      (p) =>
+        p !== initial[0] &&
+        (p.name !== 'disabled' ||
+          p.type !== 'boolean' ||
+          p.bindings.figma.kind !== 'VARIANT'),
+    )
+  )
+    return;
   if (
     contract.semantics.roleByProp ||
     contract.semantics.elementByProp ||

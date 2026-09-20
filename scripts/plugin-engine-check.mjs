@@ -542,8 +542,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
   assert(
-    dump._provenance && dump._provenance.dumpVersion === '1.39',
-    `dump v1.39: provenance dumpVersion is 1.39 (got ${dump._provenance && dump._provenance.dumpVersion})`,
+    dump._provenance && dump._provenance.dumpVersion === '1.40',
+    `dump v1.40: provenance dumpVersion is 1.40 (got ${dump._provenance && dump._provenance.dumpVersion})`,
   );
   assert(
     storedHash && dump.Badge.specHash === storedHash,
@@ -1572,8 +1572,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       const buttonDump = await runIn(mockA, scopedButton);
       const rxNotes = (buttonDump._degradations || []).filter((d) => d.code === 'prototype-reactions-unsupported');
       assert(
-        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.39',
-        `dump v1.39: provenance dumpVersion is 1.39 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
+        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.40',
+        `dump v1.40: provenance dumpVersion is 1.40 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
       );
       assert(
         rxNotes.length === wiringA.length,
