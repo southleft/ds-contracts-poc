@@ -6563,3 +6563,41 @@ wrong-file delivery, stale source, altered metadata readback, operation reopen,
 repeat reservation and unsupported updates. Reverse the new app route and
 adapter to stop preparing these operations; preserve existing journals and the
 metadata reader/refusal so previously created targets remain recoverable.
+
+## D.72 A native height edit returns as a package update without changing the state API
+
+**AGENT measurement decision — separate manual package replacement from automatic
+two-way repair.** The existing state-API set from D.71 was edited in Evaluations:
+its owned height variable changed from 18.390625 to 20 px. A fresh whole-file
+binding check found 19 consumers on the operation and capture pages, with no
+variable aliases. The edit affected 38 existing nodes through those bindings;
+nothing was created. A canonical native capture was loaded through the app's
+JSON importer, then exported with **Prepare React library**.
+
+The returned archive differs from the previous archive only in one token CSS
+value. Its package identity, JavaScript and type declarations are byte-identical.
+The clean consumer passes all 54 recorded state/callback trials. Replacing the
+package in the original consumer, without editing its source, also passes 54/54.
+All nine updated roots are exactly 32 × 20 px. Recorded-origin image comparison
+passes 9/9 on both backgrounds at the unchanged 5% limit, with maxima 2.662%
+white and 2.083% black. The installed control was activated visibly and emitted
+the expected callback.
+
+Restoring the native variable produces identical snapshots across both pages,
+identical bindings and ten identical PNGs. Restoring the original package passes
+54/54 again; consumer source and installed token bytes return exactly. npm
+normalizes the equivalent archive path from `file:./library.tgz` to
+`file:library.tgz`, so its package and lock files are not byte-identical.
+
+This is a measured designer edit → app import → installed package update and
+rollback. It requires manual capture transfer and package installation. It does
+not update the original hand-written React source, authorize a stale source
+observation, or qualify guarded source-to-native bound-height updates. Exact
+descendant geometry, hover/focus, dark/responsive states and excluded inputs
+remain outside this receipt. The native operation journal remains historical
+evidence; the temporary edit was restored before further work. Detailed captures,
+archive hashes, same-consumer tests, restoration checks and the visible review
+are retained in private `stateful-design-update-s__b4c11/`.
+
+To reverse this measurement decision, remove this bounded acceptance claim while
+preserving its private evidence. No converter, scorer or tolerance changed.
