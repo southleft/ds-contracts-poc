@@ -186,6 +186,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       // A correction that reached, or may have reached, the canvas.
       const written = !!row.updates?.some(update => update.operation && !['update-prepared','update-preflight-observed','update-refused','update-write-untouched'].includes(update.operation.phase));
       const currentProblems = op.problems.filter(problem => !corrected || problem !== 'native-operation-source-evidence-unavailable');
+      // Display priority only. Every action still reauthenticates its proposal
+      // on the host; this ordering does not authorize a write.
+      const updatePriority = (update: NonNullable<Operation['updates']>[number]) =>
+        update.operation && (update.operation.pendingPhase || update.operation.phase === 'update-recovery-required') ? 0 :
+        update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 1 :
+        !update.operation ? 2 : 3;
+      const orderedUpdates = [...(row.updates ?? [])].sort((a, b) => updatePriority(a) - updatePriority(b));
       return <details key={id} open={row.caseId === selectedCase}>
         <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${stateApi ? '· retained state API' : initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
         {stateApi && <p>This separate set retains the checked-state initializer and callback declarations from a completed source experiment. Figma variants remain editable visual states. Native interactivity, live updates, visual fidelity and the returned React consumer are not qualified by creation.</p>}
@@ -201,7 +208,10 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {!comparison && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {reviewed[id] && <p role="status">{reviewed[id]}</p>}
-          {row.updates?.map(update => <div key={update.id}>
+          {orderedUpdates.map(update => <div key={update.id}>
+            <h4>{update.operation && (update.operation.pendingPhase || update.operation.phase === 'update-recovery-required') ? 'Correction needs attention' :
+              update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 'Verified correction for current inputs' :
+              update.operation ? 'Saved correction' : 'Saved proposal'}</h4>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.tokenChanges?.length && <>
               <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
