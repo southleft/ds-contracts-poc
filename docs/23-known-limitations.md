@@ -7391,3 +7391,29 @@ the two coordinate bases, and apply exact leaf resizes without constraints. No
 public schema field or responsive rule is inferred. Reversal disables new plans
 and removes the reader/coordinate lowering while preserving historical program
 support and journals; it never changes the scorer or rewrites earlier measurements.
+
+## D.86 A fixed native width cannot recover a lost CSS maximum
+
+The historical Card REST fixture records a 320px, FIXED root whose `size.x`
+is bound to `size/card/width`. It has no `maxWidth` field or binding. The
+shipping source contract instead declares `max-width`. The emitter's existing
+unmeasured-root lowering bakes that maximum into a fixed native width; the
+original responsive meaning is absent from the fixture. The older plugin dump
+also lacks a bounding box, so its historical reviewable inversion cannot
+establish measured fixed sizing. Neither input proves a lossless source return.
+
+**AGENT decision, 2026-09-20.** Keep the measured fixed-root reader: a uniformly
+FIXED, non-FILL root retains its width binding, independently of any maximum.
+Correct the REST receipt's expected target to an independent native contract
+fixture carrying that width. Retain a separate, unmodified comparison against
+the shipping source, which explicitly reports both mismatches: missing
+`max-width` and added `width`. The comparator, original REST bytes, plugin dump,
+shipping contract, emitter lowering and frozen evaluation record are unchanged.
+Erasing the bounding box, changing the root to HUG, or replacing the width
+binding with a maximum must each fail native agreement. This changes a stale
+test expectation; it does not repair the historical emitter's responsive loss
+or qualify the composed source round trip.
+
+Reversal restores the old receipt expectation and its failing source-width
+comparison. Do not reverse by discarding measurements, restoring the guessed
+maximum in the converter, changing a tolerance, or rewriting historical evidence.
