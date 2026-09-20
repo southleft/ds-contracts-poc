@@ -351,4 +351,8 @@ verify historical receipts. It does not inspect closed shadow content and must
 not be used for new measurements. The matched-frame recorder requires version
 2 receipts; historical manifests and instrument hashes remain unchanged. The
 application identifies this limitation when opening a version-1 measurement.
+The state-API Switch has a separate version-2 recapture. Review opens that
+measurement and retains the original in expandable history. Both generations
+must authenticate and recompute; duplicate generations refuse. The four capture
+records contain 28 pairs for 19 distinct state/content comparisons.
 Neither version qualifies runtime interactions or the current native canvas.

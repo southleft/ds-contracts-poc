@@ -359,26 +359,29 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {currentProblems.length > 0 && <ul>{currentProblems.map(p => <li key={p}>{p}</li>)}</ul>}
         {row.recordedMeasurement && <section aria-label="Recorded matched-frame measurement">
           <button type="button" disabled={busy} onClick={() => void reviewMeasurement(id)}>Review recorded matched frames</button>
-          {measurements[id] && <>
-            <p>{measurements[id].rows.filter(r => r.pass).length} / {measurements[id].rows.length} recorded pairs meet the 5% limit on both backgrounds. Root sizes and capture positions checked. Operation observed {new Date(measurements[id].recordedAt).toLocaleString()}.</p>
+          {measurements[id] && [measurements[id], ...(measurements[id].history ?? [])].map((measurement, index) => <details key={measurement.recordId} open={index === 0}>
+            <summary>{measurement.captureInspection === 'chromium-light-tree-v1' ? 'Capture with shadow-boundary checks' : 'Original capture'} · {measurement.rows.length} pairs</summary>
+            <p>{measurement.rows.filter(r => r.pass).length} / {measurement.rows.length} recorded pairs meet the 5% limit on both backgrounds. Root sizes and capture positions checked. Operation observed {new Date(measurement.recordedAt).toLocaleString()}.</p>
             <p>These saved captures describe the recorded baseline. Opening this review does not inspect the current canvas or test interaction behavior. Images are shown at their original pixel size.</p>
-            {measurements[id].captureInspection === 'legacy-light-dom' && <p>Capture limitation: closed shadow content was not inspected in this recorded measurement.</p>}
+            {measurement.captureInspection === 'legacy-light-dom'
+              ? <p>Capture limitation: closed shadow content was not inspected in this recorded measurement.</p>
+              : <p>This source capture checked for open, closed and browser-owned shadow boundaries.</p>}
             <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 8px',textAlign:'left'}}>
-              {measurements[id].scope === 'recorded-caller-content' ? <>
+              {measurement.scope === 'recorded-caller-content' ? <>
                 <thead><tr><th>Caller content</th><th>React</th><th>Figma</th><th>Difference</th></tr></thead>
-                <tbody>{measurements[id].rows.flatMap(measurement => (['white','black'] as const).map(background => <tr key={`${measurement.id}-${background}`}>
+                <tbody>{measurement.rows.flatMap(measurement => (['white','black'] as const).map(background => <tr key={`${measurement.id}-${background}`}>
                   <th scope="row">{measurement.variant}<br />{background} background</th>
                   <MeasurementImages measurement={measurement} background={background} />
                 </tr>))}</tbody>
               </> : <>
                 <thead><tr><th>Initial state</th><th>React · white</th><th>Figma · white</th><th>White difference</th><th>React · black</th><th>Figma · black</th><th>Black difference</th></tr></thead>
-                <tbody>{measurements[id].rows.map(measurement => <tr key={measurement.id}>
+                <tbody>{measurement.rows.map(measurement => <tr key={measurement.id}>
                   <th scope="row">{measurement.variant}</th>
                   {(['white','black'] as const).map(background => <MeasurementImages key={background} measurement={measurement} background={background} />)}
                 </tr>)}</tbody>
               </>}
             </table></div>
-          </>}
+          </details>)}
         </section>}
         {!!op.imageObservation?.images.length && <details open={comparison || initial}><summary>{initial ? 'Native initial-state exports' : comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
           <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : op.sourceOwnedContent ? 'These mains retain the component’s own observed internal content. Other inputs, runtime interactions and visual fidelity remain unqualified.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>

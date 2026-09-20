@@ -322,3 +322,36 @@ test('synthetic versioned envelopes require the matching instrument and cannot m
   wrongHash.instruments['source-reference/transparent-source-frame-v2.ts'] = '0'.repeat(64);
   assert.throws(() => scoreMatchedEvidence(evidence,wrongHash), /instrument-changed/);
 });
+
+
+test('the real version-two recapture retains all nine scores and immutable original PNGs', () => {
+  const oldDir = path.join(REPO, 'recipe/evidence/react-native-matched-state-api');
+  const currentDir = path.join(REPO, 'recipe/evidence/react-native-matched-state-api-scope');
+  const old = JSON.parse(readFileSync(path.join(oldDir, 'manifest.json'), 'utf8')) as MatchedManifest;
+  const current = JSON.parse(readFileSync(path.join(currentDir, 'manifest.json'), 'utf8')) as MatchedManifest;
+  assert.deepEqual(checkMatchedEvidence(currentDir), checkMatchedEvidence(oldDir));
+  assert.deepEqual(current.cohort.source, old.cohort.source);
+  assert.deepEqual(current.cohort.native, old.cohort.native);
+  for (const [index, row] of current.rows.entries()) {
+    assert.equal(row.source.version, 2);
+    assertCurrentMatchedCapture(row.source);
+    assert.deepEqual(row.files, old.rows[index].files);
+    assert.deepEqual(row.native, old.rows[index].native);
+    assert.equal(old.rows[index].source.version, 1);
+  }
+});
+
+test('app catalog admits both instrument generations but refuses duplicates and mixed rows', () => temp(repo => {
+  const oldDir = 'recipe/evidence/react-native-matched-state-api';
+  const currentDir = 'recipe/evidence/react-native-matched-state-api-scope';
+  const old = JSON.parse(readFileSync(path.join(REPO,oldDir,'manifest.json'),'utf8')) as MatchedManifest;
+  const current = JSON.parse(readFileSync(path.join(REPO,currentDir,'manifest.json'),'utf8')) as MatchedManifest;
+  for (const dir of [oldDir,currentDir]) mkdirSync(path.join(repo,dir),{recursive:true});
+  const put = (dir: string, m: MatchedManifest) => writeFileSync(path.join(repo,dir,'manifest.json'),JSON.stringify(m));
+  const present = () => hasRecordedNativeMeasurement(repo,String(old.cohort.native.operationId),String(old.cohort.source.referenceId));
+  put(oldDir,old); put(currentDir,current); assert(present());
+  put(currentDir,old); assert(!present(),'a duplicate generation must not select one arbitrarily');
+  const mixed = structuredClone(current); mixed.rows[0].source = old.rows[0].source;
+  put(currentDir,mixed); assert(!present(),'mixed generations must not hide behind the valid original');
+  put(currentDir,current); assert(present());
+}));

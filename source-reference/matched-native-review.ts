@@ -15,16 +15,23 @@ function recorded(repo: string, operationId: string, referenceId: string) {
   const matches = MATCHED_EVIDENCE_DIRS.flatMap(relative => {
     const dir = path.join(repo, relative), file = path.join(dir, 'manifest.json');
     if (!existsSync(file)) return [];
-    const m = JSON.parse(readFileSync(file, 'utf8')) as MatchedManifest;
-    return m.cohort.native.operationId === operationId && m.cohort.source.referenceId === referenceId ? [{dir, m}] : [];
+    const bytes = readFileSync(file), m = JSON.parse(bytes.toString('utf8')) as MatchedManifest;
+    return m.cohort.native.operationId === operationId && m.cohort.source.referenceId === referenceId ? [{dir, m, recordId: sha256(bytes)}] : [];
   });
-  if (matches.length !== 1) throw Error('matched-review-operation-mismatch');
-  return matches[0]!;
+  // One receipt per capture-instrument generation. Never choose a later file
+  // or hide an ambiguous, malformed or unsuccessful record behind a good one.
+  const versions = matches.map(({m}) => m.rows[0]?.source.version);
+  if (!matches.length || versions.some(v => v !== 1 && v !== 2) || new Set(versions).size !== matches.length ||
+      matches.some(({m}) => m.rows.some(row => row.source.version !== m.rows[0]!.source.version)))
+    throw Error('matched-review-operation-mismatch');
+  return matches.sort((a, b) => b.m.rows[0]!.source.version - a.m.rows[0]!.source.version);
 }
 export function hasRecordedNativeMeasurement(repo: string, operationId: string, referenceId: string): boolean {
   try { recorded(repo, operationId, referenceId); return true; } catch { return false; }
 }
 export interface RecordedNativeMeasurement {
+  recordId: string;
+  history?: RecordedNativeMeasurement[];
   captureInspection: 'legacy-light-dom' | 'chromium-light-tree-v1';
   recordedAt: string; sourceCase: string; scope: 'recorded-initial-states' | 'recorded-caller-content';
   rows: Array<{ id: string; variant: string; width: number; height: number; sourceImage: string; nativeImage: string;
@@ -44,27 +51,27 @@ export function readRecordedNativeMeasurement(repo: string, operationId: string,
   const request = stateApi ? operationRequest.initial : operationRequest;
   const initial = request.kind === 'react-initial-draft';
   const referenceId = initial ? request.anchor.referenceId : request.referenceId;
-  const {m, dir} = recorded(repo, operationId, referenceId);
-  if (!same(m.cohort.source.stateApiObservation, stateApi ? operationRequest.observation : undefined)) throw Error('matched-review-state-api-mismatch');
-  const pin = initial ? request.observation : {id: request.ownership.id, reportSha256: request.ownership.sha256, inventorySha256: request.inventorySha256};
-  if (m.cohort.source.caseId !== request.caseId ||
-      (initial ? m.cohort.source.inspectionId : m.cohort.source.ownershipId) !== pin.id ||
-      m.cohort.source.reportSha256 !== pin.reportSha256 || m.cohort.source.inventorySha256 !== pin.inventorySha256) throw Error('matched-review-operation-mismatch');
-  let source: MatchedSpec['source'];
-  if (initial) {
-    const {kind: _kind, observation, ...inspection} = request;
-    source = {kind: 'initial', inspection: 'react-initial-inspections/' + revisionOf(inspection).slice(7) + '/' + observation.id};
-  } else source = {kind: 'comparison', bounds: m.rows[0]!.source.bounds};
-  const current = authenticateMatchedOperation(path.join(repo, 'private'), {
-    id: m.cohort.id, component: m.cohort.component, description: 'Recorded native measurement', operation: operationId,
-    journal: 'source-native-app/operations/' + operationId, event: String(m.cohort.native.journalEvent), source,
+  const measurements = recorded(repo, operationId, referenceId).map(({m, dir, recordId}): RecordedNativeMeasurement => {
+    if (!same(m.cohort.source.stateApiObservation, stateApi ? operationRequest.observation : undefined)) throw Error('matched-review-state-api-mismatch');
+    const pin = initial ? request.observation : {id: request.ownership.id, reportSha256: request.ownership.sha256, inventorySha256: request.inventorySha256};
+    if (m.cohort.source.caseId !== request.caseId ||
+        (initial ? m.cohort.source.inspectionId : m.cohort.source.ownershipId) !== pin.id ||
+        m.cohort.source.reportSha256 !== pin.reportSha256 || m.cohort.source.inventorySha256 !== pin.inventorySha256) throw Error('matched-review-operation-mismatch');
+    let source: MatchedSpec['source'];
+    if (initial) {
+      const {kind: _kind, observation, ...inspection} = request;
+      source = {kind: 'initial', inspection: 'react-initial-inspections/' + revisionOf(inspection).slice(7) + '/' + observation.id};
+    } else source = {kind: 'comparison', bounds: m.rows[0]!.source.bounds};
+    const current = authenticateMatchedOperation(path.join(repo, 'private'), {
+      id: m.cohort.id, component: m.cohort.component, description: 'Recorded native measurement', operation: operationId,
+      journal: 'source-native-app/operations/' + operationId, event: String(m.cohort.native.journalEvent), source,
   });
   if (!same(current.sourceRequest, operationRequest)) throw Error('matched-review-source-request-mismatch');
   if (current.native.journalEventSha256 !== m.cohort.native.journalEventSha256 ||
       current.native.planRevision !== m.cohort.native.planRevision) throw Error('matched-review-journal-mismatch');
   assertMatchedManifestBinding(m, current.pairs);
   const rows = scoreMatchedEvidence(dir, m);
-  return { captureInspection: m.rows[0]!.source.version === 2 ? 'chromium-light-tree-v1' : 'legacy-light-dom',
+  return { recordId, captureInspection: m.rows[0]!.source.version === 2 ? 'chromium-light-tree-v1' : 'legacy-light-dom',
     recordedAt: String(m.cohort.native.recordedAt), sourceCase: request.caseId, scope: initial ? 'recorded-initial-states' : 'recorded-caller-content',
     rows: rows.map(row => {
       const s = m.rows.find(s => s.id === row.id)!;
@@ -77,4 +84,6 @@ export function readRecordedNativeMeasurement(repo: string, operationId: string,
         sourceImage: image('source'), nativeImage: image('native'), whiteMismatch: row.scores[0]!.mismatch,
         blackMismatch: row.scores[1]!.mismatch, pass: row.pass };
     }) };
+  });
+  return { ...measurements[0]!, ...(measurements.length > 1 ? {history: measurements.slice(1)} : {}) };
 }

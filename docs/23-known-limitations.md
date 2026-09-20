@@ -6949,6 +6949,18 @@ native baseline; no nodes changed, and the unobstructed canvas was inspected.
 The real recorder refused the old capture before creating an output directory.
 This verifies the strengthened measurement path, not the remaining V1 gaps.
 
+The same recorder has now registered those nine new receipts separately in
+`recipe/evidence/react-native-matched-state-api-scope/`. Application review opens
+the capture with shadow-boundary checks and retains the original capture in an
+expandable history, including its limitation. Both receipts are authenticated
+and scored before either is returned; a duplicate instrument generation,
+mixed-version rows or invalid historical evidence refuses the whole review.
+The lane now checks 28 pairs across four records, representing the same 19
+distinct state/content comparisons. This recapture adds inspection evidence,
+not additional component coverage. Opening the review still performs no canvas
+inspection or write. To reverse this presentation decision, remove the new
+catalog entry and multiple-record view while preserving both capture folders.
+
 Adversarial evidence is retained in
 `private/transparent-closed-shadow-nlayfc6h/`: the before/after pixel probe,
 open/closed target and ancestor refusals, unchanged ordinary and sibling pixels,
