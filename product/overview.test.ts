@@ -53,8 +53,8 @@ test("both product surfaces render the canonical document, including its scope a
   const site = systemPage();
   assert.equal(site.route, "system");
   assert.ok(site.html.includes(`<article>${html}</article>`));
-  assert.match(html, /v1 is not complete/);
-  assert.match(html, /The general sync spine still plans without applying/);
+  assert.match(html, /v1 is not complete/i);
+  assert.match(html, /does not automatically edit React source/);
   assert.match(html, /src="\/assets\/product-loop.svg"/);
   assert.match(
     html,
@@ -75,7 +75,7 @@ test("both product surfaces render the canonical document, including its scope a
 
 test("new canonical text changes the rendered result; unknown diagrams fail instead of silently breaking", () => {
   const changed = markdown.replace(
-    "v1 is not complete",
+    /v1 is not complete/i,
     "TEST: readiness claim changed",
   );
   assert.match(
