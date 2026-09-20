@@ -92,6 +92,7 @@
           "literals": {
             "letter-spacing": "1px"
           },
+          "textAutoResize": "WIDTH_AND_HEIGHT",
           "content": {
             "prop": "text"
           },

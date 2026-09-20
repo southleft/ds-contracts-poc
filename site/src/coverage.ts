@@ -178,6 +178,8 @@ reg("props", "props", ["contract.props"]);
 reg("anatomy", "anatomy", ["contract.anatomy"]);
 reg("states", "declared-states", ["contract.states"]);
 reg("states", "state-previews", ["contract.bindings.figma.statePreviews"]);
+// Additive (docs/23 §D.40): the undrawn combinations of a sparse variant matrix.
+reg("contract", "absent-variants", ["contract.bindings.figma.absentVariants"]);
 reg("events", "events", ["contract.events"]);
 
 // --- Semantics -------------------------------------------------------------
@@ -304,6 +306,11 @@ reg("layout", "placement", [
 ]);
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
 reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
+// dump v1.35: a CAPTURED canvas fact — the part's stroke takes no layout space.
+reg("layout", "strokes-included-in-layout", ["part.strokesIncludedInLayout"]);
+// dump v1.36: a CAPTURED canvas fact — the text box sizes itself to its text
+// and is a whole number of pixels wide.
+reg("layout", "text-auto-resize", ["part.textAutoResize"]);
 reg("layout", "layout-by-prop", [
   "part.layoutByProp",
   "layoutByProp.prop",

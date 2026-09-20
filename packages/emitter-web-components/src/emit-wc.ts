@@ -76,9 +76,14 @@ import {
   boolProps,
   DEFAULT_FONT_FAMILY_DECL,
   defaultFontFamilyParts,
+  disabledStateSelector,
   enumProps,
   finishStylesheet,
   generateCss,
+  lowerStrokeRings,
+  settleStrokeShadows,
+  stateSelectorsFor,
+  wholePixelTextBoxPlan,
   isArrayType,
   isEnum,
   kebab,
@@ -135,6 +140,13 @@ export interface WcEmitCtx {
    * CSS unchecked.
    */
   tokens?: Set<string>;
+  /** The DTCG trees themselves (core TokenTreeInput), when the caller has
+   *  them. One fact needs a token's VALUE, not its path: a part with
+   *  `strokesIncludedInLayout: false` composes its real shadow after the inset
+   *  ring, and a shadow token that resolves to `none` would void the whole
+   *  declaration (core settleStrokeShadows). Absent → that one case is left
+   *  as written, the limit the core function names. */
+  tokenValues?: unknown;
 }
 
 export interface EmitWcResult {
@@ -166,12 +178,21 @@ const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 
-const STATE_SELECTORS: Record<string, string> = {
-  hover: ':hover:not(:disabled)',
-  active: ':active:not(:disabled)',
-  'focus-visible': ':focus-visible',
-  disabled: ':disabled',
-};
+/** The selector this surface's internal root takes for a disabled state —
+ *  the attribute generateElement renders for the `disabled` prop: the native
+ *  `disabled` on a form-control tag, `data-disabled=""` on every other tag,
+ *  and per rendered tag under elementByProp (so a map mixing both kinds takes
+ *  both). core disabledStateSelector says why `:disabled` alone is dead on a
+ *  `div`. Lowering register: css.disabled-state-rendered-attribute. */
+export function wcRootDisabledSelector(contract: Contract): string {
+  const tags = contract.semantics.elementByProp
+    ? [...Object.values(contract.semantics.elementByProp.map), contract.semantics.element]
+    : [contract.semantics.element];
+  return disabledStateSelector(
+    tags.some((t) => SUPPORTS_DISABLED.includes(t)),
+    tags.some((t) => !SUPPORTS_DISABLED.includes(t)),
+  );
+}
 const OVERLAY_CSS: Record<string, string[]> = {
   top: ['bottom: 100%', 'left: 0'],
   bottom: ['top: 100%', 'left: 0'],
@@ -229,8 +250,20 @@ function layoutDecls(part: Part): string[] {
   return d;
 }
 
-export function shadowCss(contract: Contract): string {
+export function shadowCss(input: Contract, tokenValues?: unknown, errors: string[] = []): string {
+  // `strokesIncludedInLayout: false`: the stroke is drawn as an inset ring
+  // that takes no layout space — core lowerStrokeRings, the same rewrite
+  // generateCss applies, so the two sheets cannot disagree about a border.
+  const contract = lowerStrokeRings(input);
+  // dump v1.36: the whole-pixel text box, the same declarations generateCss
+  // writes (which also refuses an unsubtractable tracking token by name).
+  const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
   const k = kebab(contract.name);
+  // A disabled state styles what the internal root actually exposes
+  // (wcRootDisabledSelector); every state rule, root and part, reads it — a
+  // part's state rule hangs off the ROOT's state selector.
+  const disabledSel = wcRootDisabledSelector(contract);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
   const defaultFamily = defaultFontFamilyParts(contract);
@@ -247,15 +280,15 @@ export function shadowCss(contract: Contract): string {
   // referee) resolves per value and passes, so nothing refused. Enum
   // placeholders select on the mirrored data-attribute; a boolean placeholder
   // expands to true/false on attribute presence (emit-react's `substValues`
-  // + `boolFrag`, `:disabled` where the element carries the native attribute).
+  // + `boolFrag`; `disabled` takes disabledSel — `:disabled` only where the
+  // internal root renders the native attribute).
   // A placeholder naming neither has NO host attribute to hang a selector on
   // and is REFUSED BY NAME — braces inside var() are never written.
   const placeholderValues = (ph: string): string[] | undefined =>
     enums.get(ph) ?? (boolNames.has(ph) ? ['true', 'false'] : undefined);
   const placeholderCond = (ph: string, value: string): string => {
     if (enums.has(ph)) return enumCond(ph, value);
-    const sel =
-      ph === 'disabled' && SUPPORTS_DISABLED.includes(contract.semantics.element) ? ':disabled' : boolCond(ph);
+    const sel = ph === 'disabled' ? disabledSel : boolCond(ph);
     return value === 'true' ? sel : `:not(${sel})`;
   };
   const rootWithCombo = (combo: Array<[string, string]>, lead: string[] = []) =>
@@ -446,7 +479,7 @@ export function shadowCss(contract: Contract): string {
     rule(`${ROOT_SEL}:focus-visible`, ['outline-style: solid', 'outline-offset: 2px']);
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
-    rule(`${ROOT_SEL}:disabled`, ['cursor: not-allowed']);
+    rule(`${ROOT_SEL}${disabledSel}`, ['cursor: not-allowed']);
   }
   for (const { prop, value, decls } of enumRules.values()) {
     rule(rootWithEnum(prop, value), decls);
@@ -591,6 +624,10 @@ export function shadowCss(contract: Contract): string {
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    // dump v1.36: the whole-pixel text box — the same declaration generateCss
+    // writes (core anatomy.ts wholePixelTextBoxDecls), so the two sheets
+    // cannot disagree about a text box.
+    decls.push(...(textBoxes.get(part) ?? []));
     if (part.element === 'img' && part.declared?.['position'] === 'absolute') {
       decls.push('width: 100%', 'height: 100%');
     }
@@ -696,7 +733,10 @@ export function shadowCss(contract: Contract): string {
   // unnamed, and `placeholder-color` (css: 'pseudo-element') would have.
   // Latent only because no first-party WC sample is a switch or a text field.
   // One shared exit, so a new disposition can never be forgotten here again.
-  return finishStylesheet(lines.join('\n'));
+  // finishStylesheet also restores a ring part's boundary under forced colors;
+  // a ring's real shadow whose token is `none` is settled where values are known.
+  const finished = finishStylesheet(lines.join('\n'));
+  return contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
 }
 
 // ---------------------------------------------------------------------------
@@ -1348,8 +1388,8 @@ ${noOps.map((n) => ` *   · ${n}`).join('\n')}${
 // Stylesheet module — the shadow CSS as a constructable sheet.
 // ---------------------------------------------------------------------------
 
-function generateStylesheetModule(contract: Contract): string {
-  const css = shadowCss(contract);
+function generateStylesheetModule(contract: Contract, tokenValues?: unknown): string {
+  const css = shadowCss(contract, tokenValues);
   return [
     `/**`,
     ` * ${contract.name} — constructable shadow stylesheet from contract`,
@@ -1561,7 +1601,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
         `Pass WcEmitCtx.tokens (core/tokens.ts tokenInventoryFromJson). Emitting unchecked would ship dangling var(--…) references that render as nothing, silently.`,
     );
   } else {
-    generateCss(contract, ctx.tokens, errors);
+    generateCss(contract, ctx.tokens, errors, ctx.tokenValues);
   }
 
   if (errors.length > 0) {
@@ -1571,7 +1611,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   }
   return {
     element: generateElement(contract, ctx),
-    stylesheet: generateStylesheetModule(contract),
+    stylesheet: generateStylesheetModule(contract, ctx.tokenValues),
     demo: generateDemo(contract),
     manifest: generateManifest(contract),
   };

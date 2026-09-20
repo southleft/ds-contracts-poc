@@ -14,6 +14,7 @@ import {
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
+  absentVariantIssues,
   isNativeCheckablePart,
   statePreviewSubstProps,
   tokensByPropEntries,
@@ -24,6 +25,7 @@ import {
 } from '@ds-contracts/schema';
 import {
   boolProps,
+  drawsStrokeRing,
   enumProps,
   isArrayType,
   isEnum,
@@ -31,10 +33,12 @@ import {
   isVariantBool,
   NATIVE_ROLE_HOSTS,
   PART_STATE_CHANNELS,
+  partCarriesStroke,
   placeholdersIn,
   rootElementsOf,
   STATE_SELECTORS,
   stripBraces,
+  textBoxStaticRefusals,
   textProps,
   topRootNames,
   topRoots,
@@ -549,6 +553,51 @@ export function validateContract(
       errors.push(
         `${contract.id}: part "${name}" carries hugsBelowMaxWidth but no "max-width" channel — the flag qualifies that channel and qualifies nothing here`,
       );
+    }
+    // dump v1.35: `strokesIncludedInLayout: false` qualifies a STROKE — the
+    // same discipline as the flag above: with no stroke channel it qualifies
+    // nothing, and a stray flag is a contract error, not a no-op. And what the
+    // ring cannot spell is refused BY NAME rather than dropped: the code
+    // surfaces redraw the border as ONE-colour solid inset shadow layers
+    // (anatomy.ts lowerStrokeRings), which has no per-side colour and no
+    // dashed/dotted style.
+    if (part.strokesIncludedInLayout === false) {
+      if (!partCarriesStroke(part)) {
+        errors.push(
+          `${contract.id}: part "${name}" carries strokesIncludedInLayout: false but no stroke channel (border-width / border-color / border-<side>-width / outline-*) — the flag qualifies a stroke and qualifies nothing here`,
+        );
+      }
+      if (drawsStrokeRing(part)) {
+        const holders: Array<Record<string, unknown> | undefined> = [
+          part.tokens, part.literals, part.declared,
+          ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+          ...tokensByPropEntries(part).flatMap((e) => Object.values(e.map)),
+          ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+          ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
+          ...(part.stylesWhen ?? []).map((sw) => sw.styles),
+        ];
+        const unspellable = [...new Set(holders.flatMap((h) => Object.keys(h ?? {})))]
+          .filter((c) => /^border-(top|right|bottom|left)-color$/.test(c) || /^border(-(top|right|bottom|left))?-style$/.test(c))
+          .sort();
+        if (unspellable.length > 0) {
+          errors.push(
+            `${contract.id}: part "${name}" carries strokesIncludedInLayout: false together with ${unspellable.join(', ')} — a stroke outside layout is drawn as a one-colour solid inset ring on the code surfaces, which has no per-side colour and no border style; remove the flag or the channel`,
+          );
+        }
+      }
+    }
+    // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` qualifies a TEXT BOX
+    // THAT SIZES ITSELF TO ITS TEXT — the hugsBelowMaxWidth discipline: a
+    // stray or inert flag is a contract error, not a no-op. Every refusal is
+    // decided in one place (anatomy.ts textBoxStaticRefusals, which the
+    // proposer also uses to withdraw a flag it cannot honour): a top-level
+    // root, a part that owns no text, a box sized / filled / truncated by a
+    // channel, tracking that is not a px / em / rem length or that the part
+    // inherits, and an inline-level element where inline-size does nothing.
+    if (part.textAutoResize !== undefined) {
+      for (const reason of textBoxStaticRefusals(contract, part, p)) {
+        errors.push(`${contract.id}: part "${name}" carries textAutoResize: WIDTH_AND_HEIGHT and ${reason}`);
+      }
     }
     // v18 (mint round): text evidence describes ONE channel and withholds
     // ONE thing — the part's own text. A stray flag is a contract error, not
@@ -1095,6 +1144,11 @@ export function validateContract(
       );
     }
   }
+
+  // bindings.figma.absentVariants: the declared undrawn combinations. Every
+  // refusal is named by the shared reader (schema: absentVariantIssues) so
+  // the writer and the proposer hold the list to the same rules.
+  for (const issue of absentVariantIssues(contract)) errors.push(`${contract.id}: ${issue}`);
 
   // v7 elementByProp: the dynamic-tag lookup must be total and honest —
   // the prop must be a declared enum, the map must cover every value, and

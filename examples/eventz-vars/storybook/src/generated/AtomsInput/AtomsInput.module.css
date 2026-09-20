@@ -35,7 +35,7 @@
   border-style: solid;
 }
 
-.root:hover:not(:disabled) .horizontalStack {
+.root:hover:not([data-disabled]) .horizontalStack {
   background-color: var(--comp-form-color-background-hover);
 }
 
