@@ -16,8 +16,9 @@ export interface NativeUpdateHistoryEntry {
   receipt?: NativeContractUpdateInput['baseline'];
 }
 export function createNativeUpdatePlans(repo: string,
-  derive: (parentId: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
-  history?: (parentId: string) => NativeUpdateHistoryEntry[]) {
+  derive: (parentId: string, parentJournalRevision?: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
+  history?: (parentId: string) => NativeUpdateHistoryEntry[],
+  currentParentRevision?: (parentId: string) => string) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
   const displayScope = 'native-update-plans:' + randomUUID();
   function directory(parentId: string, create = false) {
@@ -36,8 +37,8 @@ export function createNativeUpdatePlans(repo: string,
   const clean = (receipt: NativeContractUpdateInput['baseline']) => { const r=structuredClone(receipt);delete r.images;return r; };
   // Each written correction must be a single successor of the last verified
   // observation. Historical compiler output is evidence, not current authority.
-  const chain = (parentId: string, source: ReturnType<typeof derive>, self?: string) => {
-    const remaining = [...(history?.(parentId) ?? [])];
+  const chain = (parentId: string, source: ReturnType<typeof derive>, written: NativeUpdateHistoryEntry[], self?: string) => {
+    const remaining = [...written];
     let predecessor: Predecessor | undefined, before=source.input.before, baseline=clean(source.input.baseline);
     while (remaining.length) {
       const candidates=remaining.filter(e => same(read(parentId,e.proposalId).predecessor,predecessor));
@@ -58,9 +59,14 @@ export function createNativeUpdatePlans(repo: string,
     return {predecessor,before,baseline};
   };
   const compile = (parentId: string, self?: string): Record => {
-    const source = derive(parentId);
+    const written = history?.(parentId) ?? [];
+    const roots = written.map(entry => read(parentId,entry.proposalId)).filter(record => !record.predecessor);
+    if (written.length && roots.length !== 1) throw Error('native-update-history-branch-or-gap');
+    // Only a written correction can select a saved parent prefix. Unapplied
+    // proposals still require the latest observation and cannot pin stale data.
+    const source = derive(parentId, roots[0]?.parentJournalRevision);
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
-    const tip=chain(parentId,source,self);
+    const tip=chain(parentId,source,written,self);
     return { version: 1, parentId, parentJournalRevision: source.parentJournalRevision,
       ...(tip.predecessor ? {predecessor:tip.predecessor} : {}),
       update: prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline}) };
@@ -119,5 +125,11 @@ export function createNativeUpdatePlans(repo: string,
       });
     },
     saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
+    observationContext(parentId: string, id: string) {
+      const baselineRevision=read(parentId,id).parentJournalRevision;
+      const currentRevision=currentParentRevision?.(parentId) ?? baselineRevision;
+      if (!HASH.test(currentRevision)) throw Error('native-update-parent-journal-invalid');
+      return {baselineRevision,currentRevision};
+    },
   };
 }

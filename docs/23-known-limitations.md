@@ -6202,3 +6202,56 @@ it does not authenticate a new comparison against the current React reference.
 The Badge remains unqualified. To revisit the decision, demonstrate a general
 native text rule that preserves the complete label, exact source dimensions and
 subsequent text edits, then remeasure through a current authenticated operation.
+
+
+## D.64 A later parent read must not strand a verified correction
+
+**AGENT decision, 2026-09-19: recover the correction's pinned parent observation
+from its validated journal, then require a fresh contextual read before reuse.**
+Earlier versions allowed reading an operation's creation plan after a correction
+had changed its native nodes. That read correctly disagreed with the old plan,
+but also replaced the journal fingerprint used to authenticate the correction.
+The retained Button family was stranded despite its intact correction records.
+
+Only written correction history may select a saved parent fingerprint. The
+reader validates the complete current journal and then retrieves the matching
+prefix; the original input and receipt must pass their normal checks. A missing
+pin, unfinished read, malformed chain or suffix containing anything beyond
+component readbacks and their results/abandonments refuses. Unapplied proposals
+still authenticate against the latest parent. Current source, desired
+compilation, correction predecessors and write preflight remain independently
+checked. No historical file is rewritten.
+
+Recovering a prefix alone is insufficient: a later parent read may reveal real
+canvas changes. Before a corrected component can be reused, a new independent
+update read must match the verified correction and record the current parent
+journal revision in its host-owned dispatch. Another parent change during or
+after that read invalidates reuse. A differing native value refuses normally.
+Old readbacks remain historical until refreshed. The application uses its
+existing **Inspect update again** action; this never repeats the write.
+
+The real Button parent `e9bd4394…` has twelve events. Its first ten reproduce
+the correction's exact saved fingerprint; the last two are a later read and
+result. A read-only host probe recovered input and baseline receipt byte-exactly,
+without changing any parent file, and authenticated the unchanged shadcn source
+`0907e10c…`. Adversarial probes cover corrupted headers and later events,
+unavailable pins, pending reads, source drift, stale unapplied plans, changed
+native values and a parent changing while readback is in flight. Private
+evidence: `native-parent-baseline-recovery-tsv6lvyo/`.
+
+Reverse by removing historical parent selection and the contextual read marker
+from update planning and reuse authentication. Keep all journal events and
+restore the named recovery gap. Do not delete later observations or replace the
+original correction baseline.
+
+Live application verification used **Inspect update again** on correction
+`c620c0e9…` in Evaluations. Its contextual read returned **191 nodes and 63
+images**, matching all previous node values, token data and PNG bytes. The
+new image records add export bounds. The current source and correction
+authenticate again. The update still has one write dispatch; recovery appended
+only two read/result pairs. The parent remains twelve unchanged events.
+The companion was reconnected after the development server reloaded, and the
+source page's expensive refresh delayed requests; both interventions are
+recorded. The plugin was closed and the existing 63-component set inspected
+on the live canvas. This restores the correction chain's supported read/reuse
+path, not the family's still-missing image and interaction qualification.
