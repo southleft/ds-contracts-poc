@@ -6769,3 +6769,41 @@ To reverse, restore the anchor-case equality checks in
 selection from `source-reference/react-reference.ts`; keep existing succession entries
 readable and refuse only new adoptions with another anchor. Rejecting the saved
 entries would strand otherwise authenticated operations.
+
+## D.76 Declared JSX entry points need not live under src
+
+**AGENT decision (2026-09-20).** API inspection and structure tracing selected
+only bundled `.tsx` files beneath the workspace's `src/` directory. A valid
+declaration mounting original JSX from another directory could render and
+validate, yet expose no component modules to those readers.
+
+Both readers now retain that historical selection and additionally inspect
+explicitly mounted `.tsx` or `.jsx` files resolved by the same bundler run.
+Each declared entry must already be pinned by the declaration's witnesses and
+read into the reference. Resolution metadata stays on the host; the reference
+identity, entry, bundle and provenance format are unchanged. This does not
+discover package internals, follow source-map guesses or equate a compiled
+package export with a neighboring original source file.
+
+A separate workspace explicitly mounted Radix Themes 3.3.0's shipped Theme,
+Button and Switch JSX. Through the app, all four cases validated against
+network-isolated replay, with five negative controls rejected for each of the
+two representative subjects. API inspection recorded three component definitions
+and 202 source/declaration files, but remained incomplete:
+`ThemeContext:component-function-unresolved`. Structure tracing refused before
+matching any of the four cases with `react-ownership-source-changed-or-unreadable`.
+Native preparation remained disabled. The source facts also retain Button's
+delegation to BaseButton, Switch's replacement of caller children and Theme's
+unresolved return control flow. No native conversion is qualified by this run.
+
+Private evidence `radix-source-intake-umz12j_6/` retains the explicit declaration,
+the initial host-configuration refusal, its correction, the original library
+bytes, app records, DOM and inspected screenshot. All 1,244 existing native
+journal files remained identical. The earlier compiled-package workspace and its
+refusals remain separate evidence; no runtime-equivalence claim is made.
+
+The regression exercises an extensionless declared JSX import outside `src`,
+the actual HTTP API inspection, source changes and missing witnesses. A nearby
+unimported JSX file cannot stand in for a compiled package entry. To reverse,
+remove the additional mounted-file selection and its host-only metadata from
+`react-reference.ts`, retaining the historical `src` selection in both readers.

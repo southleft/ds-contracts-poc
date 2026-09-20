@@ -71,6 +71,23 @@ export interface ReactReference {
   /** The real path of the host-configured root these bytes were read from.
    * Like the cohort it is never serialized; provenance names its own fields. */
   sourceRoot: string;
+  /** Bundler-resolved files explicitly mounted by a declared cohort. This is
+   * host-only selection metadata, not a new reference identity or source map. */
+  mountedSourceFiles?: readonly string[];
+}
+
+/** Retain the historical src selection and add explicitly mounted JSX from
+ * declared workspaces. Only files read by this exact build may be inspected;
+ * compiled package entries do not authorize guessed original-source paths. */
+export function reactReferenceSourceModules(reference: ReactReference): string[] {
+  const root = reference.sourceRoot;
+  const historical = Object.keys(reference.files).filter((file) =>
+    file.startsWith(path.join(root, "src") + path.sep) && file.endsWith(".tsx"));
+  const declared = (reference.mountedSourceFiles ?? []).filter((file) =>
+    file.startsWith(root + path.sep) && /\.[jt]sx$/.test(file) &&
+    Object.hasOwn(reference.files, file));
+  return [...new Set([...historical, ...declared])].sort((a, b) => a.localeCompare(b))
+    .map((file) => path.relative(root, file));
 }
 
 /** A host-configured source root; no browser request can choose a filesystem
@@ -145,9 +162,9 @@ export async function buildReactReference(
     if (!files[path.resolve(sourceRoot, input)])
       throw Error(`react-reference-input-unrecorded: ${input}`);
   }
-  if (cohort.declared)
-    requireWitnessedModules(cohort, new Map((output.metafile!.inputs["react-reference.tsx"]?.imports ?? [])
-      .flatMap((i) => i.original ? [[i.original, path.relative(sourceRoot, path.resolve(sourceRoot, i.path)).split(path.sep).join("/")] as const] : [])));
+  const resolvedModules = new Map((output.metafile!.inputs["react-reference.tsx"]?.imports ?? [])
+    .flatMap((i) => i.original ? [[i.original, path.relative(sourceRoot, path.resolve(sourceRoot, i.path)).split(path.sep).join("/")] as const] : []));
+  if (cohort.declared) requireWitnessedModules(cohort, resolvedModules);
   const javascript = output.outputFiles.find((f) =>
     f.path.endsWith(".js"),
   )?.text;
@@ -171,6 +188,8 @@ export async function buildReactReference(
     css,
     cohort,
     sourceRoot,
+    ...(cohort.declared ? { mountedSourceFiles: (cohort.mountedModules ?? [])
+      .map((module) => path.resolve(sourceRoot, resolvedModules.get(module)!)) } : {}),
   };
   if (!reactReferenceUnchanged(reference))
     throw Error("react-reference-source-changed");
@@ -886,13 +905,7 @@ export function createReactReferenceService(
       try {
         if (!reactReferenceUnchanged(reference)) throw Error("source-changed");
         const root = realpathSync(sourceRoot);
-        const modules = Object.keys(reference.files)
-          .filter(
-            (file) =>
-              file.startsWith(path.join(root, "src") + path.sep) &&
-              file.endsWith(".tsx"),
-          )
-          .map((file) => path.relative(root, file));
+        const modules = reactReferenceSourceModules(reference);
         if (!modules.length) throw Error("component-modules-unavailable");
         const program = readReactSourceProgram(root, modules);
         if (
