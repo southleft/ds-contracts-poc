@@ -9,7 +9,8 @@ import { watchSourceFailures } from './observe.js';
 import { reactReferenceHtml } from './react-reference.js';
 import { reactReferenceProfile } from './react-reference-profiles.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
-import { selectReactNativeRequest } from './react-native-evidence.js';
+import { selectReactNativeRequest, readReactNativeContentEvidence } from './react-native-evidence.js';
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { startReactContentInspection, readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
@@ -56,6 +57,17 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   writeFileSync(path.join(dir, 'button-default/source.png'), sourcePng!);
   writeFileSync(path.join(dir, 'integrity.json'), JSON.stringify({ version: 1, files: inventoryEvidence(dir) }));
   const request = selectReactNativeRequest(repo, report, 'button-default');
+  const originalContent=readReactNativeContentEvidence(repo,reference,request);
+  withEvidenceReadSnapshot(()=>{
+    const first=readReactNativeContentEvidence(repo,reference,request);
+    first.captured.treeSha256='changed caller copy';
+    writeFileSync(source,'source changed after display snapshot');
+    assert.deepEqual(readReactNativeContentEvidence(repo,reference,structuredClone(request)),originalContent);
+    assert.throws(()=>readReactNativeContentEvidence(repo,reference,{...request,inventorySha256:'f'.repeat(64)}),/unavailable/);
+  });
+  assert.throws(()=>readReactNativeContentEvidence(repo,reference,request),/unavailable/);
+  writeFileSync(source,'original source fixture');
+  assert.deepEqual(readReactNativeContentEvidence(repo,reference,request),originalContent);
   const loadFrame = () => ({ reference, request });
   const frames = createReactSourceFramingStore(repo, loadFrame);
   const framed = await frames.create(reference.id, operationId);
