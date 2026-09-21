@@ -1192,7 +1192,7 @@ export function createFigmaMock(options = {}) {
         // content is children, not a value.
         inst._allProps[key] = def.type === 'SLOT'
           ? { type: 'SLOT', preferredValues: def.preferredValues ?? [] }
-          : { type: def.type, value: def.defaultValue };
+          : { type: def.type, value: def.type === 'VARIANT' ? (this.variantProperties?.[key] ?? def.defaultValue) : def.defaultValue };
       }
       const lagged = source._hideNonVariantOnInstances === true;
       Object.defineProperty(inst, 'componentProperties', {

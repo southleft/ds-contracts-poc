@@ -67,7 +67,7 @@ Its caller comparison, canonical return and application integration remain
 unimplemented. New property observations authenticate painted fonts per plane;
 older source archives retain their original interpretation. Application journeys,
 template updates/recovery, clean consumers and
-5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)). The graph caller candidate now preserves edited text across a live variant switch and restoration. Its first archived-original comparison fails at 6.85%; canonical return and application admission remain open.
 
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.
 

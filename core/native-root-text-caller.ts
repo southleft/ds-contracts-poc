@@ -1,5 +1,6 @@
 import type { NodeSpec } from './emit-figma-script.js';
 import type { NativeContractObservationInput } from './native-source-observation.js';
+import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection } from './native-root-text-template-graph.js';
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { prepareNativeTokenContext, type NativeTokenContextInput } from './native-token-context.js';
 
@@ -16,7 +17,27 @@ export interface NativeRootTextCaller {
   specPath: number[];
   characters: string;
   modeId: string;
+  /** Complete independently verified source and selector vector. */
+  modeVector?: Record<string, string>;
   planRevision: string;
+}
+
+/** Derive modes from the parent plan, never from a caller-supplied vector.
+ * The comparison host separately verifies the complete independent parent read. */
+export function nativeRootTextCallerModes(parent: NativeContractObservationInput, variantName: string): Record<string, string> {
+  const plan = parent.projection.rootTextTemplate;
+  const key = plan?.variants.find(v => v.name === variantName)?.modeKey;
+  if (!plan || !key) throw Error('native-contract-comparison-text-template-selection-required');
+  if (parent.templateGraph) {
+    const graph = planNativeRootTextTemplateGraph(parent.templateGraph.input);
+    if (canonicalJson(graph.template) !== canonicalJson(plan)) throw Error('native-contract-comparison-text-template-graph-changed');
+    const selected = nativeRootTextTemplateGraphSelection(graph, variantName);
+    return Object.fromEntries([[parent.tokenIdentity.collection.id, parent.tokenIdentity.modes[0].modeId],
+      ...parent.templateGraph.identity.selectors.map(s => [s.id, s.modes[Number(selected[s.selector])].modeId])]);
+  }
+  const native = parent.tokenIdentity.modes.filter(m => m.nativeSelection?.planRevision === plan.revision && m.nativeSelection?.modeKey === key);
+  if (native.length !== 1) throw Error('native-contract-comparison-text-template-selection-required');
+  return { [parent.tokenIdentity.collection.id]: native[0].modeId };
 }
 
 /** Prove that the sole anonymous caller text has the selected main's complete
@@ -33,10 +54,10 @@ export function planNativeRootTextCaller(parent: NativeContractObservationInput,
       !/^sha256:[a-f0-9]{64}$/.test(evidence.treeRevision) || evidence.contractRevision !== contractRevision ||
       !tokens || revisionOf(tokens) !== tokenRevision) fail('source-inheritance-required');
   const key = plan!.variants.find(v => v.name === variantName)?.modeKey;
-  const native = parent.tokenIdentity.modes.filter(m => m.nativeSelection?.planRevision === plan!.revision && m.nativeSelection?.modeKey === key);
+  const modes = nativeRootTextCallerModes(parent, variantName);
   const variant = parent.component.variants.find(v => v.name === variantName);
   const template = variant?.spec.children?.[0]?.children?.[0];
-  if (native.length !== 1 || !template?.slotTextTemplate || children.length !== 1 || children[0].type !== 'text') fail('single-text-required');
+  if (!template?.slotTextTemplate || children.length !== 1 || children[0].type !== 'text') fail('single-text-required');
   const child = children[0], expected = template!;
   const allowed = new Set(['type','name','characters','fontSize','fontStyle','fontFamily','fontSizeVar','fontWeightVar','lineHeightVar',
     'textFill','lineHeight','letterSpacing','textCase','textAlignH','textDecoration','textAutoResize']);
@@ -68,7 +89,14 @@ export function planNativeRootTextCaller(parent: NativeContractObservationInput,
     }
     return fail('unresolved-binding');
   };
-  for (const field of fields) if (canonicalJson(value(sample, child[field]!)) !== canonicalJson(value(main, expected[field]!, key)))
-    fail('caller-binding-value-differs');
-  return { specPath: [0, 0], characters: evidence!.characters, modeId: native[0].modeId, planRevision: plan!.revision };
+  const channels = { fontSizeVar: 'fontSize', fontWeightVar: 'fontWeight', lineHeightVar: 'lineHeight', textFill: 'fill' } as const;
+  const selected = plan!.modes.find(m => m.key === key);
+  if (!selected) fail('selection-required');
+  for (const field of fields) {
+    const target = parent.templateGraph ? selected!.targets[channels[field]] : expected[field]!;
+    if (canonicalJson(value(sample, child[field]!)) !== canonicalJson(value(main, target, parent.templateGraph ? undefined : key)))
+      fail('caller-binding-value-differs');
+  }
+  return { specPath: [0, 0], characters: evidence!.characters, modeId: modes[parent.tokenIdentity.collection.id],
+    ...(parent.templateGraph ? { modeVector: modes } : {}), planRevision: plan!.revision };
 }

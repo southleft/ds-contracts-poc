@@ -435,7 +435,10 @@ export function nativeContractComparisonRuntime(nested: boolean, gridContent: bo
     // The instance inherits the main's selected parent-collection mode. An
     // explicit set on the instance or its children would pin the old variant.
     replace('  inst.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);',
-      "  if (inst.resolvedVariableModes[parentCollection.id] !== c.textTemplate.modeId) nativeRefuse('comparison-template-mode');");
+      `  const templateModes = c.textTemplate.modeVector || { [parentCollection.id]: c.textTemplate.modeId };
+  if (nativeCanonical(inst.explicitVariableModes) !== nativeCanonical(templateModes) ||
+      Object.entries(templateModes).some(([id, mode]) => inst.resolvedVariableModes[id] !== mode))
+    nativeRefuse('comparison-template-mode');`);
     replace('      node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);',
       "      if (Object.keys(node.explicitVariableModes).length) nativeRefuse('comparison-template-child-mode');");
     replace('  pair(main, inst, []);', `  const templateNode = () => c.textTemplate.specPath.reduce((node, index) => node.children[index], inst);

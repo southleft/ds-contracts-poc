@@ -1,3 +1,4 @@
+import { nativeRootTextCallerModes } from './native-root-text-caller.js';
 import type {NativeComparisonMainMigration} from './native-comparison-main-migration.js';
 /** Independent observation of caller content in an existing native main.
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
@@ -28,9 +29,9 @@ function checkInput(input: NativeContractComparisonObservationInput) {
   const { creation: c, comparison: p } = input;
   if (p.textTemplate) {
     const plan = p.parent.projection.rootTextTemplate;
-    const modeKey = plan?.variants.find(v => v.name === p.variantName)?.modeKey;
-    const mode = p.parent.tokenIdentity.modes.find(m => m.nativeSelection?.planRevision === plan?.revision && m.nativeSelection?.modeKey === modeKey);
-    if (!plan || p.textTemplate.planRevision !== plan.revision || p.textTemplate.modeId !== mode?.modeId ||
+    const modes = nativeRootTextCallerModes(p.parent, p.variantName);
+    if (!plan || p.textTemplate.planRevision !== plan.revision || p.textTemplate.modeId !== modes[p.parent.tokenIdentity.collection.id] ||
+        !same(p.textTemplate.modeVector, p.parent.templateGraph ? modes : undefined) ||
         !same(p.textTemplate.specPath, [0, 0]) || !same(p.slotSpecPath, [0]) || p.contentSpecPath || p.instances?.length ||
         p.specs.length !== 1 || p.specs[0].type !== 'text' || p.textTemplate.characters !== p.specs[0].characters ||
         input.mainMigrations?.length) throw Error('native-contract-comparison-template-observation-input-invalid');
@@ -161,6 +162,14 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     const parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]));
     const variableByName = new Map<string, string>(content.tokens.receipt.variables.map((v: Row) => [v.name, v.id]));
     const sampleMode = { [input.tokenIdentity.collection.id]: input.tokenIdentity.modes[0].modeId };
+    // A template consumes only the main's graph. Native Figma can omit the
+    // unused caller collection from resolved modes even when explicitly set.
+    // If reported, that mode must still match; every source/selector is required.
+    const templateModesMatch = (actual: unknown, parent: PreparedNativeContractComparison['parent'], variant: string) => {
+      if (!actual || typeof actual !== 'object' || Array.isArray(actual)) return false;
+      const modes = nativeRootTextCallerModes(parent, variant), callerId = input.tokenIdentity.collection.id;
+      return same(actual, { ...modes, ...(callerId in actual ? sampleMode : {}) });
+    };
     const alias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variableByName.get(name) });
     const paint = (v: any, name: string) => Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
       variableByName.has(name) && same(v[0].boundVariables?.color, alias(name));
@@ -172,7 +181,8 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         spec = { ...spec, fontSizeVar: carrier.fontSizeVar, fontWeightVar: carrier.fontWeightVar,
           lineHeightVar: carrier.lineHeightVar, textFill: carrier.textFill };
       }
-      const variables = template ? new Map(template.reference.parent.tokenIdentity.variables.map(v => [v.tokenPath.replaceAll('.', '/'), v.id])) : variableByName;
+      const variables = template ? new Map([...template.reference.parent.tokenIdentity.variables.map(v => [v.tokenPath.replaceAll('.', '/'), v.id] as [string, string]),
+        ...(template.reference.parent.templateGraph?.identity.routes.map(v => [v.name, v.id] as [string, string]) ?? [])]) : variableByName;
       const sampleAlias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variables.get(name) });
       const samplePaint = (v: any, name: string) => template
         ? Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
@@ -194,7 +204,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
           !same(meta(n, 'nativeContractSample'), spec.nativeContractSample) || !same(v.explicitVariableModes, template ? {} : sampleMode) ||
           v.visible !== true || (v.opacity !== undefined && !numeric(v.opacity, spec.opacity ?? 1))) issue('sample-identity', n);
       if (template && (!same(meta(n, 'nativeContractPart'), meta(template.source, 'nativeContractPart')) ||
-          v.resolvedVariableModes?.[template.reference.parent.tokenIdentity.collection.id] !== template.reference.textTemplate!.modeId ||
+          !templateModesMatch(v.resolvedVariableModes, template.reference.parent, template.reference.variantName) ||
           !numeric(v.fontWeight, template.source.values.fontWeight) || v.textAutoResize !== 'WIDTH_AND_HEIGHT' ||
           !same(v.letterSpacing, template.source.values.letterSpacing) || !same(v.fills, template.source.values.fills)))
         issue('template-caller-inheritance', n);
@@ -276,8 +286,10 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       }
       if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
           !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
-      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode,
-        [reference.parent.tokenIdentity.collection.id]: reference.textTemplate?.modeId ?? reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
+      const parentModes = reference.textTemplate ? nativeRootTextCallerModes(reference.parent, reference.variantName)
+        : { [reference.parent.tokenIdentity.collection.id]: reference.parent.tokenIdentity.modes[0].modeId };
+      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode, ...parentModes }) ||
+          reference.textTemplate && !templateModesMatch(actual.values.resolvedVariableModes, reference.parent, reference.variantName)) issue('main-instance-modes', actual);
       let contentGrid: NodeSpec | undefined;
       if (reference.contentSpecPath && same(specPath, reference.contentSpecPath)) {
         let spec = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;

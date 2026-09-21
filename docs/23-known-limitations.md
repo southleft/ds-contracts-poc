@@ -8289,6 +8289,35 @@ unqualified. The fresh application font observation independently verifies 200
 property planes across two cases and all 418 sealed files; it does not infer the
 marker or certify native font metrics.
 
+A graph-backed caller candidate now uses the same comparison renderer and an
+independently verified parent graph. It derives the complete source and selector
+vector from the public variant, proves the direct caller text and all four
+bound typography values against the archived source, and edits the inherited
+TEXT. No new text binding or explicit child mode replaces the main's graph.
+Parent observation runs after asynchronous font loading and before the final
+synchronous duplicate-page check. Missing selectors, substituted aliases, stale
+parent graphs and competing pages refuse before allocation.
+
+Live candidate `3092dfe9-075d-4ada-a5fb-1aa3d71f2e42` uses the sealed original
+`New` text for the info/large/outline variant. Separate readback verifies its
+five native nodes and unchanged parent graph. Switching the same instance to
+primary/small/unset preserves the text and all four carrier IDs while changing
+font size from 16 to 12 and line height from 24 to 16; restoration passes a fresh
+independent read despite Figma assigning the text a new descendant ID. Repeat
+refuses before allocation. The first image pair **fails** the existing 5% bar at
+6.8503%; its native layout width is 59.01599884 against the source's computed
+58.1875 px, with both heights 24 px. This is one engineering comparison, not
+application admission, clean return, or family fidelity qualification. The sealed
+property plane has no layout origin, so an origin-aligned score is not claimed.
+
+**AGENT decision, 2026-09-21.** Verify every required source/selector resolved
+mode and every explicit mode independently. Live Figma omits the unused caller
+collection from resolved modes even when it is explicitly set on the instance;
+that one unused entry may be absent, but must match when present. Extra foreign
+entries, missing selectors and incorrect values refuse. Reversal: remove graph
+caller admission and its `modeVector` from the caller planner, runtime and
+observer. Preserve the failed image pair and original source bytes.
+
 **AGENT decision, 2026-09-21.** Keep the original single-mode source-token identity
 and authenticate routing with a separate graph receipt. Do not represent multiple
 collections as one token identity or replace the shared renderer. Reversal: remove
@@ -8298,8 +8327,8 @@ matching observation branch; existing single-collection paths remain unchanged.
 The seven-level native research graph also exposes a capture gap: its sixteen
 consuming bindings retain their full selected chains, but the global variable
 collector cannot resolve two carrier modes. Raising a depth limit alone would
-not authenticate cross-collection selection. Multi-collection canonical return,
-caller comparison and application admission remain unimplemented. New source
+not authenticate cross-collection selection. Multi-collection canonical return and application admission remain unimplemented.
+A subsequent graph caller candidate is described below. New source
 property observations seal painted-font evidence on every plane and require the
 original font witness to return after each probe. Matrix and single-property
 assembly validate each witness against its raw tree and observation digest,

@@ -329,7 +329,7 @@ ${prepared.comparisonParentReadbackScript}
     }
     if (!loaded) nativeRefuse('${draftFonts.length ? 'draft-font-unavailable' : 'comparison-font-unavailable'}');
   }
-  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
+  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}${prepared.descriptor.contractComparison?.textTemplate?.modeVector ? '\n  await nativeCheckComparisonParent();' : ''}
   nativeFileGuard();
   for (const page of figma.root.children) {
     if (page.name === NATIVE.pageName${prepared.descriptor.recovery ? ' && page.id !== NATIVE.recovery.creation.pageId' : ''}) nativeRefuse('page-name-collision');
@@ -344,7 +344,7 @@ ${prepared.comparisonParentReadbackScript}
       if (node.getSharedPluginData('ds_contracts', 'contractId') === NATIVE.machineId) nativeRefuse('scope-collision');
     }
   }
-  ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
+  ${prepared.descriptor.contractComparison && !prepared.descriptor.contractComparison.textTemplate?.modeVector ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
   ${prepared.descriptor.recovery ? `NATIVE_PAGE = await figma.getNodeByIdAsync(NATIVE.recovery.creation.pageId); nativeFileGuard();
   const recoveryObserved = await (async()=>{${prepared.recoveryReadbackScript}})();
   nativeFileGuard();
