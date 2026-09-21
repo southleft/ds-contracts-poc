@@ -6,16 +6,18 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
 import {nativeUpdateFixture} from '../core/native-contract-update-test-fixture.js';
+import type {NativeContractUpdateInput} from '../core/native-contract-update.js';
 import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 
 async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof nativeBackgroundUpdateFixture=nativeUpdateFixture) {
  const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-chain-'));
+ const input:NativeContractUpdateInput=f.input;
  t.after(()=>rmSync(repo,{recursive:true,force:true}));
  let stale=false,parentRevision='a'.repeat(64);
  const pins:Array<string|undefined>=[];
- const plans=createNativeUpdatePlans(repo,(_id,pinned)=>{pins.push(pinned);if(stale)throw Error('source drift');return {parentJournalRevision:pinned??parentRevision,input:f.input};},id=>jobs.updateHistory(id),()=>parentRevision);
+ const plans=createNativeUpdatePlans(repo,(_id,pinned)=>{pins.push(pinned);if(stale)throw Error('source drift');return {parentJournalRevision:pinned??parentRevision,input};},id=>jobs.updateHistory(id),()=>parentRevision);
  let jobs=createNativeUpdateJobs(repo,plans);
  const parent=f.input.before.operation.id;
  const prepare=()=>{const p=plans.prepare(parent);return {proposal:p,operation:jobs.prepare(parent,p.id)};};
@@ -24,7 +26,17 @@ async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof
  };
  const finish=async(id:string)=>{for(const p of ['update-preflight-readback','update-apply','update-readback'] as const)await step(id,p);};
  const next=()=>{for(const v of f.input.desired.component.variants)v.spec.opacity=0.125;f.input.desired.revision=revisionOf(f.input.desired.component);};
- return {...f,repo,parent,plans,prepare,step,finish,next,pins,moveParent:(revision='b'.repeat(64))=>{parentRevision=revision;},jobs:()=>jobs,stale:()=>{stale=true;},restart:()=>{jobs=createNativeUpdateJobs(repo,plans);}};
+ return {...f,input,repo,parent,plans,prepare,step,finish,next,pins,moveParent:(revision='b'.repeat(64))=>{parentRevision=revision;},jobs:()=>jobs,stale:()=>{stale=true;},restart:()=>{jobs=createNativeUpdateJobs(repo,plans);}};
+}
+
+function numberAddition(input:NativeContractUpdateInput):NativeContractUpdateInput['desired'] {
+ const component=structuredClone(input.before.component),tokenInput=structuredClone(input.before.tokenInput);
+ tokenInput.tokenPaths=[...tokenInput.tokenPaths,'newOpacity'].sort();
+ for(const mode of tokenInput.modes){
+  mode.tokens={...mode.tokens,newOpacity:{$type:'number',$value:0.6}};
+  mode.tokenTreeRevision=revisionOf(mode.tokens);
+ }
+ return {component,revision:revisionOf(component),tokenInput};
 }
 
 test('proposal lists isolate display copies and recheck altered proposals after the response',async t=>{
@@ -78,6 +90,57 @@ test('a changed parent during readback or conflicting canvas cannot qualify hist
  await f.step(first.operation.id,'update-readback');
  assert.equal(f.jobs().get(first.operation.id).phase,'update-recovery-required');
  assert.throws(()=>f.jobs().verifiedForParent(f.parent),/effective-observation-unavailable/);
+});
+
+test('design repair evidence cannot outlive its parent context or the tip of its correction chain',async t=>{
+ const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
+ const observe=async(id:string)=>{const c=f.jobs().observeDesign(id);f.jobs().accept(id,{...c,result:await f.run(c.script)});};
+ await observe(first.operation.id);assert.ok(f.jobs().designEvidence(first.operation.id));
+ assert.throws(()=>withEvidenceReadSnapshot(()=>f.jobs().designEvidence(first.operation.id)),/write-during-evidence-read-snapshot/);
+ f.moveParent();assert.throws(()=>f.jobs().designEvidence(first.operation.id),/parent-observation-refresh-required/);
+ await f.step(first.operation.id,'update-readback');await observe(first.operation.id);
+ assert.ok(f.jobs().designEvidence(first.operation.id));
+ f.next();const second=f.prepare();await f.step(second.operation.id,'update-preflight-readback');await f.step(second.operation.id,'update-apply');
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/effective-observation-unavailable/);
+ await f.step(second.operation.id,'update-readback');await observe(second.operation.id);
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/superseded-observation-is-historical/);
+ assert.equal(f.jobs().designEvidence(second.operation.id).input.component.variants[0].spec.opacity,0.125);
+});
+
+test('an allocation correction survives journal restart and requires the subsequent component review before repair',async t=>{
+ const f=await fixture(t);
+ f.input.desired=numberAddition(f.input);
+ // The pending component correction must remain separate from allocation.
+ for(const v of f.input.desired.component.variants)v.spec.opacity=0.6;
+ f.input.desired.revision=revisionOf(f.input.desired.component);
+ const first=f.prepare();assert.equal(first.proposal.tokenAllocations?.length,1);
+ assert.equal(first.proposal.compilerReviewRequired,true);
+ await f.step(first.operation.id,'update-preflight-readback');f.restart();
+ await f.step(first.operation.id,'update-apply');
+ assert.throws(()=>f.prepare(),/effective-observation-unavailable/);
+ await f.step(first.operation.id,'update-readback');
+ assert.equal(f.jobs().get(first.operation.id).phase,'update-verified');
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/compiler-review-required-after-token-allocation/);
+ const second=f.prepare();assert.notEqual(second.proposal.id,first.proposal.id);
+ assert.equal(second.proposal.tokenAllocations,undefined);assert.equal(second.proposal.changes.length,2);
+ await f.finish(second.operation.id);
+ assert.equal(f.jobs().get(second.operation.id).phase,'update-verified');
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.tokenIdentity.variables.length,3);
+ const design=f.jobs().observeDesign(second.operation.id);f.jobs().accept(second.operation.id,{...design,result:await f.run(design.script)});
+ assert.ok(f.jobs().designEvidence(second.operation.id));
+ assert.equal(f.plans.prepare(f.parent).id,second.proposal.id,'a settled repeat does not allocate or duplicate');
+});
+
+test('allocation-only changes still settle a separate no-op component review before repair',async t=>{
+ const f=await fixture(t);f.input.desired=numberAddition(f.input);
+ const allocation=f.prepare();await f.finish(allocation.operation.id);
+ const reviewed=f.prepare();assert.notEqual(reviewed.proposal.id,allocation.proposal.id);
+ assert.equal(reviewed.proposal.tokenAllocations,undefined);assert.equal(reviewed.proposal.changes.length,0);
+ await f.finish(reviewed.operation.id);assert.equal(f.jobs().get(reviewed.operation.id).phase,'update-verified');
+ const read=f.jobs().observeDesign(reviewed.operation.id);f.jobs().accept(reviewed.operation.id,{...read,result:await f.run(read.script)});
+ assert.ok(f.jobs().designEvidence(reviewed.operation.id));
+ assert.equal(f.plans.prepare(f.parent).id,reviewed.proposal.id);
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.tokenIdentity.variables.length,3);
 });
 
 test('a second correction starts at the verified first result, survives restart and preserves history',async t=>{

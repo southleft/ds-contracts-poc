@@ -1,4 +1,6 @@
 import {isReactStateApiNativeRequest,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
+import {createReactSourceRepairPreviews} from './react-source-repair-preview.js';
+import {planReactOpacitySourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
@@ -361,6 +363,21 @@ export function createReactReferenceService(
     try { return native!().jobs.reactInitialRequest(id); }
     catch { return native!().jobs.reactEffectiveStateApiRequest(id).initial; }
   };
+  const sourceRepairs=createReactSourceRepairPreviews(repoRoot,(referenceId,parentId,proposalId)=>{
+    if(!native||!reference||reference.id!==referenceId||!reactReferenceUnchanged(reference))throw Error('react-source-repair-source-unavailable');
+    const {jobs,updateJobs}=native();
+    if(!updateJobs||jobs.reactIdentity(parentId).referenceId!==referenceId)throw Error('react-source-repair-pair-unavailable');
+    const update=updateJobs.forProposal(parentId,proposalId);
+    if(!update)throw Error('react-source-repair-design-read-required');
+    const design=updateJobs.designEvidence(update.id),request=initialRequestForOperation(parentId);
+    if(request.version!==1)throw Error('react-source-repair-root-initial-states-required');
+    const recorded=initialStates.repairEvidence(reference,request,design.input.component.contractId);
+    const plan=planReactOpacitySourceRepair(design,readFileSync(path.join(reference.sourceRoot,recorded.observation.source.module),'utf8'),recorded.observation.source);
+    const input=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_INPUT,output=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT;
+    if(!input||!output||[input,output].some(file=>path.isAbsolute(file)||file.split(/[\\/]/).includes('..')))
+      throw Error('react-source-repair-host-css-recipe-required');
+    return {reference,program:recorded.original.program,recorded,caseId:request.caseId,variants:recorded.nativeVariants,plan,recipe:{input,output}};
+  });
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -399,6 +416,25 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const repair=/^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/source-repair(?:\/([a-f0-9-]{36})\/(original|candidate-\d+|caller-original|caller-candidate)\/(\d+|[a-z][a-z-]{0,79})\/([a-f0-9]{64})\.png)?$/.exec(route);
+    if(repair) {
+      try {
+        if(!['GET',...(repair[4]?[]:['POST'])].includes(req.method??'')||Number(req.headers['content-length']??0)>0||req.headers['transfer-encoding']||
+            !reference||reference.id!==repair[1]||!reactReferenceUnchanged(reference))throw Error('react-source-repair-request-invalid');
+        if(repair[4]) {
+          const bytes=sourceRepairs.image(repair[1],repair[2],repair[3],repair[4],repair[5],repair[6],repair[7]);
+          res.writeHead(200,{'Content-Type':'image/png','Content-Length':bytes.length,'Cache-Control':'no-store'});res.end(bytes);return;
+        }
+        if(req.method==='POST') {
+          const job=sourceRepairs.start(repair[1],repair[2],repair[3]);void job.promise.catch(()=>{});
+          json(res,200,{preview:job.state});
+        }else json(res,200,{preview:sourceRepairs.read(repair[1],repair[2],repair[3])});
+      }catch(error){
+        const reason=error instanceof Error&&/^[a-z][a-z0-9-]*(?::[A-Za-z0-9:;._-]+)?$/.test(error.message)?error.message:undefined;
+        json(res,409,{error:'Source repair preview requires the current design read and complete source observations.',reason});
+      }
+      return;
+    }
     const contextual = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react\/child\/(instance-\d+)\/(initial-states|callback-behavior)$/.exec(route);
     if (contextual) {
       try {

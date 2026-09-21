@@ -8611,3 +8611,168 @@ particular downloaded font file. No family substitution, source-font change,
 scorer change or tolerance change is introduced. Reversal: remove the optional
 witness, conditional observation and check, and its control evidence; retain
 all archived references and failed or passing reports.
+
+### D.102 Source repair previews check the complete recorded finite domain
+
+**AGENT decision — 2026-09-21.** A bounded root-opacity repair can propose
+exact utility-class edits in an authenticated original React declaration. The
+host rebuilds its CSS in a new private workspace, then exercises every initial
+state mapped to the existing native component. Exactly one candidate must
+produce the requested opacity in every changed state while preserving every
+other recorded tree, ownership, font, geometry and content fact. Unchanged
+states must retain identical PNG bytes. Auxiliary observations authenticate
+their own tree and style revisions before comparing their measured facts;
+a changed class token necessarily changes those input revisions.
+
+A fresh twelve-state source probe rejects the group-conditioned utility and
+selects the disabled utility: four disabled states change opacity from 0.5 to
+0.6, and eight other states preserve identical images. Original source and CSS
+remain unchanged. The earlier sealed observation lacked
+pseudo-box geometry and correctly refused. The fresh successor was explicitly
+adopted through the application. Compiler review then refused four newly
+requested number tokens; the original source, canvas and historical records
+remained unchanged. D.103 addresses that allocation gap.
+
+**Application preview shown on 2026-09-21:** after the allocation and separate
+geometry corrections, four disabled variants were edited to 60% opacity through
+Figma's Design UI. The app independently read exactly those four values and
+prepared preview `d99ee880…`. It rejected the group-conditioned candidate and
+selected `disabled:opacity-50` → `disabled:opacity-60` across all 12 states,
+preserving the 8 unchanged PNGs and other recorded facts. Original files remained
+unchanged. A separate engineering probe then checked all 10 configured examples:
+60 finite states across 5 caller contexts, including the nested Card, plus 10
+mounted interaction trials per source version; unchanged caller PNGs match.
+This wider probe is not yet part of application admission. Evidence lives under
+private `react-source-repair-previews/d99ee880…/` in the live app worktree and
+`react-design-source-repair-20260921/cohort-render-4EkKB7/` in the repair worktree.
+
+The preview service and UI accept only an existing source/native pair and its
+current recorded design read. The host must configure relative
+`DS_CONTRACTS_REACT_SOURCE_CSS_INPUT` and
+`DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT` paths for a supported CSS rebuild.
+Original CSS must reproduce byte for byte before staging. Source project
+build scripts are not executed. Competing edits, changed inputs, incomplete
+states and zero or multiple matching candidates refuse. Preview evidence is
+preserved privately; after a server restart a new preview is required.
+
+Automatic original-file application, application admission of the wider caller
+and interaction checks, interrupted source-write recovery and live two-way
+acceptance remain undone.
+The preview offers no apply action. Reversal removes the repair routes, UI and
+source-repair modules together, retaining the native design-read and source
+succession journals and every failed or successful private probe.
+
+### D.103 Additive token allocation is a separate correction
+
+**AGENT decision, 2026-09-21.** A compiler may newly track a literal number
+without changing its rendered value. An existing native draft must be able to
+add that variable while retaining its original collection, modes, existing
+variable IDs, component nodes and ownership metadata. Dropping requested paths
+or creating another component would hide the missing update behavior.
+
+The new allocation correction checks the whole verified component baseline and
+the complete collection inventory. It supports additional literal number tokens
+in one existing mode; existing token definitions, mode changes, aliases and
+other token types cannot change in the same step. Its append-only collection
+ledger records intent before allocation and actual IDs immediately after each
+create call. Independent readback verifies the exact additions and every old
+variable. Repeats of a completed allocation create nothing. Source repair stays
+unavailable until a subsequent compiler review settles the remaining component
+changes. This step alone does not update the component's appearance.
+
+Bounded engine probes cover old-ID preservation, subsequent value updates,
+repeated extensions, forged identity/ledger/value refusals, concurrent component
+edits and interrupted allocation. An interruption before intent can retry. A
+complete allocation whose final ledger stamp was interrupted can settle after
+all IDs and values match. An unknown allocation, missing recorded ID or partial
+value assignment refuses without creating another variable; automatic recovery
+from those ambiguous states remains unqualified. No variable is deleted as
+cleanup.
+
+**Shown through the application on 2026-09-21:** correction `2a9e18cb…` added
+four requested number variables to the retained twelve-state Checkbox collection
+in Evaluations. Preflight, one begun write and independent readback completed
+through the companion. All 46 original variable records and all 44 native node
+records are unchanged; the collection now has 50 variables. Twelve native PNGs
+were collected and the canvas was inspected with the companion closed. Evidence:
+`private/react-design-source-repair-20260921/allocation-live-readback-v1.json`.
+The separate pseudo-box correction `82a7eec0…` then moved the existing twelve
+transparent hit-area shapes by 1 px on each axis. All 44 node IDs, all 50 variables
+and all 12 PNGs with their export bounds are unchanged; the app independently
+verified the correction and the canvas was inspected with the companion closed.
+Evidence: `geometry-live-readback-v1.json` and `geometry-ui-completion-v1.json`
+in the same private directory. D.102 records the subsequent source preview.
+These steps do not qualify automatic source writes or V1.
+
+Reversal removes the allocation route and writer while preserving the extended
+token reader, original ownership stamps, allocation ledger and journals for
+already written corrections. Never erase those records to imitate an old
+allocation or reassign variables by name.
+
+### D.104 Preview images carry immutable evidence rather than current write authority
+
+**AGENT decision, 2026-09-21.** A live source-preview image request took 88.26 seconds
+because each image re-derived the full native correction chain. A twelve-state
+comparison requests 24 images. Image delivery now verifies the exact preview,
+selected candidate, row and content hash without repeating that history read.
+Completed preview metadata and preview preparation still reauthenticate the
+source/native pair; the HTTP route also retains its original-source identity
+and file checks. Running and refused progress reports are explicitly noncurrent
+and do not replay history. The worker checks original source identities during
+observation and reauthenticates the complete input before reporting completion.
+A saved image is evidence of that preview, never current write authority.
+
+After the change, a second application preview delivered the same 5,733-byte
+image in 0.16 seconds, with the identical SHA-256. All 24 comparison images
+loaded in the live application. Before/after timing receipts and the inspected
+application screenshot are preserved in private
+`react-design-source-repair-20260921/preview-image-{before,after}-v1.json` and
+`preview-images-fixed-ui-v1.png` in the application worktree.
+
+Bounded checks show that a changed design plan makes preview metadata stale
+while its pinned image bytes remain the same, and reject different proposal
+IDs, unselected candidates, invalid rows and modified image bytes. New previews
+are still required after restart. Reversal restores per-image derivation without
+changing any saved preview, image hash or source-write checks.
+
+### D.105 Source repair must check the other configured callers
+
+**AGENT decision, 2026-09-21.** An edit to a component module affects every
+configured caller of that module. A matching isolated state set is insufficient.
+The preview now requires a second observation of every configured example,
+including examples that do not use the edited component. Module/export identity
+selects the affected instances; no named-component exception is used. The
+unmodified and ownership-instrumented bundles must first produce identical
+trees and images in each context.
+
+The original witnesses remain immutable. Candidate root-opacity expectations
+are derived from the independently read native edit and the caller's actual
+properties. Other styles, content, ownership, fonts and geometry remain exact.
+Each affected instance must cover the complete recorded finite domain. For the
+supported checked-control class, associated-label and Space actions must pass
+in both versions and restore the original view. Missing cases, states, actions,
+ambiguous property mappings, source drift and unrelated pixel changes refuse.
+The observer bounds work to 64 cases, 32 affected instances and 512 observed
+states across both versions.
+
+A production-observer engineering run covers all ten configured examples,
+60 initial states and ten interaction trials per source version in five caller
+contexts, including the nested Card. A separate replay of the final verifier
+checks all twenty saved initial-image hashes. Evidence is private
+`react-design-source-repair-20260921/production-cohort-KMCPRm/verified-v2.json`
+in the repair worktree. The subsequent application preview `b52cefe0…` completes
+the same ten examples, sixty initial states and ten interaction trials per
+version. All twenty caller images served by the application match their recorded
+hashes. The caller table, changed disabled view, unchanged composed Card and
+finite-state comparisons were inspected in the live app. Original module and
+stylesheet hashes remain unchanged. The application receipt and screenshots are
+in private `react-design-source-repair-20260921/caller-preview-live-proof-v1.json`
+in the application worktree. Images are served only for the exact reviewed
+preview, case, side and hash, using the D.104 evidence boundary.
+
+This check covers configured examples and the named finite/action domain only.
+It does not establish arbitrary caller coverage or authorize an original-file
+write. Source/CSS transactions, witness succession, fresh canvas preconditions
+and interrupted-write recovery remain unfinished. Reversal removes the cohort
+observer and its preview integration together, restoring the narrower preview
+limitation while preserving every saved observation and original witness.

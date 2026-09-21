@@ -211,11 +211,13 @@ test('ineligible token changes are refused by name, with the token path', async 
   // A pinned identity without the variable never reaches eligibility: the baseline itself is unverified.
   assert.equal(refusal(() => { const i = structuredClone(f.input); i.before.tokenIdentity.variables = i.before.tokenIdentity.variables.filter((v: any) => v.tokenPath !== 'opacity'); prepareNativeContractUpdate(i); }),
     'native-update-verified-baseline-required', 'an identity without the variable is not a verified baseline');
-  // A leaf new to the source is allocated by nothing here: requested, it refuses by name...
-  assert.equal(refusal(() => prepareNativeContractUpdate({ ...f.input, desired: f.desiredFor({ ...structuredClone(f.tokens), brandNew: { $type: 'number', $value: 0.7 } }) })),
-    'native-update-token-allocation-change-unsupported:requested;brandNew');
+  // Requested number additions have their own allocation step. Existing value
+  // edits cannot be mixed into it; unrequested references still refuse below.
+  const allocation=prepareNativeContractUpdate({ ...f.input, desired: f.desiredFor({ ...structuredClone(f.tokens), brandNew: { $type: 'number', $value: 0.7 } }) }).plan;
+  assert.equal(allocation.kind,'native-contract-token-allocation-update');
+  assert.deepEqual(allocation.after.component,f.input.before.component);
   assert.equal(refusal(() => prepareNativeContractUpdate({ ...f.input, desired: f.desiredFor({ ...structuredClone(f.tokens), faded: { $type: 'number', $value: 0.2 }, brandNew: { $type: 'number', $value: 0.7 } }) })),
-    'native-update-token-allocation-change-unsupported:requested;brandNew', 'also beside an eligible value change');
+    'native-token-context-allocation-base-leaf-changed', 'an allocation cannot conceal a value change');
   // ...and unrequested, it refuses once the desired component names it anywhere.
   const referenced = structuredClone(f.input);
   (referenced.desired.tokenInput.modes[0].tokens as any).brandNew = { $type: 'number', $value: 0.7 };

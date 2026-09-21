@@ -1,4 +1,5 @@
 import { nativeImageFraming } from '../native-image-framing';
+import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useState } from 'react';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
@@ -48,6 +49,7 @@ interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
+    tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
     boundCrossSize?: boolean; layoutChanges?: Array<{nodeId:string;channel:'x'|'y';before:number;after:number}>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
@@ -196,6 +198,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 'Verified correction for current inputs' :
               update.operation ? 'Saved correction' : 'Saved proposal'}</h4>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            {!!update.tokenAllocations?.length && <>
+              <p>Add {update.tokenAllocations.length} number variables to this component's existing collection. Existing variables and component nodes stay unchanged. After verification, use Review compiler update again to check the remaining component changes. Source repair is unavailable until that review is complete.</p>
+              <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>New token</th><th>Mode</th><th>Value</th></tr></thead>
+                <tbody>{update.tokenAllocations.flatMap(token=>token.values.map(row=><tr key={token.tokenPath+':'+row.sourceMode}><td>{token.tokenPath}</td><td>{row.sourceMode}</td><td>{String(row.value)}</td></tr>))}</tbody></table>
+            </>}
             {!!update.tokenChanges?.length && <>
               <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
                 ? update.boundCrossSize
@@ -230,6 +237,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                   <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Nothing was written and nothing is accepted. To carry a change to React, change the source so it renders the observed value, then follow the changed source: when both sides agree the update verifies without writing to Figma. To keep the code's value instead, restore it on the canvas. Until then, a code update that touches the same property is refused by name.</p>
                   <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Node</th><th>Property</th><th>Verified value</th><th>On the canvas now</th></tr></thead>
                     <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td>{/^(variable|collection):/.test(change.channel) ? 'Variable' : <a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a>}</td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
+                  <ReactSourceRepairPreview endpoint={`${root}/native-operation/${id}/update/${update.id}/source-repair`} />
                 </> : <p>The canvas matches the verified values: no design changes since verification.</p>)}
               </section>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>
