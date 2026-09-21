@@ -9003,3 +9003,43 @@ Reversal removes the Apply endpoints, recovery UI and controller together.
 Keep the source transaction helper and witness loader for already applied
 changes until those sources have been recovered or explicitly re-witnessed.
 Never remove private journals, selections, held files or validation evidence.
+
+## D.109 Observed child content remains provisional
+
+**AGENT decision, 2026-09-21.** A REST import can retain a bounded static
+FRAME/GROUP/TEXT subtree observed inside an unresolved child instance, even when
+the authored child definition is empty. The content stays in a separate draft
+child contract. It does not become parent anatomy or establish the complete
+child API. Only the observed applied variant values are admitted; unobserved
+variants remain unknown.
+
+Every use of that child identity in the imported batch must have matching
+captured content and matching exact anatomy/token projections. Missing or
+conflicting observations, dynamic text bindings, mutable exposed properties,
+nested instances, additional projected API, unresolved values, or observations
+exceeding 128 nodes or depth 8 keep the geometry-only stub and produce a named
+`observed-instance-content-refused` note. Existing real child definitions retain
+priority. Reimport can refresh an older provisional stub. Authoritative VARIANT
+types keep string boolean spellings as enum values. The additive optional
+`instanceContent` field is REST-only; plugin dumps do not provide it. REST dump
+version remains 1.41, with admission based on the field's presence.
+
+The fresh Altitude Tabs installed React consumer now renders two body-copy lines
+that the previous empty stub lost. It still fails the unchanged 5% black-background
+fidelity limit, loses the active tab appearance and the stretch variant's visible
+effect, and has a measured content-width mismatch. The authored Text Passage set
+is still empty, and its unobserved width variant is not recovered. This CLI
+consumer evidence does not qualify application delivery, interactive Tabs
+behavior, the independent-family requirement, or V1.
+
+`core/observed-instance-content.test.ts` covers later-host content conflicts,
+missing observations, mutable API refusal, typography/paint/visibility drift,
+static bounds, real-child precedence, a forged narrowed census, and session
+stub refresh. The review caught and fixed an exposed TEXT control being turned
+into inert content. Original failures and fresh consumer evidence are retained
+in `private/observed-instance-content-20260921/`.
+
+To reverse, remove the optional REST observation and its provisional projection
+route together, returning unresolved children to geometry-only stubs. Preserve
+the captured source, failure receipts and consumer comparisons. Do not relabel
+observed usage content as a complete child definition or change fidelity limits.
