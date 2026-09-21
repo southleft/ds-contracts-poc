@@ -631,6 +631,81 @@ const varNameById = async (id, consumer) => {
   return v.name;
 };
 
+// v1.45: a multi-collection template cannot be represented by one global
+// value per mode. Preserve complete raw collection inventories and every edge,
+// including unused modes, alongside native consuming vectors. This read-only
+// channel is evidence; it neither normalizes a graph nor waives degradations.
+const readTemplateVariableGraph = async (set) => {
+  const fileKey = figma.fileKey;
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const stable = value => JSON.stringify((function sort(v) {
+    if (Array.isArray(v)) return v.map(sort);
+    if (!v || typeof v !== 'object') return v;
+    return Object.fromEntries(Object.keys(v).sort().map(k => [k, sort(v[k])]));
+  })(value));
+  const guard = () => { if (!fileKey || figma.fileKey !== fileKey) throw Error('file changed during graph capture'); };
+  const roots = set.type === 'COMPONENT_SET' ? [...set.children] : [set];
+  const nativeNodes = [], seeds = new Set();
+  const visit = (node, variantName, specPath) => {
+    if (nativeNodes.length >= 4096 || specPath.length > 32) throw Error('template consumer limit');
+    nativeNodes.push({ node, variantName, specPath });
+    for (const id of Object.keys(capturedVariableConsumers.get(node.id) || {})) seeds.add(id);
+    for (const [index, child] of (node.children || []).entries()) visit(child, variantName, specPath.concat(index));
+  };
+  for (const root of roots) visit(root, root.name, []);
+  const consumers = () => nativeNodes.map(({ node, variantName, specPath }) => ({
+    nodeId: node.id, variantName, specPath, explicitVariableModes: copy(node.explicitVariableModes),
+    resolvedVariableModes: copy(node.resolvedVariableModes),
+  }));
+  const beforeConsumers = consumers(), collections = new Map(), variables = new Map(), pending = [...seeds];
+  const readCollection = async id => {
+    const c = await figma.variables.getVariableCollectionByIdAsync(id); guard();
+    if (!c || c.id !== id || typeof c.key !== 'string' || !c.key || !Array.isArray(c.variableIds) ||
+        new Set(c.variableIds).size !== c.variableIds.length || !Array.isArray(c.modes) || !c.modes.length ||
+        new Set(c.modes.map(m => m.modeId)).size !== c.modes.length || !c.modes.some(m => m.modeId === c.defaultModeId))
+      throw Error('collection inventory unavailable');
+    return { id: c.id, key: c.key, name: c.name, remote: c.remote, defaultModeId: c.defaultModeId,
+      modes: copy(c.modes), variableIds: [...c.variableIds].sort() };
+  };
+  const readVariable = async id => {
+    const v = await figma.variables.getVariableByIdAsync(id); guard();
+    if (!v || v.id !== id || typeof v.key !== 'string' || !v.key || !v.valuesByMode || !Array.isArray(v.scopes))
+      throw Error('variable inventory unavailable');
+    return { id: v.id, key: v.key, name: v.name, collectionId: v.variableCollectionId, resolvedType: v.resolvedType,
+      remote: v.remote, scopes: [...v.scopes].sort(), valuesByMode: copy(v.valuesByMode) };
+  };
+  while (pending.length) {
+    if (pending.length > 32768 || variables.size >= 16384 || collections.size > 64) throw Error('template graph inventory limit');
+    const id = pending.shift();
+    if (variables.has(id)) continue;
+    const variable = await readVariable(id);
+    if (!collections.has(variable.collectionId)) {
+      const collection = await readCollection(variable.collectionId);
+      collections.set(collection.id, collection); pending.push(...collection.variableIds);
+    }
+    const collection = collections.get(variable.collectionId);
+    if (!collection.variableIds.includes(id) || stable(Object.keys(variable.valuesByMode).sort()) !== stable(collection.modes.map(m => m.modeId).sort()))
+      throw Error('variable membership or mode inventory disagrees');
+    variables.set(id, variable);
+    for (const raw of Object.values(variable.valuesByMode)) if (raw && typeof raw === 'object' && raw.type === 'VARIABLE_ALIAS') {
+      if (Object.keys(raw).sort().join('|') !== 'id|type' || typeof raw.id !== 'string' || !raw.id) throw Error('malformed raw alias');
+      pending.push(raw.id);
+    }
+  }
+  // Single-collection templates retain their historical dump representation.
+  if (collections.size < 2) return undefined;
+  for (const collection of collections.values()) {
+    if (collection.variableIds.some(id => !variables.has(id) || variables.get(id).collectionId !== collection.id) ||
+        stable(await readCollection(collection.id)) !== stable(collection)) throw Error('collection changed during graph capture');
+  }
+  for (const variable of variables.values()) if (stable(await readVariable(variable.id)) !== stable(variable))
+    throw Error('variable changed during graph capture');
+  guard();
+  if (stable(beforeConsumers) !== stable(consumers())) throw Error('consumer modes changed during graph capture');
+  return { version: 1, fileKey, collections: [...collections.values()].sort((a, b) => a.id.localeCompare(b.id)),
+    variables: [...variables.values()].sort((a, b) => a.id.localeCompare(b.id)), consumers: beforeConsumers };
+};
+
 // First visible solid paint → { var } | { hex } | null, with the paint's
 // effective opacity as `alpha` when < 1 (dump v1.1 — 5%-black fills are a
 // real kit idiom; without alpha they mint opaque black).
@@ -1628,7 +1703,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.44',
+    dumpVersion: '1.45',
   },
 };
 dumps._degradations = degradations;
@@ -1747,6 +1822,15 @@ for (const page of figma.root.children) {
       key: node.key,
       variants,
     };
+    if (dumps[node.name].rootSlot && dumps[node.name].rootSlot.textTemplate === 1) {
+      try {
+        const graph = await readTemplateVariableGraph(node);
+        if (graph) dumps[node.name].templateVariableGraph = graph;
+      } catch (e) {
+        degrade('template-variable-graph-unavailable', node.name,
+          'complete raw graph not captured (' + (e && e.message ? e.message : String(e)) + ')');
+      }
+    }
     if (Object.keys(defs.propertyDefinitions).length > 0) dumps[node.name].propertyDefinitions = defs.propertyDefinitions;
     if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
     if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;

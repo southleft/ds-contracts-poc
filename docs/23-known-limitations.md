@@ -8284,8 +8284,9 @@ readback verifies all 302 native nodes; repeat refuses before allocation. The
 unobstructed canvas shows the empty editable mains. Its source is the unchanged
 DaisyUI observation with the template marker explicitly added for this engineering
 probe. This is not application source admission or a clean consumer/fidelity
-result. Caller comparison, canonical return, updates and recovery are still
-unqualified. The fresh application font observation independently verifies 200
+result. Updates, recovery and application admission remain unqualified. The
+subsequent caller and return candidates are described below. The fresh
+application font observation independently verifies 200
 property planes across two cases and all 418 sealed files; it does not infer the
 marker or certify native font metrics.
 
@@ -8324,12 +8325,37 @@ collections as one token identity or replace the shared renderer. Reversal: remo
 the optional `templateGraph` context, engine graph compilation entry point and
 matching observation branch; existing single-collection paths remain unchanged.
 
-The seven-level native research graph also exposes a capture gap: its sixteen
-consuming bindings retain their full selected chains, but the global variable
-collector cannot resolve two carrier modes. Raising a depth limit alone would
-not authenticate cross-collection selection. Multi-collection canonical return and application admission remain unimplemented.
-A subsequent graph caller candidate is described below. New source
-property observations seal painted-font evidence on every plane and require the
+The seven-level native research graph exposed a capture gap: selected chains
+were retained, but the global variable collector could not resolve two carrier
+modes. Capture 1.45 adds a separate raw graph for explicit text templates across
+multiple collections: complete member inventories, every raw mode value and
+alias edge, and each main/SLOT/TEXT mode vector. It rereads those facts and names
+a degradation instead of publishing a partial graph when they change. The
+legacy global collector and its unresolved-mode notes remain intact.
+
+The graph inverse reconstructs deterministic routing from original source
+identities and public binding tuples. It checks every selector address, including
+unselected edges, original alias closure and all consumer vectors, then removes
+only verified routing variables from the returned token projection. Source value
+edits remain design data. In the live 100-main capture, all eight collections,
+207 variables and 300 consumer vectors match separate readback. The returned
+contract preserves all 400 typography references and the five compared typography
+fields per variant without minting replacement typography tokens. It has not
+yet completed an application return or clean consumer journey.
+
+**AGENT decision, 2026-09-21.** Require complete raw cross-collection evidence for
+this inverse; a selected alias chain or a raised depth limit cannot prove all
+routing edges. Structural inversion does not authorize updates or authenticate
+a rewritten graph against an earlier operation; those require the separately
+persisted host baseline. Preserve optional enum typography bindings through
+`tokensByProp`, including omission and equal-valued references. The first live
+inverse reminted font size and line height because it discarded a verified
+per-value reference function; the generic typography reader now retains it.
+Reversal: remove `templateVariableGraph` capture and its inverse dispatch, and
+restore the string-only stamped typography reader. Keep the earlier failed
+return and image evidence.
+
+New source property observations seal painted-font evidence on every plane and require the
 original font witness to return after each probe. Matrix and single-property
 assembly validate each witness against its raw tree and observation digest,
 then map the actual family on a private compilation clone. Mixed evidence,

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import vm from 'node:vm';
+import { readFileSync } from 'node:fs';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -11,6 +12,10 @@ import { emitNativeContractComparisonReadbackScript, verifyNativeContractCompari
 import { prepareNativeTokenContext } from './native-token-context.js';
 import { planNativeRootTextTemplateGraph, verifyNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection,
   verifyNativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput, type NativeRootTextTemplateGraph } from './native-root-text-template-graph.js';
+import { projectRootTextTemplateAliases } from './figma-template-aliases.js';
+import { capturedTokensFromDump } from './captured-tokens.js';
+import { tokenCorpusFromJson } from './token-corpus.js';
+import { proposeBatchFromDump } from './propose-figma.js';
 import { nativeTextBindings } from './native-text-template-test-fixture.js';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
 import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
@@ -293,14 +298,15 @@ test('a competing selector created during asynchronous source lookup stops furth
 });
 
 
-async function componentFixture() {
-  const f = fixture(3, 3), h = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
+async function componentFixture(sizes = 3, colors = 3, configure?: (f: ReturnType<typeof fixture>) => void) {
+  const f = fixture(sizes, colors), h = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
   nativeTextBindings(h.figma);
   Object.getPrototypeOf(h.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, mode: string) {
     this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: mode };
   };
   Object.assign(f.contract.anatomy.root.tokens!, { 'background-color': '{ink.{ink}}', 'border-color': '{ink.{ink}}',
     'padding-inline': '{size.v0}', 'border-radius': '{size.v0}' });
+  configure?.(f);
   const engine = createFigmaEngine({ tokens: { primitives: f.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
   const operation = { id: '10000000-0000-4000-8000-000000000099', fileKey: h.figma.fileKey };
   const source = { revision: revisionOf('graph component source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('graph evidence') };
@@ -528,5 +534,148 @@ test('graph caller refuses route drift during font loading and a new competing p
     assert.equal(injected, true); assert.equal(result.status, 'refused', JSON.stringify(result));
     assert.equal(result.allocationAttempted, false); assert.deepEqual(result.nodes, []);
     assert.deepEqual(h.figma.root.findAll(() => true).map((n: any) => n.id), [...before, ...(competitor ? [competitor.id] : [])]);
+  }
+});
+
+
+const captureProgram = (name: string) => readFileSync(new URL('../extract/figma/dump.plugin.js', import.meta.url), 'utf8')
+  .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify([name])};`);
+
+test('canonical capture retains every raw graph variable, mode, alias edge and main/child selector vector', async () => {
+  const h = await componentFixture(), creation = await h.run(h.script());
+  assert.equal(creation.status, 'created-candidate');
+  const before = await h.run(emitNativeTemplateGraphReadbackScript(h.input, h.created.identity));
+  const dump = await h.run(captureProgram(h.contract.name)), graph = dump[h.contract.name].templateVariableGraph;
+  assert.equal(dump._provenance.dumpVersion, '1.45');
+  assert.ok(graph, JSON.stringify(dump._degradations));
+  assert.equal(graph.fileKey, h.figma.fileKey); assert.equal(graph.collections.length, h.collections.length);
+  assert.equal(graph.variables.length, h.variables.length); assert.equal(graph.consumers.length, 27);
+  for (const variable of h.variables) {
+    const raw = graph.variables.find((v: any) => v.id === variable.id);
+    assert.equal(raw.key, variable.key); assert.equal(raw.collectionId, variable.variableCollectionId);
+    assert.equal(canonicalJson(raw.valuesByMode), canonicalJson(variable.valuesByMode));
+  }
+  for (const collection of h.collections) {
+    const raw = graph.collections.find((v: any) => v.id === collection.id);
+    assert.deepEqual(raw.variableIds, [...collection.variableIds].sort());
+    assert.deepEqual(raw.modes, collection.modes); assert.equal(raw.defaultModeId, collection.defaultModeId);
+  }
+  for (const consumer of graph.consumers) {
+    const node = await h.figma.getNodeByIdAsync(consumer.nodeId);
+    assert.deepEqual(consumer.explicitVariableModes, node.explicitVariableModes);
+    assert.deepEqual(consumer.resolvedVariableModes, node.resolvedVariableModes);
+  }
+  assert.deepEqual(await h.run(emitNativeTemplateGraphReadbackScript(h.input, h.created.identity)), before);
+});
+
+test('raw template capture includes unbound collection members and names inventory drift without a partial graph', async () => {
+  for (const drift of [false, true]) {
+    const h = await componentFixture(); await h.run(h.script());
+    const collection = h.collections.find(c => c.id === h.created.identity.source.collection.id);
+    const unused = h.figma.variables.createVariable('unbound/source', collection, 'FLOAT');
+    unused.setValueForMode(collection.modes[0].modeId, 7);
+    if (drift) {
+      const get = h.figma.variables.getVariableByIdAsync.bind(h.figma.variables); let reads = 0;
+      h.figma.variables.getVariableByIdAsync = async (id: string) => {
+        if (id === unused.id && ++reads === 2) unused.setValueForMode(collection.modes[0].modeId, 8);
+        return get(id);
+      };
+    }
+    const dump = await h.run(captureProgram(h.contract.name)), graph = dump[h.contract.name].templateVariableGraph;
+    if (drift) {
+      assert.equal(graph, undefined);
+      assert.ok(dump._degradations.some((d: any) => d.code === 'template-variable-graph-unavailable' && d.message.includes('variable changed')));
+    } else {
+      assert.deepEqual(graph.variables.find((v: any) => v.id === unused.id).valuesByMode, unused.valuesByMode);
+      assert.ok(graph.collections.find((c: any) => c.id === collection.id).variableIds.includes(unused.id));
+    }
+  }
+});
+
+
+test('graph inverse restores original source references from the complete raw routing graph without changing the dump', async () => {
+  const h = await componentFixture(); await h.run(h.script());
+  const dump = await h.run(captureProgram(h.contract.name)), before = structuredClone(dump);
+  const projection = projectRootTextTemplateAliases(dump[h.contract.name])!;
+  assert.ok(projection); assert.equal(projection.syntheticNames.length, h.graph.routes.length);
+  assert.equal(projection.tokens.some(t => t.name.startsWith('dsc-native-template/')), false);
+  const layer = capturedTokensFromDump(dump)!; assert.deepEqual(layer.skipped, []);
+  const batch = proposeBatchFromDump(dump, { corpus: tokenCorpusFromJson({ primitives: layer.tree, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map<string, string>(), mintUnbound: true });
+  assert.deepEqual(batch.skipped, []); assert.equal(batch.proposals.length, 1);
+  const returned = ContractSchema.parse(batch.proposals[0].contract);
+  for (const field of ['color', 'font-size', 'line-height', 'font-weight'])
+    assert.equal(returned.anatomy.root.tokens![field], h.contract.anatomy.root.tokens![field]);
+  assert.equal(JSON.stringify(returned).includes('dsc-native-template'), false);
+  assert.deepEqual(dump, before);
+  const sourceInk = h.variables.find(v => v.name === 'ink/v1')!;
+  sourceInk.setValueForMode(Object.keys(sourceInk.valuesByMode)[0], { r: 1, g: 0, b: 0, a: 1 });
+  const edited = await h.run(captureProgram(h.contract.name));
+  const updated = projectRootTextTemplateAliases(edited[h.contract.name])!;
+  assert.equal(updated.tokens.find(t => t.name === 'ink/v1')!.value, '#ff0000');
+  assert.deepEqual(edited[h.contract.name].templateVariableGraph.variables.filter((v: any) => v.name.startsWith('dsc-native-template/')),
+    dump[h.contract.name].templateVariableGraph.variables.filter((v: any) => v.name.startsWith('dsc-native-template/')));
+});
+
+test('graph return keeps optional typography token identities including omission and equal-valued weight refs', async () => {
+  const h = await componentFixture(3, 3, f => {
+    delete f.contract.props[0].default;
+    f.contract.props[0].bindings!.figma!.unsetValue = '(unset)';
+    const root = f.contract.anatomy.root;
+    (f.tokens as any).weights = Object.fromEntries(['base', 'v0', 'v1', 'v2'].map(k => [k, { $type: 'fontWeight', $value: 400 }]));
+    Object.assign(root.tokens!, { 'font-size': '{size.v0}', 'line-height': '{line.v0}', 'font-weight': '{weights.base}' });
+    root.tokensByProp = [{ prop: 'size', map: Object.fromEntries(['v0','v1','v2'].map(k => [k, {
+      'font-size': `{size.${k}}`, 'line-height': `{line.${k}}`, 'font-weight': `{weights.${k}}`,
+    }])) }];
+  });
+  await h.run(h.script());
+  const dump = await h.run(captureProgram(h.contract.name)), layer = capturedTokensFromDump(dump)!;
+  const batch = proposeBatchFromDump(dump, { corpus: tokenCorpusFromJson({ primitives: layer.tree, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map<string, string>(), mintUnbound: true });
+  assert.deepEqual(batch.skipped, []); assert.equal(batch.proposals.length, 1);
+  const returned = ContractSchema.parse(batch.proposals[0].contract);
+  const evaluate = (root: typeof returned.anatomy.root, size?: string) => {
+    const entries = !root.tokensByProp ? [] : Array.isArray(root.tokensByProp) ? root.tokensByProp : [root.tokensByProp];
+    return { ...root.tokens, ...entries.find(e => e.prop === 'size')?.map[size!] };
+  };
+  for (const size of [undefined, 'v0','v1','v2']) for (const field of ['font-size','line-height','font-weight'])
+    assert.equal(evaluate(returned.anatomy.root, size)[field], evaluate(h.contract.anatomy.root, size)[field], `${size}/${field}`);
+  assert.equal(JSON.stringify(returned).includes('content-text-template'), false);
+});
+
+test('graph inverse refuses changed unselected edges, missing inventory, foreign modes and source alias cycles', async () => {
+  const h = await componentFixture(1, 1); await h.run(h.script());
+  const dump = await h.run(captureProgram(h.contract.name)), set = dump[h.contract.name];
+  const used = new Set<string>();
+  for (const root of set.variants) for (const [id, c] of Object.entries<any>(root.children[0].children[0].variableConsumers))
+    for (const hop of [{ id, ...c }, ...c.aliasChain]) used.add(hop.id + '/' + hop.modeId);
+  const routes = set.templateVariableGraph.variables.filter((v: any) => v.name.startsWith('dsc-native-template/'));
+  const unused = routes.flatMap((v: any) => Object.keys(v.valuesByMode).map(mode => ({ id: v.id, mode, type: v.resolvedType })))
+    .find((x: any) => !used.has(x.id + '/' + x.mode));
+  assert.ok(unused, 'the one-plane graph still records its unused carrier mode');
+  for (const mutate of [
+    (s: any) => { const v = s.templateVariableGraph.variables.find((v: any) => v.id === unused.id); v.valuesByMode[unused.mode] = { type: 'VARIABLE_ALIAS', id: v.id }; },
+    (s: any) => { s.templateVariableGraph.collections[0].variableIds.pop(); },
+    (s: any) => { s.templateVariableGraph.variables[0].valuesByMode.foreign = 1; },
+    (s: any) => { s.templateVariableGraph.collections[0] = null; },
+    (s: any) => { s.templateVariableGraph.variables[0].name = {}; },
+    (s: any) => { s.templateVariableGraph.consumers[0].specPath = [-1]; },
+    (s: any) => {
+      const graph = s.templateVariableGraph, source = graph.collections.find((c: any) => c.id === h.created.identity.source.collection.id);
+      assert.ok(source);
+      const variable = { ...graph.variables.find((v: any) => v.name === 'weight'), id: 'unselected-cycle', key: 'unselected-cycle-key', name: 'unused/cycle',
+        valuesByMode: { [source.modes[0].modeId]: { type: 'VARIABLE_ALIAS', id: 'unselected-cycle' } } };
+      graph.variables.push(variable); source.variableIds.push(variable.id);
+    },
+    (s: any) => { s.templateVariableGraph.consumers[0].resolvedVariableModes.foreign = 'wrong'; },
+    (s: any) => { s.templateVariableGraph.consumers[1].explicitVariableModes = s.templateVariableGraph.consumers[0].explicitVariableModes; },
+    (s: any) => { s.templateVariableGraph.variables.find((v: any) => v.name === 'weight').valuesByMode = { [h.created.identity.source.modes[0].modeId]: { type:'VARIABLE_ALIAS',id:h.created.identity.routes.find((v: any)=>v.name.endsWith('/font-weight')).id } }; },
+    (s: any) => { delete s.templateVariableGraph; },
+    (s: any) => { s.variants[0].children[0].children[0].variableConsumers = {}; },
+    (s: any) => { const c = s.variants[0].children[0].children[0].variableConsumers; c[Object.keys(c)[0]] = null; },
+    (s: any) => { const c: any = Object.values(s.variants[0].children[0].children[0].variableConsumers)[0]; c.aliasChain[0] = null; },
+  ]) {
+    const changed = structuredClone(set); mutate(changed);
+    assert.throws(() => projectRootTextTemplateAliases(changed), /FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED/);
   }
 });

@@ -68,35 +68,9 @@ export function planNativeRootTextTemplateGraph(input: NativeRootTextTemplateGra
     const types = channel === 'fill' ? ['color'] : channel === 'fontWeight' ? ['fontWeight', 'number'] : ['dimension', 'number'];
     if (!types.includes(sourceLeaves.get(v.tokenPath)?.type ?? '')) fail('SOURCE_BINDING_TYPE');
   }
-  const tuple = (m: NativeRootTextTemplatePlan['modes'][number]) => canonicalJson(channels.map(c => m.targets[c]));
-  const modes = [...template.modes].sort((a, b) => order(tuple(a), tuple(b)));
-  // Keep allocation, validation and capture work finite. This is an explicit
-  // protocol bound, not a claim about a Figma account's collection allowance.
-  if (modes.length > 1024) fail('SELECTION_LIMIT');
-  const levels = Math.max(1, Math.ceil(Math.log2(modes.length)));
-  const selectors = Array.from({ length: levels }, (_, bit) => ({
-    key: `bit-${bit}`, collectionName: `${sourceTokens.collectionName} / Text selector ${bit + 1}`, modes: ['0', '1'] as ['0', '1'],
-  }));
-  const routes = new Map<string, Route>();
-  const prefix = template.aliases.fill.slice(0, -'/fill'.length);
-  const make = (channel: RootTextTemplateChannel, level: number, start: number, carrier = false): Target | undefined => {
-    if (start >= modes.length) return undefined;
-    if (level < 0) return { sourcePath: sourceVariables.get(modes[start].targets[channel])!.tokenPath };
-    const low = make(channel, level - 1, start), high = make(channel, level - 1, start + 2 ** level);
-    if (!low) return high;
-    if (!carrier && (!high || same(low, high))) return low;
-    const body = { selector: selectors[level].key, resolvedType: channel === 'fill' ? 'COLOR' as const : 'FLOAT' as const,
-      targets: [low, high ?? low] as [Target, Target] };
-    const name = carrier ? template.aliases[channel] : `${prefix}/route/${revisionOf(body).slice(7)}`;
-    if (routes.has(name) && !same(routes.get(name), { name, ...body })) fail('ROUTE_IDENTITY_COLLISION');
-    routes.set(name, { name, ...body });
-    return { route: name };
-  };
-  for (const channel of channels) make(channel, levels - 1, 0, true);
-  if (routes.size > 8192) fail('ROUTE_LIMIT');
-  const selections = modes.map((mode, index) => ({ modeKey: mode.key,
-    modes: Object.fromEntries(selectors.map((selector, bit) => [selector.key, String(Math.floor(index / 2 ** bit) % 2) as '0' | '1'])),
-  }));
+  const routing = deriveNativeRootTextRouting(template, Object.fromEntries(sourceTokens.variables.map(v => [v.name, v.tokenPath])), sourceTokens.collectionName);
+  const { modes, selectors, selections } = routing, levels = selectors.length;
+  const routes = new Map(routing.routes.map(route => [route.name, route]));
   let maximumSelectedChainEntries = 0;
   for (let i = 0; i < modes.length; i++) for (const channel of channels) {
     let target: Target = { route: template.aliases[channel] }, depth = 0;
@@ -115,6 +89,44 @@ export function planNativeRootTextTemplateGraph(input: NativeRootTextTemplateGra
     selectors, routes: [...routes.values()].sort((a, b) => order(a.name, b.name)), selections, maximumSelectedChainEntries,
     ...(input.renderScope === 'component' ? { componentSourceScopes: componentScopes(input.component, sourceTokens) } : {}) };
   return { ...body, revision: revisionOf(body) };
+}
+
+/** Pure routing shape shared by forward projection and independent inverse.
+ * Original source values are deliberately absent: editing a source leaf does
+ * not change routing identity. All mode branches, including unused addresses,
+ * remain explicit in the returned graph. */
+export function deriveNativeRootTextRouting(template: Pick<NativeRootTextTemplatePlan, 'aliases' | 'modes'>,
+  sourcePathByName: Record<string, string>, collectionName: string) {
+  const tuple = (m: NativeRootTextTemplatePlan['modes'][number]) => canonicalJson(channels.map(c => m.targets[c]));
+  const modes = [...template.modes].sort((a, b) => order(tuple(a), tuple(b)));
+  // Keep allocation, validation and capture work finite. This is an explicit
+  // protocol bound, not a claim about a Figma account's collection allowance.
+  if (modes.length > 1024) fail('SELECTION_LIMIT');
+  const levels = Math.max(1, Math.ceil(Math.log2(modes.length)));
+  const selectors = Array.from({ length: levels }, (_, bit) => ({
+    key: `bit-${bit}`, collectionName: `${collectionName} / Text selector ${bit + 1}`, modes: ['0', '1'] as ['0', '1'],
+  }));
+  const routes = new Map<string, Route>();
+  const prefix = template.aliases.fill.slice(0, -'/fill'.length);
+  const make = (channel: RootTextTemplateChannel, level: number, start: number, carrier = false): Target | undefined => {
+    if (start >= modes.length) return undefined;
+    if (level < 0) return { sourcePath: sourcePathByName[modes[start].targets[channel]] };
+    const low = make(channel, level - 1, start), high = make(channel, level - 1, start + 2 ** level);
+    if (!low) return high;
+    if (!carrier && (!high || same(low, high))) return low;
+    const body = { selector: selectors[level].key, resolvedType: channel === 'fill' ? 'COLOR' as const : 'FLOAT' as const,
+      targets: [low, high ?? low] as [Target, Target] };
+    const name = carrier ? template.aliases[channel] : `${prefix}/route/${revisionOf(body).slice(7)}`;
+    if (routes.has(name) && !same(routes.get(name), { name, ...body })) fail('ROUTE_IDENTITY_COLLISION');
+    routes.set(name, { name, ...body });
+    return { route: name };
+  };
+  for (const channel of channels) make(channel, levels - 1, 0, true);
+  if (routes.size > 8192) fail('ROUTE_LIMIT');
+  const selections = modes.map((mode, index) => ({ modeKey: mode.key,
+    modes: Object.fromEntries(selectors.map((selector, bit) => [selector.key, String(Math.floor(index / 2 ** bit) % 2) as '0' | '1'])),
+  }));
+  return { modes, selectors, routes: [...routes.values()].sort((a, b) => order(a.name, b.name)), selections };
 }
 
 /** Picker categories are not binding authority. Unknown binding fields refuse

@@ -1652,13 +1652,14 @@ function unifyRefs(
 
 /** Unify dump-stamped slash names (fontSizeVar / fontWeightVar / lineHeightVar)
  *  the same way bound layout paints unify. One name → that ref; many names
- *  that spell one enum axis → a substituted ref. Anything else stays
- *  undefined so the numeric mint path can still run. */
+ *  that spell one enum axis → a substituted ref; other complete enum
+ *  functions retain their original refs through tokensByProp, including
+ *  the omitted plane. Anything else leaves the numeric mint path available. */
 function unifyStampedTextVar(
   occs: Array<{ variant: string; node: DumpNode }>,
   pick: (text: NonNullable<DumpNode['text']>) => string | undefined,
   axes: Axis[],
-): string | undefined {
+): string | PerValueRef | undefined {
   const u = unifyRefs(
     occs.map((o) => {
       const raw = o.node.text ? pick(o.node.text) : undefined;
@@ -1667,7 +1668,7 @@ function unifyStampedTextVar(
     axes,
     `text-style-variable@${occs[0]?.node.name ?? 'text'}`,
   );
-  return u.kind === 'ref' ? u.ref : undefined;
+  return u.kind === 'ref' ? u.ref : u.kind === 'per-value' ? u.perValue : undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -5342,6 +5343,7 @@ function weightTokenRef(ctx: Ctx, fontStyle: string): string | undefined {
 function mintTextChannels(
   m: Merged,
   tokens: Record<string, string>,
+  byProp: ByPropCollector,
   ctx: Ctx,
   where: string,
   opts: { weight: boolean },
@@ -5372,7 +5374,7 @@ function mintTextChannels(
   // path while Label recovered its IDENTITY, for no reason a reader could see.
   const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
   if (stamped !== undefined) {
-    tokens['font-weight'] = stamped;
+    carryRef(tokens, byProp, 'font-weight', stamped, ctx, where);
   }
   // >1 distinct stamp is a size-varying weight, not a contradiction — the
   // contract binds a substituted ref and the canvas resolves it per variant.
@@ -5416,7 +5418,7 @@ function mintTextChannels(
   // between; no stamp falls through to the mint below, unchanged.
   const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes);
   if (stampedLh !== undefined) {
-    tokens['line-height'] = stampedLh;
+    carryRef(tokens, byProp, 'line-height', stampedLh, ctx, where);
     return;
   }
   // @door propose.line-height-multi-stamp-falls-through
@@ -5963,9 +5965,9 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // minted a dump-slug weight the corpus already spells (design-roundtrip
   // Switch MISMATCH 1).
   if (stampedSize !== undefined && (stampedWeight !== undefined || sizeVarsVary)) {
-    tokens['font-size'] = stampedSize;
-    if (stampedWeight !== undefined) tokens['font-weight'] = stampedWeight;
-    mintTextChannels(m, tokens, ctx, where, { weight: tokens['font-weight'] === undefined });
+    carryRef(tokens, byProp, 'font-size', stampedSize, ctx, where);
+    if (stampedWeight !== undefined) carryRef(tokens, byProp, 'font-weight', stampedWeight, ctx, where);
+    mintTextChannels(m, tokens, byProp, ctx, where, { weight: tokens['font-weight'] === undefined });
     return tokens;
   }
   const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
@@ -6040,6 +6042,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     mintTextChannels(
       m,
       tokens,
+      byProp,
       ctx,
       where,
       { weight: true },
@@ -6083,7 +6086,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
       // @door propose.weight-not-corpus-nameable
       tokens['font-weight'] = ref(stampedWeight[0]);
-      mintTextChannels(m, tokens, ctx, where, { weight: false });
+      mintTextChannels(m, tokens, byProp, ctx, where, { weight: false });
       return tokens;
     }
     if (stampedWeight.length > 1) {
@@ -6100,7 +6103,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
         );
       }
     }
-    mintTextChannels(m, tokens, ctx, where, {
+    mintTextChannels(m, tokens, byProp, ctx, where, {
       weight: observed !== 'Medium' && weightRef === undefined,
     });
     return tokens;
@@ -6190,6 +6193,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   mintTextChannels(
     m,
     tokens,
+    byProp,
     ctx,
     where,
     { weight: !style },

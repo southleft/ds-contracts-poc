@@ -3,7 +3,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.44';
+export const PLUGIN_DUMP_VERSION = '1.45';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -686,6 +686,19 @@ export type DumpPropertyDefinition =
       slotSettings?: Record<string, unknown>;
     };
 
+/** Plugin 1.45 raw multi-collection template evidence. Nothing is resolved
+ * through an invented cross-collection default or discarded as unused. */
+export interface DumpTemplateVariableGraph {
+  version: 1;
+  fileKey: string;
+  collections: Array<{ id: string; key: string; name: string; remote: boolean; defaultModeId: string;
+    modes: Array<{ modeId: string; name: string }>; variableIds: string[] }>;
+  variables: Array<{ id: string; key: string; name: string; collectionId: string; resolvedType: string;
+    remote: boolean; scopes: string[]; valuesByMode: Record<string, unknown> }>;
+  consumers: Array<{ nodeId: string; variantName: string; specPath: number[];
+    explicitVariableModes: Record<string, string>; resolvedVariableModes: Record<string, string> }>;
+}
+
 export interface DumpSet {
   setName: string;
   type: 'COMPONENT_SET' | 'COMPONENT';
@@ -746,6 +759,8 @@ export interface DumpSet {
   codeValueAxes?: unknown;
   /** Compiler-owned root content container; preserve even malformed metadata. */
   rootSlot?: unknown;
+  /** Complete raw graph captured independently; inverse validation is required. */
+  templateVariableGraph?: DumpTemplateVariableGraph;
   statePreviewAxis?: {
     axis: string;
     default: string;

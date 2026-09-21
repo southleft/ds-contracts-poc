@@ -1,48 +1,9 @@
 import type { DumpSet, DumpVariableConsumer } from '../extract/figma/types.js';
 import { canonicalJson } from './contract-provenance.js';
 
-export interface TemplateSourceToken {
-  id: string;
-  name: string;
-  path: string;
-  value: string;
-  type: 'dimension' | 'number' | 'color';
-  /** Keep the original source alias; value is its independently captured literal. */
-  reference?: string;
-}
-
-const fail = (why: string): never => { throw Error(`FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED: ${why}`); };
-const object = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
-const exact = (a: unknown, b: number) => typeof a === 'number' && Number.isFinite(a) && (a === b || a === Math.fround(b));
-const equivalent = (a: unknown, b: unknown): boolean => {
-  if (typeof b === 'number') return exact(a, b) || typeof a === 'number' && exact(b, a);
-  return object(a) && object(b) && ['r', 'g', 'b', 'a'].every(k =>
-    typeof (b[k] ?? (k === 'a' ? 1 : undefined)) === 'number' &&
-    equivalent(a[k] ?? (k === 'a' ? 1 : undefined), b[k] ?? (k === 'a' ? 1 : undefined)));
-};
-const edge = (v: unknown): string | undefined => object(v) && Object.keys(v).sort().join('|') === 'id|type' &&
-  v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string' && v.id ? v.id : undefined;
-const pathOf = (name: string) => {
-  if (!/^[a-z0-9-]+(?:[/.][a-z0-9-]+)*$/i.test(name) || name.startsWith('dsc-native-template/'))
-    fail(`unregistrable source token ${name}`);
-  if (name.split(/[/.]/).some(segment => segment === 'prototype' || Object.hasOwn(Object.prototype, segment)))
-    fail(`unsafe source token path ${name}`);
-  return name.replaceAll('/', '.');
-};
-const spell = (c: DumpVariableConsumer, type: TemplateSourceToken['type']) => {
-  if (type !== 'color') {
-    if (c.resolvedType !== 'FLOAT' || typeof c.value !== 'number' || !Number.isFinite(c.value)) fail('invalid numeric alias value');
-    return `${c.value}${type === 'dimension' ? 'px' : ''}`;
-  }
-  if (c.resolvedType !== 'COLOR' || !object(c.value) || Object.keys(c.value).some(k => !['r','g','b','a'].includes(k))) fail('invalid color alias value');
-  const color = c.value as { r: number; g: number; b: number; a?: number };
-  const channels = [color.r, color.g, color.b, color.a ?? 1].map(v => {
-    if (!Number.isFinite(v) || v < 0 || v > 1 || !exact(v, Math.round(v * 255) / 255))
-      fail('source color has no exact captured hex spelling');
-    return Math.round(v * 255).toString(16).padStart(2, '0');
-  });
-  return '#' + channels.slice(0, channels[3] === 'ff' ? 3 : 4).join('');
-};
+export type { TemplateSourceToken } from './figma-template-values.js';
+import { fail, object, equivalent, edge, pathOf, spell, type TemplateSourceToken } from './figma-template-values.js';
+import { projectRootTextTemplateGraphAliases } from './figma-template-graph-aliases.js';
 
 /** Invert only the compiler's four reserved carrier aliases on an explicit
  * empty root template. Every selected edge is independently corroborated.
@@ -59,6 +20,7 @@ export function projectRootTextTemplateAliases(set: DumpSet): {
     return typeof name === 'string' && name.startsWith('dsc-native-template/');
   }));
   if (!reserved) return undefined;
+  if (set.templateVariableGraph) return projectRootTextTemplateGraphAliases(set);
   const copy = structuredClone(set), byName = new Map<string, string>(), byId = new Map<string, string>();
   const sources = new Map<string, { token: TemplateSourceToken; consumer: DumpVariableConsumer; target?: string }>();
   const carriers = new Map<string, string>(), syntheticNames = new Set<string>(), modeNames = new Map<string, string>();
