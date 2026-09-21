@@ -41,6 +41,7 @@ import {
   type ExactProjectionResult,
   type ExactVariantRow,
 } from './exact-projection.js';
+import { jointTokenTableErrors } from '../packages/core/src/joint-tokens.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
@@ -1460,12 +1461,44 @@ export interface PerValueRef {
   byValue: Record<string, string>;
 }
 
-type UnifiedRef = string | PerValueRef;
+interface PerCombinationRef {
+  props: [string,string];
+  rows: Array<{values:[string|null,string|null];ref:string}>;
+}
+type UnifiedRef = string | PerValueRef | PerCombinationRef;
 
 /** Identity key for unified refs — lets the padding/radius pairing rules
  *  compare per-value functions the way they compare plain ref strings. */
 const refKey = (u: UnifiedRef | undefined): string | undefined =>
-  u === undefined ? undefined : typeof u === 'string' ? u : `f(${u.propName}):${JSON.stringify(u.byValue)}`;
+  u === undefined ? undefined : typeof u === 'string' ? u : 'props' in u ? `joint:${JSON.stringify(u)}` : `f(${u.propName}):${JSON.stringify(u.byValue)}`;
+
+/** Bindings themselves, not their colors or token-name segments, must be a
+ * complete function of two corroborated optional axes. Every other axis is
+ * observed across its whole domain before it can be factored out. */
+function unifyJointPaintRefs(obs:Array<{variant:string;path?:string}>,axes:Axis[]):PerCombinationRef|undefined{
+  if(!obs.length||obs.some(o=>!o.path||!/^[a-z0-9.-]+$/i.test(o.path)))return;
+  const seen=new Set<string>();
+  for(const o of obs){
+    const values=axisValuesOf(o.variant),tuple=axes.map(a=>values[a.property]);
+    if(tuple.some((v,i)=>!axes[i].values.includes(v)))return;
+    const key=JSON.stringify(tuple);if(seen.has(key))return;seen.add(key);
+  }
+  if(seen.size!==axes.reduce((n,a)=>n*a.values.length,1))return;
+  const eligible=axes.filter(a=>a.omitted&&a.omitted.valueType!=='boolean'&&!isBooleanAxis(a));
+  for(let i=0;i<eligible.length;i++)for(let j=i+1;j<eligible.length;j++){
+    const pair=[eligible[i],eligible[j]] as const,refs=new Map<string,string>();let fits=true;
+    const value=(axis:Axis,label:string)=>label===axis.omitted!.unsetValue?null:axisValue(axis,label);
+    for(const o of obs){
+      const values=axisValuesOf(o.variant),key=JSON.stringify(pair.map(a=>value(a,values[a.property])));
+      if(refs.has(key)&&refs.get(key)!==o.path){fits=false;break;}refs.set(key,o.path!);
+    }
+    if(!fits||refs.size!==pair[0].values.length*pair[1].values.length)continue;
+    return {props:[pair[0].propName,pair[1].propName],rows:pair[0].values.flatMap(a=>pair[1].values.map(b=>{
+      const values:[string|null,string|null]=[value(pair[0],a),value(pair[1],b)];
+      return {values,ref:`{${refs.get(JSON.stringify(values))!}}`};
+    }))};
+  }
+}
 
 type Unified =
   | { kind: 'none' }
@@ -2578,6 +2611,7 @@ interface ByPropCollector {
   prop?: string;
   map: Record<string, Record<string, string>>;
   additional?: ByPropCollector[];
+  combinations?: Array<{props:[string,string];rows:Array<{values:[string|null,string|null];tokens:Record<string,string>}>}>;
 }
 
 /** Carry one unified ref into a part's tokens record: plain refs land as
@@ -2595,6 +2629,18 @@ function carryRef(
   if (u === undefined) return;
   if (typeof u === 'string') {
     tokens[cssProp] = u;
+    return;
+  }
+  if('props' in u){
+    const tables=byProp.combinations??=[];
+    let table=tables.find(table=>JSON.stringify(table.props)===JSON.stringify(u.props));
+    if(!table){table={props:u.props,rows:u.rows.map(row=>({values:row.values,tokens:{}}))};tables.push(table);}
+    for(const row of u.rows){
+      const target=table.rows.find(candidate=>JSON.stringify(candidate.values)===JSON.stringify(row.values));
+      if(!target||Object.hasOwn(target.tokens,cssProp))throw Error('FIGMA_JOINT_TOKEN_TABLE_CONFLICT');
+      target.tokens[cssProp]=row.ref;
+    }
+    ctx.notes.push(`${where} ${cssProp}: complete bound token identities retained over optional ${u.props.join(' × ')} including omission`);
     return;
   }
   if (byProp.prop !== undefined && byProp.prop !== u.propName) {
@@ -2627,6 +2673,7 @@ function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector):
     .filter((entry) => entry.prop !== undefined && Object.keys(entry.map).length > 0)
     .map((entry) => ({ prop: entry.prop!, map: entry.map }));
   if (entries.length > 0) holder.tokensByProp = entries.length === 1 ? entries[0] : entries;
+  if(byProp.combinations?.length)holder.tokensByCombination=byProp.combinations;
 }
 
 /** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
@@ -2656,6 +2703,7 @@ function unifyPaint(
   paintName: string,
   mint?: {
     cssProperty: string;
+    jointRoot?: boolean;
     target: Record<string, string>;
     /** The literal an ABSENT paint means on this channel, when absence is
      *  itself a drawn fact rather than a missing observation. A node with no
@@ -2792,6 +2840,11 @@ function unifyPaint(
   }
   if (u.kind === 'drift') {
     // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
+    if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&
+       paints.every(p=>p.paint?.var!==undefined&&(p.paint.alpha??1)===1)){
+      const joint=unifyJointPaintRefs(paints.map(p=>({variant:p.variant,path:dotPath(p.paint!.var!)})),ctx.axes);
+      if(joint)return joint;
+    }
     // @door propose.bound-paint-drift-to-mint
     // refs refuse unification (mixed segment depth, or a function of more
     // than one axis) used to drop entirely — honest in prose, catastrophic
@@ -3063,6 +3116,7 @@ function invertNodeTokens(
     'background-color',
     unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
       cssProperty: 'background-color',
+      jointRoot: isRoot,
       target: tokens,
       // PHASE 2 EXAM (fill-absent-on-axis-value / fill-unset-by-state): an
       // ABSENT fill is a DRAWN fact, exactly as an absent stroke is. Both
@@ -3088,6 +3142,7 @@ function invertNodeTokens(
     strokeColorProp,
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
       cssProperty: strokeColorProp,
+      jointRoot: isRoot,
       target: tokens,
       // A strokeless variant is a ZERO-WIDTH stroke, not an uncaptured one —
       // the width channel below already mints 0 for exactly these nodes.
@@ -5824,7 +5879,7 @@ function carryClip(
   );
 }
 
-function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector): Record<string, string> {
+function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
     m,
@@ -5832,7 +5887,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     ctx,
     where,
     'text fill',
-    { cssProperty: 'color', target: tokens },
+    { cssProperty: 'color', target: tokens, jointRoot },
   );
   carryRef(tokens, byProp, 'color', color, ctx, where);
 
@@ -12347,7 +12402,7 @@ function proposeFromDumpFenced(
   } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
-    const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
+    const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp, true);
     Object.assign(rootTokens, textTokens);
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
@@ -13293,6 +13348,8 @@ function proposeFromDumpFenced(
     );
   }
   const parsedContract = ContractSchema.parse(contract);
+  const jointErrors = jointTokenTableErrors(parsedContract);
+  if (jointErrors.length) throw new Error(`FIGMA_JOINT_TOKEN_TABLE_UNSUPPORTED: ${jointErrors.join('; ')}`);
   const parsedStubs = childStubs.map((stub) => ContractSchema.parse(stub));
   // §D.41 / PR 131 M1 — a rest-plane hole and a states plane do not share a
   // canvas: `absentVariants` is not composed with state previews (§D.40), so

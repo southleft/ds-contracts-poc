@@ -23,14 +23,14 @@ import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import {evidenceSha} from './react-validation-evidence.js';
 
-for(const joint of [true,false])test(`optional root axes ${joint?'retain joint-binding refusals instead of creating an unpainted draft':'still compile independently factored paint'}`,async()=>{
+for(const joint of ['paint','opacity',false] as const)test(`optional root axes ${joint==='paint'?'carry complete joint paint tables':joint==='opacity'?'retain unsupported joint-binding refusals':'still compile independently factored paint'}`,async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
  const dir=mkdtempSync(path.join(process.cwd(),'private/root-overflow-fixture-')),browser=await chromium.launch();
  try{
   const source=`import React from 'react';
 export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'solid'|'outline';children?:React.ReactNode}){
  const colors={warm:['rgb(80, 20, 10)','rgb(160, 40, 20)'],cool:['rgb(10, 20, 80)','rgb(20, 40, 160)'],absent:['rgb(30, 30, 30)','rgb(90, 90, 90)']};
- return <section style={{display:'inline-flex',height:20,padding:4,backgroundColor:colors[tone??'absent'][${joint?"finish==='outline'?1:0":'0'}],opacity:finish==='solid'?0.8:1}}>{children}</section>;
+ return <section style={{display:'inline-flex',height:20,padding:4,backgroundColor:colors[tone??'absent'][${joint==='paint'?"finish==='outline'?1:0":'0'}],opacity:${joint==='opacity'?"(tone==='warm'?0.8:0.6)*(finish==='solid'?0.5:1)":"finish==='solid'?0.8:1"}}}>{children}</section>;
 }`;
   writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
   writeFileSync(path.join(dir,'surface.tsx'),source);
@@ -49,17 +49,18 @@ export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'sol
   const before=JSON.stringify({program,ownership,tree,effects,snapshots});
   const result=assembleReactRootMatrix(program,ownership,tree,effects,snapshots),draft=result.draft!;
   assert.deepEqual(result.problems,[]);
-  assert.equal(draft.status,joint?'style-prepared':'native-compiled',JSON.stringify(draft.problems));
-  if(joint){
-   assert.deepEqual(draft.problems,['react-root-matrix-unprojected-bindings:root.background-color']);
+  assert.equal(draft.status,joint==='opacity'?'style-prepared':'native-compiled',JSON.stringify(draft.problems));
+  if(joint==='opacity'){
+   assert.deepEqual(draft.problems,['react-root-matrix-unprojected-bindings:root.opacity']);
    assert.equal(draft.native,undefined);
-   const residue=draft.residuals!.find(r=>r.channel==='background-color')!;
+   const residue=draft.residuals!.find(r=>r.channel==='opacity')!;
    assert.equal(residue.reason,'pair ref over TWO unset axes — no carried spelling; named residue');
    assert.match(residue.sample,/\{tone\}/);assert.match(residue.sample,/\{finish\}/);
-   assert.ok([...flattenTokens(draft.tokens!).keys()].some(k=>k.includes('background-color')),'captured colors remain available for investigation');
+   assert.ok([...flattenTokens(draft.tokens!).keys()].some(k=>k.includes('opacity')),'captured values remain available for investigation');
   }else{
    assert.deepEqual(draft.problems,[]);assert.equal(draft.native!.variants.length,9);
    assert.ok(draft.native!.variants.every(v=>v.spec.fill),'independent paint is retained in every omitted/set combination');
+   if(joint==='paint')assert.equal(draft.contract!.anatomy.root.tokensByCombination![0].rows.length,9);
   }
   assert.equal(JSON.stringify({program,ownership,tree,effects,snapshots}),before);
   assert.equal(readFileSync(path.join(dir,'surface.tsx'),'utf8'),source);

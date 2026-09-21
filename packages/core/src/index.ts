@@ -11,6 +11,7 @@
  */
 
 // The emitter contract + the registry.
+export {jointTokenCss,jointTokenRows,jointTokenTableErrors,JOINT_PAINT_CHANNELS} from './joint-tokens.js';
 export {
   emitterByName,
   emitters,

@@ -670,6 +670,18 @@ export const TokensByPropFieldSchema = z.union([
   z.array(TokensByPropSchema).min(1),
 ]);
 
+/** A complete token table over two optional enum axes. A null tuple member
+ * means the prop is omitted; it is never an enum value or a runtime default.
+ * Plain refs keep the table independent of token-path spelling. The contract
+ * referee admits disjoint root paint tables only, with every tuple present. */
+export const TokensByCombinationSchema = z.strictObject({
+  props: z.tuple([z.string(), z.string()]),
+  rows: z.array(z.strictObject({
+    values: z.tuple([z.string().nullable(), z.string().nullable()]),
+    tokens: z.record(z.string(), TokenRefSchema),
+  })).min(1),
+});
+
 /** v17 (the hover-plane round) — an interaction state whose binding is ALSO a
  *  function of an enum axis: `statesByProp`.
  *
@@ -2088,6 +2100,7 @@ export interface Part {
    *  v14: a part may carry MULTIPLE entries (one per driving axis) — ordered,
    *  later entries win per channel; conflicting channel+prop pairs refuse. */
   tokensByProp?: z.infer<typeof TokensByPropFieldSchema>;
+  tokensByCombination?: Array<z.infer<typeof TokensByCombinationSchema>>;
   /** v14: literal styling values (channel → bounded literal) resolved
    *  deterministically from component-private source literals — carried with
    *  provenance at promotion, never minted into tokens. */
@@ -2578,6 +2591,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v10. */
     /** v14: single entry OR ordered array of entries (see TokensByPropFieldSchema). */
     tokensByProp: TokensByPropFieldSchema.optional(),
+    tokensByCombination: z.array(TokensByCombinationSchema).min(1).optional(),
     /** v14: bounded literal styling values with promotion-time provenance. */
     literals: LiteralsRecordSchema.optional(),
     /** v14: ordered per-enum-value literal overrides. */
@@ -3048,7 +3062,7 @@ export function resolveLayout(
 /** The token record a part carries under one concrete variant combo:
  *  tokensByProp override (if the combo's value has one) merged over the base
  *  `tokens` (v10 — the resolveLayout shape). With an empty subst (no enum
- *  context) the base tokens win. The ONE shared resolver for every surface
+ *  context) the base tokens win, plus complete tables' omitted rows. The ONE shared resolver for every surface
  *  that compiles per variant (figma script, inline emitter, canvas preview);
  *  the static CSS emitters render the map as enum-class/descendant rules
  *  instead. */
@@ -3064,6 +3078,11 @@ export function resolveTokens(
   for (const entry of tokensByPropEntries(part)) {
     const override = entry.map[subst[entry.prop] ?? ""];
     if (override) out = { ...out, ...override };
+  }
+  for (const table of part.tokensByCombination ?? []) {
+    const row=table.rows.find(row=>table.props.every((prop,i)=>
+      row.values[i] === (Object.hasOwn(subst,prop) ? subst[prop] : null)));
+    if(row)out={...out,...row.tokens};
   }
   return out;
 }

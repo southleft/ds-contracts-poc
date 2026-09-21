@@ -79,6 +79,7 @@ export function scopeContractResources(contracts: Contract[], resources: Contrac
     for (const { part } of walkAnatomy(contract)) {
       refs(part.tokens); refs(part.component?.overrides);
       for (const entry of tokensByPropEntries(part)) Object.values(entry.map).forEach(refs);
+      for(const table of part.tokensByCombination??[])for(const row of table.rows)refs(row.tokens);
       Object.values(part.states ?? {}).forEach(refs);
       for (const entry of part.statesByProp ?? []) Object.values(entry.map).forEach(refs);
       layout(part.layout);

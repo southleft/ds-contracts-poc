@@ -1,5 +1,6 @@
 import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
+import {jointTokenCss} from './joint-tokens.js';
 /**
  * Contract → scoped CSS text — the stylesheet every code target shares
  * (React CSS Modules, static HTML, the web-components constructable sheet).
@@ -753,11 +754,19 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     lines.push('', `.root${disabledSel} {`, '  cursor: not-allowed;', '}');
   }
 
+  // CSS Modules must export every class mentioned by the table, including
+  // otherwise style-less enum values and values used only in omission tests.
+  for(const table of root.tokensByCombination??[])for(const prop of table.props)
+    for(const value of enums.get(prop)??[])if(!enumRules.has(`${prop}-${value}`))enumRules.set(`${prop}-${value}`,new Map());
   for (const [cls, decls] of enumRules) {
     lines.push('', `.${cls} {`);
     for (const [prop, value] of decls) lines.push(`  ${prop}: ${value};`);
     lines.push('}');
   }
+  lines.push(...jointTokenCss(contract,(prop,value)=>`.${cssIdentifier(`${prop}-${value}`)}`,
+    conditions=>'.root'+conditions.join(''),ref=>{
+      const path=stripBraces(ref);checkToken(path,'anatomy.root.tokensByCombination');return cssVar(path);
+    }));
 
   // v7 layoutByProp on the root: the enum class sits on the root element
   // itself, so the override rule targets it directly (emitted after .root

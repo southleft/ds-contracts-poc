@@ -7812,3 +7812,49 @@ To reverse, remove the source-position tiebreaker and restore the named tie
 expectations. Keep the independent cross-encapsulation refusal and all source,
 failed-probe, interrupted-run and native evidence. Do not replace authored
 constraints with measured sample dimensions or weaken visual thresholds.
+
+## D.97 Complete joint paint tables preserve both omitted planes
+
+**AGENT decision — 2026-09-20.** A complete `tokensByCombination` table now
+represents resting root paint that depends jointly on two optional defaultless
+enums. Each row contains two canonical values or `null` for omission, and plain
+token references. Both properties retain their existing public API and explicit
+native omitted planes. The shared referee requires every Cartesian tuple,
+identical channel sets, and no competing base, per-property, state or conditional
+binding. It admits background, text and border color only on one ordinary root.
+It refuses interaction states, nested anatomy, component/shape/icon/meter/repeat
+roots, outside-layout strokes, overrides and other channels. This is an optional
+schema field; existing contracts and their generated output keep their meaning.
+
+The shared source fuser can carry an observed pair through this table instead
+of returning an overflow. D.95 still names every unsupported binding and stops
+native preparation. CSS Modules, inline React, static CSS, shadow CSS and the
+native compiler use the same tuple semantics. Resource scoping rewrites all
+row references, and canvas projection removes entire tuples when it narrows a
+domain. A runtime `null`, `false` or `0` mapped to a named enum value stays
+distinct from omission.
+
+The first return probe exposed a real defect: emitted native fills were correct
+but their identities disappeared from the proposed contract. Native inversion
+now retains the actual bound references when complete observations prove a
+function of two corroborated optional axes; independent extra axes must be fully
+observed. Root text hoisting retains the same identity table. The proposal
+refuses an unsupported final table rather than emitting one that the shared
+referee cannot carry. Missing tuples, duplicate observations, missing omission
+metadata, unbound paint and paint opacity cannot certify a lossless table.
+
+Bounded browser tests exercise all nine set/omitted combinations, repeated
+transitions, typed mappings, and the actual static/shadow stylesheets. The emitted
+native program and canonical dump preserve the nine references and unchanged
+repeat. Native edits override the original binding; equal-color variables keep
+their distinct identities. A 27-variant probe verifies an independent third
+axis and refuses a paint that depends on all three. These are compiler and
+browser proofs, not live application acceptance. Fresh DaisyUI native output,
+visible fidelity and the complete returned React journey remain unqualified.
+Private evidence is retained in `joint-optional-token-bindings-20260920/`.
+
+To reverse, remove the optional schema field, shared resolver/referee, fuser and
+inverse admission, and all emitter/resource consumers together; restore the
+D.95 overflow expectation for these pairs. Preserve the failed native run,
+return regression and all journals. Do not widen fidelity thresholds or collapse
+omission into an invented default to obtain a pass.

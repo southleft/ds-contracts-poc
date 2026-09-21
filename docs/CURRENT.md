@@ -100,6 +100,10 @@ from the source report. Fresh assembly now names those refusals and stops before
 native preparation ([D.95](23-known-limitations.md#d95-root-style-drafts-retain-binding-refusals)).
 The separate source-order rule now retains the authored 20 px and 16 px heights,
 while `fit-content` width remains unresolved ([D.96](23-known-limitations.md#d96-css-rule-order-requires-stylesheet-and-tree-scope-evidence)).
+A bounded shared joint-paint table now preserves both omitted planes in
+compiler/browser tests, including canonical native return and typed values
+([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)).
+Fresh live application delivery with this table is still pending.
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 
