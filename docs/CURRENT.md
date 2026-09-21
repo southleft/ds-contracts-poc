@@ -150,8 +150,9 @@ variables and structure. Its returned package now preserves text styling and
 passes all 100 original-versus-returned React image pairs on white. This closes
 the earlier missing-text-binding return defect described in D.98.
 
-The native caller still fails at 8.43%, and live template updates and interrupted
-native recovery remain unqualified. The full inherited source API is incomplete;
+The native caller's baseline still fails at 8.43%. A live source-color update now
+passes independent verification on the retained mains and caller; interrupted
+template recovery and full visual qualification remain unfinished. The full inherited source API is incomplete;
 Radix content ownership remains a separate refusal. This does not close the
 independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
@@ -193,18 +194,25 @@ changes before delivery. Journal/companion tests cover forward update, unchanged
 repeat, exact reverse, caller-context refresh, conflict and lost-write settlement
 across restarts. Updated main and caller exports are available in the review;
 an intervening edit during export refuses the observation. Template-to-original-source
-repair remains unavailable; the existing opacity repair path is kept separate. These are integration
-tests with a synthetic native host, not a measured live application journey.
-An actual source-color change now passes source validation and structure tracing,
-follows the existing component, and produces an app proposal for 11 color variables
-and one recorded caller. An unchanged review produces zero changes. The live
-preflight still refuses: Figma now reports a different virtual ID for the caller's
-text node, while lookup by its saved ID resolves to that same current node. A
-separate read found no other caller-field or token differences. No assignments
-were attempted; safely handling that identity transition remains unfinished.
-The live source-edit/update/recovery demonstration, additional caller creation
-after an update, comparison refresh/repair transitions and visual/layout
-qualification remain unfinished.
+repair remains unavailable; the existing opacity repair path is kept separate.
+Those interruption and recovery cases remain synthetic native-host coverage.
+A real source-color change now passes validation and structure tracing, follows
+the existing component, and updates 11 existing color variables through the
+application. The independent read verifies all 302 main records and five caller
+records with no other differences, retaining the same nodes and variables.
+The unobstructed Evaluations canvas shows the blue caller, and the application
+shows the completed update. Its source-to-native fidelity has not been remeasured.
+The earlier identity refusal remains preserved: the SDK resolves the saved and
+current caller text IDs to the same object. New proposals admit that transition
+only with a complete slot-allocation proof and fresh SDK lookup equality; other
+content, geometry, binding and ownership changes still refuse. Historical
+proposal programs retain their exact bytes.
+An unchanged review before delivery produced zero changes. Live repetition,
+conflict, interruption, recovery and reverse delivery for this template path,
+additional caller creation after an update, comparison refresh/repair transitions
+and visual/layout qualification remain unfinished. Private evidence:
+`native-template-app-integration-20260921/` and
+`native-template-caller-identity-20260921/`.
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 
