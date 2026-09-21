@@ -9196,3 +9196,13 @@ source designs, image framing or the scorer to imitate the alternate font.
 If the source's actual font bytes later become available, compare their hashes
 and create a fresh measurement; never rewrite these receipts as authenticated
 source-font evidence.
+
+A separate check of the final app-delivered standalone Tab archive
+(`5866d6e8…627d508`) selected its two source-named static faces before scoring.
+All ten source PNGs and package bytes remain unchanged. The new consumer still
+passes only **8/10** image pairs: unselected rest and pressed remain at
+**12.5641% black**, with exact root dimensions. The changed font inputs alter
+glyph pixels but do not resolve this failure. The earlier static-font probe
+used an older package and remains preserved separately. Evidence is in private
+`tab-font-provenance-20260921-v1/`; this result rules out the specific supplied
+font-version substitution as a fix, not every possible font or shaping cause.
