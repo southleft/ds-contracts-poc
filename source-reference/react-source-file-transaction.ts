@@ -213,6 +213,7 @@ export function createSourceFileTransactions(repo:string,hooks:Hooks={}) {
         heldLock.assert();
         state=inspect(id);if(state.phase==='conflict')fail('conflict');
         const folder=path.join(dir,'files',String(index)),desired=direction==='apply'?edit.afterSha256:edit.beforeSha256;
+        const assertDirectories=()=>{directory(transaction.sourceRoot);directory(path.dirname(edit.file));directory(folder);};
         const current=digest(edit.file),held=path.join(folder,direction==='apply'?'held-original':'held-applied');
         const other=direction==='apply'?edit.beforeSha256:edit.afterSha256;
         const intended=events.some(e=>e.kind==='file-intent'&&e.direction===direction&&e.index===index);
@@ -226,6 +227,7 @@ export function createSourceFileTransactions(repo:string,hooks:Hooks={}) {
         if(digest(install)!==desired)fail('installation-changed');
         hooks.checkpoint?.('before-move',index);
         heldLock.assert();
+        assertDirectories();
         if(existsSync(held)){
           if(digest(held)!==other||digest(edit.file)!==undefined)fail('recovery-conflict');
         }else if(current!==undefined){
@@ -234,14 +236,16 @@ export function createSourceFileTransactions(repo:string,hooks:Hooks={}) {
           // An edit racing this move is kept in held, then rejected by its hash.
           renameSync(edit.file,held);sync(path.dirname(edit.file));sync(folder);wrote=true;
           hooks.checkpoint?.('moved',index);
+          assertDirectories();
           if(digest(held)!==other){
             // Preserve an edit that raced the move at its original path when
             // that path is still empty. Never replace a newly created file.
-            try{linkSync(held,edit.file);sync(path.dirname(edit.file));}
+            try{assertDirectories();linkSync(held,edit.file);sync(path.dirname(edit.file));}
             catch(error){if((error as NodeJS.ErrnoException).code!=='EEXIST')throw error;}
             fail('held-file-conflict');
           }
         }else if(direction==='apply'||!existsSync(path.join(folder,'held-original')))fail('unowned-missing-file');
+        assertDirectories();
         try{linkSync(install,edit.file);}catch(error){if((error as NodeJS.ErrnoException).code==='EEXIST')fail('destination-conflict');throw error;}
         sync(path.dirname(edit.file));wrote=true;hooks.checkpoint?.('installed',index);
         if(digest(edit.file)!==desired)fail('installed-file-changed');

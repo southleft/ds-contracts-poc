@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {chmodSync,closeSync,existsSync,mkdirSync,mkdtempSync,openSync,readFileSync,readdirSync,
-  realpathSync,rmSync,symlinkSync,writeFileSync} from 'node:fs';
+import {chmodSync,closeSync,copyFileSync,existsSync,mkdirSync,mkdtempSync,openSync,readFileSync,readdirSync,
+  realpathSync,renameSync,rmSync,symlinkSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {spawnSync,execFile} from 'node:child_process';
@@ -169,6 +169,29 @@ test('actual process death between rename and installation leaves recoverable ev
     assert.deepEqual(f.contents(),direction==='apply'?f.after:f.before);
     const lockRoot=path.join(f.repo,'private/react-source-file-transactions/locks',sha(f.root));
     assert.ok(readdirSync(lockRoot).filter(n=>/^\d{8}$/.test(n)).some(n=>JSON.parse(readFileSync(path.join(lockRoot,n,'owner.json'),'utf8')).priorLost));
+  }
+});
+
+test('a source directory redirected during replacement cannot receive an apply or rollback write',t=>{
+  for(const direction of ['apply','rollback'] as const)for(const point of ['before-move','moved'] as const){
+    const f=fixture(t);if(direction==='rollback')f.store.run(f.id,'apply',()=>{});
+    const outside=path.join(f.repo,'unselected'),retained=path.join(f.repo,'retained-source');mkdirSync(outside);
+    const outsideSource=path.join(outside,path.basename(f.source));
+    let replaced=false,expected:string|undefined;
+    f.hook((p,i)=>{
+      if(p!==point||i!==0)return;
+      for(const name of readdirSync(f.root))copyFileSync(path.join(f.root,name),path.join(outside,name));
+      expected=existsSync(outsideSource)?readFileSync(outsideSource,'utf8'):undefined;
+      renameSync(f.root,retained);symlinkSync(outside,f.root,'dir');replaced=true;
+    });
+    assert.throws(()=>f.store.run(f.id,direction,()=>{}),/directory-changed/);
+    assert.equal(replaced,true);
+    assert.equal(existsSync(outsideSource)?readFileSync(outsideSource,'utf8'):undefined,expected,
+      `${direction}/${point} must leave the redirected destination untouched`);
+    assert.equal(readFileSync(path.join(retained,path.basename(f.css)),'utf8'),direction==='apply'?f.before[1]:f.after[1]);
+    rmSync(f.root);renameSync(retained,f.root);
+    assert.equal(f.fresh().run(f.id,direction,()=>{}).phase,direction==='apply'?'applied':'rolled-back');
+    assert.deepEqual(f.contents(),direction==='apply'?f.after:f.before);
   }
 });
 

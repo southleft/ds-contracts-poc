@@ -8972,6 +8972,21 @@ attempting to supply paths or programs. These checks use disposable sources.
 The controller does not qualify the entire two-way journey, arbitrary CSS or
 callers outside the preview's recorded domain.
 
+**AGENT decision, 2026-09-21 — source directory revalidation.** A disposable
+filesystem probe redirected the selected source directory to an unselected
+directory between transaction inspection and file replacement. The earlier
+implementation wrote there before its later check refused. Apply and restoration
+now recheck the real source, destination parent and recovery directory immediately
+around replacement writes. The same probe now refuses before changing the
+redirected destination, and restoring the original directory lets the retained
+transaction resume. Both directions are checked before moving the source and
+after retaining it. These checks do not make path-based filesystem operations
+atomic. Evidence is retained in
+`private/source-preview-integration-20260921/directory-race-before-v1.log` and
+`directory-race-after-v1.log`. Reversal must retain these refusal and recovery
+cases or replace the checks with an equally restrictive filesystem mechanism;
+removing the checks alone reintroduces the demonstrated write defect.
+
 Restoring source restores the selected module and CSS only; it leaves the
 reviewed Figma design unchanged. It requires another canvas read and validates
 the restored original. Source and Figma are not locked together, so a later
