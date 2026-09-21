@@ -206,7 +206,7 @@ return result;
   return { graph, script };
 }
 
-export function emitNativeTemplateGraphReadbackScript(input: NativeRootTextTemplateGraphInput, identity: NativeTemplateGraphIdentity): string {
+export function emitNativeTemplateGraphReadbackScript(input: NativeRootTextTemplateGraphInput, identity: NativeTemplateGraphIdentity, synchronous = false): string {
   const graph = planNativeRootTextTemplateGraph(input); checkIdentity(input, graph, identity);
   return `// GENERATED independent read-only graph observation, pinned by allocated IDs.
 ${runtime(graph)}
@@ -214,10 +214,10 @@ const EXPECTED = ${JSON.stringify(identity)};
 const result = { version: 1, status: 'refused', graphRevision: GRAPH.revision, receiptKind: 'independent-native-readback', problems: [] };
 try {
   guard();
-  const collections = await Promise.all(EXPECTED.selectors.map(s => figma.variables.getVariableCollectionByIdAsync(s.id)));
-  const variables = await Promise.all(EXPECTED.routes.map(r => figma.variables.getVariableByIdAsync(r.id)));
-  const sourceVariables = await Promise.all(EXPECTED.source.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));
-  const source = await (async () => { ${emitNativeTokenContextReadbackScript(input.tokens, identity.source)}\n })();
+  const collections = ${synchronous ? 'EXPECTED.selectors.map(s => figma.variables.getVariableCollectionById(s.id))' : 'await Promise.all(EXPECTED.selectors.map(s => figma.variables.getVariableCollectionByIdAsync(s.id)))'};
+  const variables = ${synchronous ? 'EXPECTED.routes.map(r => figma.variables.getVariableById(r.id))' : 'await Promise.all(EXPECTED.routes.map(r => figma.variables.getVariableByIdAsync(r.id)))'};
+  const sourceVariables = ${synchronous ? 'EXPECTED.source.variables.map(v => figma.variables.getVariableById(v.id))' : 'await Promise.all(EXPECTED.source.variables.map(v => figma.variables.getVariableByIdAsync(v.id)))'};
+  const source = ${synchronous ? '(()' : 'await (async ()'} => { ${emitNativeTokenContextReadbackScript(input.tokens, identity.source, synchronous)}\n })();
   if (source.status !== 'readback-collected') refuse('source-readback');
   guard();
   if (collections.some((c, i) => !c || c.id !== EXPECTED.selectors[i].id || c.key !== EXPECTED.selectors[i].key) ||
