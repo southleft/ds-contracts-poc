@@ -1,5 +1,6 @@
 import {isReactStateApiNativeRequest,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
 import {createReactSourceRepairPreviews} from './react-source-repair-preview.js';
+import {createReactSourceWitnessSuccessions} from './react-source-witness-succession.js';
 import {planReactOpacitySourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
@@ -45,7 +46,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, mkdirSync, writeFileSync, realpathSync, lstatSync, existsSync } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { loadReactCohort, reactCasesFile, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
+import { loadReactCohort, reactCasesFile, reactCohortWitnessSnapshot, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -184,6 +185,7 @@ export async function buildReactReference(
       .sort(),
     javascript: sha(javascript),
     css: sha(css),
+    ...(cohort.witnessSuccession ? {witnessSuccession:cohort.witnessSuccession.revision} : {}),
   };
   const reference = {
     id: sha(JSON.stringify(identity)),
@@ -203,6 +205,12 @@ export async function buildReactReference(
 }
 export function reactReferenceUnchanged(reference: ReactReference) {
   try {
+    const succession=reference.cohort.witnessSuccession;
+    if(succession && (!/^sha256:[a-f0-9]{64}$/.test(succession.revision) ||
+      succession.cohortRevision!==revisionOf(reactCohortWitnessSnapshot(reference.cohort)) ||
+      JSON.stringify(Object.entries(reference.files).sort())!==JSON.stringify(Object.entries(succession.referenceFiles).sort()) ||
+      Object.entries(succession.evidenceFiles).some(([file,hash])=>!lstatSync(file).isFile()||
+        realpathSync(file)!==file||sha(readFileSync(file))!==hash))) return false;
     // Which cohort a root selects is itself source. A built-in reference
     // records no declaration path, so its absence is checked directly: anything
     // now at that path, even unreadable or refused, makes the reference stale.
@@ -867,7 +875,7 @@ export function createReactReferenceService(
         return;
       }
       try {
-        loading ??= buildReactReference(sourceRoot);
+        loading ??= buildReactReference(sourceRoot,createReactSourceWitnessSuccessions(repoRoot).load(sourceRoot));
         reference = await loading;
         if (!reactReferenceUnchanged(reference))
           throw Error("react-reference-source-changed");
@@ -887,6 +895,7 @@ export function createReactReferenceService(
                 sourceRoot,
                 files: reference.files,
                 entrySha256: sha(reference.cohort.entry),
+                ...(reference.cohort.witnessSuccession?{witnessSuccession:reference.cohort.witnessSuccession.revision}:{}),
                 qualification: "unqualified",
                 cases: reference.cohort.cases,
               },
@@ -921,7 +930,7 @@ export function createReactReferenceService(
         // A refused declaration is named so its author can correct it. Only an
         // identifier leaves the host: no path, file content or parser text.
         const message = error instanceof Error ? error.message : "";
-        const reason = /^react-cases-[a-z-]{2,60}$/.test(message) ? message : undefined;
+        const reason = /^react-(?:cases|source-witness|source-transaction)-[a-z-]{2,60}$/.test(message) ? message : undefined;
         json(res, 409, {
           error:
             "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with a source workspace and its installed dependencies; source files are never modified by this action.",

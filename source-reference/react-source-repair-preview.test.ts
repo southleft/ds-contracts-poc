@@ -28,7 +28,7 @@ function fixture(t:test.TestContext) {
   after.snapshots['0'].tree.classes=[candidate.edit.after];after.snapshots['0'].tree.style.opacity='0.6';after.snapshots['0'].image=sha('after');
   after.snapshots['0'].ownership.components[0].source.sourceSha256=candidate.afterSha256;
   after.snapshots['0'].fonts!.treeRevision=revisionOf(after.snapshots['0'].tree);after.snapshots['0'].svg.treeRevision=revisionOf(after.snapshots['0'].tree);
-  const input={reference:{id:referenceId,files:{[file]:sha(text)},sourceRoot:root,cohort:{declared:false}},program:{files:{[file]:sha(text)}},recorded:before,caseId:'control',
+  const input={reference:{id:referenceId,files:{[file]:sha(text)},sourceRoot:root,cohort:{declared:false,cases:[],witnessFiles:{}}},program:{files:{[file]:sha(text)}},recorded:before,caseId:'control',
     variants:[{observation:'0',variant:'disabled=true'}],recipe:{input:'input.css',output:'output.css'},
     plan:{revision:'sha256:'+referenceId,changes:[{nodeId:'1:1',variant:'disabled=true',before:.5,after:.6}],candidates:[candidate]}} as unknown as ReactSourceRepairInput;
   let stageHook=()=>{},observeHook=async()=>{},cohortHook=async()=>{};
@@ -48,6 +48,11 @@ test('verified preview reuses its identity, pins images and never changes origin
   const f=fixture(t),job=f.store.start(referenceId,parentId,proposalId);await job.promise;
   assert.equal(job.state.phase,'reviewable');assert.equal(job.state.selected,0);
   assert.equal(f.store.start(referenceId,parentId,proposalId).state.id,job.state.id);
+  const selection=f.store.selection(referenceId,parentId,proposalId,job.state.id);
+  assert.equal(selection.resultRevision,revisionOf(job.state));
+  assert.equal(selection.previewDirectory,job.dir);
+  selection.stage.css.afterSha256='changed';
+  assert.notEqual(f.store.selection(referenceId,parentId,proposalId,job.state.id).stage.css.afterSha256,'changed');
   assert.equal(readFileSync(f.file,'utf8'),f.text);
   assert.equal(f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')).toString(),'after');
   assert.equal(f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-candidate','control',sha('after')).toString(),'after');
@@ -55,6 +60,7 @@ test('verified preview reuses its identity, pins images and never changes origin
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-original','control',sha('after')),/image-mismatch/);
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-1','0',sha('after')),/image-mismatch/);
   f.input.plan.revision='sha256:'+proposalId;
+  assert.throws(()=>f.store.selection(referenceId,parentId,proposalId,job.state.id),/selection-stale/);
   assert.equal(f.store.read(referenceId,parentId,proposalId)?.current,false);
   // Evidence remains the same historical bytes; it does not make a changed
   // preview current. Every metadata read still checks the current source pair.
@@ -77,6 +83,7 @@ test('concurrent previews, changed evidence and changed original source refuse',
     f.setObserveHook(()=>barrier);const job=f.store.start(referenceId,parentId,proposalId);
     const before=f.derivations(),progress=f.store.read(referenceId,parentId,proposalId);
     assert.equal(progress?.phase,'running');assert.equal(progress?.current,false);
+    assert.throws(()=>f.store.selection(referenceId,parentId,proposalId,job.state.id),/selection-unavailable/);
     assert.equal(f.derivations(),before,'progress-only reads cannot authorize a write and do not replay history');
     assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
     assert.equal(f.store.start(referenceId,parentId,proposalId).state.id,job.state.id);

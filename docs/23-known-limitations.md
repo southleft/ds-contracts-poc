@@ -8798,10 +8798,59 @@ source/CSS version during application. Only regular files on the same filesystem
 as the private journal are supported. Unexpected edits are preserved and refuse;
 unknown journals or a lock owned by a live/reused process ID also refuse. Power
 loss and every operating-system/filesystem combination are not qualified.
-Authenticated witness succession, fresh native preconditions, the original-source
-application UI and independent post-write source/native verification remain
-unfinished. The complete two-way journey is still unqualified.
+The witness succession mechanism in D.107 reopens completed transactions in
+source loading. Fresh native preconditions, the original-source application UI
+and independent post-write source/native verification remain unfinished. The
+complete two-way journey is still unqualified.
 
 Reversal removes the helper and its gate entry together. Preserve any existing
 transaction directories, held originals, before/after blobs and lock history;
 removing code must never remove recovery evidence or overwrite source files.
+
+### D.107 Reviewed source edits need versioned validation witnesses
+
+**AGENT decision, 2026-09-21.** An intended original-source repair must not
+rewrite the frozen source witnesses or accept its new rendering as its own
+independent expectation. A host-only succession store now derives the changed
+root-opacity expectation from the pinned native design intent, original caller
+props and the complete reviewed caller proof. Every unrelated profile field
+remains exact. The original profiles and earlier source references stay intact.
+
+The preview retains its selected stage and in-memory result revision. Its
+identity now includes the original witness profiles, and its caller result pins
+both complete observation sets. Preparing a successor replays the caller checks
+and authenticates the stage, source/CSS transitions, initial and finite-state
+images, full compiler inputs and original reference inventory. The selected CSS
+must be the CSS recorded in the reviewed preview. Browser requests cannot supply
+paths, profiles or executable commands to this store.
+
+A successor enters normal source loading only through a matching completed
+source-file transaction. Its provenance enters the new reference identity and
+saved provenance; historical references without succession retain their exact
+identity. Loading replays the proof and transaction history. It refuses an
+incomplete write, changed evidence, missing ancestor or multiple unrelated
+histories matching the current bytes. A reviewed reverse edit creates a new
+record; a completed transaction rollback restores the earlier witnesses.
+
+Disposable-fixture checks cover reload through the actual source-loading HTTP
+handler, forward/reverse chains, repeated values, file-boundary interruption,
+rollback, altered images and observations, replaced CSS pins, changed original
+profiles, foreign transaction selections and conflicting histories. They also
+verify that damaged evidence invalidates an already built reference. These are
+engineering and HTTP integration results, not a live original-source Apply
+journey. No production original has been changed through this mechanism.
+
+The mechanism currently carries the existing bounded root-opacity repair and
+its configured finite/control-action domain. It requires the retained private
+evidence, supports at most 128 linked transactions per source root and grants
+no fresh canvas authority. The application still needs its Apply/recovery
+controller, fresh companion preflight and independent post-write source/native
+validation before this closes any two-way acceptance gap. Earlier previews
+without the new witness and observation pins remain historical evidence and
+cannot be promoted into source-write selections.
+
+Reversal removes the succession store, source-loading integration and its gate
+entry together. Preserve all private selections, links, preview evidence and
+source transaction journals. Sources already changed by an applied transaction
+must be recovered or explicitly re-witnessed before removing the loader;
+silently falling back to stale expectations is not a valid rollback.

@@ -151,6 +151,12 @@ export function createSourceFileTransactions(repo:string,hooks:Hooks={}) {
   }
   return {
     inspect,
+    /** Authenticated historical journal, not permission to write or a claim
+     * that the original paths still contain this transaction's output. */
+    history(id:string) {
+      const {transaction,events}=load(id);
+      return structuredClone({transaction,events});
+    },
     prepare(args:{sourceRoot:string;selectionRevision:string;inputs:Readonly<Record<string,string>>;
       edits:ReadonlyArray<{file:string;beforeSha256:string;after:Buffer}>}) {
       const sourceRoot=realpathSync(args.sourceRoot);directory(sourceRoot);
