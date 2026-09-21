@@ -177,11 +177,14 @@ test('tracked text boxes refuse structured, caller-owned and raw-text hosts befo
   const tracked = { ...LABEL.literals, 'letter-spacing': '1px' };
   for (const extra of [
     { content: { prop: 'children' } }, { parts: { child: { text: 'Child' } } },
-    { attrs: { style: 'letter-spacing: 2px' } }, { layout: { display: 'flex' } },
+    { attrs: { style: 'letter-spacing: 2px' } }, { attrs: { style: '' } }, { layout: { display: 'flex' } },
     { declared: { display: 'grid' } }, { declaredStates: { hover: { display: 'flex' } } },
     { stylesWhen: [{ prop: 'tone', equals: 'danger', styles: { display: 'contents' } }] },
     { element: 'textarea' }, { element: 'option' },
   ]) assert.match(errorsOf(flagged({ literals: tracked, ...extra })), /tracking on/);
+  const emptyStyle = flagged({ literals: tracked, attrs: { style: '' } });
+  for (const emit of [modules, inline]) assert.throws(() => emit(emptyStyle), /tracking on/,
+    'an explicitly empty style must refuse before generating duplicate JSX style attributes');
   assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '9'.repeat(400) + 'px' } })), /not a px/);
 });
 

@@ -687,7 +687,7 @@ export function textBoxStaticRefusals(contract: Contract, part: Part, path: stri
       return !prop || !isEnum(prop) || prop.default === undefined || !prop.type.enum.includes(String(prop.default));
     })) out.push('carries letter-spacing (placeholder token) without one to three distinct enum axes with explicit defaults — every selected and omitted tracking value needs a matching text-box rule');
   }
-  if (ls && (part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.meter || part.attrs?.style || part.content?.prop === 'children')) {
+  if (ls && (part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.meter || part.attrs?.style !== undefined || part.content?.prop === 'children')) {
     out.push('carries tracking on caller or structured content — the trailing-spacing run requires an owned text leaf');
   }
   const displayHolders = textHolders(part);

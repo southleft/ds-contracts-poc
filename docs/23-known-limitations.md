@@ -7850,7 +7850,9 @@ px/em/rem string. Object-shaped dimensions refuse because the scalar emitters
 do not serialize that format; even zero percent is invalid tracking. Missing cells, boolean/defaultless/repeated axes, a competing
 literal, and per-value tracking overrides refuse. The text must be an owned
 leaf in ordinary text flow; caller children, structured content, raw-text hosts
-and authored style attributes cannot acquire the inner run.
+and authored style attributes cannot acquire the inner run. Even an explicitly
+empty style attribute refuses: accepting it produced duplicate JSX style
+attributes and an uncompilable React component in an adversarial control.
 
 An adversarial browser check found that subtracting tracking from `fit-content`
 could subtract twice when a content-sized parent fed its rounded width back
