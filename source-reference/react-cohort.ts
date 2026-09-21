@@ -35,6 +35,18 @@ export interface ReactCohort {
   /** Only a declared cohort: the `./`-relative modules its cases mount. The
    * build resolves each to a source file that the witnesses must pin. */
   mountedModules?: readonly string[];
+  /** Host-authenticated source repair provenance. Absent on historical cohorts.
+   * The expected source inventory excludes these private evidence files. */
+  witnessSuccession?: {revision:string;cohortRevision:string;evidenceFiles:Readonly<Record<string,string>>;
+    referenceFiles:Readonly<Record<string,string>>};
+}
+
+/** Frozen expectation inputs as data, for repair evidence identity. This does
+ * not change the identities of existing source references. */
+export function reactCohortWitnessSnapshot(cohort:ReactCohort){
+  return {declared:cohort.declared,source:cohort.source,theme:cohort.theme,entry:cohort.entry,
+    cases:cohort.cases,profiles:cohort.cases.map(c=>cohort.profile(c.id)),witnessFiles:cohort.witnessFiles,
+    negativeCaseIds:cohort.negativeCaseIds,declaration:cohort.declaration??null,mountedModules:cohort.mountedModules??null};
 }
 
 /** The cohort this application was first written around. Its entry bytes and

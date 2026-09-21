@@ -441,6 +441,43 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         journalRevision:l.previous,attemptId:design.attemptId,input:nativeContractUpdateAfter(l.plan,receipt),
         baseline:receipt,observed:design.observed,difference:nativeDesignChanges(receipt,design.observed)});
     },
+    /** Read-only recovery observation. Original source can be partly changed
+     * by a journaled source transaction, so this grants no source authority.
+     * The caller must authenticate that transaction and compare the complete
+     * observed content with its reviewed intent before any source write. */
+    observeSourceRepair(id:string,baselineRevision:string,renew=false):NativeOperationCommand {
+      assertOutsideEvidenceSnapshot();let l=load(id);
+      if(superseded(l)||l.state.phase!=='update-verified'||l.state.problems.length||l.state.alarms.length||
+        revisionOf(clean(l.state.observation))!==baselineRevision)fail('source-repair-baseline-unavailable');
+      const script=readback(l.plan.after,true,true),scriptSha256=sha(script);
+      if(l.state.pending){
+        if(!l.state.designRead||!l.state.pending.readOnly||l.state.pending.scriptSha256!==scriptSha256)fail('source-repair-read-in-flight');
+        if(!renew)return structuredClone(l.state.pending);
+        // A cached result from before a host restart cannot be a fresh
+        // source-write preflight. Preserve and supersede that read only.
+        append(l,{kind:'abandon-observation',attemptId:l.state.pending.attemptId});l=load(id);
+      }
+      const command:NativeOperationCommand={version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:id,phase:'update-readback',
+        attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
+        planRevision:l.header.planRevision,script,scriptSha256,readOnly:true};
+      append(l,{kind:'dispatch',command,design:true,reader:{version:1,inputRevision:revisionOf(l.plan.after)}});
+      return structuredClone(command);
+    },
+    sourceRepairReadEvidence(id:string,attemptId:string,baselineRevision:string){
+      assertOutsideEvidenceSnapshot();const l=load(id);
+      if(superseded(l)||l.state.phase!=='update-verified'||l.state.problems.length||l.state.alarms.length||
+        revisionOf(clean(l.state.observation))!==baselineRevision)fail('source-repair-baseline-unavailable');
+      if(l.state.pending){
+        if(l.state.designRead&&l.state.pending.attemptId===attemptId&&l.state.pending.readOnly)return null;
+        fail('source-repair-read-replaced');
+      }
+      const design=l.state.design;
+      if(!design||design.attemptId!==attemptId||design.scriptSha256!==sha(readback(l.plan.after,true,true))||
+        revisionOf(design.baseline)!==baselineRevision)fail('source-repair-read-unavailable');
+      return structuredClone({operationId:id,parentId:l.header.parentId,proposalId:l.header.proposalId,
+        fileKey:l.plan.before.operation.fileKey,attemptId,journalRevision:l.previous,scriptSha256:design.scriptSha256,
+        baselineRevision,observed:design.observed});
+    },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {
       assertOutsideEvidenceSnapshot();

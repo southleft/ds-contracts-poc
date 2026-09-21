@@ -8776,3 +8776,230 @@ write. Source/CSS transactions, witness succession, fresh canvas preconditions
 and interrupted-write recovery remain unfinished. Reversal removes the cohort
 observer and its preview integration together, restoring the narrower preview
 limitation while preserving every saved observation and original witness.
+
+
+### D.106 Original source writes need durable file recovery
+
+**AGENT decision, 2026-09-21.** A filesystem transaction helper now retains the
+selected source/CSS before and after bytes, hashes, permissions and complete
+input pins before changing an original. It is not connected to an application
+Apply action. It cannot approve a preview or establish canvas agreement.
+
+Each file moves into recovery storage before the candidate is installed with
+an exclusive hard link. A destination recreated by another editor is never
+replaced. Immutable before/after blobs remain separate from the held originals
+and installation links, which can retain concurrent edits. The journal and
+lock records publish only fully written, synced bytes. Lock generations are
+append-only: simultaneous recovery processes compete for one new generation
+without deleting or replacing an earlier writer's lock.
+
+Checks exercise source/CSS application, unchanged repeat, reversal, every
+persisted file boundary, conflicting bytes and permissions, missing authority,
+corrupted evidence, outside paths, symlinks and concurrent destination creation.
+Actual child processes are killed between moving a source file and installing
+its replacement, then a fresh process resumes application and rollback. A
+separate two-process barrier probe proves only one abandoned-writer recovery
+can acquire the next lock. An asynchronous authority callback refuses before
+writing; asynchronous canvas preflight must finish before the final synchronous
+assertion. All probes use disposable source fixtures, not the user's originals.
+
+This is a recoverable sequence of file operations, not an atomic multi-file
+filesystem transaction. Another reader can observe a missing file or a mixed
+source/CSS version during application. Only regular files on the same filesystem
+as the private journal are supported. Unexpected edits are preserved and refuse;
+unknown journals or a lock owned by a live/reused process ID also refuse. Power
+loss and every operating-system/filesystem combination are not qualified.
+The witness succession mechanism in D.107 reopens completed transactions in
+source loading. Fresh native preconditions, the original-source application UI
+and independent post-write source/native verification remain unfinished. The
+complete two-way journey is still unqualified.
+
+Reversal removes the helper and its gate entry together. Preserve any existing
+transaction directories, held originals, before/after blobs and lock history;
+removing code must never remove recovery evidence or overwrite source files.
+
+### D.107 Reviewed source edits need versioned validation witnesses
+
+**AGENT decision, 2026-09-21.** An intended original-source repair must not
+rewrite the frozen source witnesses or accept its new rendering as its own
+independent expectation. A host-only succession store now derives the changed
+root-opacity expectation from the pinned native design intent, original caller
+props and the complete reviewed caller proof. Every unrelated profile field
+remains exact. The original profiles and earlier source references stay intact.
+
+The preview retains its selected stage and in-memory result revision. Its
+identity now includes the original witness profiles, and its caller result pins
+both complete observation sets. Preparing a successor replays the caller checks
+and authenticates the stage, source/CSS transitions, initial and finite-state
+images, full compiler inputs and original reference inventory. The selected CSS
+must be the CSS recorded in the reviewed preview. Browser requests cannot supply
+paths, profiles or executable commands to this store.
+
+A successor enters normal source loading only through a matching completed
+source-file transaction. Its provenance enters the new reference identity and
+saved provenance; historical references without succession retain their exact
+identity. Loading replays the proof and transaction history. It refuses an
+incomplete write, changed evidence, missing ancestor or multiple unrelated
+histories matching the current bytes. A reviewed reverse edit creates a new
+record; a completed transaction rollback restores the earlier witnesses.
+
+Disposable-fixture checks cover reload through the actual source-loading HTTP
+handler, forward/reverse chains, repeated values, file-boundary interruption,
+rollback, altered images and observations, replaced CSS pins, changed original
+profiles, foreign transaction selections and conflicting histories. They also
+verify that damaged evidence invalidates an already built reference. These are
+engineering and HTTP integration results, not a live original-source Apply
+journey. No production original has been changed through this mechanism.
+
+The mechanism currently carries the existing bounded root-opacity repair and
+its configured finite/control-action domain. It requires the retained private
+evidence, supports at most 128 linked transactions per source root and grants
+no fresh canvas authority. The application still needs its Apply/recovery
+controller, fresh companion preflight and independent post-write source/native
+validation before this closes any two-way acceptance gap. Earlier previews
+without the new witness and observation pins remain historical evidence and
+cannot be promoted into source-write selections.
+
+Reversal removes the succession store, source-loading integration and its gate
+entry together. Preserve all private selections, links, preview evidence and
+source transaction journals. Sources already changed by an applied transaction
+must be recovered or explicitly re-witnessed before removing the loader;
+silently falling back to stale expectations is not a valid rollback.
+
+### D.108 Source application requires fresh canvas reads and verified recovery
+
+**AGENT decision, 2026-09-21.** The reviewed root-opacity preview now has an
+original-source Apply controller and persistent application recovery controls.
+The first live application run now changes the original Checkbox module from
+`disabled:opacity-50` to `disabled:opacity-60` and regenerates its CSS. It resumes
+after a host restart before the source write, using a new canvas-read attempt.
+All ten configured examples pass normal source validation, and a second fresh
+read verifies the unchanged 44-node Figma set. The unobstructed canvas shows the
+same four disabled native variants at 60% opacity. A repeated completed Apply
+request leaves all 69 source and retained operation files byte-identical.
+Evidence is in `private/react-design-source-repair-20260921/live-apply-v1.json`
+and `live-apply-repeat-v1.json`. Explicit restoration through the app then
+restores both original files byte-for-byte, validates all ten examples again
+and obtains fresh pre/post reads with the complete native snapshot unchanged.
+Figma remains at the designer's 60% edit, as the recovery UI explains. That
+result and the unobstructed canvas inspection are retained in
+`live-apply-restore-v1.json`. D.104–D.107's earlier previews and engineering
+tests remain separate evidence; these bounded results do not qualify V1.
+
+A later live review demonstrates both conflict boundaries on the same retained
+application. A non-rendering source comment added after the review was sealed
+and its canvas read requested survives the resumed run: the fresh read passes,
+but the file transaction refuses before writing source or CSS. After removing
+only that probe, changing the four native disabled variants to 70% makes the
+next fresh read refuse `react-source-apply-native-intent-changed`; both source
+files stay original and the four canvas edits remain intact. Full readback
+comparison finds no native change beyond those four opacity values. Evidence,
+probe restoration steps and the visible refusal are retained under
+`private/react-design-source-repair-20260921/live-conflict-v1/`.
+Restoring the probe values to 60% lets that same application resume with another
+fresh preflight, apply the reviewed source, validate all ten examples and pass
+its final native read. Both refusals remain in its immutable journal.
+
+The applied source now completes normal source succession through the app.
+A fresh structure observation matches all ten examples; initial-state inspection
+restores all twelve Checkbox combinations. Following the existing initial-state
+operation retains its component identity. Compiler review finds the four native
+literals already at float32 0.6, but the owned opacity variable still at 0.5.
+The guarded correction scans 86 pages and 3,205 nodes, changes that one variable
+to 0.6 and writes no component values. Independent readback retains all 44 node
+snapshots, all twelve PNGs and every other variable exactly. The same 37 native
+operation IDs remain; no replacement is prepared. An unchanged review reuses
+the verified correction, leaving its journal and succession files unchanged.
+The unobstructed canvas was inspected at 60%. Evidence is retained under
+`private/react-design-source-repair-20260921/native-succession-v1/`.
+
+A live partial-file failure now exercises the same controller. After a reviewed
+60% → 70% design edit, temporarily denying writes to the source root lets the
+nested module installation finish but makes the later CSS installation fail.
+The app retains that refusal and shows the module as changed while CSS remains
+original. Once permissions are restored, resuming the same application reads
+the canvas again, keeps the already installed module and completes the CSS.
+Its first source validation fails because a required capture control did not
+complete; that failure remains recorded. A second explicit resume writes no
+source bytes, passes all ten examples and obtains an identical full native
+readback. Both installed files retain their original installation inodes and
+single installation records across that validation retry.
+
+The app then restores both pre-test source files byte-for-byte, validates all
+ten examples and independently verifies the unchanged native set. Restoring
+only the four temporary canvas opacity edits to 60% and reading again returns
+all 44 nodes, 50 variables and twelve images exactly to the pre-test snapshot.
+The app reports no remaining design changes, and the unobstructed editable
+canvas was inspected. Evidence, including both failures, is retained under
+`private/react-design-source-repair-20260921/partial-write-v1/`. This demonstrates
+recovery from an actual partial-file IO failure; it does not demonstrate process
+termination during a file replacement or remove the non-atomic write limitation.
+
+Apply accepts only the host's current selected preview. It seals that selection,
+prepares the exact source/CSS transaction and requests a new read from the
+existing Sync Runner operation. The full observed content must match the
+reviewed design intent and verified baseline. An old pending read is superseded
+when a run starts; a cached result from before restart cannot authorize a new
+source write. Recovery reads remain read-only even when original source is
+partially changed, and grant no authority to the ordinary source-dependent
+design reader.
+
+After writing, the controller builds the original workspace through its normal
+versioned witness loader. The application's normal browser validation must pass
+every configured example and all required corruption controls for that exact
+reference. A second fresh canvas read, unchanged source inputs and retained
+validation evidence are required before completion. The source record persists
+independently of the old reference, so recovery remains accessible after reload
+or an interrupted file replacement. A closed service stops its pending run;
+run identities prevent its late completion from changing a newer run's journal.
+Completed historical records remain identified as previously completed when
+a later source change stops matching their result. That history is separate
+from current verification and grants no new write authority. During a running
+operation, displayed file states are explicitly the latest checked states;
+the transaction checks again before writing.
+
+The first live run exposed a clipboard wait that left recovery controls busy.
+Connection preparation now finishes before the separate copy action, with a
+masked field for ordinary keyboard copying. Pairing authenticates the retained
+journal without recompiling source history; start and native write delivery
+still perform their existing source checks. Pairing alone cannot authorize a
+write. This also lets a partially changed source reconnect for read-only recovery.
+
+Engineering checks cover apply, unchanged repeat, source restoration, partial
+file recovery, changed source and canvas, wrong-reference or incomplete
+validation, changed retained evidence, unavailable companions and request bodies
+attempting to supply paths or programs. These checks use disposable sources.
+The controller does not qualify the entire two-way journey, arbitrary CSS or
+callers outside the preview's recorded domain.
+
+**AGENT decision, 2026-09-21 — source directory revalidation.** A disposable
+filesystem probe redirected the selected source directory to an unselected
+directory between transaction inspection and file replacement. The earlier
+implementation wrote there before its later check refused. Apply and restoration
+now recheck the real source, destination parent and recovery directory immediately
+around replacement writes. The same probe now refuses before changing the
+redirected destination, and restoring the original directory lets the retained
+transaction resume. Both directions are checked before moving the source and
+after retaining it. These checks do not make path-based filesystem operations
+atomic. Evidence is retained in
+`private/source-preview-integration-20260921/directory-race-before-v1.log` and
+`directory-race-after-v1.log`. Reversal must retain these refusal and recovery
+cases or replace the checks with an equally restrictive filesystem mechanism;
+removing the checks alone reintroduces the demonstrated write defect.
+
+Restoring source restores the selected module and CSS only; it leaves the
+reviewed Figma design unchanged. It requires another canvas read and validates
+the restored original. Source and Figma are not locked together, so a later
+design edit can invalidate agreement. File replacement retains D.106's
+non-atomic multi-file limitation. Unexpected source edits refuse without being
+overwritten. Missing preview or transaction proof refuses; stale validation
+evidence requires verification again. The measured normal succession retains
+the existing component and closes this bounded source-application loop. Broader
+repair channels remain unqualified. The demonstrated host interruption precedes
+the write; the separate partial-file failure and recovery above are now live
+evidence. Termination during file replacement remains unmeasured.
+
+Reversal removes the Apply endpoints, recovery UI and controller together.
+Keep the source transaction helper and witness loader for already applied
+changes until those sources have been recovered or explicitly re-witnessed.
+Never remove private journals, selections, held files or validation evidence.

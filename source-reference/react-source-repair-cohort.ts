@@ -3,7 +3,7 @@
 import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {chromium} from 'playwright-core';
-import {canonicalJson} from '../core/contract-provenance.js';
+import {canonicalJson,revisionOf} from '../core/contract-provenance.js';
 import {flatten} from '../extract/computed/lib.js';
 import {reactReferenceHtml,reactReferenceUnchanged,type ReactReference} from './react-reference.js';
 import {reactSourceProgramUnchanged,type ReactSourceProgram} from './react-source-program.js';
@@ -130,6 +130,7 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
   });
   if(!instances)fail('edited-source-unused');
   return {qualification:'configured-caller-effects-verified' as const,cases,
+    observations:{before:revisionOf(before),after:revisionOf(after)},
     limitations:['configured-cases-only','finite-initial-states-and-checked-control-actions-only','source-write-not-authorized']};
 }
 

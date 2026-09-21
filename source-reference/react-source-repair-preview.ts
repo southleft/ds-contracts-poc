@@ -4,6 +4,7 @@ import {createHash,randomUUID} from 'node:crypto';
 import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
+import {reactCohortWitnessSnapshot} from './react-cohort.js';
 import {buildReactReference,reactReferenceSourceModules,reactReferenceUnchanged,type ReactReference} from './react-reference.js';
 import {readReactSourceProgram,reactSourceProgramUnchanged,type ReactSourceProgram} from './react-source-program.js';
 import {stageReactUtilitySourceEdit} from './react-source-repair-stage.js';
@@ -34,8 +35,10 @@ const reason=(error:unknown)=>{
   const message=error instanceof Error?error.message:'';
   return /^[a-z][a-z0-9-]*(?::[A-Za-z0-9:;._-]+)?$/.test(message)?message:'react-source-repair-preview-refused';
 };
-const signature=(value:ReactSourceRepairInput)=>revisionOf({reference:value.reference.id,files:value.reference.files,
+export const reactSourceRepairInputRevision=(value:ReactSourceRepairInput)=>revisionOf({reference:value.reference.id,files:value.reference.files,
+  witnesses:reactCohortWitnessSnapshot(value.reference.cohort),
   program:value.program,recorded:value.recorded,caseId:value.caseId,variants:value.variants,plan:value.plan,recipe:value.recipe});
+const signature=reactSourceRepairInputRevision;
 function changedText(before:string,after:string) {
   let start=0;while(start<before.length&&start<after.length&&before[start]===after[start])start++;
   let end=0;while(end<before.length-start&&end<after.length-start&&before[before.length-1-end]===after[after.length-1-end])end++;
@@ -44,7 +47,8 @@ function changedText(before:string,after:string) {
 
 export function createReactSourceRepairPreviews(repo:string,
   derive:(referenceId:string,parentId:string,proposalId:string)=>ReactSourceRepairInput,deps:Dependencies=dependencies) {
-  type Job={state:ReactSourceRepairPreview;signature:string;referenceId:string;dir:string;promise:Promise<void>};
+  type Job={state:ReactSourceRepairPreview;signature:string;referenceId:string;dir:string;promise:Promise<void>;
+    selectedStage?:Awaited<ReturnType<typeof stageReactUtilitySourceEdit>>};
   const jobs=new Map<string,Job>();
   let running:Job|undefined;
   const key=(referenceId:string,parentId:string,proposalId:string)=>{
@@ -81,7 +85,7 @@ export function createReactSourceRepairPreviews(repo:string,
       const assertInput=()=>{assertSource();if(signature(derive(referenceId,parentId,proposalId))!==pinned)throw Error('react-source-repair-preview-evidence-changed');};
       job.promise=(async()=>{
         try {
-          const verified=new Map<number,{reference:ReactReference;program:ReactSourceProgram}>();
+          const verified=new Map<number,{reference:ReactReference;program:ReactSourceProgram;stage:Awaited<ReturnType<typeof stageReactUtilitySourceEdit>>}>();
           assertInput();
           const before=await deps.observe({reference:input.reference,program:input.program,caseId:input.caseId,
             instanceId:input.recorded.observation.instanceId,expected:input.recorded.observation,dir:path.join(dir,'original'),assertCurrent:assertSource});
@@ -101,7 +105,7 @@ export function createReactSourceRepairPreviews(repo:string,
               row.css={file:input.recipe.output,beforeSha256:stage.css.beforeSha256,afterSha256:stage.css.afterSha256,
                 ...changedText(originalCss.toString(),stagedCss.toString())};
               row.status='verified';
-              verified.set(index,{reference,program});
+              verified.set(index,{reference,program,stage});
             }catch(error){row.problem=reason(error);}
           }
           assertInput();const selected=state.candidates.filter(c=>c.status==='verified');
@@ -109,7 +113,7 @@ export function createReactSourceRepairPreviews(repo:string,
           const index=selected[0].index,proposed=verified.get(index)!;
           state.step='Checking every configured caller and its recorded finite states';
           state.cohort=await deps.cohort({input,candidateIndex:index,proposed:proposed.reference,program:proposed.program,dir:path.join(dir,'callers'),assertCurrent:assertSource});
-          assertInput();state.selected=index;state.phase='reviewable';state.current=true;state.step='One candidate matches the recorded states and configured callers';
+          assertInput();job.selectedStage=structuredClone(proposed.stage);state.selected=index;state.phase='reviewable';state.current=true;state.step='One candidate matches the recorded states and configured callers';
         } catch(error) {state.phase='refused';state.step='Preview refused';state.problems.push(reason(error));}
         finally {
           try{writeFileSync(path.join(dir,'result.json'),JSON.stringify(state,null,2)+'\n',{flag:'wx'});}
@@ -117,6 +121,16 @@ export function createReactSourceRepairPreviews(repo:string,
         }
       })();
       return job;
+    },
+    /** Host-only reviewed bytes. Never serialize this result into an HTTP
+     * response: it contains source paths, compiler pins and witness inputs. */
+    selection(referenceId:string,parentId:string,proposalId:string,id:string){
+      const job=jobs.get(key(referenceId,parentId,proposalId));
+      if(!job||job.state.id!==id||job.state.phase!=='reviewable'||!job.selectedStage)throw Error('react-source-repair-preview-selection-unavailable');
+      const input=derive(referenceId,parentId,proposalId);
+      if(signature(input)!==job.signature||!reactReferenceUnchanged(input.reference)||!reactSourceProgramUnchanged(input.program))
+        throw Error('react-source-repair-preview-selection-stale');
+      return {input,stage:structuredClone(job.selectedStage),previewDirectory:job.dir,resultRevision:revisionOf(job.state)};
     },
     image(referenceId:string,parentId:string,proposalId:string,id:string,index:string,rowId:string,hash:string) {
       // These are immutable evidence bytes, not a current-source verdict or
