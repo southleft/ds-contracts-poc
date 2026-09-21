@@ -7,6 +7,7 @@ import type {
 import type { ReactValidation } from "../../../source-reference/react-reference-validation";
 import { useEffect, useState } from "react";
 import { ReactNativeInspection } from './ReactNativeInspection';
+import { ReactSourceRepairs } from './ReactSourceRepairs';
 interface Reference {
   id: string;
   source: string;
@@ -188,6 +189,7 @@ export function ReactSourceReference() {
       aria-labelledby="react-original-title"
     >
       <h2 id="react-original-title">React originals</h2>
+      <ReactSourceRepairs onReload={()=>void load()}/>
       <p>
         Inspect the actual source components before conversion. A source
         workspace may declare its own cases; without a declaration the built-in

@@ -224,6 +224,20 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       return evidenceReadOnce('react-initial',{repo,referenceId:reference.id,files:reference.files,request,identity},
         ()=>nativeEvidenceFresh(reference,request,identity));
     },
+    /** Host-only repair input from the exact saved source/native pair. Never
+     * choose the latest observation, accept a browser path, or drop a row. */
+    repairEvidence(reference:ReactReference,request:ReactInitialNativeRequest,identity:string) {
+      const evidence=nativeEvidenceFresh(reference,request,identity);
+      const value=from(reference,reactInspectionRequest(request.anchor,request.caseId,request.version===2?request.instanceId:undefined));
+      const record=saved(value,request.observation)!;
+      const observation=record.report.observation!;
+      const snapshots=Object.fromEntries(observation.rows.map(row=>{
+        if(!/^\d+$/.test(row.id))throw Error('react-initial-row-invalid');
+        return [row.id,JSON.parse(readFileSync(path.join(record.dir,'states',row.id+'.json'),'utf8'))];
+      }));
+      return {original:value.source,observation:structuredClone(observation),snapshots,
+        nativeVariants:evidence.draft.nativeVariants};
+    },
     nativeImage(reference: ReactReference, request: ReactInitialNativeRequest, rowId: string) {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))
         throw Error('react-initial-native-image-invalid');

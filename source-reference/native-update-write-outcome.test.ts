@@ -219,6 +219,44 @@ test('a design read names a canvas edit without moving the verified state, and t
  f.jobs().retryObservation(f.id);
 });
 
+test('repair evidence contains every change and the actual readbacks, independently of the display limit',async t=>{
+ const f=await fixture(t);for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const)await f.run(phase);
+ assert.throws(()=>f.jobs().designEvidence(f.id),/design-evidence-unavailable/);
+ const command=f.jobs().observeDesign(f.id),observed=await f.run_script(command.script);
+ // Unknown fields must reach the repair planner so it can refuse them; the
+ // last unsupported field must not disappear at the UI's 200-row boundary.
+ const node=observed.nodes.find((n:any)=>n.id===f.nodes[0].id);
+ for(let i=0;i<205;i++)node.values['unhandled-'+i]=i;
+ const display=f.jobs().accept(f.id,{...command,result:observed});
+ assert.equal(display.designChanges!.total,205);assert.equal(display.designChanges!.changes.length,200);
+ const evidence=f.jobs().designEvidence(f.id);
+ assert.equal(evidence.difference.changes.length,205);assert.equal(evidence.attemptId,command.attemptId);
+ assert.equal(evidence.input.component.variants[0].spec.opacity,0.25);
+ assert.equal(evidence.baseline.nodes!.find(n=>n.id===f.nodes[0].id)!.values.opacity,0.25);
+ assert.deepEqual(evidence.observed.nodes,observed.nodes);assert.match(evidence.journalRevision,/^[a-f0-9]{64}$/);
+ assert.equal(evidence.baseline.images,undefined);assert.equal(evidence.observed.images,undefined);
+ evidence.difference.changes.length=0;evidence.observed.nodes!.length=0;
+ f.restart();assert.equal(f.jobs().designEvidence(f.id).difference.changes.length,205,'callers cannot mutate saved evidence');
+ assert.equal(f.writes(),1,'reading repair evidence dispatches no native write');
+});
+
+test('a new or interrupted observation invalidates the previous design evidence even after the baseline verifies again',async t=>{
+ const f=await fixture(t);for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const)await f.run(phase);
+ const observe=async()=>{const c=f.jobs().observeDesign(f.id);f.jobs().accept(f.id,{...c,result:await f.run_script(c.script)});};
+ await observe();assert.ok(f.jobs().designEvidence(f.id));
+ f.jobs().observeDesign(f.id);
+ assert.throws(()=>f.jobs().designEvidence(f.id),/effective-observation-unavailable/);
+ f.jobs().retryObservation(f.id);
+ const current=f.jobs().pendingCommand(f.id)!;
+ f.jobs().accept(f.id,{...current,result:await f.run_script(current.script)});
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');
+ assert.equal(f.jobs().get(f.id).designChanges,undefined);
+ assert.throws(()=>f.jobs().designEvidence(f.id),/design-evidence-unavailable/);
+ await observe();assert.ok(f.jobs().designEvidence(f.id));
+ await f.run('update-readback');f.restart();
+ assert.throws(()=>f.jobs().designEvidence(f.id),/design-evidence-unavailable/);
+});
+
 // An operator may attest that a begun write's companion is gone. The attestation
 // revokes that attempt, so no late result or late begin is accepted, and the write
 // is then settled by a canvas read dispatched after it like any other unknown write.

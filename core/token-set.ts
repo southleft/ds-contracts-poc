@@ -1091,7 +1091,7 @@ function scopedTokenPreparation(input: NativeTokenContextInput): NativeTokenPrep
 /** Shared read-only helpers for creation-object receipts and later independent
  * native reads. Ownership metadata is an identity precondition, not authority
  * granted by a collection name. The host authenticates this preparation. */
-function nativeTokenReceiptRuntime(preparation: NativeTokenPreparation): string {
+function nativeTokenReceiptRuntime(preparation: NativeTokenPreparation, extensions = false): string {
   return `const PREPARATION = ${JSON.stringify(preparation)};
 const NS = 'ds_contracts', OWNERSHIP_KEY = 'nativeTokenContext';
 const OWNERSHIP = { scopeId: PREPARATION.scopeId, preparationRevision: PREPARATION.revision, source: PREPARATION.source };
@@ -1119,6 +1119,7 @@ const receiptOf = (collection, variables) => ({
     id: collection.id, key: collection.key, name: collection.name, remote: collection.remote,
     ownership: readOwner(collection), defaultModeId: collection.defaultModeId,
     modes: collection.modes.map((mode) => ({ modeId: mode.modeId, name: mode.name })),
+${extensions ? "    extensions: JSON.parse(collection.getSharedPluginData(NS, 'nativeTokenExtensions')),\n" : ''}\
   },
   variables: variables.map((variable) => ({
     id: variable.id, key: variable.key, name: variable.name, variableCollectionId: variable.variableCollectionId,
@@ -1139,6 +1140,7 @@ export function emitNativeTokenContextScript(input: NativeTokenContextInput): {
 } {
   // A value succession describes an EXISTING collection; it is never created.
   if (input?.allocatedValues !== undefined) throw new Error('native-token-write-value-succession-not-creatable');
+  if (input?.allocationBase !== undefined) throw new Error('native-token-write-allocation-extension-not-creatable');
   const preparation = scopedTokenPreparation(input);
   const multiple = preparation.writeProtocol === 'explicit-modes-v1';
   const script = `// GENERATED scoped candidate token creation by the existing token-set writer.
@@ -1276,6 +1278,7 @@ export function emitNativeTokenContextReadbackScript(
       ownership: { scopeId: preparation.scopeId, preparationRevision: preparation.revision, source: preparation.source },
       defaultModeId: identity?.modes?.[0]?.modeId,
       modes: identity?.modes?.map((m) => ({ modeId: m.modeId, name: m.name })) ?? [],
+      ...(identity?.extensions ? { extensions: identity.extensions } : {}),
     },
     variables: preparation.variables.map((v) => {
       const expected = variables.get(v.tokenPath);
@@ -1293,7 +1296,7 @@ export function emitNativeTokenContextReadbackScript(
   const checked = verifyNativeTokenContextReceipt({ input, expectedIdentity: identity, receipt: expectedReceipt });
   if (checked.status !== 'native-token-context-observed') throw new Error(checked.problems[0]);
   return `// GENERATED read-only native token observation. No allocation or repair.
-${nativeTokenReceiptRuntime(preparation)}
+${nativeTokenReceiptRuntime(preparation, !!input.allocationBase)}
 const EXPECTED = ${JSON.stringify(identity)};
 const result = { version: 1, status: 'refused', acceptedContract: null, nativeQualification: 'unqualified',
   preparationRevision: PREPARATION.revision, receiptKind: 'independent-native-readback', problems: [] };
