@@ -49,7 +49,9 @@ export function nativeTextNodeBindings(node: any, resolve?: (id: string) => any)
           500: 'Medium', 600: 'Semi Bold', 700: 'Bold', 800: 'Extra Bold', 900: 'Black' };
         const style = styles[weight];
         if (!style || fontName.family !== 'Inter') throw Error('fixture-font-weight-unqualified');
-        return { family: fontName.family, style: fontName.style.includes('Italic') ?
+        return { family: fontName.family,
+          ...(fontName.variationSettings ? { variationSettings: { ...fontName.variationSettings, wght: weight } } : {}),
+          style: fontName.style.includes('Italic') ?
           (style === 'Regular' ? 'Italic' : style + ' Italic') : style };
       },
       set(value) { fontName = value; },
@@ -64,6 +66,34 @@ export function nativeTextNodeBindings(node: any, resolve?: (id: string) => any)
       }
     };
     return node;
+}
+
+/** Evaluations paint probe: the resolved RGB and paint opacity both follow a
+ * bound RGBA leaf through the active route modes. The general mock stores the
+ * original paint only; opt in to this behavior for value-update fixtures. */
+export function nativeNodePaintBindings(node: any, resolve: (id: string) => any) {
+  for (const field of ['fills', 'strokes']) {
+    if (!(field in node)) continue;
+    let saved = node[field];
+    Object.defineProperty(node, field, { configurable: true, enumerable: true,
+      get() {
+        if (!Array.isArray(saved)) return saved;
+        // The general mock discovers resolved modes by traversing paints.
+        // Supply the inherited explicit selections directly to avoid recursive
+        // paint discovery; its resolver fills absent collection defaults.
+        const ancestors = []; for (let current = node; current; current = current.parent) ancestors.unshift(current);
+        const resolvedVariableModes = Object.assign({}, ...ancestors.map(n => n.explicitVariableModes));
+        return saved.map(paint => {
+          const alias = paint.boundVariables?.color;
+          const variable = alias?.type === 'VARIABLE_ALIAS' && resolve(alias.id);
+          if (!variable) return paint;
+          const value = variable.resolveForConsumer({ resolvedVariableModes }).value;
+          return { ...paint, color: { r: value.r, g: value.g, b: value.b }, opacity: value.a };
+        });
+      },
+      set(value) { saved = value; },
+    });
+  }
 }
 
 export function nativeTextGraphFixture(sizes = 10, colors = 10) {

@@ -149,6 +149,13 @@ retained native set without writes. Its diagnosis distinguishes unchanged
 evidence from supported structure and grants no recovery or settlement
 authority. A compact proposal restores the same guarded program while avoiding
 repeated parent evidence in each caller record.
+An exact value-propagation check now verifies selected native scalar, paint
+and font changes while preserving every other recorded field. Changed computed
+geometry remains a named refusal. In a live engineering run, one existing
+color variable updated five main variants and their retained caller; the
+separate read passed, and a guarded reverse update restored all 302 main node
+records, five caller records and the caller image exactly. This used a synthetic
+source successor, so it is not an application update or a fidelity result.
 Application source succession, delivery, interrupted-write settlement and
 updated visual/layout qualification remain unfinished; the application
 continues to refuse template updates.
