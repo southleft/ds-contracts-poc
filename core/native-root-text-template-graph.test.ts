@@ -8,8 +8,10 @@ import { flattenTokens } from './tokens.js';
 import { prepareNativeTokenContext } from './native-token-context.js';
 import { planNativeRootTextTemplateGraph, verifyNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection,
   verifyNativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput, type NativeRootTextTemplateGraph } from './native-root-text-template-graph.js';
+import { nativeTextBindings } from './native-text-template-test-fixture.js';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
 import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 
 function fixture(sizes = 10, colors = 10) {
   const names = (length: number) => Array.from({ length }, (_, i) => `v${i}`);
@@ -285,4 +287,139 @@ test('a competing selector created during asynchronous source lookup stops furth
   assert.deepEqual(created.problems, ['native-template-graph-scope-collision']);
   assert.deepEqual(created.allocation.selectors, []); assert.deepEqual(created.allocation.routes, []);
   assert.equal(h.collections.length, 2); assert.equal(h.variables.length, generated.graph.sourceTokens.variables.length);
+});
+
+
+async function componentFixture() {
+  const f = fixture(3, 3), h = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
+  nativeTextBindings(h.figma);
+  Object.getPrototypeOf(h.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, mode: string) {
+    this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: mode };
+  };
+  Object.assign(f.contract.anatomy.root.tokens!, { 'background-color': '{ink.{ink}}', 'border-color': '{ink.{ink}}',
+    'padding-inline': '{size.v0}', 'border-radius': '{size.v0}' });
+  const engine = createFigmaEngine({ tokens: { primitives: f.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
+  const operation = { id: '10000000-0000-4000-8000-000000000099', fileKey: h.figma.fileKey };
+  const source = { revision: revisionOf('graph component source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('graph evidence') };
+  const tokens = f.compile().tokens;
+  tokens.fileKey = operation.fileKey; tokens.scopeId = 'source-' + operation.id;
+  tokens.source.revision = source.revision;
+  const byId = new Map([[f.contract.id, f.contract]]);
+  const { input, graph } = engine.compileNativeContractTemplateGraph(f.contract, byId, source, tokens);
+  const run = async (code: string) => JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${code}\n})()`, { figma: h.figma, console }, { timeout: 5000 })));
+  const created = await run(emitNativeTemplateGraphScript(input).script);
+  assert.equal(created.status, 'created-candidate', JSON.stringify(created));
+  const observed = await run(emitNativeTemplateGraphReadbackScript(input, created.identity));
+  verifyNativeTemplateGraphReceipt(input, created.identity, observed.receipt);
+  const context = { operation, tokens: { input: tokens, identity: created.identity.source, receipt: observed.receipt.source },
+    templateGraph: { identity: created.identity, receipt: observed.receipt } };
+  const script = () => engine.buildNativeContractDraftScript(f.contract, byId, source, context);
+  return { ...h, ...f, engine, operation, source, byId, input, graph, created, observed, context, run, script };
+}
+
+test('shared component renderer carries the complete selector vector and inherits four stable text bindings', async () => {
+  const h = await componentFixture(), before = structuredClone(h.observed.receipt);
+  const result = await h.run(h.script());
+  assert.equal(result.status, 'created-candidate', JSON.stringify(result));
+  const draft = h.engine.compileNativeContractDraft(h.contract, h.byId, h.source);
+  const observation: NativeContractObservationInput = { operation: h.operation, planRevision: revisionOf('graph component observation'),
+    projection: draft.projection, component: draft.component, tokenInput: h.context.tokens.input,
+    tokenIdentity: h.context.tokens.identity, creation: result, templateGraph: { input: h.input, identity: h.created.identity } };
+  const readback = await h.run(emitNativeContractReadbackScript(observation));
+  assert.equal(verifyNativeContractReadback(observation, readback).status, 'supported-structure-observed', JSON.stringify(verifyNativeContractReadback(observation, readback)));
+  for (const mutate of [
+    (r: any) => { delete r.templateGraph; },
+    (r: any) => { r.templateGraph.receipt.routes[0].valuesByMode = {}; },
+    (r: any) => { delete r.nodes.find((n: any) => n.type === 'COMPONENT').values.explicitVariableModes[h.created.identity.selectors[0].id]; },
+    (r: any) => { r.nodes.find((n: any) => n.type === 'TEXT').values.explicitVariableModes = { [h.created.identity.selectors[0].id]: h.created.identity.selectors[0].modes[0].modeId }; },
+    (r: any) => { r.nodes.find((n: any) => n.type === 'TEXT').values.fontWeight = 800; },
+  ]) {
+    const altered = structuredClone(readback); mutate(altered);
+    assert.equal(verifyNativeContractReadback(observation, altered).status, 'refused');
+  }
+  const set = await h.figma.getNodeByIdAsync(result.target.id);
+  assert.equal(set.children.length, 9);
+  for (const main of set.children) {
+    const selected = nativeRootTextTemplateGraphSelection(h.graph, main.name);
+    const modes = Object.fromEntries([[h.context.tokens.identity.collection.id, h.context.tokens.identity.modes[0].modeId],
+      ...h.context.templateGraph.identity.selectors.map((s: any) => [s.id, s.modes[Number(selected[s.selector])].modeId])]);
+    assert.deepEqual(main.explicitVariableModes, modes);
+    const slot = main.children[0], text = slot.children[0];
+    assert.equal(slot.type, 'SLOT'); assert.equal(text.type, 'TEXT');
+    assert.equal(text.visible, false); assert.equal(text.characters, '');
+    assert.deepEqual(slot.explicitVariableModes, {}); assert.deepEqual(text.explicitVariableModes, {});
+    assert.deepEqual(text.resolvedVariableModes, modes);
+    const sources = selectedSources(h.graph, main.name);
+    for (const [channel, alias] of Object.entries(h.graph.template.aliases)) {
+      const id = h.context.templateGraph.identity.routes.find((r: any) => r.name === alias)!.id;
+      const variable = h.variables.find(v => v.id === id)!;
+      const sourceId = h.context.tokens.identity.variables.find((v: any) => v.tokenPath === sources[channel])!.id;
+      const source = h.variables.find(v => v.id === sourceId)!;
+      assert.deepEqual(variable.resolveForConsumer(text), source.resolveForConsumer(text));
+      if (channel === 'fill') assert.equal(text.fills[0].boundVariables.color.id, id);
+      else assert.equal(text.boundVariables[channel][0].id, id);
+    }
+  }
+  const after = await h.run(emitNativeTemplateGraphReadbackScript(h.input, h.created.identity));
+  assert.deepEqual(after.receipt, before, 'component creation never modifies the routing graph');
+  const size = h.context.tokens.identity.variables.find((v: any) => v.tokenPath === 'size.v0')!;
+  assert.deepEqual(after.receipt.sourceScopes[size.id], ['CORNER_RADIUS', 'FONT_SIZE', 'GAP']);
+  const ink = h.context.tokens.identity.variables.find((v: any) => v.tokenPath === 'ink.v0')!;
+  assert.deepEqual(after.receipt.sourceScopes[ink.id], ['FRAME_FILL', 'STROKE_COLOR', 'TEXT_FILL']);
+  const nodes = h.figma.root.findAll(() => true).map((n: any) => n.id);
+  const repeat = await h.run(h.script());
+  assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
+  assert.deepEqual(h.figma.root.findAll(() => true).map((n: any) => n.id), nodes);
+});
+
+test('component graph context is rederived; receipt and source substitution refuse before a program is emitted', async () => {
+  const h = await componentFixture();
+  for (const mutate of [
+    (c: typeof h.context) => { c.templateGraph.receipt.routes[0].valuesByMode = {}; },
+    (c: typeof h.context) => { c.templateGraph.identity.source.collection.id = 'other'; },
+    (c: typeof h.context) => { c.tokens.input.source.sourceProgramSha256 = 'b'.repeat(64); },
+    (c: typeof h.context) => { c.tokens.input.modes[0].tokenTreeRevision = revisionOf('invented'); },
+  ]) {
+    const context = structuredClone(h.context); mutate(context);
+    assert.throws(() => h.engine.buildNativeContractDraftScript(h.contract, h.byId, h.source, context), /native-template-graph-|native-source-write-template-graph-|NATIVE_ROOT_TEXT_TEMPLATE_GRAPH_/);
+  }
+  const c = structuredClone(h.contract); c.anatomy.root.tokens!['font-size'] = '{size.v0}';
+  assert.throws(() => h.engine.buildNativeContractDraftScript(c, new Map([[c.id, c]]), h.source, h.context), /native-template-graph-identity-shape/);
+});
+
+test('a routing edit during asynchronous font preflight refuses with no node allocation', async () => {
+  const h = await componentFixture(), script = h.script(), before = h.figma.root.findAll(() => true).map((n: any) => n.id);
+  const load = h.figma.loadFontAsync.bind(h.figma); let changed = false;
+  h.figma.loadFontAsync = async (...args: any[]) => {
+    if (!changed) {
+      changed = true;
+      const route = h.variables.find(v => v.id === h.context.templateGraph.identity.routes[0].id)!;
+      route.scopes = ['ALL_SCOPES'];
+    }
+    return load(...args);
+  };
+  const result = await h.run(script);
+  assert.equal(result.status, 'refused'); assert.equal(result.allocationAttempted, false);
+  assert.deepEqual(result.problems, ['native-source-write-template-graph-changed']);
+  assert.deepEqual(h.figma.root.findAll(() => true).map((n: any) => n.id), before);
+});
+
+test('a competing operation page created during final graph lookup refuses before allocation', async () => {
+  const h = await componentFixture(), script = h.script();
+  const load = h.figma.loadFontAsync.bind(h.figma), lookup = h.figma.variables.getVariableByIdAsync.bind(h.figma.variables);
+  let fontsReached = false, inserted = false, competingId = '';
+  h.figma.loadFontAsync = async (...args: any[]) => { fontsReached = true; return load(...args); };
+  h.figma.variables.getVariableByIdAsync = async (id: string) => {
+    if (fontsReached && !inserted && id === h.created.identity.routes[0].id) {
+      inserted = true;
+      const page = h.figma.createPage(); page.name = 'DS contract draft / ' + h.operation.id; competingId = page.id;
+    }
+    return lookup(id);
+  };
+  const before = h.figma.root.findAll(() => true).map((n: any) => n.id);
+  const result = await h.run(script);
+  assert.equal(inserted, true);
+  assert.equal(result.status, 'refused'); assert.equal(result.allocationAttempted, false);
+  assert.deepEqual(result.problems, ['native-source-write-page-name-collision']);
+  assert.deepEqual(h.figma.root.findAll(() => true).map((n: any) => n.id), [...before, competingId]);
 });

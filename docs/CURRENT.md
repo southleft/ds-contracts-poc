@@ -61,9 +61,10 @@ Native component properties and editable slot text are different capabilities. F
 The explicit root text-template path has a generated native engineering probe:
 caller text retains its bindings through Small → Large → Small, and a bounded
 inverse restores root typography. The source adapter does not yet derive this
-marker. A separate generated variable-graph transport passes an independent
-native readback, but its component integration and canonical return are not
-implemented. New property observations authenticate painted fonts per plane;
+marker. A separate variable-graph component candidate now creates 100 native
+mains through the shared renderer, with independent graph and node readback.
+Its caller comparison, canonical return and application integration remain
+unimplemented. New property observations authenticate painted fonts per plane;
 older source archives retain their original interpretation. Application journeys,
 template updates/recovery, clean consumers and
 5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).

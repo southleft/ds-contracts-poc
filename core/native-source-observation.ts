@@ -1,6 +1,8 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
-import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
+import { verifyRootTextTemplateTokenContext, applyRootTextTemplateAliases } from './native-root-text-template-plan.js';
+import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
+import { emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt, type NativeTemplateGraphIdentity } from './native-root-text-template-graph-native.js';
 import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
 import { positionedAs } from './native-float32.js';
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
@@ -42,6 +44,7 @@ export interface NativeSourceReadback {
   nativeQualification: "unqualified";
   nodes?: Array<Record<string, any>>;
   tokens?: Record<string, any>;
+  templateGraph?: Record<string, any>;
   images?: Array<{ caseId: string; nodeId: string; pngBase64: string }>;
   problems: string[];
 }
@@ -57,6 +60,8 @@ export interface NativeContractObservationInput extends Omit<NativeSourceObserva
   /** Explicit layout evidence for a future bounded cross-axis update. Absent
    * from historical inputs and programs; this readback grants no write. */
   fixedCrossSizeReadback?: {version:1;nodeIds:string[]};
+  /** Engine-derived original specs and persisted variable allocation IDs. */
+  templateGraph?: { input: NativeRootTextTemplateGraphInput; identity: NativeTemplateGraphIdentity };
 }
 export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
 function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {
@@ -108,8 +113,24 @@ function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
   if (isContractDraft(input) && input.projection.rootTextTemplate) {
     if (input.graphComponents) throw Error('native-text-template-graph-unqualified');
-    verifyRootTextTemplateTokenContext(input.tokenInput, input.projection.rootTextTemplate);
+    if (input.templateGraph) {
+      const { input: original, identity } = input.templateGraph, graph = planNativeRootTextTemplateGraph(original);
+      if (original.renderScope !== 'component' || !same(original.tokens, input.tokenInput) || !same(identity.source, input.tokenIdentity) ||
+          !same(graph.template, input.projection.rootTextTemplate)) throw Error('native-text-template-graph-context-changed');
+      const expected = structuredClone(original.component);
+      applyRootTextTemplateAliases(expected, graph.template);
+      const visit = (spec: NodeSpec, variant: string, specPath: number[]) => {
+        spec.nativeContractPart = { contractRevision: input.projection.contractRevision, variant, specPath };
+        spec.children?.forEach((child, i) => visit(child, variant, [...specPath, i]));
+      };
+      expected.variants.forEach(v => visit(v.spec, v.name, []));
+      expected.nativeContractDraft = { revision: revisionOf(input.projection), acceptedContract: null };
+      if (!same(expected, input.component)) throw Error('native-text-template-graph-component-changed');
+      emitNativeTemplateGraphReadbackScript(original, identity); // complete identity validation
+    } else verifyRootTextTemplateTokenContext(input.tokenInput, input.projection.rootTextTemplate);
   }
+  if (isContractDraft(input) && input.templateGraph && (!input.projection.rootTextTemplate || input.fixedCrossSizeReadback || input.backgroundMigration || input.absoluteShapeReadback))
+    throw Error('native-text-template-graph-readback-unqualified');
   if (isContractDraft(input) && input.fixedCrossSizeReadback !== undefined) {
     const guard = input.fixedCrossSizeReadback;
     if (guard.version !== 1 || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
@@ -198,12 +219,25 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if (isContractDraft(input) && input.component.variants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   if (isContractDraft(input) && input.component.variants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
-  return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
+  const inventory = emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component),
     isContractDraft(input) ? input.absoluteShapeReadback?.nodeIds : undefined,
     isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2,
     isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
     isContractDraft(input) && input.component.rootSlot?.textTemplate === 1);
+  if (!isContractDraft(input) || !input.templateGraph) return inventory;
+  const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity);
+  return `// GENERATED independent component and selector-graph observation.
+const readGraph = async () => { ${graphRead}\n };
+const before = await readGraph();
+const observed = await (async () => { ${inventory}\n })();
+const after = await readGraph();
+if (before.status !== 'readback-collected' || after.status !== 'readback-collected' || JSON.stringify(before) !== JSON.stringify(after)) {
+  observed.status = 'refused'; observed.problems.push('native-text-template-graph-changed-during-read');
+}
+observed.templateGraph = after;
+return observed;
+`;
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -573,6 +607,21 @@ function verifyReadback(
   const variableByName = new Map<string, string>(
     (tokens?.receipt?.variables ?? []).map((v: any) => [v.name, v.id]),
   );
+  const templateGraph = isContractDraft(input) ? input.templateGraph : undefined;
+  let graph: ReturnType<typeof planNativeRootTextTemplateGraph> | undefined;
+  if (templateGraph) {
+    try {
+      const observed = receipt.templateGraph;
+      if (!object(observed) || observed.status !== 'readback-collected' || observed.receiptKind !== 'independent-native-readback' ||
+          !same(observed.receipt?.source, tokens.receipt)) throw Error('graph-source-drift');
+      verifyNativeTemplateGraphReceipt(templateGraph.input, templateGraph.identity, observed.receipt);
+      graph = planNativeRootTextTemplateGraph(templateGraph.input);
+      for (const variable of observed.receipt.routes) {
+        if (variableByName.has(variable.name)) throw Error('graph-name-ambiguous');
+        variableByName.set(variable.name, variable.id);
+      }
+    } catch { issue('native-source-observation-template-graph-drift'); return report(); }
+  } else if (receipt.templateGraph !== undefined) { issue('native-source-observation-template-graph-unexpected'); return report(); }
   const mode = {
     [input.tokenIdentity.collection.id]: input.tokenIdentity.modes[0].modeId,
   };
@@ -725,7 +774,14 @@ function verifyReadback(
       issue("native-source-observation-node-type", n);
     let consumingMode = mode;
     const template = isContractDraft(input) ? input.projection.rootTextTemplate : undefined;
-    if (template && spec.nativeContractPart) {
+    if (graph && templateGraph && spec.nativeContractPart) {
+      const selected = nativeRootTextTemplateGraphSelection(graph, spec.nativeContractPart.variant);
+      consumingMode = Object.fromEntries([[input.tokenIdentity.collection.id, input.tokenIdentity.modes[0].modeId],
+        ...templateGraph.identity.selectors.map(s => [s.id, s.modes[Number(selected[s.selector])].modeId])]);
+      const inherits = spec.rootSlotContent || spec.slotTextTemplate;
+      if (!same(v.explicitVariableModes, inherits ? {} : consumingMode) || !same(v.resolvedVariableModes, consumingMode))
+        issue('native-source-observation-template-mode', n);
+    } else if (template && spec.nativeContractPart) {
       const selected = template.variants.find(row => row.name === spec.nativeContractPart!.variant);
       const native = input.tokenIdentity.modes.find(row => row.nativeSelection?.planRevision === template.revision && row.nativeSelection?.modeKey === selected?.modeKey);
       consumingMode = native ? { [input.tokenIdentity.collection.id]: native.modeId } : {};
@@ -911,13 +967,16 @@ function verifyReadback(
       issue("native-source-observation-clipping", n);
     if (spec.type === "text") {
       if (spec.slotTextTemplate) {
-        let weight = tokens.receipt.variables.find((entry: any) => entry.name === spec.fontWeightVar);
-        const modeId = consumingMode[input.tokenIdentity.collection.id], seen = new Set<string>();
+        const variables = [...tokens.receipt.variables, ...(graph ? receipt.templateGraph!.receipt.routes : [])];
+        let weight = variables.find((entry: any) => entry.name === spec.fontWeightVar);
+        let modeId = consumingMode[weight?.variableCollectionId ?? input.tokenIdentity.collection.id];
+        const seen = new Set<string>();
         while (weight && object(weight.valuesByMode[modeId]) && weight.valuesByMode[modeId].type === 'VARIABLE_ALIAS') {
           if (seen.has(weight.id)) { weight = undefined; break; }
           seen.add(weight.id);
           const id = weight.valuesByMode[modeId].id;
-          weight = tokens.receipt.variables.find((entry: any) => entry.id === id);
+          weight = variables.find((entry: any) => entry.id === id);
+          modeId = consumingMode[weight?.variableCollectionId ?? input.tokenIdentity.collection.id];
         }
         if (!weight || !numeric(v.fontWeight, weight.valuesByMode[modeId]))
           issue('native-source-observation-text-template-weight', n);

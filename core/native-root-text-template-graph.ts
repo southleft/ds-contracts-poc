@@ -3,7 +3,7 @@
  * path accepts this plan yet. Hosts must rederive it from authenticated inputs;
  * a hash on a supplied graph is not authority to allocate or adopt variables. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
-import type { ComponentData } from './emit-figma-script.js';
+import type { ComponentData, NodeSpec } from './emit-figma-script.js';
 import { prepareNativeTokenContext, type NativeTokenContextInput, type NativeTokenPreparation } from './native-token-context.js';
 import { planNativeRootTextTemplate, type NativeRootTextTemplatePlan, type RootTextTemplateChannel } from './native-root-text-template-plan.js';
 import { flattenTokens } from './tokens.js';
@@ -20,6 +20,8 @@ export interface NativeRootTextTemplateGraph {
   selectors: Array<{ key: string; collectionName: string; modes: ['0', '1'] }>;
   routes: Route[];
   selections: Array<{ modeKey: string; modes: Record<string, '0' | '1'> }>;
+  /** Present only for a component transport; derived from the fresh specs. */
+  componentSourceScopes?: Record<string, string[]>;
   /** Counts the carrier, routing variables and original source alias chain. */
   maximumSelectedChainEntries: number;
   revision: string;
@@ -28,6 +30,7 @@ export interface NativeRootTextTemplateGraphInput {
   component: ComponentData;
   source: { contractRevision: string; tokenRevision: string };
   tokens: NativeTokenContextInput;
+  renderScope?: 'component';
 }
 function fail(why: string): never { throw Error(`NATIVE_ROOT_TEXT_TEMPLATE_GRAPH_${why}`); }
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
@@ -109,8 +112,46 @@ export function planNativeRootTextTemplateGraph(input: NativeRootTextTemplateGra
   // Never hide source alias depth by counting only synthetic routing nodes.
   if (maximumSelectedChainEntries > 16) fail('SELECTED_CHAIN_LIMIT');
   const body = { version: 1 as const, kind: 'native-root-text-template-graph' as const, template, sourceTokens,
-    selectors, routes: [...routes.values()].sort((a, b) => order(a.name, b.name)), selections, maximumSelectedChainEntries };
+    selectors, routes: [...routes.values()].sort((a, b) => order(a.name, b.name)), selections, maximumSelectedChainEntries,
+    ...(input.renderScope === 'component' ? { componentSourceScopes: componentScopes(input.component, sourceTokens) } : {}) };
   return { ...body, revision: revisionOf(body) };
+}
+
+/** Picker categories are not binding authority. Unknown binding fields refuse
+ * instead of broadening the picker to ALL_SCOPES. Original alias targets inherit
+ * the union of every consumer of their source variable. */
+function componentScopes(component: ComponentData, tokens: NativeTokenPreparation): Record<string, string[]> {
+  const fields: Record<string, string> = {
+    paddingLeft: 'GAP', paddingRight: 'GAP', paddingTop: 'GAP', paddingBottom: 'GAP', itemSpacing: 'GAP', counterAxisSpacing: 'GAP',
+    topLeftRadius: 'CORNER_RADIUS', topRightRadius: 'CORNER_RADIUS', bottomLeftRadius: 'CORNER_RADIUS', bottomRightRadius: 'CORNER_RADIUS', cornerRadius: 'CORNER_RADIUS',
+    strokeWeight: 'STROKE_FLOAT', strokeTopWeight: 'STROKE_FLOAT', strokeRightWeight: 'STROKE_FLOAT', strokeBottomWeight: 'STROKE_FLOAT', strokeLeftWeight: 'STROKE_FLOAT',
+    width: 'WIDTH_HEIGHT', height: 'WIDTH_HEIGHT', minWidth: 'WIDTH_HEIGHT', maxWidth: 'WIDTH_HEIGHT', minHeight: 'WIDTH_HEIGHT', maxHeight: 'WIDTH_HEIGHT', opacity: 'OPACITY',
+  };
+  const byName = new Map(tokens.variables.map(v => [v.name, v])), found = new Map<string, Set<string>>();
+  const add = (name: string | undefined, scope: string, type: 'FLOAT' | 'COLOR') => {
+    if (name === undefined) return;
+    const variable = byName.get(name);
+    if (!variable || variable.resolvedType !== type) fail('COMPONENT_BINDING_UNQUALIFIED');
+    const scopes = found.get(variable.tokenPath) ?? new Set<string>();
+    scopes.add(scope); found.set(variable.tokenPath, scopes);
+  };
+  const visit = (spec: NodeSpec) => {
+    for (const [field, name] of Object.entries(spec.bindings ?? {})) {
+      if (!fields[field]) fail('COMPONENT_BINDING_SCOPE_UNQUALIFIED');
+      add(name, fields[field], 'FLOAT');
+    }
+    add(spec.fill, spec.type === 'text' ? 'TEXT_FILL' : spec.type === 'shape' || spec.type === 'svg' ? 'SHAPE_FILL' : 'FRAME_FILL', 'COLOR');
+    add(spec.stroke, 'STROKE_COLOR', 'COLOR');
+    add(spec.fixedWidth?.varName, 'WIDTH_HEIGHT', 'FLOAT'); add(spec.fixedHeight?.varName, 'WIDTH_HEIGHT', 'FLOAT');
+    add(spec.textFill, 'TEXT_FILL', 'COLOR'); add(spec.fontSizeVar, 'FONT_SIZE', 'FLOAT');
+    add(spec.fontWeightVar, 'FONT_WEIGHT', 'FLOAT'); add(spec.lineHeightVar, 'LINE_HEIGHT', 'FLOAT');
+    // Root text templates cannot contain SVGs or nested components; keep this
+    // refusal explicit if their shape is ever widened elsewhere.
+    if (spec.svgPaintVar || spec.type === 'instance' || spec.type === 'svg') fail('COMPONENT_SHAPE_UNQUALIFIED');
+    for (const child of spec.children ?? []) visit(child);
+  };
+  for (const variant of component.variants) visit(variant.spec);
+  return Object.fromEntries([...found].sort(([a], [b]) => order(a, b)).map(([path, scopes]) => [path, [...scopes].sort()]));
 }
 
 /** Requires the source inputs again, not a self-reported plan hash. */
@@ -165,5 +206,6 @@ export function nativeRootTextTemplateGraphSourceScopes(graph: NativeRootTextTem
   };
   for (const route of graph.routes) for (const target of route.targets)
     if ('sourcePath' in target) visit(target.sourcePath, routeScopes[route.name]);
+  for (const [path, scopes] of Object.entries(graph.componentSourceScopes ?? {})) visit(path, scopes);
   return Object.fromEntries([...found].map(([path, values]) => [path, [...values].sort()]));
 }

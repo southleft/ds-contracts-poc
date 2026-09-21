@@ -83,6 +83,7 @@ import {
   type NativeSourceProjectionContext,
 } from './native-source-projection.js';
 import { prepareNativeSourceWrite, wrapNativeSourceWrite, type NativeSourceWriteContext } from './native-source-write.js';
+import { planNativeRootTextTemplateGraph, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { prepareNativeSourceComparisons, NATIVE_COMPARISONS_RUNTIME, type NativeSourceSampleIdentity } from './native-source-comparisons.js';
 
 
@@ -7914,12 +7915,30 @@ function buildNativeContractDraftScript(
 ): string {
   if (context.comparisons) throw Error('NATIVE_CONTRACT_DRAFT_COMPARISON_MAPPING_REQUIRED');
   const draft = compileNativeContractDraft(contract, byId, source);
-  const prepared = prepareNativeSourceWrite(draft.projection, context, draft.boundNames);
+  const graphInput = context.templateGraph ? compileNativeContractTemplateGraph(contract, byId, source, context.tokens.input).input : undefined;
+  const prepared = prepareNativeSourceWrite(draft.projection, context, draft.boundNames, undefined, undefined, graphInput);
   const scoped = { ...draft.component, contractId: prepared.descriptor.machineId, anchorKey: null };
   return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
     preamble: '', nativeSource: true,
   }), draft.fonts);
+}
+
+/** Recompile from the Contract and engine token inputs. Caller-supplied specs
+ * or a graph hash never authorize allocation or component writes. */
+function compileNativeContractTemplateGraph(contract: Contract, byId: Map<string, Contract>,
+  source: NativeContractDraftSource, tokens: NativeRootTextTemplateGraphInput['tokens']) {
+  const draft = compileNativeContractDraft(contract, byId, source);
+  if (!draft.projection.rootTextTemplate) throw Error('NATIVE_ROOT_TEXT_TEMPLATE_GRAPH_TEMPLATE_REQUIRED');
+  if (tokens.source.revision !== source.revision || tokens.source.sourceProgramSha256 !== source.programSha256 ||
+      tokens.modes[0]?.sourceMode !== draft.projection.context.mode || tokens.modes[0]?.brand !== draft.projection.context.brand)
+    throw Error('NATIVE_ROOT_TEXT_TEMPLATE_GRAPH_SOURCE_CONTEXT');
+  const component = compileComponentData(contract, byId);
+  if (compiledData.get(component) !== canonicalJson(component)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  const graphInput: NativeRootTextTemplateGraphInput = { component,
+    source: { contractRevision: draft.projection.contractRevision, tokenRevision: draft.projection.tokenRevision },
+    tokens: structuredClone(tokens), renderScope: 'component' };
+  return { input: graphInput, graph: planNativeRootTextTemplateGraph(graphInput) };
 }
 
 function scopeNativeGraphComponent(data: ComponentData, ids: Map<string, string>) {
@@ -9749,6 +9768,7 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildBatchScript,
     buildNativeSourceComponentScript,
     compileNativeContractDraft,
+    compileNativeContractTemplateGraph,
     buildNativeContractDraftScript,
     compileNativeContractGraphDraft,
     buildNativeContractGraphDraftScript,

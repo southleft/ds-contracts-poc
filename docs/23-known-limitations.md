@@ -8239,8 +8239,8 @@ and the previous failed consumer; never relabel old evidence as a new capture.
 The application source adapter does not yet derive the explicit
 `slot.bindings.figma.textTemplate` marker. Empty caller-slot mains therefore
 still lack the complete return behavior required by V1. Template updates,
-interrupted comparison recovery, composed graphs, states, variable-picker
-scopes, clean consumers and the unchanged 5% fidelity gate remain unqualified.
+interrupted comparison recovery, composed graphs, states,
+clean consumers and the unchanged 5% fidelity gate remain unqualified.
 
 **AGENT decision, 2026-09-21.** An explicit template marker is admitted only for
 one hidden empty TEXT inside the root SLOT, with complete bound font size,
@@ -8260,17 +8260,46 @@ complete selector vector for each public variant, and refuses unobserved binary
 addresses. Generated creation and separate ID-based readback have been checked
 in Evaluations for 31 source variables, seven selectors and 54 routing variables;
 an unchanged rerun refuses before allocation. Source and routing picker scopes
-are derived from their text consumers. This candidate-only transport does not
-create components or participate in application operations, repairs or updates.
+are derived from their text consumers. Variable allocation remains separate from
+component creation; neither candidate path participates in application operations,
+repairs or updates.
 Independent operation scopes can use the same compiler alias names in separate
 collections. A second native allocation and separate readback preserve the first
 graph exactly; names never authorize adopting or updating existing variables.
+
+A subsequent candidate uses the shared component renderer with a separately
+verified graph receipt. The engine re-derives the graph from the fresh contract
+and original token tree; supplied component data or a graph hash grants no write
+authority. Root and text consumers determine picker categories, including alias
+closure; unsupported binding fields refuse. Every main selects the complete
+source and selector mode vector, while its SLOT and hidden TEXT inherit it.
+Independent observation reads the graph before and after the node inventory and
+checks identities, all routing edges, ownership, mode vectors and template
+structure. A routing change during asynchronous font preflight refuses before
+node allocation. Unchanged ordinary writer programs retain their bytes.
+
+In Evaluations, candidate `10f0d730-9f43-44ae-a130-29bb74d104a7` creates 100 mains,
+153 original variables, seven selectors and 54 routing variables. Independent
+readback verifies all 302 native nodes; repeat refuses before allocation. The
+unobstructed canvas shows the empty editable mains. Its source is the unchanged
+DaisyUI observation with the template marker explicitly added for this engineering
+probe. This is not application source admission or a clean consumer/fidelity
+result. Caller comparison, canonical return, updates and recovery are still
+unqualified. The fresh application font observation independently verifies 200
+property planes across two cases and all 418 sealed files; it does not infer the
+marker or certify native font metrics.
+
+**AGENT decision, 2026-09-21.** Keep the original single-mode source-token identity
+and authenticate routing with a separate graph receipt. Do not represent multiple
+collections as one token identity or replace the shared renderer. Reversal: remove
+the optional `templateGraph` context, engine graph compilation entry point and
+matching observation branch; existing single-collection paths remain unchanged.
 
 The seven-level native research graph also exposes a capture gap: its sixteen
 consuming bindings retain their full selected chains, but the global variable
 collector cannot resolve two carrier modes. Raising a depth limit alone would
 not authenticate cross-collection selection. Multi-collection canonical return,
-component integration and application admission remain unimplemented. New source
+caller comparison and application admission remain unimplemented. New source
 property observations seal painted-font evidence on every plane and require the
 original font witness to return after each probe. Matrix and single-property
 assembly validate each witness against its raw tree and observation digest,
