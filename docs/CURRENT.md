@@ -207,10 +207,18 @@ current caller text IDs to the same object. New proposals admit that transition
 only with a complete slot-allocation proof and fresh SDK lookup equality; other
 content, geometry, binding and ownership changes still refuse. Historical
 proposal programs retain their exact bytes.
-An unchanged review before delivery produced zero changes. Live repetition,
-conflict, interruption, recovery and reverse delivery for this template path,
-additional caller creation after an update, comparison refresh/repair transitions
-and visual/layout qualification remain unfinished. Private evidence:
+After a fresh application session, an unchanged review planned and wrote nothing;
+all 1,470 retained main, update, proposal and succession files stayed byte-identical.
+A deliberate intervening native color edit then refused at preflight with zero
+attempted assignments. Restoring that value and retrying allowed the application
+to deliver the reverse source change. Independent verification restored all 302
+main records, five caller records, variables and 101 exported images to the original
+purple baseline. The unobstructed canvas and completed application status were
+both inspected. These results cover source-color forward, repeat, conflict,
+retry and reverse; live interruption/recovery, additional caller creation after
+an update, comparison refresh/repair transitions and visual/layout qualification
+remain unfinished. A read-only JavaScript profile of the saved-inspection listing
+took 75.7 seconds; reopening this history remains too slow. Private evidence:
 `native-template-app-integration-20260921/` and
 `native-template-caller-identity-20260921/`.
 
