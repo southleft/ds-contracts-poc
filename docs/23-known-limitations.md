@@ -7970,3 +7970,129 @@ To reverse, remove the source-position tiebreaker and restore the named tie
 expectations. Keep the independent cross-encapsulation refusal and all source,
 failed-probe, interrupted-run and native evidence. Do not replace authored
 constraints with measured sample dimensions or weaken visual thresholds.
+
+## D.97 Complete joint paint tables preserve both omitted planes
+
+**AGENT decision — 2026-09-20.** A complete `tokensByCombination` table now
+represents resting root paint that depends jointly on two optional defaultless
+enums. Each row contains two canonical values or `null` for omission, and plain
+token references. Both properties retain their existing public API and explicit
+native omitted planes. The shared referee requires every Cartesian tuple,
+identical channel sets, and no competing base, per-property, state or conditional
+binding. It admits background, text and border color only on one ordinary root.
+It refuses interaction states, nested anatomy, component/shape/icon/meter/repeat
+roots, outside-layout strokes, overrides and other channels. This is an optional
+schema field; existing contracts and their generated output keep their meaning.
+
+The shared source fuser can carry an observed pair through this table instead
+of returning an overflow. D.95 still names every unsupported binding and stops
+native preparation. CSS Modules, inline React, static CSS, shadow CSS and the
+native compiler use the same tuple semantics. Resource scoping rewrites all
+row references, and canvas projection removes entire tuples when it narrows a
+domain. A runtime `null`, `false` or `0` mapped to a named enum value stays
+distinct from omission.
+
+The first return probe exposed a real defect: emitted native fills were correct
+but their identities disappeared from the proposed contract. Native inversion
+now retains the actual bound references when complete observations prove a
+function of two corroborated optional axes; independent extra axes must be fully
+observed. Root text hoisting retains the same identity table. The proposal
+refuses an unsupported final table rather than emitting one that the shared
+referee cannot carry. Missing tuples, duplicate observations, missing omission
+metadata, unbound paint and unexplained paint opacity cannot certify a lossless
+table.
+
+Bounded browser tests exercise all nine set/omitted combinations, repeated
+transitions, typed mappings, and the actual static/shadow stylesheets. The emitted
+native program and canonical dump preserve the nine references and unchanged
+repeat. Native edits override the original binding; equal-color variables keep
+their distinct identities. A 27-variant probe verifies an independent third
+axis and refuses a paint that depends on all three. These are compiler and
+browser proofs, not complete live application acceptance.
+
+A fresh unchanged DaisyUI source trace matches both representatives and restores
+all 100 observed combinations per case. Through the application, operation
+`12d70613-cd2a-4543-958a-6d9926a20852` creates 100 painted native mains in
+Evaluations set `89:2590` and 153 variables. Independent readbacks pass. Separate
+caller operation `e607320a-2c9c-4654-a9d9-a1e9acedf378` creates instance `89:2609`
+with visible purple fill, border and editable “New” text. Its native width is
+**51.01599884033203 px**, versus the unchanged source's **49.921875 px**; both
+heights are 20 px. The original text advances 29.92 px while the native text box
+is 31 px. This remains a fidelity gap. No sample extent, font or tolerance was
+changed to hide it. The prior 71 page identities/top-level child lists, 1,352
+variable records and 49 collection records remain unchanged in the captured
+inventory fields; that inventory does not certify every historical deep node.
+
+The canonical native return first refused the omitted/outline tuple because
+the new inverse admitted only opaque paints. Figma represents a solid paint's
+alpha in its [opacity field](https://developers.figma.com/docs/plugins/api/Paint/).
+The corrected shared check admits the bound reference only when paint opacity
+equals the captured variable's alpha exactly or its float32 representation.
+A full capture's variable layer is authoritative; missing entries refuse. A
+set-only caller may supply an explicit token corpus instead. Separate opacity
+changes and alpha values lost by capture quantization remain unsupported.
+The retained capture now imports through the application with 20 color/variant
+tuples for background and border. Repeating the import keeps the identical
+contract and one workspace entry; repeated archive preparation produces
+byte-identical packages. An isolated consumer installs the app-delivered
+archive unchanged and matches captured background, border and height through
+all 100 runtime combinations, including omission and caller-text replacement.
+Its empty slots contain no text-color or typography bindings to return. With
+the original Inter asset loaded at the host's 16 px default, the returned
+primary is 54.1875 × 20 px and the small secondary is 50.1875 × 16 px; both
+inherit black text. The source cases use 14 px and 12 px text, respectively.
+The first review harness had a broken font URL; that failed instrument and its
+measurements are preserved separately, and the corrected run requires a loaded
+font before measuring. Visible fidelity and the complete returned React journey
+remain unqualified. Evidence is retained in
+`joint-optional-token-bindings-20260920/` and
+`daisyui-source-intake-20260920/`.
+
+A live adversarial edit changes the primary main's bound fill opacity from 1
+to 0.5 without changing its variable reference. The canonical capture of that
+edit is refused by the application. Restoring the paint restores the exact
+original PNG bytes, native caller dimensions and successful app import. This
+proves the bounded opacity refusal and restoration; it does not qualify general
+native update synchronization.
+
+**AGENT decision — selected variable modes, 2026-09-21.** A live four-swatch
+control shares one bound color between two mains. Changing only the second
+main's collection mode changes its drawn color from `#141e28` to `#c80ab4`,
+while the current canonical dump still gives that variable one default value.
+Before this correction, both captures produced the same accepted joint paint
+table. The inverse now refuses a joint table whose referenced captured colors
+have differing or unavailable mode values with
+`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED`. Identical captured mode values remain
+supported. The check runs before simplifying repeated bindings into a single
+reference or axis, so rebinding rows cannot hide the same uncertainty. Raw mode
+evidence cannot be erased by an explicit value index.
+This conservative refusal also applies when all observed consumers happen to
+use the base mode: the capture does not corroborate their individual choices.
+Set-only callers must supply known mode conflicts alongside their corpus.
+The actual application accepts the prior single-mode capture, then refuses
+the captured mode-change control while preserving the editor contract byte for
+byte. Its earlier accepted, incorrect import remains separate evidence.
+The probe's original binding, mode and PNG were restored exactly; the new
+page, IDs, failed first fixture setup and both captures remain in
+`joint-paint-mode-review-20260921/`. Revisit this refusal only when the capture
+and inverse preserve each consuming mode, including aliases and theme
+interactions. Removing it without that evidence repeats the measured loss.
+
+A same-tab reload retains both saved Workspace entries but returns the editor
+to its default example. Manually selecting the saved import restores identical
+contract bytes and all 58 captured tokens. React archive preparation succeeds
+and the downloaded archive is byte-identical to the installed package above;
+there are still two Workspace entries and no source reimport. The measured
+receipt and inspected screenshot are in
+`joint-paint-mode-review-20260921/recovery-result-v1.json` and
+`recovery-restored-v1.png`. A separate fresh-tab check shows no saved imports,
+while the original tab retains both entries and identical contract bytes
+(`fresh-tab-result-v1.json`). Workspace storage is scoped to one tab; cross-tab
+recovery is unavailable. These observations do not prove browser-restart
+recovery or automatic editor selection restoration. Fidelity remains unqualified.
+
+To reverse, remove the optional schema field, shared resolver/referee, fuser and
+inverse admission, and all emitter/resource consumers together; restore the
+D.95 overflow expectation for these pairs. Preserve the failed native run,
+return regression and all journals. Do not widen fidelity thresholds or collapse
+omission into an invented default to obtain a pass.

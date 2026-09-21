@@ -100,6 +100,31 @@ from the source report. Fresh assembly now names those refusals and stops before
 native preparation ([D.95](23-known-limitations.md#d95-root-style-drafts-retain-binding-refusals)).
 The separate source-order rule now retains the authored 20 px and 16 px heights,
 while `fit-content` width remains unresolved ([D.96](23-known-limitations.md#d96-css-rule-order-requires-stylesheet-and-tree-scope-evidence)).
+A bounded shared joint-paint table now preserves both omitted planes in
+compiler/browser tests, including canonical native return and typed values
+([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)).
+Fresh application delivery now creates 100 editable painted mains and 153
+variables in Evaluations. The separate caller instance has visible fill, border
+and editable text, but measures 51.01599884033203 × 20 px against the unchanged
+49.921875 × 20 px source. Its empty native content slots do not carry the source
+text-color or typography bindings back to React. The first canonical return
+refused transparent paint; the corrected inverse checks captured variable alpha
+exactly before preserving its reference.
+The same capture now imports in the app, repeats identically, and produces
+byte-identical installable archives. The unchanged installed component matches
+captured paint and height in all 100 combinations. Its missing text styling
+still produces the wrong caller widths and text colors.
+A separate live variable-mode control exposed color loss despite unchanged
+binding IDs. Joint paint return now refuses differing captured modes until
+each consuming node mode can be corroborated. The app names that refusal
+without changing the current contract; the supported single-mode import still
+succeeds. The probe restored its original binding, mode and image exactly.
+After a same-tab reload, manually selecting the saved Workspace import restores
+identical contract bytes and 58 captured tokens; archive preparation returns
+the same package bytes with both Workspace entries retained and no reimport.
+A fresh tab has no saved imports because Workspace storage is scoped to one
+tab. Cross-tab recovery is unavailable; browser-restart recovery remains
+unverified ([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)).
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 

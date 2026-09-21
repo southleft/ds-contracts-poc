@@ -62,7 +62,7 @@ import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '
  *   a11y.contrast is a review gate, not a rendering fact (no emitter
  *   renders it) — named here, not silently dropped.
  */
-import { refuseRetainedRuntime } from '@ds-contracts/core';
+import { refuseRetainedRuntime,jointTokenCss } from '@ds-contracts/core';
 import {
   isNativeCheckablePart,
   shapeCssDecls,
@@ -742,6 +742,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // One shared exit, so a new disposition can never be forgotten here again.
   // finishStylesheet also restores a ring part's boundary under forced colors;
   // a ring's real shadow whose token is `none` is settled where values are known.
+  lines.push(...jointTokenCss(contract,enumCond,conditions=>rootWithConds(["",...conditions]),ref=>cssVar(stripBraces(ref))));
   const finished = finishStylesheet(lines.join('\n'));
   return contract === input ? finished : settleStrokeShadows(finished, tokenValues, errors, contract.id);
 }

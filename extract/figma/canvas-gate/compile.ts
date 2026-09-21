@@ -126,6 +126,10 @@ export function projectForCanvas(contract: Contract): Contract {
         e.map = Object.fromEntries(Object.entries(e.map).filter(([k]) => kept.has(k)));
       }
     }
+    for (const table of (part.tokensByCombination ?? []) as NonNullable<Contract['anatomy']['root']['tokensByCombination']>) {
+      table.rows = table.rows.filter(row => table.props.every((prop, i) =>
+        row.values[i] === null || !keptByProp.has(prop) || keptByProp.get(prop)!.has(row.values[i]!)));
+    }
     for (const child of Object.values((part.parts as Record<string, Record<string, unknown>>) ?? {})) pruneMaps(child);
   };
   pruneMaps(clone.anatomy.root as unknown as Record<string, unknown>);

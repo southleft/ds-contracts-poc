@@ -47,6 +47,7 @@ import {
   topRoots,
 } from './anatomy.js';
 import { ELEMENT_META } from './elements.js';
+import {jointTokenTableErrors} from './joint-tokens.js';
 
 // ---------------------------------------------------------------------------
 // Contract-level validation (beyond the Zod schema)
@@ -96,6 +97,7 @@ export function validateContract(
   errors: string[],
   iconAssets: Map<string, string>,
 ) {
+  errors.push(...jointTokenTableErrors(contract));
   for (const prop of contract.props) if (prop.bindings.code.values) {
     const parsed = PropSchema.safeParse(prop);
     if (!parsed.success) errors.push(`${contract.id}: CODE_VALUES_INVALID:${prop.name}: ${parsed.error.message}`);
@@ -465,6 +467,9 @@ export function validateContract(
         for (const ch of Object.keys(overrides)) checkTokenChannel(ch, `tokensByProp[${i}]`);
       }
     });
+    for (const [i, table] of (part.tokensByCombination ?? []).entries()) {
+      for (const row of table.rows) for (const ch of Object.keys(row.tokens)) checkTokenChannel(ch, `tokensByCombination[${i}]`);
+    }
     // Root `states` had NO channel gate at all (nested-part states are gated
     // by the narrower PART_STATE_CHANNELS below) — the same hole, one level
     // up. It uses the token vocabulary, so it is refereed by the same
