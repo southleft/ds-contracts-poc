@@ -80,9 +80,11 @@ spacing and corners; changing caller text updates every combination. Lossless
 PNG comparisons now pass **100/100** on white at the unchanged 5% limit:
 maximum antialiasing-aware difference is **0%**, while exact-pixel difference
 reaches **29.39%**. All origins and dimensions match, and all isolated replays
-are byte-identical. Both source-readiness cohorts remain unqualified because
-the missing-font control cannot distinguish a local Inter fallback by family
-name ([D.100](23-known-limitations.md#d100-source-capture-must-preserve-css-module-imports)). A same-tab
+are byte-identical. Both source-readiness cohorts now pass **50/50** with an
+explicit web-font witness; each representative rejects all five corruption
+controls, including same-family system fallback. All 200 source/replay PNGs
+are byte-identical to those already scored. The earlier family-only refusals
+remain archived ([D.101](23-known-limitations.md#d101-web-font-witnesses-reject-same-family-system-fallback)). A same-tab
 reload requires manually selecting the saved Workspace import and produces
 identical contract and archive bytes. One earlier return tab stalled; recovery
 used a fresh tab with React output selected. Native fidelity, template updates,

@@ -8308,13 +8308,17 @@ the package remains unchanged. This measures returned React against original
 React and does not qualify the failing native caller.
 
 Two declared cohorts of fifty retain all combinations within the declaration's
-existing case cap. Both readiness reports remain **0/50 qualified** because
-the missing-font negative control sees the same family name after fallback to
-local Inter; it records a width mismatch but cannot prove font substitution
-([D.100](#d100-source-capture-must-preserve-css-module-imports)). The baseline
-source and replay captures match every authored witness. The pixel report
-preserves the readiness refusal. Evidence is in `app-consumer-v1/visual-score-v2.json`
-and `app-consumer-v1/source-validation-v1/`, with a visible review of all pairs.
+existing case cap. The first family-only readiness reports remain archived at
+**0/50 qualified**: their missing-font control could not distinguish local
+Inter fallback. Fresh reports with the explicit web-font witness now pass
+**50/50 each**, with all five corruption controls rejected per representative
+([D.101](#d101-web-font-witnesses-reject-same-family-system-fallback)). All 200
+source/replay PNGs are byte-identical to the previously scored images, and
+all 100 dimensions and painted-font origin witnesses pass. The unchanged pixel
+report and earlier refusal remain in `app-consumer-v1/visual-score-v2.json`
+and `app-consumer-v1/source-validation-v1/`; the new verified receipt is
+`app-consumer-v1/source-validation-v2/cohort-readiness-receipt-v1.json`.
+The visible review includes all pairs and the current readiness result.
 Earlier browser screenshot interfaces returned JPEG data; their failed
 measurement remains in `app-consumer-v1/visual-measurement-refusal-v2.json`.
 
@@ -8543,12 +8547,11 @@ cross-file composition, global CSS, deterministic reference identity and stale
 source detection. Private evidence is in
 `native-root-text-template-20260921/app-consumer-v1/source-validation-v1/`.
 
-A separate readiness limitation remains: removing a web font can fall back to
-a local font with the same painted family name. The current instrument checks
-that family name and cannot prove the missing-font control was rejected in this
-case. It retains `negative-control-not-proven:missing-font`; a pixel comparison
-does not turn this refusal into a source-readiness pass or authenticate font
-bytes in Figma.
+A family-only witness cannot distinguish fallback to a local font with the
+same painted family name. Those archived references retain
+`negative-control-not-proven:missing-font`. D.101 adds an explicit web-font
+origin witness and demonstrates fresh passing readiness reports; neither
+pixel similarity nor web origin authenticates font bytes in Figma.
 
 **AGENT decision, 2026-09-21.** Select esbuild's `local-css` loader for
 `.module.css`, preserving the byte-recording hook and all other loader rules.
@@ -8575,7 +8578,17 @@ Inter painting three glyphs from a system font afterward. The baseline and
 isolated replay PNGs remain identical to the prior measured image. The old
 family-only refusal is retained. Evidence is in private
 `react-source-validations/27fc7ddeb884d3d14086a18ecfd3cca5b6ca51eab7cbbbada89f4abd782d1b5e/67408aed-771b-4642-8b9a-e3faca0e7e80/`.
-This probe does not qualify the complete cohort, native Figma fonts or V1.
+The subsequent complete cohort passes **100/100**, split into two fifty-case
+declarations. Both representatives reject all five corruption controls; their
+font records show the same custom-to-system transition. Every before/after
+source and replay observation reports Inter glyphs painted by a web font, all
+root dimensions match the original, and all 200 PNGs are byte-identical to the
+images already measured at 100/100 under the unchanged 5% pixel limit. Source
+inputs remained unchanged during both captures. The reports and independent
+hash verification are indexed in private
+`native-root-text-template-20260921/app-consumer-v1/source-validation-v2/cohort-readiness-receipt-v1.json`.
+This qualifies source readiness for the installed return, not native Figma
+fonts, the failing native caller, or V1.
 
 **AGENT decision, 2026-09-21.** Use Chromium's painted-font origin evidence only
 when the source declaration explicitly requires web-font rendering. Preserve
