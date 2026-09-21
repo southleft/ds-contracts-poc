@@ -31,15 +31,17 @@ function fixture(t:test.TestContext) {
   const input={reference:{id:referenceId,files:{[file]:sha(text)},sourceRoot:root,cohort:{declared:false}},program:{files:{[file]:sha(text)}},recorded:before,caseId:'control',
     variants:[{observation:'0',variant:'disabled=true'}],recipe:{input:'input.css',output:'output.css'},
     plan:{revision:'sha256:'+referenceId,changes:[{nodeId:'1:1',variant:'disabled=true',before:.5,after:.6}],candidates:[candidate]}} as unknown as ReactSourceRepairInput;
-  let stageHook=()=>{},observeHook=async()=>{};
+  let stageHook=()=>{},observeHook=async()=>{},cohortHook=async()=>{};
   const deps={
     async stage(){stageHook();return {workspace:staged,css:{file:path.join(root,'output.css'),beforeSha256:sha('old CSS'),afterSha256:sha('new CSS')}};},
     async observe(args:{dir:string}){await observeHook();const original=args.dir.endsWith('/original'),value=structuredClone(original?before:after);mkdirSync(path.join(args.dir,'states'),{recursive:true});writeFileSync(path.join(args.dir,'states/0.png'),original?'before':'after');return value;},
     async build(){return {...input.reference,sourceRoot:staged};},program(){return input.program;},
+    async cohort({dir}:{dir:string}){await cohortHook();for(const [side,text] of [['original','before'],['candidate','after']]){mkdirSync(path.join(dir,'control',side),{recursive:true});writeFileSync(path.join(dir,'control',side,'initial.png'),text);}
+      return {qualification:'configured-caller-effects-verified',cases:[{caseId:'control',changedRoots:1,beforeImage:sha('before'),afterImage:sha('after'),finite:[],interactions:[]}],limitations:['source-write-not-authorized']};},
   } as unknown as NonNullable<Parameters<typeof createReactSourceRepairPreviews>[2]>;
   let derivations=0;
   const store=createReactSourceRepairPreviews(repo,()=>{derivations++;return structuredClone(input);},deps);
-  return {repo,root,file,text,input,store,derivations:()=>derivations,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;}};
+  return {repo,root,file,text,input,store,derivations:()=>derivations,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;},setCohortHook(fn:()=>Promise<void>){cohortHook=fn;}};
 }
 
 test('verified preview reuses its identity, pins images and never changes original bytes',async t=>{
@@ -48,6 +50,9 @@ test('verified preview reuses its identity, pins images and never changes origin
   assert.equal(f.store.start(referenceId,parentId,proposalId).state.id,job.state.id);
   assert.equal(readFileSync(f.file,'utf8'),f.text);
   assert.equal(f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')).toString(),'after');
+  assert.equal(f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-candidate','control',sha('after')).toString(),'after');
+  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-candidate','unknown',sha('after')),/image-mismatch/);
+  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-original','control',sha('after')),/image-mismatch/);
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-1','0',sha('after')),/image-mismatch/);
   f.input.plan.revision='sha256:'+proposalId;
   assert.equal(f.store.read(referenceId,parentId,proposalId)?.current,false);
@@ -62,12 +67,18 @@ test('verified preview reuses its identity, pins images and never changes origin
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','..',sha('after')),/image-unavailable/);
   writeFileSync(path.join(job.dir,'candidate-0/states/0.png'),'tampered');
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-changed/);
+  writeFileSync(path.join(job.dir,'callers/control/candidate/initial.png'),'tampered');
+  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'caller-candidate','control',sha('after')),/image-changed/);
 });
 
 test('concurrent previews, changed evidence and changed original source refuse',async t=>{
   for(const mode of ['evidence','source'] as const) {
     const f=fixture(t);let release!:()=>void;const barrier=new Promise<void>(resolve=>{release=resolve;});
     f.setObserveHook(()=>barrier);const job=f.store.start(referenceId,parentId,proposalId);
+    const before=f.derivations(),progress=f.store.read(referenceId,parentId,proposalId);
+    assert.equal(progress?.phase,'running');assert.equal(progress?.current,false);
+    assert.equal(f.derivations(),before,'progress-only reads cannot authorize a write and do not replay history');
+    assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
     assert.equal(f.store.start(referenceId,parentId,proposalId).state.id,job.state.id);
     assert.throws(()=>f.store.start(referenceId,parentId,'c'.repeat(64)),/already-running/);
     if(mode==='evidence')f.input.plan.revision='changed';else writeFileSync(f.file,f.text+'\n');
@@ -83,5 +94,16 @@ test('zero or multiple matching candidates do not produce an applicable selectio
     const job=f.store.start(referenceId,parentId,proposalId);await job.promise;
     assert.equal(job.state.phase,'refused');assert.equal(job.state.selected,undefined);
     assert.match(job.state.problems[0],mode==='none'?/no-matching-effect/:/ambiguous-effect/);
+  }
+});
+
+test('a matching local state set cannot bypass a failed caller check or evidence drift during it',async t=>{
+  for(const reason of ['caller-failure','drift'] as const){
+    const f=fixture(t);let called=0;
+    f.setCohortHook(async()=>{called++;if(reason==='caller-failure')throw Error('react-source-repair-cohort-behavior-changed');f.input.plan.revision='changed';});
+    const job=f.store.start(referenceId,parentId,proposalId);await job.promise;
+    assert.equal(called,1);assert.equal(job.state.phase,'refused');assert.equal(job.state.selected,undefined);
+    assert.match(job.state.problems[0],reason==='caller-failure'?/cohort-behavior-changed/:/evidence-changed/);
+    assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
   }
 });

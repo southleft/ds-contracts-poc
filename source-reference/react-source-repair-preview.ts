@@ -8,6 +8,7 @@ import {buildReactReference,reactReferenceSourceModules,reactReferenceUnchanged,
 import {readReactSourceProgram,reactSourceProgramUnchanged,type ReactSourceProgram} from './react-source-program.js';
 import {stageReactUtilitySourceEdit} from './react-source-repair-stage.js';
 import {observeReactSourceRepairStates,verifyReactSourceRepairBaseline,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
+import {verifyReactSourceRepairCohort} from './react-source-repair-cohort.js';
 import type {planReactOpacitySourceRepair} from './react-design-source-repair.js';
 
 type Plan=ReturnType<typeof planReactOpacitySourceRepair>;
@@ -22,11 +23,12 @@ export interface ReactSourceRepairPreview {
   candidates:Array<{index:number;status:'verified'|'refused';before:string;after:string;problem?:string;
     module:string;css?:{file:string;beforeSha256:string;afterSha256:string;removed:string;added:string};comparison?:Comparison}>;
   selected?:number;
+  cohort?:Awaited<ReturnType<typeof verifyReactSourceRepairCohort>>;
   limitations:string[];
 }
 type Dependencies={stage:typeof stageReactUtilitySourceEdit;observe:typeof observeReactSourceRepairStates;
-  build:typeof buildReactReference;program:typeof readReactSourceProgram};
-const dependencies:Dependencies={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,program:readReactSourceProgram};
+  build:typeof buildReactReference;program:typeof readReactSourceProgram;cohort:typeof verifyReactSourceRepairCohort};
+const dependencies:Dependencies={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,program:readReactSourceProgram,cohort:verifyReactSourceRepairCohort};
 const sha=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 const reason=(error:unknown)=>{
   const message=error instanceof Error?error.message:'';
@@ -52,6 +54,11 @@ export function createReactSourceRepairPreviews(repo:string,
   };
   const read=(referenceId:string,parentId:string,proposalId:string)=>{
     const job=jobs.get(key(referenceId,parentId,proposalId));if(!job)return null;
+    // Progress and refusal reports are never actionable evidence. Replaying
+    // the entire correction chain on every progress poll blocks the browser
+    // observations this job is waiting for. The worker checks the input before
+    // and after observation; completed metadata still checks it on every read.
+    if(job.state.phase!=='reviewable')return {...structuredClone(job.state),current:false};
     let current=false;
     try{current=signature(derive(referenceId,parentId,proposalId))===job.signature;}catch{/* Historical previews cannot become write authority. */}
     return {...structuredClone(job.state),current};
@@ -64,9 +71,9 @@ export function createReactSourceRepairPreviews(repo:string,
       if(prior?.signature===pinned&&(prior.state.phase==='running'||prior.state.phase==='reviewable'))return prior;
       if(running)throw Error('react-source-repair-preview-already-running');
       const id=randomUUID(),dir=path.join(repo,'private/react-source-repair-previews',id);mkdirSync(dir,{recursive:true,mode:0o700});
-      const state:ReactSourceRepairPreview={id,phase:'running',step:'Checking unchanged source states',current:true,parentId,proposalId,
+      const state:ReactSourceRepairPreview={id,phase:'running',step:'Checking unchanged source states',current:false,parentId,proposalId,
         planRevision:input.plan.revision,problems:[],candidates:[],limitations:['preview-only-original-source-unchanged',
-          'recorded-caller-context-and-finite-domain-only','other-callers-not-yet-qualified','canvas-is-the-last-recorded-read',
+          'configured-callers-and-finite-domains-only','bounded-checked-control-actions-only','canvas-is-the-last-recorded-read',
           'restart-requires-a-new-preview']};
       writeFileSync(path.join(dir,'started.json'),JSON.stringify({signature:pinned,referenceId,plan:input.plan,recipe:input.recipe},null,2)+'\n',{flag:'wx'});
       const job:Job={state,signature:pinned,referenceId,dir,promise:Promise.resolve()};jobs.set(name,job);running=job;
@@ -74,6 +81,7 @@ export function createReactSourceRepairPreviews(repo:string,
       const assertInput=()=>{assertSource();if(signature(derive(referenceId,parentId,proposalId))!==pinned)throw Error('react-source-repair-preview-evidence-changed');};
       job.promise=(async()=>{
         try {
+          const verified=new Map<number,{reference:ReactReference;program:ReactSourceProgram}>();
           assertInput();
           const before=await deps.observe({reference:input.reference,program:input.program,caseId:input.caseId,
             instanceId:input.recorded.observation.instanceId,expected:input.recorded.observation,dir:path.join(dir,'original'),assertCurrent:assertSource});
@@ -93,11 +101,15 @@ export function createReactSourceRepairPreviews(repo:string,
               row.css={file:input.recipe.output,beforeSha256:stage.css.beforeSha256,afterSha256:stage.css.afterSha256,
                 ...changedText(originalCss.toString(),stagedCss.toString())};
               row.status='verified';
+              verified.set(index,{reference,program});
             }catch(error){row.problem=reason(error);}
           }
           assertInput();const selected=state.candidates.filter(c=>c.status==='verified');
           if(selected.length!==1)throw Error(selected.length?'react-source-repair-preview-ambiguous-effect':'react-source-repair-preview-no-matching-effect');
-          state.selected=selected[0].index;state.phase='reviewable';state.step='One candidate matches every recorded state';
+          const index=selected[0].index,proposed=verified.get(index)!;
+          state.step='Checking every configured caller and its recorded finite states';
+          state.cohort=await deps.cohort({input,candidateIndex:index,proposed:proposed.reference,program:proposed.program,dir:path.join(dir,'callers'),assertCurrent:assertSource});
+          assertInput();state.selected=index;state.phase='reviewable';state.current=true;state.step='One candidate matches the recorded states and configured callers';
         } catch(error) {state.phase='refused';state.step='Preview refused';state.problems.push(reason(error));}
         finally {
           try{writeFileSync(path.join(dir,'result.json'),JSON.stringify(state,null,2)+'\n',{flag:'wx'});}
@@ -113,8 +125,14 @@ export function createReactSourceRepairPreviews(repo:string,
       // read/start paths still reauthenticate that chain; image identity stays
       // pinned to this exact reviewed preview, selected row and content hash.
       const job=jobs.get(key(referenceId,parentId,proposalId)),state=job?.state;
-      if(!job||state?.id!==id||state.phase!=='reviewable'||! /^\d+$/.test(rowId)||! /^[a-f0-9]{64}$/.test(hash))
+      if(!job||state?.id!==id||state.phase!=='reviewable'||! /^(?:\d+|[a-z][a-z-]{0,79})$/.test(rowId)||! /^[a-f0-9]{64}$/.test(hash))
         throw Error('react-source-repair-preview-image-unavailable');
+      if(index==='caller-original'||index==='caller-candidate'){
+        const row=state.cohort?.cases.find(c=>c.caseId===rowId),before=index==='caller-original';
+        if(!row||hash!==(before?row.beforeImage:row.afterImage))throw Error('react-source-repair-preview-image-mismatch');
+        const bytes=readFileSync(path.join(job.dir,'callers',rowId,before?'original':'candidate','initial.png'));
+        if(sha(bytes)!==hash)throw Error('react-source-repair-preview-image-changed');return bytes;
+      }
       const candidate=state.candidates.find(c=>c.index===state.selected),row=candidate?.comparison?.rows.find(r=>r.observation===rowId);
       const before=index==='original';
       if(!row||(!before&&index!=='candidate-'+state.selected)||hash!==(before?row.beforeImage:row.afterImage))

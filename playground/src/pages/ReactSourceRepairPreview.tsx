@@ -33,7 +33,7 @@ export function ReactSourceRepairPreview({endpoint}:{endpoint:string}) {
     <button type="button" disabled={busy||running} onClick={()=>void start()}>Prepare source repair preview</button>
     {error&&<p role="alert">{error}</p>}
     {preview&&<>
-      <p role="status">{preview.step}. {!preview.current&&'The source or design evidence has changed; prepare again.'}</p>
+      <p role="status">{preview.step}. {preview.phase==='reviewable'&&!preview.current&&'The source or design evidence has changed; prepare again.'}</p>
       {!!preview.problems.length&&<ul>{preview.problems.map(problem=><li key={problem}>{problem}</li>)}</ul>}
       {!!preview.candidates.length&&<table style={{borderSpacing:'12px 6px',textAlign:'left'}}>
         <thead><tr><th>Source module</th><th>Before</th><th>Proposed</th><th>Result</th></tr></thead>
@@ -48,13 +48,33 @@ export function ReactSourceRepairPreview({endpoint}:{endpoint:string}) {
       </details>}
       {selected?.comparison&&<>
         <p>{selected.comparison.rows.filter(row=>row.changed).length} changed states; {selected.comparison.rows.filter(row=>!row.changed).length} unchanged states with identical images. Other recorded styles, content, fonts and geometry match.</p>
-        <p>This checks the recorded caller and finite state set. Other callers and interactions still need verification before applying a source edit. Automatic source application is not available yet.</p>
+        {preview.cohort&&<>
+          <p>All {preview.cohort.cases.length} configured caller examples match the intended change. Automatic source application is not available yet.</p>
+          <table style={{borderSpacing:'12px 6px',textAlign:'left'}}>
+            <thead><tr><th>Caller example</th><th>Initial states checked</th><th>Interaction trials per version</th><th>Original view</th></tr></thead>
+            <tbody>{preview.cohort.cases.map(c=><tr key={c.caseId}>
+              <td>{c.caseId}</td><td>{c.finite.reduce((n,f)=>n+f.rows.length,0)}</td>
+              <td>{c.interactions.reduce((n,i)=>n+i.rows.length,0)}</td>
+              <td>{c.changedRoots?'Matches the requested opacity':'Identical image'}</td>
+            </tr>)}</tbody>
+          </table>
+          <p>Coverage is limited to the configured examples, their finite initial states, and checked-control label and keyboard actions. Other caller contexts and arbitrary interactions remain unqualified.</p>
+          {preview.current&&<details><summary>Compare all {preview.cohort.cases.length} caller examples</summary>
+            {preview.cohort.cases.map(c=><figure key={c.caseId} style={{margin:'16px 0'}}>
+              <figcaption>{c.caseId}: {c.changedRoots?'requested opacity change':'unchanged image'}</figcaption>
+              <div style={{display:'flex',gap:12,overflow:'auto'}}>
+                <img loading="lazy" src={`${endpoint}/${preview.id}/caller-original/${c.caseId}/${c.beforeImage}.png`} alt={`Original caller ${c.caseId}`} width={450} height={300}/>
+                <img loading="lazy" src={`${endpoint}/${preview.id}/caller-candidate/${c.caseId}/${c.afterImage}.png`} alt={`Proposed caller ${c.caseId}`} width={450} height={300}/>
+              </div>
+            </figure>)}
+          </details>}
+        </>}
         {preview.current&&<details><summary>Compare all {selected.comparison.rows.length} source states</summary>
           {selected.comparison.rows.map(row=><figure key={row.observation} style={{margin:'16px 0'}}>
             <figcaption>{row.variant}: opacity {row.beforeOpacity} → {row.afterOpacity}</figcaption>
             <div style={{display:'flex',gap:12,overflow:'auto'}}>
-              <img src={`${endpoint}/${preview.id}/original/${row.observation}/${row.beforeImage}.png`} alt={`Original source ${row.variant}`} width={450} height={300}/>
-              <img src={`${endpoint}/${preview.id}/candidate-${preview.selected}/${row.observation}/${row.afterImage}.png`} alt={`Proposed source ${row.variant}`} width={450} height={300}/>
+              <img loading="lazy" src={`${endpoint}/${preview.id}/original/${row.observation}/${row.beforeImage}.png`} alt={`Original source ${row.variant}`} width={450} height={300}/>
+              <img loading="lazy" src={`${endpoint}/${preview.id}/candidate-${preview.selected}/${row.observation}/${row.afterImage}.png`} alt={`Proposed source ${row.variant}`} width={450} height={300}/>
             </div>
           </figure>)}
         </details>}

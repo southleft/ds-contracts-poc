@@ -8704,12 +8704,58 @@ allocation or reassign variables by name.
 because each image re-derived the full native correction chain. A twelve-state
 comparison requests 24 images. Image delivery now verifies the exact preview,
 selected candidate, row and content hash without repeating that history read.
-Metadata reads and preview preparation still reauthenticate the source/native
-pair; the HTTP route also retains its original-source identity and file checks.
+Completed preview metadata and preview preparation still reauthenticate the
+source/native pair; the HTTP route also retains its original-source identity
+and file checks. Running and refused progress reports are explicitly noncurrent
+and do not replay history. The worker checks original source identities during
+observation and reauthenticates the complete input before reporting completion.
 A saved image is evidence of that preview, never current write authority.
+
+After the change, a second application preview delivered the same 5,733-byte
+image in 0.16 seconds, with the identical SHA-256. All 24 comparison images
+loaded in the live application. Before/after timing receipts and the inspected
+application screenshot are preserved in private
+`react-design-source-repair-20260921/preview-image-{before,after}-v1.json` and
+`preview-images-fixed-ui-v1.png` in the application worktree.
 
 Bounded checks show that a changed design plan makes preview metadata stale
 while its pinned image bytes remain the same, and reject different proposal
 IDs, unselected candidates, invalid rows and modified image bytes. New previews
 are still required after restart. Reversal restores per-image derivation without
 changing any saved preview, image hash or source-write checks.
+
+### D.105 Source repair must check the other configured callers
+
+**AGENT decision, 2026-09-21.** An edit to a component module affects every
+configured caller of that module. A matching isolated state set is insufficient.
+The preview now requires a second observation of every configured example,
+including examples that do not use the edited component. Module/export identity
+selects the affected instances; no named-component exception is used. The
+unmodified and ownership-instrumented bundles must first produce identical
+trees and images in each context.
+
+The original witnesses remain immutable. Candidate root-opacity expectations
+are derived from the independently read native edit and the caller's actual
+properties. Other styles, content, ownership, fonts and geometry remain exact.
+Each affected instance must cover the complete recorded finite domain. For the
+supported checked-control class, associated-label and Space actions must pass
+in both versions and restore the original view. Missing cases, states, actions,
+ambiguous property mappings, source drift and unrelated pixel changes refuse.
+The observer bounds work to 64 cases, 32 affected instances and 512 observed
+states across both versions.
+
+A production-observer engineering run covers all ten configured examples,
+60 initial states and ten interaction trials per source version in five caller
+contexts, including the nested Card. A separate replay of the final verifier
+checks all twenty saved initial-image hashes. Evidence is private
+`react-design-source-repair-20260921/production-cohort-KMCPRm/verified-v2.json`
+in the repair worktree. This is engineering evidence; the integrated application
+run is still pending. Images are served only for the exact reviewed preview,
+case, side and hash, using the D.104 evidence boundary.
+
+This check covers configured examples and the named finite/action domain only.
+It does not establish arbitrary caller coverage or authorize an original-file
+write. Source/CSS transactions, witness succession, fresh canvas preconditions
+and interrupted-write recovery remain unfinished. Reversal removes the cohort
+observer and its preview integration together, restoring the narrower preview
+limitation while preserving every saved observation and original witness.

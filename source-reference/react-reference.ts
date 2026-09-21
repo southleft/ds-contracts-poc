@@ -416,7 +416,7 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
-    const repair=/^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/source-repair(?:\/([a-f0-9-]{36})\/(original|candidate-\d+)\/(\d+)\/([a-f0-9]{64})\.png)?$/.exec(route);
+    const repair=/^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/source-repair(?:\/([a-f0-9-]{36})\/(original|candidate-\d+|caller-original|caller-candidate)\/(\d+|[a-z][a-z-]{0,79})\/([a-f0-9]{64})\.png)?$/.exec(route);
     if(repair) {
       try {
         if(!['GET',...(repair[4]?[]:['POST'])].includes(req.method??'')||Number(req.headers['content-length']??0)>0||req.headers['transfer-encoding']||
