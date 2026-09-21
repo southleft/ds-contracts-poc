@@ -10,9 +10,16 @@ import {createNativeUpdateJobs} from './native-update-jobs.js';
 import {prepareNativeAppUpdate,prepareNativeTemplateAppUpdate,nativeAppUpdateMatches,nativeAppUpdatePreflight,emitNativeAppUpdateScript,emitNativeAppUpdateReadback,nativeAppUpdateDesignChanges} from './native-app-update.js';
 import type {NativeOperationCommand} from './native-operation-jobs.js';
 
-async function fixture(t:test.TestContext) {
+async function fixture(t:test.TestContext,settleCaller=false) {
   const h=await nativeTemplateValueUpdateFixture(true,true),repo=mkdtempSync(path.join(tmpdir(),'template-app-update-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
+  if(settleCaller) {
+    const row=h.input.consumers[0].baseline.content.nodes.find((n:any)=>n.type==='TEXT');
+    const old=row.id,node=h.figma.getNodeById(old),get=h.figma.getNodeById;
+    node.id=node.parent.id+';settled-app-text';
+    h.figma.getNodeById=(id:string)=>id===old?node:get(id);
+    h.figma.getNodeByIdAsync=async(id:string)=>h.figma.getNodeById(id);
+  }
   let desired=structuredClone(h.input.desired),callerRevision='b'.repeat(64);
   const parent=h.input.before.operation.id,caller=structuredClone(h.input.consumers[0]);
   delete caller.baseline.images;delete caller.baseline.parent.images;delete caller.baseline.content.images;
@@ -145,4 +152,17 @@ test('design diagnostics include template routing and selector changes even when
     assert.ok(result.changes.some(c=>c.channel.startsWith('template-')));
     assert.equal(nativeAppUpdateMatches(plan,changed,true),false);
   }
+});
+
+
+test('settled SDK caller IDs survive application preflight, independent image read, journal restart and reverse',async t=>{
+  const f=await fixture(t,true),first=f.prepare();
+  await f.finish(first.operation.id);
+  const history=f.jobs().updateHistory(f.parent)[0];
+  assert.equal((history.receipt as any).consumerObservations[0].slotIdentityAliases.length,1);
+  assert.equal(f.plans.prepare(f.parent).id,first.proposal.id);
+  assert.equal(f.assignments.length,1);
+  f.reverse();const reverse=f.prepare();await f.finish(reverse.operation.id);
+  assert.equal(f.assignments.length,2);
+  assert.equal(f.plans.prepare(f.parent).id,reverse.proposal.id);
 });

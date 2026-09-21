@@ -1,3 +1,4 @@
+import { cleanNativeTemplateCallerReadback } from '../core/native-template-caller-identity.js';
 /** Application adapter. Legacy plans and generated programs retain their exact
  * representation; template updates require their complete caller inventory. */
 import {canonicalJson,revisionOf} from '../core/contract-provenance.js';
@@ -12,6 +13,7 @@ import {nativeDesignChanges} from '../core/native-design-changes.js';
 export type NativeAppUpdateInput = legacy.NativeContractUpdateInput & {
   templateGraph?: NativeTemplateComponentUpdateInput['desired'];
   templateConsumers?: NativeTemplateComponentUpdateInput['consumers'];
+  templateCallerIdentity?: NativeTemplateComponentUpdateInput['callerIdentity'];
 };
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
 const clean=(value:unknown)=>{const copy=structuredClone(value) as any;delete copy.images;return copy;};
@@ -63,7 +65,8 @@ export function prepareNativeAppUpdate(input:NativeAppUpdateInput):{plan:NativeA
   if(!Array.isArray(input.templateConsumers)||!same(input.templateGraph.component,input.desired.component)||
       !same(input.templateGraph.tokens,input.desired.tokenInput))throw Error('native-update-template-source-invalid');
   return prepareNativeTemplateAppUpdate(prepareNativeTemplateUpdateProposal({before:input.before,baseline:input.baseline,
-    desired:input.templateGraph,consumers:input.templateConsumers}),input.desired.revision);
+    desired:input.templateGraph,consumers:input.templateConsumers,
+    ...(input.templateCallerIdentity?{callerIdentity:input.templateCallerIdentity}:{})}),input.desired.revision);
 }
 export const templateUpdateInput=(plan:NativeTemplateAppUpdatePlan)=>{
   const saved=templates.get(plan.desiredRevision+':'+plan.template.revision);
@@ -96,7 +99,7 @@ export function nativeAppUpdatePreflight(plan:NativeAppUpdatePlan,raw:any,untouc
     return raw?.version===1&&raw.kind==='native-template-value-write-result'&&raw.planRevision===prepared.revision&&
       raw.status==='preflight-observed'&&raw.acceptedContract===null&&raw.nativeQualification==='unqualified'&&
       same(raw.problems,[])&&same(clean(raw.observation),plan.baseline)&&
-      same((raw.consumerObservations??[]).map(clean),prepared.consumers.map(c=>c.baseline.content));
+      same((raw.consumerObservations??[]).map((r:NativeSourceReadback)=>cleanNativeTemplateCallerReadback(r,prepared.callerIdentity,true)),prepared.consumers.map(c=>c.baseline.content));
   }catch{return false;}
 }
 export function emitNativeAppUpdateScript(plan:NativeAppUpdatePlan,readOnly=false) {

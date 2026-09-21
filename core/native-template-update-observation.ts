@@ -1,3 +1,4 @@
+import { cleanNativeTemplateCallerReadback } from './native-template-caller-identity.js';
 /** Read-only evidence for settling a template delivery. An acknowledgement is
  * never an observation, and supported structure is not full update exactness. */
 import { canonicalJson } from './contract-provenance.js';
@@ -36,7 +37,7 @@ const before=await observe();if(before.status!=='collected')return before;
 try{
  const main=await(async()=>{${emitNativeContractReadbackScript(plan.after,true,true)}})();
  const callerExports=[];
- for(const read of [${plan.consumers.map(c=>`async()=>{${emitNativeTemplateCallerContentReadback(c.input,false,true)}}`).join(',')}])callerExports.push(await read());
+ for(const read of [${plan.consumers.map(c=>`async()=>{${emitNativeTemplateCallerContentReadback(c.input,false,true,plan.callerIdentity)}}`).join(',')}])callerExports.push(await read());
  const after=await observe();
  if(after.status!=='collected'||canonical(before)!==canonical(after)||canonical(clean(main))!==canonical(clean(after.observation))||
    callerExports.some((r,i)=>canonical(clean(r))!==canonical(clean(after.consumerObservations[i]))))throw Error('native-template-update-export-observation-changed');
@@ -49,7 +50,7 @@ const out={version:1,kind:'independent-native-template-update-observation',planR
  status:'refused',problems:[],acceptedContract:null,nativeQualification:'unqualified'};
 const canonical=value=>JSON.stringify((function sort(v){if(Array.isArray(v))return v.map(sort);if(v&&typeof v==='object')return Object.fromEntries(Object.keys(v).sort().filter(k=>v[k]!==undefined).map(k=>[k,sort(v[k])]));return v;})(value));
 const readMain=async()=>{${emitNativeContractReadbackScript(plan.after)}};
-const readers=[${plan.consumers.map(c => `async()=>{${emitNativeTemplateCallerContentReadback(c.input)}}`).join(',')}];
+const readers=[${plan.consumers.map(c => `async()=>{${emitNativeTemplateCallerContentReadback(c.input,false,false,plan.callerIdentity)}}`).join(',')}];
 const readCallers=async()=>{const rows=[];for(const reader of readers)rows.push(await reader());return rows;};
 try{
  const firstMain=await readMain(),firstCallers=await readCallers();
@@ -82,7 +83,7 @@ export function inspectNativeTemplateUpdateObservation(input: NativeTemplateComp
         r.nativeQualification !== 'unqualified' || !r.observation || !Array.isArray(r.consumerObservations) ||
         r.consumerObservations.length !== plan.consumers.length)
       throw Error('native-template-update-observation-envelope');
-    const main = clean(r.observation), contents = r.consumerObservations.map(clean);
+    const main = clean(r.observation), contents = r.consumerObservations.map(c => cleanNativeTemplateCallerReadback(c, plan.callerIdentity, true));
     // This outer revision describes the HOST reader context, not a canvas
     // allocation. The receipt inside it retains the original allocation hash.
     // Validate the exact emitted context before comparing an untouched canvas

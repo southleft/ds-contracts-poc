@@ -98,7 +98,10 @@ export function createNativeUpdatePlans(repo: string,
     const source = derive(parentId, roots[0]?.parentJournalRevision,[...selectedPins.values()].sort((a,b)=>a.operationId.localeCompare(b.operationId)));
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
     const tip=chain(parentId,source,written,self);
+    const savedSelf=self&&written.some(e=>e.proposalId===self)?read(parentId,self):undefined;
+    const savedTemplate=savedSelf?.update.plan.kind==='native-contract-template-value-update'?savedSelf.update.plan.template:undefined;
     const update=prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline,
+      ...(source.templateInventory?{templateCallerIdentity:savedSelf?savedTemplate?.input.callerIdentity:'sdk-slot-alias-v1' as const}:{}),
       ...(source.templateInventory?{templateConsumers:tip.templateConsumers}:{})});
     // Reconstruct only authenticated WRITTEN legacy history, never an unapplied
     // proposal. The complete record still has to match below; compiler/source
@@ -112,7 +115,6 @@ export function createNativeUpdatePlans(repo: string,
     }
     const template=update.plan.kind==='native-contract-template-value-update';
     if(template&&!source.templateInventory)throw Error('native-update-template-inventory-required');
-    const savedSelf=self&&written.some(e=>e.proposalId===self)?read(parentId,self):undefined;
     return { version: template?2:1, parentId, parentJournalRevision: source.parentJournalRevision,
       ...(template?{consumerPins:tip.consumerPins,templateContextRevision:savedSelf?.templateContextRevision??source.templateInventory!.currentRevision}:{}),
       ...(tip.predecessor ? {predecessor:tip.predecessor} : {}), update };

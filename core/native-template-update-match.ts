@@ -1,3 +1,4 @@
+import { cleanNativeTemplateCallerReadback } from './native-template-caller-identity.js';
 /** Exact native value propagation, separate from source-to-canvas fidelity.
  * A structurally valid graph is insufficient: every selected binding must
  * resolve to its intended scalar, and every other observed fact is preserved.
@@ -152,7 +153,7 @@ export function matchNativeTemplateUpdateObservation(input: NativeTemplateCompon
     main.templateGraph!.graphRevision = plan.baseline.templateGraph!.graphRevision;
     if (!same(main, plan.baseline)) fail('main-conflict');
     for (const [index, consumer] of plan.consumers.entries()) {
-      const content = r.consumerObservations![index]; delete content.images;
+      const content = cleanNativeTemplateCallerReadback(r.consumerObservations![index], plan.callerIdentity, true);
       normalizeNodes(plan, consumer.baseline.content, content);
       if (!same(content, consumer.baseline.content)) fail('caller-conflict:' + consumer.instanceId);
     }
