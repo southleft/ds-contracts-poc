@@ -57,8 +57,8 @@ export interface NativeTokenContextInput {
    * was allocated. Ownership stamps on the collection and on every owned node
    * name the allocation revision, so it is re-derived by restoring these leaves,
    * never taken from a caller. A requested `number` leaf may differ. Pixel
-   * dimensions require the explicit protocol below. Both remain one FLOAT
-   * variable and neither side may be an alias. */
+   * dimensions require the explicit protocol below. Template history also
+   * carries fontWeight and color leaves. Neither side may become an alias. */
   allocatedValues?: {
     sourceMode: string;
     brand: string;
@@ -67,7 +67,7 @@ export interface NativeTokenContextInput {
   }[];
   /** Value-history support only, not write authority. Absent on historical
    * inputs. A new bounded geometry writer must separately prove consumers. */
-  allocatedValueProtocol?: "px-dimension-v1";
+  allocatedValueProtocol?: "px-dimension-v1" | "template-values-v1";
   /** Original allocation input for a verified additive allocation. This is
    * evidence, not permission to discover or create IDs. It has no history of
    * its own; restoring later values must reproduce this base plus number leaves. */
@@ -237,7 +237,7 @@ export function prepareNativeTokenContext(
 ): NativeTokenPreparation {
   if (input?.writeProtocol !== undefined && input.writeProtocol !== 'explicit-modes-v1') fail('write-protocol');
   if (input?.writeProtocol !== undefined && input.allocatedValues !== undefined) fail('explicit-modes-value-update-unqualified');
-  if (input?.allocatedValueProtocol !== undefined && input.allocatedValueProtocol !== "px-dimension-v1")
+  if (input?.allocatedValueProtocol !== undefined && !["px-dimension-v1", "template-values-v1"].includes(input.allocatedValueProtocol))
     fail("allocated-value-protocol");
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValues === undefined)
     fail("allocated-value-protocol-empty");
@@ -264,10 +264,12 @@ export function prepareNativeTokenContext(
   });
   const { revision: allocationRevision, ...allocationBody } = allocation;
   if (!same(shape(body), shape(allocationBody))) fail("allocated-value-structure");
-  // Each succession is one FLOAT variable in both states.
+  // Historical successions remain FLOAT-only. The explicit template protocol
+  // may carry COLOR too; shape equality above retains each variable's type.
   for (const row of input.allocatedValues)
     for (const prepared of [body, allocationBody])
-      if (prepared.variables.find((v) => v.tokenPath === row.tokenPath)?.resolvedType !== "FLOAT")
+      if (!(input.allocatedValueProtocol === 'template-values-v1' ? ['FLOAT', 'COLOR'] : ['FLOAT'])
+          .includes(prepared.variables.find((v) => v.tokenPath === row.tokenPath)?.resolvedType ?? ''))
         fail("allocated-value-type");
   return clone({ ...body, revision: allocationRevision });
 }
@@ -311,6 +313,8 @@ function restoreAllocatedValues(
   delete restored.allocatedValues;
   delete restored.allocatedValueProtocol;
   let dimensionValues = 0;
+  const templateValues = input.allocatedValueProtocol === 'template-values-v1';
+  const requested = new Set(templateValues ? prepareBody(input).variables.map(v => v.tokenPath) : input.tokenPaths);
   const literalPixels = (value: unknown): boolean => typeof value === "string" &&
     /^-?(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value) && Number.isFinite(Number(value.slice(0, -2)));
   for (const row of rows!) {
@@ -324,9 +328,11 @@ function restoreAllocatedValues(
     // Historical inputs remain number-only. A dimension succession is a new
     // explicit protocol, restricted to literal px on both sides: no relative
     // unit conversion, structured value, alias or inferred type.
-    if (!input.tokenPaths.includes(row.tokenPath)) fail("allocated-value-unrequested");
-    if (current!.type !== "number") {
-      if (current!.type !== "dimension" || input.allocatedValueProtocol !== "px-dimension-v1")
+    if (!requested.has(row.tokenPath)) fail("allocated-value-unrequested");
+    if (templateValues && !['number', 'dimension', 'fontWeight', 'color'].includes(current!.type ?? ''))
+      fail('allocated-value-type');
+    if (current!.type !== "number" && !(templateValues && ['fontWeight', 'color'].includes(current!.type ?? ''))) {
+      if (current!.type !== "dimension" || !["px-dimension-v1", "template-values-v1"].includes(input.allocatedValueProtocol ?? ''))
         fail("allocated-value-type");
       if (!literalPixels(current!.value) || !literalPixels(row.value)) fail("allocated-value-pixels");
       dimensionValues++;
@@ -337,7 +343,7 @@ function restoreAllocatedValues(
     if (same(current!.value, row.value)) fail("allocated-value-redundant");
     setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value));
   }
-  if (input.allocatedValueProtocol !== undefined && !dimensionValues) fail("allocated-value-protocol-empty");
+  if (input.allocatedValueProtocol === 'px-dimension-v1' && !dimensionValues) fail("allocated-value-protocol-empty");
   for (const mode of restored.modes) mode.tokenTreeRevision = revisionOf(mode.tokens);
   return restored;
 }
@@ -404,6 +410,13 @@ function verifyAllocationExtension(input: NativeTokenContextInput,
       body.variables.length!==original.variables.length+added.length ||
       !same(original.dependencyTokenPaths,body.dependencyTokenPaths)) fail('allocation-base-variables');
   return original.revision;
+}
+
+/** Recover the original allocation input by rederiving and validating history.
+ * This returns evidence only; no identity is discovered and no write is granted. */
+export function restoreNativeTokenAllocationInput(input: NativeTokenContextInput): NativeTokenContextInput {
+  prepareNativeTokenContext(input);
+  return input.allocatedValues === undefined ? clone(input) : restoreAllocatedValues(input);
 }
 
 function prepareBody(

@@ -2,12 +2,16 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import vm from 'node:vm';
 import { revisionOf, canonicalJson } from './contract-provenance.js';
-import { nativeTextGraphFixture } from './native-text-template-test-fixture.js';
+import { nativeTextGraphFixture, nativeTextGraphComponentFixture } from './native-text-template-test-fixture.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import type { NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
-import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript } from './native-root-text-template-graph-native.js';
+import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
+import { planNativeRootTextTemplateGraph } from './native-root-text-template-graph.js';
+import { prepareNativeTokenContext } from './native-token-context.js';
 import { planNativeTemplateValueUpdate, verifyNativeTemplateValueUpdate, observeNativeTemplateValueUpdate,
-  emitNativeTemplateValueReadbackScript, type NativeTemplateValueUpdateInput } from './native-root-text-template-value-update.js';
+  emitNativeTemplateValueReadbackScript, resolveNativeTemplateValueState, resolveNativeTemplateContractValueState,
+  type NativeTemplateValueUpdateInput } from './native-root-text-template-value-update.js';
 
 async function fixture(prepare?: (f: ReturnType<typeof nativeTextGraphFixture>) => void) {
   const f = nativeTextGraphFixture(3, 2), host = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
@@ -213,4 +217,98 @@ test('new values accept only exact or float32 representations, with indistinguis
   receipt.source.variables.find(v => v.id === c.variableId)!.valuesByMode[c.modeId] = 12;
   const result = observeNativeTemplateValueUpdate(near.input, receipt);
   assert.equal(result.status, 'no-op'); assert.deepEqual(result.values, [{ tokenPath: 'size.v0', state: 'both' }]);
+});
+
+test('current graph values retain allocation ownership across two updates, an unchanged repeat and full reversal', async () => {
+  const h = await fixture(), original = structuredClone(h.input), originalGraph = planNativeRootTextTemplateGraph(original.before);
+  h.f.tokens.size.v0.$value = '15.5px'; h.f.tokens.line.v0.$value = '23px';
+  h.f.tokens.weight.$value = 600; h.f.tokens.ink.v0.$value = '#abcdef'; h.input.desired = h.compile();
+  const plan = planNativeTemplateValueUpdate(h.input), state = resolveNativeTemplateValueState(h.input), graph = planNativeRootTextTemplateGraph(state);
+  assert.equal(graph.allocationRevision, originalGraph.revision);
+  assert.notEqual(graph.revision, originalGraph.revision);
+  assert.deepEqual(graph.sourceTokens.source, originalGraph.sourceTokens.source);
+  assert.equal(graph.sourceTokens.revision, originalGraph.sourceTokens.revision);
+  assert.equal(state.tokens.allocatedValues!.length, 4);
+  assert.throws(() => emitNativeTemplateGraphScript(state), /succession-not-creatable/);
+  // Before any fixture assignment, the new current-value expectation must fail.
+  assert.throws(() => verifyNativeTemplateGraphReceipt(state, h.input.identity, h.input.baseline), /source-readback/);
+  const assign = (changes: typeof plan.changes) => { for (const change of changes)
+    h.host.variables.find(v => v.id === change.variableId)!.setValueForMode(change.modeId, structuredClone(change.after)); };
+  const read = async (input: NativeRootTextTemplateGraphInput) => {
+    const result = await h.run(emitNativeTemplateGraphReadbackScript(input, h.input.identity));
+    assert.equal(result.status, 'readback-collected');
+    verifyNativeTemplateGraphReceipt(input, h.input.identity, result.receipt);
+    return result.receipt;
+  };
+  assign(plan.changes); const firstReceipt = await read(state);
+  assert.equal(firstReceipt.graphRevision, originalGraph.revision);
+  assert.deepEqual(firstReceipt.selectors, original.baseline.selectors);
+  assert.deepEqual(firstReceipt.routes, original.baseline.routes);
+  assert.deepEqual(firstReceipt.source.collection, original.baseline.source.collection);
+  const repeat = { ...h.input, before: state, baseline: firstReceipt };
+  assert.deepEqual(planNativeTemplateValueUpdate(repeat).changes, []);
+  assert.deepEqual(resolveNativeTemplateValueState(repeat), state);
+  h.f.tokens.weight.$value = 700; h.f.tokens.size.v0.$value = '19px';
+  const next = { ...repeat, desired: h.compile() }, second = resolveNativeTemplateValueState(next);
+  assert.equal(second.tokens.allocatedValues!.find(v => v.tokenPath === 'weight')!.value, 400, 'history retains allocation, not previous update');
+  assign(planNativeTemplateValueUpdate(next).changes); const secondReceipt = await read(second);
+  const reverse = { ...next, before: second, desired: original.before, baseline: secondReceipt };
+  const restored = resolveNativeTemplateValueState(reverse);
+  assert.deepEqual(restored, original.before); assert.deepEqual(planNativeRootTextTemplateGraph(restored), originalGraph);
+  assign(planNativeTemplateValueUpdate(reverse).changes);
+  assert.deepEqual(await read(restored), original.baseline);
+});
+
+test('forged allocation history cannot reassign an existing graph or change the original token hash', async () => {
+  const h = await fixture(); h.f.tokens.weight.$value = 600; h.input.desired = h.compile();
+  const state = resolveNativeTemplateValueState(h.input);
+  for (const mutate of [
+    (i: typeof state) => { i.tokens.allocatedValues![0].value = 500; },
+    (i: typeof state) => { i.tokens.source.tokensSha256 = '0'.repeat(64); },
+    (i: typeof state) => { i.tokens.allocatedValues![0].value = '{weight}'; },
+    (i: typeof state) => { i.tokens.allocatedValues!.push(structuredClone(i.tokens.allocatedValues![0])); },
+    (i: typeof state) => { i.tokens.allocatedValueProtocol = 'px-dimension-v1'; },
+    (i: typeof state) => { i.tokens.allocatedValues = []; },
+  ]) {
+    const changed = structuredClone(state); mutate(changed);
+    assert.throws(() => emitNativeTemplateGraphReadbackScript(changed, h.input.identity), /NATIVE_ROOT_TEXT_TEMPLATE_GRAPH_|native-token-context-|native-template-graph-/);
+  }
+  const forged = structuredClone(h.input.identity); forged.graphRevision = planNativeRootTextTemplateGraph(state).revision;
+  assert.throws(() => emitNativeTemplateGraphReadbackScript(state, forged), /identity-shape/);
+  assert.equal(prepareNativeTokenContext(state.tokens).revision, h.input.identity.source.preparationRevision);
+});
+
+test('expected component state retains creation identities and independently verifies current size, line height, weight and paint', async () => {
+  const h = await nativeTextGraphComponentFixture(2, 2), creation = await h.run(h.script());
+  const draft = h.engine.compileNativeContractDraft(h.contract, h.byId, h.source);
+  const before: NativeContractObservationInput = structuredClone({ operation: h.operation, planRevision: revisionOf('template value observation'),
+    projection: draft.projection, component: draft.component, tokenInput: h.context.tokens.input,
+    tokenIdentity: h.context.tokens.identity, creation, templateGraph: { input: h.input, identity: h.created.identity } });
+  const baseline = await h.run(emitNativeContractReadbackScript(before));
+  assert.equal(verifyNativeContractReadback(before, baseline).status, 'supported-structure-observed');
+  assert.deepEqual(resolveNativeTemplateContractValueState({ before, baseline, desired: before.templateGraph!.input }), before);
+  h.tokens.size.v1.$value = '17.5px'; h.tokens.line.v1.$value = '27px'; h.tokens.ink.v1.$value = '#abcdef';
+  h.tokens.weight.$value = 700;
+  const desired: NativeRootTextTemplateGraphInput = structuredClone(h.compile());
+  desired.renderScope = 'component'; desired.tokens.fileKey = before.operation.fileKey;
+  desired.tokens.scopeId = before.tokenInput.scopeId; desired.tokens.source.revision = before.tokenInput.source.revision;
+  const next = resolveNativeTemplateContractValueState({ before, baseline, desired });
+  assert.deepEqual(next.creation, before.creation); assert.deepEqual(next.tokenIdentity, before.tokenIdentity);
+  assert.deepEqual(next.templateGraph!.identity, before.templateGraph!.identity);
+  const plan = planNativeTemplateValueUpdate({ before: before.templateGraph!.input, desired,
+    identity: before.templateGraph!.identity, baseline: baseline.templateGraph.receipt });
+  for (const change of plan.changes) h.variables.find(v => v.id === change.variableId)!.setValueForMode(change.modeId, structuredClone(change.after));
+  const readback = await h.run(emitNativeContractReadbackScript(next));
+  assert.ok(readback.nodes.filter((n: any) => n.type === 'TEXT').every((n: any) => n.values.fontName.style === 'Bold'));
+  const verification = verifyNativeContractReadback(next, readback);
+  assert.equal(verification.status, 'supported-structure-observed', JSON.stringify(verification));
+  assert.equal(verifyNativeContractReadback(before, readback).status, 'refused', 'allocation identity alone cannot certify stale content');
+  const corrupt = structuredClone(baseline); corrupt.nodes.find((n: any) => n.type === 'TEXT').values.characters = 'unowned edit';
+  assert.throws(() => resolveNativeTemplateContractValueState({ before, baseline: corrupt, desired }), /component-baseline/);
+  const reverse = resolveNativeTemplateContractValueState({ before: next, baseline: readback, desired: before.templateGraph!.input });
+  assert.deepEqual(reverse, before, 'full reversal recovers the original component expectation');
+  const reversePlan = planNativeTemplateValueUpdate({ before: next.templateGraph!.input, desired: before.templateGraph!.input,
+    identity: before.templateGraph!.identity, baseline: readback.templateGraph.receipt });
+  for (const change of reversePlan.changes) h.variables.find(v => v.id === change.variableId)!.setValueForMode(change.modeId, structuredClone(change.after));
+  assert.deepEqual(await h.run(emitNativeContractReadbackScript(reverse)), baseline);
 });

@@ -29,12 +29,13 @@ export interface NativeTemplateGraphReceipt {
 }
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 function fail(why: string): never { throw Error(`native-template-graph-${why}`); }
-const owner = (graph: NativeRootTextTemplateGraph) => ({ scopeId: graph.sourceTokens.scopeId, graphRevision: graph.revision });
+const allocationRevision = (graph: NativeRootTextTemplateGraph) => graph.allocationRevision ?? graph.revision;
+const owner = (graph: NativeRootTextTemplateGraph) => ({ scopeId: graph.sourceTokens.scopeId, graphRevision: allocationRevision(graph) });
 const nonempty = (v: unknown): v is string => typeof v === 'string' && v.length > 0 && v.trim() === v;
 function unique(values: string[]) { if (values.some(v => !nonempty(v)) || new Set(values).size !== values.length) fail('identity-ambiguous'); }
 
 function checkIdentity(input: NativeRootTextTemplateGraphInput, graph: NativeRootTextTemplateGraph, id: NativeTemplateGraphIdentity) {
-  if (!id || id.version !== 1 || id.graphRevision !== graph.revision || id.fileKey !== graph.sourceTokens.fileKey ||
+  if (!id || id.version !== 1 || id.graphRevision !== allocationRevision(graph) || id.fileKey !== graph.sourceTokens.fileKey ||
       !Array.isArray(id.selectors) || id.selectors.length !== graph.selectors.length ||
       !Array.isArray(id.routes) || id.routes.length !== graph.routes.length) fail('identity-shape');
   // Reuse the existing complete source-identity validator. Emitting this
@@ -58,7 +59,7 @@ function checkIdentity(input: NativeRootTextTemplateGraphInput, graph: NativeRoo
  * leaves. Collection membership and ownership are exact, not name discovery. */
 export function verifyNativeTemplateGraphReceipt(input: NativeRootTextTemplateGraphInput, id: NativeTemplateGraphIdentity, receipt: NativeTemplateGraphReceipt): void {
   const graph = planNativeRootTextTemplateGraph(input); checkIdentity(input, graph, id);
-  if (!receipt || receipt.fileKey !== id.fileKey || receipt.graphRevision !== graph.revision ||
+  if (!receipt || receipt.fileKey !== id.fileKey || receipt.graphRevision !== allocationRevision(graph) ||
       !Array.isArray(receipt.selectors) || !Array.isArray(receipt.routes) ||
       receipt.selectors.length !== id.selectors.length || receipt.routes.length !== id.routes.length) fail('receipt-shape');
   const source = verifyNativeTokenContextReceipt({ input: input.tokens, expectedIdentity: id.source, receipt: receipt.source });
@@ -221,7 +222,7 @@ try {
   guard();
   if (collections.some((c, i) => !c || c.id !== EXPECTED.selectors[i].id || c.key !== EXPECTED.selectors[i].key) ||
       variables.some((v, i) => !v || v.id !== EXPECTED.routes[i].id || v.key !== EXPECTED.routes[i].key)) refuse('readback-identity');
-  result.receipt = { graphRevision: GRAPH.revision, fileKey: figma.fileKey, source: source.receipt,
+  result.receipt = { graphRevision: ${graph.allocationRevision ? 'GRAPH.allocationRevision' : 'GRAPH.revision'}, fileKey: figma.fileKey, source: source.receipt,
     sourceScopes: Object.fromEntries(sourceVariables.map((v, i) => {
       if (!v || v.id !== EXPECTED.source.variables[i].id || v.key !== EXPECTED.source.variables[i].key) refuse('source-readback');
       return [v.id, [...v.scopes].sort()];
