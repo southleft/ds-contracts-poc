@@ -7875,10 +7875,20 @@ The app refuses a tracking reference to a color value. Restoring the original
 contract produces a byte-identical archive; normal reload and workspace
 selection restore the exact contract and delivery action, with one saved
 entry. This is same-tab recovery; browser restart is not established.
-The earlier app archive and its 15.38% failures remain intact. A new native
-update with this sizing rule remains pending. Font assets are explicitly
-supplied and hashed; Figma's font bytes remain unverified. The earlier Public
-Sans 1.007 control also remains failed.
+The earlier app archive and its 15.38% failures remain intact. Font assets are
+explicitly supplied and hashed; Figma's font bytes remain unverified. The
+earlier Public Sans 1.007 control also remains failed.
+
+A generated native update, using that app contract with only its identity
+retargeted to the existing owned Evaluations fixture, preserves the set key
+and all ten main IDs. The existing amend rule rebuilds ten editable text
+interiors; all retain `WIDTH_AND_HEIGHT` and the expected 0px/1px tracking.
+Root dimensions, native image bytes, pages, collections and variable values
+are exact before and after. An unchanged repeat allocates nothing and preserves
+the complete readback. Canonical capture and inverse proposal retain the
+auto-width field and both tracking values. The bridge was closed and the
+canvas inspected. This is a generated-program update of the owned fixture,
+not a new source-workflow operation or fidelity qualification.
 
 **AGENT decision — editor token values, 2026-09-21.** The editor passed only
 token names to its CSS validation layer. That falsely refused the imported
