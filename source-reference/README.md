@@ -40,6 +40,17 @@ Without a declaration the built-in shadcn cohort above is used, and its entry by
 
 A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText` or `textContent: "absent"`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from. It must include the resolved source file of every `./`-relative module the cases mount (`./src/components/ui/badge` resolves to `src/components/ui/badge.tsx`; resolution is the bundler's, recorded by the build), so a changed component source always forces renewed witnesses. It cannot name the declaration itself.
 
+When the source requires a web font, add `"fontOrigin": "web"` to that case's
+`witness`. Every font that paints a glyph at `fontPath` (or the normal text
+target) must match `fontFamily` and be reported by Chromium as a custom font.
+System fallback with the same family name, mixed web/system glyphs and missing
+origin evidence all refuse with `font-substitution`. Omission retains the
+existing family-only requirement and observation shape. This witness cannot
+accompany `textContent: "absent"`. It distinguishes web-font use from system
+fallback; it does not identify an exact font file or authenticate Figma fonts.
+Author it from the source's font CSS and asset requirements, and pin the
+relevant source files in `witnessFiles`.
+
 For an intentionally textless root, set `witness.textContent` to `"absent"` and omit `fontPath` and `associatedLabelText`. The observer must prove that its bounded ordinary HTML/SVG subtree contains no non-whitespace text, including hidden descendants, no generated text or list markers, and no painted glyphs. Custom elements, shadow roots, slots and opaque or native text surfaces refuse this proof. Missing, hidden or zero-size roots, wrong styles/tokens and resource/runtime failures still fail. Other witnesses retain the existing visible-text and actual-font requirements. A separate nearby caption cannot supply component text.
 
 Witnesses are authored by the workspace owner from the source's own CSS, tokens and font metadata. They are an independent check of the capture and must never be sampled from converter output. A changed source file requires renewed witnesses.
