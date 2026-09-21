@@ -8902,6 +8902,28 @@ the verified correction, leaving its journal and succession files unchanged.
 The unobstructed canvas was inspected at 60%. Evidence is retained under
 `private/react-design-source-repair-20260921/native-succession-v1/`.
 
+A live partial-file failure now exercises the same controller. After a reviewed
+60% → 70% design edit, temporarily denying writes to the source root lets the
+nested module installation finish but makes the later CSS installation fail.
+The app retains that refusal and shows the module as changed while CSS remains
+original. Once permissions are restored, resuming the same application reads
+the canvas again, keeps the already installed module and completes the CSS.
+Its first source validation fails because a required capture control did not
+complete; that failure remains recorded. A second explicit resume writes no
+source bytes, passes all ten examples and obtains an identical full native
+readback. Both installed files retain their original installation inodes and
+single installation records across that validation retry.
+
+The app then restores both pre-test source files byte-for-byte, validates all
+ten examples and independently verifies the unchanged native set. Restoring
+only the four temporary canvas opacity edits to 60% and reading again returns
+all 44 nodes, 50 variables and twelve images exactly to the pre-test snapshot.
+The app reports no remaining design changes, and the unobstructed editable
+canvas was inspected. Evidence, including both failures, is retained under
+`private/react-design-source-repair-20260921/partial-write-v1/`. This demonstrates
+recovery from an actual partial-file IO failure; it does not demonstrate process
+termination during a file replacement or remove the non-atomic write limitation.
+
 Apply accepts only the host's current selected preview. It seals that selection,
 prepares the exact source/CSS transaction and requests a new read from the
 existing Sync Runner operation. The full observed content must match the
@@ -8947,8 +8969,9 @@ non-atomic multi-file limitation. Unexpected source edits refuse without being
 overwritten. Missing preview or transaction proof refuses; stale validation
 evidence requires verification again. The measured normal succession retains
 the existing component and closes this bounded source-application loop. Broader
-repair channels remain unqualified. The demonstrated interruption precedes the
-write; partial-file recovery remains engineering coverage.
+repair channels remain unqualified. The demonstrated host interruption precedes
+the write; the separate partial-file failure and recovery above are now live
+evidence. Termination during file replacement remains unmeasured.
 
 Reversal removes the Apply endpoints, recovery UI and controller together.
 Keep the source transaction helper and witness loader for already applied

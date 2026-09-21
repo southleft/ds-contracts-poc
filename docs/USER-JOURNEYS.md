@@ -122,7 +122,13 @@ validates them; it leaves the Figma edit in place. After completion, **Load
 verified source** opens the resulting source reference. Unexpected source edits
 are preserved and refuse. The bounded opacity Apply, interruption before the
 write, completed-repeat behavior, exact source restoration and intervening
-source/canvas conflict refusals are demonstrated. To continue using an existing
+source/canvas conflict refusals are demonstrated. A real failure after installing
+the module but before installing CSS also resumes through these controls. The
+completed module is retained; verification must still finish before the app
+claims success. Source restoration and the four temporary canvas edits were
+then independently verified back to the pre-test state. This is an IO-failure
+probe; process termination during file replacement remains unmeasured.
+To continue using an existing
 native set, trace the verified source, follow its saved root observation, inspect
 the required initial states, then choose **Follow the current source with the
 existing … states** and **Review compiler update**. This flow retains the same
