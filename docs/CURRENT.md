@@ -91,9 +91,15 @@ A second-library intake now admits the unchanged React DaisyUI 5.0.5 default
 export through a bounded generic source rule ([D.94](23-known-limitations.md#d94-local-default-components-keep-their-export-identity)).
 Its two declared cases pass app source/replay checks with all five negative
 controls. The published entry matches both observed source cases exactly.
-The full API read still refuses an inherited `inlist` type, and native fidelity
-and the complete second-library journey remain unqualified. This does not close
-row 4 or the existing Radix ownership gap.
+The full API read still refuses an inherited `inlist` type. A live app operation
+created 100 editable mains and 148 variables; its separate primary caller
+instance contains editable text but loses the badge fill and border. Its native
+width is 49.01599884033203 px versus 49.921875 px in the source. Joint color
+bindings over two defaultless properties were refused by fusion but omitted
+from the source report. Fresh assembly now names those refusals and stops before
+native preparation ([D.95](23-known-limitations.md#d95-root-style-drafts-retain-binding-refusals)).
+Native fidelity and the complete second-library journey remain unqualified.
+This does not close row 4 or the existing Radix ownership gap.
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 

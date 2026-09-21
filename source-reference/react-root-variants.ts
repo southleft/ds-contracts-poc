@@ -106,11 +106,12 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
      states:[],semantics:{element:roots.get(baseValue)!.tag},anatomy:{root:{slot:{name:'children'}}},
      bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
     const byCombo=new Map(enumeration.combos.map(c=>[c.key,roots.get(c.axisValues[property])!]));
-    const {enriched,tokens,residuals}=compileReactRootSweep(contract,[axis],baseAxisValues,byCombo);
+    const {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,[axis],baseAxisValues,byCombo);
     retainReactRootSourceBindings(enriched,tokens,[axis],baseAxisValues,new Map(enumeration.combos.map(c=>[c.key,projections.get(c.axisValues[property])!])));
     if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-variants-content-boundary-changed');
     const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-variants-invalid:'+errors.join(';'));
     result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';
+    if(overflow.length)throw Error('react-root-variants-unprojected-bindings:'+overflow.map(r=>r.part+'.'+r.channel+(r.state?':'+r.state:'')).join(','));
     const engine=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
     result.native=engine.compileComponentData(enriched,new Map([[enriched.id,enriched]]));result.status='native-compiled';
    }catch(error){result.problems.push(error instanceof Error?error.message:String(error));}
