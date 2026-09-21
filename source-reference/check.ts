@@ -6,6 +6,9 @@ export interface SourceProfile {
   path: string[];
   /** A painted text witness may live inside a slotted child's shadow root. */
   fontPath?: string[];
+  /** Require painted web-font glyphs as well as the declared family. This
+   * distinguishes same-family system fallback, not exact font asset bytes. */
+  fontOrigin?: 'web';
   /** Opt in to an independently observed absence of DOM text and painted glyphs.
    * Omission retains the original visible-text and actual-font requirement. */
   textContent?: 'absent';
@@ -33,7 +36,7 @@ export interface SourceObservation {
   styles: Record<string, string>;
   tokens: Record<string, string>;
   fontsReady: boolean;
-  platformFonts: { familyName: string; glyphCount: number }[];
+  platformFonts: { familyName: string; glyphCount: number; isCustomFont?: boolean }[];
   failedResources: string[];
   runtimeErrors: string[];
   probes?: Record<string, {
@@ -47,13 +50,14 @@ export interface SourceObservation {
 export function checkSource(profile: SourceProfile, observed: SourceObservation) {
   const problems: string[] = [];
   if (!profile.id || !profile.provenance || !profile.path.length ||
-      !profile.fontFamily || !Object.keys(profile.requiredStyles).length || !Object.keys(profile.requiredTokens).length) {
+      !profile.fontFamily || !Object.keys(profile.requiredStyles).length || !Object.keys(profile.requiredTokens).length ||
+      (profile.fontOrigin !== undefined && profile.fontOrigin !== 'web')) {
     problems.push('profile-incomplete');
   }
   if (!observed.found) problems.push('component-missing');
   if (!observed.visible || !(observed.width > 0) || !(observed.height > 0)) problems.push('component-not-visible');
   if (profile.textContent === 'absent') {
-    if (profile.fontPath !== undefined || profile.associatedLabelText !== undefined) problems.push('profile-incomplete');
+    if (profile.fontPath !== undefined || profile.associatedLabelText !== undefined || profile.fontOrigin !== undefined) problems.push('profile-incomplete');
     const proof = observed.textAbsence;
     if (!proof || proof.status !== 'observed' || !Number.isSafeInteger(proof.inspectedNodes) ||
         proof.inspectedNodes < 1 || proof.inspectedNodes > 10_000 || proof.problems.length)
@@ -81,7 +85,8 @@ export function checkSource(profile: SourceProfile, observed: SourceObservation)
   const used = observed.platformFonts.filter(f => f.glyphCount > 0);
   if (profile.textContent === 'absent') {
     if (used.length) problems.push('unexpected-source-glyphs');
-  } else if (!used.length || used.some(f => f.familyName !== profile.fontFamily)) problems.push('font-substitution');
+  } else if (!used.length || used.some(f => f.familyName !== profile.fontFamily ||
+      (profile.fontOrigin === 'web' && f.isCustomFont !== true))) problems.push('font-substitution');
   if (observed.failedResources.length) problems.push('resource-failure');
   if (observed.runtimeErrors.length) problems.push('runtime-error');
   for (const [name, probe] of Object.entries(profile.probes ?? {})) {

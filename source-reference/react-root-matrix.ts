@@ -15,6 +15,7 @@ import {projectReactRootVisual,reactRootStyleExclusion} from './react-root-visua
 import {compileReactRootSweep,retainReactRootSourceBindings} from './react-root-sweep.js';
 import type {ReactPropertySnapshot,ReactRootVariants} from './react-root-variants.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {reactPropertyPaintedRoot,assertReactPropertyFontCoverage} from './react-property-fonts.js';
 export interface ReactRootMatrix {
  version:1;qualification:'combined-property-root-draft';acceptedContract:null;
  draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[];sizing?:ReactSizingReport[]};problems:string[];
@@ -47,6 +48,7 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const roots=new Map<string,CapturedNode>(),projections=new Map<string,ReturnType<typeof projectReactRootVisual>['roots'][number]>(),trees=new Map<string,string>();
    // Every observed row, including an omission that shares its default's key.
    const planes:Array<ReturnType<typeof projectReactRootVisual>['roots'][number]>=[];
+   assertReactPropertyFontCoverage(matrix.rows,snapshots);
    for(const row of matrix.rows){
     const snap=snapshots[row.id];if(row.status!=='observed'||!row.restored||!snap||snap.treeSha256!==row.treeSha256||snap.image!==row.image||evidenceSha(JSON.stringify(snap.tree))!==row.treeSha256)throw Error('react-root-matrix-observation-unverified');
     const instance=snap.ownership.components.find(i=>i.id===matrix.instanceId);if(!instance||JSON.stringify(instance.source)!==JSON.stringify(matrix.source))throw Error('react-root-matrix-source-changed');
@@ -64,7 +66,11 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
     if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-matrix-content-unqualified');
     const prior=projections.get(key);
     if(prior&&(JSON.stringify(prior.sourceBindings)!==JSON.stringify(projected.sourceBindings)||JSON.stringify(prior.sourceSizing)!==JSON.stringify(projected.sourceSizing)))throw Error('react-root-matrix-default-provenance-differs');
-    const root:CapturedNode={...structuredClone(linked.roots[0].observation),nodes:[],style:Object.fromEntries(Object.entries(linked.roots[0].observation.style).map(([k,v])=>[k,normalizeValue(v)]))};
+    const painted=reactPropertyPaintedRoot(snap,row,linked.roots[0].path);
+    const root:CapturedNode={...painted,nodes:[],style:Object.fromEntries(Object.entries(painted.style).map(([k,v])=>[k,normalizeValue(v)]))};
+    if(painted.style['font-family']!==linked.roots[0].observation.style['font-family'])
+     result.lowerings.push({value:key,channel:'font-family',from:linked.roots[0].observation.style['font-family'],to:painted.style['font-family'],reason:'painted-font-family'});
+    if(roots.has(key)&&roots.get(key)!.style['font-family']!==root.style['font-family'])throw Error('react-root-matrix-default-font-differs');
     // Same bounded flex-gap lowering as the single-property adapter (CSS Align3 8.1).
     if(root.style.display==='flex'||root.style.display==='inline-flex')for(const channel of ['row-gap','column-gap'])if(root.style[channel]==='normal'){
      root.style[channel]='0px';if(!result.lowerings.some(l=>l.value===key&&l.channel===channel))result.lowerings.push({value:key,channel,from:'normal',to:'0px',reason:'flex-normal-gap-used-value'});

@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { checkSource, type SourceProfile } from './check.js';
+import { checkSource, type SourceProfile, type SourceObservation } from './check.js';
 import { observeSource, watchSourceFailures } from './observe.js';
+import { corruptReactReference } from './react-reference-validation.js';
 
 const profile: SourceProfile = {
   id:'negative-control-fixture', provenance:'source-reference/check.test.ts (instrument test, not a design-system proof)',
@@ -59,6 +60,39 @@ test('real Chromium rejects invalid answer keys, not just tampered JSON', async 
   } finally { await browser.close(); }
 });
 
+test('authored web-font origin rejects same-family system fallback and missing evidence', async () => {
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage();
+  const failures = watchSourceFailures(page);
+  const web: SourceProfile = {...profile, fontOrigin:'web'};
+  try {
+    await page.setContent(html()); await page.evaluate(() => document.fonts.ready);
+    const legacy = await observeSource(page, profile, failures);
+    assert.ok(legacy.platformFonts.every(f => !Object.hasOwn(f,'isCustomFont')), 'legacy observations retain their original shape');
+    const original = await observeSource(page, web, failures);
+    assert.ok(original.platformFonts.some(f => f.glyphCount > 0));
+    assert.ok(original.platformFonts.filter(f => f.glyphCount > 0).every(f => f.isCustomFont === true));
+    assert.equal(checkSource(web,original).status,'valid');
+    assert.ok(checkSource(web,legacy).problems.includes('font-substitution'), 'old family-only evidence cannot satisfy an origin witness');
+    for (const flag of [false,undefined]) {
+      const fallback: SourceObservation = {...original, platformFonts:original.platformFonts.map(f => ({...f,isCustomFont:flag}))};
+      assert.ok(checkSource(web,fallback).problems.includes('font-substitution'), 'matching family and dimensions do not establish web-font origin');
+      assert.equal(checkSource(profile,fallback).status,'valid', 'unrequested origin evidence does not change legacy semantics');
+    }
+    const mixed = {...original, platformFonts:[...original.platformFonts,{familyName:profile.fontFamily,glyphCount:1,isCustomFont:false}]};
+    assert.ok(checkSource(web,mixed).problems.includes('font-substitution'), 'one system-painted glyph prevents a pass');
+    mixed.platformFonts.at(-1)!.glyphCount = 0;
+    assert.equal(checkSource(web,mixed).status,'valid', 'unused font inventory is not painted evidence');
+    await corruptReactReference(page,'missing-font','button');
+    const missing = await observeSource(page,web,failures);
+    const used = missing.platformFonts.filter(f => f.glyphCount > 0);
+    assert.ok(used.length && used.every(f => f.isCustomFont === false), 'Chromium records system origin after the web-font removal');
+    // The instrument probe adopts the observed system family only to isolate
+    // origin rejection; it is not a source-readiness witness for a product.
+    assert.ok(checkSource({...web,fontFamily:used[0].familyName},missing).problems.includes('font-substitution'));
+  } finally { failures.dispose(); await browser.close(); }
+});
+
 test('an empty profile cannot confer validity', () => {
   const result = checkSource({...profile, requiredStyles:{}, requiredTokens:{}}, {
     found:true, visible:true, width:1, height:1, text:'x', styles:{}, tokens:{}, fontsReady:true,
@@ -71,7 +105,7 @@ test('state and slotted font witnesses reject plausible but wrong stories', asyn
   const browser = await chromium.launch({headless:true});
   const page = await browser.newPage();
   const failures = watchSourceFailures(page);
-  const stateProfile: SourceProfile = {...profile, fontPath:['label-host', 'span'], probes:{
+  const stateProfile: SourceProfile = {...profile, fontOrigin:'web', fontPath:['label-host', 'span'], probes:{
     input:{path:['input'], properties:{checked:true, disabled:false}},
     icon:{path:['svg'], styles:{width:'20px'}},
   }};
