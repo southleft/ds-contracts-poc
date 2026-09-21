@@ -7700,6 +7700,148 @@ caller override forwarding. Keep the independent inline `style` collision fix,
 font-input support, D.88 root guard and all historical evidence. Do not alter
 source designs, crops, scorer thresholds or owner grades.
 
+### D.91 Pressed root paint can equal rest while still needing a hover reset
+
+**AGENT decision, 2026-09-20.** A pointer press also matches `:hover`. Reading
+pressed paint only as a difference from rest loses a necessary override when
+the pressed drawing restores the resting background or border color. The
+proposer now compares these root paint channels with the uniquely matched
+hover cells too. It retains the captured pressed value, including a bound
+reference equal to the base reference, through the existing state vocabulary.
+It requires a hover peer for every compared pressed cell and at most one
+remaining variant axis. Multiple-axis hover selectors can outrank a uniform
+pressed selector and remain outside this bounded reset rule. No state, paint,
+property axis or component-specific behavior is invented. Other root channels,
+part-level resets, simultaneous keyboard focus and states with no recoverable
+override retain their existing limits and refusals.
+
+Root token-state CSS follows the declared interaction vocabulary order across
+uniform, substituted and per-value bindings. Stable ordering keeps per-value
+overrides after uniform bindings within each state. A browser counterexample
+showed a per-value hover rule overriding a uniform pressed rule at equal
+specificity; the corrected order restores the captured paint during a real
+pointer press. The synthetic native preview round trip retains the active
+state and its token references.
+
+A state need not change paint if the source explicitly draws the same paint
+at rest. The consumer check retains its `state-inert` finding unless a unique
+rest cell has exactly the same non-state props, a distinct native node ID,
+byte-identical valid PNG data, authenticated full-bounds scale-one captures,
+and exactly matching relative render geometry and layout size. The receipt
+names both nodes and their image hash. This only resolves the paint-change
+expectation: undeclared states and unreachable interactions still fail, and
+the consumer's own size and both unmasked image comparisons remain required.
+The scorer, crop rules and 5% limit are unchanged. Disabled-state equivalence
+is not admitted by this rule.
+
+Read-only native evidence on Altitude Tab confirms both Active/Default pairs
+are byte-identical, with stable bracketing source snapshots. The application
+now imports Tab as a real child instead of its former state-refusal stub and
+prepares its React archive. A clean consumer installs a byte-identical package
+and reaches both pressed states. It still reports 16 image/content-size
+problems: only 3/10 image pairs meet both background limits, selected text is
+93px wide against 101px in the source, and focus reaches a 27.47% black-background
+mismatch. The press proof does not excuse those failures. The same JSON import
+repeated with exactly five workspace entries and an identical Tab contract.
+The visible comparison and installed consumer were inspected on both
+backgrounds; evidence is retained in
+`private/tab-active-reset-app-20260920/`. Text Passage and ArrowArcLeft remain
+unresolved dependencies. This failed application journey does not qualify V1.
+
+To reverse, remove the concurrent-hover root-paint comparison and restore the
+prior root token-rule ordering. Restore unconditional `state-inert` reporting
+if withdrawing the independent source-equivalence adjudication; keep its
+receipts and negative controls. Preserve the failed consumer and all native
+source evidence. Do not adjust tolerances or replace historical results.
+
+### D.92 A uniform state border can replace different resting side widths
+
+**AGENT decision, 2026-09-20.** A resting bottom-only border and a uniform
+focused border use existing contract channels, but the proposer previously
+named every state-width change involving resting side widths as unsupported.
+It now carries this bounded case as `border-width` and solid `border-style`:
+every compared root has a captured stroke, INSIDE alignment and an explicit
+`strokesIncludedInLayout: true`; resting widths are complete finite
+nonnegative numbers, and all state cells have one equal finite nonnegative
+uniform width that changes at least one resting side. Unbound widths need
+minting; uniformly bound widths retain their references, including distinct
+identities represented through the existing per-value state maps. A failed
+width recovery cannot leave a style-only override. Unequal state-side widths,
+missing layout evidence and other alignment policies remain outside this rule.
+No schema field, component-name branch or inferred width is added.
+
+Native state previews remove replaced resting side literals and bindings
+before applying the state shorthand. These transitions explicitly include
+strokes in layout on the resting and state frames; the public outside-layout
+flag still wins. Native layout settings differ across retained and freshly
+created nodes, so an explicit write avoids relying on their prior state.
+Other generated library scripts
+remain byte-fresh. Synthetic browser and native round trips cover common and
+per-value bound width identities and twelve unsupported input controls.
+
+The generated program was executed in a new isolated Evaluations page and
+collection. Its ten editable variants retain the bottom-only resting stroke
+and the two uniform 2px focus strokes. The canonical native dump and exact
+proposal recover the width references and solid style. Existing page and
+collection inventories and variable values are unchanged. The plugin window
+was closed before inspecting the live canvas. This is a bounded native engine
+probe, not a claim that the application completed the reverse journey.
+
+The actual Playground imported the same preserved source, prepared a React
+archive, and a clean consumer installed the byte-identical package. Tab now
+passes **4/10 image pairs on both backgrounds**, with **12 named problems**
+remaining. Unselected focus is 96 × 40 on both surfaces and measures 0% on
+white / 2.421875% on black. Selected focus is still 97 × 40 against native
+105 × 40 and fails on black. Text sizing and other text image differences
+remain unresolved; the two composed dependency gaps in D.91 also remain.
+Explicit Public Sans consumer assets do not authenticate Figma's font bytes.
+The original pixels, frame checks and 5% limit are unchanged. Repeating the
+import retains five entries and an identical Tab contract. A normal browser
+reload restores a schema-valid contract and an available package action.
+The comparison and installed consumer were inspected visibly on both
+backgrounds. Tab and V1 remain unqualified.
+
+To reverse, remove the uniform-state-width exception and its solid-style
+carrier, restore the native state-preview side handling and remove this
+transition's explicit layout policy. Preserve the outside-layout behavior,
+D.91 pressed paint reset, all source captures and the failed app consumer.
+
+
+**AGENT review correction, 2026-09-21.** The explicit layout policy also
+covers token-bound resting side widths. The initial rule detected only literal
+sides, so an existing native outside-layout setting could survive reconciliation
+of an otherwise identical bound contract. A new isolated Evaluations control
+first created two 120 × 32 native mains with the expected setting already true;
+that fresh result is preserved. The controlled existing-node case then set the
+layout setting false and cleared only this fixture's stamp to require a real
+amend. The prior generated program left both values false. The corrected
+program set both true while preserving the set key, both main IDs, dimensions,
+side widths, bindings, variable values and PNG bytes. A repeat allocated nothing
+and retained the complete readback. The plugin was closed and the canvas
+inspected. This measures a native reconciliation policy, not a new application
+or pixel-fidelity result. The contradictory outside-layout plus border-style
+contract still refuses. Reverse this extension by limiting the explicit policy
+to literal sides again; keep the controlled before/after evidence in
+`private/uniform-state-bound-review-20260921/`.
+
+**AGENT review correction — alignment and binding order, 2026-09-21.**
+The uniform replacement requires an explicit captured `INSIDE` value on both
+resting and state roots. Absence means unknown. The earlier exception incorrectly
+accepted missing alignment; the later bound-width reader could also reintroduce
+a refused width. Common and per-value bindings now obey the same qualification
+as unbound widths. The existing explicitly outside focus-ring path remains
+separate. A qualified common width stays a border even when the resting paint
+is awaiting token minting; previously that ordering could remap it to an outline.
+Browser and mock-native round trips cover common and per-value width identities,
+and 45 controls retain missing/unsupported alignment, layout and width refusals.
+A fresh canonical read of the retained two-main Evaluations fixture still
+recovers `{two}` with solid border style. Removing either alignment field from
+an offline copy makes exact projection refuse; no native node was changed.
+The bridge was closed and the retained canvas inspected. This is a bounded
+compiler/capture check, not a new application journey or fidelity qualification.
+To reverse, restore the absent-alignment fallback, independent bound-width
+recovery and early outline remap together; preserve the failing controls and
+readback in the same private review directory.
 
 ## D.94 Local default components keep their export identity
 
@@ -7712,7 +7854,7 @@ a local `const` whose initializer is a supported function or direct React
 Const alone is insufficient for a wrapper object: an adversarial probe replaced
 its `render` method with `Object.assign` while the initial reader still reported
 forwarded children. New default admission therefore also refuses local value
-mutations and escapes. Only declaration, local export, direct JSX, type query
+mutations and escapes. Only declaration, local export, type query
 and literal `displayName` assignment uses are admitted. Anonymous export
 expressions, default function declarations, mutable bindings, indirect wrappers,
 external definitions and unsupported calls remain named refusals. Existing
@@ -7722,9 +7864,25 @@ of every possible future consumer mutation.
 Tests retain true default import identity, direct children, callback/default
 metadata and non-execution of source. Two modules with the same local name and
 `default` export join distinct renderer owners; a substituted module identity
-and duplicate runtime alias refuse. Six wrapper mutation/escape controls refuse.
+and duplicate runtime alias refuse. The initial six wrapper mutation/escape
+controls refuse.
 The cohort still groups negative controls by the declared export-name subject;
 multiple default-exported modules do not automatically receive separate groups.
+
+**Adversarial correction — 2026-09-21.** A local JSX element retains the actual
+wrapper object in its `type` field. Both an assigned element and an element
+returned from a local factory allowed `Object.assign(element.type, ...)` to
+replace the render while inspection incorrectly reported forwarded children.
+Direct `eval` reached the binding without a checked symbol reference. Controlled
+runtime probes confirmed all three changed caller content to replacement text.
+Default admission now refuses local JSX references and modules containing an
+`eval` identifier. This deliberately includes harmless local JSX uses until an
+element-alias proof exists. Runtime regression controls verify the changed
+output and refusal; immutable export-only components retain admission. Private
+before/after evidence is in `default-export-adversarial-20260921/`.
+To reverse this correction, first prove that the produced element and any
+returned aliases cannot expose a mutable implementation, and that dynamic
+evaluation cannot alter it. Do not restore the unconditional JSX exemption.
 
 The unchanged React DaisyUI 5.0.5 Badge source matches both npm source-map text
 and release `94869ab436cb72aea944972a8f931cb9b60e725e`. In the app, two declared

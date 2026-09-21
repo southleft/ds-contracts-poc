@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
-import { sourceEquivalentTransitions } from './design-consumer-variants.js';
+import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
 import { NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
 
@@ -516,4 +516,42 @@ test('same-size mask-only geometry changes are visible to state and variant obse
     assert.notEqual(await shape.evaluate(paintOf), before.paint);
     assert.notEqual(await shape.evaluate(variantPaintOf), before.variant);
   } finally { await browser.close(); }
+});
+
+
+function equivalentStateFixture() {
+  const f = equivalentVariantFixture();
+  const cases: Array<{key:string;nodeId:string;interaction:string;state?:string;props:Record<string,unknown>}> = [
+    {key:'rest',nodeId:'1:1',interaction:'none',props:{selected:false}},
+    {key:'pressed',nodeId:'1:2',interaction:'active',state:'active',props:{selected:false}},
+  ];
+  for (const frame of Object.values(f.frames)) frame.raster = {kind:'figma-rest-full-bounds-v1',scale:1};
+  const inspect = () => sourceEquivalentStateTransitions(cases, ['pressed'], f.images, f.frames);
+  return {...f,cases,inspect};
+}
+
+test('a drawn state identical to rest retains exact source identities, while missing-state and reachability problems remain', () => {
+  const f = equivalentStateFixture();
+  assert.deepEqual(f.inspect(), [{from:'pressed',to:'rest',fromNodeId:'1:2',toNodeId:'1:1',pngSha256:imageSha256(f.image),layoutSize:{width:20,height:20}}]);
+  assert.deepEqual(stateProblems({key:'pressed',interaction:'active',state:'active'}, ['active'], false, false), ['state-unreachable:active:pressed']);
+  assert.deepEqual(stateProblems({key:'pressed',interaction:'active',state:'active'}, [], true, false), ['state-not-carried:active']);
+  assert.deepEqual(stateProblems({key:'pressed',interaction:'active',state:'active'}, ['active'], true, false), ['state-inert:active:pressed'], 'without independent source evidence the existing refusal remains');
+});
+
+test('state equivalence refuses changed paint, geometry, props, identities, ambiguous pairs and unauthenticated capture', () => {
+  for (const mutate of [
+    (f: ReturnType<typeof equivalentStateFixture>) => { const p=PNG.sync.read(f.image); p.data[3]=1; f.images['1:2']=PNG.sync.write(p); f.frames['1:2'].pngSha256=imageSha256(f.images['1:2']); },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.frames['1:2'].layout.width += 0.125; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.frames['1:2'].render.x += 0.125; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.frames['1:2'].pngSha256='stale'; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { delete f.frames['1:2'].raster; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases[1].nodeId=f.cases[0].nodeId; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases[0].props.selected=true; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases[0].state='hover'; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases[1].state='hover'; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases[1].interaction='none'; },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases.push({...f.cases[0],key:'duplicate-rest'}); },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases.push({...f.cases[1]}); },
+    (f: ReturnType<typeof equivalentStateFixture>) => { f.cases.splice(0,1); },
+  ]) { const f=equivalentStateFixture(); mutate(f); assert.deepEqual(f.inspect(),[]); }
 });
