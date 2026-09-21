@@ -8189,6 +8189,19 @@ page, IDs, failed first fixture setup and both captures remain in
 and inverse preserve each consuming mode, including aliases and theme
 interactions. Removing it without that evidence repeats the measured loss.
 
+A same-tab reload retains both saved Workspace entries but returns the editor
+to its default example. Manually selecting the saved import restores identical
+contract bytes and all 58 captured tokens. React archive preparation succeeds
+and the downloaded archive is byte-identical to the installed package above;
+there are still two Workspace entries and no source reimport. The measured
+receipt and inspected screenshot are in
+`joint-paint-mode-review-20260921/recovery-result-v1.json` and
+`recovery-restored-v1.png`. A separate fresh-tab check shows no saved imports,
+while the original tab retains both entries and identical contract bytes
+(`fresh-tab-result-v1.json`). Workspace storage is scoped to one tab; cross-tab
+recovery is unavailable. These observations do not prove browser-restart
+recovery or automatic editor selection restoration. Fidelity remains unqualified.
+
 To reverse, remove the optional schema field, shared resolver/referee, fuser and
 inverse admission, and all emitter/resource consumers together; restore the
 D.95 overflow expectation for these pairs. Preserve the failed native run,

@@ -148,6 +148,12 @@ binding IDs. Joint paint return now refuses differing captured modes until
 each consuming node mode can be corroborated. The app names that refusal
 without changing the current contract; the supported single-mode import still
 succeeds. The probe restored its original binding, mode and image exactly.
+After a same-tab reload, manually selecting the saved Workspace import restores
+identical contract bytes and 58 captured tokens; archive preparation returns
+the same package bytes with both Workspace entries retained and no reimport.
+A fresh tab has no saved imports because Workspace storage is scoped to one
+tab. Cross-tab recovery is unavailable; browser-restart recovery remains
+unverified ([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)).
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 
