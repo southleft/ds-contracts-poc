@@ -7753,3 +7753,92 @@ prior root token-rule ordering. Restore unconditional `state-inert` reporting
 if withdrawing the independent source-equivalence adjudication; keep its
 receipts and negative controls. Preserve the failed consumer and all native
 source evidence. Do not adjust tolerances or replace historical results.
+
+### D.92 A uniform state border can replace different resting side widths
+
+**AGENT decision, 2026-09-20.** A resting bottom-only border and a uniform
+focused border use existing contract channels, but the proposer previously
+named every state-width change involving resting side widths as unsupported.
+It now carries this bounded case as `border-width` and solid `border-style`:
+every compared root has a captured stroke, INSIDE alignment and an explicit
+`strokesIncludedInLayout: true`; resting widths are complete finite
+nonnegative numbers, and all state cells have one equal finite nonnegative
+uniform width that changes at least one resting side. Unbound widths need
+minting; uniformly bound widths retain their references, including distinct
+identities represented through the existing per-value state maps. A failed
+width recovery cannot leave a style-only override. Unequal state-side widths,
+missing layout evidence and other alignment policies remain outside this rule.
+No schema field, component-name branch or inferred width is added.
+
+Native state previews remove replaced resting side literals and bindings
+before applying the state shorthand. These transitions explicitly include
+strokes in layout on the resting and state frames; the public outside-layout
+flag still wins. Native layout settings differ across retained and freshly
+created nodes, so an explicit write avoids relying on their prior state.
+Other generated library scripts
+remain byte-fresh. Synthetic browser and native round trips cover common and
+per-value bound width identities and twelve unsupported input controls.
+
+The generated program was executed in a new isolated Evaluations page and
+collection. Its ten editable variants retain the bottom-only resting stroke
+and the two uniform 2px focus strokes. The canonical native dump and exact
+proposal recover the width references and solid style. Existing page and
+collection inventories and variable values are unchanged. The plugin window
+was closed before inspecting the live canvas. This is a bounded native engine
+probe, not a claim that the application completed the reverse journey.
+
+The actual Playground imported the same preserved source, prepared a React
+archive, and a clean consumer installed the byte-identical package. Tab now
+passes **4/10 image pairs on both backgrounds**, with **12 named problems**
+remaining. Unselected focus is 96 × 40 on both surfaces and measures 0% on
+white / 2.421875% on black. Selected focus is still 97 × 40 against native
+105 × 40 and fails on black. Text sizing and other text image differences
+remain unresolved; the two composed dependency gaps in D.91 also remain.
+Explicit Public Sans consumer assets do not authenticate Figma's font bytes.
+The original pixels, frame checks and 5% limit are unchanged. Repeating the
+import retains five entries and an identical Tab contract. A normal browser
+reload restores a schema-valid contract and an available package action.
+The comparison and installed consumer were inspected visibly on both
+backgrounds. Tab and V1 remain unqualified.
+
+To reverse, remove the uniform-state-width exception and its solid-style
+carrier, restore the native state-preview side handling and remove this
+transition's explicit layout policy. Preserve the outside-layout behavior,
+D.91 pressed paint reset, all source captures and the failed app consumer.
+
+
+**AGENT review correction, 2026-09-21.** The explicit layout policy also
+covers token-bound resting side widths. The initial rule detected only literal
+sides, so an existing native outside-layout setting could survive reconciliation
+of an otherwise identical bound contract. A new isolated Evaluations control
+first created two 120 × 32 native mains with the expected setting already true;
+that fresh result is preserved. The controlled existing-node case then set the
+layout setting false and cleared only this fixture's stamp to require a real
+amend. The prior generated program left both values false. The corrected
+program set both true while preserving the set key, both main IDs, dimensions,
+side widths, bindings, variable values and PNG bytes. A repeat allocated nothing
+and retained the complete readback. The plugin was closed and the canvas
+inspected. This measures a native reconciliation policy, not a new application
+or pixel-fidelity result. The contradictory outside-layout plus border-style
+contract still refuses. Reverse this extension by limiting the explicit policy
+to literal sides again; keep the controlled before/after evidence in
+`private/uniform-state-bound-review-20260921/`.
+
+**AGENT review correction — alignment and binding order, 2026-09-21.**
+The uniform replacement requires an explicit captured `INSIDE` value on both
+resting and state roots. Absence means unknown. The earlier exception incorrectly
+accepted missing alignment; the later bound-width reader could also reintroduce
+a refused width. Common and per-value bindings now obey the same qualification
+as unbound widths. The existing explicitly outside focus-ring path remains
+separate. A qualified common width stays a border even when the resting paint
+is awaiting token minting; previously that ordering could remap it to an outline.
+Browser and mock-native round trips cover common and per-value width identities,
+and 45 controls retain missing/unsupported alignment, layout and width refusals.
+A fresh canonical read of the retained two-main Evaluations fixture still
+recovers `{two}` with solid border style. Removing either alignment field from
+an offline copy makes exact projection refuse; no native node was changed.
+The bridge was closed and the retained canvas inspected. This is a bounded
+compiler/capture check, not a new application journey or fidelity qualification.
+To reverse, restore the absent-alignment fallback, independent bound-width
+recovery and early outline remap together; preserve the failing controls and
+readback in the same private review directory.
