@@ -202,9 +202,16 @@ export function emitNativeContractReadbackScript(input: NativeContractObservatio
 export function emitNativeFixedCrossSizeSyncReadback(input: NativeContractObservationInput): string {
   return emitNativeInspectionReadbackScript(input, false, false, true);
 }
+/** Final non-yielding template recheck after the complete document is loaded.
+ * Includes allocated routing/source objects and every recorded component field. */
+export function emitNativeTemplateSyncReadback(input: NativeContractObservationInput): string {
+  if (!input.templateGraph || input.component.rootSlot?.textTemplate !== 1)
+    throw Error('native-template-sync-input-invalid');
+  return emitNativeInspectionReadbackScript(input, false, false, true);
+}
 export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false, captureExportBounds = false, synchronous = false): string {
   checkInput(input);
-  if(synchronous && (!isContractDraft(input) || !input.fixedCrossSizeReadback || captureImages || captureExportBounds))
+  if(synchronous && (!isContractDraft(input) || !input.fixedCrossSizeReadback && !input.templateGraph || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const expected = {
     operation: input.operation,
@@ -226,6 +233,20 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
     isContractDraft(input) && input.component.rootSlot?.textTemplate === 1);
   if (!isContractDraft(input) || !input.templateGraph) return inventory;
+  if (synchronous) {
+    const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity, true);
+    return `// GENERATED synchronous component and selector-graph recheck.
+const readGraph = () => { ${graphRead}\n };
+const before = readGraph();
+const observed = (() => { ${inventory}\n })();
+const after = readGraph();
+if (before.status !== 'readback-collected' || after.status !== 'readback-collected' || JSON.stringify(before) !== JSON.stringify(after)) {
+  observed.status = 'refused'; observed.problems.push('native-text-template-graph-changed-during-read');
+}
+observed.templateGraph = after;
+return observed;
+`;
+  }
   const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity);
   return `// GENERATED independent component and selector-graph observation.
 const readGraph = async () => { ${graphRead}\n };
@@ -247,7 +268,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
 }, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false): string {
-  if(synchronous && (!fixedCrossSizeNodeIds.length || captureImages || captureExportBounds))
+  if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
     "visible",
@@ -341,7 +362,7 @@ ${synchronous ? '' : 'async '}function read(page) {
       row.definitions = copy(node.componentPropertyDefinitions);
     if (node.type === 'COMPONENT' && node.parent.type === 'COMPONENT_SET') row.variantProperties = copy(node.variantProperties);
     if (node.type === 'INSTANCE') {
-      const main = ${synchronous ? "(()=>{throw Error('native-fixed-cross-size-sync-instance-unsupported');})()" : 'await node.getMainComponentAsync()'}; guard();
+      const main = ${synchronous ? textTemplate ? 'node.mainComponent' : "(()=>{throw Error('native-fixed-cross-size-sync-instance-unsupported');})()" : 'await node.getMainComponentAsync()'}; guard();
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }

@@ -134,11 +134,15 @@ independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
 they are not the current returned-package result.
 
-A separate read-only foundation plans template token changes and verifies
-current component values while retaining the original allocated identities.
-It distinguishes untouched, updated, partial and conflicting observations;
-it grants no write or recovery permission. Its guarded application writer
-and live update journey remain unfinished.
+A separate foundation plans template token changes and verifies current
+component values while retaining the original allocated identities. An
+engineering writer now rechecks the complete component and document-wide
+consumers synchronously before assigning existing variable values. Its tests
+cover interruption, stale retries, intervening edits, unchanged repetition
+and reversal. A live read-only preflight refused an unobserved instance
+consumer before attempting any assignment. Verified caller admission,
+application delivery and interrupted-write settlement remain unfinished;
+the application continues to refuse template updates.
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 
