@@ -119,7 +119,7 @@ const EnumTypeSchema = z.strictObject({
  *  Code renders `Array<{ field: type; … }>` with no default (an optional
  *  array — undefined means "not provided", never a silent []). */
 const ArrayTypeSchema = z.strictObject({
-  arrayOf: z.record(z.string(), z.enum(["text", "number", "boolean"])),
+  arrayOf: z.record(z.string(), z.union([z.enum(["text", "number", "boolean"]), EnumTypeSchema])),
 });
 
 // Scoped to the opt-in omission boundary: do not silently reinterpret older
@@ -1938,8 +1938,8 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
  *  part rendered once per record of the `itemsProp` arrayOf prop. Field →
  *  child-prop mapping is BY NAME: every arrayOf field of `itemsProp` names a
  *  prop of the referenced child contract (text field → child text prop,
- *  boolean → boolean, number → number; per-item ENUM differences — the
- *  selected tab — are P10 and stay receipted, never carried). Constant child
+ *  boolean → boolean, number → number, enum → a subset of the child enum).
+ *  Enum item values are canonical; emitters apply the child code binding. Constant child
  *  props ride `component.props` as today.
  *  Projections: the React surface maps the live array
  *  (`{items?.map(…)}` — undefined renders nothing, the arrayOf discipline);

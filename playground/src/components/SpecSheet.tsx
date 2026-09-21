@@ -16,7 +16,7 @@ import {
 
 const isEnumProp = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
-const isArrayProp = (p: Prop): p is Prop & { type: { arrayOf: Record<string, string> } } =>
+const isArrayProp = (p: Prop): p is Prop & { type: Extract<Prop['type'], { arrayOf: unknown }> } =>
   typeof p.type === 'object' && 'arrayOf' in p.type;
 
 const typeLabel = (p: Prop): string => {
@@ -171,7 +171,7 @@ export function SpecSheet({
                       {isEnumProp(p) ? (
                         <Chips values={p.type.enum} />
                       ) : isArrayProp(p) ? (
-                        <Chips values={Object.entries(p.type.arrayOf).map(([f, t]) => `${f}: ${t}`)} mono />
+                        <Chips values={Object.entries(p.type.arrayOf).map(([f, t]) => `${f}: ${typeof t === 'object' ? t.enum.join(' | ') : t}`)} mono />
                       ) : p.type === 'boolean' ? (
                         'on / off'
                       ) : (

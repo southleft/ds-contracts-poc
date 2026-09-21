@@ -13,6 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### React V1 conversion candidates (2026-09-21)
+
+- Bounded, corroborated static content from unresolved Figma instances can remain in provisional child contracts. Missing, conflicting or mutable observations retain a named refusal. The application exports the recovered content in an installable React package; visual and interaction qualification remain open.
+- Repeated items can carry typed canonical enum choices from known child contracts. Generated React forwards each choice through the child's code binding. Invalid domains refuse, parent-dependent choices retain separate instances, and different component identities cannot collapse solely because their names match. The fresh CLI consumer restores active styling but still fails the unchanged 5% visual limit. No additional V1 acceptance row is complete.
+
 ### F1 capture-only — mechanical compile refused (2026-08-31)
 
 - Mechanical calendar@1 compile from the day-picker ledger was

@@ -2289,7 +2289,7 @@ interface Ctx {
   boolProps: Array<{ name: string; property: string; default?: boolean }>;
   /** P9 repeated-children collections: one arrayOf prop per repeat part,
    *  emitted after text/bool props (code-only, bindings.figma.kind NONE). */
-  arrayProps: Array<{ name: string; fields: Record<string, 'text' | 'boolean'>; instanceOf: string }>;
+  arrayProps: Array<{ name: string; fields: Record<string, 'text' | 'boolean' | { enum: string[] }>; instanceOf: string }>;
   /** Slot parts in tree order, for the default-slot ("children") judgment. */
   slots: Array<{ part: Record<string, unknown>; property: string; optional: boolean }>;
   /** Variant names whose base instance was flattened into the variant root —
@@ -8474,9 +8474,10 @@ function unifiedPropRef(m: Merged, kind: string, ctx: Ctx, where: string): strin
 //   · a TEXT-CERTAIN string prop (the resolved child contract models it as a
 //     text prop, or the key carries the dump v1.5 "#id" suffix) → a text
 //     field (varying or not — per-item content is per-item API)
-//   · a VARYING enum/ambiguous string prop → a NAMED receipt (per-item
-//     enum/state differences are P10, selected-item — no repeat vocabulary;
-//     bare string keys in pre-v1.5 dumps are VARIANT/TEXT-ambiguous)
+//   · a VARYING enum with a known child domain → a typed enum field, with
+//     design labels canonicalized through the child bindings. Choices that
+//     change across parent variants retain separate threaded instances.
+//   · ambiguous string props → a named receipt; no enum domain is guessed.
 //   · constant props stay FIXED on component.props (canonicalized as today)
 // No carriable field → the pattern is receipted and the siblings build as
 // fixed parts, exactly as before. Per-sibling VISIBILITY bindings (the
@@ -8501,12 +8502,18 @@ function repeatRunAt(children: Merged[], i: number, ctx: Ctx): Merged[] | null {
       .sort()
       .join(' ');
   const shape = shapeOf(children[i]);
+  const identityOf = (m: Merged): string | undefined => {
+    const identities = new Set(m.occ.map(occurrence => observedInstanceIdentity(occurrence.node) ?? ''));
+    return identities.size === 1 ? [...identities][0] : undefined;
+  };
+  const identity = identityOf(children[i]);
+  if (identity === undefined) return null;
   const run: Merged[] = [];
   for (let j = i; j < children.length; j++) {
     const m = children[j];
     if (!eligible(m)) break;
     if ((first(m.occ, (n) => n.instanceOf) ?? m.name) !== instanceOf) break;
-    if (shapeOf(m) !== shape) break;
+    if (shapeOf(m) !== shape || identityOf(m) !== identity) break;
     run.push(m);
   }
   return run.length >= 3 ? run : null;
@@ -8529,10 +8536,11 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
     (sib.occ.find((o) => o.variant === ctx.totalVariants[0]) ?? sib.occ[0]).node.componentProperties ?? {};
   const records = run.map(appliedOf);
 
-  const fields: Record<string, 'text' | 'boolean'> = {};
+  const fields: Record<string, 'text' | 'boolean' | { enum: string[] }> = {};
+  const enumSamples = new Map<string, string[]>();
   const fieldKeyByName: Record<string, string> = {};
   const constantKeys: string[] = [];
-  const claimField = (name: string, type: 'text' | 'boolean', rawKey: string, bare: string): boolean => {
+  const claimField = (name: string, type: 'text' | 'boolean' | { enum: string[] }, rawKey: string, bare: string): boolean => {
     if (fields[name] !== undefined) {
       ctx.notes.push(
         `${where}: per-item field name "${name}" (from applied prop "${bare}") collides with another field — not carried, review (P9)`,
@@ -8565,13 +8573,31 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
       claimField(mappingProp?.name ?? canonicalPropName(bare), 'text', rawKey, bare);
     } else if (!varying) {
       constantKeys.push(rawKey);
+    } else if (mapping && mappingProp?.type && typeof mappingProp.type === 'object' &&
+        'enum' in mappingProp.type && Array.isArray(mappingProp.type.enum) &&
+        mappingProp.type.enum.length > 0 && mappingProp.type.enum.every(value => typeof value === 'string')) {
+      const domain = mappingProp.type.enum as string[];
+      const canonical = (value: string | boolean | undefined): unknown => value === undefined ? undefined :
+        canonicalizeInstanceProps(instanceOf, {[rawKey]: value}, mapping.id, ctx, where, true, keys)[mappingProp.name];
+      const samples = values.map(canonical);
+      // The code-only array has one observed sample. If a parent variant
+      // changes an item's choice, keep individual component refs so existing
+      // prop threading can represent it; never freeze the first occurrence.
+      if (samples.some(value => typeof value !== 'string' || !domain.includes(value)) ||
+          run.some((sibling, index) => sibling.occ.some(occurrence =>
+            canonical(occurrence.node.componentProperties?.[rawKey]) !== samples[index]))) {
+        ctx.notes.push(`${where}: repeat-enum-not-uniform — per-item "${bare}" is unmappable or changes across parent variants; keeping separate child instances with their applied props`);
+        return null;
+      }
+      if (claimField(mappingProp.name, {enum: [...domain]}, rawKey, bare))
+        enumSamples.set(mappingProp.name, samples as string[]);
     } else if (mapping && !mappingProp) {
       ctx.notes.push(
         `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but does not map through ${mapping.id}'s bindings — not carried as a field; verify the child contract is current (P9)`,
       );
     } else if (mapping) {
       ctx.notes.push(
-        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) — per-item enum/state differences are P10 (selected-item) with no repeat vocabulary; receipted, the sample renders ${mapping.id}'s default (review)`,
+        `${where}: applied prop "${bare}" varies per sibling (${[...new Set(values.map(String))].join(', ')}) but its child type has no supported repeat field; receipted, the sample renders ${mapping.id}'s default (review)`,
       );
     } else {
       ctx.notes.push(
@@ -8617,11 +8643,11 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
   );
 
   // The observed sample — one record per drawn sibling, field values only
-  // (text verbatim, booleans as drawn).
-  const sample = records.map((rec) => {
+  // (text verbatim, booleans as drawn, enum choices in canonical spelling).
+  const sample = records.map((rec, index) => {
     const out: Record<string, string | boolean> = {};
     for (const [name, rawKey] of Object.entries(fieldKeyByName)) {
-      const v = rec[rawKey];
+      const v = enumSamples.get(name)?.[index] ?? rec[rawKey];
       if (v !== undefined) out[name] = v;
     }
     return out;
@@ -8660,7 +8686,7 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
     );
   }
   ctx.notes.push(
-    `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" with a homogeneous applied-prop shape — proposed as ONE item-template part with repeat over arrayOf prop \`${propName}\` (P9; fields: ${Object.entries(fields).map(([n, t]) => `${n}:${t}`).join(', ')}); the drawn siblings become the canvas's static sample (repeat.sample — the meter discipline: canvas and static surfaces render the OBSERVED sample; code maps the live array)`,
+    `${where}: ${run.length} adjacent sibling instances of "${instanceOf}" with a homogeneous applied-prop shape — proposed as ONE item-template part with repeat over arrayOf prop \`${propName}\` (P9; fields: ${Object.entries(fields).map(([n, t]) => `${n}:${typeof t === 'object' ? 'enum' : t}`).join(', ')}); the drawn siblings become the canvas's static sample (repeat.sample — the meter discipline: canvas and static surfaces render the OBSERVED sample; code maps the live array)`,
   );
   return part;
 }

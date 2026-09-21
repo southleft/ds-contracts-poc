@@ -929,7 +929,6 @@ export function validateContract(
         errors.push(`${contract.id}: part "${name}" repeat prop "${part.repeat.itemsProp}" must be an arrayOf prop`);
       } else {
         const dep = part.component ? byId.get(part.component.id) : undefined;
-        const FIELD_TO_PROP: Record<string, string> = { text: 'text', boolean: 'boolean', number: 'number' };
         for (const [field, ftype] of Object.entries(rp.type.arrayOf)) {
           if (part.component?.props && field in part.component.props) {
             errors.push(`${contract.id}: part "${name}" repeat field "${field}" collides with a fixed component prop — a field is per-item, a fixed prop is constant`);
@@ -938,9 +937,11 @@ export function validateContract(
           const depProp = dep.props.find((dp) => dp.name === field);
           if (!depProp) {
             errors.push(`${contract.id}: part "${name}" repeat field "${field}" names no ${dep.id} prop`);
-          } else if (depProp.type !== FIELD_TO_PROP[ftype]) {
+          } else if (typeof ftype === 'object'
+            ? !isEnum(depProp) || !ftype.enum.every(value => (depProp.type as { enum: string[] }).enum.includes(value))
+            : depProp.type !== ftype) {
             errors.push(
-              `${contract.id}: part "${name}" repeat field "${field}" (${ftype}) does not match ${dep.id} prop "${field}" (${typeof depProp.type === 'object' ? JSON.stringify(depProp.type) : depProp.type}) — per-item enum differences are P10 and stay receipted`,
+              `${contract.id}: part "${name}" repeat field "${field}" (${typeof ftype === 'object' ? JSON.stringify(ftype) : ftype}) does not match ${dep.id} prop "${field}" (${typeof depProp.type === 'object' ? JSON.stringify(depProp.type) : depProp.type}) — repeat fields must match the child scalar type or name a subset of its enum`,
             );
           }
         }
@@ -949,6 +950,8 @@ export function validateContract(
             const ftype = rp.type.arrayOf[key];
             if (ftype === undefined) {
               errors.push(`${contract.id}: part "${name}" repeat sample[${i}] key "${key}" is not a field of "${part.repeat.itemsProp}"`);
+            } else if (typeof ftype === 'object' && (typeof value !== 'string' || !ftype.enum.includes(value))) {
+              errors.push(`${contract.id}: part "${name}" repeat sample[${i}].${key} is outside its declared enum`);
             } else if ((ftype === 'boolean') !== (typeof value === 'boolean') || (ftype === 'number') !== (typeof value === 'number')) {
               errors.push(`${contract.id}: part "${name}" repeat sample[${i}].${key} is a ${typeof value} but the field is ${ftype}`);
             }

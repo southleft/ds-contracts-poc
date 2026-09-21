@@ -8290,3 +8290,44 @@ To reverse, remove the optional REST observation and its provisional projection
 route together, returning unresolved children to geometry-only stubs. Preserve
 the captured source, failure receipts and consumer comparisons. Do not relabel
 observed usage content as a complete child definition or change fidelity limits.
+
+## D.110 Repeated items retain known child enum choices
+
+**AGENT decision, 2026-09-21.** A repeated collection may carry a typed enum
+field when the referenced child contract supplies that enum's domain and design
+binding. The proposer canonicalizes observed design labels, validates every
+item against the child domain, and records canonical choices in `repeat.sample`.
+React exposes a string union and applies the child's code-value binding for
+each item. The inline React and maintained Web Components emitter types accept
+the same additive schema. Static projections continue to render the observed
+sample; there is no new native list-of-records property or inferred interaction.
+
+An unmappable choice or a choice changing across parent variants prevents the
+collection collapse and retains individual child instances for existing prop
+threading. Repeated siblings must also agree on captured child identity across
+their occurrences. A shared display name cannot override different captured
+keys. Older observations with no identity retain their existing name fallback.
+Schema validation rejects enum fields outside the child's domain and samples
+outside the field's declared choices. Scalar repeat fields retain their prior
+behavior.
+
+The fresh CLI-generated Tabs consumer restores the first tab's active underline
+and text styling. Its default black-background difference decreases from 6.24%
+to **5.24%**, and stretch measures **5.78%**. Both still fail the unchanged 5%
+limit. Stretch remains visually discarded, and default content width remains
+441 px against 438 px in Figma. Both source PNGs are byte-identical to those used
+before the change. Supplied consumer fonts still lack a verified source-font
+byte identity. This result does not qualify interaction, application delivery
+of the enum rule, the independent-family requirement, or V1.
+
+`core/repeated-enum-fields.test.ts` covers canonical labels, code-value aliases
+in rendered React, invalid fields/samples, parent-dependent choices, unknown
+labels and same-name identity conflicts. The identity probe failed before the
+guard and passed afterward. The existing repeat check exercises all maintained
+surfaces. Original failures and the installed consumer evidence remain in
+`private/observed-instance-content-20260921/`, including `consumer-enum-v1/`.
+
+To reverse, remove enum fields from the array schema, proposer, validator and
+emitter type projections together. Restore named refusal of unsupported
+per-item enum choices and preserve all comparison evidence. Do not strip
+existing enum fields from saved contracts without reporting the incompatibility.
