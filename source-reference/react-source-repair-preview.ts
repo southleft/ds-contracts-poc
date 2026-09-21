@@ -107,8 +107,13 @@ export function createReactSourceRepairPreviews(repo:string,
       return job;
     },
     image(referenceId:string,parentId:string,proposalId:string,id:string,index:string,rowId:string,hash:string) {
-      const job=jobs.get(key(referenceId,parentId,proposalId)),state=read(referenceId,parentId,proposalId);
-      if(!job||state?.id!==id||!state.current||state.phase!=='reviewable'||! /^\d+$/.test(rowId)||! /^[a-f0-9]{64}$/.test(hash))
+      // These are immutable evidence bytes, not a current-source verdict or
+      // write permit. Re-deriving the native correction chain for each of the
+      // comparison's images serializes expensive history reads. The metadata
+      // read/start paths still reauthenticate that chain; image identity stays
+      // pinned to this exact reviewed preview, selected row and content hash.
+      const job=jobs.get(key(referenceId,parentId,proposalId)),state=job?.state;
+      if(!job||state?.id!==id||state.phase!=='reviewable'||! /^\d+$/.test(rowId)||! /^[a-f0-9]{64}$/.test(hash))
         throw Error('react-source-repair-preview-image-unavailable');
       const candidate=state.candidates.find(c=>c.index===state.selected),row=candidate?.comparison?.rows.find(r=>r.observation===rowId);
       const before=index==='original';

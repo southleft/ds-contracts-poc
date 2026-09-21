@@ -8616,12 +8616,24 @@ a changed class token necessarily changes those input revisions.
 A fresh twelve-state source probe rejects the group-conditioned utility and
 selects the disabled utility: four disabled states change opacity from 0.5 to
 0.6, and eight other states preserve identical images. Original source and CSS
-remain unchanged. This is an engineering preview result, not a completed
-application journey or source write. The earlier sealed observation lacked
+remain unchanged. The earlier sealed observation lacked
 pseudo-box geometry and correctly refused. The fresh successor was explicitly
 adopted through the application. Compiler review then refused four newly
 requested number tokens; the original source, canvas and historical records
 remained unchanged. D.103 addresses that allocation gap.
+
+**Application preview shown on 2026-09-21:** after the allocation and separate
+geometry corrections, four disabled variants were edited to 60% opacity through
+Figma's Design UI. The app independently read exactly those four values and
+prepared preview `d99ee880…`. It rejected the group-conditioned candidate and
+selected `disabled:opacity-50` → `disabled:opacity-60` across all 12 states,
+preserving the 8 unchanged PNGs and other recorded facts. Original files remained
+unchanged. A separate engineering probe then checked all 10 configured examples:
+60 finite states across 5 caller contexts, including the nested Card, plus 10
+mounted interaction trials per source version; unchanged caller PNGs match.
+This wider probe is not yet part of application admission. Evidence lives under
+private `react-source-repair-previews/d99ee880…/` in the live app worktree and
+`react-design-source-repair-20260921/cohort-render-4EkKB7/` in the repair worktree.
 
 The preview service and UI accept only an existing source/native pair and its
 current recorded design read. The host must configure relative
@@ -8632,8 +8644,9 @@ build scripts are not executed. Competing edits, changed inputs, incomplete
 states and zero or multiple matching candidates refuse. Preview evidence is
 preserved privately; after a server restart a new preview is required.
 
-Automatic original-file application, other callers and interaction coverage,
-interrupted source-write recovery and live two-way acceptance remain undone.
+Automatic original-file application, application admission of the wider caller
+and interaction checks, interrupted source-write recovery and live two-way
+acceptance remain undone.
 The preview offers no apply action. Reversal removes the repair routes, UI and
 source-repair modules together, retaining the native design-read and source
 succession journals and every failed or successful private probe.
@@ -8672,10 +8685,31 @@ through the companion. All 46 original variable records and all 44 native node
 records are unchanged; the collection now has 50 variables. Twelve native PNGs
 were collected and the canvas was inspected with the companion closed. Evidence:
 `private/react-design-source-repair-20260921/allocation-live-readback-v1.json`.
-The separate pseudo-box geometry correction and source repair preview are still
-pending. This verifies additive delivery, not full two-way updates or V1.
+The separate pseudo-box correction `82a7eec0…` then moved the existing twelve
+transparent hit-area shapes by 1 px on each axis. All 44 node IDs, all 50 variables
+and all 12 PNGs with their export bounds are unchanged; the app independently
+verified the correction and the canvas was inspected with the companion closed.
+Evidence: `geometry-live-readback-v1.json` and `geometry-ui-completion-v1.json`
+in the same private directory. D.102 records the subsequent source preview.
+These steps do not qualify automatic source writes or V1.
 
 Reversal removes the allocation route and writer while preserving the extended
 token reader, original ownership stamps, allocation ledger and journals for
 already written corrections. Never erase those records to imitate an old
 allocation or reassign variables by name.
+
+### D.104 Preview images carry immutable evidence rather than current write authority
+
+**AGENT decision, 2026-09-21.** A live source-preview image request took 88.26 seconds
+because each image re-derived the full native correction chain. A twelve-state
+comparison requests 24 images. Image delivery now verifies the exact preview,
+selected candidate, row and content hash without repeating that history read.
+Metadata reads and preview preparation still reauthenticate the source/native
+pair; the HTTP route also retains its original-source identity and file checks.
+A saved image is evidence of that preview, never current write authority.
+
+Bounded checks show that a changed design plan makes preview metadata stale
+while its pinned image bytes remain the same, and reject different proposal
+IDs, unselected candidates, invalid rows and modified image bytes. New previews
+are still required after restart. Reversal restores per-image derivation without
+changing any saved preview, image hash or source-write checks.

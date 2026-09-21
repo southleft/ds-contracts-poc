@@ -37,8 +37,9 @@ function fixture(t:test.TestContext) {
     async observe(args:{dir:string}){await observeHook();const original=args.dir.endsWith('/original'),value=structuredClone(original?before:after);mkdirSync(path.join(args.dir,'states'),{recursive:true});writeFileSync(path.join(args.dir,'states/0.png'),original?'before':'after');return value;},
     async build(){return {...input.reference,sourceRoot:staged};},program(){return input.program;},
   } as unknown as NonNullable<Parameters<typeof createReactSourceRepairPreviews>[2]>;
-  const store=createReactSourceRepairPreviews(repo,()=>structuredClone(input),deps);
-  return {repo,root,file,text,input,store,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;}};
+  let derivations=0;
+  const store=createReactSourceRepairPreviews(repo,()=>{derivations++;return structuredClone(input);},deps);
+  return {repo,root,file,text,input,store,derivations:()=>derivations,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;}};
 }
 
 test('verified preview reuses its identity, pins images and never changes original bytes',async t=>{
@@ -50,7 +51,17 @@ test('verified preview reuses its identity, pins images and never changes origin
   assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-1','0',sha('after')),/image-mismatch/);
   f.input.plan.revision='sha256:'+proposalId;
   assert.equal(f.store.read(referenceId,parentId,proposalId)?.current,false);
-  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
+  // Evidence remains the same historical bytes; it does not make a changed
+  // preview current. Every metadata read still checks the current source pair.
+  const before=f.derivations();
+  assert.equal(f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')).toString(),'after');
+  assert.equal(f.derivations(),before,'asset reads do not repeatedly derive the native correction chain');
+  assert.equal(f.store.read(referenceId,parentId,proposalId)?.current,false);
+  assert.equal(f.derivations(),before+1);
+  assert.throws(()=>f.store.image(referenceId,parentId,'c'.repeat(64),job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
+  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','..',sha('after')),/image-unavailable/);
+  writeFileSync(path.join(job.dir,'candidate-0/states/0.png'),'tampered');
+  assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-changed/);
 });
 
 test('concurrent previews, changed evidence and changed original source refuse',async t=>{
