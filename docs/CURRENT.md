@@ -60,8 +60,10 @@ Native component properties and editable slot text are different capabilities. F
 
 The explicit root text-template path has a generated native engineering probe:
 caller text retains its bindings through Small → Large → Small, and a bounded
-inverse restores root typography. The source adapter does not yet derive this
-marker. A separate variable-graph component candidate now creates 100 native
+inverse restores root typography. A candidate source adapter now derives this
+marker from new, complete direct-text observations and sends its graph through
+the operation journal; this path still needs a live application journey.
+A separate variable-graph component candidate creates 100 native
 mains through the shared renderer, with independent graph and node readback.
 Its caller preserves edited text across a live variant switch and restoration,
 but the first archived-original comparison fails the 5% bar at 6.85%. Canonical

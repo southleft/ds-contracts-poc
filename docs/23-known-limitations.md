@@ -8236,11 +8236,36 @@ and the previous failed consumer; never relabel old evidence as a new capture.
 
 ## D.99 Native root text templates still need an application journey
 
-The application source adapter does not yet derive the explicit
-`slot.bindings.figma.textTemplate` marker. Empty caller-slot mains therefore
-still lack the complete return behavior required by V1. Template updates,
+The candidate application source adapter derives the explicit
+`slot.bindings.figma.textTemplate` marker from newly captured direct caller text,
+but has not yet completed the live application journey. Empty caller-slot mains
+still lack the complete demonstrated return behavior required by V1. Template updates,
 interrupted comparison recovery, composed graphs, states,
 clean consumers and the unchanged 5% fidelity gate remain unqualified.
+
+**AGENT decision, 2026-09-21.** Property capture version two records each full-page
+image's measured bounds and digest, including fractional origins, and requires
+the bounds to restore after every probe. It rechecks bounds alongside the tree
+and image before sealing a plane. Older archives keep their original capture
+and compilation; the adapter never backfills an origin or infers a template
+marker for them. New complete single-property or matrix observations may add
+the marker only for one direct caller text run with authenticated painted-font
+evidence and typography accepted by the shared compiler. Nested caller elements,
+pseudo content and unsupported typography retain named limitations. Original
+caller text remains absent from the reusable main.
+
+The candidate operation host pins the complete graph in its plan, persists all
+returned allocation IDs before a separate graph read, and provides a component
+writer context only after that read verifies the source and every selector and
+route. Component observation retains the graph input and identities for later
+comparisons. The real companion client has exercised all four phases with a
+native API mock and journal restarts; repeated preparation reuses its reservation
+and changed routing refuses. Partial allocations remain in their immutable
+events and cannot be blindly retried or exposed as verified contexts. Graph
+sizing inspections, updates and interrupted component recovery remain refused.
+This is protocol evidence, not a live application or fidelity result. Reversal:
+remove version-two template admission and the optional graph branch of the
+React plan and operation host; preserve existing operation journals and images.
 
 **AGENT decision, 2026-09-21.** An explicit template marker is admitted only for
 one hidden empty TEXT inside the root SLOT, with complete bound font size,

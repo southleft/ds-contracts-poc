@@ -22,6 +22,7 @@ import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {prepareReactRootTextTemplate} from './react-root-text-template.js';
 
 for(const joint of ['paint','opacity',false] as const)test(`optional root axes ${joint==='paint'?'carry complete joint paint tables':joint==='opacity'?'retain unsupported joint-binding refusals':'still compile independently factored paint'}`,async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
@@ -30,7 +31,7 @@ for(const joint of ['paint','opacity',false] as const)test(`optional root axes $
   const source=`import React from 'react';
 export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'solid'|'outline';children?:React.ReactNode}){
  const colors={warm:['rgb(80, 20, 10)','rgb(160, 40, 20)'],cool:['rgb(10, 20, 80)','rgb(20, 40, 160)'],absent:['rgb(30, 30, 30)','rgb(90, 90, 90)']};
- return <section style={{display:'inline-flex',height:20,padding:4,backgroundColor:colors[tone??'absent'][${joint==='paint'?"finish==='outline'?1:0":'0'}],opacity:${joint==='opacity'?"(tone==='warm'?0.8:0.6)*(finish==='solid'?0.5:1)":"finish==='solid'?0.8:1"}}}>{children}</section>;
+ return <section style={{display:'inline-flex',height:20,padding:4,fontFamily:'Arial',fontSize:12,fontWeight:400,lineHeight:'20px',color:'#123456',backgroundColor:colors[tone??'absent'][${joint==='paint'?"finish==='outline'?1:0":'0'}],opacity:${joint==='opacity'?"(tone==='warm'?0.8:0.6)*(finish==='solid'?0.5:1)":"finish==='solid'?0.8:1"}}}>{children}</section>;
 }`;
   writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
   writeFileSync(path.join(dir,'surface.tsx'),source);
@@ -60,6 +61,22 @@ export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'sol
   }else{
    assert.deepEqual(draft.problems,[]);assert.equal(draft.native!.variants.length,9);
    assert.ok(draft.native!.variants.every(v=>v.spec.fill),'independent paint is retained in every omitted/set combination');
+   assert.equal(draft.contract!.anatomy.root.slot!.bindings?.figma?.textTemplate,true);
+   assert.ok(draft.native!.variants.every(v=>v.spec.children?.[0].children?.[0].characters===''));
+   const legacyRows=structuredClone(effects),legacySnapshots=structuredClone(snapshots);
+   for(const row of legacyRows.rows){delete row.propertyCaptureVersion;delete legacySnapshots[row.id].propertyCaptureVersion;}
+   const legacy=assembleReactRootMatrix(program,ownership,tree,legacyRows,legacySnapshots).draft!;
+   assert.equal(legacy.status,'native-compiled');assert.equal(legacy.contract!.anatomy.root.slot!.bindings?.figma?.textTemplate,undefined);
+   const mixed=structuredClone(effects);delete mixed.rows[0].propertyCaptureVersion;
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,mixed,snapshots).draft!.problems,['react-root-text-template-capture-version-mixed']);
+   const badBounds=structuredClone(snapshots);badBounds[effects.rows[0].id].bounds!.x+=0.25;
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,badBounds).draft!.problems,['react-root-text-template-bounds-unverified']);
+   const nested=structuredClone(snapshots[effects.rows[0].id]),nestedRow=structuredClone(effects.rows[0]);
+   const child=structuredClone(nested.tree);nested.tree.nodes=[{t:'el',el:child}];
+   nested.fonts!.rows[0].path=[0];nested.fonts!.treeRevision=revisionOf(nested.tree);
+   nestedRow.fontsSha256=evidenceSha(JSON.stringify(nested.fonts));
+   const nestedResult=prepareReactRootTextTemplate(legacy.contract!,draft.tokens!,[{snapshot:nested,row:nestedRow,rootPath:'',caller:'Untouched caller'}]);
+   assert.equal(nestedResult.admitted,false);assert.equal(nestedResult.limitation,'root-text-template-unqualified:direct-caller-text-required');
    if(joint==='paint')assert.equal(draft.contract!.anatomy.root.tokensByCombination![0].rows.length,9);
   }
   assert.equal(JSON.stringify({program,ownership,tree,effects,snapshots}),before);

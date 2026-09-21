@@ -180,7 +180,7 @@ export function createReferenceService(
         }),
         buildComponent: (request, context) => (request.compilation === 'current' ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({
           ...reactReference.nativeEvidence(request), operation: context.operation,
-          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, templateGraph: context.templateGraph,
         }),
       },
       reactCaller: {
