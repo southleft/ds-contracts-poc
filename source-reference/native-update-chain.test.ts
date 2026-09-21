@@ -80,6 +80,21 @@ test('a changed parent during readback or conflicting canvas cannot qualify hist
  assert.throws(()=>f.jobs().verifiedForParent(f.parent),/effective-observation-unavailable/);
 });
 
+test('design repair evidence cannot outlive its parent context or the tip of its correction chain',async t=>{
+ const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
+ const observe=async(id:string)=>{const c=f.jobs().observeDesign(id);f.jobs().accept(id,{...c,result:await f.run(c.script)});};
+ await observe(first.operation.id);assert.ok(f.jobs().designEvidence(first.operation.id));
+ assert.throws(()=>withEvidenceReadSnapshot(()=>f.jobs().designEvidence(first.operation.id)),/write-during-evidence-read-snapshot/);
+ f.moveParent();assert.throws(()=>f.jobs().designEvidence(first.operation.id),/parent-observation-refresh-required/);
+ await f.step(first.operation.id,'update-readback');await observe(first.operation.id);
+ assert.ok(f.jobs().designEvidence(first.operation.id));
+ f.next();const second=f.prepare();await f.step(second.operation.id,'update-preflight-readback');await f.step(second.operation.id,'update-apply');
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/effective-observation-unavailable/);
+ await f.step(second.operation.id,'update-readback');await observe(second.operation.id);
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/superseded-observation-is-historical/);
+ assert.equal(f.jobs().designEvidence(second.operation.id).input.component.variants[0].spec.opacity,0.125);
+});
+
 test('a second correction starts at the verified first result, survives restart and preserves history',async t=>{
  const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
  const original=readFileSync(path.join(f.repo,'private/source-native-update-plans',f.parent,first.proposal.id+'.json'),'utf8');

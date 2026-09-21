@@ -86,6 +86,23 @@ test('source drift or a manual native edit prevents the write',async t=>{
   assert.equal(conflict.delivered.length,1);assert.equal(conflict.nodes[0].opacity,0.8);assert.equal(conflict.nodes[1].opacity,0.5);
 });
 
+test('repair evidence refuses source drift and reader drift; a refreshed baseline can use the current design reader',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  const observe=async()=>{const c=f.jobs().observeDesign(f.id);f.jobs().accept(f.id,{...c,result:await f.run(c.script)});return c;};
+  await observe();assert.ok(f.jobs().designEvidence(f.id));
+  f.advanceReader();f.restart();
+  assert.throws(()=>f.jobs().designEvidence(f.id),/current-reader-observation-required/);
+  // A historical design read is display-only until the baseline is refreshed.
+  await observe();assert.throws(()=>f.jobs().designEvidence(f.id),/current-reader-observation-required/);
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.throws(()=>f.jobs().designEvidence(f.id),/design-evidence-unavailable/);
+  f.nodes[0].opacity=0.8;
+  const read=await observe();assert.ok(read.script.startsWith('// Current independent reader 1'));
+  const evidence=f.jobs().designEvidence(f.id);assert.equal(evidence.difference.changes[0].observed,0.8);
+  f.restart();assert.deepEqual(f.jobs().designEvidence(f.id),evidence);
+  f.stale();assert.throws(()=>f.jobs().designEvidence(f.id),/source changed/);
+});
+
 test('a lost update acknowledgement is retained and resent without repeating a write even after source drift',async t=>{
   const f=await fixture(t);await f.poll();f.lose('result');await f.poll();
   assert.equal(f.storage.get('ds_native_receipt:'+f.id).stage,'result');
