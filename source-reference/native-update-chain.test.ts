@@ -119,6 +119,18 @@ test('an allocation correction survives journal restart and requires the subsequ
  assert.equal(f.plans.prepare(f.parent).id,second.proposal.id,'a settled repeat does not allocate or duplicate');
 });
 
+test('allocation-only changes still settle a separate no-op component review before repair',async t=>{
+ const f=await fixture(t);f.input.desired=f.desiredFor({...f.tokens,newOpacity:{$type:'number',$value:0.6}});
+ const allocation=f.prepare();await f.finish(allocation.operation.id);
+ const reviewed=f.prepare();assert.notEqual(reviewed.proposal.id,allocation.proposal.id);
+ assert.equal(reviewed.proposal.tokenAllocations,undefined);assert.equal(reviewed.proposal.changes.length,0);
+ await f.finish(reviewed.operation.id);assert.equal(f.jobs().get(reviewed.operation.id).phase,'update-verified');
+ const read=f.jobs().observeDesign(reviewed.operation.id);f.jobs().accept(reviewed.operation.id,{...read,result:await f.run(read.script)});
+ assert.ok(f.jobs().designEvidence(reviewed.operation.id));
+ assert.equal(f.plans.prepare(f.parent).id,reviewed.proposal.id);
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.tokenIdentity.variables.length,3);
+});
+
 test('a second correction starts at the verified first result, survives restart and preserves history',async t=>{
  const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
  const original=readFileSync(path.join(f.repo,'private/source-native-update-plans',f.parent,first.proposal.id+'.json'),'utf8');

@@ -117,7 +117,11 @@ export function createNativeUpdatePlans(repo: string,
       const writesVariables=record.update.plan.kind==='native-contract-token-allocation-update'||'tokenChanges' in record.update.plan && !!record.update.plan.tokenChanges?.length;
       if(!record.update.plan.changes.length && !writesVariables && record.predecessor) {
         const previous=read(parentId,record.predecessor.proposalId);
-        if(same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
+        // Allocation establishes IDs, not component agreement. Even when the
+        // following review finds no property changes, settle its own no-op
+        // correction before offering design repair.
+        if(previous.update.plan.kind!=='native-contract-token-allocation-update' &&
+          same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
       }
       const id=revisionOf(record).slice(7),dir=directory(parentId,true)!;
       const file=path.join(dir,id+'.json');
