@@ -8252,9 +8252,27 @@ replaces a failed live projection: separate bindings on each main left edited
 slot text using its former variant's typography. Unscoped writers now refuse
 the marker before allocation. Unsupported mode capacity retains the partial
 allocation identities rather than reporting a successful write.
-The current projection selects variants inside one collection. Large source
-matrices can therefore exceed the file's available mode capacity; factoring
-selection across collections is research, not an implemented write protocol.
+The admitted projection selects variants inside one collection. Large source
+matrices can therefore exceed the file's available mode capacity. A separate
+experimental graph transport factors source-binding tuples across two-mode
+selector collections. It retains source aliases and identities, requires the
+complete selector vector for each public variant, and refuses unobserved binary
+addresses. Generated creation and separate ID-based readback have been checked
+in Evaluations for 31 source variables, seven selectors and 54 routing variables;
+an unchanged rerun refuses before allocation. Source and routing picker scopes
+are derived from their text consumers. This candidate-only transport does not
+create components or participate in application operations, repairs or updates.
+Independent operation scopes can use the same compiler alias names in separate
+collections. A second native allocation and separate readback preserve the first
+graph exactly; names never authorize adopting or updating existing variables.
+
+The seven-level native research graph also exposes a capture gap: its sixteen
+consuming bindings retain their full selected chains, but the global variable
+collector cannot resolve two carrier modes. Raising a depth limit alone would
+not authenticate cross-collection selection. Multi-collection canonical return,
+component integration and application admission remain unimplemented. Before
+admission, the host must also authenticate the painted font on each source
+plane; a CSS font-family spelling alone does not identify the face Chromium used.
 
 Plugin capture 1.44 records numeric native weight and complete selected alias
 chains up to 16 edges, including target consuming modes and native values.
@@ -8290,7 +8308,10 @@ not authenticated application journeys or visual-fidelity scores.
 Adversarial checks run in `runtime:check` and `source:reference:check`: they
 cover missing and mixed bindings, changed mode/alias identity, inconsistent
 source definitions, unsafe token paths, stale direct-text evidence, altered
-readbacks, mode-allocation failures and duplicate writes. To reverse, remove
+readbacks, mode-allocation failures and duplicate writes. Graph transport checks
+also reject same-valued alias substitution, incomplete selector vectors,
+unowned variables, scope drift and collisions during asynchronous preflight;
+partial failures retain allocation IDs. To reverse, remove
 the optional marker and its planner, scoped writer, inverse and caller support
 together; restore named refusal for nonempty root slots, regenerate derived
 artifacts and retain all failed and successful journals. Do not loosen the
