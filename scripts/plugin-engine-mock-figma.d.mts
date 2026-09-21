@@ -68,6 +68,8 @@ export interface MockVariable {
 }
 
 export interface MockOptions {
+  /** Opt in to inherited consuming modes without changing legacy snapshots. */
+  consumerVariableModes?: boolean;
   /** `VariableCollection.addMode` throws past N modes, the way a Figma Starter
    *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
   modeLimit?: number | null;

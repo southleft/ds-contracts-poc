@@ -49,7 +49,7 @@ for(const display of ['flex','inline-flex'] as const) test(`native ${display} ro
  const c=seed(),byId=new Map([[c.id,c]]);
  c.anatomy.root.layout!.display=display;
  const marker={version:1,property:'Children',...(display==='inline-flex'?{display}:{})};
- const {figma,root}=createFigmaMock();
+ const {figma,root}=createFigmaMock({consumerVariableModes:true});
  const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
  await run(engine.buildTokensScript(null));const script=()=>engine.buildComponentScript(c,byId);

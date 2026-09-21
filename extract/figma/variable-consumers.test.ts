@@ -10,7 +10,7 @@ const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8'
   .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, 'const TARGET_SETS = ["ConsumerProbe"];');
 
 function fixture() {
-  const { figma: mockFigma } = createFigmaMock();
+  const { figma: mockFigma } = createFigmaMock({ consumerVariableModes: true });
   const figma: any = mockFigma;
   const collection = figma.variables.createVariableCollection('Typography');
   const small = collection.modes[0].modeId;
