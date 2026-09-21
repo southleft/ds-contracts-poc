@@ -1191,8 +1191,9 @@ async function dumpNode(node, nodePath, parent) {
     // bridge already does: PIXELS literally, PERCENT against the node's own
     // font size. A mixed value, or a percentage with no single font size, has
     // no one pixel value and keeps its receipt.
+    // v1.41 keeps observed zero distinct from mixed or missing tracking.
     let pxLetterSpacing;
-    if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
+    if (node.letterSpacing !== figma.mixed && node.letterSpacing) {
       if (node.letterSpacing.unit === 'PIXELS') pxLetterSpacing = node.letterSpacing.value;
       else if (node.letterSpacing.unit === 'PERCENT' && typeof node.fontSize === 'number') pxLetterSpacing = node.letterSpacing.value * node.fontSize / 100;
       else channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit + ' (the canvas twin of CSS letter-spacing — no single pixel value on this node)');
@@ -1522,7 +1523,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.40',
+    dumpVersion: '1.41',
   },
 };
 dumps._degradations = degradations;

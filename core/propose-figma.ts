@@ -5692,14 +5692,22 @@ function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void
   }
 }
 /** The bridge resolves spacing to pixels, without inventing a token identity.
- * Uniform spacing uses the existing literal channel. Mixed or partially
- * captured spacing cannot use a uniform literal. */
-function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
-  const values = m.occ.filter((o) => o.node.text !== undefined).map((o) => o.node.text!.letterSpacing);
+ * Uniform spacing uses the existing literal channel. Complete varying
+ * observations use the ordinary provisional token/axis classifier; absent
+ * spacing is never assumed zero. */
+function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string, tokens: Record<string, string>): void {
+  const values = m.occ.map((o) => o.node.text?.letterSpacing);
   if (!values.some((value) => value !== undefined)) return;
   const value = values[0];
-  if (value === undefined || !Number.isFinite(value) || values.some((other) => other !== value)) {
-    ctx.notes.push(`${where}: letter-spacing is mixed, partial, or invalid across variants — no uniform literal proposed; NAMED for review`);
+  if (values.some((other) => other === undefined || !Number.isFinite(other))) {
+    ctx.notes.push(`${where}: letter-spacing is partial or invalid across variants — no value inferred for an uncaptured cell; NAMED for review`);
+    return;
+  }
+  if (values.some((other) => other !== value)) {
+    if (ctx.mint) {
+      mintObservation(ctx, tokens, where, 'letter-spacing', 'px', m.occ.map((o, i) => ({ variant: o.variant, value: values[i]! })), `${where}|letterSpacing`);
+      ctx.notes.push(`${where}: finite letter-spacing differs across fully captured variants — submitted to provisional token/axis classification; zero is an observation, not an absence`);
+    } else ctx.notes.push(`${where}: letter-spacing differs across variants and needs provisional token minting — NAMED, not proposed`);
     return;
   }
   if (value === 0) return; // CSS normal has zero additional tracking.
@@ -8907,7 +8915,7 @@ function buildPartFromEvidence(
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
-    carryLetterSpacing(m, part, ctx, where);
+    carryLetterSpacing(m, part, ctx, where, tokens);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
     invertNodeOpacity(m, part, tokens, ctx, where);
@@ -10832,6 +10840,11 @@ function proposeStateDiffs(
   partStates?: PartStateTarget[],
   /** v17 — the root's per-enum-value collector for THIS state. */
   rootByProp?: StateByPropCollector,
+  /** A pointer press still matches :hover. Captured root paints must undo a
+   *  hover paint even when the pressed value equals the resting value. */
+  concurrentHoverByName?: ReadonlyMap<string, DumpNode>,
+  /** Captured solid strokes that replace a per-side base with one width. */
+  uniformStateStrokeStyles?: Set<string>,
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -10851,7 +10864,12 @@ function proposeStateDiffs(
     paintName: string,
     pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
   ) => {
-    if (!occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(o.base)))) return;
+    // With multiple remaining axes a substituted hover selector may be more
+    // specific than a uniform active selector. That reset is not qualified.
+    const resetsHover = state === 'active' && ctx.axes.length <= 1 && concurrentHoverByName !== undefined &&
+      occs.every((o) => concurrentHoverByName.has(o.variant)) &&
+      occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(concurrentHoverByName.get(o.variant)!)));
+    if (!resetsHover && !occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(o.base)))) return;
     const paints = occs.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
     if (paints.some((p) => p.paint === undefined)) {
       ctx.notes.push(
@@ -10859,13 +10877,16 @@ function proposeStateDiffs(
       );
       return;
     }
+    if (resetsHover) ctx.notes.push(
+      `${where}: captured ${paintName} in state "active" differs from the matching hover drawing — retain the pressed paint even when it equals rest, because a pointer press also matches :hover`,
+    );
     if (paints.every((p) => p.paint!.var !== undefined)) {
       const u = unifyRefs(
         paints.map((p) => ({ variant: p.variant, path: dotPath(p.paint!.var!) })),
         ctx.axes,
       );
       if (u.kind === 'ref') {
-        if (u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
+        if (resetsHover || u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
       } else if (u.kind === 'per-value') {
         // v17 — this used to be a flat refusal, and it cost Eventz's Button
         // its whole hover plane: the per-variant hover colours are UNRELATED
@@ -10977,9 +10998,37 @@ function proposeStateDiffs(
   // drew). A per-side state override has no vocabulary yet — NAMED.
   if (occs.some((o) => o.node.strokeWeights !== undefined || o.base.strokeWeights !== undefined)) {
     if (occs.some((o) => sideWeightsKey(o.node) !== sideWeightsKey(o.base) || (o.node.strokeWeight ?? null) !== (o.base.strokeWeight ?? null))) {
-      ctx.notes.push(
-        `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — a per-side state override has no contract vocabulary; NAMED, not proposed (review)`,
-      );
+      // A uniform state stroke is already representable by border-width.
+      // Its base may have four different sides: do not read that missing
+      // shorthand as zero, and do not invent unequal state-side overrides.
+      const capturedUniform = uniformStateStrokeStyles && occs.every(({ node, base }) =>
+        node.stroke !== undefined && base.stroke !== undefined &&
+        node.strokeWeights === undefined && typeof node.strokeWeight === 'number' &&
+        Number.isFinite(node.strokeWeight) && node.strokeWeight >= 0 &&
+        (node.strokeAlign ?? 'INSIDE') === 'INSIDE' && (base.strokeAlign ?? 'INSIDE') === 'INSIDE' &&
+        node.strokesIncludedInLayout === true && base.strokesIncludedInLayout === true &&
+        (base.strokeWeights !== undefined
+          ? STROKE_SIDE_CHANNELS.every(([, side]) => Number.isFinite(base.strokeWeights![side]) && base.strokeWeights![side] >= 0)
+          : typeof base.strokeWeight === 'number' && Number.isFinite(base.strokeWeight) && base.strokeWeight >= 0)) &&
+        new Set(occs.map(({ node }) => node.strokeWeight)).size === 1 &&
+        occs.some(({ node, base }) => base.strokeWeights !== undefined
+          ? STROKE_SIDE_CHANNELS.some(([, side]) => base.strokeWeights![side] !== node.strokeWeight)
+          : base.strokeWeight !== node.strokeWeight);
+      const unbound = occs.every(({ node, base }) => STROKE_WEIGHT_BOUND_FIELDS.every(field =>
+        node.bound?.[field] === undefined && base.bound?.[field] === undefined));
+      const boundUniform = occs.every(({ node }) => node.bound?.strokeWeight !== undefined ||
+        STROKE_WEIGHT_BOUND_FIELDS.slice(1).every(field => node.bound?.[field] !== undefined && node.bound[field] === node.bound.strokeTopWeight));
+      if (capturedUniform && (ctx.mint && unbound || boundUniform)) {
+        if (unbound) mintStateObservation(ctx, target, state, 'border-width', 'px',
+          occs.map(({ variant, node }) => ({ variant, value: node.strokeWeight! })),
+          `${where} (state ${state})|strokeWeight`);
+        uniformStateStrokeStyles.add(state);
+        ctx.notes.push(`${where}: state "${state}" replaces captured per-side resting widths with a uniform ${occs[0].node.strokeWeight}px INSIDE stroke included in layout — carried as border-width with its solid border style`);
+      } else {
+        ctx.notes.push(
+          `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — only a captured uniform INSIDE state stroke included in layout, unbound or uniformly bound, can replace them; NAMED, not proposed (review)`,
+        );
+      }
     }
   } else {
     numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, [...STROKE_WEIGHT_BOUND_FIELDS]);
@@ -12452,7 +12501,7 @@ function proposeFromDumpFenced(
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
-    carryLetterSpacing(only, root, ctx, `${where}/label`);
+    carryLetterSpacing(only, root, ctx, `${where}/label`, rootTokens);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
     // the text element's own box; the root's box is padding plus content and
@@ -12555,9 +12604,14 @@ function proposeFromDumpFenced(
   /** v17 — state → prop → value → channel → ref, the root's per-enum-value
    *  state bindings (see StateByPropCollector). */
   const stateByProp: Record<string, StateByPropCollector> = {};
+  const uniformStateStrokeStyles = new Set<string>();
   const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
+    const hoverVariants = stateGroups.get('hover') ?? [];
+    const hoverByName = new Map(hoverVariants.map((v) => [v.name, v]));
+    // A duplicate peer is not evidence of which hover drawing is concurrent.
+    const concurrentHoverByName = hoverByName.size === hoverVariants.length ? hoverByName : undefined;
     const baseChildNames = new Set<string>();
     for (const v of variants) for (const c of v.children ?? []) baseChildNames.add(c.name);
     const groups: Array<[string, DumpNode[]]> = [...stateGroups.entries()];
@@ -12571,6 +12625,8 @@ function proposeFromDumpFenced(
         rootKeyByChildName,
         partStateTargets,
         byProp,
+        state === 'active' ? concurrentHoverByName : undefined,
+        uniformStateStrokeStyles,
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
@@ -13268,6 +13324,15 @@ function proposeFromDumpFenced(
       const rootPresent = present.filter((s) => Object.keys(stateOverrides[s]).length > 0);
       if (rootPresent.length > 0) {
         root.states = Object.fromEntries(rootPresent.map((s) => [s, stateOverrides[s]]));
+      }
+      for (const state of uniformStateStrokeStyles) {
+        // A failed mint must not leave a style-only state drawing a UA width.
+        const widthCarried = stateOverrides[state]['border-width'] !== undefined ||
+          Object.values(stateByProp[state] ?? {}).some(map => Object.values(map).every(value => value['border-width'] !== undefined));
+        if (!present.includes(state) || !widthCarried) continue;
+        const declaredStates = (root.declaredStates as Record<string, Record<string, string>> | undefined) ?? {};
+        (declaredStates[state] ??= {})['border-style'] = 'solid';
+        root.declaredStates = declaredStates;
       }
       // v17 — the root's per-enum-value state bindings, in declared state
       // order so the emitted sheet is a function of the contract alone.

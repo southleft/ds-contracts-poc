@@ -160,15 +160,12 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
-  /** dump v1.35 — `Part.strokesIncludedInLayout: false`: the stroke paints
-   *  over the padding and takes NO layout space (a designer's frame at Figma's
-   *  default). Only `false` is ever carried. The runtime writes it on the
-   *  auto-layout frame; with no spec carrying it the runtime is byte-identical
-   *  and the frame keeps what it is born with, which reads back `true`
-   *  (measured: 160 of 160 generated auto-layout frames in the committed
-   *  census responses) — the space-taking CSS border every other contract
-   *  means. */
-  strokesIncludedInLayout?: false;
+  /** The public Part model carries only false, for a stroke outside layout.
+   *  Internally true also enables explicit CSS border-box layout when a
+   *  uniform state width replaces literal resting sides. Native defaults
+   *  have differed between the older census and the current Desktop probe;
+   *  this transition must write its layout policy instead of relying on one. */
+  strokesIncludedInLayout?: boolean;
   /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
    *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
   dashPattern?: number[];
@@ -3401,6 +3398,15 @@ function applyStyling(
   // outline, token or literal, this combo or another), so it is read here,
   // beside the other spec-level facts, and not in the stroke cases above.
   if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
+  // A state shorthand replacing literal side widths needs border-box layout
+  // on both resting and state frames. An absent native flag defaults false;
+  // the contract's ordinary CSS border includes those widths in layout.
+  else if (spec.lits?.strokeSides && (
+    Object.values(part.states ?? {}).some(state => state['border-width'] !== undefined) ||
+    (part.statesByProp ?? []).some(entry => Object.values(entry.map).some(state => state['border-width'] !== undefined))
+  )) {
+    spec.strokesIncludedInLayout = true;
+  }
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
   // squares whose real height rides a pseudo-element padding hack).
@@ -5893,9 +5899,22 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           const v = subst[e.prop];
           if (v !== undefined) Object.assign(byPropState, e.map[v] ?? {});
         }
+        const stateTokens = translateStateOverrides({ ...(overrides[stateName] ?? {}), ...byPropState });
+        // The later state shorthand replaces every base-side width in CSS.
+        // Retaining these literals would overwrite its native binding at
+        // applyFrameSpec's tail and quietly redraw the resting border.
+        if (stateTokens['border-width'] !== undefined) {
+          if (rootSpec.lits) {
+            delete rootSpec.lits.strokeSides;
+            delete rootSpec.lits.strokeWeight;
+          }
+          for (const field of ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight']) {
+            if (rootSpec.bindings) delete rootSpec.bindings[field];
+          }
+        }
         const ctx = applyTokens(
           rootSpec,
-          translateStateOverrides({ ...(overrides[stateName] ?? {}), ...byPropState }),
+          stateTokens,
           subst,
           baseCtx,
           root.hugsBelowMaxWidth,
@@ -8067,9 +8086,9 @@ function buildSyncScript(
   // without these facts emit byte-identical scripts (the golden discipline).
   const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
-  // dump v1.35: same discipline — a contract with no stroke outside layout
-  // emits the runtime it always did.
-  const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout === false));
+  // Include layout writes only for an explicit outside-layout part or a
+  // state width replacing literal sides. Other scripts retain their bytes.
+  const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout !== undefined));
   // dump v1.36: same discipline — a contract with no whole-pixel text box
   // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).
   const hasTextBox = featureDatas.some((d) => dataSome(d, (x) => x.textAutoResize === 'WIDTH_AND_HEIGHT'));

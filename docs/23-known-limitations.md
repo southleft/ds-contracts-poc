@@ -4649,10 +4649,19 @@ give the text element the same box Figma draws:
 
 ```
 inline-size: calc-size(fit-content, round(up, size, 1px));
-inline-size: calc-size(fit-content, round(up, size - <letter-spacing>, 1px));   /* a tracked label */
+inline-size: calc-size(max-content, round(up, size - <letter-spacing>, 1px));  /* an owned tracked label */
 max-inline-size: 100%;        /* unless the part carries its own max-width */
 align-self: flex-start;       /* only under a flex column that would stretch it */
 ```
+
+**2026-09-21 tracked-text revision:** the tracked box also carries a private
+tracking variable and a block text run whose inline size is
+`calc-size(100%, size + var(--_dsc-text-box-tracking))`. It keeps the final
+advance available for line breaking without including it in the layout box.
+An absent or empty text value contributes zero width. A default minimum of
+zero allows grid tracks to shrink; authored minimums remain authoritative.
+Untracked text retains the earlier `fit-content` rule. See D.93 for the
+measured wrapping defect, bounded enum support and remaining image failures.
 
 `calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
 cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
@@ -4660,10 +4669,11 @@ available))`: a label that fits is its max-content box rounded up; a string that
 does not fit wraps at the available width exactly as it does without the fact.
 `max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
 box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
-A browser without `calc-size()` drops the `inline-size` declaration at parse (a
-stylesheet) or ignores the assignment (the CSSOM, i.e. the inline surface) and
-keeps today's fractional box, under 1 px narrower — never wider and never a wrap
-change; no `@supports` guard is needed and none could be spelled inline. Logical
+A browser without `calc-size()` drops both outer and inner sizing declarations
+at parse or assignment. It retains the fractional, untrimmed browser advance;
+tracking and rounding can make this differ from Figma by more than a subpixel.
+The existing clamp and conditional start alignment still apply. No fallback
+Figma fidelity is claimed; both declarations use the same feature boundary. Logical
 properties, so a vertical or RTL writing mode rounds the axis the text runs along.
 The declaration takes effect because every emitter renders a text part as its own
 element inside a parent it lays out as flex or grid (blockified), and an absolutely
@@ -4691,9 +4701,9 @@ committed REST fixtures rendered in Chromium with the fonts loaded:
 Three of three tracked samples: Figma's box is the run less the trailing spacing,
 rounded up. The part's own uniform `letter-spacing` is therefore shed before
 rounding — a literal verbatim, a token as its `var()` on the sheets and as its
-resolved value inline. A `letter-spacing` that varies by variant or state, or
-rides a placeholder token, has no single spelling in the base rule and is refused
-beside the flag. On the 23 untracked samples the two forms are the same number.
+resolved value inline. Per-value variant or state overrides remain refused.
+Complete enum-placeholder tokens now select a matching box and run rule as
+described in D.93. On the 23 untracked samples the two forms are the same number.
 
 **The premise, measured on 26 samples.** Every WIDTH_AND_HEIGHT text node in the
 committed REST fixtures whose font could be loaded (Inter locally; Manrope, Geist
@@ -4758,7 +4768,8 @@ that owns no text (`text` / `content` / `textByProp`); beside a `width` /
 `inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
 truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
 that is sized, filled or truncated by a channel is not sized by its text; beside a
-per-variant / per-state or placeholder-token `letter-spacing`; beside a literal
+per-variant / per-state `letter-spacing` overrides, or a placeholder token
+without one to three distinct enum axes and explicit defaults; beside a literal
 `letter-spacing` that is not a px / em / rem length; when the part INHERITS
 `letter-spacing` from any ancestor holder (root or part; literal, token or
 per-variant) and states none of its own; on an inline-level element (the part
@@ -4892,10 +4903,9 @@ hoisted root label and count as named). Evidence:
   committed dump predates the field).
 - **The hoisted root label** (a sole root text node named `label`) is named, not
   carried; the root keeps the fractional advance.
-- **A tracked label with per-variant or per-state tracking** is refused beside the
-  flag rather than given a private custom property; the proposer never writes
-  per-variant tracking (a mixed `letter-spacing` is already named), so the
-  refusal reaches only hand-written contracts.
+- **Per-value tracking overrides** remain refused. D.93 now carries complete
+  captured enum-placeholder tracking with a selected box/run rule; ambiguous
+  axes or missing values still refuse.
 - The mock canvas does not model the field (it reports nothing, which reads as
   "not captured"). The Playground's canvas preview ignores the flag.
 
@@ -7700,6 +7710,184 @@ caller override forwarding. Keep the independent inline `style` collision fix,
 font-input support, D.88 root guard and all historical evidence. Do not alter
 source designs, crops, scorer thresholds or owner grades.
 
+### D.91 Pressed root paint can equal rest while still needing a hover reset
+
+**AGENT decision, 2026-09-20.** A pointer press also matches `:hover`. Reading
+pressed paint only as a difference from rest loses a necessary override when
+the pressed drawing restores the resting background or border color. The
+proposer now compares these root paint channels with the uniquely matched
+hover cells too. It retains the captured pressed value, including a bound
+reference equal to the base reference, through the existing state vocabulary.
+It requires a hover peer for every compared pressed cell and at most one
+remaining variant axis. Multiple-axis hover selectors can outrank a uniform
+pressed selector and remain outside this bounded reset rule. No state, paint,
+property axis or component-specific behavior is invented. Other root channels,
+part-level resets, simultaneous keyboard focus and states with no recoverable
+override retain their existing limits and refusals.
+
+Root token-state CSS follows the declared interaction vocabulary order across
+uniform, substituted and per-value bindings. Stable ordering keeps per-value
+overrides after uniform bindings within each state. A browser counterexample
+showed a per-value hover rule overriding a uniform pressed rule at equal
+specificity; the corrected order restores the captured paint during a real
+pointer press. The synthetic native preview round trip retains the active
+state and its token references.
+
+A state need not change paint if the source explicitly draws the same paint
+at rest. The consumer check retains its `state-inert` finding unless a unique
+rest cell has exactly the same non-state props, a distinct native node ID,
+byte-identical valid PNG data, authenticated full-bounds scale-one captures,
+and exactly matching relative render geometry and layout size. The receipt
+names both nodes and their image hash. This only resolves the paint-change
+expectation: undeclared states and unreachable interactions still fail, and
+the consumer's own size and both unmasked image comparisons remain required.
+The scorer, crop rules and 5% limit are unchanged. Disabled-state equivalence
+is not admitted by this rule.
+
+Read-only native evidence on Altitude Tab confirms both Active/Default pairs
+are byte-identical, with stable bracketing source snapshots. The application
+now imports Tab as a real child instead of its former state-refusal stub and
+prepares its React archive. A clean consumer installs a byte-identical package
+and reaches both pressed states. It still reports 16 image/content-size
+problems: only 3/10 image pairs meet both background limits, selected text is
+93px wide against 101px in the source, and focus reaches a 27.47% black-background
+mismatch. The press proof does not excuse those failures. The same JSON import
+repeated with exactly five workspace entries and an identical Tab contract.
+The visible comparison and installed consumer were inspected on both
+backgrounds; evidence is retained in
+`private/tab-active-reset-app-20260920/`. Text Passage and ArrowArcLeft remain
+unresolved dependencies. This failed application journey does not qualify V1.
+
+To reverse, remove the concurrent-hover root-paint comparison and restore the
+prior root token-rule ordering. Restore unconditional `state-inert` reporting
+if withdrawing the independent source-equivalence adjudication; keep its
+receipts and negative controls. Preserve the failed consumer and all native
+source evidence. Do not adjust tolerances or replace historical results.
+
+### D.92 A uniform state border can replace different resting side widths
+
+**AGENT decision, 2026-09-20.** A resting bottom-only border and a uniform
+focused border use existing contract channels, but the proposer previously
+named every state-width change involving resting side widths as unsupported.
+It now carries this bounded case as `border-width` and solid `border-style`:
+every compared root has a captured stroke, INSIDE alignment and an explicit
+`strokesIncludedInLayout: true`; resting widths are complete finite
+nonnegative numbers, and all state cells have one equal finite nonnegative
+uniform width that changes at least one resting side. Unbound widths need
+minting; uniformly bound widths retain their references, including distinct
+identities represented through the existing per-value state maps. A failed
+width recovery cannot leave a style-only override. Unequal state-side widths,
+missing layout evidence and other alignment policies remain outside this rule.
+No schema field, component-name branch or inferred width is added.
+
+Native state previews remove replaced resting side literals and bindings
+before applying the state shorthand. These transitions explicitly include
+strokes in layout on the resting and state frames; the public outside-layout
+flag still wins. The current Desktop probe starts with a different native
+layout default from older census observations, so relying on that default
+would lose the intended CSS border-box size. Other generated library scripts
+remain byte-fresh. Synthetic browser and native round trips cover common and
+per-value bound width identities and twelve unsupported input controls.
+
+The generated program was executed in a new isolated Evaluations page and
+collection. Its ten editable variants retain the bottom-only resting stroke
+and the two uniform 2px focus strokes. The canonical native dump and exact
+proposal recover the width references and solid style. Existing page and
+collection inventories and variable values are unchanged. The plugin window
+was closed before inspecting the live canvas. This is a bounded native engine
+probe, not a claim that the application completed the reverse journey.
+
+The actual Playground imported the same preserved source, prepared a React
+archive, and a clean consumer installed the byte-identical package. Tab now
+passes **4/10 image pairs on both backgrounds**, with **12 named problems**
+remaining. Unselected focus is 96 × 40 on both surfaces and measures 0% on
+white / 2.421875% on black. Selected focus is still 97 × 40 against native
+105 × 40 and fails on black. Text sizing and other text image differences
+remain unresolved; the two composed dependency gaps in D.91 also remain.
+Explicit Public Sans consumer assets do not authenticate Figma's font bytes.
+The original pixels, frame checks and 5% limit are unchanged. Repeating the
+import retains five entries and an identical Tab contract. A normal browser
+reload restores a schema-valid contract and an available package action.
+The comparison and installed consumer were inspected visibly on both
+backgrounds. Tab and V1 remain unqualified.
+
+To reverse, remove the uniform-state-width exception and its solid-style
+carrier, restore the native state-preview side handling and remove this
+transition's explicit layout policy. Preserve the outside-layout behavior,
+D.91 pressed paint reset, all source captures and the failed app consumer.
+
+
+### D.93 Complete observed tracking can vary by prop
+
+**AGENT decision — 2026-09-20.** Both readers now retain explicitly observed
+zero letter spacing (REST dump 1.40, plugin dump 1.41). Missing or mixed data
+still means uncaptured. Fully observed, finite tracking that differs across
+variants uses the existing provisional-token axis classifier when minting is
+allowed. Uniform nonzero values retain the existing literal spelling; uniform
+zero adds no declaration. Missing cells, nonfinite values and varying input
+with minting disabled keep named limits. No component-specific rule was added.
+
+The actual JSON-import and React-package workflow produced an archive that
+matches the isolated installed package byte for byte. At the unchanged 5%
+limit, **8/10** native/React pairs pass on both backgrounds. All five selected
+appearances now pass. Unselected rest and pressed remain **15.38%** on black;
+the run is still refused. The source version and bracketing geometry hashes
+are identical before and after capture. Repeat import retains five workspace
+entries; normal reload restores the identical contract and package action.
+The comparison and installed consumer were inspected in the application.
+
+A generated update in Evaluations preserved the existing component set key
+and all ten variant IDs, rebuilt the contract-owned text interiors, and read
+back 0px or 1px on every label. The unchanged repeat created nothing. Existing
+page, collection and variable inventories and values did not change. Native
+tracking is a resolved value; this does not establish variable-binding
+identity for letter spacing. Only the owned Evaluations probe was amended.
+
+**AGENT decision — tracked text boxes, 2026-09-21.** A base tracking token
+with one to three distinct enum placeholders and explicit defaults now retains
+the auto-width fact. Every expanded light/dark token value must be a finite scalar
+px/em/rem string. Object-shaped dimensions refuse because the scalar emitters
+do not serialize that format; even zero percent is invalid tracking. Missing cells, boolean/defaultless/repeated axes, a competing
+literal, and per-value tracking overrides refuse. The text must be an owned
+leaf in ordinary text flow; caller children, structured content, raw-text hosts
+and authored style attributes cannot acquire the inner run.
+
+An adversarial browser check found that subtracting tracking from `fit-content`
+could subtract twice when a content-sized parent fed its rounded width back
+as available space. A 14px Arial label, “Updated label”, with 1px tracking
+became a 98px box on two lines despite a 99.40625px run. The revised shared
+rule uses a 99px layout box and an inner 100px line-breaking box, keeping one
+line. Static tracking and selected enum tracking use the same rule. Negative
+tracking, empty text, replacement, restoration, constrained columns/grid, RTL,
+vertical text and fallback without `calc-size()` are measured separately.
+No font, scorer or image threshold was changed.
+A separate static-tracking regression consumer retains all ten passing Badge
+image pairs on both backgrounds. It uses environment fonts; their bytes are
+not authenticated. This check does not replace its prior application evidence.
+
+A fresh **engineering-generated** clean consumer from the preserved Tab capture
+now matches all ten native root dimensions exactly. It still passes only
+**8/10** image pairs: unselected rest and pressed fail at **12.56%** on black.
+This is a separate failed consumer, not a new application-delivery result.
+The earlier app archive and its 15.38% failures remain intact. Application
+re-delivery and a new native update with this sizing rule remain pending.
+Font assets are explicitly supplied and hashed; Figma's font bytes remain
+unverified. The earlier Public Sans 1.007 control also remains failed.
+
+Reversing this sizing revision means restoring the placeholder-token refusal
+and the prior tracked-box declarations and markup together, removing its
+private run variable and empty-text handling, then rebuilding the plugin
+receipt and derived registers through their scripts. Keep the newly exposed
+short-label wrapping defect documented and preserve every failed consumer.
+
+Evidence and the adversarial review remain in the append-only private
+`variant-letter-spacing-20260920/` journal, including eleven bounded controls,
+source captures, actual archive, clean-consumer receipts, native IDs and visible
+comparisons. Earlier D.91/D.92 failures remain intact. Tab and V1 remain
+unqualified. Reversal: revert the reader-version/capture and proposer changes
+together, rebuild the embedded dump and plugin receipt through their scripts,
+and retain all old captures and failed consumers. This restores the named
+varying-tracking loss rather than inventing zero for missing observations.
 
 ## D.94 Local default components keep their export identity
 

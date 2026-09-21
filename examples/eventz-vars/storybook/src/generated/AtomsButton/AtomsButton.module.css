@@ -42,14 +42,6 @@
   background-color: var(--color-background-none);
 }
 
-.root:focus-visible {
-  outline-color: var(--comp-border-focus-ring);
-}
-
-.root:focus-visible {
-  outline-width: var(--imported-atoms-button-state-focus-visible-outline-width);
-}
-
 .variant-primary:hover:not(:disabled) {
   background-color: var(--comp-button-primary-color-background-hover);
 }
@@ -80,6 +72,14 @@
 
 .variant-bare:active:not(:disabled) {
   background-color: var(--color-background-none);
+}
+
+.root:focus-visible {
+  outline-color: var(--comp-border-focus-ring);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-atoms-button-state-focus-visible-outline-width);
 }
 
 .root[data-is-disabled] {

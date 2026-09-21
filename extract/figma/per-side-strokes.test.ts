@@ -47,7 +47,7 @@ const stripWeights = (n: DumpNode) => { const { strokeWeight: _w, strokeWeights:
 test('the REST reader carries sides [1, 0, 1, 0] as strokeWeights, writes no uniform weight beside them, and names nothing', () => {
   // `strokeWeight: 0` is what Figma REST really reports for these sides.
   const { headers, receipts, provenance } = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }, { sides: HEADER_RULE, strokeWeight: 0 }]);
-  assert.equal(provenance.dumpVersion, '1.39');
+  assert.equal(provenance.dumpVersion, '1.40');
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, HEADER_RULE]);
   assert.deepEqual(headers.map(h => 'strokeWeight' in h), [false, false], 'one stroke, one spelling — the reported 0 is not a drawn fact');
   assert.deepEqual(receipts, []);
@@ -93,7 +93,7 @@ test('the plugin reader carries the same field from strokeTopWeight…strokeLeft
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RuledTabs'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string }; _degradations: Array<{ code: string; nodePath: string }> };
-  assert.equal(dumps._provenance.dumpVersion, '1.40');
+  assert.equal(dumps._provenance.dumpVersion, '1.41');
   // The dump was built in the VM's realm; copy the values into this one.
   const headers = Array.from(dumps.RuledTabs.variants, v => JSON.parse(JSON.stringify(v.children![0])) as DumpNode);
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, undefined, undefined]);

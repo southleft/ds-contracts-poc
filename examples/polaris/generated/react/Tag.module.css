@@ -50,6 +50,14 @@
   outline-width: var(--imported-tag-root-outline-width-state-active);
 }
 
+.root:focus-visible {
+  outline-color: var(--imported-tag-root-outline-color-state-focus-visible);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-tag-root-outline-width-state-focus-visible);
+}
+
 .root[data-disabled] {
   background-color: var(--imported-tag-root-background-color-state-disabled);
 }
@@ -92,14 +100,6 @@
 
 .root[data-disabled] {
   text-emphasis-color: var(--imported-shared-color-b5b5b5);
-}
-
-.root:focus-visible {
-  outline-color: var(--imported-tag-root-outline-color-state-focus-visible);
-}
-
-.root:focus-visible {
-  outline-width: var(--imported-tag-root-outline-width-state-focus-visible);
 }
 
 .root[data-disabled] {
