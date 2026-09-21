@@ -296,20 +296,36 @@ test('native text rendering does not cross a caller-content or child-component o
   assert.deepEqual([...nativeTextRenderingRoots(multi)], [multi.anatomy.root], 'another root cannot alter this root');
 });
 
-test('MEASURED native text rendering: caller overrides win and text/element geometry remains exact across fonts, runtime strings, wrapping and RTL on both React surfaces', async t => {
+test('MEASURED native text rendering: defaults and caller overrides exactly match the authored policy across fonts, runtime strings, wrapping and RTL on both React surfaces', async t => {
   const browser = await chromium.launch();
   try {
     for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
       for (const file of ['inter/inter-latin-variable.woff2', 'roboto/roboto-latin-400-normal.woff2', 'ibm-plex-sans/IBMPlexSans-Regular.woff2']) {
         const c = flagged({ declared: { 'font-family': 'Rendering Probe' } });
-        const output = surface === 'inline' ? { ...inline(c), css: '' } : modules(c);
-        const page = await browser.newPage();
+        const emit = (subject: Contract) => surface === 'inline' ? { ...inline(subject), css: '' } : modules(subject);
+        const policies = ['geometricPrecision', 'auto'] as const;
+        // A rendering-policy switch may change glyph metrics on Linux. Compare
+        // the inferred/caller policy with an explicit contract declaration of
+        // that SAME policy, without weakening any geometry comparison.
+        const subjects = [c, ...policies.map(policy => flagged(
+          { declared: { 'font-family': 'Rendering Probe' } },
+          { ...ROOT, declared: { 'text-rendering': policy.toLowerCase() } },
+        ))];
+        const pages = await Promise.all(subjects.map(() => browser.newPage()));
         try {
-          const render = await mountGenerated(page, c.name, output.tsx, output.css);
           const font = readFileSync(new URL('../extract/computed/fonts/' + file, import.meta.url));
-          await page.addStyleTag({ content: `@font-face{font-family:"Rendering Probe";src:url(data:font/woff2;base64,${font.toString('base64')});font-weight:100 900}` });
-          await page.evaluate(() => document.fonts.ready);
-          const observe = () => page.locator('#root > :first-child').evaluate(root => {
+          const renders = [];
+          for (const [index, subject] of subjects.entries()) {
+            const output = emit(subject), page = pages[index];
+            renders.push(await mountGenerated(page, subject.name, output.tsx, output.css));
+            await page.addStyleTag({ content: `@font-face{font-family:"Rendering Probe";src:url(data:font/woff2;base64,${font.toString('base64')});font-weight:100 900}` });
+            assert.equal(await page.evaluate(async () => {
+              const faces = await document.fonts.load('14px "Rendering Probe"');
+              await document.fonts.ready;
+              return faces.length;
+            }), 1, 'the provided face must load before either observation');
+          }
+          const observe = (index: number) => pages[index].locator('#root > :first-child').evaluate(root => {
             const origin = root.getBoundingClientRect();
             return [...[root], ...root.querySelectorAll('*')].map(el => {
               const box = el.getBoundingClientRect(), range = document.createRange(); range.selectNodeContents(el);
@@ -318,15 +334,16 @@ test('MEASURED native text rendering: caller overrides win and text/element geom
             });
           });
           for (const label of ['AVATAR office ffi', 'Ångström naïve', LONG]) for (const dir of ['ltr', 'rtl']) {
-            const style = { width: '120px' };
-            await render({ label, dir, style });
-            assert.equal(await page.locator('#root > :first-child > :first-child').evaluate(el => getComputedStyle(el).textRendering), 'geometricprecision');
-            const natural = await observe();
-            await render({ label, dir, style: { ...style, textRendering: 'auto' } });
-            assert.equal(await page.locator('#root > :first-child > :first-child').evaluate(el => getComputedStyle(el).textRendering), 'auto');
-            assert.deepEqual(await observe(), natural, `${surface}: ${file}: ${label}: ${dir}`);
+            for (const [index, policy] of policies.entries()) {
+              const style = { width: '120px' };
+              await renders[index + 1]({ label, dir, style });
+              await renders[0]({ label, dir, style: policy === 'auto' ? { ...style, textRendering: policy } : style });
+              for (const page of [pages[0], pages[index + 1]])
+                assert.equal(await page.locator('#root > :first-child > :first-child').evaluate(el => getComputedStyle(el).textRendering), policy.toLowerCase());
+              assert.deepEqual(await observe(0), await observe(index + 1), `${surface}: ${file}: ${label}: ${dir}: ${policy}`);
+            }
           }
-        } finally { await page.close(); }
+        } finally { await Promise.all(pages.map(page => page.close())); }
       }
     });
   } finally { await browser.close(); }
