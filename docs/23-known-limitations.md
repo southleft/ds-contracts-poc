@@ -8348,9 +8348,14 @@ this inverse; a selected alias chain or a raised depth limit cannot prove all
 routing edges. Structural inversion does not authorize updates or authenticate
 a rewritten graph against an earlier operation; those require the separately
 persisted host baseline. Preserve optional enum typography bindings through
-`tokensByProp`, including omission and equal-valued references. The first live
+`tokensByProp` for verified root text templates, including omission and equal-valued references. The first live
 inverse reminted font size and line height because it discarded a verified
-per-value reference function; the generic typography reader now retains it.
+per-value reference function; the template typography reader now retains it.
+The ordinary historical typography reader keeps its prior representation.
+Expanding the new behavior to ordinary text parts also changed a frozen held-out
+return's token identities and generated CSS. That broader change is outside this
+template admission; its failed comparison remains recorded without rewriting
+the historical fixture or adding a component-specific rule.
 Reversal: remove `templateVariableGraph` capture and its inverse dispatch, and
 restore the string-only stamped typography reader. Keep the earlier failed
 return and image evidence.
