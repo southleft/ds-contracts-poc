@@ -10738,6 +10738,9 @@ function proposeStateDiffs(
   partStates?: PartStateTarget[],
   /** v17 — the root's per-enum-value collector for THIS state. */
   rootByProp?: StateByPropCollector,
+  /** A pointer press still matches :hover. Captured root paints must undo a
+   *  hover paint even when the pressed value equals the resting value. */
+  concurrentHoverByName?: ReadonlyMap<string, DumpNode>,
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -10757,7 +10760,12 @@ function proposeStateDiffs(
     paintName: string,
     pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
   ) => {
-    if (!occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(o.base)))) return;
+    // With multiple remaining axes a substituted hover selector may be more
+    // specific than a uniform active selector. That reset is not qualified.
+    const resetsHover = state === 'active' && ctx.axes.length <= 1 && concurrentHoverByName !== undefined &&
+      occs.every((o) => concurrentHoverByName.has(o.variant)) &&
+      occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(concurrentHoverByName.get(o.variant)!)));
+    if (!resetsHover && !occs.some((o) => paintKey(pick(o.node)) !== paintKey(pick(o.base)))) return;
     const paints = occs.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
     if (paints.some((p) => p.paint === undefined)) {
       ctx.notes.push(
@@ -10765,13 +10773,16 @@ function proposeStateDiffs(
       );
       return;
     }
+    if (resetsHover) ctx.notes.push(
+      `${where}: captured ${paintName} in state "active" differs from the matching hover drawing — retain the pressed paint even when it equals rest, because a pointer press also matches :hover`,
+    );
     if (paints.every((p) => p.paint!.var !== undefined)) {
       const u = unifyRefs(
         paints.map((p) => ({ variant: p.variant, path: dotPath(p.paint!.var!) })),
         ctx.axes,
       );
       if (u.kind === 'ref') {
-        if (u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
+        if (resetsHover || u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
       } else if (u.kind === 'per-value') {
         // v17 — this used to be a flat refusal, and it cost Eventz's Button
         // its whole hover plane: the per-variant hover colours are UNRELATED
@@ -12459,6 +12470,10 @@ function proposeFromDumpFenced(
   const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
+    const hoverVariants = stateGroups.get('hover') ?? [];
+    const hoverByName = new Map(hoverVariants.map((v) => [v.name, v]));
+    // A duplicate peer is not evidence of which hover drawing is concurrent.
+    const concurrentHoverByName = hoverByName.size === hoverVariants.length ? hoverByName : undefined;
     const baseChildNames = new Set<string>();
     for (const v of variants) for (const c of v.children ?? []) baseChildNames.add(c.name);
     const groups: Array<[string, DumpNode[]]> = [...stateGroups.entries()];
@@ -12472,6 +12487,7 @@ function proposeFromDumpFenced(
         rootKeyByChildName,
         partStateTargets,
         byProp,
+        state === 'active' ? concurrentHoverByName : undefined,
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
