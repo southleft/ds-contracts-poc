@@ -22,6 +22,50 @@ import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import {evidenceSha} from './react-validation-evidence.js';
+
+for(const joint of [true,false])test(`optional root axes ${joint?'retain joint-binding refusals instead of creating an unpainted draft':'still compile independently factored paint'}`,async()=>{
+ mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
+ const dir=mkdtempSync(path.join(process.cwd(),'private/root-overflow-fixture-')),browser=await chromium.launch();
+ try{
+  const source=`import React from 'react';
+export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'solid'|'outline';children?:React.ReactNode}){
+ const colors={warm:['rgb(80, 20, 10)','rgb(160, 40, 20)'],cool:['rgb(10, 20, 80)','rgb(20, 40, 160)'],absent:['rgb(30, 30, 30)','rgb(90, 90, 90)']};
+ return <section style={{display:'inline-flex',height:20,padding:4,backgroundColor:colors[tone??'absent'][${joint?"finish==='outline'?1:0":'0'}],opacity:finish==='solid'?0.8:1}}>{children}</section>;
+}`;
+  writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
+  writeFileSync(path.join(dir,'surface.tsx'),source);
+  const program=readReactSourceProgram(dir,['surface.tsx']);assert.deepEqual(program.problems,[]);
+  const c=program.components.find(c=>c.exportName==='Surface')!,identity={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
+  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Surface}];flushSync(()=>createRoot(document.getElementById('root')).render(<Surface>Untouched caller</Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+  const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
+  await page.setContent('<div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
+  const selector='#root > section',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+  const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
+  const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+  const effects=await observeReactPropertyMatrix({page,program,ownership,tree,image,selector,instanceId:ownership.components[0].id,dir:path.join(dir,'effects'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.equal(effects.rows.length,9);assert.ok(effects.rows.every(r=>r.status==='observed'&&r.restored));
+  const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(effects.rows.map(r=>[r.id,JSON.parse(readFileSync(path.join(dir,'effects',r.id+'.json'),'utf8'))]));
+  const before=JSON.stringify({program,ownership,tree,effects,snapshots});
+  const result=assembleReactRootMatrix(program,ownership,tree,effects,snapshots),draft=result.draft!;
+  assert.deepEqual(result.problems,[]);
+  assert.equal(draft.status,joint?'style-prepared':'native-compiled',JSON.stringify(draft.problems));
+  if(joint){
+   assert.deepEqual(draft.problems,['react-root-matrix-unprojected-bindings:root.background-color']);
+   assert.equal(draft.native,undefined);
+   const residue=draft.residuals!.find(r=>r.channel==='background-color')!;
+   assert.equal(residue.reason,'pair ref over TWO unset axes — no carried spelling; named residue');
+   assert.match(residue.sample,/\{tone\}/);assert.match(residue.sample,/\{finish\}/);
+   assert.ok([...flattenTokens(draft.tokens!).keys()].some(k=>k.includes('background-color')),'captured colors remain available for investigation');
+  }else{
+   assert.deepEqual(draft.problems,[]);assert.equal(draft.native!.variants.length,9);
+   assert.ok(draft.native!.variants.every(v=>v.spec.fill),'independent paint is retained in every omitted/set combination');
+  }
+  assert.equal(JSON.stringify({program,ownership,tree,effects,snapshots}),before);
+  assert.equal(readFileSync(path.join(dir,'surface.tsx'),'utf8'),source);
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,snapshots),result);
+ }finally{await browser.close();rmSync(dir,{recursive:true,force:true});}
+});
 import {emitReact} from '../core/emit-react.js';
 import {emitReactInline} from '../core/emit-react-inline.js';
 import {flattenTokens} from '../core/tokens.js';

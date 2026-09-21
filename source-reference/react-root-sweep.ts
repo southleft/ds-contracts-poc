@@ -20,7 +20,13 @@ export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],base
  const name=contract.name,prep=prepareMint(aligned,{name,importName:name,contract:'',sampleText:'',axes:axes.map(a=>a.prop)},space,styled,[],layout.handled,contract);
  const minted=mintTokens(name,prep.baseObs,prep.axes,{nestedPairs:true}),states=mintTokens(name,prep.stateObs,prep.axes,{nestedPairs:true});
  const applied=applyMintToContract(contract,space,minted,prep.baseObs,states,prep.stateObs,layout.enriched,prep.declared,prep.declaredStates,prep.setPlaneLiterals,{only:prep.inheritanceOnly,stateDeltas:prep.inheritanceStateDeltas},prep.stateCodeOnly);
- return {enriched:ContractSchema.parse(applied.enriched),tokens:structuredClone(minted.tree),residuals:[...prep.codeOnly,...prep.stateCodeOnly]};
+ // Minting a token does not mean its binding survived contract fusion. Keep
+ // the shared fuser's refusals visible, including base-plane overflow (for
+ // example a color depending jointly on two optional, defaultless axes).
+ const overflow=applied.overflowBindings.map(({part,channel,state,ref,refusal})=>({part,channel,
+  ...(state?{state}:{}),reason:refusal,sample:ref??''}));
+ return {enriched:ContractSchema.parse(applied.enriched),tokens:structuredClone(minted.tree),
+  residuals:[...prep.codeOnly,...prep.stateCodeOnly,...overflow],overflow};
 }
 
 /** Carry source identities only when their conditional mapping is proved

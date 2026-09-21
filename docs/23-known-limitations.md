@@ -7899,3 +7899,38 @@ second-library journey remain unqualified. Private evidence is retained in
 To reverse, restore the uppercase-only export filter and remove the default-only
 binding/use guard and documentation. Preserve original source, declined cases,
 all private observations and the existing runtime identity/refusal checks.
+
+## D.95 Root style drafts retain binding refusals
+
+**AGENT decision — 2026-09-20.** A token being minted does not establish that
+its binding can be expressed in the contract. The observed-root adapter kept
+the mint preparation's residuals but dropped the shared fuser's binding
+refusals. It could therefore label a draft `native-compiled` after losing a
+captured paint channel. Both the combined and single-property adapters now
+retain each refused channel, token reference and reason. They keep the prepared
+contract and captured tokens available for inspection, but stop before native
+compilation with `react-root-matrix-unprojected-bindings` or
+`react-root-variants-unprojected-bindings`. Existing diagnostic operations and
+their original receipts remain unchanged; this guard applies to fresh assembly.
+
+The live React DaisyUI Badge matrix exposed the defect. Its background, text
+and four border colors depend jointly on `color` and `variant`, both optional
+without defaults. The shared fuser explicitly refuses that two-omission mapping.
+The prior application run nevertheless created 100 editable mains with empty
+native slots, all 1 px tall and without fills or strokes. A separate native
+instance with editable `New` text measured 49.01599884033203 × 20 px, against
+49.921875 × 20 px in the unchanged source, and visibly omitted the badge paint.
+No fidelity pass is claimed. Independently, source height provenance remains
+unresolved at a cascade-order tie; this change does not substitute the measured
+sample height for an authored constraint.
+
+The app's fresh source trace and synthetic full-matrix checks exercise the
+refusal. Independently factored colors over the same optional axes remain
+eligible. Source files, prior Figma objects, token names, the shared fusion
+grammar and visual thresholds are unchanged. The retained evidence is in private
+`daisyui-source-intake-20260920/` and `react-root-overflow-20260920/`.
+
+To reverse, remove the adapter's overflow forwarding and native-compilation
+guard, together with these outcome claims. Preserve every source observation,
+native operation and failed visual comparison. Supporting the refused mapping
+requires a separate contract/emitter change and measured round-trip evidence.
