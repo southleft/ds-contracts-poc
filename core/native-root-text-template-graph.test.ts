@@ -643,6 +643,28 @@ test('graph return keeps optional typography token identities including omission
   assert.equal(JSON.stringify(returned).includes('content-text-template'), false);
 });
 
+test('shared typography tokens require every consuming channel to match the captured value', async () => {
+  const h = await componentFixture(2, 1, f => {
+    f.contract.anatomy.root.tokens!['line-height'] = f.contract.anatomy.root.tokens!['font-size'];
+  });
+  await h.run(h.script());
+  const dump = await h.run(captureProgram(h.contract.name));
+  const layer = capturedTokensFromDump(dump)!;
+  const options = { corpus: tokenCorpusFromJson({ primitives: layer.tree, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map<string, string>(), mintUnbound: true };
+  const valid = proposeBatchFromDump(dump, options);
+  assert.deepEqual(valid.skipped, []); assert.equal(valid.proposals.length, 1);
+  const returned = ContractSchema.parse(valid.proposals[0].contract);
+  assert.equal(returned.anatomy.root.tokens!['line-height'], returned.anatomy.root.tokens!['font-size']);
+  for (const field of ['fontSize', 'lineHeight'] as const) {
+    const changed = structuredClone(dump);
+    changed[h.contract.name].variants[0].children[0].children[0].text[field] += 1;
+    const refused = proposeBatchFromDump(changed, options);
+    assert.equal(refused.proposals.length, 0, `${field} drift must refuse even when its token is shared`);
+    assert.match(JSON.stringify(refused.skipped), /numeric binding.*disagrees with its consuming value/);
+  }
+});
+
 test('graph inverse refuses changed unselected edges, missing inventory, foreign modes and source alias cycles', async () => {
   const h = await componentFixture(1, 1); await h.run(h.script());
   const dump = await h.run(captureProgram(h.contract.name)), set = dump[h.contract.name];

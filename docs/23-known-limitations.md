@@ -8254,6 +8254,17 @@ Native fidelity remains unqualified. The live application caller measures
 native recovery are still refused. The following evidence establishes bounded
 creation, return and consumer behavior without closing those gaps.
 
+**AGENT decision, integration review 2026-09-21:** when multiple typography
+properties share one source token, each observed property must match its
+independently captured consuming value, exactly or as float32. Review reproduced
+an accepted line-height contradiction because the previous guard checked only
+the font-size field for that shared token. The same canonical capture now
+preserves the valid shared reference and refuses either field's independent
+drift. The before/after checks remain in private
+`native-template-integration-20260921/`. Reversing this guard must also refuse
+shared typography references until every consuming channel can be corroborated;
+checking one property cannot establish the others. No fidelity threshold changed.
+
 The application source adapter now derives the explicit
 `slot.bindings.figma.textTemplate` marker from newly captured direct caller text.
 Fresh observation `a34b7769-50af-4c36-94b1-03dac7eac993` matches both unchanged

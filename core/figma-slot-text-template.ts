@@ -62,8 +62,12 @@ export function validateRootTextTemplates(set: DumpSet, corpus: TokenCorpus, cap
         if (c.resolvedType !== 'COLOR') return fail(`non-color binding ${name}`);
         color(name, c);
       } else {
-        const observed = name === t.fontSizeVar ? t.fontSize : name === t.fontWeightVar ? t.fontWeight : t.lineHeight;
-        if (c.resolvedType !== 'FLOAT' || !exact(c.value, number(name)) || !exact(observed, c.value as number))
+        const observed = [
+          ...(name === t.fontSizeVar ? [t.fontSize] : []),
+          ...(name === t.fontWeightVar ? [t.fontWeight] : []),
+          ...(name === t.lineHeightVar ? [t.lineHeight] : []),
+        ];
+        if (c.resolvedType !== 'FLOAT' || !exact(c.value, number(name)) || observed.some(value => !exact(value, c.value as number)))
           return fail(`numeric binding ${name} disagrees with its consuming value`);
       }
     }
