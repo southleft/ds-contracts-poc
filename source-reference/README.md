@@ -90,8 +90,10 @@ function or direct React `forwardRef` call. Declare both `mount.export` and
 The reader retains the module, actual export, source hash and declaration span.
 Mutable bindings, inline export expressions, default function declarations,
 transformed values, external re-exports and local value escapes or mutations
-refuse by name. Direct JSX use, type queries, local exports and literal
-`displayName` assignments are supported. Duplicate runtime export aliases still
+refuse by name. Local JSX references also refuse because an element's `type`
+exposes the mutable wrapper; modules containing an `eval` identifier refuse.
+Type queries, local exports and literal `displayName` assignments are supported.
+Duplicate runtime export aliases still
 refuse. The existing per-subject limitation above also applies when several
 modules export `default`; this does not qualify arbitrary default-exported APIs.
 See [D.94](../docs/23-known-limitations.md#d94-local-default-components-keep-their-export-identity).

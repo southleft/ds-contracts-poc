@@ -7765,7 +7765,7 @@ a local `const` whose initializer is a supported function or direct React
 Const alone is insufficient for a wrapper object: an adversarial probe replaced
 its `render` method with `Object.assign` while the initial reader still reported
 forwarded children. New default admission therefore also refuses local value
-mutations and escapes. Only declaration, local export, direct JSX, type query
+mutations and escapes. Only declaration, local export, type query
 and literal `displayName` assignment uses are admitted. Anonymous export
 expressions, default function declarations, mutable bindings, indirect wrappers,
 external definitions and unsupported calls remain named refusals. Existing
@@ -7775,9 +7775,25 @@ of every possible future consumer mutation.
 Tests retain true default import identity, direct children, callback/default
 metadata and non-execution of source. Two modules with the same local name and
 `default` export join distinct renderer owners; a substituted module identity
-and duplicate runtime alias refuse. Six wrapper mutation/escape controls refuse.
+and duplicate runtime alias refuse. The initial six wrapper mutation/escape
+controls refuse.
 The cohort still groups negative controls by the declared export-name subject;
 multiple default-exported modules do not automatically receive separate groups.
+
+**Adversarial correction — 2026-09-21.** A local JSX element retains the actual
+wrapper object in its `type` field. Both an assigned element and an element
+returned from a local factory allowed `Object.assign(element.type, ...)` to
+replace the render while inspection incorrectly reported forwarded children.
+Direct `eval` reached the binding without a checked symbol reference. Controlled
+runtime probes confirmed all three changed caller content to replacement text.
+Default admission now refuses local JSX references and modules containing an
+`eval` identifier. This deliberately includes harmless local JSX uses until an
+element-alias proof exists. Runtime regression controls verify the changed
+output and refusal; immutable export-only components retain admission. Private
+before/after evidence is in `default-export-adversarial-20260921/`.
+To reverse this correction, first prove that the produced element and any
+returned aliases cannot expose a mutable implementation, and that dynamic
+evaluation cannot alter it. Do not restore the unconditional JSX exemption.
 
 The unchanged React DaisyUI 5.0.5 Badge source matches both npm source-map text
 and release `94869ab436cb72aea944972a8f931cb9b60e725e`. In the app, two declared
