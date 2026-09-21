@@ -1082,7 +1082,7 @@ export interface NativeTokenReadbackResult {
 
 function scopedTokenPreparation(input: NativeTokenContextInput): NativeTokenPreparation {
   const preparation = prepareNativeTokenContext(input);
-  if (preparation.modes.length !== 1) {
+  if (preparation.modes.length !== 1 && preparation.writeProtocol !== 'explicit-modes-v1') {
     throw new Error('native-token-write-single-mode-required');
   }
   return preparation;
@@ -1140,6 +1140,7 @@ export function emitNativeTokenContextScript(input: NativeTokenContextInput): {
   // A value succession describes an EXISTING collection; it is never created.
   if (input?.allocatedValues !== undefined) throw new Error('native-token-write-value-succession-not-creatable');
   const preparation = scopedTokenPreparation(input);
+  const multiple = preparation.writeProtocol === 'explicit-modes-v1';
   const script = `// GENERATED scoped candidate token creation by the existing token-set writer.
 // Host-owned new collection only. Returned creation objects are NOT independent readback.
 ${nativeTokenReceiptRuntime(preparation)}
@@ -1171,7 +1172,7 @@ try {
   // Capture allocation BEFORE any metadata, mode or value write can fail.
   result.allocation.collection = { id: textId(col?.id), key: textId(col?.key), name: textId(col?.name) };
   result.allocation.modes = Array.isArray(col?.modes) ? col.modes.filter((m) => textId(m?.modeId)).map((m) => ({
-    sourceMode: mode.sourceMode, brand: mode.brand, modeId: m.modeId, name: textId(m.name) || '',
+    sourceMode: mode.sourceMode, brand: mode.brand, modeId: m.modeId, name: textId(m.name) || '',${preparation.modes.some(m => m.nativeSelection) ? '\n    ...(mode.nativeSelection ? { nativeSelection: copy(mode.nativeSelection) } : {}),' : ''}
   })) : [];
   fileGuard();
   if (!textId(col?.id) || !textId(col?.key) || col.name !== PREPARATION.collectionName || col.remote !== false ||
@@ -1183,7 +1184,23 @@ try {
   col.renameMode(lightId, lightName);
   result.allocation.modes[0].name = col.modes[0].name;
   if (col.modes[0].name !== lightName) refuse('created-mode-identity');
-  const existing = new Map(), allocated = new Map();
+${multiple ? `  for (const next of PREPARATION.modes.slice(1)) {
+    fileGuard();
+    if (typeof col.addMode !== 'function') refuse('created-collection-capability');
+    let id;
+    try { id = col.addMode(next.nativeModeName); } catch { refuse('mode-allocation-failed'); }
+    // Preserve the returned identity before validating it or making another call.
+    result.allocation.modes.push({ sourceMode: next.sourceMode, brand: next.brand,
+      modeId: textId(id), name: next.nativeModeName,
+      ...(next.nativeSelection ? { nativeSelection: copy(next.nativeSelection) } : {}) });
+    fileGuard();
+    if (!textId(id) || result.allocation.modes.filter(m => m.modeId === id).length !== 1 ||
+        col.modes.length !== result.allocation.modes.length ||
+        !col.modes.some(m => m.modeId === id && m.name === next.nativeModeName)) refuse('created-mode-identity');
+  }
+  let activeModeId = lightId, activeModeName = lightName;
+  const writtenModes = new Map();
+` : ''}  const existing = new Map(), allocated = new Map();
   const byName = new Map(PREPARATION.variables.map((v) => [v.name, v]));
   const createOwnedVariable = (name, collection, type) => {
     fileGuard();
@@ -1201,14 +1218,26 @@ try {
   };
   const applyValue = (variable, modeId, modeName, value, created) => {
     fileGuard();
-    if (!created || allocated.get(variable.id) !== variable || modeId !== lightId || modeName !== lightName) refuse('existing-value-write');
+    ${multiple ? `if (allocated.get(variable.id) !== variable || modeId !== activeModeId || modeName !== activeModeName)
+      refuse('existing-value-write');
+    const written = writtenModes.get(variable.id) || new Set();
+    if (written.has(modeId)) refuse('duplicate-mode-value-write');
+    written.add(modeId); writtenModes.set(variable.id, written);` : "if (!created || allocated.get(variable.id) !== variable || modeId !== lightId || modeName !== lightName) refuse('existing-value-write');"}
     variable.setValueForMode(modeId, value);
     return true;
   };
   const TOKENS = mode.rows, SKIPPED_VALUES = [];
   ${tokenRowsUpsertRuntime('createOwnedVariable')}
   if (updated !== 0 || skippedValues.length || created !== PREPARATION.variables.length) refuse('incomplete-creation');
-  fileGuard();
+${multiple ? `  for (let index = 1; index < PREPARATION.modes.length; index++) {
+    const mode = PREPARATION.modes[index], lightId = result.allocation.modes[index].modeId,
+      lightName = mode.nativeModeName, darkId = null, TOKENS = mode.rows, SKIPPED_VALUES = [];
+    activeModeId = lightId; activeModeName = lightName;
+    ${tokenRowsUpsertRuntime('createOwnedVariable')}
+    if (created !== 0 || updated !== PREPARATION.variables.length || skippedValues.length) refuse('incomplete-creation');
+  }
+  if ([...allocated.keys()].some(id => writtenModes.get(id)?.size !== PREPARATION.modes.length)) refuse('incomplete-mode-values');
+` : ''}  fileGuard();
   // Identity is assembled from the original allocation records, never from a
   // later name lookup or readback. Keep it even if receipt access now fails.
   result.creationIdentity = { origin: 'created', preparationRevision: PREPARATION.revision, fileKey: PREPARATION.fileKey,

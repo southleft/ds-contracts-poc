@@ -8217,7 +8217,7 @@ and numeric precision. Missing or invalid consuming evidence produces
 `variable-consumer-unresolved`; it does not substitute the collection's first
 mode. A selected alias edge is recorded, but this is not a complete alias graph
 or proof that a theme can be inverted without loss. The existing global variable
-table remains unchanged. These records alone do not qualify a mode-aware inverse.
+table and D.97 conservative mode refusal remain unchanged.
 
 Both readers now capture a uniform native line-height variable binding. It
 overrides a conflicting legacy emitter stamp with `text-binding-conflict`.
@@ -8238,10 +8238,376 @@ Root-slot readback accepts the new evidence field while retaining its existing
 content, layout, paint and behavior guards. The initial metadata rejection and
 the corrected flex/grid readback checks are preserved in that journal.
 
-This is a capture improvement. The converter still drops the hidden empty TEXT
-inside a native content slot; source typography is not yet preserved through
-that return journey. It does not qualify the second-library journey or V1.
+This capture improvement alone does not preserve root typography through the
+return journey. D.99 describes the subsequent bounded template projection and
+its remaining application gaps. Neither qualifies the second-library journey
+or V1.
 To reverse, remove the additive consumer records and native line-height capture
 together with their tests, regenerate the embedded dump and plugin receipt, and
 rederive sync baselines under an explicitly new grammar. Preserve live journals
 and the previous failed consumer; never relabel old evidence as a new capture.
+
+## D.99 Native root text templates still need an application journey
+
+Native fidelity remains unqualified. The live application caller measures
+**8.4314%** against the unchanged 5% limit; template updates and interrupted
+native recovery are still refused. The following evidence establishes bounded
+creation, return and consumer behavior without closing those gaps.
+
+**AGENT decision, integration review 2026-09-21:** when multiple typography
+properties share one source token, each observed property must match its
+independently captured consuming value, exactly or as float32. Review reproduced
+an accepted line-height contradiction because the previous guard checked only
+the font-size field for that shared token. The same canonical capture now
+preserves the valid shared reference and refuses either field's independent
+drift. The before/after checks remain in private
+`native-template-integration-20260921/`. Reversing this guard must also refuse
+shared typography references until every consuming channel can be corroborated;
+checking one property cannot establish the others. No fidelity threshold changed.
+
+The application source adapter now derives the explicit
+`slot.bindings.figma.textTemplate` marker from newly captured direct caller text.
+Fresh observation `a34b7769-50af-4c36-94b1-03dac7eac993` matches both unchanged
+source cases, authenticating 200 property planes and 418 sealed files. Application
+operation `0bab5d79-eb95-45fb-92f5-5820fbdc43c4` creates 100 mains, 153 source
+variables and 54 routing variables in Evaluations; separate token and component
+readbacks verify the complete graph and all 302 native nodes. The plugin was
+closed and the complete canvas inspected. The main set is `90:4384`, on page
+`90:4083`; allocation IDs, independent review and screenshots remain in private
+`native-root-text-template-20260921/app-graph-review-v1.json` and neighboring files.
+The connection needed an explicit second paste into the native field; the same
+operation resumed without allocating a second family.
+Repeating preparation afterward reuses that operation: all 37 existing operation
+and plan files remain byte-identical, event counts do not change, and the app
+offers inspection rather than another creation.
+
+The reusable mains retain empty editable content. Application comparison
+`4555d258-9f47-4fc3-a417-d6dd5d2f19da` creates a separate primary/omitted-size/
+omitted-variant caller on page `90:4401`, instance `90:4403`, using main
+`90:4264`. Independent readback verifies its editable text and unchanged parent
+graph; the closed-plugin canvas was inspected. Its native width is
+51.01599884033203 px against 49.921875 px in the source, with both heights 20 px.
+The original scorer reports 8.4314%; the recorded-origin diagnostic uses a
+different denominator and retains five mismatching pixels outside text. It is
+not a replacement pass. The app measures source text advance at 29.92 px and
+native text box width at 31 px. Read-only font inspection finds different
+variation-axis sets despite the same Inter family name; exact native font bytes
+are not established, and that difference does not explain away the geometry or
+outside-text residual. No source font or threshold was changed. Evidence remains
+in private `native-root-text-template-20260921/app-caller-v1/`.
+
+The same native family returns through canonical capture 1.45 and the app's
+JSON import. Its proposed contract and archive input match an independent
+inverse, preserving 400 original typography references and 500 explicit fields
+across 100 variants. Both legacy unresolved carrier-mode notes remain visible.
+The downloaded archive installs in an isolated consumer with all ten package
+files byte-identical. With the original source font supplied by the host, all
+100 combinations match the original React width, height, font size, weight,
+line height, tracking, paint, padding, border width and four corner radii.
+Changing caller text changes all 100 labels and widths; the visible selected
+variant also changes typography and paint. This compares returned React with
+original React, not with the failing native caller. The archive SHA-256 is
+`93a0a1c077e6e53220ab45882ae607a5712c15bb48fb17b5735cc983b1d3b813`;
+private evidence includes `app-graph-inverse-v3.json`,
+`app-consumer-v1/verification-v2.json` and the inspected consumer screenshot.
+Lossless pixel comparison now passes **100/100** on white at the unchanged 5%
+limit, using the existing application source-validation PNG capture and scorer.
+Maximum antialiasing-aware difference is **0%**; exact-pixel difference reaches
+**29.3860%**. All 100 origins and dimensions agree, and each network-isolated
+replay PNG is byte-identical. The original font asset is supplied by the host;
+the package remains unchanged. This measures returned React against original
+React and does not qualify the failing native caller.
+
+Two declared cohorts of fifty retain all combinations within the declaration's
+existing case cap. The first family-only readiness reports remain archived at
+**0/50 qualified**: their missing-font control could not distinguish local
+Inter fallback. Fresh reports with the explicit web-font witness now pass
+**50/50 each**, with all five corruption controls rejected per representative
+([D.101](#d101-web-font-witnesses-reject-same-family-system-fallback)). All 200
+source/replay PNGs are byte-identical to the previously scored images, and
+all 100 dimensions and painted-font origin witnesses pass. The unchanged pixel
+report and earlier refusal remain in `app-consumer-v1/visual-score-v2.json`
+and `app-consumer-v1/source-validation-v1/`; the new verified receipt is
+`app-consumer-v1/source-validation-v2/cohort-readiness-receipt-v1.json`.
+The visible review includes all pairs and the current readiness result.
+Earlier browser screenshot interfaces returned JPEG data; their failed
+measurement remains in `app-consumer-v1/visual-measurement-refusal-v2.json`.
+
+Reloading the same tab retains one Workspace entry. Manually restoring it and
+preparing the library again produces identical contract and archive bytes.
+One earlier import with Preview selected accepted the contract, then stalled
+during an attempt to clear its 2.6 MB raw textarea; reload and close commands
+also failed. A fresh tab in the same browser, with React output selected before
+import and the raw input subsequently hidden, completed the return. The cause
+of the earlier stall remains unresolved; Preview itself renders and remains
+responsive after restoring the saved import. This intervention is recorded in
+`app-return-recovery-v1.json`; it does not qualify interrupted native recovery,
+cross-tab or browser-restart recovery. Template updates, composed graphs,
+states and complete family fidelity remain unqualified.
+
+**AGENT decision, 2026-09-21.** Property capture version two records each full-page
+image's measured bounds and digest, including fractional origins, and requires
+the bounds to restore after every probe. It rechecks bounds alongside the tree
+and image before sealing a plane. Older archives keep their original capture
+and compilation; the adapter never backfills an origin or infers a template
+marker for them. New complete single-property or matrix observations may add
+the marker only for one direct caller text run with authenticated painted-font
+evidence and typography accepted by the shared compiler. Nested caller elements,
+pseudo content and unsupported typography retain named limitations. Original
+caller text remains absent from the reusable main.
+
+The candidate operation host pins the complete graph in its plan, persists all
+returned allocation IDs before a separate graph read, and provides a component
+writer context only after that read verifies the source and every selector and
+route. Component observation retains the graph input and identities for later
+comparisons. The real companion client has exercised all four phases with a
+native API mock and journal restarts; repeated preparation reuses its reservation
+and changed routing refuses. Partial allocations remain in their immutable
+events and cannot be blindly retried or exposed as verified contexts. Graph
+sizing inspections, updates and interrupted component recovery remain refused.
+The live application run above exercises those four phases with the actual
+companion. The mock interruption probes do not qualify native recovery or visual
+fidelity. Reversal: remove version-two template admission and the optional graph branch of the
+React plan and operation host; preserve existing operation journals and images.
+
+**AGENT decision, 2026-09-21.** An explicit template marker is admitted only for
+one hidden empty TEXT inside the root SLOT, with complete bound font size,
+weight, line height and color. Family, slant, tracking, case and alignment must
+remain invariant. The scoped writer retains the original source variables and
+adds four shared aliases whose targets are selected by the main's native mode.
+It deduplicates identical binding tuples, never merely equal values. This rule
+replaces a failed live projection: separate bindings on each main left edited
+slot text using its former variant's typography. Unscoped writers now refuse
+the marker before allocation. Unsupported mode capacity retains the partial
+allocation identities rather than reporting a successful write.
+The admitted projection selects variants inside one collection. Large source
+matrices can therefore exceed the file's available mode capacity. A separate
+experimental graph transport factors source-binding tuples across two-mode
+selector collections. It retains source aliases and identities, requires the
+complete selector vector for each public variant, and refuses unobserved binary
+addresses. Generated creation and separate ID-based readback have been checked
+in Evaluations for 31 source variables, seven selectors and 54 routing variables;
+an unchanged rerun refuses before allocation. Source and routing picker scopes
+are derived from their text consumers. Variable allocation remains separate from
+component creation. The factored graph now participates in the bounded
+application operation above; repairs and updates remain refused.
+Independent operation scopes can use the same compiler alias names in separate
+collections. A second native allocation and separate readback preserve the first
+graph exactly; names never authorize adopting or updating existing variables.
+
+A subsequent candidate uses the shared component renderer with a separately
+verified graph receipt. The engine re-derives the graph from the fresh contract
+and original token tree; supplied component data or a graph hash grants no write
+authority. Root and text consumers determine picker categories, including alias
+closure; unsupported binding fields refuse. Every main selects the complete
+source and selector mode vector, while its SLOT and hidden TEXT inherit it.
+Independent observation reads the graph before and after the node inventory and
+checks identities, all routing edges, ownership, mode vectors and template
+structure. A routing change during asynchronous font preflight refuses before
+node allocation. Unchanged ordinary writer programs retain their bytes.
+
+In Evaluations, candidate `10f0d730-9f43-44ae-a130-29bb74d104a7` creates 100 mains,
+153 original variables, seven selectors and 54 routing variables. Independent
+readback verifies all 302 native nodes; repeat refuses before allocation. The
+unobstructed canvas shows the empty editable mains. Its source is the unchanged
+DaisyUI observation with the template marker explicitly added for this engineering
+probe. This is not application source admission or a clean consumer/fidelity
+result. That engineering probe did not establish application admission; the
+separate live operation above does. Updates and recovery remain unqualified.
+The subsequent caller and return candidates are described below. The fresh
+application font observation independently verifies 200
+property planes across two cases and all 418 sealed files; it does not infer the
+marker or certify native font metrics.
+
+A graph-backed caller candidate now uses the same comparison renderer and an
+independently verified parent graph. It derives the complete source and selector
+vector from the public variant, proves the direct caller text and all four
+bound typography values against the archived source, and edits the inherited
+TEXT. No new text binding or explicit child mode replaces the main's graph.
+Parent observation runs after asynchronous font loading and before the final
+synchronous duplicate-page check. Missing selectors, substituted aliases, stale
+parent graphs and competing pages refuse before allocation.
+
+Live candidate `3092dfe9-075d-4ada-a5fb-1aa3d71f2e42` uses the sealed original
+`New` text for the info/large/outline variant. Separate readback verifies its
+five native nodes and unchanged parent graph. Switching the same instance to
+primary/small/unset preserves the text and all four carrier IDs while changing
+font size from 16 to 12 and line height from 24 to 16; restoration passes a fresh
+independent read despite Figma assigning the text a new descendant ID. Repeat
+refuses before allocation. The first image pair **fails** the existing 5% bar at
+6.8503%; its native layout width is 59.01599884 against the source's computed
+58.1875 px, with both heights 24 px. This is one engineering comparison, not
+application admission, clean return, or family fidelity qualification. The sealed
+property plane has no layout origin, so an origin-aligned score is not claimed.
+
+**AGENT decision, 2026-09-21.** Verify every required source/selector resolved
+mode and every explicit mode independently. Live Figma omits the unused caller
+collection from resolved modes even when it is explicitly set on the instance;
+that one unused entry may be absent, but must match when present. Extra foreign
+entries, missing selectors and incorrect values refuse. Reversal: remove graph
+caller admission and its `modeVector` from the caller planner, runtime and
+observer. Preserve the failed image pair and original source bytes.
+
+**AGENT decision, 2026-09-21.** Keep the original single-mode source-token identity
+and authenticate routing with a separate graph receipt. Do not represent multiple
+collections as one token identity or replace the shared renderer. Reversal: remove
+the optional `templateGraph` context, engine graph compilation entry point and
+matching observation branch; existing single-collection paths remain unchanged.
+
+The seven-level native research graph exposed a capture gap: selected chains
+were retained, but the global variable collector could not resolve two carrier
+modes. Capture 1.45 adds a separate raw graph for explicit text templates across
+multiple collections: complete member inventories, every raw mode value and
+alias edge, and each main/SLOT/TEXT mode vector. It rereads those facts and names
+a degradation instead of publishing a partial graph when they change. The
+legacy global collector and its unresolved-mode notes remain intact.
+
+The graph inverse reconstructs deterministic routing from original source
+identities and public binding tuples. It checks every selector address, including
+unselected edges, original alias closure and all consumer vectors, then removes
+only verified routing variables from the returned token projection. Source value
+edits remain design data. In the live 100-main capture, all eight collections,
+207 variables and 300 consumer vectors match separate readback. The returned
+contract preserves all 400 typography references and the five compared typography
+fields per variant without minting replacement typography tokens. The separate
+application capture, import and clean consumer described above now exercise
+that bounded return; native fidelity and update qualification remain open.
+
+**AGENT decision, 2026-09-21.** Require complete raw cross-collection evidence for
+this inverse; a selected alias chain or a raised depth limit cannot prove all
+routing edges. Structural inversion does not authorize updates or authenticate
+a rewritten graph against an earlier operation; those require the separately
+persisted host baseline. Preserve optional enum typography bindings through
+`tokensByProp` for verified root text templates, including omission and equal-valued references. The first live
+inverse reminted font size and line height because it discarded a verified
+per-value reference function; the template typography reader now retains it.
+The ordinary historical typography reader keeps its prior representation.
+Expanding the new behavior to ordinary text parts also changed a frozen held-out
+return's token identities and generated CSS. That broader change is outside this
+template admission; its failed comparison remains recorded without rewriting
+the historical fixture or adding a component-specific rule.
+Reversal: remove `templateVariableGraph` capture and its inverse dispatch, and
+restore the string-only stamped typography reader. Keep the earlier failed
+return and image evidence.
+
+New source property observations seal painted-font evidence on every plane and require the
+original font witness to return after each probe. Matrix and single-property
+assembly validate each witness against its raw tree and observation digest,
+then map the actual family on a private compilation clone. Mixed evidence,
+changed witnesses and default/omission family disagreements refuse. Older
+archives retain their original CSS-family interpretation and cannot establish
+painted-font identity for template admission. The source CSS and font bytes are
+unchanged; neither this mapping nor a CSS family spelling certifies native font
+metrics, font asset delivery to a clean React consumer or the fidelity limit.
+
+Plugin capture 1.44 records numeric native weight and complete selected alias
+chains up to 16 edges, including target consuming modes and native values.
+Unverifiable chains name a degradation and are omitted as a whole. REST 1.42
+captures weight identity without inventing consumer-mode evidence. The bounded
+inverse validates all four compiler aliases, corroborates the selected edges,
+and requires original source definitions to agree across modes. It restores
+source token references, including original aliases, without mutating the dump.
+Its source-chain limit remains 10 entries to match the existing token resolver.
+The 1.42 REST grammar transition was re-observed with REST GETs: 25 current
+baselines and six existing pending decisions retain their native fingerprints
+and unresolved status. Historical receipts remain archived. Census regeneration
+changes only named capture-note counts; its generated-code hashes are unchanged.
+
+Caller text may use the template only when the host authenticates a direct DOM
+text run and recompiles its observed content. Equal paint on a descendant
+element is insufficient. The planner checks every typography channel before
+the writer edits the existing template. It leaves parent mode selection on the
+main, records actual slot descendants, and independently verifies inherited
+bindings and modes. Nested content, measured text boxes, stale source evidence,
+comparison recovery and repairs requiring template migration refuse by name.
+
+The retained Evaluations engineering fixture uses the generated token, main,
+caller and readback programs. Its caller switches Small → Large → Small:
+12/20/12 px size, 18/28/18 px line height, 400/700/400 weight and red/blue/red
+paint, retaining the same four binding IDs. The restored independent readback
+passes, the parent remains unchanged, and a rerun refuses before duplicate
+allocation. A canonical main capture produces one return proposal with the
+original source references. Canvas screenshots and all operation IDs are in
+`native-root-text-template-20260921/`. These are synthetic engineering probes,
+not authenticated application journeys or visual-fidelity scores.
+
+Adversarial checks run in `runtime:check` and `source:reference:check`: they
+cover missing and mixed bindings, changed mode/alias identity, inconsistent
+source definitions, unsafe token paths, stale direct-text evidence, altered
+readbacks, mode-allocation failures and duplicate writes. Graph transport checks
+also reject same-valued alias substitution, incomplete selector vectors,
+unowned variables, scope drift and collisions during asynchronous preflight;
+partial failures retain allocation IDs. To reverse, remove
+the optional marker and its planner, scoped writer, inverse and caller support
+together; restore named refusal for nonempty root slots, regenerate derived
+artifacts and retain all failed and successful journals. Do not loosen the
+fidelity threshold or rewrite historical receipts.
+
+## D.100 Source capture must preserve CSS Module imports
+
+Loading an installed React library through source inspection previously treated
+its `.module.css` files as global CSS. That discarded the imported class map:
+the component mounted without its styles and source validation refused it.
+The loader now retains local CSS semantics while hashing the original input
+bytes. Ordinary CSS remains global. The installed package is unchanged.
+
+The application reproduced the failure using its own downloaded React archive;
+after correction, the mounted component matches the original style witnesses.
+The independent regression probe also covers colliding local class names,
+cross-file composition, global CSS, deterministic reference identity and stale
+source detection. Private evidence is in
+`native-root-text-template-20260921/app-consumer-v1/source-validation-v1/`.
+
+A family-only witness cannot distinguish fallback to a local font with the
+same painted family name. Those archived references retain
+`negative-control-not-proven:missing-font`. D.101 adds an explicit web-font
+origin witness and demonstrates fresh passing readiness reports; neither
+pixel similarity nor web origin authenticates font bytes in Figma.
+
+**AGENT decision, 2026-09-21.** Select esbuild's `local-css` loader for
+`.module.css`, preserving the byte-recording hook and all other loader rules.
+This is a source-bundling correction, without a component-specific branch or
+change to the scorer. Reversal: revert the loader selection and its regression
+probe; preserve the failed and corrected reference archives. Existing archived
+references are never rewritten.
+
+## D.101 Web-font witnesses reject same-family system fallback
+
+A family-name check cannot distinguish a required web font from an installed
+system font with the same name. A case may now author `fontOrigin: "web"` in
+its source witness. Every font that paints glyphs must match the declared family
+and report `isCustomFont: true`; system, mixed or missing origin evidence refuses
+with `font-substitution`. The optional witness follows the existing text target,
+including a declared shadow font path or associated label. It is incompatible
+with an explicit text-absence witness. Other declarations retain their original
+family-only semantics and observation shape.
+
+The application probe against the unchanged installed return now finishes
+**1/1 valid**, with all five negative controls rejected. Its missing-font record
+shows Inter painting three glyphs from a custom font before corruption and
+Inter painting three glyphs from a system font afterward. The baseline and
+isolated replay PNGs remain identical to the prior measured image. The old
+family-only refusal is retained. Evidence is in private
+`react-source-validations/27fc7ddeb884d3d14086a18ecfd3cca5b6ca51eab7cbbbada89f4abd782d1b5e/67408aed-771b-4642-8b9a-e3faca0e7e80/`.
+The subsequent complete cohort passes **100/100**, split into two fifty-case
+declarations. Both representatives reject all five corruption controls; their
+font records show the same custom-to-system transition. Every before/after
+source and replay observation reports Inter glyphs painted by a web font, all
+root dimensions match the original, and all 200 PNGs are byte-identical to the
+images already measured at 100/100 under the unchanged 5% pixel limit. Source
+inputs remained unchanged during both captures. The reports and independent
+hash verification are indexed in private
+`native-root-text-template-20260921/app-consumer-v1/source-validation-v2/cohort-readiness-receipt-v1.json`.
+This qualifies source readiness for the installed return, not native Figma
+fonts, the failing native caller, or V1.
+
+**AGENT decision, 2026-09-21.** Use Chromium's painted-font origin evidence only
+when the source declaration explicitly requires web-font rendering. Preserve
+the before/after font records for its missing-font control, keep absence of
+evidence as a refusal, and authenticate the changed witness through the existing
+reference identity. The [Chromium protocol](https://chromium.googlesource.com/devtools/devtools-frontend/+/main/third_party/blink/public/devtools_protocol/browser_protocol.json)
+distinguishes custom from locally resolved fonts; this does not identify a
+particular downloaded font file. No family substitution, source-font change,
+scorer change or tolerance change is introduced. Reversal: remove the optional
+witness, conditional observation and check, and its control evidence; retain
+all archived references and failed or passing reports.

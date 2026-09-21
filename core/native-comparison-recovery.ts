@@ -12,6 +12,7 @@ const fail = (reason: string): never => { throw Error('native-comparison-recover
 export type NativeComparisonRecoveryInput = NativeContractComparisonObservationInput;
 function checkInput(input: NativeComparisonRecoveryInput) {
   const {creation:c,comparison:p}=input, record=c?.comparisons?.[0];
+  if (p.textTemplate) fail('text-template-unqualified');
   if (!c || c.status!=='partial-or-unknown-allocation' || c.allocationAttempted!==true ||
       c.operationId!==input.operation.id || c.fileKey!==input.operation.fileKey || c.target!==null ||
       c.acceptedContract!==null || c.nativeQualification!=='unqualified' ||

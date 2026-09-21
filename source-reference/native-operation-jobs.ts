@@ -50,6 +50,8 @@ import {
   type NativeContractObservationInput,
 } from "../core/native-source-observation.js";
 import type { NativeSourceWriteContext } from "../core/native-source-write.js";
+import {emitNativeTemplateGraphScript,emitNativeTemplateGraphReadbackScript,type NativeTemplateGraphIdentity} from '../core/native-root-text-template-graph-native.js';
+import {acceptTemplateGraphAllocation,observeTemplateGraph} from './native-template-operation.js';
 import {
   emitNativeTokenContextReadbackScript,
   emitNativeTokenContextScript,
@@ -89,6 +91,7 @@ type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
 type InitialPlan = ReturnType<typeof prepareReactInitialNativePlan>;
 type StateApiPlan = ReturnType<typeof prepareReactStateApiNativePlan>;
 type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan;
+const templateGraphPlan = (p: Plan) => 'templateGraph' in p.plan ? p.plan.templateGraph : undefined;
 const isStateApiPlan = (p: Plan): p is StateApiPlan => 'kind' in p.plan && p.plan.kind === 'react-state-api-draft-inspection';
 const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
 const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
@@ -113,6 +116,7 @@ export interface NativeOperationComponentContext {
   planRevision: string;
   journalRevision: string;
   comparisonRecovery?: PreparedNativeComparisonRecovery;
+  templateGraph?: NativeSourceWriteContext['templateGraph'];
 }
 export interface NativeOperationCommand {
   version: 1;
@@ -224,6 +228,7 @@ interface State {
   fixedCrossSizeReadback?: NativeContractObservationInput['fixedCrossSizeReadback'];
   phase: NativeOperationSnapshot["phase"];
   identity?: NativeTokenIdentity;
+  templateGraphIdentity?: NativeTemplateGraphIdentity;
   componentCreation?: Record<string, any>;
   allocationAnchor?: NativeSourceObservationInput["allocationAnchor"];
   componentObservation?: ReturnType<typeof verifyNativeInspectionReadback> | ReturnType<typeof verifyNativeContractComparisonReadback>;
@@ -505,6 +510,13 @@ export function createNativeOperationJobs(
   ) => {
     validatePlan(prepared, id, request);
     const plan = prepared.plan;
+    const graph = templateGraphPlan(plan);
+    if (graph) {
+      const compiled = emitNativeTemplateGraphScript(graph.input);
+      if (!same(graph.input.tokens, plan.plan.tokenInput) || !same(compiled.graph, graph.graph) ||
+          !same(compiled.graph.sourceTokens, plan.plan.tokenPreparation)) fail('template-graph-preparation-changed');
+      return compiled.script;
+    }
     const compiled = emitNativeTokenContextScript(plan.plan.tokenInput);
     if (!same(compiled.preparation, plan.plan.tokenPreparation))
       fail("token-preparation-changed");
@@ -548,7 +560,9 @@ export function createNativeOperationJobs(
   const acceptCreation = (
     result: NativeTokenCreationResult,
     plan: Plan,
-  ): Pick<State, "phase" | "identity" | "problems"> => {
+  ): Pick<State, "phase" | "identity" | "templateGraphIdentity" | "problems"> => {
+    const graph = templateGraphPlan(plan);
+    if (graph) return acceptTemplateGraphAllocation(graph.input, graph.graph.revision, result);
     const invalid = {
       phase: "creation-invalid" as const,
       problems: ["native-operation-creation-result-invalid"],
@@ -620,7 +634,10 @@ export function createNativeOperationJobs(
     result: NativeTokenReadbackResult,
     identity: NativeTokenIdentity,
     plan: Plan,
+    graphIdentity?: NativeTemplateGraphIdentity,
   ): Pick<State, "phase" | "problems"> => {
+    const graph = templateGraphPlan(plan);
+    if (graph) return observeTemplateGraph(graph.input, graphIdentity, result);
     if (
       !object(result) ||
       result.version !== 1 ||
@@ -811,6 +828,7 @@ export function createNativeOperationJobs(
       tokenIdentity: state.identity,
       creation: state.componentCreation,
       allocationAnchor: state.allocationAnchor,
+      ...(templateGraphPlan(plan) ? { templateGraph: { input: templateGraphPlan(plan)!.input, identity: state.templateGraphIdentity! } } : {}),
       ...(state.fixedCrossSizeReadback ? { fixedCrossSizeReadback: structuredClone(state.fixedCrossSizeReadback) } : {}),
     };
   };
@@ -1115,6 +1133,7 @@ export function createNativeOperationJobs(
                     event.envelope.result as NativeTokenReadbackResult,
                     state.identity!,
                     plan,
+                    state.templateGraphIdentity,
                   ));
         if(state.pending.phase==='component-create' && outcome.phase==='component-partial-allocation') state.partialCreation=structuredClone(event.envelope.result);
         if (
@@ -1320,7 +1339,7 @@ export function createNativeOperationJobs(
         loweredCases: isComparisonPlan(loaded.plan) ? 1 : isReactPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
           (c) => c.status === "lowered",
         ).length,
-        variables: loaded.plan.plan.tokenPreparation.variables.length,
+        variables: loaded.plan.plan.tokenPreparation.variables.length + (templateGraphPlan(loaded.plan)?.graph.routes.length ?? 0),
       },
       problems: [
         ...loaded.state.problems,
@@ -1504,6 +1523,7 @@ export function createNativeOperationJobs(
     if (loaded.state.pending) fail("native-outcome-unknown");
     if (inspectSizing && (phase !== 'component-readback' || loaded.state.phase !== 'component-structure-observed'))
       fail('sizing-observation-precondition-invalid');
+    if (inspectSizing && templateGraphPlan(loaded.plan)) fail('template-graph-sizing-unqualified');
     const fixedCrossSizeReadback = phase === 'component-readback'
       ? inspectSizing ? sizingReadbackScope(loaded.state, loaded.plan) : loaded.state.fixedCrossSizeReadback
       : undefined;
@@ -1521,7 +1541,9 @@ export function createNativeOperationJobs(
       if (!loaded.state.identity) fail("allocation-identity-unavailable");
       // Readback remains available for known allocations after source changes.
       // It cannot authorize a write or advance a source/component baseline.
-      script = emitNativeTokenContextReadbackScript(
+      const graph = templateGraphPlan(loaded.plan);
+      if (graph && !loaded.state.templateGraphIdentity) fail('template-graph-allocation-identity-unavailable');
+      script = graph ? emitNativeTemplateGraphReadbackScript(graph.input, loaded.state.templateGraphIdentity!) : emitNativeTokenContextReadbackScript(
         loaded.plan.plan.tokenInput,
         loaded.state.identity,
       );
@@ -1681,7 +1703,7 @@ export function createNativeOperationJobs(
     if (event?.kind !== "result") fail("verified-token-observation-required");
     const result = event.envelope.result as NativeTokenReadbackResult;
     if (
-      observe(result, loaded.state.identity, loaded.plan).phase !==
+      observe(result, loaded.state.identity, loaded.plan, loaded.state.templateGraphIdentity).phase !==
         "tokens-observed" ||
       !result.receipt
     )
@@ -1693,8 +1715,9 @@ export function createNativeOperationJobs(
       tokens: {
         input: loaded.plan.plan.tokenInput,
         identity: loaded.state.identity,
-        receipt: result.receipt,
+        receipt: templateGraphPlan(loaded.plan) ? (result.receipt as any).source : result.receipt,
       },
+      ...(templateGraphPlan(loaded.plan) ? { templateGraph: { identity: loaded.state.templateGraphIdentity!, receipt: result.receipt as any } } : {}),
     });
   };
   return {

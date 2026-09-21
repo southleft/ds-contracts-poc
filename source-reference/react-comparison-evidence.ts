@@ -12,6 +12,7 @@ import { recompileSavedObservedContent } from './observed-content.js';
 import type { NativeContractObservationInput, NativeSourceReadback } from '../core/native-source-observation.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 import {reactComparisonInstanceWidth,reactComparisonContainerWidth} from './react-comparison-context.js';
+import { reactRootTextCallerEvidence } from './react-root-text-caller.js';
 
 export function selectReactComparisonRequest(repoRoot: string, reference: ReactReference, root: ReactNativeRequest, parentOperationId: string, composition?: ReturnType<typeof readReactCompositionEvidence>): ReactComparisonRequest {
   const saved = readReactContentInspection(repoRoot, reference, root, parentOperationId);
@@ -70,6 +71,7 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   const containerWidth=variant.spec.rootFillWidth ? reactComparisonContainerWidth(captured.tree,origin) : undefined;
   return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.composition ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0],
+      ...(parent.input.projection.rootTextTemplate ? { rootText: reactRootTextCallerEvidence(captured.tree, content) } : {}),
       ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(containerWidth!==undefined ? {containerWidth} : {}), ...(request.composition ? { instances: composition!.references } : {}) } };
 }
 

@@ -1,3 +1,6 @@
+import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
+import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
+import { verifyNativeTemplateGraphReceipt, emitNativeTemplateGraphReadbackScript, type NativeTemplateGraphIdentity, type NativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
 import { prepareNativeComparisonRecovery, emitNativeComparisonRecoveryReadbackScript, type PreparedNativeComparisonRecovery } from './native-comparison-recovery.js';
 import { nativeComparisonDependencies } from './native-contract-comparison.js';
 import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
@@ -34,6 +37,9 @@ export interface NativeSourceWriteContext {
   comparisons?: NativeSourceComparisonInput;
   /** Host-authenticated partial allocation plus independent empty-instance preflight. */
   comparisonRecovery?: PreparedNativeComparisonRecovery;
+  /** Candidate-only component transport. The engine derives the graph again;
+   * these are allocated identities and a separate read, never supplied specs. */
+  templateGraph?: { identity: NativeTemplateGraphIdentity; receipt: NativeTemplateGraphReceipt };
 }
 
 export function prepareNativeSourceWrite(
@@ -42,6 +48,7 @@ export function prepareNativeSourceWrite(
   boundNames: string[],
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
   contractComparison?: PreparedNativeContractComparison,
+  templateGraphInput?: NativeRootTextTemplateGraphInput,
 ) {
   const fail = (code: string): never => {
     throw Error(`native-source-write-${code}`);
@@ -58,16 +65,26 @@ export function prepareNativeSourceWrite(
   if (!tokens?.input || !tokens.identity || !tokens.receipt)
     fail("token-observation-required");
   const input = tokens.input;
+  const template = 'kind' in projection ? projection.rootTextTemplate : undefined;
+  const graphSidecar = context.templateGraph;
+  if (!!graphSidecar !== !!templateGraphInput || graphSidecar && (!template || comparisons || contractComparison || context.comparisonRecovery))
+    fail('template-graph-context-unqualified');
+  const graph = templateGraphInput ? planNativeRootTextTemplateGraph(templateGraphInput) : undefined;
+  if (graph && (templateGraphInput!.renderScope !== 'component' || canonicalJson(templateGraphInput!.tokens) !== canonicalJson(input) ||
+      canonicalJson(graph.template) !== canonicalJson(template) || canonicalJson(graphSidecar!.identity.source) !== canonicalJson(tokens.identity) ||
+      canonicalJson(graphSidecar!.receipt.source) !== canonicalJson(tokens.receipt))) fail('template-graph-context-changed');
+  if (graph) verifyNativeTemplateGraphReceipt(templateGraphInput!, graphSidecar!.identity, graphSidecar!.receipt);
+  if (template && !graph) verifyRootTextTemplateTokenContext(input, template);
   if (
     input.fileKey !== operation.fileKey ||
     input.scopeId !== `source-${operation.id}` ||
     input.source.revision !== projection.source.revision ||
     input.source.sourceProgramSha256 !== projection.source.programSha256 ||
-    input.modes.length !== 1 ||
+    ((!template || graph) && input.modes.length !== 1) ||
     input.modes[0].sourceMode !== projection.context.mode ||
     input.modes[0].brand !== projection.context.brand ||
-    input.modes[0].tokenTreeRevision !== ('kind' in projection
-      ? projection.tokenRevision : projection.binding.tokenRevision) ||
+    ((!template || graph) && input.modes[0].tokenTreeRevision !== ('kind' in projection
+      ? projection.tokenRevision : projection.binding.tokenRevision)) ||
     tokens.identity.origin !== "created"
   )
     fail("token-source-context");
@@ -80,10 +97,15 @@ export function prepareNativeSourceWrite(
     fail("token-observation-refused");
   const preparation = prepareNativeTokenContext(input);
   const names = new Set(preparation.variables.map((v) => v.name));
+  if (graph) for (const route of graph.routes) {
+    if (names.has(route.name)) fail('template-graph-name-ambiguous');
+    names.add(route.name);
+  }
   if (boundNames.some((name) => !names.has(name)))
     fail("token-binding-outside-scope");
   const dependencies = contractComparison ? nativeComparisonDependencies(contractComparison) : undefined;
   const recovery = context.comparisonRecovery;
+  if (recovery && contractComparison?.textTemplate) fail('text-template-recovery-unqualified');
   if (recovery) {
     const checked = prepareNativeComparisonRecovery(recovery.input, recovery.observation);
     if (!contractComparison || canonicalJson(checked) !== canonicalJson(recovery) ||
@@ -109,9 +131,18 @@ export function prepareNativeSourceWrite(
     ...(recovery ? { recovery: { revision: recovery.revision, creation: recovery.input.creation, observation: recovery.observation } } : {}),
     identity: tokens.identity,
     receipt: tokens.receipt,
+    ...(graph ? { templateGraph: {
+      graph, identity: graphSidecar!.identity, receipt: graphSidecar!.receipt,
+      selections: Object.fromEntries(graph.template.variants.map(variant => {
+        const selected = nativeRootTextTemplateGraphSelection(graph, variant.name);
+        return [variant.name, Object.fromEntries([[tokens.identity.collection.id, tokens.identity.modes[0].modeId],
+          ...graphSidecar!.identity.selectors.map(s => [s.id, s.modes[Number(selected[s.selector])].modeId])])];
+      })),
+    } } : {}),
     ...(contractComparison ? { contractComparison: {
       caseId: contractComparison.caseId, mainId: contractComparison.mainId,
       variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
+      ...(contractComparison.textTemplate ? { textTemplate: contractComparison.textTemplate } : {}),
       ...(contractComparison.instanceWidth !== undefined ? {instanceWidth:contractComparison.instanceWidth} : {}),
       ...(contractComparison.containerWidth !== undefined ? {containerWidth:contractComparison.containerWidth} : {}),
       ...(contractComparison.contentSpecPath ? { contentSpecPath: contractComparison.contentSpecPath } : {}),
@@ -148,6 +179,7 @@ export function prepareNativeSourceWrite(
       input,
       tokens.identity,
     ),
+    graphReadbackScript: graph ? emitNativeTemplateGraphReadbackScript(templateGraphInput!, graphSidecar!.identity) : undefined,
     sampleSpecs: comparisons?.specs ?? contractComparison?.specs ?? [],
     comparisonNestedReadbackScripts: dependencies?.parents.map(ref => emitNativeContractReadbackScript(ref.parent)),
     comparisonParentReadbackScript: contractComparison ? emitNativeContractReadbackScript(contractComparison.parent) : undefined,
@@ -174,7 +206,7 @@ const NATIVE_RESULT = { version: 1, status: 'refused', acceptedContract: null,
   pageId: null, target: null, nodes: [], problems: [] };
 let NATIVE_PAGE = null;
 let NATIVE_VARIABLES = [];
-let NATIVE_COLLECTION = null;
+let NATIVE_COLLECTION = null;${prepared.descriptor.templateGraph ? '\nlet NATIVE_GRAPH_COLLECTIONS = [];' : ''}
 const nativeCanonical = (v) => JSON.stringify((function order(x) {
   if (Array.isArray(x)) return x.map(order);
   if (!x || typeof x !== 'object') return x;
@@ -207,7 +239,22 @@ function nativeInit(node, spec) {
   for (const child of svgDescendants) nativeRetain(child);
   nativeOwn(node);
   if (spec.type !== 'slot') NATIVE_PAGE.appendChild(node);
-  node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
+  ${prepared.descriptor.templateGraph ? `if (spec.nativeContractPart && spec.nativeContractPart.specPath.length === 0) {
+    const modes = NATIVE.templateGraph.selections[spec.nativeContractPart.variant];
+    if (!modes) nativeRefuse('template-graph-selection');
+    for (const collection of [NATIVE_COLLECTION, ...NATIVE_GRAPH_COLLECTIONS]) {
+      if (!collection || !modes[collection.id]) nativeRefuse('template-graph-selection');
+      node.setExplicitVariableModeForCollection(collection, modes[collection.id]);
+    }
+  } else if (!spec.rootSlotContent && !spec.slotTextTemplate) nativeRefuse('template-graph-node-unqualified');` : 'kind' in prepared.descriptor.projection && prepared.descriptor.projection.rootTextTemplate ? `const template = NATIVE.projection.rootTextTemplate;
+  if (spec.nativeContractPart && spec.nativeContractPart.specPath.length === 0) {
+    const selected = template.variants.find(v => v.name === spec.nativeContractPart.variant);
+    const mode = selected && NATIVE.identity.modes.find(m => m.nativeSelection?.planRevision === template.revision && m.nativeSelection.modeKey === selected.modeKey);
+    if (!mode) nativeRefuse('template-mode-selection');
+    node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, mode.modeId);
+  } else if (!spec.rootSlotContent && !spec.slotTextTemplate) {
+    node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
+  }` : 'node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);'}
   ${'kind' in prepared.descriptor.projection
     ? "if (spec.nativeContractPart) node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(spec.nativeContractPart));\n  else " : ''}if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
   else if (spec.nativeSourceSample || spec.nativeContractSample) {
@@ -235,7 +282,12 @@ function nativeCheckTokens(observed) {
   if (observed.status !== 'readback-collected' ||
       nativeCanonical(observed.receipt) !== nativeCanonical(NATIVE.receipt)) nativeRefuse('tokens-changed');
 }
-${prepared.descriptor.contractComparison ? `async function nativeCheckComparisonParent() {
+${prepared.descriptor.templateGraph ? `async function nativeCheckTemplateGraph() {
+  const observed = await (async () => { ${prepared.graphReadbackScript}\n })();
+  nativeFileGuard();
+  if (observed.status !== 'readback-collected' || nativeCanonical(observed.receipt) !== nativeCanonical(NATIVE.templateGraph.receipt)) nativeRefuse('template-graph-changed');
+}
+` : ''}${prepared.descriptor.contractComparison ? `async function nativeCheckComparisonParent() {
   const observed = await (async () => {
 ${prepared.comparisonParentReadbackScript}
   })();
@@ -260,7 +312,15 @@ ${prepared.comparisonParentReadbackScript}
   await figma.loadAllPagesAsync();
   nativeFileGuard();
   NATIVE_COLLECTION = await figma.variables.getVariableCollectionByIdAsync(NATIVE.identity.collection.id);
-  NATIVE_VARIABLES = await Promise.all(NATIVE.identity.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));
+  NATIVE_VARIABLES = await Promise.all(NATIVE.identity.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));${prepared.descriptor.templateGraph ? `
+  NATIVE_GRAPH_COLLECTIONS = await Promise.all(NATIVE.templateGraph.identity.selectors.map(s => figma.variables.getVariableCollectionByIdAsync(s.id)));
+  const routes = await Promise.all(NATIVE.templateGraph.identity.routes.map(v => figma.variables.getVariableByIdAsync(v.id)));
+  nativeFileGuard();
+  if (NATIVE_GRAPH_COLLECTIONS.some((c, i) => !c || c.id !== NATIVE.templateGraph.identity.selectors[i].id || c.key !== NATIVE.templateGraph.identity.selectors[i].key) ||
+      routes.some((v, i) => !v || v.id !== NATIVE.templateGraph.identity.routes[i].id || v.key !== NATIVE.templateGraph.identity.routes[i].key)) nativeRefuse('template-graph-identity');
+  NATIVE_VARIABLES.push(...routes);
+  if (new Set(NATIVE_VARIABLES.map(v => v.name)).size !== NATIVE_VARIABLES.length) nativeRefuse('template-graph-name-ambiguous');
+  ` : ''}
   await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
   for (const font of ${draftFonts.length ? JSON.stringify(draftFonts) : 'comparison ? comparison.fonts : []'}) {
     let loaded = false;
@@ -269,7 +329,7 @@ ${prepared.comparisonParentReadbackScript}
     }
     if (!loaded) nativeRefuse('${draftFonts.length ? 'draft-font-unavailable' : 'comparison-font-unavailable'}');
   }
-  nativeCheckTokens(await nativeReadTokens());
+  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}${prepared.descriptor.contractComparison?.textTemplate?.modeVector ? '\n  await nativeCheckComparisonParent();' : ''}
   nativeFileGuard();
   for (const page of figma.root.children) {
     if (page.name === NATIVE.pageName${prepared.descriptor.recovery ? ' && page.id !== NATIVE.recovery.creation.pageId' : ''}) nativeRefuse('page-name-collision');
@@ -284,7 +344,7 @@ ${prepared.comparisonParentReadbackScript}
       if (node.getSharedPluginData('ds_contracts', 'contractId') === NATIVE.machineId) nativeRefuse('scope-collision');
     }
   }
-  ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
+  ${prepared.descriptor.contractComparison && !prepared.descriptor.contractComparison.textTemplate?.modeVector ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
   ${prepared.descriptor.recovery ? `NATIVE_PAGE = await figma.getNodeByIdAsync(NATIVE.recovery.creation.pageId); nativeFileGuard();
   const recoveryObserved = await (async()=>{${prepared.recoveryReadbackScript}})();
   nativeFileGuard();
@@ -305,7 +365,7 @@ ${prepared.comparisonParentReadbackScript}
 ${render}
   })();
   nativeFileGuard();
-  nativeCheckTokens(await nativeReadTokens());
+  nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
   ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent();' : ''}
   // Slot content can become instance-derived clones after this run. Preserve
   // both the allocation stamp and its exact role under a stable slot root.
