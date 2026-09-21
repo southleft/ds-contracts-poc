@@ -48,7 +48,7 @@
  */
 import { packageReactLibrary } from './package-react-library.js';
 import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
-import { sourceEquivalentTransitions } from './design-consumer-variants.js';
+import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -712,6 +712,16 @@ async function main() {
       : fileKey ? await fetchFigmaImages(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'figma-images-unavailable' as const, reason: 'no fileKey in dump', files: {}, frames: {} as Record<string,FigmaFrame>, framingRefusal: 'no fileKey in dump' };
     for (const row of receipt.cases) row.nodeId = cases.find(c => c.key === row.key)?.nodeId ?? null;
     const sourceImages: Record<string, Buffer> = Object.fromEntries(Object.entries(figma.files).map(([id, file]) => [id, readFileSync(file)]));
+    for (const row of receipt.behavior.states ?? []) {
+      if (!row.reached || row.paintChanged) continue;
+      const inert = problems.indexOf(`state-inert:${row.state}:${row.key}`);
+      if (inert < 0) continue; // Never dismiss not-carried or unreachable states.
+      const [equivalent] = sourceEquivalentStateTransitions(cases, [row.key], sourceImages, figma.frames);
+      if (!equivalent) continue;
+      row.sourceEquivalentToRest = equivalent;
+      row.paintExpectation = 'same as rest: exact source PNG bytes and relative geometry';
+      problems.splice(inert, 1);
+    }
     for (const row of receipt.behavior.variants ?? []) {
       const unchanged = row.cellsSwitched.filter((key: string) => !row.cellsChanged.includes(key));
       const equivalent = sourceEquivalentTransitions(cases, row.prop, row.switchedTo, unchanged, sourceImages, figma.frames);

@@ -91,12 +91,12 @@
   outline-color: var(--imported-button-root-outline-color-secondary);
 }
 
-.root:active:not(:disabled) {
-  background-image: var(--imported-button-root-background-image-state-active);
+.root:hover:not(:disabled) {
+  background-image: var(--imported-button-root-background-image-state-hover);
 }
 
-.root:disabled {
-  opacity: var(--imported-button-root-opacity-state-disabled);
+.root:active:not(:disabled) {
+  background-image: var(--imported-button-root-background-image-state-active);
 }
 
 .variant-primary:focus-visible {
@@ -123,8 +123,8 @@
   outline-width: var(--imported-button-root-outline-width-state-focus-visible);
 }
 
-.root:hover:not(:disabled) {
-  background-image: var(--imported-button-root-background-image-state-hover);
+.root:disabled {
+  opacity: var(--imported-button-root-opacity-state-disabled);
 }
 
 .root:disabled {

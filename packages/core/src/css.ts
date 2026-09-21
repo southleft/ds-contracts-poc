@@ -10,6 +10,7 @@ import {jointTokenCss} from './joint-tokens.js';
  * @ds-contracts/schema only.
  */
 import {
+  CONTRACT_STATES,
   PSEUDO_ELEMENT_CHANNELS,
   REF_OVERRIDE_CHANNELS,
   refOverrideVar,
@@ -453,7 +454,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   }
 
   const enumRules = new Map<string, Map<string, string>>(); // class → decls
-  const stateRules: string[] = [];
+  const stateRules: Array<{ state: string; css: string }> = [];
   const rootSubRules: string[] = [];
 
   // Bool-conditioned ROOT tokens (mint bool-axis carriage — the axis-inert
@@ -792,7 +793,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       const phs = placeholdersIn(refPath);
       if (phs.length === 0) {
         if (checkToken(refPath, `anatomy.root.states.${state}.${cssProp}`)) {
-          stateRules.push(`\n.root${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+          stateRules.push({ state, css: `\n.root${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}` });
         }
         continue;
       }
@@ -802,7 +803,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       // byte-identical to the former single-axis branch.
       for (const { combo, resolved } of expandRef(`anatomy.root.states.${state}.${cssProp}`, refPath)) {
         if (!checkToken(resolved, `anatomy.root.states.${state}.${cssProp}`)) continue;
-        stateRules.push(`\n.${comboCls(combo)}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+        stateRules.push({ state, css: `\n.${comboCls(combo)}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}` });
       }
     }
   }
@@ -818,11 +819,17 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
         if (!checkToken(refPath, `anatomy.root.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
-        stateRules.push(`\n.${entry.prop}-${value}${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+        stateRules.push({ state: entry.state, css: `\n.${entry.prop}-${value}${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}` });
       }
     }
   }
-  lines.push(...stateRules);
+  // Equal-specificity state rules follow the interaction order regardless of
+  // whether a ref is uniform, substituted or per-value. A later hover map
+  // must not override an active reset. Stable sorting retains the per-value
+  // override order WITHIN one state.
+  const stateOrder: readonly string[] = CONTRACT_STATES;
+  stateRules.sort((a, b) => stateOrder.indexOf(a.state) - stateOrder.indexOf(b.state));
+  lines.push(...stateRules.map(rule => rule.css));
   // v15 declaredStates on the root: verbatim state-selector rules, emitted
   // after the token state rules (a declared fact never shadows a binding —
   // they carry disjoint channels by the validateContract ambiguity rule).
