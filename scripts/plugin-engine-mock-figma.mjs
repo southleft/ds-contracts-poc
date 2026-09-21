@@ -91,7 +91,20 @@ export function createFigmaMock(options = {}) {
         },
       });
       this.parent = null;
-      this.explicitVariableModes = {};
+      // Consumer-mode tests opt in: adding fields to every legacy mock node
+      // would rewrite old operation snapshots and their pinned programs.
+      if (options.consumerVariableModes) {
+        this.explicitVariableModes = {};
+        Object.defineProperty(this, 'resolvedVariableModes', { configurable: true, get: () => ({
+          ...Object.fromEntries(collections.map(c => [c.id, c.modes[0].modeId])),
+          ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes,
+        }) });
+        this.setExplicitVariableModeForCollection = (collection, modeId) => {
+          const id = typeof collection === 'string' ? collection : collection.id;
+          if (!collections.find(c => c.id === id)?.modes.some(m => m.modeId === modeId)) throw Error('unknown variable mode');
+          this.explicitVariableModes[id] = modeId;
+        };
+      }
       this.removed = false;
       this.visible = true;
       this.opacity = 1;
@@ -922,17 +935,6 @@ export function createFigmaMock(options = {}) {
 
     getPluginData(key) {
       return this._shared.get(`\u0000/${key}`) ?? '';
-    }
-
-    get resolvedVariableModes() {
-      return { ...Object.fromEntries(collections.map(c => [c.id, c.modes[0].modeId])),
-        ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes };
-    }
-
-    setExplicitVariableModeForCollection(collection, modeId) {
-      const id = typeof collection === 'string' ? collection : collection.id;
-      if (!collections.find(c => c.id === id)?.modes.some(m => m.modeId === modeId)) throw Error('unknown variable mode');
-      this.explicitVariableModes[id] = modeId;
     }
 
     setBoundVariable(field, variable) {
