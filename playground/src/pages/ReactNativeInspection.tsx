@@ -42,6 +42,7 @@ function updateProblem(problem: string) {
   if (name === 'native-update-token-value-conflict') return `Variable ${nodeId}: its value is neither the saved value nor the proposed value. It was edited in Figma; this update will not overwrite it.`;
   if (name === 'native-update-token-bound') return `Variable ${nodeId} is now bound to a node or aliased by another variable. Changing its value would change that design, so this update will not write it.`;
   if (name === 'native-update-token-variable-missing' || name === 'native-update-token-variable-identity') return `Variable ${nodeId} no longer exists in this operation's own collection as a number variable.`;
+  if (/^native-template-write-(?:consumer-)?(?:baseline|live)-conflict$/.test(name)) return 'The component or caller does not match its saved observation. The update stopped before assigning values. Inspect the difference before retrying.';
   if (name.endsWith('-conflict')) return `${nodeId ? `Node ${nodeId}: t` : 'T'}he property this update changes holds a value that is neither the saved value nor the proposed value. It was edited in Figma; this update will not overwrite it.`;
   return problem;
 }
