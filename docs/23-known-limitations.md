@@ -8600,3 +8600,38 @@ particular downloaded font file. No family substitution, source-font change,
 scorer change or tolerance change is introduced. Reversal: remove the optional
 witness, conditional observation and check, and its control evidence; retain
 all archived references and failed or passing reports.
+
+### D.102 Source repair previews check the complete recorded finite domain
+
+**AGENT decision — 2026-09-21.** A bounded root-opacity repair can propose
+exact utility-class edits in an authenticated original React declaration. The
+host rebuilds its CSS in a new private workspace, then exercises every initial
+state mapped to the existing native component. Exactly one candidate must
+produce the requested opacity in every changed state while preserving every
+other recorded tree, ownership, font, geometry and content fact. Unchanged
+states must retain identical PNG bytes. Auxiliary observations authenticate
+their own tree and style revisions before comparing their measured facts;
+a changed class token necessarily changes those input revisions.
+
+A fresh twelve-state source probe rejects the group-conditioned utility and
+selects the disabled utility: four disabled states change opacity from 0.5 to
+0.6, and eight other states preserve identical images. Original source and CSS
+remain unchanged. This is an engineering preview result, not a completed
+application journey or source write. The earlier sealed observation lacked
+pseudo-box geometry and correctly refused; its fresh successor is separate
+evidence and has not silently replaced the native operation's source pin.
+
+The preview service and UI accept only an existing source/native pair and its
+current recorded design read. The host must configure relative
+`DS_CONTRACTS_REACT_SOURCE_CSS_INPUT` and
+`DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT` paths for a supported CSS rebuild.
+Original CSS must reproduce byte for byte before staging. Source project
+build scripts are not executed. Competing edits, changed inputs, incomplete
+states and zero or multiple matching candidates refuse. Preview evidence is
+preserved privately; after a server restart a new preview is required.
+
+Automatic original-file application, other callers and interaction coverage,
+interrupted source-write recovery and live two-way acceptance remain undone.
+The preview offers no apply action. Reversal removes the repair routes, UI and
+source-repair modules together, retaining the native design-read and source
+succession journals and every failed or successful private probe.

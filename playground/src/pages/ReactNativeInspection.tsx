@@ -1,4 +1,5 @@
 import { nativeImageFraming } from '../native-image-framing';
+import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useState } from 'react';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
@@ -230,6 +231,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                   <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Nothing was written and nothing is accepted. To carry a change to React, change the source so it renders the observed value, then follow the changed source: when both sides agree the update verifies without writing to Figma. To keep the code's value instead, restore it on the canvas. Until then, a code update that touches the same property is refused by name.</p>
                   <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Node</th><th>Property</th><th>Verified value</th><th>On the canvas now</th></tr></thead>
                     <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td>{/^(variable|collection):/.test(change.channel) ? 'Variable' : <a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a>}</td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
+                  <ReactSourceRepairPreview endpoint={`${root}/native-operation/${id}/update/${update.id}/source-repair`} />
                 </> : <p>The canvas matches the verified values: no design changes since verification.</p>)}
               </section>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>
