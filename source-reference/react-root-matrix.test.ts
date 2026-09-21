@@ -21,7 +21,11 @@ import {revisionOf} from '../core/contract-provenance.js';
 import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
-import {evidenceSha} from './react-validation-evidence.js';
+import {evidenceSha,inventoryEvidence} from './react-validation-evidence.js';
+import {readReactNativeEvidence,selectReactNativeRequest} from './react-native-evidence.js';
+import {builtinReactCohort} from './react-cohort.js';
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
+import type {ReactOwnershipReport} from './react-ownership-run.js';
 import {prepareReactRootTextTemplate} from './react-root-text-template.js';
 
 for(const joint of ['paint','opacity',false] as const)test(`optional root axes ${joint==='paint'?'carry complete joint paint tables':joint==='opacity'?'retain unsupported joint-binding refusals':'still compile independently factored paint'}`,async()=>{
@@ -63,6 +67,38 @@ export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'sol
    assert.ok(draft.native!.variants.every(v=>v.spec.fill),'independent paint is retained in every omitted/set combination');
    assert.equal(draft.contract!.anatomy.root.slot!.bindings?.figma?.textTemplate,true);
    assert.ok(draft.native!.variants.every(v=>v.spec.children?.[0].children?.[0].characters===''));
+   if(joint===false){
+    // Real observed matrices are reassembled under the retained allocation
+    // identity. Source snapshots remain sealed and content-derived by default.
+    const identity='observed.react-matrix-0123456789abcdef';
+    const retained=assembleReactRootMatrix(program,ownership,tree,effects,snapshots,identity);
+    assert.equal(retained.draft!.contract!.id,identity);
+    assert.equal(retained.draft!.contract!.name,'RootMatrix0123456789abcdef');
+    assert.deepEqual([...flattenTokens(retained.draft!.tokens!).values()], [...flattenTokens(draft.tokens!).values()]);
+    assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,snapshots,'observed.react-initial-0123456789abcdef').draft!.problems,
+      ['react-root-matrix-identity-invalid']);
+    const reference={id:'a'.repeat(64),files:program.files,javascript:'',css:'',cohort:builtinReactCohort,sourceRoot:dir};
+    const report:ReactOwnershipReport={id:'10000000-0000-4000-8000-000000000001',referenceId:reference.id,state:'complete',acceptedContract:null,
+      denominator:1,matched:1,sourceUnchanged:true,rows:[{id:'button-default',matched:true,problems:[],treeSha256:evidenceSha(JSON.stringify(tree)),ownership,propertyMatrix:effects,rootMatrix:result}]};
+    const archive=path.join(dir,'private/react-source-ownership',reference.id,report.id);
+    const snapshotDir=path.join(archive,'button-default/matrix');mkdirSync(snapshotDir,{recursive:true});
+    writeFileSync(path.join(archive,'program.json'),JSON.stringify(program));
+    writeFileSync(path.join(archive,'report.json'),JSON.stringify(report));
+    writeFileSync(path.join(archive,'button-default/source-tree.json'),JSON.stringify({status:'captured',problems:[],tree,treeSha256:evidenceSha(JSON.stringify(tree))}));
+    for(const [id,snapshot] of Object.entries(snapshots))writeFileSync(path.join(snapshotDir,id+'.json'),JSON.stringify(snapshot));
+    writeFileSync(path.join(archive,'integrity.json'),JSON.stringify({version:1,files:inventoryEvidence(archive)}));
+    const request=selectReactNativeRequest(dir,report,'button-default'),saved=inventoryEvidence(archive);
+    assert.equal(revisionOf(readReactNativeEvidence(dir,reference,request).matrix),revisionOf(result));
+    assert.deepEqual(readReactNativeEvidence(dir,reference,request,identity).matrix,retained);
+    withEvidenceReadSnapshot(()=>{
+      assert.equal(readReactNativeEvidence(dir,reference,request,identity).matrix.draft!.contract!.id,identity);
+      assert.equal(readReactNativeEvidence(dir,reference,request).matrix.draft!.contract!.id,draft.contract!.id);
+    });
+    assert.deepEqual(inventoryEvidence(archive),saved);
+    assert.throws(()=>readReactNativeEvidence(dir,reference,request,'unowned'),/matrix-identity-invalid/);
+    writeFileSync(path.join(snapshotDir,effects.rows[0].id+'.json'),'{}');
+    assert.throws(()=>readReactNativeEvidence(dir,reference,request,identity),/evidence-unavailable/);
+   }
    const legacyRows=structuredClone(effects),legacySnapshots=structuredClone(snapshots);
    for(const row of legacyRows.rows){delete row.propertyCaptureVersion;delete legacySnapshots[row.id].propertyCaptureVersion;}
    const legacy=assembleReactRootMatrix(program,ownership,tree,legacyRows,legacySnapshots).draft!;
