@@ -19,6 +19,7 @@ import {
   STYLES_WHEN_ALLOWED,
   absentVariantIssues,
   isNativeCheckablePart,
+  hasComponentGrow,
   statePreviewSubstProps,
   tokensByPropEntries,
   VOID_ELEMENTS,
@@ -46,6 +47,7 @@ import {
   topRootNames,
   topRoots,
 } from './anatomy.js';
+import { contractApiNames } from './prop-collision.js';
 import { ELEMENT_META } from './elements.js';
 import {jointTokenTableErrors} from './joint-tokens.js';
 
@@ -371,9 +373,38 @@ export function validateContract(
           }
         }
       }
-      if (part.component) {
+      if (part.component && Object.values(lbp.map).some(value => Object.keys(value).some(key => !['grow', 'growBasis'].includes(key)))) {
         errors.push(`${contract.id}: part "${name}" is a component instance — layoutByProp cannot restyle it (the child contract owns its layout)`);
       }
+    }
+    if (part.layout?.growBasis !== undefined && part.layout.grow !== true)
+      errors.push(`${contract.id}: part "${name}" layout.growBasis requires grow: true`);
+    for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
+      if (override.growBasis !== undefined && (override.grow ?? part.layout?.grow) !== true)
+        errors.push(`${contract.id}: part "${name}" layoutByProp.${value}.growBasis requires grow: true`);
+    }
+    const zeroGrowth = part.layout?.growBasis === 'zero' || Object.values(part.layoutByProp?.map ?? {}).some(value => value.growBasis === 'zero');
+    if (zeroGrowth || hasComponentGrow(part) || Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow !== undefined)) {
+      const receiver = part.component ? byId.get(part.component.id)?.anatomy.root : part;
+      const holders = receiver ? [receiver.tokens, receiver.literals, receiver.declared,
+        ...Object.values(receiver.states ?? {}), ...Object.values(receiver.declaredStates ?? {}),
+        ...tokensByPropEntries(receiver).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
+        ...(receiver.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.stylesWhen ?? []).map(entry => entry.styles)] : [];
+      if (p.length === 1 || holders.some(holder => Object.keys(holder ?? {}).some(key => /^(min-(width|height|inline-size|block-size)|flex(-grow|-shrink|-basis)?)$/.test(key))))
+        errors.push(`${contract.id}: part "${name}" growth-constraint-unproven — requires a nested item without competing minimum-size or flex declarations`);
+    }
+    if (hasComponentGrow(part)) {
+      const dep = byId.get(part.component!.id);
+      const parent = p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]]);
+      if (part.layout && Object.keys(part.layout).some(key => !['grow', 'growBasis'].includes(key)))
+        errors.push(`${contract.id}: part "${name}" instance layout may only carry parent-owned grow`);
+      if (p.length === 1 || !dep?.anatomy.root || isMultiRoot(dep) || dep.anatomy.root.component || dep.bindings.code.runtime ||
+          contractApiNames(dep).some(name => ['className', 'style'].includes(name)) || parent?.layout?.display === 'grid' ||
+          Object.keys(part.component!.overrides ?? {}).length > 0)
+        errors.push(`${contract.id}: part "${name}" component-grow-host-unproven — requires an ordinary generated single root without caller style bindings or a placement wrapper`);
     }
     // v10 tokensByProp: the driving prop must be a declared enum, every map
     // key one of its values, and every mapped ref plain (per-value maps ARE
@@ -778,7 +809,7 @@ export function validateContract(
       if (p.length === 1) {
         errors.push(`${contract.id}: the root part cannot be an overlay — overlays attach to the root`);
       }
-      if (part.layout?.grow) {
+      if (part.layout?.grow || Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow)) {
         errors.push(`${contract.id}: part "${name}" is an overlay — it cannot also grow (grow is in-flow sizing)`);
       }
       if (part.layout?.overlap) {

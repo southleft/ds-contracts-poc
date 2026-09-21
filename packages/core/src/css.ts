@@ -1,3 +1,4 @@
+import {hasComponentGrow} from '@ds-contracts/schema';
 import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
 import {jointTokenCss} from './joint-tokens.js';
@@ -200,6 +201,14 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   if (isMultiRoot(contract)) {
     for (const { name, part } of walkAnatomy(contract)) {
       if (part.component) {
+        if (hasComponentGrow(part)) {
+          const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
+          if (placement.length) lines.push('', `.${cssIdentifier(name)} {`, ...placement.map(d => `  ${d};`), '}');
+          for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
+            const decls = layoutOverrideDecls(override, part.layout);
+            if (decls.length) lines.push('', `.${part.layoutByProp!.prop}-${value} .${cssIdentifier(name)} {`, ...decls.map(d => `  ${d};`), '}');
+          }
+        }
         // A2 grid (G3/P12): an instance child of a grid parent rides a
         // wrapper element that IS the grid item — the wrapper's class takes
         // the cell; display: grid makes the lone instance stretch into it
@@ -222,7 +231,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         }
       }
       decls.push(...(gridPlan.cells.get(name) ?? []));
-      if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+      if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
       if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
       if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
       if (part.shape) decls.push(...shapeCssDecls(part.shape));
@@ -775,7 +784,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // so the override wins at equal specificity).
   if (root.layoutByProp) {
     for (const [value, override] of Object.entries(root.layoutByProp.map)) {
-      const decls = layoutOverrideDecls(override);
+      const decls = layoutOverrideDecls(override, root.layout);
       if (decls.length === 0) continue;
       lines.push('', `.${root.layoutByProp.prop}-${value} {`);
       for (const d of decls) lines.push(`  ${d};`);
@@ -848,6 +857,15 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
     if (part.component) {
+      if (hasComponentGrow(part)) {
+        const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
+        if (placement.length) lines.push('', `.${cssIdentifier(name)} {`, ...placement.map(d => `  ${d};`), '}');
+        for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
+          const decls = layoutOverrideDecls(override, part.layout);
+          if (decls.length) lines.push('', `.${part.layoutByProp!.prop}-${value} .${cssIdentifier(name)} {`, ...decls.map(d => `  ${d};`), '}');
+        }
+      }
+
       // Round 2 iteration 9 — per-instance overrides: the ref part becomes a
       // structural WRAPPER class (the TSX wraps the instance in a span; the
       // child contract still owns ALL of its own styling) whose only job is
@@ -924,7 +942,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // explicit placement. Sizing stays UNSPELLED: stretch is the CSS grid
     // default and the pinned spelling of the canvas FILL (G3).
     decls.push(...(gridPlan.cells.get(name) ?? []));
-    if (part.layout?.grow) decls.push('flex: 1 1 auto', 'min-width: 0');
+    if (part.layout?.grow) decls.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
     // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
     // part would leak UA margins the real component resets — same discipline
     // as the root rule; captured nonzero margins arrive as minted overrides.
@@ -1192,7 +1210,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     // enum class — exactly the nested-token-substitution rule shape.
     if (part.layoutByProp) {
       for (const [value, override] of Object.entries(part.layoutByProp.map)) {
-        const lDecls = layoutOverrideDecls(override);
+        const lDecls = layoutOverrideDecls(override, part.layout);
         if (lDecls.length === 0) continue;
         nestedSubRules.push(
           `\n.${part.layoutByProp.prop}-${value} .${cssIdentifier(name)} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,

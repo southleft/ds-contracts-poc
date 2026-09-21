@@ -12,6 +12,13 @@ native agreement separately from the two explicit source-contract mismatches;
 it does not qualify lossless source recovery. See
 [D.86](23-known-limitations.md#d86-a-fixed-native-width-cannot-recover-a-lost-css-maximum).
 
+The current layout candidate carries complete per-variant primary-axis fill onto
+frames and repeated generated child roots, with an explicit zero basis for equal
+Figma allocation. Its isolated Tabs consumer now responds to Stretch, but the
+black-background differences still fail at 5.24% for Default and 5.36% for
+Stretch. This is CLI evidence; application delivery and live native validation
+of the rule remain open ([D.111](23-known-limitations.md#d111-primary-axis-fill-can-vary-with-a-prop)).
+
 ## The whole loop
 
 ![V1 workflows: React to contract to editable Figma; Figma to contract to reusable React; and changes through comparison, authorized repair and independent verification.](assets/product-loop.svg)

@@ -1,3 +1,4 @@
+import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
@@ -399,7 +400,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           if (part.layout?.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
         }
       }
-      if (part.layout?.grow) { s.flex = '1 1 auto'; s.minWidth = 0; }
+      if (part.layout?.grow) { s.flex = part.layout.growBasis === 'zero' ? '1 1 0px' : '1 1 auto'; s.minWidth = 0; if (part.layout.growBasis === 'zero') s.minHeight = 0; }
       if (part.overlay) Object.assign(s, { position: 'absolute' }, OVERLAY_CSS[part.overlay.placement]);
       // v9 shape: the shared projection, camelCased for style objects.
       if (part.shape) {
@@ -569,6 +570,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         if (merged?.direction) decls.flexDirection = merged.direction;
         if (merged?.align) decls.alignItems = ALIGN_CSS[merged.align];
         if (merged?.justify) decls.justifyContent = JUSTIFY_CSS[merged.justify];
+        if (merged?.grow !== undefined) { decls.flex = merged.grow ? (merged.growBasis === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto'; decls.minWidth = merged.grow ? 0 : 'auto'; if (merged.growBasis === 'zero') decls.minHeight = merged.grow ? 0 : 'auto'; }
         addVariant(part.layoutByProp.prop, value, partName, decls);
       }
     }
@@ -576,7 +578,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   };
 
   for (const { name: partName, part, path: p } of walkAnatomy(contract)) {
-    if (part.component) continue; // instances style themselves via their own contract
+    if (part.component) {
+      if (hasComponentGrow(part)) {
+        baseStyles[partName] = part.layout?.grow === undefined ? {} : {flex: part.layout.grow ? (part.layout.growBasis === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: part.layout.grow ? 0 : 'auto', ...(part.layout.growBasis === 'zero' ? {minHeight: part.layout.grow ? 0 : 'auto'} : {})};
+        for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) if (override.grow !== undefined)
+          addVariant(part.layoutByProp!.prop, value, partName, {flex: override.grow ? ((override.growBasis ?? part.layout?.growBasis) === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: override.grow ? 0 : 'auto', ...((override.growBasis ?? part.layout?.growBasis) === 'zero' ? {minHeight: override.grow ? 0 : 'auto'} : {})});
+      }
+      continue;
+    }
     // A top-level root (path.length === 1) is compiled as a root — single-root:
     // the sole "root"; multi-root: each of dialog/backdrop/… (each gets the
     // root layout treatment). Byte-identical for single-root.
@@ -943,7 +952,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
                 fieldAttrs += ` ${codeName}="${v}"`;
               }
             }
-            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs;
+            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentGrow(part) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
               ? `<${dep.name}${attrs}>${itemText}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
@@ -953,7 +962,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component);
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component) + (hasComponentGrow(part) ? ` style=${styleExpr(partName, false, [])}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.

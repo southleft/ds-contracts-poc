@@ -1,3 +1,4 @@
+import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
@@ -652,7 +653,7 @@ export function generateTsx(
       const dep = byId.get(part.component.id)!;
       const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
       const codeName = rp.bindings.code.prop;
-      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
+      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract) + (hasComponentGrow(part) ? ` className={${stylesRef(partName)}}` : '');
       let childrenField: string | null = null;
       const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> }).arrayOf)
         .map((field) => {
@@ -671,7 +672,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component);
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + (hasComponentGrow(part) ? ` className={${stylesRef(partName)}}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be

@@ -82,6 +82,7 @@ export interface ExtractedPart {
     align?: "start" | "center" | "end" | "stretch" | "baseline";
     justify?: "start" | "center" | "end" | "space-between";
     grow?: boolean;
+  growBasis?: "zero";
     overlap?: boolean;
     /** A2 grid (G1) — declared track lists, inverted from
      *  grid-template-rows/columns by core/grid-css.ts: the three

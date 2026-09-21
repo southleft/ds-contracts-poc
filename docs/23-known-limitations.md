@@ -9096,3 +9096,52 @@ To reverse, remove enum fields from the array schema, proposer, validator and
 emitter type projections together. Restore named refusal of unsupported
 per-item enum choices and preserve all comparison evidence. Do not strip
 existing enum fields from saved contracts without reporting the incompatibility.
+
+
+## D.111 Primary-axis fill can vary with a prop
+
+**AGENT decision, 2026-09-21.** Primary-axis fill is item placement owned by
+its parent. The proposer reads each occurrence against that occurrence's parent
+direction. Complete enum-correlated differences become `layoutByProp.grow` on
+ordinary parts, slots and generated child instances, including repeated items.
+A filling default remains an explicit variant entry; other variants retain
+their intrinsic size. Siblings with different placement observations remain
+individual references. Unknown parent directions, uncorrelated observations,
+a conflicting layout axis and out-of-flow placement keep named refusals.
+
+The additive `growBasis: "zero"` fact distinguishes equal Figma fill allocation
+from existing contracts' content-basis growth. New captured primary-axis fill
+carries it with `grow: true`. React, inline React and HTML emit `flex: 1 1 0px`;
+the maintained Web Components projection applies it to the child host. Existing
+contracts with no basis keep their previous CSS. Native compilation resolves
+growth per variant before building each frame or instance. A legacy content
+basis still has no separate native ratio representation; this change does not
+qualify that historical approximation or arbitrary CSS flex shorthand.
+
+Placement on a child reference requires an ordinary generated single root.
+Retained runtimes, multiple roots, style/className API collisions and existing
+placement wrappers refuse. Zero-basis placement also refuses competing minimum
+size and flex declarations, preserving those facts rather than overriding them.
+Grid children, overlays and whole-pixel text boxes retain their existing
+conflict guards for the new per-variant channel. Component internals remain
+owned by the child contract.
+
+`core/variant-primary-fill.test.ts` checks real generated React and inline React:
+three intrinsically different labels occupy equal 200 px shares of a 600 px
+parent along either row or column, then return to their exact original sizes. It also checks native
+instance specifications, default variants, optional boolean selectors, differing
+sibling placement and refusals. These are engineering probes; they do not
+establish a live Figma or application outcome. The original captured Tabs family
+and successive consumer comparisons remain in
+`private/variant-primary-fill-20260921/`. The corrected CLI consumer now responds
+to Stretch; the discarded-variant failure is gone. Its default black difference
+remains **5.24%** and Stretch measures **5.36%**; both still fail the unchanged
+5% limit. Default content remains 441 px against 438 px, and the complete native
+root is 439 px. Consumer font bytes still lack source-font authentication. No
+threshold, scorer, source asset or protected evidence is changed.
+
+To reverse, remove the optional placement fields, their proposer carriage and
+all emitter projections together, restoring named refusal of partial fill.
+Reject saved contracts using the removed fields by name. Preserve the recorded
+failed and corrected consumers; do not silently drop the explicit zero basis
+or reinterpret older contracts.

@@ -527,6 +527,8 @@ export const LayoutSchema = z
     justify: z.enum(["start", "center", "end", "space-between"]).optional(),
     /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
     grow: z.boolean().optional(),
+    /** Equal allocation from a zero basis. Omitted preserves legacy content-basis growth. */
+    growBasis: z.literal("zero").optional(),
     /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
      *  child margin in CSS and as negative itemSpacing on the canvas. */
     overlap: z.boolean().optional(),
@@ -618,7 +620,8 @@ export const LayoutSchema = z
  *  A subset of LayoutSchema — plus REVERSED directions, which only make
  *  sense as variant overrides: code emits flex-direction rules under the
  *  enum class; the canvas (which has no reverse) reverses the compiled
- *  child order per variant instead. grow/overlap stay per-part invariants. */
+ *  child order per variant instead. Grow is parent-owned item placement;
+ *  overlap stays a per-part invariant. */
 export const VariantLayoutSchema = z.strictObject({
   display: z.enum(["flex", "inline-flex"]).optional(),
   direction: z
@@ -626,6 +629,9 @@ export const VariantLayoutSchema = z.strictObject({
     .optional(),
   align: z.enum(["start", "center", "end", "stretch", "baseline"]).optional(),
   justify: z.enum(["start", "center", "end", "space-between"]).optional(),
+  grow: z.boolean().optional(),
+    /** Equal allocation from a zero basis. Omitted preserves legacy content-basis growth. */
+    growBasis: z.literal("zero").optional(),
 });
 
 /** v7: layout driven by an enum prop. `map` values are OVERRIDES merged over
@@ -2479,7 +2485,7 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
           "which readers must gate; G9.2)",
       );
     }
-    if (child.layout?.grow) {
+    if (child.layout?.grow || Object.values(child.layoutByProp?.map ?? {}).some(value => value.grow)) {
       issue(["parts", name, "layout", "grow"], GRID_REFUSALS["grid-child-grow"]);
     }
     if (child.placement && areas[name]) {
@@ -3038,6 +3044,7 @@ export interface ResolvedLayout {
   align?: "start" | "center" | "end" | "stretch" | "baseline";
   justify?: "start" | "center" | "end" | "space-between";
   grow?: boolean;
+  growBasis?: "zero";
   overlap?: boolean;
   /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */
   wrap?: boolean;
@@ -3062,6 +3069,13 @@ export function resolveLayout(
   const override = byProp ? byProp.map[subst[byProp.prop] ?? ""] : undefined;
   if (!override) return base;
   return { ...base, ...override };
+}
+
+/** Component internals remain child-owned; grow places its single root in
+ *  the parent's flex layout. Other instance restyling is not implied. */
+export function hasComponentGrow(part: Part): boolean {
+  return Boolean(part.component && (part.layout?.grow !== undefined ||
+    Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow !== undefined)));
 }
 
 /** The token record a part carries under one concrete variant combo:

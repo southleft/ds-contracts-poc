@@ -6416,46 +6416,53 @@ function carryPartialCrossAxisFill(
   );
 }
 
-/** G3b, the PRIMARY-axis twin — a FILL drawn ALONG the parent's primary axis
- *  in only some variant occurrences (field case: the same Tabs set's list
- *  under its ROW header, and each tab under the ROW list, FILL under
- *  Variant=Stretch only). Along the primary axis a FILL is `layout.grow`
- *  (`flex: 1 1 auto`), NOT a `100%` literal: three siblings at `width: 100%`
- *  each claim the whole row, where three growers share it. `grow` is a
- *  per-part invariant — primaryAxisGrow carries it only when EVERY occurrence
- *  fills, and the per-variant layout vocabulary (VariantLayoutSchema:
- *  display / direction / align / justify) has no `grow` — so the per-variant
- *  case has no spelling today. It used to fall through primaryAxisGrow with no
- *  note at all (the SILENT-LOSS class); it is NAMED here, once per part (a
- *  repeat run's siblings share one path, so they share one note), with the
- *  axis it follows when it follows one, so the schema change that would carry
- *  it is a recorded gap rather than a guess. Each occurrence is read against
- *  ITS OWN parent mode. Called from buildChildParts, above every branch of
- *  buildPart and beside buildRepeatPart, so no part class can return past it. */
-function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes | null, ctx: Ctx, where: string): void {
-  if (!parentModes) return;
-  const facts = new Map<string, number>();
-  for (const m of siblings) {
-    const rows = m.occ.flatMap((o) => {
-      const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
-      if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') return [];
-      const dim = mode === 'HORIZONTAL' ? 'width' : 'height';
-      return [{ variant: o.variant, dim, mode, fills: o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] === true }];
-    });
-    const filling = rows.filter((r) => r.fills);
-    if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
-    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })), `primary-axis-fill@${where}`);
-    const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
-    const correlation = fit
-      ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
-      : 'not a pure function of one declared enum axis';
-    const fact = `drawn ${planes.join(' and ')} in ${filling.length}/${rows.length} variant occurrence(s) only — ${correlation}. Along the primary axis a FILL is \`layout.grow\` (\`flex: 1 1 auto\`), not a \`100%\` literal (siblings at 100% each claim the whole row; growers share it), and \`grow\` is a per-part invariant: the per-variant layout vocabulary (layoutByProp / VariantLayoutSchema) has no \`grow\`, so the per-variant primary-axis FILL has no spelling; NAMED, not carried — nothing grows this part along that axis in any variant (review)`;
-    // @door propose.primary-axis-fill-partial-refused
-    facts.set(fact, (facts.get(fact) ?? 0) + 1);
+/** Primary-axis fill is parent-owned placement, including component refs.
+ * Read each observation against its own parent direction. A partial pattern
+ * must follow a fully observed enum axis; no geometry or axis is guessed. */
+function primaryGrowRows(m: Merged, parentModes: ParentModes | null) {
+  return m.occ.map(o => {
+    const mode = parentModes?.byVariant.get(o.variant) ?? null;
+    return {variant: o.variant, supported: mode === 'HORIZONTAL' || mode === 'VERTICAL',
+      fills: mode === 'HORIZONTAL' ? o.node.fillWidth === true : mode === 'VERTICAL' ? o.node.fillHeight === true : false};
+  });
+}
+function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const rows = primaryGrowRows(m, parentModes);
+  if (rows.some((row, index) => !row.supported && (m.occ[index].node.fillWidth || m.occ[index].node.fillHeight))) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — captured fill has no observed flex-parent direction`);
+    return;
   }
-  for (const [fact, count] of facts) {
-    ctx.notes.push(`${where}: ${count > 1 ? `${count} repeated siblings each ` : ''}${fact}`);
+  if (!rows.some(row => row.fills)) return;
+  if (m.occ.some(o => absBoxOf(o.node) !== undefined)) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — absolute placement cannot also be a flex item`);
+    return;
   }
+  const layout = (part.layout ?? {}) as Record<string, unknown>;
+  if (rows.every(row => row.supported && row.fills)) {
+    part.layout = {...layout, grow: true, growBasis: 'zero'};
+    return;
+  }
+  const fit = rows.every(row => row.supported)
+    ? fitLiteralAxis(ctx, rows.map(row => ({variant: row.variant, value: row.fills ? 'grow' : NOT_FILLING})), `primary-axis-fill@${where}`)
+    : undefined;
+  const prior = part.layoutByProp as {prop: string; map: Record<string, Record<string, unknown>>} | undefined;
+  // @door propose.primary-axis-fill-partial-refused
+  if (!fit || layout.display === 'grid' || (prior && prior.prop !== fit.axis.propName)) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — partial FILL is uncorrelated, has incomplete flex-parent observations, or conflicts with another layout axis/grid; review`);
+    return;
+  }
+  // A partial fill has no unconditional base grow. Include only filling
+  // values (including the declared default when it fills); all other values
+  // keep their own intrinsic sizing and token constraints.
+  if (layout.grow !== undefined) { delete layout.grow; delete layout.growBasis; part.layout = layout; }
+  const map = structuredClone(prior?.map ?? {});
+  for (const value of fit.axis.values) {
+    if (fit.byValue.get(value) !== 'grow') continue;
+    const key = axisValue(fit.axis, value);
+    map[key] = {...map[key], grow: true, growBasis: 'zero'};
+  }
+  part.layoutByProp = {prop: fit.axis.propName, map};
+  ctx.notes.push(`${where}: primary-axis FILL carried as layoutByProp.grow on \`${fit.axis.propName}\`; the parent places the item and the child keeps its internal layout`);
 }
 
 /** PER-VARIANT accounting for the cross-axis FILL under a parent whose
@@ -7163,11 +7170,8 @@ function crossAxisFillByPropOn(
  *  ROW — was silent on every variant (canvas conformance
  *  slot-primary-axis-fill + its REST twin, r10 2026-08-23). */
 function primaryAxisGrow(m: Merged, parentModes: ParentModes | null): true | undefined {
-  const parentMode = parentModes?.base ?? null;
-  return (parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true)) ||
-    (parentMode === 'VERTICAL' && m.occ.every((o) => o.node.fillHeight === true))
-    ? true
-    : undefined;
+  const rows = primaryGrowRows(m, parentModes);
+  return rows.length > 0 && rows.every(row => row.supported && row.fills) ? true : undefined;
 }
 
 function invertLayout(
@@ -8841,15 +8845,12 @@ function buildChildParts(
   // placement fact is child order (G5) and repeat runs stay legal.
   const manualGrid = mode?.grid?.carried === true && !mode.grid.flow;
   let i = 0;
-  let primaryFillNamedThrough = 0;
   while (i < children.length) {
     const child = children[i];
-    const run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
-    // G3b primary-axis twin — once per child; a run that falls back to fixed
-    // parts below re-enters this loop for its later siblings, already named.
-    if (i >= primaryFillNamedThrough) {
-      namePartialPrimaryAxisFill(run ?? [child], mode, ctx, `${where}/${child.name}`);
-      primaryFillNamedThrough = i + (run?.length ?? 1);
+    let run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
+    if (run && new Set(run.map(sibling => JSON.stringify(primaryGrowRows(sibling, mode)))).size > 1) {
+      ctx.notes.push(`${where}/${child.name}: repeat-placement-not-uniform — siblings have different primary-axis fill; retaining individual instances`);
+      run = null;
     }
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
@@ -8862,6 +8863,7 @@ function buildChildParts(
             `${where}/${child.name}: absolute placement captured (dump v1.7 \`abs\`) on a repeated-collection sibling — a repeat template renders its items in flow; placement not carried (ledgered by name)`,
           );
         }
+        carryPrimaryAxisGrow(child, mode, repeatPart, ctx, `${where}/${child.name}`);
         parts[key] = repeatPart;
         i += run.length;
         continue;
@@ -8869,7 +8871,10 @@ function buildChildParts(
       // No carriable field (named above) — the first sibling builds under the
       // already-claimed key; the rest walk as before.
       const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-      if (built) parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+      if (built) {
+        carryPrimaryAxisGrow(child, mode, built, ctx, `${where}/${child.name}`);
+        parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+      }
       i++;
       continue;
     }
@@ -8880,6 +8885,7 @@ function buildChildParts(
       // A2 grid (G2): the ONE placement door — every part class takes its
       // captured cell here (no-op unless the parent's grid carried, manual).
       attachGridPlacement(child, mode, built, ctx, `${where}/${child.name}`);
+      carryPrimaryAxisGrow(child, mode, built, ctx, `${where}/${child.name}`);
       parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
     }
     i++;

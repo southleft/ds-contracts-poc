@@ -3803,7 +3803,7 @@ function formControlSpec(
     type: 'frame',
     name,
     layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'CENTER' },
-    grow: part.layout?.grow || undefined,
+    grow: resolveLayout(part, subst)?.grow || undefined,
   };
   const childCtx = applyStyling(spec, part, subst, ctx);
   // RC7: the placeholder CONCEPT decides everything below — whether there is
@@ -4586,6 +4586,7 @@ function partToSpecs(
       for (const [k, v] of Object.entries(rec)) fields[k] = typeof v === 'number' ? String(v) : v;
       const spec: NodeSpec = {
         type: 'instance',
+        grow: resolveLayout(part, subst)?.grow || undefined,
         name: i === 0 ? name : `${name} ${i + 1}`,
         dep: dep.name,
         depContractId: dep.id,
@@ -4745,7 +4746,7 @@ function partToSpecInner(
       name,
       svg: markup,
       ...(paintVar ? { svgPaintVar: paintVar } : {}),
-      grow: part.layout?.grow || undefined,
+      grow: resolveLayout(part, subst)?.grow || undefined,
       // Round 4 (canvas-gate finding): a viewBox-only svg has no intrinsic
       // size — the icon draws 0×0 in shrink-to-fit contexts. The contract's
       // icon.size (captured glyph size) sizes the node on every surface.
@@ -4832,7 +4833,7 @@ function partToSpecInner(
       layout: resolveLayout(part, subst)
         ? layoutSpec(part, false, subst)
         : { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' },
-      grow: part.layout?.grow || undefined,
+      grow: resolveLayout(part, subst)?.grow || undefined,
       children: [{ ...spec, name: `${name}-icon`, grow: undefined }],
     };
     applyStyling(frame, part, subst, ctx);
@@ -4934,6 +4935,7 @@ function partToSpecInner(
     const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
       type: 'instance',
+      grow: resolveLayout(part, subst)?.grow || undefined,
       name,
       dep: dep.name,
       depContractId: dep.id,
@@ -4978,7 +4980,7 @@ function partToSpecInner(
       // `grow` on any in-flow child) — it was the one spec built without it,
       // so a proposed slot grow regenerated as a HUG slot (canvas conformance
       // slot-primary-axis-fill).
-      grow: part.layout?.grow || undefined,
+      grow: resolveLayout(part, subst)?.grow || undefined,
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
       slotAccepts: (part.slot.accepts ?? []).map((id) => {
@@ -5030,7 +5032,7 @@ function partToSpecInner(
       type: 'frame',
       name,
       layout: resolveLayout(part, subst) ? layoutSpec(part, false, subst) : { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' },
-      grow: part.layout?.grow || undefined,
+      grow: resolveLayout(part, subst)?.grow || undefined,
       children: [textSpec],
     };
     const textCtx = applyStyling(frame, part, subst, ctx);
@@ -5147,7 +5149,7 @@ function partToSpecInner(
     type: 'frame',
     name,
     layout: layoutSpec(part, false, subst),
-    grow: part.layout?.grow || undefined,
+    grow: resolveLayout(part, subst)?.grow || undefined,
   };
   if (Object.values(part.parts ?? {}).some(child => child.shape?.kind === 'stroked-path')) spec.strokeViewport = true;
   // B-3 finding 5: inset overlay parts lower to ABSOLUTE + STRETCH behind

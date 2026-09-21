@@ -641,6 +641,7 @@ export function textBoxConflicts(part: Part): string[] {
   const { base, perValue } = textHolders(part);
   const channels = new Set([...base, ...perValue].flatMap((h) => Object.keys(h ?? {})).filter((c) => TEXT_BOX_CONFLICT_CHANNEL.test(c)));
   if (part.layout?.grow) channels.add('layout.grow');
+  if (Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow)) channels.add('layoutByProp.grow');
   if (holds(perValue, 'letter-spacing')) channels.add('letter-spacing (per variant or state)');
   if (part.literals?.['letter-spacing'] !== undefined && part.tokens?.['letter-spacing'] &&
       placeholdersIn(stripBraces(part.tokens['letter-spacing'])).length > 0)
@@ -918,12 +919,20 @@ export function layoutOverrideDecls(o: {
   direction?: string;
   align?: string;
   justify?: string;
-}): string[] {
+  grow?: boolean;
+  growBasis?: "zero";
+}, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
+  if (o.grow !== undefined || o.growBasis !== undefined) {
+    const grow = o.grow ?? base?.grow;
+    const zero = (o.growBasis ?? base?.growBasis) === 'zero';
+    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`, `min-width: ${grow ? '0' : 'auto'}`);
+    if (zero) d.push(`min-height: ${grow ? '0' : 'auto'}`);
+  }
   return d;
 }
 
