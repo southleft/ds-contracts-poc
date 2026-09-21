@@ -26,8 +26,24 @@ const clean = (raw: NativeSourceReadback) => { const r = structuredClone(raw); d
  * complete reads bracket one another; a changed main or caller refuses. This
  * can observe partial native values without asking them to satisfy the desired
  * component, which is essential after an interrupted assignment. */
-export function emitNativeTemplateUpdateObservationScript(input: NativeTemplateComponentUpdateInput): string {
+export function emitNativeTemplateUpdateObservationScript(input: NativeTemplateComponentUpdateInput, captureImages = false): string {
   const plan = prepareNativeTemplateComponentUpdate(input);
+  if(captureImages)return `// GENERATED independent template observation with bracketed exports. READ ONLY.
+const observe=async()=>{${emitNativeTemplateUpdateObservationScript(input)}};
+const canonical=value=>JSON.stringify((function sort(v){if(Array.isArray(v))return v.map(sort);if(v&&typeof v==='object')return Object.fromEntries(Object.keys(v).sort().filter(k=>v[k]!==undefined).map(k=>[k,sort(v[k])]));return v;})(value));
+const clean=value=>{const copy=JSON.parse(JSON.stringify(value));delete copy.images;return copy;};
+const before=await observe();if(before.status!=='collected')return before;
+try{
+ const main=await(async()=>{${emitNativeContractReadbackScript(plan.after,true,true)}})();
+ const callerExports=[];
+ for(const read of [${plan.consumers.map(c=>`async()=>{${emitNativeTemplateCallerContentReadback(c.input,false,true)}}`).join(',')}])callerExports.push(await read());
+ const after=await observe();
+ if(after.status!=='collected'||canonical(before)!==canonical(after)||canonical(clean(main))!==canonical(clean(after.observation))||
+   callerExports.some((r,i)=>canonical(clean(r))!==canonical(clean(after.consumerObservations[i]))))throw Error('native-template-update-export-observation-changed');
+ after.observation.images=main.images;
+ after.consumerObservations.forEach((r,i)=>{r.images=callerExports[i].images;});
+ return after;
+}catch(error){return {...before,status:'refused',problems:[error&&error.message?error.message:String(error)]};}`;
   return `// GENERATED independent template update observation. READ ONLY.
 const out={version:1,kind:'independent-native-template-update-observation',planRevision:${JSON.stringify(plan.revision)},
  status:'refused',problems:[],acceptedContract:null,nativeQualification:'unqualified'};

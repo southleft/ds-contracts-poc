@@ -56,6 +56,8 @@ test('a large real update journal survives restart, dispatch and independent ver
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const plans = createNativeUpdatePlans(repo, () => ({ parentJournalRevision: 'a'.repeat(64), input: h.input }));
   const parentId = h.input.before.operation.id, proposal = plans.prepare(parentId), plan = plans.saved(parentId, proposal.id).update.plan;
+  assert.notEqual(plan.kind,'native-contract-template-value-update');
+  if(plan.kind==='native-contract-template-value-update')throw Error('expected legacy fixture');
   const scripts = Object.fromEntries([
     ['update-preflight-readback', emitNativeContractUpdateScript(plan, 'apply', true)],
     ['update-apply', emitNativeContractUpdateScript(plan)],

@@ -50,6 +50,7 @@ interface Operation {
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
     tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
+    templateValueChanges?: Array<{tokenPath:string;variableId:string;modeId:string;before:unknown;after:unknown}>; templateCallerCount?:number;
     boundCrossSize?: boolean; layoutChanges?: Array<{nodeId:string;channel:'x'|'y';before:number;after:number}>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
@@ -197,7 +198,12 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             <h4>{update.operation && (update.operation.pendingPhase || update.operation.phase === 'update-recovery-required') ? 'Correction needs attention' :
               update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 'Verified correction for current inputs' :
               update.operation ? 'Saved correction' : 'Saved proposal'}</h4>
-            <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            <p>{update.templateValueChanges ? 'Reviewed color update.' : <>Reviewed update: {update.changes.length} property corrections.</>} Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            {update.templateValueChanges && <>
+              <p>{update.templateValueChanges.length} color updates affect the existing component and {update.templateCallerCount ?? 0} recorded caller instances. Unrecorded consumers or intervening edits stop the update. Typography and size updates remain unavailable.</p>
+              {!!update.templateValueChanges.length && <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>Token</th><th>Saved color</th><th>Proposed color</th></tr></thead>
+                <tbody>{update.templateValueChanges.map(change=><tr key={change.variableId+':'+change.modeId}><td>{change.tokenPath}</td><td>{designValue(change.before)}</td><td>{designValue(change.after)}</td></tr>)}</tbody></table>}
+              </>}
             {!!update.tokenAllocations?.length && <>
               <p>Add {update.tokenAllocations.length} number variables to this component's existing collection. Existing variables and component nodes stay unchanged. After verification, use Review compiler update again to check the remaining component changes. Source repair is unavailable until that review is complete.</p>
               <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>New token</th><th>Mode</th><th>Value</th></tr></thead>
@@ -271,6 +277,12 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                   </div>)}
                   <figcaption>{image.caseId}{initial && <><br />{image.layoutOffset && sourceFrame ? 'Layout origins aligned from recorded bounds' : 'Layout alignment unavailable; verified source and native export bounds are required'}</>}</figcaption><div style={{padding:8,...nativeImageFraming(sourceFrame,image).native,backgroundColor:'white',width:'max-content'}}><img loading="lazy" alt={`Updated native ${image.caseId}`} style={{display:'block',maxWidth:'none',width:image.width,height:image.height}} src={`${root}/native-operation/${id}/update/${update.id}/images/${image.sha256}.png`} /></div>
                 </figure>})}</div>
+              </details>}
+              {!!update.operation.callerImageObservations?.length && <details open><summary>Updated caller instances · diagnostic only</summary>
+                <div style={{display:'flex',flexWrap:'wrap',gap:24}}>{update.operation.callerImageObservations.flatMap(c=>c.observation.images.map(image=><figure key={c.operationId+':'+image.caseId} style={{margin:0}}>
+                  <figcaption>{c.caseId}</figcaption><img loading="lazy" alt={`Updated caller ${c.caseId}`} style={{display:'block',maxWidth:'none',width:image.width,height:image.height}}
+                    src={`${root}/native-operation/${id}/update/${update.id}/images/${image.sha256}.png`} />
+                </figure>))}</div>
               </details>}
             </>}
           </div>)}
