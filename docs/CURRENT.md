@@ -128,6 +128,12 @@ unverified ([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-prese
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 
+Canonical capture now retains inherited consuming modes and native line-height
+bindings on a separate hidden-text probe, with six records matching independent
+native readback. Hidden-template conversion remains unimplemented and the
+second-library journey remains unqualified
+([D.98](23-known-limitations.md#d98-native-capture-records-the-consuming-variable-mode)).
+
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 
 **AGENT decision — variable-update preconditions, 2026-09-20.** New variable

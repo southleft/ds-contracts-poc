@@ -1,8 +1,9 @@
 import type { StrokedPath } from '../../scripts/contract-schema.js';
 
-/** Canonical plugin capture includes original open vector centerlines, which
- * the REST producer cannot read. flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.41';
+/** Canonical plugin capture includes consuming-node variable modes and values
+ * and original open vector centerlines, which the REST producer cannot read.
+ * flow-check pins the standalone script stamp. */
+export const PLUGIN_DUMP_VERSION = '1.42';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -158,10 +159,8 @@ export interface DumpText {
    *  means the set was not drawn by this pipeline (or predates v1.22), which
    *  is exactly when no weight should be proposed. */
   fontWeightVar?: string;
-  /** The line-height TOKEN in slash-form (dump v1.23, additive), stamped for
-   *  the same reason as fontWeightVar: Figma's lineHeight takes a value, not a
-   *  variable, so the resolved number cannot name its token and the reader
-   *  minted a second name for one the corpus already had. */
+  /** Native uniform line-height binding, or a legacy emitter stamp when
+   * unbound. Mixed native ranges never fall back to a stamp (plugin v1.42). */
   lineHeightVar?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
@@ -338,8 +337,24 @@ export interface DumpShape {
   constraints?: { horizontal: string; vertical: string };
 }
 
+export interface DumpVariableConsumer {
+  name: string;
+  collectionId: string;
+  modeId: string;
+  modeName: string;
+  resolvedType: 'FLOAT' | 'COLOR' | 'STRING' | 'BOOLEAN';
+  /** Native precision; unlike the global token table, colors are not rounded. */
+  value: number | string | boolean | { r: number; g: number; b: number; a?: number };
+  /** Raw selected-mode value, including a VARIABLE_ALIAS when present.
+   * This records the edge but does not corroborate an entire alias graph. */
+  selectedValue: unknown;
+}
+
 export interface DumpNode {
   name: string;
+  /** Plugin v1.42: direct binding variable ID → this node's inherited mode
+   * and resolved value. Missing means uncaptured, never the default mode. */
+  variableConsumers?: Record<string, DumpVariableConsumer>;
   /** Node type. 'SLOT' (dump v1.5): a NATIVE Figma slot node (Schema 2025) —
    *  captured verbatim where the API exposes it; propose.ts maps it to the
    *  same contract `slot` part the INSTANCE_SWAP spelling maps to, with a

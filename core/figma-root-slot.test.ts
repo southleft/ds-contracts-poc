@@ -49,7 +49,7 @@ for(const display of ['flex','inline-flex'] as const) test(`native ${display} ro
  const c=seed(),byId=new Map([[c.id,c]]);
  c.anatomy.root.layout!.display=display;
  const marker={version:1,property:'Children',...(display==='inline-flex'?{display}:{})};
- const {figma,root}=createFigmaMock();
+ const {figma,root}=createFigmaMock({consumerVariableModes:true});
  const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
  await run(engine.buildTokensScript(null));const script=()=>engine.buildComponentScript(c,byId);
@@ -63,6 +63,7 @@ for(const display of ['flex','inline-flex'] as const) test(`native ${display} ro
  assert.equal(comp.children![0].layoutSizingHorizontal,'HUG');assert.equal(comp.children![0].layoutSizingVertical,'HUG');
  const dumpSource=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
  const dump=JSON.parse(JSON.stringify((await run(dumpSource))[comp.name]));assert.deepEqual(dump.rootSlot,marker);
+ assert.ok(Object.values(dump.variants[0].children[0].variableConsumers).some((row:any)=>row.name==='gap8'&&row.value===8), 'canonical capture adds consuming-mode evidence beside the slot gap');
  const corpus=tokenCorpusFromJson({primitives,semantic:{},light:{},brandDefault:{}});
  for(const mode of ['exact','reviewable-inversion'] as const){
   const proposal=proposeFromDump(dump,{corpus,contractIdByName:new Map(),fileKey:null,projectionMode:mode,mintUnbound:true});

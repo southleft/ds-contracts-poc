@@ -91,6 +91,20 @@ export function createFigmaMock(options = {}) {
         },
       });
       this.parent = null;
+      // Consumer-mode tests opt in: adding fields to every legacy mock node
+      // would rewrite old operation snapshots and their pinned programs.
+      if (options.consumerVariableModes) {
+        this.explicitVariableModes = {};
+        Object.defineProperty(this, 'resolvedVariableModes', { configurable: true, get: () => ({
+          ...Object.fromEntries(collections.map(c => [c.id, c.modes[0].modeId])),
+          ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes,
+        }) });
+        this.setExplicitVariableModeForCollection = (collection, modeId) => {
+          const id = typeof collection === 'string' ? collection : collection.id;
+          if (!collections.find(c => c.id === id)?.modes.some(m => m.modeId === modeId)) throw Error('unknown variable mode');
+          this.explicitVariableModes[id] = modeId;
+        };
+      }
       this.removed = false;
       this.visible = true;
       this.opacity = 1;
@@ -1279,15 +1293,15 @@ export function createFigmaMock(options = {}) {
     setVariableCodeSyntax(platform, value) {
       this._codeSyntax[platform] = value;
     }
-    resolveForConsumer() {
-      // Default-mode resolution, alias chains chased across collections.
-      let value = this.valuesByMode[Object.keys(this.valuesByMode)[0]];
+    resolveForConsumer(consumer) {
+      const mode = v => consumer?.resolvedVariableModes?.[v.variableCollectionId] ?? Object.keys(v.valuesByMode)[0];
+      let value = this.valuesByMode[mode(this)];
       let type = this.resolvedType;
       let guard = 0;
       while (value && typeof value === 'object' && value.type === 'VARIABLE_ALIAS' && guard++ < 10) {
         const target = variables.find((v) => v.id === value.id);
         if (!target) return null;
-        value = target.valuesByMode[Object.keys(target.valuesByMode)[0]];
+        value = target.valuesByMode[mode(target)];
         type = target.resolvedType;
       }
       return { resolvedType: type, value };

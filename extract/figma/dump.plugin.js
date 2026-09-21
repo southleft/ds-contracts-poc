@@ -489,6 +489,10 @@ function dumpShape(node, parent) {
 // number, STRING/BOOLEAN as-is. A variable whose value cannot resolve is a
 // named degradation, never a silent absence.
 const capturedVariables = {};
+// v1.42: a collection's mode values do not identify the mode of each
+// consuming node. Keep the native binding identity, inherited selection and
+// resolved value together. This is evidence, not an alias-graph projection.
+const capturedVariableConsumers = new Map();
 // dump v1.6: a variable whose COLLECTION has more than one mode ALSO carries
 // `modes` — mode NAME → resolved value per mode (direct values and one-hop-
 // resolved aliases; deeper alias chains resolve up to depth 5). This is the
@@ -521,6 +525,37 @@ const resolveModeValue = async (raw, modeId, depth) => {
 const varNameById = async (id, consumer) => {
   const v = await figma.variables.getVariableByIdAsync(id);
   if (!v) return null;
+  if (consumer && consumer.id) {
+    let rows = capturedVariableConsumers.get(consumer.id);
+    if (!rows) { rows = Object.create(null); capturedVariableConsumers.set(consumer.id, rows); }
+    if (!Object.prototype.hasOwnProperty.call(rows, id)) {
+      // A null cache entry prevents repeated API failures for one binding;
+      // it is never emitted as a captured fact.
+      rows[id] = null;
+      try {
+        const collection = await figma.variables.getVariableCollectionByIdAsync(v.variableCollectionId);
+        const modes = consumer.resolvedVariableModes;
+        const modeId = modes && modes[v.variableCollectionId];
+        const mode = collection && collection.modes.find(m => m.modeId === modeId);
+        const resolved = v.resolveForConsumer(consumer);
+        if (!mode || !resolved || !Object.prototype.hasOwnProperty.call(v.valuesByMode, modeId))
+          throw new Error('consuming mode or value unavailable');
+        const value = resolved.value;
+        const valid = resolved.resolvedType === 'FLOAT' ? typeof value === 'number' && Number.isFinite(value)
+          : resolved.resolvedType === 'STRING' ? typeof value === 'string'
+          : resolved.resolvedType === 'BOOLEAN' ? typeof value === 'boolean'
+          : resolved.resolvedType === 'COLOR' && value && typeof value === 'object' &&
+            ['r', 'g', 'b'].every(k => typeof value[k] === 'number' && Number.isFinite(value[k])) &&
+            (value.a === undefined || typeof value.a === 'number' && Number.isFinite(value.a));
+        if (!valid) throw new Error('resolved value is not finite native data');
+        rows[id] = { name: v.name, collectionId: collection.id, modeId, modeName: mode.name,
+          resolvedType: resolved.resolvedType, value, selectedValue: v.valuesByMode[modeId] };
+      } catch (e) {
+        degrade('variable-consumer-unresolved', consumer.name || consumer.id,
+          'variable "' + v.name + '" consuming mode/value not captured (' + (e && e.message ? e.message : String(e)) + ')');
+      }
+    }
+  }
   if (consumer && !(v.name in capturedVariables)) {
     try {
       const r = v.resolveForConsumer(consumer);
@@ -1300,11 +1335,21 @@ async function dumpNode(node, nodePath, parent) {
     // on any node this pipeline did not draw, which stays the old behaviour.
     const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
     if (weightVar) text.fontWeightVar = weightVar;
-    // dump v1.23: the line-height token, stamped for the same reason — Figma's
-    // lineHeight takes a value, not a variable, so the number on the node
-    // cannot name the token that produced it.
+    // Native line-height bindings now exist. A uniform native binding is
+    // authoritative; old emitter stamps remain a fallback only when unbound.
     const lhVar = node.getSharedPluginData('ds_contracts', 'lineHeightVar');
-    if (lhVar) text.lineHeightVar = lhVar;
+    const lhAliases = node.boundVariables && node.boundVariables.lineHeight;
+    if (Array.isArray(lhAliases) && lhAliases.length === 1 && lhAliases[0] &&
+        lhAliases[0].type === 'VARIABLE_ALIAS' && typeof lhAliases[0].id === 'string' && lhAliases[0].id !== '') {
+      const nativeLh = await varNameById(lhAliases[0].id, node);
+      if (nativeLh) {
+        text.lineHeightVar = nativeLh;
+        if (lhVar && lhVar !== nativeLh) degrade('text-binding-conflict', nodePath,
+          'native lineHeight binding "' + nativeLh + '" differs from legacy stamp "' + lhVar + '" — native identity captured');
+      } else degrade('text-channel-unsupported', nodePath, 'native lineHeight variable unavailable — legacy stamp not substituted');
+    } else if (lhAliases !== undefined && (!Array.isArray(lhAliases) || lhAliases.length > 0)) {
+      degrade('text-channel-unsupported', nodePath, 'lineHeight has no single uniform variable binding — legacy stamp not substituted');
+    } else if (lhVar) text.lineHeightVar = lhVar;
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
@@ -1471,6 +1516,11 @@ async function dumpNode(node, nodePath, parent) {
     out.children = [];
     for (const child of node.children) out.children.push(await dumpNode(child, nodePath + '/' + child.name, node));
   }
+  const consumerRows = capturedVariableConsumers.get(node.id);
+  if (consumerRows) {
+    const captured = Object.fromEntries(Object.entries(consumerRows).filter(([, value]) => value !== null));
+    if (Object.keys(captured).length) out.variableConsumers = captured;
+  }
   return out;
 }
 
@@ -1523,7 +1573,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.41',
+    dumpVersion: '1.42',
   },
 };
 dumps._degradations = degradations;
