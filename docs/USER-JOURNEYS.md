@@ -122,9 +122,15 @@ validates them; it leaves the Figma edit in place. After completion, **Load
 verified source** opens the resulting source reference. Unexpected source edits
 are preserved and refuse. The bounded opacity Apply, interruption before the
 write, completed-repeat behavior, exact source restoration and intervening
-source/canvas conflict refusals are demonstrated; broader recovery and
-two-way acceptance remain under qualification. A preview alone never means
-the original files were updated.
+source/canvas conflict refusals are demonstrated. To continue using an existing
+native set, trace the verified source, follow its saved root observation, inspect
+the required initial states, then choose **Follow the current source with the
+existing … states** and **Review compiler update**. This flow retains the same
+component operation and nodes; any remaining variable correction still requires
+preflight and independent readback. The bounded opacity journey demonstrates
+that succession and an unchanged repeat. Broader recovery and two-way acceptance
+remain under qualification. A preview alone never means the original files
+were updated.
 
 **Inspect a stateful child in its composition:** for the configured composed Card, open its saved caller-content review:
 

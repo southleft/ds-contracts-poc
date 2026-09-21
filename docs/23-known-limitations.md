@@ -8889,6 +8889,19 @@ Restoring the probe values to 60% lets that same application resume with another
 fresh preflight, apply the reviewed source, validate all ten examples and pass
 its final native read. Both refusals remain in its immutable journal.
 
+The applied source now completes normal source succession through the app.
+A fresh structure observation matches all ten examples; initial-state inspection
+restores all twelve Checkbox combinations. Following the existing initial-state
+operation retains its component identity. Compiler review finds the four native
+literals already at float32 0.6, but the owned opacity variable still at 0.5.
+The guarded correction scans 86 pages and 3,205 nodes, changes that one variable
+to 0.6 and writes no component values. Independent readback retains all 44 node
+snapshots, all twelve PNGs and every other variable exactly. The same 37 native
+operation IDs remain; no replacement is prepared. An unchanged review reuses
+the verified correction, leaving its journal and succession files unchanged.
+The unobstructed canvas was inspected at 60%. Evidence is retained under
+`private/react-design-source-repair-20260921/native-succession-v1/`.
+
 Apply accepts only the host's current selected preview. It seals that selection,
 prepares the exact source/CSS transaction and requests a new read from the
 existing Sync Runner operation. The full observed content must match the
@@ -8932,11 +8945,10 @@ the restored original. Source and Figma are not locked together, so a later
 design edit can invalidate agreement. File replacement retains D.106's
 non-atomic multi-file limitation. Unexpected source edits refuse without being
 overwritten. Missing preview or transaction proof refuses; stale validation
-evidence requires verification again. Returning the updated source to the
-existing native operation's normal succession workflow remains qualification
-work. The demonstrated
-interruption precedes the write; partial-file recovery remains engineering
-coverage.
+evidence requires verification again. The measured normal succession retains
+the existing component and closes this bounded source-application loop. Broader
+repair channels remain unqualified. The demonstrated interruption precedes the
+write; partial-file recovery remains engineering coverage.
 
 Reversal removes the Apply endpoints, recovery UI and controller together.
 Keep the source transaction helper and witness loader for already applied
