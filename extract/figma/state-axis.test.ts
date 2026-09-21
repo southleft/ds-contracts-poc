@@ -12,6 +12,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import { chromium } from 'playwright-core';
 import { readFileSync } from 'node:fs';
 import { createFigmaMock } from '../../scripts/plugin-engine-mock-figma.mjs';
 import { mapRestToDump } from './rest/map.js';
@@ -302,9 +303,27 @@ test('sparse, the fence holds INSIDE a state plane: a hover fill two axes explai
 // 4. the writer round trip — a designer's axis and a pipeline preview axis are never confused
 // ---------------------------------------------------------------------------
 type CanvasNode = { name: string; type: string; children: CanvasNode[]; getSharedPluginData(ns: string, key: string): string };
-async function canvas(tokens: Record<string, unknown>) {
+async function canvas(tokens: Record<string, unknown>, perSideStrokes = false) {
   const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
   const { figma, root } = createFigmaMock();
+  if (perSideStrokes) {
+    // The shared mock has no per-side frame accessors. Model those native
+    // fields only for this probe; a uniform setter updates all four sides.
+    const create = figma.createComponent as () => Record<string, unknown>;
+    figma.createComponent = () => {
+      const node = create();
+      node.strokesIncludedInLayout = false; // Exercise a retained outside-layout value; the writer must opt in.
+      const sides: Record<string, number> = { Top: 1, Right: 1, Bottom: 1, Left: 1 };
+      for (const side of Object.keys(sides)) Object.defineProperty(node, `stroke${side}Weight`, {
+        configurable: true, get: () => sides[side], set: (value: number) => { sides[side] = value; },
+      });
+      Object.defineProperty(node, 'strokeWeight', { configurable: true,
+        get: () => new Set(Object.values(sides)).size === 1 ? sides.Top : figma.mixed,
+        set: (value: number) => { for (const side of Object.keys(sides)) sides[side] = value; },
+      });
+      return node;
+    };
+  }
   const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
   const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 }) as Promise<unknown>;
   await run(engine.buildTokensScript(null));
@@ -575,4 +594,278 @@ test('M2: "stamps observable" is a fact about what ANSWERED the request — an i
   assert.match(batch.skipped[0].reason + (batch.skipped[0].detail ?? ''), /state-axis-stamps-not-observable/);
   const asserted = await importFromUrl(url, 'token', { fetchImpl: replay, transportCarriesPluginData: true });
   assert.equal(dumpStampsObservable(asserted.dump._provenance as never), true);
+});
+
+
+// A drawn press can restore rest while :hover is still true. Empty state
+// declarations remain refused; these are real paint overrides of hover.
+test('a captured pressed root paint restores rest across real hover and pointer-down, and round-trips through native previews', async () => {
+  const states = ['Default', 'Hover', 'Pressed'];
+  const cells = pillCells(states).map(c => c.at.State === 'Pressed' ? { ...c, fill: REST[c.at.Tone] } : c);
+  const first = exact(designerSet('ReturnPaint', { State: states, Tone: ['A', 'B'] }, cells));
+  const c1 = ContractSchema.parse(first.contract);
+  assert.deepEqual(c1.states, ['hover', 'active']);
+  assert.deepEqual(refusalsOf(c1), []);
+  assert.ok(first.notes.some(n => n.includes('a pointer press also matches :hover')));
+  const inventory = tokenInventoryFromJson([first.mintedTokens!.tree]);
+  const { css } = emitReact(c1, { tokens: inventory, icons: new Map(), contracts: new Map([[c1.id, c1]]) });
+  const paints = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  const values = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${paints.resolveLiteral(key)}`).join(';');
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>:root{${values}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+    for (const tone of ['a', 'b']) {
+      const el = page.locator('.tone-' + tone);
+      const paint = () => el.evaluate(n => getComputedStyle(n).backgroundColor);
+      await page.mouse.move(0, 0);
+      const rest = await paint();
+      const box = await el.boundingBox();
+      assert.ok(box);
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      assert.notEqual(await paint(), rest, tone + ': hover paints');
+      await page.mouse.down();
+      assert.equal(await el.evaluate(n => n.matches(':hover') && n.matches(':active')), true, JSON.stringify(await el.evaluate(n => ({tone:n.className,hover:n.matches(':hover'),active:n.matches(':active'),html:n.outerHTML,rect:n.getBoundingClientRect().toJSON(), css:[...document.styleSheets].flatMap(s=>[...s.cssRules].map(r=>r.cssText))}))));
+      assert.equal(await paint(), rest, tone + ': pressing restores captured rest paint');
+      await page.mouse.move(0, 0); await page.mouse.up();
+    }
+  } finally { await browser.close(); }
+  const { write, read } = await canvas(first.mintedTokens!.tree);
+  const node = await write(c1);
+  assert.equal(node.children.length, 6);
+  const set = await read(node);
+  const writerCorpus = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  const back = proposeFromDump(set, { corpus: writerCorpus, contractIdByName: new Map([[c1.name, c1.id]]), contractsById: new Map([[c1.id, c1 as never]]), fileKey: null, projectionMode: 'exact', mintUnbound: false });
+  const c2 = ContractSchema.parse(back.contract);
+  assert.equal(back.projection.status, 'verified-exact');
+  assert.deepEqual(c2.states, c1.states);
+  assert.deepEqual(c2.anatomy.root.states, c1.anatomy.root.states);
+});
+
+test('active root-paint resets need the captured matching hover plane; absent box fill restores transparent', () => {
+  const states = ['Default', 'Pressed'];
+  const noHover = designerSet('Quiet', { State: states, Tone: ['A', 'B'] }, pillCells(states).map(c => ({ ...c, fill: REST[c.at.Tone] })));
+  assert.match(refusalOf(() => exact(noHover)).message, /state-axis-state-not-carried:active/);
+  const absent = designerSet('NoPaint', { State: ['Default', 'Hover', 'Pressed'], Tone: ['A', 'B'] }, pillCells(['Default', 'Hover', 'Pressed']));
+  for (const v of absent.variants) if (!v.name.includes('State=Hover')) delete v.fill;
+  const transparent = exact(absent);
+  const c = ContractSchema.parse(transparent.contract);
+  const ref = c.anatomy.root.states!.active!['background-color'];
+  const paints = tokenCorpusFromJson({ primitives: transparent.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  assert.equal(paints.resolveLiteral(ref.slice(1, -1)), '#00000000');
+});
+
+
+test('a bound common pressed paint outranks per-value hover paints without replacing token identity', async () => {
+  const tokens = { paint: { rest: { $type: 'color', $value: '#abcdef' }, hot: { $type: 'color', $value: '#990000' }, cool: { $type: 'color', $value: '#007700' } } };
+  const set = designerSet('BoundReturn', { State: ['Default', 'Hover', 'Pressed'], Tone: ['A', 'B'] }, pillCells(['Default', 'Hover', 'Pressed']));
+  for (const v of set.variants) v.fill = { var: !v.name.includes('State=Hover') ? 'paint/rest' : v.name.includes('Tone=A') ? 'paint/hot' : 'paint/cool' };
+  const sourceCorpus = tokenCorpusFromJson({ primitives: tokens, semantic: {}, light: {}, brandDefault: {} });
+  const result = proposeFromDump(set, { ...opts('exact', true), corpus: sourceCorpus });
+  const c = ContractSchema.parse(result.contract);
+  assert.equal(c.anatomy.root.states!.active!['background-color'], '{paint.rest}');
+  assert.ok(c.anatomy.root.statesByProp?.some(x => x.state === 'hover'));
+  const inventory = tokenInventoryFromJson([tokens, result.mintedTokens!.tree]);
+  const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const all = tokenCorpusFromJson({ primitives: { ...tokens, ...result.mintedTokens!.tree }, semantic: {}, light: {}, brandDefault: {} });
+  const values = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${all.resolveLiteral(key)}`).join(';');
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(`<!doctype html><style>:root{${values}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+    for (const tone of ['a', 'b']) {
+      const el = page.locator('.tone-' + tone);
+      await el.hover();
+      assert.notEqual(await el.evaluate(n => getComputedStyle(n).backgroundColor), 'rgb(171, 205, 239)');
+      await page.mouse.down();
+      assert.equal(await el.evaluate(n => n.matches(':hover') && n.matches(':active')), true);
+      assert.equal(await el.evaluate(n => getComputedStyle(n).backgroundColor), 'rgb(171, 205, 239)');
+      await page.mouse.move(0, 0); await page.mouse.up();
+    }
+  } finally { await browser.close(); }
+});
+
+
+test('a new hover reset does not admit an unqualified multiple-axis specificity case', () => {
+  const states=['Default','Hover','Pressed'];
+  const cells=states.flatMap(State=>['A','B'].flatMap(Tone=>['S','L'].map(Size=>({at:{State,Tone,Size},fill:State==='Hover' ? (Tone==='A' ? (Size==='S'?'990000':'880000') : (Size==='S'?'007700':'006600')) : 'abcdef'}))));
+  const set=designerSet('MultipleAxes',{State:states,Tone:['A','B'],Size:['S','L']},cells);
+  assert.match(refusalOf(()=>exact(set)).message,/state-axis-state-not-carried:active/);
+});
+
+function uniformStrokeStateSet(name = 'FocusBorder'): DumpSet {
+  const set = designerSet(name, { State: ['Default', 'Focus'], Tone: ['A', 'B'] },
+    pillCells(['Default', 'Focus']).map(c => ({ ...c, fill: REST[c.at.Tone] })));
+  for (const v of set.variants) {
+    v.stroke = { hex: '123456' };
+    v.strokeAlign = 'INSIDE';
+    v.strokesIncludedInLayout = true;
+    if (v.name.includes('State=Focus')) v.strokeWeight = 2;
+    else v.strokeWeights = { top: 0, right: 0, bottom: 2, left: 0 };
+  }
+  return set;
+}
+
+test('a uniform state stroke replaces per-side resting widths in browser and native previews', async () => {
+  const first = exact(uniformStrokeStateSet());
+  const c = ContractSchema.parse(first.contract);
+  assert.deepEqual(c.states, ['focus-visible']);
+  assert.deepEqual(c.anatomy.root.declaredStates, { 'focus-visible': { 'border-style': 'solid' } });
+  const ref = c.anatomy.root.states!['focus-visible']['border-width'];
+  const inventory = tokenInventoryFromJson([first.mintedTokens!.tree]);
+  const values = tokenCorpusFromJson({ primitives: first.mintedTokens!.tree, semantic: {}, light: {}, brandDefault: {} });
+  assert.equal(values.resolveLiteral(ref.slice(1, -1)), '2px');
+  const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    const vars = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${values.resolveLiteral(key)}`).join(';');
+    await page.setContent(`<!doctype html><style>:root{${vars}}${css}</style><button class="root tone-a">A</button>`);
+    const el = page.locator('button');
+    const widths = () => el.evaluate(n => { const s = getComputedStyle(n); return [s.borderTopWidth, s.borderRightWidth, s.borderBottomWidth, s.borderLeftWidth]; });
+    assert.deepEqual(await widths(), ['0px', '0px', '2px', '0px']);
+    await page.keyboard.press('Tab');
+    assert.equal(await el.evaluate(n => n.matches(':focus-visible')), true);
+    assert.deepEqual(await widths(), ['2px', '2px', '2px', '2px']);
+  } finally { await browser.close(); }
+  const { write, read } = await canvas(first.mintedTokens!.tree, true);
+  const native = await read(await write(c));
+  const focus = native.variants.filter(v => v.name.includes('State=Focus Visible'));
+  assert.equal(focus.length, 2);
+  for (const v of focus) {
+    assert.equal(v.strokeWeights, undefined, 'base sides must not overwrite the state shorthand');
+    assert.equal(v.bound?.strokeWeight, ref.slice(1, -1).replaceAll('.', '/'));
+    assert.equal(v.strokeWeight, 2);
+    assert.equal(v.strokesIncludedInLayout, true);
+  }
+  for (const v of native.variants.filter(v => v.name.includes('State=Default'))) {
+    assert.deepEqual(v.strokeWeights, { top: 0, right: 0, bottom: 2, left: 0 });
+    assert.equal(v.strokesIncludedInLayout, true);
+  }
+  const back = proposeFromDump(native, { ...opts('exact', true), corpus: values,
+    contractIdByName: new Map([[c.name, c.id]]), contractsById: new Map([[c.id, c as never]]), mintUnbound: false });
+  const recovered = ContractSchema.parse(back.contract);
+  assert.equal(recovered.anatomy.root.states?.['focus-visible']?.['border-width'], ref);
+  assert.equal(recovered.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+});
+
+test('common and distinct bound state-width identities retain solid borders through native round trips', async () => {
+  for (const representation of ['common', 'per-value']) {
+    const tokens = { width: { thin: { $type: 'dimension', $value: '2px' }, heavy: { $type: 'dimension', $value: '2px' } } };
+    const source = uniformStrokeStateSet('BoundWidth');
+    for (const v of source.variants.filter(v => v.name.includes('State=Focus')))
+      v.bound = { strokeWeight: representation === 'common' || v.name.includes('Tone=A') ? 'width/thin' : 'width/heavy' };
+    const corpus = tokenCorpusFromJson({ primitives: tokens, semantic: {}, light: {}, brandDefault: {} });
+    const result = proposeFromDump(source, { ...opts('exact', true), corpus });
+    const c = ContractSchema.parse(result.contract);
+    if (representation === 'per-value') assert.ok(c.anatomy.root.statesByProp?.some(e => e.state === 'focus-visible'));
+    else assert.equal(c.anatomy.root.states?.['focus-visible']?.['border-width'], '{width.thin}');
+    assert.equal(c.anatomy.root.states?.['focus-visible']?.['outline-width'], undefined, 'an INSIDE replacement remains a border before the base mint pass');
+    assert.equal(c.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+    const allTokens = { ...tokens, ...result.mintedTokens!.tree };
+    const inventory = tokenInventoryFromJson([allTokens]);
+    const values = tokenCorpusFromJson({ primitives: allTokens, semantic: {}, light: {}, brandDefault: {} });
+    const { css } = emitReact(c, { tokens: inventory, icons: new Map(), contracts: new Map([[c.id, c]]) });
+    const browser = await chromium.launch();
+    try {
+      const page = await browser.newPage();
+      const vars = [...inventory].map(key => `--${key.replace(/\./g, '-')}:${values.resolveLiteral(key)}`).join(';');
+      await page.setContent(`<!doctype html><style>:root{${vars}}${css}</style><button class="root tone-a">A</button><button class="root tone-b">B</button>`);
+      for (const tone of ['a', 'b']) {
+        await page.keyboard.press('Tab');
+        const el = page.locator('.tone-' + tone);
+        assert.equal(await el.evaluate(n => n.matches(':focus-visible')), true);
+        assert.deepEqual(await el.evaluate(n => { const s = getComputedStyle(n); return [s.borderTopWidth, s.borderRightWidth, s.borderBottomWidth, s.borderLeftWidth]; }), ['2px', '2px', '2px', '2px']);
+      }
+    } finally { await browser.close(); }
+    const { write, read } = await canvas(allTokens, true);
+    const native = await read(await write(c));
+    for (const v of native.variants) {
+      assert.equal(v.strokesIncludedInLayout, true);
+      if (v.name.includes('State=Focus Visible')) {
+        assert.equal(v.strokeWeight, 2);
+        assert.equal(v.strokeWeights, undefined);
+        assert.equal(v.bound?.strokeWeight, representation === 'common' || v.name.includes('Tone=A') ? 'width/thin' : 'width/heavy');
+      }
+    }
+    const back = proposeFromDump(native, { ...opts('exact', true), corpus: values,
+      contractIdByName: new Map([[c.name, c.id]]), contractsById: new Map([[c.id, c as never]]), mintUnbound: false });
+    const recovered = ContractSchema.parse(back.contract);
+    assert.deepEqual(recovered.anatomy.root.states, c.anatomy.root.states);
+    assert.deepEqual(recovered.anatomy.root.statesByProp, c.anatomy.root.statesByProp);
+    assert.equal(recovered.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], 'solid');
+  }
+});
+
+test('uniform state stroke recovery refuses unsupported alignment, layout, incomplete and unequal widths', () => {
+  for (const representation of ['unbound', 'common', 'per-value']) {
+    const corpus = tokenCorpusFromJson({ primitives: { width: {
+      thin: { $type: 'dimension', $value: '2px' }, heavy: { $type: 'dimension', $value: '2px' },
+    } }, semantic: {}, light: {}, brandDefault: {} });
+    for (const mutate of [
+      (s: DumpSet) => { delete s.variants[0].strokeAlign; },
+      (s: DumpSet) => { delete s.variants[2].strokeAlign; },
+      (s: DumpSet) => { for (const v of s.variants) delete v.strokeAlign; },
+      (s: DumpSet) => { s.variants[2].strokeAlign = 'OUTSIDE'; },
+      (s: DumpSet) => { s.variants[2].strokeAlign = 'CENTER'; },
+      (s: DumpSet) => { s.variants[2].strokesIncludedInLayout = false; },
+      (s: DumpSet) => { delete s.variants[2].strokesIncludedInLayout; },
+      (s: DumpSet) => { delete s.variants[2].strokeWeight; },
+      (s: DumpSet) => { s.variants[2].strokeWeight = -1; },
+      (s: DumpSet) => { s.variants[2].strokeWeight = NaN; },
+      (s: DumpSet) => { s.variants[2].strokeWeight = 3; },
+      (s: DumpSet) => { delete s.variants[2].strokeWeight; s.variants[2].strokeWeights = { top: 1, right: 2, bottom: 3, left: 4 }; },
+      (s: DumpSet) => { s.variants[0].strokeWeights!.left = NaN; },
+      (s: DumpSet) => { for (const v of s.variants) if (v.strokeWeights) v.strokeWeights = { top: 2, right: 2, bottom: 2, left: 2 }; },
+      (s: DumpSet) => { s.variants[2].bound = { strokeTopWeight: 'missing/side' }; },
+    ]) {
+      const s = uniformStrokeStateSet('DifferentName');
+      if (representation !== 'unbound') for (const v of s.variants.filter(v => v.name.includes('State=Focus')))
+        v.bound = { strokeWeight: representation === 'common' || v.name.includes('Tone=A') ? 'width/thin' : 'width/heavy' };
+      mutate(s);
+      const r = proposeFromDump(s, { ...opts('reviewable-inversion', true), corpus });
+      const c = ContractSchema.parse(r.contract);
+      assert.equal(c.anatomy.root.states?.['focus-visible']?.['border-width'], undefined);
+      assert.equal(c.anatomy.root.states?.['focus-visible']?.['outline-width'], undefined);
+      for (const entry of c.anatomy.root.statesByProp ?? []) for (const value of Object.values(entry.map)) {
+        assert.equal(value['border-width'], undefined);
+        assert.equal(value['outline-width'], undefined);
+      }
+      assert.equal(c.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], undefined);
+      assert.ok(r.notes.some(n => n.includes('only a captured uniform INSIDE state stroke')));
+    }
+  }
+});
+
+
+test('uniform state widths retain border-box layout when resting sides are token-bound', async () => {
+  const first = exact(uniformStrokeStateSet('BoundRestingSides'));
+  const c = ContractSchema.parse(first.contract);
+  const root = c.anatomy.root;
+  const tokens = { ...first.mintedTokens!.tree, reviewWidth: {
+    zero: { $type: 'dimension', $value: '0px' }, two: { $type: 'dimension', $value: '2px' },
+  } };
+  for (const side of ['top', 'right', 'bottom', 'left']) {
+    const channel = `border-${side}-width`;
+    delete root.literals![channel];
+    root.tokens![channel] = side === 'bottom' ? '{reviewWidth.two}' : '{reviewWidth.zero}';
+  }
+  const { write, read } = await canvas(tokens, true);
+  const native = await read(await write(c));
+  for (const v of native.variants) {
+    assert.equal(v.strokesIncludedInLayout, true, 'bound sides have the same CSS layout policy as literal sides');
+    if (v.name.includes('State=Focus Visible')) {
+      assert.equal(v.strokeWeight, 2);
+      assert.equal(v.strokeWeights, undefined);
+      assert.ok(v.bound?.strokeWeight);
+      for (const side of ['Top', 'Right', 'Bottom', 'Left']) assert.equal(v.bound?.[`stroke${side}Weight`], undefined);
+    } else {
+      assert.deepEqual(v.strokeWeights, { top: 0, right: 0, bottom: 2, left: 0 });
+      assert.equal(v.bound?.strokeBottomWeight, 'reviewWidth/two');
+    }
+  }
+  // A contradictory explicit outside-layout declaration still refuses.
+  const outside = structuredClone(c); outside.id += '-outside'; outside.name += 'Outside';
+  outside.anatomy.root.strokesIncludedInLayout = false;
+  await assert.rejects(() => write(outside), /strokesIncludedInLayout: false together with border-style/);
 });

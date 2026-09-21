@@ -5,7 +5,7 @@
   "nodeId": "53:2906",
   "mode": "reviewable-inversion",
   "variantCount": 5,
-  "contractSha256": "4ef41dddd556e8126ad8f1c112b354e74e3129fa789ba33da5b61b08eb5e11dd",
+  "contractSha256": "b32073769074202c5a81648833d01dc5b8b9ffb4107b674daf1fe343146c98e3",
   "carriage": {
     "carried": 31,
     "named": 79,
@@ -202,12 +202,12 @@
     }
   ],
   "generatedFiles": {
-    "react/ButtonIcon/ButtonIcon.module.css": "9e1e72f6d6b0aad6436948a8bc6b4429963db5b04a809d51ad5f82429f76c957",
+    "react/ButtonIcon/ButtonIcon.module.css": "dd3681b5c38dceeb173f4926dc6941f1f7caa08d26a2ed2939f47ff405c17ba3",
     "react/ButtonIcon/ButtonIcon.stories.tsx": "79dd2cccfbf629d27f1c9b21202d5459a4d3f9fc36ebaf2e8409a7778cedc66a",
     "react/ButtonIcon/ButtonIcon.tsx": "d2e449eeff05013d5bd36636f1ca380cbbe2574b649a1c63f8ab986a8b150152",
     "react/ButtonIcon/index.ts": "2d9a9ab14e16752ba765078087392f153f9d4cde5553469aa0c882f2c36b4619",
     "wc/ds-button-icon.ts": "22e6b99caabc9523b9afff95d253ab6c6eda345a051de3c6b89e5de385c332ad",
-    "wc/ds-button-icon.css.ts": "851f80471444a7954a81141d8805d7f4f15999c3f8ec135629fef51d2a33652c",
+    "wc/ds-button-icon.css.ts": "7f0e7ecf08c26cfe7d6e2f5a1fb56172a6b0516184ea0eca38b746e782456266",
     "wc/ds-button-icon.demo.html": "71ca11e0a588a953352d30d35d12b54255b3dbffc208ddc7a745b3ac0df64262",
     "wc/ds-button-icon.custom-elements.json": "607b3ff5fddf9931c0ab803bedbfacd66f13133e8dfee5883cd28d6d55e4847b",
     "wc/ds-button-icon-default-sm.ts": "f701ebbd91c9ed405cb3461d2211a34b35e0160013a6d0e876b0761461db6edd",
@@ -215,5 +215,5 @@
     "wc/ds-button-icon-default-sm.demo.html": "5aca1316a94aef4e11f440bf7bc1757838211551586db9d256897f34a0b59ffd",
     "wc/ds-button-icon-default-sm.custom-elements.json": "46b1cc47f0b4ec7b98fdaadba767fa0ed2eeab3e48f5fb1b744379ee65d01201"
   },
-  "notesCount": 91
+  "notesCount": 92
 }
