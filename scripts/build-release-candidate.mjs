@@ -54,6 +54,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-09-21: validation and CSS emission import the shared
+    // joint-token referee/serializer; its runtime and declarations must ship.
     // Reviewed 2026-09-17: css.js imports this pure CSS identifier serializer;
     // both its runtime module and declaration belong in the installed package.
     // Reviewed 2026-09-15: the public emitter context imports the pure runtime
@@ -93,6 +95,8 @@ const PACKAGES = [
       "dist/grid.js",
       "dist/index.d.ts",
       "dist/index.js",
+      "dist/joint-tokens.d.ts",
+      "dist/joint-tokens.js",
       "dist/naming.d.ts",
       "dist/naming.js",
       "dist/prop-collision.d.ts",

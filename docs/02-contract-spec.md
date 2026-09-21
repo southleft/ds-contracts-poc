@@ -160,6 +160,31 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
 
+## Complete joint paint bindings
+
+`anatomy.root.tokensByCombination` carries a complete token table over two
+optional enum properties with no defaults. Each entry has `props: [a, b]` and
+`rows: [{ values: [aValue, bValue], tokens: { channel: "{token.path}" } }]`.
+A `null` tuple member means the property is omitted; it never adds a public enum
+value or changes a runtime `null` mapped to a named canonical value. Every named
+and omitted Cartesian tuple is required, including `[null, null]`.
+
+The initial supported subset is resting background, text and border color on
+one ordinary root. Both axes need explicit Figma `unsetValue` planes. All rows
+carry the same channels, and those channels cannot also appear in another base,
+per-property, state, conditional or joint binding. Nested parts, component or
+shape roots, icon/meter/repeat roots, outside-layout strokes, overrides,
+interaction states, missing or duplicate tuples and substituted token refs
+refuse before emission. Other channels retain their existing named refusal.
+
+React CSS Modules, inline React, static CSS and shadow CSS select the same row;
+the native compiler resolves it for each variant. Native return preserves bound
+token identities only with full Cartesian observations and corroborated optional
+axis metadata. Extra axes must be fully observed and independent of the paint.
+Missing bindings, paint opacity and unsupported root structures cannot certify
+a lossless table. See [D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)
+for the decision, evidence and remaining live qualification.
+
 ## Grid layout (declared tracks and managed row flow)
 
 `layout.display: "grid"` joins the flex vocabulary, carrying the **declared-track

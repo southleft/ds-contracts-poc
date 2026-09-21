@@ -331,6 +331,13 @@ reg("tokens", "tokens-by-prop", [
   "tokensByProp.prop",
   "tokensByProp.map",
 ]);
+reg("tokens", "tokens-by-combination", [
+  "part.tokensByCombination",
+  "part.tokensByCombination.props",
+  "part.tokensByCombination.rows",
+  "part.tokensByCombination.rows.tokens",
+  "part.tokensByCombination.rows.values",
+]);
 reg("tokens", "literals", [
   "part.literals",
   "part.literalsByProp",

@@ -1,4 +1,5 @@
 import { lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
+import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
 /**
  * Contract → static HTML + CSS — a pure emitter over the SAME contract
  * semantics the React generator renders, for surfaces with no build step
@@ -548,6 +549,7 @@ function componentCss(contract: Contract): string[] {
   for (const { prop, value, decls } of enumRules.values()) {
     rule(propSel(prop, value), decls);
   }
+  lines.push(...jointTokenCss(contract,enumCls,conditions=>rootCls+conditions.join(''),ref=>cssVar(stripBraces(ref))));
   // v7 layoutByProp on the root: the enum class sits on the root element
   // itself (emitted after the enum rules so the override wins at equal
   // specificity) — mirrors core/emit-react.ts generateCss.
