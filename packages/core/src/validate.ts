@@ -247,6 +247,11 @@ export function validateContract(
     if (part.slot) {
       const s = part.slot;
       const n = (s.defaultContent ?? []).length;
+      if (s.bindings?.figma?.textTemplate && (part !== contract.anatomy.root || s.name !== 'children' ||
+          !part.layout || !['flex', 'inline-flex'].includes(part.layout.display ?? '') || n ||
+          s.accepts?.length || s.acceptsMode === 'restrict' || s.min !== undefined || s.max !== undefined || s.required)) {
+        errors.push('FIGMA_SLOT_TEXT_TEMPLATE_SHAPE_UNSUPPORTED: requires an unconstrained empty flex root children slot');
+      }
       if (s.min !== undefined && s.max !== undefined && s.min > s.max) {
         errors.push(`${contract.id}: slot "${s.name}" declares min ${s.min} > max ${s.max} — no content can satisfy it`);
       }

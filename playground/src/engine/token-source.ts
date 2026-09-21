@@ -203,7 +203,7 @@ function capturedTree(layer: CapturedTokenLayer, paths: Set<string>): Record<str
     const segs = e.path.split('.');
     let node = tree;
     for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
-    node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
+    node[segs[segs.length - 1]] = { $value: e.reference ?? e.value, $type: e.type };
   }
   return tree;
 }

@@ -71,6 +71,8 @@ const part = (node: Record<string, any>) => {
 };
 export type NativeContractUpdatePlan = NativeDefaultFillUpdatePlan | NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan | NativeAbsoluteShapeUpdatePlan | NativeBoundCrossSizeUpdatePlan;
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
+  if (input.before.projection.rootTextTemplate || input.before.component.rootSlot?.textTemplate || input.desired.component.rootSlot?.textTemplate)
+    throw Error('native-update-root-text-template-unqualified');
   // Only the scalar plan carries variable values. A sibling kind's matcher and
   // program know nothing of them, so a mixed change is refused by name.
   const scalarOnly = (base: NativeContractUpdateInput) => prepareOpacityUpdate(base, false);

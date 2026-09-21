@@ -2644,6 +2644,59 @@ const resolveModeValue = async (raw, modeId, depth) => {
   }
   return raw;
 };
+// v1.44: alias evidence follows this consumer's selected mode at EVERY hop.
+// Do not call varNameById here: an alias target is not another node binding,
+// and must not populate the global token table as though it were bound.
+const readConsumerVariable = async (variable, consumer) => {
+  const collection = await figma.variables.getVariableCollectionByIdAsync(variable.variableCollectionId);
+  const modes = consumer.resolvedVariableModes;
+  const modeId = modes && modes[variable.variableCollectionId];
+  const mode = collection && collection.modes.find(m => m.modeId === modeId);
+  const resolved = variable.resolveForConsumer(consumer);
+  if (!mode || !resolved || !Object.prototype.hasOwnProperty.call(variable.valuesByMode, modeId))
+    throw new Error('consuming mode or value unavailable');
+  const value = resolved.value;
+  const valid = resolved.resolvedType === 'FLOAT' ? typeof value === 'number' && Number.isFinite(value)
+    : resolved.resolvedType === 'STRING' ? typeof value === 'string'
+    : resolved.resolvedType === 'BOOLEAN' ? typeof value === 'boolean'
+    : resolved.resolvedType === 'COLOR' && value && typeof value === 'object' &&
+      ['r', 'g', 'b'].every(k => typeof value[k] === 'number' && Number.isFinite(value[k])) &&
+      (value.a === undefined || typeof value.a === 'number' && Number.isFinite(value.a));
+  if (!valid) throw new Error('resolved value is not finite native data');
+  return { name: variable.name, collectionId: collection.id, modeId, modeName: mode.name,
+    resolvedType: resolved.resolvedType, value, selectedValue: variable.valuesByMode[modeId] };
+};
+const sameConsumerValue = (a, b, type) => {
+  const number = (x, y) => typeof x === 'number' && typeof y === 'number' && Number.isFinite(x) && Number.isFinite(y) &&
+    (x === y || x === Math.fround(y) || Math.fround(x) === y);
+  if (type === 'FLOAT') return number(a, b);
+  if (type === 'COLOR') return a && b && typeof a === 'object' && typeof b === 'object' &&
+    ['r', 'g', 'b'].every(k => number(a[k], b[k])) && number(a.a === undefined ? 1 : a.a, b.a === undefined ? 1 : b.a);
+  return a === b;
+};
+const readConsumerAliasChain = async (rootId, root, consumer) => {
+  const seen = new Set([rootId]), chain = [];
+  let current = root;
+  while (current.selectedValue && typeof current.selectedValue === 'object' && current.selectedValue.type === 'VARIABLE_ALIAS') {
+    const alias = current.selectedValue;
+    if (typeof alias.id !== 'string' || !alias.id || Object.keys(alias).some(k => k !== 'type' && k !== 'id'))
+      throw new Error('malformed alias edge');
+    if (seen.has(alias.id)) throw new Error('alias cycle');
+    if (chain.length >= 16) throw new Error('alias depth exceeds 16');
+    seen.add(alias.id);
+    const target = await figma.variables.getVariableByIdAsync(alias.id);
+    if (!target || target.id !== alias.id || !target.name) throw new Error('alias target unavailable');
+    const next = await readConsumerVariable(target, consumer);
+    if (target.resolvedType !== current.resolvedType || next.resolvedType !== current.resolvedType ||
+        !sameConsumerValue(current.value, next.value, current.resolvedType))
+      throw new Error('alias resolution disagrees with selected target');
+    chain.push({ id: alias.id, ...next });
+    current = next;
+  }
+  if (!sameConsumerValue(current.value, current.selectedValue, current.resolvedType))
+    throw new Error('terminal selected value disagrees with consumer resolution');
+  return chain;
+};
 const varNameById = async (id, consumer) => {
   const v = await figma.variables.getVariableByIdAsync(id);
   if (!v) return null;
@@ -2655,23 +2708,15 @@ const varNameById = async (id, consumer) => {
       // it is never emitted as a captured fact.
       rows[id] = null;
       try {
-        const collection = await figma.variables.getVariableCollectionByIdAsync(v.variableCollectionId);
-        const modes = consumer.resolvedVariableModes;
-        const modeId = modes && modes[v.variableCollectionId];
-        const mode = collection && collection.modes.find(m => m.modeId === modeId);
-        const resolved = v.resolveForConsumer(consumer);
-        if (!mode || !resolved || !Object.prototype.hasOwnProperty.call(v.valuesByMode, modeId))
-          throw new Error('consuming mode or value unavailable');
-        const value = resolved.value;
-        const valid = resolved.resolvedType === 'FLOAT' ? typeof value === 'number' && Number.isFinite(value)
-          : resolved.resolvedType === 'STRING' ? typeof value === 'string'
-          : resolved.resolvedType === 'BOOLEAN' ? typeof value === 'boolean'
-          : resolved.resolvedType === 'COLOR' && value && typeof value === 'object' &&
-            ['r', 'g', 'b'].every(k => typeof value[k] === 'number' && Number.isFinite(value[k])) &&
-            (value.a === undefined || typeof value.a === 'number' && Number.isFinite(value.a));
-        if (!valid) throw new Error('resolved value is not finite native data');
-        rows[id] = { name: v.name, collectionId: collection.id, modeId, modeName: mode.name,
-          resolvedType: resolved.resolvedType, value, selectedValue: v.valuesByMode[modeId] };
+        const row = await readConsumerVariable(v, consumer);
+        rows[id] = row;
+        if (row.selectedValue && typeof row.selectedValue === 'object' && row.selectedValue.type === 'VARIABLE_ALIAS') {
+          try { row.aliasChain = await readConsumerAliasChain(id, row, consumer); }
+          catch (e) {
+            degrade('variable-consumer-alias-unresolved', consumer.name || consumer.id,
+              'variable "' + v.name + '" selected alias chain not captured (' + (e && e.message ? e.message : String(e)) + ')');
+          }
+        }
       } catch (e) {
         degrade('variable-consumer-unresolved', consumer.name || consumer.id,
           'variable "' + v.name + '" consuming mode/value not captured (' + (e && e.message ? e.message : String(e)) + ')');
@@ -2706,6 +2751,81 @@ const varNameById = async (id, consumer) => {
     }
   }
   return v.name;
+};
+
+// v1.45: a multi-collection template cannot be represented by one global
+// value per mode. Preserve complete raw collection inventories and every edge,
+// including unused modes, alongside native consuming vectors. This read-only
+// channel is evidence; it neither normalizes a graph nor waives degradations.
+const readTemplateVariableGraph = async (set) => {
+  const fileKey = figma.fileKey;
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const stable = value => JSON.stringify((function sort(v) {
+    if (Array.isArray(v)) return v.map(sort);
+    if (!v || typeof v !== 'object') return v;
+    return Object.fromEntries(Object.keys(v).sort().map(k => [k, sort(v[k])]));
+  })(value));
+  const guard = () => { if (!fileKey || figma.fileKey !== fileKey) throw Error('file changed during graph capture'); };
+  const roots = set.type === 'COMPONENT_SET' ? [...set.children] : [set];
+  const nativeNodes = [], seeds = new Set();
+  const visit = (node, variantName, specPath) => {
+    if (nativeNodes.length >= 4096 || specPath.length > 32) throw Error('template consumer limit');
+    nativeNodes.push({ node, variantName, specPath });
+    for (const id of Object.keys(capturedVariableConsumers.get(node.id) || {})) seeds.add(id);
+    for (const [index, child] of (node.children || []).entries()) visit(child, variantName, specPath.concat(index));
+  };
+  for (const root of roots) visit(root, root.name, []);
+  const consumers = () => nativeNodes.map(({ node, variantName, specPath }) => ({
+    nodeId: node.id, variantName, specPath, explicitVariableModes: copy(node.explicitVariableModes),
+    resolvedVariableModes: copy(node.resolvedVariableModes),
+  }));
+  const beforeConsumers = consumers(), collections = new Map(), variables = new Map(), pending = [...seeds];
+  const readCollection = async id => {
+    const c = await figma.variables.getVariableCollectionByIdAsync(id); guard();
+    if (!c || c.id !== id || typeof c.key !== 'string' || !c.key || !Array.isArray(c.variableIds) ||
+        new Set(c.variableIds).size !== c.variableIds.length || !Array.isArray(c.modes) || !c.modes.length ||
+        new Set(c.modes.map(m => m.modeId)).size !== c.modes.length || !c.modes.some(m => m.modeId === c.defaultModeId))
+      throw Error('collection inventory unavailable');
+    return { id: c.id, key: c.key, name: c.name, remote: c.remote, defaultModeId: c.defaultModeId,
+      modes: copy(c.modes), variableIds: [...c.variableIds].sort() };
+  };
+  const readVariable = async id => {
+    const v = await figma.variables.getVariableByIdAsync(id); guard();
+    if (!v || v.id !== id || typeof v.key !== 'string' || !v.key || !v.valuesByMode || !Array.isArray(v.scopes))
+      throw Error('variable inventory unavailable');
+    return { id: v.id, key: v.key, name: v.name, collectionId: v.variableCollectionId, resolvedType: v.resolvedType,
+      remote: v.remote, scopes: [...v.scopes].sort(), valuesByMode: copy(v.valuesByMode) };
+  };
+  while (pending.length) {
+    if (pending.length > 32768 || variables.size >= 16384 || collections.size > 64) throw Error('template graph inventory limit');
+    const id = pending.shift();
+    if (variables.has(id)) continue;
+    const variable = await readVariable(id);
+    if (!collections.has(variable.collectionId)) {
+      const collection = await readCollection(variable.collectionId);
+      collections.set(collection.id, collection); pending.push(...collection.variableIds);
+    }
+    const collection = collections.get(variable.collectionId);
+    if (!collection.variableIds.includes(id) || stable(Object.keys(variable.valuesByMode).sort()) !== stable(collection.modes.map(m => m.modeId).sort()))
+      throw Error('variable membership or mode inventory disagrees');
+    variables.set(id, variable);
+    for (const raw of Object.values(variable.valuesByMode)) if (raw && typeof raw === 'object' && raw.type === 'VARIABLE_ALIAS') {
+      if (Object.keys(raw).sort().join('|') !== 'id|type' || typeof raw.id !== 'string' || !raw.id) throw Error('malformed raw alias');
+      pending.push(raw.id);
+    }
+  }
+  // Single-collection templates retain their historical dump representation.
+  if (collections.size < 2) return undefined;
+  for (const collection of collections.values()) {
+    if (collection.variableIds.some(id => !variables.has(id) || variables.get(id).collectionId !== collection.id) ||
+        stable(await readCollection(collection.id)) !== stable(collection)) throw Error('collection changed during graph capture');
+  }
+  for (const variable of variables.values()) if (stable(await readVariable(variable.id)) !== stable(variable))
+    throw Error('variable changed during graph capture');
+  guard();
+  if (stable(beforeConsumers) !== stable(consumers())) throw Error('consumer modes changed during graph capture');
+  return { version: 1, fileKey, collections: [...collections.values()].sort((a, b) => a.id.localeCompare(b.id)),
+    variables: [...variables.values()].sort((a, b) => a.id.localeCompare(b.id)), consumers: beforeConsumers };
 };
 
 // First visible solid paint → { var } | { hex } | null, with the paint's
@@ -3450,13 +3570,23 @@ async function dumpNode(node, nodePath, parent) {
     } else if (Array.isArray(fontSizeAlias) && fontSizeAlias.length > 1) {
       degrade('text-channel-unsupported', nodePath, 'fontSize is bound to ' + fontSizeAlias.length + ' variables across character ranges — dump v1 carries ONE size token per text node; omitted');
     }
-    // dump v1.22: the weight TOKEN, stamped by the emitter because Figma has
-    // no bindable font-weight field. The face name ("Medium") cannot say
-    // whether a weight was declared or defaulted, so without this the channel
-    // was dropped in silence (TJ-TEST.md §A7). Read like fontSizeVar; absent
-    // on any node this pipeline did not draw, which stays the old behaviour.
+    // A native uniform weight binding is authoritative. Legacy emitter
+    // stamps remain a fallback only when there is no native binding.
     const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
-    if (weightVar) text.fontWeightVar = weightVar;
+    const weightAliases = node.boundVariables && node.boundVariables.fontWeight;
+    if (Array.isArray(weightAliases) && weightAliases.length === 1 && weightAliases[0] &&
+        weightAliases[0].type === 'VARIABLE_ALIAS' && typeof weightAliases[0].id === 'string' && weightAliases[0].id !== '') {
+      const nativeWeight = await varNameById(weightAliases[0].id, node);
+      if (nativeWeight) {
+        text.fontWeightVar = nativeWeight;
+        if (typeof node.fontWeight === 'number' && Number.isFinite(node.fontWeight)) text.fontWeight = node.fontWeight;
+        else degrade('text-channel-unsupported', nodePath, 'native fontWeight binding has no uniform numeric value');
+        if (weightVar && weightVar !== nativeWeight) degrade('text-binding-conflict', nodePath,
+          'native fontWeight binding "' + nativeWeight + '" differs from legacy stamp "' + weightVar + '" — native identity captured');
+      } else degrade('text-channel-unsupported', nodePath, 'native fontWeight variable unavailable — legacy stamp not substituted');
+    } else if (weightAliases !== undefined && (!Array.isArray(weightAliases) || weightAliases.length > 0)) {
+      degrade('text-channel-unsupported', nodePath, 'fontWeight has no single uniform variable binding — legacy stamp not substituted');
+    } else if (weightVar) text.fontWeightVar = weightVar;
     // Native line-height bindings now exist. A uniform native binding is
     // authoritative; old emitter stamps remain a fallback only when unbound.
     const lhVar = node.getSharedPluginData('ds_contracts', 'lineHeightVar');
@@ -3695,7 +3825,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.42',
+    dumpVersion: '1.45',
   },
 };
 dumps._degradations = degradations;
@@ -3814,6 +3944,15 @@ for (const page of figma.root.children) {
       key: node.key,
       variants,
     };
+    if (dumps[node.name].rootSlot && dumps[node.name].rootSlot.textTemplate === 1) {
+      try {
+        const graph = await readTemplateVariableGraph(node);
+        if (graph) dumps[node.name].templateVariableGraph = graph;
+      } catch (e) {
+        degrade('template-variable-graph-unavailable', node.name,
+          'complete raw graph not captured (' + (e && e.message ? e.message : String(e)) + ')');
+      }
+    }
     if (Object.keys(defs.propertyDefinitions).length > 0) dumps[node.name].propertyDefinitions = defs.propertyDefinitions;
     if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
     if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;

@@ -432,6 +432,7 @@ reg("composition", "slots", [
   "slot.bindings",
   "slot.bindings.figma",
   "slot.bindings.figma.property",
+  "slot.bindings.figma.textTemplate",
 ]);
 reg("composition", "default-content", [
   "slot.defaultContent",

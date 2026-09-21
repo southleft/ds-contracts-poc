@@ -2007,7 +2007,12 @@ export const SlotSchema = z.strictObject({
    *  surface namespace, at every level of the document. */
   bindings: z
     .strictObject({
-      figma: z.strictObject({ property: z.string().optional() }).optional(),
+      figma: z.strictObject({
+        property: z.string().optional(),
+        /** Opt-in native typography carrier for an empty root content slot.
+         * It is hidden design data, never a React child or default string. */
+        textTemplate: z.literal(true).optional(),
+      }).optional(),
     })
     .optional(),
   /** v16 spelling — REFUSED BY NAME since schema 17 (see LEGACY_V16). */

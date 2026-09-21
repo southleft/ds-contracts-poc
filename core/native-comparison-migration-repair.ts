@@ -10,6 +10,7 @@ const clean=(value:unknown):Row=>{const r=structuredClone(value) as Row;if(r?.co
 const fail=(why:string):never=>{throw Error('native-comparison-migration-'+why);};
 
 export function prepareNativeComparisonMigrationRepair(input:NativeContractComparisonObservationInput,receipt:unknown):NativeComparisonRepairPlan {
+  if (input.comparison.textTemplate) throw Error('native-comparison-migration-repair-text-template-unqualified');
  if(!input.mainMigrations?.length)fail('proven-main-transition-required');
  const before=clean(receipt),after=clean(receipt),next=structuredClone(input),creation=next.creation;
  const nodes=new Map<string,Row>((after.content?.nodes??[]).map((n:Row)=>[n.id,n]));

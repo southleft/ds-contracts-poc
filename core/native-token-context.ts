@@ -18,7 +18,16 @@ type PlannedValue =
   | Exclude<NativeTokenValue, { type: "VARIABLE_ALIAS"; id: string }>
   | { type: "TOKEN_ALIAS"; targetPath: string; targetName: string };
 
+export interface NativeTokenModeSelection {
+  /** A host-derived native variant projection; never a source theme/brand. */
+  planRevision: string;
+  modeKey: string;
+}
+
 export interface NativeTokenContextInput {
+  /** Explicit opt-in to create all planned native modes. Does not authorize
+   * updates, inferred source modes, component bindings or application dispatch. */
+  writeProtocol?: 'explicit-modes-v1';
   fileKey: string;
   /** Host-owned operation scope, never a library collection's display name. */
   scopeId: string;
@@ -33,11 +42,13 @@ export interface NativeTokenContextInput {
   };
   /** Exact requested paths. Alias dependencies are added, never same-value peers. */
   tokenPaths: string[];
-  /** Only demonstrated source modes. Dark-only input produces one Dark mode. */
+  /** Only demonstrated source modes. A nativeSelection distinguishes physical
+   * variant modes of the same source context without inventing source themes. */
   modes: {
     sourceMode: string;
     brand: string;
     nativeModeName: string;
+    nativeSelection?: NativeTokenModeSelection;
     tokens: Record<string, unknown>;
     tokenTreeRevision: string;
   }[];
@@ -59,6 +70,7 @@ export interface NativeTokenContextInput {
   allocatedValueProtocol?: "px-dimension-v1";
 }
 export interface NativeTokenPreparation {
+  writeProtocol?: 'explicit-modes-v1';
   version: 1;
   status: "prepared-candidate";
   acceptedContract: null;
@@ -76,6 +88,7 @@ export interface NativeTokenPreparation {
     sourceMode: string;
     brand: string;
     nativeModeName: string;
+    nativeSelection?: NativeTokenModeSelection;
     tokenTreeRevision: string;
     /** The shared compiler's rows, with alias dependencies ordered first. */
     rows: TokenSetRow[];
@@ -84,7 +97,7 @@ export interface NativeTokenPreparation {
     tokenPath: string;
     name: string;
     resolvedType: NativeType;
-    values: { sourceMode: string; brand: string; value: PlannedValue }[];
+    values: { sourceMode: string; brand: string; nativeSelection?: NativeTokenModeSelection; value: PlannedValue }[];
   }[];
   /** The ALLOCATION revision: what ownership metadata was stamped with. With
    * `allocatedValues` it is NOT a hash of this body's current values: two value
@@ -100,7 +113,7 @@ export interface NativeTokenIdentity {
   preparationRevision: string;
   fileKey: string;
   collection: { id: string; key: string; name: string };
-  modes: { sourceMode: string; brand: string; modeId: string; name: string }[];
+  modes: { sourceMode: string; brand: string; modeId: string; name: string; nativeSelection?: NativeTokenModeSelection }[];
   variables: { tokenPath: string; id: string; key: string }[];
 }
 export interface NativeTokenContextReceipt {
@@ -211,6 +224,8 @@ export function nativeTokenCollectionName(scopeId: string): string {
 export function prepareNativeTokenContext(
   input: NativeTokenContextInput,
 ): NativeTokenPreparation {
+  if (input?.writeProtocol !== undefined && input.writeProtocol !== 'explicit-modes-v1') fail('write-protocol');
+  if (input?.writeProtocol !== undefined && input.allocatedValues !== undefined) fail('explicit-modes-value-update-unqualified');
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValueProtocol !== "px-dimension-v1")
     fail("allocated-value-protocol");
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValues === undefined)
@@ -337,8 +352,17 @@ function prepareBody(
     input.modes.map((m) => m.nativeModeName),
     "mode-name-ambiguous",
   );
+  const selections = input.modes.map(m => m.nativeSelection);
+  if (selections.some(s => s !== undefined)) {
+    if (input.writeProtocol !== 'explicit-modes-v1' || selections.some(s => !s ||
+        Object.keys(s).sort().join('|') !== 'modeKey|planRevision' ||
+        !/^sha256:[a-f0-9]{64}$/.test(s.planRevision) || !/^sha256:[a-f0-9]{64}$/.test(s.modeKey)) ||
+        new Set(selections.map(s => s!.planRevision)).size !== 1 ||
+        new Set(input.modes.map(m => JSON.stringify([m.sourceMode, m.brand]))).size !== 1)
+      fail('native-mode-selection');
+  }
   unique(
-    input.modes.map((m) => JSON.stringify([m.sourceMode, m.brand])),
+    input.modes.map((m) => JSON.stringify([m.sourceMode, m.brand, m.nativeSelection?.modeKey])),
     "source-mode-ambiguous",
   );
   const requestedTokenPaths = [...input.tokenPaths].sort();
@@ -425,6 +449,7 @@ function prepareBody(
       sourceMode: mode.sourceMode,
       brand: mode.brand,
       nativeModeName: mode.nativeModeName,
+      ...(mode.nativeSelection ? { nativeSelection: clone(mode.nativeSelection) } : {}),
       tokenTreeRevision: mode.tokenTreeRevision,
       rows: ordered,
     };
@@ -448,7 +473,7 @@ function prepareBody(
               targetName: row.target,
             }
           : row.light;
-      return { sourceMode: mode.sourceMode, brand: mode.brand, value };
+      return { sourceMode: mode.sourceMode, brand: mode.brand, ...(mode.nativeSelection ? { nativeSelection: clone(mode.nativeSelection) } : {}), value };
     });
     return { tokenPath, name, resolvedType: resolvedType!, values };
   });
@@ -458,6 +483,7 @@ function prepareBody(
     acceptedContract: null,
     nativeQualification: "unqualified",
     valueComparison: "exact-or-float32-color-v1",
+    ...(input.writeProtocol ? { writeProtocol: input.writeProtocol } : {}),
     fileKey: input.fileKey,
     scopeId: input.scopeId,
     collectionName,
@@ -541,7 +567,7 @@ export function verifyNativeTokenContextReceipt(args: {
       if (
         native.sourceMode !== mode.sourceMode ||
         native.brand !== mode.brand ||
-        native.name !== mode.nativeModeName
+        native.name !== mode.nativeModeName || !same(native.nativeSelection ?? null, mode.nativeSelection ?? null)
       )
         fail("mode-mapping");
     }
