@@ -513,11 +513,11 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *
  *  The lowering gives the text element the same box:
  *
- *      inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px));
+ *      inline-size: calc-size(fit-content, round(up, size, 1px)); // untracked
  *      max-inline-size: 100%;           (unless the part carries its own max-width)
  *      align-self: flex-start;          (only under a stretching flex column)
  *
- *  · FIT-CONTENT, NOT MAX-CONTENT (review, PR 132). `max-content` gave the
+ *  · Untracked text retains FIT-CONTENT (review, PR 132). `max-content` gave the
  *    element a definite, NON-WRAPPING box: the shipped `flowbite.card` label
  *    carries the fact on a runtime `children` string, and a long one grew the
  *    card to 596 px inside a 240 px container (a fixed-width column or grid
@@ -526,6 +526,16 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *    max(min-content, available))`: a label that fits is its max-content box
  *    rounded up (the badge is unchanged, 34 px), a label that does not fit
  *    wraps at the available width exactly as it does without the fact.
+ *  · Tracked owned text uses a max-content layout box less the final tracking,
+ *    plus an inner run with `calc-size(100%, size + tracking)`. Subtracting from
+ *    fit-content can subtract TWICE when the hug parent feeds its rounded size
+ *    back as available space; the shorter run then wraps a label that fits.
+ *    The inner run keeps trailing advance for line breaking and inherits text
+ *    alignment. max-inline-size plus min-inline-size:0 clamps it even in grid.
+ *    Empty text overrides the outer size to zero, including negative tracking.
+ *    Both calc-size declarations disappear together without browser support.
+ *    Complete one-to-three enum token axes emit the tracking variable and box
+ *    rule beside each selected value; missing/defaultless/boolean axes refuse.
  *  · MAX-INLINE-SIZE: 100%. Rounding a WRAPPED box rounds the available width
  *    up, so a fractional container (120.5 px) overflowed by 0.5 px; the clamp
  *    returns it to 120.5 (measured in column-flex, row-flex, grid and a
@@ -562,9 +572,9 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *  · `calc-size()` is the only CSS that can round an INTRINSIC size. A
  *    browser without it drops the `inline-size` declaration at parse (or
  *    ignores the CSSOM assignment, the inline surface) and keeps today's
- *    fractional box: under 1 px narrower than Figma's. That is NOT "no
- *    different layout" in every context — see align-self above, which is why
- *    that declaration exists — but it is never wider and never a wrap change.
+ *    fractional, untrimmed browser advance. Tracking plus rounding may differ
+ *    from Figma by more than a subpixel; fallback fidelity is not claimed.
+ *    The existing clamp and conditional start alignment still apply.
  *  · Logical properties, so vertical and RTL writing round and clamp the axis
  *    the text runs along.
  *  · The element must be BLOCK-LEVEL for `inline-size` to apply: every emitter
@@ -603,7 +613,7 @@ function textHolders(part: Part): { base: Holder[]; perValue: Holder[] } {
 const holds = (hs: Holder[], channel: string | RegExp) =>
   hs.some((h) => h !== undefined && Object.keys(h).some((k) => (typeof channel === 'string' ? k === channel : channel.test(k))));
 /** A tracking value that is only a zero adds nothing after the last glyph. */
-const ZERO_LENGTH = /^[-+]?(0+\.?0*|\.0+)(px|em|rem|%)?$/;
+const ZERO_LENGTH = /^[-+]?(0+\.?0*|\.0+)(px|em|rem)?$/;
 /** A tracking LENGTH `size - x` can subtract: px / em / rem. */
 const TRACKING_LENGTH = /^[-+]?(\d+\.?\d*|\.\d+)(px|em|rem)$/;
 /** The part's own uniform letter spacing as the base holders spell it: a
@@ -625,15 +635,16 @@ export function textBoxLetterSpacing(part: Part): { kind: 'literal'; value: stri
 const TEXT_BOX_CONFLICT_CHANNEL = /^(width|inline-size|flex|flex-grow|flex-basis|text-overflow|-webkit-line-clamp|line-clamp)$/;
 /** Every channel (and `layout.grow`) on the part that contradicts the fact,
  *  sorted — empty when the box is sized by its text alone. A `letter-spacing`
- *  that varies by variant or state, or rides a placeholder token, is listed
- *  too: the trailing tracking the box must shed has no single spelling then. */
+ *  that varies in per-value overrides is still refused. A complete enum
+ *  placeholder binding can emit its trimming rule beside each selected value. */
 export function textBoxConflicts(part: Part): string[] {
   const { base, perValue } = textHolders(part);
   const channels = new Set([...base, ...perValue].flatMap((h) => Object.keys(h ?? {})).filter((c) => TEXT_BOX_CONFLICT_CHANNEL.test(c)));
   if (part.layout?.grow) channels.add('layout.grow');
   if (holds(perValue, 'letter-spacing')) channels.add('letter-spacing (per variant or state)');
-  const ls = textBoxLetterSpacing(part);
-  if (ls?.kind === 'token' && placeholdersIn(ls.ref).length > 0) channels.add('letter-spacing (placeholder token)');
+  if (part.literals?.['letter-spacing'] !== undefined && part.tokens?.['letter-spacing'] &&
+      placeholdersIn(stripBraces(part.tokens['letter-spacing'])).length > 0)
+    channels.add('letter-spacing (literal beside placeholder token)');
   return [...channels].sort();
 }
 const FLEX_OR_GRID = new Set(['flex', 'inline-flex', 'grid', 'inline-grid']);
@@ -669,7 +680,24 @@ export function textBoxStaticRefusals(contract: Contract, part: Part, path: stri
   const conflicts = textBoxConflicts(part);
   if (conflicts.length > 0) out.push(`carries ${conflicts.join(', ')} — a box that is sized, filled or truncated by a channel is not sized by its text; remove the flag or the channel`);
   const ls = textBoxLetterSpacing(part);
-  if (ls?.kind === 'literal' && !TRACKING_LENGTH.test(ls.value)) {
+  if (ls?.kind === 'token' && placeholdersIn(ls.ref).length > 0) {
+    const phs = placeholdersIn(ls.ref);
+    if (phs.length > 3 || new Set(phs).size !== phs.length || phs.some(name => {
+      const prop = contract.props.find(p => p.name === name);
+      return !prop || !isEnum(prop) || prop.default === undefined || !prop.type.enum.includes(String(prop.default));
+    })) out.push('carries letter-spacing (placeholder token) without one to three distinct enum axes with explicit defaults — every selected and omitted tracking value needs a matching text-box rule');
+  }
+  if (ls && (part.parts || part.component || part.slot || part.repeat || part.icon || part.shape || part.meter || part.attrs?.style !== undefined || part.content?.prop === 'children')) {
+    out.push('carries tracking on caller or structured content — the trailing-spacing run requires an owned text leaf');
+  }
+  const displayHolders = textHolders(part);
+  if (ls && (part.layout || part.layoutByProp || [...displayHolders.base, ...displayHolders.perValue].some(h => h?.display !== undefined && !['block', 'inline-block', 'flow-root', 'none'].includes(String(h.display))))) {
+    out.push('carries tracking on a text holder whose display can leave ordinary text flow — the trailing-spacing run requires a block text container');
+  }
+  if (ls && (part.element && /^(input|textarea|select|option|optgroup|script|style|title|text|svg|img|br|hr|area|base|embed|link|meta|param|source|track|wbr)$/.test(part.element) || partAt(contract, path.slice(0, -1))?.element === 'select')) {
+    out.push('carries tracking on a text host that cannot contain a span run');
+  }
+  if (ls?.kind === 'literal' && (!TRACKING_LENGTH.test(ls.value) || !Number.isFinite(parseFloat(ls.value)))) {
     out.push(`carries letter-spacing ${JSON.stringify(ls.value)}, which is not a px / em / rem length — the trailing tracking the box must shed cannot be subtracted from its size (a % resolves against the containing block, a unitless value invalidates the declaration)`);
   }
   // Inherited tracking: an ancestor that states letter-spacing anywhere, and
@@ -712,12 +740,12 @@ function tokenModeValues(tokens: unknown, path: string): Array<string | undefine
     try { return trackingText(makeResolveLiteral(m)(path)); } catch { return undefined; }
   });
 }
-/** A resolved DTCG value as CSS text: a number stays unitless (and is then
- *  refused), a `{ value, unit }` dimension is joined. */
+/** Only scalar values reach these CSS serializers. Do not normalize an
+ *  object here when the inline emitter and tokens.css cannot serialize it. */
 function trackingText(v: unknown): string | undefined {
   if (typeof v === 'string') return v.trim();
   if (typeof v === 'number') return String(v);
-  if (v && typeof v === 'object' && 'value' in v && 'unit' in v) return `${(v as { value: unknown }).value}${(v as { unit: unknown }).unit}`;
+  if (v && typeof v === 'object') return '[non-scalar token value]';
   return undefined;
 }
 /** A flagged part's letter-spacing TOKEN is spelled into the calc as its
@@ -731,15 +759,19 @@ export function textBoxTokenRefusals(contract: Contract, tokens: unknown): strin
   for (const { name, part } of walkAnatomy(contract)) {
     if (!drawsWholePixelTextBox(part)) continue;
     const ls = textBoxLetterSpacing(part);
-    if (ls?.kind !== 'token' || placeholdersIn(ls.ref).length > 0) continue;
+    if (ls?.kind !== 'token') continue;
     if (tokens === undefined || tokens === null) {
       out.push(`${contract.id}: part "${name}" carries textAutoResize and binds letter-spacing to {${ls.ref}}, and no token VALUES were supplied — whether \`size - var(…)\` is valid depends on the token's unit, which cannot be checked from the path; pass the DTCG trees`);
       continue;
     }
-    const values = tokenModeValues(tokens, ls.ref);
+    const phs = placeholdersIn(ls.ref);
+    const enums = new Map(enumProps(contract).map(p => [p.name, p.type.enum]));
+    const paths = phs.length === 0 ? [ls.ref] : enumCombos(phs, enums).map(combo =>
+      combo.reduce((ref, [name, value]) => ref.replaceAll(`{${name}}`, value), ls.ref));
+    const values = paths.flatMap(path => tokenModeValues(tokens, path));
     // `0px` is a length and subtracts nothing; a unitless `0` is a number and
     // invalidates `size - var(…)` — so the unit decides, not the magnitude.
-    if (values.length === 0 || values.some((v) => v === undefined || !TRACKING_LENGTH.test(v))) {
+    if (values.length === 0 || values.some((v) => v === undefined || !TRACKING_LENGTH.test(v) || !Number.isFinite(parseFloat(v)))) {
       out.push(`${contract.id}: part "${name}" carries textAutoResize and binds letter-spacing to {${ls.ref}}, which resolves to ${[...new Set(values.map((v) => v ?? 'nothing'))].join(' / ')} — only a px / em / rem length can be subtracted before rounding (a % resolves against the containing block, a unitless value or \`normal\` invalidates the declaration: a silent no-op); state the tracking as a length or remove the flag`);
     }
   }
@@ -751,10 +783,16 @@ export function textBoxTokenRefusals(contract: Contract, tokens: unknown): strin
  *  validateContract / textBoxTokenRefusals before any rule is written. */
 export function wholePixelTextBoxDecls(contract: Contract, part: Part, path: string[], tokenCss: (tokenPath: string) => string): string[] {
   const ls = textBoxLetterSpacing(part);
-  const trim = ls === undefined ? '' : ` - ${ls.kind === 'token' ? tokenCss(ls.ref) : ls.value}`;
-  const decls = [`inline-size: calc-size(${WHOLE_PIXEL_TEXT_BOX_BASIS}, round(up, size${trim}, 1px))`];
+  // Placeholder trimming belongs to the same selected rule as letter-spacing.
+  // The base never contains an unresolved token path or a guessed axis value.
+  const trim = ls === undefined || ls.kind === 'token' && placeholdersIn(ls.ref).length > 0
+    ? '' : ` - ${ls.kind === 'token' ? tokenCss(ls.ref) : ls.value}`;
+  const basis = ls ? 'max-content' : WHOLE_PIXEL_TEXT_BOX_BASIS;
+  const decls = [`inline-size: calc-size(${basis}, round(up, size${trim}, 1px))`];
+  if (ls) decls.push(`${WHOLE_PIXEL_TEXT_TRACKING}: ${trim ? trim.slice(3) : '0px'}`);
   const { base, perValue } = textHolders(part);
   if (!holds([...base, ...perValue], /^max-(width|inline-size)$/)) decls.push('max-inline-size: 100%');
+  if (ls && !holds([...base, ...perValue], /^min-(width|inline-size)$/)) decls.push('min-inline-size: 0');
   const parent = partAt(contract, path.slice(0, -1));
   if (
     parent && !absolutelyPlaced(part) && part.declared?.['align-self'] === undefined &&
@@ -764,6 +802,25 @@ export function wholePixelTextBoxDecls(contract: Contract, part: Part, path: str
     parent.layoutByProp === undefined
   ) decls.push('align-self: flex-start');
   return decls;
+}
+/** A selected tracking token and its trailing-spacing subtraction must change
+ * together. The stylesheet and inline emitters call this at the same site that
+ * writes the resolved letter-spacing value; unflagged/static parts are inert. */
+export function wholePixelTextTrackingDecls(part: Part, property: string, value: string): string[] {
+  const ls = textBoxLetterSpacing(part);
+  return drawsWholePixelTextBox(part) && property === 'letter-spacing' && ls?.kind === 'token' && placeholdersIn(ls.ref).length > 0
+    ? [`inline-size: calc-size(max-content, round(up, size - ${value}, 1px))`, `${WHOLE_PIXEL_TEXT_TRACKING}: ${value}`] : [];
+}
+/** The layout box excludes the final tracking advance, but its text run must
+ * retain that space for line breaking. A percentage basis contributes no extra
+ * intrinsic width; calc-size(auto, ...) would add the tracking twice. Both the
+ * outer and inner declarations disappear in engines without calc-size(). */
+export const WHOLE_PIXEL_TEXT_TRACKING = '--_dsc-text-box-tracking';
+export const WHOLE_PIXEL_TEXT_RUN_STYLE = {
+  display: 'block', inlineSize: `calc-size(100%, size + var(${WHOLE_PIXEL_TEXT_TRACKING}))`,
+};
+export function needsWholePixelTextRun(part: Part): boolean {
+  return drawsWholePixelTextBox(part) && textBoxLetterSpacing(part) !== undefined;
 }
 /** The same declarations, looked up by part object — for emitters whose part
  *  loop does not carry the anatomy path. */

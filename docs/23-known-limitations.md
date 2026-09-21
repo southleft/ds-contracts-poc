@@ -4649,10 +4649,19 @@ give the text element the same box Figma draws:
 
 ```
 inline-size: calc-size(fit-content, round(up, size, 1px));
-inline-size: calc-size(fit-content, round(up, size - <letter-spacing>, 1px));   /* a tracked label */
+inline-size: calc-size(max-content, round(up, size - <letter-spacing>, 1px));  /* an owned tracked label */
 max-inline-size: 100%;        /* unless the part carries its own max-width */
 align-self: flex-start;       /* only under a flex column that would stretch it */
 ```
+
+**2026-09-21 tracked-text revision:** the tracked box also carries a private
+tracking variable and a block text run whose inline size is
+`calc-size(100%, size + var(--_dsc-text-box-tracking))`. It keeps the final
+advance available for line breaking without including it in the layout box.
+An absent or empty text value contributes zero width. A default minimum of
+zero allows grid tracks to shrink; authored minimums remain authoritative.
+Untracked text retains the earlier `fit-content` rule. See D.93 for the
+measured wrapping defect, bounded enum support and remaining image failures.
 
 `calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
 cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
@@ -4660,10 +4669,11 @@ available))`: a label that fits is its max-content box rounded up; a string that
 does not fit wraps at the available width exactly as it does without the fact.
 `max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
 box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
-A browser without `calc-size()` drops the `inline-size` declaration at parse (a
-stylesheet) or ignores the assignment (the CSSOM, i.e. the inline surface) and
-keeps today's fractional box, under 1 px narrower — never wider and never a wrap
-change; no `@supports` guard is needed and none could be spelled inline. Logical
+A browser without `calc-size()` drops both outer and inner sizing declarations
+at parse or assignment. It retains the fractional, untrimmed browser advance;
+tracking and rounding can make this differ from Figma by more than a subpixel.
+The existing clamp and conditional start alignment still apply. No fallback
+Figma fidelity is claimed; both declarations use the same feature boundary. Logical
 properties, so a vertical or RTL writing mode rounds the axis the text runs along.
 The declaration takes effect because every emitter renders a text part as its own
 element inside a parent it lays out as flex or grid (blockified), and an absolutely
@@ -4691,9 +4701,9 @@ committed REST fixtures rendered in Chromium with the fonts loaded:
 Three of three tracked samples: Figma's box is the run less the trailing spacing,
 rounded up. The part's own uniform `letter-spacing` is therefore shed before
 rounding — a literal verbatim, a token as its `var()` on the sheets and as its
-resolved value inline. A `letter-spacing` that varies by variant or state, or
-rides a placeholder token, has no single spelling in the base rule and is refused
-beside the flag. On the 23 untracked samples the two forms are the same number.
+resolved value inline. Per-value variant or state overrides remain refused.
+Complete enum-placeholder tokens now select a matching box and run rule as
+described in D.93. On the 23 untracked samples the two forms are the same number.
 
 **The premise, measured on 26 samples.** Every WIDTH_AND_HEIGHT text node in the
 committed REST fixtures whose font could be loaded (Inter locally; Manrope, Geist
@@ -4758,7 +4768,8 @@ that owns no text (`text` / `content` / `textByProp`); beside a `width` /
 `inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
 truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
 that is sized, filled or truncated by a channel is not sized by its text; beside a
-per-variant / per-state or placeholder-token `letter-spacing`; beside a literal
+per-variant / per-state `letter-spacing` overrides, or a placeholder token
+without one to three distinct enum axes and explicit defaults; beside a literal
 `letter-spacing` that is not a px / em / rem length; when the part INHERITS
 `letter-spacing` from any ancestor holder (root or part; literal, token or
 per-variant) and states none of its own; on an inline-level element (the part
@@ -4892,10 +4903,9 @@ hoisted root label and count as named). Evidence:
   committed dump predates the field).
 - **The hoisted root label** (a sole root text node named `label`) is named, not
   carried; the root keeps the fractional advance.
-- **A tracked label with per-variant or per-state tracking** is refused beside the
-  flag rather than given a private custom property; the proposer never writes
-  per-variant tracking (a mixed `letter-spacing` is already named), so the
-  refusal reaches only hand-written contracts.
+- **Per-value tracking overrides** remain refused. D.93 now carries complete
+  captured enum-placeholder tracking with a selected box/run rule; ambiguous
+  axes or missing values still refuse.
 - The mock canvas does not model the field (it reports nothing, which reads as
   "not captured"). The Playground's canvas preview ignores the flag.
 
@@ -7842,6 +7852,107 @@ compiler/capture check, not a new application journey or fidelity qualification.
 To reverse, restore the absent-alignment fallback, independent bound-width
 recovery and early outline remap together; preserve the failing controls and
 readback in the same private review directory.
+
+### D.93 Complete observed tracking can vary by prop
+
+**AGENT decision — 2026-09-20.** Both readers now retain explicitly observed
+zero letter spacing (REST dump 1.40, plugin dump 1.41). Missing or mixed data
+still means uncaptured. Fully observed, finite tracking that differs across
+variants uses the existing provisional-token axis classifier when minting is
+allowed. Uniform nonzero values retain the existing literal spelling; uniform
+zero adds no declaration. Missing cells, nonfinite values and varying input
+with minting disabled keep named limits. No component-specific rule was added.
+
+The actual JSON-import and React-package workflow produced an archive that
+matches the isolated installed package byte for byte. At the unchanged 5%
+limit, **8/10** native/React pairs pass on both backgrounds. All five selected
+appearances now pass. Unselected rest and pressed remain **15.38%** on black;
+the run is still refused. The source version and bracketing geometry hashes
+are identical before and after capture. Repeat import retains five workspace
+entries; normal reload restores the identical contract and package action.
+The comparison and installed consumer were inspected in the application.
+
+A generated update in Evaluations preserved the existing component set key
+and all ten variant IDs, rebuilt the contract-owned text interiors, and read
+back 0px or 1px on every label. The unchanged repeat created nothing. Existing
+page, collection and variable inventories and values did not change. Native
+tracking is a resolved value; this does not establish variable-binding
+identity for letter spacing. Only the owned Evaluations probe was amended.
+
+**AGENT decision — tracked text boxes, 2026-09-21.** A base tracking token
+with one to three distinct enum placeholders and explicit defaults now retains
+the auto-width fact. Every expanded light/dark token value must be a finite scalar
+px/em/rem string. Object-shaped dimensions refuse because the scalar emitters
+do not serialize that format; even zero percent is invalid tracking. Missing cells, boolean/defaultless/repeated axes, a competing
+literal, and per-value tracking overrides refuse. The text must be an owned
+leaf in ordinary text flow; caller children, structured content, raw-text hosts
+and authored style attributes cannot acquire the inner run. Even an explicitly
+empty style attribute refuses: accepting it produced duplicate JSX style
+attributes and an uncompilable React component in an adversarial control.
+
+An adversarial browser check found that subtracting tracking from `fit-content`
+could subtract twice when a content-sized parent fed its rounded width back
+as available space. A 14px Arial label, “Updated label”, with 1px tracking
+became a 98px box on two lines despite a 99.40625px run. The revised shared
+rule uses a 99px layout box and an inner 100px line-breaking box, keeping one
+line. Static tracking and selected enum tracking use the same rule. Negative
+tracking, empty text, replacement, restoration, constrained columns/grid, RTL,
+vertical text and fallback without `calc-size()` are measured separately.
+No font, scorer or image threshold was changed.
+A separate static-tracking regression consumer retains all ten passing Badge
+image pairs on both backgrounds. It uses environment fonts; their bytes are
+not authenticated. This check does not replace its prior application evidence.
+
+A fresh engineering consumer from the preserved Tab capture matches all ten
+native root dimensions exactly. A subsequent actual application import,
+archive download and isolated installation reproduces that result: **8/10**
+image pairs pass; unselected rest and pressed fail at **12.56%** on black.
+The downloaded archive and clean consumer's installed archive share SHA256
+`5866d6e8042f596c1178671628353edc0ae0e91cf0c05973269d6ec72627d508`.
+The app refuses a tracking reference to a color value. Restoring the original
+contract produces a byte-identical archive; normal reload and workspace
+selection restore the exact contract and delivery action, with one saved
+entry. This is same-tab recovery; browser restart is not established.
+The earlier app archive and its 15.38% failures remain intact. Font assets are
+explicitly supplied and hashed; Figma's font bytes remain unverified. The
+earlier Public Sans 1.007 control also remains failed.
+
+A generated native update, using that app contract with only its identity
+retargeted to the existing owned Evaluations fixture, preserves the set key
+and all ten main IDs. The existing amend rule rebuilds ten editable text
+interiors; all retain `WIDTH_AND_HEIGHT` and the expected 0px/1px tracking.
+Root dimensions, native image bytes, pages, collections and variable values
+are exact before and after. An unchanged repeat allocates nothing and preserves
+the complete readback. Canonical capture and inverse proposal retain the
+auto-width field and both tracking values. The bridge was closed and the
+canvas inspected. This is a generated-program update of the owned fixture,
+not a new source-workflow operation or fidelity qualification.
+
+**AGENT decision — editor token values, 2026-09-21.** The editor passed only
+token names to its CSS validation layer. That falsely refused the imported
+tracked label with “no token VALUES were supplied” even though the app held
+all 17 minted values. Validation now receives the same active token tree as
+generation. The positive app import and negative color-as-length check both
+exercise this path. Reversal means restoring inventory-only validation and
+documenting the resulting refusal of valid tracked text imports; never skip
+the shared value-dependent guard. The new app archive, failed comparison,
+reload and refusal evidence are preserved in the private
+`variant-tracking-text-box-20260921/` journal.
+
+Reversing this sizing revision means restoring the placeholder-token refusal
+and the prior tracked-box declarations and markup together, removing its
+private run variable and empty-text handling, then rebuilding the plugin
+receipt and derived registers through their scripts. Keep the newly exposed
+short-label wrapping defect documented and preserve every failed consumer.
+
+Evidence and the adversarial review remain in the append-only private
+`variant-letter-spacing-20260920/` journal, including eleven bounded controls,
+source captures, actual archive, clean-consumer receipts, native IDs and visible
+comparisons. Earlier D.91/D.92 failures remain intact. Tab and V1 remain
+unqualified. Reversal: revert the reader-version/capture and proposer changes
+together, rebuild the embedded dump and plugin receipt through their scripts,
+and retain all old captures and failed consumers. This restores the named
+varying-tracking loss rather than inventing zero for missing observations.
 
 ## D.94 Local default components keep their export identity
 

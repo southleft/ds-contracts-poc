@@ -5692,14 +5692,22 @@ function settleTextAutoResize(contract: Record<string, unknown>, ctx: Ctx): void
   }
 }
 /** The bridge resolves spacing to pixels, without inventing a token identity.
- * Uniform spacing uses the existing literal channel. Mixed or partially
- * captured spacing cannot use a uniform literal. */
-function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
-  const values = m.occ.filter((o) => o.node.text !== undefined).map((o) => o.node.text!.letterSpacing);
+ * Uniform spacing uses the existing literal channel. Complete varying
+ * observations use the ordinary provisional token/axis classifier; absent
+ * spacing is never assumed zero. */
+function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string, tokens: Record<string, string>): void {
+  const values = m.occ.map((o) => o.node.text?.letterSpacing);
   if (!values.some((value) => value !== undefined)) return;
   const value = values[0];
-  if (value === undefined || !Number.isFinite(value) || values.some((other) => other !== value)) {
-    ctx.notes.push(`${where}: letter-spacing is mixed, partial, or invalid across variants — no uniform literal proposed; NAMED for review`);
+  if (values.some((other) => other === undefined || !Number.isFinite(other))) {
+    ctx.notes.push(`${where}: letter-spacing is partial or invalid across variants — no value inferred for an uncaptured cell; NAMED for review`);
+    return;
+  }
+  if (values.some((other) => other !== value)) {
+    if (ctx.mint) {
+      mintObservation(ctx, tokens, where, 'letter-spacing', 'px', m.occ.map((o, i) => ({ variant: o.variant, value: values[i]! })), `${where}|letterSpacing`);
+      ctx.notes.push(`${where}: finite letter-spacing differs across fully captured variants — submitted to provisional token/axis classification; zero is an observation, not an absence`);
+    } else ctx.notes.push(`${where}: letter-spacing differs across variants and needs provisional token minting — NAMED, not proposed`);
     return;
   }
   if (value === 0) return; // CSS normal has zero additional tracking.
@@ -8907,7 +8915,7 @@ function buildPartFromEvidence(
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
-    carryLetterSpacing(m, part, ctx, where);
+    carryLetterSpacing(m, part, ctx, where, tokens);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     carryTextAutoResize(m, part, ctx, where); // dump v1.36 — the whole-pixel auto-width text box
     invertNodeOpacity(m, part, tokens, ctx, where);
@@ -12500,7 +12508,7 @@ function proposeFromDumpFenced(
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
-    carryLetterSpacing(only, root, ctx, `${where}/label`);
+    carryLetterSpacing(only, root, ctx, `${where}/label`, rootTokens);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     // dump v1.36: the whole-pixel text box does NOT hoist. The fact qualifies
     // the text element's own box; the root's box is padding plus content and

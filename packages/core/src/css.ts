@@ -40,6 +40,7 @@ import {
   lowerStrokeRings,
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
+  wholePixelTextTrackingDecls,
   nativeTextRenderingRoots,
   nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
@@ -1035,7 +1036,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         // expansion.
         for (const { combo, resolved } of expandRef(`anatomy.${name}.tokens.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${comboCls(combo)} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          const selected = [`${cssProp}: ${cssVar(resolved)}`, ...wholePixelTextTrackingDecls(part, cssProp, cssVar(resolved))];
+          nestedSubRules.push(`\n.${comboCls(combo)} .${cssIdentifier(name)} {\n${selected.map(d => `  ${d};`).join('\n')}\n}`);
         }
         continue;
       }

@@ -50,6 +50,8 @@ import {
   isMultiRoot,
   namedSlots,
   namedTextProps,
+  needsWholePixelTextRun,
+  WHOLE_PIXEL_TEXT_RUN_STYLE,
   nativeTextRenderingLeafParts,
   numberProps,
   textDefault,
@@ -80,6 +82,9 @@ export {
   textBoxTokenRefusals,
   WHOLE_PIXEL_TEXT_BOX_BASIS,
   wholePixelTextBoxPlan,
+  wholePixelTextTrackingDecls,
+  needsWholePixelTextRun,
+  WHOLE_PIXEL_TEXT_RUN_STYLE,
   nativeTextRenderingRoots,
   NATIVE_TEXT_RENDERING_DECL,
   enumProps,
@@ -310,8 +315,12 @@ export function generateTsx(
   const { base: propsBase, omitted: omittedAttrs } = reactPropsBase(contract, meta);
   const omittedNote = reactOmittedNote(omittedAttrs, meta);
   const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
-  const nativeTextLeafStyle = (part: Part) => nativeTextLeaves.has(part) && !omittedAttrs.includes('style')
-    ? ' style={{ textRendering: rest.style?.textRendering }}' : '';
+  const nativeTextLeafStyle = (part: Part, text: string) => {
+    const declarations: string[] = [];
+    if (nativeTextLeaves.has(part) && !omittedAttrs.includes('style')) declarations.push('textRendering: rest.style?.textRendering');
+    if (needsWholePixelTextRun(part)) declarations.push(`...((${text}) == null || (${text}) === '' ? { inlineSize: 0 } : {})`);
+    return declarations.length ? ` style={{ ${declarations.join(', ')} }}` : '';
+  };
 
   const events = contract.events ?? [];
   const toggledCodeProps = new Set(
@@ -615,6 +624,8 @@ export function generateTsx(
       .map((area) => `<div className={${stylesRef(area)}} />`)
       .join('\n');
 
+  const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
+    ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
   const renderPart = (partName: string, part: Part): string => {
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
       `<span className={${stylesRef(partName)}} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
@@ -713,7 +724,7 @@ export function generateTsx(
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part)}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part, prop.bindings.code.prop)}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, `{${prop.bindings.code.prop}}`)}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -728,7 +739,7 @@ export function generateTsx(
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part)}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${nativeTextLeafStyle(part, tb ? inner.slice(1, -1) : JSON.stringify(part.text))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, inner)}</${el}>`,
       );
     }
     if (part.meter) {

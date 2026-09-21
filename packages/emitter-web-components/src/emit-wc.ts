@@ -85,6 +85,9 @@ import {
   settleStrokeShadows,
   stateSelectorsFor,
   wholePixelTextBoxPlan,
+  wholePixelTextTrackingDecls,
+  needsWholePixelTextRun,
+  WHOLE_PIXEL_TEXT_RUN_STYLE,
   nativeTextRenderingRoots,
   nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
@@ -614,7 +617,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
       // N placeholders → the cartesian as a compound ancestor selector (every
       // modifier attribute rides the root), the same expansion the root takes.
       for (const { combo, resolved } of expandRef(`part "${name}" token "${cssProp}"`, refPath)) {
-        subRules.push([`${rootWithCombo(combo)} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]]);
+        subRules.push([`${rootWithCombo(combo)} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`, ...wholePixelTextTrackingDecls(part, cssProp, cssVar(resolved))]]);
       }
     }
     if (
@@ -966,6 +969,10 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
 
   // ---- markup codegen ----------------------------------------------------
   const extraConsts: string[] = [];
+  const emptyRun = (part: Part, text: string) => needsWholePixelTextRun(part)
+    ? ` style="\${(${text}) == null || (${text}) === '' ? 'inline-size: 0px' : ''}"` : '';
+  const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
+    ? `<span style="display: block; inline-size: ${WHOLE_PIXEL_TEXT_RUN_STYLE.inlineSize}">${content}</span>` : content;
 
   // `attrs` on a part (root included): a `{prop}` value binds to the LIVE
   // prop; an unset defaultless prop applies no attribute at all (an empty
@@ -1115,7 +1122,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       const valueExpr = prop
         ? `\${__esc(String(${acc(prop.name)} ?? ${JSON.stringify(fallback)}))}`
         : tpl(escapeHtml(fallback));
-      const inner = `<${textEl}${partAttr}${attrFragment(part)}>${valueExpr}</${textEl}>`;
+      const inner = `<${textEl}${partAttr}${attrFragment(part)}${emptyRun(part, prop ? `(${acc(prop.name)} ?? ${JSON.stringify(fallback)})` : JSON.stringify(fallback))}>${textRun(part, valueExpr)}</${textEl}>`;
       return visibleWrap(part, inner);
     }
 
@@ -1128,7 +1135,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
             .map(([v, t]) => `(${acc(tb.prop)} ?? '') === ${JSON.stringify(v)} ? ${JSON.stringify(escapeHtml(t))} : `)
             .join('')}${JSON.stringify(escapeHtml(part.text))}}`
         : tpl(escapeHtml(part.text));
-      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}>${textFrag}</${textEl}>`);
+      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}${emptyRun(part, tb ? textFrag.slice(2, -1) : JSON.stringify(part.text))}>${textRun(part, textFrag)}</${textEl}>`);
     }
 
     if (part.meter) {

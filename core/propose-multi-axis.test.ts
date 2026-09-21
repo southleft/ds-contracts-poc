@@ -61,7 +61,9 @@ test("letter spacing carries signed pixels and names mixed or partial evidence",
     if (values[0] !== values[1])
       assert.ok(
         result.notes.some((n) =>
-          n.includes("letter-spacing is mixed, partial"),
+          n.includes(values.some((v) => v === undefined)
+            ? "letter-spacing is partial or invalid"
+            : "letter-spacing differs across variants and needs provisional token minting"),
         ),
       );
   }

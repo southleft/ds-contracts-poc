@@ -50,7 +50,7 @@ const AUTO = { resize: 'WIDTH_AND_HEIGHT', sizing: 'HUG' };
 test('the REST reader carries textAutoResize on every text node — an ABSENT response key is NONE, REST\'s default (review M4) — and never copies an unknown spelling', () => {
   // A fixed box is built BY OMISSION, as REST is believed to report it: NONE is the field's default.
   const { set, provenance } = mapped([AUTO, { resize: 'HEIGHT', sizing: 'FILL' }, { sizing: 'FIXED' }]);
-  assert.equal(provenance.dumpVersion, '1.39');
+  assert.equal(provenance.dumpVersion, '1.40');
   assert.deepEqual(set.variants.map((v) => labelOf(v as DumpNode).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', 'NONE']);
   assert.equal(labelOf(mapped([{ resize: 'NONE', sizing: 'FIXED' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'NONE', 'an explicit NONE reads the same');
   assert.equal(labelOf(mapped([{ resize: 'TRUNCATE' }]).set.variants[0] as DumpNode).text!.textAutoResize, 'TRUNCATE', 'the deprecated value is captured too, so nothing is guessed at');
@@ -75,7 +75,7 @@ test('the plugin reader carries the same field from node.textAutoResize, and wri
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['WholePixelBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.40');
+  assert.equal(dumps._provenance.dumpVersion, '1.41');
   const variants = Array.from(dumps.WholePixelBadge.variants, (v) => JSON.parse(JSON.stringify(v)) as DumpNode);
   assert.deepEqual(variants.map((v) => labelOf(v).text!.textAutoResize), ['WIDTH_AND_HEIGHT', 'HEIGHT', undefined], 'unreported: not captured, never auto-width');
 });

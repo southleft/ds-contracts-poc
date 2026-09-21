@@ -69,9 +69,10 @@ export function validateContractText(text: string): ValidationResult {
   }
   const errors: string[] = [];
   validateContract(contract, contracts, errors, icons);
-  // The ACTIVE token inventory referees {token.ref}s — with a pasted user
-  // tree, refs into repo-only tokens refuse by name (see token-source.ts).
-  generateCss(contract, activeTokens().inventory, errors);
+  // Pass the active values as well as their names: value-dependent checks
+  // (including tracked text sizing) need the same trees the emitters receive.
+  const tokens = activeTokens();
+  generateCss(contract, tokens.inventory, errors, tokens.tree);
   if (errors.length > 0) {
     return {
       status: 'violations',

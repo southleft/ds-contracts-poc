@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import {
   lstatSync,
@@ -150,6 +150,31 @@ const fail = (code: string): never => {
   throw Error(`candidate-job-${code}`);
 };
 
+/** Internal stop handle for a child whose process group this launcher owns.
+ * Once signalled or absent, the group is terminal. A close callback must not
+ * signal it again: macOS can return EPERM while it exits, and a later reused
+ * process-group ID would no longer identify our child. */
+export function candidateProcessGroupStop(
+  child: Pick<ChildProcess, "pid">,
+  signal: typeof process.kill = process.kill,
+): () => boolean {
+  let stopped = false;
+  return () => {
+    if (stopped || !child.pid) return false;
+    try {
+      signal(-child.pid, "SIGKILL");
+      stopped = true;
+      return true;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "ESRCH") {
+        stopped = true;
+        return false;
+      }
+      throw error;
+    }
+  };
+}
+
 /** The process group is created here, retained only in this closure and never
  * recovered from disk. SIGKILL deliberately leaves partial private evidence
  * for inspection; it cannot leave an unresponsive build grandchild running. */
@@ -166,16 +191,7 @@ function launchCandidate(repoRoot: string): CandidateRun {
       },
     });
     let finished = false;
-    const kill = () => {
-      if (!child.pid) return false;
-      try {
-        process.kill(-child.pid, "SIGKILL");
-        return true;
-      } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === "ESRCH") return false;
-        throw error;
-      }
-    };
+    const kill = candidateProcessGroupStop(child);
     const timer = setTimeout(
       () => settle(Error("candidate-job-timeout")),
       180000,
