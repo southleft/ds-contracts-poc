@@ -9134,14 +9134,65 @@ sibling placement and refusals. These are engineering probes; they do not
 establish a live Figma or application outcome. The original captured Tabs family
 and successive consumer comparisons remain in
 `private/variant-primary-fill-20260921/`. The corrected CLI consumer now responds
-to Stretch; the discarded-variant failure is gone. Its default black difference
-remains **5.24%** and Stretch measures **5.36%**; both still fail the unchanged
-5% limit. Default content remains 441 px against 438 px, and the complete native
-root is 439 px. Consumer font bytes still lack source-font authentication. No
-threshold, scorer, source asset or protected evidence is changed.
+to Stretch; the discarded-variant failure is gone. The app then imported the
+unchanged captured family, visibly rendered its content and equal Stretch
+allocation, and prepared the seven-component archive. An isolated consumer
+installed byte-identical archive bytes and reproduced the CLI result: default
+black difference **5.24%**, Stretch **5.36%**, and a 441 px root against 439 px
+in Figma. These failed measurements used supplied Public Sans 2.001. A later
+controlled font-input check, with the same package, passes both image pairs
+and exact root dimensions; see D.112 for selection evidence and its limits.
+Application delivery is recorded in private
+`observed-content-app-20260921/grow-app-delivery-v1.json`. Interactive Tabs
+behavior and live native execution of this placement rule remain unqualified.
+No threshold, scorer, source asset or protected evidence is changed.
 
 To reverse, remove the optional placement fields, their proposer carriage and
 all emitter projections together, restoring named refusal of partial fill.
 Reject saved contracts using the removed fields by name. Preserve the recorded
 failed and corrected consumers; do not silently drop the explicit zero basis
 or reinterpret older contracts.
+
+## D.112 Font names do not identify font bytes
+
+**AGENT decision, 2026-09-21.** A consumer may explicitly supply fonts selected
+from independently captured source names and weights. Selection must be recorded
+before scoring. A lower image difference cannot select the font or authenticate
+the bytes Figma used. Keep every earlier measurement and report the supplied
+assets as inputs, including their hashes and the remaining identity uncertainty.
+
+The Tabs source REST observation names PublicSans-Regular (400),
+PublicSans-Medium (500) and PublicSans-SemiBold (600). The locally installed
+static files match those three PostScript names and weights and report version
+1.007. The earlier consumer used a variable Public Sans 2.001 asset. REST does
+not expose the source font version or bytes. Exactly the three matching static
+files were selected and hashed before the new run; no score-based font search
+was performed.
+
+The same application-generated archive, SHA-256
+`8825be77486fb6fbe5ff011111e8b6104c8db07747d4ef336ebb7ecca7e58023`, installs
+unchanged in a clean consumer with these explicitly supplied fonts. Default
+measures **0.4142% white / 3.7404% black**; Stretch measures
+**0.0155% white / 3.3392% black**. Both pairs pass the unchanged 5% limit with
+recorded origins and a common unmasked crop. Both root boxes match Figma
+exactly at **439 × 176 px**. The default's nonzero-alpha content width still
+differs by one pixel (439 versus 438); exact pixel identity is not claimed.
+Stretch changes geometry, and the array-content probe renders all three items.
+Native PNGs and the captured file version are identical to the prior failed run;
+the generated package and scorer are unchanged.
+
+This is a bounded macOS consumer result for two captured appearances. It does
+not qualify keyboard interaction, tab-panel switching, accessibility, instance
+swaps, Linux rendering, source-font byte identity, live native placement or the
+complete independent-family journey. No other component's failing score is
+superseded by this result. Raw source metadata, the pre-measurement selection,
+hashed font manifest, failed and successful receipts, and visible comparisons
+remain in private `tabs-font-provenance-20260921-v1/` and
+`tabs-font-review-20260921-v1/`.
+
+To reverse the consumer input choice, rerun the same archive with the preserved
+2.001 manifest and keep the new receipt separately. Do not change generated CSS,
+source designs, image framing or the scorer to imitate the alternate font.
+If the source's actual font bytes later become available, compare their hashes
+and create a fresh measurement; never rewrite these receipts as authenticated
+source-font evidence.
