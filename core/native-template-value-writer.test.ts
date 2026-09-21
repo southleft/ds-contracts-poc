@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { revisionOf } from './contract-provenance.js';
-import { nativeTextGraphComponentFixture, nativeTextNodeBindings } from './native-text-template-test-fixture.js';
+import { nativeTextGraphComponentFixture, nativeTextNodeBindings, nativeNodePaintBindings } from './native-text-template-test-fixture.js';
 import { emitNativeContractReadbackScript, emitNativeTemplateSyncReadback, verifyNativeContractReadback,
   type NativeContractObservationInput } from './native-source-observation.js';
 import { emitNativeTemplateValueWriteScript, prepareNativeTemplateComponentUpdate } from './native-template-value-writer.js';
@@ -13,15 +13,22 @@ import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } fr
 import { verifyNativeTemplateConsumersAfter, type NativeTemplateConsumerInput } from './native-template-value-consumers.js';
 import { emitNativeTemplateUpdateObservationScript, inspectNativeTemplateUpdateObservation } from './native-template-update-observation.js';
 import { prepareNativeTemplateUpdateProposal, restoreNativeTemplateUpdateProposal } from './native-template-update-proposal.js';
+import { matchNativeTemplateUpdateObservation } from './native-template-update-match.js';
 
-async function fixture(withCaller = false) {
+async function fixture(withCaller = false, colorsOnly: boolean | 'weight' = false) {
   const h = await nativeTextGraphComponentFixture(2, 2), creation = await h.run(h.script());
+  for (const born of creation.nodes) {
+    const node = await h.figma.getNodeByIdAsync(born.id);
+    nativeNodePaintBindings(node, id => h.variables.find(v => v.id === id));
+    if (node.type === 'TEXT') node.fontName = { ...node.fontName, variationSettings: { slnt: 0, wght: node.fontWeight } };
+  }
   const draft = h.engine.compileNativeContractDraft(h.contract, h.byId, h.source);
   const before: NativeContractObservationInput = structuredClone({ operation: h.operation, planRevision: revisionOf('template writer fixture'),
     projection: draft.projection, component: draft.component, tokenInput: h.context.tokens.input,
     tokenIdentity: h.context.tokens.identity, creation, templateGraph: { input: h.input, identity: h.created.identity } });
   const baseline = await h.run(emitNativeContractReadbackScript(before));
-  assert.equal(verifyNativeContractReadback(before, baseline).status, 'supported-structure-observed');
+  assert.equal(baseline.status, 'native-readback-collected', JSON.stringify(baseline.problems));
+  assert.equal(verifyNativeContractReadback(before, baseline).status, 'supported-structure-observed', JSON.stringify(verifyNativeContractReadback(before, baseline).problems));
   const consumers: NativeTemplateConsumerInput[] = [];
   if (withCaller) {
     const content = structuredClone(h.contract); content.id = 'test.update-caller'; content.props = [];
@@ -45,14 +52,18 @@ async function fixture(withCaller = false) {
     assert.equal(created.status, 'created-candidate', JSON.stringify(created));
     for (const born of created.nodes.filter((n: any) => n.type === 'TEXT'))
       nativeTextNodeBindings(await h.figma.getNodeByIdAsync(born.id), id => h.variables.find(v => v.id === id));
+    for (const born of created.nodes) nativeNodePaintBindings(await h.figma.getNodeByIdAsync(born.id), id => h.variables.find(v => v.id === id));
     const input: NativeContractComparisonObservationInput = { operation, planRevision: revisionOf('caller update observation'),
       comparison: prepared, tokenInput, tokenIdentity: context.tokens.identity, creation: created };
     const observed = await h.run(emitNativeContractComparisonReadbackScript(input));
     assert.equal(verifyNativeContractComparisonReadback(input, observed).status, 'supported-comparison-structure-observed');
     consumers.push({ input, baseline: observed });
   }
-  h.tokens.size.v1.$value = '17.5px'; h.tokens.line.v1.$value = '27px';
-  h.tokens.ink.v1.$value = '#abcdef'; h.tokens.weight.$value = 700;
+  if (!colorsOnly) {
+    h.tokens.size.v1.$value = '17.5px'; h.tokens.line.v1.$value = '27px'; h.tokens.weight.$value = 700;
+  }
+  if (colorsOnly === 'weight') h.tokens.weight.$value = 700;
+  h.tokens.ink.v1.$value = colorsOnly === true ? '#abcdef80' : '#abcdef';
   const desired: NativeRootTextTemplateGraphInput = structuredClone(h.compile());
   desired.renderScope = 'component'; desired.tokens.fileKey = before.operation.fileKey;
   desired.tokens.scopeId = before.tokenInput.scopeId; desired.tokens.source.revision = before.tokenInput.source.revision;
@@ -72,6 +83,52 @@ async function fixture(withCaller = false) {
   return { ...h, input, plan, assignments, write: (readOnly = false) => h.run(emitNativeTemplateValueWriteScript(input, readOnly)) };
 }
 
+test('completed template updates verify resolved paint and all retained caller facts, not only variable receipts', async () => {
+  const h = await fixture(true, true);
+  const initial = matchNativeTemplateUpdateObservation(h.input, await h.run(emitNativeTemplateUpdateObservationScript(h.input)));
+  assert.equal(initial.untouched, true); assert.equal(initial.completed, false); assert.deepEqual(initial.problems, []);
+  await h.write();
+  const raw = await h.run(emitNativeTemplateUpdateObservationScript(h.input));
+  const result = matchNativeTemplateUpdateObservation(h.input, raw);
+  assert.equal(result.completed, true, JSON.stringify(result.problems));
+  assert.equal(result.nativeQualification, 'unqualified');
+  for (const corrupt of [
+    (r: any) => { r.observation.nodes.find((n: any) => n.type === 'COMPONENT').values.x += 1; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.width += 1; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.fontName.family = 'different'; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.characters = 'edited'; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'INSTANCE').values.opacity = 0.8; },
+    (r: any) => { r.observation.nodes.find((n: any) => n.type === 'COMPONENT').values.fills[0].blendMode = 'MULTIPLY'; },
+    (r: any) => { r.observation.nodes.find((n: any) => n.type === 'COMPONENT').values.strokes[0].visible = false; },
+    (r: any) => { r.observation.nodes.find((n: any) => n.values.fills?.[0]?.opacity === 128 / 255).values.fills[0].color.extra = 1; },
+    (r: any) => { r.consumerObservations[0].nodes[0].metadata.unrequested = 'edit'; },
+  ]) {
+    const broken = structuredClone(raw); corrupt(broken);
+    assert.equal(matchNativeTemplateUpdateObservation(h.input, broken).completed, false);
+  }
+  // A value update cannot hide an unrelated paint change, including unchanged
+  // variants whose leaf has the same old colour as the changed source leaf.
+  for (const collection of [raw.observation.nodes, raw.consumerObservations[0].nodes]) {
+    for (const node of collection) for (const field of ['fills', 'strokes']) {
+      if (!node.values[field]?.[0]?.boundVariables?.color) continue;
+      for (const mutate of [(p: any) => p.color.r = 0, (p: any) => p.opacity = 0.5]) {
+        const broken = structuredClone(raw), rows = collection === raw.observation.nodes ? broken.observation.nodes : broken.consumerObservations[0].nodes;
+        mutate(rows.find((n: any) => n.id === node.id).values[field][0]);
+        assert.equal(matchNativeTemplateUpdateObservation(h.input, broken).completed, false, node.id + ':' + field);
+      }
+    }
+  }
+  const next = { before: h.plan.after, baseline: raw.observation, desired: h.input.desired, consumers: result.consumerStates };
+  const repeat = await h.run(emitNativeTemplateUpdateObservationScript(next));
+  assert.equal(matchNativeTemplateUpdateObservation(next, repeat).completed, true);
+  assert.equal(matchNativeTemplateUpdateObservation(next, repeat).untouched, true);
+  const reverse = { ...next, desired: h.input.before.templateGraph!.input };
+  await h.run(emitNativeTemplateValueWriteScript(reverse));
+  const reversed = await h.run(emitNativeTemplateUpdateObservationScript(reverse));
+  assert.equal(matchNativeTemplateUpdateObservation(reverse, reversed).completed, true);
+  assert.deepEqual(reversed.observation, h.input.baseline);
+});
+
 test('final synchronous template read matches the independent asynchronous inventory without yielding', async () => {
   const h = await fixture(), script = emitNativeTemplateSyncReadback(h.input.before);
   assert.doesNotMatch(script, /\bawait\b/);
@@ -80,6 +137,31 @@ test('final synchronous template read matches the independent asynchronous inven
   delete h.figma.variables.getVariableCollectionById;
   assert.equal((await h.run(script)).status, 'refused');
   h.figma.variables.getVariableCollectionById = old;
+});
+
+test('typography transitions keep face axes exact and never discard changed computed geometry', async () => {
+  const h = await fixture(true, 'weight');
+  await h.write();
+  const raw = await h.run(emitNativeTemplateUpdateObservationScript(h.input));
+  const diagnostic = inspectNativeTemplateUpdateObservation(h.input, raw);
+  assert.equal(diagnostic.supportedAfterStructure, true, JSON.stringify(diagnostic.problems));
+  const matching = matchNativeTemplateUpdateObservation(h.input, raw);
+  assert.equal(matching.completed, true, JSON.stringify(matching.problems));
+  const main = raw.observation.nodes.find((n: any) => n.type === 'TEXT');
+  assert.equal(main.values.fontName.variationSettings.wght, 700);
+  for (const corrupt of [
+    (r: any) => { r.observation.nodes.find((n: any) => n.id === main.id).values.fontName.variationSettings.wght = 400; },
+    (r: any) => { r.observation.nodes.find((n: any) => n.id === main.id).values.fontName.variationSettings.slnt = 1; },
+    (r: any) => { r.observation.nodes.find((n: any) => n.id === main.id).values.fontName.variationSettings.wdth = 80; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.height += 4; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.width += 4; },
+    (r: any) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'INSTANCE').values.x += 4; },
+  ]) {
+    const changed = structuredClone(raw); corrupt(changed);
+    const result = matchNativeTemplateUpdateObservation(h.input, changed);
+    assert.equal(result.completed, false);
+    assert.deepEqual(result.consumerStates, []);
+  }
 });
 
 test('verified caller subtrees follow inherited values, preserve content and reverse with the original identities', async () => {
@@ -93,6 +175,9 @@ test('verified caller subtrees follow inherited values, preserve content and rev
   assert.deepEqual(h.assignments, []);
   const result = await h.write();
   assert.equal(result.status, 'write-observed', JSON.stringify(result.problems));
+  const exact = matchNativeTemplateUpdateObservation(h.input, await h.run(emitNativeTemplateUpdateObservationScript(h.input)));
+  assert.equal(exact.completed, false);
+  assert.ok(exact.problems.some(p => p.startsWith('native-template-update-computed-geometry-changed:')), JSON.stringify(exact.problems));
   const verified = verifyNativeTemplateConsumersAfter(h.plan.consumers, h.plan.after, result.observation, result.consumerObservations);
   assert.equal(verified.status, 'supported-consumer-structure-observed', JSON.stringify(verified.problems));
   for (const corrupt of [
