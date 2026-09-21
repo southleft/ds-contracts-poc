@@ -7,19 +7,23 @@ import { planNativeTemplateValueUpdate, resolveNativeTemplateContractValueState 
 import { emitNativeTokenBindingScope } from './native-token-binding-scope.js';
 import type { NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import type { NodeSpec } from './emit-figma-script.js';
+import { emitNativeTemplateCallerContentReadback } from './native-contract-comparison-observation.js';
+import { prepareNativeTemplateConsumers, type NativeTemplateConsumerInput } from './native-template-value-consumers.js';
 
 export interface NativeTemplateComponentUpdateInput {
   before: NativeContractObservationInput;
   baseline: NativeSourceReadback;
   desired: NativeRootTextTemplateGraphInput;
+  consumers?: NativeTemplateConsumerInput[];
 }
 export function prepareNativeTemplateComponentUpdate(input: NativeTemplateComponentUpdateInput) {
   const after = resolveNativeTemplateContractValueState(input);
   const valuePlan = planNativeTemplateValueUpdate({ before: input.before.templateGraph!.input,
     desired: input.desired, identity: input.before.templateGraph!.identity, baseline: input.baseline.templateGraph!.receipt });
   const baseline = structuredClone(input.baseline); delete baseline.images;
+  const consumers = prepareNativeTemplateConsumers(input.before, baseline, input.consumers);
   const plan = { version: 1 as const, kind: 'native-template-component-update-candidate' as const,
-    before: structuredClone(input.before), baseline, after, valuePlan,
+    before: structuredClone(input.before), baseline, after, valuePlan, consumers,
     acceptedContract: null, nativeQualification: 'unqualified' as const };
   return { ...plan, revision: revisionOf(plan) };
 }
@@ -33,7 +37,7 @@ export function emitNativeTemplateValueWriteScript(input: NativeTemplateComponen
   const plan = prepareNativeTemplateComponentUpdate(input);
   const identity = plan.before.templateGraph!.identity;
   const allocated = [...identity.source.variables.map(v => v.id), ...identity.routes.map(v => v.id)];
-  const owned = plan.before.creation.nodes.map((n: { id: string }) => n.id);
+  const owned = [...plan.before.creation.nodes.map((n: { id: string }) => n.id), ...plan.consumers.flatMap(c => c.nodeIds)];
   const mainIds = plan.before.creation.variants.map((n: { id: string }) => n.id);
   if (new Set(owned).size !== owned.length || !owned.length) throw Error('native-template-write-node-identity');
   const baseline = canonicalJson(plan.baseline);
@@ -60,10 +64,17 @@ const stored=(actual,expected)=>canonical(actual)===canonical(expected)||typeof 
  canonical(Object.keys(actual).sort())===canonical(Object.keys(expected).sort())&&Object.entries(expected).every(([key,value])=>stored(actual[key],value));
 const expectedBaseline=${JSON.stringify(baseline)};
 const sameBaseline=value=>canonical(clean(value))===expectedBaseline;
+${plan.consumers.length ? `const consumerBaselines=${JSON.stringify(plan.consumers.map(c => c.baseline.content))};
+const readConsumers=[${plan.consumers.map(c => `async()=>{${emitNativeTemplateCallerContentReadback(c.input)}}`).join(',')}];
+const readConsumersSync=[${plan.consumers.map(c => `()=>{${emitNativeTemplateCallerContentReadback(c.input,true)}}`).join(',')}];
+const sameConsumers=values=>values.length===consumerBaselines.length&&values.every((v,i)=>canonical(clean(v))===canonical(consumerBaselines[i]));
+const collectConsumers=async()=>{const values=[];for(const read of readConsumers)values.push(await read());return values;};` : ''}
 try{
  if(figma.fileKey!==plan.before.operation.fileKey)throw Error('native-update-file-mismatch');
- const initial=await(async()=>{${emitNativeContractReadbackScript(plan.before)}})();
+ const readBefore=async()=>{${emitNativeContractReadbackScript(plan.before)}};
+ const initial=await readBefore();
  if(!sameBaseline(initial))throw Error('native-template-write-baseline-conflict');
+ ${plan.consumers.length ? "const consumersInitial=await collectConsumers();if(!sameConsumers(consumersInitial)||!sameBaseline(await readBefore()))throw Error('native-template-write-consumer-baseline-conflict');out.consumerObservations=consumersInitial;" : ''}
  if(!plan.valuePlan.changes.length){out.status=readOnly?'preflight-observed':'no-op';out.observation=initial;return out;}
  if(typeof figma.loadFontAsync!=='function'||typeof figma.listAvailableFontsAsync!=='function')throw Error('native-template-write-font-api');
  const available=await figma.listAvailableFontsAsync(), fonts=new Map();
@@ -101,18 +112,23 @@ try{
  }
  const current=(()=>{${emitNativeTemplateSyncReadback(plan.before)}})();
  if(!sameBaseline(current))throw Error('native-template-write-live-conflict');
+ ${plan.consumers.length ? "const consumerCurrent=readConsumersSync.map(read=>read());if(!sameConsumers(consumerCurrent))throw Error('native-template-write-consumer-live-conflict');" : ''}
  const assignments=plan.valuePlan.changes.map(change=>{const variable=figma.variables.getVariableById(change.variableId);
   if(!variable||variable.key!==change.variableKey||typeof variable.setValueForMode!=='function')throw Error('native-template-write-variable-api');return{change,variable};})
   .filter(({change,variable})=>!stored(variable.valuesByMode[change.modeId],change.after));
  out.consumerScope={affectedVariableIds:[...affected].sort(),nodeIds:consumers.sort()};
- if(readOnly){out.status='preflight-observed';out.observation=current;return out;}
+ if(readOnly){out.status='preflight-observed';out.observation=current;${plan.consumers.length ? 'out.consumerObservations=consumerCurrent;' : ''}return out;}
  for(const {change,variable} of assignments){
   out.attemptedVariableIds.push(change.variableId);
   variable.setValueForMode(change.modeId,change.after);
   out.changedVariableIds.push(change.variableId);
  }
- out.observation=await(async()=>{${emitNativeContractReadbackScript(plan.after)}})();
+ const readAfter=async()=>{${emitNativeContractReadbackScript(plan.after)}};
+ out.observation=await readAfter();
  if(out.observation.status!=='native-readback-collected')throw Error('native-template-write-post-read-refused');
+ ${plan.consumers.length ? `const consumersFirst=await collectConsumers();out.consumerObservations=await collectConsumers();
+ if(out.consumerObservations.some(v=>v.status!=='native-readback-collected')||canonical(consumersFirst)!==canonical(out.consumerObservations)||
+  canonical(out.observation)!==canonical(await readAfter()))throw Error('native-template-write-post-consumers-changed');` : ''}
  // The host must verify this independently against plan.after. This response
  // is an attempted delivery, never a qualification or recovery permission.
  out.status=assignments.length?'write-observed':'no-op';
