@@ -1659,6 +1659,7 @@ function unifyStampedTextVar(
   occs: Array<{ variant: string; node: DumpNode }>,
   pick: (text: NonNullable<DumpNode['text']>) => string | undefined,
   axes: Axis[],
+  preservePerValue = false,
 ): string | PerValueRef | undefined {
   const u = unifyRefs(
     occs.map((o) => {
@@ -1668,7 +1669,7 @@ function unifyStampedTextVar(
     axes,
     `text-style-variable@${occs[0]?.node.name ?? 'text'}`,
   );
-  return u.kind === 'ref' ? u.ref : u.kind === 'per-value' ? u.perValue : undefined;
+  return u.kind === 'ref' ? u.ref : preservePerValue && u.kind === 'per-value' ? u.perValue : undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -5346,7 +5347,7 @@ function mintTextChannels(
   byProp: ByPropCollector,
   ctx: Ctx,
   where: string,
-  opts: { weight: boolean },
+  opts: { weight: boolean; preservePerValue?: boolean },
   /** v17 — see mintObservation.styleName. */
   styleName?: string,
   styleKey?: string,
@@ -5372,7 +5373,7 @@ function mintTextChannels(
   // site is what stops the answer depending on which carrier the node happened
   // to use: Badge and Button recovered the weight's VALUE through the mint
   // path while Label recovered its IDENTITY, for no reason a reader could see.
-  const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
+  const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes, opts.preservePerValue);
   if (stamped !== undefined) {
     carryRef(tokens, byProp, 'font-weight', stamped, ctx, where);
   }
@@ -5416,7 +5417,7 @@ function mintTextChannels(
   // (`imported.label.root.line-height`). Value was never the problem; identity
   // was. One distinct stamp binds; disagreeing stamps are NAMED, not picked
   // between; no stamp falls through to the mint below, unchanged.
-  const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes);
+  const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes, opts.preservePerValue);
   if (stampedLh !== undefined) {
     carryRef(tokens, byProp, 'line-height', stampedLh, ctx, where);
     return;
@@ -5929,7 +5930,7 @@ function carryClip(
   );
 }
 
-function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false): Record<string, string> {
+function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false, preservePerValue = false): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
     m,
@@ -5956,8 +5957,8 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // substituted-ref case — minting from the px values remints a dump-slug
   // path (`imported.<set-slug>.label.font-size.{size}`) over the canvas
   // names (`imported/button/root/font-size/{size}`). FC-DUMP-PROPOSE-TYPE-UNPINNED.
-  const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes);
-  const stampedWeight = stampedSize !== undefined ? unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes) : undefined;
+  const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes, preservePerValue);
+  const stampedWeight = stampedSize !== undefined ? unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes, preservePerValue) : undefined;
   const sizeVarsVary = new Set(textOcc.map((o) => o.node.text!.fontSizeVar)).size > 1;
   // ONE size stamp and NO weight stamp (the repo's own pre-v1.22 dumps:
   // Switch descriptionText) keeps the uniform-sizeVar branch below, whose
@@ -5967,7 +5968,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   if (stampedSize !== undefined && (stampedWeight !== undefined || sizeVarsVary)) {
     carryRef(tokens, byProp, 'font-size', stampedSize, ctx, where);
     if (stampedWeight !== undefined) carryRef(tokens, byProp, 'font-weight', stampedWeight, ctx, where);
-    mintTextChannels(m, tokens, byProp, ctx, where, { weight: tokens['font-weight'] === undefined });
+    mintTextChannels(m, tokens, byProp, ctx, where, { weight: tokens['font-weight'] === undefined, preservePerValue });
     return tokens;
   }
   const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
@@ -6045,7 +6046,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
       byProp,
       ctx,
       where,
-      { weight: true },
+      { weight: true, preservePerValue },
       varyingStyle,
       varyingStyleKey,
       perOccStyles ? textOcc : undefined,
@@ -6086,7 +6087,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
       // @door propose.weight-not-corpus-nameable
       tokens['font-weight'] = ref(stampedWeight[0]);
-      mintTextChannels(m, tokens, byProp, ctx, where, { weight: false });
+      mintTextChannels(m, tokens, byProp, ctx, where, { weight: false, preservePerValue });
       return tokens;
     }
     if (stampedWeight.length > 1) {
@@ -6105,6 +6106,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     }
     mintTextChannels(m, tokens, byProp, ctx, where, {
       weight: observed !== 'Medium' && weightRef === undefined,
+      preservePerValue,
     });
     return tokens;
   }
@@ -6196,7 +6198,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     byProp,
     ctx,
     where,
-    { weight: !style },
+    { weight: !style, preservePerValue },
     unresolvedStyle,
     unresolvedStyleKey,
   );
@@ -12511,7 +12513,7 @@ function proposeFromDumpFenced(
     root.slot = slot;
     if (rootContent.textTemplate) {
       const template = only!.children[0], path = `${where}/Content text template`;
-      const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true);
+      const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true, true);
       Object.assign(rootTokens, textTokens);
       carryTextCase(template, root, ctx, path);
       carryFontSlant(template, root, ctx, path);
