@@ -58,21 +58,30 @@ The composed Card delivery contains seven dependency components and six parent v
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.
 
-The explicit root text-template path has a generated native engineering probe:
-caller text retains its bindings through Small → Large → Small, and a bounded
-inverse restores root typography. A candidate source adapter now derives this
-marker from new, complete direct-text observations and sends its graph through
-the operation journal; this path still needs a live application journey.
-A separate variable-graph component candidate creates 100 native
-mains through the shared renderer, with independent graph and node readback.
-Its caller preserves edited text across a live variant switch and restoration,
-but the first archived-original comparison fails the 5% bar at 6.85%. Canonical
-capture and return now preserve all 400 typography references across those 100
-variants; application integration and a clean returned consumer remain open.
-New property observations authenticate painted fonts per plane;
-older source archives retain their original interpretation. Application journeys,
-template updates/recovery, clean consumers and
-5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+The application now derives the explicit root text-template marker from complete
+direct-text observations. A fresh two-case capture authenticates painted fonts
+and image bounds on all 200 property planes, preserving all 418 sealed files.
+Through Sync Runner, its saved operation creates 100 reusable native mains,
+153 source variables and 54 routing variables; independent readback verifies
+all 302 nodes and the full variable graph. The unobstructed canvas was inspected.
+Reusable mains keep empty editable content; this structure result does not
+qualify their caller rendering.
+
+The application caller still fails the 5% bar at **8.43%**: native width is
+51.01599884 px against 49.921875 px in the original React source. Recorded-origin
+diagnostics retain differing pixels outside text. The earlier engineering
+comparison remains a separate 6.85% failure.
+
+Canonical capture imported through the app preserves all 400 typography
+references across 100 variants. Its downloaded archive installs unchanged in a
+clean React consumer. With the original font supplied by that consumer, all
+100 combinations match the original React dimensions, typography, paint,
+spacing and corners; changing caller text updates every combination. A same-tab
+reload requires manually selecting the saved Workspace import and produces
+identical contract and archive bytes. One earlier return tab stalled; recovery
+used a fresh tab with React output selected. Native fidelity, template updates,
+interrupted native recovery and the complete independent-family journey remain
+unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
 
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.
 

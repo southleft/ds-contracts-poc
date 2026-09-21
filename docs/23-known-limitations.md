@@ -8236,12 +8236,68 @@ and the previous failed consumer; never relabel old evidence as a new capture.
 
 ## D.99 Native root text templates still need an application journey
 
-The candidate application source adapter derives the explicit
-`slot.bindings.figma.textTemplate` marker from newly captured direct caller text,
-but has not yet completed the live application journey. Empty caller-slot mains
-still lack the complete demonstrated return behavior required by V1. Template updates,
-interrupted comparison recovery, composed graphs, states,
-clean consumers and the unchanged 5% fidelity gate remain unqualified.
+Native fidelity remains unqualified. The live application caller measures
+**8.4314%** against the unchanged 5% limit; template updates and interrupted
+native recovery are still refused. The following evidence establishes bounded
+creation, return and consumer behavior without closing those gaps.
+
+The application source adapter now derives the explicit
+`slot.bindings.figma.textTemplate` marker from newly captured direct caller text.
+Fresh observation `a34b7769-50af-4c36-94b1-03dac7eac993` matches both unchanged
+source cases, authenticating 200 property planes and 418 sealed files. Application
+operation `0bab5d79-eb95-45fb-92f5-5820fbdc43c4` creates 100 mains, 153 source
+variables and 54 routing variables in Evaluations; separate token and component
+readbacks verify the complete graph and all 302 native nodes. The plugin was
+closed and the complete canvas inspected. The main set is `90:4384`, on page
+`90:4083`; allocation IDs, independent review and screenshots remain in private
+`native-root-text-template-20260921/app-graph-review-v1.json` and neighboring files.
+The connection needed an explicit second paste into the native field; the same
+operation resumed without allocating a second family.
+Repeating preparation afterward reuses that operation: all 37 existing operation
+and plan files remain byte-identical, event counts do not change, and the app
+offers inspection rather than another creation.
+
+The reusable mains retain empty editable content. Application comparison
+`4555d258-9f47-4fc3-a417-d6dd5d2f19da` creates a separate primary/omitted-size/
+omitted-variant caller on page `90:4401`, instance `90:4403`, using main
+`90:4264`. Independent readback verifies its editable text and unchanged parent
+graph; the closed-plugin canvas was inspected. Its native width is
+51.01599884033203 px against 49.921875 px in the source, with both heights 20 px.
+The original scorer reports 8.4314%; the recorded-origin diagnostic uses a
+different denominator and retains five mismatching pixels outside text. It is
+not a replacement pass. The app measures source text advance at 29.92 px and
+native text box width at 31 px. Read-only font inspection finds different
+variation-axis sets despite the same Inter family name; exact native font bytes
+are not established, and that difference does not explain away the geometry or
+outside-text residual. No source font or threshold was changed. Evidence remains
+in private `native-root-text-template-20260921/app-caller-v1/`.
+
+The same native family returns through canonical capture 1.45 and the app's
+JSON import. Its proposed contract and archive input match an independent
+inverse, preserving 400 original typography references and 500 explicit fields
+across 100 variants. Both legacy unresolved carrier-mode notes remain visible.
+The downloaded archive installs in an isolated consumer with all ten package
+files byte-identical. With the original source font supplied by the host, all
+100 combinations match the original React width, height, font size, weight,
+line height, tracking, paint, padding, border width and four corner radii.
+Changing caller text changes all 100 labels and widths; the visible selected
+variant also changes typography and paint. This compares returned React with
+original React, not with the failing native caller. The archive SHA-256 is
+`93a0a1c077e6e53220ab45882ae607a5712c15bb48fb17b5735cc983b1d3b813`;
+private evidence includes `app-graph-inverse-v3.json`,
+`app-consumer-v1/verification-v2.json` and the inspected consumer screenshot.
+
+Reloading the same tab retains one Workspace entry. Manually restoring it and
+preparing the library again produces identical contract and archive bytes.
+One earlier import with Preview selected accepted the contract, then stalled
+during an attempt to clear its 2.6 MB raw textarea; reload and close commands
+also failed. A fresh tab in the same browser, with React output selected before
+import and the raw input subsequently hidden, completed the return. The cause
+of the earlier stall remains unresolved; Preview itself renders and remains
+responsive after restoring the saved import. This intervention is recorded in
+`app-return-recovery-v1.json`; it does not qualify interrupted native recovery,
+cross-tab or browser-restart recovery. Template updates, composed graphs,
+states and complete family fidelity remain unqualified.
 
 **AGENT decision, 2026-09-21.** Property capture version two records each full-page
 image's measured bounds and digest, including fractional origins, and requires
@@ -8263,8 +8319,9 @@ native API mock and journal restarts; repeated preparation reuses its reservatio
 and changed routing refuses. Partial allocations remain in their immutable
 events and cannot be blindly retried or exposed as verified contexts. Graph
 sizing inspections, updates and interrupted component recovery remain refused.
-This is protocol evidence, not a live application or fidelity result. Reversal:
-remove version-two template admission and the optional graph branch of the
+The live application run above exercises those four phases with the actual
+companion. The mock interruption probes do not qualify native recovery or visual
+fidelity. Reversal: remove version-two template admission and the optional graph branch of the
 React plan and operation host; preserve existing operation journals and images.
 
 **AGENT decision, 2026-09-21.** An explicit template marker is admitted only for
@@ -8286,8 +8343,8 @@ addresses. Generated creation and separate ID-based readback have been checked
 in Evaluations for 31 source variables, seven selectors and 54 routing variables;
 an unchanged rerun refuses before allocation. Source and routing picker scopes
 are derived from their text consumers. Variable allocation remains separate from
-component creation; neither candidate path participates in application operations,
-repairs or updates.
+component creation. The factored graph now participates in the bounded
+application operation above; repairs and updates remain refused.
 Independent operation scopes can use the same compiler alias names in separate
 collections. A second native allocation and separate readback preserve the first
 graph exactly; names never authorize adopting or updating existing variables.
@@ -8309,8 +8366,9 @@ readback verifies all 302 native nodes; repeat refuses before allocation. The
 unobstructed canvas shows the empty editable mains. Its source is the unchanged
 DaisyUI observation with the template marker explicitly added for this engineering
 probe. This is not application source admission or a clean consumer/fidelity
-result. Updates, recovery and application admission remain unqualified. The
-subsequent caller and return candidates are described below. The fresh
+result. That engineering probe did not establish application admission; the
+separate live operation above does. Updates and recovery remain unqualified.
+The subsequent caller and return candidates are described below. The fresh
 application font observation independently verifies 200
 property planes across two cases and all 418 sealed files; it does not infer the
 marker or certify native font metrics.
@@ -8365,8 +8423,9 @@ only verified routing variables from the returned token projection. Source value
 edits remain design data. In the live 100-main capture, all eight collections,
 207 variables and 300 consumer vectors match separate readback. The returned
 contract preserves all 400 typography references and the five compared typography
-fields per variant without minting replacement typography tokens. It has not
-yet completed an application return or clean consumer journey.
+fields per variant without minting replacement typography tokens. The separate
+application capture, import and clean consumer described above now exercise
+that bounded return; native fidelity and update qualification remain open.
 
 **AGENT decision, 2026-09-21.** Require complete raw cross-collection evidence for
 this inverse; a selected alias chain or a raised depth limit cannot prove all
