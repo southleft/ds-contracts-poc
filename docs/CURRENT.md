@@ -120,7 +120,7 @@ The configured Altitude flow and its existing records remain in the collapsed Li
 
 The owner's React-only V1 asks for five demonstrations. Each row names what the application shows today, where the evidence is, and the concrete gap. None of these rows is a release grade.
 
-A reviewed provisional-child candidate now retains corroborated static content from unresolved REST instances ([D.109](23-known-limitations.md#d109-observed-child-content-remains-provisional)). The fresh installed Tabs consumer renders its previously missing body text, but active appearance, stretch behavior, width and black-background fidelity still fail. Application delivery remains to be demonstrated; this is no additional completed acceptance row.
+A reviewed provisional-child candidate now retains corroborated static content from unresolved REST instances ([D.109](23-known-limitations.md#d109-observed-child-content-remains-provisional)). The fresh installed Tabs consumer renders its previously missing body text, but active appearance, stretch behavior, width and black-background fidelity still fail. The running app imports the captured family, shows the recovered text, and prepares a seven-component package; a byte-identical archive installs in a clean consumer and reproduces those failures. This is no additional completed acceptance row.
 
 | Criterion | Demonstrated through the application | Evidence | Concrete gap |
 | --- | --- | --- | --- |

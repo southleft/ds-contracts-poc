@@ -9021,23 +9021,28 @@ exceeding 128 nodes or depth 8 keep the geometry-only stub and produce a named
 `observed-instance-content-refused` note. Existing real child definitions retain
 priority. Reimport can refresh an older provisional stub. Authoritative VARIANT
 types keep string boolean spellings as enum values. The additive optional
-`instanceContent` field is REST-only; plugin dumps do not provide it. REST dump
-version remains 1.41, with admission based on the field's presence.
+`instanceContent` field is REST-only; plugin dumps do not provide it. Admission uses
+the field's presence; older dumps keep the geometry-only path.
 
 The fresh Altitude Tabs installed React consumer now renders two body-copy lines
 that the previous empty stub lost. It still fails the unchanged 5% black-background
 fidelity limit, loses the active tab appearance and the stretch variant's visible
 effect, and has a measured content-width mismatch. The authored Text Passage set
-is still empty, and its unobserved width variant is not recovered. This CLI
-consumer evidence does not qualify application delivery, interactive Tabs
-behavior, the independent-family requirement, or V1.
+is still empty, and its unobserved width variant is not recovered. The running
+application now imports the captured family through its JSON file chooser,
+shows both body-copy lines, and prepares a seven-component React package. The
+clean consumer installs an archive byte-identical to that application download,
+without repository source paths. It reproduces the same failures. This does not
+qualify interactive Tabs behavior, the independent-family requirement, or V1.
 
 `core/observed-instance-content.test.ts` covers later-host content conflicts,
 missing observations, mutable API refusal, typography/paint/visibility drift,
 static bounds, real-child precedence, a forged narrowed census, and session
 stub refresh. The review caught and fixed an exposed TEXT control being turned
 into inert content. Original failures and fresh consumer evidence are retained
-in `private/observed-instance-content-20260921/`.
+in `private/observed-instance-content-20260921/`; the application import, package
+identity and consumer failures are retained in
+`private/observed-content-app-20260921/app-delivery-v1.json`.
 
 To reverse, remove the optional REST observation and its provisional projection
 route together, returning unresolved children to geometry-only stubs. Preserve
