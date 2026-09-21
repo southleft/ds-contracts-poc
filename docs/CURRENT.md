@@ -127,8 +127,8 @@ variables and structure. Its returned package now preserves text styling and
 passes all 100 original-versus-returned React image pairs on white. This closes
 the earlier missing-text-binding return defect described in D.98.
 
-The native caller still fails at 8.43%, and template updates and interrupted
-native recovery remain refused. The full inherited source API is incomplete;
+The native caller still fails at 8.43%, and live template updates and interrupted
+native recovery remain unqualified. The full inherited source API is incomplete;
 Radix content ownership remains a separate refusal. This does not close the
 independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
@@ -163,9 +163,17 @@ history. Written updates can retain an original observation only while the
 complete later journal remains valid and read-only. A read-only check loaded
 the retained application's 302-node main and five-node caller; this inventory
 does not authorize delivery or qualify an update.
-Application source succession, delivery, interrupted-write settlement and
-updated visual/layout qualification remain unfinished; the application
-continues to refuse template updates.
+An application adapter now connects fresh desired graphs and authenticated
+caller history to compact update proposals, existing transport and independent
+combined readbacks. It admits color changes while refusing geometry-affecting
+changes before delivery. Journal/companion tests cover forward update, unchanged
+repeat, exact reverse, caller-context refresh, conflict and lost-write settlement
+across restarts. Updated main and caller exports are available in the review;
+an intervening edit during export refuses the observation. These are integration
+tests with a synthetic native host, not a measured live application journey.
+The live source-edit/update/recovery demonstration, additional caller creation
+after an update, comparison refresh/repair transitions and visual/layout
+qualification remain unfinished.
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 

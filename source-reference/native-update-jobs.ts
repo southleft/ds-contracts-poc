@@ -6,10 +6,10 @@ import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readd
 import path from 'node:path';
 import { storeNativeUpdatePrograms, loadNativeUpdatePrograms } from './native-update-programs.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
-import { emitNativeContractUpdateScript, nativeContractUpdateMatches, nativeContractUpdateUntouched, nativeContractUpdateAfter } from '../core/native-contract-update.js';
+import {emitNativeAppUpdateScript,emitNativeAppUpdateReadback,nativeAppUpdateMatches as nativeContractUpdateMatches,nativeAppUpdateUntouched as nativeContractUpdateUntouched,nativeAppUpdateAfter as nativeContractUpdateAfter,nativeAppUpdatePreflight,nativeAppUpdateMainReadback,nativeAppUpdateDesignChanges} from './native-app-update.js';
 import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
-import { nativeDesignChanges, type NativeDesignChanges } from '../core/native-design-changes.js';
-import { collectNativeImages } from './native-operation-images.js';
+import { type NativeDesignChanges } from '../core/native-design-changes.js';
+import { collectNativeImages,collectExpectedNativeImages } from './native-operation-images.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { NativeOperationCommand, NativeOperationPhase, NativeOperationResult } from './native-operation-jobs.js';
 
@@ -30,7 +30,7 @@ type Entry = { sequence: number; previous: string } & (
   // result never arrived. It is the only dispatch allowed while a write is pending.
   // `design` marks a read that only reports what a designer changed since this
   // update was verified. It never moves the phase or the verified observation.
-  { kind: 'dispatch'; command: NativeOperationCommand; reader?: { version: 1; inputRevision: string }; outcomeOf?: string; design?: true; parentJournalRevision?: string } |
+  { kind: 'dispatch'; command: NativeOperationCommand; reader?: { version: 1; inputRevision: string }; outcomeOf?: string; design?: true; parentJournalRevision?: string; templateContextRevision?:string } |
   { kind: 'result'; envelope: NativeOperationResult } |
   { kind: 'late-write-result'; envelope: NativeOperationResult } |
   // The companion asks before executing a write. Once a canvas read has been
@@ -50,7 +50,7 @@ type Entry = { sequence: number; previous: string } & (
 type Settlement = 'landed' | 'untouched' | 'unresolved';
 type State = { phase: string; write?: NativeOperationCommand; answered?: boolean; writeStatus?:string; completedUnchanged?:'rolled-back'|'refused'; revoked: Set<string>; attested?: { attemptId: string; at: string };
   revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: NativeDesignChanges & { attemptId: string }; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; begunAt?: string; claims: number; settled: Map<string, Settlement>;
-  wrote: boolean; observation?: unknown; observationScriptSha256?: string; observationParentRevision?: string; problems: string[] };
+  wrote: boolean; observation?: unknown; observationScriptSha256?: string; observationParentRevision?: string; observationTemplateContextRevision?:string; problems: string[] };
 function fail(message: string): never { throw Error('native-update-' + message); }
 /** The operator's statement, recorded verbatim with every attestation. The route takes no body. */
 export const NATIVE_UPDATE_ATTEST_DEAD_STATEMENT = 'The operator attests that the companion granted permission to begin this write is gone and will not execute it. This attempt is revoked; the canvas decides what happened.';
@@ -109,9 +109,9 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   const scripts = (record: ReturnType<Plans['saved']>) => {
     const plan=record.update.plan;
     return Object.fromEntries([
-      ['update-preflight-readback',emitNativeContractUpdateScript(plan,'apply',true)],
-      ['update-apply',emitNativeContractUpdateScript(plan)],
-      ['update-readback',readback(plan.after,true,true)],
+      ['update-preflight-readback',emitNativeAppUpdateScript(plan,true)],
+      ['update-apply',emitNativeAppUpdateScript(plan)],
+      ['update-readback',emitNativeAppUpdateReadback(plan,readback)],
     ].map(([key,script])=>[key,{script,sha256:sha(script)}])) as Header['scripts'];
   };
   const load = (id: string) => evidenceReadOnce(displayScope, id, () => {
@@ -120,6 +120,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(header.version!==1 || header.id!==id || identity(header.parentId,header.proposalId)!==id) fail('header-invalid');
     const saved=plans.saved(header.parentId,header.proposalId),plan=saved.update.plan;
     if(header.planRevision!==saved.update.revision || PHASES.some(p => typeof header.scripts[p]?.script!=='string' || sha(header.scripts[p].script)!==header.scripts[p].sha256)) fail('plan-changed');
+    const successStatuses=plan.kind==='native-contract-template-value-update'?['write-observed','no-op']:['updated','no-op'];
     const eventsDir=path.join(dir,'events'); ensure(eventsDir);
     let previous=sha(headerBytes);
     const state:State={phase:'update-prepared',wrote:false,claims:0,settled:new Map(),problems:[],revoked:new Set(),alarms:[]},events:Entry[]=[];
@@ -131,6 +132,9 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       if(event.kind==='dispatch' && event.parentJournalRevision!==undefined &&
           (!HASH.test(event.parentJournalRevision) || event.command.phase!=='update-readback' ||
             event.command.readOnly!==true || event.design || event.outcomeOf!==undefined)) fail('parent-context-invalid');
+      if(event.kind==='dispatch' && event.templateContextRevision!==undefined &&
+          (plan.kind!=='native-contract-template-value-update'||!/^sha256:[a-f0-9]{64}$/.test(event.templateContextRevision)||
+           event.command.phase!=='update-readback'||!event.command.readOnly||event.design||event.outcomeOf!==undefined))fail('template-context-invalid');
       if(event.kind==='dispatch' && event.design) {
         const c=event.command,reader=header.scripts['update-readback'];
         if(state.pending || state.phase!=='update-verified' || !state.observation || event.reader || event.outcomeOf!==undefined ||
@@ -159,7 +163,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           if(state.wrote || state.phase!=='update-preflight-observed' || !same(JSON.parse(read(path.join(dir,claimFile(state.claims)))),c)) fail('write-precondition-invalid');
           state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.writeStatus;delete state.completedUnchanged;delete state.revokedUntouched;delete state.begunAt;
         } else if(p==='update-preflight-readback' ? state.wrote : !state.wrote) fail('readback-precondition-invalid');
-        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;delete state.observationParentRevision;
+        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;delete state.observationParentRevision;delete state.observationTemplateContextRevision;
       } else if(event.kind==='begin') {
         if(state.unresolved || state.pending?.phase!=='update-apply' || event.attemptId!==state.pending.attemptId || state.begun ||
             (event.at!==undefined && (typeof event.at!=='string' || !Number.isFinite(Date.parse(event.at))))) fail('begin-invalid');
@@ -174,7 +178,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         if(!settlement || state.pending || state.revoked.has(event.envelope.attemptId)) fail('late-result-invalid');
         if(event.envelope.attemptId===state.write?.attemptId) state.answered=true;
         // Allow-list: only results consistent with the settlement are benign.
-        const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:['updated','no-op'];
+        const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:successStatuses;
         // Untouched means begin was refused from then on: any result at all proves a
         // program ran without permission (a companion older than the handshake).
         if(settlement==='untouched') state.problems=[...new Set([...state.problems,'native-update-write-ran-without-begin'])];
@@ -187,7 +191,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         correlate(event.envelope,state.pending);
         // Report only. The verified observation stays the chain's truth; the
         // next write still has to pass its own preflight against the canvas.
-        try { state.design={...nativeDesignChanges(clean(state.observation),clean(event.envelope.result)),attemptId:state.pending.attemptId}; }
+        try { state.design={...nativeAppUpdateDesignChanges(plan,state.observation,event.envelope.result),attemptId:state.pending.attemptId}; }
         catch { delete state.design;state.problems=['native-update-design-observation-unreadable']; }
         delete state.designRead;delete state.pending;
       } else if(event.kind==='result' && state.unresolved) {
@@ -214,14 +218,14 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         const r=event.envelope.result as any,p=state.pending.phase;
         state.problems=[];
         if(p==='update-preflight-readback') {
-          state.phase=r?.status==='preflight-observed' && nativeContractUpdateMatches(plan,r.observation) ? 'update-preflight-observed' : 'update-refused';
+          state.phase=nativeAppUpdatePreflight(plan,r) ? 'update-preflight-observed' : 'update-refused';
           // A revoked write settled as untouched may still have executed later. The
           // first preflight after that settlement names any canvas that moved since.
           // Kept until a preflight actually reads the canvas: an observed one that is
           // not the saved baseline, or one the program refused after reading it.
           const refusedAfterReading=r?.status==='refused' && !(Array.isArray(r?.problems) && r.problems.includes('native-update-file-mismatch'));
           if(state.revokedUntouched && (r?.status==='preflight-observed' || refusedAfterReading)) {
-            if(refusedAfterReading || !nativeContractUpdateUntouched(plan,r.observation))
+            if(refusedAfterReading || !nativeAppUpdatePreflight(plan,r,true))
               state.alarms=[...new Set([...state.alarms,'native-update-canvas-moved-after-revoked-settlement'])];
             delete state.revokedUntouched;
           }
@@ -230,11 +234,12 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           // Acknowledgement never qualifies success. A separate read observes
           // the actual nodes even after a refused or rolled-back write.
           state.phase='update-applied';
-          if(!['updated','no-op'].includes(r?.status)) state.problems=['native-update-write-'+String(r?.status ?? 'unknown')];
+          if(!successStatuses.includes(r?.status)) state.problems=['native-update-write-'+String(r?.status ?? 'unknown')];
         } else {
           state.observation=r;state.observationScriptSha256=state.pending.scriptSha256;
           const dispatch=events.find(e=>e.kind==='dispatch' && e.command.attemptId===state.pending!.attemptId);
           state.observationParentRevision=dispatch?.kind==='dispatch' ? dispatch.parentJournalRevision : undefined;
+          state.observationTemplateContextRevision=dispatch?.kind==='dispatch'?dispatch.templateContextRevision:undefined;
           if(nativeContractUpdateMatches(plan,r,true)) state.phase='update-verified';
           else if(state.answered && state.write && ['rolled-back','refused'].includes(state.writeStatus??'') && nativeContractUpdateUntouched(plan,r)) {
             // A terminal answer alone is not evidence. This later independent
@@ -249,7 +254,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           // The native program names the check that refused: a conflicting node,
           // an unrelated canvas edit, a missing node. Keep those names beside the
           // summary; "refused" alone gives an operator nothing to resolve.
-          const named=Array.isArray(r?.problems)?(r.problems as unknown[]).filter((p):p is string=>typeof p==='string'&&/^native-update-[A-Za-z0-9:;._-]{1,160}$/.test(p)).slice(0,20):[];
+          const named=Array.isArray(r?.problems)?(r.problems as unknown[]).filter((p):p is string=>typeof p==='string'&&/^native-(?:update|template)-[A-Za-z0-9:;._-]{1,160}$/.test(p)).slice(0,20):[];
           state.problems=['native-update-observation-refused',...new Set(named)];
         }
         delete state.pending;
@@ -277,7 +282,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         const settlement=state.settled.get(event.envelope.attemptId);
         if(settlement) {
           if(state.pending) fail('late-result-invalid');
-          const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:['updated','no-op'];
+          const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:successStatuses;
           if(!benign.includes(status)) {
             state.phase='update-recovery-required';state.wrote=true;delete state.revokedUntouched;
             state.problems=[...new Set([...state.problems,'native-update-late-write-result-contradicts-canvas'])];
@@ -315,9 +320,12 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     const context=plans.observationContext(l.header.parentId,l.header.proposalId);
     if(context.currentRevision!==context.baselineRevision && l.state.observationParentRevision!==context.currentRevision)
       fail('parent-observation-refresh-required');
+    if(context.templateCurrentRevision!==undefined &&
+        l.state.observationTemplateContextRevision!==context.templateCurrentRevision)
+      fail('template-context-observation-refresh-required');
     // Export geometry enriches images only. An otherwise current historical
     // reader still proves structure; missing framing is reported separately.
-    if (![sha(readback(l.plan.after,true,true)), sha(readback(l.plan.after,true))].includes(l.state.observationScriptSha256 ?? ''))
+    if (![sha(emitNativeAppUpdateReadback(l.plan,readback)), sha(emitNativeAppUpdateReadback(l.plan,readback,true,false))].includes(l.state.observationScriptSha256 ?? ''))
       fail('current-reader-observation-required');
   };
   type Unsealed<E> = E extends Entry ? Omit<E,'sequence'|'previous'> : never;
@@ -331,6 +339,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     const id=identity(l.header.parentId,proposal.id);
     return existsSync(path.join(root,id))&&load(id).state.wrote;
   });
+  const callerImages=(l:Loaded)=>l.plan.kind==='native-contract-template-value-update'&&l.state.observation
+    ? l.plan.template.input.consumers.map((c,i)=>({operationId:c.input.operation.id,caseId:c.input.comparison.caseId,
+      ...collectExpectedNativeImages({operation:c.input.operation,planRevision:c.input.planRevision},
+        [{id:c.input.comparison.caseId,instanceId:c.input.creation.comparisons[0].instanceId}],
+        (l.state.observation as any).consumerObservations?.[i])})) : [];
   const snapshot=(l:Loaded) => {
     let sourceCurrent=false, canRefreshObservation=false;
     try { if(l.state.wrote && l.state.phase==='update-verified') authenticateObservation(l); else authenticate(l); sourceCurrent=true; }
@@ -348,7 +361,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       completedUnchanged:l.state.completedUnchanged,
       attestedDead:l.state.attested&&l.state.attested.attemptId===l.state.write?.attemptId?{...l.state.attested}:undefined,canAttestDead:attestable(l.state)==='ok',
       begunAt:l.state.begun&&l.state.begun===l.state.write?.attemptId?l.state.begunAt:undefined,
-      imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};
+      imageObservation:l.state.observation ? collectNativeImages(l.plan.after,nativeAppUpdateMainReadback(l.plan,l.state.observation)).observation:undefined,
+      ...(l.plan.kind==='native-contract-template-value-update'?{callerImageObservations:callerImages(l).map(({operationId,caseId,observation})=>({operationId,caseId,observation}))}:{})};
   };
   const get=(id:string)=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id)));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
@@ -359,26 +373,28 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(l.state.phase==='update-write-untouched') fail('write-rearm-required');
     if(p==='update-apply' ? l.state.wrote || l.state.phase!=='update-preflight-observed' : p==='update-preflight-readback' ? l.state.wrote : !l.state.wrote) fail('phase-refused');
     if(p==='update-apply') authenticate(l);
-    let program=l.header.scripts[p],reader:Extract<Entry,{kind:'dispatch'}>['reader'],parentJournalRevision:string|undefined;
+    let program=l.header.scripts[p],reader:Extract<Entry,{kind:'dispatch'}>['reader'],parentJournalRevision:string|undefined,templateContextRevision:string|undefined;
     if (p==='update-readback') {
       // A stale source still permits historical read-only recovery, but only a
       // freshly authenticated unchanged plan can select today's reader.
       try {
         authenticatePlan(l);
-        const script=readback(l.plan.after,true,true);
+        const script=emitNativeAppUpdateReadback(l.plan,readback);
         if(script!==program.script) {program={script,sha256:sha(script)};reader={version:1,inputRevision:revisionOf(l.plan.after)};}
         const context=plans.observationContext(l.header.parentId,l.header.proposalId);
         if(context.currentRevision!==context.baselineRevision)parentJournalRevision=context.currentRevision;
+        templateContextRevision=context.templateCurrentRevision;
       } catch { /* Deliver the historical reader; it cannot qualify current reuse. */ }
     }
     const command:NativeOperationCommand={version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:id,phase:p,
       attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
       planRevision:l.header.planRevision,script:program.script,scriptSha256:program.sha256,readOnly:p!=='update-apply'};
-    append(l,{kind:'dispatch',command,...(reader?{reader}:{}),...(parentJournalRevision?{parentJournalRevision}:{})});return structuredClone(command);
+    append(l,{kind:'dispatch',command,...(reader?{reader}:{}),...(parentJournalRevision?{parentJournalRevision}:{}),...(templateContextRevision?{templateContextRevision}:{})});return structuredClone(command);
   };
   const image=(id:string,hash:string) => {
     if(!HASH.test(hash))fail('image-request-invalid');
-    const l=load(id),data=collectNativeImages(l.plan.after,l.state.observation).bytes.get(hash);
+    const l=load(id),data=collectNativeImages(l.plan.after,nativeAppUpdateMainReadback(l.plan,l.state.observation)).bytes.get(hash)
+      ??callerImages(l).map(c=>c.bytes.get(hash)).find(Boolean);
     if(!data)fail('image-unavailable');
     return Buffer.from(data);
   };
@@ -408,9 +424,9 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         if(tips.length!==1) fail('effective-observation-unavailable');
         const l=tips[0];authenticateObservation(l); // Reauthenticates the entire pinned chain and current source.
         if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
-        const receipt=structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
+        const receipt=nativeAppUpdateMainReadback(l.plan,l.state.observation);
         delete receipt.images;
-        return {input:nativeContractUpdateAfter(l.plan,receipt),receipt};
+        return {input:nativeContractUpdateAfter(l.plan,l.state.observation),receipt};
       });
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
