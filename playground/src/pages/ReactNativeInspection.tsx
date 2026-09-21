@@ -75,8 +75,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [inspectionSourceAvailable, setInspectionSourceAvailable] = useState(false);
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
+  // A transport can finish while this response still carries the preceding
+  // journal view. Keep refreshing until the displayed update itself settles.
   const active = rows.some(r => (r.connection.paired && r.connection.started && !r.connection.finished) || r.content?.phase === 'running' ||
-    r.updates?.some(u => u.connection?.paired && u.connection.started && !u.connection.finished));
+    r.updates?.some(u => u.connection?.paired && u.connection.started && (!u.connection.finished ||
+      ['awaiting-native-result', 'update-preflight-observed', 'update-applied'].includes(u.operation?.phase ?? ''))));
   async function reviewMeasurement(id: string) {
     setBusy(true); setError('');
     try {
