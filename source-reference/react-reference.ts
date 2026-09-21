@@ -1184,9 +1184,9 @@ export function createReactReferenceService(
         ? readReactCompositionEvidence(repoRoot, reference, request.root, reactComparisonContentOperation(request), native!().jobs,
           { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
-    nativeEvidence(request: ReactNativeRequest) {
+    nativeEvidence(request: ReactNativeRequest, identity?: string) {
       if (!reference) throw Error('react-native-reference-unavailable');
-      return readReactNativeEvidence(repoRoot, reference, request);
+      return readReactNativeEvidence(repoRoot, reference, request, identity);
     },
     callerNativeEvidence,
     stateApiNativeEvidence:thisStateApiEvidence,

@@ -13,7 +13,8 @@ import { isReactNativeRequest, type ReactNativeRequest } from './react-native-re
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import { deriveReactChildRoot } from './react-child-root.js';
 import { readReactContentInspectionEvidence } from './react-content-inspection.js';
-import type { ReactRootMatrix } from './react-root-matrix.js';
+import { assembleReactRootMatrix, type ReactRootMatrix } from './react-root-matrix.js';
+import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { ReactChildRoot } from './react-child-root.js';
 import type { NativeContractDraftSource } from '../core/native-contract-draft.js';
 
@@ -45,11 +46,11 @@ export function selectReactChildRequest(repoRoot: string, reference: ReactRefere
 
 /** Existing journal requests retain these exact hashes across restarts. A new
  * request must first come from selectReactNativeRequest on a current runner. */
-export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
-  return evidenceReadOnce('react-native', {repoRoot,referenceId:reference.id,files:reference.files,request},
-    ()=>readReactNativeEvidenceFresh(repoRoot,reference,request));
+export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, identity?: string) {
+  return evidenceReadOnce('react-native', {repoRoot,referenceId:reference.id,files:reference.files,request,identity},
+    ()=>readReactNativeEvidenceFresh(repoRoot,reference,request,identity));
 }
-function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReference, request: ReactNativeRequest): {
+function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, identity?: string): {
   matrix: ReactRootMatrix | ReactChildRoot; source: NativeContractDraftSource;
 } {
   if (!isReactNativeRequest(request) || reference.id !== request.referenceId || !reactReferenceUnchanged(reference)) fail();
@@ -73,7 +74,10 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   const program = JSON.parse(programBytes.toString()) as ReactSourceProgram;
   if (!reactSourceProgramUnchanged(program) || !reactReferenceUnchanged(reference)) fail();
-  const captured = request.version !== 1 ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
+  const retainIdentity = identity !== undefined && identity !== row.rootMatrix!.draft!.contract?.id;
+  if(retainIdentity&&(request.version!==1||!/^observed\.react-matrix-[a-f0-9]{16}$/.test(identity!)))
+    throw Error('react-native-matrix-identity-invalid');
+  const captured = request.version !== 1 || retainIdentity ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
   if (captured && (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
       captured.treeSha256 !== evidenceSha(JSON.stringify(captured.tree)) || captured.treeSha256 !== row.treeSha256)) fail();
   let context,ownedEvidence;
@@ -90,8 +94,21 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
         svg:JSON.parse(readFileSync(path.join(contentDir,'svg-viewports.json'),'utf8'))};
     }
   }
-  const matrix = request.version === 1 ? structuredClone(row.rootMatrix!) : deriveReactChildRoot(program, row.ownership!, captured.tree,
+  let matrix = request.version === 1 ? structuredClone(row.rootMatrix!) : deriveReactChildRoot(program, row.ownership!, captured.tree,
     JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8')), request.selection!.instanceId,context,ownedEvidence);
+  if(retainIdentity) {
+    if(!row.propertyMatrix||!row.ownership)fail();
+    const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyMatrix!.rows.map(effect=>{
+      if(!/^\d+$/.test(effect.id))return fail();
+      const file=path.join(request.caseId,'matrix',effect.id+'.json');
+      if(!Object.hasOwn(seal.files,file))return fail();
+      return [effect.id,JSON.parse(readFileSync(path.join(dir,file),'utf8'))];
+    }));
+    const reassembled=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots);
+    if(revisionOf(reassembled)!==revisionOf(row.rootMatrix))throw Error('react-native-matrix-reassembly-changed');
+    matrix=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,identity);
+    if(matrix.problems.length||matrix.draft?.status!=='native-compiled'||matrix.draft.problems.length)fail();
+  }
   return { matrix, source: {
     revision: `sha256:${reference.id}`, programSha256: evidenceSha(programBytes), evidenceRevision: revisionOf(request),
   } };

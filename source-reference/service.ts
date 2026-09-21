@@ -786,7 +786,8 @@ export function createReferenceService(
       // The existing component keeps its name and token namespace; for an
       // unchanged source this equals the content-derived name.
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })
-      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source), operation: baseline.input.operation });
+      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source,
+        baseline.source.version===1?baseline.input.component.contractId:undefined), operation: baseline.input.operation });
     const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
     const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins):undefined;
     return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {

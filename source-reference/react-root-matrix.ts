@@ -22,7 +22,7 @@ export interface ReactRootMatrix {
  draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[];sizing?:ReactSizingReport[]};problems:string[];
 }
 export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:ReactOwnership,tree:CapturedNode,
- matrix:ReactPropertyMatrix,snapshots:Record<string,ReactPropertySnapshot>):ReactRootMatrix{
+ matrix:ReactPropertyMatrix,snapshots:Record<string,ReactPropertySnapshot>,identity?:string):ReactRootMatrix{
  const out:ReactRootMatrix={version:1,qualification:'combined-property-root-draft',acceptedContract:null,problems:[]};
  try{
   const expected=planReactPropertyMatrix(program,ownership,tree,matrix.instanceId);
@@ -94,7 +94,11 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const grid=gridRefusal?undefined:grids[0],fills=!!grid&&sizing.fill.has('width');
    if(fills)result.sizing=sizing.reports.map(r=>r.channel==='width'?{channel:'width',status:'fill'}:r);
    if(grid)result.limitations.push('intrinsic-row-lowering-observed-block-content-only','grid-tracks-observed-for-this-content-only');
-   const suffix=revisionOf({sizing:[...projections].map(([key,p])=>[key,p.sourceSizing]),source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
+   // A host-authenticated successor keeps its existing allocation namespace.
+   // New captures still derive their identity from the complete observations.
+   const retained=identity===undefined?undefined:/^observed\.react-matrix-([a-f0-9]{16})$/.exec(identity)?.[1];
+   if(identity!==undefined&&!retained)throw Error('react-root-matrix-identity-invalid');
+   const suffix=retained??revisionOf({sizing:[...projections].map(([key,p])=>[key,p.sourceSizing]),source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),
     states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'},...(grid?{layout:grid,literals:{...(fills?{width:'100%'}:{}),height:'fit-content'}}:{})}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
