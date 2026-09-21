@@ -1,4 +1,5 @@
 import { nativeImageFraming } from '../native-image-framing';
+import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useCallback, useEffect, useState } from 'react';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
@@ -49,6 +50,7 @@ interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
+    tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
     templateValueChanges?: Array<{tokenPath:string;variableId:string;modeId:string;before:unknown;after:unknown}>; templateCallerCount?:number;
     boundCrossSize?: boolean; layoutChanges?: Array<{nodeId:string;channel:'x'|'y';before:number;after:number}>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
@@ -202,6 +204,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               <p>{update.templateValueChanges.length} color updates affect the existing component and {update.templateCallerCount ?? 0} recorded caller instances. Unrecorded consumers or intervening edits stop the update. Typography and size updates remain unavailable.</p>
               {!!update.templateValueChanges.length && <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>Token</th><th>Saved color</th><th>Proposed color</th></tr></thead>
                 <tbody>{update.templateValueChanges.map(change=><tr key={change.variableId+':'+change.modeId}><td>{change.tokenPath}</td><td>{designValue(change.before)}</td><td>{designValue(change.after)}</td></tr>)}</tbody></table>}
+              </>}
+            {!!update.tokenAllocations?.length && <>
+              <p>Add {update.tokenAllocations.length} number variables to this component's existing collection. Existing variables and component nodes stay unchanged. After verification, use Review compiler update again to check the remaining component changes. Source repair is unavailable until that review is complete.</p>
+              <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>New token</th><th>Mode</th><th>Value</th></tr></thead>
+                <tbody>{update.tokenAllocations.flatMap(token=>token.values.map(row=><tr key={token.tokenPath+':'+row.sourceMode}><td>{token.tokenPath}</td><td>{row.sourceMode}</td><td>{String(row.value)}</td></tr>))}</tbody></table>
             </>}
             {!!update.tokenChanges?.length && <>
               <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
@@ -234,9 +241,10 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 <button type="button" disabled={busy||!update.connection?.paired||!!update.operation.pendingPhase} onClick={()=>void action(`native-operation/${id}/update/${update.id}/observe-design`)}>Read design changes from the canvas</button>
                 {update.operation.designRead && <p role="status">Reading the actual nodes. This only reads; the verified state is not affected. Keep the companion connected.</p>}
                 {update.operation.designChanges && (update.operation.designChanges.total||update.operation.designChanges.added.length||update.operation.designChanges.removed.length ? <>
-                  <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Nothing was written and nothing is accepted. To carry a change to React, change the source so it renders the observed value, then follow the changed source: when both sides agree the update verifies without writing to Figma. To keep the code's value instead, restore it on the canvas. Until then, a code update that touches the same property is refused by name.</p>
+                  <p>A designer changed {update.operation.designChanges.total} recorded value{update.operation.designChanges.total===1?'':'s'} on these nodes since this update was verified{update.operation.designChanges.added.length?`, added ${update.operation.designChanges.added.length} node(s)`:''}{update.operation.designChanges.removed.length?`, removed ${update.operation.designChanges.removed.length} node(s)`:''}. Reading the change leaves both sides untouched. For a supported opacity change, preview and apply a source repair below. Other changes require a developer to update the source and follow the changed source. To keep the code's value instead, restore it on the canvas. Until the values agree, a code update that touches the same property is refused by name.</p>
                   <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Node</th><th>Property</th><th>Verified value</th><th>On the canvas now</th></tr></thead>
                     <tbody>{update.operation.designChanges.changes.map(change=><tr key={change.nodeId+':'+change.channel}><td>{/^(variable|collection):/.test(change.channel) ? 'Variable' : <a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant ?? '—'}</a>}</td><td>{change.node}</td><td>{change.channel}</td><td>{designValue(change.recorded)}</td><td>{designValue(change.observed)}</td></tr>)}</tbody></table>
+                  <ReactSourceRepairPreview endpoint={`${root}/native-operation/${id}/update/${update.id}/source-repair`} />
                 </> : <p>The canvas matches the verified values: no design changes since verification.</p>)}
               </section>}
               {update.operation.unresolvedWrite==='awaiting-result' && <>

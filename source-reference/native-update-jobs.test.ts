@@ -2,6 +2,7 @@ import {PNG} from 'pngjs';
 import {nativeDefaultFillUpdateFixture} from '../core/native-contract-default-fill-update-test-fixture.js';
 import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
+import {revisionOf} from '../core/contract-provenance.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -59,6 +60,70 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     enableFraming:()=>{legacyFraming=false;},derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
 
+test('source-repair recovery reads stay correlated and read-only after source changes',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  f.nodes[0].opacity=.6;
+  f.transport().observeDesign(f.id);await f.poll();
+  const original=f.jobs().designEvidence(f.id),baseline=revisionOf(original.baseline);
+  f.stale();assert.throws(()=>f.jobs().designEvidence(f.id),/source changed/);
+  const command=f.transport().observeSourceRepair(f.id,baseline);
+  assert.equal(command.readOnly,true);assert.equal(command.phase,'update-readback');
+  assert.equal(f.jobs().sourceRepairReadEvidence(f.id,command.attemptId,baseline),null);
+  assert.deepEqual(f.transport().observeSourceRepair(f.id,baseline),command,'a pending read is resumed, not duplicated');
+  f.restart();await f.poll();
+  const observed=f.jobs().sourceRepairReadEvidence(f.id,command.attemptId,baseline)!;
+  assert.equal(revisionOf(observed.observed),revisionOf(original.observed));
+  assert.notEqual(observed.attemptId,original.attemptId);
+  assert.throws(()=>f.jobs().sourceRepairReadEvidence(f.id,original.attemptId,baseline),/read-unavailable/);
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1,'only the original native update wrote');
+  assert.throws(()=>f.jobs().designEvidence(f.id),/source changed/,'read-only recovery did not restore source authority');
+});
+
+test('source-repair reads refuse a different baseline and replaced attempt',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();f.transport().observeDesign(f.id);await f.poll();
+  const baseline=revisionOf(f.jobs().designEvidence(f.id).baseline);
+  assert.throws(()=>f.transport().observeSourceRepair(f.id,revisionOf('wrong baseline')),/baseline-unavailable/);
+  const read=f.transport().observeSourceRepair(f.id,baseline);
+  assert.throws(()=>f.jobs().sourceRepairReadEvidence(f.id,'00000000-0000-4000-8000-000000000001',baseline),/read-replaced/);
+  f.advanceReader();assert.throws(()=>f.transport().observeSourceRepair(f.id,baseline),/read-in-flight/);
+  assert.equal(f.jobs().pendingCommand(f.id)?.attemptId,read.attemptId);
+});
+
+test('renewed source-repair preflight cannot reuse a cached read from before restart',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  f.transport().observeDesign(f.id);await f.poll();
+  const original=f.jobs().designEvidence(f.id),baseline=revisionOf(original.baseline);
+  const old=f.transport().observeSourceRepair(f.id,baseline);
+  const cached={...old,result:await f.run(old.script)};
+  f.restart();f.nodes[0].opacity=.6;
+  const fresh=f.transport().observeSourceRepair(f.id,baseline,true);
+  assert.notEqual(fresh.attemptId,old.attemptId);
+  assert.throws(()=>f.jobs().accept(f.id,cached),/result-correlation-invalid/);
+  assert.throws(()=>f.jobs().sourceRepairReadEvidence(f.id,old.attemptId,baseline),/read-replaced/);
+  assert.equal(f.jobs().sourceRepairReadEvidence(f.id,fresh.attemptId,baseline),null);
+  await f.poll();
+  const observed=f.jobs().sourceRepairReadEvidence(f.id,fresh.attemptId,baseline)!;
+  assert.notEqual(revisionOf(observed.observed),revisionOf(original.observed));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+});
+
+test('the companion resends a cached repair read without satisfying the fresh post-restart attempt',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  f.transport().observeDesign(f.id);await f.poll();
+  const original=f.jobs().designEvidence(f.id),baseline=revisionOf(original.baseline);
+  const old=f.transport().observeSourceRepair(f.id,baseline);f.lose('result');await f.poll();
+  assert.equal(f.storage.get('ds_native_receipt:'+f.id).stage,'result');
+  f.restart();f.nodes[0].opacity=.6;
+  const fresh=f.transport().observeSourceRepair(f.id,baseline,true);
+  assert.notEqual(old.attemptId,fresh.attemptId);
+  await f.poll();
+  assert.equal(f.jobs().sourceRepairReadEvidence(f.id,fresh.attemptId,baseline),null,'the cached result is history only');
+  await f.poll();
+  const observed=f.jobs().sourceRepairReadEvidence(f.id,fresh.attemptId,baseline)!;
+  assert.notEqual(revisionOf(observed.observed),revisionOf(original.observed));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+});
+
 test('the actual companion delivers preflight, an existing-node update, and independent exports across restarts',async t=>{
   const f=await fixture(t),ids=f.figma.root.findAll(()=>true).map((n:any)=>n.id);
   for(const expected of ['update-preflight-observed','update-applied','update-verified']) {
@@ -84,6 +149,23 @@ test('source drift or a manual native edit prevents the write',async t=>{
   const conflict=await fixture(t);conflict.nodes[0].opacity=0.8;await conflict.poll();
   assert.equal(conflict.jobs().get(conflict.id).phase,'update-refused');await conflict.poll();
   assert.equal(conflict.delivered.length,1);assert.equal(conflict.nodes[0].opacity,0.8);assert.equal(conflict.nodes[1].opacity,0.5);
+});
+
+test('repair evidence refuses source drift and reader drift; a refreshed baseline can use the current design reader',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  const observe=async()=>{const c=f.jobs().observeDesign(f.id);f.jobs().accept(f.id,{...c,result:await f.run(c.script)});return c;};
+  await observe();assert.ok(f.jobs().designEvidence(f.id));
+  f.advanceReader();f.restart();
+  assert.throws(()=>f.jobs().designEvidence(f.id),/current-reader-observation-required/);
+  // A historical design read is display-only until the baseline is refreshed.
+  await observe();assert.throws(()=>f.jobs().designEvidence(f.id),/current-reader-observation-required/);
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.throws(()=>f.jobs().designEvidence(f.id),/design-evidence-unavailable/);
+  f.nodes[0].opacity=0.8;
+  const read=await observe();assert.ok(read.script.startsWith('// Current independent reader 1'));
+  const evidence=f.jobs().designEvidence(f.id);assert.equal(evidence.difference.changes[0].observed,0.8);
+  f.restart();assert.deepEqual(f.jobs().designEvidence(f.id),evidence);
+  f.stale();assert.throws(()=>f.jobs().designEvidence(f.id),/source changed/);
 });
 
 test('a lost update acknowledgement is retained and resent without repeating a write even after source drift',async t=>{

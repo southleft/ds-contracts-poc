@@ -12,6 +12,7 @@ import type { NativeSourceCandidateProjection } from "./native-source-projection
 import type { NativeContractDraftProjection } from "./native-contract-draft.js";
 import type { NativeSourceComparisonInput } from "./native-source-comparisons.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
+import { emitNativeTokenExtensionContextReadbackScript } from './native-token-extension.js';
 import {backgroundPaintIdentities} from './figma-background-clip.js';
 import {
   verifyNativeTokenContextReceipt,
@@ -54,6 +55,9 @@ export interface NativeContractObservationInput extends Omit<NativeSourceObserva
   graphComponents?: ComponentData[];
   /** Host-derived provenance for an independently verified allocation extension. */
   backgroundMigration?: {desiredRevision:string;allocationRevision:string};
+  /** A pending additive token correction uses a complete collection inventory.
+   * Its IDs are adopted only after the separate extension verifier succeeds. */
+  tokenExtensionReadback?: import('./native-token-extension.js').NativeTokenExtensionPlan;
   /** New geometry corrections require fresh constraint evidence. Absent on
    * historical inputs, so their pinned readback programs remain byte-identical. */
   absoluteShapeReadback?: {version:1|2|3;nodeIds:string[]};
@@ -226,12 +230,16 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if (isContractDraft(input) && input.component.variants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   if (isContractDraft(input) && input.component.variants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
+  const extension=isContractDraft(input)?input.tokenExtensionReadback:undefined;
+  if(extension && (synchronous || !same(extension.before,input.tokenInput) || !same(extension.identity,input.tokenIdentity)))
+    throw Error('native-token-extension-reader-input-invalid');
   const inventory = emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component),
     isContractDraft(input) ? input.absoluteShapeReadback?.nodeIds : undefined,
     isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2,
     isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
-    isContractDraft(input) && input.component.rootSlot?.textTemplate === 1);
+    isContractDraft(input) && input.component.rootSlot?.textTemplate === 1,
+    extension ? emitNativeTokenExtensionContextReadbackScript(extension) : undefined);
   if (!isContractDraft(input) || !input.templateGraph) return inventory;
   if (synchronous) {
     const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity, true);
@@ -267,7 +275,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string): string {
   if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
@@ -342,7 +350,7 @@ const stable = x => JSON.stringify((function order(v) {
 })(x));
 function guard() { if (figma.fileKey !== EXPECTED.operation.fileKey) throw Error('native-source-readback-file-mismatch'); }
 ${synchronous ? 'function tokenRead() { return (() => {' : 'async function tokenRead() { return await (async () => {'}
-${emitNativeTokenContextReadbackScript(tokenInput, tokenIdentity, synchronous)}
+${tokenReadback ?? emitNativeTokenContextReadbackScript(tokenInput, tokenIdentity, synchronous)}
 })(); }
 ${synchronous ? '' : 'async '}function read(page) {
   const nodes = [page, ...page.findAll(() => true)];

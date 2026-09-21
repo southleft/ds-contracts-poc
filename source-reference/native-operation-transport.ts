@@ -35,6 +35,7 @@ export interface NativeDeliveryJobs {
   resolveWriteOutcome?(id: string): NativeOperationCommand;
   beginWrite?(id: string, attemptId: string): void;
   observeDesign?(id: string): NativeOperationCommand;
+  observeSourceRepair?(id:string,baselineRevision:string,renew?:boolean):NativeOperationCommand;
   rearmWrite?(id: string): void;
   /** Operator attestation that the companion that began the latest write is gone. */
   attestDead?(id: string): unknown;
@@ -115,7 +116,10 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       fail("unauthorized");
   };
   const pair = (id: string) => {
-    jobs.get(id); // Must be an actual valid journal, never caller-chosen script.
+    // Authenticate the journal without recompiling source history. Pairing
+    // also serves read-only recovery after source drift; start/dispatch/begin
+    // retain their own current-source checks before any native write.
+    jobs.deliveryState(id);
     const file = path.join(directory(id), "connection.json");
     if (!existsSync(file)) {
       try {
@@ -286,7 +290,12 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
   const observeDesign = (id: string) => {
     connection(id);
     if (!status(id).started || !jobs.observeDesign) fail("design-observation-refused");
-    jobs.observeDesign(id);
+    return jobs.observeDesign(id);
+  };
+  const observeSourceRepair=(id:string,baselineRevision:string,renew=false)=>{
+    connection(id);
+    if(!status(id).started||!jobs.observeSourceRepair)fail('source-repair-observation-refused');
+    return jobs.observeSourceRepair(id,baselineRevision,renew);
   };
   const rearmWrite = (id: string) => {
     connection(id);
@@ -305,5 +314,5 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (state.connected) throw Error("native-update-attest-dead-companion-connected");
     jobs.attestDead(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign };
+  return { pair, start, status, authorize, claim, begin, accept, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign, observeSourceRepair };
 }

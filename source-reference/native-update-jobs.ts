@@ -7,8 +7,8 @@ import path from 'node:path';
 import { storeNativeUpdatePrograms, loadNativeUpdatePrograms } from './native-update-programs.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import {emitNativeAppUpdateScript,emitNativeAppUpdateReadback,nativeAppUpdateMatches as nativeContractUpdateMatches,nativeAppUpdateUntouched as nativeContractUpdateUntouched,nativeAppUpdateAfter as nativeContractUpdateAfter,nativeAppUpdatePreflight,nativeAppUpdateMainReadback,nativeAppUpdateDesignChanges} from './native-app-update.js';
-import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
-import { type NativeDesignChanges } from '../core/native-design-changes.js';
+import { emitNativeContractReadbackScript, type NativeSourceReadback } from '../core/native-source-observation.js';
+import { nativeDesignChanges, type NativeDesignChanges } from '../core/native-design-changes.js';
 import { collectNativeImages,collectExpectedNativeImages } from './native-operation-images.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { NativeOperationCommand, NativeOperationPhase, NativeOperationResult } from './native-operation-jobs.js';
@@ -48,8 +48,10 @@ type Entry = { sequence: number; previous: string } & (
   // A result for a revoked attempt. Kept as evidence, never counted as its outcome.
   { kind: 'late-result-after-revocation'; envelope: NativeOperationResult });
 type Settlement = 'landed' | 'untouched' | 'unresolved';
+type DesignEvidence = NativeDesignChanges & { attemptId: string; scriptSha256: string;
+  baseline: NativeSourceReadback; observed: NativeSourceReadback };
 type State = { phase: string; write?: NativeOperationCommand; answered?: boolean; writeStatus?:string; completedUnchanged?:'rolled-back'|'refused'; revoked: Set<string>; attested?: { attemptId: string; at: string };
-  revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: NativeDesignChanges & { attemptId: string }; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; begunAt?: string; claims: number; settled: Map<string, Settlement>;
+  revokedUntouched?: string; alarms: string[]; designRead?: boolean; design?: DesignEvidence; pending?: NativeOperationCommand; unresolved?: NativeOperationCommand; begun?: string; begunAt?: string; claims: number; settled: Map<string, Settlement>;
   wrote: boolean; observation?: unknown; observationScriptSha256?: string; observationParentRevision?: string; observationTemplateContextRevision?:string; problems: string[] };
 function fail(message: string): never { throw Error('native-update-' + message); }
 /** The operator's statement, recorded verbatim with every attestation. The route takes no body. */
@@ -137,11 +139,14 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
            event.command.phase!=='update-readback'||!event.command.readOnly||event.design||event.outcomeOf!==undefined))fail('template-context-invalid');
       if(event.kind==='dispatch' && event.design) {
         const c=event.command,reader=header.scripts['update-readback'];
-        if(state.pending || state.phase!=='update-verified' || !state.observation || event.reader || event.outcomeOf!==undefined ||
+        const readerValid=event.reader
+          ? event.reader.version===1 && event.reader.inputRevision===revisionOf(plan.after) && typeof c.script==='string' && sha(c.script)===c.scriptSha256
+          : c.script===reader.script && c.scriptSha256===reader.sha256;
+        if(state.pending || state.phase!=='update-verified' || !state.observation || !readerValid || event.outcomeOf!==undefined ||
             c.phase!=='update-readback' || c.readOnly!==true || c.version!==1 || c.kind!=='SOURCE-NATIVE-OPERATION' || c.operationId!==id ||
             c.fileKey!==plan.before.operation.fileKey || c.planRevision!==header.planRevision || !UUID.test(c.attemptId) || !HASH.test(c.nonce) ||
-            attempts.has(c.attemptId) || c.script!==reader.script || c.scriptSha256!==reader.sha256) fail('design-dispatch-invalid');
-        attempts.add(c.attemptId);state.pending=c;state.designRead=true;
+            attempts.has(c.attemptId)) fail('design-dispatch-invalid');
+        attempts.add(c.attemptId);state.pending=c;state.designRead=true;delete state.design;
       } else if(event.kind==='dispatch' && event.outcomeOf!==undefined) {
         const c=event.command,reader=header.scripts['update-readback'];
         if(state.unresolved || state.pending?.phase!=='update-apply' || event.outcomeOf!==state.pending.attemptId || event.reader ||
@@ -163,7 +168,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           if(state.wrote || state.phase!=='update-preflight-observed' || !same(JSON.parse(read(path.join(dir,claimFile(state.claims)))),c)) fail('write-precondition-invalid');
           state.wrote=true;state.claims++;delete state.begun;state.write=c;delete state.answered;delete state.writeStatus;delete state.completedUnchanged;delete state.revokedUntouched;delete state.begunAt;
         } else if(p==='update-preflight-readback' ? state.wrote : !state.wrote) fail('readback-precondition-invalid');
-        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;delete state.observationParentRevision;delete state.observationTemplateContextRevision;
+        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;delete state.observationParentRevision;delete state.observationTemplateContextRevision;delete state.design;
       } else if(event.kind==='begin') {
         if(state.unresolved || state.pending?.phase!=='update-apply' || event.attemptId!==state.pending.attemptId || state.begun ||
             (event.at!==undefined && (typeof event.at!=='string' || !Number.isFinite(Date.parse(event.at))))) fail('begin-invalid');
@@ -191,7 +196,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         correlate(event.envelope,state.pending);
         // Report only. The verified observation stays the chain's truth; the
         // next write still has to pass its own preflight against the canvas.
-        try { state.design={...nativeAppUpdateDesignChanges(plan,state.observation,event.envelope.result),attemptId:state.pending.attemptId}; }
+        try {
+          const baseline=clean(nativeAppUpdateMainReadback(plan,state.observation)),observed=clean(nativeAppUpdateMainReadback(plan,event.envelope.result));
+          state.design={...nativeAppUpdateDesignChanges(plan,state.observation,event.envelope.result),attemptId:state.pending.attemptId,
+            scriptSha256:state.pending.scriptSha256,baseline,observed};
+        }
         catch { delete state.design;state.problems=['native-update-design-observation-unreadable']; }
         delete state.designRead;delete state.pending;
       } else if(event.kind==='result' && state.unresolved) {
@@ -339,6 +348,21 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     const id=identity(l.header.parentId,proposal.id);
     return existsSync(path.join(root,id))&&load(id).state.wrote;
   });
+  const verifiedTip=(parentId:string) => {
+    const written=plans.list(parentId).flatMap(proposal=>{
+      const id=identity(parentId,proposal.id);
+      if(!existsSync(path.join(root,id)))return [];
+      const l=load(id);return l.state.wrote?[l]:[];
+    });
+    if(!written.length)return undefined;
+    if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending))fail('effective-observation-unavailable');
+    const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
+    const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
+    if(tips.length!==1)fail('effective-observation-unavailable');
+    const l=tips[0];authenticateObservation(l);
+    if(!nativeContractUpdateMatches(l.plan,l.state.observation,true))fail('effective-observation-invalid');
+    return l;
+  };
   const callerImages=(l:Loaded)=>l.plan.kind==='native-contract-template-value-update'&&l.state.observation
     ? l.plan.template.input.consumers.map((c,i)=>({operationId:c.input.operation.id,caseId:c.input.comparison.caseId,
       ...collectExpectedNativeImages({operation:c.input.operation,planRevision:c.input.planRevision},
@@ -411,23 +435,70 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     },
     verifiedForParent(parentId: string) {
       return evidenceReadOnce(displayScope + ':parent', parentId, () => {
-        const written = plans.list(parentId).flatMap(proposal => {
-          const id=identity(parentId,proposal.id);
-          if(!existsSync(path.join(root,id))) return [];
-          const loaded=load(id);
-          return loaded.state.wrote ? [loaded] : [];
-        });
-        if(!written.length) return undefined;
-        if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending)) fail('effective-observation-unavailable');
-        const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
-        const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
-        if(tips.length!==1) fail('effective-observation-unavailable');
-        const l=tips[0];authenticateObservation(l); // Reauthenticates the entire pinned chain and current source.
-        if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
+        const l=verifiedTip(parentId);if(!l)return undefined;
         const receipt=nativeAppUpdateMainReadback(l.plan,l.state.observation);
         delete receipt.images;
         return {input:nativeContractUpdateAfter(l.plan,l.state.observation),receipt};
       });
+    },
+    /** Full host-only input for a repair planner, never the truncated UI rows.
+     * It proves the journal/source/baseline relationship, not permission to
+     * write source or that the canvas has stayed unchanged since this read. */
+    designEvidence(id:string) {
+      assertOutsideEvidenceSnapshot();
+      const l=load(id);
+      if(l.plan.kind==='native-contract-template-value-update')fail('template-source-repair-unqualified');
+      const tip=verifiedTip(l.header.parentId),design=l.state.design;
+      if(l.plan.kind==='native-contract-token-allocation-update')fail('compiler-review-required-after-token-allocation');
+      if(tip?.id!==id)fail('superseded-observation-is-historical');
+      if(!design || l.state.pending || l.state.unresolved || l.state.problems.length || l.state.alarms.length)
+        fail('design-evidence-unavailable');
+      if(!same(design.baseline,clean(l.state.observation)))fail('design-baseline-changed');
+      if(![sha(readback(l.plan.after,true,true)),sha(readback(l.plan.after,true))].includes(design.scriptSha256))
+        fail('current-design-reader-required');
+      const receipt=clean(l.state.observation) as NativeSourceReadback;
+      return structuredClone({operationId:id,parentId:l.header.parentId,proposalId:l.header.proposalId,
+        journalRevision:l.previous,attemptId:design.attemptId,input:nativeContractUpdateAfter(l.plan,receipt),
+        baseline:receipt,observed:design.observed,difference:nativeDesignChanges(receipt,design.observed)});
+    },
+    /** Read-only recovery observation. Original source can be partly changed
+     * by a journaled source transaction, so this grants no source authority.
+     * The caller must authenticate that transaction and compare the complete
+     * observed content with its reviewed intent before any source write. */
+    observeSourceRepair(id:string,baselineRevision:string,renew=false):NativeOperationCommand {
+      assertOutsideEvidenceSnapshot();let l=load(id);
+      if(l.plan.kind==='native-contract-template-value-update')fail('template-source-repair-unqualified');
+      if(superseded(l)||l.state.phase!=='update-verified'||l.state.problems.length||l.state.alarms.length||
+        revisionOf(clean(l.state.observation))!==baselineRevision)fail('source-repair-baseline-unavailable');
+      const script=readback(l.plan.after,true,true),scriptSha256=sha(script);
+      if(l.state.pending){
+        if(!l.state.designRead||!l.state.pending.readOnly||l.state.pending.scriptSha256!==scriptSha256)fail('source-repair-read-in-flight');
+        if(!renew)return structuredClone(l.state.pending);
+        // A cached result from before a host restart cannot be a fresh
+        // source-write preflight. Preserve and supersede that read only.
+        append(l,{kind:'abandon-observation',attemptId:l.state.pending.attemptId});l=load(id);
+      }
+      const command:NativeOperationCommand={version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:id,phase:'update-readback',
+        attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
+        planRevision:l.header.planRevision,script,scriptSha256,readOnly:true};
+      append(l,{kind:'dispatch',command,design:true,reader:{version:1,inputRevision:revisionOf(l.plan.after)}});
+      return structuredClone(command);
+    },
+    sourceRepairReadEvidence(id:string,attemptId:string,baselineRevision:string){
+      assertOutsideEvidenceSnapshot();const l=load(id);
+      if(l.plan.kind==='native-contract-template-value-update')fail('template-source-repair-unqualified');
+      if(superseded(l)||l.state.phase!=='update-verified'||l.state.problems.length||l.state.alarms.length||
+        revisionOf(clean(l.state.observation))!==baselineRevision)fail('source-repair-baseline-unavailable');
+      if(l.state.pending){
+        if(l.state.designRead&&l.state.pending.attemptId===attemptId&&l.state.pending.readOnly)return null;
+        fail('source-repair-read-replaced');
+      }
+      const design=l.state.design;
+      if(!design||design.attemptId!==attemptId||design.scriptSha256!==sha(readback(l.plan.after,true,true))||
+        revisionOf(design.baseline)!==baselineRevision)fail('source-repair-read-unavailable');
+      return structuredClone({operationId:id,parentId:l.header.parentId,proposalId:l.header.proposalId,
+        fileKey:l.plan.before.operation.fileKey,attemptId,journalRevision:l.previous,scriptSha256:design.scriptSha256,
+        baselineRevision,observed:design.observed});
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {
@@ -494,11 +565,16 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       const l=load(id);
       if(superseded(l))fail('superseded-observation-is-historical');
       if(l.state.pending||l.state.phase!=='update-verified') fail('design-observation-refused');
-      const reader=l.header.scripts['update-readback'];
+      let reader=l.header.scripts['update-readback'],currentReader:Extract<Entry,{kind:'dispatch'}>['reader'];
+      try {
+        authenticateObservation(l);
+        const script=emitNativeAppUpdateReadback(l.plan,readback);
+        if(script!==reader.script) {reader={script,sha256:sha(script)};currentReader={version:1,inputRevision:revisionOf(l.plan.after)};}
+      } catch { /* Historical differences remain inspectable, never current repair evidence. */ }
       const command:NativeOperationCommand={version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:id,phase:'update-readback',
         attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
         planRevision:l.header.planRevision,script:reader.script,scriptSha256:reader.sha256,readOnly:true};
-      append(l,{kind:'dispatch',command,design:true});return structuredClone(command);
+      append(l,{kind:'dispatch',command,design:true,...(currentReader?{reader:currentReader}:{})});return structuredClone(command);
     },
     /** Called for the companion immediately before it executes a write. */
     beginWrite(id:string,attemptId:string) {

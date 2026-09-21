@@ -1,4 +1,6 @@
 import { emitNativeTokenBindingScope } from './native-token-binding-scope.js';
+import {prepareNativeTokenAllocationUpdate,resolveNativeTokenAllocationUpdate,nativeTokenAllocationUpdateMatches,
+  emitNativeTokenAllocationUpdateScript,type NativeTokenAllocationUpdatePlan} from './native-contract-token-allocation.js';
 import {prepareNativeBoundCrossSizeUpdate,type NativeBoundCrossSizeUpdatePlan} from './native-contract-bound-cross-size-update.js';
 import {emitNativeBoundCrossSizeUpdateScript} from './native-contract-bound-cross-size-writer.js';
 import {nativeBoundCrossSizeObservationMatches} from './native-bound-cross-size-observation.js';
@@ -69,10 +71,12 @@ const scalar = (v: unknown): v is number => typeof v === 'number' && Number.isFi
 const part = (node: Record<string, any>) => {
   try { return JSON.parse(node.metadata.nativeContractPart); } catch { return null; }
 };
-export type NativeContractUpdatePlan = NativeDefaultFillUpdatePlan | NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan | NativeAbsoluteShapeUpdatePlan | NativeBoundCrossSizeUpdatePlan;
+export type NativeContractUpdatePlan = NativeTokenAllocationUpdatePlan | NativeDefaultFillUpdatePlan | NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan | NativeAbsoluteShapeUpdatePlan | NativeBoundCrossSizeUpdatePlan;
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
   if (input.before.projection.rootTextTemplate || input.before.component.rootSlot?.textTemplate || input.desired.component.rootSlot?.textTemplate)
     throw Error('native-update-root-text-template-unqualified');
+  const allocation=prepareNativeTokenAllocationUpdate(input);
+  if(allocation)return allocation;
   // Only the scalar plan carries variable values. A sibling kind's matcher and
   // program know nothing of them, so a mixed change is refused by name.
   const scalarOnly = (base: NativeContractUpdateInput) => prepareOpacityUpdate(base, false);
@@ -228,6 +232,11 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
 /** Host verification uses the same independent reader as creation, with the
  * old immutable allocation identities and explicitly updated expected values. */
 export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, receipt: unknown, direction: 'apply' | 'rollback' = 'apply') {
+  if(plan.kind==='native-contract-token-allocation-update') {
+    try {if(direction!=='apply'||!nativeTokenAllocationUpdateMatches(plan,receipt as NativeSourceReadback,true))throw Error('mismatch');
+      return verifyNativeContractReadback(resolveNativeTokenAllocationUpdate(plan,receipt as NativeSourceReadback),receipt);
+    }catch {const result=verifyNativeContractReadback(plan.before,receipt);return {...result,status:'refused' as const,problems:[...result.problems,'native-update-token-allocation-observation-mismatch']};}
+  }
   if(plan.kind==='native-contract-background-update') {
     try {return verifyNativeContractReadback(direction==='apply'?resolveNativeBackgroundUpdateInput(plan,receipt):plan.before,receipt);}
     catch {const result=verifyNativeContractReadback(plan.before,receipt);return {...result,status:'refused' as const,problems:[...result.problems,'native-update-background-observation-mismatch']};}
@@ -262,6 +271,7 @@ export function nativeContractUpdateUntouched(plan: NativeContractUpdatePlan, re
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
+  if(plan.kind==='native-contract-token-allocation-update')return nativeTokenAllocationUpdateMatches(plan,receipt as NativeSourceReadback,complete);
   if (plan.kind === 'native-contract-bound-cross-size-update') return nativeBoundCrossSizeObservationMatches(plan,receipt,complete?'after':'partial');
   if (plan.kind === 'native-contract-absolute-shape-update') return nativeAbsoluteShapeUpdateMatches(plan,receipt,complete);
   if (plan.kind === 'native-contract-default-fill-update') return nativeDefaultFillUpdateMatches(plan, receipt, complete);
@@ -296,6 +306,7 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
  * values. The same program can finish a partial application or make no writes.
  * Transport must still resolve an unknown delivery before explicitly resuming. */
 export function emitNativeContractUpdateScript(plan: NativeContractUpdatePlan, direction: 'apply' | 'rollback' = 'apply', readOnly = false) {
+  if(plan.kind==='native-contract-token-allocation-update')return emitNativeTokenAllocationUpdateScript(plan,direction,readOnly);
   if (plan.kind === 'native-contract-bound-cross-size-update') return emitNativeBoundCrossSizeUpdateScript(plan,direction,readOnly);
   if (plan.kind === 'native-contract-absolute-shape-update') return emitNativeAbsoluteShapeUpdateScript(plan,direction,readOnly);
   if (plan.kind === 'native-contract-default-fill-update') return emitNativeDefaultFillUpdateScript(plan, direction, readOnly);
@@ -524,5 +535,6 @@ return out;`;
 
 /** Resolve newly observed allocations only after independent migration checks. */
 export function nativeContractUpdateAfter(plan:NativeContractUpdatePlan,receipt:unknown) {
+ if(plan.kind==='native-contract-token-allocation-update')return resolveNativeTokenAllocationUpdate(plan,receipt as NativeSourceReadback);
  return plan.kind==='native-contract-background-update'?resolveNativeBackgroundUpdateInput(plan,receipt):structuredClone(plan.after);
 }
