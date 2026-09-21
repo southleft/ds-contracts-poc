@@ -8286,6 +8286,10 @@ original React, not with the failing native caller. The archive SHA-256 is
 `93a0a1c077e6e53220ab45882ae607a5712c15bb48fb17b5735cc983b1d3b813`;
 private evidence includes `app-graph-inverse-v3.json`,
 `app-consumer-v1/verification-v2.json` and the inspected consumer screenshot.
+Lossless pixel comparison of this installed consumer remains unmeasured: the
+browser screenshot interfaces returned JPEG data. The attempted capture's
+format refusal is preserved in `app-consumer-v1/visual-measurement-refusal-v1.json`;
+the geometry and computed-style results are not promoted to a pixel score.
 
 Reloading the same tab retains one Workspace entry. Manually restoring it and
 preparing the library again produces identical contract and archive bytes.
