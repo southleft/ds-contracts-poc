@@ -132,6 +132,35 @@ export function createReactSourceWitnessSuccessions(repo:string){
       !same(transaction.inputs,selection.inputs)||!same(transaction.edits.map(({mode:_mode,...edit})=>edit),selection.edits))fail('transaction-mismatch');
   }
   return {
+    /** Authenticate retained review evidence while this exact transaction may
+     * be incomplete. This never admits a partially written source as valid. */
+    review(transactionId:string,sourceRoot:string){
+      sourceRoot=realpathSync(sourceRoot);
+      const history=transactions.history(transactionId),id=history.transaction.selectionRevision.slice(7);
+      const selections=new Set<string>();
+      const base=loadReactCohort(sourceRoot);
+      const visit=(selectionId:string,current=false):{selection:Selection;before:ReactCohort;after:ReactCohort}=>{
+        if(selections.has(selectionId)||selections.size>=128)fail('history-cycle');selections.add(selectionId);
+        const selection=read(selectionId);if(selection.sourceRoot!==sourceRoot)fail('root-mismatch');
+        const dir=registry(sourceRoot),names=readdirSync(dir).filter(n=>n!=='.pending');
+        if(names.length>128)fail('history-limit');
+        const links=names.map(name=>{
+          if(!/^[a-f0-9]{64}\.json$/.test(name))fail('registry-invalid');
+          const file=path.join(dir,name),bytes=fileBytes(file),link=JSON.parse(bytes.toString());
+          if(link.version!==1||link.transactionId+'.json'!==name)fail('registry-invalid');return {link,file,bytes};
+        }).filter(({link})=>link.selectionId===selectionId);
+        if(links.length!==1)fail('ambiguous-transaction');
+        const {link,file,bytes}=links[0],parentHistory=transactions.history(link.transactionId);
+        if(current&&link.transactionId!==transactionId)fail('transaction-mismatch');
+        checkTransaction(selection,selectionId,parentHistory.transaction);
+        if(!current&&(parentHistory.events.at(-1)?.kind!=='complete'||parentHistory.events.at(-1)?.direction!=='apply'))fail('parent-transaction-incomplete');
+        const before=selection.parent?visit(selection.parent).after:base;
+        const after=derive(selectionId,selection,before,{...before.witnessSuccession?.evidenceFiles,[file]:sha(bytes)});
+        return {selection,before,after};
+      };
+      const result=visit(id,true);checkTransaction(result.selection,id,history.transaction);
+      return {...result,transaction:history.transaction};
+    },
     prepare(input:ReactSourceRepairInput,stage:Stage,previewDirectory:string,resultRevision:string){
       if(!reactReferenceUnchanged(input.reference)||!reactWitnessesMatch(input.reference)||
         input.reference.sourceRoot!==stage.sourceRoot||!matches(stage.originalFiles))fail('original-source-changed');

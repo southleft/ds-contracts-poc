@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react';
 import type {ReactSourceRepairPreview as Preview} from '../../../source-reference/react-source-repair-preview';
 
 export function ReactSourceRepairPreview({endpoint}:{endpoint:string}) {
-  const [preview,setPreview]=useState<Preview|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
+  const [preview,setPreview]=useState<Preview|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[application,setApplication]=useState('');
   const running=preview?.phase==='running';
   useEffect(()=>{
     let stopped=false,pending=false;
@@ -27,6 +27,15 @@ export function ReactSourceRepairPreview({endpoint}:{endpoint:string}) {
     finally{setBusy(false);}
   };
   const selected=preview?.candidates.find(candidate=>candidate.index===preview.selected);
+  const apply=async()=>{
+    if(!preview)return;setBusy(true);setError('');
+    try{
+      const response=await fetch(`${endpoint}/${preview.id}/apply`,{method:'POST'}),result=await response.json();
+      if(!response.ok)throw Error(result.reason??result.error);
+      setApplication(result.application.id);window.dispatchEvent(new Event('react-source-repair-changed'));
+    }catch(error){setError(error instanceof Error?error.message:String(error));}
+    finally{setBusy(false);}
+  };
   return <section aria-label="React source repair preview">
     <h5>Preview a React source repair</h5>
     <p>Check a supported opacity edit in an isolated copy of the original source, across every recorded state. The preview leaves the original files unchanged.</p>
@@ -49,7 +58,9 @@ export function ReactSourceRepairPreview({endpoint}:{endpoint:string}) {
       {selected?.comparison&&<>
         <p>{selected.comparison.rows.filter(row=>row.changed).length} changed states; {selected.comparison.rows.filter(row=>!row.changed).length} unchanged states with identical images. Other recorded styles, content, fonts and geometry match.</p>
         {preview.cohort&&<>
-          <p>All {preview.cohort.cases.length} configured caller examples match the intended change. Automatic source application is not available yet.</p>
+          <p>All {preview.cohort.cases.length} configured caller examples match the intended change. Apply updates the original module and generated CSS shown above, then validates the source and checks the canvas again.</p>
+          <button type="button" disabled={busy||running||!preview.current||!!application} onClick={()=>void apply()}>Apply reviewed change to original source</button>
+          {application&&<p role="status">Application {application.slice(0,8)} started. Its progress and recovery controls are under Source changes and recovery above.</p>}
           <table style={{borderSpacing:'12px 6px',textAlign:'left'}}>
             <thead><tr><th>Caller example</th><th>Initial states checked</th><th>Interaction trials per version</th><th>Original view</th></tr></thead>
             <tbody>{preview.cohort.cases.map(c=><tr key={c.caseId}>

@@ -8854,3 +8854,51 @@ entry together. Preserve all private selections, links, preview evidence and
 source transaction journals. Sources already changed by an applied transaction
 must be recovered or explicitly re-witnessed before removing the loader;
 silently falling back to stale expectations is not a valid rollback.
+
+### D.108 Source application requires fresh canvas reads and verified recovery
+
+**AGENT decision, 2026-09-21.** The reviewed root-opacity preview now has an
+original-source Apply controller and persistent application recovery controls.
+This is an implemented path under qualification; a live original-source Apply
+journey has not yet been recorded. D.104–D.107's earlier previews, transaction
+tests and witness checks do not establish that outcome.
+
+Apply accepts only the host's current selected preview. It seals that selection,
+prepares the exact source/CSS transaction and requests a new read from the
+existing Sync Runner operation. The full observed content must match the
+reviewed design intent and verified baseline. An old pending read is superseded
+when a run starts; a cached result from before restart cannot authorize a new
+source write. Recovery reads remain read-only even when original source is
+partially changed, and grant no authority to the ordinary source-dependent
+design reader.
+
+After writing, the controller builds the original workspace through its normal
+versioned witness loader. The application's normal browser validation must pass
+every configured example and all required corruption controls for that exact
+reference. A second fresh canvas read, unchanged source inputs and retained
+validation evidence are required before completion. The source record persists
+independently of the old reference, so recovery remains accessible after reload
+or an interrupted file replacement. A closed service stops its pending run;
+run identities prevent its late completion from changing a newer run's journal.
+
+Engineering checks cover apply, unchanged repeat, source restoration, partial
+file recovery, changed source and canvas, wrong-reference or incomplete
+validation, changed retained evidence, unavailable companions and request bodies
+attempting to supply paths or programs. These checks use disposable sources.
+The controller does not qualify the entire two-way journey, arbitrary CSS or
+callers outside the preview's recorded domain.
+
+Restoring source restores the selected module and CSS only; it leaves the
+reviewed Figma design unchanged. It requires another canvas read and validates
+the restored original. Source and Figma are not locked together, so a later
+design edit can invalidate agreement. File replacement retains D.106's
+non-atomic multi-file limitation. Unexpected source edits refuse without being
+overwritten. Missing preview or transaction proof refuses; stale validation
+evidence requires verification again. Returning the updated source to the
+existing native operation's normal succession workflow and the live
+interruption/repeat/rollback demonstrations remain qualification work.
+
+Reversal removes the Apply endpoints, recovery UI and controller together.
+Keep the source transaction helper and witness loader for already applied
+changes until those sources have been recovered or explicitly re-witnessed.
+Never remove private journals, selections, held files or validation evidence.
