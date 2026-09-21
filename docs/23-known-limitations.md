@@ -8556,3 +8556,34 @@ This is a source-bundling correction, without a component-specific branch or
 change to the scorer. Reversal: revert the loader selection and its regression
 probe; preserve the failed and corrected reference archives. Existing archived
 references are never rewritten.
+
+## D.101 Web-font witnesses reject same-family system fallback
+
+A family-name check cannot distinguish a required web font from an installed
+system font with the same name. A case may now author `fontOrigin: "web"` in
+its source witness. Every font that paints glyphs must match the declared family
+and report `isCustomFont: true`; system, mixed or missing origin evidence refuses
+with `font-substitution`. The optional witness follows the existing text target,
+including a declared shadow font path or associated label. It is incompatible
+with an explicit text-absence witness. Other declarations retain their original
+family-only semantics and observation shape.
+
+The application probe against the unchanged installed return now finishes
+**1/1 valid**, with all five negative controls rejected. Its missing-font record
+shows Inter painting three glyphs from a custom font before corruption and
+Inter painting three glyphs from a system font afterward. The baseline and
+isolated replay PNGs remain identical to the prior measured image. The old
+family-only refusal is retained. Evidence is in private
+`react-source-validations/27fc7ddeb884d3d14086a18ecfd3cca5b6ca51eab7cbbbada89f4abd782d1b5e/67408aed-771b-4642-8b9a-e3faca0e7e80/`.
+This probe does not qualify the complete cohort, native Figma fonts or V1.
+
+**AGENT decision, 2026-09-21.** Use Chromium's painted-font origin evidence only
+when the source declaration explicitly requires web-font rendering. Preserve
+the before/after font records for its missing-font control, keep absence of
+evidence as a refusal, and authenticate the changed witness through the existing
+reference identity. The [Chromium protocol](https://chromium.googlesource.com/devtools/devtools-frontend/+/main/third_party/blink/public/devtools_protocol/browser_protocol.json)
+distinguishes custom from locally resolved fonts; this does not identify a
+particular downloaded font file. No family substitution, source-font change,
+scorer change or tolerance change is introduced. Reversal: remove the optional
+witness, conditional observation and check, and its control evidence; retain
+all archived references and failed or passing reports.
