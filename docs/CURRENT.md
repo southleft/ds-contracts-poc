@@ -36,6 +36,12 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
 
+The retained Checkbox's fresh source observation exposed four newly requested
+number tokens. An additive allocation step now preserves the existing collection
+and node identities in engine checks; it requires a separate compiler review
+after allocation. This step has not yet been demonstrated through the live app
+([D.103](23-known-limitations.md#d103-additive-token-allocation-is-a-separate-correction)).
+
 ### What the React application can do now
 
 The `/sources` page loads the configured original workspace. **Validate React sources** checks source identity, authored styles, actual fonts and states against archived replay; representative negative controls reject missing or hidden content. **Inspect React APIs**, **Trace React structure** and state/callback inspection derive supported facts without substituting generated code for the original.

@@ -49,6 +49,7 @@ interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
+    tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
     boundCrossSize?: boolean; layoutChanges?: Array<{nodeId:string;channel:'x'|'y';before:number;after:number}>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
@@ -197,6 +198,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded ? 'Verified correction for current inputs' :
               update.operation ? 'Saved correction' : 'Saved proposal'}</h4>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            {!!update.tokenAllocations?.length && <>
+              <p>Add {update.tokenAllocations.length} number variables to this component's existing collection. Existing variables and component nodes stay unchanged. After verification, use Review compiler update again to check the remaining component changes. Source repair is unavailable until that review is complete.</p>
+              <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>New token</th><th>Mode</th><th>Value</th></tr></thead>
+                <tbody>{update.tokenAllocations.flatMap(token=>token.values.map(row=><tr key={token.tokenPath+':'+row.sourceMode}><td>{token.tokenPath}</td><td>{row.sourceMode}</td><td>{String(row.value)}</td></tr>))}</tbody></table>
+            </>}
             {!!update.tokenChanges?.length && <>
               <p>This update also writes {update.tokenChanges.length} variable value{update.tokenChanges.length === 1 ? '' : 's'} in this operation's own collection. {update.tokenBindingScope === 'document-v1'
                 ? update.boundCrossSize

@@ -8618,8 +8618,10 @@ selects the disabled utility: four disabled states change opacity from 0.5 to
 0.6, and eight other states preserve identical images. Original source and CSS
 remain unchanged. This is an engineering preview result, not a completed
 application journey or source write. The earlier sealed observation lacked
-pseudo-box geometry and correctly refused; its fresh successor is separate
-evidence and has not silently replaced the native operation's source pin.
+pseudo-box geometry and correctly refused. The fresh successor was explicitly
+adopted through the application. Compiler review then refused four newly
+requested number tokens; the original source, canvas and historical records
+remained unchanged. D.103 addresses that allocation gap.
 
 The preview service and UI accept only an existing source/native pair and its
 current recorded design read. The host must configure relative
@@ -8635,3 +8637,35 @@ interrupted source-write recovery and live two-way acceptance remain undone.
 The preview offers no apply action. Reversal removes the repair routes, UI and
 source-repair modules together, retaining the native design-read and source
 succession journals and every failed or successful private probe.
+
+### D.103 Additive token allocation is a separate correction
+
+**AGENT decision, 2026-09-21.** A compiler may newly track a literal number
+without changing its rendered value. An existing native draft must be able to
+add that variable while retaining its original collection, modes, existing
+variable IDs, component nodes and ownership metadata. Dropping requested paths
+or creating another component would hide the missing update behavior.
+
+The new allocation correction checks the whole verified component baseline and
+the complete collection inventory. It supports additional literal number tokens
+in one existing mode; existing token definitions, mode changes, aliases and
+other token types cannot change in the same step. Its append-only collection
+ledger records intent before allocation and actual IDs immediately after each
+create call. Independent readback verifies the exact additions and every old
+variable. Repeats of a completed allocation create nothing. Source repair stays
+unavailable until a subsequent compiler review settles the remaining component
+changes. This step alone does not update the component's appearance.
+
+Bounded engine probes cover old-ID preservation, subsequent value updates,
+repeated extensions, forged identity/ledger/value refusals, concurrent component
+edits and interrupted allocation. An interruption before intent can retry. A
+complete allocation whose final ledger stamp was interrupted can settle after
+all IDs and values match. An unknown allocation, missing recorded ID or partial
+value assignment refuses without creating another variable; automatic recovery
+from those ambiguous states remains unqualified. No variable is deleted as
+cleanup. Application delivery and live Figma verification remain outstanding.
+
+Reversal removes the allocation route and writer while preserving the extended
+token reader, original ownership stamps, allocation ledger and journals for
+already written corrections. Never erase those records to imitate an old
+allocation or reassign variables by name.

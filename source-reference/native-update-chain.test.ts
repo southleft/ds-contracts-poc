@@ -95,6 +95,30 @@ test('design repair evidence cannot outlive its parent context or the tip of its
  assert.equal(f.jobs().designEvidence(second.operation.id).input.component.variants[0].spec.opacity,0.125);
 });
 
+test('an allocation correction survives journal restart and requires the subsequent component review before repair',async t=>{
+ const f=await fixture(t);
+ f.input.desired=f.desiredFor({...f.tokens,newOpacity:{$type:'number',$value:0.6}});
+ // The pending component correction must remain separate from allocation.
+ for(const v of f.input.desired.component.variants)v.spec.opacity=0.6;
+ f.input.desired.revision=revisionOf(f.input.desired.component);
+ const first=f.prepare();assert.equal(first.proposal.tokenAllocations?.length,1);
+ assert.equal(first.proposal.compilerReviewRequired,true);
+ await f.step(first.operation.id,'update-preflight-readback');f.restart();
+ await f.step(first.operation.id,'update-apply');
+ assert.throws(()=>f.prepare(),/effective-observation-unavailable/);
+ await f.step(first.operation.id,'update-readback');
+ assert.equal(f.jobs().get(first.operation.id).phase,'update-verified');
+ assert.throws(()=>f.jobs().designEvidence(first.operation.id),/compiler-review-required-after-token-allocation/);
+ const second=f.prepare();assert.notEqual(second.proposal.id,first.proposal.id);
+ assert.equal(second.proposal.tokenAllocations,undefined);assert.equal(second.proposal.changes.length,2);
+ await f.finish(second.operation.id);
+ assert.equal(f.jobs().get(second.operation.id).phase,'update-verified');
+ assert.equal(f.jobs().verifiedForParent(f.parent)!.input.tokenIdentity.variables.length,3);
+ const design=f.jobs().observeDesign(second.operation.id);f.jobs().accept(second.operation.id,{...design,result:await f.run(design.script)});
+ assert.ok(f.jobs().designEvidence(second.operation.id));
+ assert.equal(f.plans.prepare(f.parent).id,second.proposal.id,'a settled repeat does not allocate or duplicate');
+});
+
 test('a second correction starts at the verified first result, survives restart and preserves history',async t=>{
  const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
  const original=readFileSync(path.join(f.repo,'private/source-native-update-plans',f.parent,first.proposal.id+'.json'),'utf8');

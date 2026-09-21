@@ -429,6 +429,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     designEvidence(id:string) {
       assertOutsideEvidenceSnapshot();
       const l=load(id),tip=verifiedTip(l.header.parentId),design=l.state.design;
+      if(l.plan.kind==='native-contract-token-allocation-update')fail('compiler-review-required-after-token-allocation');
       if(tip?.id!==id)fail('superseded-observation-is-historical');
       if(!design || l.state.pending || l.state.unresolved || l.state.problems.length || l.state.alarms.length)
         fail('design-evidence-unavailable');

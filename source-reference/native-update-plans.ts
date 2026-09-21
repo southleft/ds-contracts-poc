@@ -94,6 +94,8 @@ export function createNativeUpdatePlans(repo: string,
   const view = (record: Record) => ({ id: revisionOf(record).slice(7), parentId: record.parentId, status:'planned' as const,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
     changes:structuredClone(record.update.plan.changes),
+    ...(record.update.plan.kind==='native-contract-token-allocation-update'?{
+      tokenAllocations:structuredClone(record.update.plan.extension.additions),compilerReviewRequired:true as const}:{}),
     ...(record.update.plan.kind === 'native-contract-bound-cross-size-update' ? {
       boundCrossSize: true,
       layoutChanges: record.update.plan.derived.flatMap(change => (['x','y'] as const).flatMap(channel =>
@@ -112,7 +114,7 @@ export function createNativeUpdatePlans(repo: string,
       assertOutsideEvidenceSnapshot();
       const record=compile(parentId);
       // A plan that writes only a variable value is not "no further changes".
-      const writesVariables='tokenChanges' in record.update.plan && !!record.update.plan.tokenChanges?.length;
+      const writesVariables=record.update.plan.kind==='native-contract-token-allocation-update'||'tokenChanges' in record.update.plan && !!record.update.plan.tokenChanges?.length;
       if(!record.update.plan.changes.length && !writesVariables && record.predecessor) {
         const previous=read(parentId,record.predecessor.proposalId);
         if(same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
