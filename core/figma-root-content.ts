@@ -38,8 +38,10 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       return fail(`${root.name}: full-width root must have an unbound fixed preview width`);
     if (marker.display === 'grid') {
       const carrier = slot.children?.[0], grid = carrier?.layout;
-      const slotFields = new Set(['name', 'type', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
-      const frameFields = new Set(['name', 'type', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound']);
+      // Consumer records describe existing bindings; they are capture evidence,
+      // not another style/layout channel or authority to relax these guards.
+      const slotFields = new Set(['name', 'type', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'variableConsumers']);
+      const frameFields = new Set(['name', 'type', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound', 'variableConsumers']);
       if (Object.keys(slot).some(key => !slotFields.has(key)) ||
           Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
           slot.children?.length !== 1 || carrier?.type !== 'FRAME' || carrier.name !== 'Content layout' ||
@@ -84,7 +86,7 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
     if (marker.display === 'block' && (!outer || outer.mode !== 'VERTICAL' || outer.primary !== 'MIN' ||
         outer.counter !== 'MIN' || outer.spacing !== 0 || outer.primarySizing !== 'AUTO' || root.bound?.itemSpacing))
       return fail(`${root.name}: block content requires intrinsic vertical flow without flex distribution`);
-    const allowed = new Set(['name', 'type', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
+    const allowed = new Set(['name', 'type', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight', 'variableConsumers']);
     if (Object.keys(slot).some(key => !allowed.has(key)) ||
         Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
         Object.keys(slot.bound ?? {}).some(key => key !== 'itemSpacing')) return fail(`${root.name}: content container has independent styling or behavior`);

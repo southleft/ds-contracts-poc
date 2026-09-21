@@ -476,6 +476,7 @@ export type MapDegradationCode =
   // is CARRIED (minWidth/minHeight/maxWidth/maxHeight style facts) instead
   // of degraded away.
   | 'text-channel-unsupported'
+  | 'text-binding-conflict'
   // Phase 2 exam (2026-08-22), REST-route receipts:
   // ONE row per import naming WHY the variables endpoint gave no response
   // (scope missing / plan-or-unknown / network / never fetched) and the fix.
@@ -1087,14 +1088,30 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
-  // dump v1.32 (REST parity with dump.plugin.js v1.22/v1.23): the weight and
-  // line-height TOKEN names the emitter stamped — Figma has no bindable
-  // font-weight field and lineHeight takes a value, not a variable, so the
-  // stamp is the only carrier of the token identity on this route too.
+  // Weight still uses the emitter stamp. A uniform native line-height
+  // binding is authoritative; its stamp is a fallback only when unbound.
   const weightVar = node.sharedPluginData?.ds_contracts?.fontWeightVar;
   if (typeof weightVar === 'string' && weightVar !== '') text.fontWeightVar = weightVar;
   const lhVar = node.sharedPluginData?.ds_contracts?.lineHeightVar;
-  if (typeof lhVar === 'string' && lhVar !== '') text.lineHeightVar = lhVar;
+  const lhAliases = node.boundVariables?.lineHeight;
+  if (Array.isArray(lhAliases) && lhAliases.length === 1 && isAlias(lhAliases[0])) {
+    const nativeLh = resolveVarName(ctx, lhAliases[0], nodePath, 'text.lineHeightVar');
+    if (nativeLh) {
+      text.lineHeightVar = nativeLh;
+      if (typeof lhVar === 'string' && lhVar !== '' && lhVar !== nativeLh) ctx.report.degradations.push({
+        code: 'text-binding-conflict', nodePath, field: 'text.lineHeightVar',
+        message: `native lineHeight binding "${nativeLh}" differs from legacy stamp "${lhVar}" — native identity captured`,
+      });
+    } else ctx.report.degradations.push({
+      code: 'text-channel-unsupported', nodePath, field: 'text.lineHeightVar',
+      message: 'native lineHeight variable unavailable — legacy stamp not substituted',
+    });
+  } else if (lhAliases !== undefined && (!Array.isArray(lhAliases) || lhAliases.length > 0)) {
+    ctx.report.degradations.push({
+      code: 'text-channel-unsupported', nodePath, field: 'text.lineHeightVar',
+      message: 'lineHeight has no single uniform variable binding — legacy stamp not substituted',
+    });
+  } else if (typeof lhVar === 'string' && lhVar !== '') text.lineHeightVar = lhVar;
   // dump v1.3: PIXEL line heights are CAPTURED (text.lineHeight); other
   // explicit units stay receipts below.
   if (s.lineHeightUnit === 'PIXELS' && typeof s.lineHeightPx === 'number') {
@@ -1905,7 +1922,10 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.40';
+export const REST_DUMP_VERSION = '1.41';
+// 1.41: uniform native line-height binding names, with explicit stamp conflicts.
+//       Per-node consumer values/modes remain uncaptured on the REST route.
+// 1.40: observed zero letter spacing retained across variants.
 // 1.39: vector masks cannot enter the ordinary filled-path projection.
 // 1.38: bounded closed filled VECTOR paths, exact local size and placement.
 // 1.37: fixedSize on explicit FIXED, in-flow, non-auto-layout boxes inside

@@ -7953,3 +7953,41 @@ unqualified. Reversal: revert the reader-version/capture and proposer changes
 together, rebuild the embedded dump and plugin receipt through their scripts,
 and retain all old captures and failed consumers. This restores the named
 varying-tracking loss rather than inventing zero for missing observations.
+
+## D.98 Native capture records the consuming variable mode
+
+**AGENT decision, 2026-09-21.** Plugin dump 1.42 records each resolved binding's
+variable ID, collection, inherited consuming mode, native resolved value and raw
+selected mode value on its consuming node. It preserves float32 color channels
+and numeric precision. Missing or invalid consuming evidence produces
+`variable-consumer-unresolved`; it does not substitute the collection's first
+mode. A selected alias edge is recorded, but this is not a complete alias graph
+or proof that a theme can be inverted without loss. The existing global variable
+table remains unchanged. These records alone do not qualify a mode-aware inverse.
+
+Both readers now capture a uniform native line-height variable binding. It
+overrides a conflicting legacy emitter stamp with `text-binding-conflict`.
+Mixed, malformed or unresolved native bindings name the loss and do not reuse
+the stamp. Unbound text keeps the legacy fallback. REST dump 1.41 retains the
+binding name when variable metadata is available; it does not capture inherited
+consumer modes or claim `resolveForConsumer` evidence.
+
+The retained Evaluations hidden-text probe has Small and Large mains using the
+same three variable IDs. The new canonical capture matches the independent
+native readback: 12/20 px font size, 18/28 px line height, and distinct native
+color values, with inherited mode selections and no explicit TEXT modes. Six
+consumer records are captured without degradations or node changes. Unit
+controls cover alias targets in another collection, native precision, missing
+and unreadable mode evidence, non-finite values, and stamp conflicts. Evidence
+is retained in `native-text-consumers-20260921/`.
+Root-slot readback accepts the new evidence field while retaining its existing
+content, layout, paint and behavior guards. The initial metadata rejection and
+the corrected flex/grid readback checks are preserved in that journal.
+
+This is a capture improvement. The converter still drops the hidden empty TEXT
+inside a native content slot; source typography is not yet preserved through
+that return journey. It does not qualify the second-library journey or V1.
+To reverse, remove the additive consumer records and native line-height capture
+together with their tests, regenerate the embedded dump and plugin receipt, and
+rederive sync baselines under an explicitly new grammar. Preserve live journals
+and the previous failed consumer; never relabel old evidence as a new capture.

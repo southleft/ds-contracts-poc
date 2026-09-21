@@ -56,7 +56,7 @@ test('plugin and REST fixed manual-box capture agree, including fractions, inval
   const source=readFileSync(new URL('../dump.plugin.js',import.meta.url),'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ['MeasuredBox'];`);
   const dumps=await run(source);
-  assert.equal(dumps._provenance.dumpVersion,'1.41');
+  assert.equal(dumps._provenance.dumpVersion,'1.42');
   assert.deepEqual(Array.from(dumps.MeasuredBox.variants, (v:any)=>v.children[0].fixedSize && JSON.parse(JSON.stringify(v.children[0].fixedSize))),
     specs.map(spec=>capture(child(spec as Partial<RestNode>)).fixedSize));
 });
