@@ -114,6 +114,10 @@ The same capture now imports in the app, repeats identically, and produces
 byte-identical installable archives. The unchanged installed component matches
 captured paint and height in all 100 combinations. Its missing text styling
 still produces the wrong caller widths and text colors.
+Canonical capture now retains the inherited consuming modes and native
+line-height bindings on a separate hidden-text probe, with six records matching
+independent native readback. The hidden-template conversion itself remains
+unimplemented ([D.98](23-known-limitations.md#d98-native-capture-records-the-consuming-variable-mode)).
 A separate live variable-mode control exposed color loss despite unchanged
 binding IDs. Joint paint return now refuses differing captured modes until
 each consuming node mode can be corroborated. The app names that refusal

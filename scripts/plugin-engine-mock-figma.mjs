@@ -91,6 +91,7 @@ export function createFigmaMock(options = {}) {
         },
       });
       this.parent = null;
+      this.explicitVariableModes = {};
       this.removed = false;
       this.visible = true;
       this.opacity = 1;
@@ -923,6 +924,17 @@ export function createFigmaMock(options = {}) {
       return this._shared.get(`\u0000/${key}`) ?? '';
     }
 
+    get resolvedVariableModes() {
+      return { ...Object.fromEntries(collections.map(c => [c.id, c.modes[0].modeId])),
+        ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes };
+    }
+
+    setExplicitVariableModeForCollection(collection, modeId) {
+      const id = typeof collection === 'string' ? collection : collection.id;
+      if (!collections.find(c => c.id === id)?.modes.some(m => m.modeId === modeId)) throw Error('unknown variable mode');
+      this.explicitVariableModes[id] = modeId;
+    }
+
     setBoundVariable(field, variable) {
       if (variable == null) {
         delete this.boundVariables[field];
@@ -1279,15 +1291,15 @@ export function createFigmaMock(options = {}) {
     setVariableCodeSyntax(platform, value) {
       this._codeSyntax[platform] = value;
     }
-    resolveForConsumer() {
-      // Default-mode resolution, alias chains chased across collections.
-      let value = this.valuesByMode[Object.keys(this.valuesByMode)[0]];
+    resolveForConsumer(consumer) {
+      const mode = v => consumer?.resolvedVariableModes?.[v.variableCollectionId] ?? Object.keys(v.valuesByMode)[0];
+      let value = this.valuesByMode[mode(this)];
       let type = this.resolvedType;
       let guard = 0;
       while (value && typeof value === 'object' && value.type === 'VARIABLE_ALIAS' && guard++ < 10) {
         const target = variables.find((v) => v.id === value.id);
         if (!target) return null;
-        value = target.valuesByMode[Object.keys(target.valuesByMode)[0]];
+        value = target.valuesByMode[mode(target)];
         type = target.resolvedType;
       }
       return { resolvedType: type, value };

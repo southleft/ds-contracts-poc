@@ -63,6 +63,7 @@ for(const display of ['flex','inline-flex'] as const) test(`native ${display} ro
  assert.equal(comp.children![0].layoutSizingHorizontal,'HUG');assert.equal(comp.children![0].layoutSizingVertical,'HUG');
  const dumpSource=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
  const dump=JSON.parse(JSON.stringify((await run(dumpSource))[comp.name]));assert.deepEqual(dump.rootSlot,marker);
+ assert.ok(Object.values(dump.variants[0].children[0].variableConsumers).some((row:any)=>row.name==='gap8'&&row.value===8), 'canonical capture adds consuming-mode evidence beside the slot gap');
  const corpus=tokenCorpusFromJson({primitives,semantic:{},light:{},brandDefault:{}});
  for(const mode of ['exact','reviewable-inversion'] as const){
   const proposal=proposeFromDump(dump,{corpus,contractIdByName:new Map(),fileKey:null,projectionMode:mode,mintUnbound:true});
