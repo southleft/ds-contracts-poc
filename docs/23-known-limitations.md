@@ -7934,3 +7934,39 @@ To reverse, remove the adapter's overflow forwarding and native-compilation
 guard, together with these outcome claims. Preserve every source observation,
 native operation and failed visual comparison. Supporting the refused mapping
 requires a separate contract/emitter change and measured round-trip evidence.
+
+## D.96 CSS rule order requires stylesheet and tree-scope evidence
+
+**AGENT decision — 2026-09-20.** Equal-priority declarations in separate rules
+of the same stylesheet previously remained a `cascade-order-tie`. The reader
+now uses valid, non-overlapping sheet-relative `CSSStyle.range` positions after
+importance, inline, layer and specificity ranking. Every tied candidate must
+identify the same stylesheet and a captured tree scope. Duplicate reports of
+one rule are deduplicated by numeric range; neither CDP array order, selector
+names nor equal computed colors choose a source declaration. Conflicting
+declarations within one rule, separate stylesheets, missing or invalid positions
+or scope IDs, overlapping ranges and nested rules remain unresolved.
+
+An adversarial browser probe reused one constructed stylesheet in both the
+document and a shadow root. Source order incorrectly chose the inner rule even
+though the outer rule painted the host. Rules from different recorded origin
+tree scopes now refuse as `encapsulation-cascade-unsupported` before ranking.
+The probe covers equal and unequal specificity, and the reversal for important
+declarations. The rule follows [CSS Cascade 5](https://www.w3.org/TR/css-cascade-5/#cascade-order)
+and the [CDP CSS protocol](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/master/json/browser_protocol.json);
+it does not infer cross-context order from selector spelling.
+
+The unchanged DaisyUI source demonstrates the bounded improvement: its regular
+badge height is authored as `1.25rem` (20 px), and the later small-badge rule
+declares `1rem` (16 px). The app trace retains height across the 100 observed
+property combinations for each declared case. Both original/observed pairs
+match and the source is unchanged. Width remains unresolved because the
+`fit-content` expression is outside the supported source-size grammar. The six
+paint bindings still refuse under D.95, so native preparation remains disabled;
+no new native output or fidelity pass is claimed. Private evidence is retained
+in `daisyui-source-intake-20260920/` and `css-source-order-20260920/`.
+
+To reverse, remove the source-position tiebreaker and restore the named tie
+expectations. Keep the independent cross-encapsulation refusal and all source,
+failed-probe, interrupted-run and native evidence. Do not replace authored
+constraints with measured sample dimensions or weaken visual thresholds.

@@ -1,9 +1,67 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {chromium} from 'playwright-core';
-import {readReactStyleOrigin,selectorSubjectIsOwn} from './react-style-origin.js';
+import {readReactStyleOrigin,resolveReactStyleDeclaration,selectorSubjectIsOwn} from './react-style-origin.js';
 import type {ReactOwnership} from './react-ownership.js';
 const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],components:[{id:'one',source:{module:'fixture.tsx',exportName:'Surface',sourceSha256:'0'.repeat(64),span:{start:0,end:1}},props:{},roots:['']}],nodes:[{path:'',tag:'button',createdBy:'one',nearestComponent:'one'}],problems:[]};
+
+test('rule-order proof requires complete, non-overlapping positions in one stylesheet and ignores CDP list order',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  const capture=async(html:string)=>{
+   await page.setContent(html);
+   const cdp=await page.context().newCDPSession(page);await cdp.send('DOM.enable');await cdp.send('CSS.enable');
+   const {root}=await cdp.send('DOM.getDocument'),{nodeId}=await cdp.send('DOM.querySelector',{nodeId:root.nodeId,selector:'#subject'});
+   const matched=await cdp.send('CSS.getMatchedStylesForNode',{nodeId}),layers=await cdp.send('CSS.getLayersForNode',{nodeId});
+   await cdp.detach();return {matched,layers};
+  };
+  const html='<style>.subject{width:40px}\n.subject{width:50px}</style><button id="subject" class="subject">x</button>';
+  const {matched,layers}=await capture(html),read=(m=matched)=>resolveReactStyleDeclaration(m,layers,'width');
+  assert.equal(read().status,'resolved');assert.equal((read() as {value:string}).value,'50px');
+  const reversed=structuredClone(matched);reversed.matchedCSSRules!.reverse();assert.deepEqual(read(reversed),read());
+  const rules=matched.matchedCSSRules!.filter(m=>m.rule.origin==='regular'&&m.rule.style.cssProperties.some(p=>p.name==='width'));
+  assert.equal(rules.length,2);
+  const duplicate=structuredClone(matched);duplicate.matchedCSSRules!.push(structuredClone(rules[0]));assert.deepEqual(read(duplicate),read());
+  const tamper=(change:(rule:typeof rules[number]['rule'],first:typeof rules[number]['rule'])=>void)=>{
+   const m=structuredClone(matched),rs=m.matchedCSSRules!.filter(m=>m.rule.origin==='regular'&&m.rule.style.cssProperties.some(p=>p.name==='width'));
+   change(rs[1].rule,rs[0].rule);assert.equal(read(m).status,'unresolved');assert.equal((read(m) as {reason:string}).reason,'cascade-order-tie');
+  };
+  tamper(r=>{delete r.style.range});
+  tamper(r=>{delete r.style.styleSheetId});
+  tamper(r=>{delete r.originTreeScopeNodeId});
+  tamper(r=>{r.originTreeScopeNodeId=0});
+  tamper(r=>{r.originTreeScopeNodeId=NaN});
+  tamper(r=>{r.style.range!.startLine=-1});
+  tamper(r=>{r.style.range!.startColumn=NaN});
+  tamper(r=>{r.style.range!.endLine=0;r.style.range!.endColumn=0});
+  tamper((r,first)=>{r.style.range={...first.style.range!,endColumn:first.style.range!.endColumn+1}});
+  tamper((r,first)=>{r.style.range={...first.style.range!}});
+  tamper(r=>{r.styleSheetId='another-sheet';r.style.styleSheetId='another-sheet'});
+  tamper(r=>{r.nestingSelectors=['.parent']});
+  const cross=await capture('<style>.subject{width:40px}</style><style>.subject{width:50px}</style><button id="subject" class="subject">x</button>');
+  assert.equal(resolveReactStyleDeclaration(cross.matched,cross.layers,'width').status,'unresolved','different sheet order remains outside the proof');
+  assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(r=>r.channel==='width')!.reason,'cascade-order-tie');
+ }finally{await browser.close()}
+});
+
+test('one stylesheet shared across document and shadow contexts cannot use source order or specificity as encapsulation order',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  for(const inner of [':host',':host(.subject)'])for(const important of ['', '!important']){
+   await page.setContent('<div id="subject" class="subject" style="--outer:red;--inner:blue">x</div>');
+   await page.evaluate(({inner,important})=>{
+    const sheet=new CSSStyleSheet();
+    sheet.replaceSync(`.subject{background-color:var(--outer)${important}}\n${inner}{background-color:var(--inner)${important}}`);
+    document.adoptedStyleSheets=[sheet];
+    document.querySelector('#subject')!.attachShadow({mode:'open'}).adoptedStyleSheets=[sheet];
+   },{inner,important});
+   assert.equal(await page.locator('#subject').evaluate(n=>getComputedStyle(n).backgroundColor),important?'rgb(0, 0, 255)':'rgb(255, 0, 0)');
+   const result=await readReactStyleOrigin(page,'#subject',{...ownership,nodes:[{...ownership.nodes[0],tag:'div'}]});
+   const channel=result.roots[0].channels.find(c=>c.channel==='background-color')!;
+   assert.equal(channel.status,'unresolved');assert.equal(channel.reason,'encapsulation-cascade-unsupported');
+  }
+ }finally{await browser.close()}
+});
 
 test('browser source names follow layer and selector priority, never same-value matching',async()=>{
  const browser=await chromium.launch();try{
@@ -32,7 +90,11 @@ test('browser source names follow layer and selector priority, never same-value 
   rows=await run('.subject{background-color:var(--brand)} @media (min-width:99999px){#subject{background-color:var(--other)}}');
   assert.equal(by(rows).variable,'--brand','inactive rules cannot supply source identity');
   rows=await run('.subject{background-color:var(--brand)} .subject{background-color:var(--other)}');
-  assert.equal(by(rows).reason,'cascade-order-tie','unproved source order cannot break a name tie');
+  assert.equal(by(rows).variable,'--other','later captured rule in the same stylesheet breaks the specificity tie');
+  rows=await run('.subject{background-color:var(--other)} .subject{background-color:var(--brand)}');
+  assert.equal(by(rows).variable,'--brand','source position wins independently of the variable name or equal color');
+  rows=await run('.subject{background-color:var(--brand);background-color:var(--other)}');
+  assert.equal(by(rows).reason,'cascade-order-tie','declaration order within one rule is still outside the bounded proof');
   rows=await run('.subject{background-color:var(--brand)} #subject{all:initial}');
   assert.equal(by(rows).reason,'all-reset-unsupported');
   rows=await run('.subject{background-color:var(--brand, red)}');
@@ -78,7 +140,7 @@ test('typed size provenance distinguishes authored constraints from measured aut
   rows=await read('.subject{width:40px;inline-size:50px}');
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'logical-size-cascade-unsupported');
   rows=await read('.subject{width:40px}.subject{width:50px}');
-  assert.equal(rows.find(r=>r.channel==='width')!.reason,'cascade-order-tie');
+  assert.deepEqual([rows.find(r=>r.channel==='width')!.status,rows.find(r=>r.channel==='width')!.value],['fixed','50px']);
   rows=await read('.subject{--unit:10vw;width:calc(var(--unit) * 2)}');
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'responsive-or-unsupported-size-expression');
   // An own `width:100%` that really takes its containing width is a declared

@@ -66,21 +66,27 @@ export function selectorSubjectIsOwn(selector: string): boolean {
 }
 
 /** A bounded cascade: author rules/inline styles, media/supports and named
- * layers. Source-order ties, inheritance, scopes, containers, animation,
- * shorthand/fallback/arithmetic values and other origins are not inferred. */
+ * layers. Separate, non-overlapping rule ranges in ONE stylesheet establish
+ * source order after priority ties in one captured tree scope. Cross-sheet order, declaration order within
+ * one rule, nesting, inheritance, scopes and other unsupported origins are not
+ * inferred. CSS Cascade 5 section 6.1; CDP CSSStyle.range is sheet-relative. */
 export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, channel: string, competing:string[] = []) {
-  type Declaration = {rank: number[]; value: string; selector: string; own: boolean};
+  type Style = NonNullable<Matched['inlineStyle']>;
+  type SourceOrder = {sheet:string;scope:number;range:NonNullable<Style['range']>};
+  type Declaration = {rank: number[]; value: string; selector: string; own: boolean; order?:SourceOrder};
+  const rangeKey=(r:SourceOrder['range'])=>`${r.startLine}:${r.startColumn}-${r.endLine}:${r.endColumn}`;
   const declarations: Declaration[] = [], problems: string[] = [];
+  const scopes=new Set<number>();
   const orders = new Map<string, number>();
   const visit = (node: Layers['rootLayer'], parents: string[]) => {
     orders.set(parents.join('.'),node.order);
     for(const child of node.subLayers??[]) visit(child,[...parents,child.name]);
   };
   visit(layers.rootLayer,[]);
-  const add = (style: NonNullable<Matched['inlineStyle']>, rank: (important:boolean)=>number[], selector:string, own=true) => {
+  const add = (style: Style, rank: (important:boolean)=>number[], selector:string, own=true, order?:SourceOrder) => {
     for(const prop of style.cssProperties) {
       if(prop.name!==channel || prop.disabled || prop.parsedOk===false) continue;
-      declarations.push({rank:rank(!!prop.important),value:(prop.important?prop.value.replace(/\s*!important\s*$/i,''):prop.value).trim(),selector,own});
+      declarations.push({rank:rank(!!prop.important),value:(prop.important?prop.value.replace(/\s*!important\s*$/i,''):prop.value).trim(),selector,own,order});
     }
   };
   if(matched.cssKeyframesRules?.length) problems.push('animated-source');
@@ -98,6 +104,9 @@ export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, c
       continue;
     }
     if(rule.origin!=='regular') {problems.push('style-origin-unsupported');continue;}
+    const scope=rule.originTreeScopeNodeId;
+    const validScope=scope!==undefined&&Number.isInteger(scope)&&scope>0;
+    if(validScope)scopes.add(scope);
     if(rule.style.cssProperties.some(p=>competing.includes(p.name)&&!p.disabled&&p.parsedOk!==false)){problems.push('logical-size-cascade-unsupported');continue;}
     const specificities=match.matchingSelectors.map(i=>rule.selectorList.selectors[i]?.specificity);
     if(!specificities.length||specificities.some(s=>!s)) {problems.push('selector-specificity-missing');continue;}
@@ -105,15 +114,34 @@ export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, c
     const layer=(rule.layers??[]).map(l=>l.text).reverse().join('.');
     const order=orders.get(layer);
     if(order===undefined) {problems.push('layer-order-missing');continue;}
+    const range=rule.style.range;
+    const validRange=range&&[range.startLine,range.startColumn,range.endLine,range.endColumn].every(n=>Number.isInteger(n)&&n>=0)&&
+      compare([range.startLine,range.startColumn],[range.endLine,range.endColumn])<0;
+    const sourceOrder=validRange&&validScope&&rule.styleSheetId&&rule.styleSheetId===rule.style.styleSheetId&&!rule.nestingSelectors?.length
+      ?{sheet:rule.styleSheetId,scope,range}:undefined;
     add(rule.style,important=>[important?1:0,0,important?-order:order,...specificity],rule.selectorList.text,
-      match.matchingSelectors.every(i=>selectorSubjectIsOwn(rule.selectorList.selectors[i]?.text??'')));
+      match.matchingSelectors.every(i=>selectorSubjectIsOwn(rule.selectorList.selectors[i]?.text??'')),sourceOrder);
   }
   if(matched.inlineStyle?.cssProperties.some(p=>p.name==='all'&&!p.disabled&&p.parsedOk!==false)) problems.push('all-reset-unsupported');
   if(matched.inlineStyle?.cssProperties.some(p=>competing.includes(p.name)&&!p.disabled&&p.parsedOk!==false)) problems.push('logical-size-cascade-unsupported');
   if(matched.inlineStyle) add(matched.inlineStyle,important=>[important?1:0,1,0,0,0,0],'<inline>');
+  // Encapsulation precedes specificity/source order. One constructed sheet can
+  // be adopted by both the document and a shadow root, so sheet identity alone
+  // cannot prove the winning context (nor can a selector spelling).
+  if(scopes.size>1)problems.push('encapsulation-cascade-unsupported');
   if(problems.length) return {channel,status:'unresolved' as const,selectors:[],reason:[...new Set(problems)].sort().join(',')};
   declarations.sort((a,b)=>compare(b.rank,a.rank));
-  const winners=declarations.filter(d=>compare(d.rank,declarations[0].rank)===0);
+  let winners=declarations.filter(d=>compare(d.rank,declarations[0].rank)===0);
+  // Do not use CDP array order or selector names as an ordering witness. The
+  // same source rule can occur more than once; identical ranges are one rule.
+  // Overlapping ranges may describe nesting, whose order is outside this proof.
+  if(new Set(winners.map(d=>d.value)).size>1&&winners.every(d=>d.order)&&new Set(winners.map(d=>d.order!.sheet)).size===1){
+    const ranges=[...new Map(winners.map(d=>[rangeKey(d.order!.range),d.order!.range])).values()]
+      .sort((a,b)=>compare([a.startLine,a.startColumn],[b.startLine,b.startColumn]));
+    if(ranges.every((r,i)=>!i||compare([ranges[i-1].endLine,ranges[i-1].endColumn],[r.startLine,r.startColumn])<=0)){
+      const last=rangeKey(ranges.at(-1)!);winners=winners.filter(d=>rangeKey(d.order!.range)===last);
+    }
+  }
   const values=[...new Set(winners.map(d=>d.value))];
   const selectors=[...new Set(winners.map(d=>d.selector))].sort();
   if(values.length!==1) return {channel,status:'unresolved' as const,selectors,reason:values.length?'cascade-order-tie':'no-own-declaration'};
