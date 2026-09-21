@@ -44,6 +44,8 @@ export interface SourceRepairApplication {
   files:Array<{file:string;state:SourceTransactionState['files'][number]['state']}>;
   validation?:{referenceId:string;valid:number;total:number};
   canvasVerification:'not-recorded'|'recorded';
+  /** Historical completion, distinct from whether current files still match. */
+  recordedCompletion?:'applied'|'rolled-back';
 }
 const sha=(bytes:string|Buffer)=>createHash('sha256').update(bytes).digest('hex');
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
@@ -144,6 +146,7 @@ export function createReactSourceRepairApplications(repo:string,sourceRoot:strin
         l.phase==='prepared'&&transaction.phase==='prepared'?'prepared':last?.kind==='refused'?'refused':'recovery-required',running:false,direction:l.direction,problem,
       transaction:transaction.phase,files:transaction.files.map(f=>({...f,file:path.relative(configuredRoot(),f.file)})),
       ...(l.validation?{validation:{referenceId:l.validation.referenceId,valid:l.validation.valid,total:l.validation.caseIds.length}}:{}),
+      ...(l.phase==='complete'?{recordedCompletion:l.direction==='apply'?'applied' as const:'rolled-back' as const}:{}),
       canvasVerification:l.observed?'recorded':'not-recorded'};
   };
   return {
@@ -184,6 +187,7 @@ export function createReactSourceRepairApplications(repo:string,sourceRoot:strin
       if(direction==='rollback'&&state.transaction==='prepared')fail('nothing-to-restore');
       const runId=randomUUID();l.append({kind:'run',direction,runId});
       state.running=true;state.direction=direction;state.phase='reading-design';delete state.problem;
+      delete state.recordedCompletion;
       const job={state,promise:Promise.resolve()};active.set(id,job);
       const append=(event:RunInput)=>{
         const current=load(id);if(current.runId!==runId)fail('run-replaced');current.append({...event,runId});

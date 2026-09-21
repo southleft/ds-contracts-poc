@@ -8875,6 +8875,20 @@ result and the unobstructed canvas inspection are retained in
 `live-apply-restore-v1.json`. D.104–D.107's earlier previews and engineering
 tests remain separate evidence; these bounded results do not qualify V1.
 
+A later live review demonstrates both conflict boundaries on the same retained
+application. A non-rendering source comment added after the review was sealed
+and its canvas read requested survives the resumed run: the fresh read passes,
+but the file transaction refuses before writing source or CSS. After removing
+only that probe, changing the four native disabled variants to 70% makes the
+next fresh read refuse `react-source-apply-native-intent-changed`; both source
+files stay original and the four canvas edits remain intact. Full readback
+comparison finds no native change beyond those four opacity values. Evidence,
+probe restoration steps and the visible refusal are retained under
+`private/react-design-source-repair-20260921/live-conflict-v1/`.
+Restoring the probe values to 60% lets that same application resume with another
+fresh preflight, apply the reviewed source, validate all ten examples and pass
+its final native read. Both refusals remain in its immutable journal.
+
 Apply accepts only the host's current selected preview. It seals that selection,
 prepares the exact source/CSS transaction and requests a new read from the
 existing Sync Runner operation. The full observed content must match the
@@ -8892,6 +8906,11 @@ validation evidence are required before completion. The source record persists
 independently of the old reference, so recovery remains accessible after reload
 or an interrupted file replacement. A closed service stops its pending run;
 run identities prevent its late completion from changing a newer run's journal.
+Completed historical records remain identified as previously completed when
+a later source change stops matching their result. That history is separate
+from current verification and grants no new write authority. During a running
+operation, displayed file states are explicitly the latest checked states;
+the transaction checks again before writing.
 
 The first live run exposed a clipboard wait that left recovery controls busy.
 Connection preparation now finishes before the separate copy action, with a
@@ -8914,8 +8933,8 @@ design edit can invalidate agreement. File replacement retains D.106's
 non-atomic multi-file limitation. Unexpected source edits refuse without being
 overwritten. Missing preview or transaction proof refuses; stale validation
 evidence requires verification again. Returning the updated source to the
-existing native operation's normal succession workflow, live source/canvas
-conflict refusals remain qualification work. The demonstrated
+existing native operation's normal succession workflow remains qualification
+work. The demonstrated
 interruption precedes the write; partial-file recovery remains engineering
 coverage.
 

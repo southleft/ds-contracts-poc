@@ -56,6 +56,8 @@ test('reviewed application verifies the exact rebuilt source, reopens, repeats w
   assert.equal(f.prepared.phase,'prepared');assert.deepEqual(readFileSync(f.sourceFile),source);
   await f.app.start(id,'apply','http://localhost:5181').promise;
   const applied=f.app.read(id);assert.equal(applied.phase,'applied',applied.problem??'applied');
+  assert.equal(applied.recordedCompletion,'applied');
+  const appliedSource=readFileSync(f.sourceFile),appliedCss=readFileSync(f.cssFile);
   assert.equal(applied.validation?.valid,1);assert.notEqual(applied.validation?.referenceId,f.p.reference.id);
   assert.equal(readFileSync(f.sourceFile,'utf8').includes('disabled:opacity-60'),true);
   assert.equal(f.reads.length,2);assert.deepEqual(f.store().read(id),applied);
@@ -64,9 +66,19 @@ test('reviewed application verifies the exact rebuilt source, reopens, repeats w
   assert.deepEqual(readdirSync(events),before);assert.equal(f.reads.length,2);
   await f.store().start(id,'rollback','http://localhost:5181').promise;
   const restored=f.store().read(id);assert.equal(restored.phase,'rolled-back',restored.problem??'restored');
+  assert.equal(restored.recordedCompletion,'rolled-back');
   assert.equal(restored.validation?.referenceId,f.p.reference.id);
   assert.deepEqual(readFileSync(f.sourceFile),source);assert.deepEqual(readFileSync(f.cssFile),css);
   assert.throws(()=>f.store().start(id,'apply','http://localhost:5181'),/new-review-required/);
+  // A later authorized change can produce the same bytes as this old review.
+  // Keep its completed history visible without certifying the current source
+  // or allowing the old rolled-back transaction to become an Apply again.
+  writeFileSync(f.sourceFile,appliedSource);writeFileSync(f.cssFile,appliedCss);
+  const historical=f.store().read(id);
+  assert.equal(historical.phase,'recovery-required');assert.equal(historical.recordedCompletion,'rolled-back');
+  await f.store().start(id,'apply','http://localhost:5181').promise;
+  assert.match(f.store().read(id).problem??'',/new-review-required-after-rollback/);
+  assert.deepEqual(readFileSync(f.sourceFile),appliedSource);assert.deepEqual(readFileSync(f.cssFile),appliedCss);
 });
 
 test('changed canvas or source refuses before any source write',async t=>{

@@ -121,7 +121,8 @@ new canvas read. **Restore original source and CSS** restores those files and
 validates them; it leaves the Figma edit in place. After completion, **Load
 verified source** opens the resulting source reference. Unexpected source edits
 are preserved and refuse. The bounded opacity Apply, interruption before the
-write, completed-repeat behavior and exact source restoration are demonstrated; broader recovery and
+write, completed-repeat behavior, exact source restoration and intervening
+source/canvas conflict refusals are demonstrated; broader recovery and
 two-way acceptance remain under qualification. A preview alone never means
 the original files were updated.
 

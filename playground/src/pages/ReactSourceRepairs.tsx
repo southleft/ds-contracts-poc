@@ -59,8 +59,11 @@ export function ReactSourceRepairs({onReload}:{onReload:()=>void}){
     {notice&&<p role="status">{notice}</p>}
     {applications.map(a=><article key={a.id} style={{margin:'16px 0',padding:'12px 0',borderTop:'1px solid var(--border, #ddd)'}}>
       <h4>Source repair {a.id.slice(0,8)}</h4>
-      <p role="status">{phases[a.phase]}</p>
+      <p role="status">{a.recordedCompletion&&a.phase!==a.recordedCompletion
+        ? `This operation previously ${a.recordedCompletion==='applied'?'applied and verified its source change':'restored and verified the original source'}. The current source or validation evidence has since changed.`
+        :phases[a.phase]}</p>
       {a.problem&&<p role="alert">{a.problem}</p>}
+      {a.running&&<p>File status is from the most recent transaction check. Apply checks again before writing.</p>}
       <ul>{a.files.map(file=><li key={file.file}><code>{file.file}</code>: {file.state==='before'?'original bytes':file.state==='after'?'reviewed change':file.state==='missing'?'interrupted file replacement':'changed outside this operation'}</li>)}</ul>
       {a.validation&&<p>Recorded source validation: {a.validation.valid}/{a.validation.total} examples. Reference {a.validation.referenceId.slice(0,12)}.</p>}
       {a.phase!=='rolled-back'&&<button type="button" disabled={!!busy} onClick={()=>void action(a.id,'connection')}>Prepare Sync Runner connection</button>}
