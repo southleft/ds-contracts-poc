@@ -144,7 +144,12 @@ export async function observeSource(page: Page, profile: SourceProfile,
         }
       }
       const resultFonts = await cdp.send('CSS.getPlatformFontsForNode', {nodeId});
-      platformFonts = resultFonts.fonts.map(({familyName, glyphCount}) => ({familyName, glyphCount}));
+      // Retain legacy observation bytes unless the authored profile requests
+      // origin evidence. Absence is never inferred to mean a painted web font.
+      platformFonts = resultFonts.fonts.map(({familyName, glyphCount, isCustomFont}) => ({
+        familyName, glyphCount,
+        ...(profile.fontOrigin === 'web' && typeof isCustomFont === 'boolean' ? {isCustomFont} : {}),
+      }));
       await cdp.send('Runtime.releaseObject', {objectId:result.objectId});
     }
   } finally { await cdp.detach(); }

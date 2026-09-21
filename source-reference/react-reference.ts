@@ -144,7 +144,11 @@ export async function buildReactReference(
         name: "record-original-bytes",
         setup(builder) {
           builder.onLoad({ filter: /./, namespace: "file" }, (args) => {
-            const loader = loaders[path.extname(args.path)];
+            // Preserve esbuild's CSS Module semantics while recording the
+            // original bytes; a global-css override loses imported class maps.
+            const loader = args.path.endsWith(".module.css")
+              ? "local-css"
+              : loaders[path.extname(args.path)];
             if (!loader) throw Error("react-reference-unsupported-asset");
             const contents = readFileSync(args.path);
             const hash = sha(contents);
