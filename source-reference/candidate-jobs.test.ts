@@ -16,6 +16,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 import {
+  candidateProcessGroupStop,
   createCandidateJobs,
   type CandidateJobsOptions,
   type CandidateJobRecord,
@@ -532,6 +533,36 @@ test("inputs changed during validation refuse, and cancellation cannot overwrite
   } finally {
     f.close();
   }
+});
+
+test("a stopped or absent owned process group is never signalled again", () => {
+  for (const absent of [false, true]) {
+    const calls: [number, string | number | undefined][] = [];
+    const stop = candidateProcessGroupStop({ pid: 321 }, (pid, signal) => {
+      calls.push([pid, signal]);
+      if (calls.length > 1) throw Object.assign(Error("kill EPERM"), { code: "EPERM" });
+      if (absent) throw Object.assign(Error("kill ESRCH"), { code: "ESRCH" });
+      return true;
+    });
+    assert.equal(stop(), !absent);
+    assert.equal(stop(), false);
+    assert.equal(stop(), false);
+    assert.deepEqual(calls, [[-321, "SIGKILL"]]);
+  }
+});
+
+test("a failed first group signal remains an error and may be retried", () => {
+  let calls = 0;
+  const stop = candidateProcessGroupStop({ pid: 321 }, () => {
+    if (++calls === 1) throw Object.assign(Error("kill EPERM"), { code: "EPERM" });
+    return true;
+  });
+  assert.throws(stop, { code: "EPERM" });
+  assert.equal(stop(), true);
+  assert.equal(stop(), false);
+  assert.equal(calls, 2);
+  const unlaunched = candidateProcessGroupStop({}, () => assert.fail("no child was launched"));
+  assert.equal(unlaunched(), false);
 });
 
 test(
