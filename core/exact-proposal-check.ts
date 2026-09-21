@@ -4098,10 +4098,16 @@ console.log(
   }>;
   check(
     "the axis-split height twin grows only on the COLUMN plane and carries height: 100% only on the DEFINITE ROW plane",
-    (twinImage?.layout as Record<string, unknown> | undefined)?.grow === undefined &&
-      (twinImage?.layoutByProp as {prop: string; map: Record<string, {grow?: boolean}>} | undefined)?.prop === 'variant' &&
-      (twinImage?.layoutByProp as {map: Record<string, {grow?: boolean}>}).map.default?.grow === true &&
-      (twinImage?.layoutByProp as {map: Record<string, {grow?: boolean}>}).map.inline?.grow === undefined &&
+    (twinImage?.layout as Record<string, unknown> | undefined)?.grow ===
+      undefined &&
+      (
+        twinImage?.layoutByProp as
+          { prop: string; map: Record<string, { grow?: boolean }> } | undefined
+      )?.prop === "variant" &&
+      (twinImage?.layoutByProp as { map: Record<string, { grow?: boolean }> })
+        .map.default?.grow === true &&
+      (twinImage?.layoutByProp as { map: Record<string, { grow?: boolean }> })
+        .map.inline?.grow === undefined &&
       twinLbp.some(
         (e) =>
           e.prop === "variant" &&

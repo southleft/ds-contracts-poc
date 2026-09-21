@@ -629,7 +629,8 @@ function layoutPage(): { route: string; html: string } {
             "Cross-axis alignment. Flex-only — schema-invalid with <code>display: grid</code> (per-cell alignment lives on <code>placement</code>).",
           justify:
             "Main-axis distribution. Flex-only — schema-invalid with <code>display: grid</code>.",
-          grow: "The part takes remaining space — code: <code>flex: 1 1 auto</code>; canvas: fill container.",
+          grow: "The part takes remaining space along its parent's flex axis — code defaults to <code>flex: 1 1 auto</code>; canvas: fill container. May vary through <code>layoutByProp</code>.",
+          growBasis: 'Optional <code>"zero"</code> with effective <code>grow: true</code> emits <code>flex: 1 1 0px</code> and zero minimum width/height, matching equal Figma fill allocation. Omission preserves the existing content-basis CSS. Captured primary-axis fill supplies zero explicitly; competing minimum-size or flex channels refuse instead of being overridden.',
           overlap:
             "Children overlap (AvatarGroup): the gap token is applied as a <em>negative</em> child margin in CSS and as negative item spacing on the canvas. Flex-only.",
           wrap: "v15: children wrap (tag groups, chip rows) — code: <code>flex-wrap: wrap</code>; canvas: native <code>layoutWrap: WRAP</code>. Flex-only.",
@@ -729,7 +730,7 @@ function layoutPage(): { route: string; html: string } {
       "layout-by-prop",
       "Layout by prop",
       ["generated", "curated"],
-      `<p><code>layoutByProp: { prop, map }</code> applies per-enum-value layout overrides merged over the base <code>layout</code>. Partial coverage is the point — only the values that deviate appear. ChatMessage: <code>sender=user</code> flips <code>direction: row-reverse</code> on the root, right-aligning user messages.</p><p>Projections: code emits the override under the root’s enum class (<code>.sender-user .body { … }</code>); the canvas — which has no reverse — resolves it per variant at compile time, rendering the same children in reversed order.</p>` +
+      `<p><code>layoutByProp: { prop, map }</code> applies per-enum-value layout overrides merged over the base <code>layout</code>. Partial coverage is the point — only the values that deviate appear. ChatMessage: <code>sender=user</code> flips <code>direction: row-reverse</code> on the root, right-aligning user messages.</p><p>Projections: code emits the override under the root’s enum class (<code>.sender-user .body { … }</code>); the canvas — which has no reverse — resolves it per variant at compile time, rendering the same children in reversed order.</p><p><code>grow</code> and optional <code>growBasis: "zero"</code> describe how the parent allocates space to this item. Complete captured variant observations can carry these fields onto a frame, slot or generated single-root child reference, including repeated items. A filling default remains explicit; other variants keep their intrinsic sizes. A <code>grow: false</code> override disables inherited growth. Other child layout fields remain owned by the child contract.</p>` +
         codeBlock(
           `map values: ${typeText(VariantLayoutSchema as AnySchema)}`,
           "ts",
@@ -737,8 +738,9 @@ function layoutPage(): { route: string; html: string } {
         ) +
         refusals("Refusals:", [
           "the driving prop must be a declared enum; every map key one of its values",
-          "a component-instance part refuses overrides — the child contract owns its layout",
-          "<code>grow</code> and <code>overlap</code> stay per-part invariants: not overridable per variant",
+          "a component-instance part permits only parent-owned <code>grow</code> / <code>growBasis</code> overrides, with an ordinary generated single root; retained runtimes, multiple roots, placement wrappers and style/className API collisions refuse",
+          "<code>growBasis</code> requires effective <code>grow: true</code>; new growth placement requires an observed parent and refuses competing minimum-size or flex channels, grids, overlays and whole-pixel text boxes",
+          "<code>overlap</code> stays a per-part invariant: not overridable per variant",
         ]) +
         shippingExample("chat-message.contract.json", {
           paths: ["anatomy.root.layoutByProp"],

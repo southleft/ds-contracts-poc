@@ -270,6 +270,7 @@ reg("layout", "layout", [
   "layout.align",
   "layout.justify",
   "layout.grow",
+  "layout.growBasis",
   "layout.overlap",
   // v15 (S4): flex-wrap — native on both surfaces.
   "layout.wrap",
@@ -319,6 +320,8 @@ reg("layout", "layout-by-prop", [
   "variantLayout.direction",
   "variantLayout.align",
   "variantLayout.justify",
+  "variantLayout.grow",
+  "variantLayout.growBasis",
 ]);
 
 // --- Token bindings --------------------------------------------------------
