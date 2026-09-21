@@ -2,12 +2,16 @@ import type { DumpSet } from '../extract/figma/types.js';
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
-export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid' | 'block'; normalized?: DumpSet; fillWidth?: true } | undefined {
+export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid' | 'block'; normalized?: DumpSet; fillWidth?: true; textTemplate?: true } | undefined {
   const raw = set.rootSlot;
   if (raw === undefined) return undefined;
   const fail = (why: string): never => { throw new Error(`FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED: ${why}`); };
   const marker = raw as Record<string, unknown> | null;
-  const keys = marker && Object.keys(marker).sort().join('|');
+  const template = marker && Object.hasOwn(marker, 'textTemplate');
+  if (template && (marker.textTemplate !== 1 || ![1,3].includes(marker.version as number) ||
+      ![undefined, 'flex', 'inline-flex'].includes(marker.display as string | undefined)))
+    return fail('invalid root text template declaration');
+  const keys = marker && Object.keys(marker).filter(key => key !== 'textTemplate').sort().join('|');
   if (!marker || typeof marker !== 'object' || Array.isArray(marker) ||
       !([3,4].includes(marker.version as number)
         ? keys === 'display|property|version|width' && marker.width === 'fill' && typeof marker.display === 'string' &&
@@ -82,7 +86,12 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       if (carrier.bound) root.bound = { ...root.bound, ...carrier.bound };
       continue;
     }
-    if (slot.children?.length) return fail(`${root.name}: nonempty main content needs qualified default-content inversion`);
+    if (template) {
+      const text = slot.children?.[0];
+      if (slot.children?.length !== 1 || text?.type !== 'TEXT' || text.name !== 'Content text template' ||
+          text.hidden !== true || text.text?.characters !== '')
+        return fail(`${root.name}: text template must be one hidden empty TEXT`);
+    } else if (slot.children?.length) return fail(`${root.name}: nonempty main content needs qualified default-content inversion`);
     if (marker.display === 'block' && (!outer || outer.mode !== 'VERTICAL' || outer.primary !== 'MIN' ||
         outer.counter !== 'MIN' || outer.spacing !== 0 || outer.primarySizing !== 'AUTO' || root.bound?.itemSpacing))
       return fail(`${root.name}: block content requires intrinsic vertical flow without flex distribution`);
@@ -108,5 +117,6 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
     }
   }
   return normalized ? { property, display: 'grid', normalized, ...sizing }
-    : { property, display: marker.display === 'block' ? 'block' : marker.display === 'inline-flex' ? 'inline-flex' : 'flex', ...sizing };
+    : { property, display: marker.display === 'block' ? 'block' : marker.display === 'inline-flex' ? 'inline-flex' : 'flex', ...sizing,
+      ...(template ? { textTemplate: true } : {}) };
 }

@@ -26,6 +26,15 @@ export interface NativeContractComparisonObservationInput {
 }
 function checkInput(input: NativeContractComparisonObservationInput) {
   const { creation: c, comparison: p } = input;
+  if (p.textTemplate) {
+    const plan = p.parent.projection.rootTextTemplate;
+    const modeKey = plan?.variants.find(v => v.name === p.variantName)?.modeKey;
+    const mode = p.parent.tokenIdentity.modes.find(m => m.nativeSelection?.planRevision === plan?.revision && m.nativeSelection?.modeKey === modeKey);
+    if (!plan || p.textTemplate.planRevision !== plan.revision || p.textTemplate.modeId !== mode?.modeId ||
+        !same(p.textTemplate.specPath, [0, 0]) || !same(p.slotSpecPath, [0]) || p.contentSpecPath || p.instances?.length ||
+        p.specs.length !== 1 || p.specs[0].type !== 'text' || p.textTemplate.characters !== p.specs[0].characters ||
+        input.mainMigrations?.length) throw Error('native-contract-comparison-template-observation-input-invalid');
+  }
   if (!c || c.status !== 'created-candidate' || c.operationId !== input.operation.id || c.fileKey !== input.operation.fileKey ||
       input.operation.id === p.parent.operation.id || input.operation.fileKey !== p.parent.operation.fileKey ||
       !/^sha256:[a-f0-9]{64}$/.test(input.planRevision) || !Array.isArray(c.nodes) || !c.nodes.length ||
@@ -52,7 +61,8 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
     comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
   }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
     ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true,
-    [input.comparison.parent,...nested.map(ref=>ref.parent)].flatMap(p=>backgroundPaintIdentities(p.component)));
+    [input.comparison.parent,...nested.map(ref=>ref.parent)].flatMap(p=>backgroundPaintIdentities(p.component)),
+    [], false, [], false, !!input.comparison.textTemplate);
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},
@@ -154,8 +164,19 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     const alias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variableByName.get(name) });
     const paint = (v: any, name: string) => Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
       variableByName.has(name) && same(v[0].boundVariables?.color, alias(name));
-    const sample = (spec: NodeSpec, n?: Row) => {
+    const sample = (spec: NodeSpec, n?: Row, template?: { reference: Reference; source: Row }) => {
       if (!n || checked.has(n.id)) { issue('sample-pairing'); return; }
+      if (template) {
+        let carrier = template.reference.parent.component.variants.find(v => v.name === template.reference.variantName)!.spec;
+        for (const index of template.reference.textTemplate!.specPath) carrier = carrier.children![index];
+        spec = { ...spec, fontSizeVar: carrier.fontSizeVar, fontWeightVar: carrier.fontWeightVar,
+          lineHeightVar: carrier.lineHeightVar, textFill: carrier.textFill };
+      }
+      const variables = template ? new Map(template.reference.parent.tokenIdentity.variables.map(v => [v.tokenPath.replaceAll('.', '/'), v.id])) : variableByName;
+      const sampleAlias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variables.get(name) });
+      const samplePaint = (v: any, name: string) => template
+        ? Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
+          variables.has(name) && same(v[0].boundVariables?.color, sampleAlias(name)) : paint(v, name);
       if (spec.nativeContractSample?.instance !== undefined) {
         const index = spec.nativeContractSample.instance, reference = references[index];
         const record = nestedRecords.find((row: Row) => row.index === index);
@@ -170,18 +191,26 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       }
       checked.add(n.id); const v = n.values;
       if (n.type !== ({ frame: 'FRAME', text: 'TEXT', svg: 'FRAME' } as Record<string, string>)[spec.type] ||
-          !same(meta(n, 'nativeContractSample'), spec.nativeContractSample) || !same(v.explicitVariableModes, sampleMode) ||
+          !same(meta(n, 'nativeContractSample'), spec.nativeContractSample) || !same(v.explicitVariableModes, template ? {} : sampleMode) ||
           v.visible !== true || (v.opacity !== undefined && !numeric(v.opacity, spec.opacity ?? 1))) issue('sample-identity', n);
+      if (template && (!same(meta(n, 'nativeContractPart'), meta(template.source, 'nativeContractPart')) ||
+          v.resolvedVariableModes?.[template.reference.parent.tokenIdentity.collection.id] !== template.reference.textTemplate!.modeId ||
+          !numeric(v.fontWeight, template.source.values.fontWeight) || v.textAutoResize !== 'WIDTH_AND_HEIGHT' ||
+          !same(v.letterSpacing, template.source.values.letterSpacing) || !same(v.fills, template.source.values.fills)))
+        issue('template-caller-inheritance', n);
       if (spec.layout && (v.layoutMode !== spec.layout.mode || v.primaryAxisAlignItems !== spec.layout.primary ||
           v.counterAxisAlignItems !== spec.layout.counter || v.clipsContent !== (spec.clipsContent === true))) issue('sample-layout', n);
       const bindings = { ...spec.bindings, ...(spec.fixedWidth?.varName ? { width: spec.fixedWidth.varName } : {}),
-        ...(spec.fixedHeight?.varName ? { height: spec.fixedHeight.varName } : {}), ...(spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}) };
+        ...(spec.fixedHeight?.varName ? { height: spec.fixedHeight.varName } : {}), ...(spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}),
+        ...(template ? { fontWeight: spec.fontWeightVar!, lineHeight: spec.lineHeightVar! } : {}) };
       const actual = Object.fromEntries(Object.entries(v.boundVariables ?? {}).filter(([key]) => !['fills', 'strokes'].includes(key)));
       // Figma reports text-field bindings as arrays, even for uniform text.
       // Accept exactly one alias; mixed ranges must not collapse to one value.
       if (n.type === 'TEXT' && Array.isArray(actual.fontSize) && actual.fontSize.length === 1) actual.fontSize = actual.fontSize[0];
+      if (template) for (const field of ['fontWeight','lineHeight'])
+        if (Array.isArray(actual[field]) && actual[field].length === 1) actual[field] = actual[field][0];
       if (!same(Object.keys(actual).sort(), Object.keys(bindings).sort()) || Object.entries(bindings).some(([field, name]) =>
-        !variableByName.has(name) || !same(actual[field], alias(name)))) issue('sample-bindings', n);
+        !variables.has(name) || !same(actual[field], sampleAlias(name)))) issue('sample-bindings', n);
       for (const field of ['fill', 'stroke'] as const) {
         const name = spec[field], values = v[field === 'fill' ? 'fills' : 'strokes'] ?? [];
         if (name ? !paint(values, name) : spec.type !== 'text' && values.length) issue('sample-' + field, n);
@@ -200,8 +229,8 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
             !same(v.lineHeight, spec.lineHeight ?? { unit: 'AUTO' }) || (spec.textAlignH && v.textAlignHorizontal !== spec.textAlignH) ||
             v.textCase !== (spec.textCase ?? 'ORIGINAL') || v.textDecoration !== (spec.textDecoration ?? 'NONE') ||
             v.textStyleId || n.metadata.fontWeightVar !== (spec.fontWeightVar ?? '') || n.metadata.lineHeightVar !== (spec.lineHeightVar ?? '') ||
-            (spec.letterSpacing && !same(v.letterSpacing, spec.letterSpacing))) issue('sample-text', n);
-        if (spec.textFill ? !paint(v.fills, spec.textFill) :
+            (!template && spec.letterSpacing && !same(v.letterSpacing, spec.letterSpacing))) issue('sample-text', n);
+        if (spec.textFill ? !samplePaint(v.fills, spec.textFill) :
           !spec.textFillLit || v.fills?.length !== 1 || Object.keys(v.fills[0].boundVariables ?? {}).length ||
           !['r','g','b'].every(k => numeric(v.fills[0].color?.[k], (spec.textFillLit as any)[k])) ||
           !numeric(v.fills[0].opacity ?? 1, spec.textFillLit.a ?? 1)) issue('sample-text-paint', n);
@@ -225,7 +254,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     // Content changes a hugging instance's geometry, but not the main's styles,
     // property bindings or other children. Compare every remaining observed field.
     const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
-    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'> & { contentMode?: 'source-owned'; instanceWidth?: number };
+    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs' | 'textTemplate'> & { contentMode?: 'source-owned'; instanceWidth?: number };
     const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[],
       reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
@@ -247,7 +276,8 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       }
       if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
           !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
-      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode, [reference.parent.tokenIdentity.collection.id]: reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
+      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode,
+        [reference.parent.tokenIdentity.collection.id]: reference.textTemplate?.modeId ?? reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
       let contentGrid: NodeSpec | undefined;
       if (reference.contentSpecPath && same(specPath, reference.contentSpecPath)) {
         let spec = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
@@ -293,7 +323,8 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
           for (const problem of nativeGridProblems(comparisonContentGrid(spec, reference.specs), actual.values,
             actual.childIds.map((id: string) => nodes.get(id)?.values))) issue('grid-content-' + problem, actual);
         }
-        reference.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
+        reference.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]), reference.textTemplate
+          ? { reference, source: parentNodes.get(original.childIds[0])! } : undefined)); return;
       }
       if (original.childIds.length !== actual.childIds.length) issue('main-instance-children', actual);
       original.childIds.forEach((id: string, index: number) => pair(parentNodes.get(id), nodes.get(actual.childIds[index]), [...specPath, index], reference, record, parentNodes));

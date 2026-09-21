@@ -95,10 +95,28 @@ export function createFigmaMock(options = {}) {
       // would rewrite old operation snapshots and their pinned programs.
       if (options.consumerVariableModes) {
         this.explicitVariableModes = {};
-        Object.defineProperty(this, 'resolvedVariableModes', { configurable: true, get: () => ({
-          ...Object.fromEntries(collections.map(c => [c.id, c.modes[0].modeId])),
-          ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes,
-        }) });
+        Object.defineProperty(this, 'resolvedVariableModes', { configurable: true, get: () => {
+          // Live Figma omits unrelated local collections. Resolve defaults only
+          // for bindings on this consumer and their selected alias dependencies.
+          // Adding another operation's collection must not change this readback.
+          const modes = { ...this.parent?.resolvedVariableModes, ...this.explicitVariableModes };
+          const seen = new Set();
+          const visit = value => {
+            if (!value || typeof value !== 'object') return;
+            if (value.type === 'VARIABLE_ALIAS') {
+              if (seen.has(value.id)) return;
+              seen.add(value.id);
+              const variable = variables.find(v => v.id === value.id);
+              if (!variable) return;
+              const collection = collections.find(c => c.id === variable.variableCollectionId);
+              if (!collection) return;
+              modes[collection.id] ??= collection.modes[0]?.modeId;
+              visit(variable.valuesByMode[modes[collection.id]]);
+            } else for (const child of Object.values(value)) visit(child);
+          };
+          for (const value of [this.boundVariables, this.fills, this.strokes, this.effects]) visit(value);
+          return modes;
+        } });
         this.setExplicitVariableModeForCollection = (collection, modeId) => {
           const id = typeof collection === 'string' ? collection : collection.id;
           if (!collections.find(c => c.id === id)?.modes.some(m => m.modeId === modeId)) throw Error('unknown variable mode');
@@ -1112,6 +1130,7 @@ export function createFigmaMock(options = {}) {
         if (this[gf] !== undefined) clone[gf] = this[gf];
       }
       clone.boundVariables = structuredClone(this.boundVariables);
+      if (options.consumerVariableModes) clone.explicitVariableModes = { ...this.explicitVariableModes };
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
       // Live Figma inherits shared plugin data onto an instance's private
       // sublayers (measured on nested TEXT content, 2026-09-17). Preserve it
@@ -1120,6 +1139,11 @@ export function createFigmaMock(options = {}) {
       if (this.type === 'TEXT') {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
           clone[field] = this[field];
+        }
+        if (options.consumerVariableModes) {
+          clone.fontWeight = this.fontWeight;
+          clone.textAutoResize = this.textAutoResize;
+          delete clone.clipsContent;
         }
       }
       if (this.type === 'INSTANCE') clone.componentProperties = { ...(this.componentProperties ?? {}) };
@@ -1132,6 +1156,9 @@ export function createFigmaMock(options = {}) {
       inst.name = this.name;
       inst._mainComponent = this;
       inst.boundVariables = structuredClone(this.boundVariables);
+      // Live instance readback exposes the selected main's mode without an
+      // explicit call on the instance. Keep this opt-in for mode-aware tests.
+      if (options.consumerVariableModes) inst.explicitVariableModes = { ...this.explicitVariableModes };
       inst.children = [];
       for (const child of this.children ?? []) inst.appendChild(child._cloneForInstance());
       for (const field of [

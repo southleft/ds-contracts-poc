@@ -1,4 +1,5 @@
 import { materializeFlowRows } from './grid-flow-rows.js';
+import { planNativeRootTextCaller, type NativeRootTextCallerEvidence, type NativeRootTextCaller } from './native-root-text-caller.js';
 /** Comparison content belongs to an instance of an independently observed main.
  * No source-template identity is invented and the main is never rewritten. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -30,6 +31,8 @@ export interface NativeContractComparisonInput {
   caseId: string;
   variantName: string;
   slotSpecPath: number[];
+  /** Re-derived by the host from authenticated direct DOM text, never inferred from equal paint. */
+  rootText?: NativeRootTextCallerEvidence;
   /** Authenticated width of this caller usage, never a reusable main size. */
   instanceWidth?: number;
   /** Observed content width of the containing block a fill-width root took in
@@ -49,7 +52,7 @@ export function comparisonContentGrid(spec: NodeSpec, children: NodeSpec[]): Nod
 
 export function prepareNativeContractComparison(contract: Contract, component: ComponentData,
   source: NativeContractDraftSource, tokenRevision: string, context: { mode: string; brand: string },
-  input: NativeContractComparisonInput) {
+  input: NativeContractComparisonInput, sourceTokens?: Record<string, unknown>) {
   const fail = (code: string): never => { throw Error('native-contract-comparison-' + code); };
   const revision = /^sha256:[a-f0-9]{64}$/;
   if (!revision.test(source.revision) || !revision.test(source.evidenceRevision) ||
@@ -63,7 +66,9 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       contract.bindings.figma.anchors.componentSetKey || component.variants.length !== 1 || component.stateVariants?.length ||
       component.boolProps.length || component.textProps.length || component.nativeSourceCandidate || component.nativeContractDraft)
     fail('snapshot-contract-required');
-  const select = (input: Omit<NativeContractComparisonInput, 'caseId'> & { contentMode?: 'source-owned' }) => {
+  const select = (input: Omit<NativeContractComparisonInput, 'caseId'> & { contentMode?: 'source-owned' }): {
+    mainId: string; fillWidth?: true; contentSpecPath?: number[]; textTemplate?: NativeRootTextCaller;
+  } => {
     const variants = input.parent.component.variants.filter(v => v.name === input.variantName);
     const mains = input.parent.creation.variants.filter((v: { name: string }) => v.name === input.variantName);
     if (variants.length !== 1 || mains.length !== 1) fail('main-ambiguous');
@@ -81,6 +86,15 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     }
     if (slot.type !== 'slot' || slot.slotDefault?.length) fail('empty-slot-required');
     const carrier = slot.children?.[0];
+    if (carrier?.slotTextTemplate) {
+      if (!input.rootText || input.instances?.length || input.slotSpecPath.join(',') !== '0' ||
+          slot.children?.length !== 1 || !slot.rootSlotContent) fail('text-template-caller-mode-projection-required');
+      const children = component.variants[0].spec.children?.filter(child => !child.backgroundPaint) ?? [];
+      return { mainId: mains[0].id as string, ...(variants[0].spec.rootFillWidth ? { fillWidth: true as const } : {}),
+        textTemplate: planNativeRootTextCaller(input.parent, input.variantName, revisionOf(contract), tokenRevision,
+          sourceTokens, input.rootText, children) };
+    }
+    if (input.rootText) fail('text-template-evidence-without-template');
     if (slot.children?.length && (slot.children.length !== 1 || !slot.rootSlotContent ||
         !carrier?.rootSlotGridContent || carrier.type !== 'frame' || carrier.layout?.mode !== 'GRID' ||
         carrier.layout.grid?.flow !== 'ROW_AUTO_FLOW' || carrier.children?.length)) fail('empty-slot-required');
@@ -410,8 +424,42 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false, containerWidth = false): string {
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false, containerWidth = false, textTemplate = false): string {
   let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (textTemplate) {
+    if (nested || gridContent || sourceOwned || recovery) throw Error('native-contract-comparison-text-template-runtime-unqualified');
+    const replace = (from: string, to: string) => {
+      if (script.split(from).length !== 2) throw Error('native-contract-comparison-text-template-runtime-changed');
+      script = script.replace(from, to);
+    };
+    // The instance inherits the main's selected parent-collection mode. An
+    // explicit set on the instance or its children would pin the old variant.
+    replace('  inst.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);',
+      "  if (inst.resolvedVariableModes[parentCollection.id] !== c.textTemplate.modeId) nativeRefuse('comparison-template-mode');");
+    replace('      node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);',
+      "      if (Object.keys(node.explicitVariableModes).length) nativeRefuse('comparison-template-child-mode');");
+    replace('  pair(main, inst, []);', `  const templateNode = () => c.textTemplate.specPath.reduce((node, index) => node.children[index], inst);
+  const emptyText = templateNode();
+  if (!emptyText || emptyText.type !== 'TEXT' || emptyText.characters !== '' || emptyText.visible !== false)
+    nativeRefuse('comparison-template-not-empty');
+  // Editing native SLOT content can replace instance-derived descendant IDs.
+  // Reacquire after each edit, and only then assign allocation identities.
+  emptyText.characters = c.textTemplate.characters;
+  templateNode().visible = true;
+  if (templateNode().characters !== c.textTemplate.characters || templateNode().visible !== true)
+    nativeRefuse('comparison-template-text-refused');
+  pair(main, inst, []);`);
+    replace("  if (!slot || slot.type !== 'SLOT' || slot.children.length) nativeRefuse('comparison-slot-not-empty');",
+      "  if (!slot || slot.type !== 'SLOT' || slot.children.length !== 1) nativeRefuse('comparison-slot-not-empty');");
+    replace(`  for (const spec of c.specs) {
+    const node = await buildNode(spec, { texts: [], slots: [], visibles: [] });
+    saved.contentNodeIds.push(node.id); slot.appendChild(node);
+  }`, `  const text = parts.get(nativeCanonical(c.textTemplate.specPath));
+  if (!text || text !== slot.children[0] || c.specs.length !== 1 || c.specs[0].type !== 'text')
+    nativeRefuse('comparison-template-content-mismatch');
+  text.setSharedPluginData('ds_contracts', 'nativeContractSample', JSON.stringify(c.specs[0].nativeContractSample));
+  saved.contentNodeIds.push(text.id);`);
+  }
   if (recovery) {
     script = script.replace("  const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);",
       "  const board = await figma.getNodeByIdAsync(NATIVE.recovery.creation.comparisonBoardId); nativeFileGuard(); nativeOwn(board);");

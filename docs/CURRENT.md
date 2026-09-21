@@ -58,6 +58,12 @@ The composed Card delivery contains seven dependency components and six parent v
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.
 
+The explicit root text-template path has a generated native engineering probe:
+caller text retains its bindings through Small → Large → Small, and a bounded
+inverse restores root typography. The source adapter does not yet derive this
+marker. Application journeys, template updates/recovery, clean consumers and
+5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.
 
 ### Lit and Web Components: paused for planned V1.1

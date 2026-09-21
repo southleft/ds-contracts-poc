@@ -1,3 +1,4 @@
+import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
 import { prepareNativeComparisonRecovery, emitNativeComparisonRecoveryReadbackScript, type PreparedNativeComparisonRecovery } from './native-comparison-recovery.js';
 import { nativeComparisonDependencies } from './native-contract-comparison.js';
 import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
@@ -58,16 +59,18 @@ export function prepareNativeSourceWrite(
   if (!tokens?.input || !tokens.identity || !tokens.receipt)
     fail("token-observation-required");
   const input = tokens.input;
+  const template = 'kind' in projection ? projection.rootTextTemplate : undefined;
+  if (template) verifyRootTextTemplateTokenContext(input, template);
   if (
     input.fileKey !== operation.fileKey ||
     input.scopeId !== `source-${operation.id}` ||
     input.source.revision !== projection.source.revision ||
     input.source.sourceProgramSha256 !== projection.source.programSha256 ||
-    input.modes.length !== 1 ||
+    (!template && input.modes.length !== 1) ||
     input.modes[0].sourceMode !== projection.context.mode ||
     input.modes[0].brand !== projection.context.brand ||
-    input.modes[0].tokenTreeRevision !== ('kind' in projection
-      ? projection.tokenRevision : projection.binding.tokenRevision) ||
+    (!template && input.modes[0].tokenTreeRevision !== ('kind' in projection
+      ? projection.tokenRevision : projection.binding.tokenRevision)) ||
     tokens.identity.origin !== "created"
   )
     fail("token-source-context");
@@ -84,6 +87,7 @@ export function prepareNativeSourceWrite(
     fail("token-binding-outside-scope");
   const dependencies = contractComparison ? nativeComparisonDependencies(contractComparison) : undefined;
   const recovery = context.comparisonRecovery;
+  if (recovery && contractComparison?.textTemplate) fail('text-template-recovery-unqualified');
   if (recovery) {
     const checked = prepareNativeComparisonRecovery(recovery.input, recovery.observation);
     if (!contractComparison || canonicalJson(checked) !== canonicalJson(recovery) ||
@@ -112,6 +116,7 @@ export function prepareNativeSourceWrite(
     ...(contractComparison ? { contractComparison: {
       caseId: contractComparison.caseId, mainId: contractComparison.mainId,
       variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
+      ...(contractComparison.textTemplate ? { textTemplate: contractComparison.textTemplate } : {}),
       ...(contractComparison.instanceWidth !== undefined ? {instanceWidth:contractComparison.instanceWidth} : {}),
       ...(contractComparison.containerWidth !== undefined ? {containerWidth:contractComparison.containerWidth} : {}),
       ...(contractComparison.contentSpecPath ? { contentSpecPath: contractComparison.contentSpecPath } : {}),
@@ -207,7 +212,15 @@ function nativeInit(node, spec) {
   for (const child of svgDescendants) nativeRetain(child);
   nativeOwn(node);
   if (spec.type !== 'slot') NATIVE_PAGE.appendChild(node);
-  node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
+  ${'kind' in prepared.descriptor.projection && prepared.descriptor.projection.rootTextTemplate ? `const template = NATIVE.projection.rootTextTemplate;
+  if (spec.nativeContractPart && spec.nativeContractPart.specPath.length === 0) {
+    const selected = template.variants.find(v => v.name === spec.nativeContractPart.variant);
+    const mode = selected && NATIVE.identity.modes.find(m => m.nativeSelection?.planRevision === template.revision && m.nativeSelection.modeKey === selected.modeKey);
+    if (!mode) nativeRefuse('template-mode-selection');
+    node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, mode.modeId);
+  } else if (!spec.rootSlotContent && !spec.slotTextTemplate) {
+    node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
+  }` : 'node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);'}
   ${'kind' in prepared.descriptor.projection
     ? "if (spec.nativeContractPart) node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(spec.nativeContractPart));\n  else " : ''}if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
   else if (spec.nativeSourceSample || spec.nativeContractSample) {

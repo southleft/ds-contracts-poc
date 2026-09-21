@@ -1,5 +1,6 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
+import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
 import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
 import { positionedAs } from './native-float32.js';
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
@@ -105,6 +106,10 @@ export function nativeShadowStackMatches(spec: NodeSpec, effects: unknown): bool
 
 function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
+  if (isContractDraft(input) && input.projection.rootTextTemplate) {
+    if (input.graphComponents) throw Error('native-text-template-graph-unqualified');
+    verifyRootTextTemplateTokenContext(input.tokenInput, input.projection.rootTextTemplate);
+  }
   if (isContractDraft(input) && input.fixedCrossSizeReadback !== undefined) {
     const guard = input.fixedCrossSizeReadback;
     if (guard.version !== 1 || !Array.isArray(guard.nodeIds) || !guard.nodeIds.length ||
@@ -197,7 +202,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component),
     isContractDraft(input) ? input.absoluteShapeReadback?.nodeIds : undefined,
     isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2,
-    isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous);
+    isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
+    isContractDraft(input) && input.component.rootSlot?.textTemplate === 1);
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -206,7 +212,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false): string {
   if(synchronous && (!fixedCrossSizeNodeIds.length || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
@@ -265,6 +271,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "textStyleId",
     "vectorPaths",
     "reactions",
+    ...(textTemplate ? ['textAutoResize', 'fontWeight'] : []),
   ];
   return `// GENERATED independent native source readback. READ ONLY.
 const EXPECTED = ${JSON.stringify(expected)};
@@ -716,7 +723,16 @@ function verifyReadback(
             )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : undefined : undefined);
     if (!expectedType || n.type !== expectedType)
       issue("native-source-observation-node-type", n);
-    if (!same(v.explicitVariableModes, mode))
+    let consumingMode = mode;
+    const template = isContractDraft(input) ? input.projection.rootTextTemplate : undefined;
+    if (template && spec.nativeContractPart) {
+      const selected = template.variants.find(row => row.name === spec.nativeContractPart!.variant);
+      const native = input.tokenIdentity.modes.find(row => row.nativeSelection?.planRevision === template.revision && row.nativeSelection?.modeKey === selected?.modeKey);
+      consumingMode = native ? { [input.tokenIdentity.collection.id]: native.modeId } : {};
+      const inherits = spec.rootSlotContent || spec.slotTextTemplate;
+      if (!native || !same(v.explicitVariableModes, inherits ? {} : consumingMode) || !same(v.resolvedVariableModes, consumingMode))
+        issue('native-source-observation-template-mode', n);
+    } else if (!same(v.explicitVariableModes, mode))
       issue("native-source-observation-mode", n);
     if (!sample && !same(meta(n, isContractDraft(input) ? 'nativeContractPart' : 'nativeSourcePart'),
       isContractDraft(input) ? spec.nativeContractPart : spec.nativeSourcePart))
@@ -799,7 +815,7 @@ function verifyReadback(
     );
     if (
       v.visible !==
-      (wrapper ? wrapper.visible : spec.nativeSourceVisible !== false)
+      (wrapper ? wrapper.visible : !spec.slotTextTemplate && spec.nativeSourceVisible !== false)
     )
       issue("native-source-observation-visibility", n);
     if (
@@ -820,6 +836,8 @@ function verifyReadback(
     const bindings = {
       ...spec.bindings,
       ...(isContractDraft(input) && spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}),
+      ...(isContractDraft(input) && spec.slotTextTemplate && spec.fontWeightVar ? { fontWeight: spec.fontWeightVar } : {}),
+      ...(isContractDraft(input) && spec.slotTextTemplate && spec.lineHeightVar ? { lineHeight: spec.lineHeightVar } : {}),
       ...(spec.fixedWidth ? { width: spec.fixedWidth.varName } : {}),
       ...(spec.fixedHeight?.varName
         ? { height: spec.fixedHeight.varName }
@@ -828,6 +846,10 @@ function verifyReadback(
     const observedBindings = { ...v.boundVariables };
     if (isContractDraft(input) && spec.type === 'text' && Array.isArray(observedBindings.fontSize) && observedBindings.fontSize.length === 1)
       observedBindings.fontSize = observedBindings.fontSize[0];
+    if (isContractDraft(input) && spec.slotTextTemplate && Array.isArray(observedBindings.fontWeight) && observedBindings.fontWeight.length === 1)
+      observedBindings.fontWeight = observedBindings.fontWeight[0];
+    if (isContractDraft(input) && spec.slotTextTemplate && Array.isArray(observedBindings.lineHeight) && observedBindings.lineHeight.length === 1)
+      observedBindings.lineHeight = observedBindings.lineHeight[0];
     if (
       Object.entries(observedBindings).some(
         ([field, value]) =>
@@ -888,6 +910,21 @@ function verifyReadback(
     if (spec.layout && v.clipsContent !== (spec.clipsContent === true))
       issue("native-source-observation-clipping", n);
     if (spec.type === "text") {
+      if (spec.slotTextTemplate) {
+        let weight = tokens.receipt.variables.find((entry: any) => entry.name === spec.fontWeightVar);
+        const modeId = consumingMode[input.tokenIdentity.collection.id], seen = new Set<string>();
+        while (weight && object(weight.valuesByMode[modeId]) && weight.valuesByMode[modeId].type === 'VARIABLE_ALIAS') {
+          if (seen.has(weight.id)) { weight = undefined; break; }
+          seen.add(weight.id);
+          const id = weight.valuesByMode[modeId].id;
+          weight = tokens.receipt.variables.find((entry: any) => entry.id === id);
+        }
+        if (!weight || !numeric(v.fontWeight, weight.valuesByMode[modeId]))
+          issue('native-source-observation-text-template-weight', n);
+      }
+      if (spec.slotTextTemplate && (v.textAutoResize !== 'WIDTH_AND_HEIGHT' ||
+          !same(v.letterSpacing, { unit: 'PIXELS', value: spec.letterSpacing ?? 0 })))
+        issue('native-source-observation-text-template-sizing', n);
       if (
         v.characters !== spec.characters ||
         v.fontName?.family !== spec.fontFamily ||
@@ -970,6 +1007,10 @@ function verifyReadback(
         issue('native-contract-observation-shape-position', n);
     }
     if (spec.type === "slot") {
+      if (spec.children?.some(child => child.slotTextTemplate) &&
+          ((v.layoutSizingHorizontal === 'HUG' && v.width !== 0) ||
+           (v.layoutSizingVertical === 'HUG' && v.height !== 0)))
+        issue('native-source-observation-text-template-empty-box', n);
       if (
         v.componentPropertyReferences?.slotContentId !==
         slotKeys.get(spec.slotProperty!)

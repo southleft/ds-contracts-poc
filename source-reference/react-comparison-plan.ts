@@ -49,7 +49,9 @@ function compiled(input: ReactComparisonPlanInput) {
   const engine = createFigmaEngine({ tokens: { primitives: c.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map(c.assets) });
   const contracts = new Map([[c.contract.id, c.contract]]), data = engine.compileComponentData(c.contract, contracts);
   if (canonicalJson(data) !== canonicalJson(c.component)) throw Error('react-comparison-compiler-changed');
-  const comparison = prepareNativeContractComparison(c.contract, data, input.source, revisionOf(c.tokens), { mode: 'light', brand: 'default' }, input.comparison);
+  if (input.comparison.rootText && input.comparison.rootText.treeRevision !== c.treeRevision)
+    throw Error('react-comparison-direct-root-text-changed');
+  const comparison = prepareNativeContractComparison(c.contract, data, input.source, revisionOf(c.tokens), { mode: 'light', brand: 'default' }, input.comparison, c.tokens);
   return { engine, contracts, comparison, contract: c.contract, tokens: c.tokens };
 }
 export function prepareReactComparisonPlan(input: ReactComparisonPlanInput) {

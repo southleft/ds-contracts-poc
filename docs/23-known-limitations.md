@@ -8225,10 +8225,73 @@ Root-slot readback accepts the new evidence field while retaining its existing
 content, layout, paint and behavior guards. The initial metadata rejection and
 the corrected flex/grid readback checks are preserved in that journal.
 
-This is a capture improvement. The converter still drops the hidden empty TEXT
-inside a native content slot; source typography is not yet preserved through
-that return journey. It does not qualify the second-library journey or V1.
+This capture improvement alone does not preserve root typography through the
+return journey. D.99 describes the subsequent bounded template projection and
+its remaining application gaps. Neither qualifies the second-library journey
+or V1.
 To reverse, remove the additive consumer records and native line-height capture
 together with their tests, regenerate the embedded dump and plugin receipt, and
 rederive sync baselines under an explicitly new grammar. Preserve live journals
 and the previous failed consumer; never relabel old evidence as a new capture.
+
+## D.99 Native root text templates still need an application journey
+
+The application source adapter does not yet derive the explicit
+`slot.bindings.figma.textTemplate` marker. Empty caller-slot mains therefore
+still lack the complete return behavior required by V1. Template updates,
+interrupted comparison recovery, composed graphs, states, variable-picker
+scopes, clean consumers and the unchanged 5% fidelity gate remain unqualified.
+
+**AGENT decision, 2026-09-21.** An explicit template marker is admitted only for
+one hidden empty TEXT inside the root SLOT, with complete bound font size,
+weight, line height and color. Family, slant, tracking, case and alignment must
+remain invariant. The scoped writer retains the original source variables and
+adds four shared aliases whose targets are selected by the main's native mode.
+It deduplicates identical binding tuples, never merely equal values. This rule
+replaces a failed live projection: separate bindings on each main left edited
+slot text using its former variant's typography. Unscoped writers now refuse
+the marker before allocation. Unsupported mode capacity retains the partial
+allocation identities rather than reporting a successful write.
+The current projection selects variants inside one collection. Large source
+matrices can therefore exceed the file's available mode capacity; factoring
+selection across collections is research, not an implemented write protocol.
+
+Plugin capture 1.44 records numeric native weight and complete selected alias
+chains up to 16 edges, including target consuming modes and native values.
+Unverifiable chains name a degradation and are omitted as a whole. REST 1.42
+captures weight identity without inventing consumer-mode evidence. The bounded
+inverse validates all four compiler aliases, corroborates the selected edges,
+and requires original source definitions to agree across modes. It restores
+source token references, including original aliases, without mutating the dump.
+Its source-chain limit remains 10 entries to match the existing token resolver.
+The 1.42 REST grammar transition was re-observed with REST GETs: 25 current
+baselines and six existing pending decisions retain their native fingerprints
+and unresolved status. Historical receipts remain archived. Census regeneration
+changes only named capture-note counts; its generated-code hashes are unchanged.
+
+Caller text may use the template only when the host authenticates a direct DOM
+text run and recompiles its observed content. Equal paint on a descendant
+element is insufficient. The planner checks every typography channel before
+the writer edits the existing template. It leaves parent mode selection on the
+main, records actual slot descendants, and independently verifies inherited
+bindings and modes. Nested content, measured text boxes, stale source evidence,
+comparison recovery and repairs requiring template migration refuse by name.
+
+The retained Evaluations engineering fixture uses the generated token, main,
+caller and readback programs. Its caller switches Small → Large → Small:
+12/20/12 px size, 18/28/18 px line height, 400/700/400 weight and red/blue/red
+paint, retaining the same four binding IDs. The restored independent readback
+passes, the parent remains unchanged, and a rerun refuses before duplicate
+allocation. A canonical main capture produces one return proposal with the
+original source references. Canvas screenshots and all operation IDs are in
+`native-root-text-template-20260921/`. These are synthetic engineering probes,
+not authenticated application journeys or visual-fidelity scores.
+
+Adversarial checks run in `runtime:check` and `source:reference:check`: they
+cover missing and mixed bindings, changed mode/alias identity, inconsistent
+source definitions, unsafe token paths, stale direct-text evidence, altered
+readbacks, mode-allocation failures and duplicate writes. To reverse, remove
+the optional marker and its planner, scoped writer, inverse and caller support
+together; restore named refusal for nonempty root slots, regenerate derived
+artifacts and retain all failed and successful journals. Do not loosen the
+fidelity threshold or rewrite historical receipts.

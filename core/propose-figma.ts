@@ -2,6 +2,7 @@ import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './ab
 import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
+import { validateRootTextTemplates } from './figma-slot-text-template.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
 /**
@@ -11829,7 +11830,10 @@ function proposeFromDumpFenced(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const rootContent = readRootContent(set);
-  if (rootContent?.normalized) set = rootContent.normalized;
+  const template = rootContent?.textTemplate ? validateRootTextTemplates(set, opts.corpus, opts.capturedValues) : undefined;
+  const templateFamily = template?.family;
+  if (template?.normalized) set = template.normalized;
+  else if (rootContent?.normalized) set = rootContent.normalized;
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
@@ -12495,9 +12499,24 @@ function proposeFromDumpFenced(
   const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined;
   if (rootContent) {
     const slot: Record<string, unknown> = { name: 'children' };
-    if (rootContent.property !== 'Children') slot.bindings = { figma: { property: rootContent.property } };
+    if (rootContent.property !== 'Children' || rootContent.textTemplate) slot.bindings = { figma: {
+      ...(rootContent.property !== 'Children' ? { property: rootContent.property } : {}),
+      ...(rootContent.textTemplate ? { textTemplate: true } : {}),
+    } };
     applySlotAccepts(slot, rootContent.property, ctx, where, true);
     root.slot = slot;
+    if (rootContent.textTemplate) {
+      const template = only!.children[0], path = `${where}/Content text template`;
+      const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true);
+      Object.assign(rootTokens, textTokens);
+      carryTextCase(template, root, ctx, path);
+      carryFontSlant(template, root, ctx, path);
+      root.declared = { ...(root.declared as Record<string, string> | undefined), 'font-family': templateFamily! };
+      carryLetterSpacing(template, root, ctx, path, rootTokens);
+      carryTextAlign(template, root, ctx, path);
+      if (ctx.mint) for (const o of ctx.mint.observations) if (o.target === textTokens) o.target = rootTokens;
+      ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
+    }
     ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
   } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
@@ -13738,9 +13757,10 @@ export function proposeBatchFromDump(
   // The batch has the whole dump, so the captured-variable value index
   // (dump v1.4 `_variables` — the class-① mint-routing input) is built here
   // once unless the caller supplied its own.
+  const capturedLayer = capturedTokensFromDump(dump);
   const capturedValues =
     opts.capturedValues ??
-    new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+    new Map((capturedLayer?.entries ?? []).map((e) => [e.path, e.value] as const));
   // The dump stores one value per variable name, not the selected mode of
   // each consuming node. A joint table must not flatten differing modes.
   // Inspect the raw table so malformed mode values cannot disappear during
@@ -13900,6 +13920,18 @@ export function proposeBatchFromDump(
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
+      if (value.rootSlot && typeof value.rootSlot === 'object' &&
+          (value.rootSlot as { textTemplate?: unknown }).textTemplate === 1) {
+        const templateNames = new Set(value.variants.flatMap(root =>
+          Object.values(root.children?.[0]?.children?.[0]?.variableConsumers ?? {})
+            .flatMap(c => [c.name, ...(c.aliasChain ?? []).map(hop => hop.name)])));
+        if (capturedLayer?.skipped.some(skip => skip.name === value.setName || templateNames.has(skip.name)))
+          throw Error('FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED: conflicting or unregistrable captured template tokens');
+      }
+      if (value.rootSlot && typeof value.rootSlot === 'object' &&
+          (value.rootSlot as { textTemplate?: unknown }).textTemplate !== undefined &&
+          (captureGapNote || degradations.some(d => d.nodePath === name || d.nodePath.startsWith(`${name}:`))))
+        throw Error('FIGMA_SLOT_TEXT_TEMPLATE_CAPTURE_UNQUALIFIED: incomplete capture or degradation on the template set');
       const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
       attachSiblingStubs(proposal);
       registerSession(proposal.contract as Record<string, unknown>, name);

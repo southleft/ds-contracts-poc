@@ -146,6 +146,8 @@ export interface NodeSpec {
   nativeSourceVisible?: false;
   /** Synthetic native content container; never a new React element. */
   rootSlotContent?: true;
+  /** Explicit hidden, empty native text carrier; never default caller content. */
+  slotTextTemplate?: true;
   /** Synthetic grid inside a root SLOT; sized after the slot joins its root. */
   rootSlotGridContent?: true;
   layout?: LayoutSpec;
@@ -459,20 +461,11 @@ export interface NodeSpec {
    *  .size.md and font.control.size.sm both resolve to it). Binding the
    *  variable puts the identity back where a reader can see it. */
   fontSizeVar?: string;
-  /** FC-WEIGHT-IDENTITY, second half. Figma has NO variable binding for font
-   *  weight — the face name is the only thing on the node — so a contract's
-   *  weight token used to die at emit: this file resolved it to "Medium" and
-   *  threw the identity away, and "Medium" is the same face a node with no
-   *  weight token at all draws. The inverter then could not tell a DECLARED
-   *  500 from the runtime default, so it proposed nothing and said nothing
-   *  (TJ-TEST.md §A7, the silent row). Stamped as plugin data instead, the
-   *  same way the size token rides `fontSizeVar` when no style can carry it. */
+  /** Weight token identity. Historical output carries a plugin-data stamp;
+   * explicit empty text templates also bind the native fontWeight field. */
   fontWeightVar?: string;
-  /** Same story as fontWeightVar, one channel over. Figma's lineHeight takes a
-   *  value, not a variable, so the contract's token resolved to a number here
-   *  and the identity was gone — the reader then MINTED a replacement
-   *  (`imported.label.label.line-height`) for a token the corpus already had
-   *  (`imported.label.root.line-height`). Stamped so the original binds back. */
+  /** Line-height token identity. Historical output carries a plugin-data
+   * stamp; explicit empty text templates also use a native lineHeight binding. */
   lineHeightVar?: string;
   textFill?: string;
   /** R7 LITERAL INK: the TEXT node's fill when the contract carries
@@ -737,9 +730,9 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
-  rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
+  rootSlot?: ({ version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
     { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' } |
-    { version: 4; property: string; display: 'block'; width: 'fill' };
+    { version: 4; property: string; display: 'block'; width: 'fill' }) & { textTemplate?: 1 };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -1609,11 +1602,10 @@ interface TextCtx {
   /** The same token in Figma's slash spelling — bound to `fontSize` when the
    *  node cannot ride a style (see NodeSpec.fontSizeVar). */
   fontSizeVar?: string;
-  /** The weight token in Figma's slash spelling — stamped, never bound
-   *  (Figma cannot bind a variable to font weight). See NodeSpec.fontWeightVar. */
+  /** Weight token in slash form. See NodeSpec.fontWeightVar for the legacy
+   * stamp and explicit text-template binding paths. */
   fontWeightVar?: string;
-  /** The line-height token in Figma's slash spelling — stamped, never bound.
-   *  See NodeSpec.lineHeightVar. */
+  /** Line-height token in slash form. See NodeSpec.lineHeightVar. */
   lineHeightVar?: string;
   /** Resolved line height — see NodeSpec.lineHeight. */
   lineHeight?: number | { value: number; unit: 'PIXELS' | 'PERCENT' };
@@ -5244,6 +5236,11 @@ function nestedSlotNames(part: Part): string[] {
  * child flow. Padding/paint/borders stay on the source box and are not doubled.
  * Runtime sizing is selected after append from the actual parent axes. */
 function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>): NodeSpec {
+  const textTemplate = root.slot?.bindings?.figma?.textTemplate;
+  if (textTemplate && (!root.layout || !['flex', 'inline-flex'].includes(root.layout.display ?? '') ||
+      root.slot!.name !== 'children' || root.slot!.defaultContent?.length || root.slot!.accepts?.length ||
+      root.slot!.acceptsMode === 'restrict' || root.slot!.min !== undefined || root.slot!.max !== undefined || root.slot!.required))
+    throw Error('FIGMA_SLOT_TEXT_TEMPLATE_SHAPE_UNSUPPORTED: requires an unconstrained empty flex root children slot');
   if (!rootSpec.layout || rootSpec.layout.wrap || isReversed(root, subst))
     throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root content requires supported forward flow');
   if (root.declared?.display === 'block' && !root.layout &&
@@ -5289,6 +5286,24 @@ function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byI
     throw new Error('FIGMA_ROOT_SLOT_DISTRIBUTION_UNSUPPORTED: native space-between does not preserve the CSS minimum gap');
   if (rootSpec.bindings?.itemSpacing !== undefined) spec.bindings = { itemSpacing: rootSpec.bindings.itemSpacing };
   if (rootSpec.lits?.itemSpacing !== undefined) spec.lits = { itemSpacing: rootSpec.lits.itemSpacing };
+  if (textTemplate) {
+    const line = typeof ctx.lineHeight === 'number' ? ctx.lineHeight
+      : ctx.lineHeight?.unit === 'PIXELS' ? ctx.lineHeight.value : undefined;
+    if (!ctx.fontFamily || !ctx.fontStyle || !Number.isFinite(ctx.fontSize) || ctx.fontSize! <= 0 ||
+        !Number.isFinite(line) || line! <= 0 || !ctx.textFill || !ctx.fontSizeVar || !ctx.fontWeightVar || !ctx.lineHeightVar ||
+        ctx.textTruncation || (ctx.textDecoration && ctx.textDecoration !== 'NONE'))
+      throw Error('FIGMA_SLOT_TEXT_TEMPLATE_TYPOGRAPHY_UNQUALIFIED: explicit font and bound size, weight, pixel line height and ink required');
+    const template: NodeSpec = { type: 'text', name: 'Content text template', characters: '',
+      slotTextTemplate: true, fontSize: ctx.fontSize, fontStyle: figmaFaceStyle(ctx),
+      lineHeight: { unit: 'PIXELS', value: line! }, textAutoResize: 'WIDTH_AND_HEIGHT', textFill: ctx.textFill, ...textExtras(ctx) };
+    applyTextIdentity(template, ctx);
+    template.letterSpacing = ctx.letterSpacing ?? 0;
+    // Native bindings carry identity on the empty node; a shared text style
+    // would own overlapping fields and could clear those bindings on update.
+    delete template.textStyle;
+    if (ctx.fontSizeVar) template.fontSizeVar = ctx.fontSizeVar;
+    spec.children = [template];
+  }
   return spec;
 }
 
@@ -5339,6 +5354,8 @@ function slotPropertyDescription(slot: NonNullable<Part['slot']>): string {
 function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>): void {
   const errors: string[] = [];
   for (const { name, part, path } of walkAnatomy(contract)) {
+    if (part.slot?.bindings?.figma?.textTemplate && part !== contract.anatomy.root)
+      errors.push('FIGMA_SLOT_TEXT_TEMPLATE_ROOT_REQUIRED');
     if (part.component && (path.length === 1 || part.repeat)) {
       if (part.parts !== undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: caller parts require a non-repeated nested instance');
       if (part.component.initialProps) errors.push('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializers require a non-repeated nested instance');
@@ -6516,6 +6533,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
     ),
   };
+  if (contract.anatomy.root?.slot?.bindings?.figma?.textTemplate && data.rootSlot) data.rootSlot.textTemplate = 1;
   compiledData.set(data, canonicalJson(data));
   if (nativeSource) nativeCandidateData.add(data);
   return data;
@@ -7784,6 +7802,7 @@ function buildComponentScript(
   }
   const data = compileComponentData(contract, byId);
   if (nativeCandidateData.has(data)) throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
+  if (data.rootSlot?.textTemplate === 1) throw new Error('FIGMA_SLOT_TEXT_TEMPLATE_REQUIRES_SCOPED_MODES');
   return buildSyncScript([data], fileKeyOverride ?? contract.bindings.figma.anchors.fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -7814,6 +7833,7 @@ function buildBatchScript(datas: ComponentData[], fileKey: string | null): strin
     // Contract compilation. The production batch shell passes these exact
     // compiler outputs, so its generated bytes remain unchanged.
     if (compiledData.get(data) !== canonicalJson(data)) throw new Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+    if (data.rootSlot?.textTemplate === 1) throw new Error('FIGMA_SLOT_TEXT_TEMPLATE_REQUIRES_SCOPED_MODES');
   }
   return buildSyncScript(datas, fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
@@ -7946,6 +7966,7 @@ function compileNativeContractGraphDraft(
   if (ordered.at(-1)?.id !== parent.id)
     throw Error('NATIVE_CONTRACT_GRAPH_PARENT_ORDER_UNQUALIFIED');
   const compiled = ordered.map(contract => compileNativeContractDraft(contract, byId, source));
+  if (compiled.some(row => row.projection.rootTextTemplate)) throw Error('NATIVE_CONTRACT_GRAPH_TEXT_TEMPLATE_UNQUALIFIED');
   const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
   const components = compiled.map(row => scopeNativeGraphComponent(row.component, ids));
   const parentIndex = ordered.findIndex(contract => contract.id === parent.id);
@@ -7989,11 +8010,11 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   const data = compileComponentData(contract, byId);
   const compiled = prepareNativeContractComparison(contract, data, source, revisionOf(input.tokens.primitives), {
     mode: input.mode ?? 'light', brand: input.brand ?? 'default',
-  }, comparison);
+  }, comparison, input.tokens.primitives);
   const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
   return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
     header: '// Shared renderer: caller content in an instance of an existing observed main.',
-    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSourceOwnedComparison: !!compiled.instances?.some(ref => ref.contentMode === 'source-owned'), nativeInstanceWidthComparison: compiled.instanceWidth !== undefined, nativeContainerWidthComparison: compiled.containerWidth !== undefined, nativeComparisonRecovery: !!context.comparisonRecovery, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSourceOwnedComparison: !!compiled.instances?.some(ref => ref.contentMode === 'source-owned'), nativeInstanceWidthComparison: compiled.instanceWidth !== undefined, nativeContainerWidthComparison: compiled.containerWidth !== undefined, nativeTextTemplateComparison: !!compiled.textTemplate, nativeComparisonRecovery: !!context.comparisonRecovery, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
   }));
 }
 
@@ -8003,7 +8024,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8026,6 +8047,7 @@ function buildSyncScript(
   const hasArc = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
   const hasShadow = featureDatas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
   const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
+  const hasSlotTextTemplate = featureDatas.some((d) => dataSome(d, (x) => x.slotTextTemplate === true));
   const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
   const hasLits = featureDatas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
@@ -8785,7 +8807,12 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
-    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');${hasSlotTextTemplate ? `
+    if (spec.slotTextTemplate) {
+      if (spec.fontWeightVar) node.setBoundVariable('fontWeight', need(spec.fontWeightVar));
+      if (spec.lineHeightVar) node.setBoundVariable('lineHeight', need(spec.lineHeightVar));
+      node.visible = false;
+    }` : ''}
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -8962,7 +8989,16 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
       try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
-  return node;
+${hasSlotTextTemplate ? `  if (spec.type === 'slot' && spec.children?.some(child => child.slotTextTemplate)) {
+    // Hidden empty TEXT can leave a cached line height on an intrinsic SLOT.
+    // Reset that empty extent before parent-relative sizing is applied.
+    node.layoutSizingHorizontal = 'FIXED';
+    node.layoutSizingVertical = 'FIXED';
+    node.resizeWithoutConstraints(0, 0);
+    node.layoutSizingHorizontal = 'HUG';
+    node.layoutSizingVertical = 'HUG';
+  }
+` : ''}  return node;
 }
 
 
@@ -9689,7 +9725,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison, !!opts.nativeSourceOwnedComparison, !!opts.nativeInstanceWidthComparison, !!opts.nativeComparisonRecovery, !!opts.nativeContainerWidthComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
+${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison, !!opts.nativeSourceOwnedComparison, !!opts.nativeInstanceWidthComparison, !!opts.nativeComparisonRecovery, !!opts.nativeContainerWidthComparison, !!opts.nativeTextTemplateComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run

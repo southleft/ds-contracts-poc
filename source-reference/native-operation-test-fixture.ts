@@ -90,8 +90,8 @@ export const nativeFixturePrepare: NativeOperationJobsOptions["prepare"] = (
 
 /** Execute the actual generated token writer/readback in the existing native
  * API mock. Supplement immutable identity fields that mock does not model. */
-export function nativeFixtureHost() {
-  const h = createFigmaMock({ modeLimit: 1 });
+export function nativeFixtureHost(options: { modeLimit?: number; consumerVariableModes?: boolean } = {}) {
+  const h = createFigmaMock({ modeLimit: 1, ...options });
   const figma = h.figma as any,
     variables = h.variables as any[],
     collections = h.collections as any[];

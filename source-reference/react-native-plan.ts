@@ -2,6 +2,7 @@
  * an application adapter must re-open sealed ownership evidence and check the
  * original source before each call. This module grants no delivery permission.
  */
+import { expandRootTextTemplateTokenContext } from '../core/native-root-text-template-plan.js';
 import { revisionOf, canonicalJson } from '../core/contract-provenance.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import type { NativeContractDraftSource } from '../core/native-contract-draft.js';
@@ -61,7 +62,7 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
       !/^[A-Za-z0-9]{10,80}$/.test(input.operation.fileKey))
     throw Error('react-native-plan-operation-invalid');
   const { draft, compiled } = nativeDraft(input, recompile);
-  const tokenInput: NativeTokenContextInput = {
+  const baseTokenInput: NativeTokenContextInput = {
     fileKey: input.operation.fileKey, scopeId: `source-${input.operation.id}`,
     source: { revision: input.source.revision, sourceProgramSha256: input.source.programSha256,
       tokensSha256: revisionOf(draft.tokens).slice(7) },
@@ -69,6 +70,8 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
     modes: [{ sourceMode: 'light', brand: 'default', nativeModeName: 'Light',
       tokens: structuredClone(draft.tokens!), tokenTreeRevision: compiled.projection.tokenRevision }],
   };
+  const tokenInput = compiled.projection.rootTextTemplate
+    ? expandRootTextTemplateTokenContext(baseTokenInput, compiled.projection.rootTextTemplate) : baseTokenInput;
   const plan = {
     version: 1 as const, kind: 'react-root-draft-inspection' as const, purpose: 'source-candidate-inspection' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const,
