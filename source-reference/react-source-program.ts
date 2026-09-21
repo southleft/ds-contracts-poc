@@ -407,11 +407,15 @@ export function readReactSourceProgram(
         if (name === "default") {
           // Const protects the binding, not a forwardRef object's render field.
           // Follow only local uses that cannot replace the implementation. A
-          // literal displayName assignment is metadata on the React wrapper;
-          // arbitrary property access, aliases and calls need a separate proof.
+          // literal displayName assignment is metadata on the React wrapper.
+          // Even JSX exposes the wrapper as element.type; without an escape
+          // proof that is another mutable alias, not a safe rendering use.
           let escaped = false;
           const inspect = (node: ts.Node) => {
             if (ts.isIdentifier(node)) {
+              // Direct eval can reach this module's binding without a symbol
+              // reference. Its string contents are not static source evidence.
+              if (node.text === "eval") escaped = true;
               let candidate = checker.getSymbolAtLocation(node);
               if (candidate && candidate.flags & ts.SymbolFlags.Alias)
                 candidate = checker.getAliasedSymbol(candidate);
@@ -425,11 +429,6 @@ export function readReactSourceProgram(
                   ts.isExportAssignment(parent) &&
                   !parent.isExportEquals &&
                   parent.expression === node;
-                const jsxTag =
-                  (ts.isJsxOpeningElement(parent) ||
-                    ts.isJsxClosingElement(parent) ||
-                    ts.isJsxSelfClosingElement(parent)) &&
-                  parent.tagName === node;
                 const label =
                   ts.isPropertyAccessExpression(parent) &&
                   parent.expression === node &&
@@ -447,7 +446,6 @@ export function readReactSourceProgram(
                   ) &&
                   !localExport &&
                   !defaultExport &&
-                  !jsxTag &&
                   !label &&
                   !ts.isTypeQueryNode(parent)
                 )

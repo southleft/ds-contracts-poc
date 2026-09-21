@@ -3,6 +3,9 @@ import test from "node:test";
 import { mkdtempSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { tmpdir } from "node:os";
+import { runInNewContext } from "node:vm";
+import * as React from "react";
+import ts from "typescript";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
@@ -485,6 +488,11 @@ const Panel=forwardRef<HTMLDivElement,{children?:React.ReactNode}>(({children},r
       "const Alias=Panel; Object.assign(Alias,{render:()=> <div/>});",
       "const replace=(value:object)=>Object.assign(value,{render:()=> <div/>}); replace(Panel);",
       "Panel.displayName=String(Math.random());",
+      "const element=<Panel/>; Object.assign(element.type,{render:()=> <div/>});",
+      "const make=()=> <Panel/>; Object.assign(make().type,{render:()=> <div/>});",
+      "const make=()=> <Panel/>;",
+      'eval("Panel.render=()=>null");',
+      '(eval)("Panel.render=()=>null");',
     ]) {
       writeFileSync(
         path.join(dir, "components.tsx"),
@@ -503,12 +511,79 @@ const Panel=forwardRef<HTMLDivElement,{children?:React.ReactNode}>(({children},r
       `${prefix}
 Panel.displayName='Panel';
 type ComponentValue=typeof Panel;
-const render=()=> <Panel><span>Caller content</span></Panel>;
 export {Panel as default};`,
     );
     const program = readReactSourceProgram(dir, ["components.tsx"]);
     assert.equal(program.status, "observed", JSON.stringify(program.problems));
     assert.equal(program.components[0].children.kind, "forwarded");
+  }));
+
+test("JSX reflection and dynamic evaluation cannot authenticate a replaced default render", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    for (const mutation of [
+      "",
+      "const element=<Panel/>; Object.assign(element.type,{render:()=> <div>Replaced</div>});",
+      "const make=()=> <Panel/>; Object.assign(make().type,{render:()=> <div>Replaced</div>});",
+      `eval("Panel.render=()=>React.createElement('div',null,'Replaced')");`,
+    ]) {
+      const source = `import * as React from 'react';
+const Panel=React.forwardRef<HTMLDivElement,{children?:React.ReactNode}>(({children},ref)=><div ref={ref}>{children}</div>);
+${mutation}
+export default Panel;`;
+      writeFileSync(path.join(dir, "components.tsx"), source);
+      // Execute only this controlled test fixture to prove that the alias
+      // changes actual React output. The product reader never executes it.
+      const compiled = ts.transpileModule(source, {
+        compilerOptions: {
+          jsx: ts.JsxEmit.React,
+          module: ts.ModuleKind.CommonJS,
+          target: ts.ScriptTarget.ES2022,
+        },
+      }).outputText;
+      const exports: {
+        default?: {
+          render: (
+            props: { children: string },
+            ref: null,
+          ) => React.ReactElement<{ children: string }>;
+        };
+      } = {};
+      runInNewContext(compiled, {
+        exports,
+        require: (id: string) => {
+          assert.equal(id, "react");
+          return React;
+        },
+      });
+      assert.equal(
+        exports.default!.render({ children: "Caller" }, null).props.children,
+        mutation ? "Replaced" : "Caller",
+      );
+      const program = readReactSourceProgram(dir, ["components.tsx"]);
+      assert.equal(program.status, mutation ? "refused" : "observed", mutation);
+      if (mutation) {
+        assert.deepEqual(program.components, []);
+        assert.ok(
+          program.problems.includes("default:component-value-mutation-or-escape"),
+        );
+      } else assert.equal(program.components[0].children.kind, "forwarded");
+    }
   }));
 
 test("lookalike, computed, mutable and indirect wrapper factories do not acquire React source proof", () =>

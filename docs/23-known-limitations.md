@@ -7783,9 +7783,9 @@ No schema field, component-name branch or inferred width is added.
 Native state previews remove replaced resting side literals and bindings
 before applying the state shorthand. These transitions explicitly include
 strokes in layout on the resting and state frames; the public outside-layout
-flag still wins. The current Desktop probe starts with a different native
-layout default from older census observations, so relying on that default
-would lose the intended CSS border-box size. Other generated library scripts
+flag still wins. Native layout settings differ across retained and freshly
+created nodes, so an explicit write avoids relying on their prior state.
+Other generated library scripts
 remain byte-fresh. Synthetic browser and native round trips cover common and
 per-value bound width identities and twelve unsupported input controls.
 
@@ -7816,6 +7816,42 @@ carrier, restore the native state-preview side handling and remove this
 transition's explicit layout policy. Preserve the outside-layout behavior,
 D.91 pressed paint reset, all source captures and the failed app consumer.
 
+
+**AGENT review correction, 2026-09-21.** The explicit layout policy also
+covers token-bound resting side widths. The initial rule detected only literal
+sides, so an existing native outside-layout setting could survive reconciliation
+of an otherwise identical bound contract. A new isolated Evaluations control
+first created two 120 × 32 native mains with the expected setting already true;
+that fresh result is preserved. The controlled existing-node case then set the
+layout setting false and cleared only this fixture's stamp to require a real
+amend. The prior generated program left both values false. The corrected
+program set both true while preserving the set key, both main IDs, dimensions,
+side widths, bindings, variable values and PNG bytes. A repeat allocated nothing
+and retained the complete readback. The plugin was closed and the canvas
+inspected. This measures a native reconciliation policy, not a new application
+or pixel-fidelity result. The contradictory outside-layout plus border-style
+contract still refuses. Reverse this extension by limiting the explicit policy
+to literal sides again; keep the controlled before/after evidence in
+`private/uniform-state-bound-review-20260921/`.
+
+**AGENT review correction — alignment and binding order, 2026-09-21.**
+The uniform replacement requires an explicit captured `INSIDE` value on both
+resting and state roots. Absence means unknown. The earlier exception incorrectly
+accepted missing alignment; the later bound-width reader could also reintroduce
+a refused width. Common and per-value bindings now obey the same qualification
+as unbound widths. The existing explicitly outside focus-ring path remains
+separate. A qualified common width stays a border even when the resting paint
+is awaiting token minting; previously that ordering could remap it to an outline.
+Browser and mock-native round trips cover common and per-value width identities,
+and 45 controls retain missing/unsupported alignment, layout and width refusals.
+A fresh canonical read of the retained two-main Evaluations fixture still
+recovers `{two}` with solid border style. Removing either alignment field from
+an offline copy makes exact projection refuse; no native node was changed.
+The bridge was closed and the retained canvas inspected. This is a bounded
+compiler/capture check, not a new application journey or fidelity qualification.
+To reverse, restore the absent-alignment fallback, independent bound-width
+recovery and early outline remap together; preserve the failing controls and
+readback in the same private review directory.
 
 ### D.93 Complete observed tracking can vary by prop
 
@@ -7929,7 +7965,7 @@ a local `const` whose initializer is a supported function or direct React
 Const alone is insufficient for a wrapper object: an adversarial probe replaced
 its `render` method with `Object.assign` while the initial reader still reported
 forwarded children. New default admission therefore also refuses local value
-mutations and escapes. Only declaration, local export, direct JSX, type query
+mutations and escapes. Only declaration, local export, type query
 and literal `displayName` assignment uses are admitted. Anonymous export
 expressions, default function declarations, mutable bindings, indirect wrappers,
 external definitions and unsupported calls remain named refusals. Existing
@@ -7939,9 +7975,25 @@ of every possible future consumer mutation.
 Tests retain true default import identity, direct children, callback/default
 metadata and non-execution of source. Two modules with the same local name and
 `default` export join distinct renderer owners; a substituted module identity
-and duplicate runtime alias refuse. Six wrapper mutation/escape controls refuse.
+and duplicate runtime alias refuse. The initial six wrapper mutation/escape
+controls refuse.
 The cohort still groups negative controls by the declared export-name subject;
 multiple default-exported modules do not automatically receive separate groups.
+
+**Adversarial correction — 2026-09-21.** A local JSX element retains the actual
+wrapper object in its `type` field. Both an assigned element and an element
+returned from a local factory allowed `Object.assign(element.type, ...)` to
+replace the render while inspection incorrectly reported forwarded children.
+Direct `eval` reached the binding without a checked symbol reference. Controlled
+runtime probes confirmed all three changed caller content to replacement text.
+Default admission now refuses local JSX references and modules containing an
+`eval` identifier. This deliberately includes harmless local JSX uses until an
+element-alias proof exists. Runtime regression controls verify the changed
+output and refusal; immutable export-only components retain admission. Private
+before/after evidence is in `default-export-adversarial-20260921/`.
+To reverse this correction, first prove that the produced element and any
+returned aliases cannot expose a mutable implementation, and that dynamic
+evaluation cannot alter it. Do not restore the unconditional JSX exemption.
 
 The unchanged React DaisyUI 5.0.5 Badge source matches both npm source-map text
 and release `94869ab436cb72aea944972a8f931cb9b60e725e`. In the app, two declared
