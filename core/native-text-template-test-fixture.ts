@@ -12,10 +12,20 @@ import type { NativeRootTextTemplateGraphInput } from './native-root-text-templa
 // fields. Keep this explicit until the older general mock adopts that API.
 export function nativeTextBindings(figma: any) {
   const create = figma.createText.bind(figma);
-  figma.createText = () => {
-    const node = create(), bind = node.setBoundVariable.bind(node);
+  figma.createText = () => nativeTextNodeBindings(create());
+}
+/** The general mock clones native text once. Apply the same measured live
+ * binding behavior to a retained instance child for update tests. */
+export function nativeTextNodeBindings(node: any, resolve?: (id: string) => any) {
+    const bind = node.setBoundVariable.bind(node);
     delete node.clipsContent; // TextNode has no frame clipping field.
     const linked = new Map<string, any>();
+    for (const field of ['fontSize', 'fontWeight', 'lineHeight']) {
+      const bindings = node.boundVariables[field];
+      const alias = Array.isArray(bindings) && bindings.length === 1 ? bindings[0] : bindings;
+      const variable = alias?.type === 'VARIABLE_ALIAS' && resolve?.(alias.id);
+      if (variable) linked.set(field, variable);
+    }
     for (const field of ['fontSize', 'fontWeight', 'lineHeight']) {
       const storage = field === 'fontSize' ? '_fontSize' : field;
       let fallback = node[storage];
@@ -54,7 +64,6 @@ export function nativeTextBindings(figma: any) {
       }
     };
     return node;
-  };
 }
 
 export function nativeTextGraphFixture(sizes = 10, colors = 10) {

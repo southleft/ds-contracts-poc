@@ -139,10 +139,13 @@ component values while retaining the original allocated identities. An
 engineering writer now rechecks the complete component and document-wide
 consumers synchronously before assigning existing variable values. Its tests
 cover interruption, stale retries, intervening edits, unchanged repetition
-and reversal. A live read-only preflight refused an unobserved instance
-consumer before attempting any assignment. Verified caller admission,
-application delivery and interrupted-write settlement remain unfinished;
-the application continues to refuse template updates.
+and reversal. Existing caller observations now admit only their verified
+instance subtrees; missing records or intervening caller edits refuse. A live
+read-only preflight passed for five main variants and their recorded caller,
+with independently verified unchanged observations and no assignments.
+Application source succession, delivery, interrupted-write settlement and
+updated visual/layout qualification remain unfinished; the application
+continues to refuse template updates.
 
 Conversion stays deterministic and needs no AI at runtime: readers, compilers, writers and verifiers are pure functions of authenticated inputs, and every result above is reproducible from its recorded evidence.
 
