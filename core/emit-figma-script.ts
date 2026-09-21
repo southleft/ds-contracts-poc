@@ -162,7 +162,7 @@ export interface NodeSpec {
   strokeOutside?: boolean;
   /** The public Part model carries only false, for a stroke outside layout.
    *  Internally true also enables explicit CSS border-box layout when a
-   *  uniform state width replaces literal resting sides. Native defaults
+   *  uniform state width replaces literal or bound resting sides. Native defaults
    *  have differed between the older census and the current Desktop probe;
    *  this transition must write its layout policy instead of relying on one. */
   strokesIncludedInLayout?: boolean;
@@ -3398,10 +3398,10 @@ function applyStyling(
   // outline, token or literal, this combo or another), so it is read here,
   // beside the other spec-level facts, and not in the stroke cases above.
   if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
-  // A state shorthand replacing literal side widths needs border-box layout
+  // A state shorthand replacing literal or bound side widths needs border-box layout
   // on both resting and state frames. An absent native flag defaults false;
   // the contract's ordinary CSS border includes those widths in layout.
-  else if (spec.lits?.strokeSides && (
+  else if ((spec.lits?.strokeSides || ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'].some(field => spec.bindings?.[field] !== undefined)) && (
     Object.values(part.states ?? {}).some(state => state['border-width'] !== undefined) ||
     (part.statesByProp ?? []).some(entry => Object.values(entry.map).some(state => state['border-width'] !== undefined))
   )) {
@@ -8087,7 +8087,7 @@ function buildSyncScript(
   const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
   const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
   // Include layout writes only for an explicit outside-layout part or a
-  // state width replacing literal sides. Other scripts retain their bytes.
+  // state width replacing literal or bound sides. Other scripts retain their bytes.
   const hasStrokeOutsideLayout = featureDatas.some((d) => dataSome(d, (x) => x.strokesIncludedInLayout !== undefined));
   // dump v1.36: same discipline — a contract with no whole-pixel text box
   // emits the runtime it always did (createText is born WIDTH_AND_HEIGHT).

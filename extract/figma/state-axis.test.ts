@@ -312,6 +312,7 @@ async function canvas(tokens: Record<string, unknown>, perSideStrokes = false) {
     const create = figma.createComponent as () => Record<string, unknown>;
     figma.createComponent = () => {
       const node = create();
+      node.strokesIncludedInLayout = false; // Exercise a retained outside-layout value; the writer must opt in.
       const sides: Record<string, number> = { Top: 1, Right: 1, Bottom: 1, Left: 1 };
       for (const side of Object.keys(sides)) Object.defineProperty(node, `stroke${side}Weight`, {
         configurable: true, get: () => sides[side], set: (value: number) => { sides[side] = value; },
@@ -812,4 +813,37 @@ test('uniform state stroke recovery refuses unsupported alignment, layout, incom
     assert.equal(c.anatomy.root.declaredStates?.['focus-visible']?.['border-style'], undefined);
     assert.ok(r.notes.some(n => n.includes('only a captured uniform INSIDE state stroke')));
   }
+});
+
+
+test('uniform state widths retain border-box layout when resting sides are token-bound', async () => {
+  const first = exact(uniformStrokeStateSet('BoundRestingSides'));
+  const c = ContractSchema.parse(first.contract);
+  const root = c.anatomy.root;
+  const tokens = { ...first.mintedTokens!.tree, reviewWidth: {
+    zero: { $type: 'dimension', $value: '0px' }, two: { $type: 'dimension', $value: '2px' },
+  } };
+  for (const side of ['top', 'right', 'bottom', 'left']) {
+    const channel = `border-${side}-width`;
+    delete root.literals![channel];
+    root.tokens![channel] = side === 'bottom' ? '{reviewWidth.two}' : '{reviewWidth.zero}';
+  }
+  const { write, read } = await canvas(tokens, true);
+  const native = await read(await write(c));
+  for (const v of native.variants) {
+    assert.equal(v.strokesIncludedInLayout, true, 'bound sides have the same CSS layout policy as literal sides');
+    if (v.name.includes('State=Focus Visible')) {
+      assert.equal(v.strokeWeight, 2);
+      assert.equal(v.strokeWeights, undefined);
+      assert.ok(v.bound?.strokeWeight);
+      for (const side of ['Top', 'Right', 'Bottom', 'Left']) assert.equal(v.bound?.[`stroke${side}Weight`], undefined);
+    } else {
+      assert.deepEqual(v.strokeWeights, { top: 0, right: 0, bottom: 2, left: 0 });
+      assert.equal(v.bound?.strokeBottomWeight, 'reviewWidth/two');
+    }
+  }
+  // A contradictory explicit outside-layout declaration still refuses.
+  const outside = structuredClone(c); outside.id += '-outside'; outside.name += 'Outside';
+  outside.anatomy.root.strokesIncludedInLayout = false;
+  await assert.rejects(() => write(outside), /strokesIncludedInLayout: false together with border-style/);
 });
