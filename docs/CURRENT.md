@@ -114,6 +114,10 @@ The same capture now imports in the app, repeats identically, and produces
 byte-identical installable archives. The unchanged installed component matches
 captured paint and height in all 100 combinations. Its missing text styling
 still produces the wrong caller widths and text colors.
+A separate live variable-mode control exposed color loss despite unchanged
+binding IDs. Joint paint return now refuses differing captured modes until
+each consuming node mode can be corroborated; the probe restored its original
+binding, mode and image exactly.
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 

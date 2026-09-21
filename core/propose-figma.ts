@@ -2248,6 +2248,8 @@ interface Ctx {
    *  variant's ref still resolves here, so the paint survives as per-variant
    *  minted literals instead of dropping entirely. */
   capturedValues?: Map<string, string>;
+  /** Joint paint cannot recover each consumer mode from the current dump. */
+  capturedPaintModeConflicts?: ReadonlySet<string>;
   /** instanceKey → exported stub-glyph asset (iteration 8) — see the
    *  proposeFromDump option of the same name. */
   iconAssets?: ReadonlyMap<string, StubIconAsset>;
@@ -2872,7 +2874,11 @@ function unifyPaint(
     if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&
        paints.every(p=>jointPaintAlphaMatches(p.paint,ctx))){
       const joint=unifyJointPaintRefs(paints.map(p=>({variant:p.variant,path:dotPath(p.paint!.var!)})),ctx.axes);
-      if(joint)return joint;
+      if(joint){
+        const conflicts=[...new Set(paints.map(p=>dotPath(p.paint!.var!)).filter(path=>ctx.capturedPaintModeConflicts?.has(path)))].sort();
+        if(conflicts.length)throw Error(`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED: ${where} ${paintName}: ${conflicts.join(', ')} has differing or unavailable captured mode values; each consuming node mode is not captured`);
+        return joint;
+      }
     }
     // @door propose.bound-paint-drift-to-mint
     // refs refuse unification (mixed segment depth, or a function of more
@@ -11707,6 +11713,10 @@ function proposeFromDumpFenced(
      *  per-variant minted literals (live-gauntlet class ①) instead of
      *  dropping the channel. Absent → the classic drift note stands. */
     capturedValues?: Map<string, string>;
+    /** Captured color paths with differing or unavailable modes. The batch
+     *  entry derives these from the raw dump and cannot be overridden away.
+     *  A set-only caller must supply known mode conflicts with its corpus. */
+    capturedPaintModeConflicts?: ReadonlySet<string>;
     /** ITERATION 8 — stub glyph carriage: instanceKey → exported SVG asset
      *  (assets/icons/<asset>.svg, exported at 1x from the stub source's MAIN
      *  component; the caller loads the export manifest). When every observed
@@ -12235,6 +12245,7 @@ function proposeFromDumpFenced(
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
+    capturedPaintModeConflicts: opts.capturedPaintModeConflicts,
     iconAssets: opts.iconAssets,
     instanceOverrides: opts.instanceOverrides,
     prefix,
@@ -13654,6 +13665,24 @@ export function proposeBatchFromDump(
   const capturedValues =
     opts.capturedValues ??
     new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+  // The dump stores one value per variable name, not the selected mode of
+  // each consuming node. A joint table must not flatten differing modes.
+  // Inspect the raw table so malformed mode values cannot disappear during
+  // captured-token registration, and union caller evidence rather than let
+  // an explicit capturedValues index erase this refusal.
+  const capturedPaintModeConflicts = new Set(opts.capturedPaintModeConflicts ?? []);
+  const capturedVariables = dump._variables;
+  if (capturedVariables && typeof capturedVariables === 'object' && !Array.isArray(capturedVariables)) {
+    for (const [name, raw] of Object.entries(capturedVariables)) {
+      if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
+      const variable = raw as Record<string, unknown>;
+      if (variable.type !== 'COLOR' || !Object.hasOwn(variable, 'modes')) continue;
+      const modes = variable.modes;
+      if (!modes || typeof modes !== 'object' || Array.isArray(modes) ||
+          !Object.keys(modes).length || Object.values(modes).some(value => value !== variable.value))
+        capturedPaintModeConflicts.add(dotPath(name));
+    }
+  }
   // Session-link siblings in THIS dump: a later Card-Image sees Avatar
   // proposed earlier. Without this, Path A batches mint string "true"/"false"
   // against a child that is BOOLEAN and generateTsx refuses (Eventz/CBDS).
@@ -13754,6 +13783,7 @@ export function proposeBatchFromDump(
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     capturedValues,
+    capturedPaintModeConflicts,
     contractIdByName,
     contractsById,
     contractIdByKey,

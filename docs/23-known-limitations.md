@@ -7897,6 +7897,24 @@ original PNG bytes, native caller dimensions and successful app import. This
 proves the bounded opacity refusal and restoration; it does not qualify general
 native update synchronization.
 
+**AGENT decision — selected variable modes, 2026-09-21.** A live four-swatch
+control shares one bound color between two mains. Changing only the second
+main's collection mode changes its drawn color from `#141e28` to `#c80ab4`,
+while the current canonical dump still gives that variable one default value.
+Before this correction, both captures produced the same accepted joint paint
+table. The inverse now refuses a joint table whose referenced captured colors
+have differing or unavailable mode values with
+`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED`. Identical captured mode values remain
+supported. Raw mode evidence cannot be erased by an explicit value index.
+This conservative refusal also applies when all observed consumers happen to
+use the base mode: the capture does not corroborate their individual choices.
+Set-only callers must supply known mode conflicts alongside their corpus.
+The probe's original binding, mode and PNG were restored exactly; the new
+page, IDs, failed first fixture setup and both captures remain in
+`joint-paint-mode-review-20260921/`. Revisit this refusal only when the capture
+and inverse preserve each consuming mode, including aliases and theme
+interactions. Removing it without that evidence repeats the measured loss.
+
 To reverse, remove the optional schema field, shared resolver/referee, fuser and
 inverse admission, and all emitter/resource consumers together; restore the
 D.95 overflow expectation for these pairs. Preserve the failed native run,

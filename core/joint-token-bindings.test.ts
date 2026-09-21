@@ -268,3 +268,27 @@ test('transparent bound colors use captured variable alpha without discarding a 
   assert.ok(!r.proposals.some(p=>ContractSchema.parse(p.contract).anatomy.root.tokensByCombination?.some(t=>t.rows.some(row=>'background-color'in row.tokens))));
  }
 });
+
+
+test('joint paint refuses uncorroborated native consumer modes without flattening the captured palette',async()=>{
+ const {captureAll}=await nativeFixture(seed()),dump=await captureAll() as any;
+ const options={corpus:tokenCorpusFromJson({primitives:tokens.primitives,semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map<string,string>(),fileKey:null,projectionMode:'exact' as const,mintUnbound:true};
+ const variable=dump._variables['palette/p00'],value=variable.value;
+ variable.modes={Base:value,Alternate:value};
+ const original=JSON.stringify(dump);
+ assert.equal(ContractSchema.parse(proposeBatchFromDump(dump,options).proposals[0].contract).anatomy.root.tokensByCombination?.[0].rows.length,9);
+ assert.equal(JSON.stringify(dump),original);
+ for(const modes of [{Base:value,Alternate:'#c80ab4'},{Base:value,Alternate:'#141e2800'},{Base:value,Alternate:20},{},null,[],{Base:value,Alternate:{type:'VARIABLE_ALIAS',id:'unresolved'}}]){
+  const changed=structuredClone(dump);changed._variables['palette/p00'].modes=modes;
+  const before=JSON.stringify(changed);
+  for(const overrides of [{},{capturedValues:new Map(Object.entries(dump._variables).map(([name,v]:[string,any])=>[name.replaceAll('/','.'),v.value])),capturedPaintModeConflicts:new Set<string>()}]){
+   const result=proposeBatchFromDump(changed,{...options,...overrides});
+   assert.equal(result.proposals.length,0);assert.equal(result.skipped.length,1);
+   assert.match(result.skipped[0].reason,/FIGMA_JOINT_PAINT_MODE_UNCORROBORATED/);
+  }
+  assert.equal(JSON.stringify(changed),before);
+ }
+ // A conflict on an unused variable does not refuse a complete single-mode table.
+ const unused=structuredClone(dump);unused._variables['palette/unused']={type:'COLOR',value,modes:{Base:value,Alternate:'#c80ab4'}};
+ assert.equal(proposeBatchFromDump(unused,options).proposals.length,1);
+});
