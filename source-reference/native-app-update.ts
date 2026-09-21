@@ -42,6 +42,20 @@ export function prepareNativeTemplateAppUpdate(template:NativeTemplateUpdateProp
   templates.set(key,{bytes,input:structuredClone(input),update:structuredClone(update)});
   return update;
 }
+/** Select source representations from a freshly authenticated compiler result.
+ * The rendered native component has selector aliases and ownership stamps;
+ * template value planning needs the unaliased graph input instead. */
+export function nativeAppUpdateDesired(compiled:{revision:string;plan:{
+  component:NativeAppUpdateInput['desired']['component'];
+  tokenInput:NativeAppUpdateInput['desired']['tokenInput'];
+  templateGraph?:{input:NativeTemplateComponentUpdateInput['desired']};
+}}) {
+  if(compiled.revision!==revisionOf(compiled.plan))throw Error('native-update-compiled-source-changed');
+  const templateGraph=compiled.plan.templateGraph?.input;
+  if(templateGraph&&!same(templateGraph.tokens,compiled.plan.tokenInput))throw Error('native-update-template-source-invalid');
+  return structuredClone({desired:{component:templateGraph?.component??compiled.plan.component,
+    revision:compiled.revision,tokenInput:compiled.plan.tokenInput},...(templateGraph?{templateGraph}:{})});
+}
 export type NativeTemplateAppUpdatePlan=ReturnType<typeof prepareNativeTemplateAppUpdate>['plan'];
 export type NativeAppUpdatePlan=legacy.NativeContractUpdatePlan|NativeTemplateAppUpdatePlan;
 export function prepareNativeAppUpdate(input:NativeAppUpdateInput):{plan:NativeAppUpdatePlan;revision:string} {

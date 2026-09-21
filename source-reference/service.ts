@@ -1,3 +1,4 @@
+import {nativeAppUpdateDesired} from './native-app-update.js';
 import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { createNativeSourceSuccessions } from './native-source-succession.js';
@@ -786,12 +787,11 @@ export function createReferenceService(
       // unchanged source this equals the content-derived name.
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })
       : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source), operation: baseline.input.operation });
-    const templateGraph='templateGraph' in desired.plan?desired.plan.templateGraph?.input:undefined;
+    const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
     const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins):undefined;
     return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {
       before: baseline.input, baseline: baseline.receipt,
-      desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
-      ...(templateGraph?{templateGraph}:{}),
+      ...desiredInput,
     } };
   }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id),
   (id,pins)=>nativeJobs.reactTemplateConsumerBaselines(id,pins).currentRevision);
