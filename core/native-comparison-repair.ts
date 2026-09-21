@@ -32,6 +32,7 @@ export function prepareNativeComparisonFrameRepair(input:NativeContractCompariso
   return {...plan,revision:revisionOf(plan)};
 }
 export function prepareNativeComparisonRepair(input:NativeContractComparisonObservationInput,receipt:unknown):NativeComparisonRepairPlan {
+  if (input.comparison.textTemplate) fail('text-template-unqualified');
   const before=clean(receipt),after=structuredClone(before),p=input.comparison,c=input.creation;
   // The ordinary reader validates all source/main/token ownership after only
   // the specifically derived changes below. An arbitrary refused receipt is

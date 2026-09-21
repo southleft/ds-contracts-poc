@@ -17,7 +17,7 @@
  * Rules (bounded, named, never guessed):
  *   · COLOR → { $value: '#rrggbb[aa]', $type: 'color' }
  *   · FLOAT → '<n>px' / $type dimension — Figma lengths are px — EXCEPT
- *     variables the dump shows bound to node `opacity`, which stay unitless
+ *     variables observed on node `opacity` or native `fontWeight`, which stay unitless
  *     ('<n>' / $type number)
  *   · STRING / BOOLEAN → no CSS custom-property projection; SKIPPED by name
  *   · a name outside the token-ref grammar ([a-z0-9.-] after slash→dot) is
@@ -30,6 +30,7 @@
  * Pure module (no node:* imports) — part of the browser-importable core.
  */
 import { isDumpSet, type DumpNode, type DumpVariable } from '../extract/figma/types.js';
+import { projectRootTextTemplateAliases, type TemplateSourceToken } from './figma-template-aliases.js';
 
 export interface CapturedTokenEntry {
   /** Dot-form token path ("bg.brand.default") — what refs resolve through. */
@@ -40,6 +41,8 @@ export interface CapturedTokenEntry {
   value: string;
   /** DTCG $type ('color' | 'dimension' | 'number'). */
   type: string;
+  /** Verified original source alias; value remains its captured CSS literal. */
+  reference?: string;
   /** Per-mode CSS-value spellings, keyed by MODE NAME (dump v1.6) — present
    *  only when the variable's collection is multi-mode and the mode value
    *  spells with the entry's own type rule. The §3 channel: a promoted theme
@@ -97,7 +100,7 @@ function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown>
     const segs = e.path.split('.');
     let node = tree;
     for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
-    node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
+    node[segs[segs.length - 1]] = { $value: e.reference ?? e.value, $type: e.type };
   }
   return tree;
 }
@@ -109,15 +112,37 @@ function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown>
  * the degraded fallback, exactly as before.
  */
 export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedTokenLayer | null {
-  const vars = dump['_variables'] as Record<string, DumpVariable> | undefined;
-  if (!vars || typeof vars !== 'object' || Array.isArray(vars) || Object.keys(vars).length === 0) {
+  const rawVars = dump['_variables'] as Record<string, DumpVariable> | undefined;
+  if (!rawVars || typeof rawVars !== 'object' || Array.isArray(rawVars) || Object.keys(rawVars).length === 0) {
     return null;
   }
+  const vars = { ...rawVars }, sourceTokens: TemplateSourceToken[] = [], templateSkips: CapturedTokenSkip[] = [];
+  for (const value of Object.values(dump)) if (isDumpSet(value)) {
+    try {
+      const projected = projectRootTextTemplateAliases(value);
+      if (projected) {
+        sourceTokens.push(...projected.tokens);
+        for (const name of projected.syntheticNames) delete vars[name];
+      }
+    } catch (error) {
+      templateSkips.push({ name: value.setName, reason: error instanceof Error ? error.message : String(error) });
+    }
+  }
 
-  // Variables bound to node `opacity` anywhere in the dump stay unitless.
+  // Variables bound to opacity or a captured native font weight stay unitless.
   const opacityVars = new Set<string>();
+  const weightVars = new Set<string>(), dimensionVars = new Set<string>();
+  const observedIdentities = new Map<string, Set<string>>();
   const walk = (n: DumpNode) => {
+    for (const [id, c] of Object.entries(n.variableConsumers ?? {})) {
+      if (!c || typeof c.name !== 'string') continue;
+      const ids = observedIdentities.get(c.name) ?? new Set<string>(); ids.add(id); observedIdentities.set(c.name, ids);
+    }
     if (n.bound?.opacity) opacityVars.add(n.bound.opacity);
+    if (n.text?.fontWeightVar && n.text.fontWeight !== undefined) weightVars.add(n.text.fontWeightVar);
+    for (const [field, name] of Object.entries(n.bound ?? {})) if (field !== 'opacity') dimensionVars.add(name);
+    if (n.text?.fontSizeVar) dimensionVars.add(n.text.fontSizeVar);
+    if (n.text?.lineHeightVar) dimensionVars.add(n.text.lineHeightVar);
     for (const c of n.children ?? []) walk(c);
   };
   for (const value of Object.values(dump)) {
@@ -132,10 +157,14 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     Object.keys(vars).map((name) => foldVariablePath(name)).filter((f) => !f.folded).map((f) => f.path),
   );
   const entries: CapturedTokenEntry[] = [];
-  const skipped: CapturedTokenSkip[] = [];
+  const skipped: CapturedTokenSkip[] = templateSkips;
   const claimedFolded = new Set<string>();
   for (const [name, cap] of Object.entries(vars)) {
     if (!cap || typeof cap !== 'object') continue;
+    if (weightVars.has(name) && dimensionVars.has(name)) {
+      skipped.push({ name, reason: 'native font weight and dimension share one variable — incompatible CSS units; not registered' });
+      continue;
+    }
     const { path, folded } = foldVariablePath(name);
     if (folded && (unfoldedPaths.has(path) || claimedFolded.has(path))) {
       skipped.push({
@@ -176,7 +205,7 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
       const modes = modesOf((v) => (typeof v === 'string' ? v : null));
       entries.push({ path, name, value: cap.value, type: 'color', ...(modes ? { modes } : {}) });
     } else if (cap.type === 'FLOAT' && typeof cap.value === 'number') {
-      const unitless = opacityVars.has(name);
+      const unitless = opacityVars.has(name) || weightVars.has(name);
       const modes = modesOf((v) => (typeof v === 'number' ? (unitless ? String(v) : `${v}px`) : null));
       entries.push(
         unitless
@@ -188,6 +217,29 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
         name,
         reason: `resolved type ${String(cap.type)} has no CSS custom-property projection — not registered`,
       });
+    }
+  }
+
+  // Carrier variables are implementation details. Selected source identities
+  // contribute their original definitions; a collision refuses all claimants.
+  const sourcePaths = new Map<string, TemplateSourceToken>(), conflicted = new Set<string>();
+  for (const token of sourceTokens) {
+    const existing = sourcePaths.get(token.path), global = entries.find(e => e.path === token.path);
+    if ([...(observedIdentities.get(token.name) ?? [])].some(id => id !== token.id) ||
+        existing && (existing.id !== token.id || existing.name !== token.name || existing.type !== token.type ||
+        existing.value !== token.value || existing.reference !== token.reference) ||
+        global && (global.name !== token.name || global.type !== token.type || global.value !== token.value ||
+          global.modes && Object.values(global.modes).some(v => v !== token.value))) conflicted.add(token.path);
+    sourcePaths.set(token.path, token);
+  }
+  for (const [path, token] of sourcePaths) {
+    const index = entries.findIndex(e => e.path === path);
+    if (index >= 0) entries.splice(index, 1);
+    if (conflicted.has(path)) {
+      skipped.push({ name: token.name, reason: 'original template source token has conflicting native identities or values; not registered' });
+    } else {
+      const { id: _id, ...entry } = token;
+      entries.push(entry);
     }
   }
 

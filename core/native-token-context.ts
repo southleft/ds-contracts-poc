@@ -18,7 +18,16 @@ type PlannedValue =
   | Exclude<NativeTokenValue, { type: "VARIABLE_ALIAS"; id: string }>
   | { type: "TOKEN_ALIAS"; targetPath: string; targetName: string };
 
+export interface NativeTokenModeSelection {
+  /** A host-derived native variant projection; never a source theme/brand. */
+  planRevision: string;
+  modeKey: string;
+}
+
 export interface NativeTokenContextInput {
+  /** Explicit opt-in to create all planned native modes. Does not authorize
+   * updates, inferred source modes, component bindings or application dispatch. */
+  writeProtocol?: 'explicit-modes-v1';
   fileKey: string;
   /** Host-owned operation scope, never a library collection's display name. */
   scopeId: string;
@@ -33,11 +42,13 @@ export interface NativeTokenContextInput {
   };
   /** Exact requested paths. Alias dependencies are added, never same-value peers. */
   tokenPaths: string[];
-  /** Only demonstrated source modes. Dark-only input produces one Dark mode. */
+  /** Only demonstrated source modes. A nativeSelection distinguishes physical
+   * variant modes of the same source context without inventing source themes. */
   modes: {
     sourceMode: string;
     brand: string;
     nativeModeName: string;
+    nativeSelection?: NativeTokenModeSelection;
     tokens: Record<string, unknown>;
     tokenTreeRevision: string;
   }[];
@@ -57,8 +68,13 @@ export interface NativeTokenContextInput {
   /** Value-history support only, not write authority. Absent on historical
    * inputs. A new bounded geometry writer must separately prove consumers. */
   allocatedValueProtocol?: "px-dimension-v1";
+  /** Original allocation input for a verified additive allocation. This is
+   * evidence, not permission to discover or create IDs. It has no history of
+   * its own; restoring later values must reproduce this base plus number leaves. */
+  allocationBase?: NativeTokenContextInput;
 }
 export interface NativeTokenPreparation {
+  writeProtocol?: 'explicit-modes-v1';
   version: 1;
   status: "prepared-candidate";
   acceptedContract: null;
@@ -76,6 +92,7 @@ export interface NativeTokenPreparation {
     sourceMode: string;
     brand: string;
     nativeModeName: string;
+    nativeSelection?: NativeTokenModeSelection;
     tokenTreeRevision: string;
     /** The shared compiler's rows, with alias dependencies ordered first. */
     rows: TokenSetRow[];
@@ -84,7 +101,7 @@ export interface NativeTokenPreparation {
     tokenPath: string;
     name: string;
     resolvedType: NativeType;
-    values: { sourceMode: string; brand: string; value: PlannedValue }[];
+    values: { sourceMode: string; brand: string; nativeSelection?: NativeTokenModeSelection; value: PlannedValue }[];
   }[];
   /** The ALLOCATION revision: what ownership metadata was stamped with. With
    * `allocatedValues` it is NOT a hash of this body's current values: two value
@@ -100,7 +117,13 @@ export interface NativeTokenIdentity {
   preparationRevision: string;
   fileKey: string;
   collection: { id: string; key: string; name: string };
-  modes: { sourceMode: string; brand: string; modeId: string; name: string }[];
+  modes: { sourceMode: string; brand: string; modeId: string; name: string; nativeSelection?: NativeTokenModeSelection }[];
+  variables: { tokenPath: string; id: string; key: string }[];
+  /** Independently verified, append-only collection allocation ledger. */
+  extensions?: NativeTokenExtensionIdentity[];
+}
+export interface NativeTokenExtensionIdentity {
+  revision: string;
   variables: { tokenPath: string; id: string; key: string }[];
 }
 export interface NativeTokenContextReceipt {
@@ -118,6 +141,7 @@ export interface NativeTokenContextReceipt {
     };
     defaultModeId: string;
     modes: { modeId: string; name: string }[];
+    extensions?: NativeTokenExtensionIdentity[];
   };
   variables: {
     id: string;
@@ -211,13 +235,18 @@ export function nativeTokenCollectionName(scopeId: string): string {
 export function prepareNativeTokenContext(
   input: NativeTokenContextInput,
 ): NativeTokenPreparation {
+  if (input?.writeProtocol !== undefined && input.writeProtocol !== 'explicit-modes-v1') fail('write-protocol');
+  if (input?.writeProtocol !== undefined && input.allocatedValues !== undefined) fail('explicit-modes-value-update-unqualified');
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValueProtocol !== "px-dimension-v1")
     fail("allocated-value-protocol");
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValues === undefined)
     fail("allocated-value-protocol-empty");
   const body = prepareBody(input);
-  if (input.allocatedValues === undefined)
-    return clone({ ...body, revision: revisionOf(body) });
+  if (input.allocatedValues === undefined) {
+    const revision = input.allocationBase === undefined ? revisionOf(body) :
+      verifyAllocationExtension(input, body);
+    return clone({ ...body, revision });
+  }
   // A value succession. Re-derive the allocation by restoring the recorded
   // leaves; everything except a non-alias scalar value must be identical.
   const allocation = prepareNativeTokenContext(restoreAllocatedValues(input));
@@ -313,6 +342,70 @@ function restoreAllocatedValues(
   return restored;
 }
 
+/** Preserve the allocation-time input even after value or allocation updates.
+ * A caller still needs an independently verified native identity and receipt. */
+export function nativeTokenAllocationBase(input: NativeTokenContextInput): NativeTokenContextInput {
+  prepareNativeTokenContext(input);
+  if (input.allocationBase) return clone(input.allocationBase);
+  return input.allocatedValues ? restoreAllocatedValues(input) : clone(input);
+}
+
+function verifyAllocationExtension(input: NativeTokenContextInput,
+  body: Omit<NativeTokenPreparation, 'revision'>): string {
+  const base = input.allocationBase!;
+  if (!base || base.allocationBase !== undefined || base.allocatedValues !== undefined ||
+      base.allocatedValueProtocol !== undefined || base.writeProtocol !== undefined || input.writeProtocol !== undefined)
+    fail('allocation-base-invalid');
+  const original = prepareNativeTokenContext(base);
+  const header = (i: NativeTokenContextInput) => ({fileKey:i.fileKey,scopeId:i.scopeId,source:i.source,
+    modes:i.modes.map(({tokens: _tokens,tokenTreeRevision: _revision,...mode})=>mode)});
+  if (!same(header(base),header(input))) fail('allocation-base-context');
+  const added = input.tokenPaths.filter(p=>!base.tokenPaths.includes(p)).sort();
+  if (!added.length || base.tokenPaths.some(p=>!input.tokenPaths.includes(p))) fail('allocation-base-paths');
+  // Check the actual trees, including unrequested leaves and metadata. Flattening
+  // alone would lose a changed group/type or accept a newly hidden sibling.
+  const inspect = (old: Record<string,unknown> | undefined, current: Record<string,unknown>, prefix:string[]) => {
+    if (old && Object.hasOwn(old,'$value')) {
+      if (!same(old,current)) fail('allocation-base-leaf-changed');
+      return;
+    }
+    if (!old && Object.hasOwn(current,'$value')) {
+      if (!added.includes(prefix.join('.')) || Object.keys(current).some(k=>!['$type','$value'].includes(k)) ||
+          (current.$type !== undefined && current.$type !== 'number')) fail('allocation-added-leaf');
+      return;
+    }
+    for (const [key,value] of Object.entries(old ?? {})) {
+      if (!Object.hasOwn(current,key)) fail('allocation-base-tree-changed');
+      if (key.startsWith('$') && !same(value,current[key])) fail('allocation-base-tree-changed');
+    }
+    for (const [key,value] of Object.entries(current)) {
+      if (key.startsWith('$')) {
+        if (!old && !(key==='$type' && value==='number')) fail('allocation-added-metadata');
+        if (old && !Object.hasOwn(old,key)) fail('allocation-base-tree-changed');
+      } else {
+        if (!value || typeof value!=='object' || Array.isArray(value)) fail('allocation-added-tree');
+        inspect(old?.[key] as Record<string,unknown>|undefined,value as Record<string,unknown>,[...prefix,key]);
+      }
+    }
+    if (!old && !Object.keys(current).some(k=>!k.startsWith('$'))) fail('allocation-added-empty');
+  };
+  input.modes.forEach((mode,i)=>inspect(base.modes[i].tokens,mode.tokens,[]));
+  for (const path of added) {
+    if (base.modes.some(m=>flattenTokens(m.tokens).has(path))) fail('allocation-added-existing-path');
+    if (input.modes.some(m=>{
+      const leaf=flattenTokens(m.tokens).get(path);
+      return !leaf || leaf.type!=='number' || aliasTarget(leaf.value)!==null;
+    })) fail('allocation-added-type');
+    const variable=body.variables.find(v=>v.tokenPath===path);
+    if (!variable || variable.resolvedType!=='FLOAT' || variable.values.some(v=>typeof v.value!=='number' || !Number.isFinite(v.value)))
+      fail('allocation-added-type');
+  }
+  if (original.variables.some(v=>!same(v,body.variables.find(n=>n.tokenPath===v.tokenPath))) ||
+      body.variables.length!==original.variables.length+added.length ||
+      !same(original.dependencyTokenPaths,body.dependencyTokenPaths)) fail('allocation-base-variables');
+  return original.revision;
+}
+
 function prepareBody(
   input: NativeTokenContextInput,
 ): Omit<NativeTokenPreparation, "revision"> {
@@ -337,8 +430,17 @@ function prepareBody(
     input.modes.map((m) => m.nativeModeName),
     "mode-name-ambiguous",
   );
+  const selections = input.modes.map(m => m.nativeSelection);
+  if (selections.some(s => s !== undefined)) {
+    if (input.writeProtocol !== 'explicit-modes-v1' || selections.some(s => !s ||
+        Object.keys(s).sort().join('|') !== 'modeKey|planRevision' ||
+        !/^sha256:[a-f0-9]{64}$/.test(s.planRevision) || !/^sha256:[a-f0-9]{64}$/.test(s.modeKey)) ||
+        new Set(selections.map(s => s!.planRevision)).size !== 1 ||
+        new Set(input.modes.map(m => JSON.stringify([m.sourceMode, m.brand]))).size !== 1)
+      fail('native-mode-selection');
+  }
   unique(
-    input.modes.map((m) => JSON.stringify([m.sourceMode, m.brand])),
+    input.modes.map((m) => JSON.stringify([m.sourceMode, m.brand, m.nativeSelection?.modeKey])),
     "source-mode-ambiguous",
   );
   const requestedTokenPaths = [...input.tokenPaths].sort();
@@ -425,6 +527,7 @@ function prepareBody(
       sourceMode: mode.sourceMode,
       brand: mode.brand,
       nativeModeName: mode.nativeModeName,
+      ...(mode.nativeSelection ? { nativeSelection: clone(mode.nativeSelection) } : {}),
       tokenTreeRevision: mode.tokenTreeRevision,
       rows: ordered,
     };
@@ -448,7 +551,7 @@ function prepareBody(
               targetName: row.target,
             }
           : row.light;
-      return { sourceMode: mode.sourceMode, brand: mode.brand, value };
+      return { sourceMode: mode.sourceMode, brand: mode.brand, ...(mode.nativeSelection ? { nativeSelection: clone(mode.nativeSelection) } : {}), value };
     });
     return { tokenPath, name, resolvedType: resolvedType!, values };
   });
@@ -458,6 +561,7 @@ function prepareBody(
     acceptedContract: null,
     nativeQualification: "unqualified",
     valueComparison: "exact-or-float32-color-v1",
+    ...(input.writeProtocol ? { writeProtocol: input.writeProtocol } : {}),
     fileKey: input.fileKey,
     scopeId: input.scopeId,
     collectionName,
@@ -525,6 +629,20 @@ export function verifyNativeTokenContextReceipt(args: {
       })
     )
       fail("collection-ownership");
+    if (args.input.allocationBase) {
+      if (!Array.isArray(expected.extensions) || !expected.extensions.length || !same(expected.extensions,collection.extensions))
+        fail('allocation-ledger');
+      const basePaths=new Set(prepareNativeTokenContext(args.input.allocationBase).variables.map(v=>v.tokenPath));
+      const additions=expected.extensions.flatMap(e=>{
+        if (!/^sha256:[0-9a-f]{64}$/.test(e.revision) || !Array.isArray(e.variables) || !e.variables.length)
+          fail('allocation-ledger');
+        return e.variables;
+      });
+      unique(expected.extensions.map(e=>e.revision),'allocation-ledger');
+      unique(additions.map(v=>v.tokenPath),'allocation-ledger');
+      if (!same([...additions].sort((a,b)=>a.tokenPath.localeCompare(b.tokenPath)),
+        expected.variables.filter(v=>!basePaths.has(v.tokenPath)).sort((a,b)=>a.tokenPath.localeCompare(b.tokenPath)))) fail('allocation-ledger');
+    } else if (expected.extensions!==undefined || collection.extensions!==undefined) fail('allocation-ledger-unexpected');
     if (
       !Array.isArray(expected.modes) ||
       expected.modes.length !== prep.modes.length ||
@@ -541,7 +659,7 @@ export function verifyNativeTokenContextReceipt(args: {
       if (
         native.sourceMode !== mode.sourceMode ||
         native.brand !== mode.brand ||
-        native.name !== mode.nativeModeName
+        native.name !== mode.nativeModeName || !same(native.nativeSelection ?? null, mode.nativeSelection ?? null)
       )
         fail("mode-mapping");
     }

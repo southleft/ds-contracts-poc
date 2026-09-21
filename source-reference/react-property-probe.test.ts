@@ -27,7 +27,7 @@ test('real React property experiments preserve context and distinguish delivered
   const registry=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');
   const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[${registry}];flushSync(()=>createRoot(document.getElementById('mount')).render(<Surface><Toggle checked={false}/><Initial defaultChecked={false}/></Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
-  await page.setContent('<div id="mount"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.setContent('<style>body{margin:8.25px}</style><div id="mount"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
   const selector='#mount > section';
   const ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;assert.deepEqual(ownership.problems,[]);
   const id=(name:string)=>ownership.components.find(c=>c.source.exportName===name)!.id;
@@ -100,6 +100,17 @@ test('real React property experiments preserve context and distinguish delivered
   assert.ok(effects.rows.every(r=>r.status==='observed'&&r.restored),JSON.stringify(effects.rows));
   assert.equal(effects.rows[0].visibleChange,false);assert.equal(effects.rows[1].visibleChange,true);
   assert.ok(effects.rows[1].changedInstances?.some(i=>i.name==='Surface'&&i.channels.includes('padding-top')));
+  const baselineBounds=await page.locator(selector).boundingBox();
+  assert.ok(baselineBounds);
+  assert.equal(baselineBounds.x,8.25);assert.equal(baselineBounds.y,8.25);
+  for(const row of effects.rows){
+   const snapshot=JSON.parse(readFileSync(path.join(dir,'effects',row.id+'.json'),'utf8'));
+   assert.equal(row.propertyCaptureVersion,2);assert.equal(snapshot.propertyCaptureVersion,2);
+   assert.equal(row.boundsSha256,evidenceSha(JSON.stringify(snapshot.bounds)));
+   assert.equal(snapshot.boundsSha256,row.boundsSha256);
+   assert.equal(snapshot.bounds.x,baselineBounds.x);assert.equal(snapshot.bounds.y,baselineBounds.y);
+   assert.equal(snapshot.bounds.height,baselineBounds.height+(row.id==='1'?24:0),'changed padding is measured with each plane');
+  }
   assert.equal(evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})),image);
   const bad=structuredClone(ownership);bad.components[0].source.sourceSha256='0'.repeat(64);
   assert.throws(()=>planReactPropertyEffects(program,bad,tree,id('Surface')),/source-unqualified/);

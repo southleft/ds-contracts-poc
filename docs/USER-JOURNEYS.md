@@ -104,6 +104,40 @@ On a saved operation, **Prepare caller-content comparison** reads its original t
 
 **Update that existing state-API set:** after a source or observer change, reload the source and refresh its initial-state and simultaneous-input observations. If those checks are disabled, follow the current source with a supported existing root first. Choose **Follow the current source with the existing … state API**, then **Review compiler update**, **Prepare reviewed correction**, connect the companion using that correction's code, and **Apply and verify correction**. A running or failed experiment cannot authorize an update. A conflicting canvas value is named and left intact; after resolving it, **Inspect update again** runs a fresh preflight on the same proposal. The independent Switch opacity update, conflict, repeat and exact rollback are demonstrated in [D.73](23-known-limitations.md#d73-state-api-operations-follow-fresh-source-evidence-without-replacing-their-native-set). Bound-height and API changes remain refused. Earlier exports remain visible as historical evidence and are not paired with the current source.
 
+**Apply a reviewed design change to the original source (under qualification):**
+for an existing verified update, choose **Read design changes from the canvas**
+and **Prepare source repair preview**. This currently supports the bounded
+root-opacity edit described in [D.108](23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery).
+Review the module, generated CSS, state images and all configured caller
+examples, then choose **Apply reviewed change to original source**. Keep the
+same Sync Runner operation connected while the app checks the canvas, writes
+the reviewed files, validates all examples and checks the canvas again.
+
+Progress and recovery appear under **Source changes and recovery**, including
+after a page reload. Choose **Prepare Sync Runner connection**, then **Copy Sync
+Runner connection** (or select and copy the masked field) to copy the operation's
+connection for reconnection. **Apply / resume reviewed change** retries with a
+new canvas read. **Restore original source and CSS** restores those files and
+validates them; it leaves the Figma edit in place. After completion, **Load
+verified source** opens the resulting source reference. Unexpected source edits
+are preserved and refuse. The bounded opacity Apply, interruption before the
+write, completed-repeat behavior, exact source restoration and intervening
+source/canvas conflict refusals are demonstrated. A real failure after installing
+the module but before installing CSS also resumes through these controls. The
+completed module is retained; verification must still finish before the app
+claims success. Source restoration and the four temporary canvas edits were
+then independently verified back to the pre-test state. This is an IO-failure
+probe; process termination during file replacement remains unmeasured.
+To continue using an existing
+native set, trace the verified source, follow its saved root observation, inspect
+the required initial states, then choose **Follow the current source with the
+existing … states** and **Review compiler update**. This flow retains the same
+component operation and nodes; any remaining variable correction still requires
+preflight and independent readback. The bounded opacity journey demonstrates
+that succession and an unchanged repeat. Broader recovery and two-way acceptance
+remain under qualification. A preview alone never means the original files
+were updated.
+
 **Inspect a stateful child in its composition:** for the configured composed Card, open its saved caller-content review:
 
 1. Choose **Generate React composition** to review the nested component identities and any source-context differences.

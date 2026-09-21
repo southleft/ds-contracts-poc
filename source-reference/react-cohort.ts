@@ -35,6 +35,18 @@ export interface ReactCohort {
   /** Only a declared cohort: the `./`-relative modules its cases mount. The
    * build resolves each to a source file that the witnesses must pin. */
   mountedModules?: readonly string[];
+  /** Host-authenticated source repair provenance. Absent on historical cohorts.
+   * The expected source inventory excludes these private evidence files. */
+  witnessSuccession?: {revision:string;cohortRevision:string;evidenceFiles:Readonly<Record<string,string>>;
+    referenceFiles:Readonly<Record<string,string>>};
+}
+
+/** Frozen expectation inputs as data, for repair evidence identity. This does
+ * not change the identities of existing source references. */
+export function reactCohortWitnessSnapshot(cohort:ReactCohort){
+  return {declared:cohort.declared,source:cohort.source,theme:cohort.theme,entry:cohort.entry,
+    cases:cohort.cases,profiles:cohort.cases.map(c=>cohort.profile(c.id)),witnessFiles:cohort.witnessFiles,
+    negativeCaseIds:cohort.negativeCaseIds,declaration:cohort.declaration??null,mountedModules:cohort.mountedModules??null};
 }
 
 /** The cohort this application was first written around. Its entry bytes and
@@ -177,11 +189,12 @@ const strings = (value: unknown, required: boolean): value is Record<string, str
 type Witness = Omit<SourceProfile, "id" | "provenance" | "requiredTokens" | "fontFamily">;
 function witness(value: unknown): Witness {
   const problem = "witness-invalid";
-  const w = keys(value, ["path", "fontPath", "textContent", "associatedLabelText", "requiredStyles", "probes"], ["path", "requiredStyles"], problem);
+  const w = keys(value, ["path", "fontPath", "fontOrigin", "textContent", "associatedLabelText", "requiredStyles", "probes"], ["path", "requiredStyles"], problem);
   if (!selectors(w.path) || !strings(w.requiredStyles, true)) return refuse(problem);
   if (w.fontPath !== undefined && !selectors(w.fontPath)) refuse(problem);
+  if (w.fontOrigin !== undefined && w.fontOrigin !== "web") refuse(problem);
   if (w.associatedLabelText !== undefined && !label(w.associatedLabelText)) refuse(problem);
-  if (w.textContent !== undefined && (w.textContent !== "absent" || w.fontPath !== undefined || w.associatedLabelText !== undefined)) refuse(problem);
+  if (w.textContent !== undefined && (w.textContent !== "absent" || w.fontPath !== undefined || w.associatedLabelText !== undefined || w.fontOrigin !== undefined)) refuse(problem);
   const probes: NonNullable<SourceProfile["probes"]> = {};
   if (w.probes !== undefined) {
     if (!isRecord(w.probes) || Object.keys(w.probes).length > 16) refuse(problem);
@@ -210,6 +223,7 @@ function witness(value: unknown): Witness {
   return {
     path: w.path,
     ...(w.fontPath ? { fontPath: w.fontPath as string[] } : {}),
+    ...(w.fontOrigin === "web" ? { fontOrigin: "web" as const } : {}),
     ...(w.textContent === "absent" ? { textContent: "absent" as const } : {}),
     ...(w.associatedLabelText === undefined ? {} : { associatedLabelText: w.associatedLabelText as string }),
     requiredStyles: w.requiredStyles,

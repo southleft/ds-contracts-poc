@@ -5,6 +5,7 @@ import type { CapturedNode } from '../extract/computed/lib.js';
 import { compileObservedContent, recompileSavedObservedContent, type ObservedContentDraft } from './observed-content.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import type { NodeSpec } from '../core/emit-figma-script.js';
+import { reactRootTextCallerEvidence } from './react-root-text-caller.js';
 
 function fixture() {
   const tree: CapturedNode = { tag: 'button', classes: [], pseudo: {}, nodes: [{ t: 'text', v: 'Observed label' }], style: {
@@ -80,6 +81,33 @@ test('shared observed-content compilation carries text, painted font and styles 
   assert.equal(text?.fontStyle, 'Medium');
   assert.deepEqual(f, before);
   assert.deepEqual(compileObservedContent(f.tree, f.fonts), result);
+});
+
+test('root text inheritance requires the authenticated direct text run, not equal-looking descendant styles', () => {
+  const f = fixture(), content = compileObservedContent(f.tree, f.fonts);
+  const evidence = reactRootTextCallerEvidence(f.tree, content);
+  assert.equal(evidence.characters, 'Observed label');
+  assert.equal(evidence.contractRevision, revisionOf(content.contract));
+  assert.equal(evidence.treeRevision, revisionOf(f.tree));
+  for (const mutate of [
+    (tree: CapturedNode) => { tree.nodes = [{ t: 'el', el: structuredClone(tree) }]; },
+    (tree: CapturedNode) => { tree.pseudo = { '::before': { content: '"prefix"' } }; },
+    (tree: CapturedNode) => { tree.style.display = 'block'; },
+    (tree: CapturedNode) => { tree.style['white-space'] = 'pre'; },
+    (tree: CapturedNode) => { tree.style['white-space-collapse'] = 'preserve'; },
+    (tree: CapturedNode) => { tree.nodes = [{ t: 'text', v: 'Other label' }]; },
+    (tree: CapturedNode) => { tree.nodes = []; },
+  ]) {
+    const tree = structuredClone(f.tree); mutate(tree);
+    // Keep the hash consistent to exercise the semantic boundary as well as
+    // the separate stale-tree guard below. This is not archive authentication.
+    assert.throws(() => reactRootTextCallerEvidence(tree, { ...content, treeRevision: revisionOf(tree) }), /direct-root-text-unqualified/);
+  }
+  assert.throws(() => reactRootTextCallerEvidence(f.tree, { ...content, treeRevision: revisionOf('stale') }), /direct-root-text-unqualified/);
+  const spaced = structuredClone(f.tree); spaced.nodes = [{ t: 'text', v: ' \nObserved\t' }, { t: 'text', v: ' label ' }];
+  assert.equal(reactRootTextCallerEvidence(spaced, { ...content, treeRevision: revisionOf(spaced) }).characters, 'Observed label');
+  spaced.nodes = [{ t: 'text', v: 'Observed\u00a0label' }];
+  assert.throws(() => reactRootTextCallerEvidence(spaced, { ...content, treeRevision: revisionOf(spaced) }), /direct-root-text-unqualified/);
 });
 
 test('stale or missing glyph evidence cannot become a native comparison draft', () => {

@@ -1225,7 +1225,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
             max: "Arity upper bound.",
             required: "The slot must be filled.",
             bindings:
-              "Per-surface slot bindings (schema 17): <code>bindings.figma.property</code> is the canvas property name, default PascalCase(name) — the slot-level twin of a prop’s <code>bindings.figma.property</code>.",
+              "Per-surface slot bindings (schema 17): <code>bindings.figma.property</code> is the canvas property name, default PascalCase(name) — the slot-level twin of a prop’s <code>bindings.figma.property</code>. An explicit <code>bindings.figma.textTemplate: true</code> supports one hidden, empty native TEXT in an unconstrained root children slot. The scoped native writer requires bound size, weight, line height and color, and invariant family, slant, tracking, case and alignment. Verified direct caller text may edit this template while inheriting the selected main’s token aliases. It adds no default React content. Unscoped generation, nested content, stateful/composed templates, main updates and comparison recovery refuse this marker. The application does not infer it; an application journey, clean consumers and fidelity remain unqualified.",
             defaultContent:
               'See <a href="#default-content">default content</a>.',
           },

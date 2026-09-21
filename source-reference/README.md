@@ -40,6 +40,35 @@ Without a declaration the built-in shadcn cohort above is used, and its entry by
 
 A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText` or `textContent: "absent"`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from. It must include the resolved source file of every `./`-relative module the cases mount (`./src/components/ui/badge` resolves to `src/components/ui/badge.tsx`; resolution is the bundler's, recorded by the build), so a changed component source always forces renewed witnesses. It cannot name the declaration itself.
 
+When the source requires a web font, add `"fontOrigin": "web"` to that case's
+`witness`. Every font that paints a glyph at `fontPath` (or the normal text
+target) must match `fontFamily` and be reported by Chromium as a custom font.
+System fallback with the same family name, mixed web/system glyphs and missing
+origin evidence all refuse with `font-substitution`. Omission retains the
+existing family-only requirement and observation shape. This witness cannot
+accompany `textContent: "absent"`. It distinguishes web-font use from system
+fallback; it does not identify an exact font file or authenticate Figma fonts.
+Author it from the source's font CSS and asset requirements, and pin the
+relevant source files in `witnessFiles`.
+
+**AGENT decision, 2026-09-21 — painted-font evidence.** New finite-property
+observations retain and authenticate the font census for every captured state
+and its restoration. Compilation uses the observed painted family on a private
+clone; raw trees and their authored CSS family names remain unchanged. Missing,
+mixed-generation or mismatched evidence refuses. Entirely historical captures
+without font evidence retain their previous interpretation and do not gain a
+painted-font claim. The optional web-origin witness above also retains the
+before/after font census for its missing-font control. These checks establish
+source readiness, not visual agreement with Figma or exact font-asset identity.
+Reversal must remove the new property-font lowering and origin admission
+together, preserve existing evidence, and require fresh observations before
+making any replacement font claim.
+
+Source byte capture preserves `.module.css` local class maps, including
+cross-file `composes`, while ordinary `.css` imports keep global semantics.
+Both the module bytes and generated class names participate in the archived
+reference; a changed module invalidates the loaded source.
+
 For an intentionally textless root, set `witness.textContent` to `"absent"` and omit `fontPath` and `associatedLabelText`. The observer must prove that its bounded ordinary HTML/SVG subtree contains no non-whitespace text, including hidden descendants, no generated text or list markers, and no painted glyphs. Custom elements, shadow roots, slots and opaque or native text surfaces refuse this proof. Missing, hidden or zero-size roots, wrong styles/tokens and resource/runtime failures still fail. Other witnesses retain the existing visible-text and actual-font requirements. A separate nearby caption cannot supply component text.
 
 Witnesses are authored by the workspace owner from the source's own CSS, tokens and font metadata. They are an independent check of the capture and must never be sampled from converter output. A changed source file requires renewed witnesses.
@@ -346,6 +375,19 @@ The shared computed channel map preserves node opacity independently of paint al
 **Review compiler update** prepares a host-derived proposal through `POST react/:reference/native-operation/:operation/update-plan`. It authenticates the saved native journal and derives the desired output from pinned source evidence. **Prepare reviewed correction** creates a child update journal; **Get update connection code** pairs the companion; **Apply and verify correction** runs a fresh preflight, guarded update and independent readback. **Inspect update again** reads the same nodes without repeating the write. Creation records remain intact and fresh exports appear alongside the originals.
 
 Supported corrections cover opacity, literal dimensions on empty flex roots, root shadow stacks, simple SVG stroke widths, unrequested default root paint, and uniform padding-box background layers. Each rule checks its complete baseline and rejects unrelated edits. Paint-layer migration can follow a verified scalar correction while preserving the existing nodes' contract ownership and content slots; the new layer is independently inventoried. Current compiler revisions do not authorize replacing historical ownership metadata. An allocated, owned, unbound number variable may follow a verified value change in the scalar update path. New variable proposals require a document-wide scan of all pages, including hidden instances, text ranges, styles and local variable aliases. After the last asynchronous read, the writer checks live bindings and assigns values synchronously; unavailable scope or more than 10,000 nodes refuses. Historical page-only programs retain their original bytes but cannot receive new variable write authority. Bound dimensions, allocation changes, aliases and mixed unsupported channels refuse by name. The journal retains late acknowledgements, refuses conflicting replay and never automatically repeats a write whose result is unknown. Live bounded update, conflict, interruption and begun-write recovery proofs are indexed in [CURRENT.md](../docs/CURRENT.md#v1-acceptance-evidence); the document guard and its limits are described in [D.74](../docs/23-known-limitations.md#d74-variable-updates-inspect-document-bindings-before-writing). General two-way repair and broader rollback remain unqualified; observing a design change does not edit the original React code.
+
+
+**Apply reviewed source repair (under qualification)** uses
+`POST react/:reference/native-operation/:operation/update/:proposal/source-repair/:preview/apply`.
+Only the current host-selected preview can prepare a transaction. Requests accept
+no body, path, source text or program. `GET react/source-repairs` lists retained
+applications independently of the current reference; per-application `apply`,
+`rollback` and `connection` actions provide explicit resume, source restoration
+and companion reconnection. Completion requires fresh pre/post native reads,
+normal witnessed source rebuilding and complete browser validation. The source
+transaction can be resumed after interruption; changed source bytes refuse.
+Restoration affects source/CSS only, leaving Figma untouched. No live Apply
+acceptance is claimed yet; see [D.108](../docs/23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery).
 
 
 `react-behavior-contract.ts` derives a separate React draft from authenticated callback and initial appearance records for the same case. It rechecks the finite action/state/payload rows and requires an omitted initializer to match exactly one explicit value across every other captured input context. It preserves the canonical appearance axis while binding the code side to separate controlled and initial-only public inputs, and emits the observed next-value callback. It does not rewrite the static/native contract or add a second canvas axis. The application shows this draft and its generated React code. Controlled-source appearance, associated label composition, clean-consumer delivery and native metadata preservation remain unqualified.

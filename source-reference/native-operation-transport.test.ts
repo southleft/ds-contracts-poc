@@ -204,6 +204,19 @@ async function fixture(t: test.TestContext) {
   };
 }
 
+test("pairing authenticates the journal without recompilation and cannot authorize a stale write", async (t) => {
+  const f = await fixture(t);
+  const before = f.preparationCount();
+  f.stale();
+  const connection = f.transport.pair(f.id);
+  assert.equal(connection.split('.')[1], f.secret);
+  assert.equal(f.preparationCount(), before);
+  assert.throws(() => f.start(), /start-refused/);
+  assert.deepEqual(f.delivered, []);
+  unlinkSync(path.join(f.repo, 'private/source-native-app/operations', f.id, 'operation.json'));
+  assert.throws(() => f.transport.pair(f.id));
+});
+
 test("companion plugin completes all four journal phases through one local connection", async (t) => {
   const f = await fixture(t);
   f.start();

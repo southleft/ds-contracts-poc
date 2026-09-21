@@ -3,7 +3,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.42';
+export const PLUGIN_DUMP_VERSION = '1.45';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -152,13 +152,11 @@ export interface DumpText {
    *  the style group's weight keeps its size token here instead. Absence in
    *  older dumps means not captured, never "no size token". */
   fontSizeVar?: string;
-  /** The weight TOKEN in slash-form (dump v1.22, additive), stamped by the
-   *  emitter rather than bound: Figma exposes no bindable font-weight field,
-   *  so the face name is all the node itself carries — and "Medium" is drawn
-   *  both by a contract declaring 500 and by one declaring nothing. Absence
-   *  means the set was not drawn by this pipeline (or predates v1.22), which
-   *  is exactly when no weight should be proposed. */
+  /** Native uniform weight binding, or legacy emitter stamp when unbound.
+   * Mixed ranges do not fall back to a stamp (plugin v1.43). */
   fontWeightVar?: string;
+  /** Native numeric weight observed with a uniform native binding. */
+  fontWeight?: number;
   /** Native uniform line-height binding, or a legacy emitter stamp when
    * unbound. Mixed native ranges never fall back to a stamp (plugin v1.42). */
   lineHeightVar?: string;
@@ -346,8 +344,12 @@ export interface DumpVariableConsumer {
   /** Native precision; unlike the global token table, colors are not rounded. */
   value: number | string | boolean | { r: number; g: number; b: number; a?: number };
   /** Raw selected-mode value, including a VARIABLE_ALIAS when present.
-   * This records the edge but does not corroborate an entire alias graph. */
+   * The optional aliasChain corroborates only this selected path. */
   selectedValue: unknown;
+  /** Plugin v1.44: selected targets in traversal order, at most 16 edges.
+   * Every target includes its own inherited consuming mode and native value.
+   * Absent means uncaptured; it never authorizes an alias projection. */
+  aliasChain?: Array<Omit<DumpVariableConsumer, 'aliasChain'> & { id: string }>;
 }
 
 export interface DumpNode {
@@ -689,6 +691,19 @@ export type DumpPropertyDefinition =
       slotSettings?: Record<string, unknown>;
     };
 
+/** Plugin 1.45 raw multi-collection template evidence. Nothing is resolved
+ * through an invented cross-collection default or discarded as unused. */
+export interface DumpTemplateVariableGraph {
+  version: 1;
+  fileKey: string;
+  collections: Array<{ id: string; key: string; name: string; remote: boolean; defaultModeId: string;
+    modes: Array<{ modeId: string; name: string }>; variableIds: string[] }>;
+  variables: Array<{ id: string; key: string; name: string; collectionId: string; resolvedType: string;
+    remote: boolean; scopes: string[]; valuesByMode: Record<string, unknown> }>;
+  consumers: Array<{ nodeId: string; variantName: string; specPath: number[];
+    explicitVariableModes: Record<string, string>; resolvedVariableModes: Record<string, string> }>;
+}
+
 export interface DumpSet {
   setName: string;
   type: 'COMPONENT_SET' | 'COMPONENT';
@@ -749,6 +764,8 @@ export interface DumpSet {
   codeValueAxes?: unknown;
   /** Compiler-owned root content container; preserve even malformed metadata. */
   rootSlot?: unknown;
+  /** Complete raw graph captured independently; inverse validation is required. */
+  templateVariableGraph?: DumpTemplateVariableGraph;
   statePreviewAxis?: {
     axis: string;
     default: string;

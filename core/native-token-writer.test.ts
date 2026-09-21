@@ -99,8 +99,8 @@ type Host = {
 
 /** The existing writer mock supplies allocation/aliases/modes/metadata. Add
  * only read-only identity fields present in actual Plugin API typings. */
-function host() {
-  const handle = createFigmaMock({ modeLimit: 1 });
+function host(modeLimit = 1) {
+  const handle = createFigmaMock({ modeLimit });
   const figma = handle.figma as unknown as Host;
   const variables = handle.variables as unknown as Variable[];
   const collections = handle.collections as unknown as Collection[];
@@ -749,4 +749,114 @@ test("browser bundle initializes both imports and invokes the scoped compiler ac
   assert.equal(compiled.preparation.modes[0].nativeModeName, "Dark");
   assert.match(compiled.script, /createOwnedVariable/);
   assert.equal(compiled.preparation.nativeQualification, "unqualified");
+});
+
+
+function explicitModesRequest(): NativeTokenContextInput {
+  const input = request(); input.writeProtocol = 'explicit-modes-v1';
+  const second = structuredClone(input.modes[0]);
+  second.sourceMode = 'light'; second.nativeModeName = 'Light';
+  (second.tokens.action as any).background.$value = '{palette.twin}';
+  (second.tokens.weight as any).$value = 400;
+  second.tokenTreeRevision = revisionOf(second.tokens); input.modes.push(second);
+  return input;
+}
+
+test('single-mode scoped writer remains byte-identical without the explicit mode protocol', () => {
+  assert.equal(sha(emitNativeTokenContextScript(request()).script), '703d28842312f3846abb20da7c73aab67f9969f611e63dbee8f2dae7db9e100d');
+  const input = explicitModesRequest(); delete input.writeProtocol;
+  assert.throws(() => emitNativeTokenContextScript(input), /single-mode-required/);
+  assert.throws(() => emitNativeTokenContextScript({ ...request(), writeProtocol: 'unknown' as any }), /write-protocol/);
+});
+
+test('explicit modes allocate once and retain per-mode alias identities through independent readback', async () => {
+  const input = explicitModesRequest(), h = host(3), old = historical(h);
+  const before = JSON.stringify({ collection: old.collection, variable: old.variable });
+  const written = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+  assert.equal(written.status, 'created-candidate', JSON.stringify(written));
+  const identity = written.creationIdentity!;
+  assert.equal(identity.modes.length, 2); assert.equal(identity.variables.length, 5);
+  const read = await h.run<NativeTokenReadbackResult>(emitNativeTokenContextReadbackScript(input, identity));
+  assert.equal(read.status, 'readback-collected', JSON.stringify(read));
+  assert.equal(verifyNativeTokenContextReceipt({ input, expectedIdentity: identity, receipt: read.receipt! }).status, 'native-token-context-observed');
+  const vars = new Map(read.receipt!.variables.map(v => [v.name, v]));
+  const [dark, light] = identity.modes;
+  assert.deepEqual(vars.get('action/background')!.valuesByMode, {
+    [dark.modeId]: { type: 'VARIABLE_ALIAS', id: vars.get('palette/base')!.id },
+    [light.modeId]: { type: 'VARIABLE_ALIAS', id: vars.get('palette/twin')!.id },
+  });
+  assert.deepEqual(vars.get('weight')!.valuesByMode, { [dark.modeId]: 600, [light.modeId]: 400 });
+  assert.equal(JSON.stringify({ collection: old.collection, variable: old.variable }), before);
+  const aliased = h.variables.find(v => v.id === vars.get('action/background')!.id)!;
+  aliased.setValueForMode(light.modeId, { type: 'VARIABLE_ALIAS', id: vars.get('palette/base')!.id });
+  const altered = await h.run<NativeTokenReadbackResult>(emitNativeTokenContextReadbackScript(input, identity));
+  assert.equal(verifyNativeTokenContextReceipt({ input, expectedIdentity: identity, receipt: altered.receipt! }).status, 'refused', 'same-value target substitution is not identity preservation');
+  h.mutations.length = 0;
+  const repeat = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+  assert.equal(repeat.status, 'refused'); assert.deepEqual(h.mutations, []);
+});
+
+test('mode capacity and later value failures retain partial owned allocation without retrying it', async () => {
+  for (const kind of ['capacity', 'second-value'] as const) {
+    const input = explicitModesRequest(), h = host(kind === 'capacity' ? 1 : 2);
+    if (kind === 'second-value') {
+      const create = h.figma.variables.createVariable.bind(h.figma.variables);
+      h.figma.variables.createVariable = (...args) => {
+        const v = create(...args), set = v.setValueForMode.bind(v);
+        v.setValueForMode = (id, value) => {
+          if (v.name === 'weight' && id === h.collections[0].modes[1].modeId) throw Error('write interrupted');
+          set(id, value);
+        };
+        return v;
+      };
+    }
+    const written = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+    assert.equal(written.status, 'partial-allocation', kind);
+    assert.ok(written.allocation.collection?.id, kind);
+    assert.equal(written.allocation.modes.length, kind === 'capacity' ? 1 : 2, kind);
+    assert.equal(written.allocation.variables.length, kind === 'capacity' ? 0 : 5, kind);
+    assert.equal(written.creationIdentity, undefined, kind);
+    if (kind === 'capacity') assert.deepEqual(written.problems, ['native-token-write-mode-allocation-failed']);
+    h.mutations.length = 0;
+    const repeat = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+    assert.equal(repeat.status, 'refused'); assert.deepEqual(h.mutations, []);
+  }
+});
+
+test('explicit mode creation permits an alias to become concrete without allocating a same-name peer', async () => {
+  const input = explicitModesRequest(), h = host(2);
+  (input.modes[1].tokens.action as any).background.$value = '#4375ff';
+  input.modes[1].tokenTreeRevision = revisionOf(input.modes[1].tokens);
+  const written = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+  assert.equal(written.status, 'created-candidate', JSON.stringify(written));
+  const read = await h.run<NativeTokenReadbackResult>(emitNativeTokenContextReadbackScript(input, written.creationIdentity!));
+  assert.equal(verifyNativeTokenContextReceipt({ input, expectedIdentity: written.creationIdentity!, receipt: read.receipt! }).status, 'native-token-context-observed');
+  assert.equal(h.variables.filter(v => v.name === 'action/background').length, 1);
+});
+
+
+test('native selections distinguish physical variant modes without inventing a source theme', async () => {
+  const input = explicitModesRequest(), h = host(2);
+  const planRevision = revisionOf('a host-derived template projection');
+  for (const [index, mode] of input.modes.entries()) {
+    mode.sourceMode = 'light'; mode.brand = 'default';
+    mode.nativeSelection = { planRevision, modeKey: revisionOf(index) };
+  }
+  const written = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+  assert.equal(written.status, 'created-candidate', JSON.stringify(written));
+  assert.deepEqual(written.creationIdentity!.modes.map(m => m.nativeSelection), input.modes.map(m => m.nativeSelection));
+  const read = await h.run<NativeTokenReadbackResult>(emitNativeTokenContextReadbackScript(input, written.creationIdentity!));
+  assert.equal(verifyNativeTokenContextReceipt({ input, expectedIdentity: written.creationIdentity!, receipt: read.receipt! }).status, 'native-token-context-observed');
+  const altered = structuredClone(written.creationIdentity!); delete altered.modes[1].nativeSelection;
+  assert.equal(verifyNativeTokenContextReceipt({ input, expectedIdentity: altered, receipt: read.receipt! }).status, 'refused');
+  for (const change of [
+    (i: NativeTokenContextInput) => { delete i.modes[1].nativeSelection; },
+    (i: NativeTokenContextInput) => { i.modes[1].nativeSelection!.planRevision = revisionOf('other'); },
+    (i: NativeTokenContextInput) => { i.modes[1].nativeSelection!.modeKey = i.modes[0].nativeSelection!.modeKey; },
+    (i: NativeTokenContextInput) => { delete i.writeProtocol; },
+    (i: NativeTokenContextInput) => { i.modes[1].brand = 'other'; },
+  ]) {
+    const bad = structuredClone(input); change(bad);
+    assert.throws(() => emitNativeTokenContextScript(bad), /native-token-context-(native-mode-selection|source-mode-ambiguous)/);
+  }
 });

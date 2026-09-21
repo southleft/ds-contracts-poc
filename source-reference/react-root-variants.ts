@@ -17,9 +17,19 @@ import {planReactPropertyEffects} from './react-property-effects.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
 import {projectReactRootVisual,reactRootStyleExclusion} from './react-root-visual.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {reactPropertyPaintedRoot,assertReactPropertyFontCoverage} from './react-property-fonts.js';
+import type {TextFontEvidence} from './text-fonts.js';
+import type {SourceBox} from './source-framing.js';
+import {prepareReactRootTextTemplate,type ReactRootTextPlane} from './react-root-text-template.js';
 
 export interface ReactPropertySnapshot {
+ propertyCaptureVersion?:2;
  tree:CapturedNode;treeSha256:string;image:string;ownership:ReactOwnership;styleOrigin:ReactStyleOrigin;
+ /** Sealed per-plane painted glyph evidence; older live-update archives lack it. */
+ fonts?:TextFontEvidence;
+ /** Full-page pixel coordinates of the capture selector, not an inferred child box. */
+ bounds?:SourceBox;
+ boundsSha256?:string;
  /** Present only when this plane's tree holds a grid container; older archives never carry it. */
  gridConstraints?:GridConstraintEvidence;
  /** Initial-mount planes only, and only since descendants are sized: older archives never carry it. */
@@ -63,8 +73,10 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
     const enumeration=enumerate([axis],[],64,baseAxisValues);
     if(enumeration.policy!=='full-cartesian')throw Error('react-root-variants-incomplete-enumeration');
     const rows=effects.rows.filter(r=>r.property===property);
+    assertReactPropertyFontCoverage(rows,snapshots);
     const roots=new Map<string,CapturedNode>(),projections=new Map<string,ReturnType<typeof projectReactRootVisual>['roots'][number]>();
     let omitted:ReactPropertySnapshot|undefined,defaultSnapshot:ReactPropertySnapshot|undefined;
+    const textPlanes:ReactRootTextPlane[]=[];
     for(const row of rows){
      const snap=snapshots[row.id];
      if(row.status!=='observed'||!row.restored||!snap||snap.treeSha256!==row.treeSha256||snap.image!==row.image||evidenceSha(JSON.stringify(snap.tree))!==row.treeSha256)
@@ -79,7 +91,11 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
      const linked=linkReactSourceAnatomy(program,snap.ownership,snap.tree).instances.find(i=>i.instanceId===effects.instanceId);
      const projected=projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin).roots.find(r=>r.instanceId===effects.instanceId);
      if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-variants-content-unqualified');
-     const root={...structuredClone(linked.roots[0].observation),nodes:[],style:Object.fromEntries(Object.entries(linked.roots[0].observation.style).map(([k,v])=>[k,normalizeValue(v)]))};
+     const painted=reactPropertyPaintedRoot(snap,row,linked.roots[0].path);
+     textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children});
+     const root={...painted,nodes:[],style:Object.fromEntries(Object.entries(painted.style).map(([k,v])=>[k,normalizeValue(v)]))};
+     if(painted.style['font-family']!==linked.roots[0].observation.style['font-family'])
+      result.lowerings.push({value:key,channel:'font-family',from:linked.roots[0].observation.style['font-family'],to:painted.style['font-family'],reason:'painted-font-family'});
      // CSS Align 3 section 8.1: normal gap has a used value of zero in
      // flex layout (unlike multicol). Keep this lowering explicit; feeding
      // 'normal' into the numeric mint would drop the ENTIRE varying gap.
@@ -106,8 +122,10 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
      states:[],semantics:{element:roots.get(baseValue)!.tag},anatomy:{root:{slot:{name:'children'}}},
      bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
     const byCombo=new Map(enumeration.combos.map(c=>[c.key,roots.get(c.axisValues[property])!]));
-    const {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,[axis],baseAxisValues,byCombo);
+    let {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,[axis],baseAxisValues,byCombo);
     retainReactRootSourceBindings(enriched,tokens,[axis],baseAxisValues,new Map(enumeration.combos.map(c=>[c.key,projections.get(c.axisValues[property])!])));
+    const textTemplate=prepareReactRootTextTemplate(enriched,tokens,textPlanes);enriched=textTemplate.contract;
+    if(textTemplate.limitation)result.limitations.push(textTemplate.limitation);
     if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-variants-content-boundary-changed');
     const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-variants-invalid:'+errors.join(';'));
     result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';

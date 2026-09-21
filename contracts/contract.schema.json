@@ -1770,6 +1770,10 @@
                   "properties": {
                     "property": {
                       "type": "string"
+                    },
+                    "textTemplate": {
+                      "type": "boolean",
+                      "const": true
                     }
                   },
                   "additionalProperties": false

@@ -60,8 +60,8 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input.operation.id) ||
       !/^[A-Za-z0-9]{10,80}$/.test(input.operation.fileKey))
     throw Error('react-native-plan-operation-invalid');
-  const { draft, compiled } = nativeDraft(input, recompile);
-  const tokenInput: NativeTokenContextInput = {
+  const { engine, contracts, draft, compiled } = nativeDraft(input, recompile);
+  const baseTokenInput: NativeTokenContextInput = {
     fileKey: input.operation.fileKey, scopeId: `source-${input.operation.id}`,
     source: { revision: input.source.revision, sourceProgramSha256: input.source.programSha256,
       tokensSha256: revisionOf(draft.tokens).slice(7) },
@@ -69,6 +69,9 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
     modes: [{ sourceMode: 'light', brand: 'default', nativeModeName: 'Light',
       tokens: structuredClone(draft.tokens!), tokenTreeRevision: compiled.projection.tokenRevision }],
   };
+  const templateGraph = compiled.projection.rootTextTemplate
+    ? engine.compileNativeContractTemplateGraph(draft.contract!, contracts, input.source, baseTokenInput) : undefined;
+  const tokenInput = baseTokenInput;
   const plan = {
     version: 1 as const, kind: 'react-root-draft-inspection' as const, purpose: 'source-candidate-inspection' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const,
@@ -76,6 +79,7 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
     projection: compiled.projection, component: compiled.component,
     componentRevision: revisionOf(compiled.component),
     tokenInput, tokenPreparation: prepareNativeTokenContext(tokenInput),
+    ...(templateGraph ? { templateGraph } : {}),
     limitations: [...draft.limitations, 'native-content-comparisons-not-assembled',
       'native-output-not-observed', 'application-dispatch-not-authorized-by-plan'],
   };
@@ -87,17 +91,19 @@ function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
 export function buildReactNativeComponentWrite(input: ReactNativePlanInput & {
   expectedPlanRevision: string;
   tokens: NativeSourceWriteContext['tokens'];
+  templateGraph?: NativeSourceWriteContext['templateGraph'];
 }) {
   return buildWrite(input, false);
 }
 export function buildReactNativeFreshComponentWrite(input: ReactNativePlanInput & {
   expectedPlanRevision: string;
   tokens: NativeSourceWriteContext['tokens'];
+  templateGraph?: NativeSourceWriteContext['templateGraph'];
 }) {
   return buildWrite(input, true);
 }
 function buildWrite(input: ReactNativePlanInput & {
-  expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens'];
+  expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens']; templateGraph?: NativeSourceWriteContext['templateGraph'];
 }, fresh: boolean) {
   const current = fresh ? prepareReactNativeFreshPlan(input) : prepareReactNativePlan(input);
   if (current.revision !== input.expectedPlanRevision ||
@@ -105,6 +111,6 @@ function buildWrite(input: ReactNativePlanInput & {
     throw Error('react-native-plan-write-stale');
   const { engine, contracts, draft } = nativeDraft(input, fresh);
   return { planRevision: current.revision, script: engine.buildNativeContractDraftScript(
-    draft.contract!, contracts, input.source, { operation: input.operation, tokens: input.tokens },
+    draft.contract!, contracts, input.source, { operation: input.operation, tokens: input.tokens, ...(input.templateGraph ? { templateGraph: input.templateGraph } : {}) },
   ) };
 }

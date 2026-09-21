@@ -11,6 +11,7 @@ import {
   evidenceUnchanged,
 } from "./react-validation-evidence.js";
 import { checkSource } from "./check.js";
+import type { SourceObservation } from "./check.js";
 import { observeSource, watchSourceFailures } from "./observe.js";
 import {
   captureReference,
@@ -38,7 +39,13 @@ export interface ReactValidationRow {
     treeSha256?: string;
     census?: unknown;
   };
-  negativeControls?: { name: string; rejected: boolean; problems: string[] }[];
+  negativeControls?: {
+    name: string; rejected: boolean; problems: string[];
+    fontEvidence?: {
+      before: SourceObservation['platformFonts'];
+      after: SourceObservation['platformFonts'];
+    };
+  }[];
   behavior?: CheckboxBehavior & { restored: boolean };
 }
 export interface ReactValidation {
@@ -325,15 +332,11 @@ export function startReactValidation(
                 await page.locator(profile.path[0]).waitFor();
                 await requireOpaqueSandbox(page);
                 await page.evaluate(() => document.fonts.ready);
-                const before = checkSource(
-                  profile,
-                  await observeSource(page, profile, failures),
-                );
+                const beforeObservation = await observeSource(page, profile, failures);
+                const before = checkSource(profile, beforeObservation);
                 await corruptReactReference(page, name, profile.path[0]);
-                const result = checkSource(
-                  profile,
-                  await observeSource(page, profile, failures),
-                );
+                const afterObservation = await observeSource(page, profile, failures);
+                const result = checkSource(profile, afterObservation);
                 const expected =
                   name === "missing-css"
                     ? "style-mismatch:"
@@ -354,6 +357,9 @@ export function startReactValidation(
                   name,
                   rejected,
                   problems: result.problems,
+                  ...(profile.fontOrigin === 'web' && name === 'missing-font' ? {
+                    fontEvidence: {before: beforeObservation.platformFonts, after: afterObservation.platformFonts},
+                  } : {}),
                 });
                 if (!rejected)
                   row.problems.push(`negative-control-not-proven:${name}`);

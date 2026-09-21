@@ -1088,10 +1088,26 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
-  // Weight still uses the emitter stamp. A uniform native line-height
-  // binding is authoritative; its stamp is a fallback only when unbound.
+  // Native bindings take precedence over historical emitter stamps.
   const weightVar = node.sharedPluginData?.ds_contracts?.fontWeightVar;
-  if (typeof weightVar === 'string' && weightVar !== '') text.fontWeightVar = weightVar;
+  const weightAliases = node.boundVariables?.fontWeight;
+  if (Array.isArray(weightAliases) && weightAliases.length === 1 && isAlias(weightAliases[0])) {
+    const nativeWeight = resolveVarName(ctx, weightAliases[0], nodePath, 'text.fontWeightVar');
+    if (nativeWeight) {
+      text.fontWeightVar = nativeWeight;
+      if (typeof s.fontWeight === 'number' && Number.isFinite(s.fontWeight)) text.fontWeight = s.fontWeight;
+      else ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeight',
+        message: 'native fontWeight binding has no uniform numeric value' });
+      if (typeof weightVar === 'string' && weightVar !== '' && weightVar !== nativeWeight) ctx.report.degradations.push({
+        code: 'text-binding-conflict', nodePath, field: 'text.fontWeightVar',
+        message: `native fontWeight binding "${nativeWeight}" differs from legacy stamp "${weightVar}" — native identity captured`,
+      });
+    } else ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeightVar',
+      message: 'native fontWeight variable unavailable — legacy stamp not substituted' });
+  } else if (weightAliases !== undefined && (!Array.isArray(weightAliases) || weightAliases.length > 0)) {
+    ctx.report.degradations.push({ code: 'text-channel-unsupported', nodePath, field: 'text.fontWeightVar',
+      message: 'fontWeight has no single uniform variable binding — legacy stamp not substituted' });
+  } else if (typeof weightVar === 'string' && weightVar !== '') text.fontWeightVar = weightVar;
   const lhVar = node.sharedPluginData?.ds_contracts?.lineHeightVar;
   const lhAliases = node.boundVariables?.lineHeight;
   if (Array.isArray(lhAliases) && lhAliases.length === 1 && isAlias(lhAliases[0])) {
@@ -1935,7 +1951,9 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.41';
+export const REST_DUMP_VERSION = '1.42';
+// 1.42: uniform native font-weight binding identity and observed numeric weight.
+//       Consumer modes and selected alias chains remain plugin-only evidence.
 // 1.41: uniform native line-height binding names, with explicit stamp conflicts.
 //       Per-node consumer values/modes remain uncaptured on the REST route.
 // 1.40: observed zero letter spacing retained across variants.

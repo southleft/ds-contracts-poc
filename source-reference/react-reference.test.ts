@@ -11,6 +11,7 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { createServer } from "node:http";
+import { runInNewContext } from "node:vm";
 import {
   buildReactReference,
   createReactReferenceService,
@@ -89,6 +90,34 @@ test("reference bytes are deterministic, source changes invalidate them, and raw
     );
     assert.equal(reactReferenceUnchanged(first), false);
     assert.notEqual((await buildReactReference(root)).id, first.id);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("source CSS Modules retain distinct class maps, composition and authenticated original bytes", async () => {
+  const { root, put } = fixture();
+  try {
+    put("first.module.css", ".root { padding: 7px } .label { color: red }");
+    put("second.module.css", '.root { composes: label from "./first.module.css"; padding: 11px }');
+    put("global.css", ".root { margin: 3px }");
+    const entry = 'import a from "./first.module.css"; import b from "./second.module.css"; import "./global.css"; globalThis.maps = { a, b };';
+    const first = await buildReactReference(root, undefined, entry);
+    const scope: { maps?: { a: Record<string, string>; b: Record<string, string> } } = {};
+    runInNewContext(first.javascript, scope);
+    const { a, b } = scope.maps!;
+    assert.ok(a.root && a.label && b.root, "imports supply usable class names");
+    assert.notEqual(a.root, b.root.split(" ")[0], "identical local names stay isolated");
+    assert.ok(b.root.split(" ").includes(a.label), "cross-file composition retains the referenced class");
+    assert.ok(first.css.includes(`.${a.root} {\n  padding: 7px;`));
+    assert.ok(first.css.includes(".root {\n  margin: 3px;"), "ordinary CSS stays global");
+    for (const name of ["first.module.css", "second.module.css", "global.css"])
+      assert.ok(first.files[path.join(first.sourceRoot, name)], `${name} is authenticated`);
+    assert.equal((await buildReactReference(root, undefined, entry)).id, first.id);
+    assert.ok(reactReferenceUnchanged(first));
+    put("first.module.css", ".root { padding: 9px } .label { color: red }");
+    assert.equal(reactReferenceUnchanged(first), false);
+    assert.notEqual((await buildReactReference(root, undefined, entry)).id, first.id);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

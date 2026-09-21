@@ -27,7 +27,7 @@ export interface ReactPropertyEffects {
  planned:number;
  skipped:Array<{property:string;reason:string}>;
  rows:Array<{id:string;property:string;requested:ReactPropertyValue;status:'observed'|'refused';
-  image?:string;treeSha256?:string;visibleChange?:boolean;treeChange?:boolean;restored?:boolean;restoredAfterLayoutRebuild?:boolean;
+  propertyCaptureVersion?:2;image?:string;treeSha256?:string;fontsSha256?:string;boundsSha256?:string;visibleChange?:boolean;treeChange?:boolean;restored?:boolean;restoredAfterLayoutRebuild?:boolean;
   changedInstances?:Array<{instanceId:string;name:string;channels:string[]}>;problem?:string}>;
  problems:string[];
 }
@@ -82,10 +82,13 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const styles=await readReactStyleOrigin(page,selector,own,args.stageSelector??'#root');
   // Declared tracks exist only before layout; a plane without a grid container records nothing.
   const grids=current&&hasGridContainer(current)?{gridConstraints:await observeGridConstraints(page,[selector],current)}:{};
+  const fonts=await observeTextFonts(page,[selector],current),fontsSha256=evidenceSha(JSON.stringify(fonts));
+  // Preserve the full-page image's actual origin and box, including fractional
+  // coordinates. Old archives remain unmeasured; no origin is inferred for them.
+  const bounds=await sourceBounds(page,{path:[selector]}),boundsSha256=evidenceSha(JSON.stringify(bounds));
   const contentEvidence=args.observationMode==='initial-mount'?{
-   fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
+   svg:await observeSvgViewports(page,[selector],current),
    ...(hasUnpaintedPseudoBoxes(current)?{pseudoBoxes:await observePseudoBoxes(page,[selector],current)}:{}),
-   bounds:await sourceBounds(page,{path:[selector]}),
    // Where a part BELOW the root declares its own size. Initial mounts only: their contract assembles descendants.
    descendantSizes:await readReactDescendantSizes(page,selector,own,args.stageSelector??'#root'),
   }:{};
@@ -100,13 +103,16 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
     initialSelection={instanceId,path:selectedPath,bounds:await sourceBounds(page,{path:[selected]})};
    }
   }
-  if(!current||JSON.stringify(current)!==JSON.stringify(await read())||evidenceSha(png)!==evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})))throw Error('react-property-effects-render-unstable');
+  if(!current||JSON.stringify(current)!==JSON.stringify(await read())||evidenceSha(png)!==evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}))||
+   boundsSha256!==evidenceSha(JSON.stringify(await sourceBounds(page,{path:[selector]}))))throw Error('react-property-effects-render-unstable');
   if(args.failures.runtimeErrors.length||args.failures.failedResources.length)throw Error('react-property-effects-source-failed');
   if(own.problems.length)throw Error('react-property-effects-ownership-unqualified');
   args.assertCurrent();
-  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...grids,...contentEvidence,...(initialSelection?{initialSelection}:{})};
+  return {propertyCaptureVersion:2 as const,tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,fonts,fontsSha256,bounds,boundsSha256,...grids,...contentEvidence,...(initialSelection?{initialSelection}:{})};
  };
  let usable=true;
+ let originalFontsSha256:string|undefined;
+ let originalBoundsSha256:string|undefined;
  for(const [index,entry] of plan.entries()){
   const row:P&ReactPropertyObservation={id:String(index),...entry,status:'refused'};result.rows.push(row);
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
@@ -125,7 +131,11 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    }
    // Name WHICH witness disagreed: a probe page that never matched the sealed
    // original is a different defect from a render that did not come back.
+   originalFontsSha256??=probe.before.fontsSha256;
+   originalBoundsSha256??=probe.before.boundsSha256;
    const unrestored=[!probe.ownershipRestored&&'ownership',probe.before.treeSha256!==originalTree&&'before-tree',probe.before.image!==args.image&&'before-image',
+    probe.before.fontsSha256!==originalFontsSha256&&'before-fonts',restored.fontsSha256!==originalFontsSha256&&'restored-fonts',
+    probe.before.boundsSha256!==originalBoundsSha256&&'before-bounds',restored.boundsSha256!==originalBoundsSha256&&'restored-bounds',
     restored.treeSha256!==originalTree&&'restored-tree',restored.image!==args.image&&'restored-image'].filter(Boolean);
    if(unrestored.length)throw Error('react-property-effects-original-not-restored:'+unrestored.join(';'));
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
@@ -146,7 +156,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    const snapshot={...probe.changed,png:undefined,projection};
    writeFileSync(path.join(dir,row.id+'.json'),JSON.stringify(snapshot,null,2)+'\n',{flag:'wx'});
    writeFileSync(path.join(dir,row.id+'.png'),probe.changed.png,{flag:'wx'});
-   Object.assign(row,{status:'observed',image:probe.changed.image,treeSha256:probe.changed.treeSha256,
+   Object.assign(row,{propertyCaptureVersion:probe.changed.propertyCaptureVersion,status:'observed',image:probe.changed.image,treeSha256:probe.changed.treeSha256,fontsSha256:probe.changed.fontsSha256,boundsSha256:probe.changed.boundsSha256,
     visibleChange:probe.changed.image!==args.image,treeChange:probe.changed.treeSha256!==originalTree,restored:true,...(layoutRebuilt?{restoredAfterLayoutRebuild:true}:{}),changedInstances});
   }catch(error){
    row.problem=error instanceof Error?error.message:String(error);

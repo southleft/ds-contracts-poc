@@ -187,6 +187,33 @@ test("the built-in cohort is frozen: entry bytes, case records and negative cont
     assert.deepEqual(builtinReactCohort.profile(c.id), reactReferenceProfile(c.id));
 });
 
+test("web-font origin is an explicit per-case witness and changing it invalidates the reference", async () => {
+  const { root, put } = fixture();
+  try {
+    put(reactCasesFile, JSON.stringify(declaration()));
+    const original = await buildReactReference(root);
+    const changed = JSON.parse(JSON.stringify(declaration()));
+    changed.cases[0].witness.fontOrigin = "web";
+    put(reactCasesFile, JSON.stringify(changed));
+    assert.equal(reactReferenceUnchanged(original), false);
+    const current = await buildReactReference(root);
+    assert.notEqual(current.id, original.id);
+    assert.equal(current.cohort.entry, original.cohort.entry, "authored origin does not alter the rendered source");
+    assert.equal(current.cohort.profile(changed.cases[0].id).fontOrigin, "web");
+    for (const entry of changed.cases.slice(1)) assert.equal(current.cohort.profile(entry.id).fontOrigin, undefined);
+    assert.equal((await buildReactReference(root)).id, current.id);
+    for (const invalid of ["local", "", false, null, {}, ["web"]]) {
+      changed.cases[0].witness.fontOrigin = invalid;
+      put(reactCasesFile, JSON.stringify(changed));
+      assert.throws(() => loadReactCohort(root), /react-cases-witness-invalid/);
+    }
+    changed.cases[0].witness.fontOrigin = "web";
+    changed.cases[0].witness.textContent = "absent";
+    put(reactCasesFile, JSON.stringify(changed));
+    assert.throws(() => loadReactCohort(root), /react-cases-witness-invalid/, "textless and painted-web-font witnesses are mutually exclusive");
+  } finally { rmSync(root, {recursive:true, force:true}); }
+});
+
 test("a subject without an authored witness is refused, never given another subject's witness", () => {
   assert.throws(() => reactReferenceProfileFor({ id: "switch-on", subject: "Switch" }), /^Error: react-reference-subject-unwitnessed$/);
   assert.throws(() => reactReferenceProfile("switch-on"), /^Error: react-reference-case-unknown$/);

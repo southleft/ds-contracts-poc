@@ -2,6 +2,7 @@
  * This is neither a retained runtime binding nor permission to write a file.
  * The host must pin and re-open its source evidence before dispatching a write.
  */
+import { planNativeRootTextTemplate, applyRootTextTemplateAliases, type NativeRootTextTemplatePlan } from './native-root-text-template-plan.js';
 import { revisionOf } from './contract-provenance.js';
 import type { Contract } from '../scripts/contract-schema.js';
 import type { ComponentData, NodeSpec } from './emit-figma-script.js';
@@ -28,6 +29,7 @@ export interface NativeContractDraftProjection {
   tokenRevision: string;
   source: NativeContractDraftSource;
   context: { mode: string; brand: string };
+  rootTextTemplate?: NativeRootTextTemplatePlan;
 }
 
 /** Annotate only freshly compiled data. The engine authenticates that data
@@ -95,6 +97,11 @@ export function prepareNativeContractDraft(
         spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||
         typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))
       throw Error('NATIVE_CONTRACT_DRAFT_TEXT_OWNERSHIP_UNQUALIFIED');
+    if (spec.slotTextTemplate && (spec.type !== 'text' || !parent?.rootSlotContent || parent.type !== 'slot' ||
+        parent.children?.length !== 1 || specPath.length !== 2 || component.rootSlot?.textTemplate !== 1 ||
+        spec.characters !== '' || spec.name !== 'Content text template' || spec.contentProp || spec.callerContentProp ||
+        spec.textAutoResize !== 'WIDTH_AND_HEIGHT' || !spec.fontSizeVar || !spec.lineHeightVar || !spec.fontWeightVar || !spec.textFill))
+      throw Error('NATIVE_CONTRACT_DRAFT_TEXT_TEMPLATE_UNQUALIFIED');
     if (spec.contentProp !== undefined) {
       if (insideCallerSlot || spec.type !== 'text' || !textProperties.has(spec.contentProp) ||
           spec.characters !== textProperties.get(spec.contentProp))
@@ -142,6 +149,12 @@ export function prepareNativeContractDraft(
   data.variants.forEach(v => visit(v.spec, v.name, []));
   if (boundTextProperties.size !== textProperties.size)
     throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
+  const templatePlan = planNativeRootTextTemplate(data, { contractRevision: projection.contractRevision, tokenRevision });
+  if (templatePlan) {
+    projection.rootTextTemplate = templatePlan;
+    applyRootTextTemplateAliases(data, templatePlan);
+    for (const name of Object.values(templatePlan.aliases)) boundNames.add(name);
+  }
   data.nativeContractDraft = { revision: revisionOf(projection), acceptedContract: null };
   return { projection, component: data, boundNames: [...boundNames].sort(), fonts: [...fonts.values()] };
 }

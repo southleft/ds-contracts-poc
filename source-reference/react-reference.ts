@@ -1,4 +1,10 @@
+import {createReactSourceRepairApplications} from './react-source-repair-apply.js';
+import {completeNegativeControls,inventoryEvidence} from './react-validation-evidence.js';
+import {fileURLToPath} from 'node:url';
 import {isReactStateApiNativeRequest,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
+import {createReactSourceRepairPreviews} from './react-source-repair-preview.js';
+import {createReactSourceWitnessSuccessions} from './react-source-witness-succession.js';
+import {planReactOpacitySourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
@@ -43,7 +49,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, mkdirSync, writeFileSync, realpathSync, lstatSync, existsSync } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { loadReactCohort, reactCasesFile, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
+import { loadReactCohort, reactCasesFile, reactCohortWitnessSnapshot, requireWitnessedModules, type ReactCohort } from "./react-cohort.js";
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -144,7 +150,11 @@ export async function buildReactReference(
         name: "record-original-bytes",
         setup(builder) {
           builder.onLoad({ filter: /./, namespace: "file" }, (args) => {
-            const loader = loaders[path.extname(args.path)];
+            // Preserve esbuild's CSS Module semantics while recording the
+            // original bytes; a global-css override loses imported class maps.
+            const loader = args.path.endsWith(".module.css")
+              ? "local-css"
+              : loaders[path.extname(args.path)];
             if (!loader) throw Error("react-reference-unsupported-asset");
             const contents = readFileSync(args.path);
             const hash = sha(contents);
@@ -178,6 +188,7 @@ export async function buildReactReference(
       .sort(),
     javascript: sha(javascript),
     css: sha(css),
+    ...(cohort.witnessSuccession ? {witnessSuccession:cohort.witnessSuccession.revision} : {}),
   };
   const reference = {
     id: sha(JSON.stringify(identity)),
@@ -197,6 +208,12 @@ export async function buildReactReference(
 }
 export function reactReferenceUnchanged(reference: ReactReference) {
   try {
+    const succession=reference.cohort.witnessSuccession;
+    if(succession && (!/^sha256:[a-f0-9]{64}$/.test(succession.revision) ||
+      succession.cohortRevision!==revisionOf(reactCohortWitnessSnapshot(reference.cohort)) ||
+      JSON.stringify(Object.entries(reference.files).sort())!==JSON.stringify(Object.entries(succession.referenceFiles).sort()) ||
+      Object.entries(succession.evidenceFiles).some(([file,hash])=>!lstatSync(file).isFile()||
+        realpathSync(file)!==file||sha(readFileSync(file))!==hash))) return false;
     // Which cohort a root selects is itself source. A built-in reference
     // records no declaration path, so its absence is checked directly: anything
     // now at that path, even unreadable or refused, makes the reference stale.
@@ -357,6 +374,21 @@ export function createReactReferenceService(
     try { return native!().jobs.reactInitialRequest(id); }
     catch { return native!().jobs.reactEffectiveStateApiRequest(id).initial; }
   };
+  const sourceRepairs=createReactSourceRepairPreviews(repoRoot,(referenceId,parentId,proposalId)=>{
+    if(!native||!reference||reference.id!==referenceId||!reactReferenceUnchanged(reference))throw Error('react-source-repair-source-unavailable');
+    const {jobs,updateJobs}=native();
+    if(!updateJobs||jobs.reactIdentity(parentId).referenceId!==referenceId)throw Error('react-source-repair-pair-unavailable');
+    const update=updateJobs.forProposal(parentId,proposalId);
+    if(!update)throw Error('react-source-repair-design-read-required');
+    const design=updateJobs.designEvidence(update.id),request=initialRequestForOperation(parentId);
+    if(request.version!==1)throw Error('react-source-repair-root-initial-states-required');
+    const recorded=initialStates.repairEvidence(reference,request,design.input.component.contractId);
+    const plan=planReactOpacitySourceRepair(design,readFileSync(path.join(reference.sourceRoot,recorded.observation.source.module),'utf8'),recorded.observation.source);
+    const input=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_INPUT,output=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT;
+    if(!input||!output||[input,output].some(file=>path.isAbsolute(file)||file.split(/[\\/]/).includes('..')))
+      throw Error('react-source-repair-host-css-recipe-required');
+    return {reference,program:recorded.original.program,recorded,caseId:request.caseId,variants:recorded.nativeVariants,plan,recipe:{input,output}};
+  });
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -384,6 +416,72 @@ export function createReactReferenceService(
     return job;
   };
   let loading: Promise<ReactReference> | undefined;
+  function retainReference(reference:ReactReference){
+    const dir = path.join(
+      repoRoot,
+      "private/react-source-references",
+      reference.id,
+    );
+    mkdirSync(dir, { recursive: true });
+    for (const [name, bytes] of Object.entries({
+      "reference.html": reactReferenceHtml(reference),
+      "provenance.json":
+        JSON.stringify(
+          {
+            version: 1,
+            id: reference.id,
+            sourceRoot,
+            files: reference.files,
+            entrySha256: sha(reference.cohort.entry),
+            ...(reference.cohort.witnessSuccession?{witnessSuccession:reference.cohort.witnessSuccession.revision}:{}),
+            qualification: "unqualified",
+            cases: reference.cohort.cases,
+          },
+          null,
+          2,
+        ) + "\n",
+    })) {
+      try {
+        writeFileSync(path.join(dir, name), bytes, { flag: "wx" });
+      } catch (e) {
+        if (
+          (e as NodeJS.ErrnoException).code !== "EEXIST" ||
+          readFileSync(path.join(dir, name), "utf8") !== bytes
+        )
+          throw e;
+      }
+    }
+  }
+  const sourceApplications=createReactSourceRepairApplications(repoRoot,sourceRoot,{
+    requestRead(plan){
+      const transport=native?.().updateTransport;
+      if(!transport)throw Error('react-source-apply-companion-unavailable');
+      return transport.observeSourceRepair(plan.operationId,plan.baselineRevision,true);
+    },
+    readNative(plan,attemptId){
+      const jobs=native?.().updateJobs;
+      if(!jobs)throw Error('react-source-apply-companion-unavailable');
+      return jobs.sourceRepairReadEvidence(plan.operationId,attemptId,plan.baselineRevision);
+    },
+    async validate(current,origin){
+      retainReference(current);reference=current;
+      const job=startReactValidation(current,origin,path.join(repoRoot,'private/react-source-validations'));
+      validations.set(current.id,job);await job.promise;
+      const report=job.report(),ids=current.cohort.cases.map(c=>c.id);
+      if(report.state!=='complete'||report.problem||!report.sourceUnchanged||report.referenceId!==current.id||
+        report.denominator!==ids.length||report.valid!==ids.length||!report.engine||
+        canonicalJson(report.rows.map(r=>r.id))!==canonicalJson(ids)||report.rows.some(r=>!r.sourceValid||r.problems.length)||
+        !completeNegativeControls(report.rows,current.cohort.negativeCaseIds,
+          current.cohort.negativeCaseIds.filter(id=>current.cohort.profile(id).textContent==='absent'))||
+        report.engine.profilesSha256!==sha(JSON.stringify(current.cohort.cases.map(c=>current.cohort.profile(c.id)))))
+        throw Error('react-source-apply-source-validation-incomplete');
+      const engineRoot=path.dirname(fileURLToPath(import.meta.url));
+      return {referenceId:current.id,caseIds:ids,valid:report.valid,files:{
+        ...Object.fromEntries(Object.entries(inventoryEvidence(job.dir)).map(([file,hash])=>[path.join(job.dir,file),hash])),
+        ...Object.fromEntries(Object.entries(report.engine.files).map(([file,hash])=>[path.resolve(engineRoot,file),hash])),
+      }};
+    },
+  });
   const json = (res: ServerResponse, status: number, body: unknown) => {
     res.statusCode = status;
     res.setHeader("Content-Type", "application/json");
@@ -395,6 +493,62 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const sourceApplication=/^react\/source-repairs(?:\/([a-f0-9]{64})(?:\/(apply|rollback|connection))?)?$/.exec(route);
+    const applyPreview=/^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/source-repair\/([a-f0-9-]{36})\/apply$/.exec(route);
+    if(sourceApplication||applyPreview){
+      try{
+        if(Number(req.headers['content-length']??0)>0||req.headers['transfer-encoding'])throw Error('react-source-apply-body-refused');
+        if(applyPreview){
+          if(req.method!=='POST')throw Error('react-source-apply-method-refused');
+          const selected=sourceRepairs.selection(applyPreview[1],applyPreview[2],applyPreview[3],applyPreview[4]);
+          const prepared=sourceApplications.prepare(selected);
+          const job=sourceApplications.start(prepared.id,'apply',new URL(`http://${req.headers.host}`).origin);
+          void job.promise.catch(()=>{});json(res,202,{application:job.state});
+        }else{
+          const [,id,action]=sourceApplication!;
+          if(!action){
+            if(req.method!=='GET')throw Error('react-source-apply-method-refused');
+            json(res,200,id?{application:sourceApplications.read(id)}:{applications:sourceApplications.list()});
+          }else{
+            if(req.method!=='POST')throw Error('react-source-apply-method-refused');
+            const state=sourceApplications.read(id);
+            if(action==='connection'){
+              if(new URL(`http://${req.headers.host}`).port!=='5181')throw Error('react-source-apply-pairing-port');
+              const transport=native?.().updateTransport;
+              if(!transport)throw Error('react-source-apply-companion-unavailable');
+              json(res,200,{connection:transport.pair(state.operationId)});
+            }else{
+              const job=sourceApplications.start(id,action as 'apply'|'rollback',new URL(`http://${req.headers.host}`).origin);
+              void job.promise.catch(()=>{});json(res,202,{application:job.state});
+            }
+          }
+        }
+      }catch(error){
+        const message=error instanceof Error?error.message:'';
+        const reason=/^[a-z][a-z0-9-]*(?::[A-Za-z0-9:;._-]+)?$/.test(message)?message:undefined;
+        json(res,409,{error:'Source application cannot continue. Review the recorded result and reconnect the companion if needed.',reason});
+      }
+      return;
+    }
+    const repair=/^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/source-repair(?:\/([a-f0-9-]{36})\/(original|candidate-\d+|caller-original|caller-candidate)\/(\d+|[a-z][a-z-]{0,79})\/([a-f0-9]{64})\.png)?$/.exec(route);
+    if(repair) {
+      try {
+        if(!['GET',...(repair[4]?[]:['POST'])].includes(req.method??'')||Number(req.headers['content-length']??0)>0||req.headers['transfer-encoding']||
+            !reference||reference.id!==repair[1]||!reactReferenceUnchanged(reference))throw Error('react-source-repair-request-invalid');
+        if(repair[4]) {
+          const bytes=sourceRepairs.image(repair[1],repair[2],repair[3],repair[4],repair[5],repair[6],repair[7]);
+          res.writeHead(200,{'Content-Type':'image/png','Content-Length':bytes.length,'Cache-Control':'no-store'});res.end(bytes);return;
+        }
+        if(req.method==='POST') {
+          const job=sourceRepairs.start(repair[1],repair[2],repair[3]);void job.promise.catch(()=>{});
+          json(res,200,{preview:job.state});
+        }else json(res,200,{preview:sourceRepairs.read(repair[1],repair[2],repair[3])});
+      }catch(error){
+        const reason=error instanceof Error&&/^[a-z][a-z0-9-]*(?::[A-Za-z0-9:;._-]+)?$/.test(error.message)?error.message:undefined;
+        json(res,409,{error:'Source repair preview requires the current design read and complete source observations.',reason});
+      }
+      return;
+    }
     const contextual = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react\/child\/(instance-\d+)\/(initial-states|callback-behavior)$/.exec(route);
     if (contextual) {
       try {
@@ -827,43 +981,11 @@ export function createReactReferenceService(
         return;
       }
       try {
-        loading ??= buildReactReference(sourceRoot);
+        loading ??= buildReactReference(sourceRoot,createReactSourceWitnessSuccessions(repoRoot).load(sourceRoot));
         reference = await loading;
         if (!reactReferenceUnchanged(reference))
           throw Error("react-reference-source-changed");
-        const dir = path.join(
-          repoRoot,
-          "private/react-source-references",
-          reference.id,
-        );
-        mkdirSync(dir, { recursive: true });
-        for (const [name, bytes] of Object.entries({
-          "reference.html": reactReferenceHtml(reference),
-          "provenance.json":
-            JSON.stringify(
-              {
-                version: 1,
-                id: reference.id,
-                sourceRoot,
-                files: reference.files,
-                entrySha256: sha(reference.cohort.entry),
-                qualification: "unqualified",
-                cases: reference.cohort.cases,
-              },
-              null,
-              2,
-            ) + "\n",
-        })) {
-          try {
-            writeFileSync(path.join(dir, name), bytes, { flag: "wx" });
-          } catch (e) {
-            if (
-              (e as NodeJS.ErrnoException).code !== "EEXIST" ||
-              readFileSync(path.join(dir, name), "utf8") !== bytes
-            )
-              throw e;
-          }
-        }
+        retainReference(reference);
         json(res, 200, {
           id: reference.id,
           source: reference.cohort.source,
@@ -881,7 +1003,7 @@ export function createReactReferenceService(
         // A refused declaration is named so its author can correct it. Only an
         // identifier leaves the host: no path, file content or parser text.
         const message = error instanceof Error ? error.message : "";
-        const reason = /^react-cases-[a-z-]{2,60}$/.test(message) ? message : undefined;
+        const reason = /^react-(?:cases|source-witness|source-transaction)-[a-z-]{2,60}$/.test(message) ? message : undefined;
         json(res, 409, {
           error:
             "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with a source workspace and its installed dependencies; source files are never modified by this action.",
@@ -1187,6 +1309,7 @@ export function createReactReferenceService(
     callerNativeEvidence,
     stateApiNativeEvidence:thisStateApiEvidence,
     close() {
+      sourceApplications.close();
       for (const job of validations.values()) job.close();
       for (const job of ownershipJobs.values()) job.close();
     },

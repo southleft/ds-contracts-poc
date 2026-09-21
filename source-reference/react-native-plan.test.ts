@@ -11,6 +11,9 @@ import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from '../core/token-set.js';
 import { nativeFixtureHost } from './native-operation-test-fixture.js';
+import { nativeTextBindings } from '../core/native-text-template-test-fixture.js';
+import {emitNativeTemplateGraphScript,emitNativeTemplateGraphReadbackScript} from '../core/native-root-text-template-graph-native.js';
+import {acceptTemplateGraphAllocation,observeTemplateGraph} from './native-template-operation.js';
 import { SOURCE_NATIVE_FILE_KEY } from './native-operation-jobs.js';
 import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
 import type { ReactRootMatrix } from './react-root-matrix.js';
@@ -28,7 +31,7 @@ import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { builtinReactCohort } from './react-cohort.js';
 
 // Synthetic input and native API mock: guard/structure evidence, not visual fidelity.
-function inputFixture(shadow?: string) {
+function inputFixture(shadow?: string, template = false) {
   const contract = ContractSchema.parse({ id: 'check.react-native', name: 'ReactNativeDraft',
     status: 'draft', version: '0.1.0', description: 'Synthetic root draft', states: [],
     semantics: { element: 'button' }, props: [{ name: 'tone', type: { enum: ['quiet', 'null'] },
@@ -45,6 +48,12 @@ function inputFixture(shadow?: string) {
   const tokens = { surface: { $type: 'color', $value: '#123456' }, space: { $type: 'dimension', $value: '8px' },
     height: { $type: 'dimension', $value: '36px' }, width: { $type: 'dimension', $value: '72px' },
     ...(shadow ? { shadow: { $type: 'shadow', $value: shadow } } : {}) };
+  if (template) {
+    Object.assign(tokens,{size:{$type:'dimension',$value:'12px'},line:{$type:'dimension',$value:'18px'},weight:{$type:'fontWeight',$value:400}});
+    contract.anatomy.root.slot!.bindings={figma:{textTemplate:true}};
+    contract.anatomy.root.declared={'font-family':'Inter'};
+    Object.assign(contract.anatomy.root.tokens!,{'font-size':'{size}','font-weight':'{weight}','line-height':'{line}',color:'{surface}'});
+  }
   const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
   const matrix: ReactRootMatrix = { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
     draft: { properties: ['tone'], status: 'native-compiled', contract, tokens,
@@ -230,10 +239,43 @@ test('wrong file and interrupted creation remain distinct from a safe repeat', a
   assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
 });
 
-for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
+test('graph allocation requires complete IDs and a separate read; malformed and partial results never authorize components', async () => {
+  const {input}=inputFixture(undefined,true),plan=prepareReactNativePlan(input).plan,graph=plan.templateGraph!;
+  const h=nativeFixtureHost({modeLimit:2,consumerVariableModes:true});nativeTextBindings(h.figma);
+  const run=async(script:string,figma=h.figma)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma,console},{timeout:5000})));
+  const script=emitNativeTemplateGraphScript(graph.input).script,result=await run(script);
+  const accepted=acceptTemplateGraphAllocation(graph.input,graph.graph.revision,result);
+  assert.equal(accepted.phase,'tokens-created');assert.ok('templateGraphIdentity' in accepted);
+  assert.equal(observeTemplateGraph(graph.input,result.identity,result).phase,'observation-refused','creation receipt is never independent readback');
+  for(const mutate of [
+    (r:any)=>{r.graphRevision=revisionOf('forged');},
+    (r:any)=>{r.allocation.source.creationIdentity.collection.id='other';},
+    (r:any)=>{r.allocation.selectors.pop();},
+    (r:any)=>{r.identity.routes[0].id=r.identity.source.variables[0].id;},
+    (r:any)=>{r.allocationAttempted=false;},
+  ]){const changed=structuredClone(result);mutate(changed);assert.equal(acceptTemplateGraphAllocation(graph.input,graph.graph.revision,changed).phase,'creation-invalid');}
+  const read=await run(emitNativeTemplateGraphReadbackScript(graph.input,result.identity));
+  assert.equal(observeTemplateGraph(graph.input,result.identity,read).phase,'tokens-observed');
+  for(const mutate of [
+    (r:any)=>{r.receipt.routes[0].valuesByMode={};},
+    (r:any)=>{r.receipt.source.variables[0].valuesByMode={};},
+    (r:any)=>{r.receipt.selectors[0].variableIds=[];},
+    (r:any)=>{r.graphRevision=revisionOf('forged');},
+  ]){const changed=structuredClone(read);mutate(changed);assert.equal(observeTemplateGraph(graph.input,result.identity,changed).phase,'observation-refused');}
+  assert.equal(observeTemplateGraph(graph.input,undefined,read).phase,'observation-refused');
+  assert.throws(()=>buildReactNativeComponentWrite({...input,expectedPlanRevision:prepareReactNativePlan(input).revision,
+    tokens:{input:plan.tokenInput,identity:result.identity.source,receipt:read.receipt.source}}),/CONTEXT_CHANGED|unqualified|graph/);
+  const partialHost=nativeFixtureHost({modeLimit:1}),partial=await run(script,partialHost.figma),before=JSON.stringify(partial);
+  assert.equal(acceptTemplateGraphAllocation(graph.input,graph.graph.revision,partial).phase,'partial-allocation');
+  assert.equal(JSON.stringify(partial),before);assert.ok(partial.allocation.source.allocation.collection.id);assert.ok(partial.allocation.selectors[0].id);
+  const refused=await run(script);
+  assert.equal(acceptTemplateGraphAllocation(graph.input,graph.graph.revision,refused).phase,'creation-refused');
+});
+
+for (const kind of ['root', 'initial', 'nested', 'fresh', 'graph'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-native-journal-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
-  const { input } = inputFixture();
+  const { input } = inputFixture(undefined,kind==='graph');
   if (kind === 'fresh') input.matrix.draft!.native!.setName='Archived compiler output';
   const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
     ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
@@ -286,13 +328,14 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
           plan: (request.compilation ? prepareReactNativeFreshPlan : prepareReactNativePlan)({ ...input, operation }) };
       },
       buildComponent: (_, context) => (request.compilation ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({ ...input, operation: context.operation,
-        expectedPlanRevision: context.planRevision, tokens: context.tokens }),
+        expectedPlanRevision: context.planRevision, tokens: context.tokens, templateGraph: context.templateGraph }),
     },
   };
   let jobs = createNativeOperationJobs(repo, options), transport = createNativeOperationTransport(repo, jobs);
   const first = jobs.prepare(operationRequest), pair = transport.pair(first.id), secret = pair.split('.')[1];
-  const host = nativeFixtureHost(); host.figma.fileKey = REACT_NATIVE_FILE_KEY;
-  Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, m: string) { this.explicitVariableModes = { [c.id]: m }; };
+  const host = nativeFixtureHost(kind==='graph'?{modeLimit:2,consumerVariableModes:true}:{}); host.figma.fileKey = REACT_NATIVE_FILE_KEY;
+  if(kind==='graph')nativeTextBindings(host.figma);
+  Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, m: string) { this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: m }; };
   const storage = new Map<string, any>(), messages: any[] = [];
   host.figma.showUI = () => {};
   host.figma.clientStorage = { getAsync: async (k: string) => structuredClone(storage.get(k)),
@@ -331,7 +374,7 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
   await send({ type: 'native-poll' }); assert.equal(messages.at(-1).status, 'finished');
   assert.equal(host.figma.root.findAll(() => true).length, before);
   assert.throws(() => jobs.prepare(kind === 'initial' ? { ...initialRequest, observation: { ...initialRequest.observation, reportSha256: 'f'.repeat(64) } } : { ...request, matrixRevision: revisionOf('changed') }), /baseline-already-reserved/);
-  assert.equal(jobs.listReact(request.referenceId)[0].kind, kind === 'fresh' ? 'root' : kind);
+  assert.equal(jobs.listReact(request.referenceId)[0].kind, kind === 'fresh'||kind==='graph' ? 'root' : kind);
   if(kind === 'fresh') {
     assert.equal(jobs.get(first.id).sourceCompilerRecompiled,true);
     const legacy={...request};delete legacy.compilation;
@@ -373,6 +416,20 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
   main.opacity=opacity;
   transport.retryObservation(first.id);await send({type:'native-poll'});
   assert.equal(jobs.get(first.id).phase,'component-structure-observed');
+  if(kind==='graph'){
+    const graph=jobs.reactUpdateBaseline(first.id).input.templateGraph!;
+    assert.ok(graph);
+    assert.equal(jobs.get(first.id).counters.variables,graph.identity.source.variables.length+graph.identity.routes.length);
+    const route=host.variables.find(v=>v.id===graph.identity.routes[0].id)!,saved=structuredClone(route.valuesByMode);
+    const mode=Object.keys(route.valuesByMode)[1];route.setValueForMode(mode,{type:'VARIABLE_ALIAS',id:route.id});
+    transport.retryObservation(first.id);await send({type:'native-poll'});
+    assert.equal(jobs.get(first.id).phase,'component-observation-refused');
+    assert.throws(()=>jobs.reactUpdateBaseline(first.id),/verified-baseline-required/);
+    route.setValueForMode(mode,saved[mode]);transport.retryObservation(first.id);await send({type:'native-poll'});
+    assert.equal(jobs.get(first.id).phase,'component-structure-observed');
+    assert.throws(()=>transport.inspectSizing(first.id),/template-graph-sizing-unqualified/);
+    return;
+  }
   // The optional sizing reader is delivered by the real companion, and its
   // required facts survive restart, interruption and a failed read. Old journal
   // prefixes retain the old input and receipts exactly.

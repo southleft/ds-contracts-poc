@@ -22,6 +22,7 @@ import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {prepareReactRootTextTemplate} from './react-root-text-template.js';
 
 for(const joint of ['paint','opacity',false] as const)test(`optional root axes ${joint==='paint'?'carry complete joint paint tables':joint==='opacity'?'retain unsupported joint-binding refusals':'still compile independently factored paint'}`,async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
@@ -30,7 +31,7 @@ for(const joint of ['paint','opacity',false] as const)test(`optional root axes $
   const source=`import React from 'react';
 export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'solid'|'outline';children?:React.ReactNode}){
  const colors={warm:['rgb(80, 20, 10)','rgb(160, 40, 20)'],cool:['rgb(10, 20, 80)','rgb(20, 40, 160)'],absent:['rgb(30, 30, 30)','rgb(90, 90, 90)']};
- return <section style={{display:'inline-flex',height:20,padding:4,backgroundColor:colors[tone??'absent'][${joint==='paint'?"finish==='outline'?1:0":'0'}],opacity:${joint==='opacity'?"(tone==='warm'?0.8:0.6)*(finish==='solid'?0.5:1)":"finish==='solid'?0.8:1"}}}>{children}</section>;
+ return <section style={{display:'inline-flex',height:20,padding:4,fontFamily:'Arial',fontSize:12,fontWeight:400,lineHeight:'20px',color:'#123456',backgroundColor:colors[tone??'absent'][${joint==='paint'?"finish==='outline'?1:0":'0'}],opacity:${joint==='opacity'?"(tone==='warm'?0.8:0.6)*(finish==='solid'?0.5:1)":"finish==='solid'?0.8:1"}}}>{children}</section>;
 }`;
   writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
   writeFileSync(path.join(dir,'surface.tsx'),source);
@@ -60,6 +61,22 @@ export function Surface({tone,finish,children}:{tone?:'warm'|'cool';finish?:'sol
   }else{
    assert.deepEqual(draft.problems,[]);assert.equal(draft.native!.variants.length,9);
    assert.ok(draft.native!.variants.every(v=>v.spec.fill),'independent paint is retained in every omitted/set combination');
+   assert.equal(draft.contract!.anatomy.root.slot!.bindings?.figma?.textTemplate,true);
+   assert.ok(draft.native!.variants.every(v=>v.spec.children?.[0].children?.[0].characters===''));
+   const legacyRows=structuredClone(effects),legacySnapshots=structuredClone(snapshots);
+   for(const row of legacyRows.rows){delete row.propertyCaptureVersion;delete legacySnapshots[row.id].propertyCaptureVersion;}
+   const legacy=assembleReactRootMatrix(program,ownership,tree,legacyRows,legacySnapshots).draft!;
+   assert.equal(legacy.status,'native-compiled');assert.equal(legacy.contract!.anatomy.root.slot!.bindings?.figma?.textTemplate,undefined);
+   const mixed=structuredClone(effects);delete mixed.rows[0].propertyCaptureVersion;
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,mixed,snapshots).draft!.problems,['react-root-text-template-capture-version-mixed']);
+   const badBounds=structuredClone(snapshots);badBounds[effects.rows[0].id].bounds!.x+=0.25;
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,badBounds).draft!.problems,['react-root-text-template-bounds-unverified']);
+   const nested=structuredClone(snapshots[effects.rows[0].id]),nestedRow=structuredClone(effects.rows[0]);
+   const child=structuredClone(nested.tree);nested.tree.nodes=[{t:'el',el:child}];
+   nested.fonts!.rows[0].path=[0];nested.fonts!.treeRevision=revisionOf(nested.tree);
+   nestedRow.fontsSha256=evidenceSha(JSON.stringify(nested.fonts));
+   const nestedResult=prepareReactRootTextTemplate(legacy.contract!,draft.tokens!,[{snapshot:nested,row:nestedRow,rootPath:'',caller:'Untouched caller'}]);
+   assert.equal(nestedResult.admitted,false);assert.equal(nestedResult.limitation,'root-text-template-unqualified:direct-caller-text-required');
    if(joint==='paint')assert.equal(draft.contract!.anatomy.root.tokensByCombination![0].rows.length,9);
   }
   assert.equal(JSON.stringify({program,ownership,tree,effects,snapshots}),before);
@@ -86,7 +103,9 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
   const c=program.components[0],identity={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
   const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Surface}];flushSync(()=>createRoot(document.getElementById('root')).render(<Surface>Original caller content</Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
-  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--twin:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  const font=readFileSync('extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2').toString('base64');
+  await page.setContent('<style>@font-face{font-family:AppAlias;src:url(data:font/woff2;base64,'+font+')}section{font-family:AppAlias}:root{--base:rgb(10, 20, 30);--twin:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>document.fonts.ready);
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
   const selector='#root > section',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
@@ -99,6 +118,37 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
   assert.equal(draft.native!.variants.length,defaulted?8:10);assert.equal(JSON.stringify(draft.contract).includes('Original caller content'),false);
   assert.deepEqual(draft.contract!.anatomy.root.slot,{name:'children'});assert.equal(draft.contract!.anatomy.root.parts,undefined);
   assert.equal(effects.planned,15);
+  assert.ok(Object.values(snapshots).every(s=>s.tree.style['font-family']==='AppAlias'&&s.fonts?.rows[0].fonts[0].familyName==='IBM Plex Sans'));
+  assert.ok(effects.rows.every(r=>r.fontsSha256===evidenceSha(JSON.stringify(snapshots[r.id].fonts))));
+  assert.equal(draft.contract!.anatomy.root.declared?.['font-family'],'"IBM Plex Sans"');
+  assert.equal(draft.lowerings.filter(l=>l.reason==='painted-font-family').length,15);
+  for(const mutate of [
+   (s:ReactPropertySnapshot)=>{delete s.fonts;},
+   (s:ReactPropertySnapshot)=>{s.fonts!.rows[0].fonts[0].familyName='Unobserved';},
+   (s:ReactPropertySnapshot)=>{s.fonts!.treeRevision='sha256:'+'0'.repeat(64);},
+  ]){
+   const changedFonts=structuredClone(snapshots);mutate(changedFonts[effects.rows[0].id]);
+   assert.match(assembleReactRootMatrix(program,ownership,tree,effects,changedFonts).draft!.problems[0],/react-property-font-/);
+  }
+  const incompleteFonts=structuredClone(effects),incompleteSnapshots=structuredClone(snapshots);
+  delete incompleteFonts.rows[0].fontsSha256;delete incompleteSnapshots[incompleteFonts.rows[0].id].fonts;
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,incompleteFonts,incompleteSnapshots).draft!.problems,['react-property-font-coverage-incomplete']);
+  const aliasedFonts=structuredClone(effects),aliasedSnapshots=structuredClone(snapshots),aliasRow=aliasedFonts.rows[0];
+  aliasedSnapshots[aliasRow.id].fonts!.rows[0].cssFamily='OtherAlias';
+  aliasRow.fontsSha256=evidenceSha(JSON.stringify(aliasedSnapshots[aliasRow.id].fonts));
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,aliasedFonts,aliasedSnapshots).draft!.problems,['text-font-source-node-changed']);
+  if(defaulted){
+   const mismatch=structuredClone(effects),mismatchSnapshots=structuredClone(snapshots);
+   const omitted=mismatch.rows.find(r=>r.changes.tone.kind==='omit')!;
+   mismatchSnapshots[omitted.id].fonts!.rows[0].fonts[0].familyName='Different Family';
+   omitted.fontsSha256=evidenceSha(JSON.stringify(mismatchSnapshots[omitted.id].fonts));
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,mismatch,mismatchSnapshots).draft!.problems,['react-root-matrix-default-font-differs']);
+  }
+  const legacyEffects=structuredClone(effects),legacySnapshots=structuredClone(snapshots);
+  for(const r of legacyEffects.rows){delete r.fontsSha256;delete legacySnapshots[r.id].fonts;}
+  const legacy=assembleReactRootMatrix(program,ownership,tree,legacyEffects,legacySnapshots).draft!;
+  assert.equal(legacy.status,'native-compiled');assert.equal(legacy.contract!.anatomy.root.declared?.['font-family'],'AppAlias');
+  assert.ok(!legacy.lowerings.some(l=>l.reason==='painted-font-family'),'old archives cannot acquire an inferred font witness');
   assert.deepEqual(draft.sizing?.map(s=>[s.channel,s.status]),[['width','retained'],['height','retained']]);
   const codeValues=draft.contract!.props.find(p=>p.name==='tone')!.bindings.code.values!;
   assert.equal(Object.values(codeValues).filter(v=>v===null).length,1);assert.ok(Object.values(codeValues).includes('null'));

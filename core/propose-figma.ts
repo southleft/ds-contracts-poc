@@ -4,6 +4,7 @@ import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './ab
 import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
+import { validateRootTextTemplates } from './figma-slot-text-template.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
 /**
@@ -1653,13 +1654,15 @@ function unifyRefs(
 
 /** Unify dump-stamped slash names (fontSizeVar / fontWeightVar / lineHeightVar)
  *  the same way bound layout paints unify. One name → that ref; many names
- *  that spell one enum axis → a substituted ref. Anything else stays
- *  undefined so the numeric mint path can still run. */
+ *  that spell one enum axis → a substituted ref; other complete enum
+ *  functions retain their original refs through tokensByProp, including
+ *  the omitted plane. Anything else leaves the numeric mint path available. */
 function unifyStampedTextVar(
   occs: Array<{ variant: string; node: DumpNode }>,
   pick: (text: NonNullable<DumpNode['text']>) => string | undefined,
   axes: Axis[],
-): string | undefined {
+  preservePerValue = false,
+): string | PerValueRef | undefined {
   const u = unifyRefs(
     occs.map((o) => {
       const raw = o.node.text ? pick(o.node.text) : undefined;
@@ -1668,7 +1671,7 @@ function unifyStampedTextVar(
     axes,
     `text-style-variable@${occs[0]?.node.name ?? 'text'}`,
   );
-  return u.kind === 'ref' ? u.ref : undefined;
+  return u.kind === 'ref' ? u.ref : preservePerValue && u.kind === 'per-value' ? u.perValue : undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -5345,9 +5348,10 @@ function weightTokenRef(ctx: Ctx, fontStyle: string): string | undefined {
 function mintTextChannels(
   m: Merged,
   tokens: Record<string, string>,
+  byProp: ByPropCollector,
   ctx: Ctx,
   where: string,
-  opts: { weight: boolean },
+  opts: { weight: boolean; preservePerValue?: boolean },
   /** v17 — see mintObservation.styleName. */
   styleName?: string,
   styleKey?: string,
@@ -5373,9 +5377,9 @@ function mintTextChannels(
   // site is what stops the answer depending on which carrier the node happened
   // to use: Badge and Button recovered the weight's VALUE through the mint
   // path while Label recovered its IDENTITY, for no reason a reader could see.
-  const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
+  const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes, opts.preservePerValue);
   if (stamped !== undefined) {
-    tokens['font-weight'] = stamped;
+    carryRef(tokens, byProp, 'font-weight', stamped, ctx, where);
   }
   // >1 distinct stamp is a size-varying weight, not a contradiction — the
   // contract binds a substituted ref and the canvas resolves it per variant.
@@ -5417,9 +5421,9 @@ function mintTextChannels(
   // (`imported.label.root.line-height`). Value was never the problem; identity
   // was. One distinct stamp binds; disagreeing stamps are NAMED, not picked
   // between; no stamp falls through to the mint below, unchanged.
-  const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes);
+  const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes, opts.preservePerValue);
   if (stampedLh !== undefined) {
-    tokens['line-height'] = stampedLh;
+    carryRef(tokens, byProp, 'line-height', stampedLh, ctx, where);
     return;
   }
   // @door propose.line-height-multi-stamp-falls-through
@@ -5930,7 +5934,7 @@ function carryClip(
   );
 }
 
-function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false): Record<string, string> {
+function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false, preservePerValue = false): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
     m,
@@ -5957,8 +5961,8 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // substituted-ref case — minting from the px values remints a dump-slug
   // path (`imported.<set-slug>.label.font-size.{size}`) over the canvas
   // names (`imported/button/root/font-size/{size}`). FC-DUMP-PROPOSE-TYPE-UNPINNED.
-  const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes);
-  const stampedWeight = stampedSize !== undefined ? unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes) : undefined;
+  const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes, preservePerValue);
+  const stampedWeight = stampedSize !== undefined ? unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes, preservePerValue) : undefined;
   const sizeVarsVary = new Set(textOcc.map((o) => o.node.text!.fontSizeVar)).size > 1;
   // ONE size stamp and NO weight stamp (the repo's own pre-v1.22 dumps:
   // Switch descriptionText) keeps the uniform-sizeVar branch below, whose
@@ -5966,9 +5970,9 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // minted a dump-slug weight the corpus already spells (design-roundtrip
   // Switch MISMATCH 1).
   if (stampedSize !== undefined && (stampedWeight !== undefined || sizeVarsVary)) {
-    tokens['font-size'] = stampedSize;
-    if (stampedWeight !== undefined) tokens['font-weight'] = stampedWeight;
-    mintTextChannels(m, tokens, ctx, where, { weight: tokens['font-weight'] === undefined });
+    carryRef(tokens, byProp, 'font-size', stampedSize, ctx, where);
+    if (stampedWeight !== undefined) carryRef(tokens, byProp, 'font-weight', stampedWeight, ctx, where);
+    mintTextChannels(m, tokens, byProp, ctx, where, { weight: tokens['font-weight'] === undefined, preservePerValue });
     return tokens;
   }
   const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
@@ -6043,9 +6047,10 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     mintTextChannels(
       m,
       tokens,
+      byProp,
       ctx,
       where,
-      { weight: true },
+      { weight: true, preservePerValue },
       varyingStyle,
       varyingStyleKey,
       perOccStyles ? textOcc : undefined,
@@ -6086,7 +6091,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
       // @door propose.weight-not-corpus-nameable
       tokens['font-weight'] = ref(stampedWeight[0]);
-      mintTextChannels(m, tokens, ctx, where, { weight: false });
+      mintTextChannels(m, tokens, byProp, ctx, where, { weight: false, preservePerValue });
       return tokens;
     }
     if (stampedWeight.length > 1) {
@@ -6103,8 +6108,9 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
         );
       }
     }
-    mintTextChannels(m, tokens, ctx, where, {
+    mintTextChannels(m, tokens, byProp, ctx, where, {
       weight: observed !== 'Medium' && weightRef === undefined,
+      preservePerValue,
     });
     return tokens;
   }
@@ -6193,9 +6199,10 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   mintTextChannels(
     m,
     tokens,
+    byProp,
     ctx,
     where,
-    { weight: !style },
+    { weight: !style, preservePerValue },
     unresolvedStyle,
     unresolvedStyleKey,
   );
@@ -11918,7 +11925,10 @@ function proposeFromDumpFenced(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const rootContent = readRootContent(set);
-  if (rootContent?.normalized) set = rootContent.normalized;
+  const template = rootContent?.textTemplate ? validateRootTextTemplates(set, opts.corpus, opts.capturedValues) : undefined;
+  const templateFamily = template?.family;
+  if (template?.normalized) set = template.normalized;
+  else if (rootContent?.normalized) set = rootContent.normalized;
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
@@ -12585,9 +12595,24 @@ function proposeFromDumpFenced(
   const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined;
   if (rootContent) {
     const slot: Record<string, unknown> = { name: 'children' };
-    if (rootContent.property !== 'Children') slot.bindings = { figma: { property: rootContent.property } };
+    if (rootContent.property !== 'Children' || rootContent.textTemplate) slot.bindings = { figma: {
+      ...(rootContent.property !== 'Children' ? { property: rootContent.property } : {}),
+      ...(rootContent.textTemplate ? { textTemplate: true } : {}),
+    } };
     applySlotAccepts(slot, rootContent.property, ctx, where, true);
     root.slot = slot;
+    if (rootContent.textTemplate) {
+      const template = only!.children[0], path = `${where}/Content text template`;
+      const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true, true);
+      Object.assign(rootTokens, textTokens);
+      carryTextCase(template, root, ctx, path);
+      carryFontSlant(template, root, ctx, path);
+      root.declared = { ...(root.declared as Record<string, string> | undefined), 'font-family': templateFamily! };
+      carryLetterSpacing(template, root, ctx, path, rootTokens);
+      carryTextAlign(template, root, ctx, path);
+      if (ctx.mint) for (const o of ctx.mint.observations) if (o.target === textTokens) o.target = rootTokens;
+      ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
+    }
     ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
   } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
@@ -13830,9 +13855,10 @@ export function proposeBatchFromDump(
   // The batch has the whole dump, so the captured-variable value index
   // (dump v1.4 `_variables` — the class-① mint-routing input) is built here
   // once unless the caller supplied its own.
+  const capturedLayer = capturedTokensFromDump(dump);
   const capturedValues =
     opts.capturedValues ??
-    new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+    new Map((capturedLayer?.entries ?? []).map((e) => [e.path, e.value] as const));
   // The dump stores one value per variable name, not the selected mode of
   // each consuming node. A joint table must not flatten differing modes.
   // Inspect the raw table so malformed mode values cannot disappear during
@@ -13994,6 +14020,18 @@ export function proposeBatchFromDump(
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
+      if (value.rootSlot && typeof value.rootSlot === 'object' &&
+          (value.rootSlot as { textTemplate?: unknown }).textTemplate === 1) {
+        const templateNames = new Set(value.variants.flatMap(root =>
+          Object.values(root.children?.[0]?.children?.[0]?.variableConsumers ?? {})
+            .flatMap(c => [c.name, ...(c.aliasChain ?? []).map(hop => hop.name)])));
+        if (capturedLayer?.skipped.some(skip => skip.name === value.setName || templateNames.has(skip.name)))
+          throw Error('FIGMA_SLOT_TEXT_TEMPLATE_READBACK_UNQUALIFIED: conflicting or unregistrable captured template tokens');
+      }
+      if (value.rootSlot && typeof value.rootSlot === 'object' &&
+          (value.rootSlot as { textTemplate?: unknown }).textTemplate !== undefined &&
+          (captureGapNote || degradations.some(d => d.nodePath === name || d.nodePath.startsWith(`${name}:`))))
+        throw Error('FIGMA_SLOT_TEXT_TEMPLATE_CAPTURE_UNQUALIFIED: incomplete capture or degradation on the template set');
       const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
       attachSiblingStubs(proposal);
       registerSession(proposal.contract as Record<string, unknown>, name);

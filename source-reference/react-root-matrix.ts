@@ -15,6 +15,8 @@ import {projectReactRootVisual,reactRootStyleExclusion} from './react-root-visua
 import {compileReactRootSweep,retainReactRootSourceBindings} from './react-root-sweep.js';
 import type {ReactPropertySnapshot,ReactRootVariants} from './react-root-variants.js';
 import {evidenceSha} from './react-validation-evidence.js';
+import {reactPropertyPaintedRoot,assertReactPropertyFontCoverage} from './react-property-fonts.js';
+import {prepareReactRootTextTemplate,type ReactRootTextPlane} from './react-root-text-template.js';
 export interface ReactRootMatrix {
  version:1;qualification:'combined-property-root-draft';acceptedContract:null;
  draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[];sizing?:ReactSizingReport[]};problems:string[];
@@ -47,6 +49,8 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const roots=new Map<string,CapturedNode>(),projections=new Map<string,ReturnType<typeof projectReactRootVisual>['roots'][number]>(),trees=new Map<string,string>();
    // Every observed row, including an omission that shares its default's key.
    const planes:Array<ReturnType<typeof projectReactRootVisual>['roots'][number]>=[];
+   const textPlanes:ReactRootTextPlane[]=[];
+   assertReactPropertyFontCoverage(matrix.rows,snapshots);
    for(const row of matrix.rows){
     const snap=snapshots[row.id];if(row.status!=='observed'||!row.restored||!snap||snap.treeSha256!==row.treeSha256||snap.image!==row.image||evidenceSha(JSON.stringify(snap.tree))!==row.treeSha256)throw Error('react-root-matrix-observation-unverified');
     const instance=snap.ownership.components.find(i=>i.id===matrix.instanceId);if(!instance||JSON.stringify(instance.source)!==JSON.stringify(matrix.source))throw Error('react-root-matrix-source-changed');
@@ -64,7 +68,12 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
     if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-matrix-content-unqualified');
     const prior=projections.get(key);
     if(prior&&(JSON.stringify(prior.sourceBindings)!==JSON.stringify(projected.sourceBindings)||JSON.stringify(prior.sourceSizing)!==JSON.stringify(projected.sourceSizing)))throw Error('react-root-matrix-default-provenance-differs');
-    const root:CapturedNode={...structuredClone(linked.roots[0].observation),nodes:[],style:Object.fromEntries(Object.entries(linked.roots[0].observation.style).map(([k,v])=>[k,normalizeValue(v)]))};
+    const painted=reactPropertyPaintedRoot(snap,row,linked.roots[0].path);
+    textPlanes.push({snapshot:snap,row,rootPath:linked.roots[0].path,caller:instance.props.children});
+    const root:CapturedNode={...painted,nodes:[],style:Object.fromEntries(Object.entries(painted.style).map(([k,v])=>[k,normalizeValue(v)]))};
+    if(painted.style['font-family']!==linked.roots[0].observation.style['font-family'])
+     result.lowerings.push({value:key,channel:'font-family',from:linked.roots[0].observation.style['font-family'],to:painted.style['font-family'],reason:'painted-font-family'});
+    if(roots.has(key)&&roots.get(key)!.style['font-family']!==root.style['font-family'])throw Error('react-root-matrix-default-font-differs');
     // Same bounded flex-gap lowering as the single-property adapter (CSS Align3 8.1).
     if(root.style.display==='flex'||root.style.display==='inline-flex')for(const channel of ['row-gap','column-gap'])if(root.style[channel]==='normal'){
      root.style[channel]='0px';if(!result.lowerings.some(l=>l.value===key&&l.channel===channel))result.lowerings.push({value:key,channel,from:'normal',to:'0px',reason:'flex-normal-gap-used-value'});
@@ -89,7 +98,9 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),
     states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'},...(grid?{layout:grid,literals:{...(fills?{width:'100%'}:{}),height:'fit-content'}}:{})}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
-   const {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
+   let {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
+   const textTemplate=prepareReactRootTextTemplate(enriched,tokens,textPlanes);enriched=textTemplate.contract;
+   if(textTemplate.limitation)result.limitations.push(textTemplate.limitation);
    if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-matrix-content-boundary-changed');
    const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-matrix-invalid:'+errors.join(';'));
    result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';
