@@ -7890,6 +7890,13 @@ remain unqualified. Evidence is retained in
 `joint-optional-token-bindings-20260920/` and
 `daisyui-source-intake-20260920/`.
 
+A live adversarial edit changes the primary main's bound fill opacity from 1
+to 0.5 without changing its variable reference. The canonical capture of that
+edit is refused by the application. Restoring the paint restores the exact
+original PNG bytes, native caller dimensions and successful app import. This
+proves the bounded opacity refusal and restoration; it does not qualify general
+native update synchronization.
+
 To reverse, remove the optional schema field, shared resolver/referee, fuser and
 inverse admission, and all emitter/resource consumers together; restore the
 D.95 overflow expectation for these pairs. Preserve the failed native run,
