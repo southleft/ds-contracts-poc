@@ -64,6 +64,17 @@ test('complete variant tracking uses provisional axis tokens while partial data 
   assert.equal(ContractSchema.parse(zero.contract).anatomy.root.parts!.Label.literals?.['letter-spacing'], undefined, 'uniform default remains byte-stable');
 });
 
+test('complete observed tracking retains the captured auto-width fact through proposal', () => {
+  const { set } = mapped([0, 1].map(letterSpacing => ({ letterSpacing, textAutoResize: 'WIDTH_AND_HEIGHT' })));
+  const before = structuredClone(set);
+  const result = proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }), contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });
+  const label = ContractSchema.parse(result.contract).anatomy.root.parts!.Label;
+  assert.equal(label.textAutoResize, 'WIDTH_AND_HEIGHT');
+  assert.equal(label.tokens!['letter-spacing'], '{imported.badge.label.letter-spacing.{tone}}');
+  assert.ok(!result.notes.some(n => n.includes('whole-pixel box is WITHDRAWN')));
+  assert.deepEqual(set, before);
+});
+
 test('a designer-authored label reaches the contract as a letter-spacing literal through the REST reader', () => {
   const { set } = mapped([{ letterSpacing: 1 }, { letterSpacing: 1 }]);
   const result = proposeFromDump(set, { corpus: tokenCorpusFromJson({ primitives: { paint: { a: { $type: 'color', $value: '#ffffff' } } }, semantic: {}, light: {}, brandDefault: {} }), contractIdByName: new Map(), fileKey: null, projectionMode: 'reviewable-inversion', mintUnbound: true });

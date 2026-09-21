@@ -4649,10 +4649,19 @@ give the text element the same box Figma draws:
 
 ```
 inline-size: calc-size(fit-content, round(up, size, 1px));
-inline-size: calc-size(fit-content, round(up, size - <letter-spacing>, 1px));   /* a tracked label */
+inline-size: calc-size(max-content, round(up, size - <letter-spacing>, 1px));  /* an owned tracked label */
 max-inline-size: 100%;        /* unless the part carries its own max-width */
 align-self: flex-start;       /* only under a flex column that would stretch it */
 ```
+
+**2026-09-21 tracked-text revision:** the tracked box also carries a private
+tracking variable and a block text run whose inline size is
+`calc-size(100%, size + var(--_dsc-text-box-tracking))`. It keeps the final
+advance available for line breaking without including it in the layout box.
+An absent or empty text value contributes zero width. A default minimum of
+zero allows grid tracks to shrink; authored minimums remain authoritative.
+Untracked text retains the earlier `fit-content` rule. See D.93 for the
+measured wrapping defect, bounded enum support and remaining image failures.
 
 `calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
 cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
@@ -4660,10 +4669,11 @@ available))`: a label that fits is its max-content box rounded up; a string that
 does not fit wraps at the available width exactly as it does without the fact.
 `max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
 box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
-A browser without `calc-size()` drops the `inline-size` declaration at parse (a
-stylesheet) or ignores the assignment (the CSSOM, i.e. the inline surface) and
-keeps today's fractional box, under 1 px narrower — never wider and never a wrap
-change; no `@supports` guard is needed and none could be spelled inline. Logical
+A browser without `calc-size()` drops both outer and inner sizing declarations
+at parse or assignment. It retains the fractional, untrimmed browser advance;
+tracking and rounding can make this differ from Figma by more than a subpixel.
+The existing clamp and conditional start alignment still apply. No fallback
+Figma fidelity is claimed; both declarations use the same feature boundary. Logical
 properties, so a vertical or RTL writing mode rounds the axis the text runs along.
 The declaration takes effect because every emitter renders a text part as its own
 element inside a parent it lays out as flex or grid (blockified), and an absolutely
@@ -4691,9 +4701,9 @@ committed REST fixtures rendered in Chromium with the fonts loaded:
 Three of three tracked samples: Figma's box is the run less the trailing spacing,
 rounded up. The part's own uniform `letter-spacing` is therefore shed before
 rounding — a literal verbatim, a token as its `var()` on the sheets and as its
-resolved value inline. A `letter-spacing` that varies by variant or state, or
-rides a placeholder token, has no single spelling in the base rule and is refused
-beside the flag. On the 23 untracked samples the two forms are the same number.
+resolved value inline. Per-value variant or state overrides remain refused.
+Complete enum-placeholder tokens now select a matching box and run rule as
+described in D.93. On the 23 untracked samples the two forms are the same number.
 
 **The premise, measured on 26 samples.** Every WIDTH_AND_HEIGHT text node in the
 committed REST fixtures whose font could be loaded (Inter locally; Manrope, Geist
@@ -4758,7 +4768,8 @@ that owns no text (`text` / `content` / `textByProp`); beside a `width` /
 `inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
 truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
 that is sized, filled or truncated by a channel is not sized by its text; beside a
-per-variant / per-state or placeholder-token `letter-spacing`; beside a literal
+per-variant / per-state `letter-spacing` overrides, or a placeholder token
+without one to three distinct enum axes and explicit defaults; beside a literal
 `letter-spacing` that is not a px / em / rem length; when the part INHERITS
 `letter-spacing` from any ancestor holder (root or part; literal, token or
 per-variant) and states none of its own; on an inline-level element (the part
@@ -4892,10 +4903,9 @@ hoisted root label and count as named). Evidence:
   committed dump predates the field).
 - **The hoisted root label** (a sole root text node named `label`) is named, not
   carried; the root keeps the fractional advance.
-- **A tracked label with per-variant or per-state tracking** is refused beside the
-  flag rather than given a private custom property; the proposer never writes
-  per-variant tracking (a mixed `letter-spacing` is already named), so the
-  refusal reaches only hand-written contracts.
+- **Per-value tracking overrides** remain refused. D.93 now carries complete
+  captured enum-placeholder tracking with a selected box/run rule; ambiguous
+  axes or missing values still refuse.
 - The mock canvas does not model the field (it reports nothing, which reads as
   "not captured"). The Playground's canvas preview ignores the flag.
 
@@ -7833,14 +7843,42 @@ page, collection and variable inventories and values did not change. Native
 tracking is a resolved value; this does not establish variable-binding
 identity for letter spacing. Only the owned Evaluations probe was amended.
 
-**Remaining sizing and rendering limit.** Per-prop tracking still conflicts
-with the whole-pixel text-box flag. The proposer names that conflict and
-withholds the flag; it does not bypass the emitter guard. The guarded native
-text-rendering default consequently does not apply to this label. Font assets
-are explicitly supplied and hashed, but Figma's font bytes remain unverified.
-An installed Public Sans 1.007 control also failed the same two appearances
-(15.51% black), so it was preserved as a failed control. No font, scorer,
-threshold, source design or generated CSS was tuned to obtain a pass.
+**AGENT decision — tracked text boxes, 2026-09-21.** A base tracking token
+with one to three distinct enum placeholders and explicit defaults now retains
+the auto-width fact. Every expanded light/dark token value must be a finite scalar
+px/em/rem string. Object-shaped dimensions refuse because the scalar emitters
+do not serialize that format; even zero percent is invalid tracking. Missing cells, boolean/defaultless/repeated axes, a competing
+literal, and per-value tracking overrides refuse. The text must be an owned
+leaf in ordinary text flow; caller children, structured content, raw-text hosts
+and authored style attributes cannot acquire the inner run.
+
+An adversarial browser check found that subtracting tracking from `fit-content`
+could subtract twice when a content-sized parent fed its rounded width back
+as available space. A 14px Arial label, “Updated label”, with 1px tracking
+became a 98px box on two lines despite a 99.40625px run. The revised shared
+rule uses a 99px layout box and an inner 100px line-breaking box, keeping one
+line. Static tracking and selected enum tracking use the same rule. Negative
+tracking, empty text, replacement, restoration, constrained columns/grid, RTL,
+vertical text and fallback without `calc-size()` are measured separately.
+No font, scorer or image threshold was changed.
+A separate static-tracking regression consumer retains all ten passing Badge
+image pairs on both backgrounds. It uses environment fonts; their bytes are
+not authenticated. This check does not replace its prior application evidence.
+
+A fresh **engineering-generated** clean consumer from the preserved Tab capture
+now matches all ten native root dimensions exactly. It still passes only
+**8/10** image pairs: unselected rest and pressed fail at **12.56%** on black.
+This is a separate failed consumer, not a new application-delivery result.
+The earlier app archive and its 15.38% failures remain intact. Application
+re-delivery and a new native update with this sizing rule remain pending.
+Font assets are explicitly supplied and hashed; Figma's font bytes remain
+unverified. The earlier Public Sans 1.007 control also remains failed.
+
+Reversing this sizing revision means restoring the placeholder-token refusal
+and the prior tracked-box declarations and markup together, removing its
+private run variable and empty-text handling, then rebuilding the plugin
+receipt and derived registers through their scripts. Keep the newly exposed
+short-label wrapping defect documented and preserve every failed consumer.
 
 Evidence and the adversarial review remain in the append-only private
 `variant-letter-spacing-20260920/` journal, including eleven bounded controls,

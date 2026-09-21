@@ -71,6 +71,9 @@ import {
   holderDeclaresPosition,
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
+  wholePixelTextTrackingDecls,
+  needsWholePixelTextRun,
+  WHOLE_PIXEL_TEXT_RUN_STYLE,
   nativeTextRenderingRoots,
   nativeTextRenderingLeafParts,
   NATIVE_TEXT_RENDERING_DECL,
@@ -109,7 +112,7 @@ const OVERLAY_CSS: Record<string, Record<string, string | number>> = {
 const stripBraces = (ref: string) => ref.slice(1, -1);
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
-const camel = (cssProp: string) => cssProp.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+const camel = (cssProp: string) => cssProp.startsWith('--') ? cssProp : cssProp.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
 /** FC-BORDER-STYLE-NOT-SYNTHESISED — the shared border-style rule, lowered to
  *  this surface's camelCase StyleRecord. `borderStyleDecls` states the rule
  *  once (schema package) so the three CSS surfaces cannot fork on it again. */
@@ -446,19 +449,25 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const refPath = stripBraces(ref);
       if (cssProp === 'gap' && part.layout?.overlap) continue; // negative child margins — see note below
       const phs = placeholdersIn(refPath);
+      const selectedStyle = (resolved: string): StyleRecord => {
+        const value = resolveValue(resolved);
+        const style: StyleRecord = { [camel(cssProp)]: value };
+        applyDeclStrings(style, wholePixelTextTrackingDecls(part, cssProp, String(value)));
+        return style;
+      };
       if (phs.length === 0) {
         s[camel(cssProp)] = resolveValue(refPath);
       } else if (phs.length === 1) {
         for (const value of substByName.get(phs[0]) ?? []) {
           const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          addVariant(phs[0], value, partName, { [camel(cssProp)]: resolveValue(resolved) });
+          addVariant(phs[0], value, partName, selectedStyle(resolved));
         }
       } else if (phs.length === 2) {
         const [pa, pb] = phs;
         for (const a of substByName.get(pa) ?? []) {
           for (const b of substByName.get(pb) ?? []) {
             const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
-            addVariantCompound([[pa, a], [pb, b]], partName, { [camel(cssProp)]: resolveValue(resolved) });
+            addVariantCompound([[pa, a], [pb, b]], partName, selectedStyle(resolved));
           }
         }
       } else if (phs.length === 3) {
@@ -472,7 +481,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
                 .replaceAll(`{${pa}}`, a)
                 .replaceAll(`{${pb}}`, b)
                 .replaceAll(`{${pc}}`, c);
-              addVariantCompound([[pa, a], [pb, b], [pc, c]], partName, { [camel(cssProp)]: resolveValue(resolved) });
+              addVariantCompound([[pa, a], [pb, b], [pc, c]], partName, selectedStyle(resolved));
             }
           }
         }
@@ -880,6 +889,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return parts.join('');
   };
 
+  const emptyRun = (part: Part, text: string) => needsWholePixelTextRun(part)
+    ? [`...((${text}) == null || (${text}) === '' ? { inlineSize: 0 } : {})`] : [];
+  const textRun = (part: Part, content: string) => needsWholePixelTextRun(part)
+    ? `<span style={${JSON.stringify(WHOLE_PIXEL_TEXT_RUN_STYLE)}}>${content}</span>` : content;
   const renderPart = (partName: string, part: Part): string => {
     if (part.shape?.kind === 'stroked-path') return wrapVisibleWhen(part,
       `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" dangerouslySetInnerHTML={{ __html: ${JSON.stringify(strokedPathSvg(part.shape))} }} />`);
@@ -965,7 +978,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       )!;
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${prop.bindings.code.prop}}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, [...stylesWhenExprs(part), ...emptyRun(part, prop.bindings.code.prop)])}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, `{${prop.bindings.code.prop}}`)}</${el}>`,
       );
     }
     if (part.text !== undefined) {
@@ -979,7 +992,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, [...stylesWhenExprs(part), ...emptyRun(part, tb ? inner.slice(1, -1) : JSON.stringify(part.text))])}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${textRun(part, inner)}</${el}>`,
       );
     }
     if (part.meter) {
@@ -1069,6 +1082,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   elementAttrs.push('{...rest}');
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
+  const styleType = walkAnatomy(contract).some(({ part }) => needsWholePixelTextRun(part))
+    ? `CSSProperties & { '--_dsc-text-box-tracking'?: string }` : 'CSSProperties';
   const variantFlat: Record<string, StyleRecord> = {};
   for (const [key, parts] of Object.entries({ ...variantStyles, ...variantPairStyles })) {
     for (const [partName, decls] of Object.entries(parts)) {
@@ -1172,10 +1187,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};
 
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
@@ -1208,10 +1223,10 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};
 ${Object.keys(disabledStyle).length > 0 ? `\nconst DISABLED_STYLE: CSSProperties = ${JSON.stringify(disabledStyle)};\n` : ''}
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}

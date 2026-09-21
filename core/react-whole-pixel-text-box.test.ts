@@ -6,7 +6,8 @@
 // Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every
 // content size equal (a 47.40625 px root against Figma's 48). The emitters give
 // the text element the same box —
-//   inline-size: calc-size(fit-content, round(up, size[ - <letter-spacing>], 1px));
+//   inline-size: calc-size(fit-content, round(up, size, 1px)); // untracked
+// Tracked text has a max-content outer box and a separate trailing-advance run.
 //   max-inline-size: 100%;            (unless the part carries its own max)
 //   align-self: flex-start;           (only under a stretching flex column)
 // — a progressive enhancement, and these tests MEASURE the box in Chromium rather
@@ -26,7 +27,8 @@ import { tokenInventoryFromJson } from './tokens.js';
 
 const tokens = { primitives: {
   paint: { ground: { $type: 'color', $value: '#0e61ba' }, ink: { $type: 'color', $value: '#fcfeff' } },
-  track: { wide: { $type: 'dimension', $value: '1px' }, pct: { $type: 'dimension', $value: '-0.5%' }, zero: { $type: 'dimension', $value: '0' }, flat: { $type: 'dimension', $value: '0px' } },
+  track: { wide: { $type: 'dimension', $value: '1px' }, pct: { $type: 'dimension', $value: '-0.5%' }, zero: { $type: 'dimension', $value: '0' }, flat: { $type: 'dimension', $value: '0px' },
+    brand: { $type: 'dimension', $value: '0px' }, danger: { $type: 'dimension', $value: '1px' } },
 }, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
 const TONE = { name: 'tone', type: { enum: ['brand', 'danger'] }, default: 'brand', bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone', values: { brand: 'Brand', danger: 'Danger' } } } };
 const TEXT = { name: 'label', type: 'text', default: 'Label', bindings: { code: { prop: 'label' }, figma: { kind: 'TEXT', property: 'Label' } } };
@@ -50,7 +52,7 @@ const inline = (c: Contract) => emitReactInline(c, { ...ctx(c), tokens } as neve
 const rule = (css: string, selector: string) => css.match(new RegExp(`(^|\\n)${selector.replace(/[.[\]=':()]/g, '\\$&')} \\{[^}]*\\}`))?.[0] ?? '';
 const flagged = (extra: Record<string, unknown> = {}, root?: Record<string, unknown>) => contract({ ...LABEL, ...extra, textAutoResize: 'WIDTH_AND_HEIGHT' }, root);
 const VALUE = 'calc-size(fit-content, round(up, size, 1px))';
-const TRIMMED = 'calc-size(fit-content, round(up, size - 1px, 1px))';
+const TRIMMED = 'calc-size(max-content, round(up, size - 1px, 1px))';
 const errorsOf = (c: Contract) => { const errors: string[] = []; validateContract(c, new Map([[c.id, c]]), errors, new Map()); return errors.join('\n'); };
 
 test('without the flag every surface emits what it always did — no calc-size, no inline-size, no clamp, byte for byte the sheet of a contract that never heard of it', () => {
@@ -64,7 +66,7 @@ test('CSS modules, the web-component sheet and the inline style give the flagged
   assert.match(rule(modules(c).css, '.caption'), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n\}/);
   assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n/);
   assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`) && inline(c).tsx.includes('"maxInlineSize": "100%"'), inline(c).tsx);
-  assert.doesNotMatch(modules(c).css + shadowCss(c) + inline(c).tsx, /max-content/, 'never max-content: a runtime string must still wrap');
+  assert.doesNotMatch(modules(c).css + shadowCss(c) + inline(c).tsx, /max-content/, 'untracked text retains fit-content; tracked runs have a separate bounded inner box');
   // The inherited native-text rendering default changes paint policy only.
   const withoutRendering = (css: string) => css.replace('  text-rendering: geometricPrecision;\n', '');
   const plain = contract(LABEL);
@@ -101,9 +103,9 @@ test('the letter spacing CSS adds after the LAST glyph — which Figma\'s box do
   assert.ok(rule(shadowCss(literal), "[part='caption']").includes(`inline-size: ${TRIMMED};`));
   assert.ok(inline(literal).tsx.includes(`"inlineSize": "${TRIMMED}"`));
   const em = flagged({ literals: { ...LABEL.literals, 'letter-spacing': '0.05em' } });
-  assert.ok(rule(modules(em).css, '.caption').includes('inline-size: calc-size(fit-content, round(up, size - 0.05em, 1px));'));
+  assert.ok(rule(modules(em).css, '.caption').includes('inline-size: calc-size(max-content, round(up, size - 0.05em, 1px));'));
   const token = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.wide}' } });
-  assert.ok(rule(modules(token).css, '.caption').includes('inline-size: calc-size(fit-content, round(up, size - var(--track-wide), 1px));'), modules(token).css);
+  assert.ok(rule(modules(token).css, '.caption').includes('inline-size: calc-size(max-content, round(up, size - var(--track-wide), 1px));'), modules(token).css);
   assert.ok(inline(token).tsx.includes(`"inlineSize": "${TRIMMED}"`), 'the inline surface resolves the token to its literal');
   assert.ok(rule(modules(flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.flat}' } })).css, '.caption').includes('size - var(--track-flat)'), '`0px` is a length and subtracts nothing');
   // A zero literal adds nothing after the last glyph: nothing to shed.
@@ -121,6 +123,68 @@ test('a letter-spacing TOKEN is judged by its VALUE: a % or a unitless value is 
   assert.throws(() => modules(token, null), /no token VALUES were supplied/);
 });
 
+test('variant tracking keeps its trimming rule beside the selected value and checks every token mode', () => {
+  const c = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.{tone}}' } });
+  const before = structuredClone(c);
+  assert.equal(errorsOf(c), '');
+  const css = modules(c).css;
+  for (const tone of ['brand', 'danger']) {
+    assert.match(rule(css, `.tone-${tone} .caption`), new RegExp(`inline-size: calc-size\\(max-content, round\\(up, size - var\\(--track-${tone}\\), 1px\\)\\)`));
+  }
+  assert.doesNotMatch(css, /var\([^)]*\{/);
+  assert.deepEqual(generatedTypeErrors(c.name, inline(c).tsx), []);
+  const wc = shadowCss(c, tokens);
+  assert.ok(wc.includes('size - var(--track-brand)'));
+  assert.ok(wc.includes('size - var(--track-danger)'));
+  assert.deepEqual(c, before, 'emitting does not mutate the input');
+  for (const value of ['0', '1%', 'normal', 'inherit', '9'.repeat(400) + 'px']) {
+    const values = structuredClone(tokens);
+    values.primitives.track.danger.$value = value;
+    assert.throws(() => modules(c, values), /only a px \/ em \/ rem length/);
+    assert.throws(() => emitReactInline(c, { ...ctx(c), tokens: values } as never), /only a px \/ em \/ rem length/);
+  }
+  const objects = { ...tokens, primitives: { ...tokens.primitives, track: { ...tokens.primitives.track, danger: { $type: 'dimension', $value: { value: 1, unit: 'px' } } } } };
+  assert.throws(() => modules(c, objects), /non-scalar token value/);
+  assert.throws(() => emitReactInline(c, { ...ctx(c), tokens: objects } as never), /non-scalar token value/);
+  const missing = structuredClone(tokens);
+  delete (missing.primitives.track as Record<string, unknown>).danger;
+  assert.throws(() => modules(c, missing), /nothing/);
+  const badDark = { ...tokens, dark: { track: { danger: { $type: 'dimension', $value: '2%' } } } };
+  assert.throws(() => modules(c, badDark), /2%/);
+  assert.throws(() => modules(c, null), /no token VALUES/);
+  const conflict = structuredClone(c);
+  conflict.anatomy.root.parts!.caption.literals!['letter-spacing'] = '0px';
+  assert.match(errorsOf(conflict), /literal beside placeholder token/);
+});
+
+test('variant tracking does not infer omitted, boolean or repeated placeholder axes', () => {
+  const c = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.{tone}}' } });
+  const missingDefault = structuredClone(c);
+  delete missingDefault.props[0].default;
+  assert.match(errorsOf(missingDefault), /explicit defaults/);
+  const repeated = structuredClone(c);
+  repeated.anatomy.root.parts!.caption.tokens!['letter-spacing'] = '{track.{tone}.{tone}}';
+  assert.match(errorsOf(repeated), /distinct enum axes/);
+  const unknown = structuredClone(c);
+  unknown.anatomy.root.parts!.caption.tokens!['letter-spacing'] = '{track.{unobserved}}';
+  assert.match(errorsOf(unknown), /explicit defaults/);
+  const bool = structuredClone(c);
+  bool.props[0] = { name: 'tone', type: 'boolean', default: false, bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone' } } };
+  assert.match(errorsOf(bool), /distinct enum axes/);
+});
+
+test('tracked text boxes refuse structured, caller-owned and raw-text hosts before adding a run', () => {
+  const tracked = { ...LABEL.literals, 'letter-spacing': '1px' };
+  for (const extra of [
+    { content: { prop: 'children' } }, { parts: { child: { text: 'Child' } } },
+    { attrs: { style: 'letter-spacing: 2px' } }, { layout: { display: 'flex' } },
+    { declared: { display: 'grid' } }, { declaredStates: { hover: { display: 'flex' } } },
+    { stylesWhen: [{ prop: 'tone', equals: 'danger', styles: { display: 'contents' } }] },
+    { element: 'textarea' }, { element: 'option' },
+  ]) assert.match(errorsOf(flagged({ literals: tracked, ...extra })), /tracking on/);
+  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '9'.repeat(400) + 'px' } })), /not a px/);
+});
+
 test('validateContract refuses a flag that would be wrong or inert, by name; the schema spells only the auto-width value', () => {
   assert.equal(errorsOf(flagged()), '');
   assert.match(errorsOf(contract({ layout: { display: 'flex' }, textAutoResize: 'WIDTH_AND_HEIGHT', tokens: { 'background-color': '{paint.ground}' } })), /owns no text/);
@@ -129,9 +193,12 @@ test('validateContract refuses a flag that would be wrong or inert, by name; the
   assert.match(errorsOf(flagged({ layout: { grow: true } })), /carries layout\.grow —/);
   assert.match(errorsOf(flagged({ declared: { 'text-overflow': 'ellipsis' } })), /carries text-overflow —/, 'a truncated box is not sized by its text');
   assert.match(errorsOf(flagged({ literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] })), /letter-spacing \(per variant or state\)/);
-  assert.match(errorsOf(flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.{tone}}' } })), /letter-spacing \(placeholder token\)/);
+  const omittedTracking = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': '{track.{tone}}' } });
+  delete omittedTracking.props[0].default;
+  assert.match(errorsOf(omittedTracking), /letter-spacing \(placeholder token\).*explicit defaults/);
   // Review M3: tracking that is not a subtractable length.
   assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '5%' } })), /letter-spacing "5%", which is not a px \/ em \/ rem length/);
+  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'letter-spacing': '0%' } })), /not a px \/ em \/ rem length/, 'zero percent is still invalid CSS tracking; it must not fall through to inherited tracking');
   // Review M2: tracking the part INHERITS — a root's per-variant 2px drew a 42px box where Figma's is 40.
   const inherits = flagged({}, { ...ROOT, literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] });
   assert.match(errorsOf(inherits), /inherits letter-spacing from "root" and states none of its own/);
@@ -148,6 +215,61 @@ test('validateContract refuses a flag that would be wrong or inert, by name; the
 });
 
 // --- measured -------------------------------------------------------------
+
+test('MEASURED: one to three enum tracking axes update both React surfaces, including omission, text edits and restoration', async () => {
+  const browser = await chromium.launch();
+  try {
+    for (const count of [1, 2, 3]) {
+      const axes = ['tone', 'density', 'emphasis'].slice(0, count);
+      const c = flagged({ tokens: { ...LABEL.tokens, 'letter-spacing': `{tracking.${axes.map(a => `{${a}}`).join('.')}}` }, declared: { 'font-family': 'Arial' } });
+      c.props = [...axes.map(name => ({ ...structuredClone(TONE), name, bindings: { code: { prop: name }, figma: { kind: 'VARIANT' as const, property: name } } })), structuredClone(c.props.find(p => p.name === 'label')!)];
+      const tracking: Record<string, unknown> = {};
+      const rows: Array<{ props: Record<string, string>; spacing: number }> = [];
+      const variables: string[] = [];
+      for (let mask = 0; mask < 2 ** count; mask++) {
+        const choices = axes.map((_, i) => mask & (1 << i) ? 'danger' : 'brand');
+        const spacing = mask - 1;
+        let parent = tracking;
+        for (const choice of choices.slice(0, -1)) parent = (parent[choice] ??= {}) as Record<string, unknown>;
+        parent[choices.at(-1)!] = { $type: 'dimension', $value: `${spacing}px` };
+        variables.push(`--tracking-${choices.join('-')}: ${spacing}px;`);
+        rows.push({ props: Object.fromEntries(axes.map((a, i) => [a, choices[i]])), spacing });
+      }
+      const values = { ...tokens, primitives: { ...tokens.primitives, tracking } };
+      assert.equal(errorsOf(c), '');
+      for (const surface of ['css-module', 'inline'] as const) {
+        const out = surface === 'inline'
+          ? { ...emitReactInline(c, { ...ctx(c), tokens: values } as never), css: '' }
+          : emitReact(c, { ...ctx(c), tokens: tokenInventoryFromJson([values.primitives]), tokenValues: values });
+        assert.deepEqual(generatedTypeErrors(c.name, out.tsx), []);
+        const page = await browser.newPage();
+        try {
+          const render = await mountGenerated(page, c.name, out.tsx, out.css);
+          await page.addStyleTag({ content: `:root { ${variables.join(' ')} }` });
+          const observed = [];
+          for (const { props, spacing } of [{ props: {}, spacing: -1 }, ...rows, ...rows.map(r => ({ ...r, props: { ...r.props, label: 'Updated label' } })), ...rows.map(r => ({ ...r, props: { ...r.props, label: '' } })), { props: {}, spacing: -1 }]) {
+            await render(props);
+            const row = await page.locator('#root > :first-child').evaluate(root => {
+              const text = root.firstElementChild as HTMLElement;
+              const range = document.createRange(); range.selectNodeContents(text.firstElementChild ?? text);
+              const style = getComputedStyle(text);
+              return { width: text.getBoundingClientRect().width, root: root.getBoundingClientRect().width,
+                run: range.getBoundingClientRect().width, spacing: style.letterSpacing === 'normal' ? 0 : parseFloat(style.letterSpacing),
+                text: text.textContent, inlineSize: style.inlineSize, height: text.getBoundingClientRect().height, lines: Array.from(range.getClientRects(), r => ({x:r.x,y:r.y,width:r.width,height:r.height})), props: root.getAttribute('class') };
+            });
+            assert.equal(row.spacing, spacing, `${count} axes / ${surface}`);
+            assert.equal(row.width, row.text === '' ? 0 : Math.ceil(row.run - spacing), `${count} axes / ${surface}: ${JSON.stringify({props, row})}`);
+            assert.equal(row.root, row.width + 16, surface);
+            assert.equal(row.height, row.text === '' ? 0 : 16, 'a short text update stays on one line; empty content has no line');
+            observed.push(row);
+          }
+          assert.deepEqual(observed[0], observed.at(-1), 'default omission restores the same box');
+        } finally { await page.close(); }
+      }
+    }
+  } finally { await browser.close(); }
+});
+
 const FONT = { 'font-size': '13px', 'line-height': '16px', 'letter-spacing': '0.35px' };
 const FACE = { 'font-family': 'Arial' };
 const LONG = 'Please review the updated terms before continuing with your purchase today.';
@@ -155,7 +277,7 @@ const LONG = 'Please review the updated terms before continuing with your purcha
 const withoutCalcSize = (root: HTMLElement) => {
   for (const sheet of Array.from(document.styleSheets)) for (const r of Array.from(sheet.cssRules) as CSSStyleRule[]) if (r.style?.inlineSize?.startsWith('calc-size')) r.style.removeProperty('inline-size');
   const el = root.firstElementChild as HTMLElement;
-  if (el.style.inlineSize.startsWith('calc-size')) el.style.removeProperty('inline-size');
+  for (const node of [el, ...el.querySelectorAll<HTMLElement>('*')]) if (node.style.inlineSize.startsWith('calc-size')) node.style.removeProperty('inline-size');
 };
 type Seen = { width: number; height: number; root: number; rootHeight: number; runWidth: number; leftGap: number; rightGap: number; lines: number; overflow: number; x: number };
 async function measurer(browser: import('playwright-core').Browser, surface: 'css-module' | 'inline') {
@@ -169,7 +291,7 @@ async function measurer(browser: import('playwright-core').Browser, surface: 'cs
       return await p.locator('#root > :first-child').evaluate((root, decorateSrc) => {
         (new Function('root', `(${decorateSrc})(root)`))(root);
         const el = root.firstElementChild as HTMLElement;
-        const range = document.createRange(); range.selectNodeContents(el);
+        const range = document.createRange(); range.selectNodeContents(el.firstElementChild ?? el);
         const box = el.getBoundingClientRect(), run = range.getBoundingClientRect(), r = root.getBoundingClientRect();
         const rs = getComputedStyle(root);
         const contentRight = r.right - parseFloat(rs.paddingRight) - parseFloat(rs.borderRightWidth);
@@ -203,7 +325,7 @@ test('MEASURED in Chromium: the flagged box is the run rounded up to the pixel (
       assert.equal(after.root, after.width + 16, 'the hug root is a whole number: padding plus the whole-pixel box');
       assert.equal(after.rootHeight, before.rootHeight, 'the block axis is untouched');
       const centred = await measure(flagged({ literals: FONT, declared: { ...FACE, 'text-align': 'center' } }));
-      assert.ok(Math.abs(centred.leftGap - centred.rightGap) < 0.02, `centred run: ${centred.leftGap} vs ${centred.rightGap}`);
+      assert.ok(Math.abs(centred.leftGap - (centred.rightGap + ls)) < 0.02, `centred glyph advance excludes the final tracking: ${centred.leftGap} vs ${centred.rightGap + ls}`);
       assert.ok(after.leftGap < 0.02 && after.rightGap >= 0, 'left-aligned run at the start edge');
       const rtl = await measure(c, {}, (root) => { root.dir = 'rtl'; });
       assert.equal(rtl.width, after.width);
