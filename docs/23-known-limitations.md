@@ -8749,9 +8749,15 @@ A production-observer engineering run covers all ten configured examples,
 contexts, including the nested Card. A separate replay of the final verifier
 checks all twenty saved initial-image hashes. Evidence is private
 `react-design-source-repair-20260921/production-cohort-KMCPRm/verified-v2.json`
-in the repair worktree. This is engineering evidence; the integrated application
-run is still pending. Images are served only for the exact reviewed preview,
-case, side and hash, using the D.104 evidence boundary.
+in the repair worktree. The subsequent application preview `b52cefe0…` completes
+the same ten examples, sixty initial states and ten interaction trials per
+version. All twenty caller images served by the application match their recorded
+hashes. The caller table, changed disabled view, unchanged composed Card and
+finite-state comparisons were inspected in the live app. Original module and
+stylesheet hashes remain unchanged. The application receipt and screenshots are
+in private `react-design-source-repair-20260921/caller-preview-live-proof-v1.json`
+in the application worktree. Images are served only for the exact reviewed
+preview, case, side and hash, using the D.104 evidence boundary.
 
 This check covers configured examples and the named finite/action domain only.
 It does not establish arbitrary caller coverage or authorize an original-file
