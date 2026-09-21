@@ -8299,10 +8299,24 @@ original React, not with the failing native caller. The archive SHA-256 is
 `93a0a1c077e6e53220ab45882ae607a5712c15bb48fb17b5735cc983b1d3b813`;
 private evidence includes `app-graph-inverse-v3.json`,
 `app-consumer-v1/verification-v2.json` and the inspected consumer screenshot.
-Lossless pixel comparison of this installed consumer remains unmeasured: the
-browser screenshot interfaces returned JPEG data. The attempted capture's
-format refusal is preserved in `app-consumer-v1/visual-measurement-refusal-v1.json`;
-the geometry and computed-style results are not promoted to a pixel score.
+Lossless pixel comparison now passes **100/100** on white at the unchanged 5%
+limit, using the existing application source-validation PNG capture and scorer.
+Maximum antialiasing-aware difference is **0%**; exact-pixel difference reaches
+**29.3860%**. All 100 origins and dimensions agree, and each network-isolated
+replay PNG is byte-identical. The original font asset is supplied by the host;
+the package remains unchanged. This measures returned React against original
+React and does not qualify the failing native caller.
+
+Two declared cohorts of fifty retain all combinations within the declaration's
+existing case cap. Both readiness reports remain **0/50 qualified** because
+the missing-font negative control sees the same family name after fallback to
+local Inter; it records a width mismatch but cannot prove font substitution
+([D.100](#d100-source-capture-must-preserve-css-module-imports)). The baseline
+source and replay captures match every authored witness. The pixel report
+preserves the readiness refusal. Evidence is in `app-consumer-v1/visual-score-v2.json`
+and `app-consumer-v1/source-validation-v1/`, with a visible review of all pairs.
+Earlier browser screenshot interfaces returned JPEG data; their failed
+measurement remains in `app-consumer-v1/visual-measurement-refusal-v2.json`.
 
 Reloading the same tab retains one Workspace entry. Manually restoring it and
 preparing the library again produces identical contract and archive bytes.
@@ -8513,3 +8527,32 @@ the optional marker and its planner, scoped writer, inverse and caller support
 together; restore named refusal for nonempty root slots, regenerate derived
 artifacts and retain all failed and successful journals. Do not loosen the
 fidelity threshold or rewrite historical receipts.
+
+## D.100 Source capture must preserve CSS Module imports
+
+Loading an installed React library through source inspection previously treated
+its `.module.css` files as global CSS. That discarded the imported class map:
+the component mounted without its styles and source validation refused it.
+The loader now retains local CSS semantics while hashing the original input
+bytes. Ordinary CSS remains global. The installed package is unchanged.
+
+The application reproduced the failure using its own downloaded React archive;
+after correction, the mounted component matches the original style witnesses.
+The independent regression probe also covers colliding local class names,
+cross-file composition, global CSS, deterministic reference identity and stale
+source detection. Private evidence is in
+`native-root-text-template-20260921/app-consumer-v1/source-validation-v1/`.
+
+A separate readiness limitation remains: removing a web font can fall back to
+a local font with the same painted family name. The current instrument checks
+that family name and cannot prove the missing-font control was rejected in this
+case. It retains `negative-control-not-proven:missing-font`; a pixel comparison
+does not turn this refusal into a source-readiness pass or authenticate font
+bytes in Figma.
+
+**AGENT decision, 2026-09-21.** Select esbuild's `local-css` loader for
+`.module.css`, preserving the byte-recording hook and all other loader rules.
+This is a source-bundling correction, without a component-specific branch or
+change to the scorer. Reversal: revert the loader selection and its regression
+probe; preserve the failed and corrected reference archives. Existing archived
+references are never rewritten.

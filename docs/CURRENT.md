@@ -1,6 +1,6 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-09-20 · V1 is not complete.**
+**Public project status · updated 2026-09-21 · V1 is not complete.**
 
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
@@ -76,7 +76,13 @@ Canonical capture imported through the app preserves all 400 typography
 references across 100 variants. Its downloaded archive installs unchanged in a
 clean React consumer. With the original font supplied by that consumer, all
 100 combinations match the original React dimensions, typography, paint,
-spacing and corners; changing caller text updates every combination. A same-tab
+spacing and corners; changing caller text updates every combination. Lossless
+PNG comparisons now pass **100/100** on white at the unchanged 5% limit:
+maximum antialiasing-aware difference is **0%**, while exact-pixel difference
+reaches **29.39%**. All origins and dimensions match, and all isolated replays
+are byte-identical. Both source-readiness cohorts remain unqualified because
+the missing-font control cannot distinguish a local Inter fallback by family
+name ([D.100](23-known-limitations.md#d100-source-capture-must-preserve-css-module-imports)). A same-tab
 reload requires manually selecting the saved Workspace import and produces
 identical contract and archive bytes. One earlier return tab stalled; recovery
 used a fresh tab with React output selected. Native fidelity, template updates,
