@@ -171,6 +171,13 @@ repeat, exact reverse, caller-context refresh, conflict and lost-write settlemen
 across restarts. Updated main and caller exports are available in the review;
 an intervening edit during export refuses the observation. These are integration
 tests with a synthetic native host, not a measured live application journey.
+An actual source-color change now passes source validation and structure tracing,
+follows the existing component, and produces an app proposal for 11 color variables
+and one recorded caller. An unchanged review produces zero changes. The live
+preflight still refuses: Figma now reports a different virtual ID for the caller's
+text node, while lookup by its saved ID resolves to that same current node. A
+separate read found no other caller-field or token differences. No assignments
+were attempted; safely handling that identity transition remains unfinished.
 The live source-edit/update/recovery demonstration, additional caller creation
 after an update, comparison refresh/repair transitions and visual/layout
 qualification remain unfinished.
