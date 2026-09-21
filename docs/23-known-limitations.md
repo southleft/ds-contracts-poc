@@ -8881,6 +8881,13 @@ independently of the old reference, so recovery remains accessible after reload
 or an interrupted file replacement. A closed service stops its pending run;
 run identities prevent its late completion from changing a newer run's journal.
 
+The first live run exposed a clipboard wait that left recovery controls busy.
+Connection preparation now finishes before the separate copy action, with a
+masked field for ordinary keyboard copying. Pairing authenticates the retained
+journal without recompiling source history; start and native write delivery
+still perform their existing source checks. Pairing alone cannot authorize a
+write. This also lets a partially changed source reconnect for read-only recovery.
+
 Engineering checks cover apply, unchanged repeat, source restoration, partial
 file recovery, changed source and canvas, wrong-reference or incomplete
 validation, changed retained evidence, unavailable companions and request bodies

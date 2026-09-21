@@ -17,6 +17,7 @@ const phases:Record<SourceRepairApplication['phase'],string>={
 export function ReactSourceRepairs({onReload}:{onReload:()=>void}){
   const [applications,setApplications]=useState<SourceRepairApplication[]>([]),[error,setError]=useState('');
   const [busy,setBusy]=useState(''),[notice,setNotice]=useState(''),[revision,setRevision]=useState(0);
+  const [connection,setConnection]=useState<{id:string;value:string}>();
   const running=applications.some(a=>a.running);
   useEffect(()=>{
     const update=()=>setRevision(r=>r+1);window.addEventListener('react-source-repair-changed',update);
@@ -42,8 +43,8 @@ export function ReactSourceRepairs({onReload}:{onReload:()=>void}){
       const response=await fetch(`${root}/${id}/${action}`,{method:'POST'}),result=await response.json();
       if(!response.ok)throw Error(result.reason??result.error);
       if(action==='connection'){
-        await navigator.clipboard.writeText(result.connection);
-        setNotice('Connection copied. Paste it into Sync Runner’s Local app connection, then select Connect / resume.');
+        setConnection({id,value:result.connection});
+        setNotice('Connection ready. Copy it into Sync Runner’s Local app connection, then select Connect / resume.');
       }else setApplications(rows=>rows.map(row=>row.id===id?result.application:row));
       setRevision(r=>r+1);
     }catch(error){setError(error instanceof Error?error.message:String(error));}
@@ -62,7 +63,14 @@ export function ReactSourceRepairs({onReload}:{onReload:()=>void}){
       {a.problem&&<p role="alert">{a.problem}</p>}
       <ul>{a.files.map(file=><li key={file.file}><code>{file.file}</code>: {file.state==='before'?'original bytes':file.state==='after'?'reviewed change':file.state==='missing'?'interrupted file replacement':'changed outside this operation'}</li>)}</ul>
       {a.validation&&<p>Recorded source validation: {a.validation.valid}/{a.validation.total} examples. Reference {a.validation.referenceId.slice(0,12)}.</p>}
-      {a.phase!=='rolled-back'&&<button type="button" disabled={!!busy} onClick={()=>void action(a.id,'connection')}>Copy Sync Runner connection</button>}
+      {a.phase!=='rolled-back'&&<button type="button" disabled={!!busy} onClick={()=>void action(a.id,'connection')}>Prepare Sync Runner connection</button>}
+      {connection?.id===a.id&&<div>
+        <label>Sync Runner connection <input type="password" autoComplete="off" readOnly value={connection.value} onFocus={event=>event.currentTarget.select()}/></label>
+        <button type="button" onClick={()=>{
+          setNotice('Copying connection. You can also select and copy the connection field.');
+          void navigator.clipboard.writeText(connection.value).then(()=>setNotice('Connection copied. Paste it into Sync Runner’s Local app connection, then select Connect / resume.'),()=>setNotice('Select and copy the connection field, then paste it into Sync Runner.'));
+        }}>Copy Sync Runner connection</button>
+      </div>}
       {!['applied','rolled-back'].includes(a.phase)&&<button type="button" disabled={!!busy||running||a.transaction==='conflict'} onClick={()=>void action(a.id,a.direction==='rollback'?'rollback':'apply')}>
         {a.direction==='rollback'?'Resume restoring source':'Apply / resume reviewed change'}
       </button>}

@@ -114,7 +114,8 @@ same Sync Runner operation connected while the app checks the canvas, writes
 the reviewed files, validates all examples and checks the canvas again.
 
 Progress and recovery appear under **Source changes and recovery**, including
-after a page reload. **Copy Sync Runner connection** copies the operation's
+after a page reload. Choose **Prepare Sync Runner connection**, then **Copy Sync
+Runner connection** (or select and copy the masked field) to copy the operation's
 connection for reconnection. **Apply / resume reviewed change** retries with a
 new canvas read. **Restore original source and CSS** restores those files and
 validates them; it leaves the Figma edit in place. After completion, **Load

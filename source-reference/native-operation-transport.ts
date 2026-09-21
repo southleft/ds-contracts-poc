@@ -116,7 +116,10 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       fail("unauthorized");
   };
   const pair = (id: string) => {
-    jobs.get(id); // Must be an actual valid journal, never caller-chosen script.
+    // Authenticate the journal without recompiling source history. Pairing
+    // also serves read-only recovery after source drift; start/dispatch/begin
+    // retain their own current-source checks before any native write.
+    jobs.deliveryState(id);
     const file = path.join(directory(id), "connection.json");
     if (!existsSync(file)) {
       try {
