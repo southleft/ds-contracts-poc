@@ -1,3 +1,4 @@
+import { cleanNativeTemplateCallerReadback, type NativeTemplateCallerIdentity } from './native-template-caller-identity.js';
 /** Existing caller observations authorize their exact instance subtrees only.
  * Native geometry and visual fidelity still require their separate app proofs. */
 import { canonicalJson } from './contract-provenance.js';
@@ -15,7 +16,7 @@ const clean = (r: NativeSourceReadback) => { const out = structuredClone(r); del
 const fail = (reason: string): never => { throw Error('native-template-consumer-' + reason); };
 
 export function prepareNativeTemplateConsumers(before: NativeContractObservationInput, baseline: NativeSourceReadback,
-  inputs: NativeTemplateConsumerInput[] = []) {
+  inputs: NativeTemplateConsumerInput[] = [], callerIdentity?: NativeTemplateCallerIdentity) {
   if (!Array.isArray(inputs) || inputs.length > 100) fail('inventory');
   const operations = new Set<string>(), pages = new Set<string>(), owned = new Set<string>();
   return inputs.map(consumer => {
@@ -34,7 +35,7 @@ export function prepareNativeTemplateConsumers(before: NativeContractObservation
       owned.add(id); nodeIds.push(id); node.childIds.forEach(visit);
     };
     visit(instanceId);
-    return { input: structuredClone(input), baseline: { ...structuredClone(observed), parent: clean(observed.parent), content: clean(observed.content) },
+    return { input: structuredClone(input), baseline: { ...structuredClone(observed), parent: clean(observed.parent), content: cleanNativeTemplateCallerReadback(observed.content, callerIdentity) },
       instanceId, nodeIds };
   });
 }

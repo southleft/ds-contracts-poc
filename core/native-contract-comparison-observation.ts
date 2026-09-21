@@ -1,3 +1,4 @@
+import { emitNativeTemplateCallerIdentityReadback, type NativeTemplateCallerIdentity } from './native-template-caller-identity.js';
 import { nativeRootTextCallerModes } from './native-root-text-caller.js';
 import type {NativeComparisonMainMigration} from './native-comparison-main-migration.js';
 /** Independent observation of caller content in an existing native main.
@@ -90,16 +91,17 @@ return out;
 /** Read an already authenticated template caller without collecting its main
  * a second time. The update transport supplies the independently read parent.
  * Static mode permits the final complete caller recheck without yielding. */
-export function emitNativeTemplateCallerContentReadback(input: NativeContractComparisonObservationInput, synchronous = false, captureImages = false): string {
+export function emitNativeTemplateCallerContentReadback(input: NativeContractComparisonObservationInput, synchronous = false, captureImages = false, callerIdentity?: NativeTemplateCallerIdentity): string {
   checkInput(input);
   if (!input.comparison.textTemplate || !input.comparison.parent.templateGraph || input.comparison.instances?.length)
     throw Error('native-template-consumer-kind-unqualified');
-  return emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
+  const script = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
     pageId: input.creation.pageId, nodes: input.creation.nodes,
     comparisons: captureImages ? [{id:input.comparison.caseId,instanceId:input.creation.comparisons[0].instanceId,type:'INSTANCE'}] : [],
   }, input.tokenInput, input.tokenIdentity,
   ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar'],
   captureImages, captureImages, backgroundPaintIdentities(input.comparison.parent.component), [], false, [], synchronous, true);
+  return callerIdentity ? emitNativeTemplateCallerIdentityReadback(script, input.creation, synchronous) : script;
 }
 export function verifyNativeContractComparisonReadback(input: NativeContractComparisonObservationInput, receipt: unknown) {
   const problems: string[] = [];

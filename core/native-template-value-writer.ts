@@ -1,3 +1,4 @@
+import type { NativeTemplateCallerIdentity } from './native-template-caller-identity.js';
 /** Guarded engineering transport for an authenticated template value plan.
  * Application admission and interrupted-write settlement remain separate. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -15,15 +16,18 @@ export interface NativeTemplateComponentUpdateInput {
   baseline: NativeSourceReadback;
   desired: NativeRootTextTemplateGraphInput;
   consumers?: NativeTemplateConsumerInput[];
+  callerIdentity?: NativeTemplateCallerIdentity;
 }
 export function prepareNativeTemplateComponentUpdate(input: NativeTemplateComponentUpdateInput) {
+  if (input.callerIdentity !== undefined && input.callerIdentity !== 'sdk-slot-alias-v1') throw Error('native-template-caller-identity-invalid');
   const after = resolveNativeTemplateContractValueState(input);
   const valuePlan = planNativeTemplateValueUpdate({ before: input.before.templateGraph!.input,
     desired: input.desired, identity: input.before.templateGraph!.identity, baseline: input.baseline.templateGraph!.receipt });
   const baseline = structuredClone(input.baseline); delete baseline.images;
-  const consumers = prepareNativeTemplateConsumers(input.before, baseline, input.consumers);
+  const consumers = prepareNativeTemplateConsumers(input.before, baseline, input.consumers, input.callerIdentity);
   const plan = { version: 1 as const, kind: 'native-template-component-update-candidate' as const,
     before: structuredClone(input.before), baseline, after, valuePlan, consumers,
+    ...(input.callerIdentity ? {callerIdentity: input.callerIdentity} : {}),
     acceptedContract: null, nativeQualification: 'unqualified' as const };
   return { ...plan, revision: revisionOf(plan) };
 }
@@ -64,10 +68,10 @@ const stored=(actual,expected)=>canonical(actual)===canonical(expected)||typeof 
  canonical(Object.keys(actual).sort())===canonical(Object.keys(expected).sort())&&Object.entries(expected).every(([key,value])=>stored(actual[key],value));
 const expectedBaseline=${JSON.stringify(baseline)};
 const sameBaseline=value=>canonical(clean(value))===expectedBaseline;
-${plan.consumers.length ? `const consumerBaselines=${JSON.stringify(plan.consumers.map(c => c.baseline.content))};
-const readConsumers=[${plan.consumers.map(c => `async()=>{${emitNativeTemplateCallerContentReadback(c.input)}}`).join(',')}];
-const readConsumersSync=[${plan.consumers.map(c => `()=>{${emitNativeTemplateCallerContentReadback(c.input,true)}}`).join(',')}];
-const sameConsumers=values=>values.length===consumerBaselines.length&&values.every((v,i)=>canonical(clean(v))===canonical(consumerBaselines[i]));
+${plan.consumers.length ? `${plan.callerIdentity ? "const cleanCaller=value=>{const v=clean(value);delete v.slotIdentityAliases;return v;};\n" : ""}const consumerBaselines=${JSON.stringify(plan.consumers.map(c => c.baseline.content))};
+const readConsumers=[${plan.consumers.map(c => `async()=>{${emitNativeTemplateCallerContentReadback(c.input,false,false,plan.callerIdentity)}}`).join(',')}];
+const readConsumersSync=[${plan.consumers.map(c => `()=>{${emitNativeTemplateCallerContentReadback(c.input,true,false,plan.callerIdentity)}}`).join(',')}];
+const sameConsumers=values=>values.length===consumerBaselines.length&&values.every((v,i)=>canonical(${plan.callerIdentity ? "cleanCaller" : "clean"}(v))===canonical(consumerBaselines[i]));
 const collectConsumers=async()=>{const values=[];for(const read of readConsumers)values.push(await read());return values;};` : ''}
 try{
  if(figma.fileKey!==plan.before.operation.fileKey)throw Error('native-update-file-mismatch');
@@ -86,7 +90,9 @@ try{
  ${emitNativeTokenBindingScope()}
  // The scope scan and final complete read are synchronous through assignment.
  const allocated=new Set(${JSON.stringify(allocated)}),owned=new Set(${JSON.stringify(owned)}),mainIds=new Set(${JSON.stringify(mainIds)});
- const affected=new Set(plan.valuePlan.changes.map(c=>c.variableId));
+${plan.callerIdentity && plan.consumers.length ? `const scopedCallers=readConsumersSync.map(read=>read());
+ if(!sameConsumers(scopedCallers))throw Error('native-template-write-consumer-live-conflict');
+ for(const content of scopedCallers)for(const alias of content.slotIdentityAliases)owned.add(alias.liveId);\n` : ''} const affected=new Set(plan.valuePlan.changes.map(c=>c.variableId));
  const refs=value=>Array.isArray(value)?value.flatMap(refs):value&&typeof value==='object'?
   value.type==='VARIABLE_ALIAS'?[value.id]:Object.values(value).flatMap(refs):[];
  if(locals.length>10000)throw Error('native-template-write-variable-scope-too-large');
@@ -112,7 +118,7 @@ try{
  }
  const current=(()=>{${emitNativeTemplateSyncReadback(plan.before)}})();
  if(!sameBaseline(current))throw Error('native-template-write-live-conflict');
- ${plan.consumers.length ? "const consumerCurrent=readConsumersSync.map(read=>read());if(!sameConsumers(consumerCurrent))throw Error('native-template-write-consumer-live-conflict');" : ''}
+ ${plan.consumers.length ? "const consumerCurrent=readConsumersSync.map(read=>read());if(!sameConsumers(consumerCurrent))throw Error('native-template-write-consumer-live-conflict');" + (plan.callerIdentity ? "if(canonical(consumerCurrent)!==canonical(scopedCallers))throw Error('native-template-write-consumer-alias-changed');" : '') : ''}
  const assignments=plan.valuePlan.changes.map(change=>{const variable=figma.variables.getVariableById(change.variableId);
   if(!variable||variable.key!==change.variableKey||typeof variable.setValueForMode!=='function')throw Error('native-template-write-variable-api');return{change,variable};})
   .filter(({change,variable})=>!stored(variable.valuesByMode[change.modeId],change.after));

@@ -27,7 +27,8 @@ export function prepareNativeTemplateUpdateProposal(input: NativeTemplateCompone
     return { input: { ...consumer.input, comparison }, baseline };
   });
   const body = { version: 1 as const, kind: 'native-template-update-proposal' as const,
-    input: { before: plan.before, baseline: plan.baseline, desired: structuredClone(input.desired), consumers }, planRevision: plan.revision };
+    input: { before: plan.before, baseline: plan.baseline, desired: structuredClone(input.desired), consumers,
+      ...(plan.callerIdentity ? {callerIdentity: plan.callerIdentity} : {}) }, planRevision: plan.revision };
   return { ...body, revision: revisionOf(body) };
 }
 
