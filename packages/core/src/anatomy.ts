@@ -254,7 +254,7 @@ export const isVariantBool = (p: Prop): boolean =>
 /** v7: structured/array prop — code-only (bindings.figma.kind 'NONE'). */
 export const isArrayType = (
   p: Prop,
-): p is Prop & { type: { arrayOf: Record<string, 'text' | 'number' | 'boolean'> } } =>
+): p is Prop & { type: Extract<Prop['type'], { arrayOf: unknown }> } =>
   typeof p.type === 'object' && 'arrayOf' in p.type;
 
 export function enumProps(contract: Contract) {

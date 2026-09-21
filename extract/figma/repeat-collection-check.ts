@@ -7,9 +7,8 @@
  * they proposed as N hard-coded component-ref parts; now a run of ≥3 with a
  * homogeneous applied-prop shape and ≥1 carriable per-item field proposes as
  * ONE item-template part with `repeat` + a new arrayOf prop. Field rules are
- * deterministic and every carry/skip is a NAMED note; per-item ENUM/state
- * differences (the selected tab, P10) and pre-v1.5 TEXT/VARIANT-ambiguous
- * string keys stay receipts, never guesses.
+ * deterministic and every carry/skip is a NAMED note; typed per-item enum choices now carry through the child bindings.
+ * Pre-v1.5 TEXT/VARIANT-ambiguous string keys stay receipts, never guesses.
  *
  * Pinned here:
  *   1. REAL owner's-kit fixture (Navigation-Header, the census composition):
@@ -18,8 +17,7 @@
  *      controls are receipted, and all four surfaces render — React maps the
  *      live array; html/canvas render the observed sample.
  *   2. SYNTHETIC v1.5-shaped run (Badge Row): '#'-suffixed TEXT keys carry
- *      per-item text ('children' field); a varying enum applied prop is the
- *      P10 receipt.
+ *      per-item text ('children' field) and the declared child variant enum.
  *   3. No carriable field → the pattern is receipted and the siblings stay
  *      fixed parts (Pagination-shaped run whose only variation is `state`).
  *   4. The census's arrayOf-candidate fixture (Text Area) proposes UNCHANGED
@@ -380,25 +378,18 @@ console.log(
   const rp = repeatParts[0]?.part.repeat;
   const itemsProp = r.contract.props.find((p) => p.name === rp?.itemsProp);
   check(
-    'per-item TEXT carries as a field — the "#id" suffix is TEXT certainty (fields: { children: text })',
+    'per-item text and the declared child enum both carry as typed fields',
     JSON.stringify((itemsProp?.type as { arrayOf?: unknown })?.arrayOf) ===
-      '{"children":"text"}',
+      JSON.stringify({children:'text',variant:(repoContracts.get('ds.badge')!.props.find(p=>p.name==='variant')!.type)}),
   );
   check(
     "the sample carries the drawn labels VERBATIM (One/Two/Three/Four)",
     JSON.stringify(rp?.sample.map((s) => s.children)) ===
       '["One","Two","Three","Four"]',
   );
-  const p10 = r.proposal.notes.find(
-    (n) =>
-      n.includes('applied prop "Variant" varies per sibling (Info, Success)') &&
-      n.includes(
-        "per-item enum/state differences are P10 (selected-item) with no repeat vocabulary; receipted, the sample renders ds.badge's default",
-      ),
-  );
   check(
-    "the varying enum is the P10 receipt (selected-item stays note-gated, never carried)",
-    p10 !== undefined,
+    "the observed variant choices survive in the sample instead of becoming child defaults",
+    JSON.stringify(rp?.sample.map(row => row.variant)) === '["info","info","success","info"]',
   );
   check(
     `referee CLEAN (got ${r.violations.length})`,
@@ -410,9 +401,9 @@ console.log(
   );
   const tsx = fileText(r, "react", "BadgeRow.tsx");
   check(
-    "React renders the text field as JSX children ({items?.map((item, index) => (<Badge key={index}>{item.children}</Badge>))})",
+    "React forwards each item variant and renders its text as JSX children",
     tsx.includes(
-      "{items?.map((item, index) => (<Badge key={index}>{item.children}</Badge>))}",
+      "{items?.map((item, index) => (<Badge key={index} variant={item.variant}>{item.children}</Badge>))}",
     ),
   );
   const html = fileText(r, "html", ".html");
@@ -537,5 +528,5 @@ if (failures.length > 0) {
   process.exit(1);
 }
 console.log(
-  "\n✔ P9 holds — repeated children propose as ONE repeat part + arrayOf prop; the observed sample renders; enums/ambiguity stay receipts",
+  "\n✔ P9 holds — repeated children propose as ONE repeat part + arrayOf prop; the observed sample renders; typed enums carry; ambiguity stays receipted",
 );

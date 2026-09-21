@@ -335,7 +335,7 @@ export function generateTsx(
       propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${union};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
-        .map(([f, t]) => `${f}: ${t === 'text' ? 'string' : t}`)
+        .map(([f, t]) => `${f}: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
         .join('; ');
       propLines.push(`${doc}  ${p.bindings.code.prop}?: Array<{ ${fields} }>;`);
     } else if (p.type === 'boolean') {
@@ -654,7 +654,7 @@ export function generateTsx(
       const codeName = rp.bindings.code.prop;
       const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
       let childrenField: string | null = null;
-      const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, string> }).arrayOf)
+      const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> }).arrayOf)
         .map((field) => {
           const depProp = dep.props.find((p) => p.name === field)!;
           if (depProp.bindings.code.prop === 'children') {
