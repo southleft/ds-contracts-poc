@@ -11,6 +11,8 @@ import { emitNativeContractComparisonReadbackScript, emitNativeTemplateCallerCon
   type NativeContractComparisonObservationInput } from './native-contract-comparison-observation.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from './token-set.js';
 import { verifyNativeTemplateConsumersAfter, type NativeTemplateConsumerInput } from './native-template-value-consumers.js';
+import { emitNativeTemplateUpdateObservationScript, inspectNativeTemplateUpdateObservation } from './native-template-update-observation.js';
+import { prepareNativeTemplateUpdateProposal, restoreNativeTemplateUpdateProposal } from './native-template-update-proposal.js';
 
 async function fixture(withCaller = false) {
   const h = await nativeTextGraphComponentFixture(2, 2), creation = await h.run(h.script());
@@ -230,4 +232,97 @@ test('an interrupted assignment remains explicit and a repeated old plan cannot 
   assert.equal(result.changedVariableIds.length, 1); assert.equal(result.attemptedVariableIds.length, 2);
   assert.equal(h.assignments.length, 1, 'no unverified automatic reversal');
   const repeated = await h.write(); assert.equal(repeated.status, 'refused'); assert.equal(h.assignments.length, 1);
+});
+
+test('a separate observation distinguishes unchanged and changed values without treating delivery as settlement', async () => {
+  const h = await fixture(true), script = emitNativeTemplateUpdateObservationScript(h.input);
+  assert.doesNotMatch(script, /setValueForMode|loadFontAsync|createVariable\(/);
+  const first = await h.run(script), untouched = inspectNativeTemplateUpdateObservation(h.input, first);
+  assert.equal(first.status, 'collected');
+  assert.equal(untouched.valueState, 'untouched'); assert.equal(untouched.untouched, true);
+  assert.equal(untouched.supportedAfterStructure, false); assert.deepEqual(h.assignments, []);
+  const delivery = await h.write(); assert.equal(delivery.status, 'write-observed');
+  assert.equal(inspectNativeTemplateUpdateObservation(h.input, delivery).untouched, false);
+  assert.match(inspectNativeTemplateUpdateObservation(h.input, delivery).problems[0], /observation-envelope/);
+  const after = await h.run(script), inspected = inspectNativeTemplateUpdateObservation(h.input, after);
+  assert.equal(inspected.valueState, 'updated'); assert.equal(inspected.untouched, false);
+  assert.equal(inspected.supportedAfterStructure, true, JSON.stringify(inspected.problems));
+  assert.equal(inspected.consumerStates.length, 1);
+  assert.equal(inspected.writeAuthority, 'none'); assert.equal(inspected.settlementAuthority, 'none');
+  const next = { before: h.plan.after, baseline: after.observation, desired: h.input.desired, consumers: inspected.consumerStates };
+  const noOp = inspectNativeTemplateUpdateObservation(next, await h.run(emitNativeTemplateUpdateObservationScript(next)));
+  assert.equal(noOp.valueState, 'no-op'); assert.equal(noOp.untouched, true); assert.equal(noOp.supportedAfterStructure, true);
+  for (const change of [
+    (r: typeof after) => { r.planRevision = revisionOf('wrong plan'); },
+    (r: typeof after) => { r.observation.templateGraph.graphRevision = revisionOf('wrong reader'); },
+    (r: typeof after) => { r.observation.templateGraph.receipt.graphRevision = revisionOf('wrong allocation'); },
+    (r: typeof after) => { r.consumerObservations = []; },
+    (r: typeof after) => { r.consumerObservations.push(structuredClone(r.consumerObservations[0])); },
+    (r: typeof after) => { r.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.characters = 'lost text'; },
+  ]) {
+    const corrupted = structuredClone(after); change(corrupted);
+    const result = inspectNativeTemplateUpdateObservation(h.input, corrupted);
+    assert.equal(result.supportedAfterStructure, false); assert.equal(result.untouched, false);
+    assert.ok(result.problems.length);
+  }
+});
+
+test('independent reads retain partial assignments and reject changed callers even when no variable changed', async () => {
+  const h = await fixture(true), script = emitNativeTemplateUpdateObservationScript(h.input);
+  const callerText = h.figma.getNodeById(h.plan.consumers[0].baseline.content.nodes!.find((n: any) => n.type === 'TEXT')!.id);
+  const original = callerText.characters; callerText.characters = 'design edit';
+  const edited = inspectNativeTemplateUpdateObservation(h.input, await h.run(script));
+  assert.equal(edited.valueState, 'untouched'); assert.equal(edited.untouched, false);
+  assert.ok(edited.problems.includes('native-template-update-observation-baseline-conflict'));
+  callerText.characters = original;
+  const second = h.variables.find(v => v.id === h.plan.valuePlan.changes[1].variableId)!;
+  second.setValueForMode = () => { throw Error('interrupted assignment'); };
+  assert.equal((await h.write()).status, 'recovery-required');
+  const observation = await h.run(script), partial = inspectNativeTemplateUpdateObservation(h.input, observation);
+  assert.equal(observation.status, 'collected'); assert.equal(partial.valueState, 'partial');
+  assert.equal(partial.untouched, false); assert.equal(partial.supportedAfterStructure, false);
+  assert.equal(partial.settlementAuthority, 'none'); assert.deepEqual(partial.consumerStates, []);
+  assert.equal((await h.write()).status, 'refused'); assert.equal(h.assignments.length, 1);
+});
+
+test('a main or caller edit during the second caller read refuses the entire independent observation', async () => {
+  for (const target of ['main', 'caller']) {
+    const h = await fixture(true), page = h.plan.consumers[0].input.creation.pageId;
+    const get = h.figma.getNodeByIdAsync.bind(h.figma); let reads = 0;
+    h.figma.getNodeByIdAsync = async (id: string) => {
+      if (id === page && ++reads === 2) {
+        const node = target === 'main' ? h.figma.getNodeById(h.input.before.creation.variants[0].id)
+          : h.figma.getNodeById(h.plan.consumers[0].instanceId);
+        node.opacity = .123;
+      }
+      return get(id);
+    };
+    const result = await h.run(emitNativeTemplateUpdateObservationScript(h.input));
+    assert.equal(result.status, 'refused', target);
+    assert.ok(result.problems.includes('native-template-update-observation-changed-during-read'), JSON.stringify(result.problems));
+    assert.equal(inspectNativeTemplateUpdateObservation(h.input, result).untouched, false);
+    assert.deepEqual(h.assignments, []);
+  }
+});
+
+test('compact proposals restore identical guarded programs and reject competing parent copies or changed derived plans', async () => {
+  const h = await fixture(true), proposal = prepareNativeTemplateUpdateProposal(h.input);
+  const restored = restoreNativeTemplateUpdateProposal(proposal);
+  assert.deepEqual(prepareNativeTemplateComponentUpdate(restored), h.plan);
+  assert.equal(emitNativeTemplateValueWriteScript(restored), emitNativeTemplateValueWriteScript(h.input));
+  assert.equal(emitNativeTemplateUpdateObservationScript(restored), emitNativeTemplateUpdateObservationScript(h.input));
+  assert.ok(Buffer.byteLength(JSON.stringify(proposal)) < Buffer.byteLength(JSON.stringify(h.plan)) / 2);
+  const resigned = (p: typeof proposal) => { const { revision: _revision, ...body } = p; p.revision = revisionOf(body); return p; };
+  for (const mutate of [
+    (p: typeof proposal) => { p.planRevision = revisionOf('forged writer'); },
+    (p: typeof proposal) => { (p.input.consumers[0].input.comparison as any).parent = {}; },
+    (p: typeof proposal) => { p.input.consumers[0].baseline.parent = {}; },
+    (p: typeof proposal) => { p.input.consumers[0].input.creation.pageId = p.input.before.creation.pageId; },
+    (p: typeof proposal) => { p.input.consumers[0].baseline.content = {}; },
+  ]) {
+    const bad = structuredClone(proposal); mutate(bad);
+    assert.throws(() => restoreNativeTemplateUpdateProposal(resigned(bad)), /native-template/);
+  }
+  const changed = structuredClone(proposal); changed.input.desired.source.tokenRevision = revisionOf('unsealed edit');
+  assert.throws(() => restoreNativeTemplateUpdateProposal(changed), /proposal-changed/);
 });

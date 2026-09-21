@@ -4,6 +4,7 @@ import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-sn
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { storeNativeUpdatePrograms, loadNativeUpdatePrograms } from './native-update-programs.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { emitNativeContractUpdateScript, nativeContractUpdateMatches, nativeContractUpdateUntouched, nativeContractUpdateAfter } from '../core/native-contract-update.js';
 import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
@@ -115,7 +116,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   };
   const load = (id: string) => evidenceReadOnce(displayScope, id, () => {
     const dir=directory(id), headerBytes=read(path.join(dir,'operation.json'));
-    const header=JSON.parse(headerBytes) as Header;
+    const header=loadNativeUpdatePrograms<Header>(JSON.parse(headerBytes), name => JSON.parse(read(path.join(dir,name))));
     if(header.version!==1 || header.id!==id || identity(header.parentId,header.proposalId)!==id) fail('header-invalid');
     const saved=plans.saved(header.parentId,header.proposalId),plan=saved.update.plan;
     if(header.planRevision!==saved.update.revision || PHASES.some(p => typeof header.scripts[p]?.script!=='string' || sha(header.scripts[p].script)!==header.scripts[p].sha256)) fail('plan-changed');
@@ -421,7 +422,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       const header:Header={version:1,id,parentId,proposalId,planRevision:record.update.revision,scripts:scripts(record)};
       if(!same(record,plans.current(parentId,proposalId))) fail('source-changed-during-preparation');
       const dir=directory(id,true);sync(root);ensure(path.join(dir,'events'),true);
-      write(path.join(dir,'operation.json'),header);return get(id);
+      const stored=storeNativeUpdatePrograms(header,(name,value)=>write(path.join(dir,name),value));
+      write(path.join(dir,'operation.json'),stored);return get(id);
     },
     forProposal(parentId:string,proposalId:string) { const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?get(id):null; },
     deliveryState(id:string) {const l=load(id);return {phase:l.state.phase,pendingPhase:l.state.pending?.phase,fileKey:l.plan.before.operation.fileKey};},
