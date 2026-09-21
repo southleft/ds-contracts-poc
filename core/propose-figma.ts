@@ -2695,6 +2695,35 @@ export const paintCssHex = (p: { hex?: string; alpha?: number }): string => {
   return `#${hex}${byte}`;
 };
 
+/** Figma stores a COLOR variable's alpha on SolidPaint.opacity. It is
+ * already represented by that bound ref when the captured token alpha matches
+ * exactly (or at Figma float32 storage precision). Never fold a separate paint
+ * opacity into a token identity. The capture's hex quantization cannot prove
+ * any other alpha; those cases remain the named refusal. */
+function jointPaintAlphaMatches(paint: {var?:string;alpha?:number}|undefined, ctx: Pick<Ctx,'capturedValues'|'corpus'>): boolean {
+  if (!paint?.var) return false;
+  const actual = paint.alpha ?? 1;
+  const path = dotPath(paint.var);
+  let value: unknown = ctx.capturedValues?.get(path);
+  // A full dump's captured layer is authoritative, including a missing ref.
+  // A set-only caller can instead supply its explicit token corpus.
+  if (ctx.capturedValues === undefined) {
+    try { value = ctx.corpus.resolveLiteral(path); } catch { return false; }
+  }
+  if (typeof value !== 'string') return false;
+  // The shared shadow parser is intentionally permissive. Do not let its
+  // parseFloat handling turn percent/suffixed alpha into a different value.
+  const numeric = String.raw`\s*\d+(?:\.\d+)?\s*`;
+  if (!/^#(?:[a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(value) &&
+      !new RegExp(`^rgb\\(${numeric},${numeric},${numeric}\\)$`, 'i').test(value) &&
+      !new RegExp(`^rgba\\(${numeric},${numeric},${numeric},${numeric}\\)$`, 'i').test(value)) return false;
+  const color = parseCssRgba(value);
+  if (!color || [color.r,color.g,color.b].some(n=>!Number.isFinite(n)||n<0||n>255)) return false;
+  const expected = color.a;
+  if (expected === undefined || !Number.isFinite(expected) || expected < 0 || expected > 1) return false;
+  return actual === expected || actual === Math.fround(expected);
+}
+
 function unifyPaint(
   m: Merged,
   pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
@@ -2841,7 +2870,7 @@ function unifyPaint(
   if (u.kind === 'drift') {
     // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
     if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&
-       paints.every(p=>p.paint?.var!==undefined&&(p.paint.alpha??1)===1)){
+       paints.every(p=>jointPaintAlphaMatches(p.paint,ctx))){
       const joint=unifyJointPaintRefs(paints.map(p=>({variant:p.variant,path:dotPath(p.paint!.var!)})),ctx.axes);
       if(joint)return joint;
     }

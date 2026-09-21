@@ -7841,7 +7841,8 @@ function of two corroborated optional axes; independent extra axes must be fully
 observed. Root text hoisting retains the same identity table. The proposal
 refuses an unsupported final table rather than emitting one that the shared
 referee cannot carry. Missing tuples, duplicate observations, missing omission
-metadata, unbound paint and paint opacity cannot certify a lossless table.
+metadata, unbound paint and unexplained paint opacity cannot certify a lossless
+table.
 
 Bounded browser tests exercise all nine set/omitted combinations, repeated
 transitions, typed mappings, and the actual static/shadow stylesheets. The emitted
@@ -7849,9 +7850,45 @@ native program and canonical dump preserve the nine references and unchanged
 repeat. Native edits override the original binding; equal-color variables keep
 their distinct identities. A 27-variant probe verifies an independent third
 axis and refuses a paint that depends on all three. These are compiler and
-browser proofs, not live application acceptance. Fresh DaisyUI native output,
-visible fidelity and the complete returned React journey remain unqualified.
-Private evidence is retained in `joint-optional-token-bindings-20260920/`.
+browser proofs, not complete live application acceptance.
+
+A fresh unchanged DaisyUI source trace matches both representatives and restores
+all 100 observed combinations per case. Through the application, operation
+`12d70613-cd2a-4543-958a-6d9926a20852` creates 100 painted native mains in
+Evaluations set `89:2590` and 153 variables. Independent readbacks pass. Separate
+caller operation `e607320a-2c9c-4654-a9d9-a1e9acedf378` creates instance `89:2609`
+with visible purple fill, border and editable “New” text. Its native width is
+**51.01599884033203 px**, versus the unchanged source's **49.921875 px**; both
+heights are 20 px. The original text advances 29.92 px while the native text box
+is 31 px. This remains a fidelity gap. No sample extent, font or tolerance was
+changed to hide it. The prior 71 page identities/top-level child lists, 1,352
+variable records and 49 collection records remain unchanged in the captured
+inventory fields; that inventory does not certify every historical deep node.
+
+The canonical native return first refused the omitted/outline tuple because
+the new inverse admitted only opaque paints. Figma represents a solid paint's
+alpha in its [opacity field](https://developers.figma.com/docs/plugins/api/Paint/).
+The corrected shared check admits the bound reference only when paint opacity
+equals the captured variable's alpha exactly or its float32 representation.
+A full capture's variable layer is authoritative; missing entries refuse. A
+set-only caller may supply an explicit token corpus instead. Separate opacity
+changes and alpha values lost by capture quantization remain unsupported.
+The retained capture now imports through the application with 20 color/variant
+tuples for background and border. Repeating the import keeps the identical
+contract and one workspace entry; repeated archive preparation produces
+byte-identical packages. An isolated consumer installs the app-delivered
+archive unchanged and matches captured background, border and height through
+all 100 runtime combinations, including omission and caller-text replacement.
+Its empty slots contain no text-color or typography bindings to return. With
+the original Inter asset loaded at the host's 16 px default, the returned
+primary is 54.1875 × 20 px and the small secondary is 50.1875 × 16 px; both
+inherit black text. The source cases use 14 px and 12 px text, respectively.
+The first review harness had a broken font URL; that failed instrument and its
+measurements are preserved separately, and the corrected run requires a loaded
+font before measuring. Visible fidelity and the complete returned React journey
+remain unqualified. Evidence is retained in
+`joint-optional-token-bindings-20260920/` and
+`daisyui-source-intake-20260920/`.
 
 To reverse, remove the optional schema field, shared resolver/referee, fuser and
 inverse admission, and all emitter/resource consumers together; restore the

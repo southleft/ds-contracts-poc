@@ -794,6 +794,24 @@ function tokensPage(): { route: string; html: string } {
         }),
     ),
     section(
+      "tokens-by-combination",
+      "Complete joint paint tables",
+      ["curated"],
+      `<p><code>tokensByCombination</code> is an array of complete two-property tables. Each entry has <code>props: [a, b]</code> and <code>rows: [{ values: [aValue, bValue], tokens: { channel: "{token.path}" } }]</code>. The <code>props</code> tuple names optional defaultless enum properties with explicit native omitted planes. A <code>null</code> member of <code>values</code> means omitted; runtime null, false or zero mapped to a named canonical value stays distinct. Every named and omitted Cartesian tuple must occur once, and every row carries the same channels as plain token references.</p><p>The initial subset covers resting background, text and border color on one ordinary root. React CSS Modules, inline React, static CSS, shadow CSS and native variants select the same row. Native return requires complete bound observations over both optional axes; any other axis must be fully observed and independent. A paint alpha must equal its captured variable alpha exactly or at float32 storage precision. Unknown, mismatched or quantized alpha cannot certify lossless return. Compiler and browser proofs do not qualify a complete live journey; see <a href="/system/">current acceptance</a>.</p>` +
+        refusals("Refusals:", [
+          "missing, duplicate or unknown tuples; rows with different channel sets; substituted references",
+          "required/defaulted/boolean axes or missing explicit native omitted planes",
+          "nested anatomy, component/shape/icon/meter/repeat roots, outside-layout strokes, override paint or interaction states",
+          "channels outside background/text/border color, or a competing base, per-property, state, conditional or joint binding",
+        ]) +
+        illustrativeExample(PartSchema, {tokensByCombination:[{props:["tone","finish"],rows:[
+          {values:[null,null],tokens:{"background-color":"{palette.base}"}},
+          {values:["accent",null],tokens:{"background-color":"{palette.accent}"}},
+          {values:[null,"outline"],tokens:{"background-color":"{palette.transparent}"}},
+          {values:["accent","outline"],tokens:{"background-color":"{palette.transparent}"}},
+        ]}]}, "Complete rows for optional tone=accent and finish=outline; declare both enum properties and their native omitted planes on the owning contract."),
+    ),
+    section(
       "literals",
       "Literal channels",
       ["generated", "curated"],

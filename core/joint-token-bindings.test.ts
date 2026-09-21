@@ -15,7 +15,7 @@ import {projectForCanvas} from '../extract/figma/canvas-gate/compile.js';
 import {tokenInventoryFromJson} from './tokens.js';
 import {mountGenerated,generatedTypeErrors} from './react-test-runtime.js';
 import {createFigmaMock} from '../scripts/plugin-engine-mock-figma.mjs';
-import {proposeFromDump} from './propose-figma.js';
+import {proposeFromDump,proposeBatchFromDump} from './propose-figma.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
 import type {DumpSet} from '../extract/figma/types.js';
 
@@ -133,12 +133,13 @@ async function nativeFixture(c:Contract,resourceTokens=tokens){
  const script=engine.buildComponentScript(c,new Map([[c.id,c]]));await run(script);
  const node=root.findOne((n:any)=>n.type==='COMPONENT_SET'&&n.getSharedPluginData('ds_contracts','contractId')===c.id);
  assert.ok(node);
- const dump=async()=>{
+ const captureAll=async()=>{
   const code=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8')
    .replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([node.name])};`);
-  return (await run(code) as Record<string,DumpSet>)[node.name];
+  return await run(code) as Record<string,unknown>;
  };
- return {captured:await dump(),dump,run,script,engine,nativeIds:()=>node.children!.map(n=>[n.id,n.name] as const)};
+ const dump=async()=>(await captureAll())[node.name] as DumpSet;
+ return {captured:await dump(),dump,captureAll,run,script,engine,nativeIds:()=>node.children!.map(n=>[n.id,n.name] as const)};
 }
 const propose=(captured:DumpSet)=>proposeFromDump(captured,{corpus:tokenCorpusFromJson({primitives:tokens.primitives,semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),fileKey:null,projectionMode:'exact',mintUnbound:true});
 
@@ -240,4 +241,30 @@ test('native return keeps typed code values distinct from omitted tuples across 
  const {captured}=await nativeFixture(c),back=ContractSchema.parse(propose(captured).contract);
  for(const p of c.props){const returned=back.props.find(b=>b.name===p.name)!;assert.deepEqual(returned.bindings.code,p.bindings.code);assert.deepEqual(returned.type,p.type);assert.equal(returned.default,undefined);}
  assert.deepEqual(back.anatomy.root.tokensByCombination,c.anatomy.root.tokensByCombination);
+});
+
+
+test('transparent bound colors use captured variable alpha without discarding a separate paint-opacity change',async()=>{
+ const alphaTokens=structuredClone(tokens);alphaTokens.primitives.palette.p00.$value='#141e2800';alphaTokens.primitives.palette.p01.$value='#141e2880';
+ const {captureAll}=await nativeFixture(seed(),alphaTokens),dump=await captureAll();
+ const options={corpus:tokenCorpusFromJson({primitives:alphaTokens.primitives,semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map<string,string>(),fileKey:null,projectionMode:'exact' as const,mintUnbound:true};
+ const result=proposeBatchFromDump(dump,options);
+ assert.deepEqual(result.skipped,[]);assert.equal(result.proposals.length,1);
+ const back=ContractSchema.parse(result.proposals[0].contract);
+ assert.equal(resolveTokens(back.anatomy.root,{})['background-color'],'{palette.p00}');
+ assert.equal(back.anatomy.root.tokensByCombination?.[0].rows.length,9);
+ const float32=structuredClone(dump) as any;
+ float32[seed().name].variants[1].fill.alpha=Math.fround(128/255);
+ assert.equal(ContractSchema.parse(proposeBatchFromDump(float32,options).proposals[0].contract).anatomy.root.tokensByCombination?.[0].rows.length,9);
+ for(const change of [
+  (d:any)=>{d[seed().name].variants[0].fill.alpha=0.5},
+  (d:any)=>{d[seed().name].variants[1].fill.alpha=0.5},
+  (d:any)=>{d._variables['palette/p00'].value='#141e28'},
+  (d:any)=>{delete d._variables},
+  (d:any)=>{delete d._variables['palette/p22']},
+  (d:any)=>{d._variables['palette/p00'].value='rgba(20,30,40,0.5%)';d[seed().name].variants[0].fill.alpha=0.5},
+ ]){
+  const modified=structuredClone(dump);change(modified);const r=proposeBatchFromDump(modified,options);
+  assert.ok(!r.proposals.some(p=>ContractSchema.parse(p.contract).anatomy.root.tokensByCombination?.some(t=>t.rows.some(row=>'background-color'in row.tokens))));
+ }
 });

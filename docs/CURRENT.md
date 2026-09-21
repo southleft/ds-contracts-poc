@@ -103,7 +103,17 @@ while `fit-content` width remains unresolved ([D.96](23-known-limitations.md#d96
 A bounded shared joint-paint table now preserves both omitted planes in
 compiler/browser tests, including canonical native return and typed values
 ([D.97](23-known-limitations.md#d97-complete-joint-paint-tables-preserve-both-omitted-planes)).
-Fresh live application delivery with this table is still pending.
+Fresh application delivery now creates 100 editable painted mains and 153
+variables in Evaluations. The separate caller instance has visible fill, border
+and editable text, but measures 51.01599884033203 × 20 px against the unchanged
+49.921875 × 20 px source. Its empty native content slots do not carry the source
+text-color or typography bindings back to React. The first canonical return
+refused transparent paint; the corrected inverse checks captured variable alpha
+exactly before preserving its reference.
+The same capture now imports in the app, repeats identically, and produces
+byte-identical installable archives. The unchanged installed component matches
+captured paint and height in all 100 combinations. Its missing text styling
+still produces the wrong caller widths and text colors.
 Native fidelity and the complete second-library journey remain unqualified.
 This does not close row 4 or the existing Radix ownership gap.
 
