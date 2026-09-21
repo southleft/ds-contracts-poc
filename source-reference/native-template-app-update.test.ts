@@ -57,6 +57,21 @@ test('template proposals use compact storage and retain caller after-states thro
   writeFileSync(file,JSON.stringify(corrupt));assert.throws(()=>f.plans.saved(f.parent,first.proposal.id),/plan-changed/);
   writeFileSync(file,original);
   await f.finish(first.operation.id);
+  const verifiedState=f.jobs().get(first.operation.id);
+  for(const invoke of [
+    ()=>f.jobs().designEvidence(first.operation.id),
+    ()=>f.jobs().observeSourceRepair(first.operation.id,revisionOf(f.input.baseline)),
+    ()=>f.jobs().sourceRepairReadEvidence(first.operation.id,'unissued',revisionOf(f.input.baseline)),
+  ])assert.throws(invoke,/template-source-repair-unqualified/);
+  assert.deepEqual(f.jobs().get(first.operation.id),verifiedState,'source repair refusals dispatch no observation or write');
+  const callerNode=f.figma.getNodeById(f.input.consumers[0].input.creation.comparisons[0].instanceId);
+  const callerOpacity=callerNode.opacity;callerNode.opacity=0.25;
+  try {
+    const design=await f.accept(first.operation.id,f.jobs().observeDesign(first.operation.id));
+    assert.equal(design.phase,'update-verified');
+    assert.ok(design.designChanges?.changes.some(c=>c.nodeId===callerNode.id&&c.channel==='opacity'),
+      'the integrated design reader retains caller changes as well as main observations');
+  }finally{callerNode.opacity=callerOpacity;}
   assert.equal(f.plans.prepare(f.parent).id,first.proposal.id,'unchanged review reuses the written update');
   assert.equal(f.jobs().verifiedForParent(f.parent)!.receipt.nodes!.length,f.input.baseline.nodes!.length);
   assert.equal(f.jobs().get(first.operation.id).imageObservation?.images.length,4);

@@ -192,7 +192,8 @@ combined readbacks. It admits color changes while refusing geometry-affecting
 changes before delivery. Journal/companion tests cover forward update, unchanged
 repeat, exact reverse, caller-context refresh, conflict and lost-write settlement
 across restarts. Updated main and caller exports are available in the review;
-an intervening edit during export refuses the observation. These are integration
+an intervening edit during export refuses the observation. Template-to-original-source
+repair remains unavailable; the existing opacity repair path is kept separate. These are integration
 tests with a synthetic native host, not a measured live application journey.
 The live source-edit/update/recovery demonstration, additional caller creation
 after an update, comparison refresh/repair transitions and visual/layout
