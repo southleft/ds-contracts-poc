@@ -8270,9 +8270,16 @@ The seven-level native research graph also exposes a capture gap: its sixteen
 consuming bindings retain their full selected chains, but the global variable
 collector cannot resolve two carrier modes. Raising a depth limit alone would
 not authenticate cross-collection selection. Multi-collection canonical return,
-component integration and application admission remain unimplemented. Before
-admission, the host must also authenticate the painted font on each source
-plane; a CSS font-family spelling alone does not identify the face Chromium used.
+component integration and application admission remain unimplemented. New source
+property observations seal painted-font evidence on every plane and require the
+original font witness to return after each probe. Matrix and single-property
+assembly validate each witness against its raw tree and observation digest,
+then map the actual family on a private compilation clone. Mixed evidence,
+changed witnesses and default/omission family disagreements refuse. Older
+archives retain their original CSS-family interpretation and cannot establish
+painted-font identity for template admission. The source CSS and font bytes are
+unchanged; neither this mapping nor a CSS family spelling certifies native font
+metrics, font asset delivery to a clean React consumer or the fidelity limit.
 
 Plugin capture 1.44 records numeric native weight and complete selected alias
 chains up to 16 edges, including target consuming modes and native values.

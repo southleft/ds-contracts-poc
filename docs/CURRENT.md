@@ -63,7 +63,9 @@ caller text retains its bindings through Small → Large → Small, and a bounde
 inverse restores root typography. The source adapter does not yet derive this
 marker. A separate generated variable-graph transport passes an independent
 native readback, but its component integration and canonical return are not
-implemented. Application journeys, template updates/recovery, clean consumers and
+implemented. New property observations authenticate painted fonts per plane;
+older source archives retain their original interpretation. Application journeys,
+template updates/recovery, clean consumers and
 5% fidelity remain unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
 
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.

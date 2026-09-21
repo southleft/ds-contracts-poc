@@ -86,7 +86,9 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
   const c=program.components[0],identity={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
   const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Surface}];flushSync(()=>createRoot(document.getElementById('root')).render(<Surface>Original caller content</Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
-  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--twin:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  const font=readFileSync('extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2').toString('base64');
+  await page.setContent('<style>@font-face{font-family:AppAlias;src:url(data:font/woff2;base64,'+font+')}section{font-family:AppAlias}:root{--base:rgb(10, 20, 30);--twin:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>document.fonts.ready);
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
   const selector='#root > section',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
@@ -99,6 +101,37 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
   assert.equal(draft.native!.variants.length,defaulted?8:10);assert.equal(JSON.stringify(draft.contract).includes('Original caller content'),false);
   assert.deepEqual(draft.contract!.anatomy.root.slot,{name:'children'});assert.equal(draft.contract!.anatomy.root.parts,undefined);
   assert.equal(effects.planned,15);
+  assert.ok(Object.values(snapshots).every(s=>s.tree.style['font-family']==='AppAlias'&&s.fonts?.rows[0].fonts[0].familyName==='IBM Plex Sans'));
+  assert.ok(effects.rows.every(r=>r.fontsSha256===evidenceSha(JSON.stringify(snapshots[r.id].fonts))));
+  assert.equal(draft.contract!.anatomy.root.declared?.['font-family'],'"IBM Plex Sans"');
+  assert.equal(draft.lowerings.filter(l=>l.reason==='painted-font-family').length,15);
+  for(const mutate of [
+   (s:ReactPropertySnapshot)=>{delete s.fonts;},
+   (s:ReactPropertySnapshot)=>{s.fonts!.rows[0].fonts[0].familyName='Unobserved';},
+   (s:ReactPropertySnapshot)=>{s.fonts!.treeRevision='sha256:'+'0'.repeat(64);},
+  ]){
+   const changedFonts=structuredClone(snapshots);mutate(changedFonts[effects.rows[0].id]);
+   assert.match(assembleReactRootMatrix(program,ownership,tree,effects,changedFonts).draft!.problems[0],/react-property-font-/);
+  }
+  const incompleteFonts=structuredClone(effects),incompleteSnapshots=structuredClone(snapshots);
+  delete incompleteFonts.rows[0].fontsSha256;delete incompleteSnapshots[incompleteFonts.rows[0].id].fonts;
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,incompleteFonts,incompleteSnapshots).draft!.problems,['react-property-font-coverage-incomplete']);
+  const aliasedFonts=structuredClone(effects),aliasedSnapshots=structuredClone(snapshots),aliasRow=aliasedFonts.rows[0];
+  aliasedSnapshots[aliasRow.id].fonts!.rows[0].cssFamily='OtherAlias';
+  aliasRow.fontsSha256=evidenceSha(JSON.stringify(aliasedSnapshots[aliasRow.id].fonts));
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,aliasedFonts,aliasedSnapshots).draft!.problems,['text-font-source-node-changed']);
+  if(defaulted){
+   const mismatch=structuredClone(effects),mismatchSnapshots=structuredClone(snapshots);
+   const omitted=mismatch.rows.find(r=>r.changes.tone.kind==='omit')!;
+   mismatchSnapshots[omitted.id].fonts!.rows[0].fonts[0].familyName='Different Family';
+   omitted.fontsSha256=evidenceSha(JSON.stringify(mismatchSnapshots[omitted.id].fonts));
+   assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,mismatch,mismatchSnapshots).draft!.problems,['react-root-matrix-default-font-differs']);
+  }
+  const legacyEffects=structuredClone(effects),legacySnapshots=structuredClone(snapshots);
+  for(const r of legacyEffects.rows){delete r.fontsSha256;delete legacySnapshots[r.id].fonts;}
+  const legacy=assembleReactRootMatrix(program,ownership,tree,legacyEffects,legacySnapshots).draft!;
+  assert.equal(legacy.status,'native-compiled');assert.equal(legacy.contract!.anatomy.root.declared?.['font-family'],'AppAlias');
+  assert.ok(!legacy.lowerings.some(l=>l.reason==='painted-font-family'),'old archives cannot acquire an inferred font witness');
   assert.deepEqual(draft.sizing?.map(s=>[s.channel,s.status]),[['width','retained'],['height','retained']]);
   const codeValues=draft.contract!.props.find(p=>p.name==='tone')!.bindings.code.values!;
   assert.equal(Object.values(codeValues).filter(v=>v===null).length,1);assert.ok(Object.values(codeValues).includes('null'));

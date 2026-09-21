@@ -15,6 +15,7 @@ import {emitReact} from '../core/emit-react.js';
 import {emitReactInline} from '../core/emit-react-inline.js';
 import {flattenTokens} from '../core/tokens.js';
 import {mountGenerated,generatedTypeErrors} from '../core/react-test-runtime.js';
+import {observeReactPropertyPlan} from './react-property-effects.js';
 
 for(const defaulted of [true,false])test(`source property planes preserve typed React/native variants with ${defaulted?'a declared default':'omission as its own plane'}`,async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
@@ -30,7 +31,9 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},children}:{tone?:'qu
   const c=program.components[0],identity={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
   const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Surface}];flushSync(()=>createRoot(document.getElementById('root')).render(<Surface>Original caller content</Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
-  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  const font=readFileSync('extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2').toString('base64');
+  await page.setContent('<style>@font-face{font-family:AppAlias;src:url(data:font/woff2;base64,'+font+')}section{font-family:AppAlias}:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>document.fonts.ready);
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
   const selector='#root > section',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
@@ -40,6 +43,11 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},children}:{tone?:'qu
   const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(effects.rows.map(r=>[r.id,JSON.parse(readFileSync(path.join(dir,'effects',r.id+'.json'),'utf8'))]));
   const result=assembleReactRootVariants(program,ownership,tree,effects,snapshots);assert.deepEqual(result.problems,[]);
   const draft=result.drafts[0];assert.equal(draft.status,'native-compiled',draft.problems.join(';'));
+  assert.ok(effects.rows.every(r=>r.fontsSha256===evidenceSha(JSON.stringify(snapshots[r.id].fonts))));
+  assert.ok(Object.values(snapshots).every(s=>s.tree.style['font-family']==='AppAlias'));
+  assert.equal(draft.contract!.anatomy.root.declared?.['font-family'],'"IBM Plex Sans"');
+  const substitutedFonts=structuredClone(snapshots);substitutedFonts[effects.rows[0].id].fonts!.rows[0].fonts[0].familyName='Other';
+  assert.deepEqual(assembleReactRootVariants(program,ownership,tree,effects,substitutedFonts).drafts[0].problems,['react-property-font-evidence-unverified']);
   assert.equal(draft.native!.variants.length,defaulted?4:5);assert.equal(JSON.stringify(draft.contract).includes('Original caller content'),false);
   assert.deepEqual(draft.contract!.anatomy.root.slot,{name:'children'});assert.equal(draft.contract!.anatomy.root.parts,undefined);
   const codeValues=draft.contract!.props[0].bindings.code.values!;
@@ -67,5 +75,30 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},children}:{tone?:'qu
   const wrong=structuredClone(effects);wrong.rows[0].requested={kind:'set',value:'unobserved'};
   assert.deepEqual(assembleReactRootVariants(program,ownership,tree,wrong,snapshots).drafts,[]);
   assert.deepEqual(assembleReactRootVariants(program,ownership,tree,effects,snapshots),result,'repeat assembly is deterministic');
+  if(defaulted){
+   // A font census can drift while the DOM and PNG stay identical. The source
+   // must still restore its exact painted-font witness before another probe.
+   const newSession=context.newCDPSession.bind(context);let fontSessions=0;
+   context.newCDPSession=async target=>{
+    const session=await newSession(target),send=session.send.bind(session);let fontSession=0;
+    session.send=(async(method:any,args:any)=>{
+     const response:any=await send(method,args);
+     if(method==='CSS.getPlatformFontsForNode'){
+      fontSession||=++fontSessions;
+      if(fontSession>=3)response.fonts=response.fonts.map((f:any)=>({...f,postScriptName:f.postScriptName+'-changed'}));
+     }
+     return response;
+    }) as typeof session.send;
+    return session;
+   };
+   try{
+    const failure=await observeReactPropertyPlan({page,program,ownership,tree,image,selector,instanceId:ownership.components[0].id,
+     dir:path.join(dir,'font-restoration-fault'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}},
+    [{changes:{tone:{kind:'set' as const,value:'quiet'}}},{changes:{tone:{kind:'set' as const,value:'loud'}}}]);
+    assert.equal(failure.rows[0].problem,'react-property-effects-original-not-restored:restored-fonts');
+    assert.equal(failure.rows[1].problem,'prior-observation-invalidated-context');
+    assert.ok(failure.rows.every(r=>r.status==='refused'));
+   }finally{context.newCDPSession=newSession;}
+  }
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
 });

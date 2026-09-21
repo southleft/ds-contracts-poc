@@ -114,6 +114,8 @@ export function startReactOwnership(
           "react-child-context.ts",
           "react-property-probe.ts",
           "react-property-effects.ts",
+          "react-property-fonts.ts",
+          "text-fonts.ts",
           "react-root-variants.ts",
           "react-property-matrix.ts",
           "react-root-matrix.ts",
