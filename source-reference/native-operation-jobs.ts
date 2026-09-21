@@ -11,6 +11,7 @@ import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonReco
 import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
 import { isReactComparisonRequest, reactComparisonReservation, type ReactComparisonRequest } from './react-comparison-request.js';
+import type { NativeTemplateConsumerInput } from '../core/native-template-value-consumers.js';
 import type { prepareReactComparisonPlan } from './react-comparison-plan.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from '../core/native-contract-comparison-observation.js';
 /** Durable, server-owned source-native operations. Transport executes the
@@ -1774,6 +1775,70 @@ export function createNativeOperationJobs(
       if (!isNativeSourcePin(loaded.header.request) ||
           loaded.state.pending) fail('react-update-parent-context-unavailable');
       return loaded.fingerprint;
+    },
+    /** Current, independently observed caller journals. These records preserve
+     * their original parent revision; an update chain must reconcile it before
+     * writing. Source recompilation is intentionally separate: a retained
+     * caller's historical source need not equal the main's desired successor. */
+    reactTemplateConsumerBaselines(parentId: string,
+      baselineRevisions: Array<{ operationId: string; journalRevision: string }> = []) {
+      const parent = load(parentId);
+      if (!isNativeSourcePin(parent.header.request) || !isReactPlan(parent.plan) ||
+          !templateGraphPlan(parent.plan) || parent.state.pending || !parent.state.componentCreation ||
+          !parent.state.templateGraphIdentity) fail('template-consumer-parent-unavailable');
+      const parentInput = componentObservationInput(parent.state, parent.plan) as NativeContractObservationInput;
+      const discover = () => readdirSync(operations).filter(id => UUID.test(id)).sort().filter(id => {
+        ensure(dir(id));
+        const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        // Discovery is not authority. Even an invalid related request must be
+        // loaded and refused, rather than disappearing from the inventory.
+        return (header.request as any)?.parentOperationId === parentId;
+      });
+      const ids = discover();
+      if (ids.length > 100) fail('template-consumer-inventory-too-large');
+      if (!Array.isArray(baselineRevisions) || baselineRevisions.length > 100)
+        fail('template-consumer-baseline-pin-invalid');
+      const pins = new Map<string, string>();
+      for (const pin of baselineRevisions) {
+        if (!pin || !UUID.test(pin.operationId) || !HASH.test(pin.journalRevision) || pins.has(pin.operationId) ||
+            !ids.includes(pin.operationId)) fail('template-consumer-baseline-pin-invalid');
+        pins.set(pin.operationId, pin.journalRevision);
+      }
+      const consumers = ids.map(id => {
+        const current = load(id), revision = pins.get(id);
+        // Only the update store may select a WRITTEN historical prefix. The
+        // complete current journal is still checked, including pending work
+        // and every suffix event; a refresh/repair cannot be hidden by a pin.
+        const loaded = revision === undefined ? current
+          : readOnce('baseline:' + id + ':' + revision, () => loadFresh(id, revision));
+        const { header, state, plan } = loaded;
+        if (!isReactComparisonRequest(header.request) || header.request.parentOperationId !== parentId ||
+            !isComparisonPlan(plan) || state.pending || state.phase !== 'component-structure-observed' ||
+            !state.imageReadback) fail('template-consumer-observation-required:' + id);
+        const input = comparisonObservationInput(state, plan as ComparisonPlan);
+        if (!input.comparison.textTemplate || !same(input.comparison.parent.operation, parentInput.operation) ||
+            !same(input.comparison.parent.creation, parentInput.creation) ||
+            !same(input.comparison.parent.tokenIdentity, parentInput.tokenIdentity) ||
+            !same(input.comparison.parent.templateGraph?.identity, parentInput.templateGraph?.identity))
+          fail('template-consumer-parent-identity-changed:' + id);
+        const baseline = structuredClone(state.imageReadback!.result) as NativeTemplateConsumerInput['baseline'];
+        if (verifyNativeContractComparisonReadback(input, baseline).status !== 'supported-comparison-structure-observed')
+          fail('template-consumer-observation-invalid:' + id);
+        delete baseline.images; delete baseline.parent.images; delete baseline.content.images;
+        const cleanInput = structuredClone(input); delete cleanInput.comparison.receipt.images;
+        return { operationId: id, journalRevision: loaded.fingerprint,
+          currentJournalRevision: current.fingerprint, input: cleanInput, baseline };
+      });
+      // A fresh call outside a display snapshot always validates full journals.
+      // Recheck both membership and fingerprints before exposing the inventory.
+      if (!same(ids, discover()) || loadFresh(parentId).fingerprint !== parent.fingerprint ||
+          consumers.some(c => loadFresh(c.operationId).fingerprint !== c.currentJournalRevision))
+        fail('template-consumer-evidence-changed');
+      return structuredClone({ parentJournalRevision: parent.fingerprint, consumers,
+        // A later independent update observation must pin this current context,
+        // not just the immutable prefixes used to reconstruct value history.
+        currentRevision: revisionOf({ parent: parent.fingerprint,
+          consumers: consumers.map(c => ({ operationId: c.operationId, journalRevision: c.currentJournalRevision })) }) });
     },
     /** Creation pin of an operation that can follow a later source observation. */
     reactSuccessionSubject(id: string) {

@@ -179,6 +179,13 @@ color variable updated five main variants and their retained caller; the
 separate read passed, and a guarded reverse update restored all 302 main node
 records, five caller records and the caller image exactly. This used a synthetic
 source successor, so it is not an application update or a fidelity result.
+The application journal reader now inventories retained template callers from
+fully validated operation histories, including their current journal revisions.
+It refuses pending or unverified callers, changed parent identities and corrupt
+history. Written updates can retain an original observation only while the
+complete later journal remains valid and read-only. A read-only check loaded
+the retained application's 302-node main and five-node caller; this inventory
+does not authorize delivery or qualify an update.
 Application source succession, delivery, interrupted-write settlement and
 updated visual/layout qualification remain unfinished; the application
 continues to refuse template updates.
