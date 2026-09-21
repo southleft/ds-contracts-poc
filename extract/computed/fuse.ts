@@ -25,6 +25,7 @@
  * workflow, extract/computed/resolve.ts) is a first-class output.
  */
 import { mintTokens, type MintAxis, type MintObservation, type MintResult } from '../../core/mint-tokens.js';
+import {JOINT_PAINT_CHANNELS,jointTokenTableErrors} from '../../packages/core/src/joint-tokens.js';
 import {
   CONTRACT_STATES,
   DECLARED_CHANNELS,
@@ -3993,6 +3994,26 @@ export function applyMintToContract(
         const ub = unsetAxes.get(pb);
         // @door fuse.pair-over-two-unset-axes
         if (ua !== undefined && ub !== undefined) {
+          // A complete two-axis table gives each omission its own tuple.
+          // Admission remains the shared contract referee's decision; no
+          // placeholder fallback or synthetic public enum value is invented.
+          const aa=space.axes.find(axis=>axis.prop===pa),ab=space.axes.find(axis=>axis.prop===pb);
+          if(partName==='root'&&JOINT_PAINT_CHANNELS.has(channel)&&aa&&ab){
+            const before=target.tokensByCombination;
+            const tables=structuredClone(before??[]);
+            let table=tables.find(table=>table.props[0]===pa&&table.props[1]===pb);
+            if(!table){table={props:[pa,pb],rows:aa.values.flatMap(a=>ab.values.map(b=>({values:[a===ua?null:a,b===ub?null:b] as [string|null,string|null],tokens:{}})))};tables.push(table);}
+            for(const row of table.rows){
+              const a=row.values[0]??ua,b=row.values[1]??ub;
+              row.tokens[channel]=`{${inner.replaceAll(`{${pa}}`,a).replaceAll(`{${pb}}`,b)}}`;
+            }
+            target.tokensByCombination=tables;
+            if(!jointTokenTableErrors(enriched).length){
+              enrichmentNotes.push(`complete optional pair carried: ${partName}.${channel} = explicit ${pa} × ${pb} token table including both omitted planes`);
+              return;
+            }
+            if(before===undefined)delete target.tokensByCombination;else target.tokensByCombination=before;
+          }
           overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: 'pair ref over TWO unset axes — no carried spelling; named residue' });
           return;
         }

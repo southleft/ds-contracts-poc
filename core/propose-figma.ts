@@ -41,6 +41,7 @@ import {
   type ExactProjectionResult,
   type ExactVariantRow,
 } from './exact-projection.js';
+import { jointTokenTableErrors } from '../packages/core/src/joint-tokens.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { textBoxStaticRefusals, UA_PADDING_BY_ELEMENT, UA_PADDING_ELEMENTS } from '../packages/core/src/anatomy.js';
 import { INTERACTION_STATE_BY_VALUE, keptAsEnumStateAxes, normStateValue, readStateAxes, readStateAxis, STATE_AXIS_KEPT_AS_ENUM, type InteractionState, type StateAxisProjection } from './interaction-state-axis.js';
@@ -1460,12 +1461,44 @@ export interface PerValueRef {
   byValue: Record<string, string>;
 }
 
-type UnifiedRef = string | PerValueRef;
+interface PerCombinationRef {
+  props: [string,string];
+  rows: Array<{values:[string|null,string|null];ref:string}>;
+}
+type UnifiedRef = string | PerValueRef | PerCombinationRef;
 
 /** Identity key for unified refs — lets the padding/radius pairing rules
  *  compare per-value functions the way they compare plain ref strings. */
 const refKey = (u: UnifiedRef | undefined): string | undefined =>
-  u === undefined ? undefined : typeof u === 'string' ? u : `f(${u.propName}):${JSON.stringify(u.byValue)}`;
+  u === undefined ? undefined : typeof u === 'string' ? u : 'props' in u ? `joint:${JSON.stringify(u)}` : `f(${u.propName}):${JSON.stringify(u.byValue)}`;
+
+/** Bindings themselves, not their colors or token-name segments, must be a
+ * complete function of two corroborated optional axes. Every other axis is
+ * observed across its whole domain before it can be factored out. */
+function unifyJointPaintRefs(obs:Array<{variant:string;path?:string}>,axes:Axis[]):PerCombinationRef|undefined{
+  if(!obs.length||obs.some(o=>!o.path||!/^[a-z0-9.-]+$/i.test(o.path)))return;
+  const seen=new Set<string>();
+  for(const o of obs){
+    const values=axisValuesOf(o.variant),tuple=axes.map(a=>values[a.property]);
+    if(tuple.some((v,i)=>!axes[i].values.includes(v)))return;
+    const key=JSON.stringify(tuple);if(seen.has(key))return;seen.add(key);
+  }
+  if(seen.size!==axes.reduce((n,a)=>n*a.values.length,1))return;
+  const eligible=axes.filter(a=>a.omitted&&a.omitted.valueType!=='boolean'&&!isBooleanAxis(a));
+  for(let i=0;i<eligible.length;i++)for(let j=i+1;j<eligible.length;j++){
+    const pair=[eligible[i],eligible[j]] as const,refs=new Map<string,string>();let fits=true;
+    const value=(axis:Axis,label:string)=>label===axis.omitted!.unsetValue?null:axisValue(axis,label);
+    for(const o of obs){
+      const values=axisValuesOf(o.variant),key=JSON.stringify(pair.map(a=>value(a,values[a.property])));
+      if(refs.has(key)&&refs.get(key)!==o.path){fits=false;break;}refs.set(key,o.path!);
+    }
+    if(!fits||refs.size!==pair[0].values.length*pair[1].values.length)continue;
+    return {props:[pair[0].propName,pair[1].propName],rows:pair[0].values.flatMap(a=>pair[1].values.map(b=>{
+      const values:[string|null,string|null]=[value(pair[0],a),value(pair[1],b)];
+      return {values,ref:`{${refs.get(JSON.stringify(values))!}}`};
+    }))};
+  }
+}
 
 type Unified =
   | { kind: 'none' }
@@ -2215,6 +2248,8 @@ interface Ctx {
    *  variant's ref still resolves here, so the paint survives as per-variant
    *  minted literals instead of dropping entirely. */
   capturedValues?: Map<string, string>;
+  /** Joint paint cannot recover each consumer mode from the current dump. */
+  capturedPaintModeConflicts?: ReadonlySet<string>;
   /** instanceKey → exported stub-glyph asset (iteration 8) — see the
    *  proposeFromDump option of the same name. */
   iconAssets?: ReadonlyMap<string, StubIconAsset>;
@@ -2578,6 +2613,7 @@ interface ByPropCollector {
   prop?: string;
   map: Record<string, Record<string, string>>;
   additional?: ByPropCollector[];
+  combinations?: Array<{props:[string,string];rows:Array<{values:[string|null,string|null];tokens:Record<string,string>}>}>;
 }
 
 /** Carry one unified ref into a part's tokens record: plain refs land as
@@ -2595,6 +2631,18 @@ function carryRef(
   if (u === undefined) return;
   if (typeof u === 'string') {
     tokens[cssProp] = u;
+    return;
+  }
+  if('props' in u){
+    const tables=byProp.combinations??=[];
+    let table=tables.find(table=>JSON.stringify(table.props)===JSON.stringify(u.props));
+    if(!table){table={props:u.props,rows:u.rows.map(row=>({values:row.values,tokens:{}}))};tables.push(table);}
+    for(const row of u.rows){
+      const target=table.rows.find(candidate=>JSON.stringify(candidate.values)===JSON.stringify(row.values));
+      if(!target||Object.hasOwn(target.tokens,cssProp))throw Error('FIGMA_JOINT_TOKEN_TABLE_CONFLICT');
+      target.tokens[cssProp]=row.ref;
+    }
+    ctx.notes.push(`${where} ${cssProp}: complete bound token identities retained over optional ${u.props.join(' × ')} including omission`);
     return;
   }
   if (byProp.prop !== undefined && byProp.prop !== u.propName) {
@@ -2627,6 +2675,7 @@ function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector):
     .filter((entry) => entry.prop !== undefined && Object.keys(entry.map).length > 0)
     .map((entry) => ({ prop: entry.prop!, map: entry.map }));
   if (entries.length > 0) holder.tokensByProp = entries.length === 1 ? entries[0] : entries;
+  if(byProp.combinations?.length)holder.tokensByCombination=byProp.combinations;
 }
 
 /** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
@@ -2648,6 +2697,35 @@ export const paintCssHex = (p: { hex?: string; alpha?: number }): string => {
   return `#${hex}${byte}`;
 };
 
+/** Figma stores a COLOR variable's alpha on SolidPaint.opacity. It is
+ * already represented by that bound ref when the captured token alpha matches
+ * exactly (or at Figma float32 storage precision). Never fold a separate paint
+ * opacity into a token identity. The capture's hex quantization cannot prove
+ * any other alpha; those cases remain the named refusal. */
+function jointPaintAlphaMatches(paint: {var?:string;alpha?:number}|undefined, ctx: Pick<Ctx,'capturedValues'|'corpus'>): boolean {
+  if (!paint?.var) return false;
+  const actual = paint.alpha ?? 1;
+  const path = dotPath(paint.var);
+  let value: unknown = ctx.capturedValues?.get(path);
+  // A full dump's captured layer is authoritative, including a missing ref.
+  // A set-only caller can instead supply its explicit token corpus.
+  if (ctx.capturedValues === undefined) {
+    try { value = ctx.corpus.resolveLiteral(path); } catch { return false; }
+  }
+  if (typeof value !== 'string') return false;
+  // The shared shadow parser is intentionally permissive. Do not let its
+  // parseFloat handling turn percent/suffixed alpha into a different value.
+  const numeric = String.raw`\s*\d+(?:\.\d+)?\s*`;
+  if (!/^#(?:[a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(value) &&
+      !new RegExp(`^rgb\\(${numeric},${numeric},${numeric}\\)$`, 'i').test(value) &&
+      !new RegExp(`^rgba\\(${numeric},${numeric},${numeric},${numeric}\\)$`, 'i').test(value)) return false;
+  const color = parseCssRgba(value);
+  if (!color || [color.r,color.g,color.b].some(n=>!Number.isFinite(n)||n<0||n>255)) return false;
+  const expected = color.a;
+  if (expected === undefined || !Number.isFinite(expected) || expected < 0 || expected > 1) return false;
+  return actual === expected || actual === Math.fround(expected);
+}
+
 function unifyPaint(
   m: Merged,
   pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined,
@@ -2656,6 +2734,7 @@ function unifyPaint(
   paintName: string,
   mint?: {
     cssProperty: string;
+    jointRoot?: boolean;
     target: Record<string, string>;
     /** The literal an ABSENT paint means on this channel, when absence is
      *  itself a drawn fact rather than a missing observation. A node with no
@@ -2772,6 +2851,14 @@ function unifyPaint(
     // @door propose.bound-paint-drift-unresolvable
     return undefined;
   }
+  // Check a complete two-omission matrix before ref simplification: a
+  // designer may rebind every row to one variable yet select different modes.
+  if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&ctx.capturedPaintModeConflicts?.size){
+    const refs=paints.map(p=>({variant:p.variant,path:p.paint?.var?dotPath(p.paint.var):undefined}));
+    const conflicts=[...new Set(refs.flatMap(p=>p.path&&ctx.capturedPaintModeConflicts!.has(p.path)?[p.path]:[]))].sort();
+    if(conflicts.length&&unifyJointPaintRefs(refs,ctx.axes))
+      throw Error(`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED: ${where} ${paintName}: ${conflicts.join(', ')} has differing or unavailable captured mode values; each consuming node mode is not captured`);
+  }
   const u = unifyRefs(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
@@ -2792,6 +2879,11 @@ function unifyPaint(
   }
   if (u.kind === 'drift') {
     // Live-gauntlet class ① (fill-matrix-depth-drop): a BOUND paint whose
+    if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&
+       paints.every(p=>jointPaintAlphaMatches(p.paint,ctx))){
+      const joint=unifyJointPaintRefs(paints.map(p=>({variant:p.variant,path:dotPath(p.paint!.var!)})),ctx.axes);
+      if(joint)return joint;
+    }
     // @door propose.bound-paint-drift-to-mint
     // refs refuse unification (mixed segment depth, or a function of more
     // than one axis) used to drop entirely — honest in prose, catastrophic
@@ -3063,6 +3155,7 @@ function invertNodeTokens(
     'background-color',
     unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
       cssProperty: 'background-color',
+      jointRoot: isRoot,
       target: tokens,
       // PHASE 2 EXAM (fill-absent-on-axis-value / fill-unset-by-state): an
       // ABSENT fill is a DRAWN fact, exactly as an absent stroke is. Both
@@ -3088,6 +3181,7 @@ function invertNodeTokens(
     strokeColorProp,
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
       cssProperty: strokeColorProp,
+      jointRoot: isRoot,
       target: tokens,
       // A strokeless variant is a ZERO-WIDTH stroke, not an uncaptured one —
       // the width channel below already mints 0 for exactly these nodes.
@@ -5832,7 +5926,7 @@ function carryClip(
   );
 }
 
-function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector): Record<string, string> {
+function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropCollector, jointRoot = false): Record<string, string> {
   const tokens: Record<string, string> = {};
   const color = unifyPaint(
     m,
@@ -5840,7 +5934,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     ctx,
     where,
     'text fill',
-    { cssProperty: 'color', target: tokens },
+    { cssProperty: 'color', target: tokens, jointRoot },
   );
   carryRef(tokens, byProp, 'color', color, ctx, where);
 
@@ -11679,6 +11773,10 @@ function proposeFromDumpFenced(
      *  per-variant minted literals (live-gauntlet class ①) instead of
      *  dropping the channel. Absent → the classic drift note stands. */
     capturedValues?: Map<string, string>;
+    /** Captured color paths with differing or unavailable modes. The batch
+     *  entry derives these from the raw dump and cannot be overridden away.
+     *  A set-only caller must supply known mode conflicts with its corpus. */
+    capturedPaintModeConflicts?: ReadonlySet<string>;
     /** ITERATION 8 — stub glyph carriage: instanceKey → exported SVG asset
      *  (assets/icons/<asset>.svg, exported at 1x from the stub source's MAIN
      *  component; the caller loads the export manifest). When every observed
@@ -12207,6 +12305,7 @@ function proposeFromDumpFenced(
     ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
+    capturedPaintModeConflicts: opts.capturedPaintModeConflicts,
     iconAssets: opts.iconAssets,
     instanceOverrides: opts.instanceOverrides,
     prefix,
@@ -12403,7 +12502,7 @@ function proposeFromDumpFenced(
   } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
-    const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
+    const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp, true);
     Object.assign(rootTokens, textTokens);
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
@@ -13365,6 +13464,8 @@ function proposeFromDumpFenced(
     );
   }
   const parsedContract = ContractSchema.parse(contract);
+  const jointErrors = jointTokenTableErrors(parsedContract);
+  if (jointErrors.length) throw new Error(`FIGMA_JOINT_TOKEN_TABLE_UNSUPPORTED: ${jointErrors.join('; ')}`);
   const parsedStubs = childStubs.map((stub) => ContractSchema.parse(stub));
   // §D.41 / PR 131 M1 — a rest-plane hole and a states plane do not share a
   // canvas: `absentVariants` is not composed with state previews (§D.40), so
@@ -13640,6 +13741,24 @@ export function proposeBatchFromDump(
   const capturedValues =
     opts.capturedValues ??
     new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
+  // The dump stores one value per variable name, not the selected mode of
+  // each consuming node. A joint table must not flatten differing modes.
+  // Inspect the raw table so malformed mode values cannot disappear during
+  // captured-token registration, and union caller evidence rather than let
+  // an explicit capturedValues index erase this refusal.
+  const capturedPaintModeConflicts = new Set(opts.capturedPaintModeConflicts ?? []);
+  const capturedVariables = dump._variables;
+  if (capturedVariables && typeof capturedVariables === 'object' && !Array.isArray(capturedVariables)) {
+    for (const [name, raw] of Object.entries(capturedVariables)) {
+      if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
+      const variable = raw as Record<string, unknown>;
+      if (variable.type !== 'COLOR' || !Object.hasOwn(variable, 'modes')) continue;
+      const modes = variable.modes;
+      if (!modes || typeof modes !== 'object' || Array.isArray(modes) ||
+          !Object.keys(modes).length || Object.values(modes).some(value => value !== variable.value))
+        capturedPaintModeConflicts.add(dotPath(name));
+    }
+  }
   // Session-link siblings in THIS dump: a later Card-Image sees Avatar
   // proposed earlier. Without this, Path A batches mint string "true"/"false"
   // against a child that is BOOLEAN and generateTsx refuses (Eventz/CBDS).
@@ -13740,6 +13859,7 @@ export function proposeBatchFromDump(
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),
     capturedValues,
+    capturedPaintModeConflicts,
     contractIdByName,
     contractsById,
     contractIdByKey,

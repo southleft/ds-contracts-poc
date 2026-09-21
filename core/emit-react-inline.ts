@@ -251,6 +251,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const nativeTextRendering = new Set([...nativeTextRenderingRoots(contract), ...nativeTextLeaves]);
   /** `${prop}-${value}` → partName → overrides. */
   const variantStyles: Record<string, Record<string, StyleRecord>> = {};
+  const jointTables=contract.anatomy.root?.tokensByCombination??[];
+  const jointStyles=jointTables.map(table=>Object.fromEntries(table.rows.map(row=>[
+    JSON.stringify(row.values),Object.fromEntries(Object.entries(row.tokens).map(([channel,ref])=>
+      [camel(channel),resolveValue(stripBraces(ref))]))
+  ])));
+  const jointConst=jointTables.length?`\nconst J: Array<Record<string, CSSProperties>> = ${JSON.stringify(jointStyles,null,2)};\n`:'';
   const partVariantProps = new Map<string, Set<string>>();
   const addVariant = (prop: string, value: string, partName: string, decls: StyleRecord) => {
     const key = `${prop}-${value}`;
@@ -768,6 +774,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const expression = props.reduceRight((expr, prop) => whenProvided(prop, expr, '{}'), `V[\`${key}:${partName}\`] ?? {}`);
       pieces.push(`...(${expression})`);
     }
+    if(isRoot)for(const [index,table] of jointTables.entries()){
+      const values=table.props.map(prop=>`${codePropOf(prop)} === undefined ? null : ${codePropOf(prop)}`).join(', ');
+      pieces.push(`...(J[${index}][JSON.stringify([${values}])] ?? {})`);
+    }
     pieces.push(...extra);
     if (isRoot && Object.keys(disabledStyle).length > 0) {
       pieces.push(`...(${codePropOf('disabled')} ? DISABLED_STYLE : {})`);
@@ -1190,7 +1200,7 @@ ${depImports}${depImports ? '\n' : ''}
 ${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}
 
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
@@ -1226,7 +1236,7 @@ ${depImports}${depImports ? '\n' : ''}
 ${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}
 ${Object.keys(disabledStyle).length > 0 ? `\nconst DISABLED_STYLE: CSSProperties = ${JSON.stringify(disabledStyle)};\n` : ''}
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}

@@ -1118,6 +1118,7 @@ export function channelsOf(part: Part): Set<string> {
   add(part.tokens);
   add(part.literals);
   add(part.declared);
+  for(const table of part.tokensByCombination??[])for(const row of table.rows)add(row.tokens);
   const byProp = part.tokensByProp;
   if (Array.isArray(byProp))
     for (const e of byProp)

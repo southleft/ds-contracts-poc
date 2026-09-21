@@ -1401,6 +1401,78 @@
             }
           ]
         },
+        "tokensByCombination": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "props": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "additionalItems": false,
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "rows": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      ],
+                      "additionalItems": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "tokens": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                      }
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "tokens"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "props",
+              "rows"
+            ],
+            "additionalProperties": false
+          }
+        },
         "literals": {
           "type": "object",
           "propertyNames": {

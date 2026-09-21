@@ -89,10 +89,11 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),
     states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'},...(grid?{layout:grid,literals:{...(fills?{width:'100%'}:{}),height:'fit-content'}}:{})}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
-   const {enriched,tokens,residuals}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
+   const {enriched,tokens,residuals,overflow}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
    if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-matrix-content-boundary-changed');
    const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-matrix-invalid:'+errors.join(';'));
    result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';
+   if(overflow.length)throw Error('react-root-matrix-unprojected-bindings:'+overflow.map(r=>r.part+'.'+r.channel+(r.state?':'+r.state:'')).join(','));
    if(gridRefusal)throw Error(gridRefusal);
    result.native=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()}).compileComponentData(enriched,new Map([[enriched.id,enriched]]));result.status='native-compiled';
   }catch(error){result.problems.push(error instanceof Error?error.message:String(error));}
