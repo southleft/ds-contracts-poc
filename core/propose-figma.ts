@@ -1,3 +1,5 @@
+import {canonicalJson, revisionOf} from './contract-provenance.js';
+import {observedInstanceGroups, observedInstanceIdentity, staticInstanceContent} from './observed-instance-content.js';
 import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './absolute-box.js';
 import { strokedPathGeometryIssue } from '../scripts/contract-schema.js';
 import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
@@ -2203,6 +2205,7 @@ interface MintCapture {
 }
 
 interface Ctx {
+  instanceContentGroups: ReadonlyMap<string, readonly DumpNode[]>;
   setName: string;
   axes: Axis[];
   totalVariants: string[];
@@ -2353,6 +2356,7 @@ interface StubCapture {
    *  stub's bindings.figma.anchors.componentSetKey so importing the real set later
    *  LINKS back to this identity by key. */
   setKey?: string;
+  instances?: DumpNode[];
   /** Every occurrence's applied componentProperties, across variants. */
   applied: Array<Record<string, string | boolean>>;
   /** dump v1.5 observed per-occurrence geometry facts — the honest box the
@@ -7735,6 +7739,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
     if (setKey !== undefined) capture.setKey = setKey;
   }
   for (const o of m.occ) {
+    (capture.instances ??= []).push(o.node);
     capture.instanceNames ??= [];
     if (!capture.instanceNames.includes(o.node.name)) capture.instanceNames.push(o.node.name);
     if (o.node.componentProperties) capture.applied.push(o.node.componentProperties);
@@ -9176,7 +9181,9 @@ function buildPartFromEvidence(
       // own provisionality.
       const stubId = captureStub(instanceOf, m, ctx, where);
       ctx.notes.push(
-        `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${stubId}" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)`,
+        m.occ.some(o => o.node.instanceContent)
+          ? `${where}: nested instance of "${instanceOf}" has no known contract — component ref "${stubId}" retains a provisional child; its observed content must agree across every captured use before anatomy is retained, and its complete API remains unknown`
+          : `${where}: nested instance of "${instanceOf}" has no known contract — component ref proposed as "${stubId}" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)`,
       );
     }
     // The ref and the stub share stubIdFor — they can never drift apart.
@@ -10380,13 +10387,65 @@ function resolveStubIcon(
   return null;
 }
 
+/** Retain only static content corroborated by every usage of this identity.
+ * Each usage goes through the existing anatomy/token projection. The result
+ * remains a provisional child, with only the applied API values below; the
+ * synthetic projection container never becomes a claimed native main. */
+function observedStubContent(capture: StubCapture, ctx: Ctx):
+  {root: Record<string, unknown>; geometry: NonNullable<ReturnType<typeof stubGeometry>>; applied: Array<Record<string, string | boolean>>} | undefined {
+  const local = capture.instances ?? [];
+  if (!local.some(node => node.instanceContent)) return;
+  const refuse = (reason: string) => { ctx.notes.push(`stub ${capture.id}: observed-instance-content-refused:${reason} — retained geometry only; import the complete child definition`); return undefined; };
+  const keys = local.map(observedInstanceIdentity);
+  if (keys.some(key => !key) || new Set(keys).size !== 1) return refuse('identity');
+  const uses = ctx.instanceContentGroups.get(keys[0]!);
+  if (!uses?.length || uses.length > 256 || uses.some(node => !node.instanceContent)) return refuse('incomplete-census');
+  if (local.some(node => !uses.some(use => canonicalJson(node) === canonicalJson(use)))) return refuse('incomplete-census');
+  for (const usage of uses) {
+    const types = usage.instanceContent!.propertyTypes, values = usage.componentProperties ?? {};
+    if (!types || canonicalJson(Object.keys(types).sort()) !== canonicalJson(Object.keys(values).sort()) ||
+        Object.entries(types).some(([key, type]) => type !== 'VARIANT' || typeof values[key] !== 'string')) return refuse('mutable-api');
+  }
+  const name = `Content ${revisionOf(capture.id).slice(7)}`;
+  let retained: {root: Record<string, unknown>; geometry: NonNullable<ReturnType<typeof stubGeometry>>} | undefined;
+  let signature: string | undefined, capturedSignature: string | undefined;
+  for (const usage of uses) {
+    if (!staticInstanceContent(usage.instanceContent!.root)) return refuse('dynamic-or-unbounded');
+    try {
+      const node = JSON.parse(JSON.stringify(usage.instanceContent!.root)) as DumpNode;
+      node.name = name;
+      const captured = canonicalJson(node);
+      if (capturedSignature !== undefined && capturedSignature !== captured) return refuse('conflicting-uses');
+      capturedSignature = captured;
+      node.type = 'COMPONENT';
+      const projected = proposeFromDump({setName: name, type: 'COMPONENT', propertyDefinitions: {}, variants: [node]}, {
+        corpus: ctx.corpus, contractIdByName: new Map(), mintUnbound: !!ctx.mint,
+        hiddenCaptured: ctx.hiddenCaptured, capturedValues: ctx.capturedValues,
+        capturedPaintModeConflicts: ctx.capturedPaintModeConflicts, projectionMode: 'exact',
+      });
+      if ((projected.contract.props as unknown[]).length || (projected.contract.states as unknown[]).length ||
+          projected.childStubs?.length || projected.unbound.length) return refuse('additional-api-or-unresolved-content');
+      const root = (projected.contract.anatomy as {root: Record<string, unknown>}).root;
+      const geometry = {tokens: {}, tree: projected.mintedTokens?.tree ?? {},
+        count: projected.mintedTokens?.count ?? 0, entries: projected.mintedTokens?.entries ?? []};
+      const next = canonicalJson({root, tree: geometry.tree});
+      if (signature !== undefined && signature !== next) return refuse('conflicting-uses');
+      if (!retained) for (const note of projected.notes) ctx.notes.push(`stub ${capture.id} observed projection: ${note}`);
+      signature = next; retained = {root, geometry};
+    } catch { return refuse('projection'); }
+  }
+  ctx.notes.push(`stub ${capture.id}: observed-instance-content — identical captured content and projected static anatomy across all ${uses.length} uses; retains a separate child component, not the missing main's complete API or unobserved variants`);
+  return retained ? {...retained, applied: uses.map(node => node.componentProperties ?? {})} : undefined;
+}
+
 function buildChildStub(
   capture: StubCapture,
   ctx: Ctx,
   fileKey: string | null,
-): { contract: Record<string, unknown>; geometry: ReturnType<typeof stubGeometry> } {
+): { contract: Record<string, unknown>; geometry: ReturnType<typeof stubGeometry>; observedContent: boolean } {
+  const observedContent = observedStubContent(capture, ctx);
   const observed = new Map<string, { suffixed: boolean; values: Array<string | boolean> }>();
-  for (const applied of capture.applied) {
+  for (const applied of observedContent?.applied ?? capture.applied) {
     for (const [key, value] of Object.entries(applied)) {
       const property = key.split('#')[0];
       const entry = observed.get(property) ?? { suffixed: key.includes('#'), values: [] };
@@ -10423,7 +10482,7 @@ function buildChildStub(
       // A BOOLEAN Figma property often arrives as the strings "true"/"false"
       // (REST). One observed spelling is still a boolean, not an enum of
       // `["false"]` that then refuses a boolean applied value (CBDS Table-Data).
-      if (keys.length > 0 && keys.every((k) => k === 'true' || k === 'false')) {
+      if (!observedContent && keys.length > 0 && keys.every((k) => k === 'true' || k === 'false')) {
         props.push({
           name,
           type: 'boolean',
@@ -10450,7 +10509,7 @@ function buildChildStub(
   // dump v1.5: stub geometry — the observed box binds the root's tokens to
   // minted provisional leaves; a text prop observed on the instances renders
   // as the box's content (the drawn label is real observed content).
-  const geometry = stubGeometry(capture, props, ctx, iconRes);
+  const geometry = observedContent?.geometry ?? stubGeometry(capture, props, ctx, iconRes);
   const root: Record<string, unknown> = {};
   // Every stub renders its OBSERVED truth and nothing else: a captured TEXT
   // prop becomes the box's content (the drawn label is real observed
@@ -10490,7 +10549,7 @@ function buildChildStub(
       }; witness paint channels are NOT minted (the svg bakes the drawn ink) and per-usage ink divergence, if any, stays with the export's baked colors — import the real child set to replace the stub`,
     );
   }
-  if (geometry) {
+  if (geometry && !observedContent) {
     if (Object.keys(geometry.tokens).length > 0) root.tokens = geometry.tokens;
     if (geometry.circleRadius50) root.literals = { 'border-radius': '50%' };
     // dump v1.9: a hash-form image fill on the stub renders the exported
@@ -10555,17 +10614,18 @@ function buildChildStub(
       name,
       version: '0.1.0',
       status: 'draft',
-      description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries)${geometry ? '; the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry' : ''}${iconRes && iconRes.kind !== 'circleFill' ? "; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints" : ''}. Import the child set to replace this stub.`,
+      description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; ${observedContent ? 'captured content and projected static anatomy agree across every use, but the complete child API and unobserved variants remain unknown' : 'anatomy and styling are NOT captured (dump v1 stops at instance boundaries)'}${!observedContent && geometry ? '; the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry' : ''}${iconRes && iconRes.kind !== 'circleFill' ? "; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints" : ''}. Import the child set to replace this stub.`,
       semantics: { element: 'span' },
       props,
       states: [],
-      anatomy: { root },
+      anatomy: { root: observedContent?.root ?? root },
       bindings: {
         figma: { anchors: { fileKey, componentSetKey: capture.setKey ?? null } },
         code: { anchors: { importPath: `src/components/${name}`, export: name } },
       },
     },
     geometry,
+    observedContent: !!observedContent,
   };
 }
 
@@ -11748,6 +11808,9 @@ function proposeFromDumpFenced(
   set: DumpSet,
   opts: {
     corpus: TokenCorpus;
+    /** The batch supplies all uses, including those with no captured content.
+     * Set-only callers otherwise derive this census from their whole set. */
+    instanceContentGroups?: ReadonlyMap<string, readonly DumpNode[]>;
     contractIdByName: Map<string, string>;
     contractsById?: Map<string, MinimalChildContract>;
     /** componentSetKey (or setless component key) → contract id (dump v1.5)
@@ -12291,6 +12354,7 @@ function proposeFromDumpFenced(
   }
 
   const ctx: Ctx = {
+    instanceContentGroups: opts.instanceContentGroups ?? observedInstanceGroups(set.variants),
     setName: set.setName,
     axes,
     totalVariants: variantNames,
@@ -13416,7 +13480,9 @@ function proposeFromDumpFenced(
       mintedTokens.entries.push(...built.geometry.entries);
       for (const e of built.geometry.entries) {
         ctx.notes.push(
-          `MINTED ${e.ref} = ${e.value} — stub geometry (the "${capture.instanceOf}" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: ${e.usageSites.join(', ')}`,
+          built.observedContent
+            ? `MINTED ${e.ref} = ${e.value} — observed static child content for "${capture.instanceOf}" (provisional) — bound at: ${e.usageSites.join(', ')}`
+            : `MINTED ${e.ref} = ${e.value} — stub geometry (the "${capture.instanceOf}" instances' OBSERVED box/paint, dump v1.5; provisional) — bound at: ${e.usageSites.join(', ')}`,
         );
       }
     }
@@ -13855,6 +13921,8 @@ export function proposeBatchFromDump(
   };
   const setOpts = {
     ...opts,
+    // Derive from the complete batch; caller options cannot narrow the census.
+    instanceContentGroups: observedInstanceGroups(Object.values(dump).filter(isDumpSet).flatMap(set => set.variants)),
     stampsObservable:
       opts.stampsObservable ??
       dumpStampsObservable((dump as { _provenance?: Parameters<typeof dumpStampsObservable>[0] })._provenance),

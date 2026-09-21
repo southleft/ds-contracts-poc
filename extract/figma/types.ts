@@ -633,6 +633,11 @@ export interface DumpNode {
     alignX?: 'MIN' | 'CENTER' | 'MAX';
     alignY?: 'MIN' | 'CENTER' | 'MAX';
   };
+  /** REST observed-instance content. A bounded FRAME/TEXT/GROUP subtree from
+   * this usage, with the instance root represented as a FRAME. It is not the
+   * main component, its complete API, or evidence of an unobserved variant.
+   * Readers must check every observed use before sharing a static fallback. */
+  instanceContent?: { root: DumpNode; propertyTypes: Record<string, string> };
   children?: DumpNode[];
 }
 
