@@ -3399,8 +3399,8 @@ function applyStyling(
   // beside the other spec-level facts, and not in the stroke cases above.
   if (part.strokesIncludedInLayout === false) spec.strokesIncludedInLayout = false;
   // A state shorthand replacing literal or bound side widths needs border-box layout
-  // on both resting and state frames. An absent native flag defaults false;
-  // the contract's ordinary CSS border includes those widths in layout.
+  // on both resting and state frames. Write it explicitly because retained
+  // native values may differ; ordinary CSS borders include widths in layout.
   else if ((spec.lits?.strokeSides || ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'].some(field => spec.bindings?.[field] !== undefined)) && (
     Object.values(part.states ?? {}).some(state => state['border-width'] !== undefined) ||
     (part.statesByProp ?? []).some(entry => Object.values(entry.map).some(state => state['border-width'] !== undefined))
