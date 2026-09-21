@@ -6,6 +6,7 @@ export function systemPage() {
   const body = renderProductOverview(
     readFileSync("docs/CURRENT.md", "utf8"),
     "/assets/product-loop.svg",
+    "site",
   );
   return {
     route: "system",

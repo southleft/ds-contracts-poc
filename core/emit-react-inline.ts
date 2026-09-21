@@ -71,6 +71,9 @@ import {
   holderDeclaresPosition,
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
+  NATIVE_TEXT_RENDERING_DECL,
 } from './emit-react.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
@@ -240,6 +243,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // -------------------------------------------------------------------------
   const baseStyles: Record<string, StyleRecord> = {};
   const defaultFamily = defaultFontFamilyParts(contract);
+  const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
+  const nativeTextLeafNames = new Set(walkAnatomy(contract).filter(entry => nativeTextLeaves.has(entry.part)).map(entry => entry.name));
+  const nativeTextRendering = new Set([...nativeTextRenderingRoots(contract), ...nativeTextLeaves]);
   /** `${prop}-${value}` → partName → overrides. */
   const variantStyles: Record<string, Record<string, StyleRecord>> = {};
   const partVariantProps = new Map<string, Set<string>>();
@@ -530,6 +536,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // No declared family = the pipeline default (defaultFontFamilyParts) —
     // an inline style inherits the host page's font exactly as a class does.
     if (defaultFamily.has(part)) s.fontFamily = DEFAULT_FONT_STACK;
+    if (nativeTextRendering.has(part)) applyDeclStrings(s, [NATIVE_TEXT_RENDERING_DECL]);
     // dump v1.36: the whole-pixel text box — the same declarations the
     // stylesheet surfaces write (anatomy.ts wholePixelTextBoxDecls), a token
     // resolved to its literal. An inline style is set through the CSSOM,
@@ -616,6 +623,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // attrs type and named in the header. Byte-identical when nothing collides.
   const { base: propsBase, omitted: omittedAttrs } = reactPropsBase(contract, meta);
   const omittedNote = reactOmittedNote(omittedAttrs, meta);
+  const callerStyleAvailable = !omittedAttrs.includes('style');
   const toggledCodeProps = new Set(events.filter((e) => e.toggles).map((e) => codePropOf(e.toggles!.prop)));
 
   const propLines: string[] = [];
@@ -672,7 +680,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
-  destructured.push('style', 'children', '...rest');
+  if (callerStyleAvailable) destructured.push('style');
+  destructured.push('children', '...rest');
 
   // Uncontrolled toggles + handlers — identical pattern to the CSS-Module emitter.
   const prelude: string[] = mappedPropPrelude(contract);
@@ -754,7 +763,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (isRoot && Object.keys(disabledStyle).length > 0) {
       pieces.push(`...(${codePropOf('disabled')} ? DISABLED_STYLE : {})`);
     }
-    if (isRoot) pieces.push('...style');
+    if (isRoot && callerStyleAvailable) pieces.push('...style');
+    if (!isRoot && callerStyleAvailable && nativeTextLeafNames.has(partName))
+      pieces.push("...(style?.textRendering ? { textRendering: style.textRendering } : {})");
     // A flagged part's merged record — the consumer's `style` included, so
     // their border/shadow props land on the ring — is redrawn as a ring
     // (STROKE_RING_RUNTIME).

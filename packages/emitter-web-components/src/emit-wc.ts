@@ -85,6 +85,9 @@ import {
   settleStrokeShadows,
   stateSelectorsFor,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
+  NATIVE_TEXT_RENDERING_DECL,
   isArrayType,
   isEnum,
   kebab,
@@ -259,6 +262,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // dump v1.36: the whole-pixel text box, the same declarations generateCss
   // writes (which also refuses an unsubtractable tracking token by name).
   const textBoxes = wholePixelTextBoxPlan(contract, cssVar);
+  const nativeTextLeaves = nativeTextRenderingLeafParts(contract);
   const k = kebab(contract.name);
   // A disabled state styles what the internal root actually exposes
   // (wcRootDisabledSelector); every state rule, root and part, reads it — a
@@ -443,6 +447,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // a shadow root inherits the HOST page's font through the host element.
   // After the UA resets — `font: inherit` would erase a family before it.
   if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
+  if (nativeTextRenderingRoots(contract).has(root)) rootDecls.push(NATIVE_TEXT_RENDERING_DECL);
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, lit] of Object.entries(overrides)) {
@@ -625,6 +630,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    if (nativeTextLeaves.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
     // dump v1.36: the whole-pixel text box — the same declaration generateCss
     // writes (core anatomy.ts wholePixelTextBoxDecls), so the two sheets
     // cannot disagree about a text box.

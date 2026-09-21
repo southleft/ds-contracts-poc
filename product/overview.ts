@@ -1,9 +1,11 @@
 import { marked } from "marked";
+import { resolveDocumentLink } from "./document-links.js";
 
 /** Only repository-authored Markdown is accepted here, never imported user content. */
 export function renderProductOverview(
   markdown: string,
   diagramUrl: string,
+  surface: "app" | "site" = "app",
 ): string {
   const renderer = new marked.Renderer();
   renderer.image = ({ text, href }) => {
@@ -17,9 +19,7 @@ export function renderProductOverview(
     return `<img class="product-overview__diagram" src="${esc(diagramUrl)}" alt="${esc(text)}" />`;
   };
   renderer.link = ({ href, tokens }) => {
-    const url = href.startsWith("../")
-      ? `https://github.com/southleft/ds-contracts-poc/blob/main/${href.slice(3)}`
-      : href;
+    const url = resolveDocumentLink(href, surface);
     return `<a href="${url.replaceAll("&", "&amp;").replaceAll('"', "&quot;")}">${renderer.parser.parseInline(tokens)}</a>`;
   };
   return marked.parse(markdown, { renderer, async: false });

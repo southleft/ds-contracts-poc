@@ -38,6 +38,9 @@ import {
   lowerStrokeRings,
   textBoxTokenRefusals,
   wholePixelTextBoxPlan,
+  nativeTextRenderingRoots,
+  nativeTextRenderingLeafParts,
+  NATIVE_TEXT_RENDERING_DECL,
   OVERLAY_CSS,
   placeholdersIn,
   rootElementsOf,
@@ -160,6 +163,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // Pushed LAST in a part's base rule: the UA resets above spell `font:
   // inherit`, a shorthand that would erase a family written before it.
   const defaultFamily = defaultFontFamilyParts(contract);
+  const nativeTextRendering = new Set([...nativeTextRenderingRoots(contract), ...nativeTextRenderingLeafParts(contract)]);
 
   const checkToken = (tokenPath: string, context: string): boolean => {
     if (!tokenInventory.has(tokenPath)) {
@@ -242,6 +246,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
       if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+      if (nativeTextRendering.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
       // dump v1.36: the whole-pixel text box (anatomy.ts wholePixelTextBoxDecls
       // says why this exact declaration; the single-root site below carries
       // the lowering marker).
@@ -704,6 +709,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     rootDecls.push(`${cssProp}: ${value}`);
   }
   if (defaultFamily.has(root)) rootDecls.push(DEFAULT_FONT_FAMILY_DECL);
+  if (nativeTextRendering.has(root)) rootDecls.push(NATIVE_TEXT_RENDERING_DECL);
 
   // a11y.minHitArea: the declared floor is ENFORCED, not aspirational — the
   // standard non-visual hit-target extension (an absolutely centered ::before
@@ -1098,6 +1104,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       decls.push(`${cssProp}: ${value}`);
     }
     if (defaultFamily.has(part)) decls.push(DEFAULT_FONT_FAMILY_DECL);
+    if (nativeTextRendering.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
     // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` — a Figma text box that
     // sizes itself to its text is a whole number of pixels wide (the advance
     // rounded up); the element gets the same box, as a progressive

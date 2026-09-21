@@ -43,8 +43,11 @@
  * comparison is recorded as `figma-images-unavailable`, never as a pass).
  * --keep-built-consumer retains the isolated production build in out/review-site
  * for visible browser inspection; it does not change the comparison or score.
+ * --fonts <manifest.json> provisions explicitly hashed local font files in the
+ * consumer; the receipt retains them. It never changes generated component CSS.
  */
 import { packageReactLibrary } from './package-react-library.js';
+import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions } from './design-consumer-variants.js';
 import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing.js';
 import { execFileSync } from 'node:child_process';
@@ -96,12 +99,13 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
   return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
 }
 
-type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean };
+type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean; fonts?: string };
 function parseArgs(argv: string[]): Args {
   const read = (flag: string) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : undefined; };
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
   return { dump: required('--dump'), contract: required('--contract'), generated: required('--generated'), component: required('--component'),
-    out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
+    out: required('--out'), keepBuiltConsumer: argv.includes('--keep-built-consumer'), fonts: argv.includes('--fonts') ? required('--fonts') : undefined,
+    token: read('--token') ?? (process.env.FIGMA_TOKEN || undefined) };
 }
 
 const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
@@ -351,16 +355,18 @@ export function stateProblems(c: { key: string; interaction: Interaction; state?
 const unmapped = new Set<string>();
 
 
-function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string) {
+function writeConsumer(work: string, lib: { name: string; tarball: string }, component: string, cases: Case[], reactVersion: string, fonts: readonly ConsumerFont[] = []) {
   const consumer = path.join(work, 'consumer'); mkdirSync(consumer, { recursive: true });
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:#fff}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, textProp: c.textProp ?? null }))));
+  if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ${component} } from ${JSON.stringify(lib.name)};
+${fonts.length ? "import './fonts/fonts.css';" : ''}
 import CASES from './cases.json';
 function App() {
   const [text, setText] = useState(null);
@@ -432,6 +438,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  const fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
@@ -440,6 +447,7 @@ async function main() {
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
   mkdirSync(args.out, { recursive: true });
   const inputs = path.join(args.out, 'inputs'); mkdirSync(inputs, { recursive: true });
+  if (fonts.length) writeConsumerFonts(path.join(inputs, 'fonts'), fonts);
   cpSync(args.dump, path.join(inputs, 'rest-dump.json')); cpSync(args.contract, path.join(inputs, path.basename(args.contract)));
   // Low (review): every contract beside it — the followed children and stubs —
   // and the minted tree ride the committed inputs, so the run reproduces from them. The
@@ -488,7 +496,7 @@ async function main() {
     const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
     const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
-    const consumer = writeConsumer(work, lib, args.component, cases, reactVersion);
+    const consumer = writeConsumer(work, lib, args.component, cases, reactVersion, fonts);
     run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], consumer);
     // The consumer must not resolve anything from this repository.
     const lockfile = readFileSync(path.join(consumer, 'package-lock.json'), 'utf8');
@@ -498,6 +506,10 @@ async function main() {
     const repoPathInInstalled = installedFiles.filter(f => readFileSync(path.join(installedDir, 'dist', f), 'utf8').includes(ROOT));
     receipt.consumer = { react: installed.peerDependencies?.react ?? null, installedVersion: installed.version, lockfileSha256: sha256(lockfile),
       repoPathInLockfile: lockfile.includes(ROOT), repoPathInInstalledFiles: repoPathInInstalled };
+    receipt.consumer.fontProvision = { kind: fonts.length ? 'explicit-local-assets' : 'environment-fonts',
+      manifest: fonts.length ? consumerFontManifest(fonts) : null,
+      sourceFontByteIdentity: 'unverified',
+      note: 'These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.' };
     if (receipt.consumer.repoPathInLockfile) throw new Error('consumer lockfile references the repository');
     if (repoPathInInstalled.length) throw new Error(`installed files reference the repository: ${repoPathInInstalled.join(', ')}`);
     run(path.join(consumer, 'node_modules', '.bin', 'vite'), ['build', '--logLevel', 'error'], consumer);
@@ -531,6 +543,7 @@ async function main() {
       await page.goto(origin + '/index.html');
       try { await page.waitForSelector('[data-cell]', { timeout: 15000 }); }
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }
+      receipt.consumer.fontProvision.loaded = await loadConsumerFonts(page, fonts);
       const cells = await page.$$('[data-cell]');
       // THE INSTRUMENT, not the product: cells used to flow inline, so a root 47.4 px
       // wide pushed every later root onto a fractional x and 33 of 72 CBDS Badge
