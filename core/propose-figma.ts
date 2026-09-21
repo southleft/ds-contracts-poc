@@ -2851,6 +2851,14 @@ function unifyPaint(
     // @door propose.bound-paint-drift-unresolvable
     return undefined;
   }
+  // Check a complete two-omission matrix before ref simplification: a
+  // designer may rebind every row to one variable yet select different modes.
+  if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&ctx.capturedPaintModeConflicts?.size){
+    const refs=paints.map(p=>({variant:p.variant,path:p.paint?.var?dotPath(p.paint.var):undefined}));
+    const conflicts=[...new Set(refs.flatMap(p=>p.path&&ctx.capturedPaintModeConflicts!.has(p.path)?[p.path]:[]))].sort();
+    if(conflicts.length&&unifyJointPaintRefs(refs,ctx.axes))
+      throw Error(`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED: ${where} ${paintName}: ${conflicts.join(', ')} has differing or unavailable captured mode values; each consuming node mode is not captured`);
+  }
   const u = unifyRefs(
     paints.map((p) => ({ variant: p.variant, path: p.paint?.var ? dotPath(p.paint.var) : undefined })),
     ctx.axes,
@@ -2874,11 +2882,7 @@ function unifyPaint(
     if(mint?.jointRoot&&['background-color','color','border-color'].includes(mint.cssProperty)&&
        paints.every(p=>jointPaintAlphaMatches(p.paint,ctx))){
       const joint=unifyJointPaintRefs(paints.map(p=>({variant:p.variant,path:dotPath(p.paint!.var!)})),ctx.axes);
-      if(joint){
-        const conflicts=[...new Set(paints.map(p=>dotPath(p.paint!.var!)).filter(path=>ctx.capturedPaintModeConflicts?.has(path)))].sort();
-        if(conflicts.length)throw Error(`FIGMA_JOINT_PAINT_MODE_UNCORROBORATED: ${where} ${paintName}: ${conflicts.join(', ')} has differing or unavailable captured mode values; each consuming node mode is not captured`);
-        return joint;
-      }
+      if(joint)return joint;
     }
     // @door propose.bound-paint-drift-to-mint
     // refs refuse unification (mixed segment depth, or a function of more

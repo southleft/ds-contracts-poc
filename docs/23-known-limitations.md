@@ -7905,7 +7905,9 @@ Before this correction, both captures produced the same accepted joint paint
 table. The inverse now refuses a joint table whose referenced captured colors
 have differing or unavailable mode values with
 `FIGMA_JOINT_PAINT_MODE_UNCORROBORATED`. Identical captured mode values remain
-supported. Raw mode evidence cannot be erased by an explicit value index.
+supported. The check runs before simplifying repeated bindings into a single
+reference or axis, so rebinding rows cannot hide the same uncertainty. Raw mode
+evidence cannot be erased by an explicit value index.
 This conservative refusal also applies when all observed consumers happen to
 use the base mode: the capture does not corroborate their individual choices.
 Set-only callers must supply known mode conflicts alongside their corpus.

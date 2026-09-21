@@ -288,6 +288,15 @@ test('joint paint refuses uncorroborated native consumer modes without flattenin
   }
   assert.equal(JSON.stringify(changed),before);
  }
+ // Rebinding a complete matrix to one variable or one axis must not hide
+ // the same mode uncertainty behind an earlier ref simplification.
+ for(const collapse of ['constant','one-axis']){
+  const changed=structuredClone(dump);changed._variables['palette/p00'].modes={Base:value,Alternate:'#c80ab4'};
+  for(const [i,v] of changed[seed().name].variants.entries())v.fill={var:collapse==='constant'||i<3?'palette/p00':'palette/p10'};
+  const result=proposeBatchFromDump(changed,options);assert.equal(result.proposals.length,0);
+  assert.match(result.skipped[0].reason,/FIGMA_JOINT_PAINT_MODE_UNCORROBORATED/);
+ }
+ assert.throws(()=>proposeFromDump(dump[seed().name],{...options,capturedPaintModeConflicts:new Set(['palette.p00'])}),/FIGMA_JOINT_PAINT_MODE_UNCORROBORATED/);
  // A conflict on an unused variable does not refuse a complete single-mode table.
  const unused=structuredClone(dump);unused._variables['palette/unused']={type:'COLOR',value,modes:{Base:value,Alternate:'#c80ab4'}};
  assert.equal(proposeBatchFromDump(unused,options).proposals.length,1);
