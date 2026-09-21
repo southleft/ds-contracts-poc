@@ -5,7 +5,7 @@ import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { flattenTokens, aliasTarget } from './tokens.js';
 import { planNativeRootTextTemplateGraph, type NativeRootTextTemplateGraph,
   type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
-import { verifyNativeTemplateGraphReceipt, type NativeTemplateGraphIdentity,
+import { emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt, type NativeTemplateGraphIdentity,
   type NativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
 
 export interface NativeTemplateValueUpdateInput {
@@ -146,4 +146,58 @@ export function planNativeTemplateValueUpdate(input: NativeTemplateValueUpdateIn
 
 export function verifyNativeTemplateValueUpdate(input: NativeTemplateValueUpdateInput, plan: NativeTemplateValueUpdatePlan): void {
   if (!same(planNativeTemplateValueUpdate(input), plan)) fail('plan-changed');
+}
+
+export interface NativeTemplateValueObservation {
+  status: 'untouched' | 'updated' | 'partial' | 'no-op' | 'conflict';
+  values: Array<{ tokenPath: string; state: 'before' | 'after' | 'both' }>;
+  problems: string[];
+}
+
+/** Same stored-value representations accepted by the source-context verifier.
+ * No tolerance, approximate colour matching or equal-valued alias substitution. */
+function storedValue(actual: unknown, expected: unknown): boolean {
+  if (same(actual, expected)) return true;
+  if (typeof expected === 'number') return actual === Math.fround(expected);
+  if (expected && typeof expected === 'object' && !Array.isArray(expected) &&
+      Object.keys(expected).sort().join('|') === 'a|b|g|r')
+    return same(actual, Object.fromEntries(Object.entries(expected).map(([key, value]) => [key, Math.fround(value)])));
+  return false;
+}
+
+/** Classify a separately collected receipt without rewriting allocation
+ * ownership or hiding drift elsewhere. A partial state is evidence for a
+ * future recovery operation, never permission to resume or roll back. */
+export function observeNativeTemplateValueUpdate(input: NativeTemplateValueUpdateInput, receipt: NativeTemplateGraphReceipt): NativeTemplateValueObservation {
+  const out: NativeTemplateValueObservation = { status: 'conflict', values: [], problems: [] };
+  try {
+    const plan = planNativeTemplateValueUpdate(input), normalized = structuredClone(receipt);
+    for (const change of plan.changes) {
+      const variable = normalized.source.variables.find(v => v.id === change.variableId);
+      if (!variable || variable.key !== change.variableKey || !Object.hasOwn(variable.valuesByMode, change.modeId)) fail('observation-identity');
+      const actual = variable.valuesByMode[change.modeId];
+      const before = storedValue(actual, change.before), after = storedValue(actual, change.after);
+      if (!before && !after) fail('observation-value-conflict');
+      out.values.push({ tokenPath: change.tokenPath, state: before && after ? 'both' : before ? 'before' : 'after' });
+      variable.valuesByMode[change.modeId] = structuredClone(change.before) as typeof actual;
+    }
+    // Also catches extra variables/modes, altered scopes, unselected route
+    // edges and source alias changes. Only the selected scalar leaves normalize.
+    verifyNativeTemplateGraphReceipt(input.before, input.identity, normalized);
+    if (!same(normalized, input.baseline)) fail('observation-baseline-conflict');
+    const before = out.values.some(v => v.state === 'before'), after = out.values.some(v => v.state === 'after');
+    out.status = before && after ? 'partial' : before ? 'untouched' : after ? 'updated' : 'no-op';
+  } catch (error) {
+    out.values = [];
+    out.problems.push(error instanceof Error && /^(native-template-(value-update|graph)-|NATIVE_ROOT_TEXT_TEMPLATE_)/.test(error.message)
+      ? error.message : 'native-template-value-update-observation-invalid');
+  }
+  return out;
+}
+
+/** Read only by saved IDs. The returned receipt retains original allocation
+ * ownership; observeNativeTemplateValueUpdate supplies current-value checks. */
+export function emitNativeTemplateValueReadbackScript(input: NativeTemplateValueUpdateInput): string {
+  planNativeTemplateValueUpdate(input);
+  return emitNativeTemplateGraphReadbackScript(input.before, input.identity);
 }
