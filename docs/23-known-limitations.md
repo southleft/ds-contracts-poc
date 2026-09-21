@@ -8663,7 +8663,17 @@ complete allocation whose final ledger stamp was interrupted can settle after
 all IDs and values match. An unknown allocation, missing recorded ID or partial
 value assignment refuses without creating another variable; automatic recovery
 from those ambiguous states remains unqualified. No variable is deleted as
-cleanup. Application delivery and live Figma verification remain outstanding.
+cleanup.
+
+**Shown through the application on 2026-09-21:** correction `2a9e18cb…` added
+four requested number variables to the retained twelve-state Checkbox collection
+in Evaluations. Preflight, one begun write and independent readback completed
+through the companion. All 46 original variable records and all 44 native node
+records are unchanged; the collection now has 50 variables. Twelve native PNGs
+were collected and the canvas was inspected with the companion closed. Evidence:
+`private/react-design-source-repair-20260921/allocation-live-readback-v1.json`.
+The separate pseudo-box geometry correction and source repair preview are still
+pending. This verifies additive delivery, not full two-way updates or V1.
 
 Reversal removes the allocation route and writer while preserving the extended
 token reader, original ownership stamps, allocation ledger and journals for

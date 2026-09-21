@@ -6,16 +6,18 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
 import {nativeUpdateFixture} from '../core/native-contract-update-test-fixture.js';
+import type {NativeContractUpdateInput} from '../core/native-contract-update.js';
 import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 
 async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof nativeBackgroundUpdateFixture=nativeUpdateFixture) {
  const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-chain-'));
+ const input:NativeContractUpdateInput=f.input;
  t.after(()=>rmSync(repo,{recursive:true,force:true}));
  let stale=false,parentRevision='a'.repeat(64);
  const pins:Array<string|undefined>=[];
- const plans=createNativeUpdatePlans(repo,(_id,pinned)=>{pins.push(pinned);if(stale)throw Error('source drift');return {parentJournalRevision:pinned??parentRevision,input:f.input};},id=>jobs.updateHistory(id),()=>parentRevision);
+ const plans=createNativeUpdatePlans(repo,(_id,pinned)=>{pins.push(pinned);if(stale)throw Error('source drift');return {parentJournalRevision:pinned??parentRevision,input};},id=>jobs.updateHistory(id),()=>parentRevision);
  let jobs=createNativeUpdateJobs(repo,plans);
  const parent=f.input.before.operation.id;
  const prepare=()=>{const p=plans.prepare(parent);return {proposal:p,operation:jobs.prepare(parent,p.id)};};
@@ -24,7 +26,17 @@ async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof
  };
  const finish=async(id:string)=>{for(const p of ['update-preflight-readback','update-apply','update-readback'] as const)await step(id,p);};
  const next=()=>{for(const v of f.input.desired.component.variants)v.spec.opacity=0.125;f.input.desired.revision=revisionOf(f.input.desired.component);};
- return {...f,repo,parent,plans,prepare,step,finish,next,pins,moveParent:(revision='b'.repeat(64))=>{parentRevision=revision;},jobs:()=>jobs,stale:()=>{stale=true;},restart:()=>{jobs=createNativeUpdateJobs(repo,plans);}};
+ return {...f,input,repo,parent,plans,prepare,step,finish,next,pins,moveParent:(revision='b'.repeat(64))=>{parentRevision=revision;},jobs:()=>jobs,stale:()=>{stale=true;},restart:()=>{jobs=createNativeUpdateJobs(repo,plans);}};
+}
+
+function numberAddition(input:NativeContractUpdateInput):NativeContractUpdateInput['desired'] {
+ const component=structuredClone(input.before.component),tokenInput=structuredClone(input.before.tokenInput);
+ tokenInput.tokenPaths=[...tokenInput.tokenPaths,'newOpacity'].sort();
+ for(const mode of tokenInput.modes){
+  mode.tokens={...mode.tokens,newOpacity:{$type:'number',$value:0.6}};
+  mode.tokenTreeRevision=revisionOf(mode.tokens);
+ }
+ return {component,revision:revisionOf(component),tokenInput};
 }
 
 test('proposal lists isolate display copies and recheck altered proposals after the response',async t=>{
@@ -97,7 +109,7 @@ test('design repair evidence cannot outlive its parent context or the tip of its
 
 test('an allocation correction survives journal restart and requires the subsequent component review before repair',async t=>{
  const f=await fixture(t);
- f.input.desired=f.desiredFor({...f.tokens,newOpacity:{$type:'number',$value:0.6}});
+ f.input.desired=numberAddition(f.input);
  // The pending component correction must remain separate from allocation.
  for(const v of f.input.desired.component.variants)v.spec.opacity=0.6;
  f.input.desired.revision=revisionOf(f.input.desired.component);
@@ -120,7 +132,7 @@ test('an allocation correction survives journal restart and requires the subsequ
 });
 
 test('allocation-only changes still settle a separate no-op component review before repair',async t=>{
- const f=await fixture(t);f.input.desired=f.desiredFor({...f.tokens,newOpacity:{$type:'number',$value:0.6}});
+ const f=await fixture(t);f.input.desired=numberAddition(f.input);
  const allocation=f.prepare();await f.finish(allocation.operation.id);
  const reviewed=f.prepare();assert.notEqual(reviewed.proposal.id,allocation.proposal.id);
  assert.equal(reviewed.proposal.tokenAllocations,undefined);assert.equal(reviewed.proposal.changes.length,0);

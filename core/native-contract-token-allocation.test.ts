@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {nativeUpdateFixture} from './native-contract-update-test-fixture.js';
 import {prepareNativeContractUpdate,emitNativeContractUpdateScript,verifyNativeContractUpdate,nativeContractUpdateMatches,
-  nativeContractUpdateUntouched,nativeContractUpdateAfter} from './native-contract-update.js';
+  nativeContractUpdateUntouched,nativeContractUpdateAfter,type NativeContractUpdateInput} from './native-contract-update.js';
 import {emitNativeContractReadbackScript,verifyNativeContractReadback} from './native-source-observation.js';
 
 async function fixture(){
  const f=await nativeUpdateFixture();
- f.input.desired=f.desiredFor({...f.tokens,added:{$type:'number',$value:0.6}});
- return {...f,plan:prepareNativeContractUpdate(f.input).plan};
+ const input:NativeContractUpdateInput={...f.input,desired:f.desiredFor({...f.tokens,added:{$type:'number',$value:0.6}})};
+ return {...f,input,plan:prepareNativeContractUpdate(input).plan};
 }
 test('allocation update preserves every component fact, uses independent inventory, and resumes ordinary correction',async()=>{
  const f=await fixture(),ids=f.figma.root.findAll(()=>true).map((n:any)=>n.id);

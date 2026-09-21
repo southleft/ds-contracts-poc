@@ -37,9 +37,10 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
 
 The retained Checkbox's fresh source observation exposed four newly requested
-number tokens. An additive allocation step now preserves the existing collection
-and node identities in engine checks; it requires a separate compiler review
-after allocation. This step has not yet been demonstrated through the live app
+number tokens. The live app added them to the retained collection: independent
+readback confirms all 46 original variables and all 44 nodes are unchanged,
+with 50 variables afterward. The canvas was inspected with the companion closed.
+A separate compiler review must still settle the pending geometry correction
 ([D.103](23-known-limitations.md#d103-additive-token-allocation-is-a-separate-correction)).
 
 ### What the React application can do now
