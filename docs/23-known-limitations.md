@@ -9075,8 +9075,11 @@ to **5.24%**, and stretch measures **5.78%**. Both still fail the unchanged 5%
 limit. Stretch remains visually discarded, and default content width remains
 441 px against 438 px in Figma. Both source PNGs are byte-identical to those used
 before the change. Supplied consumer fonts still lack a verified source-font
-byte identity. This result does not qualify interaction, application delivery
-of the enum rule, the independent-family requirement, or V1.
+byte identity. The application now imports the same captured family through its
+JSON file chooser, displays the active underline and body content, and prepares
+the seven-component React package. The clean consumer installs an archive
+byte-identical to that download and reproduces the same failures. This result
+does not qualify interaction, the independent-family requirement, or V1.
 
 `core/repeated-enum-fields.test.ts` covers canonical labels, code-value aliases
 in rendered React, invalid fields/samples, parent-dependent choices, unknown
@@ -9084,6 +9087,10 @@ labels and same-name identity conflicts. The identity probe failed before the
 guard and passed afterward. The existing repeat check exercises all maintained
 surfaces. Original failures and the installed consumer evidence remain in
 `private/observed-instance-content-20260921/`, including `consumer-enum-v1/`.
+Application delivery and the installed package identity are recorded separately
+in `private/observed-content-app-20260921/enum-app-delivery-v1.json`. Integration
+required restarting the development server after its engine receipt changed
+and opening a fresh tab after the earlier tab retained a connection error.
 
 To reverse, remove enum fields from the array schema, proposer, validator and
 emitter type projections together. Restore named refusal of unsupported

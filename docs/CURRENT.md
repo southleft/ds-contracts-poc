@@ -120,9 +120,9 @@ The configured Altitude flow and its existing records remain in the collapsed Li
 
 The owner's React-only V1 asks for five demonstrations. Each row names what the application shows today, where the evidence is, and the concrete gap. None of these rows is a release grade.
 
-A reviewed provisional-child candidate now retains corroborated static content from unresolved REST instances ([D.109](23-known-limitations.md#d109-observed-child-content-remains-provisional)). The fresh installed Tabs consumer renders its previously missing body text, but active appearance, stretch behavior, width and black-background fidelity still fail. The running app imports the captured family, shows the recovered text, and prepares a seven-component package; a byte-identical archive installs in a clean consumer and reproduces those failures. This is no additional completed acceptance row.
+A reviewed provisional-child candidate now retains corroborated static content from unresolved REST instances ([D.109](23-known-limitations.md#d109-observed-child-content-remains-provisional)). The running app imports the captured Tabs family, shows its previously missing body text, and prepares a seven-component package. A byte-identical archive installs in a clean consumer. The initial result still lost active styling, alongside the stretch, width and black-background fidelity failures.
 
-A subsequent CLI candidate carries typed per-item enum choices from known child contracts ([D.110](23-known-limitations.md#d110-repeated-items-retain-known-child-enum-choices)). Its installed consumer restores the first tab's active appearance, but still fails at 5.24% and 5.78% on black, with discarded stretch behavior and a content-width mismatch. Application delivery of this additional rule is not yet measured.
+A subsequent application import carries typed per-item enum choices from known child contracts ([D.110](23-known-limitations.md#d110-repeated-items-retain-known-child-enum-choices)). Its downloaded archive installs byte-identically in a clean consumer and restores the first tab's active appearance, but still fails at 5.24% and 5.78% on black, with discarded stretch behavior and a content-width mismatch. No additional acceptance row is complete.
 
 | Criterion | Demonstrated through the application | Evidence | Concrete gap |
 | --- | --- | --- | --- |
