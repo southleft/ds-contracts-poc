@@ -8859,9 +8859,21 @@ silently falling back to stale expectations is not a valid rollback.
 
 **AGENT decision, 2026-09-21.** The reviewed root-opacity preview now has an
 original-source Apply controller and persistent application recovery controls.
-This is an implemented path under qualification; a live original-source Apply
-journey has not yet been recorded. D.104–D.107's earlier previews, transaction
-tests and witness checks do not establish that outcome.
+The first live application run now changes the original Checkbox module from
+`disabled:opacity-50` to `disabled:opacity-60` and regenerates its CSS. It resumes
+after a host restart before the source write, using a new canvas-read attempt.
+All ten configured examples pass normal source validation, and a second fresh
+read verifies the unchanged 44-node Figma set. The unobstructed canvas shows the
+same four disabled native variants at 60% opacity. A repeated completed Apply
+request leaves all 69 source and retained operation files byte-identical.
+Evidence is in `private/react-design-source-repair-20260921/live-apply-v1.json`
+and `live-apply-repeat-v1.json`. Explicit restoration through the app then
+restores both original files byte-for-byte, validates all ten examples again
+and obtains fresh pre/post reads with the complete native snapshot unchanged.
+Figma remains at the designer's 60% edit, as the recovery UI explains. That
+result and the unobstructed canvas inspection are retained in
+`live-apply-restore-v1.json`. D.104–D.107's earlier previews and engineering
+tests remain separate evidence; these bounded results do not qualify V1.
 
 Apply accepts only the host's current selected preview. It seals that selection,
 prepares the exact source/CSS transaction and requests a new read from the
@@ -8902,8 +8914,10 @@ design edit can invalidate agreement. File replacement retains D.106's
 non-atomic multi-file limitation. Unexpected source edits refuse without being
 overwritten. Missing preview or transaction proof refuses; stale validation
 evidence requires verification again. Returning the updated source to the
-existing native operation's normal succession workflow and the live
-interruption/repeat/rollback demonstrations remain qualification work.
+existing native operation's normal succession workflow, live source/canvas
+conflict refusals remain qualification work. The demonstrated
+interruption precedes the write; partial-file recovery remains engineering
+coverage.
 
 Reversal removes the Apply endpoints, recovery UI and controller together.
 Keep the source transaction helper and witness loader for already applied

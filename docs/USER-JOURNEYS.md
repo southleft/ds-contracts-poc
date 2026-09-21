@@ -120,9 +120,10 @@ connection for reconnection. **Apply / resume reviewed change** retries with a
 new canvas read. **Restore original source and CSS** restores those files and
 validates them; it leaves the Figma edit in place. After completion, **Load
 verified source** opens the resulting source reference. Unexpected source edits
-are preserved and refuse. This workflow is implemented but still needs its live
-acceptance demonstration; a completed preview alone never means the original
-files were updated.
+are preserved and refuse. The bounded opacity Apply, interruption before the
+write, completed-repeat behavior and exact source restoration are demonstrated; broader recovery and
+two-way acceptance remain under qualification. A preview alone never means
+the original files were updated.
 
 **Inspect a stateful child in its composition:** for the configured composed Card, open its saved caller-content review:
 
