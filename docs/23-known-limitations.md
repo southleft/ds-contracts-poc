@@ -7909,6 +7909,9 @@ supported. Raw mode evidence cannot be erased by an explicit value index.
 This conservative refusal also applies when all observed consumers happen to
 use the base mode: the capture does not corroborate their individual choices.
 Set-only callers must supply known mode conflicts alongside their corpus.
+The actual application accepts the prior single-mode capture, then refuses
+the captured mode-change control while preserving the editor contract byte for
+byte. Its earlier accepted, incorrect import remains separate evidence.
 The probe's original binding, mode and PNG were restored exactly; the new
 page, IDs, failed first fixture setup and both captures remain in
 `joint-paint-mode-review-20260921/`. Revisit this refusal only when the capture
