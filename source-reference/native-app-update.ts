@@ -21,6 +21,18 @@ const clean=(value:unknown)=>{const copy=structuredClone(value) as any;delete co
 // Files, source evidence and journals are still read and authenticated by every
 // authorizing call. An unchanged digest with changed contents cannot hit this.
 const templates=new Map<string,{bytes:string;input:NativeTemplateComponentUpdateInput;update:NativeTemplateAppUpdate}>();
+// A displayed update repeatedly authenticates its source and journals. Reuse
+// only deterministic program text, keyed by the COMPLETE template bytes and
+// reader options. Neither a digest nor a historical authorization is cached.
+const templatePrograms=new Map<string,string>();
+function templateProgram(plan:NativeTemplateAppUpdatePlan,mode:string,
+  emit:(input:NativeTemplateComponentUpdateInput)=>string) {
+  const key=canonicalJson([mode,plan.template]),saved=templatePrograms.get(key);
+  if(saved!==undefined)return saved;
+  const script=emit(templateUpdateInput(plan));
+  if(templatePrograms.size>=8)templatePrograms.delete(templatePrograms.keys().next().value!);
+  templatePrograms.set(key,script);return script;
+}
 type NativeTemplateAppUpdate={plan:{version:1;kind:'native-contract-template-value-update';acceptedContract:null;nativeQualification:'unqualified';
   before:NativeTemplateComponentUpdateInput['before'];baseline:NativeSourceReadback;after:NativeTemplateComponentUpdateInput['before'];desiredRevision:string;
   changes:legacy.NativeOpacityUpdatePlan['changes'];template:NativeTemplateUpdateProposal;
@@ -103,11 +115,11 @@ export function nativeAppUpdatePreflight(plan:NativeAppUpdatePlan,raw:any,untouc
   }catch{return false;}
 }
 export function emitNativeAppUpdateScript(plan:NativeAppUpdatePlan,readOnly=false) {
-  return plan.kind==='native-contract-template-value-update'?emitNativeTemplateValueWriteScript(templateUpdateInput(plan),readOnly)
+  return plan.kind==='native-contract-template-value-update'?templateProgram(plan,'write:'+readOnly,input=>emitNativeTemplateValueWriteScript(input,readOnly))
     :legacy.emitNativeContractUpdateScript(plan,'apply',readOnly);
 }
 export function emitNativeAppUpdateReadback(plan:NativeAppUpdatePlan,reader=emitNativeContractReadbackScript,images=true,geometry=true) {
-  return plan.kind==='native-contract-template-value-update'?emitNativeTemplateUpdateObservationScript(templateUpdateInput(plan),images)
+  return plan.kind==='native-contract-template-value-update'?templateProgram(plan,'read:'+images,input=>emitNativeTemplateUpdateObservationScript(input,images))
     :reader(plan.after,images,geometry);
 }
 /** Extraction for display only. Settlement always checks the combined envelope. */

@@ -181,3 +181,21 @@ test('settled SDK caller IDs survive application preflight, independent image re
   assert.equal(f.assignments.length,2);
   assert.equal(f.plans.prepare(f.parent).id,reverse.proposal.id);
 });
+
+
+test('program reuse keys complete template bytes and options, never just the saved digest',async t=>{
+  const f=await fixture(t),proposal=f.plans.prepare(f.parent),plan=f.plans.saved(f.parent,proposal.id).update.plan;
+  assert.equal(plan.kind,'native-contract-template-value-update');
+  const apply=emitNativeAppUpdateScript(plan),preflight=emitNativeAppUpdateScript(plan,true);
+  assert.notEqual(apply,preflight);
+  assert.equal(emitNativeAppUpdateScript(structuredClone(plan)),apply);
+  assert.equal(emitNativeAppUpdateScript(structuredClone(plan),true),preflight);
+  const read=emitNativeAppUpdateReadback(plan,undefined,false),images=emitNativeAppUpdateReadback(plan,undefined,true);
+  assert.notEqual(read,images);
+  assert.equal(emitNativeAppUpdateReadback(structuredClone(plan),undefined,false),read);
+  assert.equal(emitNativeAppUpdateReadback(structuredClone(plan),undefined,true),images);
+  const changed=structuredClone(plan);if(changed.kind!=='native-contract-template-value-update')throw Error('wrong plan');
+  changed.template.input.consumers[0].baseline.unrequested='tampered';
+  assert.throws(()=>emitNativeAppUpdateScript(changed),/proposal-changed/);
+  assert.throws(()=>emitNativeAppUpdateReadback(changed),/proposal-changed/);
+});
