@@ -7865,14 +7865,31 @@ A separate static-tracking regression consumer retains all ten passing Badge
 image pairs on both backgrounds. It uses environment fonts; their bytes are
 not authenticated. This check does not replace its prior application evidence.
 
-A fresh **engineering-generated** clean consumer from the preserved Tab capture
-now matches all ten native root dimensions exactly. It still passes only
-**8/10** image pairs: unselected rest and pressed fail at **12.56%** on black.
-This is a separate failed consumer, not a new application-delivery result.
-The earlier app archive and its 15.38% failures remain intact. Application
-re-delivery and a new native update with this sizing rule remain pending.
-Font assets are explicitly supplied and hashed; Figma's font bytes remain
-unverified. The earlier Public Sans 1.007 control also remains failed.
+A fresh engineering consumer from the preserved Tab capture matches all ten
+native root dimensions exactly. A subsequent actual application import,
+archive download and isolated installation reproduces that result: **8/10**
+image pairs pass; unselected rest and pressed fail at **12.56%** on black.
+The downloaded archive and clean consumer's installed archive share SHA256
+`5866d6e8042f596c1178671628353edc0ae0e91cf0c05973269d6ec72627d508`.
+The app refuses a tracking reference to a color value. Restoring the original
+contract produces a byte-identical archive; normal reload and workspace
+selection restore the exact contract and delivery action, with one saved
+entry. This is same-tab recovery; browser restart is not established.
+The earlier app archive and its 15.38% failures remain intact. A new native
+update with this sizing rule remains pending. Font assets are explicitly
+supplied and hashed; Figma's font bytes remain unverified. The earlier Public
+Sans 1.007 control also remains failed.
+
+**AGENT decision — editor token values, 2026-09-21.** The editor passed only
+token names to its CSS validation layer. That falsely refused the imported
+tracked label with “no token VALUES were supplied” even though the app held
+all 17 minted values. Validation now receives the same active token tree as
+generation. The positive app import and negative color-as-length check both
+exercise this path. Reversal means restoring inventory-only validation and
+documenting the resulting refusal of valid tracked text imports; never skip
+the shared value-dependent guard. The new app archive, failed comparison,
+reload and refusal evidence are preserved in the private
+`variant-tracking-text-box-20260921/` journal.
 
 Reversing this sizing revision means restoring the placeholder-token refusal
 and the prior tracked-box declarations and markup together, removing its
