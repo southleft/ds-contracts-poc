@@ -377,64 +377,64 @@
   outline-color: var(--imported-button-root-outline-color-monochromePlain-success);
 }
 
-.root:disabled {
-  background: var(--p-color-bg-fill-disabled);
+.variant-plain:hover:not(:disabled) {
+  background-color: var(--imported-button-root-background-color-state-hover-plain-none);
 }
 
-.root:disabled {
-  color: var(--p-color-text-disabled);
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--imported-button-root-background-color-state-hover-primary-none);
 }
 
-.root:disabled {
-  fill: var(--p-color-icon-disabled);
+.variant-secondary:hover:not(:disabled) {
+  background-color: var(--imported-button-root-background-color-state-hover-secondary-none);
 }
 
-.variant-plain:disabled {
-  background-color: var(--imported-button-root-background-color-state-disabled-plain);
+.variant-tertiary:hover:not(:disabled) {
+  background-color: var(--imported-button-root-background-color-state-hover-tertiary-none);
 }
 
-.variant-primary:disabled {
-  background-color: var(--imported-button-root-background-color-state-disabled-primary);
+.variant-monochromePlain:hover:not(:disabled) {
+  background-color: var(--imported-button-root-background-color-state-hover-monochromePlain-none);
 }
 
-.variant-secondary:disabled {
-  background-color: var(--imported-button-root-background-color-state-disabled-secondary);
+.variant-plain:hover:not(:disabled) {
+  color: var(--imported-button-root-color-state-hover-plain-none);
 }
 
-.variant-tertiary:disabled {
-  background-color: var(--imported-button-root-background-color-state-disabled-tertiary);
+.variant-primary:hover:not(:disabled) {
+  color: var(--imported-button-root-color-state-hover-primary-none);
 }
 
-.variant-monochromePlain:disabled {
-  background-color: var(--imported-button-root-background-color-state-disabled-monochromePlain);
+.variant-secondary:hover:not(:disabled) {
+  color: var(--imported-button-root-color-state-hover-secondary-none);
 }
 
-.root:disabled {
-  background-image: var(--imported-button-root-background-image-state-disabled);
+.variant-tertiary:hover:not(:disabled) {
+  color: var(--imported-button-root-color-state-hover-tertiary-none);
 }
 
-.root:disabled {
-  box-shadow: var(--imported-button-root-box-shadow-state-disabled);
+.variant-monochromePlain:hover:not(:disabled) {
+  color: var(--imported-button-root-color-state-hover-monochromePlain-none);
 }
 
-.variant-plain:disabled {
-  outline-color: var(--imported-button-root-outline-color-state-disabled-plain);
+.variant-plain:hover:not(:disabled) {
+  outline-color: var(--imported-button-root-outline-color-state-hover-plain-none);
 }
 
-.variant-primary:disabled {
-  outline-color: var(--imported-button-root-outline-color-state-disabled-primary);
+.variant-primary:hover:not(:disabled) {
+  outline-color: var(--imported-button-root-outline-color-state-hover-primary-none);
 }
 
-.variant-secondary:disabled {
-  outline-color: var(--imported-button-root-outline-color-state-disabled-secondary);
+.variant-secondary:hover:not(:disabled) {
+  outline-color: var(--imported-button-root-outline-color-state-hover-secondary-none);
 }
 
-.variant-tertiary:disabled {
-  outline-color: var(--imported-button-root-outline-color-state-disabled-tertiary);
+.variant-tertiary:hover:not(:disabled) {
+  outline-color: var(--imported-button-root-outline-color-state-hover-tertiary-none);
 }
 
-.variant-monochromePlain:disabled {
-  outline-color: var(--imported-button-root-outline-color-state-disabled-monochromePlain);
+.variant-monochromePlain:hover:not(:disabled) {
+  outline-color: var(--imported-button-root-outline-color-state-hover-monochromePlain-none);
 }
 
 .variant-plain:active:not(:disabled) {
@@ -665,64 +665,64 @@
   outline-width: var(--imported-button-root-outline-width-state-focus-visible);
 }
 
-.variant-plain:hover:not(:disabled) {
-  background-color: var(--imported-button-root-background-color-state-hover-plain-none);
+.root:disabled {
+  background: var(--p-color-bg-fill-disabled);
 }
 
-.variant-primary:hover:not(:disabled) {
-  background-color: var(--imported-button-root-background-color-state-hover-primary-none);
+.root:disabled {
+  color: var(--p-color-text-disabled);
 }
 
-.variant-secondary:hover:not(:disabled) {
-  background-color: var(--imported-button-root-background-color-state-hover-secondary-none);
+.root:disabled {
+  fill: var(--p-color-icon-disabled);
 }
 
-.variant-tertiary:hover:not(:disabled) {
-  background-color: var(--imported-button-root-background-color-state-hover-tertiary-none);
+.variant-plain:disabled {
+  background-color: var(--imported-button-root-background-color-state-disabled-plain);
 }
 
-.variant-monochromePlain:hover:not(:disabled) {
-  background-color: var(--imported-button-root-background-color-state-hover-monochromePlain-none);
+.variant-primary:disabled {
+  background-color: var(--imported-button-root-background-color-state-disabled-primary);
 }
 
-.variant-plain:hover:not(:disabled) {
-  color: var(--imported-button-root-color-state-hover-plain-none);
+.variant-secondary:disabled {
+  background-color: var(--imported-button-root-background-color-state-disabled-secondary);
 }
 
-.variant-primary:hover:not(:disabled) {
-  color: var(--imported-button-root-color-state-hover-primary-none);
+.variant-tertiary:disabled {
+  background-color: var(--imported-button-root-background-color-state-disabled-tertiary);
 }
 
-.variant-secondary:hover:not(:disabled) {
-  color: var(--imported-button-root-color-state-hover-secondary-none);
+.variant-monochromePlain:disabled {
+  background-color: var(--imported-button-root-background-color-state-disabled-monochromePlain);
 }
 
-.variant-tertiary:hover:not(:disabled) {
-  color: var(--imported-button-root-color-state-hover-tertiary-none);
+.root:disabled {
+  background-image: var(--imported-button-root-background-image-state-disabled);
 }
 
-.variant-monochromePlain:hover:not(:disabled) {
-  color: var(--imported-button-root-color-state-hover-monochromePlain-none);
+.root:disabled {
+  box-shadow: var(--imported-button-root-box-shadow-state-disabled);
 }
 
-.variant-plain:hover:not(:disabled) {
-  outline-color: var(--imported-button-root-outline-color-state-hover-plain-none);
+.variant-plain:disabled {
+  outline-color: var(--imported-button-root-outline-color-state-disabled-plain);
 }
 
-.variant-primary:hover:not(:disabled) {
-  outline-color: var(--imported-button-root-outline-color-state-hover-primary-none);
+.variant-primary:disabled {
+  outline-color: var(--imported-button-root-outline-color-state-disabled-primary);
 }
 
-.variant-secondary:hover:not(:disabled) {
-  outline-color: var(--imported-button-root-outline-color-state-hover-secondary-none);
+.variant-secondary:disabled {
+  outline-color: var(--imported-button-root-outline-color-state-disabled-secondary);
 }
 
-.variant-tertiary:hover:not(:disabled) {
-  outline-color: var(--imported-button-root-outline-color-state-hover-tertiary-none);
+.variant-tertiary:disabled {
+  outline-color: var(--imported-button-root-outline-color-state-disabled-tertiary);
 }
 
-.variant-monochromePlain:hover:not(:disabled) {
-  outline-color: var(--imported-button-root-outline-color-state-hover-monochromePlain-none);
+.variant-monochromePlain:disabled {
+  outline-color: var(--imported-button-root-outline-color-state-disabled-monochromePlain);
 }
 
 .root:disabled {
