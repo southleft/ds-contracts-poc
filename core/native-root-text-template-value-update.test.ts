@@ -6,7 +6,8 @@ import { nativeTextGraphFixture } from './native-text-template-test-fixture.js';
 import type { NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
 import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript } from './native-root-text-template-graph-native.js';
-import { planNativeTemplateValueUpdate, verifyNativeTemplateValueUpdate, type NativeTemplateValueUpdateInput } from './native-root-text-template-value-update.js';
+import { planNativeTemplateValueUpdate, verifyNativeTemplateValueUpdate, observeNativeTemplateValueUpdate,
+  emitNativeTemplateValueReadbackScript, type NativeTemplateValueUpdateInput } from './native-root-text-template-value-update.js';
 
 async function fixture(prepare?: (f: ReturnType<typeof nativeTextGraphFixture>) => void) {
   const f = nativeTextGraphFixture(3, 2), host = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
@@ -18,7 +19,7 @@ async function fixture(prepare?: (f: ReturnType<typeof nativeTextGraphFixture>) 
   assert.equal(created.status, 'created-candidate');
   const read = () => run(emitNativeTemplateGraphReadbackScript(before, created.identity));
   const baseline = (await read()).receipt;
-  return { f, host, compile, read, input: { before, desired: compile(), identity: created.identity, baseline } as NativeTemplateValueUpdateInput };
+  return { f, host, compile, run, read, input: { before, desired: compile(), identity: created.identity, baseline } as NativeTemplateValueUpdateInput };
 }
 
 test('a four-channel value succession preserves every allocated ID and all routing edges without writing', async () => {
@@ -151,4 +152,65 @@ test('the proposal retains observed float32 colors without rounding the requeste
   const plan = planNativeTemplateValueUpdate(h.input);
   assert.deepEqual(plan.changes[0].before, native.valuesByMode[modeId]);
   assert.deepEqual(plan.changes[0].after, { r: 171 / 255, g: 205 / 255, b: 239 / 255, a: 1 });
+});
+
+test('independent ID-based reads distinguish untouched, partial, complete and restored values without adopting new IDs', async () => {
+  const h = await fixture();
+  h.f.tokens.size.v0.$value = '15.5px'; h.f.tokens.ink.v0.$value = '#abcdef'; h.input.desired = h.compile();
+  const plan = planNativeTemplateValueUpdate(h.input), script = emitNativeTemplateValueReadbackScript(h.input);
+  const observe = async () => {
+    const read = await h.run(script); assert.equal(read.status, 'readback-collected');
+    return observeNativeTemplateValueUpdate(h.input, read.receipt);
+  };
+  assert.equal((await observe()).status, 'untouched');
+  const inventory = { collections: h.host.collections.map(v => v.id), variables: h.host.variables.map(v => v.id) };
+  // Explicit host fixture mutations exercise readback; the candidate emits no writer.
+  const assign = (index: number, side: 'before' | 'after') => {
+    const change = plan.changes[index], variable = h.host.variables.find(v => v.id === change.variableId)!;
+    variable.setValueForMode(change.modeId, structuredClone(change[side]));
+  };
+  assign(0, 'after'); assert.equal((await observe()).status, 'partial');
+  assign(1, 'after'); assert.equal((await observe()).status, 'updated');
+  assign(0, 'before'); assert.equal((await observe()).status, 'partial');
+  assign(1, 'before'); assert.equal((await observe()).status, 'untouched');
+  assert.deepEqual({ collections: h.host.collections.map(v => v.id), variables: h.host.variables.map(v => v.id) }, inventory);
+  assert.deepEqual((await h.read()).receipt, h.input.baseline);
+  assert.equal(observeNativeTemplateValueUpdate({ ...h.input, desired: h.input.before }, h.input.baseline).status, 'no-op');
+});
+
+test('partial-state classification rejects conflicting values and drift in every untouched graph surface', async () => {
+  const h = await fixture(); h.f.tokens.size.v0.$value = '15px'; h.input.desired = h.compile();
+  const plan = planNativeTemplateValueUpdate(h.input), change = plan.changes[0];
+  const mutations: Array<(r: typeof h.input.baseline) => void> = [
+    r => { r.source.variables.find(v => v.id === change.variableId)!.valuesByMode[change.modeId] = 14; },
+    r => { r.source.variables.find(v => v.id === change.variableId)!.valuesByMode[change.modeId] = { type: 'VARIABLE_ALIAS', id: 'same-valued' }; },
+    r => { r.source.variables.find(v => v.id !== change.variableId)!.valuesByMode[change.modeId] = 123; },
+    r => { r.source.variables.push(structuredClone(r.source.variables[0])); },
+    r => { r.routes[0].valuesByMode[Object.keys(r.routes[0].valuesByMode)[1]] = { type: 'VARIABLE_ALIAS', id: 'wrong-unselected-edge' }; },
+    r => { r.selectors[0].modes[0].name = 'changed'; },
+    r => { r.sourceScopes[change.variableId] = []; },
+    r => { r.source.collection.ownership.preparationRevision = plan.desiredGraphRevision; },
+  ];
+  for (const mutate of mutations) {
+    const receipt = structuredClone(h.input.baseline); mutate(receipt);
+    const original = canonicalJson(receipt), observation = observeNativeTemplateValueUpdate(h.input, receipt);
+    assert.equal(observation.status, 'conflict'); assert.deepEqual(observation.values, []);
+    assert.equal(observation.problems.length, 1); assert.equal(canonicalJson(receipt), original);
+  }
+});
+
+test('new values accept only exact or float32 representations, with indistinguishable states reported explicitly', async () => {
+  const h = await fixture(); h.f.tokens.size.v0.$value = '15.123456789px'; h.input.desired = h.compile();
+  const change = planNativeTemplateValueUpdate(h.input).changes[0];
+  for (const [value, expected] of [[15.123456789, 'updated'], [Math.fround(15.123456789), 'updated'], [15.123457, 'conflict']] as const) {
+    const receipt = structuredClone(h.input.baseline);
+    receipt.source.variables.find(v => v.id === change.variableId)!.valuesByMode[change.modeId] = value;
+    assert.equal(observeNativeTemplateValueUpdate(h.input, receipt).status, expected);
+  }
+  const near = await fixture(f => { f.tokens.size.v0.$value = '12.00000001px'; });
+  near.f.tokens.size.v0.$value = '12.00000002px'; near.input.desired = near.compile();
+  const c = planNativeTemplateValueUpdate(near.input).changes[0], receipt = structuredClone(near.input.baseline);
+  receipt.source.variables.find(v => v.id === c.variableId)!.valuesByMode[c.modeId] = 12;
+  const result = observeNativeTemplateValueUpdate(near.input, receipt);
+  assert.equal(result.status, 'no-op'); assert.deepEqual(result.values, [{ tokenPath: 'size.v0', state: 'both' }]);
 });
