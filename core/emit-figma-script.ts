@@ -162,9 +162,9 @@ export interface NodeSpec {
   strokeOutside?: boolean;
   /** The public Part model carries only false, for a stroke outside layout.
    *  Internally true also enables explicit CSS border-box layout when a
-   *  uniform state width replaces literal or bound resting sides. Native defaults
-   *  have differed between the older census and the current Desktop probe;
-   *  this transition must write its layout policy instead of relying on one. */
+   *  uniform state width replaces literal or bound resting sides. Retained
+   *  nodes can carry an outside-layout value; this transition must write its
+   *  layout policy instead of relying on that prior state. */
   strokesIncludedInLayout?: boolean;
   /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
    *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */

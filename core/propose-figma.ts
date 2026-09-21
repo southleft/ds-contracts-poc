@@ -10894,6 +10894,7 @@ function proposeStateDiffs(
   // there is no uniform number to compare (`strokeWeight` is absent there, and
   // reading that absence as 0 would mint a state `border-width: 0` nobody
   // drew). A per-side state override has no vocabulary yet — NAMED.
+  let perSideWidthRefused = false;
   if (occs.some((o) => o.node.strokeWeights !== undefined || o.base.strokeWeights !== undefined)) {
     if (occs.some((o) => sideWeightsKey(o.node) !== sideWeightsKey(o.base) || (o.node.strokeWeight ?? null) !== (o.base.strokeWeight ?? null))) {
       // A uniform state stroke is already representable by border-width.
@@ -10903,7 +10904,7 @@ function proposeStateDiffs(
         node.stroke !== undefined && base.stroke !== undefined &&
         node.strokeWeights === undefined && typeof node.strokeWeight === 'number' &&
         Number.isFinite(node.strokeWeight) && node.strokeWeight >= 0 &&
-        (node.strokeAlign ?? 'INSIDE') === 'INSIDE' && (base.strokeAlign ?? 'INSIDE') === 'INSIDE' &&
+        node.strokeAlign === 'INSIDE' && base.strokeAlign === 'INSIDE' &&
         node.strokesIncludedInLayout === true && base.strokesIncludedInLayout === true &&
         (base.strokeWeights !== undefined
           ? STROKE_SIDE_CHANNELS.every(([, side]) => Number.isFinite(base.strokeWeights![side]) && base.strokeWeights![side] >= 0)
@@ -10923,6 +10924,7 @@ function proposeStateDiffs(
         uniformStateStrokeStyles.add(state);
         ctx.notes.push(`${where}: state "${state}" replaces captured per-side resting widths with a uniform ${occs[0].node.strokeWeight}px INSIDE stroke included in layout — carried as border-width with its solid border style`);
       } else {
+        perSideWidthRefused = true;
         ctx.notes.push(
           `${where}: stroke weight differs in state "${state}" where per-side weights are drawn (dump v1.34 strokeWeights) — only a captured uniform INSIDE state stroke included in layout, unbound or uniformly bound, can replace them; NAMED, not proposed (review)`,
         );
@@ -10997,7 +10999,10 @@ function proposeStateDiffs(
       if (sides.every((s) => s && s === sides[0])) return dotPath(sides[0]!);
       return undefined;
     };
-    if (boundChanged) {
+    // The shared binding reader must not reintroduce a per-side transition
+    // refused above. Keep the existing explicitly OUTSIDE focus-ring path.
+    const outsideFocus = state === 'focus-visible' && occs.every(o => o.node.strokeAlign === 'OUTSIDE');
+    if (boundChanged && (!perSideWidthRefused || outsideFocus)) {
       const paths = occs.map((o) => ({ variant: o.variant, path: uniformPath(o.node) }));
       if (paths.some((p) => p.path === undefined)) {
         ctx.notes.push(
@@ -11031,7 +11036,9 @@ function proposeStateDiffs(
   // and dropped outline-width (FC-DUMP-PROPOSE-FOCUS-OUTLINE).
   const focusOutside =
     state === 'focus-visible' && occs.every((o) => o.node.strokeAlign === 'OUTSIDE');
-  if (baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
+  // A qualified per-side replacement already proves an INSIDE resting stroke,
+  // even when its unbound color has not reached the deferred mint pass yet.
+  if (!uniformStateStrokeStyles?.has(state) && baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
     const hasBorder = target['border-color'] !== undefined || target['border-width'] !== undefined;
     if (hasBorder && state === 'focus-visible') {
       for (const [from, to] of [['border-color', 'outline-color'], ['border-width', 'outline-width']] as const) {

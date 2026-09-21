@@ -7823,3 +7823,22 @@ or pixel-fidelity result. The contradictory outside-layout plus border-style
 contract still refuses. Reverse this extension by limiting the explicit policy
 to literal sides again; keep the controlled before/after evidence in
 `private/uniform-state-bound-review-20260921/`.
+
+**AGENT review correction — alignment and binding order, 2026-09-21.**
+The uniform replacement requires an explicit captured `INSIDE` value on both
+resting and state roots. Absence means unknown. The earlier exception incorrectly
+accepted missing alignment; the later bound-width reader could also reintroduce
+a refused width. Common and per-value bindings now obey the same qualification
+as unbound widths. The existing explicitly outside focus-ring path remains
+separate. A qualified common width stays a border even when the resting paint
+is awaiting token minting; previously that ordering could remap it to an outline.
+Browser and mock-native round trips cover common and per-value width identities,
+and 45 controls retain missing/unsupported alignment, layout and width refusals.
+A fresh canonical read of the retained two-main Evaluations fixture still
+recovers `{two}` with solid border style. Removing either alignment field from
+an offline copy makes exact projection refuse; no native node was changed.
+The bridge was closed and the retained canvas inspected. This is a bounded
+compiler/capture check, not a new application journey or fidelity qualification.
+To reverse, restore the absent-alignment fallback, independent bound-width
+recovery and early outline remap together; preserve the failing controls and
+readback in the same private review directory.
