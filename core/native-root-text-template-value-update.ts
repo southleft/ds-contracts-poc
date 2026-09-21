@@ -3,6 +3,10 @@
  * observations and an interruption-safe writer must qualify separately. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { flattenTokens, aliasTarget } from './tokens.js';
+import { restoreNativeTokenAllocationInput } from './native-token-context.js';
+import { applyRootTextTemplateAliases } from './native-root-text-template-plan.js';
+import { verifyNativeContractReadback, type NativeContractObservationInput, type NativeSourceReadback } from './native-source-observation.js';
+import type { NodeSpec } from './emit-figma-script.js';
 import { planNativeRootTextTemplateGraph, type NativeRootTextTemplateGraph,
   type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt, type NativeTemplateGraphIdentity,
@@ -38,6 +42,7 @@ function fail(why: string): never { throw Error(`native-template-value-update-${
  * mode identities or requested/dependency path distinction. */
 function topology(graph: NativeRootTextTemplateGraph) {
   const copy = structuredClone(graph);
+  delete copy.allocationRevision;
   copy.revision = '';
   copy.template.revision = '';
   copy.template.tokenRevision = '';
@@ -146,6 +151,56 @@ export function planNativeTemplateValueUpdate(input: NativeTemplateValueUpdateIn
 
 export function verifyNativeTemplateValueUpdate(input: NativeTemplateValueUpdateInput, plan: NativeTemplateValueUpdatePlan): void {
   if (!same(planNativeTemplateValueUpdate(input), plan)) fail('plan-changed');
+}
+
+/** Build the expected current-value context while retaining the original
+ * allocation source and IDs. This is usable for an independent post-read; it
+ * does not claim that any assignment has occurred or authorize one. */
+export function resolveNativeTemplateValueState(input: NativeTemplateValueUpdateInput): NativeRootTextTemplateGraphInput {
+  planNativeTemplateValueUpdate(input);
+  const allocation = restoreNativeTokenAllocationInput(input.before.tokens);
+  const current = structuredClone(input.desired);
+  current.tokens = structuredClone(allocation);
+  current.tokens.modes[0].tokens = structuredClone(input.desired.tokens.modes[0].tokens);
+  current.tokens.modes[0].tokenTreeRevision = input.desired.tokens.modes[0].tokenTreeRevision;
+  const oldLeaves = flattenTokens(allocation.modes[0].tokens), newLeaves = flattenTokens(current.tokens.modes[0].tokens);
+  const { sourceMode, brand } = allocation.modes[0];
+  const rows = [...oldLeaves].filter(([path, leaf]) => !same(leaf.value, newLeaves.get(path)!.value))
+    .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
+    .map(([tokenPath, leaf]) => ({ sourceMode, brand, tokenPath, value: structuredClone(leaf.value) }));
+  if (rows.length) { current.tokens.allocatedValues = rows; current.tokens.allocatedValueProtocol = 'template-values-v1'; }
+  const graph = planNativeRootTextTemplateGraph(current);
+  if ((graph.allocationRevision ?? graph.revision) !== input.identity.graphRevision ||
+      graph.sourceTokens.revision !== input.identity.source.preparationRevision) fail('allocation-changed');
+  return current;
+}
+
+/** Expected main-component state for an independent post-update observation.
+ * The original creation receipt, operation, allocated IDs and contract-part
+ * ownership remain immutable. A complete old component read is required, not
+ * just a variable receipt. This still grants no native write authority. */
+export function resolveNativeTemplateContractValueState(input: {
+  before: NativeContractObservationInput; baseline: NativeSourceReadback; desired: NativeRootTextTemplateGraphInput;
+}): NativeContractObservationInput {
+  const { before, baseline, desired } = input;
+  if (!before.templateGraph || !before.projection.rootTextTemplate ||
+      verifyNativeContractReadback(before, baseline).status !== 'supported-structure-observed') fail('component-baseline');
+  const next = resolveNativeTemplateValueState({ before: before.templateGraph.input, desired,
+    identity: before.templateGraph.identity, baseline: baseline.templateGraph!.receipt });
+  const graph = planNativeRootTextTemplateGraph(next), after = structuredClone(before);
+  after.templateGraph!.input = next;
+  after.tokenInput = structuredClone(next.tokens);
+  after.projection.tokenRevision = next.source.tokenRevision;
+  after.projection.rootTextTemplate = graph.template;
+  after.component = structuredClone(next.component);
+  applyRootTextTemplateAliases(after.component, graph.template);
+  const stamp = (spec: NodeSpec, variant: string, specPath: number[]) => {
+    spec.nativeContractPart = { contractRevision: before.projection.contractRevision, variant, specPath };
+    spec.children?.forEach((child, index) => stamp(child, variant, [...specPath, index]));
+  };
+  after.component.variants.forEach(variant => stamp(variant.spec, variant.name, []));
+  after.component.nativeContractDraft = { revision: revisionOf(after.projection), acceptedContract: null };
+  return after;
 }
 
 export interface NativeTemplateValueObservation {
