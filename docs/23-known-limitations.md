@@ -8765,3 +8765,43 @@ write. Source/CSS transactions, witness succession, fresh canvas preconditions
 and interrupted-write recovery remain unfinished. Reversal removes the cohort
 observer and its preview integration together, restoring the narrower preview
 limitation while preserving every saved observation and original witness.
+
+
+### D.106 Original source writes need durable file recovery
+
+**AGENT decision, 2026-09-21.** A filesystem transaction helper now retains the
+selected source/CSS before and after bytes, hashes, permissions and complete
+input pins before changing an original. It is not connected to an application
+Apply action. It cannot approve a preview or establish canvas agreement.
+
+Each file moves into recovery storage before the candidate is installed with
+an exclusive hard link. A destination recreated by another editor is never
+replaced. Immutable before/after blobs remain separate from the held originals
+and installation links, which can retain concurrent edits. The journal and
+lock records publish only fully written, synced bytes. Lock generations are
+append-only: simultaneous recovery processes compete for one new generation
+without deleting or replacing an earlier writer's lock.
+
+Checks exercise source/CSS application, unchanged repeat, reversal, every
+persisted file boundary, conflicting bytes and permissions, missing authority,
+corrupted evidence, outside paths, symlinks and concurrent destination creation.
+Actual child processes are killed between moving a source file and installing
+its replacement, then a fresh process resumes application and rollback. A
+separate two-process barrier probe proves only one abandoned-writer recovery
+can acquire the next lock. An asynchronous authority callback refuses before
+writing; asynchronous canvas preflight must finish before the final synchronous
+assertion. All probes use disposable source fixtures, not the user's originals.
+
+This is a recoverable sequence of file operations, not an atomic multi-file
+filesystem transaction. Another reader can observe a missing file or a mixed
+source/CSS version during application. Only regular files on the same filesystem
+as the private journal are supported. Unexpected edits are preserved and refuse;
+unknown journals or a lock owned by a live/reused process ID also refuse. Power
+loss and every operating-system/filesystem combination are not qualified.
+Authenticated witness succession, fresh native preconditions, the original-source
+application UI and independent post-write source/native verification remain
+unfinished. The complete two-way journey is still unqualified.
+
+Reversal removes the helper and its gate entry together. Preserve any existing
+transaction directories, held originals, before/after blobs and lock history;
+removing code must never remove recovery evidence or overwrite source files.
