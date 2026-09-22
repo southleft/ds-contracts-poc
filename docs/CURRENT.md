@@ -71,14 +71,16 @@ The declared Switch passes all nine matched-frame pairs (maximum **4.167% white 
 
 The native graph verifier now checks caller slots below inherited wrappers
 against their source main's hierarchy and allocation stamps. This corrects a
-regression-tested refusal; historical Card readbacks remain unchanged. A fresh
-deep-slot application journey is still required ([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
+regression-tested refusal; historical Card readbacks remain unchanged. The
+bounded nested-host application evidence below exercises the corrected path
+([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
 
 Source inspection now distinguishes children passed inside static JSX wrappers
 and checks the host path against React ownership. Bounded caller generation
 retains the owned hosts and places caller content in the identified nested
 slot. Browser and native fixture checks cover repeated wrappers and editable
-caller text; live application delivery and fidelity remain unqualified
+caller text. The separate application probe below demonstrates bounded delivery
+and recovery; wider content projection and full fidelity remain unqualified
 ([D.126](23-known-limitations.md#d126-nested-source-children-need-an-explicit-host-path),
 [D.127](23-known-limitations.md#d127-nested-caller-slots-preserve-their-owned-hosts)).
 
