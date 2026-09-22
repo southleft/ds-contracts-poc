@@ -5,6 +5,9 @@ import { createNativeSourceSuccessions } from './native-source-succession.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
+import type {ReactComparisonRequest} from './react-comparison-request.js';
+import type {ReactNativeRequest} from './react-native-request.js';
+import type {NativeContractObservationInput,NativeSourceReadback} from '../core/native-source-observation.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
 import { prepareReactCallerNativePlan, buildReactCallerNativeWrite } from './react-caller-native-plan.js';
@@ -154,11 +157,11 @@ export function createReferenceService(
       },
       reactComparison: {
         refresh: (request, operation) => {
-          const fresh = reactReference.refreshComparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          const fresh = reactReference.refreshComparisonEvidence(request, comparisonParent(request,operation.id));
           return {request:fresh.request,plan:prepareReactComparisonPlan({...fresh.evidence,operation})};
         },
         prepare: (request, operation) => {
-          const evidence = reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          const evidence = reactReference.comparisonEvidence(request, comparisonParent(request,operation.id));
           return {
             visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
             preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
@@ -167,7 +170,7 @@ export function createReferenceService(
           };
         },
         buildComponent: (request, context) => buildReactComparisonWrite({
-          ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
+          ...reactReference.comparisonEvidence(request, comparisonParent(request,context.operation.id)), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision, comparisonRecovery:context.comparisonRecovery,
         }),
       },
@@ -774,7 +777,14 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
-  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision, consumerPins) => {
+  function comparisonParent(request:ReactComparisonRequest,operationId:string):{
+    input:NativeContractObservationInput;receipt:NativeSourceReadback;request:ReactNativeRequest
+  } {
+    if(request.version!==4)return nativeJobs.verifiedReactObservation(request.parentOperationId);
+    return {...nativeUpdateJobs.verifiedForNewConsumer(request.parentOperationId,operationId,request.parentUpdate!),
+      request:nativeJobs.reactEffectiveRequest(request.parentOperationId)};
+  }
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision, consumerPins, birth) => {
     const baseline = nativeJobs.reactUpdateBaseline(id, parentJournalRevision);
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
@@ -789,13 +799,13 @@ export function createReferenceService(
       : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source,
         baseline.source.version===1?baseline.input.component.contractId:undefined), operation: baseline.input.operation });
     const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
-    const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins):undefined;
+    const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins,birth):undefined;
     return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {
       before: baseline.input, baseline: baseline.receipt,
       ...desiredInput,
     } };
   }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id),
-  (id,pins)=>nativeJobs.reactTemplateConsumerBaselines(id,pins));
+  (id,pins,birth)=>nativeJobs.reactTemplateConsumerBaselines(id,pins,birth));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;
