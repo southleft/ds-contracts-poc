@@ -17,8 +17,8 @@ const admits = (type:ReactTypeFact,value:unknown):boolean => type.kind==='union'
 const sameSource=(a:ReactOwnership['components'][number]['source'],b:ReactOwnership['components'][number]['source'])=>
   a.module===b.module&&a.exportName===b.exportName&&a.sourceSha256===b.sourceSha256&&a.span.start===b.span.start&&a.span.end===b.span.end;
 
-async function propertyInput(page:Page,selector:string,program:ReactSourceProgram,instanceId:string,changes:ReactPropertyChanges){
- if(program.problems.length||!Object.keys(changes).length||Object.keys(changes).some(property=>reserved.has(property))) throw Error('react-property-probe-input-unsupported');
+async function propertyInput(page:Page,selector:string,program:ReactSourceProgram,instanceId:string,changes:ReactPropertyChanges,allowEmpty=false){
+ if(program.problems.length||(!allowEmpty&&!Object.keys(changes).length)||Object.keys(changes).some(property=>reserved.has(property))) throw Error('react-property-probe-input-unsupported');
  const baseline=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
  if(baseline.problems.length) throw Error('react-property-probe-ownership-unqualified');
  const instance=baseline.components.find(c=>c.id===instanceId);
@@ -31,6 +31,18 @@ async function propertyInput(page:Page,selector:string,program:ReactSourceProgra
    throw Error('react-property-probe-value-outside-source-api');
  }
  return {baseline,instance,source};
+}
+
+/** A static baseline is read three times without asking React to rerender.
+ * It is not a live-update or initial-state experiment. The caller also checks
+ * that all captured render witnesses are identical. */
+export async function probeReactPropertyBaseline<T>(
+ page:Page,selector:string,program:ReactSourceProgram,instanceId:string,observe:()=>Promise<T>,
+){
+ const {baseline}=await propertyInput(page,selector,program,instanceId,{},true);
+ const before=await observe(),changed=await observe(),restored=await observe();
+ const after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+ return {before,changed,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes:{}};
 }
 
 /** The callback records the real render/DOM, so a successfully delivered prop

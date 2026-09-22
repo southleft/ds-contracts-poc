@@ -27,9 +27,10 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
  try{
   const expected=planReactPropertyMatrix(program,ownership,tree,matrix.instanceId);
   if(matrix.version!==1||matrix.qualification!=='full-finite-style-matrix'||matrix.problems.length||
-   JSON.stringify(expected.source)!==JSON.stringify(matrix.source)||JSON.stringify(expected.heldProps)!==JSON.stringify(matrix.heldProps)||JSON.stringify(expected.axes)!==JSON.stringify(matrix.axes)||
-   expected.plan.length!==matrix.planned||expected.plan.length!==matrix.rows.length||matrix.rows.some((r,i)=>r.id!==String(i)||JSON.stringify(r.changes)!==JSON.stringify(expected.plan[i].changes)))throw Error('react-root-matrix-plan-mismatch');
-  if(!expected.axes.length)return out;
+   JSON.stringify(expected.source)!==JSON.stringify(matrix.source)||JSON.stringify(expected.heldProps)!==JSON.stringify(matrix.heldProps)||JSON.stringify(expected.axes)!==JSON.stringify(matrix.axes))throw Error('react-root-matrix-plan-mismatch');
+  // Historical zero-axis archives captured no plane and gain no draft.
+  if(!expected.axes.length && matrix.planned===0 && matrix.rows.length===0)return out;
+  if(expected.plan.length!==matrix.planned||expected.plan.length!==matrix.rows.length||matrix.rows.some((r,i)=>r.baseline!==expected.plan[i].baseline||r.id!==String(i)||JSON.stringify(r.changes)!==JSON.stringify(expected.plan[i].changes)))throw Error('react-root-matrix-plan-mismatch');
   const result:NonNullable<ReactRootMatrix['draft']>={properties:expected.axes.map(a=>a.property),status:'refused',problems:[],observations:[],lowerings:[],limitations:[
    'observed-context-and-selected-finite-properties-only','boolean-and-runtime-state-apis-not-projected','descendant-effects-not-assembled','unresolved-sizing-and-responsive-constraints-not-projected','behavior-not-projected','native-fidelity-not-verified']};out.draft=result;
   try{
@@ -50,6 +51,13 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    // Every observed row, including an omission that shares its default's key.
    const planes:Array<ReturnType<typeof projectReactRootVisual>['roots'][number]>=[];
    const textPlanes:ReactRootTextPlane[]=[];
+   if(!expected.axes.length){
+    const row=matrix.rows[0],snap=snapshots[row.id];
+    if(row.propertyCaptureVersion!==2||!row.fontsSha256||!row.boundsSha256||!snap?.fonts||!snap.bounds||snap.propertyCaptureVersion!==2||
+     row.boundsSha256!==snap.boundsSha256||evidenceSha(JSON.stringify(snap.bounds))!==row.boundsSha256||
+     row.treeSha256!==evidenceSha(JSON.stringify(tree))||JSON.stringify(snap.ownership)!==JSON.stringify(ownership)||row.visibleChange!==false||row.treeChange!==false)
+     throw Error('react-root-matrix-baseline-unverified');
+   }
    assertReactPropertyFontCoverage(matrix.rows,snapshots);
    for(const row of matrix.rows){
     const snap=snapshots[row.id];if(row.status!=='observed'||!row.restored||!snap||snap.treeSha256!==row.treeSha256||snap.image!==row.image||evidenceSha(JSON.stringify(snap.tree))!==row.treeSha256)throw Error('react-root-matrix-observation-unverified');

@@ -9749,3 +9749,33 @@ The probe and failing/passing regressions are retained in
 This correction does not qualify native delivery or the full V1 journey.
 To reverse, remove the nested inline reset and restore the named visual gap;
 retain the browser comparison and regenerate the plugin engine receipt.
+
+
+## D.130 A root without finite style props needs an observed baseline
+
+**AGENT decision, 2026-09-22.** An authored nested-panel source passed the
+application's source validation and ownership capture, but its Scene had no
+finite style props. The property matrix recorded zero rows and no root draft,
+so the application could not prepare it for native delivery. A static caller
+slot must not require an artificial variant prop.
+
+A new zero-axis matrix records one explicitly marked baseline, read three times
+without changing props or scheduling a React update. All captured render facts
+must remain identical, and the normal original-render, ownership, font and
+bounds checks still apply. Assembly requires current capture metadata, the
+original tree and ownership, matching bounds hashes, and unchanged image/tree
+flags. Other inputs remain held at their observed values; this does not qualify
+state changes or behavior. Missing or altered evidence refuses. Older zero-row
+archives remain without a draft and need a new capture.
+
+Real browser checks cover both a children-only root and one with a held numeric
+input. Each compiles one native root with its authored dimensions, preserves
+caller text outside the main, and performs no React commit. Negative checks
+reject omitted baseline markers, incomplete rows, changed ownership, absent
+fonts, missing or changed bounds, and a mismatched original image. Empty input
+remains invalid for the separate property-mutation API. Live native delivery,
+visual fidelity and the complete composed journey remain unqualified.
+
+**Reversal:** remove the marked baseline plan and read-only observer, restore the
+zero-axis assembly refusal, and update the UI label and these checks together.
+Keep recorded source/native evidence; never infer a baseline for an old archive.

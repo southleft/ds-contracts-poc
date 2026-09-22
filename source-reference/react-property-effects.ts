@@ -8,7 +8,7 @@ import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
 import {linkReactSourceAnatomy,nestedReactHostPaths} from './react-source-anatomy.js';
-import {probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
+import {probeReactPropertyBaseline,probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
 import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
 import {hasUnpaintedPseudoBoxes,observePseudoBoxes} from './pseudo-boxes.js';
@@ -66,7 +66,7 @@ export interface ReactPropertyObservationArgs {
 export type ReactPropertyObservation=Omit<ReactPropertyEffects['rows'][number],'property'|'requested'>;
 
 /** Both single-axis and joint observations use the same capture/restoration boundary. */
-export async function observeReactPropertyPlan<P extends {changes:ReactPropertyChanges}>(args:ReactPropertyObservationArgs,plan:P[]){
+export async function observeReactPropertyPlan<P extends {changes:ReactPropertyChanges;baseline?:true}>(args:ReactPropertyObservationArgs,plan:P[]){
  const {page,program,ownership,tree,instanceId,selector,dir}=args;
  const result:{rows:Array<P&ReactPropertyObservation>;problems:string[]}={rows:[],problems:[]};
  if(!plan.length)return result;
@@ -117,7 +117,12 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const row:P&ReactPropertyObservation={id:String(index),...entry,status:'refused'};result.rows.push(row);
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
   try{
-   const probe=await (args.observationMode==='initial-mount'?probeReactInitialProperties:probeReactProperties)(page,selector,program,instanceId,entry.changes,observe);
+   if(entry.baseline && (Object.keys(entry.changes).length || args.observationMode==='initial-mount'))throw Error('react-property-baseline-plan-invalid');
+   const probe=entry.baseline
+    ?await probeReactPropertyBaseline(page,selector,program,instanceId,observe)
+    :await (args.observationMode==='initial-mount'?probeReactInitialProperties:probeReactProperties)(page,selector,program,instanceId,entry.changes,observe);
+   if(entry.baseline && (JSON.stringify(probe.before)!==JSON.stringify(probe.changed)||JSON.stringify(probe.before)!==JSON.stringify(probe.restored)))
+    throw Error('react-property-baseline-render-changed');
    // After any style change Chromium can rasterize an unchanged rounded edge
    // one 8-bit level apart from its first paint, and keeps doing so; rebuilding
    // the document's layout tree returns the first-paint raster exactly. When
