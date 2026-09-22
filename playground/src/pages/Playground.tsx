@@ -138,6 +138,7 @@ import {
 } from '../engine/remembered-tokens';
 import { CanvasFrame } from '../components/CanvasFrame';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
+import { SelectionSetup } from '../components/SelectionSetup';
 import { CopyButton } from '../components/CopyButton';
 import { FigmaGroundTruth } from '../components/FigmaGroundTruth';
 import { InfoPopover } from '../components/InfoPopover';
@@ -425,7 +426,7 @@ export function Playground() {
   // last SCHEMA-VALID parse (generator violations still have a shape to
   // show); while the text on screen isn't schema-valid, the sheet goes
   // stale and says so — the refusal list below stays visible in both views.
-  const [contractView, setContractView] = useState<'json' | 'spec'>('json');
+  const [contractView, setContractView] = useState<'json' | 'spec' | 'selection'>('json');
   const lastSpec = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
   if (validation.status === 'valid' || validation.status === 'violations') {
     lastSpec.current = { contract: validation.contract, contracts: validation.contracts };
@@ -3507,6 +3508,10 @@ export function Playground() {
             >
               Spec
             </button>
+            <button type="button" className={`seg__btn${contractView === 'selection' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'selection'} onClick={() => setContractView('selection')}>
+              Selection
+            </button>
           </div>
           {/* One line, ellipsized when narrow — the full text rides title. */}
           <span className="editor__meta" title={provenance}>
@@ -3541,7 +3546,18 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          {contractView === 'spec' ? (
+          {contractView === 'selection' ? (
+            validation.status === 'valid' && text === debouncedText ? <SelectionSetup key={debouncedText}
+              contract={validation.contract} contracts={validation.contracts} onEditJson={() => setContractView('json')}
+              onApply={next => {
+                if (text !== debouncedText) throw Error('The contract changed. Review the current version before applying.');
+                const nextText = pretty(next), checked = validateContractText(nextText);
+                if (checked.status !== 'valid') throw Error('issues' in checked ? checked.issues.join('\n') : 'The configured contract did not pass validation.');
+                setText(nextText);
+                setProvenance(`${provenance} · selection configured`);
+                setContractView('json');
+              }} /> : <div className="pane__body hint">Load a valid contract before configuring selection. Resolve any current refusals in JSON first.</div>
+          ) : contractView === 'spec' ? (
             lastSpec.current ? (
               <>
                 {!specLive ? (

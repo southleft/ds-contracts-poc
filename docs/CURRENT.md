@@ -75,9 +75,10 @@ The contract records supported properties, anatomy, layout, tokens, content and 
 
 An explicit finite `selection` relationship now generates tab-pattern behavior
 on both React surfaces, including keyed items, controlled inputs, keyboard
-navigation and persistent inactive panels. Application configuration, native
-return of the relationship and an app-delivered interactive Tabs consumer
-remain unfinished. The retained Tabs archive is unchanged; missing identities
+navigation and persistent inactive panels. The Playground's **Selection** view
+provides an explicit setup and review form; it edits the current contract only
+after full validation. Native return of the relationship and an app-delivered
+interactive Tabs consumer remain unfinished. The retained Tabs archive is unchanged; missing identities
 and panel content are not inferred ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
 
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. Deeper caller-content locations remain refused. Source-preserved React composition has separate browser behavior checks; neither result qualifies every composed journey.
