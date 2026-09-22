@@ -44,6 +44,14 @@ const identity = (source: ReactOwnership['components'][number]['source']) => JSO
   source.module, source.exportName, source.sourceSha256, source.span.start, source.span.end,
 ]);
 
+/** Only hosts whose nested source path has already been proved need extra
+ * style observations. Existing root-only captures keep their exact scope. */
+export function nestedReactHostPaths(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode): string[] {
+  const anatomy = linkReactSourceAnatomy(program, ownership, tree);
+  return [...new Set(anatomy.instances.filter(instance => instance.content === 'nested-caller-slot')
+    .flatMap(instance => instance.sourceOwnedPaths))].sort();
+}
+
 /** Joins the installed source program to the actual rendered exports and
  * original captured tree. No names/classes/text are used as matching guesses.
  * The host must first authenticate source/evidence identity and paired-render

@@ -9691,8 +9691,9 @@ the wrapper styles, text API, property planes or native fidelity.
 
 Nested flow has a distinct `nested-forwarded` fact and `nested-caller-slot`
 anatomy. It must not use root-only projection, which deliberately discards sample
-descendants. Native main matching and caller generation explicitly refuse the
-new case until lowering retains the complete owned structure. A review fixture
+descendants. Native main matching explicitly refuses the new case until it
+compares the complete owned structure. Caller generation now has the bounded
+host-preserving path described in D.127. A review fixture
 demonstrated that root paint alone could otherwise match a main that omits the
 source-owned wrapper. It now refuses by name. API proposals also retain the
 `nested-children-lowering-unqualified` limitation and advertise no root slot.
@@ -9710,3 +9711,51 @@ Evidence is retained in `private/nested-slot-source-20260922/`. To reverse,
 restore root-only source inference and its ownership join; preserve the named
 refusals and review fixture. Do not relabel nested flow as ordinary forwarding
 without implementing and verifying the complete source-owned structure.
+
+## D.127 Nested caller slots preserve their owned hosts
+
+**AGENT decision, 2026-09-22: compile a proved static host tree with one nested
+caller slot using the existing contract model.** Each owned host retains its
+element, paint, spacing, layout and supported declarations. Text-bearing hosts
+keep a wrapper rather than collapsing into a native text node. Only content
+inside the source-proved receiving host is removed from the reusable dependency;
+the composing contract supplies that content to the native slot.
+
+The receiving host is an ordinary contract slot with an explicit `element`.
+Both React emitters already render this wrapper, and the native emitter applies
+its styling to the SLOT. Validation now permits bounded `declared` facts on
+such explicit hosts. Unnamed insertion points and component instances retain
+their existing styling refusal; declaration grammars and channel-collision
+checks remain unchanged. No new schema field or emitter convention is needed.
+
+Style inspection captures every source-owned host after the ownership join
+proves its path. Each width and height needs an authored fixed-size or auto
+observation; fixed sizes must match the used value. Missing, ambiguous and
+unresolved facts refuse. Source-proved fill sizes remain refused pending a
+complete nested-context lowering. Caller style overrides and unresolved source
+variable identities also refuse. Fonts and SVG evidence are authenticated
+against the entire original tree before caller content is removed.
+
+Painted caller fonts do not redefine the empty reusable slot's CSS family.
+The caller retains its separately authenticated painted font. A review exposed
+and fixed a false dependency conflict caused by this distinction. Another
+review exposed fixed captions becoming orphaned caller controls when nested
+ownership rows were reordered. Hosts are now classified from outer to inner,
+then runtime-owned children reclaim their content. Repeated identical shells
+reuse one dependency without making their fixed captions caller properties.
+
+Regression checks exercise both React emitters, browser style-origin capture,
+real generated caller text edits, repeated nested shells in both ownership
+orders, and the generated native graph writer plus independent mock readback.
+The readback rejects changed caller text. These are implementation checks,
+not a live application/Figma journey or a visual-fidelity qualification.
+Root-only existing-main matching still refuses nested source slots. Unobserved
+property planes, dynamic structure, nested text templates, fill contexts and
+two-way updates of these shells remain unqualified.
+
+Evidence is retained in `private/nested-slot-lowering-20260922/`. To reverse,
+restore the caller generator's named nested-slot refusal, remove the nested
+child projector and additional host-style capture, and restore validation's
+non-root slot declaration restriction. Preserve the adversarial examples and
+the source-path evidence from D.126. Regenerate the plugin engine receipt after
+changing validation; do not rewrite historical native evidence.

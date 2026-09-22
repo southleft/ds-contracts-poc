@@ -101,10 +101,9 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     if (/^\d+(?:\.\d+)?px$/.test(tree.style.width)) result.observedWidth = Number.parseFloat(tree.style.width);
     const anatomy = linkReactSourceAnatomy(program, ownership, tree);
     if (anatomy.status !== 'linked' || anatomy.problems.length) throw Error('react-caller-source-correspondence-unavailable');
-    if (anatomy.instances.some(instance => instance.content === 'nested-caller-slot'))
-      throw Error('react-caller-nested-slot-lowering-unqualified');
     const labels = verifiedLabelAssociations(tree, input.labels);
-    const boundaries = ownership.components.flatMap(c => c.roots).filter(path => path !== '');
+    const boundaries = [...ownership.components.flatMap(c => c.roots),
+      ...anatomy.instances.flatMap(instance => instance.callerSlotPath ? [instance.callerSlotPath] : [])].filter(path => path !== '');
     const content = compileObservedContent(tree, fonts, svg, true, boundaries);
     if (content.status !== 'compiled-comparison-draft' || content.problems.length || !content.contract || !content.tokens || !content.sourcePaths || content.component?.variants.length !== 1)
       throw Error('react-caller-content-unavailable');
@@ -114,6 +113,7 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     contract.description = 'Source-owned nested components and caller relationships at the observed context; wider API and native qualification remain pending.';
     const parts = new Map(walkAnatomy(contract).map(w => [w.name, w.part]));
     const partAt = (path: string): Part => {
+      if (path === '') return contract.anatomy.root;
       const matches = content.sourcePaths!.filter(p => p.sourcePath === path);
       if (matches.length !== 1 || !parts.has(matches[0].partName)) throw Error('react-caller-compiler-correspondence-unavailable:' + path);
       return parts.get(matches[0].partName)!;
@@ -143,6 +143,14 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     // private anatomy; keep the public text field in the composing contract.
     const ownedParts = new Set<Part>();
     const own = (part: Part) => { ownedParts.add(part); Object.values(part.parts ?? {}).forEach(own); };
+    const unown = (part: Part) => { ownedParts.delete(part); Object.values(part.parts ?? {}).forEach(unown); };
+    // Outer slots expose caller content before deeper components reclaim their
+    // own static hosts. Observation enumeration order is not ownership order.
+    for (const child of anatomy.instances.filter(c => c.content === 'nested-caller-slot')
+      .sort((a,b)=>a.roots[0].path.split('.').length-b.roots[0].path.split('.').length || a.roots[0].path.localeCompare(b.roots[0].path))) {
+      own(partAt(child.roots[0].path));
+      unown(partAt(child.callerSlotPath!));
+    }
     for (const child of anatomy.instances.filter(c => c.content === 'authored-or-runtime'))
       for (const root of child.roots) own(partAt(root.path));
     // The content compiler has already resolved CSS aliases against the
@@ -234,11 +242,13 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
       if (contexts.has(dependency.id) && (!same(contexts.get(dependency.id)!.tokens, childTokens) || !same([...contexts.get(dependency.id)!.assets], childAssets)))
         throw Error('react-caller-dependency-context-conflict');
       contexts.set(dependency.id, context);
-      const callerParts = target.parts;
-      if (child.content === 'caller-slot' && (target.content || target.text !== undefined)) throw Error('react-caller-content-box-unqualified');
+      const callerTarget = child.content === 'nested-caller-slot' ? partAt(child.callerSlotPath!) : target;
+      const callerParts = callerTarget.parts;
+      const callerSlot = child.content === 'caller-slot' || child.content === 'nested-caller-slot';
+      if (callerSlot && (callerTarget.content || callerTarget.text !== undefined)) throw Error('react-caller-content-box-unqualified');
       for (const key of Object.keys(target)) delete (target as Record<string, unknown>)[key];
       target.component = ref;
-      if (child.content === 'caller-slot') target.parts = callerParts ?? {};
+      if (callerSlot) target.parts = callerParts ?? {};
       result.children.push({ instanceId: child.instanceId, sourcePath, exportName: child.source.exportName, contractId: dependency.id, behavior: child.content === 'authored-or-runtime' });
     }
     if (result.identities.some(id => !result.children.some(child => child.sourcePath === id.sourcePath))) throw Error('react-caller-label-control-not-generated');

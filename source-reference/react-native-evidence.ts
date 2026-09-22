@@ -88,7 +88,7 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
     if(!inspection || inspection.report.phase!=='complete' || !inspection.report.sourceUnchanged ||
         inspection.report.gridConstraints?.status!=='observed') return fail();
     context={gridConstraints:inspection.report.gridConstraints};
-    if(linkReactSourceAnatomy(program,row.ownership!,captured.tree).instances.find(i=>i.instanceId===request.selection!.instanceId)?.content==='authored-or-runtime') {
+    if(['authored-or-runtime','nested-caller-slot'].includes(linkReactSourceAnatomy(program,row.ownership!,captured.tree).instances.find(i=>i.instanceId===request.selection!.instanceId)?.content??'')) {
       const contentDir=path.join(repoRoot,'private/react-content-inspections',pin.operationId,pin.id);
       ownedEvidence={fonts:JSON.parse(readFileSync(path.join(contentDir,'text-fonts.json'),'utf8')),
         svg:JSON.parse(readFileSync(path.join(contentDir,'svg-viewports.json'),'utf8'))};

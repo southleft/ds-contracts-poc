@@ -1,10 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {readReactSourceProgram} from './react-source-program.js';
 import {deriveReactChildRoot} from './react-child-root.js';
+import {deriveReactNestedChild} from './react-nested-child.js';
+import {walkAnatomy} from '../scripts/contract-schema.js';
 import {prepareReactNativePlan} from './react-native-plan.js';
 import {revisionOf} from '../core/contract-provenance.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
@@ -38,6 +40,70 @@ function fixture(t:test.TestContext){
  const run=(o=ownership,s=origin,e=evidence)=>deriveReactChildRoot(program,o,tree,s,'toggle',undefined,e);
  return{program,ownership,tree,origin,evidence,run,source};
 }
+
+test('nested source hosts retain paint, size and wrappers while the main excludes caller text',t=>{
+ const f=fixture(t),file=Object.keys(f.program.files).find(p=>p.endsWith('/surface.tsx'))!;
+ writeFileSync(file,readFileSync(file,'utf8').replace('export function Toggle(props:{checked?:boolean;id?:string}){return <button><span/></button>}',
+  'export function Toggle({children}:{children?:string}){return <button><span>{children}</span></button>}'));
+ const program=readReactSourceProgram(path.dirname(file),['surface.tsx']);assert.deepEqual(program.problems,[]);
+ const ownership=structuredClone(f.ownership);
+ for(const instance of ownership.components){const c=program.components.find(c=>c.exportName===instance.source.exportName)!;
+  instance.source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};}
+ ownership.components[1].props={children:'Sample caller text'};
+ const tree=structuredClone(f.tree),root=(tree.nodes[0] as {t:'el';el:CapturedNode}).el;
+ const body=(root.nodes[0] as {t:'el';el:CapturedNode}).el;
+ body.style={...body.style,display:'flex','flex-direction':'column','font-family':'Inter','font-size':'14px','font-weight':'400','font-style':'normal','line-height':'20px','white-space-collapse':'collapse'};
+ body.nodes=[{t:'text',v:'Sample caller text'}];
+ const origin=structuredClone(f.origin);origin.roots.push({path:'0.0',tag:'span',channels:[],sizes:['width','height'].map(channel=>({channel:channel as 'width'|'height',status:'fixed',value:'8px',selectors:['.body']}))});
+ const evidence:ReactOwnedChildEvidence={fonts:{version:1,status:'observed',treeRevision:revisionOf(tree),problems:[],rows:[
+  {path:[0,0],text:'Sample caller text',cssFamily:'Inter',cssWeight:'400',cssStyle:'normal',fonts:[{familyName:'Inter',postScriptName:'Inter-Regular',isCustomFont:true,glyphCount:18}]}]},
+  svg:{version:1,status:'observed',treeRevision:revisionOf(tree),problems:[],rows:[]}};
+ const before=structuredClone({program,ownership,tree,origin,evidence});
+ const result=deriveReactNestedChild(program,ownership,tree,origin,'toggle',evidence);
+ assert.equal(result.draft.status,'native-compiled');assert.equal(result.nestedSlot.sourcePath,'0.0');
+ const part=walkAnatomy(result.draft.contract!).find(p=>p.part.slot)?.part;
+ assert.equal(part?.slot?.name,'children');assert.equal(part?.element,'span');
+ assert.equal(JSON.stringify(result.draft.contract).includes('Sample caller text'),false);
+ const spec=result.draft.native!.variants[0].spec,slot=spec.children![0];
+ assert.equal(slot.type,'slot');assert.equal(slot.slotProperty,'Children');
+ assert.equal(slot.layout?.mode,'VERTICAL');assert.ok(slot.fill||slot.bindings?.fills,'the slot retains its own paint');
+ assert.ok(spec.fill||spec.bindings?.fills,'the outer host retains its own paint');
+ assert.ok(slot.fixedWidth||slot.lits?.width,'the slot retains its authored size');
+ assert.deepEqual(result,deriveReactNestedChild(program,ownership,tree,origin,'toggle',evidence));
+ assert.deepEqual({program,ownership,tree,origin,evidence},before);
+ const missing=structuredClone(origin);missing.roots.pop();assert.throws(()=>deriveReactNestedChild(program,ownership,tree,missing,'toggle',evidence),/style-origin-required/);
+ const wrong=structuredClone(origin);wrong.roots[1].sizes![0].value='9px';assert.throws(()=>deriveReactNestedChild(program,ownership,tree,wrong,'toggle',evidence),/size-observation-mismatch/);
+ for(const status of ['fill','unresolved','unknown']){
+  const altered=structuredClone(origin);altered.roots[1].sizes![0].status=status as 'auto';
+  assert.throws(()=>deriveReactNestedChild(program,ownership,tree,altered,'toggle',evidence),/react-nested-child-(fill-context|size)-unqualified/);
+ }
+ const duplicated=structuredClone(origin);duplicated.roots.push(structuredClone(duplicated.roots[1]));
+ assert.throws(()=>deriveReactNestedChild(program,ownership,tree,duplicated,'toggle',evidence),/style-origin-required/);
+ const styled=structuredClone(ownership);styled.components[1].props.className='caller-override';
+ assert.throws(()=>deriveReactNestedChild(program,styled,tree,origin,'toggle',evidence),/caller-style-unqualified/);
+ for(const key of ['fonts','svg'] as const){const stale=structuredClone(evidence);stale[key].treeRevision=revisionOf('stale');
+  assert.throws(()=>deriveReactNestedChild(program,ownership,tree,origin,'toggle',stale));}
+ const changedTree=structuredClone(tree),changedOwnership=structuredClone(ownership),changedEvidence=structuredClone(evidence);
+ const changedBody=((changedTree.nodes[0] as {t:'el';el:CapturedNode}).el.nodes[0] as {t:'el';el:CapturedNode}).el;
+ changedBody.nodes=[{t:'text',v:'Different caller'}];changedOwnership.components[1].props.children='Different caller';
+ changedEvidence.fonts.treeRevision=revisionOf(changedTree);changedEvidence.svg.treeRevision=revisionOf(changedTree);
+ changedEvidence.fonts.rows[0].text='Different caller';changedEvidence.fonts.rows[0].fonts[0].glyphCount=16;
+ const changed=deriveReactNestedChild(program,changedOwnership,changedTree,origin,'toggle',changedEvidence);
+ assert.deepEqual(changed.draft.contract,result.draft.contract,'changing caller text cannot change its reusable dependency');
+ assert.deepEqual(changed.draft.tokens,result.draft.tokens);
+ const boundTree=structuredClone(tree),boundOrigin=structuredClone(origin),boundEvidence=structuredClone(evidence);
+ const boundBody=((boundTree.nodes[0] as {t:'el';el:CapturedNode}).el.nodes[0] as {t:'el';el:CapturedNode}).el;
+ boundBody.style['--accent']='rgb(255, 255, 255)';boundBody.style['background-color']='rgb(255, 255, 255)';
+ boundOrigin.roots[1].channels=[{...boundOrigin.roots[0].channels[0],selectors:['.body']}];
+ boundEvidence.fonts.treeRevision=revisionOf(boundTree);boundEvidence.svg.treeRevision=revisionOf(boundTree);
+ const bound=deriveReactNestedChild(program,ownership,boundTree,boundOrigin,'toggle',boundEvidence);
+ const tokenPath='source.css.v'+Buffer.from('--accent').toString('hex');
+ assert.deepEqual(bound.draft.sourceBindings!.filter(b=>b.variable==='--accent').map(b=>b.tokenPath),[tokenPath,tokenPath]);
+ const named=(bound.draft.tokens!.source as {css:Record<string,{$extensions:Record<string,{selectors:string[]}>}>}).css;
+ assert.deepEqual(Object.values(named)[0].$extensions['dev.ds-contracts.css-source'].selectors,['.body','.toggle']);
+ const conflict=structuredClone(boundOrigin);conflict.roots[1].channels[0].rawValue='rgb(0, 0, 0)';
+ assert.throws(()=>deriveReactNestedChild(program,ownership,boundTree,conflict,'toggle',boundEvidence),/source-binding-unresolved/);
+});
 test('owned child carries its exact observed content, held inputs, authored size and root variable into the native plan',t=>{
  const f=fixture(t),child=f.run();
  assert.equal(child.contentMode,'source-owned');assert.deepEqual(child.heldProps,{checked:true,id:'chosen'});
