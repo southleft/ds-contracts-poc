@@ -6995,6 +6995,9 @@ when both props referenced the same array. The reader now reports
 non-primitive sibling binding. Other parameters that may alias the children or
 props container receive the same check. Passing a secondary binding directly
 as the returned element's `ref` remains allowed; executing it does not.
+The check also covers children forwarded within a destructured rest object:
+copying the props container leaves a mutable children value shared. Resolving
+the declared children property keeps primitive-only rest children supported.
 The reader deliberately does not infer purity for other uses. Unused siblings,
 primitive-only children and primitive-only siblings retain their existing proof;
 binding identity keeps unrelated shadowed names separate. Readonly TypeScript

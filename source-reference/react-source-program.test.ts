@@ -304,6 +304,10 @@ export function Unknown({children,mirror}:{children:string[];mirror:unknown}){(m
 export function Any({children,mirror}:{children:string[];mirror:any}){mirror.pop();return <div>{children}</div>;}
 export function Readonly({children,mirror}:{children:readonly string[];mirror:string[]}){mirror.pop();return <div>{children}</div>;}
 export function Union({children,mirror}:{children:string|string[];mirror:string[]|undefined}){mirror?.pop();return <div>{children}</div>;}
+export function RestAliased({mirror,...rest}:API){mirror.pop();return <div {...rest}/>;}
+export function RestDefaulted({mirror,x=mirror.pop(),...rest}:API&{x?:string}){return <div {...rest}/>;}
+export function RestUnused({mirror,...rest}:API){return <div {...rest}/>;}
+export function RestPrimitive({mirror,...rest}:{children:string;mirror:string[]}){mirror.pop();return <div {...rest}/>;}
 export function Unused({children,mirror}:API){return <div>{children}</div>;}
 export function PrimitiveChild({children,mirror}:{children:string;mirror:string[]}){mirror.pop();return <div>{children}</div>;}
 export function PrimitiveSibling({children,label,count,enabled}:{children:string[];label:string|null;count?:number;enabled:boolean}){const text=label?.toUpperCase()+String(count)+String(enabled);return <div title={text}>{children}</div>;}
@@ -327,6 +331,8 @@ export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>m
       "Any",
       "Readonly",
       "Union",
+      "RestAliased",
+      "RestDefaulted",
     ])
       assert.deepEqual(
         fact(name),
@@ -335,6 +341,8 @@ export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>m
       );
     for (const name of [
       "Unused",
+      "RestUnused",
+      "RestPrimitive",
       "PrimitiveChild",
       "PrimitiveSibling",
       "Shadowed",
