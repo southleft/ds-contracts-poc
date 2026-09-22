@@ -91,7 +91,10 @@ function templateMatch(plan:NativeTemplateAppUpdatePlan,raw:unknown) {
   const key=canonicalJson([plan.template,raw]),saved=matches.get(key);
   if(saved)return structuredClone(saved);
   const result=matchNativeTemplateUpdateObservation(templateUpdateInput(plan),raw);
-  if(matches.size>=4)matches.delete(matches.keys().next().value!);
+  // A correction history revisits both forward and reverse observations.
+  // Four entries evict still-needed matches during an ordinary history read;
+  // retain a bounded working set without caching any source/write authority.
+  if(matches.size>=16)matches.delete(matches.keys().next().value!);
   matches.set(key,structuredClone(result));return result;
 }
 export function nativeAppUpdateMatches(plan:NativeAppUpdatePlan,raw:unknown,complete=false) {
