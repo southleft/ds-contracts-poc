@@ -9317,12 +9317,18 @@ native text editability. A subsequent app-dispatched combined update
 completed its independent read. It covers both the original caller and the
 new one: all 302 main records, 100 main images, both caller records and images,
 and 180 prior evidence files remain unchanged. With the companion closed, the
-restored `New` text was inspected on the unobstructed canvas. The app's history
-view was still displaying an older pending response while its expensive read
-completed; that display and the next real source update across both callers,
-unchanged repeat and recovery remain to be verified. Private evidence is
-`private/native-template-app-integration-20260921/combined-callers-verified-v1.json`
-and `combined-callers-canvas-v1.json`.
+restored `New` text was inspected on the unobstructed canvas. After a restart,
+the app visibly reports the combined correction as verified for current inputs
+and both callers. The newer caller's creation row still reports unavailable
+source evidence after its birth update becomes historical; its current
+readback is carried by the combined correction. The next real source update
+across both callers and broader recovery remain to be verified. An unchanged
+compiler review through the app now reuses this verified correction and leaves
+all 1,535 retained journal files unchanged, with no new proposal, operation or
+native write. Private evidence is
+`private/native-template-app-integration-20260921/combined-callers-verified-v1.json`,
+`combined-callers-canvas-v1.json`, `combined-callers-app-v1.json` and
+`combined-repeat-verified-v1.json`.
 
 The app reports 49.92 px source versus 51.02 px native width. The combined no-op
 does not qualify fidelity, the subsequent update lifecycle or V1.
@@ -9351,8 +9357,16 @@ A local nine-sample comparison of the same saved values reduced the median
 complete revision calculation from 73.77 to 33.80 ms for the 1.80 MB caller
 plan and from 84.55 to 40.33 ms for the 2.07 MB combined update input. These
 are isolated measurements, not an application latency result or V1 evidence.
-The live application has not yet adopted this candidate. Private evidence is
-under `private/post-update-callers-20260922/native-hash-*`.
+The local application subsequently adopted the candidate with an official
+engine rebuild. A read-only service-handler comparison over the same 1,535
+retained journal files returned byte-identical 166,152-byte responses and left
+the journals unchanged. The first warm read fell from 115.48 to 84.65 seconds
+(26.7%). The before cold sample overlapped server shutdown, and the second
+before warm sample briefly overlapped another check; neither is used for that
+comparison. This sequential measurement is not a browser latency study, and
+an approximately 85-second history read remains a product performance gap.
+Private evidence is under `private/post-update-callers-20260922/native-hash-*`
+and `private/native-template-app-integration-20260921/native-hash-list-*-v1.json`.
 
 To reverse, remove the optional native branch and keep the existing portable
 SHA-256 implementation. Every historical revision and generated program must
