@@ -158,6 +158,13 @@ independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
 they are not the current returned-package result.
 
+The app now also creates a new caller after a verified source update and
+independently verifies its link to the retained main, native slot and text.
+Native text editing and visible restoration were demonstrated. The next
+combined update must include both callers and independently confirm the
+restored instance; that lifecycle remains unfinished. The new comparison
+still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
+
 A separate foundation plans template token changes and verifies current
 component values while retaining the original allocated identities. An
 engineering writer now rechecks the complete component and document-wide
