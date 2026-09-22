@@ -28,6 +28,14 @@ export interface NativeContractComparisonReference {
 export interface NativeContractComparisonInput {
   parent: NativeContractObservationInput;
   receipt: NativeSourceReadback;
+  /** Host-authenticated current source after a verified template update.
+   * The retained main keeps its historical source projection. This proof is
+   * re-derived by the host; it is never accepted from a caller HTTP payload. */
+  sourceSuccession?: {
+    proposalId: string;
+    observationRevision: string;
+    source: NativeContractDraftSource;
+  };
   caseId: string;
   variantName: string;
   slotSpecPath: number[];
@@ -55,9 +63,19 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   input: NativeContractComparisonInput, sourceTokens?: Record<string, unknown>) {
   const fail = (code: string): never => { throw Error('native-contract-comparison-' + code); };
   const revision = /^sha256:[a-f0-9]{64}$/;
+  const succession = input.sourceSuccession;
+  if (succession !== undefined) {
+    const receipt = structuredClone(input.receipt); delete receipt.images;
+    if (!succession || Object.keys(succession).sort().join(',') !== 'observationRevision,proposalId,source' ||
+        typeof succession.proposalId !== 'string' || !/^[a-f0-9]{64}$/.test(succession.proposalId) ||
+        succession.observationRevision !== revisionOf({ input: input.parent, receipt }) ||
+        canonicalJson(succession.source) !== canonicalJson(source) ||
+        !input.parent.templateGraph || !input.parent.projection.rootTextTemplate || !input.rootText || input.instances?.length)
+      fail('source-succession-unverified');
+  }
   if (!revision.test(source.revision) || !revision.test(source.evidenceRevision) ||
       !/^[a-f0-9]{64}$/.test(source.programSha256) || !revision.test(tokenRevision) ||
-      source.revision !== input.parent.projection.source.revision || source.programSha256 !== input.parent.projection.source.programSha256 ||
+      (!succession && (source.revision !== input.parent.projection.source.revision || source.programSha256 !== input.parent.projection.source.programSha256)) ||
       context.mode !== input.parent.projection.context.mode || context.brand !== input.parent.projection.context.brand)
     fail('source-changed');
   if (!input.caseId || input.caseId.length > 160 || verifyNativeContractReadback(input.parent, input.receipt).status !== 'supported-structure-observed')
@@ -283,6 +301,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   }
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
+    ...(succession ? { sourceSuccession: structuredClone(succession) } : {}),
     caseId: input.caseId, ...selected, ...(contentRows ? { contentRows } : {}), variantName: input.variantName,
     slotSpecPath: [...input.slotSpecPath], ...(input.instanceWidth !== undefined ? {instanceWidth:input.instanceWidth} : {}),
     ...(input.containerWidth !== undefined ? {containerWidth:input.containerWidth} : {}),

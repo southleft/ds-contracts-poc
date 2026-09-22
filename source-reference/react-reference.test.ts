@@ -291,6 +291,52 @@ test("reference API retains all ten cases, isolates source execution and refuses
 });
 
 
+test("native progress HTTP reads cannot expose verification authority, recompile source or mutate delivery", async t => {
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-progress-route-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const parent='10000000-0000-4000-8000-000000000008',proposal='a'.repeat(64);
+  let referenceId='',heavyReads=0,progressReads=0,refusal='';
+  let state:{phase:string;pendingPhase?:string}={phase:'update-preflight-observed'};
+  const heavy=()=>{heavyReads++;throw Error('full verification must not run during progress');};
+  const progress=()=>{progressReads++;if(refusal)throw Error(refusal);return state;};
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],get:heavy,
+    withReadSnapshot:(read:()=>unknown)=>read(),
+    reactIdentity:(id:string)=>{if(id!==parent)throw Error('native-operation-unavailable');return {referenceId};},
+    deliveryState:(id:string)=>{assert.equal(id,parent);return progress();}},
+    transport:{status:heavy,pair:heavy,start:heavy},updateJobs:{forProposal:heavy,get:heavy,prepare:heavy,
+      deliveryStateForProposal:(p:string,id:string)=>{assert.equal(p,parent);if(id!==proposal)throw Error('native-update-unavailable');return progress();}}
+  } as any));
+  const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>server.close());
+  const base=`http://127.0.0.1:${(server.address() as {port:number}).port}`;
+  referenceId=(await (await fetch(base+'/react',{method:'POST'})).json()).id;
+  const rootRoute=`${base}/react/${referenceId}/native-operation/${parent}/progress`;
+  const updateRoute=`${base}/react/${referenceId}/native-operation/${parent}/update/${proposal}/progress`;
+  for(const route of [rootRoute,updateRoute]) {
+    for(const phase of ['prepared','tokens-created','tokens-observed','components-created','comparison-repair-observed','comparison-recovery-observed','update-prepared','update-preflight-observed','update-applied']) {
+      state={phase};const response=await fetch(route);
+      assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+      assert.deepEqual(await response.json(),{pending:true});
+    }
+    state={phase:'update-verified'};assert.deepEqual(await (await fetch(route)).json(),{pending:false});
+    state={phase:'update-verified',pendingPhase:'update-readback'};
+    assert.deepEqual(await (await fetch(route)).json(),{pending:true});
+    state={phase:'update-refused'};assert.deepEqual(await (await fetch(route)).json(),{pending:false});
+    const before=progressReads;
+    for(const method of ['POST','PUT','DELETE']) assert.equal((await fetch(route,{method})).status,409);
+    assert.equal(progressReads,before,'non-GET requests never reach the journal');
+  }
+  refusal='native-update-journal-chain-invalid';
+  const damaged=await fetch(updateRoute);assert.equal(damaged.status,409);
+  assert.equal((await damaged.json()).reason,refusal);
+  refusal='';
+  assert.equal((await fetch(updateRoute.replace(proposal,'b'.repeat(64)))).status,409);
+  assert.equal((await fetch(rootRoute.replace(parent,'20000000-0000-4000-8000-000000000009'))).status,409);
+  const before=progressReads;referenceId='c'.repeat(64);
+  assert.equal((await fetch(rootRoute)).status,409);assert.equal((await fetch(updateRoute)).status,409);
+  assert.equal(progressReads,before);assert.equal(heavyReads,0);
+});
+
 test("update image HTTP delivery uses the checked archive without a current-source snapshot", async t => {
   const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-image-route-'));
   t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
@@ -323,7 +369,8 @@ test("attest-dead is a bodiless POST that reaches only the update transport, and
   const parent='10000000-0000-4000-8000-000000000008',proposal='a'.repeat(64),update='20000000-0000-4000-8000-000000000009';
   let referenceId='',refusal:string|undefined;const calls:string[]=[];
   const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],listReactMoved:()=>[],withReadSnapshot:(f:()=>unknown)=>f(),reactIdentity:()=>({referenceId})},transport:{},
-    updateJobs:{forProposal:(p:string,id:string)=>{assert.equal(p,parent);assert.equal(id,proposal);return {id:update};},prepare:()=>{throw Error('must not prepare');}},
+    updateJobs:{idForProposal:(p:string,id:string)=>{assert.equal(p,parent);assert.equal(id,proposal);return update;},
+      forProposal:()=>{throw Error('must not compute a display result to identify an action');},prepare:()=>{throw Error('must not prepare');}},
     updateTransport:{attestDead:(id:string)=>{calls.push(id);if(refusal)throw Error(refusal);},
       resolveWriteOutcome:()=>{throw Error('must not settle');},rearmWrite:()=>{throw Error('must not rearm');}}} as any));
   const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});

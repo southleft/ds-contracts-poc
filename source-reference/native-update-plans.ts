@@ -9,6 +9,7 @@ import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import {prepareNativeAppUpdate as prepareNativeContractUpdate, nativeAppUpdateMatches as nativeContractUpdateMatches, nativeAppUpdateAfter as nativeContractUpdateAfter, nativeAppUpdateMainReadback, nativeAppUpdateConsumersAfter, templateUpdateInput, prepareNativeTemplateAppUpdate, type NativeAppUpdateInput as NativeContractUpdateInput} from './native-app-update.js';
 import type {createNativeOperationJobs} from './native-operation-jobs.js';
 import type {NativeTemplateConsumerInput} from '../core/native-template-value-consumers.js';
+import type {ReactComparisonBirth} from './react-comparison-request.js';
 type ConsumerPin={operationId:string;journalRevision:string};
 type TemplateInventory=ReturnType<ReturnType<typeof createNativeOperationJobs>['reactTemplateConsumerBaselines']>;
 type Derived={parentJournalRevision:string;input:NativeContractUpdateInput;templateInventory?:TemplateInventory};
@@ -21,10 +22,10 @@ export interface NativeUpdateHistoryEntry {
   receipt?: unknown;
 }
 export function createNativeUpdatePlans(repo: string,
-  derive: (parentId: string, parentJournalRevision?: string, consumerPins?:ConsumerPin[]) => Derived,
+  derive: (parentId: string, parentJournalRevision?: string, consumerPins?:ConsumerPin[], birth?:ReactComparisonBirth) => Derived,
   history?: (parentId: string) => NativeUpdateHistoryEntry[],
   currentParentRevision?: (parentId: string) => string,
-  currentTemplateRevision?: (parentId:string,pins:ConsumerPin[])=>string) {
+  currentTemplateInventory?: (parentId:string,pins:ConsumerPin[],birth?:ReactComparisonBirth)=>Pick<TemplateInventory,'currentRevision'|'consumers'>) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
   const displayScope = 'native-update-plans:' + randomUUID();
   function directory(parentId: string, create = false) {
@@ -84,7 +85,7 @@ export function createNativeUpdatePlans(repo: string,
     }
     return {predecessor,before,baseline,templateConsumers:callers(),consumerPins:source.templateInventory?pins():undefined};
   };
-  const compile = (parentId: string, self?: string): Record => {
+  const compile = (parentId: string, self?: string, birth?:ReactComparisonBirth): Record => {
     const written = history?.(parentId) ?? [];
     const roots = written.map(entry => read(parentId,entry.proposalId)).filter(record => !record.predecessor);
     if (written.length && roots.length !== 1) throw Error('native-update-history-branch-or-gap');
@@ -95,7 +96,7 @@ export function createNativeUpdatePlans(repo: string,
       if(selectedPins.has(pin.operationId)&&!same(selectedPins.get(pin.operationId),pin))throw Error('native-update-template-consumer-history-changed');
       selectedPins.set(pin.operationId,pin);
     }
-    const source = derive(parentId, roots[0]?.parentJournalRevision,[...selectedPins.values()].sort((a,b)=>a.operationId.localeCompare(b.operationId)));
+    const source = derive(parentId, roots[0]?.parentJournalRevision,[...selectedPins.values()].sort((a,b)=>a.operationId.localeCompare(b.operationId)),birth);
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
     const tip=chain(parentId,source,written,self);
     const savedSelf=self&&written.some(e=>e.proposalId===self)?read(parentId,self):undefined;
@@ -168,7 +169,11 @@ export function createNativeUpdatePlans(repo: string,
         // Allocation establishes IDs, not component agreement. Even when the
         // following review finds no property changes, settle its own no-op
         // correction before offering design repair.
+        // A caller added after the previous write was never covered by that
+        // reader. Even with no value changes, settle a new combined proposal
+        // containing the complete current inventory before reusing authority.
         if(previous.update.plan.kind!=='native-contract-token-allocation-update' &&
+          same(record.consumerPins?.map(p=>p.operationId),previous.consumerPins?.map(p=>p.operationId)) &&
           same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
       }
       const id=recordId(record),dir=directory(parentId,true)!;
@@ -190,20 +195,23 @@ export function createNativeUpdatePlans(repo: string,
       return readdirSync(dir).filter(f=>/^[a-f0-9]{64}\.json$/.test(f)).sort().map(f=>view(read(parentId,f.slice(0,-5))));
       });
     },
-    current(parentId: string,id: string) {
-      return evidenceReadOnce(displayScope + ':current', {parentId,id}, () => {
+    current(parentId: string,id: string,birth?:ReactComparisonBirth) {
+      return evidenceReadOnce(displayScope + ':current', {parentId,id,birth}, () => {
         const record=read(parentId,id);
-        if(canonicalJson(compile(parentId,id))!==canonicalJson(record)) throw Error('native-update-input-changed');
+        if(canonicalJson(compile(parentId,id,birth))!==canonicalJson(record)) throw Error('native-update-input-changed');
         return structuredClone(record);
       });
     },
     saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
-    observationContext(parentId: string, id: string) {
+    observationContext(parentId: string, id: string,birth?:ReactComparisonBirth) {
       const record=read(parentId,id),baselineRevision=record.parentJournalRevision;
       const currentRevision=currentParentRevision?.(parentId) ?? baselineRevision;
       if (!HASH.test(currentRevision)) throw Error('native-update-parent-journal-invalid');
-      if(record.version===2&&!currentTemplateRevision)throw Error('native-update-template-context-unavailable');
-      const templateCurrentRevision=record.version===2?currentTemplateRevision!(parentId,record.consumerPins!):undefined;
+      if(record.version===2&&!currentTemplateInventory)throw Error('native-update-template-context-unavailable');
+      const inventory=record.version===2?currentTemplateInventory!(parentId,record.consumerPins!,birth):undefined;
+      if(inventory&&!same(inventory.consumers.map(c=>c.operationId),record.consumerPins!.map(p=>p.operationId)))
+        throw Error('native-update-template-consumer-inventory-refresh-required');
+      const templateCurrentRevision=inventory?.currentRevision;
       if(templateCurrentRevision!==undefined&&!/^sha256:[a-f0-9]{64}$/.test(templateCurrentRevision))throw Error('native-update-template-context-invalid');
       return {baselineRevision,currentRevision,...(record.version===2?{
         templateBaselineRevision:record.templateContextRevision,

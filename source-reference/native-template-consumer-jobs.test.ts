@@ -5,10 +5,13 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
-import { nativeTextGraphFixture, nativeTextBindings, nativeTextNodeBindings } from '../core/native-text-template-test-fixture.js';
+import { nativeTextGraphFixture, nativeTextBindings, nativeTextNodeBindings, nativeNodePaintBindings } from '../core/native-text-template-test-fixture.js';
 import { nativeFixtureHost } from './native-operation-test-fixture.js';
 import { createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationPhase, type NativeOperationJobsOptions } from './native-operation-jobs.js';
-import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
+import { prepareReactNativePlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite } from './react-native-plan.js';
+import {createNativeUpdatePlans} from './native-update-plans.js';
+import {createNativeUpdateJobs} from './native-update-jobs.js';
+import {nativeAppUpdateDesired} from './native-app-update.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite, type ReactComparisonPlanInput } from './react-comparison-plan.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
@@ -21,11 +24,16 @@ async function fixture(t: test.TestContext) {
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const f = nativeTextGraphFixture(2, 2), host = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
   host.figma.fileKey = REACT_NATIVE_FILE_KEY; nativeTextBindings(host.figma);
+  host.figma.getNodeById=(id:string)=>host.figma.root.id===id?host.figma.root:host.figma.root.findOne((n:any)=>n.id===id);
+  host.figma.variables.getVariableById=(id:string)=>host.variables.find(v=>v.id===id)??null;
+  host.figma.variables.getVariableCollectionById=(id:string)=>host.collections.find(c=>c.id===id)??null;
+  host.figma.listAvailableFontsAsync=async()=>[{fontName:{family:'Inter',style:'Regular'}}];
+  Object.defineProperty(Object.getPrototypeOf(host.figma.currentPage),'mainComponent',{configurable:true,get(){return this._mainComponent??null;}});
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, m: string) {
     this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: m };
   };
   const engine = createFigmaEngine({ tokens: { primitives: f.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const source = { revision: revisionOf('journal source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('journal evidence') };
+  let source = { revision: revisionOf('journal source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('journal evidence') };
   const matrix: ReactRootMatrix = { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
     draft: { properties: ['size', 'ink'], status: 'native-compiled', contract: f.contract, tokens: f.tokens,
       native: engine.compileComponentData(f.contract, new Map([[f.contract.id, f.contract]])), problems: [], observations: [], lowerings: [], limitations: [] } };
@@ -33,9 +41,21 @@ async function fixture(t: test.TestContext) {
     ownership: { id: '10000000-0000-4000-8000-000000000099', sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
     caseId: 'template-main', matrixRevision: revisionOf(matrix) };
   const comparisons = new Map<string, Omit<ReactComparisonPlanInput, 'operation'>>();
+  const selectedRequests=new Map<string,ReactComparisonRequest>();
+  let updates:ReturnType<typeof createNativeUpdateJobs>,effective=request;
+  const comparisonEvidence=(selected:ReactComparisonRequest,operationId:string)=>{
+    const saved=comparisons.get(selected.root.caseId)!;
+    if(selected.version!==4)return saved;
+    assert.deepEqual(selected.mainRoot,effective,'new caller still authenticates the effective source');
+    const current=updates.verifiedForNewConsumer(selected.parentOperationId,operationId,selected.parentUpdate!);
+    return {...saved,comparison:{...saved.comparison,parent:current.input,receipt:current.receipt,
+      sourceSuccession:{...selected.parentUpdate!,source:saved.source}}};
+  };
   const options: NativeOperationJobsOptions = {
     prepare: () => { throw Error('legacy adapter must not run'); },
     react: {
+      effectiveSource:()=>effective,
+      updatedObservation:id=>updates.verifiedForParent(id),
       prepare: (_, operation) => ({ visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
         preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) }, plan: prepareReactNativePlan({ operation, source, matrix }) }),
       buildComponent: (_, context) => buildReactNativeComponentWrite({ operation: context.operation, source, matrix,
@@ -44,16 +64,25 @@ async function fixture(t: test.TestContext) {
     reactComparison: {
       prepare: (selected, operation) => ({ visual: { id: selected.content.id, reportSha256: selected.content.reportSha256 },
         preparation: { id: selected.content.id, reportSha256: selected.content.reportSha256 },
-        plan: prepareReactComparisonPlan({ ...comparisons.get(selected.root.caseId)!, operation }) }),
-      buildComponent: (selected, context) => buildReactComparisonWrite({ ...comparisons.get(selected.root.caseId)!, operation: context.operation,
+        plan: prepareReactComparisonPlan({ ...comparisonEvidence(selected,operation.id), operation }) }),
+      buildComponent: (selected, context) => buildReactComparisonWrite({ ...comparisonEvidence(selected,context.operation.id), operation: context.operation,
         expectedPlanRevision: context.planRevision, tokens: context.tokens }),
     },
   };
   let jobs = createNativeOperationJobs(repo, options);
+  const plans=createNativeUpdatePlans(repo,(id,revision,pins,birth)=>{
+    const baseline=jobs.reactUpdateBaseline(id,revision);
+    const desired=nativeAppUpdateDesired(prepareReactNativeCorrectionPlan({operation:baseline.input.operation,source,matrix}));
+    return {parentJournalRevision:baseline.journalRevision,templateInventory:jobs.reactTemplateConsumerBaselines(id,pins,birth),
+      input:{before:baseline.input,baseline:baseline.receipt,...desired}};
+  },id=>updates.updateHistory(id),id=>jobs.reactUpdateJournalRevision(id),(id,pins,birth)=>jobs.reactTemplateConsumerBaselines(id,pins,birth));
+  updates=createNativeUpdateJobs(repo,plans);
   const phase = async (id: string, p: NativeOperationPhase) => {
     const result = await host.run(jobs.dispatch(id, p));
-    if (p === 'component-create') for (const node of host.figma.root.findAll((n: any) => n.type === 'TEXT'))
-      nativeTextNodeBindings(node, id => host.variables.find(v => v.id === id));
+    if (p === 'component-create') for (const node of host.figma.root.findAll(()=>true)) {
+      if(node.type==='TEXT')nativeTextNodeBindings(node, id => host.variables.find(v => v.id === id));
+      nativeNodePaintBindings(node,id=>host.variables.find(v=>v.id===id));
+    }
     return jobs.accept(id, result);
   };
   const finish = async (id: string) => {
@@ -62,7 +91,7 @@ async function fixture(t: test.TestContext) {
   };
   const parentId = jobs.prepare(request).id; await finish(parentId);
   const prepareCaller = (caseId: string) => {
-    const parent = jobs.reactUpdateBaseline(parentId), contract = structuredClone(f.contract);
+    const parent = jobs.verifiedReactCallerObservation(parentId), contract = structuredClone(f.contract);
     contract.id = 'test.caller-' + caseId; contract.props = []; delete contract.anatomy.root.slot;
     for (const [key, value] of Object.entries(contract.anatomy.root.tokens!))
       contract.anatomy.root.tokens![key] = value.replace('{size}', 'v1').replace('{ink}', 'v1');
@@ -74,15 +103,80 @@ async function fixture(t: test.TestContext) {
       comparison: { parent: parent.input, receipt: parent.receipt, caseId,
         variantName: parent.input.component.variants.find(v => v.name.includes('Size=v1') && v.name.includes('Ink=v1'))!.name,
         slotSpecPath: [0], rootText: { version: 1, kind: 'direct-root-text', characters: 'Retained caller', contractRevision: revisionOf(contract), treeRevision } } });
-    const selected: ReactComparisonRequest = { version: 3, kind: 'react-content-comparison', parentOperationId: parentId,
-      root: { ...request, caseId }, mainRoot: request,
+    const selected: ReactComparisonRequest = { version: parent.parentUpdate?4:3,
+      ...(parent.parentUpdate?{parentUpdate:parent.parentUpdate}:{}),kind: 'react-content-comparison', parentOperationId: parentId,
+      root: { ...parent.request, caseId }, mainRoot: parent.request,
       content: { id: request.ownership.id, reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
-    return jobs.prepare(selected).id;
+    const id=jobs.prepare(selected).id;selectedRequests.set(id,selected);return id;
+  };
+  const finishUpdate=async(id:string)=>{
+    for(const phase of ['update-preflight-readback','update-apply','update-readback'] as const) {
+      const command=updates.dispatch(id,phase);
+      if(phase==='update-apply')updates.beginWrite(id,command.attemptId);
+      const result=updates.accept(id,await host.run(command));
+      assert.equal(result.problems.length,0,JSON.stringify(result));
+      updates=createNativeUpdateJobs(repo,plans);
+    }
+    assert.equal(updates.get(id).sourceCurrent,true,JSON.stringify(updates.get(id)));
   };
   return { repo, host, parentId, prepareCaller, finish, phase, jobs: () => jobs,
+    plans,updates:()=>updates,finishUpdate,requestFor:(id:string)=>structuredClone(selectedRequests.get(id)!),
+    evidenceFor:(id:string)=>structuredClone(comparisonEvidence(selectedRequests.get(id)!,id)),
+    forward:()=>{f.tokens.ink.v1.$value='#abcdef';source={revision:revisionOf('updated journal source'),programSha256:'f'.repeat(64),evidenceRevision:revisionOf('updated evidence')};effective={...request,referenceId:source.revision.slice(7),inventorySha256:'f'.repeat(64),matrixRevision:revisionOf(matrix)};},
     changeSource: () => { f.tokens.ink.v1.$value = '#abcdef'; },
-    restart: () => { jobs = createNativeOperationJobs(repo, options); } };
+    restart: () => { jobs = createNativeOperationJobs(repo, options); updates=createNativeUpdateJobs(repo,plans); } };
 }
+
+test('a caller born after a verified template update resumes against exact parent authority and joins the next combined read',async t=>{
+  const f=await fixture(t),first=f.prepareCaller('before');await f.finish(first);
+  f.forward();const proposal=f.plans.prepare(f.parentId),update=f.updates().prepare(f.parentId,proposal.id);
+  await f.finishUpdate(update.id);
+  const second=f.prepareCaller('after'),request=f.requestFor(second);
+  assert.equal(request.version,4);assert.equal(request.parentUpdate!.proposalId,proposal.id);
+  const evidence=f.evidenceFor(second),operation={id:second,fileKey:REACT_NATIVE_FILE_KEY};
+  const prepared=prepareReactComparisonPlan({...evidence,operation});
+  assert.notEqual(prepared.plan.comparison.projection.source.revision,prepared.plan.comparison.parent.projection.source.revision);
+  assert.equal(prepared.plan.comparison.projection.source.revision,evidence.source.revision);
+  assert.deepEqual(prepared.plan.comparison.sourceSuccession,evidence.comparison.sourceSuccession);
+  for(const mutate of [
+    (e:ReactComparisonPlanInput)=>{delete e.comparison.sourceSuccession;},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.source={...e.comparison.sourceSuccession!.source,programSha256:'0'.repeat(64)};},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.observationRevision=revisionOf('forged');},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.proposalId='invalid';},
+    (e:ReactComparisonPlanInput)=>{(e.comparison.sourceSuccession as any).unknown=true;},
+    (e:ReactComparisonPlanInput)=>{delete e.comparison.parent.templateGraph;},
+    (e:ReactComparisonPlanInput)=>{e.comparison.instances=[{} as any];},
+    (e:ReactComparisonPlanInput)=>{e.comparison.parent.component.variants[0].name+=' changed';},
+  ]) {
+    const changed=structuredClone({...evidence,operation});mutate(changed);
+    assert.throws(()=>prepareReactComparisonPlan(changed),/source-changed|source-succession-unverified/);
+  }
+  assert.equal(f.jobs().get(second).sourceCurrent,true);
+  assert.throws(()=>f.jobs().reactTemplateConsumerBaselines(f.parentId),/template-consumer-observation-required/);
+  assert.throws(()=>f.plans.prepare(f.parentId),/template-consumer-observation-required/);
+  assert.throws(()=>f.prepareCaller('unrelated'),/template-consumer-observation-required/);
+  const savedUpdate=f.updates().updateHistory(f.parentId);
+  assert.throws(()=>f.updates().retryObservation(update.id),/caller-context-unavailable-before-refresh/);
+  assert.deepEqual(f.updates().updateHistory(f.parentId),savedUpdate,'a parent refresh cannot strand the pending caller');
+  assert.throws(()=>f.updates().verifiedForNewConsumer(f.parentId,'10000000-0000-4000-8000-000000000080',request.parentUpdate!),/template-consumer-observation-required/);
+  assert.throws(()=>f.updates().verifiedForNewConsumer(f.parentId,first,request.parentUpdate!),/birth-invalid/);
+  assert.throws(()=>f.updates().verifiedForNewConsumer(f.parentId,second,{...request.parentUpdate!,observationRevision:revisionOf('forged')}),/birth-invalid|birth-parent-changed/);
+  await f.phase(second,'token-create');f.restart();
+  const event=path.join(f.repo,'private/source-native-app/operations',second,'events','00000000.json');
+  const bytes=readFileSync(event),corrupt=JSON.parse(bytes.toString());corrupt.previousSha256='0'.repeat(64);
+  writeFileSync(event,JSON.stringify(corrupt));
+  assert.throws(()=>f.updates().verifiedForNewConsumer(f.parentId,second,request.parentUpdate!),/journal-chain-invalid/);
+  writeFileSync(event,bytes);
+  assert.equal(f.jobs().prepare(request).id,second,'restart reuses the exact saved operation');
+  await f.phase(second,'token-readback');await f.phase(second,'component-create');f.restart();await f.phase(second,'component-readback');
+  assert.equal(f.jobs().get(second).phase,'component-structure-observed');
+  assert.equal(f.jobs().reactTemplateConsumerBaselines(f.parentId).consumers.length,2);
+  assert.throws(()=>f.updates().verifiedForParent(f.parentId),/consumer-inventory-refresh-required/);
+  const combined=f.plans.prepare(f.parentId);assert.equal(combined.templateCallerCount,2);assert.deepEqual(combined.templateValueChanges,[]);
+  await f.finishUpdate(f.updates().prepare(f.parentId,combined.id).id);
+  assert.equal(f.plans.prepare(f.parentId).id,combined.id);
+  assert.throws(()=>f.updates().verifiedForNewConsumer(f.parentId,second,request.parentUpdate!),/caller-birth-parent-changed/);
+});
 
 test('template callers come from complete current journals and survive manager restarts', async t => {
   const f = await fixture(t), inventory = () => f.jobs().reactTemplateConsumerBaselines(f.parentId);

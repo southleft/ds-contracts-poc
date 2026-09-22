@@ -9102,3 +9102,222 @@ To reverse, remove enum fields from the array schema, proposer, validator and
 emitter type projections together. Restore named refusal of unsupported
 per-item enum choices and preserve all comparison evidence. Do not strip
 existing enum fields from saved contracts without reporting the incompatibility.
+
+## D.113 A larger caller inventory needs a larger observation
+
+**AGENT decision, 2026-09-21.** A template update's independent reader covers
+exactly the caller operations recorded in its proposal. Adding another caller
+cannot make that old reader current for the larger inventory. A fresh caller
+journal revision for the same members may still be verified by another read;
+a change in membership requires a new proposal containing every current caller.
+When source values are unchanged, this successor performs no variable writes
+but still requires combined preflight and independent observation.
+
+A regression created and observed a second native caller against an updated
+parent using the production compiler and readers in the simulated native host.
+Before this guard, re-reading the original update incorrectly restored
+`sourceCurrent` even though its reader did not contain the new caller. The
+guard now refuses that authority with
+`native-update-template-consumer-inventory-refresh-required`. A new proposal
+includes both callers, verifies without another value assignment, survives
+journal restart, and carries both callers through the reverse update. A local
+edit on the added caller refuses its combined preflight before any write.
+Original proposals, programs and observations remain historical evidence.
+
+This is a host lifecycle regression proof, not a live application birth proof.
+The application still needs authenticated caller preparation after a source
+succession, safe creation and restart, and a visible combined verification.
+It does not qualify native pixels, arbitrary instances or full V1 recovery.
+Evidence: `source-reference/native-template-app-update.test.ts` and private
+`native-template-app-integration-20260921/caller-inventory-*.log`.
+
+To replace this rule, provide an independently verified reader that covers the
+entire new inventory with exact source, parent and caller pins. Preserve the
+old proposal and journal bytes. Removing the membership check or marking the
+old reader with a newer inventory revision is not an equivalent observation.
+
+## D.114 A new caller pins the verified parent update
+
+**AGENT decision, 2026-09-21.** New root-text callers after a source succession
+use a versioned request containing the effective source, the parent's latest
+verified update proposal and the exact parent observation revision. Their
+content inspection has its own source-derived scope. Historical requests and
+content pointers are retained. Existing cases reuse their saved operation;
+another source revision cannot silently replace that operation.
+
+During this caller's preparation and creation, only its own new journal may
+be excluded when reauthenticating the preceding parent update. That journal is
+still fully validated and must contain the matching versioned parent pin and
+compiled observation. Every other caller remains in the inventory. A forged
+pin, an unrelated pending caller, an already-recorded caller, changed source,
+or a superseded parent update cannot use this creation scope. Ordinary update
+planning and verification never exclude the new caller. After its independent
+observation, D.113 requires a combined successor covering the larger inventory.
+
+A verified parent read cannot be replaced while its caller inventory is
+unavailable: the pending caller still needs that evidence to finish. Reads for
+unknown-write recovery retain their existing path. The application reports
+`native-update-caller-context-unavailable-before-refresh` and leaves the
+verified journal intact until caller inspection is complete or recovered.
+
+The simulated native journal test covers creation after a color update,
+restart after token allocation, repeat operation selection, independent caller
+observation and the combined successor. It also probes forged pins, unknown
+and previously recorded caller IDs, a corrupt current caller event, competing
+caller preparation and parent refresh during creation. These are lifecycle
+tests, not evidence of live geometry, fidelity or complete V1 recovery. Live
+application qualification remains pending.
+
+To reverse this decision, stop admitting new version-4 comparison requests and
+retain every existing operation, program and observation as historical data.
+Do not reinterpret them as version-3 requests or relax normal inventory checks.
+An alternative must demonstrate creation, restart, conflicts and subsequent
+combined updates with the same complete evidence and immutable history.
+
+## D.115 Caller source succession preserves the main's original provenance
+
+**AGENT decision, 2026-09-21.** A live post-update caller preparation refused
+`native-contract-comparison-source-changed` before publishing an operation or
+issuing a native command. The current caller source had advanced, while the
+retained main correctly kept its original source projection. The first journal
+fixture changed token values and request pins without changing the source
+revision and program hash; advancing those too reproduces the live refusal.
+
+Version-4 callers now carry a separate source-succession record: the verified
+parent proposal, the hash of its exact input and independent observation, and
+the current caller source. The host authenticates the written update chain,
+effective source and complete caller inventory before deriving this record.
+The compiler checks its shape, source equality, exact parent observation and
+bounded root-text-template scope. The new caller records the current source;
+the retained main keeps its original projection. This record alone does not
+authenticate a proposal: only the host's verified update path grants authority.
+HTTP callers cannot supply it. Nested compositions remain outside this scope.
+
+The stronger journal regression covers changed source revision and program,
+creation, restart, independent observation and the next combined update. Missing
+or changed proof, mismatched source, altered parent, malformed proposal, unknown
+fields and unsupported scope refuse. The failed live run preserves all 161
+prior evidence files and creates no new caller operation.
+
+The application subsequently created caller `fda385a6…` against the verified
+updated source. Its independent read passed supported comparison structure:
+instance `103:4999` retains main `98:4808`, with a native slot and text layer.
+All 161 earlier evidence files stayed byte-identical. With the plugin closed,
+the canvas showed the blue caller; editing its text and restoring `New` showed
+native text editability. A subsequent app-dispatched combined update
+`89d54a3d…` passed preflight, returned a no-op with no variable assignments and
+completed its independent read. It covers both the original caller and the
+new one: all 302 main records, 100 main images, both caller records and images,
+and 180 prior evidence files remain unchanged. With the companion closed, the
+restored `New` text was inspected on the unobstructed canvas. After a restart,
+the app visibly reports the combined correction as verified for current inputs
+and both callers. The newer caller's creation row initially reported unavailable
+source evidence after its birth update became historical. Caller rows now name
+their current parent correction only when that settled, current, unsuperseded
+verification includes the caller. Original creation exports remain historical;
+image presence alone never establishes current verification. An unchanged
+compiler review through the app now reuses this verified correction and leaves
+all 1,535 retained journal files unchanged, with no new proposal, operation or
+native write. Private evidence is
+`private/native-template-app-integration-20260921/combined-callers-verified-v1.json`,
+`combined-callers-canvas-v1.json`, `combined-callers-app-v1.json` and
+`combined-repeat-verified-v1.json`.
+
+A subsequent real source update `12873186…` now completes preflight, an explicit
+begin, 11 intended color assignments and independent readback across both callers.
+All 302 main records, variables, graph receipt and 100 main images restore the
+preserved purple baseline. Both caller images match the original purple pixels;
+the new caller retains its own variables and every non-paint record. Comparing
+against the preceding blue read identifies only resolved paint changes: 20 main
+nodes and two nodes in each caller, with all node identities retained. All 1,535
+earlier files stay byte-identical. The application shows current verification,
+and both purple instances were inspected with the companion closed. Evidence:
+`combined-purple-verified-v2.json`, `combined-purple-changed-nodes-v1.json` and
+`combined-purple-visible-v1.json` in the same private directory.
+
+The journal spans 684.06 seconds from preflight dispatch to final receipt,
+excluding preparation, pairing and terminal UI refresh. This is an observed
+operation duration, not a controlled performance comparison. Broader recovery
+and usable performance remain open. The app still reports 49.92 px source versus
+51.02 px native width; the verified color update does not qualify fidelity or V1.
+
+To reverse, refuse post-succession caller preparation and preserve existing
+version-4 plans as historical evidence. Do not replace the current source with
+the main's old identity or rewrite the main's recorded provenance.
+
+## D.116 Native hashing preserves portable revision bytes
+
+**AGENT decision, 2026-09-21.** Reading retained native evidence repeatedly
+hashes large canonical values. Node hosts with `process.getBuiltinModule` now
+use the synchronous built-in SHA-256 implementation. Browser, plugin and older
+Node hosts retain the existing portable implementation. Canonicalization,
+UTF-8 encoding, revision format and all evidence checks remain unchanged. No
+revision or evidence is cached by this change.
+
+The existing provenance gate runs the shipped implementation in five isolated
+host shapes, including absent and throwing built-in lookups and native crypto.
+It compares 279 values with Node's digest, including Unicode, malformed UTF-16,
+SHA padding boundaries and a large value, and checks mutation and restoration.
+The browser bundle also executes without Node globals. The actual saved
+post-update caller plan, writer and independent reader reproduce exactly.
+
+A local nine-sample comparison of the same saved values reduced the median
+complete revision calculation from 73.77 to 33.80 ms for the 1.80 MB caller
+plan and from 84.55 to 40.33 ms for the 2.07 MB combined update input. These
+are isolated measurements, not an application latency result or V1 evidence.
+The local application subsequently adopted the candidate with an official
+engine rebuild. A read-only service-handler comparison over the same 1,535
+retained journal files returned byte-identical 166,152-byte responses and left
+the journals unchanged. The first warm read fell from 115.48 to 84.65 seconds
+(26.7%). The before cold sample overlapped server shutdown, and the second
+before warm sample briefly overlapped another check; neither is used for that
+comparison. This sequential measurement is not a browser latency study, and
+an approximately 85-second history read remains a product performance gap.
+Private evidence is under `private/post-update-callers-20260922/native-hash-*`
+and `private/native-template-app-integration-20260921/native-hash-list-*-v1.json`.
+
+To reverse, remove the optional native branch and keep the existing portable
+SHA-256 implementation. Every historical revision and generated program must
+remain byte-identical; never migrate journals or relax a verification check.
+
+## D.117 Delivery progress is separate from result verification
+
+**AGENT decision, 2026-09-22.** Sources previously requested the complete native
+inspection every four seconds while delivery was active. Each request could
+reconstruct source and correction history synchronously, delaying the companion's
+next request. Native creation and update progress now use a read-only journal
+route that returns only whether delivery remains pending. It validates operation
+identity and the retained journal; it does not report source freshness or grant
+verification or write authority. Existing write checks are unchanged.
+
+Completion, unavailable or malformed progress, and running source inspections
+still require the full listing. Pending commands receive a full status read after
+one minute so interruption and recovery controls remain available. That read can
+itself be slow. An action's fully checked response resets this interval. A
+discarded development-mode mount no longer starts a duplicate initial read.
+No result or source evidence is cached across progress requests.
+
+Against the retained two-caller update, the existing full listing took 96.01
+seconds. The new update progress route took 2.13 seconds on its first request
+and 0.61–0.65 seconds on four subsequent requests. All 1,549 existing native
+journal, plan and succession files stayed byte-identical. The first creation
+progress request spent 251.57 seconds including queued reload work; it is not a
+clean endpoint benchmark. The app subsequently showed the existing correction
+as verified through its full listing. These measurements compare different
+read operations, not equivalent full verification or complete update latency.
+Startup, final verification and overall usable performance remain unqualified.
+
+The reference HTTP, transport, update-journal and frontend polling tests cover
+wrong references, unknown operations/proposals, non-GET requests, journal damage,
+stale-source write refusal, completion races, reinspection, malformed progress
+and interrupted-delivery fallback. Private measurements and the bounded review
+are under `private/native-progress-polling-20260922/` in the live worktree.
+
+Existing-update actions also resolve their target ID from the checked journal
+before entering the transport. They no longer construct a full display result
+solely to obtain that ID. Missing or corrupt journals still refuse, and each
+transport action retains its existing source and phase authorization. This
+removes redundant verification work; end-to-end latency is still unqualified.
+
+To reverse, restore full-list polling and remove the progress routes. Preserve
+the existing journal format, write authorization and terminal verification.

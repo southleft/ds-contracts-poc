@@ -10,7 +10,7 @@ import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emit
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
 import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
-import { isReactComparisonRequest, reactComparisonReservation, type ReactComparisonRequest } from './react-comparison-request.js';
+import { isReactComparisonRequest, isReactComparisonParentUpdate, reactComparisonReservation, type ReactComparisonRequest, type ReactComparisonBirth, type ReactComparisonParentUpdate } from './react-comparison-request.js';
 import type { NativeTemplateConsumerInput } from '../core/native-template-value-consumers.js';
 import type { prepareReactComparisonPlan } from './react-comparison-plan.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from '../core/native-contract-comparison-observation.js';
@@ -266,7 +266,7 @@ export interface NativeOperationJobsOptions {
      * recorded succession may replace the creation pin; absent, it is the pin. */
     effectiveSource?(id: string, original: NativeSourcePin): NativeSourcePin;
     updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
-      receipt: import('../core/native-source-observation.js').NativeSourceReadback } | undefined;
+      receipt: import('../core/native-source-observation.js').NativeSourceReadback; parentUpdate?:ReactComparisonParentUpdate } | undefined;
     prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
     buildComponent(request: ReactNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
@@ -1781,7 +1781,7 @@ export function createNativeOperationJobs(
      * writing. Source recompilation is intentionally separate: a retained
      * caller's historical source need not equal the main's desired successor. */
     reactTemplateConsumerBaselines(parentId: string,
-      baselineRevisions: Array<{ operationId: string; journalRevision: string }> = []) {
+      baselineRevisions: Array<{ operationId: string; journalRevision: string }> = [], birth?:ReactComparisonBirth) {
       const parent = load(parentId);
       if (!isNativeSourcePin(parent.header.request) || !isReactPlan(parent.plan) ||
           !templateGraphPlan(parent.plan) || parent.state.pending || !parent.state.componentCreation ||
@@ -1794,10 +1794,30 @@ export function createNativeOperationJobs(
         // loaded and refused, rather than disappearing from the inventory.
         return (header.request as any)?.parentOperationId === parentId;
       });
-      const ids = discover();
-      if (ids.length > 100) fail('template-consumer-inventory-too-large');
+      const allIds = discover();
+      if (allIds.length > 100) fail('template-consumer-inventory-too-large');
       if (!Array.isArray(baselineRevisions) || baselineRevisions.length > 100)
         fail('template-consumer-baseline-pin-invalid');
+      // Only this new caller may authenticate its own creation against the
+      // immediately preceding verified update. Normal update preparation and
+      // all other callers still see the complete, possibly pending inventory.
+      let excluded:Loaded|undefined;
+      if(birth) {
+        if(Object.keys(birth).sort().join(',')!=='operationId,parentUpdate' || !UUID.test(birth.operationId) ||
+            birth.operationId===parentId || !isReactComparisonParentUpdate(birth.parentUpdate) ||
+            baselineRevisions.some(pin=>pin.operationId===birth.operationId)) fail('template-consumer-birth-invalid');
+        if(allIds.length===100&&!allIds.includes(birth.operationId))fail('template-consumer-inventory-too-large');
+        if(allIds.includes(birth.operationId)) {
+          excluded=load(birth.operationId);
+          const r=excluded.header.request;
+          if(!isReactComparisonRequest(r)||r.version!==4||r.parentOperationId!==parentId||
+              !same(r.parentUpdate,birth.parentUpdate)||!isComparisonPlan(excluded.plan)) fail('template-consumer-birth-invalid');
+          const comparison=excluded.plan.plan.comparison,receipt=structuredClone(comparison.receipt);delete receipt.images;
+          if(revisionOf({input:comparison.parent,receipt})!==birth.parentUpdate.observationRevision)
+            fail('template-consumer-birth-parent-changed');
+        }
+      }
+      const ids=allIds.filter(id=>id!==birth?.operationId);
       const pins = new Map<string, string>();
       for (const pin of baselineRevisions) {
         if (!pin || !UUID.test(pin.operationId) || !HASH.test(pin.journalRevision) || pins.has(pin.operationId) ||
@@ -1831,7 +1851,8 @@ export function createNativeOperationJobs(
       });
       // A fresh call outside a display snapshot always validates full journals.
       // Recheck both membership and fingerprints before exposing the inventory.
-      if (!same(ids, discover()) || loadFresh(parentId).fingerprint !== parent.fingerprint ||
+      if (!same(allIds, discover()) || loadFresh(parentId).fingerprint !== parent.fingerprint ||
+          (excluded&&loadFresh(excluded.header.id).fingerprint!==excluded.fingerprint) ||
           consumers.some(c => loadFresh(c.operationId).fingerprint !== c.currentJournalRevision))
         fail('template-consumer-evidence-changed');
       return structuredClone({ parentJournalRevision: parent.fingerprint, consumers,
@@ -1881,6 +1902,24 @@ export function createNativeOperationJobs(
       const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
       return structuredClone({ input, receipt, request: loaded.header.request });
+    },
+    /** Select current creation authority without rewriting the historical
+     * request used by existing comparison operations. */
+    verifiedReactCallerObservation(id:string) {
+      const loaded=load(id);
+      if(!isReactNativeRequest(loaded.header.request)||loaded.header.request.version!==1||!isReactPlan(loaded.plan)||
+          loaded.state.pending||!loaded.state.imageReadback||!['component-structure-observed','component-observation-refused'].includes(loaded.state.phase))
+        fail('react-parent-observation-required');
+      const updated=options.react?.updatedObservation?.(id);
+      if(updated) {
+        if(!updated.input.templateGraph||!isReactComparisonParentUpdate(updated.parentUpdate))fail('react-updated-caller-unqualified');
+        return structuredClone({...updated,request:effectiveSource(id,loaded.header.request) as ReactNativeRequest});
+      }
+      if(loaded.state.phase!=='component-structure-observed')fail('react-parent-observation-required');
+      authenticate(loaded);
+      const input=componentObservationInput(loaded.state,loaded.plan) as NativeContractObservationInput;delete input.allocationAnchor;
+      const receipt=structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;delete receipt.images;
+      return structuredClone({input,receipt,request:loaded.header.request,parentUpdate:undefined});
     },
     verifiedReactInitialObservation(id: string) {
       const loaded = load(id);
@@ -1969,7 +2008,7 @@ export function createNativeOperationJobs(
           ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(stateApi ? { stateApiObservation: structuredClone(stateApi.observation) } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
-          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),
+          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 || comparison.version === 4 ? id : comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
       });
       });

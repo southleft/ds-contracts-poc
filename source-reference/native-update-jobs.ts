@@ -11,6 +11,7 @@ import { emitNativeContractReadbackScript, type NativeSourceReadback } from '../
 import { nativeDesignChanges, type NativeDesignChanges } from '../core/native-design-changes.js';
 import { collectNativeImages,collectExpectedNativeImages } from './native-operation-images.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
+import {isReactComparisonParentUpdate,type ReactComparisonBirth,type ReactComparisonParentUpdate} from './react-comparison-request.js';
 import type { NativeOperationCommand, NativeOperationPhase, NativeOperationResult } from './native-operation-jobs.js';
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
@@ -310,8 +311,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     return {id,dir,header,plan,state,events,previous};
   });
   type Loaded=ReturnType<typeof load>;
-  const authenticatePlan=(l:Loaded) => {
-    const record=plans.current(l.header.parentId,l.header.proposalId);
+  const authenticatePlan=(l:Loaded,birth?:ReactComparisonBirth) => {
+    const record=plans.current(l.header.parentId,l.header.proposalId,birth);
     if(record.update.revision!==l.header.planRevision) fail('source-or-compiler-changed');
     if(load(l.id).previous!==l.previous) fail('journal-changed');
     return record;
@@ -324,9 +325,9 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     requireCurrentWriteScope(l);
     if (!same(scripts(authenticatePlan(l)),l.header.scripts)) fail('source-or-compiler-changed');
   };
-  const authenticateObservation=(l:Loaded) => {
-    authenticatePlan(l);
-    const context=plans.observationContext(l.header.parentId,l.header.proposalId);
+  const authenticateObservation=(l:Loaded,birth?:ReactComparisonBirth) => {
+    authenticatePlan(l,birth);
+    const context=plans.observationContext(l.header.parentId,l.header.proposalId,birth);
     if(context.currentRevision!==context.baselineRevision && l.state.observationParentRevision!==context.currentRevision)
       fail('parent-observation-refresh-required');
     if(context.templateCurrentRevision!==undefined &&
@@ -348,7 +349,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     const id=identity(l.header.parentId,proposal.id);
     return existsSync(path.join(root,id))&&load(id).state.wrote;
   });
-  const verifiedTip=(parentId:string) => {
+  const verifiedTip=(parentId:string,birth?:ReactComparisonBirth) => {
     const written=plans.list(parentId).flatMap(proposal=>{
       const id=identity(parentId,proposal.id);
       if(!existsSync(path.join(root,id)))return [];
@@ -359,9 +360,18 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
     const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
     if(tips.length!==1)fail('effective-observation-unavailable');
-    const l=tips[0];authenticateObservation(l);
+    const l=tips[0];
+    if(birth&&(!UUID.test(birth.operationId)||birth.operationId===parentId||!isReactComparisonParentUpdate(birth.parentUpdate)||
+      l.plan.kind!=='native-contract-template-value-update'||birth.parentUpdate.proposalId!==l.header.proposalId))fail('caller-birth-parent-changed');
+    authenticateObservation(l,birth);
     if(!nativeContractUpdateMatches(l.plan,l.state.observation,true))fail('effective-observation-invalid');
+    if(birth&&parentObservation(l).parentUpdate.observationRevision!==birth.parentUpdate.observationRevision)fail('caller-birth-parent-changed');
     return l;
+  };
+  const parentObservation=(l:Loaded)=>{
+    const receipt=nativeAppUpdateMainReadback(l.plan,l.state.observation);delete receipt.images;
+    const input=nativeContractUpdateAfter(l.plan,l.state.observation);
+    return {input,receipt,parentUpdate:{proposalId:l.header.proposalId,observationRevision:revisionOf({input,receipt})}};
   };
   const callerImages=(l:Loaded)=>l.plan.kind==='native-contract-template-value-update'&&l.state.observation
     ? l.plan.template.input.consumers.map((c,i)=>({operationId:c.input.operation.id,caseId:c.input.comparison.caseId,
@@ -397,6 +407,15 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(l.state.phase==='update-write-untouched') fail('write-rearm-required');
     if(p==='update-apply' ? l.state.wrote || l.state.phase!=='update-preflight-observed' : p==='update-preflight-readback' ? l.state.wrote : !l.state.wrote) fail('phase-refused');
     if(p==='update-apply') authenticate(l);
+    if(p==='update-readback'&&l.plan.kind==='native-contract-template-value-update'&&l.state.phase==='update-verified') {
+      // Do not erase the verified parent evidence while a new caller needs it
+      // to finish. Unknown writes retain their historical recovery reader.
+      try { plans.observationContext(l.header.parentId,l.header.proposalId); }
+      catch(error) {
+        if(!(error instanceof Error)||error.message!=='native-update-template-consumer-inventory-refresh-required')
+          fail('caller-context-unavailable-before-refresh');
+      }
+    }
     let program=l.header.scripts[p],reader:Extract<Entry,{kind:'dispatch'}>['reader'],parentJournalRevision:string|undefined,templateContextRevision:string|undefined;
     if (p==='update-readback') {
       // A stale source still permits historical read-only recovery, but only a
@@ -436,10 +455,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     verifiedForParent(parentId: string) {
       return evidenceReadOnce(displayScope + ':parent', parentId, () => {
         const l=verifiedTip(parentId);if(!l)return undefined;
-        const receipt=nativeAppUpdateMainReadback(l.plan,l.state.observation);
-        delete receipt.images;
-        return {input:nativeContractUpdateAfter(l.plan,l.state.observation),receipt};
+        return parentObservation(l);
       });
+    },
+    verifiedForNewConsumer(parentId:string,operationId:string,parentUpdate:ReactComparisonParentUpdate) {
+      const l=verifiedTip(parentId,{operationId,parentUpdate});
+      if(!l)fail('caller-birth-parent-unavailable');
+      return parentObservation(l);
     },
     /** Full host-only input for a repair planner, never the truncated UI rows.
      * It proves the journal/source/baseline relationship, not permission to
@@ -513,6 +535,16 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       write(path.join(dir,'operation.json'),stored);return get(id);
     },
     forProposal(parentId:string,proposalId:string) { const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?get(id):null; },
+    /** Resolve an action's target from its checked journal, not a display view.
+     * Every transport action still enforces its own source and phase guards. */
+    idForProposal(parentId:string,proposalId:string) {
+      const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?load(id).id:null;
+    },
+    /** Read the authenticated journal only. This never grants current-source authority. */
+    deliveryStateForProposal(parentId:string,proposalId:string) {
+      const l=load(identity(parentId,proposalId));
+      return {phase:l.state.phase,pendingPhase:l.state.pending?.phase};
+    },
     deliveryState(id:string) {const l=load(id);return {phase:l.state.phase,pendingPhase:l.state.pending?.phase,fileKey:l.plan.before.operation.fileKey};},
     pendingCommand(id:string) {assertOutsideEvidenceSnapshot();const l=load(id);if(l.state.pending&&!l.state.pending.readOnly) authenticate(l);return structuredClone(l.state.pending??null);},
     accept(id:string,envelope:NativeOperationResult) {
