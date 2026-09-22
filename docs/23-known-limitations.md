@@ -9461,9 +9461,57 @@ retry. Reopening and the later explicit resume were required. Host processing
 and final display took minutes. This proves the observed recovery boundary,
 not usable latency, native visual fidelity or complete V1 acceptance.
 
+The unchanged production companion subsequently performs the reviewed reverse
+correction with one Apply request, one write dispatch and one begin. Eleven
+color variables change; the separate final read passes the current product
+matcher. Its complete main and both caller observations, including all images,
+equal the original purple state. All four source files are restored exactly,
+and all 2,085 earlier native evidence files remain unchanged. The app reports
+current verification; both purple callers were inspected with the companion
+closed, and both loaded images were inspected in the app gallery. Preflight
+dispatch to final result took about 16 minutes, followed by about seven minutes
+before the terminal UI was observed. These uncontrolled wall timings include
+host work, polling, transport and native exports; they are not a benchmark.
+
 Evidence: `private/native-template-begun-write-20260922/`, especially
 `fault-companion-build-v1.json`, `recovery-read-observed-v1.json`,
 `recovery-verified-v1.json`, `recovery-visible-v1.json` and
 `recovery-journal-timing-v1.json`. To leave the test setup, close its separately
 named companion and use the unchanged production companion. Preserve all
 journals and fault artifacts; do not clear a receipt or repeat an unknown write.
+The restoration is recorded in `purple-restoration-verified-v1.json`,
+`purple-restoration-visible-v1.json` and `purple-restoration-journal-timing-v1.json`.
+
+## D.122 Exact template matching reuses one freshly derived plan
+
+**AGENT decision, 2026-09-22.** Structural inspection and exact matching now
+share one guarded plan within their synchronous call. Both still derive it
+from the complete input; neither accepts an externally prepared plan. There
+is no cache across calls, and the public diagnostic retains its existing shape.
+Source and journal authentication, native preflight, resolved paint, geometry,
+caller identity and unrelated-field comparisons remain separate requirements.
+
+The previous implementation is retained for an alternating comparison on two
+real 302-node observations with two callers each. Complete matcher results and
+public diagnostics are identical. Twelve altered-input cases retain the same
+named refusals, and input bytes remain unchanged. Three timed calls per version
+give medians of 3.05 to 2.25 seconds for the recovered blue observation and 3.99
+to 2.45 seconds for its purple restoration. These are pure comparison timings
+on one host with the live app idle, not end-to-end latency or V1 qualification.
+Regression coverage also verifies returned-state isolation and existing
+untouched, no-op, forward, reverse, partial and conflicting observations.
+
+Two full service listings against the same local application history also
+return identical bytes and preserve all 2,104 native evidence files. In one
+dedicated process per version, the first listing changes from 162 to 133 seconds
+and its repeat from 123 to 100 seconds. No native command is issued. This single
+comparison is not a stable speedup guarantee; the remaining delay is still a
+release gap.
+
+Evidence: `private/template-match-preparation-20260922/`, including the pinned
+previous sources, `comparison-v1.json`, `runtime-v1.log` and `types-v1.log`.
+The complete response and inventory comparisons are in
+`full-listing-previous-v2.json` and `full-listing-candidate-v2.json`.
+Reverse this decision by restoring the separate guarded-plan derivation in
+the matcher and the original diagnostic wrapper; preserve all exactness checks,
+refusals and retained native evidence.

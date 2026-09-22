@@ -187,6 +187,13 @@ recovery work finished were required. Host delays and an obscured interruption
 message remain usability gaps; this does not qualify arbitrary partial writes,
 OS crashes, native fidelity or V1 ([D.121](23-known-limitations.md#d121-a-completed-write-can-be-recovered-without-its-result)).
 
+The unchanged production companion then applied the reviewed reverse correction
+once. A separate read restores the complete original purple main and both
+callers, including every retained image; all four source files and 2,085 earlier
+evidence files match their original bytes. The app reports current verification,
+and both unobstructed native callers and the app gallery show the restoration.
+The long host and display delays remain a release gap.
+
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
 for the retained update took 0.61–0.65 seconds, while a full listing took 96.01
