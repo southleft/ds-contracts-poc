@@ -131,8 +131,8 @@ export function SelectionSetup({
         </ul>
         <p>
           Keyboard behavior runs in the generated React library. The current
-          preview is static. Native recapture does not yet preserve this
-          relationship.
+          preview is static. Native return requires preserved item identities and
+          matching states and panels. The live return journey is not yet qualified.
         </p>
         <p className="hint">
           Changes stay in this editor until you export them. The imported
@@ -509,7 +509,7 @@ export function SelectionSetup({
               </ul>
               <p>
                 The current preview remains static. Keyboard behavior runs in
-                the generated React library. Native return is not yet supported.
+                the generated React library. Live native return remains unqualified.
               </p>
               <p className="hint">
                 Apply updates the editor. Reset restores the loaded source; no

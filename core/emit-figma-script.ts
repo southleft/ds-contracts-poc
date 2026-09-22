@@ -1,3 +1,4 @@
+import { figmaSelectionApi, type FigmaSelectionApi, type SelectionIdentity } from './figma-selection-api.js';
 import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { selectedSampleKey, selectionErrors } from '../packages/core/src/selection.js';
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
@@ -140,6 +141,7 @@ export interface NodeSpec {
   iconSize?: number;
   name: string;
   /** Private compile-only source identity; never inferred from a layer name. */
+  selectionIdentity?: SelectionIdentity;
   nativeSourcePart?: NativeSourcePartIdentity;
   nativeContractPart?: NativeContractPartIdentity;
   nativeContractSample?: NativeContractSampleIdentity;
@@ -732,6 +734,7 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
+  selectionApi?: FigmaSelectionApi;
   rootSlot?: ({ version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
     { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' } |
     { version: 4; property: string; display: 'block'; width: 'fill' }) & { textTemplate?: 1 };
@@ -4596,6 +4599,7 @@ function partToSpecs(
       const spec: NodeSpec = {
         type: 'instance',
         grow: resolveLayout(part, subst)?.grow || undefined,
+        ...(selection?.itemPart === name ? {selectionIdentity: {version: 1 as const, role: 'item' as const, key: String(rec[part.repeat!.keyField!])}} : {}),
         name: i === 0 ? name : `${name} ${i + 1}`,
         dep: dep.name,
         depContractId: dep.id,
@@ -4626,7 +4630,10 @@ function partToSpecs(
       partToSpecs(childName, child, contract, byId, ctx, subst),
     );
   }
-  return [partToSpec(name, part, contract, byId, ctx, subst)];
+  const spec = partToSpec(name, part, contract, byId, ctx, subst);
+  if (selection?.listPart === name) spec.selectionIdentity = {version: 1, role: 'list'};
+  if (panel) spec.selectionIdentity = {version: 1, role: 'panel', value: panel.value};
+  return [spec];
 }
 
 /** ROOT TEXT (canvas round-trip gate, 2026-08-22 — core/root-text-check.ts).
@@ -6112,12 +6119,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   if (contract.selection) facts.push({
     part: contract.selection.itemPart, variant: '', kind: 'event', channel: contract.selection.bindings.code.prop,
     value: JSON.stringify(contract.selection),
-    reason: 'selection keyboard, focus and callbacks execute in React; the canvas draws finite enum states from the observed sample; raw recapture does not reconstruct this relationship',
+    reason: 'selection keyboard, focus and callbacks execute in React; the canvas draws finite enum states from the observed sample; bounded recapture restores retained relationships only after checking native identities and appearances; it does not observe interaction',
   });
   for (const { name: partName, part } of walkAnatomy(contract)) {
     if (part.repeat?.keyField !== undefined) facts.push({
       part: partName, variant: '', kind: 'declared', channel: 'repeat.keyField', value: part.repeat.keyField,
-      reason: 'stable collection identity is code metadata; the canvas draws the observed sample and raw recapture does not reconstruct these keys',
+      reason: 'stable collection identity is code metadata; the canvas draws the observed sample; explicit selection identities can return after validation, while other repeats do not reconstruct these keys',
     });
   }
   // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
@@ -6508,6 +6515,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
     isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
+    ...(contract.selection ? {selectionApi: figmaSelectionApi(contract)} : {}),
     ...(contract.anatomy.root?.slot ? { rootSlot: contract.anatomy.root.declared?.display === 'block' && !contract.anatomy.root.layout
       ? { version: 4 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'block' as const, width: 'fill' as const }
       : fillRootSlot
@@ -8117,6 +8125,7 @@ function buildSyncScript(
   // contract — every other script keeps its bytes.
   const hasAbsentVariants = featureDatas.some((d) => (d.absentVariants?.length ?? 0) > 0);
   const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
+  const hasSelection = featureDatas.some(d => d.selectionApi !== undefined);
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
   const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
@@ -8960,7 +8969,7 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
   // layer renames the linked SLOT property (probe 2b), so the contract's
   // slot.bindings.figma.property is spelled here and nowhere else.
   ${hasCallerSlots ? 'if (!spec.callerSlotProperty) ' : ''}node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
-  if (spec.visibleProp) {
+${hasSelection ? `  if (spec.selectionIdentity) node.setSharedPluginData('ds_contracts', 'selectionIdentity', JSON.stringify(spec.selectionIdentity));\n` : ''}  if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
 ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an already-populated
@@ -9146,7 +9155,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  set.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
+${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.selectionApi ? JSON.stringify(C.selectionApi) : '');\n` : ''}  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  set.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -9422,7 +9431,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  comp.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
+${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.selectionApi ? JSON.stringify(C.selectionApi) : '');\n` : ''}  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  comp.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -9581,6 +9590,9 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -9749,7 +9761,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  target.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
+${hasSelection ? `  target.setSharedPluginData('ds_contracts', 'selectionApi', C.selectionApi ? JSON.stringify(C.selectionApi) : '');\n` : ''}  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  target.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

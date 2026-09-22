@@ -2296,6 +2296,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -5118,6 +5121,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -9880,6 +9886,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -11678,6 +11687,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -13528,6 +13540,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -15278,6 +15293,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -17127,6 +17145,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -19884,6 +19905,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
