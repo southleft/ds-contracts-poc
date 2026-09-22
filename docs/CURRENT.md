@@ -106,9 +106,11 @@ are byte-identical to those already scored. The earlier family-only refusals
 remain archived ([D.101](23-known-limitations.md#d101-web-font-witnesses-reject-same-family-system-fallback)). A same-tab
 reload requires manually selecting the saved Workspace import and produces
 identical contract and archive bytes. One earlier return tab stalled; recovery
-used a fresh tab with React output selected. Native fidelity, template updates,
-interrupted native recovery and the complete independent-family journey remain
-unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+used a fresh tab with React output selected. Bounded template color updates and
+interruption recovery now have measured [application evidence below](#v1-acceptance-evidence).
+Native fidelity, broader update and recovery behavior, and the complete
+independent-family journey remain unqualified
+([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
 
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.
 
