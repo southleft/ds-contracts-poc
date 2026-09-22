@@ -4583,7 +4583,9 @@ function partToSpecs(
       // Field values map through the child's bindings exactly like fixed
       // props (numbers spell as strings on the canvas — TEXT properties).
       const fields: Record<string, string | boolean> = {};
-      for (const [k, v] of Object.entries(rec)) fields[k] = typeof v === 'number' ? String(v) : v;
+      for (const [k, v] of Object.entries(rec)) {
+        if (k !== part.repeat!.keyField) fields[k] = typeof v === 'number' ? String(v) : v;
+      }
       const spec: NodeSpec = {
         type: 'instance',
         name: i === 0 ? name : `${name} ${i + 1}`,
@@ -6096,6 +6098,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
   variants.forEach(v=>lowerBackground(v.spec));
   const facts: CodeOnlyFactObservation[] = [];
+  for (const { name: partName, part } of walkAnatomy(contract)) {
+    if (part.repeat?.keyField !== undefined) facts.push({
+      part: partName, variant: '', kind: 'declared', channel: 'repeat.keyField', value: part.repeat.keyField,
+      reason: 'stable collection identity is code metadata; the canvas draws the observed sample and raw recapture does not reconstruct these keys',
+    });
+  }
   // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
   // natively and need no receipt; state-plane declared facts are always
   // code-only (state previews do not draw declared facts yet — a named limit).

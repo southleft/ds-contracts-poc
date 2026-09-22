@@ -934,7 +934,23 @@ export function validateContract(
         errors.push(`${contract.id}: part "${name}" repeat prop "${part.repeat.itemsProp}" must be an arrayOf prop`);
       } else {
         const dep = part.component ? byId.get(part.component.id) : undefined;
+        const keyField = part.repeat.keyField;
+        if (keyField !== undefined) {
+          if (rp.type.arrayOf[keyField] !== 'text') {
+            errors.push(`${contract.id}: part "${name}" repeat-key-field-invalid: "${keyField}" must name a text field of "${rp.name}"`);
+          }
+          const keys = new Set<string>();
+          for (const [i, rec] of part.repeat.sample.entries()) {
+            const key = rec[keyField];
+            if (!Object.prototype.hasOwnProperty.call(rec, keyField) || typeof key !== 'string' || key.length === 0) {
+              errors.push(`${contract.id}: part "${name}" repeat-key-invalid: sample[${i}].${keyField} must be a nonempty string`);
+            } else if (keys.has(key)) {
+              errors.push(`${contract.id}: part "${name}" repeat-key-duplicate: sample[${i}].${keyField}`);
+            } else keys.add(key);
+          }
+        }
         for (const [field, ftype] of Object.entries(rp.type.arrayOf)) {
+          if (field === keyField) continue;
           if (part.component?.props && field in part.component.props) {
             errors.push(`${contract.id}: part "${name}" repeat field "${field}" collides with a fixed component prop — a field is per-item, a fixed prop is constant`);
           }

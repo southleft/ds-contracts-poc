@@ -32,6 +32,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, m
  *   - optional parts render conditionally on their slot prop
  */
 import { rootContentJsx, literalTextJsx } from './root-content.js';
+import { REACT_REPEAT_RUNTIME } from './react-repeat-runtime.js';
 import {
   isNativeCheckablePart,
   pascal,
@@ -280,6 +281,8 @@ export function generateTsx(
     ? { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false }
     : ELEMENT_META[contract.semantics.element];
   const name = contract.name;
+  const repeatRuntime = walkAnatomy(contract).some(({part}) => part.repeat?.keyField !== undefined)
+    ? REACT_REPEAT_RUNTIME : '';
   const enums = enumProps(contract);
   const bools = boolProps(contract);
   const texts = namedTextProps(contract);
@@ -655,6 +658,7 @@ export function generateTsx(
       const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
       let childrenField: string | null = null;
       const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> }).arrayOf)
+        .filter((field) => field !== part.repeat!.keyField)
         .map((field) => {
           const depProp = dep.props.find((p) => p.name === field)!;
           if (depProp.bindings.code.prop === 'children') {
@@ -664,10 +668,13 @@ export function generateTsx(
           return ` ${depProp.bindings.code.prop}={${codeValueExpression(depProp, `item.${field}`)}}`;
         })
         .join('');
+      const key = part.repeat.keyField === undefined ? 'index' : `item[${JSON.stringify(part.repeat.keyField)}]`;
       const node = childrenField
-        ? `<${dep.name} key={index}${fixedAttrs}${fieldAttrs}>{item.${childrenField}}</${dep.name}>`
-        : `<${dep.name} key={index}${fixedAttrs}${fieldAttrs} />`;
-      return wrapVisibleWhen(part, `{${codeName}?.map((item, index) => (${node}))}`);
+        ? `<${dep.name} key={${key}}${fixedAttrs}${fieldAttrs}>{item.${childrenField}}</${dep.name}>`
+        : `<${dep.name} key={${key}}${fixedAttrs}${fieldAttrs} />`;
+      const collection = part.repeat.keyField === undefined ? codeName
+        : `__dscRepeatItems(${codeName}, ${JSON.stringify(part.repeat.keyField)})`;
+      return wrapVisibleWhen(part, `{${collection}?.map((item, index) => (${node}))}`);
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
@@ -790,7 +797,7 @@ export function generateTsx(
 import type { ${mrTypeImports} } from 'react';
 ${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}export interface ${name}Props extends ${mr.propsBase} {
+${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
 }
 
@@ -841,7 +848,7 @@ import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from '
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${sr.propsBase} {
+${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}
 }
 

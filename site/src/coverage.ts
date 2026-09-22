@@ -455,6 +455,7 @@ reg("composition", "ref-overrides", [
 reg("composition", "repeat", [
   "part.repeat",
   "repeat.itemsProp",
+  "repeat.keyField",
   "repeat.sample",
 ]);
 

@@ -1904,6 +1904,10 @@
             "itemsProp": {
               "type": "string"
             },
+            "keyField": {
+              "type": "string",
+              "pattern": "^[a-z][A-Za-z0-9]*$"
+            },
             "sample": {
               "minItems": 1,
               "type": "array",

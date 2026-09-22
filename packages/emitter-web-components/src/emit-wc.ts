@@ -1065,6 +1065,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
           type: { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> };
         })?.type.arrayOf ?? {},
       )) {
+        if (field === part.repeat.keyField) continue;
         const depProp = dep.props.find((pr) => pr.name === field);
         const f = `__rec[${JSON.stringify(field)}]`;
         if (depProp?.bindings.code.prop === 'children') {
