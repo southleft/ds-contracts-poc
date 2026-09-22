@@ -1914,7 +1914,11 @@ function mapNode(
     const staticContent = (n: RestNode, depth: number): boolean =>
       ++count <= 128 && depth <= 8 && ['FRAME', 'GROUP', 'TEXT'].includes(n.type) &&
       (n.children ?? []).every(child => staticContent(child, depth + 1));
-    if ((node.children?.length ?? 0) > 0 && node.children!.every(child => staticContent(child, 1))) {
+    // A parent-controlled component swap is content supplied through a slot,
+    // not a fixed child whose currently selected internals can become a stub.
+    // Keep its reference and swap binding; its private chrome belongs to the
+    // selected child definition, just as it does on the ordinary instance path.
+    if (out.propRefs?.mainComponent === undefined && (node.children?.length ?? 0) > 0 && node.children!.every(child => staticContent(child, 1))) {
       out.instanceContent = {
         root: mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed content]`, parentBox, parent),
         propertyTypes: Object.fromEntries(Object.entries(node.componentProperties ?? {}).map(([key, value]) => [key, value.type])),

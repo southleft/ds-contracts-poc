@@ -9024,6 +9024,19 @@ types keep string boolean spellings as enum values. The additive optional
 `instanceContent` field is REST-only; plugin dumps do not provide it. Admission uses
 the field's presence; older dumps keep the geometry-only path.
 
+A parent-controlled component swap is outside this static fallback. Its
+`mainComponent` property reference describes caller-supplied slot content; the
+currently selected child's private chrome cannot establish a fixed child
+definition. REST retains that reference and swap binding without projecting
+its internals into `instanceContent`. The full evaluation caught the missing
+boundary when a historical slot utility's dashed border entered the new
+supplemental projection and became a parent mapping degradation. A renamed
+synthetic instance now checks the boundary, and removing only its swap binding
+still reports the unsupported dashed stroke by name. This does not exempt
+ordinary observed content from mapping diagnostics or alter the frozen REST
+fixtures. To reverse this refinement, replace it with an independently verified
+model for dynamic slot content; do not freeze a selected instance as static.
+
 The fresh Altitude Tabs installed React consumer now renders two body-copy lines
 that the previous empty stub lost. It still fails the unchanged 5% black-background
 fidelity limit, loses the active tab appearance and the stretch variant's visible

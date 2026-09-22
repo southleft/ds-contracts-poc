@@ -82,6 +82,31 @@ test('dynamic text bindings and nested component internals do not become static 
   }
 });
 
+test('a parent-controlled component swap retains its binding without projecting the selected child chrome', () => {
+  const response = fixture();
+  for (const row of Object.values(response.nodes)) {
+    const instance = row!.document.children![0];
+    instance.name = 'Arbitrary supplied content';
+    instance.componentPropertyReferences = {mainComponent: 'Body#1:0'};
+    instance.strokes = [{type: 'SOLID', color: {r: 0, g: 0, b: 0, a: 1}}];
+    instance.strokeWeight = 1;
+    instance.strokeDashes = [4, 4];
+  }
+  const {dump, report} = mapRestToDump(response, {fileKey: 'fixture'});
+  for (const name of ['Holder', 'Panel']) {
+    const instance = (dump[name] as {variants: DumpNode[]}).variants[0].children![0];
+    assert.equal(instance.propRefs?.mainComponent, 'Body');
+    assert.equal(instance.instanceContent, undefined);
+    assert.equal(instance.instanceSetKey, 'body-set-key');
+  }
+  assert.equal(report.degradations.some(d => d.code === 'stroke-style-unsupported'), false);
+  // Ordinary static usage still exposes the unsupported stroke by name. A
+  // name, paint or component identity alone must not suppress that evidence.
+  for (const row of Object.values(response.nodes)) delete row!.document.children![0].componentPropertyReferences;
+  const ordinary = mapRestToDump(response, {fileKey: 'fixture'});
+  assert.equal(ordinary.report.degradations.filter(d => d.code === 'stroke-style-unsupported').length, 2);
+});
+
 test('an exposed text control without a captured binding cannot become an inert literal', () => {
   for (const property of ['Content#1:0', 'Content']) {
     const response = fixture();
