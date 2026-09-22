@@ -78,6 +78,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
   const latest = useRef({rows, busy});
+  const fullReadAt = useRef(0);
   latest.current = {rows, busy};
   async function reviewMeasurement(id: string) {
     setBusy(true); setError('');
@@ -89,7 +90,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     finally { setBusy(false); }
   }
   useEffect(() => {
-    let stopped = false, pending = false, fullReadAt = 0;
+    let stopped = false, pending = false;
     const load = async (poll = false) => {
       if (pending || (poll && latest.current.busy)) return;
       pending = true;
@@ -98,11 +99,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           const response = await fetch(`${root}/${route}`);
           if (!response.ok) throw Error('Native progress unavailable.');
           return response.json();
-        }, Date.now() - fullReadAt >= 60_000)) return;
+        }, Date.now() - fullReadAt.current >= 60_000)) return;
         if (stopped) return;
         setLoading(true);
         const response = await fetch(`${root}/native`), result = await response.json();
-        fullReadAt = Date.now();
+        fullReadAt.current = Date.now();
         if (!response.ok) throw Error(result.error);
         if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setInspectionSourceAvailable(result.inspectionSourceAvailable === true); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
@@ -132,6 +133,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         setCodes(old => ({ ...old, [id]: result.connection }));
         const refreshed = await fetch(`${root}/native`), snapshot = await refreshed.json();
         if (!refreshed.ok) throw Error(snapshot.error);
+        fullReadAt.current = Date.now();
         setRows(snapshot.operations); setMoved(snapshot.moved ?? []);
         setInspectionSourceAvailable(snapshot.inspectionSourceAvailable === true);
       } else {
@@ -142,6 +144,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           const after: Operation[] = result.operations, tip = after.find(r => r.operation.id === review[1])?.updates?.some(u => u.operation?.phase === 'update-verified' && u.operation.sourceCurrent && !u.operation.superseded);
           setReviewed(old => ({ ...old, [review[1]]: ids(rows) === ids(after) && tip ? 'Reviewed again: the current source and compiler plan no further changes. The verified correction below stands and nothing was prepared or written.' : '' }));
         }
+        fullReadAt.current = Date.now();
         setRows(result.operations); setMoved(result.moved ?? []);
         setInspectionSourceAvailable(result.inspectionSourceAvailable === true);
       }
