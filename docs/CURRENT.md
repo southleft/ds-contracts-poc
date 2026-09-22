@@ -43,7 +43,7 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 | React → native Figma | The application creates simple, stateful and composed native output. Retained Button, Checkbox and Card objects have independent readbacks and bounded correction/repeat proofs. The declared Switch's nine states and composed Alert now have guarded source/native frame measurements visible in the app. | Badge has an exact-width mismatch; some historical Button scores remain above 5%; retained empty Button mains lack comparable pixels. Broader behavior, themes, responsive states and dependency internals remain unqualified. |
 | Figma → installed React | Through app import and archive preparation, clean consumers measure Altitude Badge **10/10**, CBDS Badge **72/72**, Checkbox Group **12/12** and standalone Checkbox **26/26**, using the unchanged 5% limit on white and black. CBDS and Checkbox use explicitly supplied, hashed Inter and Public Sans assets respectively. | Tabs now retains observed body content, active styling and Stretch allocation; its unchanged app archive passes 2/2 image pairs with source-named static font inputs and exact root dimensions (D.112). Keyboard interaction and accessibility remain unqualified. The latest app-delivered standalone Tab retains pressed paint, its full focus border, per-variant tracking and all ten exact native root dimensions: **8/10** image pairs pass both backgrounds; unselected rest and pressed text remain at **12.56%** black difference ([D.93](23-known-limitations.md#d93-complete-observed-tracking-can-vary-by-prop)). Invalid tracking refuses; restoring the contract produces an identical archive. Normal reload and workspace selection restore the exact contract and delivery action. Earlier failed consumers remain preserved. Consumer fonts do not authenticate Figma font bytes. Broader semantics, accessibility and instance swaps remain unqualified. |
 | Updates and recovery | Live code changes update existing nodes; exact repeats write nothing. Conflicting design edits refuse. The app detects design-only changes and verifies agreement after a developer changes the source. Begun-write recovery has a live canvas settlement and independent verification. The app now previews a real opacity edit, selects one source candidate and checks all ten configured examples: 60 initial states and ten interaction trials per source version across five caller contexts, including the nested Card. The reviewed change now applies to the original module and regenerated CSS through the app; all ten source examples and fresh pre/post canvas reads pass. Restart before the write resumes safely, and a repeated completed Apply request changes no retained files. Explicit restoration returns source/CSS byte-for-byte, validates all ten examples and preserves the full native snapshot. Later source and canvas edits each refuse before a source write and remain intact. | Bounded Apply, source restoration, live source/canvas conflict refusals, subsequent native succession and partial-file IO-failure recovery are measured ([D.108](23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery)). Completion requires fresh canvas reads, all-case source validation and demonstrated recovery; preview coverage is limited to configured callers and the recorded finite/action domain ([D.105](23-known-limitations.md#d105-source-repair-must-check-the-other-configured-callers)). Bound-size updates require narrow fixed-layout conditions; broader changes and full two-way acceptance remain unqualified. |
-| Delivery | The local app produces React archives, records native operations and shows original/native comparisons. Installation and workflow guides name fonts, CSS Modules and current limitations. | The earlier engineering PR train and source-readiness #160 are merged; template #161 is in CI, and reviewed source-repair and composition changes still require qualified integration. Release qualification, tagging, publishing and deployment have not happened. |
+| Delivery | The local app produces React archives, records native operations and shows original/native comparisons. Installation and workflow guides name fonts, CSS Modules and current limitations. | Release qualification remains open: the complete cohort, clean consumer journeys, update and recovery proofs, and current installation evidence are not all demonstrated. Tagging, publishing and deployment have not happened. |
 
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
 
@@ -162,8 +162,10 @@ The app now also creates a new caller after a verified source update and
 independently verifies its link to the retained main, native slot and text.
 Native text editing and visible restoration were demonstrated. A combined
 no-op now independently verifies both callers, including the restored text,
-with all main and caller records and images unchanged. The next real source
-change across both callers, repeat and recovery remain unfinished. The comparison
+with all main and caller records and images unchanged. An unchanged app review
+reuses that correction without adding or changing any of the 1,535 retained
+journal files. The next real source change across both callers and broader
+recovery remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
 
 A separate foundation plans template token changes and verifies current
@@ -215,10 +217,12 @@ current caller text IDs to the same object. New proposals admit that transition
 only with a complete slot-allocation proof and fresh SDK lookup equality; other
 content, geometry, binding and ownership changes still refuse. Historical
 proposal programs retain their exact bytes.
-An unchanged review before delivery produced zero changes. Live repetition,
-conflict, interruption, recovery and reverse delivery for this template path,
-additional caller creation after an update, comparison refresh/repair transitions
-and visual/layout qualification remain unfinished. Private evidence:
+Single-caller forward and reverse color changes, unchanged reviews, refusal of
+an intervening native color edit, and recovery from an interruption before the
+write began are measured separately. Additional caller creation and a combined
+unchanged review are now measured above. Subsequent source updates across both
+callers, broader recovery, comparison refresh/repair transitions and visual/layout
+qualification remain unfinished. Private evidence:
 `native-template-app-integration-20260921/` and
 `native-template-caller-identity-20260921/`.
 
