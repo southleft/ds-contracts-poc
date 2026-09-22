@@ -1,4 +1,5 @@
 import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
+import { selectedSampleKey, selectionErrors } from '../packages/core/src/selection.js';
 import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
@@ -4577,6 +4578,10 @@ function partToSpecs(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec[] {
+  const selection = contract.selection;
+  const selected = selection ? selectedSampleKey(contract, subst[selection.valueProp]) : undefined;
+  const panel = selection?.panels.find(panel => panel.part === name);
+  if (panel && panel.value !== selected) return [];
   if (part.repeat && part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
     return part.repeat.sample.map((rec, i) => {
@@ -4586,6 +4591,8 @@ function partToSpecs(
       for (const [k, v] of Object.entries(rec)) {
         if (k !== part.repeat!.keyField) fields[k] = typeof v === 'number' ? String(v) : v;
       }
+      if (selection?.itemPart === name) fields[selection.selected.prop] =
+        rec[part.repeat!.keyField!] === selected ? selection.selected.on : selection.selected.off;
       const spec: NodeSpec = {
         type: 'instance',
         name: i === 0 ? name : `${name} ${i + 1}`,
@@ -5574,6 +5581,8 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+  const selectionProblems = selectionErrors(contract, byId);
+  if (selectionProblems.length) throw Error(`FIGMA_SELECTION_INVALID: ${selectionProblems.join('; ')}`);
   const nativeSource = contract.bindings.code.runtime && input.nativeSourceCandidate
     ? resolveNativeSourceProjection(contract, { tokens: input.tokens, mode, brand }, input.nativeSourceCandidate)
     : undefined;
@@ -6098,6 +6107,11 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
   variants.forEach(v=>lowerBackground(v.spec));
   const facts: CodeOnlyFactObservation[] = [];
+  if (contract.selection) facts.push({
+    part: contract.selection.itemPart, variant: '', kind: 'event', channel: contract.selection.bindings.code.prop,
+    value: JSON.stringify(contract.selection),
+    reason: 'selection keyboard, focus and callbacks execute in React; the canvas draws finite enum states from the observed sample; raw recapture does not reconstruct this relationship',
+  });
   for (const { name: partName, part } of walkAnatomy(contract)) {
     if (part.repeat?.keyField !== undefined) facts.push({
       part: partName, variant: '', kind: 'declared', channel: 'repeat.keyField', value: part.repeat.keyField,

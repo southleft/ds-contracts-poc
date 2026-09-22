@@ -435,6 +435,128 @@
         "additionalProperties": false
       }
     },
+    "selection": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "const": "tabs"
+        },
+        "valueProp": {
+          "type": "string"
+        },
+        "listPart": {
+          "type": "string"
+        },
+        "itemPart": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "object",
+          "properties": {
+            "prop": {
+              "type": "string"
+            },
+            "on": {
+              "type": "string"
+            },
+            "off": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "prop",
+            "on",
+            "off"
+          ],
+          "additionalProperties": false
+        },
+        "disabledField": {
+          "type": "string"
+        },
+        "panels": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "minLength": 1
+              },
+              "part": {
+                "type": "string"
+              },
+              "focusable": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "value",
+              "part",
+              "focusable"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "ltr",
+            "rtl"
+          ]
+        },
+        "activation": {
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual"
+          ]
+        },
+        "bindings": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "object",
+              "properties": {
+                "prop": {
+                  "type": "string",
+                  "pattern": "^on[A-Z][a-zA-Z0-9]*$"
+                }
+              },
+              "required": [
+                "prop"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "code"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "pattern",
+        "valueProp",
+        "listPart",
+        "itemPart",
+        "selected",
+        "panels",
+        "orientation",
+        "direction",
+        "activation",
+        "bindings"
+      ],
+      "additionalProperties": false
+    },
     "states": {
       "default": [],
       "type": "array",

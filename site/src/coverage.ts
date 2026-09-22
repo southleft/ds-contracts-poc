@@ -181,6 +181,11 @@ reg("states", "state-previews", ["contract.bindings.figma.statePreviews"]);
 // Additive (docs/23 §D.40): the undrawn combinations of a sparse variant matrix.
 reg("contract", "absent-variants", ["contract.bindings.figma.absentVariants"]);
 reg("events", "events", ["contract.events"]);
+reg("events", "selection", ["contract.selection", "selection.pattern", "selection.valueProp",
+  "selection.listPart", "selection.itemPart", "selection.selected", "selection.selected.prop",
+  "selection.selected.on", "selection.selected.off", "selection.disabledField", "selection.panels",
+  "selection.panels.value", "selection.panels.part", "selection.panels.focusable", "selection.orientation",
+  "selection.direction", "selection.activation", "selection.bindings", "selection.bindings.code", "selection.bindings.code.prop"]);
 
 // --- Semantics -------------------------------------------------------------
 reg("semantics", "semantics", [

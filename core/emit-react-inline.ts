@@ -1,5 +1,6 @@
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactSelectionPlan } from './react-selection.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
@@ -231,6 +232,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const textBoxes = wholePixelTextBoxPlan(contract, (ref) => String(resolveValue(ref)));
 
   const name = contract.name;
+  const selection = reactSelectionPlan(contract, ctx.contracts);
   const enums = enumProps(contract);
   const bools = boolProps(contract);
   const events = contract.events ?? [];
@@ -640,15 +642,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const omittedNote = reactOmittedNote(omittedAttrs, meta);
   const callerStyleAvailable = !omittedAttrs.includes('style');
   const toggledCodeProps = new Set(events.filter((e) => e.toggles).map((e) => codePropOf(e.toggles!.prop)));
+  if (selection) toggledCodeProps.add(selection.code);
 
   const propLines: string[] = [];
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
     if (isEnum(p)) {
-      propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${hasCodeValues(p) ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
+      propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${hasCodeValues(p) || p.name === contract.selection?.valueProp ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
-        .map(([f, t]) => `${f}: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
+        .map(([f, t]) => `${selection?.item.repeat?.itemsProp === p.name ? JSON.stringify(f) : f}: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
         .join('; ');
       propLines.push(`${doc}  ${p.bindings.code.prop}?: Array<{ ${fields} }>;`);
     } else if (p.type === 'boolean') {
@@ -672,6 +675,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   }
 
   const destructured: string[] = [];
+  if (selection) { propLines.push(selection.propLine); destructured.push(selection.callback); }
   for (const p of enums) {
     destructured.push(
       hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
@@ -700,6 +704,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   // Uncontrolled toggles + handlers — identical pattern to the CSS-Module emitter.
   const prelude: string[] = mappedPropPrelude(contract);
+  if (selection) prelude.push(...selection.prelude);
   for (const ev of events) {
     if (!ev.toggles) continue;
     const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
@@ -779,6 +784,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       pieces.push(`...(J[${index}][JSON.stringify([${values}])] ?? {})`);
     }
     pieces.push(...extra);
+    const selectionPart = selection && walkAnatomy(contract).find(row => row.name === partName)?.part;
+    if (selectionPart && selection?.style(selectionPart)) pieces.push(selection.style(selectionPart)!);
     if (isRoot && Object.keys(disabledStyle).length > 0) {
       pieces.push(`...(${codePropOf('disabled')} ? DISABLED_STYLE : {})`);
     }
@@ -807,6 +814,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   };
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+    const panel = selection?.wrap(part, jsx);
+    if (panel !== undefined) return panel;
     if (!part.visibleWhen) return jsx;
     const codeName = codePropOf(part.visibleWhen.prop);
     const eq = part.visibleWhen.equals;
@@ -822,7 +831,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // Root and nested attrs share typed native/ARIA projection with the CSS-module emitter.
   const partAttrList = (part: Part): string[] =>
     reactPartAttrList(contract, part, codePropOf);
-  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('') + (selection?.attrs(part, true) ?? '');
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
   const neededIcons = new Map<string, string>();
@@ -917,6 +926,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       return wrapVisibleWhen(part, node);
     }
     if (part.repeat && part.component) {
+      if (selection?.item === part) {
+        const dep = ctx.contracts.get(part.component.id)!;
+        const rp = contract.props.find(p => p.name === part.repeat!.itemsProp)!;
+        let childrenField: string | undefined;
+        const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, unknown> }).arrayOf)
+          .filter(field => field !== part.repeat!.keyField)
+          .map(field => {
+            const prop = dep.props.find(p => p.name === field)!;
+            if (prop.bindings.code.prop === 'children') { childrenField = field; return ''; }
+            return ` ${prop.bindings.code.prop}={${codeValueExpression(prop, `__dscItem[${JSON.stringify(field)}]`)}}`;
+          }).join('');
+        const attrs = depAttrString(dep, part.component.props ?? {}) + fieldAttrs + selection.itemAttrs;
+        const key = `__dscItem[${JSON.stringify(part.repeat.keyField)}]`;
+        const node = childrenField ? `<${dep.name} key={${key}}${attrs}>{__dscItem[${JSON.stringify(childrenField)}]}</${dep.name}>`
+          : `<${dep.name} key={${key}}${attrs} />`;
+        return `{__dscItems.map(__dscItem => (${node}))}`;
+      }
       // v12 repeat (P9): the inline surface renders the contract's OBSERVED
       // sample as fixed instances (the meter discipline; the full React
       // surface maps the live array) — a declared fidelity limit, named in
@@ -954,7 +980,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component);
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.
@@ -1128,7 +1154,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const overlapNote = walkAnatomy(contract).some((w) => w.part.layout?.overlap && w.part.tokens?.gap)
     ? `\n * Fidelity: the overlap gap (negative child margins) needs a child selector — not\n * expressible inline; children render without the overlap offset.`
     : '';
-  const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat)
+  const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat && w.part !== selection?.item)
     ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
     : '';
 
@@ -1234,7 +1260,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
+${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}
