@@ -20,7 +20,10 @@ export interface ReactSourceAnatomy {
        * computed style remains measured evidence, never a reusable rule. */
       observation: Omit<CapturedNode, 'nodes'>;
     }>;
-    content: 'caller-slot' | 'authored-or-runtime' | 'unresolved';
+    content: 'caller-slot' | 'nested-caller-slot' | 'authored-or-runtime' | 'unresolved';
+    /** Observed host container for a proved nested input. Root-only consumers
+     * must not discard its surrounding source-owned hosts. */
+    callerSlotPath?: string;
     /** Paths are addresses in this observation, not permanent part names. */
     sourceOwnedPaths: string[];
     callerContentPaths: string[];
@@ -99,17 +102,48 @@ export function linkReactSourceAnatomy(
           correspondence: owned ? source.root.kind === 'host' ? 'source-host' as const : 'observed-host-branch' as const : 'runtime-dependent' as const,
           observation: structuredClone(observation) };
       });
-      const content = source.children.kind === 'forwarded' && roots.length === 1 && roots[0].correspondence !== 'runtime-dependent'
+      let content: ReactSourceAnatomy['instances'][number]['content'] = source.children.kind === 'forwarded' && roots.length === 1 && roots[0].correspondence !== 'runtime-dependent'
         ? 'caller-slot' as const : source.children.kind === 'unresolved' ? 'unresolved' as const : 'authored-or-runtime' as const;
       const nodes = ownership.nodes.filter(node => instance.roots.some(root => contains(root, node.path)));
+      let callerSlotPath: string | undefined;
+      if (source.children.kind === 'nested-forwarded') {
+        const slot = source.children.nestedSlot;
+        if (!slot || !slot.path || roots.length !== 1 || roots[0].correspondence !== 'source-host' ||
+            !slot.hosts.length || new Set(slot.hosts.map(host => host.path)).size !== slot.hosts.length ||
+            slot.hosts.some(host => !/^(?:0|[1-9]\d*)(?:\.(?:0|[1-9]\d*))*$/.test(host.path) && host.path !== ''))
+          fail('react-anatomy-nested-slot-source-unqualified');
+        const hosts = new Map(slot.hosts.map(host => [host.path, host]));
+        if (!hosts.has('') || !hosts.has(slot.path) || slot.hosts.some(host => host.path !== slot.path && contains(slot.path, host.path)))
+          fail('react-anatomy-nested-slot-source-unqualified');
+        for (const host of slot.hosts) {
+          const children = slot.hosts.filter(child => child.path !== '' && child.path.split('.').slice(0, -1).join('.') === host.path);
+          if (children.some((child, index) => child.path !== (host.path ? `${host.path}.${index}` : String(index))))
+            fail('react-anatomy-nested-slot-source-unqualified');
+          if (host.path && !hosts.has(host.path.split('.').slice(0, -1).join('.')))
+            fail('react-anatomy-nested-slot-source-unqualified');
+        }
+        const absolute = (path: string) => [roots[0].path, path].filter(Boolean).join('.');
+        callerSlotPath = absolute(slot.path);
+        const inside = (path: string) => path !== callerSlotPath && contains(callerSlotPath!, path);
+        const shell = nodes.filter(node => !inside(node.path));
+        if (shell.length !== slot.hosts.length || slot.hosts.some(host => {
+          const node = shell.find(node => node.path === absolute(host.path));
+          return !node || node.tag !== host.tag || node.createdBy !== instance.id;
+        }) || nodes.some(node => inside(node.path) && node.createdBy === instance.id) ||
+            ownership.components.some(child => child.parent === instance.id && !child.roots.every(inside)))
+          fail('react-anatomy-nested-slot-observation-mismatch');
+        content = 'nested-caller-slot';
+      }
       const sourceOwnedPaths = nodes.filter(node => node.createdBy === instance.id).map(node => node.path);
-      const callerContentPaths = content === 'caller-slot' ? nodes.filter(node => !instance.roots.includes(node.path) && node.createdBy !== instance.id).map(node => node.path) : [];
+      const callerContentPaths = content === 'caller-slot' ? nodes.filter(node => !instance.roots.includes(node.path) && node.createdBy !== instance.id).map(node => node.path)
+        : content === 'nested-caller-slot' ? nodes.filter(node => node.path !== callerSlotPath && contains(callerSlotPath!, node.path)).map(node => node.path) : [];
       const dependencies = ownership.components.filter(child => child.parent === instance.id).map(child => ({
         instanceId: child.id, roots: [...child.roots],
-        placement: content === 'caller-slot' ? 'caller-content' as const : 'authored-or-runtime' as const,
+        placement: content === 'caller-slot' || content === 'nested-caller-slot' ? 'caller-content' as const : 'authored-or-runtime' as const,
       }));
       out.instances.push({ instanceId: instance.id, source: structuredClone(instance.source),
         ...(instance.parent ? { parentInstanceId: instance.parent } : {}), roots, content,
+        ...(callerSlotPath === undefined ? {} : {callerSlotPath}),
         sourceOwnedPaths, callerContentPaths,
         runtimeDependentPaths: nodes.filter(node => !sourceOwnedPaths.includes(node.path) && !callerContentPaths.includes(node.path)).map(node => node.path),
         dependencies, problems: [
@@ -117,6 +151,7 @@ export function linkReactSourceAnatomy(
           ...(roots.some(root => root.correspondence === 'runtime-dependent') ? ['root-runtime-correspondence-unqualified'] : []),
           ...(roots.some(root => root.correspondence === 'observed-host-branch') ? ['other-root-branches-unqualified'] : []),
           ...(content === 'unresolved' ? ['children-flow-unresolved'] : []),
+          ...(content === 'nested-caller-slot' ? ['nested-children-lowering-unqualified'] : []),
         ] });
     }
     out.status = 'linked';

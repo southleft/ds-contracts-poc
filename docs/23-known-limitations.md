@@ -9672,3 +9672,41 @@ To reverse, restore the metadata-based traversal boundary in
 `core/native-source-observation.ts` and regenerate the plugin engine receipt;
 preserve the deeper-slot refusal, adversarial examples and private evidence in
 `private/nested-slot-readback-20260922/`.
+
+## D.126 Nested source children need an explicit host path
+
+**AGENT decision, 2026-09-22: record nested input flow separately from a root
+slot.** The React reader can now identify one unchanged `children` input inside
+a static tree of intrinsic JSX hosts. It records the receiving host's element
+path and the surrounding host structure. Text and comments do not consume
+element addresses. Expression, attribute and props-spread forwarding use the
+same precedence and input-mutation checks as direct root forwarding.
+
+The ownership join verifies each surrounding host's address, tag and creating
+component against the actual captured tree. It checks that caller elements and
+dependent component roots remain inside the identified container. Missing,
+extra, moved or differently owned hosts refuse. Repeated instances keep their
+own absolute paths. These facts identify content ownership; they do not prove
+the wrapper styles, text API, property planes or native fidelity.
+
+Nested flow has a distinct `nested-forwarded` fact and `nested-caller-slot`
+anatomy. It must not use root-only projection, which deliberately discards sample
+descendants. Native main matching and caller generation explicitly refuse the
+new case until lowering retains the complete owned structure. A review fixture
+demonstrated that root paint alone could otherwise match a main that omits the
+source-owned wrapper. It now refuses by name. API proposals also retain the
+`nested-children-lowering-unqualified` limitation and advertise no root slot.
+
+Source tests cover sibling hosts, deeper paths, attribute and spread precedence,
+duplicate slots, component and fragment boundaries, conditional content,
+defaults, mutation, mutable aliases and escaped callback inputs. A real React
+browser check links repeated nested components, text and empty callers across
+rerenders without altering rendered pixels. Existing Badge and Separator source
+reads remain byte-identical. These are implementation checks, not a new live
+application or Figma journey. Unsupported dynamic structure and the complete
+deep-composition journey remain V1 gaps.
+
+Evidence is retained in `private/nested-slot-source-20260922/`. To reverse,
+restore root-only source inference and its ownership join; preserve the named
+refusals and review fixture. Do not relabel nested flow as ordinary forwarding
+without implementing and verifying the complete source-owned structure.

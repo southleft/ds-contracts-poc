@@ -178,6 +178,8 @@ export function proposeReactSourceProgram(
         component.root.kind === "host";
       if (!rootChildrenSlot && component.children?.kind === "forwarded")
         row.problems.push("children-root-consumption-unverified");
+      else if (component.children?.kind === "nested-forwarded")
+        row.problems.push("nested-children-lowering-unqualified");
       else if (component.children?.kind === "unresolved")
         row.problems.push(
           component.children.reason ?? "children-flow-unresolved",

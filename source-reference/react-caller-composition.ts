@@ -101,6 +101,8 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     if (/^\d+(?:\.\d+)?px$/.test(tree.style.width)) result.observedWidth = Number.parseFloat(tree.style.width);
     const anatomy = linkReactSourceAnatomy(program, ownership, tree);
     if (anatomy.status !== 'linked' || anatomy.problems.length) throw Error('react-caller-source-correspondence-unavailable');
+    if (anatomy.instances.some(instance => instance.content === 'nested-caller-slot'))
+      throw Error('react-caller-nested-slot-lowering-unqualified');
     const labels = verifiedLabelAssociations(tree, input.labels);
     const boundaries = ownership.components.flatMap(c => c.roots).filter(path => path !== '');
     const content = compileObservedContent(tree, fonts, svg, true, boundaries);

@@ -74,6 +74,11 @@ against their source main's hierarchy and allocation stamps. This corrects a
 regression-tested refusal; historical Card readbacks remain unchanged. A fresh
 deep-slot application journey is still required ([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
 
+Source inspection now distinguishes children passed inside static JSX wrappers
+and checks the host path against React ownership. Native generation still
+refuses this case until it preserves those wrappers; browser checks alone do
+not qualify the application journey ([D.126](23-known-limitations.md#d126-nested-source-children-need-an-explicit-host-path)).
+
 ### Build rules that compose
 
 The contract records supported properties, anatomy, layout, tokens, content and component references. Readers and emitters use reusable rules; examples exercise those rules or expose a missing one. Runtime conversion requires no AI.

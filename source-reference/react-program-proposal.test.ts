@@ -47,6 +47,33 @@ export interface InputAPI{active?:boolean;checked?:boolean;requiredFlag:boolean;
   }
 }
 
+test("a nested source input is not advertised as a root children API", () =>
+  fixture((root) => {
+    const source =
+      "import type {InputAPI} from './types'; export function Panel({children}:{children?:string}) {return <div><div>{children}</div></div>}";
+    writeFileSync(path.join(root, "components.tsx"), source);
+    const program = readReactSourceProgram(root, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    assert.equal(program.components[0].children.kind, "nested-forwarded");
+    const proposal = proposeReactSourceProgram(program, [
+      { sourcePath: "components.tsx", source },
+    ]);
+    assert.ok(
+      proposal.components[0].problems.includes(
+        "nested-children-lowering-unqualified",
+      ),
+    );
+    assert.deepEqual(proposal.components[0].slots, []);
+    for (const row of proposal.result.proposals) {
+      const contract = ContractSchema.parse(row.proposal.contract);
+      assert.equal(contract.anatomy.root.slot, undefined);
+      assert.equal(
+        contract.props.some((prop) => prop.name === "children"),
+        false,
+      );
+    }
+  }));
+
 test("installed API proposals preserve booleans, omission and declared defaults while naming unrepresentable domains", () =>
   fixture((root, source) => {
     const program = readReactSourceProgram(root, ["components.tsx"]);

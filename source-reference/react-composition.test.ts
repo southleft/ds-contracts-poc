@@ -206,6 +206,31 @@ export function Child(props: {children?: string; id?: string}) { return <button 
   } catch (error) { rmSync(dir, { recursive: true, force: true }); throw error; }
 }
 
+test('a nested caller host cannot reuse a root-only main or erase its wrapper', async t => {
+  const f=await fixture();t.after(()=>rmSync(f.dir,{recursive:true,force:true}));
+  const file=path.join(f.dir,'components.tsx');
+  writeFileSync(file,readFileSync(file,'utf8').replace('section: any; button: any','section: any; button: any; span: any')
+    .replace('export function Child(props: {children?: string; id?: string}) { return <button {...props}/> }',
+      'export function Child({children,id}: {children?: string; id?: string}) { return <button id={id}><span>{children}</span></button> }'));
+  f.program=readReactSourceProgram(f.dir,['components.tsx']);assert.deepEqual(f.program.problems,[]);
+  for(const instance of f.ownership.components){const c=f.program.components.find(c=>c.exportName===instance.source.exportName)!;
+    instance.source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};}
+  assert.equal(f.program.components.find(c=>c.name==='Child')!.children.kind,'nested-forwarded');
+  f.ownership.nodes[2].createdBy='child';f.main.source=f.ownership.components[1].source;
+  const matched=matchReactComposition(f.program,f.ownership,f.tree,f.content,[f.main]);
+  assert.equal(matched.review.matched,0,'matching root paint cannot justify omitting the source-owned span');
+  assert.deepEqual(matched.references,[]);
+  assert.deepEqual(matched.review.rows[0].problems,['react-composition-nested-slot-lowering-unqualified']);
+  const input={program:f.program,ownership:f.ownership,tree:f.tree,fonts:f.fonts,
+    svg:{version:1 as const,treeRevision:revisionOf(f.tree),status:'observed' as const,rows:[],problems:[]},
+    origin:{version:1 as const,roots:[{path:'0',tag:'button',channels:[]}]},
+    labels:{version:1 as const,treeRevision:revisionOf(f.tree),status:'observed' as const,rows:[],problems:[]},behaviors:[]};
+  const generated=projectReactCallerCompositionGraph(input);
+  assert.equal(generated.draft.status,'refused');
+  assert.deepEqual(generated.draft.problems,['react-caller-nested-slot-lowering-unqualified']);
+  assert.deepEqual(generated.resources,[]);
+});
+
 test('context child requests reopen pinned evidence and refuse substitution without upgrading legacy requests', async () => {
   const f = await fixture();
   try {
