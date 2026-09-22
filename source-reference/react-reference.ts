@@ -770,14 +770,14 @@ export function createReactReferenceService(
           if(req.method!=='GET' || Number(req.headers['content-length'] ?? 0)>0 || req.headers['transfer-encoding'])
             throw Error('react-native-progress-read-only');
           const referenceId=reference.id;
-          const pending=withEvidenceReadSnapshot(()=>{
+          const pending=withEvidenceReadSnapshot(()=>jobs.withReadSnapshot(()=>{
             if(jobs.reactIdentity(nativeProgress[2]).referenceId!==referenceId) throw Error('react-native-progress-reference-mismatch');
             const state=nativeProgress[3]
               ? native().updateJobs?.deliveryStateForProposal(nativeProgress[2],nativeProgress[3])
               : jobs.deliveryState(nativeProgress[2]);
             if(!state) throw Error('react-native-progress-unavailable');
             return nativeDeliveryPending(state);
-          });
+          }));
           // Deliberately omit sourceCurrent, results, images, scripts and pairing.
           // A settled journal tells the UI to request the fully checked listing.
           json(res,200,{pending});return;

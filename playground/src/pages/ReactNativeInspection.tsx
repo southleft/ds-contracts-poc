@@ -109,7 +109,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
       finally { pending = false; if (!stopped) setLoading(false); }
     };
-    void load();
+    // StrictMode cleans up its first effect immediately. Let that cleanup run
+    // before starting a synchronous, expensive host read that cannot be undone.
+    queueMicrotask(() => { if (!stopped) void load(); });
     const timer = setInterval(() => void load(true), 4000);
     return () => { stopped = true; clearInterval(timer); };
   }, [root, observationRevision]);
