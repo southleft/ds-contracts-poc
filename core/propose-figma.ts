@@ -1,3 +1,4 @@
+import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
 import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {observedInstanceGroups, observedInstanceIdentity, staticInstanceContent} from './observed-instance-content.js';
 import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './absolute-box.js';
@@ -11924,6 +11925,8 @@ function proposeFromDumpFenced(
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
+  const retainedSelection = readFigmaSelectionApi(set);
+  if (retainedSelection) set = retainedSelection.normalized;
   const rootContent = readRootContent(set);
   const template = rootContent?.textTemplate ? validateRootTextTemplates(set, opts.corpus, opts.capturedValues) : undefined;
   const templateFamily = template?.family;
@@ -13544,6 +13547,10 @@ function proposeFromDumpFenced(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  if (retainedSelection) {
+    restoreFigmaSelectionApi(contract, retainedSelection, opts.contractsById);
+    ctx.notes.push('retained-selection-api: explicit identities, input aliases and panel relationships recovered from validated non-executable metadata; paint and content come from the capture, not retained source anatomy; native behavior is not certified');
+  }
   if (retainedApi) {
     restoreFigmaStateApi(contract, retainedApi);
     ctx.notes.push('retained-state-api: initializer and callback toggle recovered from validated non-executable metadata; drawn variants corroborate the input domain, not native interaction behavior');

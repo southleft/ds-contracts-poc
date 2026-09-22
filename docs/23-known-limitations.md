@@ -9635,8 +9635,26 @@ component wrappers refuse. Public selection-value remapping is not supported.
 
 Static HTML and native Figma project the declared finite states from the
 observed records. Figma records the relationship and React-only behavior as
-code-only facts; raw native recapture does not reconstruct them. Web Components
-refuse this declaration. Existing unkeyed repeats retain their prior behavior.
+code-only facts. A bounded return now retains non-executable selection API
+metadata and stamps list, item and panel identities. Before reconstruction,
+the reader verifies the complete native domain, unique item keys, consistent
+ordering, selected appearance, panel visibility, slot property identity and
+full dependency contracts. The ordinary inverse supplies current paint, item
+labels and panel content; no source anatomy snapshot overwrites a capture.
+Uniform item reordering and label changes survive. Missing, duplicated, hidden
+or inconsistent relationships refuse by name. Existing relationships cannot
+be retired or changed by an ordinary in-place sync; use a verified migration
+or a fresh lineage. The return currently requires one div-root selection, two
+inputs, a literal list label, all finite items and panels drawn, and unconstrained
+panel slots. Disabled or missing sample items with undrawn panels, repeated
+instance overrides and broader retained APIs refuse. Web Components refuse
+this declaration. Existing unkeyed repeats retain their prior behavior.
+
+Production writer/capture checks on a native mock, REST metadata checks and
+returned-component browser checks demonstrate this bounded implementation.
+Both React emitters retain the declared initial value, keyboard callback and
+stable IDs after native item reordering. These are not live Figma evidence:
+the actual application-to-native-to-installed-consumer journey remains open.
 
 Generated React browser checks cover both emitters, including controlled-held
 callbacks, manual RTL navigation, disabled items, active styling, panel state
@@ -9676,7 +9694,9 @@ fidelity or native return. Those journeys remain unfinished. The retained Tabs
 archive is unchanged; its missing identities and additional panel contents are
 not invented.
 
-**Reversal:** remove the Selection setup view/helper, then remove `selection` and its shared projection/runtime integration,
+**Reversal:** remove the retained selection reader/writer and node metadata
+handling together (preserve native evidence and use a fresh lineage), remove
+the Selection setup view/helper, then remove `selection` and its shared projection/runtime integration,
 restore the named interaction gap, regenerate both schema projections and the
 plugin receipt, and retain the failing and passing private checks. The keyed
 repeat foundation can remain independently. No fidelity threshold changes.

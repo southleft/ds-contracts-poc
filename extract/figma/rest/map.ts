@@ -1552,6 +1552,8 @@ function mapNode(
   parent: RestNode | null = null,
 ): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
+  const selectionIdentity = node.sharedPluginData?.ds_contracts?.selectionIdentity;
+  if (selectionIdentity) { try { out.selectionIdentity = JSON.parse(selectionIdentity); } catch { out.selectionIdentity = selectionIdentity; } }
 
   // dump v1.17: GRID-cell placement — the same rule as dump.plugin.js: every
   // IN-FLOW child of a MANUAL GRID parent carries its cell (0-based anchors,
@@ -2166,6 +2168,10 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const stampedRootSlot = rawRootSlot === undefined ? undefined : (() => {
       try { return JSON.parse(rawRootSlot) as unknown; } catch { return rawRootSlot; }
     })();
+    const rawSelectionApi = stampString('selectionApi');
+    const stampedSelectionApi = rawSelectionApi === undefined ? undefined : (() => {
+      try { return JSON.parse(rawSelectionApi) as unknown; } catch { return rawSelectionApi; }
+    })();
     const rawCodeValueAxes = stampString('codeValueAxes');
     // Preserve malformed JSON too: absence and corrupt omission semantics
     // are not interchangeable observations.
@@ -2313,6 +2319,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedPropNames ? { propNames: stampedPropNames } : {}),
       ...(stampedUnsetVariantAxes !== undefined ? { unsetVariantAxes: stampedUnsetVariantAxes } : {}),
       ...(stampedRootSlot !== undefined ? { rootSlot: stampedRootSlot } : {}),
+      ...(stampedSelectionApi !== undefined ? { selectionApi: stampedSelectionApi } : {}),
       ...(stampedCodeValueAxes !== undefined ? { codeValueAxes: stampedCodeValueAxes } : {}),
       ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),

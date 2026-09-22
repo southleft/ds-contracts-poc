@@ -400,7 +400,7 @@
     "extract:figma:wrap:check": "tsx extract/figma/wrap-check.ts",
     "extract:figma:gradient:check": "tsx extract/figma/gradient-fill-check.ts",
     "extract:figma:constraints:check": "tsx extract/figma/constraints-check.ts",
-    "extract:figma:repeat:check": "tsx extract/figma/repeat-collection-check.ts && node --import tsx --test core/repeated-enum-fields.test.ts core/repeat-identity.test.ts core/react-selection-runtime.test.ts core/selection-contract.test.ts",
+    "extract:figma:repeat:check": "tsx extract/figma/repeat-collection-check.ts && node --import tsx --test core/repeated-enum-fields.test.ts core/repeat-identity.test.ts core/react-selection-runtime.test.ts core/selection-contract.test.ts core/figma-selection-api.test.ts",
     "extract:figma:theme:check": "tsx extract/figma/theme-mode-check.ts",
     "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",
     "extract:figma:gauntlet:noteclass:check": "tsx extract/figma/gauntlet/note-class-check.ts",

@@ -246,7 +246,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 2007,
+      "ruleLine": 2010,
       "ruleText": "const adjacentInlines = kids.some((k, i) => i > 0 && !blockLevel(k) && !blockLevel(kids[i - 1]));",
       "css": {
         "construct": "two or more adjacent inline siblings inside a block container — one CSS line box",
@@ -274,8 +274,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 1941,
-      "ruleLine": 1942,
+      "line": 1944,
+      "ruleLine": 1945,
       "ruleText": "if (l && !l.direction && part.declared?.['display'] === 'block') {",
       "css": {
         "construct": "display:block carrying align/justify facts but no flex-direction",
@@ -305,8 +305,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2008,
-      "ruleLine": 2009,
+      "line": 2011,
+      "ruleLine": 2012,
       "ruleText": "if (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines))) {",
       "css": {
         "construct": "a block-flow container (block | list-item | flow-root | inline) with no layout fact",
@@ -336,7 +336,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 2013,
+      "ruleLine": 2016,
       "ruleText": "const mode: 'HORIZONTAL' | 'VERTICAL' = l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL';",
       "css": {
         "construct": "any container whose flex-direction was not carried — including one that carries NO layout at all",
@@ -368,7 +368,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 4841,
+      "ruleLine": 4848,
       "ruleText": "layout: resolveLayout(part, subst)",
       "css": {
         "construct": "display:block (or any block-flow display) on an icon part that also carries box channels",
@@ -396,7 +396,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 1959,
+      "ruleLine": 1962,
       "ruleText": "return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };",
       "css": {
         "construct": "a ROOT that carries no layout fact at all",
@@ -434,8 +434,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5207,
-      "ruleLine": 5208,
+      "line": 5214,
+      "ruleLine": 5215,
       "ruleText": "if (isReversed(part, subst)) spec.children.reverse();",
       "css": {
         "construct": "flex-direction: row-reverse / column-reverse",
@@ -471,7 +471,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8636,
+      "ruleLine": 8645,
       "ruleText": "const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -500,7 +500,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 5041,
+      "ruleLine": 5048,
       "ruleText": "layout: resolveLayout(part, subst) ? layoutSpec(part, false, subst) : { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' },",
       "css": {
         "construct": "a text part carrying a padding channel, whose display is block-flow",
@@ -528,7 +528,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 2881,
+      "ruleLine": 2884,
       "ruleText": "if (n !== undefined && (spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') li().itemSpacing = n;",
       "css": {
         "construct": "a LITERAL column-gap on a VERTICAL stack (and the row-gap twin four lines below)",
@@ -556,8 +556,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2296,
-      "ruleLine": 2297,
+      "line": 2299,
+      "ruleLine": 2300,
       "ruleText": "miss(spec, cssProp, 'the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.', ref);",
       "css": {
         "construct": "column-gap bound to a token on a VERTICAL stack (and, at the twin site, row-gap on a HORIZONTAL one)",
@@ -586,8 +586,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2289,
-      "ruleLine": 2290,
+      "line": 2292,
+      "ruleLine": 2293,
       "ruleText": "if ((spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') {",
       "css": {
         "construct": "column-gap bound to a token",
@@ -623,8 +623,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 1926,
-      "ruleLine": 1927,
+      "line": 1929,
+      "ruleLine": 1930,
       "ruleText": "rowGap: gapPx(l.gap?.row),",
       "css": {
         "construct": "row-gap and column-gap on a grid container",
@@ -661,7 +661,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7287,
+      "ruleLine": 7295,
       "ruleText": "const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -693,8 +693,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 4524,
-      "ruleLine": 4525,
+      "line": 4527,
+      "ruleLine": 4528,
       "ruleText": "if (g.flowRows) {",
       "css": {
         "construct": "grid-auto-rows with forward row flow",
@@ -729,8 +729,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 1900,
-      "ruleLine": 1901,
+      "line": 1903,
+      "ruleLine": 1904,
       "ruleText": "const toTrack = (t: NonNullable<typeof l.rows>[number]): GridTrackSpec =>",
       "css": {
         "construct": "grid-template-columns / grid-template-rows",
@@ -768,7 +768,7 @@
       "stage": "emit",
       "status": "wall",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 2669,
+      "ruleLine": 2672,
       "ruleText": "const m = value.trim().match(/^(-?\\d+(?:\\.\\d+)?)(px|rem|em)?$/);",
       "css": {
         "construct": "margin: auto — the standard \"push to the far edge\" and \"centre in the container\" idiom",
@@ -799,7 +799,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 9487,
+      "ruleLine": 9496,
       "ruleText": "}${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\\n  sizeCallerSlots(comp);' : ''}",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -829,8 +829,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6283,
-      "ruleLine": 6284,
+      "line": 6290,
+      "ruleLine": 6291,
       "ruleText": "if (sides.length > 0 && why) {",
       "css": {
         "construct": "margin-* on a child the margin box provably cannot wrap",
@@ -861,7 +861,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 6793,
+      "ruleLine": 6801,
       "ruleText": "box.name = childSpec.name + ' (margin box)';",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -901,7 +901,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 6723,
+      "ruleLine": 6731,
       "ruleText": "gaps.push({ px: t + l, vars });",
       "css": {
         "construct": "adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next)",
@@ -935,8 +935,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6732,
-      "ruleLine": 6733,
+      "line": 6740,
+      "ruleLine": 6741,
       "ruleText": "(spec.lits ??= {}).itemSpacing = px;",
       "css": {
         "construct": "margin-* lowered to itemSpacing whose contributing margins name more than one token, or none",
@@ -970,7 +970,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 6712,
+      "ruleLine": 6720,
       "ruleText": "if (kids.length < 2) return;",
       "css": {
         "construct": "margin-* on the ONLY in-flow child of a container",
@@ -999,8 +999,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6726,
-      "ruleLine": 6727,
+      "line": 6734,
+      "ruleLine": 6735,
       "ruleText": "if (px <= 0 || !gaps.every((g) => g.px === px)) return;",
       "css": {
         "construct": "margin-* between in-flow siblings, on the parent’s MAIN axis",
@@ -1038,8 +1038,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6102,
-      "ruleLine": 6103,
+      "line": 6109,
+      "ruleLine": 6110,
       "ruleText": "const lowered=lowerPaddingBoxBackground(spec,name=>{",
       "css": {
         "construct": "background-clip: padding-box",
@@ -1071,8 +1071,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2268,
-      "ruleLine": 2269,
+      "line": 2271,
+      "ruleLine": 2272,
       "ruleText": "spec.bindings = { ...spec.bindings, paddingLeft: varName };",
       "css": {
         "construct": "padding-left / -right / -top / -bottom bound to a token",
@@ -1109,7 +1109,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 2606,
+      "ruleLine": 2609,
       "ruleText": "if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note, ref);",
       "css": {
         "construct": "any token-bound channel with no case in the switch — including the `padding` shorthand itself",
@@ -1138,7 +1138,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8572,
+      "ruleLine": 8581,
       "ruleText": "if (isNewSection) {",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1167,7 +1167,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 9368,
+      "ruleLine": 9377,
       "ruleText": "child.x = x; child.y = y;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1196,8 +1196,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 4364,
-      "ruleLine": 4365,
+      "line": 4367,
+      "ruleLine": 4368,
       "ruleText": "if (carried === 4 && numeric) {",
       "css": {
         "construct": "position:absolute with all four insets carried and every one a px length",
@@ -1235,7 +1235,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 4305,
+      "ruleLine": 4308,
       "ruleText": "if (left === undefined && right === undefined && top === undefined && bottom === undefined) return null;",
       "css": {
         "construct": "position:absolute with NO inset carried — the static-position case",
@@ -1263,8 +1263,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5262,
-      "ruleLine": 5263,
+      "line": 5269,
+      "ruleLine": 5270,
       "ruleText": "if (resolveLiterals(root, subst).width === '100%') {",
       "css": {
         "construct": "width:100% on a reusable root children slot",
@@ -1295,8 +1295,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2507,
-      "ruleLine": 2508,
+      "line": 2510,
+      "ruleLine": 2511,
       "ruleText": "const ceiling = spec.type !== 'text' && Number.isFinite(value) &&",
       "css": {
         "construct": "max-width",
@@ -1328,8 +1328,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 2536,
-      "ruleLine": 2537,
+      "line": 2539,
+      "ruleLine": 2540,
       "ruleText": "if (tokens['height'] === undefined) {",
       "css": {
         "construct": "min-height alongside a height token",
@@ -1357,8 +1357,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5518,
-      "ruleLine": 5519,
+      "line": 5525,
+      "ruleLine": 5526,
       "ruleText": "!(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&",
       "css": {
         "construct": "a text child inside a container that grants FILL",
@@ -1389,7 +1389,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 893,
+      "ruleLine": 896,
       "ruleText": "node[prop] = 'FIXED';",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1419,7 +1419,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8934,
+      "ruleLine": 8943,
       "ruleText": "if (!spec.fill) node.fills = [];",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1448,8 +1448,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 5399,
-      "ruleLine": 5400,
+      "line": 5406,
+      "ruleLine": 5407,
       "ruleText": "`${contract.id}: slot \"${part.slot.name}\" declares display:grid — Figma refuses it verbatim (\"GRID layoutMode cannot be applied to Slot frames\"); a slot interior is NONE/HORIZONTAL/VERTICAL only`,",
       "css": {
         "construct": "display:grid directly on a non-root slot part",
@@ -1477,8 +1477,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6365,
-      "ruleLine": 6366,
+      "line": 6372,
+      "ruleLine": 6373,
       "ruleText": "if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {",
       "css": {
         "construct": ":hover, :focus, :active and every other state’s channel values",
@@ -1507,8 +1507,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 6354,
-      "ruleLine": 6355,
+      "line": 6361,
+      "ruleLine": 6362,
       "ruleText": "if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT' || p.bindings.figma.unsetValue !== undefined) continue;",
       "css": {
         "construct": "the library’s rendering when a defaultless enum prop is not supplied at all",
@@ -1537,7 +1537,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 4744,
+      "ruleLine": 4751,
       "ruleText": "const paintVar = svgSinglePaintVar(markup, paintHex, paintPath);",
       "css": {
         "construct": "fill / stroke colour on an icon whose markup carries MORE THAN ONE paint",
@@ -1565,7 +1565,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 8805,
+      "ruleLine": 8814,
       "ruleText": "if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1595,7 +1595,7 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 7026,
+      "ruleLine": 7034,
       "ruleText": "if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';`",
       "markerOutsideRule": "the deciding line is inside the serialized in-page plugin runtime (a template literal), which is emitted as the generated Figma script rather than executed here — a `//` line there would become generated text, not a source marker, so this rule is pinned by its rule text instead",
       "css": {
@@ -1863,8 +1863,8 @@
       "stage": "propose",
       "status": "implemented",
       "file": "core/propose-figma.ts",
-      "line": 7250,
-      "ruleLine": 7251,
+      "line": 7251,
+      "ruleLine": 7252,
       "ruleText": "if (!m.rootContent && direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {",
       "css": {
         "construct": "a canvas root drawn at exactly row / center / center",
@@ -1894,8 +1894,8 @@
       "stage": "propose",
       "status": "implemented",
       "file": "core/propose-figma.ts",
-      "line": 1239,
-      "ruleLine": 1240,
+      "line": 1240,
+      "ruleLine": 1241,
       "ruleText": "const next = { ...literals };",
       "css": {
         "construct": "padding-top / -right / -bottom / -left: 0px written as root literals on the PROPOSED contract, for every side every variant draws 0 and the proposal does not declare, when the root renders (semantics.element or any elementByProp value) as an element the user agent pads (UA_PADDING_ELEMENTS: button, input, textarea, option, fieldset, legend, ul, ol, menu, dialog, td, th — measured in Chromium)",

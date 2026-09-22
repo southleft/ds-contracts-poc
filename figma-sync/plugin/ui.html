@@ -2932,6 +2932,8 @@ const dumpFillStack = async (node, nodePath) => {
 
 async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
+  const selectionIdentity = node.getSharedPluginData('ds_contracts', 'selectionIdentity');
+  if (selectionIdentity) { try { out.selectionIdentity = JSON.parse(selectionIdentity); } catch (_) { out.selectionIdentity = selectionIdentity; } }
 
   // dump v1.14: the structured realized tuple for a direct component-set row.
   // Names are presentation and may contain punctuation; exact recovery uses
@@ -3631,6 +3633,11 @@ async function dumpNode(node, nodePath, parent) {
       // dump v1.5: rename-safe identity — the main component's publish key
       // and its owning set's key; the session-linking resolver matches these
       // against in-scope contracts' anchors (componentSetKey first).
+      if (out.selectionIdentity && out.selectionIdentity.role === 'item') {
+        const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+        const id = owner.getSharedPluginData('ds_contracts', 'contractId');
+        if (id) out.instanceContractId = id;
+      }
       if (main.key) out.instanceKey = main.key;
       if (main.parent && main.parent.type === 'COMPONENT_SET' && main.parent.key) {
         out.instanceSetKey = main.parent.key;
@@ -3923,6 +3930,11 @@ for (const page of figma.root.children) {
         const raw = node.getSharedPluginData('ds_contracts', 'rootSlot');
         if (!raw) return {};
         try { return { rootSlot: JSON.parse(raw) }; } catch (e) { return { rootSlot: raw }; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'selectionApi');
+        if (!raw) return {};
+        try { return { selectionApi: JSON.parse(raw) }; } catch (_) { return { selectionApi: raw }; }
       })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'codeValueAxes');

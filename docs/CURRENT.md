@@ -77,8 +77,9 @@ An explicit finite `selection` relationship now generates tab-pattern behavior
 on both React surfaces, including keyed items, controlled inputs, keyboard
 navigation and persistent inactive panels. The Playground's **Selection** view
 provides an explicit setup and review form; it edits the current contract only
-after full validation. Native return of the relationship and an app-delivered
-interactive Tabs consumer remain unfinished. The retained Tabs archive is unchanged; missing identities
+after full validation. A bounded engine return now corroborates retained
+identities and API against the captured items, states and panels. Its live
+application journey and an app-delivered interactive Tabs consumer remain unfinished. The retained Tabs archive is unchanged; missing identities
 and panel content are not inferred ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
 
 A separate authored selection example now completes setup, review and archive
