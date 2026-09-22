@@ -9815,12 +9815,24 @@ Generated React browser checks cover both emitters, including controlled-held
 callbacks, manual RTL navigation, disabled items, active styling, panel state
 retention, component panel hosts and public API aliases. The separate runtime
 checks cover reconciliation and SSR/hydration. These are engine checks, not an
-application journey or independent-family acceptance. Application configuration,
-authenticated native return, actual archive delivery and source-matched consumer
+application journey or independent-family acceptance. The Playground's
+**Selection** view now authors and reviews the explicit mapping. It requires a
+stable key and a panel choice for every observed item, preserves existing panel
+content, and offers empty consumer slots only as an explicit authoring choice.
+Changing any field invalidates the review. Full contract validation runs before
+Apply; refused setup leaves the editor and imported workspace entries unchanged.
+An already-configured relationship is summarized and edited through JSON.
+These edits use the existing editor lifecycle: Reset restores the loaded source;
+the setup does not overwrite the imported workspace record or autosave a draft.
+The static preview does not demonstrate keyboard behavior. Its state controls
+replace defaults for rendering, so requesting a disabled initial item currently
+refuses; generated React supports a controlled disabled value with no selection.
+Form-level browser checks are not a live application journey.
+Authenticated native return, actual application archive delivery and source-matched consumer
 qualification remain unfinished. The retained Tabs archive is unchanged; its
 missing identities and additional panel contents are not invented.
 
-**Reversal:** remove `selection` and its shared projection/runtime integration,
+**Reversal:** remove the Selection setup view/helper, then remove `selection` and its shared projection/runtime integration,
 restore the named interaction gap, regenerate both schema projections and the
 plugin receipt, and retain the failing and passing private checks. The keyed
 repeat foundation can remain independently. No fidelity threshold changes.
