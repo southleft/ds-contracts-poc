@@ -17,6 +17,7 @@ import path from "node:path";
 import {
   type NativeOperationCommand,
   type NativeOperationPhase,
+  type NativeOperationReceipt,
   type NativeOperationResult,
 } from "./native-operation-jobs.js";
 
@@ -29,6 +30,7 @@ export interface NativeDeliveryJobs {
   pendingCommand(id: string): NativeOperationCommand | null;
   abandonedObservationPhase(id: string, attemptId: string): NativeOperationPhase | null;
   accept(id: string, result: NativeOperationResult): unknown;
+  acceptDelivery(id: string, result: NativeOperationResult): NativeOperationReceipt;
   retryObservation(id: string): unknown;
   inspectSizing?(id: string): NativeOperationCommand;
   /** Journals that can settle an unresolved write by reading the canvas. */
@@ -249,24 +251,29 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       ...(resolveWriteAttemptId === undefined ? {} : { resolvesWriteAttemptId: resolveWriteAttemptId }),
     };
   };
-  const accept = (
+  const acceptResult = <T>(
     id: string,
     secret: string,
     result: NativeOperationResult,
-  ) => {
+    record: (id: string, result: NativeOperationResult) => T,
+  ): T => {
     authorize(id, secret);
     if (!result || !UUID.test(result.attemptId)) fail("result-invalid");
-    const record = read(path.join(directory(id), `${result.attemptId}.json`));
+    const claim = read(path.join(directory(id), `${result.attemptId}.json`));
     if (
-      record.version !== 1 ||
-      record.id !== id ||
-      record.attemptId !== result.attemptId
+      claim.version !== 1 ||
+      claim.id !== id ||
+      claim.attemptId !== result.attemptId
     )
       fail("claim-invalid");
-    // The journal verifies every correlation field and stores the result before
-    // checking fresh source; a stale source must never erase a late native ack.
-    return jobs.accept(id, result) as ReturnType<Jobs['accept']>;
+    // Both responses verify correlation and the durable journal. Only the full
+    // view also checks fresh source; a receipt cannot authorize the next write.
+    return record(id, result);
   };
+  const accept = (id: string, secret: string, result: NativeOperationResult) =>
+    acceptResult(id, secret, result, (id, result) => jobs.accept(id, result)) as ReturnType<Jobs['accept']>;
+  const acceptDelivery = (id: string, secret: string, result: NativeOperationResult) =>
+    acceptResult(id, secret, result, (id, result) => jobs.acceptDelivery(id, result));
   const retryObservation = (id: string) => {
     connection(id);
     if (!status(id).started) fail("observation-retry-refused");
@@ -319,5 +326,5 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (state.connected) throw Error("native-update-attest-dead-companion-connected");
     jobs.attestDead(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign, observeSourceRepair };
+  return { pair, start, status, authorize, claim, begin, accept, acceptDelivery, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign, observeSourceRepair };
 }

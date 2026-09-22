@@ -250,7 +250,7 @@ test('state API journal and actual companion complete all phases, reopen, reject
             payload.resolveWriteAttemptId,
             payload.protocol,
           )
-        : transport.accept(first.id, supplied, payload);
+        : transport.acceptDelivery(first.id, supplied, payload);
     return { ok: true, json: async () => JSON.parse(JSON.stringify(response)) };
   };
   const boot = () => {

@@ -5,7 +5,8 @@ import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import {revisionOf} from '../core/contract-provenance.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { Readable } from 'node:stream';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import vm from 'node:vm';
@@ -43,7 +44,7 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     if(url.endsWith('/claim')) {
       response=transport.claim(id,supplied,payload.fileKey,payload.replaceReadbackAttemptId,payload.resolveWriteAttemptId,payload.protocol);
       if('command' in response) delivered.push(response.command);
-    } else response=transport.accept(id,supplied,payload);
+    } else response=transport.acceptDelivery(id,supplied,payload);
     if(lose===(url.endsWith('/claim')?'claim':'result')){lose='';throw Error('response lost');}
     return {ok:true,json:async()=>JSON.parse(JSON.stringify(response))};
   };
@@ -59,6 +60,70 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     restart:()=>{jobs=createNativeUpdateJobs(repo,plans,readers);transport=createNativeOperationTransport(repo,jobs);send=boot();},
     enableFraming:()=>{legacyFraming=false;},derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
+
+test('delivery receipt records an update result without deriving source or granting write authority',async t=>{
+  const f=await fixture(t),transport=f.transport();
+  const delivery=transport.claim(f.id,f.secret,f.input.before.operation.fileKey,undefined,undefined,2);
+  assert.equal(delivery.status,'command');
+  const command=delivery.command!,envelope={...command,result:await f.run(command.script)};
+  const initialEvents=readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events'));
+  assert.throws(()=>transport.acceptDelivery(f.id,f.secret,{...envelope,nonce:'0'.repeat(64)}),/result-correlation-invalid/);
+  assert.deepEqual(readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events')),initialEvents);
+  f.stale();const before=f.derivations();
+  const receipt=transport.acceptDelivery(f.id,f.secret,envelope);
+  assert.deepEqual(receipt,{status:'result-recorded',id:f.id,attemptId:command.attemptId,nativeQualification:'unqualified'});
+  assert.equal(f.derivations(),before,'a journal acknowledgment does not recompile current source');
+  const directory=path.join(f.repo,'private/source-native-updates',f.id,'events');
+  const inventory=()=>readdirSync(directory).map(name=>[name,readFileSync(path.join(directory,name),'utf8')]);
+  const saved=inventory();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,false,'the final view still checks fresh source');
+  assert.throws(()=>transport.claim(f.id,f.secret,f.input.before.operation.fileKey,undefined,undefined,2),/source changed/);
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,0);
+  assert.deepEqual(inventory(),saved,'the stale-source write refusal appends no command');
+  assert.deepEqual(transport.acceptDelivery(f.id,f.secret,envelope),receipt);
+  assert.deepEqual(inventory(),saved,'exact result replay appends nothing');
+  assert.throws(()=>transport.acceptDelivery(f.id,'0'.repeat(64),envelope),/unauthorized/);
+  assert.throws(()=>transport.acceptDelivery(f.id,f.secret,{...envelope,result:{status:'changed'}}),/result-replay-conflict/);
+  assert.deepEqual(inventory(),saved);
+  withEvidenceReadSnapshot(()=>assert.throws(()=>transport.acceptDelivery(f.id,f.secret,envelope),/write-during-evidence-read-snapshot/));
+});
+
+test('delivery receipt refuses journal corruption discovered after appending the result',async t=>{
+  const f=await fixture(t),transport=f.transport();
+  const delivery=transport.claim(f.id,f.secret,f.input.before.operation.fileKey,undefined,undefined,2);
+  assert.equal(delivery.status,'command');
+  const command=delivery.command!,envelope={...command,result:await f.run(command.script)};
+  const resultFile=path.join(f.repo,'private/source-native-updates',f.id,'events','00000001.json');
+  let planted=false;
+  const plans={...f.plans,saved:(...args:Parameters<typeof f.plans.saved>)=>{
+    const saved=f.plans.saved(...args);
+    if(!planted&&existsSync(resultFile)) {
+      const event=JSON.parse(readFileSync(resultFile,'utf8'));event.envelope.nonce='0'.repeat(64);
+      writeFileSync(resultFile,JSON.stringify(event));planted=true;
+    }
+    return saved;
+  }};
+  const jobs=createNativeUpdateJobs(f.repo,plans);
+  assert.throws(()=>jobs.acceptDelivery(f.id,envelope),/result-correlation-invalid/);
+  assert.equal(planted,true,'the post-append journal was reopened before acknowledgment');
+});
+
+test('actual result service returns only a durable journal receipt for an update',async t=>{
+  const f=await fixture(t),delivery=f.transport().claim(f.id,f.secret,f.input.before.operation.fileKey,undefined,undefined,2);
+  assert.equal(delivery.status,'command');
+  const command=delivery.command!,envelope={...command,result:await f.run(command.script)};
+  const {createReferenceService}=await import('./service.js');
+  const service=createReferenceService(f.repo);t.after(()=>service.close());
+  const body=JSON.stringify(envelope),req=Readable.from([body]);
+  Object.assign(req,{method:'POST',url:`/api/source-reference/native/${f.id}/result`,
+    headers:{host:'localhost:5181',origin:'http://localhost:5181','content-type':'application/json',authorization:'Bearer '+f.secret},
+    socket:{remoteAddress:'127.0.0.1'}});
+  let status=0,response='';
+  await service.handle(req as any,{set statusCode(value:number){status=value;},setHeader(){},end(value:string){response=value;}} as any);
+  assert.equal(status,200);
+  assert.deepEqual(JSON.parse(response),{status:'result-recorded',id:f.id,attemptId:command.attemptId,nativeQualification:'unqualified'});
+  assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+});
 
 test('proposal progress follows the checked journal without recompiling source or granting write authority',async t=>{
   const f=await fixture(t),progress=()=>f.jobs().deliveryStateForProposal(f.proposal.parentId,f.proposal.id);

@@ -997,7 +997,7 @@ export function createReferenceService(
           json(
             res,
             200,
-            deliveryTransport(pluginRoute[1]).accept(pluginRoute[1], secret, payload),
+            deliveryTransport(pluginRoute[1]).acceptDelivery(pluginRoute[1], secret, payload),
           );
         }
       } catch {
