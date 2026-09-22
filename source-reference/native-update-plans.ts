@@ -24,7 +24,7 @@ export function createNativeUpdatePlans(repo: string,
   derive: (parentId: string, parentJournalRevision?: string, consumerPins?:ConsumerPin[]) => Derived,
   history?: (parentId: string) => NativeUpdateHistoryEntry[],
   currentParentRevision?: (parentId: string) => string,
-  currentTemplateRevision?: (parentId:string,pins:ConsumerPin[])=>string) {
+  currentTemplateInventory?: (parentId:string,pins:ConsumerPin[])=>Pick<TemplateInventory,'currentRevision'|'consumers'>) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
   const displayScope = 'native-update-plans:' + randomUUID();
   function directory(parentId: string, create = false) {
@@ -168,7 +168,11 @@ export function createNativeUpdatePlans(repo: string,
         // Allocation establishes IDs, not component agreement. Even when the
         // following review finds no property changes, settle its own no-op
         // correction before offering design repair.
+        // A caller added after the previous write was never covered by that
+        // reader. Even with no value changes, settle a new combined proposal
+        // containing the complete current inventory before reusing authority.
         if(previous.update.plan.kind!=='native-contract-token-allocation-update' &&
+          same(record.consumerPins?.map(p=>p.operationId),previous.consumerPins?.map(p=>p.operationId)) &&
           same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
       }
       const id=recordId(record),dir=directory(parentId,true)!;
@@ -202,8 +206,11 @@ export function createNativeUpdatePlans(repo: string,
       const record=read(parentId,id),baselineRevision=record.parentJournalRevision;
       const currentRevision=currentParentRevision?.(parentId) ?? baselineRevision;
       if (!HASH.test(currentRevision)) throw Error('native-update-parent-journal-invalid');
-      if(record.version===2&&!currentTemplateRevision)throw Error('native-update-template-context-unavailable');
-      const templateCurrentRevision=record.version===2?currentTemplateRevision!(parentId,record.consumerPins!):undefined;
+      if(record.version===2&&!currentTemplateInventory)throw Error('native-update-template-context-unavailable');
+      const inventory=record.version===2?currentTemplateInventory!(parentId,record.consumerPins!):undefined;
+      if(inventory&&!same(inventory.consumers.map(c=>c.operationId),record.consumerPins!.map(p=>p.operationId)))
+        throw Error('native-update-template-consumer-inventory-refresh-required');
+      const templateCurrentRevision=inventory?.currentRevision;
       if(templateCurrentRevision!==undefined&&!/^sha256:[a-f0-9]{64}$/.test(templateCurrentRevision))throw Error('native-update-template-context-invalid');
       return {baselineRevision,currentRevision,...(record.version===2?{
         templateBaselineRevision:record.templateContextRevision,

@@ -795,7 +795,7 @@ export function createReferenceService(
       ...desiredInput,
     } };
   }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id),
-  (id,pins)=>nativeJobs.reactTemplateConsumerBaselines(id,pins).currentRevision);
+  (id,pins)=>nativeJobs.reactTemplateConsumerBaselines(id,pins));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

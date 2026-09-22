@@ -9,6 +9,11 @@ import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
 import {prepareNativeAppUpdate,prepareNativeTemplateAppUpdate,nativeAppUpdateMatches,nativeAppUpdatePreflight,emitNativeAppUpdateScript,emitNativeAppUpdateReadback,nativeAppUpdateDesignChanges} from './native-app-update.js';
 import type {NativeOperationCommand} from './native-operation-jobs.js';
+import {prepareNativeContractComparison} from '../core/native-contract-comparison.js';
+import {emitNativeContractComparisonReadbackScript,verifyNativeContractComparisonReadback} from '../core/native-contract-comparison-observation.js';
+import {emitNativeTokenContextScript,emitNativeTokenContextReadbackScript} from '../core/token-set.js';
+import {nativeTextNodeBindings,nativeNodePaintBindings} from '../core/native-text-template-test-fixture.js';
+import type {NativeTemplateConsumerInput} from '../core/native-template-value-consumers.js';
 
 async function fixture(t:test.TestContext,settleCaller=false) {
   const h=await nativeTemplateValueUpdateFixture(true,true),repo=mkdtempSync(path.join(tmpdir(),'template-app-update-'));
@@ -24,14 +29,16 @@ async function fixture(t:test.TestContext,settleCaller=false) {
   const parent=h.input.before.operation.id,caller=structuredClone(h.input.consumers[0]);
   delete caller.baseline.images;delete caller.baseline.parent.images;delete caller.baseline.content.images;
   delete caller.input.comparison.receipt.images;
+  const added:NativeTemplateConsumerInput[]=[];
   const inventory=(pins:Array<{operationId:string;journalRevision:string}>=[])=>({parentJournalRevision:'a'.repeat(64),
-    currentRevision:revisionOf({callerRevision}),consumers:[{...structuredClone(caller),operationId:caller.input.operation.id,
-      journalRevision:pins.find(p=>p.operationId===caller.input.operation.id)?.journalRevision??callerRevision,currentJournalRevision:callerRevision}]});
+    currentRevision:revisionOf({callerRevision,added:added.map(c=>c.input.operation.id)}),consumers:[caller,...added].map(c=>({
+      ...structuredClone(c),operationId:c.input.operation.id,
+      journalRevision:pins.find(p=>p.operationId===c.input.operation.id)?.journalRevision??callerRevision,currentJournalRevision:callerRevision}))});
   const derive=(_id:string,_revision?:string,pins?:Array<{operationId:string;journalRevision:string}>)=>({parentJournalRevision:'a'.repeat(64),
     input:{before:h.input.before,baseline:h.input.baseline,templateGraph:desired,
       desired:{component:desired.component,tokenInput:desired.tokens,revision:revisionOf(desired)}},templateInventory:inventory(pins)});
   let jobs:ReturnType<typeof createNativeUpdateJobs>;
-  const plans=createNativeUpdatePlans(repo,derive,id=>jobs.updateHistory(id),()=> 'a'.repeat(64),(_id,pins)=>inventory(pins).currentRevision);
+  const plans=createNativeUpdatePlans(repo,derive,id=>jobs.updateHistory(id),()=> 'a'.repeat(64),(_id,pins)=>inventory(pins));
   jobs=createNativeUpdateJobs(repo,plans);
   const accept=async(id:string,command:NativeOperationCommand)=>{
     if(command.phase==='update-apply')jobs.beginWrite(id,command.attemptId);
@@ -46,11 +53,82 @@ async function fixture(t:test.TestContext,settleCaller=false) {
     }
     assert.equal(jobs.get(id).sourceCurrent,true,JSON.stringify(jobs.get(id)));
   };
+  // A real second native caller born against the verified updated parent. This
+  // bypasses the application birth route only; compilation, native allocation
+  // and independent observation all use their production implementations.
+  const addCaller=async()=>{
+    const current=jobs.verifiedForParent(parent)!;
+    const content=structuredClone(h.contract);content.id='test.added-caller';content.props=[];
+    delete content.anatomy.root.slot;
+    for(const [key,value] of Object.entries(content.anatomy.root.tokens!))
+      content.anatomy.root.tokens![key]=value.replace('{size}','v1').replace('{ink}','v1');
+    content.anatomy.root.parts={label:{text:'Added after update'}};
+    const comparison={parent:current.input,receipt:current.receipt,caseId:'added-caller',
+      variantName:current.input.component.variants.find(v=>v.name.includes('Size=v1')&&v.name.includes('Ink=v1'))!.name,
+      slotSpecPath:[0],rootText:{version:1 as const,kind:'direct-root-text' as const,characters:'Added after update',
+        contractRevision:revisionOf(content),treeRevision:revisionOf('added caller source')}};
+    const byId=new Map([[content.id,content]]),operation={id:'10000000-0000-4000-8000-000000000097',fileKey:h.figma.fileKey};
+    const prepared=prepareNativeContractComparison(content,h.engine.compileComponentData(content,byId),h.source,
+      revisionOf(h.tokens),{mode:'light',brand:'default'},comparison,h.tokens);
+    const tokenInput={fileKey:operation.fileKey,scopeId:'source-'+operation.id,
+      source:{revision:h.source.revision,sourceProgramSha256:h.source.programSha256,tokensSha256:revisionOf(h.tokens).slice(7)},
+      tokenPaths:[...h.context.tokens.input.tokenPaths],
+      modes:[{sourceMode:'light',brand:'default',nativeModeName:'Light',tokens:structuredClone(h.tokens),tokenTreeRevision:revisionOf(h.tokens)}]};
+    const tokens=await h.run(emitNativeTokenContextScript(tokenInput).script);
+    assert.ok(tokens.creationIdentity,JSON.stringify(tokens));
+    const read=await h.run(emitNativeTokenContextReadbackScript(tokenInput,tokens.creationIdentity));
+    const context={operation,tokens:{input:tokenInput,identity:tokens.creationIdentity,receipt:read.receipt}};
+    const creation=await h.run(h.engine.buildNativeContractComparisonScript(content,byId,h.source,context,comparison));
+    assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+    for(const born of creation.nodes) {
+      const node=await h.figma.getNodeByIdAsync(born.id);
+      if(node.type==='TEXT')nativeTextNodeBindings(node,id=>h.variables.find(v=>v.id===id));
+      nativeNodePaintBindings(node,id=>h.variables.find(v=>v.id===id));
+    }
+    const input={operation,planRevision:revisionOf('added caller observation'),comparison:prepared,
+      tokenInput,tokenIdentity:tokens.creationIdentity,creation};
+    const baseline=await h.run(emitNativeContractComparisonReadbackScript(input));
+    const verified=verifyNativeContractComparisonReadback(input,baseline);
+    assert.equal(verified.status,'supported-comparison-structure-observed',JSON.stringify(verified.problems));
+    delete baseline.images;delete baseline.parent.images;delete baseline.content.images;delete input.comparison.receipt.images;
+    added.push({input,baseline});return added[0];
+  };
   return {...h,repo,parent,plans,prepare,finish,accept,jobs:()=>jobs,
+    addCaller,
     readCallerAgain:()=>{callerRevision='c'.repeat(64);},
     reverse:()=>{desired=structuredClone(h.input.before.templateGraph!.input);},
     desired:()=>desired};
 }
+
+test('a new caller requires a combined successor read before the larger inventory is current',async t=>{
+  const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
+  const oldPlan=f.plans.saved(f.parent,first.proposal.id),added=await f.addCaller();
+  assert.equal(f.jobs().get(first.operation.id).sourceCurrent,false);
+  await f.accept(first.operation.id,f.jobs().retryObservation(first.operation.id));
+  assert.equal(f.jobs().get(first.operation.id).sourceCurrent,false,
+    'rereading only the original caller must not certify a newly enlarged inventory');
+  assert.throws(()=>f.jobs().verifiedForParent(f.parent),/consumer-inventory-refresh-required/);
+  const combined=f.prepare();
+  assert.notEqual(combined.proposal.id,first.proposal.id);
+  assert.equal(combined.proposal.templateCallerCount,2);
+  assert.deepEqual(combined.proposal.templateValueChanges,[]);
+  const assignmentCount=f.assignments.length;
+  const addedNode=f.figma.getNodeById(added.input.creation.comparisons[0].instanceId),opacity=addedNode.opacity;
+  addedNode.opacity=0.25;
+  const refused=await f.accept(combined.operation.id,f.jobs().dispatch(combined.operation.id,'update-preflight-readback'));
+  assert.equal(refused.phase,'update-refused','a change on the added caller is part of the new preflight');
+  assert.equal(f.assignments.length,assignmentCount);
+  assert.throws(()=>f.jobs().dispatch(combined.operation.id,'update-apply'),/phase-refused/);
+  addedNode.opacity=opacity;
+  await f.finish(combined.operation.id);
+  assert.equal(f.assignments.length,assignmentCount,'the new combined context writes no variable values');
+  assert.equal(f.jobs().get(combined.operation.id).callerImageObservations?.length,2);
+  assert.deepEqual(f.plans.saved(f.parent,first.proposal.id),oldPlan,'historical proposal bytes stay intact');
+  assert.equal(f.plans.prepare(f.parent).id,combined.proposal.id,'repeat reuses the combined verification');
+  f.reverse();const reverse=f.prepare();assert.equal(reverse.proposal.templateCallerCount,2);
+  await f.finish(reverse.operation.id);
+  assert.equal(f.jobs().get(reverse.operation.id).callerImageObservations?.some(c=>c.operationId===added.input.operation.id),true);
+});
 
 test('template proposals use compact storage and retain caller after-states through update, repeat, reverse and journal restart',async t=>{
   const f=await fixture(t),first=f.prepare();
