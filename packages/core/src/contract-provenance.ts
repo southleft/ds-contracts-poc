@@ -54,9 +54,36 @@ export function canonicalJson(value: unknown): string {
   return "null";
 }
 
-// Compact synchronous SHA-256. Revisions must be available in browser/plugin
-// planning code, where SubtleCrypto is async and not consistently available.
+// Node 20.16+ exposes built-ins synchronously without a module import. Keep
+// the browser/plugin bundle import-free and retain the portable implementation
+// on older Node versions. This changes hashing cost, never the hashed bytes.
+const nativeSha256 = (() => {
+  type Hash = {
+    update(text: string, encoding: "utf8"): { digest(encoding: "hex"): string };
+  };
+  try {
+    const runtime = globalThis as unknown as {
+      process?: {
+        getBuiltinModule?(
+          id: string,
+        ): { createHash?(algorithm: string): Hash } | undefined;
+      };
+    };
+    const crypto = runtime.process?.getBuiltinModule?.("node:crypto");
+    if (typeof crypto?.createHash === "function") {
+      return (text: string) =>
+        crypto.createHash!("sha256").update(text, "utf8").digest("hex");
+    }
+  } catch {
+    /* A non-Node host or restricted shim uses the portable path. */
+  }
+  return undefined;
+})();
+
+// Revisions also need to be available synchronously in browser/plugin planning
+// code, where SubtleCrypto is async and not consistently available.
 function sha256(text: string): string {
+  if (nativeSha256) return nativeSha256(text);
   const bytes = new TextEncoder().encode(text);
   const bitLength = bytes.length * 8;
   const paddedLength = Math.ceil((bytes.length + 9) / 64) * 64;
