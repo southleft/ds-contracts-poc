@@ -69,8 +69,10 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   // Only a fill-width main asks for its caller's place; any other root keeps
   // its own sizing and an own-100% case compares exactly as it always did.
   const containerWidth=variant.spec.rootFillWidth ? reactComparisonContainerWidth(captured.tree,origin) : undefined;
-  return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.composition ? composition!.content : content,
+  const source = { ...original.source, evidenceRevision: revisionOf(request) };
+  return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source, content: request.composition ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0],
+      ...(request.version === 4 ? { sourceSuccession: { ...request.parentUpdate!, source } } : {}),
       ...(parent.input.projection.rootTextTemplate ? { rootText: reactRootTextCallerEvidence(captured.tree, content) } : {}),
       ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(containerWidth!==undefined ? {containerWidth} : {}), ...(request.composition ? { instances: composition!.references } : {}) } };
 }

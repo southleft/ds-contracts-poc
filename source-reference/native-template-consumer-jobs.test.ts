@@ -33,7 +33,7 @@ async function fixture(t: test.TestContext) {
     this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: m };
   };
   const engine = createFigmaEngine({ tokens: { primitives: f.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const source = { revision: revisionOf('journal source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('journal evidence') };
+  let source = { revision: revisionOf('journal source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('journal evidence') };
   const matrix: ReactRootMatrix = { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
     draft: { properties: ['size', 'ink'], status: 'native-compiled', contract: f.contract, tokens: f.tokens,
       native: engine.compileComponentData(f.contract, new Map([[f.contract.id, f.contract]])), problems: [], observations: [], lowerings: [], limitations: [] } };
@@ -48,7 +48,8 @@ async function fixture(t: test.TestContext) {
     if(selected.version!==4)return saved;
     assert.deepEqual(selected.mainRoot,effective,'new caller still authenticates the effective source');
     const current=updates.verifiedForNewConsumer(selected.parentOperationId,operationId,selected.parentUpdate!);
-    return {...saved,comparison:{...saved.comparison,parent:current.input,receipt:current.receipt}};
+    return {...saved,comparison:{...saved.comparison,parent:current.input,receipt:current.receipt,
+      sourceSuccession:{...selected.parentUpdate!,source:saved.source}}};
   };
   const options: NativeOperationJobsOptions = {
     prepare: () => { throw Error('legacy adapter must not run'); },
@@ -120,7 +121,8 @@ async function fixture(t: test.TestContext) {
   };
   return { repo, host, parentId, prepareCaller, finish, phase, jobs: () => jobs,
     plans,updates:()=>updates,finishUpdate,requestFor:(id:string)=>structuredClone(selectedRequests.get(id)!),
-    forward:()=>{f.tokens.ink.v1.$value='#abcdef';effective={...request,inventorySha256:'f'.repeat(64),matrixRevision:revisionOf(matrix)};},
+    evidenceFor:(id:string)=>structuredClone(comparisonEvidence(selectedRequests.get(id)!,id)),
+    forward:()=>{f.tokens.ink.v1.$value='#abcdef';source={revision:revisionOf('updated journal source'),programSha256:'f'.repeat(64),evidenceRevision:revisionOf('updated evidence')};effective={...request,referenceId:source.revision.slice(7),inventorySha256:'f'.repeat(64),matrixRevision:revisionOf(matrix)};},
     changeSource: () => { f.tokens.ink.v1.$value = '#abcdef'; },
     restart: () => { jobs = createNativeOperationJobs(repo, options); updates=createNativeUpdateJobs(repo,plans); } };
 }
@@ -131,6 +133,24 @@ test('a caller born after a verified template update resumes against exact paren
   await f.finishUpdate(update.id);
   const second=f.prepareCaller('after'),request=f.requestFor(second);
   assert.equal(request.version,4);assert.equal(request.parentUpdate!.proposalId,proposal.id);
+  const evidence=f.evidenceFor(second),operation={id:second,fileKey:REACT_NATIVE_FILE_KEY};
+  const prepared=prepareReactComparisonPlan({...evidence,operation});
+  assert.notEqual(prepared.plan.comparison.projection.source.revision,prepared.plan.comparison.parent.projection.source.revision);
+  assert.equal(prepared.plan.comparison.projection.source.revision,evidence.source.revision);
+  assert.deepEqual(prepared.plan.comparison.sourceSuccession,evidence.comparison.sourceSuccession);
+  for(const mutate of [
+    (e:ReactComparisonPlanInput)=>{delete e.comparison.sourceSuccession;},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.source={...e.comparison.sourceSuccession!.source,programSha256:'0'.repeat(64)};},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.observationRevision=revisionOf('forged');},
+    (e:ReactComparisonPlanInput)=>{e.comparison.sourceSuccession!.proposalId='invalid';},
+    (e:ReactComparisonPlanInput)=>{(e.comparison.sourceSuccession as any).unknown=true;},
+    (e:ReactComparisonPlanInput)=>{delete e.comparison.parent.templateGraph;},
+    (e:ReactComparisonPlanInput)=>{e.comparison.instances=[{} as any];},
+    (e:ReactComparisonPlanInput)=>{e.comparison.parent.component.variants[0].name+=' changed';},
+  ]) {
+    const changed=structuredClone({...evidence,operation});mutate(changed);
+    assert.throws(()=>prepareReactComparisonPlan(changed),/source-changed|source-succession-unverified/);
+  }
   assert.equal(f.jobs().get(second).sourceCurrent,true);
   assert.throws(()=>f.jobs().reactTemplateConsumerBaselines(f.parentId),/template-consumer-observation-required/);
   assert.throws(()=>f.plans.prepare(f.parentId),/template-consumer-observation-required/);
