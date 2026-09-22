@@ -9312,9 +9312,20 @@ updated source. Its independent read passed supported comparison structure:
 instance `103:4999` retains main `98:4808`, with a native slot and text layer.
 All 161 earlier evidence files stayed byte-identical. With the plugin closed,
 the canvas showed the blue caller; editing its text and restoring `New` showed
-native text editability. A further independent read after that edit is still
-required. The app reports 49.92 px source versus 51.02 px native width. This
-does not qualify fidelity, the combined update of both callers, or V1.
+native text editability. A subsequent app-dispatched combined update
+`89d54a3d…` passed preflight, returned a no-op with no variable assignments and
+completed its independent read. It covers both the original caller and the
+new one: all 302 main records, 100 main images, both caller records and images,
+and 180 prior evidence files remain unchanged. With the companion closed, the
+restored `New` text was inspected on the unobstructed canvas. The app's history
+view was still displaying an older pending response while its expensive read
+completed; that display and the next real source update across both callers,
+unchanged repeat and recovery remain to be verified. Private evidence is
+`private/native-template-app-integration-20260921/combined-callers-verified-v1.json`
+and `combined-callers-canvas-v1.json`.
+
+The app reports 49.92 px source versus 51.02 px native width. The combined no-op
+does not qualify fidelity, the subsequent update lifecycle or V1.
 
 To reverse, refuse post-succession caller preparation and preserve existing
 version-4 plans as historical evidence. Do not replace the current source with
