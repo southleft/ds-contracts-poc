@@ -202,6 +202,15 @@ its real HTTP response matches the saved bytes and creates no native event or
 write. Source and write authorization are unchanged. Usable latency remains
 unqualified ([D.123](23-known-limitations.md#d123-replaying-a-correction-history-must-not-evict-every-useful-match)).
 
+Within a single history response, ordinary JSON evidence now uses a guarded
+copy path. A full-history prototype preserves the complete response and all
+2,104 native evidence files while reducing one repeated read from 55 to 49
+seconds. Richer values retain the original copy behavior; freshness and write
+checks are unchanged. After adoption, the app reopens the same verified
+correction and a real HTTP read takes 51 seconds with identical response and
+evidence bytes. The remaining delay still prevents latency qualification
+([D.124](23-known-limitations.md#d124-display-copying-must-preserve-the-values-it-is-copying)).
+
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
 for the retained update took 0.61–0.65 seconds, while a full listing took 96.01

@@ -9565,3 +9565,45 @@ its four-entry limit in `source-reference/native-app-update.ts`. Prepared-plan
 reuse can be reversed independently by deriving the guarded plan on every
 preflight and restoring its four-entry cache. Preserve the complete-byte keys,
 input checks, isolated copies and all retained observations.
+
+## D.124 Display copying must preserve the values it is copying
+
+**AGENT decision, 2026-09-22.** A synchronous history response may store an
+already isolated, ordinary JSON tree as JSON text and parse separate copies
+for later readers. The first copy still uses `structuredClone`; values with
+shared references, cycles, richer prototypes, sparse or named array entries,
+special numbers or `toJSON` keep the original copy path. Serialization failures
+also fall back. This representation changes neither evidence identity nor the
+scope of reuse: it ends with the response. Error handling, source freshness,
+journal validation and write guards are unchanged.
+
+A warm-history CPU sample attributes about 19% of its time directly to the
+snapshot-copy function, alongside substantial canonical serialization and
+garbage collection. A bounded differential probe compares 1,023 deterministic
+and edge values, getter and clone-failure behavior, caller mutations and two
+large retained evidence records against the prior copy path. Every result
+matches; 1,006 probe values use JSON and 17 retain richer copies.
+
+In a separate full-service prototype, one cold/repeated read changes from
+94/55 seconds to 89/49 seconds with the complete 246,371-byte response and all
+2,104 native evidence files unchanged. No native event or write occurs. These
+single-host samples do not establish stable latency or qualify a complete
+operation. The remaining delay is still a release gap.
+
+After adoption and one **Load React originals** action, the app again displays
+the current verified correction for the unchanged source and both callers.
+A real Vite HTTP read takes 51 seconds and returns the exact same response;
+all 2,104 native files remain unchanged, with no new native event or write.
+The adopted adapter, copy module and regression test match the release branch.
+The two diagnostic galleries retain their 100 main and two caller images and
+remain closed without loading those images immediately. This reopens saved
+verification; it is not a fresh canvas observation.
+
+Evidence: `private/native-template-match-profile-20260922/`, including
+`warm-analysis-v1.json`, `json-snapshot-probe-v2.json` and
+`json-snapshot-candidate-v1.json`, plus the actual app read in
+`json-snapshot-adoption-v1.json`; production-module differential review and
+application regression checks are in `private/template-match-cache-20260922/`.
+Reverse this decision by restoring the original `structuredClone` storage and
+return paths in `source-reference/evidence-read-snapshot.ts`. Preserve the
+response lifetime, copy isolation, refusals, freshness checks and write guard.
