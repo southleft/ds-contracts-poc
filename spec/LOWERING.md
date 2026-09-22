@@ -413,7 +413,7 @@ The stage where the two directions disagree about a keyword. The proposer elides
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `css.display-absent-root-inflates-inline-flex` | `proposed` | `css.ts:285` | the CSS emitted for a contract whose root carries no layout block → n/a — this is the CSS the contract renders to | the two defaults must be the SAME keyword, or the elision is not an elision | **none** | `untested` |
-| `propose.display-root-layout-elided` | `implemented` | `propose-figma.ts:7247` | a canvas root drawn at exactly row / center / center → n/a — this is the return leg: the Figma fact is dropped rather than proposed | the elision is only sound if the absence re-inflates to the SAME shape it elided | **none** | `untested` |
+| `propose.display-root-layout-elided` | `implemented` | `propose-figma.ts:7251` | a canvas root drawn at exactly row / center / center → n/a — this is the return leg: the Figma fact is dropped rather than proposed | the elision is only sound if the absence re-inflates to the SAME shape it elided | **none** | `untested` |
 | `schema.display-block-to-vertical-stack` | `implemented` | `contract-schema.ts:1109` | display: inline \| block \| list-item → frame nesting; a block-level box lowers to a vertical stack | a block-level box lowers to a vertical stack | **none** | `named` |
 
 #### `css.display-absent-root-inflates-inline-flex`
@@ -457,7 +457,7 @@ The cleanest lowering in the tree, and the standard the rest of the register is 
 |---|---|---|---|---|---|---|
 | `emit.padding-longhand-bound` | `implemented` | `emit-figma-script.ts:2268` | padding-left / -right / -top / -bottom bound to a token → bindings.paddingLeft (and siblings) bound to the same variable | the logical shorthand when both sides agree, longhands otherwise | **none** | `round-tripped` |
 | `emit.padding-shorthand-registry-hole` | `proposed` | `emit-figma-script.ts:2605` | any token-bound channel with no case in the switch — including the `padding` shorthand itself → nothing | a named refusal for every unhandled channel, whether or not a registry row exists | `channel-miss` | `untested` |
-| `propose.ua-padding-drawn-zero-explicit` | `implemented` | `propose-figma.ts:1238` | padding-top / -right / -bottom / -left: 0px written as root literals on the proposed contract for every side every variant draws 0 and the proposal does not declare, when the root renders as an element the user agent pads (measured in Chromium) → a frame whose padding field is 0 on that side | padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named | `notes` | `untested` |
+| `propose.ua-padding-drawn-zero-explicit` | `implemented` | `propose-figma.ts:1240` | padding-top / -right / -bottom / -left: 0px written as root literals on the proposed contract for every side every variant draws 0 and the proposal does not declare, when the root renders as an element the user agent pads (measured in Chromium) → a frame whose padding field is 0 on that side | padding-* for every side the canvas draws, 0px included, on a set proposed as an element the user agent pads; a side the proposal refuses stays undeclared and named | `notes` | `untested` |
 
 #### `emit.padding-longhand-bound`
 

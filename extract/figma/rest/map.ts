@@ -1907,7 +1907,24 @@ function mapNode(
     // recurses into instance internals).
     const box = node.absoluteBoundingBox;
     if (box) out.bbox = { width: round2(box.width), height: round2(box.height) };
-    return out; // instance internals belong to the child contract — no children
+    // Retain an independent, bounded observation without making instance
+    // internals part of the parent's anatomy or claiming an authored main.
+    // No nested component/slot authority is inferred from this snapshot.
+    let count = 1;
+    const staticContent = (n: RestNode, depth: number): boolean =>
+      ++count <= 128 && depth <= 8 && ['FRAME', 'GROUP', 'TEXT'].includes(n.type) &&
+      (n.children ?? []).every(child => staticContent(child, depth + 1));
+    // A parent-controlled component swap is content supplied through a slot,
+    // not a fixed child whose currently selected internals can become a stub.
+    // Keep its reference and swap binding; its private chrome belongs to the
+    // selected child definition, just as it does on the ordinary instance path.
+    if (out.propRefs?.mainComponent === undefined && (node.children?.length ?? 0) > 0 && node.children!.every(child => staticContent(child, 1))) {
+      out.instanceContent = {
+        root: mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed content]`, parentBox, parent),
+        propertyTypes: Object.fromEntries(Object.entries(node.componentProperties ?? {}).map(([key, value]) => [key, value.type])),
+      };
+    }
+    return out; // referenced identity and observed content remain separate
   }
 
   if (Array.isArray(node.children)) {
