@@ -935,7 +935,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     if (hostCollisions.has(p.name)) continue;
     const fields = p.type.arrayOf;
     const recType = `{ ${Object.entries(fields)
-      .map(([f, t]) => `${isIdent(f) ? f : JSON.stringify(f)}?: ${t === 'text' ? 'string' : t}`)
+      .map(([f, t]) => `${isIdent(f) ? f : JSON.stringify(f)}?: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
       .join('; ')} }`;
     const priv = `#${isIdent(p.name) ? p.name : 'arrayProp_' + attrOf(p.name).replace(/-/g, '_')}`;
     accessors.push(
@@ -1062,7 +1062,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       let childText = '';
       for (const [field, fieldType] of Object.entries(
         (contract.props.find((pr) => pr.name === part.repeat!.itemsProp) as Prop & {
-          type: { arrayOf: Record<string, string> };
+          type: { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> };
         })?.type.arrayOf ?? {},
       )) {
         const depProp = dep.props.find((pr) => pr.name === field);
@@ -1514,7 +1514,7 @@ function generateManifest(contract: Contract): string {
     privacy: 'public',
     type: {
       text: `Array<{ ${Object.entries(p.type.arrayOf)
-        .map(([f, t]) => `${f}?: ${t === 'text' ? 'string' : t}`)
+        .map(([f, t]) => `${f}?: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
         .join('; ')} }>`,
     },
     description: `${p.description ?? ''}${p.description ? ' ' : ''}(JS property only — attributes cannot carry lists; unset renders the contract's observed sample)`.trim(),
