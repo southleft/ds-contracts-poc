@@ -388,3 +388,27 @@ When resuming work, read this page, [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.
 ### Checking these pages
 
 `npm run docs:check` validates public claims and links. `npm run test:playground` includes canonical-document integration checks. `npm run site:build` builds the documentation site. The desktop/mobile documentation smoke test is `npm run test:product-overview:browser` with local servers on ports 5181 and 5182. These checks validate documentation surfaces, not conversion readiness.
+
+### Nested source host integration, 2026-09-22
+
+The Sources application now delivers an authored composition containing two native
+panel instances, each with a retained heading, nested body host and separate
+editable caller text (D.125–D.130). Source validation and all five corruption
+controls passed. Independent native readback found the expected 18 nodes, and a
+bounded edit of the first caller text left the other caller and headings intact.
+After restoration, the native PNG was byte-identical to its initial export; a
+fresh readback retained the graph while accepting Figma's remapped slot IDs.
+
+Nine fixed host boxes match the source exactly. The matched 800 × 228 source and
+native images differ by 0.276864% using the existing anti-alias-aware comparison,
+below the unchanged 5% limit. Exact text advances still differ, and native font
+byte identity is unqualified. This is one authored application probe, not
+independent-library coverage or complete native fidelity qualification. Full V1
+acceptance remains open.
+
+The graph review exposes repeat inspection and interrupted-readback retry after
+successful delivery, plus reconnection after reloading the app. A queued readback
+was retried through these controls after browser reload; the same 18-node graph
+and exact native PNG were retained with no new creation command. Broader native
+write interruption, update conflict and two-way recovery qualification is still
+pending.
