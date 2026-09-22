@@ -291,6 +291,143 @@ export function SiblingDefault({children,x=(children='replaced')}:{children?:str
     assert.equal(fact("Early").reason, "children-control-flow-unresolved");
   }));
 
+test("children proof refuses mutable aliases through siblings and other parameters", () =>
+  fixture((dir) => {
+    const body = `
+type API={children:string[];mirror:string[]};
+export function Changed({children,mirror}:API){mirror[0]='changed';return <div>{children}</div>;}
+export function Renamed({children,mirror:other}:API){other.pop();return <div>{children}</div>;}
+export function Escaped({children,mirror}:API){const replace=(v:string[])=>v.splice(0,1,'changed');replace(mirror);return <div>{children}</div>;}
+export function Captured({children,mirror}:API){const mutate=()=>mirror.pop();mutate();return <div>{children}</div>;}
+export function Defaulted({children,mirror,x=mirror.pop()}:API&{x?:string}){return <div>{children}</div>;}
+export function Unknown({children,mirror}:{children:string[];mirror:unknown}){(mirror as string[]).pop();return <div>{children}</div>;}
+export function Any({children,mirror}:{children:string[];mirror:any}){mirror.pop();return <div>{children}</div>;}
+export function Readonly({children,mirror}:{children:readonly string[];mirror:string[]}){mirror.pop();return <div>{children}</div>;}
+export function Union({children,mirror}:{children:string|string[];mirror:string[]|undefined}){mirror?.pop();return <div>{children}</div>;}
+export function RestAliased({mirror,...rest}:API){mirror.pop();return <div {...rest}/>;}
+export function RestDefaulted({mirror,x=mirror.pop(),...rest}:API&{x?:string}){return <div {...rest}/>;}
+export function RestUnused({mirror,...rest}:API){return <div {...rest}/>;}
+export function RestPrimitive({mirror,...rest}:{children:string;mirror:string[]}){mirror.pop();return <div {...rest}/>;}
+export function SpreadStyle({children,style}:{children:string[];style:{width?:number}}){return <div style={{...style}}>{children}</div>;}
+export function Unused({children,mirror}:API){return <div>{children}</div>;}
+export function PrimitiveChild({children,mirror}:{children:string;mirror:string[]}){mirror.pop();return <div>{children}</div>;}
+export function PrimitiveSibling({children,label,count,enabled}:{children:string[];label:string|null;count?:number;enabled:boolean}){const text=label?.toUpperCase()+String(count)+String(enabled);return <div title={text}>{children}</div>;}
+export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>mirror.pop();local(['unrelated']);return <div>{children}</div>;}
+`;
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      "import './primitive';\n" + body,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    const fact = (name: string) =>
+      program.components.find((c) => c.name === name)!.children;
+    for (const name of [
+      "Changed",
+      "Renamed",
+      "Escaped",
+      "Captured",
+      "Defaulted",
+      "Unknown",
+      "Any",
+      "Readonly",
+      "Union",
+      "RestAliased",
+      "RestDefaulted",
+      "SpreadStyle",
+    ])
+      assert.deepEqual(
+        fact(name),
+        { kind: "unresolved", reason: "children-alias-unresolved" },
+        name,
+      );
+    for (const name of [
+      "Unused",
+      "RestUnused",
+      "RestPrimitive",
+      "PrimitiveChild",
+      "PrimitiveSibling",
+      "Shadowed",
+    ])
+      assert.equal(fact(name).kind, "forwarded", name);
+
+    // The returned reference stays identical, but the actual React children
+    // have changed. This is the false proof the source reader must reject.
+    const exports: Record<
+      string,
+      (props: unknown) => React.ReactElement<{ children: string[] }>
+    > = {};
+    runInNewContext(
+      ts.transpileModule(body, {
+        compilerOptions: {
+          jsx: ts.JsxEmit.React,
+          module: ts.ModuleKind.CommonJS,
+        },
+      }).outputText,
+      { exports, React },
+    );
+    const children = ["original"];
+    const element = exports.Changed({ children, mirror: children });
+    assert.equal(element.props.children, children);
+    assert.deepEqual(element.props.children, ["changed"]);
+    const styleChildren = ["original"];
+    let reads = 0;
+    const style = Object.defineProperty({}, "width", {
+      enumerable: true,
+      get() {
+        reads++;
+        styleChildren[0] = "changed by getter";
+        return 320;
+      },
+    });
+    const styled = exports.SpreadStyle({ children: styleChildren, style });
+    assert.equal(reads, 1);
+    assert.equal(styled.props.children, styleChildren);
+    assert.deepEqual(styled.props.children, ["changed by getter"]);
+  }));
+
+test("forwardRef callbacks cannot mutate children through the ref parameter", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `
+import * as React from 'react';
+export const Aliased = React.forwardRef<string[],{children:string[]}>(({children},ref)=>{(ref as React.MutableRefObject<string[]>).current.pop();return <div>{children}</div>;});
+export const Container = React.forwardRef<{children:string},{children:string}>((props,ref)=>{(ref as React.MutableRefObject<{children:string}>).current.children='changed';return <div {...props}/>;});
+export const Invoked = React.forwardRef<HTMLDivElement,{children:string[]}>(({children},ref)=>{(ref as React.RefCallback<HTMLDivElement>)(null);return <div ref={ref}>{children}</div>;});
+export const Passed = React.forwardRef<HTMLDivElement,{children:string[]}>(({children},ref)=><div ref={ref}>{children}</div>);
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    for (const name of ["Aliased", "Container", "Invoked"])
+      assert.deepEqual(
+        program.components.find((c) => c.name === name)!.children,
+        { kind: "unresolved", reason: "children-alias-unresolved" },
+        name,
+      );
+    assert.equal(
+      program.components.find((c) => c.name === "Passed")!.children.kind,
+      "forwarded",
+    );
+  }));
+
 test("React forwardRef callbacks retain source, public props and children facts without executing wrappers", () =>
   fixture((dir) => {
     writeFileSync(
@@ -580,7 +717,9 @@ export default Panel;`;
       if (mutation) {
         assert.deepEqual(program.components, []);
         assert.ok(
-          program.problems.includes("default:component-value-mutation-or-escape"),
+          program.problems.includes(
+            "default:component-value-mutation-or-escape",
+          ),
         );
       } else assert.equal(program.components[0].children.kind, "forwarded");
     }

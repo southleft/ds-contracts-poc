@@ -6981,6 +6981,41 @@ scope, disappearing roots, node bounds and both five-control sets. Reverse by re
 absence witness and its admission/control rules; preserve all receipts and
 restore the named textless-source limitation.
 
+**AGENT decision, 2026-09-22: preserve refusal when a sibling prop may alias
+mutable children.** A helper's metadata excluding the `children` key does not
+prove unchanged content. With the original Separator helper and original
+metadata, an iterable shared by `size` and `children` receives an `initial`
+default: the children reference stays identical while its rendered text changes.
+This is diagnostic evidence, not an admitted source input or a native outcome.
+
+The same review found a false proof in the direct destructuring reader:
+`mirror[0] = "changed"` followed by returning `children` was marked forwarded
+when both props referenced the same array. The reader now reports
+`children-alias-unresolved` when mutable/unknown children have a used
+non-primitive sibling binding. Other parameters that may alias the children or
+props container receive the same check. Passing a secondary binding directly
+as the returned element's `ref` remains allowed; executing it does not.
+The check also covers children forwarded within a destructured rest object:
+copying the props container leaves a mutable children value shared. Resolving
+the declared children property keeps primitive-only rest children supported.
+An object spread is not a purity proof: a caller's style getter can change a
+children array before the returned JSX receives it. Spreading an opaque sibling
+object therefore refuses this proof even when ordinary data-only objects would
+be safe. Grid lowering remains covered with component-owned constant styles;
+the earlier caller-style fixture is retained as an explicit source refusal.
+The reader deliberately does not infer purity for other uses. Unused siblings,
+primitive-only children and primitive-only siblings retain their existing proof;
+binding identity keeps unrelated shadowed names separate. Readonly TypeScript
+annotations do not establish runtime immutability.
+
+Runtime counterexamples, source regressions and old/new reads of the original
+Badge and Separator programs are retained in
+`private/children-alias-proof-20260922/`. The two original program reads remain
+identical. General helper-mediated ownership and the Radix native journey remain
+unqualified. To reverse, remove the sibling-alias guard in `react-children.ts`,
+restoring the documented false-positive limitation; retain these counterexamples
+and all existing source, application and native evidence.
+
 ## D.78 Vector masks must not become ordinary filled paths
 
 **AGENT decision, 2026-09-20: keep mask composition outside the filled-path
