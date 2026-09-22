@@ -175,9 +175,15 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api', initial = row.kind === 'initial' || stateApi;
       const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId && r.ownershipId===row.ownershipId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
+      // A caller's birth record is historical after a combined main update.
+      // Use only the current, settled parent verification that names this caller;
+      // an export or an earlier parent correction alone proves nothing current.
+      const callerCorrection = comparison && rows.find(parent => parent.operation.id === row.parentOperationId)?.updates?.find(update =>
+        update.operation?.phase === 'update-verified' && update.operation.sourceCurrent && !update.operation.superseded &&
+        !update.operation.pendingPhase && update.operation.callerImageObservations?.some(caller => caller.operationId === id));
       // A correction that reached, or may have reached, the canvas.
       const written = !!row.updates?.some(update => update.operation && !['update-prepared','update-preflight-observed','update-refused','update-write-untouched'].includes(update.operation.phase));
-      const currentProblems = op.problems.filter(problem => !corrected || problem !== 'native-operation-source-evidence-unavailable');
+      const currentProblems = op.problems.filter(problem => !(corrected || callerCorrection) || problem !== 'native-operation-source-evidence-unavailable');
       // Display priority only. Every action still reauthenticates its proposal
       // on the host; this ordering does not authorize a write.
       const updatePriority = (update: NonNullable<Operation['updates']>[number]) =>
@@ -191,7 +197,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
         {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
         {comparison && op.comparisonContainerWidth !== undefined && <p>This component fills its parent. The comparison frame is {op.comparisonContainerWidth} px wide: the content width of the container it filled in this case’s original render. The reusable main still fills whatever parent it is placed in.</p>}
-        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {corrected ? 'verified correction matches current inputs; original creation retained below' : op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {callerCorrection ? 'verified in the main’s current correction; original creation retained below' : corrected ? 'verified correction matches current inputs; original creation retained below' : op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        {callerCorrection && <p>The main’s current correction independently read this instance together with the component. Use <em>Updated caller instances</em> in that correction to inspect the result. The creation exports below are historical; visual fidelity remains unqualified.</p>}
         {op.comparisonBaselineRefreshed && <p>This read-only inspection checks the retained instance against verified main corrections. Original creation records and node identities are preserved.</p>}
         {op.sourceCompilerRecompiled && <p>This new draft uses the current compiler with the unchanged, verified source observations. The original capture remains intact. This prepared output is pinned before creation; existing Figma operations are not replaced.</p>}
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
@@ -316,7 +323,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             onClick={() => void action(`native-operation/${id}/resume-comparison`)}>Inspect and resume retained comparison</button>
         </section>}
         {written && <p>This operation has a written correction. Its own reader compares the canvas with the creation plan, so reading it again would call the corrected nodes wrong and strand later updates. Use <em>Inspect update again</em> or <em>Read design changes from the canvas</em> on the latest correction instead.</p>}
-        {!corrected && !written && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
+        {!corrected && !callerCorrection && !written && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
         {!corrected && !written && ['root', 'initial', 'state-api'].includes(row.kind) && op.phase === 'component-structure-observed' && !op.sizingObservation && <button type="button" disabled={busy || !row.connection.paired}
           onClick={() => void action(`native-operation/${id}/inspect-sizing`)}>Inspect sizing details</button>}
