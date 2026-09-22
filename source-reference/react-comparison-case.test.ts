@@ -64,6 +64,17 @@ test('each reused source case has separate preparation and reservation while old
   assert.notEqual(reactComparisonReservation(icon), reactComparisonReservation(request));
   assert.notEqual(reactComparisonContentOperation(icon), reactComparisonContentOperation(request));
   assert.ok(isReactComparisonRequest({ ...request, composition: { revision: revisionOf('mapping') } }));
+  const updated={...request,version:4 as const,parentUpdate:{proposalId:'a'.repeat(64),observationRevision:revisionOf('observed updated main')}};
+  assert.ok(isReactComparisonRequest(updated));
+  assert.notEqual(reactComparisonReservation(updated),reactComparisonReservation(request));
+  assert.equal(reactComparisonContentOperation(updated),reactComparisonContentOperation(request));
+  assert.notEqual(reactComparisonReservation({...updated,root:{...root,inventorySha256:'f'.repeat(64)}}),reactComparisonReservation(updated));
+  assert.notEqual(reactComparisonReservation({...updated,parentUpdate:{...updated.parentUpdate,observationRevision:revisionOf('other main')}}),reactComparisonReservation(updated));
+  for(const invalid of [{...updated,parentUpdate:undefined},{...updated,mainRoot:undefined},
+    {...updated,parentUpdate:{...updated.parentUpdate,proposalId:'bad'}},
+    {...updated,parentUpdate:{...updated.parentUpdate,observationRevision:'a'.repeat(64)}},
+    {...updated,parentUpdate:{...updated.parentUpdate,callerIds:[]}},
+    {...request,parentUpdate:updated.parentUpdate}])assert.equal(isReactComparisonRequest(invalid),false);
   for (const invalid of [{ ...request, mainRoot: undefined }, { ...request, nodeId: '1:2' },
     { ...request, composition: { revision: revisionOf('mapping'), references: [] } }, { ...old, mainRoot: f.main }])
     assert.equal(isReactComparisonRequest(invalid), false);

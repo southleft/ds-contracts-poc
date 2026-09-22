@@ -29,7 +29,7 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   parent: { input: NativeContractObservationInput; receipt: NativeSourceReadback; request: ReactNativeRequest }, composition?: ReturnType<typeof readReactCompositionEvidence>) {
   if (!isReactComparisonRequest(request) || parent.input.operation.id !== request.parentOperationId ||
       canonicalJson(parent.request) !== canonicalJson(request.mainRoot ?? request.root)) throw Error('react-comparison-parent-changed');
-  if (request.version === 3) assertReactComparisonFamily(repoRoot, reference, parent.request, request.root);
+  if (request.version === 3 || request.version === 4) assertReactComparisonFamily(repoRoot, reference, parent.request, request.root);
   const contentOperation = reactComparisonContentOperation(request);
   if (request.composition && (!composition || composition.review.status !== 'ready' || composition.review.inputRevision !== request.composition!.revision))
     throw Error('react-composition-pinned-mapping-changed');

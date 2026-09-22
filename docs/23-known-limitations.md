@@ -9036,3 +9036,41 @@ To replace this rule, provide an independently verified reader that covers the
 entire new inventory with exact source, parent and caller pins. Preserve the
 old proposal and journal bytes. Removing the membership check or marking the
 old reader with a newer inventory revision is not an equivalent observation.
+
+## D.114 A new caller pins the verified parent update
+
+**AGENT decision, 2026-09-21.** New root-text callers after a source succession
+use a versioned request containing the effective source, the parent's latest
+verified update proposal and the exact parent observation revision. Their
+content inspection has its own source-derived scope. Historical requests and
+content pointers are retained. Existing cases reuse their saved operation;
+another source revision cannot silently replace that operation.
+
+During this caller's preparation and creation, only its own new journal may
+be excluded when reauthenticating the preceding parent update. That journal is
+still fully validated and must contain the matching versioned parent pin and
+compiled observation. Every other caller remains in the inventory. A forged
+pin, an unrelated pending caller, an already-recorded caller, changed source,
+or a superseded parent update cannot use this creation scope. Ordinary update
+planning and verification never exclude the new caller. After its independent
+observation, D.113 requires a combined successor covering the larger inventory.
+
+A verified parent read cannot be replaced while its caller inventory is
+unavailable: the pending caller still needs that evidence to finish. Reads for
+unknown-write recovery retain their existing path. The application reports
+`native-update-caller-context-unavailable-before-refresh` and leaves the
+verified journal intact until caller inspection is complete or recovered.
+
+The simulated native journal test covers creation after a color update,
+restart after token allocation, repeat operation selection, independent caller
+observation and the combined successor. It also probes forged pins, unknown
+and previously recorded caller IDs, a corrupt current caller event, competing
+caller preparation and parent refresh during creation. These are lifecycle
+tests, not evidence of live geometry, fidelity or complete V1 recovery. Live
+application qualification remains pending.
+
+To reverse this decision, stop admitting new version-4 comparison requests and
+retain every existing operation, program and observation as historical data.
+Do not reinterpret them as version-3 requests or relax normal inventory checks.
+An alternative must demonstrate creation, restart, conflicts and subsequent
+combined updates with the same complete evidence and immutable history.

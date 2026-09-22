@@ -279,6 +279,10 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactSourceRequest(operationId) };
   });
+  const callerContentSource=(jobs:ReturnType<typeof createNativeOperationJobs>,id:string)=>{
+    const original=jobs.reactRequest(id),request=jobs.reactEffectiveRequest(id);
+    return {request,scope:canonicalJson(original)===canonicalJson(request)?id:reactComparisonContentScope(id,request)};
+  };
   const selectInspectionSource = (referenceId: string, caseId?: string) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
@@ -772,11 +776,13 @@ export function createReactReferenceService(
             throw Error('react-native-body-refused');
           if (caseComparisonRoute) {
             const [, , parentId, caseId] = caseComparisonRoute;
-            const parent = jobs.verifiedReactObservation(parentId);
-            const source = selectReactComparisonCase(repoRoot, reference, parent.request, caseId);
+            const main = jobs.reactEffectiveRequest(parentId);
+            const source = selectReactComparisonCase(repoRoot, reference, main, caseId);
             const existing = jobs.listReact(reference.id).find(row => row.kind === 'comparison' &&
               row.parentOperationId === parentId && row.caseId === caseId && row.ownershipId === source.ownership.id);
             if (!existing) {
+              const parent=jobs.verifiedReactCallerObservation(parentId);
+              if(canonicalJson(parent.request)!==canonicalJson(main))throw Error('react-comparison-parent-changed');
               const scope = reactComparisonContentScope(parentId, source);
               let inspected = readReactContentInspection(repoRoot, reference, source, scope);
               if (!inspected || inspected.phase !== 'complete') {
@@ -791,7 +797,8 @@ export function createReactReferenceService(
               if (inspected.phase !== 'complete' || !inspected.sourceUnchanged) throw Error('react-comparison-content-unavailable');
               const composition = readReactCompositionEvidence(repoRoot, reference, source, scope, jobs, undefined, initialStates.nativeEvidence);
               const selected = selectReactComparisonRequest(repoRoot, reference, source, scope, composition);
-              const prepared = jobs.prepare({ ...selected, version: 3, parentOperationId: parentId, mainRoot: parent.request });
+              const prepared = jobs.prepare({ ...selected, version: parent.parentUpdate?4:3,
+                ...(parent.parentUpdate?{parentUpdate:parent.parentUpdate}:{}),parentOperationId: parentId, mainRoot: parent.request });
               await frames.create(reference.id, prepared.id);
             } else if (!existing.operation.sourceCurrent) throw Error('react-comparison-source-changed');
           } else if (childRoute) {
@@ -873,16 +880,25 @@ export function createReactReferenceService(
               if (!updates) throw Error('react-update-planning-unavailable');
               updates.prepare(id);
             } else if (nativeAction[3] === 'content') {
-              if (contentJobs.get(id)?.state.phase !== 'running') {
-                const job = startReactContentInspection(repoRoot, reference, jobs.reactRequest(id), id);
-                contentJobs.set(id, job);
+              const {request,scope}=callerContentSource(jobs,id);
+              if (contentJobs.get(scope)?.state.phase !== 'running') {
+                const job = startReactContentInspection(repoRoot, reference, request, scope);
+                contentJobs.set(scope, job);
                 void job.promise.catch(() => { job.state.phase = 'failed'; job.state.problems = ['react-content-evidence-unavailable']; });
               }
             } else if (nativeAction[3] === 'source-frame') {
               await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
-              jobs.verifiedReactObservation(id);
-              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
+              const {request,scope}=callerContentSource(jobs,id);
+              const existing=jobs.listReact(reference.id).find(row=>row.kind==='comparison'&&row.parentOperationId===id&&
+                row.caseId===request.caseId&&row.ownershipId===request.ownership.id);
+              if(!existing) {
+                const parent=jobs.verifiedReactCallerObservation(id);
+                const selected=selectReactComparisonRequest(repoRoot,reference,request,scope,
+                  readReactCompositionEvidence(repoRoot,reference,request,scope,jobs,undefined,initialStates.nativeEvidence));
+                const prepared=jobs.prepare(parent.parentUpdate?{...selected,version:4,parentOperationId:id,mainRoot:parent.request,parentUpdate:parent.parentUpdate}:selected);
+                if(parent.parentUpdate)await frames.create(reference.id,prepared.id);
+              }
             } else if (nativeAction[3] === 'repair-comparison') jobs.dispatch(id,'comparison-repair-preflight-readback');
             else if (nativeAction[3] === 'resume-comparison') jobs.dispatch(id,'comparison-recovery-readback');
             else if (nativeAction[3] === 'retry-observation' || nativeAction[3] === 'inspect-sizing') {
@@ -932,18 +948,20 @@ export function createReactReferenceService(
             catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
           if (row.kind === 'root') {
-            const id = row.operation.id, running = contentJobs.get(id);
+            const id = row.operation.id;
+            let running:ReturnType<typeof startReactContentInspection>|undefined;
             try {
+              const {request,scope}=callerContentSource(jobs,id);running=contentJobs.get(scope);
               if (running && running.state.phase !== 'complete') content = running.report();
               else {
                 try {
                   // The composition reader authenticates and returns the saved
                   // inspection too. Do not read the same sealed archive twice.
-                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
+                  const evidence = readReactCompositionEvidence(repoRoot, reference!, request, scope, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
                   if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
                   content = evidence.inspection; composition = evidence.review;
                 } catch {
-                  content = running?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(id), id);
+                  content = running?.report() ?? readReactContentInspection(repoRoot, reference!, request, scope);
                   if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
                     compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.';
                 }
