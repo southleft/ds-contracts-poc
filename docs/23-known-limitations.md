@@ -9400,6 +9400,15 @@ actual service route and existing companion recovery simulations exercise the
 receipt path. Live companion latency and complete user-operation performance
 still require measurement.
 
+A direct service-handler measurement replayed the retained two-caller result
+twice: storage receipts took 19.0 and 0.83 seconds, compared with 153.5 and
+78.6 seconds for the earlier full result response. The following first full
+listing took 223.6 seconds and returned the exact earlier authenticated view.
+All 2,061 retained native evidence and transport files remained unchanged, with
+no new events or writes. The smaller upload response does not qualify overall
+latency. This measures saved-result replay, not fresh Figma execution; see
+`private/native-progress-polling-20260922/result-receipt-benchmark-v1.json`.
+
 To reverse, point the companion result route back to the full-view transport
 `accept` method and remove the separate receipt methods/type. Preserve all
 journals and the shared result-storage validation. No history migration or
