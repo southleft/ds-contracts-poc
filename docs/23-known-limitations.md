@@ -9515,3 +9515,53 @@ The complete response and inventory comparisons are in
 Reverse this decision by restoring the separate guarded-plan derivation in
 the matcher and the original diagnostic wrapper; preserve all exactness checks,
 refusals and retained native evidence.
+
+## D.123 Replaying a correction history must not evict every useful match
+
+**AGENT decision, 2026-09-22.** The host adapter retains up to sixteen pure
+template match results instead of four. It also includes the earlier local
+prepared-plan reuse: up to sixteen decodes are retained, and preflight reuses
+their guarded plans only when the complete proposal bytes still match. Match
+keys contain the complete proposal and observation bytes. Returned values
+remain isolated copies; source and journal authentication, native write
+permission and fresh canvas reads are unchanged. The eviction policy and exact
+comparison rules are unchanged.
+The diagnostic export galleries also keep the existing local default: closed
+until the operator opens them. The saved images remain available for review;
+opening the history does not immediately request those diagnostic images.
+
+A read-only trace of the restored history records 71 lookups for seven distinct
+comparisons. The four-entry cache performs 24 comparisons and twenty evictions
+within that one read. The program cache does not thrash in this trace: it has
+one miss across four requests. Increasing its limit was therefore unnecessary.
+
+A process-local prototype changing only the match limit returns the identical
+246,371-byte service response and preserves all 2,104 native evidence files.
+One cold/repeated read changes from 133/100 seconds to 94/55 seconds. This is a
+single host comparison, not a latency guarantee; the remaining delay still
+prevents usable-latency qualification. No native operation was issued.
+Both timed versions already included prepared-plan reuse, so this measurement
+isolates the larger match cache rather than the complete release change.
+
+After adoption and one **Load React originals** action, the running app shows
+the same current verified correction. A separate real Vite HTTP read takes
+54 seconds and returns the identical response, with all retained native files
+unchanged and no new command or write. The adopted adapter and its regression
+test match the release branch exactly. This verifies reopening the saved result,
+not a new canvas observation or a complete operation-latency measurement.
+
+The larger working set uses more retained memory. These seven complete keys
+and serialized results total about 49 MB; that is a payload measurement, not a
+JavaScript heap measurement. The ten retained prepared-plan entries serialize
+to a further 207 MB. Sixteen is an entry bound per cache, not a byte bound, and
+larger histories can still exceed it. No result or authority is persisted.
+
+Evidence: `private/native-template-match-profile-20260922/`, including
+`profile-v1.json`, `cache-analysis-v1.json` and
+`cache-limit16-candidate-v1.json` and `adoption-api-v2.json`. The adapter review
+and corruption probes are in `private/template-match-cache-20260922/`.
+Reverse the match-cache change by restoring
+its four-entry limit in `source-reference/native-app-update.ts`. Prepared-plan
+reuse can be reversed independently by deriving the guarded plan on every
+preflight and restoring its four-entry cache. Preserve the complete-byte keys,
+input checks, isolated copies and all retained observations.

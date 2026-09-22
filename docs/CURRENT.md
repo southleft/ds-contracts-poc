@@ -1,6 +1,6 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-09-21 · V1 is not complete.**
+**Public project status · updated 2026-09-22 · V1 is not complete.**
 
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
@@ -193,6 +193,14 @@ callers, including every retained image; all four source files and 2,085 earlier
 evidence files match their original bytes. The app reports current verification,
 and both unobstructed native callers and the app gallery show the restoration.
 The long host and display delays remain a release gap.
+
+The host's pure template-match cache now retains a larger bounded correction
+history. A read-only prototype preserved the complete response and all 2,104
+native evidence files while reducing one repeated listing from 100 to 55
+seconds. After adoption, the app reopens the same current verified correction;
+its real HTTP response matches the saved bytes and creates no native event or
+write. Source and write authorization are unchanged. Usable latency remains
+unqualified ([D.123](23-known-limitations.md#d123-replaying-a-correction-history-must-not-evict-every-useful-match)).
 
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
