@@ -1,3 +1,4 @@
+import {nativeAppUpdateDesired} from './native-app-update.js';
 import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { createNativeSourceSuccessions } from './native-source-succession.js';
@@ -773,7 +774,7 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
-  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision) => {
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, (id, parentJournalRevision, consumerPins) => {
     const baseline = nativeJobs.reactUpdateBaseline(id, parentJournalRevision);
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
@@ -785,12 +786,16 @@ export function createReferenceService(
       // The existing component keeps its name and token namespace; for an
       // unchanged source this equals the content-derived name.
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.source, baseline.input.component.contractId), operation: baseline.input.operation })
-      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source), operation: baseline.input.operation });
-    return { parentJournalRevision: baseline.journalRevision, input: {
+      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source,
+        baseline.source.version===1?baseline.input.component.contractId:undefined), operation: baseline.input.operation });
+    const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
+    const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins):undefined;
+    return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {
       before: baseline.input, baseline: baseline.receipt,
-      desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
+      ...desiredInput,
     } };
-  }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id));
+  }, id => nativeUpdateJobs.updateHistory(id), id => nativeJobs.reactUpdateJournalRevision(id),
+  (id,pins)=>nativeJobs.reactTemplateConsumerBaselines(id,pins).currentRevision);
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

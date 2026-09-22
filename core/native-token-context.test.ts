@@ -5,6 +5,7 @@ import { compileTokenSetRows } from "./token-set.js";
 import {
   nativeTokenCollectionName,
   prepareNativeTokenContext,
+  restoreNativeTokenAllocationInput,
   verifyNativeTokenContextReceipt,
   type NativeTokenContextInput,
   type NativeTokenContextReceipt,
@@ -49,6 +50,52 @@ function input(): NativeTokenContextInput {
   };
 }
 const rgba = { r: 0x12 / 255, g: 0x34 / 255, b: 0x56 / 255, a: 0x80 / 255 };
+
+test('template history retains allocation values for requested leaves and alias dependencies', () => {
+  const before = input();
+  (before.modes[0].tokens.gap as any).$value = '8px';
+  (before.modes[0].tokens.weight as any).$type = 'fontWeight'; revise(before);
+  const after = copy(before);
+  (after.modes[0].tokens.gap as any).$value = '12px';
+  (after.modes[0].tokens.weight as any).$value = 700;
+  (after.modes[0].tokens.palette as any).base.$value = '#abcdef'; revise(after);
+  after.allocatedValueProtocol = 'template-values-v1';
+  after.allocatedValues = [
+    { sourceMode: 'dark', brand: 'default', tokenPath: 'gap', value: '8px' },
+    { sourceMode: 'dark', brand: 'default', tokenPath: 'palette.base', value: '#12345680' },
+    { sourceMode: 'dark', brand: 'default', tokenPath: 'weight', value: 600 },
+  ];
+  const original = copy(after), prepared = prepareNativeTokenContext(after);
+  assert.equal(prepared.revision, prepareNativeTokenContext(before).revision);
+  assert.ok(!after.tokenPaths.includes('palette.base'), 'dependency retains its original allocation without being requested');
+  assert.deepEqual(restoreNativeTokenAllocationInput(after), before);
+  assert.deepEqual(after, original);
+  const historical = copy(after); delete historical.allocatedValueProtocol;
+  assert.throws(() => prepareNativeTokenContext(historical), /allocated-value-/);
+  const unrelated = copy(after); unrelated.modes[0].tokens.unused = { $type: 'color', $value: '#fff' }; revise(unrelated);
+  unrelated.allocatedValues = [{ sourceMode: 'dark', brand: 'default', tokenPath: 'unused', value: '#000' }];
+  assert.throws(() => prepareNativeTokenContext(unrelated), /allocated-value-unrequested/);
+});
+
+test('template history cannot carry aliases, relative dimensions, unsupported types or fabricated modes', () => {
+  const before = input(); (before.modes[0].tokens.gap as any).$value = '8px'; revise(before);
+  const current = copy(before); (current.modes[0].tokens.gap as any).$value = '12px'; revise(current);
+  current.allocatedValueProtocol = 'template-values-v1';
+  current.allocatedValues = [{ sourceMode: 'dark', brand: 'default', tokenPath: 'gap', value: '8px' }];
+  for (const mutate of [
+    (v: NativeTokenContextInput) => { v.allocatedValues![0].value = '0.5rem'; },
+    (v: NativeTokenContextInput) => { (v.modes[0].tokens.gap as any).$value = '0.75rem'; },
+    (v: NativeTokenContextInput) => { v.allocatedValues![0].value = '{weight}'; },
+    (v: NativeTokenContextInput) => { (v.modes[0].tokens.gap as any).$value = '{weight}'; },
+    (v: NativeTokenContextInput) => { (v.modes[0].tokens.gap as any).$type = 'string'; },
+    (v: NativeTokenContextInput) => { v.allocatedValues![0].sourceMode = 'light'; },
+    (v: NativeTokenContextInput) => { v.allocatedValues!.push(copy(v.allocatedValues![0])); },
+    (v: NativeTokenContextInput) => { v.writeProtocol = 'explicit-modes-v1'; },
+  ]) {
+    const bad = copy(current); mutate(bad); revise(bad);
+    assert.throws(() => prepareNativeTokenContext(bad), /native-token-context-/);
+  }
+});
 
 test('explicit pixel-dimension history preserves allocation identity and carries the current FLOAT value', () => {
   const before = input();

@@ -1,3 +1,4 @@
+import {nativeAppUpdateDesired,prepareNativeAppUpdate} from './native-app-update.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
@@ -428,6 +429,25 @@ for (const kind of ['root', 'initial', 'nested', 'fresh', 'graph'] as const) tes
     route.setValueForMode(mode,saved[mode]);transport.retryObservation(first.id);await send({type:'native-poll'});
     assert.equal(jobs.get(first.id).phase,'component-structure-observed');
     assert.throws(()=>transport.inspectSizing(first.id),/template-graph-sizing-unqualified/);
+    const savedBaseline=jobs.reactUpdateBaseline(first.id);
+    const desired=prepareReactNativeCorrectionPlan({...input,operation:savedBaseline.input.operation});
+    assert.notDeepEqual(desired.plan.component,desired.plan.templateGraph!.input.component,
+      'the real compiler binds and stamps native output after retaining its source graph');
+    const updateInput={before:savedBaseline.input,baseline:savedBaseline.receipt,templateConsumers:[]};
+    const proposal=prepareNativeAppUpdate({...updateInput,...nativeAppUpdateDesired(desired)});
+    assert.equal(proposal.plan.kind,'native-contract-template-value-update');
+    if(proposal.plan.kind!=='native-contract-template-value-update')throw Error('template expected');
+    assert.deepEqual(proposal.plan.templateValueChanges,[]);
+    assert.throws(()=>prepareNativeAppUpdate({...updateInput,templateGraph:desired.plan.templateGraph!.input,
+      desired:{component:desired.plan.component,tokenInput:desired.plan.tokenInput,revision:desired.revision}}),/template-source-invalid/);
+    const changed=structuredClone(input);(changed.matrix.draft!.tokens!.surface as {$value:string}).$value='#234567';
+    const next=prepareReactNativeCorrectionPlan({...changed,operation:savedBaseline.input.operation});
+    const color=prepareNativeAppUpdate({...updateInput,...nativeAppUpdateDesired(next)});
+    assert.equal(color.plan.kind,'native-contract-template-value-update');
+    if(color.plan.kind!=='native-contract-template-value-update')throw Error('template expected');
+    assert.equal(color.plan.templateValueChanges.length,1);
+    const forged=structuredClone(next);forged.plan.component.setName+='changed';
+    assert.throws(()=>nativeAppUpdateDesired(forged),/compiled-source-changed/);
     return;
   }
   // The optional sizing reader is delivered by the real companion, and its
