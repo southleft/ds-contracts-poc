@@ -81,6 +81,15 @@ after full validation. Native return of the relationship and an app-delivered
 interactive Tabs consumer remain unfinished. The retained Tabs archive is unchanged; missing identities
 and panel content are not inferred ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
 
+A separate authored selection example now completes setup, review and archive
+preparation through the app. Its clean installed consumer retains panel input
+and stable item identity, handles keyboard selection and item removal, and
+honors held or accepted callbacks. Reset and an explicit same-tab share-link
+reload preserve the expected contract. The browser download event timed out;
+the exact displayed archive endpoint supplied the installed bytes. This is a
+bounded application rehearsal, not original Tabs, independent-family or native
+return qualification ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
+
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.

@@ -9827,10 +9827,27 @@ the setup does not overwrite the imported workspace record or autosave a draft.
 The static preview does not demonstrate keyboard behavior. Its state controls
 replace defaults for rendering, so requesting a disabled initial item currently
 refuses; generated React supports a controlled disabled value with no selection.
-Form-level browser checks are not a live application journey.
-Authenticated native return, actual application archive delivery and source-matched consumer
-qualification remain unfinished. The retained Tabs archive is unchanged; its
-missing identities and additional panel contents are not invented.
+A separate authored application rehearsal now imports three contracts through
+JSON, refuses an incomplete setup, invalidates an edited review, applies the
+fully validated mapping and prepares an archive. The offered archive was
+retrieved from its displayed endpoint with the exact artifact hash; the browser
+download event timed out. An isolated consumer installs that archive with its
+own React dependency. Its live browser exercise verifies keyboard selection,
+retained panel input, item identity through reordering and relabeling, selected
+item removal, explicit remount, and caller-held versus accepted requests. Two
+instances have six distinct tab/panel pairs and hidden panels do not paint.
+Reset restores the loaded source; an explicit share link restores the exact
+configured contract after reload in the same tab, with dependencies still in
+its session workspace. This is not general draft persistence or cross-device
+share qualification.
+
+Evidence: `private/selection-app-20260922/` in the live application worktree,
+including the original inputs, configured contract, visible review, archive
+hash, isolated install, browser trials and screenshots. This authored rehearsal
+does not qualify the original Tabs, an independent family, source-matched
+fidelity or native return. Those journeys remain unfinished. The retained Tabs
+archive is unchanged; its missing identities and additional panel contents are
+not invented.
 
 **Reversal:** remove the Selection setup view/helper, then remove `selection` and its shared projection/runtime integration,
 restore the named interaction gap, regenerate both schema projections and the
