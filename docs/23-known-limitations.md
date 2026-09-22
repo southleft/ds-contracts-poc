@@ -9413,3 +9413,22 @@ To reverse, point the companion result route back to the full-view transport
 `accept` method and remove the separate receipt methods/type. Preserve all
 journals and the shared result-storage validation. No history migration or
 native canvas change is needed.
+
+## D.120 Token row indexing does not replace token validation
+
+**AGENT decision, 2026-09-22.** Native token preparation now builds one name
+index for each mode's completed rows, then uses it to resolve every requested
+variable and alias. Previously it rebuilt the same index for every variable.
+The indexes exist only within that preparation call. Tree, revision, alias,
+mode, type and allocation-history checks remain unchanged; no result is reused
+across preparations or requests.
+
+Four retained inputs produce identical preparation bytes; the three inputs
+with retained native identities also produce identical readback programs.
+Sixteen changed-input probes retain their named refusals. Alternating-order
+microbenchmarks measured improvements on the two larger inputs and essentially
+unchanged small inputs. They do not qualify full application latency or V1.
+Evidence: `private/native-progress-polling-20260922/token-row-index-benchmark-v2.json`.
+
+To reverse, move the row index construction back inside each variable's mode
+loop. Preserve all validation, output ordering, journals and fidelity limits.
