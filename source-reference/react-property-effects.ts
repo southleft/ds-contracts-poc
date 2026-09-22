@@ -7,7 +7,7 @@ import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
-import {linkReactSourceAnatomy} from './react-source-anatomy.js';
+import {linkReactSourceAnatomy,nestedReactHostPaths} from './react-source-anatomy.js';
 import {probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
 import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
@@ -79,7 +79,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const read=()=>page.evaluate(captureJs(args.stageSelector??'#root',undefined,'--',[selector])) as Promise<CapturedNode>;
   const current=await read(),png=await page.screenshot({fullPage:true,caret:'initial'});
   const own=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
-  const styles=await readReactStyleOrigin(page,selector,own,args.stageSelector??'#root');
+  const styles=await readReactStyleOrigin(page,selector,own,args.stageSelector??'#root',nestedReactHostPaths(program,own,current));
   // Declared tracks exist only before layout; a plane without a grid container records nothing.
   const grids=current&&hasGridContainer(current)?{gridConstraints:await observeGridConstraints(page,[selector],current)}:{};
   const fonts=await observeTextFonts(page,[selector],current),fontsSha256=evidenceSha(JSON.stringify(fonts));

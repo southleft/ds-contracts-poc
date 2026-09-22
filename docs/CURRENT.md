@@ -370,3 +370,15 @@ When resuming work, read this page, [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.
 ### Checking these pages
 
 `npm run docs:check` validates public claims and links. `npm run test:playground` includes canonical-document integration checks. `npm run site:build` builds the documentation site. The desktop/mobile documentation smoke test is `npm run test:product-overview:browser` with local servers on ports 5181 and 5182. These checks validate documentation surfaces, not conversion readiness.
+
+
+### Nested source host integration, 2026-09-22
+
+The live checkout now includes the bounded nested caller-slot implementation and
+its source-binding, explicit-host and inline-margin corrections (D.125–D.129).
+An installed-source browser probe validates its original source and retains two
+repeated panels, fixed headings and editable caller text. Measured browser
+geometry matches exactly; the matched 800 × 228 crops differ at 13 pixels with a
+maximum channel difference of 2. This is an authored engine probe, not independent
+library coverage or a native fidelity result. Application delivery, live native
+editability, repeats and the full V1 acceptance requirements remain unqualified.

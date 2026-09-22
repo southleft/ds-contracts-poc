@@ -66,6 +66,7 @@ export function matchReactComposition(program: ReactSourceProgram, ownership: Re
       module: child.source.module, sourcePaths: child.roots.map(r => r.path), status: 'unresolved', problems: [] };
     review.rows.push(row);
     try {
+      if (child.content === 'nested-caller-slot') throw Error('react-composition-nested-slot-lowering-unqualified');
       const sourceOwned = child.content === 'authored-or-runtime';
       if (child.roots.length !== 1 || child.content === 'unresolved' ||
           (!sourceOwned && child.roots[0].correspondence === 'runtime-dependent') || sourceOwned && child.dependencies.length)

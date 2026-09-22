@@ -385,6 +385,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         s.position = 'relative';
       }
     } else {
+      // Match the CSS-module surface: intrinsic heading/list/paragraph
+      // margins cannot move contract-owned parts. Authored margins below
+      // override this baseline.
+      if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) s.margin = 0;
       if (isStructural(part)) {
         if (part.layout?.display === 'grid') {
           // A2 grid (G1): a nested grid parent — tracks/gaps/areas/flow.

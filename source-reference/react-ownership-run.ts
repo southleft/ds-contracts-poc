@@ -5,7 +5,7 @@ import type {ReactStyleOrigin} from './react-style-origin.js';
 import {observeReactPropertyMatrix,type ReactPropertyMatrix} from './react-property-matrix.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
 import {observeGridConstraints,hasGridContainer,type GridConstraintEvidence} from './grid-constraints.js';
-import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
+import { linkReactSourceAnatomy, nestedReactHostPaths, type ReactSourceAnatomy } from './react-source-anatomy.js';
 import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
 import { chromium, type Browser } from "playwright-core";
 import { randomUUID } from "node:crypto";
@@ -232,7 +232,8 @@ export function startReactOwnership(
                 )
                   throw Error("react-ownership-subject-root-unmatched");
               }
-              const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership) : undefined;
+              const ownedHostPaths = ownership ? nestedReactHostPaths(program, ownership, tree.tree) : [];
+              const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership, '#root', ownedHostPaths) : undefined;
               // Same read-only witness the content inspection takes for composed
               // children. The app never re-opens this file: it is the sealed INPUT
               // of the row's sealed `rootVisual`, kept (like style-origin.json) so
@@ -241,7 +242,7 @@ export function startReactOwnership(
               const gridConstraints = ownership && hasGridContainer(tree.tree) ? await observeGridConstraints(page, profile.path, tree.tree) : undefined;
               if (gridConstraints) writeFileSync(path.join(rowDir, "grid-constraints.json"), JSON.stringify(gridConstraints,null,2)+"\n", {flag:"wx"});
               if (styleOrigin) {
-                const repeat = await readReactStyleOrigin(page, profile.path[0], ownership!);
+                const repeat = await readReactStyleOrigin(page, profile.path[0], ownership!, '#root', ownedHostPaths);
                 if (JSON.stringify(styleOrigin) !== JSON.stringify(repeat) ||
                     evidenceSha(await page.screenshot({fullPage:true,caret:"initial"})) !== tree.sourcePngSha256)
                   throw Error("react-ownership-style-origin-unstable");

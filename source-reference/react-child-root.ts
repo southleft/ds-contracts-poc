@@ -1,5 +1,6 @@
 /** A source-owned nested root at its observed inputs, not a fabricated matrix. */
 import { deriveReactOwnedChild, type ReactOwnedChildEvidence } from './react-owned-child.js';
+import { deriveReactNestedChild } from './react-nested-child.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
@@ -21,6 +22,7 @@ export interface ReactChildRoot {
   contentMode?: 'source-owned';
   sourceOwnedTree?: CapturedNode;
   assets?: Array<[string,string]>;
+  nestedSlot?: {sourcePath:string;relativePath:string;partName:string;specPath:number[]};
   problems: string[];
 }
 export function deriveReactChildRoot(program: ReactSourceProgram, ownership: ReactOwnership,
@@ -28,7 +30,10 @@ export function deriveReactChildRoot(program: ReactSourceProgram, ownership: Rea
   const instance = ownership.components.find(c => c.id === instanceId);
   if (!instance?.parent || instance.roots.length !== 1 || instance.roots[0] === '')
     throw Error('react-child-root-nested-source-required');
-  if (ownedEvidence && linkReactSourceAnatomy(program,ownership,tree).instances.find(i=>i.instanceId===instanceId)?.content==='authored-or-runtime')
+  const content = linkReactSourceAnatomy(program,ownership,tree).instances.find(i=>i.instanceId===instanceId)?.content;
+  if (ownedEvidence && content==='nested-caller-slot')
+    return deriveReactNestedChild(program,ownership,tree,styleOrigin,instanceId,ownedEvidence);
+  if (ownedEvidence && content==='authored-or-runtime')
     return deriveReactOwnedChild(program,ownership,tree,styleOrigin,instanceId,ownedEvidence);
   const projection = projectReactRootVisual(program, ownership, tree, styleOrigin, new Set([instanceId]), context);
   const draft = projection.roots.find(r => r.instanceId === instanceId);

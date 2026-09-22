@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {readReactSourceProgram} from './react-source-program.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
+import {projectReactRootVisual} from './react-root-visual.js';
 import type {ReactOwnership} from './react-ownership.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 
@@ -19,6 +20,7 @@ export function Box(props:{children?:string}){return <section {...props}/>}
 export function Child({label}:{label:string}){return <button>{label}</button>}
 export function Poly({asChild=false,...props}:{asChild?:boolean;children?:string}){const Root=asChild?External:'button';return <Root {...props}/>}
 export function Wrapped(props:{children?:string}){return <External {...props}/>}
+export function Deep({children}:{children?:string}){return <section>Heading<div/><div><button/><div>{children}</div></div></section>}
 `);
   const program=readReactSourceProgram(root,['components.tsx']);assert.deepEqual(program.problems,[]);
   const source=(name:string)=>{const c=program.components.find(c=>c.exportName===name)!;return {module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};};
@@ -31,6 +33,44 @@ export function Wrapped(props:{children?:string}){return <External {...props}/>}
   return {root,program,source,node,tree,ownership};
  }catch(error){rmSync(root,{recursive:true,force:true});throw error;}
 }
+
+test('nested source slots keep their owned shell, exact host paths and caller dependencies separate',()=>{
+ const f=fixture();try{
+  const tree=f.node('section',[{t:'text',v:'Heading'},{t:'el',el:f.node('div')},{t:'el',el:f.node('div',[
+   {t:'el',el:f.node('button')},{t:'el',el:f.node('div',[{t:'el',el:f.node('button',[{t:'text',v:'Caller'}])}])},
+  ])}]);
+  const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],components:[
+   {id:'deep',source:f.source('Deep'),props:{children:{kind:'object'}},roots:['']},
+   {id:'child',parent:'deep',source:f.source('Child'),props:{label:'Caller'},roots:['1.1.0']},
+  ],nodes:[...['','0','1','1.0','1.1'].map(path=>({path,tag:path==='1.0'?'button':path===''?'section':'div',nearestComponent:'deep',createdBy:'deep'})),
+   {path:'1.1.0',tag:'button',nearestComponent:'child',createdBy:'child'}],problems:[]};
+  const before=structuredClone({program:f.program,tree,ownership});
+  const linked=linkReactSourceAnatomy(f.program,ownership,tree);
+  assert.equal(linked.status,'linked',JSON.stringify(linked));
+  const deep=linked.instances[0];
+  assert.equal(deep.content,'nested-caller-slot');assert.equal(deep.callerSlotPath,'1.1');
+  assert.deepEqual(deep.sourceOwnedPaths,['','0','1','1.0','1.1']);
+  assert.deepEqual(deep.callerContentPaths,['1.1.0']);assert.deepEqual(deep.runtimeDependentPaths,[]);
+  assert.deepEqual(deep.dependencies,[{instanceId:'child',roots:['1.1.0'],placement:'caller-content'}]);
+  assert.ok(deep.problems.includes('nested-children-lowering-unqualified'));
+  const projected=projectReactRootVisual(f.program,ownership,tree);
+  assert.equal(projected.roots[0].status,'refused');assert.equal(projected.roots[0].contract,undefined);
+  assert.equal(projected.roots[0].native,undefined,'root-only projection must never erase the owned shell');
+  for(const mutate of [
+   (o:ReactOwnership)=>{delete o.nodes[2].createdBy;},
+   (o:ReactOwnership)=>{o.nodes[2].createdBy='child';},
+   (o:ReactOwnership)=>{o.nodes[5].createdBy='deep';},
+   (o:ReactOwnership)=>{o.components[1].roots=['1.0'];},
+  ]){const changed=structuredClone(ownership);mutate(changed);const result=linkReactSourceAnatomy(f.program,changed,tree);assert.equal(result.status,'refused');assert.deepEqual(result.instances,[]);}
+  for(const mutate of [
+   (p:typeof f.program)=>{p.components.find(c=>c.name==='Deep')!.children.nestedSlot!.path='0';},
+   (p:typeof f.program)=>{p.components.find(c=>c.name==='Deep')!.children.nestedSlot!.hosts[2].tag='button';},
+   (p:typeof f.program)=>{p.components.find(c=>c.name==='Deep')!.children.nestedSlot!.hosts.pop();},
+   (p:typeof f.program)=>{delete p.components.find(c=>c.name==='Deep')!.children.nestedSlot;},
+  ]){const changed=structuredClone(f.program);mutate(changed);assert.equal(linkReactSourceAnatomy(changed,ownership,tree).status,'refused');}
+  assert.deepEqual({program:f.program,tree,ownership},before);
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
 
 test('source identities link reusable root boxes while caller composition stays separate',()=>{
  const f=fixture();try{

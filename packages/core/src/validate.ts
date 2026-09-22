@@ -562,8 +562,10 @@ export function validateContract(
     }
     // v15 declared facts (S4): registry channels only, each value inside the
     // channel's bounded grammar; a channel carried by BOTH declared and
-    // tokens/literals is ambiguous — refused by name; component/slot parts
-    // refuse (the child contract / consumer owns styling). declaredStates:
+    // tokens/literals is ambiguous — refused by name. Component instances
+    // cannot restyle their child contract. A slot with an explicit host element
+    // styles that wrapper, as both React emitters already do; an unqualified
+    // insertion point still cannot claim the consumer's styling. declaredStates:
     // known state names, declared in the contract's `states`, same registry.
     const checkDeclaredEntry = (cssProp: string, value: string, where: string) => {
       const spec = DECLARED_CHANNELS[cssProp];
@@ -580,7 +582,8 @@ export function validateContract(
       }
     };
     const rootContentBox = name === 'root' && part === contract.anatomy.root && part.slot?.name === 'children';
-    if ((part.declared || part.declaredStates) && (part.component || (part.slot && !rootContentBox))) {
+    const slotHostBox = Boolean(part.slot && part.element);
+    if ((part.declared || part.declaredStates) && (part.component || (part.slot && !rootContentBox && !slotHostBox))) {
       errors.push(
         `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declared facts cannot restyle it (the child contract / consumer owns its styling)`,
       );

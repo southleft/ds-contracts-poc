@@ -346,7 +346,7 @@ export function ReactSourceReference() {
                         <ul>{row.anatomy.instances.map(instance => (
                           <li key={instance.instanceId}>
                             {instance.source.exportName}: {instance.roots.map(root => `<${root.tag}> (${root.correspondence})`).join(", ")}
-                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "nested-caller-slot" ? " · caller content inside source wrappers; native generation remains unqualified" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
                             {instance.dependencies.length > 0 && ` · ${instance.dependencies.length} nested component instance(s) kept as references`}
                             {instance.problems.length > 0 && ` · ${instance.problems.join(" · ")}`}
                           </li>

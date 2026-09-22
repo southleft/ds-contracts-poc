@@ -9575,3 +9575,177 @@ Evidence: `private/native-progress-polling-20260922/token-row-index-benchmark-v2
 
 To reverse, move the row index construction back inside each variable's mode
 loop. Preserve all validation, output ordering, journals and fidelity limits.
+
+## D.125 Deeper caller slots require the inherited main hierarchy
+
+**AGENT decision, 2026-09-22: verify inherited wrappers before accepting a
+caller slot below them.** Native graph writing already filled these slots, but
+readback stopped at the first inherited node carrying component-part metadata.
+That metadata also belongs to ordinary wrappers, so an otherwise supported
+three-wrapper fixture refused with `native-contract-observation-instance-caller-slot`.
+
+Readback now follows inherited layers using the existing allocated-versus-borrowed
+node inventory. At each inherited step it checks the corresponding main's child
+position, native type and allocation stamp. A moved slot, missing or borrowed
+stamp, altered wrapper type, or inconsistent tree refuses with
+`native-contract-observation-instance-tree`. Caller allocations still pass through
+their own content verifier; traversal does not grant them inherited-node status.
+
+Regression cases cover zero, one and three wrappers, settled caller IDs, missing
+or duplicated stamps, altered text, foreign ownership and content inserted into
+an unfilled slot. Three retained application Card graph readbacks give exactly
+the same old/new verification reports, with their source files unchanged. This
+is a replay of historical evidence, not a fresh canvas observation. Native
+geometry, pixels, dependency overrides and the complete deep-composition user
+journey remain unqualified. This change does not extend React source ownership
+inference to children passed through deeper JSX wrappers. No writer, schema,
+scorer or tolerance changed.
+
+To reverse, restore the metadata-based traversal boundary in
+`core/native-source-observation.ts` and regenerate the plugin engine receipt;
+preserve the deeper-slot refusal, adversarial examples and private evidence in
+`private/nested-slot-readback-20260922/`.
+
+## D.126 Nested source children need an explicit host path
+
+**AGENT decision, 2026-09-22: record nested input flow separately from a root
+slot.** The React reader can now identify one unchanged `children` input inside
+a static tree of intrinsic JSX hosts. It records the receiving host's element
+path and the surrounding host structure. Text and comments do not consume
+element addresses. Expression, attribute and props-spread forwarding use the
+same precedence and input-mutation checks as direct root forwarding.
+
+The ownership join verifies each surrounding host's address, tag and creating
+component against the actual captured tree. It checks that caller elements and
+dependent component roots remain inside the identified container. Missing,
+extra, moved or differently owned hosts refuse. Repeated instances keep their
+own absolute paths. These facts identify content ownership; they do not prove
+the wrapper styles, text API, property planes or native fidelity.
+
+Nested flow has a distinct `nested-forwarded` fact and `nested-caller-slot`
+anatomy. It must not use root-only projection, which deliberately discards sample
+descendants. Native main matching explicitly refuses the new case until it
+compares the complete owned structure. Caller generation now has the bounded
+host-preserving path described in D.127. A review fixture
+demonstrated that root paint alone could otherwise match a main that omits the
+source-owned wrapper. It now refuses by name. API proposals also retain the
+`nested-children-lowering-unqualified` limitation and advertise no root slot.
+
+Source tests cover sibling hosts, deeper paths, attribute and spread precedence,
+duplicate slots, component and fragment boundaries, conditional content,
+defaults, mutation, mutable aliases and escaped callback inputs. A real React
+browser check links repeated nested components, text and empty callers across
+rerenders without altering rendered pixels. Existing Badge and Separator source
+reads remain byte-identical. These are implementation checks, not a new live
+application or Figma journey. Unsupported dynamic structure and the complete
+deep-composition journey remain V1 gaps.
+
+Evidence is retained in `private/nested-slot-source-20260922/`. To reverse,
+restore root-only source inference and its ownership join; preserve the named
+refusals and review fixture. Do not relabel nested flow as ordinary forwarding
+without implementing and verifying the complete source-owned structure.
+
+## D.127 Nested caller slots preserve their owned hosts
+
+**AGENT decision, 2026-09-22: compile a proved static host tree with one nested
+caller slot using the existing contract model.** Each owned host retains its
+element, paint, spacing, layout and supported declarations. Text-bearing hosts
+keep a wrapper rather than collapsing into a native text node. Only content
+inside the source-proved receiving host is removed from the reusable dependency;
+the composing contract supplies that content to the native slot.
+
+The receiving host is an ordinary contract slot with an explicit `element`.
+Both React emitters already render this wrapper, and the native emitter applies
+its styling to the SLOT. Validation now permits bounded `declared` facts on
+such explicit hosts. Unnamed insertion points and component instances retain
+their existing styling refusal; declaration grammars and channel-collision
+checks remain unchanged. No new schema field or emitter convention is needed.
+
+Style inspection captures every source-owned host after the ownership join
+proves its path. Each width and height needs an authored fixed-size or auto
+observation; fixed sizes must match the used value. Missing, ambiguous and
+unresolved facts refuse. Source-proved fill sizes remain refused pending a
+complete nested-context lowering. Caller style overrides and unresolved source
+variable identities also refuse. Fonts and SVG evidence are authenticated
+against the entire original tree before caller content is removed.
+
+Painted caller fonts do not redefine the empty reusable slot's CSS family.
+The caller retains its separately authenticated painted font. A review exposed
+and fixed a false dependency conflict caused by this distinction. Another
+review exposed fixed captions becoming orphaned caller controls when nested
+ownership rows were reordered. Hosts are now classified from outer to inner,
+then runtime-owned children reclaim their content. Repeated identical shells
+reuse one dependency without making their fixed captions caller properties.
+
+Regression checks exercise both React emitters, browser style-origin capture,
+real generated caller text edits, repeated nested shells in both ownership
+orders, and the generated native graph writer plus independent mock readback.
+The readback rejects changed caller text. These are implementation checks,
+not a live application/Figma journey or a visual-fidelity qualification.
+Root-only existing-main matching still refuses nested source slots. Unobserved
+property planes, dynamic structure, nested text templates, fill contexts and
+two-way updates of these shells remain unqualified.
+
+Evidence is retained in `private/nested-slot-lowering-20260922/`. To reverse,
+restore the caller generator's named nested-slot refusal, remove the nested
+child projector and additional host-style capture, and restore validation's
+non-root slot declaration restriction. Preserve the adversarial examples and
+the source-path evidence from D.126. Regenerate the plugin engine receipt after
+changing validation; do not rewrite historical native evidence.
+
+
+The installed-source probe exposed an implicit-host case missed by the original
+`span` fixture: an ordinary `div` compiles without an explicit element. The slot
+projector now records the authenticated receiving host tag before converting
+it to a slot. It refuses an inconsistent existing tag. Both `div` and `span`
+regressions cover retained styling, native compilation and caller-text exclusion;
+the validation boundary stays unchanged.
+
+## D.128 Source color identity compares exact literal values
+
+**AGENT decision, 2026-09-22: expand literal hex colors when checking an already
+proved CSS variable binding.** A real browser probe of `--brand: #243242` painted
+`rgb(36, 50, 66)`, but the reader previously refused the binding because those
+strings differed. This blocked otherwise supported nested source hosts with
+ordinary hex paint tokens. The shared source binding reader now expands
+three-, four-, six- and eight-digit hex values to numeric RGBA for exact
+comparison on the supported color channels. It retains the original variable
+name, raw spelling and winning selectors in the token's source metadata.
+
+No identity is inferred from equal paint: the authored direct-variable join,
+observed channel, in-scope value, compiled token and scoped-source checks remain
+required. There is no channel or alpha rounding, tolerance change, general CSS
+expression evaluation or color-space conversion. Browser-rounded fractional
+alpha remains `source-variable-value-needs-resolution`; for example, `#abcd`
+and Chromium's serialized alpha `0.867` are not treated as exactly equal.
+
+Browser regressions cover the original failure, short and mixed-case hex,
+transparent and opaque byte alpha, native variable binding, retained raw source
+metadata, changed paint, changed in-scope values and unresolved indirection.
+Evidence: `private/nested-slot-lowering-20260922/hex-binding-*-v1.log`. This is a
+source-reader correction, not new application or native-fidelity acceptance.
+To reverse, remove the literal expansion in `react-source-bindings.ts` and
+restore the named refusal while retaining the failing browser example.
+
+## D.129 Inline React retains the CSS surface's owned-host margin reset
+
+**AGENT decision, 2026-09-22: apply the existing intrinsic-margin reset to
+nested owned parts on the inline React surface.** The installed nested-host
+probe generated an `h3` with browser-default 16 px top and bottom margins.
+Those margins shifted its caller slot and compressed its height. The source
+had zero margins, and the CSS-module emitter already reset those same owned
+heading and paragraph elements. The inline emitter reset only component roots.
+
+Inline emission now uses the same `UA_MARGIN_ELEMENTS` rule for nested parts,
+before applying authored token margins. No source component name, schema field,
+scoring threshold or native layout rule changes. Browser regressions compare
+both React surfaces for `h3` and `p`, checking exact heading/slot positions,
+slot height and a nonzero authored token margin. Caller content is not given
+new styles by this rule.
+
+The probe and failing/passing regressions are retained in
+`private/nested-slot-lowering-20260922/host-margin-*.log` and the staged-source
+`private/nested-host-app-intake-20260922/` evidence in the live worktree.
+This correction does not qualify native delivery or the full V1 journey.
+To reverse, remove the nested inline reset and restore the named visual gap;
+retain the browser comparison and regenerate the plugin engine receipt.

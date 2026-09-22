@@ -47,6 +47,106 @@ const fixture = `
  window.__DSC_REACT_EXPORTS=[{identity:identity('First'),value:First},{identity:identity('Second'),value:Second}];
  flushSync(()=>createRoot(document.getElementById('mount')).render(<First><Second checked={false}/><Second checked={null}/></First>));`;
 
+test("nested slot paths match real React ownership with repeated, empty and text callers", async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "react-nested-owners-"));
+  const browser = await chromium.launch();
+  try {
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `import React from 'react';
+export function Outer({children}:{children?:React.ReactNode}) {return <section>Heading<aside>Fixed</aside><div><div>{children}</div></div><footer/></section>}
+export function Inner({children}:{children?:React.ReactNode}) {return <article><div>{children}</div></article>}`,
+    );
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    assert.ok(
+      program.components.every((c) => c.children.kind === "nested-forwarded"),
+    );
+    const entries = program.components.map((c) => ({
+      module: c.module,
+      exportName: c.exportName,
+      sourceSha256: c.sourceSha256,
+      span: c.span,
+    }));
+    const bundle = await build({
+      stdin: {
+        contents: `import React from 'react';import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';
+import {Outer,Inner} from ${JSON.stringify(path.join(dir, "components.tsx"))};
+window.__DSC_REACT_EXPORTS=${JSON.stringify(entries)}.map((identity,i)=>({identity,value:[Outer,Inner][i]}));
+const root=createRoot(document.getElementById('mount'));
+window.renderCaller=(kind)=>flushSync(()=>root.render(<Outer>{kind==='empty'?null:kind==='text'?'Plain caller':[<Inner key="one"><span>First</span></Inner>,<Inner key="two"><span>Second</span></Inner>]}</Outer>));
+window.renderCaller('composed');`,
+        resolveDir: process.cwd(),
+        loader: "tsx",
+      },
+      bundle: true,
+      write: false,
+      format: "iife",
+      nodePaths: [path.resolve("node_modules")],
+    });
+    const context = await browser.newContext();
+    try {
+      await context.addInitScript(reactOwnershipHook);
+      const page = await context.newPage();
+      await page.setContent('<div id="mount"></div>');
+      await page.addScriptTag({ content: bundle.outputFiles[0].text });
+      await page.evaluate(
+        "window.__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort()",
+      );
+      for (const mode of ["composed", "text", "empty", "composed"]) {
+        await page.evaluate(`window.renderCaller(${JSON.stringify(mode)})`);
+        const before = await page.screenshot();
+        const ownership = (await page.evaluate(
+          reactOwnershipRead("#mount > section"),
+        )) as ReactOwnership;
+        const tree = (await page.evaluate(
+          captureJs("#mount", undefined, "--", ["#mount > section"]),
+        )) as CapturedNode;
+        assert.deepEqual(ownership.problems, []);
+        const linked = linkReactSourceAnatomy(program, ownership, tree);
+        assert.equal(linked.status, "linked", JSON.stringify(linked.problems));
+        const outer = linked.instances[0];
+        assert.equal(outer.content, "nested-caller-slot");
+        assert.equal(outer.callerSlotPath, "1.0");
+        assert.deepEqual(outer.sourceOwnedPaths, ["", "0", "1", "1.0", "2"]);
+        assert.equal(outer.dependencies.length, mode === "composed" ? 2 : 0);
+        if (mode === "composed")
+          assert.deepEqual(
+            linked.instances.slice(1).map((i) => i.callerSlotPath),
+            ["1.0.0.0", "1.0.1.0"],
+          );
+        else assert.deepEqual(outer.callerContentPaths, []);
+        assert.deepEqual(
+          await page.screenshot(),
+          before,
+          "tracing must not change the original render",
+        );
+      }
+    } finally {
+      await context.close();
+    }
+  } finally {
+    await browser.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("a child state update retains source owners when React switches ancestor fiber buffers", async () => {
   const browser = await chromium.launch();
   try {
