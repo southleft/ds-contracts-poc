@@ -9003,3 +9003,36 @@ Reversal removes the Apply endpoints, recovery UI and controller together.
 Keep the source transaction helper and witness loader for already applied
 changes until those sources have been recovered or explicitly re-witnessed.
 Never remove private journals, selections, held files or validation evidence.
+
+## D.113 A larger caller inventory needs a larger observation
+
+**AGENT decision, 2026-09-21.** A template update's independent reader covers
+exactly the caller operations recorded in its proposal. Adding another caller
+cannot make that old reader current for the larger inventory. A fresh caller
+journal revision for the same members may still be verified by another read;
+a change in membership requires a new proposal containing every current caller.
+When source values are unchanged, this successor performs no variable writes
+but still requires combined preflight and independent observation.
+
+A regression created and observed a second native caller against an updated
+parent using the production compiler and readers in the simulated native host.
+Before this guard, re-reading the original update incorrectly restored
+`sourceCurrent` even though its reader did not contain the new caller. The
+guard now refuses that authority with
+`native-update-template-consumer-inventory-refresh-required`. A new proposal
+includes both callers, verifies without another value assignment, survives
+journal restart, and carries both callers through the reverse update. A local
+edit on the added caller refuses its combined preflight before any write.
+Original proposals, programs and observations remain historical evidence.
+
+This is a host lifecycle regression proof, not a live application birth proof.
+The application still needs authenticated caller preparation after a source
+succession, safe creation and restart, and a visible combined verification.
+It does not qualify native pixels, arbitrary instances or full V1 recovery.
+Evidence: `source-reference/native-template-app-update.test.ts` and private
+`native-template-app-integration-20260921/caller-inventory-*.log`.
+
+To replace this rule, provide an independently verified reader that covers the
+entire new inventory with exact source, parent and caller pins. Preserve the
+old proposal and journal bytes. Removing the membership check or marking the
+old reader with a newer inventory revision is not an equivalent observation.
