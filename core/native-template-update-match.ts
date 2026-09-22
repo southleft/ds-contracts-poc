@@ -4,9 +4,8 @@ import { cleanNativeTemplateCallerReadback } from './native-template-caller-iden
  * resolve to its intended scalar, and every other observed fact is preserved.
  * Computed geometry is never erased to make a typography update pass. */
 import { canonicalJson } from './contract-provenance.js';
-import { prepareNativeTemplateComponentUpdate, type NativeTemplateComponentUpdateInput,
-  type NativeTemplateComponentUpdatePlan } from './native-template-value-writer.js';
-import { inspectNativeTemplateUpdateObservation, type NativeTemplateUpdateObservation } from './native-template-update-observation.js';
+import type { NativeTemplateComponentUpdateInput, NativeTemplateComponentUpdatePlan } from './native-template-value-writer.js';
+import { inspectNativeTemplateUpdateObservationContext, type NativeTemplateUpdateObservation } from './native-template-update-observation.js';
 import type { NativeSourceReadback } from './native-source-observation.js';
 
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
@@ -128,16 +127,18 @@ function normalizeNodes(plan: NativeTemplateComponentUpdatePlan, baseline: Nativ
 }
 
 export function matchNativeTemplateUpdateObservation(input: NativeTemplateComponentUpdateInput, raw: unknown) {
-  const diagnostic = inspectNativeTemplateUpdateObservation(input, raw);
+  const { diagnostic, plan } = inspectNativeTemplateUpdateObservationContext(input, raw);
   const problems = [...diagnostic.problems];
   const result = (completed: boolean) => ({ version: 1 as const, completed, untouched: diagnostic.untouched, valueState: diagnostic.valueState,
     consumerStates: completed ? diagnostic.consumerStates : [], problems: [...new Set(problems)],
     acceptedContract: null, nativeQualification: 'unqualified' as const,
     limitations: ['changed-computed-geometry-unqualified', 'native-visual-fidelity-unverified'] });
   if (diagnostic.untouched && diagnostic.valueState === 'untouched') return result(false);
+  // Preparation failures already retain the same named diagnostic. A second
+  // derivation cannot repair invalid evidence or grant completion.
+  if (!plan) return result(false);
   let completed = false;
   try {
-    const plan = prepareNativeTemplateComponentUpdate(input);
     if (!['updated', 'no-op'].includes(diagnostic.valueState) || !diagnostic.supportedAfterStructure || problems.length)
       fail('after-state-unverified');
     const r = structuredClone(raw) as NativeTemplateUpdateObservation, main = r.observation!;

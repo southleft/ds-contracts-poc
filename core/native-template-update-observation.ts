@@ -6,7 +6,7 @@ import { emitNativeContractReadbackScript, verifyNativeContractReadback, type Na
 import { emitNativeTemplateCallerContentReadback } from './native-contract-comparison-observation.js';
 import { observeNativeTemplateValueUpdate } from './native-root-text-template-value-update.js';
 import { planNativeRootTextTemplateGraph } from './native-root-text-template-graph.js';
-import { prepareNativeTemplateComponentUpdate, type NativeTemplateComponentUpdateInput } from './native-template-value-writer.js';
+import { prepareNativeTemplateComponentUpdate, type NativeTemplateComponentUpdateInput, type NativeTemplateComponentUpdatePlan } from './native-template-value-writer.js';
 import { verifyNativeTemplateConsumersAfter } from './native-template-value-consumers.js';
 
 export interface NativeTemplateUpdateObservation {
@@ -72,12 +72,21 @@ return out;`;
  * separately: changed computed geometry and exact paint propagation still
  * need the application update matcher before any completed-update claim. */
 export function inspectNativeTemplateUpdateObservation(input: NativeTemplateComponentUpdateInput, raw: unknown) {
+  return inspectNativeTemplateUpdateObservationContext(input, raw).diagnostic;
+}
+
+/** Derive the guarded plan once for a synchronous inspection and exact match.
+ * This accepts source evidence, never a caller-supplied prepared plan, and keeps
+ * no state between calls. The public diagnostic deliberately omits the plan. */
+export function inspectNativeTemplateUpdateObservationContext(input: NativeTemplateComponentUpdateInput, raw: unknown) {
   const problems: string[] = [];
   let valueState: 'untouched' | 'updated' | 'partial' | 'no-op' | 'conflict' = 'conflict';
   let untouched = false, supportedAfterStructure = false;
+  let prepared: NativeTemplateComponentUpdatePlan | undefined;
   let states: ReturnType<typeof verifyNativeTemplateConsumersAfter>['states'] = [];
   try {
     const plan = prepareNativeTemplateComponentUpdate(input), r = raw as NativeTemplateUpdateObservation;
+    prepared = plan;
     if (!r || r.version !== 1 || r.kind !== 'independent-native-template-update-observation' || r.planRevision !== plan.revision ||
         r.status !== 'collected' || !Array.isArray(r.problems) || r.problems.length || r.acceptedContract !== null ||
         r.nativeQualification !== 'unqualified' || !r.observation || !Array.isArray(r.consumerObservations) ||
@@ -105,8 +114,9 @@ export function inspectNativeTemplateUpdateObservation(input: NativeTemplateComp
     }
     if (valueState === 'untouched' && !untouched) problems.push('native-template-update-observation-baseline-conflict');
   } catch (error) { problems.push(error instanceof Error ? error.message : 'native-template-update-observation-invalid'); }
-  return { version: 1 as const, valueState, untouched, supportedAfterStructure, consumerStates: states,
+  const diagnostic = { version: 1 as const, valueState, untouched, supportedAfterStructure, consumerStates: states,
     problems: [...new Set(problems)], writeAuthority: 'none' as const, settlementAuthority: 'none' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const,
     limitations: ['native-update-exactness-unverified', 'native-computed-geometry-unverified', 'native-visual-fidelity-unverified'] };
+  return { diagnostic, plan: prepared };
 }

@@ -17,6 +17,33 @@ import { matchNativeTemplateUpdateObservation } from './native-template-update-m
 
 import {nativeTemplateValueUpdateFixture as fixture} from './native-template-value-update-test-fixture.js';
 
+test('template inspection and exact matching isolate their inputs and every returned caller state', async () => {
+  const h = await fixture(true, true);
+  await h.write();
+  const raw = await h.run(emitNativeTemplateUpdateObservationScript(h.input));
+  const inputBefore = structuredClone(h.input), rawBefore = structuredClone(raw);
+  const diagnostic = inspectNativeTemplateUpdateObservation(h.input, raw);
+  assert.equal(Object.hasOwn(diagnostic, 'plan'), false);
+  const expected = matchNativeTemplateUpdateObservation(h.input, raw);
+  assert.equal(expected.completed, true, JSON.stringify(expected.problems));
+  const returned = matchNativeTemplateUpdateObservation(h.input, raw);
+  returned.consumerStates[0].baseline.content.nodes[0].values.opacity = 0.123;
+  diagnostic.consumerStates[0].baseline.content.nodes[0].values.opacity = 0.456;
+  assert.deepEqual(matchNativeTemplateUpdateObservation(h.input, raw), expected);
+  assert.deepEqual(h.input, inputBefore); assert.deepEqual(raw, rawBefore);
+
+  const badInput = structuredClone(h.input);
+  badInput.consumers[0].input.comparison.parent.planRevision = revisionOf('changed source');
+  const refused = matchNativeTemplateUpdateObservation(badInput, raw);
+  assert.equal(refused.completed, false); assert.deepEqual(refused.consumerStates, []);
+  assert.ok(refused.problems.length);
+  const changed = structuredClone(raw);
+  changed.consumerObservations[0].nodes.find((n: any) => n.type === 'TEXT').values.width += 1;
+  const edited = matchNativeTemplateUpdateObservation(h.input, changed);
+  assert.equal(edited.completed, false); assert.deepEqual(edited.consumerStates, []);
+  assert.deepEqual(matchNativeTemplateUpdateObservation(h.input, raw), expected);
+});
+
 test('completed template updates verify resolved paint and all retained caller facts, not only variable receipts', async () => {
   const h = await fixture(true, true);
   const initial = matchNativeTemplateUpdateObservation(h.input, await h.run(emitNativeTemplateUpdateObservationScript(h.input)));

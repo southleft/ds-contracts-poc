@@ -9413,3 +9413,105 @@ To reverse, point the companion result route back to the full-view transport
 `accept` method and remove the separate receipt methods/type. Preserve all
 journals and the shared result-storage validation. No history migration or
 native canvas change is needed.
+
+## D.120 Token row indexing does not replace token validation
+
+**AGENT decision, 2026-09-22.** Native token preparation now builds one name
+index for each mode's completed rows, then uses it to resolve every requested
+variable and alias. Previously it rebuilt the same index for every variable.
+The indexes exist only within that preparation call. Tree, revision, alias,
+mode, type and allocation-history checks remain unchanged; no result is reused
+across preparations or requests.
+
+Four retained inputs produce identical preparation bytes; the three inputs
+with retained native identities also produce identical readback programs.
+Sixteen changed-input probes retain their named refusals. Alternating-order
+microbenchmarks measured improvements on the two larger inputs and essentially
+unchanged small inputs. They do not qualify full application latency or V1.
+Evidence: `private/native-progress-polling-20260922/token-row-index-benchmark-v2.json`.
+
+To reverse, move the row index construction back inside each variable's mode
+loop. Preserve all validation, output ordering, journals and fidelity limits.
+
+## D.121 A completed write can be recovered without its result
+
+**AGENT test decision, 2026-09-22.** A separate local test companion closes
+after one pinned template color writer returns `write-observed`, before it
+saves or uploads the result. Its guard checks the operation, plan, script,
+authorized file and write phase. The production companion and native writer
+remain unchanged. This tests a completed write with a lost result, not an OS
+crash or an arbitrary partial write.
+
+Through the application, the reviewed eleven-color update affected the
+retained component and two recorded callers. The companion closed, and the
+journal retained exactly one write dispatch and begin with no write result.
+Reopening the same companion preserved its interrupted-command marker.
+**Resolve by reading the canvas** produced a correlated settlement read;
+**Connect / resume** then allowed a separate final verification read. Both
+observations pass the product matcher and are identical, including all 302
+main records, 100 main images and both callers. Their native content exactly
+matches the previously observed blue state. All 2,064 earlier files survive
+unchanged. The app reports **Verified correction for current inputs**; both
+native instances were inspected with the plugin closed, as was the app gallery.
+
+Manual steps and limits remain part of the result. The interrupted-write
+notice was obscured by the busy message and was not observed; the injected
+close notification was not captured. The manifest picker needed a path-entry
+retry. Reopening and the later explicit resume were required. Host processing
+and final display took minutes. This proves the observed recovery boundary,
+not usable latency, native visual fidelity or complete V1 acceptance.
+
+The unchanged production companion subsequently performs the reviewed reverse
+correction with one Apply request, one write dispatch and one begin. Eleven
+color variables change; the separate final read passes the current product
+matcher. Its complete main and both caller observations, including all images,
+equal the original purple state. All four source files are restored exactly,
+and all 2,085 earlier native evidence files remain unchanged. The app reports
+current verification; both purple callers were inspected with the companion
+closed, and both loaded images were inspected in the app gallery. Preflight
+dispatch to final result took about 16 minutes, followed by about seven minutes
+before the terminal UI was observed. These uncontrolled wall timings include
+host work, polling, transport and native exports; they are not a benchmark.
+
+Evidence: `private/native-template-begun-write-20260922/`, especially
+`fault-companion-build-v1.json`, `recovery-read-observed-v1.json`,
+`recovery-verified-v1.json`, `recovery-visible-v1.json` and
+`recovery-journal-timing-v1.json`. To leave the test setup, close its separately
+named companion and use the unchanged production companion. Preserve all
+journals and fault artifacts; do not clear a receipt or repeat an unknown write.
+The restoration is recorded in `purple-restoration-verified-v1.json`,
+`purple-restoration-visible-v1.json` and `purple-restoration-journal-timing-v1.json`.
+
+## D.122 Exact template matching reuses one freshly derived plan
+
+**AGENT decision, 2026-09-22.** Structural inspection and exact matching now
+share one guarded plan within their synchronous call. Both still derive it
+from the complete input; neither accepts an externally prepared plan. There
+is no cache across calls, and the public diagnostic retains its existing shape.
+Source and journal authentication, native preflight, resolved paint, geometry,
+caller identity and unrelated-field comparisons remain separate requirements.
+
+The previous implementation is retained for an alternating comparison on two
+real 302-node observations with two callers each. Complete matcher results and
+public diagnostics are identical. Twelve altered-input cases retain the same
+named refusals, and input bytes remain unchanged. Three timed calls per version
+give medians of 3.05 to 2.25 seconds for the recovered blue observation and 3.99
+to 2.45 seconds for its purple restoration. These are pure comparison timings
+on one host with the live app idle, not end-to-end latency or V1 qualification.
+Regression coverage also verifies returned-state isolation and existing
+untouched, no-op, forward, reverse, partial and conflicting observations.
+
+Two full service listings against the same local application history also
+return identical bytes and preserve all 2,104 native evidence files. In one
+dedicated process per version, the first listing changes from 162 to 133 seconds
+and its repeat from 123 to 100 seconds. No native command is issued. This single
+comparison is not a stable speedup guarantee; the remaining delay is still a
+release gap.
+
+Evidence: `private/template-match-preparation-20260922/`, including the pinned
+previous sources, `comparison-v1.json`, `runtime-v1.log` and `types-v1.log`.
+The complete response and inventory comparisons are in
+`full-listing-previous-v2.json` and `full-listing-candidate-v2.json`.
+Reverse this decision by restoring the separate guarded-plan derivation in
+the matcher and the original diagnostic wrapper; preserve all exactness checks,
+refusals and retained native evidence.

@@ -106,9 +106,11 @@ are byte-identical to those already scored. The earlier family-only refusals
 remain archived ([D.101](23-known-limitations.md#d101-web-font-witnesses-reject-same-family-system-fallback)). A same-tab
 reload requires manually selecting the saved Workspace import and produces
 identical contract and archive bytes. One earlier return tab stalled; recovery
-used a fresh tab with React output selected. Native fidelity, template updates,
-interrupted native recovery and the complete independent-family journey remain
-unqualified ([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+used a fresh tab with React output selected. Bounded template color updates and
+interruption recovery now have measured [application evidence below](#v1-acceptance-evidence).
+Native fidelity, broader update and recovery behavior, and the complete
+independent-family journey remain unqualified
+([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
 
 Arbitrary React programs and CSS are not automatically convertible. A design drawing cannot supply business logic such as data fetching, sorting or validation. Existing behavior needs a verified preservation boundary; design-only behavior needs a declared, tested implementation.
 
@@ -127,7 +129,7 @@ The configured Altitude flow and its existing records remain in the collapsed Li
 | 5 | Prove generality and release readiness | Independent family completes both journeys without named-component fixes; accurate installation and limitations. | Independent-family gaps and sequential PR integration remain. |
 
 <a id="v1-acceptance-evidence"></a>
-### V1 acceptance evidence, 2026-09-21
+### V1 acceptance evidence, 2026-09-22
 
 The owner's six React-only V1 requirements are grouped into five evidence rows below. Live two-way updates and repeat/recovery share row 3; both remain required. Each row names what the application shows today, where the evidence is, and the concrete gap. None of these rows is a release grade.
 
@@ -151,8 +153,9 @@ passes all 100 original-versus-returned React image pairs on white. This closes
 the earlier missing-text-binding return defect described in D.98.
 
 The native caller's baseline still fails at 8.43%. A live source-color update now
-passes independent verification on the retained mains and caller; interrupted
-template recovery and full visual qualification remain unfinished. The full inherited source API is incomplete;
+passes independent verification on the retained mains and caller. Bounded
+interruption recovery is measured below; broader recovery and full visual
+qualification remain unfinished. The full inherited source API is incomplete;
 Radix content ownership remains a separate refusal. This does not close the
 independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
@@ -172,6 +175,24 @@ and both instances were inspected with the companion closed. This run took 11.4
 minutes from preflight dispatch to final receipt, excluding preparation and UI
 refresh. Broader recovery and usable performance remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
+
+A separate controlled companion closure now demonstrates recovery after the
+write finishes but before its result is saved. The app settles the outcome by
+reading the canvas, then independently verifies it: one write and one begin,
+no write result, and two equal reads of all 302 main records, 100 main images
+and both callers. All 2,064 earlier evidence files remain unchanged. The app
+reports current verification, and both unobstructed instances and the app
+gallery were inspected. Reopening the companion and resuming after its held
+recovery work finished were required. Host delays and an obscured interruption
+message remain usability gaps; this does not qualify arbitrary partial writes,
+OS crashes, native fidelity or V1 ([D.121](23-known-limitations.md#d121-a-completed-write-can-be-recovered-without-its-result)).
+
+The unchanged production companion then applied the reviewed reverse correction
+once. A separate read restores the complete original purple main and both
+callers, including every retained image; all four source files and 2,085 earlier
+evidence files match their original bytes. The app reports current verification,
+and both unobstructed native callers and the app gallery show the restoration.
+The long host and display delays remain a release gap.
 
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
