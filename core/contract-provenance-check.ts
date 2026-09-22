@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import vm from "node:vm";
+import { transformSync } from "esbuild";
 import {
   assertContractProvenance,
   canonicalJson,
@@ -43,6 +46,92 @@ assert.equal(revisionOf({ b: 2, a: 1 }), revisionOf({ a: 1, b: 2 }));
 assert.equal(
   revisionOf("abc"),
   `sha256:${createHash("sha256").update(JSON.stringify("abc")).digest("hex")}`,
+);
+
+// Run the shipped source in isolated Node-like and browser/plugin-like hosts.
+// No cached revision may survive a mutation, and UTF-8 must agree at padding
+// boundaries, for malformed UTF-16, and for large journal-sized values.
+const provenanceScript = transformSync(
+  readFileSync(
+    new URL("../packages/core/src/contract-provenance.ts", import.meta.url),
+    "utf8",
+  ),
+  { loader: "ts", format: "iife", globalName: "provenance" },
+).code;
+const hashValues: unknown[] = [
+  null,
+  undefined,
+  false,
+  true,
+  0,
+  -0,
+  NaN,
+  Infinity,
+  "",
+  "abc",
+  "\0",
+  "é😀漢字",
+  "\ud800",
+  "\udc00",
+  "\ud800x\udc00",
+  { z: [undefined, -0, null, { é: "😀" }], a: "text", ignored: undefined },
+  "journal 😀".repeat(131072),
+];
+for (let length = 0; length <= 130; length++) {
+  hashValues.push("x".repeat(length), "é😀".repeat(length));
+}
+let nativeCalls = 0,
+  lookups = 0;
+const runtimeHosts = [
+  {},
+  { process: {} },
+  { process: { getBuiltinModule: () => undefined } },
+  {
+    process: {
+      getBuiltinModule: () => {
+        throw Error("unavailable host shim");
+      },
+    },
+  },
+  {
+    process: {
+      getBuiltinModule: (id: string) => {
+        lookups++;
+        assert.equal(id, "node:crypto");
+        return {
+          createHash: (algorithm: string) => {
+            nativeCalls++;
+            return createHash(algorithm);
+          },
+        };
+      },
+    },
+  },
+];
+for (const host of runtimeHosts) {
+  const context = vm.createContext({ TextEncoder, ...host });
+  vm.runInContext(provenanceScript, context);
+  for (const value of hashValues) {
+    const expected = `sha256:${createHash("sha256").update(canonicalJson(value), "utf8").digest("hex")}`;
+    assert.equal(context.provenance.revisionOf(value), expected);
+    assert.equal(revisionOf(value), expected);
+  }
+  const mutable = { value: "before" };
+  const before = context.provenance.revisionOf(mutable);
+  mutable.value = "after";
+  assert.notEqual(context.provenance.revisionOf(mutable), before);
+  mutable.value = "before";
+  assert.equal(context.provenance.revisionOf(mutable), before);
+}
+assert.equal(
+  lookups,
+  1,
+  "select the available runtime once, without caching evidence",
+);
+assert.equal(
+  nativeCalls,
+  hashValues.length + 3,
+  "the native host actually uses native hashing",
 );
 assert.equal(
   extractionRevision(extracted("old")),

@@ -9319,3 +9319,30 @@ does not qualify fidelity, the combined update of both callers, or V1.
 To reverse, refuse post-succession caller preparation and preserve existing
 version-4 plans as historical evidence. Do not replace the current source with
 the main's old identity or rewrite the main's recorded provenance.
+
+## D.116 Native hashing preserves portable revision bytes
+
+**AGENT decision, 2026-09-21.** Reading retained native evidence repeatedly
+hashes large canonical values. Node hosts with `process.getBuiltinModule` now
+use the synchronous built-in SHA-256 implementation. Browser, plugin and older
+Node hosts retain the existing portable implementation. Canonicalization,
+UTF-8 encoding, revision format and all evidence checks remain unchanged. No
+revision or evidence is cached by this change.
+
+The existing provenance gate runs the shipped implementation in five isolated
+host shapes, including absent and throwing built-in lookups and native crypto.
+It compares 279 values with Node's digest, including Unicode, malformed UTF-16,
+SHA padding boundaries and a large value, and checks mutation and restoration.
+The browser bundle also executes without Node globals. The actual saved
+post-update caller plan, writer and independent reader reproduce exactly.
+
+A local nine-sample comparison of the same saved values reduced the median
+complete revision calculation from 73.77 to 33.80 ms for the 1.80 MB caller
+plan and from 84.55 to 40.33 ms for the 2.07 MB combined update input. These
+are isolated measurements, not an application latency result or V1 evidence.
+The live application has not yet adopted this candidate. Private evidence is
+under `private/post-update-callers-20260922/native-hash-*`.
+
+To reverse, remove the optional native branch and keep the existing portable
+SHA-256 implementation. Every historical revision and generated program must
+remain byte-identical; never migrate journals or relax a verification check.
