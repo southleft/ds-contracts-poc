@@ -1,4 +1,4 @@
-import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,evidenceReadOnce,withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 /** Updates are children of immutable creation evidence. The existing companion
  * transport delivers these commands; no target allocation or baseline rewrite. */
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
@@ -378,7 +378,10 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       ...collectExpectedNativeImages({operation:c.input.operation,planRevision:c.input.planRevision},
         [{id:c.input.comparison.caseId,instanceId:c.input.creation.comparisons[0].instanceId}],
         (l.state.observation as any).consumerObservations?.[i])})) : [];
-  const snapshot=(l:Loaded) => {
+  // A standalone result/replay response needs the same bounded read scope as
+  // the full listing. Reuse verified inputs only until this synchronous view
+  // returns; command authorization and journal writes stay outside the scope.
+  const snapshot=(l:Loaded) => withEvidenceReadSnapshot(() => {
     let sourceCurrent=false, canRefreshObservation=false;
     try { if(l.state.wrote && l.state.phase==='update-verified') authenticateObservation(l); else authenticate(l); sourceCurrent=true; }
     catch { /* Historical results remain visible. */ }
@@ -397,8 +400,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       begunAt:l.state.begun&&l.state.begun===l.state.write?.attemptId?l.state.begunAt:undefined,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,nativeAppUpdateMainReadback(l.plan,l.state.observation)).observation:undefined,
       ...(l.plan.kind==='native-contract-template-value-update'?{callerImageObservations:callerImages(l).map(({operationId,caseId,observation})=>({operationId,caseId,observation}))}:{})};
-  };
-  const get=(id:string)=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id)));
+  });
+  const get=(id:string)=>withEvidenceReadSnapshot(()=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id))));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
     assertOutsideEvidenceSnapshot();
     const l=load(id),p=phase as Phase;

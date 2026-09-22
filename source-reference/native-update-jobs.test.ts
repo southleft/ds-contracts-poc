@@ -87,6 +87,19 @@ test('proposal progress follows the checked journal without recompiling source o
   assert.throws(target,/journal-chain-invalid/);
 });
 
+test('a standalone update view checks source once and discards its read scope before the next call',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  const before=f.derivations(),first=f.jobs().get(f.id);
+  assert.equal(first.sourceCurrent,true);assert.equal(f.derivations()-before,1,'one source derivation per view');
+  first.problems.push('caller-mutated-result');
+  const after=f.derivations(),second=f.jobs().get(f.id);
+  assert.equal(f.derivations()-after,1,'the next view must reauthenticate');
+  assert.deepEqual(second.problems,[]);
+  f.stale();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,false,'no verified source result survives the synchronous view');
+  assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/source changed/);
+});
+
 test('source-repair recovery reads stay correlated and read-only after source changes',async t=>{
   const f=await fixture(t);await f.poll();await f.poll();await f.poll();
   f.nodes[0].opacity=.6;

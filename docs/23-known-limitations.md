@@ -9429,3 +9429,27 @@ removes redundant verification work; end-to-end latency is still unqualified.
 
 To reverse, restore full-list polling and remove the progress routes. Preserve
 the existing journal format, write authorization and terminal verification.
+
+
+## D.118 A result response has its own bounded evidence read
+
+**AGENT decision, 2026-09-22.** Full native inspection listings already share
+checked evidence within one synchronous response. Standalone update results
+and replay responses now use the same read scope. A focused probe previously
+observed two source derivations while constructing one verified update view;
+it now observes one. The next view performs a fresh derivation.
+
+The scope closes before the response returns and never survives a request.
+Source changes between views still invalidate current-source authority. Result
+objects remain isolated from callers, and journal writes, command delivery and
+write authorization remain outside the read scope. No source, native program,
+recorded result, fidelity rule or comparison threshold changes.
+
+Focused update, transport, caller-inventory, correction-chain and evidence-scope
+checks pass. This reduces demonstrated duplicate work; live result latency and
+complete operation performance remain unqualified. Private before/after probe
+logs are under `private/post-update-callers-qualification-20260922/`.
+
+To reverse, remove the standalone `withEvidenceReadSnapshot` wrappers from the
+update view and getter. Preserve the existing full-list read scope, journal
+format, write guards and historical result files.
