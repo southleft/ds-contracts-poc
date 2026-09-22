@@ -300,6 +300,7 @@ test("native progress HTTP reads cannot expose verification authority, recompile
   const heavy=()=>{heavyReads++;throw Error('full verification must not run during progress');};
   const progress=()=>{progressReads++;if(refusal)throw Error(refusal);return state;};
   const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],get:heavy,
+    withReadSnapshot:(read:()=>unknown)=>read(),
     reactIdentity:(id:string)=>{if(id!==parent)throw Error('native-operation-unavailable');return {referenceId};},
     deliveryState:(id:string)=>{assert.equal(id,parent);return progress();}},
     transport:{status:heavy,pair:heavy,start:heavy},updateJobs:{forProposal:heavy,get:heavy,prepare:heavy,
