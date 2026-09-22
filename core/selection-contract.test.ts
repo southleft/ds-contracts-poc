@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, symlinkSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { chromium } from 'playwright-core';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
 import { validateContract } from '../packages/core/src/validate.js';
@@ -8,6 +12,7 @@ import { emitReactInline } from './emit-react-inline.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { emitHtml } from './emit-html.js';
+import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
 
 const bindings = { code: { anchors: { importPath: './probe', export: 'Probe' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } };
 const enumProp = (name: string, values: string[], initial: string, code=name) => ({name,type:{enum:values},default:initial,
@@ -163,4 +168,34 @@ test('selection API names do not collide with generated record locals',()=>{
     const generate=(c:Contract)=>inline?emitReactInline(c,{...ctx,tokens}):emitReact(c,ctx);
     assert.deepEqual(generatedTypeErrors(parent.name,generate(parent).tsx,{Choice:generate(child).tsx}),[]);
   }
+});
+
+test('the selection family installs from its archive and renders with React supplied only by the clean consumer',async()=>{
+  const root=process.cwd(),work=mkdtempSync(path.join(tmpdir(),'selection-library-consumer-'));
+  try{
+    const host=path.join(work,'host');mkdirSync(host);symlinkSync(path.join(root,'node_modules'),path.join(host,'node_modules'));
+    const parent=fixture(),input=parseLibraryRequest({rootId:parent.id,contracts:[parent,entry],tokens,icons:[]});
+    const library=await buildReactLibrary(host,input);
+    const entries=execFileSync('tar',['-tzf',library.tarball],{encoding:'utf8'});
+    assert.match(entries,/dist\/ViewChoices\/ViewChoices\.d\.ts/);assert.match(entries,/dist\/Choice\/Choice\.js/);
+    assert.doesNotMatch(entries,/\.tsx|node_modules|core\/react-selection/);
+    const consumer=path.join(work,'consumer');mkdirSync(consumer);
+    const version=JSON.parse(readFileSync(path.join(root,'node_modules/react/package.json'),'utf8')).version;
+    writeFileSync(path.join(consumer,'package.json'),JSON.stringify({private:true,dependencies:{react:version,'react-dom':version,[library.name]:`file:${library.tarball}`}}));
+    execFileSync('npm',['install','--ignore-scripts','--no-audit','--no-fund'],{cwd:consumer,stdio:'pipe',timeout:120_000});
+    writeFileSync(path.join(consumer,'main.jsx'),`import {ViewChoices} from ${JSON.stringify(library.name)};import {renderToStaticMarkup} from 'react-dom/server';console.log(renderToStaticMarkup(<ViewChoices items={${JSON.stringify(sample)}} defaultValue="beta" alphaContent="First content" betaContent="Second content" gammaContent="Third content"/>));`);
+    execFileSync(path.join(root,'node_modules/.bin/esbuild'),['main.jsx','--bundle','--platform=node','--format=cjs','--jsx=automatic','--outfile=app.cjs'],{cwd:consumer,stdio:'pipe'});
+    const html=execFileSync(process.execPath,['app.cjs'],{cwd:consumer,encoding:'utf8'});
+    assert.equal([...html.matchAll(/role="tab"/g)].length,4);
+    assert.equal([...html.matchAll(/role="tabpanel"/g)].length,4);
+    assert.equal([...html.matchAll(/aria-selected="true"/g)].length,1);
+    const selectedButton=html.match(/<button[^>]*aria-selected="true"[^>]*>([\s\S]*?)<\/button>/)?.[1];
+    assert.equal(selectedButton?.replace(/<[^>]*>/g,''),'beta');
+    assert.equal([...html.matchAll(/hidden=""/g)].length,3);
+    assert.match(html,/Second content/);
+    const declaration=readFileSync(path.join(consumer,'node_modules',library.name,'dist/ViewChoices/ViewChoices.d.ts'),'utf8');
+    assert.match(declaration.replaceAll("'",'"'),/onValueChange\?: \(value: "alpha" \| "disabled" \| "beta" \| "gamma"\) => void/);
+    assert.match(declaration,/defaultValue\?/);
+    assert.ok(!readFileSync(path.join(consumer,'app.cjs'),'utf8').includes(root),'installed bundle cannot depend on the repository path');
+  }finally{rmSync(work,{recursive:true,force:true});}
 });
