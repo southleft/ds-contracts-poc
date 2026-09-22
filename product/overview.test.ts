@@ -58,7 +58,9 @@ test("both product surfaces render the canonical document, including its scope a
     ),
   );
   assert.match(html, /v1 is not complete/i);
-  assert.match(html, /does not automatically edit React source/);
+  assert.match(html, /reviewed change now applies to the original module and regenerated CSS through the app/);
+  assert.match(html, /Original-source Apply is measured only for the reviewed root-opacity channel/);
+  assert.match(html, /Outside the bounded reviewed root-opacity channel, the developer edits the hand-written React/);
   assert.match(html, /src="\/assets\/product-loop.svg"/);
   assert.match(
     html,

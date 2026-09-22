@@ -9304,9 +9304,17 @@ HTTP callers cannot supply it. Nested compositions remain outside this scope.
 The stronger journal regression covers changed source revision and program,
 creation, restart, independent observation and the next combined update. Missing
 or changed proof, mismatched source, altered parent, malformed proposal, unknown
-fields and unsupported scope refuse. Live creation still needs verification;
-this fix does not qualify geometry, visual fidelity or V1. The failed live run
-preserves all 161 prior evidence files and creates no new caller operation.
+fields and unsupported scope refuse. The failed live run preserves all 161
+prior evidence files and creates no new caller operation.
+
+The application subsequently created caller `fda385a6…` against the verified
+updated source. Its independent read passed supported comparison structure:
+instance `103:4999` retains main `98:4808`, with a native slot and text layer.
+All 161 earlier evidence files stayed byte-identical. With the plugin closed,
+the canvas showed the blue caller; editing its text and restoring `New` showed
+native text editability. A further independent read after that edit is still
+required. The app reports 49.92 px source versus 51.02 px native width. This
+does not qualify fidelity, the combined update of both callers, or V1.
 
 To reverse, refuse post-succession caller preparation and preserve existing
 version-4 plans as historical evidence. Do not replace the current source with
