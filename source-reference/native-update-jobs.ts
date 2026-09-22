@@ -535,6 +535,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       write(path.join(dir,'operation.json'),stored);return get(id);
     },
     forProposal(parentId:string,proposalId:string) { const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?get(id):null; },
+    /** Resolve an action's target from its checked journal, not a display view.
+     * Every transport action still enforces its own source and phase guards. */
+    idForProposal(parentId:string,proposalId:string) {
+      const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?load(id).id:null;
+    },
     /** Read the authenticated journal only. This never grants current-source authority. */
     deliveryStateForProposal(parentId:string,proposalId:string) {
       const l=load(identity(parentId,proposalId));

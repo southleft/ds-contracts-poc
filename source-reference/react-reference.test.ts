@@ -369,7 +369,8 @@ test("attest-dead is a bodiless POST that reaches only the update transport, and
   const parent='10000000-0000-4000-8000-000000000008',proposal='a'.repeat(64),update='20000000-0000-4000-8000-000000000009';
   let referenceId='',refusal:string|undefined;const calls:string[]=[];
   const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],listReactMoved:()=>[],withReadSnapshot:(f:()=>unknown)=>f(),reactIdentity:()=>({referenceId})},transport:{},
-    updateJobs:{forProposal:(p:string,id:string)=>{assert.equal(p,parent);assert.equal(id,proposal);return {id:update};},prepare:()=>{throw Error('must not prepare');}},
+    updateJobs:{idForProposal:(p:string,id:string)=>{assert.equal(p,parent);assert.equal(id,proposal);return update;},
+      forProposal:()=>{throw Error('must not compute a display result to identify an action');},prepare:()=>{throw Error('must not prepare');}},
     updateTransport:{attestDead:(id:string)=>{calls.push(id);if(refusal)throw Error(refusal);},
       resolveWriteOutcome:()=>{throw Error('must not settle');},rearmWrite:()=>{throw Error('must not rearm');}}} as any));
   const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});

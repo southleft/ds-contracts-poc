@@ -835,18 +835,18 @@ export function createReactReferenceService(
             const { updateJobs, updateTransport }=native();
             const [, , parentId, proposalId, action]=updateAction;
             if(!updateJobs || !updateTransport || jobs.reactIdentity(parentId).referenceId!==reference.id) throw Error('react-update-unavailable');
-            const update=action==='prepare'?updateJobs.prepare(parentId,proposalId):updateJobs.forProposal(parentId,proposalId);
-            if(!update) throw Error('react-update-unavailable');
+            const updateId=action==='prepare'?updateJobs.prepare(parentId,proposalId).id:updateJobs.idForProposal(parentId,proposalId);
+            if(!updateId) throw Error('react-update-unavailable');
             if(action==='connection') {
               if(new URL(`http://${req.headers.host}`).port!=='5181') throw Error('react-native-pairing-port');
-              json(res,200,{connection:updateTransport.pair(update.id)});return;
+              json(res,200,{connection:updateTransport.pair(updateId)});return;
             }
-            if(action==='start') updateTransport.start(update.id);
-            if(action==='retry-observation') updateTransport.retryObservation(update.id);
-            if(action==='resolve-write') updateTransport.resolveWriteOutcome(update.id);
-            if(action==='rearm-write') updateTransport.rearmWrite(update.id);
-            if(action==='attest-dead') updateTransport.attestDead(update.id);
-            if(action==='observe-design') updateTransport.observeDesign(update.id);
+            if(action==='start') updateTransport.start(updateId);
+            if(action==='retry-observation') updateTransport.retryObservation(updateId);
+            if(action==='resolve-write') updateTransport.resolveWriteOutcome(updateId);
+            if(action==='rearm-write') updateTransport.rearmWrite(updateId);
+            if(action==='attest-dead') updateTransport.attestDead(updateId);
+            if(action==='observe-design') updateTransport.observeDesign(updateId);
           } else if (stateApiNativeRoute) {
             jobs.prepare(currentStateApiRequest(stateApiNativeRoute[2]));
           } else if (initialNativeRoute) {

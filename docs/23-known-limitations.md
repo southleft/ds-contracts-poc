@@ -9313,5 +9313,11 @@ stale-source write refusal, completion races, reinspection, malformed progress
 and interrupted-delivery fallback. Private measurements and the bounded review
 are under `private/native-progress-polling-20260922/` in the live worktree.
 
+Existing-update actions also resolve their target ID from the checked journal
+before entering the transport. They no longer construct a full display result
+solely to obtain that ID. Missing or corrupt journals still refuse, and each
+transport action retains its existing source and phase authorization. This
+removes redundant verification work; end-to-end latency is still unqualified.
+
 To reverse, restore full-list polling and remove the progress routes. Preserve
 the existing journal format, write authorization and terminal verification.
