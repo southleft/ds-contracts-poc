@@ -9345,3 +9345,14 @@ logs are under `private/post-update-callers-qualification-20260922/`.
 To reverse, remove the standalone `withEvidenceReadSnapshot` wrappers from the
 update view and getter. Preserve the existing full-list read scope, journal
 format, write guards and historical result files.
+
+The same scope also covers dependent native-operation reads when no local
+native-listing scope is open. A second probe found those dependencies were still
+derived twice within one shared response. Reuse is keyed by store identity, so
+another store with different compiler callbacks cannot borrow the first store's
+result. Returned objects remain isolated, a subsequent response detects source
+drift or journal corruption, and command dispatch remains forbidden inside the
+scope. The fresh journal read during source authentication is retained. This
+closes a demonstrated duplicate-read path; whole-operation latency remains
+unqualified. To reverse this extension, restore the direct `read()` fallback in
+the native-operation store's `readOnce` helper. No journal migration is needed.
