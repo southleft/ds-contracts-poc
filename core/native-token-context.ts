@@ -545,11 +545,14 @@ function prepareBody(
       rows: ordered,
     };
   });
+  // Every variable resolves against the same completed rows for each mode.
+  // Build those indexes once per preparation; they never outlive this call.
+  const rowsByMode = modes.map(mode => new Map(mode.rows.map(row => [row.name, row])));
   const variables = paths.map((tokenPath) => {
     const name = tokenPath.replaceAll(".", "/");
     let resolvedType: NativeType | undefined;
-    const values = modes.map((mode) => {
-      const byName = new Map(mode.rows.map((r) => [r.name, r]));
+    const values = modes.map((mode, modeIndex) => {
+      const byName = rowsByMode[modeIndex];
       const row = byName.get(name)!;
       let resolved = row;
       while (resolved.type === "ALIAS") resolved = byName.get(resolved.target)!;
