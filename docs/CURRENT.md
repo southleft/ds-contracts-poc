@@ -173,6 +173,12 @@ minutes from preflight dispatch to final receipt, excluding preparation and UI
 refresh. Broader recovery and usable performance remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
 
+Intermediate delivery polling now reads a narrow journal progress response;
+completion still requires the full verified listing. Repeated progress requests
+for the retained update took 0.61–0.65 seconds, while a full listing took 96.01
+seconds. Startup and whole-operation performance remain unqualified; these are
+different read operations, not a complete update speedup ([D.117](23-known-limitations.md#d117-delivery-progress-is-separate-from-result-verification)).
+
 A separate foundation plans template token changes and verifies current
 component values while retaining the original allocated identities. An
 engineering writer now rechecks the complete component and document-wide

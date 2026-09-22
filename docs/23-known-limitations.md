@@ -9180,3 +9180,39 @@ and `private/native-template-app-integration-20260921/native-hash-list-*-v1.json
 To reverse, remove the optional native branch and keep the existing portable
 SHA-256 implementation. Every historical revision and generated program must
 remain byte-identical; never migrate journals or relax a verification check.
+
+## D.117 Delivery progress is separate from result verification
+
+**AGENT decision, 2026-09-22.** Sources previously requested the complete native
+inspection every four seconds while delivery was active. Each request could
+reconstruct source and correction history synchronously, delaying the companion's
+next request. Native creation and update progress now use a read-only journal
+route that returns only whether delivery remains pending. It validates operation
+identity and the retained journal; it does not report source freshness or grant
+verification or write authority. Existing write checks are unchanged.
+
+Completion, unavailable or malformed progress, and running source inspections
+still require the full listing. Pending commands receive a full status read after
+one minute so interruption and recovery controls remain available. That read can
+itself be slow. An action's fully checked response resets this interval. A
+discarded development-mode mount no longer starts a duplicate initial read.
+No result or source evidence is cached across progress requests.
+
+Against the retained two-caller update, the existing full listing took 96.01
+seconds. The new update progress route took 2.13 seconds on its first request
+and 0.61–0.65 seconds on four subsequent requests. All 1,549 existing native
+journal, plan and succession files stayed byte-identical. The first creation
+progress request spent 251.57 seconds including queued reload work; it is not a
+clean endpoint benchmark. The app subsequently showed the existing correction
+as verified through its full listing. These measurements compare different
+read operations, not equivalent full verification or complete update latency.
+Startup, final verification and overall usable performance remain unqualified.
+
+The reference HTTP, transport, update-journal and frontend polling tests cover
+wrong references, unknown operations/proposals, non-GET requests, journal damage,
+stale-source write refusal, completion races, reinspection, malformed progress
+and interrupted-delivery fallback. Private measurements and the bounded review
+are under `private/native-progress-polling-20260922/` in the live worktree.
+
+To reverse, restore full-list polling and remove the progress routes. Preserve
+the existing journal format, write authorization and terminal verification.
