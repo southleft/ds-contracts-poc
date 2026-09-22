@@ -8250,9 +8250,13 @@ and the previous failed consumer; never relabel old evidence as a new capture.
 ## D.99 Native root text templates still need an application journey
 
 Native fidelity remains unqualified. The live application caller measures
-**8.4314%** against the unchanged 5% limit; template updates and interrupted
-native recovery are still refused. The following evidence establishes bounded
-creation, return and consumer behavior without closing those gaps.
+**8.4314%** against the unchanged 5% limit. Color-only template updates now pass
+through the application, including conflict refusal, exact reverse and a live
+delivery interruption before `begin` followed by canvas settlement and an explicit
+fresh write. The current [acceptance ledger](CURRENT.md#v1-acceptance-evidence-2026-09-21)
+records that bounded evidence. Geometry-affecting updates, broader recovery cases
+and full visual qualification remain open. The following creation and return
+evidence does not qualify those gaps.
 
 **AGENT decision, integration review 2026-09-21:** when multiple typography
 properties share one source token, each observed property must match its

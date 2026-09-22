@@ -43,7 +43,7 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 | React → native Figma | The application creates simple, stateful and composed native output. Retained Button, Checkbox and Card objects have independent readbacks and bounded correction/repeat proofs. The declared Switch's nine states and composed Alert now have guarded source/native frame measurements visible in the app. | Badge has an exact-width mismatch; some historical Button scores remain above 5%; retained empty Button mains lack comparable pixels. Broader behavior, themes, responsive states and dependency internals remain unqualified. |
 | Figma → installed React | Through app import and archive preparation, clean consumers measure Altitude Badge **10/10**, CBDS Badge **72/72**, Checkbox Group **12/12** and standalone Checkbox **26/26**, using the unchanged 5% limit on white and black. CBDS and Checkbox use explicitly supplied, hashed Inter and Public Sans assets respectively. | Tabs now retains observed body content, active styling and Stretch allocation; its unchanged app archive passes 2/2 image pairs with source-named static font inputs and exact root dimensions (D.112). Keyboard interaction and accessibility remain unqualified. The latest app-delivered standalone Tab retains pressed paint, its full focus border, per-variant tracking and all ten exact native root dimensions: **8/10** image pairs pass both backgrounds; unselected rest and pressed text remain at **12.56%** black difference ([D.93](23-known-limitations.md#d93-complete-observed-tracking-can-vary-by-prop)). Invalid tracking refuses; restoring the contract produces an identical archive. Normal reload and workspace selection restore the exact contract and delivery action. Earlier failed consumers remain preserved. Consumer fonts do not authenticate Figma font bytes. Broader semantics, accessibility and instance swaps remain unqualified. |
 | Updates and recovery | Live code changes update existing nodes; exact repeats write nothing. Conflicting design edits refuse. The app detects design-only changes and verifies agreement after a developer changes the source. Begun-write recovery has a live canvas settlement and independent verification. The app now previews a real opacity edit, selects one source candidate and checks all ten configured examples: 60 initial states and ten interaction trials per source version across five caller contexts, including the nested Card. The reviewed change now applies to the original module and regenerated CSS through the app; all ten source examples and fresh pre/post canvas reads pass. Restart before the write resumes safely, and a repeated completed Apply request changes no retained files. Explicit restoration returns source/CSS byte-for-byte, validates all ten examples and preserves the full native snapshot. Later source and canvas edits each refuse before a source write and remain intact. | Bounded Apply, source restoration, live source/canvas conflict refusals, subsequent native succession and partial-file IO-failure recovery are measured ([D.108](23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery)). Completion requires fresh canvas reads, all-case source validation and demonstrated recovery; preview coverage is limited to configured callers and the recorded finite/action domain ([D.105](23-known-limitations.md#d105-source-repair-must-check-the-other-configured-callers)). Bound-size updates require narrow fixed-layout conditions; broader changes and full two-way acceptance remain unqualified. |
-| Delivery | The local app produces React archives, records native operations and shows original/native comparisons. Installation and workflow guides name fonts, CSS Modules and current limitations. | The earlier engineering PR train and source-readiness #160 are merged; template #161 is in CI, and reviewed source-repair and composition changes still require qualified integration. Release qualification, tagging, publishing and deployment have not happened. |
+| Delivery | The local app produces React archives, records native operations and shows original/native comparisons. Installation and workflow guides name fonts, CSS Modules and current limitations. | The earlier engineering PR train, source-readiness #160, template #161 and source-repair #162 are merged. Template color updates #163 and observed child-content #164 still require qualified integration. Release qualification, tagging, publishing and deployment have not happened. |
 
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
 
@@ -151,8 +151,10 @@ passes all 100 original-versus-returned React image pairs on white. This closes
 the earlier missing-text-binding return defect described in D.98.
 
 The native caller's baseline still fails at 8.43%. A live source-color update now
-passes independent verification on the retained mains and caller; interrupted
-template recovery and full visual qualification remain unfinished. The full inherited source API is incomplete;
+passes independent verification on the retained mains and caller. A delivery
+interruption before the write began now settles through a fresh canvas read,
+and an explicit new write verifies independently; broader interruption cases
+and full visual qualification remain unfinished. The full inherited source API is incomplete;
 Radix content ownership remains a separate refusal. This does not close the
 independent-family requirement. Earlier missing paint, typography and sizing
 results remain preserved in their private journals and limitation entries;
@@ -195,7 +197,7 @@ repeat, exact reverse, caller-context refresh, conflict and lost-write settlemen
 across restarts. Updated main and caller exports are available in the review;
 an intervening edit during export refuses the observation. Template-to-original-source
 repair remains unavailable; the existing opacity repair path is kept separate.
-Those interruption and recovery cases remain synthetic native-host coverage.
+The tests cover more interruption interleavings than the bounded live case below.
 A real source-color change now passes validation and structure tracing, follows
 the existing component, and updates 11 existing color variables through the
 application. The independent read verifies all 302 main records and five caller
@@ -215,10 +217,35 @@ to deliver the reverse source change. Independent verification restored all 302
 main records, five caller records, variables and 101 exported images to the original
 purple baseline. The unobstructed canvas and completed application status were
 both inspected. These results cover source-color forward, repeat, conflict,
-retry and reverse; live interruption/recovery, additional caller creation after
-an update, comparison refresh/repair transitions and visual/layout qualification
-remain unfinished. A read-only JavaScript profile of the saved-inspection listing
-took 75.7 seconds; reopening this history remains too slow. Private evidence:
+retry and reverse.
+
+**Live interruption and explicit retry, 2026-09-22:** after the transport claimed
+a new purple-to-blue write, the app process was stopped before any `begin` or
+write result. The companion was closed before restart. **Resolve by reading the
+canvas** dispatched a separate read; it matched all 302 main records, five caller
+records, variables, graph receipt and 101 image hashes to the untouched purple
+baseline. No second write was sent. The application showed **update write
+untouched** and required **Preflight again and send a new write**. Selecting that
+control created a fresh preflight, a distinct numbered write claim and a new
+`begin`; 11 intended colors changed. Independent readback matched the earlier
+verified blue result exactly. All evidence and the original apply claim from
+before the retry stayed byte-identical. The unobstructed native canvas was
+inspected after both settlement and retry. Source and native output remain blue
+in this isolated test workspace. This demonstrates a delivery interruption
+before `begin`; it does not establish every begun-write or late-execution case.
+Private receipts: `interruption-untouched-exact-v2.json` and
+`interruption-rearm-exact-v1.json` under the integration directory below. The
+first diagnostic helper incorrectly compared desired-plan graph revisions;
+its failure is preserved, and the corrected helper compares native graph receipts
+while retaining the unchanged product matcher.
+
+Additional caller creation after an update, comparison refresh/repair transitions
+and visual/layout qualification remain unfinished. A read-only JavaScript profile
+of an earlier saved-inspection listing took 75.7 seconds. A later five-proposal
+history measured 68.2 seconds cold and 30.1 seconds repeated after exact-byte
+prepared-plan reuse, with identical responses and unchanged journals. These are
+different history states, not an A/B speedup claim; reopening remains too slow.
+Private evidence:
 `native-template-app-integration-20260921/` and
 `native-template-caller-identity-20260921/`.
 
