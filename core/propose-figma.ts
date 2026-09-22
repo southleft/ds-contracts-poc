@@ -12578,6 +12578,10 @@ function proposeFromDumpFenced(
   const only = merged.children.length === 1 ? merged.children[0] : undefined;
   const soleLabel = only !== undefined && only.type === 'TEXT' && only.name === 'label';
   const autoLabel = soleLabel && unifiedPropRef(only!, 'characters', ctx, `${where}/label`);
+  // A layer named label is not proof of the public children API. A stamped
+  // non-children property keeps its actual name and text part; otherwise a
+  // captured dependency silently changes API and its callers cannot bind it.
+  const hoistAutoLabel = autoLabel && (!ctx.propNames?.[autoLabel] || ctx.propNames[autoLabel] === 'children');
   // R7 (2026-08-22, core/root-text-check.ts): the UNBOUND sole `label` TEXT
   // child is what the emitter draws for `anatomy.root.text` (rootTextSpecs:
   // the root IS the text node, and a COMPONENT cannot be a TEXT node, so it
@@ -12617,7 +12621,7 @@ function proposeFromDumpFenced(
       ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
     }
     ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
-  } else if (only && (autoLabel || unboundRootText)) {
+  } else if (only && (hoistAutoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp, true);

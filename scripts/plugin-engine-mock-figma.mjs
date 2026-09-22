@@ -1088,6 +1088,13 @@ export function createFigmaMock(options = {}) {
         owner = owner.parent;
       }
       if (!owner) throw new Error('isExposedInstance requires a containing component');
+      const hasReference = node => {
+        if (Object.values(node.componentPropertyReferences || {}).some(ref => typeof ref === 'string' && ref.length > 0)) return true;
+        return node.type !== 'INSTANCE' && (node.children || []).some(hasReference);
+      };
+      if (value && this.exposedInstances.length === 0 && !this.children.some(hasReference)) {
+        throw new Error('Can only expose instances that have exposed nested instances or children with component property references.');
+      }
       this._exposedInstance = value;
     }
     get exposedInstances() {

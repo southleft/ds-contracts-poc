@@ -10,7 +10,7 @@ import {
 } from "../scripts/contract-schema.js";
 import { createFigmaMock } from "../scripts/plugin-engine-mock-figma.mjs";
 import { createFigmaEngine } from "./emit-figma-script.js";
-import { proposeFromDump } from "./propose-figma.js";
+import { proposeBatchFromDump, proposeFromDump } from "./propose-figma.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
 import { emitReactInline } from "./emit-react-inline.js";
 import { emitReact } from "./emit-react.js";
@@ -244,6 +244,28 @@ const list = (v: any): any => v.children[0];
 const pane = (v: any): any => v.children[1].children[0];
 const rows = (c: Contract) =>
   walkAnatomy(c).find((r) => r.name === "item")!.part.repeat!.sample;
+
+test("a complete captured selection family preserves stamped item text names without source dependencies", async () => {
+  const c = fixture(), live = await native(c);
+  const source = readFileSync(new URL("../extract/figma/dump.plugin.js", import.meta.url), "utf8")
+    .replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
+      `const TARGET_SETS = ${JSON.stringify([child.name, panel.name, c.name])};`);
+  const dump = JSON.parse(JSON.stringify(await live.run(source)));
+  const batch = proposeBatchFromDump(dump, {
+    corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map(), contractsById: new Map(), mintUnbound: true,
+    projectionMode: "exact",
+  });
+  assert.deepEqual(batch.skipped, []);
+  assert.equal(batch.proposals.length, 3);
+  const returned = batch.proposals.map(p => ContractSchema.parse(p.contract));
+  const item = returned.find(p => p.id === child.id)!;
+  assert.equal(item.props.find(p => p.bindings.figma.property === "Label")?.name, "label");
+  assert.equal(item.anatomy.root.parts?.label.content?.prop, "label");
+  const parent = returned.find(p => p.id === c.id)!;
+  assert.deepEqual(rows(parent), rows(c));
+  assert.deepEqual(parent.selection, c.selection);
+});
 
 test("writer and production Plugin capture on a native mock retain finite identities and aliases without a source anatomy snapshot", async () => {
   const c = fixture(),

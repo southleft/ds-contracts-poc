@@ -122,9 +122,10 @@ Missing or different file identity refuses the source operation.
   (scan, drift, inventory, propose's set read) runs against a guarded
   `figma` façade in `code.js` that throws on any write — the `readOnly`
   flag is enforced, not decorative. Writes happen only when you press
-  Generate/Apply on a report the plugin showed you first, and a thrown sync
-  script is atomic by Figma's design, so a failed run never leaves a
-  half-synced file.
+  Generate/Apply on a report the plugin showed you first. A thrown sync
+  script can leave changes made before the error, including incomplete
+  components. Preserve its report and inspect the canvas before repairing
+  the affected nodes or retrying.
 - **The ONE unguarded surface is Advanced → Paste a script.** It runs
   whatever you paste with **full plugin permissions in the file you have
   open** and is NOT run against the guarded read-only API — a script pasted
