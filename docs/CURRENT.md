@@ -129,7 +129,7 @@ The configured Altitude flow and its existing records remain in the collapsed Li
 <a id="v1-acceptance-evidence"></a>
 ### V1 acceptance evidence, 2026-09-21
 
-The owner's React-only V1 asks for five demonstrations. Each row names what the application shows today, where the evidence is, and the concrete gap. None of these rows is a release grade.
+The owner's six React-only V1 requirements are grouped into five evidence rows below. Live two-way updates and repeat/recovery share row 3; both remain required. Each row names what the application shows today, where the evidence is, and the concrete gap. None of these rows is a release grade.
 
 A reviewed provisional-child candidate now retains corroborated static content from unresolved REST instances ([D.109](23-known-limitations.md#d109-observed-child-content-remains-provisional)). The running app imports the captured Tabs family, shows its previously missing body text, and prepares a seven-component package. A byte-identical archive installs in a clean consumer. The initial result still lost active styling, alongside the stretch, width and black-background fidelity failures.
 
