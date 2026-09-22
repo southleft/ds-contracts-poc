@@ -6981,6 +6981,41 @@ scope, disappearing roots, node bounds and both five-control sets. Reverse by re
 absence witness and its admission/control rules; preserve all receipts and
 restore the named textless-source limitation.
 
+**AGENT decision, 2026-09-22: preserve refusal when a sibling prop may alias
+mutable children.** A helper's metadata excluding the `children` key does not
+prove unchanged content. With the original Separator helper and original
+metadata, an iterable shared by `size` and `children` receives an `initial`
+default: the children reference stays identical while its rendered text changes.
+This is diagnostic evidence, not an admitted source input or a native outcome.
+
+The same review found a false proof in the direct destructuring reader:
+`mirror[0] = "changed"` followed by returning `children` was marked forwarded
+when both props referenced the same array. The reader now reports
+`children-alias-unresolved` when mutable/unknown children have a used
+non-primitive sibling binding. Other parameters that may alias the children or
+props container receive the same check. Passing a secondary binding directly
+as the returned element's `ref` remains allowed; executing it does not.
+The check also covers children forwarded within a destructured rest object:
+copying the props container leaves a mutable children value shared. Resolving
+the declared children property keeps primitive-only rest children supported.
+An object spread is not a purity proof: a caller's style getter can change a
+children array before the returned JSX receives it. Spreading an opaque sibling
+object therefore refuses this proof even when ordinary data-only objects would
+be safe. Grid lowering remains covered with component-owned constant styles;
+the earlier caller-style fixture is retained as an explicit source refusal.
+The reader deliberately does not infer purity for other uses. Unused siblings,
+primitive-only children and primitive-only siblings retain their existing proof;
+binding identity keeps unrelated shadowed names separate. Readonly TypeScript
+annotations do not establish runtime immutability.
+
+Runtime counterexamples, source regressions and old/new reads of the original
+Badge and Separator programs are retained in
+`private/children-alias-proof-20260922/`. The two original program reads remain
+identical. General helper-mediated ownership and the Radix native journey remain
+unqualified. To reverse, remove the sibling-alias guard in `react-children.ts`,
+restoring the documented false-positive limitation; retain these counterexamples
+and all existing source, application and native evidence.
+
 ## D.78 Vector masks must not become ordinary filled paths
 
 **AGENT decision, 2026-09-20: keep mask composition outside the filled-path
@@ -9516,6 +9551,97 @@ Reverse this decision by restoring the separate guarded-plan derivation in
 the matcher and the original diagnostic wrapper; preserve all exactness checks,
 refusals and retained native evidence.
 
+## D.123 Replaying a correction history must not evict every useful match
+
+**AGENT decision, 2026-09-22.** The host adapter retains up to sixteen pure
+template match results instead of four. It also includes the earlier local
+prepared-plan reuse: up to sixteen decodes are retained, and preflight reuses
+their guarded plans only when the complete proposal bytes still match. Match
+keys contain the complete proposal and observation bytes. Returned values
+remain isolated copies; source and journal authentication, native write
+permission and fresh canvas reads are unchanged. The eviction policy and exact
+comparison rules are unchanged.
+The diagnostic export galleries also keep the existing local default: closed
+until the operator opens them. The saved images remain available for review;
+opening the history does not immediately request those diagnostic images.
+
+A read-only trace of the restored history records 71 lookups for seven distinct
+comparisons. The four-entry cache performs 24 comparisons and twenty evictions
+within that one read. The program cache does not thrash in this trace: it has
+one miss across four requests. Increasing its limit was therefore unnecessary.
+
+A process-local prototype changing only the match limit returns the identical
+246,371-byte service response and preserves all 2,104 native evidence files.
+One cold/repeated read changes from 133/100 seconds to 94/55 seconds. This is a
+single host comparison, not a latency guarantee; the remaining delay still
+prevents usable-latency qualification. No native operation was issued.
+Both timed versions already included prepared-plan reuse, so this measurement
+isolates the larger match cache rather than the complete release change.
+
+After adoption and one **Load React originals** action, the running app shows
+the same current verified correction. A separate real Vite HTTP read takes
+54 seconds and returns the identical response, with all retained native files
+unchanged and no new command or write. The adopted adapter and its regression
+test match the release branch exactly. This verifies reopening the saved result,
+not a new canvas observation or a complete operation-latency measurement.
+
+The larger working set uses more retained memory. These seven complete keys
+and serialized results total about 49 MB; that is a payload measurement, not a
+JavaScript heap measurement. The ten retained prepared-plan entries serialize
+to a further 207 MB. Sixteen is an entry bound per cache, not a byte bound, and
+larger histories can still exceed it. No result or authority is persisted.
+
+Evidence: `private/native-template-match-profile-20260922/`, including
+`profile-v1.json`, `cache-analysis-v1.json` and
+`cache-limit16-candidate-v1.json` and `adoption-api-v2.json`. The adapter review
+and corruption probes are in `private/template-match-cache-20260922/`.
+Reverse the match-cache change by restoring
+its four-entry limit in `source-reference/native-app-update.ts`. Prepared-plan
+reuse can be reversed independently by deriving the guarded plan on every
+preflight and restoring its four-entry cache. Preserve the complete-byte keys,
+input checks, isolated copies and all retained observations.
+
+## D.124 Display copying must preserve the values it is copying
+
+**AGENT decision, 2026-09-22.** A synchronous history response may store an
+already isolated, ordinary JSON tree as JSON text and parse separate copies
+for later readers. The first copy still uses `structuredClone`; values with
+shared references, cycles, richer prototypes, sparse or named array entries,
+special numbers or `toJSON` keep the original copy path. Serialization failures
+also fall back. This representation changes neither evidence identity nor the
+scope of reuse: it ends with the response. Error handling, source freshness,
+journal validation and write guards are unchanged.
+
+A warm-history CPU sample attributes about 19% of its time directly to the
+snapshot-copy function, alongside substantial canonical serialization and
+garbage collection. A bounded differential probe compares 1,023 deterministic
+and edge values, getter and clone-failure behavior, caller mutations and two
+large retained evidence records against the prior copy path. Every result
+matches; 1,006 probe values use JSON and 17 retain richer copies.
+
+In a separate full-service prototype, one cold/repeated read changes from
+94/55 seconds to 89/49 seconds with the complete 246,371-byte response and all
+2,104 native evidence files unchanged. No native event or write occurs. These
+single-host samples do not establish stable latency or qualify a complete
+operation. The remaining delay is still a release gap.
+
+After adoption and one **Load React originals** action, the app again displays
+the current verified correction for the unchanged source and both callers.
+A real Vite HTTP read takes 51 seconds and returns the exact same response;
+all 2,104 native files remain unchanged, with no new native event or write.
+The adopted adapter, copy module and regression test match the release branch.
+The two diagnostic galleries retain their 100 main and two caller images and
+remain closed without loading those images immediately. This reopens saved
+verification; it is not a fresh canvas observation.
+
+Evidence: `private/native-template-match-profile-20260922/`, including
+`warm-analysis-v1.json`, `json-snapshot-probe-v2.json` and
+`json-snapshot-candidate-v1.json`, plus the actual app read in
+`json-snapshot-adoption-v1.json`; production-module differential review and
+application regression checks are in `private/template-match-cache-20260922/`.
+Reverse this decision by restoring the original `structuredClone` storage and
+return paths in `source-reference/evidence-read-snapshot.ts`. Preserve the
+response lifetime, copy isolation, refusals, freshness checks and write guard.
 
 ## D.125 Deeper caller slots require the inherited main hierarchy
 

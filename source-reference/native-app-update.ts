@@ -20,7 +20,8 @@ const clean=(value:unknown)=>{const copy=structuredClone(value) as any;delete co
 // Memoize only a pure decode/compile, keyed by the COMPLETE proposal bytes.
 // Files, source evidence and journals are still read and authenticated by every
 // authorizing call. An unchanged digest with changed contents cannot hit this.
-const templates=new Map<string,{bytes:string;input:NativeTemplateComponentUpdateInput;update:NativeTemplateAppUpdate}>();
+const templates=new Map<string,{bytes:string;input:NativeTemplateComponentUpdateInput;
+  prepared:ReturnType<typeof prepareNativeTemplateComponentUpdate>;update:NativeTemplateAppUpdate}>();
 // A displayed update repeatedly authenticates its source and journals. Reuse
 // only deterministic program text, keyed by the COMPLETE template bytes and
 // reader options. Neither a digest nor a historical authorization is cached.
@@ -52,8 +53,11 @@ export function prepareNativeTemplateAppUpdate(template:NativeTemplateUpdateProp
     changes:[] as legacy.NativeOpacityUpdatePlan['changes'],template:structuredClone(template),
     templateValueChanges:prepared.valuePlan.changes};
   const update={plan,revision:revisionOf(plan)};
-  if(templates.size>=4)templates.delete(templates.keys().next().value!);
-  templates.set(key,{bytes,input:structuredClone(input),update:structuredClone(update)});
+  // Histories revisit several proposals in order. Keep a bounded working set
+  // large enough for a forward/reverse/conflict/recovery sequence; four entries
+  // made the fifth proposal evict every preceding decode on each traversal.
+  if(templates.size>=16)templates.delete(templates.keys().next().value!);
+  templates.set(key,{bytes,input:structuredClone(input),prepared:structuredClone(prepared),update:structuredClone(update)});
   return update;
 }
 /** Select source representations from a freshly authenticated compiler result.
@@ -91,7 +95,10 @@ function templateMatch(plan:NativeTemplateAppUpdatePlan,raw:unknown) {
   const key=canonicalJson([plan.template,raw]),saved=matches.get(key);
   if(saved)return structuredClone(saved);
   const result=matchNativeTemplateUpdateObservation(templateUpdateInput(plan),raw);
-  if(matches.size>=4)matches.delete(matches.keys().next().value!);
+  // A correction history revisits both forward and reverse observations.
+  // Four entries evict still-needed matches during an ordinary history read;
+  // retain a bounded working set without caching any source/write authority.
+  if(matches.size>=16)matches.delete(matches.keys().next().value!);
   matches.set(key,structuredClone(result));return result;
 }
 export function nativeAppUpdateMatches(plan:NativeAppUpdatePlan,raw:unknown,complete=false) {
@@ -107,7 +114,12 @@ export function nativeAppUpdatePreflight(plan:NativeAppUpdatePlan,raw:any,untouc
   if(plan.kind!=='native-contract-template-value-update')return raw?.status==='preflight-observed'&&
     (untouched?legacy.nativeContractUpdateUntouched(plan,raw.observation):legacy.nativeContractUpdateMatches(plan,raw.observation));
   try {
-    const input=templateUpdateInput(plan),prepared=prepareNativeTemplateComponentUpdate(input);
+    // Reuse only the pure compiler result for these exact proposal bytes.
+    // The caller still authenticates the current files, source and journal;
+    // every observation below is compared anew. No write permission is cached.
+    const saved=templates.get(plan.desiredRevision+':'+plan.template.revision);
+    const prepared=saved?.bytes===canonicalJson(plan.template)?saved.prepared
+      :prepareNativeTemplateComponentUpdate(templateUpdateInput(plan));
     return raw?.version===1&&raw.kind==='native-template-value-write-result'&&raw.planRevision===prepared.revision&&
       raw.status==='preflight-observed'&&raw.acceptedContract===null&&raw.nativeQualification==='unqualified'&&
       same(raw.problems,[])&&same(clean(raw.observation),plan.baseline)&&

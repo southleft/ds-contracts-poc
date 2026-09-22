@@ -27,6 +27,26 @@ export function readReactChildren(
     ts.Symbol,
     "object" | "excluded" | "value" | "defaulted"
   >();
+  // A sibling prop can contain the same object as children. A copy of the
+  // props container does not separate those values. Primitive-only siblings
+  // cannot carry this alias; object/unknown values need their own proof.
+  const possibleChildAliases = new Set<ts.Symbol>();
+  const secondaryAliases = new Set<ts.Symbol>();
+  const primitiveOnly = (type: ts.Type): boolean =>
+    type.isUnion()
+      ? type.types.every(primitiveOnly)
+      : !!(
+          type.flags &
+          (ts.TypeFlags.StringLike |
+            ts.TypeFlags.NumberLike |
+            ts.TypeFlags.BigIntLike |
+            ts.TypeFlags.BooleanLike |
+            ts.TypeFlags.ESSymbolLike |
+            ts.TypeFlags.Null |
+            ts.TypeFlags.Undefined |
+            ts.TypeFlags.Void |
+            ts.TypeFlags.Never)
+        );
   const declarations = new Set<ts.Identifier>();
   const add = (
     id: ts.Identifier,
@@ -39,6 +59,7 @@ export function readReactChildren(
   const parameter = fn.parameters[0];
   if (!parameter || parameter.initializer)
     return unknown("children-parameter-default-unresolved");
+  let checkSecondaryAliases = ts.isIdentifier(parameter.name);
   if (ts.isIdentifier(parameter.name)) add(parameter.name, "object");
   else if (ts.isObjectBindingPattern(parameter.name)) {
     const elements = parameter.name.elements;
@@ -54,6 +75,25 @@ export function readReactChildren(
         (e.propertyName ?? e.name).getText(sf).replace(/^['"]|['"]$/g, "") ===
           "children",
     );
+    const childBinding = elements.find(
+      (e) =>
+        !e.dotDotDotToken &&
+        (e.propertyName ?? e.name).getText(sf).replace(/^['"]|['"]$/g, "") ===
+          "children",
+    );
+    // Destructuring rest copies the container, not its children value. Resolve
+    // that property even when children has no separate local binding.
+    const childProperty = checker.getPropertyOfType(
+      checker.getTypeAtLocation(parameter),
+      "children",
+    );
+    const childType = childBinding
+      ? checker.getTypeAtLocation(childBinding.name)
+      : childProperty
+        ? checker.getTypeOfSymbolAtLocation(childProperty, parameter)
+        : undefined;
+    const mutableChildren = !childType || !primitiveOnly(childType);
+    checkSecondaryAliases = mutableChildren;
     for (const e of elements) {
       if (!ts.isIdentifier(e.name))
         return unknown("children-nested-binding-unresolved");
@@ -63,8 +103,33 @@ export function readReactChildren(
         "children"
       )
         add(e.name, e.initializer ? "defaulted" : "value");
+      else if (
+        mutableChildren &&
+        !primitiveOnly(checker.getTypeAtLocation(e.name))
+      ) {
+        const symbol = checker.getSymbolAtLocation(e.name);
+        if (symbol) possibleChildAliases.add(symbol);
+        declarations.add(e.name);
+      }
     }
   } else return unknown("children-parameter-binding-unresolved");
+  if (checkSecondaryAliases) {
+    const collect = (name: ts.BindingName) => {
+      if (ts.isIdentifier(name)) {
+        if (!primitiveOnly(checker.getTypeAtLocation(name))) {
+          const symbol = checker.getSymbolAtLocation(name);
+          if (symbol) {
+            possibleChildAliases.add(symbol);
+            secondaryAliases.add(symbol);
+          }
+          declarations.add(name);
+        }
+      } else
+        for (const element of name.elements)
+          if (ts.isBindingElement(element)) collect(element.name);
+    };
+    for (const p of fn.parameters.slice(1)) collect(p.name);
+  }
   const unwrap = (e: ts.Expression): ts.Expression =>
     ts.isParenthesizedExpression(e) ||
     ts.isAsExpression(e) ||
@@ -155,6 +220,20 @@ export function readReactChildren(
         attr.initializer.expression
           ? expression(attr.initializer.expression, "attribute")
           : { kind: "replaced" };
+    } else if (
+      attr.name.getText(sf) === "ref" &&
+      attr.initializer &&
+      ts.isJsxExpression(attr.initializer) &&
+      attr.initializer.expression
+    ) {
+      const ref = unwrap(attr.initializer.expression);
+      // Passing the forwardRef binding into the returned element does not
+      // execute it. Calls, property access and every other use still refuse.
+      if (
+        ts.isIdentifier(ref) &&
+        secondaryAliases.has(checker.getSymbolAtLocation(ref)!)
+      )
+        approve(ref);
     }
   }
   if (ts.isJsxElement(root)) {
@@ -183,6 +262,7 @@ export function readReactChildren(
   }
   if (result.kind !== "forwarded") return result;
   let escaped = false;
+  let possibleAliasUsed = false;
   const visit = (node: ts.Node) => {
     // These can reach a parameter without a reference to its binding symbol.
     if (
@@ -196,14 +276,20 @@ export function readReactChildren(
     if (
       ts.isIdentifier(node) &&
       !approved.has(node) &&
-      !declarations.has(node) &&
-      inputs.has(checker.getSymbolAtLocation(node)!)
-    )
-      escaped = true;
+      !declarations.has(node)
+    ) {
+      const symbol = checker.getSymbolAtLocation(node)!;
+      if (inputs.has(symbol)) escaped = true;
+      if (possibleChildAliases.has(symbol)) possibleAliasUsed = true;
+    }
     ts.forEachChild(node, visit);
   };
   // A parameter default on any sibling can mutate an earlier input binding.
   for (const p of fn.parameters) ts.forEachChild(p, visit);
   if (fn.body) visit(fn.body);
-  return escaped ? unknown("children-input-escape-or-mutation") : result;
+  return escaped
+    ? unknown("children-input-escape-or-mutation")
+    : possibleAliasUsed
+      ? unknown("children-alias-unresolved")
+      : result;
 }
