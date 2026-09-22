@@ -9281,3 +9281,33 @@ retain every existing operation, program and observation as historical data.
 Do not reinterpret them as version-3 requests or relax normal inventory checks.
 An alternative must demonstrate creation, restart, conflicts and subsequent
 combined updates with the same complete evidence and immutable history.
+
+## D.115 Caller source succession preserves the main's original provenance
+
+**AGENT decision, 2026-09-21.** A live post-update caller preparation refused
+`native-contract-comparison-source-changed` before publishing an operation or
+issuing a native command. The current caller source had advanced, while the
+retained main correctly kept its original source projection. The first journal
+fixture changed token values and request pins without changing the source
+revision and program hash; advancing those too reproduces the live refusal.
+
+Version-4 callers now carry a separate source-succession record: the verified
+parent proposal, the hash of its exact input and independent observation, and
+the current caller source. The host authenticates the written update chain,
+effective source and complete caller inventory before deriving this record.
+The compiler checks its shape, source equality, exact parent observation and
+bounded root-text-template scope. The new caller records the current source;
+the retained main keeps its original projection. This record alone does not
+authenticate a proposal: only the host's verified update path grants authority.
+HTTP callers cannot supply it. Nested compositions remain outside this scope.
+
+The stronger journal regression covers changed source revision and program,
+creation, restart, independent observation and the next combined update. Missing
+or changed proof, mismatched source, altered parent, malformed proposal, unknown
+fields and unsupported scope refuse. Live creation still needs verification;
+this fix does not qualify geometry, visual fidelity or V1. The failed live run
+preserves all 161 prior evidence files and creates no new caller operation.
+
+To reverse, refuse post-succession caller preparation and preserve existing
+version-4 plans as historical evidence. Do not replace the current source with
+the main's old identity or rewrite the main's recorded provenance.
