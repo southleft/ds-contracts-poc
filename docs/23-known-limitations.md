@@ -9356,3 +9356,14 @@ scope. The fresh journal read during source authentication is retained. This
 closes a demonstrated duplicate-read path; whole-operation latency remains
 unqualified. To reverse this extension, restore the direct `read()` fallback in
 the native-operation store's `readOnce` helper. No journal migration is needed.
+
+A local exact-result replay on 2026-09-22 preserved the same verified response
+bytes and all 2,061 retained native journal, plan, succession and transport
+files. Two sequential passes measured 163.7 and 86.0 seconds before the
+dependency-scope extension, and 153.5 and 78.6 seconds afterward. This small
+sample measures the direct service handler replaying an already accepted
+read-only result; it does not measure a fresh Figma operation, browser latency
+or a statistically stable speedup. The retained live inspection on the earlier
+standalone-scope candidate also verified both callers without writes. Usable
+whole-operation performance remains unfinished. The preserved comparison is
+`private/native-progress-polling-20260922/result-replay-conclusion-v1.json`.
