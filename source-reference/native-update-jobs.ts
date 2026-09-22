@@ -535,6 +535,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       write(path.join(dir,'operation.json'),stored);return get(id);
     },
     forProposal(parentId:string,proposalId:string) { const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?get(id):null; },
+    /** Read the authenticated journal only. This never grants current-source authority. */
+    deliveryStateForProposal(parentId:string,proposalId:string) {
+      const l=load(identity(parentId,proposalId));
+      return {phase:l.state.phase,pendingPhase:l.state.pending?.phase};
+    },
     deliveryState(id:string) {const l=load(id);return {phase:l.state.phase,pendingPhase:l.state.pending?.phase,fileKey:l.plan.before.operation.fileKey};},
     pendingCommand(id:string) {assertOutsideEvidenceSnapshot();const l=load(id);if(l.state.pending&&!l.state.pending.readOnly) authenticate(l);return structuredClone(l.state.pending??null);},
     accept(id:string,envelope:NativeOperationResult) {

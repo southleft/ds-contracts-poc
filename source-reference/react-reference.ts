@@ -37,7 +37,7 @@ import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNat
 import type { ReactNativeRequest } from './react-native-request.js';
 import { isReactCallerNativeRequest, reactCallerNativeReservation, type ReactCallerNativeRequest } from './react-caller-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
-import type { createNativeOperationTransport } from './native-operation-transport.js';
+import { nativeDeliveryPending, type createNativeOperationTransport } from './native-operation-transport.js';
 import { proposeReactSourceProgram } from "./react-program-proposal.js";
 import {
   readReactSourceProgram,
@@ -761,10 +761,27 @@ export function createReactReferenceService(
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|inspect-sizing|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|attest-dead|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
-    if (nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
+    const nativeProgress = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})(?:\/update\/([a-f0-9]{64}))?\/progress$/.exec(route);
+    if (nativeRoute || nativeAction || initialNativeRoute || stateApiNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute || nativeProgress) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? stateApiNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? stateApiNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute ?? nativeProgress)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
+        if (nativeProgress) {
+          if(req.method!=='GET' || Number(req.headers['content-length'] ?? 0)>0 || req.headers['transfer-encoding'])
+            throw Error('react-native-progress-read-only');
+          const referenceId=reference.id;
+          const pending=withEvidenceReadSnapshot(()=>{
+            if(jobs.reactIdentity(nativeProgress[2]).referenceId!==referenceId) throw Error('react-native-progress-reference-mismatch');
+            const state=nativeProgress[3]
+              ? native().updateJobs?.deliveryStateForProposal(nativeProgress[2],nativeProgress[3])
+              : jobs.deliveryState(nativeProgress[2]);
+            if(!state) throw Error('react-native-progress-unavailable');
+            return nativeDeliveryPending(state);
+          });
+          // Deliberately omit sourceCurrent, results, images, scripts and pairing.
+          // A settled journal tells the UI to request the fully checked listing.
+          json(res,200,{pending});return;
+        }
         if (updateImage) {
           const { updateJobs }=native();
           if(req.method!=='GET' || !updateJobs || jobs.reactIdentity(updateImage[2]).referenceId!==reference.id) throw Error('react-update-image-refused');

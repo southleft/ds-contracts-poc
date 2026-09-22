@@ -60,6 +60,27 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     enableFraming:()=>{legacyFraming=false;},derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
 
+test('proposal progress follows the checked journal without recompiling source or granting write authority',async t=>{
+  const f=await fixture(t),progress=()=>f.jobs().deliveryStateForProposal(f.proposal.parentId,f.proposal.id);
+  const initial=f.derivations();
+  assert.deepEqual(progress(),{phase:'update-prepared',pendingPhase:undefined});
+  assert.equal(f.derivations(),initial);
+  await f.poll();
+  const afterRead=f.derivations();
+  assert.deepEqual(progress(),{phase:'update-preflight-observed',pendingPhase:undefined});
+  f.stale();f.restart();
+  assert.deepEqual(progress(),{phase:'update-preflight-observed',pendingPhase:undefined});
+  assert.equal(f.derivations(),afterRead,'progress did not restore or recheck current-source authority');
+  await f.poll();
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,0,'stale source still prevents the write');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
+  assert.throws(()=>f.jobs().deliveryStateForProposal(f.proposal.parentId,'f'.repeat(64)));
+  assert.throws(()=>f.jobs().deliveryStateForProposal('00000000-0000-4000-8000-000000000099',f.proposal.id));
+  const event=path.join(f.repo,'private/source-native-updates',f.id,'events','00000000.json');
+  const damaged=JSON.parse(readFileSync(event,'utf8'));damaged.previous='0'.repeat(64);writeFileSync(event,JSON.stringify(damaged));
+  assert.throws(progress,/journal-chain-invalid/);
+});
+
 test('source-repair recovery reads stay correlated and read-only after source changes',async t=>{
   const f=await fixture(t);await f.poll();await f.poll();await f.poll();
   f.nodes[0].opacity=.6;
