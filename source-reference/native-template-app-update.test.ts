@@ -191,6 +191,16 @@ test('template admission refuses geometry changes and a plain main read cannot s
     'memoized compilation requires complete unchanged bytes, not a claimed digest');
   const incomplete=await f.run(emitNativeAppUpdateScript(color.plan,true));
   assert.equal(nativeAppUpdatePreflight(color.plan,incomplete),true);
+  const changedObservation=structuredClone(incomplete);
+  changedObservation.consumerObservations[0].nodes[0].values.opacity=0.25;
+  assert.equal(nativeAppUpdatePreflight(color.plan,changedObservation),false,
+    'reusing compilation never reuses the result of a prior observation');
+  const changedProposal=structuredClone(color.plan);
+  changedProposal.template.input.consumers[0].baseline.unrequested='tampered';
+  assert.equal(nativeAppUpdatePreflight(changedProposal,incomplete),false,
+    'unchanged claimed revision cannot reuse compilation for different proposal bytes');
+  assert.equal(nativeAppUpdatePreflight(color.plan,incomplete),true,
+    'a refused observation or forged proposal cannot contaminate the saved result');
   delete incomplete.consumerObservations;assert.equal(nativeAppUpdatePreflight(color.plan,incomplete),false);
   const other=await nativeTemplateValueUpdateFixture(true,false);
   assert.throws(()=>prepareNativeAppUpdate({before:other.input.before,baseline:other.input.baseline,templateGraph:other.input.desired,
