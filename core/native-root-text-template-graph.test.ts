@@ -3,9 +3,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import { readFileSync } from 'node:fs';
 import { ContractSchema } from '../scripts/contract-schema.js';
-import { createFigmaEngine } from './emit-figma-script.js';
 import { canonicalJson, revisionOf } from './contract-provenance.js';
-import { flattenTokens } from './tokens.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from './token-set.js';
 import { prepareNativeContractComparison } from './native-contract-comparison.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from './native-contract-comparison-observation.js';
@@ -16,43 +14,10 @@ import { projectRootTextTemplateAliases } from './figma-template-aliases.js';
 import { capturedTokensFromDump } from './captured-tokens.js';
 import { tokenCorpusFromJson } from './token-corpus.js';
 import { proposeBatchFromDump } from './propose-figma.js';
-import { nativeTextBindings } from './native-text-template-test-fixture.js';
+import { nativeTextBindings, nativeTextGraphFixture as fixture, nativeTextGraphComponentFixture as componentFixture } from './native-text-template-test-fixture.js';
 import { nativeFixtureHost } from '../source-reference/native-operation-test-fixture.js';
 import { emitNativeTemplateGraphScript, emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
-
-function fixture(sizes = 10, colors = 10) {
-  const names = (length: number) => Array.from({ length }, (_, i) => `v${i}`);
-  const tokens = {
-    size: Object.fromEntries(names(sizes).map((key, i) => [key, { $type: 'dimension', $value: `${12 + i}px` }])),
-    line: Object.fromEntries(names(sizes).map((key, i) => [key, { $type: 'dimension', $value: `${18 + i}px` }])),
-    // Deliberately equal values: all ten source identities must survive.
-    ink: Object.fromEntries(names(colors).map(key => [key, { $type: 'color', $value: '#123456' }])),
-    weight: { $type: 'fontWeight', $value: 400 },
-  };
-  const contract = ContractSchema.parse({ id: 'test.template-graph', name: 'TemplateGraph', description: 'Finite template routing fixture', version: '0.1.0', status: 'draft',
-    props: [{ name: 'size', type: { enum: names(sizes) }, default: 'v0', bindings: { code: { prop: 'size' }, figma: { kind: 'VARIANT', property: 'Size' } } },
-      { name: 'ink', type: { enum: names(colors) }, default: 'v0', bindings: { code: { prop: 'ink' }, figma: { kind: 'VARIANT', property: 'Ink' } } }],
-    states: [], semantics: { element: 'span' }, anatomy: { root: {
-      slot: { name: 'children', bindings: { figma: { textTemplate: true } } },
-      layout: { display: 'inline-flex', direction: 'row' }, declared: { 'font-family': 'Inter' },
-      tokens: { color: '{ink.{ink}}', 'font-size': '{size.{size}}', 'line-height': '{line.{size}}', 'font-weight': '{weight}' },
-    } }, bindings: { code: { anchors: { importPath: 'test/TemplateGraph', export: 'TemplateGraph' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } },
-  });
-  const compile = () => {
-    const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-    const tokenRevision = revisionOf(tokens);
-    return { component: engine.compileComponentData(contract, new Map([[contract.id, contract]])),
-      source: { contractRevision: revisionOf(contract), tokenRevision },
-      tokens: { fileKey: 'test-file', scopeId: 'template-graph-probe',
-        source: { revision: revisionOf('source'), sourceProgramSha256: 'a'.repeat(64), tokensSha256: tokenRevision.slice(7) },
-        tokenPaths: [...flattenTokens(tokens).keys()].sort(),
-        modes: [{ sourceMode: 'light', brand: 'default', nativeModeName: 'Source', tokens, tokenTreeRevision: tokenRevision }],
-      },
-    } satisfies NativeRootTextTemplateGraphInput;
-  };
-  return { tokens, contract, compile };
-}
 
 function selectedSources(graph: NativeRootTextTemplateGraph, variant: string) {
   const modes = nativeRootTextTemplateGraphSelection(graph, variant);
@@ -298,33 +263,6 @@ test('a competing selector created during asynchronous source lookup stops furth
 });
 
 
-async function componentFixture(sizes = 3, colors = 3, configure?: (f: ReturnType<typeof fixture>) => void) {
-  const f = fixture(sizes, colors), h = nativeFixtureHost({ modeLimit: 2, consumerVariableModes: true });
-  nativeTextBindings(h.figma);
-  Object.getPrototypeOf(h.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, mode: string) {
-    this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: mode };
-  };
-  Object.assign(f.contract.anatomy.root.tokens!, { 'background-color': '{ink.{ink}}', 'border-color': '{ink.{ink}}',
-    'padding-inline': '{size.v0}', 'border-radius': '{size.v0}' });
-  configure?.(f);
-  const engine = createFigmaEngine({ tokens: { primitives: f.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
-  const operation = { id: '10000000-0000-4000-8000-000000000099', fileKey: h.figma.fileKey };
-  const source = { revision: revisionOf('graph component source'), programSha256: 'a'.repeat(64), evidenceRevision: revisionOf('graph evidence') };
-  const tokens = f.compile().tokens;
-  tokens.fileKey = operation.fileKey; tokens.scopeId = 'source-' + operation.id;
-  tokens.source.revision = source.revision;
-  const byId = new Map([[f.contract.id, f.contract]]);
-  const { input, graph } = engine.compileNativeContractTemplateGraph(f.contract, byId, source, tokens);
-  const run = async (code: string) => JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${code}\n})()`, { figma: h.figma, console }, { timeout: 5000 })));
-  const created = await run(emitNativeTemplateGraphScript(input).script);
-  assert.equal(created.status, 'created-candidate', JSON.stringify(created));
-  const observed = await run(emitNativeTemplateGraphReadbackScript(input, created.identity));
-  verifyNativeTemplateGraphReceipt(input, created.identity, observed.receipt);
-  const context = { operation, tokens: { input: tokens, identity: created.identity.source, receipt: observed.receipt.source },
-    templateGraph: { identity: created.identity, receipt: observed.receipt } };
-  const script = () => engine.buildNativeContractDraftScript(f.contract, byId, source, context);
-  return { ...h, ...f, engine, operation, source, byId, input, graph, created, observed, context, run, script };
-}
 
 test('shared component renderer carries the complete selector vector and inherits four stable text bindings', async () => {
   const h = await componentFixture(), before = structuredClone(h.observed.receipt);

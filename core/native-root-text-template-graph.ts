@@ -4,7 +4,7 @@
  * a hash on a supplied graph is not authority to allocate or adopt variables. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import type { ComponentData, NodeSpec } from './emit-figma-script.js';
-import { prepareNativeTokenContext, type NativeTokenContextInput, type NativeTokenPreparation } from './native-token-context.js';
+import { prepareNativeTokenContext, restoreNativeTokenAllocationInput, type NativeTokenContextInput, type NativeTokenPreparation } from './native-token-context.js';
 import { planNativeRootTextTemplate, type NativeRootTextTemplatePlan, type RootTextTemplateChannel } from './native-root-text-template-plan.js';
 import { flattenTokens } from './tokens.js';
 
@@ -15,7 +15,7 @@ export interface NativeRootTextTemplateGraph {
   version: 1;
   kind: 'native-root-text-template-graph';
   template: NativeRootTextTemplatePlan;
-  /** Unchanged single-mode preparation, including original alias definitions. */
+  /** Single-mode preparation; value history retains original allocation identity. */
   sourceTokens: NativeTokenPreparation;
   selectors: Array<{ key: string; collectionName: string; modes: ['0', '1'] }>;
   routes: Route[];
@@ -24,6 +24,9 @@ export interface NativeRootTextTemplateGraph {
   componentSourceScopes?: Record<string, string[]>;
   /** Counts the carrier, routing variables and original source alias chain. */
   maximumSelectedChainEntries: number;
+  /** Rederived from original values when current values differ. Ownership and
+   * allocated IDs still name this revision; revision hashes the current graph. */
+  allocationRevision?: string;
   revision: string;
 }
 export interface NativeRootTextTemplateGraphInput {
@@ -44,10 +47,13 @@ export function planNativeRootTextTemplateGraph(input: NativeRootTextTemplateGra
   const template = planNativeRootTextTemplate(input.component, input.source);
   if (!template) fail('TEMPLATE_REQUIRED');
   const base = input.tokens;
-  if (base.writeProtocol || base.allocatedValues || base.allocatedValueProtocol || base.modes.length !== 1 ||
+  const history = base.allocatedValueProtocol === 'template-values-v1';
+  if (base.writeProtocol || (base.allocatedValues || base.allocatedValueProtocol) && !history || base.modes.length !== 1 ||
       base.modes[0].nativeSelection || base.modes[0].tokenTreeRevision !== template.tokenRevision ||
-      base.source.tokensSha256 !== template.tokenRevision.slice(7)) fail('SOURCE_CONTEXT');
+      !history && base.source.tokensSha256 !== template.tokenRevision.slice(7)) fail('SOURCE_CONTEXT');
   const sourceTokens = prepareNativeTokenContext(base);
+  const allocation = history ? restoreNativeTokenAllocationInput(base) : undefined;
+  if (allocation && allocation.source.tokensSha256 !== allocation.modes[0].tokenTreeRevision.slice(7)) fail('ALLOCATION_SOURCE_CONTEXT');
   if (sourceTokens.variables.some(v => v.name.startsWith('dsc-native-template/'))) fail('RESERVED_SOURCE_NAME');
   const sourceVariables = new Map(sourceTokens.variables.map(v => [v.name, v]));
   const sourceByPath = new Map(sourceTokens.variables.map(v => [v.tokenPath, v]));
@@ -88,7 +94,11 @@ export function planNativeRootTextTemplateGraph(input: NativeRootTextTemplateGra
   const body = { version: 1 as const, kind: 'native-root-text-template-graph' as const, template, sourceTokens,
     selectors, routes: [...routes.values()].sort((a, b) => order(a.name, b.name)), selections, maximumSelectedChainEntries,
     ...(input.renderScope === 'component' ? { componentSourceScopes: componentScopes(input.component, sourceTokens) } : {}) };
-  return { ...body, revision: revisionOf(body) };
+  if (!allocation) return { ...body, revision: revisionOf(body) };
+  const original = planNativeRootTextTemplateGraph({ ...input, tokens: allocation,
+    source: { ...input.source, tokenRevision: allocation.modes[0].tokenTreeRevision } });
+  const current = { ...body, allocationRevision: original.revision };
+  return { ...current, revision: revisionOf(current) };
 }
 
 /** Pure routing shape shared by forward projection and independent inverse.
