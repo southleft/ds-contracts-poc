@@ -69,6 +69,11 @@ The declared Switch passes all nine matched-frame pairs (maximum **4.167% white 
 
 **Review compiler update** supports bounded corrections with a fresh preflight, guarded write and independent readback. **Read design changes from the canvas** reports supported differences on the tip of a correction chain. Source succession can retain an operation across a later sealed observation of the same case. Conflicts and uncertain write outcomes stop further writes until explicitly resolved.
 
+The native graph verifier now checks caller slots below inherited wrappers
+against their source main's hierarchy and allocation stamps. This corrects a
+regression-tested refusal; historical Card readbacks remain unchanged. A fresh
+deep-slot application journey is still required ([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
+
 ### Build rules that compose
 
 The contract records supported properties, anatomy, layout, tokens, content and component references. Readers and emitters use reusable rules; examples exercise those rules or expose a missing one. Runtime conversion requires no AI.

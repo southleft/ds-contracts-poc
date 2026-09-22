@@ -9515,3 +9515,34 @@ The complete response and inventory comparisons are in
 Reverse this decision by restoring the separate guarded-plan derivation in
 the matcher and the original diagnostic wrapper; preserve all exactness checks,
 refusals and retained native evidence.
+
+
+## D.125 Deeper caller slots require the inherited main hierarchy
+
+**AGENT decision, 2026-09-22: verify inherited wrappers before accepting a
+caller slot below them.** Native graph writing already filled these slots, but
+readback stopped at the first inherited node carrying component-part metadata.
+That metadata also belongs to ordinary wrappers, so an otherwise supported
+three-wrapper fixture refused with `native-contract-observation-instance-caller-slot`.
+
+Readback now follows inherited layers using the existing allocated-versus-borrowed
+node inventory. At each inherited step it checks the corresponding main's child
+position, native type and allocation stamp. A moved slot, missing or borrowed
+stamp, altered wrapper type, or inconsistent tree refuses with
+`native-contract-observation-instance-tree`. Caller allocations still pass through
+their own content verifier; traversal does not grant them inherited-node status.
+
+Regression cases cover zero, one and three wrappers, settled caller IDs, missing
+or duplicated stamps, altered text, foreign ownership and content inserted into
+an unfilled slot. Three retained application Card graph readbacks give exactly
+the same old/new verification reports, with their source files unchanged. This
+is a replay of historical evidence, not a fresh canvas observation. Native
+geometry, pixels, dependency overrides and the complete deep-composition user
+journey remain unqualified. This change does not extend React source ownership
+inference to children passed through deeper JSX wrappers. No writer, schema,
+scorer or tolerance changed.
+
+To reverse, restore the metadata-based traversal boundary in
+`core/native-source-observation.ts` and regenerate the plugin engine receipt;
+preserve the deeper-slot refusal, adversarial examples and private evidence in
+`private/nested-slot-readback-20260922/`.

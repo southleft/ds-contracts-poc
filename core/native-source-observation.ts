@@ -844,13 +844,30 @@ function verifyReadback(
           issue('native-contract-observation-instance-property', n);
       }
       const descendants: Record<string, any>[] = [];
-      const descend = (row: Record<string, any>) => {
-        for (const id of row.childIds) { const child = nodes.get(id); if (child) {
+      const inheritedSeen = new Set<string>([n.id]);
+      const descend = (row: Record<string, any>, main: Record<string, any> | undefined) => {
+        if (!main || (row.type !== 'SLOT' && row.childIds.length !== main.childIds.length))
+          issue('native-contract-observation-instance-tree', row);
+        for (const [index,id] of row.childIds.entries()) { const child = nodes.get(id); if (child) {
+          if (inheritedSeen.has(id)) { issue('native-contract-observation-instance-tree', child); continue; }
+          inheritedSeen.add(id);
           descendants.push(child);
-          if (!child.metadata.nativeContractPart) descend(child);
+          // Main-owned wrappers also carry part metadata. Follow their
+          // inherited layers; caller allocations are checked by visit below.
+          if (borrowedIds.has(child.id)) {
+            const source = main && nodes.get(main.childIds[index]);
+            const allocation = source?.metadata.nativeSourceAllocation;
+            if (!source || child.type !== source.type ||
+                typeof allocation !== 'string' || !bornIds.has(allocation) ||
+                nodes.get(allocation)?.type !== source.type ||
+                (bornIds.has(source.id) && allocation !== source.id) ||
+                child.metadata.nativeSourceAllocation !== allocation)
+              issue('native-contract-observation-instance-tree', child);
+            descend(child,source);
+          }
         } }
       };
-      descend(n);
+      descend(n,nodes.get(n.mainId));
       for (const row of descendants) if (borrowedIds.has(row.id)) checked.add(row.id);
       // Inherited slots the parent leaves unfilled are the only place a canvas
       // edit can add content inside an instance. They must mirror the main's
