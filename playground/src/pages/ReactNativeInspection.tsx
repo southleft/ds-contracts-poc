@@ -1,7 +1,8 @@
 import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { nativePollNeedsRefresh } from './native-inspection-poll';
 import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -76,11 +77,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [inspectionSourceAvailable, setInspectionSourceAvailable] = useState(false);
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
-  // A transport can finish while this response still carries the preceding
-  // journal view. Keep refreshing until the displayed update itself settles.
-  const active = rows.some(r => (r.connection.paired && r.connection.started && !r.connection.finished) || r.content?.phase === 'running' ||
-    r.updates?.some(u => u.connection?.paired && u.connection.started && (!u.connection.finished ||
-      ['awaiting-native-result', 'update-preflight-observed', 'update-applied'].includes(u.operation?.phase ?? ''))));
+  const latest = useRef({rows, busy});
+  latest.current = {rows, busy};
   async function reviewMeasurement(id: string) {
     setBusy(true); setError('');
     try {
@@ -91,20 +89,29 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     finally { setBusy(false); }
   }
   useEffect(() => {
-    let stopped = false, pending = false;
-    const load = async () => {
-      if (pending) return; pending = true; setLoading(true);
+    let stopped = false, pending = false, fullReadAt = 0;
+    const load = async (poll = false) => {
+      if (pending || (poll && latest.current.busy)) return;
+      pending = true;
       try {
+        if (poll && !await nativePollNeedsRefresh(latest.current.rows, async route => {
+          const response = await fetch(`${root}/${route}`);
+          if (!response.ok) throw Error('Native progress unavailable.');
+          return response.json();
+        }, Date.now() - fullReadAt >= 60_000)) return;
+        if (stopped) return;
+        setLoading(true);
         const response = await fetch(`${root}/native`), result = await response.json();
+        fullReadAt = Date.now();
         if (!response.ok) throw Error(result.error);
         if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setInspectionSourceAvailable(result.inspectionSourceAvailable === true); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
       finally { pending = false; if (!stopped) setLoading(false); }
     };
     void load();
-    const timer = active ? setInterval(() => void load(), 4000) : undefined;
-    return () => { stopped = true; if (timer) clearInterval(timer); };
-  }, [root, active, observationRevision]);
+    const timer = setInterval(() => void load(true), 4000);
+    return () => { stopped = true; clearInterval(timer); };
+  }, [root, observationRevision]);
   async function inspectTypography(parentId: string, key: string) {
     setBusy(true); setError('');
     try {

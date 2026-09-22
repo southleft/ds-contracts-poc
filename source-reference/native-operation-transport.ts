@@ -62,6 +62,11 @@ const NEXT: Partial<
   "update-applied": "update-readback",
 };
 
+/** A journal progress hint, not source freshness or verification authority. */
+export function nativeDeliveryPending(state: { phase: string; pendingPhase?: string }): boolean {
+  return !!state.pendingPhase || !!NEXT[state.phase];
+}
+
 export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(repoRoot: string, jobs: Jobs) {
   const root = path.join(repoRoot, "private", "source-native-transport");
   const seen = new Map<string, number>();
@@ -159,7 +164,7 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       paired: existsSync(path.join(dir, "connection.json")),
       connected,
       started,
-      finished: !!state && !state.pendingPhase && !NEXT[state.phase],
+      finished: !!state && !nativeDeliveryPending(state),
     };
   };
   const claim = (
