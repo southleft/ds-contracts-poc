@@ -1319,10 +1319,12 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       "repeat",
       "Repeat — item templates over arrays",
       ["generated", "curated"],
-      `<p>Repeated-children collections (menu items, breadcrumb segments, tab items, avatar stacks): the part is an <strong>item template</strong> — a component-ref part rendered once per record of the <code>itemsProp</code> <a href="/spec/props/#prop-types">arrayOf prop</a>. Field → child-prop mapping is by name: every arrayOf field names a prop of the referenced child contract. Constant child props ride <code>component.props</code> as usual.</p><p>Projections: React maps the live array (<code>{items?.map(…)}</code> — undefined renders nothing); the static surfaces and the canvas render <code>sample</code> — the <em>observed</em> drawn siblings, the collection’s honest static state (the meter discipline again).</p>` +
+      `<p>Repeated-children collections (menu items, breadcrumb segments, tab items, avatar stacks): the part is an <strong>item template</strong> — a component-ref part rendered once per record of the <code>itemsProp</code> <a href="/spec/props/#prop-types">arrayOf prop</a>. Field → child-prop mapping is by name: every arrayOf field except an explicitly declared identity field names a prop of the referenced child contract. Constant child props ride <code>component.props</code> as usual.</p><p>Projections: React maps the live array (<code>{items?.map(…)}</code> — undefined renders nothing); the static surfaces and the canvas render <code>sample</code> — the <em>observed</em> drawn siblings, the collection’s honest static state (the meter discipline again).</p>` +
         fieldList(RepeatSchema as AnySchema, {
           itemsProp:
             "The arrayOf prop (by canonical name) the template maps over in code.",
+          keyField:
+            "Optional camelCase text field carrying a stable item identity. Its values must be nonempty and unique within the collection. React uses these keys to retain each child's state when items reorder; missing or duplicate keys refuse. Identity is metadata and is not passed as a child prop or DOM attribute. Without this declaration, the existing positional behavior is retained. Static projections still draw the observed sample; raw Figma recapture does not reconstruct these code identities. This does not declare selection or keyboard behavior.",
           sample:
             "The observed design-time sample — one record per drawn sibling, keys ⊆ the arrayOf fields. Required: the canvas projection <em>is</em> the sample; a sample-less collection would render nothing everywhere but React.",
         }) +
@@ -1332,6 +1334,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           "<code>itemsProp</code> unknown, or not an <code>arrayOf</code> prop",
           "a field colliding with a fixed component prop — a field is per-item, a fixed prop is constant",
           "a field naming no child prop; sample keys outside the fields; sample values of the wrong type",
+          "<code>keyField</code> not naming a text field, or missing, empty or duplicate sample identities; the identity field is exempt from child-prop mapping",
         ]) +
         replayedBlock(
           replays.repeatPart,

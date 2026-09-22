@@ -1125,6 +1125,7 @@ function renderComponentHtml(
           }
           let itemText: string | undefined;
           for (const [field, v] of Object.entries(rec)) {
+            if (field === part.repeat!.keyField) continue;
             const depProp = dep.props.find((p) => p.name === field);
             if (typeof v === 'boolean') { depState.bools[field] = v; continue; }
             if (depProp?.bindings.code.prop === 'children') { itemText = String(v); continue; }

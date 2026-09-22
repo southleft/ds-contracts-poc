@@ -1942,8 +1942,8 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
 /** v12: repeated-children collection (P9 — menu items, breadcrumb segments,
  *  tab items, avatar stacks). The part is an ITEM TEMPLATE: a component-ref
  *  part rendered once per record of the `itemsProp` arrayOf prop. Field →
- *  child-prop mapping is BY NAME: every arrayOf field of `itemsProp` names a
- *  prop of the referenced child contract (text field → child text prop,
+ *  child-prop mapping is BY NAME: every arrayOf field of `itemsProp`, except
+ *  the optional identity-only `keyField`, names a prop of the referenced child contract (text field → child text prop,
  *  boolean → boolean, number → number, enum → a subset of the child enum).
  *  Enum item values are canonical; emitters apply the child code binding. Constant child
  *  props ride `component.props` as today.
@@ -1956,6 +1956,11 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
 export const RepeatSchema = z.strictObject({
   /** The arrayOf prop (by canonical name) the template maps over in code. */
   itemsProp: z.string(),
+  /** Optional stable identity for each record. Must name a text field whose
+   * nonempty values are unique within the collection. This field is metadata,
+   * never forwarded to the child as content or a DOM attribute. No identity is
+   * inferred from labels or positions; older repeats retain their behavior. */
+  keyField: z.string().regex(/^[a-z][A-Za-z0-9]*$/, 'repeat keyField must be a camelCase field name').optional(),
   /** The OBSERVED design-time sample — one record per drawn sibling, keys ⊆
    *  the arrayOf fields. Required: the canvas/static projection IS the
    *  sample; a sample-less collection would render nothing everywhere but

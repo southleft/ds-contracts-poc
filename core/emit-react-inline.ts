@@ -942,6 +942,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             let itemText: string | undefined;
             let fieldAttrs = '';
             for (const [field, v] of Object.entries(rec)) {
+              if (field === part.repeat!.keyField) continue;
               const depProp = dep.props.find((p) => p.name === field);
               const codeName = depProp?.bindings.code.prop ?? field;
               if (typeof v === 'string' && codeName === 'children') {
