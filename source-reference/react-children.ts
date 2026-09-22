@@ -81,10 +81,19 @@ export function readReactChildren(
         (e.propertyName ?? e.name).getText(sf).replace(/^['"]|['"]$/g, "") ===
           "children",
     );
-    const mutableChildren =
-      childBinding &&
-      !primitiveOnly(checker.getTypeAtLocation(childBinding.name));
-    checkSecondaryAliases = !!mutableChildren || !childBinding;
+    // Destructuring rest copies the container, not its children value. Resolve
+    // that property even when children has no separate local binding.
+    const childProperty = checker.getPropertyOfType(
+      checker.getTypeAtLocation(parameter),
+      "children",
+    );
+    const childType = childBinding
+      ? checker.getTypeAtLocation(childBinding.name)
+      : childProperty
+        ? checker.getTypeOfSymbolAtLocation(childProperty, parameter)
+        : undefined;
+    const mutableChildren = !childType || !primitiveOnly(childType);
+    checkSecondaryAliases = mutableChildren;
     for (const e of elements) {
       if (!ts.isIdentifier(e.name))
         return unknown("children-nested-binding-unresolved");
