@@ -1141,12 +1141,13 @@ test("local native HTTP connection restricts authority and retains correlated pl
     );
     const accepted = await post(resultUrl, envelope, auth);
     assert.equal(accepted.status, 200);
-    assert.equal(((await accepted.json()) as any).phase, "tokens-created");
-    assert.equal(
-      (await post(resultUrl, envelope, auth)).status,
-      200,
-      "lost acknowledgement can retry",
-    );
+    const receipt={status:'result-recorded',id:envelope.operationId,
+      attemptId:envelope.attemptId,nativeQualification:'unqualified'};
+    assert.deepEqual(await accepted.json(),receipt);
+    const replay=await post(resultUrl,envelope,auth);
+    assert.equal(replay.status,200,"lost acknowledgement can retry");
+    assert.deepEqual(await replay.json(),receipt);
+    // Only the independent public inspection carries the operation's phase.
     const publicResult = (await (await fetch(base)).json()) as any;
     assert.equal(publicResult.latest.nativeOperation.phase, "tokens-created");
     assert.equal(publicResult.latest.nativeConnection.connected, true);
