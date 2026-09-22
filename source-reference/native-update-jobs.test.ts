@@ -62,23 +62,29 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
 
 test('proposal progress follows the checked journal without recompiling source or granting write authority',async t=>{
   const f=await fixture(t),progress=()=>f.jobs().deliveryStateForProposal(f.proposal.parentId,f.proposal.id);
+  const target=()=>f.jobs().idForProposal(f.proposal.parentId,f.proposal.id);
   const initial=f.derivations();
+  assert.equal(target(),f.id);
   assert.deepEqual(progress(),{phase:'update-prepared',pendingPhase:undefined});
   assert.equal(f.derivations(),initial);
   await f.poll();
   const afterRead=f.derivations();
   assert.deepEqual(progress(),{phase:'update-preflight-observed',pendingPhase:undefined});
   f.stale();f.restart();
+  assert.equal(target(),f.id,'journal identity survives source drift without granting authority');
   assert.deepEqual(progress(),{phase:'update-preflight-observed',pendingPhase:undefined});
   assert.equal(f.derivations(),afterRead,'progress did not restore or recheck current-source authority');
   await f.poll();
   assert.equal(f.delivered.filter(c=>!c.readOnly).length,0,'stale source still prevents the write');
   assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
+  assert.equal(f.jobs().idForProposal(f.proposal.parentId,'f'.repeat(64)),null);
+  assert.equal(f.jobs().idForProposal('00000000-0000-4000-8000-000000000099',f.proposal.id),null);
   assert.throws(()=>f.jobs().deliveryStateForProposal(f.proposal.parentId,'f'.repeat(64)));
   assert.throws(()=>f.jobs().deliveryStateForProposal('00000000-0000-4000-8000-000000000099',f.proposal.id));
   const event=path.join(f.repo,'private/source-native-updates',f.id,'events','00000000.json');
   const damaged=JSON.parse(readFileSync(event,'utf8'));damaged.previous='0'.repeat(64);writeFileSync(event,JSON.stringify(damaged));
   assert.throws(progress,/journal-chain-invalid/);
+  assert.throws(target,/journal-chain-invalid/);
 });
 
 test('source-repair recovery reads stay correlated and read-only after source changes',async t=>{
