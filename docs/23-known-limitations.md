@@ -9432,3 +9432,38 @@ Evidence: `private/native-progress-polling-20260922/token-row-index-benchmark-v2
 
 To reverse, move the row index construction back inside each variable's mode
 loop. Preserve all validation, output ordering, journals and fidelity limits.
+
+## D.121 A completed write can be recovered without its result
+
+**AGENT test decision, 2026-09-22.** A separate local test companion closes
+after one pinned template color writer returns `write-observed`, before it
+saves or uploads the result. Its guard checks the operation, plan, script,
+authorized file and write phase. The production companion and native writer
+remain unchanged. This tests a completed write with a lost result, not an OS
+crash or an arbitrary partial write.
+
+Through the application, the reviewed eleven-color update affected the
+retained component and two recorded callers. The companion closed, and the
+journal retained exactly one write dispatch and begin with no write result.
+Reopening the same companion preserved its interrupted-command marker.
+**Resolve by reading the canvas** produced a correlated settlement read;
+**Connect / resume** then allowed a separate final verification read. Both
+observations pass the product matcher and are identical, including all 302
+main records, 100 main images and both callers. Their native content exactly
+matches the previously observed blue state. All 2,064 earlier files survive
+unchanged. The app reports **Verified correction for current inputs**; both
+native instances were inspected with the plugin closed, as was the app gallery.
+
+Manual steps and limits remain part of the result. The interrupted-write
+notice was obscured by the busy message and was not observed; the injected
+close notification was not captured. The manifest picker needed a path-entry
+retry. Reopening and the later explicit resume were required. Host processing
+and final display took minutes. This proves the observed recovery boundary,
+not usable latency, native visual fidelity or complete V1 acceptance.
+
+Evidence: `private/native-template-begun-write-20260922/`, especially
+`fault-companion-build-v1.json`, `recovery-read-observed-v1.json`,
+`recovery-verified-v1.json`, `recovery-visible-v1.json` and
+`recovery-journal-timing-v1.json`. To leave the test setup, close its separately
+named companion and use the unchanged production companion. Preserve all
+journals and fault artifacts; do not clear a receipt or repeat an unknown write.

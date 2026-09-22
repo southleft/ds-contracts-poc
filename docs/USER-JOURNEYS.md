@@ -171,6 +171,21 @@ When another selected case has the same observed family, the app offers **Compar
 
 **For two previously unrelated libraries:** the repository has diff and planning foundations. The [current status](https://ds-contracts-spec.pages.dev/system/) describes their boundaries. The hosted copy may lag this repository (on 2026-09-18 it answered 404); the same document is [docs/CURRENT.md](../docs/CURRENT.md), and the local app serves it at `/system`. There is no complete **Compare libraries → repair both sides** application action yet. Starting from two existing libraries must not silently become “overwrite one with the other.”
 
+**If a native update loses its result:** reopen the same companion in the
+authorized file and allow it to deliver any saved result. If the app still
+awaits that result, use **Resolve by reading the canvas**. The original write
+is never sent again. A read that proves the intended change landed allows a
+separate verification read; other outcomes may require further recovery.
+
+Reopening alone finishes only work the companion already holds. If it reports
+**Nothing left to finish. Press Connect / resume to continue**, enter the same
+operation's connection from the app and choose **Connect / resume**. Wait for
+the app's verified result, then close the plugin to inspect the canvas. Use
+**Attest the companion is gone** only when every companion window for that
+file is actually closed; it is not a shortcut past a slow response. The
+measured recovery boundary and remaining gaps are in
+[D.121](23-known-limitations.md#d121-a-completed-write-can-be-recovered-without-its-result).
+
 <a id="install"></a>
 ## Install and try it today
 
