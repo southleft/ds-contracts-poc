@@ -148,7 +148,7 @@ async function fixture(t: test.TestContext) {
         responseFailure = "";
         throw Error("response unavailable");
       }
-      body = transport.accept(id, supplied, payload);
+      body = transport.acceptDelivery(id, supplied, payload);
     }
     if (responseFailure === (url.endsWith("/claim") ? "claim" : "result")) {
       responseFailure = "";
@@ -344,6 +344,28 @@ test("wrong capability, wrong file and unknown identity cannot receive commands 
   );
   assert.deepEqual(readdirSync(directory), before);
   assert.equal(f.jobs.get(f.id).phase, "prepared");
+});
+
+test("delivery receipt preserves a late creation result without fresh source authority", async (t) => {
+  const f=await fixture(t);f.start();
+  const delivery=f.transport.claim(f.id,f.secret,SOURCE_NATIVE_FILE_KEY);
+  assert.equal(delivery.status,'command');
+  const envelope=await f.host.run(delivery.command!);f.stale();
+  const preparations=f.preparationCount();
+  const receipt=f.transport.acceptDelivery(f.id,f.secret,envelope);
+  assert.deepEqual(receipt,{status:'result-recorded',id:f.id,attemptId:envelope.attemptId,nativeQualification:'unqualified'});
+  assert.equal(f.preparationCount(),preparations);
+  assert.equal(f.jobs.get(f.id).sourceCurrent,false);
+  const events=path.join(f.repo,'private/source-native-app/operations',f.id,'events');
+  const inventory=()=>readdirSync(events).map(name=>[name,readFileSync(path.join(events,name),'utf8')]);
+  const before=inventory();
+  assert.deepEqual(f.transport.acceptDelivery(f.id,f.secret,envelope),receipt);
+  assert.deepEqual(inventory(),before);
+  assert.throws(()=>f.transport.acceptDelivery(f.id,f.secret,{...envelope,nonce:'0'.repeat(64)}),/result-replay-conflict/);
+  assert.throws(()=>f.transport.acceptDelivery(f.id,'0'.repeat(64),envelope),/unauthorized/);
+  const next=f.transport.claim(f.id,f.secret,SOURCE_NATIVE_FILE_KEY);
+  assert.equal(next.status,'command');
+  assert.equal(next.command?.readOnly,true,'a late acknowledgment cannot authorize another creation');
 });
 
 test("source changes block first creation delivery and a late result remains durable", async (t) => {

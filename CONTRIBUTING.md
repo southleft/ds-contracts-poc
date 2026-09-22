@@ -60,6 +60,13 @@ and `npm run ci:lane catalog-visual`. `npm run ci:lanes` derives current gate
 coverage and refuses an unwired check. [docs/25](docs/25-reading-a-red-ci.md)
 maps each lane and red gate to its local reproducer.
 
+`test:recipe` runs its test files one at a time. The combobox and table proofs
+contain elapsed-time bounds, so their measurements must not compete with other
+recipe test processes launched by the same command. The file list, assertions
+and timing limits are unchanged. Keep the host free of other heavy validation
+while running these proofs; this scheduling choice does not qualify application
+performance.
+
 **The local fast lane differs from CI in one way you will see.** The local runner
 executes every guarded step and does not evaluate a step's `hashFiles(...)` condition.
 CI skips the `recipe:input-field:comparison*` steps when

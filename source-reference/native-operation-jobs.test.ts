@@ -112,6 +112,37 @@ test('display caching retains the fresh journal check during source authenticati
  assert.equal(f.jobs.withReadSnapshot(()=>f.jobs.get(f.snapshot.id)).sourceCurrent,false);
 });
 
+test('shared evidence scopes reuse native dependency reads only within one store and response',t=>{
+  let calls=0,stale=false;
+  const f=fixture(t,(request,operation)=>{calls++;if(stale)throw Error('source changed');return nativeFixturePrepare(request,operation);});
+  const id=f.snapshot.id,before=f.inventory();calls=0;
+  withEvidenceReadSnapshot(()=>{
+    const first=f.jobs.get(id);assert.equal(first.sourceCurrent,true);
+    first.counters.variables=999;
+    const second=f.jobs.get(id);
+    assert.notEqual(second.counters.variables,999);
+    assert.equal(calls,1,'the same dependency is derived once in a response');
+    stale=true;
+    assert.equal(f.jobs.get(id).sourceCurrent,true);
+    assert.equal(f.reopen().get(id).sourceCurrent,false,'a separate store cannot borrow source authority');
+    assert.throws(()=>f.jobs.dispatch(id,'token-create'),/write-during-evidence-read-snapshot/);
+  });
+  assert.deepEqual(f.inventory(),before);
+  assert.equal(f.jobs.get(id).sourceCurrent,false,'the next read checks the current source');
+  assert.throws(()=>f.jobs.dispatch(id,'token-create'),/source changed/);
+  stale=false;
+  const file=path.join(f.directory,'operation.json'),bytes=readFileSync(file,'utf8');
+  withEvidenceReadSnapshot(()=>{
+    assert.equal(f.jobs.get(id).sourceCurrent,true);
+    const altered=JSON.parse(bytes);altered.version=99;writeFileSync(file,JSON.stringify(altered));
+    assert.equal(f.jobs.get(id).sourceCurrent,true);
+  });
+  assert.throws(()=>f.jobs.get(id),/native-operation-header-invalid/,'the next response detects journal corruption');
+  writeFileSync(file,bytes);
+  assert.equal(f.jobs.get(id).sourceCurrent,true);
+  assert.deepEqual(f.inventory(),before);
+});
+
 test('a failed journal stays refused only for the current display and is freshly read afterward',t=>{
  const f=fixture(t),file=path.join(f.directory,'operation.json'),original=readFileSync(file);
  const header=JSON.parse(original.toString());header.version=99;writeFileSync(file,JSON.stringify(header));

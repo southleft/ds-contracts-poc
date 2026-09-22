@@ -9321,3 +9321,95 @@ removes redundant verification work; end-to-end latency is still unqualified.
 
 To reverse, restore full-list polling and remove the progress routes. Preserve
 the existing journal format, write authorization and terminal verification.
+
+
+## D.118 A result response has its own bounded evidence read
+
+**AGENT decision, 2026-09-22.** Full native inspection listings already share
+checked evidence within one synchronous response. Standalone update results
+and replay responses now use the same read scope. A focused probe previously
+observed two source derivations while constructing one verified update view;
+it now observes one. The next view performs a fresh derivation.
+
+The scope closes before the response returns and never survives a request.
+Source changes between views still invalidate current-source authority. Result
+objects remain isolated from callers, and journal writes, command delivery and
+write authorization remain outside the read scope. No source, native program,
+recorded result, fidelity rule or comparison threshold changes.
+
+Focused update, transport, caller-inventory, correction-chain and evidence-scope
+checks pass. This reduces demonstrated duplicate work; live result latency and
+complete operation performance remain unqualified. Private before/after probe
+logs are under `private/post-update-callers-qualification-20260922/`.
+
+To reverse, remove the standalone `withEvidenceReadSnapshot` wrappers from the
+update view and getter. Preserve the existing full-list read scope, journal
+format, write guards and historical result files.
+
+The same scope also covers dependent native-operation reads when no local
+native-listing scope is open. A second probe found those dependencies were still
+derived twice within one shared response. Reuse is keyed by store identity, so
+another store with different compiler callbacks cannot borrow the first store's
+result. Returned objects remain isolated, a subsequent response detects source
+drift or journal corruption, and command dispatch remains forbidden inside the
+scope. The fresh journal read during source authentication is retained. This
+closes a demonstrated duplicate-read path; whole-operation latency remains
+unqualified. To reverse this extension, restore the direct `read()` fallback in
+the native-operation store's `readOnce` helper. No journal migration is needed.
+
+A local exact-result replay on 2026-09-22 preserved the same verified response
+bytes and all 2,061 retained native journal, plan, succession and transport
+files. Two sequential passes measured 163.7 and 86.0 seconds before the
+dependency-scope extension, and 153.5 and 78.6 seconds afterward. This small
+sample measures the direct service handler replaying an already accepted
+read-only result; it does not measure a fresh Figma operation, browser latency
+or a statistically stable speedup. The retained live inspection on the earlier
+standalone-scope candidate also verified both callers without writes. Usable
+whole-operation performance remains unfinished. The preserved comparison is
+`private/native-progress-polling-20260922/result-replay-conclusion-v1.json`.
+
+## D.119 A stored native result is not a verified conversion
+
+**AGENT decision, 2026-09-22.** The companion's result upload now returns a
+small `result-recorded` receipt instead of constructing a complete inspection
+view. The companion only needs to know whether it may discard its saved upload.
+The receipt identifies the operation and attempt, explicitly retains
+`nativeQualification: unqualified`, and carries no source-current flag or
+verified phase.
+
+Both native creation and update journals keep the same correlation, replay,
+late-result and durable-append rules. Before acknowledging a new result, the
+host reopens and validates the complete journal. Invalid post-append evidence
+refuses the acknowledgment. An exact replay validates the retained journal
+and changes no history; a different result for the same attempt still refuses.
+Result storage does not recompile the current source. A late result remains
+durable when the source has changed, while the full inspection view and every
+subsequent write still require their existing source and policy checks.
+
+The application still reports completion through its full authenticated
+listing. An upload acknowledgment alone cannot qualify native structure,
+fidelity, source freshness or recovery. The full-view `accept` API remains
+available to host callers; only the companion's result route uses the smaller
+receipt. No plugin program, generated script, journal format, stored result or
+fidelity rule changes.
+
+Bounded probes cover stale source, unchanged replay, conflicting replay,
+unauthorized connections, a result with incorrect correlation, forbidden
+writes during a read scope, and journal corruption planted after append. The
+actual service route and existing companion recovery simulations exercise the
+receipt path. Live companion latency and complete user-operation performance
+still require measurement.
+
+A direct service-handler measurement replayed the retained two-caller result
+twice: storage receipts took 19.0 and 0.83 seconds, compared with 153.5 and
+78.6 seconds for the earlier full result response. The following first full
+listing took 223.6 seconds and returned the exact earlier authenticated view.
+All 2,061 retained native evidence and transport files remained unchanged, with
+no new events or writes. The smaller upload response does not qualify overall
+latency. This measures saved-result replay, not fresh Figma execution; see
+`private/native-progress-polling-20260922/result-receipt-benchmark-v1.json`.
+
+To reverse, point the companion result route back to the full-view transport
+`accept` method and remove the separate receipt methods/type. Preserve all
+journals and the shared result-storage validation. No history migration or
+native canvas change is needed.

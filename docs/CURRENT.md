@@ -179,6 +179,13 @@ for the retained update took 0.61–0.65 seconds, while a full listing took 96.0
 seconds. Startup and whole-operation performance remain unqualified; these are
 different read operations, not a complete update speedup ([D.117](23-known-limitations.md#d117-delivery-progress-is-separate-from-result-verification)).
 
+The companion's upload now acknowledges durable result storage separately from
+the app's full verification. A saved-result replay preserves the exact verified
+view and all retained journals; the receipt does not grant source freshness or
+native qualification. The first full listing still took 223.6 seconds in that
+measurement, so complete operation latency remains unfinished
+([D.119](23-known-limitations.md#d119-a-stored-native-result-is-not-a-verified-conversion)).
+
 A separate foundation plans template token changes and verifies current
 component values while retaining the original allocated identities. An
 engineering writer now rechecks the complete component and document-wide

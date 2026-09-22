@@ -4,7 +4,7 @@ import type {prepareReactStateApiNativePlan} from './react-state-api-native-plan
 import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
 import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
 import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
-import {assertOutsideEvidenceSnapshot,readSnapshotValue,type EvidenceReadEntry} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,evidenceReadOnce,readSnapshotValue,type EvidenceReadEntry} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
@@ -147,6 +147,13 @@ export interface NativeOperationResult {
     | NativeTokenCreationResult
     | NativeTokenReadbackResult
     | Record<string, unknown>;
+}
+/** A durable journal acknowledgment, never source or native qualification. */
+export interface NativeOperationReceipt {
+  status: 'result-recorded';
+  id: string;
+  attemptId: string;
+  nativeQualification: 'unqualified';
 }
 export interface NativeOperationSnapshot {
   sizingObservation?: { status: 'pending' | 'observed' | 'refused'; nodeCount: number };
@@ -900,6 +907,7 @@ export function createNativeOperationJobs(
   // checked observation only within this synchronous, non-authorizing scope.
   // Nothing survives into another request or a native command's authorization.
   let readSnapshot: Map<string, EvidenceReadEntry> | undefined;
+  const evidenceReadScope = 'native-operation-jobs:' + randomUUID();
   const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
   function withReadSnapshot<T>(read: () => T): T {
     const outer = readSnapshot;
@@ -911,7 +919,10 @@ export function createNativeOperationJobs(
     } finally { readSnapshot = outer; }
   }
   function readOnce<T>(key: string, read: () => T): T {
-    if (!readSnapshot) return read();
+    // Standalone update views open the shared synchronous evidence scope.
+    // Their native dependencies need the same reuse as a full native listing.
+    // Store identity prevents a separate compiler configuration sharing reads.
+    if (!readSnapshot) return evidenceReadOnce(evidenceReadScope,key,read);
     return readSnapshotValue(readSnapshot,key,read);
   }
   const loadFresh = (id: string, baselineRevision?: string) => {
@@ -1622,10 +1633,11 @@ export function createNativeOperationJobs(
     append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}),...(comparisonRefresh?{comparisonRefresh}:{}) });
     return structuredClone(command);
   };
-  const accept = (
+  const acceptResult = <T>(
     id: string,
     envelope: NativeOperationResult,
-  ): NativeOperationSnapshot => {
+    finish: (loaded: Loaded, envelope: NativeOperationResult) => T,
+  ): T => {
     assertWriteScope();
     const serialized = encode(envelope);
     if (Buffer.byteLength(serialized) > 4 * 1024 * 1024)
@@ -1640,7 +1652,7 @@ export function createNativeOperationJobs(
     );
     if (prior?.kind === "result") {
       if (!same(prior.envelope, envelope)) fail("result-replay-conflict");
-      return snapshot(loaded, current(loaded));
+      return finish(loaded, envelope);
     }
     if (!loaded.state.pending) fail("unsolicited-result");
     correlate(envelope, loaded.state.pending);
@@ -1648,8 +1660,15 @@ export function createNativeOperationJobs(
     // fails: allocated IDs must never be lost because the source moved meanwhile.
     append(loaded, { kind: "result", envelope: structuredClone(envelope) });
     const next = load(id);
-    return snapshot(next, current(next));
+    return finish(next, envelope);
   };
+  const accept = (id: string, envelope: NativeOperationResult): NativeOperationSnapshot =>
+    acceptResult(id, envelope, loaded => snapshot(loaded, current(loaded)));
+  // Reopening the complete journal above must succeed before the companion can
+  // discard its saved result. Fresh source authority belongs to views/commands.
+  const acceptDelivery = (id: string, envelope: NativeOperationResult): NativeOperationReceipt =>
+    acceptResult(id, envelope, (loaded, result) => ({status:'result-recorded',id:loaded.header.id,
+      attemptId:result.attemptId,nativeQualification:'unqualified'}));
   const retryObservation = (id: string) => {
     assertWriteScope();
     const loaded = load(id);
@@ -1728,6 +1747,7 @@ export function createNativeOperationJobs(
     forBaseline,
     dispatch: (id: string, phase: NativeOperationPhase) => dispatch(id, phase),
     accept,
+    acceptDelivery,
     retryObservation,
     inspectSizing: (id: string) => dispatch(id, 'component-readback', true),
     retryCreation,

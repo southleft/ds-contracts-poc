@@ -84,6 +84,29 @@ test('the write\'s own result outranks a pending canvas read; one arriving after
  assert.throws(()=>g.jobs().accept(g.id,{...lost,result:{...landed,status:'no-op'}}),/result-replay-conflict/);
 });
 
+test('delivery receipts preserve late-result settlement and never turn a contradictory result into success',async t=>{
+ const f=await fixture(t);await f.run('update-preflight-readback');
+ const write=f.jobs().dispatch(f.id,'update-apply'),result=await f.run_script(write.script);
+ const read=f.jobs().resolveWriteOutcome(f.id),envelope={...write,result};
+ const receipt=f.jobs().acceptDelivery(f.id,envelope);
+ assert.deepEqual(receipt,{status:'result-recorded',id:f.id,attemptId:write.attemptId,nativeQualification:'unqualified'});
+ assert.equal(f.jobs().get(f.id).phase,'update-applied');
+ assert.throws(()=>f.jobs().acceptDelivery(f.id,{...read,result:{}}),/unsolicited-result/);
+ assert.equal(f.jobs().abandonedObservationPhase(f.id,read.attemptId),'update-readback');
+ const count=readdirSync(path.join(f.dir,'events')).length;
+ assert.deepEqual(f.jobs().acceptDelivery(f.id,envelope),receipt);
+ assert.equal(readdirSync(path.join(f.dir,'events')).length,count);
+
+ const g=await fixture(t);await g.run('update-preflight-readback');
+ const lost=g.jobs().dispatch(g.id,'update-apply');await g.settle();
+ const contradictory={...lost,result:{status:'updated'}};
+ assert.equal(g.jobs().acceptDelivery(g.id,contradictory).nativeQualification,'unqualified');
+ assert.equal(g.jobs().get(g.id).phase,'update-recovery-required');
+ assert.throws(()=>g.jobs().verifiedForParent(g.parent),/effective-observation-unavailable/);
+ g.restart();assert.equal(g.jobs().get(g.id).phase,'update-recovery-required');
+ assert.throws(()=>g.jobs().acceptDelivery(g.id,{...contradictory,result:{status:'no-op'}}),/result-replay-conflict/);
+});
+
 test('a late result claiming a write the canvas read found untouched raises recovery instead of being believed',async t=>{
  const f=await fixture(t);await f.run('update-preflight-readback');
  const lost=f.jobs().dispatch(f.id,'update-apply');await f.settle();

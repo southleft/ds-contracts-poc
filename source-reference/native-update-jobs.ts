@@ -1,4 +1,4 @@
-import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,evidenceReadOnce,withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 /** Updates are children of immutable creation evidence. The existing companion
  * transport delivers these commands; no target allocation or baseline rewrite. */
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
@@ -12,7 +12,7 @@ import { nativeDesignChanges, type NativeDesignChanges } from '../core/native-de
 import { collectNativeImages,collectExpectedNativeImages } from './native-operation-images.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import {isReactComparisonParentUpdate,type ReactComparisonBirth,type ReactComparisonParentUpdate} from './react-comparison-request.js';
-import type { NativeOperationCommand, NativeOperationPhase, NativeOperationResult } from './native-operation-jobs.js';
+import type { NativeOperationCommand, NativeOperationPhase, NativeOperationReceipt, NativeOperationResult } from './native-operation-jobs.js';
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const HASH = /^[a-f0-9]{64}$/;
@@ -378,7 +378,10 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       ...collectExpectedNativeImages({operation:c.input.operation,planRevision:c.input.planRevision},
         [{id:c.input.comparison.caseId,instanceId:c.input.creation.comparisons[0].instanceId}],
         (l.state.observation as any).consumerObservations?.[i])})) : [];
-  const snapshot=(l:Loaded) => {
+  // A standalone result/replay response needs the same bounded read scope as
+  // the full listing. Reuse verified inputs only until this synchronous view
+  // returns; command authorization and journal writes stay outside the scope.
+  const snapshot=(l:Loaded) => withEvidenceReadSnapshot(() => {
     let sourceCurrent=false, canRefreshObservation=false;
     try { if(l.state.wrote && l.state.phase==='update-verified') authenticateObservation(l); else authenticate(l); sourceCurrent=true; }
     catch { /* Historical results remain visible. */ }
@@ -397,8 +400,8 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       begunAt:l.state.begun&&l.state.begun===l.state.write?.attemptId?l.state.begunAt:undefined,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,nativeAppUpdateMainReadback(l.plan,l.state.observation)).observation:undefined,
       ...(l.plan.kind==='native-contract-template-value-update'?{callerImageObservations:callerImages(l).map(({operationId,caseId,observation})=>({operationId,caseId,observation}))}:{})};
-  };
-  const get=(id:string)=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id)));
+  });
+  const get=(id:string)=>withEvidenceReadSnapshot(()=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id))));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
     assertOutsideEvidenceSnapshot();
     const l=load(id),p=phase as Phase;
@@ -441,6 +444,38 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(!data)fail('image-unavailable');
     return Buffer.from(data);
   };
+  function acceptResult<T>(id:string,envelope:NativeOperationResult,finish:(loaded:Loaded,envelope:NativeOperationResult)=>T):T {
+    assertOutsideEvidenceSnapshot();
+    const serialized=JSON.stringify(envelope);if(Buffer.byteLength(serialized)>4*1024*1024) fail('result-too-large');
+    envelope=JSON.parse(serialized);const l=load(id);
+    const prior=l.events.find(e=>e.kind==='result'&&e.envelope.attemptId===envelope?.attemptId);
+    if(prior?.kind==='result') {if(!same(prior.envelope,envelope)) fail('result-replay-conflict');return finish(l,envelope);}
+    const late=l.events.find(e=>e.kind==='late-write-result'&&e.envelope.attemptId===envelope?.attemptId);
+    if(late?.kind==='late-write-result') {if(!same(late.envelope,envelope)) fail('result-replay-conflict');return finish(l,envelope);}
+    const revoked=l.events.find(e=>e.kind==='late-result-after-revocation'&&e.envelope.attemptId===envelope?.attemptId);
+    if(revoked?.kind==='late-result-after-revocation') {if(!same(revoked.envelope,envelope)) fail('result-replay-conflict');return finish(l,envelope);}
+    let current=l;
+    if(current.state.revoked.has(envelope?.attemptId)) {
+      // Checked before the "own result outranks a canvas read" rule: a revoked
+      // attempt's result is evidence only, whatever it says and whenever it arrives.
+      const write=current.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===envelope.attemptId);
+      if(write?.kind!=='dispatch') fail('unsolicited-result');correlate(envelope,write.command);
+      // Once settled, as for an unrevoked late result: judged only while nothing else is pending.
+      if(current.state.settled.has(envelope.attemptId)&&current.state.pending) fail('unsolicited-result');
+      append(current,{kind:'late-result-after-revocation',envelope});return withEvidenceReadSnapshot(()=>finish(load(id),envelope));
+    }
+    if(current.state.unresolved&&envelope?.attemptId===current.state.unresolved.attemptId) {
+      // The write's own result arrived after all: it outranks the pending canvas read.
+      correlate(envelope,current.state.unresolved);
+      append(current,{kind:'abandon-observation',attemptId:current.state.pending!.attemptId});current=load(id);
+    } else if(!current.state.pending&&current.state.settled.has(envelope?.attemptId)) {
+      const write=current.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===envelope.attemptId);
+      if(write?.kind!=='dispatch') fail('unsolicited-result');correlate(envelope,write.command);
+      append(current,{kind:'late-write-result',envelope});return withEvidenceReadSnapshot(()=>finish(load(id),envelope));
+    }
+    if(!current.state.pending) fail('unsolicited-result');correlate(envelope,current.state.pending);
+    append(current,{kind:'result',envelope});return withEvidenceReadSnapshot(()=>finish(load(id),envelope));
+  }
   return {
     get,dispatch,
     updateHistory(parentId: string) {
@@ -548,36 +583,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     deliveryState(id:string) {const l=load(id);return {phase:l.state.phase,pendingPhase:l.state.pending?.phase,fileKey:l.plan.before.operation.fileKey};},
     pendingCommand(id:string) {assertOutsideEvidenceSnapshot();const l=load(id);if(l.state.pending&&!l.state.pending.readOnly) authenticate(l);return structuredClone(l.state.pending??null);},
     accept(id:string,envelope:NativeOperationResult) {
-      assertOutsideEvidenceSnapshot();
-      const serialized=JSON.stringify(envelope);if(Buffer.byteLength(serialized)>4*1024*1024) fail('result-too-large');
-      envelope=JSON.parse(serialized);const l=load(id);
-      const prior=l.events.find(e=>e.kind==='result'&&e.envelope.attemptId===envelope?.attemptId);
-      if(prior?.kind==='result') {if(!same(prior.envelope,envelope)) fail('result-replay-conflict');return snapshot(l);}
-      const late=l.events.find(e=>e.kind==='late-write-result'&&e.envelope.attemptId===envelope?.attemptId);
-      if(late?.kind==='late-write-result') {if(!same(late.envelope,envelope)) fail('result-replay-conflict');return snapshot(l);}
-      const revoked=l.events.find(e=>e.kind==='late-result-after-revocation'&&e.envelope.attemptId===envelope?.attemptId);
-      if(revoked?.kind==='late-result-after-revocation') {if(!same(revoked.envelope,envelope)) fail('result-replay-conflict');return snapshot(l);}
-      let current=l;
-      if(current.state.revoked.has(envelope?.attemptId)) {
-        // Checked before the "own result outranks a canvas read" rule: a revoked
-        // attempt's result is evidence only, whatever it says and whenever it arrives.
-        const write=current.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===envelope.attemptId);
-        if(write?.kind!=='dispatch') fail('unsolicited-result');correlate(envelope,write.command);
-        // Once settled, as for an unrevoked late result: judged only while nothing else is pending.
-        if(current.state.settled.has(envelope.attemptId)&&current.state.pending) fail('unsolicited-result');
-        append(current,{kind:'late-result-after-revocation',envelope});return get(id);
-      }
-      if(current.state.unresolved&&envelope?.attemptId===current.state.unresolved.attemptId) {
-        // The write's own result arrived after all: it outranks the pending canvas read.
-        correlate(envelope,current.state.unresolved);
-        append(current,{kind:'abandon-observation',attemptId:current.state.pending!.attemptId});current=load(id);
-      } else if(!current.state.pending&&current.state.settled.has(envelope?.attemptId)) {
-        const write=current.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===envelope.attemptId);
-        if(write?.kind!=='dispatch') fail('unsolicited-result');correlate(envelope,write.command);
-        append(current,{kind:'late-write-result',envelope});return get(id);
-      }
-      if(!current.state.pending) fail('unsolicited-result');correlate(envelope,current.state.pending);
-      append(current,{kind:'result',envelope});return get(id);
+      return acceptResult(id,envelope,loaded=>snapshot(loaded));
+    },
+    acceptDelivery(id:string,envelope:NativeOperationResult):NativeOperationReceipt {
+      // Correlation, durable append and full journal validation run before this
+      // receipt. It grants no fresh source or native-success authority.
+      return acceptResult(id,envelope,(loaded,result)=>({status:'result-recorded',id:loaded.id,
+        attemptId:result.attemptId,nativeQualification:'unqualified'}));
     },
     /** Settle a write whose result never arrived by reading the actual nodes.
      * The write is never sent again. Uses the reader pinned with this update. */
