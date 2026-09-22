@@ -160,9 +160,10 @@ they are not the current returned-package result.
 
 The app now also creates a new caller after a verified source update and
 independently verifies its link to the retained main, native slot and text.
-Native text editing and visible restoration were demonstrated. The next
-combined update must include both callers and independently confirm the
-restored instance; that lifecycle remains unfinished. The new comparison
+Native text editing and visible restoration were demonstrated. A combined
+no-op now independently verifies both callers, including the restored text,
+with all main and caller records and images unchanged. The next real source
+change across both callers, repeat and recovery remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
 
 A separate foundation plans template token changes and verifies current
