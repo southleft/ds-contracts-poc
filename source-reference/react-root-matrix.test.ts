@@ -239,13 +239,20 @@ for(const own of ['fixed','fill'] as const)test(`a top-level grid root with its 
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
  const dir=mkdtempSync(path.join(process.cwd(),'private/root-matrix-grid-fixture-')),browser=await chromium.launch();
  try{
-  const source=`import React from 'react';
+  const callerStyleSource=`import React from 'react';
 export function NoticeTitle({children}:{children?:React.ReactNode}){return <div style={{fontWeight:600}}>{children}</div>;}
 export function NoticeBody({children}:{children?:React.ReactNode}){return <div>{children}</div>;}
 export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';children?:React.ReactNode;style?:React.CSSProperties}){
  return <div role="alert" style={{display:'grid',boxSizing:'border-box',width:${own==='fixed'?320:"'100%'"},rowGap:2,padding:tone==='loud'?16:12,backgroundColor:tone==='loud'?'var(--accent)':'var(--base)',...style}}>{children}</div>;
 }`;
   writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
+  writeFileSync(path.join(dir,'notice.tsx'),callerStyleSource);
+  const callerStyleProgram=readReactSourceProgram(dir,['notice.tsx']);assert.deepEqual(callerStyleProgram.problems,[]);
+  assert.deepEqual(callerStyleProgram.components.find(c=>c.name==='Notice')!.children,
+   {kind:'unresolved',reason:'children-alias-unresolved'},'spreading an opaque style object can execute getters that mutate children');
+  // Keep the original caller-style pattern as an explicit refusal above. Grid
+  // lowering is qualified separately with component-owned constant styles.
+  const source=callerStyleSource.replace(',children,style}',',children}').replace(';style?:React.CSSProperties','').replace(',...style}', '}');
   writeFileSync(path.join(dir,'notice.tsx'),source);
   const program=readReactSourceProgram(dir,['notice.tsx']);assert.deepEqual(program.problems,[]);
   const exportsList=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');

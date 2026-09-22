@@ -308,6 +308,7 @@ export function RestAliased({mirror,...rest}:API){mirror.pop();return <div {...r
 export function RestDefaulted({mirror,x=mirror.pop(),...rest}:API&{x?:string}){return <div {...rest}/>;}
 export function RestUnused({mirror,...rest}:API){return <div {...rest}/>;}
 export function RestPrimitive({mirror,...rest}:{children:string;mirror:string[]}){mirror.pop();return <div {...rest}/>;}
+export function SpreadStyle({children,style}:{children:string[];style:{width?:number}}){return <div style={{...style}}>{children}</div>;}
 export function Unused({children,mirror}:API){return <div>{children}</div>;}
 export function PrimitiveChild({children,mirror}:{children:string;mirror:string[]}){mirror.pop();return <div>{children}</div>;}
 export function PrimitiveSibling({children,label,count,enabled}:{children:string[];label:string|null;count?:number;enabled:boolean}){const text=label?.toUpperCase()+String(count)+String(enabled);return <div title={text}>{children}</div>;}
@@ -333,6 +334,7 @@ export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>m
       "Union",
       "RestAliased",
       "RestDefaulted",
+      "SpreadStyle",
     ])
       assert.deepEqual(
         fact(name),
@@ -368,6 +370,20 @@ export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>m
     const element = exports.Changed({ children, mirror: children });
     assert.equal(element.props.children, children);
     assert.deepEqual(element.props.children, ["changed"]);
+    const styleChildren = ["original"];
+    let reads = 0;
+    const style = Object.defineProperty({}, "width", {
+      enumerable: true,
+      get() {
+        reads++;
+        styleChildren[0] = "changed by getter";
+        return 320;
+      },
+    });
+    const styled = exports.SpreadStyle({ children: styleChildren, style });
+    assert.equal(reads, 1);
+    assert.equal(styled.props.children, styleChildren);
+    assert.deepEqual(styled.props.children, ["changed by getter"]);
   }));
 
 test("forwardRef callbacks cannot mutate children through the ref parameter", () =>
