@@ -9367,3 +9367,40 @@ or a statistically stable speedup. The retained live inspection on the earlier
 standalone-scope candidate also verified both callers without writes. Usable
 whole-operation performance remains unfinished. The preserved comparison is
 `private/native-progress-polling-20260922/result-replay-conclusion-v1.json`.
+
+## D.119 A stored native result is not a verified conversion
+
+**AGENT decision, 2026-09-22.** The companion's result upload now returns a
+small `result-recorded` receipt instead of constructing a complete inspection
+view. The companion only needs to know whether it may discard its saved upload.
+The receipt identifies the operation and attempt, explicitly retains
+`nativeQualification: unqualified`, and carries no source-current flag or
+verified phase.
+
+Both native creation and update journals keep the same correlation, replay,
+late-result and durable-append rules. Before acknowledging a new result, the
+host reopens and validates the complete journal. Invalid post-append evidence
+refuses the acknowledgment. An exact replay validates the retained journal
+and changes no history; a different result for the same attempt still refuses.
+Result storage does not recompile the current source. A late result remains
+durable when the source has changed, while the full inspection view and every
+subsequent write still require their existing source and policy checks.
+
+The application still reports completion through its full authenticated
+listing. An upload acknowledgment alone cannot qualify native structure,
+fidelity, source freshness or recovery. The full-view `accept` API remains
+available to host callers; only the companion's result route uses the smaller
+receipt. No plugin program, generated script, journal format, stored result or
+fidelity rule changes.
+
+Bounded probes cover stale source, unchanged replay, conflicting replay,
+unauthorized connections, a result with incorrect correlation, forbidden
+writes during a read scope, and journal corruption planted after append. The
+actual service route and existing companion recovery simulations exercise the
+receipt path. Live companion latency and complete user-operation performance
+still require measurement.
+
+To reverse, point the companion result route back to the full-view transport
+`accept` method and remove the separate receipt methods/type. Preserve all
+journals and the shared result-storage validation. No history migration or
+native canvas change is needed.

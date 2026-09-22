@@ -148,6 +148,13 @@ export interface NativeOperationResult {
     | NativeTokenReadbackResult
     | Record<string, unknown>;
 }
+/** A durable journal acknowledgment, never source or native qualification. */
+export interface NativeOperationReceipt {
+  status: 'result-recorded';
+  id: string;
+  attemptId: string;
+  nativeQualification: 'unqualified';
+}
 export interface NativeOperationSnapshot {
   sizingObservation?: { status: 'pending' | 'observed' | 'refused'; nodeCount: number };
   comparisonBaselineRefreshed?: boolean;
@@ -1626,10 +1633,11 @@ export function createNativeOperationJobs(
     append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}),...(comparisonRefresh?{comparisonRefresh}:{}) });
     return structuredClone(command);
   };
-  const accept = (
+  const acceptResult = <T>(
     id: string,
     envelope: NativeOperationResult,
-  ): NativeOperationSnapshot => {
+    finish: (loaded: Loaded, envelope: NativeOperationResult) => T,
+  ): T => {
     assertWriteScope();
     const serialized = encode(envelope);
     if (Buffer.byteLength(serialized) > 4 * 1024 * 1024)
@@ -1644,7 +1652,7 @@ export function createNativeOperationJobs(
     );
     if (prior?.kind === "result") {
       if (!same(prior.envelope, envelope)) fail("result-replay-conflict");
-      return snapshot(loaded, current(loaded));
+      return finish(loaded, envelope);
     }
     if (!loaded.state.pending) fail("unsolicited-result");
     correlate(envelope, loaded.state.pending);
@@ -1652,8 +1660,15 @@ export function createNativeOperationJobs(
     // fails: allocated IDs must never be lost because the source moved meanwhile.
     append(loaded, { kind: "result", envelope: structuredClone(envelope) });
     const next = load(id);
-    return snapshot(next, current(next));
+    return finish(next, envelope);
   };
+  const accept = (id: string, envelope: NativeOperationResult): NativeOperationSnapshot =>
+    acceptResult(id, envelope, loaded => snapshot(loaded, current(loaded)));
+  // Reopening the complete journal above must succeed before the companion can
+  // discard its saved result. Fresh source authority belongs to views/commands.
+  const acceptDelivery = (id: string, envelope: NativeOperationResult): NativeOperationReceipt =>
+    acceptResult(id, envelope, (loaded, result) => ({status:'result-recorded',id:loaded.header.id,
+      attemptId:result.attemptId,nativeQualification:'unqualified'}));
   const retryObservation = (id: string) => {
     assertWriteScope();
     const loaded = load(id);
@@ -1732,6 +1747,7 @@ export function createNativeOperationJobs(
     forBaseline,
     dispatch: (id: string, phase: NativeOperationPhase) => dispatch(id, phase),
     accept,
+    acceptDelivery,
     retryObservation,
     inspectSizing: (id: string) => dispatch(id, 'component-readback', true),
     retryCreation,
