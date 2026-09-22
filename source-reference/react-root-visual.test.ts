@@ -132,3 +132,32 @@ test('caller style inputs cannot become source-owned fixed sizes',()=>{
   }
  }finally{rmSync(f.dir,{recursive:true,force:true})}
 });
+
+
+test('hex source paint retains its variable identity without accepting a different observed value',async()=>{
+ const f=fixture(),browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  for(const [raw,computed] of [['#243242','rgb(36, 50, 66)'],['#abc','rgb(170, 187, 204)'],['#A1B2C3','rgb(161, 178, 195)'],['#abcf','rgb(170, 187, 204)'],['#a1b2c3ff','rgb(161, 178, 195)'],['#0000','rgba(0, 0, 0, 0)'],['#abcd','rgba(170, 187, 204, 0.867)']]){
+   await page.setContent(`<style>:root{--brand:${raw}} section{background-color:var(--brand)}</style><section>Original sample</section>`);
+   const captured=await page.locator('section').evaluate(n=>({raw:getComputedStyle(n).getPropertyValue('--brand').trim(),computed:getComputedStyle(n).backgroundColor}));
+   assert.deepEqual(captured,{raw,computed});
+   f.tree.style['--brand']=captured.raw;f.tree.style['background-color']=captured.computed;
+   const origin=await readReactStyleOrigin(page,'section',f.ownership);
+   const project=(tree=f.tree,proof=origin)=>projectReactRootVisual(f.program,f.ownership,tree,proof).roots[0].sourceBindings!.find(b=>b.channel==='background-color')!;
+   const binding=project();
+   // Fractional alpha serialized by Chromium is not an exact byte-alpha witness.
+   if(raw==='#abcd'){assert.equal(binding.reason,'source-variable-value-needs-resolution');continue;}
+   assert.ok(binding.tokenPath,raw+': '+binding.reason);
+   const output=projectReactRootVisual(f.program,f.ownership,f.tree,origin).roots[0];
+   assert.equal(output.native!.variants[0].spec.fill,binding.tokenPath!.replaceAll('.','/'));
+   const source=(output.tokens!.source as {css:Record<string,{$extensions:Record<string,{rawValue:string}>}>}).css;
+   assert.equal(Object.values(source)[0].$extensions['dev.ds-contracts.css-source'].rawValue,raw);
+   const stale=structuredClone(f.tree);stale.style['background-color']='rgb(36, 50, 67)';
+   assert.equal(project(stale).reason,'source-variable-value-needs-resolution');
+   const moved=structuredClone(f.tree);moved.style['--brand']='#000000';
+   assert.equal(project(moved).reason,'source-variable-value-needs-resolution');
+   const indirect=structuredClone(origin);indirect.roots[0].channels.find(b=>b.channel==='background-color')!.rawValue='var(--other)';
+   assert.equal(project(f.tree,indirect).reason,'source-variable-value-needs-resolution');
+  }
+ }finally{await browser.close();rmSync(f.dir,{recursive:true,force:true})}
+});

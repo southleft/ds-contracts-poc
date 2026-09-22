@@ -41,20 +41,22 @@ function fixture(t:test.TestContext){
  return{program,ownership,tree,origin,evidence,run,source};
 }
 
-test('nested source hosts retain paint, size and wrappers while the main excludes caller text',t=>{
+for(const host of ['span','div'])test(`nested source ${host} hosts retain paint, size and wrappers while the main excludes caller text`,t=>{
  const f=fixture(t),file=Object.keys(f.program.files).find(p=>p.endsWith('/surface.tsx'))!;
- writeFileSync(file,readFileSync(file,'utf8').replace('export function Toggle(props:{checked?:boolean;id?:string}){return <button><span/></button>}',
-  'export function Toggle({children}:{children?:string}){return <button><span>{children}</span></button>}'));
+ writeFileSync(file,readFileSync(file,'utf8').replace('span:any','span:any;div:any').replace('export function Toggle(props:{checked?:boolean;id?:string}){return <button><span/></button>}',
+  `export function Toggle({children}:{children?:string}){return <button><${host}>{children}</${host}></button>}`));
  const program=readReactSourceProgram(path.dirname(file),['surface.tsx']);assert.deepEqual(program.problems,[]);
  const ownership=structuredClone(f.ownership);
  for(const instance of ownership.components){const c=program.components.find(c=>c.exportName===instance.source.exportName)!;
   instance.source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};}
  ownership.components[1].props={children:'Sample caller text'};
+ ownership.nodes.find(n=>n.path==='0.0')!.tag=host;
  const tree=structuredClone(f.tree),root=(tree.nodes[0] as {t:'el';el:CapturedNode}).el;
  const body=(root.nodes[0] as {t:'el';el:CapturedNode}).el;
+ body.tag=host;
  body.style={...body.style,display:'flex','flex-direction':'column','font-family':'Inter','font-size':'14px','font-weight':'400','font-style':'normal','line-height':'20px','white-space-collapse':'collapse'};
  body.nodes=[{t:'text',v:'Sample caller text'}];
- const origin=structuredClone(f.origin);origin.roots.push({path:'0.0',tag:'span',channels:[],sizes:['width','height'].map(channel=>({channel:channel as 'width'|'height',status:'fixed',value:'8px',selectors:['.body']}))});
+ const origin=structuredClone(f.origin);origin.roots.push({path:'0.0',tag:host,channels:[],sizes:['width','height'].map(channel=>({channel:channel as 'width'|'height',status:'fixed',value:'8px',selectors:['.body']}))});
  const evidence:ReactOwnedChildEvidence={fonts:{version:1,status:'observed',treeRevision:revisionOf(tree),problems:[],rows:[
   {path:[0,0],text:'Sample caller text',cssFamily:'Inter',cssWeight:'400',cssStyle:'normal',fonts:[{familyName:'Inter',postScriptName:'Inter-Regular',isCustomFont:true,glyphCount:18}]}]},
   svg:{version:1,status:'observed',treeRevision:revisionOf(tree),problems:[],rows:[]}};
@@ -62,7 +64,7 @@ test('nested source hosts retain paint, size and wrappers while the main exclude
  const result=deriveReactNestedChild(program,ownership,tree,origin,'toggle',evidence);
  assert.equal(result.draft.status,'native-compiled');assert.equal(result.nestedSlot.sourcePath,'0.0');
  const part=walkAnatomy(result.draft.contract!).find(p=>p.part.slot)?.part;
- assert.equal(part?.slot?.name,'children');assert.equal(part?.element,'span');
+ assert.equal(part?.slot?.name,'children');assert.equal(part?.element,host);
  assert.equal(JSON.stringify(result.draft.contract).includes('Sample caller text'),false);
  const spec=result.draft.native!.variants[0].spec,slot=spec.children![0];
  assert.equal(slot.type,'slot');assert.equal(slot.slotProperty,'Children');

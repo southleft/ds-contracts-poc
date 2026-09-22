@@ -207,6 +207,12 @@ export function deriveReactNestedChild(
     throw Error("react-nested-child-slot-content-unqualified");
   delete slotPart.text;
   delete slotPart.parts;
+  // Ordinary div frames use an implicit default element in the compiler.
+  // A styled slot must explicitly retain its source-owned host; otherwise
+  // both validation and React emission treat it as a bare insertion point.
+  if (slotPart.element && slotPart.element !== slot.tag)
+    throw Error("react-nested-child-slot-element-mismatch");
+  slotPart.element = slot.tag;
   slotPart.slot = { name: "children" };
   const bindings: NonNullable<ReactChildRoot["draft"]["sourceBindings"]> = [];
   for (const row of flat) {

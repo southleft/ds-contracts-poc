@@ -331,3 +331,22 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  const slotId=nativeSlot.id;
  await run(engine.buildComponentScript(c,byId));assert.equal(comp.children![0].id,slotId,'repeat does not replace the slot');
 });
+
+test('owned heading and paragraph hosts reset UA margins on both React surfaces while authored margins win',async()=>{
+ const browser=await chromium.launch();
+ try{for(const element of ['h3','p'])for(const authored of [false,true])for(const mode of ['module','inline']){
+  const c=seed();delete c.anatomy.root.slot;
+  c.anatomy.root.parts={heading:{element,text:'Owned heading',layout:{display:'flex',direction:'row'},
+   literals:{width:'120px',height:'24px','font-size':'16px','line-height':'24px'},...(authored?{tokens:{'margin-top':'{gap8}'}}:{})},
+   body:{element:'div',slot:{name:'children'},layout:{display:'flex',direction:'column'},literals:{width:'120px',height:'80px'}}};
+  const byId=new Map([[c.id,c]]),generated=mode==='module'?emitReact(c,{tokens:new Set(flattenTokens(primitives).keys()),icons:new Map(),contracts:byId}):emitReactInline(c,{tokens,icons:new Map(),contracts:byId});
+  const page=await browser.newPage(),render=await mountGenerated(page,c.name,generated.tsx,'css' in generated?generated.css as string:'');
+  await page.addStyleTag({content:':root{--gap8:8px}'});await render({children:'Caller text'});
+  const observed=await page.locator('#root > *').evaluate(root=>{
+   const heading=root.children[0],body=root.children[1],r=root.getBoundingClientRect(),h=heading.getBoundingClientRect(),b=body.getBoundingClientRect(),style=getComputedStyle(heading);
+   return {marginTop:style.marginTop,marginBottom:style.marginBottom,headingY:h.y-r.y,bodyY:b.y-r.y,bodyHeight:b.height};
+  });
+  assert.deepEqual(observed,{marginTop:authored?'8px':'0px',marginBottom:'0px',headingY:authored?16:8,bodyY:authored?48:40,bodyHeight:80},`${element}/${mode}/${authored}`);
+  await page.close();
+ }}finally{await browser.close();}
+});

@@ -9759,3 +9759,60 @@ child projector and additional host-style capture, and restore validation's
 non-root slot declaration restriction. Preserve the adversarial examples and
 the source-path evidence from D.126. Regenerate the plugin engine receipt after
 changing validation; do not rewrite historical native evidence.
+
+
+The installed-source probe exposed an implicit-host case missed by the original
+`span` fixture: an ordinary `div` compiles without an explicit element. The slot
+projector now records the authenticated receiving host tag before converting
+it to a slot. It refuses an inconsistent existing tag. Both `div` and `span`
+regressions cover retained styling, native compilation and caller-text exclusion;
+the validation boundary stays unchanged.
+
+## D.128 Source color identity compares exact literal values
+
+**AGENT decision, 2026-09-22: expand literal hex colors when checking an already
+proved CSS variable binding.** A real browser probe of `--brand: #243242` painted
+`rgb(36, 50, 66)`, but the reader previously refused the binding because those
+strings differed. This blocked otherwise supported nested source hosts with
+ordinary hex paint tokens. The shared source binding reader now expands
+three-, four-, six- and eight-digit hex values to numeric RGBA for exact
+comparison on the supported color channels. It retains the original variable
+name, raw spelling and winning selectors in the token's source metadata.
+
+No identity is inferred from equal paint: the authored direct-variable join,
+observed channel, in-scope value, compiled token and scoped-source checks remain
+required. There is no channel or alpha rounding, tolerance change, general CSS
+expression evaluation or color-space conversion. Browser-rounded fractional
+alpha remains `source-variable-value-needs-resolution`; for example, `#abcd`
+and Chromium's serialized alpha `0.867` are not treated as exactly equal.
+
+Browser regressions cover the original failure, short and mixed-case hex,
+transparent and opaque byte alpha, native variable binding, retained raw source
+metadata, changed paint, changed in-scope values and unresolved indirection.
+Evidence: `private/nested-slot-lowering-20260922/hex-binding-*-v1.log`. This is a
+source-reader correction, not new application or native-fidelity acceptance.
+To reverse, remove the literal expansion in `react-source-bindings.ts` and
+restore the named refusal while retaining the failing browser example.
+
+## D.129 Inline React retains the CSS surface's owned-host margin reset
+
+**AGENT decision, 2026-09-22: apply the existing intrinsic-margin reset to
+nested owned parts on the inline React surface.** The installed nested-host
+probe generated an `h3` with browser-default 16 px top and bottom margins.
+Those margins shifted its caller slot and compressed its height. The source
+had zero margins, and the CSS-module emitter already reset those same owned
+heading and paragraph elements. The inline emitter reset only component roots.
+
+Inline emission now uses the same `UA_MARGIN_ELEMENTS` rule for nested parts,
+before applying authored token margins. No source component name, schema field,
+scoring threshold or native layout rule changes. Browser regressions compare
+both React surfaces for `h3` and `p`, checking exact heading/slot positions,
+slot height and a nonzero authored token margin. Caller content is not given
+new styles by this rule.
+
+The probe and failing/passing regressions are retained in
+`private/nested-slot-lowering-20260922/host-margin-*.log` and the staged-source
+`private/nested-host-app-intake-20260922/` evidence in the live worktree.
+This correction does not qualify native delivery or the full V1 journey.
+To reverse, remove the nested inline reset and restore the named visual gap;
+retain the browser comparison and regenerate the plugin engine receipt.
