@@ -28,6 +28,7 @@ import {
   ShapeSchema,
   VisibleWhenSchema,
   EventSchema,
+  SelectionSchema,
   TokenRefSchema,
 } from '../../scripts/contract-schema.js';
 
@@ -58,6 +59,7 @@ const NAMED: Array<[AnySchema, string]> = [
   [ShapeSchema as AnySchema, 'Shape'],
   [VisibleWhenSchema as AnySchema, 'VisibleWhen'],
   [EventSchema as AnySchema, 'Event'],
+  [SelectionSchema as AnySchema, 'Selection'],
 ];
 
 export const nameOf = (s: unknown): string | undefined =>
@@ -195,6 +197,7 @@ const ROOTS: Array<[string, AnySchema]> = [
   ['shape', ShapeSchema as AnySchema],
   ['visibleWhen', VisibleWhenSchema as AnySchema],
   ['event', EventSchema as AnySchema],
+  ['selection', SelectionSchema as AnySchema],
 ];
 
 /** Union branch label: literals by value, objects by their first field. */

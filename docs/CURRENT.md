@@ -73,6 +73,13 @@ The declared Switch passes all nine matched-frame pairs (maximum **4.167% white 
 
 The contract records supported properties, anatomy, layout, tokens, content and component references. Readers and emitters use reusable rules; examples exercise those rules or expose a missing one. Runtime conversion requires no AI.
 
+An explicit finite `selection` relationship now generates tab-pattern behavior
+on both React surfaces, including keyed items, controlled inputs, keyboard
+navigation and persistent inactive panels. Application configuration, native
+return of the relationship and an app-delivered interactive Tabs consumer
+remain unfinished. The retained Tabs archive is unchanged; missing identities
+and panel content are not inferred ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
+
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.

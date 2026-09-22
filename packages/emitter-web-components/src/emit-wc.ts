@@ -1608,6 +1608,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
   const refuseMapped = (c: Contract): void => {
     if (checked.has(c.id)) return;
     checked.add(c.id);
+    if (c.selection) throw new Error(`WEB_COMPONENT_SELECTION_UNSUPPORTED:${c.id}: selection behavior is implemented for React`);
     if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
     for (const w of walkAnatomy(c)) {
       if (w.part.component?.initialProps) throw new Error('WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED');

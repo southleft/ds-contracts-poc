@@ -33,6 +33,7 @@ import {
   ShapeSchema,
   VisibleWhenSchema,
   EventSchema,
+  SelectionSchema,
   GridPlacementSchema,
   STYLES_WHEN_ALLOWED,
   REF_OVERRIDE_CHANNELS,
@@ -427,7 +428,7 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           "ts",
           "prop.bindings — rendered from the schema at build time",
         ) +
-        `<p><code>bindings.code.initial</code> declares a separate React initializer for an optional enum state axis with exactly one toggle event. For example, <code>{"prop":"defaultChecked","default":"off"}</code> reads the public <code>defaultChecked</code> input once at mount, using the same typed mapping as <code>checked</code>. Its optional default is a canonical enum key; omission otherwise uses the prop default or stays unset. A supplied controlled value takes precedence, and controlled activations do not change the hidden uncontrolled state. Later initializer changes are ignored. This binding does not add another canvas axis. Initial inputs must not collide with props, slots, events or generated names. Both React emitters implement this declaration; Web Component emission refuses it. Source admission and native round-trip preservation require separate evidence.</p>` +
+        `<p><code>bindings.code.initial</code> declares a separate React initializer for an optional enum state axis with exactly one toggle event or the explicit <code>selection</code> relationship. For example, <code>{"prop":"defaultChecked","default":"off"}</code> reads the public <code>defaultChecked</code> input once at mount, using the same typed mapping as <code>checked</code>. Its optional default is a canonical enum key; omission otherwise uses the prop default or stays unset. A supplied controlled value takes precedence, and controlled activations do not change the hidden uncontrolled state. Later initializer changes are ignored. This binding does not add another canvas axis. Initial inputs must not collide with props, slots, events or generated names. Both React emitters implement this declaration; Web Component emission refuses it. Source admission and native round-trip preservation require separate evidence.</p>` +
         `<p><code>bindings.code.values</code> maps every canonical enum member to its actual React scalar: a string, finite number, boolean or null. For example, <code>{"none": null, "literal-null": "null"}</code> keeps null distinct from the string “null” while Figma uses named variants. The map must cover the enum exactly, with unique typed values; missing or extra keys, duplicate values and negative zero refuse. This mapping is only valid for enum props. Defaults and conditional rules use canonical enum members; generated React accepts the mapped values. Omission remains separate and uses the optional-prop/unset rules below. Versioned canvas metadata carries the typed mapping; labels alone cannot recover it. Typed values do not establish rendered fidelity or behavior.</p>` +
         `<p><code>bindings.figma.unsetValue</code> explicitly reserves a canvas-only option for an omitted, defaultless enum or boolean prop. For example, a code API can declare only <code>secondary | danger</code> while omission draws its base appearance; <code>unsetValue: "(unset)"</code> draws that base as a separate Figma variant without adding a public enum value or a code default. The label must be nonempty, unambiguous and distinct from every mapped public value, and is legal only for an optional defaultless <code>VARIANT</code> enum or boolean. A boolean has three distinct canvas options: omitted, false and true. Explicit version-2 type metadata restores the boolean API; labels such as “Off” and “On” never infer a type. Boolean omission supports token and literal overrides; it does not extend enum-only layout/text/state maps or explicit boolean equality conditions. Readback removes this canvas-only option only when versioned metadata, property definitions, structured variant rows and the exact matrix corroborate it. Invalid, retired or unsupported omission mappings refuse instead of becoming a new public value. Changing its type or omission label, or removing the binding on an existing set requires a fresh lineage; the writer refuses before changing that target and preserves its history. This boundary has offline and real Figma round-trip checks, including a repeat with unchanged node identities. It does not qualify a complete source-to-canvas journey.</p>` +
         refusals("Refusal rules on props and bindings:", [
@@ -1352,6 +1353,24 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
 function eventsPage(): { route: string; html: string } {
   const body = [
     section(
+      "selection", "An explicit item-to-panel relationship", ["generated", "curated"],
+      `<p><code>selection</code> declares a finite tab-pattern relationship. The component name, label text and description never activate it. Each value of an optional enum maps to one distinct panel part; an explicitly keyed repeat supplies the items. Both React emitters generate native-button keyboard navigation, controlled or uncontrolled selection, a typed callback and linked panels whose inactive contents remain mounted. This is an engine rule: application configuration, native return of the relationship and complete Tabs qualification remain unfinished.</p>` +
+      fieldList(SelectionSchema as AnySchema, {
+        pattern: 'The explicit interaction pattern; currently <code>tabs</code>.',
+        valueProp: 'Canonical name of an optional enum with a declared default. Its code binding is the controlled input. An optional <code>bindings.code.initial</code> provides a mount-only initializer; public value remapping is not supported for this declaration.',
+        listPart: 'A named div containing only the repeated item template, with an accessible label.',
+        itemPart: 'The named component repeat. Its <code>keyField</code> identifies each item; live keys must belong to the declared enum.',
+        selected: 'Child enum mapping: <code>prop</code> names the selected appearance property and <code>on</code>/<code>off</code> name distinct canonical values. This input cannot also be supplied by item data or fixed props.',
+        disabledField: 'Optional record boolean mapped to the child’s native disabled input. When declared, every record must supply it. Disabled items are skipped during navigation and cannot become selected.',
+        panels: 'One <code>{value, part, focusable}</code> per enum value. Each distinct div panel declares <code>visibleWhen</code> for exactly that value. Content is supplied by its existing anatomy or declared slot; missing mappings refuse. <code>focusable</code> declares whether the panel participates in keyboard focus.',
+        orientation: 'Horizontal navigation uses Left/Right; vertical navigation uses Up/Down. Home/End select the first/last enabled item.',
+        direction: 'Explicit ltr or rtl; reverses horizontal arrow direction.',
+        activation: 'Automatic activation follows focus; manual activation uses Enter, Space or a pointer click.',
+        bindings: '<code>code.prop</code> names the on-prefixed callback that receives the requested enum value. A controlled consumer can accept or hold the request.',
+      }) +
+      fidelity(`<p>Static HTML and Figma draw finite enum states using the observed records. A requested item that is absent or disabled selects no panel; undefined or empty live arrays render no items. Removing the uncontrolled selection chooses the first enabled item without a user callback. React preserves inactive panel state, while removal from the supplied items unmounts its panel. Figma carries a code-only receipt for keyboard behavior and the mapping; raw recapture does not reconstruct it. Web Components refuse this declaration. No missing panel content or new item relationship is invented.</p>`),
+    ),
+    section(
       "events",
       "The interaction surface, declared",
       ["curated"],
@@ -1400,7 +1419,7 @@ function eventsPage(): { route: string; html: string } {
   ].join("");
   return specPage(
     "events",
-    "Declared callbacks and mechanically generated toggles — the interaction surface both surfaces can verify, with everything richer left honestly to hand-written code.",
+    "Declared callbacks, toggles and explicit finite item-to-panel selection, with surface limits and missing relationships named.",
     body,
   );
 }

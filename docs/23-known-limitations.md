@@ -9779,3 +9779,48 @@ visual fidelity and the complete composed journey remain unqualified.
 **Reversal:** remove the marked baseline plan and read-only observer, restore the
 zero-axis assembly refusal, and update the UI label and these checks together.
 Keep recorded source/native evidence; never infer a baseline for an old archive.
+
+## D.131 Selection behavior requires an explicit item-to-panel relationship
+
+**AGENT decision, 2026-09-22.** An observed row of active and inactive items
+does not establish keyboard behavior, stable identity or ownership of missing
+panel content. Optional `selection` declares a finite tab pattern independently
+of component names: a keyed component repeat, one optional enum for selection,
+a child enum for selected appearance, explicit navigation policy and one panel
+per enum value. Shared validation refuses incomplete or conflicting mappings.
+
+Both React emitters use the same runtime. They generate a controlled value,
+optional mount-only initializer and typed change callback; automatic or manual
+activation; horizontal or vertical navigation with explicit text direction;
+disabled-item skipping; and linked panels. Inactive panels remain mounted.
+Removing an item unmounts its panel; an uncontrolled selection recovers to the
+first enabled item without claiming a user action. A known controlled value
+whose item is absent or disabled selects no panel. Unknown identities refuse.
+
+The child must expose a generated native button without competing handlers or
+nested interactive descendants. Item identities are metadata, not child props.
+The declared selected appearance cannot also be supplied by data. Disabled
+records require an explicit native-disabled mapping and own Boolean fields.
+Generated local bindings cannot shadow a public value alias such as `item`.
+Panels require distinct div hosts, complete value mappings and compatible
+visibility; conflicting attributes, conditional ancestors and unsupported
+component wrappers refuse. Public selection-value remapping is not supported.
+
+Static HTML and native Figma project the declared finite states from the
+observed records. Figma records the relationship and React-only behavior as
+code-only facts; raw native recapture does not reconstruct them. Web Components
+refuse this declaration. Existing unkeyed repeats retain their prior behavior.
+
+Generated React browser checks cover both emitters, including controlled-held
+callbacks, manual RTL navigation, disabled items, active styling, panel state
+retention, component panel hosts and public API aliases. The separate runtime
+checks cover reconciliation and SSR/hydration. These are engine checks, not an
+application journey or independent-family acceptance. Application configuration,
+authenticated native return, actual archive delivery and source-matched consumer
+qualification remain unfinished. The retained Tabs archive is unchanged; its
+missing identities and additional panel contents are not invented.
+
+**Reversal:** remove `selection` and its shared projection/runtime integration,
+restore the named interaction gap, regenerate both schema projections and the
+plugin receipt, and retain the failing and passing private checks. The keyed
+repeat foundation can remain independently. No fidelity threshold changes.

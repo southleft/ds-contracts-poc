@@ -160,6 +160,12 @@ export function omittedCodeBindingConflicts(contract: unknown, aliases: readonly
     if (record(part.parts)) Object.values(part.parts).forEach(walkPart);
   };
   if (record(contract.anatomy)) Object.values(contract.anatomy).forEach(walkPart);
+  if (record(contract.selection)) {
+    const selection = contract.selection;
+    add(codeName(selection));
+    const code = codeName(props.find(p => p.name === selection.valueProp));
+    if (typeof code === 'string') add(`${code}Prop`);
+  }
   for (const event of Array.isArray(contract.events) ? contract.events : []) {
     if (!record(event)) continue;
     add(codeName(event));
@@ -2725,6 +2731,24 @@ export const EventSchema = z.strictObject({
     .optional(),
 });
 
+/** Explicit finite single-selection relationship. Anatomy and enum values
+ * supply the complete item-to-panel mapping; labels never imply identity.
+ * Panels use the same visibleWhen enum for static/native projections. React
+ * keeps inactive panels mounted and supplies the tab-pattern interaction. */
+export const SelectionSchema = z.strictObject({
+  pattern: z.literal('tabs'),
+  valueProp: z.string(),
+  listPart: z.string(),
+  itemPart: z.string(),
+  selected: z.strictObject({ prop: z.string(), on: z.string(), off: z.string() }),
+  disabledField: z.string().optional(),
+  panels: z.array(z.strictObject({ value: z.string().min(1), part: z.string(), focusable: z.boolean() })).min(1),
+  orientation: z.enum(['horizontal', 'vertical']),
+  direction: z.enum(['ltr', 'rtl']),
+  activation: z.enum(['automatic', 'manual']),
+  bindings: z.strictObject({ code: z.strictObject({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }) }),
+});
+
 /** Optional artifact provenance. Old contracts remain valid without it.
  * Cross-field/content hash verification lives at promotion/publication
  * boundaries in core/contract-provenance.ts. */
@@ -2948,6 +2972,7 @@ export const ContractSchema = z.strictObject({
   }),
   props: z.array(PropSchema),
   events: z.array(EventSchema).optional(),
+  selection: SelectionSchema.optional(),
   states: z.array(z.enum(CONTRACT_STATES)).default([]),
   /** v16 spellings — REFUSED BY NAME since schema 17 (see LEGACY_V16 and
    *  `bindings` below). Declared as tombstones rather than left to the
@@ -3007,10 +3032,12 @@ export const ContractSchema = z.strictObject({
     const initial = prop.bindings.code.initial!;
     const values = typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
     const toggles = c.events?.filter(e => e.toggles?.prop === prop.name) ?? [];
-    if (!values || toggles.length !== 1 || toggles[0]?.toggles?.between[0] === toggles[0]?.toggles?.between[1] || toggles[0]?.toggles?.between.some(value => !values?.includes(value)) || prop.required || !isSupportedOmittedCodeBinding(prop.bindings.code.prop) ||
+    const selects = c.selection?.valueProp === prop.name;
+    const hasController = selects ? toggles.length === 0 : toggles.length === 1 && toggles[0]?.toggles?.between[0] !== toggles[0]?.toggles?.between[1] && !toggles[0]?.toggles?.between.some(value => !values?.includes(value));
+    if (!values || !hasController || prop.required || !isSupportedOmittedCodeBinding(prop.bindings.code.prop) ||
         (initial.default !== undefined && !values.includes(initial.default)) ||
         (initial.default !== undefined && prop.default !== undefined && initial.default !== prop.default))
-      ctx.addIssue({code:'custom',path:['props',c.props.indexOf(prop),'bindings','code','initial'],message:'initial code binding requires one optional enum toggle and a valid, consistent canonical default'});
+      ctx.addIssue({code:'custom',path:['props',c.props.indexOf(prop),'bindings','code','initial'],message:'initial code binding requires one optional enum toggle or selection and a valid, consistent canonical default'});
   }
   for (const alias of omittedCodeBindingConflicts(c, initialProps.map(p => p.bindings.code.initial!.prop)))
     ctx.addIssue({code:'custom',path:['props'],message:`initial code binding "${alias}" collides with another prop, slot, event or generated binding`});

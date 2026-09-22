@@ -50,6 +50,7 @@ import {
 import { contractApiNames } from './prop-collision.js';
 import { ELEMENT_META } from './elements.js';
 import {jointTokenTableErrors} from './joint-tokens.js';
+import {selectionErrors} from './selection.js';
 
 // ---------------------------------------------------------------------------
 // Contract-level validation (beyond the Zod schema)
@@ -100,6 +101,7 @@ export function validateContract(
   iconAssets: Map<string, string>,
 ) {
   errors.push(...jointTokenTableErrors(contract));
+  errors.push(...selectionErrors(contract, byId));
   for (const prop of contract.props) if (prop.bindings.code.values) {
     const parsed = PropSchema.safeParse(prop);
     if (!parsed.success) errors.push(`${contract.id}: CODE_VALUES_INVALID:${prop.name}: ${parsed.error.message}`);

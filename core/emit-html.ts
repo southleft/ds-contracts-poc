@@ -1,6 +1,7 @@
 import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
+import {selectedSampleKey} from '../packages/core/src/selection.js';
 /**
  * Contract → static HTML + CSS — a pure emitter over the SAME contract
  * semantics the React generator renders, for surfaces with no build step
@@ -1079,6 +1080,10 @@ function renderComponentHtml(
 
   const renderPart = (name: string, part: Part, pad: string, parentEl = 'div'): string => {
     if (!visible(part)) return '';
+    const selection = contract.selection;
+    const selected = selection ? selectedSampleKey(contract, propValue(selection.valueProp)) : undefined;
+    const panel = selection?.panels.find(panel => panel.part === name);
+    if (panel && panel.value !== selected) return '';
     const cls = `${k}__${name}`;
     if (part.shape?.kind === 'stroked-path') return `${pad}<span class="${cls}" aria-hidden="true">${strokedPathSvg(part.shape)}</span>`;
     // Content-model honesty: HTML parsers drop anything but <option>/<optgroup>
@@ -1131,6 +1136,8 @@ function renderComponentHtml(
             if (depProp?.bindings.code.prop === 'children') { itemText = String(v); continue; }
             depState.subst[field] = String(v);
           }
+          if (selection?.itemPart === name) depState.subst[selection.selected.prop] =
+            rec[part.repeat!.keyField!] === selected ? selection.selected.on : selection.selected.off;
           return renderComponentHtml(dep, ctx, depState, pad, itemText, hasComponentGrow(part) ? cls : undefined);
         })
         .join('\n');

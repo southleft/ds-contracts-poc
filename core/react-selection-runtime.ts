@@ -1,4 +1,4 @@
-/** Selection runtime foundation; contract/emitter integration is not yet wired.
+/** Shared runtime for explicit contract selection on both React surfaces.
  * No component name or description is interpreted as behavior.
  * Keep the runtime as source so both React emitters can include these same bytes
  * without depending on the build tool's Function#toString transformation. */
@@ -144,7 +144,7 @@ export function useSingleSelection(options: SelectionOptions) {
     };
   };
   return {
-    selected, itemProps, panelProps,
+    selected, itemProps, panelProps, has: (key: string) => all.has(key),
     listProps: { role: 'tablist', 'aria-orientation': orientation, dir: direction } as const,
   };
 }
