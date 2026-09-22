@@ -9319,10 +9319,11 @@ new one: all 302 main records, 100 main images, both caller records and images,
 and 180 prior evidence files remain unchanged. With the companion closed, the
 restored `New` text was inspected on the unobstructed canvas. After a restart,
 the app visibly reports the combined correction as verified for current inputs
-and both callers. The newer caller's creation row still reports unavailable
-source evidence after its birth update becomes historical; its current
-readback is carried by the combined correction. The next real source update
-across both callers and broader recovery remain to be verified. An unchanged
+and both callers. The newer caller's creation row initially reported unavailable
+source evidence after its birth update became historical. Caller rows now name
+their current parent correction only when that settled, current, unsuperseded
+verification includes the caller. Original creation exports remain historical;
+image presence alone never establishes current verification. An unchanged
 compiler review through the app now reuses this verified correction and leaves
 all 1,535 retained journal files unchanged, with no new proposal, operation or
 native write. Private evidence is
@@ -9330,8 +9331,23 @@ native write. Private evidence is
 `combined-callers-canvas-v1.json`, `combined-callers-app-v1.json` and
 `combined-repeat-verified-v1.json`.
 
-The app reports 49.92 px source versus 51.02 px native width. The combined no-op
-does not qualify fidelity, the subsequent update lifecycle or V1.
+A subsequent real source update `12873186…` now completes preflight, an explicit
+begin, 11 intended color assignments and independent readback across both callers.
+All 302 main records, variables, graph receipt and 100 main images restore the
+preserved purple baseline. Both caller images match the original purple pixels;
+the new caller retains its own variables and every non-paint record. Comparing
+against the preceding blue read identifies only resolved paint changes: 20 main
+nodes and two nodes in each caller, with all node identities retained. All 1,535
+earlier files stay byte-identical. The application shows current verification,
+and both purple instances were inspected with the companion closed. Evidence:
+`combined-purple-verified-v2.json`, `combined-purple-changed-nodes-v1.json` and
+`combined-purple-visible-v1.json` in the same private directory.
+
+The journal spans 684.06 seconds from preflight dispatch to final receipt,
+excluding preparation, pairing and terminal UI refresh. This is an observed
+operation duration, not a controlled performance comparison. Broader recovery
+and usable performance remain open. The app still reports 49.92 px source versus
+51.02 px native width; the verified color update does not qualify fidelity or V1.
 
 To reverse, refuse post-succession caller preparation and preserve existing
 version-4 plans as historical evidence. Do not replace the current source with

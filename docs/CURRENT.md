@@ -166,8 +166,13 @@ Native text editing and visible restoration were demonstrated. A combined
 no-op now independently verifies both callers, including the restored text,
 with all main and caller records and images unchanged. An unchanged app review
 reuses that correction without adding or changing any of the 1,535 retained
-journal files. The next real source change across both callers and broader
-recovery remain unfinished. The comparison
+journal files. The next real source change now also passes: 11 color assignments
+restore all 302 main records and 100 main images to the preserved purple baseline;
+both callers match the original purple pixels, with only intended paint changes
+and all 1,535 earlier files preserved. The application reports current verification,
+and both instances were inspected with the companion closed. This run took 11.4
+minutes from preflight dispatch to final receipt, excluding preparation and UI
+refresh. Broader recovery and usable performance remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
 
 A separate foundation plans template token changes and verifies current
