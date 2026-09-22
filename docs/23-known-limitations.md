@@ -9826,8 +9826,9 @@ this declaration. Existing unkeyed repeats retain their prior behavior.
 Production writer/capture checks on a native mock, REST metadata checks and
 returned-component browser checks demonstrate this bounded implementation.
 Both React emitters retain the declared initial value, keyboard callback and
-stable IDs after native item reordering. These are not live Figma evidence:
-the actual application-to-native-to-installed-consumer journey remains open.
+stable IDs after native item reordering. These checks are not live Figma evidence. A separate bounded live return trial
+is now recorded in [D.132](#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return);
+clean end-user delivery remains open.
 
 Generated React browser checks cover both emitters, including controlled-held
 callbacks, manual RTL navigation, disabled items, active styling, panel state
@@ -9863,7 +9864,8 @@ Evidence: `private/selection-app-20260922/` in the live application worktree,
 including the original inputs, configured contract, visible review, archive
 hash, isolated install, browser trials and screenshots. This authored rehearsal
 does not qualify the original Tabs, an independent family, source-matched
-fidelity or native return. Those journeys remain unfinished. The retained Tabs
+fidelity. Its later bounded native return is recorded in D.132; complete
+journeys remain unfinished. The retained Tabs
 archive is unchanged; its missing identities and additional panel contents are
 not invented.
 
@@ -9873,3 +9875,51 @@ the Selection setup view/helper, then remove `selection` and its shared projecti
 restore the named interaction gap, regenerate both schema projections and the
 plugin receipt, and retain the failing and passing private checks. The keyed
 repeat foundation can remain independently. No fidelity threshold changes.
+
+
+## D.132 Native nested exposure requires an actual control; text identities survive return
+
+**AGENT decision — 2026-09-22.** A live authored composition failed when the
+writer exposed a static nested instance. Figma permits exposure only when an
+instance has exposed nested instances or descendants with component-property
+references. Variant axes and unused definitions alone do not qualify. The
+shared writer now checks both ownership and this native eligibility before
+exposing controls, including create and both amend paths. It does not cross
+unexposed nested-instance boundaries. Static instances remain editable on the
+canvas; real and transitively exposed controls remain available.
+
+The failed script left an incomplete component. A plugin exception is not an
+atomic rollback. The plugin now states this explicitly and directs the user to
+preserve the report and inspect the canvas before retrying. The observed partial
+was retained on a separate failure page; it was not deleted or represented as a
+successful output.
+
+The complete native-family return exposed another shared defect: the reader
+renamed a stamped text property to `children` solely because its only text layer
+was named `label`. That broke callers using the captured property name. A
+stamped non-`children` property now retains its name and text part. This preserves
+its whole-pixel text-box fact too. Unstamped and stamped-`children` hoisting keep
+their existing behavior. This rule does not recover an unrecorded code alias.
+
+The actual app-exported scripts created three editable native components in the
+authorized evaluation file. Canonical capture, pasted into the application,
+returned all three contracts; its archive installed in an isolated React
+consumer and passed eight live interaction trials. Native structure and
+unobstructed canvas screenshots are recorded. The trial required manual script
+and capture transfers. The plugin's Send surface still refuses this new parent
+because its child contracts are absent from the plugin's baked corpus. This is
+a bounded return demonstration, not clean end-user delivery, original Tabs,
+independent-family qualification, visual fidelity, or complete V1 acceptance.
+
+Evidence: `private/selection-live-return-20260922/` in the live worktree and
+`private/selection-live-exposure-20260922/` in the selection worktree. Native
+creation and the failed partial are preserved. The regression reproduces the
+full-family return with no original dependency contracts. Exposure probes cover
+static, variant-only, actual and transitive controls, creation, amendment and
+unchanged reruns. No scoring limits or frozen evidence changed.
+
+**Reversal:** revert the eligibility guard and matching native-mock assertion
+together, revert the stamped-label hoist condition, regenerate Figma scripts,
+lowering citations and the plugin receipt, and retain both failing and passing
+evidence. Restore a named native refusal rather than claiming unsupported
+exposure succeeds. Do not restore the false atomic-rollback message.

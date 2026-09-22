@@ -91,6 +91,12 @@ the exact displayed archive endpoint supplied the installed bytes. This is a
 bounded application rehearsal, not original Tabs, independent-family or native
 return qualification ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
 
+The returned native family now also installs from an app-generated archive
+and passes the same eight interaction trials in a clean consumer. Its native
+structure and unobstructed canvas were inspected. Manual script/capture transfers
+and a Send dependency refusal remain; visual fidelity and complete V1 acceptance
+are unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return)).
+
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.

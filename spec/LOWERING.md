@@ -97,7 +97,7 @@ The family the owner asked for by name, and the excavation changed the shape of 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.margin-auto-unparsed` | `wall` | `emit-figma-script.ts:2672` | margin: auto — the standard "push to the far edge" and "centre in the container" idiom → nothing — it is never lowered to SPACE_BETWEEN, to MAX counter-axis alignment, or to a spacer | a named refusal — `auto` margins must be REFUSED by name, never lowered to a used pixel value | **none** | `untested` |
-| `emit.margin-box-absent-on-amend` | `proposed` | `emit-figma-script.ts:9498` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → nothing — no margin box is built on this path | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
+| `emit.margin-box-absent-on-amend` | `proposed` | `emit-figma-script.ts:9508` | margin-* on a direct child of a STANDALONE component’s root, amended rather than created → nothing — no margin box is built on this path | the same lowering the create path performs — create and amend must agree | **none** | `untested` |
 | `emit.margin-box-skipped-refused` | `implemented` | `emit-figma-script.ts:6293` | margin-* on a child the margin box provably cannot wrap → nothing — the margins are stripped from the spec before the runtime sees them | a named refusal (FC-EMIT-MARGIN-BOX-SKIPPED) | `emit-facts` | `named` |
 | `emit.margin-box-wrapper` | `implemented` | `emit-figma-script.ts:6803` | residual margin-* on an in-flow child that no gap or padding lowering consumed → a synthetic FRAME named "<child> (margin box)", fills [], clipsContent false, sized w+l+r × h+t+b, child placed at (l, t) | gap or padding on the parent, with any residual REFUSED by name — never a synthetic node | **none** | `named` |
 | `emit.margin-collapse-summed-not-maxed` | `proposed` | `emit-figma-script.ts:6733` | adjoining vertical margins between block-flow siblings (margin-bottom of one, margin-top of the next) → itemSpacing = t + l | gap on the parent, equal to the COLLAPSED value | **none** | `untested` |
@@ -721,7 +721,7 @@ Forward-only decisions with no CSS source at all. Two rules that look identical 
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.placement-host-section-origin-pinned` | `implemented` | `emit-figma-script.ts:8583` | n/a — canvas placement has no CSS source; this is a pure forward-only structure decision → a NEW host section is placed at x = 0, y = (max bottom edge of the page’s existing children) + a 200px gutter; an EXISTING one is re-fitted in size and keeps the coordinates it already has | position on create; never move an existing section on amend | **none** | `untested` |
-| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:9379` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
+| `emit.placement-variant-cells-gridded` | `implemented` | `emit-figma-script.ts:9389` | n/a — the arrangement of variant cells within a component set → each variant cell placed on a padded grid derived from accumulated column and row extents | variant cells laid out on a deterministic grid | **none** | `untested` |
 
 #### `emit.placement-host-section-origin-pinned`
 
@@ -752,7 +752,7 @@ Rules that exist purely to work around platform behaviour — the kind of knowle
 | rule | status | site | CSS construct → Figma | canonical | receipt | round trip |
 |---|---|---|---|---|---|---|
 | `emit.slot-birth-box-dissolved` | `implemented` | `emit-figma-script.ts:896` | an empty container that should size to its content → a FIXED → resize(1) → HUG round-trip, which forces the relayout a childless node never gets | an empty box measures its content, not its birth box | `emit-facts` | `untested` |
-| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:8945` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
+| `emit.slot-empty-fill-cleared` | `implemented` | `emit-figma-script.ts:8955` | a slot with no declared background → fills cleared, so the slot renders as Figma’s own empty-slot affordance | an undeclared background is no background | **none** | `untested` |
 | `emit.slot-grid-refused` | `implemented` | `emit-figma-script.ts:5409` | display:grid on a slot part → nothing — refused by name, quoting the platform’s own error | a named refusal | **none** | `untested` |
 
 #### `emit.slot-birth-box-dissolved`
@@ -841,7 +841,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 |---|---|---|---|---|---|---|
 | `anatomy.svg-host-plan-first-wins` | `implemented` | `anatomy.ts:1995` | a second (or third) <svg> under a host element that already has an svg plan → nothing for the later svgs — only the first becomes an icon | one icon per host, chosen deliberately, with the others refused by name | **none** | `untested` |
 | `emit.svg-multipaint-token-identity-lost` | `proposed` | `emit-figma-script.ts:4752` | fill / stroke colour on an icon whose markup carries MORE THAN ONE paint → the imported SVG keeps baked hex paints, bound to nothing | each distinct paint bound to the token that produced it, or a named refusal | **none** | `untested` |
-| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:8816` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
+| `emit.svg-rotation-negated` | `implemented` | `emit-figma-script.ts:8826` | transform: rotate(Ndeg) on an icon part → node.rotation = -N | rotate(N) lowers to rotation -N | `emit-facts` | `untested` |
 
 #### `anatomy.svg-host-plan-first-wins`
 

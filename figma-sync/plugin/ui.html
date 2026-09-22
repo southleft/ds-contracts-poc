@@ -1614,7 +1614,7 @@
         ? (changed === 0 && unchanged > 0
             ? 'Re-ran: 0 changes — your canvas already matches (' + unchanged + ' component(s) checked; nothing moved, nothing duplicated).'
             : 'Done — ' + built.length + ' component(s) synced. The last one is selected on the canvas.')
-        : 'Stopped at the first failure — the report above names it. A thrown script commits nothing (Figma runs them atomically).';
+        : 'Stopped at the first failure — the report above names it. Changes made before the error may remain. Inspect this file before retrying.';
       refreshInventory();
     });
   }
@@ -1951,7 +1951,7 @@
   }
 
   function showPasteResult(msg) {
-    var box = resultBox('paste-result', msg.ok, msg.ok ? 'Script finished — report:' : 'Script threw — nothing was committed.');
+    var box = resultBox('paste-result', msg.ok, msg.ok ? 'Script finished — report:' : 'Script threw — inspect this file before retrying.');
     if (msg.ok) {
       // Plain words about WHERE the component is now — the report JSON below
       // is the receipt, this line is the story.
@@ -1997,7 +1997,7 @@
       var err = document.createElement('pre');
       err.textContent = msg.error + (msg.stack ? '\n\n' + msg.stack : '');
       box.appendChild(err);
-      addMeta(box, 'Scripts are atomic on throw by Figma’s design — a failed run does not leave a half-synced file. Fix or regenerate the script and paste it again.');
+      addMeta(box, 'Changes made before the error may remain, including incomplete components. Inspect the canvas and preserve the error report before repairing the affected nodes or retrying.');
     }
   }
 
