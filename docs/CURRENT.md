@@ -47,6 +47,13 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
 
+Newly prepared React library downloads retain their validated input and archive
+on local disk. A saved download URL survives a local server restart, and exact
+repeat preparation reuses its retained artifact. Changed, incomplete or unsafe
+artifact files refuse instead of being silently replaced. This improves download
+recovery; it does not restore the displayed link or imported workspace context
+after a browser reload, recover older in-memory links, or qualify native return.
+
 The corrected ordinary-root caller workflow now completes through the app and
 Sync Runner: the retained Button main produces a new current-source comparison,
 and independent readback preserves its 191 parent nodes and 122 variables.
