@@ -272,7 +272,7 @@ export interface NativeOperationJobsOptions {
     /** The sealed source observation an existing operation follows today. A
      * recorded succession may replace the creation pin; absent, it is the pin. */
     effectiveSource?(id: string, original: NativeSourcePin): NativeSourcePin;
-    updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
+    updatedObservation?(id: string, purpose?: 'caller'): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
       receipt: import('../core/native-source-observation.js').NativeSourceReadback; parentUpdate?:ReactComparisonParentUpdate } | undefined;
     prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
     buildComponent(request: ReactNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
@@ -1796,6 +1796,31 @@ export function createNativeOperationJobs(
           loaded.state.pending) fail('react-update-parent-context-unavailable');
       return loaded.fingerprint;
     },
+    /** Authenticate an ordinary root caller's birth against the complete
+     * current journals. Historical callers stay intact; an existing operation
+     * can resume only under its own exact verified parent revision. Template
+     * callers additionally require the full inventory checked below. */
+    reactRootComparisonBirth(parentId: string, birth: ReactComparisonBirth) {
+      const parent=load(parentId);
+      if(!isReactNativeRequest(parent.header.request)||parent.header.request.version!==1||!isReactPlan(parent.plan)||
+          templateGraphPlan(parent.plan)||parent.state.pending||!parent.state.imageReadback||
+          !['component-structure-observed','component-observation-refused'].includes(parent.state.phase))
+        fail('react-parent-observation-required');
+      if(!birth||Object.keys(birth).sort().join(',')!=='operationId,parentUpdate'||!UUID.test(birth.operationId)||
+          birth.operationId===parentId||!isReactComparisonParentUpdate(birth.parentUpdate))fail('react-caller-birth-invalid');
+      let caller: Loaded|undefined;
+      if(present(dir(birth.operationId))) {
+        caller=load(birth.operationId);
+        const request=caller.header.request;
+        if(!isReactComparisonRequest(request)||request.version!==4||request.parentOperationId!==parentId||
+            !same(request.parentUpdate,birth.parentUpdate)||!isComparisonPlan(caller.plan))fail('react-caller-birth-invalid');
+        const comparison=caller.plan.plan.comparison,receipt=structuredClone(comparison.receipt);delete receipt.images;
+        if(revisionOf({input:comparison.parent,receipt})!==birth.parentUpdate.observationRevision)
+          fail('react-caller-birth-parent-changed');
+      }
+      if(loadFresh(parentId).fingerprint!==parent.fingerprint||
+          (caller&&loadFresh(birth.operationId).fingerprint!==caller.fingerprint))fail('react-caller-birth-evidence-changed');
+    },
     /** Current, independently observed caller journals. These records preserve
      * their original parent revision; an update chain must reconcile it before
      * writing. Source recompilation is intentionally separate: a retained
@@ -1930,9 +1955,9 @@ export function createNativeOperationJobs(
       if(!isReactNativeRequest(loaded.header.request)||loaded.header.request.version!==1||!isReactPlan(loaded.plan)||
           loaded.state.pending||!loaded.state.imageReadback||!['component-structure-observed','component-observation-refused'].includes(loaded.state.phase))
         fail('react-parent-observation-required');
-      const updated=options.react?.updatedObservation?.(id);
+      const updated=options.react?.updatedObservation?.(id,'caller');
       if(updated) {
-        if(!updated.input.templateGraph||!isReactComparisonParentUpdate(updated.parentUpdate))fail('react-updated-caller-unqualified');
+        if(!updated.input.component.rootSlot||!isReactComparisonParentUpdate(updated.parentUpdate))fail('react-updated-caller-unqualified');
         return structuredClone({...updated,request:effectiveSource(id,loaded.header.request) as ReactNativeRequest});
       }
       if(loaded.state.phase!=='component-structure-observed')fail('react-parent-observation-required');

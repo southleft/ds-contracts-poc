@@ -28,7 +28,7 @@ export interface NativeContractComparisonReference {
 export interface NativeContractComparisonInput {
   parent: NativeContractObservationInput;
   receipt: NativeSourceReadback;
-  /** Host-authenticated current source after a verified template update.
+  /** Host-authenticated current source after a verified root correction.
    * The retained main keeps its historical source projection. This proof is
    * re-derived by the host; it is never accepted from a caller HTTP payload. */
   sourceSuccession?: {
@@ -70,7 +70,10 @@ export function prepareNativeContractComparison(contract: Contract, component: C
         typeof succession.proposalId !== 'string' || !/^[a-f0-9]{64}$/.test(succession.proposalId) ||
         succession.observationRevision !== revisionOf({ input: input.parent, receipt }) ||
         canonicalJson(succession.source) !== canonicalJson(source) ||
-        !input.parent.templateGraph || !input.parent.projection.rootTextTemplate || !input.rootText || input.instances?.length)
+        !input.parent.component.rootSlot ||
+        (input.parent.templateGraph || input.parent.projection.rootTextTemplate
+          ? !input.parent.templateGraph || !input.parent.projection.rootTextTemplate || !input.rootText || !!input.instances?.length
+          : !!input.rootText))
       fail('source-succession-unverified');
   }
   if (!revision.test(source.revision) || !revision.test(source.evidenceRevision) ||

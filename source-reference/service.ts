@@ -176,7 +176,7 @@ export function createReferenceService(
       },
       react: {
         effectiveSource: (id, original) => nativeSuccessions.effective(id, original),
-        updatedObservation: id => nativeUpdateJobs.verifiedForParent(id),
+        updatedObservation: (id,purpose) => purpose==='caller' ? nativeUpdateJobs.verifiedForCaller(id) : nativeUpdateJobs.verifiedForParent(id),
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
           preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
@@ -799,6 +799,7 @@ export function createReferenceService(
       : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source,
         baseline.source.version===1?baseline.input.component.contractId:undefined), operation: baseline.input.operation });
     const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
+    if(birth&&!templateGraph)nativeJobs.reactRootComparisonBirth(id,birth);
     const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins,birth):undefined;
     return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {
       before: baseline.input, baseline: baseline.receipt,

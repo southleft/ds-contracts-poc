@@ -362,7 +362,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(tips.length!==1)fail('effective-observation-unavailable');
     const l=tips[0];
     if(birth&&(!UUID.test(birth.operationId)||birth.operationId===parentId||!isReactComparisonParentUpdate(birth.parentUpdate)||
-      l.plan.kind!=='native-contract-template-value-update'||birth.parentUpdate.proposalId!==l.header.proposalId))fail('caller-birth-parent-changed');
+      l.plan.kind==='native-contract-token-allocation-update'||birth.parentUpdate.proposalId!==l.header.proposalId))fail('caller-birth-parent-changed');
     authenticateObservation(l,birth);
     if(!nativeContractUpdateMatches(l.plan,l.state.observation,true))fail('effective-observation-invalid');
     if(birth&&parentObservation(l).parentUpdate.observationRevision!==birth.parentUpdate.observationRevision)fail('caller-birth-parent-changed');
@@ -492,6 +492,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         const l=verifiedTip(parentId);if(!l)return undefined;
         return parentObservation(l);
       });
+    },
+    verifiedForCaller(parentId: string) {
+      const l=verifiedTip(parentId);if(!l)return undefined;
+      // Allocating missing variables does not establish that the component
+      // agrees with the current compiler. Its follow-up correction must settle.
+      if(l.plan.kind==='native-contract-token-allocation-update')fail('compiler-review-required-after-token-allocation');
+      return parentObservation(l);
     },
     verifiedForNewConsumer(parentId:string,operationId:string,parentUpdate:ReactComparisonParentUpdate) {
       const l=verifiedTip(parentId,{operationId,parentUpdate});

@@ -1,6 +1,6 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-09-22 · V1 is not complete.**
+**Public project status · updated 2026-09-23 · V1 is not complete.**
 
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
@@ -46,6 +46,15 @@ The complete loop remains unqualified. Recorded matched-frame captures made with
 | Delivery | The local app produces React archives, records native operations and shows original/native comparisons. Installation and workflow guides name fonts, CSS Modules and current limitations. | Release qualification remains open: the complete cohort, clean consumer journeys, update and recovery proofs, and current installation evidence are not all demonstrated. Tagging, publishing and deployment have not happened. |
 
 **No complete journey cohort has met every V1 criterion.** Passing individual images or engine checks does not establish the full product outcome. The ledger below records the denominators, failures and evidence.
+
+The corrected ordinary-root caller workflow now completes through the app and
+Sync Runner: the retained Button main produces a new current-source comparison,
+and independent readback preserves its 191 parent nodes and 122 variables.
+The remaining exact-size failure is visible in the application: React measures
+115.8125 × 36 px; native Figma measures 116 × 36 px. This closes the blocked
+caller-creation step, not the Button fidelity requirement. Earlier comparison
+records remain intact. See [caller comparisons after a root correction](../source-reference/README.md#caller-comparisons-after-a-root-correction)
+for steps, authority checks and the measured limit.
 
 The retained Checkbox's fresh source observation exposed four newly requested
 number tokens. The live app added them to the retained collection: independent
