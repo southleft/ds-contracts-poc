@@ -4,8 +4,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { prepareNativeContractUpdate, emitNativeContractUpdateScript, nativeContractUpdateMatches } from './native-contract-update.js';
 
-test('fixed root size repair preserves native identity, centered slot and untouched sizing; repeat and rollback', async () => {
+test('zero root size repair preserves native identity, centered slot and untouched sizing; repeat and rollback', async () => {
   const f = await fixture(), ids = f.figma.root.findAll(() => true).map((n:any) => n.id), width=f.root.width;
+  assert.deepEqual([width,f.root.height,f.slot.width,f.slot.height],[0,0,0,0]);
   assert.equal(f.plan.kind, 'native-contract-root-size-update');
   const preflight=await f.run(emitNativeContractUpdateScript(f.plan,'apply',true));
   assert.equal(preflight.status,'preflight-observed',JSON.stringify(preflight.problems));
@@ -18,6 +19,7 @@ test('fixed root size repair preserves native identity, centered slot and untouc
   const repeat=await f.run(emitNativeContractUpdateScript(f.plan));assert.equal(repeat.status,'no-op');
   const rollback=await f.run(emitNativeContractUpdateScript(f.plan,'rollback'));assert.equal(rollback.status,'updated',JSON.stringify(rollback.problems));
   assert.equal(nativeContractUpdateMatches(f.plan,rollback.observation),true);
+  assert.deepEqual([f.root.width,f.root.height,f.slot.width,f.slot.height],[0,0,0,0]);
 });
 test('size repair refuses changed layout, manual geometry and populated content', async () => {
   const f=await fixture();
@@ -33,19 +35,28 @@ test('size repair refuses changed layout, manual geometry and populated content'
   assert.throws(()=>prepareNativeContractUpdate(content),/baseline-required/);
 });
 test('size repair rolls back a failed postcondition without undoing an unrelated edit', async () => {
-  const f=await fixture(), oldHeight=f.root.height, resize=f.root.resize.bind(f.root);
-  f.root.resize=(width:number,height:number)=>{resize(width,height);if(height===36)f.root.name='manual edit';};
+  const f=await fixture(), oldHeight=f.root.height, resize=f.root.resizeWithoutConstraints.bind(f.root);
+  f.root.resizeWithoutConstraints=(width:number,height:number)=>{resize(width,height);if(height===36)f.root.name='manual edit';};
   const result=await f.run(emitNativeContractUpdateScript(f.plan));
   assert.equal(result.status,'rolled-back',JSON.stringify(result.problems));assert.equal(f.root.height,oldHeight);
   assert.equal(f.root.name,'manual edit');
 });
 
 test('size repair restores a resize that throws after changing geometry', async () => {
-  const f=await fixture(), oldHeight=f.root.height, resize=f.root.resize.bind(f.root);
-  f.root.resize=(width:number,height:number)=>{resize(width,height);if(height===36)throw Error('native resize failure');};
+  const f=await fixture(), oldHeight=f.root.height, resize=f.root.resizeWithoutConstraints.bind(f.root);
+  f.root.resizeWithoutConstraints=(width:number,height:number)=>{resize(width,height);if(height===36)throw Error('native resize failure');};
   const result=await f.run(emitNativeContractUpdateScript(f.plan));
   assert.equal(result.status,'rolled-back',JSON.stringify(result));
   assert.equal(f.root.height,oldHeight);assert.equal(f.root.layoutSizingVertical,'HUG');
+});
+
+test('empty baselines do not admit nonpositive or nonfinite target sizes', async () => {
+  const f=await fixture();
+  for(const height of [0,-1,NaN,Infinity]) {
+    const input=structuredClone(f.input);input.desired.component.variants[0].spec.lits={height};
+    assert.throws(()=>prepareNativeContractUpdate(input),Number.isFinite(height)
+      ? /native-update-size-target-unqualified/ : /native-update-channel-change-unsupported/);
+  }
 });
 
 test('both literal axes repair together and preserve centered empty content', async () => {

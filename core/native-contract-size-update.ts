@@ -14,6 +14,7 @@ export interface NativeRootSizeUpdatePlan extends Omit<NativeOpacityUpdatePlan, 
 }
 const equal = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 const positive = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n > 0;
+const nonnegative = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n) && n >= 0;
 const clean = (receipt: NativeSourceReadback) => { const copy = structuredClone(receipt); delete copy.images; return copy; };
 function normalize(plan: NativeRootSizeUpdatePlan, receipt: unknown, complete: boolean) {
   const result = clean(receipt as NativeSourceReadback);
@@ -84,7 +85,7 @@ export function prepareNativeRootSizeUpdate(input: NativeContractUpdateInput,
       if (binding || root.values.boundVariables?.[d.channel] ||
           !['HUG', 'FIXED'].includes(root.values['layoutSizing' + axis]) ||
           !['AUTO', 'FIXED'].includes(root.values[mode]) || slot.values['layoutSizing' + axis] === 'FILL' ||
-          !['MIN', 'MAX', 'CENTER'].includes(alignment) || !positive(root.values[d.channel]) || !positive(slot.values[d.channel]) ||
+          !['MIN', 'MAX', 'CENTER'].includes(alignment) || !nonnegative(root.values[d.channel]) || !nonnegative(slot.values[d.channel]) ||
           !Number.isFinite(slot.values[position]) || !Array.isArray(slot.values.relativeTransform))
         throw Error('native-update-size-layout-unqualified');
       const sides = d.channel === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
@@ -114,6 +115,13 @@ export function prepareNativeRootSizeUpdate(input: NativeContractUpdateInput,
 
 export function emitNativeRootSizeUpdateScript(plan: NativeRootSizeUpdatePlan, direction: 'apply' | 'rollback', readOnly: boolean) {
   const expected = direction === 'apply' ? plan.after : plan.before;
+  // Ordinary resize clamps zero to a nonzero minimum. Preserve exact empty
+  // geometry on apply AND rollback, including an untouched zero axis. Keep
+  // the emitted bytes of existing positive-size plans unchanged.
+  const preservesZero = plan.transitions.some(t => {
+    const root = plan.baseline.nodes?.find(n => n.id === t.nodeId);
+    return root?.values.width === 0 || root?.values.height === 0;
+  });
   return `const plan = ${JSON.stringify(plan)}, direction = ${JSON.stringify(direction)}, readOnly = ${readOnly};
 const out = { version: 1, kind: 'native-contract-update-result', direction, status: 'refused', changes: [], problems: [], acceptedContract: null, nativeQualification: 'unqualified' };
 const canonical = value => JSON.stringify((function sort(v) { if (Array.isArray(v)) return v.map(sort); if (v && typeof v === 'object') return Object.fromEntries(Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => [k, sort(v[k])])); return v; })(value));
@@ -121,7 +129,7 @@ const clean = value => { const copy = JSON.parse(JSON.stringify(value)); delete 
 const has = (node, values) => Object.entries(values).every(([k,v]) => canonical(node[k]) === canonical(v));
 const attempted = [];
 function assign(node, values) {
-  node.resize(values.width === undefined ? node.width : values.width, values.height === undefined ? node.height : values.height);
+  node.${preservesZero ? 'resizeWithoutConstraints' : 'resize'}(values.width === undefined ? node.width : values.width, values.height === undefined ? node.height : values.height);
   for (const key of ['primaryAxisSizingMode','counterAxisSizingMode']) if(values[key]!==undefined)node[key]=values[key];
   for (const axis of ['Horizontal','Vertical']) if (values['layoutSizing'+axis] !== undefined) node['layoutSizing'+axis] = values['layoutSizing'+axis];
   // resize may fix the untouched axis too; restore its original sizing mode.
