@@ -215,6 +215,19 @@ minutes from preflight dispatch to final receipt, excluding preparation and UI
 refresh. Broader recovery and usable performance remain unfinished. The comparison
 still measures 49.92 px source versus 51.02 px native width ([D.115](23-known-limitations.md#d115-caller-source-succession-preserves-the-mains-original-provenance)).
 
+A separate synchronous-failure proof now interrupts a template color update
+after two actual assignments. The guarded writer restores both values; a
+separate read confirms the original 302 main records, 100 images and both callers.
+The app closes the failed attempt and requires an explicit fresh preflight. The
+production companion then succeeds under a new write claim, and a reviewed
+reverse update restores the complete original native observations and images
+and all four source files. All 2,185 earlier evidence files remain unchanged.
+This uses a separately pinned test companion to inject the error; it does not
+qualify spontaneous API failures, OS crashes, arbitrary partial writes or the
+full recovery requirement. Terminal app states and the unobstructed canvas were
+inspected; long host/display delays remain unresolved
+([D.135](23-known-limitations.md#d135-a-synchronous-template-assignment-failure-can-restore-its-attempted-values)).
+
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
 for the retained update took 0.61–0.65 seconds, while a full listing took 96.01
