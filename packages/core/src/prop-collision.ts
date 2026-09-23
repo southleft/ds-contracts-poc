@@ -60,6 +60,7 @@ export function contractApiNames(contract: Contract): string[] {
   for (const p of contract.props) { names.push(p.bindings.code.prop); if (p.bindings.code.initial) names.push(p.bindings.code.initial.prop); }
   for (const { slot } of slotsOf(contract)) names.push(slot.name);
   for (const ev of contract.events ?? []) names.push(ev.bindings.code.prop);
+  if (contract.selection) names.push(contract.selection.bindings.code.prop);
   return [...new Set(names)];
 }
 

@@ -2021,11 +2021,9 @@ return { inventory: rows };
     } catch (e) {
       return { ok: false, issue: plainFromThrow("The proposal failed", e) };
     }
-    const proposal =
-      batch.proposals.find((p) => p.setName === setName) ?? batch.proposals[0];
+    const proposal = batch.proposals.find((p) => p.setName === setName);
     if (!proposal) {
-      const skip =
-        batch.skipped.find((s) => s.setName === setName) ?? batch.skipped[0];
+      const skip = batch.skipped.find((s) => s.setName === setName);
       return {
         ok: false,
         issue: skip

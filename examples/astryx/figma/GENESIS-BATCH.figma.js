@@ -2141,6 +2141,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -4855,6 +4858,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -7797,6 +7803,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -10279,6 +10288,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -12682,6 +12694,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -14957,6 +14972,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -18816,6 +18834,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -21844,6 +21865,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -25007,6 +25031,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -28421,6 +28448,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -30149,6 +30179,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -31233,6 +31266,23 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+function nestedCanExpose(instance) {
+  let owned = false;
+  for (let parent = instance.parent; parent; parent = parent.parent) {
+    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'COMPONENT' || parent.type === 'COMPONENT_SET') { owned = true; break; }
+  }
+  if (!owned) return false;
+  if (instance.exposedInstances.length > 0) return true;
+  // A variant axis or an unused property definition is not an exposable
+  // control. Figma requires references in this main's own subtree, or an
+  // already exposed nested instance. Do not cross an unexposed instance.
+  function hasReference(node) {
+    if (Object.values(node.componentPropertyReferences || {}).some(value => typeof value === 'string' && value.length > 0)) return true;
+    return node.type !== 'INSTANCE' && (node.children || []).some(hasReference);
+  }
+  return instance.children.some(hasReference);
+}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -31933,7 +31983,7 @@ async function amendSet(set, C) {
   }
       report.rebuiltVariants++;
     }
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+    for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -32159,7 +32209,7 @@ async function amendComponent(comp, C) {
       Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
       Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
-  for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+  for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -32253,6 +32303,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -32313,7 +32366,7 @@ async function syncOne(C) {
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+    for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
     built.push({ v, comp, registry });
   }
 
@@ -33165,6 +33218,23 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
+function nestedCanExpose(instance) {
+  let owned = false;
+  for (let parent = instance.parent; parent; parent = parent.parent) {
+    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'COMPONENT' || parent.type === 'COMPONENT_SET') { owned = true; break; }
+  }
+  if (!owned) return false;
+  if (instance.exposedInstances.length > 0) return true;
+  // A variant axis or an unused property definition is not an exposable
+  // control. Figma requires references in this main's own subtree, or an
+  // already exposed nested instance. Do not cross an unexposed instance.
+  function hasReference(node) {
+    if (Object.values(node.componentPropertyReferences || {}).some(value => typeof value === 'string' && value.length > 0)) return true;
+    return node.type !== 'INSTANCE' && (node.children || []).some(hasReference);
+  }
+  return instance.children.some(hasReference);
+}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -33755,7 +33825,7 @@ async function amendSet(set, C) {
       }
       report.rebuiltVariants++;
     }
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+    for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -33955,7 +34025,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
-  for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+  for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -34049,6 +34119,9 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousSelection = existing.getSharedPluginData('ds_contracts', 'selectionApi');
+    if (previousSelection && previousSelection !== JSON.stringify(C.selectionApi))
+      throw new Error('FIGMA_SELECTION_RETIREMENT_REFUSED: changing or removing retained selection inputs needs a verified migration or fresh lineage');
     const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
     if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
       throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
@@ -34109,7 +34182,7 @@ async function syncOne(C) {
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+    for (const instance of registry.nestedControls || []) if (nestedCanExpose(instance)) instance.isExposedInstance = true;
     built.push({ v, comp, registry });
   }
 

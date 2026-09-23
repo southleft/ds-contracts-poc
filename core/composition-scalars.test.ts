@@ -382,6 +382,55 @@ test('native composed components expose child controls on create, amend and no-o
   }
 });
 
+test('native composition skips static and variant-only exposure while preserving real and transitive controls', async () => {
+  for (const variantSet of [false, true]) {
+    const { parent, child, ctx } = family();
+    const inert = ContractSchema.parse({ ...child, id: 'ds.inert', name: 'Inert', props: [],
+      anatomy: { root: { parts: { copy: { text: 'Retained body' } } } } });
+    const axis = ContractSchema.parse({ ...inert, id: 'ds.axis', name: 'AxisOnly', props: [{
+      name: 'tone', type: { enum: ['quiet', 'strong'] }, default: 'quiet',
+      bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone' } },
+    }] });
+    ctx.contracts.set(inert.id, inert); ctx.contracts.set(axis.id, axis);
+    parent.props = variantSet ? structuredClone(axis.props) : [];
+    parent.anatomy.root.parts = {
+      control: { component: { id: child.id, props: { label: 'Editable', disabled: false } } },
+      retained: { component: { id: inert.id } },
+      variant: { component: { id: axis.id } },
+    };
+    const outer = ContractSchema.parse({ ...inert, id: 'ds.outer', name: 'Outer',
+      anatomy: { root: { parts: { middle: { component: { id: parent.id } } } } } });
+    ctx.contracts.set(outer.id, outer);
+    const engine = createFigmaEngine(ctx);
+    const { figma, root } = createFigmaMock();
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    const run = (contract: Contract) => vm.runInContext(`(async () => { ${engine.buildComponentScript(contract, ctx.contracts)} })()`, context);
+    for (const contract of [child, inert, axis, parent, outer]) await run(contract);
+    const target = root.findOne(n => n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode;
+    const targetId = target.id;
+    const inspect = () => {
+      for (const component of variantSet ? target.children : [target]) {
+        const instances = component.findAll(n => n.type === 'INSTANCE') as ComposedMockNode[];
+        assert.equal(instances.find(n => n.name === 'control')!.isExposedInstance, true);
+        for (const name of ['retained', 'variant']) {
+          const instance = instances.find(n => n.name === name)!;
+          assert.equal(instance.isExposedInstance, false);
+          assert.throws(() => { instance.isExposedInstance = true; }, /Can only expose instances/);
+        }
+      }
+    };
+    inspect();
+    const before = target.findAll(n => n.type === 'INSTANCE').map(n => n.id);
+    await run(parent); inspect();
+    assert.deepEqual(target.findAll(n => n.type === 'INSTANCE').map(n => n.id), before);
+    parent.description += ' Force amend.';
+    await run(parent); inspect(); assert.equal(target.id, targetId);
+    const outerNode = root.findOne(n => n.getSharedPluginData('ds_contracts', 'contractId') === outer.id)!;
+    const middle = outerNode.findOne(n => n.type === 'INSTANCE') as ComposedMockNode;
+    assert.equal(middle.isExposedInstance, true, 'exposed nested controls remain reachable through composition');
+  }
+});
+
 test('native fresh-mount variants preserve initializer omission, controlled precedence and authored mappings', async () => {
   const { parent, child, ctx } = callerFamily();
   const state = child.props.find(p => p.name === 'state')!;

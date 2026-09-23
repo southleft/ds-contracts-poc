@@ -138,6 +138,7 @@ import {
 } from '../engine/remembered-tokens';
 import { CanvasFrame } from '../components/CanvasFrame';
 import { ContractEditor, type ContractEditorHandle } from '../components/ContractEditor';
+import { SelectionSetup } from '../components/SelectionSetup';
 import { CopyButton } from '../components/CopyButton';
 import { FigmaGroundTruth } from '../components/FigmaGroundTruth';
 import { InfoPopover } from '../components/InfoPopover';
@@ -392,6 +393,7 @@ export function Playground() {
   // The active token source (repo bundled ↔ user pasted) — validation,
   // preview, proposals, and emitters all rebind when it changes.
   const tokenSource = useTokenSource();
+  const workspace = useWorkspace();
 
   // -------------------------------------------------- contract editor state
   const [text, setText] = useState('');
@@ -408,9 +410,10 @@ export function Playground() {
   }, [text]);
   const validation = useMemo(
     () => validateContractText(debouncedText),
-    // validateContractText reads the active token inventory.
+    // Validation reads the active tokens and session dependency registry.
+    // A child-only reimport can leave the editor and active token layer unchanged.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [debouncedText, tokenSource],
+    [debouncedText, tokenSource, workspace],
   );
 
   const lastGood = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
@@ -425,7 +428,7 @@ export function Playground() {
   // last SCHEMA-VALID parse (generator violations still have a shape to
   // show); while the text on screen isn't schema-valid, the sheet goes
   // stale and says so — the refusal list below stays visible in both views.
-  const [contractView, setContractView] = useState<'json' | 'spec'>('json');
+  const [contractView, setContractView] = useState<'json' | 'spec' | 'selection'>('json');
   const lastSpec = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
   if (validation.status === 'valid' || validation.status === 'violations') {
     lastSpec.current = { contract: validation.contract, contracts: validation.contracts };
@@ -666,7 +669,6 @@ export function Playground() {
   const [expectedRefusal, setExpectedRefusal] = useState<string | null>(null);
 
   // ---------------------------------------------------- session workspace
-  const workspace = useWorkspace();
   // The workspace entry currently in the editor (drives the switch strip);
   // any other load clears it.
   const [wsLoaded, setWsLoaded] = useState<WorkspaceEntry | null>(null);
@@ -2395,6 +2397,7 @@ export function Playground() {
 
   const emittable =
     validation.status === 'valid' || validation.status === 'violations' ? validation : null;
+  const canPrepareLibrary = validation.status === 'valid' && text === debouncedText;
 
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
@@ -2405,7 +2408,7 @@ export function Playground() {
     setLibraryArtifact(null); setLibraryNotice(null);
   }, [text, tokenSource.tree, icons, emittable?.contracts]);
   const downloadReactLibrary = async () => {
-    if (!emittable || validation.status !== 'valid' || libraryBusy) return;
+    if (!emittable || !canPrepareLibrary || libraryBusy) return;
     const revision = libraryRevision.current;
     setLibraryBusy(true); setLibraryNotice(null); setLibraryArtifact(null);
     try {
@@ -3112,18 +3115,23 @@ export function Playground() {
                 walkthrough (/flow) shows the envelope the Send tab exports. */}
             <div className="rail__group" style={{ marginTop: 24 }}>
               <div className="rail__group-title">
-                From the Figma plugin&rsquo;s Send tab — a CLI door, not a playground one
+                From the Figma plugin&rsquo;s Send tab
               </div>
               <p className="hint">
-                The plugin&rsquo;s <strong>Send</strong> tab reads the selected set, proposes a
-                contract with the same engine this page runs, and exports a{' '}
-                <code>CONTRACT-PROPOSAL</code> envelope (proposed contract, notes, child stubs,
-                minted tokens, a provenance line). Its receiver is the CLI:{' '}
+                The plugin&rsquo;s <strong>Send</strong> tab reads the selected set and its
+                local dependencies. A family exports as one <code>.family.json</code> file.
+                Load it in <strong>JSON</strong> to retain the captured child proposals and
+                open the requested parent. Review refusals and provisional children before
+                preparing a React library. Remote or ambiguous dependencies refuse by name.
+              </p>
+              <p className="hint">
+                A single component exports a <code>CONTRACT-PROPOSAL</code> envelope
+                (proposed contract, notes, child stubs, minted tokens and provenance).
+                Load that file in <strong>JSON</strong>, or use the CLI receiver:{' '}
                 <code>ds-contracts figma receive --out &lt;contracts-dir&gt;</code> waits under a
                 pairing code and writes only <code>.proposals/&lt;id&gt;.proposal.json</code>{' '}
-                unless <code>--apply</code>. Nothing in the shipped plugin posts to this page,
-                so the button below stays disabled — named, not hidden. Paste the exported
-                envelope, or a plugin dump, into the <strong>JSON</strong> tab instead.
+                unless <code>--apply</code>. This pairing transport carries single proposals,
+                not family captures. Direct plugin delivery to this page remains unavailable.
               </p>
               {bridge === null ? (
                 <button
@@ -3507,6 +3515,10 @@ export function Playground() {
             >
               Spec
             </button>
+            <button type="button" className={`seg__btn${contractView === 'selection' ? ' is-active' : ''}`}
+              aria-pressed={contractView === 'selection'} onClick={() => setContractView('selection')}>
+              Selection
+            </button>
           </div>
           {/* One line, ellipsized when narrow — the full text rides title. */}
           <span className="editor__meta" title={provenance}>
@@ -3541,7 +3553,18 @@ export function Playground() {
           </div>
         ) : null}
         <div className="editor">
-          {contractView === 'spec' ? (
+          {contractView === 'selection' ? (
+            validation.status === 'valid' && text === debouncedText ? <SelectionSetup key={debouncedText}
+              contract={validation.contract} contracts={validation.contracts} onEditJson={() => setContractView('json')}
+              onApply={next => {
+                if (text !== debouncedText) throw Error('The contract changed. Review the current version before applying.');
+                const nextText = pretty(next), checked = validateContractText(nextText);
+                if (checked.status !== 'valid') throw Error('issues' in checked ? checked.issues.join('\n') : 'The configured contract did not pass validation.');
+                setText(nextText);
+                setProvenance(`${provenance} · selection configured`);
+                setContractView('json');
+              }} /> : <div className="pane__body hint">Load a valid contract before configuring selection. Resolve any current refusals in JSON first.</div>
+          ) : contractView === 'spec' ? (
             lastSpec.current ? (
               <>
                 {!specLive ? (
@@ -3955,7 +3978,7 @@ export function Playground() {
             <div className="output__files">
               {outputTab === 'react' && import.meta.env.DEV && (
                 <div className="pane__body">
-                  <button type="button" className="btn--primary" disabled={libraryBusy || validation.status !== 'valid'} onClick={() => void downloadReactLibrary()}>
+                  <button type="button" className="btn--primary" disabled={libraryBusy || !canPrepareLibrary} onClick={() => void downloadReactLibrary()}>
                     {libraryBusy ? 'Preparing React library…' : 'Prepare React library'}
                   </button>
                   <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>

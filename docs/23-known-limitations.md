@@ -9846,6 +9846,240 @@ visual fidelity and the complete composed journey remain unqualified.
 zero-axis assembly refusal, and update the UI label and these checks together.
 Keep recorded source/native evidence; never infer a baseline for an old archive.
 
+## D.131 Selection behavior requires an explicit item-to-panel relationship
+
+**AGENT decision, 2026-09-22.** An observed row of active and inactive items
+does not establish keyboard behavior, stable identity or ownership of missing
+panel content. Optional `selection` declares a finite tab pattern independently
+of component names: a keyed component repeat, one optional enum for selection,
+a child enum for selected appearance, explicit navigation policy and one panel
+per enum value. Shared validation refuses incomplete or conflicting mappings.
+
+Both React emitters use the same runtime. They generate a controlled value,
+optional mount-only initializer and typed change callback; automatic or manual
+activation; horizontal or vertical navigation with explicit text direction;
+disabled-item skipping; and linked panels. Inactive panels remain mounted.
+Removing an item unmounts its panel; an uncontrolled selection recovers to the
+first enabled item without claiming a user action. A known controlled value
+whose item is absent or disabled selects no panel. Unknown identities refuse.
+
+The child must expose a generated native button without competing handlers or
+nested interactive descendants. Item identities are metadata, not child props.
+The declared selected appearance cannot also be supplied by data. Disabled
+records require an explicit native-disabled mapping and own Boolean fields.
+Generated local bindings cannot shadow a public value alias such as `item`.
+Panels require distinct div hosts, complete value mappings and compatible
+visibility; conflicting attributes, conditional ancestors and unsupported
+component wrappers refuse. Public selection-value remapping is not supported.
+
+Static HTML and native Figma project the declared finite states from the
+observed records. Figma records the relationship and React-only behavior as
+code-only facts. A bounded return now retains non-executable selection API
+metadata and stamps list, item and panel identities. Before reconstruction,
+the reader verifies the complete native domain, unique item keys, consistent
+ordering, selected appearance, panel visibility, slot property identity and
+full dependency contracts. The ordinary inverse supplies current paint, item
+labels and panel content; no source anatomy snapshot overwrites a capture.
+Uniform item reordering and label changes survive. Missing, duplicated, hidden
+or inconsistent relationships refuse by name. Existing relationships cannot
+be retired or changed by an ordinary in-place sync; use a verified migration
+or a fresh lineage. The return currently requires one div-root selection, two
+inputs, a literal list label, all finite items and panels drawn, and unconstrained
+panel slots. Disabled or missing sample items with undrawn panels, repeated
+instance overrides and broader retained APIs refuse. Web Components refuse
+this declaration. Existing unkeyed repeats retain their prior behavior.
+
+Production writer/capture checks on a native mock, REST metadata checks and
+returned-component browser checks demonstrate this bounded implementation.
+Both React emitters retain the declared initial value, keyboard callback and
+stable IDs after native item reordering. These checks are not live Figma evidence. A separate bounded live return trial
+is now recorded in [D.132](#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return);
+clean end-user delivery remains open.
+
+Generated React browser checks cover both emitters, including controlled-held
+callbacks, manual RTL navigation, disabled items, active styling, panel state
+retention, component panel hosts and public API aliases. The separate runtime
+checks cover reconciliation and SSR/hydration. These are engine checks, not an
+application journey or independent-family acceptance. The Playground's
+**Selection** view now authors and reviews the explicit mapping. It requires a
+stable key and a panel choice for every observed item, preserves existing panel
+content, and offers empty consumer slots only as an explicit authoring choice.
+Changing any field invalidates the review. Full contract validation runs before
+Apply; refused setup leaves the editor and imported workspace entries unchanged.
+An already-configured relationship is summarized and edited through JSON.
+These edits use the existing editor lifecycle: Reset restores the loaded source;
+the setup does not overwrite the imported workspace record or autosave a draft.
+The static preview does not demonstrate keyboard behavior. Its state controls
+replace defaults for rendering, so requesting a disabled initial item currently
+refuses; generated React supports a controlled disabled value with no selection.
+A separate authored application rehearsal now imports three contracts through
+JSON, refuses an incomplete setup, invalidates an edited review, applies the
+fully validated mapping and prepares an archive. The offered archive was
+retrieved from its displayed endpoint with the exact artifact hash; the browser
+download event timed out. An isolated consumer installs that archive with its
+own React dependency. Its live browser exercise verifies keyboard selection,
+retained panel input, item identity through reordering and relabeling, selected
+item removal, explicit remount, and caller-held versus accepted requests. Two
+instances have six distinct tab/panel pairs and hidden panels do not paint.
+Reset restores the loaded source; an explicit share link restores the exact
+configured contract after reload in the same tab, with dependencies still in
+its session workspace. This is not general draft persistence or cross-device
+share qualification.
+
+Evidence: `private/selection-app-20260922/` in the live application worktree,
+including the original inputs, configured contract, visible review, archive
+hash, isolated install, browser trials and screenshots. This authored rehearsal
+does not qualify the original Tabs, an independent family, source-matched
+fidelity. Its later bounded native return is recorded in D.132; complete
+journeys remain unfinished. The retained Tabs
+archive is unchanged; its missing identities and additional panel contents are
+not invented.
+
+**Reversal:** remove the retained selection reader/writer and node metadata
+handling together (preserve native evidence and use a fresh lineage), remove
+the Selection setup view/helper, then remove `selection` and its shared projection/runtime integration,
+restore the named interaction gap, regenerate both schema projections and the
+plugin receipt, and retain the failing and passing private checks. The keyed
+repeat foundation can remain independently. No fidelity threshold changes.
+
+
+## D.132 Native nested exposure requires an actual control; text identities survive return
+
+**AGENT decision — 2026-09-22.** A live authored composition failed when the
+writer exposed a static nested instance. Figma permits exposure only when an
+instance has exposed nested instances or descendants with component-property
+references. Variant axes and unused definitions alone do not qualify. The
+shared writer now checks both ownership and this native eligibility before
+exposing controls, including create and both amend paths. It does not cross
+unexposed nested-instance boundaries. Static instances remain editable on the
+canvas; real and transitively exposed controls remain available.
+
+The failed script left an incomplete component. A plugin exception is not an
+atomic rollback. The plugin now states this explicitly and directs the user to
+preserve the report and inspect the canvas before retrying. The observed partial
+was retained on a separate failure page; it was not deleted or represented as a
+successful output.
+
+The complete native-family return exposed another shared defect: the reader
+renamed a stamped text property to `children` solely because its only text layer
+was named `label`. That broke callers using the captured property name. A
+stamped non-`children` property now retains its name and text part. This preserves
+its whole-pixel text-box fact too. Unstamped and stamped-`children` hoisting keep
+their existing behavior. This rule does not recover an unrecorded code alias.
+
+The actual app-exported scripts created three editable native components in the
+authorized evaluation file. Canonical capture, pasted into the application,
+returned all three contracts; its archive installed in an isolated React
+consumer and passed eight live interaction trials. Native structure and
+unobstructed canvas screenshots are recorded. The trial required manual script
+and capture transfers. At that checkpoint Send refused the new parent because
+its child contracts were absent from the plugin's baked corpus; the later local
+family capture in D.133 resolves that acquisition gap. This is
+a bounded return demonstration, not clean end-user delivery, original Tabs,
+independent-family qualification, visual fidelity, or complete V1 acceptance.
+
+Evidence: `private/selection-live-return-20260922/` in the live worktree and
+`private/selection-live-exposure-20260922/` in the selection worktree. Native
+creation and the failed partial are preserved. The regression reproduces the
+full-family return with no original dependency contracts. Exposure probes cover
+static, variant-only, actual and transitive controls, creation, amendment and
+unchanged reruns. No scoring limits or frozen evidence changed.
+
+**Reversal:** revert the eligibility guard and matching native-mock assertion
+together, revert the stamped-label hoist condition, regenerate Figma scripts,
+lowering citations and the plugin receipt, and retain both failing and passing
+evidence. Restore a named native refusal rather than claiming unsupported
+exposure succeeds. Do not restore the false atomic-rollback message.
+
+## D.133 Send captures local dependencies as one family
+
+**AGENT decision — 2026-09-22.** Send previously captured only its selected
+parent. A newly authored selection component then refused because its item
+contract was absent from the plugin's baked corpus. Send now opts into the
+canonical dump's read-only dependency walk. Actual main-component IDs and
+applied instance-swap IDs determine the local family; names do not select a
+different dependency. Children precede parents for batch proposal, while
+closure provenance retains the originally requested node ID.
+
+The walk refuses remote or unreadable mains, cycles, colliding or reserved set
+names, more than 64 pulled sets, or more than 50,000 visited nodes. It does not
+import remote components or claim to recover arbitrary instance-internal
+overrides. Existing capture degradations and proposal refusals remain visible.
+The default standalone dump retains its previous scope unless dependency
+capture is explicitly enabled. Dump version 1.46 records the new producer.
+
+A family is delivered as one observed `.family.json`, through Copy/Download
+and the app's existing JSON import. The app saves supported children together,
+opens the requested parent by node ID, and refuses oversized workspace imports
+atomically at its separate 30-component limit. Refused children remain named
+provisional stubs. Single-proposal GitHub and pairing transports cannot carry
+this artifact and are hidden for family results. New reads clear old delivery
+actions, and a refused requested parent cannot fall back to a successful child.
+
+The live evaluation parent produced one capture containing its two dependencies,
+with no capture degradations. Loading that exact artifact in the app retained
+all three proposals and opened the requested parent. Its React archive is
+byte-identical to the previously installed, interaction-tested archive. No
+script editing or individual child transfers were needed for this capture.
+Native saving remains unqualified: Figma's Save dialog stayed disabled for
+both data and Blob links. The exact data-link payload supplied the app import;
+Copy reported success and pasted JSON into a native field, but that first run
+did not independently verify a complete clipboard-to-app transfer. A subsequent
+fresh Chrome session completed **Copy JSON → native paste → Load → Prepare React
+library → Download** without extracting the link payload. The app retained all
+three components and opened the requested parent; Chrome saved the actual
+8,652-byte archive, byte-identical to the installed return archive. This verifies
+the clipboard and app-download route, while Figma's own Save dialog remains
+unqualified. The final plugin bundle was reopened for this read; no native node
+changed, and the unobstructed canvas was inspected. Evidence:
+`private/selection-family-send-20260922/`. This does not qualify family fidelity,
+two-way recovery, remote-library support or the complete V1 journey. Regression
+checks cover the actual canonical script, empty source-dependency maps, named
+refusals and the packaged UI's unchanged family artifact.
+
+**Reversal:** disable the Send dependency option and remove the family artifact
+route, restore the named parent-dependency limitation in the workflow docs,
+regenerate the embedded dump and plugin receipt, and preserve captured evidence.
+Keep the exact requested-parent check and stale-action clearing independently.
+
+## D.134 Child-only imports refresh the current family
+
+**AGENT decision — 2026-09-22.** Reimporting a native family could leave the
+parent's JSON and active token layer unchanged while replacing a child's tokens
+or contract. The editor validation memo did not observe the session workspace,
+so its dependency scope and prepared React download could remain stale. The
+workspace snapshot now invalidates that memo; previews and emitted output use
+the new scope, and the existing archive revision guard clears the old download.
+This applies to all workspace imports, with no component-name condition.
+Package preparation also waits until validation matches the current editor text,
+so an edit cannot prepare the previous contract during the debounce interval.
+
+A reversible native active-paint edit passed through Send, OS clipboard paste,
+app import and normal archive download. Exactly one token value changed; the
+installed consumer showed that color while retaining keyboard, controlled and
+uncontrolled selection, stable item identities and mounted panel input. Restoring
+the native paint and recapturing produced the original archive bytes. A label
+changed in only one parent variant refused as state-dependent, without a child
+fallback; the label was restored. All affected native IDs and observed fields
+were recorded and checked, including the existing instance on the preserved
+failed-build page. No new nodes were created by these edit probes.
+
+That restore exposed the stale download. After the fix, application replays of
+the preserved native capture independently changed child paint and child body
+content while keeping the parent's contract byte-identical. Both removed the old
+archive, refreshed the preview and produced the expected package change. The
+paint replay matched the native-edit package exactly; body content changed only
+the child JavaScript. Repeated imports retained exactly three workspace entries,
+and the restored package matched the baseline. These are bounded update and
+refusal checks. Removing a required child clears the archive and disables
+preparation with named violations; reimport restores the three-entry family.
+This is not automatic two-way synchronization, a fidelity score or full
+V1 qualification. Evidence: `private/selection-edit-return-20260922/`.
+
+**Reversal:** remove the workspace dependency from editor validation and restore
+its previous subscription location; preserve both stale-download and corrected
+replay evidence. Document stale dependency output if that behavior is restored.
+
 ## D.135 A synchronous template assignment failure can restore its attempted values
 
 **AGENT decision — 2026-09-22.** A template value update previously left earlier

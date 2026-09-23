@@ -32,6 +32,8 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, m
  *   - optional parts render conditionally on their slot prop
  */
 import { rootContentJsx, literalTextJsx } from './root-content.js';
+import { REACT_REPEAT_RUNTIME } from './react-repeat-runtime.js';
+import { reactSelectionPlan } from './react-selection.js';
 import {
   isNativeCheckablePart,
   pascal,
@@ -280,6 +282,9 @@ export function generateTsx(
     ? { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false }
     : ELEMENT_META[contract.semantics.element];
   const name = contract.name;
+  const selection = reactSelectionPlan(contract, byId);
+  const repeatRuntime = selection?.runtime ?? (walkAnatomy(contract).some(({part}) => part.repeat?.keyField !== undefined)
+    ? REACT_REPEAT_RUNTIME : '');
   const enums = enumProps(contract);
   const bools = boolProps(contract);
   const texts = namedTextProps(contract);
@@ -326,16 +331,17 @@ export function generateTsx(
   const toggledCodeProps = new Set(
     events.filter((e) => e.toggles).map((e) => codePropOf(e.toggles!.prop)),
   );
+  if (selection) toggledCodeProps.add(selection.code);
 
   const propLines: string[] = [];
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
     if (isEnum(p)) {
-      const union = hasCodeValues(p) ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ');
+      const union = hasCodeValues(p) || p.name === contract.selection?.valueProp ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ');
       propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${union};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
-        .map(([f, t]) => `${f}: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
+        .map(([f, t]) => `${selection?.item.repeat?.itemsProp === p.name ? JSON.stringify(f) : f}: ${typeof t === 'object' ? t.enum.map(value => JSON.stringify(value)).join(' | ') : t === 'text' ? 'string' : t}`)
         .join('; ');
       propLines.push(`${doc}  ${p.bindings.code.prop}?: Array<{ ${fields} }>;`);
     } else if (p.type === 'boolean') {
@@ -359,6 +365,7 @@ export function generateTsx(
   }
 
   const destructured: string[] = [];
+  if (selection) { propLines.push(selection.propLine); destructured.push(selection.callback); }
   // A toggled enum prop follows the controlled/uncontrolled pattern: no
   // destructure default — undefined means "uncontrolled", backed by useState.
   for (const p of enums) {
@@ -403,6 +410,7 @@ export function generateTsx(
 
   // Body prelude: uncontrolled state + handlers for declared events.
   const prelude: string[] = mappedPropPrelude(contract);
+  if (selection) prelude.push(...selection.prelude);
   for (const ev of events) {
     if (!ev.toggles) continue;
     const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
@@ -517,7 +525,7 @@ export function generateTsx(
   // Root and nested attrs share typed native/ARIA projection with the inline emitter.
   const partAttrList = (part: Part | undefined): string[] =>
     reactPartAttrList(contract, part, codePropOf);
-  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('') + (selection?.attrs(part) ?? '');
 
   const rootAttrs = contract.anatomy.root?.attrs ?? {};
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
@@ -602,6 +610,8 @@ export function generateTsx(
     JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+    const panel = selection?.wrap(part, jsx);
+    if (panel !== undefined) return panel;
     if (!part.visibleWhen) return jsx;
     const codeName = codePropOf(part.visibleWhen.prop);
     const eq = part.visibleWhen.equals;
@@ -653,25 +663,31 @@ export function generateTsx(
       const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
       const codeName = rp.bindings.code.prop;
       const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
+      const itemName = selection?.item === part ? '__dscItem' : 'item';
+      const itemField = (field: string) => selection?.item === part ? `${itemName}[${JSON.stringify(field)}]` : `${itemName}.${field}`;
       let childrenField: string | null = null;
       const fieldAttrs = Object.keys((rp.type as { arrayOf: Record<string, 'text' | 'number' | 'boolean' | { enum: string[] }> }).arrayOf)
+        .filter((field) => field !== part.repeat!.keyField)
         .map((field) => {
           const depProp = dep.props.find((p) => p.name === field)!;
           if (depProp.bindings.code.prop === 'children') {
             childrenField = field;
             return '';
           }
-          return ` ${depProp.bindings.code.prop}={${codeValueExpression(depProp, `item.${field}`)}}`;
+          return ` ${depProp.bindings.code.prop}={${codeValueExpression(depProp, itemField(field))}}`;
         })
         .join('');
+      const key = part.repeat.keyField === undefined ? 'index' : `${itemName}[${JSON.stringify(part.repeat.keyField)}]`;
       const node = childrenField
-        ? `<${dep.name} key={index}${fixedAttrs}${fieldAttrs}>{item.${childrenField}}</${dep.name}>`
-        : `<${dep.name} key={index}${fixedAttrs}${fieldAttrs} />`;
-      return wrapVisibleWhen(part, `{${codeName}?.map((item, index) => (${node}))}`);
+        ? `<${dep.name} key={${key}}${fixedAttrs}${fieldAttrs}${selection?.item === part ? selection.itemAttrs : ''}>{${itemField(childrenField)}}</${dep.name}>`
+        : `<${dep.name} key={${key}}${fixedAttrs}${fieldAttrs}${selection?.item === part ? selection.itemAttrs : ''} />`;
+      const collection = part.repeat.keyField === undefined ? codeName
+        : `__dscRepeatItems(${codeName}, ${JSON.stringify(part.repeat.keyField)})`;
+      return wrapVisibleWhen(part, `{${collection}?.map((${itemName}${selection?.item === part ? '' : ', index'}) => (${node}))}`);
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component);
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
@@ -790,7 +806,7 @@ export function generateTsx(
 import type { ${mrTypeImports} } from 'react';
 ${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}export interface ${name}Props extends ${mr.propsBase} {
+${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBase} {
 ${propLines.join('\n')}
 }
 
@@ -841,7 +857,7 @@ import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from '
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${sr.propsBase} {
+${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface ${name}Props extends ${sr.propsBase} {
 ${propLines.join('\n')}
 }
 
@@ -886,6 +902,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
 
   const storyEvents = contract.events ?? [];
   const toggledPropNames = new Set(storyEvents.filter((e) => e.toggles).map((e) => e.toggles!.prop));
+  if (contract.selection) toggledPropNames.add(contract.selection.valueProp);
 
   const argTypes: string[] = [];
   const args: string[] = [];

@@ -39,6 +39,9 @@ jobs:
       - name: install exact dependencies
         run: npm ci
 
+      - name: install Chromium for browser-driven gates
+        run: npx playwright-core install --with-deps chromium
+
       - name: validate release-candidate configuration
         run: node scripts/build-release-candidate.mjs --check
 
