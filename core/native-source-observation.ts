@@ -894,6 +894,12 @@ function verifyReadback(
         if ((n.metadata.callerContentProperty ?? '') !== (spec.callerContentProp ?? ''))
           issue('native-contract-observation-caller-content-property', n);
       }
+      // A fixed width can match today's pixels while losing responsive Fill.
+      // Check the compiled request before instances take their separate path.
+      if (library && spec.fillW &&
+          !(spec.type === 'text' && !spec.textTruncation && spec.fillText !== true) &&
+          v.layoutSizingHorizontal !== 'FILL')
+        issue('native-library-observation-fill-width', n);
       if (isContractDraft(input) && spec.type === 'instance') {
         const graphComponents = input.graphComponents ?? [];
         const dep = graphComponents.find(component => component.contractId === spec.depContractId);

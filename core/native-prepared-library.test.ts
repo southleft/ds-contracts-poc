@@ -14,7 +14,7 @@ import {nativeLibraryReactionsMatch,type NativePreparedLibrarySource} from './na
 import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter') {
+async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill=false) {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
@@ -33,9 +33,10 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     }}},bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}});
   const parent=ContractSchema.parse({id:'test.library-parent',name:'Parent',version:'0.1.0',status:'draft',
     description:'A default slot instance plus an ordinary nested instance',props:[],states:[],semantics:{element:'div'},
-    anatomy:{root:{layout:{display:'flex',direction:'column'},parts:{
+    anatomy:{root:{layout:{display:'flex',direction:'column',...(fill?{align:'stretch'}:{})},...(fill?{literals:{width:'320px'}}:{}),parts:{
       slot:{slot:{name:'children',defaultContent:[{id:leaf.id,props:{size:'large',label:'Default caller'}}],accepts:[leaf.id]}},
       leaf:{component:{id:leaf.id,props:{shown:true}}},
+      ...(fill?{frame:{layout:{display:'flex',grow:true},parts:{nested:{slot:{name:'extra'}}}}}:{}),
     }}},bindings:{code:{anchors:{importPath:'test/Parent',export:'Parent'}},figma:{anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-parent-key'}}}});
   const outer=ContractSchema.parse({...parent,id:'test.library-outer',name:'Outer',
     anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}},
@@ -250,5 +251,30 @@ test('library default typography pins Inter without replacing a declared family 
     mixed.anatomy.root.parts!.other={text:'Another owner',declared:{'font-family':'Roboto'}};
     assert.throws(()=>f.engine.compileNativePreparedLibrary(mixed,new Map([[mixed.id,mixed]]),f.source,f.context.operation.id),/TEXT_OWNERSHIP_UNQUALIFIED/,
       'a declared family elsewhere does not grant a missing-family fallback');
+  }
+});
+
+
+test('library readback rejects lost Fill on frames and slots',async()=>{
+  const {input,receipt,compiled}=await fixture(true,'Inter',true);
+  assert.equal(verifyNativePreparedLibraryReadback(input,receipt).status,'supported-structure-observed');
+  const fillSpecs:any[]=[];
+  const visit=(spec:any)=>{if(spec.fillW)fillSpecs.push(spec);(spec.children??[]).forEach(visit);};
+  compiled.components.forEach(c=>c.variants.forEach(v=>visit(v.spec)));
+  const rows=fillSpecs.map(spec=>receipt.nodes.find((n:any)=>n.metadata.nativeContractPart&&
+    JSON.stringify(JSON.parse(n.metadata.nativeContractPart))===JSON.stringify(spec.nativeContractPart)));
+  assert.ok(rows.some((n:any)=>n?.type==='SLOT'));
+  assert.ok(rows.some((n:any)=>n?.type==='FRAME'));
+  for(const row of rows) {
+    assert.ok(row);
+    assert.equal(row.values.layoutSizingHorizontal,'FILL');
+    for(const mode of ['HUG','FIXED',undefined]) {
+      const changed=structuredClone(receipt);
+      const node=changed.nodes.find((n:any)=>n.id===row.id);
+      node.values.layoutSizingHorizontal=mode;
+      const result=verifyNativePreparedLibraryReadback(input,changed);
+      assert.equal(result.status,'refused',row.type+' '+mode);
+      assert.ok(JSON.stringify(result).includes('native-library-observation-fill-width'));
+    }
   }
 });
