@@ -9975,3 +9975,39 @@ refusals and the packaged UI's unchanged family artifact.
 route, restore the named parent-dependency limitation in the workflow docs,
 regenerate the embedded dump and plugin receipt, and preserve captured evidence.
 Keep the exact requested-parent check and stale-action clearing independently.
+
+## D.134 Child-only imports refresh the current family
+
+**AGENT decision — 2026-09-22.** Reimporting a native family could leave the
+parent's JSON and active token layer unchanged while replacing a child's tokens
+or contract. The editor validation memo did not observe the session workspace,
+so its dependency scope and prepared React download could remain stale. The
+workspace snapshot now invalidates that memo; previews and emitted output use
+the new scope, and the existing archive revision guard clears the old download.
+This applies to all workspace imports, with no component-name condition.
+
+A reversible native active-paint edit passed through Send, OS clipboard paste,
+app import and normal archive download. Exactly one token value changed; the
+installed consumer showed that color while retaining keyboard, controlled and
+uncontrolled selection, stable item identities and mounted panel input. Restoring
+the native paint and recapturing produced the original archive bytes. A label
+changed in only one parent variant refused as state-dependent, without a child
+fallback; the label was restored. All affected native IDs and observed fields
+were recorded and checked, including the existing instance on the preserved
+failed-build page. No new nodes were created by these edit probes.
+
+That restore exposed the stale download. After the fix, application replays of
+the preserved native capture independently changed child paint and child body
+content while keeping the parent's contract byte-identical. Both removed the old
+archive, refreshed the preview and produced the expected package change. The
+paint replay matched the native-edit package exactly; body content changed only
+the child JavaScript. Repeated imports retained exactly three workspace entries,
+and the restored package matched the baseline. These are bounded update and
+refusal checks. Removing a required child clears the archive and disables
+preparation with named violations; reimport restores the three-entry family.
+This is not automatic two-way synchronization, a fidelity score or full
+V1 qualification. Evidence: `private/selection-edit-return-20260922/`.
+
+**Reversal:** remove the workspace dependency from editor validation and restore
+its previous subscription location; preserve both stale-download and corrected
+replay evidence. Document stale dependency output if that behavior is restored.

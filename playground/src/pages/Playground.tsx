@@ -393,6 +393,7 @@ export function Playground() {
   // The active token source (repo bundled ↔ user pasted) — validation,
   // preview, proposals, and emitters all rebind when it changes.
   const tokenSource = useTokenSource();
+  const workspace = useWorkspace();
 
   // -------------------------------------------------- contract editor state
   const [text, setText] = useState('');
@@ -409,9 +410,10 @@ export function Playground() {
   }, [text]);
   const validation = useMemo(
     () => validateContractText(debouncedText),
-    // validateContractText reads the active token inventory.
+    // Validation reads the active tokens and session dependency registry.
+    // A child-only reimport can leave the editor and active token layer unchanged.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [debouncedText, tokenSource],
+    [debouncedText, tokenSource, workspace],
   );
 
   const lastGood = useRef<{ contract: Contract; contracts: Map<string, Contract> } | null>(null);
@@ -667,7 +669,6 @@ export function Playground() {
   const [expectedRefusal, setExpectedRefusal] = useState<string | null>(null);
 
   // ---------------------------------------------------- session workspace
-  const workspace = useWorkspace();
   // The workspace entry currently in the editor (drives the switch strip);
   // any other load clears it.
   const [wsLoaded, setWsLoaded] = useState<WorkspaceEntry | null>(null);
