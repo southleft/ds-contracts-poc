@@ -93,9 +93,14 @@ return qualification ([D.131](23-known-limitations.md#d131-selection-behavior-re
 
 The returned native family now also installs from an app-generated archive
 and passes the same eight interaction trials in a clean consumer. Its native
-structure and unobstructed canvas were inspected. Manual script/capture transfers
-and a Send dependency refusal remain; visual fidelity and complete V1 acceptance
-are unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return)).
+structure and unobstructed canvas were inspected. Creation still required manual
+script transfers. Send now captures this parent's actual local dependencies in
+one family file; its live app import retains all three proposals and opens the
+parent without individual child transfers. The exact link payload supplied
+the import because Figma's native Save dialog was disabled; file saving remains
+unqualified. Visual fidelity and complete V1
+acceptance remain unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return),
+[D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family)).
 
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. Deeper caller-content locations remain refused. Source-preserved React composition has separate browser behavior checks; neither result qualifies every composed journey.
 

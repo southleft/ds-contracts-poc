@@ -52,7 +52,7 @@ test('hidden text captures its actual line-height binding and inherited consumin
   const f = fixture();
   const before = f.texts.map(t => JSON.stringify({ characters: t.characters, visible: t.visible, bound: t.boundVariables, modes: t.explicitVariableModes }));
   const dump = await f.capture(), labels = f.labels(dump);
-  assert.equal(dump._provenance.dumpVersion, '1.45');
+  assert.equal(dump._provenance.dumpVersion, '1.46');
   assert.ok(!dump._degradations.some(d => d.code === 'variable-consumer-unresolved'));
   assert.deepEqual(labels.map(n => n.text!.lineHeightVar), ['line-height', 'line-height']);
   assert.deepEqual(labels.map(n => n.variableConsumers![f.line.id]), [f.small, f.large].map((modeId, i) => ({

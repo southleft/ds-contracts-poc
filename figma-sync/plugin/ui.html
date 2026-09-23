@@ -1630,7 +1630,14 @@
   var pendingProposeNames = null;
   var propRun = $('prop-run');
 
+  function clearProposal() {
+    lastProposal = null;
+    $('prop-result').innerHTML = '';
+    ['prop-code-section', 'prop-pr-section', 'prop-bridge-section'].forEach(function (id) { $(id).hidden = true; });
+  }
+
   propRun.onclick = function () {
+    clearProposal();
     var DSC = engine();
     if (!DSC) { addLine(resultBox('prop-result', false, 'No engine.'), NO_ENGINE); return; }
     var name = $('prop-set').value.trim();
@@ -1642,15 +1649,17 @@
 
   function proposeFor(setName) {
     var DSC = engine();
+    clearProposal();
     var source = $('dump-source').textContent.replace(/^\n/, '');
     var scoped = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
-      'const TARGET_SETS = ' + JSON.stringify([setName]) + ';');
-    if (scoped === source) {
+      function () { return 'const TARGET_SETS = ' + JSON.stringify([setName]) + ';'; });
+    if (scoped === source || scoped.indexOf('const INCLUDE_DEPENDENCIES = false;') < 0) {
       addIssues(resultBox('prop-result', false, 'Broken build.'), [{ headline: 'Could not scope the dump script — re-download the plugin from the playground.' }]);
       return;
     }
+    scoped = scoped.replace('const INCLUDE_DEPENDENCIES = false;', 'const INCLUDE_DEPENDENCIES = true;');
     setBusy(true);
-    $('prop-status').textContent = 'Reading ' + setName + ' (read-only)…';
+    $('prop-status').textContent = 'Reading ' + setName + ' and its local dependencies (read-only)…';
     // Read the file markers alongside the dump so a repo-generated set can
     // pre-fill its own base contract.
     engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (invMsg) {
@@ -1666,7 +1675,8 @@
         }
         var dump = msg.result || {};
         var row = null;
-        inventory.forEach(function (r) { if (r.name === setName || (r.contractId && r.name.indexOf(setName) === 0)) row = row || r; });
+        var capturedSet = dump[setName];
+        inventory.forEach(function (r) { if (capturedSet && r.nodeId === capturedSet.nodeId) row = r; });
         // MARKER = PROVENANCE, and the whole canvas→code asymmetry hangs off
         // it. The marked inventory lists every set this tool generated; a set
         // missing from it carries no ds_contracts/contractId and was drawn by
@@ -1706,6 +1716,15 @@
         if (!diff.ok) {
           $('prop-code-section').hidden = true;
           addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
+          return;
+        }
+        var closure = dump._provenance && dump._provenance.closure;
+        if (closure && closure.pulled && closure.pulled.length > 0) {
+          var familyBox = resultBox('prop-result', true, 'Family capture — ' + setName + ':');
+          addLine(familyBox, 'Captured ' + (closure.requested.length + closure.pulled.length) + ' local components: ' + closure.requested.concat(closure.pulled).map(function (set) { return set.name; }).join(', ') + '.');
+          addLine(familyBox, 'Download or copy this family JSON, then import it in the app’s JSON input. The app derives proposals for the captured components together and opens ' + setName + '. Review any refusals or provisional dependencies before preparing a React library.');
+          addMeta(familyBox, 'This artifact contains the observed canvas, not a base-contract diff. Single-proposal GitHub and pairing delivery do not carry a complete family.');
+          addArtifactActions(familyBox, String(diff.proposal.id || 'component') + '.family.json', JSON.stringify(dump, null, 2));
           return;
         }
         lastProposal = diff;
@@ -2346,6 +2365,11 @@
 // runtime to the set you picked (figma-sync/plugin/ui.html proposeFor) and
 // was never affected.
 const TARGET_SETS = [];
+// Send opts in to a complete, bounded local family. Other capture callers keep
+// their historical scope. No imports or mutations are performed by this walk.
+const INCLUDE_DEPENDENCIES = false;
+const DEPENDENCY_SET_CAP = 64;
+const DEPENDENCY_NODE_CAP = 50000;
 
 await figma.loadAllPagesAsync();
 
@@ -3832,7 +3856,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.45',
+    dumpVersion: '1.46',
   },
 };
 dumps._degradations = degradations;
@@ -3850,13 +3874,112 @@ if (TARGET_SETS.length === 0) {
 }
 const scope = TARGET_SETS.length > 0 ? 'TARGET_SETS' : selectedSetIds.size > 0 ? 'selection' : 'every set';
 const seenNames = [];
+const localSets = [];
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
     if (node.name === 'Slot') continue; // utility, never a contract component
     seenNames.push(node.name);
-    if (TARGET_SETS.length > 0 && !TARGET_SETS.includes(node.name)) continue;
-    if (scope === 'selection' && !selectedSetIds.has(node.id)) continue;
+    localSets.push(node);
+  }
+}
+let captureSets = localSets.filter((node) =>
+  TARGET_SETS.length > 0 ? TARGET_SETS.includes(node.name) :
+    scope === 'selection' ? selectedSetIds.has(node.id) : true);
+if (INCLUDE_DEPENDENCIES) {
+  const refuse = (reason, detail) => { throw new Error('DEPENDENCY_CAPTURE_' + reason + ': ' + detail); };
+  const byId = new Map(localSets.map((node) => [node.id, node]));
+  const chosen = new Map();
+  const names = new Map();
+  const edges = new Map();
+  const origins = new Map();
+  const requestedIds = new Set(captureSets.map((node) => node.id));
+  let visited = 0;
+  const describe = (node) => ({ nodeId: node.id, name: node.name, type: node.type });
+  const add = (node, round, from) => {
+    if (node.name.startsWith('_') || node.name === 'constructor' || node.name === 'prototype' || /^(0|[1-9]\d*)$/.test(node.name)) {
+      refuse('SET_NAME', JSON.stringify(node.name) + ' cannot be represented as a dump set key. Rename the component and retry.');
+    }
+    if (names.has(node.name) && names.get(node.name) !== node.id) {
+      refuse('AMBIGUOUS_NAME', JSON.stringify(node.name) + ' names multiple captured components. Rename them and retry.');
+    }
+    names.set(node.name, node.id);
+    if (!chosen.has(node.id)) {
+      if (!requestedIds.has(node.id) && chosen.size - requestedIds.size >= DEPENDENCY_SET_CAP) {
+        refuse('SET_CAP', 'More than ' + DEPENDENCY_SET_CAP + ' local dependencies. Narrow the component family.');
+      }
+      chosen.set(node.id, node);
+      edges.set(node.id, new Set());
+      origins.set(node.id, { round, referencedBy: new Set() });
+    }
+    if (from) origins.get(node.id).referencedBy.add(from.name);
+  };
+  for (const node of captureSets) add(node, 0, null);
+  // Map iteration includes later additions, giving a deterministic breadth-first
+  // walk. IDs, never names, decide which main owns an observed instance.
+  for (const owner of chosen.values()) {
+    const follow = (main, path) => {
+      if (!main) refuse('MAIN_UNREADABLE', path + ' has no readable main component.');
+      if (main.type !== 'COMPONENT') refuse('NOT_COMPONENT', path + ' does not reference a component.');
+      const target = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+      if (main.remote || target.remote) refuse('REMOTE_COMPONENT', path + ' references remote ' + target.name + '; capture requires local main components.');
+      if (target.name === 'Slot') return; // utility placeholder, not a dependency
+      if (!byId.has(target.id)) refuse('MAIN_UNREADABLE', path + ' references a main outside the readable local file.');
+      add(target, origins.get(owner.id).round + 1, owner);
+      edges.get(owner.id).add(target.id);
+    };
+    const pending = [owner];
+    while (pending.length) {
+      const node = pending.pop();
+      if (++visited > DEPENDENCY_NODE_CAP) refuse('NODE_CAP', 'More than ' + DEPENDENCY_NODE_CAP + ' nodes visited. Narrow the component family.');
+      const path = owner.name + ' / ' + node.name + ' (' + node.id + ')';
+      if (node.type === 'INSTANCE') {
+        let main;
+        try { main = await node.getMainComponentAsync(); }
+        catch (e) { refuse('MAIN_UNREADABLE', path + ': ' + String(e && e.message || e)); }
+        follow(main, path);
+        let props;
+        try { props = node.componentProperties || {}; }
+        catch (e) { refuse('PROPERTIES_UNREADABLE', path + ': ' + String(e && e.message || e)); }
+        for (const [key, def] of Object.entries(props)) {
+          if (def.type !== 'INSTANCE_SWAP' || typeof def.value !== 'string' || !def.value) continue;
+          let swapped;
+          try { swapped = await figma.getNodeByIdAsync(def.value); }
+          catch (e) { refuse('MAIN_UNREADABLE', path + ' / ' + key + ': ' + String(e && e.message || e)); }
+          follow(swapped, path + ' / ' + key);
+        }
+        // The dump represents the main and fixed swaps above, not arbitrary
+        // instance internals. Its own override reader names unsupported changes.
+        continue;
+      }
+      if (node.children) for (let i = node.children.length - 1; i >= 0; i--) pending.push(node.children[i]);
+    }
+  }
+  const active = new Set(), complete = new Set(), dependencyFirst = [];
+  const checkCycle = (id) => {
+    if (active.has(id)) refuse('CYCLE', 'Circular main-component references include ' + chosen.get(id).name + '.');
+    if (complete.has(id)) return;
+    active.add(id);
+    for (const next of edges.get(id)) checkCycle(next);
+    active.delete(id);
+    complete.add(id);
+    dependencyFirst.push(chosen.get(id));
+  };
+  for (const id of chosen.keys()) checkCycle(id);
+  dumps._provenance.closure = {
+    rule: 'follow-instances', cap: DEPENDENCY_SET_CAP,
+    requested: captureSets.map(describe),
+    pulled: [...chosen.values()].filter((node) => !requestedIds.has(node.id)).map((node) => ({
+      ...describe(node), round: origins.get(node.id).round,
+      referencedBy: [...origins.get(node.id).referencedBy].sort(),
+    })),
+    unresolved: [], cycles: [],
+  };
+  // The batch proposer registers each captured child before reading its host.
+  // requested retains the user's parent identity independently of this order.
+  captureSets = dependencyFirst;
+}
+for (const node of captureSets) {
     const variants = [];
     if (node.type === 'COMPONENT_SET') {
       for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name, node));
@@ -3969,7 +4092,6 @@ for (const page of figma.root.children) {
     if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
     if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;
     if (Object.keys(defs.slotDescriptions).length > 0) dumps[node.name].slotDescriptions = defs.slotDescriptions;
-  }
 }
 // R8: the dump says WHAT it dumped, and a named set that is not in the file is
 // a refusal — never a quiet `{}` that propose reads as "no sets".

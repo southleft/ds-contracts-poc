@@ -104,7 +104,7 @@ await page.addInitScript(() => {
     else if (msg.type === 'channel-check') post(Object.assign({ type: 'channel-check-result', replyTo: msg.replyTo }, window.__sim.channel));
     else if (msg.type === 'engine-run') {
       const code = String(msg.code || '');
-      if (msg.readOnly) window.__sim.readOnlyRuns.push(code.slice(0, 60));
+      if (msg.readOnly) window.__sim.readOnlyRuns.push(code);
       // The SCAN and the marked inventory are the same emitted walk with the
       // marker filter on/off — the simulator tells them apart the same way a
       // reader does: the scan keeps unmarked rows instead of `continue`ing.
@@ -416,6 +416,40 @@ ok(JSON.parse(await page.evaluate(() => {
   return JSON.stringify({ name: a && a.download });
 })).name.endsWith('.proposal.json'),
   'the download is named .proposal.json — it is a CONTRACT-PROPOSAL envelope, and naming an envelope .contract.json was a trap');
+
+// Local families use one actual capture artifact. Neither old delivery action
+// may remain armed with the previous successful single-component proposal.
+const FAMILY_DUMP = structuredClone(HAND_DUMP);
+FAMILY_DUMP.ForeignChip = {
+  setName: 'ForeignChip', type: 'COMPONENT', nodeId: '5:8', key: 'key-5:8',
+  variants: [{ name: 'ForeignChip', type: 'COMPONENT', bbox: { width: 10, height: 10 } }],
+};
+FAMILY_DUMP._provenance.closure = {
+  rule: 'follow-instances', cap: 64,
+  requested: [{ nodeId: '5:6', name: 'HandBuilt', type: 'COMPONENT_SET' }],
+  pulled: [{ nodeId: '5:8', name: 'ForeignChip', type: 'COMPONENT', round: 1, referencedBy: ['HandBuilt'] }],
+  unresolved: [], cycles: [],
+};
+await page.evaluate((dump) => { window.__sim.dump = dump; }, FAMILY_DUMP);
+await page.click('#prop-run');
+await page.waitForTimeout(700);
+ok((await page.locator('#prop-result').textContent()).includes('Family capture'),
+  'Send exposes a local family as a single capture');
+ok(await page.evaluate(() => window.__sim.readOnlyRuns.some(code => code.includes('const INCLUDE_DEPENDENCIES = true;'))),
+  'Send enables dependency capture under the read-only executor');
+const familyArtifact = await page.locator('#prop-result .download').evaluate(async (a) => ({
+  name: a.download, value: await (await fetch(a.href)).json(),
+}));
+ok(familyArtifact.name.endsWith('.family.json') && JSON.stringify(familyArtifact.value) === JSON.stringify(FAMILY_DUMP),
+  'download retains the entire observed capture including closure and children');
+ok(!(await shown('#prop-pr-section')) && !(await shown('#prop-bridge-section')) && !(await shown('#prop-code-section')),
+  'family delivery cannot send an incomplete parent through a single-proposal door');
+await page.evaluate(() => { window.__sim.dump = {}; });
+await page.click('#prop-run');
+await page.waitForTimeout(700);
+ok((await page.locator('#prop-result').textContent()).includes('No proposal'), 'a later refused capture replaces the result');
+ok(await page.locator('#prop-result .download').count() === 0 && !(await shown('#prop-pr-section')) && !(await shown('#prop-bridge-section')),
+  'refusal clears the stale artifact and delivery actions');
 
 // The SAME fixture is now reported as marked, with no trusted baseline or
 // comparison added. The panel must not promote that Boolean into proof.

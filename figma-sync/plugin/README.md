@@ -50,7 +50,19 @@ repo's tokens, contracts and icons baked in (`window.DSC`, built by
 
 - **Send** — "get what is on this canvas to the code side." **Scan this
   file** is a read-only pass over every local component set — including the
-  ones this tool did not make. Pick a set (or your selection): with a base
+  ones this tool did not make. Pick a set (or your selection). Send follows
+  its actual local main-component references, including applied instance
+  swaps, and reads the children before the parent. A multi-component family
+  exports as one `.family.json`: load it in the app's **JSON** input to
+  retain the captured dependencies and open the requested parent. Review
+  refusals and provisional children there before preparing a React library.
+  Remote, missing, circular or ambiguous dependencies refuse by name; the
+  capture allows at most 64 pulled sets and 50,000 visited nodes. The app's
+  separate 30-component workspace limit still applies. Single-proposal PR
+  and pairing delivery are unavailable for these family artifacts.
+  If Figma disables Save in its download dialog, use **Copy JSON** and paste
+  into the app; native file saving remains unqualified in the live evaluation.
+  For a single component, with a base
   contract you get an API-level diff (version, props, slots, variant axes;
   sets this tool generated pre-fill their own base); without one the plugin
   proposes a contract from what is drawn — the path for hand-built

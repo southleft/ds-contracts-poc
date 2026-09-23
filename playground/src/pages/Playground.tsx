@@ -3113,18 +3113,23 @@ export function Playground() {
                 walkthrough (/flow) shows the envelope the Send tab exports. */}
             <div className="rail__group" style={{ marginTop: 24 }}>
               <div className="rail__group-title">
-                From the Figma plugin&rsquo;s Send tab — a CLI door, not a playground one
+                From the Figma plugin&rsquo;s Send tab
               </div>
               <p className="hint">
-                The plugin&rsquo;s <strong>Send</strong> tab reads the selected set, proposes a
-                contract with the same engine this page runs, and exports a{' '}
-                <code>CONTRACT-PROPOSAL</code> envelope (proposed contract, notes, child stubs,
-                minted tokens, a provenance line). Its receiver is the CLI:{' '}
+                The plugin&rsquo;s <strong>Send</strong> tab reads the selected set and its
+                local dependencies. A family exports as one <code>.family.json</code> file.
+                Load it in <strong>JSON</strong> to retain the captured child proposals and
+                open the requested parent. Review refusals and provisional children before
+                preparing a React library. Remote or ambiguous dependencies refuse by name.
+              </p>
+              <p className="hint">
+                A single component exports a <code>CONTRACT-PROPOSAL</code> envelope
+                (proposed contract, notes, child stubs, minted tokens and provenance).
+                Load that file in <strong>JSON</strong>, or use the CLI receiver:{' '}
                 <code>ds-contracts figma receive --out &lt;contracts-dir&gt;</code> waits under a
                 pairing code and writes only <code>.proposals/&lt;id&gt;.proposal.json</code>{' '}
-                unless <code>--apply</code>. Nothing in the shipped plugin posts to this page,
-                so the button below stays disabled — named, not hidden. Paste the exported
-                envelope, or a plugin dump, into the <strong>JSON</strong> tab instead.
+                unless <code>--apply</code>. This pairing transport carries single proposals,
+                not family captures. Direct plugin delivery to this page remains unavailable.
               </p>
               {bridge === null ? (
                 <button
