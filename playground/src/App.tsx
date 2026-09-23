@@ -10,6 +10,7 @@ import { Playground } from "./pages/Playground";
 import { Sources } from "./pages/Sources";
 import { Start } from "./pages/Start";
 import { System } from "./pages/System";
+import { PreparedLibraryNative } from './pages/PreparedLibraryNative';
 
 export const REPO_URL = "https://github.com/southleft/ds-contracts-poc";
 
@@ -92,6 +93,8 @@ function TopBar() {
 
 function Routes() {
   const { pathname } = useRoute();
+  const library = /^\/prepared-library\/([a-f0-9]{64})$/.exec(pathname);
+  if (library) return <PreparedLibraryNative key={library[1]} artifactId={library[1]} />;
   if (pathname === "/start") return <Start />;
   if (pathname === "/system") return <System />;
   if (pathname === "/sources") return <Sources />;

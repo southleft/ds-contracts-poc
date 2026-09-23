@@ -2401,7 +2401,7 @@ export function Playground() {
 
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
-  const [libraryArtifact, setLibraryArtifact] = useState<{ filename: string; name: string; downloadUrl: string } | null>(null);
+  const [libraryArtifact, setLibraryArtifact] = useState<{ artifactId: string; filename: string; name: string; downloadUrl: string } | null>(null);
   const libraryRevision = useRef(0);
   useEffect(() => {
     libraryRevision.current++;
@@ -2423,7 +2423,8 @@ export function Playground() {
         throw Error(detail?.error ?? `React library preparation failed (${response.status}).`);
       }
       const artifact = await response.json();
-      if (typeof artifact.filename !== 'string' || !/^[A-Za-z0-9._-]+\.tgz$/.test(artifact.filename) ||
+      if (typeof artifact.artifactId !== 'string' || !/^[a-f0-9]{64}$/.test(artifact.artifactId) ||
+        typeof artifact.filename !== 'string' || !/^[A-Za-z0-9._-]+\.tgz$/.test(artifact.filename) ||
         typeof artifact.name !== 'string' || typeof artifact.downloadUrl !== 'string' ||
         !/^\/api\/react-library\/download\/[a-f0-9-]+$/.test(artifact.downloadUrl)) throw Error('React library response did not contain an installable archive.');
       if (revision !== libraryRevision.current) return;
@@ -3986,6 +3987,7 @@ export function Playground() {
                   {libraryArtifact && <>
                     <p><a href={libraryArtifact.downloadUrl} download={libraryArtifact.filename}>Download {libraryArtifact.filename}</a></p>
                     <p className="hint">Install: <code>npm install ./path/to/{libraryArtifact.filename}</code><br />Import from <code>{libraryArtifact.name}</code>.</p>
+                    <p><a href={`/prepared-library/${libraryArtifact.artifactId}?mode=${theme}&brand=default`}>Prepare this library for editable Figma inspection</a></p>
                   </>}
                 </div>
               )}
