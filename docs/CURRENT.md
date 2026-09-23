@@ -88,6 +88,46 @@ and recovery; wider content projection and full fidelity remain unqualified
 
 The contract records supported properties, anatomy, layout, tokens, content and component references. Readers and emitters use reusable rules; examples exercise those rules or expose a missing one. Runtime conversion requires no AI.
 
+An explicit finite `selection` relationship now generates tab-pattern behavior
+on both React surfaces, including keyed items, controlled inputs, keyboard
+navigation and persistent inactive panels. The Playground's **Selection** view
+provides an explicit setup and review form; it edits the current contract only
+after full validation. A bounded engine return now corroborates retained
+identities and API against the captured items, states and panels. Its live
+application journey and an app-delivered interactive Tabs consumer remain unfinished. The retained Tabs archive is unchanged; missing identities
+and panel content are not inferred ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
+
+A separate authored selection example now completes setup, review and archive
+preparation through the app. Its clean installed consumer retains panel input
+and stable item identity, handles keyboard selection and item removal, and
+honors held or accepted callbacks. Reset and an explicit same-tab share-link
+reload preserve the expected contract. The browser download event timed out;
+the exact displayed archive endpoint supplied the installed bytes. This is a
+bounded application rehearsal, not original Tabs, independent-family or native
+return qualification ([D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship)).
+
+The returned native family now also installs from an app-generated archive
+and passes the same eight interaction trials in a clean consumer. Its native
+structure and unobstructed canvas were inspected. Creation still required manual
+script transfers. Send now captures this parent's actual local dependencies in
+one family file; its live app import retains all three proposals and opens the
+parent without individual child transfers. A fresh Chrome session then completed
+**Copy JSON → paste → Load → Prepare React library → Download**. Its saved archive
+is byte-identical to the installed return archive. Figma's own Save dialog remains
+unqualified; the earlier exact-link transfer is preserved. Visual fidelity and complete V1
+acceptance remain unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return),
+[D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family)).
+
+A reversible native paint edit now returns through that route to an installed
+consumer with only the expected token change. Restoring and recapturing yields
+the original archive bytes. A state-dependent label edit refuses explicitly.
+The restore exposed a stale prepared-download link after child-only imports;
+workspace changes now refresh dependency validation, previews and archive state.
+Application replays verify child paint and content updates with unchanged parent
+JSON and three retained workspace entries. These bounded checks do not close
+the full two-way update or fidelity requirements
+([D.134](23-known-limitations.md#d134-child-only-imports-refresh-the-current-family)).
+
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.

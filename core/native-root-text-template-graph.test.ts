@@ -484,7 +484,7 @@ test('canonical capture retains every raw graph variable, mode, alias edge and m
   assert.equal(creation.status, 'created-candidate');
   const before = await h.run(emitNativeTemplateGraphReadbackScript(h.input, h.created.identity));
   const dump = await h.run(captureProgram(h.contract.name)), graph = dump[h.contract.name].templateVariableGraph;
-  assert.equal(dump._provenance.dumpVersion, '1.45');
+  assert.equal(dump._provenance.dumpVersion, '1.46');
   assert.ok(graph, JSON.stringify(dump._degradations));
   assert.equal(graph.fileKey, h.figma.fileKey); assert.equal(graph.collections.length, h.collections.length);
   assert.equal(graph.variables.length, h.variables.length); assert.equal(graph.consumers.length, 27);

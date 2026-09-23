@@ -33,6 +33,8 @@ An approved, linted set is a good input. Approval establishes design intent; the
 
 **Install from the local app.** In the React output, choose **Prepare React library**, then the download link. The local development server generates the selected component and its complete dependency graph, packages JavaScript, CSS Modules, tokens and TypeScript declarations into a `.tgz`, and exposes a download link for the archive. Links last until the local server restarts or ten newer libraries are prepared; prepare again if a link expires. Install the file with `npm install ./path/to/the-downloaded-file.tgz`, then import the component from the package name in its `package.json`. The archive includes a README. Use React 18 or later and a bundler with CSS Modules support; supply the fonts declared by the design. The hosted static Playground has no packaging server, so this button is available only in local development. Missing dependencies, invalid contracts, undefined tokens or more than 30 components refuse the whole download. Packaging does not qualify fidelity or accessibility.
 
+**Configure tab behavior.** For a valid contract containing repeated button components, open **Contract → Selection**. Choose the repeat, assign stable item keys, map the selected/unselected appearance, and give the list an accessible label. Map every item to an existing panel or explicitly choose an empty content slot for your app to supply. Choose the initial item and navigation policy, then **Review selection setup** and **Apply selection to contract**. Missing or conflicting relationships refuse before the editor changes. The form edits the current contract; it does not overwrite imported workspace entries or save a draft automatically. Reset restores the loaded source. Export the reviewed React library before leaving, and keep the contract JSON for later editing. The preview is static; test keyboard behavior in your consuming app. Native recapture of this relationship remains unfinished; see [D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship).
+
 **Clean consumer check (from this checkout):** `npm run design:consumer:check -- --dump <rest-dump.json> --contract <proposed contract> --generated <generated dir> --component <Name> --out <new evidence dir>` packages generated output, installs it into a temporary Vite consumer with no path back to this repository, mounts source variants, exercises supported text, content, variant and state behavior, and compares against Figma exports. Use a new output directory to retain earlier measurements. Read the receipt's framing and capture metadata as well as its scores: historical independent ink crops and opaque browser captures are not interchangeable with a current full-bounds comparison. Text-masked scores are diagnostic and never replace the unmasked limit. See [the measurement decisions](23-known-limitations.md#d51-comparable-node-alpha-and-contrasting-background-measurement) and current acceptance evidence.
 
 **Pin the consumer fonts.** Add `--fonts ./fonts.json` to the clean-consumer command when you have the design's font files. The manifest below names local files relative to itself (absolute local paths also work). Replace the hash with the file's SHA-256, for example from `shasum -a 256 ./fonts/ExampleSans.woff2`.
@@ -59,6 +61,29 @@ Use the exact CSS family declared by the component. `weight` is a string contain
 **Repeat imports.** Figma captures with file/node anchors refresh the same workspace entry across JSON and URL imports. Same-name components from different files remain separate. Their allocated contract ids survive set renames and removal of an earlier name collision. Unanchored inputs still refresh by source and display name; old entries already replaced before this correction must be imported again.
 
 **The REST import brings the children (docs/23 §D.43).** The app’s URL import follows the same-file dependency walk. It saves the parent and child proposals together, with their token layers, and opens the requested parent by its Figma node id. In **JSON**, choose a REST dump file (or paste its contents), review it, and choose **Load**. A dump carrying closure provenance uses the same family retention. A family larger than the workspace’s 30-component limit refuses before changing the workspace; a refused requested parent also refuses the import, while a refused dependency stays a named provisional stub. Repeated Altitude and CBDS imports were shown live on 2026-09-19 with stable, distinct identities and retained dependencies; see the acceptance ledger for the delivered consumers.
+
+**Capture a local family with the plugin.** Select the parent in Figma, open
+**Send**, and choose **Read the set & diff**. When local dependencies exist,
+the result offers one `.family.json` containing the observed parent and child
+components. Copy it, then load it through the app's **JSON** input. A download
+link is also offered; native file saving remains unqualified because Figma's
+Save dialog was disabled in the live evaluation.
+The native Copy JSON path into a fresh Chrome app session and the subsequent
+React archive download were verified with identical installed-package bytes.
+The requested parent opens automatically and the supported child proposals are
+retained together. Review any refused or provisional children before choosing
+**Prepare React library**. Remote mains, cycles, unreadable references and
+ambiguous names refuse; this does not import published libraries into the file.
+Single-proposal GitHub/pairing delivery does not carry family captures. See
+[D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family).
+
+To return another canvas edit, capture and load the family again. Reimport
+refreshes its existing workspace identities. Even when only a child changes,
+the preview and dependency scope refresh and the earlier package link is cleared;
+choose **Prepare React library** again for the current family. This explicit
+capture/import route is not continuous synchronization. Bounded paint, content
+and restoration checks are recorded in
+[D.134](23-known-limitations.md#d134-child-only-imports-refresh-the-current-family).
 
 **From the command line:** `npm run extract:figma:rest -- "<figma url>?node-id=<set id>" --out <work>/set.rest-dump.json` now also fetches every same-file component set the set's instances reference (transitively, at most 64 of them) into the same dump, so `npm run extract:figma` proposes each child as a real contract instead of an empty stub, and `ds-contracts generate <work>/propose/*.contract.proposed.json …` generates them all. Nothing extra is typed. A remote (library) component, a child that refuses to propose (`closure-child-refused:<set>:<reason>`) or one past the cap stays a stub and is named on stderr and in `figma-proposals.md`. `--no-closure` imports the one set, as before. Dependency closure alone does not qualify child content or behavior. The current Altitude Tabs archive preserves its observed body content, active styling and Stretch allocation; its two measured appearances pass both backgrounds with explicitly supplied fonts. Keyboard navigation and panel switching remain unimplemented in that archive, and the consumer fonts do not authenticate Figma font bytes. The historical near-white comparison was insufficient; current comparisons retain both backgrounds (see [CURRENT](./CURRENT.md) row 2).
 

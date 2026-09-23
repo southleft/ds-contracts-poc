@@ -54,6 +54,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-09-22: shared contract validation imports selection.js;
+    // its runtime and declarations keep installed validation equivalent.
     // Reviewed 2026-09-21: validation and CSS emission import the shared
     // joint-token referee/serializer; its runtime and declarations must ship.
     // Reviewed 2026-09-17: css.js imports this pure CSS identifier serializer;
@@ -107,6 +109,8 @@ const PACKAGES = [
       "dist/required-facts.js",
       "dist/runtime-emission.d.ts",
       "dist/runtime-emission.js",
+      "dist/selection.d.ts",
+      "dist/selection.js",
       "dist/tokens.d.ts",
       "dist/tokens.js",
       "dist/validate.d.ts",

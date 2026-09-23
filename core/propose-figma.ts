@@ -1,3 +1,4 @@
+import { readFigmaSelectionApi, restoreFigmaSelectionApi } from './figma-selection-api.js';
 import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {observedInstanceGroups, observedInstanceIdentity, staticInstanceContent} from './observed-instance-content.js';
 import { cssBoxFromNative, verifyInsets, zeroInsets, type BoxInsets } from './absolute-box.js';
@@ -11924,6 +11925,8 @@ function proposeFromDumpFenced(
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
+  const retainedSelection = readFigmaSelectionApi(set);
+  if (retainedSelection) set = retainedSelection.normalized;
   const rootContent = readRootContent(set);
   const template = rootContent?.textTemplate ? validateRootTextTemplates(set, opts.corpus, opts.capturedValues) : undefined;
   const templateFamily = template?.family;
@@ -12575,6 +12578,10 @@ function proposeFromDumpFenced(
   const only = merged.children.length === 1 ? merged.children[0] : undefined;
   const soleLabel = only !== undefined && only.type === 'TEXT' && only.name === 'label';
   const autoLabel = soleLabel && unifiedPropRef(only!, 'characters', ctx, `${where}/label`);
+  // A layer named label is not proof of the public children API. A stamped
+  // non-children property keeps its actual name and text part; otherwise a
+  // captured dependency silently changes API and its callers cannot bind it.
+  const hoistAutoLabel = autoLabel && (!ctx.propNames?.[autoLabel] || ctx.propNames[autoLabel] === 'children');
   // R7 (2026-08-22, core/root-text-check.ts): the UNBOUND sole `label` TEXT
   // child is what the emitter draws for `anatomy.root.text` (rootTextSpecs:
   // the root IS the text node, and a COMPONENT cannot be a TEXT node, so it
@@ -12614,7 +12621,7 @@ function proposeFromDumpFenced(
       ctx.notes.push(`${where}: verified empty native text template restored root typography without default children; native text-box rounding is not applied to the root box`);
     }
     ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
-  } else if (only && (autoLabel || unboundRootText)) {
+  } else if (only && (hoistAutoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp, true);
@@ -13544,6 +13551,10 @@ function proposeFromDumpFenced(
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   restoreCodeValueAxes(contract, typedAxes);
+  if (retainedSelection) {
+    restoreFigmaSelectionApi(contract, retainedSelection, opts.contractsById);
+    ctx.notes.push('retained-selection-api: explicit identities, input aliases and panel relationships recovered from validated non-executable metadata; paint and content come from the capture, not retained source anatomy; native behavior is not certified');
+  }
   if (retainedApi) {
     restoreFigmaStateApi(contract, retainedApi);
     ctx.notes.push('retained-state-api: initializer and callback toggle recovered from validated non-executable metadata; drawn variants corroborate the input domain, not native interaction behavior');

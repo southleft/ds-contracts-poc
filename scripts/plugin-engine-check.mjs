@@ -542,8 +542,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
   assert(
-    dump._provenance && dump._provenance.dumpVersion === '1.45',
-    `dump v1.45: provenance dumpVersion is 1.45 (got ${dump._provenance && dump._provenance.dumpVersion})`,
+    dump._provenance && dump._provenance.dumpVersion === '1.46',
+    `dump v1.46: provenance dumpVersion is 1.46 (got ${dump._provenance && dump._provenance.dumpVersion})`,
   );
   assert(
     storedHash && dump.Badge.specHash === storedHash,
@@ -643,6 +643,14 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
 
   const diff = DSC.proposeDiff(dump, 'Badge', badge);
   assert(diff.ok, `proposeDiff proposes from the drawn set (${diff.ok ? '' : diff.issue.headline})`);
+  const absentRequested = DSC.proposeDiff(dump, 'AbsentParent', null);
+  assert(!absentRequested.ok && absentRequested.issue.headline.includes('AbsentParent'),
+    'a missing requested parent never substitutes a successful captured child');
+  const refusedRequested = DSC.proposeDiff({ ...dump, BrokenParent: {
+    ...dump.Badge, setName: 'BrokenParent', selectionApi: '{',
+  } }, 'BrokenParent', null);
+  assert(!refusedRequested.ok,
+    'a refused requested parent never substitutes a successful captured child');
   assert(
     diff.summaryLines[diff.summaryLines.length - 1].startsWith('Scope: this diff covers the API surface'),
     'the diff ends with its named scope note',
@@ -1572,8 +1580,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       const buttonDump = await runIn(mockA, scopedButton);
       const rxNotes = (buttonDump._degradations || []).filter((d) => d.code === 'prototype-reactions-unsupported');
       assert(
-        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.45',
-        `dump v1.45: provenance dumpVersion is 1.45 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
+        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.46',
+        `dump v1.46: provenance dumpVersion is 1.46 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
       );
       assert(
         rxNotes.length === wiringA.length,

@@ -3,7 +3,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.45';
+export const PLUGIN_DUMP_VERSION = '1.46';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -353,6 +353,8 @@ export interface DumpVariableConsumer {
 }
 
 export interface DumpNode {
+  /** Retained selection identity. Malformed values must reach validation. */
+  selectionIdentity?: unknown;
   name: string;
   /** Plugin v1.42: direct binding variable ID → this node's inherited mode
    * and resolved value. Missing means uncaptured, never the default mode. */
@@ -579,6 +581,8 @@ export interface DumpNode {
    *  set). Matches contracts' bindings.figma.anchors.componentSetKey — checked FIRST
    *  by the resolver; instanceKey is the fallback for setless components. */
   instanceSetKey?: string;
+  /** Selection items only: identity read from the actual main/set, not the instance stamp. */
+  instanceContractId?: string;
   /** OBSERVED bounding box (dump v1.5, additive; post-layout width/height,
    *  px) on two node classes:
    *  · INSTANCE nodes — dump v1 stops at instance boundaries by design;
@@ -705,6 +709,8 @@ export interface DumpTemplateVariableGraph {
 }
 
 export interface DumpSet {
+  /** Retained API, corroborated against all native relationship nodes. */
+  selectionApi?: unknown;
   setName: string;
   type: 'COMPONENT_SET' | 'COMPONENT';
   /** Set-level anchors (dump v1.1, additive). */

@@ -50,7 +50,19 @@ repo's tokens, contracts and icons baked in (`window.DSC`, built by
 
 - **Send** — "get what is on this canvas to the code side." **Scan this
   file** is a read-only pass over every local component set — including the
-  ones this tool did not make. Pick a set (or your selection): with a base
+  ones this tool did not make. Pick a set (or your selection). Send follows
+  its actual local main-component references, including applied instance
+  swaps, and reads the children before the parent. A multi-component family
+  exports as one `.family.json`: load it in the app's **JSON** input to
+  retain the captured dependencies and open the requested parent. Review
+  refusals and provisional children there before preparing a React library.
+  Remote, missing, circular or ambiguous dependencies refuse by name; the
+  capture allows at most 64 pulled sets and 50,000 visited nodes. The app's
+  separate 30-component workspace limit still applies. Single-proposal PR
+  and pairing delivery are unavailable for these family artifacts.
+  If Figma disables Save in its download dialog, use **Copy JSON** and paste
+  into the app; native file saving remains unqualified in the live evaluation.
+  For a single component, with a base
   contract you get an API-level diff (version, props, slots, variant axes;
   sets this tool generated pre-fill their own base); without one the plugin
   proposes a contract from what is drawn — the path for hand-built
@@ -122,9 +134,10 @@ Missing or different file identity refuses the source operation.
   (scan, drift, inventory, propose's set read) runs against a guarded
   `figma` façade in `code.js` that throws on any write — the `readOnly`
   flag is enforced, not decorative. Writes happen only when you press
-  Generate/Apply on a report the plugin showed you first, and a thrown sync
-  script is atomic by Figma's design, so a failed run never leaves a
-  half-synced file.
+  Generate/Apply on a report the plugin showed you first. A thrown sync
+  script can leave changes made before the error, including incomplete
+  components. Preserve its report and inspect the canvas before repairing
+  the affected nodes or retrying.
 - **The ONE unguarded surface is Advanced → Paste a script.** It runs
   whatever you paste with **full plugin permissions in the file you have
   open** and is NOT run against the guarded read-only API — a script pasted
