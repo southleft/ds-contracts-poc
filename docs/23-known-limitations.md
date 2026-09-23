@@ -9908,8 +9908,11 @@ An isolated full-service comparison against the retained recovery history reduce
 mean repeated-read time from 64.0 to 52.3 seconds over two warm reads per process;
 the first read fell from 114.7 to 99.4 seconds. All six complete responses were
 byte-identical and all 2,204 native evidence files remained unchanged. These are
-local in-process measurements, not an HTTP latency guarantee. The remaining delay
-is still a product gap, and broader performance qualification is unfinished.
+local in-process measurements, not an HTTP latency guarantee. After adoption,
+the app reopens the same current verified correction and its historical records.
+A separate actual HTTP read takes 56.9 seconds, returns the exact saved response,
+and preserves all 2,204 native evidence files with no new event. The remaining
+delay is still a product gap; broader performance qualification is unfinished.
 
 Regression checks mutate returned predecessor and consumer pins, history arrays
 and nested observations, then confirm later callers retain the original values.
