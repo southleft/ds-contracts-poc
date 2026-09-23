@@ -3388,8 +3388,13 @@ function dsStampFingerprints(node) {
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
 const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+function hasJointPropertyReferences(spec) {
+  return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children || []).some(hasJointPropertyReferences);
+}
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV +
+    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '');
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -3660,7 +3665,7 @@ async function amendSet(set, C) {
     for (const vis of registry.visibles) {
       const k = defKey(vis.prop);
       if (!k) continue;
-      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: k };
       vis.node.visible = vis.default;
     }
   }
@@ -3869,7 +3874,7 @@ async function amendComponent(comp, C) {
   for (const vis of registry.visibles) {
     const k = defKey(vis.prop);
     if (!k) continue;
-    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: k };
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
@@ -4039,7 +4044,7 @@ async function syncOne(C) {
     for (const vis of b.registry.visibles) {
       const key = keys[vis.prop];
       if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: key };
       vis.node.visible = vis.default;
     }
   }

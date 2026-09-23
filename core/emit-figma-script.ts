@@ -966,6 +966,20 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  construction the moment the zip-stale failure in front of it was fixed. */
 export const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
 
+function componentHasJointPropertyReferences(component: ComponentData): boolean {
+  const visit = (spec: NodeSpec): boolean =>
+    Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children ?? []).some(visit);
+  return [...component.variants, ...(component.stateVariants ?? [])].some(v => visit(v.spec));
+}
+
+/** Only components with overlapping property references need this runtime
+ * correction. Keep the plugin's preview hash aligned with emitted specHash. */
+export function figmaRuntimeRevision(component: ComponentData): string {
+  return RUNTIME_EMIT_REV + (componentHasJointPropertyReferences(component)
+    ? '|joint-property-references-v1' : '');
+}
+
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
   return createFigmaEngine(ctx).buildComponentScript(
@@ -8090,6 +8104,10 @@ function buildSyncScript(
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
+  // A visibility assignment replaces the complete Figma reference map. Text
+  // and native slots can already carry another live property on that node.
+  // Keep unrelated emitted programs and their runtime hashes unchanged.
+  const hasJointPropertyReferences = featureDatas.some(componentHasJointPropertyReferences);
   const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
   const hasStrokedPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'stroked-path'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
@@ -9099,8 +9117,13 @@ function dsStampFingerprints(node) {
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
 const RUNTIME_EMIT_REV = '${RUNTIME_EMIT_REV}';
-function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
+${hasJointPropertyReferences ? `function hasJointPropertyReferences(spec) {
+  return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children || []).some(hasJointPropertyReferences);
+}
+` : ''}function specHash(C) {
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV${hasJointPropertyReferences ? ` +
+    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '')` : ''};
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -9360,7 +9383,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
     for (const vis of registry.visibles) {
       const k = defKey(vis.prop);
       if (!k) continue;
-      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
       vis.node.visible = vis.default;
     }
   }
@@ -9546,7 +9569,7 @@ ${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.s
   for (const vis of registry.visibles) {
     const k = defKey(vis.prop);
     if (!k) continue;
-    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
@@ -9727,7 +9750,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     for (const vis of b.registry.visibles) {
       const key = keys[vis.prop];
       if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: key };
       vis.node.visible = vis.default;
     }
   }

@@ -153,6 +153,7 @@ export {
   createFigmaEngine,
   emitFigmaScript,
   RUNTIME_EMIT_REV,
+  figmaRuntimeRevision,
   codeOnlyFactLabel,
   foldCodeOnlyFacts,
   summarizeCodeOnlyFacts,

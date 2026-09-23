@@ -10157,3 +10157,31 @@ journal. Existing rich-value and write-during-display refusal behavior is retain
 **Reversal:** remove the projected pin/history reuse and return the traversal to
 full authenticated record reads. Preserve all journals and measurement evidence;
 do not replace the response-scoped projections with persistent authorization.
+
+
+## D.137 Visibility must preserve other property bindings
+
+**AGENT decision — 2026-09-23.** Figma replaces a node's complete
+`componentPropertyReferences` map on assignment. The renderer assigned text or
+slot content first and then visibility, silently removing the first binding.
+A read-only inspection of the retained imported Button found 45 text layers
+with visibility references and none with text references.
+
+Create, standalone amendment and variant-set amendment now preserve the other
+references when assigning visibility. Components with overlapping references
+receive a specific runtime-hash suffix, shared by native emission and the
+plugin's preview. Their unchanged contracts therefore receive the correction;
+unrelated components keep their previous hashes and emitted program bytes.
+
+Two isolated native fixtures reproduced the old defect and then amended three
+mains while preserving the target IDs and property keys. Instance label changes
+and hide/show edits worked; a repeated corrected program skipped rebuilding.
+A separate readback confirmed both text/visibility and slot-content/visibility
+references, and the unobstructed canvas was inspected. This was a developer
+script rehearsal. The retained imported family was not corrected, and its
+application delivery, complete dependency verification and fidelity remain open.
+
+**Reversal:** restore the visibility-only assignments and remove the specific
+runtime-hash suffix from both emission and the plugin mirror. Preserve the
+failed and corrected native evidence; do not call a defined but unbound text
+property editable.
