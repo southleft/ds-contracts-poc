@@ -213,7 +213,7 @@ async function native(c = fixture()) {
     );
     return (await run(code))[node.name] as DumpSet;
   };
-  return { node, root, run, dump };
+  return { node, root, figma, run, dump };
 }
 function proposal(
   set: DumpSet,
@@ -245,12 +245,22 @@ const pane = (v: any): any => v.children[1].children[0];
 const rows = (c: Contract) =>
   walkAnatomy(c).find((r) => r.name === "item")!.part.repeat!.sample;
 
-test("a complete captured selection family preserves stamped item text names without source dependencies", async () => {
+function familyCaptureSource(name: string) {
+  return readFileSync(new URL("../extract/figma/dump.plugin.js", import.meta.url), "utf8")
+    .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify([name])};`)
+    .replace("const INCLUDE_DEPENDENCIES = false;", "const INCLUDE_DEPENDENCIES = true;");
+}
+
+test("one selected parent captures its actual local family without source dependencies", async () => {
   const c = fixture(), live = await native(c);
-  const source = readFileSync(new URL("../extract/figma/dump.plugin.js", import.meta.url), "utf8")
-    .replace(/^const TARGET_SETS = \[[^\n]*\];$/m,
-      `const TARGET_SETS = ${JSON.stringify([child.name, panel.name, c.name])};`);
+  const source = familyCaptureSource(live.node.name);
+  const before = await live.dump();
   const dump = JSON.parse(JSON.stringify(await live.run(source)));
+  assert.deepEqual(await live.dump(), before, "capture does not alter the parent");
+  assert.equal(dump._provenance.closure.requested[0].nodeId, live.node.id);
+  assert.deepEqual(dump._provenance.closure.pulled.map((s: any) => s.name).sort(), [child.name, panel.name].sort());
+  assert.deepEqual(dump._provenance.closure.unresolved, []);
+  assert.equal(Object.keys(dump).filter(k => !k.startsWith("_")).length, 3);
   const batch = proposeBatchFromDump(dump, {
     corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
     contractIdByName: new Map(), contractsById: new Map(), mintUnbound: true,
@@ -265,6 +275,49 @@ test("a complete captured selection family preserves stamped item text names wit
   const parent = returned.find(p => p.id === c.id)!;
   assert.deepEqual(rows(parent), rows(c));
   assert.deepEqual(parent.selection, c.selection);
+});
+
+test("family capture refuses missing, remote, cyclic, ambiguous and over-budget references", async () => {
+  for (const kind of ["MAIN_UNREADABLE", "REMOTE_COMPONENT", "CYCLE", "AMBIGUOUS_NAME", "SET_CAP", "NODE_CAP", "SET_NAME"]) {
+    const live = await native();
+    const instance: any = live.node.findOne((n: any) => n.type === "INSTANCE");
+    const main = await instance.getMainComponentAsync();
+    let source = familyCaptureSource(live.node.name);
+    if (kind === "MAIN_UNREADABLE") instance.getMainComponentAsync = async () => null;
+    if (kind === "REMOTE_COMPONENT") main.remote = true;
+    if (kind === "CYCLE") instance.getMainComponentAsync = async () => live.node.children![0];
+    if (kind === "AMBIGUOUS_NAME") main.parent.name = live.node.name;
+    if (kind === "SET_NAME") main.parent.name = "_hidden";
+    if (kind === "SET_CAP") source = source.replace("const DEPENDENCY_SET_CAP = 64;", "const DEPENDENCY_SET_CAP = 0;");
+    if (kind === "NODE_CAP") source = source.replace("const DEPENDENCY_NODE_CAP = 50000;", "const DEPENDENCY_NODE_CAP = 1;");
+    await assert.rejects(live.run(source), new RegExp("DEPENDENCY_CAPTURE_" + kind), kind);
+  }
+});
+
+test("family capture follows transitive mains and applied swaps by identity", async () => {
+  const live = await native();
+  const figma: any = live.figma;
+  const instance: any = live.node.findOne((n: any) => n.type === "INSTANCE");
+  const main = await instance.getMainComponentAsync();
+  const nested = figma.createComponent();
+  nested.name = "NestedLocal";
+  figma.currentPage.appendChild(nested);
+  main.appendChild(nested.createInstance());
+  const swapped = figma.createComponent();
+  swapped.name = "AppliedLocal";
+  figma.currentPage.appendChild(swapped);
+  instance._allProps["Icon#99"] = { type: "INSTANCE_SWAP", value: swapped.id };
+  const unrelated = figma.createComponent();
+  unrelated.name = main.parent.name; // same name does not make it a dependency
+  figma.currentPage.appendChild(unrelated);
+  const dump = JSON.parse(JSON.stringify(await live.run(familyCaptureSource(live.node.name))));
+  const closure = dump._provenance.closure;
+  assert.equal(closure.pulled.find((s: any) => s.nodeId === nested.id).round, 2);
+  assert.equal(closure.pulled.find((s: any) => s.nodeId === swapped.id).round, 1);
+  assert.ok(!closure.pulled.some((s: any) => s.nodeId === unrelated.id));
+  assert.equal(dump.AppliedLocal.nodeId, swapped.id);
+  assert.ok(dump._provenance.sets.indexOf(nested.name) < dump._provenance.sets.indexOf(main.parent.name));
+  assert.equal(dump._provenance.sets.at(-1), live.node.name);
 });
 
 test("writer and production Plugin capture on a native mock retain finite identities and aliases without a source anatomy snapshot", async () => {

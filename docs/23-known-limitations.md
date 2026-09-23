@@ -9906,8 +9906,9 @@ authorized evaluation file. Canonical capture, pasted into the application,
 returned all three contracts; its archive installed in an isolated React
 consumer and passed eight live interaction trials. Native structure and
 unobstructed canvas screenshots are recorded. The trial required manual script
-and capture transfers. The plugin's Send surface still refuses this new parent
-because its child contracts are absent from the plugin's baked corpus. This is
+and capture transfers. At that checkpoint Send refused the new parent because
+its child contracts were absent from the plugin's baked corpus; the later local
+family capture in D.133 resolves that acquisition gap. This is
 a bounded return demonstration, not clean end-user delivery, original Tabs,
 independent-family qualification, visual fidelity, or complete V1 acceptance.
 
@@ -9923,3 +9924,48 @@ together, revert the stamped-label hoist condition, regenerate Figma scripts,
 lowering citations and the plugin receipt, and retain both failing and passing
 evidence. Restore a named native refusal rather than claiming unsupported
 exposure succeeds. Do not restore the false atomic-rollback message.
+
+## D.133 Send captures local dependencies as one family
+
+**AGENT decision — 2026-09-22.** Send previously captured only its selected
+parent. A newly authored selection component then refused because its item
+contract was absent from the plugin's baked corpus. Send now opts into the
+canonical dump's read-only dependency walk. Actual main-component IDs and
+applied instance-swap IDs determine the local family; names do not select a
+different dependency. Children precede parents for batch proposal, while
+closure provenance retains the originally requested node ID.
+
+The walk refuses remote or unreadable mains, cycles, colliding or reserved set
+names, more than 64 pulled sets, or more than 50,000 visited nodes. It does not
+import remote components or claim to recover arbitrary instance-internal
+overrides. Existing capture degradations and proposal refusals remain visible.
+The default standalone dump retains its previous scope unless dependency
+capture is explicitly enabled. Dump version 1.46 records the new producer.
+
+A family is delivered as one observed `.family.json`, through Copy/Download
+and the app's existing JSON import. The app saves supported children together,
+opens the requested parent by node ID, and refuses oversized workspace imports
+atomically at its separate 30-component limit. Refused children remain named
+provisional stubs. Single-proposal GitHub and pairing transports cannot carry
+this artifact and are hidden for family results. New reads clear old delivery
+actions, and a refused requested parent cannot fall back to a successful child.
+
+The live evaluation parent produced one capture containing its two dependencies,
+with no capture degradations. Loading that exact artifact in the app retained
+all three proposals and opened the requested parent. Its React archive is
+byte-identical to the previously installed, interaction-tested archive. No
+script editing or individual child transfers were needed for this capture.
+Native saving remains unqualified: Figma's Save dialog stayed disabled for
+both data and Blob links. The exact data-link payload supplied the app import;
+Copy reported success and pasted JSON into a native field, but a complete
+clipboard-to-app transfer was not independently verified in this run. This is
+not a clean end-to-end delivery qualification. Evidence:
+`private/selection-family-send-20260922/`. This does not qualify family fidelity,
+two-way recovery, remote-library support or the complete V1 journey. Regression
+checks cover the actual canonical script, empty source-dependency maps, named
+refusals and the packaged UI's unchanged family artifact.
+
+**Reversal:** disable the Send dependency option and remove the family artifact
+route, restore the named parent-dependency limitation in the workflow docs,
+regenerate the embedded dump and plugin receipt, and preserve captured evidence.
+Keep the exact requested-parent check and stale-action clearing independently.
