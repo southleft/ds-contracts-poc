@@ -198,8 +198,10 @@ const fillWitness = (stage: string) => `const fill=()=>{
   }
   return no(indefinite);};`;
 
-export async function readReactStyleOrigin(page: Page, selector: string, ownership: ReactOwnership, stage = '#root'): Promise<ReactStyleOrigin> {
-  return {version:1,roots:await readOrigins(page,selector,ownership,stage,[...new Set(ownership.components.flatMap(c=>c.roots))].sort())};
+export async function readReactStyleOrigin(page: Page, selector: string, ownership: ReactOwnership, stage = '#root', ownedHostPaths: readonly string[] = []): Promise<ReactStyleOrigin> {
+  if(ownedHostPaths.some(path=>!ownership.nodes.some(node=>node.path===path&&node.createdBy&&ownership.components.some(c=>c.id===node.createdBy))))
+    throw Error('react-style-origin-owned-host-unqualified');
+  return {version:1,roots:await readOrigins(page,selector,ownership,stage,[...new Set([...ownership.components.flatMap(c=>c.roots),...ownedHostPaths])].sort())};
 }
 
 /** The same own-size rule, read for the host elements BELOW the component

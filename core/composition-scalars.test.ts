@@ -662,10 +662,11 @@ test('native caller content populates linked slots without altering child mains 
   }
 });
 
-test('native caller graph owns linked instances, preserves borrowed internals and passes independent readback', async () => {
+for (const depth of [0,1,3]) test(`native caller graph owns linked instances and checks caller slots through ${depth} inherited wrappers`, async () => {
   const fixture = await nativeComparisonFixture();
-  const frame = fixture.contract('fixture.graph-frame', { root: { layout: { display: 'flex', direction: 'column' },
-    slot: { name: 'children' } } });
+  let content: any = { slot: { name: 'children' } };
+  for (let i=0;i<depth;i++) content={layout:{display:'flex',direction:'column'},parts:{['wrapper'+i]:content}};
+  const frame = fixture.contract('fixture.graph-frame', { root: { layout: { display: 'flex', direction: 'column' }, ...content } });
   const parent = fixture.contract('fixture.graph-main', { root: { layout: { display: 'flex', direction: 'column' }, parts: {
     frame: { component: { id: frame.id }, parts: {
       caption: { content: { prop: 'caption' }, tokens: { color: '{ink}' }, declared: { 'font-family': 'Inter' } },
@@ -724,6 +725,39 @@ test('native caller graph owns linked instances, preserves borrowed internals an
       r.nodes.push({ id: 'foreign:rect', type: 'RECTANGLE', name: 'dropped', parentId: slot.id, childIds: [], values: {}, metadata: {} });
       slot.childIds.push('foreign:rect'); }],
   ];
+  if (depth === 3) tampered.push(['inherited slot moved out of its main wrapper', r => {
+    const born = new Set(creation.nodes.map((n: any) => n.id));
+    const slot = r.nodes.find((n: any) => n.type === 'SLOT' && !born.has(n.id) && n.childIds.length > 0);
+    const wrapper = r.nodes.find((n: any) => n.id === slot.parentId);
+    // The selected fixture has multiple wrappers; locate the owning instance
+    // without relying on names or the depth of the native layout lowering.
+    let root = wrapper;
+    while (root.type !== 'INSTANCE') root = r.nodes.find((n: any) => n.id === root.parentId);
+    assert.notEqual(slot.parentId,root.id);
+    wrapper.childIds = wrapper.childIds.filter((id: string) => id !== slot.id);
+    slot.parentId = root.id; root.childIds.push(slot.id);
+  }], ['inherited wrapper loses its allocation stamp', r => {
+    const born = new Set(creation.nodes.map((n: any) => n.id));
+    const wrapper = r.nodes.find((n: any) => n.type === 'FRAME' && !born.has(n.id));
+    assert.ok(wrapper); wrapper.metadata.nativeSourceAllocation = '';
+  }], ['inherited wrapper claims a sibling allocation', r => {
+    const born = new Set(creation.nodes.map((n: any) => n.id));
+    const wrappers = r.nodes.filter((n: any) => n.type === 'FRAME' && !born.has(n.id));
+    assert.ok(wrappers.length > 1);
+    wrappers[0].metadata.nativeSourceAllocation = wrappers[1].metadata.nativeSourceAllocation;
+  }], ['inherited wrapper changes native type', r => {
+    const born = new Set(creation.nodes.map((n: any) => n.id));
+    const wrapper = r.nodes.find((n: any) => n.type === 'FRAME' && !born.has(n.id));
+    assert.ok(wrapper); wrapper.type = 'RECTANGLE';
+  }], ['main and inherited wrapper share a forged allocation stamp', r => {
+    const born = new Set(creation.nodes.map((n: any) => n.id));
+    const wrapper = r.nodes.find((n: any) => n.type === 'FRAME' && !born.has(n.id));
+    const source = r.nodes.find((n: any) => n.id === wrapper.metadata.nativeSourceAllocation);
+    assert.ok(source);
+    const original = wrapper.metadata.nativeSourceAllocation;
+    for (const row of r.nodes) if (row.metadata.nativeSourceAllocation === original)
+      row.metadata.nativeSourceAllocation = 'forged:allocation';
+  }]);
   for (const [name, mutate] of tampered) {
     const changed = structuredClone(settled); mutate(changed);
     assert.equal(verifyNativeContractReadback(input, changed).status, 'refused', name);

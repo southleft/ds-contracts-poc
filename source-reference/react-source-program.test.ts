@@ -20,6 +20,106 @@ export function Toggle(props:Parameters<typeof Primitive.Root>[0]) {return <Prim
 export function Action({asChild=false,...props}:{asChild?:boolean;disabled?:boolean}) {const Comp=asChild?Primitive.Root:'button';return <Comp data-slot="action" {...props}/>;}
 export function Box(props:{children?:string}) {const div='button';return <div {...props}><Action/></div>;}
 `;
+
+test("nested unchanged children retain a host path instead of becoming a root slot", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `import './primitive';
+type API = {children?: string[]; mirror?: string[]; visible?: boolean};
+function External(props: API) {return <div {...props}/>}
+export function Deep({children}: API) {return <div><div><button>{children}</button></div></div>}
+export function Siblings({children}: API) {return <div>Heading<div/><div><button/>{/* comment */}<div>{children}</div></div><button/></div>}
+export function Attribute({children}: API) {return <div><button children={children}/></div>}
+export function Spread(props: API) {return <div><button {...props}/></div>}
+export function Duplicate({children}: API) {return <div><div>{children}</div><button>{children}</button></div>}
+export function Fragment({children}: API) {return <div><><button>{children}</button></></div>}
+export function Component({children}: API) {return <div><External>{children}</External></div>}
+export function Dynamic({children,visible}: API) {return <div>{visible && <button/>}<div>{children}</div></div>}
+export function Mixed({children}: API) {return <div><div>{children} extra</div></div>}
+export function Changed({children}: API) {children?.push('changed');return <div><div>{children}</div></div>}
+export function Aliased({children,mirror}: API) {mirror?.push('changed');return <div><div>{children}</div></div>}
+export function EscapedAttribute({children}: API) {return <div onClick={() => <button>{children}</button>}><div>{children}</div></div>}
+export function Transformed({children}: API) {return <div><div>{children?.join(',')}</div></div>}
+export function Defaulted({children=[]}: API) {return <div><div>{children}</div></div>}
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    const fact = (name: string) =>
+      program.components.find((c) => c.name === name)!.children;
+    for (const [name, slotPath, hosts] of [
+      [
+        "Deep",
+        "0.0",
+        [
+          ["", "div"],
+          ["0", "div"],
+          ["0.0", "button"],
+        ],
+      ],
+      [
+        "Siblings",
+        "1.1",
+        [
+          ["", "div"],
+          ["0", "div"],
+          ["1", "div"],
+          ["1.0", "button"],
+          ["1.1", "div"],
+          ["2", "button"],
+        ],
+      ],
+      [
+        "Attribute",
+        "0",
+        [
+          ["", "div"],
+          ["0", "button"],
+        ],
+      ],
+      [
+        "Spread",
+        "0",
+        [
+          ["", "div"],
+          ["0", "button"],
+        ],
+      ],
+    ] as const) {
+      const result = fact(name);
+      assert.equal(result.kind, "nested-forwarded", name);
+      assert.deepEqual(
+        result.nestedSlot,
+        { path: slotPath, hosts: hosts.map(([path, tag]) => ({ path, tag })) },
+        name,
+      );
+      assert.ok(result.span && result.span.end > result.span.start);
+    }
+    for (const name of [
+      "Duplicate",
+      "Fragment",
+      "Component",
+      "Dynamic",
+      "Mixed",
+      "Changed",
+      "Aliased",
+      "EscapedAttribute",
+      "Transformed",
+      "Defaulted",
+    ]) {
+      assert.notEqual(fact(name).kind, "forwarded", name);
+      assert.notEqual(fact(name).kind, "nested-forwarded", name);
+      assert.equal(fact(name).nestedSlot, undefined, name);
+    }
+    assert.equal(fact("Changed").reason, "children-input-escape-or-mutation");
+    assert.equal(fact("Aliased").reason, "children-alias-unresolved");
+    assert.equal(
+      fact("EscapedAttribute").reason,
+      "children-input-escape-or-mutation",
+    );
+    assert.deepEqual(readReactSourceProgram(dir, ["components.tsx"]), program);
+  }));
 function fixture(fn: (dir: string) => void) {
   const dir = mkdtempSync(path.join(tmpdir(), "react-program-"));
   try {
@@ -289,6 +389,143 @@ export function SiblingDefault({children,x=(children='replaced')}:{children?:str
       );
     assert.equal(fact("Changed").reason, "children-input-escape-or-mutation");
     assert.equal(fact("Early").reason, "children-control-flow-unresolved");
+  }));
+
+test("children proof refuses mutable aliases through siblings and other parameters", () =>
+  fixture((dir) => {
+    const body = `
+type API={children:string[];mirror:string[]};
+export function Changed({children,mirror}:API){mirror[0]='changed';return <div>{children}</div>;}
+export function Renamed({children,mirror:other}:API){other.pop();return <div>{children}</div>;}
+export function Escaped({children,mirror}:API){const replace=(v:string[])=>v.splice(0,1,'changed');replace(mirror);return <div>{children}</div>;}
+export function Captured({children,mirror}:API){const mutate=()=>mirror.pop();mutate();return <div>{children}</div>;}
+export function Defaulted({children,mirror,x=mirror.pop()}:API&{x?:string}){return <div>{children}</div>;}
+export function Unknown({children,mirror}:{children:string[];mirror:unknown}){(mirror as string[]).pop();return <div>{children}</div>;}
+export function Any({children,mirror}:{children:string[];mirror:any}){mirror.pop();return <div>{children}</div>;}
+export function Readonly({children,mirror}:{children:readonly string[];mirror:string[]}){mirror.pop();return <div>{children}</div>;}
+export function Union({children,mirror}:{children:string|string[];mirror:string[]|undefined}){mirror?.pop();return <div>{children}</div>;}
+export function RestAliased({mirror,...rest}:API){mirror.pop();return <div {...rest}/>;}
+export function RestDefaulted({mirror,x=mirror.pop(),...rest}:API&{x?:string}){return <div {...rest}/>;}
+export function RestUnused({mirror,...rest}:API){return <div {...rest}/>;}
+export function RestPrimitive({mirror,...rest}:{children:string;mirror:string[]}){mirror.pop();return <div {...rest}/>;}
+export function SpreadStyle({children,style}:{children:string[];style:{width?:number}}){return <div style={{...style}}>{children}</div>;}
+export function Unused({children,mirror}:API){return <div>{children}</div>;}
+export function PrimitiveChild({children,mirror}:{children:string;mirror:string[]}){mirror.pop();return <div>{children}</div>;}
+export function PrimitiveSibling({children,label,count,enabled}:{children:string[];label:string|null;count?:number;enabled:boolean}){const text=label?.toUpperCase()+String(count)+String(enabled);return <div title={text}>{children}</div>;}
+export function Shadowed({children,mirror}:API){const local=(mirror:string[])=>mirror.pop();local(['unrelated']);return <div>{children}</div>;}
+`;
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      "import './primitive';\n" + body,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    const fact = (name: string) =>
+      program.components.find((c) => c.name === name)!.children;
+    for (const name of [
+      "Changed",
+      "Renamed",
+      "Escaped",
+      "Captured",
+      "Defaulted",
+      "Unknown",
+      "Any",
+      "Readonly",
+      "Union",
+      "RestAliased",
+      "RestDefaulted",
+      "SpreadStyle",
+    ])
+      assert.deepEqual(
+        fact(name),
+        { kind: "unresolved", reason: "children-alias-unresolved" },
+        name,
+      );
+    for (const name of [
+      "Unused",
+      "RestUnused",
+      "RestPrimitive",
+      "PrimitiveChild",
+      "PrimitiveSibling",
+      "Shadowed",
+    ])
+      assert.equal(fact(name).kind, "forwarded", name);
+
+    // The returned reference stays identical, but the actual React children
+    // have changed. This is the false proof the source reader must reject.
+    const exports: Record<
+      string,
+      (props: unknown) => React.ReactElement<{ children: string[] }>
+    > = {};
+    runInNewContext(
+      ts.transpileModule(body, {
+        compilerOptions: {
+          jsx: ts.JsxEmit.React,
+          module: ts.ModuleKind.CommonJS,
+        },
+      }).outputText,
+      { exports, React },
+    );
+    const children = ["original"];
+    const element = exports.Changed({ children, mirror: children });
+    assert.equal(element.props.children, children);
+    assert.deepEqual(element.props.children, ["changed"]);
+    const styleChildren = ["original"];
+    let reads = 0;
+    const style = Object.defineProperty({}, "width", {
+      enumerable: true,
+      get() {
+        reads++;
+        styleChildren[0] = "changed by getter";
+        return 320;
+      },
+    });
+    const styled = exports.SpreadStyle({ children: styleChildren, style });
+    assert.equal(reads, 1);
+    assert.equal(styled.props.children, styleChildren);
+    assert.deepEqual(styled.props.children, ["changed by getter"]);
+  }));
+
+test("forwardRef callbacks cannot mutate children through the ref parameter", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          jsx: "react",
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          skipLibCheck: true,
+          paths: {
+            react: [path.resolve("node_modules/@types/react/index.d.ts")],
+          },
+        },
+      }),
+    );
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `
+import * as React from 'react';
+export const Aliased = React.forwardRef<string[],{children:string[]}>(({children},ref)=>{(ref as React.MutableRefObject<string[]>).current.pop();return <div>{children}</div>;});
+export const Container = React.forwardRef<{children:string},{children:string}>((props,ref)=>{(ref as React.MutableRefObject<{children:string}>).current.children='changed';return <div {...props}/>;});
+export const Invoked = React.forwardRef<HTMLDivElement,{children:string[]}>(({children},ref)=>{(ref as React.RefCallback<HTMLDivElement>)(null);return <div ref={ref}>{children}</div>;});
+export const Passed = React.forwardRef<HTMLDivElement,{children:string[]}>(({children},ref)=><div ref={ref}>{children}</div>);
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    for (const name of ["Aliased", "Container", "Invoked"])
+      assert.deepEqual(
+        program.components.find((c) => c.name === name)!.children,
+        { kind: "unresolved", reason: "children-alias-unresolved" },
+        name,
+      );
+    assert.equal(
+      program.components.find((c) => c.name === "Passed")!.children.kind,
+      "forwarded",
+    );
   }));
 
 test("React forwardRef callbacks retain source, public props and children facts without executing wrappers", () =>
@@ -580,7 +817,9 @@ export default Panel;`;
       if (mutation) {
         assert.deepEqual(program.components, []);
         assert.ok(
-          program.problems.includes("default:component-value-mutation-or-escape"),
+          program.problems.includes(
+            "default:component-value-mutation-or-escape",
+          ),
         );
       } else assert.equal(program.components[0].children.kind, "forwarded");
     }

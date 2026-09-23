@@ -346,7 +346,7 @@ export function ReactSourceReference() {
                         <ul>{row.anatomy.instances.map(instance => (
                           <li key={instance.instanceId}>
                             {instance.source.exportName}: {instance.roots.map(root => `<${root.tag}> (${root.correspondence})`).join(", ")}
-                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "nested-caller-slot" ? " · caller content inside source wrappers; native generation remains unqualified" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
                             {instance.dependencies.length > 0 && ` · ${instance.dependencies.length} nested component instance(s) kept as references`}
                             {instance.problems.length > 0 && ` · ${instance.problems.join(" · ")}`}
                           </li>
@@ -380,10 +380,10 @@ export function ReactSourceReference() {
                     {ownership.state === "complete" && row.matched && row.rootMatrix && (
                       <section aria-label={`${row.id} root matrix`}>
                         <h4>Combined root style draft</h4>
-                        <p>Selected finite properties are observed together. The draft preserves their root styling and a replaceable children slot. Fixed source sizes are retained where their origin is verified. Boolean state, nested styling, responsive sizing and native visual fidelity remain unqualified.</p>
+                        <p>{row.rootMatrix.draft?.properties.length === 0 ? "The unchanged source baseline is observed without changing its inputs." : "Selected finite properties are observed together."} The draft preserves their root styling and a replaceable children slot. Fixed source sizes are retained where their origin is verified. Boolean state, nested styling, responsive sizing and native visual fidelity remain unqualified.</p>
                         {row.rootMatrix.problems.length>0 && <p>{row.rootMatrix.problems.join(" · ")}</p>}
                         {row.rootMatrix.draft && [row.rootMatrix.draft].map(draft=><details key="draft">
-                          <summary>{draft.properties.join(" × ")}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
+                          <summary>{draft.properties.join(" × ") || "Unchanged source baseline"}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
                           {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
                           {draft.contract?.props.map(prop=><p key={prop.name}>{prop.name}: {Object.values(prop.bindings.code.values ?? (typeof prop.type==="object" && "enum" in prop.type ? Object.fromEntries(prop.type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}</p>)}
                           {draft.sizing?.map(size=><p key={size.channel}>{size.channel}: {size.status==="retained"?"source constraint retained":size.status==="intrinsic"?"automatic sizing; sample dimensions not fixed":size.status==="fill"?"own 100% declaration; fills the width its parent supplies":`not projected (${size.reason})`}</p>)}
@@ -395,12 +395,12 @@ export function ReactSourceReference() {
                     {ownership.state === "complete" && row.matched && row.propertyMatrix && (
                       <section aria-label={`${row.id} property matrix`}>
                         <h4>Combined source property effects</h4>
-                        <p>{row.propertyMatrix.rows.filter(r=>r.status==="observed").length} / {row.propertyMatrix.planned} planned combinations observed. Each changes all selected properties in one React update and verifies restoration. Omission is observed separately before any default is collapsed.</p>
+                        <p>{row.propertyMatrix.rows.filter(r=>r.status==="observed").length} / {row.propertyMatrix.planned} planned observations verified. {row.propertyMatrix.rows.some(r=>r.baseline) ? "This baseline is read repeatedly without changing props or scheduling a React update; every render witness must remain unchanged." : "Each changes all selected properties in one React update and verifies restoration. Omission is observed separately before any default is collapsed."}</p>
                         {row.propertyMatrix.axes.map(axis=><p key={axis.property}>{axis.property}: {axis.values.map(v=>v.kind==="omit"?"omitted":JSON.stringify(v.value)).join(", ")}</p>)}
                         {row.propertyMatrix.problems.length>0 && <p>{row.propertyMatrix.problems.join(" · ")}</p>}
                         <details><summary>Properties outside this observation</summary>{row.propertyMatrix.skipped.map(p=><p key={p.property}>{p.property}: {p.reason}</p>)}</details>
                         <details><summary>Review observed combinations</summary>{row.propertyMatrix.rows.map(effect=><details key={effect.id}>
-                          <summary>{Object.entries(effect.changes).map(([property,value])=>`${property} = ${value.kind==="omit"?"omitted":JSON.stringify(value.value)}`).join(" · ")} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
+                          <summary>{effect.baseline ? "Unchanged source baseline" : Object.entries(effect.changes).map(([property,value])=>`${property} = ${value.kind==="omit"?"omitted":JSON.stringify(value.value)}`).join(" · ")} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
                           {effect.problem && <p>{effect.problem}</p>}
                           {!!effect.changedInstances?.length && <details><summary>Changed component styles</summary>{effect.changedInstances.map(i=><p key={i.instanceId}>{i.name}: {i.channels.join(", ")}</p>)}</details>}
                           {effect.status==="observed" && <div className="native-image-pair">

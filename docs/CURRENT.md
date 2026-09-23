@@ -69,6 +69,21 @@ The declared Switch passes all nine matched-frame pairs (maximum **4.167% white 
 
 **Review compiler update** supports bounded corrections with a fresh preflight, guarded write and independent readback. **Read design changes from the canvas** reports supported differences on the tip of a correction chain. Source succession can retain an operation across a later sealed observation of the same case. Conflicts and uncertain write outcomes stop further writes until explicitly resolved.
 
+The native graph verifier now checks caller slots below inherited wrappers
+against their source main's hierarchy and allocation stamps. This corrects a
+regression-tested refusal; historical Card readbacks remain unchanged. The
+bounded nested-host application evidence below exercises the corrected path
+([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
+
+Source inspection now distinguishes children passed inside static JSX wrappers
+and checks the host path against React ownership. Bounded caller generation
+retains the owned hosts and places caller content in the identified nested
+slot. Browser and native fixture checks cover repeated wrappers and editable
+caller text. The separate application probe below demonstrates bounded delivery
+and recovery; wider content projection and full fidelity remain unqualified
+([D.126](23-known-limitations.md#d126-nested-source-children-need-an-explicit-host-path),
+[D.127](23-known-limitations.md#d127-nested-caller-slots-preserve-their-owned-hosts)).
+
 ### Build rules that compose
 
 The contract records supported properties, anatomy, layout, tokens, content and component references. Readers and emitters use reusable rules; examples exercise those rules or expose a missing one. Runtime conversion requires no AI.
@@ -102,7 +117,7 @@ unqualified. Visual fidelity and complete V1
 acceptance remain unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return),
 [D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family)).
 
-The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. Deeper caller-content locations remain refused. Source-preserved React composition has separate browser behavior checks; neither result qualifies every composed journey.
+The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.
 
@@ -404,3 +419,27 @@ When resuming work, read this page, [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.
 ### Checking these pages
 
 `npm run docs:check` validates public claims and links. `npm run test:playground` includes canonical-document integration checks. `npm run site:build` builds the documentation site. The desktop/mobile documentation smoke test is `npm run test:product-overview:browser` with local servers on ports 5181 and 5182. These checks validate documentation surfaces, not conversion readiness.
+
+### Nested source host integration, 2026-09-22
+
+The Sources application now delivers an authored composition containing two native
+panel instances, each with a retained heading, nested body host and separate
+editable caller text (D.125–D.130). Source validation and all five corruption
+controls passed. Independent native readback found the expected 18 nodes, and a
+bounded edit of the first caller text left the other caller and headings intact.
+After restoration, the native PNG was byte-identical to its initial export; a
+fresh readback retained the graph while accepting Figma's remapped slot IDs.
+
+Nine fixed host boxes match the source exactly. The matched 800 × 228 source and
+native images differ by 0.276864% using the existing anti-alias-aware comparison,
+below the unchanged 5% limit. Exact text advances still differ, and native font
+byte identity is unqualified. This is one authored application probe, not
+independent-library coverage or complete native fidelity qualification. Full V1
+acceptance remains open.
+
+The graph review exposes repeat inspection and interrupted-readback retry after
+successful delivery, plus reconnection after reloading the app. A queued readback
+was retried through these controls after browser reload; the same 18-node graph
+and exact native PNG were retained with no new creation command. Broader native
+write interruption, update conflict and two-way recovery qualification is still
+pending.

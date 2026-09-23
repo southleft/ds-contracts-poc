@@ -4,7 +4,8 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { nativeComparisonFixture } from '../core/native-contract-comparison-test-fixture.js';
-import { emitNativeContractReadbackScript, type NativeContractObservationInput } from '../core/native-source-observation.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from '../core/native-source-observation.js';
+import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from '../core/token-set.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { readReactSourceProgram } from './react-source-program.js';
 import { compileObservedContent } from './observed-content.js';
@@ -18,7 +19,8 @@ import { isReactNativeRequest, reactNativeReservation } from './react-native-req
 import { deriveReactChildRoot } from './react-child-root.js';
 import { projectReactRootVisual } from './react-root-visual.js';
 import { prepareReactNativePlan } from './react-native-plan.js';
-import type { ReactStyleOrigin } from './react-style-origin.js';
+import { readReactStyleOrigin, type ReactStyleOrigin } from './react-style-origin.js';
+import { nestedReactHostPaths } from './react-source-anatomy.js';
 import { reactChildContextSizing } from './react-child-context.js';
 import { gridConstraintChannels } from './grid-constraints.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
@@ -26,6 +28,7 @@ import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequ
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { projectReactCallerComposition, projectReactCallerCompositionGraph, compareReactCallerContext, requireReactCallerComposition } from './react-caller-composition.js';
 import { compileReactCallerNative } from './react-caller-native.js';
+import { prepareReactCallerNativePlan, buildReactCallerNativeWrite } from './react-caller-native-plan.js';
 import { isReactCallerNativeRequest, reactCallerNativeReservation } from './react-caller-native-request.js';
 import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
@@ -205,6 +208,154 @@ export function Child(props: {children?: string; id?: string}) { return <button 
     return { dir, program, tree, ownership, fonts, content, main };
   } catch (error) { rmSync(dir, { recursive: true, force: true }); throw error; }
 }
+
+test('a nested caller host cannot reuse a root-only main or erase its wrapper', async t => {
+  const f=await fixture();t.after(()=>rmSync(f.dir,{recursive:true,force:true}));
+  const file=path.join(f.dir,'components.tsx');
+  writeFileSync(file,readFileSync(file,'utf8').replace('section: any; button: any','section: any; button: any; span: any')
+    .replace('export function Child(props: {children?: string; id?: string}) { return <button {...props}/> }',
+      'export function Child({children,id}: {children?: string; id?: string}) { return <button id={id}><span>{children}</span></button> }'));
+  f.program=readReactSourceProgram(f.dir,['components.tsx']);assert.deepEqual(f.program.problems,[]);
+  for(const instance of f.ownership.components){const c=f.program.components.find(c=>c.exportName===instance.source.exportName)!;
+    instance.source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};}
+  assert.equal(f.program.components.find(c=>c.name==='Child')!.children.kind,'nested-forwarded');
+  f.ownership.nodes[2].createdBy='child';f.main.source=f.ownership.components[1].source;
+  const host=(f.tree.nodes[0] as {t:'el';el:CapturedNode}).el;
+  const slotHost=(host.nodes[0] as {t:'el';el:CapturedNode}).el;
+  f.tree.style.width='240px';
+  Object.assign(host.style,{width:'160px',height:'80px'});
+  Object.assign(slotHost.style,{display:'flex','flex-direction':'column',width:'120px',height:'40px'});
+  f.fonts.treeRevision=revisionOf(f.tree);f.content=compileObservedContent(f.tree,f.fonts,undefined,true);
+  assert.equal(f.content.status,'compiled-comparison-draft',f.content.problems.join(','));
+  const matched=matchReactComposition(f.program,f.ownership,f.tree,f.content,[f.main]);
+  assert.equal(matched.review.matched,0,'matching root paint cannot justify omitting the source-owned span');
+  assert.deepEqual(matched.references,[]);
+  assert.deepEqual(matched.review.rows[0].problems,['react-composition-nested-slot-lowering-unqualified']);
+  const input={program:f.program,ownership:f.ownership,tree:f.tree,fonts:f.fonts,
+    svg:{version:1 as const,treeRevision:revisionOf(f.tree),status:'observed' as const,rows:[],problems:[]},
+    origin:{version:1 as const,roots:[{path:'0',tag:'button',channels:[]}]},
+    labels:{version:1 as const,treeRevision:revisionOf(f.tree),status:'observed' as const,rows:[],problems:[]},behaviors:[]};
+  const generated=projectReactCallerCompositionGraph(input);
+  assert.equal(generated.draft.status,'refused');
+  assert.ok(generated.draft.problems.some(p=>p.startsWith('react-nested-child-size-unqualified')),generated.draft.problems.join(','));
+  assert.deepEqual(generated.resources,[]);
+  const sized={...input,origin:{version:1 as const,roots:[
+    {path:'0',tag:'button',channels:[],sizes:[{channel:'width' as const,status:'fixed' as const,value:'160px',selectors:['.child']},{channel:'height' as const,status:'fixed' as const,value:'80px',selectors:['.child']}]},
+    {path:'0.0',tag:'span',channels:[],sizes:[{channel:'width' as const,status:'fixed' as const,value:'120px',selectors:['.body']},{channel:'height' as const,status:'fixed' as const,value:'40px',selectors:['.body']}]},
+  ]}};
+  const graph=projectReactCallerCompositionGraph(sized);
+  assert.equal(graph.draft.status,'generated-draft',graph.draft.problems.join(','));
+  const child=graph.draft.contracts!.find(c=>c.name==='Child')!;
+  assert.equal(child.anatomy.root.slot,undefined);
+  assert.ok(Object.values(child.anatomy.root.parts??{}).some(part=>part.slot?.name==='children'));
+  const native=compileReactCallerNative(graph);
+  assert.ok(native.components.find(c=>c.contractId===child.id)?.variants[0].spec.children?.some(node=>node.type==='slot'));
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  const page=await browser.newPage();
+  await page.setContent('<style>.child{box-sizing:border-box;width:160px;height:80px}.body{display:flex;width:120px;height:40px}</style><div id="root"><section id="subject"><button class="child"><span class="body">Save</span></button></section></div>');
+  const paths=nestedReactHostPaths(f.program,f.ownership,f.tree);
+  assert.deepEqual(paths,['0','0.0']);
+  const before=await page.screenshot();
+  const rootsOnly=await readReactStyleOrigin(page,'#subject',f.ownership);
+  assert.deepEqual(rootsOnly.roots.map(row=>row.path),['','0']);
+  const captured=await readReactStyleOrigin(page,'#subject',f.ownership,'#root',paths);
+  assert.deepEqual(captured.roots.map(row=>row.path),['','0','0.0']);
+  assert.deepEqual(await page.screenshot(),before,'nested style capture cannot change the source');
+  const capturedGraph=projectReactCallerCompositionGraph({...sized,origin:captured});
+  assert.equal(capturedGraph.draft.status,'generated-draft',capturedGraph.draft.problems.join(','));
+  assert.deepEqual(capturedGraph.draft.contracts!.find(c=>c.name==='Child'),child,'real browser declarations carry the same fixed wrapper sizes');
+  await assert.rejects(readReactStyleOrigin(page,'#subject',f.ownership,'#root',['0.0.0']),/owned-host-unqualified/);
+  const output=await buildReactCallerPreview(process.cwd(),graph.draft);
+  await page.setContent('<div id="root"></div>');await page.addStyleTag({content:output.css});await page.addScriptTag({content:output.javascript});
+  const wrappers=page.locator('.examples button > span');
+  assert.equal(await wrappers.count(),2);
+  assert.deepEqual(await wrappers.allTextContents(),['Save','Save']);
+  assert.deepEqual(await wrappers.evaluateAll(nodes=>nodes.map(node=>{
+    const style=getComputedStyle(node);return {width:style.width,height:style.height,display:style.display,direction:style.flexDirection};
+  })),Array(2).fill({width:'120px',height:'40px',display:'flex',direction:'column'}));
+  const text=graph.draft.contract!.props.find(p=>p.default==='Save')!;assert.ok(text);
+  await page.getByLabel(text.name,{exact:true}).fill('Changed caller text');
+  assert.deepEqual(await wrappers.allTextContents(),['Changed caller text','Changed caller text']);
+  const hostFixture=await nativeComparisonFixture();
+  const planInput={graph,operation:{id:'10000000-0000-4000-8000-000000000009',fileKey:hostFixture.figma.fileKey},source:hostFixture.source};
+  const plan=prepareReactCallerNativePlan(planInput);
+  const tokenCreation=await hostFixture.run(emitNativeTokenContextScript(plan.plan.tokenInput).script);
+  assert.equal(tokenCreation.status,'created-candidate');
+  const tokenReadback=await hostFixture.run(emitNativeTokenContextReadbackScript(plan.plan.tokenInput,tokenCreation.creationIdentity));
+  const write=buildReactCallerNativeWrite({...planInput,expectedPlanRevision:plan.revision,
+    tokens:{input:plan.plan.tokenInput,identity:tokenCreation.creationIdentity,receipt:tokenReadback.receipt}});
+  const creation=await hostFixture.run(write.script);assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const observation={operation:planInput.operation,planRevision:plan.revision,projection:plan.plan.projection,
+    component:plan.plan.component,graphComponents:plan.plan.graphComponents,tokenInput:plan.plan.tokenInput,
+    tokenIdentity:tokenCreation.creationIdentity,creation};
+  const receipt=await hostFixture.run(emitNativeContractReadbackScript(observation));
+  const verified=verifyNativeContractReadback(observation,receipt);
+  assert.equal(verified.status,'supported-structure-observed',JSON.stringify(verified));
+  const nativeCaller=hostFixture.figma.root.findOne((node:any)=>node.type==='TEXT'&&node.characters==='Save'&&node.getSharedPluginData('ds_contracts','callerContentProperty'))!;
+  assert.ok(nativeCaller);assert.equal(nativeCaller.parent.type,'SLOT');assert.equal(nativeCaller.parent.parent.type,'INSTANCE');
+  assert.equal(nativeCaller.parent.width,120);assert.equal(nativeCaller.parent.height,40);
+  assert.equal(nativeCaller.parent.layoutMode,'VERTICAL');
+  nativeCaller.characters='Native caller edit';
+  assert.equal(verifyNativeContractReadback(observation,await hostFixture.run(emitNativeContractReadbackScript(observation))).status,'refused');
+});
+
+test('repeated nested shells keep owned captions out of caller controls regardless of ownership enumeration order', async t => {
+  const f=await fixture();t.after(()=>rmSync(f.dir,{recursive:true,force:true}));
+  const file=path.join(f.dir,'components.tsx');
+  writeFileSync(file,readFileSync(file,'utf8').replace('section: any; button: any','section: any; button: any; span: any')
+    .replace('export function Child(props: {children?: string; id?: string}) { return <button {...props}/> }',
+      'export function Child({children}: {children?: unknown}) { return <section><span>Owned caption</span><section>{children}</section></section> }'));
+  const program=readReactSourceProgram(f.dir,['components.tsx']);assert.deepEqual(program.problems,[]);
+  const source=(name:string)=>{const c=program.components.find(c=>c.exportName===name)!;
+    return {module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};};
+  const style={display:'flex','flex-direction':'column',width:'160px',height:'80px','font-family':'Inter','font-size':'14px','font-weight':'400','font-style':'normal','line-height':'20px','white-space-collapse':'collapse'};
+  const shell=(nodes:CapturedNode['nodes']):CapturedNode=>({tag:'section',classes:[],pseudo:{},style:{...style},nodes:[
+    {t:'el',el:{tag:'span',classes:[],pseudo:{},style:{...style},nodes:[{t:'text',v:'Owned caption'}]}},
+    {t:'el',el:{tag:'section',classes:[],pseudo:{},style:{...style},nodes}},
+  ]});
+  const tree:CapturedNode={tag:'section',classes:[],pseudo:{},style:{...style,width:'240px'},nodes:[{t:'el',el:shell([{t:'el',el:shell([{t:'text',v:'Caller copy'}])}])}]};
+  const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],problems:[],components:[
+    {id:'box',source:source('Box'),props:{children:{kind:'object'}},roots:['']},
+    {id:'outer',parent:'box',source:source('Child'),props:{children:{kind:'object'}},roots:['0']},
+    {id:'inner',parent:'outer',source:source('Child'),props:{children:'Caller copy'},roots:['0.1.0']},
+  ],nodes:[{path:'',tag:'section',nearestComponent:'box',createdBy:'box'},
+    ...[['outer','0'],['inner','0.1.0']].flatMap(([id,root])=>[
+      {path:root,tag:'section',nearestComponent:id,createdBy:id},
+      {path:root+'.0',tag:'span',nearestComponent:id,createdBy:id},
+      {path:root+'.1',tag:'section',nearestComponent:id,createdBy:id},
+    ])]};
+  const treeRevision=revisionOf(tree);
+  const fonts:TextFontEvidence={version:1,status:'observed',treeRevision,problems:[],rows:[
+    {path:[0,0],text:'Owned caption'},{path:[0,1,0,0],text:'Owned caption'},{path:[0,1,0,1],text:'Caller copy'},
+  ].map(row=>({...row,cssFamily:'Inter',cssWeight:'400',cssStyle:'normal',fonts:[{familyName:'Inter',postScriptName:'Inter-Regular',isCustomFont:true,glyphCount:row.text.length}]}))};
+  const origin:ReactStyleOrigin={version:1,roots:ownership.nodes.filter(n=>n.path).map(n=>({...n,channels:[],sizes:[
+    {channel:'width',status:'fixed',value:'160px',selectors:['.shell']},{channel:'height',status:'fixed',value:'80px',selectors:['.shell']},
+  ]}))};
+  const input={program,ownership,tree,fonts,origin,svg:{version:1 as const,status:'observed' as const,treeRevision,rows:[],problems:[]},
+    labels:{version:1 as const,status:'observed' as const,treeRevision,rows:[],problems:[]},behaviors:[]};
+  const reversed=structuredClone(input);reversed.ownership.components.reverse();
+  const derived=input.ownership.components.filter(c=>c.parent).map(c=>deriveReactChildRoot(program,ownership,tree,origin,c.id,undefined,{fonts,svg:input.svg}).draft);
+  assert.deepEqual(derived[0].contract,derived[1].contract);
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  const page=await browser.newPage();
+  for(const sample of [input,reversed]){
+    const graph=projectReactCallerCompositionGraph(sample);
+    assert.equal(graph.draft.status,'generated-draft',graph.draft.problems.join(','));
+    assert.deepEqual(graph.draft.contract!.props.map(p=>p.default),['Caller copy'],'component-owned text must not become an orphaned caller control');
+    assert.equal(graph.draft.contracts!.length,2,'both callers reuse the same source-owned shell');
+    assert.equal(new Set(graph.draft.children.map(c=>c.contractId)).size,1);
+    assert.doesNotThrow(()=>compileReactCallerNative(graph));
+    assert.doesNotThrow(()=>prepareReactCallerNativePlan({graph,operation:{id:'10000000-0000-4000-8000-000000000009',fileKey:'T56aKuRnoay1L7CKAjSWRO'},
+      source:{revision:treeRevision,programSha256:revisionOf(program).slice(7),evidenceRevision:revisionOf(sample)}}));
+    const preview=await buildReactCallerPreview(process.cwd(),graph.draft);
+    await page.setContent('<div id="root"></div>');await page.addStyleTag({content:preview.css});await page.addScriptTag({content:preview.javascript});
+    const captions=page.locator('.examples span').filter({hasText:'Owned caption'});
+    assert.equal(await captions.count(),4,'both repeated shells retain their own caption in each rendered example');
+    const caller=graph.draft.contract!.props[0];await page.getByLabel(caller.name,{exact:true}).fill('Changed caller');
+    assert.deepEqual(await captions.allTextContents(),Array(4).fill('Owned caption'));
+    assert.equal(await page.locator('.examples').getByText('Changed caller',{exact:true}).count(),2);
+  }
+});
 
 test('context child requests reopen pinned evidence and refuse substitution without upgrading legacy requests', async () => {
   const f = await fixture();

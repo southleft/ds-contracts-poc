@@ -14,10 +14,41 @@ import {createFigmaMock} from '../scripts/plugin-engine-mock-figma.mjs';
 import {proposeFromDump} from './propose-figma.js';
 import {flattenTokens} from './tokens.js';
 import {tokenCorpusFromJson} from './token-corpus.js';
+import {validateContract} from '../packages/core/src/validate.js';
 
 import {primitives,tokens,rootSlotSeed as seed} from './figma-root-slot.fixture.js';
 const engine=createFigmaEngine({tokens,icons:new Map()});
 const compile=(c:Contract)=>engine.compileComponentData(c,new Map([[c.id,c]]));
+
+test('an explicit nested slot host styles its own wrapper on both React surfaces and native SLOT',async()=>{
+ const c=seed();delete c.anatomy.root.slot;
+ c.anatomy.root.parts={body:{element:'section',slot:{name:'children'},layout:{display:'flex',direction:'column'},
+  declared:{'font-family':'Georgia, serif','text-align':'center'},
+  literals:{width:'120px',height:'64px','padding-inline':'8px','padding-block':'8px'},tokens:{'background-color':'{blue}'}}};
+ const byId=new Map([[c.id,c]]),errors:string[]=[];validateContract(c,byId,errors,new Map());assert.deepEqual(errors,[]);
+ const spec=compile(c).variants[0].spec.children![0];assert.equal(spec.type,'slot');assert.equal(spec.slotProperty,'Children');
+ assert.equal(spec.fill,'blue');assert.equal(spec.lits?.paddingLeft,8);
+ const unresolved=structuredClone(c);delete unresolved.anatomy.root.parts!.body.element;
+ const refused:string[]=[];validateContract(unresolved,new Map([[unresolved.id,unresolved]]),refused,new Map());
+ assert.ok(refused.some(e=>e.includes('declared facts cannot restyle')),'an unnamed insertion point still cannot claim consumer styles');
+ const invalid=structuredClone(c);invalid.anatomy.root.parts!.body.declared!['font-family']='';
+ const invalidErrors:string[]=[];validateContract(invalid,new Map([[invalid.id,invalid]]),invalidErrors,new Map());
+ assert.ok(invalidErrors.some(e=>e.includes('outside the channel')),'an explicit host does not bypass channel validation');
+ const browser=await chromium.launch();
+ try{for(const mode of ['module','inline']){
+  const generated=mode==='module'?emitReact(c,{tokens:new Set(flattenTokens(primitives).keys()),icons:new Map(),contracts:byId})
+   :emitReactInline(c,{tokens,icons:new Map(),contracts:byId});
+  const page=await browser.newPage();try{
+   const render=await mountGenerated(page,c.name,generated.tsx,'css' in generated?String(generated.css):'');
+   await page.addStyleTag({content:':root{--blue:#0055ff;--gap8:8px}'});await render({children:'Caller'});
+   const body=page.locator('#root section');
+   assert.deepEqual(await body.evaluate(el=>({text:el.textContent,font:getComputedStyle(el).fontFamily,align:getComputedStyle(el).textAlign,
+    color:getComputedStyle(el).backgroundColor,padding:getComputedStyle(el).paddingLeft,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})),
+    {text:'Caller',font:'Georgia, serif',align:'center',color:'rgb(0, 85, 255)',padding:'8px',width:120,height:64},mode);
+   await render({children:'Updated'});assert.equal(await body.textContent(),'Updated');
+  }finally{await page.close();}
+ }}finally{await browser.close();}
+});
 
 test('root content becomes one native slot with copied flow, spacing and no doubled box styling',()=>{
  const c=seed(),before=structuredClone(c),data=compile(c),root=data.variants[0].spec;
@@ -299,4 +330,23 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  ]){const altered=structuredClone(dump);change(altered);assert.throws(()=>proposeFromDump(altered,options),/FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED/);}
  const slotId=nativeSlot.id;
  await run(engine.buildComponentScript(c,byId));assert.equal(comp.children![0].id,slotId,'repeat does not replace the slot');
+});
+
+test('owned heading and paragraph hosts reset UA margins on both React surfaces while authored margins win',async()=>{
+ const browser=await chromium.launch();
+ try{for(const element of ['h3','p'])for(const authored of [false,true])for(const mode of ['module','inline']){
+  const c=seed();delete c.anatomy.root.slot;
+  c.anatomy.root.parts={heading:{element,text:'Owned heading',layout:{display:'flex',direction:'row'},
+   literals:{width:'120px',height:'24px','font-size':'16px','line-height':'24px'},...(authored?{tokens:{'margin-top':'{gap8}'}}:{})},
+   body:{element:'div',slot:{name:'children'},layout:{display:'flex',direction:'column'},literals:{width:'120px',height:'80px'}}};
+  const byId=new Map([[c.id,c]]),generated=mode==='module'?emitReact(c,{tokens:new Set(flattenTokens(primitives).keys()),icons:new Map(),contracts:byId}):emitReactInline(c,{tokens,icons:new Map(),contracts:byId});
+  const page=await browser.newPage(),render=await mountGenerated(page,c.name,generated.tsx,'css' in generated?generated.css as string:'');
+  await page.addStyleTag({content:':root{--gap8:8px}'});await render({children:'Caller text'});
+  const observed=await page.locator('#root > *').evaluate(root=>{
+   const heading=root.children[0],body=root.children[1],r=root.getBoundingClientRect(),h=heading.getBoundingClientRect(),b=body.getBoundingClientRect(),style=getComputedStyle(heading);
+   return {marginTop:style.marginTop,marginBottom:style.marginBottom,headingY:h.y-r.y,bodyY:b.y-r.y,bodyHeight:b.height};
+  });
+  assert.deepEqual(observed,{marginTop:authored?'8px':'0px',marginBottom:'0px',headingY:authored?16:8,bodyY:authored?48:40,bodyHeight:80},`${element}/${mode}/${authored}`);
+  await page.close();
+ }}finally{await browser.close();}
 });
