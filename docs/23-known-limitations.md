@@ -10023,9 +10023,15 @@ byte-identical to the previously installed, interaction-tested archive. No
 script editing or individual child transfers were needed for this capture.
 Native saving remains unqualified: Figma's Save dialog stayed disabled for
 both data and Blob links. The exact data-link payload supplied the app import;
-Copy reported success and pasted JSON into a native field, but a complete
-clipboard-to-app transfer was not independently verified in this run. This is
-not a clean end-to-end delivery qualification. Evidence:
+Copy reported success and pasted JSON into a native field, but that first run
+did not independently verify a complete clipboard-to-app transfer. A subsequent
+fresh Chrome session completed **Copy JSON → native paste → Load → Prepare React
+library → Download** without extracting the link payload. The app retained all
+three components and opened the requested parent; Chrome saved the actual
+8,652-byte archive, byte-identical to the installed return archive. This verifies
+the clipboard and app-download route, while Figma's own Save dialog remains
+unqualified. The final plugin bundle was reopened for this read; no native node
+changed, and the unobstructed canvas was inspected. Evidence:
 `private/selection-family-send-20260922/`. This does not qualify family fidelity,
 two-way recovery, remote-library support or the complete V1 journey. Regression
 checks cover the actual canonical script, empty source-dependency maps, named
