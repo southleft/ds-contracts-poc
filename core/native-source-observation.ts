@@ -979,18 +979,27 @@ function verifyReadback(
           if (definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))) filledKeys.add(candidate);
         const slotsOf = (root: Record<string, any> | undefined, stopAt: Set<string>) => {
           const found = new Map<string, Record<string, any>>(); const seen = new Set<string>();
-          const walk = (row: Record<string, any>) => { for (const id of row.childIds) {
+          // Property keys belong to an instance, not to the complete descendant
+          // tree. Two instances of one main legitimately inherit the same key.
+          const walk = (row: Record<string, any>, path: number[] = [], scope: number[] = []) => { for (const [index,id] of row.childIds.entries()) {
             const child = nodes.get(id); if (!child || seen.has(id)) continue; seen.add(id);
             const key = child.type === 'SLOT' ? child.values.componentPropertyReferences?.slotContentId : undefined;
-            if (typeof key === 'string') { if (found.has(key)) issue('native-contract-observation-inherited-slot', child); found.set(key, child); if (stopAt.has(key)) continue; }
-            walk(child);
+            if (typeof key === 'string') {
+              const scopedKey = library ? JSON.stringify([scope,key]) : key;
+              if (found.has(scopedKey)) issue('native-contract-observation-inherited-slot', child);
+              found.set(scopedKey, child);
+              if ((!library || scope.length === 0) && stopAt.has(key)) continue;
+            }
+            const childPath = [...path,index];
+            walk(child,childPath,child.type === 'INSTANCE' ? childPath : scope);
           } };
           if (root) walk(root);
           return found;
         };
         const mainRow = nodes.get(n.mainId), mainSlots = slotsOf(mainRow, new Set());
+        const scopedFilledKeys = library ? new Set([...filledKeys].map(key=>JSON.stringify([[],key]))) : filledKeys;
         for (const [key, slot] of slotsOf(n, filledKeys)) {
-          if (filledKeys.has(key)) continue;
+          if (scopedFilledKeys.has(key)) continue;
           const mainSlot = mainSlots.get(key);
           if (!mainRow || !mainSlot) { issue('native-contract-observation-inherited-slot', slot); continue; }
           if (slot.childIds.length !== mainSlot.childIds.length || slot.childIds.some((id: string, index: number) => {
@@ -1002,7 +1011,9 @@ function verifyReadback(
         for (const slotSpec of spec.children ?? []) {
           const key = depTarget && Object.entries(depTarget.definitions ?? {}).filter(([candidate, definition]: [string, any]) =>
             definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))).map(([candidate]) => candidate);
-          const slots = key?.length === 1 ? descendants.filter(row => row.type === 'SLOT' && row.values.componentPropertyReferences?.slotContentId === key[0]) : [];
+          const slots = key?.length === 1 ? library
+            ? [...slotsOf(n,filledKeys)].filter(([scopedKey])=>scopedKey === JSON.stringify([[],key[0]])).map(([,slot])=>slot)
+            : descendants.filter(row => row.type === 'SLOT' && row.values.componentPropertyReferences?.slotContentId === key[0]) : [];
           if (slots.length !== 1 || slots[0].childIds.length !== (slotSpec.children ?? []).length) {
             issue('native-contract-observation-instance-caller-slot', n); continue;
           }
@@ -1037,7 +1048,7 @@ function verifyReadback(
         issue('native-source-observation-root-fill-width', n);
       if ((spec.opacity !== undefined || v.opacity !== undefined) && !numeric(v.opacity, spec.opacity ?? 1))
         issue("native-source-observation-opacity", n);
-      const bindings = {
+      const bindings: Record<string, string> = {
         ...spec.bindings,
         ...(isContractDraft(input) && spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}),
         ...(isContractDraft(input) && spec.slotTextTemplate && spec.fontWeightVar ? { fontWeight: spec.fontWeightVar } : {}),
@@ -1048,6 +1059,17 @@ function verifyReadback(
           : {}),
       };
       const observedBindings = { ...v.boundVariables };
+      // Figma exposes a uniform stroke binding through its four edge channels.
+      // Accept that API representation only when every edge retains the exact
+      // intended variable and the independently read weights are uniform.
+      const strokeEdges = ['strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'];
+      if (library && bindings.strokeWeight && !Object.hasOwn(observedBindings,'strokeWeight') &&
+          strokeEdges.every(field => !Object.hasOwn(bindings,field) &&
+            same(observedBindings[field],{type:'VARIABLE_ALIAS',id:variableByName.get(bindings.strokeWeight)}) &&
+            typeof v.strokeWeight === 'number' && numeric(v[field],v.strokeWeight))) {
+        observedBindings.strokeWeight = observedBindings.strokeTopWeight;
+        for (const field of strokeEdges) delete observedBindings[field];
+      }
       if (isContractDraft(input) && spec.type === 'text' && Array.isArray(observedBindings.fontSize) && observedBindings.fontSize.length === 1)
         observedBindings.fontSize = observedBindings.fontSize[0];
       if (isContractDraft(input) && spec.slotTextTemplate && Array.isArray(observedBindings.fontWeight) && observedBindings.fontWeight.length === 1)

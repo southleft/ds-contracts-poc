@@ -13,20 +13,21 @@ import type {NativeTokenContextInput} from './native-token-context.js';
 import {nativeLibraryReactionsMatch,type NativePreparedLibrarySource} from './native-prepared-library.js';
 import {validNativeGraphCreation} from './native-graph-creation.js';
 
-async function fixture(composed:boolean|'nested'=true) {
+async function fixture(composed:boolean|'nested'|'repeated'=true) {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
   };
   const run=async(script:string)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma:host.figma,console},{timeout:5000})));
-  const tokens={primitives:{ink:{$type:'color',$value:'#123456'},fade:{$type:'number',$value:0.5}},
+  const tokens={primitives:{ink:{$type:'color',$value:'#123456'},fade:{$type:'number',$value:0.5},
+    edge:{$type:'number',$value:1},otherEdge:{$type:'number',$value:1}},
     semantic:{label:{$type:'color',$value:'{ink}'}},light:{},dark:{},brands:{default:{}}};
   const leaf=ContractSchema.parse({id:'test.library-leaf',name:'Leaf',version:'0.1.0',status:'draft',
     description:'Synthetic conformance fixture; no visual qualification',semantics:{element:'button'},states:['hover'],
     props:[{name:'label',type:'text',default:'Library label',bindings:{code:{prop:'label'},figma:{kind:'TEXT',property:'Label'}}},
       {name:'shown',type:'boolean',default:false,bindings:{code:{prop:'shown'},figma:{kind:'BOOLEAN',property:'Shown'}}},
       {name:'size',type:{enum:['small','large']},default:'small',bindings:{code:{prop:'size'},figma:{kind:'VARIANT',property:'Size',values:{small:'Small',large:'Large'}}}}],
-    anatomy:{root:{layout:{display:'inline-flex'},states:{hover:{opacity:'{fade}'}},parts:{
+    anatomy:{root:{layout:{display:'inline-flex'},tokens:{'border-width':'{edge}','border-color':'{ink}'},states:{hover:{opacity:'{fade}'}},parts:{
       text:{content:{prop:'label'},visibleWhen:{prop:'shown'},declared:{'font-family':'Inter'},tokens:{color:'{label}'}},
     }}},bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}});
   const parent=ContractSchema.parse({id:'test.library-parent',name:'Parent',version:'0.1.0',status:'draft',
@@ -36,9 +37,12 @@ async function fixture(composed:boolean|'nested'=true) {
       leaf:{component:{id:leaf.id,props:{shown:true}}},
     }}},bindings:{code:{anchors:{importPath:'test/Parent',export:'Parent'}},figma:{anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-parent-key'}}}});
   const outer=ContractSchema.parse({...parent,id:'test.library-outer',name:'Outer',
-    anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}}}}}});
-  const root=composed==='nested'?outer:composed?parent:leaf;
-  const byId=new Map((composed==='nested'?[outer,parent,leaf]:composed?[parent,leaf]:[leaf]).map(c=>[c.id,c]));
+    anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}},
+      ...(composed==='repeated'?{secondPanel:{component:{id:parent.id}}}:{})}}}});
+  const top=ContractSchema.parse({...outer,id:'test.library-top',name:'Top',
+    anatomy:{root:{layout:{display:'flex'},parts:{outer:{component:{id:outer.id}}}}}});
+  const root=composed==='repeated'?top:composed==='nested'?outer:composed?parent:leaf;
+  const byId=new Map((composed==='repeated'?[top,outer,parent,leaf]:composed==='nested'?[outer,parent,leaf]:composed?[parent,leaf]:[leaf]).map(c=>[c.id,c]));
   const before=JSON.stringify([...byId.values()]);
   const source:NativePreparedLibrarySource={kind:'prepared-contract-library',revision:'sha256:'+'a'.repeat(64),artifactId:'a'.repeat(64),
     inputSha256:'b'.repeat(64),tarballSha256:'c'.repeat(64),tokensSha256:revisionOf(tokens).slice(7)};
@@ -69,6 +73,13 @@ test('retained libraries create scoped stateful components, joint controls and t
     assert.ok(compiled.components.every(c=>c.anchorKey===null));
     const report=verifyNativePreparedLibraryReadback(input,receipt);
     assert.equal(report.status,'supported-structure-observed',JSON.stringify(report));
+    let nextY=0;
+    for (const identity of creation.graphTargets) {
+      const target=await f.host.figma.getNodeByIdAsync(identity.id);
+      assert.equal(target.parent.id,creation.pageId);
+      assert.equal(target.x,0);assert.equal(target.y,nextY,'fresh dependency mains must be separately visible');
+      nextY=Math.fround(nextY+target.height+200);
+    }
     const leaf=creation.graphTargets[0];
     assert.ok(leaf.variants.some((v:any)=>v.name.includes('State=Hover')));
     const target=await f.host.figma.getNodeByIdAsync(leaf.id);
@@ -79,9 +90,15 @@ test('retained libraries create scoped stateful components, joint controls and t
     const text=instance.findOne((n:any)=>n.type==='TEXT');
     assert.equal(text.characters,'Edited in Figma'); assert.equal(text.visible,true); instance.remove();
     const before=f.host.figma.root.findAll(()=>true).map((n:any)=>n.id);
+    const positions=creation.graphTargets.map((identity:any)=>{
+      const node=f.host.figma.root.findOne((n:any)=>n.id===identity.id);return [node.id,node.x,node.y];
+    });
     const repeat=await f.run(f.script);
     assert.equal(repeat.status,'refused');assert.equal(repeat.allocationAttempted,false);
     assert.deepEqual(f.host.figma.root.findAll(()=>true).map((n:any)=>n.id),before);
+    assert.deepEqual(creation.graphTargets.map((identity:any)=>{
+      const node=f.host.figma.root.findOne((n:any)=>n.id===identity.id);return [node.id,node.x,node.y];
+    }),positions,'refused replay leaves placement intact');
     if(composed) {
       const defaults=receipt.nodes.filter((n:any)=>n.metadata.nativeContractPart&&JSON.parse(n.metadata.nativeContractPart).defaultSlotIndex===0);
       assert.equal(defaults.filter((n:any)=>creation.nodes.some((c:any)=>c.id===n.id)).length,1); assert.equal(defaults[0].type,'INSTANCE');
@@ -147,6 +164,57 @@ test('inherited default slots remain borrowed and reject extra content, wrong st
     (r:any)=>{r.nodes.find((n:any)=>n.id===inherited.id).metadata.nativeSourceAllocation='foreign:1';},
     (r:any)=>{const original=r.nodes.find((n:any)=>n.id===inherited.id),extra={...structuredClone(original),id:'extra:1',childIds:[]};r.nodes.push(extra);r.nodes.find((n:any)=>n.id===original.parentId).childIds.push(extra.id);},
     (r:any)=>{r.nodes.find((n:any)=>n.id===inherited.id).childIds=[];},
+  ]) {
+    const changed=structuredClone(receipt);mutate(changed);
+    assert.equal(verifyNativePreparedLibraryReadback(input,changed).status,'refused');
+  }
+});
+
+test('uniform stroke edge mirrors retain exact variable identity and numeric uniformity',async()=>{
+  const {input,receipt}=await fixture(false);
+  const edges=['strokeTopWeight','strokeRightWeight','strokeBottomWeight','strokeLeftWeight'];
+  const mirrored=structuredClone(receipt);
+  const roots=mirrored.nodes.filter((n:any)=>n.type==='COMPONENT');
+  for(const node of roots) {
+    const binding=node.values.boundVariables.strokeWeight;
+    assert.equal(binding.type,'VARIABLE_ALIAS');
+    for(const edge of edges) {node.values.boundVariables[edge]=binding;node.values[edge]=node.values.strokeWeight;}
+    delete node.values.boundVariables.strokeWeight;
+  }
+  assert.equal(verifyNativePreparedLibraryReadback(input,mirrored).status,'supported-structure-observed');
+  const other=input.tokenIdentity.variables.find(v=>v.tokenPath==='otherEdge')!;
+  assert.ok(other);
+  for(const [name,mutate] of [
+    ['missing edge',(v:any)=>{delete v.boundVariables.strokeTopWeight;}],
+    ['equal value foreign identity',(v:any)=>{v.boundVariables.strokeTopWeight={type:'VARIABLE_ALIAS',id:other.id};}],
+    ['unequal weight',(v:any)=>{v.strokeLeftWeight=2;}],
+    ['mixed uniform value',(v:any)=>{delete v.strokeWeight;}],
+    ['contradictory scalar',(v:any)=>{v.boundVariables.strokeWeight={type:'VARIABLE_ALIAS',id:other.id};}],
+    ['extra alias',(v:any)=>{v.boundVariables.rotation=v.boundVariables.strokeTopWeight;}],
+  ] as const) {
+    const changed=structuredClone(mirrored);mutate(changed.nodes.find((n:any)=>n.id===roots[0].id).values);
+    assert.equal(verifyNativePreparedLibraryReadback(input,changed).status,'refused',name);
+  }
+});
+
+test('repeated nested instances scope inherited slots to their own component property owner',async()=>{
+  const {input,receipt}=await fixture('repeated');
+  const report=verifyNativePreparedLibraryReadback(input,receipt);
+  assert.equal(report.status,'supported-structure-observed',JSON.stringify(report));
+  const top=receipt.nodes.find((n:any)=>n.id===input.creation.target.id);
+  const outer=receipt.nodes.find((n:any)=>n.id===top.childIds[0]);
+  const nestedSlots=receipt.nodes.filter((n:any)=>n.type==='SLOT' && !input.creation.nodes.some((c:any)=>c.id===n.id));
+  const slots=nestedSlots.filter((s:any)=>{
+    let n=s;while(n && n.parentId!==outer.id) n=receipt.nodes.find((row:any)=>row.id===n.parentId);
+    return !!n;
+  });
+  assert.equal(slots.length,2);
+  assert.equal(slots[0].values.componentPropertyReferences.slotContentId,slots[1].values.componentPropertyReferences.slotContentId);
+  for(const mutate of [
+    (r:any)=>{r.nodes.find((n:any)=>n.id===slots[1].id).childIds=[];},
+    (r:any)=>{r.nodes.find((n:any)=>n.id===slots[1].id).values.componentPropertyReferences.slotContentId='foreign#slot';},
+    (r:any)=>{r.nodes.find((n:any)=>n.id===slots[1].childIds[0]).metadata.nativeSourceAllocation='foreign';},
+    (r:any)=>{r.nodes.find((n:any)=>n.id===slots[1].childIds[0]).componentProperties.Size.value='Small';},
   ]) {
     const changed=structuredClone(receipt);mutate(changed);
     assert.equal(verifyNativePreparedLibraryReadback(input,changed).status,'refused');

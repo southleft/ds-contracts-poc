@@ -366,7 +366,26 @@ ${prepared.comparisonParentReadbackScript}
   const applied = await (async () => {
 ${render}
   })();
-  nativeFileGuard();
+  nativeFileGuard();${'kind' in prepared.descriptor.projection && prepared.descriptor.projection.kind === 'prepared-contract-library' ? `
+  // Each fresh dependency target shares this operation's page. Arrange the
+  // finished targets in dependency order, using their actual native extents;
+  // placing every main at the origin conceals otherwise editable output.
+  const placements = [];
+  let nextTargetY = 0;
+  if (!Array.isArray(NATIVE_RESULT.graphTargets) || !NATIVE_RESULT.graphTargets.length) nativeRefuse('library-placement-invalid');
+  for (const identity of NATIVE_RESULT.graphTargets) {
+    const target = await figma.getNodeByIdAsync(identity.id);
+    nativeFileGuard();
+    if (!target || target.parent !== NATIVE_PAGE || !['COMPONENT','COMPONENT_SET'].includes(target.type) ||
+        target.getSharedPluginData('ds_contracts','nativeSourceOperation') !== nativeOwner ||
+        typeof target.height !== 'number' || !Number.isFinite(target.height) || target.height < 0 ||
+        !Number.isFinite(nextTargetY)) nativeRefuse('library-placement-invalid');
+    placements.push({target, y:nextTargetY});
+    nextTargetY = Math.fround(nextTargetY + target.height + 200);
+  }
+  if (placements.length !== NATIVE_RESULT.graphTargets.length) nativeRefuse('library-placement-invalid');
+  for (const placement of placements) { placement.target.x = 0; placement.target.y = placement.y; }
+  ` : ''}
   nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
   ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent();' : ''}
   // Slot content can become instance-derived clones after this run. Preserve

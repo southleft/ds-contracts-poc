@@ -425,7 +425,7 @@ function prepareBody(
     fail("source-identity");
   if (
     !Array.isArray(input.tokenPaths) ||
-    !input.tokenPaths.length ||
+    (!input.tokenPaths.length && !(input.source.kind === 'prepared-contract-library' && input.writeProtocol === 'explicit-modes-v1')) ||
     input.tokenPaths.some((p) => !pathPattern.test(p))
   )
     fail("token-path");
