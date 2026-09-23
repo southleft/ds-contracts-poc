@@ -9892,3 +9892,31 @@ display transitions remain a release gap. Broader recovery and V1 remain open.
 **Reversal:** restore the original assignment loop and its partial-write refusal,
 and retain these failed/restored observations. Do not classify partial values as
 untouched or permit a retry based only on the write response.
+
+
+## D.136 History traversal copies only the evidence each display check needs
+
+**AGENT decision — 2026-09-22.** A long correction history repeatedly copied
+complete plans and replayed journals just to inspect predecessor and caller pins.
+History traversal now reuses authenticated pin projections and the projected
+written-history list within one synchronous display response. Each caller still
+receives an independent copy. Nothing survives that response: command delivery
+and other authorizing reads outside the display scope recheck the original files,
+source and journal. Canonical identities and native comparison rules are unchanged.
+
+An isolated full-service comparison against the retained recovery history reduced
+mean repeated-read time from 64.0 to 52.3 seconds over two warm reads per process;
+the first read fell from 114.7 to 99.4 seconds. All six complete responses were
+byte-identical and all 2,204 native evidence files remained unchanged. These are
+local in-process measurements, not an HTTP latency guarantee. The remaining delay
+is still a product gap, and broader performance qualification is unfinished.
+
+Regression checks mutate returned predecessor and consumer pins, history arrays
+and nested observations, then confirm later callers retain the original values.
+Altered proposal files and damaged journals remain refused in the next request
+and before dispatch. A separate store cannot inherit a previous store's checked
+journal. Existing rich-value and write-during-display refusal behavior is retained.
+
+**Reversal:** remove the projected pin/history reuse and return the traversal to
+full authenticated record reads. Preserve all journals and measurement evidence;
+do not replace the response-scoped projections with persistent authorization.

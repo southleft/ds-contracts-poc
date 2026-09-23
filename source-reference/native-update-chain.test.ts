@@ -1,7 +1,7 @@
 import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,readFileSync,writeFileSync,rmSync,readdirSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
@@ -221,4 +221,51 @@ test('a paint migration follows a verified scalar correction without replacing i
    before.input.component.variants[0].spec.nativeContractPart!.contractRevision);
  assert.equal(after.input.component.variants[0].spec.opacity,0.5);
  assert.equal(f.plans.prepare(f.parent).id,second.proposal.id);
+});
+
+
+test('history pin projections isolate callers and revalidate files after each display',async t=>{
+ const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
+ f.next();const second=f.prepare(),expected=f.plans.historyPins(f.parent,second.proposal.id);
+ assert.equal(expected.predecessor?.proposalId,first.proposal.id);
+ const file=path.join(f.repo,'private/source-native-update-plans',f.parent,second.proposal.id+'.json');
+ const original=readFileSync(file,'utf8');
+ try {
+  withEvidenceReadSnapshot(()=>{
+   const copy=f.plans.historyPins(f.parent,second.proposal.id);
+   copy.predecessor!.journalRevision='f'.repeat(64);copy.parentJournalRevision='e'.repeat(64);
+   assert.deepEqual(f.plans.historyPins(f.parent,second.proposal.id),expected);
+   const changed=JSON.parse(original);changed.parentJournalRevision='d'.repeat(64);writeFileSync(file,JSON.stringify(changed));
+   assert.deepEqual(f.plans.historyPins(f.parent,second.proposal.id),expected,'only this display retains its authenticated pins');
+   assert.throws(()=>f.jobs().dispatch(second.operation.id,'update-preflight-readback'),/write-during-evidence-read-snapshot/);
+  });
+  assert.throws(()=>f.plans.historyPins(f.parent,second.proposal.id),/native-update-plan-changed/);
+  assert.throws(()=>withEvidenceReadSnapshot(()=>f.plans.historyPins(f.parent,second.proposal.id)),/native-update-plan-changed/);
+  assert.throws(()=>f.jobs().dispatch(second.operation.id,'update-preflight-readback'),/native-update-plan-changed/);
+ }finally{writeFileSync(file,original);}
+ assert.deepEqual(f.plans.historyPins(f.parent,second.proposal.id),expected);
+ assert.doesNotThrow(()=>f.plans.current(f.parent,second.proposal.id));
+});
+
+test('projected history copies cannot alter later callers or mask next-request journal corruption',async t=>{
+ const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
+ const expected=f.jobs().updateHistory(f.parent);
+ assert.equal(expected.length,1);assert.ok((expected[0].receipt as any).nodes.length);
+ const dir=path.join(f.repo,'private/source-native-updates',first.operation.id,'events');
+ const file=path.join(dir,readdirSync(dir).sort()[0]),original=readFileSync(file,'utf8');
+ try {
+  withEvidenceReadSnapshot(()=>{
+   const copy=f.jobs().updateHistory(f.parent);
+   copy[0].phase='caller mutation';(copy[0].receipt as any).nodes[0].values.opacity=0.987;copy.push(copy[0]);
+   assert.deepEqual(f.jobs().updateHistory(f.parent),expected);
+   const changed=JSON.parse(original);changed.sequence=99;writeFileSync(file,JSON.stringify(changed));
+   assert.deepEqual(f.jobs().updateHistory(f.parent),expected,'one display retains its authenticated journal');
+   assert.throws(()=>f.jobs().dispatch(first.operation.id,'update-readback'),/write-during-evidence-read-snapshot/);
+   assert.throws(()=>createNativeUpdateJobs(f.repo,f.plans).updateHistory(f.parent),/journal-chain-invalid/,'another store cannot inherit a checked journal');
+  });
+  assert.throws(()=>f.jobs().updateHistory(f.parent),/journal-chain-invalid/);
+  assert.throws(()=>withEvidenceReadSnapshot(()=>f.jobs().updateHistory(f.parent)),/journal-chain-invalid/);
+  assert.throws(()=>f.jobs().dispatch(first.operation.id,'update-readback'),/journal-chain-invalid/);
+ }finally{writeFileSync(file,original);}
+ assert.deepEqual(f.jobs().updateHistory(f.parent),expected);
 });
