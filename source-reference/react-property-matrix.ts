@@ -13,19 +13,20 @@ export interface ReactPropertyMatrix {
  source:ReactOwnership['components'][number]['source'];heldProps:ReactOwnership['components'][number]['props'];
  axes:Array<{property:string;values:ReactPropertyValue[]}>;
  planned:number;skipped:Array<{property:string;reason:string}>;
- rows:Array<ReactPropertyObservation&{changes:ReactPropertyChanges}>;problems:string[];
+ rows:Array<ReactPropertyObservation&{changes:ReactPropertyChanges;baseline?:true}>;problems:string[];
 }
 export function planReactPropertyMatrix(program:ReactSourceProgram,ownership:ReactOwnership,tree:CapturedNode,instanceId:string){
  const single=planReactPropertyEffects(program,ownership,tree,instanceId);
  const axes=[...new Set(single.plan.map(p=>p.property))].map(property=>({property,values:single.plan.filter(p=>p.property===property).map(p=>p.requested)}));
  const total=axes.length?axes.reduce((n,a)=>n*a.values.length,1):0;
  if(total>256)throw Error('react-property-matrix-cartesian-limit');
- const plan:Array<{changes:ReactPropertyChanges}>=[];
+ const plan:Array<{changes:ReactPropertyChanges;baseline?:true}>=[];
  const visit=(i:number,changes:ReactPropertyChanges)=>{
   if(i===axes.length){plan.push({changes});return;}
   const axis=axes[i];for(const value of axis.values)visit(i+1,{...changes,[axis.property]:value});
  };
  if(total)visit(0,{});
+ else plan.push({changes:{},baseline:true});
  return {source:single.source,heldProps:single.heldProps,skipped:single.skipped,axes,plan};
 }
 export async function observeReactPropertyMatrix(args:ReactPropertyObservationArgs):Promise<ReactPropertyMatrix>{

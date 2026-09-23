@@ -1,13 +1,17 @@
 import ts from "typescript";
 
 export type ReactChildrenFact = {
-  kind: "forwarded" | "replaced" | "absent" | "unresolved";
+  kind: "forwarded" | "nested-forwarded" | "replaced" | "absent" | "unresolved";
+  /** Static host addresses, relative to the returned root. This is source
+   * flow evidence only; it does not authorize root-only native lowering. */
+  nestedSlot?: { path: string; hosts: Array<{ path: string; tag: string }> };
   reason?: string;
   via?: "spread" | "attribute" | "expression";
   span?: { start: number; end: number };
 };
 
-/** Source proof of an unchanged children input reaching the returned JSX root.
+/** Source proof of an unchanged children input reaching the returned JSX root
+ * or one separately recorded host path inside it.
  * This says nothing about what an imported root component does with that input.
  * Unknown spreads, transformations, defaults and escaped/mutated inputs refuse
  * proof. JSX children win over attributes; later attributes win over spreads. */
@@ -18,7 +22,6 @@ export function readReactChildren(
   hasChildren: boolean,
 ): ReactChildrenFact {
   const sf = root.getSourceFile();
-  const opening = ts.isJsxElement(root) ? root.openingElement : root;
   const unknown = (reason: string): ReactChildrenFact => ({
     kind: "unresolved",
     reason,
@@ -204,63 +207,154 @@ export function readReactChildren(
       return { kind: "replaced" };
     return unknown("children-expression-unresolved");
   };
-  let result: ReactChildrenFact = { kind: "absent" };
-  for (const attr of opening.attributes.properties) {
-    if (ts.isJsxSpreadAttribute(attr)) {
-      const kind = inputKind(attr.expression);
-      if (kind === "excluded") approve(attr.expression);
-      else if (kind === "object") {
-        approve(attr.expression);
-        if (hasChildren) result = forwarded(attr, "spread");
-      } else result = unknown("children-spread-unresolved");
-    } else if (attr.name.getText(sf) === "children") {
-      result =
+  const readAt = (
+    element: ts.JsxElement | ts.JsxSelfClosingElement,
+  ): ReactChildrenFact => {
+    const opening = ts.isJsxElement(element) ? element.openingElement : element;
+    let result: ReactChildrenFact = { kind: "absent" };
+    for (const attr of opening.attributes.properties) {
+      if (ts.isJsxSpreadAttribute(attr)) {
+        const kind = inputKind(attr.expression);
+        if (kind === "excluded") approve(attr.expression);
+        else if (kind === "object") {
+          approve(attr.expression);
+          if (hasChildren) result = forwarded(attr, "spread");
+        } else result = unknown("children-spread-unresolved");
+      } else if (attr.name.getText(sf) === "children") {
+        result =
+          attr.initializer &&
+          ts.isJsxExpression(attr.initializer) &&
+          attr.initializer.expression
+            ? expression(attr.initializer.expression, "attribute")
+            : { kind: "replaced" };
+      } else if (
+        attr.name.getText(sf) === "ref" &&
         attr.initializer &&
         ts.isJsxExpression(attr.initializer) &&
         attr.initializer.expression
-          ? expression(attr.initializer.expression, "attribute")
-          : { kind: "replaced" };
-    } else if (
-      attr.name.getText(sf) === "ref" &&
-      attr.initializer &&
-      ts.isJsxExpression(attr.initializer) &&
-      attr.initializer.expression
-    ) {
-      const ref = unwrap(attr.initializer.expression);
-      // Passing the forwardRef binding into the returned element does not
-      // execute it. Calls, property access and every other use still refuse.
+      ) {
+        const ref = unwrap(attr.initializer.expression);
+        // Passing the forwardRef binding into the returned element does not
+        // execute it. Calls, property access and every other use still refuse.
+        if (
+          ts.isIdentifier(ref) &&
+          secondaryAliases.has(checker.getSymbolAtLocation(ref)!)
+        )
+          approve(ref);
+      }
+    }
+    if (ts.isJsxElement(element)) {
+      // A single-line space is real JSX text; indentation-only multiline text
+      // and empty JSX comments do not become a children argument.
+      const children = element.children.filter((c) =>
+        ts.isJsxText(c)
+          ? !!c.text.trim() || !/[\r\n]/.test(c.text)
+          : !ts.isJsxExpression(c) || !!c.expression,
+      );
       if (
-        ts.isIdentifier(ref) &&
-        secondaryAliases.has(checker.getSymbolAtLocation(ref)!)
+        children.length === 1 &&
+        ts.isJsxExpression(children[0]) &&
+        children[0].expression
       )
-        approve(ref);
+        result = expression(children[0].expression, "expression");
+      else if (children.length)
+        result = children.every(
+          (c) =>
+            ts.isJsxText(c) ||
+            ts.isJsxElement(c) ||
+            ts.isJsxSelfClosingElement(c),
+        )
+          ? { kind: "replaced" }
+          : unknown("children-composition-unresolved");
+    }
+    return result;
+  };
+  let result = readAt(root);
+  if (result.kind !== "forwarded") {
+    // Keep the established root facts byte-identical unless a descendant has
+    // a direct unchanged input. Never upgrade the root fact: its projector
+    // intentionally discards descendants and would erase these wrappers.
+    let candidate = false;
+    const rootApproved = new Set(approved);
+    const findCandidate = (node: ts.Node) => {
+      if (
+        node !== root &&
+        (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) &&
+        readAt(node).kind === "forwarded"
+      )
+        candidate = true;
+      ts.forEachChild(node, findCandidate);
+    };
+    findCandidate(root);
+    // Candidate discovery also visits JSX inside callbacks and attributes.
+    // Only actual host-template traversal may approve those input uses.
+    approved.clear();
+    for (const node of rootApproved) approved.add(node);
+    if (!candidate) return result;
+    const hosts: Array<{ path: string; tag: string }> = [];
+    const slots: Array<{ path: string; fact: ReactChildrenFact }> = [];
+    const walk = (
+      element: ts.JsxElement | ts.JsxSelfClosingElement,
+      path: string,
+    ) => {
+      const opening = ts.isJsxElement(element)
+        ? element.openingElement
+        : element;
+      if (
+        !ts.isIdentifier(opening.tagName) ||
+        !/^[a-z][a-z0-9]*$/.test(opening.tagName.text)
+      )
+        throw Error("children-nested-host-unresolved");
+      hosts.push({ path, tag: opening.tagName.text });
+      const fact = readAt(element);
+      if (fact.kind === "forwarded") {
+        slots.push({ path, fact });
+        return;
+      }
+      if (fact.kind === "unresolved")
+        throw Error("children-nested-content-unresolved");
+      let index = 0;
+      if (ts.isJsxElement(element))
+        for (const child of element.children) {
+          if (ts.isJsxText(child)) continue;
+          if (ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child)) {
+            walk(child, path ? `${path}.${index++}` : String(index++));
+          } else if (ts.isJsxExpression(child)) {
+            if (!child.expression) continue;
+            const value = unwrap(child.expression);
+            // Primitive literals contribute no element path. Dynamic branches,
+            // arrays, portals, fragments and mixed caller content need another
+            // structural proof; observing one branch cannot establish it.
+            if (
+              !ts.isStringLiteral(value) &&
+              !ts.isNumericLiteral(value) &&
+              ![
+                ts.SyntaxKind.NullKeyword,
+                ts.SyntaxKind.TrueKeyword,
+                ts.SyntaxKind.FalseKeyword,
+              ].includes(value.kind)
+            )
+              throw Error("children-nested-content-unresolved");
+          } else throw Error("children-nested-content-unresolved");
+        }
+    };
+    try {
+      walk(root, "");
+      if (slots.length !== 1 || !slots[0].path)
+        return unknown("children-nested-slot-ambiguous");
+      result = {
+        ...slots[0].fact,
+        kind: "nested-forwarded",
+        nestedSlot: { path: slots[0].path, hosts },
+      };
+    } catch (error) {
+      return unknown(
+        error instanceof Error
+          ? error.message
+          : "children-nested-content-unresolved",
+      );
     }
   }
-  if (ts.isJsxElement(root)) {
-    // A single-line space is real JSX text; indentation-only multiline text
-    // and empty JSX comments do not become a children argument.
-    const children = root.children.filter((c) =>
-      ts.isJsxText(c)
-        ? !!c.text.trim() || !/[\r\n]/.test(c.text)
-        : !ts.isJsxExpression(c) || !!c.expression,
-    );
-    if (
-      children.length === 1 &&
-      ts.isJsxExpression(children[0]) &&
-      children[0].expression
-    )
-      result = expression(children[0].expression, "expression");
-    else if (children.length)
-      result = children.every(
-        (c) =>
-          ts.isJsxText(c) ||
-          ts.isJsxElement(c) ||
-          ts.isJsxSelfClosingElement(c),
-      )
-        ? { kind: "replaced" }
-        : unknown("children-composition-unresolved");
-  }
-  if (result.kind !== "forwarded") return result;
   let escaped = false;
   let possibleAliasUsed = false;
   const visit = (node: ts.Node) => {

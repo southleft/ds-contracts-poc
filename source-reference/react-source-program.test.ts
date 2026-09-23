@@ -20,6 +20,106 @@ export function Toggle(props:Parameters<typeof Primitive.Root>[0]) {return <Prim
 export function Action({asChild=false,...props}:{asChild?:boolean;disabled?:boolean}) {const Comp=asChild?Primitive.Root:'button';return <Comp data-slot="action" {...props}/>;}
 export function Box(props:{children?:string}) {const div='button';return <div {...props}><Action/></div>;}
 `;
+
+test("nested unchanged children retain a host path instead of becoming a root slot", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      `import './primitive';
+type API = {children?: string[]; mirror?: string[]; visible?: boolean};
+function External(props: API) {return <div {...props}/>}
+export function Deep({children}: API) {return <div><div><button>{children}</button></div></div>}
+export function Siblings({children}: API) {return <div>Heading<div/><div><button/>{/* comment */}<div>{children}</div></div><button/></div>}
+export function Attribute({children}: API) {return <div><button children={children}/></div>}
+export function Spread(props: API) {return <div><button {...props}/></div>}
+export function Duplicate({children}: API) {return <div><div>{children}</div><button>{children}</button></div>}
+export function Fragment({children}: API) {return <div><><button>{children}</button></></div>}
+export function Component({children}: API) {return <div><External>{children}</External></div>}
+export function Dynamic({children,visible}: API) {return <div>{visible && <button/>}<div>{children}</div></div>}
+export function Mixed({children}: API) {return <div><div>{children} extra</div></div>}
+export function Changed({children}: API) {children?.push('changed');return <div><div>{children}</div></div>}
+export function Aliased({children,mirror}: API) {mirror?.push('changed');return <div><div>{children}</div></div>}
+export function EscapedAttribute({children}: API) {return <div onClick={() => <button>{children}</button>}><div>{children}</div></div>}
+export function Transformed({children}: API) {return <div><div>{children?.join(',')}</div></div>}
+export function Defaulted({children=[]}: API) {return <div><div>{children}</div></div>}
+`,
+    );
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    const fact = (name: string) =>
+      program.components.find((c) => c.name === name)!.children;
+    for (const [name, slotPath, hosts] of [
+      [
+        "Deep",
+        "0.0",
+        [
+          ["", "div"],
+          ["0", "div"],
+          ["0.0", "button"],
+        ],
+      ],
+      [
+        "Siblings",
+        "1.1",
+        [
+          ["", "div"],
+          ["0", "div"],
+          ["1", "div"],
+          ["1.0", "button"],
+          ["1.1", "div"],
+          ["2", "button"],
+        ],
+      ],
+      [
+        "Attribute",
+        "0",
+        [
+          ["", "div"],
+          ["0", "button"],
+        ],
+      ],
+      [
+        "Spread",
+        "0",
+        [
+          ["", "div"],
+          ["0", "button"],
+        ],
+      ],
+    ] as const) {
+      const result = fact(name);
+      assert.equal(result.kind, "nested-forwarded", name);
+      assert.deepEqual(
+        result.nestedSlot,
+        { path: slotPath, hosts: hosts.map(([path, tag]) => ({ path, tag })) },
+        name,
+      );
+      assert.ok(result.span && result.span.end > result.span.start);
+    }
+    for (const name of [
+      "Duplicate",
+      "Fragment",
+      "Component",
+      "Dynamic",
+      "Mixed",
+      "Changed",
+      "Aliased",
+      "EscapedAttribute",
+      "Transformed",
+      "Defaulted",
+    ]) {
+      assert.notEqual(fact(name).kind, "forwarded", name);
+      assert.notEqual(fact(name).kind, "nested-forwarded", name);
+      assert.equal(fact(name).nestedSlot, undefined, name);
+    }
+    assert.equal(fact("Changed").reason, "children-input-escape-or-mutation");
+    assert.equal(fact("Aliased").reason, "children-alias-unresolved");
+    assert.equal(
+      fact("EscapedAttribute").reason,
+      "children-input-escape-or-mutation",
+    );
+    assert.deepEqual(readReactSourceProgram(dir, ["components.tsx"]), program);
+  }));
 function fixture(fn: (dir: string) => void) {
   const dir = mkdtempSync(path.join(tmpdir(), "react-program-"));
   try {

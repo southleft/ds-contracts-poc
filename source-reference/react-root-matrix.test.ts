@@ -361,3 +361,51 @@ test('conditional size bindings preserve prototype-like enum values as own keys'
  assert.ok(Object.hasOwn(map,'__proto__'));assert.ok(Object.hasOwn(map.__proto__,'width'));
  assert.equal(Object.hasOwn(Object.prototype,'width'),false);
 });
+
+import {probeReactProperties,probeReactPropertyBaseline} from './react-property-probe.js';
+
+for(const held of [false,true])test(`a no-axis root captures one immutable baseline${held?' with a held numeric input':''}`,async()=>{
+ const dir=mkdtempSync(path.join(process.cwd(),'private/static-root-baseline-')),browser=await chromium.launch();
+ try{
+  const source=`import React from 'react';
+export function Surface({children${held?',opacity=1':''}}:{children?:React.ReactNode${held?';opacity?:number':''}}){
+ return <section style={{display:'flex',boxSizing:'border-box',width:240,height:120,padding:8,fontFamily:'Arial',fontSize:14,lineHeight:'20px',backgroundColor:'#eee'${held?',opacity':''}}}>{children}</section>;
+}`;
+  writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
+  writeFileSync(path.join(dir,'surface.tsx'),source);
+  const program=readReactSourceProgram(dir,['surface.tsx']);assert.deepEqual(program.problems,[]);
+  const component=program.components.find(c=>c.exportName==='Surface')!,identity={module:component.module,exportName:component.exportName,sourceSha256:component.sourceSha256,span:component.span};
+  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Surface}];flushSync(()=>createRoot(document.getElementById('root')).render(<Surface${held?' opacity={1}':''}><span>Caller content</span></Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+  const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
+  await page.setContent('<div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
+  const selector='#root > section',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership,instanceId=ownership.components[0].id;
+  const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
+  const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+  const revisions=()=>page.evaluate(()=>[...(window as any).__DSC_REACT_OWNERSHIP.roots.values()].map((r:any)=>r.revision));
+  const before=await revisions();
+  const matrix=await observeReactPropertyMatrix({page,program,ownership,tree,image,selector,instanceId,dir:path.join(dir,'matrix'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.deepEqual(matrix.problems,[]);assert.deepEqual(matrix.axes,[]);assert.equal(matrix.planned,1);
+  const row=matrix.rows[0];assert.equal(row.baseline,true);assert.equal(row.status,'observed',row.problem??'');assert.equal(row.restored,true);assert.equal(row.visibleChange,false);assert.equal(row.treeChange,false);
+  assert.deepEqual(await revisions(),before,'baseline collection must not schedule a React update');
+  const snapshots:Record<string,ReactPropertySnapshot>={'0':JSON.parse(readFileSync(path.join(dir,'matrix/0.json'),'utf8'))};
+  const result=assembleReactRootMatrix(program,ownership,tree,matrix,snapshots),draft=result.draft!;
+  assert.deepEqual(result.problems,[]);assert.equal(draft.status,'native-compiled',draft.problems.join(';'));assert.deepEqual(draft.properties,[]);assert.deepEqual(draft.contract!.props,[]);assert.equal(draft.native!.variants.length,1);
+  assert.equal(draft.native!.variants[0].spec.fixedWidth?.px,240);assert.equal(draft.native!.variants[0].spec.fixedHeight?.px,120);assert.equal(JSON.stringify(draft.contract).includes('Caller content'),false);
+  const legacy={...matrix,planned:0,rows:[]};assert.equal(assembleReactRootMatrix(program,ownership,tree,legacy,{}).draft,undefined,'old zero-row archives gain no evidence');
+  const incomplete=structuredClone(matrix);incomplete.rows=[];assert.match(assembleReactRootMatrix(program,ownership,tree,incomplete,{}).problems[0],/plan-mismatch/);
+  const marker=structuredClone(matrix);delete marker.rows[0].baseline;assert.match(assembleReactRootMatrix(program,ownership,tree,marker,snapshots).problems[0],/plan-mismatch/);
+  for(const alter of [
+   (s:ReactPropertySnapshot)=>{delete s.fonts;},
+   (s:ReactPropertySnapshot)=>{delete s.bounds;},
+   (s:ReactPropertySnapshot)=>{s.bounds!.width+=1;},
+   (s:ReactPropertySnapshot)=>{s.ownership.components[0].props.unobserved=true;},
+  ]){const corrupted=structuredClone(snapshots);alter(corrupted['0']);assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,matrix,corrupted).draft!.problems,['react-root-matrix-baseline-unverified']);}
+  const changed=structuredClone(matrix);changed.rows[0].visibleChange=true;assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,changed,snapshots).draft!.problems,['react-root-matrix-baseline-unverified']);
+  await assert.rejects(probeReactProperties(page,selector,program,instanceId,{},async()=>0),/input-unsupported/,'empty input remains forbidden for mutation probes');
+  await assert.rejects(probeReactPropertyBaseline(page,selector,program,'missing',async()=>0),/source-or-prop-missing/);
+  const invalid=await observeReactPropertyMatrix({page,program,ownership,tree,image:'0'.repeat(64),selector,instanceId,dir:path.join(dir,'invalid'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.equal(invalid.rows[0].status,'refused');assert.match(invalid.rows[0].problem!,/original-not-restored/);
+  assert.equal(readFileSync(path.join(dir,'surface.tsx'),'utf8'),source);
+ }finally{await browser.close();rmSync(dir,{recursive:true,force:true});}
+});

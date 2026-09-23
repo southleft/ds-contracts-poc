@@ -176,11 +176,11 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
             {!delivery?.operation && <button type="button" disabled={busy} onClick={() => void prepareDelivery()}>Prepare native graph operation</button>}
             {delivery?.operation && <>
               <p>Native graph operation: {delivery.operation.phase.replaceAll('-', ' ')}. {delivery.operation.counters.variants} parent variants; {delivery.operation.counters.variables} scoped variables.</p>
-              {!delivery.connection?.paired && <button type="button" disabled={busy} onClick={() => void deliveryAction('connection')}>Get Figma connection code</button>}
+              {!connectionCode && <button type="button" disabled={busy} onClick={() => void deliveryAction('connection')}>{delivery.connection?.paired ? 'Reconnect Figma' : 'Get Figma connection code'}</button>}
               {connectionCode && <p><code>{connectionCode}</code></p>}
               {delivery.connection?.paired && !delivery.connection.started && <button type="button" disabled={busy} onClick={() => void deliveryAction('start')}>Create and inspect native graph</button>}
-              {!delivery.operation.pendingPhase && (delivery.operation.phase === 'component-observation-refused' || delivery.operation.phase === 'components-created') &&
-                <button type="button" disabled={busy} onClick={() => void deliveryAction('retry-observation')}>Inspect native graph again</button>}
+              {(delivery.operation.pendingPhase?.endsWith('readback') || !delivery.operation.pendingPhase && ['component-observation-refused', 'components-created', 'component-structure-observed'].includes(delivery.operation.phase)) &&
+                <button type="button" disabled={busy} onClick={() => void deliveryAction('retry-observation')}>{delivery.operation.pendingPhase ? 'Retry interrupted graph readback' : 'Inspect native graph again'}</button>}
               {delivery.operation.structuralObservation && <p>Structure: {delivery.operation.structuralObservation.status.replaceAll('-', ' ')}.{delivery.operation.sourceCurrent ? '' : ' The source or graph has changed since this readback; the saved evidence below describes the delivered graph, not the current compilation.'}</p>}
               {!!delivery.operation.problems.length && <p role="alert">{delivery.operation.problems.join(', ')}</p>}
               {delivery.operation.phase === 'component-structure-observed' && delivery.operation.imageObservation?.images.length && <section aria-label="React and native visual review">

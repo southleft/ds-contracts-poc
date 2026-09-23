@@ -10,6 +10,21 @@ export interface ReactSourceBindingProjection {
   sourceBindings: Array<{ channel: string; variable?: string; tokenPath?: string; reason?: string }>;
   tokens: Record<string, unknown>;
 }
+/** A custom property preserves its hex spelling while a painted channel uses
+ * rgb/rgba. Expand only literal hex, without rounding channels or alpha. This
+ * compares values after the authored-variable join; it cannot infer identity
+ * from equal paint. Rounded browser alpha still needs a separate proof. */
+function sourceValue(value: string, channel: string): string {
+  if (channel === 'color' || channel === 'background-color') {
+    const hex = /^#([\da-f]{3}|[\da-f]{4}|[\da-f]{6}|[\da-f]{8})$/i.exec(value);
+    if (hex) {
+      const digits = hex[1].length < 5 ? [...hex[1]].map(c => c + c).join('') : hex[1];
+      const parts = digits.match(/../g)!.map(c => parseInt(c, 16));
+      return `rgba(${parts[0]}, ${parts[1]}, ${parts[2]}, ${parts.length === 4 ? parts[3] / 255 : 1})`;
+    }
+  }
+  return normalizeValue(value);
+}
 export function observeReactSourceBindings(root: CapturedNode, part: Part, tokens: Record<string, unknown>,
   styleOrigin: ReactStyleOrigin, rootPath: string, values: Record<string, string> = {}): ReactSourceBindingProjection {
   if (styleOrigin.version !== 1) throw Error('react-root-visual-style-origin-version');
@@ -23,9 +38,10 @@ export function observeReactSourceBindings(root: CapturedNode, part: Part, token
     const leaf = typeof ref === 'string' ? leaves.get(ref.slice(1, -1)) : undefined;
     if (binding.status !== 'direct-variable' || !binding.variable || !binding.rawValue || !binding.computedValue)
       return { ...base, reason: binding.reason ?? 'source-binding-unresolved' };
-    if (normalizeValue(binding.computedValue) !== normalizeValue(root.style[binding.channel]) ||
-        normalizeValue(binding.rawValue) !== normalizeValue(binding.computedValue) ||
-        normalizeValue(root.style[binding.variable] ?? '') !== normalizeValue(binding.rawValue))
+    const normalize = (value: string) => sourceValue(value, binding.channel);
+    if (normalize(binding.computedValue) !== normalize(root.style[binding.channel]) ||
+        normalize(binding.rawValue) !== normalize(binding.computedValue) ||
+        normalize(root.style[binding.variable] ?? '') !== normalize(binding.rawValue))
       return { ...base, reason: 'source-variable-value-needs-resolution' };
     if (!leaf || !['color', 'number'].includes(leaf.type)) return { ...base, reason: 'projected-channel-not-token-bound' };
     const scoped = new Set(styleOrigin.roots.flatMap(r => r.channels.filter(c => c.variable === binding.variable && c.rawValue).map(c => c.rawValue)));
