@@ -10051,6 +10051,8 @@ so its dependency scope and prepared React download could remain stale. The
 workspace snapshot now invalidates that memo; previews and emitted output use
 the new scope, and the existing archive revision guard clears the old download.
 This applies to all workspace imports, with no component-name condition.
+Package preparation also waits until validation matches the current editor text,
+so an edit cannot prepare the previous contract during the debounce interval.
 
 A reversible native active-paint edit passed through Send, OS clipboard paste,
 app import and normal archive download. Exactly one token value changed; the
