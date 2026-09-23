@@ -96,9 +96,10 @@ and passes the same eight interaction trials in a clean consumer. Its native
 structure and unobstructed canvas were inspected. Creation still required manual
 script transfers. Send now captures this parent's actual local dependencies in
 one family file; its live app import retains all three proposals and opens the
-parent without individual child transfers. The exact link payload supplied
-the import because Figma's native Save dialog was disabled; file saving remains
-unqualified. Visual fidelity and complete V1
+parent without individual child transfers. A fresh Chrome session then completed
+**Copy JSON → paste → Load → Prepare React library → Download**. Its saved archive
+is byte-identical to the installed return archive. Figma's own Save dialog remains
+unqualified; the earlier exact-link transfer is preserved. Visual fidelity and complete V1
 acceptance remain unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return),
 [D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family)).
 

@@ -68,6 +68,8 @@ the result offers one `.family.json` containing the observed parent and child
 components. Copy it, then load it through the app's **JSON** input. A download
 link is also offered; native file saving remains unqualified because Figma's
 Save dialog was disabled in the live evaluation.
+The native Copy JSON path into a fresh Chrome app session and the subsequent
+React archive download were verified with identical installed-package bytes.
 The requested parent opens automatically and the supported child proposals are
 retained together. Review any refused or provisional children before choosing
 **Prepare React library**. Remote mains, cycles, unreadable references and

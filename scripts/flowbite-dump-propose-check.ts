@@ -373,8 +373,8 @@ check(
 );
 const dumpPlugin = readFileSync(path.join(ROOT, 'extract', 'figma', 'dump.plugin.js'), 'utf8');
 check(
-  'dump.plugin.js declares dumpVersion 1.45 (a v1.45 producer must still read this v1.30 fixture)',
-  /dumpVersion: '1\.45'/.test(dumpPlugin),
+  'dump.plugin.js declares dumpVersion 1.46 (a v1.46 producer must still read this v1.30 fixture)',
+  /dumpVersion: '1\.46'/.test(dumpPlugin),
 );
 const flowbiteSetName = 'Alert (flowbite.alert)';
 const scopedDump = dumpPlugin.replace(
