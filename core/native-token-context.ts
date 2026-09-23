@@ -182,7 +182,7 @@ function unique(values: string[], code: string): void {
   )
     fail(code);
 }
-function assertTree(tree: unknown): asserts tree is Record<string, unknown> {
+export function assertNativeTokenTree(tree: unknown): asserts tree is Record<string, unknown> {
   if (!tree || typeof tree !== "object" || Array.isArray(tree))
     fail("tree-shape");
   // flattenTokens deliberately normalizes dot paths. Refuse an ambiguous tree
@@ -276,7 +276,7 @@ export function prepareNativeTokenContext(
 
 /** The single writer of a token leaf's `$value`, addressed the way
  * flattenTokens names it. Exactly one leaf must answer to the path; a tree
- * that passed assertTree always has one, so anything else is refused here. */
+ * that passed assertNativeTokenTree always has one, so anything else is refused here. */
 export function setNativeTokenLeafValue(
   tree: Record<string, unknown>,
   tokenPath: string,
@@ -322,7 +322,7 @@ function restoreAllocatedValues(
       (m) => m.sourceMode === row.sourceMode && m.brand === row.brand,
     );
     if (!mode) fail("allocated-value-mode");
-    assertTree(mode!.tokens);
+    assertNativeTokenTree(mode!.tokens);
     const current = flattenTokens(mode!.tokens).get(row.tokenPath);
     if (!current) fail("allocated-value-path");
     // Historical inputs remain number-only. A dimension succession is a new
@@ -461,7 +461,7 @@ function prepareBody(
   const tables = input.modes.map((mode) => {
     if (!nonempty(mode.sourceMode) || !nonempty(mode.brand))
       fail("source-mode");
-    assertTree(mode.tokens);
+    assertNativeTokenTree(mode.tokens);
     if (mode.tokenTreeRevision !== revisionOf(mode.tokens))
       fail("token-tree-revision");
     return flattenTokens(mode.tokens);
