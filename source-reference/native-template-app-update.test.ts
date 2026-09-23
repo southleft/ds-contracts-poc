@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
@@ -99,6 +100,47 @@ async function fixture(t:test.TestContext,settleCaller=false) {
     reverse:()=>{desired=structuredClone(h.input.before.templateGraph!.input);},
     desired:()=>desired};
 }
+
+test('a template rollback needs an independent read and an explicit fresh write claim',async t=>{
+  const f=await fixture(t), {operation}=f.prepare(), id=operation.id;
+  const change=f.plan.valuePlan.changes[0], variable=f.variables.find(v=>v.id===change.variableId)!;
+  const assign=variable.setValueForMode.bind(variable);let fail=true;
+  variable.setValueForMode=(mode:string,value:unknown)=>{
+    assign(mode,value);if(fail){fail=false;throw Error('failed after template assignment');}
+  };
+  await f.accept(id,f.jobs().dispatch(id,'update-preflight-readback'));
+  const write=f.jobs().dispatch(id,'update-apply');
+  assert.equal((await f.accept(id,write)).phase,'update-applied');
+  assert.throws(()=>f.jobs().rearmWrite(id),/write-rearm-refused/);
+  assert.throws(()=>f.jobs().verifiedForParent(f.parent),/effective-observation-unavailable/);
+  const settled=await f.accept(id,f.jobs().dispatch(id,'update-readback'));
+  assert.equal(settled.phase,'update-write-untouched',JSON.stringify(settled.problems));
+  assert.equal(settled.completedUnchanged,'rolled-back');
+  assert.throws(()=>f.jobs().beginWrite(id,write.attemptId),/write-begin-refused/);
+  assert.throws(()=>f.jobs().dispatch(id,'update-apply'),/write-rearm-required/);
+  f.jobs().rearmWrite(id);
+  await f.accept(id,f.jobs().dispatch(id,'update-preflight-readback'));
+  const fresh=f.jobs().dispatch(id,'update-apply');
+  assert.notEqual(fresh.attemptId,write.attemptId);
+  await f.accept(id,fresh);
+  assert.equal((await f.accept(id,f.jobs().dispatch(id,'update-readback'))).phase,'update-verified');
+});
+
+test('a native edit after template rollback cannot be released by the rollback receipt',async t=>{
+  const f=await fixture(t), {operation}=f.prepare(), id=operation.id;
+  const change=f.plan.valuePlan.changes[0], variable=f.variables.find(v=>v.id===change.variableId)!;
+  const assign=variable.setValueForMode.bind(variable);let fail=true;
+  variable.setValueForMode=(mode:string,value:unknown)=>{
+    assign(mode,value);if(fail){fail=false;throw Error('failed after template assignment');}
+  };
+  await f.accept(id,f.jobs().dispatch(id,'update-preflight-readback'));
+  await f.accept(id,f.jobs().dispatch(id,'update-apply'));
+  f.figma.getNodeById(f.input.before.creation.variants[0].id).name='Unrelated native edit';
+  const observed=await f.accept(id,f.jobs().dispatch(id,'update-readback'));
+  assert.equal(observed.phase,'update-recovery-required');
+  assert.equal(observed.completedUnchanged,undefined);
+  assert.throws(()=>f.jobs().rearmWrite(id),/write-rearm-refused/);
+});
 
 test('a new caller requires a combined successor read before the larger inventory is current',async t=>{
   const f=await fixture(t),first=f.prepare();await f.finish(first.operation.id);
@@ -286,4 +328,18 @@ test('program reuse keys complete template bytes and options, never just the sav
   changed.template.input.consumers[0].baseline.unrequested='tampered';
   assert.throws(()=>emitNativeAppUpdateScript(changed),/proposal-changed/);
   assert.throws(()=>emitNativeAppUpdateReadback(changed),/proposal-changed/);
+});
+
+
+test('template history pin projections retain independent nested consumer pins',async t=>{
+ const f=await fixture(t),first=f.prepare(),expected=f.plans.historyPins(f.parent,first.proposal.id);
+ assert.ok(expected.consumerPins?.length);
+ withEvidenceReadSnapshot(()=>{
+  const copy=f.plans.historyPins(f.parent,first.proposal.id);
+  copy.consumerPins![0].journalRevision='f'.repeat(64);copy.consumerPins!.push(copy.consumerPins![0]);
+  assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
+  const stored=f.plans.saved(f.parent,first.proposal.id);stored.consumerPins![0].journalRevision='e'.repeat(64);
+  assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
+ });
+ assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
 });

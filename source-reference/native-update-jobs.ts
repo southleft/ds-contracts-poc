@@ -345,7 +345,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     write(path.join(l.dir,'events',`${String(l.events.length).padStart(8,'0')}.json`),{...event,sequence:l.events.length,previous:l.previous});
   };
   const superseded=(l:Loaded) => plans.list(l.header.parentId).some(proposal=>{
-    if(plans.saved(l.header.parentId,proposal.id).predecessor?.proposalId!==l.header.proposalId)return false;
+    if(plans.historyPins(l.header.parentId,proposal.id).predecessor?.proposalId!==l.header.proposalId)return false;
     const id=identity(l.header.parentId,proposal.id);
     return existsSync(path.join(root,id))&&load(id).state.wrote;
   });
@@ -357,7 +357,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     });
     if(!written.length)return undefined;
     if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending))fail('effective-observation-unavailable');
-    const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
+    const predecessors=new Set(written.map(l=>plans.historyPins(parentId,l.header.proposalId).predecessor?.proposalId));
     const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
     if(tips.length!==1)fail('effective-observation-unavailable');
     const l=tips[0];
@@ -479,13 +479,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   return {
     get,dispatch,
     updateHistory(parentId: string) {
-      return plans.list(parentId).flatMap(proposal => {
+      return evidenceReadOnce(displayScope + ':history', parentId, () => plans.list(parentId).flatMap(proposal => {
         const id=identity(parentId,proposal.id);
         if(!existsSync(path.join(root,id))) return [];
         const l=load(id);
         return l.state.wrote ? [{proposalId:proposal.id,journalRevision:l.previous,phase:l.state.phase,
           pending:!!l.state.pending,receipt:structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback | undefined}] : [];
-      });
+      }));
     },
     verifiedForParent(parentId: string) {
       return evidenceReadOnce(displayScope + ':parent', parentId, () => {

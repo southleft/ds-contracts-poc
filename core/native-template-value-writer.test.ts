@@ -270,14 +270,83 @@ test('edits during the final async registry load and font loads are observed bef
   }
 });
 
-test('an interrupted assignment remains explicit and a repeated old plan cannot silently resume it', async () => {
-  const h = await fixture(), second = h.variables.find(v => v.id === h.plan.valuePlan.changes[1].variableId)!;
-  second.setValueForMode = () => { throw Error('injected assignment failure'); };
+test('synchronous assignment failures restore exact values and retained caller observations', async () => {
+  for (const afterAssignment of [false, true]) {
+    const h = await fixture(true), change = h.plan.valuePlan.changes[1];
+    const second = h.variables.find(v => v.id === change.variableId)!;
+    const assign = second.setValueForMode.bind(second);
+    const read = emitNativeTemplateUpdateObservationScript(h.input), before = await h.run(read);
+    second.setValueForMode = (mode: string, value: unknown) => {
+      if (afterAssignment) assign(mode, value);
+      throw Error('injected assignment failure');
+    };
+    const result = await h.write();
+    assert.equal(result.status, 'rolled-back', JSON.stringify(result.problems));
+    assert.equal(result.attemptedVariableIds.length, 2);
+    assert.deepEqual(result.restoredVariableIds, result.attemptedVariableIds);
+    assert.deepEqual(result.unrestoredVariableIds, []);
+    assert.equal(result.rollbackAttemptedVariableIds.length, afterAssignment ? 2 : 1);
+    assert.deepEqual(await h.run(read), before, 'the whole native graph and caller return to the observed baseline');
+    assert.equal(inspectNativeTemplateUpdateObservation(h.input, result).untouched, false,
+      'the delivery answer is not an independent observation');
+  }
+});
+
+test('rollback never overwrites a third value and retains failed restorations as partial updates', async () => {
+  for (const conflict of [false, true]) {
+    const h = await fixture(true), [a, b] = h.plan.valuePlan.changes;
+    const first = h.variables.find(v => v.id === a.variableId)!;
+    const second = h.variables.find(v => v.id === b.variableId)!;
+    const assign = first.setValueForMode.bind(first); let calls = 0;
+    first.setValueForMode = (mode: string, value: unknown) => {
+      if (++calls > 1) throw Error('restoration failed');
+      assign(mode, value);
+    };
+    second.setValueForMode = () => {
+      if (conflict) first.valuesByMode[a.modeId] = { r: 0.91, g: 0.82, b: 0.73, a: 1 };
+      throw Error('interrupted assignment');
+    };
+    const result = await h.write();
+    assert.equal(result.status, 'recovery-required');
+    assert.ok(result.unrestoredVariableIds.includes(a.variableId));
+    if (conflict) {
+      assert.deepEqual(result.rollbackAttemptedVariableIds, []);
+      assert.ok(result.problems.includes('native-template-rollback-conflict'));
+      assert.deepEqual(first.valuesByMode[a.modeId], { r: 0.91, g: 0.82, b: 0.73, a: 1 });
+    }
+    const assignmentCount = h.assignments.length;
+    assert.equal((await h.write()).status, 'refused');
+    assert.equal(h.assignments.length, assignmentCount, 'the old plan cannot resume partial canvas state');
+  }
+});
+
+test('rollback checks every channel after restorative setters and does not reverse asynchronous read failures', async () => {
+  const h = await fixture(true), [a, b] = h.plan.valuePlan.changes;
+  const first = h.variables.find(v => v.id === a.variableId)!;
+  const second = h.variables.find(v => v.id === b.variableId)!;
+  const assignFirst = first.setValueForMode.bind(first), assignSecond = second.setValueForMode.bind(second);
+  let firstCalls = 0, secondCalls = 0;
+  first.setValueForMode = (mode: string, value: unknown) => {
+    assignFirst(mode, value);
+    if (++firstCalls > 1) assignSecond(b.modeId, b.after);
+  };
+  second.setValueForMode = (mode: string, value: unknown) => {
+    assignSecond(mode, value);
+    if (++secondCalls === 1) throw Error('failed after assignment');
+  };
   const result = await h.write();
   assert.equal(result.status, 'recovery-required');
-  assert.equal(result.changedVariableIds.length, 1); assert.equal(result.attemptedVariableIds.length, 2);
-  assert.equal(h.assignments.length, 1, 'no unverified automatic reversal');
-  const repeated = await h.write(); assert.equal(repeated.status, 'refused'); assert.equal(h.assignments.length, 1);
+  assert.ok(result.unrestoredVariableIds.includes(b.variableId), 'a later setter cannot hide drift in an earlier restored channel');
+
+  const later = await fixture(true), get = later.figma.getNodeByIdAsync.bind(later.figma);
+  later.figma.getNodeByIdAsync = async (id: string) => {
+    if (later.assignments.length) throw Error('post-write reader failed');
+    return get(id);
+  };
+  const failedRead = await later.write();
+  assert.equal(failedRead.status, 'recovery-required');
+  assert.equal(later.assignments.length, later.plan.valuePlan.changes.length);
+  assert.equal(failedRead.rollbackAttemptedVariableIds, undefined, 'asynchronous observation errors never enter synchronous rollback');
 });
 
 test('a separate observation distinguishes unchanged and changed values without treating delivery as settlement', async () => {
@@ -322,6 +391,12 @@ test('independent reads retain partial assignments and reject changed callers ev
   assert.ok(edited.problems.includes('native-template-update-observation-baseline-conflict'));
   callerText.characters = original;
   const second = h.variables.find(v => v.id === h.plan.valuePlan.changes[1].variableId)!;
+  const first = h.variables.find(v => v.id === h.plan.valuePlan.changes[0].variableId)!;
+  const assign = first.setValueForMode.bind(first); let calls = 0;
+  first.setValueForMode = (mode: string, value: unknown) => {
+    if (++calls > 1) throw Error('restoration unavailable');
+    assign(mode, value);
+  };
   second.setValueForMode = () => { throw Error('interrupted assignment'); };
   assert.equal((await h.write()).status, 'recovery-required');
   const observation = await h.run(script), partial = inspectNativeTemplateUpdateObservation(h.input, observation);

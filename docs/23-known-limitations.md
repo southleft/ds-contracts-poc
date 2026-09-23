@@ -10079,3 +10079,81 @@ V1 qualification. Evidence: `private/selection-edit-return-20260922/`.
 **Reversal:** remove the workspace dependency from editor validation and restore
 its previous subscription location; preserve both stale-download and corrected
 replay evidence. Document stale dependency output if that behavior is restored.
+
+## D.135 A synchronous template assignment failure can restore its attempted values
+
+**AGENT decision — 2026-09-22.** A template value update previously left earlier
+assignments on the canvas when a later variable setter threw. The writer now
+captures each exact observed value before assigning it. If a setter fails, it
+checks every attempted variable identity and mode value before restoring any:
+only the captured original value or that attempt's intended value is eligible.
+A third value or replacement identity stops rollback without overwriting it.
+
+Restoration runs in reverse order, with no asynchronous yield between the final
+preflight, assignments and rollback. It records attempted and restored IDs and
+checks all attempted channels again after the restorative setters. A setter that
+throws after restoring its value can be distinguished from a failed restoration.
+An incomplete restoration remains `recovery-required`. Errors during later
+asynchronous observations never authorize this rollback, and this does not
+recover an OS crash or a companion closed in the middle of a write.
+
+The application still requires a separate complete native read. The writer's
+`rolled-back` answer alone cannot qualify the canvas or permit a retry. Only
+independent unchanged evidence enables the existing explicit action to preflight
+and send a new write under a new claim; the previous write cannot begin again.
+An unrelated native edit keeps the operation in recovery.
+
+Regression checks exercise errors before and after an assignment, exact main and
+caller restoration, a third-value conflict, a failed restorative setter, drift
+introduced by a later restorative setter, and a post-write read failure. Journal
+checks cover independent settlement, refusal of the old claim, explicit rearm and
+an unrelated edit.
+
+The live application now demonstrates one bounded failure in Evaluations. A
+separate test companion injects a synchronous throw after the second completed
+assignment. Both attempted values restore; an independent read confirms all 302
+main records, 100 main images and both retained callers are unchanged. The app
+closes that write and offers an explicit fresh preflight. Using the unchanged
+production companion, that action obtains a different write claim, applies all
+11 reviewed color changes and independently verifies them. A reverse correction
+then restores the complete original native observations and images, all four
+source files and their original bytes; all 2,185 earlier native evidence files
+remain unchanged. Terminal app states and the unobstructed canvas were inspected.
+The injected execution is recorded separately from the original command hash;
+this is not evidence of a spontaneous API failure or an OS crash. Slow host and
+display transitions remain a release gap. Broader recovery and V1 remain open.
+
+**Reversal:** restore the original assignment loop and its partial-write refusal,
+and retain these failed/restored observations. Do not classify partial values as
+untouched or permit a retry based only on the write response.
+
+
+## D.136 History traversal copies only the evidence each display check needs
+
+**AGENT decision — 2026-09-22.** A long correction history repeatedly copied
+complete plans and replayed journals just to inspect predecessor and caller pins.
+History traversal now reuses authenticated pin projections and the projected
+written-history list within one synchronous display response. Each caller still
+receives an independent copy. Nothing survives that response: command delivery
+and other authorizing reads outside the display scope recheck the original files,
+source and journal. Canonical identities and native comparison rules are unchanged.
+
+An isolated full-service comparison against the retained recovery history reduced
+mean repeated-read time from 64.0 to 52.3 seconds over two warm reads per process;
+the first read fell from 114.7 to 99.4 seconds. All six complete responses were
+byte-identical and all 2,204 native evidence files remained unchanged. These are
+local in-process measurements, not an HTTP latency guarantee. After adoption,
+the app reopens the same current verified correction and its historical records.
+A separate actual HTTP read takes 56.9 seconds, returns the exact saved response,
+and preserves all 2,204 native evidence files with no new event. The remaining
+delay is still a product gap; broader performance qualification is unfinished.
+
+Regression checks mutate returned predecessor and consumer pins, history arrays
+and nested observations, then confirm later callers retain the original values.
+Altered proposal files and damaged journals remain refused in the next request
+and before dispatch. A separate store cannot inherit a previous store's checked
+journal. Existing rich-value and write-during-display refusal behavior is retained.
+
+**Reversal:** remove the projected pin/history reuse and return the traversal to
+full authenticated record reads. Preserve all journals and measurement evidence;
+do not replace the response-scoped projections with persistent authorization.
