@@ -9845,3 +9845,37 @@ visual fidelity and the complete composed journey remain unqualified.
 **Reversal:** remove the marked baseline plan and read-only observer, restore the
 zero-axis assembly refusal, and update the UI label and these checks together.
 Keep recorded source/native evidence; never infer a baseline for an old archive.
+
+## D.135 A synchronous template assignment failure can restore its attempted values
+
+**AGENT decision — 2026-09-22.** A template value update previously left earlier
+assignments on the canvas when a later variable setter threw. The writer now
+captures each exact observed value before assigning it. If a setter fails, it
+checks every attempted variable identity and mode value before restoring any:
+only the captured original value or that attempt's intended value is eligible.
+A third value or replacement identity stops rollback without overwriting it.
+
+Restoration runs in reverse order, with no asynchronous yield between the final
+preflight, assignments and rollback. It records attempted and restored IDs and
+checks all attempted channels again after the restorative setters. A setter that
+throws after restoring its value can be distinguished from a failed restoration.
+An incomplete restoration remains `recovery-required`. Errors during later
+asynchronous observations never authorize this rollback, and this does not
+recover an OS crash or a companion closed in the middle of a write.
+
+The application still requires a separate complete native read. The writer's
+`rolled-back` answer alone cannot qualify the canvas or permit a retry. Only
+independent unchanged evidence enables the existing explicit action to preflight
+and send a new write under a new claim; the previous write cannot begin again.
+An unrelated native edit keeps the operation in recovery.
+
+Regression checks exercise errors before and after an assignment, exact main and
+caller restoration, a third-value conflict, a failed restorative setter, drift
+introduced by a later restorative setter, and a post-write read failure. Journal
+checks cover independent settlement, refusal of the old claim, explicit rearm and
+an unrelated edit. Live application and Figma demonstration remains unqualified.
+This implementation does not close the broader recovery or V1 requirements.
+
+**Reversal:** restore the original assignment loop and its partial-write refusal,
+and retain these failed/restored observations. Do not classify partial values as
+untouched or permit a retry based only on the write response.
