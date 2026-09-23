@@ -2428,7 +2428,7 @@ export function Playground() {
         !/^\/api\/react-library\/download\/[a-f0-9-]+$/.test(artifact.downloadUrl)) throw Error('React library response did not contain an installable archive.');
       if (revision !== libraryRevision.current) return;
       setLibraryArtifact(artifact);
-      setLibraryNotice('React library ready. Download it, then install the saved file in your app.');
+      setLibraryNotice('React library ready. This download link survives local server restarts. Download it, then install the saved file in your app.');
     } catch (error) {
       if (revision === libraryRevision.current) setLibraryNotice(error instanceof Error ? error.message : String(error));
     }
