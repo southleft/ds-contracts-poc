@@ -1,3 +1,4 @@
+import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
 import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
 import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { verifyNativeTemplateGraphReceipt, emitNativeTemplateGraphReadbackScript, type NativeTemplateGraphIdentity, type NativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
@@ -43,7 +44,7 @@ export interface NativeSourceWriteContext {
 }
 
 export function prepareNativeSourceWrite(
-  projection: NativeSourceCandidateProjection | NativeContractDraftProjection,
+  projection: NativeSourceCandidateProjection | NativeContractDraftProjection | NativePreparedLibraryProjection,
   context: NativeSourceWriteContext,
   boundNames: string[],
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
@@ -65,6 +66,7 @@ export function prepareNativeSourceWrite(
   if (!tokens?.input || !tokens.identity || !tokens.receipt)
     fail("token-observation-required");
   const input = tokens.input;
+  const library = 'kind' in projection && projection.kind === 'prepared-contract-library';
   const template = 'kind' in projection ? projection.rootTextTemplate : undefined;
   const graphSidecar = context.templateGraph;
   if (!!graphSidecar !== !!templateGraphInput || graphSidecar && (!template || comparisons || contractComparison || context.comparisonRecovery))
@@ -79,7 +81,7 @@ export function prepareNativeSourceWrite(
     input.fileKey !== operation.fileKey ||
     input.scopeId !== `source-${operation.id}` ||
     input.source.revision !== projection.source.revision ||
-    input.source.sourceProgramSha256 !== projection.source.programSha256 ||
+    (library ? canonicalJson(input.source) !== canonicalJson(projection.source) : !('programSha256' in projection.source) || input.source.sourceProgramSha256 !== projection.source.programSha256) ||
     ((!template || graph) && input.modes.length !== 1) ||
     input.modes[0].sourceMode !== projection.context.mode ||
     input.modes[0].brand !== projection.context.brand ||
@@ -126,7 +128,7 @@ export function prepareNativeSourceWrite(
     sourceContractRevision: projection.contractRevision,
     projection,
     machineId: `source-native:${operation.id}:${projection.contractId}`,
-    pageName: `${'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
+    pageName: `${library ? 'DS prepared library' : 'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
     tokenPreparationRevision: preparation.revision,
     ...(recovery ? { recovery: { revision: recovery.revision, creation: recovery.input.creation, observation: recovery.observation } } : {}),
     identity: tokens.identity,

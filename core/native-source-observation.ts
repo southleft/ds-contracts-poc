@@ -1,3 +1,4 @@
+import {nativeGraphVariants, nativeLibraryReactionsMatch, type NativePreparedLibraryProjection} from './native-prepared-library.js';
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
 import { verifyRootTextTemplateTokenContext, applyRootTextTemplateAliases } from './native-root-text-template-plan.js';
@@ -70,9 +71,14 @@ export interface NativeContractObservationInput extends Omit<NativeSourceObserva
   /** Engine-derived original specs and persisted variable allocation IDs. */
   templateGraph?: { input: NativeRootTextTemplateGraphInput; identity: NativeTemplateGraphIdentity };
 }
-export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
-function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {
-  return 'kind' in input.projection && input.projection.kind === 'contract-draft';
+export interface NativePreparedLibraryObservationInput extends Omit<NativeContractObservationInput, 'projection' | 'graphVerification'> {
+  projection: NativePreparedLibraryProjection;
+  graphVerification: 2;
+  graphComponents: ComponentData[];
+}
+export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput | NativePreparedLibraryObservationInput;
+function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput | NativePreparedLibraryObservationInput {
+  return 'kind' in input.projection && ['contract-draft','prepared-contract-library'].includes(input.projection.kind);
 }
 /** Exports are diagnostic mains for a Contract draft; source comparisons remain
  * separate instances. Neither image kind is a visual-fidelity result. */
@@ -118,9 +124,14 @@ export function nativeShadowStackMatches(spec: NodeSpec, effects: unknown): bool
 
 function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
+  if (isContractDraft(input) && input.projection.kind === 'prepared-contract-library' &&
+      (input.graphVerification !== 2 || !same(input.projection.source,input.tokenInput.source) ||
+       input.templateGraph || input.backgroundMigration || input.fixedCrossSizeReadback || input.absoluteShapeReadback || input.tokenExtensionReadback))
+    throw Error('native-prepared-library-observation-context-invalid');
   if (('graphVerification' in input && input.graphVerification !== undefined) || c?.graphVerification !== undefined) {
-    if (!isContractDraft(input) || input.graphVerification !== 1 ||
-        !validNativeGraphCreation(input.graphComponents, c))
+    if (!isContractDraft(input) || input.graphVerification !== (input.projection.kind === 'prepared-contract-library' ? 2 : 1) ||
+        c?.graphVerification !== input.graphVerification ||
+         !validNativeGraphCreation(input.graphComponents, c, input.graphVerification))
       throw Error('native-graph-observation-creation-invalid');
   }
   if (isContractDraft(input) && input.projection.rootTextTemplate) {
@@ -158,7 +169,7 @@ function checkInput(input: NativeInspectionInput) {
       throw Error('native-absolute-shape-readback-input-invalid');
   }
   const graphValid = !isContractDraft(input) || input.graphComponents === undefined ||
-    (Array.isArray(input.graphComponents) && input.graphComponents.length > 1 &&
+    (Array.isArray(input.graphComponents) && input.graphComponents.length >= (input.projection.kind === 'prepared-contract-library' ? 1 : 2) &&
      same(input.graphComponents.at(-1), input.component) &&
      new Set(input.graphComponents.map(component => component.contractId)).size === input.graphComponents.length &&
      input.graphComponents.every(component => component.nativeContractDraft && !component.nativeSourceCandidate) &&
@@ -205,6 +216,9 @@ export function emitNativeSourceReadbackScript(
 ): string {
   return emitNativeInspectionReadbackScript(input, captureImages);
 }
+export function emitNativePreparedLibraryReadbackScript(input: NativePreparedLibraryObservationInput, captureImages = false): string {
+  return emitNativeInspectionReadbackScript(input, captureImages);
+}
 export function emitNativeContractReadbackScript(input: NativeContractObservationInput, captureImages = false, captureExportBounds = false): string {
   return emitNativeInspectionReadbackScript(input, captureImages, captureExportBounds);
 }
@@ -232,9 +246,9 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     nodes: input.creation.nodes,
     comparisons: nativeInspectionExports(input),
   };
-  const observedComponents = isContractDraft(input) && input.graphVerification === 1
+  const observedComponents = isContractDraft(input) && input.graphVerification !== undefined
     ? input.graphComponents! : [input.component];
-  const observedVariants = isContractDraft(input) && input.graphVerification === 1
+  const observedVariants = isContractDraft(input) && input.graphVerification !== undefined
     ? observedComponents.flatMap(c => [...c.variants, ...(c.stateVariants ?? [])]) : input.component.variants;
   const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
   const extra = observedVariants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
@@ -242,6 +256,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   if (isContractDraft(input) && observedVariants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
   if (isContractDraft(input) && observedVariants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
+  if (isContractDraft(input) && input.graphVerification === 2) extra.push('statePreviewAxis');
   const extension=isContractDraft(input)?input.tokenExtensionReadback:undefined;
   if(extension && (synchronous || !same(extension.before,input.tokenInput) || !same(extension.identity,input.tokenIdentity)))
     throw Error('native-token-extension-reader-input-invalid');
@@ -458,6 +473,9 @@ export function verifyNativeSourceReadback(
   } catch {
     return observationReport(["native-source-observation-malformed"]);
   }
+}
+export function verifyNativePreparedLibraryReadback(input: NativePreparedLibraryObservationInput, receipt: unknown) {
+  return verifyNativeInspectionReadback(input, receipt);
 }
 export function verifyNativeContractReadback(input: NativeContractObservationInput, receipt: unknown) {
   return verifyNativeInspectionReadback(input, receipt);
@@ -706,10 +724,18 @@ function verifyReadback(
     }
   }
   const verifyComponent = (component: ComponentData, target: Record<string, any>, created: Record<string, any>) => {
+    const library = isContractDraft(input) && input.graphVerification === 2;
+    const variants = nativeGraphVariants(component, library ? 2 : 1);
     const defs = target.definitions ?? {},
+      boolKeys = new Map<string,string>(),
       slotKeys = new Map<string, string>(),
       textKeys = new Map<string, string>();
     for (const [key, def] of Object.entries(defs) as Array<[string, any]>) {
+      if (library && def.type === 'BOOLEAN') {
+        const display = key.slice(0,key.lastIndexOf('#'));
+        if (!key.includes('#') || boolKeys.has(display)) issue('native-library-observation-boolean-property-ambiguous');
+        boolKeys.set(display,key);
+      }
       if (def.type === "SLOT") {
         const display = key.slice(0, key.lastIndexOf("#"));
         if (!key.includes("#") || slotKeys.has(display))
@@ -725,7 +751,7 @@ function verifyReadback(
     }
     const axes = component.unsetVariantAxes?.axes ?? [];
     const draftAxes = new Map<string, Set<string>>();
-    if (isContractDraft(input) && component.isSet) for (const variant of component.variants)
+    if (isContractDraft(input) && component.isSet) for (const variant of variants)
       for (const segment of variant.name.split(', ')) {
         const i = segment.indexOf('='), property = segment.slice(0, i), value = segment.slice(i + 1);
         if (i <= 0) throw Error('native-contract-observation-variant-name');
@@ -733,9 +759,14 @@ function verifyReadback(
         draftAxes.get(property)!.add(value);
       }
     const expectedSlots = new Set<string>();
-    const expectedTexts = new Map<string, string>();
+    const expectedTexts = new Map<string, string>(library ? component.textProps.map(p=>[p.property,p.default]) : []);
+    const expectedBools = new Map<string, boolean>(library ? component.boolProps.map(p=>[p.property,p.default]) : []);
+    const slotSpecs = new Map<string,NodeSpec>();
     const collect = (s: NodeSpec) => {
-      if (s.type === "slot" && s.callerSlotProperty === undefined) expectedSlots.add(s.slotProperty!);
+      if (s.type === "slot" && s.callerSlotProperty === undefined) {
+        expectedSlots.add(s.slotProperty!); slotSpecs.set(s.slotProperty!,s);
+        if (library && s.slotOptional) expectedBools.set('Show '+s.slotProperty,false);
+      }
       if (isContractDraft(input) && s.contentProp !== undefined) {
         if (s.type !== 'text' || typeof s.characters !== 'string' ||
             (expectedTexts.has(s.contentProp) && expectedTexts.get(s.contentProp) !== s.characters))
@@ -744,13 +775,29 @@ function verifyReadback(
       }
       (s.children ?? []).forEach(collect);
     };
-    component.variants.forEach((v) => collect(v.spec));
+    variants.forEach((v) => collect(v.spec));
     if (
       !same([...slotKeys.keys()].sort(), [...expectedSlots].sort()) ||
       !same([...textKeys.keys()].sort(), [...expectedTexts.keys()].sort()) ||
-      Object.keys(defs).length !== expectedSlots.size + expectedTexts.size + (isContractDraft(input) ? draftAxes.size : axes.length)
+      !same([...boolKeys.keys()].sort(), [...expectedBools.keys()].sort()) ||
+      Object.keys(defs).length !== expectedSlots.size + expectedTexts.size + expectedBools.size + (isContractDraft(input) ? draftAxes.size : axes.length)
     )
       issue("native-source-observation-property-inventory");
+    if (library) {
+      for (const [name,value] of expectedBools) if (defs[boolKeys.get(name)!]?.defaultValue !== value)
+        issue('native-library-observation-boolean-default');
+      if (component.statePreviewAxis ? !same(meta(target,'statePreviewAxis'),component.statePreviewAxis) : !!target.metadata.statePreviewAxis)
+        issue('native-library-observation-state-axis');
+      for (const [name,spec] of slotSpecs) {
+        const def = defs[slotKeys.get(name)!];
+        const preferred = (spec.slotAccepts ?? []).map(ref => {
+          const identity = c.graphTargets.find((row:any)=>row.contractId === ref.contractId);
+          return identity && {type:identity.type,key:identity.key};
+        });
+        if (!def || !same(def.preferredValues ?? [],preferred) || (def.description ?? '') !== (spec.slotDescription ?? ''))
+          issue('native-library-observation-slot-definition');
+      }
+    }
     for (const axis of axes) {
       const def = defs[axis.property];
       if (
@@ -838,6 +885,10 @@ function verifyReadback(
       if (isContractDraft(input)) {
         const references = spec.type === 'slot' ? { slotContentId: slotKeys.get(spec.slotProperty!) }
           : spec.contentProp !== undefined ? { characters: textKeys.get(spec.contentProp) } : {};
+        if (library) {
+          if (spec.visibleProp) Object.assign(references,{visible:boolKeys.get(spec.visibleProp)});
+          else if (spec.slotOptional) Object.assign(references,{visible:boolKeys.get('Show '+spec.slotProperty)});
+        }
         if (!same(v.componentPropertyReferences ?? {}, references))
           issue('native-contract-observation-property-references', n);
         if ((n.metadata.callerContentProperty ?? '') !== (spec.callerContentProp ?? ''))
@@ -856,9 +907,31 @@ function verifyReadback(
           if (matches.length !== 1 || !same((matches[0][1] as any)?.value, value))
             issue('native-contract-observation-instance-property', n);
         }
+        if (library && depTarget) {
+          const main = nodes.get(n.mainId);
+          if (!same(n.values.reactions ?? [],main?.values.reactions ?? [])) issue('native-library-observation-instance-reactions',n);
+          if (n.values.visible !== (spec.visibleProp ? spec.visibleDefault === true : true))
+            issue('native-library-observation-instance-visibility',n);
+          const definitions = depTarget.definitions ?? {}, properties = n.componentProperties ?? {};
+          if (!same(Object.keys(properties).filter(key=>properties[key].type !== 'SLOT').sort(), Object.keys(definitions).filter(key=>definitions[key].type !== 'SLOT').sort()) ||
+              Object.keys(properties).some(key=>properties[key].type === 'SLOT' &&
+                (definitions[key]?.type !== 'SLOT' || properties[key].value !== undefined ||
+                 !same(properties[key].preferredValues ?? [],definitions[key].preferredValues ?? []))))
+            issue('native-library-observation-instance-property-inventory',n);
+          for (const [key,definition] of Object.entries(definitions) as Array<[string,any]>) {
+            if (definition.type === 'SLOT') continue;
+            const display = key.includes('#') ? key.slice(0,key.lastIndexOf('#')) : key;
+            const expected = spec.depProps && Object.hasOwn(spec.depProps,display) ? spec.depProps[display] : definition.defaultValue;
+            if (properties[key]?.type !== definition.type || !same(properties[key]?.value,expected) ||
+                Object.keys(properties[key]?.boundVariables ?? {}).length ||
+                (definition.type === 'VARIANT' && main?.variantProperties?.[key] !== expected))
+              issue('native-library-observation-instance-property-default',n);
+          }
+        }
         const descendants: Record<string, any>[] = [];
         const inheritedSeen = new Set<string>([n.id]);
-        const descend = (row: Record<string, any>, main: Record<string, any> | undefined) => {
+        const descend = (row: Record<string, any>, main: Record<string, any> | undefined, inheritedProperties = n.componentProperties ?? {}) => {
+          const properties = row.type === 'INSTANCE' ? row.componentProperties ?? {} : inheritedProperties;
           if (!main || (row.type !== 'SLOT' && row.childIds.length !== main.childIds.length))
             issue('native-contract-observation-instance-tree', row);
           for (const [index,id] of row.childIds.entries()) { const child = nodes.get(id); if (child) {
@@ -876,7 +949,22 @@ function verifyReadback(
                   (bornIds.has(source.id) && allocation !== source.id) ||
                   child.metadata.nativeSourceAllocation !== allocation)
                 issue('native-contract-observation-instance-tree', child);
-              descend(child,source);
+              if (library && source) {
+                // Instance edits can override inherited content without changing
+                // its main link or allocation stamp. Compare these independently
+                // observed channels, allowing only the declared property value.
+                if (child.type === 'INSTANCE' && (child.mainId !== source.mainId ||
+                    !same(child.componentProperties,source.componentProperties) ||
+                    !same(child.values.reactions ?? [],source.values.reactions ?? [])))
+                  issue('native-library-observation-inherited-instance',child);
+                for (const field of ['fills','strokes','effects','opacity','strokeWeight','cornerRadius','fontName','fontSize',
+                  'textAutoResize','textAlignHorizontal','lineHeight','letterSpacing','boundVariables','characters','visible']) {
+                  const key = source.values.componentPropertyReferences?.[field];
+                  const expected = key && properties[key] ? properties[key].value : source.values[field];
+                  if (!same(child.values[field],expected)) issue('native-library-observation-inherited-'+field,child);
+                }
+              }
+              descend(child,source,properties);
             }
           } }
         };
@@ -907,7 +995,8 @@ function verifyReadback(
           if (!mainRow || !mainSlot) { issue('native-contract-observation-inherited-slot', slot); continue; }
           if (slot.childIds.length !== mainSlot.childIds.length || slot.childIds.some((id: string, index: number) => {
             const child = nodes.get(id), mainChild = nodes.get(mainSlot.childIds[index]);
-            return !child || !mainChild || child.type !== mainChild.type || child.metadata.nativeSourceAllocation !== mainChild.id;
+            return !child || !mainChild || child.type !== mainChild.type || child.metadata.nativeSourceAllocation !==
+              (library ? mainChild.metadata.nativeSourceAllocation : mainChild.id);
           })) issue('native-contract-observation-inherited-slot-content', slot);
         }
         for (const slotSpec of spec.children ?? []) {
@@ -930,7 +1019,7 @@ function verifyReadback(
       );
       if (
         v.visible !==
-        (wrapper ? wrapper.visible : !spec.slotTextTemplate && spec.nativeSourceVisible !== false)
+        (wrapper ? wrapper.visible : library && spec.visibleProp ? spec.visibleDefault === true : library && spec.slotOptional ? false : !spec.slotTextTemplate && spec.nativeSourceVisible !== false)
       )
         issue("native-source-observation-visibility", n);
       if (
@@ -1020,7 +1109,11 @@ function verifyReadback(
           !numeric(v[field], spec.lits[field]!)
         )
           issue(`native-source-observation-${field}`, n);
-      if (spec.type !== "svg" && v.reactions?.length)
+      if (library && spec.type === 'root') {
+        const expected = (component.stateReactions ?? []).filter(w=>w.from === n.name).map(w=>({trigger:{type:w.trigger},
+          actions:[{type:'NODE',destinationId:created.variants.find((v:any)=>v.name===w.to)?.id,navigation:'CHANGE_TO',transition:null}]}));
+        if (!nativeLibraryReactionsMatch(v.reactions ?? [],expected)) issue('native-library-observation-reactions',n);
+      } else if (spec.type !== "svg" && v.reactions?.length)
         issue("native-source-observation-reactions", n);
       if (spec.layout && v.clipsContent !== (spec.clipsContent === true))
         issue("native-source-observation-clipping", n);
@@ -1143,7 +1236,9 @@ function verifyReadback(
                 s.identity.sourceNodeId === spec.nativeSourcePart?.sourceNodeId &&
                 s.identity.templateId === spec.nativeSourcePart?.templateId,
             );
-        const specs = isContractDraft(input) ? spec.children ?? [] : sourceSample?.specs ?? [];
+        const defaults:NodeSpec[] = library ? (spec.slotDefault ?? []).map(item=>({type:'instance',name:item.dep,
+          dep:item.dep,depContractId:item.contractId,depProps:item.props,nativeContractPart:item.nativeContractPart})) : [];
+        const specs = isContractDraft(input) ? [...defaults,...(spec.children ?? [])] : sourceSample?.specs ?? [];
         if (n.childIds.length !== specs.length)
           issue("native-source-observation-slot-content", n);
         specs.forEach((child, i) =>
@@ -1171,7 +1266,7 @@ function verifyReadback(
       );
     };
     if (
-      created.variants.length !== component.variants.length ||
+      created.variants.length !== variants.length ||
       (component.isSet && !same(
         target.childIds,
         created.variants.map((v: any) => v.id),
@@ -1179,7 +1274,7 @@ function verifyReadback(
     )
       issue("native-source-observation-variant-inventory");
     const mainIds = new Map<string, string>();
-    component.variants.forEach((variant, i) => {
+    variants.forEach((variant, i) => {
       const born = created.variants[i],
         node = born && nodes.get(born.id);
       if (!node || (component.isSet && node.name !== variant.name) || node.key !== born.key ||
@@ -1255,7 +1350,7 @@ function verifyReadback(
     if (!same(board!.childIds, expectedInstances))
       issue("native-source-observation-comparison-inventory");
   };
-  if (isContractDraft(input) && input.graphVerification === 1) {
+  if (isContractDraft(input) && input.graphVerification !== undefined) {
     for (const [index, component] of input.graphComponents!.entries()) {
       const identity = c.graphTargets[index], node = nodes.get(identity.id);
       if (!node || !same(node.definitions, identity.propertyDefinitions)) {

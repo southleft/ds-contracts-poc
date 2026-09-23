@@ -909,6 +909,10 @@ export function createFigmaMock(options = {}) {
 
     // --- prototype reactions (see the fidelity note above) -----------------
     get reactions() {
+      // Live inherited instance reactions follow the selected main (v112
+      // prepared-library readback); an explicit override remains independent.
+      if (this.type === 'INSTANCE' && this._mainComponent && !this._reactionsOverridden)
+        return this._mainComponent.reactions;
       return this._reactions;
     }
 
@@ -949,6 +953,7 @@ export function createFigmaMock(options = {}) {
         }
       }
       this._reactions = reactions.map((r) => ({ ...r }));
+      this._reactionsOverridden = true;
     }
 
     setSharedPluginData(namespace, key, value) {
@@ -1154,6 +1159,8 @@ export function createFigmaMock(options = {}) {
       clone.boundVariables = structuredClone(this.boundVariables);
       if (options.consumerVariableModes) clone.explicitVariableModes = { ...this.explicitVariableModes };
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
+      clone._reactions = structuredClone(this._reactions);
+      clone._reactionsOverridden = this._reactionsOverridden;
       // Live Figma inherits shared plugin data onto an instance's private
       // sublayers (measured on nested TEXT content, 2026-09-17). Preserve it
       // so correspondence metadata is testable on the actual editable layer.
@@ -1261,6 +1268,21 @@ export function createFigmaMock(options = {}) {
           if (def.type === 'BOOLEAN') {
             for (const n of targets) {
               if (n.componentPropertyReferences?.visible === key) n.visible = value;
+            }
+          }
+        }
+        // Opt in for allocation-sensitive graph proofs: native setProperties
+        // changes the main link and inherited layers, not just displayed props.
+        // Historical fixture IDs remain unchanged unless this is requested.
+        if (options.instanceVariantSelection && source.type === 'COMPONENT_SET') {
+          const axes = Object.entries(inst._allProps).filter(([,v])=>v.type === 'VARIANT');
+          const selected = source.children.find(main=>axes.every(([key,v])=>main.variantProperties?.[key] === v.value));
+          if (selected && selected !== inst._mainComponent) {
+            inst._mainComponent = selected;
+            inst._refreshFromMain();
+            for (const [key,prop] of Object.entries(inst._allProps)) for (const n of [inst,...inst.findAll()]) {
+              if (prop.type === 'TEXT' && n.componentPropertyReferences?.characters === key) n.characters = prop.value;
+              if (prop.type === 'BOOLEAN' && n.componentPropertyReferences?.visible === key) n.visible = prop.value;
             }
           }
         }
