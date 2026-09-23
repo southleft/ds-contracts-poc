@@ -135,6 +135,43 @@ Source readiness is separate from dependency-build reproducibility, Figma fideli
 
 A combined root draft takes its layout from the root's own display: flex is re-derived from the observed planes, and a traced top-level `display: grid` root takes the same bounded row-flow lowering as a composed grid child (one implicit auto column, intrinsic rows, row flow, horizontal LTR, block children) from a declared-track witness sealed with the row (`grid-constraints.json`) and with every matrix plane. Because no parent proves a top-level root's width, that column is admitted only when the width is the component's own declaration in every plane: a fixed length, or exactly `100%` (style-origin status `fill`, read only while the border box really takes its containing width), which projects `width: 100%` so the column takes whatever definite width the instance's parent supplies. A caller `style`/`className`, another percentage, `calc()`, a min/max-width clamp or an automatic width stops at `react-root-grid-width-unqualified`, other tracks, flow or writing modes at `react-root-grid-constraints-unqualified`, and archives sealed without the witness read exactly as before. When that grid root is the container of a composed child, the child's `width: 100%` comes from the same root rule judged after caller inputs (not from both root sizes being automatic), so a caller-owned root width refuses its children by the same name. A size is the component's OWN only when the winning selector's subject compound is carried by the element itself (a class, attribute or id token; ancestor and sibling parts are conditions on the author's rule): a rule reaching in from outside (`#w > *`, a tag-only or universal subject, anything inside `:is()`/`:where()`) is `size-declared-by-outer-selector` for fixed and fill alike. A `fill` fact is recorded only on what the in-page witness saw: the box in flow with its width as the used-width source, its border box equal to the parent's content box, no `zoom` on it or any ancestor, and a containing width made definite by an ancestor's own px width through in-flow, horizontal, block-level boxes (`fillWidthContainer.depth` records which ancestor, never a selector). A shrink-to-fit place is `declared-fill-width-containing-block-indefinite`, and a chain bounded only by the harness stage, body or viewport is `declared-fill-width-containing-block-viewport-only`: a harness fact is never the caller's place, so such a root refuses and no comparison width exists. A lowered grid root also carries `grid-tracks-observed-for-this-content-only`: rules conditioned on content (`:has(> svg)` tracks or placements) do not match the sample, the matrix varies properties and never content, and only matching rules are observable. A fill-width main has no width of its own, so its caller-content comparison pins `containerWidth`: the root's used border-box width, which that sealed fact witnessed to BE its containing block's content width. It sizes only the app-owned comparison frame (FIXED, the instance FILL inside it); it never reaches the main, its contract or a token, and it is distinct from `instanceWidth`, which pins an instance whose caller declared a width.
 
+## Caller comparisons after a root correction
+
+After **Review compiler update** has completed and independent readback verifies
+the latest correction, use **Prepare caller-content comparison**, then **Prepare
+native comparison operation** on the retained root. Connect Sync Runner in the
+authorized file and choose **Create and inspect native comparison**. Ordinary
+empty content slots now use this path as well as text-template roots. If the
+review only allocated missing variables, complete its separate follow-up
+component review first.
+
+The comparison pins the current source and exact verified parent correction.
+Its writer rechecks the live main before creating an editable instance. Pending
+observations, damaged journals, substituted parent identities and later source
+changes cannot authorize creation. Historical comparisons remain historical;
+this path creates a separately recorded current-source caller, without replacing
+the main. Repeating the same request reopens that caller's saved operation.
+Nested references retain their own current-source and independent-readback checks.
+
+The 2026-09-23 application rehearsal created an ordinary Button caller from its
+retained corrected main. Independent readback preserved all 191 parent nodes and
+122 parent variables, and verified six comparison nodes and 18 caller variables.
+The unobstructed native canvas was inspected. **Exact geometry still fails:**
+React is 115.8125 × 36 px and Figma is 116 × 36 px. The text diagnostic reports
+93.8125 px browser advance versus a 94 px native text box. Matching Inter family
+and weight names do not identify matching font bytes. No pixel-fidelity pass or
+complete V1 qualification follows from this rehearsal.
+
+**AGENT decision, 2026-09-23:** extend the existing host-authenticated version-4
+caller reservation to verified ordinary root corrections. Do not reinterpret
+old caller evidence as the new source or bypass canvas preflight. Journal/compiler
+regressions in `native-root-consumer-jobs.test.ts` cover restart, exact repeat,
+historical preservation, stale authority, corruption, canvas conflict and the
+allocation-only refusal. Template inventory guards remain independently tested.
+To reverse this decision, restore template-only caller admission and hide the
+ordinary corrected-root action; retain every historical operation and evidence
+file. No conversion threshold or geometry rule changes with this workflow.
+
 ---
 
 # Source validity before conversion fidelity

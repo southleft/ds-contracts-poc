@@ -187,6 +187,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api', initial = row.kind === 'initial' || stateApi;
       const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId && r.ownershipId===row.ownershipId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
+      const correctedCaller = row.updates?.some(update => update.operation?.phase === 'update-verified' &&
+        update.operation.sourceCurrent && !update.operation.superseded && !update.operation.pendingPhase && !update.compilerReviewRequired);
       // A caller's birth record is historical after a combined main update.
       // Use only the current, settled parent verification that names this caller;
       // an export or an earlier parent correction alone proves nothing current.
@@ -347,7 +349,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !(op.sourceCurrent || corrected) || row.content?.phase === 'running'}
           onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>}
         {row.kind === 'root' && row.content?.content?.status === 'compiled-comparison-draft' && <button type="button"
-          disabled={busy || !!savedComparison || !(op.sourceCurrent || corrected) || op.phase !== 'component-structure-observed' || row.composition?.status !== 'ready' || !!row.compositionProblem}
+          disabled={busy || !!savedComparison || !(correctedCaller || (op.sourceCurrent && !written && op.phase === 'component-structure-observed')) || row.composition?.status !== 'ready' || !!row.compositionProblem}
           onClick={() => void action(`native-operation/${id}/comparison`)}>{savedComparison ? 'Comparison operation saved' : 'Prepare native comparison operation'}</button>}
         {row.compositionProblem && <p role="alert">{row.compositionProblem}</p>}
         {!!row.composition?.problems.length && <p role="alert">The captured source and compiled content do not have a verified correspondence. Composed output is unavailable until this is resolved.</p>}
