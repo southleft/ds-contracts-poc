@@ -2397,6 +2397,7 @@ export function Playground() {
 
   const emittable =
     validation.status === 'valid' || validation.status === 'violations' ? validation : null;
+  const canPrepareLibrary = validation.status === 'valid' && text === debouncedText;
 
   const [libraryBusy, setLibraryBusy] = useState(false);
   const [libraryNotice, setLibraryNotice] = useState<string | null>(null);
@@ -2407,7 +2408,7 @@ export function Playground() {
     setLibraryArtifact(null); setLibraryNotice(null);
   }, [text, tokenSource.tree, icons, emittable?.contracts]);
   const downloadReactLibrary = async () => {
-    if (!emittable || validation.status !== 'valid' || libraryBusy) return;
+    if (!emittable || !canPrepareLibrary || libraryBusy) return;
     const revision = libraryRevision.current;
     setLibraryBusy(true); setLibraryNotice(null); setLibraryArtifact(null);
     try {
@@ -3977,7 +3978,7 @@ export function Playground() {
             <div className="output__files">
               {outputTab === 'react' && import.meta.env.DEV && (
                 <div className="pane__body">
-                  <button type="button" className="btn--primary" disabled={libraryBusy || validation.status !== 'valid'} onClick={() => void downloadReactLibrary()}>
+                  <button type="button" className="btn--primary" disabled={libraryBusy || !canPrepareLibrary} onClick={() => void downloadReactLibrary()}>
                     {libraryBusy ? 'Preparing React library…' : 'Prepare React library'}
                   </button>
                   <p className="hint">Includes this component, its dependencies, styles, tokens and TypeScript declarations. Use a React app with CSS Modules support; provide the fonts declared by the design.</p>
