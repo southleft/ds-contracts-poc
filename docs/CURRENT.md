@@ -118,6 +118,16 @@ unqualified; the earlier exact-link transfer is preserved. Visual fidelity and c
 acceptance remain unqualified ([D.132](23-known-limitations.md#d132-native-nested-exposure-requires-an-actual-control-text-identities-survive-return),
 [D.133](23-known-limitations.md#d133-send-captures-local-dependencies-as-one-family)).
 
+A reversible native paint edit now returns through that route to an installed
+consumer with only the expected token change. Restoring and recapturing yields
+the original archive bytes. A state-dependent label edit refuses explicitly.
+The restore exposed a stale prepared-download link after child-only imports;
+workspace changes now refresh dependency validation, previews and archive state.
+Application replays verify child paint and content updates with unchanged parent
+JSON and three retained workspace entries. These bounded checks do not close
+the full two-way update or fidelity requirements
+([D.134](23-known-limitations.md#d134-child-only-imports-refresh-the-current-family)).
+
 The composed Card delivery contains seven dependency components and six parent variants. Parent readback validates supported nested identities, state and slot content; dependency mains are verified by identity only. The bounded nested-host path now has the separate application evidence below; broader content projection remains refused. Source-preserved React composition has separate browser behavior checks; these results do not qualify every composed journey.
 
 Native component properties and editable slot text are different capabilities. Figma does not retain parent text-property bindings into instance slots. The writer refuses such mappings before allocation and represents supported caller text as native editable content. It does not expose an ineffective property control. See the [limitation ledger](23-known-limitations.md) for decisions and reversal instructions.
