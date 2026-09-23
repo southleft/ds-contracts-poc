@@ -233,7 +233,9 @@ pins and written-history projection needed within each synchronous display. An
 isolated comparison reduced the mean of two warm reads from 64.0 to 52.3 seconds
 with identical complete responses and all 2,204 native files preserved. Callers
 keep independent copies, and subsequent requests and write authorization recheck
-fresh evidence. The remaining delay is still unqualified
+fresh evidence. The adopted app reopens the same verified correction; an actual
+HTTP read takes 56.9 seconds with identical response and native evidence bytes.
+The remaining delay is still unqualified
 ([D.136](23-known-limitations.md#d136-history-traversal-copies-only-the-evidence-each-display-check-needs)).
 
 Intermediate delivery polling now reads a narrow journal progress response;
