@@ -12,8 +12,9 @@ import {emitNativePreparedLibraryReadbackScript,verifyNativePreparedLibraryReadb
 import type {NativeTokenContextInput} from './native-token-context.js';
 import {nativeLibraryReactionsMatch,type NativePreparedLibrarySource} from './native-prepared-library.js';
 import {validNativeGraphCreation} from './native-graph-creation.js';
+import {annotateNativeContractProjection} from './native-contract-draft.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true) {
+async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter') {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
@@ -28,7 +29,7 @@ async function fixture(composed:boolean|'nested'|'repeated'=true) {
       {name:'shown',type:'boolean',default:false,bindings:{code:{prop:'shown'},figma:{kind:'BOOLEAN',property:'Shown'}}},
       {name:'size',type:{enum:['small','large']},default:'small',bindings:{code:{prop:'size'},figma:{kind:'VARIANT',property:'Size',values:{small:'Small',large:'Large'}}}}],
     anatomy:{root:{layout:{display:'inline-flex'},tokens:{'border-width':'{edge}','border-color':'{ink}'},states:{hover:{opacity:'{fade}'}},parts:{
-      text:{content:{prop:'label'},visibleWhen:{prop:'shown'},declared:{'font-family':'Inter'},tokens:{color:'{label}'}},
+      text:{content:{prop:'label'},visibleWhen:{prop:'shown'},...(family === null ? {} : {declared:{'font-family':family}}),tokens:{color:'{label}'}},
     }}},bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}});
   const parent=ContractSchema.parse({id:'test.library-parent',name:'Parent',version:'0.1.0',status:'draft',
     description:'A default slot instance plus an ordinary nested instance',props:[],states:[],semantics:{element:'div'},
@@ -218,5 +219,36 @@ test('repeated nested instances scope inherited slots to their own component pro
   ]) {
     const changed=structuredClone(receipt);mutate(changed);
     assert.equal(verifyNativePreparedLibraryReadback(input,changed).status,'refused');
+  }
+});
+
+test('library default typography pins Inter without replacing a declared family or accepting malformed text',async()=>{
+  for (const family of [null,'Roboto'] as const) {
+    const f=await fixture(false,family);
+    const expected=family ?? 'Inter';
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed');
+    assert.ok(f.compiled.fonts.some(font=>font.family===expected));
+    const text=f.receipt.nodes.find((n:any)=>n.type==='TEXT');
+    assert.equal(text.values.fontName.family,expected);
+    const changed=structuredClone(f.receipt);
+    changed.nodes.find((n:any)=>n.id===text.id).values.fontName.family=expected==='Inter'?'Roboto':'Inter';
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,changed).status,'refused');
+    if (family !== null) continue;
+    const raw=f.engine.compileComponentData(f.root,f.byId),before=JSON.stringify(raw);
+    assert.equal(raw.variants[0].spec.children![0].fontFamily,undefined);
+    for (const mutate of [
+      (spec:any)=>{spec.fontFamily='';},
+      (spec:any)=>{spec.fontFamily=null;},
+      (spec:any)=>{delete spec.fontStyle;},
+      (spec:any)=>{spec.textStyle='unqualified-style';},
+    ]) {
+      const malformed=structuredClone(raw);mutate(malformed.variants[0].spec.children![0]);
+      assert.throws(()=>annotateNativeContractProjection(f.root,malformed,structuredClone(f.compiled.projection)),/TEXT_OWNERSHIP_UNQUALIFIED/);
+    }
+    assert.equal(JSON.stringify(raw),before,'annotation never changes the compiler or original contract');
+    const mixed=structuredClone(f.root);
+    mixed.anatomy.root.parts!.other={text:'Another owner',declared:{'font-family':'Roboto'}};
+    assert.throws(()=>f.engine.compileNativePreparedLibrary(mixed,new Map([[mixed.id,mixed]]),f.source,f.context.operation.id),/TEXT_OWNERSHIP_UNQUALIFIED/,
+      'a declared family elsewhere does not grant a missing-family fallback');
   }
 });
