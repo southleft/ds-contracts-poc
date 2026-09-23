@@ -9873,8 +9873,21 @@ Regression checks exercise errors before and after an assignment, exact main and
 caller restoration, a third-value conflict, a failed restorative setter, drift
 introduced by a later restorative setter, and a post-write read failure. Journal
 checks cover independent settlement, refusal of the old claim, explicit rearm and
-an unrelated edit. Live application and Figma demonstration remains unqualified.
-This implementation does not close the broader recovery or V1 requirements.
+an unrelated edit.
+
+The live application now demonstrates one bounded failure in Evaluations. A
+separate test companion injects a synchronous throw after the second completed
+assignment. Both attempted values restore; an independent read confirms all 302
+main records, 100 main images and both retained callers are unchanged. The app
+closes that write and offers an explicit fresh preflight. Using the unchanged
+production companion, that action obtains a different write claim, applies all
+11 reviewed color changes and independently verifies them. A reverse correction
+then restores the complete original native observations and images, all four
+source files and their original bytes; all 2,185 earlier native evidence files
+remain unchanged. Terminal app states and the unobstructed canvas were inspected.
+The injected execution is recorded separately from the original command hash;
+this is not evidence of a spontaneous API failure or an OS crash. Slow host and
+display transitions remain a release gap. Broader recovery and V1 remain open.
 
 **Reversal:** restore the original assignment loop and its partial-write refusal,
 and retain these failed/restored observations. Do not classify partial values as

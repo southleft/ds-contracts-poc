@@ -209,6 +209,19 @@ evidence files match their original bytes. The app reports current verification,
 and both unobstructed native callers and the app gallery show the restoration.
 The long host and display delays remain a release gap.
 
+A separate synchronous-failure proof now interrupts a template color update
+after two actual assignments. The guarded writer restores both values; a
+separate read confirms the original 302 main records, 100 images and both callers.
+The app closes the failed attempt and requires an explicit fresh preflight. The
+production companion then succeeds under a new write claim, and a reviewed
+reverse update restores the complete original native observations and images
+and all four source files. All 2,185 earlier evidence files remain unchanged.
+This uses a separately pinned test companion to inject the error; it does not
+qualify spontaneous API failures, OS crashes, arbitrary partial writes or the
+full recovery requirement. Terminal app states and the unobstructed canvas were
+inspected; long host/display delays remain unresolved
+([D.135](23-known-limitations.md#d135-a-synchronous-template-assignment-failure-can-restore-its-attempted-values)).
+
 The host's pure template-match cache now retains a larger bounded correction
 history. A read-only prototype preserved the complete response and all 2,104
 native evidence files while reducing one repeated listing from 100 to 55
