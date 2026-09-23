@@ -868,8 +868,11 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
  *     both sides to their ink box and 99 transparent rows have no ink.
  *
  *  Re-asserting HUG is a NO-OP — Figma already believes it is hugging. Only a
- *  FIXED resize round-trip forces the relayout a childless node never gets;
- *  both probes then measured EXACTLY the reference box (58 / 1).
+ *  FIXED resize round-trip forces the relayout a childless node never gets.
+ *  An unconstrained zero reset is required for truly empty content: a 1px
+ *  seed contributes 1px forever, and ordinary resize(0,0) stores a nonzero
+ *  minimum. Live FRAME, COMPONENT and SLOT probes on 2026-09-23 retained exact
+ *  zero with resizeWithoutConstraints, while padding and declared sizes held.
  *
  *  GRID is excluded by the caller: a resize on a GRID frame silently reverts
  *  HUG tracks to FLEX (G8/GP4b), so the repair would cost more than the defect.
@@ -880,11 +883,11 @@ const birthBoxRuntime = (has: boolean): string =>
 function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
     // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
-    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // 100x100 default by shrinking a HUG axis to 0 and letting it re-measure
     // — which is right for a node whose size is supposed to come from its
     // content, and destructive for one the CONTRACT sized. A childless frame
-    // has nothing to re-measure against, so the axis hugs to 1 and stays
-    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // has nothing to re-measure against, so its seed stays as empty extent.
+    // MUI's switch-track is declared 34x14 and previously shipped 1x1 exactly
     // this way (the compile receipt's pin caught it, and the pin was right).
     if (axis === 'Horizontal' && hasW) continue;
     if (axis === 'Vertical' && hasH) continue;
@@ -894,7 +897,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
-      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node.resizeWithoutConstraints(axis === 'Horizontal' ? 0 : node.width, axis === 'Vertical' ? 0 : node.height);
       node[prop] = 'HUG';
     } catch (e) {
       throw new Error(
@@ -961,7 +964,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
+export const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {

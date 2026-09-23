@@ -405,6 +405,16 @@ export function createFigmaMock(options = {}) {
     }
 
     resize(w, h) {
+      // Live empty-box probe, 2026-09-23: ordinary resize(0, 0) stores a
+      // small nonzero extent; resizeWithoutConstraints retains exact zero.
+      // Keep this distinction visible for the measured container types;
+      // do not infer new leaf-node behavior from the container probe.
+      const container = ['FRAME', 'COMPONENT', 'SLOT'].includes(this.type);
+      this._resizeBox(container && w === 0 ? Math.fround(0.0001) : w,
+        container && h === 0 ? Math.fround(0.0001) : h);
+    }
+
+    _resizeBox(w, h) {
       // G8/GP4b — on a GRID frame a resize that CHANGES a hugged axis silently
       // reverts BOTH the sizing mode (HUG -> FIXED) and that axis's HUG tracks
       // (-> FLEX). Measured live 2026-08-08. A width-only resize leaves a
@@ -431,7 +441,7 @@ export function createFigmaMock(options = {}) {
     }
 
     resizeWithoutConstraints(w, h) {
-      this.resize(w, h);
+      this._resizeBox(w, h);
     }
 
     // --- GRID layout mode (A2; docs/research/grid-recon-probes.md P1-P14) --
@@ -788,7 +798,7 @@ export function createFigmaMock(options = {}) {
         const sum = px.reduce((a, b) => a + b, 0) + gap * Math.max(0, tracks.length - 1);
         return sum + pad;
       }
-      if (this.layoutMode === 'NONE' || !this.children || this.children.length === 0) {
+      if (this.layoutMode === 'NONE' || !this.children) {
         return axis === 'w' ? this._w : this._h;
       }
       const horizontalIsPrimary = this.layoutMode === 'HORIZONTAL';
@@ -796,6 +806,11 @@ export function createFigmaMock(options = {}) {
       const sizingMode = axisIsPrimary ? this.primaryAxisSizingMode : this.counterAxisSizingMode;
       if (sizingMode === 'FIXED') return axis === 'w' ? this._w : this._h;
       const pad = axis === 'w' ? this.paddingLeft + this.paddingRight : this.paddingTop + this.paddingBottom;
+      // An empty HUG container keeps its seed extent, but padding can grow
+      // it. Measured on FRAME, COMPONENT and SLOT in the v107 live probe:
+      // a zero seed with 7+11 / 3+5 padding is exactly 18 by 8.
+      if (this.children.length === 0)
+        return Math.max(pad, axis === 'w' ? this._w : this._h);
       const inFlow = this.children.filter((c) => c.visible !== false && c.layoutPositioning !== 'ABSOLUTE');
       // The degenerate: a FILL child has no intrinsic contribution — a HUG
       // parent whose every child FILLs resolves to padding alone (~collapse).
