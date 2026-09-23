@@ -120,14 +120,54 @@ ${plan.callerIdentity && plan.consumers.length ? `const scopedCallers=readConsum
  if(!sameBaseline(current))throw Error('native-template-write-live-conflict');
  ${plan.consumers.length ? "const consumerCurrent=readConsumersSync.map(read=>read());if(!sameConsumers(consumerCurrent))throw Error('native-template-write-consumer-live-conflict');" + (plan.callerIdentity ? "if(canonical(consumerCurrent)!==canonical(scopedCallers))throw Error('native-template-write-consumer-alias-changed');" : '') : ''}
  const assignments=plan.valuePlan.changes.map(change=>{const variable=figma.variables.getVariableById(change.variableId);
-  if(!variable||variable.key!==change.variableKey||typeof variable.setValueForMode!=='function')throw Error('native-template-write-variable-api');return{change,variable};})
+  if(!variable||variable.key!==change.variableKey||typeof variable.setValueForMode!=='function')throw Error('native-template-write-variable-api');
+  return{change,variable,before:JSON.parse(JSON.stringify(variable.valuesByMode[change.modeId]))};})
   .filter(({change,variable})=>!stored(variable.valuesByMode[change.modeId],change.after));
  out.consumerScope={affectedVariableIds:[...affected].sort(),nodeIds:consumers.sort()};
  if(readOnly){out.status='preflight-observed';out.observation=current;${plan.consumers.length ? 'out.consumerObservations=consumerCurrent;' : ''}return out;}
- for(const {change,variable} of assignments){
-  out.attemptedVariableIds.push(change.variableId);
-  variable.setValueForMode(change.modeId,change.after);
-  out.changedVariableIds.push(change.variableId);
+ const attempted=[];
+ try{
+  for(const assignment of assignments){
+   const {change,variable}=assignment;
+   attempted.push(assignment);out.attemptedVariableIds.push(change.variableId);
+   variable.setValueForMode(change.modeId,change.after);
+   out.changedVariableIds.push(change.variableId);
+  }
+ }catch(error){
+  // Only a synchronous assignment failure enters this rollback. There is no
+  // await between the final preflight, assignments and restoration. An error
+  // in a later asynchronous read has no authority to reverse canvas values.
+  out.problems.push(error&&error.message?error.message:String(error));
+  out.rollbackAttemptedVariableIds=[];out.restoredVariableIds=[];out.unrestoredVariableIds=[];
+  const current=a=>figma.variables.getVariableById(a.change.variableId);
+  const intact=a=>{const v=current(a);return v&&v.key===a.change.variableKey&&
+   (stored(v.valuesByMode[a.change.modeId],a.before)||stored(v.valuesByMode[a.change.modeId],a.change.after));};
+  // A third value or replacement identity is not ours to overwrite. Check
+  // the whole attempted set before starting any restorative assignment.
+  if(!attempted.every(intact)){
+   out.status='recovery-required';out.problems.push('native-template-rollback-conflict');
+   out.unrestoredVariableIds=attempted.map(a=>a.change.variableId);return out;
+  }
+  for(const a of [...attempted].reverse()){
+   const {change,before}=a;
+   try{
+    if(!intact(a))throw Error('native-template-rollback-conflict');
+    const variable=current(a);
+    if(!stored(variable.valuesByMode[change.modeId],before)){
+     out.rollbackAttemptedVariableIds.push(change.variableId);
+     variable.setValueForMode(change.modeId,before);
+    }
+   }catch(rollbackError){out.problems.push('native-template-rollback:'+change.variableId+':'+
+    (rollbackError&&rollbackError.message?rollbackError.message:String(rollbackError)));}
+  }
+  // Re-read every attempted channel after all restorative setters. A setter
+  // that throws after restoring is distinguished from one that leaves drift.
+  for(const a of attempted){const v=current(a);
+   (v&&v.key===a.change.variableKey&&stored(v.valuesByMode[a.change.modeId],a.before)?
+    out.restoredVariableIds:out.unrestoredVariableIds).push(a.change.variableId);
+  }
+  out.status=out.unrestoredVariableIds.length?'recovery-required':'rolled-back';
+  return out;
  }
  const readAfter=async()=>{${emitNativeContractReadbackScript(plan.after)}};
  out.observation=await readAfter();
