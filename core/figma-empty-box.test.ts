@@ -39,6 +39,8 @@ test('generated single and variant components preserve exact empty, padded and d
   for (const variants of [false, true]) for (const [kind, literals, expected] of [
     ['zero', hug, [0, 0]], ['padding', padded, [18, 8]],
     ['declared', { width: '34px', height: '14px' }, [34, 14]],
+    ['widthonly', { width: '47px' }, [47, 0]],
+    ['heightonly', { height: '31px' }, [0, 31]],
   ] as const) {
     const mock = createFigmaMock(), engine = createFigmaEngine({ tokens, icons: new Map() });
     const contract = fixture(kind, { layout, literals }, variants), byId = new Map([[contract.id, contract]]);
