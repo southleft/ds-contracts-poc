@@ -59,7 +59,7 @@ export function createNativeUpdatePlans(repo: string,
     });
     const pins=(ids=[...sources.keys()])=>ids.map(operationId=>({operationId,journalRevision:sources.get(operationId)!.journalRevision}));
     while (remaining.length) {
-      const candidates=remaining.filter(e => same(read(parentId,e.proposalId).predecessor,predecessor));
+      const candidates=remaining.filter(e => same(historyPins(parentId,e.proposalId).predecessor,predecessor));
       if(candidates.length!==1) throw Error('native-update-history-branch-or-gap');
       const entry=candidates[0],record=read(parentId,entry.proposalId),plan=record.update.plan;
       if(record.parentJournalRevision!==source.parentJournalRevision || !same(plan.before,before) || !same(plan.baseline,baseline))
@@ -87,12 +87,12 @@ export function createNativeUpdatePlans(repo: string,
   };
   const compile = (parentId: string, self?: string, birth?:ReactComparisonBirth): Record => {
     const written = history?.(parentId) ?? [];
-    const roots = written.map(entry => read(parentId,entry.proposalId)).filter(record => !record.predecessor);
+    const roots = written.map(entry => historyPins(parentId,entry.proposalId)).filter(record => !record.predecessor);
     if (written.length && roots.length !== 1) throw Error('native-update-history-branch-or-gap');
     // Only a written correction can select a saved parent prefix. Unapplied
     // proposals still require the latest observation and cannot pin stale data.
     const selectedPins=new Map<string,ConsumerPin>();
-    for(const entry of written)for(const pin of read(parentId,entry.proposalId).consumerPins??[]) {
+    for(const entry of written)for(const pin of historyPins(parentId,entry.proposalId).consumerPins??[]) {
       if(selectedPins.has(pin.operationId)&&!same(selectedPins.get(pin.operationId),pin))throw Error('native-update-template-consumer-history-changed');
       selectedPins.set(pin.operationId,pin);
     }
@@ -138,6 +138,13 @@ export function createNativeUpdatePlans(repo: string,
       throw Error('native-update-template-record-invalid');
     return record;
   });
+  // History traversal needs these pins repeatedly, not an independent copy of
+  // every full plan at every comparison. Reuse only this projection within the
+  // current synchronous display; authorizing reads outside it remain fresh.
+  const historyPins = (parentId:string,id:string) => evidenceReadOnce(displayScope + ':history-pins', {parentId,id}, () => {
+    const record=read(parentId,id);
+    return {predecessor:record.predecessor,parentJournalRevision:record.parentJournalRevision,consumerPins:record.consumerPins};
+  });
   const view = (record: Record) => ({ id: recordId(record), parentId: record.parentId, status:'planned' as const,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
     changes:structuredClone(record.update.plan.changes),
@@ -159,6 +166,7 @@ export function createNativeUpdatePlans(repo: string,
       ...('tokenChanges' in record.update.plan && record.update.plan.tokenChanges?.length ?
         [record.update.plan.tokenBindingScope==='document-v1' ? 'document-binding-scan-required' : NATIVE_TOKEN_VALUE_SCOPE_LIMITATION] : [])] });
   return {
+    historyPins,
     prepare(parentId: string) {
       assertOutsideEvidenceSnapshot();
       const record=compile(parentId);

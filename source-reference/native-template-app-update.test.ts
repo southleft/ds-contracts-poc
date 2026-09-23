@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
@@ -327,4 +328,18 @@ test('program reuse keys complete template bytes and options, never just the sav
   changed.template.input.consumers[0].baseline.unrequested='tampered';
   assert.throws(()=>emitNativeAppUpdateScript(changed),/proposal-changed/);
   assert.throws(()=>emitNativeAppUpdateReadback(changed),/proposal-changed/);
+});
+
+
+test('template history pin projections retain independent nested consumer pins',async t=>{
+ const f=await fixture(t),first=f.prepare(),expected=f.plans.historyPins(f.parent,first.proposal.id);
+ assert.ok(expected.consumerPins?.length);
+ withEvidenceReadSnapshot(()=>{
+  const copy=f.plans.historyPins(f.parent,first.proposal.id);
+  copy.consumerPins![0].journalRevision='f'.repeat(64);copy.consumerPins!.push(copy.consumerPins![0]);
+  assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
+  const stored=f.plans.saved(f.parent,first.proposal.id);stored.consumerPins![0].journalRevision='e'.repeat(64);
+  assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
+ });
+ assert.deepEqual(f.plans.historyPins(f.parent,first.proposal.id),expected);
 });

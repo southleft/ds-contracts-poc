@@ -228,6 +228,14 @@ full recovery requirement. Terminal app states and the unobstructed canvas were
 inspected; long host/display delays remain unresolved
 ([D.135](23-known-limitations.md#d135-a-synchronous-template-assignment-failure-can-restore-its-attempted-values)).
 
+Long correction histories now reuse only the authenticated predecessor/caller
+pins and written-history projection needed within each synchronous display. An
+isolated comparison reduced the mean of two warm reads from 64.0 to 52.3 seconds
+with identical complete responses and all 2,204 native files preserved. Callers
+keep independent copies, and subsequent requests and write authorization recheck
+fresh evidence. The remaining delay is still unqualified
+([D.136](23-known-limitations.md#d136-history-traversal-copies-only-the-evidence-each-display-check-needs)).
+
 Intermediate delivery polling now reads a narrow journal progress response;
 completion still requires the full verified listing. Repeated progress requests
 for the retained update took 0.61–0.65 seconds, while a full listing took 96.01
