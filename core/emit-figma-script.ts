@@ -8051,13 +8051,15 @@ function buildNativeContractGraphDraftScript(
   byId: Map<string, Contract>,
   source: NativeContractDraftSource,
   context: NativeSourceWriteContext,
+  graphVerification?: 1,
 ) {
+  if (graphVerification !== undefined && graphVerification !== 1) throw Error('NATIVE_CONTRACT_GRAPH_VERIFICATION_VERSION');
   if (context.comparisons) throw Error('NATIVE_CONTRACT_GRAPH_COMPARISON_MAPPING_REQUIRED');
   const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id);
   const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames);
   return wrapNativeSourceWrite(prepared, buildSyncScript(graph.components, context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract graph.',
-    preamble: '', nativeSource: true,
+    preamble: '', nativeSource: true, nativeGraphVerification: graphVerification,
   }), graph.fonts);
 }
 
@@ -8090,7 +8092,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -9810,7 +9812,8 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
-    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),${opts.nativeGraphVerification ? `
+    nativeGraphIdentity: { type: target.type, variants: NATIVE_RESULT.variants, propertyDefinitions: NATIVE_RESULT.propertyDefinitions },` : ''}
   };
 }
 
@@ -9822,7 +9825,7 @@ for (const C of COMPONENTS) {
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }${opts.nativeSource && datas.length > 1 ? `
-NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key }));
+${opts.nativeGraphVerification ? 'NATIVE_RESULT.graphVerification = 1;\n' : ''}NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key${opts.nativeGraphVerification ? ', ...result.nativeGraphIdentity' : ''} }));
 ` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.

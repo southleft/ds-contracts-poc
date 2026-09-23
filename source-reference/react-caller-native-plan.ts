@@ -12,6 +12,7 @@ export interface ReactCallerNativePlanInput {
   operation: { id: string; fileKey: string };
   source: NativeContractDraftSource;
   graph: ReturnType<typeof projectReactCallerCompositionGraph>;
+  graphVerification?: 1;
 }
 
 function compile(input: ReactCallerNativePlanInput) {
@@ -29,6 +30,8 @@ function compile(input: ReactCallerNativePlanInput) {
 }
 
 export function prepareReactCallerNativePlan(input: ReactCallerNativePlanInput) {
+  if (input.graphVerification !== undefined && input.graphVerification !== 1)
+    throw Error('react-caller-native-verification-version');
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input.operation.id) ||
       !/^[A-Za-z0-9]{10,80}$/.test(input.operation.fileKey))
     throw Error('react-caller-native-operation-invalid');
@@ -53,11 +56,14 @@ export function prepareReactCallerNativePlan(input: ReactCallerNativePlanInput) 
     projection: compiled.projection,
     component: compiled.component,
     graphComponents: compiled.components,
+    ...(input.graphVerification ? {graphVerification: input.graphVerification} : {}),
     componentRevision: revisionOf(compiled.component),
     componentRevisions: compiled.componentRevisions,
     tokenInput,
     tokenPreparation: prepareNativeTokenContext(tokenInput),
-    limitations: ['native-visual-fidelity-unverified', 'native-graph-dependency-internals-identity-only',
+    limitations: ['native-visual-fidelity-unverified', ...(input.graphVerification
+      ? ['native-graph-computed-geometry-unverified', 'native-inherited-sample-token-bindings-unqualified']
+      : ['native-graph-dependency-internals-identity-only']),
       'generated-consumer-not-installed', 'accepted-contract-unqualified'],
   };
   return { plan, revision: revisionOf(plan) };
@@ -73,6 +79,6 @@ export function buildReactCallerNativeWrite(input: ReactCallerNativePlanInput & 
     throw Error('react-caller-native-plan-write-stale');
   const { native, parent, engine } = compile(input);
   return { planRevision: current.revision, script: engine.buildNativeContractGraphDraftScript(
-    parent, native.scoped.contracts, input.source, { operation: input.operation, tokens: input.tokens },
+    parent, native.scoped.contracts, input.source, { operation: input.operation, tokens: input.tokens }, input.graphVerification,
   ) };
 }

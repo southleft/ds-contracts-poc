@@ -193,12 +193,12 @@ export function createReferenceService(
           return {
             visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
             preparation: { id: request.ownership.id, reportSha256: request.graphRevision.slice(7) },
-            plan: prepareReactCallerNativePlan({ ...evidence, operation }),
+            plan: prepareReactCallerNativePlan({ ...evidence, operation, graphVerification: request.graphVerification }),
           };
         },
         buildComponent: (request, context) => buildReactCallerNativeWrite({
           ...reactReference.callerNativeEvidence(request), operation: context.operation,
-          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, graphVerification: request.graphVerification,
         }),
       },
       prepare: (request, operation) =>

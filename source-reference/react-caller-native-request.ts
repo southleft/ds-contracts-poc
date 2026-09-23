@@ -9,6 +9,7 @@ export interface ReactCallerNativeRequest {
   inventorySha256: string;
   caseId: string;
   graphRevision: string;
+  graphVerification?: 1;
 }
 const object = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object' && !Array.isArray(value);
 const hash = /^[a-f0-9]{64}$/;
@@ -17,7 +18,10 @@ const uuid = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 export function isReactCallerNativeRequest(value: unknown): value is ReactCallerNativeRequest {
   const request = value as ReactCallerNativeRequest;
   return object(request) && Object.keys(request).sort().join(',') ===
-    'caseId,graphRevision,inventorySha256,kind,ownership,parentOperationId,referenceId,version' &&
+    (request.graphVerification === undefined
+      ? 'caseId,graphRevision,inventorySha256,kind,ownership,parentOperationId,referenceId,version'
+      : 'caseId,graphRevision,graphVerification,inventorySha256,kind,ownership,parentOperationId,referenceId,version') &&
+    (request.graphVerification === undefined || request.graphVerification === 1) &&
     request.version === 1 && request.kind === 'react-caller-graph-draft' &&
     typeof request.referenceId === 'string' && hash.test(request.referenceId) &&
     typeof request.parentOperationId === 'string' && uuid.test(request.parentOperationId) &&
