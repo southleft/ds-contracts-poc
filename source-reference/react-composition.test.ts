@@ -35,6 +35,7 @@ import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
 import type { NodeSpec } from '../core/emit-figma-script.js';
 import { builtinReactCohort } from './react-cohort.js';
+import {createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJobsOptions, type NativeOperationCommand} from './native-operation-jobs.js';
 
 test('caller text preserves its observed font when a component boundary replaces its inherited CSS alias', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
@@ -136,6 +137,10 @@ test('caller graph requests validate exact evidence while retaining one native r
     'a changed graph cannot obtain a second native allocation behind the same source composition');
   assert.equal(isReactCallerNativeRequest({ ...request, graphRevision: 'changed' }), false);
   assert.equal(isReactCallerNativeRequest({ ...request, unexpected: true }), false);
+  assert.ok(isReactCallerNativeRequest({...request,graphVerification:1}));
+  assert.equal(reactCallerNativeReservation({...request,graphVerification:1}),reservation);
+  assert.equal(isReactCallerNativeRequest({...request,graphVerification:2}),false);
+  assert.equal(isReactCallerNativeRequest({...request,graphVerification:undefined}),false);
 });
 
 test('caller preview reports text-free typography discrepancies but refuses changed paint, text, dimensions and structure', () => {
@@ -276,8 +281,8 @@ test('a nested caller host cannot reuse a root-only main or erase its wrapper', 
   const text=graph.draft.contract!.props.find(p=>p.default==='Save')!;assert.ok(text);
   await page.getByLabel(text.name,{exact:true}).fill('Changed caller text');
   assert.deepEqual(await wrappers.allTextContents(),['Changed caller text','Changed caller text']);
-  const hostFixture=await nativeComparisonFixture();
-  const planInput={graph,operation:{id:'10000000-0000-4000-8000-000000000009',fileKey:hostFixture.figma.fileKey},source:hostFixture.source};
+  const hostFixture=await nativeComparisonFixture(REACT_NATIVE_FILE_KEY);
+  const planInput={graph,operation:{id:'10000000-0000-4000-8000-000000000009',fileKey:hostFixture.figma.fileKey},source:hostFixture.source,graphVerification:1 as const};
   const plan=prepareReactCallerNativePlan(planInput);
   const tokenCreation=await hostFixture.run(emitNativeTokenContextScript(plan.plan.tokenInput).script);
   assert.equal(tokenCreation.status,'created-candidate');
@@ -287,7 +292,7 @@ test('a nested caller host cannot reuse a root-only main or erase its wrapper', 
   const creation=await hostFixture.run(write.script);assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
   const observation={operation:planInput.operation,planRevision:plan.revision,projection:plan.plan.projection,
     component:plan.plan.component,graphComponents:plan.plan.graphComponents,tokenInput:plan.plan.tokenInput,
-    tokenIdentity:tokenCreation.creationIdentity,creation};
+    tokenIdentity:tokenCreation.creationIdentity,creation,graphVerification:1 as const};
   const receipt=await hostFixture.run(emitNativeContractReadbackScript(observation));
   const verified=verifyNativeContractReadback(observation,receipt);
   assert.equal(verified.status,'supported-structure-observed',JSON.stringify(verified));
@@ -297,6 +302,65 @@ test('a nested caller host cannot reuse a root-only main or erase its wrapper', 
   assert.equal(nativeCaller.parent.layoutMode,'VERTICAL');
   nativeCaller.characters='Native caller edit';
   assert.equal(verifyNativeContractReadback(observation,await hostFixture.run(emitNativeContractReadbackScript(observation))).status,'refused');
+  nativeCaller.characters='Save';
+
+  const request={version:1 as const,kind:'react-caller-graph-draft' as const,
+    referenceId:'a'.repeat(64),parentOperationId:'10000000-0000-4000-8000-000000000001',
+    ownership:{id:'20000000-0000-4000-8000-000000000002',sha256:'b'.repeat(64)},
+    inventorySha256:'c'.repeat(64),caseId:'card-composed',graphRevision:plan.plan.graphRevision,graphVerification:1 as const};
+  const options:NativeOperationJobsOptions={prepare:()=>{throw Error('unexpected legacy preparer');},reactCaller:{
+    prepare:(selected,operation)=>({visual:{id:selected.ownership.id,reportSha256:selected.ownership.sha256},
+      preparation:{id:selected.ownership.id,reportSha256:selected.graphRevision.slice(7)},
+      plan:prepareReactCallerNativePlan({graph,source:hostFixture.source,operation,graphVerification:selected.graphVerification})}),
+    buildComponent:(selected,context)=>buildReactCallerNativeWrite({graph,source:hostFixture.source,
+      operation:context.operation,tokens:context.tokens,expectedPlanRevision:context.planRevision,graphVerification:selected.graphVerification}),
+  }};
+  const reopen=()=>createNativeOperationJobs(f.dir,options);
+  const prepared=reopen().prepare(request);
+  assert.equal(prepared.graphVerification,1);
+  const execute=async(command:NativeOperationCommand)=>({version:1 as const,operationId:command.operationId,phase:command.phase,
+    attemptId:command.attemptId,nonce:command.nonce,fileKey:command.fileKey,planRevision:command.planRevision,
+    scriptSha256:command.scriptSha256,result:await hostFixture.run(command.script)});
+  for(const phase of ['token-create','token-readback','component-create','component-readback'] as const){
+    const command=reopen().dispatch(prepared.id,phase);
+    const envelope=await execute(command);
+    assert.equal(reopen().pendingCommand(prepared.id)?.attemptId,command.attemptId,'the exact pending command survives reopening');
+    if(phase==='component-create') assert.throws(()=>reopen().retryCreation(prepared.id),/creation-retry-refused/,
+      'an interrupted write waits for its original acknowledgement; it cannot be allocated again');
+    const next=reopen().accept(prepared.id,envelope);
+    assert.equal(next.sourceCurrent,true,JSON.stringify(next.problems));
+  }
+  const terminal=reopen().get(prepared.id);
+  assert.equal(terminal.phase,'component-structure-observed',JSON.stringify(terminal.problems));
+  assert.equal(terminal.graphVerification,1);
+  const count=hostFixture.figma.root.findAll(()=>true).length;
+  assert.equal(reopen().prepare(request).id,prepared.id);
+  const {graphVerification:_,...legacyRequest}=request;
+  assert.throws(()=>reopen().prepare(legacyRequest),/baseline-already-reserved/);
+  assert.throws(()=>reopen().dispatch(prepared.id,'component-create'),/component-creation-already-dispatched/);
+  const fresh=reopen().retryObservation(prepared.id),changed=await execute(fresh);
+  const readback=changed.result as any;
+  const dependencyText=readback.nodes.find((node:any)=>node.type==='TEXT'&&node.values.characters==='Save');
+  assert.ok(dependencyText);dependencyText.values.characters='Unexpected edit';
+  assert.equal(reopen().accept(prepared.id,changed).phase,'component-observation-refused');
+  const restored=reopen().retryObservation(prepared.id);
+  assert.equal(reopen().accept(prepared.id,await execute(restored)).phase,'component-structure-observed');
+  assert.equal(hostFixture.figma.root.findAll(()=>true).length,count,'reopens and read retries allocate no native nodes');
+
+  const incompleteRequest={...request,referenceId:'e'.repeat(64)},incomplete=reopen().prepare(incompleteRequest);
+  for(const phase of ['token-create','token-readback'] as const){
+    const command=reopen().dispatch(incomplete.id,phase);
+    reopen().accept(incomplete.id,await execute(command));
+  }
+  const allocated=await execute(reopen().dispatch(incomplete.id,'component-create'));
+  delete allocated.result.graphTargets[0].variants;
+  const refused=reopen().accept(incomplete.id,allocated);
+  assert.equal(refused.phase,'component-creation-invalid');
+  assert.equal(refused.nativeOutcome,'unknown','incomplete birth evidence cannot claim no allocation');
+  assert.equal(reopen().get(incomplete.id).phase,'component-creation-invalid','the incomplete acknowledgement remains durable');
+  assert.throws(()=>reopen().retryCreation(incomplete.id),/creation-retry-refused/);
+  assert.throws(()=>reopen().dispatch(incomplete.id,'component-create'),/component-creation-already-dispatched/);
+  assert.throws(()=>reopen().dispatch(incomplete.id,'component-readback'),/component-allocation-identity-unavailable/);
 });
 
 test('repeated nested shells keep owned captions out of caller controls regardless of ownership enumeration order', async t => {

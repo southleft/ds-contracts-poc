@@ -610,8 +610,11 @@ export function createReactReferenceService(
             referenceId: current.request.referenceId, parentOperationId: callerReact[2], ownership: current.request.ownership,
             inventorySha256: current.request.inventorySha256, caseId: current.request.caseId,
             graphRevision: compilation.report.graphRevision };
-          const operation = req.method === 'POST' ? native().jobs.prepare(selected)
-            : native().jobs.forBaseline(reactCallerNativeReservation(selected));
+          // A stronger verifier never obtains a second reservation. Existing
+          // operations retain their recorded version and exact source pins.
+          const prior = native().jobs.forBaseline(reactCallerNativeReservation(selected));
+          if (!prior || prior.graphVerification === 1) selected.graphVerification = 1;
+          const operation = req.method === 'POST' ? native().jobs.prepare(selected) : prior;
           json(res, 200, { operation, connection: operation ? native().transport.status(operation.id, Date.now()) : null }); return;
         }
         if (!callerReact[3]) { json(res, 200, { draft }); return; }

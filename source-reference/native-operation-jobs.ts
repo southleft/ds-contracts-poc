@@ -74,6 +74,7 @@ import { readVerifiedRuntimeArtifact } from "./runtime-artifact.js";
 import type { prepareReactNativePlan } from './react-native-plan.js';
 import { isReactNativeRequest, reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
 import type { prepareReactCallerNativePlan } from './react-caller-native-plan.js';
+import {validNativeGraphCreation} from '../core/native-graph-creation.js';
 import { isReactCallerNativeRequest, reactCallerNativeReservation, type ReactCallerNativeRequest } from './react-caller-native-request.js';
 
 /** The current owner-approved writable target. A request/plan cannot override it. */
@@ -156,6 +157,7 @@ export interface NativeOperationReceipt {
   nativeQualification: 'unqualified';
 }
 export interface NativeOperationSnapshot {
+  graphVerification?: 1;
   sizingObservation?: { status: 'pending' | 'observed' | 'refused'; nodeCount: number };
   comparisonBaselineRefreshed?: boolean;
   id: string;
@@ -505,6 +507,8 @@ export function createNativeOperationJobs(
       isInitialPlan(plan) !== isReactInitialNativeRequest(request) ||
       isStateApiPlan(plan) !== isReactStateApiNativeRequest(request) ||
       isComparisonPlan(plan) !== isReactComparisonRequest(request) ||
+      (isReactCallerNativeRequest(request) && (!('graphComponents' in plan.plan) ||
+        plan.plan.graphVerification !== request.graphVerification)) ||
       !same(plan.plan.operation, { id, fileKey }) ||
       plan.plan.tokenInput.fileKey !== fileKey ||
       plan.plan.tokenInput.scopeId !== `source-${id}`
@@ -773,7 +777,11 @@ export function createNativeOperationJobs(
       )
     )
       return invalid;
-    if (isReactPlan(plan)) return { phase: 'components-created', problems: [] };
+    if (isReactPlan(plan)) {
+      if ('graphComponents' in plan.plan && (plan.plan.graphVerification !== undefined || value.graphVerification !== undefined) &&
+          (plan.plan.graphVerification !== 1 || !validNativeGraphCreation(plan.plan.graphComponents, value))) return invalid;
+      return { phase: 'components-created', problems: [] };
+    }
     const instanceIds: string[] = [];
     for (const [index, c] of value.comparisons.entries()) {
       const expected = plan.plan.samples.cases[index];
@@ -831,7 +839,8 @@ export function createNativeOperationJobs(
       ...(isReactPlan(plan) ? { projection: plan.plan.projection } : {
         projection: plan.plan.sourceProjection, samples: plan.plan.samples,
       }),
-      ...('graphComponents' in plan.plan ? { graphComponents: plan.plan.graphComponents } : {}),
+      ...('graphComponents' in plan.plan ? { graphComponents: plan.plan.graphComponents,
+        ...(plan.plan.graphVerification ? {graphVerification:plan.plan.graphVerification} : {}) } : {}),
       tokenInput: plan.plan.tokenInput,
       tokenIdentity: state.identity,
       creation: state.componentCreation,
@@ -1296,6 +1305,7 @@ export function createNativeOperationJobs(
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
+      ...('graphVerification' in loaded.plan.plan && loaded.plan.plan.graphVerification ? {graphVerification:loaded.plan.plan.graphVerification} : {}),
       ...(loaded.state.comparisonRefresh ? {comparisonBaselineRefreshed:true}:{}),
       canResumeComparison: sourceCurrent && canRecover(loaded.state,loaded.plan),
       ...(sourceCurrent && availableRepair(loaded.state,loaded.plan) ? {comparisonRepair:{changes:structuredClone(availableRepair(loaded.state,loaded.plan)!.changes)}} : {}),

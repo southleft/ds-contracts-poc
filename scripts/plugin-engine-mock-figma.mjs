@@ -1168,7 +1168,13 @@ export function createFigmaMock(options = {}) {
           delete clone.clipsContent;
         }
       }
-      if (this.type === 'INSTANCE') clone.componentProperties = { ...(this.componentProperties ?? {}) };
+      if (this.type === 'INSTANCE') {
+        clone.componentProperties = structuredClone(this.componentProperties ?? {});
+        // Inherited nested instances still expose their native main identity.
+        // Keep the link when cloning a composed main's subtree for readback.
+        clone._mainComponent = this._mainComponent;
+        clone.getMainComponentAsync = async () => clone._mainComponent;
+      }
       for (const child of this.children ?? []) clone.appendChild(child._cloneForInstance());
       return clone;
     }
