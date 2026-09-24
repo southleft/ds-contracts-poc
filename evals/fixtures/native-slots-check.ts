@@ -629,7 +629,9 @@ console.log("\n8. FC-SLOT-BIRTH-BOX ON AMEND — a variant COMPONENT root the em
       literalRoot.version = version;
       await runIn(literalMock, emitOf(literalRoot));
       const roots = findAll(literalMock, (n: any) => n.type === 'COMPONENT');
-      if (!roots.length || roots.some((n: any) => n.width !== (width ?? 1) || n.height !== (height ?? 1)))
+      // Unspecified empty HUG axes have no extent. The unconstrained zero
+      // reset removed the old 1px seed; declared dimensions stay exact.
+      if (!roots.length || roots.some((n: any) => n.width !== (width ?? 0) || n.height !== (height ?? 0)))
         fail(`literal-sized empty roots lost their dimensions on ${version}: ${roots.map((n: any) => n.width + 'x' + n.height).join(', ')}`);
     }
   }
