@@ -51,6 +51,19 @@ function input(): NativeTokenContextInput {
 }
 const rgba = { r: 0x12 / 255, g: 0x34 / 255, b: 0x56 / 255, a: 0x80 / 255 };
 
+test('only an explicit retained-library context can own an empty variable scope',()=>{
+  const empty=input();empty.tokenPaths=[];
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/);
+  empty.writeProtocol='explicit-modes-v1';
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/,'ordinary source history retains its nonempty invariant');
+  empty.source={kind:'prepared-contract-library',revision:'sha256:'+'a'.repeat(64),artifactId:'a'.repeat(64),
+    inputSha256:'b'.repeat(64),tarballSha256:'c'.repeat(64),tokensSha256:'d'.repeat(64)};
+  const prepared=prepareNativeTokenContext(empty);
+  assert.deepEqual(prepared.variables,[]);assert.deepEqual(prepared.requestedTokenPaths,[]);
+  delete empty.writeProtocol;
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/);
+});
+
 test('template history retains allocation values for requested leaves and alias dependencies', () => {
   const before = input();
   (before.modes[0].tokens.gap as any).$value = '8px';

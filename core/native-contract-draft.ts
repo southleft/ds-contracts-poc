@@ -5,7 +5,7 @@
 import { planNativeRootTextTemplate, applyRootTextTemplateAliases, type NativeRootTextTemplatePlan } from './native-root-text-template-plan.js';
 import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
 import { revisionOf } from './contract-provenance.js';
-import type { Contract } from '../scripts/contract-schema.js';
+import { DEFAULT_FONT_FAMILY, type Contract } from '../scripts/contract-schema.js';
 import type { ComponentData, NodeSpec } from './emit-figma-script.js';
 
 export interface NativeContractDraftSource {
@@ -69,6 +69,11 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
   contract: Contract, component: ComponentData, projection: P,
 ) {
   const library = projection.kind === 'prepared-contract-library';
+  const namesFamily = (value: unknown): boolean => typeof value === 'object' && value !== null &&
+    Object.entries(value).some(([key, child]) => key === 'font-family' || namesFamily(child));
+  // A family mentioned in any holder can leave another state inheriting from
+  // the consumer. Do not reinterpret that unresolved context as a default.
+  const libraryDefaultFamily = library && !namesFamily(contract.anatomy);
   const data = structuredClone(component);
   const boundNames = new Set<string>();
   const fonts = new Map<string, { family: string; styles: string[] }>();
@@ -103,6 +108,11 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
     if (spec.type === 'instance' && (!spec.dep || !spec.depContractId || (!library && spec.depAnchorKey) ||
         (spec.children ?? []).some(child => child.callerSlotProperty === undefined)))
       throw Error('NATIVE_CONTRACT_DRAFT_INSTANCE_OWNERSHIP_UNQUALIFIED');
+    // The library contract's absent family means the shared pipeline default,
+    // just as on the React surface. Pin that exact family before font preflight
+    // and readback; never substitute for an explicit or malformed family.
+    if (libraryDefaultFamily && spec.type === 'text' && spec.fontFamily === undefined)
+      spec.fontFamily = DEFAULT_FONT_FAMILY;
     if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
         spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
         spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||

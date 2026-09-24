@@ -5,7 +5,6 @@ import {readPreparedReactLibrary} from './react-library-artifact.js';
 import {createFigmaEngine} from '../../core/emit-figma-script.js';
 import {canonicalJson,revisionOf} from '../../core/contract-provenance.js';
 import {layeredNativeTokenModes} from '../../core/layered-native-token-modes.js';
-import {flattenTokens} from '../../core/tokens.js';
 import {prepareNativeTokenContext,type NativeTokenContextInput} from '../../core/native-token-context.js';
 import type {NativeSourceWriteContext} from '../../core/native-source-write.js';
 import type {NativePreparedLibrarySource} from '../../core/native-prepared-library.js';
@@ -27,8 +26,13 @@ function reopen(repoRoot:string,request:PreparedLibraryNativeRequest) {
   const engine=createFigmaEngine({tokens:input.tokens,icons:new Map(input.icons),mode:request.mode,brand:request.brand});
   const contracts=new Map(input.contracts.map(c=>[c.id,c]));
   const compiled=engine.compileNativePreparedLibrary(input.root,contracts,source,request.operation.id);
+  // Allocate the graph's actual bindings and their exact alias closure. The
+  // retained token library can contain unrelated or unsupported vocabulary;
+  // its bytes still participate in the source identity, but are not silently
+  // promoted to native variables. Missing types on a used path still refuse.
+  const tokenPaths=compiled.boundNames.map(name=>name.replaceAll('/','.')).sort();
   const tokenInput:NativeTokenContextInput={fileKey:request.operation.fileKey,scopeId:'source-'+request.operation.id,
-    source,tokenPaths:[...flattenTokens(routed.modes[0].tokens).keys()].sort(),modes:routed.modes,writeProtocol:'explicit-modes-v1'};
+    source,tokenPaths,modes:routed.modes,writeProtocol:'explicit-modes-v1'};
   const plan={version:1 as const,kind:'prepared-library-native-inspection' as const,purpose:'source-candidate-inspection' as const,
     acceptedContract:null,nativeQualification:'unqualified' as const,operation:{...request.operation},
     artifactId:artifact.id,projection:compiled.projection,component:compiled.component,componentRevision:revisionOf(compiled.component),
