@@ -30,6 +30,7 @@
   max-width: 520px;
 }
 .source-connect input,
+.source-connect select,
 .source-connect button {
   font: inherit;
   padding: 10px 14px;

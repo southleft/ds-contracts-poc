@@ -1,3 +1,6 @@
+import {isPreparedLibraryNativeRequest, preparedLibraryNativeReservation, type PreparedLibraryNativeRequest} from './prepared-library-native-request.js';
+import type {prepareReactLibraryNativePlan} from '../playground/server/react-library-native.js';
+import {nativeGraphVariants} from '../core/native-prepared-library.js';
 import { isNativeSourcePin, nativeSourcePinCase, nativeSourcePinReference, type NativeSourcePin } from './native-source-succession.js';
 import {isReactStateApiNativeRequest,reactStateApiNativeReservation,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
 import type {prepareReactStateApiNativePlan} from './react-state-api-native-plan.js';
@@ -92,23 +95,27 @@ type CallerGraphPlan = ReturnType<typeof prepareReactCallerNativePlan>;
 type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
 type InitialPlan = ReturnType<typeof prepareReactInitialNativePlan>;
 type StateApiPlan = ReturnType<typeof prepareReactStateApiNativePlan>;
-type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan;
+type LibraryPlan = ReturnType<typeof prepareReactLibraryNativePlan>;
+type Plan = SourcePlan | ReactPlan | CallerGraphPlan | ComparisonPlan | InitialPlan | StateApiPlan | LibraryPlan;
+const isLibraryPlan = (p: Plan): p is LibraryPlan => 'kind' in p.plan && p.plan.kind === 'prepared-library-native-inspection';
 const templateGraphPlan = (p: Plan) => 'templateGraph' in p.plan ? p.plan.templateGraph : undefined;
 const isStateApiPlan = (p: Plan): p is StateApiPlan => 'kind' in p.plan && p.plan.kind === 'react-state-api-draft-inspection';
 const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
 const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
-type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
-const validRequest = (v: unknown): v is OperationRequest => isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
-const reservation = (r: OperationRequest) => isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
-const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+type OperationRequest = PreparedLibraryNativeRequest | BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isPreparedLibraryNativeRequest(v) || isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
+const reservation = (r: OperationRequest) => isPreparedLibraryNativeRequest(r) ? preparedLibraryNativeReservation(r) : isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isPreparedLibraryNativeRequest(r) || isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
 const isReactPlan = (p: Plan): p is ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan => 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection' || p.plan.kind === 'react-state-api-draft-inspection');
+const isMainPlan = (p: Plan): p is ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan | LibraryPlan => isReactPlan(p) || isLibraryPlan(p);
 type Pin = { id: string; reportSha256: string };
-export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
-  visual: Pin;
-  preparation: Pin;
+type LibraryPin = { id: string; inputSha256: string; tarballSha256: string };
+type SourcePins = { visual: Pin; preparation: Pin; artifact?: never };
+type LibraryPins = { artifact: LibraryPin; visual?: never; preparation?: never };
+export type NativeOperationPreparation<P extends Plan = SourcePlan> = {
   plan: P;
   sourceCompatibility?: 'identity-opacity-omission';
-}
+} & (P extends LibraryPlan ? LibraryPins : SourcePins);
 export type NativeOperationPhase =
   "token-create" | "token-readback" | "component-create" | "component-readback"
   | "update-preflight-readback" | "update-apply" | "update-readback" | "comparison-recovery-readback" | "comparison-recovery-apply" | "comparison-repair-preflight-readback" | "comparison-repair-apply";
@@ -157,7 +164,8 @@ export interface NativeOperationReceipt {
   nativeQualification: 'unqualified';
 }
 export interface NativeOperationSnapshot {
-  graphVerification?: 1;
+  graphVerification?: 1 | 2;
+  preparedLibrary?: {artifactId: string; mode: 'light' | 'dark'; brand: string};
   sizingObservation?: { status: 'pending' | 'observed' | 'refused'; nodeCount: number };
   comparisonBaselineRefreshed?: boolean;
   id: string;
@@ -210,14 +218,12 @@ export interface NativeOperationSnapshot {
   };
   problems: string[];
 }
-interface Header {
+type Header = (SourcePins | LibraryPins) & {
   version: 1;
   id: string;
   startedAt: string;
   request: OperationRequest;
   policy: ReturnType<typeof policyFor>;
-  visual: Pin;
-  preparation: Pin;
   planRevision: string;
   planSha256: string;
   tokenScriptSha256: string;
@@ -257,6 +263,10 @@ interface State {
   comparisonRefresh?: ReactComparisonRefresh;
 }
 export interface NativeOperationJobsOptions {
+  preparedLibrary?: {
+    prepare(request: PreparedLibraryNativeRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<LibraryPlan>;
+    buildComponent(request: PreparedLibraryNativeRequest, context: NativeOperationComponentContext): {planRevision: string; script: string};
+  };
   reactStateApi?: {
     prepare(request:ReactStateApiNativeRequest,operation:{id:string;fileKey:string}):NativeOperationPreparation<StateApiPlan>;
     buildComponent(request:ReactStateApiNativeRequest,context:NativeOperationComponentContext):{planRevision:string;script:string};
@@ -324,6 +334,17 @@ const pin = (value: unknown): value is Pin =>
   UUID.test(value.id) &&
   HASH.test(value.reportSha256) &&
   Object.keys(value).length === 2;
+const libraryPin = (value: unknown): value is LibraryPin => object(value) &&
+  Object.keys(value).sort().join(',') === 'id,inputSha256,tarballSha256' &&
+  typeof value.id === 'string' && HASH.test(value.id) &&
+  typeof value.inputSha256 === 'string' && HASH.test(value.inputSha256) &&
+  typeof value.tarballSha256 === 'string' && HASH.test(value.tarballSha256);
+const validEvidence = (value: SourcePins | LibraryPins, request: OperationRequest) =>
+  isPreparedLibraryNativeRequest(request)
+    ? libraryPin(value.artifact) && value.artifact.id === request.artifactId && value.visual === undefined && value.preparation === undefined
+    : value.artifact === undefined && pin(value.visual) && pin(value.preparation);
+const evidencePins = (value: SourcePins | LibraryPins): SourcePins | LibraryPins => value.artifact
+  ? {artifact: value.artifact} : {visual: value.visual!, preparation: value.preparation!};
 const date = (value: unknown): value is string =>
   typeof value === "string" && new Date(value).toISOString() === value;
 
@@ -399,6 +420,10 @@ export function createNativeOperationJobs(
   options: NativeOperationJobsOptions,
 ) {
   const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if (isPreparedLibraryNativeRequest(request)) {
+      if (!options.preparedLibrary) fail('prepared-library-adapter-unavailable');
+      return options.preparedLibrary.prepare(request, operation);
+    }
     if(isReactStateApiNativeRequest(request)) {
       if(!options.reactStateApi)fail('react-state-api-adapter-unavailable');
       return options.reactStateApi.prepare(request,operation);
@@ -495,8 +520,7 @@ export function createNativeOperationJobs(
     const plan = prepared.plan;
     const fileKey = policyFor(request).fileKey;
     if (
-      !pin(prepared.visual) ||
-      !pin(prepared.preparation) ||
+      !validEvidence(prepared, request) ||
       !plan ||
       plan.plan.version !== 1 ||
       plan.revision !== revisionOf(plan.plan) ||
@@ -504,6 +528,14 @@ export function createNativeOperationJobs(
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
       isReactPlan(plan) !== (isReactStateApiNativeRequest(request) || isReactNativeRequest(request) || isReactCallerNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isLibraryPlan(plan) !== isPreparedLibraryNativeRequest(request) ||
+      (isLibraryPlan(plan) && (plan.plan.graphVerification !== 2 || prepared.sourceCompatibility !== undefined ||
+        !isPreparedLibraryNativeRequest(request) || plan.plan.artifactId !== request.artifactId ||
+        plan.plan.projection.source.artifactId !== request.artifactId ||
+        !same(plan.plan.projection.context, {mode:request.mode,brand:request.brand}) ||
+        !same(plan.plan.tokenInput.source, plan.plan.projection.source) ||
+        !same(prepared.artifact, {id:plan.plan.artifactId, inputSha256:plan.plan.projection.source.inputSha256,
+          tarballSha256:plan.plan.projection.source.tarballSha256}))) ||
       isInitialPlan(plan) !== isReactInitialNativeRequest(request) ||
       isStateApiPlan(plan) !== isReactStateApiNativeRequest(request) ||
       isComparisonPlan(plan) !== isReactComparisonRequest(request) ||
@@ -752,9 +784,9 @@ export function createNativeOperationJobs(
       !textId(value.target.id) ||
       !textId(value.target.key) ||
       !Array.isArray(value.variants) ||
-      value.variants.length !== plan.plan.component.variants.length ||
+      value.variants.length !== nativeGraphVariants(plan.plan.component, isLibraryPlan(plan) ? 2 : 1).length ||
       !object(value.propertyDefinitions) ||
-      (isReactPlan(plan) ? value.comparisons !== undefined || value.comparisonBoardId !== undefined :
+      (isMainPlan(plan) ? value.comparisons !== undefined || value.comparisonBoardId !== undefined :
         !Array.isArray(value.comparisons) || value.comparisons.length !== plan.plan.samples.cases.length || !textId(value.comparisonBoardId))
     )
       return invalid;
@@ -768,7 +800,7 @@ export function createNativeOperationJobs(
     const nodes = new Map(value.nodes.map((n: any) => [n.id, n.type]));
     if (
       nodes.get(value.pageId) !== "PAGE" ||
-      (!isReactPlan(plan) && nodes.get(value.comparisonBoardId) !== "FRAME") ||
+      (!isMainPlan(plan) && nodes.get(value.comparisonBoardId) !== "FRAME") ||
       nodes.get(value.target.id) !== value.target.type ||
       !["COMPONENT", "COMPONENT_SET"].includes(value.target.type) ||
       value.variants.some(
@@ -777,9 +809,10 @@ export function createNativeOperationJobs(
       )
     )
       return invalid;
-    if (isReactPlan(plan)) {
+    if (isMainPlan(plan)) {
       if ('graphComponents' in plan.plan && (plan.plan.graphVerification !== undefined || value.graphVerification !== undefined) &&
-          (plan.plan.graphVerification !== 1 || !validNativeGraphCreation(plan.plan.graphComponents, value))) return invalid;
+          (plan.plan.graphVerification !== (isLibraryPlan(plan) ? 2 : 1) ||
+            !validNativeGraphCreation(plan.plan.graphComponents, value, isLibraryPlan(plan) ? 2 : 1))) return invalid;
       return { phase: 'components-created', problems: [] };
     }
     const instanceIds: string[] = [];
@@ -832,6 +865,15 @@ export function createNativeOperationJobs(
     if (isComparisonPlan(plan)) fail('root-observation-required');
     if (!state.identity || !state.componentCreation)
       fail("component-allocation-identity-unavailable");
+    if (isLibraryPlan(plan)) {
+      if (state.fixedCrossSizeReadback) fail('prepared-library-sizing-observation-unavailable');
+      return {
+        operation:plan.plan.operation, planRevision:plan.revision, component:plan.plan.component,
+        projection:plan.plan.projection, graphComponents:plan.plan.graphComponents, graphVerification:2,
+        tokenInput:plan.plan.tokenInput, tokenIdentity:state.identity, creation:state.componentCreation,
+        allocationAnchor:state.allocationAnchor,
+      };
+    }
     return {
       operation: plan.plan.operation,
       planRevision: plan.revision,
@@ -948,8 +990,7 @@ export function createNativeOperationJobs(
       !date(header.startedAt) ||
       !validRequest(header.request) ||
       !same(header.policy, policyFor(header.request)) ||
-      !pin(header.visual) ||
-      !pin(header.preparation) ||
+      !validEvidence(header, header.request) ||
       !REVISION.test(header.planRevision) ||
       !HASH.test(header.planSha256) ||
       !HASH.test(header.tokenScriptSha256)
@@ -968,7 +1009,7 @@ export function createNativeOperationJobs(
       fail("artifact-changed");
     const plan = JSON.parse(planBytes.toString()) as Plan;
     validatePlan(
-      { visual: header.visual, preparation: header.preparation, plan },
+      { ...evidencePins(header), plan },
       id,
       header.request,
     );
@@ -1250,8 +1291,7 @@ export function createNativeOperationJobs(
     if (validatePreparation(current, loaded.header.id, loaded.header.request) !== loaded.script)
       fail("compiled-script-changed");
     if (
-      !same(current.visual, loaded.header.visual) ||
-      !same(current.preparation, loaded.header.preparation) ||
+      !same(evidencePins(current), evidencePins(loaded.header)) ||
       !same(current.plan, loaded.state.comparisonRefresh?.plan ?? loaded.plan)
     )
       fail("source-plan-stale");
@@ -1313,12 +1353,15 @@ export function createNativeOperationJobs(
         ? {comparisonWidth:loaded.plan.plan.comparison.instanceWidth} : {}),
       ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.containerWidth !== undefined
         ? {comparisonContainerWidth:loaded.plan.plan.comparison.containerWidth} : {}),
+      ...(isPreparedLibraryNativeRequest(loaded.header.request) ? {preparedLibrary: {
+        artifactId:loaded.header.request.artifactId, mode:loaded.header.request.mode, brand:loaded.header.request.brand,
+      }} : {}),
       phase: loaded.state.phase,
       ...(loaded.state.fixedCrossSizeReadback ? { sizingObservation: {
         status: loaded.state.pending ? 'pending' as const : loaded.state.phase === 'component-structure-observed' ? 'observed' as const : 'refused' as const,
         nodeCount: loaded.state.fixedCrossSizeReadback.nodeIds.length,
       } } : {}),
-      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
+      ...(isMainPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
         ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),
       ...(loaded.state.pending
         ? {
@@ -1356,9 +1399,9 @@ export function createNativeOperationJobs(
       acceptedContract: null,
       nativeQualification: "unqualified",
       counters: {
-        variants: isComparisonPlan(loaded.plan) ? 0 : loaded.plan.plan.component.variants.length,
-        sourceCases: isReactPlan(loaded.plan) || isComparisonPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
-        loweredCases: isComparisonPlan(loaded.plan) ? 1 : isReactPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
+        variants: isComparisonPlan(loaded.plan) ? 0 : nativeGraphVariants(loaded.plan.plan.component, isLibraryPlan(loaded.plan) ? 2 : 1).length,
+        sourceCases: isLibraryPlan(loaded.plan) ? 0 : isReactPlan(loaded.plan) || isComparisonPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
+        loweredCases: isComparisonPlan(loaded.plan) ? 1 : isMainPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
           (c) => c.status === "lowered",
         ).length,
         variables: loaded.plan.plan.tokenPreparation.variables.length + (templateGraphPlan(loaded.plan)?.graph.routes.length ?? 0),
@@ -1464,8 +1507,7 @@ export function createNativeOperationJobs(
       startedAt: new Date().toISOString(),
       request: structuredClone(request),
       policy: policyFor(request),
-      visual: prepared.visual,
-      preparation: prepared.preparation,
+      ...evidencePins(prepared),
       planRevision: prepared.plan.revision,
       planSha256: sha(planBytes),
       tokenScriptSha256: sha(script),
@@ -1592,12 +1634,12 @@ export function createNativeOperationJobs(
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
+      if (isPreparedLibraryNativeRequest(loaded.header.request) ? !options.preparedLibrary : isReactStateApiNativeRequest(loaded.header.request) ? !options.reactStateApi : isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactCallerNativeRequest(loaded.header.request) ? !options.reactCaller : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
       const request = structuredClone(loaded.header.request);
-      const built = isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+      const built = isPreparedLibraryNativeRequest(request) ? options.preparedLibrary!.buildComponent(request, context) : isReactStateApiNativeRequest(request) ? options.reactStateApi!.buildComponent(request, context) : isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactCallerNativeRequest(request) ? options.reactCaller!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
         : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||

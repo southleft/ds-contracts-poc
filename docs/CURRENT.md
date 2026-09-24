@@ -54,6 +54,20 @@ artifact files refuse instead of being silently replaced. This improves download
 recovery; it does not restore the displayed link or imported workspace context
 after a browser reload, recover older in-memory links, or qualify native return.
 
+The prepared-library native route now uses the same durable operation journal.
+Its request selects a saved archive, theme and brand; the host fixes the evaluation
+file and native identity. HTTP/transport checks cover server restart during
+creation, identical acknowledgement redelivery, complete state inventories,
+changed dependency refusal and read-only recovery without duplicate allocation.
+It records archive/input provenance and does not claim an observed React source.
+The Playground links its saved download to a separate native inspection page.
+An isolated browser review prepares and reopens the same operation after page
+reload and server restart, with all retained files unchanged. The primary
+app/plugin journey and visual fidelity are not yet qualified. The native route
+currently requires a named brand in the retained input. The original retained
+Tabs input still refuses on unsupported
+per-prop grow semantics in this checkout; no property is stripped to admit it.
+
 The corrected ordinary-root caller workflow now completes through the app and
 Sync Runner: the retained Button main produces a new current-source comparison,
 and independent readback preserves its 191 parent nodes and 122 variables.

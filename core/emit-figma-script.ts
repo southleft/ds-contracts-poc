@@ -1,3 +1,4 @@
+import {contractDependencyEdges} from '../scripts/contract-schema.js';
 import { figmaSelectionApi, type FigmaSelectionApi, type SelectionIdentity } from './figma-selection-api.js';
 import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { selectedSampleKey, selectionErrors } from '../packages/core/src/selection.js';
@@ -5,6 +6,8 @@ import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
+import { prepareNativePreparedLibraryComponent, type NativePreparedLibrarySource } from './native-prepared-library.js';
+import { layeredNativeTokenModes } from './layered-native-token-modes.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
  * Contract → Figma sync-script text — the PURE core of scripts/generate-figma.ts.
@@ -512,7 +515,7 @@ export interface NodeSpec {
    *  main component (instances inherit it; `resetSlot()` returns to it). Any
    *  number of items carries: a native slot holds a child SEQUENCE, so the
    *  old one-instance INSTANCE_SWAP ceiling is gone. */
-  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean> }>;
+  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity }>;
   children?: NodeSpec[];
 }
 
@@ -8063,6 +8066,55 @@ function buildNativeContractGraphDraftScript(
   }), graph.fonts);
 }
 
+/** Retained-library path. Original anchors and source status remain in the
+ * projection; only fresh compiler output receives the operation scope. */
+function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contract>,
+  source: NativePreparedLibrarySource, operationId: string) {
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent || byId.size < 1 || byId.size > 30)
+    throw Error('NATIVE_PREPARED_LIBRARY_IDENTITY_REQUIRED');
+  if (source.tokensSha256 !== revisionOf(input.tokens).slice(7)) throw Error('NATIVE_PREPARED_LIBRARY_TOKENS_CHANGED');
+  const reached = new Set<string>();
+  const reach = (contract:Contract) => {
+    if (reached.has(contract.id)) return;
+    reached.add(contract.id);
+    for (const edge of contractDependencyEdges(contract)) {
+      const child = byId.get(edge.id);
+      if (!child) throw Error('NATIVE_PREPARED_LIBRARY_DEPENDENCY_MISSING');
+      reach(child);
+    }
+  };
+  reach(parent);
+  if (reached.size !== byId.size) throw Error('NATIVE_PREPARED_LIBRARY_UNRELATED_COMPONENT');
+  const ordered = sortByDependencies([...byId.values()]);
+  if (ordered.at(-1)?.id !== parent.id) throw Error('NATIVE_PREPARED_LIBRARY_PARENT_ORDER');
+  const context = {mode:input.mode ?? 'light', brand:input.brand ?? 'default'};
+  const routed = layeredNativeTokenModes(input.tokens, [{sourceMode:input.mode ?? 'light',brand:context.brand,nativeModeName:'Selected'}]);
+  const compiled = ordered.map(contract => {
+    const errors:string[]=[]; validateContract(contract, byId, errors, input.icons);
+    if (errors.length) throw Error('NATIVE_PREPARED_LIBRARY_INVALID: ' + errors.join('; '));
+    const data = compileComponentData(contract, byId);
+    if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+    return prepareNativePreparedLibraryComponent(contract,data,source,routed.modes[0].tokenTreeRevision,context);
+  });
+  const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
+  const components = compiled.map(row => ({...scopeNativeGraphComponent(row.component, ids),anchorKey:null}));
+  return {projection:compiled.at(-1)!.projection, component:components.at(-1)!, components,
+    componentRevisions:components.map(component=>({contractId:component.contractId,revision:revisionOf(component)})),
+    boundNames:[...new Set(compiled.flatMap(row=>row.boundNames))].sort(),
+    fonts:[...new Map(compiled.flatMap(row=>row.fonts).map(font=>[JSON.stringify(font),font])).values()]};
+}
+function buildNativePreparedLibraryScript(parent: Contract, byId: Map<string, Contract>,
+  source: NativePreparedLibrarySource, context: NativeSourceWriteContext) {
+  if (context.comparisons || context.comparisonRecovery || context.templateGraph)
+    throw Error('NATIVE_PREPARED_LIBRARY_CONTEXT_UNQUALIFIED');
+  const graph = compileNativePreparedLibrary(parent,byId,source,context.operation.id);
+  const prepared = prepareNativeSourceWrite(graph.projection,context,graph.boundNames);
+  return wrapNativeSourceWrite(prepared,buildSyncScript(graph.components,context.operation.fileKey,{
+    header:'// Shared renderer: operation-scoped retained contract library.',
+    preamble:'',nativeSource:true,nativeGraphVerification:2,
+  }),graph.fonts);
+}
+
 /** Create comparison instances referencing existing observed mains. The content
  * contract is recompiled here; serialized specs are never executable input. */
 function buildNativeContractComparisonScript(contract: Contract, byId: Map<string, Contract>,
@@ -8092,7 +8144,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8981,7 +9033,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
         false,
       );
       const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-      const inst = main.createInstance();
+      const inst = main.createInstance();${opts.nativeGraphVerification === 2 ? '\n      nativeInit(inst, {type: \'instance\', nativeContractPart:item.nativeContractPart});' : ''}
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
@@ -9824,8 +9876,8 @@ for (const C of COMPONENTS) {
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${opts.nativeSource && datas.length > 1 ? `
-${opts.nativeGraphVerification ? 'NATIVE_RESULT.graphVerification = 1;\n' : ''}NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key${opts.nativeGraphVerification ? ', ...result.nativeGraphIdentity' : ''} }));
+}${opts.nativeSource && (datas.length > 1 || opts.nativeGraphVerification === 2) ? `
+${opts.nativeGraphVerification ? `NATIVE_RESULT.graphVerification = ${opts.nativeGraphVerification};\n` : ''}NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key${opts.nativeGraphVerification ? ', ...result.nativeGraphIdentity' : ''} }));
 ` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
@@ -9844,6 +9896,8 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     compileNativeContractTemplateGraph,
     buildNativeContractDraftScript,
     compileNativeContractGraphDraft,
+    compileNativePreparedLibrary,
+    buildNativePreparedLibraryScript,
     buildNativeContractGraphDraftScript,
     buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not

@@ -3,6 +3,7 @@
  * The host must pin and re-open its source evidence before dispatching a write.
  */
 import { planNativeRootTextTemplate, applyRootTextTemplateAliases, type NativeRootTextTemplatePlan } from './native-root-text-template-plan.js';
+import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
 import { revisionOf } from './contract-provenance.js';
 import type { Contract } from '../scripts/contract-schema.js';
 import type { ComponentData, NodeSpec } from './emit-figma-script.js';
@@ -17,6 +18,8 @@ export interface NativeContractPartIdentity {
   variant: string;
   /** Path in the compiler output, not a claimed source DOM/template identity. */
   specPath: number[];
+  /** Allocation within this spec's default slot content, not a child spec. */
+  defaultSlotIndex?: number;
 }
 export interface NativeContractDraftProjection {
   version: 1;
@@ -57,6 +60,15 @@ export function prepareNativeContractDraft(
     contractId: contract.id, contractRevision: revisionOf(contract), tokenRevision,
     source: structuredClone(source), context: { ...context },
   };
+  return annotateNativeContractProjection(contract, component, projection);
+}
+
+/** Shared ownership annotation for freshly compiled data. Broader library
+ * admission is explicit and never changes historical source-draft programs. */
+export function annotateNativeContractProjection<P extends NativeContractDraftProjection | NativePreparedLibraryProjection>(
+  contract: Contract, component: ComponentData, projection: P,
+) {
+  const library = projection.kind === 'prepared-contract-library';
   const data = structuredClone(component);
   const boundNames = new Set<string>();
   const fonts = new Map<string, { family: string; styles: string[] }>();
@@ -84,12 +96,11 @@ export function prepareNativeContractDraft(
     }
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
-    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text', 'instance'].includes(spec.type) || spec.slotDefault?.length ||
-        spec.visibleProp || spec.slotOptional || spec.margins || spec.insetOverlay ||
+    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text', 'instance'].includes(spec.type) || (!library && (spec.slotDefault?.length || spec.visibleProp || spec.slotOptional)) || spec.margins || spec.insetOverlay ||
         spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
         spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
-    if (spec.type === 'instance' && (!spec.dep || !spec.depContractId || spec.depAnchorKey ||
+    if (spec.type === 'instance' && (!spec.dep || !spec.depContractId || (!library && spec.depAnchorKey) ||
         (spec.children ?? []).some(child => child.callerSlotProperty === undefined)))
       throw Error('NATIVE_CONTRACT_DRAFT_INSTANCE_OWNERSHIP_UNQUALIFIED');
     if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
@@ -140,6 +151,15 @@ export function prepareNativeContractDraft(
           !Number.isFinite(spec.absolute.left) || !Number.isFinite(spec.absolute.top)))))
       throw Error('NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED');
     spec.nativeContractPart = { contractRevision: projection.contractRevision, variant, specPath };
+    if (library) {
+      if (spec.visibleProp && !component.boolProps.some(p => p.property === spec.visibleProp && p.default === spec.visibleDefault))
+        throw Error('NATIVE_PREPARED_LIBRARY_VISIBILITY_MAPPING_UNQUALIFIED');
+      for (const [index, item] of (spec.slotDefault ?? []).entries()) {
+        if (spec.type !== 'slot' || !item.contractId || !item.dep || item.nativeContractPart)
+          throw Error('NATIVE_PREPARED_LIBRARY_DEFAULT_SLOT_UNQUALIFIED');
+        item.nativeContractPart = {...spec.nativeContractPart, defaultSlotIndex:index};
+      }
+    }
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
     for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar,
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
@@ -147,9 +167,16 @@ export function prepareNativeContractDraft(
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i], spec, insideCallerSlot));
   }
   data.variants.forEach(v => visit(v.spec, v.name, []));
+  if (library) {
+    data.stateVariants?.forEach(v => visit(v.spec, v.name, []));
+    for (const prop of component.textProps) {
+      if (textProperties.get(prop.property) !== prop.default) throw Error('NATIVE_PREPARED_LIBRARY_TEXT_MAPPING_UNQUALIFIED');
+      boundTextProperties.add(prop.property);
+    }
+  }
   if (boundTextProperties.size !== textProperties.size)
     throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
-  const templatePlan = planNativeRootTextTemplate(data, { contractRevision: projection.contractRevision, tokenRevision });
+  const templatePlan = library ? undefined : planNativeRootTextTemplate(data, { contractRevision: projection.contractRevision, tokenRevision: projection.tokenRevision });
   if (templatePlan) {
     projection.rootTextTemplate = templatePlan;
     applyRootTextTemplateAliases(data, templatePlan);
