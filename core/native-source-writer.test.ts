@@ -8,6 +8,13 @@ import {
   comparisonFixture,
 } from "./native-source-writer-test-fixture.js";
 
+test('prepared-library tokens cannot stand in for an observed source in the existing writer', async () => {
+  const f = await fixture();
+  f.context.tokens.input.source = { kind: 'prepared-contract-library', revision: 'sha256:' + 'c'.repeat(64),
+    artifactId: 'c'.repeat(64), inputSha256: 'd'.repeat(64), tarballSha256: 'e'.repeat(64), tokensSha256: 'b'.repeat(64) };
+  assert.throws(() => f.emit(), /token-source-context/);
+});
+
 test("shared native writer creates operation-owned empty mains with source identities, modes and full slot keys", async () => {
   const f = await fixture();
   // Force mode-before-paint: resolveForConsumer must see the explicit mode at

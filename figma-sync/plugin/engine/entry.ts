@@ -36,7 +36,7 @@
 import {
   CODE_TARGET_LABELS,
   ContractSchema,
-  RUNTIME_EMIT_REV,
+  figmaRuntimeRevision,
   assertContractProvenance,
   componentRefsOf,
   contractFileNameForId,
@@ -726,7 +726,7 @@ export function createPluginEngine(data: PluginEngineData) {
     // runtime-template-only fix still forces amend); the mirror must salt
     // identically — the wave introduced the salt in the runtime only, and
     // stored-vs-mirror equality failed by construction once reachable.
-    const s = JSON.stringify(compiled) + "|" + RUNTIME_EMIT_REV;
+    const s = JSON.stringify(compiled) + "|" + figmaRuntimeRevision(compiled);
     let h = 5381;
     for (let i = 0; i < s.length; i++)
       h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;

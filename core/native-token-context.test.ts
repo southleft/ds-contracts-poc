@@ -207,6 +207,28 @@ function revise(request: NativeTokenContextInput) {
   return request;
 }
 
+test('prepared-library token provenance preserves archive identity without claiming a source program', () => {
+  const request = input();
+  request.source = { kind: 'prepared-contract-library', revision: 'sha256:' + 'c'.repeat(64),
+    artifactId: 'c'.repeat(64), inputSha256: 'd'.repeat(64), tarballSha256: 'e'.repeat(64), tokensSha256: 'b'.repeat(64) };
+  const before = copy(request), result = prepareNativeTokenContext(request);
+  assert.deepEqual(result.source, request.source);
+  assert.equal('sourceProgramSha256' in result.source, false);
+  assert.deepEqual(request, before);
+  assert.deepEqual(result.variables, prepareNativeTokenContext(input()).variables,
+    'provenance does not rewrite token values or alias identities');
+  for (const change of [
+    { revision: 'sha256:' + 'f'.repeat(64) },
+    { artifactId: '../outside' },
+    { inputSha256: '' },
+    { tarballSha256: 'invalid' },
+    { tokensSha256: 'invalid' },
+    { sourceProgramSha256: 'a'.repeat(64) },
+    { observedReact: true },
+    { kind: 'future-protocol' },
+  ]) assert.throws(() => prepareNativeTokenContext({ ...request, source: { ...request.source, ...change } as any }), /source-identity/);
+});
+
 test("preparation preserves exact names and aliases through the existing compiler, with dark-only mapping", () => {
   const request = input(),
     original = copy(request),

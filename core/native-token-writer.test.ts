@@ -52,6 +52,23 @@ function request(): NativeTokenContextInput {
   };
 }
 
+test('the shared token writer and independent read retain prepared-library provenance', async () => {
+  const input = request();
+  input.source = { kind: 'prepared-contract-library', revision: 'sha256:' + 'c'.repeat(64),
+    artifactId: 'c'.repeat(64), inputSha256: 'd'.repeat(64), tarballSha256: 'e'.repeat(64), tokensSha256: 'b'.repeat(64) };
+  const h = host();
+  const created = await h.run<NativeTokenCreationResult>(emitNativeTokenContextScript(input).script);
+  assert.equal(created.status, 'created-candidate', JSON.stringify(created.problems));
+  const observed = await h.run<NativeTokenReadbackResult>(emitNativeTokenContextReadbackScript(input, created.creationIdentity!));
+  assert.equal(observed.status, 'readback-collected');
+  assert.deepEqual(observed.receipt!.collection.ownership.source, input.source);
+  assert.equal('sourceProgramSha256' in observed.receipt!.collection.ownership.source, false);
+  assert.equal(verifyNativeTokenContextReceipt({input,expectedIdentity:created.creationIdentity!,receipt:observed.receipt!}).status, 'native-token-context-observed');
+  const changed = structuredClone(observed.receipt!);
+  changed.collection.ownership.source = request().source;
+  assert.equal(verifyNativeTokenContextReceipt({input,expectedIdentity:created.creationIdentity!,receipt:changed}).status, 'refused');
+});
+
 type Variable = {
   id: string;
   key: string;
