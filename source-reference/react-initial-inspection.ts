@@ -115,11 +115,13 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   if (request.version === 2 && !row.ownership.components.some(c => c.id === request.instanceId && c.parent && c.roots.length === 1 && c.roots[0] !== ''))
     throw Error('react-inspection-nested-instance-unavailable');
-  // Authored authority above authenticates the complete creation provenance.
-  // The ordinary behavior probe records the same ownership structure without
-  // creation instrumentation. Compare that explicit projection, not runtime
-  // invocation counters; no archived facts or source identities are rewritten.
-  return { captured, ownership: request.version === 3 ? reactOwnershipStructure(row.ownership) : row.ownership, program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
+  // The sealed ownership run records creation provenance with its observer
+  // hook (authenticated there and by the archive); the ordinary behavior probe
+  // reads the same ownership structure without that instrumentation. Every
+  // request version compares that explicit projection, not runtime invocation
+  // counters; no archived facts or source identities are rewritten. Seals made
+  // before the observer existed carry no creation fields, so this is a no-op.
+  return { captured, ownership: reactOwnershipStructure(row.ownership), program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
