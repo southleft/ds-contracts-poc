@@ -1,6 +1,6 @@
-/** Candidate-only projection for native root text templates whose source
- * binding tuples exceed one collection's mode capacity. No application write
- * path accepts this plan yet. Hosts must rederive it from authenticated inputs;
+/** Scoped projection for native root text templates whose source binding
+ * tuples exceed one collection's mode capacity. Application hosts rederive it
+ * from authenticated inputs before accepting independently read allocations;
  * a hash on a supplied graph is not authority to allocate or adopt variables. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import type { ComponentData, NodeSpec } from './emit-figma-script.js';
@@ -212,9 +212,9 @@ export function nativeRootTextTemplateGraphScopes(graph: NativeRootTextTemplateG
   return Object.fromEntries([...found].sort(([a], [b]) => order(a, b)).map(([name, values]) => [name, [...values].sort()]));
 }
 
-/** This transport creates a text-routing candidate, so unused source leaves
- * have no picker scope. A future component host must separately derive the
- * scopes of any additional root paint/layout consumers before admitting them. */
+/** Unused source leaves have no picker scope. Component transports also
+ * derive scopes from every root paint/layout consumer through the explicit
+ * componentSourceScopes projection before admitting those bindings. */
 export function nativeRootTextTemplateGraphSourceScopes(graph: NativeRootTextTemplateGraph): Record<string, string[]> {
   const routeScopes = nativeRootTextTemplateGraphScopes(graph);
   const variables = new Map(graph.sourceTokens.variables.map(v => [v.tokenPath, v]));

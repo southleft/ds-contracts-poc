@@ -31,7 +31,7 @@ An approved, linted set is a good input. Approval establishes design intent; the
 
 **Try today:** [open Figma import](https://ds-contracts-playground.pages.dev/playground?source=figma). Enter a component URL and your access token, then choose **Import**. The engine produces a proposal and named limitations. Inspect the contract, **Receipts** and **React** output; each emitted file has a copy action. Review unresolved dependencies and conflicts with the active token inventory before using the output. Without credentials, **Demo import (Badge fixture)** exercises the import with recorded data. That fixture is a way to learn the interface, not the product's scope or proof of a live import.
 
-**Install from the local app.** In the React output, choose **Prepare React library**, then the download link. The local development server generates the selected component and its complete dependency graph, packages JavaScript, CSS Modules, tokens and TypeScript declarations into a `.tgz`, and exposes a download link for the archive. Saved archive links survive local server restarts when you reopen the same checkout. Keep the downloaded archive or its link; prepare again if an older temporary link has expired. Install the file with `npm install ./path/to/the-downloaded-file.tgz`, then import the component from the package name in its `package.json`. The archive includes a README. Use React 18 or later and a bundler with CSS Modules support; supply the fonts declared by the design. The hosted static Playground has no packaging server, so this button is available only in local development. Missing dependencies, invalid contracts, undefined tokens or more than 30 components refuse the whole download. Packaging does not qualify fidelity or accessibility.
+**Install from the local app.** In the React output, choose **Prepare React library**, then the download link. The local development server generates the selected component and its complete dependency graph, packages JavaScript, CSS Modules, tokens and TypeScript declarations into a `.tgz`, and exposes a download link for the archive. Newly prepared links survive local server restarts and newer downloads while the retained local artifact files remain available. The server verifies the saved input and archive bytes before serving a download; changed or incomplete artifacts refuse. Links created before this durable storage was added must be prepared again. Install the file with `npm install ./path/to/the-downloaded-file.tgz`, then import the component from the package name in its `package.json`. The archive includes a README. Use React 18 or later and a bundler with CSS Modules support; supply the fonts declared by the design. The hosted static Playground has no packaging server, so this button is available only in local development. Missing dependencies, invalid contracts, undefined tokens or more than 30 components refuse the whole download. Packaging does not qualify fidelity or accessibility.
 
 **Configure tab behavior.** For a valid contract containing repeated button components, open **Contract → Selection**. Choose the repeat, assign stable item keys, map the selected/unselected appearance, and give the list an accessible label. Map every item to an existing panel or explicitly choose an empty content slot for your app to supply. Choose the initial item and navigation policy, then **Review selection setup** and **Apply selection to contract**. Missing or conflicting relationships refuse before the editor changes. The form edits the current contract; it does not overwrite imported workspace entries or save a draft automatically. Reset restores the loaded source. Export the reviewed React library before leaving, and keep the contract JSON for later editing. The preview is static; test keyboard behavior in your consuming app. Native recapture of this relationship remains unfinished; see [D.131](23-known-limitations.md#d131-selection-behavior-requires-an-explicit-item-to-panel-relationship).
 
@@ -186,6 +186,40 @@ that succession and an unchanged repeat. Broader recovery and two-way acceptance
 remain under qualification. A preview alone never means the original files
 were updated.
 
+**Apply a reviewed design change to the original source (under qualification):**
+for an existing verified update, choose **Read design changes from the canvas**
+and **Prepare source repair preview**. This currently supports the bounded
+root-opacity edit described in [D.108](23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery).
+Review the module, generated CSS, state images and all configured caller
+examples, then choose **Apply reviewed change to original source**. Keep the
+same Sync Runner operation connected while the app checks the canvas, writes
+the reviewed files, validates all examples and checks the canvas again.
+
+Progress and recovery appear under **Source changes and recovery**, including
+after a page reload. Choose **Prepare Sync Runner connection**, then **Copy Sync
+Runner connection** (or select and copy the masked field) to copy the operation's
+connection for reconnection. **Apply / resume reviewed change** retries with a
+new canvas read. **Restore original source and CSS** restores those files and
+validates them; it leaves the Figma edit in place. After completion, **Load
+verified source** opens the resulting source reference. Unexpected source edits
+are preserved and refuse. The bounded opacity Apply, interruption before the
+write, completed-repeat behavior, exact source restoration and intervening
+source/canvas conflict refusals are demonstrated. A real failure after installing
+the module but before installing CSS also resumes through these controls. The
+completed module is retained; verification must still finish before the app
+claims success. Source restoration and the four temporary canvas edits were
+then independently verified back to the pre-test state. This is an IO-failure
+probe; process termination during file replacement remains unmeasured.
+To continue using an existing
+native set, trace the verified source, follow its saved root observation, inspect
+the required initial states, then choose **Follow the current source with the
+existing … states** and **Review compiler update**. This flow retains the same
+component operation and nodes; any remaining variable correction still requires
+preflight and independent readback. The bounded opacity journey demonstrates
+that succession and an unchanged repeat. Broader recovery and two-way acceptance
+remain under qualification. A preview alone never means the original files
+were updated.
+
 **Inspect a stateful child in its composition:** for the configured composed Card, open its saved caller-content review:
 
 1. Choose **Generate React composition** to review the nested component identities and any source-context differences.
@@ -217,7 +251,22 @@ When another selected case has the same observed family, the app offers **Compar
 
 **Bounded updates available locally.** On a verified native operation, use **Review compiler update**, **Prepare reviewed correction**, connect the companion, then **Apply and verify correction**. The app uses fresh preflight and independent readback, preserves creation records, refuses conflicting values and retains uncertain write outcomes for recovery. Supported channels include opacity, literal dimensions on empty flex roots, root shadows, simple SVG strokes, supported background layers and guarded allocated number values. A bound cross-axis size can update only after **Inspect sizing details** provides fresh facts and the guarded writer verifies the supported layout transition and every binding consumer; other bound dimension changes refuse by name. See [D.87](23-known-limitations.md#d87-pixel-dimension-value-history-does-not-authorize-a-bound-size-write). **Read design changes from the canvas** reports supported design edits. For a supported root-opacity change, **Prepare source repair preview** and **Apply reviewed change to original source** can update the reviewed original module and generated CSS, with fresh canvas reads and source validation as described above. Other design changes require the developer to update the original React before the app verifies agreement. Live Checkbox and Switch proofs, interruption recovery and duplicate-free repeats are recorded in [CURRENT.md](CURRENT.md#v1-acceptance-evidence).
 
-**For two previously unrelated libraries:** the repository has diff and planning foundations. The [current status](https://ds-contracts-spec.pages.dev/system/) describes their boundaries. The hosted copy may lag this repository (on 2026-09-18 it answered 404); the same document is [docs/CURRENT.md](../docs/CURRENT.md), and the local app serves it at `/system`. There is no complete **Compare libraries → repair both sides** application action yet. Starting from two existing libraries must not silently become “overwrite one with the other.”
+**For two previously unrelated libraries:** the repository has diff and planning foundations. The [current status](CURRENT.md#v1-acceptance-evidence) describes their boundaries, and the local app serves it at `/system`. The hosted `/system/` page returned 404 when checked on 2026-09-22; use the repository or local view. There is no complete **Compare libraries → repair both sides** application action yet. Starting from two existing libraries must not silently become “overwrite one with the other.”
+
+**If a native update loses its result:** reopen the same companion in the
+authorized file and allow it to deliver any saved result. If the app still
+awaits that result, use **Resolve by reading the canvas**. The original write
+is never sent again. A read that proves the intended change landed allows a
+separate verification read; other outcomes may require further recovery.
+
+Reopening alone finishes only work the companion already holds. If it reports
+**Nothing left to finish. Press Connect / resume to continue**, enter the same
+operation's connection from the app and choose **Connect / resume**. Wait for
+the app's verified result, then close the plugin to inspect the canvas. Use
+**Attest the companion is gone** only when every companion window for that
+file is actually closed; it is not a shortcut past a slow response. The
+measured recovery boundary and remaining gaps are in
+[D.121](23-known-limitations.md#d121-a-completed-write-can-be-recovered-without-its-result).
 
 <a id="install"></a>
 ## Install and try it today
@@ -303,4 +352,4 @@ Development should produce a demonstrable user flow. Tests are acceptance checks
 
 After that: complete design-only React library delivery in a clean consumer, connect safe two-way repair for an existing React/Figma pair, then run an independently selected supported cohort. Advanced composition remains a V1 requirement. Lit/Web Components integration resumes for planned V1.1 after these exits, reusing the shared rules.
 
-**Timing:** there is no evidence-backed V1 date yet. Forecast from completed journeys and observed remaining blockers, not eval counts. The next deliverable is an imported React component family reaching verified, editable native Figma output. See the [status and milestone exits](https://ds-contracts-spec.pages.dev/system/), or [docs/CURRENT.md](../docs/CURRENT.md) when the hosted copy is unavailable.
+**Timing:** there is no evidence-backed V1 date yet. Forecast from completed journeys and observed remaining blockers, not eval counts. See the [status and milestone exits](CURRENT.md#v1-acceptance-evidence) for the remaining acceptance work.

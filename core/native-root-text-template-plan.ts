@@ -2,7 +2,7 @@
  * The output is not write authority. A host must rederive it from authenticated
  * compiler output, allocate owned modes and aliases, and verify their exact
  * IDs and selected edges before dispatching the renderer. The application
- * source adapter does not infer the explicit contract marker yet. */
+ * source adapter derives the marker only from authenticated direct text. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { prepareNativeTokenContext, type NativeTokenContextInput } from './native-token-context.js';
 import { flattenTokens } from './tokens.js';

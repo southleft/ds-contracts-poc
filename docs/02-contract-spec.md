@@ -95,7 +95,11 @@ Fragment; omission leaves children unset. Slot `defaultContent` remains
 design/story sample content, never a runtime default. The Figma generator can
 populate the child's existing native slot, replacing its design defaults only
 on that instance. It preserves parent property scope and child typography,
-including supported flex and grid layouts. The writer also fills slots below a child's root, but graph readback currently verifies only slots directly under the dependency's root and refuses deeper locations by name. Full-width children
+including supported flex and grid layouts. The writer and graph readback support
+caller slots below inherited wrappers. Readback follows those wrappers against
+the selected main's hierarchy and allocation stamps, then verifies caller-owned
+content separately. This deeper-slot rule has regression coverage; a fresh
+application journey remains unqualified. Full-width children
 require a definite column or grid context; grid content must fit declared or
 managed rows. Caller-owned text inside a child slot stays directly editable on the canvas; Figma cannot bind it to a parent TEXT property, so the native generator lowers such a mapping to canvas content and reports it as editable canvas text. Exposing
 eligible direct child controls does not create arbitrary property aliases across

@@ -2,6 +2,8 @@
 
 **Public project status · updated 2026-09-25 · V1 is not complete.**
 
+**Public project status · updated 2026-09-25 · V1 is not complete.**
+
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
 This page is the current acceptance ledger and work order, also rendered at `/system`. Start with the [user journey guide](USER-JOURNEYS.md) for installation and application steps, and the [React V1 scope](REACT-V1-SCOPE.md) for the required cohort. Earlier measurements remain evidence; they do not override current failures.
@@ -906,6 +908,109 @@ the same proposal to update and reverse with exact restoration. Historical
 page-only programs stay byte-identical evidence and cannot receive new variable
 write authority. See [D.74](23-known-limitations.md#d74-variable-updates-inspect-document-bindings-before-writing)
 for measured scope, residual risk, adversarial coverage and safe reversal.
+
+
+### Evidence recorded on main, 2026-09-22 to 2026-09-23
+
+These paragraphs were recorded on `main` by the engineering PR train (#170–#180) while
+the V1 checkout recorded the entries above. They are retained verbatim here after the
+branch integration; none of them completes a V1 row.
+
+Newly prepared React library downloads retain their validated input and archive
+on local disk. A saved download URL survives a local server restart, and exact
+repeat preparation reuses its retained artifact. Changed, incomplete or unsafe
+artifact files refuse instead of being silently replaced. This improves download
+recovery; it does not restore the displayed link or imported workspace context
+after a browser reload, recover older in-memory links, or qualify native return.
+The prepared-library native route now uses the same durable operation journal.
+Its request selects a saved archive, theme and brand; the host fixes the evaluation
+file and native identity. HTTP/transport checks cover server restart during
+creation, identical acknowledgement redelivery, complete state inventories,
+changed dependency refusal and read-only recovery without duplicate allocation.
+It records archive/input provenance and does not claim an observed React source.
+The Playground links its saved download to a separate native inspection page.
+An isolated browser review prepares and reopens the same operation after page
+reload and server restart, with all retained files unchanged. The primary
+app/plugin journey and visual fidelity are not yet qualified. The native route
+currently requires a named brand in the retained input. The original retained
+Tabs input still refuses on unsupported
+per-prop grow semantics in this checkout; no property is stripped to admit it.
+
+The native graph verifier now checks caller slots below inherited wrappers
+against their source main's hierarchy and allocation stamps. This corrects a
+regression-tested refusal; historical Card readbacks remain unchanged. The
+bounded nested-host application evidence below exercises the corrected path
+([D.125](23-known-limitations.md#d125-deeper-caller-slots-require-the-inherited-main-hierarchy)).
+Source inspection now distinguishes children passed inside static JSX wrappers
+and checks the host path against React ownership. Bounded caller generation
+retains the owned hosts and places caller content in the identified nested
+slot. Browser and native fixture checks cover repeated wrappers and editable
+caller text. The separate application probe below demonstrates bounded delivery
+and recovery; wider content projection and full fidelity remain unqualified
+([D.126](23-known-limitations.md#d126-nested-source-children-need-an-explicit-host-path),
+[D.127](23-known-limitations.md#d127-nested-caller-slots-preserve-their-owned-hosts)).
+
+A shared renderer correction preserves text and slot-content property bindings
+when the same node also has a visibility control. Isolated native fixtures verify
+correction with retained main IDs and property keys, working instance label and
+visibility edits, and an unchanged repeat. The retained imported Button still
+has the earlier missing text bindings; its complete application return remains
+unqualified ([D.157](23-known-limitations.md#d157-visibility-must-preserve-other-property-bindings)).
+
+used a fresh tab with React output selected. Bounded template color updates and
+interruption recovery now have measured [application evidence below](#v1-acceptance-evidence).
+Native fidelity, broader update and recovery behavior, and the complete
+independent-family journey remain unqualified
+([D.99](23-known-limitations.md#d99-native-root-text-templates-still-need-an-application-journey)).
+
+passes independent verification on the retained mains and caller. Bounded
+interruption recovery is measured below; broader recovery and full visual
+qualification remain unfinished. The full inherited source API is incomplete;
+Radix content ownership remains a separate refusal. This does not close the
+
+The app now also creates a new caller after a verified source update and
+
+A separate controlled companion closure now demonstrates recovery after the
+write finishes but before its result is saved. The app settles the outcome by
+reading the canvas, then independently verifies it: one write and one begin,
+no write result, and two equal reads of all 302 main records, 100 main images
+and both callers. All 2,064 earlier evidence files remain unchanged. The app
+reports current verification, and both unobstructed instances and the app
+gallery were inspected. Reopening the companion and resuming after its held
+recovery work finished were required. Host delays and an obscured interruption
+message remain usability gaps; this does not qualify arbitrary partial writes,
+OS crashes, native fidelity or V1 ([D.121](23-known-limitations.md#d121-a-completed-write-can-be-recovered-without-its-result)).
+The unchanged production companion then applied the reviewed reverse correction
+once. A separate read restores the complete original purple main and both
+callers, including every retained image; all four source files and 2,085 earlier
+evidence files match their original bytes. The app reports current verification,
+and both unobstructed native callers and the app gallery show the restoration.
+The long host and display delays remain a release gap.
+
+The host's pure template-match cache now retains a larger bounded correction
+history. A read-only prototype preserved the complete response and all 2,104
+native evidence files while reducing one repeated listing from 100 to 55
+seconds. After adoption, the app reopens the same current verified correction;
+its real HTTP response matches the saved bytes and creates no native event or
+write. Source and write authorization are unchanged. Usable latency remains
+unqualified ([D.123](23-known-limitations.md#d123-replaying-a-correction-history-must-not-evict-every-useful-match)).
+Within a single history response, ordinary JSON evidence now uses a guarded
+copy path. A full-history prototype preserves the complete response and all
+2,104 native evidence files while reducing one repeated read from 55 to 49
+seconds. Richer values retain the original copy behavior; freshness and write
+checks are unchanged. After adoption, the app reopens the same verified
+correction and a real HTTP read takes 51 seconds with identical response and
+evidence bytes. The remaining delay still prevents latency qualification
+([D.124](23-known-limitations.md#d124-display-copying-must-preserve-the-values-it-is-copying)).
+
+Those interruption and recovery cases remain synthetic native-host coverage.
+
+Single-caller forward and reverse color changes, unchanged reviews, refusal of
+an intervening native color edit, and recovery from an interruption before the
+write began are measured separately. Additional caller creation and a combined
+unchanged review are now measured above. Subsequent source updates across both
+callers, broader recovery, comparison refresh/repair transitions and visual/layout
+qualification remain unfinished. Private evidence:
 
 ### React V1 acceptance surface
 
