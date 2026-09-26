@@ -138,6 +138,14 @@ export interface ReactOwnership {
 /** Different observers retain different factory journals. Pair their complete
  * renderer/source/props/host structure separately; retain and hash both full
  * observations so this comparison never authenticates the omitted journals. */
+/** The case subject among the components that own the rendered root. Ownership
+ * traces into dependencies, so a library primitive (e.g. Radix Switch.Root) can
+ * share the root with the workspace component that renders it; the subject is
+ * the OUTERMOST owner. Unrelated owners are returned together so callers refuse. */
+export function outermostRootOwners<T extends { id: string; parent?: string | null; roots: string[] }>(components: T[]): T[] {
+  const owners = components.filter(c => c.roots.includes(''));
+  return owners.filter(c => !owners.some(o => o.id === c.parent));
+}
 export function reactOwnershipStructure(ownership:ReactOwnership):ReactOwnership {
   return {...ownership,nodes:ownership.nodes.map(({creationSite:_site,creationInvocation:_invocation,creationLineage:_lineage,renderGraph:_graph,...node})=>node)};
 }

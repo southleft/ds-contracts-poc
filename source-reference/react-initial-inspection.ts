@@ -16,7 +16,7 @@ import { isReactAuthoredNativeRequest, isReactAuthoredOperationRequest, reactAut
 import { readReactAuthoredNativeEvidence } from './react-authored-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
-import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead, reactOwnershipStructure, type ReactOwnership } from './react-ownership.js';
+import { buildReactOwnershipReference, outermostRootOwners, reactOwnershipHook, reactOwnershipRead, reactOwnershipStructure, type ReactOwnership } from './react-ownership.js';
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
@@ -368,7 +368,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
               throw Error('react-initial-original-render-changed');
             const ownership = await page.evaluate(reactOwnershipRead(profile.path[0])) as ReactOwnership;
             if (revisionOf(ownership) !== revisionOf(value.source.ownership)) throw Error('react-initial-original-ownership-changed');
-            const targets = ownership.components.filter(c => instanceId ? c.id === instanceId : c.roots.includes(''));
+            const targets = instanceId ? ownership.components.filter(c => c.id === instanceId) : outermostRootOwners(ownership.components);
             if (targets.length !== 1) throw Error('react-initial-root-ambiguous');
             state.observation = await observeReactInitialStates({ page, program: value.source.program, ownership, tree: captured.tree, image: captured.sourcePngSha256,
               instanceId: targets[0].id, selector: profile.path[0], dir: path.join(dir, 'states'), failures,

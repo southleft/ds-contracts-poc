@@ -23,6 +23,7 @@ import { buildReactReference, reactReferenceUnchanged } from './react-reference.
 import { builtinReactCohort } from './react-cohort.js';
 import {
   buildReactOwnershipReference,
+  outermostRootOwners,
   reactOwnershipHook,
   reactOwnershipRead,
   reactOwnershipMatchesTree,
@@ -958,4 +959,18 @@ Control.displayName='Control';`;
     assert.equal(job.report().problem,'react-ownership-evidence-changed');assert.equal(job.report().matched,0);
     assert.equal(job.report().rows[0].helperObservations,undefined);assert.equal(job.report().rows[0].authoredTrees,undefined);
   }finally{job?.close();rmSync(dir,{recursive:true,force:true});}
+});
+
+test('the case subject is the outermost root owner; unrelated owners stay ambiguous', () => {
+  // Live family Switch (2026-09-26): Radix Switch.Root shares the root with the
+  // workspace Switch that renders it, and Thumb owns a descendant.
+  const switchOwners = [
+    { id: 'instance-0', parent: null, roots: [''] },
+    { id: 'instance-1', parent: 'instance-0', roots: [''] },
+    { id: 'instance-2', parent: 'instance-1', roots: ['0'] },
+  ];
+  assert.deepEqual(outermostRootOwners(switchOwners).map(c => c.id), ['instance-0']);
+  assert.deepEqual(outermostRootOwners([{ id: 'a', parent: null, roots: [''] }, { id: 'b', parent: null, roots: [''] }]).map(c => c.id), ['a', 'b'],
+    'two unrelated root owners are both returned so the caller refuses');
+  assert.deepEqual(outermostRootOwners([{ id: 'c', parent: null, roots: ['0'] }]), [], 'no root owner, nothing selected');
 });
