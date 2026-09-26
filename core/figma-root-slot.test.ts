@@ -227,6 +227,18 @@ test('fixed content roots keep their native outer dimensions without a consumer 
  }}finally{await browser.close()}
 });
 
+test('an exact-zero content slot re-seats its counter-axis FILL at the root inner width',async()=>{
+ // Live 2026-09-26: the birth-box reset left AlertTitle's FILL slot 0 wide.
+ const c=seed(),byId=new Map([[c.id,c]]);
+ const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
+ const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
+ await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(c,byId));
+ const comp=root.findOne((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id);
+ const slot=comp.children![0];
+ assert.equal(slot.type,'SLOT');assert.equal(slot.layoutSizingHorizontal,'FILL');
+ assert.equal(slot.width,comp.width-comp.paddingLeft-comp.paddingRight);
+});
+
 for (const intrinsic of [false, true]) for (const spacing of ['layout', 'token', 'mixed', 'literal', 'fractional', 'flow'] as const)
 if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one React root (${intrinsic ? 'intrinsic' : 'fixed'} height, ${spacing} gaps)`, async () => {
  const c=seed();

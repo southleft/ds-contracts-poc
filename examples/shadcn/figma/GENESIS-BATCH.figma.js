@@ -1641,7 +1641,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -3625,7 +3625,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6349,7 +6349,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14097,7 +14097,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16190,7 +16190,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19080,7 +19080,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -21491,7 +21491,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -23654,7 +23654,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -27078,7 +27078,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -29602,7 +29602,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -31643,7 +31643,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

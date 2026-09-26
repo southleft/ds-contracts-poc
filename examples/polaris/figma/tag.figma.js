@@ -3387,7 +3387,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function hasJointPropertyReferences(spec) {
   return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
     (spec.children || []).some(hasJointPropertyReferences);

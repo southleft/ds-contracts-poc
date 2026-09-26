@@ -983,7 +983,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+export const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 
 function componentHasJointPropertyReferences(component: ComponentData): boolean {
   const visit = (spec: NodeSpec): boolean =>
@@ -8386,7 +8386,21 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
   // Select from the current root after its size and bindings are applied.
   const horizontal = parent.layoutMode === 'HORIZONTAL';
   child.layoutSizingHorizontal = (horizontal ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
-  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';${hasRootGridSlot ? `
+  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
+  // A FILL assigned after the exact-zero birth-box reset keeps that zero
+  // extent (live 2026-09-26: an empty caller slot stayed 0 wide inside a
+  // 100 px root, so caller content grew from its centre). Re-seat a
+  // counter-axis FILL at the parent's exact inner extent through the same
+  // FIXED round-trip the birth-box repair uses.
+  const reseat = (axis, extent) => {
+    const current = axis === 'Horizontal' ? child.width : child.height;
+    if (!(extent > 0) || current === extent) return;
+    child['layoutSizing' + axis] = 'FIXED';
+    child.resizeWithoutConstraints(axis === 'Horizontal' ? extent : child.width, axis === 'Vertical' ? extent : child.height);
+    child['layoutSizing' + axis] = 'FILL';
+  };
+  if (!horizontal && child.layoutSizingHorizontal === 'FILL') reseat('Horizontal', parent.width - parent.paddingLeft - parent.paddingRight);
+  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);${hasRootGridSlot ? `
   if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
     const grid = child.children[0];
     grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
