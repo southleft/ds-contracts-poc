@@ -15,9 +15,9 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **157/157** green, 0 pinned red — 110 constructs expected CARRIED, 9 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **157/157** green, 0 pinned red — 111 constructs expected CARRIED, 8 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
-| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 47 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
+| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 46 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
@@ -43,13 +43,13 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 157 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **110 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 157 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **111 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
 | Variant axes (enum, boolean, on/off, state, theme) | 7 | `axis-bool` `axis-default-from-set` `axis-enum` `axis-onoff-enum` `axis-state` `axis-state-by-variant` `axis-theme-with-carriers` |
 | Boolean property defaults | 2 | `bool-default-from-set` `bool-default-hidden` |
-| Effects (shadows, blurs) | 2 | `effect-shadow-single` `effect-shadow-two` |
+| Effects (shadows, blurs) | 3 | `effect-inner-shadow` `effect-shadow-single` `effect-shadow-two` |
 | Fills and paints | 8 | `fill-absent-on-axis-value` `fill-alpha` `fill-image-bool` `fill-image-hash` `fill-solid-and-image-mixed` `fill-solid-raw` `fill-solid-var` `fill-unset-by-state` |
 | `grid-*` | 22 | `grid-2d` `grid-absolute-overlay` `grid-area-slot-native` `grid-auto-flow-row` `grid-bento-span-matrix` `grid-child-align` `grid-child-fill-cell` `grid-child-grow-invalid` `grid-child-text-hug` `grid-col-span` `grid-explicit-anchor` `grid-gap-row-column` `grid-gap-shorthand` `grid-in-flex-fill` `grid-instance-child` `grid-on-component-variant` `grid-root-hug-height-fixed-conflict` `grid-row-span` `grid-sidebar-px-fr` `grid-track-fit-content` `grid-tracks-mixed-fractional` `grid-two-column` |
 | Nested instances and their linkage | 7 | `instance-absent-stub` `instance-override-size-carried` `instance-props-fixed` `instance-props-thread` `instance-resolvable-key` `instance-resolvable-name` `instance-stub-no-bbox` |
@@ -123,7 +123,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 
 ### 3.3 Named refusals in the document model
 
-9 constructs are refused **by name** — the proposal must produce a note, never a guess. 38 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 47 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
+8 constructs are refused **by name** — the proposal must produce a note, never a guess. 38 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 46 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
 
 | case | disposition | side | the construct | why it is refused |
 |---|---|---|---|---|
@@ -167,7 +167,6 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 | `text-lineheight-percent` | LEDGERED | capture-side | PERCENT/AUTO line-height unit (capture-boundary: only px is captured) | non-px line-height units stay named receipts (text-channel-unsupported), never converted |
 | `axis-state-partial` | REFUSED | inversion-side | an interaction-state axis where one variant name omits the State pair | promotion with incomplete pairs is unsafe - the near-miss must be a named refusal and the axis stays an enum prop |
 | `axis-theme-without-carriers` | REFUSED | inversion-side | a Theme axis differing only in RAW color literals (no variables to ride) | with no bound variables there are no modes for the deltas to ride - promotion is refused BY NAME and the axis stays an enum with per-value minted leaves |
-| `effect-inner-shadow` | REFUSED | inversion-side | an INNER_SHADOW effect on the root | inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed |
 | `effect-layer-blur` | REFUSED | inversion-side | a LAYER_BLUR effect on the root | blur types carry type/radius only so the gap can be NAMED - no filter/box-shadow may be proposed |
 | `effect-text-shadow` | REFUSED | inversion-side | a drop shadow on a TEXT node | a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed |
 | `grid-implicit-tracks` | REFUSED | inversion-side | a child anchored at row 1 of a grid that declares ONE row track — the occupancy the canvas absorbs by rewriting the declaration | P9, the lossy edge: when occupied cells exceed the declared track lists the declaration and the occupancy disagree, and carrying either would be a fact the contract never made. Refused BY NAME (grid-implicit-tracks) with no track or placement leaking |
@@ -324,7 +323,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `be5381c0fe9e` | 281,726 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `a8d187f78ef7` | 674,806 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `f73b7aa3df69` | 113,673 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

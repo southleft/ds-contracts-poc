@@ -423,7 +423,7 @@ filter that decides carriage scores 100% on a channel it never opened.
 
 | manifest | cases | breakdown | source |
 |---|---|---|---|
-| canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
+| canvas constructs | 157 | CARRIED 111 · LEDGERED 38 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 126 | CARRIED 78 · REFUSED 26 · UNSUPPORTED 17 · LOWERED 5 | `conformance/MANIFEST.json` |
 
 Of the 157 canvas constructs, **157** are `green`.
@@ -588,7 +588,7 @@ npm run capability:fresh
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `4ad8a2a2600f` | 1,895,688 | capture counts + determinism receipts — 269 files |
 | `extract/computed/out/**/scorecard.json` | `163f22a2cc42` | 23,439,940 | computed-equality per component — 268 files |
-| `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
+| `extract/figma/conformance/MANIFEST.json` | `f73b7aa3df69` | 113,673 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `1bb1566d06d2` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
