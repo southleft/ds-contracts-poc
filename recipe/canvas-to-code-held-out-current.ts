@@ -93,6 +93,26 @@ export function artifactInventory(root: string): Record<string, string> {
   return entries;
 }
 
+/** Chromium text metrics differ between operating systems (docs/23 D.88), so a
+ * computed-style ledger recorded on one platform is not the other platform's
+ * truth. A `<root>.<platform>` directory, recorded by this same recorder on that
+ * platform, replaces individual base files for that platform only. It may not
+ * add or remove files; every byte is still compared exactly. */
+export function expectedInventory(
+  baselineRoot: string,
+  cohort: string,
+  platform: string = process.platform,
+): Record<string, string> {
+  const base = artifactInventory(path.join(baselineRoot, cohort));
+  const overlay = path.join(`${baselineRoot}.${platform}`, cohort);
+  if (!existsSync(overlay)) return base;
+  const replaced = artifactInventory(overlay);
+  for (const file of Object.keys(replaced))
+    if (!(file in base))
+      throw new Error(`held-out current: ${platform} overlay adds ${file}`);
+  return { ...base, ...replaced };
+}
+
 export function assertArtifactInventory(
   expected: Record<string, string>,
   actual: Record<string, string>,
@@ -374,7 +394,7 @@ export async function checkCohort(
   try {
     await recordCohort(cohort, work);
     assertArtifactInventory(
-      artifactInventory(expected),
+      expectedInventory(baselineRoot, cohort),
       artifactInventory(path.join(work, cohort)),
       `${cohort} current-engine replay`,
     );

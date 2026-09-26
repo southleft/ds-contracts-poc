@@ -11627,12 +11627,20 @@ consumer, explicit hashed Inter, unchanged 5% limit):
 
 Outside the label text, Checkbox differs by 0–2%. Glyph size, path geometry and
 ink match. A `text-rendering: geometricPrecision` diagnostic reached 8/20 but
-changed the label width by 1 px, so it was not adopted. The app then prepared
-native operation `46e5f671-2e8e-4b73-8802-255374f3ef3e` (20 root variants,
-81 variables). Its Figma write and canvas inspection have not run; Figma Desktop
-control was unavailable to this session. Native fidelity, interaction,
-accessibility and V1 remain unqualified. Evidence and reversal instructions:
-`private/direct-state-ink-v255/`.
+changed the label width by 1 px, so it was not adopted.
+
+The native operation `46e5f671-2e8e-4b73-8802-255374f3ef3e` then created 20
+Checkbox variants and 81 variables through Sync Runner in Evaluations. The app's
+independent readback refuses exactly four facts, all
+`native-filled-path-observation-inherited-scale` on the warning glyph in the four
+error variants (the v253 class); every other checked node passes, including the
+24/16 px glyph instance boxes. Canvas inspection with the plugin closed shows
+correct rest and error rows. **Disabled variants draw rest ink natively**: the
+child models `disabled` as a Boolean property, which cannot change paint, plus
+`State=Disabled` preview variants drawn only for `size=small, error=false` (21 of
+42 child cells), so a forwarded parent `disabled` has nothing to select. Native
+fidelity, interaction, accessibility and V1 remain unqualified. Evidence and
+reversal instructions: `private/direct-state-ink-v255/`.
 
 ## D.157 Visibility must preserve other property bindings
 
@@ -11660,3 +11668,42 @@ application delivery, complete dependency verification and fidelity remain open.
 runtime-hash suffix from both emission and the plugin mirror. Preserve the
 failed and corrected native evidence; do not call a defined but unbound text
 property editable.
+
+## D.158 A second caller of the same child allocates its own selected-content name
+
+**AGENT decision, 2026-09-26.** Fixed-swap caller content (D.154) wrote the part
+key `selectedContent` verbatim. CBDS Badge places two icons, so both children
+received that key and the proposed contract failed validation with a duplicate
+part name; the app could not prepare the library. The key is now claimed through
+the proposer's contract-wide part-name rule: the first caller keeps
+`selectedContent`, later callers take the parent-derived name with a named note.
+Single-caller outputs are unchanged. Re-measured through the app on current code:
+CBDS Badge passes 72/72 in a clean consumer (2.214% white / 4.557% black) and its
+native output passes 72/72 against that consumer and 72/72 at 0.000% against the
+original Figma frames, with exact dimensions. Reverse by restoring the literal key
+and removing the regression test in `core/instance-prop-forwarding.test.ts`.
+
+## D.159 Property-probe restoration ignores only per-render frame ordinals
+
+**AGENT decision, 2026-09-26.** After the 2026-09-22 nested-host work the
+ownership read records factory invocations, including numeric frame ordinals. The
+shadcn Alert re-invokes its factory once between static baseline reads, so
+`creationInvocation.invocation` and `.reactCall` changed while the tree, image,
+fonts and bounds restored exactly; every Alert property row refused and its root
+never drafted. Restoration now compares ownership with only those two numeric
+ordinals removed. Creation sites, inputs, effects, lineage and structure must
+still match; the callback-behaviour probe keeps its strict comparison; the
+refusal now names the first differing ownership path. Measured: Alert default and
+destructive draft `native-compiled` again (one of four rows after the existing
+recorded layout rebuild). Reverse in `source-reference/react-property-probe.ts`.
+
+## D.160 Computed-style held-out replays record a per-platform overlay
+
+**AGENT decision, 2026-09-26.** The current held-out replay compares every
+artifact byte. Its render ledgers record Chromium computed styles, whose text
+metrics differ between macOS and Linux (D.88): three ledgers recorded on macOS
+failed the Linux CI gate while the same gate passed locally. A `<root>.<platform>`
+overlay recorded by the same recorder on that platform (in CI, never
+hand-stamped) replaces those files on that platform only; an overlay may not add
+files, and every byte is still compared exactly. Reverse by deleting the overlay
+directory and `expectedInventory` in `recipe/canvas-to-code-held-out-current.ts`.

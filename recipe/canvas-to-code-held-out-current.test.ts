@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -16,6 +17,7 @@ import {
   assertCoverage,
   COHORTS,
   CURRENT_HELD_OUT_ROOT,
+  expectedInventory,
   prepareRecording,
   type CurrentResult,
 } from "./canvas-to-code-held-out-current.js";
@@ -172,5 +174,24 @@ test("recording cannot overwrite existing output or write through a symlink into
     assert.throws(() => artifactInventory(dir), /symlink artifact/);
   } finally {
     rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("a platform overlay replaces base bytes on its own platform only and may not add files", () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), "held-out-overlay-"));
+  try {
+    const base = path.join(root, "current"), overlay = path.join(`${base}.linux`, "c");
+    mkdirSync(path.join(base, "c"), { recursive: true }); mkdirSync(overlay, { recursive: true });
+    writeFileSync(path.join(base, "c", "ledger.json.gz"), "mac");
+    writeFileSync(path.join(base, "c", "results.json"), "same");
+    writeFileSync(path.join(overlay, "ledger.json.gz"), "linux");
+    const mac = expectedInventory(base, "c", "darwin"), linux = expectedInventory(base, "c", "linux");
+    assert.equal(mac["results.json"], linux["results.json"]);
+    assert.notEqual(mac["ledger.json.gz"], linux["ledger.json.gz"]);
+    assert.deepEqual(Object.keys(linux).sort(), Object.keys(mac).sort());
+    writeFileSync(path.join(overlay, "extra.json"), "x");
+    assert.throws(() => expectedInventory(base, "c", "linux"), /linux overlay adds extra\.json/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
