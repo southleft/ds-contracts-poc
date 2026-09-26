@@ -16,7 +16,7 @@ import { isReactAuthoredNativeRequest, isReactAuthoredOperationRequest, reactAut
 import { readReactAuthoredNativeEvidence } from './react-authored-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
-import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead, reactOwnershipStructure, type ReactOwnership } from './react-ownership.js';
+import { buildReactOwnershipReference, outermostRootOwners, reactOwnershipHook, reactOwnershipRead, reactOwnershipStructure, type ReactOwnership } from './react-ownership.js';
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
@@ -115,11 +115,13 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   if (request.version === 2 && !row.ownership.components.some(c => c.id === request.instanceId && c.parent && c.roots.length === 1 && c.roots[0] !== ''))
     throw Error('react-inspection-nested-instance-unavailable');
-  // Authored authority above authenticates the complete creation provenance.
-  // The ordinary behavior probe records the same ownership structure without
-  // creation instrumentation. Compare that explicit projection, not runtime
-  // invocation counters; no archived facts or source identities are rewritten.
-  return { captured, ownership: request.version === 3 ? reactOwnershipStructure(row.ownership) : row.ownership, program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
+  // The sealed ownership run records creation provenance with its observer
+  // hook (authenticated there and by the archive); the ordinary behavior probe
+  // reads the same ownership structure without that instrumentation. Every
+  // request version compares that explicit projection, not runtime invocation
+  // counters; no archived facts or source identities are rewritten. Seals made
+  // before the observer existed carry no creation fields, so this is a no-op.
+  return { captured, ownership: reactOwnershipStructure(row.ownership), program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
@@ -366,7 +368,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
               throw Error('react-initial-original-render-changed');
             const ownership = await page.evaluate(reactOwnershipRead(profile.path[0])) as ReactOwnership;
             if (revisionOf(ownership) !== revisionOf(value.source.ownership)) throw Error('react-initial-original-ownership-changed');
-            const targets = ownership.components.filter(c => instanceId ? c.id === instanceId : c.roots.includes(''));
+            const targets = instanceId ? ownership.components.filter(c => c.id === instanceId) : outermostRootOwners(ownership.components);
             if (targets.length !== 1) throw Error('react-initial-root-ambiguous');
             state.observation = await observeReactInitialStates({ page, program: value.source.program, ownership, tree: captured.tree, image: captured.sourcePngSha256,
               instanceId: targets[0].id, selector: profile.path[0], dir: path.join(dir, 'states'), failures,

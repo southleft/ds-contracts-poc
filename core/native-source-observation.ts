@@ -93,6 +93,15 @@ export function nativeInspectionExports(input: NativeInspectionInput): Array<{id
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 const numeric = (actual: unknown, expected: number) =>
   actual === expected || actual === Math.fround(expected);
+/** A SCALE-constrained child's inherited origin. Figma can retain the main's
+ * own sub-float32-step offset instead of scaling it (live CBDS Checkbox,
+ * 2026-09-25: 3.0959e-8 kept where 1.5480e-8 was expected). That is accepted
+ * only when the retained value IS the source value verbatim and both land on
+ * the same float32 position in the parent's frame; any other value refuses. */
+export const scaledOrigin = (actual: unknown, source: number, scale: number, parentOffset: unknown) =>
+  numeric(actual, source * scale) ||
+  (actual === source && typeof parentOffset === 'number' &&
+    Math.fround(parentOffset + source) === Math.fround(parentOffset + source * scale));
 const object = (v: unknown): v is Record<string, any> =>
   !!v && typeof v === "object" && !Array.isArray(v);
 
@@ -1003,7 +1012,7 @@ function verifyReadback(
                     const a = child.values, b = source.values;
                     if (![sx,sy].every(value=>Number.isFinite(value)&&value>0) ||
                         !numeric(a.width,b.width*sx) || !numeric(a.height,b.height*sy) ||
-                        !numeric(a.x,b.x*sx) || !numeric(a.y,b.y*sy) ||
+                        !scaledOrigin(a.x,b.x,sx,row.values.x) || !scaledOrigin(a.y,b.y,sy,row.values.y) ||
                         !same(a.relativeTransform,[[1,0,a.x],[0,1,a.y]]))
                       issue('native-filled-path-observation-inherited-scale',child);
                     if (pathSpec.nativePathInk && !nativeFilledPathResizeMatches(b.vectorPaths,a.vectorPaths,a.width/b.width,a.height/b.height))

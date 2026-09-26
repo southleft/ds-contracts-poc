@@ -129,6 +129,39 @@ test('registered custom properties cannot disguise viewport dimensions as fixed 
  }finally{await browser.close()}
 });
 
+test('an unregistered variable chain is fixed although the page registers unrelated properties',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  const size=async(css:string,height:string)=>{
+   await page.goto('about:blank');
+   await page.setContent(`<style>@property --tw-x{syntax:"<length>";inherits:false;initial-value:0px}${css}.subject{display:block;box-sizing:border-box;border:0;padding:0;width:48px;height:${height}}</style><button id="subject" class="subject">x</button>`);
+   return (await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(s=>s.channel==='height')!;
+  };
+  // Tailwind v4 shape: theme variable on :root, utilities register --tw-* only.
+  for(const [css,height] of [['@layer theme{:root,:host{--spacing:0.25rem}}','calc(var(--spacing) * 4)'],
+    ['.subject{--spacing:0.25rem}','calc(var(--spacing) * 4)'],['@layer theme{:root{--spacing:0.25rem}}','calc(var(--missing,var(--spacing)) * 4)']]) {
+   const h=await size(css,height);
+   assert.deepEqual([h.status,h.value],['fixed','16px'],css+' '+height);
+  }
+  // Anything that can reach a registered property still refuses, whatever its value.
+  for(const css of ['@property --spacing{syntax:"<length>";inherits:true;initial-value:4px}:root{--spacing:4px}',
+    '@property --reg{syntax:"<length>";inherits:true;initial-value:4px}:root{--reg:4px;--spacing:var(--reg)}',
+    '@property --reg{syntax:"<length>";inherits:true;initial-value:4px}:root{--reg:4px;--spacing:var(--nope,var(--reg))}']) {
+   const h=await size(css,'calc(var(--spacing) * 4)');
+   assert.deepEqual([h.status,h.reason],['unresolved','registered-size-variable-provenance-unqualified'],css);
+  }
+  await page.goto('about:blank');await page.evaluate(()=>CSS.registerProperty({name:'--spacing',syntax:'<length>',inherits:true,initialValue:'4px'}));
+  await page.setContent('<style>:root{--spacing:4px}.subject{display:block;box-sizing:border-box;border:0;padding:0;width:48px;height:calc(var(--spacing) * 4)}</style><button id="subject" class="subject">x</button>');
+  const scripted=(await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(s=>s.channel==='height')!;
+  assert.deepEqual([scripted.status,scripted.reason],['unresolved','registered-size-variable-provenance-unqualified'],'script registration');
+  // Unregistered but responsive units are still judged by the fixed-expression rule.
+  for(const unit of ['1vw','1em']) {
+   const h=await size(`:root{--spacing:${unit}}`,'calc(var(--spacing) * 4)');
+   assert.deepEqual([h.status,h.reason],['unresolved','responsive-or-unsupported-size-expression'],unit);
+  }
+ }finally{await browser.close()}
+});
+
 test('rule-order proof requires complete, non-overlapping positions in one stylesheet and ignores CDP list order',async()=>{
  const browser=await chromium.launch();try{
   const page=await browser.newPage();

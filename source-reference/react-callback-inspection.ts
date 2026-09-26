@@ -23,6 +23,7 @@ import {
 import {observeReactRuntimeDependencies} from './react-runtime-export.js';
 import {
   buildReactOwnershipReference,
+  outermostRootOwners,
   reactOwnershipHook,
   reactOwnershipRead,
   type ReactOwnership,
@@ -281,9 +282,9 @@ export function createReactCallbackInspectionStore(
               .locator(profile.path[0])
               .waitFor({ state: "attached", timeout: 15000 });
             await assertRestored();
-            const targets = value.source.ownership.components.filter((c) =>
-              instanceId ? c.id === instanceId : c.roots.includes(""),
-            );
+            const targets = instanceId
+              ? value.source.ownership.components.filter((c) => c.id === instanceId)
+              : outermostRootOwners(value.source.ownership.components);
             if (targets.length !== 1) throw Error("callback-root-ambiguous");
             state.observation = await observeReactCallbackBehavior({
               page,
