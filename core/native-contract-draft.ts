@@ -1,3 +1,5 @@
+import {nativePaintSpecSupported} from './native-paint-observation.js';
+import {lowerNativeFilledPath} from './native-filled-path.js';
 /** Framework-neutral provenance for a host-verified, unaccepted Contract draft.
  * This is neither a retained runtime binding nor permission to write a file.
  * The host must pin and re-open its source evidence before dispatching a write.
@@ -88,6 +90,9 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
   }
   const boundTextProperties = new Set<string>();
   function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec, insideCallerSlot = false) {
+    if (spec.shape?.kind === 'path' && !spec.nativePathInk) lowerNativeFilledPath(spec);
+    if (spec.nativePathInk && (!parent?.nativePathViewport || spec.type !== 'shape' || spec.shape?.kind !== 'path'))
+      throw Error('NATIVE_FILLED_PATH_OWNERSHIP_UNQUALIFIED');
     // A caller-slot spec points at a SLOT already owned by the dependency
     // instance. It is a navigation carrier, not an allocation in this draft.
     // Its children are caller-owned allocations and are qualified below.
@@ -154,12 +159,14 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
           Object.keys(spec.lits??{}).some(k=>!['radius','fillColor'].includes(k)))
         throw Error('NATIVE_CONTRACT_DRAFT_BACKGROUND_GEOMETRY_UNQUALIFIED');
     }
-    if (spec.type === 'shape' && (!spec.shape || !['rect', 'ellipse'].includes(spec.shape.kind) || spec.svg ||
-        spec.shape.arc || spec.shape.rotation || (spec.lits?.fillColor && !spec.backgroundPaint) ||
+    if (spec.type === 'shape' && (!spec.shape || !['rect', 'ellipse', ...(spec.nativePathInk ? ['path'] : [])].includes(spec.shape.kind) || spec.svg ||
+        spec.shape.arc || spec.shape.rotation ||
         !Number.isFinite(spec.shape.width) || !Number.isFinite(spec.shape.height) || spec.shape.width <= 0 || spec.shape.height <= 0 ||
         (spec.absolute && !spec.backgroundPaint && (spec.absolute.h !== 'MIN' || spec.absolute.v !== 'MIN' ||
           !Number.isFinite(spec.absolute.left) || !Number.isFinite(spec.absolute.top)))))
       throw Error('NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED');
+    if ((spec.gradient || (spec.type === 'shape' && spec.lits?.fillColor)) && !nativePaintSpecSupported(spec))
+      throw Error('NATIVE_CONTRACT_DRAFT_PAINT_UNQUALIFIED');
     spec.nativeContractPart = { contractRevision: projection.contractRevision, variant, specPath };
     if (library) {
       if (spec.visibleProp && !component.boolProps.some(p => p.property === spec.visibleProp && p.default === spec.visibleDefault))
@@ -171,7 +178,7 @@ export function annotateNativeContractProjection<P extends NativeContractDraftPr
       }
     }
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
-    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar,
+    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.instanceSize?.varName, spec.instanceInk?.varName, spec.svgPaintVar,
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
       if (name) boundNames.add(name);
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i], spec, insideCallerSlot));

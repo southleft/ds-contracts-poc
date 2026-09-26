@@ -5,7 +5,7 @@
   "nodeId": "120:1996",
   "mode": "exact",
   "variantCount": 5,
-  "contractSha256": "0e57ede8e53ac2a80e2a3f94c0625c6281f0045faf231d3c829788160544b9fb",
+  "contractSha256": "67d624f35fdf2e154227f313f23294e34e66b88f280882797468ff3fbc666a65",
   "carriage": {
     "carried": 55,
     "named": 28,
@@ -230,14 +230,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Label/Label.module.css": "f58c55b234012683dded75e2b35f350468232181b0d490acb1e0c6bdcf24219f",
+    "react/Label/Label.module.css": "d729bf8d2c2e74b361f971c496e4bddca084e508f9533f10fce655eca0a27dc1",
     "react/Label/Label.stories.tsx": "e52aaebdfa8ae54ce85fde1fe07ca94ee26c12a1aa2b8cd4f7588a74018fb722",
     "react/Label/Label.tsx": "78795d103551c0019c2e9516df0ad4b19bbdee87b34eec100e027ce71c4f98c1",
     "react/Label/index.ts": "498c66ade27de7f9d9a64360a336165960db825a5136aee5141c5fc57dc8b3d6",
     "wc/flowbite-label.ts": "c93717e4340c2d5156e8292ca2cb0d41d80e7d52d3b893209320287e23639301",
-    "wc/flowbite-label.css.ts": "314e3d96ebfc790d3b822569d9835ed21f12fb4912afd80e1b51a54535db4367",
+    "wc/flowbite-label.css.ts": "012e55aeb666ce1b99478a2f18fdd82ce1e996dff1efb960735582312c215567",
     "wc/flowbite-label.demo.html": "4b7aabe6e5584fea5190fc33692a916c6d52624dd203bab9933d8eea2c6e179b",
     "wc/flowbite-label.custom-elements.json": "1596f2d72ed5fc76c4e213c88170827a0f4801167076bdaeab26e44a53f1a880"
   },
-  "notesCount": 30
+  "notesCount": 31
 }

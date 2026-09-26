@@ -139,6 +139,7 @@ test('a native pin names the sealed state and appearance records and refuses fai
 test('update namespace comes from the exact sealed creation archive even after source and latest observation move', t => {
   const f = fixture(); t.after(() => rmSync(f.root, { recursive: true, force: true }));
   const record = readReactStateApiNativeRecord(f.root, f.request);
+  assert(f.request.source.anchor.kind==='react-root-draft');
   const pin: ReactStateApiNativeRequest = { version: 1, kind: 'react-state-api-draft',
     initial: { version: 1, kind: 'react-initial-draft', anchor: f.request.source.anchor, caseId: f.initial.caseId,
       observation: { id: f.initial.id, inventorySha256: 'a'.repeat(64), reportSha256: 'b'.repeat(64) } }, observation: record.pin };

@@ -1,3 +1,4 @@
+import {hasComponentGrow} from '@ds-contracts/schema';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '@ds-contracts/schema';
 /**
  * Contract → vanilla Custom Element — a pure emitter over the SAME contract
@@ -230,12 +231,20 @@ function layoutOverrideDecls(o: {
   direction?: string;
   align?: string;
   justify?: string;
-}): string[] {
+  grow?: boolean;
+  growBasis?: "zero";
+}, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
+  if (o.grow !== undefined || o.growBasis !== undefined) {
+    const grow = o.grow ?? base?.grow;
+    const zero = (o.growBasis ?? base?.growBasis) === 'zero';
+    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`, `min-width: ${grow ? '0' : 'auto'}`);
+    if (zero) d.push(`min-height: ${grow ? '0' : 'auto'}`);
+  }
   return d;
 }
 
@@ -253,7 +262,7 @@ function layoutDecls(part: Part): string[] {
     if (part.layout?.align) d.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
     if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
   }
-  if (part.layout?.grow) d.push('flex: 1 1 auto', 'min-width: 0');
+  if (part.layout?.grow) d.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
   return d;
 }
 
@@ -497,7 +506,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   // equal specificity, source order, exactly like emit-html).
   if (root.layoutByProp) {
     for (const [value, override] of Object.entries(root.layoutByProp.map)) {
-      rule(rootWithEnum(root.layoutByProp.prop, value), layoutOverrideDecls(override));
+      rule(rootWithEnum(root.layoutByProp.prop, value), layoutOverrideDecls(override, root.layout));
     }
   }
   for (const { selector, decls } of pairRules) rule(selector, decls);
@@ -557,7 +566,14 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   const usedAnimations = new Set<string>();
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
-    if (part.component) continue; // instances style themselves in their own shadow root
+    if (part.component) {
+      if (hasComponentGrow(part)) {
+        rule(partSel(name), layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis}));
+        for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {}))
+          rule(`${rootWithEnum(part.layoutByProp!.prop, value)} ${partSel(name)}`, layoutOverrideDecls(override, part.layout));
+      }
+      continue;
+    }
     const decls: string[] = layoutDecls(part);
     if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
     if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
@@ -721,7 +737,7 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     }
     if (part.layoutByProp) {
       for (const [value, override] of Object.entries(part.layoutByProp.map)) {
-        rule(`${rootWithEnum(part.layoutByProp.prop, value)} ${partSel(name)}`, layoutOverrideDecls(override));
+        rule(`${rootWithEnum(part.layoutByProp.prop, value)} ${partSel(name)}`, layoutOverrideDecls(override, part.layout));
       }
     }
     emitStylesWhen(part, partSel(name), false);
@@ -1079,7 +1095,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       const sample = JSON.stringify(part.repeat.sample);
       const inner =
         `\${((${acc(part.repeat.itemsProp)} ?? ${sample}) as Array<Record<string, unknown>>)` +
-        `.map((__rec) => \`<${depTag}${fixed}${fieldAttrs}>${childText}</${depTag}>\`).join('')}`;
+        `.map((__rec) => \`<${depTag}${hasComponentGrow(part) ? partAttr : ''}${fixed}${fieldAttrs}>${childText}</${depTag}>\`).join('')}`;
       return visibleWrap(part, inner);
     }
 
@@ -1595,6 +1611,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     if (c.selection) throw new Error(`WEB_COMPONENT_SELECTION_UNSUPPORTED:${c.id}: selection behavior is implemented for React`);
     if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
     for (const w of walkAnatomy(c)) {
+      if (w.part.absolutePlacement || w.part.absolutePlacementByCombination) throw new Error('WEB_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       if (w.part.component?.initialProps) throw new Error('WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
       if (w.part.component && w.part.parts !== undefined) throw new Error('WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED');
       const ids = [...(w.part.component ? [w.part.component.id] : []), ...(w.part.slot?.defaultContent ?? []).map(i => i.id)];

@@ -1,0 +1,254 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "alignment",
+      "type": {
+        "enum": [
+          "left",
+          "right"
+        ]
+      },
+      "default": "left",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "alignment",
+          "values": {
+            "left": "left",
+            "right": "right"
+          }
+        },
+        "code": {
+          "prop": "alignment"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "error",
+          "disabled",
+          "hover",
+          "focus"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "state",
+          "values": {
+            "default": "default",
+            "error": "error",
+            "disabled": "disabled",
+            "hover": "hover",
+            "focus": "focus"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "layoutByProp": {
+        "prop": "state",
+        "map": {
+          "error": {
+            "direction": "column",
+            "align": "start"
+          }
+        }
+      },
+      "parts": {
+        "contentTop": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "layoutByProp": {
+            "prop": "alignment",
+            "map": {
+              "right": {
+                "direction": "row-reverse"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{spacing.100}"
+          },
+          "parts": {
+            "checkboxIcon": {
+              "component": {
+                "id": "ds.selection-unchecked-size-large-state-default-error-false",
+                "props": {
+                  "error": {
+                    "prop": "state",
+                    "map": {
+                      "default": "false",
+                      "error": "true",
+                      "disabled": "false",
+                      "hover": "false",
+                      "focus": "false"
+                    }
+                  },
+                  "selection": "unchecked",
+                  "size": "{size}",
+                  "state": {
+                    "prop": "state",
+                    "map": {
+                      "default": "default",
+                      "error": "default",
+                      "disabled": "disabled",
+                      "hover": "hover",
+                      "focus": "focus"
+                    }
+                  }
+                }
+              }
+            },
+            "checkboxLabel": {
+              "tokensByProp": {
+                "prop": "state",
+                "map": {
+                  "disabled": {
+                    "color": "{text.disabled}"
+                  }
+                }
+              },
+              "declared": {
+                "text-align": "left"
+              },
+              "text": "Checkbox label",
+              "tokens": {
+                "color": "{text.primary}",
+                "font-size": "{imported.checkbox.content-top-checkbox-label.font-size.{size}}",
+                "font-weight": "{imported.checkbox.content-top-checkbox-label.font-weight}",
+                "line-height": "{imported.checkbox.content-top-checkbox-label.line-height.{size}}"
+              }
+            }
+          }
+        },
+        "errorText": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "literals": {
+            "width": "100%"
+          },
+          "tokens": {
+            "gap": "{spacing.050}",
+            "padding-left": "{imported.checkbox.error-text.padding-left.{alignment}.{size}}"
+          },
+          "parts": {
+            "Icon": {
+              "component": {
+                "id": "ds.size-xsmall",
+                "props": {
+                  "iconSwap": "184:89713",
+                  "size": "xsmall"
+                }
+              },
+              "visibleWhen": {
+                "prop": "state",
+                "equals": "error"
+              }
+            },
+            "errorText2": {
+              "declared": {
+                "text-align": "left"
+              },
+              "text": "error text",
+              "tokens": {
+                "color": "{text.danger.default}",
+                "font-size": "{body.font-small}",
+                "line-height": "{body.line-height-small}",
+                "font-weight": "{imported.checkbox.error-text-error-text.font-weight}"
+              },
+              "visibleWhen": {
+                "prop": "state",
+                "equals": "error"
+              }
+            }
+          },
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "error"
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "tokensByProp": {
+        "prop": "state",
+        "map": {
+          "error": {
+            "gap": "{spacing.025}"
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{spacing.100}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Checkbox",
+        "export": "Checkbox"
+      }
+    }
+  }
+}

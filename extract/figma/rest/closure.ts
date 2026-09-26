@@ -1,6 +1,6 @@
 /**
  * DEPENDENCY CLOSURE for the REST import — "a REST import follows its
- * instances".
+ * instances and applied swaps".
  *
  * RULE. Every component set referenced by an INSTANCE inside an imported set
  * (transitively) that lives in the SAME file is fetched and mapped into the
@@ -34,6 +34,11 @@
  * contract"), so a set referenced only from INSIDE an instance subtree has no
  * reference in the dump to resolve; it is reached through the child's own
  * definition when the child is followed (transitivity), or not at all.
+ * Applied INSTANCE_SWAP properties are additional references on each mapped
+ * instance: the host may select content absent from the child's defaults.
+ * Follow those exact targets, never TEXT values that resemble node IDs or the
+ * unused preferred-values menu. Fetching a target does not by itself carry the
+ * host's slot override into a contract; that remains the proposer's decision.
  *
  * ORDER. The merged response lists sets DEPENDENCIES FIRST (a post-order walk
  * from the requested ids, each set's targets visited in id order) because the
@@ -134,8 +139,8 @@ interface InstanceRef {
   nodePath: string;
 }
 
-/** The INSTANCE nodes the mapper maps — never descending into an instance —
- *  with the same node path spelling (`Set:Variant/child/…`). */
+/** Mapped instance mains and their applied swaps; never inherited descendants.
+ *  Swap locations extend the node path with the exact property key. */
 export function mappedInstanceRefs(doc: RestNode): InstanceRef[] {
   const out: InstanceRef[] = [];
   const walk = (node: RestNode, nodePath: string) => {
@@ -144,6 +149,17 @@ export function mappedInstanceRefs(doc: RestNode): InstanceRef[] {
         componentId: (node as { componentId?: string }).componentId,
         nodePath,
       });
+      for (const key of Object.keys(node.componentProperties ?? {}).sort()) {
+        const value = node.componentProperties![key]!;
+        if (value.type !== "INSTANCE_SWAP") continue;
+        out.push({
+          componentId:
+            typeof value.value === "string" && value.value !== ""
+              ? value.value
+              : undefined,
+          nodePath: `${nodePath}/componentProperties[${JSON.stringify(key)}]`,
+        });
+      }
       return;
     }
     for (const child of node.children ?? [])

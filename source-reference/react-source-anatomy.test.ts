@@ -4,7 +4,7 @@ import {mkdtempSync, writeFileSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {readReactSourceProgram} from './react-source-program.js';
-import {linkReactSourceAnatomy} from './react-source-anatomy.js';
+import {linkReactSourceAnatomy,reactCompositionInstances} from './react-source-anatomy.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import type {ReactOwnership} from './react-ownership.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
@@ -33,6 +33,111 @@ export function Deep({children}:{children?:string}){return <section>Heading<div/
   return {root,program,source,node,tree,ownership};
  }catch(error){rmSync(root,{recursive:true,force:true});throw error;}
 }
+
+test('same-host delegation preserves physical ownership and collapses only proved implementation boundaries',()=>{
+ const f=fixture();try{
+  writeFileSync(path.join(f.root,'delegated.tsx'),`
+declare global { namespace JSX { interface Element{} interface IntrinsicElements{section:any;button:any;div:any} } }
+export function Public(props:{children?:string}){return <Frame {...props}/>}
+export function Frame(props:{children?:string}){return <Leaf {...props}/>}
+export function Leaf(props:{children?:string}){return <section {...props}/>}
+export function Action(props:{children?:string}){return <button {...props}/>}
+`);
+  const program=readReactSourceProgram(f.root,['delegated.tsx'],{includeJsxDependencies:true});
+  assert.deepEqual(program.problems,[]);
+  assert.ok(program.components.every(c=>c.implementation==='source-checked'));
+  const source=(name:string)=>{const c=program.components.find(c=>c.exportName===name)!;return {module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};};
+  const tree=f.node('section',[{t:'el',el:f.node('button',[{t:'text',v:'Caller'}])}]);
+  const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],components:[
+   {id:'public',source:source('Public'),props:{children:{kind:'object'}},roots:['']},
+   {id:'frame',parent:'public',source:source('Frame'),props:{children:{kind:'object'}},roots:['']},
+   {id:'leaf',parent:'frame',source:source('Leaf'),props:{children:{kind:'object'}},roots:['']},
+   {id:'action',parent:'leaf',source:source('Action'),props:{children:'Caller'},roots:['0']},
+  ],nodes:[{path:'',tag:'section',nearestComponent:'leaf',createdBy:'leaf'},
+   {path:'0',tag:'button',nearestComponent:'action',createdBy:'action'}],problems:[]};
+  const before=structuredClone({program,ownership,tree});
+  const result=linkReactSourceAnatomy(program,ownership,tree),root=result.instances[0];
+  assert.equal(result.status,'linked');assert.equal(root.roots[0].correspondence,'delegated-host');
+  assert.deepEqual(root.rootDelegation,{instanceIds:['public','frame','leaf'],hostOwner:'leaf',forwardsChildren:true});
+  assert.equal(root.content,'caller-slot');assert.deepEqual(root.callerContentPaths,['0']);
+  assert.deepEqual(root.sourceOwnedPaths,[]);assert.deepEqual(root.runtimeDependentPaths,[]);
+  assert.deepEqual(root.dependencies,[{instanceId:'frame',roots:[''],placement:'root-delegation'}]);
+  assert.deepEqual(reactCompositionInstances(result).map(i=>i.instanceId),['public','action']);
+  assert.deepEqual(result.instances[2].sourceOwnedPaths,['']);
+  assert.equal(result.instances[3].parentInstanceId,'leaf','logical filtering never rewrites physical creators or parents');
+  assert.deepEqual({program,ownership,tree},before);
+  for(const mutate of [
+   (p:typeof program,_o:ReactOwnership)=>{delete p.components[0].implementation;},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[0].implementation='unresolved';},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[0].problems.push('component-return-control-flow-unresolved');},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[0].componentReferences=[];},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[0].root.definition!.sourceSha256='b'.repeat(64);},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[0].root.definition!.span.end++;},
+   (p:typeof program,_o:ReactOwnership)=>{p.components[1].implementation='unresolved';},
+   (p:typeof program,o:ReactOwnership)=>{o.components[1].source=source('Leaf');},
+   (p:typeof program,o:ReactOwnership)=>{o.components.push({...o.components[1],id:'extra'});},
+   (p:typeof program,o:ReactOwnership)=>{o.components[2].parent='public';},
+   (p:typeof program,o:ReactOwnership)=>{o.nodes[0].createdBy='public';},
+   (p:typeof program,o:ReactOwnership)=>{o.nodes[0].nearestComponent='frame';},
+  ]){
+   const p=structuredClone(program),o=structuredClone(ownership);mutate(p,o);
+   const changed=linkReactSourceAnatomy(p,o,tree);
+   assert.notEqual(changed.instances[0]?.roots[0].correspondence,'delegated-host');
+   assert.notEqual(changed.instances[0]?.content,'caller-slot');
+  }
+  for(const mutate of [
+   (p:typeof program,_o:ReactOwnership)=>{p.components[2].children={kind:'unresolved',reason:'helper-content-unproved'};},
+   (p:typeof program,o:ReactOwnership)=>{o.components[1].props.children='Replacement';},
+   (p:typeof program,o:ReactOwnership)=>{o.components[1].props.children=null;delete o.components[0].props.children;},
+  ]){
+   const p=structuredClone(program),o=structuredClone(ownership);mutate(p,o);
+   const changed=linkReactSourceAnatomy(p,o,tree);
+   assert.equal(changed.instances[0].roots[0].correspondence,'delegated-host','root proof is separate from content proof');
+   assert.notEqual(changed.instances[0].content,'caller-slot');
+   assert.equal(changed.instances[0].rootDelegation?.forwardsChildren,false);
+   assert.ok(reactCompositionInstances(changed).some(i=>i.instanceId==='frame'));
+   assert.equal(projectReactRootVisual(p,o,tree).roots[0].status,'refused');
+  }
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
+
+test('mutated public implementations cannot borrow an earlier delegated body',()=>{
+ const f=fixture();try{
+  const source=`declare global{namespace JSX{interface Element{} interface IntrinsicElements{section:any}}}
+export function Leaf(props:{children?:string}){return <section {...props}/>}
+export let Public=(props:{children?:string})=><Leaf {...props}/>;
+Public=props=><section>Replaced</section>;`;
+  writeFileSync(path.join(f.root,'changed.tsx'),source);
+  const program=readReactSourceProgram(f.root,['changed.tsx'],{includeJsxDependencies:true});
+  assert.deepEqual(program.problems,[]);
+  const c=program.components.find(c=>c.exportName==='Public')!;
+  assert.equal(c.implementation,'unresolved');
+  assert.ok(c.problems.includes('component-implementation-mutation-or-escape'));
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
+
+test('delegation never turns an implementation with a nested slot into a flat root slot',()=>{
+ const f=fixture();try{
+  writeFileSync(path.join(f.root,'nested.tsx'),`declare global{namespace JSX{interface Element{} interface IntrinsicElements{section:any;div:any}}}
+export function Public(props:{children?:string}){return <Inner {...props}/>}
+export function Inner(props:{children?:string}){return <section><div>{props.children}</div></section>}`);
+  const program=readReactSourceProgram(f.root,['nested.tsx'],{includeJsxDependencies:true});
+  assert.deepEqual(program.problems,[]);
+  const source=(name:string)=>{const c=program.components.find(c=>c.exportName===name)!;return {module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};};
+  const tree=f.node('section',[{t:'el',el:f.node('div',[{t:'text',v:'Caller'}])}]);
+  const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],problems:[],components:[
+   {id:'public',source:source('Public'),props:{children:'Caller'},roots:['']},
+   {id:'inner',parent:'public',source:source('Inner'),props:{children:'Caller'},roots:['']},
+  ],nodes:[{path:'',tag:'section',nearestComponent:'inner',createdBy:'inner'},{path:'0',tag:'div',nearestComponent:'inner',createdBy:'inner'}]};
+  const linked=linkReactSourceAnatomy(program,ownership,tree);
+  assert.equal(linked.status,'linked');assert.equal(linked.instances[1].content,'nested-caller-slot');
+  assert.equal(linked.instances[0].roots[0].correspondence,'delegated-host');
+  assert.equal(linked.instances[0].rootDelegation?.forwardsChildren,false);
+  assert.notEqual(linked.instances[0].content,'caller-slot');
+  assert.equal(reactCompositionInstances(linked).length,2);
+  assert.equal(projectReactRootVisual(program,ownership,tree).roots[0].status,'refused');
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
 
 test('nested source slots keep their owned shell, exact host paths and caller dependencies separate',()=>{
  const f=fixture();try{
@@ -122,5 +227,44 @@ test('changed identity, missing owners, contradictory roots and cyclic parents r
   const refused=linkReactSourceAnatomy(f.program,overlap,f.tree);
   assert.equal(refused.status,'refused');assert.deepEqual(refused.instances,[]);
   assert.deepEqual(refused.problems,['react-anatomy-roots-overlap']);
+ }finally{rmSync(f.root,{recursive:true,force:true})}
+});
+
+
+test('outside source ancestors remain explicit without becoming generated roots or erasing caller creators',()=>{
+ const f=fixture();try{
+  f.ownership.components[0].parent='context';
+  f.ownership.nodes[2].createdBy='context';
+  f.ownership.ancestors=[{id:'context',source:f.source('Box'),props:{children:{kind:'object'}},hostAncestor:{tag:'section',distance:2}}];
+  const before=structuredClone(f.ownership),linked=linkReactSourceAnatomy(f.program,f.ownership,f.tree);
+  assert.equal(linked.status,'linked',JSON.stringify(linked.problems));
+  assert.deepEqual(linked.ancestors,f.ownership.ancestors);
+  assert.equal(linked.instances.length,2,'outside contexts are never projected as selected roots');
+  assert.equal(linked.instances[0].ancestorInstanceId,'context');
+  assert.equal(linked.instances[0].parentInstanceId,undefined);
+  assert.deepEqual(linked.instances[0].callerContentPaths,['0','1']);
+  assert.equal(linked.instances[1].parentInstanceId,'box');
+  assert.deepEqual(f.ownership,before);
+  for(const mutate of [
+   (o:ReactOwnership)=>{o.ancestors![0].source.sourceSha256='bad';},
+   (o:ReactOwnership)=>{o.ancestors![0].hostAncestor.distance=0;},
+   (o:ReactOwnership)=>{o.ancestors![0].hostAncestor.distance=1.5;},
+   (o:ReactOwnership)=>{o.ancestors![0].hostAncestor.tag='button';},
+   (o:ReactOwnership)=>{o.ancestors![0].source=f.source('Wrapped');Object.assign(o.ancestors![0].hostAncestor,{tag:{}});},
+   (o:ReactOwnership)=>{o.ancestors![0].parent='context';},
+   (o:ReactOwnership)=>{o.ancestors![0].parent='box';},
+   (o:ReactOwnership)=>{o.ancestors![0].parent='missing';},
+   (o:ReactOwnership)=>{o.ancestors!.push(structuredClone(o.ancestors![0]));},
+   (o:ReactOwnership)=>{o.ancestors![0].id='box';},
+   (o:ReactOwnership)=>{delete o.ancestors;},
+   (o:ReactOwnership)=>{delete o.components[0].parent;},
+   (o:ReactOwnership)=>{o.nodes[2].nearestComponent='context';},
+   (o:ReactOwnership)=>{Object.assign(o.ancestors![0],{roots:['']});},
+   (o:ReactOwnership)=>{o.ancestors!.push({...structuredClone(o.ancestors![0]),id:'unused'});},
+   (o:ReactOwnership)=>{o.ancestors![0].parent='outer';o.ancestors!.push({...structuredClone(o.ancestors![0]),id:'outer',parent:undefined,hostAncestor:{tag:'section',distance:1}});},
+  ]){
+   const changed=structuredClone(f.ownership);mutate(changed);const refused=linkReactSourceAnatomy(f.program,changed,f.tree);
+   assert.equal(refused.status,'refused',JSON.stringify(changed));assert.deepEqual(refused.instances,[]);assert.equal(refused.ancestors,undefined);
+  }
  }finally{rmSync(f.root,{recursive:true,force:true})}
 });

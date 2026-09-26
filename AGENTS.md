@@ -37,6 +37,10 @@ are only the non-obvious things.
   `npm run prep:schema` (compiles `packages/schema` → `dist`). The startup update
   script builds it; if you re-clone or wipe `packages/schema/dist`, re-run
   `npm run prep:schema`.
+- **Playground startup needs schema and core builds.** Run `npm run prep:core`
+  after `npm ci` on a fresh checkout; it builds both in order. Schema alone leaves
+  Vite’s server config unable to resolve `@ds-contracts/core`. The client aliases
+  in the Vite config do not cover dependencies while loading that config.
 - **The gates need all four package builds on a cold tree**, in this order:
   `npm --prefix packages/schema run build`, `npm --prefix packages/core run build`,
   `npm --prefix packages/cli run build`,

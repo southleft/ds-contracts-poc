@@ -4608,7 +4608,23 @@ observer in `scripts/design-consumer-check.ts`, retaining these known false
 positive and false negative cases in the limitation ledger.
 
 
-## D.42 A Figma text box that sizes itself to its text is a whole number of pixels wide; the browser's is fractional — CLOSED for React, React inline and web components where `calc-size()` is supported; OPEN on static HTML and in browsers without it
+## D.42 Captured auto-width text uses an intrinsic whole-pixel box; bounded text and unsupported browsers remain unqualified
+
+**Current sizing policy, 2026-09-23.** Captured `WIDTH_AND_HEIGHT` text now
+uses max-content sizing and does not shrink or acquire an implicit parent-width
+ceiling. Direct desktop probes under both row and column parents confirmed
+that native HUG text overflows a constrained parent; only explicit maximums
+or Fill authorize wrapping. This supersedes the older implicit-wrapping
+policy below. Authored CSS maximums and ordinary unflagged runtime wrapping
+remain intact. Native fractional maximums remain a separate gap: a 120.5px
+maximum produced a 121px HUG text box, while Fill produced 120.5px and changed
+the native text mode to HEIGHT. No tolerance, source contract or grade changed.
+The installed application-generated package restores two empty Stretch Tabs
+states from 285x60 to 285x40, with all six root sizes matching a fresh native
+read. Ten of twelve image pairs meet the unchanged 5% limit; two empty Stretch
+states still fail on black at 6.026% and 7.974%. The retained native preparation
+is stale: its saved graph is verified, but current-source and V1 qualification
+remain open. Evidence: `private/text-sizing-v129/`.
 
 **Historical integration measurement, 2026-09-19.** After merging the current
 state-axis and consumer-check changes, fresh REST reads and newly generated,
@@ -4644,13 +4660,12 @@ carries, and are never written. ABSENT is the meaning every contract already had
 the element as wide as its fractional browser advance — so no existing contract or
 emitted byte changes; `figma:fresh` and `generated:fresh` are green.
 
-**Form** (revised after the adversarial review — see below). The code surfaces
-give the text element the same box Figma draws:
+**Current form.** The code surfaces retain captured intrinsic sizing:
 
 ```
-inline-size: calc-size(fit-content, round(up, size, 1px));
+inline-size: calc-size(max-content, round(up, size, 1px));
 inline-size: calc-size(max-content, round(up, size - <letter-spacing>, 1px));  /* an owned tracked label */
-max-inline-size: 100%;        /* unless the part carries its own max-width */
+flex-shrink: 0;              /* no implicit parent-width ceiling */
 align-self: flex-start;       /* only under a flex column that would stretch it */
 ```
 
@@ -4660,21 +4675,16 @@ tracking variable and a block text run whose inline size is
 advance available for line breaking without including it in the layout box.
 An absent or empty text value contributes zero width. A default minimum of
 zero allows grid tracks to shrink; authored minimums remain authoritative.
-Untracked text retains the earlier `fit-content` rule. See D.93 for the
-measured wrapping defect, bounded enum support and remaining image failures.
+Untracked text now uses the same intrinsic max-content basis. See D.93 for
+tracking support and remaining image failures.
 
-`calc-size()` is the only CSS that can round an INTRINSIC size (a plain `round()`
-cannot take `fit-content`). `fit-content` is `min(max-content, max(min-content,
-available))`: a label that fits is its max-content box rounded up; a string that
-does not fit wraps at the available width exactly as it does without the fact.
-`max-inline-size: 100%` removes the one thing rounding can still do to a wrapped
-box — push a fractional available width (120.5 px) up by the remaining sub-pixel.
-A browser without `calc-size()` drops both outer and inner sizing declarations
-at parse or assignment. It retains the fractional, untrimmed browser advance;
-tracking and rounding can make this differ from Figma by more than a subpixel.
-The existing clamp and conditional start alignment still apply. No fallback
-Figma fidelity is claimed; both declarations use the same feature boundary. Logical
-properties, so a vertical or RTL writing mode rounds the axis the text runs along.
+`calc-size()` rounds an intrinsic size. A captured auto-width label keeps its
+natural width even when it extends beyond its parent; an authored maximum
+still constrains it. No implicit maximum or blanket `white-space: nowrap` is
+added. A browser without `calc-size()` drops both outer and inner sizing
+rules; it retains fractional advances and can wrap differently under a
+constraint. No fallback fidelity is claimed. Logical properties round the
+axis the text runs along.
 The declaration takes effect because every emitter renders a text part as its own
 element inside a parent it lays out as flex or grid (blockified), and an absolutely
 positioned one is blockified too; where that is not true the flag is refused (see
@@ -4758,14 +4768,13 @@ exists only where the writer set it). **It is NOT a fixed point in the other
 direction**, stated plainly: `createText` is born `WIDTH_AND_HEIGHT`, so every
 hugging text part of a FLAGLESS contract, written to a real canvas and read back,
 proposes the flag. code → canvas → code therefore adds the fact. That is the truth
-about the canvas (Figma has no fractional text box) and, with `fit-content`, it
-changes nothing but the sub-pixel box of a text that fits; checked: it churns no
-committed pin — the mock canvas the committed round-trip gates run on does not
-model the field, and no live round-trip receipt was re-recorded in this change.
+about the canvas. Adding the fact can now change constrained wrapping as well
+as fractional width: the round trip is not behaviorally neutral. The historical
+mock-canvas gates do not model the field; they are not proof of this live path.
 
 **Refused by name** (`validateContract`): the flag on a top-level root; on a part
 that owns no text (`text` / `content` / `textByProp`); beside a `width` /
-`inline-size` / `flex` / `flex-grow` / `flex-basis` channel, `layout.grow` or a
+`inline-size` / `flex` / `flex-grow` / `flex-shrink` / `flex-basis` channel, `layout.grow` or a
 truncation channel (`text-overflow`, `-webkit-line-clamp`, `line-clamp`) — a box
 that is sized, filled or truncated by a channel is not sized by its text; beside a
 per-variant / per-state `letter-spacing` overrides, or a placeholder token
@@ -4780,9 +4789,10 @@ anything but a px / em / rem length in any mode (a `%`, a unitless `0`, `normal`
 and a token when no values were supplied (the §D.39 shadow precedent). The schema
 spells only `"WIDTH_AND_HEIGHT"`.
 
-**Revised after an adversarial review (PR 132, same day; fix-then-merge).** Each
-finding was reproduced by the reviewer's probes and each fix re-measured with
-them in Chromium:
+**Historical wrapping policy (commit `16d427e1e`), superseded above.** The
+following browser-only observations did not establish native wrapping parity.
+The former PR132 attribution was incorrect; that PR changed the CI timeout.
+The measurements are retained as history, not the current sizing policy:
 
 - **H1 — `max-content` made runtime text non-wrapping.** The first cut spelled
   `calc-size(max-content, …)`, a definite, unwrappable box. On the shipped
@@ -4968,6 +4978,13 @@ byte-stable across runs (two live runs of Tabs: identical bytes). Code:
 `extract/figma/rest/closure.ts` (`followInstances`), wired through
 `importFromUrl({ closure })` in `fetch.ts`; the CLI turns it ON by default and
 `--no-closure` turns it off.
+
+Applied `INSTANCE_SWAP` property values on those mapped instances now also
+participate in this walk. A parent can select a component absent from the child's
+own default anatomy. The same same-file, remote, cap, cycle and ordering rules
+apply, and unresolved locations include the exact property key. Text that looks
+like a node ID and unused preferred values are not followed. This obtains the
+dependency; it does not by itself represent nested slot overrides (D.154).
 
 **What it records.** `_provenance.closure` = `{ rule: 'follow-instances', cap,
 requested: [{nodeId, name, type}], pulled: [{nodeId, name, type, round,
@@ -7447,6 +7464,11 @@ original responsive meaning is absent from the fixture. The older plugin dump
 also lacks a bounding box, so its historical reviewable inversion cannot
 establish measured fixed sizing. Neither input proves a lossless source return.
 
+This is the historical catalog path. The declared React Card caller supplies an
+explicit 360px width, and the current independent Radix cohort contains Button
+and Switch. This loss remains open; it is not evidence that the current React
+Card journey fails for the same reason.
+
 **AGENT decision, 2026-09-20.** Keep the measured fixed-root reader: a uniformly
 FIXED, non-FILL root retains its width binding, independently of any maximum.
 Correct the REST receipt's expected target to an independent native contract
@@ -8285,9 +8307,13 @@ and the previous failed consumer; never relabel old evidence as a new capture.
 ## D.99 Native root text templates still need an application journey
 
 Native fidelity remains unqualified. The live application caller measures
-**8.4314%** against the unchanged 5% limit; template updates and interrupted
-native recovery are still refused. The following evidence establishes bounded
-creation, return and consumer behavior without closing those gaps.
+**8.4314%** against the unchanged 5% limit. Color-only template updates now pass
+through the application, including conflict refusal, exact reverse and a live
+delivery interruption before `begin` followed by canvas settlement and an explicit
+fresh write. The current [acceptance ledger](CURRENT.md#v1-acceptance-evidence-2026-09-21)
+records that bounded evidence. Geometry-affecting updates, broader recovery cases
+and full visual qualification remain open. The following creation and return
+evidence does not qualify those gaps.
 
 **AGENT decision, integration review 2026-09-21:** when multiple typography
 properties share one source token, each observed property must match its
@@ -9059,19 +9085,6 @@ types keep string boolean spellings as enum values. The additive optional
 `instanceContent` field is REST-only; plugin dumps do not provide it. Admission uses
 the field's presence; older dumps keep the geometry-only path.
 
-A parent-controlled component swap is outside this static fallback. Its
-`mainComponent` property reference describes caller-supplied slot content; the
-currently selected child's private chrome cannot establish a fixed child
-definition. REST retains that reference and swap binding without projecting
-its internals into `instanceContent`. The full evaluation caught the missing
-boundary when a historical slot utility's dashed border entered the new
-supplemental projection and became a parent mapping degradation. A renamed
-synthetic instance now checks the boundary, and removing only its swap binding
-still reports the unsupported dashed stroke by name. This does not exempt
-ordinary observed content from mapping diagnostics or alter the frozen REST
-fixtures. To reverse this refinement, replace it with an independently verified
-model for dynamic slot content; do not freeze a selected instance as static.
-
 The fresh Altitude Tabs installed React consumer now renders two body-copy lines
 that the previous empty stub lost. It still fails the unchanged 5% black-background
 fidelity limit, loses the active tab appearance and the stretch variant's visible
@@ -9123,8 +9136,11 @@ to **5.24%**, and stretch measures **5.78%**. Both still fail the unchanged 5%
 limit. Stretch remains visually discarded, and default content width remains
 441 px against 438 px in Figma. Both source PNGs are byte-identical to those used
 before the change. Supplied consumer fonts still lack a verified source-font
-byte identity. This result does not qualify interaction, application delivery
-of the enum rule, the independent-family requirement, or V1.
+byte identity. The application now imports the same captured family through its
+JSON file chooser, displays the active underline and body content, and prepares
+the seven-component React package. The clean consumer installs an archive
+byte-identical to that download and reproduces the same failures. This result
+does not qualify interaction, the independent-family requirement, or V1.
 
 `core/repeated-enum-fields.test.ts` covers canonical labels, code-value aliases
 in rendered React, invalid fields/samples, parent-dependent choices, unknown
@@ -9132,11 +9148,127 @@ labels and same-name identity conflicts. The identity probe failed before the
 guard and passed afterward. The existing repeat check exercises all maintained
 surfaces. Original failures and the installed consumer evidence remain in
 `private/observed-instance-content-20260921/`, including `consumer-enum-v1/`.
+Application delivery and the installed package identity are recorded separately
+in `private/observed-content-app-20260921/enum-app-delivery-v1.json`. Integration
+required restarting the development server after its engine receipt changed
+and opening a fresh tab after the earlier tab retained a connection error.
 
 To reverse, remove enum fields from the array schema, proposer, validator and
 emitter type projections together. Restore named refusal of unsupported
 per-item enum choices and preserve all comparison evidence. Do not strip
 existing enum fields from saved contracts without reporting the incompatibility.
+
+
+## D.111 Primary-axis fill can vary with a prop
+
+**AGENT decision, 2026-09-21.** Primary-axis fill is item placement owned by
+its parent. The proposer reads each occurrence against that occurrence's parent
+direction. Complete enum-correlated differences become `layoutByProp.grow` on
+ordinary parts, slots and generated child instances, including repeated items.
+A filling default remains an explicit variant entry; other variants retain
+their intrinsic size. Siblings with different placement observations remain
+individual references. Unknown parent directions, uncorrelated observations,
+a conflicting layout axis and out-of-flow placement keep named refusals.
+
+The additive `growBasis: "zero"` fact distinguishes equal Figma fill allocation
+from existing contracts' content-basis growth. New captured primary-axis fill
+carries it with `grow: true`. React, inline React and HTML emit `flex: 1 1 0px`;
+the maintained Web Components projection applies it to the child host. Existing
+contracts with no basis keep their previous CSS. Native compilation resolves
+growth per variant before building each frame or instance. A legacy content
+basis still has no separate native ratio representation; this change does not
+qualify that historical approximation or arbitrary CSS flex shorthand.
+Native compilation now refuses explicit zero-basis growth when the requested
+primary-axis Fill cannot be preserved; see [D.138](#d138-zero-basis-growth-cannot-silently-become-native-hug).
+
+Placement on a child reference requires an ordinary generated single root.
+Retained runtimes, multiple roots, style/className API collisions and existing
+placement wrappers refuse. Zero-basis placement also refuses competing minimum
+size and flex declarations, preserving those facts rather than overriding them.
+Grid children, overlays and whole-pixel text boxes retain their existing
+conflict guards for the new per-variant channel. Component internals remain
+owned by the child contract.
+
+`core/variant-primary-fill.test.ts` checks real generated React and inline React:
+three intrinsically different labels occupy equal 200 px shares of a 600 px
+parent along either row or column, then return to their exact original sizes. It also checks native
+instance specifications, default variants, optional boolean selectors, differing
+sibling placement and refusals. These are engineering probes; they do not
+establish a live Figma or application outcome. The original captured Tabs family
+and successive consumer comparisons remain in
+`private/variant-primary-fill-20260921/`. The corrected CLI consumer now responds
+to Stretch; the discarded-variant failure is gone. The app then imported the
+unchanged captured family, visibly rendered its content and equal Stretch
+allocation, and prepared the seven-component archive. An isolated consumer
+installed byte-identical archive bytes and reproduced the CLI result: default
+black difference **5.24%**, Stretch **5.36%**, and a 441 px root against 439 px
+in Figma. These failed measurements used supplied Public Sans 2.001. A later
+controlled font-input check, with the same package, passes both image pairs
+and exact root dimensions; see D.112 for selection evidence and its limits.
+Application delivery is recorded in private
+`observed-content-app-20260921/grow-app-delivery-v1.json`. Interactive Tabs
+behavior and live native execution of this placement rule remain unqualified.
+No threshold, scorer, source asset or protected evidence is changed.
+
+To reverse, remove the optional placement fields, their proposer carriage and
+all emitter projections together, restoring named refusal of partial fill.
+Reject saved contracts using the removed fields by name. Preserve the recorded
+failed and corrected consumers; do not silently drop the explicit zero basis
+or reinterpret older contracts.
+
+## D.112 Font names do not identify font bytes
+
+**AGENT decision, 2026-09-21.** A consumer may explicitly supply fonts selected
+from independently captured source names and weights. Selection must be recorded
+before scoring. A lower image difference cannot select the font or authenticate
+the bytes Figma used. Keep every earlier measurement and report the supplied
+assets as inputs, including their hashes and the remaining identity uncertainty.
+
+The Tabs source REST observation names PublicSans-Regular (400),
+PublicSans-Medium (500) and PublicSans-SemiBold (600). The locally installed
+static files match those three PostScript names and weights and report version
+1.007. The earlier consumer used a variable Public Sans 2.001 asset. REST does
+not expose the source font version or bytes. Exactly the three matching static
+files were selected and hashed before the new run; no score-based font search
+was performed.
+
+The same application-generated archive, SHA-256
+`8825be77486fb6fbe5ff011111e8b6104c8db07747d4ef336ebb7ecca7e58023`, installs
+unchanged in a clean consumer with these explicitly supplied fonts. Default
+measures **0.4142% white / 3.7404% black**; Stretch measures
+**0.0155% white / 3.3392% black**. Both pairs pass the unchanged 5% limit with
+recorded origins and a common unmasked crop. Both root boxes match Figma
+exactly at **439 × 176 px**. The default's nonzero-alpha content width still
+differs by one pixel (439 versus 438); exact pixel identity is not claimed.
+Stretch changes geometry, and the array-content probe renders all three items.
+Native PNGs and the captured file version are identical to the prior failed run;
+the generated package and scorer are unchanged.
+
+This is a bounded macOS consumer result for two captured appearances. It does
+not qualify keyboard interaction, tab-panel switching, accessibility, instance
+swaps, Linux rendering, source-font byte identity, live native placement or the
+complete independent-family journey. No other component's failing score is
+superseded by this result. Raw source metadata, the pre-measurement selection,
+hashed font manifest, failed and successful receipts, and visible comparisons
+remain in private `tabs-font-provenance-20260921-v1/` and
+`tabs-font-review-20260921-v1/`.
+
+To reverse the consumer input choice, rerun the same archive with the preserved
+2.001 manifest and keep the new receipt separately. Do not change generated CSS,
+source designs, image framing or the scorer to imitate the alternate font.
+If the source's actual font bytes later become available, compare their hashes
+and create a fresh measurement; never rewrite these receipts as authenticated
+source-font evidence.
+
+A separate check of the final app-delivered standalone Tab archive
+(`5866d6e8…627d508`) selected its two source-named static faces before scoring.
+All ten source PNGs and package bytes remain unchanged. The new consumer still
+passes only **8/10** image pairs: unselected rest and pressed remain at
+**12.5641% black**, with exact root dimensions. The changed font inputs alter
+glyph pixels but do not resolve this failure. The earlier static-font probe
+used an older package and remains preserved separately. Evidence is in private
+`tab-font-provenance-20260921-v1/`; this result rules out the specific supplied
+font-version substitution as a fix, not every possible font or shaping cause.
 
 ## D.113 A larger caller inventory needs a larger observation
 
@@ -9817,6 +9949,7 @@ This correction does not qualify native delivery or the full V1 journey.
 To reverse, remove the nested inline reset and restore the named visual gap;
 retain the browser comparison and regenerate the plugin engine receipt.
 
+
 ## D.130 A root without finite style props needs an observed baseline
 
 **AGENT decision, 2026-09-22.** An authored nested-panel source passed the
@@ -10158,8 +10291,1358 @@ journal. Existing rich-value and write-during-display refusal behavior is retain
 full authenticated record reads. Preserve all journals and measurement evidence;
 do not replace the response-scoped projections with persistent authorization.
 
+## D.137 Observed left alignment and inside strokes must survive import
 
-## D.137 Visibility must preserve other property bindings
+**AGENT decision — 2026-09-22.** A fresh Tab import still fails two text
+comparisons. Both Figma readers previously dropped explicit LEFT alignment,
+although browser text alignment inherits and button user-agent styles center
+it. The readers now retain that observation, and a uniform observed LEFT
+becomes declared `text-align: left`. Missing facts are not converted to LEFT;
+partial, conflicting and invalid alignment stays unclaimed with a named note
+where an observation cannot carry. No component-name rule is involved.
+
+The same reimport exposed a focus-border regression: REST omitted explicit
+INSIDE stroke alignment, which the guarded replacement of resting per-side
+widths with a uniform state border requires on both observations. REST now
+preserves explicit INSIDE beside a captured stroke. Missing alignment remains
+missing, and OUTSIDE/CENTER retain the route's named limitation. The state
+border guard is unchanged. REST grammar 1.43 and plugin grammar 1.47 identify
+the changed observations; old captures are not rewritten.
+
+With the same source version, hashed fonts and unchanged scorer, the fresh
+baseline passes 6/10 image pairs; the corrected generated clean consumer passes
+8/10 and matches all ten root dimensions. Both focus borders are restored.
+Unselected rest and pressed text improve from 12.56% to 11.67% on black and
+still fail the 5% limit. Browser inspection confirms the label starts at its
+observed left edge. The subsequent application rehearsal loads a fresh normal
+REST import, prepares the library and completes a browser download. The clean
+consumer installs the same archive bytes and reproduces 8/10 image pairs and
+all ten exact root dimensions. Repeating the unchanged import retains one
+workspace entry, clears the prior download and prepares identical archive bytes.
+A provenance-incomplete diagnostic dump first
+refuses by name; it is preserved. This does not establish font-byte identity,
+native-return qualification or full V1 acceptance. Historical held-out receipt
+integration remains unresolved; the candidate is not release-qualified.
+Evidence: `private/tab-left-alignment-20260922-v99/` and
+`private/tab-alignment-app-20260922-v100/` in the working repository.
+Regression checks exercise both readers, browser inheritance and direction,
+missing/conflicting alignment and the unchanged state-border refusals.
+
+**Reversal:** revert the readers and alignment carrier together, restore the
+named loss in current documentation, and regenerate dump embedding and engine
+receipt. Preserve all before/after artifacts and keep the explicit INSIDE
+requirement for state borders; never infer missing alignment to regain a pass.
+
+## D.138 Zero-basis growth cannot silently become native Hug
+
+**AGENT decision — 2026-09-23.** An explicit `growBasis: "zero"` requests
+allocation from a zero basis. When the native compiler cannot give that child
+primary-axis Fill, substituting Hug drops the requested layout rule. Compilation
+now stops with `FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED`, identifying the contract,
+variant, parent and child. Both row and column allocation are checked, including
+repeated instances, slots and a competing declared child size. The check runs
+before script emission or native operation reservation. React generation remains
+available. Definite native allocation and legacy content-basis behavior retain
+their existing representation; this does not qualify all intrinsic layouts.
+
+The retained Tabs comparison exposed the failure: two empty Stretch variants
+have unequal native Hug widths and equal React widths. Their failed image
+measurements are preserved. Refusing another lossy conversion is a coverage
+gap, not a fidelity pass or completed V1 journey. The generated React diagnostic
+also demonstrates the rule with unnamed geometry: intrinsically 30px and 90px
+children divide a 120px container into 60px each. A Hug substitution would lose
+that allocation. Fixed-size row and column controls remain supported.
+
+Figma documents that Fill children prevent Hug on the same axis, and that
+fractional Grid tracks are invalid on a Hug axis. Grid is therefore not a
+supported replacement for this intrinsic allocation. See the official
+[auto-layout sizing guide](https://help.figma.com/hc/en-us/articles/360040451373-Explore-auto-layout-properties)
+and [GridTrackSize reference](https://developers.figma.com/docs/plugins/api/GridTrackSize/).
+No sample width, hidden measurement node, named-component rule or comparison
+tolerance change is introduced. The newer native auto-layout version has not
+been qualified by this change.
+
+The application refuses preparation of the unchanged Tabs archive with this
+named reason, including on retry, before reserving an operation. Its React
+download remains byte-identical, and all existing native journals remain
+unchanged. The retained six-state native output still opens with the previous
+source-staleness warning. These are application refusal and preservation
+checks, not a fresh native read or a visual pass. The independent 72-variant
+Badge archive still compiles; no new Badge native output was created. Evidence:
+`private/intrinsic-growth-v130/` in the working repository.
+
+**Reversal:** remove the compile-only basis carriage and its Fill guard together,
+restore the documented silent native approximation, regenerate lowering
+citations and the plugin receipt, and rerun the focused sizing and operation
+checks. Preserve all saved contracts, native journals and failed comparisons;
+never erase the authored basis to regain admission.
+
+
+## D.139 Context exports are not component functions
+
+**AGENT decision — 2026-09-23.** The source reader records a bounded, direct
+React `createContext` export separately from component functions. Previously,
+an exported context stopped the entire structure trace with
+`component-function-unresolved`, including unrelated mounted components in that
+module. Recognition follows the imported symbol, its immutable local binding
+and supported local uses. Named aliases, default imports and namespace imports
+are supported; lookalikes, factory substitution, unresolved escapes and dynamic
+module/eval patterns keep their named refusal. The source hash and declaration
+span remain recorded. Observation inventories include the new reader helper.
+
+This is source classification, not provider conversion or a general proof of
+context behavior. Component-specific API and child-ownership refusals remain.
+The existing shadcn program is byte-identical before and after this change.
+The Radix workspace's 157 bundle inputs and 202 source/declaration pins are
+unchanged; no library source or declaration was rewritten to gain admission.
+
+**Measured at this checkpoint:** the same four Radix Themes shipped-JSX cases
+validate **4/4**, including the representative negative controls and restored
+original Switch interactions. The observation bundle now builds and all four
+source/observed PNG pairs and measured trees are identical. Structure
+qualification is still **0/4**: each case refuses
+`react-ownership-parent-outside-selection:instance-1`. The selected Button or
+Switch has a registered Theme parent whose host root lies outside the selected
+component. The trace stops before accepting anatomy or a native draft. The
+application shows this refusal and keeps native preparation disabled.
+Unresolved `inlist` property types and Theme return control flow also remain.
+
+These results do not qualify an independent family or complete either V1
+journey. No native operation was prepared, and no Figma write was performed.
+Evidence: `private/radix-context-v131/`, including before/after source records,
+the fresh validation and observation IDs, visible application captures and
+preservation checks. The earlier refusal and source captures remain intact.
+
+**Reversal:** restore component-only export handling, remove the separate
+context metadata and helper, and update both observer inventories together.
+Rerun the source and ownership checks. Preserve the newer observations as
+historical evidence; do not relabel their context classification as a native or
+behavioral qualification.
+
+
+## D.140 Selected components retain their surrounding source context
+
+**AGENT decision — 2026-09-23.** Structure observation now records registered
+ancestors outside the selected component separately from the components inside
+it. Each ancestor must have one enclosing DOM root. The record retains its
+source identity, props, parent and observed containment; caller-created content
+keeps its creator. Ancestors do not become generated roots, and a property
+experiment on the selected component cannot use this metadata to modify them.
+Existing observations without outside ancestors keep their earlier shape.
+
+An enclosing context is not established by a name or selector. Fragments with
+outside roots, portals escaping an ancestor container, moved DOM and partial
+component selections remain unqualified. An adversarial probe also exposed a
+registered portal child that could hide an outside host from the earlier
+nearest-owner check. The observer now follows its registered parent chain and
+refuses that escape. The source join checks identities,
+containment, parent cycles, missing or unused ancestor records and outside
+creators. The generated root's observation identity includes its context, and
+its limitations explicitly restrict it to that recorded context. This does not
+establish behavior or visual fidelity in arbitrary surrounding components.
+
+**Measured application outcome:** the unchanged Radix Themes shipped-JSX
+workspace now validates **4/4** and traces **4/4** cases, resolving the earlier
+parent-outside-selection refusal in D.139. All four source/observed PNG pairs
+and measured trees are identical. Theme remains recorded as the surrounding
+source component in both the observation and the application. Each case has
+one unchanged-baseline experiment, with all render witnesses restored; no
+finite property combination is qualified by those baseline reads. Normal page
+reload reopens the same validation and structure observation with their
+ancestor records intact.
+
+Native preparation remains disabled for **all four cases**. Button delegates
+its root to BaseButton; Switch delegates to its installed primitive. Their
+content remains `authored-or-runtime`, their root correspondence remains
+unqualified, and native projection refuses
+`react-root-visual-source-content-unqualified`. Unresolved `inlist` types and
+Theme control flow remain. The application shows these limits next to the
+successful structure match. No Figma output or independent-family V1 journey
+is qualified by this change.
+
+Generic browser probes also demonstrate selected-component live property and
+initial-mount experiments, with the surrounding source context restored. They
+reject attempts to mutate an outside ancestor through a selected-child probe.
+These are instrument checks, not Radix interaction qualification. Evidence:
+`private/ancestor-boundary-v132/`. Original modules, prior native evidence and
+the earlier failed observations remain preserved.
+
+**Reversal:** restore component-only ownership and its parent-selection refusal,
+revert the corresponding source-join, projection limitation and application
+context display together, then rerun source/ownership and property checks.
+Retain these observations as historical evidence; never delete parent links or
+source witnesses merely to regain admission.
+
+
+## D.141 JSX dependencies retain source and runtime identities
+
+**AGENT decision — 2026-09-23.** Structure observation follows JSX-referenced
+exports through the installed TypeScript program. Import aliases and barrel
+exports resolve to the actual exported binding; a finite queue follows nested
+references and cycles without registering unrelated module values. The recorded
+reader options retain the original entry modules so subsequent state inspection
+recreates the same dependency selection. The ordinary API-only reader keeps its
+existing entry scope.
+
+Only an executable source export inside the configured workspace can establish
+a dependency identity. Its bytes must also occur in the original bundled
+reference before runtime registration. Declaration files, private implementations,
+ambiguous exports and source-root escapes cannot supply guessed identities.
+An exported value alias can retain its identity, but an unavailable function body
+leaves its content and root unresolved. Runtime aliases that identify the same
+value twice still refuse. Registered dependency identities alone do not prove
+root delegation, content forwarding, alternate branches or native generation.
+
+An adversarial probe exposed a mutable dependency binding whose earlier JSX body
+could otherwise be treated as current implementation evidence. Dependency bodies
+now require an immutable binding or an unreplaced function declaration, with
+source-graph uses limited to imports, exports, types, JSX and literal display
+metadata. Reassignment, value escapes, exported namespace escapes and direct
+evaluation retain the export identity with an unresolved implementation. The
+earlier failing probe is preserved; these refusals also cover mutations made by
+an importing module. They do not rewrite or execute source to establish proof.
+
+**Measured application outcome:** the unchanged Radix source still validates
+and traces **4/4** cases. The source graph now records eight exports, compared
+with the original three mounted exports, using the same 202 checker inputs and
+157 bundled source inputs. Both Button observations retain **Button → BaseButton**
+inside Theme. BaseButton owns the observed button host on one conditional branch;
+At that checkpoint, Button's delegated root and BaseButton's content remained unqualified; the root mapping is extended in D.142. Switch
+explicitly reports unavailable implementation evidence for its Root and Thumb
+instead of substituting installed declarations for executable source. The app
+shows these component relationships and their remaining limitations.
+
+All four original/observed PNG pairs and measured tree bodies match. Every
+baseline-only property observation restores its witnesses. Fresh source
+validation and a normal reload retain the saved structure observation. Native
+preparation remains disabled for all four cases with
+`react-root-visual-source-content-unqualified`; no Figma operation was created.
+A separate generic browser probe preserves delegated rendering and live caller
+text updates, restores the original image, and rejects unpinned source and
+runtime identity aliases. These checks do not qualify Radix property combinations,
+converted behavior or independent-family V1 acceptance.
+
+The first application attempt was interrupted by the development server reload
+after installing the observer. Its failed report remains preserved. Reloading
+originals through the application and starting a fresh observation completed;
+no original module or prior native evidence changed. Evidence:
+`private/dependency-ownership-v133/`.
+
+**Reversal:** disable JSX dependency discovery in structure observation and
+restore the corresponding reader and state-inspection changes together. Preserve
+all source graph and render evidence as historical records. Rerun source,
+ownership and state-inspection checks; never remove dependency warnings or
+invent host/content mappings to regain native admission.
+
+
+### D.142 A shared host needs separate root and caller-content proofs
+
+A public React wrapper may return another component without adding a DOM node.
+Structure observation now links that root only when the installed source records
+an executable target identity, both implementations pass the bounded mutation
+and escape check, and the runtime records exactly one matching direct child at
+the same host. The terminal component must actually own that host. Multi-hop
+chains retain every source identity, physical parent and node creator.
+
+Root correspondence does not prove caller-content forwarding. A reusable root
+slot additionally requires unchanged children flow at every hop and agreeing
+observed inputs. Replaced, helper-derived, conditional or nested content cannot
+be flattened into a root slot. Mutable implementations, missing source proof,
+ambiguous children and mismatched identities remain refused. A proved delegated
+root is limited to its observed context and host branch.
+
+Composition uses the public boundary once when the complete forwarding chain
+is proved. An adversarial probe caught duplicate child generation from counting
+both the wrapper and its implementation; the corrected projection preserves one
+public child and keeps the implementation in the ownership record. An existing
+verified internal main cannot substitute for the public component identity.
+Sizing checks include caller style inputs on every implementation in the chain.
+
+A generic browser probe preserves the original render through a three-component
+chain, observes live caller text updates and restores its original image. A
+separate compiler probe retains an editable native root slot under the public
+identity without baking in sample text. These are bounded engineering checks;
+they do not establish a live Figma outcome or independent-family V1 acceptance.
+
+**Measured application outcome:** fresh Radix validation and structure observation
+both complete **4/4** cases. Both Button cases now show a shared
+**Button → BaseButton** root, with caller content still unqualified. All four
+original/observed PNG pairs and tree files match each other and the preceding
+checkpoint. Each baseline-only property observation restores its witnesses.
+Normal page reload and loading originals restore the same validation and trace.
+All four native preparations remain refused; no Figma operation was created.
+The same 157 bundled inputs, 202 checker inputs and eight exports are retained.
+The application visibly distinguishes proved root correspondence from the
+remaining content and Switch implementation gaps. Evidence:
+`private/root-delegation-v134/`.
+
+**Reversal:** restore the source-program implementation metadata, anatomy join,
+root sizing, composition filtering and application explanation together from
+`private/root-delegation-v134/before/`. Keep all historical observations. Rerun
+the source, ownership, root and composition checks; do not enable native output
+by removing content or identity refusals.
+
+### D.143 Local aliases do not prove helper effects
+
+The source reader follows unchanged props and children through unconditional
+top-level `const` bindings, plain object destructuring and rest bindings. Every
+derived binding remains subject to the existing mutation and escape checks.
+Sibling object values can alias children and cannot be treated as independent
+copies. Defaults, computed or nested bindings, mutable declarations, helper
+results and conditional content remain unresolved.
+
+A browser probe with three delegated components preserves caller text through
+these aliases, observes a caller update and restores the original image. This
+is bounded source and ownership evidence, not native Figma qualification.
+
+The installed Radix helper demonstrates why a copied props container and a
+matching return type are insufficient. With an array supplied as both children
+and a responsive size value, a responsive default write can alter that same
+array. A getter/setter counterexample passes the installed public TypeScript
+API and changes the actual Button's rendered text from `FirstSecond` to
+`Changed:2Second`, without changing the installed source. This is an isolated
+adversarial case, not one of the normal cohort's renderings. Helper analysis
+still needs to account for call-site keys, inherited properties, aliases,
+accessors and transitive calls before it can certify content preservation.
+
+**Measured application outcome:** fresh validation and structure observation
+complete **4/4** Radix cases. All four original/observed image pairs and measured
+trees match the prior checkpoint. Root correspondence and every native refusal
+are unchanged. Normal reload restores the saved observations; no native
+operation was created and the 1,820 native journal and transport files remain
+byte-identical. Evidence: `private/helper-flow-v136/`.
+
+**AGENT decision and reversal:** retain the bounded local-binding rule without
+admitting helper results. Restore `source-reference/react-children.ts`, its
+source-program and ownership tests, and these documentation changes from
+`private/helper-flow-v136/before/` to reverse it. Preserve the counterexample and
+application records; do not replace unresolved content with inferred forwarding.
+
+### D.144 A guarded helper call does not qualify the containing component
+
+**Trace React structure** now records a separate guarded render for an eligible
+helper call and its observed input context. A bounded source interpreter models
+its effects without executing installed source on the host. The browser checks
+registered original functions and their closed bindings, metadata, native
+intrinsics and React-created props before and after the helper call. Caller
+children remain opaque. Source and checker bytes, compiler inputs, framework
+adapters and the actual rendering executable are recorded with the paired
+images, measured trees and ownership. The containing ownership archive seals
+these files; changed inputs or evidence invalidate the observations.
+
+The React factory and forwardRef adapters require exact installed runtime
+hashes for the qualified 19.2.4 or 19.2.7 combination. Unsupported runtime bytes,
+missing registrations and unmodeled values refuse. A private bootstrap or a
+source model alone cannot authorize native conversion.
+
+**Measured application outcome:** all four Radix source cases validate and
+retain their exact earlier images and measured trees. Both solid and soft Button
+baseline helper calls pass the guarded observation with unchanged component
+ownership. The application displays the result under **Caller-content helper
+checks**. These checks apply to the recorded call-site context; they do not
+qualify every property-matrix trial or every invocation of that component.
+
+The ordinary source children fact remains unresolved. D.145 adds a separate
+containing-component observation for the two baseline contexts. Conditional
+loading content and Switch executable dependency mapping remain open.
+All four cases and six observed roots retain their native content refusals.
+No Figma operation is created by this observer, and no V1 criterion is newly
+qualified by this change. Evidence: `private/helper-observation-v143/`.
+
+**AGENT decision and reversal:** retain contextual helper evidence separately
+from unconditional children facts and native admission. Restore the named
+preimage files in `private/helper-observation-v143/before/` using its manifest;
+keep the unreferenced helper modules and all evidence. Do not replace unresolved
+content with an inferred forwarding fact or widen the supported input domain.
+
+### D.145 A checked component return is contextual evidence
+
+The guarded observer now models the containing function's evaluated defaults,
+branches and JSX attribute order. In the same browser invocation, it checks
+registered React props, secondary ref provenance, the helper call and the actual
+returned element's target, key, props and caller-content identity. Only elements
+from the pinned React factories are accepted. Opaque children cannot be inspected
+or used as DOM attributes, styles or keys. Unmodeled component targets and effects
+refuse. This observer does not execute installed source on the host.
+
+React's development `forwardRef` display-name setter changes callback metadata.
+An adapter for the exact pinned React source checks the function before that
+setter and permits only its expected name and displayName descriptors. Other
+property changes still refuse. The source model, instrumentation, runtime checks
+and paired capture remain sealed and invalidated together.
+
+**Measured application outcome:** fresh validation and structure tracing retain
+all four Radix cases and their exact original images, measured trees and component
+ownership. Both Button baseline contexts pass the containing-component check and
+return the original caller content. **Caller-content helper checks** displays
+that bounded result. A normal reload restores the saved observation.
+
+This does not create an unconditional children fact or authorize native output.
+Native admission still needs to consume the contextual proof with its source and
+instance boundaries intact. Loading content, alternate component targets and
+Switch executable mapping remain unqualified. All four cases and six roots retain
+their native content refusals. No V1 acceptance criterion is newly completed.
+Evidence: `private/containing-flow-v144/`.
+
+**AGENT decision and reversal:** keep the containing-function observation separate
+from unconditional source facts and native admission. Restore the named files
+from the PRIMARY `private/containing-flow-v144/before/` manifest to return to the
+prior helper-only observer. Preserve all measurements and rejected controls;
+never promote a baseline result to an unobserved property combination.
+
+
+### D.146 Recorded content evidence does not prove every input
+
+A guarded containing-component observation can establish a direct caller-content
+slot for its recorded input without proving unconditional forwarding. Native
+projection now consumes a host-owned capability bound to the exact source,
+component instance, input, measured tree, ownership and sealed helper artifacts.
+It verifies the model, instrumentation, original runtime calls and returned host
+again when restoring native evidence. Changed inputs or artifacts invalidate the
+capability; a copied or serialized capability is not authority. Source children
+facts and the finite property-observation plan remain unchanged.
+
+**Measured application outcome:** fresh Radix validation and structure tracing
+complete 4/4 with byte-identical original and observed images, measured trees and
+ownership. Both Button baseline cases compile root drafts with contextual caller
+slots. The app prepares one solid Button root for DS Contracts Evaluations with
+one variant and 19 variables. Normal reload restores the observations; repeated
+preparation reopens the same operation. All 1,820 earlier native journal and
+transport files are preserved. The application labels this evidence as applying
+to the recorded input. This advances the D.144–D.145 admission boundary.
+
+This preparation writes no Figma nodes and does not qualify native fidelity or
+editability. Loading content, alternate targets and unobserved inputs remain
+outside this proof. Both Switch cases retain content refusals. A baseline result
+must not expand the property matrix: broader combinations still require their
+own complete observations. No V1 acceptance criterion is newly completed.
+Evidence: `private/contextual-content-v145/`.
+
+**AGENT decision and reversal:** retain the authenticated contextual proof as a
+separate capability, checked at each projection and sealed-evidence restoration.
+Do not set an unconditional source forwarding flag or loosen matrix limits.
+The PRIMARY `private/contextual-content-v145/before/` manifest identifies the
+preimages for reversing these source and UI changes. Preserve the new module,
+prepared operation and all refusal/success evidence; rollback must not execute
+or replace an existing native operation.
+
+### D.147 Authored native graphs need visible placement and offset checks
+
+The app-created Radix Switch baselines retain two native mains, a nested thumb
+instance and 31 variables per operation. Both roots measure exactly 35 × 20 px;
+the 18 × 18 px thumb sits at (1, 1) or (16, 1). Using the unchanged historical
+white-background scorer, unchecked measures 0% and checked 1.4286%, below the
+5% limit. The source captures are opaque: this does not measure fidelity on a
+black background, other inputs, behavior or the return journey to React.
+
+The first canvases placed both mains at the origin. Fresh versioned authored
+graphs now use the existing dependency-order placement rule from prepared
+libraries. The live checked candidate places its dependency at (0, 0) and its
+root at (0, 218), with unchanged nested geometry and a byte-identical root PNG.
+Earlier operations remain intact. The plugin was closed for canvas inspection.
+
+A reversible edit moved the nested thumb from x=16 to x=14. Readback recorded
+the change, but the prior structural verifier accepted it. The verifier now
+checks declared left/top instance offsets and absolute positioning before
+accepting an authored graph. It accepts only the exact number or its float32
+representation. The app rejects the retained x=14 observation; a fresh read
+after restoring x=16 matches every pre-edit node, token and image. Repeat
+preparation reuses the same operation with 1,937 journal files unchanged.
+This bounded editability and restoration proof does not qualify other native
+overrides, responsive geometry or synchronization back to source.
+
+**AGENT decision and reversal:** reuse the existing page arrangement for fresh
+multi-component graphVerification=1 writes; preserve legacy generation and
+single-main behavior. Verify the declared MIN-axis instance positions without
+changing a scorer or tolerance. The preimages in
+`private/authored-native-live-v212/before-placement-v1/` and
+`before-position-check-v1/` identify the source changes to reverse. Rebuild the
+plugin through its official script after reversal; retain all native operations,
+failed controls, screenshots and measurements. No complete V1 criterion is newly
+qualified by this evidence.
+
+### D.148 Native return delivery does not preserve every captured effect
+
+The live checked Switch graph completes the companion's Send capture → app JSON
+import → React archive download → isolated npm install and production build.
+Capture follows the nested instance to its local main, so both components ship
+in the archive. Every installed archive file matches the download. The unedited
+consumer retains the 35 × 20 px root and 18 × 18 px thumb at (16, 1), with no
+browser errors. The generated button is one fixed appearance; this capture does
+not infer a toggle API or qualify behavior.
+The source application's initial-state and callback inspectors still refuse
+observed compositions: their source selection requires a saved root-draft
+operation. Repeating structure tracing does not connect that missing path.
+
+The shared proposer carries complete inner and mixed inner/drop shadow stacks
+as CSS `box-shadow`, preserving layer order and spelling inner layers as `inset`.
+Newly supported stacks retain captured geometry and alpha without additional
+decimal rounding. Authored inner-shadow token recovery requires matching layer
+kind and exact or float32-equivalent numbers. Blur, incomplete inner geometry,
+text shadows, per-instance restyling and unsupported partial variant presence
+remain named limitations. Legacy drop-only serialization is unchanged.
+
+A byte-identical fresh capture now produces an archive that restores the track's
+previously omitted inner shadow. Only parent CSS and token CSS differ from the
+earlier archive; component JavaScript and the linked thumb, including its five
+drop-shadow layers, are unchanged. The historical white comparison improves
+from 1.8182% to 1.4286%. Exact pixel difference is 39.4805%, so the antialias-aware
+score is not pixel identity. A separate guarded transparent-frame comparison of
+the installed appearance passes at 1.0121% white and 0% black under the unchanged
+5% rule. It includes the full painted area and preserves the original component,
+linked main and document after removing its temporary capture nodes. Exact pixel
+differences are 31.8826% white and 39.9798% black, so this also is not pixel identity.
+Broader return fidelity remains unqualified. Root and part hover-stack conversion is regression-tested; live
+hover behavior is not established by this fixed-appearance consumer.
+
+Normal document flow initially placed the consumer at a fractional origin and
+the existing aligned scorer correctly refused. Placing only its external test
+container at an integer origin permits a diagnostic aligned comparison;
+the component's relative geometry and computed styles are identical. Both
+captures and the original refusal are retained. With the recovered shadow the
+diagnostic is 0.2723%, previously 0.3813%. No scorer, threshold, native node or
+source operation changed. The updated package is generated through the app,
+never hand-edited in the consumer.
+
+**AGENT decision and reversal:** use the existing contract and emitter shadow
+vocabulary for complete captured inner stacks. Keep unrelated drop-only output
+stable and reject inner/outer token mismatches. Preimages and the exact change
+are in `private/inner-shadow-return-v214/`; restore those source files and rebuild
+the plugin through its official packager to reverse the rule. Earlier archives,
+the original fractional-position refusal and harness decision remain in
+`private/authored-native-return-v213/`. Neither the repaired fixed appearance nor
+the additional regression cases complete a full V1 criterion.
+
+### D.149 Observed composition states need reusable nested identities
+
+Initial-state and callback inspection now accept a separately identified,
+authenticated authored composition. The selected public source instance must
+match the rederived composition proof; a primitive sharing its DOM root cannot
+be substituted. Inspection can use the explicit current structure observation
+without allocating a new native graph. Legacy root and nested inspection pins
+retain their formats and evidence keys.
+
+The Radix Themes Switch completes three fresh mounts through the application:
+`defaultChecked` false, true and omitted. All three restore the original source,
+ownership, measured tree and image. The app displays each verified state image.
+A repeated completed request returns the same observation and leaves the
+retained initial-inspection evidence unchanged. The earlier failed attempt remains
+recorded; it exposed the difference between creation-instrumented provenance
+and the ordinary behavior probe's ownership structure.
+
+The callback experiment records 46 activation trials across twelve type-compatible
+inputs, identifying `checked` as controlled and `defaultChecked` as initial-only
+through `onCheckedChange`. The broad result remains failed with
+`callback-observation-incomplete`: `inert=true` refuses keyboard focus, and its
+two activation trials are not claimed. All recorded trials restore ownership
+and structure. Of 71 restoration checks, 70 match the original pixels on the
+same mount; one pixel difference is retained. Every replay then matches the
+exact archived original. This verifies disposable test-page restoration, not
+recovery of a user's runtime state. The combined state-input action refuses
+`state-api-source-evidence-incomplete` while the appearance assembly remains
+unqualified.
+
+The resulting contract still refuses
+`react-initial-contract-nested-identity-unqualified`. The current initial-state
+assembler requires a single component identity for a selected root. This
+composition contains the public source instance, its implementation primitive
+and a nested thumb. Flattening those identities would not qualify reusable
+composition. Native initial-state preparation explicitly refuses this new
+inspection kind. A direct preparation request refuses before allocation and
+leaves the native operation journal unchanged.
+Simultaneous state inputs, generated behavior, a native state graph and its
+returned React consumer remain unqualified.
+
+**AGENT decision and reversal:** authenticate the complete authored proof, then
+use the existing ownership-structure projection for the ordinary behavior
+probe. Only instrumentation-specific creation fields are absent from that
+comparison; source identities, parents, props, roots and host ownership remain
+exact. Full provenance stays in the immutable archive and is checked on every
+read. Changed pins, source bytes and substituted targets refuse. Preimages,
+negative controls, the failed run and the measured application result are in
+`private/composition-state-v217/`. Restore the corresponding preimages to
+reverse the integration; preserve every observation archive.
+
+
+### D.150 Explicit structure observations survive server restarts
+
+An explicit structure trace now saves a separate source selection. A completed
+selection pins its report and inventory, independently of native preparation.
+After a server restart, Load React originals reopens that exact archive, checks
+its full inventory and current source/observer inputs, and makes the same
+authored composition available to the state inspectors. Native preparation still
+rederives its own authority; the selection is not permission to write a graph.
+
+The measured application restart restored all four Radix source cases and the
+same three-state initial inspection. All three saved images loaded at 51 × 36 px.
+Repeating the inspection returned the same result; all 2,243 checked selection,
+structure, initial-inspection and native-operation files remained byte-identical,
+with no added files. No Figma output was created or modified.
+
+A pending selection, corrupt pin, changed archive or changed source refuses. An
+explicit failed or incomplete selection cannot silently fall back to an older
+native archive; an earlier completion cannot replace a newer selection. A pending
+selection after interruption is reported as incomplete and requires an explicit
+new trace. This does not resume the interrupted browser experiment or recover a
+user's runtime state. Historical observations are preserved, not repinned under
+new observer inputs. Existing native-journal restoration remains available when
+there is no explicit selection.
+
+The composition still refuses `react-initial-contract-nested-identity-unqualified`.
+Reusable parent/child state contracts, simultaneous input qualification, native
+state variants, returned React behavior and their update/recovery journey remain
+unqualified.
+
+**AGENT decision and reversal:** record explicit source selection at trace start,
+then atomically replace its pointer with an authenticated seal after completion.
+Retain immutable selection records and refuse changed seals on repeated
+completion. Restore the preimages in `private/composition-state-v218/` and remove
+the new selection reader from the service to reverse the integration; preserve
+all private selection and observation evidence.
+
+### D.151 Stateful composition needs placement and per-state origin evidence
+
+`absolutePlacementByCombination` carries parent-owned left/top offsets for a
+nested component over complete finite enum/boolean combinations. Omission is
+distinct from false and from a supplied enum value. Validation requires every
+tuple exactly once, rejects conflicting placement and retains the existing
+positioned-parent and child-root constraints. CSS Modules, inline React and the
+native compiler consume the same rule. Static HTML and Web Components refuse it.
+
+Browser checks cover nine combinations, exact geometry and pixels, mounted child
+identity, renamed typed inputs and defaults. Native compiler/mock checks preserve
+one child main and repeated node IDs. Independent graph checks reject changed
+offsets. Existing committed Figma scripts and generated component trees remain
+byte-fresh. These checks do not establish live Figma qualification.
+
+The authored sweep assembler requires a separate host-held render-origin proof
+for every state. It retains stable source boundaries and ancestor context,
+compiles one child contract across the observed parent input domain, and forwards
+the parent's inputs to that child's context variants. Those axes do not assert
+the original child's independent public API. Reusing or serializing a baseline
+capability cannot authorize another state's tree. A complete three-state fixture
+matches independent browser reference pixels through both React emitters while
+preserving the mounted child. Each root dimension must be uniformly proved fixed
+or automatic across the domain. Automatic dimensions use content layout; a
+sampled rectangle never becomes an authored fixed constraint. Mixed modes,
+unresolved dimensions and repeated source definitions at separate boundary paths
+refuse until their mapping is supported. Caller allocation remains unqualified.
+
+The app now collects and reopens a separate original render-origin proof for
+each finite initial input. It derives the unique declared caller mount in memory,
+preserves source files and witnesses, and requires both the bare source and
+instrumented render to equal the ordinary observation's full tree and full-page
+PNG. The shipped-JSX Switch records three verified inputs: false, true and omitted,
+with its public root, shared implementation root and nested thumb identities.
+Altered inputs, substituted states and changed caller artifacts refuse. Older
+ordinary captures and the failed browser-identity attempt remain preserved.
+
+The CSS reader treats `all` as a competing declaration: a higher-priority own
+declaration can defeat it, including proved source order within one stylesheet.
+For physical width/height, winning `initial` or `unset` can resolve to the
+browser's typed automatic size. Inheritance, rollback, unproved ties and
+declaration order within one block remain outside this bounded reader. Nested
+variable fallbacks select missing or guaranteed-invalid values, while explicit
+empty values do not select a fallback. The selected expression must use the
+existing fixed px/rem arithmetic grammar and pass typed/used-size checks.
+Variable-sized declarations in a context with CSS property registrations refuse
+until registration/dependency provenance is read; this is conservative even
+when a registration is unrelated.
+
+The finite pseudo-element rule requires every plane to pass the same bounded
+empty in-flow box grammar. Geometry stays constant; the full paint tuple may
+factor over one declared finite input. Omission supplies base paint, and missing
+gradients become explicit `none` overrides. Geometry changes and joint paint
+products that cannot factor still refuse. Independent browser references match
+both React emitters exactly over white/black backgrounds and return transitions.
+These fixtures do not qualify the real source's native state graph.
+
+The app keeps polling while a completed observation is sealing, then displays
+the freshly assembled state draft or its refusal. The fresh real-source run
+assembles two component definitions and three root variants. Both actual React
+emitters reproduce all three archived original inputs with 0% difference in the
+opaque white context and exact 35 × 20 px root dimensions. Generated frames
+wait for natural transition completion and remain identical across three
+consecutive captures. Earlier transient-frame measurements are preserved.
+The source transparency preflight refuses the painted Theme ancestor; a white
+crop cannot qualify black-background fidelity. This generated React comparison
+is not a clean installed consumer result. Undeclared or ambiguous caller mounts and unsupported original
+function forms still refuse; a function-declaration fixture records
+`jsx-effects-function-unavailable` rather than borrowing a successful model.
+
+The app now prepares the complete authored initial-state domain through a
+versioned request that pins the original ownership anchor, immutable observation,
+report and inventory, selected instance and rederived draft. Preparation and
+write reopen that exact evidence; serialized draft claims do not authorize a
+write. The original single-capture request remains unchanged. Altered run,
+report, inventory, observation key, instance, draft, ownership and helper inputs
+refuse. A changed report under the same reservation cannot allocate a second
+graph. The source image for each native variant comes from its own authenticated
+state rather than the selected baseline image.
+
+The live app and Sync Runner create two component sets, three root variants and
+36 variables in Evaluations. Independent readback confirms all root dimensions
+at 35 × 20 px and the nested 18 × 18 px thumb at (1, 1) for false/omitted or
+(16, 1) for true. After closing the plugin, the canvas and all three original/
+native pairs were inspected. With the existing white-background scorer, false
+and omitted measure 0%, and true 1.4286%; recorded-layout comparisons measure
+0%, 0% and 0.2723%. Exact differing-pixel rates remain 33.33% and 39.48%, so a
+passing tolerance score is not pixel identity. No black-background source
+comparison is qualified. Reopening preparation returns the same operation with
+all 1,307 native journal files unchanged; all 1,291 pre-existing native files
+also remain unchanged after creation. Evidence is retained in
+`private/authored-state-native-v224/`.
+
+The actual native root set and its dependency now return through Sync Runner
+Send, app import and React library download into a clean consumer. All 15
+installed package files match the downloaded archive. External omitted/false/
+true selection preserves the mounted child and exact 35 × 20 px root dimensions;
+returning to an earlier input restores the same image and observed tree.
+All six native/consumer image pairs pass the unchanged 5% limit on white and
+black: five measure 0%, and checked on white measures 1.052632%. Exact differing
+pixels remain 25.43–32.64%, so this is not pixel identity.
+
+The first return exposed a real loss despite those scores: import did not forward
+the parent's optional boolean input to the child. The checked thumb consequently
+uses the omitted state's three shadow layers instead of its native checked
+appearance. The generated child already contains the checked styling; the
+parent-to-child mapping is missing. Clicking the returned component does not
+toggle it, and the click probe found neither switch role nor checked state.
+External input selection does not establish interaction or accessibility.
+Evidence and the unchanged failed archive are retained in
+`private/authored-state-return-v225/`.
+
+The shared importer now recognizes a child's declared omitted value separately
+from missing or unmappable data. Complete observed boolean and optional-enum
+identity mappings forward through the existing component input reference model;
+missing rows, incompatible types/defaults and ambiguous sparse axes do not qualify.
+The same native capture, imported and downloaded again through the app, produces
+a new clean consumer whose checked thumb selects all five native shadow layers.
+Omitted and false inputs retain three layers, exact dimensions and the same
+mounted child. All six pairs pass the unchanged limit; checked on white improves
+to 0.842106% and the other five remain 0%. The click probe remains unchanged:
+the component does not toggle. This fix preserves input-dependent appearance;
+it does not infer behavior from a component name or a collection of pictures.
+Current evidence and the generic rule's reversal preimages are in
+`private/instance-input-forwarding-v226/`.
+
+A separate state experiment now uses the authenticated authored graph rather
+than requiring a flattened appearance. Context components must share the exact
+parent input domain and complete identity forwarding; missing, disconnected,
+cyclic, mismatched or independently stateful dependencies refuse. The root owns
+the observed state API. Context components receive the current typed value and
+retain their authored structure. The earlier native-return archive is unchanged.
+The current source experiment records nine controlled/initial combinations,
+18 keyboard/label trials and 27 exact restoration checks. Its app-generated
+React preview matches every checked-state transition and callback value, retains
+the same nested thumb and preserves exact 35 × 20 px root and 18 × 18 px thumb
+dimensions. Initial-only updates, held controlled values and accepted callbacks
+also work in the preview. This is behavior evidence, not a new visual score.
+The native graph candidate now pins that behavior experiment separately from its
+initial appearance evidence. Shared native metadata permits complete identity
+forwarding of the state inputs to nested components while keeping behavior on
+the root. Integration checks retain the initializer, callback and child mappings
+through native creation, independent readback and import; missing mappings and
+altered evidence refuse. Candidate evidence: `private/authored-state-native-v228/`.
+The app now delivers that separately pinned stateful graph into Evaluations:
+two native component sets, three root variants and 36 variables, with independent
+structure readback and unobstructed canvas review. Repeated preparation reuses
+the same operation. All 1,920 earlier native journal/transport files are unchanged.
+Sync Runner Send captures the actual root and dependency; app import preserves
+the initializer, callback and typed child mapping. The app's downloaded package
+installs and builds in a clean consumer, with all 15 package files byte-identical
+to the archive. All 18 source keyboard/label sequences match, including 36 state
+transitions, callback values, live controlled/initial inputs and accepted callback
+updates. The nested thumb stays mounted with exact root and child dimensions.
+Six native/consumer image pairs pass the unchanged 5% limit: five at 0%, checked
+on white at 0.8421%. Exact differing pixels remain 25.43–31.48%; this is not pixel
+identity. Original/native white measurements remain 0%, 1.4286% and 0%, or 0%,
+0.2723% and 0% when aligned by recorded layout origins. Temporary capture clones
+match their originals, repeat their exports and are all removed. Evidence:
+`private/authored-state-native-v229/`. The earlier appearance-only archives remain
+unchanged; the new behavior result does not upgrade them.
+Disabled and other excluded inputs remain outside this experiment; that broad
+callback sweep reported the restored `inert=true` focus refusal. The later
+corrected inspection is recorded in D.152. Original
+source black-background fidelity remains unqualified because its Theme ancestor
+is painted. Broader accessibility and behavior remain outside this evidence.
+
+**AGENT decision:** propagate canonical state through the observed identity
+graph, with explicit typed code values at each dependency boundary. Do not infer
+state from component names, image differences or unobserved child APIs. The
+planner only authorizes a fresh state experiment; its completed source evidence
+is still required before generation. Existing archived flat projections remain
+byte-identical. Evidence, adversarial checks and reversal preimages are in
+`private/authored-state-api-v227/`. Restore that stage's changed-file preimages
+and remove its new appearance helper to reverse this step, preserving all sealed
+observations and earlier native operations.
+
+This proves bounded initial appearances, structure and the observed checked-state
+API through a clean installed return. Broader fidelity and behavior, state-graph
+updates, interruption/recovery and the full independent-family journey remain
+incomplete. Legacy single-capture source
+repair paths remain unavailable for these state operations until their source
+models support composition states.
+
+The update adapter now retains the complete compiled graph. Root opacity and
+shadow-stack engine checks preserve child definitions and creation identities,
+including repeat, conflict refusal, partial application and rollback. Missing or
+changed dependencies refuse instead of disappearing from the desired update.
+An offline zero-change plan accepts the saved stateful native graph. This engine
+evidence alone does not qualify authored source succession or live graph updates.
+Preimages, checks and the decision
+are retained in `private/authored-graph-update-v230/`.
+
+The historical source reader now authenticates a composed state operation's
+ownership, initial-input and behavior archives. It recovers the original contract
+names and compares the recorded absolute source files, exports and parent
+relationships across every composition plane. Changed bytes and positional
+instance numbers can retain identity; another workspace, substituted child,
+ambiguous definition, disconnected boundary or altered archive refuses. The
+succession journal preserves the complete state pin across restart and unchanged
+repeats. Historical identity grants no live source or canvas write authority.
+Evidence and reversal preimages are in
+`private/authored-source-identity-v231/`.
+
+The application now authenticates the fresh natural draft and source hierarchy,
+then retains only the original contract IDs, names and code anchors before
+compiling fresh styles and tokens. Boundary changes and duplicate identities
+refuse. Source images follow the adopted observation; creation evidence stays
+unchanged. The live stateful Switch operation follows a new observation, plans
+zero property corrections and completes preflight, a no-op application and
+independent readback through Sync Runner. Both original component sets, three
+root variants, nested instances and 36 variables remain present. The new
+readback matches all 15 original node records, token data and three PNG exports
+exactly; an unchanged review reuses the verified correction without another
+proposal or write. The ordinary
+opacity updater makes implicit opacity 1 explicit in the returned root plan;
+it schedules no native property correction for that normalization. That
+callback sweep refused `inert=true`; the separate nine-case state check
+passes all 27 restorations. This run establishes the unchanged-source baseline.
+The follow-source response exceeded 60 seconds, so interactive latency remains
+a product limitation.
+
+A subsequent real source edit sets the original React root's opacity to 0.75.
+Fresh four-case validation, three initial observations and the nine-case state
+experiment pass; that broad callback inspection retained its inert focus refusal.
+The app follows this source on the same native operation and reviews only three
+root-opacity changes and one existing variable value. A manual 0.5 canvas edit
+refuses as `native-update-opacity-conflict:175:1984`; independent inspection
+confirms the edited value survives and the other roots and variable remain at 1.
+After explicitly restoring that test edit, fresh preflight, application and
+readback succeed. All 15 recorded nodes retain identity and every value except
+the three root opacities is identical; token data differs only at the proposed
+variable value. The three edited-source/native white comparisons measure 0%,
+0.2721% and 0%, with exact 35 × 20 px root dimensions under the unchanged scorer.
+The source Theme is painted, so source black fidelity remains unqualified.
+The app's verified correction and unobstructed canvas were inspected.
+The changed native family subsequently returns through Sync Runner Send,
+application JSON import and React download into a separate clean installed
+consumer. Its 15 installed files match the archive exactly; installation and
+production build pass. All 18 keyboard/label sequences and 36 activation
+transitions match the edited source observations, including callbacks and live
+input updates. Root opacity remains 0.75; root and child geometry and mounted
+child identity are preserved. Five appearance selections repeat unchanged
+pixels, and all six native/consumer image pairs pass the unchanged 5% limit on
+white and black, with a maximum difference of 0.3289%. Exact differing pixels
+range from 24.04% to 51.32%, so this is not pixel identity. These native/consumer
+black comparisons do not qualify the painted original-source context. Temporary
+capture clones were removed and the original native graph remained unchanged.
+The interactive review hosts the installed consumer's unchanged JS and CSS;
+only its wrapper asset URLs change for subdirectory hosting. Evidence:
+`private/authored-update-return-v234/`. Guarded restoration returns the two source
+files to their original bytes, followed by fresh four-case source validation.
+The app follows that original revision on the same operation and reviews the
+three root values and existing variable from 0.75 back to 1. Fresh preflight,
+application and independent readback pass. All 15 node records, the full recorded
+token data and all three native image records exactly match the original
+baseline. An unchanged app review reuses that verified correction; all 15 scoped
+proposal, succession and update files remain byte-identical, with no new file.
+This proves explicit reversal and repeat; dependency edits and full interruption
+coverage remain open for this composition. This bounded update does
+not qualify complete V1.
+Evidence and source reversal bytes are in `private/authored-source-update-v233/`.
+
+A subsequent bounded recovery run interrupts the server after the real begin
+event. The write lands on the same three roots and existing variable, but its
+result does not reach the journal. After the actual companion is closed and one
+replacement server starts, the application records a companion-closed
+attestation. A cached result arriving after revocation stays evidence only. The
+settling canvas read and a separate verification read then complete; all 15 node
+records, full token data and three native image records exactly match the changed
+baseline. The journal contains one write dispatch and one begin event. An
+unchanged app review preserves all 20 scoped proposal, succession and update
+files without adding one. This establishes landed-write/result-loss recovery,
+not untouched, partial-write or late-execution interleavings. The reopened
+companion stopped polling after replaying its cached result and required a manual
+Connect / resume for the pending read. Authenticated application requests also
+returned HTTP 408, and a JSON parse error remained visible after recovery.
+Unattended recovery and reliable interactive latency remain open. Preserve these
+failures alongside the successful settlement evidence in
+`private/authored-write-recovery-v235/`; do not treat this as complete V1.
+After recovery, guarded source restoration, fresh four-case validation and a
+separately reviewed reverse correction restore all 15 node records, full token
+data and three native image records exactly to the original baseline. The
+unobstructed native canvas was inspected after closing the companion.
+The selected ownership archive now reuses its authenticated result within one
+synchronous display response. Pointer and selection-record checks remain live;
+later requests recheck the archive and source, and selection writes are refused
+inside the display snapshot. The isolated profiled native listing improves from
+65.2 to 36.1 seconds with all response bytes unchanged. A first post-reload sample
+still takes 104.5 seconds, so this does not qualify reliable interactive latency.
+The source, initial-state and native-review screens preserve structured refusals
+but translate empty or malformed responses into an explicit unconfirmed-outcome
+message. An injected empty HTTP 408 was verified in the application; this is
+error handling evidence, not proof that real timeouts are eliminated. Evidence
+and preimages: `private/native-review-latency-v236/`.
+The full integration lane remains unqualified. Source and citation checks pass
+after repairs, but two held-out conversion checks still disagree with frozen
+receipts; those historical artifacts remain unchanged and the mismatches are
+not accepted as passing results.
+
+**AGENT decision:** reuse authenticated creation allocation names before fresh
+compilation; never copy historical appearance into desired output or rename
+already compiled token paths. Restore the changed-file preimages and remove the
+namespace helper listed in `private/authored-source-namespace-v232/` to reverse
+the implementation, retaining all source archives, succession and update journals.
+
+**AGENT decision and reversal:** model placement as a complete parent-owned
+table, and require each state's original provenance before assembly. Do not
+infer broader authorship from matching DOM shapes or one baseline proof.
+Restore the changed-file preimages in `private/component-state-placement-v219/`
+and `private/authored-state-assembly-v220/`, remove the new placement/sweep
+modules and regenerate schema/plugin artifacts with the repository scripts to
+reverse the implementation. Preserve all archived observations and receipts.
+The cascade correction and reversal preimages are retained under
+`private/css-reset-origin-v222/`; restore its source-reader preimage to reverse
+that correction, preserving every archived capture.
+The origin-capture/app integration preimages and measured records are retained
+under `private/state-origin-v221/`; restoring those preimages and removing its
+new observer/assembly modules reverses that step without changing older evidence.
+
+Sizing, selected-fallback and finite pseudo-paint decisions, adversarial probes
+and reversal preimages are retained under `private/intrinsic-state-v223/`.
+Restore that stage's changed-file preimages to reverse these rules, preserving
+all original captures and their recorded observer identities.
+
+The authored initial-state request and app integration decision, adversarial
+checks and reversal preimages are retained under
+`private/authored-state-native-v224/`. Restore only that stage's changed source
+and UI preimages after checking for later edits to reverse the integration;
+preserve all observations, native operations and images. The existing graph
+writer is reused without a schema, emitter, scorer or tolerance change.
+
+For the native-return comparison, temporary native clones use the same recorded
+root offset and capture dimensions as the transparent consumer frames. Exact
+clone observations, contained render bounds, repeat exports, original-node
+preservation and removal of every temporary node are checked. Neither the scorer
+nor its limit changes. This comparison qualifies only returned React against
+native appearances; it does not qualify the original source on black. The
+measurement decision and reversal are recorded in
+`private/authored-state-return-v225/AGENT-decision-v1.md`; invalidate these
+measurements if their capture assertions fail, retaining the original records.
+
+## D.152 Inert keyboard and label outcomes are distinct
+
+The callback inspector previously expected every non-disabled control to accept
+keyboard focus. That assumption incorrectly refused the original Switch when
+its `inert` input was true. Browser inertness is a separate fact from disabled
+state. In the pinned Chromium run, an inert control cannot receive focus or
+keyboard activation, but its associated label outside the inert region still
+dispatches a click and changes the checked state. Treating inertness as disabled
+would hide this observed difference.
+
+**AGENT decision, 2026-09-25.** Read the browser's computed `interactivity`, retain
+inertness in each control observation, and record focus after every action.
+Check keyboard suppression independently; record label outcomes without assuming
+they are suppressed. Unknown focus failures still refuse. Inert observations
+cannot establish a controlled/initial relationship or stand in for a disabled
+input. Both contract projection and combined-state planning recheck this boundary.
+Older sealed records remain readable and display focus as not recorded.
+
+The fresh application run completes all 48 finite compatible input/action trials
+and 72 restoration checks against the original Radix Switch. One same-mount
+pixel difference is retained, and every independent replay matches the original
+image exactly. The application displays all four inert input/action sequences,
+including the difference between keyboard and outside-label activation. A check
+against the unchanged installed package from the stateful native return matches
+those four sequences, eight actions and live input updates, with exact 35 × 20 px
+root dimensions. All 15 installed archive files retain their original hashes.
+The earlier failed report is preserved. No Figma node, conversion rule, visual
+threshold or source component changed.
+
+This is bounded browser behavior evidence, not complete inert-context coverage,
+all-input conversion or full visual qualification. Other source inputs remain
+outside the combined state API. Tests also cover attribute, inherited and CSS
+inertness, a hidden non-inert control that must fail focus, and an inert control
+whose document keyboard handler leaks a callback and must refuse. The HTML
+[inert-subtree rules](https://html.spec.whatwg.org/multipage/interaction.html#inert-subtrees)
+provide the platform context; the saved browser observations establish the
+specific label behavior.
+
+Evidence and preimages: `private/callback-inert-v237/`. Reversal restores the
+observer, defensive projection/planning checks and app display together. Keep
+all new and historical observations; do not relabel old failures or rewrite
+observer pins. The old focus assumption would again refuse the inert trial.
+
+## D.153 Conditional fill and typed child lookups need consumer checks
+
+A child present only in column-layout variants was evaluated against its
+parent's default row layout. The importer therefore dropped its FILL width.
+CBDS Checkbox's four error rows exposed this defect: the child measured roughly
+68–72 px inside parents measuring roughly 126–148 px. A root-only accounting
+check did not detect the nested width loss.
+
+**AGENT decision, 2026-09-25.** Determine the cross axis from the variants where
+the child actually exists. Carry uniform column cross-axis fill using the
+existing `width: 100%` literal; preserve bound widths and the existing mixed-axis
+and partial-fill guards. Stretching the parent would also stretch siblings, so
+the rule applies to the child. No schema or scoring threshold changes.
+
+Preparing the application archive exposed a separate typed lookup defect.
+Canonical lookup strings `"false"` and `"true"` were emitted as strings even
+when the child declared a boolean input. Reimporting an already registered
+child then lost the lookup because the importer accepted only string-valued
+observations. Both React emitters now restore the declared boolean type; string
+enums remain strings. The importer admits the boolean lookup only from complete,
+compatible observations over the parent axis. Missing, contradictory or invalid
+values remain unforwarded or refuse through existing projection guards.
+
+The new app-prepared archive installs in a clean consumer with all 20 package
+files byte-identical to the download. All 20 recorded input combinations retain
+the expected child boolean value. The four error rows fill their parent at
+content width and 420 px, and sibling dimensions remain unchanged. Repeated
+error/default/error inputs preserve fill; a repeated app import preserves the
+contract. Both React emitters also pass generic typed-input and sizing probes.
+Earlier failed archives and consumers remain preserved.
+
+The native application run of that same archive then exposed the corresponding
+Figma emitter defect: a finite lookup passed `"false"` to an actual BOOLEAN
+component property, and Figma refused it after partial allocation. The shared
+declared-type conversion now also runs in the native emitter. BOOLEAN controls
+receive booleans; boolean VARIANT bindings still receive their mapped labels;
+string enums remain strings. Invalid boolean lookup values refuse before a
+script is produced. The native mock now rejects string values for BOOLEAN
+controls, matching the observed Figma error. Focused generated-script execution
+checks cover all three receiving types.
+
+The real operation successfully created and read back 24 variables, then left
+15 recorded nodes including its page. Independent readback and an unobstructed
+canvas screenshot confirmed the incomplete output. Reopening preserved the
+reservation and refused duplicate creation despite stale compiler evidence.
+The original plan, failed write and read events remain immutable through the
+separately reviewed replacement described below.
+
+**AGENT decision, 2026-09-25.** Add an independent partial-output inspection to
+the prepared-library app. It reads the original page and token scope under the
+saved plan, including when a changed compiler prevents further creation. The
+journal retains the failed creation, records each read separately and reports
+missing, additional, type and ownership differences. An inspected inventory is
+not recovery permission or structural qualification. Duplicate creation remains
+blocked. Two real companion reads produced identical inventories and token data
+for all 15 retained nodes. The second remained queued while the companion was
+closed and finished after reconnection. No native nodes were created or removed.
+
+The replacement runtime has bounded generated-script coverage for rebuilding an
+acknowledged partial library using its existing tokens. It checks the recorded
+allocation, ownership, token context and references from other parts of the file;
+external instances, swap defaults and prototype links refuse replacement. The
+writer rechecks the reviewed inventory synchronously before removing the owned
+page. Changed supported properties, token values, added content and unrecognized
+prior claims refuse. An API failure during removal or recreation remains unknown
+and the old write cannot be replayed. Runtime evidence and reversal preimages
+are in `private/prepared-library-replacement-v243/`.
+
+**AGENT decision, 2026-09-25.** The application now pins the freshly compiled plan
+to the original archive, mode, brand and token input. Review is read-only; Apply
+requires its displayed revision and an exclusive durable write claim. The review
+explicitly includes removing the entire owned page and edits within its recorded
+nodes. The supported inventory does not serialize every Figma property and does
+not promise preservation of arbitrary text ranges, annotations or plugin data.
+External references and changed supported inventory refuse at the final check.
+The original plan and events stay intact; new creation and independent readback
+use the new pinned plan.
+
+The first live Apply returned `retirement-unknown`: Figma refused removal of the
+current page after its claim was stamped. All 15 original nodes remained present.
+A continuation requires another read proving the full original allocation,
+unchanged tokens and the exact journaled prior claim, followed by explicit Apply
+under a separate claim. Missing nodes, a removed page or unresolved delivery do
+not permit this continuation. The writer now switches to another existing page
+before its final synchronous check and removal. The actual continuation retired
+all 15 old nodes and created 105 explicit allocations. Independent readback found
+109 nodes including inherited instance descendants, three graph components and
+20 root variants. The entire 24-variable readback is unchanged. All four error
+rows use FILL at their parent widths (149 px large; 126 px small).
+
+The graph still fails independent verification with
+`native-source-observation-text-paint:207:2045`: an unresolved instance-swap
+identifier becomes a text node without specified paint, while Figma reads back
+black. This is a product refusal, not a fidelity pass. The canvas was inspected
+with the plugin closed; child icons remain provisional. Reload retains the same
+refusal, and repeated Apply returns 409 without another write. Focused tests
+cover stale reviews, changed source, exclusive claims, restart, lost/duplicate
+delivery and the separately claimed continuation; they do not qualify arbitrary
+crash recovery. Evidence and preimages: `private/prepared-library-recovery-v244/`.
+To reverse implementation changes, compare those preimages with later work and
+rebuild the plugin receipt. Preserve every new claim and read event; never replay
+the original failed write or manually release the reservation.
+
+This is structural evidence. The visible child icons are still provisional
+placeholders, including an unresolved instance-swap identifier rendered as text.
+Native return, complete appearance, click/keyboard behavior and accessibility
+remain unqualified for this archive. Current replay retains all 25 subjects,
+eight accounting outcomes and 17 exact refusals; frozen examinations are intact.
+
+Evidence and reversal preimages: `private/conditional-cross-fill-v240/` and
+`private/conditional-native-v241/`. The latter records the additional native
+emitter, shared helper and mock changes. Restore its preimages only after
+checking later edits, then rebuild the plugin receipt; never rewrite the failed
+operation or release its reservation by hand.
+The inspection addition and its preimages are in
+`private/prepared-partial-inspection-v242/`. Retain its new read events on
+reversal; an older journal reader may not understand the new read-only phase.
+To reverse, compare later edits before restoring that stage's importer, React
+emitter, helper, test and current-baseline preimages; regenerate the door register
+and plugin receipt. Preserve every failed and passing archive, historical
+receipt and native journal. The recorded clean-consumer results apply only to
+their pinned archive and would not qualify a reverted implementation.
+
+## D.154 Following a swapped component does not carry its nested content
+
+The old held-out observer retained applied property values but discarded their
+types. A suffixed `INSTANCE_SWAP` value consequently reached the generic stub
+proposer as an apparent text input. It became visible node-ID text in the archive
+and the retained native graph from D.153. Those archived strings do not contain
+enough information to safely reconstruct the missing types or child anatomy.
+No ID-pattern guess, verifier relaxation or historical evidence rewrite was used.
+
+A fresh read-only REST import of CBDS Checkbox preserves the property types and
+follows its same-file child components. It exposed another omission: closure
+followed each instance's main but not its configured swap targets, so the actual
+selected WarningCircle was absent despite an empty unresolved list.
+
+**AGENT decision, 2026-09-25.** Follow each explicitly typed applied
+`INSTANCE_SWAP` through the existing bounded dependency walk. Reuse its metadata
+resolution, remote refusal, cap, deduplication, transitive traversal and cycle
+reporting. Do not traverse inherited instance descendants or unused preferences.
+The live import now pulls seven dependencies plus the parent, including the
+selected standalone glyph, and the app retains all seven successful proposals.
+The eighth set, Checkbox-icon, remains a named refusal because its hover and
+disabled internal paint overrides cannot be carried exactly.
+
+Fetching the glyph did not apply it. The importer emitted an empty Icon rather
+than using the existing component-ref part's nested caller parts. Its slot's
+`defaultContent` is design-time sample content, not a React runtime fallback.
+The app-generated archive was byte-identical before and after
+the dependency fix, confirming this downstream gap. The clean consumer installs
+25 files identical to the downloaded package. Across all 20 parent combinations,
+typed child values and the four error-row fill relations remain correct, including
+420 px and repeated appearance changes. The bogus ID is absent, but no glyph is
+drawn in that retained candidate. It remains unqualified for appearance, behavior, accessibility
+and native return. It does not resolve the earlier native operation's refusal.
+
+Focused closure/workspace tests cover applied swaps, transitivity, duplicates,
+remote/missing/capped targets, cycles and non-reference strings. The existing
+no-closure path stays unchanged. Evidence, both fresh source reads, app workspace,
+download and visible consumer review: `private/typed-source-intake-v245/`.
+To reverse, compare that stage's closure preimages against later work. Keep its
+source captures and archives and all earlier native journal files. No Figma
+mutation, schema change, emitter change or scoring change occurred in this stage.
+
+**AGENT decision, 2026-09-25: reuse caller parts for fixed content.** The shared
+React and native emitters already support `parts` on a component-ref part: those
+parts populate the child's unique `children` slot. The importer now uses that
+representation when every occurrence resolves the child by key, selects the same
+keyed component, and the selected contract's file, key and node anchor identify
+the same standalone source. Missing identities, varying selections, variant
+targets, conflicting content, ambiguous slots and unsupported slot constraints
+remain named omissions. No new schema or runtime sample fallback was added.
+
+The new app-generated archive installs 30 byte-identical files in a clean React
+consumer and renders the selected warning glyph in all four error rows. Six
+sibling contracts remain identical to the earlier import. All 20 typed child
+inputs, intrinsic/420 px error-row widths and repeated appearance changes pass
+the bounded checks. Visual inspection still fails to establish fidelity: a
+24 px selected component overflows its 12 px icon host, and the checkbox itself
+remains a provisional stub. Native library preparation now reaches the selected
+glyph and refuses its path shape with
+`NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED` before delivery. Synthetic
+native caller-content checks pass; they do not replace this failed application
+journey or the earlier retained native operation.
+
+The importer tests are included in `npm run exact-proposal:check`; they cover
+both React outputs and native caller ownership, unchanged sample defaults and
+adversarial identity/slot cases. Application download, installed consumer,
+geometry measurements and native preparation refusal are retained in
+`private/fixed-swap-caller-v246/`. To reverse this change, compare its importer
+preimage against subsequent work and rebuild the plugin receipt. Preserve both
+candidate archives and the earlier native journal. No acceptance row is complete.
+
+## D.155 Filled paths need a drawing viewport and independent geometry checks
+
+**Open: complete fidelity and round-trip qualification.** The same prepared
+Checkbox archive from D.154 now reaches native creation through the application.
+It creates five components, 20 root variants and 47 variables. A fresh independent
+readback checks 156 nodes against 132 explicit allocations and passes the supported
+structure check. The warning content still overflows its smaller icon host, and
+the checkbox child remains a provisional empty component because its internal
+state-paint overrides were refused during import. This output is not a V1 pass.
+
+**AGENT decision, 2026-09-25: preserve the path's drawing area.** Figma's path
+parser normalizes closing segments, converts quadratic curves to cubic curves,
+and stores endpoints and relative handles as float32 values. Its intrinsic
+curve bounds can differ from the source's recorded viewport. Qualified filled
+paths now use an owned, clipped frame for that fixed viewport and an editable
+vector for the unchanged path. The vector is never resized to conceal a bounds
+difference. Verification compares closed segments, winding, rebased endpoints
+and relative handles exactly using float32 where required. It also checks masks,
+transforms, ownership, clipping, paint and inherited instance geometry. Flexible
+path viewports and unsupported stroke/effect channels remain refused.
+
+The first live read refused two vectors because the verifier and fixture had
+incorrectly assumed a `NORMAL` default blend mode. The live default is
+`PASS_THROUGH`. Correcting that exact expectation and obtaining a fresh read of
+the same output passes; the initial refusal is retained. Other blend modes and
+altered path data still refuse. No scoring threshold changed.
+
+**AGENT decision: explicit text allocation overrides the Hug optimization.**
+The full archive also exposed left-aligned text being treated as alignment-safe
+to Hug despite an explicit zero basis. The shared compiler now retains Fill
+when the parent establishes width. Intrinsic-only parents and conflicting child
+widths still refuse; legacy content-based text keeps its previous behavior.
+Unequal text lengths exercise equal allocation in browser checks.
+
+Both native reads retain identical token receipts and exported images. Four
+caller instances receive Figma virtual IDs after rehydration while retaining
+their recorded allocation identities; the node inventories are not byte-identical.
+Evidence, live probes, original failures and reversal preimages are under
+`private/native-filled-path-v247/`. Reverse by comparing those preimages with
+later edits, then rebuild the plugin and rerun emitter freshness checks. Preserve
+both native operations and their journals. All complete V1 criteria remain open.
+
+A subsequent source read confirms the caller-size gap: all four selected
+warning instances are 12 × 12 while their standalone main is 24 × 24. Both
+readers now retain selected instance dimensions, transforms, constraints and
+main identities by the complete property reference, without guessing from
+names or rounding geometry. Missing observations remain absent; the list does
+not certify that a truncated subtree was completely captured. No scale or
+rendering override is inferred from this data yet. Existing proposal outputs
+and the oversized native output remain unchanged. The capture decision,
+fresh read and reversal preimages are in `private/swap-instance-geometry-v249/`.
+
+**Current size projection, with native exactness still refused.** A qualified
+filled path can now declare its fixed parent viewport and proportional local
+geometry. This is admitted only for a coherent free parent whose children are
+qualified filled paths. A complete, identity-matched square caller observation
+can use the existing size override without changing the standalone main.
+Competing geometry, missing observations and incompatible transforms refuse.
+Both React emitters follow the proportional drawing; the fresh app archive's
+four warning hosts are 12 × 12, with 9.75 × 9.75 drawings. A clean consumer retains
+the downloaded package bytes. Browser subpixel layout still differs from the
+source placement, and the warning remains black rather than inheriting red.
+
+The corresponding Light-mode application run creates 20 variants and 48
+variables, but independent readback rejects four inherited vector positions.
+Figma retains a tiny original offset during SCALE resizing instead of its
+mathematically proportional value. Dimensions and scaled path segments pass;
+the strict position check remains unchanged. Explicitly setting inherited
+positions then failed in a separate Dark-mode run because Figma forbids that
+instance-child transform override. The attempted writer was removed; its
+partial page and both operation histories remain intact. Setting a standalone
+vector's origin to zero also fails exact source-path verification, so it is not
+an accepted correction. No tolerance or scoring threshold was widened.
+
+The SCALE projection and rejected position-writer decisions, reversal preimages,
+application archives and measurements are retained in
+`private/scalable-filled-path-v251/`. Native exact geometry, the provisional
+checkbox child, host-owned paint, repair and full V1 qualification remain open.
+
+**Caller color in the subsequent React archive.** The readers now identify a
+qualified overridden solid vector by its nearest main component and numeric
+child path. A single-ink scalable component can expose its root color while
+the path consumes `currentColor` through the existing literal channel. Complete
+identity-matched caller observations can override that color without replacing
+the main's default paint. Ambiguous targets and additional overridden fields
+remain named and uncarried. No layer-name selector or component-specific rule
+is used.
+
+A fresh application download installs byte-identically in a clean React
+consumer and renders all four warning glyphs with the observed red fill at the
+previously verified size. The checkbox's stateful glyph is still a provisional
+stub. The corresponding native run creates a red warning but then stops with
+stale instance-sublayer references: paint was overridden before attachment to
+the caller slot. Applying that override after attachment now completes a live
+replacement through the application. All four warning instances carry the red
+variable-bound paint and intended size; the reusable main keeps its default
+paint. The unobstructed error variant was inspected. Independent readback still
+refuses the four exact inherited path origins described above. The checkbox's
+stateful glyph remains empty, and full fidelity and V1 remain unqualified.
+
+The initial recovery refusal also exposed an inventory mismatch: Figma remapped
+one caller allocation into a virtual slot identity and inherited 15 layers from
+owned component mains. Recovery now authenticates those relationships against
+the original allocation stamps, main links and complete observed tree. Foreign
+content, altered identities and external consumers still refuse. The review and
+acknowledgement use the exact physical inventory, not only the original allocation
+IDs. The live reviewed replacement retired 62 nodes, created all 20 root variants
+and reused 49 variables. A fresh read collected 156 nodes from 132 allocations.
+The original plan, creation acknowledgement and failed reads are unchanged;
+replacement and inspection append to the same operation journal. Evidence and
+reversal preimages: `private/host-paint-target-v252/` and
+`private/partial-slot-recovery-v253/`.
+
+## D.156 Direct drawing instances carry their box; a projected child state forwards only `disabled`
+
+**AGENT decisions, 2026-09-25.** Two generic proposal rules extend D.155.
+
+A key-resolved direct instance of a standalone drawing whose single path records
+a SCALE/SCALE `parentViewport` now carries its observed square box through the
+child's declared `size` channel. The child's own viewport records the main box,
+so no minted-value ledger is needed; the comparison is exact. The rule requires
+the same identity qualification as caller ink: matching file, node and key, no
+child variant axes, and a square box on every occurrence. Non-square, missing or
+unchanged boxes carry nothing. The existing ledger path is unchanged.
+
+A host that applies a child's §D.41 projected state axis now forwards it through
+the same closed table onto the child's promoted `disabled` boolean. Every
+observed occurrence must apply an in-table value on that one axis; otherwise
+nothing forwards and `state-forward-incomplete` is named. Hover, focus-visible
+and active have no input a caller can set. They are named
+`state-forward-pseudo-class-unrepresentable`; their drawn appearance is not
+invented.
+
+Component-ref state overrides select only the child's declared override
+variables. CSS Modules React and native state previews carry them. Inline React
+carries the base box and ink and declares the part-state omission in its header.
+
+Measured through the application on the CBDS Checkbox family (fresh REST capture,
+JSON import, **Prepare React library**, archive SHA-256 `67b65920…818358`, clean
+consumer, explicit hashed Inter, unchanged 5% limit):
+
+| Component | Result | Named gaps |
+| --- | --- | --- |
+| Checkbox-icon, 42 variants | 30/42 at 0.000% on white and black: every rest, error, disabled and pointer-hover cell | 12 focus-visible cells are unreachable: the root is a non-focusable element and its ring is not drawn |
+| Checkbox, 20 variants | 5/20 | 11 label rasterisation failures (text-only; best alignment is unshifted); 4 focus cells lack the ring; hover renders rest ink |
+
+Outside the label text, Checkbox differs by 0–2%. Glyph size, path geometry and
+ink match. A `text-rendering: geometricPrecision` diagnostic reached 8/20 but
+changed the label width by 1 px, so it was not adopted.
+
+The native operation `46e5f671-2e8e-4b73-8802-255374f3ef3e` then created 20
+Checkbox variants and 81 variables through Sync Runner in Evaluations. The app's
+independent readback refuses exactly four facts, all
+`native-filled-path-observation-inherited-scale` on the warning glyph in the four
+error variants (the v253 class); every other checked node passes, including the
+24/16 px glyph instance boxes. Canvas inspection with the plugin closed shows
+correct rest and error rows. **Disabled variants draw rest ink natively**: the
+child models `disabled` as a Boolean property, which cannot change paint, plus
+`State=Disabled` preview variants drawn only for `size=small, error=false` (21 of
+42 child cells), so a forwarded parent `disabled` has nothing to select. Native
+fidelity, interaction, accessibility and V1 remain unqualified. Evidence and
+reversal instructions: `private/direct-state-ink-v255/`.
+
+## D.157 Visibility must preserve other property bindings
 
 **AGENT decision — 2026-09-23.** Figma replaces a node's complete
 `componentPropertyReferences` map on assignment. The renderer assigned text or
@@ -10185,3 +11668,83 @@ application delivery, complete dependency verification and fidelity remain open.
 runtime-hash suffix from both emission and the plugin mirror. Preserve the
 failed and corrected native evidence; do not call a defined but unbound text
 property editable.
+
+## D.158 A second caller of the same child allocates its own selected-content name
+
+**AGENT decision, 2026-09-26.** Fixed-swap caller content (D.154) wrote the part
+key `selectedContent` verbatim. CBDS Badge places two icons, so both children
+received that key and the proposed contract failed validation with a duplicate
+part name; the app could not prepare the library. The key is now claimed through
+the proposer's contract-wide part-name rule: the first caller keeps
+`selectedContent`, later callers take the parent-derived name with a named note.
+Single-caller outputs are unchanged. Re-measured through the app on current code:
+CBDS Badge passes 72/72 in a clean consumer (2.214% white / 4.557% black) and its
+native output passes 72/72 against that consumer and 72/72 at 0.000% against the
+original Figma frames, with exact dimensions. Reverse by restoring the literal key
+and removing the regression test in `core/instance-prop-forwarding.test.ts`.
+
+## D.159 Property-probe restoration ignores only per-render frame ordinals
+
+**AGENT decision, 2026-09-26.** After the 2026-09-22 nested-host work the
+ownership read records factory invocations, including numeric frame ordinals. The
+shadcn Alert re-invokes its factory once between static baseline reads, so
+`creationInvocation.invocation` and `.reactCall` changed while the tree, image,
+fonts and bounds restored exactly; every Alert property row refused and its root
+never drafted. Restoration now compares ownership with only those two numeric
+ordinals removed. Creation sites, inputs, effects, lineage and structure must
+still match; the callback-behaviour probe keeps its strict comparison; the
+refusal now names the first differing ownership path. Measured: Alert default and
+destructive draft `native-compiled` again (one of four rows after the existing
+recorded layout rebuild). Reverse in `source-reference/react-property-probe.ts`.
+
+## D.160 Computed-style held-out replays record a per-platform overlay
+
+**AGENT decision, 2026-09-26.** The current held-out replay compares every
+artifact byte. Its render ledgers record Chromium computed styles, whose text
+metrics differ between macOS and Linux (D.88): three ledgers recorded on macOS
+failed the Linux CI gate while the same gate passed locally. A `<root>.<platform>`
+overlay recorded by the same recorder on that platform (in CI, never
+hand-stamped) replaces those files on that platform only; an overlay may not add
+files, and every byte is still compared exactly. Reverse by deleting the overlay
+directory and `expectedInventory` in `recipe/canvas-to-code-held-out-current.ts`.
+
+## D.161 A content slot's counter-axis FILL is re-seated after the exact-zero reset
+
+**AGENT decision, 2026-09-26.** A root content slot is built empty, so the
+birth-box repair (`remeasureBirthBox`, rt20) resets its HUG axes to exact zero. The root then set
+the slot's counter axis to FILL. On the canvas that FILL kept the stored zero:
+the app-created AlertTitle and AlertDescription mains carried a 0 px wide slot
+inside a 100 px root, and every instance inherited it, so the Alert comparison
+drew its caller content from the slot's centre. A live Scratch probe reproduced
+this with the runtime's own order (slot 0×0 at FILL in a 100×0 component).
+Applying the same FIXED-resize-FILL round-trip the birth-box repair uses gave
+100 px, and an instance widened to 360 px carried a 360 px slot.
+`sizeRootContent` now re-seats a counter-axis FILL at the parent's inner extent,
+and `RUNTIME_EMIT_REV` is `rt21-reseat-counter-axis-fill`, so every committed
+sync script was re-emitted (only that line changed). The headless mock models
+the measured case only (SLOT, horizontal axis, exact zero), and
+`core/figma-root-slot.test.ts` fails without the re-seat (0 vs 284). Reverse by
+removing the re-seat, the mock's `_zeroFillW` and the test, and restoring the rt20
+revision. Measured through the app afterwards (fresh root, both child mains
+and the content comparison, in Evaluations): both composed Alert cases match
+their React source within the unchanged 5% limit at exactly 360 × 68 px —
+destructive 3.211% white / 3.248% black, default 3.068% / 3.105% — and the
+remaining difference is glyph edges only.
+
+## D.162 A parent-set BOOLEAN state selects the child's drawn State preview
+
+**AGENT decision, 2026-09-26.** A designer `state=disabled` axis becomes a
+BOOLEAN `Disabled` property on the child, and a BOOLEAN paints nothing in
+Figma. State previews multiply only the child's primary axis and pin every
+other axis to its default. So the natively created CBDS Checkbox forwarded
+`Disabled=true` into CheckboxIcon but never selected a disabled cell, and all
+four disabled parent variants drew rest ink (op `46e5f671`), while React was
+correct. `mapDepProps` now also sets `State=<state>` when exactly one BOOLEAN
+state is true and every wired non-primary axis sits on its preview pin.
+Otherwise the state is ledgered by name (`draws its State previews only at …`)
+instead of silently drawing rest ink. No committed sync script changed. Covered
+by `core/direct-instance-drawing.test.ts` ("a parent-set BOOLEAN state selects
+the child State preview…"). This makes the pinned cells correct and names the
+others; drawing previews across every axis combination (21 → 30 CheckboxIcon
+variants for disabled alone) remains the complete fix and needs its own receipt
+round. Reverse by deleting the statePreviews block in `mapDepProps` and its test.

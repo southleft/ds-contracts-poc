@@ -511,7 +511,7 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   writeFileSync(file, 'unchanged source');
   const reference = { id: 'a'.repeat(64), files: { [file]: evidenceSha('unchanged source') }, javascript: '', css: '', cohort: builtinReactCohort, sourceRoot: repo };
   const report: ReactOwnershipReport = { id: input.operation.id, referenceId: reference.id, state: 'complete', acceptedContract: null,
-    denominator: 1, matched: 1, sourceUnchanged: true, rows: [{ id: 'button-default', matched: true, problems: [], rootMatrix: input.matrix }] };
+    denominator: 1, matched: 1, sourceUnchanged: true, rows: [{ id: 'button-default', matched: true, problems: [], rootMatrix: input.matrix, authoredTrees: [{helper:0,reason:'retained structural observation'}], jsxHelpers: [] }] };
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, report.id); mkdirSync(dir, { recursive: true });
   writeFileSync(path.join(dir, 'report.json'), JSON.stringify(report));
   writeFileSync(path.join(dir, 'program.json'), JSON.stringify({ files: reference.files }));
@@ -539,6 +539,8 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   assert.equal(restored.report().sourceUnchanged, false);
   assert.equal(restored.report().matched, 0);
   assert.equal(restored.report().rows[0].rootMatrix, undefined);
+  assert.equal(restored.report().rows[0].authoredTrees, undefined);
+  assert.equal(restored.report().rows[0].jsxHelpers, undefined);
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
   writeFileSync(file, 'unchanged source');
   const reportPath = path.join(dir, 'report.json'), original = readFileSync(reportPath);

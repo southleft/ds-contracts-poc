@@ -14,14 +14,14 @@ import {nativeLibraryReactionsMatch,type NativePreparedLibrarySource} from './na
 import {validNativeGraphCreation} from './native-graph-creation.js';
 import {annotateNativeContractProjection} from './native-contract-draft.js';
 
-async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill=false) {
+async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|null='Inter', fill:boolean|'height'=false, shapes?:'row'|'column'|'percent'|'path', literalPaint=false, callerInk=false) {
   const host=nativeFixtureHost({instanceVariantSelection:true}); host.figma.fileKey='PreparedLibraryFixture';
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection=function(c:any,mode:string) {
     this.explicitVariableModes={...this.explicitVariableModes,[c.id]:mode};
   };
   const run=async(script:string)=>JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`,{figma:host.figma,console},{timeout:5000})));
   const tokens={primitives:{ink:{$type:'color',$value:'#123456'},fade:{$type:'number',$value:0.5},
-    edge:{$type:'number',$value:1},otherEdge:{$type:'number',$value:1}},
+    edge:{$type:'number',$value:1},otherEdge:{$type:'number',$value:1},...(callerInk?{callerInk:{$type:'color',$value:'#b51833'},drawingSize:{$type:'dimension',$value:'24px'}}:{})},
     semantic:{label:{$type:'color',$value:'{ink}'}},light:{},dark:{},brands:{default:{}}};
   const leaf=ContractSchema.parse({id:'test.library-leaf',name:'Leaf',version:'0.1.0',status:'draft',
     description:'Synthetic conformance fixture; no visual qualification',semantics:{element:'button'},states:['hover'],
@@ -33,11 +33,71 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     }}},bindings:{code:{anchors:{importPath:'test/Leaf',export:'Leaf'}},figma:{statePreviews:true,anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-leaf-key'}}}});
   const parent=ContractSchema.parse({id:'test.library-parent',name:'Parent',version:'0.1.0',status:'draft',
     description:'A default slot instance plus an ordinary nested instance',props:[],states:[],semantics:{element:'div'},
-    anatomy:{root:{layout:{display:'flex',direction:'column',...(fill?{align:'stretch'}:{})},...(fill?{literals:{width:'320px'}}:{}),parts:{
-      slot:{slot:{name:'children',defaultContent:[{id:leaf.id,props:{size:'large',label:'Default caller'}}],accepts:[leaf.id]}},
+    anatomy:{root:{layout:{display:'flex',direction:shapes==='percent'||shapes==='path'?'column':shapes??'column',...(fill?{align:'stretch'}:{})},...((fill||shapes)?{literals:{width:'320px',...((fill==='height'||shapes)?{height:'300px'}:{})}}:{}),parts:{
+      slot:{...(fill==='height'?{layout:{display:'flex',direction:'column',grow:true}}:{}),slot:{name:'children',defaultContent:[{id:leaf.id,props:{size:'large',label:'Default caller'}}],accepts:[leaf.id]}},
       leaf:{component:{id:leaf.id,props:{shown:true}}},
       ...(fill?{frame:{layout:{display:'flex',grow:true},parts:{nested:{slot:{name:'extra'}}}}}:{}),
+      ...(shapes && shapes!=='path'?Object.fromEntries(['rect','ellipse'].map(kind=>[kind,{shape:{kind,width:10,height:12},...(shapes==='percent'?{literals:{width:'100%'}}:{layout:{grow:true,growBasis:'zero'}}),tokens:{'background-color':'{ink}'}}])):{}),
     }}},bindings:{code:{anchors:{importPath:'test/Parent',export:'Parent'}},figma:{anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-parent-key'}}}});
+  if (literalPaint) {
+    parent.anatomy.root.literals={...parent.anatomy.root.literals,'background-color':'#eeeeee80'};
+    parent.anatomy.root.parts!.paintedFrame={layout:{display:'flex'},literals:{'background-color':'#cc9966',width:'8px',height:'9px'}};
+  }
+  if (shapes === 'path') {
+    parent.anatomy.root.parts!.mark = { shape: {kind:'path',width:12.25,height:10.25,paths:[{data:'M0 0L12 0L6 10Z',windingRule:'NONZERO'}]}, tokens:{'background-color':'{ink}'} };
+    // Live Figma readbacks expose paint bindings both on the paint and in
+    // node.boundVariables.fills. The base synthetic host omits that mirror.
+    const reflectPaintBindings=(node:any)=>{
+      if(!callerInk)return;
+      let paints=node.fills;
+      Object.defineProperty(node,'fills',{configurable:true,get:()=>paints,set(value){
+        if(value[0]?.color?.r===181/255)assert.equal(node.parent?.parent?.parent?.type,'SLOT','override before caller-slot attachment invalidates native sublayers');
+        paints=value;
+      }});
+      let explicit=node.boundVariables??{};
+      Object.defineProperty(node,'boundVariables',{configurable:true,get(){
+        const fills=(node.fills??[]).flatMap((paint:any)=>paint.boundVariables?.color?[paint.boundVariables.color]:[]);
+        return {...explicit,...(fills.length?{fills}:{})};
+      },set(value){explicit=value;}});
+    };
+    const prototype = Object.getPrototypeOf(host.figma.currentPage);
+    Object.defineProperty(prototype, 'relativeTransform', {get() {
+      assert.equal(this.rotation,0,'this synthetic host only models untranslated axes');
+      return [[1,0,this.x],[0,1,this.y]];
+    }});
+    const clone = prototype._cloneForInstance;
+    prototype._cloneForInstance = function() {
+      const instance = clone.call(this);
+      for (const field of ['vectorPaths','isMask','blendMode'])
+        if (this[field] !== undefined) instance[field] = structuredClone(this[field]);
+      if(this.type==='VECTOR')reflectPaintBindings(instance);
+      return instance;
+    };
+    // This host models the measured triangle API behavior only. Live curve
+    // geometry is tested independently; no source-expected size is injected.
+    (host.figma as any).createVector = () => {
+      const node = host.figma.createRectangle() as any; node.type = 'VECTOR'; node.isMask = false;
+      node.blendMode = 'PASS_THROUGH'; node.constraints = {horizontal:'MIN',vertical:'MIN'};
+      reflectPaintBindings(node);
+      let paths: unknown;
+      Object.defineProperty(node, 'vectorPaths', {get:()=>paths,set:(value:any)=>{
+        assert.equal(value[0].data,'M0 0L12 0L6 10Z');
+        paths=[{data:'M 0 0 L 12 0 L 6 10 L 0 0 Z',windingRule:'NONZERO'}];
+        node.resize(12,10);
+      }});
+      return node;
+    };
+  }
+  if (callerInk) {
+    leaf.props=[];leaf.states=[];delete leaf.bindings.figma.statePreviews;
+    leaf.anatomy.root={declared:{position:'relative'},tokens:{color:'{ink}',width:'{drawingSize}',height:'{drawingSize}'},overridable:['color'],parts:{
+      ink:{shape:{kind:'path',width:12,height:10,paths:[{data:'M0 0L12 0L6 10Z',windingRule:'NONZERO'}],parentViewport:{width:24,height:24,x:3,y:4}},literals:{'background-color':'currentColor'}},
+    }};
+  }
+  const slotHost=callerInk?ContractSchema.parse({...leaf,id:'test.drawing-host',name:'DrawingHost',
+    anatomy:{root:{layout:{display:'flex'},parts:{well:{slot:{name:'children',bindings:{figma:{property:'Drawing'}}}}}}},
+    bindings:{code:{anchors:{importPath:'test/DrawingHost',export:'DrawingHost'}},figma:{anchors:{fileKey:'OriginalSourceFile',componentSetKey:'original-host-key'}}}}):undefined;
+  if(slotHost)parent.anatomy.root.parts={leaf:{component:{id:slotHost.id},parts:{selected:{component:{id:leaf.id,overrides:{color:'{callerInk}'}}}}},untouched:{component:{id:leaf.id}}};
   const outer=ContractSchema.parse({...parent,id:'test.library-outer',name:'Outer',
     anatomy:{root:{layout:{display:'flex'},parts:{panel:{component:{id:parent.id}},
       ...(composed==='repeated'?{secondPanel:{component:{id:parent.id}}}:{})}}}});
@@ -45,6 +105,7 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
     anatomy:{root:{layout:{display:'flex'},parts:{outer:{component:{id:outer.id}}}}}});
   const root=composed==='repeated'?top:composed==='nested'?outer:composed?parent:leaf;
   const byId=new Map((composed==='repeated'?[top,outer,parent,leaf]:composed==='nested'?[outer,parent,leaf]:composed?[parent,leaf]:[leaf]).map(c=>[c.id,c]));
+  if(slotHost)byId.set(slotHost.id,slotHost);
   const before=JSON.stringify([...byId.values()]);
   const source:NativePreparedLibrarySource={kind:'prepared-contract-library',revision:'sha256:'+'a'.repeat(64),artifactId:'a'.repeat(64),
     inputSha256:'b'.repeat(64),tarballSha256:'c'.repeat(64),tokensSha256:revisionOf(tokens).slice(7)};
@@ -66,6 +127,57 @@ async function fixture(composed:boolean|'nested'|'repeated'=true, family:string|
   const receipt=await run(emitNativePreparedLibraryReadbackScript(input));
   return {host,run,source,root,byId,engine,context,compiled,script,creation,input,receipt};
 }
+
+test('native caller ink verifies its own bound paint while preserving the main and sibling',async()=>{
+  const f=await fixture(true,'Inter',false,'path',false,true);
+  const result=verifyNativePreparedLibraryReadback(f.input,f.receipt);
+  assert.equal(result.status,'supported-structure-observed',JSON.stringify(result));
+  const vectors=f.receipt.nodes.filter((n:any)=>n.type==='VECTOR');
+  assert.equal(vectors.length,3);
+  const caller=vectors.find((n:any)=>n.values.fills[0]?.color.r===Math.fround(181/255)||n.values.fills[0]?.color.r===181/255);
+  assert(caller,'the caller must carry its red fill');
+  assert.equal(vectors.filter((n:any)=>n!==caller&&n.values.fills[0]?.color.r===18/255).length,2,'main and untouched instance keep the original fill');
+  const changes:Array<(n:any)=>void>=[
+    n=>{n.values.fills[0].color.g=0;},
+    n=>{n.values.fills[0].boundVariables.color.id='wrong';},
+    n=>{n.values.boundVariables.fills[0].id='wrong';},
+    n=>{n.values.boundVariables.opacity={type:'VARIABLE_ALIAS',id:'unexpected'};},
+    n=>{n.values.fills.push(structuredClone(n.values.fills[0]));},
+  ];
+  for(const change of changes){const receipt=structuredClone(f.receipt);change(receipt.nodes.find((n:any)=>n.id===caller.id));
+    const refused=verifyNativePreparedLibraryReadback(f.input,receipt);
+    assert.equal(refused.status,'refused',JSON.stringify(refused));
+    assert(JSON.stringify(refused).includes('native-filled-path-observation-caller-ink'));
+  }
+});
+
+test('native filled paths preserve a fixed viewport and verify owned and inherited editable ink', async () => {
+  const f = await fixture('nested','Inter',false,'path');
+  const result = verifyNativePreparedLibraryReadback(f.input,f.receipt);
+  assert.equal(result.status,'supported-structure-observed',JSON.stringify(result));
+  const vector = f.receipt.nodes.find((n:any)=>n.type==='VECTOR' && f.creation.nodes.some((b:any)=>b.id===n.id));
+  const viewport = f.receipt.nodes.find((n:any)=>n.id===vector.parentId);
+  assert.equal(viewport.values.width,12.25); assert.equal(viewport.values.height,10.25);
+  assert.equal(vector.values.width,12); assert.equal(vector.values.height,10);
+  assert.equal(viewport.values.clipsContent,true); assert.equal(viewport.values.layoutMode,'NONE');
+  const inherited = f.receipt.nodes.find((n:any)=>n.type==='VECTOR' && !f.creation.nodes.some((b:any)=>b.id===n.id));
+  assert(inherited);
+  for (const [name, mutate] of [
+    ['same bounds, changed path',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).values.vectorPaths[0].data='M0 0L12 0L5 10Z';}],
+    ['winding',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).values.vectorPaths[0].windingRule='EVENODD';}],
+    ['mask',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).values.isMask=true;}],
+    ['normal blend',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).values.blendMode='NORMAL';}],
+    ['multiply blend',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).values.blendMode='MULTIPLY';}],
+    ['origin',(r:any)=>{const v=r.nodes.find((n:any)=>n.id===vector.id).values;v.x=0.125;v.relativeTransform[0][2]=v.x;}],
+    ['viewport size',(r:any)=>{r.nodes.find((n:any)=>n.id===viewport.id).values.width=12;}],
+    ['clip',(r:any)=>{r.nodes.find((n:any)=>n.id===viewport.id).values.clipsContent=false;}],
+    ['inherited path',(r:any)=>{r.nodes.find((n:any)=>n.id===inherited.id).values.vectorPaths[0].data='M0 0L12 0L5 10Z';}],
+    ['ink allocation',(r:any)=>{r.nodes.find((n:any)=>n.id===vector.id).metadata.nativeSourceAllocation='foreign';}],
+  ] as const) {
+    const changed=structuredClone(f.receipt); mutate(changed);
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,changed).status,'refused',name);
+  }
+});
 
 test('retained libraries create scoped stateful components, joint controls and tracked default slot content',async()=>{
   for(const composed of [false,true,'nested'] as const) {
@@ -142,6 +254,49 @@ test('library readback rejects state, property, slot and provenance corruption e
   assert.throws(()=>f.engine.compileNativeContractGraphDraft(f.root,f.byId,{revision:f.source.revision,programSha256:f.source.artifactId,evidenceRevision:f.source.revision},f.context.operation.id),/TOKEN_OVERLAY_UNQUALIFIED/);
 });
 
+
+test('prepared-library declared solid frame paints verify exactly and refuse altered or extra paint',async()=>{
+  const f=await fixture(true,'Inter',false,undefined,true);
+  const report=verifyNativePreparedLibraryReadback(f.input,f.receipt);
+  assert.equal(report.status,'supported-structure-observed',JSON.stringify(report));
+  const specs:any[]=[];
+  const visit=(spec:any)=>{if(spec.lits?.fillColor&&!spec.backgroundPaint)specs.push(spec);(spec.children??[]).forEach(visit);};
+  f.compiled.components.forEach(c=>c.variants.forEach(v=>visit(v.spec)));
+  assert.deepEqual(specs.map(s=>s.type).sort(),['frame','root']);
+  for (const spec of specs) {
+    const row=f.receipt.nodes.find((n:any)=>n.metadata.nativeContractPart&&
+      JSON.stringify(JSON.parse(n.metadata.nativeContractPart))===JSON.stringify(spec.nativeContractPart));
+    assert.ok(row);
+    const rounded=structuredClone(f.receipt),paint=rounded.nodes.find((n:any)=>n.id===row.id).values.fills[0];
+    for(const key of ['r','g','b'])paint.color[key]=Math.fround(paint.color[key]);
+    paint.opacity=Math.fround(paint.opacity??1);
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,rounded).status,'supported-structure-observed');
+    for(const [name,mutate] of [
+      ['missing',(v:any)=>{v.fills=[];}],
+      ['extra',(v:any)=>{v.fills.push(structuredClone(v.fills[0]));}],
+      ['type',(v:any)=>{v.fills[0].type='GRADIENT_LINEAR';}],
+      ['hidden',(v:any)=>{v.fills[0].visible=false;}],
+      ['blend',(v:any)=>{v.fills[0].blendMode='MULTIPLY';}],
+      ['color',(v:any)=>{v.fills[0].color.r+=0.000001;}],
+      ['opacity',(v:any)=>{v.fills[0].opacity=(v.fills[0].opacity??1)-0.1;}],
+      ['alias',(v:any)=>{v.fills[0].boundVariables={color:{type:'VARIABLE_ALIAS',id:f.input.tokenIdentity.variables[0].id}};}],
+      ['node alias',(v:any)=>{v.boundVariables.fills=[{type:'VARIABLE_ALIAS',id:f.input.tokenIdentity.variables[0].id}];}],
+      ['malformed node alias',(v:any)=>{v.boundVariables.fills={};}],
+      ['missing color channel',(v:any)=>{delete v.fills[0].color.r;}],
+      ['non-array paints',(v:any)=>{v.fills={0:v.fills[0],length:1};}],
+    ] as const) {
+      const changed=structuredClone(f.receipt);mutate(changed.nodes.find((n:any)=>n.id===row.id).values);
+      const result=verifyNativePreparedLibraryReadback(f.input,changed);
+      assert.equal(result.status,'refused',spec.type+' '+name);
+      assert.ok(result.problems.some(p=>p.startsWith('native-library-observation-literal-fill')),spec.type+' '+name+' '+JSON.stringify(result));
+    }
+    const unrequested=structuredClone(f.input);
+    const remove=(s:any)=>{if(JSON.stringify(s.nativeContractPart)===JSON.stringify(spec.nativeContractPart))delete s.lits.fillColor;(s.children??[]).forEach(remove);};
+    unrequested.graphComponents!.forEach(c=>c.variants.forEach(v=>remove(v.spec)));
+    unrequested.component.variants.forEach(v=>remove(v.spec));
+    assert.equal(verifyNativePreparedLibraryReadback(unrequested,f.receipt).status,'refused','undeclared literal paint');
+  }
+});
 
 test('native reaction API mirrors preserve exact behavior and reject additional actions and flags',()=>{
  const action={type:'NODE',destinationId:'1:2',navigation:'CHANGE_TO',transition:null};
@@ -275,6 +430,54 @@ test('library readback rejects lost Fill on frames and slots',async()=>{
       const result=verifyNativePreparedLibraryReadback(input,changed);
       assert.equal(result.status,'refused',row.type+' '+mode);
       assert.ok(JSON.stringify(result).includes('native-library-observation-fill-width'));
+    }
+  }
+});
+
+
+test('library readback rejects lost vertical Fill without accepting a fixed height',async()=>{
+  const {input,receipt,compiled}=await fixture(true,'Inter','height');
+  assert.equal(verifyNativePreparedLibraryReadback(input,receipt).status,'supported-structure-observed');
+  const specs:any[]=[];
+  const visit=(spec:any)=>{if(spec.fillH)specs.push(spec);(spec.children??[]).forEach(visit);};
+  compiled.components.forEach(c=>c.variants.forEach(v=>visit(v.spec)));
+  const rows=specs.map(spec=>receipt.nodes.find((n:any)=>n.metadata.nativeContractPart&&
+    JSON.stringify(JSON.parse(n.metadata.nativeContractPart))===JSON.stringify(spec.nativeContractPart)));
+  assert.ok(rows.some((n:any)=>n?.type==='SLOT'));assert.ok(rows.some((n:any)=>n?.type==='FRAME'));
+  for(const row of rows){
+    assert.ok(row);assert.equal(row.values.layoutSizingVertical,'FILL');
+    for(const mode of ['HUG','FIXED',undefined]){
+      const changed=structuredClone(receipt);changed.nodes.find((n:any)=>n.id===row.id).values.layoutSizingVertical=mode;
+      const result=verifyNativePreparedLibraryReadback(input,changed);
+      assert.equal(result.status,'refused',row.type+' '+mode);
+      assert.ok(JSON.stringify(result).includes('native-library-observation-fill-height'));
+    }
+  }
+});
+
+
+test('prepared-library growing shapes preserve Fill while fixed cross sizes stay exact',async()=>{
+  for(const direction of ['row','column','percent'] as const){
+    const f=await fixture(true,'Inter',false,direction);
+    assert.equal(verifyNativePreparedLibraryReadback(f.input,f.receipt).status,'supported-structure-observed');
+    const legacy=structuredClone(f.input);
+    const removeSizing=(spec:any)=>{if(spec.type==='shape'){delete spec.grow;delete spec.widthFill;}(spec.children??[]).forEach(removeSizing);};
+    [legacy.component,...(legacy.graphComponents??[])].forEach(c=>c.variants.forEach(v=>removeSizing(v.spec)));
+    const legacyResult=verifyNativePreparedLibraryReadback(legacy,f.receipt);
+    assert.equal(legacyResult.status,'refused','an implicit legacy Fill flag cannot grant resized geometry');
+    assert.ok(JSON.stringify(legacyResult).includes('native-contract-observation-shape-size'));
+    const shapes=f.receipt.nodes.filter((n:any)=>['RECTANGLE','ELLIPSE'].includes(n.type));
+    assert.equal(shapes.length,2);
+    const field=direction!=='column'?'layoutSizingHorizontal':'layoutSizingVertical';
+    const cross=direction!=='column'?'height':'width';
+    for(const node of shapes){
+      assert.equal(node.values[field],'FILL');
+      for(const value of ['FIXED','HUG',undefined]){const r=structuredClone(f.receipt);r.nodes.find((n:any)=>n.id===node.id).values[field]=value;assert.equal(verifyNativePreparedLibraryReadback(f.input,r).status,'refused');}
+      const r=structuredClone(f.receipt);r.nodes.find((n:any)=>n.id===node.id).values[cross]+=0.5;
+      assert.equal(verifyNativePreparedLibraryReadback(f.input,r).status,'refused','fixed cross geometry remains exact');
+      const axis=direction!=='column'?'width':'height';
+      for(const invalid of [-1,NaN,Infinity,undefined]){const r=structuredClone(f.receipt);r.nodes.find((n:any)=>n.id===node.id).values[axis]=invalid;assert.equal(verifyNativePreparedLibraryReadback(f.input,r).status,'refused','invalid Fill extent');}
+      const stretched=structuredClone(f.receipt);stretched.nodes.find((n:any)=>n.id===node.id).values[direction!=='column'?'layoutSizingVertical':'layoutSizingHorizontal']='FILL';assert.equal(verifyNativePreparedLibraryReadback(f.input,stretched).status,'refused','unsolicited cross-axis Fill');
     }
   }
 });

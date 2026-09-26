@@ -82,12 +82,12 @@ test('a second axis the fill does not depend on is ignored; every value of the a
   assert.deepEqual(headerOf(result).literalsByProp, [{ prop: 'variant', map: { stretch: { width: '100%' } } }]);
 });
 
-test('a FILL drawn in EVERY variant proposes exactly what it did before', () => {
-  // Width under a COLUMN whose other child hugs: the whole-set path names it (its bytes are unchanged).
+test('a FILL drawn in EVERY variant uses a base relation without changing sibling alignment', () => {
+  // The whole-set width relation has the same carrier as a partial FILL.
   const width = propose('VERTICAL', [{ name: 'Variant=Default', header: true }, { name: 'Variant=Stretch', header: true }]);
   assert.equal(headerOf(width).literalsByProp, undefined);
-  assert.equal(headerOf(width).literals, undefined);
-  assert.ok(width.notes.some(n => /header: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(n)));
+  assert.deepEqual(headerOf(width).literals, { width: '100%' });
+  assert.ok(width.notes.some(n => /header: drawn FILL-width under a COLUMN parent in every occurrence of this part.*carried as the part literal/.test(n)));
   // Height under a definite ROW: the base literal, not a per-variant one.
   const height = propose('HORIZONTAL', [{ name: 'Variant=Default', header: true }, { name: 'Variant=Stretch', header: true }]);
   assert.deepEqual(headerOf(height).literals, { height: '100%' });
@@ -124,12 +124,13 @@ test('anything less correlated stays NAMED with nothing proposed', () => {
   assert.ok(partial.notes.some(n => NAMED.test(n)));
 });
 
-test('the primary-axis twin has no per-variant spelling: it is NAMED with its axis, and carried as neither grow nor 100%', () => {
+test('the primary-axis twin uses variant grow without replacing sibling widths with 100%', () => {
   const result = propose('VERTICAL', [{ name: 'Variant=Default' }, { name: 'Variant=Stretch', header: true, list: true }]);
   const list = headerOf(result).parts!.list;
   assert.equal(list.literalsByProp, undefined, 'three siblings at width: 100% would each claim the whole row');
-  assert.equal((list.layout as Record<string, unknown> | undefined)?.grow, undefined, 'grow is a per-part invariant: it would fill Variant=Default too');
-  assert.ok(result.notes.some(n => /header\/list: drawn FILL-width along a ROW parent's primary axis in 1\/2 variant occurrence\(s\) only — a pure function of axis "Variant" \(Stretch\)\..*VariantLayoutSchema\) has no `grow`.*NAMED, not carried/.test(n)));
+  assert.equal((list.layout as Record<string, unknown> | undefined)?.grow, undefined, 'unconditional grow would also fill Variant=Default');
+  assert.deepEqual(list.layoutByProp, {prop: 'variant', map: {stretch: {grow: true, growBasis: 'zero'}}});
+  assert.ok(result.notes.some(n => /header\/list: primary-axis FILL carried as layoutByProp.grow/.test(n)));
   // Drawn in every variant it is the ordinary grow, and nothing is named.
   const every = propose('VERTICAL', [{ name: 'Variant=Default', list: true }, { name: 'Variant=Stretch', list: true }]);
   assert.equal((headerOf(every).parts!.list.layout as Record<string, unknown>).grow, true);

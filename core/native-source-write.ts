@@ -199,6 +199,7 @@ export function wrapNativeSourceWrite(
   prepared: PreparedNativeSourceWrite,
   render: string,
   draftFonts: Array<{ family: string; styles: string[] }> = [],
+  placeGraphTargets = false,
 ): string {
   return `// GENERATED scoped source-candidate inspection. Fresh objects only.
 const NATIVE = ${JSON.stringify(prepared.descriptor)};
@@ -366,7 +367,7 @@ ${prepared.comparisonParentReadbackScript}
   const applied = await (async () => {
 ${render}
   })();
-  nativeFileGuard();${'kind' in prepared.descriptor.projection && prepared.descriptor.projection.kind === 'prepared-contract-library' ? `
+  nativeFileGuard();${placeGraphTargets || ('kind' in prepared.descriptor.projection && prepared.descriptor.projection.kind === 'prepared-contract-library') ? `
   // Each fresh dependency target shares this operation's page. Arrange the
   // finished targets in dependency order, using their actual native extents;
   // placing every main at the origin conceals otherwise editable output.

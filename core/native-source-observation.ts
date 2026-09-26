@@ -1,3 +1,5 @@
+import {nativePaintStackMatches,nativeBoundPaintColor} from './native-paint-observation.js';
+import {nativeFilledPathMatches, nativeFilledPathResizeMatches} from './native-filled-path.js';
 import {nativeGraphVariants, nativeLibraryReactionsMatch, type NativePreparedLibraryProjection} from './native-prepared-library.js';
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
@@ -255,6 +257,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasText = (spec: NodeSpec): boolean => spec.type === 'text' || !!spec.children?.some(hasText);
   if (isContractDraft(input) && observedVariants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
+  const hasPathInk = (spec: NodeSpec): boolean => spec.nativePathInk === true || !!spec.children?.some(hasPathInk);
   if (isContractDraft(input) && observedVariants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
   if (isContractDraft(input) && input.graphVerification === 2) extra.push('statePreviewAxis');
   const extension=isContractDraft(input)?input.tokenExtensionReadback:undefined;
@@ -266,7 +269,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     isContractDraft(input) && input.absoluteShapeReadback?.version === 3 ? 'strict' : isContractDraft(input) && input.absoluteShapeReadback?.version === 2,
     isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
     isContractDraft(input) && input.component.rootSlot?.textTemplate === 1,
-    extension ? emitNativeTokenExtensionContextReadbackScript(extension) : undefined);
+    extension ? emitNativeTokenExtensionContextReadbackScript(extension) : undefined, false,
+    observedVariants.some(v => hasPathInk(v.spec)));
   if (!isContractDraft(input) || !input.templateGraph) return inventory;
   if (synchronous) {
     const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity, true);
@@ -302,8 +306,9 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string): string {
-  if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate || captureImages || captureExportBounds))
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false): string {
+  if(synchronousPartialInventory && !synchronous) throw Error('native-partial-sync-inventory-required');
+  if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate && !synchronousPartialInventory || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
   const fields = [
     "visible",
@@ -360,6 +365,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "textDecoration",
     "textStyleId",
     "vectorPaths",
+    ...(filledPaths ? ['isMask', 'blendMode', 'constraints'] : []),
     "reactions",
     ...(textTemplate ? ['textAutoResize', 'fontWeight'] : []),
   ];
@@ -397,7 +403,7 @@ ${synchronous ? '' : 'async '}function read(page) {
       row.definitions = copy(node.componentPropertyDefinitions);
     if (node.type === 'COMPONENT' && node.parent.type === 'COMPONENT_SET') row.variantProperties = copy(node.variantProperties);
     if (node.type === 'INSTANCE') {
-      const main = ${synchronous ? textTemplate ? 'node.mainComponent' : "(()=>{throw Error('native-fixed-cross-size-sync-instance-unsupported');})()" : 'await node.getMainComponentAsync()'}; guard();
+      const main = ${synchronous ? textTemplate || synchronousPartialInventory ? 'node.mainComponent' : "(()=>{throw Error('native-fixed-cross-size-sync-instance-unsupported');})()" : 'await node.getMainComponentAsync()'}; guard();
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
@@ -684,6 +690,14 @@ function verifyReadback(
   const mode = {
     [input.tokenIdentity.collection.id]: input.tokenIdentity.modes[0].modeId,
   };
+  const pathSpecs = new Map<string, NodeSpec>();
+  const indexPath = (spec: NodeSpec) => {
+    if ((spec.nativePathInk || spec.nativePathViewport) && spec.nativeContractPart)
+      pathSpecs.set(canonicalJson(spec.nativeContractPart), spec);
+    spec.children?.forEach(indexPath);
+  };
+  for (const component of isContractDraft(input) ? input.graphComponents ?? [input.component] : [])
+    [...component.variants, ...(component.stateVariants ?? [])].forEach(v => indexPath(v.spec));
   const target = nodes.get(c.target.id),
     page = nodes.get(c.pageId),
     board = isContractDraft(input) ? undefined : nodes.get(c.comparisonBoardId);
@@ -858,7 +872,7 @@ function verifyReadback(
                   svg: "FRAME",
                   instance: "INSTANCE",
                 } as Record<string, string>
-              )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : undefined : undefined);
+              )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : spec.nativePathInk ? 'VECTOR' : undefined : undefined);
       if (!expectedType || n.type !== expectedType)
         issue("native-source-observation-node-type", n);
       let consumingMode = mode;
@@ -900,7 +914,16 @@ function verifyReadback(
           !(spec.type === 'text' && !spec.textTruncation && spec.fillText !== true) &&
           v.layoutSizingHorizontal !== 'FILL')
         issue('native-library-observation-fill-width', n);
+      if (library && spec.fillH && v.layoutSizingVertical !== 'FILL')
+        issue('native-library-observation-fill-height', n);
       if (isContractDraft(input) && spec.type === 'instance') {
+        // A declared left/top offset is an observable contract fact even when
+        // the instance's inherited layout remains outside geometry qualification.
+        // Check it before the instance branch returns past ordinary leaf checks.
+        if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' ||
+            (spec.absolute.h === 'MIN' && !numeric(v.x, spec.absolute.left ?? 0)) ||
+            (spec.absolute.v === 'MIN' && !numeric(v.y, spec.absolute.top ?? 0))))
+          issue('native-contract-observation-instance-position', n);
         const graphComponents = input.graphComponents ?? [];
         const dep = graphComponents.find(component => component.contractId === spec.depContractId);
         const identity = Array.isArray(c.graphTargets) && c.graphTargets.find((row: any) => row.contractId === spec.depContractId);
@@ -915,6 +938,12 @@ function verifyReadback(
         }
         if (library && depTarget) {
           const main = nodes.get(n.mainId);
+          if (spec.instanceSize) {
+            const alias = {type:'VARIABLE_ALIAS', id:variableByName.get(spec.instanceSize.varName)};
+            if (!alias.id || !numeric(v.width,spec.instanceSize.px) || !numeric(v.height,spec.instanceSize.px) ||
+                v.layoutMode !== 'NONE' || !same(v.boundVariables,{...main?.values.boundVariables,width:alias,height:alias}))
+              issue('native-filled-path-observation-instance-size',n);
+          }
           if (!same(n.values.reactions ?? [],main?.values.reactions ?? [])) issue('native-library-observation-instance-reactions',n);
           if (n.values.visible !== (spec.visibleProp ? spec.visibleDefault === true : true))
             issue('native-library-observation-instance-visibility',n);
@@ -956,6 +985,34 @@ function verifyReadback(
                   child.metadata.nativeSourceAllocation !== allocation)
                 issue('native-contract-observation-instance-tree', child);
               if (library && source) {
+                const pathSpec = pathSpecs.get(canonicalJson(meta(source, 'nativeContractPart')));
+                const inkOverride = pathSpec?.nativePathInk && spec.instanceInk;
+                if (inkOverride) {
+                  const bound = nativeBoundPaintColor(inkOverride.varName,tokens.receipt.variables,consumingMode,input.tokenIdentity.collection.id);
+                  if (!nativePaintStackMatches({type:'shape',name:'caller ink',fill:inkOverride.varName},child.values.fills,bound,child.values.boundVariables?.fills) ||
+                      !bound || !same(child.values.boundVariables,{...source.values.boundVariables,fills:[{type:'VARIABLE_ALIAS',id:bound.id}]}))
+                    issue('native-filled-path-observation-caller-ink',child);
+                }
+                if (pathSpec) {
+                  const scalable = !!(pathSpec.nativePathScale || pathSpec.pathParentViewport);
+                  const fields = pathSpec.nativePathInk ? ['isMask','blendMode','constraints'] : ['layoutMode','clipsContent','constraints'];
+                  for (const field of fields) if (!same(child.values[field],source.values[field]))
+                    issue('native-filled-path-observation-inherited-' + field,child);
+                  if (scalable) {
+                    const sx = row.values.width / main!.values.width, sy = row.values.height / main!.values.height;
+                    const a = child.values, b = source.values;
+                    if (![sx,sy].every(value=>Number.isFinite(value)&&value>0) ||
+                        !numeric(a.width,b.width*sx) || !numeric(a.height,b.height*sy) ||
+                        !numeric(a.x,b.x*sx) || !numeric(a.y,b.y*sy) ||
+                        !same(a.relativeTransform,[[1,0,a.x],[0,1,a.y]]))
+                      issue('native-filled-path-observation-inherited-scale',child);
+                    if (pathSpec.nativePathInk && !nativeFilledPathResizeMatches(b.vectorPaths,a.vectorPaths,a.width/b.width,a.height/b.height))
+                      issue('native-filled-path-observation-inherited-vectorPaths',child);
+                  } else for (const field of ['relativeTransform','width','height',...(pathSpec.nativePathInk?['vectorPaths']:[])]) {
+                    if (!same(child.values[field],source.values[field]))
+                      issue('native-filled-path-observation-inherited-' + field,child);
+                  }
+                }
                 // Instance edits can override inherited content without changing
                 // its main link or allocation stamp. Compare these independently
                 // observed channels, allowing only the declared property value.
@@ -965,6 +1022,7 @@ function verifyReadback(
                   issue('native-library-observation-inherited-instance',child);
                 for (const field of ['fills','strokes','effects','opacity','strokeWeight','cornerRadius','fontName','fontSize',
                   'textAutoResize','textAlignHorizontal','lineHeight','letterSpacing','boundVariables','characters','visible']) {
+                  if (inkOverride && (field === 'fills' || field === 'boundVariables')) continue;
                   const key = source.values.componentPropertyReferences?.[field];
                   const expected = key && properties[key] ? properties[key].value : source.values[field];
                   if (!same(child.values[field],expected)) issue('native-library-observation-inherited-'+field,child);
@@ -1041,11 +1099,15 @@ function verifyReadback(
         issue("native-source-observation-visibility", n);
       if (
         spec.layout &&
-        (v.layoutMode !== spec.layout.mode ||
+        !spec.scalablePathParent && (v.layoutMode !== spec.layout.mode ||
           (spec.layout.mode !== 'GRID' && (v.primaryAxisAlignItems !== spec.layout.primary ||
           v.counterAxisAlignItems !== spec.layout.counter)))
       )
         issue("native-source-observation-layout", n);
+      if (spec.scalablePathParent && (v.layoutMode !== 'NONE' ||
+          !numeric(v.width,spec.fixedWidth?.px ?? spec.lits?.width ?? NaN) ||
+          !numeric(v.height,spec.fixedHeight?.px ?? spec.lits?.height ?? NaN)))
+        issue('native-filled-path-observation-parent',n);
       for (const problem of nativeGridProblems(spec, v, n.childIds.map((id: string) => nodes.get(id)?.values)))
         issue('native-source-observation-grid-' + problem, n);
       if (spec.rootFillWidth && (v.layoutSizingHorizontal !== 'FIXED' ||
@@ -1106,10 +1168,18 @@ function verifyReadback(
           })
         )
           issue(`native-source-observation-binding-${field}`, n);
+      const inspectPaintStack = isContractDraft(input) && ['root','frame','shape'].includes(spec.type) &&
+        !!(spec.gradient || (spec.type === 'shape' && spec.lits?.fillColor));
       for (const field of ["fill", "stroke"] as const) {
         const name = spec[field],
           paints = v[field === "fill" ? "fills" : "strokes"] ?? [];
-        if (name) {
+        if (field === 'fill' && inspectPaintStack) {
+          const bound = name ? nativeBoundPaintColor(name,
+            [...tokens.receipt.variables, ...(graph ? receipt.templateGraph!.receipt.routes : [])],
+            consumingMode, input.tokenIdentity.collection.id) : undefined;
+          if (!nativePaintStackMatches(spec,paints,bound,observedBindings.fills))
+            issue('native-contract-observation-paint-stack',n);
+        } else if (name) {
           if (
             paints.length !== 1 ||
             paints[0].type !== "SOLID" ||
@@ -1121,6 +1191,15 @@ function verifyReadback(
             })
           )
             issue(`native-source-observation-${field}-binding`, n);
+        } else if (field === 'fill' && library && ['root','frame'].includes(spec.type) && spec.lits?.fillColor) {
+          // The prepared contract already declares this paint. A literal is
+          // verified by its exact color and opacity, never by a canvas claim.
+          if (!Array.isArray(paints) || paints.length !== 1 || paints[0].type !== 'SOLID' || paints[0].visible === false ||
+              (paints[0].blendMode ?? 'NORMAL') !== 'NORMAL' || !paint(paints[0].color,spec.lits.fillColor) ||
+              !numeric(paints[0].opacity ?? 1,spec.lits.fillColor.a ?? 1) ||
+              Object.keys(paints[0].boundVariables ?? {}).length ||
+              (observedBindings.fills !== undefined && (!Array.isArray(observedBindings.fills) || observedBindings.fills.length !== 0)))
+            issue('native-library-observation-literal-fill',n);
         } else if (field==='fill'&&spec.backgroundPaint&&spec.lits?.fillColor) {
           if(paints.length!==1 || paints[0].type!=='SOLID' || !paint(paints[0].color,spec.lits.fillColor) ||
              !numeric(paints[0].opacity??1,spec.lits.fillColor.a??1) || Object.keys(paints[0].boundVariables??{}).length)
@@ -1130,7 +1209,7 @@ function verifyReadback(
       }
       if (!nativeShadowStackMatches(spec, v.effects))
         issue("native-source-observation-effects", n);
-      if (spec.gradient) issue("native-source-observation-gradient-unverified", n);
+      if (spec.gradient && !inspectPaintStack) issue("native-source-observation-gradient-unverified", n);
       for (const field of ["width", "height"] as const)
         if (
           spec.lits?.[field] !== undefined &&
@@ -1227,6 +1306,17 @@ function verifyReadback(
       }
       if (spec.type === 'shape') {
         const parent=nodes.get(n.parentId),background=spec.backgroundPaint;
+        if (spec.nativePathInk) {
+          if (!nativeFilledPathMatches(spec.shape, v.vectorPaths, v.x, v.y) || v.isMask !== false ||
+              v.blendMode !== 'PASS_THROUGH' || !same(v.constraints, spec.nativePathScale
+                ? {horizontal:'SCALE',vertical:'SCALE'} : {horizontal:'MIN',vertical:'MIN'}) ||
+              !same(v.relativeTransform, [[1,0,v.x],[0,1,v.y]]) ||
+              ![v.width,v.height].every(n => typeof n === 'number' && Number.isFinite(n) && n > 0) ||
+              v.layoutSizingHorizontal === 'FILL' || v.layoutSizingVertical === 'FILL')
+            issue('native-filled-path-observation-geometry', n);
+          if (n.childIds.length) issue('native-filled-path-observation-children', n);
+          return;
+        }
         if (isContractDraft(input) && input.absoluteShapeReadback?.nodeIds.includes(n.id) &&
             (!same(v.constraints,{horizontal:'MIN',vertical:'MIN'}) ||
              input.absoluteShapeReadback.version >= 2 && v.targetAspectRatio !== null ||
@@ -1235,7 +1325,21 @@ function verifyReadback(
           issue('native-absolute-shape-observation-constraints',n);
         const width=background?Math.max(0.01,(parent?.values.width??NaN)-2*background.inset):spec.shape!.width;
         const height=background?Math.max(0.01,(parent?.values.height??NaN)-2*background.inset):spec.shape!.height;
-        if (!numeric(v.width, width) || !numeric(v.height, height))
+        // A compiled Fill relation replaces the shape's intrinsic size on that
+        // axis. Its native sizing mode is verified above; the other axis still
+        // has to retain its exact declared geometry. This is structure evidence,
+        // not a visual comparison or an inferred fixed allocation.
+        // Old plans could carry an implicit shape stretch flag. Require the
+        // declared relation as well; a historical compiler flag grants nothing.
+        const fillsWidth = library && !background && spec.fillW === true &&
+          (spec.widthFill === true || (spec.grow === true && parent?.values.layoutMode === 'HORIZONTAL'));
+        const fillsHeight = library && !background && spec.fillH === true &&
+          spec.grow === true && parent?.values.layoutMode === 'VERTICAL';
+        const finiteSize = (value: unknown): boolean => typeof value === 'number' && Number.isFinite(value) && value >= 0;
+        if (!(fillsWidth ? finiteSize(v.width) : numeric(v.width, width)) ||
+            !(fillsHeight ? finiteSize(v.height) : numeric(v.height, height)) ||
+            (library && !background && ((!fillsWidth && v.layoutSizingHorizontal === 'FILL') ||
+              (!fillsHeight && v.layoutSizingVertical === 'FILL'))))
           issue('native-contract-observation-shape-size', n);
         if(background&&(!numeric(v.cornerRadius,background.radius)||
             !numeric(background.radius,Math.max(0,(parent?.values.cornerRadius??NaN)-background.inset))||
@@ -1245,6 +1349,14 @@ function verifyReadback(
             !positionedAs(v.y, spec.absolute.top!, parent?.values.height, v.height)))
           issue('native-contract-observation-shape-position', n);
       }
+      if (spec.nativePathViewport && (v.layoutMode !== 'NONE' || v.clipsContent !== true ||
+          !numeric(v.width, spec.lits!.width!) || !numeric(v.height, spec.lits!.height!) ||
+          spec.children?.length !== 1 || spec.children[0].nativePathInk !== true))
+        issue('native-filled-path-observation-viewport', n);
+      if (spec.pathParentViewport && (!same(v.constraints,{horizontal:'SCALE',vertical:'SCALE'}) ||
+          !numeric(v.x,spec.pathParentViewport.x) || !numeric(v.y,spec.pathParentViewport.y) ||
+          !same(v.relativeTransform,[[1,0,v.x],[0,1,v.y]])))
+        issue('native-filled-path-observation-viewport-position',n);
       if (spec.type === "slot") {
         if (spec.children?.some(child => child.slotTextTemplate) &&
             ((v.layoutSizingHorizontal === 'HUG' && v.width !== 0) ||

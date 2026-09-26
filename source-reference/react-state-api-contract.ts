@@ -1,3 +1,4 @@
+import { reactStateApiAppearance } from './react-state-api-appearance.js';
 import { ContractSchema, type Contract, type Part } from '../scripts/contract-schema.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { emitReactInline } from '../core/emit-react-inline.js';
@@ -16,15 +17,15 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
     'associated-label-composition-not-generated', 'generated-consumer-not-qualified', 'native-behavior-metadata-not-qualified',
   ] };
   try {
-    const plan = inspection.plan;
+    const plan = inspection.plan, appearance = reactStateApiAppearance(initial);
     if (initial.id !== plan.initialObservation || initial.caseId !== plan.caseId || initial.phase !== 'complete' ||
-        !initial.sourceUnchanged || initial.problems.length || initial.draft?.status !== 'compiled-draft' || !initial.draft.compiled?.contract || !initial.draft.compiled.tokens ||
+        !initial.sourceUnchanged || initial.problems.length ||
         !initial.observation || initial.observation.instanceId !== plan.instanceId ||
         revisionOf(initial.observation.source) !== revisionOf(plan.source) || inspection.phase !== 'complete' ||
         !inspection.sourceUnchanged || inspection.problems.length || !inspection.observation ||
         inspection.restorationChecks !== plan.cases.length * 3) throw Error('state-api-contract-evidence-incomplete');
     validateReactStateApiObservation(inspection.observation, plan);
-    const compiled = initial.draft.compiled, contract = structuredClone(initial.draft.compiled.contract);
+    const contracts = structuredClone(appearance.contracts), contract = contracts.find(c => c.id === appearance.contract.id)!;
     const prop = contract.props.find(p => p.bindings.code.prop === plan.initial);
     const mixed = plan.version === 2;
     const values = prop?.bindings.code.values;
@@ -51,7 +52,7 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
     const rename = (name: string) => oldDisabled && name === oldDisabled ? 'disabled' : name;
     const visit = (part: Part) => {
       // Child forwarding and dynamic content have their own ownership proof.
-      if (part.component || part.slot || part.repeat || part.meter || part.content || part.optional)
+      if ((!appearance.authored && part.component) || part.slot || part.repeat || part.meter || part.content || part.optional)
         throw Error('state-api-contract-composition-unobserved');
       const references = [part.layoutByProp, part.textByProp, part.textOutOfBox, part.shape?.pathsByProp,
         ...(Array.isArray(part.tokensByProp) ? part.tokensByProp : part.tokensByProp ? [part.tokensByProp] : []),
@@ -68,27 +69,54 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
         for (const map of tokens) if (map) for (const key of Object.keys(map))
           map[key] = map[key].replaceAll('{' + oldDisabled + '}', '{disabled}');
       }
+      for (const table of part.tokensByCombination ?? []) table.props = [rename(table.props[0]), rename(table.props[1])];
+      if (part.absolutePlacementByCombination) part.absolutePlacementByCombination.props = part.absolutePlacementByCombination.props.map(rename);
+      if (part.component && oldDisabled && oldDisabled !== 'disabled') {
+        part.component.props = Object.fromEntries(Object.entries(part.component.props ?? {}).map(([key, value]) =>
+          [rename(key), value === '{' + oldDisabled + '}' ? '{disabled}' : value]));
+      }
       for (const child of Object.values(part.parts ?? {})) visit(child);
     };
-    for (const root of Object.values(contract.anatomy)) visit(root);
+    for (const member of contracts) {
+      if (member !== contract && disabled) member.props.find(p => p.name === oldDisabled)!.name = 'disabled';
+      for (const root of Object.values(member.anatomy)) visit(root);
+    }
     const stateValues = mixed ? values! : { false: false, true: true };
     const keyFor = (value: boolean | 'indeterminate') => {
       const found = Object.keys(stateValues).filter(key => stateValues[key] === value);
       if (found.length !== 1) throw Error('state-api-contract-state-mapping-unavailable');
       return found[0];
     };
-    prop.type = { enum: mixed ? keys : ['false', 'true'] };
+    // Canonical runtime values are shared by every contextual appearance.
+    // Keep dependency public values typed; only the root owns state.
+    for (const member of contracts) {
+      const state = member.props.find(p => p.name === prop.name)!;
+      state.type = { enum: mixed ? keys : ['false', 'true'] };
+      state.bindings.code.values = structuredClone(stateValues);
+    }
     prop.bindings.code = { ...prop.bindings.code, prop: plan.controlled, values: stateValues,
       initial: { prop: plan.initial, default: keyFor(plan.defaultValue) } };
     contract.semantics = { ...contract.semantics, role: plan.role,
       roleException: `Independent simultaneous-input observations identify a button-backed ${plan.role}.` };
     contract.events = [{ name: 'stateChange', trigger: 'root', toggles: { prop: prop.name, between: [keyFor(false), keyFor(true)], aria: 'checked' },
       bindings: { code: { prop: plan.callback, argument: 'next-value' } } }];
-    contract.id += '-state-api'; contract.name += 'StateApi'; contract.bindings.code.anchors.export = contract.name;
+    const ids = new Map(contracts.map(c => [c.id, c.id + '-state-api']));
+    for (const member of contracts) {
+      member.id = ids.get(member.id)!; member.name += 'StateApi'; member.bindings.code.anchors.export = member.name;
+      const link = (part: Part) => {
+        if (part.component) part.component.id = ids.get(part.component.id)!;
+        for (const child of Object.values(part.parts ?? {})) link(child);
+      };
+      for (const root of Object.values(member.anatomy)) link(root);
+    }
     contract.description = 'Bounded observed checked-state inputs applied to an initial appearance draft. Generated consumer, excluded inputs and native round-trip qualification remain pending.';
     result.contract = ContractSchema.parse(contract);
-    result.tsx = emitReactInline(result.contract, { contracts: new Map([[contract.id, result.contract]]), icons: new Map(compiled.assets),
-      tokens: { primitives: initial.draft.compiled.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } } }).tsx;
+    const parsed = contracts.map(c => ContractSchema.parse(c));
+    const context = { contracts: new Map(parsed.map(c => [c.id, c])), icons: new Map(appearance.assets),
+      tokens: { primitives: appearance.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } } };
+    result.tsx = emitReactInline(result.contract, context).tsx;
+    if (appearance.authored) result.dependencies = parsed.filter(c => c.id !== result.contract!.id)
+      .map(c => ({ contract: c, tsx: emitReactInline(c, context).tsx }));
     result.status = 'generated-draft';
   } catch (error) { result.problems.push(error instanceof Error ? error.message : String(error)); }
   return result;

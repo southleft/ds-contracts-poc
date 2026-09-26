@@ -15,6 +15,7 @@ import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { selectReactNativeRequest } from './react-native-evidence.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
+import {observeReactAuthoredInitials} from './react-authored-initial.js';
 
 // A workspace that CAN be mounted: a stateful track whose part is sized by the component's own ancestor-conditioned
 // rule and moves to the far end when on. The whole path is real: bundle, Chromium, fresh mounts, seal, assembly.
@@ -105,4 +106,19 @@ test('observing again under another observer: the new run completes and becomes 
   assert.equal(observedBy({ x: '2' }).nativeRequest(reference.id, 'track-off').observation.id, again.state.id, 'an operation prepared afterwards pins the new run');
   // An existing operation's pin still reads the OLD run, whatever latest says.
   assert.deepEqual({ image: evidenceSha(observedBy({ x: '2' }).nativeImage(reference, pin, '0')), draft: JSON.stringify(observedBy({ x: '2' }).nativeEvidence(reference, pin).draft) }, pinned);
+  const snapshots=Object.fromEntries(saved.observation!.rows.map(row=>[row.id,JSON.parse(readFileSync(path.join(firstDir,'states',row.id+'.json'),'utf8'))]));
+  const originDir=path.join(repo,'original-origins'),originBrowser=await chromium.launch({args:['--enable-automation']});
+  try{
+    const origins=await observeReactAuthoredInitials({browser:originBrowser,reference,program,ownership,tree:captured.tree,
+      observation:saved.observation!,snapshots,caseId:'track-off',dir:originDir,assertCurrent(){}});
+    // This fixture is a function declaration, a named unsupported form of the
+    // original JSX effect model. A matched render must never bypass that refusal.
+    assert.deepEqual(origins.rows.map(row=>({status:row.status,problem:row.problem})),
+      saved.observation!.rows.map(()=>({status:'refused',problem:'jsx-effects-function-unavailable'})));
+    const changed=structuredClone(saved.observation!);changed.rows.pop();
+    await assert.rejects(observeReactAuthoredInitials({browser:originBrowser,reference,program,ownership,tree:captured.tree,
+      observation:changed,snapshots,caseId:'track-off',dir:path.join(repo,'incomplete-origins'),assertCurrent(){}}),/domain-mismatch/);
+  }finally{await originBrowser.close();}
+  assert.equal(JSON.stringify(inventoryEvidence(firstDir)),firstBytes,'origin collection leaves the sealed initial observation untouched');
+
 });

@@ -1,3 +1,4 @@
+import {hasComponentGrow} from '../scripts/contract-schema.js';
 import { lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import {jointTokenCss} from '../packages/core/src/joint-tokens.js';
 import {selectedSampleKey} from '../packages/core/src/selection.js';
@@ -135,12 +136,20 @@ function layoutOverrideDecls(o: {
   direction?: string;
   align?: string;
   justify?: string;
-}): string[] {
+  grow?: boolean;
+  growBasis?: "zero";
+}, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
+  if (o.grow !== undefined || o.growBasis !== undefined) {
+    const grow = o.grow ?? base?.grow;
+    const zero = (o.growBasis ?? base?.growBasis) === 'zero';
+    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`, `min-width: ${grow ? '0' : 'auto'}`);
+    if (zero) d.push(`min-height: ${grow ? '0' : 'auto'}`);
+  }
   return d;
 }
 
@@ -170,7 +179,7 @@ function layoutDecls(part: Part, gridWhere: string, isGridChild = false): string
       if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
     }
   }
-  if (part.layout?.grow) d.push('flex: 1 1 auto', 'min-width: 0');
+  if (part.layout?.grow) d.push(...layoutOverrideDecls({grow: true, growBasis: part.layout.growBasis}));
   return d;
 }
 
@@ -271,6 +280,14 @@ function componentCss(contract: Contract): string[] {
     };
     for (const { name, part } of walkAnatomy(contract)) {
       if (part.component) {
+        if (hasComponentGrow(part)) {
+          const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
+          if (placement.length) lines.push('', `${partCls(name)} {`, ...placement.map(d => `  ${d};`), '}');
+          for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
+            const decls = layoutOverrideDecls(override, part.layout);
+            if (decls.length) lines.push('', `${propSel(part.layoutByProp!.prop, value)} ${partCls(name)} {`, ...decls.map(d => `  ${d};`), '}');
+          }
+        }
         // A2 grid (G3/P12): an instance cell rides a wrapper element whose
         // class takes the placement; display: grid stretches the lone
         // instance into the cell (the CSS spelling of canvas FILL).
@@ -556,7 +573,7 @@ function componentCss(contract: Contract): string[] {
   // specificity) — mirrors core/emit-react.ts generateCss.
   if (root.layoutByProp) {
     for (const [value, override] of Object.entries(root.layoutByProp.map)) {
-      rule(propSel(root.layoutByProp.prop, value), layoutOverrideDecls(override));
+      rule(propSel(root.layoutByProp.prop, value), layoutOverrideDecls(override, root.layout));
     }
   }
   for (const { selector, decls } of pairRules) rule(selector, decls);
@@ -626,6 +643,14 @@ function componentCss(contract: Contract): string[] {
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
     if (part.component) {
+      if (hasComponentGrow(part)) {
+        const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
+        if (placement.length) lines.push('', `${partCls(name)} {`, ...placement.map(d => `  ${d};`), '}');
+        for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) {
+          const decls = layoutOverrideDecls(override, part.layout);
+          if (decls.length) lines.push('', `${propSel(part.layoutByProp!.prop, value)} ${partCls(name)} {`, ...decls.map(d => `  ${d};`), '}');
+        }
+      }
       // A2 grid (G3/P12): an instance cell rides a wrapper element whose
       // class takes the placement; display: grid stretches the lone
       // instance into the cell (the CSS spelling of canvas FILL).
@@ -846,7 +871,7 @@ function componentCss(contract: Contract): string[] {
     // enum modifier class.
     if (part.layoutByProp) {
       for (const [value, override] of Object.entries(part.layoutByProp.map)) {
-        rule(`${propSel(part.layoutByProp.prop, value)} ${partCls(name)}`, layoutOverrideDecls(override));
+        rule(`${propSel(part.layoutByProp.prop, value)} ${partCls(name)}`, layoutOverrideDecls(override, part.layout));
       }
     }
     emitStylesWhen(part, partCls(name), false);
@@ -928,6 +953,7 @@ function validateStaticHtmlIdentity(contract: Contract, ctx: EmitCtx): void {
     }
 
     for (const { name, part, path } of walkAnatomy(c)) {
+      if (part.absolutePlacement || part.absolutePlacementByCombination) throw new Error('HTML_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       const location = `${c.id}.anatomy.${path.join('.')}`;
       if (!CLASS_FRAGMENT.test(name)) refuseUnsafe('part class fragment', name, location);
       if (part.element && !HTML_NAME.test(part.element)) {
@@ -983,6 +1009,7 @@ function renderComponentHtml(
   state: RenderState,
   indent: string,
   extraText?: string,
+  extraRootClass?: string,
 ): string {
   const k = kebab(contract.name);
   const root = contract.anatomy.root;
@@ -1112,7 +1139,7 @@ function renderComponentHtml(
           }
           if (selection?.itemPart === name) depState.subst[selection.selected.prop] =
             rec[part.repeat!.keyField!] === selected ? selection.selected.on : selection.selected.off;
-          return renderComponentHtml(dep, ctx, depState, pad, itemText);
+          return renderComponentHtml(dep, ctx, depState, pad, itemText, hasComponentGrow(part) ? cls : undefined);
         })
         .join('\n');
     }
@@ -1145,7 +1172,7 @@ function renderComponentHtml(
         const inner = renderComponentHtml(dep, ctx, depState, pad + '  ', part.component.text ?? undefined);
         return `${pad}<div class="${cls}">\n${inner}\n${pad}</div>`;
       }
-      return renderComponentHtml(dep, ctx, depState, pad, part.component.text ?? undefined);
+      return renderComponentHtml(dep, ctx, depState, pad, part.component.text ?? undefined, hasComponentGrow(part) ? cls : undefined);
     }
     if (part.slot) {
       const el = part.element ?? 'div';
@@ -1291,6 +1318,7 @@ function renderComponentHtml(
   // decide", never "the first enum value".
   const classes = [
     k,
+    ...(extraRootClass ? [extraRootClass] : []),
     ...enumProps(contract)
       .filter((p) => state.subst[p.name] !== undefined)
       .map((p) => `${k}--${p.name}-${state.subst[p.name]}`),

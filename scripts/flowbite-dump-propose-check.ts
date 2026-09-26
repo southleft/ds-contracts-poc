@@ -373,8 +373,8 @@ check(
 );
 const dumpPlugin = readFileSync(path.join(ROOT, 'extract', 'figma', 'dump.plugin.js'), 'utf8');
 check(
-  'dump.plugin.js declares dumpVersion 1.46 (a v1.46 producer must still read this v1.30 fixture)',
-  /dumpVersion: '1\.46'/.test(dumpPlugin),
+  'dump.plugin.js declares dumpVersion 1.47 (a v1.47 producer must still read this v1.30 fixture)',
+  /dumpVersion: '1\.47'/.test(dumpPlugin),
 );
 const flowbiteSetName = 'Alert (flowbite.alert)';
 const scopedDump = dumpPlugin.replace(
@@ -551,10 +551,10 @@ for (const name of [
 ]) {
   const layout = rootLayoutOf(name);
   check(
-    `${name}: column root (live MIN×MIN; justify/align omitted)`,
+    `${name}: column root (live MIN×MIN; justify omitted, explicit start alignment)`,
     layout?.direction === 'column' &&
       layout.justify === undefined &&
-      layout.align === undefined,
+      layout.align === 'start',
   );
 }
 

@@ -1,0 +1,26 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/selected-true-state-default-size-small.contract.json (ds.selected-true-state-default-size-small v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.size-small {
+  height: var(--imported-stub-selected-true-state-default-size-small-root-height-small);
+}
+
+.size-large {
+  height: var(--imported-stub-selected-true-state-default-size-small-root-height-large);
+}

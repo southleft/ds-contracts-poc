@@ -9,7 +9,7 @@ import { validateContract } from '../packages/core/src/validate.js';
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
 import { compileObservedContent, prepareObservedContentTree } from './observed-content.js';
 import { deriveReactChildRoot } from './react-child-root.js';
-import { linkReactSourceAnatomy } from './react-source-anatomy.js';
+import { linkReactSourceAnatomy, reactCompositionInstances } from './react-source-anatomy.js';
 import { verifiedLabelAssociations, type LabelAssociationEvidence } from './label-associations.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 import type { ReactOwnership } from './react-ownership.js';
@@ -179,7 +179,7 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
         bindings: { code: { prop }, figma: { kind: 'NONE' } } });
       part.content = { prop }; delete part.text;
     }
-    const children = anatomy.instances.filter(c => !c.roots.some(r => r.path === ''));
+    const children = reactCompositionInstances(anatomy).filter(c => !c.roots.some(r => r.path === ''));
     for (const [index, child] of children.entries()) {
       if (child.roots.length !== 1 || child.content === 'unresolved') throw Error('react-caller-child-correspondence-unqualified');
       const sourcePath = child.roots[0].path, target = partAt(sourcePath), observed = ownership.components.find(c => c.id === child.instanceId)!;

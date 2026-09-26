@@ -285,6 +285,37 @@ function reactCasesEntry(
   ].join("\n");
 }
 
+/** Host-only isolated mount of one finite caller input. The pinned declaration
+ * and every other mount remain byte-identical; no source file is rewritten.
+ * The caller must pair the resulting rendering with its independently observed
+ * initial-state tree/image. This entry is not a replacement source witness. */
+export function reactInitialCaseEntry(cohort:ReactCohort,caseId:string,target:{module:string;exportName:string},
+  changes:Record<string,{kind:'set';value:string|number|boolean|null}|{kind:'omit'}>,resolvedModules?:ReadonlyMap<string,string>) {
+  const unavailable=():never=>{throw Error('react-initial-case-entry-unavailable');};
+  if(!cohort.declared||!cohort.declaration||cohort.witnessSuccession)unavailable();
+  const bytes=readFileSync(cohort.declaration!.file);
+  if(createHash('sha256').update(bytes).digest('hex')!==cohort.declaration!.sha256)unavailable();
+  const declaration=JSON.parse(bytes.toString());
+  const cases:Array<{id:string;mount:ReactCaseElement}>=declaration.cases.map((c:{id:string;mount:unknown})=>({id:c.id,mount:element(c.mount,1)}));
+  if(reactCasesEntry(cases,declaration.sideEffectImports??[])!==cohort.entry)unavailable();
+  const selected=cases.filter(c=>c.id===caseId);if(selected.length!==1)unavailable();
+  const matches:Array<{node:ReactCaseElement;path:number[]}>=[];
+  const visit=(node:ReactCaseElement,mountPath:number[])=>{
+    if('module' in node&&(resolvedModules?resolvedModules.get(node.module)===target.module:node.module==='./'+target.module)&&node.export===target.exportName)matches.push({node,path:mountPath});
+    node.children?.forEach((child,i)=>{if(typeof child!=='string')visit(child,[...mountPath,i]);});
+  };
+  visit(selected[0].mount,[]);if(matches.length!==1)unavailable();
+  const {node,path:mountPath}=matches[0],before=structuredClone(node.props??{});
+  const reserved=new Set(['children','className','style','ref','key','id','__proto__','constructor','prototype','dangerouslySetInnerHTML']);
+  if(!Object.keys(changes).length||Object.entries(changes).some(([name,v])=>reserved.has(name)||
+    !v||!['set','omit'].includes(v.kind)||v.kind==='set'&&!(v.value===null||typeof v.value==='string'||typeof v.value==='boolean'||typeof v.value==='number'&&Number.isFinite(v.value))))unavailable();
+  node.props={...before};
+  for(const [name,value] of Object.entries(changes)){if(value.kind==='omit')delete node.props[name];else node.props[name]=value.value;}
+  const entry=reactCasesEntry(cases,declaration.sideEffectImports??[]);
+  return {entry,receipt:{version:1 as const,caseId,target,mountModule:'module' in node?node.module:undefined,mountPath,changes:structuredClone(changes),before,after:structuredClone(node.props),
+    declaration:{...cohort.declaration!},baseEntrySha256:createHash('sha256').update(cohort.entry).digest('hex'),entrySha256:createHash('sha256').update(entry).digest('hex')}};
+}
+
 /** A workspace declares its own cohort; the application is not edited to admit
  * a component family. Witnesses are authored by the workspace owner from the
  * source's own CSS, tokens and font metadata. They are an independent check of

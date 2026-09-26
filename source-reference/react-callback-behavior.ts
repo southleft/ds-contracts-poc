@@ -15,7 +15,7 @@ import {
 } from "./react-property-probe.js";
 
 type Scalar = string | number | boolean | null;
-type Control = { checked: string; disabled: boolean };
+type Control = { checked: string; disabled: boolean; inert?: true };
 export interface ReactCallbackBehavior {
   /** A recorded identifier, kept as first written so sealed observations stay
    * readable. `role` names the observed member of the checked-toggle class;
@@ -30,7 +30,7 @@ export interface ReactCallbackBehavior {
     value: Scalar;
     action: "space" | "associated-label";
     initial: Control;
-    steps: Array<{ control: Control; callback: ReactCallbackObservation }>;
+    steps: Array<{ control: Control; callback: ReactCallbackObservation; focused?: boolean }>;
     live: Control;
     restored: boolean;
   }>;
@@ -123,6 +123,9 @@ export async function observeReactCallbackBehavior(input: {
           element instanceof HTMLButtonElement
             ? element.disabled
             : element.getAttribute("aria-disabled") === "true",
+        // The browser's computed value includes inherited/CSS inertness and
+        // modal escapes. The attribute alone does not describe the flat tree.
+        inert: getComputedStyle(element).getPropertyValue('interactivity') === 'inert',
       };
     });
     const role = checkedToggleRole(observed.role);
@@ -135,18 +138,19 @@ export async function observeReactCallbackBehavior(input: {
     if (result.role && result.role !== role)
       throw Error("callback-control-role-changed");
     result.role = role;
-    return { checked: observed.checked!, disabled: observed.disabled };
+    return { checked: observed.checked!, disabled: observed.disabled,
+      ...(observed.inert ? { inert: true as const } : {}) };
   };
   const activate = async (
     action: "space" | "associated-label",
-    disabled: boolean,
+    control: Control,
   ) => {
     if (action === "space") {
       await page.locator(controlSelector).focus();
       const focused = await page
         .locator(controlSelector)
         .evaluate((element) => document.activeElement === element);
-      if (focused === disabled) throw Error("callback-focus-mismatch");
+      if (focused === (control.disabled || !!control.inert)) throw Error("callback-focus-mismatch");
       await page.keyboard.press("Space");
     } else {
       const label = await page.locator(controlSelector).evaluateHandle((element) => {
@@ -164,12 +168,16 @@ export async function observeReactCallbackBehavior(input: {
         return labels[0];
       });
       try {
-        await label.asElement()!.click({ force: disabled, timeout: 3000 });
+        // A real pointer event must be attempted even when the label itself
+        // is inert. An outside label can activate an inert control, so that
+        // outcome is recorded independently of keyboard suppression.
+        await label.asElement()!.click({ force: control.disabled || !!control.inert, timeout: 3000 });
       } finally {
         await label.dispose();
       }
     }
     await settle();
+    return page.locator(controlSelector).evaluate(element => document.activeElement === element);
   };
   try {
     if (!candidates.some((c) => c.status === "needs-observation"))
@@ -226,10 +234,11 @@ export async function observeReactCallbackBehavior(input: {
                     if (mounting.calls.length || mounting.problems.length)
                       throw Error("callback-fired-before-activation");
                     for (let count = 0; count < 2; count++) {
-                      await activate(action, initial.disabled);
+                      const focused = await activate(action, initial);
                       steps.push({
                         control: await read(),
                         callback: await callback(),
+                        focused,
                       });
                     }
                   }
@@ -261,6 +270,11 @@ export async function observeReactCallbackBehavior(input: {
                 )
               )
                 throw Error("callback-disabled-activation-not-suppressed");
+              if (action === 'space' && trial.changed.initial.inert &&
+                  trial.changed.steps.some(step => !step.control.inert || step.focused ||
+                    step.control.checked !== trial.changed.initial.checked ||
+                    step.callback.calls.length || step.callback.problems.length))
+                throw Error('callback-inert-keyboard-not-suppressed');
             }
           } catch (error) {
             const problem = error instanceof Error ? error.message : String(error);
@@ -301,10 +315,10 @@ export async function observeReactCallbackBehavior(input: {
           complete &&
           rows.every(
             (row) =>
-              !row.initial.disabled &&
+              !row.initial.disabled && !row.initial.inert && !row.live.inert &&
               row.steps.every(
                 (step, index) =>
-                  !step.control.disabled &&
+                  !step.control.disabled && !step.control.inert &&
                   step.callback.problems.length === 0 &&
                   step.callback.calls.length === index + 1 &&
                   step.callback.calls.every(

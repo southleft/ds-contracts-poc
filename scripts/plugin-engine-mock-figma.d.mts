@@ -73,6 +73,8 @@ export interface MockOptions {
   /** `VariableCollection.addMode` throws past N modes, the way a Figma Starter
    *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
   modeLimit?: number | null;
+  /** Opt in to native setProperties re-selecting the instance's main variant. */
+  instanceVariantSelection?: boolean;
 }
 
 export declare function createFigmaMock(options?: MockOptions): {

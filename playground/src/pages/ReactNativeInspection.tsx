@@ -1,3 +1,4 @@
+import {readSourceResponse} from './source-response';
 import { nativeImageFraming } from '../native-image-framing';
 import {ReactSourceRepairPreview} from './ReactSourceRepairPreview';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
@@ -31,6 +32,7 @@ interface MovedOperation { operationId: string; caseId: string; kind: 'root' | '
 const ATTEST_DEAD_WAIT_MS = 60_000;
 function updateProblem(problem: string) {
   const [name, ...node] = problem.split(':'), nodeId = node.join(':');
+  if (name === 'react-authored-native-action-unqualified') return 'This action is not yet supported for composed components. Your existing Figma output is preserved.';
   if(name==='native-update-caller-context-unavailable-before-refresh')return 'Complete or recover the pending caller inspection before refreshing this parent update. Its verified observation is needed to finish that caller.';
   if (name === 'native-update-observation-refused') return 'The canvas did not match what this update expected. Nothing further was written.';
   if (name === 'native-update-write-begun-outcome-unresolved') return 'The companion had begun this write, but the canvas still shows the earlier values. It may still land. Nothing is retried; inspect again once the companion has settled or, if every companion window for this file is closed, attest that the companion is gone.';
@@ -49,7 +51,7 @@ function updateProblem(problem: string) {
   return problem;
 }
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api'; sourceRevisions?: string[]; successionProblem?: string;
+  kind: 'root' | 'comparison' | 'initial' | 'nested' | 'state-api' | 'authored' | 'authored-initial' | 'authored-state-api'; sourceRevisions?: string[]; successionProblem?: string;
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes']; tokenChanges?: NativeTokenValueChange[]; tokenBindingScope?: 'document-v1';
     tokenAllocations?:Array<{tokenPath:string;values:Array<{sourceMode:string;value:unknown}>}>;compilerReviewRequired?:true;
@@ -75,6 +77,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [measurements, setMeasurements] = useState<Record<string, RecordedNativeMeasurement>>({});
   const [observationRevision, setObservationRevision] = useState(0);
   const [inspectionSourceAvailable, setInspectionSourceAvailable] = useState(false);
+  const [inspectionSources, setInspectionSources] = useState<Record<string, boolean>>({});
   const refreshObservations = useCallback(() => setObservationRevision(value => value + 1), []);
   const root = `/api/source-reference/react/${referenceId}`;
   const latest = useRef({rows, busy});
@@ -83,7 +86,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   async function reviewMeasurement(id: string) {
     setBusy(true); setError('');
     try {
-      const response = await fetch(`${root}/native-operation/${id}/matched-review`), result = await response.json();
+      const response = await fetch(`${root}/native-operation/${id}/matched-review`), result = await readSourceResponse(response);
       if (!response.ok) throw Error(result.error);
       setMeasurements(old => ({ ...old, [id]: result.measurement }));
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
@@ -98,14 +101,14 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         if (poll && !await nativePollNeedsRefresh(latest.current.rows, async route => {
           const response = await fetch(`${root}/${route}`);
           if (!response.ok) throw Error('Native progress unavailable.');
-          return response.json();
+          return readSourceResponse(response);
         }, Date.now() - fullReadAt.current >= 60_000)) return;
         if (stopped) return;
         setLoading(true);
-        const response = await fetch(`${root}/native`), result = await response.json();
+        const response = await fetch(`${root}/native`), result = await readSourceResponse(response);
         fullReadAt.current = Date.now();
         if (!response.ok) throw Error(result.error);
-        if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setInspectionSourceAvailable(result.inspectionSourceAvailable === true); setError(''); }
+        if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setInspectionSourceAvailable(result.inspectionSourceAvailable === true); setInspectionSources(result.inspectionSources ?? {}); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
       finally { pending = false; if (!stopped) setLoading(false); }
     };
@@ -114,12 +117,12 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     queueMicrotask(() => { if (!stopped) void load(); });
     const timer = setInterval(() => void load(true), 4000);
     return () => { stopped = true; clearInterval(timer); };
-  }, [root, observationRevision]);
+  }, [root, observationRevision, ownership?.id, ownership?.state]);
   async function inspectTypography(parentId: string, key: string) {
     setBusy(true); setError('');
     try {
       const response = await fetch(`${root}/native-operation/${parentId}/source-typography`, { method: 'POST' });
-      const result = await response.json();
+      const result = await readSourceResponse(response);
       if (!response.ok) throw Error(result.error);
       setTypography(old => ({ ...old, [key]: result.typography }));
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
@@ -128,16 +131,17 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   async function action(route: string, id?: string) {
     setBusy(true); setError('');
     try {
-      const response = await fetch(`${root}/${route}`, { method: 'POST' }), result = await response.json();
-      if (!response.ok) throw Error(result.reason==='native-update-caller-context-unavailable-before-refresh'
+      const response = await fetch(`${root}/${route}`, { method: 'POST' }), result = await readSourceResponse(response);
+      if (!response.ok) throw Error(['native-update-caller-context-unavailable-before-refresh','react-authored-native-action-unqualified'].includes(result.reason)
         ? updateProblem(result.reason) : result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
       if (result.connection && id) {
         setCodes(old => ({ ...old, [id]: result.connection }));
-        const refreshed = await fetch(`${root}/native`), snapshot = await refreshed.json();
+        const refreshed = await fetch(`${root}/native`), snapshot = await readSourceResponse(refreshed);
         if (!refreshed.ok) throw Error(snapshot.error);
         fullReadAt.current = Date.now();
         setRows(snapshot.operations); setMoved(snapshot.moved ?? []);
         setInspectionSourceAvailable(snapshot.inspectionSourceAvailable === true);
+        setInspectionSources(snapshot.inspectionSources ?? {});
       } else {
         const review = /^native-operation\/([a-f0-9-]{36})\/update-plan$/.exec(route);
         if (review) {
@@ -149,19 +153,22 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         fullReadAt.current = Date.now();
         setRows(result.operations); setMoved(result.moved ?? []);
         setInspectionSourceAvailable(result.inspectionSourceAvailable === true);
+        setInspectionSources(result.inspectionSources ?? {});
       }
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
     finally { setBusy(false); }
   }
   const selected = ownership?.rows.find(r => r.id === selectedCase);
   const ready = ownership?.state === 'complete' && ownership.sourceUnchanged && selected?.matched && selected.rootMatrix?.draft?.status === 'native-compiled';
+  const authoredReady = ownership?.state === 'complete' && ownership.sourceUnchanged && !ownership.problem && selected?.matched && !selected.problems.length &&
+    selected.authoredTrees?.filter(row => row.draft?.status === 'native-compiled').length === 1;
   const selectedMatrix = ownership?.rows.find(row => row.id === selectedCase)?.rootMatrix;
   const reusableRoot = selectedMatrix && rows.find(row => row.kind === 'root' && row.caseId !== selectedCase &&
     (row.operation.sourceCurrent || row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent)) &&
     JSON.stringify(ownership?.rows.find(source => source.id === row.caseId)?.rootMatrix) === JSON.stringify(selectedMatrix));
   return <section className="react-native-inspection">
-    <h3>Inspect editable Figma roots</h3>
-    <p>Create a native draft from the observed root styles and properties. Its content slot stays empty and editable.
+    <h3>{authoredReady ? 'Inspect the observed composition in Figma' : 'Inspect editable Figma roots'}</h3>
+    {!authoredReady && <><p>Create a native draft from the observed root styles and properties. Its content slot stays empty and editable.
       Prepare separate caller-content instances for comparison below. Visual fidelity, stateful behavior and the complete composed component remain unqualified.</p>
     {loading && <p role="status">{rows.length ? 'Refreshing saved Figma inspections…' : 'Loading saved Figma inspections…'}</p>}
     {reusableRoot ? <>
@@ -173,7 +180,12 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     </> : <button type="button" disabled={busy || loading || !ready} onClick={() => void action(`native/${selectedCase}`)}>
       Prepare {selectedCase} for Figma
     </button>}
-    {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
+    {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}</>}
+    {authoredReady && <section aria-label="Observed composition for Figma">
+      <h4>Observed composition</h4>
+      <p>Prepare the component with its authored children as editable native components at the captured inputs. Other states, behavior, visual fidelity and later updates still need qualification.</p>
+      <button type="button" disabled={busy || loading} onClick={() => void action(`native-authored/${selectedCase}`)}>Prepare {selectedCase} composition for Figma</button>
+    </section>}
     {moved.map(m => <section key={m.operationId} aria-label="Existing native component following earlier evidence">
       <p>An existing native {m.kind === 'state-api' ? 'state-API set' : m.kind === 'initial' ? 'initial-state set' : 'root family'} for <strong>{m.caseId}</strong> follows an earlier source observation ({m.followedReferenceId.slice(0, 8)}…). Following the current source requires the same source module and exported component. It keeps that operation, its Figma nodes and its verified corrections, and writes nothing to Figma. Afterwards, <em>Review compiler update</em> shows what the source change would alter on those same nodes. {m.kind !== 'state-api' && 'Preparing the same source case again instead would create a second component.'}</p>
       {m.observationRequired && <p>{m.kind === 'initial' ? 'Complete the current initial-state observation before following this source.' : 'Complete the current initial-state and simultaneous-input observations before following this source.'}</p>}
@@ -181,10 +193,10 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       <button type="button" disabled={busy || loading || !!m.successionProblem || m.observationRequired} onClick={() => void action(`native-operation/${m.operationId}/adopt-source`)}>Follow the current source with the existing {m.caseId} {m.kind === 'root' ? 'roots' : m.kind === 'state-api' ? 'state API' : 'states'}</button>
     </section>)}
     {error && <p role="alert">{error}</p>}
-    <ReactCallbackInspection onStateApiChange={refreshObservations} prepareStateApi={() => void action(`native-state-api/${selectedCase}`)} nativeBusy={busy} key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={inspectionSourceAvailable} />
-    <ReactInitialInspection onObservationChange={refreshObservations} referenceId={referenceId} caseId={selectedCase} available={inspectionSourceAvailable} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
+    <ReactCallbackInspection onStateApiChange={refreshObservations} prepareStateApi={() => void action(`native-state-api/${selectedCase}`)} nativeBusy={busy} key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={inspectionSources[selectedCase] ?? inspectionSourceAvailable} unavailableReason={authoredReady ? "Finish a current structure observation before inspecting this composition." : undefined} />
+    <ReactInitialInspection onObservationChange={refreshObservations} referenceId={referenceId} caseId={selectedCase} available={inspectionSources[selectedCase] ?? inspectionSourceAvailable} unavailableReason={authoredReady ? "Finish a current structure observation before inspecting this composition." : undefined} nativeSaved={rows.some(r => (r.kind === 'initial'||r.kind==='authored-initial') && r.caseId === selectedCase && r.operation.sourceCurrent)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
-      const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api', initial = row.kind === 'initial' || stateApi;
+      const op = row.operation, id = op.id, comparison = row.kind === 'comparison', stateApi = row.kind === 'state-api' || row.kind === 'authored-state-api', initial = row.kind === 'initial' || row.kind==='authored-initial' || stateApi;
       const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId && r.ownershipId===row.ownershipId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
       const correctedCaller = row.updates?.some(update => update.operation?.phase === 'update-verified' &&
@@ -206,7 +218,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         !update.operation ? 2 : 3;
       const orderedUpdates = [...(row.updates ?? [])].sort((a, b) => updatePriority(a) - updatePriority(b));
       return <details key={id} open={row.caseId === selectedCase}>
-        <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${stateApi ? '· retained state API' : initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
+        <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${stateApi ? '· retained state API' : initial ? '· observed initial states' : row.kind === 'authored' ? '· observed composition' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
+        {row.kind === 'authored' && <p>This draft preserves authored component boundaries at the captured inputs. Behavior, visual fidelity, other inputs and later updates remain unqualified.</p>}
+        {row.kind === 'authored-initial' && <p>This draft preserves component boundaries across the observed initial inputs. Each root variant is paired with its own original image. Live behavior, fidelity and updates remain unqualified.</p>}
         {stateApi && <p>This separate set retains the checked-state initializer and callback declarations from a completed source experiment. Figma variants remain editable visual states. Native interactivity, live updates, visual fidelity and the returned React consumer are not qualified by creation.</p>}
         {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
         {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
@@ -218,7 +232,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
         {row.successionProblem && <p role="alert">This operation's source-succession record cannot be read, so its updates are refused until that is repaired. <code>{row.successionProblem}</code></p>}
         {(row.sourceRevisions?.length ?? 0) > 1 && <p>This operation has followed {row.sourceRevisions!.length} source observations ({row.sourceRevisions!.map(r => r.slice(0, 8)).join(' → ')}). Its creation evidence belongs to the first; changes since then arrive only as reviewed updates to the same nodes. Content and comparison inspections recorded against an earlier revision are unavailable here.</p>}
-        {!comparison && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
+        {!comparison && row.kind !== 'authored' && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {reviewed[id] && <p role="status">{reviewed[id]}</p>}
           {orderedUpdates.map(update => <div key={update.id}>

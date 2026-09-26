@@ -232,6 +232,9 @@ test("the generated root claims the role that was observed, never an assumed one
 });
 test("summary labels alone cannot admit changed, ambiguous or incomplete callback/default evidence", () => {
   const mutations = [
+    ({ behavior }: ReturnType<typeof observations>) => { behavior.observation!.rows[0].initial.inert = true; },
+    ({ behavior }: ReturnType<typeof observations>) => { behavior.observation!.rows[0].live.inert = true; },
+    ({ behavior }: ReturnType<typeof observations>) => { behavior.observation!.rows[0].steps[0].control.inert = true; },
     ({ behavior }: ReturnType<typeof observations>) => {
       behavior.sourceUnchanged = false;
     },

@@ -630,7 +630,8 @@ function layoutPage(): { route: string; html: string } {
             "Cross-axis alignment. Flex-only — schema-invalid with <code>display: grid</code> (per-cell alignment lives on <code>placement</code>).",
           justify:
             "Main-axis distribution. Flex-only — schema-invalid with <code>display: grid</code>.",
-          grow: "The part takes remaining space — code: <code>flex: 1 1 auto</code>; canvas: fill container.",
+          grow: "The part takes remaining space along its parent's flex axis — code defaults to <code>flex: 1 1 auto</code>; canvas: fill container. May vary through <code>layoutByProp</code>.",
+          growBasis: 'Optional <code>"zero"</code> with effective <code>grow: true</code> emits <code>flex: 1 1 0px</code> and zero minimum width/height, matching equal Figma fill allocation. Omission preserves the existing content-basis CSS. Captured primary-axis fill supplies zero explicitly; competing minimum-size or flex channels refuse instead of being overridden.',
           overlap:
             "Children overlap (AvatarGroup): the gap token is applied as a <em>negative</em> child margin in CSS and as negative item spacing on the canvas. Flex-only.",
           wrap: "v15: children wrap (tag groups, chip rows) — code: <code>flex-wrap: wrap</code>; canvas: native <code>layoutWrap: WRAP</code>. Flex-only.",
@@ -672,6 +673,12 @@ function layoutPage(): { route: string; html: string } {
           { paths: ["anatomy.root.layout"] },
           "declared tracks + named areas (G1/G4)",
         ),
+    ),
+    section(
+      "absolute-component-placement",
+      "Placement of a component root",
+      ["curated"],
+      `<p><code>part.absolutePlacement: {left, top}</code> places an ordinary generated component root at finite CSS pixel offsets from its direct parent's padding edge. The parent must explicitly declare <code>position: relative</code> or <code>absolute</code>. React CSS Modules and inline React forward the placement to the child's root without adding a wrapper; native emission retains an instance of the child's main and accounts for the parent border once. The child still owns its dimensions, paint and internal layout.</p><p>This bounded field holds fixed observed coordinates. It does not establish responsive constraints, state transitions, native readback recovery or live fidelity. Opposing computed CSS insets do not imply stretch. Repeated placement, grids, caller-content wrappers, retained runtimes, multiple roots, style/className API collisions and competing child geometry refuse. Static HTML and Web Components currently refuse this field by name. Existing contracts remain unchanged.</p><p><code>part.absolutePlacementByCombination: {props, rows}</code> carries a complete table of parent-owned offsets instead of one fixed offset. Each row contains <code>values</code>, <code>left</code> and <code>top</code>. Values follow the property order, use canonical strings (including <code>"false"</code> and <code>"true"</code>), and use <code>null</code> for an omitted optional input. Every tuple of the finite enum/boolean VARIANT axes must appear exactly once, including omission; at most 64 tuples are supported. Optional defaultless inputs require a declared Figma unset option. A part cannot carry both placement fields. The same parent and child geometry restrictions apply, and the conditional table requires a single root. Both React emitters and native variant compilation resolve the table without cloning the child identity. This supports observed input positions; it does not infer interaction behavior or qualify a live stateful round trip.</p>`,
     ),
     section(
       "placement",
@@ -717,7 +724,7 @@ function layoutPage(): { route: string; html: string } {
       "text-auto-resize",
       "textAutoResize — a text box that sizes itself to its text is a whole number of pixels wide",
       ["curated"],
-      `<p><code>textAutoResize: "WIDTH_AND_HEIGHT"</code> on a text part records one captured canvas fact about that part's box: <em>it sizes itself to its text</em>, and a Figma text box that does so is a <strong>whole number of pixels wide</strong> — the glyph advance rounded up. It is Figma's <code>textAutoResize</code> under its own name, and only the value the code surfaces lower is spelled; <code>NONE</code>, <code>HEIGHT</code> and the deprecated <code>TRUNCATE</code> are a fixed or filled box, which the width and fill vocabulary already carries. Measured on a designer's 72-variant Badge: 26 of the 48 × 16 px small variants missed the 5 % limit at 4.4–7.3 % with every content size equal, because <code>Label</code> in Inter Semi Bold 14 is a 32 px box in Figma and a 31.40625 px run in Chromium, so the hug root rendered 47.40625 px against 48 and its right edge antialiased across two columns.</p><p><strong>Absent</strong> is the meaning every contract already had: the text element is as wide as its glyph run at the browser's fractional advance. No existing contract or emitted byte changes.</p><p>The lowering gives the element the same box as Figma's: <code>inline-size: calc-size(fit-content, round(up, size, 1px))</code> — its fit-content inline size, less its own px / em / rem letter spacing after the last glyph, rounded up to the pixel — with <code>max-inline-size: 100%</code> (unless the part carries its own max) and, under a flex column that would stretch it, <code>align-self: flex-start</code>, the Figma hug box's position. <code>fit-content</code>, not <code>max-content</code>: a runtime string that does not fit still wraps. It is a <strong>progressive enhancement</strong>: a browser without <code>calc-size()</code> drops the declaration at parse (or ignores the assignment on the inline surface) and keeps today's fractional box, under 1 px narrower. Logical <code>inline-size</code>, so a vertical or RTL writing mode rounds the axis the text runs along. <code>text-align</code>, <code>max-width</code> and <code>white-space</code> compose with it. The canvas writer sets <code>textAutoResize = 'WIDTH_AND_HEIGHT'</code> on the node it builds — the value <code>figma.createText()</code> is born with, so a set this pipeline wrote reads the fact back and proposes it: <strong>not a fixed point</strong> in the flagless direction, because Figma has no fractional text box. The fact is <strong>captured, never inferred</strong>: a dump that did not capture the field (dump ≤ v1.35) proposes the fractional box it always did; a node auto-width in some variants and not in others is named; a node that says auto-width and FILL at once is named as a contradiction; a sole root label hoisted into <code>anatomy.root.text</code> is named, not carried.</p>` +
+      `<p><code>textAutoResize: "WIDTH_AND_HEIGHT"</code> on a text part records one captured canvas fact about that part's box: <em>it sizes itself to its text</em>, and a Figma text box that does so is a <strong>whole number of pixels wide</strong> — the glyph advance rounded up. It is Figma's <code>textAutoResize</code> under its own name, and only the value the code surfaces lower is spelled; <code>NONE</code>, <code>HEIGHT</code> and the deprecated <code>TRUNCATE</code> are a fixed or filled box, which the width and fill vocabulary already carries. Measured on a designer's 72-variant Badge: 26 of the 48 × 16 px small variants missed the 5 % limit at 4.4–7.3 % with every content size equal, because <code>Label</code> in Inter Semi Bold 14 is a 32 px box in Figma and a 31.40625 px run in Chromium, so the hug root rendered 47.40625 px against 48 and its right edge antialiased across two columns.</p><p><strong>Absent</strong> is the meaning every contract already had: the text element is as wide as its glyph run at the browser's fractional advance. No existing contract or emitted byte changes.</p><p>The lowering gives captured auto-width text its intrinsic box: <code>inline-size: calc-size(max-content, round(up, size, 1px))</code> and <code>flex-shrink: 0</code>. Tracked text subtracts its final px/em/rem advance and retains that advance in an inner text run. It adds no container maximum: a HUG label can extend beyond a constrained parent. Authored maximums still constrain CSS text, and ordinary unflagged text retains its existing wrapping behavior. Native maximum-width fidelity remains separately unqualified. Under a stretching flex column, <code>align-self: flex-start</code> preserves the HUG position. Browsers without <code>calc-size()</code> retain fractional advances and may wrap differently; fallback fidelity is not claimed. Logical properties round the inline axis for vertical and RTL text. The canvas writer sets <code>textAutoResize = 'WIDTH_AND_HEIGHT'</code> on the node it builds — the value <code>figma.createText()</code> is born with, so a set this pipeline wrote reads the fact back and proposes it: <strong>not a fixed point</strong> in the flagless direction, because Figma has no fractional text box. The fact is <strong>captured, never inferred</strong>: a dump that did not capture the field (dump ≤ v1.35) proposes the fractional box it always did; a node auto-width in some variants and not in others is named; a node that says auto-width and FILL at once is named as a contradiction; a sole root label hoisted into <code>anatomy.root.text</code> is named, not carried.</p>` +
         refusals("Refusals:", [
           "a top-level root carrying <code>textAutoResize</code> — a root's box is its padding plus its content; the fact qualifies a text part's own element",
           "a part carrying <code>textAutoResize</code> that owns no text (no <code>text</code> / <code>content</code> / <code>textByProp</code>)",
@@ -730,7 +737,7 @@ function layoutPage(): { route: string; html: string } {
       "layout-by-prop",
       "Layout by prop",
       ["generated", "curated"],
-      `<p><code>layoutByProp: { prop, map }</code> applies per-enum-value layout overrides merged over the base <code>layout</code>. Partial coverage is the point — only the values that deviate appear. ChatMessage: <code>sender=user</code> flips <code>direction: row-reverse</code> on the root, right-aligning user messages.</p><p>Projections: code emits the override under the root’s enum class (<code>.sender-user .body { … }</code>); the canvas — which has no reverse — resolves it per variant at compile time, rendering the same children in reversed order.</p>` +
+      `<p><code>layoutByProp: { prop, map }</code> applies per-enum-value layout overrides merged over the base <code>layout</code>. Partial coverage is the point — only the values that deviate appear. ChatMessage: <code>sender=user</code> flips <code>direction: row-reverse</code> on the root, right-aligning user messages.</p><p>Projections: code emits the override under the root’s enum class (<code>.sender-user .body { … }</code>); the canvas — which has no reverse — resolves it per variant at compile time, rendering the same children in reversed order.</p><p><code>grow</code> and optional <code>growBasis: "zero"</code> describe how the parent allocates space to this item. Complete captured variant observations can carry these fields onto a frame, slot or generated single-root child reference, including repeated items. A filling default remains explicit; other variants keep their intrinsic sizes. A <code>grow: false</code> override disables inherited growth. Other child layout fields remain owned by the child contract.</p>` +
         codeBlock(
           `map values: ${typeText(VariantLayoutSchema as AnySchema)}`,
           "ts",
@@ -738,8 +745,9 @@ function layoutPage(): { route: string; html: string } {
         ) +
         refusals("Refusals:", [
           "the driving prop must be a declared enum; every map key one of its values",
-          "a component-instance part refuses overrides — the child contract owns its layout",
-          "<code>grow</code> and <code>overlap</code> stay per-part invariants: not overridable per variant",
+          "a component-instance part permits only parent-owned <code>grow</code> / <code>growBasis</code> overrides, with an ordinary generated single root; retained runtimes, multiple roots, placement wrappers and style/className API collisions refuse",
+          "<code>growBasis</code> requires effective <code>grow: true</code>; new growth placement requires an observed parent and refuses competing minimum-size or flex channels, grids, overlays and whole-pixel text boxes",
+          "<code>overlap</code> stays a per-part invariant: not overridable per variant",
         ]) +
         shippingExample("chat-message.contract.json", {
           paths: ["anatomy.root.layoutByProp"],
@@ -816,15 +824,15 @@ function tokensPage(): { route: string; html: string } {
       "literals",
       "Literal channels",
       ["generated", "curated"],
-      `<p><code>literals</code> and <code>literalsByProp</code> (v14) carry the styling facts a foreign system keeps as <em>component-private literals</em> — Polaris’s <code>--pc-*</code> pixel geometry (ProgressBar’s per-size track heights, Avatar’s per-size widths, Button’s <code>transparent</code> base background). A literal is only carried when it was resolved <em>deterministically</em> through the source’s own var() chain at promotion time, with provenance; it is never minted into a token — the value is honestly literal, and renaming it against a real token is the adopter’s call.</p><p>The grammar is bounded: px/rem/em/unitless numbers, hex and <code>rgb()</code>/<code>rgba()</code> colors, and the CSS keywords <code>transparent</code>/<code>inherit</code>/<code>currentColor</code>. The channel set is bounded too (geometry and paint channels — see the refusal list). <code>literalsByProp</code> is the per-enum-value form, an ordered array with exactly the tokensByProp entry semantics.</p>` +
+      `<p><code>literals</code> and <code>literalsByProp</code> (v14) carry the styling facts a foreign system keeps as <em>component-private literals</em> — Polaris’s <code>--pc-*</code> pixel geometry (ProgressBar’s per-size track heights, Avatar’s per-size widths, Button’s <code>transparent</code> base background). A literal is only carried when it was resolved <em>deterministically</em> through the source’s own var() chain at promotion time, with provenance; it is never minted into a token — the value is honestly literal, and renaming it against a real token is the adopter’s call.</p><p>The grammar is bounded: px/rem/em/unitless numbers, hex and <code>rgb()</code>/<code>rgba()</code> colors, and the CSS keywords <code>transparent</code>/<code>inherit</code>/<code>currentColor</code>. The <code>background-image</code> channel also admits <code>none</code> or a single linear gradient with an optional axis direction or degree angle, explicit ordered 0–100% stops, and hex/rgb/rgba colors. A token binding on the same channel takes priority over its literal fallback. The channel set is bounded too (geometry and paint channels — see the refusal list). <code>literalsByProp</code> is the per-enum-value form, an ordered array with exactly the tokensByProp entry semantics.</p>` +
         fieldList(LiteralsByPropSchema as AnySchema, {
           prop: "The driving enum prop, by canonical name.",
           map: "enum value → (CSS property → bounded literal), merged over the base literals.",
         }) +
         refusals("Refusals:", [
-          "a channel outside the bounded literal-channel set (background/background-color, color, height/width/min-*, padding-block/-inline, gap, border-radius, border-width, font-size, line-height, letter-spacing)",
-          "a value outside the bounded grammar (no gradients, no calc(), no keywords beyond transparent/inherit/currentColor)",
-          "a channel carried as BOTH a token binding and a literal on the same part — ambiguous",
+          "a channel outside the bounded literal-channel set (background/background-color/background-image, color, height/width/min-*, padding-block/-inline, gap, border-radius, border-width, font-size, line-height, letter-spacing)",
+          "a value outside its channel grammar: for example calc(), image URLs, multiple gradient layers, decreasing stops or a gradient on a scalar channel",
+          "unsupported paint cannot be made valid by moving it to another literal channel",
           "a component-instance part — the child contract owns its styling",
         ]) +
         illustrativeExample(
@@ -1089,6 +1097,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           strokePath: 'Original open centerline and parent coordinate basis — see <a href="#stroked-paths">stroked paths</a>.',
           paths: 'Closed filled-path geometry — see <a href="#filled-paths">filled paths</a>.',
           pathsByProp: 'Complete enum-conditioned path geometry — see <a href="#filled-paths">filled paths</a>.',
+          parentViewport: 'Optional fixed parent basis for proportional filled-path geometry — see <a href="#filled-paths">filled paths</a>.',
           sides:
             "Polygon point count, ≥ 3. A polygon with no captured side count renders the canvas default (3) — and the proposer names that assumption in its notes.",
           width: "Intrinsic (pre-rotation) width, px.",
@@ -1115,7 +1124,15 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
         fieldList(ShapeSchema as AnySchema, {
           paths: "One compound closed path, containing data and windingRule.",
           pathsByProp: "A prop name and map of enum values to complete width, height and paths geometry.",
-        }, { only: ["paths", "pathsByProp"] }) +
+          parentViewport: "Fixed parent dimensions and the drawing's local origin before caller resizing.",
+        }, { only: ["paths", "pathsByProp", "parentViewport"] }) +
+        fieldList(unwrap((ShapeSchema.shape as unknown as Record<string, AnySchema>).parentViewport).schema, {
+          width: "Positive parent width in pixels at capture time.",
+          height: "Positive parent height in pixels at capture time.",
+          x: "Drawing origin on the parent's horizontal axis, in pixels.",
+          y: "Drawing origin on the parent's vertical axis, in pixels.",
+        }) +
+        `<p><code>parentViewport</code> makes drawing dimensions and placement proportional to that fixed parent basis. It requires an unpadded, relatively positioned free parent with declared width and height, containing only qualified filled paths sharing that basis. Rotation, enum-conditioned paths, competing layout and geometry channels refuse. A declared size override on a qualified component can resize its caller while preserving the standalone main. React uses percentage geometry; browser subpixel placement still requires visual verification. Native SCALE dimensions and path data are checked independently, and inherited-position discrepancies remain a refusal.</p>` +
         `<p><code>pathsByProp.prop</code> names an enum prop. <code>pathsByProp.map</code> must cover every enum value with its own <code>{ width, height, paths }</code>. Capture proposes a single-axis map only when all observed geometry agrees with that axis. An exact ancestor visibility gate may make an enum value unreachable; any base-geometry completion for such a value is named in the proposal.</p>` +
         `<p>Code output uses an encoded SVG mask and the part’s fill. Native output creates an editable VECTOR and checks its intrinsic dimensions exactly or against the intended float32 values before proceeding; it refuses a mismatch instead of resizing the path. Figma may normalize path serialization on readback. The supported capture class has one visible solid fill, normal blending, no strokes, effects or rounded corners, and unrotated transform axes. Fractional translation is retained.</p>` +
         refusals("Filled-path boundaries:", [
@@ -1130,7 +1147,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           },
           literals: { "background-color": "#111827" },
         }, "Schema-validated illustrative filled triangle; not a fidelity acceptance receipt.") +
-        fidelity(`<p>Editable geometry and repeat-safe native generation have bounded engineering evidence. Complete application fidelity and responsive SCALE constraints remain unqualified; see the current acceptance ledger and limitation D.60.</p>`),
+        fidelity(`<p>Editable geometry and repeat-safe native generation have bounded engineering evidence. A clean React consumer demonstrates caller-size projection. Native SCALE origin checks still refuse the measured warning path, and complete application fidelity remains unqualified; see the current acceptance ledger and limitation D.155.</p>`),
     ),
     section(
       "stroked-paths",

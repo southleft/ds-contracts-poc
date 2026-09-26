@@ -3533,8 +3533,9 @@ console.log(
     reviewable,
   );
   check(
-    "Inter and LEFT are the defaults the emitters already render — no declared block is invented for them",
-    partOf(inter, "t")?.declared === undefined,
+    "observed LEFT is explicit because text-align inherits; the default Inter family is still omitted",
+    JSON.stringify(partOf(inter, "t")?.declared) ===
+      JSON.stringify({ "text-align": "left" }),
   );
 }
 
@@ -3966,7 +3967,7 @@ console.log(
   check(
     "the layout block is the slot's interior auto-layout PLUS the grow (r11: invertLayout on the SLOT branch, one implementation) and no FIXED receipt fires for a FILL axis",
     JSON.stringify(layoutOf(uniform, "Image")) ===
-      '{"direction":"column","justify":"center","align":"center","grow":true}' &&
+      '{"direction":"column","justify":"center","align":"center","grow":true,"growBasis":"zero"}' &&
       !uniform.notes.some((n) =>
         /P2SlotGrow:root\/Image: .*FC-GEOMETRY-EXCLUDED/.test(n),
       ),
@@ -4023,11 +4024,12 @@ console.log(
     reviewable,
   );
   check(
-    "FILL-width under a COLUMN parent is the cross-axis stretch, not grow — no layout.grow (the interior layout still carries), named by carryCrossAxisFill",
+    "FILL-width under a COLUMN parent carries width: 100% without changing grow or interior layout",
     JSON.stringify(layoutOf(column, "Image")) ===
       '{"direction":"column","justify":"center","align":"center"}' &&
+      JSON.stringify(partOf(column, "Image").literals) === '{"width":"100%"}' &&
       column.notes.some((n) =>
-        /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(
+        /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent in every occurrence of this part.*carried as the part literal/.test(
           n,
         ),
       ),
@@ -4097,8 +4099,17 @@ console.log(
     map: Record<string, Record<string, string>>;
   }>;
   check(
-    "the axis-split height twin now carries the grow its receipt already claimed: layout.grow on the COLUMN plane AND height: 100% on the DEFINITE ROW plane",
-    (twinImage?.layout as Record<string, unknown> | undefined)?.grow === true &&
+    "the axis-split height twin grows only on the COLUMN plane and carries height: 100% only on the DEFINITE ROW plane",
+    (twinImage?.layout as Record<string, unknown> | undefined)?.grow ===
+      undefined &&
+      (
+        twinImage?.layoutByProp as
+          { prop: string; map: Record<string, { grow?: boolean }> } | undefined
+      )?.prop === "variant" &&
+      (twinImage?.layoutByProp as { map: Record<string, { grow?: boolean }> })
+        .map.default?.grow === true &&
+      (twinImage?.layoutByProp as { map: Record<string, { grow?: boolean }> })
+        .map.inline?.grow === undefined &&
       twinLbp.some(
         (e) =>
           e.prop === "variant" &&
@@ -4174,7 +4185,7 @@ console.log(
   check(
     "a SLOT drawn VERTICAL / CENTER / MAX with no drawn children carries layout {direction: column, justify: center, align: end} beside the r10 grow — a slot is a container by definition, so the empty child list does not gate justify/align",
     JSON.stringify(part?.layout) ===
-      '{"direction":"column","justify":"center","align":"end","grow":true}' &&
+      '{"direction":"column","justify":"center","align":"end","grow":true,"growBasis":"zero"}' &&
       JSON.stringify(part?.slot ?? {}).includes('"name":"children"'),
   );
   check(
@@ -4233,7 +4244,7 @@ console.log(
   check(
     "a per-variant interior difference on the SLOT rides layoutByProp on the axis (Inline → row/start/start over the Default column base), named like a FRAME part's",
     JSON.stringify(splitPart?.layout) ===
-      '{"direction":"column","justify":"center","align":"end","grow":true}' &&
+      '{"direction":"column","justify":"center","align":"end","grow":true,"growBasis":"zero"}' &&
       lbp?.prop === "variant" &&
       JSON.stringify(lbp.map) ===
         '{"inline":{"direction":"row","justify":"start","align":"start"}}' &&

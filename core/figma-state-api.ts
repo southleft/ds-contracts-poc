@@ -157,8 +157,15 @@ export function figmaStateApi(contract: Contract): FigmaStateApi | undefined {
   )
     return fail('conflicting native semantic projection');
   const visit = (part: Contract['anatomy'][string]) => {
+    // Native graph compilation and exact import retain component identity and
+    // its independently verified variant mapping. The root envelope owns only
+    // behavior. Admit complete identity forwarding; other composition models
+    // still need a separate representation before they can retain this API.
+    if (part.component && (Object.keys(part.component.props ?? {}).length !== contract.props.length ||
+      contract.props.some(p => part.component!.props?.[p.name] !== `{${p.name}}`) ||
+      Object.keys(part.component.initialProps ?? {}).length))
+      return fail('component context requires complete identity forwarding');
     if (
-      part.component ||
       part.slot ||
       part.repeat ||
       part.meter ||

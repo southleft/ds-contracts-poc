@@ -1,3 +1,4 @@
+import type {ReactRenderGraphHost} from './react-render-graph-runtime.js';
 import { flatten, type CapturedNode } from "../extract/computed/lib.js";
 /** Version-bounded read-only renderer observation. It never selects a component
  * by display name, changes source files, injects DOM attributes, or accepts a
@@ -5,6 +6,8 @@ import { flatten, type CapturedNode } from "../extract/computed/lib.js";
  * Protocol reference: react/packages/react-devtools-shared/src/hook.js.
  */
 import path from "node:path";
+import type {ReactElementCreationSite,ReactElementLineage} from './react-element-creation.js';
+import type {ReactElementInvocation} from './react-element-invocation.js';
 import {
   buildReactReference,
   reactReferenceUnchanged,
@@ -15,7 +18,7 @@ import {
   type ReactSourceProgram,
 } from "./react-source-program.js";
 
-export async function buildReactOwnershipReference(
+export function reactOwnershipEntry(
   root: string,
   original: ReactReference,
   program: ReactSourceProgram,
@@ -38,6 +41,7 @@ export async function buildReactOwnershipReference(
       exportName: c.exportName,
       sourceSha256: c.sourceSha256,
       span: c.span,
+      runtimeObservationOnly: c.problems.includes('runtime-export-binding-only'),
     };
   });
   if (
@@ -60,12 +64,22 @@ export async function buildReactOwnershipReference(
     "\nwindow.__DSC_REACT_EXPORTS = [" +
     entries
       .map(
-        (c) =>
-          `{identity:${JSON.stringify(c)},value:__dscModule${modules.indexOf(c.module)}[${JSON.stringify(c.exportName)}]}`,
+        ({runtimeObservationOnly,...c}) =>
+          `{identity:${JSON.stringify(c)},value:__dscModule${modules.indexOf(c.module)}[${JSON.stringify(c.exportName)}]${runtimeObservationOnly?',runtimeObservationOnly:true':''}}`,
       )
       .join(",") +
     "];\nwindow.__DSC_REACT_CLONE_ELEMENT = React.cloneElement;";
-  const reference = await buildReactReference(root, original.cohort, entry);
+  return entry;
+}
+
+export async function buildReactOwnershipReference(
+  root: string,
+  original: ReactReference,
+  program: ReactSourceProgram,
+  observer?: Parameters<typeof buildReactReference>[3],
+) {
+  const entry = reactOwnershipEntry(root, original, program);
+  const reference = await buildReactReference(root, original.cohort, entry, observer);
   if (
     JSON.stringify(reference.files) !== JSON.stringify(original.files) ||
     !reactSourceProgramUnchanged(program)
@@ -103,23 +117,43 @@ export interface ReactOwnership {
     props: Record<string, unknown>;
     roots: string[];
   }>;
+  /** Registered render ancestors outside the selected DOM subtree. They are
+   * context, not generated component roots; parent links are never erased. */
+  ancestors?: Array<Omit<ReactOwnership['components'][number], 'roots'> & {
+    hostAncestor: { tag: string; distance: number };
+  }>;
   nodes: Array<{
     path: string;
     tag: string;
     nearestComponent?: string;
     createdBy?: string;
+    /** Exact current factory invocation only; does not prove source semantics. */
+    creationSite?: ReactElementCreationSite;
+    creationInvocation?: ReactElementInvocation;
+    creationLineage?: ReactElementLineage;
+    renderGraph?: ReactRenderGraphHost;
   }>;
   problems: string[];
 }
+/** Different observers retain different factory journals. Pair their complete
+ * renderer/source/props/host structure separately; retain and hash both full
+ * observations so this comparison never authenticates the omitted journals. */
+export function reactOwnershipStructure(ownership:ReactOwnership):ReactOwnership {
+  return {...ownership,nodes:ownership.nodes.map(({creationSite:_site,creationInvocation:_invocation,creationLineage:_lineage,renderGraph:_graph,...node})=>node)};
+}
 /** Element-index paths match flatten(CapturedNode) under the selected root.
  * Unknown owner/portal/renderer states are kept as problems, never guessed. */
-export const reactOwnershipRead = (selector: string) => `(() => {
+export const reactOwnershipRead = (selector: string, renderGraph = false) => `(() => {
  const state=window.__DSC_REACT_OWNERSHIP, exports=window.__DSC_REACT_EXPORTS;
  const out={version:1,rendererVersions:[],components:[],nodes:[],problems:[]};
  const fail=code=>{out.problems.push(code);return out;};
  if(!state||!Array.isArray(exports))return fail('react-ownership-instrumentation-missing');
- const values=new Map();for(const entry of exports){
+ const values=new Map(),runtimeValues=new Set();for(const entry of exports){
   if(!entry.value)return fail('react-ownership-export-missing');
+  if(entry.runtimeObservationOnly){
+   if(!['function','object'].includes(typeof entry.value))return fail('react-ownership-runtime-export-not-component');
+   runtimeValues.add(entry.value);
+  }
   if(values.has(entry.value))return fail('react-ownership-export-alias-ambiguous');
   values.set(entry.value,entry.identity);
  }
@@ -130,13 +164,20 @@ export const reactOwnershipRead = (selector: string) => `(() => {
  const selected=document.querySelector(${JSON.stringify(selector)});
  if(!selected)return fail('react-ownership-selected-root-missing');
  const paths=new Map();const map=(node,path)=>{paths.set(node,path);if(node.shadowRoot||node.localName.includes('-'))out.problems.push('react-ownership-custom-element-boundary:'+path);[...node.children].forEach((child,i)=>map(child,path===''?String(i):path+'.'+i));};map(selected,'');
- const fibers=new Map(),hostFibers=new Map();let sequence=0;
+ const fibers=new Map(),hostFibers=new Map(),componentHosts=new Map();let sequence=0;
  const plainProps=props=>Object.fromEntries(Object.entries(props||{}).map(([key,value])=>[key,
   value===null||['string','number','boolean'].includes(typeof value)?value:
   value===undefined?{kind:'undefined'}:typeof value==='function'?{kind:'function'}:
   {kind:Array.isArray(value)?'array':'object'}]));
  const walk=(fiber,parent)=>{for(let node=fiber;node;node=node.sibling){
-  const identity=values.get(node.elementType)||values.get(node.type);
+  const value=values.has(node.elementType)?node.elementType:node.type;
+  let identity=values.get(value);
+  // A runtime export can be a host tag or context provider. An unresolved
+  // source binding does not make it a component. These are the committed
+  // function/class/forwardRef/memo tags in the supported renderer versions.
+  if(identity&&runtimeValues.has(value)&&![0,1,11,14,15].includes(node.tag)){
+   out.problems.push('react-ownership-runtime-boundary-kind-unsupported');identity=undefined;
+  }
   let current=parent;
   if(identity){const component={id:'instance-'+sequence++,source:identity,...(parent?{parent}:{}),props:plainProps(node.memoizedProps),roots:[]};
    out.components.push(component);fibers.set(node,component.id);current=component.id;}
@@ -153,18 +194,53 @@ export const reactOwnershipRead = (selector: string) => `(() => {
   // fiber; never infer source ownership from a name or the nearest component.
   const owner=host.fiber._debugOwner;
   const createdBy=fibers.get(owner)??(owner?.alternate?.alternate===owner?fibers.get(owner.alternate):undefined);
-  out.nodes.push({path,tag:element.localName.toLowerCase(),...(host.nearestComponent?{nearestComponent:host.nearestComponent}:{}),...(createdBy?{createdBy}:{})});
+  const creationSite=window.__DSC_ELEMENT_CREATION?.read(host.fiber);
+  const creationInvocation=window.__DSC_ELEMENT_CREATION?.readInvocation(host.fiber);
+  const creationLineage=window.__DSC_ELEMENT_CREATION?.readLineage(host.fiber);
+  const renderGraph=${renderGraph?'window.__DSC_RUNTIME_PROOF?.renderGraphHost(host.fiber.memoizedProps,host.fiber.type,owner,owner?.alternate?.alternate===owner?owner.alternate:undefined)':'undefined'};
+  out.nodes.push({path,tag:element.localName.toLowerCase(),...(host.nearestComponent?{nearestComponent:host.nearestComponent}:{}),...(createdBy?{createdBy}:{}),...(creationSite?{creationSite}:{}),...(creationInvocation?{creationInvocation}:{}),...(creationLineage?{creationLineage}:{}),...(renderGraph?{renderGraph}:{})});
  }
  // Roots are actual topmost DOM descendants of each exported instance, not
  // class/attribute matches. Multiple roots and co-owned wrapper roots survive.
  for(const [fiber,id] of fibers){const c=out.components.find(c=>c.id===id);
-  const visit=node=>{for(let n=node;n;n=n.sibling){if(n.stateNode instanceof Element){if(paths.has(n.stateNode))c.roots.push(paths.get(n.stateNode));}else if(n.child)visit(n.child);}};
-  visit(fiber.child);
+  const hosts=[];
+  const visit=node=>{for(let n=node;n;n=n.sibling){if(n.stateNode instanceof Element){hosts.push(n.stateNode);if(paths.has(n.stateNode))c.roots.push(paths.get(n.stateNode));}else if(n.child)visit(n.child);}};
+  visit(fiber.child);componentHosts.set(id,hosts);
  }
+ const all=new Map(out.components.map(c=>[c.id,c]));
  out.components=out.components.filter(c=>c.roots.length);
- const ids=new Set(out.components.map(c=>c.id));
- for(const [element,host] of hostFibers)if(ids.has(host.nearestComponent)&&!paths.has(element))out.problems.push('react-ownership-host-outside-selection:'+host.nearestComponent);
- for(const c of out.components)if(c.parent&&!ids.has(c.parent))out.problems.push('react-ownership-parent-outside-selection:'+c.id);
+ const ids=new Set(out.components.map(c=>c.id)),external=new Set();
+ // Preserve only actual registered ancestors of selected instances. Each must
+ // have one enclosing host; fragments, sibling roots and portal escapes are
+ // not an enclosing render context. No display name or selector proves this.
+ for(const c of out.components){let parent=c.parent;const seen=new Set([c.id]);
+  while(parent){if(seen.has(parent)||!all.has(parent)){out.problems.push('react-ownership-parent-unresolved:'+c.id);break;}
+   seen.add(parent);if(!ids.has(parent))external.add(parent);parent=all.get(parent).parent;
+  }
+ }
+ const ancestors=[];
+ for(const [id,c] of all){if(!external.has(id))continue;
+  const hosts=componentHosts.get(id),enclosing=hosts?.length===1?hosts[0]:undefined;
+  let distance=0;for(let node=selected;node&&node!==enclosing;node=node.parentElement)distance++;
+  if(!enclosing||enclosing===selected||!enclosing.contains(selected)){
+   out.problems.push('react-ownership-parent-outside-selection:'+id);continue;
+  }
+  // An ancestor's unselected descendants may exist within its enclosing host,
+  // but may not escape it through portals or a reparented DOM subtree.
+  for(const [element,host] of hostFibers){let owner=host.nearestComponent;const seen=new Set();
+   while(owner&&!seen.has(owner)){seen.add(owner);if(owner===id){if(!enclosing.contains(element))out.problems.push('react-ownership-ancestor-host-outside-container:'+id);break;}owner=all.get(owner)?.parent;}
+  }
+  const {roots,...identity}=c;ancestors.push({...identity,hostAncestor:{tag:enclosing.localName.toLowerCase(),distance}});
+ }
+ if(ancestors.length)out.ancestors=ancestors;
+ const ancestorIds=new Set(ancestors.map(c=>c.id));
+ // A registered descendant is still part of its selected ancestor. Following
+ // that chain prevents an exported portal child from hiding an outside host.
+ for(const [element,host] of hostFibers){if(paths.has(element))continue;
+  let owner=host.nearestComponent;const seen=new Set();
+  while(owner&&!seen.has(owner)){seen.add(owner);if(ids.has(owner)){out.problems.push('react-ownership-host-outside-selection:'+owner);break;}owner=all.get(owner)?.parent;}
+ }
+ for(const c of out.components)if(c.parent&&!ids.has(c.parent)&&!ancestorIds.has(c.parent))out.problems.push('react-ownership-parent-outside-selection:'+c.id);
  return out;
 })()`;
 

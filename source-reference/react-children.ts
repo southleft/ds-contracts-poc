@@ -17,15 +17,22 @@ export type ReactChildrenFact = {
  * proof. JSX children win over attributes; later attributes win over spreads. */
 export function readReactChildren(
   fn: ts.FunctionLikeDeclaration,
-  root: ts.JsxElement | ts.JsxSelfClosingElement,
+  root: ts.JsxElement | ts.JsxSelfClosingElement | ts.CallExpression,
   checker: ts.TypeChecker,
   hasChildren: boolean,
+  /** Only a separately bound JSX-runtime call may use the compiled form. */
+  compiledFactory = false,
 ): ReactChildrenFact {
   const sf = root.getSourceFile();
   const unknown = (reason: string): ReactChildrenFact => ({
     kind: "unresolved",
     reason,
   });
+  if (ts.isCallExpression(root) && !compiledFactory)
+    return unknown("children-call-factory-unproved");
+  const symbolAt = (node: ts.Identifier) => ts.isShorthandPropertyAssignment(node.parent) && node.parent.name === node
+    ? checker.getShorthandAssignmentValueSymbol(node.parent)
+    : checker.getSymbolAtLocation(node);
   const inputs = new Map<
     ts.Symbol,
     "object" | "excluded" | "value" | "defaulted"
@@ -55,7 +62,7 @@ export function readReactChildren(
     id: ts.Identifier,
     kind: "object" | "excluded" | "value" | "defaulted",
   ) => {
-    const symbol = checker.getSymbolAtLocation(id);
+    const symbol = symbolAt(id);
     if (symbol) inputs.set(symbol, kind);
     declarations.add(id);
   };
@@ -110,7 +117,7 @@ export function readReactChildren(
         mutableChildren &&
         !primitiveOnly(checker.getTypeAtLocation(e.name))
       ) {
-        const symbol = checker.getSymbolAtLocation(e.name);
+        const symbol = symbolAt(e.name);
         if (symbol) possibleChildAliases.add(symbol);
         declarations.add(e.name);
       }
@@ -120,7 +127,7 @@ export function readReactChildren(
     const collect = (name: ts.BindingName) => {
       if (ts.isIdentifier(name)) {
         if (!primitiveOnly(checker.getTypeAtLocation(name))) {
-          const symbol = checker.getSymbolAtLocation(name);
+          const symbol = symbolAt(name);
           if (symbol) {
             possibleChildAliases.add(symbol);
             secondaryAliases.add(symbol);
@@ -155,7 +162,7 @@ export function readReactChildren(
   const inputKind = (e: ts.Expression) => {
     e = unwrap(e);
     return ts.isIdentifier(e)
-      ? inputs.get(checker.getSymbolAtLocation(e)!)
+      ? inputs.get(symbolAt(e)!)
       : undefined;
   };
   const readsChildren = (e: ts.Expression): boolean => {
@@ -176,6 +183,73 @@ export function readReactChildren(
     approved.add(node);
     ts.forEachChild(node, approve);
   };
+  // Follow only unconditional local bindings, in evaluation order. A helper
+  // result, computed binding or default is not an unchanged input merely
+  // because its inferred type has the same shape. Keep every derived binding
+  // in the final escape scan, including sibling values that can alias children.
+  if (fn.body && ts.isBlock(fn.body)) {
+    for (const statement of fn.body.statements) {
+      if (ts.isReturnStatement(statement)) break;
+      if (
+        !ts.isVariableStatement(statement) ||
+        !(statement.declarationList.flags & ts.NodeFlags.Const)
+      )
+        continue;
+      for (const declaration of statement.declarationList.declarations) {
+        if (!declaration.initializer) continue;
+        const initializer = unwrap(declaration.initializer);
+        const kind = inputKind(initializer);
+        if (ts.isIdentifier(declaration.name)) {
+          const derived = readsChildren(initializer) ? "value" : kind;
+          if (!derived) continue;
+          add(declaration.name, derived);
+          approve(initializer);
+          continue;
+        }
+        if (
+          (kind !== "object" && kind !== "excluded") ||
+          !ts.isObjectBindingPattern(declaration.name)
+        )
+          continue;
+        const elements = declaration.name.elements;
+        if (
+          elements.some(
+            (e) =>
+              !ts.isIdentifier(e.name) ||
+              e.initializer ||
+              (e.propertyName && ts.isComputedPropertyName(e.propertyName)),
+          )
+        )
+          continue;
+        const childBinding = elements.find(
+          (e) =>
+            !e.dotDotDotToken &&
+            (e.propertyName ?? e.name).getText(sf).replace(/^['"]|['"]$/g, "") ===
+              "children",
+        );
+        const childProperty = checker.getPropertyOfType(
+          checker.getTypeAtLocation(initializer),
+          "children",
+        );
+        const mutableChildren =
+          !childProperty ||
+          !primitiveOnly(checker.getTypeOfSymbolAtLocation(childProperty, initializer));
+        for (const element of elements) {
+          const name = element.name as ts.Identifier;
+          if (element.dotDotDotToken)
+            add(name, kind === "excluded" || childBinding ? "excluded" : "object");
+          else if (element === childBinding)
+            add(name, kind === "object" ? "value" : "defaulted");
+          else if (mutableChildren && !primitiveOnly(checker.getTypeAtLocation(name))) {
+            const symbol = symbolAt(name);
+            if (symbol) possibleChildAliases.add(symbol);
+            declarations.add(name);
+          }
+        }
+        approve(initializer);
+      }
+    }
+  }
   const forwarded = (
     node: ts.Node,
     via: ReactChildrenFact["via"],
@@ -238,7 +312,7 @@ export function readReactChildren(
         // execute it. Calls, property access and every other use still refuse.
         if (
           ts.isIdentifier(ref) &&
-          secondaryAliases.has(checker.getSymbolAtLocation(ref)!)
+          secondaryAliases.has(symbolAt(ref)!)
         )
           approve(ref);
       }
@@ -269,8 +343,41 @@ export function readReactChildren(
     }
     return result;
   };
-  let result = readAt(root);
+  const readCompiled = (call: ts.CallExpression): ReactChildrenFact => {
+    const props = call.arguments[1] && unwrap(call.arguments[1]);
+    if (!props || !ts.isObjectLiteralExpression(props))
+      return unknown('children-compiled-props-unresolved');
+    let fact: ReactChildrenFact = {kind:'absent'};
+    for (const property of props.properties) {
+      if (ts.isSpreadAssignment(property)) {
+        const kind = inputKind(property.expression);
+        if (kind === 'excluded') approve(property.expression);
+        else if (kind === 'object') {
+          approve(property.expression);
+          if (hasChildren) fact = forwarded(property, 'spread');
+        } else return unknown('children-spread-unresolved');
+        continue;
+      }
+      if (!ts.isPropertyAssignment(property) && !ts.isShorthandPropertyAssignment(property))
+        return unknown('children-compiled-accessor-or-method');
+      const name = property.name;
+      if (!ts.isIdentifier(name) && !ts.isStringLiteral(name))
+        return unknown('children-compiled-key-unresolved');
+      if (name.text === '__proto__') return unknown('children-compiled-prototype-unresolved');
+      const value = ts.isPropertyAssignment(property) ? property.initializer : property.name;
+      if (name.text === 'children') fact = expression(value, 'attribute');
+      else if (name.text === 'ref') {
+        const ref = unwrap(value);
+        if (ts.isIdentifier(ref) && secondaryAliases.has(symbolAt(ref)!)) approve(ref);
+      }
+    }
+    return fact;
+  };
+  let result = ts.isCallExpression(root) ? readCompiled(root) : readAt(root);
   if (result.kind !== "forwarded") {
+    // Compiled nested composition needs its own element graph. Never pass a
+    // factory call through the JSX-only host-template walker.
+    if (ts.isCallExpression(root)) return result;
     // Keep the established root facts byte-identical unless a descendant has
     // a direct unchanged input. Never upgrade the root fact: its projector
     // intentionally discards descendants and would erase these wrappers.
@@ -372,9 +479,19 @@ export function readReactChildren(
       !approved.has(node) &&
       !declarations.has(node)
     ) {
-      const symbol = checker.getSymbolAtLocation(node)!;
+      const symbol = symbolAt(node)!;
       if (inputs.has(symbol)) escaped = true;
-      if (possibleChildAliases.has(symbol)) possibleAliasUsed = true;
+      if (possibleChildAliases.has(symbol)) {
+        // ToBoolean of an object does not invoke coercion/getter/user code.
+        // Compiled source may use a sibling flag to select the root while
+        // forwarding the input unchanged. Other uses of possible aliases,
+        // including copying one into the target or props, remain unresolved.
+        const parent = node.parent;
+        const readOnlyCondition = compiledFactory &&
+          ((ts.isConditionalExpression(parent) && parent.condition === node) ||
+           (ts.isIfStatement(parent) && parent.expression === node));
+        if (!readOnlyCondition) possibleAliasUsed = true;
+      }
     }
     ts.forEachChild(node, visit);
   };

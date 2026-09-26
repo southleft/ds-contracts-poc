@@ -120,9 +120,10 @@ test('manual RTL selection and mapped child appearances work through component p
   const panel=ContractSchema.parse({id:'probe.pane',name:'Pane',version:'1.0.0',status:'draft',archetype:'none',description:'A reusable panel host.',semantics:{element:'div'},props:[],states:[],
     anatomy:{root:{layout:{display:'flex',direction:'column'},parts:{content:{slot:{name:'children'}}}}},bindings});
   const mapped=structuredClone(entry);mapped.props[0].bindings.code.values={quiet:false,strong:true};mapped.props[0].bindings.code.prop='active';
-  for(const inline of [false,true]){
+  for(const inline of [false,true])for(const grow of [false,true]){
     const parent=fixture();parent.selection!.activation='manual';parent.selection!.direction='rtl';
     for(const value of values)parent.anatomy.root.parts![value+'Panel']={component:{id:panel.id},parts:{[value+'Text']:{text:value+' content'}},visibleWhen:{prop:'selection',equals:value}};
+    if(grow){parent.anatomy.root.layout={display:'flex',direction:'column'};parent.anatomy.root.parts!.list.layout={display:'flex',direction:'row'};parent.anatomy.root.parts!.list.parts!.item.layout={grow:true,growBasis:'zero'};for(const value of values)parent.anatomy.root.parts![value+'Panel'].layout={grow:true,growBasis:'zero'};}
     const ctx={...context(parent),contracts:new Map([[parent.id,parent],[mapped.id,mapped],[panel.id,panel]])};
     const generate=(c:Contract)=>inline?{...emitReactInline(c,{...ctx,tokens}),css:''}:emitReact(c,ctx);
     const output=generate(parent), child=generate(mapped), pane=generate(panel);
@@ -138,6 +139,7 @@ test('manual RTL selection and mapped child appearances work through component p
     assert.deepEqual(await page.evaluate('window.calls'),['beta']);
     assert.equal(await page.getByRole('tabpanel').textContent(),'beta content');
     assert.equal(await page.getByRole('tabpanel').evaluate(el=>getComputedStyle(el).display),'flex');
+    if(grow){assert.equal(await page.getByRole('tabpanel').evaluate(el=>getComputedStyle(el).flexBasis),'0px');assert.equal(await page.getByRole('tab',{name:'beta',exact:true}).evaluate(el=>getComputedStyle(el).flexBasis),'0px');}
     assert.equal(await page.locator('[role=tabpanel][hidden]').first().evaluate(el=>getComputedStyle(el).display),'none');
     assert.equal(await page.locator('[role=tab][aria-selected=true]').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 0, 0)');
     await page.close();

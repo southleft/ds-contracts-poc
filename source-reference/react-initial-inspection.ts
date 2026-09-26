@@ -11,9 +11,12 @@ import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
 import { readReactNativeEvidence } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
+import { isReactAuthoredNativeRequest, isReactAuthoredOperationRequest, reactAuthoredOwnershipAnchor,
+  type ReactAuthoredNativeRequest, type ReactAuthoredInitialNativeRequest } from './react-authored-native-request.js';
+import { readReactAuthoredNativeEvidence } from './react-authored-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
-import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead, type ReactOwnership } from './react-ownership.js';
+import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead, reactOwnershipStructure, type ReactOwnership } from './react-ownership.js';
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
@@ -21,10 +24,22 @@ import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-valid
 import { cropSourceFrame, type SourceFrame } from './source-framing.js';
 import { compileReactInitialContract, reactInitialObservedRoot, reactInitialEvidenceUnobserved } from './react-initial-contract.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
+import {observeReactAuthoredInitials,type ReactAuthoredInitialOrigins} from './react-authored-initial.js';
+import {reactOwnershipEngine} from './react-ownership-run.js';
+import {projectReactAuthoredInitial} from './react-authored-initial-contract.js';
+import type {ReactAuthoredNamespace} from './react-authored-namespace.js';
 
-export type ReactInspectionRequest = { anchor: ReactNativeRequest; caseId: string } & ({ version: 1 } | { version: 2; instanceId: string });
-export function reactInspectionRequest(anchor: ReactNativeRequest, caseId: string, instanceId?: string): ReactInspectionRequest {
+export type ReactInspectionAnchor = ReactNativeRequest | ReactAuthoredNativeRequest;
+export type ReactInspectionSource = { reference: ReactReference; anchor: ReactInspectionAnchor; anchors?: ReactNativeRequest[]; instanceId?: string };
+export type ReactInspectionRequest = ({ anchor: ReactNativeRequest; caseId: string } & ({ version: 1 } | { version: 2; instanceId: string })) |
+  { version: 3; anchor: ReactAuthoredNativeRequest; caseId: string; instanceId: string };
+export function reactInspectionRequest(anchor: ReactInspectionAnchor, caseId: string, instanceId?: string): ReactInspectionRequest {
   if (instanceId !== undefined && !/^instance-\d+$/.test(instanceId)) throw Error('react-inspection-instance-invalid');
+  if (anchor.kind === 'react-authored-draft') {
+    if (!isReactAuthoredNativeRequest(anchor) || anchor.caseId !== caseId || instanceId === undefined)
+      throw Error('react-inspection-authored-target-required');
+    return { version: 3, anchor, caseId, instanceId };
+  }
   return instanceId === undefined ? { version: 1, anchor, caseId } : { version: 2, anchor, caseId, instanceId };
 }
 type Request = ReactInspectionRequest;
@@ -52,7 +67,7 @@ export function reactInitialObserverIdentity(): Record<string, string> {
   try {
     const root = path.dirname(fileURLToPath(import.meta.url)), manifest = createRequire(import.meta.url).resolve('playwright-core/package.json');
     const chromiumBuild = (JSON.parse(readFileSync(path.join(path.dirname(manifest), 'browsers.json'), 'utf8')).browsers as Array<{ name: string; revision: string; browserVersion: string }>).find(b => b.name === 'chromium')!;
-    return { ...Object.fromEntries(reactInitialObserverModules.map(f => [f, evidenceSha(readFileSync(path.join(root, f)))])),
+    return { ...reactOwnershipEngine(), ...Object.fromEntries([...reactInitialObserverModules,'react-authored-initial.ts','react-initial-capture.ts'].map(f => [f, evidenceSha(readFileSync(path.join(root, f)))])),
       'playwright-core': `${JSON.parse(readFileSync(manifest, 'utf8')).version} chromium ${chromiumBuild.browserVersion} r${chromiumBuild.revision}` };
   } catch { return { [observerIdentityUnavailable]: 'sources-or-browser-manifest-unreadable' }; }
 }
@@ -73,6 +88,9 @@ export interface ReactInitialInspection {
   observer?: Record<string, string>;
   observation?: Awaited<ReturnType<typeof observeReactInitialStates>>; problems: string[];
   draft?: ReturnType<typeof compileReactInitialContract>;
+  authoredOrigins?:ReactAuthoredInitialOrigins;
+  authoredDraft?:ReturnType<typeof projectReactAuthoredInitial>;
+  authoredProblem?:string;
   /** Derived on read, never saved. Why this COMPLETE run may be observed again; absent means it is final.
    * A run with no recorded observer that still assembles is not stale: nothing says a new mount would differ. */
   reobservable?: 'observer-changed' | 'evidence-unobserved-by-recorded-observer' | 'observer-unrecorded-and-evidence-unobserved';
@@ -81,7 +99,12 @@ export interface ReactInitialInspection {
 }
 export function readReactInspectionOriginal(repo: string, reference: ReactReference, request: Request) {
   reference.cohort.profile(request.caseId);
-  readReactNativeEvidence(repo, reference, request.anchor);
+  if (request.version === 3) {
+    const { draft } = readReactAuthoredNativeEvidence(repo, reference, request.anchor);
+    if (request.caseId !== request.anchor.caseId || request.instanceId !== draft.fact?.instanceId ||
+        !draft.boundaries.some(b => b.path === '' && b.instances.some(i => i.id === request.instanceId && i.roots.length === 1 && i.roots[0] === '')))
+      throw Error('react-inspection-authored-target-mismatch');
+  } else readReactNativeEvidence(repo, reference, request.anchor);
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, request.anchor.ownership.id);
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactOwnershipReport;
   const row = report.rows.find(r => r.id === request.caseId);
@@ -92,11 +115,15 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   if (request.version === 2 && !row.ownership.components.some(c => c.id === request.instanceId && c.parent && c.roots.length === 1 && c.roots[0] !== ''))
     throw Error('react-inspection-nested-instance-unavailable');
-  return { captured, ownership: row.ownership, program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
+  // Authored authority above authenticates the complete creation provenance.
+  // The ordinary behavior probe records the same ownership structure without
+  // creation instrumentation. Compare that explicit projection, not runtime
+  // invocation counters; no archived facts or source identities are rewritten.
+  return { captured, ownership: request.version === 3 ? reactOwnershipStructure(row.ownership) : row.ownership, program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
-  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] },
+  select: (referenceId: string, caseId: string) => ReactInspectionSource,
   /** Read once: the identity of the observer this process loaded. */
   observer: Record<string, string> = reactInitialObserverIdentity()) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void>; request: Request }>();
@@ -108,6 +135,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
   };
   const input = (referenceId: string, caseId: string, instanceId?: string) => {
     const selected = select(referenceId, caseId), { reference } = selected;
+    const target = instanceId ?? selected.instanceId;
     // A different root in the same sealed cohort may become the selected
     // anchor after a compiler change. Reopen its existing initial observation
     // without recapturing or rewriting it. Only host-verified root requests
@@ -118,8 +146,8 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       anchor.inventorySha256 === selected.anchor.inventorySha256 &&
       revisionOf(anchor.ownership) === revisionOf(selected.anchor.ownership))];
     const anchor = candidates.find(anchor => existsSync(path.join(repo, 'private/react-initial-inspections',
-      revisionOf(reactInspectionRequest(anchor, caseId, instanceId)).slice(7), 'latest.json'))) ?? selected.anchor;
-    return from(reference, reactInspectionRequest(anchor, caseId, instanceId));
+      revisionOf(reactInspectionRequest(anchor, caseId, target)).slice(7), 'latest.json'))) ?? selected.anchor;
+    return from(reference, reactInspectionRequest(anchor, caseId, target));
   };
   const saved = (value: ReturnType<typeof input>, pinned?: ReactInitialNativeRequest['observation']) => {
     const pointer = path.join(value.root, 'latest.json');
@@ -136,14 +164,18 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     if (pinned && evidenceSha(reportBytes) !== pinned.reportSha256) throw Error('react-initial-report-changed');
     const report = JSON.parse(reportBytes.toString()) as ReactInitialInspection;
     if (report.id !== latest.id || report.caseId !== value.request.caseId || report.phase === 'running' ||
-        report.instanceId !== (value.request.version === 2 ? value.request.instanceId : undefined)) throw Error('react-initial-report-invalid');
+        report.instanceId !== (value.request.version !== 1 ? value.request.instanceId : undefined)) throw Error('react-initial-report-invalid');
     return { dir, report, pin: { id: latest.id as string, inventorySha256: latest.inventorySha256 as string, reportSha256: evidenceSha(reportBytes) } };
   };
-  const derive = (value: ReturnType<typeof input>, record: NonNullable<ReturnType<typeof saved>>, identity?: string) => {
+  const derive = (value: ReturnType<typeof input>, record: NonNullable<ReturnType<typeof saved>>, identity?: string, namespace?:ReactAuthoredNamespace) => {
     const report = structuredClone(record.report);
+    // Only this invocation may mint an authored draft. A serialized claim in
+    // an archive without its original render capabilities grants no authority.
+    delete report.authoredDraft;
+    delete report.authoredProblem;
     if (report.phase === 'complete' && report.observation) {
       const observedId = report.observation.instanceId;
-      if (value.request.version === 2 ? observedId !== value.request.instanceId :
+      if (value.request.version !== 1 ? observedId !== value.request.instanceId :
           typeof observedId === 'string' && !value.source.ownership.components.some(c => c.id === observedId && c.roots.includes('')))
         throw Error('react-initial-observation-target-mismatch');
       const snapshots = Object.fromEntries(report.observation.rows.map(row => {
@@ -154,6 +186,12 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       // never overwrite the historical observation or accept a contract here.
       report.draft = compileReactInitialContract(value.source.program, value.source.ownership, value.source.captured.tree,
         report.observation, snapshots, identity);
+      if(value.request.version===3&&report.authoredOrigins){
+        try{report.authoredDraft=projectReactAuthoredInitial({reference:value.reference,program:value.source.program,ownership:value.source.ownership,
+          tree:value.source.captured.tree,observation:report.observation,snapshots,caseId:value.request.caseId,origins:report.authoredOrigins,namespace,
+          read:(id,name)=>readFileSync(path.join(record.dir,'authored-origins',id,name))});}
+        catch(error){report.authoredProblem=error instanceof Error?error.message:String(error);}
+      }
     }
     return report;
   };
@@ -174,10 +212,11 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       let bounds = snapshot.bounds;
       if (record.report.instanceId) {
         const instance = snapshot.ownership.components.find((c: ReactOwnership['components'][number]) => c.id === record.report.instanceId);
-        if (snapshot.initialSelection?.instanceId !== record.report.instanceId || instance?.roots.length !== 1 ||
-            snapshot.initialSelection.path !== instance.roots[0] || !snapshot.initialSelection.bounds)
+        if (instance?.roots.length !== 1) throw Error('react-initial-selection-evidence-unavailable');
+        if (instance.roots[0] && (snapshot.initialSelection?.instanceId !== record.report.instanceId ||
+            snapshot.initialSelection.path !== instance.roots[0] || !snapshot.initialSelection.bounds))
           throw Error('react-initial-selection-evidence-unavailable');
-        bounds = snapshot.initialSelection.bounds;
+        if (instance.roots[0]) bounds = snapshot.initialSelection.bounds;
       }
       const cropped = cropSourceFrame(png, bounds);
       const frame: SourceFrame = { version: 1, sourceSha256: row.image, inputSha256: revisionOf({ pin: record.pin, rowId }).slice(7),
@@ -204,20 +243,67 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         heldProps: report.observation!.heldProps, trees }, source: { revision: 'sha256:' + reference.id,
         programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
   };
+  const authoredValue = (reference:ReactReference, request:ReactAuthoredInitialNativeRequest) => {
+    if(!isReactAuthoredOperationRequest(request)||request.version!==2||reference.id!==request.referenceId)
+      throw Error('react-authored-initial-native-request-invalid');
+    const value=from(reference,reactInspectionRequest(reactAuthoredOwnershipAnchor(request),request.caseId,request.initial.instanceId));
+    if(value.key!==request.initial.key)throw Error('react-authored-initial-native-key-mismatch');
+    return value;
+  };
+  const authoredReady = (value:ReturnType<typeof input>, record:NonNullable<ReturnType<typeof saved>>, namespace?:ReactAuthoredNamespace) => {
+    const report=derive(value,record,undefined,namespace);
+    if(value.request.version!==3||report.phase!=='complete'||!report.sourceUnchanged||report.problems.length||
+       report.authoredProblem||report.authoredDraft?.status!=='native-compiled'||!report.observer||
+       Object.hasOwn(observer,observerIdentityUnavailable)||canonicalJson(report.observer)!==canonicalJson(observer))
+      throw Error('react-authored-initial-native-observation-unavailable');
+    return report.authoredDraft;
+  };
+  const authoredNativeEvidenceFresh = (reference:ReactReference,request:ReactAuthoredInitialNativeRequest,namespace?:ReactAuthoredNamespace) => {
+    const value=authoredValue(reference,request),record=saved(value,request.initial)!;
+    const natural=authoredReady(value,record);
+    if(revisionOf(natural)!==request.draftRevision)throw Error('react-authored-initial-native-draft-changed');
+    const draft=namespace?authoredReady(value,record,namespace):natural;
+    const frames=Object.fromEntries(draft.nativeVariants.map(v=>[v.observation,framedImage(record,record.report.id,v.observation).frame]));
+    return {draft,frames,source:{revision:'sha256:'+reference.id,programSha256:value.source.programSha256,evidenceRevision:revisionOf(request)}};
+  };
   return {
     read,
     running(request: ReactInspectionRequest) {
       const job = [...active.values()].find(({ request: r }) => r.caseId === request.caseId && r.version === request.version &&
-        (r.version !== 2 || request.version === 2 && r.instanceId === request.instanceId) &&
+        (r.version === 1 || request.version !== 1 && r.instanceId === request.instanceId) &&
         r.anchor.referenceId === request.anchor.referenceId && r.anchor.inventorySha256 === request.anchor.inventorySha256 &&
         revisionOf(r.anchor.ownership) === revisionOf(request.anchor.ownership));
       return job ? structuredClone(job.state) : undefined;
     },
     nativeRequest(referenceId: string, caseId: string, instanceId?: string): ReactInitialNativeRequest {
       const value = input(referenceId, caseId, instanceId), record = saved(value);
+      if (value.request.version === 3) throw Error('react-initial-authored-native-unqualified');
       if (!record || active.has(value.key) || derive(value, record).draft?.status !== 'compiled-draft')
         throw Error('react-initial-native-observation-unavailable');
       return { ...value.request, kind: 'react-initial-draft', observation: record.pin };
+    },
+    operationRequest(referenceId:string,caseId:string,instanceId?:string):ReactInitialNativeRequest|ReactAuthoredInitialNativeRequest {
+      const value=input(referenceId,caseId,instanceId),record=saved(value);
+      if(!record||active.has(value.key))throw Error('react-initial-native-observation-unavailable');
+      if(value.request.version!==3){
+        if(derive(value,record).draft?.status!=='compiled-draft')throw Error('react-initial-native-observation-unavailable');
+        return {...value.request,kind:'react-initial-draft',observation:record.pin};
+      }
+      const draft=authoredReady(value,record);
+      return {...value.request.anchor,version:2,draftRevision:revisionOf(draft),initial:{...record.pin,key:value.key,
+        instanceId:value.request.instanceId,anchorDraftRevision:value.request.anchor.draftRevision}};
+    },
+    authoredNativeEvidence(reference:ReactReference,request:ReactAuthoredInitialNativeRequest,namespace?:ReactAuthoredNamespace){
+      return evidenceReadOnce('react-authored-initial',{repo,referenceId:reference.id,files:reference.files,request,...(namespace?{namespace:[...namespace]}:{})},
+        ()=>authoredNativeEvidenceFresh(reference,request,namespace));
+    },
+    authoredNativeImage(reference:ReactReference,request:ReactAuthoredInitialNativeRequest,rowId:string){
+      if(!/^\d+$/.test(rowId))throw Error('react-initial-row-invalid');
+      const value=authoredValue(reference,request),record=saved(value,request.initial)!;
+      const draft=authoredReady(value,record);
+      if(revisionOf(draft)!==request.draftRevision||!draft.nativeVariants.some(v=>v.observation===rowId))
+        throw Error('react-authored-initial-native-image-unavailable');
+      return framedImage(record,request.initial.id,rowId).bytes;
     },
     /** `identity` compiles for an existing native component; see compileReactInitialContract. */
     nativeEvidence(reference:ReactReference,request:ReactInitialNativeRequest,identity?:string) {
@@ -250,6 +336,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     },
     start(referenceId: string, caseId: string, instanceId?: string) {
       const value = input(referenceId, caseId, instanceId), existing = active.get(value.key);
+      instanceId = value.request.version === 1 ? undefined : value.request.instanceId;
       if (existing) return existing;
       const prior = saved(value);
       // A complete run is final UNLESS its observer is not this one (or is unrecorded and the assembler names
@@ -263,7 +350,8 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         let browser;
         try {
           const observed = await buildReactOwnershipReference(sourceRoot, value.reference, value.source.program);
-          browser = await chromium.launch();
+          // The guarded origin reader records the actual browser executable.
+          browser = await chromium.launch(value.request.version===3?{args:['--enable-automation']}:{});
           const context = await browser.newContext({ viewport: { width: 900, height: 600 }, deviceScaleFactor: 1, colorScheme: 'light' });
           await context.addInitScript(reactOwnershipHook);
           const url = 'http://127.0.0.1/react-ownership?case=' + caseId;
@@ -287,6 +375,12 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
               } });
             if (!state.observation.planned || state.observation.problems.length || state.observation.rows.some(r => r.status !== 'observed' || !r.restored))
               throw Error('react-initial-observation-incomplete');
+            if(value.request.version===3){
+              const snapshots=Object.fromEntries(state.observation.rows.map(row=>[row.id,JSON.parse(readFileSync(path.join(dir,'states',row.id+'.json'),'utf8'))]));
+              state.authoredOrigins=await observeReactAuthoredInitials({browser,reference:value.reference,program:value.source.program,ownership,
+                tree:captured.tree,observation:state.observation,snapshots,caseId,dir:path.join(dir,'authored-origins'),
+                assertCurrent:()=>{if(!reactReferenceUnchanged(value.reference)||!reactSourceProgramUnchanged(value.source.program))throw Error('react-initial-source-changed');}});
+            }
             readReactInspectionOriginal(repo, value.reference, value.request);
             state.sourceUnchanged = true; state.phase = 'complete';
           } finally { failures.dispose(); }

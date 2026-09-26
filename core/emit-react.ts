@@ -1,9 +1,10 @@
+import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
  *
@@ -146,10 +147,7 @@ function depAttrString(
       // undefined applies the child's own default for unmapped values.
       const parentProp = parent?.props.find((p) => p.name === value.prop);
       const expr = parentProp?.bindings.code.prop ?? value.prop;
-      const chain = Object.entries(value.map)
-        .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
-        .join('');
-      parts.push(` ${codeName}={${codeValueExpression(depProp, chain + 'undefined')}}`);
+      parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map)}}`);
       continue;
     }
     if (typeof value === 'boolean') {
@@ -662,7 +660,7 @@ export function generateTsx(
       const dep = byId.get(part.component.id)!;
       const rp = contract.props.find((p) => p.name === part.repeat!.itemsProp)!;
       const codeName = rp.bindings.code.prop;
-      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract);
+      const fixedAttrs = depAttrString(dep, part.component.props ?? {}, contract) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '');
       const itemName = selection?.item === part ? '__dscItem' : 'item';
       const itemField = (field: string) => selection?.item === part ? `${itemName}[${JSON.stringify(field)}]` : `${itemName}.${field}`;
       let childrenField: string | null = null;
@@ -687,7 +685,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part) ?? '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
@@ -722,7 +720,7 @@ export function generateTsx(
       // A2 grid (G3/P12): an instance cell rides the same wrapper span — its
       // class carries the grid placement (see generateCss).
       const withOverrides =
-        Object.keys(part.component.overrides ?? {}).length > 0 || gridPlan.wrappedInstances.has(partName)
+        Object.keys(part.component.overrides ?? {}).length > 0 || part.states || part.statesByProp?.length || gridPlan.wrappedInstances.has(partName)
           ? `<span className={${stylesRef(partName)}}>${instance}</span>`
           : instance;
       return wrapVisibleWhen(part, withOverrides);

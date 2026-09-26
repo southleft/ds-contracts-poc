@@ -5,7 +5,7 @@
   "nodeId": "53:4327",
   "mode": "reviewable-inversion",
   "variantCount": 2,
-  "contractSha256": "6fa8ad6a1ee25383c78fb702d5306cd442bfa37175a454586fec8c0afd5b1104",
+  "contractSha256": "e69a71d9950165d7a85a271e6874dde8ee59eaf48e0d81f17c60cd70a61e0fb4",
   "carriage": {
     "carried": 20,
     "named": 16,
@@ -141,14 +141,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Dek/Dek.module.css": "1a12713f979763835f980f8efd3ddbeec69fb2e819fcc6e6f80114348955df18",
+    "react/Dek/Dek.module.css": "01454060d9b9d278c9cd93cdd1bf654d9c0300f3c4a1aebd1a74c891d895e5a3",
     "react/Dek/Dek.stories.tsx": "b0d3fb9d37852fd3924cc730b26eeb670b3eb173583495e886f50039c32b2245",
     "react/Dek/Dek.tsx": "814f92db4630bc68b2eb559b199437313b2326f8e93a0f1df99cbc805bab4030",
     "react/Dek/index.ts": "9895f37860ec3bb45a38bfe4d1e08865f9c9f6af6167c78e69f9f6139e2e1375",
     "wc/ds-dek.ts": "59ab8ab13703e17941235f0ada2ec03756a065e115eea7f05b353ebb4f2dfb78",
-    "wc/ds-dek.css.ts": "27ae5d6952ad4f22d3421fa5b0143dabfacc6fd22f4accb274b8d648c4a9e629",
+    "wc/ds-dek.css.ts": "0dd677c75fb8236a394007f7c776e64ffc3d0c2a4daa47276e91a1887269adf1",
     "wc/ds-dek.demo.html": "7eb38c7a5df81ac91cb9541f0eb3d2de406801eede62b528f19ae119b5a924fe",
     "wc/ds-dek.custom-elements.json": "1f65aa7108818ef1551cadb5df261ab8852544d5dd11bd0e36a7af7f8c6cc3e5"
   },
-  "notesCount": 24
+  "notesCount": 25
 }

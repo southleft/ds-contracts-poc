@@ -1,0 +1,47 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-current.ts --record-to <new-directory>
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --body-font-large: 16px;
+  --body-font-medium: 14px;
+  --body-font-small: 12px;
+  --body-line-height-large: 24px;
+  --body-line-height-medium: 20px;
+  --body-line-height-small: 16px;
+  --imported-radio-button-content-top-radio-label-font-size-large: 16px;
+  --imported-radio-button-content-top-radio-label-font-size-small: 14px;
+  --imported-radio-button-content-top-radio-label-font-weight: 400;
+  --imported-radio-button-content-top-radio-label-line-height-large: 24px;
+  --imported-radio-button-content-top-radio-label-line-height-small: 20px;
+  --imported-radio-button-error-text-error-text-font-weight: 400;
+  --imported-radio-button-error-text-padding-left-left-large: 4px;
+  --imported-radio-button-error-text-padding-left-left-small: 2px;
+  --imported-radio-button-error-text-padding-left-right-large: 0px;
+  --imported-radio-button-error-text-padding-left-right-small: 0px;
+  --imported-stub-selected-false-size-large-state-default-error-false-root-height-large: 24px;
+  --imported-stub-selected-false-size-large-state-default-error-false-root-height-small: 16px;
+  --imported-stub-selected-false-size-large-state-default-error-false-root-width-large: 24px;
+  --imported-stub-selected-false-size-large-state-default-error-false-root-width-small: 16px;
+  --imported-stub-size-xsmall-root-height: 12px;
+  --imported-stub-size-xsmall-root-width: 12px;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-100: 8px;
+  --text-danger-default: #b51833;
+  --text-disabled: #556275;
+  --text-primary: #050a0f;
+}

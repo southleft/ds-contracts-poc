@@ -5,7 +5,7 @@
   "nodeId": "120:2203",
   "mode": "exact",
   "variantCount": 45,
-  "contractSha256": "a33808102e0f1ba9b9de888bd76d97c8a8b0d256395dc50953442af919dd0481",
+  "contractSha256": "9a026525a57a2f3f6fc049513fd29e35c26ffec758e892257c4333b516cf1dbf",
   "carriage": {
     "carried": 569,
     "named": 733,
@@ -314,14 +314,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Button/Button.module.css": "6e1b52cc8abd07eec8ea339b9a4405e7e9fcae663c11ee4194996b3dc4a24acc",
+    "react/Button/Button.module.css": "4159d08b93f6361dff13e4aaa65979a5a810bcdca6c2699afc9d563745eaaf64",
     "react/Button/Button.stories.tsx": "391a96a111fe2c1cad8fc7db929d1e25c5dcf0dd7367189810a21b5ec5befd30",
     "react/Button/Button.tsx": "eb2f1789ddcd6cb6f287c3c797e95ddb7169d4d3928fa3887d7c5f1a4f5d4824",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/flowbite-button.ts": "60124528db35b03c0b2681fd253ee2d1bf6c4f7b4e04915013759531f5b95d69",
-    "wc/flowbite-button.css.ts": "d5cdf07453d9425e9e1eee86a770eaffcff86465300200f1d7025cdfd6d9c161",
+    "wc/flowbite-button.css.ts": "5fee6d1d389b555d28dafa9ce86a936bf7c524cfd6e479a3a00d3f03ee45339c",
     "wc/flowbite-button.demo.html": "20832062212272e4182289c823cd2a3f10c8f4ac2c73d9a758e11ff99d9fafac",
     "wc/flowbite-button.custom-elements.json": "3ac6858009a9d2dd19b71a5e024662ad47ba31fb123613029418161a1af513ae"
   },
-  "notesCount": 502
+  "notesCount": 503
 }

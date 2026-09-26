@@ -1,0 +1,49 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tabs.contract.json (ds.tabs v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 0;
+  width: fit-content;
+  height: fit-content;
+}
+
+.alCTabsHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border-color: var(--theme-color-border-neutral-default);
+}
+
+.variant-stretch .alCTabsHeader {
+  width: 100%;
+}
+
+.alCTabsList {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.variant-stretch .alCTabsList {
+  flex: 1 1 0px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.alCTabsBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

@@ -1,0 +1,35 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-current.ts --record-to <new-directory>
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --body-font-large: 16px;
+  --body-font-medium: 14px;
+  --body-line-height-large: 24px;
+  --body-line-height-medium: 20px;
+  --imported-stub-switch-on-false-size-large-state-default-root-height-large: 24px;
+  --imported-stub-switch-on-false-size-large-state-default-root-height-small: 16px;
+  --imported-stub-switch-on-false-size-large-state-default-root-width-large: 24px;
+  --imported-stub-switch-on-false-size-large-state-default-root-width-small: 16px;
+  --imported-toggle-toggle-label-font-size-large: 16px;
+  --imported-toggle-toggle-label-font-size-small: 14px;
+  --imported-toggle-toggle-label-font-weight: 400;
+  --imported-toggle-toggle-label-line-height-large: 24px;
+  --imported-toggle-toggle-label-line-height-small: 20px;
+  --spacing-100: 8px;
+  --text-disabled: #556275;
+  --text-primary: #050a0f;
+}

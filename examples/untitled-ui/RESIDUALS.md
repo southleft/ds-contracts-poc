@@ -304,7 +304,7 @@ What each would need in order to stop costing pixels, quoted from the receipt th
 
 ### 5.4 Refusals that are structural given the contract vocabulary
 
-The conformance manifest names **9 constructs REFUSED** and **38 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
+The conformance manifest names **8 constructs REFUSED** and **38 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
 
 | case | the construct | the vocabulary change it would need |
 |---|---|---|
@@ -312,7 +312,6 @@ The conformance manifest names **9 constructs REFUSED** and **38 LEDGERED** — 
 | `axis-theme-without-carriers` | a Theme axis differing only in RAW color literals (no variables to ride) | with no bound variables there are no modes for the deltas to ride - promotion is refused BY NAME and the axis stays an enum with per-value minted leaves |
 | `blend-mode-multiply` | a non-NORMAL blendMode on the root (capture-boundary: no dump v1 field) | blend modes have no dump projection; the capture receipts blend-mode-unsupported and nothing blend-shaped may appear in the contract |
 | `effect-bound-variables-named` | PLUGIN twin of rest-effect-bound-variables: a DROP_SHADOW whose five channels are bound to LOCAL variables the plugin can NAME (dump v1.31 effects[].bound + _variables) | a box-shadow is ONE token in the contract grammar, so per-channel effect bindings have no carrier — the resolved stack carries and the variable names are NAMED as rename targets, never dropped |
-| `effect-inner-shadow` | an INNER_SHADOW effect on the root | inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed |
 | `effect-layer-blur` | a LAYER_BLUR effect on the root | blur types carry type/radius only so the gap can be NAMED - no filter/box-shadow may be proposed |
 | `effect-style-identity` | PLUGIN twin of rest-effect-style-identity: a DROP_SHADOW root whose effects ride an EffectStyle (dump v1.31 effectStyle/effectStyleKey from effectStyleId) | the shadow geometry carries as box-shadow; the STYLE identity is a token-class fact the plugin reads off effectStyleId and must be named |
 | `effect-text-shadow` | a drop shadow on a TEXT node | a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed |
@@ -481,7 +480,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `f73b7aa3df69` | 113,673 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

@@ -82,8 +82,8 @@ import { filledPathIssue } from '../../../scripts/contract-schema.js';
  *   layoutSizingVertical === 'FILL'                 fillHeight: true (dump v1.31 — the vertical twin of fillWidth)
  *   style.fontFamily                                text.fontFamily (dump v1.31, verbatim — Inter included, so "Inter
  *                                                     drawn" and "not captured" stay different facts)
- *   style.textAlignHorizontal                       text.textAlign (dump v1.31 — CENTER | RIGHT | JUSTIFIED; LEFT is
- *                                                     the CSS default and is omitted, as the plugin dump omits it)
+ *   style.textAlignHorizontal                       text.textAlign (LEFT | CENTER | RIGHT | JUSTIFIED; observed
+ *                                                     LEFT is preserved, independently of CSS inheritance)
  *   style.textAutoResize (absent = NONE)            text.textAutoResize (dump v1.36 — NONE | HEIGHT | WIDTH_AND_HEIGHT |
  *                                                     TRUNCATE on every text node; a box that sizes itself to its text is
  *                                                     a whole number of pixels wide, so WIDTH_AND_HEIGHT inverts to
@@ -124,6 +124,7 @@ export interface RestVariableAlias {
 
 /** SolidPaint & BasePaint (api_types.ts): color channels are 0–1 floats. */
 export interface RestPaint {
+  blendMode?: string;
   type: string;
   visible?: boolean;
   opacity?: number;
@@ -1140,12 +1141,9 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // captured" the same absence. Phase 2 exam: 44 Manrope nodes rendered
   // Inter with no receipt.
   if (typeof s.fontFamily === 'string' && s.fontFamily.trim() !== '') text.fontFamily = s.fontFamily;
-  // dump v1.31: textAlignHorizontal → text.textAlign. LEFT is CSS's own
-  // default and is OMITTED (the plugin dump omits it too — the two producers
-  // must agree on what an absent field means: left-or-not-captured, never a
-  // different alignment). CENTER / RIGHT / JUSTIFIED carry as the declared
-  // text-align channel downstream.
-  if (s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
+  // Preserve each observed alignment, including LEFT. CSS text-align inherits
+  // and button user-agent styles may center it. Absence stays uncaptured.
+  if (s.textAlignHorizontal === 'LEFT' || s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
     text.textAlign = s.textAlignHorizontal;
   }
   // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — style.textAutoResize,
@@ -1225,6 +1223,34 @@ function mapPropRefs(node: RestNode): Record<string, string> | undefined {
     if (key) propRefs[kind] = key.split('#')[0];
   }
   return Object.keys(propRefs).length > 0 ? propRefs : undefined;
+}
+
+/** Instance internals otherwise stay opaque. Retain only the geometry of
+ * selected content whose property identity the parent actually controls. */
+function mapSwapInstances(root: RestNode, property: string): DumpFixedSwap['observedInstances'] {
+  if (!root.children) return undefined;
+  const found: NonNullable<DumpFixedSwap['observedInstances']> = [];
+  const size = (n: RestNode) => n.size && Number.isFinite(n.size.x) && Number.isFinite(n.size.y)
+    ? { width: n.size.x, height: n.size.y } : undefined;
+  const visit = (parent: RestNode, path: number[]) => {
+    for (const [index, node] of (parent.children ?? []).entries()) {
+      const next = [...path, index];
+      if (node.type === 'INSTANCE' && node.componentPropertyReferences?.mainComponent === property) {
+        const row: NonNullable<DumpFixedSwap['observedInstances']>[number] = { nodeId: node.id, path: next };
+        if (node.componentId) row.componentId = node.componentId;
+        const localSize = size(node), parentSize = size(parent), matrix = node.relativeTransform;
+        if (localSize) row.size = localSize;
+        if (parentSize) row.parentSize = parentSize;
+        if (Array.isArray(matrix) && matrix.length === 2 && matrix.every(r => Array.isArray(r) && r.length === 3 && r.every(Number.isFinite)))
+          row.relativeTransform = matrix.map(r => [...r]);
+        if (node.constraints) row.constraints = { ...node.constraints };
+        found.push(row);
+      }
+      visit(node, next);
+    }
+  };
+  visit(root, []);
+  return found;
 }
 
 /** Arbitrary-path vector types with NO parametric projection — still #42
@@ -1542,6 +1568,28 @@ function indexSubtree(root: RestNode, cap = 200): Map<string, { node: RestNode; 
   return byId;
 }
 
+/** A display path is useful for notes, but cannot authorize a paint override.
+ * Follow source identities and reset the numeric path at each instance. */
+function solidFillTarget(root: RestNode, targetId: string): DumpHostOverride['solidFillTarget'] {
+  let count = 0, incomplete = false;
+  const matches: NonNullable<DumpHostOverride['solidFillTarget']>[] = [];
+  const visit = (node: RestNode, owner: RestNode, path: number[], depth: number, instancePath: number[], absolutePath: number[]) => {
+    if (++count > 200 || depth > 32) { incomplete = true; return; }
+    if (node.id === targetId) {
+      const paints = node.fills?.filter(p => p.visible !== false);
+      if (node.type === 'VECTOR' && paints?.length === 1 && paints[0].type === 'SOLID' &&
+          (!paints[0].blendMode || paints[0].blendMode === 'NORMAL') && owner.type === 'INSTANCE' && owner.componentId)
+        matches.push({nodeId:node.id,instanceId:owner.id,componentId:owner.componentId,instancePath,childPath:path});
+    }
+    const nextOwner = node.type === 'INSTANCE' ? node : owner;
+    const nextPath = node.type === 'INSTANCE' ? [] : path;
+    const nextInstancePath = node.type === 'INSTANCE' ? absolutePath : instancePath;
+    for (const [i, child] of (node.children ?? []).entries()) visit(child,nextOwner,[...nextPath,i],depth+1,nextInstancePath,[...absolutePath,i]);
+  };
+  visit(root,root,[],0,[],[]);
+  return !incomplete && matches.length === 1 ? matches[0] : undefined;
+}
+
 function mapNode(
   node: RestNode,
   ctx: Ctx,
@@ -1644,6 +1692,10 @@ function mapNode(
   const stroke = mapPaint(node.strokes, ctx, nodePath, 'stroke');
   if (stroke) {
     out.stroke = stroke;
+    // Preserve an observed INSIDE, not an assumed default. State border
+    // replacement requires this fact on both the resting and state node.
+    // Other alignments retain their existing named REST capture limitation.
+    if (node.strokeAlign === 'INSIDE') out.strokeAlign = node.strokeAlign;
     // dump v1.34: sides that differ ride `strokeWeights` and the uniform
     // `strokeWeight` is NOT written beside them — REST reports strokeWeight 0
     // for sides [1, 0, 1, 0], and a consumer reading that 0 draws a correctly
@@ -1799,6 +1851,8 @@ function mapNode(
         if (typeof def.value === 'string' && def.value !== '') {
           const target = ctx.components.get(def.value);
           const swap: DumpFixedSwap = { id: def.value };
+          const observedInstances = mapSwapInstances(node, key);
+          if (observedInstances?.length) swap.observedInstances = observedInstances;
           if (target) {
             swap.name = target.name;
             if (target.key) swap.key = target.key;
@@ -1889,7 +1943,11 @@ function mapNode(
           const h: DumpHostOverride = { path, fields };
           if (fields.includes('fills')) {
             const fill = mapPaint(hit.node.fills, ctx, `${nodePath}/${path}`, 'fill');
-            if (fill) h.fill = fill;
+            if (fill) {
+              h.fill = fill;
+              const target = solidFillTarget(node,o.id);
+              if (target) h.solidFillTarget = target;
+            }
           }
           hostOverrides.push(h);
         }
@@ -1957,7 +2015,8 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.42';
+export const REST_DUMP_VERSION = '1.43';
+// 1.43: observed LEFT text alignment and explicit INSIDE stroke alignment.
 // 1.42: uniform native font-weight binding identity and observed numeric weight.
 //       Consumer modes and selected alias chains remain plugin-only evidence.
 // 1.41: uniform native line-height binding names, with explicit stamp conflicts.
@@ -1991,7 +2050,7 @@ const REST_CAPTURE_GAPS: readonly string[] = [
   // dump v1.31: REST returns overrides[] AND the instance subtree, so the
   // channel is captured here (mapNode, INSTANCE branch) — the old line was a
   // read limit nobody had measured, not a transport fact.
-  'strokeAlign (dump v1.11): not captured on this route — an OUTSIDE stroke (focus ring) will be read as an inward border',
+  'non-INSIDE strokeAlign (dump v1.11): not captured on this route — OUTSIDE/CENTER alignment remains a named loss; only explicit INSIDE is carried',
   'layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line',
   'the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types',
 ];

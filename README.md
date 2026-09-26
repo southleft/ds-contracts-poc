@@ -61,11 +61,16 @@ Requires npm and Node.js 20.19 or later on the 20.x line, or 22.12 or later. Tha
 
 ```bash
 npm ci
-npm run prep:schema
+npm run prep:core
+npx playwright-core install chromium
 npm run playground
 ```
 
 Use `npm ci`, as CI does: it installs exactly what `package-lock.json` records. `npm install` under npm 10.8.2 rewrites that tracked lockfile (it drops the `libc` fields); `git restore package-lock.json` discards the change.
+
+`npm run prep:core` builds schema and core in the order required by the local server. The schema build alone is insufficient on a fresh clone: startup cannot resolve `@ds-contracts/core` until core is built.
+
+Chromium is required for source validation, structure tracing and browser comparisons. The install command downloads the browser revision pinned by this checkout; static code import and contract exploration do not need it.
 
 The app must run on port 5181: the port is strict, and the companion plugin's local connection is fixed to `http://localhost:5181`. If the port is busy, stop the other process. `npm run playground -- --port <n>` starts the app on another port for browsing, but the plugin will not reach it.
 

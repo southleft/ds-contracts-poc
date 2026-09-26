@@ -33,6 +33,18 @@ test('real React property experiments preserve context and distinguish delivered
   const id=(name:string)=>ownership.components.find(c=>c.source.exportName===name)!.id;
   const observe=()=>page.locator(selector).evaluate(n=>({padding:getComputedStyle(n).padding,inputs:[...n.querySelectorAll('input')].map(n=>n.checked),text:n.textContent}));
   const baseline=await observe();
+  // Selecting a nested source component records its surrounding Surface but
+  // must still update/remount only the selected export and restore both.
+  const scopedSelector='input[aria-label="controlled"]';
+  const scoped=await page.evaluate(reactOwnershipRead(scopedSelector)) as ReactOwnership;
+  assert.equal(scoped.ancestors?.[0].source.exportName,'Surface');
+  assert.equal(scoped.components[0].id,id('Toggle'));
+  const scopedUpdate=await probeReactProperty(page,scopedSelector,program,id('Toggle'),'checked',{kind:'set',value:true},observe);
+  assert.deepEqual(scopedUpdate.changed.inputs,[true,false]);assert.deepEqual(scopedUpdate.restored,baseline);assert.equal(scopedUpdate.ownershipRestored,true);
+  const scopedMount=await probeReactInitialProperties(page,'input[aria-label="initial"]',program,id('Initial'),{defaultChecked:{kind:'set',value:true}},observe);
+  assert.deepEqual(scopedMount.changed.inputs,[false,true]);assert.deepEqual(scopedMount.restored,baseline);assert.equal(scopedMount.ownershipRestored,true);
+  await assert.rejects(probeReactProperty(page,scopedSelector,program,id('Surface'),'tone',{kind:'set',value:'loud'},observe),/source-or-prop-missing/);
+  assert.deepEqual(await observe(),baseline,'ancestor metadata is not authority to mutate that ancestor');
   const tone=await probeReactProperty(page,selector,program,id('Surface'),'tone',{kind:'set',value:'loud'},observe);
   assert.equal(tone.changed.padding,'20px');assert.deepEqual(tone.restored,baseline);assert.equal(tone.ownershipRestored,true);
   const checked=await probeReactProperty(page,selector,program,id('Toggle'),'checked',{kind:'set',value:true},observe);
@@ -125,4 +137,17 @@ test('real React property experiments preserve context and distinguish delivered
   assert.deepEqual(await observe(),baseline);
 
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
+});
+
+test('restoration ignores only the numeric render ordinal of a factory invocation', async () => {
+  const { ownershipForRestoration, ownershipDifference } = await import('./react-property-probe.js');
+  const node = (invocation: unknown, extra: Record<string, unknown> = {}) => ({ nodes: [{ path: '', tag: 'div',
+    creationInvocation: { status: 'observed', invocation, input: { variant: 'default' }, ...extra } }], problems: [] });
+  const same = (a: unknown, b: unknown) => JSON.stringify(ownershipForRestoration(a)) === JSON.stringify(ownershipForRestoration(b));
+  assert.equal(same(node(1), node(2)), true, 'a re-render of the same factory restores');
+  assert.equal(same(node(1, { reactCall: 1 }), node(2, { reactCall: 3 })), true, 'the React call ordinal is a frame counter too');
+  assert.equal(same(node(1), node(1, { input: { variant: 'destructive' } })), false, 'changed input still refuses');
+  assert.equal(same(node(1), node('1')), false, 'a non-numeric invocation value is compared verbatim');
+  assert.equal(same({ nodes: [], problems: [] }, node(1)), false, 'structure changes still refuse');
+  assert.equal(ownershipDifference(ownershipForRestoration(node(1)), ownershipForRestoration(node(1, { input: {} }))), '$.nodes.0.creationInvocation.input.variant');
 });

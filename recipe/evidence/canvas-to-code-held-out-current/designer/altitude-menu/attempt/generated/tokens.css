@@ -1,0 +1,32 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-current.ts --record-to <new-directory>
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-menu-root-padding-bottom-default: 4px;
+  --imported-menu-root-padding-bottom-simple: 0px;
+  --imported-menu-root-padding-left-default: 4px;
+  --imported-menu-root-padding-left-simple: 0px;
+  --imported-menu-root-padding-right-default: 4px;
+  --imported-menu-root-padding-right-simple: 0px;
+  --imported-menu-root-padding-top-default: 4px;
+  --imported-menu-root-padding-top-simple: 0px;
+  --imported-stub-state-default-selected-no-role-item-root-height: 36px;
+  --imported-stub-state-default-selected-no-role-item-root-width: 101px;
+  --theme-color-background-neutral-default: #1d1d1a;
+  --theme-color-background-transparent-default: #00000000;
+  --theme-space-xxs: 4px;
+}

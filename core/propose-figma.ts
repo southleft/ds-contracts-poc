@@ -30,7 +30,7 @@ import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -233,7 +233,7 @@ export interface MinimalChildContract {
   id: string;
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
-  props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
+  props: Array<{ name: string; type?: unknown; default?: unknown; required?: boolean; bindings: { figma: { property?: string; values?: Record<string, string>; unsetValue?: string } } }>;
   bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } } };
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
@@ -2211,6 +2211,7 @@ interface MintCapture {
 interface Ctx {
   instanceContentGroups: ReadonlyMap<string, readonly DumpNode[]>;
   setName: string;
+  fileKey: string | null;
   axes: Axis[];
   totalVariants: string[];
   presenceVariants?: string[];
@@ -3578,6 +3579,47 @@ const shadowCss = (e: DumpEffect): string => {
   return `${px(e.offset?.x ?? 0)} ${px(e.offset?.y ?? 0)} ${px(e.radius ?? 0)}${spread} ${paintCssHex(e.color ?? { hex: '000000' })}`;
 };
 
+/** CSS lengths cannot use exponent notation in the existing shadow grammar.
+ * Expand the number's round-trippable spelling without rounding its value. */
+const shadowDecimal = (value: number): string => {
+  const raw = String(value);
+  if (!/[eE]/.test(raw)) return raw;
+  const [mantissa, exponent] = raw.toLowerCase().split('e');
+  const sign = mantissa.startsWith('-') ? '-' : '';
+  const unsigned = sign ? mantissa.slice(1) : mantissa;
+  const digits = unsigned.replace('.', '');
+  const at = (unsigned.includes('.') ? unsigned.indexOf('.') : unsigned.length) + Number(exponent);
+  return sign + (at <= 0 ? `0.${'0'.repeat(-at)}${digits}`
+    : at >= digits.length ? digits + '0'.repeat(at - digits.length)
+      : `${digits.slice(0, at)}.${digits.slice(at)}`);
+};
+
+/** Preserve legacy drop-only output. Newly supported inner/mixed shadow
+ * stacks require complete captured geometry and retain numeric/alpha values.
+ * A blur, malformed shadow or partial stack refuses the entire channel. */
+const observedShadowStack = (effects: DumpEffect[] | undefined): string | undefined => {
+  if (!effects?.length) return undefined;
+  if (effects.every(e => e.type === 'DROP_SHADOW')) return effects.map(shadowCss).join(', ');
+  if (!effects.every(e => e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW')) return undefined;
+  const layers: string[] = [];
+  for (const e of effects) {
+    const alpha = e.color?.alpha ?? 1;
+    if (!e.offset || !e.color || !/^[0-9a-fA-F]{6}$/.test(e.color.hex) ||
+        ![e.offset.x, e.offset.y, e.radius, e.spread ?? 0, alpha].every(n => typeof n === 'number' && Number.isFinite(n)) ||
+        e.radius! < 0 || alpha < 0 || alpha > 1) return undefined;
+    const rgb = [0, 2, 4].map(i => parseInt(e.color!.hex.slice(i, i + 2), 16));
+    const lengths = [e.offset.x, e.offset.y, e.radius!, e.spread ?? 0].map(n => `${shadowDecimal(n)}px`).join(' ');
+    layers.push(`${e.type === 'INNER_SHADOW' ? 'inset ' : ''}${lengths} rgba(${rgb.join(', ')}, ${shadowDecimal(alpha)})`);
+  }
+  return layers.join(', ');
+};
+
+const observedShadowChanged = (node: DumpNode, base: DumpNode): boolean => {
+  const next = observedShadowStack(node.effects), previous = observedShadowStack(base.effects);
+  return next !== previous || (next === undefined &&
+    JSON.stringify(node.effects ?? []) !== JSON.stringify(base.effects ?? []));
+};
+
 const splitShadowLayers = (value: string): string[] => {
   const out: string[] = [];
   let depth = 0;
@@ -3623,7 +3665,7 @@ const parseCssRgba = (
 
 const parseShadowLayer = (
   layer: string,
-): { x: number; y: number; radius: number; spread: number; r: number; g: number; b: number; a: number } | undefined => {
+): { inner: boolean; x: number; y: number; radius: number; spread: number; r: number; g: number; b: number; a: number } | undefined => {
   const colorMatch = layer.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
   if (!colorMatch) return undefined;
   const color = parseCssRgba(colorMatch[1]);
@@ -3641,6 +3683,7 @@ const parseShadowLayer = (
   });
   if (px.some(Number.isNaN)) return undefined;
   return {
+    inner: /(^| )inset( |$)/.test(layer),
     x: px[0],
     y: px[1],
     radius: px[2] ?? 0,
@@ -3655,10 +3698,18 @@ const shadowStacksEqual = (a: string, b: string): boolean => {
   const la = splitShadowLayers(a);
   const lb = splitShadowLayers(b);
   if (la.length === 0 || la.length !== lb.length) return false;
+  const carriesInner = [...la, ...lb].some(layer => /(^| )inset( |$)/.test(layer));
+  const exactOrFloat32 = (x: number, y: number) => x === y || Math.fround(x) === y || x === Math.fround(y);
   for (let i = 0; i < la.length; i++) {
     const pa = parseShadowLayer(la[i]);
     const pb = parseShadowLayer(lb[i]);
     if (!pa || !pb) return false;
+    if (pa.inner !== pb.inner) return false;
+    if (carriesInner) {
+      if (!( ['x', 'y', 'radius', 'spread', 'r', 'g', 'b', 'a'] as const)
+        .every(key => Number.isFinite(pa[key]) && Number.isFinite(pb[key]) && exactOrFloat32(pa[key], pb[key]))) return false;
+      continue;
+    }
     if (pa.x !== pb.x || pa.y !== pb.y || pa.radius !== pb.radius || pa.spread !== pb.spread) return false;
     if (Math.abs(pa.r - pb.r) > 1 || Math.abs(pa.g - pb.g) > 1 || Math.abs(pa.b - pb.b) > 1) return false;
     if (Math.abs(pa.a - pb.a) > 0.02) return false;
@@ -3706,7 +3757,7 @@ const recoverAuthoredBoxShadow = (
   }
   target['box-shadow'] = authoredRef;
   ctx.notes.push(
-    `${where}: unbound DROP_SHADOW stack recovers the stamped contract's ${authoredRef} (same resolved layers), not a dump-slug mint (FC-DUMP-PROPOSE-SHADOW-MINTED)`,
+    `${where}: unbound ${drawn.some(row => /\binset\b/.test(row.value)) ? 'box-shadow' : 'DROP_SHADOW'} stack recovers the stamped contract's ${authoredRef} (same resolved layers), not a dump-slug mint (FC-DUMP-PROPOSE-SHADOW-MINTED)`,
   );
   return true;
 };
@@ -3722,7 +3773,9 @@ const recoverAuthoredBoxShadow = (
  *  two-layer stack (0/4/6/-2 black 3% + 0/12/16/-4 black 8%); the old
  *  single-layer rule refused the pair, so the light-theme bubble rendered
  *  white-on-white with no edge at all — the correct value was NAMED and the
- *  drawing was wrong. Anything else — inner shadows, blurs, mixed kinds,
+ *  drawing was wrong. Inner shadows now use CSS inset with exact captured
+ *  numeric values; mixed inner/drop stacks preserve their captured order.
+ *  Anything else — blurs, malformed shadows,
  *  partial presence across variants (a node shadowed in some variants and
  *  bare in others: "absent" would have to be read as `none`, which no
  *  observation states) — is still a NAMED note carrying the effect types: the
@@ -3777,11 +3830,8 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
   nameEffectProvenance(m, ctx, where); // dump v1.31 — style identity + channel bindings, never silent
   if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
   const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
-  const dropShadowStackEverywhere = m.occ.every((o) => {
-    const eff = o.node.effects ?? [];
-    return eff.length >= 1 && eff.every((e) => e.type === 'DROP_SHADOW');
-  });
-  if (!dropShadowStackEverywhere) {
+  const shadowStackEverywhere = m.occ.every(o => observedShadowStack(o.node.effects) !== undefined);
+  if (!shadowStackEverywhere) {
     // State-preview DROP_SHADOW (Button Active / Focus Visible) is a
     // default-bare / state-drawn stack — the same split hover fill uses.
     // invertNodeEffects used to NAME that as "not proposed" because
@@ -3809,20 +3859,20 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
     // @door propose.effect-non-dropshadow-refused
     }
     ctx.notes.push(
-      `${where}: visible effect(s) [${kinds.join(', ')}] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed`,
+      `${where}: visible effect(s) [${kinds.join(', ')}] — only supported DROP_SHADOW / INNER_SHADOW stacks present in every variant map to box-shadow; inner stacks require complete finite geometry and color; channel NAMED, not proposed`,
     );
     return;
   }
-  const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.effects!.map(shadowCss).join(', ') }));
+  const occ = m.occ.map(o => ({ variant: o.variant, value: observedShadowStack(o.node.effects)! }));
   const depth = Math.max(...m.occ.map((o) => (o.node.effects ?? []).length));
   reportUnbound(ctx, where, 'effects', occ[0].value);
   const authoredShadow = authoredPartAt(ctx, partPathOf(where))?.tokens?.['box-shadow'];
   if (!recoverAuthoredBoxShadow(ctx, tokens, where, authoredShadow, occ)) {
     mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
   }
-  ctx.notes.push(
-    `${where}: ${depth > 1 ? `a DROP_SHADOW stack (up to ${depth} layers) proposed as a comma-separated box-shadow value` : 'DROP_SHADOW proposed as a box-shadow value'} (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`,
-  );
+  ctx.notes.push(kinds.includes('INNER_SHADOW')
+    ? `${where}: captured inner/drop shadow stack (up to ${depth} layers) carried in order as box-shadow; INNER_SHADOW uses inset and retains captured numeric values and alpha without additional rounding`
+    : `${where}: ${depth > 1 ? `a DROP_SHADOW stack (up to ${depth} layers) proposed as a comma-separated box-shadow value` : 'DROP_SHADOW proposed as a box-shadow value'} (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`);
 }
 
 // ---------------------------------------------------------------------------
@@ -4239,6 +4289,24 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       return;
     }
     shape.paths = first.paths;
+    const scaled = m.occ.map(o => {
+      const sh = o.node.shape!, parent = o.parent?.node, box = parent?.bbox;
+      if (!parent || !box || !Number.isFinite(box.width) || !Number.isFinite(box.height) || box.width <= 0 || box.height <= 0 ||
+          Object.keys(parent).some(key => !['name', 'type', 'bbox', 'children', 'hidden'].includes(key)) ||
+          !parent.children?.length || parent.children.some(child => child.shape?.kind !== 'path' ||
+            child.shape.constraints?.horizontal !== 'SCALE' || child.shape.constraints?.vertical !== 'SCALE') ||
+          sh.constraints?.horizontal !== 'SCALE' || sh.constraints?.vertical !== 'SCALE' || sh.rotation ||
+          !Number.isFinite(sh.x) || !Number.isFinite(sh.y)) return undefined;
+      return { width: box.width, height: box.height, x: sh.x!, y: sh.y! };
+    });
+    if (scaled.every(Boolean) && new Set(scaled.map(v => JSON.stringify(v))).size === 1 &&
+        new Set(shapes.map(s => JSON.stringify({width:s.sh.width,height:s.sh.height,paths:s.sh.paths}))).size === 1) {
+      shape.parentViewport = scaled[0];
+      part.shape = shape;
+      part.declared = { ...(part.declared as Record<string, string> | undefined), position: 'absolute' };
+      ctx.notes.push(`${where}: captured SCALE/SCALE relationship carried against the exact free-parent viewport; path bytes and main dimensions are unchanged`);
+      return;
+    }
     const geometry = (s: (typeof shapes)[number]) => ({ width: s.sh.width, height: s.sh.height, paths: s.sh.paths! });
     if (new Set(shapes.map((s) => JSON.stringify(geometry(s)))).size > 1) {
       let carried = false;
@@ -5752,11 +5820,12 @@ function carryFontFamily(m: Merged, holder: Record<string, unknown>, ctx: Ctx, w
 
 /** dump v1.31 — textAlignHorizontal → the declared `text-align` channel
  *  (DECLARED_CHANNELS, canvas: draw — the emitter writes textAlignHorizontal
- *  back). LEFT is the CSS default and is not a fact to carry; CENTER / RIGHT
- *  / JUSTIFIED drawn in every variant carry, a mixed axis is NAMED. Phase 2
+ *  back). Every observed value, including LEFT, must carry: CSS text-align
+ *  inherits and button user-agent rules may center it. A mixed axis is NAMED. Phase 2
  *  exam: 8 centred labels rendered start-aligned with no receipt
  *  (rest-text-align-center). */
 const TEXT_ALIGN_BY_CANVAS: Record<string, string> = {
+  LEFT: 'left',
   CENTER: 'center',
   RIGHT: 'right',
   JUSTIFIED: 'justify',
@@ -5765,13 +5834,16 @@ function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, wh
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   if (textOcc.length === 0) return;
   const aligns = [...new Set(textOcc.map((o) => o.node.text!.textAlign))];
-  const drawn = aligns.filter((a): a is 'CENTER' | 'RIGHT' | 'JUSTIFIED' => a !== undefined && a in TEXT_ALIGN_BY_CANVAS);
-  // @door propose.text-align-left-is-default
-  if (drawn.length === 0) return; // LEFT / not captured — CSS's own default
-  if (aligns.length > 1) {
+  const drawn = aligns.filter((a): a is 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED' =>
+    typeof a === 'string' && Object.hasOwn(TEXT_ALIGN_BY_CANVAS, a));
+  // @door propose.text-align-not-captured
+  if (aligns.length === 1 && aligns[0] === undefined) return;
+  if (aligns.length > 1 || drawn.length !== 1) {
     // @door propose.text-align-mixed-refused
     ctx.notes.push(
-      `${where}: textAlignHorizontal differs across variants (${aligns.map((a) => a ?? 'LEFT/not captured').join(', ')}) — text-align is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+      aligns.length > 1
+        ? `${where}: textAlignHorizontal differs across variants (${aligns.map((a) => a ?? 'not captured').join(', ')}) — text-align is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`
+        : `${where}: textAlignHorizontal is unsupported (${aligns.map(String).join(', ')}) — text-align not proposed (review)`,
     );
     return;
   }
@@ -5845,7 +5917,7 @@ function carryTextAutoResize(m: Merged, holder: Record<string, unknown>, ctx: Ct
   }
   holder.textAutoResize = 'WIDTH_AND_HEIGHT';
   ctx.notes.push(
-    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round the element's fit-content inline size up to the pixel where calc-size() is supported (a label that does not fit still wraps), and the writer sets the field back on the node`,
+    `${where}: the text box sizes itself to its text in every variant (textAutoResize WIDTH_AND_HEIGHT, dump v1.36) — carried as textAutoResize: WIDTH_AND_HEIGHT; a Figma auto-width text box is a whole number of pixels wide (the advance rounded up), so the code emitters round its intrinsic max-content inline size where calc-size() is supported and prevent flex shrinking, without inventing a parent-width ceiling; authored bounds remain authoritative, and the writer sets the field back on the node`,
   );
 }
 
@@ -6272,20 +6344,23 @@ function carryCrossAxisFill(
 ): void {
   // @door propose.parent-mode-owns-stretch
   if (!parentModes || parentModes.stretchCross) return; // the parent's align: stretch owns it
-  const base = parentModes.base;
+  // A conditional child may exist only in COLUMN variants even when the
+  // parent's default is a ROW. Read the mode over this child's occurrence
+  // domain; variants in which it is absent cannot determine its fill axis.
+  const modes = m.occ.map(o => parentModes.byVariant.has(o.variant)
+    ? parentModes.byVariant.get(o.variant) : parentModes.base);
+  const base = modes[0];
+  if (modes.some(mode => mode !== base)) {
+    // crossAxisFillByProp owns complete correlated planes. Account for
+    // remaining mixed-axis fills before looking at any one default axis.
+    nameCrossAxisFillByVariant(m, parentModes, part, ctx, where);
+    return;
+  }
   if (base !== 'HORIZONTAL' && base !== 'VERTICAL') return;
   const dim = base === 'HORIZONTAL' ? 'height' : 'width';
   const fillField = base === 'HORIZONTAL' ? 'fillHeight' : 'fillWidth';
   const filling = m.occ.filter((o) => o.node[fillField] === true).length;
   if (filling === 0) return;
-  if (parentModes.byVariant.size > 0 && [...parentModes.byVariant.values()].some((mode) => mode !== base)) {
-    // Mixed parent modes — crossAxisFillByProp's door for a FILL drawn on
-    // the same axis in EVERY occurrence; whatever that door did not take
-    // (a fill on one axis in one variant and the other axis in the next) is
-    // accounted PER VARIANT here, never dropped at the door.
-    nameCrossAxisFillByVariant(m, parentModes, part, ctx, where);
-    return;
-  }
   if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
   if (filling !== m.occ.length) {
     carryPartialCrossAxisFill(dim, base, m, parentModes, part, ctx, where);
@@ -6293,14 +6368,20 @@ function carryCrossAxisFill(
   }
   if (dim === 'width') {
     // @door propose.cross-axis-fill-sibling-conflict
-    // The horizontal twin keeps its bytes (no existing fixture changes): named.
+    // The same width relation already used for a partial FILL also carries
+    // a uniform FILL. Its sibling keeps its own HUG/fixed sizing; changing
+    // the parent's alignment would stretch that sibling as well.
+    const literals = (part.literals as Record<string, string> | undefined) ?? {};
+    if (literals.width !== undefined) return;
+    literals.width = '100%';
+    part.literals = literals;
     ctx.notes.push(
-      `${where}: drawn FILL-width under a COLUMN parent whose other children do not all fill — the parent cannot carry \`align: stretch\` for this part alone and the contract has no per-part align-self; the cross-axis stretch is NAMED, not carried (review)`,
+      `${where}: drawn FILL-width under a COLUMN parent in every occurrence of this part — carried as the part literal \`width: 100%\`; the parent's other children retain their own sizing`,
     );
     return;
   }
   // @door propose.cross-axis-fill-hugging-parent
-  if (!parentModes.crossDefinite) {
+  if (!m.occ.every(o => parentModes.crossDefiniteByVariant?.get(o.variant) ?? parentModes.crossDefinite)) {
     ctx.notes.push(
       `${where}: drawn FILL-height under a ROW parent that HUGS its height (dump v1.31 fillHeight) — the parent cannot carry \`align: stretch\` for this part alone (its other children hug) and \`height: 100%\` of an auto height is auto, so no grammar spelling is exact; the cross-axis stretch is NAMED, not carried (review)`,
     );
@@ -6417,46 +6498,53 @@ function carryPartialCrossAxisFill(
   );
 }
 
-/** G3b, the PRIMARY-axis twin — a FILL drawn ALONG the parent's primary axis
- *  in only some variant occurrences (field case: the same Tabs set's list
- *  under its ROW header, and each tab under the ROW list, FILL under
- *  Variant=Stretch only). Along the primary axis a FILL is `layout.grow`
- *  (`flex: 1 1 auto`), NOT a `100%` literal: three siblings at `width: 100%`
- *  each claim the whole row, where three growers share it. `grow` is a
- *  per-part invariant — primaryAxisGrow carries it only when EVERY occurrence
- *  fills, and the per-variant layout vocabulary (VariantLayoutSchema:
- *  display / direction / align / justify) has no `grow` — so the per-variant
- *  case has no spelling today. It used to fall through primaryAxisGrow with no
- *  note at all (the SILENT-LOSS class); it is NAMED here, once per part (a
- *  repeat run's siblings share one path, so they share one note), with the
- *  axis it follows when it follows one, so the schema change that would carry
- *  it is a recorded gap rather than a guess. Each occurrence is read against
- *  ITS OWN parent mode. Called from buildChildParts, above every branch of
- *  buildPart and beside buildRepeatPart, so no part class can return past it. */
-function namePartialPrimaryAxisFill(siblings: Merged[], parentModes: ParentModes | null, ctx: Ctx, where: string): void {
-  if (!parentModes) return;
-  const facts = new Map<string, number>();
-  for (const m of siblings) {
-    const rows = m.occ.flatMap((o) => {
-      const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
-      if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') return [];
-      const dim = mode === 'HORIZONTAL' ? 'width' : 'height';
-      return [{ variant: o.variant, dim, mode, fills: o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] === true }];
-    });
-    const filling = rows.filter((r) => r.fills);
-    if (filling.length === 0 || filling.length === rows.length) continue; // none, or primaryAxisGrow's every-occurrence plane
-    const fit = fitLiteralAxis(ctx, rows.map((r) => ({ variant: r.variant, value: r.fills ? 'grow' : NOT_FILLING })), `primary-axis-fill@${where}`);
-    const planes = [...new Set(filling.map((r) => `FILL-${r.dim} along a ${r.mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent's primary axis`))];
-    const correlation = fit
-      ? `a pure function of axis "${fit.axis.property}" (${fit.axis.values.filter((v) => fit.byValue.get(v) === 'grow').join(', ')})`
-      : 'not a pure function of one declared enum axis';
-    const fact = `drawn ${planes.join(' and ')} in ${filling.length}/${rows.length} variant occurrence(s) only — ${correlation}. Along the primary axis a FILL is \`layout.grow\` (\`flex: 1 1 auto\`), not a \`100%\` literal (siblings at 100% each claim the whole row; growers share it), and \`grow\` is a per-part invariant: the per-variant layout vocabulary (layoutByProp / VariantLayoutSchema) has no \`grow\`, so the per-variant primary-axis FILL has no spelling; NAMED, not carried — nothing grows this part along that axis in any variant (review)`;
-    // @door propose.primary-axis-fill-partial-refused
-    facts.set(fact, (facts.get(fact) ?? 0) + 1);
+/** Primary-axis fill is parent-owned placement, including component refs.
+ * Read each observation against its own parent direction. A partial pattern
+ * must follow a fully observed enum axis; no geometry or axis is guessed. */
+function primaryGrowRows(m: Merged, parentModes: ParentModes | null) {
+  return m.occ.map(o => {
+    const mode = parentModes?.byVariant.get(o.variant) ?? null;
+    return {variant: o.variant, supported: mode === 'HORIZONTAL' || mode === 'VERTICAL',
+      fills: mode === 'HORIZONTAL' ? o.node.fillWidth === true : mode === 'VERTICAL' ? o.node.fillHeight === true : false};
+  });
+}
+function carryPrimaryAxisGrow(m: Merged, parentModes: ParentModes | null, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const rows = primaryGrowRows(m, parentModes);
+  if (rows.some((row, index) => !row.supported && (m.occ[index].node.fillWidth || m.occ[index].node.fillHeight))) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — captured fill has no observed flex-parent direction`);
+    return;
   }
-  for (const [fact, count] of facts) {
-    ctx.notes.push(`${where}: ${count > 1 ? `${count} repeated siblings each ` : ''}${fact}`);
+  if (!rows.some(row => row.fills)) return;
+  if (m.occ.some(o => absBoxOf(o.node) !== undefined)) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — absolute placement cannot also be a flex item`);
+    return;
   }
+  const layout = (part.layout ?? {}) as Record<string, unknown>;
+  if (rows.every(row => row.supported && row.fills)) {
+    part.layout = {...layout, grow: true, growBasis: 'zero'};
+    return;
+  }
+  const fit = rows.every(row => row.supported)
+    ? fitLiteralAxis(ctx, rows.map(row => ({variant: row.variant, value: row.fills ? 'grow' : NOT_FILLING})), `primary-axis-fill@${where}`)
+    : undefined;
+  const prior = part.layoutByProp as {prop: string; map: Record<string, Record<string, unknown>>} | undefined;
+  // @door propose.primary-axis-fill-partial-refused
+  if (!fit || layout.display === 'grid' || (prior && prior.prop !== fit.axis.propName)) {
+    ctx.notes.push(`${where}: primary-axis-fill-not-carried — partial FILL is uncorrelated, has incomplete flex-parent observations, or conflicts with another layout axis/grid; review`);
+    return;
+  }
+  // A partial fill has no unconditional base grow. Include only filling
+  // values (including the declared default when it fills); all other values
+  // keep their own intrinsic sizing and token constraints.
+  if (layout.grow !== undefined) { delete layout.grow; delete layout.growBasis; part.layout = layout; }
+  const map = structuredClone(prior?.map ?? {});
+  for (const value of fit.axis.values) {
+    if (fit.byValue.get(value) !== 'grow') continue;
+    const key = axisValue(fit.axis, value);
+    map[key] = {...map[key], grow: true, growBasis: 'zero'};
+  }
+  part.layoutByProp = {prop: fit.axis.propName, map};
+  ctx.notes.push(`${where}: primary-axis FILL carried as layoutByProp.grow on \`${fit.axis.propName}\`; the parent places the item and the child keeps its internal layout`);
 }
 
 /** PER-VARIANT accounting for the cross-axis FILL under a parent whose
@@ -7164,11 +7252,8 @@ function crossAxisFillByPropOn(
  *  ROW — was silent on every variant (canvas conformance
  *  slot-primary-axis-fill + its REST twin, r10 2026-08-23). */
 function primaryAxisGrow(m: Merged, parentModes: ParentModes | null): true | undefined {
-  const parentMode = parentModes?.base ?? null;
-  return (parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true)) ||
-    (parentMode === 'VERTICAL' && m.occ.every((o) => o.node.fillHeight === true))
-    ? true
-    : undefined;
+  const rows = primaryGrowRows(m, parentModes);
+  return rows.length > 0 && rows.every(row => row.supported && row.fills) ? true : undefined;
 }
 
 function invertLayout(
@@ -7230,7 +7315,9 @@ function invertLayout(
   // this path is flex-only (the GRID delegate returned above), so an absent
   // field can only be a hand-authored fixture and MIN is the API default.
   const justify = JUSTIFY_INV[l.primary ?? 'MIN'] ?? (m.rootContent ? 'start' : undefined);
-  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (m.rootContent ? 'start' : stretchEvidence(m) ? 'stretch' : undefined);
+  // Native MIN is explicit start alignment. CSS omission would stretch
+  // differently sized children, even when every native child hugs.
+  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (m.rootContent ? 'start' : stretchEvidence(m) ? 'stretch' : 'start');
   // WRAPPING (dump v1.12) — COUNTED BEFORE THE isRoot EARLY RETURN, and that
   // ordering is the whole point. The emitter has written `node.layoutWrap =
   // 'WRAP'` from `layout.wrap` since v15 while the dump never read it back, so
@@ -7806,7 +7893,7 @@ function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey
   }
 }
 
-/** Thread applied props that track a parent enum axis 1:1 into
+/** Thread applied props that track a parent finite axis 1:1 into
  *  "{parentProp}" refs (ComponentRefSchema: the child prop follows the
  *  parent's per variant). Detection is exact-correlation over EVERY
  *  occurrence: the canonical applied value equals the parent axis's
@@ -7814,14 +7901,66 @@ function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey
  *  axis match keeps the first value with a named note — never guessed. */
 function threadInstanceProps(
   base: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
-  perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean> }>,
+  perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean>; omitted?: ReadonlySet<string> }>,
   ctx: Ctx,
   where: string,
   instanceOf: string,
+  child?: MinimalChildContract,
 ) {
   if (perOccurrence.length < 2) return;
-  const enumAxes = ctx.axes.filter((a) => !isBooleanAxis(a));
+  const enumAxes = ctx.axes.filter((a) => !isBooleanAxis(a) && !a.omitted);
+  // Typed identity includes boolean values and explicit omission. Missing or
+  // unmappable observations are not omitted observations. Require every row
+  // and the entire source axis domain before forwarding an input, including
+  // when the declared default row has no applied prop at all.
+  const forwarded = new Set<string>();
+  const candidates = new Set(perOccurrence.flatMap(o => [...Object.keys(o.canonical), ...(o.omitted ?? [])]));
+  for (const propName of candidates) {
+    const childProp = child?.props.find(p => p.name === propName);
+    if (!childProp) continue;
+    if (childProp.type !== 'boolean' && !ctx.axes.some(a => a.omitted)) continue;
+    const axis = ctx.axes.find(a => {
+      const boolean = isBooleanAxis(a) || a.omitted?.valueType === 'boolean';
+      if (!boolean && !a.omitted) return false; // existing ordinary enum rule below
+      const childType = childProp.type;
+      const childValues = childType && typeof childType === 'object' && 'enum' in childType ? childType.enum : undefined;
+      if (boolean ? childType !== 'boolean' : !Array.isArray(childValues)) return false;
+      if (a.omitted && (childProp.bindings.figma.unsetValue === undefined || childProp.default !== undefined || childProp.required === true)) return false;
+      const seen = new Set<string>();
+      for (const occurrence of perOccurrence) {
+        const label = axisValuesOf(occurrence.variant)[a.property];
+        if (label === undefined || !a.values.includes(label)) return false;
+        seen.add(label);
+        if (a.omitted && label === a.omitted.unsetValue) {
+          if (!occurrence.omitted?.has(propName) || Object.hasOwn(occurrence.canonical, propName)) return false;
+        } else {
+          const canonical = axisValue(a, label);
+          if (boolean && canonical !== 'false' && canonical !== 'true') return false;
+          if (!boolean && !(childValues as unknown[]).includes(canonical)) return false;
+          const expected = boolean ? canonical === 'true' : canonical;
+          if (!Object.hasOwn(occurrence.canonical, propName) || occurrence.canonical[propName] !== expected || occurrence.omitted?.has(propName)) return false;
+        }
+      }
+      return a.values.every(value => seen.has(value));
+    });
+    if (!axis) {
+      const observations = perOccurrence.map(o => o.omitted?.has(propName) ? 'omitted' : JSON.stringify(o.canonical[propName]) ?? 'unobserved');
+      if (new Set(observations).size > 1 && ctx.axes.some(a => isBooleanAxis(a) || a.omitted)) {
+        ctx.notes.push(`${where}: typed input forwarding for "${propName}" of the nested "${instanceOf}" is not proved over a complete axis domain — missing, incompatible or differing observations remain unforwarded; review`);
+      }
+      continue;
+    }
+    fenceSparseInference(ctx.axes, `component-prop-${propName}@${where}`, perOccurrence.map(o => ({
+      variant: o.variant, value: o.omitted?.has(propName) ? { omitted: true } : o.canonical[propName],
+    })));
+    base[propName] = `{${axis.propName}}`;
+    forwarded.add(propName);
+    ctx.notes.push(
+      `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the complete typed "${axis.propName}" axis across all ${perOccurrence.length} occurrence(s) — threaded as "{${axis.propName}}"${axis.omitted ? ', preserving explicit omission' : ''}`,
+    );
+  }
   for (const propName of Object.keys(base)) {
+    if (forwarded.has(propName)) continue;
     const values = perOccurrence
       .filter((o) => o.canonical[propName] !== undefined)
       .map((o) => ({ variant: o.variant, value: o.canonical[propName] }));
@@ -7844,25 +7983,33 @@ function threadInstanceProps(
     // Not an identity of any axis — a pure FUNCTION of one axis still binds,
     // as a per-value LOOKUP (first-variant-freeze fix; field case:
     // SocialButton's icon platform "x(twitter)" under the parent value "x").
-    // String values only (the PropByProp map vocabulary is string→string).
+    // The map vocabulary is string→string, but a declared boolean child
+    // uses canonical "false"/"true" entries. Its emitter restores the type.
+    // Prove every occurrence and the complete parent axis before admitting
+    // this typed lookup; an absent capture is not the child's false value.
+    const booleanChild = child?.props.find(p => p.name === propName)?.type === 'boolean';
     let lookup: { axis: Axis; map: Record<string, string> } | undefined;
     for (const a of enumAxes) {
       const byValue = new Map<string, string>();
-      let pure = values.length > 0;
+      let pure = values.length > 0 && (!booleanChild || (
+        values.length === perOccurrence.length && !perOccurrence.some(o => o.omitted?.has(propName))
+      ));
       for (const v of values) {
         const axisValue = axisValuesOf(v.variant)[a.property];
-        if (axisValue === undefined || typeof v.value !== 'string') {
+        if (axisValue === undefined || (booleanChild ? typeof v.value !== 'boolean' : typeof v.value !== 'string')) {
           pure = false;
           break;
         }
+        const value = String(v.value);
         const prev = byValue.get(axisValue);
-        if (prev === undefined) byValue.set(axisValue, v.value);
-        else if (prev !== v.value) {
+        if (prev === undefined) byValue.set(axisValue, value);
+        else if (prev !== value) {
           pure = false;
           break;
         }
       }
       if (!pure || byValue.size <= 1) continue;
+      if (booleanChild && (byValue.size !== a.values.length || !a.values.every(value => byValue.has(value)))) continue;
       const map: Record<string, string> = {};
       for (const value of a.values) {
         const hit = byValue.get(value);
@@ -8767,11 +8914,153 @@ function nameHostOverrides(m: Merged, ctx: Ctx, where: string): void {
   );
 }
 
-/** dump v1.31 — FIXED INSTANCE_SWAP values on a nested instance. */
-function nameFixedSwaps(m: Merged, ctx: Ctx, where: string): void {
+/** A direct instance may override only the declared ink of an exact, keyed
+ * standalone drawing. Display names never identify the affected descendant. */
+function directDrawingChild(node: DumpNode, childId: string, ctx: Ctx) {
+  const parsed = ContractSchema.safeParse(ctx.contractsById?.get(childId));
+  if (!parsed.success) return undefined;
+  const child = parsed.data, anchor = child.bindings.figma.anchors;
+  const resolution = resolveChildContract(node.instanceOf ?? node.name,
+    {setKey:node.instanceSetKey,key:node.instanceKey},ctx);
+  const paths = Object.values(child.anatomy.root.parts ?? {});
+  if (resolution.id !== childId || resolution.mechanism !== 'key' || !ctx.fileKey ||
+      anchor.fileKey !== ctx.fileKey || !anchor.nodeId || !anchor.componentSetKey ||
+      child.props.some(p=>p.bindings.figma.kind==='VARIANT') || paths.length !== 1 ||
+      paths[0].shape?.kind !== 'path' || !paths[0].shape.parentViewport) return undefined;
+  return {child, anchor, path: paths[0], viewport: paths[0].shape.parentViewport};
+}
+
+function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
+  const d = directDrawingChild(node, childId, ctx);
+  const h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
+  const target = h?.solidFillTarget;
+  if (!d || !d.child.anatomy.root.overridable?.includes('color') ||
+      d.path.literals?.['background-color'] !== 'currentColor' ||
+      !h || h.fields.length !== 1 || h.fields[0] !== 'fills' || !h.fill?.hex || !target ||
+      target.componentId !== d.anchor.nodeId || target.instancePath.length !== 0 ||
+      JSON.stringify(target.childPath) !== '[0]') return undefined;
+  return h.fill;
+}
+
+/** The same exact drawing proves its SCALE/SCALE path follows the instance
+ * box (parentViewport is only recorded for that relationship), so an
+ * observed square box is carried through the declared size channel. The
+ * main's own box is the recorded viewport; comparisons are exact. */
+function directInstanceSize(node: DumpNode, childId: string, ctx: Ctx) {
+  const d = directDrawingChild(node, childId, ctx), box = node.bbox, root = d?.child.anatomy.root;
+  if (!d || !box || !root?.overridable?.includes('size') || !root.tokens?.width || !root.tokens?.height ||
+      d.viewport.width !== d.viewport.height || !Number.isFinite(box.width) || box.width <= 0 ||
+      box.width !== box.height || node.children?.length) return undefined;
+  return {observed: box.width, main: d.viewport.width};
+}
+
+function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
+  occ:Array<{variant:string;value:string}>,state?:string,partKey?:string) {
+  if(!ctx.mint)return;
+  ctx.mint.observations.push({nodePath:where,part:state?`${partKey}/state-${state}`:partPathOf(where),
+    cssProperty:'color',kind:'color',booleanAxes:true,target,source:where+'|instance ink',
+    occurrences:occ.map(o=>({...o,axisValues:ctx.mint!.axisValuesByVariant.get(o.variant)??{}}))});
+}
+
+/** Fixed content belongs to the caller, not to the child's sample defaults.
+ * Reuse the existing component + parts representation for a unique default
+ * slot. Every occurrence must prove both identities; names alone cannot
+ * select a variant or turn an unresolved/stub target into runtime content. */
+function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, component: Record<string, unknown>, ctx: Ctx, where: string, selfKey: string): ReadonlySet<string> {
+  const carried = new Set<string>();
+  const properties = [...new Set(m.occ.flatMap(o => Object.keys(o.node.fixedSwaps ?? {})))].sort();
+  if (!properties.length) return carried;
+  const decline = (reason: string) => {
+    ctx.notes.push(`${where}: fixed-swap-caller-not-carried — ${reason}; review`);
+    return carried;
+  };
+  const parsed = ContractSchema.safeParse(ctx.contractsById?.get(component.id as string));
+  if (!parsed.success) return decline('a complete child contract is unavailable');
+  const child = parsed.data;
+  if (m.occ.some(o => {
+    const resolved = resolveChildContract(o.node.instanceOf ?? m.name,
+      { setKey: o.node.instanceSetKey, key: o.node.instanceKey }, ctx);
+    return resolved.id !== child.id || resolved.mechanism !== 'key';
+  }))
+    return decline('the child identity is not key-resolved in every occurrence');
+  const slots = slotsOf(child), defaults = slots.filter(s => s.slot.name === 'children');
+  if (defaults.length !== 1) return decline('the child has no unique children slot');
+  const slot = defaults[0].slot, property = slotFigmaProperty(slot);
+  if (!properties.includes(property) || slots.filter(s => slotFigmaProperty(s.slot) === property).length !== 1)
+    return decline('the captured swap does not identify one children slot');
+  if (slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined)
+    return decline('the children slot has unsupported content constraints');
+  const childrenProp = child.props.find(p => p.bindings.code.prop === 'children');
+  if (part.parts !== undefined || part.repeat || part.slot || part.content || part.text !== undefined || part.icon || part.meter ||
+      component.text !== undefined || (childrenProp && Object.hasOwn(component.props ?? {}, childrenProp.name)))
+    return decline('the instance already has conflicting caller content');
+  const swaps = m.occ.map(o => o.node.fixedSwaps?.[property]);
+  const firstSwap = swaps[0];
+  if (!firstSwap?.key || swaps.some(s => !s || s.id !== firstSwap.id || s.key !== firstSwap.key))
+    return decline('selected content is missing, unkeyed or varies across occurrences');
+  const targetId = ctx.contractIdByKey?.get(firstSwap.key);
+  const target = ContractSchema.safeParse(targetId && ctx.contractsById?.get(targetId));
+  if (!target.success || targetId === ctx.selfId || targetId === child.id)
+    return decline('the selected content is unresolved or self-referential');
+  const anchor = target.data.bindings.figma.anchors;
+  // A variant's component key/id cannot stand in for its set's default.
+  // Matching the source node as well as its key proves a standalone target.
+  if (!ctx.fileKey || anchor?.componentSetKey !== firstSwap.key || anchor.nodeId !== firstSwap.id ||
+      anchor.fileKey !== ctx.fileKey || target.data.props.some(p => p.bindings.figma.kind === 'VARIANT' || (p.required && p.default === undefined)))
+    return decline('the selected content is not an exact standalone target with usable defaults');
+  const selected: Record<string, unknown> = { id: targetId };
+  // Part names are contract-wide identity: a second caller of the same child
+  // allocates its own key through the shared rule instead of a fixed spelling.
+  part.parts = { [partKey('selectedContent', ctx, `${where}/selectedContent`, selfKey)]: { component: selected } };
+  const observations = swaps.map(s => s?.observedInstances);
+  const sizes = observations.map(rows => rows?.length === 1 ? rows[0] : undefined);
+  if (ctx.mint && target.data.anatomy.root?.overridable?.includes('size') && sizes.every(row => row &&
+      row.componentId === firstSwap.id && row.path.length === 1 && row.path[0] === 0 &&
+      JSON.stringify(row.relativeTransform) === '[[1,0,0],[0,1,0]]' &&
+      row.constraints?.horizontal === 'SCALE' && row.constraints.vertical === 'SCALE' &&
+      row.size && Number.isFinite(row.size.width) && row.size.width > 0 && row.size.width === row.size.height &&
+      row.parentSize?.width === row.size.width && row.parentSize.height === row.size.height)) {
+    const target: Record<string, string> = {};
+    mintObservation(ctx, target, `${where}.selectedContent`, 'size', 'px',
+      m.occ.map((o, i) => ({ variant: o.variant, value: sizes[i]!.size!.width })));
+    ctx.mint.refOverrides.push({component:selected, target});
+    ctx.notes.push(`${where}: selected caller content retains its observed square size through the child's declared scalable drawing`);
+  } else if (observations.some(rows => rows?.length)) {
+    ctx.notes.push(`${where}: fixed-swap-caller-size-not-carried — requires one identity-matched square SCALE/SCALE instance at the origin and an overridable child; review`);
+  }
+  const inkParts = Object.values(target.data.anatomy.root.parts ?? {});
+  if (ctx.mint && target.data.anatomy.root?.overridable?.includes('color') && inkParts.length === 1 &&
+      inkParts[0].shape?.kind === 'path' && inkParts[0].shape.parentViewport && inkParts[0].literals?.['background-color'] === 'currentColor') {
+    const rows = m.occ.map((o,i) => {
+      const overrides = o.node.hostOverrides;
+      const h = overrides?.length === 1 ? overrides[0] : undefined;
+      const t = h?.solidFillTarget, observed = sizes[i];
+      return h && t && observed && h.fields.length === 1 && h.fields[0] === 'fills' &&
+        t.componentId === firstSwap.id && t.instanceId === observed.nodeId &&
+        JSON.stringify(t.instancePath) === JSON.stringify(observed.path) &&
+        JSON.stringify(t.childPath) === '[0]' && h.fill?.hex ? h.fill : undefined;
+    });
+    if (rows.every(Boolean)) {
+      const prior = ctx.mint.refOverrides.find(r=>r.component===selected);
+      const ink: Record<string,string> = prior?.target ?? {};
+      mintObservation(ctx,ink,`${where}.selectedContent`,'color','color',
+        m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(rows[i]!)})));
+      if (!prior) ctx.mint.refOverrides.push({component:selected,target:ink});
+      ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
+      ctx.notes.push(`${where}: identity-qualified caller glyph fill carried through the child's declared color channel; the standalone main keeps its own ink`);
+    }
+  }
+  carried.add(property);
+  ctx.notes.push(`${where}: fixed INSTANCE_SWAP "${property}" carried as caller content ${targetId} in ${child.id}'s children slot; sample defaultContent is unchanged`);
+  return carried;
+}
+
+/** dump v1.31 — FIXED INSTANCE_SWAP values not carried as caller parts. */
+function nameFixedSwaps(m: Merged, ctx: Ctx, where: string, carried: ReadonlySet<string> = new Set()): void {
   const rows = new Map<string, string[]>();
   for (const o of m.occ) {
     for (const [prop, swap] of Object.entries(o.node.fixedSwaps ?? {})) {
+      if (carried.has(prop)) continue;
       const key = `"${prop}" = ${swap.name !== undefined ? `"${swap.name}" (${swap.id}${swap.key ? `, key ${swap.key}` : ''})` : swap.id}`;
       rows.set(key, [...(rows.get(key) ?? []), o.variant]);
     }
@@ -8779,7 +9068,7 @@ function nameFixedSwaps(m: Merged, ctx: Ctx, where: string): void {
   if (rows.size === 0) return;
   const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
   ctx.notes.push(
-    `${where}: nested "${instanceOf}" fixes INSTANCE_SWAP ${[...rows].map(([k, vs]) => `${k} in ${vs.length}/${m.occ.length} variant(s) [${vs.join(', ')}]`).join('; ')} (dump v1.31 fixedSwaps) — a component ref carries props only; nested slot CONTENT is not expressible in the composition grammar, so the fixed swap is NAMED, not carried (author the child's slot defaultContent, or expose the swap as a host property, to carry it)`,
+    `${where}: nested "${instanceOf}" fixes INSTANCE_SWAP ${[...rows].map(([k, vs]) => `${k} in ${vs.length}/${m.occ.length} variant(s) [${vs.join(', ')}]`).join('; ')} (dump v1.31 fixedSwaps) — this selected content has no proven caller-parts projection, so the fixed swap is NAMED, not carried; sample defaultContent is not a runtime substitute`,
   );
 }
 
@@ -8842,15 +9131,12 @@ function buildChildParts(
   // placement fact is child order (G5) and repeat runs stay legal.
   const manualGrid = mode?.grid?.carried === true && !mode.grid.flow;
   let i = 0;
-  let primaryFillNamedThrough = 0;
   while (i < children.length) {
     const child = children[i];
-    const run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
-    // G3b primary-axis twin — once per child; a run that falls back to fixed
-    // parts below re-enters this loop for its later siblings, already named.
-    if (i >= primaryFillNamedThrough) {
-      namePartialPrimaryAxisFill(run ?? [child], mode, ctx, `${where}/${child.name}`);
-      primaryFillNamedThrough = i + (run?.length ?? 1);
+    let run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
+    if (run && new Set(run.map(sibling => JSON.stringify(primaryGrowRows(sibling, mode)))).size > 1) {
+      ctx.notes.push(`${where}/${child.name}: repeat-placement-not-uniform — siblings have different primary-axis fill; retaining individual instances`);
+      run = null;
     }
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
@@ -8863,6 +9149,7 @@ function buildChildParts(
             `${where}/${child.name}: absolute placement captured (dump v1.7 \`abs\`) on a repeated-collection sibling — a repeat template renders its items in flow; placement not carried (ledgered by name)`,
           );
         }
+        carryPrimaryAxisGrow(child, mode, repeatPart, ctx, `${where}/${child.name}`);
         parts[key] = repeatPart;
         i += run.length;
         continue;
@@ -8870,7 +9157,10 @@ function buildChildParts(
       // No carriable field (named above) — the first sibling builds under the
       // already-claimed key; the rest walk as before.
       const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-      if (built) parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+      if (built) {
+        carryPrimaryAxisGrow(child, mode, built, ctx, `${where}/${child.name}`);
+        parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+      }
       i++;
       continue;
     }
@@ -8881,6 +9171,7 @@ function buildChildParts(
       // A2 grid (G2): the ONE placement door — every part class takes its
       // captured cell here (no-op unless the parent's grid carried, manual).
       attachGridPlacement(child, mode, built, ctx, `${where}/${child.name}`);
+      carryPrimaryAxisGrow(child, mode, built, ctx, `${where}/${child.name}`);
       parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
     }
     i++;
@@ -9141,15 +9432,12 @@ function buildPartFromEvidence(
         `${where}: visible effect(s) on a nested instance — not representable on a component ref (dump v1.2); review`,
       );
     }
-    // dump v1.31 — HOST facts on a nested instance, named before any branch
-    // returns: overrides of the child's internals (the icon colour per
-    // variant) and FIXED swap values (a configured nested Icon). Both are
-    // host facts the child contract cannot know; neither has a carrier in
-    // the composition grammar (a component ref carries props only).
+    // HOST overrides belong to the caller. Fixed swaps are considered for
+    // caller-parts carriage after the component identity/props resolve.
     nameHostOverrides(m, ctx, where);
-    nameFixedSwaps(m, ctx, where);
     const swapProperty = unifiedPropRef(m, 'mainComponent', ctx, where);
     if (swapProperty) {
+      nameFixedSwaps(m, ctx, where);
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
       // just without wrapper geometry (not the generator's shape — note it).
       ctx.notes.push(`${where}: INSTANCE_SWAP-bound instance without a dedicated wrapper frame — slot proposed without layout, review`);
@@ -9173,6 +9461,7 @@ function buildPartFromEvidence(
     }
     const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
     if (isSelfInstance(instanceOf, ctx)) {
+      nameFixedSwaps(m, ctx, where);
       // SELF-REFERENCE GUARD (field case: Eventz DS Button, node 2313-42).
       // A nested instance that resolves to the set's own contract id must
       // NEVER become a component ref — the generator refuses a contract that
@@ -9224,16 +9513,27 @@ function buildPartFromEvidence(
     const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx, keys).id };
     const appliedOcc = m.occ.filter((o) => o.node.componentProperties !== undefined);
     if (appliedOcc.length > 0) {
-      const canonical = canonicalizeInstanceProps(instanceOf, appliedOcc[0].node.componentProperties!, id, ctx, where, false, keys);
-      // Prop threading: an applied value that tracks a parent enum axis 1:1
-      // becomes "{parentProp}" (per-variant fidelity); the per-occurrence
-      // values are canonicalized QUIETLY (the first occurrence above already
-      // carried the named notes).
-      const perOccurrence = appliedOcc.map((o) => ({
-        variant: o.variant,
-        canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties!, id, ctx, where, true, keys),
-      }));
-      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf);
+      // A projected state axis forwards only when EVERY observed occurrence
+      // applies an in-table value on that same axis; otherwise none does.
+      const stateChild = id ? ctx.contractsById?.get(id) : undefined;
+      const stateAxes = m.occ.map(o => {
+        const applied = o.node.componentProperties ?? {};
+        const axis = stateChild ? projectedStateAxis(stateChild, id, keys, applied) : undefined;
+        const raw = axis === undefined ? undefined : Object.entries(applied).find(([k]) => k.split('#')[0] === axis)?.[1];
+        return typeof raw === 'string' && INTERACTION_STATE_BY_VALUE[normStateValue(raw)] ? axis : undefined;
+      });
+      const projectState = stateAxes[0] !== undefined && stateAxes.every(a => a === stateAxes[0]);
+      if (!projectState && stateAxes.some(Boolean))
+        ctx.notes.push(`${where}: state-forward-incomplete \u2014 not every occurrence of "${instanceOf}" applies an in-table value on ${id}'s projected state axis; the child's disabled input is not forwarded; review`);
+      const canonical = canonicalizeInstanceProps(instanceOf, appliedOcc[0].node.componentProperties!, id, ctx, where, false, keys, undefined, projectState);
+      // Include missing-property occurrences in the typed identity proof;
+      // absence of a capture is different from the child's explicit unset plane.
+      const perOccurrence = m.occ.map((o) => {
+        const omitted = new Set<string>();
+        return { variant: o.variant, omitted,
+          canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties ?? {}, id, ctx, where, true, keys, omitted, projectState) };
+      });
+      threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string));
       // Every applied prop may have been dropped as unmappable (each is a
       // named note) — an empty props object carries nothing.
       if (Object.keys(canonical).length > 0) component.props = canonical;
@@ -9519,7 +9819,32 @@ function buildPartFromEvidence(
         );
       }
     }
+    if (ctx.mint && id && !ctx.instanceOverrides) {
+      const sizes = m.occ.map(o=>directInstanceSize(o.node,id,ctx));
+      if (sizes.length && sizes.every(Boolean) && sizes.some(s=>s!.observed!==s!.main) &&
+          !ctx.mint.refOverrides.some(r=>r.component===component)) {
+        const target: Record<string,string> = {};
+        mintObservation(ctx,target,where,'size','px',m.occ.map((o,i)=>({variant:o.variant,value:sizes[i]!.observed})));
+        ctx.mint.refOverrides.push({component,target});
+        ctx.notes.push(`${where}: identity-qualified direct instance of a SCALE/SCALE drawing carries its observed square box (${[...new Set(sizes.map(s=>s!.observed))].join('/')}px; main ${sizes[0]!.main}px) through the child's declared size channel`);
+      } else if (m.occ.some(o=>directDrawingChild(o.node,id,ctx)) && m.occ.some(o=>o.node.bbox && directDrawingChild(o.node,id,ctx) &&
+          o.node.bbox.width !== directDrawingChild(o.node,id,ctx)!.viewport.width)) {
+        ctx.notes.push(`${where}: direct-instance-size-not-carried \u2014 requires an identity-qualified square box on every occurrence and a child declaring size; review`);
+      }
+    }
+    if (ctx.mint && id) {
+      const paints = m.occ.map(o=>directInstanceInk(o.node,id,ctx));
+      if (paints.length && paints.every(Boolean)) {
+        const prior = ctx.mint.refOverrides.find(r=>r.component===component);
+        const target = prior?.target ?? {};
+        mintInstanceInk(ctx,target,where,m.occ.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})));
+        if (!prior) ctx.mint.refOverrides.push({component,target});
+        ctx.notes = ctx.notes.filter(n=>!n.startsWith(`${where}: host override(s)`));
+        ctx.notes.push(`${where}: identity-qualified direct-instance ink carried through the child's declared color override`);
+      }
+    }
     part.component = component;
+    nameFixedSwaps(m, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where, selfKey));
     carryClip(m, part, ctx, where, { carry: false, owner: 'component-ref part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
@@ -9748,6 +10073,20 @@ function applyVisibleBinding(part: Record<string, unknown>, property: string, ct
   part.visibleWhen = { prop: name };
 }
 
+/** The applied property that is exactly the child's §D.41 projected state
+ * axis: a key-resolved child with the promoted BOOLEAN "Disabled" prop and no
+ * binding of its own for that axis name. Undefined for any other shape. */
+function projectedStateAxis(child: MinimalChildContract, resolvedId: string | null,
+  keys: { setKey?: string; key?: string } | undefined, applied: Record<string, string | boolean>): string | undefined {
+  const disabled = child.props.find(p => p.name === 'disabled' && p.type === 'boolean' &&
+    (p.bindings.figma as {kind?: string}).kind === 'BOOLEAN' && p.bindings.figma.property === 'Disabled');
+  const setKey = (child as {bindings?:{figma?:{anchors?:{componentSetKey?:string|null}}}}).bindings?.figma?.anchors?.componentSetKey;
+  if (!disabled || resolvedId !== child.id || !keys?.setKey || setKey !== keys.setKey || Object.hasOwn(applied, 'Disabled')) return undefined;
+  const axes = Object.keys(applied).map(k => k.split('#')[0]).filter(k =>
+    ['state', 'states', 'interaction'].includes(k.trim().toLowerCase()) && !child.props.some(p => p.bindings.figma.property === k));
+  return axes.length === 1 ? axes[0] : undefined;
+}
+
 function canonicalizeInstanceProps(
   instanceOf: string,
   applied: Record<string, string | boolean>,
@@ -9763,6 +10102,10 @@ function canonicalizeInstanceProps(
   quiet = false,
   /** The instance's captured identity keys — stubIdFor is key-aware. */
   keys?: { setKey?: string; key?: string },
+  /** Positive omission evidence, separate from missing/unmappable props. */
+  omitted?: Set<string>,
+  /** Forward the child's projected state axis (see projectedStateAxis). */
+  projectState = false,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const note = (text: string) => {
@@ -9784,6 +10127,11 @@ function canonicalizeInstanceProps(
     // the figma property name and value spelling map back to the canonical
     // prop name and enum value (Size/"Small" → size/"sm"), never by guessing.
     const childProp = child?.props.find((p) => p.bindings.figma.property === property.split('#')[0]);
+    if (childProp && typeof value === 'string' && value === childProp.bindings.figma.unsetValue && childProp.default === undefined && childProp.required !== true) {
+      omitted?.add(childProp.name);
+      mapped++;
+      continue;
+    }
     if (childProp && typeof value === 'string') {
       const values = (childProp.bindings.figma as { values?: Record<string, string> }).values;
       const canonical = values ? Object.entries(values).find(([, spelled]) => spelled === value)?.[0] : undefined;
@@ -9816,6 +10164,21 @@ function canonicalizeInstanceProps(
     if (childProp && typeof value === 'boolean') {
       out[childProp.name] = value;
       mapped++;
+      continue;
+    }
+    // A host applying the child's own projected state axis (§D.41): the
+    // same closed table that made the child's `disabled` BOOLEAN prop maps
+    // the applied value onto it (the caller decided the whole observed
+    // domain qualifies). Pseudo-class states have no input a caller can
+    // set, so their drawn appearance is named, never forced.
+    const bare = property.split('#')[0];
+    const projected = projectState && child && typeof value === 'string' &&
+      projectedStateAxis(child, resolvedId, keys, applied) === bare ? INTERACTION_STATE_BY_VALUE[normStateValue(value)] : undefined;
+    if (child && projected) {
+      out.disabled = projected === 'disabled';
+      mapped++;
+      const residual = `${where}: state-forward-pseudo-class-unrepresentable — applied "${bare}=${value}" on nested "${instanceOf}" is ${child.id}'s projected ${projected} state, which has no input a caller can set; its drawn appearance is not carried; review`;
+      if (projected !== 'default' && projected !== 'disabled' && !ctx.notes.includes(residual)) ctx.notes.push(residual);
       continue;
     }
     if (child) {
@@ -11138,17 +11501,12 @@ function proposeStateDiffs(
   // stack is a state override, same as hover fill. Canvas did not bind a
   // variable — mint the observed CSS stack, never invent a corpus name.
   {
-    const stackOf = (n: DumpNode): string | undefined => {
-      const eff = n.effects ?? [];
-      if (eff.length === 0) return undefined;
-      if (!eff.every((e) => e.type === 'DROP_SHADOW')) return undefined;
-      return eff.map(shadowCss).join(', ');
-    };
-    if (occs.some((o) => stackOf(o.node) !== stackOf(o.base))) {
+    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(n.effects);
+    if (occs.some(o => observedShadowChanged(o.node, o.base))) {
       const stacks = occs.map((o) => ({ variant: o.variant, value: stackOf(o.node) }));
       if (stacks.some((s) => s.value === undefined)) {
         ctx.notes.push(
-          `${where}: effects differ in state "${state}" but are absent or mixed-kind in some of its variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
+          `${where}: effects differ in state "${state}" but are absent or unsupported in some of its variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
         );
       } else {
         reportUnbound(ctx, `${where} (state ${state})`, 'effects', stacks[0].value!);
@@ -11391,6 +11749,19 @@ function proposeStateDiffs(
     return { partRec, resolvedKey };
   };
   for (const [childName, childOccs] of childOccByName) {
+    const {partRec:instancePart,resolvedKey:instanceKey} = resolveChildPart(childName,1);
+    const ref = instancePart?.component as {id?:string}|undefined;
+    if (ctx.mint && partStates && ref?.id && instanceKey) {
+      const paints = childOccs.map(o=>directInstanceInk(o.node,ref.id!,ctx));
+      if (paints.length && paints.every(Boolean)) {
+        let rec = partStates.find(r=>r.part===instancePart && r.state===state);
+        if (!rec) {rec={part:instancePart!,state,target:{},byProp:{}};partStates.push(rec);}
+        mintInstanceInk(ctx,rec.target,`${where}/${childName} (state ${state})`,
+          childOccs.map((o,i)=>({variant:o.variant,value:paintCssHex(paints[i]!)})),state,instanceKey);
+        ctx.notes=ctx.notes.filter(n=>!n.startsWith(`${where} (state ${state})/${childName}: host override(s)`));
+        ctx.notes.push(`${where}/${childName}: identity-qualified instance ink in state "${state}" carried through the child's declared color override`);
+      }
+    }
     type Pick = (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined;
     const channels: Array<{ cssProp: string; paintName: string; pick: Pick }> =
       childOccs.every((x) => x.node.type === 'TEXT')
@@ -11561,12 +11932,7 @@ function proposeStateDiffs(
     collect(occs.map((o) => ({ variant: o.variant, node: o.node, base: o.base })), '', 1);
 
     type Obs = { variant: string; ref?: string; value?: string | number };
-    const stackOf = (n: DumpNode): string | undefined => {
-      const eff = n.effects ?? [];
-      if (eff.length === 0) return undefined;
-      if (!eff.every((e) => e.type === 'DROP_SHADOW')) return undefined;
-      return eff.map(shadowCss).join(', ');
-    };
+    const stackOf = (n: DumpNode): string | undefined => observedShadowStack(n.effects);
     const effectKinds = (n: DumpNode): string => (n.effects ?? []).map((e) => e.type).join('+') || 'none';
     const uniformBound = (n: DumpNode, fields: string[]): string | undefined => {
       const b = n.bound ?? {};
@@ -11719,10 +12085,10 @@ function proposeStateDiffs(
           if (differs((n) => n.text?.[field])) nameOnly(`text.${field}`, 'part-level states carry color-kind, shadow, border and opacity channels only (no per-state type vocabulary)');
         }
       } else {
-        // Effects → box-shadow (DROP_SHADOW-only stacks; the root's own rule).
-        if (d.some((x) => stackOf(x.node) !== stackOf(x.base) || effectKinds(x.node) !== effectKinds(x.base))) {
+        // Effects → box-shadow (the root's shared inner/drop stack rule).
+        if (d.some(x => observedShadowChanged(x.node, x.base))) {
           if (d.some((x) => stackOf(x.node) === undefined)) {
-            nameOnly('effects', `absent or not a pure DROP_SHADOW stack (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) in some of its variant(s) — a state override cannot unset a channel and only DROP_SHADOW layers map to box-shadow`);
+            nameOnly('effects', `absent or unsupported shadow stack (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) in some of its variant(s) — a state override cannot unset a channel; only supported DROP_SHADOW / INNER_SHADOW layers map to box-shadow`);
           } else {
             carry('box-shadow', 'effects', 'shadow', d.map((x) => ({ variant: x.variant, value: stackOf(x.node)! })));
           }
@@ -12401,6 +12767,7 @@ function proposeFromDumpFenced(
     contractIdByName: opts.contractIdByName,
     contractsById: opts.contractsById,
     contractIdByKey: opts.contractIdByKey,
+    fileKey: opts.fileKey ?? null,
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
@@ -13348,13 +13715,24 @@ function proposeFromDumpFenced(
   // minted root box is the observed box (any instance can be resized).
   // Opt-in with the instance-override ledger — the option-less path is
   // byte-identical.
-  if (ctx.instanceOverrides) {
+  const scalableDrawing = Object.values(root.parts ?? {}).length > 0 &&
+    Object.values(root.parts ?? {}).every((part: any) => part.shape?.kind === 'path' && part.shape.parentViewport);
+  const singleInkPart = scalableDrawing && Object.values(root.parts ?? {}).length === 1
+    ? Object.values(root.parts as Record<string, any>)[0] : undefined;
+  if (singleInkPart?.tokens?.['background-color'] && !singleInkPart.states && !singleInkPart.tokensByProp &&
+      !singleInkPart.statesByProp && !singleInkPart.literalsByProp && !singleInkPart.stylesWhen && !(root.tokens as Record<string,string> | undefined)?.color) {
+    ((root.tokens ??= {}) as Record<string,string>).color = singleInkPart.tokens['background-color'];
+    delete singleInkPart.tokens['background-color'];
+    singleInkPart.literals = {...singleInkPart.literals, 'background-color':'currentColor'};
+  }
+  if (ctx.instanceOverrides || scalableDrawing) {
     const rt = (root.tokens ?? {}) as Record<string, string>;
     const declaredOv: string[] = [];
     if (typeof rt['background-image'] === 'string' && merged.occ.some((o) => typeof o.node.imageFill === 'string')) {
       declaredOv.push('background-image');
     }
     if (typeof rt['width'] === 'string' && typeof rt['height'] === 'string') declaredOv.push('size');
+    if (singleInkPart?.literals?.['background-color'] === 'currentColor' && typeof rt.color === 'string') declaredOv.push('color');
     if (declaredOv.length > 0) {
       root.overridable = declaredOv;
       ctx.notes.push(

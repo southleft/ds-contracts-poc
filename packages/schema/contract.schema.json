@@ -874,6 +874,10 @@
             "grow": {
               "type": "boolean"
             },
+            "growBasis": {
+              "type": "string",
+              "const": "zero"
+            },
             "overlap": {
               "type": "boolean"
             },
@@ -1142,6 +1146,70 @@
           ],
           "additionalProperties": false
         },
+        "absolutePlacement": {
+          "type": "object",
+          "properties": {
+            "left": {
+              "type": "number"
+            },
+            "top": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "left",
+            "top"
+          ],
+          "additionalProperties": false
+        },
+        "absolutePlacementByCombination": {
+          "type": "object",
+          "properties": {
+            "props": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rows": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "left": {
+                    "type": "number"
+                  },
+                  "top": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "values",
+                  "left",
+                  "top"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "props",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
         "layoutByProp": {
           "type": "object",
           "properties": {
@@ -1190,6 +1258,13 @@
                       "end",
                       "space-between"
                     ]
+                  },
+                  "grow": {
+                    "type": "boolean"
+                  },
+                  "growBasis": {
+                    "type": "string",
+                    "const": "zero"
                   }
                 },
                 "additionalProperties": false
@@ -1260,6 +1335,32 @@
                 "path",
                 "stroked-path"
               ]
+            },
+            "parentViewport": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "width",
+                "height",
+                "x",
+                "y"
+              ],
+              "additionalProperties": false
             },
             "strokePath": {
               "type": "object",

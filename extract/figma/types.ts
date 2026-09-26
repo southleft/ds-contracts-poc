@@ -3,7 +3,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.46';
+export const PLUGIN_DUMP_VERSION = '1.47';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -182,8 +182,8 @@ export interface DumpText {
    * in older dumps means not captured, never zero. No token identity implied. */
   letterSpacing?: number;
   /** Horizontal text alignment (dump v1.31, additive) — textAlignHorizontal
-   *  verbatim. LEFT is the CSS default and may be omitted by producers;
-   *  CENTER/RIGHT/JUSTIFIED carry as the declared `text-align` channel
+   *  verbatim, including observed LEFT. All four values carry as the
+   *  declared `text-align` channel
    *  (canvas: draw — the emitter writes textAlignHorizontal back). Absence in
    *  older dumps means not captured (their captures receipted the channel as
    *  text-channel-unsupported). */
@@ -264,6 +264,17 @@ export interface DumpHostOverride {
   path: string;
   fields: string[];
   fill?: DumpPaint;
+  /** Exact paint owner, captured only for a VECTOR with one visible normal
+   * SOLID fill. The nearest instance's actual main identity and numeric
+   * child path disambiguate duplicate layer names and nested swaps. This
+   * describes the observed node, not the main's complete anatomy. */
+  solidFillTarget?: {
+    nodeId: string;
+    instanceId: string;
+    componentId: string;
+    instancePath: number[];
+    childPath: number[];
+  };
 }
 
 /** A FIXED INSTANCE_SWAP value on a nested instance (dump v1.31, additive):
@@ -279,6 +290,19 @@ export interface DumpFixedSwap {
   /** Its name / publish key when the producer could resolve them. */
   name?: string;
   key?: string;
+  /** Actual selected instances, matched by the complete property reference,
+   * not their display names. Dimensions and transforms are local, unrounded
+   * observations; absence means uncaptured. This list does not assert that a
+   * truncated source subtree contains no further occurrences. */
+  observedInstances?: Array<{
+    nodeId: string;
+    path: number[];
+    componentId?: string;
+    size?: { width: number; height: number };
+    parentSize?: { width: number; height: number };
+    relativeTransform?: number[][];
+    constraints?: { horizontal: string; vertical: string };
+  }>;
 }
 
 /** Decor-shape geometry (dump v1.3, additive) — captured for the closed set

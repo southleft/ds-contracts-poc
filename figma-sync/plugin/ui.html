@@ -2139,7 +2139,8 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.31).
+// Design-side ANATOMY dump — the canonical node-tree capture.
+// v1.47 preserves observed LEFT text alignment independently of CSS defaults.
 //
 // dump v1.31 (Phase 2 fix round 2, 2026-08-23) — ten facts the Phase 2 exam
 // measured as SILENT on the REST route, now read by BOTH producers in ONE
@@ -2150,9 +2151,9 @@
 //                      under a COLUMN parent; propose disambiguates)
 //   text.fontFamily    fontName.family, verbatim (Inter included — "Inter
 //                      drawn" and "not captured" must stay different facts)
-//   text.textAlign     textAlignHorizontal CENTER | RIGHT | JUSTIFIED (LEFT is
-//                      the CSS default and is omitted) — CARRIED now, no
-//                      longer a text-channel-unsupported receipt
+//   text.textAlign     textAlignHorizontal LEFT | CENTER | RIGHT | JUSTIFIED;
+//                      observed LEFT carries since v1.47, independently of
+//                      CSS inheritance or user-agent button styles
 //   effectStyle /      effectStyleId → the EffectStyle's name and publish key
 //   effectStyleKey     (provenance beside the carried box-shadow)
 //   effects[].bound    per-channel variable bindings (radius / spread / color /
@@ -2954,6 +2955,60 @@ const dumpFillStack = async (node, nodePath) => {
   return { fill, gradient };
 };
 
+async function dumpSwapInstances(root, property) {
+  if (!('children' in root)) return undefined;
+  const found = [];
+  const size = n => typeof n.width === 'number' && typeof n.height === 'number' && Number.isFinite(n.width) && Number.isFinite(n.height)
+    ? { width: n.width, height: n.height } : undefined;
+  const visit = async (parent, path) => {
+    for (const [index, node] of (('children' in parent ? parent.children : []) || []).entries()) {
+      const next = [...path, index];
+      if (node.type === 'INSTANCE' && node.componentPropertyReferences && node.componentPropertyReferences.mainComponent === property) {
+        const row = { nodeId: node.id, path: next };
+        try {
+          const main = await node.getMainComponentAsync();
+          if (main) row.componentId = main.id;
+        } catch (_) { /* Unreadable identity stays absent, not inferred. */ }
+        const localSize = size(node), parentSize = size(parent), matrix = node.relativeTransform;
+        if (localSize) row.size = localSize;
+        if (parentSize) row.parentSize = parentSize;
+        if (Array.isArray(matrix) && matrix.length === 2 && matrix.every(r => Array.isArray(r) && r.length === 3 && r.every(Number.isFinite)))
+          row.relativeTransform = matrix.map(r => [...r]);
+        if ('constraints' in node && node.constraints) {
+          const c = node.constraints;
+          row.constraints = {
+            horizontal: c.horizontal === 'MIN' ? 'LEFT' : c.horizontal === 'MAX' ? 'RIGHT' : c.horizontal,
+            vertical: c.vertical === 'MIN' ? 'TOP' : c.vertical === 'MAX' ? 'BOTTOM' : c.vertical,
+          };
+        }
+        found.push(row);
+      }
+      await visit(node, next);
+    }
+  };
+  await visit(root, []);
+  return found;
+}
+
+async function dumpSolidFillTarget(root, target) {
+  if (!target || target.type !== 'VECTOR' || !Array.isArray(target.fills)) return undefined;
+  const paints = target.fills.filter(function (p) { return p.visible !== false; });
+  if (paints.length !== 1 || paints[0].type !== 'SOLID' || (paints[0].blendMode && paints[0].blendMode !== 'NORMAL')) return undefined;
+  const childPath = [], instancePath = [];
+  let node = target, owner, depth = 0;
+  while (node && node.id !== root.id) {
+    if (++depth > 32 || !node.parent || !Array.isArray(node.parent.children)) return undefined;
+    const parent = node.parent, index = parent.children.indexOf(node);
+    if (index < 0) return undefined;
+    if (!owner) childPath.unshift(index); else instancePath.unshift(index);
+    if (!owner && parent.type === 'INSTANCE') owner = parent;
+    node = parent;
+  }
+  if (!node || !owner) return undefined;
+  const main = await owner.getMainComponentAsync();
+  return main ? {nodeId:target.id,instanceId:owner.id,componentId:main.id,instancePath:instancePath,childPath:childPath} : undefined;
+}
+
 async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
   const selectionIdentity = node.getSharedPluginData('ds_contracts', 'selectionIdentity');
@@ -3554,9 +3609,9 @@ async function dumpNode(node, nodePath, parent) {
     } else if (node.fontName === figma.mixed) {
       degrade('text-channel-unsupported', nodePath, 'fontName is mixed across character ranges — dump v1 carries ONE family/face per text node; fontFamily and fontStyle omitted (dump v1.31)');
     }
-    // dump v1.31: textAlignHorizontal CENTER | RIGHT | JUSTIFIED → text.textAlign
-    // (LEFT is the CSS default and is OMITTED — the REST twin omits it too).
-    if (node.textAlignHorizontal === 'CENTER' || node.textAlignHorizontal === 'RIGHT' || node.textAlignHorizontal === 'JUSTIFIED') {
+    // Every observed alignment carries. LEFT cannot be inferred from CSS:
+    // text-align inherits and button user-agent styles may center it.
+    if (node.textAlignHorizontal === 'LEFT' || node.textAlignHorizontal === 'CENTER' || node.textAlignHorizontal === 'RIGHT' || node.textAlignHorizontal === 'JUSTIFIED') {
       text.textAlign = node.textAlignHorizontal;
     }
     // dump v1.36: HOW THE TEXT BOX SIZES ITSELF — node.textAutoResize,
@@ -3691,6 +3746,12 @@ async function dumpNode(node, nodePath, parent) {
           if (typeof def.value === 'string' && def.value !== '') {
             const swap = { id: def.value };
             try {
+              const observedInstances = await dumpSwapInstances(node, key);
+              if (observedInstances && observedInstances.length) swap.observedInstances = observedInstances;
+            } catch (_) {
+              degrade('instance-main-unresolved', nodePath, 'INSTANCE_SWAP "' + key + '" occurrence geometry could not be read; no partial sizing evidence is retained');
+            }
+            try {
               const target = await figma.getNodeByIdAsync(def.value);
               if (target) {
                 swap.name = target.name;
@@ -3756,7 +3817,15 @@ async function dumpNode(node, nodePath, parent) {
           const h = { path: seg.join('/'), fields: hostFieldsById[n.id] };
           if (h.fields.indexOf('fills') >= 0 && 'fills' in n && Array.isArray(n.fills)) {
             const paint = await dumpPaint(n.fills, null, 'fill', n);
-            if (paint) h.fill = paint;
+            if (paint) {
+              h.fill = paint;
+              try {
+                const target = await dumpSolidFillTarget(node,n);
+                if (target) h.solidFillTarget = target;
+              } catch (_) {
+                degrade('host-paint-target-unavailable', nodePath, 'the overridden vector main identity could not be read — no paint target inferred');
+              }
+            }
           }
           hostOverrides.push(h);
           located++;
@@ -3856,7 +3925,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.46',
+    dumpVersion: '1.47',
   },
 };
 dumps._degradations = degradations;

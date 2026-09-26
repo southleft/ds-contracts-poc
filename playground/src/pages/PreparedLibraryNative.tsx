@@ -14,6 +14,10 @@ const phaseNames: Partial<Record<NativeOperationSnapshot['phase'],string>> = {
   'components-created':'Components created', 'component-structure-observed':'Native structure checked',
   'component-observation-refused':'Native changes need review', 'observation-refused':'Token changes need review',
   'component-creation-refused':'Component creation refused', 'creation-refused':'Token creation refused',
+  'component-partial-allocation':'Creation stopped with partial output',
+  'library-replacement-observed':'Replacement ready for review',
+  'library-replacement-refused':'Replacement refused',
+  'library-replacement-unknown':'Replacement outcome unconfirmed',
   'evidence-unavailable':'Saved evidence unavailable',
 };
 
@@ -50,7 +54,8 @@ export function PreparedLibraryNative({artifactId}:{artifactId:string}) {
     if (mutating.current) return;
     mutating.current=true;setBusy(true);setError(null);++requestVersion.current;
     try {
-      const response = await fetch(root+(name ? '/'+name : ''),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,brand})});
+      const response = await fetch(root+(name ? '/'+name : ''),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,brand,
+        ...(name==='apply-replacement'?{reviewRevision:state?.operation?.libraryReplacement?.revision}:{})})});
       const result = await response.json();
       if (currentSelection.current !== selection) return;
       if (!response.ok) throw Error([result.error,result.reason].filter(Boolean).join(' '));
@@ -63,8 +68,9 @@ export function PreparedLibraryNative({artifactId}:{artifactId:string}) {
     }
   };
   const operation = state?.operation, connection = state?.connection;
+  const operationProblems=(operation?.problems??[]).filter(problem=>!operation?.libraryReplacement||problem!=='native-operation-source-evidence-unavailable');
   const readOnlyPhase = operation?.pendingPhase?.endsWith('readback');
-  const inspectable = operation && (readOnlyPhase || ['component-structure-observed','component-observation-refused','observation-refused'].includes(operation.phase));
+  const inspectable = operation && (readOnlyPhase || operation.canInspectPartial || ['component-structure-observed','component-observation-refused','observation-refused'].includes(operation.phase));
   return <main className="source-workspace">
     <p className="source-eyebrow">Prepared library · technical preview</p>
     <h1>Inspect this library in Figma.</h1>
@@ -90,8 +96,11 @@ export function PreparedLibraryNative({artifactId}:{artifactId:string}) {
       <h2>{operation.componentName ?? 'Library'} · {phaseNames[operation.phase] ?? 'Operation needs review'}</h2>
       <p role="status">{operation.counters.variants} root {operation.counters.variants === 1 ? 'variant' : 'variants'} · {operation.counters.variables} variables.</p>
       <p className="source-note">Operation {operation.id}</p>
-      {!operation.sourceCurrent && <p>The retained library no longer matches its saved evidence. Creation is unavailable; existing native output can still be inspected when its allocation is known.</p>}
-      {operation.nativeOutcome === 'unknown' && <p>Figma’s result has not been confirmed. Reconnect the same companion to return its saved result. This operation will not create a replacement graph.</p>}
+      {!operation.sourceCurrent && <p>{operation.libraryReplacement
+        ? 'The original attempt used an older compiler plan. This replacement review uses the current compiler with the same saved library and token context.'
+        : 'The saved operation no longer matches the current library or compiler. Creation is unavailable; inspection still uses the original operation and recorded allocation.'}</p>}
+      {operation.canInspectPartial ? <p>Figma reported an incomplete creation. Inspect the retained output before recovery. Inspection reads the existing page and does not create or remove components.</p>
+        : operation.nativeOutcome === 'unknown' && <p>Figma’s result has not been confirmed. Reconnect the same companion to return its saved result. This operation will not create a replacement graph.</p>}
       {operation.phase !== 'evidence-unavailable' && <>
         <ol>
           <li>Open DS Contracts Evaluations in Figma Desktop.</li>
@@ -107,10 +116,30 @@ export function PreparedLibraryNative({artifactId}:{artifactId:string}) {
           {!connection?.started && <button disabled={busy || !operation.sourceCurrent || !connection?.connected}
             onClick={()=>void action('start')}>Create and inspect in Figma</button>}
           {inspectable && <button disabled={busy || !connection?.paired}
-            onClick={()=>void action('retry-observation')}>{readOnlyPhase ? 'Retry interrupted inspection' : 'Inspect native output again'}</button>}
+            onClick={()=>void action('retry-observation')}>{readOnlyPhase ? 'Retry interrupted inspection' : operation.canInspectPartial ? 'Inspect partial output' : 'Inspect native output again'}</button>}
+          {operation.canReviewLibraryReplacement && <button disabled={busy || !connection?.paired}
+            onClick={()=>void action('review-replacement')}>Review replacement</button>}
         </div>
       </>}
-      {!!operation.problems.length && <ul>{operation.problems.map(problem=><li key={problem}>{problem}</li>)}</ul>}
+      {!!operationProblems.length && <ul>{operationProblems.map(problem=><li key={problem}>{problem}</li>)}</ul>}
+      {operation.partialObservation && <section aria-label="Partial output inspection">
+        <h3>{operation.libraryReplacement||operation.libraryReplacementOutcome ? 'Earlier partial output inspection' : operation.partialObservation.status==='partial-output-inspected' ? 'Partial output inspected' : 'Partial output inspection refused'}</h3>
+        <p>{operation.partialObservation.nodeCount} nodes observed on the retained page; {operation.partialObservation.recordedNodeCount} allocations were recorded, including the page.</p>
+        <p>{operation.partialObservation.missingNodeIds.length} missing · {operation.partialObservation.additionalNodeIds.length} additional · {operation.partialObservation.changedTypeNodeIds.length} changed types · {operation.partialObservation.ownershipMismatchNodeIds.length} ownership differences.</p>
+        {!!operation.partialObservation.inheritedNodeIds.length && <p>{operation.partialObservation.inheritedNodeIds.length} layers inherit their identity from component definitions. {operation.partialObservation.allocationAliases.length} caller allocations have replacement IDs assigned by Figma.</p>}
+        <p>{operation.partialObservation.tokensObserved ? 'The saved token context matches.' : 'The saved token context could not be verified.'} This inspection does not qualify the incomplete components. Review replacement checks whether this operation can safely rebuild its partial page.</p>
+      </section>}
+      {operation.libraryReplacement && <section aria-label="Replacement review">
+        <h3>Replace the inspected partial page</h3>
+        <p>Remove this operation’s partial page and its {operation.libraryReplacement.nodeCount-1} observed child nodes, including inherited layers and edits within those nodes. Rebuild {operation.libraryReplacement.componentCount} components from the same saved library, with {operation.libraryReplacement.rootVariants} root variants, and reuse all {operation.libraryReplacement.variableCount} variables.</p>
+        <p>Every observed node is accounted for by a recorded allocation or its inherited component structure. No external component, swap or prototype references were detected. The supported properties and tokens will be checked again before removal. The original failed operation remains in the history.</p>
+        <button disabled={busy || !connection?.connected} onClick={()=>void action('apply-replacement')}>Replace partial page and inspect</button>
+      </section>}
+      {operation.libraryReplacementOutcome && <p>{operation.libraryReplacementOutcome.status==='replacement-executed'
+        ? `Replacement ran; ${operation.libraryReplacementOutcome.retiredNodeCount} old nodes were retired. The new output still requires an independent structure check and visual qualification.`
+        : operation.canReviewLibraryReplacement
+          ? 'The previous attempt stopped during removal. Review the retained page before proposing a separately recorded continuation.'
+          : 'Replacement did not complete with a confirmed result. This write cannot be repeated; the retained result needs investigation.'}</p>}
       {operation.structuralObservation?.status === 'supported-structure-observed' && <p>The saved native graph matches the supported contract structure. Visual fidelity and React interactions still require separate qualification.</p>}
       {!!operation.imageObservation?.images.length && <>
         <h3>Native output</h3>

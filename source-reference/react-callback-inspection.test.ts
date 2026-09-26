@@ -13,8 +13,10 @@ import { randomUUID } from "node:crypto";
 import { readReactCallbackInspectionRecord } from "./react-callback-inspection.js";
 import { evidenceSha, inventoryEvidence } from "./react-validation-evidence.js";
 import type { ReactNativeRequest } from "./react-native-request.js";
+import {reactInspectionRequest} from './react-initial-inspection.js';
 
-for (const nested of [false, true]) test(`sealed ${nested ? 'nested' : 'root'} callback records reopen independently of inventory insertion order and refuse tampering or stale source`, () => {
+for (const kind of ['root','nested','authored']) test(`sealed ${kind} callback records reopen independently of inventory insertion order and refuse tampering or stale source`, () => {
+  const nested = kind !== 'root';
   const root = mkdtempSync(path.join(tmpdir(), "callback-record-")),
     id = randomUUID(),
     dir = path.join(root, id),
@@ -31,8 +33,9 @@ for (const nested of [false, true]) test(`sealed ${nested ? 'nested' : 'root'} c
       inventorySha256: hash,
       matrixRevision: "sha256:" + hash,
     };
-  const request = nested ? { version: 2 as const, anchor, caseId: 'checkbox-unchecked', instanceId: 'instance-4' }
-    : { version: 1 as const, anchor, caseId: "checkbox-unchecked" };
+  const request = kind === 'authored' ? reactInspectionRequest({version:1,kind:'react-authored-draft',referenceId:hash,
+    caseId:anchor.caseId,ownership:anchor.ownership,inventorySha256:hash,helper:0,draftRevision:'sha256:'+hash},anchor.caseId,'instance-4')
+    : reactInspectionRequest(anchor,anchor.caseId,nested ? 'instance-4' : undefined);
   const report = {
     id,
     caseId: request.caseId,

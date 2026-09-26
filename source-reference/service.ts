@@ -1,3 +1,4 @@
+import {prepareReactAuthoredNativePlan,buildReactAuthoredNativeWrite} from './react-authored-native-plan.js';
 import {nativeAppUpdateDesired} from './native-app-update.js';
 import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
@@ -189,6 +190,18 @@ export function createReferenceService(
         buildComponent: (request, context) => (request.compilation === 'current' ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({
           ...reactReference.nativeEvidence(request), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision, templateGraph: context.templateGraph,
+        }),
+      },
+      reactAuthored: {
+        prepare: (request,operation) => ({
+          visual:request.version!==1?{id:request.initial.id,reportSha256:request.initial.reportSha256}:
+            {id:request.ownership.id,reportSha256:request.ownership.sha256},
+          preparation:{id:request.version===3?request.stateApi.id:request.version===2?request.initial.id:request.ownership.id,reportSha256:request.draftRevision.slice(7)},
+          plan:prepareReactAuthoredNativePlan({...reactReference.authoredNativeEvidence(request),operation}),
+        }),
+        buildComponent: (request,context) => buildReactAuthoredNativeWrite({
+          ...reactReference.authoredNativeEvidence(request),operation:context.operation,
+          tokens:context.tokens,expectedPlanRevision:context.planRevision,
         }),
       },
       reactCaller: {
@@ -793,7 +806,10 @@ export function createReferenceService(
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
     // identity, and therefore every existing allocation, stays the same.
-    const desired = baseline.source.kind === 'react-state-api-draft'
+    const desired = baseline.source.kind === 'react-authored-draft'
+      ? prepareReactAuthoredNativePlan({...reactReference.authoredNativeEvidence(baseline.source,
+        nativeJobs.reactAuthoredRequest(id)),operation:baseline.input.operation})
+      : baseline.source.kind === 'react-state-api-draft'
       ? prepareReactStateApiNativePlan({ ...reactReference.stateApiNativeEvidence(baseline.source,
         nativeJobs.reactStateApiRequest(id)), operation: baseline.input.operation })
       : baseline.source.kind === 'react-initial-draft'
@@ -1017,7 +1033,7 @@ export function createReferenceService(
       json(res, 403, { error: "Same-origin access required." });
       return;
     }
-    const preparedLibraryRoute = /^prepared-library\/([a-f0-9]{64})\/native(?:\/(connection|start|retry-observation))?$/.exec(route);
+    const preparedLibraryRoute = /^prepared-library\/([a-f0-9]{64})\/native(?:\/(connection|start|retry-observation|review-replacement|apply-replacement))?$/.exec(route);
     if (preparedLibraryRoute) {
       if (!['GET','POST'].includes(req.method ?? '') || (req.method === 'GET' && preparedLibraryRoute[2])) {
         json(res,405,{error:'Method not allowed.'}); return;
@@ -1028,10 +1044,12 @@ export function createReferenceService(
           json(res,400,{error:'Only mode and brand are accepted.'}); return;
         }
         const selection = req.method === 'GET' ? {mode:query.get('mode'),brand:query.get('brand')} : await body(1024);
-        if (!object(selection) || Object.keys(selection).sort().join(',') !== 'brand,mode') {
-          json(res,400,{error:'Only mode and brand are accepted.'}); return;
+        const applying=preparedLibraryRoute[2]==='apply-replacement';
+        if (!object(selection) || Object.keys(selection).sort().join(',') !== (applying?'brand,mode,reviewRevision':'brand,mode') ||
+          applying&&(typeof selection.reviewRevision!=='string'||!/^sha256:[a-f0-9]{64}$/.test(selection.reviewRevision))) {
+          json(res,400,{error:applying?'Mode, brand and the displayed replacement revision are required.':'Only mode and brand are accepted.'}); return;
         }
-        const request = {version:1,kind:'prepared-library-native',artifactId:preparedLibraryRoute[1],...selection};
+        const request = {version:1,kind:'prepared-library-native',artifactId:preparedLibraryRoute[1],mode:selection.mode,brand:selection.brand};
         if (!isPreparedLibraryNativeRequest(request)) { json(res,400,{error:'Invalid library selection.'}); return; }
         const observedAt = Date.now();
         let operation = nativeJobs.forBaseline(preparedLibraryNativeReservation(request));
@@ -1046,6 +1064,8 @@ export function createReferenceService(
               json(res,200,{connection:nativeTransport.pair(operation.id)}); return;
             }
             if (preparedLibraryRoute[2] === 'start') nativeTransport.start(operation.id);
+            else if(preparedLibraryRoute[2]==='review-replacement')nativeTransport.reviewLibraryReplacement(operation.id);
+            else if(applying)nativeTransport.applyLibraryReplacement(operation.id,selection.reviewRevision as string);
             else nativeTransport.retryObservation(operation.id);
             operation = nativeJobs.get(operation.id);
           }
@@ -1059,7 +1079,10 @@ export function createReferenceService(
           connection:operation && operation.phase !== 'evidence-unavailable' ? nativeTransport.status(operation.id,observedAt) : null});
       } catch (error) {
         const reason = error instanceof Error ? /^[A-Za-z0-9_-]+/.exec(error.message)?.[0] : undefined;
-        json(res,409,{error:'Library preparation or delivery could not proceed. Existing evidence is retained.',reason:reason ?? 'library-native-refused'});
+        const message = reason === 'FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED'
+          ? "Figma cannot preserve this library's requested flexible sizing. Native preparation stopped. Your React download and existing output remain available."
+          : 'Library preparation or delivery could not proceed. Existing evidence is retained.';
+        json(res,409,{error:message,reason:reason ?? 'library-native-refused'});
       }
       return;
     }

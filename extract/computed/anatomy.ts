@@ -30,6 +30,7 @@
  * Pure module (no fs, no browser): run.ts writes the asset files.
  */
 import type { Contract, Part } from '../../scripts/contract-schema.js';
+import { observedFlowPseudoDomain } from './flow-pseudo.js';
 import { preserveOrderedFlexText } from './ordered-text.js';
 import { unpaintedPseudoBox } from './unpainted-pseudo.js';
 import { GRID_REFUSALS, walkAnatomy } from '../../scripts/contract-schema.js';
@@ -2230,6 +2231,15 @@ export function promoteAnatomy(
    *  parent, offsets folded with the host's border widths, guarded by a
    *  geometry assertion: the parent's content box must equal the host's
    *  border box (else named refusal). */
+  const flowBeforeParts = new Set<string>();
+  const addDecor = (parts:Record<string,Part>,name:string,part:Part) => {
+    // Generated ::before is before the real DOM children. Do not change their
+    // source addresses or the historical ordering of absolute decoration.
+    if(flowBeforeParts.has(name)) {
+      const previous={...parts};for(const key of Object.keys(parts))delete parts[key];
+      parts[name]=part;Object.assign(parts,previous);
+    } else parts[name]=part;
+  };
   const pseudoDecorParts = (
     e: UnionNode,
     i: number,
@@ -2250,6 +2260,17 @@ export function promoteAnatomy(
       // planes included — a disabled checked Radio keeps its dot; an
       // enabled-only domain would fabricate a hidden-when-disabled fact).
       const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
+      if(!hostIsShapeLeaf&&domain.length&&domain.some(combo=>union.alignedByKey.get(`${combo.key}__default`)![i]!.node.pseudo[pe]?.position==='static')) {
+        const carried=observedFlowPseudoDomain(domain.map(combo=>({combo,node:union.alignedByKey.get(`${combo.key}__default`)![i]!.node})),pe,
+          space.axes.filter(a=>!presenceProps.has(a.prop)&&!stateProps.includes(a.prop)&&contract.props.some(p=>p.name===a.prop)));
+        if('problem' in carried){refusals.push(`${carried.problem}: ${e.partName}${pe}`);continue;}
+        const name=`${e.partName}-${pe.slice(2)}`;
+        out.push([name,carried.part]);if(pe==='::before')flowBeforeParts.add(name);
+        receipts.push(carried.part.literalsByProp
+          ?`flow-pseudo-carried: ${e.partName}${pe} → ${name}; exact used in-flow box across ${domain.length} captured planes; paint factored by ${carried.part.literalsByProp[0].prop}; behavior and responsive sizing unqualified`
+          :`flow-pseudo-carried: ${e.partName}${pe} → ${name}; exact used in-flow box, uniform paint across ${domain.length} captured planes; ${carried.window?'gradient window lies wholly in a constant endpoint region':'solid background'}; behavior and responsive sizing unqualified`);
+        continue;
+      }
       // Preserve a fully observed, uniform empty box rather than dropping it
       // for lack of paint. Its event behavior remains a separate qualification.
       if (!hostIsShapeLeaf && domain.length) {
@@ -3415,7 +3436,7 @@ export function promoteAnatomy(
     }
     // Round 5c — S5: drawn pseudo-element decor boxes join as child parts.
     if (!part.shape) {
-      for (const [decorName, decor] of pseudoDecorParts(e, i, false, part)) childParts[decorName] = decor;
+      for (const [decorName, decor] of pseudoDecorParts(e, i, false, part)) addDecor(childParts,decorName,decor);
     }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
     // A2 — resolve the deferred display:grid fact now that children exist:
@@ -3580,7 +3601,7 @@ export function promoteAnatomy(
       for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true, rootChildren[c.partName] ?? null)) rootChildren[decorName] = decor;
     }
   }
-  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false, newRoot)) rootChildren[decorName] = decor;
+  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false, newRoot)) addDecor(rootChildren,decorName,decor);
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
   // A2 — resolve the root's deferred display:grid fact (see buildPart's
   // twin block): structured promotion first, the named fallback on abandon.

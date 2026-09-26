@@ -7,6 +7,103 @@ import { projectReactStateApiContract } from './react-state-api-contract.js';
 import type { ReactStateApiInspection } from './react-state-api-inspection.js';
 import { generatedTypeErrors, mountGenerated } from '../core/react-test-runtime.js';
 
+function authoredFixture() {
+  const value = fixture(), root = structuredClone(value.initial.draft!.compiled!.contract!);
+  const leaf = structuredClone(root), child = structuredClone(root);
+  leaf.id = 'fixture.context-leaf'; leaf.name = 'ContextLeaf'; leaf.semantics = {element:'span'};
+  leaf.bindings.code.anchors.export = leaf.name;
+  leaf.anatomy = {root:{attrs:{'data-testid':'nested'},text:'Nested',literals:{color:'#000000'},
+    literalsByProp:[{prop:'seed',map:{true:{color:'#ff0000'},false:{color:'#000000'}}}]}};
+  child.id = 'fixture.context-child'; child.name = 'ContextChild'; child.semantics = {element:'span'};
+  child.bindings.code.anchors.export = child.name;
+  const props = {seed:'{seed}',gate:'{gate}'};
+  child.anatomy = {root:{parts:{leaf:{component:{id:leaf.id,props}}}}};
+  root.anatomy.root.parts!.context = {component:{id:child.id,props}};
+  value.initial.authoredDraft = {version:1,qualification:'observed-authored-composition-sweep-draft',acceptedContract:null,
+    status:'native-compiled',nativeQualification:'unqualified',inputRevision:'fixture',contract:root,contracts:[leaf,child,root],
+    tokens:{},assets:[],problems:[],limitations:[],nativeVariants:[],
+    boundaries:[root,child,leaf].map((c,i)=>({path:i===0?'':i===1?'0':'0.0',contractId:c.id,planes:[]}))};
+  value.initial.draft!.status = 'refused';
+  return value;
+}
+
+test('authored state projection retains a transitive typed graph without flattening or mutating its source',()=>{
+  const v=authoredFixture(), before=structuredClone(v);
+  assert.deepEqual(planReactStateApi(v.initial,v.behavior),v.inspection.plan);
+  const draft=projectReactStateApiContract(v.initial,v.inspection);
+  assert.equal(draft.status,'generated-draft',JSON.stringify(draft.problems));assert.deepEqual(v,before);
+  assert.equal(draft.dependencies?.length,2);
+  assert.deepEqual(generatedTypeErrors(draft.contract!.name,draft.tsx!,
+    Object.fromEntries(draft.dependencies!.map(d=>[d.contract.name,d.tsx]))),[]);
+  for(const dependency of draft.dependencies!){
+    assert.deepEqual(dependency.contract.props[0].bindings.code.values,{false:false,true:true});
+    assert.equal(dependency.contract.props[0].bindings.code.initial,undefined);
+    assert.equal(dependency.contract.props[0].bindings.code.prop,'seed');
+    assert.equal(dependency.contract.events?.length??0,0);
+    assert.equal(dependency.contract.props[1].name,'disabled');
+  }
+});
+
+test('authored state admission refuses incomplete graphs, nonidentity forwarding and child behavior even if a flat draft exists',()=>{
+  const mutations:Array<(v:ReturnType<typeof authoredFixture>)=>void>=[
+    v=>{v.initial.authoredDraft!.status='refused';},
+    v=>{v.initial.authoredProblem='origin-not-authenticated';},
+    v=>{v.initial.authoredDraft!.contracts!.pop();},
+    v=>{v.initial.authoredDraft!.contracts!.push(v.initial.authoredDraft!.contracts![0]);},
+    v=>{v.initial.authoredDraft!.contracts![0].props[0].default=false;},
+    v=>{v.initial.authoredDraft!.contracts![1].anatomy.root.parts!.leaf.component!.props!.seed=true;},
+    v=>{v.initial.authoredDraft!.contracts![1].anatomy.root.parts!.leaf.component!.id='missing';},
+    v=>{v.initial.authoredDraft!.contracts![1].anatomy.root.parts!.leaf.component!.id=v.initial.authoredDraft!.contract!.id;},
+    v=>{v.initial.authoredDraft!.boundaries.pop();},
+    v=>{delete v.initial.authoredDraft!.contract!.anatomy.root.parts!.context;},
+    v=>{v.initial.authoredDraft!.contracts![0].events=[{name:'activate',trigger:'root',bindings:{code:{prop:'onActivate'}}}];},
+    v=>{v.initial.authoredDraft!.contracts![0].anatomy.root.slot={name:'unknown'} as any;},
+  ];
+  for(const mutate of mutations){const v=authoredFixture();v.initial.draft!.status='compiled-draft';mutate(v);
+    assert.equal(projectReactStateApiContract(v.initial,v.inspection).status,'refused');}
+});
+
+test('the generated authored graph propagates live state to mounted descendants through every controlled and disabled context',async()=>{
+  const {buildReactStateApiPreview}=await import('./react-state-api-preview.js');
+  const {reactReferenceHtml}=await import('./react-reference.js');
+  const v=authoredFixture(), draft=projectReactStateApiContract(v.initial,v.inspection);
+  const output=await buildReactStateApiPreview(process.cwd(),draft),browser=await chromium.launch();
+  try{
+    const page=await browser.newPage(),errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.setContent(reactReferenceHtml(output));
+    const control=page.getByRole('switch'),nested=page.getByTestId('nested'),calls=page.getByLabel('Generated callback values');
+    for(const item of v.inspection.plan.cases)for(const action of ['space','associated-label'] as const){
+      const option=(name:string)=>{const c=item.changes[name];return c.kind==='omit'?'omit':String(c.value)};
+      await page.getByLabel('Controlled value',{exact:true}).selectOption(option('chosen'));
+      await page.getByLabel('Initial value',{exact:true}).selectOption(option('seed'));
+      await page.getByLabel('Disabled value',{exact:true}).selectOption(option('locked'));
+      await nested.evaluate(el=>{(window as any).beforeRemount=el;});
+      await page.getByRole('button',{name:'Remount and clear callbacks'}).click();
+      await page.waitForFunction(()=>document.querySelector('[data-testid="nested"]')!==(window as any).beforeRemount);
+      const expected=v.inspection.observation!.rows.find(r=>r.id===item.id&&r.action===action)!;
+      await nested.evaluate(el=>{(window as any).retainedNested=el;});
+      const check=async(state:string)=>{
+        assert.equal(await control.getAttribute('aria-checked'),state);
+        assert.equal(await nested.evaluate(el=>getComputedStyle(el).color),state==='true'?'rgb(255, 0, 0)':'rgb(0, 0, 0)');
+        assert.equal(await nested.evaluate(el=>el===(window as any).retainedNested),true,
+          JSON.stringify({case:item.id,action,state,root:await control.evaluate(el=>el.outerHTML),tsx:draft.tsx!.slice(-3200)}));
+      };
+      await check(expected.initial.checked);
+      for(const step of expected.steps){
+        if(action==='space'){
+          // A disabled control cannot take focus. Do not accidentally send
+          // Space to the consumer's still-focused Remount button instead.
+          await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur();});
+          await control.focus();await page.keyboard.press('Space');
+        }
+        else await page.locator('label[for="generated-state-control"]').click({force:expected.initial.disabled});
+        await check(step.control.checked);assert.deepEqual(JSON.parse(await calls.innerText()),step.callback.calls.map(c=>c[0]));
+      }
+    }
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
+});
+
 function fixture() {
   const {initial, behavior} = stateApiEvidence();
   for(const row of behavior.observation!.rows) row.callback = 'onNotify';

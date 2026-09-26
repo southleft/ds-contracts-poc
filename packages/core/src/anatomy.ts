@@ -513,37 +513,26 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *
  *  The lowering gives the text element the same box:
  *
- *      inline-size: calc-size(fit-content, round(up, size, 1px)); // untracked
- *      max-inline-size: 100%;           (unless the part carries its own max-width)
- *      align-self: flex-start;          (only under a stretching flex column)
+ *      inline-size: calc-size(max-content, round(up, size, 1px)); // untracked
+ *      flex-shrink: 0;                 (captured HUG is not implicit FILL)
+ *      align-self: flex-start;         (only under a stretching flex column)
  *
- *  · Untracked text retains FIT-CONTENT (review, PR 132). `max-content` gave the
- *    element a definite, NON-WRAPPING box: the shipped `flowbite.card` label
- *    carries the fact on a runtime `children` string, and a long one grew the
- *    card to 596 px inside a 240 px container (a fixed-width column or grid
- *    stopped wrapping the same way), while Safari and Firefox — which drop
- *    the declaration — wrapped. `fit-content` is `min(max-content,
- *    max(min-content, available))`: a label that fits is its max-content box
- *    rounded up (the badge is unchanged, 34 px), a label that does not fit
- *    wraps at the available width exactly as it does without the fact.
- *  · Tracked owned text uses a max-content layout box less the final tracking,
- *    plus an inner run with `calc-size(100%, size + tracking)`. Subtracting from
- *    fit-content can subtract TWICE when the hug parent feeds its rounded size
- *    back as available space; the shorter run then wraps a label that fits.
- *    The inner run keeps trailing advance for line breaking and inherits text
- *    alignment. max-inline-size plus min-inline-size:0 clamps it even in grid.
- *    Empty text overrides the outer size to zero, including negative tracking.
- *    Both calc-size declarations disappear together without browser support.
- *    Complete one-to-three enum token axes emit the tracking variable and box
- *    rule beside each selected value; missing/defaultless/boolean axes refuse.
- *  · MAX-INLINE-SIZE: 100%. Rounding a WRAPPED box rounds the available width
- *    up, so a fractional container (120.5 px) overflowed by 0.5 px; the clamp
- *    returns it to 120.5 (measured in column-flex, row-flex, grid and a
- *    fit-content card) and changes nothing for a label that fits. A part that
- *    carries its own `max-width` / `max-inline-size` keeps it, and the clamp is
- *    not written (it would override the author's value in the same rule) —
- *    there the sub-pixel overflow in a fractional container is a NAMED limit.
- *    (`min(…, 100%)` inside `calc-size()` collapsed the badge to 0: rejected.)
+ *  · Captured WIDTH_AND_HEIGHT owns its intrinsic inline size. Live desktop
+ *    row/column probes keep long text at 477/503px inside a 120.5px parent;
+ *    no implicit container clamp is present. The previous fit-content/clamp
+ *    policy wrapped native HUG text, including a 69px label squeezed to 63px
+ *    by an equal-width composed parent. It is superseded, not a tolerance.
+ *    Authored maximums still constrain CSS text; ordinary unflagged runtime
+ *    text keeps normal wrapping. Native explicit fractional maxima remain
+ *    separately unqualified (120.5px maxWidth reports a 121px text box).
+ *  · Tracked owned text subtracts final tracking from its max-content layout
+ *    box and adds an inner run with calc-size(100%, size + tracking). The run
+ *    retains trailing advance for line breaking and inherits text alignment.
+ *    The default min-inline-size:0 permits an authored maximum to constrain
+ *    that box even in grid. Empty text overrides outer size to zero, including
+ *    negative tracking. Both calc-size declarations disappear together in an
+ *    unsupported browser. Complete one-to-three enum token axes emit tracking
+ *    and size together; missing/defaultless/boolean axes refuse.
  *  · ALIGN-SELF: FLEX-START — an AGENT decision, recorded with its inverse in
  *    docs/23 §D.42. A text box that sizes itself to its text is a HUG box in
  *    Figma, so under a vertical auto-layout frame drawn MIN it sits at the
@@ -574,8 +563,9 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *    ignores the CSSOM assignment, the inline surface) and keeps today's
  *    fractional, untrimmed browser advance. Tracking plus rounding may differ
  *    from Figma by more than a subpixel; fallback fidelity is not claimed.
- *    The existing clamp and conditional start alignment still apply.
- *  · Logical properties, so vertical and RTL writing round and clamp the axis
+ *    Flex shrink and conditional start alignment still apply; constrained
+ *    fallback text may wrap, so no unsupported-browser sizing parity is claimed.
+ *  · Logical properties, so vertical and RTL writing round the intrinsic axis
  *    the text runs along.
  *  · The element must be BLOCK-LEVEL for `inline-size` to apply: every emitter
  *    blockifies a text part inside a flex / grid parent or an absolutely
@@ -586,7 +576,7 @@ export function lowerStrokeRings(contract: Contract): Contract {
  *  Emitted only when a part carries the fact — every other contract keeps
  *  its bytes. TO REVERSE: delete the three wholePixelTextBoxDecls pushes
  *  (css.ts ×2, emit-wc.ts) and the inline assignment (emit-react-inline.ts). */
-export const WHOLE_PIXEL_TEXT_BOX_BASIS = 'fit-content';
+export const WHOLE_PIXEL_TEXT_BOX_BASIS = 'max-content';
 /** The part owns text of its own — the only kind of part the fact qualifies. */
 export function partOwnsText(part: Part): boolean {
   return part.text !== undefined || part.content !== undefined || part.textByProp !== undefined;
@@ -631,8 +621,9 @@ export function textBoxLetterSpacing(part: Part): { kind: 'literal'; value: stri
 /** Channels that size, fill or truncate the box instead of letting the text
  *  size it — a box carrying one of these is not `WIDTH_AND_HEIGHT`. `min-*`
  *  and `max-*` are not listed: Figma's auto-width text can carry a min/max
- *  and CSS clamps `inline-size` by them the same way. */
-const TEXT_BOX_CONFLICT_CHANNEL = /^(width|inline-size|flex|flex-grow|flex-basis|text-overflow|-webkit-line-clamp|line-clamp)$/;
+ *  and CSS can constrain `inline-size` by them. Native bound fidelity is a
+ *  separate qualification. Explicit flex-shrink must not be overwritten. */
+const TEXT_BOX_CONFLICT_CHANNEL = /^(width|inline-size|flex|flex-grow|flex-shrink|flex-basis|text-overflow|-webkit-line-clamp|line-clamp)$/;
 /** Every channel (and `layout.grow`) on the part that contradicts the fact,
  *  sorted — empty when the box is sized by its text alone. A `letter-spacing`
  *  that varies in per-value overrides is still refused. A complete enum
@@ -641,6 +632,7 @@ export function textBoxConflicts(part: Part): string[] {
   const { base, perValue } = textHolders(part);
   const channels = new Set([...base, ...perValue].flatMap((h) => Object.keys(h ?? {})).filter((c) => TEXT_BOX_CONFLICT_CHANNEL.test(c)));
   if (part.layout?.grow) channels.add('layout.grow');
+  if (Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow)) channels.add('layoutByProp.grow');
   if (holds(perValue, 'letter-spacing')) channels.add('letter-spacing (per variant or state)');
   if (part.literals?.['letter-spacing'] !== undefined && part.tokens?.['letter-spacing'] &&
       placeholdersIn(stripBraces(part.tokens['letter-spacing'])).length > 0)
@@ -787,11 +779,9 @@ export function wholePixelTextBoxDecls(contract: Contract, part: Part, path: str
   // The base never contains an unresolved token path or a guessed axis value.
   const trim = ls === undefined || ls.kind === 'token' && placeholdersIn(ls.ref).length > 0
     ? '' : ` - ${ls.kind === 'token' ? tokenCss(ls.ref) : ls.value}`;
-  const basis = ls ? 'max-content' : WHOLE_PIXEL_TEXT_BOX_BASIS;
-  const decls = [`inline-size: calc-size(${basis}, round(up, size${trim}, 1px))`];
+  const decls = [`inline-size: calc-size(${WHOLE_PIXEL_TEXT_BOX_BASIS}, round(up, size${trim}, 1px))`, 'flex-shrink: 0'];
   if (ls) decls.push(`${WHOLE_PIXEL_TEXT_TRACKING}: ${trim ? trim.slice(3) : '0px'}`);
   const { base, perValue } = textHolders(part);
-  if (!holds([...base, ...perValue], /^max-(width|inline-size)$/)) decls.push('max-inline-size: 100%');
   if (ls && !holds([...base, ...perValue], /^min-(width|inline-size)$/)) decls.push('min-inline-size: 0');
   const parent = partAt(contract, path.slice(0, -1));
   if (
@@ -918,12 +908,20 @@ export function layoutOverrideDecls(o: {
   direction?: string;
   align?: string;
   justify?: string;
-}): string[] {
+  grow?: boolean;
+  growBasis?: "zero";
+}, base?: {grow?: boolean; growBasis?: "zero"}): string[] {
   const d: string[] = [];
   if (o.display) d.push(`display: ${o.display}`);
   if (o.direction) d.push(`flex-direction: ${o.direction}`);
   if (o.align) d.push(`align-items: ${ALIGN_CSS[o.align]}`);
   if (o.justify) d.push(`justify-content: ${JUSTIFY_CSS[o.justify]}`);
+  if (o.grow !== undefined || o.growBasis !== undefined) {
+    const grow = o.grow ?? base?.grow;
+    const zero = (o.growBasis ?? base?.growBasis) === 'zero';
+    d.push(`flex: ${grow ? (zero ? '1 1 0px' : '1 1 auto') : '0 1 auto'}`, `min-width: ${grow ? '0' : 'auto'}`);
+    if (zero) d.push(`min-height: ${grow ? '0' : 'auto'}`);
+  }
   return d;
 }
 

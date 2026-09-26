@@ -139,6 +139,9 @@ export interface MintObservation {
    *  base-most DRAWN value — ink-invisible on the absent plane (the part
    *  draws nothing there); named on the binding, never silent. */
   partAbsentCombos?: Array<Record<string, string>>;
+  /** The receiving channel explicitly supports boolean ancestor selectors.
+   * Does not relax value agreement or required axis coverage. */
+  booleanAxes?: true;
 }
 
 export interface MintAxis {
@@ -348,7 +351,7 @@ function classify(
   // root element; nested parts and state-plane observations keep the
   // enum-only vocabulary — their refusals stay named).
   // @door mint.bool-axis-root-only
-  const axes = obs.part === '' ? allAxes : allAxes.filter((a) => !a.bool);
+  const axes = obs.part === '' || obs.booleanAxes === true ? allAxes : allAxes.filter((a) => !a.bool);
   // A partial tuple cannot establish absence for a complete variant. Ignore
   // contradictory evidence as well: an observed tuple cannot also be absent.
   const completeKey = (combo: Record<string, string>): string | undefined =>

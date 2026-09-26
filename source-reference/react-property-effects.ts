@@ -138,7 +138,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    // original is a different defect from a render that did not come back.
    originalFontsSha256??=probe.before.fontsSha256;
    originalBoundsSha256??=probe.before.boundsSha256;
-   const unrestored=[!probe.ownershipRestored&&'ownership',probe.before.treeSha256!==originalTree&&'before-tree',probe.before.image!==args.image&&'before-image',
+   const unrestored=[!probe.ownershipRestored&&('ownership'+('ownershipDifference' in probe&&probe.ownershipDifference?'@'+probe.ownershipDifference:'')),probe.before.treeSha256!==originalTree&&'before-tree',probe.before.image!==args.image&&'before-image',
     probe.before.fontsSha256!==originalFontsSha256&&'before-fonts',restored.fontsSha256!==originalFontsSha256&&'restored-fonts',
     probe.before.boundsSha256!==originalBoundsSha256&&'before-bounds',restored.boundsSha256!==originalBoundsSha256&&'restored-bounds',
     restored.treeSha256!==originalTree&&'restored-tree',restored.image!==args.image&&'restored-image'].filter(Boolean);

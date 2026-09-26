@@ -433,6 +433,7 @@ export function createFigmaMock(options = {}) {
       this._w = w;
       this._h = h;
       this._resized = true;
+      this._zeroFillW = false;
       // FC-SLOT-BIRTH-BOX: the resize IS the relayout trigger. Measured live:
       // a Body slot pinned FIXED and resized to height 1 came back 16 — the
       // padding-only hug — not 1, so Figma re-measures on resize and the stale
@@ -442,6 +443,11 @@ export function createFigmaMock(options = {}) {
 
     resizeWithoutConstraints(w, h) {
       this._resizeBox(w, h);
+      // Live Scratch probe, 2026-09-26: a SLOT whose width was reset to exact
+      // zero this way and then set to FILL inside a 100 px root kept width 0
+      // (and so did every instance of it) until a nonzero resize. Modeled for
+      // the measured case only: SLOT, horizontal axis, exact zero.
+      this._zeroFillW = this.type === 'SLOT' && w === 0;
     }
 
     // --- GRID layout mode (A2; docs/research/grid-recon-probes.md P1-P14) --
@@ -851,6 +857,7 @@ export function createFigmaMock(options = {}) {
       // axis is measured by the parent and a FIXED axis by its own resize, and
       // neither reads the stale box.
       if (this._birthBox?.w && this._lsH === 'HUG') return this._w;
+      if (this._zeroFillW && this._lsH === 'FILL') return 0;
       // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
       // POSITIONED child is OUT of the auto-layout flow — FILL sizing does
       // not apply to it (Figma converts the sizing back to FIXED the moment
@@ -1257,6 +1264,11 @@ export function createFigmaMock(options = {}) {
             throw new Error(
               `in setProperties: "${key}" is not a component property on this instance (available: ${Object.keys(inst._allProps).join(', ') || 'none'})`,
             );
+          }
+          // Live prepared-library finding: Figma rejects canonical strings
+          // at a BOOLEAN property; "false" is not the boolean false.
+          if (def.type === 'BOOLEAN' && typeof value !== 'boolean') {
+            throw new Error('in setProperties: Property value is incompatible with component property type');
           }
           inst._allProps[key] = { type: def.type, value };
           const targets = [inst, ...inst.findAll()];

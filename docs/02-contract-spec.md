@@ -7,6 +7,27 @@
 
 One contract per component, at `contracts/<component>.contract.json`. The authoritative schema is defined in Zod at `scripts/contract-schema.ts`; `npm run schema` emits `contracts/contract.schema.json` so editors validate contracts inline (every contract's `$schema` field points at it).
 
+## Parent-owned component placement
+
+A nested component reference can carry `absolutePlacement: {left, top}` for one
+fixed position, or `absolutePlacementByCombination: {props, rows}` for a complete
+finite input domain. Each table row contains `values`, `left` and `top`. Tuple
+values follow `props` order and use canonical strings, including `"false"` and
+`"true"`; `null` means an omitted optional input. Enum and boolean VARIANT axes
+are supported, with an explicit native unset option for defaultless optional
+inputs. All tuples must appear exactly once, up to 64 combinations. Duplicate,
+missing, unknown or conflicting tuples refuse. The two placement fields are
+mutually exclusive.
+
+Offsets are CSS pixels from the direct parent's padding edge. The parent must
+be explicitly positioned, and the child must be an ordinary generated component
+without competing geometry or a placement wrapper. React CSS Modules and inline
+React preserve the child root; native variants retain an instance of the same
+child main. The table requires one component root and does not infer responsive
+constraints or interaction behavior. Static HTML and Web Components refuse this
+placement model by name. This additive optional field leaves existing contract
+behavior unchanged; live stateful conversion remains subject to the V1 ledger.
+
 ## Top-level fields
 
 | Field | Type | Purpose |
@@ -156,7 +177,7 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Element by prop.** `semantics.elementByProp: { prop, map }` lets the rendered HTML element follow an enum prop. Heading's `level` maps `"2" → h2`; code emits an `ELEMENT_MAP` lookup and renders a dynamic tag (`semantics.element` is the fallback). The canvas is unaffected — text nodes carry no element semantics, a declared fidelity boundary. The element vocabulary now includes `h1`–`h6`. Build-time guardrails: the prop must be a declared enum, the map must cover every value, and every mapped element must be in the vocabulary.
 
-**Layout by prop.** `Part.layoutByProp: { prop, map }` applies per-enum-value layout overrides merged over the base `layout`. Partial coverage is the point — only deviating values appear (ChatMessage: `sender=user` flips `direction: row-reverse` on the root and `align: end` on the body → right-aligned user messages). Code emits the override under the root's enum class; the canvas resolves it per variant at compile time — reversed directions, which have no auto-layout equivalent, render as the same children in reversed order. Overrides are limited to display/direction/align/justify — `grow` and `overlap` stay per-part invariants — and component-instance parts refuse overrides (the child contract owns its layout). The driving prop is a declared enum, or an optional boolean with an omitted VARIANT plane — the condition `tokensByProp` already has: the omitted plane is the base layout and the drawn `false`/`true` planes are the map keys (a checked state that re-aligns a part). A required boolean has no omitted plane and is refused.
+**Layout by prop.** `Part.layoutByProp: { prop, map }` applies per-enum-value layout overrides merged over the base `layout`. Partial coverage is the point — only deviating values appear (ChatMessage: `sender=user` flips `direction: row-reverse` on the root and `align: end` on the body → right-aligned user messages). Code emits the override under the root's enum class; the canvas resolves it per variant at compile time — reversed directions, which have no auto-layout equivalent, render as the same children in reversed order. Overrides support display/direction/align/justify and parent-owned `grow` with optional `growBasis: "zero"`; `overlap` remains invariant. Omitted `growBasis` preserves the existing content basis (`flex: 1 1 auto`). Explicit zero basis allocates remaining space equally (`flex: 1 1 0px`) and clears automatic minimum sizes. New Figma primary-axis fill observations use the explicit zero basis. Component instances accept only these placement fields on a proven generated single root; their internal layout remains child-owned. Unproven hosts, competing minimum-size/flex declarations, overlays and grid children refuse. See [D.111](23-known-limitations.md#d111-primary-axis-fill-can-vary-with-a-prop). The driving prop is a declared enum, or an optional boolean with an omitted VARIANT plane — the condition `tokensByProp` already has: the omitted plane is the base layout and the drawn `false`/`true` planes are the map keys (a checked state that re-aligns a part). A required boolean has no omitted plane and is refused.
 
 **Conditional literal styles.** `Part.stylesWhen: [{ prop, equals?, styles }]` applies literal CSS — never tokens — when a prop matches. Boolean conditions ride the per-boolean data attribute the generator already emits (`.root[data-is-disabled] { … }`; native `disabled` uses `:disabled`); enum conditions ride the root's enum class. The whitelist is deliberately tight (position/insets/z-index/overflow/text-overflow/white-space/display/opacity/pointer-events/transform/transition/flex-direction/justify-content/align-items/cursor/text-decoration): anything with a token vocabulary belongs in `tokens`, and a brace-wrapped value here is refused by name. Fidelity: v1 applies nothing on the canvas — boolean properties can bind visibility, not style — a declared code-side surface, like events.
 

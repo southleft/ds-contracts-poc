@@ -26,6 +26,40 @@ export function Surface(props:{children?:string}){return <section {...props}/>}`
  return {dir,program,ownership,tree};
 }
 
+test('a proved delegated root compiles under its public identity and refuses implementation-chain caller sizing',()=>{
+ const f=fixture();try{
+  writeFileSync(path.join(f.dir,'surface.tsx'),`declare global{namespace JSX{interface Element{} interface IntrinsicElements{section:any}}}
+export function Surface(props:{children?:string}){return <Inner {...props}/>}
+export function Inner(props:{children?:string}){return <section {...props}/>}`);
+  const program=readReactSourceProgram(f.dir,['surface.tsx'],{includeJsxDependencies:true});
+  assert.deepEqual(program.problems,[]);
+  const source=(name:string)=>{const c=program.components.find(c=>c.exportName===name)!;return {module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};};
+  const ownership:ReactOwnership={...f.ownership,components:[
+   {...f.ownership.components[0],source:source('Surface')},
+   {...f.ownership.components[0],id:'inner',parent:'one',source:source('Inner')},
+  ],nodes:[{path:'',tag:'section',nearestComponent:'inner',createdBy:'inner'}]};
+  const before=structuredClone({program,ownership,tree:f.tree});
+  const projection=projectReactRootVisual(program,ownership,f.tree),root=projection.roots[0];
+  assert.equal(root.status,'native-compiled',root.problems.join(';'));
+  assert.deepEqual(root.source,source('Surface'));assert.deepEqual(root.contract!.anatomy.root.slot,{name:'children'});
+  assert.equal(JSON.stringify(root.contract).includes('Original sample'),false);
+  assert.deepEqual(root.native!.rootSlot,{version:1,property:'Children',display:'inline-flex'});
+  assert.ok(root.limitations.includes('delegated-root-observed-context-only'));
+  const changedTree=structuredClone(f.tree);changedTree.nodes=[{t:'text',v:'Changed caller'}];
+  const changedOwnership=structuredClone(ownership);changedOwnership.components.forEach(c=>{c.props.children='Changed caller';});
+  const changed=projectReactRootVisual(program,changedOwnership,changedTree).roots[0];
+  assert.deepEqual(changed.contract,root.contract);assert.deepEqual(changed.native,root.native);
+  const origin={version:1 as const,roots:[{path:'',tag:'section',channels:[],sizes:[{channel:'width' as const,status:'fixed' as const,value:'999px',authoredValue:'999px',selectors:['<inline>']}]}]};
+  assert.equal(projectReactRootVisual(program,ownership,f.tree,origin).roots[0].sourceSizing![0].status,'fixed');
+  for(const prop of ['style','className']){
+   const o=structuredClone(ownership);o.components[1].props[prop]=prop==='style'?{kind:'object'}:'caller-size';
+   const size=projectReactRootVisual(program,o,f.tree,origin).roots[0].sourceSizing![0];
+   assert.equal(size.status,'unresolved');assert.equal(size.reason,'caller-style-input-needs-ownership-proof');
+  }
+  assert.deepEqual({program,ownership,tree:f.tree},before);
+ }finally{rmSync(f.dir,{recursive:true,force:true})}
+});
+
 test('observed source box retains font and border declarations through the shared compiler and real React consumers',async()=>{
  const f=fixture(),browser=await chromium.launch();
  try{
@@ -160,4 +194,19 @@ test('hex source paint retains its variable identity without accepting a differe
    assert.equal(project(f.tree,indirect).reason,'source-variable-value-needs-resolution');
   }
  }finally{await browser.close();rmSync(f.dir,{recursive:true,force:true})}
+});
+
+
+test('a selected root records the enclosing render context and never generates its ancestor',()=>{
+ const f=fixture();try{
+  f.ownership.components[0].parent='outside';
+  f.ownership.ancestors=[{id:'outside',source:structuredClone(f.ownership.components[0].source),props:{theme:'cool'},hostAncestor:{tag:'section',distance:1}}];
+  const projected=projectReactRootVisual(f.program,f.ownership,f.tree);
+  assert.equal(projected.roots.length,1);
+  assert.equal(projected.roots[0].instanceId,'one');
+  assert.equal(projected.roots[0].status,'native-compiled',JSON.stringify(projected.roots[0].problems));
+  assert.ok(projected.roots[0].limitations.includes('recorded-render-ancestor-context-only'));
+  const revision=projected.inputRevision;f.ownership.ancestors[0].props.theme='warm';
+  assert.notEqual(projectReactRootVisual(f.program,f.ownership,f.tree).inputRevision,revision,'context props participate in observation identity');
+ }finally{rmSync(f.dir,{recursive:true,force:true})}
 });

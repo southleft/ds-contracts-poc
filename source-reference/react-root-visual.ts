@@ -14,6 +14,7 @@ import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
+import type {ReactContextualContent} from './react-contextual-content.js';
 import { reactChildContextSizing, reactChildContextGrid, reactRootGrid, type ReactChildContext } from './react-child-context.js';
 import { verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 
@@ -64,10 +65,11 @@ export function projectReactRootVisual(
   /** Sealed with the observation it describes; consulted only for a traced
    * top-level root that is itself a grid. Absent evidence changes nothing. */
   rootGrid?: GridConstraintEvidence,
+  contentContext?:ReactContextualContent,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
-    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}), ...(rootGrid ? {rootGrid} : {}) }), roots: [], problems: [] };
-  const anatomy = linkReactSourceAnatomy(program, ownership, tree);
+    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}), ...(rootGrid ? {rootGrid} : {}),...(contentContext?{contentContextRevision:contentContext.revision}:{}) }), roots: [], problems: [] };
+  const anatomy = linkReactSourceAnatomy(program, ownership, tree,contentContext);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
     // A child operation needs this root only. Still authenticate the complete
@@ -75,7 +77,7 @@ export function projectReactRootVisual(
     if (instanceIds && !instanceIds.has(instance.instanceId)) continue;
     const result: ReactRootVisual['roots'][number] = { instanceId: instance.instanceId,
       source: structuredClone(instance.source), status: 'refused', channels: [], problems: [],
-      limitations: [...instance.problems, 'source-api-and-behavior-not-projected',
+      limitations: [...instance.problems, ...(anatomy.ancestors?.length ? ['recorded-render-ancestor-context-only'] : []), 'source-api-and-behavior-not-projected',
         'observed-case-only-not-all-property-planes', 'provisional-values-not-authored-token-bindings',
         'caller-composition-not-assembled', 'native-fidelity-not-verified'] };
     out.roots.push(result);
@@ -95,7 +97,7 @@ export function projectReactRootVisual(
           : size.status==='fixed'&&!authoredLengthIsUsed(size.value??'',normalizeValue(observed.style[size.channel]??''))
             ? {...size,status:'unresolved' as const,reason:'size-observation-mismatch'} : size)};
       };
-      const sourceFacts = () => judged(instance.roots[0].path, observation, [instance.instanceId]);
+      const sourceFacts = () => judged(instance.roots[0].path, observation, instance.rootDelegation?.instanceIds ?? [instance.instanceId]);
       // A composed child of a traced GRID root takes its width from the root
       // rule, so every component rooted there answers for a caller width.
       const rootWidth = childContext && styleOrigin && instance.roots[0].path && tree.style.display === 'grid'

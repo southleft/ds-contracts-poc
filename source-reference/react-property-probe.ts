@@ -17,6 +17,32 @@ const admits = (type:ReactTypeFact,value:unknown):boolean => type.kind==='union'
 const sameSource=(a:ReactOwnership['components'][number]['source'],b:ReactOwnership['components'][number]['source'])=>
   a.module===b.module&&a.exportName===b.exportName&&a.sourceSha256===b.sourceSha256&&a.span.start===b.span.start&&a.span.end===b.span.end;
 
+/** Restoration compares every ownership fact except the numeric render
+ * frame ordinals of a factory invocation (`invocation: n`, `reactCall: n`),
+ * which count how often React re-invoked the same factory. A re-render that restores the identical
+ * tree, image, fonts and bounds is still the original; any other difference
+ * (site, inputs, effects, lineage, structure) keeps refusing. */
+const FRAME_ORDINALS=new Set(['invocation','reactCall']);
+export function ownershipForRestoration(value:unknown):unknown{
+ if(Array.isArray(value))return value.map(ownershipForRestoration);
+ if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value as Record<string,unknown>)
+  .filter(([key,inner])=>!(FRAME_ORDINALS.has(key)&&typeof inner==='number')).map(([key,inner])=>[key,ownershipForRestoration(inner)]));
+ return value;
+}
+const sameOwnership=(a:unknown,b:unknown)=>JSON.stringify(ownershipForRestoration(a))===JSON.stringify(ownershipForRestoration(b));
+
+/** First JSON path where two ownership reads differ; names a refusal, never relaxes it. */
+export function ownershipDifference(a:unknown,b:unknown,path='$'):string|undefined{
+ if(JSON.stringify(a)===JSON.stringify(b))return undefined;
+ if(a&&b&&typeof a==='object'&&typeof b==='object'){
+  for(const key of [...new Set([...Object.keys(a as object),...Object.keys(b as object)])]){
+   const inner=ownershipDifference((a as Record<string,unknown>)[key],(b as Record<string,unknown>)[key],path+'.'+key);
+   if(inner)return inner;
+  }
+ }
+ return path;
+}
+
 async function propertyInput(page:Page,selector:string,program:ReactSourceProgram,instanceId:string,changes:ReactPropertyChanges,allowEmpty=false){
  if(program.problems.length||(!allowEmpty&&!Object.keys(changes).length)||Object.keys(changes).some(property=>reserved.has(property))) throw Error('react-property-probe-input-unsupported');
  const baseline=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
@@ -42,7 +68,7 @@ export async function probeReactPropertyBaseline<T>(
  const {baseline}=await propertyInput(page,selector,program,instanceId,{},true);
  const before=await observe(),changed=await observe(),restored=await observe();
  const after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
- return {before,changed,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes:{}};
+ return {before,changed,restored,ownershipRestored:sameOwnership(after,baseline),ownershipDifference:ownershipDifference(ownershipForRestoration(baseline),ownershipForRestoration(after)),changes:{}};
 }
 
 /** The callback records the real render/DOM, so a successfully delivered prop
@@ -52,7 +78,7 @@ export async function probeReactPropertyBaseline<T>(
 export async function probeReactProperties<T>(
  page:Page, selector:string, program:ReactSourceProgram, instanceId:string,
  changes:ReactPropertyChanges, observe:()=>Promise<T>,
-):Promise<{before:T; changed:T; restored:T; ownershipRestored:boolean; changes:ReactPropertyChanges}> {
+):Promise<{before:T; changed:T; restored:T; ownershipRestored:boolean; ownershipDifference?:string; changes:ReactPropertyChanges}> {
  const {baseline,instance}=await propertyInput(page,selector,program,instanceId,changes);
  const token=randomUUID();
  const mutate=(restore:boolean)=>page.evaluate(`(()=>{
@@ -108,7 +134,7 @@ export async function probeReactProperties<T>(
   }
  }
  const restored=await observe(),after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
- return {before,changed:changed!,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes};
+ return {before,changed:changed!,restored,ownershipRestored:sameOwnership(after,baseline),ownershipDifference:ownershipDifference(ownershipForRestoration(baseline),ownershipForRestoration(after)),changes};
 }
 
 /** Initial-state observations remount the disposable reference. This deliberately

@@ -5,7 +5,7 @@
   "nodeId": "120:2014",
   "mode": "exact",
   "variantCount": 5,
-  "contractSha256": "9ef4a81a548bfbb94427259202d76673b67673a84e9cc5758158589aef80022d",
+  "contractSha256": "1814cbd7aa1345d779c2b09d488cedcf22665daf8951df51e51b005fedaaa8c6",
   "carriage": {
     "carried": 55,
     "named": 28,
@@ -230,14 +230,14 @@
     }
   ],
   "generatedFiles": {
-    "react/HelperText/HelperText.module.css": "a7410d42d3ba09b0b8e506aea19fde12c415de08f981b1d4dbdbd0d727f71c77",
+    "react/HelperText/HelperText.module.css": "27eeae6c85b5269ae9d07cf4c03c1f61b2cd180533e4c6b151c1a945824f8983",
     "react/HelperText/HelperText.stories.tsx": "6a7156345b63d6f913635e3e02f46a717e369d98f6b3b9831d274eea42f56269",
     "react/HelperText/HelperText.tsx": "15e14662a1fb90c27dff0cc20870b3b873b240032667992d916680d97cd74a17",
     "react/HelperText/index.ts": "c949cf590de9e714e934e0642092371897431d25cffa13392e21d50939602162",
     "wc/flowbite-helpertext.ts": "9885beb3819b73deb247704ed490b14fffa98459bf9e276ca2649389e39c1acd",
-    "wc/flowbite-helpertext.css.ts": "d48e69f469d0c4a11f6518404ab299d19385f3a6752927a0b4b50ddcc4bdf83e",
+    "wc/flowbite-helpertext.css.ts": "612016510e7b7176c72f8a4c5748c7413ab2696d602c2b9488ecf0ea977b0b5f",
     "wc/flowbite-helpertext.demo.html": "ccb7099cdd13940485cb37c81e86e9129ffb23dd25cd43e3de7a83ef6d7bf949",
     "wc/flowbite-helpertext.custom-elements.json": "9032cef6eaa83a11c21cbd08ce8d34f6c2c3e5e3f01fe12857101ef33b9650bf"
   },
-  "notesCount": 30
+  "notesCount": 31
 }

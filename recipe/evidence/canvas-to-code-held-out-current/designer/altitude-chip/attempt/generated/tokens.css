@@ -1,0 +1,42 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-current.ts --record-to <new-directory>
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-chip-root-border-color-bare: #00000000;
+  --imported-chip-root-border-color-neutral: #00000000;
+  --imported-chip-root-border-color-primary: #00000000;
+  --imported-chip-root-border-color-secondary: #00000000;
+  --imported-chip-root-border-color-tertiary: #3c3c35;
+  --imported-stub-icon-root-height: 20px;
+  --imported-stub-icon-root-width: 20px;
+  --theme-border-radius-pill: 999px;
+  --theme-border-width-md: 2px;
+  --theme-color-background-neutral-strong: #3c3c35;
+  --theme-color-background-primary-default: #8ea6ff;
+  --theme-color-background-secondary-default: #f1f0ea;
+  --theme-color-background-transparent-default: #00000000;
+  --theme-color-border-neutral-default: #3c3c35;
+  --theme-color-content-neutral-default: #f1f0ea;
+  --theme-color-content-primary-weak: #0e1834;
+  --theme-color-content-secondary-weak: #1d1d1a;
+  --theme-color-focus-ring: #8ea6ff;
+  --theme-size-control-sm: 32px;
+  --theme-space-sm: 12px;
+  --theme-space-xs: 8px;
+  --typography-font-size-12: 12px;
+  --typography-line-height-20: 20px;
+}

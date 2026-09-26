@@ -6,14 +6,14 @@
 // Badge: 26 of the 48 × 16 px small variants missed the 5 % limit with every
 // content size equal (a 47.40625 px root against Figma's 48). The emitters give
 // the text element the same box —
-//   inline-size: calc-size(fit-content, round(up, size, 1px)); // untracked
+//   inline-size: calc-size(max-content, round(up, size, 1px)); // untracked
 // Tracked text has a max-content outer box and a separate trailing-advance run.
-//   max-inline-size: 100%;            (unless the part carries its own max)
+//   flex-shrink: 0;                  (captured HUG is not implicit FILL)
 //   align-self: flex-start;           (only under a stretching flex column)
-// — a progressive enhancement, and these tests MEASURE the box in Chromium rather
-// than read the stylesheet's intent. Review (PR 132): the first cut used
-// max-content, which made a runtime string non-wrapping (the flowbite Card grew to
-// 596 px in a 240 px container); the wrap tests below are that finding, pinned.
+// — these tests MEASURE the box in Chromium. The former implicit clamp wrapped
+// captured HUG text that native Figma leaves intrinsic. Live row/column probes
+// established that only explicit bounds or FILL supply wrapping authority.
+// Keep ordinary runtime wrapping and authored-bound controls beside HUG tests.
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
@@ -51,7 +51,7 @@ const modules = (c: Contract, values: unknown = tokens) => emitReact(c, { ...ctx
 const inline = (c: Contract) => emitReactInline(c, { ...ctx(c), tokens } as never);
 const rule = (css: string, selector: string) => css.match(new RegExp(`(^|\\n)${selector.replace(/[.[\]=':()]/g, '\\$&')} \\{[^}]*\\}`))?.[0] ?? '';
 const flagged = (extra: Record<string, unknown> = {}, root?: Record<string, unknown>) => contract({ ...LABEL, ...extra, textAutoResize: 'WIDTH_AND_HEIGHT' }, root);
-const VALUE = 'calc-size(fit-content, round(up, size, 1px))';
+const VALUE = 'calc-size(max-content, round(up, size, 1px))';
 const TRIMMED = 'calc-size(max-content, round(up, size - 1px, 1px))';
 const errorsOf = (c: Contract) => { const errors: string[] = []; validateContract(c, new Map([[c.id, c]]), errors, new Map()); return errors.join('\n'); };
 
@@ -61,21 +61,21 @@ test('without the flag every surface emits what it always did — no calc-size, 
   }
 });
 
-test('CSS modules, the web-component sheet and the inline style give the flagged text part its whole-pixel FIT-CONTENT box and the container clamp, and nothing else moves', () => {
+test('all shared surfaces give captured auto-width text its intrinsic whole-pixel box without implicit containment', () => {
   const c = flagged();
-  assert.match(rule(modules(c).css, '.caption'), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n\}/);
-  assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(fit-content, round\(up, size, 1px\)\);\n  max-inline-size: 100%;\n/);
-  assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`) && inline(c).tsx.includes('"maxInlineSize": "100%"'), inline(c).tsx);
-  assert.doesNotMatch(modules(c).css + shadowCss(c) + inline(c).tsx, /max-content/, 'untracked text retains fit-content; tracked runs have a separate bounded inner box');
+  assert.match(rule(modules(c).css, '.caption'), /\n  inline-size: calc-size\(max-content, round\(up, size, 1px\)\);\n  flex-shrink: 0;\n\}/);
+  assert.match(rule(shadowCss(c), "[part='caption']"), /\n  inline-size: calc-size\(max-content, round\(up, size, 1px\)\);\n  flex-shrink: 0;\n/);
+  assert.ok(inline(c).tsx.includes(`"inlineSize": "${VALUE}"`) && inline(c).tsx.includes('"flexShrink": "0"'), inline(c).tsx);
+  assert.doesNotMatch(rule(modules(c).css, '.caption') + shadowCss(c) + inline(c).tsx, /max-inline-size|maxInlineSize|white-space|whiteSpace/, 'no implicit ceiling or blanket nowrap');
   // The inherited native-text rendering default changes paint policy only.
   const withoutRendering = (css: string) => css.replace('  text-rendering: geometricPrecision;\n', '');
   const plain = contract(LABEL);
   assert.equal(withoutRendering(rule(modules(c).css, '.root')), rule(modules(plain).css, '.root'));
   assert.equal(withoutRendering(rule(shadowCss(c), "[part='root']")), rule(shadowCss(plain), "[part='root']"));
-  assert.equal(withoutRendering(modules(c).css).replace(`  inline-size: ${VALUE};\n  max-inline-size: 100%;\n`, ''), modules(plain).css, 'only two sizing declarations and the inherited paint default differ');
+  assert.equal(withoutRendering(modules(c).css).replace(`  inline-size: ${VALUE};\n  flex-shrink: 0;\n`, ''), modules(plain).css, 'only two sizing declarations and the inherited paint default differ');
 });
 
-test('the clamp yields to the author: a part carrying its own max-width keeps it and gets no max-inline-size (the same property, same rule — ours would win)', () => {
+test('authored max-width remains authoritative and is never overwritten by an implicit ceiling', () => {
   const capped = flagged({ declared: { 'max-width': '60px' } });
   const css = rule(modules(capped).css, '.caption');
   assert.match(css, /max-width: 60px;/);
@@ -193,6 +193,9 @@ test('validateContract refuses a flag that would be wrong or inert, by name; the
   assert.match(errorsOf(contract({ layout: { display: 'flex' }, textAutoResize: 'WIDTH_AND_HEIGHT', tokens: { 'background-color': '{paint.ground}' } })), /owns no text/);
   assert.match(errorsOf(ContractSchema.parse({ ...flagged(), anatomy: { root: { ...ROOT, textAutoResize: 'WIDTH_AND_HEIGHT', content: { prop: 'label' } } } })), /is a top-level root/);
   assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, width: '40px' } })), /carries width — a box that is sized/);
+  assert.match(errorsOf(flagged({ literals: { ...LABEL.literals, 'flex-shrink': '1' } })), /carries flex-shrink —/, 'never silently overwrite an authored shrink policy');
+  assert.match(errorsOf(flagged({ tokens: { ...LABEL.tokens, 'flex-shrink': '{track.wide}' } })), /carries flex-shrink —/, 'token values cannot bypass the sizing-authority conflict');
+  assert.match(errorsOf(flagged({ literalsByProp: [{ prop: 'tone', map: { danger: { 'flex-shrink': '1' } } }] })), /carries flex-shrink —/, 'a selected value cannot restore shrinking');
   assert.match(errorsOf(flagged({ layout: { grow: true } })), /carries layout\.grow —/);
   assert.match(errorsOf(flagged({ declared: { 'text-overflow': 'ellipsis' } })), /carries text-overflow —/, 'a truncated box is not sized by its text');
   assert.match(errorsOf(flagged({ literalsByProp: [{ prop: 'tone', map: { danger: { 'letter-spacing': '2px' } } }] })), /letter-spacing \(per variant or state\)/);
@@ -340,24 +343,47 @@ test('MEASURED in Chromium: the flagged box is the run rounded up to the pixel (
   } finally { await browser.close(); }
 });
 
-test('MEASURED in Chromium (review H1): a long runtime string still WRAPS exactly as without the fact and never overflows — in a fixed fractional-width flex column and in a fixed-width grid parent — both React surfaces', async (t) => {
+test('MEASURED: ordinary runtime text and explicitly capped auto-width text retain wrapping in fractional columns and grids — both React surfaces', async (t) => {
   const browser = await chromium.launch();
   try {
     for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
       const measure = await measurer(browser, surface);
       const grid = (root: HTMLElement) => { root.style.display = 'grid'; root.style.width = '120.5px'; root.style.alignItems = ''; root.style.justifyContent = ''; };
-      for (const [where, root, decorate] of [
-        ['flex column 120.5px', COLUMN('120.5px'), () => {}],
-        ['flex column 240px', COLUMN('240px'), () => {}],
-        ['grid 120.5px', ROOT, grid],
+      for (const [where, root, decorate, maxWidth] of [
+        ['flex column 120.5px', COLUMN('120.5px'), () => {}, '120.5px'],
+        ['flex column 240px', COLUMN('240px'), () => {}, '240px'],
+        ['grid 120.5px', ROOT, grid, '104.5px'],
       ] as const) {
         const plain = await measure(contract({ ...LABEL, literals: FONT, declared: FACE }, root), { label: LONG }, decorate);
-        const flag = await measure(flagged({ literals: FONT, declared: FACE }, root), { label: LONG }, decorate);
+        const flag = await measure(flagged({ literals: FONT, declared: { ...FACE, 'max-width': maxWidth } }, root), { label: LONG }, decorate);
         assert.ok(plain.lines > 1, `${where}: the control wraps (${plain.lines} lines)`);
         assert.equal(flag.lines, plain.lines, `${where}: the same wrap as without the fact`);
         assert.equal(flag.height, plain.height, `${where}: the same block size`);
         assert.ok(flag.overflow <= 0.001, `${where}: no overflow past the parent's content edge (${flag.overflow})`);
         assert.ok(flag.root <= plain.root + 0.001, `${where}: the component does not grow (${plain.root} → ${flag.root})`);
+      }
+    });
+  } finally { await browser.close(); }
+});
+
+test('MEASURED: captured auto-width text stays intrinsic under constrained rows, columns and grids across runtime values and tracking — both React surfaces', async t => {
+  const browser = await chromium.launch();
+  try {
+    for (const surface of ['css-module', 'inline'] as const) await t.test(surface, async () => {
+      const measure = await measurer(browser, surface);
+      for (const direction of ['row', 'column', 'grid'] as const) for (const tracking of ['0px', '0.35px', '-0.35px']) {
+        const root = { layout: { display: 'flex', direction: direction === 'column' ? 'column' : 'row', align: 'start' }, literals: { width: '120.5px' } };
+        const decorate = direction === 'grid' ? (root: HTMLElement) => { root.style.display = 'grid'; } : () => {};
+        const c = flagged({ literals: { ...FONT, 'letter-spacing': tracking }, declared: FACE }, root);
+        const short = await measure(c, {}, decorate);
+        const long = await measure(c, { label: LONG }, decorate);
+        const restored = await measure(c, {}, decorate);
+        assert.equal(long.root, 120.5, `${direction}: the fixed parent does not grow`);
+        assert.equal(long.lines, 1, `${direction}: HUG has no implicit wrapping authority`);
+        assert.equal(long.height, 16);
+        assert.equal(long.width, Math.ceil(long.runWidth - parseFloat(tracking)));
+        assert.ok(long.width > long.root, 'captured intrinsic text can overflow its constrained parent, as on the native canvas');
+        assert.deepEqual(restored, short, 'rendering the original runtime value again gives exact geometry');
       }
     });
   } finally { await browser.close(); }

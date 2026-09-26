@@ -102,8 +102,9 @@ export function orderUnsetObservations(set: DumpSet): DumpSet {
 
 /** Existing proposal helpers correlate all drawn rows, including the omitted
  * plane. Lower its observed carriers to the BASE, not a synthetic selector.
- * Independent one-axis carriers are expressible; omitted-value conditions,
- * dependent instance lookups and interacting omitted placeholders are not. */
+ * Independent one-axis carriers and whole component input references are
+ * expressible; omitted-value conditions, dependent instance lookups and
+ * interacting omitted placeholders are not. */
 export function lowerUnsetProposal(
   contract: Record<string, unknown>,
   axes: Array<UnsetVariantAxis & { internalValue: string }>,
@@ -113,9 +114,11 @@ export function lowerUnsetProposal(
     throw new UnsetVariantError(`omission-dependent carrier at ${path} has no proved base/public-value lowering`, 'FIGMA_UNSET_PROJECTION_UNSUPPORTED');
   };
   const axisByProp = new Map(axes.map(a => [a.propName, a]));
+  const componentPropRecords = new WeakSet<object>();
   for (const axis of axes) if (!isSupportedOmittedCodeBinding(axis.codeProp)) fail(`props.${axis.codeProp}: unsupported public code binding`);
   for (const alias of omittedCodeBindingConflicts(contract, axes.map(a => a.codeProp))) fail(`props.${alias}: consumer/generated namespace collision`);
   const lowerPart = (part: Record<string, unknown>, path: string): void => {
+    if (object(part.component) && object(part.component.props)) componentPropRecords.add(part.component.props);
     // Per-axis maps already prove each value is independent of other axes.
     // Their omitted row is therefore exactly the base carrier.
     for (const [mapField, baseField] of [['tokensByProp', 'tokens'], ['literalsByProp', 'literals'], ['layoutByProp', 'layout'], ['textByProp', 'text'], ['statesByProp', 'states']]) {
@@ -202,7 +205,10 @@ export function lowerUnsetProposal(
   };
   if (object(contract.anatomy)) for (const [name, part] of Object.entries(contract.anatomy)) if (object(part)) lowerPart(part, `anatomy.${name}`);
   // No synthetic selector may escape into public API or token substitutions.
-  const fence = (value: unknown, path: string): void => {
+  const fence = (value: unknown, path: string, directComponentProp = false): void => {
+    // A whole component input reference forwards its typed value (including
+    // undefined). It is not a token substitution of the synthetic unset label.
+    if (directComponentProp && typeof value === 'string' && axes.some(a => value === `{${a.propName}}`)) return;
     if (typeof value === 'string' && axes.some(a => value.includes(`{${a.propName}}`))) fail(path);
     if (Array.isArray(value)) { value.forEach((v, i) => fence(v, `${path}[${i}]`)); return; }
     if (!object(value)) return;
@@ -211,7 +217,7 @@ export function lowerUnsetProposal(
     if (axis && ((object(value.map) && Object.keys(value.map).some(key => !publicValues!.includes(key))) ||
         (typeof value.equals === 'string' && !publicValues!.includes(value.equals)) ||
         (Array.isArray(value.equals) && value.equals.some(v => !publicValues!.includes(v))))) fail(path);
-    for (const [k, v] of Object.entries(value)) fence(v, `${path}.${k}`);
+    for (const [k, v] of Object.entries(value)) fence(v, `${path}.${k}`, componentPropRecords.has(value));
   };
   fence(contract.anatomy, 'anatomy');
   fence(contract.semantics, 'semantics');

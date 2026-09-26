@@ -48,9 +48,9 @@
       "path": "extract/figma/conformance/MANIFEST.json",
       "count": 157,
       "expectations": {
-        "CARRIED": 110,
+        "CARRIED": 111,
         "LEDGERED": 38,
-        "REFUSED": 9
+        "REFUSED": 8
       },
       "pinnedBecause": "RE-PINNED 2026-08-25, burn-down: 154 -> 157. NOT this branch's movement — extract/figma/conformance/MANIFEST.json already carried 157 cases (CARRIED 110) at this branch's base e884d672 and is byte-identical at HEAD; the pin had simply not been re-recorded when those three cases landed."
     },

@@ -1,0 +1,193 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "brand",
+          "success",
+          "warning",
+          "danger",
+          "neutral",
+          "accent"
+        ]
+      },
+      "default": "brand",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "type",
+          "values": {
+            "brand": "brand",
+            "success": "success",
+            "warning": "warning",
+            "danger": "danger",
+            "neutral": "neutral",
+            "accent": "accent"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "style",
+      "type": {
+        "enum": [
+          "fill",
+          "tonal",
+          "outline"
+        ]
+      },
+      "default": "fill",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "style",
+          "values": {
+            "fill": "fill",
+            "tonal": "tonal",
+            "outline": "outline"
+          }
+        },
+        "code": {
+          "prop": "style"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "rounded",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "rounded",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "rounded"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Icon": {
+          "component": {
+            "id": "ds.size-small",
+            "props": {
+              "iconSwap": "187:877",
+              "size": {
+                "prop": "size",
+                "map": {
+                  "large": "small",
+                  "small": "xsmall"
+                }
+              }
+            }
+          }
+        },
+        "Label": {
+          "declared": {
+            "text-align": "left"
+          },
+          "text": "Label",
+          "tokens": {
+            "color": "{imported.badge.label.color.{type}.{style}}",
+            "font-size": "{imported.badge.label.font-size.{size}}",
+            "font-weight": "{imported.badge.label.font-weight}",
+            "line-height": "{imported.badge.label.line-height}"
+          }
+        },
+        "icon2": {
+          "component": {
+            "id": "ds.size-small",
+            "props": {
+              "iconSwap": "187:877",
+              "size": {
+                "prop": "size",
+                "map": {
+                  "large": "small",
+                  "small": "xsmall"
+                }
+              }
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content"
+      },
+      "tokensByProp": {
+        "prop": "size",
+        "map": {
+          "small": {
+            "padding-inline": "{spacing.100}",
+            "height": "{component-size.xsmall}"
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{spacing.150}",
+        "padding-block": "{spacing.100}",
+        "gap": "{spacing.100}",
+        "height": "{component-size.small}",
+        "background-color": "{imported.badge.root.background-color.{type}.{style}}",
+        "border-color": "{imported.badge.root.border-color.{type}.{style}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Badge",
+        "export": "Badge"
+      }
+    }
+  }
+}

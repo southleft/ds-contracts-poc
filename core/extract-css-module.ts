@@ -417,6 +417,7 @@ function invertDecls(
 
   for (const { prop, value } of decls) {
     if (GENERATOR_ARTIFACTS.has(`${prop}:${value}`)) continue;
+    if (prop === 'min-height' && value === '0' && decls.some(d => d.prop === 'flex' && ['1 1 0px', '1 1 0'].includes(d.value))) continue;
     if (prop === 'width' && value === '100%' && hasMaxWidthVar) continue; // fluid-root artifact of the max-width binding
     if (prop === 'display' && (value === 'flex' || value === 'inline-flex')) {
       layout.display = value;
@@ -559,8 +560,9 @@ function invertDecls(
       layout.justify = JUSTIFY_INV[value];
       continue;
     }
-    if (prop === 'flex' && value === '1 1 auto') {
+    if (prop === 'flex' && ['1 1 auto', '1 1 0px', '1 1 0'].includes(value)) {
       layout.grow = true;
+      if (value !== '1 1 auto') layout.growBasis = 'zero';
       continue;
     }
     if (prop === 'position' && value === 'absolute') {

@@ -497,6 +497,60 @@ test('source export and compiler correspondence select an independently observed
   } finally { rmSync(f.dir, { recursive: true, force: true }); }
 });
 
+test('proved same-host implementations do not duplicate the caller child denominator', async () => {
+  const f=await fixture();
+  try{
+    writeFileSync(path.join(f.dir,'wrapper.tsx'),`import {Box} from './components';
+export function Wrapper(props:{children?:string}){return <Box {...props}/>}`);
+    const program=readReactSourceProgram(f.dir,['wrapper.tsx','components.tsx'],{includeJsxDependencies:true});
+    assert.deepEqual(program.problems,[]);
+    const c=program.components.find(c=>c.exportName==='Wrapper')!;
+    const source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
+    f.ownership.components[0].parent='wrapper';
+    f.ownership.components.unshift({id:'wrapper',source,props:{children:{kind:'object'}},roots:['']});
+    const before=structuredClone(f.ownership);
+    const result=matchReactComposition(program,f.ownership,f.tree,f.content,[f.main]);
+    assert.equal(result.review.status,'ready',JSON.stringify(result.review));
+    assert.equal(result.review.denominator,1);assert.equal(result.review.matched,1);
+    assert.deepEqual(result.review.rows.map(r=>r.instanceId),['child']);
+    assert.deepEqual(f.ownership,before);
+    const invalid=structuredClone(f.content);invalid.problems.push('test-invalid-content');
+    const refused=matchReactComposition(program,f.ownership,f.tree,invalid,[f.main]);
+    assert.equal(refused.review.status,'incomplete');
+    assert.equal(refused.review.rows.length,refused.review.denominator);
+    const unproved=structuredClone(program);unproved.components.find(c=>c.exportName==='Wrapper')!.implementation='unresolved';
+    assert.equal(matchReactComposition(unproved,f.ownership,f.tree,f.content,[f.main]).review.status,'incomplete');
+  }finally{rmSync(f.dir,{recursive:true,force:true});}
+});
+
+test('caller projection keeps the public delegated child and never emits its implementation as a second child', async () => {
+  const f=await fixture();
+  try{
+    writeFileSync(path.join(f.dir,'action.tsx'),`import {Child} from './components';
+export function Action(props:{children?:string;id?:string}){return <Child {...props}/>}`);
+    const program=readReactSourceProgram(f.dir,['action.tsx','components.tsx'],{includeJsxDependencies:true});
+    assert.deepEqual(program.problems,[]);
+    const c=program.components.find(c=>c.exportName==='Action')!;
+    const source={module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span};
+    f.ownership.components[1].parent='action';
+    f.ownership.components.splice(1,0,{id:'action',parent:'box',source,props:{children:'Save',id:'save'},roots:['0']});
+    const missing=matchReactComposition(program,f.ownership,f.tree,f.content,[f.main]);
+    assert.equal(missing.review.denominator,1);assert.equal(missing.review.matched,0);
+    assert.deepEqual(missing.review.rows[0].problems,['react-composition-main-not-verified'],'a verified internal implementation cannot impersonate its public wrapper');
+    const matched=matchReactComposition(program,f.ownership,f.tree,f.content,[{...f.main,source}]);
+    assert.equal(matched.review.status,'ready');assert.equal(matched.review.matched,1);
+    f.tree.style.width='240px';f.fonts.treeRevision=revisionOf(f.tree);
+    const graph=projectReactCallerCompositionGraph({program,ownership:f.ownership,tree:f.tree,fonts:f.fonts,
+      svg:{version:1,treeRevision:revisionOf(f.tree),status:'observed',rows:[],problems:[]},
+      origin:{version:1,roots:[{path:'0',tag:'button',channels:[]}]},
+      labels:{version:1,treeRevision:revisionOf(f.tree),status:'observed',rows:[],problems:[]},behaviors:[]});
+    assert.equal(graph.draft.status,'generated-draft',graph.draft.problems.join(','));
+    assert.equal(graph.draft.children.length,1);
+    assert.equal(graph.resources.length,2);
+    assert.equal(compileReactCallerNative(graph).report.components.length,2);
+  }finally{rmSync(f.dir,{recursive:true,force:true});}
+});
+
 test('unresolved children remain in coverage and cannot become a flattened successful comparison', async () => {
   const f = await fixture();
   try {

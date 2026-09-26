@@ -2876,7 +2876,7 @@ function applyOverlay(parent, childNode, childSpec) {
 // lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
+  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow || childSpec.widthFill) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
@@ -3387,7 +3387,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+const RUNTIME_EMIT_REV = 'rt21-reseat-counter-axis-fill';
 function hasJointPropertyReferences(spec) {
   return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
     (spec.children || []).some(hasJointPropertyReferences);
