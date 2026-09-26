@@ -24,6 +24,7 @@ import { builtinReactCohort } from './react-cohort.js';
 import {
   buildReactOwnershipReference,
   outermostRootOwners,
+  workspaceComponents,
   reactOwnershipHook,
   reactOwnershipRead,
   reactOwnershipMatchesTree,
@@ -973,4 +974,14 @@ test('the case subject is the outermost root owner; unrelated owners stay ambigu
   assert.deepEqual(outermostRootOwners([{ id: 'a', parent: null, roots: [''] }, { id: 'b', parent: null, roots: [''] }]).map(c => c.id), ['a', 'b'],
     'two unrelated root owners are both returned so the caller refuses');
   assert.deepEqual(outermostRootOwners([{ id: 'c', parent: null, roots: ['0'] }]), [], 'no root owner, nothing selected');
+});
+
+test('dependency components belong to their workspace owner, never separate identities', () => {
+  const components = [
+    { id: 'instance-0', source: { module: 'src/components/ui/switch.tsx' } },
+    { id: 'instance-1', source: { module: 'node_modules/@radix-ui/react-switch/dist/index.mjs' } },
+    { id: 'instance-2', source: { module: 'node_modules/@radix-ui/react-switch/dist/index.mjs' } },
+    { id: 'instance-3', source: { module: 'src/components/ui/label.tsx' } },
+  ];
+  assert.deepEqual(workspaceComponents(components).map(c => c.id), ['instance-0', 'instance-3']);
 });

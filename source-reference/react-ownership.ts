@@ -138,6 +138,13 @@ export interface ReactOwnership {
 /** Different observers retain different factory journals. Pair their complete
  * renderer/source/props/host structure separately; retain and hash both full
  * observations so this comparison never authenticates the omitted journals. */
+/** Components authored in the observed workspace. Ownership also traces
+ * dependency components (anything under node_modules, e.g. Radix Switch.Root
+ * and Thumb); those render hosts that belong to their nearest workspace owner
+ * and are never separate caller identities or nested-part boundaries. */
+export function workspaceComponents<T extends { source: { module: string } }>(components: T[]): T[] {
+  return components.filter(c => !c.source.module.startsWith('node_modules/'));
+}
 /** The case subject among the components that own the rendered root. Ownership
  * traces into dependencies, so a library primitive (e.g. Radix Switch.Root) can
  * share the root with the workspace component that renders it; the subject is

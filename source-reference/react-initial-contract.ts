@@ -6,7 +6,7 @@ import { ContractSchema } from '../scripts/contract-schema.js';
 import { enumerate, comboKey, normalizeValue, flatten, type CapturedNode } from '../extract/computed/lib.js';
 import type { PropSpace, SweepResult } from '../extract/computed/capture.js';
 import type { ReactSourceProgram } from './react-source-program.js';
-import { reactOwnershipMatchesTree, type ReactOwnership } from './react-ownership.js';
+import { reactOwnershipMatchesTree, workspaceComponents, type ReactOwnership } from './react-ownership.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import type { SvgViewportEvidence } from './svg-viewports.js';
@@ -93,7 +93,10 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       const instance = snap.ownership.components.find(c => c.id === observation.instanceId);
       if (!instance || revisionOf(instance.source) !== revisionOf(expected.source) || instance.roots.length !== 1 || instance.roots[0] !== originalPath || instance.parent !== originalInstance.parent)
         throw Error('react-initial-contract-source-root-mismatch');
-      if (!nested && snap.ownership.components.length !== 1) throw Error('react-initial-contract-nested-identity-unqualified');
+      // A leaf's only workspace identity is its subject (dependency components
+      // render the subject's own hosts; see workspaceComponents).
+      if (!nested && workspaceComponents(snap.ownership.components).length !== 1)
+        throw Error('react-initial-contract-nested-identity-unqualified');
       if (nested) {
         const linked = linkReactSourceAnatomy(program, snap.ownership, snap.tree);
         const child = linked.instances.find(c => c.instanceId === observation.instanceId);

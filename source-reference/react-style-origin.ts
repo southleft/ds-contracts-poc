@@ -2,7 +2,7 @@
  * cascade ties rather than choosing a variable by equal rendered values. */
 import type {CDPSession, Page} from 'playwright-core';
 import { authoredLengthIsUsed } from './layout-unit.js';
-import type {ReactOwnership} from './react-ownership.js';
+import {workspaceComponents, type ReactOwnership} from './react-ownership.js';
 
 const matchedStyles = (cdp: CDPSession, nodeId: number) => cdp.send('CSS.getMatchedStylesForNode', {nodeId});
 const layerTree = (cdp: CDPSession, nodeId: number) => cdp.send('CSS.getLayersForNode', {nodeId});
@@ -247,7 +247,9 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
  * element's own used declaration. */
 export interface ReactDescendantSizes { version: 1; nodes: Array<{path: string; tag: string; sizes: ReactSizeOrigin[]}> }
 export async function readReactDescendantSizes(page: Page, selector: string, ownership: ReactOwnership, stage = '#root'): Promise<ReactDescendantSizes> {
-  const roots=new Set(ownership.components.flatMap(c=>c.roots)),svg=ownership.nodes.filter(n=>n.tag==='svg').map(n=>n.path);
+  // Nested workspace components size their own roots; a dependency component's
+  // root (e.g. Radix Thumb) is a descendant of the component that renders it.
+  const roots=new Set(workspaceComponents(ownership.components).flatMap(c=>c.roots)),svg=ownership.nodes.filter(n=>n.tag==='svg').map(n=>n.path);
   const paths=ownership.nodes.map(n=>n.path).filter(p=>!roots.has(p)&&!svg.some(s=>p===s||p.startsWith(s===''?'':s+'.'))).sort();
   return {version:1,nodes:(await readOrigins(page,selector,ownership,stage,paths)).map(({path,tag,sizes})=>({path,tag,sizes:sizes??[]}))};
 }
