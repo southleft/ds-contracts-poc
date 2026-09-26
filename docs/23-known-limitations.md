@@ -11707,3 +11707,44 @@ overlay recorded by the same recorder on that platform (in CI, never
 hand-stamped) replaces those files on that platform only; an overlay may not add
 files, and every byte is still compared exactly. Reverse by deleting the overlay
 directory and `expectedInventory` in `recipe/canvas-to-code-held-out-current.ts`.
+
+## D.161 A content slot's counter-axis FILL is re-seated after the exact-zero reset
+
+**AGENT decision, 2026-09-26.** A root content slot is built empty, so the
+birth-box repair (`remeasureBirthBox`, rt20) resets its HUG axes to exact zero. The root then set
+the slot's counter axis to FILL. On the canvas that FILL kept the stored zero:
+the app-created AlertTitle and AlertDescription mains carried a 0 px wide slot
+inside a 100 px root, and every instance inherited it, so the Alert comparison
+drew its caller content from the slot's centre. A live Scratch probe reproduced
+this with the runtime's own order (slot 0×0 at FILL in a 100×0 component).
+Applying the same FIXED-resize-FILL round-trip the birth-box repair uses gave
+100 px, and an instance widened to 360 px carried a 360 px slot.
+`sizeRootContent` now re-seats a counter-axis FILL at the parent's inner extent,
+and `RUNTIME_EMIT_REV` is `rt21-reseat-counter-axis-fill`, so every committed
+sync script was re-emitted (only that line changed). The headless mock models
+the measured case only (SLOT, horizontal axis, exact zero), and
+`core/figma-root-slot.test.ts` fails without the re-seat (0 vs 284). Reverse by
+removing the re-seat, the mock's `_zeroFillW` and the test, and restoring the rt20
+revision. Measured through the app afterwards (fresh root, both child mains
+and the content comparison, in Evaluations): both composed Alert cases match
+their React source within the unchanged 5% limit at exactly 360 × 68 px —
+destructive 3.211% white / 3.248% black, default 3.068% / 3.105% — and the
+remaining difference is glyph edges only.
+
+## D.162 A parent-set BOOLEAN state selects the child's drawn State preview
+
+**AGENT decision, 2026-09-26.** A designer `state=disabled` axis becomes a
+BOOLEAN `Disabled` property on the child, and a BOOLEAN paints nothing in
+Figma. State previews multiply only the child's primary axis and pin every
+other axis to its default. So the natively created CBDS Checkbox forwarded
+`Disabled=true` into CheckboxIcon but never selected a disabled cell, and all
+four disabled parent variants drew rest ink (op `46e5f671`), while React was
+correct. `mapDepProps` now also sets `State=<state>` when exactly one BOOLEAN
+state is true and every wired non-primary axis sits on its preview pin.
+Otherwise the state is ledgered by name (`draws its State previews only at …`)
+instead of silently drawing rest ink. No committed sync script changed. Covered
+by `core/direct-instance-drawing.test.ts` ("a parent-set BOOLEAN state selects
+the child State preview…"). This makes the pinned cells correct and names the
+others; drawing previews across every axis combination (21 → 30 CheckboxIcon
+variants for disabled alone) remains the complete fix and needs its own receipt
+round. Reverse by deleting the statePreviews block in `mapDepProps` and its test.
