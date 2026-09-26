@@ -1,5 +1,7 @@
 import ts from "typescript";
 import { readReactChildren, type ReactChildrenFact } from "./react-children.js";
+import { reactHelperCandidates, type ReactHelperCandidate } from "./react-helper-effects.js";
+import { isReactContextExport } from "./react-context-export.js";
 import { createHash } from "node:crypto";
 import { readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
@@ -49,12 +51,17 @@ export interface ReactRootFact {
   whenTrue?: ReactRootFact;
   whenFalse?: ReactRootFact;
   reason?: string;
+  /** A checker-resolved executable export, never a declaration-file guess. */
+  definition?: { module: string; exportName: string; sourceSha256: string; span: { start: number; end: number } };
+  dependencyProblem?: string;
 }
 export interface ReactSourceComponent {
   name: string;
   exportName: string;
   module: string;
   sourceSha256: string;
+  /** Bounded binding/use proof for the observed implementation, not behavior. */
+  implementation?: 'source-checked' | 'unresolved';
   /** Recognized React export wrapper; the span still identifies the complete declaration. */
   wrappers?: Array<"forwardRef">;
   span: { start: number; end: number };
@@ -64,6 +71,8 @@ export interface ReactSourceComponent {
   defaults: Record<string, string | number | boolean | null>;
   forwardedProps: string[];
   children: ReactChildrenFact;
+  /** Possible contextual analysis sites. Never unconditional forwarding proof. */
+  helperCandidates?: ReactHelperCandidate[];
   componentReferences: {
     span: { start: number; end: number };
     target: ReactRootFact;
@@ -75,10 +84,18 @@ export interface ReactSourceProgram {
   status: "observed" | "refused";
   acceptedContract: null;
   typescriptVersion: string;
-  readerOptions: { ignoreDeprecations?: string };
+  readerOptions: { ignoreDeprecations?: string; jsxDependencyEntries?: string[] };
   compatibilityNotes: string[];
   files: Record<string, string>;
   components: ReactSourceComponent[];
+  /** Source-proven contexts remain distinct from component functions. Their
+   * providers, consumers and behavior are not conversion-qualified here. */
+  contextExports?: Array<{
+    module: string;
+    exportName: string;
+    sourceSha256: string;
+    span: { start: number; end: number };
+  }>;
   problems: string[];
 }
 
@@ -87,6 +104,7 @@ export interface ReactSourceProgram {
 export function readReactSourceProgram(
   root: string,
   modules: string[],
+  options: { includeJsxDependencies?: boolean } = {},
 ): ReactSourceProgram {
   root = realpathSync(root);
   const result: ReactSourceProgram = {
@@ -94,7 +112,7 @@ export function readReactSourceProgram(
     status: "refused",
     acceptedContract: null,
     typescriptVersion: ts.version,
-    readerOptions: {},
+    readerOptions: options.includeJsxDependencies ? { jsxDependencyEntries: [...modules] } : {},
     compatibilityNotes: [],
     files: {},
     components: [],
@@ -213,7 +231,75 @@ export function readReactSourceProgram(
       if (node.kind === ts.SyntaxKind.NullKeyword) return null;
       return undefined;
     };
-    for (const file of entries) {
+    // Only JSX-referenced exports enter the dependency queue. Reading every
+    // value in an imported module would confuse helpers with components and
+    // pull unrelated exports into the runtime observation.
+    const pending = [...new Set(entries)];
+    const entryFiles = new Set(entries);
+    const requested = new Map<string, Set<string>>(pending.map(file => [file, new Set()]));
+    const readExports = new Map<string, Set<string>>();
+    const unalias = (symbol: ts.Symbol) => symbol.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(symbol) : symbol;
+    const valueExport = (symbol: ts.Symbol) => !!(unalias(symbol).flags & ts.SymbolFlags.Value) &&
+      !symbol.declarations?.every(d => ts.isExportSpecifier(d) &&
+        (d.isTypeOnly || (ts.isExportDeclaration(d.parent.parent) && d.parent.parent.isTypeOnly)));
+    const stableDependencies = new Map<ts.Symbol, boolean>();
+    const dependencyImplementationStable = (symbol: ts.Symbol, declaration: ts.Declaration): boolean => {
+      const saved = stableDependencies.get(symbol);
+      if (saved !== undefined) return saved;
+      let stable = ts.isFunctionDeclaration(declaration) || (ts.isVariableDeclaration(declaration) &&
+        ts.isVariableDeclarationList(declaration.parent) && !!(declaration.parent.flags & ts.NodeFlags.Const));
+      const namespaceContains = (candidate: ts.Symbol | undefined, seen = new Set<ts.Symbol>()): boolean => {
+        if (!candidate) return false;
+        candidate = unalias(candidate);
+        if (seen.has(candidate) || !(candidate.flags & (ts.SymbolFlags.ValueModule | ts.SymbolFlags.NamespaceModule))) return false;
+        seen.add(candidate);
+        return checker.getExportsOfModule(candidate).some(e => valueExport(e) &&
+          (unalias(e) === symbol || namespaceContains(e, seen)));
+      };
+      // An export object's current value is not proof of its original body.
+      // Inspect its uses across the installed source graph, including callers
+      // importing it under another name. JSX and import/export/type references
+      // preserve identity; passing/storing/mutating the value does not.
+      for (const source of program.getSourceFiles()) {
+        if (!stable || source.isDeclarationFile) continue;
+        let referenced = false, hasEval = false;
+        const inspect = (node: ts.Node) => {
+          if (ts.isTypeNode(node)) return;
+          if (ts.isIdentifier(node) && node.text === 'eval') hasEval = true;
+          if (ts.isIdentifier(node) || ts.isPropertyAccessExpression(node)) {
+            const candidate = checker.getSymbolAtLocation(node);
+            if (candidate && unalias(candidate) === symbol) {
+              referenced = true;
+              let use: ts.Node = node;
+              if (ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) use = node.parent;
+              const parent = use.parent;
+              const tag = (ts.isJsxOpeningElement(parent) || ts.isJsxClosingElement(parent) || ts.isJsxSelfClosingElement(parent)) && parent.tagName === use;
+              const label = ts.isPropertyAccessExpression(parent) && parent.expression === use && parent.name.text === 'displayName' &&
+                ts.isBinaryExpression(parent.parent) && parent.parent.left === parent &&
+                parent.parent.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+                (ts.isStringLiteral(parent.parent.right) || ts.isNoSubstitutionTemplateLiteral(parent.parent.right));
+              if (!(node === (declaration as ts.NamedDeclaration).name || tag || label ||
+                ts.isImportSpecifier(parent) || ts.isImportClause(parent) || ts.isExportSpecifier(parent) ||
+                (ts.isExportAssignment(parent) && !parent.isExportEquals && parent.expression === use))) stable = false;
+            } else if (namespaceContains(candidate) || namespaceContains(checker.getTypeAtLocation(node).getSymbol())) {
+              // An escaping namespace can expose this export to untyped code
+              // without another symbol-level reference to the component.
+              referenced = true;
+              const parent = node.parent;
+              if (!(ts.isNamespaceImport(parent) || ts.isImportSpecifier(parent) || ts.isExportSpecifier(parent) ||
+                ts.isNamespaceExport(parent) || (ts.isPropertyAccessExpression(parent) && parent.expression === node))) stable = false;
+            }
+          }
+          ts.forEachChild(node, inspect);
+        };
+        inspect(source);
+        if (hasEval && referenced) stable = false;
+      }
+      stableDependencies.set(symbol, stable);
+      return stable;
+    };
+    for (let fileIndex = 0; fileIndex < pending.length; fileIndex++) {
+      const file = pending[fileIndex];
       const sf = program.getSourceFile(file);
       if (!sf) throw Error("source-program-module-unreadable");
       const moduleSymbol = checker.getSymbolAtLocation(sf);
@@ -365,7 +451,11 @@ export function readReactSourceProgram(
       };
       for (const exported of checker.getExportsOfModule(moduleSymbol)) {
         const name = exported.getName();
-        if (!/^[A-Z]/.test(name) && name !== "default") continue;
+        const wanted = requested.get(file);
+        if (!wanted?.has(name) && (!entryFiles.has(file) || (!/^[A-Z]/.test(name) && name !== "default"))) continue;
+        if (readExports.get(file)?.has(name)) continue;
+        if (!readExports.has(file)) readExports.set(file, new Set());
+        readExports.get(file)!.add(name);
         // Type-only re-exports may alias a value symbol, but emit no runtime
         // binding. Interfaces/type aliases likewise cannot identify a rendered
         // component. Keep unsupported VALUE exports on the named refusal path.
@@ -388,6 +478,11 @@ export function readReactSourceProgram(
         const declaration = symbol.valueDeclaration;
         if (!declaration || declaration.getSourceFile() !== sf) {
           fail(`${name}:component-definition-outside-module`);
+          continue;
+        }
+        if (isReactContextExport(declaration, checker)) {
+          (result.contextExports ??= []).push({module:path.relative(root,file),exportName:name,
+            sourceSha256:sha(sf.text),span:{start:declaration.getStart(sf),end:declaration.end}});
           continue;
         }
         // A default export keeps its actual module/export identity. Initially
@@ -469,8 +564,25 @@ export function readReactSourceProgram(
                 ts.isFunctionExpression(declaration.initializer))
             ? declaration.initializer
             : wrappedBody;
-        if (!fn?.body) {
-          fail(`${name}:component-function-unresolved`);
+        const stableImplementation = options.includeJsxDependencies && !!fn?.body
+          ? dependencyImplementationStable(symbol, declaration) : undefined;
+        const unsafeDependency = !entryFiles.has(file) && !!fn?.body && stableImplementation === false;
+        if (!fn?.body || unsafeDependency) {
+          if (entryFiles.has(file)) fail(`${name}:component-function-unresolved`);
+          else {
+            const reason = unsafeDependency ? 'dependency-implementation-mutation-or-escape' : 'component-function-unresolved';
+            result.components.push({
+            name: symbol.getName(), exportName: name, module: path.relative(root, file),
+            implementation: 'unresolved',
+            sourceSha256: sha(sf.text), span: { start: declaration.getStart(sf), end: declaration.end },
+            props: [], root: { kind: 'unresolved', reason },
+            children: { kind: 'unresolved', reason },
+            markers: [], defaults: {}, forwardedProps: [], componentReferences: [],
+            // The export identity can be observed, but a value alias or
+            // unsupported wrapper supplies no implementation/content proof.
+            problems: [reason],
+          });
+          }
           continue;
         }
         const signature = checker
@@ -481,6 +593,7 @@ export function readReactSourceProgram(
           exportName: name,
           module: path.relative(root, file),
           sourceSha256: sha(sf.text),
+          ...(stableImplementation === undefined ? {} : { implementation: stableImplementation ? 'source-checked' as const : 'unresolved' as const }),
           ...(wrappedBody ? { wrappers: ["forwardRef" as const] } : {}),
           span: { start: declaration.getStart(sf), end: declaration.end },
           props: [],
@@ -493,7 +606,7 @@ export function readReactSourceProgram(
             reason: "single-jsx-root-unresolved",
           },
           componentReferences: [],
-          problems: [],
+          problems: stableImplementation === false ? ['component-implementation-mutation-or-escape'] : [],
         };
         result.components.push(component);
         if (signature.length !== 1 || signature[0].parameters.length !== 1) {
@@ -609,6 +722,34 @@ export function readReactSourceProgram(
           ts.isSatisfiesExpression(node)
             ? unwrap(node.expression)
             : node;
+        const dependency = (node: ts.Expression, target: ReactRootFact): ReactRootFact => {
+          if (!options.includeJsxDependencies) return target;
+          const unavailable = (reason: string): ReactRootFact => {
+            const problem = `jsx-dependency-${reason}:${node.getText(sf)}`;
+            if (!component.problems.includes(problem)) component.problems.push(problem);
+            return { ...target, dependencyProblem: reason };
+          };
+          const binding = checker.getSymbolAtLocation(ts.isPropertyAccessExpression(node) ? node.name : node);
+          const resolved = binding && unalias(binding), declaration = resolved?.valueDeclaration;
+          if (!resolved || !declaration || declaration.getSourceFile().isDeclarationFile)
+            return unavailable('implementation-unavailable');
+          const source = declaration.getSourceFile(), absolute = realpathSync(source.fileName);
+          if (!absolute.startsWith(root + path.sep)) return unavailable('outside-source-root');
+          const sourceModule = checker.getSymbolAtLocation(source);
+          const exports = sourceModule ? checker.getExportsOfModule(sourceModule).filter(e => valueExport(e) && unalias(e) === resolved) : [];
+          // One exported name, or the declaration's own exported name, gives a
+          // deterministic runtime identity even through an import alias/barrel.
+          const selected = exports.find(e => e.getName() === resolved.getName()) ?? (exports.length === 1 ? exports[0] : undefined);
+          if (!selected) return unavailable(exports.length ? 'export-ambiguous' : 'runtime-export-unavailable');
+          const exportName = selected.getName();
+          if (!requested.has(absolute)) { requested.set(absolute, new Set([exportName])); pending.push(absolute); }
+          else {
+            const names = requested.get(absolute);
+            if (names && !names.has(exportName)) { names.add(exportName); pending.push(absolute); }
+          }
+          return { ...target, definition: { module: path.relative(root, absolute), exportName,
+            sourceSha256: sha(source.text), span: { start: declaration.getStart(source), end: declaration.end } } };
+        };
         const resolve = (
           node: ts.Expression,
           seen = new Set<string>(),
@@ -634,7 +775,7 @@ export function readReactSourceProgram(
           const parts = node.getText(sf).split(".");
           const imported = imports.get(parts[0]);
           if (imported)
-            return {
+            return dependency(node, {
               kind: "component",
               name: node.getText(sf),
               module: imported.module,
@@ -642,19 +783,21 @@ export function readReactSourceProgram(
                 ...(imported.export === "*" ? [] : [imported.export]),
                 ...parts.slice(1),
               ].join("."),
-            };
+            });
           const localSymbol = checker.getSymbolAtLocation(node);
           if (
             localSymbol?.valueDeclaration &&
             ts.isFunctionDeclaration(localSymbol.valueDeclaration) &&
             localSymbol.valueDeclaration.getSourceFile() === sf
           )
-            return {
+            return dependency(node, {
               kind: "component",
               name: node.getText(sf),
               module: path.relative(root, file),
               export: localSymbol.getName(),
-            };
+            });
+          if (options.includeJsxDependencies && localSymbol?.valueDeclaration)
+            return dependency(node, { kind: 'component', name: node.getText(sf) });
           return {
             kind: "unresolved",
             name: node.getText(sf),
@@ -666,6 +809,8 @@ export function readReactSourceProgram(
           rootNode &&
           (ts.isJsxElement(rootNode) || ts.isJsxSelfClosingElement(rootNode))
         ) {
+          const helperCandidates = reactHelperCandidates(fn, checker);
+          if (helperCandidates.length) component.helperCandidates = helperCandidates;
           component.children = component.problems.includes(
             "component-return-control-flow-unresolved",
           )

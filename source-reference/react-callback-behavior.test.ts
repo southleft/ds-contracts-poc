@@ -229,17 +229,18 @@ for (const nested of [false, true]) test(`original ${nested ? 'nested' : 'root'}
 /** The observed role decides the class, never the export name: this fixture's
  * export is called Checkbox and renders a switch. */
 async function observeRole(role: string, partial: boolean, roleExpression = JSON.stringify(role),
-  options: { missing?: 'live' | 'initial' | 'focus'; failRestoration?: boolean } = {}) {
+  options: { missing?: 'live' | 'initial' | 'focus'; inert?: 'attribute' | 'css' | 'ancestor'; inertKeyboardLeak?: boolean; failRestoration?: boolean } = {}) {
   mkdirSync("private", { recursive: true });
   const dir = mkdtempSync(path.join(process.cwd(), "private/callback-role-fixture-"));
   const browser = await chromium.launch();
   try {
     const source = `import React from 'react';
   type State=${partial ? "false|true|'partial'" : "false|true"};
-  export function Checkbox({value,initialValue=false,emit${options.missing ? ',absent=false' : ''}}:{value?:State;initialValue?:State;emit?:(value:State)=>void${options.missing ? ';absent?:State' : ''}}){
+  export function Checkbox({value,initialValue=false,emit${options.missing || options.inert && options.inert !== 'ancestor' ? ',absent=false' : ''}}:{value?:State;initialValue?:State;emit?:(value:State)=>void${options.missing || options.inert && options.inert !== 'ancestor' ? ';absent?:State' : ''}}){
    const [local,setLocal]=React.useState<State>(initialValue);const current=value===undefined?local:value;
+   ${options.inertKeyboardLeak ? `React.useEffect(()=>{const key=(event:KeyboardEvent)=>{if(event.code==='Space'&&absent===true)emit?.(true);};document.addEventListener('keydown',key);return()=>document.removeEventListener('keydown',key);},[absent,emit]);` : ''}
    ${options.missing && options.missing !== 'focus' ? `const [initialAbsent]=React.useState(absent);if(${options.missing === 'initial' ? 'initialAbsent' : 'absent'}){(window as any).__missingTrial=true;return null;}` : ''}
-   return <button id="control" type="button" ${options.missing === 'focus' ? 'inert={absent===true}' : ''} role={${roleExpression}} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
+   return <button id="control" type="button" ${options.missing === 'focus' ? 'style={{display:absent===true?"none":"inline-block"}}' : ''} ${options.inert === 'attribute' ? 'inert={absent===true}' : options.inert === 'css' ? 'style={{interactivity:absent===true?"inert":"auto"} as React.CSSProperties}' : ''} role={${roleExpression}} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
     const next=current===true?false:true;if(value===undefined)setLocal(next);emit?.(next);
    }}>Choose</button>;
   }`;
@@ -250,7 +251,7 @@ async function observeRole(role: string, partial: boolean, roleExpression = JSON
     const c = program.components[0];
     const identity = { module: c.module, exportName: c.exportName, sourceSha256: c.sourceSha256, span: c.span };
     const bundle = await build({
-      stdin: { contents: source + `;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Checkbox}];flushSync(()=>createRoot(document.getElementById('mount')).render(<main><label htmlFor="control">Preference</label><Checkbox initialValue={false} emit={()=>{}}/></main>));`,
+      stdin: { contents: source + `;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Checkbox}];flushSync(()=>createRoot(document.getElementById('mount')).render(<main${options.inert === 'ancestor' ? ' inert' : ''}><label htmlFor="control">Preference</label><Checkbox initialValue={false} emit={()=>{}}/></main>));`,
         resolveDir: dir, loader: "tsx" },
       bundle: true, write: false, format: "iife",
     });
@@ -309,6 +310,35 @@ test(`an unavailable control during the ${missing} trial remains refused while r
   assert.deepEqual(observed.relationships.map(row => [row.property, row.status]), [
     ['absent', 'unresolved'], ['initialValue', 'initial-only-observed'], ['value', 'controlled-observed'],
   ]);
+});
+
+for (const inert of ['attribute', 'css', 'ancestor'] as const)
+test(`browser ${inert} inertness records keyboard and label outcomes independently`, async () => {
+  const observed = await observeRole('switch', false, '"switch"', { inert });
+  assert.deepEqual(observed.problems, []);
+  assert.equal(observed.refusals, undefined);
+  const rows = observed.rows.filter(row => row.initial.inert);
+  assert.equal(rows.length, inert === 'ancestor' ? 8 : 2);
+  for (const row of rows) {
+    assert(row.restored);
+    assert(row.steps.every(step => step.control.inert && step.focused === false));
+    if (row.action === 'space' || inert === 'ancestor') {
+      assert(row.steps.every(step => step.control.checked === row.initial.checked && !step.callback.calls.length));
+    } else {
+      assert.deepEqual(row.steps.map(step => step.control.checked), ['true', 'false']);
+      assert.deepEqual(row.steps.at(-1)!.callback.calls, [[true], [false]], 'a label outside the inert region still activates this browser control');
+    }
+  }
+  assert(observed.relationships.filter(row => inert === 'ancestor' || row.property === 'absent').every(row => row.status === 'unresolved'));
+  if (inert !== 'ancestor') assert.deepEqual(observed.relationships.filter(row => row.property !== 'absent').map(row => [row.property, row.status]),
+    [['initialValue', 'initial-only-observed'], ['value', 'controlled-observed']]);
+});
+
+test('an inert control that still emits through a document keyboard handler remains refused', async () => {
+  const observed = await observeRole('switch', false, '"switch"', { inert: 'attribute', inertKeyboardLeak: true });
+  assert.deepEqual(observed.problems, ['callback-inert-keyboard-not-suppressed']);
+  assert.deepEqual(observed.relationships, []);
+  assert(observed.rows.every(row => row.property === 'absent' && row.value === false));
 });
 
 test('a host restoration refusal stops the sweep before any later independent input', async () => {

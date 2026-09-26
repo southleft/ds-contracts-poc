@@ -1,3 +1,4 @@
+import type { NativePreparedLibraryProjection } from './native-prepared-library.js';
 import { verifyRootTextTemplateTokenContext } from './native-root-text-template-plan.js';
 import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { verifyNativeTemplateGraphReceipt, emitNativeTemplateGraphReadbackScript, type NativeTemplateGraphIdentity, type NativeTemplateGraphReceipt } from './native-root-text-template-graph-native.js';
@@ -43,7 +44,7 @@ export interface NativeSourceWriteContext {
 }
 
 export function prepareNativeSourceWrite(
-  projection: NativeSourceCandidateProjection | NativeContractDraftProjection,
+  projection: NativeSourceCandidateProjection | NativeContractDraftProjection | NativePreparedLibraryProjection,
   context: NativeSourceWriteContext,
   boundNames: string[],
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
@@ -65,6 +66,7 @@ export function prepareNativeSourceWrite(
   if (!tokens?.input || !tokens.identity || !tokens.receipt)
     fail("token-observation-required");
   const input = tokens.input;
+  const library = 'kind' in projection && projection.kind === 'prepared-contract-library';
   const template = 'kind' in projection ? projection.rootTextTemplate : undefined;
   const graphSidecar = context.templateGraph;
   if (!!graphSidecar !== !!templateGraphInput || graphSidecar && (!template || comparisons || contractComparison || context.comparisonRecovery))
@@ -79,7 +81,7 @@ export function prepareNativeSourceWrite(
     input.fileKey !== operation.fileKey ||
     input.scopeId !== `source-${operation.id}` ||
     input.source.revision !== projection.source.revision ||
-    input.source.sourceProgramSha256 !== projection.source.programSha256 ||
+    (library ? canonicalJson(input.source) !== canonicalJson(projection.source) : !('programSha256' in projection.source) || input.source.sourceProgramSha256 !== projection.source.programSha256) ||
     ((!template || graph) && input.modes.length !== 1) ||
     input.modes[0].sourceMode !== projection.context.mode ||
     input.modes[0].brand !== projection.context.brand ||
@@ -126,7 +128,7 @@ export function prepareNativeSourceWrite(
     sourceContractRevision: projection.contractRevision,
     projection,
     machineId: `source-native:${operation.id}:${projection.contractId}`,
-    pageName: `${'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
+    pageName: `${library ? 'DS prepared library' : 'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
     tokenPreparationRevision: preparation.revision,
     ...(recovery ? { recovery: { revision: recovery.revision, creation: recovery.input.creation, observation: recovery.observation } } : {}),
     identity: tokens.identity,
@@ -197,6 +199,7 @@ export function wrapNativeSourceWrite(
   prepared: PreparedNativeSourceWrite,
   render: string,
   draftFonts: Array<{ family: string; styles: string[] }> = [],
+  placeGraphTargets = false,
 ): string {
   return `// GENERATED scoped source-candidate inspection. Fresh objects only.
 const NATIVE = ${JSON.stringify(prepared.descriptor)};
@@ -364,7 +367,26 @@ ${prepared.comparisonParentReadbackScript}
   const applied = await (async () => {
 ${render}
   })();
-  nativeFileGuard();
+  nativeFileGuard();${placeGraphTargets || ('kind' in prepared.descriptor.projection && prepared.descriptor.projection.kind === 'prepared-contract-library') ? `
+  // Each fresh dependency target shares this operation's page. Arrange the
+  // finished targets in dependency order, using their actual native extents;
+  // placing every main at the origin conceals otherwise editable output.
+  const placements = [];
+  let nextTargetY = 0;
+  if (!Array.isArray(NATIVE_RESULT.graphTargets) || !NATIVE_RESULT.graphTargets.length) nativeRefuse('library-placement-invalid');
+  for (const identity of NATIVE_RESULT.graphTargets) {
+    const target = await figma.getNodeByIdAsync(identity.id);
+    nativeFileGuard();
+    if (!target || target.parent !== NATIVE_PAGE || !['COMPONENT','COMPONENT_SET'].includes(target.type) ||
+        target.getSharedPluginData('ds_contracts','nativeSourceOperation') !== nativeOwner ||
+        typeof target.height !== 'number' || !Number.isFinite(target.height) || target.height < 0 ||
+        !Number.isFinite(nextTargetY)) nativeRefuse('library-placement-invalid');
+    placements.push({target, y:nextTargetY});
+    nextTargetY = Math.fround(nextTargetY + target.height + 200);
+  }
+  if (placements.length !== NATIVE_RESULT.graphTargets.length) nativeRefuse('library-placement-invalid');
+  for (const placement of placements) { placement.target.x = 0; placement.target.y = placement.y; }
+  ` : ''}
   nativeCheckTokens(await nativeReadTokens());${prepared.descriptor.templateGraph ? '\n  await nativeCheckTemplateGraph();' : ''}
   ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent();' : ''}
   // Slot content can become instance-derived clones after this run. Preserve

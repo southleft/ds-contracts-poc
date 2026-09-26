@@ -3533,8 +3533,9 @@ console.log(
     reviewable,
   );
   check(
-    "Inter and LEFT are the defaults the emitters already render — no declared block is invented for them",
-    partOf(inter, "t")?.declared === undefined,
+    "observed LEFT is explicit because text-align inherits; the default Inter family is still omitted",
+    JSON.stringify(partOf(inter, "t")?.declared) ===
+      JSON.stringify({ "text-align": "left" }),
   );
 }
 
@@ -4023,11 +4024,12 @@ console.log(
     reviewable,
   );
   check(
-    "FILL-width under a COLUMN parent is the cross-axis stretch, not grow — no layout.grow (the interior layout still carries), named by carryCrossAxisFill",
+    "FILL-width under a COLUMN parent carries width: 100% without changing grow or interior layout",
     JSON.stringify(layoutOf(column, "Image")) ===
       '{"direction":"column","justify":"center","align":"center"}' &&
+      JSON.stringify(partOf(column, "Image").literals) === '{"width":"100%"}' &&
       column.notes.some((n) =>
-        /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(
+        /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent in every occurrence of this part.*carried as the part literal/.test(
           n,
         ),
       ),

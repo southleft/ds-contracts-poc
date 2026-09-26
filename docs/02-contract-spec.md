@@ -7,6 +7,27 @@
 
 One contract per component, at `contracts/<component>.contract.json`. The authoritative schema is defined in Zod at `scripts/contract-schema.ts`; `npm run schema` emits `contracts/contract.schema.json` so editors validate contracts inline (every contract's `$schema` field points at it).
 
+## Parent-owned component placement
+
+A nested component reference can carry `absolutePlacement: {left, top}` for one
+fixed position, or `absolutePlacementByCombination: {props, rows}` for a complete
+finite input domain. Each table row contains `values`, `left` and `top`. Tuple
+values follow `props` order and use canonical strings, including `"false"` and
+`"true"`; `null` means an omitted optional input. Enum and boolean VARIANT axes
+are supported, with an explicit native unset option for defaultless optional
+inputs. All tuples must appear exactly once, up to 64 combinations. Duplicate,
+missing, unknown or conflicting tuples refuse. The two placement fields are
+mutually exclusive.
+
+Offsets are CSS pixels from the direct parent's padding edge. The parent must
+be explicitly positioned, and the child must be an ordinary generated component
+without competing geometry or a placement wrapper. React CSS Modules and inline
+React preserve the child root; native variants retain an instance of the same
+child main. The table requires one component root and does not infer responsive
+constraints or interaction behavior. Static HTML and Web Components refuse this
+placement model by name. This additive optional field leaves existing contract
+behavior unchanged; live stateful conversion remains subject to the V1 ledger.
+
 ## Top-level fields
 
 | Field | Type | Purpose |

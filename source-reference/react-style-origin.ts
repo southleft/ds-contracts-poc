@@ -73,9 +73,14 @@ export function selectorSubjectIsOwn(selector: string): boolean {
 export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, channel: string, competing:string[] = []) {
   type Style = NonNullable<Matched['inlineStyle']>;
   type SourceOrder = {sheet:string;scope:number;range:NonNullable<Style['range']>};
-  type Declaration = {rank: number[]; value: string; selector: string; own: boolean; order?:SourceOrder};
+  type Declaration = {rank: number[]; value: string; selector: string; own: boolean; reset:boolean; order?:SourceOrder};
   const rangeKey=(r:SourceOrder['range'])=>`${r.startLine}:${r.startColumn}-${r.endLine}:${r.endColumn}`;
   const declarations: Declaration[] = [], problems: string[] = [];
+  // `all` participates at its own cascade priority, as if expanded in place.
+  // Its winning default/inheritance/rollback semantics remain unsupported.
+  const resetsChannel=!channel.startsWith('--')&&!['direction','unicode-bidi'].includes(channel);
+  const relevant=(p:Style['cssProperties'][number])=>!p.disabled&&p.parsedOk!==false&&
+    (p.name===channel||(resetsChannel&&p.name==='all'));
   const scopes=new Set<number>();
   const orders = new Map<string, number>();
   const visit = (node: Layers['rootLayer'], parents: string[]) => {
@@ -85,22 +90,27 @@ export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, c
   visit(layers.rootLayer,[]);
   const add = (style: Style, rank: (important:boolean)=>number[], selector:string, own=true, order?:SourceOrder) => {
     for(const prop of style.cssProperties) {
-      if(prop.name!==channel || prop.disabled || prop.parsedOk===false) continue;
-      declarations.push({rank:rank(!!prop.important),value:(prop.important?prop.value.replace(/\s*!important\s*$/i,''):prop.value).trim(),selector,own,order});
+      if(!relevant(prop)) continue;
+      // CDP also emits range-less CSSOM summaries; `all` can be empty there
+      // after one longhand overrides it. The authored reset is still present
+      // and must compete. Never use that empty summary as a second declaration.
+      if(prop.name==='all'&&!prop.range&&prop.text===undefined&&
+        style.cssProperties.some(p=>p.name==='all'&&relevant(p)&&p.range&&p.text!==undefined)) continue;
+      declarations.push({rank:rank(!!prop.important),value:(prop.important?prop.value.replace(/\s*!important\s*$/i,''):prop.value).trim(),
+        selector,own,reset:prop.name==='all',order});
     }
   };
   if(matched.cssKeyframesRules?.length) problems.push('animated-source');
   for(const match of matched.matchedCSSRules??[]) {
     const rule=match.rule;
-    if(!rule.style.cssProperties.some(p=>(p.name===channel||p.name==='all'||competing.includes(p.name))&&!p.disabled&&p.parsedOk!==false)) continue;
+    if(!rule.style.cssProperties.some(p=>relevant(p)||(competing.includes(p.name)&&!p.disabled&&p.parsedOk!==false))) continue;
     if(rule.media?.some(m=>m.mediaList?.length && !m.mediaList.some(q=>q.active)) || rule.supports?.some(s=>!s.active)) continue;
     if(rule.media?.some(m=>!m.mediaList?.length)) {problems.push('media-condition-unknown');continue;}
     if(rule.containerQueries?.length || rule.scopes?.length || rule.startingStyles?.length || rule.navigations?.length) {
       problems.push('conditional-cascade-unsupported');continue;
     }
-    if(rule.style.cssProperties.some(p=>p.name==='all'&&!p.disabled&&p.parsedOk!==false)) {problems.push('all-reset-unsupported');continue;}
     if(rule.origin==='user-agent') {
-      if(rule.style.cssProperties.some(p=>p.name===channel&&p.important)) problems.push('important-user-agent-rule');
+      if(rule.style.cssProperties.some(p=>relevant(p)&&p.important)) problems.push('important-user-agent-rule');
       continue;
     }
     if(rule.origin!=='regular') {problems.push('style-origin-unsupported');continue;}
@@ -122,7 +132,6 @@ export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, c
     add(rule.style,important=>[important?1:0,0,important?-order:order,...specificity],rule.selectorList.text,
       match.matchingSelectors.every(i=>selectorSubjectIsOwn(rule.selectorList.selectors[i]?.text??'')),sourceOrder);
   }
-  if(matched.inlineStyle?.cssProperties.some(p=>p.name==='all'&&!p.disabled&&p.parsedOk!==false)) problems.push('all-reset-unsupported');
   if(matched.inlineStyle?.cssProperties.some(p=>competing.includes(p.name)&&!p.disabled&&p.parsedOk!==false)) problems.push('logical-size-cascade-unsupported');
   if(matched.inlineStyle) add(matched.inlineStyle,important=>[important?1:0,1,0,0,0,0],'<inline>');
   // Encapsulation precedes specificity/source order. One constructed sheet can
@@ -144,6 +153,11 @@ export function resolveReactStyleDeclaration(matched: Matched, layers: Layers, c
   }
   const values=[...new Set(winners.map(d=>d.value))];
   const selectors=[...new Set(winners.map(d=>d.selector))].sort();
+  // Width/height are non-inherited and have initial value auto. Only these
+  // two defaulting keywords have a local size meaning we can prove here.
+  // Inheritance and origin/layer rollback still require a different reader.
+  if(winners.some(d=>d.reset)&&!(values.length===1&&['width','height'].includes(channel)&&['initial','unset'].includes(values[0])))
+    return {channel,status:'unresolved' as const,selectors,reason:'all-reset-unsupported'};
   if(values.length!==1) return {channel,status:'unresolved' as const,selectors,reason:values.length?'cascade-order-tie':'no-own-declaration'};
   return {channel,status:'resolved' as const,value:values[0],selectors,own:winners.every(d=>d.own)};
 }
@@ -159,14 +173,35 @@ export function resolveReactStyleOrigin(matched:Matched,layers:Layers,channel:st
 /** Displays whose (non-replaced) boxes take no width and/or height: a mismatch there is named for what it is. */
 const boxless=new Set(['inline','contents','table-row','table-row-group','table-header-group','table-footer-group','table-column','table-column-group']);
 /** Only absolute px and theme-relative rem arithmetic is admitted. Values
- * depending on a viewport, container, percentage, font metric or fallback
- * stay unresolved. The browser, not this grammar, evaluates the expression. */
+ * depending on a viewport, container, percentage or font metric stay
+ * unresolved. Variables contain computed substitution values; missing keys
+ * denote unavailable/guaranteed-invalid values, while an empty PRESENT value
+ * must not take a fallback. The browser evaluates the selected expression. */
 export function fixedSizeExpression(value:string,variables:Record<string,string>,seen=new Set<string>()):boolean{
- const expanded=value.replace(/var\(\s*(--[A-Za-z0-9_-]+)\s*\)/g,(_whole,name:string)=>{
-  if(seen.has(name)||!variables[name])return '!';
-  const next=new Set(seen);next.add(name);
-  return fixedSizeExpression(variables[name],variables,next)?'('+variables[name].replace(/var\(\s*(--[A-Za-z0-9_-]+)\s*\)/g,'1px')+')':'!';
- });
+ const expand=(input:string,visiting:Set<string>,depth:number):string|undefined=>{
+  if(depth>64||input.length>65536)return undefined;
+  let output='',cursor=0;const variable=/var\(/gi;
+  for(let match=variable.exec(input);match;match=variable.exec(input)){
+   output+=input.slice(cursor,match.index);
+   let end=variable.lastIndex,level=1,comma=-1;
+   for(;end<input.length;end++){
+    const c=input[end];if(c==='(')level++;else if(c===')'&&!--level)break;
+    else if(c===','&&level===1&&comma<0)comma=end;
+   }
+   if(level)return undefined;
+   const name=input.slice(variable.lastIndex,comma<0?end:comma).trim();
+   if(!/^--[A-Za-z0-9_-]+$/.test(name))return undefined;
+   const present=Object.hasOwn(variables,name);
+   if(present&&visiting.has(name)||!present&&comma<0)return undefined;
+   const next=new Set(visiting);if(present)next.add(name);
+   const replacement=expand(present?variables[name]:input.slice(comma+1,end),next,depth+1);
+   if(replacement===undefined||!replacement.trim())return undefined;
+   output+='('+replacement+')';if(output.length>65536)return undefined;
+   cursor=end+1;variable.lastIndex=cursor;
+  }
+  return output+input.slice(cursor);
+ };
+ const expanded=expand(value,seen,0);if(expanded===undefined)return false;
  return !/[A-Za-z_%!]/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'(')) && /^[\d.()+*/\s-]+$/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'('));
 }
 
@@ -233,8 +268,10 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
         const channels=sourceTokenChannels.map(channel=>resolveReactStyleOrigin(matched,layers,channel));
         const sizeDeclarations=(['width','height'] as const).map(channel=>({channel,declaration:resolveReactStyleDeclaration(matched,layers,channel,['inline-size','block-size'])}));
         const variables=channels.flatMap(c=>c.variable?[c.variable]:[]);
+        // Typed OM distinguishes an explicitly empty custom value from a
+        // guaranteed-invalid value; CSSOM serializes both as the empty string.
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
         const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
@@ -243,12 +280,17 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
           const typed=value.sizes[channel],base={channel,selectors:declaration.selectors,...(declaration.status==='resolved'?{authoredValue:declaration.value}:{})};
           if(value.animated)return {...base,status:'unresolved',reason:'animated-source'};
           if(declaration.status==='unresolved'&&declaration.reason!=='no-own-declaration')return {...base,status:'unresolved',reason:declaration.reason};
-          if(typed.keyword==='auto')return declaration.status==='unresolved'||declaration.value==='auto'
+          if(typed.keyword==='auto')return declaration.status==='unresolved'||['auto','initial','unset'].includes(declaration.value)
             ? {...base,status:'auto',value:'auto'} : {...base,status:'unresolved',reason:'indirect-or-invalid-auto-size'};
           if(declaration.status!=='resolved')return {...base,status:'unresolved',reason:'no-own-fixed-size-declaration'};
           // A rule reaching in from a wrapper (`#w > *`, `*:w-full`) is the
           // caller's, however the component is mounted: never its own size.
           if(!declaration.own)return {...base,status:'unresolved',reason:'size-declared-by-outer-selector'};
+          // Registered lengths can compute viewport/font units to px before
+          // substitution, including into unregistered aliases. Until those
+          // dependency origins are read, do not call a sampled px value fixed.
+          if(/var\(/i.test(declaration.value)&&(matched.cssPropertyRules?.length||matched.cssPropertyRegistrations?.length))
+            return {...base,status:'unresolved',reason:'registered-size-variable-provenance-unqualified'};
           // Exactly `100%`, and only under the witness below: calc(), other
           // percentages and var() name nothing new.
           if(channel==='width'&&declaration.value==='100%'){

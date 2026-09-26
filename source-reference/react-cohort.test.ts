@@ -19,6 +19,7 @@ import {
   loadReactCohort,
   parseReactCases,
   reactCasesFile,
+  reactInitialCaseEntry,
 } from "./react-cohort.js";
 import { reactReferenceEntry } from "./react-reference-cases.js";
 import {
@@ -185,6 +186,34 @@ test("the built-in cohort is frozen: entry bytes, case records and negative cont
     assert.equal(builtinReactCohort.cases.filter((c) => c.subject === subject && builtinReactCohort.negativeCaseIds.includes(c.id)).length, 1, subject);
   for (const c of builtinReactCohort.cases)
     assert.deepEqual(builtinReactCohort.profile(c.id), reactReferenceProfile(c.id));
+});
+
+test('isolated initial callers preserve source declarations and all other mounts, including extensionless imports',async t=>{
+ const {root,put}=fixture();t.after(()=>rmSync(root,{recursive:true,force:true}));
+ const declared=declaration();declared.cases[0].mount.children![0]={...badge,props:{title:'status',active:true},children:[hostileText]} as any;
+ put(reactCasesFile,JSON.stringify(declared));
+ const reference=await buildReactReference(root),bytes=readFileSync(path.join(root,reactCasesFile));
+ const resolved=new Map(reference.cohort.mountedModules!.map((m,i)=>[m,path.relative(reference.sourceRoot,reference.mountedSourceFiles![i])]));
+ const target={module:'src/components/ui/badge.tsx',exportName:'Badge'};
+ const originalEntry=reference.cohort.entry,other=originalEntry.split('\n').find(l=>l.startsWith('["badge-default",'));
+ for(const changes of [{active:{kind:'set' as const,value:false}},{active:{kind:'omit' as const}}]){
+  const derived=reactInitialCaseEntry(reference.cohort,'badge-row',target,changes,resolved);
+  assert.deepEqual(derived.receipt.mountPath,[0]);assert.equal(derived.receipt.mountModule,badge.module);
+  assert.deepEqual(derived.receipt.before,{title:'status',active:true});
+  assert.deepEqual(derived.receipt.after,changes.active.kind==='omit'?{title:'status'}:{title:'status',active:false});
+  assert.equal(derived.entry.split('\n').find(l=>l.startsWith('["badge-default",')),other);
+  assert(derived.entry.includes('Avatar as __c0'));assert(derived.entry.includes('gap'));assert(derived.entry.includes('A <!-- <script>'));
+  const built=await buildReactReference(root,{...reference.cohort,entry:derived.entry});
+  assert.deepEqual(built.files,reference.files);assert.equal(built.css,reference.css);assert.notEqual(built.id,reference.id);
+  assert.equal(reference.cohort.entry,originalEntry);assert.deepEqual(readFileSync(path.join(root,reactCasesFile)),bytes);
+ }
+ for(const changes of [{},JSON.parse('{"__proto__":{"kind":"set","value":"x"}}'),{style:{kind:'set',value:'x'}},{active:{kind:'set',value:NaN}},{active:{kind:'set',value:{}}}])
+  assert.throws(()=>reactInitialCaseEntry(reference.cohort,'badge-row',target,changes as any,resolved),/case-entry-unavailable/);
+ assert.throws(()=>reactInitialCaseEntry({...reference.cohort,entry:originalEntry+' '},'badge-row',target,{active:{kind:'omit'}},resolved),/case-entry-unavailable/);
+ assert.throws(()=>reactInitialCaseEntry(reference.cohort,'missing',target,{active:{kind:'omit'}},resolved),/case-entry-unavailable/);
+ const repeated=declaration();repeated.cases[0].mount.children!.push({...badge} as any);put(reactCasesFile,JSON.stringify(repeated));
+ assert.throws(()=>reactInitialCaseEntry(reference.cohort,'badge-row',target,{active:{kind:'omit'}},resolved),/case-entry-unavailable/,'changed declarations invalidate the old cohort');
+ assert.throws(()=>reactInitialCaseEntry(loadReactCohort(root),'badge-row',target,{active:{kind:'omit'}},resolved),/case-entry-unavailable/,'two matching mounts cannot guess one target');
 });
 
 test("web-font origin is an explicit per-case witness and changing it invalidates the reference", async () => {
@@ -660,7 +689,7 @@ test("the generated entry keeps the built-in runtime contract and accepts the st
   const file = Object.keys(original.files).find((f) => f.endsWith("/src/components/ui/badge.tsx"))!;
   const observed = await buildReactOwnershipReference(path.dirname(path.dirname(path.dirname(path.dirname(file)))), original, {
     files: { [file]: original.files[file] }, problems: [],
-    components: [{ module: "src/components/ui/badge.tsx", exportName: "Badge", sourceSha256: original.files[file], span: { start: 0, end: 1 } }],
+    components: [{ module: "src/components/ui/badge.tsx", exportName: "Badge", sourceSha256: original.files[file], problems: [], span: { start: 0, end: 1 } }],
   } as unknown as ReactSourceProgram);
   assert.equal(observed.cohort, original.cohort, "the observed program is built from the original's cohort");
   assert.deepEqual(observed.files, original.files);

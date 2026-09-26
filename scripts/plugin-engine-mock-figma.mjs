@@ -405,6 +405,16 @@ export function createFigmaMock(options = {}) {
     }
 
     resize(w, h) {
+      // Live empty-box probe, 2026-09-23: ordinary resize(0, 0) stores a
+      // small nonzero extent; resizeWithoutConstraints retains exact zero.
+      // Keep this distinction visible for the measured container types;
+      // do not infer new leaf-node behavior from the container probe.
+      const container = ['FRAME', 'COMPONENT', 'SLOT'].includes(this.type);
+      this._resizeBox(container && w === 0 ? Math.fround(0.0001) : w,
+        container && h === 0 ? Math.fround(0.0001) : h);
+    }
+
+    _resizeBox(w, h) {
       // G8/GP4b — on a GRID frame a resize that CHANGES a hugged axis silently
       // reverts BOTH the sizing mode (HUG -> FIXED) and that axis's HUG tracks
       // (-> FLEX). Measured live 2026-08-08. A width-only resize leaves a
@@ -431,7 +441,7 @@ export function createFigmaMock(options = {}) {
     }
 
     resizeWithoutConstraints(w, h) {
-      this.resize(w, h);
+      this._resizeBox(w, h);
     }
 
     // --- GRID layout mode (A2; docs/research/grid-recon-probes.md P1-P14) --
@@ -788,7 +798,7 @@ export function createFigmaMock(options = {}) {
         const sum = px.reduce((a, b) => a + b, 0) + gap * Math.max(0, tracks.length - 1);
         return sum + pad;
       }
-      if (this.layoutMode === 'NONE' || !this.children || this.children.length === 0) {
+      if (this.layoutMode === 'NONE' || !this.children) {
         return axis === 'w' ? this._w : this._h;
       }
       const horizontalIsPrimary = this.layoutMode === 'HORIZONTAL';
@@ -796,6 +806,11 @@ export function createFigmaMock(options = {}) {
       const sizingMode = axisIsPrimary ? this.primaryAxisSizingMode : this.counterAxisSizingMode;
       if (sizingMode === 'FIXED') return axis === 'w' ? this._w : this._h;
       const pad = axis === 'w' ? this.paddingLeft + this.paddingRight : this.paddingTop + this.paddingBottom;
+      // An empty HUG container keeps its seed extent, but padding can grow
+      // it. Measured on FRAME, COMPONENT and SLOT in the v107 live probe:
+      // a zero seed with 7+11 / 3+5 padding is exactly 18 by 8.
+      if (this.children.length === 0)
+        return Math.max(pad, axis === 'w' ? this._w : this._h);
       const inFlow = this.children.filter((c) => c.visible !== false && c.layoutPositioning !== 'ABSOLUTE');
       // The degenerate: a FILL child has no intrinsic contribution — a HUG
       // parent whose every child FILLs resolves to padding alone (~collapse).
@@ -894,6 +909,10 @@ export function createFigmaMock(options = {}) {
 
     // --- prototype reactions (see the fidelity note above) -----------------
     get reactions() {
+      // Live inherited instance reactions follow the selected main (v112
+      // prepared-library readback); an explicit override remains independent.
+      if (this.type === 'INSTANCE' && this._mainComponent && !this._reactionsOverridden)
+        return this._mainComponent.reactions;
       return this._reactions;
     }
 
@@ -934,6 +953,7 @@ export function createFigmaMock(options = {}) {
         }
       }
       this._reactions = reactions.map((r) => ({ ...r }));
+      this._reactionsOverridden = true;
     }
 
     setSharedPluginData(namespace, key, value) {
@@ -1139,6 +1159,8 @@ export function createFigmaMock(options = {}) {
       clone.boundVariables = structuredClone(this.boundVariables);
       if (options.consumerVariableModes) clone.explicitVariableModes = { ...this.explicitVariableModes };
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
+      clone._reactions = structuredClone(this._reactions);
+      clone._reactionsOverridden = this._reactionsOverridden;
       // Live Figma inherits shared plugin data onto an instance's private
       // sublayers (measured on nested TEXT content, 2026-09-17). Preserve it
       // so correspondence metadata is testable on the actual editable layer.
@@ -1153,7 +1175,13 @@ export function createFigmaMock(options = {}) {
           delete clone.clipsContent;
         }
       }
-      if (this.type === 'INSTANCE') clone.componentProperties = { ...(this.componentProperties ?? {}) };
+      if (this.type === 'INSTANCE') {
+        clone.componentProperties = structuredClone(this.componentProperties ?? {});
+        // Inherited nested instances still expose their native main identity.
+        // Keep the link when cloning a composed main's subtree for readback.
+        clone._mainComponent = this._mainComponent;
+        clone.getMainComponentAsync = async () => clone._mainComponent;
+      }
       for (const child of this.children ?? []) clone.appendChild(child._cloneForInstance());
       return clone;
     }
@@ -1230,6 +1258,11 @@ export function createFigmaMock(options = {}) {
               `in setProperties: "${key}" is not a component property on this instance (available: ${Object.keys(inst._allProps).join(', ') || 'none'})`,
             );
           }
+          // Live prepared-library finding: Figma rejects canonical strings
+          // at a BOOLEAN property; "false" is not the boolean false.
+          if (def.type === 'BOOLEAN' && typeof value !== 'boolean') {
+            throw new Error('in setProperties: Property value is incompatible with component property type');
+          }
           inst._allProps[key] = { type: def.type, value };
           const targets = [inst, ...inst.findAll()];
           if (def.type === 'TEXT') {
@@ -1240,6 +1273,21 @@ export function createFigmaMock(options = {}) {
           if (def.type === 'BOOLEAN') {
             for (const n of targets) {
               if (n.componentPropertyReferences?.visible === key) n.visible = value;
+            }
+          }
+        }
+        // Opt in for allocation-sensitive graph proofs: native setProperties
+        // changes the main link and inherited layers, not just displayed props.
+        // Historical fixture IDs remain unchanged unless this is requested.
+        if (options.instanceVariantSelection && source.type === 'COMPONENT_SET') {
+          const axes = Object.entries(inst._allProps).filter(([,v])=>v.type === 'VARIANT');
+          const selected = source.children.find(main=>axes.every(([key,v])=>main.variantProperties?.[key] === v.value));
+          if (selected && selected !== inst._mainComponent) {
+            inst._mainComponent = selected;
+            inst._refreshFromMain();
+            for (const [key,prop] of Object.entries(inst._allProps)) for (const n of [inst,...inst.findAll()]) {
+              if (prop.type === 'TEXT' && n.componentPropertyReferences?.characters === key) n.characters = prop.value;
+              if (prop.type === 'BOOLEAN' && n.componentPropertyReferences?.visible === key) n.visible = prop.value;
             }
           }
         }

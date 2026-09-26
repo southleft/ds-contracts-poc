@@ -51,6 +51,19 @@ function input(): NativeTokenContextInput {
 }
 const rgba = { r: 0x12 / 255, g: 0x34 / 255, b: 0x56 / 255, a: 0x80 / 255 };
 
+test('only an explicit retained-library context can own an empty variable scope',()=>{
+  const empty=input();empty.tokenPaths=[];
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/);
+  empty.writeProtocol='explicit-modes-v1';
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/,'ordinary source history retains its nonempty invariant');
+  empty.source={kind:'prepared-contract-library',revision:'sha256:'+'a'.repeat(64),artifactId:'a'.repeat(64),
+    inputSha256:'b'.repeat(64),tarballSha256:'c'.repeat(64),tokensSha256:'d'.repeat(64)};
+  const prepared=prepareNativeTokenContext(empty);
+  assert.deepEqual(prepared.variables,[]);assert.deepEqual(prepared.requestedTokenPaths,[]);
+  delete empty.writeProtocol;
+  assert.throws(()=>prepareNativeTokenContext(empty),/token-path/);
+});
+
 test('template history retains allocation values for requested leaves and alias dependencies', () => {
   const before = input();
   (before.modes[0].tokens.gap as any).$value = '8px';
@@ -206,6 +219,28 @@ function revise(request: NativeTokenContextInput) {
     mode.tokenTreeRevision = revisionOf(mode.tokens);
   return request;
 }
+
+test('prepared-library token provenance preserves archive identity without claiming a source program', () => {
+  const request = input();
+  request.source = { kind: 'prepared-contract-library', revision: 'sha256:' + 'c'.repeat(64),
+    artifactId: 'c'.repeat(64), inputSha256: 'd'.repeat(64), tarballSha256: 'e'.repeat(64), tokensSha256: 'b'.repeat(64) };
+  const before = copy(request), result = prepareNativeTokenContext(request);
+  assert.deepEqual(result.source, request.source);
+  assert.equal('sourceProgramSha256' in result.source, false);
+  assert.deepEqual(request, before);
+  assert.deepEqual(result.variables, prepareNativeTokenContext(input()).variables,
+    'provenance does not rewrite token values or alias identities');
+  for (const change of [
+    { revision: 'sha256:' + 'f'.repeat(64) },
+    { artifactId: '../outside' },
+    { inputSha256: '' },
+    { tarballSha256: 'invalid' },
+    { tokensSha256: 'invalid' },
+    { sourceProgramSha256: 'a'.repeat(64) },
+    { observedReact: true },
+    { kind: 'future-protocol' },
+  ]) assert.throws(() => prepareNativeTokenContext({ ...request, source: { ...request.source, ...change } as any }), /source-identity/);
+});
 
 test("preparation preserves exact names and aliases through the existing compiler, with dark-only mapping", () => {
   const request = input(),

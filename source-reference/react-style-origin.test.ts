@@ -1,9 +1,133 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {chromium} from 'playwright-core';
-import {readReactStyleOrigin,resolveReactStyleDeclaration,selectorSubjectIsOwn} from './react-style-origin.js';
+import {readReactStyleOrigin,resolveReactStyleDeclaration,selectorSubjectIsOwn,fixedSizeExpression} from './react-style-origin.js';
 import type {ReactOwnership} from './react-ownership.js';
 const ownership:ReactOwnership={version:1,rendererVersions:['19.2.7'],components:[{id:'one',source:{module:'fixture.tsx',exportName:'Surface',sourceSha256:'0'.repeat(64),span:{start:0,end:1}},props:{},roots:['']}],nodes:[{path:'',tag:'button',createdBy:'one',nearestComponent:'one'}],problems:[]};
+
+test('all resets compete in the cascade; losing resets do not hide authored dimensions',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  const capture=async(css:string,inline='')=>{
+   await page.setContent(`<style>${css}</style><button id="subject" class="subject" style="${inline}">x</button>`);
+   const cdp=await page.context().newCDPSession(page);await cdp.send('DOM.enable');await cdp.send('CSS.enable');
+   const {root}=await cdp.send('DOM.getDocument'),{nodeId}=await cdp.send('DOM.querySelector',{nodeId:root.nodeId,selector:'#subject'});
+   const matched=await cdp.send('CSS.getMatchedStylesForNode',{nodeId}),layers=await cdp.send('CSS.getLayersForNode',{nodeId});
+   await cdp.detach();return {matched,layers};
+  };
+  for(const [css,inline] of [
+   ['.subject{all:unset}.subject{width:48px}',''],
+   ['#subject{width:48px}.subject{all:unset}',''],
+   ['.subject{width:48px!important}#subject{all:unset}',''],
+   ['@layer reset, component;@layer reset{#subject{all:unset}}@layer component{.subject{width:48px}}',''],
+   ['@layer first, second;@layer first{.subject{width:48px!important}}@layer second{#subject{all:unset!important}}',''],
+   ['.subject{all:unset}','width:48px'],
+   ['#subject{all:unset!important}','width:48px!important'],
+   ['.subject{width:48px}@media(min-width:99999px){#subject{all:unset}}',''],
+   ['.subject{width:48px}@supports(unknown-property:yes){#subject{all:unset}}',''],
+   ['.subject{all:var(--reset);--reset:unset}.subject{width:48px}','']
+  ]){
+   const {matched,layers}=await capture(css,inline),before=await page.screenshot();
+   const result=resolveReactStyleDeclaration(matched,layers,'width');
+   assert.equal(result.status,'resolved',css+'; '+inline);assert.equal(result.value,'48px');
+   assert.equal(await page.locator('#subject').evaluate(n=>getComputedStyle(n).width),'48px');
+   assert.deepEqual(resolveReactStyleDeclaration({...matched,matchedCSSRules:[...matched.matchedCSSRules!].reverse()},layers,'width'),result,'CDP list order is not proof');
+   assert.deepEqual(await page.screenshot(),before);
+  }
+  for(const keyword of ['initial','inherit','unset','revert','revert-layer']){
+   const {matched,layers}=await capture(`.subject{width:48px}.subject{all:${keyword}}`);
+   const result=resolveReactStyleDeclaration(matched,layers,'width');
+   if(['initial','unset'].includes(keyword)){assert.equal(result.status,'resolved');assert.equal(result.value,keyword);}
+   else assert.equal(result.reason,'all-reset-unsupported',keyword);
+  }
+  for(const [css,inline] of [
+   ['.subject{width:48px}#subject{all:unset}',''],
+   ['#subject{width:48px}.subject{all:unset!important}',''],
+   ['.subject{width:48px!important}','all:unset!important'],
+   ['@layer first, second;@layer first{.subject{all:unset!important}}@layer second{#subject{width:48px!important}}','']
+  ]){
+   const {matched,layers}=await capture(css,inline),result=resolveReactStyleDeclaration(matched,layers,'width');
+   assert.equal(result.status,'resolved',css+'; '+inline);assert.equal(result.value,'unset');
+   assert.equal((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(s=>s.channel==='width')!.status,'auto');
+  }
+  for(const [css,inline] of [
+   ['.subject{all:unset;width:48px}',''],
+   ['.subject{width:48px;all:unset}',''],
+   ['', 'all:unset;width:48px'],
+   ['', 'width:48px;all:unset']
+  ]){
+   const {matched,layers}=await capture(css,inline);
+   assert.equal(resolveReactStyleDeclaration(matched,layers,'width').reason,'all-reset-unsupported',css+'; '+inline);
+  }
+  const {matched,layers}=await capture('.subject{all:unset}.subject{width:48px}');
+  const mutate=(change:(rule:NonNullable<typeof matched.matchedCSSRules>[number]['rule'])=>void)=>{
+   const copy=structuredClone(matched),rule=copy.matchedCSSRules!.find(m=>m.rule.origin==='regular'&&m.rule.style.cssProperties.some(p=>p.name==='all'))!.rule;
+   change(rule);assert.equal(resolveReactStyleDeclaration(copy,layers,'width').status,'unresolved','unproven ordering cannot discard a reset');
+  };
+  mutate(rule=>{delete rule.style.range});mutate(rule=>{delete rule.originTreeScopeNodeId});
+  mutate(rule=>{rule.styleSheetId='another';rule.style.styleSheetId='another'});
+  mutate(rule=>{rule.nestingSelectors=['.outer']});
+  for(const channel of ['direction','unicode-bidi','--custom']){
+   const {matched,layers}=await capture(`.subject{${channel}:${channel==='direction'?'rtl':channel==='unicode-bidi'?'isolate':'48px'}}#subject{all:unset}`);
+   assert.equal(resolveReactStyleDeclaration(matched,layers,channel).status,'resolved',channel+' is exempt from all');
+  }
+  // A real fixed-size read, including a variable, still proves the used box.
+  await page.setContent('<style>.subject{all:unset}.subject{--size:48px;width:var(--size);height:24px;display:block;box-sizing:border-box}</style><button id="subject" class="subject">x</button>');
+  assert.deepEqual((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.map(s=>[s.status,s.value]),[['fixed','48px'],['fixed','24px']]);
+ }finally{await browser.close()}
+});
+
+test('size provenance follows the selected var fallback and preserves empty versus invalid custom properties',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  const read=async(declaration:string)=>{
+   await page.setContent(`<style>.subject{display:block;box-sizing:border-box;padding:0;border:0;width:48px;${declaration}}</style><button class="subject" id="subject">x</button>`);
+   return (await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(s=>s.channel==='height')!;
+  };
+  for(const [css,expected] of [
+   ['height:var(--missing,24px)','24px'],
+   ['--unit:12px;height:var(--missing,var(--also-missing,calc(var(--unit) * 2)))','24px'],
+   ['--unit:24px;height:var(--unit,50vw)','24px'],
+   ['--unit:initial;height:var(--unit,24px)','24px'],
+   ['--a:var(--b);--b:var(--a);height:var(--a,24px)','24px'],
+   ['height:var(--missing,var(--missing,24px))','24px'],
+   ['--unit:0px;height:var(--unit,24px)','0px']
+  ]){const result=await read(css);assert.equal(result.status,'fixed',css+': '+JSON.stringify(result));assert.equal(result.value,expected);}
+  for(const css of [
+   '--unit: ;height:var(--unit,24px)',
+   '--unit:red;height:var(--unit,24px)',
+   '--unit:50vw;height:var(--unit,24px)',
+   'height:var(--missing,var(--other,50%))',
+   'height:var(--missing,24px);min-height:48px'
+  ])assert.notEqual((await read(css)).status,'fixed',css);
+  assert.equal(fixedSizeExpression('var(--x,24px)',{'--x':''}),false,'a present empty value cannot choose fallback');
+  assert.equal(fixedSizeExpression('var(--x,24px)',{'--x':'var(--x)'}),false,'unresolved cyclic substitution is not fixed');
+  assert.equal(fixedSizeExpression('var(--x,'.repeat(70)+'24px'+')'.repeat(70),{}),false,'bounded recursion');
+  for(const keyword of ['auto','initial','unset']){
+   assert.equal((await read(`height:${keyword}`)).status,'auto',keyword);
+   if(keyword!=='auto'){
+    await page.setContent(`<style>.subject{height:48px}.subject{all:${keyword}}</style><button class="subject" id="subject">x</button>`);
+    assert((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.every(s=>s.status==='auto'));
+   }
+  }
+ }finally{await browser.close()}
+});
+
+test('registered custom properties cannot disguise viewport dimensions as fixed pixels, including through aliases',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  for(const registration of ['rule','script']){
+   await page.goto('about:blank');
+   if(registration==='script')await page.evaluate(()=>CSS.registerProperty({name:'--measure',syntax:'<length>',inherits:true,initialValue:'24px'}));
+   for(const expression of ['var(--measure)','var(--missing,var(--alias))']){
+    await page.setContent(`<style>${registration==='rule'?'@property --measure{syntax:"<length>";inherits:true;initial-value:24px}':''}.subject{--measure:50vw;--alias:var(--measure);display:block;box-sizing:border-box;border:0;padding:0;width:48px;height:${expression}}</style><button id="subject" class="subject">x</button>`);
+    const size=(await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(s=>s.channel==='height')!;
+    assert.equal(size.status,'unresolved',registration+':'+expression);
+    assert.equal(size.reason,'registered-size-variable-provenance-unqualified');
+   }
+  }
+ }finally{await browser.close()}
+});
 
 test('rule-order proof requires complete, non-overlapping positions in one stylesheet and ignores CDP list order',async()=>{
  const browser=await chromium.launch();try{

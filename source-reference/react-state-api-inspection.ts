@@ -8,7 +8,8 @@ import { chromium } from 'playwright-core';
 import { revisionOf } from '../core/contract-provenance.js';
 import { buildReactOwnershipReference, reactOwnershipHook, reactOwnershipRead } from './react-ownership.js';
 import { reactReferenceHtml, reactReferenceUnchanged, type ReactReference } from './react-reference.js';
-import type { ReactNativeRequest } from './react-native-request.js';
+import type { ReactInspectionSource } from './react-initial-inspection.js';
+import {observeReactRuntimeDependencies} from './react-runtime-export.js';
 import { readReactInspectionOriginal, reactInspectionRequest, type ReactInitialInspection, type ReactInspectionRequest } from './react-initial-inspection.js';
 import type { ReactCallbackInspection } from './react-callback-inspection.js';
 import { planReactStateApi, observeReactStateApi, validateReactStateApiObservation, type ReactStateApiPlan, type ReactStateApiObservation } from './react-state-api.js';
@@ -16,6 +17,8 @@ import { readReactSourceProgram, reactSourceProgramUnchanged } from './react-sou
 import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { evidenceSha, evidenceUnchanged, inventoryEvidence } from './react-validation-evidence.js';
+import { isReactAuthoredOperationRequest, reactAuthoredOwnershipAnchor, type ReactAuthoredStateApiNativeRequest } from './react-authored-native-request.js';
+import { projectReactAuthoredStateApiDraft } from './react-authored-state-api.js';
 
 export interface ReactStateApiInspection {
   id: string;
@@ -31,8 +34,9 @@ export interface ReactStateApiInspection {
 }
 
 const observerFiles = [
-  'react-state-api.ts', 'react-state-api-inspection.ts', 'react-property-probe.ts', 'react-ownership.ts',
-  'react-source-program.ts', 'react-reference.ts', 'react-initial-inspection.ts', 'react-callback-inspection.ts',
+  'react-state-api.ts', 'react-state-api-appearance.ts', 'react-state-api-inspection.ts', 'react-property-probe.ts', 'react-ownership.ts',
+  'react-source-program.ts', 'react-context-export.ts', 'react-reference.ts', 'react-initial-inspection.ts', 'react-callback-inspection.ts',
+  'react-helper-effects.ts', 'react-helper-model.mjs', 'react-helper-model.d.mts',
   'control-behavior.ts', 'capture.ts', 'observe.ts', 'react-validation-evidence.ts',
 ];
 function observerRevision(repo: string) {
@@ -104,6 +108,44 @@ export function readReactStateApiInitialIdentity(repo: string, pin: ReactStateAp
   return identity;
 }
 
+/** Sealed creation definitions and token namespaces for a composed state graph.
+ * Historical evidence only: callers must authenticate fresh source separately
+ * before adopting or compiling an update. No latest pointer or live file is read. */
+export function readReactAuthoredStateApiInitial(repo: string, pin: ReactAuthoredStateApiNativeRequest): ReactInitialInspection {
+  if (!isReactAuthoredOperationRequest(pin) || pin.version !== 3) throw Error('state-api-creation-pin-invalid');
+  const source = reactInspectionRequest(reactAuthoredOwnershipAnchor(pin), pin.caseId, pin.initial.instanceId);
+  const root = path.join(repo, 'private/react-state-api-inspections', pin.stateApi.key);
+  const dir = path.join(root, pin.stateApi.id);
+  const request = JSON.parse(readFileSync(path.join(dir, 'request.json'), 'utf8')) as ReactStateApiRequest;
+  if (revisionOf(request).slice(7) !== pin.stateApi.key || revisionOf(request.source) !== revisionOf(source) ||
+      revisionOf(source).slice(7) !== pin.initial.key) throw Error('state-api-creation-request-changed');
+  const report = readStateApiRecord(root, request, pin.stateApi, false);
+  if (evidenceSha(readFileSync(path.join(dir, 'report.json'))) !== pin.stateApi.reportSha256 ||
+      report.plan.initialObservation !== pin.initial.id) throw Error('state-api-creation-report-changed');
+  const initial = JSON.parse(readFileSync(path.join(dir, 'initial-input.json'), 'utf8')) as ReactInitialInspection;
+  if (initial.id !== pin.initial.id || initial.caseId !== pin.caseId || initial.instanceId !== pin.initial.instanceId ||
+      initial.observation?.instanceId !== pin.initial.instanceId || !initial.authoredDraft ||
+      revisionOf(initial.authoredDraft) !== pin.initialDraftRevision ||
+      revisionOf(projectReactAuthoredStateApiDraft(initial, report)) !== pin.draftRevision)
+    throw Error('state-api-creation-identity-unavailable');
+  const initialDir = path.join(repo, 'private/react-initial-inspections', pin.initial.key, pin.initial.id);
+  const sealBytes = readFileSync(path.join(initialDir, 'integrity.json'));
+  const seal = JSON.parse(sealBytes.toString()) as { version: number; files: Record<string, string> };
+  if (evidenceSha(sealBytes) !== pin.initial.inventorySha256 || seal.version !== 1 ||
+      !seal.files || typeof seal.files !== 'object' || Array.isArray(seal.files) ||
+      !evidenceUnchanged(initialDir, Object.fromEntries(Object.entries({ ...seal.files, 'integrity.json': pin.initial.inventorySha256 }).sort(([a], [b]) => a.localeCompare(b)))) ||
+      revisionOf(JSON.parse(readFileSync(path.join(initialDir, 'request.json'), 'utf8'))) !== revisionOf(source))
+    throw Error('state-api-creation-initial-changed');
+  const originalBytes = readFileSync(path.join(initialDir, 'report.json'));
+  // These fields are derived when the initial record is read, never observed.
+  const { draft: _draft, authoredDraft: _authoredDraft, authoredProblem: _authoredProblem,
+    reobservable: _reobservable, lastAttempt: _lastAttempt, ...observed } = initial;
+  if (evidenceSha(originalBytes) !== pin.initial.reportSha256 ||
+      revisionOf(JSON.parse(originalBytes.toString())) !== revisionOf(observed))
+    throw Error('state-api-creation-initial-changed');
+  return initial;
+}
+
 export function readReactStateApiNativeRecord(root:string,request:ReactStateApiRequest) {
   const report=readReactStateApiInspection(root,request);
   if(report?.phase!=='complete')throw Error('state-api-native-observation-required');
@@ -138,14 +180,14 @@ export function readRunningStateApiProgress(
 export function createReactStateApiInspectionStore(
   repo: string,
   sourceRoot: string,
-  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest },
+  select: (referenceId: string, caseId: string) => ReactInspectionSource,
   records: (referenceId: string, caseId: string) => { initial?: ReactInitialInspection; behavior?: ReactCallbackInspection },
 ) {
   const active = new Map<string, { referenceId: string; state: ReactStateApiInspection; promise: Promise<void> }>();
   const input = (referenceId: string, caseId: string) => {
-    const { reference, anchor } = select(referenceId, caseId), saved = records(referenceId, caseId);
+    const { reference, anchor, instanceId } = select(referenceId, caseId), saved = records(referenceId, caseId);
     if (!saved.initial || !saved.behavior) throw Error('state-api-observations-unavailable');
-    const sourceRequest = reactInspectionRequest(anchor, caseId);
+    const sourceRequest = reactInspectionRequest(anchor, caseId, instanceId);
     const source = readReactInspectionOriginal(repo, reference, sourceRequest);
     const plan = planReactStateApi(saved.initial, saved.behavior);
     const request: ReactStateApiRequest = { version: 1, source: sourceRequest,
@@ -178,7 +220,10 @@ export function createReactStateApiInspectionStore(
       if (running) return running;
       const prior = readReactStateApiInspection(value.root, value.request);
       if (prior?.phase === 'complete') return { state: { ...prior, draft: projectReactStateApiContract(value.saved.initial!, prior) }, promise: Promise.resolve() };
-      const program = readReactSourceProgram(sourceRoot, [...new Set(value.source.program.components.map(c => c.module))]);
+      const dependencyEntries = value.source.program.readerOptions.jsxDependencyEntries;
+      const installed = readReactSourceProgram(sourceRoot, dependencyEntries ?? [...new Set(value.source.program.components.map(c => c.module))],
+        { includeJsxDependencies: !!dependencyEntries });
+      const program = dependencyEntries ? observeReactRuntimeDependencies(value.reference, installed).program : installed;
       const identities = (p: typeof program) => p.components.map(c =>
         ({ module: c.module, exportName: c.exportName, sourceSha256: c.sourceSha256, span: c.span }));
       if (program.problems.length || revisionOf(program.files) !== revisionOf(value.source.program.files) ||

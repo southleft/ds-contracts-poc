@@ -24,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import {
   closureDegradations,
   followInstances,
+  mappedInstanceRefs,
   partitionClosureRefusals,
   pickRequestedContract,
   type FetchNodesBatch,
@@ -220,6 +221,76 @@ const B = entry(set("2:0", "B", [[inst("c", "3:1")]]), {
   "3:1": { name: "V=0", componentSetId: "3:0" },
 });
 const C = entry(set("3:0", "C", [[]]));
+
+test("applied swap targets join the dependency walk without treating text or preferred values as references", async () => {
+  const node = inst("child", "2:1", [inst("inherited", "9:1")]);
+  node.componentProperties = {
+    "Icon#4:1": { type: "INSTANCE_SWAP", value: "3:1" },
+    "Label#4:2": { type: "TEXT", value: "8:1" },
+    "Visible#4:3": { type: "BOOLEAN", value: false },
+    "Mode": { type: "VARIANT", value: "7:1" },
+  };
+  const parent = entry(set("1:0", "Parent", [[node, structuredClone(node)]]), {
+    "2:1": { name: "Default", componentSetId: "2:0" },
+    "3:1": { name: "Glyph", componentSetId: "3:0" },
+    "8:1": { name: "Text that looks like an ID" },
+    "9:1": { name: "Inherited child" },
+  });
+  parent.document.componentPropertyDefinitions = {
+    "Unused#1": { type: "INSTANCE_SWAP", defaultValue: "2:1", preferredValues: [{ type: "COMPONENT", key: "unused-preference-key" }] },
+  };
+  const calls: string[][] = [];
+  const { response, closure } = await followInstances(resp("1:0", parent), ["1:0"], batches({
+    "2:0": entry(set("2:0", "Child", [[]])),
+    "3:0": entry(set("3:0", "Glyph", [[inst("leaf", "4:0")]]), { "4:0": { name: "Leaf" } }),
+    "4:0": entry({ id: "4:0", type: "COMPONENT", name: "Leaf", children: [] }),
+  }, calls));
+  assert.deepEqual(calls, [["2:0", "3:0"], ["4:0"]]);
+  assert.equal(closure.pulled.length, 3);
+  assert.equal(closure.cycles.length, 0);
+  assert.deepEqual(closure.unresolved, []);
+  assert.deepEqual(Object.keys(response.nodes), ["2:0", "4:0", "3:0", "1:0"]);
+  assert.ok(response.nodes["3:0"]);
+  assert.deepEqual(mappedInstanceRefs(parent.document).map(ref => ref.componentId), ["2:1", "3:1", "2:1", "3:1"]);
+});
+
+test("swap targets retain remote, missing and cap refusals, with property-specific locations", async () => {
+  const node = inst("child", "2:1");
+  node.componentProperties = {
+    "Local#1": { type: "INSTANCE_SWAP", value: "3:1" },
+    "Remote#1": { type: "INSTANCE_SWAP", value: "8:1" },
+    "Missing#1": { type: "INSTANCE_SWAP", value: "9:1" },
+  };
+  const parent = entry(set("1:0", "Parent", [[node]]), {
+    "2:1": { name: "Child", componentSetId: "2:0" },
+    "3:1": { name: "Glyph", componentSetId: "3:0" },
+    "8:1": { name: "Remote glyph", remote: true },
+  });
+  const calls: string[][] = [];
+  const { closure } = await followInstances(resp("1:0", parent), ["1:0"],
+    batches({ "2:0": entry(set("2:0", "Child", [[]])) }, calls), { cap: 1 });
+  assert.deepEqual(calls, [["2:0"]]);
+  assert.deepEqual(closure.unresolved.map(row => [row.targetId, row.reason]), [
+    ["3:0", "cap-exceeded"], ["8:1", "remote-library-component"], ["9:1", "not-found"],
+  ]);
+  for (const row of closure.unresolved) assert.match(row.referencedFrom[0]!, /componentProperties\[/);
+});
+
+test("a swapped target pointing back to the parent records a bounded cycle", async () => {
+  const node = inst("child", "2:1");
+  node.componentProperties = { "Content#1": { type: "INSTANCE_SWAP", value: "1:1" } };
+  const parent = entry(set("1:0", "Parent", [[node]]), {
+    "2:1": { name: "Child", componentSetId: "2:0" },
+    "1:1": { name: "Parent variant", componentSetId: "1:0" },
+  });
+  const calls: string[][] = [];
+  const { closure } = await followInstances(resp("1:0", parent), ["1:0"],
+    batches({ "2:0": entry(set("2:0", "Child", [[]])) }, calls));
+  assert.deepEqual(calls, [["2:0"]]);
+  assert.equal(closure.cycles.length, 1);
+  assert.equal(closure.unresolved[0]!.reason, "cycle-cut");
+  assert.match(closure.unresolved[0]!.referencedFrom[0]!, /componentProperties\[/);
+});
 
 test("transitive: A → B → C are all mapped, C first; remote and missing references are named per reference", async () => {
   const calls: string[][] = [];

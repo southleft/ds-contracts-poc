@@ -9,6 +9,7 @@ export interface ReactBehaviorContract {
   status: "generated-draft" | "refused";
   contract?: Contract;
   tsx?: string;
+  dependencies?: Array<{ contract: Contract; tsx: string }>;
   problems: string[];
   limitations: string[];
 }
@@ -123,7 +124,7 @@ export function projectReactBehaviorContract(
         rows.length !== 4 ||
         rows.some(
           (row) =>
-            !row.restored || row.initial.disabled || row.steps.length !== 2,
+            !row.restored || row.initial.disabled || row.initial.inert || row.live.inert || row.steps.length !== 2,
         ) ||
         new Set(rows.map((row) => row.initial.checked)).size !== 1
       )
@@ -157,7 +158,7 @@ export function projectReactBehaviorContract(
               : row.steps[index - 1].control.checked;
           const expected = prior === "true" ? "false" : "true";
           if (
-            step.control.disabled ||
+            step.control.disabled || step.control.inert ||
             step.control.checked !== (held ? row.initial.checked : expected) ||
             step.callback.problems.length ||
             step.callback.calls.length !== index + 1 ||

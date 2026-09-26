@@ -95,7 +95,7 @@ test('the plugin reader resolves PIXELS and PERCENT to pixels and keeps a receip
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['TrackedBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.46');
+  assert.equal(dumps._provenance.dumpVersion, '1.47');
   const texts = dumps.TrackedBadge.variants.map(v => v.children![0].text!);
   // The dump was built in the VM's realm; copy the values into this one.
   assert.deepEqual(Array.from(texts, t => t.letterSpacing), [1, 2, undefined, 0], '10 % of a 20 px font is 2 px; zero and mixed remain distinct');

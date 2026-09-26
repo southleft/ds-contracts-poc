@@ -291,6 +291,43 @@ test("reference API retains all ten cases, isolates source execution and refuses
 });
 
 
+test('reference service restores its explicit structure selection before considering native journals',async t=>{
+ const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-selected-observation-'));
+ t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+ const {readReactSourceProgram}=await import('./react-source-program.js');
+ const {inventoryEvidence}=await import('./react-validation-evidence.js');
+ const {beginReactOwnershipSelection,sealReactOwnershipSelection}=await import('./react-ownership-selection.js');
+ const reference=await buildReactReference(root),id='10000000-0000-4000-8000-000000000009';
+ const dir=path.join(repo,'private/react-source-ownership',reference.id,id);mkdirSync(dir,{recursive:true});
+ const report={id,referenceId:reference.id,state:'complete' as const,acceptedContract:null,denominator:10,matched:0,rows:[],sourceUnchanged:true};
+ writeFileSync(path.join(dir,'program.json'),JSON.stringify(readReactSourceProgram(reference.sourceRoot,['src/components/ui/button.tsx'])));
+ writeFileSync(path.join(dir,'report.json'),JSON.stringify(report));
+ writeFileSync(path.join(dir,'integrity.json'),JSON.stringify({version:1,files:inventoryEvidence(dir)}));
+ beginReactOwnershipSelection(repo,reference.id,id);sealReactOwnershipSelection(repo,reference,report);
+ const before=inventoryEvidence(path.join(repo,'private'));let fallback=0;
+ const start=async()=>{
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>{fallback++;throw Error('must not select a native pin');}}} as any));
+  const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
+  return {base:`http://127.0.0.1:${(server.address() as {port:number}).port}`,close:()=>new Promise<void>(resolve=>server.close(()=>{handle.close();resolve();}))};
+ };
+ for(let restart=0;restart<2;restart++){
+  const service=await start();try{
+   const loaded=await fetch(service.base+'/react',{method:'POST'});assert.equal(loaded.status,200);
+   assert.deepEqual((await loaded.json()).ownership,report);
+   assert.deepEqual(await (await fetch(service.base+`/react/${reference.id}/ownership`)).json(),report);
+  }finally{await service.close();}
+ }
+ for(const [file,hash] of Object.entries(before))assert.equal(inventoryEvidence(path.join(repo,'private'))[file],hash);
+ const selection=path.join(repo,'private/react-source-selections',reference.id,'selection.json');writeFileSync(selection,'{}');
+ const corrupt=await start();try{
+  const loaded=await (await fetch(corrupt.base+'/react',{method:'POST'})).json();
+  assert.equal(loaded.ownership.problem,'react-ownership-selection-invalid');
+  assert.equal(loaded.ownership.matched,0);assert.deepEqual(loaded.ownership.rows,[]);
+ }finally{await corrupt.close();}
+ assert.equal(fallback,0,'a selected record, even refused, must never silently pick an older native archive');
+});
+
 test("native progress HTTP reads cannot expose verification authority, recompile source or mutate delivery", async t => {
   const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-progress-route-'));
   t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});

@@ -2651,11 +2651,11 @@ function ensureHostSection(page, target, displayName) {
 function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
     // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
-    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // 100x100 default by shrinking a HUG axis to 0 and letting it re-measure
     // — which is right for a node whose size is supposed to come from its
     // content, and destructive for one the CONTRACT sized. A childless frame
-    // has nothing to re-measure against, so the axis hugs to 1 and stays
-    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // has nothing to re-measure against, so its seed stays as empty extent.
+    // MUI's switch-track is declared 34x14 and previously shipped 1x1 exactly
     // this way (the compile receipt's pin caught it, and the pin was right).
     if (axis === 'Horizontal' && hasW) continue;
     if (axis === 'Vertical' && hasH) continue;
@@ -2665,7 +2665,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
-      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node.resizeWithoutConstraints(axis === 'Horizontal' ? 0 : node.width, axis === 'Vertical' ? 0 : node.height);
       node[prop] = 'HUG';
     } catch (e) {
       throw new Error(
@@ -2876,7 +2876,7 @@ function applyOverlay(parent, childNode, childSpec) {
 // lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
+  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow || childSpec.widthFill) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
@@ -3387,9 +3387,14 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
+const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+function hasJointPropertyReferences(spec) {
+  return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children || []).some(hasJointPropertyReferences);
+}
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV +
+    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '');
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -3660,7 +3665,7 @@ async function amendSet(set, C) {
     for (const vis of registry.visibles) {
       const k = defKey(vis.prop);
       if (!k) continue;
-      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: k };
       vis.node.visible = vis.default;
     }
   }
@@ -3869,7 +3874,7 @@ async function amendComponent(comp, C) {
   for (const vis of registry.visibles) {
     const k = defKey(vis.prop);
     if (!k) continue;
-    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: k };
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
@@ -4039,7 +4044,7 @@ async function syncOne(C) {
     for (const vis of b.registry.visibles) {
       const key = keys[vis.prop];
       if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.componentPropertyReferences = { ...vis.node.componentPropertyReferences, visible: key };
       vis.node.visible = vis.default;
     }
   }

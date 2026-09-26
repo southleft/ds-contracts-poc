@@ -1,3 +1,4 @@
+import {readSourceResponse} from './source-response';
 import type { ReactOwnershipReport } from "../../../source-reference/react-ownership-run";
 import type { ReactProgramProposal } from "../../../source-reference/react-program-proposal";
 import type {
@@ -55,7 +56,7 @@ export function ReactSourceReference() {
         `/api/source-reference/react/${reference.id}/ownership`,
         { method: "POST" },
       );
-      const data = await response.json();
+      const data = await readSourceResponse(response);
       if (!response.ok) throw Error(data.error);
       setOwnership(data);
     } catch (e) {
@@ -74,7 +75,7 @@ export function ReactSourceReference() {
     const timer = setInterval(() => {
       void fetch(`/api/source-reference/react/${reference.id}/ownership`)
         .then(async (response) => {
-          const data = await response.json();
+          const data = await readSourceResponse(response);
           if (!response.ok) throw Error(data.error);
           if (!cancelled) setOwnership(data);
         })
@@ -96,7 +97,7 @@ export function ReactSourceReference() {
         `/api/source-reference/react/${reference.id}/program`,
         { method: "POST" },
       );
-      const data = await response.json();
+      const data = await readSourceResponse(response);
       if (!response.ok) throw Error(data.error);
       setProgram(data);
     } catch (e) {
@@ -117,7 +118,7 @@ export function ReactSourceReference() {
       const response = await fetch("/api/source-reference/react", {
         method: "POST",
       });
-      const result = await response.json();
+      const result = await readSourceResponse(response);
       if (!response.ok)
         throw Error(
           result.reason ? `${result.error} (${result.reason})` : result.error,
@@ -146,7 +147,7 @@ export function ReactSourceReference() {
     const timer = setInterval(() => {
       void fetch(`/api/source-reference/react/${reference.id}/validate`)
         .then(async (response) => {
-          const data = await response.json();
+          const data = await readSourceResponse(response);
           if (!response.ok) throw Error(data.error);
           if (!cancelled) setValidation(data);
         })
@@ -171,7 +172,7 @@ export function ReactSourceReference() {
         `/api/source-reference/react/${reference.id}/validate`,
         { method: "POST" },
       );
-      const data = await response.json();
+      const data = await readSourceResponse(response);
       if (!response.ok) throw Error(data.error);
       setValidation(data);
     } catch (e) {
@@ -326,12 +327,16 @@ export function ReactSourceReference() {
                     {row.problems.length > 0 && (
                       <p>{row.problems.join(" · ")}</p>
                     )}
+                    {!!row.ownership?.ancestors?.length && <p>
+                      Surrounding source components: {row.ownership.ancestors.map(ancestor => ancestor.source.exportName).join(" → ")}.
+                      The selected component was observed in this context; surrounding components are not included in its native output.
+                    </p>}
                     <ul>
                       {row.ownership?.components.map((instance) => (
                         <li key={instance.id}>
                           {instance.source.exportName}
                           {instance.parent
-                            ? ` inside ${row.ownership?.components.find((i) => i.id === instance.parent)?.source.exportName ?? "unresolved parent"}`
+                            ? ` inside ${row.ownership?.components.find((i) => i.id === instance.parent)?.source.exportName ?? row.ownership?.ancestors?.find((i) => i.id === instance.parent)?.source.exportName ?? "unresolved parent"}`
                             : " at the selected root"}{" "}
                           · {instance.roots.length} rendered root
                           {instance.roots.length === 1 ? "" : "s"}
@@ -346,9 +351,28 @@ export function ReactSourceReference() {
                         <ul>{row.anatomy.instances.map(instance => (
                           <li key={instance.instanceId}>
                             {instance.source.exportName}: {instance.roots.map(root => `<${root.tag}> (${root.correspondence})`).join(", ")}
-                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "nested-caller-slot" ? " · caller content inside source wrappers; native generation remains unqualified" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.content === "caller-slot" ? instance.contentContext ? " · caller-content slot verified for this recorded input" : " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "nested-caller-slot" ? " · caller content inside source wrappers; native generation remains unqualified" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.rootDelegation && ` · shared root: ${instance.rootDelegation.instanceIds.map(id => row.anatomy?.instances.find(i => i.instanceId === id)?.source.exportName ?? id).join(" → ")}; caller content ${instance.rootDelegation.forwardsChildren ? instance.contentContext ? "forwarding proved for this input" : "forwarding proved" : "still unqualified"}`}
                             {instance.dependencies.length > 0 && ` · ${instance.dependencies.length} nested component instance(s) kept as references`}
                             {instance.problems.length > 0 && ` · ${instance.problems.join(" · ")}`}
+                          </li>
+                        ))}</ul>
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && !!row.helperObservations?.length && (
+                      <section aria-label={`${row.id} caller-content helper checks`}>
+                        <h4>Caller-content helper checks</h4>
+                        <p>These checks cover the recorded input and render. Other input combinations and native content conversion still need qualification.</p>
+                        <ul>{row.helperObservations.map(helper => (
+                          <li key={helper.id}>
+                            {row.ownership?.components.find(instance => instance.id === helper.instanceId)?.source.exportName ?? "Source component"}: {helper.status === "observed"
+                              ? "helper input and output verified; image and structure unchanged"
+                              : `helper not verified · ${helper.reason ?? "observation unavailable"}`}
+                            {helper.status === "observed" && helper.containingFlow?.status === "observed"
+                              ? helper.containingFlow.content === "forwarded"
+                                ? "; containing component returned the same caller content in this context"
+                                : "; containing component return checked; content is nested or replaced in this context"
+                              : helper.status === "observed" ? "; containing component return remains unverified" : ""}
                           </li>
                         ))}</ul>
                       </section>
@@ -357,6 +381,7 @@ export function ReactSourceReference() {
                       <section aria-label={`${row.id} native root check`}>
                         <h4>Native conversion check</h4>
                         <p>Checks the observed root box against the native compiler. This does not create Figma components or qualify the full component.</p>
+                        {row.rootMatrix?.contentContextRevision && <p>This draft uses content evidence for the recorded input. Other input combinations and skipped properties remain unqualified.</p>}
                         {row.rootVisual.problems.length > 0 && <p>{row.rootVisual.problems.join(" · ")}</p>}
                         <ul>{row.rootVisual.roots.map(root => (
                           <li key={root.instanceId}>

@@ -17,13 +17,16 @@ import { canonicalJson } from '../core/contract-provenance.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import { isReactNativeRequest, type ReactNativeRequest } from './react-native-request.js';
 import { isReactStateApiNativeRequest, type ReactStateApiNativeRequest } from './react-state-api-native-request.js';
+import { isReactAuthoredOperationRequest, reactAuthoredOwnershipAnchor, type ReactAuthoredNativeRequest, type ReactAuthoredStateApiNativeRequest } from './react-authored-native-request.js';
 
-export type NativeSourcePin = ReactNativeRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
+export type NativeSourcePin = ReactNativeRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest | ReactAuthoredStateApiNativeRequest;
 export const isNativeSourcePin = (pin: unknown): pin is NativeSourcePin =>
-  isReactNativeRequest(pin) || isReactInitialNativeRequest(pin) || isReactStateApiNativeRequest(pin);
+  isReactNativeRequest(pin) || isReactInitialNativeRequest(pin) || isReactStateApiNativeRequest(pin) ||
+  (isReactAuthoredOperationRequest(pin) && pin.version === 3);
 export const nativeSourcePinCase = (pin: NativeSourcePin) => pin.kind === 'react-state-api-draft' ? pin.initial.caseId : pin.caseId;
-export const nativeSourcePinAnchor = (pin: NativeSourcePin): ReactNativeRequest =>
-  pin.kind === 'react-state-api-draft' ? pin.initial.anchor : pin.kind === 'react-initial-draft' ? pin.anchor : pin;
+export const nativeSourcePinAnchor = (pin: NativeSourcePin): ReactNativeRequest | ReactAuthoredNativeRequest =>
+  pin.kind === 'react-authored-draft' ? reactAuthoredOwnershipAnchor(pin) :
+    pin.kind === 'react-state-api-draft' ? pin.initial.anchor : pin.kind === 'react-initial-draft' ? pin.anchor : pin;
 type Entry = { version: 1; parentId: string; sequence: number; previous: string; request: NativeSourcePin };
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const sha = (s: string) => createHash('sha256').update(s).digest('hex');
@@ -38,7 +41,10 @@ const identity = (pin: NativeSourcePin) => {
 };
 /** Same source case and request shape. Only the sealed evidence may differ. */
 function assertSuccessor(original: NativeSourcePin, successor: NativeSourcePin) {
-  if (isReactStateApiNativeRequest(original)) {
+  if (original.kind === 'react-authored-draft') {
+    if (!isNativeSourcePin(original)) fail('kind-unsupported');
+    if (!isNativeSourcePin(successor) || successor.kind !== 'react-authored-draft' || successor.caseId !== original.caseId) fail('case-mismatch');
+  } else if (isReactStateApiNativeRequest(original)) {
     // The complete state experiment remains part of the pin and journal seed.
     // It cannot be replaced by appearance evidence alone.
     if (!isReactStateApiNativeRequest(successor) || successor.initial.caseId !== original.initial.caseId) fail('case-mismatch');

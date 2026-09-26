@@ -82,12 +82,12 @@ test('a second axis the fill does not depend on is ignored; every value of the a
   assert.deepEqual(headerOf(result).literalsByProp, [{ prop: 'variant', map: { stretch: { width: '100%' } } }]);
 });
 
-test('a FILL drawn in EVERY variant proposes exactly what it did before', () => {
-  // Width under a COLUMN whose other child hugs: the whole-set path names it (its bytes are unchanged).
+test('a FILL drawn in EVERY variant uses a base relation without changing sibling alignment', () => {
+  // The whole-set width relation has the same carrier as a partial FILL.
   const width = propose('VERTICAL', [{ name: 'Variant=Default', header: true }, { name: 'Variant=Stretch', header: true }]);
   assert.equal(headerOf(width).literalsByProp, undefined);
-  assert.equal(headerOf(width).literals, undefined);
-  assert.ok(width.notes.some(n => /header: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(n)));
+  assert.deepEqual(headerOf(width).literals, { width: '100%' });
+  assert.ok(width.notes.some(n => /header: drawn FILL-width under a COLUMN parent in every occurrence of this part.*carried as the part literal/.test(n)));
   // Height under a definite ROW: the base literal, not a per-variant one.
   const height = propose('HORIZONTAL', [{ name: 'Variant=Default', header: true }, { name: 'Variant=Stretch', header: true }]);
   assert.deepEqual(headerOf(height).literals, { height: '100%' });

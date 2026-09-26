@@ -1,4 +1,4 @@
-import {hasComponentGrow} from '../scripts/contract-schema.js';
+import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactSelectionPlan } from './react-selection.js';
@@ -6,7 +6,7 @@ import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
-import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
  * zero-infrastructure emitter for orgs without a token pipeline: no CSS
@@ -215,6 +215,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const v = resolveLiteral(tokenPath);
     return typeof v === 'number' ? v : String(v);
   };
+  const scalableOverrideRefs = (part: Part): Record<string,string> => {
+    const root = part.component && ctx.contracts.get(part.component.id)?.anatomy.root;
+    const paths = Object.values(root?.parts ?? {});
+    if (!root || !paths.length || !paths.every(child=>child.shape?.kind==='path' && child.shape.parentViewport)) return {};
+    return Object.fromEntries(Object.entries(part.component?.overrides ?? {}).filter(([channel]) =>
+      root.overridable?.includes(channel) && (channel==='size' || channel==='color' && paths.length===1 && paths[0].literals?.['background-color']==='currentColor')));
+  };
+  const hasScalableOverrides = (part: Part) => Object.keys(scalableOverrideRefs(part)).length > 0;
 
   // A2 grid: the ONE compiled cell plan (core/emit-react.ts gridCellPlan).
   // This surface resolves token gaps to LITERALS (its whole claim) and
@@ -260,6 +268,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       [camel(channel),resolveValue(stripBraces(ref))]))
   ])));
   const jointConst=jointTables.length?`\nconst J: Array<Record<string, CSSProperties>> = ${JSON.stringify(jointStyles,null,2)};\n`:'';
+  const placementTables = walkAnatomy(contract).filter(row => row.part.absolutePlacementByCombination)
+    .map(row => ({name: row.name, table: row.part.absolutePlacementByCombination!}));
+  const placementStyles = Object.fromEntries(placementTables.map(({name, table}) => [name,
+    Object.fromEntries(table.rows.map(row => [JSON.stringify(row.values),
+      {position: 'absolute', left: row.left, top: row.top, right: 'auto', bottom: 'auto'}]))]));
+  const placementConst = placementTables.length ? `\nconst PL: Record<string, Record<string, CSSProperties>> = ${JSON.stringify(placementStyles,null,2)};\n` : '';
   const partVariantProps = new Map<string, Set<string>>();
   const addVariant = (prop: string, value: string, partName: string, decls: StyleRecord) => {
     const key = `${prop}-${value}`;
@@ -585,10 +599,25 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   for (const { name: partName, part, path: p } of walkAnatomy(contract)) {
     if (part.component) {
+      if (part.absolutePlacement) baseStyles[partName] = {position: 'absolute', left: part.absolutePlacement.left,
+        top: part.absolutePlacement.top, right: 'auto', bottom: 'auto'};
       if (hasComponentGrow(part)) {
         baseStyles[partName] = part.layout?.grow === undefined ? {} : {flex: part.layout.grow ? (part.layout.growBasis === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: part.layout.grow ? 0 : 'auto', ...(part.layout.growBasis === 'zero' ? {minHeight: part.layout.grow ? 0 : 'auto'} : {})};
         for (const [value, override] of Object.entries(part.layoutByProp?.map ?? {})) if (override.grow !== undefined)
           addVariant(part.layoutByProp!.prop, value, partName, {flex: override.grow ? ((override.growBasis ?? part.layout?.growBasis) === 'zero' ? '1 1 0px' : '1 1 auto') : '0 1 auto', minWidth: override.grow ? 0 : 'auto', ...((override.growBasis ?? part.layout?.growBasis) === 'zero' ? {minHeight: override.grow ? 0 : 'auto'} : {})});
+      }
+      for (const [channel,ref] of Object.entries(scalableOverrideRefs(part))) {
+        const path = stripBraces(ref), axes = placeholdersIn(path);
+        const values = (resolved: string): StyleRecord => channel==='size'
+          ? {width:resolveValue(resolved),height:resolveValue(resolved)} : {color:resolveValue(resolved)};
+        if (!axes.length) baseStyles[partName] = {...baseStyles[partName],...values(path)};
+        else {
+          const expand = (i: number, resolved: string, selection: [string,string][]) => {
+            if (i === axes.length) { addVariantCompound(selection,partName,values(resolved)); return; }
+            for (const value of substByName.get(axes[i]) ?? []) expand(i+1,resolved.replaceAll(`{${axes[i]}}`,value),[...selection,[axes[i],value]]);
+          };
+          expand(0,path,[]);
+        }
       }
       continue;
     }
@@ -796,6 +825,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const values=table.props.map(prop=>`${codePropOf(prop)} === undefined ? null : ${codePropOf(prop)}`).join(', ');
       pieces.push(`...(J[${index}][JSON.stringify([${values}])] ?? {})`);
     }
+    const placement = placementTables.find(row => row.name === partName);
+    if (placement) {
+      const values = placement.table.props.map(prop => `${codePropOf(prop)} === undefined ? null : String(${codePropOf(prop)})`).join(', ');
+      pieces.push(`...PL[${JSON.stringify(partName)}][JSON.stringify([${values}])]`);
+    }
     pieces.push(...extra);
     const selectionPart = selection && walkAnatomy(contract).find(row => row.name === partName)?.part;
     if (selectionPart && selection?.style(selectionPart)) pieces.push(selection.style(selectionPart)!);
@@ -886,10 +920,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         // PropByProp lookup (see emit-react depAttrString).
         const parentProp = contract.props.find((p) => p.name === value.prop);
         const expr = parentProp?.bindings.code.prop ?? value.prop;
-        const chain = Object.entries(value.map)
-          .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
-          .join('');
-        parts.push(` ${codeName}={${codeValueExpression(depProp, chain + 'undefined')}}`);
+        parts.push(` ${codeName}={${componentLookupExpression(depProp, expr, value.map)}}`);
         continue;
       }
       if (typeof value === 'boolean') {
@@ -950,7 +981,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             if (prop.bindings.code.prop === 'children') { childrenField = field; return ''; }
             return ` ${prop.bindings.code.prop}={${codeValueExpression(prop, `__dscItem[${JSON.stringify(field)}]`)}}`;
           }).join('');
-        const attrs = depAttrString(dep, part.component.props ?? {}) + fieldAttrs + selection.itemAttrs + (hasComponentGrow(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+        const attrs = depAttrString(dep, part.component.props ?? {}) + fieldAttrs + selection.itemAttrs + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
         const key = `__dscItem[${JSON.stringify(part.repeat.keyField)}]`;
         const node = childrenField ? `<${dep.name} key={${key}}${attrs}>{__dscItem[${JSON.stringify(childrenField)}]}</${dep.name}>`
           : `<${dep.name} key={${key}}${attrs} />`;
@@ -983,7 +1014,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
                 fieldAttrs += ` ${codeName}="${v}"`;
               }
             }
-            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentGrow(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+            const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
               ? `<${dep.name}${attrs}>${itemText}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
@@ -993,7 +1024,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentGrow(part) ? ` style=${styleExpr(partName, false, [])}` : '');
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component) + (selection?.attrs(part, true) ?? '') + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.
@@ -1240,7 +1271,7 @@ ${depImports}${depImports ? '\n' : ''}
 ${iconsConst}${sizedIconsConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}${placementConst}
 
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
@@ -1276,7 +1307,7 @@ ${depImports}${depImports ? '\n' : ''}
 ${selection?.runtime ?? ''}${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}${strokeRingParts.size > 0 ? STROKE_RING_RUNTIME : ''}const S: Record<string, ${styleType}> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
-const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}
+const V: Record<string, ${styleType}> = ${JSON.stringify(variantFlat, null, 2)};${jointConst}${placementConst}
 ${Object.keys(disabledStyle).length > 0 ? `\nconst DISABLED_STYLE: CSSProperties = ${JSON.stringify(disabledStyle)};\n` : ''}
 export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}

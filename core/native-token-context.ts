@@ -7,6 +7,7 @@
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import { compileTokenSetRows, type TokenSetRow } from "./token-set.js";
 import { aliasTarget, flattenTokens } from "./tokens.js";
+import { isNativeTokenSource, type NativeTokenSource } from './native-token-source.js';
 
 type NativeType = "COLOR" | "FLOAT" | "STRING";
 export type NativeTokenValue =
@@ -31,19 +32,15 @@ export interface NativeTokenContextInput {
   fileKey: string;
   /** Host-owned operation scope, never a library collection's display name. */
   scopeId: string;
-  source: {
-    revision: string;
-    sourceProgramSha256: string;
-    /** The hash of the token trees at ALLOCATION time, stamped into ownership
-     * metadata. After a carried value update (`allocatedValues`) it still names
-     * the allocation and no longer describes the current trees; each mode's
-     * `tokenTreeRevision` does. */
-    tokensSha256: string;
-  };
+  /** tokensSha256 names the trees at ALLOCATION time. Value updates retain
+   * that ownership identity; each mode's tokenTreeRevision describes its current
+   * tree. Prepared-library provenance does not assert an observed source. */
+  source: NativeTokenSource;
   /** Exact requested paths. Alias dependencies are added, never same-value peers. */
   tokenPaths: string[];
-  /** Only demonstrated source modes. A nativeSelection distinguishes physical
-   * variant modes of the same source context without inventing source themes. */
+  /** Source inputs carry demonstrated modes; prepared-library inputs carry
+   * explicit selected contexts. A nativeSelection distinguishes physical
+   * variant modes of the same context without inventing source themes. */
   modes: {
     sourceMode: string;
     brand: string;
@@ -182,7 +179,7 @@ function unique(values: string[], code: string): void {
   )
     fail(code);
 }
-function assertTree(tree: unknown): asserts tree is Record<string, unknown> {
+export function assertNativeTokenTree(tree: unknown): asserts tree is Record<string, unknown> {
   if (!tree || typeof tree !== "object" || Array.isArray(tree))
     fail("tree-shape");
   // flattenTokens deliberately normalizes dot paths. Refuse an ambiguous tree
@@ -276,7 +273,7 @@ export function prepareNativeTokenContext(
 
 /** The single writer of a token leaf's `$value`, addressed the way
  * flattenTokens names it. Exactly one leaf must answer to the path; a tree
- * that passed assertTree always has one, so anything else is refused here. */
+ * that passed assertNativeTokenTree always has one, so anything else is refused here. */
 export function setNativeTokenLeafValue(
   tree: Record<string, unknown>,
   tokenPath: string,
@@ -322,7 +319,7 @@ function restoreAllocatedValues(
       (m) => m.sourceMode === row.sourceMode && m.brand === row.brand,
     );
     if (!mode) fail("allocated-value-mode");
-    assertTree(mode!.tokens);
+    assertNativeTokenTree(mode!.tokens);
     const current = flattenTokens(mode!.tokens).get(row.tokenPath);
     if (!current) fail("allocated-value-path");
     // Historical inputs remain number-only. A dimension succession is a new
@@ -424,16 +421,11 @@ function prepareBody(
 ): Omit<NativeTokenPreparation, "revision"> {
   if (!input || !nonempty(input.fileKey)) fail("file-key");
   const collectionName = nativeTokenCollectionName(input.scopeId);
-  if (
-    !input.source ||
-    !nonempty(input.source.revision) ||
-    !hashPattern.test(input.source.sourceProgramSha256) ||
-    !hashPattern.test(input.source.tokensSha256)
-  )
+  if (!isNativeTokenSource(input.source))
     fail("source-identity");
   if (
     !Array.isArray(input.tokenPaths) ||
-    !input.tokenPaths.length ||
+    (!input.tokenPaths.length && !(input.source.kind === 'prepared-contract-library' && input.writeProtocol === 'explicit-modes-v1')) ||
     input.tokenPaths.some((p) => !pathPattern.test(p))
   )
     fail("token-path");
@@ -461,7 +453,7 @@ function prepareBody(
   const tables = input.modes.map((mode) => {
     if (!nonempty(mode.sourceMode) || !nonempty(mode.brand))
       fail("source-mode");
-    assertTree(mode.tokens);
+    assertNativeTokenTree(mode.tokens);
     if (mode.tokenTreeRevision !== revisionOf(mode.tokens))
       fail("token-tree-revision");
     return flattenTokens(mode.tokens);

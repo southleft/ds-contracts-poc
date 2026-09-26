@@ -310,6 +310,8 @@ reg("layout", "placement", [
   "part.placement.alignX",
   "part.placement.alignY",
 ]);
+reg("layout", "absolute-component-placement", ["part.absolutePlacement", "part.absolutePlacement.left", "part.absolutePlacement.top"]);
+reg("layout", "absolute-component-placement", ["part.absolutePlacementByCombination", "part.absolutePlacementByCombination.props", "part.absolutePlacementByCombination.rows", "part.absolutePlacementByCombination.rows.values", "part.absolutePlacementByCombination.rows.left", "part.absolutePlacementByCombination.rows.top"]);
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
 reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
 // dump v1.35: a CAPTURED canvas fact — the part's stroke takes no layout space.
@@ -414,6 +416,11 @@ reg("shape", "filled-paths", [
   "shape.pathsByProp",
   "shape.pathsByProp.prop",
   "shape.pathsByProp.map",
+  "shape.parentViewport",
+  "shape.parentViewport.width",
+  "shape.parentViewport.height",
+  "shape.parentViewport.x",
+  "shape.parentViewport.y",
 ]);
 reg("shape", "stroked-paths", [
   "shape.strokePath",

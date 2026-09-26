@@ -1,0 +1,156 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/textarea.contract.json (ds.textarea v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 0;
+  padding-inline: var(--theme-space-xxs);
+  padding-block: var(--theme-space-xxs);
+  gap: var(--theme-space-xxs);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.state-default {
+  width: var(--imported-textarea-root-width-default);
+  height: var(--imported-textarea-root-height-default);
+}
+
+.state-hover {
+  width: var(--imported-textarea-root-width-hover);
+  height: var(--imported-textarea-root-height-hover);
+}
+
+.state-focus {
+  width: var(--imported-textarea-root-width-focus);
+  height: var(--imported-textarea-root-height-focus);
+}
+
+.state-active {
+  width: var(--imported-textarea-root-width-active);
+  height: var(--imported-textarea-root-height-active);
+}
+
+.state-error {
+  width: var(--imported-textarea-root-width-error);
+  height: var(--imported-textarea-root-height-error);
+}
+
+.state-disabled {
+  width: var(--imported-textarea-root-width-disabled);
+  height: var(--imported-textarea-root-height-disabled);
+}
+
+.alCTextareaLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--theme-space-xxs);
+}
+
+.Label {
+  color: var(--theme-color-content-neutral-default);
+  font-size: var(--typography-font-size-16);
+  line-height: var(--typography-line-height-24);
+  font-weight: var(--imported-textarea-al-c-textarea-label-label-font-weight);
+  font-family: Public Sans;
+  text-align: left;
+}
+
+.alCTextareaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.state-default .alCTextareaContainer {
+  flex: 1 1 0px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.alCTextareaInput {
+  display: flex;
+  background-color: var(--theme-color-background-neutral-default);
+  border-color: var(--theme-color-border-neutral-default);
+}
+
+.state-default .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-default);
+}
+
+.state-hover .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-hover);
+}
+
+.state-focus .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-focus);
+}
+
+.state-active .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-active);
+}
+
+.state-error .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-error);
+}
+
+.state-disabled .alCTextareaInput {
+  opacity: var(--imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-disabled);
+}
+
+.state-hover .alCTextareaInput {
+  border-color: var(--theme-color-border-neutral-strong);
+}
+
+.state-focus .alCTextareaInput {
+  border-color: var(--theme-color-border-primary-default);
+}
+
+.state-active .alCTextareaInput {
+  border-color: var(--theme-color-border-primary-default);
+}
+
+.state-error .alCTextareaInput {
+  border-color: var(--theme-color-border-danger-default);
+}
+
+.state-disabled .alCTextareaInput {
+  border-color: var(--theme-color-content-neutral-default);
+}
+
+.state-default .alCTextareaInput {
+  flex: 1 1 0px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.state-hover .alCTextareaInput {
+  flex: 1 1 0px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.alCTextareaFooter {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.alCTextareaFieldNotes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--theme-space-xxs);
+}

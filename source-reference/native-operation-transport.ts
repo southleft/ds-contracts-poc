@@ -33,6 +33,8 @@ export interface NativeDeliveryJobs {
   acceptDelivery(id: string, result: NativeOperationResult): NativeOperationReceipt;
   retryObservation(id: string): unknown;
   inspectSizing?(id: string): NativeOperationCommand;
+  reviewLibraryReplacement?(id:string):NativeOperationCommand;
+  applyLibraryReplacement?(id:string,revision:string):NativeOperationCommand;
   /** Journals that can settle an unresolved write by reading the canvas. */
   resolveWriteOutcome?(id: string): NativeOperationCommand;
   beginWrite?(id: string, attemptId: string): void;
@@ -284,6 +286,16 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (!status(id).started || !jobs.inspectSizing) fail('sizing-observation-refused');
     jobs.inspectSizing(id);
   };
+  const reviewLibraryReplacement=(id:string)=>{
+    connection(id);
+    if(!status(id).started||!jobs.reviewLibraryReplacement)fail('library-replacement-review-refused');
+    jobs.reviewLibraryReplacement(id);
+  };
+  const applyLibraryReplacement=(id:string,revision:string)=>{
+    connection(id);
+    if(!status(id).started||!jobs.applyLibraryReplacement)fail('library-replacement-apply-refused');
+    jobs.applyLibraryReplacement(id,revision);
+  };
   const resolveWriteOutcome = (id: string) => {
     connection(id);
     if (!status(id).started || !jobs.resolveWriteOutcome) fail("write-outcome-resolution-refused");
@@ -326,5 +338,5 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (state.connected) throw Error("native-update-attest-dead-companion-connected");
     jobs.attestDead(id);
   };
-  return { pair, start, status, authorize, claim, begin, accept, acceptDelivery, retryObservation, inspectSizing, resolveWriteOutcome, rearmWrite, attestDead, observeDesign, observeSourceRepair };
+  return { pair, start, status, authorize, claim, begin, accept, acceptDelivery, retryObservation, inspectSizing, reviewLibraryReplacement, applyLibraryReplacement, resolveWriteOutcome, rearmWrite, attestDead, observeDesign, observeSourceRepair };
 }

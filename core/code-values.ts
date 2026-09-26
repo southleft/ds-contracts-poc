@@ -36,6 +36,32 @@ export function codeValueExpression(
     .join(" ");
   return `((value: unknown): ${codeValueUnion(p)}${p.required ? "" : " | undefined"} => { ${p.required ? "" : "if (value === undefined) return undefined; "}switch (value) { ${cases} default: throw new Error(${JSON.stringify("CODE_VALUE_UNKNOWN:" + p.name)}); } })(${canonicalExpression})`;
 }
+
+/** A finite lookup stores canonical strings, but the receiving component's
+ * declared type owns their runtime spelling. An enum containing "false" is
+ * still a string enum; only an actual boolean child receives false/true. */
+export function componentLookupValue(
+  child: Pick<Prop, "name" | "type"> | undefined,
+  value: string,
+): string | boolean {
+  if (child?.type !== "boolean") return value;
+  const canonical = value.trim().toLowerCase();
+  if (canonical !== "true" && canonical !== "false")
+    throw Error(`COMPONENT_BOOLEAN_LOOKUP_INVALID:${child.name}:${JSON.stringify(value)}`);
+  return canonical === "true";
+}
+
+export function componentLookupExpression(
+  child: Prop | undefined,
+  parentExpression: string,
+  map: Record<string, string>,
+): string {
+  const chain = Object.entries(map).map(([key, value]) => {
+    const literal = JSON.stringify(componentLookupValue(child, value));
+    return `${parentExpression} === ${JSON.stringify(key)} ? ${literal} : `;
+  }).join("");
+  return codeValueExpression(child, chain + "undefined");
+}
 const rawName = (index: number) => `__dscValue${index}`;
 export function mappedPropBinding(
   p: Prop,

@@ -5,11 +5,12 @@ import { ReactStateApiInspection } from './ReactStateApiInspection';
 export function ReactCallbackInspection({
   referenceId,
   caseId,
-  available, prepareStateApi, nativeBusy, onStateApiChange,
+  available, unavailableReason, prepareStateApi, nativeBusy, onStateApiChange,
 }: {
   referenceId: string;
   caseId: string;
   available: boolean;
+  unavailableReason?: string;
   prepareStateApi?:()=>void; nativeBusy?:boolean;
   onStateApiChange?:()=>void;
 }) {
@@ -112,7 +113,7 @@ export function ReactCallbackInspection({
             : `Inspect ${caseId} callback behavior`}
       </button>
       {!available && (
-        <p>A saved, current source structure observation is required.</p>
+        <p>{unavailableReason ?? "A saved, current source structure observation is required."}</p>
       )}
       {error && <p role="alert">{error}</p>}
       {result && (
@@ -170,6 +171,7 @@ export function ReactCallbackInspection({
                   <tr>
                     <th>Input</th>
                     <th>Action</th>
+                    <th>Focus after each action</th>
                     <th>Initial state</th>
                     <th>After each activation</th>
                     <th>Callback arguments</th>
@@ -183,9 +185,11 @@ export function ReactCallbackInspection({
                         {row.property} = {JSON.stringify(row.value)}
                       </td>
                       <td>{row.action}</td>
+                      <td>{row.steps.map(step => step.focused === undefined ? 'Not recorded' : step.focused ? 'Focused' : 'Not focused').join(' → ')}</td>
                       <td>
                         {row.initial.checked}
                         {row.initial.disabled ? " (disabled)" : ""}
+                        {row.initial.inert ? " (inert)" : ""}
                       </td>
                       <td>
                         {row.steps

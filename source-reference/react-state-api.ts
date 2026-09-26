@@ -1,6 +1,7 @@
 /** A separate, bounded observation of a checked-state API. A failed broad
  * candidate sweep stays failed; its uniquely observed relationships may only
  * propose the inputs for these new, independently restored experiments. */
+import { reactStateApiAppearance } from './react-state-api-appearance.js';
 import type { Page } from 'playwright-core';
 import type { ReactInitialInspection } from './react-initial-inspection.js';
 import type { ReactCallbackInspection } from './react-callback-inspection.js';
@@ -37,9 +38,9 @@ export interface ReactStateApiPlan {
  * relabeling of the broad report. The host must authenticate both input records
  * and pin this plan before executing it against the same original source. */
 export function planReactStateApi(initial: ReactInitialInspection, behavior: ReactCallbackInspection): ReactStateApiPlan {
-  const appearance = initial.draft?.compiled?.contract, observed = behavior.observation;
+  const appearance = reactStateApiAppearance(initial).contract, observed = behavior.observation;
   if (initial.phase !== 'complete' || !initial.sourceUnchanged || initial.problems.length ||
-      initial.draft?.status !== 'compiled-draft' || !appearance || !initial.observation ||
+      !initial.observation ||
       !behavior.sourceUnchanged || !['complete', 'failed'].includes(behavior.phase) || !observed ||
       initial.caseId !== behavior.caseId || initial.instanceId !== behavior.instanceId)
     throw Error('state-api-source-evidence-incomplete');
@@ -78,12 +79,12 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
     const rows = observed.rows.filter(r => r.callback === control.callback && r.property === property);
     if (rows.length !== values.length * 2 || new Set(rows.map(r => r.action + ':' + r.value)).size !== values.length * 2 ||
         rows.some(r => !['space', 'associated-label'].includes(r.action) || !values.includes(r.value as StateValue) ||
-          !r.restored || r.initial.disabled || r.live.disabled || r.initial.checked !== checkedValue(r.value) || r.steps.length !== 2 ||
+          !r.restored || r.initial.disabled || r.live.disabled || r.initial.inert || r.live.inert || r.initial.checked !== checkedValue(r.value) || r.steps.length !== 2 ||
           (property === control.property && r.live.checked !== r.initial.checked) ||
           r.steps.some((step, index) => {
             const prior = property === control.property || index === 0 ? r.initial.checked : r.steps[index - 1].control.checked;
             const next = prior !== 'true';
-            return step.control.disabled || step.control.checked !== (property === control.property ? r.initial.checked : String(next)) ||
+            return step.control.disabled || step.control.inert || step.control.checked !== (property === control.property ? r.initial.checked : String(next)) ||
               step.callback.problems.length || step.callback.calls.length !== index + 1 ||
               revisionOf(step.callback.calls[index]) !== revisionOf([next]) ||
               (index > 0 && revisionOf(step.callback.calls.slice(0, index)) !== revisionOf(r.steps[index - 1].callback.calls));
@@ -122,9 +123,9 @@ export function planReactStateApi(initial: ReactInitialInspection, behavior: Rea
     const unobservedBooleanCandidate = mixed && rows.length === 0 && !candidate.stateProperties.includes(property);
     if (prop.type !== 'boolean' || prop.required || prop.bindings.code.initial || (!unobservedBooleanCandidate && (rows.length !== 4 ||
         new Set(rows.map(r => r.action + ':' + r.value)).size !== 4 ||
-        rows.some(r => typeof r.value !== 'boolean' || !r.restored || r.initial.disabled !== r.value ||
+        rows.some(r => typeof r.value !== 'boolean' || !r.restored || r.initial.inert || r.live.inert || r.initial.disabled !== r.value ||
           r.live.disabled !== r.value || r.steps.length !== 2 || r.steps.some(step =>
-            step.control.disabled !== r.value || step.callback.problems.length ||
+            step.control.inert || step.control.disabled !== r.value || step.callback.problems.length ||
             (r.value && (step.control.checked !== r.initial.checked || step.callback.calls.length)))))))
       throw Error('state-api-disabled-input-unverified');
     if (omittedValue(property)) throw Error('state-api-disabled-default-unsupported');

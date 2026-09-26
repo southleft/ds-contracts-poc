@@ -5,7 +5,7 @@
   "nodeId": "120:1979",
   "mode": "exact",
   "variantCount": 4,
-  "contractSha256": "0053e17bad9ed2d5a26e57325229efa92c125e4ad740394c6a65e823ebecbdee",
+  "contractSha256": "160fddcfc8b7d147ac8a5ce1ae801118f3ecacc39a01ad82298a720343390412",
   "carriage": {
     "carried": 124,
     "named": 87,
@@ -297,14 +297,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Alert/Alert.module.css": "a5fbf0463e0efc057a46b86a30a35d0e8f5fd0c298c7e5cf709322143c85525f",
+    "react/Alert/Alert.module.css": "2a2e0bdf7b5342bb5c443ffd8c14ad171cc97842b59bff7f94fba876833342f9",
     "react/Alert/Alert.stories.tsx": "56479224492103838384c32b84815f61f03eb8dfafececb8b095164681887b58",
     "react/Alert/Alert.tsx": "1178dcb2d234c44de498be20aa377e756fda2f230552d07d1dfca60f30dc3219",
     "react/Alert/index.ts": "9858da9966f6abecc7ff91176e2078e00a7b6d44346f8b21f9cb0ec6ef5d38d5",
     "wc/flowbite-alert.ts": "188412c788736343132cda734e1ecea6d3090bffab7513928d1a41ce5110d7ca",
-    "wc/flowbite-alert.css.ts": "69965a30857257db1f64fd751e61560f99684d7c9e6840d2423846d310f9ba74",
+    "wc/flowbite-alert.css.ts": "eb3894e1025dcc57fc1ad65ee3940b75809dcfe341f90ec447f34afe9dac07c7",
     "wc/flowbite-alert.demo.html": "0ebc949a5514241484669857b7e6107ba0b3920f48a0c19648ee6f4adc01580a",
     "wc/flowbite-alert.custom-elements.json": "315fd9b68421e68a6979bfb3390a25e11a6d97a06f2523f4dab62601656859e3"
   },
-  "notesCount": 146
+  "notesCount": 147
 }

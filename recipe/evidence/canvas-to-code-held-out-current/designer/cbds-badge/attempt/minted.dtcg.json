@@ -1,0 +1,310 @@
+{
+  "imported": {
+    "badge": {
+      "root": {
+        "background-color": {
+          "brand": {
+            "fill": {
+              "$value": "#0e61ba",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#d6f1ff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "fill": {
+              "$value": "#038142",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#c4fde1",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "fill": {
+              "$value": "#b67300",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#fff6cc",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "danger": {
+            "fill": {
+              "$value": "#b51833",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#ffdae3",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "neutral": {
+            "fill": {
+              "$value": "#3a475b",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#dfe3eb",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          },
+          "accent": {
+            "fill": {
+              "$value": "#292d96",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#e0e1ff",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            }
+          }
+        },
+        "border-color": {
+          "brand": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#0e61ba",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#038142",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#b67300",
+              "$type": "color"
+            }
+          },
+          "danger": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#b51833",
+              "$type": "color"
+            }
+          },
+          "neutral": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#a2aebf",
+              "$type": "color"
+            }
+          },
+          "accent": {
+            "fill": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#292d96",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "label": {
+        "color": {
+          "brand": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#0e61ba",
+              "$type": "color"
+            }
+          },
+          "success": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#038142",
+              "$type": "color"
+            }
+          },
+          "warning": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#b67300",
+              "$type": "color"
+            }
+          },
+          "danger": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#b51833",
+              "$type": "color"
+            }
+          },
+          "neutral": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#3a475b",
+              "$type": "color"
+            }
+          },
+          "accent": {
+            "fill": {
+              "$value": "#fcfeff",
+              "$type": "color"
+            },
+            "tonal": {
+              "$value": "#050a0f",
+              "$type": "color"
+            },
+            "outline": {
+              "$value": "#292d96",
+              "$type": "color"
+            }
+          }
+        },
+        "font-size": {
+          "large": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        },
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-size-small": {
+      "root": {
+        "width": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "xsmall": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "xsmall": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  }
+}

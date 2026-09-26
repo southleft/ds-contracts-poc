@@ -15,12 +15,12 @@ import {
   reactReferenceUnchanged,
   type ReactReference,
 } from "./react-reference.js";
-import type { ReactNativeRequest } from "./react-native-request.js";
-import { readReactInspectionOriginal, reactInspectionRequest, type ReactInspectionRequest } from "./react-initial-inspection.js";
+import { readReactInspectionOriginal, reactInspectionRequest, type ReactInspectionRequest, type ReactInspectionSource } from "./react-initial-inspection.js";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
 } from "./react-source-program.js";
+import {observeReactRuntimeDependencies} from './react-runtime-export.js';
 import {
   buildReactOwnershipReference,
   reactOwnershipHook,
@@ -86,8 +86,8 @@ export function readReactCallbackInspectionRecord(value: {
   if (
     report.id !== latest.id ||
     report.caseId !== value.request.caseId ||
-    report.instanceId !== (value.request.version === 2 ? value.request.instanceId : undefined) ||
-    (value.request.version === 2 && report.phase === 'complete' && report.observation?.target?.instanceId !== value.request.instanceId) ||
+    report.instanceId !== (value.request.version !== 1 ? value.request.instanceId : undefined) ||
+    (value.request.version !== 1 && report.phase === 'complete' && report.observation?.target?.instanceId !== value.request.instanceId) ||
     report.phase === "running"
   )
     throw Error("callback-report-invalid");
@@ -107,7 +107,7 @@ export function createReactCallbackInspectionStore(
   select: (
     referenceId: string,
     caseId: string,
-  ) => { reference: ReactReference; anchor: ReactNativeRequest },
+  ) => ReactInspectionSource,
   derive?: (referenceId:string,caseId:string,report:ReactCallbackInspection)=>ReactBehaviorContract,
 ) {
   const active = new Map<
@@ -115,8 +115,8 @@ export function createReactCallbackInspectionStore(
     { state: ReactCallbackInspection; promise: Promise<void>; request: ReactInspectionRequest }
   >();
   const input = (referenceId: string, caseId: string, instanceId?: string) => {
-    const { reference, anchor } = select(referenceId, caseId),
-      request = reactInspectionRequest(anchor, caseId, instanceId);
+    const selected = select(referenceId, caseId), { reference, anchor } = selected,
+      request = reactInspectionRequest(anchor, caseId, instanceId ?? selected.instanceId);
     const source = readReactInspectionOriginal(repo, reference, request),
       key = revisionOf(request).slice(7);
     return {
@@ -131,7 +131,7 @@ export function createReactCallbackInspectionStore(
   return {
     running(request: ReactInspectionRequest) {
       const job = [...active.values()].find(({ request: r }) => r.caseId === request.caseId && r.version === request.version &&
-        (r.version !== 2 || request.version === 2 && r.instanceId === request.instanceId) &&
+        (r.version === 1 || request.version !== 1 && r.instanceId === request.instanceId) &&
         r.anchor.referenceId === request.anchor.referenceId && r.anchor.inventorySha256 === request.anchor.inventorySha256 &&
         revisionOf(r.anchor.ownership) === revisionOf(request.anchor.ownership));
       return job ? structuredClone(job.state) : undefined;
@@ -146,15 +146,18 @@ export function createReactCallbackInspectionStore(
     },
     start(referenceId: string, caseId: string, instanceId?: string) {
       const value = input(referenceId, caseId, instanceId);
+      instanceId = value.request.version === 1 ? undefined : value.request.instanceId;
       const activeKey = value.key;
       const existing = active.get(activeKey);
       if (existing) return existing;
       const prior = saved(value);
       if (prior?.phase === "complete")
         return { state: prior, promise: Promise.resolve() };
-      const program = readReactSourceProgram(sourceRoot, [
+      const dependencyEntries = value.source.program.readerOptions.jsxDependencyEntries;
+      const installed = readReactSourceProgram(sourceRoot, dependencyEntries ?? [
         ...new Set(value.source.program.components.map((c) => c.module)),
-      ]);
+      ], { includeJsxDependencies: !!dependencyEntries });
+      const program = dependencyEntries ? observeReactRuntimeDependencies(value.reference, installed).program : installed;
       const identities = (p: typeof program) =>
         p.components.map((c) => ({
           module: c.module,

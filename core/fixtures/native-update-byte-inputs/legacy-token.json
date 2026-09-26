@@ -1,0 +1,728 @@
+{
+  "before": {
+    "operation": {
+      "id": "10000000-0000-4000-8000-000000000008",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh"
+    },
+    "planRevision": "sha256:26c4f38e162a98454d54dcd80b8e01c962b52de3b4c965ccfe9d1a91ae7f1862",
+    "component": {
+      "setName": "Update",
+      "contractId": "fixture.update",
+      "version": "0.1.0",
+      "anchorKey": null,
+      "description": "Update — generated from contract fixture.update v0.1.0",
+      "isSet": true,
+      "boolProps": [],
+      "textProps": [],
+      "fontStyles": [
+        "Medium"
+      ],
+      "variants": [
+        {
+          "name": "Kind=a",
+          "row": 0,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Kind=a",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "stretchChildren": true
+            },
+            "fixedWidth": {
+              "px": 16,
+              "varName": "size"
+            },
+            "fixedHeight": {
+              "px": 16,
+              "varName": "size"
+            },
+            "opacity": 0.5,
+            "nativeContractPart": {
+              "contractRevision": "sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2",
+              "variant": "Kind=a",
+              "specPath": []
+            }
+          }
+        },
+        {
+          "name": "Kind=b",
+          "row": 1,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Kind=b",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "stretchChildren": true
+            },
+            "fixedWidth": {
+              "px": 16,
+              "varName": "size"
+            },
+            "fixedHeight": {
+              "px": 16,
+              "varName": "size"
+            },
+            "opacity": 0.5,
+            "nativeContractPart": {
+              "contractRevision": "sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2",
+              "variant": "Kind=b",
+              "specPath": []
+            }
+          }
+        }
+      ],
+      "propNames": {
+        "Kind": "kind"
+      },
+      "semantics": {
+        "element": "div"
+      },
+      "colW": 380,
+      "nativeContractDraft": {
+        "revision": "sha256:ee640c500034030a33f617efba9ac60f159029698bd39cd03d4056a9611472b6",
+        "acceptedContract": null
+      }
+    },
+    "projection": {
+      "version": 1,
+      "kind": "contract-draft",
+      "purpose": "source-candidate-inspection",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "contractId": "fixture.update",
+      "contractRevision": "sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2",
+      "tokenRevision": "sha256:9ac1140eb4a894c9eaf1b22c2ddd9232e97a1aadbe99f6009f7b6b7d2884fe5e",
+      "source": {
+        "revision": "sha256:073171f7f5e1438ae632cb252bda87d19e1bfab1a0ba309e91bdd645886f24ea",
+        "programSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evidenceRevision": "sha256:edecec53ab11f560816e75a17681eb83886beace01d7fb927d99707d3d031aac"
+      },
+      "context": {
+        "mode": "light",
+        "brand": "default"
+      }
+    },
+    "tokenInput": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "scopeId": "source-10000000-0000-4000-8000-000000000008",
+      "source": {
+        "revision": "sha256:073171f7f5e1438ae632cb252bda87d19e1bfab1a0ba309e91bdd645886f24ea",
+        "sourceProgramSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "tokensSha256": "9ac1140eb4a894c9eaf1b22c2ddd9232e97a1aadbe99f6009f7b6b7d2884fe5e"
+      },
+      "tokenPaths": [
+        "opacity",
+        "size"
+      ],
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "nativeModeName": "Light",
+          "tokens": {
+            "size": {
+              "$type": "dimension",
+              "$value": "16px"
+            },
+            "opacity": {
+              "$type": "number",
+              "$value": 0.5
+            }
+          },
+          "tokenTreeRevision": "sha256:9ac1140eb4a894c9eaf1b22c2ddd9232e97a1aadbe99f6009f7b6b7d2884fe5e"
+        }
+      ]
+    },
+    "tokenIdentity": {
+      "origin": "created",
+      "preparationRevision": "sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "collection": {
+        "id": "VariableCollectionId:3:4",
+        "key": "key-VariableCollectionId:3:4",
+        "name": "DS candidate tokens / source-10000000-0000-4000-8000-000000000008"
+      },
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "modeId": "VariableCollectionId:3:4:m0",
+          "name": "Light"
+        }
+      ],
+      "variables": [
+        {
+          "tokenPath": "opacity",
+          "id": "VariableID:4:5",
+          "key": "key-VariableID:4:5"
+        },
+        {
+          "tokenPath": "size",
+          "id": "VariableID:5:6",
+          "key": "key-VariableID:5:6"
+        }
+      ]
+    },
+    "creation": {
+      "version": 1,
+      "status": "created-candidate",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "operationId": "10000000-0000-4000-8000-000000000008",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "allocationAttempted": true,
+      "pageId": "6:7",
+      "target": {
+        "id": "9:10",
+        "type": "COMPONENT_SET",
+        "key": "key-9:10"
+      },
+      "nodes": [
+        {
+          "id": "6:7",
+          "type": "PAGE",
+          "key": "key-6:7"
+        },
+        {
+          "id": "7:8",
+          "type": "COMPONENT",
+          "key": "key-7:8"
+        },
+        {
+          "id": "8:9",
+          "type": "COMPONENT",
+          "key": "key-8:9"
+        },
+        {
+          "id": "9:10",
+          "type": "COMPONENT_SET",
+          "key": "key-9:10"
+        }
+      ],
+      "problems": [],
+      "propertyDefinitions": {
+        "Kind": {
+          "type": "VARIANT",
+          "defaultValue": "a",
+          "variantOptions": [
+            "a",
+            "b"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "id": "7:8",
+          "key": "key-7:8",
+          "name": "Kind=a"
+        },
+        {
+          "id": "8:9",
+          "key": "key-8:9",
+          "name": "Kind=b"
+        }
+      ],
+      "applied": {
+        "createdNodeIds": [
+          "9:10"
+        ],
+        "results": [
+          {
+            "name": "Update",
+            "contractId": "source-native:10000000-0000-4000-8000-000000000008:fixture.update",
+            "nodeId": "9:10",
+            "key": "key-9:10",
+            "variants": 2,
+            "properties": [
+              "Kind"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "baseline": {
+    "version": 1,
+    "status": "native-readback-collected",
+    "receiptKind": "independent-native-component-readback",
+    "operationId": "10000000-0000-4000-8000-000000000008",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "planRevision": "sha256:26c4f38e162a98454d54dcd80b8e01c962b52de3b4c965ccfe9d1a91ae7f1862",
+    "acceptedContract": null,
+    "nativeQualification": "unqualified",
+    "problems": [],
+    "nodes": [
+      {
+        "id": "6:7",
+        "type": "PAGE",
+        "name": "DS contract draft / 10000000-0000-4000-8000-000000000008",
+        "parentId": "2:3",
+        "childIds": [
+          "9:10"
+        ],
+        "values": {
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "layoutMode": "NONE",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": true,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000008\",\"sourceContractId\":\"fixture.update\",\"sourceContractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"tokenPreparationRevision\":\"sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "6:7",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": ""
+        },
+        "key": "key-6:7"
+      },
+      {
+        "id": "9:10",
+        "type": "COMPONENT_SET",
+        "name": "Update",
+        "parentId": "6:7",
+        "childIds": [
+          "7:8",
+          "8:9"
+        ],
+        "values": {
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 96,
+          "height": 152,
+          "layoutMode": "NONE",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": true,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:3:4": "VariableCollectionId:3:4:m0"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000008\",\"sourceContractId\":\"fixture.update\",\"sourceContractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"tokenPreparationRevision\":\"sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "9:10",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "source-native:10000000-0000-4000-8000-000000000008:fixture.update",
+          "specHash": "4282802586",
+          "canvasFingerprint": "v6:2944119896",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "{\"element\":\"div\"}",
+          "propNames": "{\"Kind\":\"kind\"}"
+        },
+        "key": "key-9:10",
+        "definitions": {
+          "Kind": {
+            "type": "VARIANT",
+            "defaultValue": "a",
+            "variantOptions": [
+              "a",
+              "b"
+            ]
+          }
+        }
+      },
+      {
+        "id": "7:8",
+        "type": "COMPONENT",
+        "name": "Kind=a",
+        "parentId": "9:10",
+        "childIds": [],
+        "values": {
+          "visible": true,
+          "opacity": 0.5,
+          "x": 40,
+          "y": 40,
+          "width": 16,
+          "height": 16,
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {
+            "width": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:5:6"
+            },
+            "height": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:5:6"
+            }
+          },
+          "explicitVariableModes": {
+            "VariableCollectionId:3:4": "VariableCollectionId:3:4:m0"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000008\",\"sourceContractId\":\"fixture.update\",\"sourceContractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"tokenPreparationRevision\":\"sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "7:8",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "v6:290506039",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"variant\":\"Kind=a\",\"specPath\":[]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": ""
+        },
+        "key": "key-7:8",
+        "variantProperties": {
+          "Kind": "a"
+        }
+      },
+      {
+        "id": "8:9",
+        "type": "COMPONENT",
+        "name": "Kind=b",
+        "parentId": "9:10",
+        "childIds": [],
+        "values": {
+          "visible": true,
+          "opacity": 0.5,
+          "x": 40,
+          "y": 96,
+          "width": 16,
+          "height": 16,
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {
+            "width": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:5:6"
+            },
+            "height": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:5:6"
+            }
+          },
+          "explicitVariableModes": {
+            "VariableCollectionId:3:4": "VariableCollectionId:3:4:m0"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000008\",\"sourceContractId\":\"fixture.update\",\"sourceContractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"tokenPreparationRevision\":\"sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "8:9",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "v6:2443125662",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2\",\"variant\":\"Kind=b\",\"specPath\":[]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": ""
+        },
+        "key": "key-8:9",
+        "variantProperties": {
+          "Kind": "b"
+        }
+      }
+    ],
+    "tokens": {
+      "version": 1,
+      "status": "readback-collected",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "preparationRevision": "sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe",
+      "receiptKind": "independent-native-readback",
+      "problems": [],
+      "receipt": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "collection": {
+          "id": "VariableCollectionId:3:4",
+          "key": "key-VariableCollectionId:3:4",
+          "name": "DS candidate tokens / source-10000000-0000-4000-8000-000000000008",
+          "remote": false,
+          "ownership": {
+            "scopeId": "source-10000000-0000-4000-8000-000000000008",
+            "preparationRevision": "sha256:cd0f5906838ef7ea1a88a81167c4d2fc34ddd81ef868e57f04da9bed5b1cb6fe",
+            "source": {
+              "revision": "sha256:073171f7f5e1438ae632cb252bda87d19e1bfab1a0ba309e91bdd645886f24ea",
+              "sourceProgramSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "tokensSha256": "9ac1140eb4a894c9eaf1b22c2ddd9232e97a1aadbe99f6009f7b6b7d2884fe5e"
+            }
+          },
+          "defaultModeId": "VariableCollectionId:3:4:m0",
+          "modes": [
+            {
+              "modeId": "VariableCollectionId:3:4:m0",
+              "name": "Light"
+            }
+          ]
+        },
+        "variables": [
+          {
+            "id": "VariableID:4:5",
+            "key": "key-VariableID:4:5",
+            "name": "opacity",
+            "variableCollectionId": "VariableCollectionId:3:4",
+            "resolvedType": "FLOAT",
+            "remote": false,
+            "valuesByMode": {
+              "VariableCollectionId:3:4:m0": 0.5
+            }
+          },
+          {
+            "id": "VariableID:5:6",
+            "key": "key-VariableID:5:6",
+            "name": "size",
+            "variableCollectionId": "VariableCollectionId:3:4",
+            "resolvedType": "FLOAT",
+            "remote": false,
+            "valuesByMode": {
+              "VariableCollectionId:3:4:m0": 16
+            }
+          }
+        ]
+      }
+    },
+    "images": []
+  },
+  "desired": {
+    "component": {
+      "setName": "Update",
+      "contractId": "fixture.update",
+      "version": "0.1.0",
+      "anchorKey": null,
+      "description": "Update — generated from contract fixture.update v0.1.0",
+      "isSet": true,
+      "boolProps": [],
+      "textProps": [],
+      "fontStyles": [
+        "Medium"
+      ],
+      "variants": [
+        {
+          "name": "Kind=a",
+          "row": 0,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Kind=a",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "stretchChildren": true
+            },
+            "fixedWidth": {
+              "px": 16,
+              "varName": "size"
+            },
+            "fixedHeight": {
+              "px": 16,
+              "varName": "size"
+            },
+            "opacity": 0.4,
+            "nativeContractPart": {
+              "contractRevision": "sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2",
+              "variant": "Kind=a",
+              "specPath": []
+            }
+          }
+        },
+        {
+          "name": "Kind=b",
+          "row": 1,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Kind=b",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "stretchChildren": true
+            },
+            "fixedWidth": {
+              "px": 16,
+              "varName": "size"
+            },
+            "fixedHeight": {
+              "px": 16,
+              "varName": "size"
+            },
+            "opacity": 0.4,
+            "nativeContractPart": {
+              "contractRevision": "sha256:49b0b93134a23e389953fc55e044766ca9e0f101ece7e57e357731bab135fcf2",
+              "variant": "Kind=b",
+              "specPath": []
+            }
+          }
+        }
+      ],
+      "propNames": {
+        "Kind": "kind"
+      },
+      "semantics": {
+        "element": "div"
+      },
+      "colW": 380,
+      "nativeContractDraft": {
+        "revision": "sha256:cc51d339b5869316121e27f9d94b890fff6fb75dd9c512a702656aec63ecc74e",
+        "acceptedContract": null
+      }
+    },
+    "revision": "sha256:f1c230380373368a81b656ac8853c10363f4c3e4138902e5e373e7a9f657d226",
+    "tokenInput": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "scopeId": "source-10000000-0000-4000-8000-000000000008",
+      "source": {
+        "revision": "sha256:073171f7f5e1438ae632cb252bda87d19e1bfab1a0ba309e91bdd645886f24ea",
+        "sourceProgramSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "tokensSha256": "9ac1140eb4a894c9eaf1b22c2ddd9232e97a1aadbe99f6009f7b6b7d2884fe5e"
+      },
+      "tokenPaths": [
+        "opacity",
+        "size"
+      ],
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "nativeModeName": "Light",
+          "tokens": {
+            "size": {
+              "$type": "dimension",
+              "$value": "16px"
+            },
+            "opacity": {
+              "$type": "number",
+              "$value": 0.4
+            }
+          },
+          "tokenTreeRevision": "sha256:418a3fa706dd028e31a2d6a04e32b2504e20cd3d8414e7a4d2a3911ebff1f49b"
+        }
+      ]
+    }
+  }
+}

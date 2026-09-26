@@ -1,0 +1,98 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.link",
+  "name": "Link",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "a"
+  },
+  "props": [
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "linkText": {
+          "declared": {
+            "font-family": "Public Sans",
+            "text-align": "left"
+          },
+          "literals": {
+            "letter-spacing": "1px"
+          },
+          "text": "Link text",
+          "tokens": {
+            "color": "{theme.color.content.primary-default}",
+            "font-size": "{typography.font-size.14}",
+            "line-height": "{typography.line-height.20}",
+            "font-weight": "{imported.link.link-text.font-weight}"
+          }
+        },
+        "alIcon": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "icon": "3610:3127"
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "tokens": {
+        "border-radius": "{theme.border.radius.xs}",
+        "gap": "{theme.space.xs}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{theme.color.focus-ring}",
+          "outline-width": "{theme.border.width.md}"
+        },
+        "disabled": {
+          "opacity": "{imported.link.state-disabled.opacity}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Link",
+        "export": "Link"
+      }
+    }
+  }
+}

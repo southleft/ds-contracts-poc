@@ -13,6 +13,9 @@ export async function buildReactStateApiPreview(repo: string, draft: ReactBehavi
       domain.some(v => v !== false && v !== true && (contract?.semantics.role !== 'checkbox' || v !== 'indeterminate')) ||
       domain.filter(v => v === 'indeterminate').length > 1)
     throw Error('state-api-preview-draft-unavailable');
+  const dependencies = new Map((draft.dependencies ?? []).map(d => [d.contract.name, d.tsx]));
+  if (dependencies.size !== (draft.dependencies ?? []).length || dependencies.has(contract.name))
+    throw Error('state-api-preview-dependencies-invalid');
   const config = { controlled: prop.bindings.code.prop, initial: prop.bindings.code.initial!.prop,
     callback: event.bindings.code.prop, values: domain, disabled: contract.props.find(p => p.name === 'disabled')?.bindings.code.prop };
   const built = await build({ absWorkingDir: repo, stdin: { resolveDir: repo, sourcefile: 'state-api-consumer.tsx', loader: 'tsx', contents: `
@@ -44,7 +47,12 @@ export async function buildReactStateApiPreview(repo: string, draft: ReactBehavi
     }createRoot(document.getElementById('root')).render(<Consumer/>);
   ` }, bundle: true, write: false, format: 'iife', jsx: 'automatic', logLevel: 'silent', plugins: [{ name: 'generated-state-api', setup(builder) {
     builder.onResolve({filter:/^generated-state-api$/},()=>({path:'generated-state-api',namespace:'state-api'}));
-    builder.onLoad({filter:/.*/,namespace:'state-api'},()=>({contents:draft.tsx!,loader:'tsx',resolveDir:repo}));
+    builder.onResolve({filter:/^\.\//,namespace:'state-api'},args=>{
+      const name=args.path.slice(2);
+      if(!dependencies.has(name))throw Error('state-api-preview-dependency-unavailable:'+name);
+      return {path:name,namespace:'state-api'};
+    });
+    builder.onLoad({filter:/.*/,namespace:'state-api'},args=>({contents:args.path==='generated-state-api'?draft.tsx!:dependencies.get(args.path)!,loader:'tsx',resolveDir:repo}));
   } }] });
   if (built.warnings.length) throw Error('state-api-preview-build-warning');
   return { javascript: built.outputFiles[0].text,

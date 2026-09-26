@@ -1,0 +1,79 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/chip.contract.json (ds.chip v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--theme-color-background-transparent-default);
+  padding-inline: var(--theme-space-sm);
+  gap: var(--theme-space-xs);
+  min-height: var(--theme-size-control-sm);
+  width: fit-content;
+  height: fit-content;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.variant-bare {
+  border-color: var(--imported-chip-root-border-color-bare);
+}
+
+.variant-primary {
+  border-color: var(--imported-chip-root-border-color-primary);
+  background-color: var(--theme-color-background-primary-default);
+}
+
+.variant-tertiary {
+  border-color: var(--imported-chip-root-border-color-tertiary);
+}
+
+.variant-secondary {
+  border-color: var(--imported-chip-root-border-color-secondary);
+  background-color: var(--theme-color-background-secondary-default);
+}
+
+.variant-neutral {
+  border-color: var(--imported-chip-root-border-color-neutral);
+  background-color: var(--theme-color-background-neutral-strong);
+}
+
+.root:focus-visible {
+  outline-color: var(--theme-color-focus-ring);
+}
+
+.root:focus-visible {
+  outline-width: var(--theme-border-width-md);
+}
+
+.Label {
+  color: var(--theme-color-content-neutral-default);
+  font-size: var(--typography-font-size-12);
+  line-height: var(--typography-line-height-20);
+  font-family: Public Sans;
+  text-align: left;
+}
+
+.variant-primary .Label {
+  color: var(--theme-color-content-primary-weak);
+}
+
+.variant-secondary .Label {
+  color: var(--theme-color-content-secondary-weak);
+}

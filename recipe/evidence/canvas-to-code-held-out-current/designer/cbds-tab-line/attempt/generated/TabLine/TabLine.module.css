@@ -1,0 +1,46 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tab-line.contract.json (ds.tab-line v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--spacing-100);
+  height: fit-content;
+}
+
+.type-horizontal {
+  width: var(--imported-tab-line-root-width-horizontal);
+}
+
+.type-verticalRight {
+  width: var(--imported-tab-line-root-width-verticalRight);
+  gap: var(--spacing-050);
+}
+
+.type-verticalLeft {
+  width: var(--imported-tab-line-root-width-verticalLeft);
+  gap: var(--spacing-050);
+}
+
+.type-verticalRight {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.type-verticalLeft {
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}

@@ -1,8 +1,12 @@
+import {readSourceResponse} from './source-response';
 import { useEffect, useState } from 'react';
 import type { ReactInitialInspection as Inspection } from '../../../source-reference/react-initial-inspection';
-export function ReactInitialInspection({ referenceId, caseId, available, prepareNative, nativeSaved, nativeBusy, onObservationChange }: { referenceId: string; caseId: string; available: boolean; prepareNative: () => void; nativeSaved: boolean; nativeBusy: boolean; onObservationChange?: () => void }) {
+export function ReactInitialInspection({ referenceId, caseId, available, unavailableReason, prepareNative, nativeSaved, nativeBusy, onObservationChange }: { referenceId: string; caseId: string; available: boolean; unavailableReason?: string; prepareNative: () => void; nativeSaved: boolean; nativeBusy: boolean; onObservationChange?: () => void }) {
   const [result, setResult] = useState<Inspection | null>(null), [error, setError] = useState(''), [busy, setBusy] = useState(false);
   const endpoint = `/api/source-reference/react/${referenceId}/initial-states/${caseId}`;
+  // A job can finish observing before its archive is sealed and reopened for
+  // assembly. Keep polling until the saved draft or its refusal is available.
+  const awaitingDraft = result?.phase === 'complete' && !!result.authoredOrigins && !result.authoredDraft && !result.authoredProblem;
   useEffect(() => {
     if (result?.phase === 'complete') onObservationChange?.();
   }, [result?.id, result?.phase, onObservationChange]);
@@ -12,7 +16,7 @@ export function ReactInitialInspection({ referenceId, caseId, available, prepare
     if (!available) return;
     const load = async () => {
       try {
-        const response = await fetch(endpoint), data = await response.json();
+        const response = await fetch(endpoint), data = await readSourceResponse(response);
         if (!response.ok) throw Error(data.error);
         if (!stopped) { setResult(data.inspection); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
@@ -21,21 +25,21 @@ export function ReactInitialInspection({ referenceId, caseId, available, prepare
     return () => { stopped = true; };
   }, [endpoint, available]);
   useEffect(() => {
-    if (result?.phase !== 'running') return;
+    if (result?.phase !== 'running' && !awaitingDraft) return;
     let stopped = false, pending = false;
     const timer = setInterval(() => {
       if (pending) return; pending = true;
       void fetch(endpoint).then(async response => {
-        const data = await response.json(); if (!response.ok) throw Error(data.error);
+        const data = await readSourceResponse(response); if (!response.ok) throw Error(data.error);
         if (!stopped) setResult(data.inspection);
       }).catch(e => { if (!stopped) setError(String(e)); }).finally(() => { pending = false; });
     }, 3000);
     return () => { stopped = true; clearInterval(timer); };
-  }, [endpoint, result?.phase]);
+  }, [endpoint, result?.phase, awaitingDraft]);
   async function start() {
     setBusy(true); setError('');
     try {
-      const response = await fetch(endpoint, { method: 'POST' }), data = await response.json();
+      const response = await fetch(endpoint, { method: 'POST' }), data = await readSourceResponse(response);
       if (!response.ok) throw Error(data.error); setResult(data.inspection);
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
     finally { setBusy(false); }
@@ -51,11 +55,25 @@ export function ReactInitialInspection({ referenceId, caseId, available, prepare
       : result.reobservable === 'evidence-unobserved-by-recorded-observer' ? 'The current assembler names evidence this observation never recorded.'
       : 'This observation was saved before observer versions were recorded, and the current assembler names evidence it never observed.'} Observing again saves a new run beside it; the saved run and any operation that pins it are unchanged.</p>}
     {result?.lastAttempt && <p role="alert">The latest observation attempt failed ({result.lastAttempt.problems.join(', ') || 'no problem recorded'}). The saved observation above is unchanged.</p>}
-    {!available && <p>Prepare a supported Figma root from the structure observation first; its saved source archive also contains this cohort’s stateful cases.</p>}
+    {!available && <p>{unavailableReason ?? "Prepare a supported Figma root from the structure observation first; its saved source archive also contains this cohort’s stateful cases."}</p>}
     {error && <p role="alert">{error}</p>}
     {result && <>
       <p>Initial-state inspection: {result.phase}. {result.sourceUnchanged ? 'Original source and rendering restored.' : 'Source equivalence is not yet established.'}</p>
-      {result.draft && <section aria-label="Initial-state contract draft">
+      {result.authoredOrigins && <section aria-label="Initial-state component origins">
+        <h4>Original component boundaries</h4>
+        <p>{result.authoredOrigins.rows.filter(row=>row.status==='observed').length} / {result.authoredOrigins.rows.length} initial states matched the original render tree and image with component origins verified.</p>
+        <p>Composed state draft: {result.authoredDraft?.status ?? (awaitingDraft ? 'assembling saved observations' : 'unavailable')}. Native creation, fidelity and interaction behavior still require verification.</p>
+        {result.authoredDraft?.status === 'native-compiled' && <p>{result.authoredDraft.contracts?.length} component definitions with {result.authoredDraft.components?.find(c => c.contractId === result.authoredDraft?.contract?.id)?.variants.length ?? 0} root variants are ready for review. Preparation verifies the saved state observations again before creating a native operation.</p>}
+        {!!result.authoredDraft?.problems.length && <ul>{result.authoredDraft.problems.map(problem=><li key={problem}>{problem==='react-authored-sweep-component-root-sizing-unqualified:'
+          ? "The source's own root width and height have not been verified, so a native state draft cannot be generated."
+          : problem}</li>)}</ul>}
+        {result.authoredProblem && <p>{result.authoredProblem}</p>}
+        {result.authoredOrigins.rows.filter(row=>row.problem).map(row=><p key={row.id}>State {row.id}: {row.problem}</p>)}
+        <button type="button" disabled={nativeBusy || nativeSaved || !!result.reobservable || result.authoredDraft?.status!=='native-compiled'} onClick={prepareNative}>
+          {nativeSaved ? 'Initial-state native operation saved' : 'Prepare initial states for Figma'}
+        </button>
+      </section>}
+      {result.draft && !result.authoredOrigins && <section aria-label="Initial-state contract draft">
         <button type="button" disabled={nativeBusy || nativeSaved || result.draft.status !== 'compiled-draft'} onClick={prepareNative}>
           {nativeSaved ? 'Initial-state native operation saved' : 'Prepare initial states for Figma'}
         </button>

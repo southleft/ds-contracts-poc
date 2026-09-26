@@ -66,18 +66,23 @@ export function prepareNativeTemplateAppUpdate(template:NativeTemplateUpdateProp
 export function nativeAppUpdateDesired(compiled:{revision:string;plan:{
   component:NativeAppUpdateInput['desired']['component'];
   tokenInput:NativeAppUpdateInput['desired']['tokenInput'];
+  graphComponents?:NativeAppUpdateInput['desired']['graphComponents'];
   templateGraph?:{input:NativeTemplateComponentUpdateInput['desired']};
 }}) {
   if(compiled.revision!==revisionOf(compiled.plan))throw Error('native-update-compiled-source-changed');
   const templateGraph=compiled.plan.templateGraph?.input;
+  if(templateGraph&&compiled.plan.graphComponents!==undefined)throw Error('native-update-template-graph-source-unqualified');
   if(templateGraph&&!same(templateGraph.tokens,compiled.plan.tokenInput))throw Error('native-update-template-source-invalid');
   return structuredClone({desired:{component:templateGraph?.component??compiled.plan.component,
-    revision:compiled.revision,tokenInput:compiled.plan.tokenInput},...(templateGraph?{templateGraph}:{})});
+    revision:compiled.revision,tokenInput:compiled.plan.tokenInput,
+    ...(compiled.plan.graphComponents!==undefined?{graphComponents:compiled.plan.graphComponents}:{})},...(templateGraph?{templateGraph}:{})});
 }
 export type NativeTemplateAppUpdatePlan=ReturnType<typeof prepareNativeTemplateAppUpdate>['plan'];
 export type NativeAppUpdatePlan=legacy.NativeContractUpdatePlan|NativeTemplateAppUpdatePlan;
 export function prepareNativeAppUpdate(input:NativeAppUpdateInput):{plan:NativeAppUpdatePlan;revision:string} {
   if(!input.templateGraph)return legacy.prepareNativeContractUpdate(input);
+  if(input.before.graphComponents!==undefined||input.desired.graphComponents!==undefined)
+    throw Error('native-update-template-graph-source-unqualified');
   if(!Array.isArray(input.templateConsumers)||!same(input.templateGraph.component,input.desired.component)||
       !same(input.templateGraph.tokens,input.desired.tokenInput))throw Error('native-update-template-source-invalid');
   return prepareNativeTemplateAppUpdate(prepareNativeTemplateUpdateProposal({before:input.before,baseline:input.baseline,

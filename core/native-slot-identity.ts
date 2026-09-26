@@ -146,6 +146,16 @@ export function resolveNativeGraphSlotIdentities(creation: Row, rows: Row[]): Ro
       if (!slot || slot.type !== 'SLOT') continue;
       const stamp = n.metadata?.nativeSourceAllocation;
       if (typeof stamp !== 'string' || !born.has(stamp)) continue;
+      // A library default is an owned INSTANCE on its main's slot and an
+      // inherited copy in each enclosing instance. It is not a re-identified
+      // caller allocation. The version-2 verifier subsequently checks the
+      // complete main/instance topology and every default-slot stamp.
+      if (creation.graphVerification === 2 && live.has(stamp) && n.type === 'INSTANCE' &&
+          born.get(stamp)?.type === 'INSTANCE' && bornInstance(boundary(slot))) {
+        const part = JSON.parse(n.metadata?.nativeContractPart ?? 'null');
+        if (Number.isInteger(part?.defaultSlotIndex) && part.defaultSlotIndex >= 0 &&
+            n.metadata.nativeContractPart === live.get(stamp)!.metadata?.nativeContractPart) continue;
+      }
       // A stamped copy beside its still-present original is a duplicate.
       if (live.has(stamp) || claimed.has(stamp)) return null;
       const original = born.get(stamp)!;

@@ -1,0 +1,52 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/toggle.contract.json (ds.toggle v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--spacing-100);
+  width: fit-content;
+  height: fit-content;
+}
+
+.alignment-right {
+  flex-direction: row-reverse;
+}
+
+.toggleLabel {
+  color: var(--text-primary);
+  font-weight: var(--imported-toggle-toggle-label-font-weight);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.size-large .toggleLabel {
+  font-size: var(--imported-toggle-toggle-label-font-size-large);
+}
+
+.size-small .toggleLabel {
+  font-size: var(--imported-toggle-toggle-label-font-size-small);
+}
+
+.size-large .toggleLabel {
+  line-height: var(--imported-toggle-toggle-label-line-height-large);
+}
+
+.size-small .toggleLabel {
+  line-height: var(--imported-toggle-toggle-label-line-height-small);
+}
+
+.root[data-disabled] .toggleLabel {
+  color: var(--text-disabled);
+}

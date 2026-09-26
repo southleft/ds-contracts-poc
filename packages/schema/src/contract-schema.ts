@@ -694,6 +694,17 @@ export const TokensByCombinationSchema = z.strictObject({
   })).min(1),
 });
 
+/** Parent-owned pixel offsets for every tuple of finite property values.
+ * Null means omission; boolean values use their canonical string spelling. */
+export const AbsolutePlacementByCombinationSchema = z.strictObject({
+  props: z.array(z.string()).min(1),
+  rows: z.array(z.strictObject({
+    values: z.array(z.string().nullable()).min(1),
+    left: z.number().finite(),
+    top: z.number().finite(),
+  })).min(1),
+});
+
 /** v17 (the hover-plane round) — an interaction state whose binding is ALSO a
  *  function of an enum axis: `statesByProp`.
  *
@@ -815,9 +826,19 @@ const shadowLayerOk = (layer: string): boolean => {
   return lengths >= 2 && lengths <= 4 && colors <= 1;
 };
 
-/** The value grammar for a literal on `channel`: the scalar bound, widened to
- *  the shadow-stack bound on the shadow channels only. */
+/** Channel-specific structured values: shadow stacks and one linear gradient.
+ * Other channels retain their scalar grammar. */
 export const literalValueOk = (channel: string, value: string): boolean => {
+  if (channel === 'background-image') {
+    if (value === 'none') return true;
+    const match = /^linear-gradient\((.*)\)$/.exec(value);
+    if (!match) return false;
+    const args = splitShadowLayers(match[1]);
+    if (/^(?:to (?:top|right|bottom|left)|-?\d+(?:\.\d+)?deg)$/.test(args[0] ?? '')) args.shift();
+    const stops = args.map(arg => /^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|rgba?\([\d , .]+\)) (\d+(?:\.\d+)?)%$/.exec(arg));
+    return stops.length >= 2 && stops.every((stop, i) => stop && Number(stop[1]) <= 100 &&
+      (i === 0 || stops[i-1] && Number(stop[1]) >= Number(stops[i-1]![1])));
+  }
   if (!SHADOW_LITERAL_CHANNELS.has(channel)) return LITERAL_VALUE_RE.test(value);
   const v = value.trim();
   if (v === "none") return true;
@@ -838,6 +859,7 @@ export const LiteralValueSchema = z
 export const LITERAL_CHANNELS = new Set([
   "background",
   "background-color",
+  "background-image",
   "color",
   "height",
   "width",
@@ -894,15 +916,16 @@ export const LITERAL_CHANNELS = new Set([
   "box-shadow",
 ]);
 
-/** A literals record whose value grammar is CHANNEL-AWARE — the scalar bound
- *  everywhere, widened to the shadow-stack bound on `box-shadow` only. */
+/** A literals record with channel-aware scalar, shadow and gradient grammars. */
 export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
   for (const [channel, value] of Object.entries(rec)) {
     if (literalValueOk(channel, value)) continue;
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
       path: [channel],
-      message: SHADOW_LITERAL_CHANNELS.has(channel)
+      message: channel === 'background-image'
+        ? 'Literal background-image must be none or one linear-gradient with bounded ordered percent stops and hex/rgb colors'
+        : SHADOW_LITERAL_CHANNELS.has(channel)
         ? "box-shadow literal must be `none` or a CSS shadow stack (lengths in px/rem/em, hex or rgb()/rgba() colors, optional `inset`)"
         : "Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, fit-content, or transparent/inherit/currentColor",
     });
@@ -1783,6 +1806,12 @@ const StrokedPathSchema = z.strictObject({
 });
 export const ShapeSchema = z.strictObject({
   kind: z.enum(["polygon", "ellipse", "rect", "path", "stroked-path"]),
+  /** Captured SCALE/SCALE relation to an unpadded free parent. Path bytes
+   * remain in their own drawing viewport; these are the parent coordinates. */
+  parentViewport: z.strictObject({
+    width: z.number().positive(), height: z.number().positive(),
+    x: z.number(), y: z.number(),
+  }).optional(),
   strokePath: StrokedPathSchema.optional(),
   paths: z.array(FilledPathSchema).length(1).optional(),
   pathsByProp: z.strictObject({
@@ -1932,6 +1961,11 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
     `height: ${shape.height}px`,
     "flex-shrink: 0",
   ];
+  if (shape.parentViewport) {
+    const v = shape.parentViewport;
+    d.splice(0, 2, `width: ${shape.width / v.width * 100}%`, `height: ${shape.height / v.height * 100}%`);
+    d.push('position: absolute', `left: ${v.x / v.width * 100}%`, `top: ${v.y / v.height * 100}%`);
+  }
   if (shape.kind === "path" && shape.paths) d.push(`mask: ${filledPathMask({ ...shape, paths: shape.paths })}`);
   if (shape.kind === "polygon")
     d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
@@ -2107,6 +2141,9 @@ export interface Part {
    *  everything else, including placement+overlay: P13's absolute children
    *  report bogus 0,0 anchors, so overlays never carry cells). */
   placement?: z.infer<typeof GridPlacementSchema>;
+  /** Parent-owned fixed CSS pixel offsets for an ordinary component root. */
+  absolutePlacement?: { left: number; top: number };
+  absolutePlacementByCombination?: z.infer<typeof AbsolutePlacementByCombinationSchema>;
   /** v7: per-enum-value layout overrides merged over `layout`. */
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
   /** v7: conditional literal styles (code-side; canvas fidelity limit). */
@@ -2230,15 +2267,17 @@ export interface Part {
    *  antialiased across two columns. No existing contract or emitted byte
    *  changes when the field is absent.
    *
-   *  `WIDTH_AND_HEIGHT` lowers, on the code surfaces, to the same box Figma
-   *  draws: `inline-size: calc-size(fit-content, round(up, size, 1px))` on the
-   *  text element — its fit-content inline size (less its own px / em / rem
-   *  trailing letter spacing) rounded up to the pixel, clamped to its
-   *  container, as a PROGRESSIVE ENHANCEMENT: a browser without `calc-size()`
-   *  drops the declaration at parse and keeps today's fractional box (< 1 px
-   *  narrower). fit-content, not max-content: a runtime string that does not
-   *  fit still WRAPS (review, PR 132). Logical properties, so vertical and RTL
-   *  writing modes round the axis the text runs along. The canvas writer sets
+   *  `WIDTH_AND_HEIGHT` lowers to an intrinsic, non-shrinking text box:
+   *  `inline-size: calc-size(max-content, round(up, size, 1px))` and
+   *  `flex-shrink: 0`. Tracked text subtracts its final px/em/rem advance and
+   *  keeps that advance in an inner line-breaking run. There is no implicit
+   *  container maximum: captured HUG text can overflow a constrained parent,
+   *  just as it does in native Figma. An authored maximum still constrains
+   *  CSS text; native maximum-width fidelity is separately unqualified.
+   *  Unflagged text keeps its existing runtime wrapping behavior. A browser
+   *  without calc-size drops the sizing declaration; fallback geometry,
+   *  including wrapping, is not qualified. Logical properties round the
+   *  inline axis in vertical and RTL writing modes. The canvas writer sets
    *  `textAutoResize = 'WIDTH_AND_HEIGHT'` on the node it builds — which is
    *  also what `figma.createText()` is born with, so a set this pipeline wrote
    *  reads the fact back and proposes it: NOT a fixed point in the flagless
@@ -2601,6 +2640,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     layout: LayoutSchema.optional(),
     /** A2 grid (G2) — see the Part interface + validateGridPart. */
     placement: GridPlacementSchema.optional(),
+    absolutePlacement: z.strictObject({left: z.number().finite(), top: z.number().finite()}).optional(),
+    absolutePlacementByCombination: AbsolutePlacementByCombinationSchema.optional(),
     /** v7. */
     layoutByProp: LayoutByPropSchema.optional(),
     /** v7. */
@@ -3108,6 +3149,21 @@ export function resolveLayout(
 export function hasComponentGrow(part: Part): boolean {
   return Boolean(part.component && (part.layout?.grow !== undefined ||
     Object.values(part.layoutByProp?.map ?? {}).some(value => value.grow !== undefined)));
+}
+
+/** A parent may position an ordinary generated child without owning its paint. */
+export function hasComponentHostPlacement(part: Part): boolean {
+  return hasComponentGrow(part) || Boolean(part.component && (part.absolutePlacement || part.absolutePlacementByCombination));
+}
+
+/** Shared concrete-plane resolver. Complete table coverage is a validation
+ * requirement; omitted props never silently use an explicit false row. */
+export function resolveComponentPlacement(part: Part, subst: Record<string, string>): Part['absolutePlacement'] {
+  const table = part.absolutePlacementByCombination;
+  if (!table) return part.absolutePlacement;
+  const row = table.rows.find(row => table.props.every((prop, i) => row.values[i] === (Object.hasOwn(subst, prop) ? subst[prop] : null)));
+  if (!row) throw Error('component-absolute-placement-combination-unavailable');
+  return { left: row.left, top: row.top };
 }
 
 /** The token record a part carries under one concrete variant combo:

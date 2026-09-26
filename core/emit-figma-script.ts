@@ -1,3 +1,5 @@
+import {contractDependencyEdges, resolveComponentPlacement} from '../scripts/contract-schema.js';
+import { lowerNativeFilledPath } from './native-filled-path.js';
 import { figmaSelectionApi, type FigmaSelectionApi, type SelectionIdentity } from './figma-selection-api.js';
 import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { selectedSampleKey, selectionErrors } from '../packages/core/src/selection.js';
@@ -5,6 +7,9 @@ import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
+import { componentLookupValue } from './code-values.js';
+import { prepareNativePreparedLibraryComponent, type NativePreparedLibrarySource } from './native-prepared-library.js';
+import { layeredNativeTokenModes } from './layered-native-token-modes.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
  * Contract → Figma sync-script text — the PURE core of scripts/generate-figma.ts.
@@ -144,6 +149,14 @@ export interface NodeSpec {
   selectionIdentity?: SelectionIdentity;
   nativeSourcePart?: NativeSourcePartIdentity;
   nativeContractPart?: NativeContractPartIdentity;
+  /** Authenticated filled-path drawing area and its unresized native ink. */
+  nativePathViewport?: true;
+  nativePathInk?: true;
+  nativePathScale?: true;
+  pathParentViewport?: { width: number; height: number; x: number; y: number };
+  scalablePathParent?: true;
+  instanceSize?: { px: number; varName: string };
+  instanceInk?: { varName: string; writeProtocol: 'attached-v1' };
   nativeContractSample?: NativeContractSampleIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
@@ -177,8 +190,14 @@ export interface NodeSpec {
   dashPattern?: number[];
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName?: string };
-  /** CSS grow → layoutSizingHorizontal FILL after append. */
+  /** CSS flex-grow follows the parent main axis after append. */
   grow?: boolean;
+  /** Compile-only placement fact; checked and removed after fill allocation. */
+  growBasis?: 'zero';
+  /** Literal width:100%, independent of flex main-axis growth. */
+  widthFill?: true;
+  /** Parent-established vertical main-axis growth. */
+  fillH?: true;
   /** Compile-decided horizontal FILL (2026-07-21, live-canvas finding —
    *  handoff 08#1). CSS stretch/grow lowers to layoutSizing FILL only when
    *  the parent's width is ESTABLISHED (fixed/literal width, itself filling,
@@ -512,7 +531,7 @@ export interface NodeSpec {
    *  main component (instances inherit it; `resetSlot()` returns to it). Any
    *  number of items carries: a native slot holds a child SEQUENCE, so the
    *  old one-instance INSTANCE_SWAP ceiling is gone. */
-  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean> }>;
+  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean>; nativeContractPart?: NativeContractPartIdentity }>;
   children?: NodeSpec[];
 }
 
@@ -868,8 +887,11 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
  *     both sides to their ink box and 99 transparent rows have no ink.
  *
  *  Re-asserting HUG is a NO-OP — Figma already believes it is hugging. Only a
- *  FIXED resize round-trip forces the relayout a childless node never gets;
- *  both probes then measured EXACTLY the reference box (58 / 1).
+ *  FIXED resize round-trip forces the relayout a childless node never gets.
+ *  An unconstrained zero reset is required for truly empty content: a 1px
+ *  seed contributes 1px forever, and ordinary resize(0,0) stores a nonzero
+ *  minimum. Live FRAME, COMPONENT and SLOT probes on 2026-09-23 retained exact
+ *  zero with resizeWithoutConstraints, while padding and declared sizes held.
  *
  *  GRID is excluded by the caller: a resize on a GRID frame silently reverts
  *  HUG tracks to FLEX (G8/GP4b), so the repair would cost more than the defect.
@@ -880,11 +902,11 @@ const birthBoxRuntime = (has: boolean): string =>
 function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
     // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
-    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // 100x100 default by shrinking a HUG axis to 0 and letting it re-measure
     // — which is right for a node whose size is supposed to come from its
     // content, and destructive for one the CONTRACT sized. A childless frame
-    // has nothing to re-measure against, so the axis hugs to 1 and stays
-    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // has nothing to re-measure against, so its seed stays as empty extent.
+    // MUI's switch-track is declared 34x14 and previously shipped 1x1 exactly
     // this way (the compile receipt's pin caught it, and the pin was right).
     if (axis === 'Horizontal' && hasW) continue;
     if (axis === 'Vertical' && hasH) continue;
@@ -894,7 +916,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
-      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node.resizeWithoutConstraints(axis === 'Horizontal' ? 0 : node.width, axis === 'Vertical' ? 0 : node.height);
       node[prop] = 'HUG';
     } catch (e) {
       throw new Error(
@@ -961,7 +983,21 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
+export const RUNTIME_EMIT_REV = 'rt20-exact-empty-hug-size';
+
+function componentHasJointPropertyReferences(component: ComponentData): boolean {
+  const visit = (spec: NodeSpec): boolean =>
+    Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children ?? []).some(visit);
+  return [...component.variants, ...(component.stateVariants ?? [])].some(v => visit(v.spec));
+}
+
+/** Only components with overlapping property references need this runtime
+ * correction. Keep the plugin's preview hash aligned with emitted specHash. */
+export function figmaRuntimeRevision(component: ComponentData): string {
+  return RUNTIME_EMIT_REV + (componentHasJointPropertyReferences(component)
+    ? '|joint-property-references-v1' : '');
+}
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -2844,12 +2880,11 @@ function applyLiterals(
         // only percentage the inversion emits is `100%`: the CROSS-AXIS half
         // of a Figma FILL (crossAxisFillByProp — a child drawn fillWidth
         // under a parent whose auto-layout mode is a function of an axis).
-        // Its canvas twin is layoutSizingHorizontal = FILL, which is exactly
-        // what `grow` lowers to (annotateFillW), so the fact goes back the
-        // way it came instead of being baked into a bogus literal. Any OTHER
+        // Its canvas twin is horizontal FILL regardless of the parent's main
+        // axis. Keep that width relation separate from flex-grow. Any OTHER
         // percentage refuses BY NAME through the channelMiss registry rather
         // than falling out of the switch.
-        if (value.trim() === '100%') { spec.grow = true; break; }
+        if (value.trim() === '100%') { spec.widthFill = true; break; }
         if (isHugKeyword(value)) break; // HUG = no fixed size compiled (see applyTokens)
         const n = parseLitPx(value);
         if (n !== undefined) li().width = n;
@@ -2939,6 +2974,17 @@ function applyLiterals(
         // R7: compileLineHeight swallows its own parse failure (`catch {
         // return undefined }`) — the literal then died in this `if`. Named.
         else literalMiss(spec, cssProp, value, `"${value.trim()}" is not a px/rem/em measure or a unitless ratio the canvas line height can hold`);
+        break;
+      }
+      case 'background-image': {
+        // Literal and token image layers share one native gradient grammar.
+        // Retain the base fill separately, including its antialiased edge.
+        if (tokens?.['background-image'] !== undefined) break;
+        if (value !== 'none') {
+          const gradient = parseCssGradient(value);
+          if (gradient) spec.gradient = gradient;
+          else spec.gradientMiss = value.slice(0, 60);
+        } else delete spec.gradient;
         break;
       }
       case 'box-shadow': {
@@ -3547,8 +3593,10 @@ function withPartStateOverrides(
       if (v !== undefined) Object.assign(byPropOverrides, e.map[v] ?? {});
     }
     const overrides = { ...(part.states?.[stateName] ?? {}), ...byPropOverrides };
-    if (Object.keys(overrides).length > 0 && !part.component && !part.slot) {
-      next = { ...next, tokens: { ...(next.tokens ?? {}), ...translateStateOverrides(overrides) } };
+    if (Object.keys(overrides).length > 0 && !part.slot) {
+      next = part.component
+        ? {...next,component:{...part.component,overrides:{...part.component.overrides,...overrides}}}
+        : { ...next, tokens: { ...(next.tokens ?? {}), ...translateStateOverrides(overrides) } };
     }
     if (next !== part) changed = true;
     out[key] = next;
@@ -3965,7 +4013,7 @@ function mapDepProps(
       // default).
       const resolved = rawValue.map[subst[rawValue.prop] ?? ''];
       if (resolved === undefined) continue;
-      value = resolved;
+      value = componentLookupValue(depProp, resolved);
     } else {
       value = rawValue;
     }
@@ -4427,7 +4475,7 @@ function variantParts(
   // stylesWhen position:absolute too (CSS ::after still paints above ::before
   // when both are absolute — document order among the positioned group).
   const positioned = (p: Part): boolean =>
-    p.declared?.['position'] === 'absolute' ||
+    Boolean(p.absolutePlacement || p.absolutePlacementByCombination) || p.declared?.['position'] === 'absolute' ||
     (p.stylesWhen ?? []).some(
       (sw) =>
         sw.styles['position'] === 'absolute' &&
@@ -4599,6 +4647,7 @@ function partToSpecs(
       const spec: NodeSpec = {
         type: 'instance',
         grow: resolveLayout(part, subst)?.grow || undefined,
+        growBasis: resolveLayout(part, subst)?.growBasis,
         ...(selection?.itemPart === name ? {selectionIdentity: {version: 1 as const, role: 'item' as const, key: String(rec[part.repeat!.keyField!])}} : {}),
         name: i === 0 ? name : `${name} ${i + 1}`,
         dep: dep.name,
@@ -4702,6 +4751,7 @@ function partToSpec(
   if (part.overlay) spec.overlay = part.overlay;
   applyStylesWhenOpacity(spec, part, contract, subst);
   nativePartOrigins.set(spec, part);
+  spec.growBasis = resolveLayout(part, subst)?.growBasis;
   return spec;
 }
 
@@ -4886,8 +4936,13 @@ function partToSpecInner(
       if (!geometry) throw new Error(`filled-path-variant-missing:${pathsByProp.prop}:${String(value)}`);
       selected = { ...baseShape, ...geometry };
     }
-    const spec: NodeSpec = { type: 'shape', name, shape: selected };
-    applyStyling(spec, part, subst, ctx);
+    const spec: NodeSpec = { type: 'shape', name, shape: selected, grow: resolveLayout(part, subst)?.grow || undefined };
+    const shapeContext = applyStyling(spec, part, subst, ctx);
+    if (selected.kind === 'path' && !spec.fill && resolveLiterals(part,subst)['background-color'] === 'currentColor') {
+      if (shapeContext.textFill) spec.fill = shapeContext.textFill;
+      else if (shapeContext.textFillLit) (spec.lits ??= {}).fillColor = shapeContext.textFillLit;
+      else throw new Error('filled-path-current-color-unresolved:' + name);
+    }
     // Wave B.1 — per-variant shape resize. `literalsByProp` may carry
     // width/height when size factors by one enum axis (Tailwind
     // ToggleSwitch thumbs at 16/20/24). applyLiterals already resolved
@@ -4933,6 +4988,11 @@ function partToSpecInner(
     applyBarCollapseAbsolute(spec);
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
     if (spec.shape!.rotation === undefined) delete spec.shape!.rotation;
+    if (selected.parentViewport) {
+      const v = selected.parentViewport;
+      spec.absolute = { h: 'MIN', v: 'MIN', left: v.x, top: v.y };
+      lowerNativeFilledPath(spec);
+    }
     applyVisibleWhen(spec, part, contract);
     return spec;
   }
@@ -4959,6 +5019,8 @@ function partToSpecInner(
       depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
+    const placement = resolveComponentPlacement(part, subst);
+    if (placement) spec.absolute = {h: 'MIN', v: 'MIN', ...placement};
     if (part.parts !== undefined) {
       const caller = callerSlotSpec(part, dep, spec.depProps!, contract, byId, ctx, subst);
       spec.children = [caller.slot];
@@ -4974,6 +5036,25 @@ function partToSpecInner(
     // ledgered through the existing channelMiss footnote (never a silent
     // drop; the instance renders the child's own defaults).
     for (const [channel, ref] of Object.entries(part.component.overrides ?? {})) {
+      if (channel === 'color' && dep.anatomy.root?.overridable?.includes('color')) {
+        const paths = Object.values(dep.anatomy.root.parts ?? {});
+        if (paths.length === 1 && paths[0].shape?.kind === 'path' && paths[0].shape.parentViewport &&
+            paths[0].literals?.['background-color'] === 'currentColor') {
+          const tokenPath = ref.slice(1,-1).replace(/\{([^}]+)\}/g,(_,key:string)=>subst[key] ?? `{${key}}`);
+          if (!parseLitColor(String(resolveLiteral(tokenPath)))) throw new Error('filled-path-instance-ink-unsupported:' + name);
+          spec.instanceInk = {varName:tokenPath.replaceAll('.', '/'),writeProtocol:'attached-v1'};
+          continue;
+        }
+      }
+      if (channel === 'size' && dep.anatomy.root?.overridable?.includes('size') &&
+          Object.values(dep.anatomy.root.parts ?? {}).length > 0 &&
+          Object.values(dep.anatomy.root.parts ?? {}).every(child => child.shape?.kind === 'path' && child.shape.parentViewport)) {
+        const tokenPath = ref.slice(1, -1).replace(/\{([^}]+)\}/g, (_, key: string) => subst[key] ?? `{${key}}`);
+        const value = resolveLiteral(tokenPath);
+        if (!strokedPathDimensionOk(value)) throw new Error(`filled-path-instance-size-unsupported:${name}`);
+        spec.instanceSize = {px:px(value), varName:tokenPath.replaceAll('.', '/')};
+        continue;
+      }
       miss(
         spec,
         `per-instance override "${channel}"`,
@@ -5198,6 +5279,7 @@ function partToSpecInner(
   spec.children = variantParts(part.parts ?? {}, subst).flatMap(([childName, child]) =>
     partToSpecs(childName, child, contract, byId, childCtx, subst),
   );
+  applyFilledPathParent(spec);
   if (spec.strokeViewport) {
     const refs = resolveTokens(part, subst), literals = resolveLiterals(part, subst);
     for (const key of ['width', 'height']) {
@@ -5458,11 +5540,25 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
  *  (Banner: an intrinsic sibling sets the hug width, the ribbon FILLs to
  *  span it): a parent is "ready" when it has a fixed/literal width, is
  *  itself filling, or hugs at least one NON-filling child that can
- *  contribute intrinsic width. Candidates under an unready parent HUG —
- *  they never collapse. Candidate selection replicates the old runtime
- *  conditions exactly (grow, or stretchChildren on non-instance children
- *  without fixedWidth); the ONLY change is the readiness gate. */
-function annotateFillW(rootSpec: NodeSpec): void {
+ *  contribute intrinsic width. Legacy candidates under an unready parent
+ *  HUG; explicit zero-basis growth refuses if its fill cannot be preserved.
+ *  Candidate selection replicates the old runtime
+ *  conditions for horizontal growth and cross-axis stretch. Column growth
+ *  fills height only when that height is declared or inherited from a
+ *  definite allocation; intrinsic siblings cannot establish spare height.
+ *  Literal width:100% remains a separate horizontal relation. */
+function applyFilledPathParent(spec: NodeSpec): void {
+  const children = spec.children ?? [];
+  if (!children.some(child => child.pathParentViewport)) return;
+  const width = spec.fixedWidth?.px ?? spec.lits?.width;
+  const height = spec.fixedHeight?.px ?? spec.lits?.height;
+  if (children.some(child => !child.pathParentViewport || child.pathParentViewport.width !== width || child.pathParentViewport.height !== height))
+    throw new Error(`filled-path-parent-basis-mismatch:${spec.name}`);
+  spec.scalablePathParent = true;
+}
+
+function annotateFillW(rootSpec: NodeSpec, context: string): void {
+  applyFilledPathParent(rootSpec);
   const inFlow = (s: NodeSpec): boolean => !s.overlay && !s.insetOverlay && !s.absolute;
   const hasOwnWidth = (s: NodeSpec): boolean =>
     s.fixedWidth !== undefined || s.lits?.width !== undefined || s.pct != null;
@@ -5473,7 +5569,8 @@ function annotateFillW(rootSpec: NodeSpec): void {
     }
     return (s.children ?? []).filter(inFlow).some(canHug);
   };
-  const walk = (s: NodeSpec, established: boolean): void => {
+  const hasOwnHeight = (s: NodeSpec): boolean => s.fixedHeight !== undefined || s.lits?.height !== undefined;
+  const walk = (s: NodeSpec, established: boolean, establishedHeight: boolean): void => {
     const kids = s.children ?? [];
     // CSS truth (Phase B live-in-mock finding, 2026-07-22): an EXPLICIT
     // width — token-bound OR literal — beats align-items:stretch. The first
@@ -5525,11 +5622,15 @@ function annotateFillW(rootSpec: NodeSpec): void {
       inFlow(c) &&
       !hasOwnWidth(c) &&
       // @lower emit.size-text-hug-vs-fill
-      !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
-      (c.callerRootFillWidth === true || c.grow === true ||
+      // Equal glyph origins do not prove equal allocated boxes. An explicit
+      // zero basis must keep its requested Fill when width is established.
+      !(c.type === 'text' && !c.textTruncation && hugTextSafe(c) &&
+        !(c.grow === true && c.growBasis === 'zero')) &&
+      (c.callerRootFillWidth === true || c.widthFill === true ||
+        (c.grow === true && (s.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') ||
         (s.layout?.stretchChildren === true &&
           (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
-          c.type !== 'instance'));
+          c.type !== 'instance' && c.shape === undefined));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
     // D7 hug-ceiling: a box MEASURED hugging beneath its maxWidth ceiling
     // never grants FILL — its width IS its content, so a FILL child would
@@ -5542,6 +5643,11 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // candidates; their own subtrees ARE width-established (the declared
     // tracks size the cell the way a fixed width sizes a box).
     const gridParent = s.layout?.mode === 'GRID';
+    const heightCandidate = (c: NodeSpec): boolean => inFlow(c) &&
+      s.layout?.mode === 'VERTICAL' && c.grow === true && !hasOwnHeight(c);
+    // Intrinsic siblings in a column do not establish spare main-axis space.
+    // The column needs a declared height or an inherited definite allocation.
+    const heightReady = establishedHeight;
     for (const c of kids) {
       if (c.callerRootFillWidth && (!ready || (!gridParent && s.layout?.mode !== 'VERTICAL')))
         throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid' +
@@ -5553,6 +5659,20 @@ function annotateFillW(rootSpec: NodeSpec): void {
         // hugging displaces it; the flag is the runtime's proof.
         if (c.type === 'text' && !c.textTruncation) c.fillText = true;
       }
+      const fillsHeight = !gridParent && heightReady && heightCandidate(c);
+      if (fillsHeight) c.fillH = true;
+      // A zero basis is a requested allocation rule, not permission to fall
+      // back to each child's intrinsic size. In particular, FILL under HUG
+      // cannot preserve CSS's intrinsic zero-basis distribution. Refuse
+      // before any script or native allocation instead of silently hugging.
+      const axis = s.layout?.mode ?? 'HORIZONTAL';
+      if (inFlow(c) && c.grow && c.growBasis === 'zero' &&
+          ((axis === 'HORIZONTAL' && !fills) || (axis === 'VERTICAL' && !fillsHeight))) {
+        throw Error(`FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED: ${context}: ` +
+          `part "${c.name}" in "${s.name}" requests zero-basis ${axis === 'HORIZONTAL' ? 'width' : 'height'} allocation, ` +
+          'but this native layout cannot establish that fill; intrinsic child sizes are not an equivalent result');
+      }
+      delete c.growBasis;
       // REJECTED-SETS ROUND: an hAligned grid occupant HUGS its width (the
       // runtime skips FILL for it — CSS justify-self beats the stretch
       // default), so its subtree is NOT width-established; treating it as
@@ -5562,10 +5682,11 @@ function annotateFillW(rootSpec: NodeSpec): void {
       // new intrinsic width; carrying that fact lets nested full-width
       // instances use the same known width without inventing a fixed size.
       walk(c, fills || hasOwnWidth(c) || (c.rootSlotContent === true && established) ||
-        (gridParent && c.cell?.hAlign === undefined));
+        (gridParent && c.cell?.hAlign === undefined),
+        fillsHeight || hasOwnHeight(c) || (c.rootSlotContent === true && establishedHeight));
     }
   };
-  walk(rootSpec, hasOwnWidth(rootSpec));
+  walk(rootSpec, hasOwnWidth(rootSpec), hasOwnHeight(rootSpec));
 }
 
 /** REQUIRED FACTS — the refuse-to-mint referee, applied at COMPILE time so it
@@ -6252,8 +6373,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   for (const v of stateVariants) stripMarginVars(v.spec);
   // FILL is a compile-time decision (see annotateFillW) — runs LAST so it
   // sees the final spec shape (after margin lowering / miss stripping).
-  for (const v of variants) annotateFillW(v.spec);
-  for (const v of stateVariants) annotateFillW(v.spec);
+  for (const v of variants) annotateFillW(v.spec, `${contract.id}, ${v.name}`);
+  for (const v of stateVariants) annotateFillW(v.spec, `${contract.id}, ${v.name}`);
   // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
   // runtime's applyMarginBox returns without a word when the child is
   // FILL-sized, grows, or is out of flow (overlay / inset / absolute): a
@@ -6282,7 +6403,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           !child.fixedHeight && child.lits?.height === undefined && !child.shape;
         const why = child.overlay || child.insetOverlay || child.absolute
           ? 'an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering'
-          : child.grow
+          : child.grow || child.widthFill
             ? 'a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow'
             : child.fillW
               ? 'a FILL-sized child cannot be wrapped in a margin box without breaking the fill'
@@ -6471,7 +6592,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   const lowerAbsolute = (parent: NodeSpec) => {
     for (const child of parent.children ?? []) {
       const part = nativePartOrigins.get(child);
-      const positioned = part?.declared?.position === 'absolute' ||
+      const positioned = Boolean(part?.absolutePlacement || part?.absolutePlacementByCombination) || part?.declared?.position === 'absolute' ||
         part?.stylesWhen?.some(sw => sw.styles.position === 'absolute');
       if ((child.absolute || child.insetOverlay) && positioned && child.shape?.kind !== 'stroked-path') {
         const insets = compiledBorderInsets(parent, name => {
@@ -6791,7 +6912,7 @@ const marginBoxRuntime = (has: boolean): string =>
 // lowering.
 function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
+  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow || childSpec.widthFill) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
   } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
@@ -6844,7 +6965,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false, hasStrokedPath = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false, hasFilledPath = false, hasStrokedPath = false, hasNativePath = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6875,8 +6996,10 @@ ${hasStrokedPath ? `    if (spec.shape.kind === 'stroked-path') {
     } else ` : ''}${hasFilledPath ? `    if (spec.shape.kind === 'path') {
       node.vectorPaths = spec.shape.paths;
       node.strokes = [];
-      if (node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
-          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height))
+${hasNativePath ? `      if (spec.nativePathScale) node.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+` : ''}
+      if (${hasNativePath ? '!spec.nativePathInk && (' : ''}node.width !== spec.shape.width && node.width !== Math.fround(spec.shape.width) ||
+          node.height !== spec.shape.height && node.height !== Math.fround(spec.shape.height)${hasNativePath ? ')' : ''})
         throw new Error('filled-path-native-size-mismatch:' + node.id);
     } else ` : '    '}node.resize(spec.shape.width, spec.shape.height);
 ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
@@ -7492,12 +7615,22 @@ const gridChildrenCall = (has: boolean, args: string): string =>
 
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
-const absoluteRuntime = (has: boolean, hasStrokedPath = false): string =>
+const absoluteRuntime = (has: boolean, hasStrokedPath = false, hasNativePath = false): string =>
   has
     ? `
 // v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
-  if (!childSpec.absolute) return;${hasStrokedPath ? `
+  if (!childSpec.absolute) return;${hasNativePath ? `
+  if (childSpec.pathParentViewport) {
+    const v = childSpec.pathParentViewport;
+    if (parent.layoutMode !== 'NONE' ||
+        parent.width !== v.width && parent.width !== Math.fround(v.width) ||
+        parent.height !== v.height && parent.height !== Math.fround(v.height))
+      throw new Error('filled-path-native-parent-basis-mismatch:' + parent.id);
+    childNode.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+    childNode.x = v.x; childNode.y = v.y;
+    return;
+  }` : ''}${hasStrokedPath ? `
   if (childSpec.shape && childSpec.shape.kind === 'stroked-path') {
     const v = childSpec.shape.strokePath.viewport;
     if (parent.layoutMode !== 'NONE' ||
@@ -8036,14 +8169,65 @@ function buildNativeContractGraphDraftScript(
   byId: Map<string, Contract>,
   source: NativeContractDraftSource,
   context: NativeSourceWriteContext,
+  graphVerification?: 1,
 ) {
+  if (graphVerification !== undefined && graphVerification !== 1) throw Error('NATIVE_CONTRACT_GRAPH_VERIFICATION_VERSION');
   if (context.comparisons) throw Error('NATIVE_CONTRACT_GRAPH_COMPARISON_MAPPING_REQUIRED');
   const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id);
   const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames);
   return wrapNativeSourceWrite(prepared, buildSyncScript(graph.components, context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract graph.',
-    preamble: '', nativeSource: true,
-  }), graph.fonts);
+    preamble: '', nativeSource: true, nativeGraphVerification: graphVerification,
+  }), graph.fonts, graphVerification === 1 && graph.components.length > 1);
+}
+
+/** Retained-library path. Original anchors and source status remain in the
+ * projection; only fresh compiler output receives the operation scope. */
+function compileNativePreparedLibrary(parent: Contract, byId: Map<string, Contract>,
+  source: NativePreparedLibrarySource, operationId: string) {
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent || byId.size < 1 || byId.size > 30)
+    throw Error('NATIVE_PREPARED_LIBRARY_IDENTITY_REQUIRED');
+  if (source.tokensSha256 !== revisionOf(input.tokens).slice(7)) throw Error('NATIVE_PREPARED_LIBRARY_TOKENS_CHANGED');
+  const reached = new Set<string>();
+  const reach = (contract:Contract) => {
+    if (reached.has(contract.id)) return;
+    reached.add(contract.id);
+    for (const edge of contractDependencyEdges(contract)) {
+      const child = byId.get(edge.id);
+      if (!child) throw Error('NATIVE_PREPARED_LIBRARY_DEPENDENCY_MISSING');
+      reach(child);
+    }
+  };
+  reach(parent);
+  if (reached.size !== byId.size) throw Error('NATIVE_PREPARED_LIBRARY_UNRELATED_COMPONENT');
+  const ordered = sortByDependencies([...byId.values()]);
+  if (ordered.at(-1)?.id !== parent.id) throw Error('NATIVE_PREPARED_LIBRARY_PARENT_ORDER');
+  const context = {mode:input.mode ?? 'light', brand:input.brand ?? 'default'};
+  const routed = layeredNativeTokenModes(input.tokens, [{sourceMode:input.mode ?? 'light',brand:context.brand,nativeModeName:'Selected'}]);
+  const compiled = ordered.map(contract => {
+    const errors:string[]=[]; validateContract(contract, byId, errors, input.icons);
+    if (errors.length) throw Error('NATIVE_PREPARED_LIBRARY_INVALID: ' + errors.join('; '));
+    const data = compileComponentData(contract, byId);
+    if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+    return prepareNativePreparedLibraryComponent(contract,data,source,routed.modes[0].tokenTreeRevision,context);
+  });
+  const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
+  const components = compiled.map(row => ({...scopeNativeGraphComponent(row.component, ids),anchorKey:null}));
+  return {projection:compiled.at(-1)!.projection, component:components.at(-1)!, components,
+    componentRevisions:components.map(component=>({contractId:component.contractId,revision:revisionOf(component)})),
+    boundNames:[...new Set(compiled.flatMap(row=>row.boundNames))].sort(),
+    fonts:[...new Map(compiled.flatMap(row=>row.fonts).map(font=>[JSON.stringify(font),font])).values()]};
+}
+function buildNativePreparedLibraryScript(parent: Contract, byId: Map<string, Contract>,
+  source: NativePreparedLibrarySource, context: NativeSourceWriteContext) {
+  if (context.comparisons || context.comparisonRecovery || context.templateGraph)
+    throw Error('NATIVE_PREPARED_LIBRARY_CONTEXT_UNQUALIFIED');
+  const graph = compileNativePreparedLibrary(parent,byId,source,context.operation.id);
+  const prepared = prepareNativeSourceWrite(graph.projection,context,graph.boundNames);
+  return wrapNativeSourceWrite(prepared,buildSyncScript(graph.components,context.operation.fileKey,{
+    header:'// Shared renderer: operation-scoped retained contract library.',
+    preamble:'',nativeSource:true,nativeGraphVerification:2,
+  }),graph.fonts);
 }
 
 /** Create comparison instances referencing existing observed mains. The content
@@ -8075,7 +8259,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeGraphVerification?: 1 | 2; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSourceOwnedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeInstanceWidthComparison?: boolean; nativeContainerWidthComparison?: boolean; nativeTextTemplateComparison?: boolean; nativeComparisonRecovery?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8089,7 +8273,12 @@ function buildSyncScript(
     throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
+  // A visibility assignment replaces the complete Figma reference map. Text
+  // and native slots can already carry another live property on that node.
+  // Keep unrelated emitted programs and their runtime hashes unchanged.
+  const hasJointPropertyReferences = featureDatas.some(componentHasJointPropertyReferences);
   const hasFilledPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'path'));
+  const hasNativePath = featureDatas.some(d => dataSome(d, s => s.nativePathViewport === true));
   const hasStrokedPath = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { kind?: string }).kind === 'stroked-path'));
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
@@ -8120,6 +8309,7 @@ function buildSyncScript(
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  const hasInstanceInk = featureDatas.some(d => dataSome(d, x => x.instanceInk !== undefined));
   // bindings.figma.absentVariants: the "still holds a declared-absent variant"
   // receipt on the skip path is emitted only for a script that carries such a
   // contract — every other script keeps its bytes.
@@ -8146,6 +8336,7 @@ function buildSyncScript(
         x.layout?.mode !== 'GRID',
     ),
   );
+  const hasFillH = featureDatas.some(d => dataSome(d, x => x.fillH === true));
   const hasWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   // A COLUMN stack carrying `wrap` is schema-valid and legal CSS, and Figma
   // THROWS on it (layoutWrap is HORIZONTAL-only). Detected statically so the
@@ -8154,6 +8345,7 @@ function buildSyncScript(
   const hasColumnWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
   const hasEffectStack = featureDatas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
   const hasGradient = featureDatas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
+  const hasShapeGradient = featureDatas.some((d) => dataSome(d, (x) => x.type === 'shape' && x.gradient !== undefined));
   const hasInsetOverlay = featureDatas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
   // Round 5d: margin-box wrapper / outline-lowered OUTSIDE strokes /
   // single-paint glyph variable re-binding — all feature-gated so contracts
@@ -8765,7 +8957,9 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   }` : ''}${hasStrokedPath ? `
   // A path viewport owns coordinates, not child flow. Apply after size and
   // variable bindings, before appending paths; resize preserves SCALE.
-  if (spec.strokeViewport) node.layoutMode = 'NONE';` : ''}
+  if (spec.strokeViewport) node.layoutMode = 'NONE';` : ''}${hasNativePath ? `
+  // A filled-path mask has a fixed drawing viewport, independent of ink bounds.
+  if (spec.nativePathViewport || spec.scalablePathParent) node.layoutMode = 'NONE';` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -8785,7 +8979,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
-${absoluteRuntime(hasAbsolute, hasStrokedPath)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {
@@ -8933,7 +9127,12 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
     );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
-    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${hasNestedPropertyControls ? `
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${featureDatas.some(d => dataSome(d, s => !!s.instanceSize)) ? `
+    if (spec.instanceSize) {
+      node.resize(spec.instanceSize.px, spec.instanceSize.px);
+      node.setBoundVariable('width', need(spec.instanceSize.varName));
+      node.setBoundVariable('height', need(spec.instanceSize.varName));
+    }` : ''}${hasNestedPropertyControls ? `
     (registry.nestedControls || (registry.nestedControls = [])).push(node);` : ''}
   } else if (spec.type === 'slot') {
     // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
@@ -8960,7 +9159,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
         false,
       );
       const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-      const inst = main.createInstance();
+      const inst = main.createInstance();${opts.nativeGraphVerification === 2 ? '\n      nativeInit(inst, {type: \'instance\', nativeContractPart:item.nativeContractPart});' : ''}
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
@@ -8968,7 +9167,7 @@ ${hasStrokeOutsideLayout ? `      // dump v1.35: the wrapper IS this part's auto
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath)} else {
+  }${shapeRuntime(hasShape, `${gradientRuntime(hasShapeGradient)}${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource, hasFilledPath, hasStrokedPath, hasNativePath)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it
@@ -8986,6 +9185,15 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
   // instance into another instance's slot invalidates its private sublayers
   // in native Figma. Frames carrying such instances must also be built in place.
   if (parent && !spec.callerSlotProperty) parent.appendChild(node);
+` : ''}${hasInstanceInk ? `  // Paint overrides also create private sublayers. Apply after attachment
+  // to a caller slot, so moving the instance cannot invalidate those handles.
+  if (spec.instanceInk) {
+    const viewport = node.children && node.children[0], ink = viewport && viewport.children && viewport.children[0];
+    if (node.children.length !== 1 || viewport.type !== 'FRAME' || viewport.children.length !== 1 || ink.type !== 'VECTOR')
+      throw new Error('filled-path-instance-ink-tree-mismatch:' + node.id);
+    ink.fills = [boundPaint(spec.instanceInk.varName,ink)];
+  }
+` : ''}${hasCallerSlots ? `
   if (spec.type === 'instance' && spec.children) {
     for (const child of spec.children) {
       if (!child.callerSlotProperty) throw Error('CALLER_SLOT_SPEC_REQUIRED');
@@ -9039,7 +9247,7 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+${hasFillH ? `\n    if (child.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
@@ -9098,8 +9306,13 @@ function dsStampFingerprints(node) {
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
 const RUNTIME_EMIT_REV = '${RUNTIME_EMIT_REV}';
-function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
+${hasJointPropertyReferences ? `function hasJointPropertyReferences(spec) {
+  return Boolean(spec.visibleProp && (spec.contentProp || spec.type === 'slot')) ||
+    (spec.children || []).some(hasJointPropertyReferences);
+}
+` : ''}function specHash(C) {
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV${hasJointPropertyReferences ? ` +
+    (C.variants.concat(C.stateVariants || []).some(v => hasJointPropertyReferences(v.spec)) ? '|joint-property-references-v1' : '')` : ''};
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -9299,7 +9512,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
-        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+${hasFillH ? `\n        if (childSpec.fillH && 'layoutSizingVertical' in childNode) {\n          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n        }\n` : ''}        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
       }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n      sizeCallerSlots(comp);' : ''}
@@ -9359,7 +9572,7 @@ ${hasSelection ? `  set.setSharedPluginData('ds_contracts', 'selectionApi', C.se
     for (const vis of registry.visibles) {
       const k = defKey(vis.prop);
       if (!k) continue;
-      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
       vis.node.visible = vis.default;
     }
   }
@@ -9502,7 +9715,7 @@ ${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.s
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
-    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+${hasFillH ? `\n    if (childSpec.fillH && 'layoutSizingVertical' in childNode) {\n      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL height was refused (layoutSizingVertical FILL); the child keeps its drawn height', e); }\n    }\n` : ''}    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n  sizeCallerSlots(comp);' : ''}
@@ -9545,7 +9758,7 @@ ${hasSelection ? `  comp.setSharedPluginData('ds_contracts', 'selectionApi', C.s
   for (const vis of registry.visibles) {
     const k = defKey(vis.prop);
     if (!k) continue;
-    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: k };
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
@@ -9726,7 +9939,7 @@ ${datas.some(d => d.codeValueAxes?.version === 2) ? `      if (previous.version 
     for (const vis of b.registry.visibles) {
       const key = keys[vis.prop];
       if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.componentPropertyReferences = { ${hasJointPropertyReferences ? '...vis.node.componentPropertyReferences, ' : ''}visible: key };
       vis.node.visible = vis.default;
     }
   }
@@ -9786,7 +9999,8 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
     key: target.key,
     variants: C.isSet ? target.children.length : 1,
     properties: Object.keys(target.componentPropertyDefinitions || {}),
-    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),${opts.nativeGraphVerification ? `
+    nativeGraphIdentity: { type: target.type, variants: NATIVE_RESULT.variants, propertyDefinitions: NATIVE_RESULT.propertyDefinitions },` : ''}
   };
 }
 
@@ -9797,8 +10011,8 @@ for (const C of COMPONENTS) {
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${opts.nativeSource && datas.length > 1 ? `
-NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key }));
+}${opts.nativeSource && (datas.length > 1 || opts.nativeGraphVerification === 2) ? `
+${opts.nativeGraphVerification ? `NATIVE_RESULT.graphVerification = ${opts.nativeGraphVerification};\n` : ''}NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key${opts.nativeGraphVerification ? ', ...result.nativeGraphIdentity' : ''} }));
 ` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
@@ -9817,6 +10031,8 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     compileNativeContractTemplateGraph,
     buildNativeContractDraftScript,
     compileNativeContractGraphDraft,
+    compileNativePreparedLibrary,
+    buildNativePreparedLibraryScript,
     buildNativeContractGraphDraftScript,
     buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not

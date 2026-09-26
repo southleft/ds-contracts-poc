@@ -156,12 +156,12 @@
     }
   ],
   "generatedFiles": {
-    "react/Kicker/Kicker.module.css": "9fd2f14ac9834259af15a57b38c5b1624e71e8fd6c99c046ba7d57f71aba6b22",
+    "react/Kicker/Kicker.module.css": "b36daf80b23499574ba473ce18854748f6b617c462bcb6fc1609f0b6b4f14c44",
     "react/Kicker/Kicker.stories.tsx": "9cfd466cae4713698bc5c4bdca3502b8b7509c83c48f076807d0206b597ee092",
     "react/Kicker/Kicker.tsx": "9dc6b747fb6b0f4deb952e74227c34fdecdb18b2eef54d2357d4f46913711bc5",
     "react/Kicker/index.ts": "117e14dd493d055f90de6b5502720c6dd185d3c571381ba71e662708a3a182e8",
     "wc/ds-kicker.ts": "68cd820617040fcb3e5691ed45448a68ee21d1b6de9747a2d7582a0b369ae3ae",
-    "wc/ds-kicker.css.ts": "57c7e13d7e313fcaf7c324ecb8d9a306076b800541b5af53a29e15c37abd34fc",
+    "wc/ds-kicker.css.ts": "ddb152edfcc2d2829277252304a15c513b7fde8fd711a90c73c9f77117dd2768",
     "wc/ds-kicker.demo.html": "92be59fd05e3ba521d8a88a7d75c5df33823e1efe737447859e51478d580c9ab",
     "wc/ds-kicker.custom-elements.json": "b30c235cc4018484879bdfe6859e6e1eda0b91a8e322fb45f7477cc52c9a8348"
   },

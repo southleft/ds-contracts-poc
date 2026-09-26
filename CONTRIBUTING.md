@@ -41,9 +41,11 @@ Without the four builds, `npx tsc --noEmit` fails with
 `extract/figma/census/design-to-code.ts(297,33): error TS2307: Cannot find module '@ds-contracts/emitter-web-components'`,
 the eval suite gains one red that the named-red ledger does not carry (`paste-door-open`:
 `Cannot find module …/packages/cli/dist/cli.js`), and `publish:check` refuses with
-`packages/core/dist is not built`. `npm run prep:schema` is the schema build alone: the
-run-locally steps use it, and it is not enough for the gates. Use the Node version in
-`.nvmrc`, which is the version CI pins.
+`packages/core/dist is not built`. `npm run prep:core` builds schema and core for
+the local Playground. The CLI and Web Components emitter builds are still required
+for the gates. `npm run prep:schema` builds only schema and is insufficient even
+for Playground startup on a fresh clone. Use the Node version in `.nvmrc`, which
+is the version CI pins.
 
 Every change must leave these green:
 
@@ -109,6 +111,14 @@ and the archetype gate you changed (`recipe:button:check`,
 hashed RECORDs.** Product v1 is incomplete (F1) until a true v1-completion
 record says otherwise. The playground runs the checked-out engine; its
 demonstrations do not qualify the complete conversion or repair journeys.
+
+The held-out canvas-to-code gates preserve their frozen v1/v2 examinations and
+compare current engine output with a separate [machine replay baseline](recipe/evidence/canvas-to-code-held-out-current/README.md).
+Keep every subject, refusal and historical file hash. Record candidates into a
+new directory using the documented runner, then review the complete changes;
+never use the historical runners' `--write` commands to refresh frozen evidence.
+An accounting pass does not qualify pixels, interactions, or the full application
+journey.
 
 The active work order is [docs/CURRENT.md](docs/CURRENT.md): complete the
 React-led journey, Figma-to-React journey, two-way repair and independent React

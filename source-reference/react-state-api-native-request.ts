@@ -16,6 +16,13 @@ export interface ReactStateApiNativeRequest {
   initial: ReactInitialNativeRequest;
   observation: ReactStateApiNativePin;
 }
+export function isReactStateApiNativePin(value: unknown): value is ReactStateApiNativePin {
+  const p = value as ReactStateApiNativePin;
+  return !!p && typeof p === 'object' && !Array.isArray(p) &&
+    Object.keys(p).sort().join(',') === 'id,inventorySha256,key,reportSha256' &&
+    typeof p.id === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(p.id) &&
+    [p.key,p.inventorySha256,p.reportSha256].every(v => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v));
+}
 export function isReactStateApiNativeRequest(
   value: unknown,
 ): value is ReactStateApiNativeRequest {

@@ -2,6 +2,7 @@ import {hasComponentGrow} from '@ds-contracts/schema';
 import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
 import {jointTokenCss} from './joint-tokens.js';
+import {componentPlacementDomain} from './component-placement.js';
 /**
  * Contract → scoped CSS text — the stylesheet every code target shares
  * (React CSS Modules, static HTML, the web-components constructable sheet).
@@ -199,8 +200,13 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // (`layout`); token refs become var(--…); literals/declared facts verbatim.
   // (Single-root falls through to the untouched N=1 path below.)
   if (isMultiRoot(contract)) {
-    for (const { name, part } of walkAnatomy(contract)) {
+    for (const { name, part, path: p } of walkAnatomy(contract)) {
       if (part.component) {
+        if (part.absolutePlacement) {
+          const {left, top} = part.absolutePlacement;
+          lines.push('', `.${cssIdentifier(p[p.length - 2])} > .${cssIdentifier(name)} {`,
+            '  position: absolute;', `  left: ${left}px;`, `  top: ${top}px;`, '  right: auto;', '  bottom: auto;', '}');
+        }
         if (hasComponentGrow(part)) {
           const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
           if (placement.length) lines.push('', `.${cssIdentifier(name)} {`, ...placement.map(d => `  ${d};`), '}');
@@ -769,6 +775,12 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // otherwise style-less enum values and values used only in omission tests.
   for(const table of root.tokensByCombination??[])for(const prop of table.props)
     for(const value of enums.get(prop)??[])if(!enumRules.has(`${prop}-${value}`))enumRules.set(`${prop}-${value}`,new Map());
+  for (const {part} of walkAnatomy(contract)) for (const name of part.absolutePlacementByCombination?.props ?? []) {
+    const prop = contract.props.find(prop => prop.name === name)!;
+    if (prop.type === 'boolean' && prop.default !== undefined) continue;
+    for (const value of componentPlacementDomain(prop)) if (value !== null && !enumRules.has(`${name}-${value}`))
+      enumRules.set(`${name}-${value}`, new Map());
+  }
   for (const [cls, decls] of enumRules) {
     lines.push('', `.${cls} {`);
     for (const [prop, value] of decls) lines.push(`  ${prop}: ${value};`);
@@ -857,6 +869,23 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
     if (part.component) {
+      const table = part.absolutePlacementByCombination;
+      if (table) for (const row of table.rows) {
+        const conditions = table.props.map((prop, i) => {
+          const selector = (value: string) => boolNames.has(prop) ? boolFrag(prop, value) : `.${cssIdentifier(`${prop}-${value}`)}`;
+          return row.values[i] === null
+            ? `:not(:is(${componentPlacementDomain(contract.props.find(p => p.name === prop)!).filter((v): v is string => v !== null).map(selector).join(', ')}))`
+            : selector(row.values[i]!);
+        }).join('');
+        const parent = p[p.length - 2];
+        lines.push('', `.root${conditions}${parent === 'root' ? '' : ` .${cssIdentifier(parent)}`} > .${cssIdentifier(name)} {`,
+          '  position: absolute;', `  left: ${row.left}px;`, `  top: ${row.top}px;`, '  right: auto;', '  bottom: auto;', '}');
+      }
+      if (part.absolutePlacement) {
+        const {left, top} = part.absolutePlacement;
+        lines.push('', `.${cssIdentifier(p[p.length - 2])} > .${cssIdentifier(name)} {`,
+          '  position: absolute;', `  left: ${left}px;`, `  top: ${top}px;`, '  right: auto;', '  bottom: auto;', '}');
+      }
       if (hasComponentGrow(part)) {
         const placement = layoutOverrideDecls({grow: part.layout?.grow, growBasis: part.layout?.growBasis});
         if (placement.length) lines.push('', `.${cssIdentifier(name)} {`, ...placement.map(d => `  ${d};`), '}');
@@ -874,16 +903,17 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       // inline-flex hugs the child, so layout (overlap margins included)
       // sees the same box as the bare instance.
       const ov = Object.entries(part.component.overrides ?? {});
+      const hasStateOverrides = Object.keys(part.states ?? {}).length > 0 || (part.statesByProp?.length ?? 0) > 0;
       // A2 grid (G3/P12): an instance child of a grid parent rides a wrapper
       // element that IS the grid item — the wrapper class takes the cell and
       // display: grid stretches the lone instance into it (the CSS spelling
       // of the canvas FILL default). With overrides, the cell decls join the
       // override wrapper's rule (one wrapper, both jobs).
       const cell = gridPlan.cells.get(name);
-      if (ov.length === 0 && cell) {
+      if (ov.length === 0 && !hasStateOverrides && cell) {
         lines.push('', `.${cssIdentifier(name)} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
       }
-      if (ov.length > 0) {
+      if (ov.length > 0 || hasStateOverrides) {
         const wrapDecls: string[] = cell ? [...cell, 'display: grid'] : ['display: inline-flex'];
         const wrapSubRules: string[] = [];
         for (const [channel, ref] of ov) {
@@ -905,11 +935,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
             // override var is set on a wrapper that is a descendant of the
             // root, and every enum class rides the root, so N placeholders
             // are the compound ancestor selector, exactly as above.
-            for (const combo of enumCombos(phs, enums)) {
-              let resolved = refPath;
-              for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
+            for (const {combo,resolved} of expandRef(`anatomy.${name}.component.overrides.${channel}`,refPath)) {
               if (!checkToken(resolved, `anatomy.${name}.component.overrides.${channel}`)) continue;
-              const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
+              const sel = `.${comboCls(combo)}`;
               wrapSubRules.push(`\n${sel} .${cssIdentifier(name)} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
             }
             continue;
@@ -921,6 +949,28 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         lines.push('', `.${cssIdentifier(name)} {`, ...wrapDecls.map((d) => `  ${d};`), '}');
         lines.push(...wrapSubRules);
       }
+      // State changes select the same declared child override variable as
+      // rest; they never apply arbitrary styling inside the child component.
+      const instanceStateRules: Array<{state:string;css:string}> = [];
+      for (const [state, overrides] of Object.entries(part.states ?? {})) {
+        const sel=STATE_SELECTORS[state]; if (!sel) continue;
+        for (const [channel,ref] of Object.entries(overrides)) {
+          const refPath=stripBraces(ref),where=`anatomy.${name}.states.${state}.${channel}`;
+          const rows=placeholdersIn(refPath).length ? expandRef(where,refPath) : [{combo:[],resolved:refPath}];
+          for(const {combo,resolved} of rows) if(checkToken(resolved,where))
+            instanceStateRules.push({state,css:`\n.${combo.length?comboCls(combo):'root'}${sel} .${cssIdentifier(name)} {\n  ${refOverrideVar(part.component.id,channel)}: ${cssVar(resolved)};\n}`});
+        }
+      }
+      for(const entry of part.statesByProp ?? []) {
+        const sel=STATE_SELECTORS[entry.state];if(!sel)continue;
+        for(const [value,overrides] of Object.entries(entry.map)) for(const [channel,ref] of Object.entries(overrides)) {
+          const refPath=stripBraces(ref);
+          if(checkToken(refPath,`anatomy.${name}.statesByProp.${entry.prop}.${value}.${entry.state}.${channel}`))
+            instanceStateRules.push({state:entry.state,css:`\n.${comboCls([[entry.prop,value]])}${sel} .${cssIdentifier(name)} {\n  ${refOverrideVar(part.component.id,channel)}: ${cssVar(refPath)};\n}`});
+        }
+      }
+      instanceStateRules.sort((a,b)=>stateOrder.indexOf(a.state)-stateOrder.indexOf(b.state));
+      lines.push(...instanceStateRules.map(r=>r.css));
       continue; // instances style themselves via their own contract
     }
     const decls: string[] = [];
@@ -1143,10 +1193,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     if (nativeTextRendering.has(part)) decls.push(NATIVE_TEXT_RENDERING_DECL);
     // dump v1.36: `textAutoResize: WIDTH_AND_HEIGHT` — a Figma text box that
     // sizes itself to its text is a whole number of pixels wide (the advance
-    // rounded up); the element gets the same box, as a progressive
-    // enhancement a browser without calc-size() drops at parse, clamped to
-    // its container and started at the column's start edge where CSS would
-    // stretch it (anatomy.ts wholePixelTextBoxDecls says why each one).
+    // rounded up); the element keeps that intrinsic width without shrinking.
+    // Browsers without calc-size() drop the progressive width declaration.
+    // Only authored bounds constrain the box; column cross-axis stretch is
+    // suppressed where needed (anatomy.ts wholePixelTextBoxDecls explains why).
     // @lower css.text-box-whole-pixel
     decls.push(...(textBoxes.get(part) ?? []));
     // Round 4: an absolutely-positioned REPLACED part (promoted Thumbnail

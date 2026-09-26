@@ -1,0 +1,150 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tabs",
+  "name": "Tabs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "stretch"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "stretch": "Stretch"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "start"
+      },
+      "parts": {
+        "alCTabsHeader": {
+          "layout": {
+            "direction": "row",
+            "align": "start"
+          },
+          "literalsByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "stretch": {
+                  "width": "100%"
+                }
+              }
+            }
+          ],
+          "tokens": {
+            "border-color": "{theme.color.border.neutral-default}"
+          },
+          "parts": {
+            "alCTabsList": {
+              "layout": {
+                "direction": "row",
+                "align": "start"
+              },
+              "parts": {
+                "alTab": {
+                  "component": {
+                    "id": "ds.state-default-active-yes",
+                    "props": {
+                      "active": "yes",
+                      "state": "default",
+                      "text": "Tab label"
+                    }
+                  }
+                },
+                "alTab2": {
+                  "component": {
+                    "id": "ds.state-default-active-no",
+                    "props": {
+                      "active": "no",
+                      "state": "default",
+                      "text": "Tab label"
+                    }
+                  }
+                },
+                "alTab3": {
+                  "component": {
+                    "id": "ds.state-default-active-no",
+                    "props": {
+                      "active": "no",
+                      "state": "default",
+                      "text": "Tab label"
+                    }
+                  }
+                }
+              },
+              "layoutByProp": {
+                "prop": "variant",
+                "map": {
+                  "stretch": {
+                    "grow": true,
+                    "growBasis": "zero"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "alCTabsBody": {
+          "layout": {
+            "direction": "column",
+            "align": "start"
+          },
+          "parts": {
+            "alTabPanel": {
+              "component": {
+                "id": "ds.state-default",
+                "props": {
+                  "state": "default"
+                }
+              }
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Tabs",
+        "export": "Tabs"
+      }
+    }
+  }
+}

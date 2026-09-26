@@ -1,0 +1,42 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/menu.contract.json (ds.menu v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 0;
+  background-color: var(--theme-color-background-neutral-default);
+  width: fit-content;
+  height: fit-content;
+}
+
+.variant-default {
+  padding-left: var(--imported-menu-root-padding-left-default);
+  padding-right: var(--imported-menu-root-padding-right-default);
+  padding-top: var(--imported-menu-root-padding-top-default);
+  padding-bottom: var(--imported-menu-root-padding-bottom-default);
+}
+
+.variant-simple {
+  padding-left: var(--imported-menu-root-padding-left-simple);
+  padding-right: var(--imported-menu-root-padding-right-simple);
+  padding-top: var(--imported-menu-root-padding-top-simple);
+  padding-bottom: var(--imported-menu-root-padding-bottom-simple);
+  background-color: var(--theme-color-background-transparent-default);
+}
+
+.alCMenuList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

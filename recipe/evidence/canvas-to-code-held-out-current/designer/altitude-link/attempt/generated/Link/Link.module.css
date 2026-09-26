@@ -1,0 +1,49 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/link.contract.json (ds.link v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  border-radius: var(--theme-border-radius-xs);
+  gap: var(--theme-space-xs);
+  width: fit-content;
+  height: fit-content;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:focus-visible {
+  outline-color: var(--theme-color-focus-ring);
+}
+
+.root:focus-visible {
+  outline-width: var(--theme-border-width-md);
+}
+
+.root[data-disabled] {
+  opacity: var(--imported-link-state-disabled-opacity);
+}
+
+.linkText {
+  color: var(--theme-color-content-primary-default);
+  font-size: var(--typography-font-size-14);
+  line-height: var(--typography-line-height-20);
+  font-weight: var(--imported-link-link-text-font-weight);
+  letter-spacing: 1px;
+  font-family: Public Sans;
+  text-align: left;
+}

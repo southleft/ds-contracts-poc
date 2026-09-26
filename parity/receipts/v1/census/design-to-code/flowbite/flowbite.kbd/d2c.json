@@ -5,7 +5,7 @@
   "nodeId": "120:1982",
   "mode": "exact",
   "variantCount": 1,
-  "contractSha256": "2cf255b624e7d908a750c02e28bf6e054f953c183a548b26b6c8d3fa101f3c26",
+  "contractSha256": "879496aa9aba067f841dc759a0294beb65858f79b6de96c28e3b48e56971418f",
   "carriage": {
     "carried": 20,
     "named": 23,
@@ -264,14 +264,14 @@
     }
   ],
   "generatedFiles": {
-    "react/Kbd/Kbd.module.css": "b8f2754b874b51769993ef4ae89ae477bc24895c8c295a913a883287c099dbe6",
+    "react/Kbd/Kbd.module.css": "b88124153ac1fc58c14ecaaa4f9b2e36366119d0c12c946a05ce3c0ea9af1ced",
     "react/Kbd/Kbd.stories.tsx": "05b60b113f46dd91f319d65a84b7e9588f1b312465c3281ee9a038db46eba2bc",
     "react/Kbd/Kbd.tsx": "5baa1d1f0964e6ecaf884181459fa9a2880ec3675930ea07d8b264eb03ab22cf",
     "react/Kbd/index.ts": "0e950fa619fef178131fcff760f73e79db08187916cb8b64ab8945dd305a9c86",
     "wc/flowbite-kbd.ts": "fc13c25a12265345e44cd8ee7cbdd7559b0530c8456b043ababffad79b3457dd",
-    "wc/flowbite-kbd.css.ts": "9b398f4a7274d344da0a9ae720cbb86f66c9038147dd5fb939348b93f31172c0",
+    "wc/flowbite-kbd.css.ts": "1e2df307866e419ce8296d9d4dd7a451d43486b04a2500524f134df8760b66a2",
     "wc/flowbite-kbd.demo.html": "d64b1a9450cd07db644d07906dd5d55149ffe01902c38c5de264abe0d42ca10f",
     "wc/flowbite-kbd.custom-elements.json": "9991a5cded1add7a6606360603d366194a059c021dde793baa9975779ffc1626"
   },
-  "notesCount": 38
+  "notesCount": 39
 }

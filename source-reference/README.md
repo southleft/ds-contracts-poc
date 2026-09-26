@@ -4,6 +4,12 @@ The local app's `/sources` page now starts with **React originals**. **Load Reac
 
 Configure `DS_CONTRACTS_REACT_SOURCE_ROOT` on the dev-server process to point to an existing React source workspace with its installed dependencies. A workspace declaration selects its own cases; without one, the built-in preset expects the shadcn source sandbox. The local owner setup defaults to the original `ds-contracts-poc/examples/shadcn/.shadcn-sandbox` sibling checkout. Requests cannot choose a filesystem path or executable. This preset is not automatic onboarding for an arbitrary React repository.
 
+On a fresh checkout, run `npm ci` and `npm run prep:core` before starting the local app. The latter builds schema and core; the schema-only preparation leaves the server unable to resolve `@ds-contracts/core`.
+
+Before capturing sources, run `npx playwright-core install chromium` from this checkout. `npm ci` installs the browser driver but does not download its pinned browser. Validation and tracing launch that browser headlessly; an unavailable executable is a setup failure, not a source-conversion result. Repeat the browser install after a Playwright version change.
+
+**Structure-tracing compatibility:** the original workspace's React DOM renderer must be 19.2.4 or 19.2.7. The observer refuses other or mixed renderer versions with `react-ownership-renderer-unsupported`; a source-validation result alone does not qualify that renderer. Generated React output has a separate React peer-dependency range. The runtime guard and its negative controls live in `react-ownership.ts` and `react-ownership.test.ts`.
+
 ## Declaring a workspace's own cases
 
 Without a declaration the built-in shadcn cohort above is used, and its entry bytes, case records and reference identity are unchanged. A source workspace can instead declare its own cohort in an optional `ds-contracts.react.json` at the configured source root, so a component family can be brought to the app without editing application code. The declared independent family has bounded live native evidence and named qualification gaps in [CURRENT.md](../docs/CURRENT.md#v1-acceptance-evidence).
@@ -116,6 +122,51 @@ Callback facts include installed parameter types, optional/rest parameters, over
 Source readiness is separate from dependency-build reproducibility, Figma fidelity, editability, behavior and workflow completion. **Trace React structure** now feeds supported combined root drafts into **Inspect editable Figma roots** through the shared native operation journal. New observations seal their complete archive in `integrity.json`; preparation pins that seal, report and matrix, and every write reopens the unchanged source/evidence. Existing operations recover after restart when unchanged originals are loaded. The authorized React target is DS Contracts Evaluations; historical Scratch operations retain their original policy. Native root readback checks structure and exposes diagnostic exports; a separate live Button caller-text comparison also passed independent readback. A saved Checkbox initial-state draft also passed live native structural readback. Full content coverage, Checkbox interactions, the composed Card and visual qualification remain unfinished. The earlier Lit workflow below is parked for V1.1 and remains available under the collapsed archive section.
 
 A combined root draft takes its layout from the root's own display: flex is re-derived from the observed planes, and a traced top-level `display: grid` root takes the same bounded row-flow lowering as a composed grid child (one implicit auto column, intrinsic rows, row flow, horizontal LTR, block children) from a declared-track witness sealed with the row (`grid-constraints.json`) and with every matrix plane. Because no parent proves a top-level root's width, that column is admitted only when the width is the component's own declaration in every plane: a fixed length, or exactly `100%` (style-origin status `fill`, read only while the border box really takes its containing width), which projects `width: 100%` so the column takes whatever definite width the instance's parent supplies. A caller `style`/`className`, another percentage, `calc()`, a min/max-width clamp or an automatic width stops at `react-root-grid-width-unqualified`, other tracks, flow or writing modes at `react-root-grid-constraints-unqualified`, and archives sealed without the witness read exactly as before. When that grid root is the container of a composed child, the child's `width: 100%` comes from the same root rule judged after caller inputs (not from both root sizes being automatic), so a caller-owned root width refuses its children by the same name. A size is the component's OWN only when the winning selector's subject compound is carried by the element itself (a class, attribute or id token; ancestor and sibling parts are conditions on the author's rule): a rule reaching in from outside (`#w > *`, a tag-only or universal subject, anything inside `:is()`/`:where()`) is `size-declared-by-outer-selector` for fixed and fill alike. A `fill` fact is recorded only on what the in-page witness saw: the box in flow with its width as the used-width source, its border box equal to the parent's content box, no `zoom` on it or any ancestor, and a containing width made definite by an ancestor's own px width through in-flow, horizontal, block-level boxes (`fillWidthContainer.depth` records which ancestor, never a selector). A shrink-to-fit place is `declared-fill-width-containing-block-indefinite`, and a chain bounded only by the harness stage, body or viewport is `declared-fill-width-containing-block-viewport-only`: a harness fact is never the caller's place, so such a root refuses and no comparison width exists. A lowered grid root also carries `grid-tracks-observed-for-this-content-only`: rules conditioned on content (`:has(> svg)` tracks or placements) do not match the sample, the matrix varies properties and never content, and only matching rules are observable. A fill-width main has no width of its own, so its caller-content comparison pins `containerWidth`: the root's used border-box width, which that sealed fact witnessed to BE its containing block's content width. It sizes only the app-owned comparison frame (FIXED, the instance FILL inside it); it never reaches the main, its contract or a token, and it is distinct from `instanceWidth`, which pins an instance whose caller declared a width.
+
+## Observed authored compositions
+
+When **Trace React structure** produces a supported authored-composition draft, the selected case offers **Prepare … composition for Figma**. This path preserves observed component boundaries and their nested instances without treating authored children as caller-content slots. It uses the shared native graph writer and the same companion connection, creation and independent-readback workflow.
+
+Preparation reopens the sealed report and source files, rederives the authored-content evidence and compares the resulting draft with the saved revision. Browser requests select a case only; they cannot supply contracts, paths, scripts or a target file. An unchanged repeat uses the same operation. After a server restart, loading unchanged originals restores its pinned observation when the saved operations agree on one archive. Changed inputs refuse rather than silently replacing a candidate.
+
+The local app has prepared both recorded Radix Switch appearances and verified repeat and restart behavior. No live native creation or fidelity result exists for these operations yet. Their captured inputs do not qualify other states, runtime behavior or two-way updates; those controls remain unavailable for this operation kind. Root and caller-comparison operations retain their existing flows below.
+
+## Caller comparisons after a root correction
+
+After **Review compiler update** has completed and independent readback verifies
+the latest correction, use **Prepare caller-content comparison**, then **Prepare
+native comparison operation** on the retained root. Connect Sync Runner in the
+authorized file and choose **Create and inspect native comparison**. Ordinary
+empty content slots now use this path as well as text-template roots. If the
+review only allocated missing variables, complete its separate follow-up
+component review first.
+
+The comparison pins the current source and exact verified parent correction.
+Its writer rechecks the live main before creating an editable instance. Pending
+observations, damaged journals, substituted parent identities and later source
+changes cannot authorize creation. Historical comparisons remain historical;
+this path creates a separately recorded current-source caller, without replacing
+the main. Repeating the same request reopens that caller's saved operation.
+Nested references retain their own current-source and independent-readback checks.
+
+The 2026-09-23 application rehearsal created an ordinary Button caller from its
+retained corrected main. Independent readback preserved all 191 parent nodes and
+122 parent variables, and verified six comparison nodes and 18 caller variables.
+The unobstructed native canvas was inspected. **Exact geometry still fails:**
+React is 115.8125 × 36 px and Figma is 116 × 36 px. The text diagnostic reports
+93.8125 px browser advance versus a 94 px native text box. Matching Inter family
+and weight names do not identify matching font bytes. No pixel-fidelity pass or
+complete V1 qualification follows from this rehearsal.
+
+**AGENT decision, 2026-09-23:** extend the existing host-authenticated version-4
+caller reservation to verified ordinary root corrections. Do not reinterpret
+old caller evidence as the new source or bypass canvas preflight. Journal/compiler
+regressions in `native-root-consumer-jobs.test.ts` cover restart, exact repeat,
+historical preservation, stale authority, corruption, canvas conflict and the
+allocation-only refusal. Template inventory guards remain independently tested.
+To reverse this decision, restore template-only caller admission and hide the
+ordinary corrected-root action; retain every historical operation and evidence
+file. No conversion threshold or geometry rule changes with this workflow.
 
 ---
 
@@ -368,8 +419,11 @@ applications independently of the current reference; per-application `apply`,
 and companion reconnection. Completion requires fresh pre/post native reads,
 normal witnessed source rebuilding and complete browser validation. The source
 transaction can be resumed after interruption; changed source bytes refuse.
-Restoration affects source/CSS only, leaving Figma untouched. No live Apply
-acceptance is claimed yet; see [D.108](../docs/23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery).
+Restoration affects source/CSS only, leaving Figma untouched. The reviewed
+root-opacity Apply, restart before writing, completed repeat, conflict refusals,
+exact source restoration and recovery after a partial-file IO failure have been
+measured through the app. Other repair channels and process termination during
+file replacement remain unqualified; see [D.108](../docs/23-known-limitations.md#d108-source-application-requires-fresh-canvas-reads-and-verified-recovery).
 
 
 `react-behavior-contract.ts` derives a separate React draft from authenticated callback and initial appearance records for the same case. It rechecks the finite action/state/payload rows and requires an omitted initializer to match exactly one explicit value across every other captured input context. It preserves the canonical appearance axis while binding the code side to separate controlled and initial-only public inputs, and emits the observed next-value callback. It does not rewrite the static/native contract or add a second canvas axis. The application shows this draft and its generated React code. Controlled-source appearance, associated label composition, clean-consumer delivery and native metadata preservation remain unqualified.

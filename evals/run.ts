@@ -3509,8 +3509,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // sibling instances of the same child with a carriable per-item field
     // propose as ONE item-template part + arrayOf prop — React maps the live
     // array, the canvas/static surfaces render the OBSERVED sample (the
-    // meter discipline). Per-item enum/state differences (P10) and pre-v1.5
-    // TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
+    // meter discipline). Declared per-item enums carry their observed choices;
+    // pre-v1.5 TEXT/VARIANT-ambiguous keys stay NAMED receipts; "Show item N" count
     // booleans never promote. Receipt runs the REAL owner's-kit
     // Navigation-Header fixture + a v1.5-shaped synthetic run.
     id: 'repeated-children-collection',
@@ -3527,9 +3527,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ the "Show item N" count booleans are receipted, never promoted (rename story named)',
         '✔ React maps the LIVE array ({items?.map((item, index) => …iconRight={item.iconRight}…)})',
         '✔ the canvas constructs the OBSERVED instances (5 LinkNeutral sample instances in the sync script)',
-        '✔ per-item TEXT carries as a field — the "#id" suffix is TEXT certainty (fields: { children: text })',
+        '✔ per-item text and the declared child enum both carry as typed fields',
         '✔ the sample carries the drawn labels VERBATIM (One/Two/Three/Four)',
-        '✔ the varying enum is the P10 receipt (selected-item stays note-gated, never carried)',
+        '✔ the observed variant choices survive in the sample instead of becoming child defaults',
         '✔ the static surface renders the OBSERVED sample per item (One…Four appear in the html)',
         '✔ the pattern is DETECTED and the fallback is a NAMED note (no field invented)',
       ]) {

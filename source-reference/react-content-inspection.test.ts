@@ -12,7 +12,7 @@ import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { selectReactNativeRequest, readReactNativeContentEvidence } from './react-native-evidence.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { startReactContentInspection, readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
-import type { ReactOwnershipReport } from './react-ownership-run.js';
+import { reactOwnershipEngine, type ReactOwnershipReport } from './react-ownership-run.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
@@ -144,7 +144,18 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   ], [undefined, undefined, 'observer-unrecorded-and-evidence-unobserved', 'observer-changed', 'evidence-unobserved-by-recorded-observer', undefined, undefined, undefined],
     'evidence can come to be read from a reader outside the module list: an equal recorded observer must not strand the run; an unavailable identity calls nothing stale');
   const identity = reactInitialObserverIdentity();
-  assert.deepEqual(Object.keys(identity), [...reactInitialObserverModules, 'playwright-core']);
+  const observerFiles = [...new Set([...Object.keys(reactOwnershipEngine()), ...reactInitialObserverModules,
+    'react-authored-initial.ts', 'react-initial-capture.ts'])];
+  assert.deepEqual(Object.keys(identity), [...observerFiles, 'playwright-core']);
+  for (const file of observerFiles) {
+    assert.equal(identity[file], evidenceSha(readFileSync(path.resolve('source-reference', file))),
+      `the observer authenticates the current bytes of ${file}`);
+  }
+  for (const file of ['react-authored-initial.ts', 'react-initial-capture.ts']) {
+    const earlier = { ...identity }; delete earlier[file];
+    assert.equal(reactInitialReobservable({ ...reopened, observer: earlier, draft: draftOf([]) }, identity),
+      'observer-changed', `a run without ${file} cannot qualify the current authored-state observer`);
+  }
   assert.match(identity['playwright-core'], /^\d+\.\d+\.\d+\S* chromium \d+(\.\d+)+ r\d+$/, 'the browser that renders the mounts is part of what an observation says');
   assert.ok(!reactInitialObserverModules.some(f => /initial-contract|descendant-geometry|observed-content|emit-figma|fuse/.test(f)), 'assembly re-runs on read: it is not the observer');
   // A run that RECORDS its observer: final under the same observer, observable again under another one.

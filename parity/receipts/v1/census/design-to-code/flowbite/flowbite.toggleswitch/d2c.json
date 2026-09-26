@@ -5,7 +5,7 @@
   "nodeId": "120:2047",
   "mode": "exact",
   "variantCount": 6,
-  "contractSha256": "6fc1fd3f015db2aef13af8ac3ad67a82d7a517a317a23024393cb78e6e23334a",
+  "contractSha256": "286707d4a5ea81c7d2c1f637d1b36d5de56da23acd5221665f14726647b29222",
   "carriage": {
     "carried": 138,
     "named": 123,
@@ -292,14 +292,14 @@
     }
   ],
   "generatedFiles": {
-    "react/ToggleSwitch/ToggleSwitch.module.css": "0fef1124d06ce66dd473560c9fb55061897875e880ba1c235c7e5695e72bd3d8",
+    "react/ToggleSwitch/ToggleSwitch.module.css": "7c6f186778a5237434a0e1218c374f568713a497e2b6bf9549ea160459c57925",
     "react/ToggleSwitch/ToggleSwitch.stories.tsx": "afc9eef96d1359d299eddfbeadac8e1d6fcc487c7eb24ac6276879305a613f17",
     "react/ToggleSwitch/ToggleSwitch.tsx": "8a9fe182de42e91e3d27eab388397201e9bc2a844fb3ab8f4d457d520f54402c",
     "react/ToggleSwitch/index.ts": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
     "wc/flowbite-toggleswitch.ts": "4aa4980d8217c434f3e4b2cb0e07bb0012ee035c75129b04df1e2561ff39d13e",
-    "wc/flowbite-toggleswitch.css.ts": "fae706270d6875a6d531237c07998a6f7d52c05f142e6f3b99ec0d4405efca9f",
+    "wc/flowbite-toggleswitch.css.ts": "41a61bb70c2f7142b4b7b433eb2b8824d08347bd4f49f3942a33f445edd2e2d4",
     "wc/flowbite-toggleswitch.demo.html": "a9f2f2f85d0f599357f969a40e26cbbcfd20e6f3d2bc9d27cea7177146ca49f4",
     "wc/flowbite-toggleswitch.custom-elements.json": "97e0cf155692825443c4015142d0d029ffa5d201a1af4e07d86f1f2546f6e185"
   },
-  "notesCount": 142
+  "notesCount": 143
 }

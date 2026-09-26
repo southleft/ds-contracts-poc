@@ -51,7 +51,11 @@ test('variant fill reaches ordinary frames, repeated child roots and native inst
   assert.match(html.find(file=>file.path.endsWith('.html'))!.contents,/class="entry menu__entry/);
   assert.match(html.find(file=>file.path.endsWith('.css'))!.contents,/\.menu--density-wide \.menu__entry \{\s*flex: 1 1 0px;/);
   assert.match(reactInlineEmitter.emit(contract,ctx).find(file=>file.path.endsWith('.tsx'))!.contents,/<Entry[^>]* style=/);
-  const data=createFigmaEngine({tokens:ctx.tokens,icons:ctx.icons}).compileComponentData(contract,ctx.contracts);
+  const engine=createFigmaEngine({tokens:ctx.tokens,icons:ctx.icons});
+  assert.throws(()=>engine.compileComponentData(contract,ctx.contracts),/FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED.*Density=Wide/,
+    'intrinsic row growth cannot silently become native Hug');
+  const bounded=structuredClone(contract);bounded.anatomy.root.literals={width:'600px'};
+  const data=engine.compileComponentData(bounded,new Map([...ctx.contracts,[bounded.id,bounded]]));
   for(const variant of data.variants){
     const instances=nodes(variant.spec).filter(node=>node.type==='instance');
     assert.equal(instances.length,3);
@@ -192,4 +196,96 @@ test('a later missing parent observation never borrows the first variant directi
   const item=walkAnatomy(contract).find(row=>row.part.repeat)!.part;
   assert.equal(item.layoutByProp,undefined);
   assert.ok(notes.some(note=>note.includes('primary-axis-fill-not-carried')));
+});
+
+
+test('native primary growth follows the parent axis on creation, amendment and repeat', async () => {
+  const vm = await import('node:vm');
+  const {createFigmaMock} = await import('../scripts/plugin-engine-mock-figma.mjs');
+  for (const direction of ['row', 'column'] as const) for (const variants of [false, true]) {
+    const contract=ContractSchema.parse({id:`test.growth-${direction}-${variants}`,name:`Growth${direction}${variants}`,version:'0.1.0',description:'Parent-axis growth regression',status:'draft',semantics:{element:'div'},
+      props:variants?[{name:'size',type:{enum:['small','large']},default:'small',bindings:{code:{prop:'size'},figma:{kind:'VARIANT',property:'Size',values:{small:'Small',large:'Large'}}}}]:[],states:[],
+      anatomy:{root:{layout:{display:'flex',direction,align:'start'},literals:{width:direction==='row'?'300px':'120px',height:direction==='row'?'120px':'300px'},
+        parts:Object.fromEntries(['a','b','c'].map((name,i)=>[name,{layout:{display:'flex',direction:'column',grow:true,growBasis:'zero'},literals:{[direction==='row'?'height':'width']:'40px'},parts:{['mark'+i]:{shape:{kind:'rect',width:10,height:10}}}}]))}},
+      bindings:{code:{anchors:{importPath:'test/Growth',export:'Growth'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+    const mock=createFigmaMock(),engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+    const context=vm.createContext({figma:mock.figma,console:{log(){},warn(){},error(){}}}),byId=new Map([[contract.id,contract]]);
+    const run=()=>vm.runInContext(`(async()=>{${engine.buildComponentScript(contract,byId)}\n})()`,context);
+    const owner=()=>mock.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===contract.id&&n.parent?.type!=='COMPONENT_SET')!;
+    const mains=()=>owner().type==='COMPONENT_SET'?owner().children!:[owner()];
+    let ids:string[]=[];
+    for(const phase of ['create','amend'] as const){
+      if(phase==='amend'){contract.version='0.1.1';contract.anatomy.root.literals![direction==='row'?'width':'height']='240px';}
+      await run();
+      if(phase==='create')ids=mains().map(n=>n.id);else assert.deepEqual(mains().map(n=>n.id),ids);
+      for(const main of mains())for(const child of main.children!){
+        assert.equal(direction==='row'?child.layoutSizingHorizontal:child.layoutSizingVertical,'FILL',`${direction} ${phase}: grow must fill the main axis`);
+        // The mock does not distribute equal FILL siblings; exact allocation is a desktop check.
+        assert.equal(direction==='row'?child.height:child.width,40,`${direction} ${phase}: retain the declared cross size`);
+        assert.deepEqual([child.children![0].width,child.children![0].height],[10,10],`${direction} ${phase}: fixed geometry cannot inherit stretch`);
+      }
+    }
+    assert.equal((await run()).results[0].skipped,true);assert.deepEqual(mains().map(n=>n.id),ids);
+  }
+});
+
+
+test('native height allocation propagates only through a definite column chain',()=>{
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  for(const definite of [false,true]) {
+    const contract=ContractSchema.parse({id:'test.nested-column',name:'NestedColumn',version:'0.1.0',status:'draft',description:'Definite height propagation',semantics:{element:'div'},props:[],states:[],
+      anatomy:{root:{layout:{display:'flex',direction:'column',align:'start'},literals:{width:'120px',...(definite?{height:'300px'}:{})},parts:{
+        stack:{layout:{display:'flex',direction:'column',align:'start',grow:true,growBasis:'zero'},literals:{width:'40px'},parts:{
+          item:{layout:{display:'flex',grow:true,growBasis:'zero'},parts:{mark:{shape:{kind:'rect',width:10,height:10}}}},
+        }},
+        sibling:{shape:{kind:'rect',width:10,height:10}},
+      }}},bindings:{code:{anchors:{importPath:'test/NestedColumn',export:'NestedColumn'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+    if(!definite){
+      assert.throws(()=>engine.compileComponentData(contract,new Map([[contract.id,contract]])),/FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED.*height allocation/);
+      continue;
+    }
+    const compiled=engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+    const all=nodes(compiled.variants[0].spec);
+    for(const name of ['stack','item']) {
+      assert.equal(all.find(n=>n.name===name)!.fillH,definite?true:undefined,`${name}: an intrinsic sibling cannot create definite height`);
+      assert.equal(all.find(n=>n.name===name)!.fillW,undefined,`${name}: column grow cannot create horizontal fill`);
+    }
+  }
+});
+
+test('literal full width stays horizontal under either flex direction without implying grow',()=>{
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  for(const direction of ['row','column'] as const) {
+    const contract=ContractSchema.parse({id:'test.percent-width',name:'PercentWidth',version:'0.1.0',status:'draft',description:'Percent width is independent of the main axis',semantics:{element:'div'},props:[],states:[],
+      anatomy:{root:{layout:{display:'flex',direction,align:'start'},literals:{width:'120px',height:'300px'},parts:{
+        item:{layout:{display:'flex'},literals:{width:'100%'},parts:{mark:{shape:{kind:'rect',width:10,height:10}}}},
+      }}},bindings:{code:{anchors:{importPath:'test/PercentWidth',export:'PercentWidth'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+    const compiled=engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+    const item=nodes(compiled.variants[0].spec).find(n=>n.name==='item')!;
+    assert.equal(item.fillW,true);assert.equal(item.fillH,undefined);assert.equal(item.grow,undefined);
+    const react=reactEmitter.emit(contract,{contracts:new Map([[contract.id,contract]]),tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map(),mode:'light'});
+    assert.match(react.find(f=>f.path.endsWith('.css'))!.contents,/width: 100%/);
+    assert.doesNotMatch(react.find(f=>f.path.endsWith('.css'))!.contents,/flex: 1/);
+  }
+});
+
+
+test('fixed shapes retain declared geometry while percentage width and explicit growth remain independent',async()=>{
+  const vm=await import('node:vm');const {createFigmaMock}=await import('../scripts/plugin-engine-mock-figma.mjs');
+  const engine=createFigmaEngine({tokens:{primitives:{},semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
+  for(const kind of ['rect','ellipse'] as const)for(const direction of ['row','column'] as const)for(const mode of ['shape','literal','percent','grow'] as const){
+    const contract=ContractSchema.parse({id:'test.shape-placement',name:'ShapePlacement',version:'0.1.0',status:'draft',description:'Fixed geometry and explicit placement',semantics:{element:'div'},props:[],states:[],
+      anatomy:{root:{layout:{display:'flex',direction,align:'stretch'},literals:{width:'40px',height:'50px'},parts:{
+        mark:{shape:{kind,width:10,height:12},...(mode==='literal'?{literals:{width:'15px'}}:mode==='percent'?{literals:{width:'100%'}}:mode==='grow'?{layout:{grow:true,growBasis:'zero'}}:{})},
+      }}},bindings:{code:{anchors:{importPath:'test/ShapePlacement',export:'ShapePlacement'}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+    const byId=new Map([[contract.id,contract]]),host=createFigmaMock();
+    await vm.runInNewContext('(async()=>{'+engine.buildComponentScript(contract,byId)+'\n})()',{figma:host.figma,console:{log(){},warn(){},error(){}}});
+    const main=host.root.findOne(n=>n.getSharedPluginData('ds_contracts','contractId')===contract.id)!;const shape=main.children![0];
+    if(mode==='grow'){
+      assert.equal(direction==='row'?shape.layoutSizingHorizontal:shape.layoutSizingVertical,'FILL');
+      assert.equal(direction==='row'?shape.height:shape.width,direction==='row'?12:10);
+    }else{
+      assert.deepEqual([shape.width,shape.height],[mode==='percent'?40:mode==='literal'?15:10,12],`${kind} ${direction} ${mode}`);
+    }
+  }
 });

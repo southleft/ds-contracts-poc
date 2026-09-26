@@ -17,13 +17,15 @@ import type {ReactPropertySnapshot,ReactRootVariants} from './react-root-variant
 import {evidenceSha} from './react-validation-evidence.js';
 import {reactPropertyPaintedRoot,assertReactPropertyFontCoverage} from './react-property-fonts.js';
 import {prepareReactRootTextTemplate,type ReactRootTextPlane} from './react-root-text-template.js';
+import type {ReactContextualContent} from './react-contextual-content.js';
 export interface ReactRootMatrix {
  version:1;qualification:'combined-property-root-draft';acceptedContract:null;
+ contentContextRevision?:string;
  draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[];sizing?:ReactSizingReport[]};problems:string[];
 }
 export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:ReactOwnership,tree:CapturedNode,
- matrix:ReactPropertyMatrix,snapshots:Record<string,ReactPropertySnapshot>,identity?:string):ReactRootMatrix{
- const out:ReactRootMatrix={version:1,qualification:'combined-property-root-draft',acceptedContract:null,problems:[]};
+ matrix:ReactPropertyMatrix,snapshots:Record<string,ReactPropertySnapshot>,identity?:string,contentContext?:ReactContextualContent):ReactRootMatrix{
+ const out:ReactRootMatrix={version:1,qualification:'combined-property-root-draft',acceptedContract:null,...(contentContext?{contentContextRevision:contentContext.revision}:{}),problems:[]};
  try{
   const expected=planReactPropertyMatrix(program,ownership,tree,matrix.instanceId);
   if(matrix.version!==1||matrix.qualification!=='full-finite-style-matrix'||matrix.problems.length||
@@ -71,8 +73,8 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
     if(JSON.stringify(held)!==JSON.stringify(original))throw Error('react-root-matrix-held-props-changed');
     const key=comboKey(axes,[],assignment,{});
     if(trees.has(key)&&trees.get(key)!==snap.treeSha256)throw Error('react-root-matrix-omission-or-default-changes-render');trees.set(key,snap.treeSha256);
-    const linked=linkReactSourceAnatomy(program,snap.ownership,snap.tree).instances.find(i=>i.instanceId===matrix.instanceId);
-    const projected=projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin,undefined,undefined,snap.gridConstraints).roots.find(r=>r.instanceId===matrix.instanceId);
+    const linked=linkReactSourceAnatomy(program,snap.ownership,snap.tree,contentContext).instances.find(i=>i.instanceId===matrix.instanceId);
+    const projected=projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin,undefined,undefined,snap.gridConstraints,contentContext).roots.find(r=>r.instanceId===matrix.instanceId);
     if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-matrix-content-unqualified');
     const prior=projections.get(key);
     if(prior&&(JSON.stringify(prior.sourceBindings)!==JSON.stringify(projected.sourceBindings)||JSON.stringify(prior.sourceSizing)!==JSON.stringify(projected.sourceSizing)))throw Error('react-root-matrix-default-provenance-differs');

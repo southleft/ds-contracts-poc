@@ -14,6 +14,7 @@ import { mountGenerated } from './react-test-runtime.js';
 import { createFigmaEngine } from './emit-figma-script.js';
 import { walkAnatomy } from '../scripts/contract-schema.js';
 import { fetchObservation } from '../sync/observe.js';
+import { nativeFilledPathMatches } from './native-filled-path.js';
 
 const triangle = { data: 'M0 0L12 0L6 10Z', windingRule: 'NONZERO' as const };
 const inset = { data: 'M0 0L12 0L12 10L0 10Z M3 3L9 3L9 7L3 7Z', windingRule: 'EVENODD' as const };
@@ -22,6 +23,22 @@ const plugin = readFileSync(new URL('../extract/figma/dump.plugin.js', import.me
 const gateStart = plugin.indexOf('function filledPathIssue(data)');
 const gateEnd = plugin.indexOf('function dumpShape(', gateStart);
 const pluginGate = vm.runInNewContext(`${plugin.slice(gateStart, gateEnd)}; filledPathIssue`) as typeof filledPathIssue;
+
+test('native path comparison accounts for explicit closure, rebased points and float32 curve handles', () => {
+  const matches = (source: string, observed: string, x = 0, y = 0) => nativeFilledPathMatches(
+    { kind: 'path', width: 12, height: 10, paths: [{ data: source, windingRule: 'NONZERO' }] },
+    [{ data: observed, windingRule: 'NONZERO' }], x, y);
+  assert(matches('M0,0 12,0 6,10Z', 'M 0 0 L 12 0 L 6 10 L 0 0 Z'));
+  assert(matches('M3 3L9 3L6 7Z', 'M 0 0 L 6 0 L 3 4 L 0 0 Z', 3, 3));
+  // Captured from the native quadratic probe, not computed by the comparator.
+  assert(matches('M0 0Q6 10 12 0L0 0Z', 'M 0 0 C 4 6.666666507720947 8 6.666666507720947 12 0 L 0 0 Z'));
+  for (const changed of ['M0 0L12 0L5 10Z', 'M0 0L12 0L6 10', 'M0 0L6 10L12 0Z', 'M0 0L12 0L6 10Z M0 0L1 0L0 1Z'])
+    assert(!matches(triangle.data, changed), changed);
+  assert(!matches(triangle.data, triangle.data, 0.125));
+  assert(!matches('M0 0Q6 10 12 0L0 0Z', 'M0 0C4 6.66 8 6.666666507720947 12 0L0 0Z'));
+  assert(!nativeFilledPathMatches({ kind: 'path', width: 12, height: 10, paths: [triangle] }, [{...triangle,windingRule:'EVENODD'}], 0, 0));
+  assert(!nativeFilledPathMatches({ kind: 'path', width: 12, height: 10, paths: [triangle] }, [triangle, triangle], 0, 0));
+});
 
 test('filled paths reject malformed, open, unsafe and approximated geometry in both readers', () => {
   for (const path of [triangle.data, inset.data, 'M0 0C1 -1 2 -1 3 0Q4 1 3 2L0 0Z', 'M0 0L1e-3 2Z', 'M0,0 L12,0 6,10Z']) {

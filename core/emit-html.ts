@@ -953,6 +953,7 @@ function validateStaticHtmlIdentity(contract: Contract, ctx: EmitCtx): void {
     }
 
     for (const { name, part, path } of walkAnatomy(c)) {
+      if (part.absolutePlacement || part.absolutePlacementByCombination) throw new Error('HTML_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       const location = `${c.id}.anatomy.${path.join('.')}`;
       if (!CLASS_FRAGMENT.test(name)) refuseUnsafe('part class fragment', name, location);
       if (part.element && !HTML_NAME.test(part.element)) {

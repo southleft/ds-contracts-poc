@@ -14,6 +14,7 @@ import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import { deriveReactChildRoot } from './react-child-root.js';
 import { readReactContentInspectionEvidence } from './react-content-inspection.js';
 import { assembleReactRootMatrix, type ReactRootMatrix } from './react-root-matrix.js';
+import {readReactContextualContent,type ReactContextualContent} from './react-contextual-content.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import type { ReactChildRoot } from './react-child-root.js';
 import type { NativeContractDraftSource } from '../core/native-contract-draft.js';
@@ -77,9 +78,22 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
   const retainIdentity = identity !== undefined && identity !== row.rootMatrix!.draft!.contract?.id;
   if(retainIdentity&&(request.version!==1||!/^observed\.react-matrix-[a-f0-9]{16}$/.test(identity!)))
     throw Error('react-native-matrix-identity-invalid');
-  const captured = request.version !== 1 || retainIdentity ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
+  const captured = request.version !== 1 || retainIdentity || row.rootMatrix!.contentContextRevision ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
   if (captured && (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
       captured.treeSha256 !== evidenceSha(JSON.stringify(captured.tree)) || captured.treeSha256 !== row.treeSha256)) fail();
+  let contentContext:ReactContextualContent|undefined;
+  if(row.rootMatrix!.contentContextRevision){
+    if(!row.ownership||!row.propertyMatrix||!row.helperObservations)return fail();
+    contentContext=readReactContextualContent({referenceId:reference.id,sourceRoot:reference.sourceRoot,program,ownership:row.ownership,tree:captured.tree,helpers:row.helperObservations,
+      read:(id,name)=>{const file=path.join(request.caseId,'helpers',id,name);if(!Object.hasOwn(seal.files,file))return fail();return readFileSync(path.join(dir,file));}});
+    if(contentContext.revision!==row.rootMatrix!.contentContextRevision)fail();
+    const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyMatrix.rows.map(effect=>{
+      if(!/^\d+$/.test(effect.id))return fail();const file=path.join(request.caseId,'matrix',effect.id+'.json');
+      if(!Object.hasOwn(seal.files,file))return fail();return [effect.id,JSON.parse(readFileSync(path.join(dir,file),'utf8'))];
+    }));
+    if(revisionOf(assembleReactRootMatrix(program,row.ownership,captured.tree,row.propertyMatrix,snapshots,undefined,contentContext))!==revisionOf(row.rootMatrix))
+      throw Error('react-native-contextual-matrix-reassembly-changed');
+  }
   let context,ownedEvidence;
   if(request.version===3) {
     const parent={...request,version:1 as const};delete parent.selection;delete parent.constraints;
@@ -104,9 +118,9 @@ function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReferenc
       if(!Object.hasOwn(seal.files,file))return fail();
       return [effect.id,JSON.parse(readFileSync(path.join(dir,file),'utf8'))];
     }));
-    const reassembled=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots);
+    const reassembled=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,undefined,contentContext);
     if(revisionOf(reassembled)!==revisionOf(row.rootMatrix))throw Error('react-native-matrix-reassembly-changed');
-    matrix=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,identity);
+    matrix=assembleReactRootMatrix(program,row.ownership!,captured.tree,row.propertyMatrix!,snapshots,identity,contentContext);
     if(matrix.problems.length||matrix.draft?.status!=='native-compiled'||matrix.draft.problems.length)fail();
   }
   return { matrix, source: {

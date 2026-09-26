@@ -1,0 +1,98 @@
+{
+  "imported": {
+    "radio-button": {
+      "content-top-radio-label": {
+        "font-size": {
+          "large": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "14px",
+            "$type": "dimension"
+          }
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "line-height": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "error-text": {
+        "padding-left": {
+          "left": {
+            "large": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "error-text-error-text": {
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        }
+      }
+    },
+    "stub-selected-false-size-large-state-default-error-false": {
+      "root": {
+        "width": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
+    "stub-size-xsmall": {
+      "root": {
+        "width": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

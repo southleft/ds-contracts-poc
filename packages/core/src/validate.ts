@@ -50,6 +50,7 @@ import {
 import { contractApiNames } from './prop-collision.js';
 import { ELEMENT_META } from './elements.js';
 import {jointTokenTableErrors} from './joint-tokens.js';
+import {componentPlacementTableErrors} from './component-placement.js';
 import {selectionErrors} from './selection.js';
 
 // ---------------------------------------------------------------------------
@@ -101,6 +102,7 @@ export function validateContract(
   iconAssets: Map<string, string>,
 ) {
   errors.push(...jointTokenTableErrors(contract));
+  errors.push(...componentPlacementTableErrors(contract));
   errors.push(...selectionErrors(contract, byId));
   for (const prop of contract.props) if (prop.bindings.code.values) {
     const parsed = PropSchema.safeParse(prop);
@@ -397,6 +399,37 @@ export function validateContract(
         ...(receiver.stylesWhen ?? []).map(entry => entry.styles)] : [];
       if (p.length === 1 || holders.some(holder => Object.keys(holder ?? {}).some(key => /^(min-(width|height|inline-size|block-size)|flex(-grow|-shrink|-basis)?)$/.test(key))))
         errors.push(`${contract.id}: part "${name}" growth-constraint-unproven — requires a nested item without competing minimum-size or flex declarations`);
+    }
+    if (part.absolutePlacement || part.absolutePlacementByCombination) {
+      const dep = part.component && byId.get(part.component.id);
+      const parent = p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]]);
+      const receiver = dep?.anatomy.root;
+      const holders = receiver ? [receiver.tokens, receiver.literals, receiver.declared,
+        ...Object.values(receiver.states ?? {}), ...Object.values(receiver.declaredStates ?? {}),
+        ...tokensByPropEntries(receiver).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
+        ...(receiver.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(receiver.stylesWhen ?? []).map(entry => entry.styles)] : [];
+      const parentOverrides = parent ? [parent.tokens, parent.literals, ...Object.values(parent.declaredStates ?? {}),
+        ...tokensByPropEntries(parent).flatMap(entry => Object.values(entry.map)),
+        ...(parent.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(parent.stylesWhen ?? []).map(entry => entry.styles)] : [];
+      const parentConflicts = parentOverrides.some(holder => Object.keys(holder ?? {}).some(key =>
+        ['position', 'display', 'transform', 'translate', 'rotate', 'scale', 'perspective'].includes(key))) ||
+        Object.values(parent?.layoutByProp?.map ?? {}).some(layout => String(layout.display) === 'grid');
+      const conflicts = holders.some(holder => Object.entries(holder ?? {}).some(([key, value]) =>
+        /^(inset($|-)|left$|right$|top$|bottom$|margin($|-)|translate($|-)|rotate$|scale$|transform($|-))/.test(key) ||
+        key === 'position' && (holder !== receiver?.declared || !['static', 'relative'].includes(String(value)))));
+      if (p.length === 1 || !part.component || !receiver || isMultiRoot(dep!) || receiver.component || dep!.bindings.code.runtime ||
+          contractApiNames(dep!).some(name => ['className', 'style'].includes(name)) ||
+          !parent || parent.component || parent.layout?.display === 'grid' || !['relative', 'absolute'].includes(parent.declared?.position ?? '') ||
+          part.repeat || part.parts || part.placement || part.overlay || part.layout || part.layoutByProp ||
+          Object.keys(part.component?.overrides ?? {}).length || conflicts ||
+          [part.tokens, part.literals, part.declared, part.states, part.declaredStates].some(holder => Object.keys(holder ?? {}).length) ||
+          part.tokensByProp || part.tokensByCombination || part.literalsByProp || part.statesByProp || part.stylesWhen ||
+          part.shape || part.slot || part.icon || part.content || part.attrs || parentConflicts)
+        errors.push(`${contract.id}: part "${name}" component-absolute-placement-unproven — requires a positioned direct parent and an ordinary generated child without competing geometry or a placement wrapper`);
     }
     if (hasComponentGrow(part)) {
       const dep = byId.get(part.component!.id);
@@ -735,7 +768,8 @@ export function validateContract(
     // whitelist refuse by name. The ROOT's states keep their own path (full
     // vocabulary, validated in generateCss).
     if (part.states && p.length > 1) {
-      if (part.component) {
+      if (part.component && Object.values(part.states).some(overrides=>Object.keys(overrides).some(channel=>
+        !Object.hasOwn(REF_OVERRIDE_CHANNELS,channel) || !byId.get(part.component!.id)?.anatomy.root.overridable?.includes(channel)))) {
         errors.push(`${contract.id}: part "${name}" is a component instance — states cannot restyle it (the child contract owns its styling)`);
       }
       if (part.slot) {
@@ -767,7 +801,8 @@ export function validateContract(
     // silently resolved by sheet order (the tokens/literals precedent).
     for (const entry of part.statesByProp ?? []) {
       const where = `statesByProp[${entry.prop}/${entry.state}]`;
-      if (part.component) {
+      if (part.component && Object.values(entry.map).some(overrides=>Object.keys(overrides).some(channel=>
+        !Object.hasOwn(REF_OVERRIDE_CHANNELS,channel) || !byId.get(part.component!.id)?.anatomy.root.overridable?.includes(channel)))) {
         errors.push(`${contract.id}: part "${name}" is a component instance — ${where} cannot restyle it (the child contract owns its styling)`);
       }
       if (part.slot) {
@@ -917,6 +952,30 @@ export function validateContract(
         }
       } else if (shape.strokePath) errors.push(`${contract.id}: ${name}: stroked-path-on-other-shape`);
       if (shape.kind === 'path') {
+        if (shape.parentViewport) {
+          const basis = shape.parentViewport;
+          const parent = walkAnatomy(contract).find(w => w.path.length === p.length - 1 && w.path.every((key, i) => key === p[i]))?.part;
+          const allowedParent = new Set(['tokens', 'literals', 'declared', 'parts', 'overridable', 'visibleWhen']);
+          if (!parent || parent.declared?.position !== 'relative' || Object.keys(parent).some(key => !allowedParent.has(key)) ||
+              !['width', 'height'].every(key => key in (parent.tokens ?? {}) || key in (parent.literals ?? {})) ||
+              Object.values(parent.parts ?? {}).some(child => child.shape?.kind !== 'path' ||
+                child.shape.parentViewport?.width !== basis.width || child.shape.parentViewport?.height !== basis.height))
+            errors.push(`${contract.id}: ${name}: filled-path-parent-basis-unsupported`);
+          for (const map of [parent?.tokens, parent?.literals, parent?.declared]) for (const [key, value] of Object.entries(map ?? {})) {
+            if (!['width', 'height', 'color', 'position', 'display'].includes(key) || key === 'position' && value !== 'relative' ||
+                key === 'display' && value !== 'block' || ['width', 'height'].includes(key) && !value.startsWith('{') && !strokedPathDimensionOk(value))
+              errors.push(`${contract.id}: ${name}: filled-path-parent-channel-unsupported:${key}`);
+          }
+          const maps = [part.tokens, part.literals, part.declared, ...Object.values(part.states ?? {}),
+            ...Object.values(part.declaredStates ?? {}), ...tokensByPropEntries(part).flatMap(entry => Object.values(entry.map)),
+            ...(part.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+            ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)), ...(part.stylesWhen ?? []).map(rule => rule.styles)];
+          if (shape.rotation || shape.pathsByProp || part.layout || part.layoutByProp || part.absolutePlacement ||
+              maps.some(map => Object.entries(map ?? {}).some(([key, value]) =>
+                !['background-color', 'opacity', 'position', 'display'].includes(key) || key === 'position' && value !== 'absolute' ||
+                key === 'display' && !['block', 'none'].includes(value))))
+            errors.push(`${contract.id}: ${name}: filled-path-scale-channel-unsupported`);
+        }
         if (!shape.paths?.length) errors.push(`${contract.id}: ${name}: filled-path-missing-geometry`);
         const paintMaps = [part.tokens, part.literals, part.declared,
           ...Object.values(part.states ?? {}),
@@ -939,7 +998,7 @@ export function validateContract(
           else if (Object.keys(by.map).length !== prop.type.enum.length || prop.type.enum.some((value) => !Object.hasOwn(by.map, value)))
             errors.push(`${contract.id}: ${name}: filled-path-axis-coverage`);
         }
-      } else if (shape.paths || shape.pathsByProp) errors.push(`${contract.id}: ${name}: filled-path-on-non-path-shape`);
+      } else if (shape.paths || shape.pathsByProp || shape.parentViewport) errors.push(`${contract.id}: ${name}: filled-path-on-non-path-shape`);
       if (part.shape.sides !== undefined && part.shape.kind !== 'polygon') {
         errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare sides — side count is polygon vocabulary`);
       }

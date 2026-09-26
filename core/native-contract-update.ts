@@ -22,7 +22,7 @@ import { aliasTarget, flattenTokens } from './tokens.js';
 export interface NativeContractUpdateInput {
   before: NativeContractObservationInput;
   baseline: NativeSourceReadback;
-  desired: { component: ComponentData; revision: string; tokenInput: NativeTokenContextInput };
+  desired: { component: ComponentData; revision: string; tokenInput: NativeTokenContextInput; graphComponents?: ComponentData[] };
 }
 export interface NativeOpacityUpdatePlan {
   version: 1; kind: 'native-contract-opacity-update';
@@ -73,6 +73,7 @@ const part = (node: Record<string, any>) => {
 };
 export type NativeContractUpdatePlan = NativeTokenAllocationUpdatePlan | NativeDefaultFillUpdatePlan | NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan | NativeAbsoluteShapeUpdatePlan | NativeBoundCrossSizeUpdatePlan;
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
+  assertNativeUpdateGraph(input);
   if (input.before.projection.rootTextTemplate || input.before.component.rootSlot?.textTemplate || input.desired.component.rootSlot?.textTemplate)
     throw Error('native-update-root-text-template-unqualified');
   const allocation=prepareNativeTokenAllocationUpdate(input);
@@ -81,6 +82,39 @@ export function prepareNativeContractUpdate(input: NativeContractUpdateInput): {
   // program know nothing of them, so a mixed change is refused by name.
   const scalarOnly = (base: NativeContractUpdateInput) => prepareOpacityUpdate(base, false);
   return prepareNativeBoundCrossSizeUpdate(input, scalarOnly) ?? prepareNativeDefaultFillUpdate(input, scalarOnly) ?? prepareNativeBackgroundUpdate(input, scalarOnly) ?? prepareNativeSvgUpdate(input, scalarOnly) ?? prepareNativeShadowUpdate(input, scalarOnly) ?? prepareNativeRootSizeUpdate(input, scalarOnly) ?? prepareNativeAbsoluteShapeUpdate(input, scalarOnly) ?? prepareOpacityUpdate(input);
+}
+/** Root corrections must carry the entire compiler output. Dependency edits
+ * need their own inherited-instance transitions; dropping them here would
+ * falsely report agreement. Creation stamps remain historical identities. */
+function assertNativeUpdateGraph(input: NativeContractUpdateInput) {
+  const before = input.before.graphComponents, desired = input.desired.graphComponents;
+  if (before === undefined && desired === undefined) return;
+  if (!Array.isArray(before) || !Array.isArray(desired) || !before.length || before.length !== desired.length ||
+      ![1, 2].includes(input.before.graphVerification ?? 0) ||
+      !equal(before.at(-1), input.before.component) || !equal(desired.at(-1), input.desired.component) ||
+      new Set(before.map(c => c.contractId)).size !== before.length ||
+      !equal(before.map(c => c.contractId), desired.map(c => c.contractId)))
+    throw Error('native-update-complete-graph-required');
+  const withoutStamps = (component: ComponentData) => {
+    const copy = structuredClone(component);
+    if (!copy.nativeContractDraft || copy.nativeContractDraft.acceptedContract !== null ||
+        !/^sha256:[a-f0-9]{64}$/.test(copy.nativeContractDraft.revision))
+      throw Error('native-update-complete-graph-required');
+    copy.nativeContractDraft.revision = '';
+    const visit = (spec: NodeSpec) => {
+      if (spec.nativeContractPart) {
+        if (!/^sha256:[a-f0-9]{64}$/.test(spec.nativeContractPart.contractRevision))
+          throw Error('native-update-complete-graph-required');
+        spec.nativeContractPart.contractRevision = '';
+      }
+      spec.children?.forEach(visit);
+    };
+    copy.variants.forEach(v => visit(v.spec));
+    return copy;
+  };
+  for (let i = 0; i < before.length - 1; i++)
+    if (!equal(withoutStamps(before[i]), withoutStamps(desired[i])))
+      throw Error('native-update-dependency-change-unqualified');
 }
 /** Figma stores opacity as IEEE-754 float32: writing 0.4 reads back as
  * 0.4000000059604645. Exact, or the float32 image of the intended value; no
@@ -128,6 +162,9 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues
   const before = structuredClone(input.before); delete before.allocationAnchor;
   const tokenUpdate = valueChanges.length ? prepareTokenValueChanges(input, valueChanges, carryTokenValues) : undefined;
   const after = structuredClone(before), desired = structuredClone(input.desired.component);
+  // Keep both views of the same root synchronized, including when a sibling
+  // channel planner changes the scalar plan's root after preparation.
+  if (after.graphComponents) after.graphComponents[after.graphComponents.length - 1] = after.component;
   if (tokenUpdate) after.tokenInput = tokenUpdate.tokenInput;
   const baseline = structuredClone(input.baseline); delete baseline.images;
   const changes: NativeOpacityUpdatePlan['changes'] = [];

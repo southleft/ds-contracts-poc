@@ -2,63 +2,12 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { randomUUID } from 'node:crypto';
-import { ContractSchema, contractDependencyEdges, type Contract } from '../../scripts/contract-schema.js';
 import { generateComponents } from '../../scripts/generate-components.js';
 import { packageReactLibrary } from '../../scripts/package-react-library.js';
-import type { TokenTreeInput } from '../../core/tokens.js';
+import { MAX_BYTES, parseLibraryRequest } from './react-library-input.js';
+import { readPreparedReactLibrary, retainPreparedReactLibrary } from './react-library-artifact.js';
+export { parseLibraryRequest } from './react-library-input.js';
 
-const MAX_BYTES = 5 * 1024 * 1024;
-const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
-function assertData(value: unknown, depth = 0): void {
-  if (depth > 64) throw Error('react-library-data-too-deep');
-  if (!value || typeof value !== 'object') return;
-  for (const [key, child] of Object.entries(value)) {
-    if (['__proto__', 'constructor', 'prototype'].includes(key)) throw Error('react-library-unsafe-data-key');
-    assertData(child, depth + 1);
-  }
-}
-export function parseLibraryRequest(value: unknown): { root: Contract; contracts: Contract[]; tokens: TokenTreeInput; icons: Array<[string, string]> } {
-  assertData(value);
-  if (!record(value) || Object.keys(value).some(k => !['rootId', 'contracts', 'tokens', 'icons'].includes(k))) throw Error('react-library-invalid-request');
-  if (!Array.isArray(value.contracts) || value.contracts.length < 1 || value.contracts.length > 30) throw Error('react-library-family-limit: expected 1–30 components');
-  const contracts = value.contracts.map(c => {
-    const parsed = ContractSchema.safeParse(c);
-    if (!parsed.success) throw Error('react-library-contract-invalid: ' + parsed.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join('; '));
-    return parsed.data;
-  });
-  const ids = new Set<string>(), names = new Set<string>();
-  for (const c of contracts) {
-    // These names become folder names and ESM exports, never arbitrary paths.
-    if (!/^[A-Z][A-Za-z0-9]*$/.test(c.name)) throw Error('react-library-invalid-component-name');
-    if (ids.has(c.id) || names.has(c.name.toLowerCase())) throw Error('react-library-duplicate-component');
-    ids.add(c.id); names.add(c.name.toLowerCase());
-  }
-  const root = contracts.find(c => c.id === value.rootId);
-  if (!root) throw Error('react-library-root-missing');
-  const byId = new Map(contracts.map(c => [c.id, c])), reached = new Set<string>();
-  const visit = (c: Contract) => {
-    if (reached.has(c.id)) return;
-    reached.add(c.id);
-    for (const edge of contractDependencyEdges(c)) {
-      const child = byId.get(edge.id);
-      if (!child) throw Error(`react-library-dependency-missing: ${edge.id}`);
-      visit(child);
-    }
-  };
-  visit(root);
-  if (reached.size !== contracts.length) throw Error('react-library-unrelated-components');
-  const tokens = value.tokens;
-  if (!record(tokens) || Object.keys(tokens).some(k => !['primitives', 'semantic', 'light', 'dark', 'brands'].includes(k)) || !['primitives', 'semantic', 'light', 'dark', 'brands'].every(k => record(tokens[k]))) throw Error('react-library-invalid-tokens');
-  if (Object.entries(tokens.brands as Record<string, unknown>).some(([key, tree]) => !/^[a-z0-9][a-z0-9-]*$/.test(key) || !record(tree))) throw Error('react-library-invalid-brand');
-  if (!Array.isArray(value.icons) || value.icons.length > 1000) throw Error('react-library-invalid-icons');
-  const iconNames = new Set<string>();
-  const icons = value.icons.map(row => {
-    if (!Array.isArray(row) || row.length !== 2 || typeof row[0] !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(row[0]) || typeof row[1] !== 'string' || row[1].length > 200_000 || iconNames.has(row[0])) throw Error('react-library-invalid-icon');
-    iconNames.add(row[0]); return row as [string, string];
-  });
-  return { root, contracts, tokens: tokens as unknown as TokenTreeInput, icons };
-}
 
 export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>) {
   const parent = path.join(repoRoot, 'private', 'react-library-downloads');
@@ -86,7 +35,6 @@ export async function buildReactLibrary(repoRoot: string, input: ReturnType<type
 
 export function createReactLibraryService(repoRoot: string, build = buildReactLibrary) {
   let busy = false;
-  const downloads = new Map<string, Awaited<ReturnType<typeof buildReactLibrary>>>();
   const json = (res: ServerResponse, status: number, error: string) => { res.statusCode = status; res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store'); res.end(JSON.stringify({ error })); };
   return async (req: IncomingMessage, res: ServerResponse) => {
     let host: URL;
@@ -98,10 +46,14 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
     const route = (req.url ?? '').split('?')[0];
     const download = /^\/api\/react-library\/download\/([a-f0-9-]+)$/.exec(route);
     if (req.method === 'GET' && download) {
-      const result = downloads.get(download[1]);
-      if (!result) { json(res, 404, 'Download expired. Prepare the React library again.'); return; }
-      res.setHeader('Content-Type', 'application/gzip'); res.setHeader('Content-Disposition', `attachment; filename="${result.filename}"`);
-      res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Artifact-Sha256', result.tarballSha256);
+      let result: ReturnType<typeof readPreparedReactLibrary>;
+      try { result = readPreparedReactLibrary(repoRoot, download[1]); }
+      catch (error) {
+        const message = error instanceof Error ? error.message : 'react-library-artifact-unavailable';
+        json(res, message === 'react-library-artifact-not-found' ? 404 : 409, message); return;
+      }
+      res.setHeader('Content-Type', 'application/gzip'); res.setHeader('Content-Disposition', `attachment; filename="${result.receipt.filename}"`);
+      res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('X-Artifact-Sha256', result.receipt.tarballSha256);
       res.end(result.bytes); return;
     }
     if (route !== '/api/react-library') { json(res, 404, 'Unknown React library route.'); return; }
@@ -117,10 +69,9 @@ export function createReactLibraryService(repoRoot: string, build = buildReactLi
       try { input = parseLibraryRequest(JSON.parse(Buffer.concat(chunks).toString('utf8'))); }
       catch (error) { json(res, 400, error instanceof Error ? error.message : 'Invalid React library input.'); return; }
       const result = await build(repoRoot, input);
-      const id = randomUUID(); downloads.set(id, result);
-      if (downloads.size > 10) downloads.delete(downloads.keys().next().value!);
+      const artifact = retainPreparedReactLibrary(repoRoot, input, result);
       res.setHeader('Content-Type', 'application/json'); res.setHeader('Cache-Control', 'no-store');
-      res.end(JSON.stringify({ filename: result.filename, name: result.name, sha256: result.tarballSha256, downloadUrl: `/api/react-library/download/${id}` }));
+      res.end(JSON.stringify({ filename: result.filename, name: result.name, sha256: result.tarballSha256, artifactId: artifact.id, downloadUrl: `/api/react-library/download/${artifact.id}` }));
     } catch (error) { json(res, 422, error instanceof Error ? error.message : 'React library generation failed.'); }
     finally { busy = false; }
   };

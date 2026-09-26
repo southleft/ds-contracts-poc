@@ -1,3 +1,4 @@
+import {prepareReactAuthoredNativePlan,buildReactAuthoredNativeWrite} from './react-authored-native-plan.js';
 import {nativeAppUpdateDesired} from './native-app-update.js';
 import {prepareReactStateApiNativePlan,buildReactStateApiNativeWrite} from './react-state-api-native-plan.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
@@ -40,6 +41,9 @@ import {
 } from "./native-operation-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
 import { createNativeOperationTransport } from "./native-operation-transport.js";
+import {preparedLibraryNativeAdapter} from './prepared-library-native.js';
+import {isPreparedLibraryNativeRequest,preparedLibraryNativeReservation} from './prepared-library-native-request.js';
+import {readPreparedReactLibrary} from '../playground/server/react-library-artifact.js';
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   altitudeCohort,
@@ -137,6 +141,7 @@ export function createReferenceService(
   const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      preparedLibrary: preparedLibraryNativeAdapter(repoRoot),
       reactStateApi: {
         prepare:(request,operation)=>({visual:{id:request.initial.anchor.ownership.id,reportSha256:request.initial.anchor.ownership.sha256},
           preparation:{id:request.observation.id,reportSha256:request.observation.reportSha256},
@@ -176,7 +181,7 @@ export function createReferenceService(
       },
       react: {
         effectiveSource: (id, original) => nativeSuccessions.effective(id, original),
-        updatedObservation: id => nativeUpdateJobs.verifiedForParent(id),
+        updatedObservation: (id,purpose) => purpose==='caller' ? nativeUpdateJobs.verifiedForCaller(id) : nativeUpdateJobs.verifiedForParent(id),
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
           preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
@@ -187,18 +192,30 @@ export function createReferenceService(
           tokens: context.tokens, expectedPlanRevision: context.planRevision, templateGraph: context.templateGraph,
         }),
       },
+      reactAuthored: {
+        prepare: (request,operation) => ({
+          visual:request.version!==1?{id:request.initial.id,reportSha256:request.initial.reportSha256}:
+            {id:request.ownership.id,reportSha256:request.ownership.sha256},
+          preparation:{id:request.version===3?request.stateApi.id:request.version===2?request.initial.id:request.ownership.id,reportSha256:request.draftRevision.slice(7)},
+          plan:prepareReactAuthoredNativePlan({...reactReference.authoredNativeEvidence(request),operation}),
+        }),
+        buildComponent: (request,context) => buildReactAuthoredNativeWrite({
+          ...reactReference.authoredNativeEvidence(request),operation:context.operation,
+          tokens:context.tokens,expectedPlanRevision:context.planRevision,
+        }),
+      },
       reactCaller: {
         prepare: (request, operation) => {
           const evidence = reactReference.callerNativeEvidence(request);
           return {
             visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
             preparation: { id: request.ownership.id, reportSha256: request.graphRevision.slice(7) },
-            plan: prepareReactCallerNativePlan({ ...evidence, operation }),
+            plan: prepareReactCallerNativePlan({ ...evidence, operation, graphVerification: request.graphVerification }),
           };
         },
         buildComponent: (request, context) => buildReactCallerNativeWrite({
           ...reactReference.callerNativeEvidence(request), operation: context.operation,
-          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, graphVerification: request.graphVerification,
         }),
       },
       prepare: (request, operation) =>
@@ -789,7 +806,10 @@ export function createReferenceService(
     // `source` is the creation pin unless a recorded succession moved this
     // operation onto a later sealed observation of the same case. The operation
     // identity, and therefore every existing allocation, stays the same.
-    const desired = baseline.source.kind === 'react-state-api-draft'
+    const desired = baseline.source.kind === 'react-authored-draft'
+      ? prepareReactAuthoredNativePlan({...reactReference.authoredNativeEvidence(baseline.source,
+        nativeJobs.reactAuthoredRequest(id)),operation:baseline.input.operation})
+      : baseline.source.kind === 'react-state-api-draft'
       ? prepareReactStateApiNativePlan({ ...reactReference.stateApiNativeEvidence(baseline.source,
         nativeJobs.reactStateApiRequest(id)), operation: baseline.input.operation })
       : baseline.source.kind === 'react-initial-draft'
@@ -799,6 +819,7 @@ export function createReferenceService(
       : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.source,
         baseline.source.version===1?baseline.input.component.contractId:undefined), operation: baseline.input.operation });
     const desiredInput=nativeAppUpdateDesired(desired),{templateGraph}=desiredInput;
+    if(birth&&!templateGraph)nativeJobs.reactRootComparisonBirth(id,birth);
     const templateInventory=templateGraph?nativeJobs.reactTemplateConsumerBaselines(id,consumerPins,birth):undefined;
     return { parentJournalRevision: baseline.journalRevision, ...(templateInventory?{templateInventory}:{}), input: {
       before: baseline.input, baseline: baseline.receipt,
@@ -1010,6 +1031,68 @@ export function createReferenceService(
     }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
+      return;
+    }
+    const preparedLibraryRoute = /^prepared-library\/([a-f0-9]{64})\/native(?:\/(connection|start|retry-observation|review-replacement|apply-replacement))?$/.exec(route);
+    if (preparedLibraryRoute) {
+      if (!['GET','POST'].includes(req.method ?? '') || (req.method === 'GET' && preparedLibraryRoute[2])) {
+        json(res,405,{error:'Method not allowed.'}); return;
+      }
+      try {
+        const query = new URL(req.url!,host.origin).searchParams;
+        if (req.method === 'GET' && [...query.keys()].sort().join(',') !== 'brand,mode') {
+          json(res,400,{error:'Only mode and brand are accepted.'}); return;
+        }
+        const selection = req.method === 'GET' ? {mode:query.get('mode'),brand:query.get('brand')} : await body(1024);
+        const applying=preparedLibraryRoute[2]==='apply-replacement';
+        if (!object(selection) || Object.keys(selection).sort().join(',') !== (applying?'brand,mode,reviewRevision':'brand,mode') ||
+          applying&&(typeof selection.reviewRevision!=='string'||!/^sha256:[a-f0-9]{64}$/.test(selection.reviewRevision))) {
+          json(res,400,{error:applying?'Mode, brand and the displayed replacement revision are required.':'Only mode and brand are accepted.'}); return;
+        }
+        const request = {version:1,kind:'prepared-library-native',artifactId:preparedLibraryRoute[1],mode:selection.mode,brand:selection.brand};
+        if (!isPreparedLibraryNativeRequest(request)) { json(res,400,{error:'Invalid library selection.'}); return; }
+        const observedAt = Date.now();
+        let operation = nativeJobs.forBaseline(preparedLibraryNativeReservation(request));
+        if (req.method === 'POST') {
+          if (active || candidateJobs.running || bindingJobs.running) throw Error('library-native-other-operation-running');
+          if (!preparedLibraryRoute[2]) operation = nativeJobs.prepare(request);
+          else {
+            if (!operation || operation.phase === 'evidence-unavailable' || operation.preparedLibrary?.artifactId !== request.artifactId)
+              throw Error('library-native-operation-unavailable');
+            if (preparedLibraryRoute[2] === 'connection') {
+              if (host.port !== '5181') throw Error('library-native-pairing-requires-port-5181');
+              json(res,200,{connection:nativeTransport.pair(operation.id)}); return;
+            }
+            if (preparedLibraryRoute[2] === 'start') nativeTransport.start(operation.id);
+            else if(preparedLibraryRoute[2]==='review-replacement')nativeTransport.reviewLibraryReplacement(operation.id);
+            else if(applying)nativeTransport.applyLibraryReplacement(operation.id,selection.reviewRevision as string);
+            else nativeTransport.retryObservation(operation.id);
+            operation = nativeJobs.get(operation.id);
+          }
+        }
+        let library: {name:string;brands:string[]} | null = null;
+        try {
+          const retained = readPreparedReactLibrary(repoRoot,request.artifactId);
+          library = {name:retained.input.root.name,brands:Object.keys(retained.input.tokens.brands).sort()};
+        } catch (error) { if (!operation) throw error; }
+        json(res,req.method === 'POST' ? 202 : 200,{operation,library,
+          connection:operation && operation.phase !== 'evidence-unavailable' ? nativeTransport.status(operation.id,observedAt) : null});
+      } catch (error) {
+        const reason = error instanceof Error ? /^[A-Za-z0-9_-]+/.exec(error.message)?.[0] : undefined;
+        const message = reason === 'FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED'
+          ? "Figma cannot preserve this library's requested flexible sizing. Native preparation stopped. Your React download and existing output remain available."
+          : 'Library preparation or delivery could not proceed. Existing evidence is retained.';
+        json(res,409,{error:message,reason:reason ?? 'library-native-refused'});
+      }
+      return;
+    }
+    const libraryImage = /^prepared-library-native\/([a-f0-9-]+)\/images\/([a-f0-9-]+)\/([a-f0-9]{64})\.png$/.exec(route);
+    if (libraryImage && req.method === 'GET') {
+      try {
+        if (!nativeJobs.get(libraryImage[1]).preparedLibrary) throw Error('library operation required');
+        const png = nativeJobs.image(libraryImage[1],libraryImage[2],libraryImage[3]);
+        res.writeHead(200,{'Content-Type':'image/png','Cache-Control':'no-store'}); res.end(png);
+      } catch { json(res,404,{error:'Library image unavailable.'}); }
       return;
     }
     if (route === "react" || route.startsWith("react/")) {

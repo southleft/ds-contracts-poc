@@ -5,7 +5,7 @@ import { verifyNativeContractReadback, type NativeContractObservationInput, type
 import type { NativeContractComparisonReference } from '../core/native-contract-comparison.js';
 import type { Contract } from '../scripts/contract-schema.js';
 import { flatten, normalizeValue, type CapturedNode } from '../extract/computed/lib.js';
-import { linkReactSourceAnatomy } from './react-source-anatomy.js';
+import { linkReactSourceAnatomy, reactCompositionInstances } from './react-source-anatomy.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 import { reactRootStyleExclusion } from './react-root-visual.js';
 import type { ReactOwnership } from './react-ownership.js';
@@ -47,16 +47,19 @@ const rootStyle = (style: Record<string, string>) => Object.fromEntries(Object.e
 export function matchReactComposition(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode,
   content: ObservedContentDraft, mains: ReactCompositionMain[], ownedTree: CapturedNode = tree) {
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
-  const roots = anatomy.instances.filter(i => i.roots.some(r => r.path === ''));
-  const children = anatomy.instances.filter(i => !roots.includes(i));
+  const logical = reactCompositionInstances(anatomy);
+  const roots = logical.filter(i => i.roots.some(r => r.path === ''));
+  const children = logical.filter(i => !roots.includes(i));
   const review: ReactCompositionReview = { version: 1, status: 'incomplete', acceptedContract: null,
-    denominator: ownership.components.filter(c => !c.roots.includes('')).length, matched: 0, rows: [], problems: [...anatomy.problems],
+    denominator: anatomy.status === 'linked' ? children.length : ownership.components.filter(c => !c.roots.includes('')).length, matched: 0, rows: [], problems: [...anatomy.problems],
     inputRevision: revisionOf({ program, ownership, tree, content, mains, ...(ownedTree !== tree ? { ownedTree } : {}) }) };
   const references: NativeContractComparisonReference[] = [];
   if (anatomy.status !== 'linked' || roots.length !== 1 || !content.sourcePaths ||
       content.status !== 'compiled-comparison-draft' || content.problems.length || content.treeRevision !== revisionOf(tree)) {
     review.problems.push('react-composition-source-correspondence-unavailable');
-    review.rows = ownership.components.filter(c => !c.roots.includes('')).map(c => ({ instanceId: c.id,
+    const unresolved = anatomy.status === 'linked' ? children.map(c => ({id:c.instanceId, source:c.source, roots:c.roots.map(r=>r.path)}))
+      : ownership.components.filter(c => !c.roots.includes(''));
+    review.rows = unresolved.map(c => ({ instanceId: c.id,
       exportName: c.source.exportName, module: c.source.module, sourcePaths: [...c.roots], status: 'unresolved',
       problems: ['react-composition-source-correspondence-unavailable'] }));
     return { review, references };

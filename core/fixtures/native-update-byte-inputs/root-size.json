@@ -1,0 +1,667 @@
+{
+  "before": {
+    "operation": {
+      "id": "10000000-0000-4000-8000-000000000001",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh"
+    },
+    "planRevision": "sha256:c1208e7c5533657cdedd08131976d5e5912daf2fb9f9619f7ecc554792602c22",
+    "projection": {
+      "version": 1,
+      "kind": "contract-draft",
+      "purpose": "source-candidate-inspection",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "contractId": "fixture.main",
+      "contractRevision": "sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94",
+      "tokenRevision": "sha256:7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9",
+      "source": {
+        "revision": "sha256:d67454ab8d94cdb9ec948d722d35a38ed6b26c2b7855b68cdb1f43c89318a617",
+        "programSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "evidenceRevision": "sha256:df3da50973e7a5a78c733b7749c2dbacf0981927716a1cf140c509d4eff787c5"
+      },
+      "context": {
+        "mode": "light",
+        "brand": "default"
+      }
+    },
+    "component": {
+      "setName": "Main",
+      "contractId": "fixture.main",
+      "version": "0.1.0",
+      "anchorKey": null,
+      "description": "Main — generated from contract fixture.main v0.1.0",
+      "isSet": false,
+      "rootSlot": {
+        "version": 1,
+        "property": "Children",
+        "display": "inline-flex"
+      },
+      "boolProps": [],
+      "textProps": [],
+      "fontStyles": [
+        "Medium"
+      ],
+      "variants": [
+        {
+          "name": "Main",
+          "row": 0,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Main",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "stretchChildren": true
+            },
+            "fill": "surface",
+            "children": [
+              {
+                "type": "slot",
+                "name": "root-content",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "stretchChildren": true
+                },
+                "slotProperty": "Children",
+                "slotAccepts": [],
+                "rootSlotContent": true,
+                "nativeContractPart": {
+                  "contractRevision": "sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94",
+                  "variant": "Main",
+                  "specPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "nativeContractPart": {
+              "contractRevision": "sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94",
+              "variant": "Main",
+              "specPath": []
+            }
+          }
+        }
+      ],
+      "semantics": {
+        "element": "button"
+      },
+      "colW": 380,
+      "nativeContractDraft": {
+        "revision": "sha256:c8f5e99a2c2134c51139211424f35dd8585cc9d2a3f1575d7d6c91dc84b8817f",
+        "acceptedContract": null
+      }
+    },
+    "tokenInput": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "scopeId": "source-10000000-0000-4000-8000-000000000001",
+      "source": {
+        "revision": "sha256:d67454ab8d94cdb9ec948d722d35a38ed6b26c2b7855b68cdb1f43c89318a617",
+        "sourceProgramSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "tokensSha256": "7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9"
+      },
+      "tokenPaths": [
+        "ink",
+        "size",
+        "surface"
+      ],
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "nativeModeName": "Light",
+          "tokens": {
+            "surface": {
+              "$type": "color",
+              "$value": "#123456"
+            },
+            "ink": {
+              "$type": "color",
+              "$value": "#fafafa"
+            },
+            "size": {
+              "$type": "dimension",
+              "$value": "14px"
+            }
+          },
+          "tokenTreeRevision": "sha256:7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9"
+        }
+      ]
+    },
+    "tokenIdentity": {
+      "origin": "created",
+      "preparationRevision": "sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "collection": {
+        "id": "VariableCollectionId:3:4",
+        "key": "key-VariableCollectionId:3:4",
+        "name": "DS candidate tokens / source-10000000-0000-4000-8000-000000000001"
+      },
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "modeId": "VariableCollectionId:3:4:m0",
+          "name": "Light"
+        }
+      ],
+      "variables": [
+        {
+          "tokenPath": "ink",
+          "id": "VariableID:4:5",
+          "key": "key-VariableID:4:5"
+        },
+        {
+          "tokenPath": "size",
+          "id": "VariableID:5:6",
+          "key": "key-VariableID:5:6"
+        },
+        {
+          "tokenPath": "surface",
+          "id": "VariableID:6:7",
+          "key": "key-VariableID:6:7"
+        }
+      ]
+    },
+    "creation": {
+      "version": 1,
+      "status": "created-candidate",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "operationId": "10000000-0000-4000-8000-000000000001",
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "allocationAttempted": true,
+      "pageId": "7:8",
+      "target": {
+        "id": "8:9",
+        "type": "COMPONENT",
+        "key": "key-8:9"
+      },
+      "nodes": [
+        {
+          "id": "7:8",
+          "type": "PAGE",
+          "key": "key-7:8"
+        },
+        {
+          "id": "8:9",
+          "type": "COMPONENT",
+          "key": "key-8:9"
+        },
+        {
+          "id": "9:10",
+          "type": "SLOT",
+          "key": "key-9:10"
+        }
+      ],
+      "problems": [],
+      "propertyDefinitions": {
+        "Children#8:9:0": {
+          "type": "SLOT",
+          "description": null,
+          "preferredValues": []
+        }
+      },
+      "variants": [
+        {
+          "id": "8:9",
+          "key": "key-8:9",
+          "name": "Main"
+        }
+      ],
+      "applied": {
+        "createdNodeIds": [
+          "8:9"
+        ],
+        "results": [
+          {
+            "name": "Main",
+            "contractId": "source-native:10000000-0000-4000-8000-000000000001:fixture.main",
+            "nodeId": "8:9",
+            "key": "key-8:9",
+            "variants": 1,
+            "properties": [
+              "Children#8:9:0"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "baseline": {
+    "version": 1,
+    "status": "native-readback-collected",
+    "receiptKind": "independent-native-component-readback",
+    "operationId": "10000000-0000-4000-8000-000000000001",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "planRevision": "sha256:c1208e7c5533657cdedd08131976d5e5912daf2fb9f9619f7ecc554792602c22",
+    "acceptedContract": null,
+    "nativeQualification": "unqualified",
+    "problems": [],
+    "nodes": [
+      {
+        "id": "7:8",
+        "type": "PAGE",
+        "name": "DS contract draft / 10000000-0000-4000-8000-000000000001",
+        "parentId": "2:3",
+        "childIds": [
+          "8:9"
+        ],
+        "values": {
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "layoutMode": "NONE",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": true,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000001\",\"sourceContractId\":\"fixture.main\",\"sourceContractRevision\":\"sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94\",\"tokenPreparationRevision\":\"sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "7:8",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": ""
+        },
+        "key": "key-7:8"
+      },
+      {
+        "id": "8:9",
+        "type": "COMPONENT",
+        "name": "Main",
+        "parentId": "7:8",
+        "childIds": [
+          "9:10"
+        ],
+        "values": {
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "CENTER",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.07058823529411765,
+                "g": 0.20392156862745098,
+                "b": 0.33725490196078434
+              },
+              "opacity": 1,
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:6:7"
+                }
+              }
+            }
+          ],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:3:4": "VariableCollectionId:3:4:m0"
+          },
+          "componentPropertyReferences": {},
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000001\",\"sourceContractId\":\"fixture.main\",\"sourceContractRevision\":\"sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94\",\"tokenPreparationRevision\":\"sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "8:9",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "source-native:10000000-0000-4000-8000-000000000001:fixture.main",
+          "specHash": "4124130543",
+          "canvasFingerprint": "v6:854082326",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94\",\"variant\":\"Main\",\"specPath\":[]}",
+          "rootSlot": "{\"version\":1,\"property\":\"Children\",\"display\":\"inline-flex\"}",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "{\"element\":\"button\"}",
+          "propNames": ""
+        },
+        "key": "key-8:9",
+        "definitions": {
+          "Children#8:9:0": {
+            "type": "SLOT",
+            "description": null,
+            "preferredValues": []
+          }
+        }
+      },
+      {
+        "id": "9:10",
+        "type": "SLOT",
+        "name": "Children",
+        "parentId": "8:9",
+        "childIds": [],
+        "values": {
+          "visible": true,
+          "opacity": 1,
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "MIN",
+          "counterAxisAlignItems": "MIN",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "layoutPositioning": "AUTO",
+          "layoutWrap": "NO_WRAP",
+          "clipsContent": false,
+          "itemSpacing": 0,
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "minWidth": null,
+          "minHeight": null,
+          "maxWidth": null,
+          "maxHeight": null,
+          "fills": [],
+          "strokes": [],
+          "strokeAlign": "INSIDE",
+          "strokeWeight": 1,
+          "cornerRadius": 0,
+          "effects": [],
+          "boundVariables": {},
+          "explicitVariableModes": {
+            "VariableCollectionId:3:4": "VariableCollectionId:3:4:m0"
+          },
+          "componentPropertyReferences": {
+            "slotContentId": "Children#8:9:0"
+          },
+          "reactions": []
+        },
+        "metadata": {
+          "nativeSourceOperation": "{\"version\":1,\"operationId\":\"10000000-0000-4000-8000-000000000001\",\"sourceContractId\":\"fixture.main\",\"sourceContractRevision\":\"sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94\",\"tokenPreparationRevision\":\"sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19\",\"acceptedContract\":null}",
+          "nativeSourceAllocation": "9:10",
+          "nativeSourcePart": "",
+          "nativeSourceSample": "",
+          "nativeSourceCase": "",
+          "contractId": "",
+          "specHash": "",
+          "canvasFingerprint": "",
+          "nativeContractPart": "{\"contractRevision\":\"sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94\",\"variant\":\"Main\",\"specPath\":[0]}",
+          "rootSlot": "",
+          "codeValueAxes": "",
+          "unsetVariantAxes": "",
+          "semantics": "",
+          "propNames": ""
+        },
+        "key": "key-9:10"
+      }
+    ],
+    "tokens": {
+      "version": 1,
+      "status": "readback-collected",
+      "acceptedContract": null,
+      "nativeQualification": "unqualified",
+      "preparationRevision": "sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19",
+      "receiptKind": "independent-native-readback",
+      "problems": [],
+      "receipt": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "collection": {
+          "id": "VariableCollectionId:3:4",
+          "key": "key-VariableCollectionId:3:4",
+          "name": "DS candidate tokens / source-10000000-0000-4000-8000-000000000001",
+          "remote": false,
+          "ownership": {
+            "scopeId": "source-10000000-0000-4000-8000-000000000001",
+            "preparationRevision": "sha256:40bbc6a077d0d419d1f257aff9f0ef29b2955b8d2a1da88a4bd9c7147cf1ce19",
+            "source": {
+              "revision": "sha256:d67454ab8d94cdb9ec948d722d35a38ed6b26c2b7855b68cdb1f43c89318a617",
+              "sourceProgramSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "tokensSha256": "7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9"
+            }
+          },
+          "defaultModeId": "VariableCollectionId:3:4:m0",
+          "modes": [
+            {
+              "modeId": "VariableCollectionId:3:4:m0",
+              "name": "Light"
+            }
+          ]
+        },
+        "variables": [
+          {
+            "id": "VariableID:4:5",
+            "key": "key-VariableID:4:5",
+            "name": "ink",
+            "variableCollectionId": "VariableCollectionId:3:4",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "VariableCollectionId:3:4:m0": {
+                "r": 0.9803921568627451,
+                "g": 0.9803921568627451,
+                "b": 0.9803921568627451,
+                "a": 1
+              }
+            }
+          },
+          {
+            "id": "VariableID:5:6",
+            "key": "key-VariableID:5:6",
+            "name": "size",
+            "variableCollectionId": "VariableCollectionId:3:4",
+            "resolvedType": "FLOAT",
+            "remote": false,
+            "valuesByMode": {
+              "VariableCollectionId:3:4:m0": 14
+            }
+          },
+          {
+            "id": "VariableID:6:7",
+            "key": "key-VariableID:6:7",
+            "name": "surface",
+            "variableCollectionId": "VariableCollectionId:3:4",
+            "resolvedType": "COLOR",
+            "remote": false,
+            "valuesByMode": {
+              "VariableCollectionId:3:4:m0": {
+                "r": 0.07058823529411765,
+                "g": 0.20392156862745098,
+                "b": 0.33725490196078434,
+                "a": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    "images": []
+  },
+  "desired": {
+    "component": {
+      "setName": "Main",
+      "contractId": "fixture.main",
+      "version": "0.1.0",
+      "anchorKey": null,
+      "description": "Main — generated from contract fixture.main v0.1.0",
+      "isSet": false,
+      "rootSlot": {
+        "version": 1,
+        "property": "Children",
+        "display": "inline-flex"
+      },
+      "boolProps": [],
+      "textProps": [],
+      "fontStyles": [
+        "Medium"
+      ],
+      "variants": [
+        {
+          "name": "Main",
+          "row": 0,
+          "col": 0,
+          "spec": {
+            "type": "root",
+            "name": "Main",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "stretchChildren": true
+            },
+            "fill": "surface",
+            "children": [
+              {
+                "type": "slot",
+                "name": "root-content",
+                "layout": {
+                  "mode": "HORIZONTAL",
+                  "primary": "MIN",
+                  "counter": "MIN",
+                  "stretchChildren": true
+                },
+                "slotProperty": "Children",
+                "slotAccepts": [],
+                "rootSlotContent": true,
+                "nativeContractPart": {
+                  "contractRevision": "sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94",
+                  "variant": "Main",
+                  "specPath": [
+                    0
+                  ]
+                }
+              }
+            ],
+            "nativeContractPart": {
+              "contractRevision": "sha256:2d878d304877354889152b5566bc1db9a4e4979db2e04ffc75cc1654750aad94",
+              "variant": "Main",
+              "specPath": []
+            },
+            "lits": {
+              "height": 36
+            }
+          }
+        }
+      ],
+      "semantics": {
+        "element": "button"
+      },
+      "colW": 380,
+      "nativeContractDraft": {
+        "revision": "sha256:c8f5e99a2c2134c51139211424f35dd8585cc9d2a3f1575d7d6c91dc84b8817f",
+        "acceptedContract": null
+      }
+    },
+    "revision": "sha256:624acbb424f785adcad13ca3f0a81bd6580c61385cd256957707d4e451ebf32d",
+    "tokenInput": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "scopeId": "source-10000000-0000-4000-8000-000000000001",
+      "source": {
+        "revision": "sha256:d67454ab8d94cdb9ec948d722d35a38ed6b26c2b7855b68cdb1f43c89318a617",
+        "sourceProgramSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "tokensSha256": "7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9"
+      },
+      "tokenPaths": [
+        "ink",
+        "size",
+        "surface"
+      ],
+      "modes": [
+        {
+          "sourceMode": "light",
+          "brand": "default",
+          "nativeModeName": "Light",
+          "tokens": {
+            "surface": {
+              "$type": "color",
+              "$value": "#123456"
+            },
+            "ink": {
+              "$type": "color",
+              "$value": "#fafafa"
+            },
+            "size": {
+              "$type": "dimension",
+              "$value": "14px"
+            }
+          },
+          "tokenTreeRevision": "sha256:7bcd607d72fd9a3238eb2f4641ba98945afbb8c04997b4679e3233c0a3e0a7f9"
+        }
+      ]
+    }
+  }
+}
