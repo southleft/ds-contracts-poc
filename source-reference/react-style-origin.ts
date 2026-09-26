@@ -205,6 +205,30 @@ export function fixedSizeExpression(value:string,variables:Record<string,string>
  return !/[A-Za-z_%!]/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'(')) && /^[\d.()+*/\s-]+$/.test(expanded.replace(/(?:\d*\.)?\d+(?:px|rem)\b/g,'1').replace(/calc\(/g,'('));
 }
 
+/** Registered custom properties compute viewport/font units to px before
+ * substitution, so a var()-based size is only admissible when no variable it
+ * can reach (every authored candidate, fallbacks and aliases included) is
+ * registered. Unregistered chains keep their authored units, which the fixed
+ * expression check still judges. */
+const referencedVariables=(text:string)=>[...text.matchAll(/var\(\s*(--[A-Za-z0-9_-]+)/gi)].map(m=>m[1]);
+export function sizeReachesRegisteredProperty(value:string,matched:Matched,computed:Record<string,string>):boolean{
+ const registered=new Set([...(matched.cssPropertyRules??[]).map(r=>r.propertyName.text),...(matched.cssPropertyRegistrations??[]).map(r=>r.propertyName)]);
+ if(!registered.size)return false;
+ const authored=new Map<string,string[]>();
+ const styles=[matched.inlineStyle,matched.attributesStyle,...(matched.matchedCSSRules??[]).map(m=>m.rule.style),
+  ...(matched.inherited??[]).flatMap(e=>[e.inlineStyle,...e.matchedCSSRules.map(m=>m.rule.style)])];
+ for(const style of styles)for(const p of style?.cssProperties??[])if(p.name.startsWith('--'))authored.set(p.name,[...authored.get(p.name)??[],p.value]);
+ const queue=referencedVariables(value),seen=new Set<string>();
+ for(let name=queue.shift();name!==undefined;name=queue.shift()){
+  if(seen.has(name))continue;seen.add(name);
+  if(registered.has(name))return true;
+  const values=authored.get(name);
+  if(!values){if(Object.hasOwn(computed,name))return true;continue;}
+  for(const v of values)queue.push(...referencedVariables(v));
+ }
+ return false;
+}
+
 /** Same element-index path convention as the authenticated ownership census.
  * No source, styles, DOM or custom properties are modified by this read. */
 /** In-page, read-only witness for an own \`width:100%\`. It records a fill only
@@ -273,9 +297,9 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
         // Typed OM distinguishes an explicitly empty custom value from a
         // guaranteed-invalid value; CSSOM serializes both as the empty string.
         const read=await cdp.send('Runtime.callFunctionOn',{objectId,returnByValue:true,
-          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
+          functionDeclaration:`function(){const style=getComputedStyle(this),typed=this.computedStyleMap?.();${fillWitness(stage)}const rect=this.getBoundingClientRect(),edge=sides=>sides.reduce((n,k)=>n+Math.trunc(parseFloat(style.getPropertyValue('padding-'+k))*64)+Math.trunc(parseFloat(style.getPropertyValue('border-'+k+'-width'))*64),0);let zoomed=false;for(let a=this;a;a=a.parentElement)if(getComputedStyle(a).zoom!=='1')zoomed=true;return {tag:this.localName,box:{display:style.display,contentBox:style.boxSizing!=='border-box',zoomed,width:rect.width*64,height:rect.height*64,edges:{width:edge(['left','right']),height:edge(['top','bottom'])}},fill:fill(),animated:this.getAnimations().length>0,ancestorAnimated:(()=>{for(let a=this.parentElement;a;a=a.parentElement)if(a.getAnimations().length)return true;return false;})(),variables:Object.fromEntries([...style].filter(p=>p.startsWith('--')&&typed?.get(p)!==undefined).map(p=>[p,style.getPropertyValue(p).trim()])),sizes:Object.fromEntries(['width','height'].map(p=>{const v=typed?.get(p);return [p,v instanceof CSSUnitValue?{unit:v.unit,value:v.value}:v instanceof CSSKeywordValue?{keyword:v.value}:{}]})),values:Object.fromEntries(${JSON.stringify([...sourceTokenChannels,...variables,'width','height'])}.map(p=>[p,style.getPropertyValue(p).trim()]))};}`});
         if(read.exceptionDetails) throw Error('react-style-origin-read-failed');
-        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};animated:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
+        const value=read.result.value as {tag:string;box:{display:string;contentBox:boolean;zoomed:boolean;width:number;height:number;edges:{width:number;height:number}};fill:{depth?:number;problem?:string};animated:boolean;ancestorAnimated?:boolean;values:Record<string,string>;variables:Record<string,string>;sizes:Record<string,{unit?:string;value?:number;keyword?:string}>};
         if(value.tag!==ownership.nodes.find(n=>n.path===path)?.tag) throw Error('react-style-origin-path-mismatch');
         let fillDepth:number|undefined;
         const sizes:ReactSizeOrigin[]=sizeDeclarations.map(({channel,declaration})=>{
@@ -291,7 +315,8 @@ async function readOrigins(page: Page, selector: string, ownership: ReactOwnersh
           // Registered lengths can compute viewport/font units to px before
           // substitution, including into unregistered aliases. Until those
           // dependency origins are read, do not call a sampled px value fixed.
-          if(/var\(/i.test(declaration.value)&&(matched.cssPropertyRules?.length||matched.cssPropertyRegistrations?.length))
+          if(/var\(/i.test(declaration.value)&&(sizeReachesRegisteredProperty(declaration.value,matched,value.variables)||
+            (value.ancestorAnimated&&(matched.cssPropertyRules?.length||matched.cssPropertyRegistrations?.length))))
             return {...base,status:'unresolved',reason:'registered-size-variable-provenance-unqualified'};
           // Exactly `100%`, and only under the witness below: calc(), other
           // percentages and var() name nothing new.
