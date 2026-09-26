@@ -11043,13 +11043,6 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   // roots were skipped entirely; with their children now carried as absolute
   // overlays the root would collapse to 0×0 without its own box.)
   const withBox = merged.occ.filter((o) => o.node.bbox !== undefined);
-  if (withBox.length === 0) return;
-  if (withBox.length !== merged.occ.length) {
-    ctx.notes.push(
-      `${where}: root bbox captured on ${withBox.length}/${merged.occ.length} variant(s) only — fixed root size not proposed (partial evidence), review`,
-    );
-    return;
-  }
   const fixedAxis = (o: Occ, dim: 'width' | 'height'): boolean => {
     const l = o.node.layout;
     if (!l) return true; // non-auto-layout root: fixed by construction (see above)
@@ -11061,6 +11054,34 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
     const alongPrimary = l.mode === 'GRID' ? dim === 'width' : (l.mode === 'HORIZONTAL') === (dim === 'width');
     return (alongPrimary ? l.primarySizing : l.counterSizing) === 'FIXED';
   };
+  if (withBox.length === 0) {
+    // D.163: an axis drawn FIXED with no box on ANY variant (pre-v1.5 dumps;
+    // the CBDS Alert v14 fixture is counterSizing FIXED with no bbox) has its
+    // dimension nowhere. This was a bare `return` — the root sized to content
+    // and a zero-basis Fill child was later refused downstream (D.138) with
+    // nothing here saying why no width existed. Nothing is minted or guessed;
+    // the loss is NAMED. Same exclusions as the carrying path below: a
+    // full-width content width, an already-carried dimension, and a FILL
+    // occurrence (spelled FIXED by the sizing mode, but the container's measure).
+    for (const dim of ['width', 'height'] as const) {
+      if (dim === 'width' && fullWidthContent) continue;
+      if (rootTokens[dim] !== undefined || merged.occ.every((o) => o.node.bound?.[dim])) continue;
+      const fillField = dim === 'width' ? 'fillWidth' : 'fillHeight';
+      const fixedIn = merged.occ.filter((o) => o.node[fillField] !== true && fixedAxis(o, dim));
+      // @door propose.root-fixed-size-no-box
+      if (fixedIn.length === 0) continue;
+      ctx.notes.push(
+        `${where}: ${dim} drawn FIXED with no captured box (FIXED in ${fixedIn.length}/${merged.occ.length} variant occurrence(s)) — size not carried (re-capture with a current dump to carry it)`,
+      );
+    }
+    return;
+  }
+  if (withBox.length !== merged.occ.length) {
+    ctx.notes.push(
+      `${where}: root bbox captured on ${withBox.length}/${merged.occ.length} variant(s) only — fixed root size not proposed (partial evidence), review`,
+    );
+    return;
+  }
   // The bbox is the BORDER box and size tokens SPEAK border-box — Figma's
   // own box model, the same convention captured size variables carry (a
   // bound 48px height IS the drawn 48px box; canvas-box parity rule). Every
