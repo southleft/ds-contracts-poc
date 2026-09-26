@@ -6031,6 +6031,22 @@
       }
     },
     {
+      "id": "propose.root-fixed-size-no-box",
+      "stage": "propose",
+      "path": "propose",
+      "file": "core/propose-figma.ts",
+      "line": 11071,
+      "kind": "subtractive",
+      "ruleLine": 11072,
+      "premise": "A root axis drawn FIXED whose dump carries no box on any variant (pre-v1.5 dumps) has no dimension to carry; the proposer mints or guesses nothing.",
+      "effect": "Drops the fixed width/height; the root sizes to content.",
+      "counterExample": "The CBDS Alert v14 fixture is counterSizing FIXED with no bbox; its zero-basis Fill child is then refused downstream (D.138) because no definite width exists.",
+      "receipt": {
+        "channel": "notes",
+        "marker": "ctx.notes.push"
+      }
+    },
+    {
       "id": "propose.row-gap-distinct-not-carried",
       "stage": "propose",
       "path": "propose",
@@ -6130,9 +6146,9 @@
       "stage": "propose",
       "path": "propose",
       "file": "core/propose-figma.ts",
-      "line": 12865,
+      "line": 12886,
       "kind": "subtractive",
-      "ruleLine": 12866,
+      "ruleLine": 12887,
       "premise": "State-group flattening notes duplicate the base-group notes, so discarding them loses nothing.",
       "effect": "Drops every receipt flattenBaseInstances would have written for state variants.",
       "counterExample": "This is a receipt SINK: any genuinely state-group-only loss is unreported; only a count survives.",
@@ -6365,9 +6381,9 @@
       "stage": "propose",
       "path": "propose",
       "file": "core/propose-figma.ts",
-      "line": 13007,
+      "line": 13028,
       "kind": "subtractive",
-      "ruleLine": 13008,
+      "ruleLine": 13029,
       "premise": "The whole-pixel text-box fact qualifies a text PART's own element; a root's box is padding plus content, and rounding padding + advance is a different number whenever the padding is fractional.",
       "effect": "Drops the fact from a sole root label hoisted into anatomy.root.text.",
       "counterExample": "A generated set whose only child is the label renders its root up to 1px narrower than the canvas, named but not closed.",

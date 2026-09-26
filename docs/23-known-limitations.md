@@ -11748,3 +11748,25 @@ the child State preview…"). This makes the pinned cells correct and names the
 others; drawing previews across every axis combination (21 → 30 CheckboxIcon
 variants for disabled alone) remains the complete fix and needs its own receipt
 round. Reverse by deleting the statePreviews block in `mapDepProps` and its test.
+
+## D.163 A root axis drawn FIXED with no captured box is named, not guessed
+
+**AGENT decision, 2026-09-26.** `invertRootFixedSize` carries a FIXED root
+axis from the dump's `bbox`. When no variant carries a box it returned with
+no note. Pre-v1.5 dumps hit this: the CBDS Alert gauntlet fixture
+(`visiblewhen-value-outside-prop-enum-alert.dump.json`, v14, 2026-07-10) is a
+VERTICAL root with `counterSizing: FIXED` and no `bbox`, and none of its
+proposal notes mentioned the root width. The root sized to content, and the
+Figma emitter later refused its zero-basis Fill child by name (D.138) with
+nothing upstream saying why no definite width existed. The proposer now adds
+`<Set>:root: <width|height> drawn FIXED with no captured box (FIXED in n/m
+variant occurrence(s)) — size not carried (re-capture with a current dump to
+carry it)`. Nothing is minted or guessed. The carrying path's exclusions
+still apply: a dimension already bound or on the root tokens, a FILL
+occurrence (the sizing mode spells it FIXED, but it is the container's
+measure), and a full-width content width. The note is emitted only in mint
+mode, like the carrying path; the bound-only mode drops unbound root sizes
+whether or not a box exists, and that is unchanged here. Registered as door
+`propose.root-fixed-size-no-box` (447 doors, 169 still silent). Covered by
+`core/root-fixed-size-no-box.test.ts`, which is in `exact-proposal:check`.
+Reverse by restoring the bare `return`, deleting the door entry and the test.
