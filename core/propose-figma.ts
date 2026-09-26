@@ -8916,25 +8916,42 @@ function nameHostOverrides(m: Merged, ctx: Ctx, where: string): void {
 
 /** A direct instance may override only the declared ink of an exact, keyed
  * standalone drawing. Display names never identify the affected descendant. */
-function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
+function directDrawingChild(node: DumpNode, childId: string, ctx: Ctx) {
   const parsed = ContractSchema.safeParse(ctx.contractsById?.get(childId));
   if (!parsed.success) return undefined;
   const child = parsed.data, anchor = child.bindings.figma.anchors;
   const resolution = resolveChildContract(node.instanceOf ?? node.name,
     {setKey:node.instanceSetKey,key:node.instanceKey},ctx);
   const paths = Object.values(child.anatomy.root.parts ?? {});
-  const h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
-  const target = h?.solidFillTarget;
   if (resolution.id !== childId || resolution.mechanism !== 'key' || !ctx.fileKey ||
       anchor.fileKey !== ctx.fileKey || !anchor.nodeId || !anchor.componentSetKey ||
-      child.props.some(p=>p.bindings.figma.kind==='VARIANT') ||
-      !child.anatomy.root.overridable?.includes('color') || paths.length !== 1 ||
-      paths[0].shape?.kind !== 'path' || !paths[0].shape.parentViewport ||
-      paths[0].literals?.['background-color'] !== 'currentColor' ||
+      child.props.some(p=>p.bindings.figma.kind==='VARIANT') || paths.length !== 1 ||
+      paths[0].shape?.kind !== 'path' || !paths[0].shape.parentViewport) return undefined;
+  return {child, anchor, path: paths[0], viewport: paths[0].shape.parentViewport};
+}
+
+function directInstanceInk(node: DumpNode, childId: string, ctx: Ctx) {
+  const d = directDrawingChild(node, childId, ctx);
+  const h = node.hostOverrides?.length === 1 ? node.hostOverrides[0] : undefined;
+  const target = h?.solidFillTarget;
+  if (!d || !d.child.anatomy.root.overridable?.includes('color') ||
+      d.path.literals?.['background-color'] !== 'currentColor' ||
       !h || h.fields.length !== 1 || h.fields[0] !== 'fills' || !h.fill?.hex || !target ||
-      target.componentId !== anchor.nodeId || target.instancePath.length !== 0 ||
+      target.componentId !== d.anchor.nodeId || target.instancePath.length !== 0 ||
       JSON.stringify(target.childPath) !== '[0]') return undefined;
   return h.fill;
+}
+
+/** The same exact drawing proves its SCALE/SCALE path follows the instance
+ * box (parentViewport is only recorded for that relationship), so an
+ * observed square box is carried through the declared size channel. The
+ * main's own box is the recorded viewport; comparisons are exact. */
+function directInstanceSize(node: DumpNode, childId: string, ctx: Ctx) {
+  const d = directDrawingChild(node, childId, ctx), box = node.bbox, root = d?.child.anatomy.root;
+  if (!d || !box || !root?.overridable?.includes('size') || !root.tokens?.width || !root.tokens?.height ||
+      d.viewport.width !== d.viewport.height || !Number.isFinite(box.width) || box.width <= 0 ||
+      box.width !== box.height || node.children?.length) return undefined;
+  return {observed: box.width, main: d.viewport.width};
 }
 
 function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
@@ -9494,13 +9511,25 @@ function buildPartFromEvidence(
     const component: Record<string, unknown> = { id: id ?? stubIdFor(instanceOf, ctx, keys).id };
     const appliedOcc = m.occ.filter((o) => o.node.componentProperties !== undefined);
     if (appliedOcc.length > 0) {
-      const canonical = canonicalizeInstanceProps(instanceOf, appliedOcc[0].node.componentProperties!, id, ctx, where, false, keys);
+      // A projected state axis forwards only when EVERY observed occurrence
+      // applies an in-table value on that same axis; otherwise none does.
+      const stateChild = id ? ctx.contractsById?.get(id) : undefined;
+      const stateAxes = m.occ.map(o => {
+        const applied = o.node.componentProperties ?? {};
+        const axis = stateChild ? projectedStateAxis(stateChild, id, keys, applied) : undefined;
+        const raw = axis === undefined ? undefined : Object.entries(applied).find(([k]) => k.split('#')[0] === axis)?.[1];
+        return typeof raw === 'string' && INTERACTION_STATE_BY_VALUE[normStateValue(raw)] ? axis : undefined;
+      });
+      const projectState = stateAxes[0] !== undefined && stateAxes.every(a => a === stateAxes[0]);
+      if (!projectState && stateAxes.some(Boolean))
+        ctx.notes.push(`${where}: state-forward-incomplete \u2014 not every occurrence of "${instanceOf}" applies an in-table value on ${id}'s projected state axis; the child's disabled input is not forwarded; review`);
+      const canonical = canonicalizeInstanceProps(instanceOf, appliedOcc[0].node.componentProperties!, id, ctx, where, false, keys, undefined, projectState);
       // Include missing-property occurrences in the typed identity proof;
       // absence of a capture is different from the child's explicit unset plane.
       const perOccurrence = m.occ.map((o) => {
         const omitted = new Set<string>();
         return { variant: o.variant, omitted,
-          canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties ?? {}, id, ctx, where, true, keys, omitted) };
+          canonical: canonicalizeInstanceProps(instanceOf, o.node.componentProperties ?? {}, id, ctx, where, true, keys, omitted, projectState) };
       });
       threadInstanceProps(canonical, perOccurrence, ctx, where, instanceOf, ctx.contractsById?.get(component.id as string));
       // Every applied prop may have been dropped as unmappable (each is a
@@ -9788,6 +9817,19 @@ function buildPartFromEvidence(
         );
       }
     }
+    if (ctx.mint && id && !ctx.instanceOverrides) {
+      const sizes = m.occ.map(o=>directInstanceSize(o.node,id,ctx));
+      if (sizes.length && sizes.every(Boolean) && sizes.some(s=>s!.observed!==s!.main) &&
+          !ctx.mint.refOverrides.some(r=>r.component===component)) {
+        const target: Record<string,string> = {};
+        mintObservation(ctx,target,where,'size','px',m.occ.map((o,i)=>({variant:o.variant,value:sizes[i]!.observed})));
+        ctx.mint.refOverrides.push({component,target});
+        ctx.notes.push(`${where}: identity-qualified direct instance of a SCALE/SCALE drawing carries its observed square box (${[...new Set(sizes.map(s=>s!.observed))].join('/')}px; main ${sizes[0]!.main}px) through the child's declared size channel`);
+      } else if (m.occ.some(o=>directDrawingChild(o.node,id,ctx)) && m.occ.some(o=>o.node.bbox && directDrawingChild(o.node,id,ctx) &&
+          o.node.bbox.width !== directDrawingChild(o.node,id,ctx)!.viewport.width)) {
+        ctx.notes.push(`${where}: direct-instance-size-not-carried \u2014 requires an identity-qualified square box on every occurrence and a child declaring size; review`);
+      }
+    }
     if (ctx.mint && id) {
       const paints = m.occ.map(o=>directInstanceInk(o.node,id,ctx));
       if (paints.length && paints.every(Boolean)) {
@@ -10029,6 +10071,20 @@ function applyVisibleBinding(part: Record<string, unknown>, property: string, ct
   part.visibleWhen = { prop: name };
 }
 
+/** The applied property that is exactly the child's §D.41 projected state
+ * axis: a key-resolved child with the promoted BOOLEAN "Disabled" prop and no
+ * binding of its own for that axis name. Undefined for any other shape. */
+function projectedStateAxis(child: MinimalChildContract, resolvedId: string | null,
+  keys: { setKey?: string; key?: string } | undefined, applied: Record<string, string | boolean>): string | undefined {
+  const disabled = child.props.find(p => p.name === 'disabled' && p.type === 'boolean' &&
+    (p.bindings.figma as {kind?: string}).kind === 'BOOLEAN' && p.bindings.figma.property === 'Disabled');
+  const setKey = (child as {bindings?:{figma?:{anchors?:{componentSetKey?:string|null}}}}).bindings?.figma?.anchors?.componentSetKey;
+  if (!disabled || resolvedId !== child.id || !keys?.setKey || setKey !== keys.setKey || Object.hasOwn(applied, 'Disabled')) return undefined;
+  const axes = Object.keys(applied).map(k => k.split('#')[0]).filter(k =>
+    ['state', 'states', 'interaction'].includes(k.trim().toLowerCase()) && !child.props.some(p => p.bindings.figma.property === k));
+  return axes.length === 1 ? axes[0] : undefined;
+}
+
 function canonicalizeInstanceProps(
   instanceOf: string,
   applied: Record<string, string | boolean>,
@@ -10046,6 +10102,8 @@ function canonicalizeInstanceProps(
   keys?: { setKey?: string; key?: string },
   /** Positive omission evidence, separate from missing/unmappable props. */
   omitted?: Set<string>,
+  /** Forward the child's projected state axis (see projectedStateAxis). */
+  projectState = false,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const note = (text: string) => {
@@ -10104,6 +10162,21 @@ function canonicalizeInstanceProps(
     if (childProp && typeof value === 'boolean') {
       out[childProp.name] = value;
       mapped++;
+      continue;
+    }
+    // A host applying the child's own projected state axis (§D.41): the
+    // same closed table that made the child's `disabled` BOOLEAN prop maps
+    // the applied value onto it (the caller decided the whole observed
+    // domain qualifies). Pseudo-class states have no input a caller can
+    // set, so their drawn appearance is named, never forced.
+    const bare = property.split('#')[0];
+    const projected = projectState && child && typeof value === 'string' &&
+      projectedStateAxis(child, resolvedId, keys, applied) === bare ? INTERACTION_STATE_BY_VALUE[normStateValue(value)] : undefined;
+    if (child && projected) {
+      out.disabled = projected === 'disabled';
+      mapped++;
+      const residual = `${where}: state-forward-pseudo-class-unrepresentable — applied "${bare}=${value}" on nested "${instanceOf}" is ${child.id}'s projected ${projected} state, which has no input a caller can set; its drawn appearance is not carried; review`;
+      if (projected !== 'default' && projected !== 'disabled' && !ctx.notes.includes(residual)) ctx.notes.push(residual);
       continue;
     }
     if (child) {

@@ -553,6 +553,18 @@ The native canvas and original/native app comparisons were inspected. Evidence:
 This does not complete any row: both-background fidelity, the clean consumer
 return, behavior, state-graph updates and interruption/recovery remain unqualified.
 
+The 2026-09-25 CBDS Checkbox family run adds bounded evidence to row 2. Through
+the app, a fresh REST capture was imported, packaged and installed in a clean
+consumer. Checkbox-icon passes 30/42 variants at 0.000% on white and black,
+including rest, error, disabled and pointer-hover cells with exact 16/24 px
+glyph boxes. All 12 focus-visible cells are unreachable (non-focusable root).
+The composed Checkbox passes 5/20: its label rasterises differently inside
+correctly placed text boxes, focus rings are absent and parent hover renders
+rest ink. Its native operation `46e5f671…` is prepared but not yet written or
+inspected. Rules, gaps and evidence:
+[D.156](23-known-limitations.md#d156-direct-drawing-instances-carry-their-box-a-projected-child-state-forwards-only-disabled),
+`private/direct-state-ink-v255/`. This completes no row.
+
 Prepared React downloads now have a native-library page that retains the selected
 archive, theme, brand and operation across reloads. Its isolated application
 proof covers restart, repeated preparation and refused pairing on an unsupported

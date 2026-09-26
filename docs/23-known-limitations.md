@@ -11416,3 +11416,45 @@ The original plan, creation acknowledgement and failed reads are unchanged;
 replacement and inspection append to the same operation journal. Evidence and
 reversal preimages: `private/host-paint-target-v252/` and
 `private/partial-slot-recovery-v253/`.
+
+## D.156 Direct drawing instances carry their box; a projected child state forwards only `disabled`
+
+**AGENT decisions, 2026-09-25.** Two generic proposal rules extend D.155.
+
+A key-resolved direct instance of a standalone drawing whose single path records
+a SCALE/SCALE `parentViewport` now carries its observed square box through the
+child's declared `size` channel. The child's own viewport records the main box,
+so no minted-value ledger is needed; the comparison is exact. The rule requires
+the same identity qualification as caller ink: matching file, node and key, no
+child variant axes, and a square box on every occurrence. Non-square, missing or
+unchanged boxes carry nothing. The existing ledger path is unchanged.
+
+A host that applies a child's §D.41 projected state axis now forwards it through
+the same closed table onto the child's promoted `disabled` boolean. Every
+observed occurrence must apply an in-table value on that one axis; otherwise
+nothing forwards and `state-forward-incomplete` is named. Hover, focus-visible
+and active have no input a caller can set. They are named
+`state-forward-pseudo-class-unrepresentable`; their drawn appearance is not
+invented.
+
+Component-ref state overrides select only the child's declared override
+variables. CSS Modules React and native state previews carry them. Inline React
+carries the base box and ink and declares the part-state omission in its header.
+
+Measured through the application on the CBDS Checkbox family (fresh REST capture,
+JSON import, **Prepare React library**, archive SHA-256 `67b65920…818358`, clean
+consumer, explicit hashed Inter, unchanged 5% limit):
+
+| Component | Result | Named gaps |
+| --- | --- | --- |
+| Checkbox-icon, 42 variants | 30/42 at 0.000% on white and black: every rest, error, disabled and pointer-hover cell | 12 focus-visible cells are unreachable: the root is a non-focusable element and its ring is not drawn |
+| Checkbox, 20 variants | 5/20 | 11 label rasterisation failures (text-only; best alignment is unshifted); 4 focus cells lack the ring; hover renders rest ink |
+
+Outside the label text, Checkbox differs by 0–2%. Glyph size, path geometry and
+ink match. A `text-rendering: geometricPrecision` diagnostic reached 8/20 but
+changed the label width by 1 px, so it was not adopted. The app then prepared
+native operation `46e5f671-2e8e-4b73-8802-255374f3ef3e` (20 root variants,
+81 variables). Its Figma write and canvas inspection have not run; Figma Desktop
+control was unavailable to this session. Native fidelity, interaction,
+accessibility and V1 remain unqualified. Evidence and reversal instructions:
+`private/direct-state-ink-v255/`.

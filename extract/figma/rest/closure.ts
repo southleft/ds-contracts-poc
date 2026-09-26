@@ -153,7 +153,10 @@ export function mappedInstanceRefs(doc: RestNode): InstanceRef[] {
         const value = node.componentProperties![key]!;
         if (value.type !== "INSTANCE_SWAP") continue;
         out.push({
-          componentId: typeof value.value === "string" && value.value !== "" ? value.value : undefined,
+          componentId:
+            typeof value.value === "string" && value.value !== ""
+              ? value.value
+              : undefined,
           nodePath: `${nodePath}/componentProperties[${JSON.stringify(key)}]`,
         });
       }
