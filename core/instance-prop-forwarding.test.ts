@@ -451,3 +451,17 @@ test('caller ink requires a single identity-qualified fill and preserves the mai
   ];
   for(const change of mutate){const f=make();change(f);assert.equal(read(f).overrides?.color,undefined,String(change));}
 });
+
+test('two callers of the same child allocate distinct contract-wide selected-content names', () => {
+  const f = fixedContentFixture();
+  for (const variant of f.set.variants) variant.children!.push({ ...structuredClone(variant.children![0]), name: 'second' });
+  const contract = ContractSchema.parse(f.propose().contract);
+  const hosts = walkAnatomy(contract).filter(p => p.part.component?.id === f.child.id);
+  assert.equal(hosts.length, 2);
+  const names = hosts.map(h => Object.keys(h.part.parts ?? {})).flat();
+  assert.equal(names.length, 2);
+  assert.equal(new Set(names).size, 2, names.join(', '));
+  assert.equal(names[0], 'selectedContent', 'the first caller keeps the established name');
+  const all = walkAnatomy(contract).map(p => p.name);
+  assert.equal(new Set(all).size, all.length, 'no duplicate part names anywhere');
+});

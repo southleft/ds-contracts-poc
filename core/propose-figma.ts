@@ -8966,7 +8966,7 @@ function mintInstanceInk(ctx:Ctx,target:Record<string,string>,where:string,
  * Reuse the existing component + parts representation for a unique default
  * slot. Every occurrence must prove both identities; names alone cannot
  * select a variant or turn an unresolved/stub target into runtime content. */
-function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, component: Record<string, unknown>, ctx: Ctx, where: string): ReadonlySet<string> {
+function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, component: Record<string, unknown>, ctx: Ctx, where: string, selfKey: string): ReadonlySet<string> {
   const carried = new Set<string>();
   const properties = [...new Set(m.occ.flatMap(o => Object.keys(o.node.fixedSwaps ?? {})))].sort();
   if (!properties.length) return carried;
@@ -9009,7 +9009,9 @@ function carryFixedSwapCaller(m: Merged, part: Record<string, unknown>, componen
       anchor.fileKey !== ctx.fileKey || target.data.props.some(p => p.bindings.figma.kind === 'VARIANT' || (p.required && p.default === undefined)))
     return decline('the selected content is not an exact standalone target with usable defaults');
   const selected: Record<string, unknown> = { id: targetId };
-  part.parts = { selectedContent: { component: selected } };
+  // Part names are contract-wide identity: a second caller of the same child
+  // allocates its own key through the shared rule instead of a fixed spelling.
+  part.parts = { [partKey('selectedContent', ctx, `${where}/selectedContent`, selfKey)]: { component: selected } };
   const observations = swaps.map(s => s?.observedInstances);
   const sizes = observations.map(rows => rows?.length === 1 ? rows[0] : undefined);
   if (ctx.mint && target.data.anatomy.root?.overridable?.includes('size') && sizes.every(row => row &&
@@ -9842,7 +9844,7 @@ function buildPartFromEvidence(
       }
     }
     part.component = component;
-    nameFixedSwaps(m, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where));
+    nameFixedSwaps(m, ctx, where, carryFixedSwapCaller(m, part, component, ctx, where, selfKey));
     carryClip(m, part, ctx, where, { carry: false, owner: 'component-ref part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
