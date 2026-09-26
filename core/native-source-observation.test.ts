@@ -8,6 +8,7 @@ import {
 import {
   emitNativeSourceReadbackScript,
   verifyNativeSourceReadback,
+  scaledOrigin,
   type NativeSourceObservationInput,
 } from "./native-source-observation.js";
 
@@ -491,4 +492,17 @@ test("legacy slot identity requires a separately verified exact-ID anchor", asyn
     "refused",
     "anchor supplies identity, never current semantics",
   );
+});
+
+test("an inherited SCALE origin may keep only the source's own float32-invisible offset", () => {
+  // Live CBDS Checkbox warning glyph (op 46e5f671): half-scale instance, parent
+  // frame at x=1.124997854…, Figma kept the main's 3.0959e-8 instead of halving it.
+  const source = 3.0959117935935865e-8, parent = 1.124997854232788;
+  assert.equal(scaledOrigin(source * 0.5, source, 0.5, parent), true, "the exact scaled value passes");
+  assert.equal(scaledOrigin(source, source, 0.5, parent), true, "the verbatim source offset passes when float32-identical in the parent");
+  assert.equal(scaledOrigin(0.125, source, 0.5, parent), false, "a real drift refuses");
+  assert.equal(scaledOrigin(5e-8, source, 0.5, parent), false, "a retained offset that is not the source value refuses");
+  assert.equal(scaledOrigin(source, source, 0.5, 0), false, "at a zero parent offset the difference is representable and refuses");
+  assert.equal(scaledOrigin(source, source, 0.5, undefined), false, "without an observed parent offset it refuses");
+  assert.equal(scaledOrigin(2, 2, 0.5, 100), false, "a representable retained origin still refuses");
 });
