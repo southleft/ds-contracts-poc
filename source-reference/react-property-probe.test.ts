@@ -138,3 +138,16 @@ test('real React property experiments preserve context and distinguish delivered
 
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
 });
+
+test('restoration ignores only the numeric render ordinal of a factory invocation', async () => {
+  const { ownershipForRestoration, ownershipDifference } = await import('./react-property-probe.js');
+  const node = (invocation: unknown, extra: Record<string, unknown> = {}) => ({ nodes: [{ path: '', tag: 'div',
+    creationInvocation: { status: 'observed', invocation, input: { variant: 'default' }, ...extra } }], problems: [] });
+  const same = (a: unknown, b: unknown) => JSON.stringify(ownershipForRestoration(a)) === JSON.stringify(ownershipForRestoration(b));
+  assert.equal(same(node(1), node(2)), true, 'a re-render of the same factory restores');
+  assert.equal(same(node(1, { reactCall: 1 }), node(2, { reactCall: 3 })), true, 'the React call ordinal is a frame counter too');
+  assert.equal(same(node(1), node(1, { input: { variant: 'destructive' } })), false, 'changed input still refuses');
+  assert.equal(same(node(1), node('1')), false, 'a non-numeric invocation value is compared verbatim');
+  assert.equal(same({ nodes: [], problems: [] }, node(1)), false, 'structure changes still refuse');
+  assert.equal(ownershipDifference(ownershipForRestoration(node(1)), ownershipForRestoration(node(1, { input: {} }))), '$.nodes.0.creationInvocation.input.variant');
+});
