@@ -913,7 +913,7 @@
    "why": "the spacer idiom carries as a grow part (structural alignment, no ink)",
    "check": {
     "carried": [
-     "\"s\":\\{\"layout\":\\{\"grow\":true\\}\\}"
+     "\"s\":\\{\"layout\":\\{\"grow\":true,\"growBasis\":\"zero\"\\}\\}"
     ]
    },
    "status": "green"
@@ -969,7 +969,7 @@
    "why": "nesting is ordinary anatomy: parts nest with their own layout/tokens at each level",
    "check": {
     "carried": [
-     "\"a\":\\{\"layout\":\\{\"direction\":\"column\"\\}",
+     "\"a\":\\{\"layout\":\\{\"direction\":\"column\",\"align\":\"start\"\\}",
      "\"b\":\\{\"layout\"",
      "\"c\":\\{\"text\""
     ]
@@ -1212,13 +1212,13 @@
   {
    "id": "effect-inner-shadow",
    "construct": "an INNER_SHADOW effect on the root",
-   "expect": "REFUSED",
-   "why": "inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed",
+   "expect": "CARRIED",
+   "why": "complete inner-shadow stacks carry as CSS box-shadow with inset layers (docs/23 inner-shadow carriage, 2026-09-25); the captured numbers and alpha are kept and the carriage is noted",
    "check": {
-    "note": "visible effect\\(s\\) \\[INNER_SHADOW\\]",
-    "absent": [
-     "box-shadow"
-    ]
+    "carried": [
+     "\"box-shadow\":\"\\{imported\\.case\\.root\\.box-shadow\\}\""
+    ],
+    "note": "INNER_SHADOW uses inset"
    },
    "status": "green"
   },

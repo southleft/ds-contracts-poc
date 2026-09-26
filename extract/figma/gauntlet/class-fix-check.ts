@@ -11,8 +11,11 @@
  *   2. visiblewhen-value-outside-prop-enum (Alert fixture) — presence on a
  *      true/false axis spells the truthy form visibleWhen { prop } (the axis
  *      promotes to a BOOLEAN prop; equals: "true" is enum vocabulary); the
- *      referee is clean and all four surfaces emit. The inexpressible false
- *      side is pinned on a synthesized two-variant set (visibleWhen has no
+ *      referee is clean; React, HTML and inline React emit, and the Figma
+ *      script refuses BY NAME (FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED, D.138):
+ *      this v14 dump records the root as FIXED width with no captured box,
+ *      so no definite width reaches Message's zero-basis Fill. The
+ *      inexpressible false side is pinned on a synthesized two-variant set (visibleWhen has no
  *      negated form — NAMED note, kept unconditional, never wrong).
  *   3. prop-binding-not-camelcase (Note fixture) — digit-led property
  *      spellings get the componentIdSlug digit-led discipline on prop code
@@ -289,9 +292,16 @@ console.log(
     'no "visibleWhen.equals … is not a value of prop" violation anywhere',
     !r.violations.some((v) => v.includes("visibleWhen.equals")),
   );
+  // D.138: the fixture's root width was never captured, so the Figma script
+  // must refuse the zero-basis Fill by name; every other surface emits.
   check(
-    `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
+    `every non-Figma surface emits (${surfaces.replace(/, figma-script/, "")})`,
+    r.emitted.length === generateSurfaces().length - 1 && !r.emitted.includes("figma-script"),
+  );
+  check(
+    "the Figma script refuses BY NAME: zero-basis Message in Description (D.138)",
+    r.refusals.length === 1 && r.refusals[0].emitter === "figma-script" &&
+      /^FIGMA_ZERO_BASIS_GROWTH_UNSUPPORTED: ds\.alert, .*part "Message" in "Description" requests zero-basis width/.test(r.refusals[0].message),
   );
 
   // The FALSE side (present exactly where the boolean is false) is
