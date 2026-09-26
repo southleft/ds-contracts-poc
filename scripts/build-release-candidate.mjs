@@ -54,6 +54,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-09-26: validation and CSS emission import the pure
+    // component-placement domain/referee (no I/O); both files must ship.
     // Reviewed 2026-09-22: shared contract validation imports selection.js;
     // its runtime and declarations keep installed validation equivalent.
     // Reviewed 2026-09-21: validation and CSS emission import the shared
@@ -97,6 +99,8 @@ const PACKAGES = [
       "dist/grid.js",
       "dist/index.d.ts",
       "dist/index.js",
+      "dist/component-placement.d.ts",
+      "dist/component-placement.js",
       "dist/joint-tokens.d.ts",
       "dist/joint-tokens.js",
       "dist/naming.d.ts",
