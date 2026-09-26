@@ -233,7 +233,7 @@ test('an exact-zero content slot re-seats its counter-axis FILL at the root inne
  const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
  await run(engine.buildTokensScript(null));await run(engine.buildComponentScript(c,byId));
- const comp=root.findOne((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id);
+ const comp=root.findOne((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id)!;
  const slot=comp.children![0];
  assert.equal(slot.type,'SLOT');assert.equal(slot.layoutSizingHorizontal,'FILL');
  assert.equal(slot.width,comp.width-comp.paddingLeft-comp.paddingRight);

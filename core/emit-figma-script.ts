@@ -4086,6 +4086,37 @@ function mapDepProps(
       });
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
+  // bindings.figma.statePreviews (child side): a BOOLEAN state prop paints
+  // nothing, so a parent that sets it true must also select the child's drawn
+  // State preview. Previews multiply only the primary axis and pin every other
+  // axis to its default (the explosion below in compileComponentData), so the
+  // selection is made only where the wired axes sit on those pins; anywhere
+  // else the state is undrawn and is ledgered BY NAME instead of silently
+  // rendering rest ink (live 2026-09-25: CBDS Checkbox disabled cells).
+  if (dep.bindings?.figma?.statePreviews && !standalone) {
+    const active = dep.states.filter((s) => {
+      const p = dep.props.find((q) => q.name === s && q.type === 'boolean' && q.bindings.figma.kind === 'BOOLEAN');
+      return p !== undefined && out[p.bindings.figma.property!] === true;
+    });
+    if (active.length > 0) {
+      const axes = dep.props.filter((p) => isEnum(p) || isVariantBool(p));
+      const substProps = statePreviewSubstProps(dep);
+      const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.name)));
+      const offPin = axes.filter((a, i) => {
+        if (i === primaryIdx) return false;
+        const wired = out[a.bindings.figma.property!];
+        return wired !== undefined && String(wired) !== axisLabel(a, orderedVariantValues(a)[0]!);
+      });
+      if (active.length === 1 && offPin.length === 0) out[STATE_PREVIEW_PROPERTY] = statePreviewLabel(active[0]);
+      else ledger?.push({
+        channel: `${dep.name} state "${active.join('+')}"`,
+        value: 'true',
+        reason: active.length > 1
+          ? `not drawn — ${dep.id} draws one State preview at a time, so combined states render the base variant's ink`
+          : `not drawn — ${dep.id} draws its State previews only at ${offPin.map((a) => `${a.bindings.figma.property}=${axisLabel(a, orderedVariantValues(a)[0]!)}`).join(', ')}, so this instance renders the base variant's ink`,
+      });
+    }
+  }
   // bindings.figma.absentVariants (child side): an instance can only select a
   // variant the child set DRAWS. The wired values plus the child's defaults
   // for every axis left unwired name one combination; when the child declares

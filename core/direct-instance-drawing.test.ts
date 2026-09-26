@@ -266,3 +266,38 @@ test('inline React carries the base box and ink and declares the part-state omis
   assert.match(tsx, /PART-level state overrides \(Part\.states, v13\) are omitted/);
   assert.doesNotMatch(tsx, /#7e0419|#a2aebf/);
 });
+
+test('a parent-set BOOLEAN state selects the child State preview on its pins and names it elsewhere', async () => {
+  const tokens = { primitives: { ink: { $type: 'color', $value: '#123456' }, off: { $type: 'color', $value: '#a2aebf' }, box: { $type: 'dimension', $value: '16px' } },
+    semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+  const child = ContractSchema.parse({ id: 'check.state-leaf', name: 'StateLeaf', version: '0.1.0', status: 'draft', description: 'Previewed child',
+    semantics: { element: 'span' }, states: ['disabled'],
+    props: [{ name: 'disabled', type: 'boolean', default: false, bindings: { code: { prop: 'disabled' }, figma: { kind: 'BOOLEAN', property: 'Disabled' } } },
+      { name: 'size', type: { enum: ['small', 'large'] }, default: 'small', bindings: { code: { prop: 'size' }, figma: { kind: 'VARIANT', property: 'Size', values: { small: 'Small', large: 'Large' } } } },
+      { name: 'tone', type: { enum: ['plain', 'strong'] }, default: 'plain', bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone', values: { plain: 'Plain', strong: 'Strong' } } } }],
+    anatomy: { root: { layout: { display: 'flex' }, tokens: { width: '{box}', height: '{box}', 'background-color': '{ink}' }, states: { disabled: { 'background-color': '{off}' } } } },
+    bindings: { code: { anchors: { importPath: './StateLeaf', export: 'StateLeaf' } }, figma: { statePreviews: true, anchors: { fileKey: null, componentSetKey: null } } } });
+  const parent = ContractSchema.parse({ id: 'check.state-host', name: 'StateHost', version: '0.1.0', status: 'draft', description: 'Forwards disabled',
+    semantics: { element: 'div' }, states: [],
+    props: [{ name: 'state', type: { enum: ['default', 'disabled'] }, default: 'default', bindings: { code: { prop: 'state' }, figma: { kind: 'VARIANT', property: 'State', values: { default: 'Default', disabled: 'Disabled' } } } },
+      { name: 'tone', type: { enum: ['plain', 'strong'] }, default: 'plain', bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone', values: { plain: 'Plain', strong: 'Strong' } } } }],
+    anatomy: { root: { layout: { display: 'flex' }, parts: { mark: { component: { id: child.id, props: {
+      tone: { prop: 'tone', map: { plain: 'plain', strong: 'strong' } }, disabled: { prop: 'state', map: { disabled: 'true' } } } } } } } },
+    bindings: { code: { anchors: { importPath: './StateHost', export: 'StateHost' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
+  const scope = new Map<string, Contract>([[child.id, child], [parent.id, parent]]);
+  const errors: string[] = []; validateContract(parent, scope, errors, new Map()); assert.deepEqual(errors, []);
+  const engine = createFigmaEngine({ tokens, icons: new Map() });
+  const host = createFigmaMock({ instanceVariantSelection: true }), context = vm.createContext({ figma: host.figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (script: string) => vm.runInContext(`(async()=>{${script}\n})()`, context);
+  await run(engine.buildTokensScript(null));
+  await run(engine.buildComponentScript(child, scope));
+  await run(engine.buildComponentScript(parent, scope));
+  const owner = host.root.findOne(n => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id)!;
+  const selected = Object.fromEntries(owner.children!.map(v => [v.name, (v.findOne(n => n.type === 'INSTANCE') as unknown as { _mainComponent: { name: string } })._mainComponent.name]));
+  assert.match(selected['State=Disabled, Tone=Plain'], /State=Disabled/, JSON.stringify(selected));
+  assert.match(selected['State=Disabled, Tone=Strong'], /Tone=Strong/);
+  assert.doesNotMatch(selected['State=Disabled, Tone=Strong'], /State=Disabled/);
+  assert.doesNotMatch(selected['State=Default, Tone=Plain'], /State=Disabled/);
+  const data = engine.compileComponentData(parent, scope);
+  assert.ok(JSON.stringify(data).includes('draws its State previews only at Tone=Plain'), 'the undrawn large cell is named');
+});
