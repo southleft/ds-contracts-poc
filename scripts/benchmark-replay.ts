@@ -254,7 +254,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       if (!receipt || !ops || !on || !at) throw Error('usage: --attach <id> --receipt <comparison.json> --ops root=<op>,instance-1=<op>,… --measured-on <platform> --measured-at <YYYY-MM-DD>');
       const pin = attachReact(repoRoot, reactCell, receipt, Object.fromEntries(ops.split(',').map(p => p.split('=') as [string, string])),
         path.join(repoRoot, 'private', 'source-native-app', 'operations'), on, at);
-      console.log(`attached ${attachId}: ${pin.fidelity!.pass ? 'pass' : 'fail'} (${pin.fidelity!.white.toFixed(3)}% / ${pin.fidelity!.black.toFixed(3)}%)`);
+      console.log(`attached ${attachId}: ${pin.fidelity!.pass ? 'pass' : pin.fidelity!.residual === 'text-only' ? 'partial (text only)' : 'fail'} (${pin.fidelity!.white.toFixed(3)}% / ${pin.fidelity!.black.toFixed(3)}%)`);
       return;
     }
     if (attachId) {

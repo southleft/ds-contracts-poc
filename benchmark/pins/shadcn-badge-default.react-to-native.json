@@ -6,5 +6,17 @@
   "root": "de7532bc371184a04769648a83d3f6b02e67977efa479990638c60e39c1d706f",
   "children": {},
   "recordedOn": "darwin-arm64",
-  "fidelity": null
+  "fidelity": {
+    "receipt": "benchmark/receipts/shadcn-badge-default.react-to-native/comparison.json",
+    "receiptSha256": "2e504d3a623b6a3bc702c7881e4663aad2a6cb439028e5b26a0a0385bec75f9e",
+    "planSetSha256": "a7015625f8880356935ff0732d140562ee6add7df654a4057c91d0a00c20007e",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-27",
+    "white": 6.25,
+    "black": 6.25,
+    "layoutExact": false,
+    "pass": false,
+    "framing": "snap-outward-v1",
+    "residual": "text-only"
+  }
 }
