@@ -369,3 +369,34 @@ test('owned heading and paragraph hosts reset UA margins on both React surfaces 
   await page.close();
  }}finally{await browser.close();}
 });
+
+test('a hug-width root keeps its empty content slot above exact zero so instances can fill (§D.175)', async () => {
+  // Measured: the composed shadcn Card's main hugs empty content; an exact-zero
+  // slot pinned its 360 px instance's slot at 0 px, content centred.
+  const c = seed();
+  c.anatomy.root.literals = { width: 'fit-content', height: 'fit-content' };
+  const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (code: string) => vm.runInContext(`(async()=>{${code}\n})()`, context, { timeout: 20000 }) as Promise<any>;
+  await run(engine.buildTokensScript(null)); await run(engine.buildComponentScript(c, new Map([[c.id, c]])));
+  const comp = root.findOne((n: any) => n.type === 'COMPONENT' && n.getSharedPluginData('ds_contracts', 'contractId') === c.id)!;
+  const slot = comp.children![0];
+  assert.equal(slot.type, 'SLOT');
+  assert.equal(slot.width, 0.01, 'a 0.01 px seed, never exact zero');
+  const inst = comp.createInstance(); inst.resize(360, inst.height); inst.counterAxisSizingMode = 'FIXED'; inst.layoutSizingHorizontal = 'FIXED';
+  assert.equal(inst.width, 360);
+  const instSlot = inst.children[0]; instSlot.layoutSizingHorizontal = 'FILL';
+  assert.equal(instSlot.width, 360 - inst.paddingLeft - inst.paddingRight, 'the widened instance fills its slot');
+});
+
+test('a hug-width row root also seeds its empty content slot above exact zero (§D.175)', async () => {
+  // Measured: the Card's row CardFooter centred its Button in an inherited 0 px slot.
+  const c = seed();
+  c.anatomy.root.layout = { display: 'flex', direction: 'row', align: 'center' } as any;
+  c.anatomy.root.literals = { width: 'fit-content', height: 'fit-content' };
+  const { figma, root } = createFigmaMock(), context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (code: string) => vm.runInContext(`(async()=>{${code}\n})()`, context, { timeout: 20000 }) as Promise<any>;
+  await run(engine.buildTokensScript(null)); await run(engine.buildComponentScript(c, new Map([[c.id, c]])));
+  const comp = root.findOne((n: any) => n.type === 'COMPONENT' && n.getSharedPluginData('ds_contracts', 'contractId') === c.id)!;
+  assert.equal(comp.layoutMode, 'HORIZONTAL');
+  assert.equal(comp.children![0].width, 0.01);
+});

@@ -510,7 +510,10 @@ export function nativeContractComparisonRuntime(nested: boolean, gridContent: bo
     if (!slot || slot.type !== 'SLOT' || slot.parent !== inst) nativeRefuse('comparison-instance-width-slot');
     slot.counterAxisSizingMode = 'FIXED';
     slot.layoutSizingHorizontal = 'FILL';
-    if (slot.layoutSizingHorizontal !== 'FILL') nativeRefuse('comparison-instance-width-slot-refused');
+    // A main slot left at exact zero pins every instance's slot at 0 px, and
+    // no instance override changes it (live Card: content centred in a 0 px
+    // slot). Refuse by name rather than draw that; mains seed 0.01 px (D.175).
+    if (slot.layoutSizingHorizontal !== 'FILL' || !(slot.width > 0)) nativeRefuse('comparison-instance-width-slot-refused');
   }`);
   if (sourceOwned) script = script.replace(
     '  const slot = parts.get(nativeCanonical(c.slotSpecPath));',

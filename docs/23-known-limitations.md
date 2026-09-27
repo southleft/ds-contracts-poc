@@ -12303,3 +12303,49 @@ Tests: `source-reference/react-source-anatomy.test.ts` (fold and four refusals).
 Reverse by removing `foldedRuntimeDependencies` from `reactCompositionInstances`,
 `matchReactComposition` and `deriveReactOwnedChild`.
 
+## D.175 A main's empty content slot keeps a 0.01 px seed so instances can be widened
+
+**AGENT decision, 2026-09-27.** The first live composed Card, with all seven
+children now prepared (D.174), drew its content centred in a 0 px wide
+Children slot. The instance was 360 × 200, exact, but scored 12.605% on white
+and black, 10.087% of it outside the text boxes. The Card's main hugs its empty
+content, so the empty-frame repair left the main's slot exactly 0 px wide. The
+comparison then widened the instance to the caller's 360 px and set the slot
+to FILL.
+
+A Scratch probe (`Empty grid row probe / 2026-09-27`) measured the behaviour:
+
+| Main slot width | Instance widened to 360, then | Instance slot |
+| --- | --- | --- |
+| exactly 0 (FILL or HUG) | FILL | 0 px, x = 180 |
+| exactly 0 | FIXED → `resizeWithoutConstraints(360)` → FILL | 0 px |
+| exactly 0 | FIXED → `resize(360)` → FILL | 0 px |
+| exactly 0 | FIXED → `resizeWithoutConstraints(360)`, left FIXED | 0 px |
+| 1 px (FILL) | FILL | 360 px, x = 0 |
+| 0.01 px (FILL or HUG) | FILL | 360 px, x = 0 |
+
+An exact-zero width is inherited by every instance, and no instance override
+changes it. Root-content sizing now keeps an empty slot's width at 0.01 px
+when it would otherwise be exactly 0, restoring its HUG or FILL sizing. This
+applies to column and row roots alike. The first rebuild seeded only column
+roots: the Card's header, description and checkbox moved into place (10.159%),
+but the row CardFooter still centred its Button in an inherited 0 px slot. That
+seed draws nothing and lets every instance fill. D.170's empty grid carrier
+also seeds 0.01 px on its horizontal axis and keeps exact zero vertically:
+callers widen instances, and a vertical zero is measured to grow with content.
+
+A first attempt re-seated the instance's slot inside the comparison instead.
+The live run refused it by name with
+`comparison-instance-width-slot-refused`, which the guard added with it
+raises when a FILL slot is still 0 px. The probe then showed that no instance
+override can work, so that re-seat is removed and the guard stays. The mock
+now pins an instance slot at 0 px whenever its main's slot measures exactly 0.
+Previously the mock let the re-seat succeed where Figma does not.
+
+This code sits inside the root-content feature gate, so no committed generated
+script changes. The engine receipt is re-recorded.
+
+Tests: `core/figma-root-slot.test.ts` (a hug-width root seeds 0.01 px and its
+widened instance fills; against the previous writer the seed is 0),
+`core/native-contract-comparison.test.ts` (an inherited zero refuses by name).
+
