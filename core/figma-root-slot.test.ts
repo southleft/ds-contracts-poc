@@ -279,7 +279,7 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  if(intrinsic){
   // docs/23 §D.170: an empty intrinsic carrier keeps no seed pixel. CSS draws
   // empty explicit rows at 0 plus their gaps, and no implicit row at all.
-  assert.equal(nativeGrid.height,nativeGrid.gridRowGap*(nativeGrid.gridRowSizes.length-1),'empty carrier draws only its row gaps');
+  assert.equal(nativeGrid.height,(nativeGrid.gridRowGap as number)*((nativeGrid.gridRowSizes as unknown[]).length-1),'empty carrier draws only its row gaps');
   assert.equal(nativeSlot.height,nativeGrid.height);
   assert.equal(comp.height,comp.paddingTop+comp.paddingBottom+nativeGrid.height);
  }
