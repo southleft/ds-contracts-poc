@@ -80,9 +80,13 @@ jobs:
 
       # deploy-check.mjs REFUSES BY NAME when a local artifact is missing
       # rather than silently passing, so all three must be built first. These
-      # are exactly the three commands its own header prescribes.
+      # are exactly the three commands its own header prescribes, after
+      # prep:core: the playground's Vite config resolves @ds-contracts/core and
+      # @ds-contracts/schema from their built dist (every run from 2026-08-05
+      # failed "Failed to resolve entry for package @ds-contracts/core").
       - name: build the three deployed artifacts
         run: |
+          npm run prep:core
           npm run plugin:zip
           npm run build:playground
           npm run site:build
