@@ -104,15 +104,31 @@ export function disabledStateSelector(native: boolean, attribute: boolean): stri
  *  entry is unchanged (an attribute selector and a pseudo-class weigh the
  *  same; `:is()` takes its heaviest argument), so no rule's place in the
  *  cascade moves. */
-export function stateSelectorsFor(disabled: string): Record<string, string> {
-  if (disabled === STATE_SELECTORS.disabled) return STATE_SELECTORS;
+export function stateSelectorsFor(disabled: string, previews = false): Record<string, string> {
+  if (!previews) {
+    if (disabled === STATE_SELECTORS.disabled) return STATE_SELECTORS;
+    return {
+      hover: `:hover:not(${disabled})`,
+      active: `:active:not(${disabled})`,
+      'focus-visible': ':focus-visible',
+      disabled,
+    };
+  }
+  // docs/23 §D.164 — bindings.code.statePreviews: each previewable state also
+  // matches the preview attribute. `:is()` takes its heaviest argument and a
+  // pseudo-class weighs the same as an attribute selector, so every rule keeps
+  // its specificity and its place in the cascade.
+  const either = (pseudo: string, state: string) => `:is(${pseudo}, [${STATE_PREVIEW_ATTRIBUTE}="${state}"])`;
   return {
-    hover: `:hover:not(${disabled})`,
-    active: `:active:not(${disabled})`,
-    'focus-visible': ':focus-visible',
+    hover: `${either(':hover', 'hover')}:not(${disabled})`,
+    active: `${either(':active', 'active')}:not(${disabled})`,
+    'focus-visible': either(':focus-visible', 'focus-visible'),
     disabled,
   };
 }
+
+/** docs/23 §D.164 — the root attribute a `statePreview` input renders. */
+export const STATE_PREVIEW_ATTRIBUTE = 'data-state-preview';
 
 /** v13 (P18 second half): the channels a NON-root part's `states` may carry —
  *  color-kind only, bounded by the field evidence (the CBDS disabled label

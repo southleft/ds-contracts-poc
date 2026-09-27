@@ -92,7 +92,8 @@
       "anchors": {
         "importPath": "src/components/Link",
         "export": "Link"
-      }
+      },
+      "statePreviews": true
     }
   }
 }

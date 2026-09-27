@@ -71,6 +71,7 @@ import {
   baseTwinName,
   sortByDependencies,
   walkAnatomy,
+  type ComponentRef,
   type Contract,
   type Part,
   type Prop,
@@ -3987,6 +3988,8 @@ function mapDepProps(
    *  to the instance spec's channelMiss footnote — never a silent drop. */
   ledger?: CodeOnlyFactSeed[],
   parent?: Contract,
+  /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
+  statePreview?: ComponentRef['statePreview'],
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4093,11 +4096,22 @@ function mapDepProps(
   // selection is made only where the wired axes sit on those pins; anywhere
   // else the state is undrawn and is ledgered BY NAME instead of silently
   // rendering rest ink (live 2026-09-25: CBDS Checkbox disabled cells).
+  // docs/23 §D.164: a forced pseudo-class state (component.statePreview) is
+  // the same selection — one more active state, resolved for this combo.
+  const forced = typeof statePreview === 'string' ? statePreview : statePreview?.map[subst[statePreview.prop] ?? ''];
+  if (forced !== undefined && (!dep.bindings?.figma?.statePreviews || standalone)) {
+    ledger?.push({
+      channel: `${dep.name} state "${forced}"`,
+      value: 'statePreview',
+      reason: `not drawn — ${dep.id} draws no State previews on the canvas, so this instance renders the base variant's ink`,
+    });
+  }
   if (dep.bindings?.figma?.statePreviews && !standalone) {
     const active = dep.states.filter((s) => {
       const p = dep.props.find((q) => q.name === s && q.type === 'boolean' && q.bindings.figma.kind === 'BOOLEAN');
       return p !== undefined && out[p.bindings.figma.property!] === true;
     });
+    if (forced !== undefined && !active.includes(forced)) active.push(forced);
     if (active.length > 0) {
       const axes = dep.props.filter((p) => isEnum(p) || isVariantBool(p));
       const substProps = statePreviewSubstProps(dep);
@@ -5047,7 +5061,7 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
+      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract, part.component.statePreview) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
     const placement = resolveComponentPlacement(part, subst);

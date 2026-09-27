@@ -379,7 +379,10 @@ test('emitted React: the states plane renders as the platform\'s own pseudo-clas
   assert.equal(contract.semantics.element, 'button', 'an interaction-state axis is the structural evidence of an interactive element');
   const inventory = tokenInventoryFromJson([result.mintedTokens!.tree]);
   const { tsx, css } = emitReact(contract, { tokens: inventory, icons: new Map(), contracts: new Map([[contract.id, contract]]) });
-  for (const selector of ['.tone-a:hover:not(:disabled)', '.tone-b:hover:not(:disabled)', '.tone-a:active:not(:disabled)', '.tone-a:focus-visible', '.root:disabled'])
+  // docs/23 §D.164: a drawn state axis also opts in to code state previews —
+  // the same pseudo-classes, each also matching the preview attribute.
+  const hover = ':is(:hover, [data-state-preview="hover"])', active = ':is(:active, [data-state-preview="active"])', focus = ':is(:focus-visible, [data-state-preview="focus-visible"])';
+  for (const selector of [`.tone-a${hover}:not(:disabled)`, `.tone-b${hover}:not(:disabled)`, `.tone-a${active}:not(:disabled)`, `.tone-a${focus}`, '.root:disabled'])
     assert.ok(css.includes(`${selector} {`), `${selector} in\n${css}`);
   assert.ok(!/\bstate\b\??:/.test(tsx), 'no state prop in the component API');
   assert.match(tsx, /disabled\?: boolean/);
@@ -391,7 +394,8 @@ test('emitted React on a root that is NOT a native control (docs/23 §D.45): the
   const contract = ContractSchema.parse({ ...result.contract, semantics: { ...(result.contract as Contract).semantics, element: 'div' } });
   const inventory = tokenInventoryFromJson([result.mintedTokens!.tree]);
   const { tsx, css } = emitReact(contract, { tokens: inventory, icons: new Map(), contracts: new Map([[contract.id, contract]]) });
-  for (const selector of ['.tone-a:hover:not([data-disabled])', '.tone-b:hover:not([data-disabled])', '.tone-a:active:not([data-disabled])', '.tone-a:focus-visible', '.root[data-disabled]'])
+  const hover = ':is(:hover, [data-state-preview="hover"])', active = ':is(:active, [data-state-preview="active"])', focus = ':is(:focus-visible, [data-state-preview="focus-visible"])';
+  for (const selector of [`.tone-a${hover}:not([data-disabled])`, `.tone-b${hover}:not([data-disabled])`, `.tone-a${active}:not([data-disabled])`, `.tone-a${focus}`, '.root[data-disabled]'])
     assert.ok(css.includes(`${selector} {`), `${selector} in\n${css}`);
   assert.doesNotMatch(css, /:disabled/, 'no :disabled selector, which can never match a div');
   assert.match(tsx, /data-disabled=\{disabled \|\| undefined\}/, 'the attribute the selector names');
