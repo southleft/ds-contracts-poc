@@ -50,6 +50,7 @@ import {
   tokenInventoryFromJson,
   type TokenTreeInput,
 } from "../../core/tokens.js";
+import { withoutStatePreviewAlternatives } from "./state-preview-selectors.js";
 
 const ROOT = process.cwd();
 const read = (p: string) =>
@@ -350,7 +351,7 @@ let reactCss = "";
 try {
   const emitted = emitReact(contract, { tokens: inventory, icons, contracts });
   tsx = emitted.tsx;
-  reactCss = emitted.css;
+  reactCss = withoutStatePreviewAlternatives(emitted.css);
 } catch (e) {
   check(
     `emitReact green with the stub in scope — ${String(e).split("\n")[0]}`,
@@ -392,7 +393,7 @@ let htmlCss = "";
 try {
   const emitted = emitHtml(contract, { tokens: inventory, icons, contracts });
   html = emitted.html;
-  htmlCss = emitted.css;
+  htmlCss = withoutStatePreviewAlternatives(emitted.css);
 } catch (e) {
   check(
     `emitHtml green with the stub in scope — ${String(e).split("\n")[0]}`,
