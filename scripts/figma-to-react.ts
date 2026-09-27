@@ -40,7 +40,21 @@ function installSessionStorage() {
   };
 }
 
-export async function figmaToReact(dumpPath: string, outDir: string, expectRequest?: string) {
+/** A Figma URL through the app's own URL import (closure on), token from the
+ *  environment only. The mapped dump is kept beside the output. */
+export async function dumpFromFigmaUrl(url: string, outDir: string) {
+  const token = process.env.FIGMA_TOKEN;
+  if (!token) throw Error('figma-to-react-token-missing: set FIGMA_TOKEN (a Figma personal access token with file read access); it is read from the environment only');
+  const { importFigmaUrl } = await import('../playground/src/engine/figma-url-import.js');
+  const refusals: string[] = [];
+  const { dump } = await importFigmaUrl(url, token, { onVariablesUnavailable: (info: { message: string }) => { refusals.push(info.message); } });
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(path.join(outDir, 'dump.json'), JSON.stringify(dump, null, 2) + '\n');
+  return { dump, refusals };
+}
+
+export async function figmaToReact(dumpPath: string, outDir: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
+  options: { packageName?: string } = {}) {
   const dump = JSON.parse(readFileSync(dumpPath, 'utf8'));
   installSessionStorage();
   const server = await createServer({
@@ -48,7 +62,7 @@ export async function figmaToReact(dumpPath: string, outDir: string, expectReque
     root: path.join(repoRoot, 'playground'),
     logLevel: 'error',
     appType: 'custom',
-    server: { middlewareMode: true, hmr: false, watch: null, fs: { allow: [repoRoot] } },
+    server: { middlewareMode: true, hmr: false, ws: false, watch: null, fs: { allow: [repoRoot] } },
     resolve: {
       alias: {
         '@ds-contracts/core': path.join(repoRoot, 'packages', 'core', 'src', 'index.ts'),
@@ -60,7 +74,7 @@ export async function figmaToReact(dumpPath: string, outDir: string, expectReque
   let imported;
   try {
     const engine = await server.ssrLoadModule('/src/engine/headless-figma-to-react.ts');
-    imported = engine.figmaDumpToLibraryRequest(dump);
+    imported = engine.figmaDumpToLibraryRequest(dump, source);
   } finally {
     await server.close();
   }
@@ -75,7 +89,7 @@ export async function figmaToReact(dumpPath: string, outDir: string, expectReque
     }
   }
   const input = parseLibraryRequest(imported.request);
-  const library = await buildReactLibrary(repoRoot, input, path.join(outDir, 'work'));
+  const library = await buildReactLibrary(repoRoot, input, path.join(outDir, 'work'), options);
   const generatedDir = path.join(path.dirname(library.tarball), 'generated');
   if (!existsSync(generatedDir)) throw Error('figma-to-react-generated-missing: ' + generatedDir);
   const tarball = path.join(outDir, path.basename(library.tarball));
@@ -88,12 +102,24 @@ export async function figmaToReact(dumpPath: string, outDir: string, expectReque
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const dump = flag('--dump'), out = flag('--out');
-  if (!dump || !out) {
-    console.error('usage: npm run figma:to-react -- --dump <dump.json> --out <dir> [--expect-request <input.json>]');
+  const dump = flag('--dump'), url = flag('--url'), out = flag('--out');
+  if ((!dump && !url) || (dump && url) || !out) {
+    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>]\n'
+      + '  --url reads FIGMA_TOKEN from the environment (never from the command line).');
     process.exit(2);
   }
-  figmaToReact(dump, out, flag('--expect-request')).then(r => {
-    console.log(`✔ figma:to-react ${r.setName} → ${r.tarball} (sha256 ${r.tarballSha256.slice(0, 12)})`);
+  (async () => {
+    let dumpPath = dump!, source: 'json' | 'figma' = 'json';
+    if (url) {
+      const fetched = await dumpFromFigmaUrl(url, out);
+      for (const r of fetched.refusals) console.error('variables: ' + r);
+      dumpPath = path.join(out, 'dump.json'); source = 'figma';
+    }
+    const name = flag('--name');
+    return figmaToReact(dumpPath, out, flag('--expect-request'), source, name ? { packageName: name } : {});
+  })().then(r => {
+    console.log(`✔ figma:to-react ${r.setName} → ${path.join(out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
+    if (r.skipped.length) console.log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
+    console.log(`  install: npm install ${path.resolve(out, r.tarball)}`);
   }).catch(e => { console.error('✖ ' + (e instanceof Error ? e.message : String(e))); process.exit(1); });
 }

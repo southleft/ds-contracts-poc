@@ -39,7 +39,9 @@ export interface HeadlessImportResult {
   notes: string[];
 }
 
-export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump']): HeadlessImportResult {
+/** `source` is the workspace origin the page records: 'json' for a pasted or
+ *  uploaded dump (the JSON tab), 'figma' for a Figma URL import. */
+export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump'], source: 'json' | 'figma' = 'json'): HeadlessImportResult {
   const batch = proposalsFromDump(dump);
   if (batch.proposals.length === 0) {
     throw Error(batch.skipped.length > 0
@@ -47,10 +49,10 @@ export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump']): Head
         + batch.skipped.map(s => `${s.setName}: ${s.reason}`).join('; ')
       : 'figma-to-react-no-component-set: no component set found in the dump');
   }
-  const receipts = () => ({ source: 'Figma JSON import', groups: [] });
+  const receipts = () => ({ source: source === 'json' ? 'Figma JSON import' : 'Figma REST import', groups: [] });
   const captured = capturedTokensFromDump(dump as Record<string, unknown>);
   const closure = dumpClosure(dump);
-  const family = closure ? recordFigmaClosure(batch, closure, receipts, captured, 'json') : undefined;
+  const family = closure ? recordFigmaClosure(batch, closure, receipts, captured, source) : undefined;
   const proposal: FigmaProposal = family?.proposal ?? batch.proposals[0];
 
   // applyProposal, engine half: the minted and captured layers register before
@@ -63,7 +65,7 @@ export function figmaDumpToLibraryRequest(dump: FigmaImportResult['dump']): Head
     recordImport({
       name: proposal.setName,
       contractId: String((proposal.contract as { id?: unknown }).id ?? ''),
-      source: 'json',
+      source,
       contractText,
       receipts: receipts(),
       ...(proposal.mintedTokens && proposal.mintedTokens.count > 0 ? { mintedTokens: proposal.mintedTokens } : {}),

@@ -10,7 +10,7 @@ export { parseLibraryRequest } from './react-library-input.js';
 
 
 export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>,
-  parent = path.join(repoRoot, 'private', 'react-library-downloads')) {
+  parent = path.join(repoRoot, 'private', 'react-library-downloads'), options: { packageName?: string } = {}) {
   mkdirSync(parent, { recursive: true });
   const work = mkdtempSync(path.join(parent, 'library-'));
   const inputs = path.join(work, 'inputs'), generated = path.join(work, 'generated'), iconsDir = path.join(inputs, 'icons');
@@ -28,7 +28,7 @@ export async function buildReactLibrary(repoRoot: string, input: ReturnType<type
   const result = await generateComponents({ contractFiles, tokenFiles, iconsDir, outDir: generated, stories: false, regenerateHint: 'Export this family again from the local Contract Playground.' });
   if (result.refused.length || result.generated.length !== input.contracts.length) throw Error('react-library-generation-refused: ' + result.refused.flatMap(r => r.violations).join('; '));
   if (result.tokensCss.danglingAliases.length) throw Error('react-library-token-alias-missing: ' + result.tokensCss.danglingAliases.join(', '));
-  const library = await packageReactLibrary(generated, input.root.name, work, repoRoot);
+  const library = await packageReactLibrary(generated, input.root.name, work, repoRoot, options);
   writeFileSync(path.join(work, 'receipt.json'), JSON.stringify({ rootId: input.root.id, contracts: input.contracts.map(c => ({ id: c.id, name: c.name })), generated: result.generated, requiredFacts: result.requiredFacts, tarballSha256: library.tarballSha256 }, null, 2), { flag: 'wx' });
   return { ...library, bytes: readFileSync(library.tarball), filename: path.basename(library.tarball) };
 }
