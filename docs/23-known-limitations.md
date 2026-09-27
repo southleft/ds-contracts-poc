@@ -11771,3 +11771,399 @@ readback with the rule gives `supported-structure-observed` with 0 problems
 (`private/direct-state-ink-v255/native-v1/readback-v2.json`). Reverse by
 restoring `numeric(a.x,b.x*sx)` / `numeric(a.y,b.y*sy)` in
 `core/native-source-observation.ts` and removing `scaledOrigin` and its test.
+
+## D.164 A parent-selected child interaction state reaches the child's code-side preview input
+
+**AGENT decision, 2026-09-26.** CBDS Checkbox draws `state=hover` and
+`state=focus` as wrapper variants that select the nested Checkbox-icon's Hover
+and Focus cells. The icon's designer State axis is projected (D.41), so its
+hover and focus run as pseudo-classes, and a pseudo-class has no input a
+caller can set. The wrapper's `state="hover"` therefore rendered rest ink in
+React (`state-forward-pseudo-class-unrepresentable`, D.156), and the consumer
+check named it `variant-prop-discarded:state`, the one non-text failure on the
+benchmark's CBDS Checkbox cell.
+
+The rule is the code twin of canvas state previews, and it is generic:
+
+- A contract whose states were drawn as selectable cells (a promoted state
+  axis that is not a preview axis this pipeline declared) gets
+  `bindings.code.statePreviews: true`. Its generated component takes a
+  `statePreview` input (`hover`, `active` or `focus-visible`, from its declared
+  states) rendered as `data-state-preview`. Every state rule in its module
+  sheet matches either the pseudo-class or that attribute inside `:is()`, so
+  no rule changes specificity and the live states still run.
+- A host that draws its child in one of those cells carries
+  `component.statePreview`: a literal when every occurrence agrees, otherwise a
+  per-value lookup of the one parent enum axis it is a pure function of
+  (checked over every occurrence and the whole axis domain, through the sparse
+  fence). An unmapped value forces nothing. Anything else is named
+  (`state-preview-forward-incomplete`, `state-preview-undeclared`).
+- React CSS Modules and the static HTML preview render it. The canvas selects
+  the child's `State` preview through the D.162 path (and names it where the
+  child draws none). Inline React omits it with the pseudo-class state tokens
+  it already omits, and says so. Web Components refuse
+  `component.statePreview` by name (`WEB_COMPONENT_STATE_PREVIEW_UNSUPPORTED`).
+- Validation refuses a forced state on a child that has not opted in, a state
+  the child does not declare, a map over a non-enum or an unknown value, a root
+  or repeated ref, and an opt-in on a multi-root contract, without a
+  previewable state, or colliding with a `statePreview` code prop.
+
+Contracts without either field emit byte-identical output; no committed
+generated file changed. Measured on the benchmark's frozen CBDS input with
+the unchanged consumer check (hashed Inter, 5% limit): Checkbox's
+`variant-prop-discarded:state` is gone and its four hover cells now render the
+drawn hover glyph; their remaining overage is inside text boxes only (0%
+outside the text mask, 0% on black), the same label residual as the rest
+cells. CheckboxIcon re-measured identically (same 42 scores, same problems).
+The four focus cells stay out of V1 scope (keyboard focus is V1.1): forcing
+`focus-visible` now draws the ring, which changes their content size and does
+not yet match Figma's ring geometry. Tests: `core/code-state-preview.test.ts`;
+the two designer-axis selector expectations in
+`extract/figma/state-axis.test.ts` now spell the preview alternative. Reverse
+by deleting `core/react-state-preview.ts`, the `statePreview` /
+`bindings.code.statePreviews` schema fields and their readers, and
+`forcedStatePreview` in `core/propose-figma.ts`.
+
+## D.165 An operation's authentication may not re-enter its own snapshot
+
+**AGENT decision, 2026-09-27.** On the live app the shadcn Switch's
+native-state-api request refused (`state-api-native-observation-required`) while
+a GET of the same state-API record, seconds later in the same process,
+returned it complete. A diagnosis on copied private records found that the
+inspection anchor, and with it the state-API key, flipped between calls:
+
+- Selecting the inspection source for a case listed every native operation of
+  the reference (`react-reference.ts`, authored branch) and authenticated each
+  one before filtering.
+- Authenticating an existing state-API draft reads its state-API evidence,
+  which selects the inspection source again. The loop recursed until
+  "Maximum call stack size exceeded".
+- `get()` caught every exception as a stale source, so whichever operation was
+  mid-authentication when the stack ran out read as not current. Which roots
+  survived depended on stack headroom, so the anchor, the first current root,
+  changed between identical requests.
+- The benchmark replay passed because its `private/` starts empty: no
+  state-API draft exists until its last step.
+
+Rules:
+
+- The authored listing filters by operation header before authenticating
+  (`listReact(referenceId, 'authored')`), so selecting a source never
+  authenticates a state-API draft.
+- `get()` refuses a re-entrant authentication by name
+  (`native-operation-authentication-reentrant`) and never reads a stack
+  overflow (`RangeError`) as a stale source; it propagates.
+- The benchmark replay now repeats each state-API request after another root
+  of the reference is prepared, and fails the cell if the repeat refuses or
+  creates another operation.
+
+Measured through the app on the live private state: after re-observing the
+Switch, native-state-api created one operation (`5cfe5ac0`) whose plan equals
+the benchmark pin, and a repeat returned the same operation (77 operations
+before and after). Three listings read it as current. Sync Runner created it
+in Evaluations and the independent readback returned
+`component-structure-observed` with 0 problems. Its image score is not
+recorded: the Switch root is 32 × 18.390625 px, and the committed
+source-native instrument refuses a fractional root box by design. Scoring it
+needs an owner-approved framing rule for fractional boxes, which this change
+does not make. The callback observation of this case ends
+`callback-observation-incomplete` both live and in a replay from an empty
+`private/` (re-measured 2026-09-27 after re-observing the initial states): the
+probe `asChild: true` renders no control without a child
+(`react-ownership-selected-root-missing`) and `hidden: true` cannot take focus
+(`callback-focus-mismatch`). The state-API chain does not depend on it and
+completes. Excluding values that remove or hide the observed control from the
+callback domain remains open.
+
+Tests: `source-reference/native-operation-jobs.test.ts` (re-entry refused by
+name, overflow propagates; both fail against the previous `get()`),
+`scripts/react-native-replay.test.ts` (a repeat that refuses or adds an
+operation fails the cell). Reverse by restoring the unfiltered listing and the
+catch-all in `get()`, and removing the repeat step.
+
+## D.166 A REST two-decimal grid track is a fractional fixed track or an empty hug
+
+**AGENT decision, 2026-09-27.** Importing the natively created shadcn Alert by
+Figma URL refused with `grid-flow-rows-readback-mismatch`. Its root content grid
+records the recipe `autoRows: HUG`, but REST reported the row as `' 1.00px'`,
+which the mapper read as a fixed 1 px track. A probe in Scratch
+(`REST grid track probe / 2026-09-27`; REST responses in
+`private/v1-scoreboard/rest-grid-probe/`) measured Figma's track spelling, which
+REST returns byte-for-byte from the plugin's `gridRowSizingCSS`:
+
+| Drawn row | REST `gridRowsSizing` |
+| --- | --- |
+| FIXED 36 | `36px` |
+| FIXED 12.5, 14.25, 7.1 | `12.50px`, `14.25px`, `7.10px` |
+| HUG with an item | `fit-content(100%)` |
+| HUG without an item | its resolved size: `50.00px`, `14.00px`, `1.00px` |
+| HUG without an item in a fixed-height frame | `minmax(0,1fr)` |
+
+An integer fixed track never prints decimals, but a fractional fixed track and
+an unoccupied HUG track print the same two-decimal spelling. The REST mapper
+now marks such tracks `resolved`, deciding nothing. Recipe readback accepts a
+recorded HUG row against a resolved observation only where no drawn item can
+occupy it: a root content grid's carrier, which `readRootContent` already
+requires to be empty, or rows past the drawn items. Every other comparison is
+unchanged, and an empty HUG spelled `minmax(0,1fr)` still refuses. Without a
+recipe, a designer grid's resolved tracks are carried as fixed px as before,
+but now with the note `grid-track-resolved-size-ambiguous` instead of silently.
+
+The native Alert's root set now returns to React by URL. The consumer check
+also mounts cases through the component's declared API: code props and
+`bindings.code.values`, where the canonical `null` becomes JS `null`. Before,
+it crashed with `CODE_VALUE_UNSUPPORTED`. The returned root is not yet scored.
+Its contract declares a fill-width root (`width: 100%`), and the harness mounts
+every case at `fit-content`, so React draws 34 × 26 px against Figma's
+100 × 27 px preview. Rendering at the preview width would change the
+measurement environment, so it is left to the owner. The composed return (the
+root with its caller title and description) is not read by the Send tab, which
+reads component sets. Tests: `core/grid-flow-rows.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by removing the `resolved`
+mark in `extract/figma/rest/map.ts`, the `drawn` parameter of
+`readGridFlowRows`, and `mountProps`.
+
+## D.167 Owner framing decisions: snapped fractional boxes, effect extents, preview width
+
+**OWNER decisions, 2026-09-27** (asked, not inferred). Three measurement
+situations had no rule, so their cells could never be scored under the
+unchanged 5% limit:
+
+1. **Fractional root boxes are snapped outward.** The React → Figma comparison
+   (`scripts/benchmark-source-native-compare.ts`) crops the source to the
+   smallest whole-pixel box that contains a fractional root box, instead of
+   refusing it.
+2. **Effects past the root box are included.** When the source paints outside
+   its root box, or Figma's render bounds exceed its layout box (shadows,
+   outlines), the source crop grows to cover all paint. Figma is then exported
+   with its render bounds, and the two are placed with their snapped root
+   origins together.
+3. **Full-width roots get Figma's preview width.** The consumer check
+   (`scripts/design-consumer-check.ts`) mounts a case in a container as wide
+   as that variant's Figma frame. It keeps that width only where the root then
+   fills exactly that width and did not at `fit-content`; every other root
+   stays at `fit-content`.
+
+Each rule is recorded in the receipt: `sourceFraming` and `nativeFraming` in
+the comparison, `consumer.containerFraming` in the consumer receipt. The
+scorer, the diff and the 5% limit are unchanged. An integer, effect-free pair
+takes the previous path: the shadcn Alert default re-scores to exactly its
+committed 3.068% / 3.105%. The effects path composites with `alignAtOffsets`
+(`scripts/benchmark-source-framing.ts`), a copy of the recorded aligner's
+compositing; `scripts/design-consumer-framing.ts` itself is unchanged, because
+recorded matched-capture evidence pins its bytes as an instrument.
+
+Results:
+- The live shadcn Switch operation `5cfe5ac0` (plan equal to the pin) scores
+  **0.000% on white and 2.174% on black** at the exact 32 × 18.39 px size,
+  over a 34 × 21 source crop that includes its box-shadow halo and a 36 × 23
+  render-bounds export. The Switch cell is **Pass**.
+- The native Alert's return to React (D.166) passes 3 of 4 variants at its
+  100 px preview width (0% white, 4.037% black). Variant `null` fails at 7.44%
+  on black: Figma draws its empty content row 1 px tall and CSS draws it 0 px
+  (26 versus 27 px). That cell is gated as a named known failure. Fixed in
+  D.170.
+- The shadcn Badges can now be framed, but their live creation must first pass
+  readback (the earlier refusal was 43.875 versus 44 px text width). Measured
+  in D.168.
+
+Tests: `scripts/benchmark-source-framing.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by restoring the integer-box
+refusal and the layout-bounds-only export in the comparison, and the
+`fit-content`-only container in the consumer check.
+
+## D.168 React → Figma text-only residuals are partials, attributed by measurement
+
+**AGENT decision, 2026-09-27, applying the owner rule of 2026-09-25**
+("text residual reported separately": a text-only overage is a partial, never
+a pass). Until now that rule existed only on the Figma → React side. A React →
+Figma cell over the limit, or with any size difference, was red whatever the
+cause.
+
+The comparison (`scripts/benchmark-source-native-compare.ts`) now takes an
+optional `textRects` in the source receipt: where the React render drew text,
+in CSS px from the root's layout box, by the same text-node walk the consumer
+check makes. With it:
+
+1. A score over the limit also gets the consumer check's second number. That
+   is the same diff with the text boxes painted out on both sides, classified
+   by the same `residualClass`. The verdict diff itself is computed exactly as
+   before.
+2. A root size difference is attributed to text only by measurement. One more
+   read-only REST GET reads the native text boxes. The difference counts as
+   text only when, on every axis where the roots differ, it equals the
+   difference between the two texts' extents (`sizeDifferenceFromText` in
+   `scripts/benchmark-source-framing.ts`).
+
+`attachReact` records `residual: "text-only"` only on a failing comparison in
+which every over-limit score is text-only and any size difference is the
+text's own. `judgeReact` reports such a cell as **partial**. `pass` stays
+false, and any other failure stays red.
+
+Measured through the application in Evaluations. Each case is a root draft
+whose plan equals its pin, plus a content comparison that places the caller's
+"New" label:
+- **shadcn Badge (default)**: root op `27002409`, comparison `541a5134`,
+  instance `253:5776`. It scores **6.250% on white and black**, with 0.000%
+  outside the text boxes (the mask covers 77% of the 44 × 20 badge). Figma
+  sets Inter Medium "New" 26 × 16, the browser sets Inter Variable 25.875 × 15,
+  so the roots are 44 and 43.875 px wide.
+- **shadcn Badge (secondary)**: root op `086ac2df`, comparison `24eca86f`,
+  instance `253:5903`. It scores **2.614% on white and black**, within the
+  limit, and the size difference is the same measured 0.125 px of label
+  advance.
+
+Both cells are **Partial (text only)**. The residual is the font substrate:
+Figma's Inter and the web's Inter Variable advance the same glyphs
+differently. No conversion rule can remove that difference.
+
+Tests: `scripts/react-native-replay.test.ts` (partial versus red cases),
+`scripts/benchmark-source-framing.test.ts` (attribution). Reverse by dropping
+`residual` from `attachReact` and the text diagnostics from the comparison.
+
+## D.169 An inspection reads as complete only once its evidence is sealed
+
+A replay run in CI named `react-composition-content-unavailable` for the
+shadcn Card. The next run of the same commit passed. The content inspection
+job set `phase = 'complete'` and then awaited `browser.close()` before it
+wrote `report.json`. A listing read inside that window saw a complete
+inspection whose evidence was not on disk yet, and reported a composition
+problem. The callback, initial-state and state-API inspection jobs had the
+same order.
+
+All four jobs now record success in a local flag and set `complete` after the
+browser closes. Nothing is awaited between that assignment and the saved
+report, so no reader can interleave. Failed inspections are unchanged.
+
+Test: `source-reference/react-content-inspection.test.ts` watches the job and
+fails if it ever reads as complete before `report.json` exists. Against the
+previous order it fails.
+
+## D.170 An empty root content grid keeps no seed pixel
+
+**AGENT decision, 2026-09-27.** The native shadcn Alert root drew 27 px where
+React draws 26 px, so its return to React failed at 7.44% on black (D.167). The
+extra pixel was the root content carrier, the "Content layout" GRID frame
+inside the Children slot. The writer seeds it with `resize(1, 1)` below
+Figma's 100 px birth box. Figma does not re-measure a childless frame, so an
+unoccupied HUG row kept that 1 px. CSS draws an empty grid with no implicit
+row at 0 px.
+
+The empty-frame repair already dissolves such seeds with a FIXED round-trip
+through `resizeWithoutConstraints`, but it excluded GRID frames on the theory
+that a resize reverts HUG tracks to FLEX (G8/GP4b). A Scratch probe
+(`Empty grid row probe / 2026-09-27`) measured:
+
+| Sequence on an empty grid | Tracks after | Extent |
+| --- | --- | --- |
+| Birth, HUG row (also FLEX row, zero rows refused) | unchanged | 100 px kept; two rows read `50.00px 50.00px` |
+| FIXED → `resizeWithoutConstraints(w, 0)` → HUG, rows and columns HUG | HUG kept | exactly 0 (`0.00px`) |
+| The same, then one 20 × 14 child | HUG kept | 14 px row, `fit-content(100%)` |
+| GP4b: `resize()` on the hugged axis | FLEX, sizing FIXED | reverted |
+
+GP4b is specific to `resize()` on an axis that is already hugging. The
+root-content sizing step now applies the round-trip to an empty carrier's
+HUG axes only; a FILL axis is never zeroed (a FILL assigned after an exact
+zero keeps it, D.161). The code sits inside the root-grid-content feature
+gate, so no committed generated script changes. The engine receipt is
+re-recorded. The import accepts the resolved `0.00px` as an unoccupied HUG
+row, with the same occupancy fence as D.166. The mock now keeps an empty
+grid's seed extent on a hugged axis, as it already did for an empty flex
+container.
+
+Measured through the application in Evaluations. Root op `bbbf2381` has a plan
+equal to the pin, and all four Alert mains are 100 × 26 with 66 × 0 carriers.
+The REST capture of that set (`253:5947`) returns to a clean React consumer at
+**4/4 within 5%**: 0.000% white and at most 0.692% black, with exact sizes. The
+shadcn Alert (native return) cell is now expected to pass. The with-content
+comparison on the same root is unchanged. Comparison `16ec1523` with children
+`c6d5be94` and `a3e6aa9d` scores 3.068% / 3.105% at exact 360 × 68, the same as
+before.
+
+Tests: `core/figma-root-slot.test.ts` (the empty intrinsic carrier draws only
+its row gaps; against the previous writer it measures 1 px),
+`core/grid-flow-rows.test.ts` (resolved zero). Reverse by removing the
+empty-carrier round-trip in `sizeRootContent` and the `>= 0` in
+`readGridFlowRows`.
+
+## D.171 The native shadcn Badge returns to React from a plugin capture
+
+**AGENT decision, 2026-09-27.** The independent family's Badge had no Figma →
+React measurement. A REST capture of its native root set (`253:5754`, operation
+`27002409`) refuses with `FIGMA_SLOT_TEXT_TEMPLATE_CAPTURE_UNQUALIFIED`: the
+label slot is a text template, and the proposal requires a complete capture,
+including the variables that REST cannot read with this token. The Send tab's
+own capture is `extract/figma/dump.plugin.js`. Run unmodified from the Sync
+Runner's Advanced tab, with only that set selected, it reads the set with its
+variables and reports no degradations (dump v1.47). The script performs no
+writes.
+
+The headless app path (`scripts/figma-to-react.ts`) prepares the React library
+from that capture. A clean consumer measures exact 18 × 20 roots in all seven
+variants. Default, destructive and secondary match at 0.000%; outline matches
+at 0.000% white and 3.611% black. The null, link and ghost variants refuse with
+`comparison-has-no-paint`: without a caller label, their transparent pill draws
+nothing on either side, so the scorer has no pixels to compare. Those three
+variants are declared out of scope in the new cell
+`shadcn-badge-return.figma-to-react`, with that reason. The cell is **Pass**,
+4/4 in scope.
+
+This measures the Badge's root without its label. The labelled comparison
+exists only as an instance frame, which the Send tab does not read (D.166).
+Reverse by removing the cell.
+
+## D.172 A wrapper and the dependency it renders share one source identity
+
+**AGENT decision, 2026-09-27.** Re-running the D.73 opacity cycle on the gated
+Switch operation (`5cfe5ac0`) on the current runtime refused at
+`adopt-source` with `react-source-succession-identity-unavailable`. Source
+identity required exactly one component to own the root element. Ownership
+now also traces the dependencies a component renders, and the shadcn `Switch`
+and Radix's `Switch.Root`, its child, both own that element. Every update to a
+wrapper component like this was blocked, whatever the edit.
+
+The identity is now the one outermost root owner (`outermostRootOwners`, the
+rule the callback inspection already uses). A single owner resolves exactly as
+before. Two unrelated owners still refuse.
+
+Measured through the application in Evaluations, all on the current runtime:
+1. **Forward.** `data-disabled:opacity-50` became `40` in the family
+   workspace, with a deterministic stylesheet rebuild (one added rule) and the
+   declared witness hashes and expectation. Fresh initial-state and state-API
+   experiments completed, the operation adopted the new source, and the plan
+   proposed three disabled roots and one owned variable, 0.5 → 0.4. Preflight,
+   one guarded write and an independent readback left all four at exactly
+   `Math.fround(0.4)`. A repeat review wrote no file.
+2. **Conflict and retry.** The workspace files were restored byte-for-byte
+   (reference `77c5af2d` again) and the source was adopted again, proposing
+   0.4 → 0.5 on the same objects. A bounded native edit then set one root to
+   0.45. Preflight refused with `native-update-opacity-conflict:251:5641` and
+   issued no write; the edit read back untouched. After the edit was restored,
+   **Inspect update again** re-ran preflight, wrote once and read back all four
+   values at 0.5. A repeat review wrote no file.
+3. **Restoration.** In the decoded readback images, exactly the three disabled
+   variants differ in the 0.4 state, and all nine are pixel-identical to the
+   operation's creation readback after the reverse.
+
+4. **Native → source.** A designer edit set the three disabled roots to 0.4 on
+   the canvas. **Read design changes from the canvas** named exactly those
+   three opacity changes, read-only. The source-repair preview then refused
+   with `react-initial-native-observation-unavailable`: repair compiles an
+   initial-state operation's draft, and this is a state-API operation. The
+   app was also started without the host CSS recipe (the
+   `DS_CONTRACTS_REACT_SOURCE_CSS_*` variables) that a Tailwind workspace
+   needs. After the edit was restored, a new design read reported 0 changes.
+   Native → source for this row stays open. It needs source repair for
+   state-API operations; D.108 measured it only for an initial-state operation.
+
+The Switch callback experiment still reports `callback-observation-incomplete`
+on both source revisions, as it has on every run since 2026-09-26. The update
+follows the state-API experiment, which completes. This cycle qualifies a
+bounded source → native opacity update with conflict refusal, retry, repeat
+and rollback, plus a read-only design read in the other direction. It does
+not qualify native → source edits for this row.
+
+Test: `source-reference/native-source-identity.test.ts` (a wrapper with a
+primitive at its root keeps the wrapper's identity; against the previous rule
+it refuses). Reverse by restoring the single-owner filter.
+

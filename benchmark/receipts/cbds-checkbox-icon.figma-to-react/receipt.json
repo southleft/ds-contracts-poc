@@ -23,10 +23,10 @@
     "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
     "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
     "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
-    "Checkbox/Checkbox.tsx": "874614f843b2fd9d022de7c3862e11eb918ad94c0ee71548021741f48e03e7f1",
+    "Checkbox/Checkbox.tsx": "fd3d148a73bac337a3f145b3da121ae9937593821a4b9e28aad978678258916e",
     "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
-    "CheckboxIcon/CheckboxIcon.module.css": "4dd864327a1a48934c876403ddd1c4eebf9f69f235376d5a15cd05b4bbb4beb4",
-    "CheckboxIcon/CheckboxIcon.tsx": "3d4b012e508d23e92a4b6fca0d61274e4b35b6feeb9de86a85d1d9c3984c61ac",
+    "CheckboxIcon/CheckboxIcon.module.css": "c1d05d4a401c2a16e79355256bac61aa57ae429a71edcd123766dfc5e4b54386",
+    "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
     "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
     "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
@@ -5479,7 +5479,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/checkboxicon",
-    "tarballSha256": "d974443d319f6407f2c7c90a99def4258af6e1fd9762f6c4890a85ccdfef16be",
+    "tarballSha256": "3c4209c17d4a5da9d6d5db3cfd4bb75cb475004197e95fa2090feb47fe9aa11d",
     "distFiles": [
       "CheckSquare",
       "CheckSquare/CheckSquare.d.ts",
@@ -5537,7 +5537,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "a836b6ca165035c4e6d916f513758ee6231292fe6e2af474b35e9d1c66412593",
+    "lockfileSha256": "1a1ed782e3213584a332862d4bbe540569cfd07d52b957a552da8f7d4f1d91d3",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -5567,9 +5567,8 @@
         }
       ]
     },
-    "reviewSite": "review-site",
     "builtCss": {
-      "bytes": 36128,
+      "bytes": 36725,
       "tokenDefinitions": 481,
       "tokenDefinitionsExpected": 481
     },

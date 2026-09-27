@@ -117,7 +117,7 @@ const run = (cmd: string, args: string[], cwd: string) => {
 /** How a state cell is reached before its screenshot. `none` = the rest state
  *  (and `disabled`, which is a prop, not an interaction). */
 export type Interaction = 'none' | Exclude<InteractionState, 'default' | 'disabled'>;
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string;
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; mount?: Record<string, unknown>; previewWidth?: number; hasText: boolean; textProp?: string;
   interaction: Interaction; /** the contract state this cell draws, when it draws one */ state?: Exclude<InteractionState, 'default'> }
 
 /** Array props (`arrayOf`) take the design's own repeat sample from the
@@ -138,6 +138,19 @@ function arraySamples(contract: any): Record<string, unknown[]> {
  *  wrong variant, so the key is typed by the prop it feeds. */
 export function variantPropValue(prop: { type?: unknown }, key: string): unknown {
   return prop.type === 'boolean' && (key === 'true' || key === 'false') ? key === 'true' : key;
+}
+/** A case as the component's own API receives it: contract prop names become
+ *  their code props and canonical values their declared code values
+ *  (bindings.code.values, e.g. canonical "null" → null). Case keys and the
+ *  receipt keep the canonical spelling. */
+export function mountProps(contract: { props: any[] }, props: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [name, value] of Object.entries(props)) {
+    const code = contract.props.find(p => p.name === name)?.bindings?.code;
+    const values = code?.values as Record<string, unknown> | undefined;
+    out[code?.prop ?? name] = values && typeof value === 'string' && Object.hasOwn(values, value) ? values[value] : value;
+  }
+  return out;
 }
 const variantValues = (prop: any): unknown[] =>
   prop.type === 'boolean' ? Object.keys(prop.bindings?.figma?.values ?? {}).map(key => variantPropValue(prop, key)) : prop.type?.enum ?? [];
@@ -258,7 +271,8 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
     const key = [...Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`), ...(interaction === 'none' ? [] : [`state-${interaction}`])].join('_') || 'default';
-    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}) };
+    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}),
+      ...(typeof variant.bbox?.width === 'number' && variant.bbox.width > 0 ? { previewWidth: variant.bbox.width } : {}) };
   });
   const keys = cases.map(c => c.key);
   for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
@@ -361,7 +375,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:#fff}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
-  writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, textProp: c.textProp ?? null }))));
+  writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -374,7 +388,7 @@ function App() {
   window.__consumer = { setText, setVariantOverride };
   return <div>
     {CASES.map(cell => {
-      const props = { ...cell.props };
+      const props = { ...cell.mount };
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
       return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
@@ -441,6 +455,7 @@ async function main() {
   const fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
+  for (const c of cases) c.mount = mountProps(contract, c.props);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
   const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
   const consumerFrames: Record<string, ConsumerFrame> = {};
@@ -545,6 +560,26 @@ async function main() {
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }
       receipt.consumer.fontProvision.loaded = await loadConsumerFonts(page, fonts);
       const cells = await page.$$('[data-cell]');
+      // FULL-WIDTH ROOTS (owner decision, 2026-09-27): a root whose width
+      // depends on its container collapses at fit-content, while Figma draws
+      // it at its preview width. Each cell tries the variant's Figma width and
+      // keeps it only where the root then fills exactly that width and did not
+      // before; every other root is left at fit-content, unchanged.
+      const previewWidths = Object.fromEntries(cases.filter(c => c.previewWidth).map(c => [c.key, c.previewWidth]));
+      const containerFramed = await page.evaluate(`((widths) => {
+        const kept = [];
+        for (const cell of document.querySelectorAll('[data-cell]')) {
+          const root = cell.firstElementChild, width = widths[cell.getAttribute('data-cell')];
+          if (!root || !width) continue;
+          const before = root.getBoundingClientRect().width;
+          cell.style.width = width + 'px';
+          const after = root.getBoundingClientRect().width;
+          if (Math.abs(after - width) < 0.01 && Math.abs(before - width) > 0.5) kept.push(cell.getAttribute('data-cell'));
+          else cell.style.width = 'fit-content';
+        }
+        return kept;
+      })(${JSON.stringify(previewWidths)})`) as string[];
+      receipt.consumer.containerFraming = { rule: 'figma-preview-width-v1', cases: containerFramed };
       // THE INSTRUMENT, not the product: cells used to flow inline, so a root 47.4 px
       // wide pushed every later root onto a fractional x and 33 of 72 CBDS Badge
       // shots came out one pixel wider with a shifted antialiased edge — while
@@ -694,7 +729,7 @@ async function main() {
         const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
-        await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop.name, target] as const);
+        await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
         const switched = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);

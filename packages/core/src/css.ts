@@ -130,7 +130,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   // table; a form-control root gets the native table itself, byte-identical.
   // @lower css.disabled-state-rendered-attribute
   const disabledSel = reactRootDisabledSelector(contract);
-  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel, contract.bindings?.code?.statePreviews === true);
   // dump v1.36: the whole-pixel text box — the declarations per flagged part
   // (anatomy.ts wholePixelTextBoxDecls), and a letter-spacing TOKEN whose
   // value cannot be subtracted refused by name before any rule is written.
@@ -765,7 +765,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
   }
 
   if (contract.states.includes('focus-visible')) {
-    lines.push('', '.root:focus-visible {', '  outline-style: solid;', '  outline-offset: 2px;', '}');
+    lines.push('', `.root${STATE_SELECTORS['focus-visible']} {`, '  outline-style: solid;', '  outline-offset: 2px;', '}');
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
     lines.push('', `.root${disabledSel} {`, '  cursor: not-allowed;', '}');

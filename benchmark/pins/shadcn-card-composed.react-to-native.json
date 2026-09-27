@@ -1,0 +1,55 @@
+{
+  "id": "shadcn-card-composed.react-to-native",
+  "version": 1,
+  "kind": "react-to-native",
+  "referenceId": "d30195a0cda4d38a849f1c9b0168d7ce7fa345f6c65a9abdb54e6dba97b2689d",
+  "root": "9786dd715f9f4a71e27411d91024d84e8d07625279bfc9319c88e3e3314c7103",
+  "children": {
+    "instance-1": {
+      "exportName": "CardHeader",
+      "planSha256": "b8fc5a5ded49b75bb63163ad600a115f41842fb36dac090c9ac0b3c7eef7f075"
+    },
+    "instance-2": {
+      "exportName": "CardTitle",
+      "planSha256": "6239fc45f11d649091715dbf9f869568ac88589c60a92c9597b7ea249a7b6240"
+    },
+    "instance-3": {
+      "exportName": "CardDescription",
+      "planSha256": "14b570132ce5a20cfe427a00e7978c8c7c80dadce57daedc5f581bdcdcd013da"
+    },
+    "instance-4": {
+      "exportName": "CardContent",
+      "planSha256": "e0bc8109364ae8218b1ea730a6605701d566a977171df8a4f278201c79cd9b75"
+    },
+    "instance-5": {
+      "exportName": "Checkbox",
+      "planSha256": null,
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
+    },
+    "instance-6": {
+      "exportName": "Root",
+      "planSha256": null,
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
+    },
+    "instance-7": {
+      "exportName": "Indicator",
+      "planSha256": null,
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
+    },
+    "instance-8": {
+      "exportName": "default",
+      "planSha256": null,
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
+    },
+    "instance-9": {
+      "exportName": "CardFooter",
+      "planSha256": "8c9dff15e7909b259eca518a11d03c18c9db1c1714f57440140a44e1538da399"
+    },
+    "instance-10": {
+      "exportName": "Button",
+      "planSha256": "197eb7e575bbca2c00d7ed8bf71264ba311aa366ad89f0fcefc37421e6d133b0"
+    }
+  },
+  "recordedOn": "darwin-arm64",
+  "fidelity": null
+}

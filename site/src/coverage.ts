@@ -178,6 +178,13 @@ reg("props", "props", ["contract.props"]);
 reg("anatomy", "anatomy", ["contract.anatomy"]);
 reg("states", "declared-states", ["contract.states"]);
 reg("states", "state-previews", ["contract.bindings.figma.statePreviews"]);
+// docs/23 §D.164: the code twin — a forced child state and its opt-in input.
+reg("states", "code-state-previews", [
+  "contract.bindings.code.statePreviews",
+  "componentRef.statePreview",
+  "componentRef.statePreview.enum",
+  "componentRef.statePreview.prop",
+]);
 // Additive (docs/23 §D.40): the undrawn combinations of a sparse variant matrix.
 reg("contract", "absent-variants", ["contract.bindings.figma.absentVariants"]);
 reg("events", "events", ["contract.events"]);

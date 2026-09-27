@@ -40,8 +40,10 @@ jobs:
       - name: build @ds-contracts/schema and @ds-contracts/core (the packager's resolution prerequisites)
         run: npm run prep:core
 
-      - name: install the vendored React workspace (React → Figma cells)
-        run: npm ci --prefix benchmark/react-family --no-audit --no-fund
+      - name: install the vendored React workspaces (React → Figma cells)
+        run: |
+          npm ci --prefix benchmark/react-family --no-audit --no-fund
+          npm ci --prefix benchmark/shadcn-cohort --no-audit --no-fund
 
       - name: cache playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -59,8 +61,19 @@ jobs:
       - name: benchmark:doc:check (published scoreboards match the pins)
         run: npm run benchmark:doc:check
 
-      - name: benchmark:check (replay every pinned cell)
-        run: npm run benchmark:check -- --json benchmark-verdicts.json --plans benchmark-plans
+      - name: benchmark:check — Figma → React cells (replay each frozen capture)
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: npm run benchmark:check -- --kind figma-to-react --json benchmark-verdicts-figma-to-react.json
+
+      - name: benchmark:check — React → Figma cells (replay the vendored workspaces)
+        if: ${{ !cancelled() }}
+        # A separate process: the React source service and Chromium never share
+        # memory with the Figma cells' Vite servers (the combined replay ran a
+        # runner low on memory intermittently).
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: npm run benchmark:check -- --kind react-to-native --json benchmark-verdicts-react-to-native.json --plans benchmark-plans
 
       - name: keep the verdicts and the replayed plans
         if: ${{ always() }}
@@ -68,6 +81,6 @@ jobs:
         with:
           name: benchmark-verdicts
           path: |
-            benchmark-verdicts.json
+            benchmark-verdicts-*.json
             benchmark-plans/
           if-no-files-found: ignore

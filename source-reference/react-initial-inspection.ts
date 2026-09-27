@@ -349,7 +349,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       const save = (file: string, data: unknown) => writeFileSync(path.join(dir, file), JSON.stringify(data, null, 2) + '\n', { flag: 'wx' });
       save('request.json', value.request);
       const promise = (async () => {
-        let browser;
+        let browser, sealable = false;
         try {
           const observed = await buildReactOwnershipReference(sourceRoot, value.reference, value.source.program);
           // The guarded origin reader records the actual browser executable.
@@ -384,12 +384,15 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
                 assertCurrent:()=>{if(!reactReferenceUnchanged(value.reference)||!reactSourceProgramUnchanged(value.source.program))throw Error('react-initial-source-changed');}});
             }
             readReactInspectionOriginal(repo, value.reference, value.request);
-            state.sourceUnchanged = true; state.phase = 'complete';
+            state.sourceUnchanged = true; sealable = true;
           } finally { failures.dispose(); }
         } catch (e) { state.phase = 'failed'; state.problems = [e instanceof Error ? e.message : String(e)]; }
         finally {
           try {
-            await browser?.close(); save('report.json', state);
+            await browser?.close();
+            // Complete only once sealed: no await from here until the saved report.
+            if (sealable) state.phase = 'complete';
+            save('report.json', state);
             save('integrity.json', { version: 1, files: inventoryEvidence(dir) });
             // A failed observation AGAIN replaces nothing: the complete run stays latest and the attempt is reported beside it.
             if (state.phase === 'complete' || prior?.report.phase !== 'complete') {

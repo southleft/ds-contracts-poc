@@ -1201,6 +1201,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const repeatNote = walkAnatomy(contract).some((w) => w.part.repeat && w.part !== selection?.item)
     ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
     : '';
+  // docs/23 §D.164: a forced child state selects the same pseudo-class state
+  // tokens this surface omits, so it is omitted with them — named here.
+  const statePreviewRefs = walkAnatomy(contract).filter((w) => w.part.component?.statePreview !== undefined).map((w) => w.name);
+  const repeatAndPreviewNote = repeatNote + (statePreviewRefs.length > 0
+    ? `\n * Fidelity: component statePreview on ${statePreviewRefs.join(', ')} (docs/23 §D.164) selects a\n * child's hover/active/focus-visible drawing — omitted with the state tokens above.`
+    : '');
 
   // SILENT-LOSS ROUND (task #33, fix 4) — CANVAS-ONLY SYNTHETIC CHANNELS.
   // `translate-x`/`translate-y` are minted by decomposeTranslate so the canvas
@@ -1299,7 +1305,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatAndPreviewNote}${canvasOnlyNote}${pseudoNote}${disabledSubstNote}${omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

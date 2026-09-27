@@ -23,10 +23,10 @@
     "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
     "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
     "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
-    "Checkbox/Checkbox.tsx": "874614f843b2fd9d022de7c3862e11eb918ad94c0ee71548021741f48e03e7f1",
+    "Checkbox/Checkbox.tsx": "fd3d148a73bac337a3f145b3da121ae9937593821a4b9e28aad978678258916e",
     "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
-    "CheckboxIcon/CheckboxIcon.module.css": "4dd864327a1a48934c876403ddd1c4eebf9f69f235376d5a15cd05b4bbb4beb4",
-    "CheckboxIcon/CheckboxIcon.tsx": "3d4b012e508d23e92a4b6fca0d61274e4b35b6feeb9de86a85d1d9c3984c61ac",
+    "CheckboxIcon/CheckboxIcon.module.css": "c1d05d4a401c2a16e79355256bac61aa57ae429a71edcd123766dfc5e4b54386",
+    "CheckboxIcon/CheckboxIcon.tsx": "02eddd32f975dd72c37db5589f67bc28a515df148e9d062c26dc38954688f246",
     "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
     "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
     "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
@@ -590,7 +590,7 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+        "pngSha256": "001329c218d12d74bb320da4d9b2e88fe1e8d5298fa1fe20e599f2bda7b2d106"
       }
     },
     {
@@ -632,7 +632,7 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+        "pngSha256": "c0fa293978bf1bab5f0237fd12e6d1568efecdb9999934c3e02b37f64a114d83"
       }
     },
     {
@@ -674,7 +674,7 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+        "pngSha256": "8ad1347703dc760faaeecc9c930ffc021304f75c39e968bc3c8519e8a1af208d"
       }
     },
     {
@@ -716,7 +716,7 @@
           "height": 24
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+        "pngSha256": "bbcc7f2aff1c426024946e801a428ddbafcc4cb907366e0dd099cceb603c5c3c"
       }
     },
     {
@@ -758,7 +758,7 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+        "pngSha256": "54ce5dde3c0aed7a42a8336c71a0bf49a75c87c1ac80c015cb48526fcab99a95"
       }
     },
     {
@@ -800,7 +800,7 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+        "pngSha256": "a53be4c9ebae90c58e6a50b60e9bcb421ebf93e374299ce06ac5563998bc7dcf"
       }
     },
     {
@@ -842,7 +842,7 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+        "pngSha256": "d87b6a5637f7875dfb1d3f4c1495360907f291d822ddac4289dfc70872650d03"
       }
     },
     {
@@ -884,7 +884,7 @@
           "height": 20
         },
         "deviceScaleFactor": 1,
-        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+        "pngSha256": "9e6f635748b58c0ad19c94b1368360f2713ed64f5537fe325b3ec6f67de37614"
       }
     }
   ],
@@ -1077,11 +1077,7 @@
           "alignment-left_size-large_state-disabled",
           "alignment-right_size-large_state-disabled",
           "alignment-left_size-small_state-disabled",
-          "alignment-right_size-small_state-disabled"
-        ],
-        "axisInertLedgered": false,
-        "sourceEquivalentTransitions": [],
-        "cellsUnchangedWithoutEquivalentSource": [
+          "alignment-right_size-small_state-disabled",
           "alignment-left_size-large_state-hover",
           "alignment-left_size-large_state-focus",
           "alignment-right_size-large_state-hover",
@@ -1090,7 +1086,10 @@
           "alignment-left_size-small_state-focus",
           "alignment-right_size-small_state-hover",
           "alignment-right_size-small_state-focus"
-        ]
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
       }
     ]
   },
@@ -2040,12 +2039,12 @@
       {
         "key": "alignment-left_size-large_state-hover",
         "figmaImage": "figma-6659_61950.png",
-        "mismatchPercent": 6.211419753086419,
+        "mismatchPercent": 6.1342592592592595,
         "blackMismatchPercent": 0,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 6.211419753086419,
+          "whiteMismatchPercent": 6.1342592592592595,
           "blackMismatchPercent": 0,
           "withinLimit": false,
           "placement": {
@@ -2086,7 +2085,7 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 0.4444444444444444,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 82.63888888888889,
         "residual": "text-only",
         "inkCoveragePercent": {
@@ -2117,13 +2116,13 @@
       {
         "key": "alignment-left_size-large_state-focus",
         "figmaImage": "figma-6659_61957.png",
-        "mismatchPercent": 19.333748443337484,
-        "blackMismatchPercent": 5.5417185554171855,
+        "mismatchPercent": 19.03538812785388,
+        "blackMismatchPercent": 6.392694063926941,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 9.620174346201743,
-          "blackMismatchPercent": 4.6699875466998755,
+          "whiteMismatchPercent": 10.131278538812785,
+          "blackMismatchPercent": 5.5936073059360725,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2136,12 +2135,12 @@
             },
             "commonCrop": {
               "x": 1,
-              "y": 1,
+              "y": 0,
               "width": 146,
-              "height": 22
+              "height": 24
             }
           },
-          "pixelsCompared": 3212
+          "pixelsCompared": 3504
         },
         "figmaFrame": {
           "layout": {
@@ -2163,17 +2162,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 34.61538461538461,
+        "textMaskedPercent": 39.1025641025641,
         "textMaskCoveragePercent": 82.1917808219178,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 23.93,
+          "consumer": 25.28,
           "figma": 26.71
         },
         "contentSize": {
           "consumer": {
             "width": 144,
-            "height": 18
+            "height": 24
           },
           "figma": {
             "width": 146,
@@ -2194,13 +2193,13 @@
       {
         "key": "alignment-right_size-large_state-hover",
         "figmaImage": "figma-6659_61965.png",
-        "mismatchPercent": 11.0727969348659,
+        "mismatchPercent": 10.919540229885058,
         "blackMismatchPercent": 0,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
           "whiteMismatchPercent": 7.9528158295281575,
-          "blackMismatchPercent": 1.2557077625570776,
+          "blackMismatchPercent": 1.141552511415525,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2240,7 +2239,7 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 1.0582010582010581,
+        "textMaskedPercent": 0,
         "textMaskCoveragePercent": 85.51724137931035,
         "residual": "text-only",
         "inkCoveragePercent": {
@@ -2271,13 +2270,13 @@
       {
         "key": "alignment-right_size-large_state-focus",
         "figmaImage": "figma-6659_61972.png",
-        "mismatchPercent": 23.345701917130487,
-        "blackMismatchPercent": 5.504019789734076,
+        "mismatchPercent": 22.70408163265306,
+        "blackMismatchPercent": 6.349206349206349,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 10.902948402948404,
-          "blackMismatchPercent": 5.466830466830467,
+          "whiteMismatchPercent": 11.289414414414415,
+          "blackMismatchPercent": 6.306306306306306,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2290,12 +2289,12 @@
             },
             "commonCrop": {
               "x": 0,
-              "y": 1,
+              "y": 0,
               "width": 148,
-              "height": 22
+              "height": 24
             }
           },
-          "pixelsCompared": 3256
+          "pixelsCompared": 3552
         },
         "figmaFrame": {
           "layout": {
@@ -2317,17 +2316,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 39.32806324110672,
+        "textMaskedPercent": 35.688405797101446,
         "textMaskCoveragePercent": 84.35374149659864,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 23.93,
+          "consumer": 25.28,
           "figma": 26.71
         },
         "contentSize": {
           "consumer": {
             "width": 145,
-            "height": 18
+            "height": 24
           },
           "figma": {
             "width": 147,
@@ -2425,13 +2424,13 @@
       {
         "key": "alignment-left_size-small_state-focus",
         "figmaImage": "figma-6659_61987.png",
-        "mismatchPercent": 21.55,
-        "blackMismatchPercent": 5.55,
+        "mismatchPercent": 18.759999999999998,
+        "blackMismatchPercent": 5.96,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 11.700000000000001,
-          "blackMismatchPercent": 5.1,
+          "whiteMismatchPercent": 10.879999999999999,
+          "blackMismatchPercent": 5.6000000000000005,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2444,12 +2443,12 @@
             },
             "commonCrop": {
               "x": 0,
-              "y": 2,
+              "y": 0,
               "width": 125,
-              "height": 16
+              "height": 20
             }
           },
-          "pixelsCompared": 2000
+          "pixelsCompared": 2500
         },
         "figmaFrame": {
           "layout": {
@@ -2471,17 +2470,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 43.75,
+        "textMaskedPercent": 45,
         "textMaskCoveragePercent": 84.8,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 25.32,
+          "consumer": 26.9,
           "figma": 27.82
         },
         "contentSize": {
           "consumer": {
             "width": 123,
-            "height": 12
+            "height": 20
           },
           "figma": {
             "width": 125,
@@ -2579,13 +2578,13 @@
       {
         "key": "alignment-right_size-small_state-focus",
         "figmaImage": "figma-6659_62002.png",
-        "mismatchPercent": 25.396825396825395,
-        "blackMismatchPercent": 5.555555555555555,
+        "mismatchPercent": 21.825396825396826,
+        "blackMismatchPercent": 5.952380952380952,
         "historicalWithinLimit": false,
         "layoutAligned": {
           "status": "measured",
-          "whiteMismatchPercent": 11.507936507936508,
-          "blackMismatchPercent": 5.059523809523809,
+          "whiteMismatchPercent": 10.714285714285714,
+          "blackMismatchPercent": 5.555555555555555,
           "withinLimit": false,
           "placement": {
             "consumer": {
@@ -2598,12 +2597,12 @@
             },
             "commonCrop": {
               "x": 0,
-              "y": 2,
+              "y": 0,
               "width": 126,
-              "height": 16
+              "height": 20
             }
           },
-          "pixelsCompared": 2016
+          "pixelsCompared": 2520
         },
         "figmaFrame": {
           "layout": {
@@ -2625,17 +2624,17 @@
           }
         },
         "withinLimit": false,
-        "textMaskedPercent": 53.515625,
+        "textMaskedPercent": 41.5625,
         "textMaskCoveragePercent": 87.3015873015873,
         "residual": "beyond-text",
         "inkCoveragePercent": {
-          "consumer": 25.32,
+          "consumer": 26.9,
           "figma": 27.82
         },
         "contentSize": {
           "consumer": {
             "width": 124,
-            "height": 12
+            "height": 20
           },
           "figma": {
             "width": 126,
@@ -2656,7 +2655,6 @@
     ]
   },
   "problems": [
-    "variant-prop-discarded:state",
     "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
@@ -2664,21 +2662,20 @@
     "layout-image-difference-above-limit:alignment-right_size-small_state-default:9.27%",
     "layout-image-difference-above-limit:alignment-left_size-small_state-disabled:7.38%",
     "layout-image-difference-above-limit:alignment-right_size-small_state-disabled:6.65%",
-    "layout-image-difference-above-limit:alignment-left_size-large_state-hover:6.21%",
-    "layout-image-difference-above-limit:alignment-left_size-large_state-focus:9.62%",
-    "content-size-mismatch:alignment-left_size-large_state-focus:144x18 vs 146x22",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-hover:6.13%",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-focus:10.13%",
+    "layout-image-difference-on-black-above-limit:alignment-left_size-large_state-focus:5.59%",
     "layout-image-difference-above-limit:alignment-right_size-large_state-hover:7.95%",
-    "layout-image-difference-above-limit:alignment-right_size-large_state-focus:10.90%",
-    "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:5.47%",
-    "content-size-mismatch:alignment-right_size-large_state-focus:145x18 vs 147x22",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-focus:11.29%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:6.31%",
     "layout-image-difference-above-limit:alignment-left_size-small_state-hover:9.55%",
-    "layout-image-difference-above-limit:alignment-left_size-small_state-focus:11.70%",
-    "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.10%",
-    "content-size-mismatch:alignment-left_size-small_state-focus:123x12 vs 125x16",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-focus:10.88%",
+    "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.60%",
+    "content-size-mismatch:alignment-left_size-small_state-focus:123x20 vs 125x16",
     "layout-image-difference-above-limit:alignment-right_size-small_state-hover:9.27%",
-    "layout-image-difference-above-limit:alignment-right_size-small_state-focus:11.51%",
-    "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.06%",
-    "content-size-mismatch:alignment-right_size-small_state-focus:124x12 vs 126x16"
+    "layout-image-difference-above-limit:alignment-right_size-small_state-focus:10.71%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.56%",
+    "content-size-mismatch:alignment-right_size-small_state-focus:124x20 vs 126x16"
   ],
   "limitations": [
     "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
@@ -2764,7 +2761,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/checkbox",
-    "tarballSha256": "67b659208368426fd1480b413df3c4431d48e96020ad1903630489e2af818358",
+    "tarballSha256": "1585db037754d8c511d13562a470aca409478526348233bb4de2958a1b5200e9",
     "distFiles": [
       "CheckSquare",
       "CheckSquare/CheckSquare.d.ts",
@@ -2822,7 +2819,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "8b74a5b97626a77e334d252489ab17795564269515e9789ea665e7ea8390391d",
+    "lockfileSha256": "8bec49cd143812755fc6e68b302c080ed765d7bbbdf8f88ab0d2a172ec23a9ea",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -2852,9 +2849,8 @@
         }
       ]
     },
-    "reviewSite": "review-site",
     "builtCss": {
-      "bytes": 44606,
+      "bytes": 45203,
       "tokenDefinitions": 481,
       "tokenDefinitionsExpected": 481
     },

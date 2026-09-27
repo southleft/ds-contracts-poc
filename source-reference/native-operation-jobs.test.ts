@@ -1491,3 +1491,24 @@ test("oversized multibyte native metadata returns a bounded explicit refusal", a
     "component-observation-refused",
   );
 });
+
+test('an authentication that reaches its own snapshot is refused by name, never a stack overflow', t => {
+  let reenter: (() => void) | undefined, inner: unknown;
+  const f = fixture(t, (request, operation) => { const r = reenter; reenter = undefined; r?.(); return nativeFixturePrepare(request, operation); });
+  reenter = () => { try { f.jobs.get(f.snapshot.id); } catch (error) { inner = error; throw error; } };
+  assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent, false);
+  assert.match(String((inner as Error | undefined)?.message), /^native-operation-authentication-reentrant$/);
+  assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent, true, 'without re-entry the same operation is current');
+});
+
+test('a stack overflow during authentication propagates instead of reading as a stale source', t => {
+  let overflow = false;
+  const f = fixture(t, (request, operation) => {
+    if (overflow) throw new RangeError('Maximum call stack size exceeded');
+    return nativeFixturePrepare(request, operation);
+  });
+  overflow = true;
+  assert.throws(() => f.jobs.get(f.snapshot.id), RangeError);
+  overflow = false;
+  assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent, true);
+});

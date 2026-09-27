@@ -1,0 +1,69 @@
+{
+  "nodeId": "251:5638",
+  "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+  "limitPercent": 5,
+  "sourceSize": [
+    32,
+    18.390625
+  ],
+  "nativeSize": [
+    32,
+    18.390625
+  ],
+  "layoutExact": true,
+  "sourceFraming": {
+    "rule": "snap-outward-effects-included-v1",
+    "rootOffset": {
+      "x": 8,
+      "y": 8.796875
+    },
+    "layoutBox": {
+      "width": 32,
+      "height": 18.390625
+    },
+    "crop": {
+      "x": 7,
+      "y": 8,
+      "width": 34,
+      "height": 21
+    },
+    "rootInCrop": {
+      "x": 1,
+      "y": 0
+    }
+  },
+  "nativeFraming": {
+    "rule": "render-bounds-v1",
+    "layout": {
+      "x": 112,
+      "y": 98.390625,
+      "width": 32,
+      "height": 18.390625
+    },
+    "render": {
+      "x": 110,
+      "y": 97.390625,
+      "width": 36,
+      "height": 22.390625
+    },
+    "rootInExport": {
+      "x": 2,
+      "y": 1
+    }
+  },
+  "scores": [
+    {
+      "background": "white",
+      "mismatchPercent": 0,
+      "withinLimit": true,
+      "triptych": "source-native-white.png"
+    },
+    {
+      "background": "black",
+      "mismatchPercent": 2.1739130434782608,
+      "withinLimit": true,
+      "triptych": "source-native-black.png"
+    }
+  ],
+  "pass": true
+}

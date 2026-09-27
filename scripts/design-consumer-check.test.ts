@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
 import { contentBox, alignPair, diffPair } from '../extract/figma/visual-parity/img.js';
-import { NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, type Interaction } from './design-consumer-check.js';
+import { NODE_SCREENSHOT_OPTIONS, contractGraph, deriveCases, rewriteWorkPaths, enterState, findDumpSet, nestedInteractiveScript, leaveState, paintOf, variantPaintOf, residualClass, stateProblems, variantPropValue, mountProps, type Interaction } from './design-consumer-check.js';
 
 const variantProp = (name: string, type: unknown, values: string[]) =>
   ({ name, type, bindings: { figma: { kind: 'VARIANT', property: name, values: Object.fromEntries(values.map(v => [v, v])) }, code: { prop: name } } });
@@ -554,4 +554,16 @@ test('state equivalence refuses changed paint, geometry, props, identities, ambi
     (f: ReturnType<typeof equivalentStateFixture>) => { f.cases.push({...f.cases[1]}); },
     (f: ReturnType<typeof equivalentStateFixture>) => { f.cases.splice(0,1); },
   ]) { const f=equivalentStateFixture(); mutate(f); assert.deepEqual(f.inspect(),[]); }
+});
+
+test('cases mount through the component API: code props and declared code values, canonical keys kept', () => {
+  const contract = { props: [
+    { name: 'variant', bindings: { code: { prop: 'variant', values: { null: null, default: 'default', destructive: 'destructive' } } } },
+    { name: 'size', bindings: { code: { prop: 'scale' } } },
+    { name: 'disabled', type: 'boolean', bindings: { code: { prop: 'disabled' } } },
+  ] };
+  assert.deepEqual(mountProps(contract, { variant: 'null', size: 'sm', disabled: true }), { variant: null, scale: 'sm', disabled: true });
+  assert.deepEqual(mountProps(contract, { variant: 'destructive' }), { variant: 'destructive' });
+  // A value the mapping does not declare passes through, so the component refuses it by name.
+  assert.deepEqual(mountProps(contract, { variant: 'ghost' }), { variant: 'ghost' });
 });

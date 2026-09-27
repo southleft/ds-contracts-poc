@@ -730,6 +730,10 @@
                 "bindingRevision"
               ],
               "additionalProperties": false
+            },
+            "statePreviews": {
+              "type": "boolean",
+              "const": true
             }
           },
           "required": [
@@ -2108,6 +2112,45 @@
                 "type": "string",
                 "pattern": "^\\{[a-z0-9.{}-]+\\}$"
               }
+            },
+            "statePreview": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "hover",
+                    "active",
+                    "focus-visible"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "prop": {
+                      "type": "string"
+                    },
+                    "map": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "enum": [
+                          "hover",
+                          "active",
+                          "focus-visible"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "prop",
+                    "map"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
             }
           },
           "required": [

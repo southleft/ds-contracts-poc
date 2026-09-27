@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFileSync, readdirSync, writeFileSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, mkdtempSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { chromium } from 'playwright-core';
@@ -205,7 +205,16 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '0'), /evidence-changed/);
   writeFileSync(path.join(initialDir, 'states/0.png'), sourcePng!);
   const job = startReactContentInspection(repo, reference, request, operationId);
+  // Measured in CI: a listing read between "complete" and the saved report
+  // found no evidence and named a composition problem. Complete means sealed.
+  let completeBeforeSealed = false;
+  const watcher = (async () => {
+    while (job.state.phase === 'running') await new Promise(resolve => setImmediate(resolve));
+    completeBeforeSealed = job.state.phase === 'complete' && !existsSync(path.join(job.dir, 'report.json'));
+  })();
   await job.promise;
+  await watcher;
+  assert.equal(completeBeforeSealed, false, 'an inspection reads as complete only after its evidence is saved');
   assert.equal(job.state.phase, 'complete', job.state.problems.join('\n'));
   assert.equal(job.state.sourceUnchanged, true);
   assert.equal(job.state.content?.status, 'compiled-comparison-draft');
