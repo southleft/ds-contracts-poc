@@ -1,34 +1,34 @@
 {
   "id": "shadcn-alert-return.figma-to-react",
   "version": 1,
-  "inputSha256": "44999cb65911deab75b5645a2ab6c1083eef26c9621b814b6fbd1fab373fa42d",
-  "requestSha256": "a3a71aeee01c64f7aae73cdeb2567cf00256d9b97db4b8ff217caaecc14b14fb",
-  "rootId": "ds.root-matrix16c39fdef03e8d42-source-native-cbcd71d4-bc90-45de-a5af-85f6788a1c3b-observed-react-matrix-16c39fdef03e8d42",
+  "inputSha256": "830db06f8a2e137c19963c78f5c3d6675493e7352a67be40a7e540f53aa8a7a7",
+  "requestSha256": "40f518ddf09279d9131dbb857ef09bd44f70bd49d763d881afc920514113bc6b",
+  "rootId": "ds.root-matrix16c39fdef03e8d42-source-native-bbbf2381-a202-4928-a570-177a3eb284ea-observed-react-matrix-16c39fdef03e8d42",
   "generated": {
-    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.module.css": "742a37fa6c48f78225c996cff8381749e49fa033d6400f68f50400210c72d3db",
-    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.tsx": "0dfbba46e05a378e980d5fd58da4428783b93037097e750646fa943a7b6f4451",
-    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.ts": "c066a4b1fddc5fee965e2af41d73257b1ed33b4ada6d0e1312fa6ba66b74713a",
-    "index.ts": "adcf49caebe937d73a319a6664a214e33bc2b626b81903a01225f26e61a49c5f",
-    "tokens.css": "67ed6dcc0728b30f456c2e3d508bf486794025a824359809711ac159ddfb2074"
+    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.module.css": "d871c78514b826746d4c9d9cf2f360bc222250ce3312044fcae5d457eebb5f27",
+    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.tsx": "51ad732b570ed9def286f669ba0893505c22de3048fa81fa804b8ad7cbaa19b5",
+    "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.ts": "ff6158ff1c5d91d7bd70a181cb8953a6dd77bc6a548a65feec993cfa00e290c2",
+    "index.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
+    "tokens.css": "51ec42f42a2d83ff65b0779771a16f4f01a337ee24b923ede12fcd671853b3b9"
   },
-  "generatedSha256": "3ad0691b2397b452b7196687c3d78880a4ab990237c6c896065801061d8ef49b",
+  "generatedSha256": "4941949dd6ca9970c0d097638e7629053e59ec9fb88a3cb261b8b081cbf6d45c",
   "entries": {
-    "package/dist/index.d.ts": "adcf49caebe937d73a319a6664a214e33bc2b626b81903a01225f26e61a49c5f",
-    "package/dist/index.js": "0d2aef52cf93d7356c736fc1bcb98c35bac920f8b352683cfb26d3d6116ee3fb",
-    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.d.ts": "c066a4b1fddc5fee965e2af41d73257b1ed33b4ada6d0e1312fa6ba66b74713a",
-    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.js": "b958e21af42a8dad72e188ea4bad067f25aeba0e94666a10d6684e58105a1d43",
-    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef0": "d12085f6526ccd6557c507d9da4a8f7993b82fa0e56e367f211328ff0a724558",
-    "package/dist/tokens.css": "67ed6dcc0728b30f456c2e3d508bf486794025a824359809711ac159ddfb2074",
-    "package/package.json": "3bee6f46fdde6b61237bc7fb4c9e763093543a156974d362f02325013c84230b",
-    "package/README.md": "40bdf64d49f8f87c5f15f5d4bed53f2d99cb16ff2250bc7a0ba589e58b1e80f8"
+    "package/dist/index.d.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
+    "package/dist/index.js": "7b641ca4414cff6145ea892086e66fa2a97fa612e66b1bd77d20c74fc69e391a",
+    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.d.ts": "ff6158ff1c5d91d7bd70a181cb8953a6dd77bc6a548a65feec993cfa00e290c2",
+    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.js": "047b4caa3a9d132aceb7c50011d01334e8a94b1088131454fb805a04d1a21336",
+    "package/dist/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef0": "71b8aa18c5ce696528351c5005b1714505a0bf97f34788f9672b9bfe44fcf686",
+    "package/dist/tokens.css": "51ec42f42a2d83ff65b0779771a16f4f01a337ee24b923ede12fcd671853b3b9",
+    "package/package.json": "2ac796c158a2cbeaa6517551b0d3a4890796201e38f26c8dfb46ce84eee081fc",
+    "package/README.md": "739ee9c95c26e15560bbfb0d9870abb0817fda98464b7ea5f4fd133b779cc075"
   },
-  "entriesSha256": "c59b306df2e6806db8a83870a20606442344acf651433aa038cdda555d199dc5",
+  "entriesSha256": "dcde38fce1cfc2c26e889b0aa5e1d1e921832025aecbcd531202b2248e5d3e78",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-alert-return.figma-to-react/receipt.json",
-    "receiptSha256": "6b380b9903ae47a48a8f6f63205e6653606bf23295a519f4cbd4731d3b0f6f05",
-    "generatedSha256": "3ad0691b2397b452b7196687c3d78880a4ab990237c6c896065801061d8ef49b",
-    "component": "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42",
+    "receiptSha256": "d3be899f51240fca5043cd54888a3fcd2afe58567941a99a04ed83a5e706b648",
+    "generatedSha256": "4941949dd6ca9970c0d097638e7629053e59ec9fb88a3cb261b8b081cbf6d45c",
+    "component": "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42",
     "measuredOn": "darwin-arm64",
     "measuredAt": "2026-09-27",
     "cases": [
@@ -36,33 +36,31 @@
         "key": "default",
         "withinLimit": true,
         "white": 0,
-        "black": 4.037037037037037,
+        "black": 0.34615384615384615,
         "residual": null
       },
       {
         "key": "variant-null",
-        "withinLimit": false,
+        "withinLimit": true,
         "white": 0,
-        "black": 7.444444444444444,
+        "black": 0.6923076923076923,
         "residual": null
       },
       {
         "key": "variant-default",
         "withinLimit": true,
         "white": 0,
-        "black": 4.037037037037037,
+        "black": 0.34615384615384615,
         "residual": null
       },
       {
         "key": "variant-destructive",
         "withinLimit": true,
         "white": 0,
-        "black": 4.037037037037037,
+        "black": 0.34615384615384615,
         "residual": null
       }
     ],
-    "problems": [
-      "layout-image-difference-on-black-above-limit:variant-null:7.44%"
-    ]
+    "problems": []
   }
 }

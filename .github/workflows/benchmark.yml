@@ -61,13 +61,19 @@ jobs:
       - name: benchmark:doc:check (published scoreboards match the pins)
         run: npm run benchmark:doc:check
 
-      - name: benchmark:check (replay every pinned cell)
-        # One process replays every cell (Vite SSR per Figma cell, then the
-        # React source service with Chromium); it peaks near 1.8 GB resident
-        # locally and ran out of heap on a runner at the default limit.
+      - name: benchmark:check — Figma → React cells (replay each frozen capture)
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-        run: npm run benchmark:check -- --json benchmark-verdicts.json --plans benchmark-plans
+        run: npm run benchmark:check -- --kind figma-to-react --json benchmark-verdicts-figma-to-react.json
+
+      - name: benchmark:check — React → Figma cells (replay the vendored workspaces)
+        if: ${{ !cancelled() }}
+        # A separate process: the React source service and Chromium never share
+        # memory with the Figma cells' Vite servers (the combined replay ran a
+        # runner low on memory intermittently).
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: npm run benchmark:check -- --kind react-to-native --json benchmark-verdicts-react-to-native.json --plans benchmark-plans
 
       - name: keep the verdicts and the replayed plans
         if: ${{ always() }}
@@ -75,6 +81,6 @@ jobs:
         with:
           name: benchmark-verdicts
           path: |
-            benchmark-verdicts.json
+            benchmark-verdicts-*.json
             benchmark-plans/
           if-no-files-found: ignore

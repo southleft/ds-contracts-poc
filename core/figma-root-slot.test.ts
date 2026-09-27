@@ -276,6 +276,13 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  assert.equal(nativeSlot.type,'SLOT');assert.equal(nativeGrid.type,'FRAME');assert.equal(nativeGrid.layoutMode,'GRID');
  assert.equal(nativeGrid.layoutSizingHorizontal,'FILL');assert.equal(nativeGrid.layoutSizingVertical,intrinsic?'HUG':'FILL');
  assert.deepEqual(JSON.parse(JSON.stringify(nativeGrid.gridRowSizes)),spacing==='fractional'?[{type:'FLEX',value:1}]:spacing==='flow'?[{type:'HUG',value:1}]:[{type:'HUG',value:1},{type:'HUG',value:1}]);
+ if(intrinsic){
+  // docs/23 §D.170: an empty intrinsic carrier keeps no seed pixel. CSS draws
+  // empty explicit rows at 0 plus their gaps, and no implicit row at all.
+  assert.equal(nativeGrid.height,(nativeGrid.gridRowGap as number)*((nativeGrid.gridRowSizes as unknown[]).length-1),'empty carrier draws only its row gaps');
+  assert.equal(nativeSlot.height,nativeGrid.height);
+  assert.equal(comp.height,comp.paddingTop+comp.paddingBottom+nativeGrid.height);
+ }
  const source=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
  const dump=JSON.parse(JSON.stringify((await run(source))[comp.name]));
  const corpus=tokenCorpusFromJson({primitives,semantic:{},light:{},brandDefault:{}});

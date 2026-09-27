@@ -35,7 +35,9 @@ export function readGridFlowRows(raw: unknown, columns: number, children: number
   const emptyHug = (t: FlowTrack & { resolved?: true }, i: number) =>
     t.resolved === true && t.type === 'FIXED' && expected[i].type === 'HUG' && i >= occupied;
   if (observed.length !== expected.length || observed.some((t, i) => {
-    if (emptyHug(t, i)) return !(Number.isFinite(t.value) && t.value > 0);
+    // An unoccupied HUG row resolves to whatever extent it was last given;
+    // the writer resets an empty root content carrier to exactly 0 (§D.170).
+    if (emptyHug(t, i)) return !(Number.isFinite(t.value) && t.value >= 0);
     const { resolved: _resolved, ...plain } = t;
     return !track(plain) || plain.type !== expected[i].type ||
       (plain.value !== expected[i].value && plain.value !== Math.fround(expected[i].value));

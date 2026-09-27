@@ -13,12 +13,16 @@ function fixture(t: test.TestContext) {
   const repo = mkdtempSync(path.join(tmpdir(), 'source-identity-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   let sequence = 0;
-  function archive(options: { workspace?: string; exportName?: string; bytes?: string; roots?: string[]; duplicate?: boolean } = {}) {
+  function archive(options: { workspace?: string; exportName?: string; bytes?: string; roots?: string[]; duplicate?: boolean; wrapped?: boolean } = {}) {
     const referenceId = evidenceSha(String(sequence++)), id = `${referenceId.slice(0, 8)}-0000-4000-8000-000000000000`;
     const module = 'src/widget.tsx', file = path.join(repo, options.workspace ?? 'original', module);
     const source = { module, exportName: options.exportName ?? 'Widget', sourceSha256: evidenceSha(options.bytes ?? 'original source'), span: { start: 0, end: 10 } };
     const component = { id: 'instance-0', source, roots: options.roots ?? [''], props: {} };
-    const row = (id: string) => ({ id, matched: true, problems: [], ownership: { version: 1, components: options.duplicate ? [component, { ...component, id: 'instance-1' }] : [component], nodes: [], rendererVersions: ['19.2.4'], problems: [] } });
+    // A dependency the wrapper renders at its own root (a Radix primitive).
+    const primitive = { id: 'instance-1', parent: 'instance-0', roots: [''], props: {},
+      source: { module: 'node_modules/primitive/dist/index.mjs', exportName: 'Root', sourceSha256: evidenceSha('primitive'), span: { start: 0, end: 5 } } };
+    const components = options.duplicate ? [component, { ...component, id: 'instance-1' }] : options.wrapped ? [component, primitive] : [component];
+    const row = (id: string) => ({ id, matched: true, problems: [], ownership: { version: 1, components, nodes: [], rendererVersions: ['19.2.4'], problems: [] } });
     const report = { id, referenceId, state: 'complete', sourceUnchanged: true, rows: [row('widget-default'), row('widget-state')] };
     const program = { version: 1, problems: [], files: { [file]: source.sourceSha256 }, components: [source] };
     const dir = path.join(repo, 'private/react-source-ownership', referenceId, id);
@@ -55,6 +59,13 @@ test('initial states use their own case, and ambiguous or missing roots refuse',
   assert.throws(() => readNativeSourceIdentity(f.repo, { ...initial, caseId: 'missing' }), /identity-unavailable/);
   for (const options of [{ roots: ['0'] }, { roots: ['', '1'] }, { duplicate: true }])
     assert.throws(() => readNativeSourceIdentity(f.repo, f.archive(options).request), /identity-unavailable/);
+});
+
+test('a wrapper that renders a dependency at its root keeps the wrapper as its identity (§D.172)', t => {
+  // Measured: the shadcn Switch and Radix's Switch.Root both own the root element.
+  const f = fixture(t), plain = f.archive(), wrapped = f.archive({ wrapped: true, bytes: 'changed source' });
+  assert.deepEqual(readNativeSourceIdentity(f.repo, wrapped.request), { file: wrapped.file, exportName: 'Widget' });
+  assert.doesNotThrow(() => assertNativeSourceIdentity(f.repo, plain.request, wrapped.request));
 });
 
 test('historical report, source program and inventory must retain the journal-pinned bytes', t => {

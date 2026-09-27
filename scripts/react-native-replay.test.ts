@@ -53,3 +53,37 @@ test('refused nested child plans are named in the verdict', async () => {
   assert.equal(v.status, 'stale');
   assert.match(v.reason, /1 nested child plan\(s\) refuse \(react-child-root-preparation-unavailable: Checkbox\)/);
 });
+
+test('a text-only overage is a partial, never a pass; anything else over the limit fails', async () => {
+  const { attachReact, judgeReact } = await import('./benchmark-react-native.js');
+  const { mkdtempSync, mkdirSync, writeFileSync, readFileSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const path = await import('node:path');
+  const cell = { id: 'b', row: 'Badge', criterion: 'C3', kind: 'react-to-native' as const, workspace: 'w', caseId: 'badge', children: false, expect: 'pass' as const };
+  const attach = (scores: object[], sizeDifferenceFromText?: boolean) => {
+    const root = mkdtempSync(path.join(tmpdir(), 'text-residual-'));
+    const plan = { component: { setName: 'Root', fill: '#171717' } };
+    mkdirSync(path.join(root, 'ops', 'op'), { recursive: true });
+    writeFileSync(path.join(root, 'ops', 'op', 'plan.json'), JSON.stringify({ plan }));
+    mkdirSync(path.join(root, 'benchmark', 'pins'), { recursive: true });
+    writeFileSync(path.join(root, 'benchmark', 'pins', 'b.json'), JSON.stringify({ id: 'b', version: 1, kind: 'react-to-native', referenceId: 'r', root: planHash(plan), children: {}, recordedOn: 'x', fidelity: null }));
+    writeFileSync(path.join(root, 'comparison.json'), JSON.stringify({ limitPercent: 5, sourceSize: [43.875, 20], nativeSize: [44, 20], layoutExact: false,
+      ...(sizeDifferenceFromText === undefined ? {} : { text: { sizeDifferenceFromText } }), scores, pass: scores.every((s: any) => s.withinLimit) }));
+    attachReact(root, cell, path.join(root, 'comparison.json'), { root: 'op' }, path.join(root, 'ops'), 'darwin-arm64', '2026-09-27');
+    const pin = JSON.parse(readFileSync(path.join(root, 'benchmark', 'pins', 'b.json'), 'utf8'));
+    return { pin, verdict: judgeReact(cell, pin, { referenceId: 'r', result: { caseId: 'badge', root: { kind: 'k', planSha256: pin.root }, children: [] } }) };
+  };
+  const over = (background: string, residual?: string) => ({ background, mismatchPercent: 6.25, withinLimit: false, ...(residual ? { residual } : {}) });
+  const within = (background: string) => ({ background, mismatchPercent: 2.614, withinLimit: true });
+  // Measured: shadcn Badge "New" — Figma sets the label 26 px wide, the browser 25.875 px, so the roots are 44 and 43.875.
+  const text = attach([over('white', 'text-only'), over('black', 'text-only')], true);
+  assert.equal(text.pin.fidelity.pass, false);
+  assert.equal(text.pin.fidelity.residual, 'text-only');
+  assert.equal(text.verdict.status, 'partial');
+  assert.match(text.verdict.reason, /size differs.*over the limit only inside the text boxes/);
+  assert.equal(attach([within('white'), within('black')], true).verdict.status, 'partial', 'within the limit, size differing only by the text: partial');
+  assert.equal(attach([within('white'), within('black')], false).verdict.status, 'red', 'a size difference the texts do not account for fails');
+  assert.equal(attach([within('white'), within('black')]).verdict.status, 'red', 'no measured texts: unattributed');
+  assert.equal(attach([over('white', 'text-only'), over('black', 'beyond-text')], true).verdict.status, 'red', 'every over-limit score must be text-only');
+  assert.equal(attach([over('white'), over('black')], true).verdict.status, 'red', 'no text boxes recorded: unclassified');
+});

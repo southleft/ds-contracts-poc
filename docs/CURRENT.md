@@ -50,12 +50,13 @@ produces now. This table is generated; do not edit it by hand.
 | CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-27. |
-| shadcn Alert (native return) | Figma → React | **Known failure** | 3/4 in scope within 5% (max 0.000% white, 4.037% black); 1 failing beyond text — darwin-arm64, 2026-09-27. |
-| shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
+| shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-27. |
+| shadcn Badge (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 3.611% black) — darwin-arm64, 2026-09-27. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
+| shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-27. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
-| shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
-| shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (default) | React → Figma | **Partial (text only)** | native vs React source 6.250% white, 6.250% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
+| shadcn Badge (secondary) | React → Figma | **Partial (text only)** | native vs React source 2.614% white, 2.614% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
@@ -72,17 +73,16 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | Altitude Badge | gated above | Pass 10/10, 0.088% vs original (pre-rt21) | Not measured | Not measured |
 | CBDS Checkbox | gated above | Readback verifies live ([D.163](23-known-limitations.md#d163-an-inherited-scale-origin-may-keep-only-the-sources-own-float32-invisible-offset)); disabled look fixed in code ([D.162](23-known-limitations.md#d162-a-parent-set-boolean-state-selects-the-childs-drawn-state-preview)) but the app cannot yet rebuild a completed library operation; no image scores | Not measured | Not measured |
 | CBDS CheckboxIcon | gated above | Created and read back; no image scores | Not measured | Not measured |
-| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | gated above | Opacity and bound height both ways, conflicts refused | Anchor drift fixed; the gate checks that a repeat after another root returns the same operation. Begun-write recovery and no-op update repeats are stale by three runtime revisions |
+| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | gated above | Source → native opacity 0.5 → 0.4 → 0.5 on the current runtime: exact float32 values, same-channel conflict refused with no write, retry, 9/9 variants pixel-identical after the reverse ([D.172](23-known-limitations.md#d172-a-wrapper-and-the-dependency-it-renders-share-one-source-identity)); bound height (D.87) predates it | Both update repeats wrote nothing; the gate checks that a repeat after another root returns the same operation. Begun-write recovery is stale by three runtime revisions |
 | shadcn Alert | gated above (native return) | gated above | In-place attempt refused by name (layout channel) | Not measured |
-| shadcn Badge | Not measured | Plans gated above; the earlier live creation was refused on exact size (text 43.875 px in React, 44 px in Figma), which must pass readback before its fractional root can be scored under the owner's framing rules ([D.167](23-known-limitations.md#d167-owner-framing-decisions-snapped-fractional-boxes-effect-extents-preview-width)) | Not measured | Not measured |
+| shadcn Badge | gated above (native return, [D.171](23-known-limitations.md#d171-the-native-shadcn-badge-returns-to-react-from-a-plugin-capture)) | gated above: created and read back live; text-only partial, Figma's label 0.125 px wider ([D.168](23-known-limitations.md#d168-react--figma-text-only-residuals-are-partials-attributed-by-measurement)) | Not measured | Not measured |
 | Altitude Tabs | gated above | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
 | shadcn Card | Not measured | Plans gated above: the composed root and six nested plans prepare; the nested Checkbox and its three Radix internals refuse (`react-composition-runtime-or-multiple-root-unqualified`: the Radix Checkbox renders more than one root). The 6/6 native variants of 2026-09-18 predate current code | Not measured | Repeat preparation, no duplicates |
 
 No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
-closed: score the shadcn Badges once their live creation passes readback,
-return the Alert to React, give completed library operations a rebuild path so
-the Checkbox fix reaches the canvas, measure bounded updates and recovery on
-the gated rows, and prepare the Card's nested Checkbox. Criterion 5
+closed: give completed library operations a rebuild path so the Checkbox fix
+reaches the canvas, measure bounded updates and recovery on the gated rows,
+and prepare the Card's nested Checkbox. Criterion 5
 also needs a fresh `npm run v1:readiness` on the release commit; the older
 definitions in [docs/26](26-v1-definition.md) and the
 [React V1 scope](REACT-V1-SCOPE.md) now point here.

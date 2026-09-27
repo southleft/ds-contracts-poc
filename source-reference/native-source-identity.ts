@@ -9,6 +9,7 @@ import type { ReactOwnershipReport } from './react-ownership-run.js';
 import type { ReactSourceProgram } from './react-source-program.js';
 import type { ReactReference } from './react-reference.js';
 import { readReactAuthoredStateApiInitial } from './react-state-api-inspection.js';
+import { outermostRootOwners } from './react-ownership.js';
 
 const fail = (): never => { throw Error('react-source-succession-identity-unavailable'); };
 export function readNativeSourceIdentity(repo: string, pin: NativeSourcePin) {
@@ -88,7 +89,10 @@ export function readNativeSourceIdentity(repo: string, pin: NativeSourcePin) {
       if (planes.some(plane => canonicalJson(plane) !== canonicalJson(planes[0]))) fail();
       return { ...root, boundaries: planes[0] };
     }
-    const roots = row.ownership!.components.filter(component => component.roots.includes(''));
+    // A wrapper and the dependency it renders own the same root element (the
+    // shadcn Switch renders Radix's Switch.Root). The identity is the one
+    // outermost owner; two unrelated owners remain ambiguous (docs/23 §D.172).
+    const roots = outermostRootOwners(row.ownership!.components);
     if (roots.length !== 1 || roots[0].roots.length !== 1) fail();
     return definition(roots[0].source);
   } catch { return fail(); }

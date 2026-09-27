@@ -8450,6 +8450,18 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     const grid = child.children[0];
     grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
     grid.layoutSizingVertical = child.layoutSizingVertical;
+    // An empty carrier keeps its 1 px seed on a HUG axis: Figma does not
+    // re-measure a childless frame, and CSS draws an empty grid at 0 (the
+    // shadcn Alert root drew 27 px against React's 26). The FIXED round-trip
+    // through resizeWithoutConstraints reaches exact zero and keeps HUG tracks
+    // (live Scratch probe 2026-09-27; GP4b's revert to FLEX is resize() on a
+    // hugged axis). A FILL axis is never zeroed: it would keep the zero.
+    if (!grid.children.length) for (const axis of ['Vertical', 'Horizontal']) {
+      if (grid['layoutSizing' + axis] !== 'HUG') continue;
+      grid['layoutSizing' + axis] = 'FIXED';
+      grid.resizeWithoutConstraints(axis === 'Horizontal' ? 0 : grid.width, axis === 'Vertical' ? 0 : grid.height);
+      grid['layoutSizing' + axis] = 'HUG';
+    }
   }` : ''}
 }
 ` : ''}${hasCallerSlots && hasRootSlot ? `const callerSlotsByInstance = new WeakMap();

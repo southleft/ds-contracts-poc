@@ -97,4 +97,8 @@ test('a REST resolved-size row corroborates a recorded HUG row only where no ite
   // Second row empty: a mixed list '36px 14.00px' with one item in the first row.
   const mixed: GridFlowRows = { version: 1, rows: [{ type: 'FIXED', value: 36 }, { type: 'HUG', value: 1 }], autoRows: { type: 'HUG', value: 1 } };
   assert.deepEqual(readGridFlowRows(mixed, 1, 1, [{ type: 'FIXED', value: 36 }, { type: 'FIXED', value: 14, resolved: true }]), mixed);
+  // §D.170: the writer now resets an empty carrier to exact zero, which REST prints ' 0.00px'.
+  assert.deepEqual(readGridFlowRows(recipe, 1, 0, [{ type: 'FIXED', value: 0, resolved: true }]), recipe);
+  assert.throws(() => readGridFlowRows(recipe, 1, 1, [{ type: 'FIXED', value: 0, resolved: true }]), /readback-mismatch/, 'an occupied row is never a resolved zero');
+  assert.throws(() => readGridFlowRows(fixed, 1, 0, [{ type: 'FIXED', value: 0, resolved: true }]), /readback-mismatch/, 'a recorded FIXED row keeps its value');
 });

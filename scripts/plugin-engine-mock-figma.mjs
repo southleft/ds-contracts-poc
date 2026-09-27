@@ -802,6 +802,12 @@ export function createFigmaMock(options = {}) {
           : this.paddingTop + this.paddingBottom;
         const px = this._gridTrackPx(tracks, 0, gap, this._gridHugTrackPx(axis, depth));
         const sum = px.reduce((a, b) => a + b, 0) + gap * Math.max(0, tracks.length - 1);
+        // An empty grid keeps its seed extent on a hugged axis, as an empty
+        // flex container does below: live Scratch probe 2026-09-27, an empty
+        // HUG row kept a 100 px birth box (two rows: '50.00px 50.00px'), a
+        // 1 px seed drew 1 px, and only resizeWithoutConstraints(…, 0) left 0.
+        if (!(this.children ?? []).some(ch => ch.layoutPositioning !== 'ABSOLUTE'))
+          return Math.max(sum + pad, axis === 'w' ? this._w : this._h);
         return sum + pad;
       }
       if (this.layoutMode === 'NONE' || !this.children) {

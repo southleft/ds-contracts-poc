@@ -86,3 +86,25 @@ export function alignAtOffsets(ours: PNG, theirs: PNG, at: {x: number; y: number
     },
   };
 }
+
+type Rect = { x: number; y: number; width: number; height: number };
+/** Width and height of the union of text boxes, or null when there is no text. */
+export function textExtent(rects: Rect[]): { width: number; height: number } | null {
+  if (!rects.length) return null;
+  const left = Math.min(...rects.map(r => r.x)), top = Math.min(...rects.map(r => r.y));
+  return { width: Math.max(...rects.map(r => r.x + r.width)) - left, height: Math.max(...rects.map(r => r.y + r.height)) - top };
+}
+
+/** A root size difference is the text's own when, on every axis where the two
+ *  root boxes differ, they differ by exactly what the two texts' extents
+ *  differ by (Figma and the browser setting the same glyphs with different
+ *  advances). Any other size difference is not attributed to text. */
+export function sizeDifferenceFromText(sourceSize: [number, number], nativeSize: [number, number],
+  sourceText: { width: number; height: number } | null, nativeText: { width: number; height: number } | null): boolean {
+  if (!sourceText || !nativeText) return false;
+  const text = [nativeText.width - sourceText.width, nativeText.height - sourceText.height];
+  return [0, 1].every(i => {
+    const root = nativeSize[i] - sourceSize[i];
+    return root === 0 || Math.abs(root - text[i]) < 1 / 64;
+  });
+}

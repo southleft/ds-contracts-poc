@@ -105,5 +105,5 @@ extract/out/diagnose-report.json
 evals/.carried/
 
 # benchmark:check outputs (CI uploads them as an artifact)
-benchmark-verdicts.json
+benchmark-verdicts*.json
 benchmark-plans/

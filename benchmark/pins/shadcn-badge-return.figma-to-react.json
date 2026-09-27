@@ -1,0 +1,93 @@
+{
+  "id": "shadcn-badge-return.figma-to-react",
+  "version": 1,
+  "inputSha256": "65b09ce58599b25d853dfc9aba6f1daf77f9180b7a9599fdc867803725b1b634",
+  "requestSha256": "80bde0e339edd783d8a6809055b2e0241f7bc62c48760fafee7a978eb6e8e2bc",
+  "rootId": "ds.root-matrix39a19bbc2f3d67e9",
+  "generated": {
+    "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.module.css": "a18359c982847ecf0718acc6cc31d0dd736d9462af685a056f84562452c72de4",
+    "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.tsx": "5d44cad3d6bb13d6042dc61596ef1b3cf72ac543791a649797b207ec6e8ee53f",
+    "RootMatrix39a19bbc2f3d67e9/index.ts": "b35f27479d1c927e0ba1e754e017b6365a1005d81597be2d4a164f718f8b3056",
+    "index.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
+    "tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67"
+  },
+  "generatedSha256": "8037b61920518a0b28e7d9125fac188fd585c9935cb36c4b1c9c9a414b4418e7",
+  "entries": {
+    "package/dist/index.d.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
+    "package/dist/index.js": "ecc115e01babfec9e9663d3374aab484ac9e5e3577bf21b6c256617fc5b32366",
+    "package/dist/RootMatrix39a19bbc2f3d67e9/index.d.ts": "b35f27479d1c927e0ba1e754e017b6365a1005d81597be2d4a164f718f8b3056",
+    "package/dist/RootMatrix39a19bbc2f3d67e9/index.js": "c36225c00b2636a14379a91ba91bb59eff8af7e85000c323be80282653aac39b",
+    "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.d.ts": "ac1602060eee078619e08e2e37ff0fac82f0dba6fa33ae7aae0825400a95a358",
+    "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.js": "5e12a70e20e809e42d9f5b28f6b8568d06b33a80109b798240620fc79a881e71",
+    "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.module.css": "a18359c982847ecf0718acc6cc31d0dd736d9462af685a056f84562452c72de4",
+    "package/dist/tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67",
+    "package/package.json": "045e78bbcfcb5ae31caa90d8bc80c81773bab646bb7bf4412bad41ed28b76bd7",
+    "package/README.md": "919520e6ec9b3abded6e50ab9564ed772539f533fedacdaf04e6f60eb8913747"
+  },
+  "entriesSha256": "48a09020fce3416fff24cb1be59674a5128f5c7bfb67d30bc34f083700ad22f7",
+  "recordedOn": "darwin-arm64",
+  "fidelity": {
+    "receipt": "benchmark/receipts/shadcn-badge-return.figma-to-react/receipt.json",
+    "receiptSha256": "5131dbdc0545d0ed57fa1ed502f5a586e378e5fd8850a70e47d679111f0c67a9",
+    "generatedSha256": "8037b61920518a0b28e7d9125fac188fd585c9935cb36c4b1c9c9a414b4418e7",
+    "component": "RootMatrix39a19bbc2f3d67e9",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-27",
+    "cases": [
+      {
+        "key": "variant-default",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-null",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      },
+      {
+        "key": "variant-destructive",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-link",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      },
+      {
+        "key": "variant-secondary",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-outline",
+        "withinLimit": true,
+        "white": 0,
+        "black": 3.6111111111111107,
+        "residual": null
+      },
+      {
+        "key": "variant-ghost",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      }
+    ],
+    "problems": [
+      "image-framing-unqualified:variant-null:comparison-has-no-paint",
+      "image-framing-unqualified:variant-link:comparison-has-no-paint",
+      "image-framing-unqualified:variant-ghost:comparison-has-no-paint"
+    ]
+  }
+}

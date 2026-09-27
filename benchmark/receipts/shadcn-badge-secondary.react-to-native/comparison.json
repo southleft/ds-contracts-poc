@@ -1,0 +1,69 @@
+{
+  "nodeId": "253:5903",
+  "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+  "limitPercent": 5,
+  "sourceSize": [
+    43.875,
+    20
+  ],
+  "nativeSize": [
+    44,
+    20
+  ],
+  "layoutExact": false,
+  "text": {
+    "source": {
+      "width": 25.875,
+      "height": 15
+    },
+    "native": {
+      "width": 26,
+      "height": 16
+    },
+    "nativeRects": [
+      {
+        "x": 9,
+        "y": 2,
+        "width": 26,
+        "height": 16
+      }
+    ],
+    "sizeDifferenceFromText": true
+  },
+  "sourceFraming": {
+    "rule": "snap-outward-v1",
+    "rootOffset": {
+      "x": 8,
+      "y": 8
+    },
+    "layoutBox": {
+      "width": 43.875,
+      "height": 20
+    },
+    "crop": {
+      "x": 8,
+      "y": 8,
+      "width": 44,
+      "height": 20
+    },
+    "rootInCrop": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "scores": [
+    {
+      "background": "white",
+      "mismatchPercent": 2.6136363636363633,
+      "withinLimit": true,
+      "triptych": "source-native-white.png"
+    },
+    {
+      "background": "black",
+      "mismatchPercent": 2.6136363636363633,
+      "withinLimit": true,
+      "triptych": "source-native-black.png"
+    }
+  ],
+  "pass": true
+}

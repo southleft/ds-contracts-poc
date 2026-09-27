@@ -1,0 +1,882 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "RootMatrix39a19bbc2f3d67e9",
+  "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+  "capture": {
+    "background": "transparent",
+    "comparisonBackgrounds": [
+      "white",
+      "black"
+    ],
+    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "deviceScaleFactor": 1,
+    "nativeRaster": {
+      "kind": "figma-rest-full-bounds-v1",
+      "scale": 1
+    }
+  },
+  "generatedSha256": {
+    "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.module.css": "a18359c982847ecf0718acc6cc31d0dd736d9462af685a056f84562452c72de4",
+    "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.tsx": "5d44cad3d6bb13d6042dc61596ef1b3cf72ac543791a649797b207ec6e8ee53f",
+    "RootMatrix39a19bbc2f3d67e9/index.ts": "b35f27479d1c927e0ba1e754e017b6365a1005d81597be2d4a164f718f8b3056",
+    "index.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
+    "tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67"
+  },
+  "cases": [
+    {
+      "key": "variant-default",
+      "figmaName": "variant=default",
+      "nodeId": "253:5733",
+      "props": {
+        "variant": "default"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(23, 23, 23)",
+        "color": "rgb(250, 250, 250)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 12,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 12,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "14e8a078b4bce0b2cbdbc7d64ddd7650a7ed4246730873ca99906e278e70cbe5"
+      }
+    },
+    {
+      "key": "variant-null",
+      "figmaName": "variant=null",
+      "nodeId": "253:5736",
+      "props": {
+        "variant": "null"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-null.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 52,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 52,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      }
+    },
+    {
+      "key": "variant-destructive",
+      "figmaName": "variant=destructive",
+      "nodeId": "253:5739",
+      "props": {
+        "variant": "destructive"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(231, 0, 11, 0.1)",
+        "color": "rgb(231, 0, 11)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-destructive.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 92,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 92,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "1fc3a2581b445d8dd710135f5fbf87cf8fea21c0f1a03e258cd32469d55c6907"
+      }
+    },
+    {
+      "key": "variant-link",
+      "figmaName": "variant=link",
+      "nodeId": "253:5742",
+      "props": {
+        "variant": "link"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(23, 23, 23)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-link.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 132,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 132,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      }
+    },
+    {
+      "key": "variant-secondary",
+      "figmaName": "variant=secondary",
+      "nodeId": "253:5745",
+      "props": {
+        "variant": "secondary"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(23, 23, 23)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-secondary.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 172,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 172,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "4fd211a03e9c8e21d1cf1d3bc51b7719f3ef3034e67e334fa1e04c7151b0add3"
+      }
+    },
+    {
+      "key": "variant-outline",
+      "figmaName": "variant=outline",
+      "nodeId": "253:5748",
+      "props": {
+        "variant": "outline"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-outline.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 212,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 212,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "59bbda5b8551099f49b24733a7ccd65fe86784f3c4632c737469561a39a31c22"
+      }
+    },
+    {
+      "key": "variant-ghost",
+      "figmaName": "variant=ghost",
+      "nodeId": "253:5751",
+      "props": {
+        "variant": "ghost"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "width": 18,
+        "height": 20,
+        "tag": "span",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-ghost.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 252,
+          "width": 18,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 252,
+          "width": 18,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      }
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": null,
+      "note": "contract declares no TEXT-bound prop"
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": true,
+      "renderedAtRuntime": true,
+      "refusedByType": false
+    },
+    "variants": [
+      {
+        "prop": "variant",
+        "switchedTo": "default",
+        "cellsSwitched": [
+          "variant-null",
+          "variant-destructive",
+          "variant-link",
+          "variant-secondary",
+          "variant-outline",
+          "variant-ghost"
+        ],
+        "cellsExpectedToChange": [
+          "variant-null",
+          "variant-destructive",
+          "variant-link",
+          "variant-secondary",
+          "variant-outline",
+          "variant-ghost"
+        ],
+        "cellsChanged": [
+          "variant-null",
+          "variant-destructive",
+          "variant-link",
+          "variant-secondary",
+          "variant-outline",
+          "variant-ghost"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "frameEvidence": {
+      "before": "figma-bounds-before.json",
+      "after": "figma-bounds-after.json",
+      "version": "2403933616105000212",
+      "export": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": true
+      },
+      "raster": {
+        "kind": "figma-rest-full-bounds-v1",
+        "scale": 1
+      },
+      "beforeSha256": "f6a2f23c30ee9bb7532e56ae55d47cf3c0c7240929cc143422910981bbdbfc52",
+      "afterSha256": "f6a2f23c30ee9bb7532e56ae55d47cf3c0c7240929cc143422910981bbdbfc52"
+    },
+    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "variant-default",
+        "figmaImage": "figma-253_5733.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 0,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 18,
+              "height": 20
+            }
+          },
+          "pixelsCompared": 360
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 40,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 40,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "55984eba108e021df997054e414410b5b0b710b48a8435980a220d9a0ba25007",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 84.72,
+          "figma": 86.67
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-null",
+        "figmaImage": "figma-253_5736.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "refused",
+          "reason": "comparison-has-no-paint",
+          "withinLimit": false
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 100,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 100,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "312bfbca6285b9e59274bf9bcca6ac89ae3189ec6b1016760014b0a67c218a38",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 0,
+          "figma": 0
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-destructive",
+        "figmaImage": "figma-253_5739.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 0,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 18,
+              "height": 20
+            }
+          },
+          "pixelsCompared": 360
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 160,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 160,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "27512bc65517e57d008c6d8bd91881e6b535c1c508312dff9c6570e15cb9d801",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 81.11,
+          "figma": 81.11
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-link",
+        "figmaImage": "figma-253_5742.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "refused",
+          "reason": "comparison-has-no-paint",
+          "withinLimit": false
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 220,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 220,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "312bfbca6285b9e59274bf9bcca6ac89ae3189ec6b1016760014b0a67c218a38",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 0,
+          "figma": 0
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-secondary",
+        "figmaImage": "figma-253_5745.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 0,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 18,
+              "height": 20
+            }
+          },
+          "pixelsCompared": 360
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 280,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 280,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "5ce76757678c7f1aea95f852a3a59ef02a220660a42b8a29213a9966b1ed09a4",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 82.78,
+          "figma": 82.22
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-outline",
+        "figmaImage": "figma-253_5748.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 3.6111111111111107,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 3.6111111111111107,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 18,
+              "height": 20
+            }
+          },
+          "pixelsCompared": 360
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 340,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 340,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "6a902f93ed8352745a9ffbc1d3730c2d997301625eeec8fab316c72e8a7301dc",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 26.67,
+          "figma": 27.78
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-ghost",
+        "figmaImage": "figma-253_5751.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "refused",
+          "reason": "comparison-has-no-paint",
+          "withinLimit": false
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 400,
+            "width": 18,
+            "height": 20
+          },
+          "render": {
+            "x": 40,
+            "y": 400,
+            "width": 18,
+            "height": 20
+          },
+          "pngSha256": "312bfbca6285b9e59274bf9bcca6ac89ae3189ec6b1016760014b0a67c218a38",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 0,
+          "figma": 0
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 18,
+            "height": 20
+          },
+          "figma": {
+            "width": 18,
+            "height": 20
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "image-framing-unqualified:variant-null:comparison-has-no-paint",
+    "image-framing-unqualified:variant-link:comparison-has-no-paint",
+    "image-framing-unqualified:variant-ghost:comparison-has-no-paint"
+  ],
+  "limitations": [
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {},
+    "stubContracts": [],
+    "componentFolders": [
+      "RootMatrix39a19bbc2f3d67e9"
+    ],
+    "contractGraph": []
+  },
+  "package": {
+    "name": "@ds-contracts-generated/rootmatrix39a19bbc2f3d67e9",
+    "tarballSha256": "4d21ee7be3f5c2f81b3c9da2a5c2ead3f83ea0d096591c66255bfc5621faa944",
+    "distFiles": [
+      "RootMatrix39a19bbc2f3d67e9",
+      "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.d.ts",
+      "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.js",
+      "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.module.css",
+      "RootMatrix39a19bbc2f3d67e9/index.d.ts",
+      "RootMatrix39a19bbc2f3d67e9/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "f77309d66e3415ff1104c8d43d58273f2a8b7b67ed03ebc76b146703b969173c",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "fontProvision": {
+      "kind": "environment-fonts",
+      "manifest": null,
+      "sourceFontByteIdentity": "unverified",
+      "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
+      "loaded": []
+    },
+    "builtCss": {
+      "bytes": 24795,
+      "tokenDefinitions": 425,
+      "tokenDefinitionsExpected": 425
+    },
+    "containerFraming": {
+      "rule": "figma-preview-width-v1",
+      "cases": []
+    },
+    "interactiveNesting": []
+  },
+  "outcome": "refused-or-failed"
+}
