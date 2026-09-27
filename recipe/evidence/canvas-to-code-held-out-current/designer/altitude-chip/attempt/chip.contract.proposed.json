@@ -174,7 +174,8 @@
       "anchors": {
         "importPath": "src/components/Chip",
         "export": "Chip"
-      }
+      },
+      "statePreviews": true
     }
   }
 }

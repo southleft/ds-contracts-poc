@@ -2088,6 +2088,13 @@ export const PropByPropSchema = z.strictObject({
   map: z.record(z.string(), z.string()),
 });
 
+/** The states a caller may force on a child that opts in with
+ *  `bindings.code.statePreviews` (docs/23 §D.164): the pointer and keyboard
+ *  states a platform runs as pseudo-classes. `disabled` is excluded — it is
+ *  already a boolean prop a caller sets. */
+export const CODE_STATE_PREVIEWS = ["hover", "active", "focus-visible"] as const;
+export const CodeStatePreviewSchema = z.enum(CODE_STATE_PREVIEWS);
+
 export const ComponentRefSchema = z.strictObject({
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
@@ -2122,6 +2129,19 @@ export const ComponentRefSchema = z.strictObject({
    *  The canvas emitter ledgers overrides as channelMiss (declared-not-
    *  drawn) this round. Absent — byte-identical classic behavior. */
   overrides: z.record(z.string(), TokenRefSchema).optional(),
+  /** docs/23 §D.164 — the child's DRAWN interaction state this usage shows.
+   *  A designer who draws a wrapper's `state=hover` draws its nested child's
+   *  Hover cell; the child runs hover as a pseudo-class, which no caller can
+   *  set, so the parent selects the drawing through the child's opt-in
+   *  preview input (`bindings.code.statePreviews`). A literal state, or a
+   *  per-value LOOKUP of one parent enum prop — a parent value absent from
+   *  the map forces nothing (the live pseudo-classes still run). React CSS
+   *  Modules renders it; the canvas selects the child's State preview where
+   *  it is drawn and ledgers it by name elsewhere; every other surface
+   *  refuses by name. Absent — byte-identical classic behavior. */
+  statePreview: z
+    .union([CodeStatePreviewSchema, z.strictObject({ prop: z.string(), map: z.record(z.string(), CodeStatePreviewSchema) })])
+    .optional(),
 });
 
 export interface Part {
@@ -2913,6 +2933,15 @@ export const ContractBindingsSchema = z.strictObject({
     /** Optional retained implementation; never silently replaced by generated
      * native anatomy when its verified artifact or bindings are unavailable. */
     runtime: CodeRuntimeBindingSchema.optional(),
+    /** OPT-IN code-side state previews (docs/23 §D.164) — the code twin of
+     *  `bindings.figma.statePreviews`. The generated component accepts a
+     *  `statePreview` input that renders one declared pseudo-class state
+     *  (hover / active / focus-visible) without the pointer or keyboard, so
+     *  a composing parent can show the state its designer drew. The live
+     *  pseudo-classes are unchanged; every state rule matches either one at
+     *  the same specificity. Requires a single-root contract that declares a
+     *  previewable state (refused by name otherwise). */
+    statePreviews: z.literal(true).optional(),
   }),
 });
 

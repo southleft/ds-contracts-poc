@@ -66,7 +66,7 @@ import {
   type EmitCtx,
   type GridCellPlan,
 } from './emit-react.js';
-import { disabledStateSelector, stateSelectorsFor } from '../packages/core/src/anatomy.js';
+import { disabledStateSelector, STATE_PREVIEW_ATTRIBUTE, stateSelectorsFor } from '../packages/core/src/anatomy.js';
 
 const stripBraces = (ref: string) => ref.slice(1, -1);
 const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`;
@@ -197,7 +197,7 @@ function componentCss(contract: Contract): string[] {
   // A disabled state styles what the rendered root actually exposes
   // (htmlRootDisabledSelector); every state rule, root and part, reads it.
   const disabledSel = htmlRootDisabledSelector(contract);
-  const STATE_SELECTORS = stateSelectorsFor(disabledSel);
+  const STATE_SELECTORS = stateSelectorsFor(disabledSel, contract.bindings?.code?.statePreviews === true);
   // N-PLACEHOLDER REFS over enum AND boolean props (the states residual of the
   // multi-axis fix, 2026-08-22). Round 10's enumCombos expanded enums only: a
   // boolean placeholder — and any `states` ref with two placeholders — fell
@@ -559,7 +559,7 @@ function componentCss(contract: Contract): string[] {
     ]);
   }
   if (contract.states.includes('focus-visible')) {
-    rule(`${rootCls}:focus-visible`, ['outline-style: solid', 'outline-offset: 2px']);
+    rule(`${rootCls}${STATE_SELECTORS['focus-visible']}`, ['outline-style: solid', 'outline-offset: 2px']);
   }
   if (contract.states.includes('disabled') && contract.semantics.element === 'button' && !rootDeclaresCursor) {
     rule(`${rootCls}${disabledSel}`, ['cursor: not-allowed']);
@@ -1001,6 +1001,8 @@ function validateStaticHtmlIdentity(contract: Contract, ctx: EmitCtx): void {
 interface RenderState {
   subst: Record<string, string>;          // enum prop → showcased value
   bools: Record<string, boolean>;         // boolean prop → showcased value
+  /** docs/23 §D.164 — the drawn interaction state a composing parent forces. */
+  statePreview?: string;
 }
 
 function renderComponentHtml(
@@ -1166,6 +1168,10 @@ function renderComponentHtml(
           if (typeof value === 'string') depState.subst[pn] = value;
         } else depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
       }
+      // docs/23 §D.164 — a forced child state: a literal, or a lookup of the
+      // live parent value (unmapped → nothing forced).
+      const preview = part.component.statePreview;
+      if (preview !== undefined) depState.statePreview = typeof preview === 'string' ? preview : preview.map[propValue(preview.prop) ?? ''];
       // A2 grid (G3/P12): an instance cell rides a wrapper element — its
       // class carries the placement (see componentCss).
       if (gridPlan.wrappedInstances.has(name)) {
@@ -1345,6 +1351,8 @@ function renderComponentHtml(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     attrs.push(`data-${dataName}="true"`);
   }
+  if (state.statePreview !== undefined && contract.bindings?.code?.statePreviews === true)
+    attrs.push(`${STATE_PREVIEW_ATTRIBUTE}="${escapeHtml(state.statePreview)}"`);
   // ONE role on the root: anatomy.root.attrs.role (rendered above) wins over
   // the semantics default — the same rule emit-react / react-inline / the WC
   // emitter apply; a DIFFERING pair is refused by name in validateContract.

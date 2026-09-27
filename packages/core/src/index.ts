@@ -65,6 +65,7 @@ export {
   partOwnsText,
   settleStrokeShadows,
   stateSelectorsFor,
+  STATE_PREVIEW_ATTRIBUTE,
   textBoxConflicts,
   textBoxLetterSpacing,
   textBoxStaticRefusals,

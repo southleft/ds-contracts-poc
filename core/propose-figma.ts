@@ -30,7 +30,7 @@ import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, CODE_STATE_PREVIEWS, type ComponentRef, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -234,7 +234,9 @@ export interface MinimalChildContract {
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; default?: unknown; required?: boolean; bindings: { figma: { property?: string; values?: Record<string, string>; unsetValue?: string } } }>;
-  bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } } };
+  bindings?: { figma?: { anchors?: { componentSetKey?: string | null; fileKey?: string | null; nodeId?: string | null } }; code?: { statePreviews?: boolean } };
+  /** docs/23 §D.164 — the states a forced `statePreview` may select. */
+  states?: string[];
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
    *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
@@ -7893,6 +7895,61 @@ function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey
   }
 }
 
+/** docs/23 §D.164 — the child state a host FORCES on each occurrence (a
+ *  hover / active / focus-visible cell selected on the child's projected state
+ *  axis) as `component.statePreview`: one literal when every occurrence
+ *  agrees, else a per-value lookup of the ONE parent enum axis it is a pure
+ *  function of (a value that forces nothing is left out of the map). Anything
+ *  else forces nothing and is named. */
+function forcedStatePreview(
+  occurrences: ReadonlyArray<{ variant: string; node: DumpNode }>,
+  axisName: string,
+  child: MinimalChildContract,
+  ctx: Ctx,
+  where: string,
+  instanceOf: string,
+): ComponentRef['statePreview'] | undefined {
+  const rows = occurrences.map((o) => {
+    const raw = Object.entries(o.node.componentProperties ?? {}).find(([k]) => k.split('#')[0] === axisName)?.[1];
+    const state = typeof raw === 'string' ? INTERACTION_STATE_BY_VALUE[normStateValue(raw)] : undefined;
+    const preview = (CODE_STATE_PREVIEWS as readonly string[]).includes(state ?? '') ? (state as (typeof CODE_STATE_PREVIEWS)[number]) : undefined;
+    return { variant: o.variant, preview, raw };
+  });
+  const forced = rows.filter((r) => r.preview !== undefined);
+  if (forced.length === 0) return undefined;
+  const undeclared = [...new Set(forced.map((r) => r.preview!))].filter((state) => child.states !== undefined && !child.states.includes(state));
+  if (undeclared.length > 0) {
+    ctx.notes.push(`${where}: state-preview-undeclared — nested "${instanceOf}" is drawn in ${undeclared.join(', ')}, which ${child.id} does not declare; not forced; review`);
+    return undefined;
+  }
+  const spelled = (r: (typeof rows)[number]) => `${axisName}=${String(r.raw)}`;
+  if (forced.length === rows.length && new Set(forced.map((r) => r.preview)).size === 1) {
+    ctx.notes.push(`${where}: nested "${instanceOf}" is drawn in ${child.id}'s ${forced[0]!.preview} state on every occurrence (${spelled(forced[0]!)}) — carried as statePreview "${forced[0]!.preview}" (docs/23 §D.164)`);
+    return forced[0]!.preview;
+  }
+  for (const a of ctx.axes.filter((x) => !isBooleanAxis(x) && !x.omitted)) {
+    const byValue = new Map<string, string>();
+    let pure = true;
+    for (const r of rows) {
+      const label = axisValuesOf(r.variant)[a.property];
+      const value = r.preview ?? '';
+      if (label === undefined || (byValue.has(label) && byValue.get(label) !== value)) { pure = false; break; }
+      byValue.set(label, value);
+    }
+    if (!pure || !a.values.every((label) => byValue.has(label))) continue;
+    const map: Record<string, (typeof CODE_STATE_PREVIEWS)[number]> = {};
+    for (const label of a.values) {
+      const hit = byValue.get(label);
+      if (hit) map[axisValue(a, label)] = hit as (typeof CODE_STATE_PREVIEWS)[number];
+    }
+    fenceSparseInference(ctx.axes, `component-state-preview@${where}`, rows.map((r) => ({ variant: r.variant, value: r.preview ?? null })));
+    ctx.notes.push(`${where}: nested "${instanceOf}" is drawn in ${child.id}'s pointer/keyboard states as a pure function of the "${a.propName}" axis (${Object.entries(map).map(([k, v]) => `${k}→${v}`).join(', ')}) — carried as a per-value statePreview (docs/23 §D.164); other values force nothing`);
+    return { prop: a.propName, map };
+  }
+  ctx.notes.push(`${where}: state-preview-forward-incomplete — nested "${instanceOf}" is drawn in ${[...new Set(forced.map((r) => r.preview))].join(', ')} on ${forced.length} of ${rows.length} occurrence(s), not as a function of one complete parent enum axis; not forced; review`);
+  return undefined;
+}
+
 /** Thread applied props that track a parent finite axis 1:1 into
  *  "{parentProp}" refs (ComponentRefSchema: the child prop follows the
  *  parent's per variant). Detection is exact-correlation over EVERY
@@ -9537,6 +9594,13 @@ function buildPartFromEvidence(
       // Every applied prop may have been dropped as unmappable (each is a
       // named note) — an empty props object carries nothing.
       if (Object.keys(canonical).length > 0) component.props = canonical;
+      // docs/23 §D.164 — the hover / active / focus-visible cells a host
+      // selects on the child's projected axis reach the child's code-side
+      // preview input when the child opted in.
+      if (projectState && stateChild?.bindings?.code?.statePreviews === true) {
+        const preview = forcedStatePreview(m.occ, stateAxes[0]!, stateChild, ctx, where, instanceOf);
+        if (preview !== undefined) component.statePreview = preview;
+      }
     } else {
       ctx.notes.push(
         `${where}: fixed prop values of the nested "${instanceOf}" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured`,
@@ -10178,7 +10242,7 @@ function canonicalizeInstanceProps(
       out.disabled = projected === 'disabled';
       mapped++;
       const residual = `${where}: state-forward-pseudo-class-unrepresentable — applied "${bare}=${value}" on nested "${instanceOf}" is ${child.id}'s projected ${projected} state, which has no input a caller can set; its drawn appearance is not carried; review`;
-      if (projected !== 'default' && projected !== 'disabled' && !ctx.notes.includes(residual)) ctx.notes.push(residual);
+      if (projected !== 'default' && projected !== 'disabled' && child.bindings?.code?.statePreviews !== true && !ctx.notes.includes(residual)) ctx.notes.push(residual);
       continue;
     }
     if (child) {
@@ -13891,6 +13955,24 @@ function proposeFromDumpFenced(
         ctx.notes.push(
           `bindings.figma.statePreviews NOT set: ${statePropertyTaken ? `a prop already binds the reserved design property "${STATE_PREVIEW_PROPERTY}"` : `state overrides substitute ${substProps.size} enum props (${[...substProps].join(', ')}) — previews multiply exactly ONE primary axis`} — canvas state previews refused by name, review`,
         );
+      }
+      // docs/23 §D.164 — the states were DRAWN as cells any instance can
+      // select, so the code component gets the same selection (the code twin
+      // of the canvas opt-in) and a composing parent can show the drawn state.
+      // Not for a preview axis this pipeline declared: that reads back to the
+      // contract it came from, unchanged.
+      const previewable = present.filter((s) => (CODE_STATE_PREVIEWS as readonly string[]).includes(s));
+      const pipelinePreviewAxis = declaredSparseAxis !== null && declaredSparseAxis.axis === statePromo.axis.property;
+      if (!pipelinePreviewAxis && previewable.length > 0) {
+        if (Object.keys(contract.anatomy as object).length === 1 && !props.some((p) => (p.bindings as { code?: { prop?: string } }).code?.prop === 'statePreview')) {
+          const cb = contract.bindings as { code: Record<string, unknown> };
+          cb.code = { ...cb.code, statePreviews: true };
+          ctx.notes.push(
+            `bindings.code.statePreviews: true — the designer drew ${previewable.join(', ')} as cells an instance can select; the generated component takes a statePreview input for them, so a composing parent can show the drawn state (docs/23 §D.164)`,
+          );
+        } else {
+          ctx.notes.push(`bindings.code.statePreviews NOT set: the contract is multi-root or already uses the code prop "statePreview" — code state previews refused by name, review`);
+        }
       }
     } else {
       ctx.notes.push(

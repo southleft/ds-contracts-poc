@@ -80,7 +80,7 @@
         "appArtifact": "bdef6602183c9c9ca442d5e8e363bd95f5f4d85b6a90a6ac3666cc476a2b6863",
         "appTarballSha256": "67b659208368"
       },
-      "expect": "known-failure",
+      "expect": "pass",
       "scope": {
         "note": "20 variants; the 4 focus variants are out of scope (keyboard focus is V1.1).",
         "outOfScope": [
@@ -90,8 +90,7 @@
           }
         ]
       },
-      "component": "Checkbox",
-      "knownFailure": "hover renders the rest variant (variant-prop-discarded:state); label cells over 5% only on text are named partials"
+      "component": "Checkbox"
     },
     {
       "id": "shadcn-alert-default.react-to-native",

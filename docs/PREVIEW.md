@@ -21,8 +21,8 @@ preview command.
 | --- | --- | --- | --- |
 | CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-09-25. |
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
-| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
-| CBDS Checkbox | Figma → React | **Known failure** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial; problems: variant-prop-discarded:state — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
+| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |

@@ -21,16 +21,16 @@
   height: fit-content;
 }
 
-.root:focus-visible {
+.root:is(:focus-visible, [data-state-preview='focus-visible']) {
   outline-style: solid;
   outline-offset: 2px;
 }
 
-.root:focus-visible {
+.root:is(:focus-visible, [data-state-preview='focus-visible']) {
   outline-color: var(--theme-color-focus-ring);
 }
 
-.root:focus-visible {
+.root:is(:focus-visible, [data-state-preview='focus-visible']) {
   outline-width: var(--theme-border-width-md);
 }
 

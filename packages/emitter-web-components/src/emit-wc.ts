@@ -1613,6 +1613,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     for (const w of walkAnatomy(c)) {
       if (w.part.absolutePlacement || w.part.absolutePlacementByCombination) throw new Error('WEB_COMPONENT_ABSOLUTE_PLACEMENT_UNSUPPORTED');
       if (w.part.component?.initialProps) throw new Error('WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
+      if (w.part.component?.statePreview !== undefined) throw new Error('WEB_COMPONENT_STATE_PREVIEW_UNSUPPORTED: component statePreview (docs/23 §D.164) is implemented for React');
       if (w.part.component && w.part.parts !== undefined) throw new Error('WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED');
       const ids = [...(w.part.component ? [w.part.component.id] : []), ...(w.part.slot?.defaultContent ?? []).map(i => i.id)];
       for (const id of ids) { const dep = ctx.contracts.get(id); if (dep) refuseMapped(dep); }

@@ -11771,3 +11771,55 @@ readback with the rule gives `supported-structure-observed` with 0 problems
 (`private/direct-state-ink-v255/native-v1/readback-v2.json`). Reverse by
 restoring `numeric(a.x,b.x*sx)` / `numeric(a.y,b.y*sy)` in
 `core/native-source-observation.ts` and removing `scaledOrigin` and its test.
+
+## D.164 A parent-selected child interaction state reaches the child's code-side preview input
+
+**AGENT decision, 2026-09-26.** CBDS Checkbox draws `state=hover` and
+`state=focus` as wrapper variants that select the nested Checkbox-icon's Hover
+and Focus cells. The icon's designer State axis is projected (D.41), so its
+hover and focus run as pseudo-classes, and a pseudo-class has no input a
+caller can set. The wrapper's `state="hover"` therefore rendered rest ink in
+React (`state-forward-pseudo-class-unrepresentable`, D.156), and the consumer
+check named it `variant-prop-discarded:state`, the one non-text failure on the
+benchmark's CBDS Checkbox cell.
+
+The rule is the code twin of canvas state previews, and it is generic:
+
+- A contract whose states were drawn as selectable cells (a promoted state
+  axis that is not a preview axis this pipeline declared) gets
+  `bindings.code.statePreviews: true`. Its generated component takes a
+  `statePreview` input (`hover`, `active` or `focus-visible`, from its declared
+  states) rendered as `data-state-preview`. Every state rule in its module
+  sheet matches either the pseudo-class or that attribute inside `:is()`, so
+  no rule changes specificity and the live states still run.
+- A host that draws its child in one of those cells carries
+  `component.statePreview`: a literal when every occurrence agrees, otherwise a
+  per-value lookup of the one parent enum axis it is a pure function of
+  (checked over every occurrence and the whole axis domain, through the sparse
+  fence). An unmapped value forces nothing. Anything else is named
+  (`state-preview-forward-incomplete`, `state-preview-undeclared`).
+- React CSS Modules and the static HTML preview render it. The canvas selects
+  the child's `State` preview through the D.162 path (and names it where the
+  child draws none). Inline React omits it with the pseudo-class state tokens
+  it already omits, and says so. Web Components refuse
+  `component.statePreview` by name (`WEB_COMPONENT_STATE_PREVIEW_UNSUPPORTED`).
+- Validation refuses a forced state on a child that has not opted in, a state
+  the child does not declare, a map over a non-enum or an unknown value, a root
+  or repeated ref, and an opt-in on a multi-root contract, without a
+  previewable state, or colliding with a `statePreview` code prop.
+
+Contracts without either field emit byte-identical output; no committed
+generated file changed. Measured on the benchmark's frozen CBDS input with
+the unchanged consumer check (hashed Inter, 5% limit): Checkbox's
+`variant-prop-discarded:state` is gone and its four hover cells now render the
+drawn hover glyph; their remaining overage is inside text boxes only (0%
+outside the text mask, 0% on black), the same label residual as the rest
+cells. CheckboxIcon re-measured identically (same 42 scores, same problems).
+The four focus cells stay out of V1 scope (keyboard focus is V1.1): forcing
+`focus-visible` now draws the ring, which changes their content size and does
+not yet match Figma's ring geometry. Tests: `core/code-state-preview.test.ts`;
+the two designer-axis selector expectations in
+`extract/figma/state-axis.test.ts` now spell the preview alternative. Reverse
+by deleting `core/react-state-preview.ts`, the `statePreview` /
+`bindings.code.statePreviews` schema fields and their readers, and
+`forcedStatePreview` in `core/propose-figma.ts`.

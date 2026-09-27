@@ -16,6 +16,7 @@ import {
   REF_OVERRIDE_CHANNELS,
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
+  CODE_STATE_PREVIEWS,
   STYLES_WHEN_ALLOWED,
   absentVariantIssues,
   isNativeCheckablePart,
@@ -161,6 +162,28 @@ export function validateContract(
           const parent = ref && contract.props.find(prop => prop.name === ref[1]);
           if (ref ? !parent || !isEnum(parent) || parent.type.enum.some(v => !child.type.enum.includes(v)) : !child.type.enum.includes(value))
             errors.push(`${contract.id}: part "${name}" initialProps value for "${key}" is outside the child canonical domain`);
+        }
+      }
+      // docs/23 §D.164 — a forced child state needs the child's opt-in
+      // preview input, a state the child declares, and (map form) one parent
+      // enum prop whose values key the lookup.
+      const preview = part.component.statePreview;
+      if (preview !== undefined) {
+        if (p.length === 1 || part.repeat)
+          errors.push(`${contract.id}: part "${name}" statePreview requires a non-repeated nested component`);
+        if (dep && dep.bindings?.code?.statePreviews !== true)
+          errors.push(`${contract.id}: part "${name}" statePreview needs ${dep.id} to declare bindings.code.statePreviews — without the input the forced state would be a silent no-op`);
+        const states = typeof preview === 'string' ? [preview] : Object.values(preview.map);
+        for (const state of new Set(states))
+          if (dep && !dep.states.includes(state))
+            errors.push(`${contract.id}: part "${name}" statePreview "${state}" is not a state ${dep.id} declares`);
+        if (typeof preview !== 'string') {
+          const parent = contract.props.find((prop) => prop.name === preview.prop);
+          if (!parent || !isEnum(parent))
+            errors.push(`${contract.id}: part "${name}" statePreview maps "${preview.prop}" but no enum prop "${preview.prop}" exists on this contract`);
+          else for (const value of Object.keys(preview.map))
+            if (!parent.type.enum.includes(value))
+              errors.push(`${contract.id}: part "${name}" statePreview maps "${preview.prop}" value "${value}", which is not one of its values`);
         }
       }
       if (part.parts !== undefined) {
@@ -1346,6 +1369,18 @@ export function validateContract(
         `${contract.id}: bindings.figma.statePreviews reserves the design property "${STATE_PREVIEW_PROPERTY}" for the preview axis, but a prop already binds it`,
       );
     }
+  }
+
+  // bindings.code.statePreviews (docs/23 §D.164): the code twin of the canvas
+  // opt-in. The input renders one declared pseudo-class state on the root, so
+  // it needs a single root, a previewable declared state, and a free name.
+  if (contract.bindings?.code?.statePreviews) {
+    if (isMultiRoot(contract))
+      errors.push(`${contract.id}: bindings.code.statePreviews needs a single-root contract — a multi-root component has no one element to carry the preview`);
+    if (!contract.states.some((state) => (CODE_STATE_PREVIEWS as readonly string[]).includes(state)))
+      errors.push(`${contract.id}: bindings.code.statePreviews is set but the contract declares none of ${CODE_STATE_PREVIEWS.join(', ')} — nothing to preview`);
+    if (contractApiNames(contract).includes('statePreview'))
+      errors.push(`${contract.id}: bindings.code.statePreviews reserves the code prop "statePreview" for the preview input, but the contract already uses that name`);
   }
 
   // bindings.figma.absentVariants: the declared undrawn combinations. Every

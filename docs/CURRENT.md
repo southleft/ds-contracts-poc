@@ -47,8 +47,8 @@ produces now. This table is generated; do not edit it by hand.
 | --- | --- | --- | --- |
 | CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-09-25. |
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
-| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
-| CBDS Checkbox | Figma → React | **Known failure** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial; problems: variant-prop-discarded:state — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
+| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
@@ -622,7 +622,10 @@ correctly placed text boxes, focus rings are absent and parent hover renders
 rest ink. Its native operation `46e5f671…` is prepared but not yet written or
 inspected. Rules, gaps and evidence:
 [D.156](23-known-limitations.md#d156-direct-drawing-instances-carry-their-box-a-projected-child-state-forwards-only-disabled),
-`private/direct-state-ink-v255/`. This completes no row.
+`private/direct-state-ink-v255/`. This completes no row. (2026-09-26: the parent
+hover now selects the drawn child hover through a code-side state preview,
+[D.164](23-known-limitations.md#d164-a-parent-selected-child-interaction-state-reaches-the-childs-code-side-preview-input);
+the gated scoreboard above has the current score.)
 
 Prepared React downloads now have a native-library page that retains the selected
 archive, theme, brand and operation across reloads. Its isolated application
