@@ -1,0 +1,560 @@
+{
+  "id": "cbds-badge.figma-to-react",
+  "version": 1,
+  "inputSha256": "d55ac5450324e83fdaf4ba99f9c6b2cc3fc8b34459852f060b7c838ec5ee5941",
+  "requestSha256": "8a5efb92e4414bae5df9f0649012d84840f64260947059d7c479ce68ad3d5ae3",
+  "rootId": "ds.badge",
+  "generated": {
+    "Badge/Badge.module.css": "87c3960e51cdd1a7286b1f1c6ce6cb9ca9656837a2d7405222af13096b16e93c",
+    "Badge/Badge.tsx": "e1768e3038b1c0a6691a0abe4027c52557c9e74882e159a1666d956a12d54ba4",
+    "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
+    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
+    "tokens.css": "e06cc6d4bd9dc885a185c8fc64664a07925e584a3e2bcbff4e1bf20b629d2547"
+  },
+  "generatedSha256": "3d27fd1bc71aa82c754033d8ac32e46bb471e8de3aad7c7133b533f4b0611228",
+  "entries": {
+    "package/dist/Badge/Badge.d.ts": "16f842c131df30d09bf2e69a52312f06386ad7423fa51649879f37b6eda0c0c7",
+    "package/dist/Badge/Badge.js": "718940ba03b651b803c62a1868a62b1c004ea9d22d4e22aa439e0a48081dd3a0",
+    "package/dist/Badge/Badge.module.css": "87c3960e51cdd1a7286b1f1c6ce6cb9ca9656837a2d7405222af13096b16e93c",
+    "package/dist/Badge/index.d.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "package/dist/Badge/index.js": "ffa73a3203235dfb94e1b06554675da916643f946dfc761facfce0f98cd3b600",
+    "package/dist/Icon/Icon.d.ts": "e1ac7a8becc47fa0b5c3bc38fe6950f85d895ee403a33023d00253a415d579bd",
+    "package/dist/Icon/Icon.js": "eef8bb90c17636a89611d64db4dfb5bf0cf83ef01e8677e99b44b68f958dd1b3",
+    "package/dist/Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "package/dist/Icon/index.d.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "package/dist/Icon/index.js": "465d07da3a00a078ab05eb2ff3a0d952657f4b4981b84ff28598c0b95996f5a1",
+    "package/dist/index.d.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
+    "package/dist/index.js": "363a814c8cd0748ccb3bb73e449ce9b6efdbb4e73ffa8f9815d1075e7d0e64fa",
+    "package/dist/Placeholder/index.d.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "package/dist/Placeholder/index.js": "5aca9cc2d44975970055c41018ea9c85031640ba77a452c28eb730c85f822d67",
+    "package/dist/Placeholder/Placeholder.d.ts": "df61f2adfda9e85d357d17717be8e3f81c685d1616d05dbc768a714354322fa6",
+    "package/dist/Placeholder/Placeholder.js": "1cbf48073a4358d818b57c31b99f5feec6e82a67461b303aeef4c77b4b17e580",
+    "package/dist/Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
+    "package/dist/tokens.css": "e06cc6d4bd9dc885a185c8fc64664a07925e584a3e2bcbff4e1bf20b629d2547",
+    "package/package.json": "ed6a043853bb81f92c887c1183139f8662a595896f1bcc25564b6aa148930177",
+    "package/README.md": "c12b8295e3116d8b0d89b16a6bd58cf1d193937f7d2fb2c52459d9ae2d0fdaf3"
+  },
+  "entriesSha256": "8738e5498c26fe6cc762108f776adf569663b7623933ac618c3ce5ae7c492cef",
+  "recordedOn": "darwin-arm64",
+  "fidelity": {
+    "receipt": "benchmark/receipts/cbds-badge.figma-to-react/receipt.json",
+    "receiptSha256": "56c5b3ee5c04c8890c778d1f747193e28ddef65b0d2264f17b6d226a156b97ee",
+    "generatedSha256": "3d27fd1bc71aa82c754033d8ac32e46bb471e8de3aad7c7133b533f4b0611228",
+    "component": "Badge",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-25",
+    "cases": [
+      {
+        "key": "type-brand_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.546448087431694,
+        "black": 0.546448087431694,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.546448087431694,
+        "black": 0.546448087431694,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 2.083333333333333,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 2.083333333333333,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.819672131147541,
+        "black": 1.092896174863388,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 2.0491803278688523,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.5625,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-brand_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.3020833333333335,
+        "black": 4.427083333333334,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.819672131147541,
+        "black": 1.092896174863388,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 2.0491803278688523,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.5625,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-success_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.3020833333333335,
+        "black": 4.427083333333334,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.34153005464480873,
+        "black": 0.34153005464480873,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.34153005464480873,
+        "black": 0.34153005464480873,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 0.78125,
+        "black": 0.78125,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 0.78125,
+        "black": 0.78125,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.8879781420765027,
+        "black": 0.8879781420765027,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.8879781420765027,
+        "black": 0.8879781420765027,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 2.213541666666667,
+        "black": 2.213541666666667,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 2.213541666666667,
+        "black": 2.213541666666667,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.546448087431694,
+        "black": 0.8879781420765027,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.34153005464480873,
+        "black": 1.9808743169398908,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.171875,
+        "black": 1.8229166666666667,
+        "residual": null
+      },
+      {
+        "key": "type-warning_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 0.9114583333333334,
+        "black": 4.296875,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.171875,
+        "black": 1.171875,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.171875,
+        "black": 1.171875,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.8879781420765027,
+        "black": 1.1612021857923498,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6830601092896175,
+        "black": 2.185792349726776,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.5625,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-danger_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.3020833333333335,
+        "black": 4.427083333333334,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 1.0416666666666665,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.953125,
+        "black": 1.953125,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.546448087431694,
+        "black": 1.092896174863388,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.546448087431694,
+        "black": 2.1174863387978142,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.0416666666666665,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-neutral_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.171875,
+        "black": 3.90625,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-fill_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6147540983606558,
+        "black": 0.6147540983606558,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.4322916666666665,
+        "black": 1.4322916666666665,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-fill_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.4322916666666665,
+        "black": 1.4322916666666665,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-tonal_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.7513661202185792,
+        "black": 0.7513661202185792,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 2.083333333333333,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-tonal_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 2.083333333333333,
+        "black": 2.083333333333333,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-false",
+        "withinLimit": true,
+        "white": 0.8879781420765027,
+        "black": 1.1612021857923498,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-outline_size-large_rounded-true",
+        "withinLimit": true,
+        "white": 0.6830601092896175,
+        "black": 2.2540983606557377,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-false",
+        "withinLimit": true,
+        "white": 1.6927083333333333,
+        "black": 2.213541666666667,
+        "residual": null
+      },
+      {
+        "key": "type-accent_style-outline_size-small_rounded-true",
+        "withinLimit": true,
+        "white": 1.4322916666666665,
+        "black": 4.557291666666666,
+        "residual": null
+      }
+    ],
+    "problems": []
+  }
+}

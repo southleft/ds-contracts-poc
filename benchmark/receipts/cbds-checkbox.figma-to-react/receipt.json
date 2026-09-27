@@ -1,0 +1,2864 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Checkbox",
+  "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+  "capture": {
+    "background": "transparent",
+    "comparisonBackgrounds": [
+      "white",
+      "black"
+    ],
+    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "deviceScaleFactor": 1,
+    "nativeRaster": {
+      "kind": "figma-rest-full-bounds-v1",
+      "scale": 1
+    }
+  },
+  "generatedSha256": {
+    "CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
+    "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
+    "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
+    "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
+    "Checkbox/Checkbox.tsx": "874614f843b2fd9d022de7c3862e11eb918ad94c0ee71548021741f48e03e7f1",
+    "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
+    "CheckboxIcon/CheckboxIcon.module.css": "4dd864327a1a48934c876403ddd1c4eebf9f69f235376d5a15cd05b4bbb4beb4",
+    "CheckboxIcon/CheckboxIcon.tsx": "3d4b012e508d23e92a4b6fca0d61274e4b35b6feeb9de86a85d1d9c3984c61ac",
+    "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
+    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
+    "MinusSquare/MinusSquare.tsx": "5b14d238d633d8916302f061cb74f1b9a9590789d519c8921e26416780eee8ae",
+    "MinusSquare/index.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
+    "Placeholder/Placeholder.module.css": "e023e4150990629822b821ab1152ec4fe00a09b1b5536577971d427fb1476855",
+    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
+    "Square/Square.tsx": "12b6057a66d7542a1d8056b031fa170cad0e6c39ddcc883d74a0d485e5f09640",
+    "Square/index.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
+    "WarningCircle/WarningCircle.module.css": "e72d08fe5e62ef6e92ec834d61c08ed00315d375d7b14ed9f3395a3d16150531",
+    "WarningCircle/WarningCircle.tsx": "463a1e292226e391fa5f6eb24351920a9dcdeb9bd5a7ac61079719c7754f769d",
+    "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
+    "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
+    "tokens.css": "33a720740ec4cec809352fd154abb68a5b4e242ca73279ef92fbd1710981b562"
+  },
+  "cases": [
+    {
+      "key": "alignment-left_size-large_state-default",
+      "figmaName": "alignment=left, size=large, state=default",
+      "nodeId": "272:90",
+      "props": {
+        "alignment": "left",
+        "size": "large",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-large_state-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 12,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 12,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+      }
+    },
+    {
+      "key": "alignment-left_size-large_state-error",
+      "figmaName": "alignment=left, size=large, state=error",
+      "nodeId": "1536:24526",
+      "props": {
+        "alignment": "left",
+        "size": "large",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox label\nerror text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 42,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-large_state-error.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 52,
+          "width": 148,
+          "height": 42
+        },
+        "capture": {
+          "x": 12,
+          "y": 52,
+          "width": 148,
+          "height": 42
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "78ab899bb073e9a75abf48c3de4cde56665029aadb6731d2257473c3c1f5f269"
+      }
+    },
+    {
+      "key": "alignment-right_size-large_state-error",
+      "figmaName": "alignment=right, size=large, state=error",
+      "nodeId": "1536:24617",
+      "props": {
+        "alignment": "right",
+        "size": "large",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox label\nerror text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 42,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-large_state-error.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 110,
+          "width": 148,
+          "height": 42
+        },
+        "capture": {
+          "x": 12,
+          "y": 110,
+          "width": 148,
+          "height": 42
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "38926a5c0daa6f839068e07a04a5c8c03ab5cbc1887715c0734dfeb3dcb2a8c4"
+      }
+    },
+    {
+      "key": "alignment-left_size-small_state-error",
+      "figmaName": "alignment=left, size=small, state=error",
+      "nodeId": "1536:24572",
+      "props": {
+        "alignment": "left",
+        "size": "small",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox label\nerror text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 38,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-small_state-error.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 168,
+          "width": 126,
+          "height": 38
+        },
+        "capture": {
+          "x": 12,
+          "y": 168,
+          "width": 126,
+          "height": 38
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "1f3ebb6a8aa06874ea33ffff1b47267cc717e1cc8a915dc11418822fe9238451"
+      }
+    },
+    {
+      "key": "alignment-right_size-small_state-error",
+      "figmaName": "alignment=right, size=small, state=error",
+      "nodeId": "1536:24592",
+      "props": {
+        "alignment": "right",
+        "size": "small",
+        "state": "error"
+      },
+      "rendered": {
+        "text": "Checkbox label\nerror text",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 38,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-small_state-error.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 222,
+          "width": 126,
+          "height": 38
+        },
+        "capture": {
+          "x": 12,
+          "y": 222,
+          "width": 126,
+          "height": 38
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "5fe39d8f4c709fae1bd968a7c815030cd4128d0159712915cef83015f0623ef5"
+      }
+    },
+    {
+      "key": "alignment-right_size-large_state-default",
+      "figmaName": "alignment=right, size=large, state=default",
+      "nodeId": "294:136",
+      "props": {
+        "alignment": "right",
+        "size": "large",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-large_state-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 276,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 276,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+      }
+    },
+    {
+      "key": "alignment-left_size-large_state-disabled",
+      "figmaName": "alignment=left, size=large, state=disabled",
+      "nodeId": "272:117",
+      "props": {
+        "alignment": "left",
+        "size": "large",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-large_state-disabled.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 316,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 316,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "e5f02096e8a8e854af4fe90592701f8c15574268179c82e9c0ff51d9288e8320"
+      }
+    },
+    {
+      "key": "alignment-right_size-large_state-disabled",
+      "figmaName": "alignment=right, size=large, state=disabled",
+      "nodeId": "294:151",
+      "props": {
+        "alignment": "right",
+        "size": "large",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-large_state-disabled.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 356,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 356,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "8e58f6339f78ebfd8a6e7ef14c914a96cfce63eb25037e08cc21e97222887fcb"
+      }
+    },
+    {
+      "key": "alignment-left_size-small_state-default",
+      "figmaName": "alignment=left, size=small, state=default",
+      "nodeId": "272:97",
+      "props": {
+        "alignment": "left",
+        "size": "small",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-small_state-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 396,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 396,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+      }
+    },
+    {
+      "key": "alignment-right_size-small_state-default",
+      "figmaName": "alignment=right, size=small, state=default",
+      "nodeId": "294:141",
+      "props": {
+        "alignment": "right",
+        "size": "small",
+        "state": "default"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-small_state-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 432,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 432,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+      }
+    },
+    {
+      "key": "alignment-left_size-small_state-disabled",
+      "figmaName": "alignment=left, size=small, state=disabled",
+      "nodeId": "272:122",
+      "props": {
+        "alignment": "left",
+        "size": "small",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-small_state-disabled.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 468,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 468,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "3798963210586fc8c967c72998d885fe95fed976a645093d93b7709c3e297f32"
+      }
+    },
+    {
+      "key": "alignment-right_size-small_state-disabled",
+      "figmaName": "alignment=right, size=small, state=disabled",
+      "nodeId": "294:154",
+      "props": {
+        "alignment": "right",
+        "size": "small",
+        "state": "disabled"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-small_state-disabled.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 504,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 504,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "aa1d037b6ede49c058d5c42e5711e760408d823abd7bbaee8419e2eab9c86873"
+      }
+    },
+    {
+      "key": "alignment-left_size-large_state-hover",
+      "figmaName": "alignment=left, size=large, state=hover",
+      "nodeId": "6659:61950",
+      "props": {
+        "alignment": "left",
+        "size": "large",
+        "state": "hover"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-large_state-hover.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 540,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 540,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+      }
+    },
+    {
+      "key": "alignment-left_size-large_state-focus",
+      "figmaName": "alignment=left, size=large, state=focus",
+      "nodeId": "6659:61957",
+      "props": {
+        "alignment": "left",
+        "size": "large",
+        "state": "focus"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-large_state-focus.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 580,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 580,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9c5c3b39a1cae127f13c8d3c8deaeb1716ab2db08dcfde564dccce18aa96eed5"
+      }
+    },
+    {
+      "key": "alignment-right_size-large_state-hover",
+      "figmaName": "alignment=right, size=large, state=hover",
+      "nodeId": "6659:61965",
+      "props": {
+        "alignment": "right",
+        "size": "large",
+        "state": "hover"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-large_state-hover.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 620,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 620,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+      }
+    },
+    {
+      "key": "alignment-right_size-large_state-focus",
+      "figmaName": "alignment=right, size=large, state=focus",
+      "nodeId": "6659:61972",
+      "props": {
+        "alignment": "right",
+        "size": "large",
+        "state": "focus"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 148,
+        "height": 24,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-large_state-focus.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 660,
+          "width": 148,
+          "height": 24
+        },
+        "capture": {
+          "x": 12,
+          "y": 660,
+          "width": 148,
+          "height": 24
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "3d2c0d6239c50fabe18a236019837b7786e16ccb8c080ea1c8eb7845bf7d9134"
+      }
+    },
+    {
+      "key": "alignment-left_size-small_state-hover",
+      "figmaName": "alignment=left, size=small, state=hover",
+      "nodeId": "6659:61980",
+      "props": {
+        "alignment": "left",
+        "size": "small",
+        "state": "hover"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-small_state-hover.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 700,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 700,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+      }
+    },
+    {
+      "key": "alignment-left_size-small_state-focus",
+      "figmaName": "alignment=left, size=small, state=focus",
+      "nodeId": "6659:61987",
+      "props": {
+        "alignment": "left",
+        "size": "small",
+        "state": "focus"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-left_size-small_state-focus.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 736,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 736,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "56dc33045785afdd5b972953f55fd571b9819e486e01f18509c68b6a4212442f"
+      }
+    },
+    {
+      "key": "alignment-right_size-small_state-hover",
+      "figmaName": "alignment=right, size=small, state=hover",
+      "nodeId": "6659:61995",
+      "props": {
+        "alignment": "right",
+        "size": "small",
+        "state": "hover"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-small_state-hover.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 772,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 772,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+      }
+    },
+    {
+      "key": "alignment-right_size-small_state-focus",
+      "figmaName": "alignment=right, size=small, state=focus",
+      "nodeId": "6659:62002",
+      "props": {
+        "alignment": "right",
+        "size": "small",
+        "state": "focus"
+      },
+      "rendered": {
+        "text": "Checkbox label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 126,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Inter, system-ui, sans-serif",
+          "weight": "400",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-alignment-right_size-small_state-focus.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 808,
+          "width": 126,
+          "height": 20
+        },
+        "capture": {
+          "x": 12,
+          "y": 808,
+          "width": 126,
+          "height": 20
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "9993ba9da641dc9aa2a48fb7d33f7f214e2f7f32de0bd8503f00dcdf928c0886"
+      }
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": "text",
+      "textBearingCells": [
+        "alignment-left_size-large_state-default",
+        "alignment-left_size-large_state-error",
+        "alignment-right_size-large_state-error",
+        "alignment-left_size-small_state-error",
+        "alignment-right_size-small_state-error",
+        "alignment-right_size-large_state-default",
+        "alignment-left_size-large_state-disabled",
+        "alignment-right_size-large_state-disabled",
+        "alignment-left_size-small_state-default",
+        "alignment-right_size-small_state-default",
+        "alignment-left_size-small_state-disabled",
+        "alignment-right_size-small_state-disabled",
+        "alignment-left_size-large_state-hover",
+        "alignment-left_size-large_state-focus",
+        "alignment-right_size-large_state-hover",
+        "alignment-right_size-large_state-focus",
+        "alignment-left_size-small_state-hover",
+        "alignment-left_size-small_state-focus",
+        "alignment-right_size-small_state-hover",
+        "alignment-right_size-small_state-focus"
+      ],
+      "changedCells": [
+        "alignment-left_size-large_state-default",
+        "alignment-left_size-large_state-error",
+        "alignment-right_size-large_state-error",
+        "alignment-left_size-small_state-error",
+        "alignment-right_size-small_state-error",
+        "alignment-right_size-large_state-default",
+        "alignment-left_size-large_state-disabled",
+        "alignment-right_size-large_state-disabled",
+        "alignment-left_size-small_state-default",
+        "alignment-right_size-small_state-default",
+        "alignment-left_size-small_state-disabled",
+        "alignment-right_size-small_state-disabled",
+        "alignment-left_size-large_state-hover",
+        "alignment-left_size-large_state-focus",
+        "alignment-right_size-large_state-hover",
+        "alignment-right_size-large_state-focus",
+        "alignment-left_size-small_state-hover",
+        "alignment-left_size-small_state-focus",
+        "alignment-right_size-small_state-hover",
+        "alignment-right_size-small_state-focus"
+      ]
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": true
+    },
+    "variants": [
+      {
+        "prop": "alignment",
+        "switchedTo": "left",
+        "cellsSwitched": [
+          "alignment-right_size-large_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-right_size-large_state-default",
+          "alignment-right_size-large_state-disabled",
+          "alignment-right_size-small_state-default",
+          "alignment-right_size-small_state-disabled",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsExpectedToChange": [
+          "alignment-right_size-large_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-right_size-large_state-default",
+          "alignment-right_size-large_state-disabled",
+          "alignment-right_size-small_state-default",
+          "alignment-right_size-small_state-disabled",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsChanged": [
+          "alignment-right_size-large_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-right_size-large_state-default",
+          "alignment-right_size-large_state-disabled",
+          "alignment-right_size-small_state-default",
+          "alignment-right_size-small_state-disabled",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
+      },
+      {
+        "prop": "size",
+        "switchedTo": "large",
+        "cellsSwitched": [
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-small_state-default",
+          "alignment-right_size-small_state-default",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsExpectedToChange": [
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-small_state-default",
+          "alignment-right_size-small_state-default",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsChanged": [
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-small_state-default",
+          "alignment-right_size-small_state-default",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
+      },
+      {
+        "prop": "state",
+        "switchedTo": "default",
+        "cellsSwitched": [
+          "alignment-left_size-large_state-error",
+          "alignment-right_size-large_state-error",
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-large_state-disabled",
+          "alignment-right_size-large_state-disabled",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled",
+          "alignment-left_size-large_state-hover",
+          "alignment-left_size-large_state-focus",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsExpectedToChange": [
+          "alignment-left_size-large_state-error",
+          "alignment-right_size-large_state-error",
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-large_state-disabled",
+          "alignment-right_size-large_state-disabled",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled",
+          "alignment-left_size-large_state-hover",
+          "alignment-left_size-large_state-focus",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ],
+        "cellsChanged": [
+          "alignment-left_size-large_state-error",
+          "alignment-right_size-large_state-error",
+          "alignment-left_size-small_state-error",
+          "alignment-right_size-small_state-error",
+          "alignment-left_size-large_state-disabled",
+          "alignment-right_size-large_state-disabled",
+          "alignment-left_size-small_state-disabled",
+          "alignment-right_size-small_state-disabled"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": [
+          "alignment-left_size-large_state-hover",
+          "alignment-left_size-large_state-focus",
+          "alignment-right_size-large_state-hover",
+          "alignment-right_size-large_state-focus",
+          "alignment-left_size-small_state-hover",
+          "alignment-left_size-small_state-focus",
+          "alignment-right_size-small_state-hover",
+          "alignment-right_size-small_state-focus"
+        ]
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "frameEvidence": {
+      "before": "figma-bounds-before.json",
+      "after": "figma-bounds-after.json",
+      "version": "2402777548310810334",
+      "export": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": true
+      },
+      "raster": {
+        "kind": "figma-rest-full-bounds-v1",
+        "scale": 1
+      },
+      "beforeSha256": "029ef71be8c32feed98a3dfbb5f2ed7836cfcb8076f3d703d5b523c02acfe268",
+      "afterSha256": "029ef71be8c32feed98a3dfbb5f2ed7836cfcb8076f3d703d5b523c02acfe268"
+    },
+    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "alignment-left_size-large_state-default",
+        "figmaImage": "figma-272_90.png",
+        "mismatchPercent": 6.1342592592592595,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 6.1342592592592595,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 3,
+              "y": 3,
+              "width": 144,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2592
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2729,
+            "y": 243,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2729,
+            "y": 243,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "aa99cf094068dccb40115aefff2aae34abf70737d703331554acc5b1a3b4b51f",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 82.63888888888889,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 144,
+            "height": 18
+          },
+          "figma": {
+            "width": 144,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-large_state-error",
+        "figmaImage": "figma-1536_24526.png",
+        "mismatchPercent": 4.089506172839506,
+        "blackMismatchPercent": 0.2507716049382716,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 4.089506172839506,
+          "blackMismatchPercent": 0.2507716049382716,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 3,
+              "y": 3,
+              "width": 144,
+              "height": 36
+            }
+          },
+          "pixelsCompared": 5184
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2919,
+            "y": 243,
+            "width": 149,
+            "height": 42
+          },
+          "render": {
+            "x": 2919,
+            "y": 243,
+            "width": 149,
+            "height": 42
+          },
+          "pngSha256": "4ab4d0d58e80309493e5fbdc13da79ed03f54378c50c7fea0f2a45f024d1e0fe",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0.7961783439490446,
+        "textMaskCoveragePercent": 75.77160493827161,
+        "inkCoveragePercent": {
+          "consumer": 18.71,
+          "figma": 17.59
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 144,
+            "height": 36
+          },
+          "figma": {
+            "width": 144,
+            "height": 36
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 42
+          },
+          "figma": {
+            "width": 149,
+            "height": 42
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-large_state-error",
+        "figmaImage": "figma-1536_24617.png",
+        "mismatchPercent": 8.984674329501916,
+        "blackMismatchPercent": 3.065134099616858,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 4.946727549467275,
+          "blackMismatchPercent": 1.141552511415525,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 3,
+              "width": 146,
+              "height": 36
+            }
+          },
+          "pixelsCompared": 5256
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2917,
+            "y": 394,
+            "width": 149,
+            "height": 42
+          },
+          "render": {
+            "x": 2917,
+            "y": 394,
+            "width": 149,
+            "height": 42
+          },
+          "pngSha256": "00c667b5cbef24c805feafdd869e8466234bb23c31689818f4d868b6f74570bc",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 2.142857142857143,
+        "textMaskCoveragePercent": 75.86206896551724,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 18.71,
+          "figma": 17.59
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 145,
+            "height": 36
+          },
+          "figma": {
+            "width": 145,
+            "height": 36
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 42
+          },
+          "figma": {
+            "width": 149,
+            "height": 42
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-small_state-error",
+        "figmaImage": "figma-1536_24572.png",
+        "mismatchPercent": 4.930500917912405,
+        "blackMismatchPercent": 0.34093889325990034,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 4.930500917912405,
+          "blackMismatchPercent": 0.34093889325990034,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 2,
+              "y": 4,
+              "width": 123,
+              "height": 31
+            }
+          },
+          "pixelsCompared": 3813
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2919,
+            "y": 305,
+            "width": 126,
+            "height": 38
+          },
+          "render": {
+            "x": 2919,
+            "y": 305,
+            "width": 126,
+            "height": 38
+          },
+          "pngSha256": "6da128b4ab8577a0f3831035a3cdd33e3fbe9604be1224f6dcf33f374485d887",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 1.3227513227513228,
+        "textMaskCoveragePercent": 80.17309205350118,
+        "inkCoveragePercent": {
+          "consumer": 19.86,
+          "figma": 18.69
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 123,
+            "height": 31
+          },
+          "figma": {
+            "width": 123,
+            "height": 31
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 38
+          },
+          "figma": {
+            "width": 126,
+            "height": 38
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-small_state-error",
+        "figmaImage": "figma-1536_24592.png",
+        "mismatchPercent": 4.8126951092611865,
+        "blackMismatchPercent": 0.31217481789802287,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 4.8126951092611865,
+          "blackMismatchPercent": 0.31217481789802287,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 4,
+              "width": 124,
+              "height": 31
+            }
+          },
+          "pixelsCompared": 3844
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2918,
+            "y": 457,
+            "width": 126,
+            "height": 38
+          },
+          "render": {
+            "x": 2918,
+            "y": 457,
+            "width": 126,
+            "height": 38
+          },
+          "pngSha256": "0168189868727a42ce99dae6948956b7dbc11946cf0974acc60b94a77164ad54",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 1.098901098901099,
+        "textMaskCoveragePercent": 81.06139438085329,
+        "inkCoveragePercent": {
+          "consumer": 19.86,
+          "figma": 18.69
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 124,
+            "height": 31
+          },
+          "figma": {
+            "width": 124,
+            "height": 31
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 38
+          },
+          "figma": {
+            "width": 126,
+            "height": 38
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-large_state-default",
+        "figmaImage": "figma-294_136.png",
+        "mismatchPercent": 10.919540229885058,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 7.9528158295281575,
+          "blackMismatchPercent": 1.8645357686453576,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 3,
+              "width": 146,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2628
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2729,
+            "y": 397,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2729,
+            "y": 397,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "5bd7b56e744eed31e424b35aa7afa2f24f2649d7e90e883df991ac8f2fe14d6d",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 85.51724137931035,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 145,
+            "height": 18
+          },
+          "figma": {
+            "width": 145,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-large_state-disabled",
+        "figmaImage": "figma-272_117.png",
+        "mismatchPercent": 4.320987654320987,
+        "blackMismatchPercent": 3.0478395061728394,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 4.320987654320987,
+          "blackMismatchPercent": 3.0478395061728394,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 3,
+              "y": 3,
+              "width": 144,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2592
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 3108,
+            "y": 243,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 3108,
+            "y": 243,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "3b9de53a605e9cb4523dd48cd1b95d0573ab1e038aba16da513420b05cad7943",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 82.63888888888889,
+        "inkCoveragePercent": {
+          "consumer": 23.99,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 144,
+            "height": 18
+          },
+          "figma": {
+            "width": 144,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-large_state-disabled",
+        "figmaImage": "figma-294_151.png",
+        "mismatchPercent": 9.655172413793103,
+        "blackMismatchPercent": 7.432950191570881,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 6.050228310502283,
+          "blackMismatchPercent": 4.908675799086757,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 3,
+              "width": 146,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2628
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 3108,
+            "y": 395,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 3108,
+            "y": 395,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "243e9420297f7ea6100af0accc9f8fd4012cab563002ef1149d50cd309732f0c",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 85.51724137931035,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 23.99,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 145,
+            "height": 18
+          },
+          "figma": {
+            "width": 145,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-small_state-default",
+        "figmaImage": "figma-272_97.png",
+        "mismatchPercent": 9.552845528455284,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 9.552845528455284,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 2,
+              "y": 4,
+              "width": 123,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1476
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2732,
+            "y": 311,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2732,
+            "y": 311,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "ef71101e8ce68b18254442be3711f59b495b146b72a2fe236f255e9dfdd4c505",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 85.36585365853658,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 123,
+            "height": 12
+          },
+          "figma": {
+            "width": 123,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-small_state-default",
+        "figmaImage": "figma-294_141.png",
+        "mismatchPercent": 9.274193548387096,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 9.274193548387096,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 4,
+              "width": 124,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1488
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2734,
+            "y": 459,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2734,
+            "y": 459,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "4bbdde0824df84f8391d71df486470297f7483d51ca8b73338aa1f0d42bc75e2",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 88.70967741935483,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 124,
+            "height": 12
+          },
+          "figma": {
+            "width": 124,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-small_state-disabled",
+        "figmaImage": "figma-272_122.png",
+        "mismatchPercent": 7.384823848238482,
+        "blackMismatchPercent": 4.336043360433604,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 7.384823848238482,
+          "blackMismatchPercent": 4.336043360433604,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 2,
+              "y": 4,
+              "width": 123,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1476
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 3111,
+            "y": 311,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 3111,
+            "y": 311,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "21b204df19c3274f4200d62d93a244d2568a61062c7941ad25d3497b0541b2ce",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 85.36585365853658,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.48,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 123,
+            "height": 12
+          },
+          "figma": {
+            "width": 123,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-small_state-disabled",
+        "figmaImage": "figma-294_154.png",
+        "mismatchPercent": 6.653225806451612,
+        "blackMismatchPercent": 3.696236559139785,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 6.653225806451612,
+          "blackMismatchPercent": 3.696236559139785,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 4,
+              "width": 124,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1488
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 3111,
+            "y": 457,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 3111,
+            "y": 457,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "abe8791b2f931c426331c5fa3f0cdd543ffe2ad77d332f88fa95231d482e9d4f",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 88.70967741935483,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.48,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 124,
+            "height": 12
+          },
+          "figma": {
+            "width": 124,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-large_state-hover",
+        "figmaImage": "figma-6659_61950.png",
+        "mismatchPercent": 6.211419753086419,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 6.211419753086419,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 3,
+              "y": 3,
+              "width": 144,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2592
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2729,
+            "y": 547,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2729,
+            "y": 547,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "7ef202d421824a3251a75c0b9dc1bf2e1cf54be9d1eda0cea344ac2742546125",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0.4444444444444444,
+        "textMaskCoveragePercent": 82.63888888888889,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 144,
+            "height": 18
+          },
+          "figma": {
+            "width": 144,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-large_state-focus",
+        "figmaImage": "figma-6659_61957.png",
+        "mismatchPercent": 19.333748443337484,
+        "blackMismatchPercent": 5.5417185554171855,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 9.620174346201743,
+          "blackMismatchPercent": 4.6699875466998755,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 1,
+              "y": 1,
+              "width": 146,
+              "height": 22
+            }
+          },
+          "pixelsCompared": 3212
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2919,
+            "y": 547,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2919,
+            "y": 547,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "71051cdf279c855f0ebb2a2d8a4b8bd440e1a4764e9b85946c93f071dd0b6339",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 34.61538461538461,
+        "textMaskCoveragePercent": 82.1917808219178,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 26.71
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 144,
+            "height": 18
+          },
+          "figma": {
+            "width": 146,
+            "height": 22
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-large_state-hover",
+        "figmaImage": "figma-6659_61965.png",
+        "mismatchPercent": 11.0727969348659,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 7.9528158295281575,
+          "blackMismatchPercent": 1.2557077625570776,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 3,
+              "width": 146,
+              "height": 18
+            }
+          },
+          "pixelsCompared": 2628
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2729,
+            "y": 701,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2729,
+            "y": 701,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "d4d01a7519c2b16382803571b9fe494a1edfac41594e63ca5c28c3deb1659148",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 1.0582010582010581,
+        "textMaskCoveragePercent": 85.51724137931035,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 22.23
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 145,
+            "height": 18
+          },
+          "figma": {
+            "width": 145,
+            "height": 18
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-large_state-focus",
+        "figmaImage": "figma-6659_61972.png",
+        "mismatchPercent": 23.345701917130487,
+        "blackMismatchPercent": 5.504019789734076,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 10.902948402948404,
+          "blackMismatchPercent": 5.466830466830467,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 1,
+              "width": 148,
+              "height": 22
+            }
+          },
+          "pixelsCompared": 3256
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2919,
+            "y": 701,
+            "width": 149,
+            "height": 24
+          },
+          "render": {
+            "x": 2919,
+            "y": 701,
+            "width": 149,
+            "height": 24
+          },
+          "pngSha256": "f47e216c5aba6e186146c5f6b5ef62a7998d9c9e4ecbec3d5186078a44728a95",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 39.32806324110672,
+        "textMaskCoveragePercent": 84.35374149659864,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 23.93,
+          "figma": 26.71
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 145,
+            "height": 18
+          },
+          "figma": {
+            "width": 147,
+            "height": 22
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 148,
+            "height": 24
+          },
+          "figma": {
+            "width": 149,
+            "height": 24
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-small_state-hover",
+        "figmaImage": "figma-6659_61980.png",
+        "mismatchPercent": 9.552845528455284,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 9.552845528455284,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 2,
+              "y": 4,
+              "width": 123,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1476
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2732,
+            "y": 615,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2732,
+            "y": 615,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "4461340084b34e7d69067a5ef0b6977745dae06f1084628670069a7a0ac226d5",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 85.36585365853658,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 123,
+            "height": 12
+          },
+          "figma": {
+            "width": 123,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-left_size-small_state-focus",
+        "figmaImage": "figma-6659_61987.png",
+        "mismatchPercent": 21.55,
+        "blackMismatchPercent": 5.55,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 11.700000000000001,
+          "blackMismatchPercent": 5.1,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 2,
+              "width": 125,
+              "height": 16
+            }
+          },
+          "pixelsCompared": 2000
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2922,
+            "y": 615,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2922,
+            "y": 615,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "8d8fd2e9b1bc0c2c63f1ee7b76b606588a998373c811c48489867bcca56f9b35",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 43.75,
+        "textMaskCoveragePercent": 84.8,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 27.82
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 123,
+            "height": 12
+          },
+          "figma": {
+            "width": 125,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-small_state-hover",
+        "figmaImage": "figma-6659_61995.png",
+        "mismatchPercent": 9.274193548387096,
+        "blackMismatchPercent": 0,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 9.274193548387096,
+          "blackMismatchPercent": 0,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 4,
+              "width": 124,
+              "height": 12
+            }
+          },
+          "pixelsCompared": 1488
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2734,
+            "y": 763,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2734,
+            "y": 763,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "d04450acab5f1fdf2e67fc0382b3b7c21de2f651d753e0e9902515afaa733070",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 88.70967741935483,
+        "residual": "text-only",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 23.37
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 124,
+            "height": 12
+          },
+          "figma": {
+            "width": 124,
+            "height": 12
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "alignment-right_size-small_state-focus",
+        "figmaImage": "figma-6659_62002.png",
+        "mismatchPercent": 25.396825396825395,
+        "blackMismatchPercent": 5.555555555555555,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 11.507936507936508,
+          "blackMismatchPercent": 5.059523809523809,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 2,
+              "width": 126,
+              "height": 16
+            }
+          },
+          "pixelsCompared": 2016
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 2924,
+            "y": 763,
+            "width": 126,
+            "height": 20
+          },
+          "render": {
+            "x": 2924,
+            "y": 763,
+            "width": 126,
+            "height": 20
+          },
+          "pngSha256": "44dd5877a05b1b15c2ead2ea75936167132ca2a9b72a96e3bee4dac66cfe043e",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 53.515625,
+        "textMaskCoveragePercent": 87.3015873015873,
+        "residual": "beyond-text",
+        "inkCoveragePercent": {
+          "consumer": 25.32,
+          "figma": 27.82
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 124,
+            "height": 12
+          },
+          "figma": {
+            "width": 126,
+            "height": 16
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 126,
+            "height": 20
+          },
+          "figma": {
+            "width": 126,
+            "height": 20
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "variant-prop-discarded:state",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-default:9.55%",
+    "layout-image-difference-above-limit:alignment-right_size-small_state-default:9.27%",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-disabled:7.38%",
+    "layout-image-difference-above-limit:alignment-right_size-small_state-disabled:6.65%",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-hover:6.21%",
+    "layout-image-difference-above-limit:alignment-left_size-large_state-focus:9.62%",
+    "content-size-mismatch:alignment-left_size-large_state-focus:144x18 vs 146x22",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-hover:7.95%",
+    "layout-image-difference-above-limit:alignment-right_size-large_state-focus:10.90%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:5.47%",
+    "content-size-mismatch:alignment-right_size-large_state-focus:145x18 vs 147x22",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-hover:9.55%",
+    "layout-image-difference-above-limit:alignment-left_size-small_state-focus:11.70%",
+    "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.10%",
+    "content-size-mismatch:alignment-left_size-small_state-focus:123x12 vs 125x16",
+    "layout-image-difference-above-limit:alignment-right_size-small_state-hover:9.27%",
+    "layout-image-difference-above-limit:alignment-right_size-small_state-focus:11.51%",
+    "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.06%",
+    "content-size-mismatch:alignment-right_size-small_state-focus:124x12 vs 126x16"
+  ],
+  "limitations": [
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 371,
+      "text-channel-unsupported": 24
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "CheckSquare",
+      "Checkbox",
+      "CheckboxIcon",
+      "Icon",
+      "MinusSquare",
+      "Placeholder",
+      "Square",
+      "WarningCircle"
+    ],
+    "closure": {
+      "requested": [
+        "Checkbox"
+      ],
+      "followed": [
+        "WarningCircle",
+        "Placeholder",
+        "Icon",
+        "Square",
+        "CheckSquare",
+        "MinusSquare",
+        "Checkbox-icon"
+      ],
+      "notFollowed": []
+    },
+    "contractGraph": [
+      {
+        "id": "ds.check-square",
+        "name": "CheckSquare",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.checkbox-icon",
+        "name": "CheckboxIcon",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.icon",
+        "name": "Icon",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.minus-square",
+        "name": "MinusSquare",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.placeholder",
+        "name": "Placeholder",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.square",
+        "name": "Square",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.warning-circle",
+        "name": "WarningCircle",
+        "stub": false,
+        "packaged": true
+      }
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/checkbox",
+    "tarballSha256": "67b659208368426fd1480b413df3c4431d48e96020ad1903630489e2af818358",
+    "distFiles": [
+      "CheckSquare",
+      "CheckSquare/CheckSquare.d.ts",
+      "CheckSquare/CheckSquare.js",
+      "CheckSquare/CheckSquare.module.css",
+      "CheckSquare/index.d.ts",
+      "CheckSquare/index.js",
+      "Checkbox",
+      "Checkbox/Checkbox.d.ts",
+      "Checkbox/Checkbox.js",
+      "Checkbox/Checkbox.module.css",
+      "Checkbox/index.d.ts",
+      "Checkbox/index.js",
+      "CheckboxIcon",
+      "CheckboxIcon/CheckboxIcon.d.ts",
+      "CheckboxIcon/CheckboxIcon.js",
+      "CheckboxIcon/CheckboxIcon.module.css",
+      "CheckboxIcon/index.d.ts",
+      "CheckboxIcon/index.js",
+      "Icon",
+      "Icon/Icon.d.ts",
+      "Icon/Icon.js",
+      "Icon/Icon.module.css",
+      "Icon/index.d.ts",
+      "Icon/index.js",
+      "MinusSquare",
+      "MinusSquare/MinusSquare.d.ts",
+      "MinusSquare/MinusSquare.js",
+      "MinusSquare/MinusSquare.module.css",
+      "MinusSquare/index.d.ts",
+      "MinusSquare/index.js",
+      "Placeholder",
+      "Placeholder/Placeholder.d.ts",
+      "Placeholder/Placeholder.js",
+      "Placeholder/Placeholder.module.css",
+      "Placeholder/index.d.ts",
+      "Placeholder/index.js",
+      "Square",
+      "Square/Square.d.ts",
+      "Square/Square.js",
+      "Square/Square.module.css",
+      "Square/index.d.ts",
+      "Square/index.js",
+      "WarningCircle",
+      "WarningCircle/WarningCircle.d.ts",
+      "WarningCircle/WarningCircle.js",
+      "WarningCircle/WarningCircle.module.css",
+      "WarningCircle/index.d.ts",
+      "WarningCircle/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "8b74a5b97626a77e334d252489ab17795564269515e9789ea665e7ea8390391d",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "fontProvision": {
+      "kind": "explicit-local-assets",
+      "manifest": {
+        "version": 1,
+        "fonts": [
+          {
+            "family": "Inter",
+            "weight": "100 900",
+            "style": "normal",
+            "file": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8.ttf",
+            "sha256": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8"
+          }
+        ]
+      },
+      "sourceFontByteIdentity": "unverified",
+      "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
+      "loaded": [
+        {
+          "family": "Inter",
+          "weight": "100 900",
+          "style": "normal",
+          "file": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8.ttf",
+          "sha256": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8",
+          "status": "loaded"
+        }
+      ]
+    },
+    "reviewSite": "review-site",
+    "builtCss": {
+      "bytes": 44606,
+      "tokenDefinitions": 481,
+      "tokenDefinitionsExpected": 481
+    },
+    "interactiveNesting": []
+  },
+  "outcome": "refused-or-failed"
+}

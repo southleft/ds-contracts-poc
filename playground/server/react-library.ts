@@ -9,8 +9,8 @@ import { readPreparedReactLibrary, retainPreparedReactLibrary } from './react-li
 export { parseLibraryRequest } from './react-library-input.js';
 
 
-export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>) {
-  const parent = path.join(repoRoot, 'private', 'react-library-downloads');
+export async function buildReactLibrary(repoRoot: string, input: ReturnType<typeof parseLibraryRequest>,
+  parent = path.join(repoRoot, 'private', 'react-library-downloads')) {
   mkdirSync(parent, { recursive: true });
   const work = mkdtempSync(path.join(parent, 'library-'));
   const inputs = path.join(work, 'inputs'), generated = path.join(work, 'generated'), iconsDir = path.join(inputs, 'icons');
