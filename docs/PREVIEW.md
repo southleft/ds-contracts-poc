@@ -8,9 +8,13 @@ is refused by name instead of guessed.
 
 ## What works today
 
-These rows are the benchmark. Each is replayed from a frozen Figma capture on
-every change to the repository, so a regression turns CI red instead of going
-unnoticed.
+These rows are the benchmark. Each is replayed from a frozen input (a Figma
+capture, or the vendored React workspace in `benchmark/react-family`) on every
+change to the repository, so a regression turns CI red instead of going
+unnoticed. The **Figma → React** rows are what this preview's command does. The
+**React → Figma** rows are measured through the local app and Figma, and are
+shown so the whole benchmark is visible in one place; they are not part of the
+preview command.
 
 <!-- benchmark:begin -->
 | Component | Direction | Result | Measured |
@@ -19,6 +23,9 @@ unnoticed.
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
 | CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Known failure** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial; problems: variant-prop-discarded:state — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
+| shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
+| shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
+| shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->

@@ -24,7 +24,7 @@ jobs:
   benchmark:
     name: benchmark replay
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -39,6 +39,19 @@ jobs:
 
       - name: build @ds-contracts/schema and @ds-contracts/core (the packager's resolution prerequisites)
         run: npm run prep:core
+
+      - name: install the vendored React workspace (React → Figma cells)
+        run: npm ci --prefix benchmark/react-family --no-audit --no-fund
+
+      - name: cache playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+
+      - name: install chromium (the React source is observed headlessly)
+        run: npx playwright-core install --with-deps chromium
 
       - name: benchmark:test (the gate's own controls)
         run: npm run benchmark:test

@@ -37,6 +37,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { figmaToReact } from './figma-to-react.js';
+import { attachReact, judgeReact, readReactPin, recordReact, replayReactCells, type ReactCell } from './benchmark-react-native.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
@@ -88,8 +89,16 @@ export function treeHashes(dir: string): Record<string, string> {
   return out;
 }
 
-export function readCells(root = repoRoot): Cell[] {
+export type AnyCell = Cell | ReactCell;
+export function readAllCells(root = repoRoot): AnyCell[] {
   return JSON.parse(readFileSync(path.join(root, 'benchmark', 'cells.json'), 'utf8')).cells;
+}
+/** The Figma → React cells (kind "figma-to-react"). */
+export function readCells(root = repoRoot): Cell[] {
+  return readAllCells(root).filter((c): c is Cell => c.kind === 'figma-to-react');
+}
+export function readReactCells(root = repoRoot): ReactCell[] {
+  return readAllCells(root).filter((c): c is ReactCell => c.kind === 'react-to-native');
 }
 const pinPath = (root: string, id: string) => path.join(root, 'benchmark', 'pins', id + '.json');
 export function readPin(root: string, id: string): Pin | null {
@@ -164,11 +173,26 @@ export async function check(root = repoRoot, only?: Set<string>): Promise<Verdic
     try { replay = await replayInput(root, cell); } catch (e) { replay = e instanceof Error ? e : Error(String(e)); }
     verdicts.push(judge(cell, readPin(root, cell.id), replay));
   }
+  const react = readReactCells(root).filter(c => !only || only.has(c.id));
+  if (react.length) {
+    const replays = await replayReactCells(root, react);
+    for (const cell of react) verdicts.push(judgeReact(cell, readReactPin(root, cell.id), replays.get(cell.id)!));
+  }
   return verdicts;
 }
 
 export async function record(root: string, ids: string[]) {
   mkdirSync(path.join(root, 'benchmark', 'pins'), { recursive: true });
+  const react = readReactCells(root).filter(c => ids.includes(c.id));
+  if (react.length) {
+    const replays = await replayReactCells(root, react);
+    for (const cell of react) {
+      const replay = replays.get(cell.id)!;
+      if (replay instanceof Error) throw replay;
+      const pin = recordReact(root, cell, replay);
+      console.log(`recorded ${cell.id}: ${pin.refusal ? 'refusal ' + pin.refusal : 'root + ' + Object.keys(pin.children).length + ' child plan(s)'}${pin.fidelity ? '' : ' (stale: needs a comparison)'}`);
+    }
+  }
   for (const cell of readCells(root).filter(c => ids.includes(c.id))) {
     const replay = await replayInput(root, cell), prior = readPin(root, cell.id), generatedSha256 = mapHash(replay.generated);
     const pin: Pin = { id: cell.id, version: 1, inputSha256: replay.inputSha256, requestSha256: replay.requestSha256, rootId: replay.rootId,
@@ -217,7 +241,16 @@ function flag(name: string) { const i = process.argv.indexOf(name); return i > -
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   (async () => {
     const recordId = flag('--record'), attachId = flag('--attach');
-    if (recordId || process.argv.includes('--all')) { await record(repoRoot, recordId ? [recordId] : readCells().map(c => c.id)); return; }
+    if (recordId || process.argv.includes('--all')) { await record(repoRoot, recordId ? [recordId] : readAllCells().map(c => c.id)); return; }
+    const reactCell = attachId ? readReactCells().find(c => c.id === attachId) : undefined;
+    if (attachId && reactCell) {
+      const receipt = flag('--receipt'), ops = flag('--ops'), on = flag('--measured-on'), at = flag('--measured-at');
+      if (!receipt || !ops || !on || !at) throw Error('usage: --attach <id> --receipt <comparison.json> --ops root=<op>,instance-1=<op>,… --measured-on <platform> --measured-at <YYYY-MM-DD>');
+      const pin = attachReact(repoRoot, reactCell, receipt, Object.fromEntries(ops.split(',').map(p => p.split('=') as [string, string])),
+        path.join(repoRoot, 'private', 'source-native-app', 'operations'), on, at);
+      console.log(`attached ${attachId}: ${pin.fidelity!.pass ? 'pass' : 'fail'} (${pin.fidelity!.white.toFixed(3)}% / ${pin.fidelity!.black.toFixed(3)}%)`);
+      return;
+    }
     if (attachId) {
       const receipt = flag('--receipt'), on = flag('--measured-on'), at = flag('--measured-at');
       if (!receipt || !on || !at) throw Error('usage: --attach <id> --receipt <receipt.json> --measured-on <platform> --measured-at <YYYY-MM-DD>');

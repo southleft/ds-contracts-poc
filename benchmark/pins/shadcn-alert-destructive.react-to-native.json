@@ -1,0 +1,29 @@
+{
+  "id": "shadcn-alert-destructive.react-to-native",
+  "version": 1,
+  "kind": "react-to-native",
+  "referenceId": "77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c",
+  "root": "ec4788e24bae672cf39b3035831d484214d1805084c01cdbf46880a07399ed2c",
+  "children": {
+    "instance-1": {
+      "exportName": "AlertTitle",
+      "planSha256": "4a69b37b45abcdefbed93452784fd18e776850879128a643dd984222edd6b01c"
+    },
+    "instance-2": {
+      "exportName": "AlertDescription",
+      "planSha256": "24eaff1dcc06d1556bf121be0f2e378e6ee6e5ab7c47fc47635b9176f25ffb27"
+    }
+  },
+  "recordedOn": "darwin-arm64",
+  "fidelity": {
+    "receipt": "benchmark/receipts/shadcn-alert-destructive.react-to-native/comparison.json",
+    "receiptSha256": "32d4fa65c1982ce5184d522d250e8c50f14ebb44f1932bcf9cfadfc32ef8c36a",
+    "planSetSha256": "67bf113fbce0f4d6f0b4a84b831b33efabe307156de425554b8da1fe7038bf0a",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-26",
+    "white": 3.21078431372549,
+    "black": 3.2475490196078436,
+    "layoutExact": true,
+    "pass": true
+  }
+}

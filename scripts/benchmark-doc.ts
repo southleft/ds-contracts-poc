@@ -9,7 +9,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { judge, readCells, readPin, type Status } from './benchmark-replay.js';
+import { judge, readAllCells, readPin, type Status } from './benchmark-replay.js';
+import { judgeReact, readReactPin } from './benchmark-react-native.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const DOCUMENTS = ['docs/PREVIEW.md'];
@@ -17,13 +18,24 @@ const BEGIN = '<!-- benchmark:begin -->', END = '<!-- benchmark:end -->';
 const label: Record<Status, string> = { green: 'Pass', partial: 'Partial (text only)', 'known-failure': 'Known failure', stale: 'Not yet re-scored', red: 'Failing' };
 
 export function scoreboard(root = repoRoot): string {
-  const rows = readCells(root).map(cell => {
-    const pin = readPin(root, cell.id);
-    const v = pin ? judge(cell, pin, { inputSha256: pin.inputSha256, requestSha256: pin.requestSha256, rootId: pin.rootId, generated: pin.generated, entries: pin.entries })
-      : { status: 'red' as Status, reason: 'no pin' };
-    const detail = ('summary' in v && v.summary) ? v.summary : v.reason;
-    const scope = cell.scope.outOfScope.length ? ` Out of scope: ${cell.scope.outOfScope.map(o => o.reason).join('; ')}.` : '';
-    return `| ${cell.row} | Figma → React | **${label[v.status]}** | ${detail.replace(/\|/g, '\\|')}.${scope} |`;
+  const rows = readAllCells(root).map(cell => {
+    let v: { status: Status; reason: string; summary?: string };
+    let scope = '', direction = 'Figma → React';
+    if (cell.kind === 'react-to-native') {
+      direction = 'React → Figma';
+      const pin = readReactPin(root, cell.id);
+      v = pin ? judgeReact(cell, pin, { referenceId: pin.referenceId, result: { caseId: cell.caseId, ...(pin.refusal ? { refusal: pin.refusal } : {}),
+        ...(pin.root ? { root: { kind: 'pinned', planSha256: pin.root } } : {}),
+        children: Object.entries(pin.children).map(([instanceId, c]) => ({ instanceId, exportName: c.exportName, ...(c.planSha256 ? { planSha256: c.planSha256 } : {}), ...(c.refusal ? { refusal: c.refusal } : {}) })) } })
+        : { status: 'red', reason: 'no pin' };
+    } else {
+      const pin = readPin(root, cell.id);
+      v = pin ? judge(cell, pin, { inputSha256: pin.inputSha256, requestSha256: pin.requestSha256, rootId: pin.rootId, generated: pin.generated, entries: pin.entries })
+        : { status: 'red', reason: 'no pin' };
+      scope = cell.scope.outOfScope.length ? ` Out of scope: ${cell.scope.outOfScope.map(o => o.reason).join('; ')}.` : '';
+    }
+    const detail = v.summary ?? v.reason;
+    return `| ${cell.row} | ${direction} | **${label[v.status]}** | ${detail.replace(/\|/g, '\\|')}.${scope} |`;
   });
   return [BEGIN,
     '| Component | Direction | Result | Measured |',
