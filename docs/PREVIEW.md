@@ -32,7 +32,7 @@ preview command.
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (default) | React → Figma | **Partial (text only)** | native vs React source 6.250% white, 6.250% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (secondary) | React → Figma | **Partial (text only)** | native vs React source 2.614% white, 2.614% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
-| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->

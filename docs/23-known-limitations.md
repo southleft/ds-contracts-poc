@@ -12255,3 +12255,51 @@ extra whitespace refuses). Reverse each by restoring the previous identity
 pass-through, the whole-directory link, the plain reader and the source-hash-only
 normalization.
 
+## D.174 Runtime dependencies inside a source-owned child fold into that child
+
+**AGENT decision, 2026-09-27.** The composed shadcn Card refused four of its ten
+nested plans with `react-composition-runtime-or-multiple-root-unqualified`.
+The cause was not a second root: the Checkbox renders one root, a button. The
+Checkbox is a source-owned subtree whose root is drawn by Radix's
+`CheckboxPrimitive.Root`, which renders an `Indicator`, which renders a lucide
+icon. Since D.141 traced dependency identities, those three appeared as
+separate composition instances, and a source-owned child with any dependency
+was refused.
+
+The standalone path already has the rule: dependency components under
+`node_modules` "render hosts that belong to their nearest workspace owner and
+are never separate caller identities or nested-part boundaries"
+(`workspaceComponents`). The composition path now applies the same rule.
+`foldedRuntimeDependencies` folds a `node_modules` instance into the nearest
+workspace instance above it when all of these hold:
+- the owner is source-owned (`authored-or-runtime`);
+- the owner has a single root;
+- every root of the dependency lies inside that root.
+
+Folded instances are removed from the composition's instances. The review and
+the owned-child derivation accept a source-owned child only when every one of
+its dependencies is folded. The child's main compiles the whole observed
+subtree as its own layers and carries the limitation
+`runtime-dependency-internals-flattened`.
+
+The following stay visible and keep refusing:
+- a workspace dependency;
+- a dependency whose root lies outside the owner's root;
+- a dependency under a caller-slot owner;
+- a dependency with no workspace owner.
+
+This does not relax D.149. That decision refuses to flatten the identities of
+a selected root for state assembly, where reuse is the point. Here the folded
+instances are third-party internals of one usage, and the nested main is named
+as an observed snapshot of it.
+
+Measured by the benchmark replay: the Card now prepares all seven children
+(CardHeader, CardTitle, CardDescription, CardContent, Checkbox, CardFooter,
+Button). The root and the six previously prepared child plans are unchanged,
+and the pin was re-recorded from ten entries to seven. The Card is still **not
+yet re-scored**: no native comparison has measured these plans.
+
+Tests: `source-reference/react-source-anatomy.test.ts` (fold and four refusals).
+Reverse by removing `foldedRuntimeDependencies` from `reactCompositionInstances`,
+`matchReactComposition` and `deriveReactOwnedChild`.
+
