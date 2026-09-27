@@ -11866,9 +11866,14 @@ in Evaluations and the independent readback returned
 recorded: the Switch root is 32 × 18.390625 px, and the committed
 source-native instrument refuses a fractional root box by design. Scoring it
 needs an owner-approved framing rule for fractional boxes, which this change
-does not make. The live callback re-observation of this case still ends
-`callback-observation-incomplete`, while the replay from an empty `private/`
-completes it; that remains open.
+does not make. The callback observation of this case ends
+`callback-observation-incomplete` both live and in a replay from an empty
+`private/` (re-measured 2026-09-27 after re-observing the initial states): the
+probe `asChild: true` renders no control without a child
+(`react-ownership-selected-root-missing`) and `hidden: true` cannot take focus
+(`callback-focus-mismatch`). The state-API chain does not depend on it and
+completes. Excluding values that remove or hide the observed control from the
+callback domain remains open.
 
 Tests: `source-reference/native-operation-jobs.test.ts` (re-entry refused by
 name, overflow propagates; both fail against the previous `get()`),
