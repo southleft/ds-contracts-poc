@@ -12145,11 +12145,23 @@ Measured through the application in Evaluations, all on the current runtime:
    variants differ in the 0.4 state, and all nine are pixel-identical to the
    operation's creation readback after the reverse.
 
+4. **Native → source.** A designer edit set the three disabled roots to 0.4 on
+   the canvas. **Read design changes from the canvas** named exactly those
+   three opacity changes, read-only. The source-repair preview then refused
+   with `react-initial-native-observation-unavailable`: repair compiles an
+   initial-state operation's draft, and this is a state-API operation. The
+   app was also started without the host CSS recipe (the
+   `DS_CONTRACTS_REACT_SOURCE_CSS_*` variables) that a Tailwind workspace
+   needs. After the edit was restored, a new design read reported 0 changes.
+   Native → source for this row stays open. It needs source repair for
+   state-API operations; D.108 measured it only for an initial-state operation.
+
 The Switch callback experiment still reports `callback-observation-incomplete`
 on both source revisions, as it has on every run since 2026-09-26. The update
 follows the state-API experiment, which completes. This cycle qualifies a
 bounded source → native opacity update with conflict refusal, retry, repeat
-and rollback. It does not qualify native → source edits for this row.
+and rollback, plus a read-only design read in the other direction. It does
+not qualify native → source edits for this row.
 
 Test: `source-reference/native-source-identity.test.ts` (a wrapper with a
 primitive at its root keeps the wrapper's identity; against the previous rule
