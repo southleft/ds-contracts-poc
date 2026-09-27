@@ -12345,6 +12345,15 @@ Previously the mock let the re-seat succeed where Figma does not.
 This code sits inside the root-content feature gate, so no committed generated
 script changes. The engine receipt is re-recorded.
 
+**Measured live, 2026-09-27.** The rebuild with the seed in both directions
+(root `97290dba…` and its seven children, comparison `eb0fa6e0…` in
+Evaluations) draws the CardFooter's Button at the left edge. The
+`card-composed` instance scores 1.331% on white and black, 360 × 200 exact,
+with the card's shadow included in the framing
+(`snap-outward-effects-included-v1`). Every remaining difference is text-edge
+antialiasing. The cell `shadcn-card-composed.react-to-native` now carries this
+receipt and replays with the other React → Figma cells.
+
 Tests: `core/figma-root-slot.test.ts` (a hug-width root seeds 0.01 px and its
 widened instance fills; against the previous writer the seed is 0),
 `core/native-contract-comparison.test.ts` (an inherited zero refuses by name).
