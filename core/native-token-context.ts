@@ -63,8 +63,10 @@ export interface NativeTokenContextInput {
     value: unknown;
   }[];
   /** Value-history support only, not write authority. Absent on historical
-   * inputs. A new bounded geometry writer must separately prove consumers. */
-  allocatedValueProtocol?: "px-dimension-v1" | "template-values-v1";
+   * inputs. A new bounded geometry writer must separately prove consumers.
+   * `shadow-values-v1` also remembers `shadow` leaves, compiled to STRING
+   * variables and compared exactly as strings. */
+  allocatedValueProtocol?: "px-dimension-v1" | "template-values-v1" | "shadow-values-v1";
   /** Original allocation input for a verified additive allocation. This is
    * evidence, not permission to discover or create IDs. It has no history of
    * its own; restoring later values must reproduce this base plus number leaves. */
@@ -234,7 +236,7 @@ export function prepareNativeTokenContext(
 ): NativeTokenPreparation {
   if (input?.writeProtocol !== undefined && input.writeProtocol !== 'explicit-modes-v1') fail('write-protocol');
   if (input?.writeProtocol !== undefined && input.allocatedValues !== undefined) fail('explicit-modes-value-update-unqualified');
-  if (input?.allocatedValueProtocol !== undefined && !["px-dimension-v1", "template-values-v1"].includes(input.allocatedValueProtocol))
+  if (input?.allocatedValueProtocol !== undefined && !["px-dimension-v1", "template-values-v1", "shadow-values-v1"].includes(input.allocatedValueProtocol))
     fail("allocated-value-protocol");
   if (input?.allocatedValueProtocol !== undefined && input.allocatedValues === undefined)
     fail("allocated-value-protocol-empty");
@@ -262,10 +264,12 @@ export function prepareNativeTokenContext(
   const { revision: allocationRevision, ...allocationBody } = allocation;
   if (!same(shape(body), shape(allocationBody))) fail("allocated-value-structure");
   // Historical successions remain FLOAT-only. The explicit template protocol
-  // may carry COLOR too; shape equality above retains each variable's type.
+  // may carry COLOR too, the shadow protocol STRING; shape equality above
+  // retains each variable's type.
   for (const row of input.allocatedValues)
     for (const prepared of [body, allocationBody])
-      if (!(input.allocatedValueProtocol === 'template-values-v1' ? ['FLOAT', 'COLOR'] : ['FLOAT'])
+      if (!(input.allocatedValueProtocol === 'template-values-v1' ? ['FLOAT', 'COLOR'] :
+          input.allocatedValueProtocol === 'shadow-values-v1' ? ['FLOAT', 'STRING'] : ['FLOAT'])
           .includes(prepared.variables.find((v) => v.tokenPath === row.tokenPath)?.resolvedType ?? ''))
         fail("allocated-value-type");
   return clone({ ...body, revision: allocationRevision });
@@ -309,8 +313,9 @@ function restoreAllocatedValues(
   const restored = clone({ ...input, allocatedValues: undefined });
   delete restored.allocatedValues;
   delete restored.allocatedValueProtocol;
-  let dimensionValues = 0;
+  let dimensionValues = 0, shadowValues = 0;
   const templateValues = input.allocatedValueProtocol === 'template-values-v1';
+  const shadowProtocol = input.allocatedValueProtocol === 'shadow-values-v1';
   const requested = new Set(templateValues ? prepareBody(input).variables.map(v => v.tokenPath) : input.tokenPaths);
   const literalPixels = (value: unknown): boolean => typeof value === "string" &&
     /^-?(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value) && Number.isFinite(Number(value.slice(0, -2)));
@@ -328,7 +333,12 @@ function restoreAllocatedValues(
     if (!requested.has(row.tokenPath)) fail("allocated-value-unrequested");
     if (templateValues && !['number', 'dimension', 'fontWeight', 'color'].includes(current!.type ?? ''))
       fail('allocated-value-type');
-    if (current!.type !== "number" && !(templateValues && ['fontWeight', 'color'].includes(current!.type ?? ''))) {
+    // A shadow is one CSS string on both sides: no parsing, no normalization.
+    if (current!.type === 'shadow') {
+      if (!shadowProtocol) fail('allocated-value-type');
+      if (typeof current!.value !== 'string' || typeof row.value !== 'string') fail('allocated-value-string');
+      shadowValues++;
+    } else if (current!.type !== "number" && !(templateValues && ['fontWeight', 'color'].includes(current!.type ?? ''))) {
       if (current!.type !== "dimension" || !["px-dimension-v1", "template-values-v1"].includes(input.allocatedValueProtocol ?? ''))
         fail("allocated-value-type");
       if (!literalPixels(current!.value) || !literalPixels(row.value)) fail("allocated-value-pixels");
@@ -341,6 +351,7 @@ function restoreAllocatedValues(
     setNativeTokenLeafValue(mode!.tokens, row.tokenPath, clone(row.value));
   }
   if (input.allocatedValueProtocol === 'px-dimension-v1' && !dimensionValues) fail("allocated-value-protocol-empty");
+  if (shadowProtocol && !shadowValues) fail("allocated-value-protocol-empty");
   for (const mode of restored.modes) mode.tokenTreeRevision = revisionOf(mode.tokens);
   return restored;
 }
