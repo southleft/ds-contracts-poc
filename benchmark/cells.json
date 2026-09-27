@@ -92,6 +92,36 @@
       },
       "component": "Checkbox",
       "knownFailure": "hover renders the rest variant (variant-prop-discarded:state); label cells over 5% only on text are named partials"
+    },
+    {
+      "id": "shadcn-alert-default.react-to-native",
+      "row": "shadcn Alert (default)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "alert-default",
+      "children": true,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-alert-destructive.react-to-native",
+      "row": "shadcn Alert (destructive)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "alert-destructive",
+      "children": true,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-switch-unchecked.react-to-native",
+      "row": "shadcn Switch",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "state-api:switch-unchecked",
+      "children": false,
+      "expect": "pass"
     }
   ]
 }

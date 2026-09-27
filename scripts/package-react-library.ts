@@ -19,7 +19,13 @@ async function run(cmd: string, args: string[], cwd: string): Promise<string> {
   }
 }
 
-export async function packageReactLibrary(generatedDir: string, component: string, work: string, repoRoot = ROOT) {
+/** An npm package name the user chose (scoped or not); anything else refuses. */
+export const PACKAGE_NAME = /^(?:@[a-z0-9][a-z0-9._~-]*\/)?[a-z0-9][a-z0-9._~-]*$/;
+
+export async function packageReactLibrary(generatedDir: string, component: string, work: string, repoRoot = ROOT,
+  options: { packageName?: string } = {}) {
+  if (options.packageName !== undefined && (!PACKAGE_NAME.test(options.packageName) || options.packageName.length > 214))
+    throw new Error(`react-library-package-name-invalid: "${options.packageName}" is not an npm package name`);
   const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
   mkdirSync(src, { recursive: true }); mkdirSync(dist, { recursive: true });
   // Copy generated sources except stories (a Storybook consumer is a different check).
@@ -47,7 +53,7 @@ export async function packageReactLibrary(generatedDir: string, component: strin
     paths: { react: [path.join(repoRoot, 'node_modules', '@types', 'react', 'index.d.ts')], 'react/jsx-runtime': [path.join(repoRoot, 'node_modules', '@types', 'react', 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
   writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
   await run(path.join(repoRoot, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], pkgDir);
-  const name = `@ds-contracts-generated/${component.toLowerCase()}`;
+  const name = options.packageName ?? `@ds-contracts-generated/${component.toLowerCase()}`;
   writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
     description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
     files: ['dist'], main: './dist/index.js', types: './dist/index.d.ts',

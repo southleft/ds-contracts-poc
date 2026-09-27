@@ -55,6 +55,7 @@ if (dirty && !process.argv.includes('--allow-dirty')) {
 }
 console.log(`deploying from ${execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim()}${dirty ? ' (+ DIRTY tree, --allow-dirty)' : ''}`);
 
+run('npm run prep:core', '0/6 build @ds-contracts/schema and core (the playground config resolves their dist)');
 run('npm run plugin:zip', '1/6 build the plugin zip (engine-receipt + dump-source gates run here)');
 run('npm run build:playground', '2/6 build the playground (bundles the fresh zip)');
 run('npm run site:build', '3/6 build the spec site');

@@ -24,7 +24,7 @@ jobs:
   benchmark:
     name: benchmark replay
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -40,16 +40,34 @@ jobs:
       - name: build @ds-contracts/schema and @ds-contracts/core (the packager's resolution prerequisites)
         run: npm run prep:core
 
+      - name: install the vendored React workspace (React → Figma cells)
+        run: npm ci --prefix benchmark/react-family --no-audit --no-fund
+
+      - name: cache playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+
+      - name: install chromium (the React source is observed headlessly)
+        run: npx playwright-core install --with-deps chromium
+
       - name: benchmark:test (the gate's own controls)
         run: npm run benchmark:test
 
-      - name: benchmark:check (replay every pinned cell)
-        run: npm run benchmark:check -- --json benchmark-verdicts.json
+      - name: benchmark:doc:check (published scoreboards match the pins)
+        run: npm run benchmark:doc:check
 
-      - name: keep the verdicts
+      - name: benchmark:check (replay every pinned cell)
+        run: npm run benchmark:check -- --json benchmark-verdicts.json --plans benchmark-plans
+
+      - name: keep the verdicts and the replayed plans
         if: ${{ always() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: benchmark-verdicts
-          path: benchmark-verdicts.json
+          path: |
+            benchmark-verdicts.json
+            benchmark-plans/
           if-no-files-found: ignore

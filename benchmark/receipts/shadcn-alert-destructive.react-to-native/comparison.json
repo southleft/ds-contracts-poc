@@ -1,0 +1,29 @@
+{
+  "nodeId": "242:5462",
+  "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+  "limitPercent": 5,
+  "sourceSize": [
+    360,
+    68
+  ],
+  "nativeSize": [
+    360,
+    68
+  ],
+  "layoutExact": true,
+  "scores": [
+    {
+      "background": "white",
+      "mismatchPercent": 3.21078431372549,
+      "withinLimit": true,
+      "triptych": "source-native-white.png"
+    },
+    {
+      "background": "black",
+      "mismatchPercent": 3.2475490196078436,
+      "withinLimit": true,
+      "triptych": "source-native-black.png"
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "source": "Independent family workspace (shadcn Badge, Alert, Switch)",
+  "theme": "Light (workspace stylesheet)",
+  "fontFamily": "Inter",
+  "sideEffectImports": [
+    "@fontsource-variable/inter",
+    "./tailwind.css"
+  ],
+  "requiredTokens": {
+    "--primary": "oklch(0.205 0 0)",
+    "--secondary": "oklch(0.97 0 0)",
+    "--input": "oklch(0.922 0 0)",
+    "--card": "oklch(1 0 0)",
+    "--radius": "0.625rem"
+  },
+  "witnessFiles": {
+    "src/components/ui/badge.tsx": "1b292cd64608eef62eab1e43621071b32f794988a8c4e40fd1086cfbf8d9ef5d",
+    "src/components/ui/alert.tsx": "26142e6f255d291475046412fd47b6054294f244f531636e40e57d5fdd3bbbf3",
+    "src/components/ui/switch.tsx": "83e792b28bb04b1ac4dbde44ccdd38a918e1ddca1dcd90113f68f2905ab7311d",
+    "src/index.css": "5ad8b87c7bcaf1f71a9a751563648be6f85ba6dccb6071274781231fa5fd1d73",
+    "tailwind.css": "a94ce9d642a66e0dca12548f4e6d52eed7289c3fd7d88073e6942928c270401d",
+    "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+  },
+  "cases": [
+    {
+      "id": "badge-default",
+      "subject": "Badge",
+      "label": "Default",
+      "mount": {
+        "module": "./src/components/ui/badge",
+        "export": "Badge",
+        "children": [
+          "New"
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"badge\"]"
+        ],
+        "requiredStyles": {
+          "display": "inline-flex",
+          "height": "20px",
+          "border-radius": "26px",
+          "font-size": "12px",
+          "font-weight": "500",
+          "padding-left": "8px",
+          "background-color": "oklch(0.205 0 0)"
+        }
+      },
+      "negativeControl": true
+    },
+    {
+      "id": "badge-secondary",
+      "subject": "Badge",
+      "label": "Secondary",
+      "mount": {
+        "module": "./src/components/ui/badge",
+        "export": "Badge",
+        "props": {
+          "variant": "secondary"
+        },
+        "children": [
+          "New"
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"badge\"]"
+        ],
+        "requiredStyles": {
+          "display": "inline-flex",
+          "height": "20px",
+          "border-radius": "26px",
+          "font-size": "12px",
+          "font-weight": "500",
+          "padding-left": "8px",
+          "background-color": "oklch(0.97 0 0)"
+        }
+      }
+    },
+    {
+      "id": "alert-default",
+      "subject": "Alert",
+      "label": "Title and description",
+      "mount": {
+        "tag": "div",
+        "props": {
+          "style": {
+            "width": 360
+          }
+        },
+        "children": [
+          {
+            "module": "./src/components/ui/alert",
+            "export": "Alert",
+            "children": [
+              {
+                "module": "./src/components/ui/alert",
+                "export": "AlertTitle",
+                "children": [
+                  "Payment received"
+                ]
+              },
+              {
+                "module": "./src/components/ui/alert",
+                "export": "AlertDescription",
+                "children": [
+                  "Your invoice has been paid in full."
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"alert\"]"
+        ],
+        "fontPath": [
+          "[data-slot=\"alert-title\"]"
+        ],
+        "requiredStyles": {
+          "display": "grid",
+          "width": "360px",
+          "border-radius": "10px",
+          "font-size": "14px",
+          "padding-left": "16px",
+          "padding-top": "12px",
+          "background-color": "oklch(1 0 0)",
+          "color": "oklch(0.145 0 0)"
+        },
+        "probes": {
+          "title": {
+            "path": [
+              "[data-slot=\"alert-title\"]"
+            ],
+            "styles": {
+              "font-weight": "500"
+            }
+          },
+          "description": {
+            "path": [
+              "[data-slot=\"alert-description\"]"
+            ],
+            "styles": {
+              "font-size": "14px"
+            }
+          }
+        }
+      },
+      "negativeControl": true
+    },
+    {
+      "id": "alert-destructive",
+      "subject": "Alert",
+      "label": "Destructive",
+      "mount": {
+        "tag": "div",
+        "props": {
+          "style": {
+            "width": 360
+          }
+        },
+        "children": [
+          {
+            "module": "./src/components/ui/alert",
+            "export": "Alert",
+            "children": [
+              {
+                "module": "./src/components/ui/alert",
+                "export": "AlertTitle",
+                "children": [
+                  "Payment received"
+                ]
+              },
+              {
+                "module": "./src/components/ui/alert",
+                "export": "AlertDescription",
+                "children": [
+                  "Your invoice has been paid in full."
+                ]
+              }
+            ],
+            "props": {
+              "variant": "destructive"
+            }
+          }
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"alert\"]"
+        ],
+        "fontPath": [
+          "[data-slot=\"alert-title\"]"
+        ],
+        "requiredStyles": {
+          "display": "grid",
+          "width": "360px",
+          "border-radius": "10px",
+          "font-size": "14px",
+          "padding-left": "16px",
+          "padding-top": "12px",
+          "background-color": "oklch(1 0 0)",
+          "color": "oklch(0.577 0.245 27.325)"
+        },
+        "probes": {
+          "title": {
+            "path": [
+              "[data-slot=\"alert-title\"]"
+            ],
+            "styles": {
+              "font-weight": "500"
+            }
+          },
+          "description": {
+            "path": [
+              "[data-slot=\"alert-description\"]"
+            ],
+            "styles": {
+              "font-size": "14px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "switch-unchecked",
+      "subject": "Switch",
+      "label": "Unchecked",
+      "mount": {
+        "tag": "div",
+        "props": {
+          "style": {
+            "display": "flex",
+            "alignItems": "center",
+            "gap": 8
+          }
+        },
+        "children": [
+          {
+            "module": "./src/components/ui/switch",
+            "export": "Switch",
+            "props": {
+              "id": "airplane",
+              "defaultChecked": false,
+              "disabled": false
+            }
+          },
+          {
+            "tag": "label",
+            "props": {
+              "htmlFor": "airplane"
+            },
+            "children": [
+              "Airplane mode"
+            ]
+          }
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"switch\"]"
+        ],
+        "associatedLabelText": "Airplane mode",
+        "requiredStyles": {
+          "display": "flex",
+          "width": "32px",
+          "height": "18.3906px",
+          "opacity": "1",
+          "background-color": "oklch(0.922 0 0)"
+        },
+        "probes": {
+          "state": {
+            "path": [
+              "[data-slot=\"switch\"]"
+            ],
+            "properties": {
+              "ariaChecked": "false",
+              "disabled": false
+            }
+          },
+          "thumb": {
+            "path": [
+              "[data-slot=\"switch-thumb\"]"
+            ],
+            "styles": {
+              "width": "16px",
+              "height": "16px"
+            }
+          }
+        }
+      },
+      "negativeControl": true
+    },
+    {
+      "id": "switch-checked",
+      "subject": "Switch",
+      "label": "Checked",
+      "mount": {
+        "tag": "div",
+        "props": {
+          "style": {
+            "display": "flex",
+            "alignItems": "center",
+            "gap": 8
+          }
+        },
+        "children": [
+          {
+            "module": "./src/components/ui/switch",
+            "export": "Switch",
+            "props": {
+              "id": "airplane",
+              "defaultChecked": true,
+              "disabled": false
+            }
+          },
+          {
+            "tag": "label",
+            "props": {
+              "htmlFor": "airplane"
+            },
+            "children": [
+              "Airplane mode"
+            ]
+          }
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"switch\"]"
+        ],
+        "associatedLabelText": "Airplane mode",
+        "requiredStyles": {
+          "display": "flex",
+          "width": "32px",
+          "height": "18.3906px",
+          "opacity": "1",
+          "background-color": "oklch(0.205 0 0)"
+        },
+        "probes": {
+          "state": {
+            "path": [
+              "[data-slot=\"switch\"]"
+            ],
+            "properties": {
+              "ariaChecked": "true",
+              "disabled": false
+            }
+          },
+          "thumb": {
+            "path": [
+              "[data-slot=\"switch-thumb\"]"
+            ],
+            "styles": {
+              "width": "16px",
+              "height": "16px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "switch-disabled",
+      "subject": "Switch",
+      "label": "Disabled",
+      "mount": {
+        "tag": "div",
+        "props": {
+          "style": {
+            "display": "flex",
+            "alignItems": "center",
+            "gap": 8
+          }
+        },
+        "children": [
+          {
+            "module": "./src/components/ui/switch",
+            "export": "Switch",
+            "props": {
+              "id": "airplane",
+              "defaultChecked": false,
+              "disabled": true
+            }
+          },
+          {
+            "tag": "label",
+            "props": {
+              "htmlFor": "airplane"
+            },
+            "children": [
+              "Airplane mode"
+            ]
+          }
+        ]
+      },
+      "witness": {
+        "path": [
+          "[data-slot=\"switch\"]"
+        ],
+        "associatedLabelText": "Airplane mode",
+        "requiredStyles": {
+          "display": "flex",
+          "width": "32px",
+          "height": "18.3906px",
+          "opacity": "0.5",
+          "background-color": "oklch(0.922 0 0)"
+        },
+        "probes": {
+          "state": {
+            "path": [
+              "[data-slot=\"switch\"]"
+            ],
+            "properties": {
+              "ariaChecked": "false",
+              "disabled": true
+            }
+          },
+          "thumb": {
+            "path": [
+              "[data-slot=\"switch-thumb\"]"
+            ],
+            "styles": {
+              "width": "16px",
+              "height": "16px"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # React V1 qualification scope
 
+> **Superseded scope (2026-09-26).** This ten-case cohort was the React scope
+> before the owner approved the closed V1 benchmark on 2026-09-25/26. The
+> current scope and scoreboard are in
+> [CURRENT.md](CURRENT.md#v1-scope-and-benchmark-scoreboard); the benchmark's
+> cells, pins and receipts are in `benchmark/`. The text below is kept as the
+> record of the earlier cohort.
+
 The goal remains React ↔ contracts ↔ editable Figma, including composed components. Lit/Web Components are parked for V1.1. Passing an individual example does not qualify a journey.
 
 ## First code-led cohort

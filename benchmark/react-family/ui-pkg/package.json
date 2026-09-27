@@ -1,0 +1,8 @@
+{
+  "name": "@shadcn-sandbox/ui",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Barrel over the shadcn copy-in sources under ../src/components/ui — shadcn is NOT an installable component package (its CLI vendors source into the host app), so this local path dependency gives the capture harness a `library.package` to mount. The true pin is the vendored source files themselves (sha256 ledger in examples/shadcn/RECON.md); this version string is the barrel's, not shadcn's.",
+  "main": "index.ts",
+  "types": "index.ts"
+}
