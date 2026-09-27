@@ -131,6 +131,30 @@
       "component": "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42"
     },
     {
+      "id": "shadcn-badge-return.figma-to-react",
+      "row": "shadcn Badge (native return)",
+      "criterion": "C4",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/shadcn-badge-return/dump.json",
+      "inputSha256": "65b09ce58599b25d853dfc9aba6f1daf77f9180b7a9599fdc867803725b1b634",
+      "source": {
+        "figmaFile": "T56aKuRnoay1L7CKAjSWRO",
+        "capturedAt": "2026-09-27",
+        "note": "Plugin capture (extract/figma/dump.plugin.js v1.47, run unmodified from the Sync Runner's Advanced tab with the set selected) of the natively created shadcn Badge root set (253:5754, operation 27002409) in Evaluations. A REST capture refuses this set: its label slot is a text template, which needs the variables REST cannot read with this token."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "7 variants of the root with an empty label slot. Variants null, link and ghost draw no paint without a caller label (transparent background, empty slot), so there are no pixels to compare; both sides measure exactly 18 x 20.",
+        "outOfScope": [
+          {
+            "pattern": "^variant-(null|link|ghost)$",
+            "reason": "draws no paint without its caller label: nothing to compare (both sides 18 x 20)"
+          }
+        ]
+      },
+      "component": "RootMatrix39a19bbc2f3d67e9"
+    },
+    {
       "id": "shadcn-alert-default.react-to-native",
       "row": "shadcn Alert (default)",
       "criterion": "C3",

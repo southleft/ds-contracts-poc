@@ -51,6 +51,7 @@ produces now. This table is generated; do not edit it by hand.
 | CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-27. |
 | shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-27. |
+| shadcn Badge (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 3.611% black) — darwin-arm64, 2026-09-27. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-27. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
@@ -74,7 +75,7 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | CBDS CheckboxIcon | gated above | Created and read back; no image scores | Not measured | Not measured |
 | shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | gated above | Opacity and bound height both ways, conflicts refused | Anchor drift fixed; the gate checks that a repeat after another root returns the same operation. Begun-write recovery and no-op update repeats are stale by three runtime revisions |
 | shadcn Alert | gated above (native return) | gated above | In-place attempt refused by name (layout channel) | Not measured |
-| shadcn Badge | Not measured | gated above: created and read back live; text-only partial, Figma's label 0.125 px wider ([D.168](23-known-limitations.md#d168-react--figma-text-only-residuals-are-partials-attributed-by-measurement)) | Not measured | Not measured |
+| shadcn Badge | gated above (native return, [D.171](23-known-limitations.md#d171-the-native-shadcn-badge-returns-to-react-from-a-plugin-capture)) | gated above: created and read back live; text-only partial, Figma's label 0.125 px wider ([D.168](23-known-limitations.md#d168-react--figma-text-only-residuals-are-partials-attributed-by-measurement)) | Not measured | Not measured |
 | Altitude Tabs | gated above | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
 | shadcn Card | Not measured | Plans gated above: the composed root and six nested plans prepare; the nested Checkbox and its three Radix internals refuse (`react-composition-runtime-or-multiple-root-unqualified`: the Radix Checkbox renders more than one root). The 6/6 native variants of 2026-09-18 predate current code | Not measured | Repeat preparation, no duplicates |
 

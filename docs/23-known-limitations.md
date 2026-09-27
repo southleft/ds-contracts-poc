@@ -12085,3 +12085,30 @@ its row gaps; against the previous writer it measures 1 px),
 `core/grid-flow-rows.test.ts` (resolved zero). Reverse by removing the
 empty-carrier round-trip in `sizeRootContent` and the `>= 0` in
 `readGridFlowRows`.
+
+## D.171 The native shadcn Badge returns to React from a plugin capture
+
+**AGENT decision, 2026-09-27.** The independent family's Badge had no Figma →
+React measurement. A REST capture of its native root set (`253:5754`, operation
+`27002409`) refuses with `FIGMA_SLOT_TEXT_TEMPLATE_CAPTURE_UNQUALIFIED`: the
+label slot is a text template, and the proposal requires a complete capture,
+including the variables that REST cannot read with this token. The Send tab's
+own capture is `extract/figma/dump.plugin.js`. Run unmodified from the Sync
+Runner's Advanced tab, with only that set selected, it reads the set with its
+variables and reports no degradations (dump v1.47). The script performs no
+writes.
+
+The headless app path (`scripts/figma-to-react.ts`) prepares the React library
+from that capture. A clean consumer measures exact 18 × 20 roots in all seven
+variants. Default, destructive and secondary match at 0.000%; outline matches
+at 0.000% white and 3.611% black. The null, link and ghost variants refuse with
+`comparison-has-no-paint`: without a caller label, their transparent pill draws
+nothing on either side, so the scorer has no pixels to compare. Those three
+variants are declared out of scope in the new cell
+`shadcn-badge-return.figma-to-react`, with that reason. The cell is **Pass**,
+4/4 in scope.
+
+This measures the Badge's root without its label. The labelled comparison
+exists only as an instance frame, which the Send tab does not read (D.166).
+Reverse by removing the cell.
+
