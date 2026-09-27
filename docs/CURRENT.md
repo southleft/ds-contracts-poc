@@ -1,8 +1,6 @@
 # React ↔ contracts ↔ Figma
 
-**Public project status · updated 2026-09-25 · V1 is not complete.**
-
-**Public project status · updated 2026-09-25 · V1 is not complete.**
+**Public project status · updated 2026-09-26 · V1 is not complete.**
 
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
@@ -24,6 +22,46 @@ worst difference is 3.7404%; the earlier font-input failures remain preserved.
 Font-byte identity, interactive Tabs behavior and live native validation of the
 placement rule remain open ([D.111](23-known-limitations.md#d111-primary-axis-fill-can-vary-with-a-prop),
 [D.112](23-known-limitations.md#d112-font-names-do-not-identify-font-bytes)).
+
+## V1 scope and benchmark scoreboard
+
+**Owner-approved 2026-09-25/26.** V1 is qualified on a closed benchmark, not on
+"any component family". The benchmark is CBDS Badge, the CBDS Checkbox family
+(Checkbox and CheckboxIcon), Altitude Badge, the independent shadcn
+Switch/Alert/Badge family, Tabs and Card. Everything outside it is a documented,
+refused-by-name limitation. The fidelity bar is unchanged: every image passes
+the 5% whole-image limit on white and on black. Text rasterisation residuals are
+reported separately and visibly; the limit is never widened for them. Keyboard
+focus and screen-reader semantics of generated components move to V1.1. Live
+two-way updates (criterion 1) are bounded: V1 guarantees the supported in-place
+channels (opacity, literal sizes, shadows, strokes, background layers, bounded
+text colour) in both directions; any other change refuses by name and offers a
+fresh create.
+
+Status per row, newest measurement first (all app-driven; "pre-rt21" marks
+native evidence recorded before the 2026-09-26 slot-sizing runtime fix,
+[D.161](23-known-limitations.md#d161-a-content-slots-counter-axis-fill-is-re-seated-after-the-exact-zero-reset)):
+
+| Row | Figma → React (C2) | React → native (C3) | Updates (C1) | Repeat / recovery (C6) |
+| --- | --- | --- | --- | --- |
+| CBDS Badge | Pass 72/72 (2.214% white, 4.557% black) | Pass 72/72, 0.000% vs original, exact sizes (pre-rt21) | Not measured | Readback refusal recovered by read-only retry, no second write |
+| Altitude Badge | Pass 10/10 (3.333%) | Pass 10/10, 0.088% vs original (pre-rt21) | Not measured | Not measured |
+| CBDS Checkbox | 5 of 16 in scope (11 label-text residuals over 5%, hover draws rest ink) | Readback now verifies live ([D.163](23-known-limitations.md#d163-an-inherited-scale-origin-may-keep-only-the-sources-own-float32-invisible-offset)); disabled look fixed in code for the pinned cells ([D.162](23-known-limitations.md#d162-a-parent-set-boolean-state-selects-the-childs-drawn-state-preview)) but the app cannot yet rebuild a completed library operation; no image scores | Not measured | Not measured |
+| CheckboxIcon | Pass 30 of 30 in scope at 0.000% (12 focus cells are V1.1) | Created and read back; no image scores | Not measured | Not measured |
+| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Pass 9/9 (thumb y 1.195 vs 1.1875 open), pre-rt21 | Opacity and bound height both ways, conflicts refused | Begun-write recovery, no-op repeats (stale by three runtime revisions) |
+| shadcn Alert | Not measured | **Pass 2/2**: destructive 3.211% / 3.248%, default 3.068% / 3.105%, exact 360 × 68 | In-place attempt refused by name (layout channel) | Not measured |
+| shadcn Badge | Not measured | Exact-size refusal (43.875 vs 44 px text width) | Not measured | Not measured |
+| Tabs | Pass on both source appearances (≤ 3.349%) | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
+| Card | Not measured | 6/6 variants from 2026-09-18, likely stale | Not measured | Repeat preparation, no duplicates |
+
+No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
+closed: refresh the Switch rows on current code, return the Alert to React and
+update it both ways, give completed library operations a rebuild path so the
+Checkbox fix reaches the canvas, measure bounded updates on both Badges, and
+re-run Card and Tabs through the app. Criterion 5 also needs a fresh
+`npm run v1:readiness` on the release commit and an update of
+[docs/26](26-v1-definition.md) and the [React V1 scope](REACT-V1-SCOPE.md) to
+this benchmark.
 
 ## The whole loop
 

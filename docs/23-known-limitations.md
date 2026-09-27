@@ -11748,3 +11748,26 @@ the child State preview…"). This makes the pinned cells correct and names the
 others; drawing previews across every axis combination (21 → 30 CheckboxIcon
 variants for disabled alone) remains the complete fix and needs its own receipt
 round. Reverse by deleting the statePreviews block in `mapDepProps` and its test.
+
+## D.163 An inherited SCALE origin may keep only the source's own float32-invisible offset
+
+**AGENT decision, 2026-09-26 (owner delegated the call).** The natively created
+CBDS Checkbox (op `46e5f671`) was refused on four
+`native-filled-path-observation-inherited-scale` facts: in each error
+variant's half-scale warning glyph, Figma kept the main path's own x offset
+(3.0959e-8) instead of halving it (1.5480e-8). Width, height, y, constraints
+and relativeTransform all matched. Both values land on the identical float32
+position in the glyph's parent frame (x = 1.124997854…), so the canvas cannot
+express the difference. Emitter-side fixes were already ruled out in v251/v253
+(Figma forbids the instance-child transform override; zeroing the main's
+origin breaks exact source-path verification). The verifier now accepts an
+inherited origin only when it is the exact scaled value, or when it is the
+source value verbatim and both land on the same float32 position in the
+parent's frame. No tolerance or constant is added: a drifted value, a retained
+value that is not the source's, a zero or unobserved parent offset, or a
+relativeTransform that disagrees all still refuse
+(`core/native-source-observation.test.ts`). Recomputing the retained
+readback with the rule gives `supported-structure-observed` with 0 problems
+(`private/direct-state-ink-v255/native-v1/readback-v2.json`). Reverse by
+restoring `numeric(a.x,b.x*sx)` / `numeric(a.y,b.y*sy)` in
+`core/native-source-observation.ts` and removing `scaledOrigin` and its test.

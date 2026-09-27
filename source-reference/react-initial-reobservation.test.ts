@@ -65,8 +65,12 @@ test('observing again under another observer: the new run completes and becomes 
   } finally { await browser.close(); }
   assert.equal(captured.status, 'captured', JSON.stringify(captured));
   if (captured.status !== 'captured') throw Error('capture required');
+  // Seals since the ownership run's creation observer carry creation facts the
+  // ordinary (v1) inspection page does not record; it must compare structure.
+  const sealed = { ...ownership, nodes: ownership.nodes.map(n => ({ ...n, creationSite: { module: 'src/components/ui/track.tsx', sourceSha256: 'c'.repeat(64),
+    span: { start: 1, end: 2 }, functionSpan: { start: 0, end: 3 }, factory: 'jsx' } })) } as ReactOwnership;
   const report: ReactOwnershipReport = { id: '22222222-2222-4222-8222-222222222222', referenceId: reference.id, state: 'complete', acceptedContract: null,
-    denominator: 1, matched: 1, sourceUnchanged: true, rows: [{ id: 'track-off', matched: true, problems: [], treeSha256: captured.treeSha256, sourceImage: captured.sourcePngSha256, ownership,
+    denominator: 1, matched: 1, sourceUnchanged: true, rows: [{ id: 'track-off', matched: true, problems: [], treeSha256: captured.treeSha256, sourceImage: captured.sourcePngSha256, ownership: sealed,
       rootMatrix: { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
         draft: { status: 'native-compiled', problems: [], properties: [], observations: [], lowerings: [], limitations: [], sizing: [] } } as ReactOwnershipReport['rows'][number]['rootMatrix'] }] };
   const archive = path.join(repo, 'private/react-source-ownership', reference.id, report.id);
