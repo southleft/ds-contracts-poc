@@ -13,7 +13,7 @@ import {watchSourceFailures} from './observe.js';
 import {evidenceSha} from './react-validation-evidence.js';
 import {observeTextFonts,withPaintedTextFonts} from './text-fonts.js';
 import {observeReactInitialStates} from './react-initial-state.js';
-import {verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
+import {restoreRepairedOwnership,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
 import {observeCheckboxBehavior,checkedToggleRole} from './control-behavior.js';
 import type {SourceProfile} from './check.js';
 import type {ReactSourceRepairInput} from './react-source-repair-preview.js';
@@ -85,7 +85,7 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
   const table=effectTable(recorded,variants,plan),value=utilityValue(candidate,plan);
   let instances=0;
   const cases=before.map((old,caseIndex)=>{
-    const now=after[caseIndex],tree=structuredClone(old.captured.tree),ownership=structuredClone(now.ownership);
+    const now=after[caseIndex],tree=structuredClone(old.captured.tree);
     if(old.captured.status!=='captured'||now.captured.status!=='captured'||old.ownership.problems.length||now.ownership.problems.length)
       fail('caller-unverified');
     const targets=old.ownership.components.filter(o=>target(o,candidate));instances+=targets.length;
@@ -99,12 +99,7 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
       if(effect){if(!exact(Number(node!.style.opacity),effect.before))fail('baseline-effect-mismatch');node!.style.opacity=String(value);changedRoots++;}
     }
     if(!same(tree,now.captured.tree))fail('other-tree-facts-changed:'+old.caseId);
-    for(const owner of ownership.components){
-      const prior=old.ownership.components.find(o=>o.id===owner.id);
-      if(prior&&owner.source.module===candidate.source.module&&prior.source.sourceSha256===candidate.beforeSha256&&
-          owner.source.sourceSha256===candidate.afterSha256&&owner.source.exportName===prior.source.exportName)
-        owner.source=structuredClone(prior.source);
-    }
+    const ownership=restoreRepairedOwnership(old.ownership,now.ownership,candidate,targets.map(owner=>owner.roots[0]));
     if(!same(old.ownership,ownership))fail('ownership-changed:'+old.caseId);
     const fontFacts=(f:RepairCallerFrame['fonts'])=>{const {treeRevision:_revision,...facts}=f;return facts;};
     withPaintedTextFonts(old.captured.tree!,old.fonts);withPaintedTextFonts(now.captured.tree!,now.fonts);

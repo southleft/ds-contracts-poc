@@ -32,16 +32,17 @@ function fixture(t:test.TestContext) {
     variants:[{observation:'0',variant:'disabled=true'}],recipe:{input:'input.css',output:'output.css'},
     plan:{revision:'sha256:'+referenceId,changes:[{nodeId:'1:1',variant:'disabled=true',before:.5,after:.6}],candidates:[candidate]}} as unknown as ReactSourceRepairInput;
   let stageHook=()=>{},observeHook=async()=>{},cohortHook=async()=>{};
+  const readerCalls:unknown[]=[];
   const deps={
     async stage(){stageHook();return {workspace:staged,css:{file:path.join(root,'output.css'),beforeSha256:sha('old CSS'),afterSha256:sha('new CSS')}};},
     async observe(args:{dir:string}){await observeHook();const original=args.dir.endsWith('/original'),value=structuredClone(original?before:after);mkdirSync(path.join(args.dir,'states'),{recursive:true});writeFileSync(path.join(args.dir,'states/0.png'),original?'before':'after');return value;},
-    async build(){return {...input.reference,sourceRoot:staged};},program(){return input.program;},
+    async build(){return {...input.reference,sourceRoot:staged};},program(reference:unknown){readerCalls.push(reference);return input.program;},
     async cohort({dir}:{dir:string}){await cohortHook();for(const [side,text] of [['original','before'],['candidate','after']]){mkdirSync(path.join(dir,'control',side),{recursive:true});writeFileSync(path.join(dir,'control',side,'initial.png'),text);}
       return {qualification:'configured-caller-effects-verified',cases:[{caseId:'control',changedRoots:1,beforeImage:sha('before'),afterImage:sha('after'),finite:[],interactions:[]}],limitations:['source-write-not-authorized']};},
   } as unknown as NonNullable<Parameters<typeof createReactSourceRepairPreviews>[2]>;
   let derivations=0;
   const store=createReactSourceRepairPreviews(repo,()=>{derivations++;return structuredClone(input);},deps);
-  return {repo,root,file,text,input,store,derivations:()=>derivations,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;},setCohortHook(fn:()=>Promise<void>){cohortHook=fn;}};
+  return {repo,root,file,text,input,store,readerCalls,derivations:()=>derivations,setStageHook(fn:()=>void){stageHook=fn;},setObserveHook(fn:()=>Promise<void>){observeHook=fn;},setCohortHook(fn:()=>Promise<void>){cohortHook=fn;}};
 }
 
 test('verified preview reuses its identity, pins images and never changes original bytes',async t=>{
@@ -113,4 +114,12 @@ test('a matching local state set cannot bypass a failed caller check or evidence
     assert.match(job.state.problems[0],reason==='caller-failure'?/cohort-behavior-changed/:/evidence-changed/);
     assert.throws(()=>f.store.image(referenceId,parentId,proposalId,job.state.id,'candidate-0','0',sha('after')),/image-unavailable/);
   }
+});
+
+test('a candidate is read with the ownership program reader, from the staged reference (§D.173)',async t=>{
+  // Measured: the shadcn Switch candidate lost Radix's Switch.Root and Thumb:
+  // it was read without JSX or runtime-bound dependencies.
+  const f=fixture(t);await f.store.start(referenceId,parentId,proposalId).promise;
+  assert.equal(f.readerCalls.length,1);
+  assert.equal((f.readerCalls[0] as {sourceRoot:string}).sourceRoot.endsWith('staged'),true,'the staged reference, not the original');
 });

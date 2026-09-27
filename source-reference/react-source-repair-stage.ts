@@ -1,7 +1,7 @@
 /** Isolated, disposable source candidate. All writes go to a new private
  * directory; successful staging grants no write authority over the originals. */
 import {createHash} from 'node:crypto';
-import {existsSync,lstatSync,mkdirSync,mkdtempSync,readFileSync,realpathSync,symlinkSync,writeFileSync} from 'node:fs';
+import {constants,cpSync,existsSync,lstatSync,mkdirSync,mkdtempSync,readdirSync,readFileSync,realpathSync,symlinkSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {buildReactSourceCss} from './react-source-css-build.js';
 import type {proposeReactOpacityUtilityEdits} from './react-utility-source-edit.js';
@@ -47,7 +47,7 @@ export async function stageReactUtilitySourceEdit(repo:string,sourceRoot:string,
     writeFileSync(target,file===sourceFile?candidate.result:bytes,{flag:'wx'});
   }
   const modules=path.join(sourceRoot,'node_modules');
-  if(existsSync(modules))symlinkSync(modules,path.join(workspace,'node_modules'),'dir');
+  if(existsSync(modules))stageModules(modules,path.join(workspace,'node_modules'),referenceFiles);
   const built=await buildReactSourceCss(workspace,recipe.input);
   const stagedSource=path.join(realpathSync(workspace),path.relative(sourceRoot,sourceFile));
   if(!built.sourceFiles.includes(stagedSource)||built.files[stagedSource]!==candidate.afterSha256)fail('staged-source-not-scanned');
@@ -65,3 +65,34 @@ export async function stageReactUtilitySourceEdit(repo:string,sourceRoot:string,
   writeFileSync(path.join(dir,'stage.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
   return receipt;
 }
+
+/** Every package holding an authenticated reference file is cloned into the
+ * stage, so the staged source program resolves its components inside its own
+ * root exactly as the original did. A single symlinked node_modules resolved
+ * outside the stage and silently dropped them (docs/23 §D.173). Every other
+ * entry stays a link for runtime resolution only. */
+function stageModules(modules:string,target:string,referenceFiles:Readonly<Record<string,string>>) {
+  const packages=new Set<string>(),authenticated:Array<[string,string]>=[];
+  for(const [file,hash] of Object.entries(referenceFiles)) {
+    if(!file.startsWith(modules+path.sep))continue;
+    const parts=path.relative(modules,file).split(path.sep);
+    if(parts.length<2||parts[0].startsWith('@')&&parts.length<3)fail('module-path-unsupported');
+    packages.add(parts[0].startsWith('@')?path.join(parts[0],parts[1]):parts[0]);
+    authenticated.push([path.join(target,path.relative(modules,file)),hash]);
+  }
+  const place=(entry:string)=>{
+    const from=path.join(modules,entry),to=path.join(target,entry);
+    if(packages.has(entry))cpSync(from,to,{recursive:true,mode:constants.COPYFILE_FICLONE,verbatimSymlinks:true});
+    else symlinkSync(from,to);
+  };
+  mkdirSync(target);
+  for(const entry of readdirSync(modules)) {
+    if(entry.startsWith('@')&&[...packages].some(p=>p.startsWith(entry+path.sep))) {
+      mkdirSync(path.join(target,entry));
+      for(const name of readdirSync(path.join(modules,entry)))place(path.join(entry,name));
+    } else place(entry);
+  }
+  for(const [file,hash] of authenticated)
+    if(lstatSync(file).isSymbolicLink()||realpathSync(file)!==file||sha(readFileSync(file))!==hash)fail('module-copy-changed');
+}
+

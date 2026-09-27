@@ -12155,6 +12155,7 @@ Measured through the application in Evaluations, all on the current runtime:
    needs. After the edit was restored, a new design read reported 0 changes.
    Native → source for this row stays open. It needs source repair for
    state-API operations; D.108 measured it only for an initial-state operation.
+   Closed later the same day in D.173.
 
 The Switch callback experiment still reports `callback-observation-incomplete`
 on both source revisions, as it has on every run since 2026-09-26. The update
@@ -12166,4 +12167,74 @@ not qualify native → source edits for this row.
 Test: `source-reference/native-source-identity.test.ts` (a wrapper with a
 primitive at its root keeps the wrapper's identity; against the previous rule
 it refuses). Reverse by restoring the single-owner filter.
+
+## D.173 A designer's opacity edit becomes a validated React source change on a state-API set
+
+**AGENT decision, 2026-09-27.** D.172 left native → source open for the gated
+Switch. Four generic defects stood between the design read and a source
+change. Each was measured live:
+
+1. **State-API identity.** Source repair compiles the operation's recorded
+   initial-state draft under the native contract's identity. A state-API
+   contract is its initial appearance under `<initial id>-state-api`
+   (`react-state-api-contract.ts`), so the initial compiler refused it
+   (`react-initial-native-observation-unavailable`). Repair now compiles a
+   state-API operation's initial evidence under the initial identity.
+   `stateApiContractId` and its inverse, `initialContractIdOfStateApi`, are
+   defined together.
+2. **Staged dependencies.** A candidate stage linked the whole `node_modules`,
+   which resolves outside the stage, so a traced dependency could never be
+   read inside it. Every package that holds an authenticated reference file is
+   now cloned into the stage (copy-on-write where the filesystem allows) and
+   verified byte-for-byte. Other entries stay links.
+3. **Candidate reader.** The preview read a candidate with the plain source
+   reader. The original was read by the ownership reader, which includes JSX
+   and runtime-bound dependencies (Radix's `Switch.Root` and `Thumb`). Both
+   now use `readReactOwnershipProgram`, the one function the ownership run
+   uses.
+4. **The edit as it reaches a dependency.** The shadcn `Switch` passes its
+   `className` to `Switch.Root`, which renders the same root element. The
+   state check and the caller check each allowed only the edited module's
+   source hash to differ. They now share `restoreRepairedOwnership`, which also
+   maps back the same token substitution in the `className` of a component
+   rendering an edited root. A different token, extra whitespace, or a
+   component that doesn't render the root still refuses.
+
+Measured through the application in Evaluations on operation `5cfe5ac0`. The
+app was started with the host CSS recipe (`DS_CONTRACTS_REACT_SOURCE_CSS_INPUT`
+= `capture-input.css`, `…_OUTPUT` = `tailwind.css`):
+- **Design read.** A designer edit set the three disabled roots to 0.4. On a
+  freshly verified correction tip (a zero-change update, `no-op` write),
+  **Read design changes from the canvas** named exactly those three changes.
+- **Preview.** One candidate, `data-disabled:opacity-50` → `40` in
+  `switch.tsx`, matched every recorded state. All seven configured callers
+  also verified: only `switch-disabled` changes one root; the Badge and Alert
+  callers and the Switch's finite states and interactions are unchanged.
+  The preview became **reviewable**.
+- **Apply.** The application read the canvas fresh, wrote `switch.tsx` and the
+  rebuilt `tailwind.css` (one added rule, identical to the manual build in
+  D.172), validated **7/7** cases on the new source and read the canvas again.
+  The declaration's witness file was untouched.
+- **Agreement.** The operation followed the repaired source. Its update wrote
+  no node values, because the canvas already held the designer's 0.4, and
+  changed only the owned variable the designer had not touched.
+- **Rollback.** The app's rollback of that application then refused with
+  `native-update-source-repair-baseline-unavailable`, because the agreement
+  update had superseded the canvas baseline the rollback is pinned to. This is
+  a named refusal, and it wrote nothing. The files were restored byte-for-byte
+  by hand, and a code → canvas update returned all four values to 0.5. All
+  nine variants are pixel-identical to the operation's creation readback.
+
+With D.172, the Switch row now has current-runtime evidence for both
+directions of bounded opacity updates. Other channels, state-API API changes
+and automatic rollback after a later update remain unqualified.
+
+Tests: `source-reference/react-state-api-contract.test.ts` (identity mapping),
+`react-source-repair-stage.test.ts` (cloned packages, linked others),
+`react-source-repair-preview.test.ts` (candidates read by the ownership
+reader), `react-source-repair-observation.test.ts` (the edit through a
+root dependency's className; a different token, a non-root component or
+extra whitespace refuses). Reverse each by restoring the previous identity
+pass-through, the whole-directory link, the plain reader and the source-hash-only
+normalization.
 

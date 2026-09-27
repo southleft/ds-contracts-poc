@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {verifyReactSourceRepairStates,verifyReactSourceRepairBaseline,type RepairStateObservation} from './react-source-repair-observation.js';
+import {restoreRepairedOwnership,verifyReactSourceRepairStates,verifyReactSourceRepairBaseline,type RepairStateObservation} from './react-source-repair-observation.js';
 import type {planReactOpacitySourceRepair} from './react-design-source-repair.js';
 import {revisionOf} from '../core/contract-provenance.js';
 
@@ -58,3 +58,35 @@ test('missing states and unrelated descendant, ownership, font, geometry and ima
   const f=fixture(),changed=structuredClone(f.before);changed.snapshots['0'].image='changed';
   assert.throws(()=>verifyReactSourceRepairBaseline(f.before,changed),/recorded-image-changed/);
 });
+
+test('a dependency rendering the edited root may carry exactly the same class token edit (§D.173)',()=>{
+  // Measured: the shadcn Switch passes className to Radix's Switch.Root, which
+  // renders the same root element.
+  const withPrimitive=(f:ReturnType<typeof fixture>,roots:string[],after:string)=>{
+    for(const [side,className] of [[f.before,'peer disabled:opacity-50 rounded-full'],[f.after,after]] as const)
+      for(const snapshot of Object.values(side.snapshots))
+        snapshot.ownership.components.push({id:'instance-1',parent:'instance-0',roots,props:{className},
+          source:{module:'node_modules/primitive/dist/index.mjs',exportName:'Root',sourceSha256:'c'.repeat(64),span:{start:0,end:9}}} as any);
+    return f;
+  };
+  const ok=withPrimitive(fixture(),[''],'peer disabled:opacity-60 rounded-full');
+  assert.doesNotThrow(()=>verifyReactSourceRepairStates(ok.before,ok.after,ok.variants,ok.plan,0));
+  for(const [roots,after] of [[[''],'peer disabled:opacity-60 rounded-md'],[['0'],'peer disabled:opacity-60 rounded-full'],[[''],'peer disabled:opacity-60  rounded-full']] as const) {
+    const f=withPrimitive(fixture(),[...roots],after);
+    assert.throws(()=>verifyReactSourceRepairStates(f.before,f.after,f.variants,f.plan,0),/ownership-facts-changed/);
+  }
+});
+
+test('restored ownership maps back only the edit, across every edited root of a caller (§D.173)',()=>{
+  const source={module:'switch.tsx',exportName:'Switch',sourceSha256:'a'.repeat(64)},radix={module:'node_modules/r/index.mjs',exportName:'Root',sourceSha256:'c'.repeat(64)};
+  const candidate={source,beforeSha256:'a'.repeat(64),afterSha256:'b'.repeat(64),edit:{before:'data-disabled:opacity-50',after:'data-disabled:opacity-40'}};
+  const own=(sha:string,token:string)=>({components:['0','1'].flatMap(root=>[
+    {id:'switch-'+root,roots:[root],props:{},source:{...source,sourceSha256:sha}},
+    {id:'root-'+root,roots:[root],props:{className:'peer '+token},source:radix}])});
+  const before=own('a'.repeat(64),'data-disabled:opacity-50'),after=own('b'.repeat(64),'data-disabled:opacity-40');
+  assert.deepEqual(restoreRepairedOwnership(before,after,candidate,['0','1']),before);
+  assert.notDeepEqual(restoreRepairedOwnership(before,after,candidate,['0']),before,'a root the edit did not reach keeps its difference');
+  const other=structuredClone(after);(other.components[1].props as {className:string}).className='peer data-disabled:opacity-30';
+  assert.notDeepEqual(restoreRepairedOwnership(before,other,candidate,['0','1']),before,'a different token is not the edit');
+});
+
