@@ -59,6 +59,9 @@ export function planReactShadowSourceRepair(evidence:Evidence,text:string,
     const was=evidence.baseline.nodes?.find(n=>n.id===change.nodeId),now=normalized.nodes?.find(n=>n.id===change.nodeId);
     if(change.channel!=='effects'||!roots.has(change.nodeId)||was?.type!=='COMPONENT'||now?.type!=='COMPONENT'||
         roots.get(change.nodeId)!==was.name||!stack(change.recorded)||!stack(change.observed))fail('unsupported-change');
+    // CSS draws no shadow behind its own box; the compiled layers show behind
+    // the node (§D.177). A layer that hides there has no utility to become.
+    if((change.observed as Array<{showShadowBehindNode?:boolean}>).some(e=>e.showShadowBehindNode===false))fail('shadow-behind-node-unsupported');
     now!.values.effects=structuredClone(change.recorded);
     return {nodeId:change.nodeId,variant:roots.get(change.nodeId)!,before:change.recorded as NativeShadowEffect[],after:change.observed as NativeShadowEffect[]};
   });

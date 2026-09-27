@@ -7,7 +7,7 @@ import {revisionOf} from '../core/contract-provenance.js';
 import {planReactDesignSourceRepair,planReactShadowSourceRepair} from './react-design-source-repair.js';
 import {proposeReactShadowUtilityEdits,type NativeShadowEffect} from './react-utility-source-edit.js';
 import {verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
-import {repairShadowShows} from './react-repair-shadow.js';
+import {acceptShadowVariables,cssIdentifier,repairShadowShows} from './react-repair-shadow.js';
 
 // Tailwind's composition: four invisible slots, then --tw-shadow (§D.177).
 const layer=(x:number,y:number,radius:number,spread:number,a:number):NativeShadowEffect=>({type:'DROP_SHADOW',visible:true,blendMode:'NORMAL',
@@ -71,6 +71,9 @@ test('a shared root shadow edit becomes a shadow plan; the host entry dispatches
   mixed.observed.nodes!.find((n:any)=>n.id===mixed.difference.changes[0].nodeId)!.values.opacity=0.6;
   mixed.difference=nativeDesignChanges(mixed.baseline,mixed.observed);
   assert.throws(()=>planReactDesignSourceRepair(mixed,text,source),/react-design-source-repair-unsupported-change/);
+  // A layer added in Figma's UI hides behind the node by default: named, not guessed.
+  const hidden=await evidence(()=>SM.map((e,i)=>i===5?{...e,showShadowBehindNode:false}:e));
+  assert.throws(()=>planReactShadowSourceRepair(hidden,text,source),/shadow-behind-node-unsupported/);
 });
 
 function states() {
@@ -109,4 +112,26 @@ test('every recorded state must render the edit and nothing else',()=>{
     for(const snap of Object.values(g.before.snapshots)){snap.fonts!.treeRevision=revisionOf(snap.tree);snap.svg.treeRevision=revisionOf(snap.tree);}
     assert.throws(()=>verifyReactSourceRepairStates(g.before,g.after,g.variants,g.plan,0),/react-source-repair-observation-/);
   }
+});
+
+test('a class swap may change only the shadow variable chain it declares (recorded capture shapes)',()=>{
+  // Measured 2026-09-27: Chromium's selectorText for the arbitrary candidate.
+  assert.equal('.'+cssIdentifier('shadow-[0px_1px_3px_0px_rgb(0_0_0/0.1),0px_1px_2px_-1px_rgb(0_0_0/0.1)]'),
+    '.shadow-\\[0px_1px_3px_0px_rgb\\(0_0_0\\/0\\.1\\)\\,0px_1px_2px_-1px_rgb\\(0_0_0\\/0\\.1\\)\\]');
+  assert.equal(cssIdentifier('shadow-sm'),'shadow-sm');assert.equal(cssIdentifier('2xl'),'\\32 xl');
+  const chain=(sel:string,shadow:string)=>['--tw-inset-shadow','--tw-inset-ring-shadow','--tw-ring-offset-shadow','--tw-ring-shadow','--tw-shadow']
+    .map(name=>[name,name==='--tw-shadow'?shadow:'0 0 #0000',sel]);
+  const XS_VAR='0 1px 2px 0 rgb(0 0 0 / 0.05)',SM_VAR='0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)';
+  const node=(sel:string,shadow:string,extra:Record<string,string>={})=>({style:{'--tw-shadow':shadow,'--primary':'oklch(0.205 0 0)',...extra},vrefs:{'box-shadow':chain(sel,shadow)}});
+  const expected=node('.shadow-xs',XS_VAR),actual=node('.shadow-sm',SM_VAR);
+  assert.ok(acceptShadowVariables(expected,actual,{before:'shadow-xs',after:'shadow-sm'}));
+  assert.deepEqual(expected,actual,'the accepted chain is copied onto the expectation');
+  for(const [label,now] of [
+    ['a rule other than the edited one',node('.shadow-md',SM_VAR)],
+    ['a value the root does not report',{...node('.shadow-sm',SM_VAR),style:{'--tw-shadow':XS_VAR,'--primary':'oklch(0.205 0 0)'}}],
+    ['a different chain',{style:node('.shadow-sm',SM_VAR).style,vrefs:{'box-shadow':chain('.shadow-sm',SM_VAR).slice(1)}}],
+  ] as const) assert.equal(acceptShadowVariables(node('.shadow-xs',XS_VAR),now as any,{before:'shadow-xs',after:'shadow-sm'}),false,label);
+  // Anything outside the chain stays for the whole-tree comparison to refuse.
+  const outside=node('.shadow-xs',XS_VAR);acceptShadowVariables(outside,node('.shadow-sm',SM_VAR,{'--primary':'red'}),{before:'shadow-xs',after:'shadow-sm'});
+  assert.equal(outside.style['--primary'],'oklch(0.205 0 0)');
 });

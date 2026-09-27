@@ -15,7 +15,7 @@ import {observeTextFonts,withPaintedTextFonts} from './text-fonts.js';
 import {observeReactInitialStates} from './react-initial-state.js';
 import {restoreRepairedOwnership,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
 import {observeCheckboxBehavior,checkedToggleRole} from './control-behavior.js';
-import {repairShadowShows} from './react-repair-shadow.js';
+import {acceptShadowVariables,repairShadowShows} from './react-repair-shadow.js';
 import {isShadowSourceRepair} from './react-design-source-repair.js';
 import type {SourceProfile} from './check.js';
 import type {ReactSourceRepairInput} from './react-source-repair-preview.js';
@@ -105,7 +105,9 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
         const shown=flatten(now.captured.tree!).find(r=>r.path===owner.roots[0])?.node;
         if(!repairShadowShows(node!.style['box-shadow'],effect.before)||!shown||!repairShadowShows(shown.style['box-shadow'],effect.after))
           fail('baseline-effect-mismatch');
-        node!.style['box-shadow']=shown!.style['box-shadow'];changedRoots++;
+        node!.style['box-shadow']=shown!.style['box-shadow'];
+        if(!acceptShadowVariables(node! as never,shown! as never,candidate.edit))fail('shadow-variables-changed:'+old.caseId);
+        changedRoots++;
       } else if(effect){if(!exact(Number(node!.style.opacity),effect.before as number))fail('baseline-effect-mismatch');node!.style.opacity=String(value);changedRoots++;}
     }
     if(!same(tree,now.captured.tree))fail('other-tree-facts-changed:'+old.caseId);

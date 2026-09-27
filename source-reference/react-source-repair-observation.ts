@@ -13,7 +13,7 @@ import {watchSourceFailures} from './observe.js';
 import {observeReactInitialStates,planReactInitialStates} from './react-initial-state.js';
 import type {ReactPropertySnapshot} from './react-root-variants.js';
 import {isShadowSourceRepair,type ReactDesignSourceRepairPlan} from './react-design-source-repair.js';
-import {repairShadowShows} from './react-repair-shadow.js';
+import {acceptShadowVariables,repairShadowShows} from './react-repair-shadow.js';
 import {withPaintedTextFonts} from './text-fonts.js';
 import {verifiedSvgViewports,type SvgViewportEvidence} from './svg-viewports.js';
 import {hasUnpaintedPseudoBoxes,verifiedPseudoBoxes,type PseudoBoxEvidence} from './pseudo-boxes.js';
@@ -162,6 +162,7 @@ export function verifyReactSourceRepairStates(before:RepairStateObservation,afte
         if(!repairShadowShows(root!.style['box-shadow'],change.before)||!repairShadowShows(actualRoot!.style['box-shadow'],change.after))
           fail('shadow-mismatch:'+variant.observation);
         root!.style['box-shadow']=actualRoot!.style['box-shadow'];
+        if(!acceptShadowVariables(root! as never,actualRoot! as never,candidate.edit))fail('shadow-variables-changed:'+variant.observation);
       }
     } else if(change) {
       const before=change.before as number,after=change.after as number;
