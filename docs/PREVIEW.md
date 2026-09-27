@@ -27,6 +27,8 @@ preview command.
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->

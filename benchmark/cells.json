@@ -140,6 +140,26 @@
       "caseId": "state-api:switch-unchecked",
       "children": false,
       "expect": "pass"
+    },
+    {
+      "id": "shadcn-badge-default.react-to-native",
+      "row": "shadcn Badge (default)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "badge-default",
+      "children": false,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-badge-secondary.react-to-native",
+      "row": "shadcn Badge (secondary)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "badge-secondary",
+      "children": false,
+      "expect": "pass"
     }
   ]
 }

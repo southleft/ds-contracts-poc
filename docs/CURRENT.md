@@ -53,6 +53,8 @@ produces now. This table is generated; do not edit it by hand.
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->
@@ -70,7 +72,7 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | CBDS CheckboxIcon | gated above | Created and read back; no image scores | Not measured | Not measured |
 | shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Plan gated above. Live operation `5cfe5ac0` (plan equal to the pin) created in Evaluations and read back with 0 problems; not image-scored, because the committed instrument refuses its fractional 32 × 18.39 px root box ([D.165](23-known-limitations.md#d165-an-operations-authentication-may-not-re-enter-its-own-snapshot)) | Opacity and bound height both ways, conflicts refused | Anchor drift fixed; the gate now checks that a repeat after another root returns the same operation. Begun-write recovery and no-op update repeats are stale by three runtime revisions |
 | shadcn Alert | Not measured; the return refuses on grid row read-back | gated above | In-place attempt refused by name (layout channel) | Not measured |
-| shadcn Badge | Not measured | Exact-size refusal (43.875 vs 44 px text width) | Not measured | Not measured |
+| shadcn Badge | Not measured | Plans gated above; the earlier live creation was refused on exact size (text 43.875 px in React, 44 px in Figma), and a fractional root cannot be scored by the committed instrument ([D.165](23-known-limitations.md#d165-an-operations-authentication-may-not-re-enter-its-own-snapshot)) | Not measured | Not measured |
 | Altitude Tabs | gated above | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
 | Card | Not measured | 6/6 variants from 2026-09-18, likely stale | Not measured | Repeat preparation, no duplicates |
 
@@ -78,7 +80,7 @@ No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
 closed: agree a framing rule for fractional root boxes so the Switch can be scored,
 return the Alert to React, give completed library operations a rebuild path so
 the Checkbox fix reaches the canvas, measure bounded updates and recovery on
-the gated rows, and bring Card and shadcn Badge into the gate. Criterion 5
+the gated rows, and bring Card into the gate. Criterion 5
 also needs a fresh `npm run v1:readiness` on the release commit; the older
 definitions in [docs/26](26-v1-definition.md) and the
 [React V1 scope](REACT-V1-SCOPE.md) now point here.
