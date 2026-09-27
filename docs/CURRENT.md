@@ -55,7 +55,7 @@ produces now. This table is generated; do not edit it by hand.
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
-| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->
@@ -75,7 +75,7 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | shadcn Alert | Not measured; the return refuses on grid row read-back | gated above | In-place attempt refused by name (layout channel) | Not measured |
 | shadcn Badge | Not measured | Plans gated above; the earlier live creation was refused on exact size (text 43.875 px in React, 44 px in Figma), and a fractional root cannot be scored by the committed instrument ([D.165](23-known-limitations.md#d165-an-operations-authentication-may-not-re-enter-its-own-snapshot)) | Not measured | Not measured |
 | Altitude Tabs | gated above | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
-| shadcn Card | Not measured | Plans gated above: the composed root and six nested plans prepare; the nested Checkbox and its three Radix internals refuse (`react-child-root-preparation-unavailable`). The 6/6 native variants of 2026-09-18 predate current code | Not measured | Repeat preparation, no duplicates |
+| shadcn Card | Not measured | Plans gated above: the composed root and six nested plans prepare; the nested Checkbox and its three Radix internals refuse (`react-composition-runtime-or-multiple-root-unqualified`: the Radix Checkbox renders more than one root). The 6/6 native variants of 2026-09-18 predate current code | Not measured | Repeat preparation, no duplicates |
 
 No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
 closed: agree a framing rule for fractional root boxes so the Switch can be scored,

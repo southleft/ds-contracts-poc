@@ -24,22 +24,22 @@
     "instance-5": {
       "exportName": "Checkbox",
       "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable"
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
     },
     "instance-6": {
       "exportName": "Root",
       "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable"
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
     },
     "instance-7": {
       "exportName": "Indicator",
       "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable"
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
     },
     "instance-8": {
       "exportName": "default",
       "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable"
+      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
     },
     "instance-9": {
       "exportName": "CardFooter",

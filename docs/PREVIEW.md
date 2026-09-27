@@ -30,7 +30,7 @@ preview command.
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
-| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->

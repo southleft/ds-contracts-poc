@@ -197,7 +197,9 @@ export async function replayReactNative(options: { workspace: string; cases: str
           const fresh = ops().filter(o => !had.has(o.id));
           out.children.push(made.status === 200 && fresh.length === 1
             ? { instanceId: child.instanceId, exportName: child.exportName, planSha256: hashed(caseId, child.instanceId, plan(fresh[0].dir)) }
-            : { instanceId: child.instanceId, exportName: child.exportName, refusal: made.body?.reason ?? made.body?.error ?? `created ${fresh.length}` });
+            : { instanceId: child.instanceId, exportName: child.exportName, refusal: [made.body?.reason ?? made.body?.error ?? `created ${fresh.length}`,
+                // The composition review's own reason, when it names one.
+                child.preparationProblem ?? (child.problems?.length ? child.problems.join(',') : undefined)].filter(Boolean).join(': ') });
         }
         if (composition?.problem) out.refusal = 'composition: ' + JSON.stringify(composition.problem).slice(0, 300);
       }
