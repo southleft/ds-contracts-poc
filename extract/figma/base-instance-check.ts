@@ -58,6 +58,7 @@ import { proposeFromDump, type FigmaProposalResult } from "./propose.js";
 import { emitReact } from "../../core/emit-react.js";
 import { emitHtml } from "../../core/emit-html.js";
 import { tokenInventoryFromJson } from "../../core/tokens.js";
+import { withoutStatePreviewAlternatives } from "./state-preview-selectors.js";
 
 const ROOT = process.cwd();
 const read = (p: string) =>
@@ -120,8 +121,8 @@ function generates(
   let tsxCss = "";
   let htmlCss = "";
   try {
-    tsxCss = emitReact(contract, emitCtx).css;
-    htmlCss = emitHtml(contract, emitCtx).css;
+    tsxCss = withoutStatePreviewAlternatives(emitReact(contract, emitCtx).css);
+    htmlCss = withoutStatePreviewAlternatives(emitHtml(contract, emitCtx).css);
   } catch (e) {
     ok = false;
     console.error(String(e));
