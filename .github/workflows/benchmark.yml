@@ -43,6 +43,9 @@ jobs:
       - name: benchmark:test (the gate's own controls)
         run: npm run benchmark:test
 
+      - name: benchmark:doc:check (published scoreboards match the pins)
+        run: npm run benchmark:doc:check
+
       - name: benchmark:check (replay every pinned cell)
         run: npm run benchmark:check -- --json benchmark-verdicts.json
 
