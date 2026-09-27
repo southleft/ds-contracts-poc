@@ -62,6 +62,11 @@ jobs:
         run: npm run benchmark:doc:check
 
       - name: benchmark:check (replay every pinned cell)
+        # One process replays every cell (Vite SSR per Figma cell, then the
+        # React source service with Chromium); it peaks near 1.8 GB resident
+        # locally and ran out of heap on a runner at the default limit.
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: npm run benchmark:check -- --json benchmark-verdicts.json --plans benchmark-plans
 
       - name: keep the verdicts and the replayed plans
