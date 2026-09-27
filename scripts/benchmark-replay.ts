@@ -29,6 +29,9 @@
  *                              attach a design:consumer:check receipt; refused
  *                              unless it scored the pinned generated files
  *   --json <file>              also write the verdicts as JSON
+ *   --kind <figma-to-react|react-to-native>
+ *                              replay only that kind of cell (CI runs each kind
+ *                              in its own process to bound memory)
  *   --plans <dir>              also write every replayed React → Figma plan,
  *                              normalized, so a changed hash can be read field
  *                              by field (CI uploads it beside the verdicts)
@@ -261,8 +264,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       console.log(`attached ${attachId}: ${v.status} — ${v.reason}`);
       return;
     }
-    const plans = flag('--plans');
-    const verdicts = await check(repoRoot, undefined, plans ? path.resolve(plans) : undefined);
+    const plans = flag('--plans'), kind = flag('--kind');
+    if (kind !== undefined && kind !== 'figma-to-react' && kind !== 'react-to-native') throw Error('usage: --kind figma-to-react|react-to-native');
+    // One kind per process when asked: the React replay holds a source service
+    // and Chromium, the Figma replay a Vite server per cell; CI runs them apart.
+    const only = kind ? new Set(readAllCells().filter(c => c.kind === kind).map(c => c.id)) : undefined;
+    const verdicts = await check(repoRoot, only, plans ? path.resolve(plans) : undefined);
     const icon: Record<Status, string> = { green: '✔', partial: '◐', 'known-failure': '▲', stale: '◌', red: '✖' };
     console.log('BENCHMARK — every pinned cell replayed from its frozen input\n');
     for (const v of verdicts) console.log(`${icon[v.status]} ${v.status.padEnd(13)} ${v.row} · ${v.criterion}\n    ${v.reason}`);
