@@ -60,6 +60,7 @@ import { capturedTokensFromDump } from "../../core/captured-tokens.js";
 import { emitHtml } from "../../core/emit-html.js";
 import { emitReact, generateCss } from "../../core/emit-react.js";
 import { flattenTokens, tokenInventoryFromJson } from "../../core/tokens.js";
+import { withoutStatePreviewAlternatives } from "./state-preview-selectors.js";
 
 const ROOT = process.cwd();
 const read = (p: string) =>
@@ -354,7 +355,7 @@ try {
     contracts,
   });
   html = emitted.html;
-  css = emitted.css;
+  css = withoutStatePreviewAlternatives(emitted.css);
 } catch (e) {
   check(`emitHtml green — ${String(e).split("\n")[0]}`, false);
 }
