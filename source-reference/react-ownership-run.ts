@@ -100,7 +100,6 @@ export function startReactOwnership(
 ) {
   if (!reactReferenceUnchanged(reference))
     throw Error("react-ownership-source-changed");
-  const modules = reactReferenceSourceModules(reference);
   const runtimeDependencies = readReactOwnershipProgram(reference, sourceRoot);
   const program = runtimeDependencies.program;
   const state: ReactOwnershipReport = {

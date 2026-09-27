@@ -30,8 +30,11 @@ export interface ReactSourceRepairPreview {
 }
 type Dependencies={stage:typeof stageReactUtilitySourceEdit;observe:typeof observeReactSourceRepairStates;
   build:typeof buildReactReference;program:(reference:ReactReference)=>ReactSourceProgram;cohort:typeof verifyReactSourceRepairCohort};
-const dependencies:Dependencies={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,
-  program:reference=>readReactOwnershipProgram(reference,reference.sourceRoot).program,cohort:verifyReactSourceRepairCohort};
+/** A candidate is read exactly as its recorded original was: by the ownership reader. */
+export const readRepairCandidateProgram=(reference:ReactReference)=>readReactOwnershipProgram(reference,reference.sourceRoot).program;
+export const repairPreviewDependencies:Readonly<Dependencies>={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,
+  program:readRepairCandidateProgram,cohort:verifyReactSourceRepairCohort};
+const dependencies:Dependencies=repairPreviewDependencies;
 const sha=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 const reason=(error:unknown)=>{
   const message=error instanceof Error?error.message:'';

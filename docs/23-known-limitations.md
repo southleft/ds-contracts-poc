@@ -12229,8 +12229,25 @@ With D.172, the Switch row now has current-runtime evidence for both
 directions of bounded opacity updates. Other channels, state-API API changes
 and automatic rollback after a later update remain unqualified.
 
+An independent adversarial review found no way for these changes to let an
+unintended change reach source. It prompted three hardenings, all fail-closed.
+The `className` restore now applies only to a dependency an edited owner
+renders, never to the owner itself. A package manager store (pnpm's `.pnpm`)
+or a loose file under `node_modules` refuses instead of being cloned. A test
+pins the production preview to the ownership reader. Stages are not yet
+deleted after a preview reaches its verdict.
+
+**Interruption (the same day, same operation).** A further forward update was
+interrupted by killing the app the moment it dispatched the apply, before
+the plugin's begin handshake. The canvas read back untouched. After the
+restart the app showed the write as `unknown` / awaiting a result. When the
+plugin reconnected, it resumed the dispatched command: one `begin`, one apply
+claim, one verified readback, and no second write. A later code → canvas update
+returned everything to baseline, 9/9 variants pixel-identical to creation.
+
 Tests: `source-reference/react-state-api-contract.test.ts` (identity mapping),
-`react-source-repair-stage.test.ts` (cloned packages, linked others),
+`react-source-repair-stage.test.ts` (cloned packages, linked others, refused
+store layouts),
 `react-source-repair-preview.test.ts` (candidates read by the ownership
 reader), `react-source-repair-observation.test.ts` (the edit through a
 root dependency's className; a different token, a non-root component or

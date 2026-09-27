@@ -77,6 +77,9 @@ function stageModules(modules:string,target:string,referenceFiles:Readonly<Recor
     if(!file.startsWith(modules+path.sep))continue;
     const parts=path.relative(modules,file).split(path.sep);
     if(parts.length<2||parts[0].startsWith('@')&&parts.length<3)fail('module-path-unsupported');
+    // A dot-named entry is a package manager's store (pnpm's .pnpm), not a
+    // package: cloning it copies every dependency and still resolves outside.
+    if(parts[0].startsWith('.'))fail('module-layout-unsupported');
     packages.add(parts[0].startsWith('@')?path.join(parts[0],parts[1]):parts[0]);
     authenticated.push([path.join(target,path.relative(modules,file)),hash]);
   }

@@ -99,7 +99,7 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
       if(effect){if(!exact(Number(node!.style.opacity),effect.before))fail('baseline-effect-mismatch');node!.style.opacity=String(value);changedRoots++;}
     }
     if(!same(tree,now.captured.tree))fail('other-tree-facts-changed:'+old.caseId);
-    const ownership=restoreRepairedOwnership(old.ownership,now.ownership,candidate,targets.map(owner=>owner.roots[0]));
+    const ownership=restoreRepairedOwnership(old.ownership,now.ownership,candidate,targets.map(owner=>({id:owner.id,root:owner.roots[0]})));
     if(!same(old.ownership,ownership))fail('ownership-changed:'+old.caseId);
     const fontFacts=(f:RepairCallerFrame['fonts'])=>{const {treeRevision:_revision,...facts}=f;return facts;};
     withPaintedTextFonts(old.captured.tree!,old.fonts);withPaintedTextFonts(now.captured.tree!,now.fonts);

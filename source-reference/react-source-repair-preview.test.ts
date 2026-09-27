@@ -123,3 +123,10 @@ test('a candidate is read with the ownership program reader, from the staged ref
   assert.equal(f.readerCalls.length,1);
   assert.equal((f.readerCalls[0] as {sourceRoot:string}).sourceRoot.endsWith('staged'),true,'the staged reference, not the original');
 });
+
+test('the production preview reads candidates with the ownership reader (§D.173)',async()=>{
+  const {readRepairCandidateProgram,repairPreviewDependencies}=await import('./react-source-repair-preview.js');
+  assert.equal(repairPreviewDependencies.program,readRepairCandidateProgram);
+  assert.match(readRepairCandidateProgram.toString(),/readReactOwnershipProgram/);
+});
+

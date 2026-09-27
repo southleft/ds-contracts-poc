@@ -77,16 +77,23 @@ test('a dependency rendering the edited root may carry exactly the same class to
   }
 });
 
-test('restored ownership maps back only the edit, across every edited root of a caller (§D.173)',()=>{
+test('restored ownership maps back only the edit, and only on a dependency an edited owner renders (§D.173)',()=>{
   const source={module:'switch.tsx',exportName:'Switch',sourceSha256:'a'.repeat(64)},radix={module:'node_modules/r/index.mjs',exportName:'Root',sourceSha256:'c'.repeat(64)};
   const candidate={source,beforeSha256:'a'.repeat(64),afterSha256:'b'.repeat(64),edit:{before:'data-disabled:opacity-50',after:'data-disabled:opacity-40'}};
   const own=(sha:string,token:string)=>({components:['0','1'].flatMap(root=>[
-    {id:'switch-'+root,roots:[root],props:{},source:{...source,sourceSha256:sha}},
-    {id:'root-'+root,roots:[root],props:{className:'peer '+token},source:radix}])});
+    {id:'switch-'+root,roots:[root],props:{className:'peer '+token},source:{...source,sourceSha256:sha}},
+    {id:'root-'+root,parent:'switch-'+root,roots:[root],props:{className:'peer '+token},source:radix}])});
   const before=own('a'.repeat(64),'data-disabled:opacity-50'),after=own('b'.repeat(64),'data-disabled:opacity-40');
-  assert.deepEqual(restoreRepairedOwnership(before,after,candidate,['0','1']),before);
-  assert.notDeepEqual(restoreRepairedOwnership(before,after,candidate,['0']),before,'a root the edit did not reach keeps its difference');
+  // The owners' own className is the edit's source, not a received prop: it keeps its difference.
+  for(const c of after.components)if(c.id.startsWith('switch-'))(c.props as {className:string}).className='peer data-disabled:opacity-50';
+  const owners=[{id:'switch-0',root:'0'},{id:'switch-1',root:'1'}];
+  assert.deepEqual(restoreRepairedOwnership(before,after,candidate,owners),before);
+  assert.notDeepEqual(restoreRepairedOwnership(before,after,candidate,[owners[0]]),before,'a root the edit did not reach keeps its difference');
   const other=structuredClone(after);(other.components[1].props as {className:string}).className='peer data-disabled:opacity-30';
-  assert.notDeepEqual(restoreRepairedOwnership(before,other,candidate,['0','1']),before,'a different token is not the edit');
+  assert.notDeepEqual(restoreRepairedOwnership(before,other,candidate,owners),before,'a different token is not the edit');
+  const ownerProp=structuredClone(after);(ownerProp.components[0].props as {className:string}).className='peer data-disabled:opacity-40';
+  assert.notDeepEqual(restoreRepairedOwnership(before,ownerProp,candidate,owners),before,'an owner never qualifies');
+  const detached=structuredClone(after);delete (detached.components[1] as {parent?:string}).parent;
+  const detachedBefore=structuredClone(before);delete (detachedBefore.components[1] as {parent?:string}).parent;
+  assert.notDeepEqual(restoreRepairedOwnership(detachedBefore,detached,candidate,owners),detachedBefore,'a component the owner does not render never qualifies');
 });
-

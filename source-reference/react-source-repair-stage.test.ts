@@ -63,3 +63,11 @@ test('authenticated dependency packages are cloned into the stage; other modules
   assert.equal(readlinkSync(path.join(staged,'@scope/other')),path.join(modules,'@scope/other'));
 });
 
+test('a store directory or a loose module file refuses instead of being cloned (§D.173)',async t=>{
+  for(const [file,reason] of [['.pnpm/react@19/node_modules/react/index.js',/module-layout-unsupported/],['loose.js',/module-path-unsupported/],['@scope/loose.js',/module-path-unsupported/]] as const) {
+    const f=await fixture(t),target=path.join(f.root,'node_modules',file);
+    mkdirSync(path.dirname(target),{recursive:true});writeFileSync(target,'export {};');
+    await assert.rejects(stageReactUtilitySourceEdit(f.repo,f.root,{...f.files,[target]:sha(readFileSync(target))},f.candidate,f.recipe),reason);
+  }
+});
+
