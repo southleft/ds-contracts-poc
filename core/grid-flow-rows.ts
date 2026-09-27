@@ -15,7 +15,9 @@ export function materializeFlowRows(recipe: GridFlowRows, columns: number, child
 /** Metadata alone never authorizes inversion: validate its exact shape and
  * compare every materialized track against independent native readback. */
 export function readGridFlowRows(raw: unknown, columns: number, children: number,
-  observed: FlowTrack[]): GridFlowRows {
+  observed: Array<FlowTrack & { resolved?: true }>,
+  /** Items actually drawn in the observed frame (a caller slot can hold none). */
+  drawn = children): GridFlowRows {
   const track = (v: any): v is FlowTrack => v && typeof v === 'object' && !Array.isArray(v) &&
     Object.keys(v).sort().join('|') === 'type|value' && ['FIXED', 'FLEX', 'HUG'].includes(v.type) &&
     Number.isFinite(v.value) && v.value > 0 && (v.type !== 'HUG' || v.value === 1);
@@ -25,9 +27,19 @@ export function readGridFlowRows(raw: unknown, columns: number, children: number
       !Array.isArray(v.rows) || !v.rows.every(track) || !track(v.autoRows))
     throw Error('grid-flow-rows-invalid-recipe');
   const expected = materializeFlowRows(v, columns, children);
-  if (observed.length !== expected.length || observed.some((t, i) =>
-    !track(t) || t.type !== expected[i].type ||
-    (t.value !== expected[i].value && t.value !== Math.fround(expected[i].value))))
+  // A REST readback prints an unoccupied HUG row as its resolved size, the
+  // same spelling as a fractional FIXED row (docs/23 §D.166). Only a row that
+  // no drawn item occupies may corroborate a recorded HUG that way.
+  if (!Number.isInteger(drawn) || drawn < 0) throw Error('grid-flow-rows-invalid-count');
+  const occupied = Math.ceil(drawn / columns);
+  const emptyHug = (t: FlowTrack & { resolved?: true }, i: number) =>
+    t.resolved === true && t.type === 'FIXED' && expected[i].type === 'HUG' && i >= occupied;
+  if (observed.length !== expected.length || observed.some((t, i) => {
+    if (emptyHug(t, i)) return !(Number.isFinite(t.value) && t.value > 0);
+    const { resolved: _resolved, ...plain } = t;
+    return !track(plain) || plain.type !== expected[i].type ||
+      (plain.value !== expected[i].value && plain.value !== Math.fround(expected[i].value));
+  }))
     throw Error('grid-flow-rows-readback-mismatch');
   return structuredClone(v);
 }

@@ -68,6 +68,9 @@ export interface ReplayedCase {
   refusal?: string;
   root?: { kind: string; planSha256: string };
   children: Array<{ instanceId: string; exportName: string; refusal?: string; planSha256?: string }>;
+  /** state-API cases: the same request repeated after another root joined the
+   *  reference. It must return the operation already prepared (criterion 6). */
+  repeat?: { status: number; newOperations: number; refusal?: string };
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -103,7 +106,10 @@ export async function replayReactNative(options: { workspace: string; cases: str
   // node:http, not fetch: fetch's 300 s headers timeout cut off long native
   // preparations on CI ("fetch failed"); the service owns its own refusals.
   const call = (method: 'GET' | 'POST', route: string) => new Promise<{ status: number; body: any }>((resolve, reject) => {
-    const req = request(base + route, { method }, res => {
+    // A fresh connection per call: a reused keep-alive socket that the server
+    // closes after its idle timeout resets a poll that lands at that moment
+    // (seen as ECONNRESET on the composed Card's long ownership poll).
+    const req = request(base + route, { method, agent: false }, res => {
       const chunks: Buffer[] = [];
       res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
@@ -165,9 +171,20 @@ export async function replayReactNative(options: { workspace: string; cases: str
         const before = new Set(ops().map(o => o.id));
         const prepared = await call('POST', `react/${R}/native-state-api/${caseId}`);
         const created = ops().filter(o => !before.has(o.id));
-        results.push(prepared.status === 200 && created.length === 1
-          ? { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: hashed(entry, 'root', plan(created[0].dir)) }, children: [] }
-          : { caseId: entry, refusal: `${prepared.body?.reason ?? prepared.body?.error ?? 'created ' + created.length} after ${steps.join(' → ')}`, children: [] });
+        if (prepared.status !== 200 || created.length !== 1) {
+          results.push({ caseId: entry, refusal: `${prepared.body?.reason ?? prepared.body?.error ?? 'created ' + created.length} after ${steps.join(' → ')}`, children: [] });
+          continue;
+        }
+        const out: ReplayedCase = { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: hashed(entry, 'root', plan(created[0].dir)) }, children: [] };
+        // Another root joins the reference (this case's own), which can move the
+        // sorted inspection anchors; the repeated request must still resolve the
+        // sealed state-API record and return the prepared operation.
+        await call('POST', `react/${R}/native/${caseId}`);
+        const settled = new Set(ops().map(o => o.id));
+        const again = await call('POST', `react/${R}/native-state-api/${caseId}`);
+        out.repeat = { status: again.status, newOperations: ops().filter(o => !settled.has(o.id)).length,
+          ...(again.status !== 200 ? { refusal: String(again.body?.reason ?? again.body?.error ?? again.status) } : {}) };
+        results.push(out);
         continue;
       }
       const before = new Set(ops().map(o => o.id));
@@ -193,7 +210,9 @@ export async function replayReactNative(options: { workspace: string; cases: str
           const fresh = ops().filter(o => !had.has(o.id));
           out.children.push(made.status === 200 && fresh.length === 1
             ? { instanceId: child.instanceId, exportName: child.exportName, planSha256: hashed(caseId, child.instanceId, plan(fresh[0].dir)) }
-            : { instanceId: child.instanceId, exportName: child.exportName, refusal: made.body?.reason ?? made.body?.error ?? `created ${fresh.length}` });
+            : { instanceId: child.instanceId, exportName: child.exportName, refusal: [made.body?.reason ?? made.body?.error ?? `created ${fresh.length}`,
+                // The composition review's own reason, when it names one.
+                child.preparationProblem ?? (child.problems?.length ? child.problems.join(',') : undefined)].filter(Boolean).join(': ') });
         }
         if (composition?.problem) out.refusal = 'composition: ' + JSON.stringify(composition.problem).slice(0, 300);
       }

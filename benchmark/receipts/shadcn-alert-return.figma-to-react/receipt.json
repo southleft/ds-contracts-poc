@@ -1,0 +1,602 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42",
+  "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+  "capture": {
+    "background": "transparent",
+    "comparisonBackgrounds": [
+      "white",
+      "black"
+    ],
+    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "deviceScaleFactor": 1,
+    "nativeRaster": {
+      "kind": "figma-rest-full-bounds-v1",
+      "scale": 1
+    }
+  },
+  "generatedSha256": {
+    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.module.css": "742a37fa6c48f78225c996cff8381749e49fa033d6400f68f50400210c72d3db",
+    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.tsx": "0dfbba46e05a378e980d5fd58da4428783b93037097e750646fa943a7b6f4451",
+    "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.ts": "c066a4b1fddc5fee965e2af41d73257b1ed33b4ada6d0e1312fa6ba66b74713a",
+    "index.ts": "adcf49caebe937d73a319a6664a214e33bc2b626b81903a01225f26e61a49c5f",
+    "tokens.css": "67ed6dcc0728b30f456c2e3d508bf486794025a824359809711ac159ddfb2074"
+  },
+  "cases": [
+    {
+      "key": "default",
+      "figmaName": "variant=(unset)",
+      "nodeId": "242:5392",
+      "props": {},
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 100,
+        "height": 26,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 12,
+          "width": 100,
+          "height": 26
+        },
+        "capture": {
+          "x": 12,
+          "y": 12,
+          "width": 100,
+          "height": 26
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      }
+    },
+    {
+      "key": "variant-null",
+      "figmaName": "variant=null",
+      "nodeId": "242:5395",
+      "props": {
+        "variant": "null"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 100,
+        "height": 26,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-null.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 54,
+          "width": 100,
+          "height": 26
+        },
+        "capture": {
+          "x": 12,
+          "y": 54,
+          "width": 100,
+          "height": 26
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "cee1ecdc9034065f84a909fffa62ab648f30120005b2177cb1580755d504ca4f"
+      }
+    },
+    {
+      "key": "variant-default",
+      "figmaName": "variant=default",
+      "nodeId": "242:5398",
+      "props": {
+        "variant": "default"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 100,
+        "height": 26,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 96,
+          "width": 100,
+          "height": 26
+        },
+        "capture": {
+          "x": 12,
+          "y": 96,
+          "width": 100,
+          "height": 26
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      }
+    },
+    {
+      "key": "variant-destructive",
+      "figmaName": "variant=destructive",
+      "nodeId": "242:5401",
+      "props": {
+        "variant": "destructive"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "width": 100,
+        "height": 26,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-destructive.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 138,
+          "width": 100,
+          "height": 26
+        },
+        "capture": {
+          "x": 12,
+          "y": 138,
+          "width": 100,
+          "height": 26
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      }
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": null,
+      "note": "contract declares no TEXT-bound prop"
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": true,
+      "renderedAtRuntime": true,
+      "refusedByType": false
+    },
+    "variants": [
+      {
+        "prop": "variant",
+        "switchedTo": "null",
+        "cellsSwitched": [
+          "variant-default",
+          "variant-destructive"
+        ],
+        "cellsExpectedToChange": [
+          "variant-default",
+          "variant-destructive"
+        ],
+        "cellsChanged": [
+          "variant-default",
+          "variant-destructive"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "frameEvidence": {
+      "before": "figma-bounds-before.json",
+      "after": "figma-bounds-after.json",
+      "version": "2403705175335250593",
+      "export": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": true
+      },
+      "raster": {
+        "kind": "figma-rest-full-bounds-v1",
+        "scale": 1
+      },
+      "beforeSha256": "1c0658b5ee5d687ffec0c5ccdabc100b3c07c558ac1c69e10ecae49d5d2c6514",
+      "afterSha256": "1c0658b5ee5d687ffec0c5ccdabc100b3c07c558ac1c69e10ecae49d5d2c6514"
+    },
+    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "default",
+        "figmaImage": "figma-242_5392.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 4.037037037037037,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 4.037037037037037,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 100,
+              "height": 27
+            }
+          },
+          "pixelsCompared": 2700
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 40,
+            "width": 100,
+            "height": 27
+          },
+          "render": {
+            "x": 40,
+            "y": 40,
+            "width": 100,
+            "height": 27
+          },
+          "pngSha256": "ec12d265b96434f549b6e0f750768780ae1a50d8af427bbf1fb54e6d87937184",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 9.69,
+          "figma": 9.7
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        }
+      },
+      {
+        "key": "variant-null",
+        "figmaImage": "figma-242_5395.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 7.444444444444444,
+        "historicalWithinLimit": false,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 7.444444444444444,
+          "withinLimit": false,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 100,
+              "height": 27
+            }
+          },
+          "pixelsCompared": 2700
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 107,
+            "width": 100,
+            "height": 27
+          },
+          "render": {
+            "x": 40,
+            "y": 107,
+            "width": 100,
+            "height": 27
+          },
+          "pngSha256": "b0136d3a2769775d65fcfc528ece73816a6259d40aafafbab619fc1f11bc9d2d",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": false,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 10.62,
+          "figma": 10.59
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        }
+      },
+      {
+        "key": "variant-default",
+        "figmaImage": "figma-242_5398.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 4.037037037037037,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 4.037037037037037,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 100,
+              "height": 27
+            }
+          },
+          "pixelsCompared": 2700
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 174,
+            "width": 100,
+            "height": 27
+          },
+          "render": {
+            "x": 40,
+            "y": 174,
+            "width": 100,
+            "height": 27
+          },
+          "pngSha256": "ec12d265b96434f549b6e0f750768780ae1a50d8af427bbf1fb54e6d87937184",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 9.69,
+          "figma": 9.7
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        }
+      },
+      {
+        "key": "variant-destructive",
+        "figmaImage": "figma-242_5401.png",
+        "mismatchPercent": 0,
+        "blackMismatchPercent": 4.037037037037037,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0,
+          "blackMismatchPercent": 4.037037037037037,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 100,
+              "height": 27
+            }
+          },
+          "pixelsCompared": 2700
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 40,
+            "y": 241,
+            "width": 100,
+            "height": 27
+          },
+          "render": {
+            "x": 40,
+            "y": 241,
+            "width": 100,
+            "height": 27
+          },
+          "pngSha256": "ec12d265b96434f549b6e0f750768780ae1a50d8af427bbf1fb54e6d87937184",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 0,
+        "inkCoveragePercent": {
+          "consumer": 9.69,
+          "figma": 9.7
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 100,
+            "height": 26
+          },
+          "figma": {
+            "width": 100,
+            "height": 27
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "layout-image-difference-on-black-above-limit:variant-null:7.44%"
+  ],
+  "limitations": [
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 40
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42"
+    ],
+    "closure": {
+      "requested": [
+        "RootMatrix16c39fdef03e8d42 (source-native:cbcd71d4-bc90-45de-a5af-85f6788a1c3b:observed.react-matrix-16c39fdef03e8d42)"
+      ],
+      "followed": [],
+      "notFollowed": []
+    },
+    "contractGraph": []
+  },
+  "package": {
+    "name": "@ds-contracts-generated/rootmatrix16c39fdef03e8d42sourcenativecbcd71d4bc9045dea5af85f6788a1c3bobservedreactmatrix16c39fdef03e8d42",
+    "tarballSha256": "e0841266ca607ddaf81308cc766a46e938906e4955c910ce5b696d93d0a904e7",
+    "distFiles": [
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42",
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.d.ts",
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.js",
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42.module.css",
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.d.ts",
+      "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "bf898eab85420eb2af3b7907f8cbff5410ada826a066b4ef386a6c31bd5bf319",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "fontProvision": {
+      "kind": "environment-fonts",
+      "manifest": null,
+      "sourceFontByteIdentity": "unverified",
+      "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
+      "loaded": []
+    },
+    "builtCss": {
+      "bytes": 23409,
+      "tokenDefinitions": 403,
+      "tokenDefinitionsExpected": 403
+    },
+    "containerFraming": {
+      "rule": "figma-preview-width-v1",
+      "cases": [
+        "default",
+        "variant-null",
+        "variant-default",
+        "variant-destructive"
+      ]
+    },
+    "interactiveNesting": []
+  },
+  "outcome": "refused-or-failed"
+}

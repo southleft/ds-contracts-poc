@@ -9,7 +9,8 @@ is refused by name instead of guessed.
 ## What works today
 
 These rows are the benchmark. Each is replayed from a frozen input (a Figma
-capture, or the vendored React workspace in `benchmark/react-family`) on every
+capture, or a vendored React workspace in `benchmark/react-family` or
+`benchmark/shadcn-cohort`) on every
 change to the repository, so a regression turns CI red instead of going
 unnoticed. The **Figma → React** rows are what this preview's command does. The
 **React → Figma** rows are measured through the local app and Figma, and are
@@ -23,9 +24,14 @@ preview command.
 | Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
 | CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
 | CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
+| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-27. |
+| shadcn Alert (native return) | Figma → React | **Known failure** | 3/4 in scope within 5% (max 0.000% white, 4.037% black); 1 failing beyond text — darwin-arm64, 2026-09-27. |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
-| shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
+| shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->

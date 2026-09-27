@@ -1,9 +1,18 @@
 /**
  * Benchmark instrument (React → native): score one app-created native Figma
  * node against a guarded transparent capture of the original React render, on
- * white and black, with the unchanged aligner (alignRecordedFrames) and scorer
- * (diffPair, 5% limit). The native PNG and bounds are read-only REST GETs with
- * the design-consumer checker's own export options and framing rules.
+ * white and black, with the unchanged scorer (diffPair, 5% limit). The native
+ * PNG and bounds are read-only REST GETs.
+ *
+ * Framing (owner decisions, 2026-09-27; recorded in comparison.json):
+ * - A fractional source root box is SNAPPED OUTWARD to the smallest whole-pixel
+ *   box containing it.
+ * - Effects that paint past the root box (shadows, outlines) are INCLUDED: the
+ *   source is cropped to the union of its snapped root box and all its paint,
+ *   Figma is exported with its render (effect) bounds, and the two are placed
+ *   with their snapped root origins together.
+ * An integer, effect-free pair takes exactly the previous path (the recorded
+ * aligner, alignRecordedFrames, over the root box).
  *
  * Usage: FIGMA_TOKEN=… tsx scripts/benchmark-source-native-compare.ts <sourceDir> <nativeNodeId> <outDir> [--file-key <key>]
  * <sourceDir> holds 0.source.png and source-receipt.json (imageSha256,
@@ -15,6 +24,7 @@ import path from 'node:path';
 import {alignRecordedFrames, figmaFramesFromSnapshots, imageSha256, FIGMA_REST_FULL_BOUNDS} from './design-consumer-framing.js';
 import {diffPair, writeTriptych} from '../extract/figma/visual-parity/img.js';
 import {PNG} from 'pngjs';
+import {alignAtOffsets, paintBox, snapOutward, unionBox} from './benchmark-source-framing.js';
 
 const [sourceDir, nodeId, outDir] = process.argv.slice(2);
 const token = process.env.FIGMA_TOKEN!;
@@ -25,34 +35,64 @@ fs.mkdirSync(outDir, {recursive: false});
 const receipt = JSON.parse(fs.readFileSync(path.join(sourceDir, 'source-receipt.json'), 'utf8'));
 const sourceBytes = fs.readFileSync(path.join(sourceDir, '0.source.png'));
 if (imageSha256(sourceBytes) !== receipt.imageSha256) throw Error('source image does not match its receipt');
-// The consumer aligner compares root layout boxes; crop the guarded capture to
-// its exact root box (rootOffset inside the crop). Refuse if any paint lies in
-// the discarded context margin, so nothing outside the box is silently dropped.
+
+// Source: the snapped root box, grown to cover every painted pixel.
 const full = PNG.sync.read(sourceBytes), off = receipt.rootOffset, box = receipt.bounds;
-if (!Number.isInteger(off.x) || !Number.isInteger(off.y) || !Number.isInteger(box.width) || !Number.isInteger(box.height)) throw Error('fractional source root box');
-for (let y = 0; y < full.height; y++) for (let x = 0; x < full.width; x++) {
-  const inside = x >= off.x && x < off.x + box.width && y >= off.y && y < off.y + box.height;
-  if (!inside && full.data[(y * full.width + x) * 4 + 3] !== 0) throw Error('source paints outside its root box');
-}
-const rootPng = new PNG({width: box.width, height: box.height});
-PNG.bitblt(full, rootPng, off.x, off.y, box.width, box.height, 0, 0);
-const rootBytes = PNG.sync.write(rootPng);
-fs.writeFileSync(path.join(outDir, 'source-root.png'), rootBytes);
-const sourceFrame = {layout: box, capture: box, deviceScaleFactor: 1, pngSha256: imageSha256(rootBytes)};
+const snapped = snapOutward(off, box);
+const painted = paintBox(full);
+if (!painted) throw Error('source capture has no paint');
+const crop = unionBox(snapped, painted);
+const sourceEffects = crop.x !== snapped.x || crop.y !== snapped.y || crop.width !== snapped.width || crop.height !== snapped.height;
+const cropPng = new PNG({width: crop.width, height: crop.height});
+PNG.bitblt(full, cropPng, crop.x, crop.y, crop.width, crop.height, 0, 0);
+const cropBytes = PNG.sync.write(cropPng);
+fs.writeFileSync(path.join(outDir, 'source-root.png'), cropBytes);
+
+// Native: bounds before and after, and the export that covers what Figma paints.
 const get = async (url: string) => { const r = await fetch(url, {headers: {'X-Figma-Token': token}}); if (!r.ok) throw Error(`GET ${r.status}`); return r; };
 const boundsUrl = `https://api.figma.com/v1/files/${fileKey}/nodes?ids=${nodeId}&depth=1`;
 const before = await (await get(boundsUrl)).json();
-const exp = await (await get(`https://api.figma.com/v1/images/${fileKey}?ids=${nodeId}&format=png&scale=1&contents_only=true&use_absolute_bounds=true`)).json() as any;
+const doc = before.nodes?.[nodeId]?.document;
+const layout = doc?.absoluteBoundingBox, render = doc?.absoluteRenderBounds;
+if (!layout || !render) throw Error('native bounds not recorded');
+const nativeEffects = render.x < layout.x || render.y < layout.y ||
+  render.x + render.width > layout.x + layout.width || render.y + render.height > layout.y + layout.height;
+const effects = sourceEffects || nativeEffects;
+const exportUrl = `https://api.figma.com/v1/images/${fileKey}?ids=${nodeId}&format=png&scale=1&contents_only=true${effects ? '' : '&use_absolute_bounds=true'}`;
+const exp = await (await get(exportUrl)).json() as any;
 const nativeBytes = Buffer.from(await (await fetch(exp.images[nodeId])).arrayBuffer());
 const after = await (await get(boundsUrl)).json();
 fs.writeFileSync(path.join(outDir, 'native.png'), nativeBytes);
 fs.writeFileSync(path.join(outDir, 'native-bounds.json'), JSON.stringify({before, after}));
-const framed = figmaFramesFromSnapshots(before, after, {[nodeId]: nativeBytes}, FIGMA_REST_FULL_BOUNDS);
-if (framed.refused) throw Error('native framing refused: ' + framed.refused);
-const nativeFrame = framed.frames[nodeId];
+
+let align: (background: 0 | 255) => ReturnType<typeof alignRecordedFrames> | ReturnType<typeof alignAtOffsets>;
+let nativeSize: [number, number], nativeFraming: Record<string, unknown> | undefined;
+if (!effects) {
+  // The previous path: root box against Figma's layout-bounds export.
+  const frameBox = snapped.fractional ? {x: 0, y: 0, width: snapped.width, height: snapped.height} : box;
+  const sourceFrame = {layout: frameBox, capture: frameBox, deviceScaleFactor: 1, pngSha256: imageSha256(cropBytes)};
+  const framed = figmaFramesFromSnapshots(before, after, {[nodeId]: nativeBytes}, FIGMA_REST_FULL_BOUNDS);
+  if (framed.refused) throw Error('native framing refused: ' + framed.refused);
+  const nativeFrame = framed.frames[nodeId];
+  nativeSize = [nativeFrame.layout.width, nativeFrame.layout.height];
+  align = background => alignRecordedFrames(cropBytes, nativeBytes, sourceFrame as any, nativeFrame, background);
+} else {
+  // Effects included: render-bounds export, snapped root origins placed together.
+  if (before.version !== after.version || before.lastModified !== after.lastModified) throw Error('native framing refused: figma-file-changed-during-export');
+  const theirs = PNG.sync.read(nativeBytes);
+  if (theirs.width !== Math.ceil(render.width) || theirs.height !== Math.ceil(render.height)) throw Error('native framing refused: figma-render-export-span-mismatch');
+  const sourceRoot = {x: snapped.x - crop.x, y: snapped.y - crop.y};
+  const nativeRoot = {x: Math.floor(layout.x - render.x), y: Math.floor(layout.y - render.y)};
+  const origin = {x: Math.max(sourceRoot.x, nativeRoot.x), y: Math.max(sourceRoot.y, nativeRoot.y)};
+  const at = {x: origin.x - sourceRoot.x, y: origin.y - sourceRoot.y}, bt = {x: origin.x - nativeRoot.x, y: origin.y - nativeRoot.y};
+  nativeSize = [layout.width, layout.height];
+  nativeFraming = {rule: 'render-bounds-v1', layout, render, rootInExport: nativeRoot};
+  align = background => alignAtOffsets(cropPng, theirs, at, bt, background);
+}
+
 const scores: any[] = [];
 for (const background of [255, 0] as const) {
-  const aligned = alignRecordedFrames(rootBytes, nativeBytes, sourceFrame as any, nativeFrame, background);
+  const aligned = align(background);
   if ('refused' in aligned) { scores.push({background, refused: aligned.refused}); continue; }
   const diff = diffPair(aligned.aligned, []);
   const name = `source-native-${background === 255 ? 'white' : 'black'}.png`;
@@ -60,8 +100,11 @@ for (const background of [255, 0] as const) {
   scores.push({background: background === 255 ? 'white' : 'black', mismatchPercent: diff.unmaskedPct, withinLimit: diff.unmaskedPct <= 5, triptych: name});
 }
 const result = {nodeId, fileKey, limitPercent: 5, sourceSize: [receipt.bounds.width, receipt.bounds.height],
-  nativeSize: [nativeFrame.layout.width, nativeFrame.layout.height],
-  layoutExact: receipt.bounds.width === nativeFrame.layout.width && receipt.bounds.height === nativeFrame.layout.height,
+  nativeSize,
+  layoutExact: receipt.bounds.width === nativeSize[0] && receipt.bounds.height === nativeSize[1],
+  ...(snapped.fractional || effects ? {sourceFraming: {rule: effects ? 'snap-outward-effects-included-v1' : 'snap-outward-v1', rootOffset: off,
+    layoutBox: {width: box.width, height: box.height}, crop, rootInCrop: {x: snapped.x - crop.x, y: snapped.y - crop.y}}} : {}),
+  ...(nativeFraming ? {nativeFraming} : {}),
   scores, pass: scores.every(s => s.withinLimit === true)};
 fs.writeFileSync(path.join(outDir, 'comparison.json'), JSON.stringify(result, null, 2));
 console.log(JSON.stringify(result));

@@ -81,3 +81,20 @@ test('regular anatomy grids retain the declared and implicit row distinction thr
   const bad=structuredClone(dump);bad.variants[0].layout.grid.rows[2]={px:24};
   assert.throws(()=>proposeFromDump(bad,{corpus:tokenCorpusFromJson({primitives:tokens.primitives,semantic:{},light:{},brandDefault:{}}),contractIdByName:new Map(),mintUnbound:true}),/grid-flow-rows-readback-mismatch/);
 });
+
+test('a REST resolved-size row corroborates a recorded HUG row only where no item can sit (docs/23 §D.166)', () => {
+  const recipe: GridFlowRows = { version: 1, rows: [], autoRows: { type: 'HUG', value: 1 } };
+  // Measured REST spelling of an empty content slot: ' 1.00px'.
+  assert.deepEqual(readGridFlowRows(recipe, 1, 0, [{ type: 'FIXED', value: 1, resolved: true }]), recipe);
+  // An occupied row prints fit-content(100%); a resolved size there is a fixed track, not a hug.
+  assert.throws(() => readGridFlowRows(recipe, 1, 1, [{ type: 'FIXED', value: 20, resolved: true }]), /readback-mismatch/);
+  // Without the REST mark the fixed reading is taken at its word.
+  assert.throws(() => readGridFlowRows(recipe, 1, 0, [{ type: 'FIXED', value: 1 }]), /readback-mismatch/);
+  // A recorded FIXED row still needs its exact value, marked or not.
+  const fixed: GridFlowRows = { version: 1, rows: [{ type: 'FIXED', value: 12.5 }], autoRows: { type: 'HUG', value: 1 } };
+  assert.deepEqual(readGridFlowRows(fixed, 1, 0, [{ type: 'FIXED', value: 12.5, resolved: true }]), fixed);
+  assert.throws(() => readGridFlowRows(fixed, 1, 0, [{ type: 'FIXED', value: 12.4, resolved: true }]), /readback-mismatch/);
+  // Second row empty: a mixed list '36px 14.00px' with one item in the first row.
+  const mixed: GridFlowRows = { version: 1, rows: [{ type: 'FIXED', value: 36 }, { type: 'HUG', value: 1 }], autoRows: { type: 'HUG', value: 1 } };
+  assert.deepEqual(readGridFlowRows(mixed, 1, 1, [{ type: 'FIXED', value: 36 }, { type: 'FIXED', value: 14, resolved: true }]), mixed);
+});

@@ -11823,3 +11823,149 @@ the two designer-axis selector expectations in
 by deleting `core/react-state-preview.ts`, the `statePreview` /
 `bindings.code.statePreviews` schema fields and their readers, and
 `forcedStatePreview` in `core/propose-figma.ts`.
+
+## D.165 An operation's authentication may not re-enter its own snapshot
+
+**AGENT decision, 2026-09-27.** On the live app the shadcn Switch's
+native-state-api request refused (`state-api-native-observation-required`) while
+a GET of the same state-API record, seconds later in the same process,
+returned it complete. A diagnosis on copied private records found that the
+inspection anchor, and with it the state-API key, flipped between calls:
+
+- Selecting the inspection source for a case listed every native operation of
+  the reference (`react-reference.ts`, authored branch) and authenticated each
+  one before filtering.
+- Authenticating an existing state-API draft reads its state-API evidence,
+  which selects the inspection source again. The loop recursed until
+  "Maximum call stack size exceeded".
+- `get()` caught every exception as a stale source, so whichever operation was
+  mid-authentication when the stack ran out read as not current. Which roots
+  survived depended on stack headroom, so the anchor, the first current root,
+  changed between identical requests.
+- The benchmark replay passed because its `private/` starts empty: no
+  state-API draft exists until its last step.
+
+Rules:
+
+- The authored listing filters by operation header before authenticating
+  (`listReact(referenceId, 'authored')`), so selecting a source never
+  authenticates a state-API draft.
+- `get()` refuses a re-entrant authentication by name
+  (`native-operation-authentication-reentrant`) and never reads a stack
+  overflow (`RangeError`) as a stale source; it propagates.
+- The benchmark replay now repeats each state-API request after another root
+  of the reference is prepared, and fails the cell if the repeat refuses or
+  creates another operation.
+
+Measured through the app on the live private state: after re-observing the
+Switch, native-state-api created one operation (`5cfe5ac0`) whose plan equals
+the benchmark pin, and a repeat returned the same operation (77 operations
+before and after). Three listings read it as current. Sync Runner created it
+in Evaluations and the independent readback returned
+`component-structure-observed` with 0 problems. Its image score is not
+recorded: the Switch root is 32 × 18.390625 px, and the committed
+source-native instrument refuses a fractional root box by design. Scoring it
+needs an owner-approved framing rule for fractional boxes, which this change
+does not make. The callback observation of this case ends
+`callback-observation-incomplete` both live and in a replay from an empty
+`private/` (re-measured 2026-09-27 after re-observing the initial states): the
+probe `asChild: true` renders no control without a child
+(`react-ownership-selected-root-missing`) and `hidden: true` cannot take focus
+(`callback-focus-mismatch`). The state-API chain does not depend on it and
+completes. Excluding values that remove or hide the observed control from the
+callback domain remains open.
+
+Tests: `source-reference/native-operation-jobs.test.ts` (re-entry refused by
+name, overflow propagates; both fail against the previous `get()`),
+`scripts/react-native-replay.test.ts` (a repeat that refuses or adds an
+operation fails the cell). Reverse by restoring the unfiltered listing and the
+catch-all in `get()`, and removing the repeat step.
+
+## D.166 A REST two-decimal grid track is a fractional fixed track or an empty hug
+
+**AGENT decision, 2026-09-27.** Importing the natively created shadcn Alert by
+Figma URL refused with `grid-flow-rows-readback-mismatch`. Its root content grid
+records the recipe `autoRows: HUG`, but REST reported the row as `' 1.00px'`,
+which the mapper read as a fixed 1 px track. A probe in Scratch
+(`REST grid track probe / 2026-09-27`; REST responses in
+`private/v1-scoreboard/rest-grid-probe/`) measured Figma's track spelling, which
+REST returns byte-for-byte from the plugin's `gridRowSizingCSS`:
+
+| Drawn row | REST `gridRowsSizing` |
+| --- | --- |
+| FIXED 36 | `36px` |
+| FIXED 12.5, 14.25, 7.1 | `12.50px`, `14.25px`, `7.10px` |
+| HUG with an item | `fit-content(100%)` |
+| HUG without an item | its resolved size: `50.00px`, `14.00px`, `1.00px` |
+| HUG without an item in a fixed-height frame | `minmax(0,1fr)` |
+
+An integer fixed track never prints decimals, but a fractional fixed track and
+an unoccupied HUG track print the same two-decimal spelling. The REST mapper
+now marks such tracks `resolved`, deciding nothing. Recipe readback accepts a
+recorded HUG row against a resolved observation only where no drawn item can
+occupy it: a root content grid's carrier, which `readRootContent` already
+requires to be empty, or rows past the drawn items. Every other comparison is
+unchanged, and an empty HUG spelled `minmax(0,1fr)` still refuses. Without a
+recipe, a designer grid's resolved tracks are carried as fixed px as before,
+but now with the note `grid-track-resolved-size-ambiguous` instead of silently.
+
+The native Alert's root set now returns to React by URL. The consumer check
+also mounts cases through the component's declared API: code props and
+`bindings.code.values`, where the canonical `null` becomes JS `null`. Before,
+it crashed with `CODE_VALUE_UNSUPPORTED`. The returned root is not yet scored.
+Its contract declares a fill-width root (`width: 100%`), and the harness mounts
+every case at `fit-content`, so React draws 34 × 26 px against Figma's
+100 × 27 px preview. Rendering at the preview width would change the
+measurement environment, so it is left to the owner. The composed return (the
+root with its caller title and description) is not read by the Send tab, which
+reads component sets. Tests: `core/grid-flow-rows.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by removing the `resolved`
+mark in `extract/figma/rest/map.ts`, the `drawn` parameter of
+`readGridFlowRows`, and `mountProps`.
+
+## D.167 Owner framing decisions: snapped fractional boxes, effect extents, preview width
+
+**OWNER decisions, 2026-09-27** (asked, not inferred). Three measurement
+situations had no rule, so their cells could never be scored under the
+unchanged 5% limit:
+
+1. **Fractional root boxes are snapped outward.** The React → Figma comparison
+   (`scripts/benchmark-source-native-compare.ts`) crops the source to the
+   smallest whole-pixel box that contains a fractional root box, instead of
+   refusing it.
+2. **Effects past the root box are included.** When the source paints outside
+   its root box, or Figma's render bounds exceed its layout box (shadows,
+   outlines), the source crop grows to cover all paint. Figma is then exported
+   with its render bounds, and the two are placed with their snapped root
+   origins together.
+3. **Full-width roots get Figma's preview width.** The consumer check
+   (`scripts/design-consumer-check.ts`) mounts a case in a container as wide
+   as that variant's Figma frame. It keeps that width only where the root then
+   fills exactly that width and did not at `fit-content`; every other root
+   stays at `fit-content`.
+
+Each rule is recorded in the receipt: `sourceFraming` and `nativeFraming` in
+the comparison, `consumer.containerFraming` in the consumer receipt. The
+scorer, the diff and the 5% limit are unchanged. An integer, effect-free pair
+takes the previous path: the shadcn Alert default re-scores to exactly its
+committed 3.068% / 3.105%. The effects path composites with `alignAtOffsets`
+(`scripts/benchmark-source-framing.ts`), a copy of the recorded aligner's
+compositing; `scripts/design-consumer-framing.ts` itself is unchanged, because
+recorded matched-capture evidence pins its bytes as an instrument.
+
+Results:
+- The live shadcn Switch operation `5cfe5ac0` (plan equal to the pin) scores
+  **0.000% on white and 2.174% on black** at the exact 32 × 18.39 px size,
+  over a 34 × 21 source crop that includes its box-shadow halo and a 36 × 23
+  render-bounds export. The Switch cell is **Pass**.
+- The native Alert's return to React (D.166) passes 3 of 4 variants at its
+  100 px preview width (0% white, 4.037% black). Variant `null` fails at 7.44%
+  on black: Figma draws its empty content row 1 px tall and CSS draws it 0 px
+  (26 versus 27 px). That cell is gated as a named known failure.
+- The shadcn Badges can now be framed, but their live creation must first pass
+  readback (the earlier refusal was 43.875 versus 44 px text width).
+
+Tests: `scripts/benchmark-source-framing.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by restoring the integer-box
+refusal and the layout-bounds-only export in the comparison, and the
+`fit-content`-only container in the consumer check.

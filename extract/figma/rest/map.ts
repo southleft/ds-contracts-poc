@@ -933,7 +933,11 @@ function mapBound(node: RestNode, ctx: Ctx, nodePath: string): Record<string, st
  *  (grid-track-unparsed), never a silent drop. */
 function parseGridTrack(token: string): DumpGridTrack | undefined {
   const t = token.trim();
-  let m = /^(\d+(?:\.\d+)?)px$/.exec(t);
+  // Two forced decimals: a fractional FIXED track or an unoccupied HUG track
+  // at its resolved size (docs/23 §D.166 probe) — marked, never decided here.
+  let m = /^(\d+\.\d{2})px$/.exec(t);
+  if (m) return { px: Number(m[1]), resolved: true };
+  m = /^(\d+(?:\.\d+)?)px$/.exec(t);
   if (m) return { px: Number(m[1]) };
   m = /^minmax\(\s*0(?:px)?\s*,\s*(\d+(?:\.\d+)?)fr\s*\)$/.exec(t);
   if (m) return { fr: Number(m[1]) };

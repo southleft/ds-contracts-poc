@@ -550,7 +550,7 @@
     "react:native:declared:check": "tsx scripts/react-native-declared-check.ts && tsx scripts/react-native-matched-check.ts && node --import tsx --test scripts/react-native-declared.test.ts scripts/react-native-matched.test.ts",
     "figma:to-react": "tsx scripts/figma-to-react.ts",
     "benchmark:check": "tsx scripts/benchmark-replay.ts",
-    "benchmark:test": "node --import tsx --test scripts/benchmark-replay.test.ts scripts/figma-to-react.test.ts scripts/react-native-replay.test.ts",
+    "benchmark:test": "node --import tsx --test scripts/benchmark-replay.test.ts scripts/figma-to-react.test.ts scripts/react-native-replay.test.ts scripts/benchmark-source-framing.test.ts",
     "benchmark:doc": "tsx scripts/benchmark-doc.ts",
     "benchmark:doc:check": "tsx scripts/benchmark-doc.ts --check"
   },

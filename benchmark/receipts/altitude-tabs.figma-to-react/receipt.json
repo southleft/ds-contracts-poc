@@ -1,0 +1,577 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Tabs",
+  "fileKey": "y83n4o9LOGs74oAoguFcGS",
+  "capture": {
+    "background": "transparent",
+    "comparisonBackgrounds": [
+      "white",
+      "black"
+    ],
+    "framing": "recorded-layout-origins-common-alpha-union-v2",
+    "deviceScaleFactor": 1,
+    "nativeRaster": {
+      "kind": "figma-rest-full-bounds-v1",
+      "scale": 1
+    }
+  },
+  "generatedSha256": {
+    "ArrowArcLeft/ArrowArcLeft.module.css": "373b2d58cb5a9cc8fd61d1232b628ae7d4b210a01c3f3f7aeb4acd39200dcf7f",
+    "ArrowArcLeft/ArrowArcLeft.tsx": "39597f11d55b2b53db37ba9c9ea4462b0dda22170120a99665859d0322bf4453",
+    "ArrowArcLeft/index.ts": "021f109a0fd7f2c7dd65788a99fbabd22294650592315f389ad6c3e32ee09119",
+    "Button/Button.module.css": "430da83987aa70c1826f887a89883472e7f470aa2a77f72c89aa6e7ad056f22e",
+    "Button/Button.tsx": "74840abae61ddf39a8fe4c895e30f883bf592d50adaa25f120d477de06f7466a",
+    "Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
+    "Icon/Icon.module.css": "cb408f49ac55e8b6360285bce74e7d5c6e81587429f3330a45a8d44652ea7774",
+    "Icon/Icon.tsx": "2738f4f1a179a62cc18872e1ccdfbd77d81dcc0872672933c56eadf0b6607d1a",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "Tab/Tab.module.css": "958ea9cabddc8b13bfd872130b8208efe58f391ee7242ada98e30abf49a4d4e8",
+    "Tab/Tab.tsx": "1c9628e2f857a32041f20e18fea6a241be72611084d91be9331d0d8fd0c3e162",
+    "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
+    "TabPanel/TabPanel.module.css": "5ec5d0dd172b9ce28796b3ca4b1439dde4e8eb08abf8262254ed3482b8af80c8",
+    "TabPanel/TabPanel.tsx": "d14e75b47a31470895f96f4c3d815c59c1d27cac96a0798d92d9a90d00ac978e",
+    "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
+    "Tabs/Tabs.module.css": "50619076b0a95f3dfd7c7948598c5b384da9d02d66b2a5b8308ebc84b2c44e93",
+    "Tabs/Tabs.tsx": "ddd3122a1e9f2ba2c3c801a148504b91ef2b84ce096af3ba3b2da9ec08c92ac9",
+    "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
+    "TextPassage/TextPassage.module.css": "f414ff703840d73f51d990865e4ec9dc48310c66a4350d02c5be185795231fb2",
+    "TextPassage/TextPassage.tsx": "b91dece789f139106b13b6babcbc03fa210cb85fd8dc12aecc4227d1573fae12",
+    "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
+    "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
+    "tokens.css": "8cfe2ba989e129625ac16daf0149ddeede375a581d2f7bdfd2c22839e366fe7e"
+  },
+  "cases": [
+    {
+      "key": "variant-default",
+      "figmaName": "Variant=Default",
+      "nodeId": "3558:61901",
+      "props": {
+        "items": [
+          {
+            "text": "Tab label",
+            "active": "yes"
+          },
+          {
+            "text": "Tab label",
+            "active": "no"
+          },
+          {
+            "text": "Tab label",
+            "active": "no"
+          }
+        ],
+        "variant": "default"
+      },
+      "rendered": {
+        "text": "Tab label\nTab label\nTab label\nA passage of body copy used to verify measure and rhythm.\nA passage of body copy used to verify measure and rhythm.\nButton",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 439,
+        "height": 176,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-default.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 12,
+          "width": 439,
+          "height": 176
+        },
+        "capture": {
+          "x": 12,
+          "y": 12,
+          "width": 439,
+          "height": 176
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "b4400e83b81f286cc21bd15d934c6fdad32209a7f1e09fa79b3b9c109f57a23e"
+      }
+    },
+    {
+      "key": "variant-stretch",
+      "figmaName": "Variant=Stretch",
+      "nodeId": "3558:61928",
+      "props": {
+        "items": [
+          {
+            "text": "Tab label",
+            "active": "yes"
+          },
+          {
+            "text": "Tab label",
+            "active": "no"
+          },
+          {
+            "text": "Tab label",
+            "active": "no"
+          }
+        ],
+        "variant": "stretch"
+      },
+      "rendered": {
+        "text": "Tab label\nTab label\nTab label\nA passage of body copy used to verify measure and rhythm.\nA passage of body copy used to verify measure and rhythm.\nButton",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 439,
+        "height": 176,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "14px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-stretch.png",
+      "frame": {
+        "layout": {
+          "x": 12,
+          "y": 204,
+          "width": 439,
+          "height": 176
+        },
+        "capture": {
+          "x": 12,
+          "y": 204,
+          "width": 439,
+          "height": 176
+        },
+        "deviceScaleFactor": 1,
+        "pngSha256": "c3c14207ffec27b8ec67e3581ebd3d292108742de714631842100d8cb57e3946"
+      }
+    }
+  ],
+  "behavior": {
+    "states": [],
+    "text": {
+      "prop": null,
+      "note": "contract declares no TEXT-bound prop"
+    },
+    "arrays": [
+      {
+        "prop": "items",
+        "textField": "text",
+        "items": 3,
+        "cellsRenderingAllItems": [
+          "variant-default",
+          "variant-stretch"
+        ]
+      }
+    ],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": true
+    },
+    "variants": [
+      {
+        "prop": "variant",
+        "switchedTo": "default",
+        "cellsSwitched": [
+          "variant-stretch"
+        ],
+        "cellsExpectedToChange": [
+          "variant-stretch"
+        ],
+        "cellsChanged": [
+          "variant-stretch"
+        ],
+        "axisInertLedgered": false,
+        "sourceEquivalentTransitions": [],
+        "cellsUnchangedWithoutEquivalentSource": []
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "frameEvidence": {
+      "before": "figma-bounds-before.json",
+      "after": "figma-bounds-after.json",
+      "version": "2402234553296509410",
+      "export": {
+        "format": "png",
+        "scale": 1,
+        "contentsOnly": true,
+        "useAbsoluteBounds": true
+      },
+      "raster": {
+        "kind": "figma-rest-full-bounds-v1",
+        "scale": 1
+      },
+      "beforeSha256": "4f7ee01a3160c6329941d6b4366b56a678da32345d36a8bdd45af571dffd4fc0",
+      "afterSha256": "4f7ee01a3160c6329941d6b4366b56a678da32345d36a8bdd45af571dffd4fc0"
+    },
+    "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "variant-default",
+        "figmaImage": "figma-3558_61901.png",
+        "mismatchPercent": 0.015566625155666251,
+        "blackMismatchPercent": 3.240452469904525,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0.015566625155666251,
+          "blackMismatchPercent": 3.240452469904525,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 438,
+              "height": 176
+            }
+          },
+          "pixelsCompared": 77088
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 105,
+            "y": 416,
+            "width": 439,
+            "height": 176
+          },
+          "render": {
+            "x": 105,
+            "y": 416,
+            "width": 439,
+            "height": 176
+          },
+          "pngSha256": "cb3f17ad2e66e328c4045ae54c3f57b4735f425d981366f16efead1621da8bb4",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 39.181195516811954,
+        "inkCoveragePercent": {
+          "consumer": 12.83,
+          "figma": 12.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 438,
+            "height": 176
+          },
+          "figma": {
+            "width": 438,
+            "height": 176
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 439,
+            "height": 176
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        }
+      },
+      {
+        "key": "variant-stretch",
+        "figmaImage": "figma-3558_61928.png",
+        "mismatchPercent": 0.015531165872851522,
+        "blackMismatchPercent": 3.211068544212052,
+        "historicalWithinLimit": true,
+        "layoutAligned": {
+          "status": "measured",
+          "whiteMismatchPercent": 0.015531165872851522,
+          "blackMismatchPercent": 3.211068544212052,
+          "withinLimit": true,
+          "placement": {
+            "consumer": {
+              "x": 0,
+              "y": 0
+            },
+            "figma": {
+              "x": 0,
+              "y": 0
+            },
+            "commonCrop": {
+              "x": 0,
+              "y": 0,
+              "width": 439,
+              "height": 176
+            }
+          },
+          "pixelsCompared": 77264
+        },
+        "figmaFrame": {
+          "layout": {
+            "x": 105,
+            "y": 636,
+            "width": 439,
+            "height": 176
+          },
+          "render": {
+            "x": 105,
+            "y": 636,
+            "width": 439,
+            "height": 176
+          },
+          "pngSha256": "8e64da79c8347db2f1439cd041d308a8fdf55dc5d9e1b1a8ba53578ebc9052fe",
+          "raster": {
+            "kind": "figma-rest-full-bounds-v1",
+            "scale": 1
+          }
+        },
+        "withinLimit": true,
+        "textMaskedPercent": 0,
+        "textMaskCoveragePercent": 39.161834748395115,
+        "inkCoveragePercent": {
+          "consumer": 13.34,
+          "figma": 13.26
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 439,
+            "height": 176
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 439,
+            "height": 176
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        }
+      }
+    ]
+  },
+  "problems": [],
+  "limitations": [
+    "one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised",
+    "declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 2107,
+      "text-channel-unsupported": 140,
+      "instance-prop-unsupported": 240,
+      "stroke-style-unsupported": 30,
+      "instance-closure-unresolved": 241
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "ArrowArcLeft",
+      "Button",
+      "Icon",
+      "Tab",
+      "TabPanel",
+      "Tabs",
+      "TextPassage"
+    ],
+    "closure": {
+      "requested": [
+        "Tabs"
+      ],
+      "followed": [
+        "Tab",
+        "Text Passage",
+        "Icon",
+        "Button",
+        "Tab Panel"
+      ],
+      "notFollowed": [
+        "not-found:3610:3127",
+        "not-found:3610:5101",
+        "remote-library-component:ArrowArcLeft"
+      ]
+    },
+    "contractGraph": [
+      {
+        "id": "ds.arrow-arc-left",
+        "name": "ArrowArcLeft",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.button",
+        "name": "Button",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.icon",
+        "name": "Icon",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.tab",
+        "name": "Tab",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.tab-panel",
+        "name": "TabPanel",
+        "stub": false,
+        "packaged": true
+      },
+      {
+        "id": "ds.text-passage",
+        "name": "TextPassage",
+        "stub": false,
+        "packaged": true
+      }
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/tabs",
+    "tarballSha256": "b657b733a3ce4c4da6574cd43e379ca697d79144658a30402a71140539b887e3",
+    "distFiles": [
+      "ArrowArcLeft",
+      "ArrowArcLeft/ArrowArcLeft.d.ts",
+      "ArrowArcLeft/ArrowArcLeft.js",
+      "ArrowArcLeft/ArrowArcLeft.module.css",
+      "ArrowArcLeft/index.d.ts",
+      "ArrowArcLeft/index.js",
+      "Button",
+      "Button/Button.d.ts",
+      "Button/Button.js",
+      "Button/Button.module.css",
+      "Button/index.d.ts",
+      "Button/index.js",
+      "Icon",
+      "Icon/Icon.d.ts",
+      "Icon/Icon.js",
+      "Icon/Icon.module.css",
+      "Icon/index.d.ts",
+      "Icon/index.js",
+      "Tab",
+      "Tab/Tab.d.ts",
+      "Tab/Tab.js",
+      "Tab/Tab.module.css",
+      "Tab/index.d.ts",
+      "Tab/index.js",
+      "TabPanel",
+      "TabPanel/TabPanel.d.ts",
+      "TabPanel/TabPanel.js",
+      "TabPanel/TabPanel.module.css",
+      "TabPanel/index.d.ts",
+      "TabPanel/index.js",
+      "Tabs",
+      "Tabs/Tabs.d.ts",
+      "Tabs/Tabs.js",
+      "Tabs/Tabs.module.css",
+      "Tabs/index.d.ts",
+      "Tabs/index.js",
+      "TextPassage",
+      "TextPassage/TextPassage.d.ts",
+      "TextPassage/TextPassage.js",
+      "TextPassage/TextPassage.module.css",
+      "TextPassage/index.d.ts",
+      "TextPassage/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "0e8d6777c11e1938db487381e41c0db64c14b2aad324ab2a07fee4e1fef85255",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "fontProvision": {
+      "kind": "explicit-local-assets",
+      "manifest": {
+        "version": 1,
+        "fonts": [
+          {
+            "family": "Public Sans",
+            "weight": "600",
+            "style": "normal",
+            "file": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
+            "sha256": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d"
+          },
+          {
+            "family": "Public Sans",
+            "weight": "500",
+            "style": "normal",
+            "file": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
+            "sha256": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9"
+          },
+          {
+            "family": "Public Sans",
+            "weight": "400",
+            "style": "normal",
+            "file": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
+            "sha256": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134"
+          }
+        ]
+      },
+      "sourceFontByteIdentity": "unverified",
+      "note": "These are consumer font inputs. Neither family names nor successful loading authenticate the font bytes used by Figma. Glyph fallback remains possible.",
+      "loaded": [
+        {
+          "family": "Public Sans",
+          "weight": "600",
+          "style": "normal",
+          "file": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d.ttf",
+          "sha256": "f6605fbe12479ffac844b0baeadc1a53ad80d3dff8d1b9dd6756adb084416e0d",
+          "status": "loaded"
+        },
+        {
+          "family": "Public Sans",
+          "weight": "500",
+          "style": "normal",
+          "file": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9.ttf",
+          "sha256": "604960f5805f6eb2d35f4b37caf65ba5ef60e80fb3c9019910e6ec2a274225d9",
+          "status": "loaded"
+        },
+        {
+          "family": "Public Sans",
+          "weight": "400",
+          "style": "normal",
+          "file": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134.ttf",
+          "sha256": "e10a00a863fcfffe936af8d54684e6acea97e5e91d0733696eccac6bd1fff134",
+          "status": "loaded"
+        }
+      ]
+    },
+    "builtCss": {
+      "bytes": 37488,
+      "tokenDefinitions": 475,
+      "tokenDefinitionsExpected": 475
+    },
+    "interactiveNesting": []
+  },
+  "outcome": "consumer-mounted-behaved-and-compared"
+}
