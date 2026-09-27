@@ -67,14 +67,14 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | Altitude Badge | gated above | Pass 10/10, 0.088% vs original (pre-rt21) | Not measured | Not measured |
 | CBDS Checkbox | gated above | Readback verifies live ([D.163](23-known-limitations.md#d163-an-inherited-scale-origin-may-keep-only-the-sources-own-float32-invisible-offset)); disabled look fixed in code ([D.162](23-known-limitations.md#d162-a-parent-set-boolean-state-selects-the-childs-drawn-state-preview)) but the app cannot yet rebuild a completed library operation; no image scores | Not measured | Not measured |
 | CBDS CheckboxIcon | gated above | Created and read back; no image scores | Not measured | Not measured |
-| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Plan gated above; the live app refuses in long-lived local state (state-API anchor drift, a C6 defect under repair) | Opacity and bound height both ways, conflicts refused | Begun-write recovery, no-op repeats (stale by three runtime revisions) |
+| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Plan gated above. Live operation `5cfe5ac0` (plan equal to the pin) created in Evaluations and read back with 0 problems; not image-scored, because the committed instrument refuses its fractional 32 × 18.39 px root box ([D.165](23-known-limitations.md#d165-an-operations-authentication-may-not-re-enter-its-own-snapshot)) | Opacity and bound height both ways, conflicts refused | Anchor drift fixed; the gate now checks that a repeat after another root returns the same operation. Begun-write recovery and no-op update repeats are stale by three runtime revisions |
 | shadcn Alert | Not measured; the return refuses on grid row read-back | gated above | In-place attempt refused by name (layout channel) | Not measured |
 | shadcn Badge | Not measured | Exact-size refusal (43.875 vs 44 px text width) | Not measured | Not measured |
 | Tabs | Pass on both source appearances (≤ 3.349%) | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
 | Card | Not measured | 6/6 variants from 2026-09-18, likely stale | Not measured | Repeat preparation, no duplicates |
 
 No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
-closed: fix the Switch state-API anchor drift and score its native output,
+closed: agree a framing rule for fractional root boxes so the Switch can be scored,
 return the Alert to React, give completed library operations a rebuild path so
 the Checkbox fix reaches the canvas, measure bounded updates and recovery on
 the gated rows, and bring Tabs, Card and shadcn Badge into the gate. Criterion 5

@@ -1683,11 +1683,24 @@ export function createNativeOperationJobs(
     }
     return snapshot(load(id), true);
   };
+  // An operation whose authentication reaches its own snapshot again (a
+  // source selection that lists this reference) is refused by name instead of
+  // recursing until the stack runs out, and a stack overflow is never read as
+  // a stale source: which operations it would mark stale depends on how much
+  // stack is left, and the inspection anchor chosen from them would drift
+  // between identical requests (measured on the live shadcn Switch).
+  const authenticating = new Set<string>();
   const get = (id: string): NativeOperationSnapshot => readOnce('snapshot:'+id, () => {
+    if (authenticating.has(id)) fail('authentication-reentrant');
     const loaded = load(id);
     let compatibility;
+    authenticating.add(id);
     try { compatibility = authenticate(loaded); }
-    catch { return snapshot(loaded, false); }
+    catch (error) {
+      if (error instanceof RangeError) throw error;
+      return snapshot(loaded, false);
+    }
+    finally { authenticating.delete(id); }
     return snapshot(loaded, true, compatibility);
   });
   const forBaseline = (baseline: string): NativeOperationSnapshot | null => {
@@ -2272,7 +2285,7 @@ export function createNativeOperationJobs(
           followedReferenceId: followed, fileKey: loaded.header.policy.fileKey, phase: loaded.state.phase }];
       }));
     },
-    listReact(referenceId: string, kind?: 'root' | 'mains') {
+    listReact(referenceId: string, kind?: 'root' | 'mains' | 'authored') {
       return withReadSnapshot(() => {
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
@@ -2281,6 +2294,9 @@ export function createNativeOperationJobs(
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
+        // Filtered BEFORE get(): authenticating a state-API draft selects its
+        // inspection source, which lists this reference again (see get()).
+        if (kind === 'authored' && !(isReactAuthoredNativeRequest(header.request) && header.request.version !== 2 && header.request.version !== 3)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
         // One unreadable succession journal fails THAT operation closed (its
         // update planning refuses by name); it must not take the listing down.

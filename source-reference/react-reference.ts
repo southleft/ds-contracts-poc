@@ -320,7 +320,7 @@ export function createReactReferenceService(
         // The explicitly observed, sealed source is sufficient. Inspection must
         // not allocate another native graph just to obtain an evidence anchor.
         const authored = composition ? [selectReactAuthoredNativeRequest(repoRoot, observed!, caseId)] :
-          native!().jobs.listReact(referenceId).filter(r => r.kind === 'authored' && r.caseId === caseId && r.operation.sourceCurrent)
+          native!().jobs.listReact(referenceId, 'authored').filter(r => r.kind === 'authored' && r.caseId === caseId && r.operation.sourceCurrent)
           .map(r => native!().jobs.reactOwnershipRequest(r.operation.id)).filter(isReactAuthoredNativeRequest);
         if (authored.length) {
           if (new Set(authored.map(revisionOf)).size !== 1) throw Error('react-inspection-authored-source-ambiguous');

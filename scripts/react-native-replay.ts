@@ -68,6 +68,9 @@ export interface ReplayedCase {
   refusal?: string;
   root?: { kind: string; planSha256: string };
   children: Array<{ instanceId: string; exportName: string; refusal?: string; planSha256?: string }>;
+  /** state-API cases: the same request repeated after another root joined the
+   *  reference. It must return the operation already prepared (criterion 6). */
+  repeat?: { status: number; newOperations: number; refusal?: string };
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -155,9 +158,20 @@ export async function replayReactNative(options: { workspace: string; cases: str
         const before = new Set(ops().map(o => o.id));
         const prepared = await call('POST', `react/${R}/native-state-api/${caseId}`);
         const created = ops().filter(o => !before.has(o.id));
-        results.push(prepared.status === 200 && created.length === 1
-          ? { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: hashed(entry, 'root', plan(created[0].dir)) }, children: [] }
-          : { caseId: entry, refusal: `${prepared.body?.reason ?? prepared.body?.error ?? 'created ' + created.length} after ${steps.join(' → ')}`, children: [] });
+        if (prepared.status !== 200 || created.length !== 1) {
+          results.push({ caseId: entry, refusal: `${prepared.body?.reason ?? prepared.body?.error ?? 'created ' + created.length} after ${steps.join(' → ')}`, children: [] });
+          continue;
+        }
+        const out: ReplayedCase = { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: hashed(entry, 'root', plan(created[0].dir)) }, children: [] };
+        // Another root joins the reference (this case's own), which can move the
+        // sorted inspection anchors; the repeated request must still resolve the
+        // sealed state-API record and return the prepared operation.
+        await call('POST', `react/${R}/native/${caseId}`);
+        const settled = new Set(ops().map(o => o.id));
+        const again = await call('POST', `react/${R}/native-state-api/${caseId}`);
+        out.repeat = { status: again.status, newOperations: ops().filter(o => !settled.has(o.id)).length,
+          ...(again.status !== 200 ? { refusal: String(again.body?.reason ?? again.body?.error ?? again.status) } : {}) };
+        results.push(out);
         continue;
       }
       const before = new Set(ops().map(o => o.id));

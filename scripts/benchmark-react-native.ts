@@ -73,11 +73,14 @@ export function judgeReact(cell: ReactCell, pin: ReactPin | null, replay: ReactR
   if (r.root?.planSha256 !== pin.root) return { ...base, status: 'red', reason: 'the native root plan changed; if intended, re-record the pin in a reviewed change and re-measure' };
   const moved = [...new Set([...Object.keys(pin.children), ...Object.keys(children)])].filter(k => canonicalJson(pin.children[k]) !== canonicalJson(children[k]));
   if (moved.length) return { ...base, status: 'red', reason: `a nested child plan changed (${moved.map(k => pin.children[k]?.exportName ?? children[k]?.exportName ?? k).join(', ')}); re-record and re-measure if intended` };
+  if (r.repeat && (r.repeat.status !== 200 || r.repeat.newOperations !== 0))
+    return { ...base, status: 'red', reason: `a repeated request ${r.repeat.status !== 200 ? 'refused (' + (r.repeat.refusal ?? r.repeat.status) + ')' : 'created ' + r.repeat.newOperations + ' more operation(s)'} instead of returning the prepared one` };
+  const repeated = r.repeat ? '; a repeat after another root joined returned the prepared operation' : '';
   const f = pin.fidelity;
   if (!f || f.planSetSha256 !== planSet(pin.root, pin.children))
-    return { ...base, status: 'stale', reason: 'plans match their pin, but no native comparison measured these exact plans yet' };
+    return { ...base, status: 'stale', reason: 'plans match their pin' + repeated + ', but no native comparison measured these exact plans yet' };
   const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'} — ${f.measuredOn}, ${f.measuredAt}`;
-  return f.pass ? { ...base, status: 'green', reason: 'plans match their pin; ' + summary, summary }
+  return f.pass ? { ...base, status: 'green', reason: 'plans match their pin' + repeated + '; ' + summary, summary }
     : { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
 }
 

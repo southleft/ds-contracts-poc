@@ -29,3 +29,16 @@ test('an observation-named draft replays equal across platforms; its content sti
   assert.notEqual(planHash(plan('2b72f17fbaa2049c', 44, '1111111111111111')), planHash(plan('2b72f17fbaa2049c', 44)));
   assert.match(normalizePlan(plan('2b72f17fbaa2049c', 44)), /InitialStates<observed-0>StateApi/);
 });
+
+test('a state-API repeat that refuses or adds an operation fails its cell', async () => {
+  const { judgeReact } = await import('./benchmark-react-native.js');
+  const cell = { id: 'c', row: 'Switch', criterion: 'C3', kind: 'react-to-native' as const, workspace: 'w', caseId: 'state-api:s', children: false, expect: 'pass' as const };
+  const pin = { id: 'c', version: 1 as const, kind: 'react-to-native' as const, referenceId: 'r', root: 'h', children: {}, recordedOn: 'x', fidelity: null };
+  const judged = (repeat?: { status: number; newOperations: number; refusal?: string }) =>
+    judgeReact(cell, pin, { referenceId: 'r', result: { caseId: 'state-api:s', root: { kind: 'k', planSha256: 'h' }, children: [], ...(repeat ? { repeat } : {}) } });
+  assert.equal(judged({ status: 200, newOperations: 0 }).status, 'stale');
+  assert.match(judged({ status: 200, newOperations: 0 }).reason, /repeat after another root joined returned the prepared operation/);
+  assert.equal(judged().status, 'stale');
+  assert.match(judged({ status: 200, newOperations: 1 }).reason, /created 1 more operation/);
+  assert.equal(judged({ status: 409, newOperations: 0, refusal: 'state-api-native-observation-required' }).status, 'red');
+});

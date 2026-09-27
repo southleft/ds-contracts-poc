@@ -11823,3 +11823,55 @@ the two designer-axis selector expectations in
 by deleting `core/react-state-preview.ts`, the `statePreview` /
 `bindings.code.statePreviews` schema fields and their readers, and
 `forcedStatePreview` in `core/propose-figma.ts`.
+
+## D.165 An operation's authentication may not re-enter its own snapshot
+
+**AGENT decision, 2026-09-27.** On the live app the shadcn Switch's
+native-state-api request refused (`state-api-native-observation-required`) while
+a GET of the same state-API record, seconds later in the same process,
+returned it complete. A diagnosis on copied private records found that the
+inspection anchor, and with it the state-API key, flipped between calls:
+
+- Selecting the inspection source for a case listed every native operation of
+  the reference (`react-reference.ts`, authored branch) and authenticated each
+  one before filtering.
+- Authenticating an existing state-API draft reads its state-API evidence,
+  which selects the inspection source again. The loop recursed until
+  "Maximum call stack size exceeded".
+- `get()` caught every exception as a stale source, so whichever operation was
+  mid-authentication when the stack ran out read as not current. Which roots
+  survived depended on stack headroom, so the anchor, the first current root,
+  changed between identical requests.
+- The benchmark replay passed because its `private/` starts empty: no
+  state-API draft exists until its last step.
+
+Rules:
+
+- The authored listing filters by operation header before authenticating
+  (`listReact(referenceId, 'authored')`), so selecting a source never
+  authenticates a state-API draft.
+- `get()` refuses a re-entrant authentication by name
+  (`native-operation-authentication-reentrant`) and never reads a stack
+  overflow (`RangeError`) as a stale source; it propagates.
+- The benchmark replay now repeats each state-API request after another root
+  of the reference is prepared, and fails the cell if the repeat refuses or
+  creates another operation.
+
+Measured through the app on the live private state: after re-observing the
+Switch, native-state-api created one operation (`5cfe5ac0`) whose plan equals
+the benchmark pin, and a repeat returned the same operation (77 operations
+before and after). Three listings read it as current. Sync Runner created it
+in Evaluations and the independent readback returned
+`component-structure-observed` with 0 problems. Its image score is not
+recorded: the Switch root is 32 × 18.390625 px, and the committed
+source-native instrument refuses a fractional root box by design. Scoring it
+needs an owner-approved framing rule for fractional boxes, which this change
+does not make. The live callback re-observation of this case still ends
+`callback-observation-incomplete`, while the replay from an empty `private/`
+completes it; that remains open.
+
+Tests: `source-reference/native-operation-jobs.test.ts` (re-entry refused by
+name, overflow propagates; both fail against the previous `get()`),
+`scripts/react-native-replay.test.ts` (a repeat that refuses or adds an
+operation fails the cell). Reverse by restoring the unfiltered listing and the
+catch-all in `get()`, and removing the repeat step.
