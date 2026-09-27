@@ -15,7 +15,7 @@
  * on every run by construction); everything else is hashed.
  */
 import { createHash } from 'node:crypto';
-import { createServer } from 'node:http';
+import { createServer, request } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -100,12 +100,22 @@ export async function replayReactNative(options: { workspace: string; cases: str
   const server = createServer((req, res) => { void service.handle(req, res); });
   await new Promise<void>(r => server.listen(0, '127.0.0.1', () => r()));
   const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/source-reference/`;
-  const call = async (method: 'GET' | 'POST', route: string) => {
-    const res = await fetch(base + route, { method });
-    const text = await res.text();
-    let body: any; try { body = JSON.parse(text); } catch { body = { error: text }; }
-    return { status: res.status, body };
-  };
+  // node:http, not fetch: fetch's 300 s headers timeout cut off long native
+  // preparations on CI ("fetch failed"); the service owns its own refusals.
+  const call = (method: 'GET' | 'POST', route: string) => new Promise<{ status: number; body: any }>((resolve, reject) => {
+    const req = request(base + route, { method }, res => {
+      const chunks: Buffer[] = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => {
+        const text = Buffer.concat(chunks).toString('utf8');
+        let body: any; try { body = JSON.parse(text); } catch { body = { error: text }; }
+        resolve({ status: res.statusCode ?? 0, body });
+      });
+      res.on('error', reject);
+    });
+    req.on('error', error => reject(Error(`react-native-replay-request-failed: ${method} ${route}: ${error.message}`)));
+    req.end();
+  });
   const ops = () => {
     const dir = path.join(tmp, 'private', 'source-native-app', 'operations');
     return existsSync(dir) ? readdirSync(dir).map(id => ({ id, dir: path.join(dir, id) })) : [];
