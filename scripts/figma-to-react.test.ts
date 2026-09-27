@@ -36,3 +36,11 @@ test('a recorded request that differs refuses before anything is packaged', asyn
   execFileSync('node', ['-e', `require('fs').writeFileSync(${JSON.stringify(expected)}, JSON.stringify({ rootId: 'other', contracts: [], tokens: {}, icons: [] }))`]);
   await assert.rejects(figmaToReact(dump, path.join(out, 'run'), expected), /figma-to-react-request-differs: rootId, contracts/);
 });
+
+test('a relative --out (as the preview page shows) packages into that directory', async t => {
+  const cwd = mkdtempSync(path.join(tmpdir(), 'figma-to-react-cwd-')), before = process.cwd();
+  t.after(() => { process.chdir(before); rmSync(cwd, { recursive: true, force: true }); });
+  process.chdir(cwd);
+  const result = await figmaToReact(dump, './out');
+  assert.equal(readdirSync(path.join(cwd, 'out')).includes(result.tarball), true);
+});

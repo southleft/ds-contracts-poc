@@ -42,7 +42,8 @@ function installSessionStorage() {
 
 /** A Figma URL through the app's own URL import (closure on), token from the
  *  environment only. The mapped dump is kept beside the output. */
-export async function dumpFromFigmaUrl(url: string, outDir: string) {
+export async function dumpFromFigmaUrl(url: string, outDirArg: string) {
+  const outDir = path.resolve(outDirArg);
   const token = process.env.FIGMA_TOKEN;
   if (!token) throw Error('figma-to-react-token-missing: set FIGMA_TOKEN (a Figma personal access token with file read access); it is read from the environment only');
   const { importFigmaUrl } = await import('../playground/src/engine/figma-url-import.js');
@@ -53,8 +54,11 @@ export async function dumpFromFigmaUrl(url: string, outDir: string) {
   return { dump, refusals };
 }
 
-export async function figmaToReact(dumpPath: string, outDir: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
+export async function figmaToReact(dumpPath: string, outDirArg: string, expectRequest?: string, source: 'json' | 'figma' = 'json',
   options: { packageName?: string } = {}) {
+  // The packager runs npm from inside the package directory, so a relative
+  // --out (as the preview page shows: ./out) must be anchored here first.
+  const outDir = path.resolve(outDirArg);
   const dump = JSON.parse(readFileSync(dumpPath, 'utf8'));
   installSessionStorage();
   const server = await createServer({
