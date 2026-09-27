@@ -41,6 +41,11 @@ export interface DumpGridTrack {
   px?: number;
   fr?: number;
   fit?: true;
+  /** REST only (measured, docs/23 §D.166): Figma's CSS spelling prints an
+   *  integer FIXED track as `36px`, but a fractional FIXED track AND an
+   *  unoccupied HUG track both as a two-decimal resolved size (`12.50px`,
+   *  `1.00px`). Such a `px` is either; the plugin dump never sets this. */
+  resolved?: true;
 }
 
 /** GRID layout facts (dump v1.17, additive — the A2 layout grammar's

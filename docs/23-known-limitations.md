@@ -11880,3 +11880,45 @@ name, overflow propagates; both fail against the previous `get()`),
 `scripts/react-native-replay.test.ts` (a repeat that refuses or adds an
 operation fails the cell). Reverse by restoring the unfiltered listing and the
 catch-all in `get()`, and removing the repeat step.
+
+## D.166 A REST two-decimal grid track is a fractional fixed track or an empty hug
+
+**AGENT decision, 2026-09-27.** Importing the natively created shadcn Alert by
+Figma URL refused with `grid-flow-rows-readback-mismatch`. Its root content grid
+records the recipe `autoRows: HUG`, but REST reported the row as `' 1.00px'`,
+which the mapper read as a fixed 1 px track. A probe in Scratch
+(`REST grid track probe / 2026-09-27`; REST responses in
+`private/v1-scoreboard/rest-grid-probe/`) measured Figma's track spelling, which
+REST returns byte-for-byte from the plugin's `gridRowSizingCSS`:
+
+| Drawn row | REST `gridRowsSizing` |
+| --- | --- |
+| FIXED 36 | `36px` |
+| FIXED 12.5, 14.25, 7.1 | `12.50px`, `14.25px`, `7.10px` |
+| HUG with an item | `fit-content(100%)` |
+| HUG without an item | its resolved size: `50.00px`, `14.00px`, `1.00px` |
+| HUG without an item in a fixed-height frame | `minmax(0,1fr)` |
+
+An integer fixed track never prints decimals, but a fractional fixed track and
+an unoccupied HUG track print the same two-decimal spelling. The REST mapper
+now marks such tracks `resolved`, deciding nothing. Recipe readback accepts a
+recorded HUG row against a resolved observation only where no drawn item can
+occupy it: a root content grid's carrier, which `readRootContent` already
+requires to be empty, or rows past the drawn items. Every other comparison is
+unchanged, and an empty HUG spelled `minmax(0,1fr)` still refuses. Without a
+recipe, a designer grid's resolved tracks are carried as fixed px as before,
+but now with the note `grid-track-resolved-size-ambiguous` instead of silently.
+
+The native Alert's root set now returns to React by URL. The consumer check
+also mounts cases through the component's declared API: code props and
+`bindings.code.values`, where the canonical `null` becomes JS `null`. Before,
+it crashed with `CODE_VALUE_UNSUPPORTED`. The returned root is not yet scored.
+Its contract declares a fill-width root (`width: 100%`), and the harness mounts
+every case at `fit-content`, so React draws 34 × 26 px against Figma's
+100 × 27 px preview. Rendering at the preview width would change the
+measurement environment, so it is left to the owner. The composed return (the
+root with its caller title and description) is not read by the Send tab, which
+reads component sets. Tests: `core/grid-flow-rows.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by removing the `resolved`
+mark in `extract/figma/rest/map.ts`, the `drawn` parameter of
+`readGridFlowRows`, and `mountProps`.

@@ -6881,9 +6881,20 @@ function invertGridLayout(
   const toTrack = (t: NonNullable<typeof g.rows>[number]): Record<string, unknown> =>
     t.fit === true ? { fit: true } : t.px !== undefined ? { px: t.px } : { fr: t.fr as number };
   const out: Record<string, unknown> = { display: 'grid' };
+  // The readback describes the drawn frame. A root content grid is lifted
+  // from its slot's 'Content layout' carrier, which readRootContent refuses
+  // unless it is drawn empty; any other grid counts its own drawn items.
+  const drawnGrid = m.occ.find((o) => o.node.layout !== undefined)!.node;
+  const drawnItems = m.rootContent ? 0 : (drawnGrid.children ?? []).filter((ch) => ch.abs === undefined).length;
   const flowRows = g.flowRows === undefined ? undefined : readGridFlowRows(g.flowRows, g.columns.length,
     m.children.filter(ch => !ch.occ.some(o => o.node.abs !== undefined)).length,
-    g.rows.map(t => t.fit ? { type: 'HUG', value: 1 } : t.px !== undefined ? { type: 'FIXED', value: t.px } : { type: 'FLEX', value: t.fr! }));
+    g.rows.map(t => t.fit ? { type: 'HUG', value: 1 } : t.px !== undefined ? { type: 'FIXED', value: t.px, ...(t.resolved ? { resolved: true as const } : {}) } : { type: 'FLEX', value: t.fr! }),
+    drawnItems);
+  // docs/23 §D.166: without a recorded recipe, a REST two-decimal track cannot
+  // be told apart from an unoccupied HUG track; it is carried as read, named.
+  const resolvedTracks = [...g.rows, ...g.columns].filter(t => t.resolved).map(t => `${t.px}px`);
+  if (!flowRows && resolvedTracks.length)
+    ctx.notes.push(`${where}: grid-track-resolved-size-ambiguous — REST prints a fractional fixed track and an unoccupied HUG track the same way (${[...new Set(resolvedTracks)].join(', ')}); carried as fixed px, which is wrong if the designer's track hugs; review`);
   if (flowRows) {
     if (!c.flow) throw Error('grid-flow-rows-requires-row-flow');
     const sourceTrack = (t: FlowTrack) => t.type === 'HUG' ? { fit: true } : t.type === 'FIXED' ? { px: t.value } : { fr: t.value };

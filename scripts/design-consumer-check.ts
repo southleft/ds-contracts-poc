@@ -117,7 +117,7 @@ const run = (cmd: string, args: string[], cwd: string) => {
 /** How a state cell is reached before its screenshot. `none` = the rest state
  *  (and `disabled`, which is a prop, not an interaction). */
 export type Interaction = 'none' | Exclude<InteractionState, 'default' | 'disabled'>;
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string;
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; mount?: Record<string, unknown>; hasText: boolean; textProp?: string;
   interaction: Interaction; /** the contract state this cell draws, when it draws one */ state?: Exclude<InteractionState, 'default'> }
 
 /** Array props (`arrayOf`) take the design's own repeat sample from the
@@ -138,6 +138,19 @@ function arraySamples(contract: any): Record<string, unknown[]> {
  *  wrong variant, so the key is typed by the prop it feeds. */
 export function variantPropValue(prop: { type?: unknown }, key: string): unknown {
   return prop.type === 'boolean' && (key === 'true' || key === 'false') ? key === 'true' : key;
+}
+/** A case as the component's own API receives it: contract prop names become
+ *  their code props and canonical values their declared code values
+ *  (bindings.code.values, e.g. canonical "null" → null). Case keys and the
+ *  receipt keep the canonical spelling. */
+export function mountProps(contract: { props: any[] }, props: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [name, value] of Object.entries(props)) {
+    const code = contract.props.find(p => p.name === name)?.bindings?.code;
+    const values = code?.values as Record<string, unknown> | undefined;
+    out[code?.prop ?? name] = values && typeof value === 'string' && Object.hasOwn(values, value) ? values[value] : value;
+  }
+  return out;
 }
 const variantValues = (prop: any): unknown[] =>
   prop.type === 'boolean' ? Object.keys(prop.bindings?.figma?.values ?? {}).map(key => variantPropValue(prop, key)) : prop.type?.enum ?? [];
@@ -361,7 +374,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
   writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:#fff}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
-  writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, textProp: c.textProp ?? null }))));
+  writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, mount: c.mount ?? c.props, textProp: c.textProp ?? null }))));
   if (fonts.length) writeConsumerFonts(path.join(consumer, 'fonts'), fonts);
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -374,7 +387,7 @@ function App() {
   window.__consumer = { setText, setVariantOverride };
   return <div>
     {CASES.map(cell => {
-      const props = { ...cell.props };
+      const props = { ...cell.mount };
       if (text !== null && cell.textProp) props[cell.textProp] = text;
       if (variantOverride) Object.assign(props, variantOverride);
       return <div data-cell={cell.key} key={cell.key} style={{ display: 'block', width: 'fit-content', margin: 8, padding: 4, minWidth: 1, minHeight: 1 }}><${component} {...props} /></div>;
@@ -441,6 +454,7 @@ async function main() {
   const fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
+  for (const c of cases) c.mount = mountProps(contract, c.props);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
   const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
   const consumerFrames: Record<string, ConsumerFrame> = {};
@@ -694,7 +708,7 @@ async function main() {
         const styleOf = async (key: string) => page.locator(`[data-cell="${key}"] > *`).first().evaluate(variantPaintOf);
         const baseline = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         const target = values.find(v => cases.some(c => c.props[prop.name] !== v)) ?? values[0];
-        await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop.name, target] as const);
+        await page.evaluate(override => (window as any).__consumer.setVariantOverride(override), mountProps(contract, { [prop.name]: target }));
         const switched = Object.fromEntries(await Promise.all(cases.map(async c => [c.key, await styleOf(c.key)])));
         await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
