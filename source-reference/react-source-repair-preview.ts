@@ -11,9 +11,9 @@ import {readReactOwnershipProgram} from './react-ownership-run.js';
 import {stageReactUtilitySourceEdit} from './react-source-repair-stage.js';
 import {observeReactSourceRepairStates,verifyReactSourceRepairBaseline,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
 import {verifyReactSourceRepairCohort} from './react-source-repair-cohort.js';
-import type {planReactOpacitySourceRepair} from './react-design-source-repair.js';
+import type {ReactDesignSourceRepairPlan} from './react-design-source-repair.js';
 
-type Plan=ReturnType<typeof planReactOpacitySourceRepair>;
+type Plan=ReactDesignSourceRepairPlan;
 type Comparison=ReturnType<typeof verifyReactSourceRepairStates>;
 export type ReactSourceRepairInput={reference:ReactReference;program:ReactSourceProgram;recorded:RepairStateObservation;
   caseId:string;variants:Array<{observation:string;variant:string}>;plan:Plan;
@@ -115,7 +115,12 @@ export function createReactSourceRepairPreviews(repo:string,
               verified.set(index,{reference,program,stage});
             }catch(error){row.problem=reason(error);}
           }
-          assertInput();const selected=state.candidates.filter(c=>c.status==='verified');
+          assertInput();const verifiedRows=state.candidates.filter(c=>c.status==='verified');
+          // A named utility that renders the edit is preferred to the arbitrary
+          // spelling of the same shadow; equals of one rank stay ambiguous (§D.177).
+          const rank=(index:number)=>{const c=input.plan.candidates[index];return c&&'rank' in c&&c.rank!==undefined?c.rank:0;};
+          const best=Math.min(...verifiedRows.map(c=>rank(c.index)));
+          const selected=verifiedRows.filter(c=>rank(c.index)===best);
           if(selected.length!==1)throw Error(selected.length?'react-source-repair-preview-ambiguous-effect':'react-source-repair-preview-no-matching-effect');
           const index=selected[0].index,proposed=verified.get(index)!;
           state.step='Checking every configured caller and its recorded finite states';

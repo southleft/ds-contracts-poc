@@ -12,7 +12,8 @@ import {captureValidatedTree} from './capture.js';
 import {watchSourceFailures} from './observe.js';
 import {observeReactInitialStates,planReactInitialStates} from './react-initial-state.js';
 import type {ReactPropertySnapshot} from './react-root-variants.js';
-import type {planReactOpacitySourceRepair} from './react-design-source-repair.js';
+import {isShadowSourceRepair,type ReactDesignSourceRepairPlan} from './react-design-source-repair.js';
+import {repairShadowShows} from './react-repair-shadow.js';
 import {withPaintedTextFonts} from './text-fonts.js';
 import {verifiedSvgViewports,type SvgViewportEvidence} from './svg-viewports.js';
 import {hasUnpaintedPseudoBoxes,verifiedPseudoBoxes,type PseudoBoxEvidence} from './pseudo-boxes.js';
@@ -21,7 +22,7 @@ import {hasGridContainer,verifiedGridConstraints} from './grid-constraints.js';
 type Observation=Awaited<ReturnType<typeof observeReactInitialStates>>;
 type RepairSnapshot=ReactPropertySnapshot&{svg:SvgViewportEvidence;pseudoBoxes?:PseudoBoxEvidence};
 export type RepairStateObservation={observation:Observation;snapshots:Record<string,RepairSnapshot>};
-type RepairPlan=ReturnType<typeof planReactOpacitySourceRepair>;
+type RepairPlan=ReactDesignSourceRepairPlan;
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
 const fail=(reason:string):never=>{throw Error('react-source-repair-observation-'+reason);};
 
@@ -155,10 +156,18 @@ export function verifyReactSourceRepairStates(before:RepairStateObservation,afte
     if(!root||!actualRoot)fail('root-unavailable');
     root!.classes=root!.classes.map(c=>c===candidate.edit.before?candidate.edit.after:c);
     const change=expected.get(variant.variant),beforeOpacity=Number(root!.style.opacity),afterOpacity=Number(actualRoot!.style.opacity);
-    if(change) {
+    if(isShadowSourceRepair(plan)) {
+      // Both renders are read by the parser that compiled the canvas (§D.177).
+      if(change) {
+        if(!repairShadowShows(root!.style['box-shadow'],change.before)||!repairShadowShows(actualRoot!.style['box-shadow'],change.after))
+          fail('shadow-mismatch:'+variant.observation);
+        root!.style['box-shadow']=actualRoot!.style['box-shadow'];
+      }
+    } else if(change) {
+      const before=change.before as number,after=change.after as number;
       if(!Number.isFinite(beforeOpacity)||!Number.isFinite(afterOpacity)||
-          !(beforeOpacity===change.before||Math.fround(beforeOpacity)===Math.fround(change.before))||
-          !(afterOpacity===change.after||Math.fround(afterOpacity)===Math.fround(change.after)))fail('opacity-mismatch:'+variant.observation);
+          !(beforeOpacity===before||Math.fround(beforeOpacity)===Math.fround(before))||
+          !(afterOpacity===after||Math.fround(afterOpacity)===Math.fround(after)))fail('opacity-mismatch:'+variant.observation);
       root!.style.opacity=actualRoot!.style.opacity;
     }
     if(!same(expectedTree,now.tree))fail('other-tree-facts-changed:'+variant.observation);
@@ -169,7 +178,9 @@ export function verifyReactSourceRepairStates(before:RepairStateObservation,afte
       if(!same((old as any)[key],(now as any)[key]))fail(key+'-changed:'+variant.observation);
     if(!change&&old.image!==now.image)fail('unchanged-state-image-changed:'+variant.observation);
     rows.push({observation:variant.observation,variant:variant.variant,changed:!!change,
-      beforeImage:old.image,afterImage:now.image,beforeOpacity,afterOpacity});
+      beforeImage:old.image,afterImage:now.image,beforeOpacity,afterOpacity,
+      ...(isShadowSourceRepair(plan)?{beforeShadow:String(old.tree&&flatten(old.tree).find(r=>r.path===owner!.roots[0])?.node.style['box-shadow']),
+        afterShadow:String(actualRoot!.style['box-shadow'])}:{})});
   }
   return {qualification:'finite-source-effect-verified' as const,rows,
     limitations:['recorded-caller-context-and-finite-domain-only','source-write-not-authorized']};

@@ -15,6 +15,8 @@ import {observeTextFonts,withPaintedTextFonts} from './text-fonts.js';
 import {observeReactInitialStates} from './react-initial-state.js';
 import {restoreRepairedOwnership,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
 import {observeCheckboxBehavior,checkedToggleRole} from './control-behavior.js';
+import {repairShadowShows} from './react-repair-shadow.js';
+import {isShadowSourceRepair} from './react-design-source-repair.js';
 import type {SourceProfile} from './check.js';
 import type {ReactSourceRepairInput} from './react-source-repair-preview.js';
 
@@ -56,7 +58,7 @@ function utilityValue(candidate:Candidate,plan:Plan) {
   const match=/opacity-(\d+(?:\.\d+)?|\[(?:\d*\.)?\d+\])$/.exec(candidate.edit.after);
   if(!match)fail('utility-value-unavailable');
   const value=match![1].startsWith('[')?Number(match![1].slice(1,-1)):Number(match![1])/100;
-  if(!Number.isFinite(value)||value<0||value>1||!plan.changes.length||!plan.changes.every(c=>exact(c.after,value)))fail('native-effect-mismatch');
+  if(!Number.isFinite(value)||value<0||value>1||!plan.changes.length||!plan.changes.every(c=>exact(c.after as number,value)))fail('native-effect-mismatch');
   return value;
 }
 
@@ -68,8 +70,11 @@ export function repairCallerProfile(profile:SourceProfile,before:RepairCallerFra
   const result=structuredClone(profile),owners=before.ownership.components.filter(o=>target(o,candidate)&&o.roots.includes(''));
   if(owners.length>1)fail('profile-root-ambiguous');
   const effect=owners[0]&&callerEffect(owners[0],effectTable(recorded,variants,plan));
+  // A witness that pins a shadow would need Chromium's own spelling of the
+  // edit; none does today, and one that does refuses rather than guesses.
+  if(isShadowSourceRepair(plan)){if(effect&&result.requiredStyles?.['box-shadow']!==undefined)fail('witness-shadow-unqualified');return result;}
   if(effect&&result.requiredStyles?.opacity!==undefined){
-    if(!exact(Number(result.requiredStyles.opacity),effect.before))fail('original-witness-mismatch');
+    if(!exact(Number(result.requiredStyles.opacity),effect.before as number))fail('original-witness-mismatch');
     result.requiredStyles.opacity=String(utilityValue(candidate,plan));
   }
   return result;
@@ -82,7 +87,7 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
   const candidate=plan.candidates[index];if(!candidate)fail('candidate-unavailable');
   if(!caseIds.length||caseIds.length>64||new Set(caseIds).size!==caseIds.length||
       !same(before.map(c=>c.caseId),caseIds)||!same(after.map(c=>c.caseId),caseIds))fail('case-inventory-changed');
-  const table=effectTable(recorded,variants,plan),value=utilityValue(candidate,plan);
+  const table=effectTable(recorded,variants,plan),value=isShadowSourceRepair(plan)?undefined:utilityValue(candidate,plan);
   let instances=0;
   const cases=before.map((old,caseIndex)=>{
     const now=after[caseIndex],tree=structuredClone(old.captured.tree);
@@ -96,7 +101,12 @@ export function verifyRepairCallerFrames(caseIds:readonly string[],before:Repair
       if(!node||node.classes.filter(c=>c===candidate.edit.before).length!==1)fail('root-class-unavailable');
       node!.classes=node!.classes.map(c=>c===candidate.edit.before?candidate.edit.after:c);
       const effect=callerEffect(owner,table);
-      if(effect){if(!exact(Number(node!.style.opacity),effect.before))fail('baseline-effect-mismatch');node!.style.opacity=String(value);changedRoots++;}
+      if(effect&&isShadowSourceRepair(plan)){
+        const shown=flatten(now.captured.tree!).find(r=>r.path===owner.roots[0])?.node;
+        if(!repairShadowShows(node!.style['box-shadow'],effect.before)||!shown||!repairShadowShows(shown.style['box-shadow'],effect.after))
+          fail('baseline-effect-mismatch');
+        node!.style['box-shadow']=shown!.style['box-shadow'];changedRoots++;
+      } else if(effect){if(!exact(Number(node!.style.opacity),effect.before as number))fail('baseline-effect-mismatch');node!.style.opacity=String(value);changedRoots++;}
     }
     if(!same(tree,now.captured.tree))fail('other-tree-facts-changed:'+old.caseId);
     const ownership=restoreRepairedOwnership(old.ownership,now.ownership,candidate,targets.map(owner=>({id:owner.id,root:owner.roots[0]})));
