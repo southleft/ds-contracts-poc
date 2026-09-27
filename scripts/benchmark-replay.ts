@@ -29,6 +29,9 @@
  *                              attach a design:consumer:check receipt; refused
  *                              unless it scored the pinned generated files
  *   --json <file>              also write the verdicts as JSON
+ *   --plans <dir>              also write every replayed React → Figma plan,
+ *                              normalized, so a changed hash can be read field
+ *                              by field (CI uploads it beside the verdicts)
  */
 import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
@@ -165,7 +168,7 @@ export function judge(cell: Cell, pin: Pin | null, replay: Replay | Error): Verd
   return { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
 }
 
-export async function check(root = repoRoot, only?: Set<string>): Promise<Verdict[]> {
+export async function check(root = repoRoot, only?: Set<string>, plans?: string): Promise<Verdict[]> {
   const verdicts: Verdict[] = [];
   for (const cell of readCells(root)) {
     if (only && !only.has(cell.id)) continue;
@@ -175,7 +178,7 @@ export async function check(root = repoRoot, only?: Set<string>): Promise<Verdic
   }
   const react = readReactCells(root).filter(c => !only || only.has(c.id));
   if (react.length) {
-    const replays = await replayReactCells(root, react);
+    const replays = await replayReactCells(root, react, plans);
     for (const cell of react) verdicts.push(judgeReact(cell, readReactPin(root, cell.id), replays.get(cell.id)!));
   }
   return verdicts;
@@ -258,7 +261,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       console.log(`attached ${attachId}: ${v.status} — ${v.reason}`);
       return;
     }
-    const verdicts = await check(repoRoot);
+    const plans = flag('--plans');
+    const verdicts = await check(repoRoot, undefined, plans ? path.resolve(plans) : undefined);
     const icon: Record<Status, string> = { green: '✔', partial: '◐', 'known-failure': '▲', stale: '◌', red: '✖' };
     console.log('BENCHMARK — every pinned cell replayed from its frozen input\n');
     for (const v of verdicts) console.log(`${icon[v.status]} ${v.status.padEnd(13)} ${v.row} · ${v.criterion}\n    ${v.reason}`);

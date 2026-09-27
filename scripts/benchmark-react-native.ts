@@ -38,14 +38,14 @@ export const planSet = (root: string | null, children: ReactPin['children']) =>
 export type ReactReplay = { referenceId: string; result: ReplayedCase };
 
 /** One service run per workspace for every case the cells ask for. */
-export async function replayReactCells(root: string, cells: ReactCell[]): Promise<Map<string, ReactReplay | Error>> {
+export async function replayReactCells(root: string, cells: ReactCell[], plans?: string): Promise<Map<string, ReactReplay | Error>> {
   const out = new Map<string, ReactReplay | Error>();
   const byWorkspace = new Map<string, ReactCell[]>();
   for (const c of cells) byWorkspace.set(c.workspace, [...(byWorkspace.get(c.workspace) ?? []), c]);
   for (const [workspace, group] of byWorkspace) {
     try {
       const run = await replayReactNative({ workspace: path.join(root, workspace), cases: [...new Set(group.map(c => c.caseId))],
-        children: group.some(c => c.children) });
+        children: group.some(c => c.children), ...(plans ? { plans } : {}) });
       for (const c of group) {
         const result = run.cases.find(r => r.caseId === c.caseId);
         out.set(c.id, result ? { referenceId: run.referenceId, result } : Error('case not replayed: ' + c.caseId));

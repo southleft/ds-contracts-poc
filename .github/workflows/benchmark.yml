@@ -60,12 +60,14 @@ jobs:
         run: npm run benchmark:doc:check
 
       - name: benchmark:check (replay every pinned cell)
-        run: npm run benchmark:check -- --json benchmark-verdicts.json
+        run: npm run benchmark:check -- --json benchmark-verdicts.json --plans benchmark-plans
 
-      - name: keep the verdicts
+      - name: keep the verdicts and the replayed plans
         if: ${{ always() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: benchmark-verdicts
-          path: benchmark-verdicts.json
+          path: |
+            benchmark-verdicts.json
+            benchmark-plans/
           if-no-files-found: ignore

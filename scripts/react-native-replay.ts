@@ -17,7 +17,7 @@
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, symlinkSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,9 +58,21 @@ export interface ReplayedCase {
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+const safeName = (s: string) => s.replace(/[^A-Za-z0-9._-]+/g, '_');
 
-export async function replayReactNative(options: { workspace: string; cases: string[]; children?: boolean; keep?: string }) {
+export async function replayReactNative(options: { workspace: string; cases: string[]; children?: boolean; keep?: string;
+  /** Also write every hashed plan, normalized, to <plans>/<case>/<root|instance>.json — the bytes a
+   *  platform or run difference can be read from field by field. */
+  plans?: string }) {
   const tmp = options.keep ?? mkdtempSync(path.join(tmpdir(), 'react-native-replay-'));
+  const hashed = (caseId: string, name: string, planJson: unknown) => {
+    if (options.plans) {
+      const dir = path.join(options.plans, safeName(caseId));
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(path.join(dir, safeName(name) + '.json'), normalizePlan(planJson) + '\n');
+    }
+    return planHash(planJson);
+  };
   if (!existsSync(path.join(tmp, 'private'))) {
     for (const entry of readdirSync(repoRoot)) {
       if (entry === 'private' || entry === '.git') continue;
@@ -131,7 +143,7 @@ export async function replayReactNative(options: { workspace: string; cases: str
         const prepared = await call('POST', `react/${R}/native-state-api/${caseId}`);
         const created = ops().filter(o => !before.has(o.id));
         results.push(prepared.status === 200 && created.length === 1
-          ? { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: planHash(plan(created[0].dir)) }, children: [] }
+          ? { caseId: entry, root: { kind: plan(created[0].dir).kind, planSha256: hashed(entry, 'root', plan(created[0].dir)) }, children: [] }
           : { caseId: entry, refusal: `${prepared.body?.reason ?? prepared.body?.error ?? 'created ' + created.length} after ${steps.join(' → ')}`, children: [] });
         continue;
       }
@@ -142,7 +154,7 @@ export async function replayReactNative(options: { workspace: string; cases: str
         results.push({ caseId, refusal: prepared.body?.reason ?? prepared.body?.error ?? `created ${created.length} operation(s)`, children: [] });
         continue;
       }
-      const root = created[0], rootPlan = plan(root.dir), out: ReplayedCase = { caseId, root: { kind: rootPlan.kind, planSha256: planHash(rootPlan) }, children: [] };
+      const root = created[0], rootPlan = plan(root.dir), out: ReplayedCase = { caseId, root: { kind: rootPlan.kind, planSha256: hashed(caseId, 'root', rootPlan) }, children: [] };
       if (options.children) {
         await call('POST', `react/${R}/native-operation/${root.id}/content`);
         let composition: any;
@@ -157,7 +169,7 @@ export async function replayReactNative(options: { workspace: string; cases: str
           const made = await call('POST', `react/${R}/native-operation/${root.id}/child/${child.instanceId}`);
           const fresh = ops().filter(o => !had.has(o.id));
           out.children.push(made.status === 200 && fresh.length === 1
-            ? { instanceId: child.instanceId, exportName: child.exportName, planSha256: planHash(plan(fresh[0].dir)) }
+            ? { instanceId: child.instanceId, exportName: child.exportName, planSha256: hashed(caseId, child.instanceId, plan(fresh[0].dir)) }
             : { instanceId: child.instanceId, exportName: child.exportName, refusal: made.body?.reason ?? made.body?.error ?? `created ${fresh.length}` });
         }
         if (composition?.problem) out.refusal = 'composition: ' + JSON.stringify(composition.problem).slice(0, 300);
