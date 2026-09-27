@@ -193,7 +193,7 @@ export function createReactCallbackInspectionStore(
       save("request.json", value.request);
       save("program.json", program);
       const promise = (async () => {
-        let browser;
+        let browser, sealable = false;
         try {
           const observed = await buildReactOwnershipReference(
             sourceRoot,
@@ -300,7 +300,7 @@ export function createReactCallbackInspectionStore(
             state.sourceUnchanged = true;
             if (state.observation.problems.length)
               throw Error("callback-observation-incomplete");
-            state.phase = "complete";
+            sealable = true;
           } finally {
             failures.dispose();
           }
@@ -312,6 +312,8 @@ export function createReactCallbackInspectionStore(
         } finally {
           try {
             await browser?.close();
+            // Complete only once sealed: no await from here until the saved report.
+            if (sealable) state.phase = "complete";
             save("report.json", state);
             save("integrity.json", {
               version: 1,

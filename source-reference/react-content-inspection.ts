@@ -40,7 +40,7 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
   const save = (name: string, value: unknown) => writeFileSync(path.join(dir, name), JSON.stringify(value, null, 2) + '\n', { flag: 'wx' });
   save('request.json', { operationId, request, originalTreeRevision: revisionOf(original.captured.tree) });
   const promise = (async () => {
-    let browser: Browser | undefined;
+    let browser: Browser | undefined, compiled = false;
     try {
       browser = await chromium.launch();
       const context = await browser.newContext({ viewport: { width: 900, height: 600 }, deviceScaleFactor: 1, colorScheme: 'light' });
@@ -76,12 +76,15 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         state.gridConstraints = grids;
         state.labelAssociations = labels;
         state.sourceUnchanged = true;
-        state.phase = 'complete';
+        compiled = true;
       } finally { failures.dispose(); }
     } catch (error) {
       state.phase = 'failed'; state.problems = [error instanceof Error ? error.message : 'react-content-inspection-failed'];
     } finally {
       await browser?.close();
+      // Complete only once sealed: no await from here until `persisted`, so a
+      // reader never sees a complete inspection whose evidence is not on disk.
+      if (compiled) state.phase = 'complete';
       save('report.json', state);
       save('integrity.json', { version: 1, files: inventoryEvidence(dir) });
       const latest = path.join(dir, '..', 'latest.json');
