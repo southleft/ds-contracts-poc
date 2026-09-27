@@ -12112,3 +12112,46 @@ This measures the Badge's root without its label. The labelled comparison
 exists only as an instance frame, which the Send tab does not read (D.166).
 Reverse by removing the cell.
 
+## D.172 A wrapper and the dependency it renders share one source identity
+
+**AGENT decision, 2026-09-27.** Re-running the D.73 opacity cycle on the gated
+Switch operation (`5cfe5ac0`) on the current runtime refused at
+`adopt-source` with `react-source-succession-identity-unavailable`. Source
+identity required exactly one component to own the root element. Ownership
+now also traces the dependencies a component renders, and the shadcn `Switch`
+and Radix's `Switch.Root`, its child, both own that element. Every update to a
+wrapper component like this was blocked, whatever the edit.
+
+The identity is now the one outermost root owner (`outermostRootOwners`, the
+rule the callback inspection already uses). A single owner resolves exactly as
+before. Two unrelated owners still refuse.
+
+Measured through the application in Evaluations, all on the current runtime:
+1. **Forward.** `data-disabled:opacity-50` became `40` in the family
+   workspace, with a deterministic stylesheet rebuild (one added rule) and the
+   declared witness hashes and expectation. Fresh initial-state and state-API
+   experiments completed, the operation adopted the new source, and the plan
+   proposed three disabled roots and one owned variable, 0.5 → 0.4. Preflight,
+   one guarded write and an independent readback left all four at exactly
+   `Math.fround(0.4)`. A repeat review wrote no file.
+2. **Conflict and retry.** The workspace files were restored byte-for-byte
+   (reference `77c5af2d` again) and the source was adopted again, proposing
+   0.4 → 0.5 on the same objects. A bounded native edit then set one root to
+   0.45. Preflight refused with `native-update-opacity-conflict:251:5641` and
+   issued no write; the edit read back untouched. After the edit was restored,
+   **Inspect update again** re-ran preflight, wrote once and read back all four
+   values at 0.5. A repeat review wrote no file.
+3. **Restoration.** In the decoded readback images, exactly the three disabled
+   variants differ in the 0.4 state, and all nine are pixel-identical to the
+   operation's creation readback after the reverse.
+
+The Switch callback experiment still reports `callback-observation-incomplete`
+on both source revisions, as it has on every run since 2026-09-26. The update
+follows the state-API experiment, which completes. This cycle qualifies a
+bounded source → native opacity update with conflict refusal, retry, repeat
+and rollback. It does not qualify native → source edits for this row.
+
+Test: `source-reference/native-source-identity.test.ts` (a wrapper with a
+primitive at its root keeps the wrapper's identity; against the previous rule
+it refuses). Reverse by restoring the single-owner filter.
+
