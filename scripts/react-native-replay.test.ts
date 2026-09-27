@@ -42,3 +42,14 @@ test('a state-API repeat that refuses or adds an operation fails its cell', asyn
   assert.match(judged({ status: 200, newOperations: 1 }).reason, /created 1 more operation/);
   assert.equal(judged({ status: 409, newOperations: 0, refusal: 'state-api-native-observation-required' }).status, 'red');
 });
+
+test('refused nested child plans are named in the verdict', async () => {
+  const { judgeReact } = await import('./benchmark-react-native.js');
+  const cell = { id: 'c', row: 'Card', criterion: 'C3', kind: 'react-to-native' as const, workspace: 'w', caseId: 'card', children: true, expect: 'pass' as const };
+  const children = { 'instance-1': { exportName: 'CardHeader', planSha256: 'a' }, 'instance-2': { exportName: 'Checkbox', planSha256: null, refusal: 'react-child-root-preparation-unavailable' } };
+  const pin = { id: 'c', version: 1 as const, kind: 'react-to-native' as const, referenceId: 'r', root: 'h', children, recordedOn: 'x', fidelity: null };
+  const v = judgeReact(cell, pin, { referenceId: 'r', result: { caseId: 'card', root: { kind: 'k', planSha256: 'h' },
+    children: [{ instanceId: 'instance-1', exportName: 'CardHeader', planSha256: 'a' }, { instanceId: 'instance-2', exportName: 'Checkbox', refusal: 'react-child-root-preparation-unavailable' }] } });
+  assert.equal(v.status, 'stale');
+  assert.match(v.reason, /1 nested child plan\(s\) refuse \(react-child-root-preparation-unavailable: Checkbox\)/);
+});

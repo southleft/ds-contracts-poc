@@ -160,6 +160,16 @@
       "caseId": "badge-secondary",
       "children": false,
       "expect": "pass"
+    },
+    {
+      "id": "shadcn-card-composed.react-to-native",
+      "row": "shadcn Card (composed)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/shadcn-cohort",
+      "caseId": "card-composed",
+      "children": true,
+      "expect": "pass"
     }
   ]
 }

@@ -76,10 +76,14 @@ export function judgeReact(cell: ReactCell, pin: ReactPin | null, replay: ReactR
   if (r.repeat && (r.repeat.status !== 200 || r.repeat.newOperations !== 0))
     return { ...base, status: 'red', reason: `a repeated request ${r.repeat.status !== 200 ? 'refused (' + (r.repeat.refusal ?? r.repeat.status) + ')' : 'created ' + r.repeat.newOperations + ' more operation(s)'} instead of returning the prepared one` };
   const repeated = r.repeat ? '; a repeat after another root joined returned the prepared operation' : '';
+  // Pinned child refusals are part of the cell's state and are always named.
+  const refusedChildren = Object.values(pin.children).filter(c => c.refusal);
+  const refused = refusedChildren.length
+    ? `; ${refusedChildren.length} nested child plan(s) refuse (${[...new Set(refusedChildren.map(c => c.refusal))].join(', ')}: ${refusedChildren.map(c => c.exportName).join(', ')})` : '';
   const f = pin.fidelity;
   if (!f || f.planSetSha256 !== planSet(pin.root, pin.children))
-    return { ...base, status: 'stale', reason: 'plans match their pin' + repeated + ', but no native comparison measured these exact plans yet' };
-  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'} — ${f.measuredOn}, ${f.measuredAt}`;
+    return { ...base, status: 'stale', reason: 'plans match their pin' + repeated + refused + ', but no native comparison measured these exact plans yet' };
+  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'}${refused} — ${f.measuredOn}, ${f.measuredAt}`;
   return f.pass ? { ...base, status: 'green', reason: 'plans match their pin' + repeated + '; ' + summary, summary }
     : { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
 }

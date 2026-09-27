@@ -40,8 +40,10 @@ jobs:
       - name: build @ds-contracts/schema and @ds-contracts/core (the packager's resolution prerequisites)
         run: npm run prep:core
 
-      - name: install the vendored React workspace (React → Figma cells)
-        run: npm ci --prefix benchmark/react-family --no-audit --no-fund
+      - name: install the vendored React workspaces (React → Figma cells)
+        run: |
+          npm ci --prefix benchmark/react-family --no-audit --no-fund
+          npm ci --prefix benchmark/shadcn-cohort --no-audit --no-fund
 
       - name: cache playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0

@@ -9,7 +9,8 @@ is refused by name instead of guessed.
 ## What works today
 
 These rows are the benchmark. Each is replayed from a frozen input (a Figma
-capture, or the vendored React workspace in `benchmark/react-family`) on every
+capture, or a vendored React workspace in `benchmark/react-family` or
+`benchmark/shadcn-cohort`) on every
 change to the repository, so a regression turns CI red instead of going
 unnoticed. The **Figma → React** rows are what this preview's command does. The
 **React → Figma** rows are measured through the local app and Figma, and are
@@ -29,6 +30,7 @@ preview command.
 | shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (default) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
 | shadcn Badge (secondary) | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->
