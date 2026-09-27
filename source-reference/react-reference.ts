@@ -1086,10 +1086,12 @@ export function createReactReferenceService(
                   const evidence = readReactCompositionEvidence(repoRoot, reference!, request, scope, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
                   if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
                   content = evidence.inspection; composition = evidence.review;
-                } catch {
+                } catch (error) {
                   content = running?.report() ?? readReactContentInspection(repoRoot, reference!, request, scope);
+                  // Name the reader's refusal when it is identifier-shaped, as other refusals that reach the browser do.
+                  const reason = error instanceof Error && /^[a-z][a-z0-9:._-]{2,160}$/.test(error.message) ? ` (${error.message})` : '';
                   if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
-                    compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.';
+                    compositionProblem = `Nested component evidence is unavailable or changed${reason}. Reload the unchanged original and inspect its content.`;
                 }
               }
             } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
