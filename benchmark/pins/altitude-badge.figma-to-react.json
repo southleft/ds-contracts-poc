@@ -1,0 +1,110 @@
+{
+  "id": "altitude-badge.figma-to-react",
+  "version": 1,
+  "inputSha256": "f0b1297625c096740fbe4487bfe5d620633ee4514fc57b8ecb18e8ea6c2b5a39",
+  "requestSha256": "cc9f6803c0b3f08a970e700a71fb457d19c2362a9c66e05fd4e795e7ca0e68ce",
+  "rootId": "ds.badge",
+  "generated": {
+    "Badge/Badge.module.css": "3b9c41944e230560fa9261770bc713fdeb54eee40b5221b0df331d58a9898fa7",
+    "Badge/Badge.tsx": "55e370d7ba2beb0a0cd586b29688f8d3cf5ebcdaded05e61c262ff87c96b3d3d",
+    "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
+    "tokens.css": "9814bfd3ac6b58509993e9d3b4d70cb05361759c2db1be312c6dec1d65322997"
+  },
+  "generatedSha256": "2ce66e2823d535225c8292510149cfea3661c95c3e6696f6386fcc7eeef84188",
+  "entries": {
+    "package/dist/Badge/Badge.d.ts": "a1276011bc5d14a5a91b63803e28ad2ec20f94cbc206f7149735a5864ab67929",
+    "package/dist/Badge/Badge.js": "19efc20bcfdf98a6fc5087a2f18b66d9d8731d8b977a942d02e34c79c9dd7363",
+    "package/dist/Badge/Badge.module.css": "3b9c41944e230560fa9261770bc713fdeb54eee40b5221b0df331d58a9898fa7",
+    "package/dist/Badge/index.d.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "package/dist/Badge/index.js": "ffa73a3203235dfb94e1b06554675da916643f946dfc761facfce0f98cd3b600",
+    "package/dist/index.d.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
+    "package/dist/index.js": "1f2139717c10e30642a61c040847f3ba8548e5bfebb5065be789310fbe11b99c",
+    "package/dist/tokens.css": "9814bfd3ac6b58509993e9d3b4d70cb05361759c2db1be312c6dec1d65322997",
+    "package/package.json": "ed6a043853bb81f92c887c1183139f8662a595896f1bcc25564b6aa148930177",
+    "package/README.md": "c12b8295e3116d8b0d89b16a6bd58cf1d193937f7d2fb2c52459d9ae2d0fdaf3"
+  },
+  "entriesSha256": "5ae72c877b7533125b199a49715dfcaa4c1930afed24ca59c873aaae2b5c1171",
+  "recordedOn": "darwin-arm64",
+  "fidelity": {
+    "receipt": "benchmark/receipts/altitude-badge.figma-to-react/receipt.json",
+    "receiptSha256": "b8adecd0eaf0e4181910b53d81504903fcdb7dfe4d3a55911e72753d91f9ab8e",
+    "generatedSha256": "2ce66e2823d535225c8292510149cfea3661c95c3e6696f6386fcc7eeef84188",
+    "component": "Badge",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-26",
+    "cases": [
+      {
+        "key": "variant-danger_shape-label",
+        "withinLimit": true,
+        "white": 2.807017543859649,
+        "black": 2.807017543859649,
+        "residual": null
+      },
+      {
+        "key": "variant-neutral_shape-label",
+        "withinLimit": true,
+        "white": 2.543859649122807,
+        "black": 2.543859649122807,
+        "residual": null
+      },
+      {
+        "key": "variant-info_shape-label",
+        "withinLimit": true,
+        "white": 2.719298245614035,
+        "black": 2.719298245614035,
+        "residual": null
+      },
+      {
+        "key": "variant-success_shape-label",
+        "withinLimit": true,
+        "white": 2.982456140350877,
+        "black": 2.982456140350877,
+        "residual": null
+      },
+      {
+        "key": "variant-warning_shape-label",
+        "withinLimit": true,
+        "white": 3.3333333333333335,
+        "black": 3.3333333333333335,
+        "residual": null
+      },
+      {
+        "key": "variant-danger_shape-dot",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-neutral_shape-dot",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-info_shape-dot",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-success_shape-dot",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-warning_shape-dot",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      }
+    ],
+    "problems": []
+  }
+}

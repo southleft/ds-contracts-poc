@@ -1,0 +1,97 @@
+{
+  "$comment": "The V1 benchmark's replayable cells. `npm run benchmark:check` replays each cell from its frozen input and compares the result with benchmark/pins/<id>.json. A cell is judged from a committed consumer receipt only when that receipt scored exactly the pinned generated files. Verdicts: green (every in-scope case within 5%), partial (only text-only overages, reported separately), known-failure (declared here, named), stale (no receipt for the current output), red (replay refused or output drifted from its pin). Scope: docs/CURRENT.md.",
+  "version": 1,
+  "cells": [
+    {
+      "id": "cbds-badge.figma-to-react",
+      "row": "CBDS Badge",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/cbds-badge/dump.json",
+      "inputSha256": "d55ac5450324e83fdaf4ba99f9c6b2cc3fc8b34459852f060b7c838ec5ee5941",
+      "source": {
+        "figmaFile": "WofZT8xaxXuc2Q6Je9S4XE",
+        "capturedAt": "2026-09-19",
+        "appArtifact": "98529fc2edb9272d90aaef2d26882ddedfa96570139a87745075ab409c3d6209",
+        "appTarballSha256": "4ec65ab1698a"
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "72 variants; all in scope",
+        "outOfScope": []
+      },
+      "component": "Badge"
+    },
+    {
+      "id": "altitude-badge.figma-to-react",
+      "row": "Altitude Badge",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/altitude-badge/dump.json",
+      "inputSha256": "f0b1297625c096740fbe4487bfe5d620633ee4514fc57b8ecb18e8ea6c2b5a39",
+      "source": {
+        "figmaFile": "y83n4o9LOGs74oAoguFcGS",
+        "capturedAt": "2026-09-19",
+        "appArtifact": "9a6d5493cc34dd83d575cb0fc3cb35c236997691735cc8f92f1cbbb7ce1d10c9",
+        "note": "The app session had already imported another Badge, so the recorded archive names the contract ds.badge-2; a fresh session names it ds.badge. The contracts are otherwise identical."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "10 variants; all in scope",
+        "outOfScope": []
+      },
+      "component": "Badge"
+    },
+    {
+      "id": "cbds-checkbox-icon.figma-to-react",
+      "row": "CBDS CheckboxIcon",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/cbds-checkbox/dump.json",
+      "inputSha256": "8ec3c1a1533cbddcfe72b0ce9f0c7b3cd8871edd403f0b403705b49d742c6234",
+      "source": {
+        "figmaFile": "WofZT8xaxXuc2Q6Je9S4XE",
+        "capturedAt": "2026-09-25",
+        "appArtifact": "bdef6602183c9c9ca442d5e8e363bd95f5f4d85b6a90a6ac3666cc476a2b6863",
+        "appTarballSha256": "67b659208368"
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "42 variants; the 12 focus-visible variants are out of scope (keyboard focus is V1.1).",
+        "outOfScope": [
+          {
+            "pattern": "state-focus-visible$",
+            "reason": "keyboard focus is V1.1"
+          }
+        ]
+      },
+      "component": "CheckboxIcon"
+    },
+    {
+      "id": "cbds-checkbox.figma-to-react",
+      "row": "CBDS Checkbox",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/cbds-checkbox/dump.json",
+      "inputSha256": "8ec3c1a1533cbddcfe72b0ce9f0c7b3cd8871edd403f0b403705b49d742c6234",
+      "source": {
+        "figmaFile": "WofZT8xaxXuc2Q6Je9S4XE",
+        "capturedAt": "2026-09-25",
+        "appArtifact": "bdef6602183c9c9ca442d5e8e363bd95f5f4d85b6a90a6ac3666cc476a2b6863",
+        "appTarballSha256": "67b659208368"
+      },
+      "expect": "known-failure",
+      "scope": {
+        "note": "20 variants; the 4 focus variants are out of scope (keyboard focus is V1.1).",
+        "outOfScope": [
+          {
+            "pattern": "state-focus$",
+            "reason": "keyboard focus is V1.1"
+          }
+        ]
+      },
+      "component": "Checkbox",
+      "knownFailure": "hover renders the rest variant (variant-prop-discarded:state); label cells over 5% only on text are named partials"
+    }
+  ]
+}

@@ -547,7 +547,10 @@
     "react:native:fidelity:check": "tsx scripts/react-native-fidelity-check.ts && node --import tsx --test scripts/react-native-fidelity-check.test.ts",
     "react:native:fidelity:record": "tsx scripts/react-native-fidelity-record.ts",
     "react:native:declared:record": "tsx scripts/react-native-declared-record.ts",
-    "react:native:declared:check": "tsx scripts/react-native-declared-check.ts && tsx scripts/react-native-matched-check.ts && node --import tsx --test scripts/react-native-declared.test.ts scripts/react-native-matched.test.ts"
+    "react:native:declared:check": "tsx scripts/react-native-declared-check.ts && tsx scripts/react-native-matched-check.ts && node --import tsx --test scripts/react-native-declared.test.ts scripts/react-native-matched.test.ts",
+    "figma:to-react": "tsx scripts/figma-to-react.ts",
+    "benchmark:check": "tsx scripts/benchmark-replay.ts",
+    "benchmark:test": "node --import tsx --test scripts/benchmark-replay.test.ts"
   },
   "engines": {
     "node": ">=20"

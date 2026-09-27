@@ -1,0 +1,55 @@
+name: benchmark
+
+# THE BENCHMARK REGRESSION GATE. Every benchmark cell (benchmark/cells.json)
+# is replayed from its frozen input through the product path and compared with
+# its pin: a change that alters a green cell's output, or makes its replay
+# refuse, goes red here by name. Cells are judged only from committed
+# consumer receipts bound to exactly the pinned generated files; see
+# scripts/benchmark-replay.ts and docs/CURRENT.md ("V1 scope and benchmark
+# scoreboard"). Its own workflow so the 40-minute fast job is untouched.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: benchmark-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  benchmark:
+    name: benchmark replay
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      - name: build @ds-contracts/schema and @ds-contracts/core (the packager's resolution prerequisites)
+        run: npm run prep:core
+
+      - name: benchmark:test (the gate's own controls)
+        run: npm run benchmark:test
+
+      - name: benchmark:check (replay every pinned cell)
+        run: npm run benchmark:check -- --json benchmark-verdicts.json
+
+      - name: keep the verdicts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: benchmark-verdicts
+          path: benchmark-verdicts.json
+          if-no-files-found: ignore

@@ -1,0 +1,260 @@
+{
+  "id": "cbds-checkbox.figma-to-react",
+  "version": 1,
+  "inputSha256": "8ec3c1a1533cbddcfe72b0ce9f0c7b3cd8871edd403f0b403705b49d742c6234",
+  "requestSha256": "875f468e53cb29da42d34d79bf98e1306c2c52061abf6682d17063e2f96c2684",
+  "rootId": "ds.checkbox",
+  "generated": {
+    "CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
+    "CheckSquare/CheckSquare.tsx": "d8e280ffe6dda83a4859c33aea64b3b86f24d40c302d5745b5b8dc2d5e508318",
+    "CheckSquare/index.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
+    "Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
+    "Checkbox/Checkbox.tsx": "874614f843b2fd9d022de7c3862e11eb918ad94c0ee71548021741f48e03e7f1",
+    "Checkbox/index.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
+    "CheckboxIcon/CheckboxIcon.module.css": "4dd864327a1a48934c876403ddd1c4eebf9f69f235376d5a15cd05b4bbb4beb4",
+    "CheckboxIcon/CheckboxIcon.tsx": "3d4b012e508d23e92a4b6fca0d61274e4b35b6feeb9de86a85d1d9c3984c61ac",
+    "CheckboxIcon/index.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
+    "Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "Icon/Icon.tsx": "1c254b435ce50664ba609cc27606e850d8aa2ebbc54cf2ec84f3c6537ea5bb93",
+    "Icon/index.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
+    "MinusSquare/MinusSquare.tsx": "5b14d238d633d8916302f061cb74f1b9a9590789d519c8921e26416780eee8ae",
+    "MinusSquare/index.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
+    "Placeholder/Placeholder.module.css": "e023e4150990629822b821ab1152ec4fe00a09b1b5536577971d427fb1476855",
+    "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
+    "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
+    "Square/Square.tsx": "12b6057a66d7542a1d8056b031fa170cad0e6c39ddcc883d74a0d485e5f09640",
+    "Square/index.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
+    "WarningCircle/WarningCircle.module.css": "e72d08fe5e62ef6e92ec834d61c08ed00315d375d7b14ed9f3395a3d16150531",
+    "WarningCircle/WarningCircle.tsx": "463a1e292226e391fa5f6eb24351920a9dcdeb9bd5a7ac61079719c7754f769d",
+    "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
+    "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
+    "tokens.css": "33a720740ec4cec809352fd154abb68a5b4e242ca73279ef92fbd1710981b562"
+  },
+  "generatedSha256": "8f722c6ba3cccb81a3f8b01ee892000c8f68c0675598c7c6077ba69e03df8eb0",
+  "entries": {
+    "package/dist/Checkbox/Checkbox.d.ts": "fbd25bae2199259886b7da0041d439459bcc1cc73555d0e64b1d5a0bfa64c494",
+    "package/dist/Checkbox/Checkbox.js": "c65069b39fae55c7239d0d45e6ca4a0523663e70b56fbb1a6fb479a2ec7abeb4",
+    "package/dist/Checkbox/Checkbox.module.css": "173b078e6fd3b6b922fb4c5320ea3e84656e8567f239486d5b6f15a10c74bf88",
+    "package/dist/Checkbox/index.d.ts": "0855fd4f7dd71acbfc406968d94252865790922b2c9700c6abb241479daf0ac2",
+    "package/dist/Checkbox/index.js": "3426812f0cfd3c4e15aef030e59837a61d5f50e7de9ee8122dd8e9e990740e7d",
+    "package/dist/CheckboxIcon/CheckboxIcon.d.ts": "050abeded35620427af9ef92b4bca4e2dd38b09604cc9e1576800249c7fc287c",
+    "package/dist/CheckboxIcon/CheckboxIcon.js": "1757c8cce530aa9c617c64a2784643998b264e100f12cdcc85b0c5c7b29200f9",
+    "package/dist/CheckboxIcon/CheckboxIcon.module.css": "4dd864327a1a48934c876403ddd1c4eebf9f69f235376d5a15cd05b4bbb4beb4",
+    "package/dist/CheckboxIcon/index.d.ts": "eb5093d33d51d1f41dce952d5e0e4245e6af975986d8e667643d2cd045aacb2c",
+    "package/dist/CheckboxIcon/index.js": "0edd56bc5ee00ebd4fd11acea31469ab3ad92142af9e91c633be224cd5ecf766",
+    "package/dist/CheckSquare/CheckSquare.d.ts": "2d77f04f5f0fe7876d72805f7f49849bfdd75b851f0122bd1aeff17d14127afc",
+    "package/dist/CheckSquare/CheckSquare.js": "540e5ebc7a2659bd3d9869040a957a8aeaf173f17b492803ca7c42a13dd2bf8a",
+    "package/dist/CheckSquare/CheckSquare.module.css": "62c613e3bda70bd30fa88610a8671e4a29346ab851ea6ea070a719a762d84d43",
+    "package/dist/CheckSquare/index.d.ts": "ba5c68b106aa468ebd7d0b328b6addee63c55ebecab3b31ebbe32d8003896709",
+    "package/dist/CheckSquare/index.js": "eda8c7c3dbe8cfb9e9cf4d08940fffe4b4318a354729c0027d51b9529c07a19f",
+    "package/dist/Icon/Icon.d.ts": "e1ac7a8becc47fa0b5c3bc38fe6950f85d895ee403a33023d00253a415d579bd",
+    "package/dist/Icon/Icon.js": "eef8bb90c17636a89611d64db4dfb5bf0cf83ef01e8677e99b44b68f958dd1b3",
+    "package/dist/Icon/Icon.module.css": "8956b57844816905e6b61e124df8a7bcdb5de72414a821b6daa31ebd3fe903b6",
+    "package/dist/Icon/index.d.ts": "8c380c35c0519acca91fd84b984c32083fd9607f651fe139ba91796919c8394a",
+    "package/dist/Icon/index.js": "465d07da3a00a078ab05eb2ff3a0d952657f4b4981b84ff28598c0b95996f5a1",
+    "package/dist/index.d.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
+    "package/dist/index.js": "0da26021daa0e5ed46107c2d686e8a49702f10df130bd23078d95ea87fc82730",
+    "package/dist/MinusSquare/index.d.ts": "044c20aa2bc823d9f678ef82b56d81ec23ed7215b6841cc8e2af89dc82d46171",
+    "package/dist/MinusSquare/index.js": "0631d9d33bd28e0c663542cf097cbf7f72f806654c8abe43c4075f087b61e32e",
+    "package/dist/MinusSquare/MinusSquare.d.ts": "25f2f0e6357af066fd6bc3551bcceffcdf77b13b000ef643799a56857cb8c82b",
+    "package/dist/MinusSquare/MinusSquare.js": "073a1dedebdb1fc093fbb41c4c2077e28a7ba4532bb157e638331bfeb62be7c0",
+    "package/dist/MinusSquare/MinusSquare.module.css": "18c5f894b2309dd44de4541e1cc58f601efe20b575f7a4b50fcf622c1e64b7ab",
+    "package/dist/Placeholder/index.d.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
+    "package/dist/Placeholder/index.js": "5aca9cc2d44975970055c41018ea9c85031640ba77a452c28eb730c85f822d67",
+    "package/dist/Placeholder/Placeholder.d.ts": "df61f2adfda9e85d357d17717be8e3f81c685d1616d05dbc768a714354322fa6",
+    "package/dist/Placeholder/Placeholder.js": "1cbf48073a4358d818b57c31b99f5feec6e82a67461b303aeef4c77b4b17e580",
+    "package/dist/Placeholder/Placeholder.module.css": "e023e4150990629822b821ab1152ec4fe00a09b1b5536577971d427fb1476855",
+    "package/dist/Square/index.d.ts": "32949ebc48a0d33e605ad547dc7d03dc1e032231b64d0680ab304ce5bacd66af",
+    "package/dist/Square/index.js": "d279c2a321349dfdb42157dddbe5c273fa9d56c3a296ab9ea561996a3e09322b",
+    "package/dist/Square/Square.d.ts": "3ff7d48d4a5081886ab6a9066789a1d6aafc6345011fb327ce15f258ed6d37fd",
+    "package/dist/Square/Square.js": "371b4d8de6594ea0937cf8e21fcae963cfd71ba1836150364ecacd8f4538104d",
+    "package/dist/Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
+    "package/dist/tokens.css": "33a720740ec4cec809352fd154abb68a5b4e242ca73279ef92fbd1710981b562",
+    "package/dist/WarningCircle/index.d.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
+    "package/dist/WarningCircle/index.js": "96d1eff87efd3abf824d6c8a49d5d938099741ac468ba1548d5538dfe259378a",
+    "package/dist/WarningCircle/WarningCircle.d.ts": "aea44145994a43483554462a9626c4f6a4eeffbccbe782b6cd4349cd0e369edd",
+    "package/dist/WarningCircle/WarningCircle.js": "94085dd8c88ee4a02e8137ab6130bc8ae422e078b158fa89498d2bcdb3d8a344",
+    "package/dist/WarningCircle/WarningCircle.module.css": "e72d08fe5e62ef6e92ec834d61c08ed00315d375d7b14ed9f3395a3d16150531",
+    "package/package.json": "a3173b5f900e9e39e3571696563fe93f549ee2e3530047e55161190f4f1f93fd",
+    "package/README.md": "ebb06674886896eace2a334ed054eb2ef63764766774db9a516335713800e078"
+  },
+  "entriesSha256": "da244de2fdfbadbea4576ed09790afb27e91c423faa23444568a0cd00945d5f5",
+  "recordedOn": "darwin-arm64",
+  "fidelity": {
+    "receipt": "benchmark/receipts/cbds-checkbox.figma-to-react/receipt.json",
+    "receiptSha256": "fe12b1d8c35cde5eef25492216bb69d01154497b61774f292e3615b56b3ebd7f",
+    "generatedSha256": "8f722c6ba3cccb81a3f8b01ee892000c8f68c0675598c7c6077ba69e03df8eb0",
+    "component": "Checkbox",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-25",
+    "cases": [
+      {
+        "key": "alignment-left_size-large_state-default",
+        "withinLimit": false,
+        "white": 6.1342592592592595,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-large_state-error",
+        "withinLimit": true,
+        "white": 4.089506172839506,
+        "black": 0.2507716049382716,
+        "residual": null
+      },
+      {
+        "key": "alignment-right_size-large_state-error",
+        "withinLimit": true,
+        "white": 4.946727549467275,
+        "black": 1.141552511415525,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-small_state-error",
+        "withinLimit": true,
+        "white": 4.930500917912405,
+        "black": 0.34093889325990034,
+        "residual": null
+      },
+      {
+        "key": "alignment-right_size-small_state-error",
+        "withinLimit": true,
+        "white": 4.8126951092611865,
+        "black": 0.31217481789802287,
+        "residual": null
+      },
+      {
+        "key": "alignment-right_size-large_state-default",
+        "withinLimit": false,
+        "white": 7.9528158295281575,
+        "black": 1.8645357686453576,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-large_state-disabled",
+        "withinLimit": true,
+        "white": 4.320987654320987,
+        "black": 3.0478395061728394,
+        "residual": null
+      },
+      {
+        "key": "alignment-right_size-large_state-disabled",
+        "withinLimit": false,
+        "white": 6.050228310502283,
+        "black": 4.908675799086757,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-small_state-default",
+        "withinLimit": false,
+        "white": 9.552845528455284,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-right_size-small_state-default",
+        "withinLimit": false,
+        "white": 9.274193548387096,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-small_state-disabled",
+        "withinLimit": false,
+        "white": 7.384823848238482,
+        "black": 4.336043360433604,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-right_size-small_state-disabled",
+        "withinLimit": false,
+        "white": 6.653225806451612,
+        "black": 3.696236559139785,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-large_state-hover",
+        "withinLimit": false,
+        "white": 6.211419753086419,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-large_state-focus",
+        "withinLimit": false,
+        "white": 9.620174346201743,
+        "black": 4.6699875466998755,
+        "residual": "beyond-text"
+      },
+      {
+        "key": "alignment-right_size-large_state-hover",
+        "withinLimit": false,
+        "white": 7.9528158295281575,
+        "black": 1.2557077625570776,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-right_size-large_state-focus",
+        "withinLimit": false,
+        "white": 10.902948402948404,
+        "black": 5.466830466830467,
+        "residual": "beyond-text"
+      },
+      {
+        "key": "alignment-left_size-small_state-hover",
+        "withinLimit": false,
+        "white": 9.552845528455284,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-left_size-small_state-focus",
+        "withinLimit": false,
+        "white": 11.700000000000001,
+        "black": 5.1,
+        "residual": "beyond-text"
+      },
+      {
+        "key": "alignment-right_size-small_state-hover",
+        "withinLimit": false,
+        "white": 9.274193548387096,
+        "black": 0,
+        "residual": "text-only"
+      },
+      {
+        "key": "alignment-right_size-small_state-focus",
+        "withinLimit": false,
+        "white": 11.507936507936508,
+        "black": 5.059523809523809,
+        "residual": "beyond-text"
+      }
+    ],
+    "problems": [
+      "variant-prop-discarded:state",
+      "layout-image-difference-above-limit:alignment-left_size-large_state-default:6.13%",
+      "layout-image-difference-above-limit:alignment-right_size-large_state-default:7.95%",
+      "layout-image-difference-above-limit:alignment-right_size-large_state-disabled:6.05%",
+      "layout-image-difference-above-limit:alignment-left_size-small_state-default:9.55%",
+      "layout-image-difference-above-limit:alignment-right_size-small_state-default:9.27%",
+      "layout-image-difference-above-limit:alignment-left_size-small_state-disabled:7.38%",
+      "layout-image-difference-above-limit:alignment-right_size-small_state-disabled:6.65%",
+      "layout-image-difference-above-limit:alignment-left_size-large_state-hover:6.21%",
+      "layout-image-difference-above-limit:alignment-left_size-large_state-focus:9.62%",
+      "content-size-mismatch:alignment-left_size-large_state-focus:144x18 vs 146x22",
+      "layout-image-difference-above-limit:alignment-right_size-large_state-hover:7.95%",
+      "layout-image-difference-above-limit:alignment-right_size-large_state-focus:10.90%",
+      "layout-image-difference-on-black-above-limit:alignment-right_size-large_state-focus:5.47%",
+      "content-size-mismatch:alignment-right_size-large_state-focus:145x18 vs 147x22",
+      "layout-image-difference-above-limit:alignment-left_size-small_state-hover:9.55%",
+      "layout-image-difference-above-limit:alignment-left_size-small_state-focus:11.70%",
+      "layout-image-difference-on-black-above-limit:alignment-left_size-small_state-focus:5.10%",
+      "content-size-mismatch:alignment-left_size-small_state-focus:123x12 vs 125x16",
+      "layout-image-difference-above-limit:alignment-right_size-small_state-hover:9.27%",
+      "layout-image-difference-above-limit:alignment-right_size-small_state-focus:11.51%",
+      "layout-image-difference-on-black-above-limit:alignment-right_size-small_state-focus:5.06%",
+      "content-size-mismatch:alignment-right_size-small_state-focus:124x12 vs 126x16"
+    ]
+  }
+}
