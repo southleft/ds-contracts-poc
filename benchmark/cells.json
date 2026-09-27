@@ -93,6 +93,25 @@
       "component": "Checkbox"
     },
     {
+      "id": "altitude-tabs.figma-to-react",
+      "row": "Altitude Tabs",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/altitude-tabs/dump.json",
+      "inputSha256": "3d8e2330713c1e14d61b66c3b81f6c7c92ee01abfaf6964a91480f5ae6718b73",
+      "source": {
+        "figmaFile": "y83n4o9LOGs74oAoguFcGS",
+        "capturedAt": "2026-09-27",
+        "note": "Fresh read-only REST capture of the Tabs set (node 3558:61955) and its local closure. Text Passage is not proposed in exact mode (no structured property evidence); its content renders through the Tab Panel. Fonts: the three hashed Public Sans statics selected before measurement (docs/23 §D.112)."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "2 variants (Default, Stretch); both in scope",
+        "outOfScope": []
+      },
+      "component": "Tabs"
+    },
+    {
       "id": "shadcn-alert-default.react-to-native",
       "row": "shadcn Alert (default)",
       "criterion": "C3",
