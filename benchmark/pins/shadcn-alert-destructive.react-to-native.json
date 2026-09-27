@@ -3,22 +3,22 @@
   "version": 1,
   "kind": "react-to-native",
   "referenceId": "77c5af2d963eb1aa40c46e2fa4f283ebcebe364863eefe10c35bf1b93050575c",
-  "root": "ec4788e24bae672cf39b3035831d484214d1805084c01cdbf46880a07399ed2c",
+  "root": "9b8c377efc6c709b7382f7880d0263a0d4deeb046e9933dfc9013dab1f0444e0",
   "children": {
     "instance-1": {
       "exportName": "AlertTitle",
-      "planSha256": "4a69b37b45abcdefbed93452784fd18e776850879128a643dd984222edd6b01c"
+      "planSha256": "f37e2746b3b6b27102145c5d5b807bdb50cd86187ee3d0a0a2e4b960ec516f2b"
     },
     "instance-2": {
       "exportName": "AlertDescription",
-      "planSha256": "24eaff1dcc06d1556bf121be0f2e378e6ee6e5ab7c47fc47635b9176f25ffb27"
+      "planSha256": "25646d1db69d577ca1c4a5a0a2879090430d3c19946a37cf23ba0e16243e9c8d"
     }
   },
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-alert-destructive.react-to-native/comparison.json",
     "receiptSha256": "32d4fa65c1982ce5184d522d250e8c50f14ebb44f1932bcf9cfadfc32ef8c36a",
-    "planSetSha256": "67bf113fbce0f4d6f0b4a84b831b33efabe307156de425554b8da1fe7038bf0a",
+    "planSetSha256": "614a7afc84468db0cbfe62d2e6cbb051a0a79241cda3220578bf73b41e57632b",
     "measuredOn": "darwin-arm64",
     "measuredAt": "2026-09-26",
     "white": 3.21078431372549,

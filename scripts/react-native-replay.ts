@@ -36,7 +36,17 @@ const RUN_DERIVED = new Set(['operation', 'sourceCompilation', 'componentRevisio
   // the parent operation; its compiled content is compared field by field.
   'matrixRevision',
   // A state-API plan also records a revision of its own request (run ids).
-  'requestRevision']);
+  'requestRevision',
+  // Digests of content the plan itself carries (the compiled component, the
+  // token trees and prepared rows), which also hash the observed name below.
+  'contractRevision', 'tokenRevision', 'tokenTreeRevision', 'tokensSha256', 'draftRevision']);
+/** An observed draft is named from a revision of its observation
+ *  (`observed.react-initial-<16 hex>`), and the observation carries raster
+ *  digests that differ between platforms (measured: Linux and macOS name the
+ *  same Switch draft differently; nothing else in the plan differs). The name
+ *  is an identity label, so each such suffix is replaced wherever it appears
+ *  (contract id, set name, variable paths) by its order of first appearance. */
+const OBSERVED_ID = /observed\.[a-z][a-z-]*?-([a-f0-9]{16})\b/g;
 
 /** A plan with every run-derived value removed, as canonical JSON. */
 export function normalizePlan(plan: unknown): string {
@@ -46,7 +56,10 @@ export function normalizePlan(plan: unknown): string {
       return Object.fromEntries(Object.entries(v).filter(([k]) => !RUN_DERIVED.has(k)).map(([k, x]) => [k, walk(x)]));
     return typeof v === 'string' ? v.replace(UUID, '<id>') : v;
   };
-  return canonicalJson(walk(plan));
+  let json = canonicalJson(walk(plan));
+  const suffixes = [...new Set([...json.matchAll(OBSERVED_ID)].map(m => m[1]))];
+  suffixes.forEach((suffix, i) => { json = json.split(suffix).join(`<observed-${i}>`); });
+  return json;
 }
 export const planHash = (plan: unknown) => createHash('sha256').update(normalizePlan(plan)).digest('hex');
 
