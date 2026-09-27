@@ -11961,11 +11961,127 @@ Results:
 - The native Alert's return to React (D.166) passes 3 of 4 variants at its
   100 px preview width (0% white, 4.037% black). Variant `null` fails at 7.44%
   on black: Figma draws its empty content row 1 px tall and CSS draws it 0 px
-  (26 versus 27 px). That cell is gated as a named known failure.
+  (26 versus 27 px). That cell is gated as a named known failure. Fixed in
+  D.170.
 - The shadcn Badges can now be framed, but their live creation must first pass
-  readback (the earlier refusal was 43.875 versus 44 px text width).
+  readback (the earlier refusal was 43.875 versus 44 px text width). Measured
+  in D.168.
 
 Tests: `scripts/benchmark-source-framing.test.ts`,
 `scripts/design-consumer-check.test.ts`. Reverse by restoring the integer-box
 refusal and the layout-bounds-only export in the comparison, and the
 `fit-content`-only container in the consumer check.
+
+## D.168 React → Figma text-only residuals are partials, attributed by measurement
+
+**AGENT decision, 2026-09-27, applying the owner rule of 2026-09-25**
+("text residual reported separately": a text-only overage is a partial, never
+a pass). Until now that rule existed only on the Figma → React side. A React →
+Figma cell over the limit, or with any size difference, was red whatever the
+cause.
+
+The comparison (`scripts/benchmark-source-native-compare.ts`) now takes an
+optional `textRects` in the source receipt: where the React render drew text,
+in CSS px from the root's layout box, by the same text-node walk the consumer
+check makes. With it:
+
+1. A score over the limit also gets the consumer check's second number. That
+   is the same diff with the text boxes painted out on both sides, classified
+   by the same `residualClass`. The verdict diff itself is computed exactly as
+   before.
+2. A root size difference is attributed to text only by measurement. One more
+   read-only REST GET reads the native text boxes. The difference counts as
+   text only when, on every axis where the roots differ, it equals the
+   difference between the two texts' extents (`sizeDifferenceFromText` in
+   `scripts/benchmark-source-framing.ts`).
+
+`attachReact` records `residual: "text-only"` only on a failing comparison in
+which every over-limit score is text-only and any size difference is the
+text's own. `judgeReact` reports such a cell as **partial**. `pass` stays
+false, and any other failure stays red.
+
+Measured through the application in Evaluations. Each case is a root draft
+whose plan equals its pin, plus a content comparison that places the caller's
+"New" label:
+- **shadcn Badge (default)**: root op `27002409`, comparison `541a5134`,
+  instance `253:5776`. It scores **6.250% on white and black**, with 0.000%
+  outside the text boxes (the mask covers 77% of the 44 × 20 badge). Figma
+  sets Inter Medium "New" 26 × 16, the browser sets Inter Variable 25.875 × 15,
+  so the roots are 44 and 43.875 px wide.
+- **shadcn Badge (secondary)**: root op `086ac2df`, comparison `24eca86f`,
+  instance `253:5903`. It scores **2.614% on white and black**, within the
+  limit, and the size difference is the same measured 0.125 px of label
+  advance.
+
+Both cells are **Partial (text only)**. The residual is the font substrate:
+Figma's Inter and the web's Inter Variable advance the same glyphs
+differently. No conversion rule can remove that difference.
+
+Tests: `scripts/react-native-replay.test.ts` (partial versus red cases),
+`scripts/benchmark-source-framing.test.ts` (attribution). Reverse by dropping
+`residual` from `attachReact` and the text diagnostics from the comparison.
+
+## D.169 An inspection reads as complete only once its evidence is sealed
+
+A replay run in CI named `react-composition-content-unavailable` for the
+shadcn Card. The next run of the same commit passed. The content inspection
+job set `phase = 'complete'` and then awaited `browser.close()` before it
+wrote `report.json`. A listing read inside that window saw a complete
+inspection whose evidence was not on disk yet, and reported a composition
+problem. The callback, initial-state and state-API inspection jobs had the
+same order.
+
+All four jobs now record success in a local flag and set `complete` after the
+browser closes. Nothing is awaited between that assignment and the saved
+report, so no reader can interleave. Failed inspections are unchanged.
+
+Test: `source-reference/react-content-inspection.test.ts` watches the job and
+fails if it ever reads as complete before `report.json` exists. Against the
+previous order it fails.
+
+## D.170 An empty root content grid keeps no seed pixel
+
+**AGENT decision, 2026-09-27.** The native shadcn Alert root drew 27 px where
+React draws 26 px, so its return to React failed at 7.44% on black (D.167). The
+extra pixel was the root content carrier, the "Content layout" GRID frame
+inside the Children slot. The writer seeds it with `resize(1, 1)` below
+Figma's 100 px birth box. Figma does not re-measure a childless frame, so an
+unoccupied HUG row kept that 1 px. CSS draws an empty grid with no implicit
+row at 0 px.
+
+The empty-frame repair already dissolves such seeds with a FIXED round-trip
+through `resizeWithoutConstraints`, but it excluded GRID frames on the theory
+that a resize reverts HUG tracks to FLEX (G8/GP4b). A Scratch probe
+(`Empty grid row probe / 2026-09-27`) measured:
+
+| Sequence on an empty grid | Tracks after | Extent |
+| --- | --- | --- |
+| Birth, HUG row (also FLEX row, zero rows refused) | unchanged | 100 px kept; two rows read `50.00px 50.00px` |
+| FIXED → `resizeWithoutConstraints(w, 0)` → HUG, rows and columns HUG | HUG kept | exactly 0 (`0.00px`) |
+| The same, then one 20 × 14 child | HUG kept | 14 px row, `fit-content(100%)` |
+| GP4b: `resize()` on the hugged axis | FLEX, sizing FIXED | reverted |
+
+GP4b is specific to `resize()` on an axis that is already hugging. The
+root-content sizing step now applies the round-trip to an empty carrier's
+HUG axes only; a FILL axis is never zeroed (a FILL assigned after an exact
+zero keeps it, D.161). The code sits inside the root-grid-content feature
+gate, so no committed generated script changes. The engine receipt is
+re-recorded. The import accepts the resolved `0.00px` as an unoccupied HUG
+row, with the same occupancy fence as D.166. The mock now keeps an empty
+grid's seed extent on a hugged axis, as it already did for an empty flex
+container.
+
+Measured through the application in Evaluations. Root op `bbbf2381` has a plan
+equal to the pin, and all four Alert mains are 100 × 26 with 66 × 0 carriers.
+The REST capture of that set (`253:5947`) returns to a clean React consumer at
+**4/4 within 5%**: 0.000% white and at most 0.692% black, with exact sizes. The
+shadcn Alert (native return) cell is now expected to pass. The with-content
+comparison on the same root is unchanged. Comparison `16ec1523` with children
+`c6d5be94` and `a3e6aa9d` scores 3.068% / 3.105% at exact 360 × 68, the same as
+before.
+
+Tests: `core/figma-root-slot.test.ts` (the empty intrinsic carrier draws only
+its row gaps; against the previous writer it measures 1 px),
+`core/grid-flow-rows.test.ts` (resolved zero). Reverse by removing the
+empty-carrier round-trip in `sizeRootContent` and the `>= 0` in
+`readGridFlowRows`.

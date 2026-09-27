@@ -117,19 +117,18 @@
       "criterion": "C4",
       "kind": "figma-to-react",
       "input": "benchmark/inputs/shadcn-alert-return/dump.json",
-      "inputSha256": "44999cb65911deab75b5645a2ab6c1083eef26c9621b814b6fbd1fab373fa42d",
+      "inputSha256": "830db06f8a2e137c19963c78f5c3d6675493e7352a67be40a7e540f53aa8a7a7",
       "source": {
         "figmaFile": "T56aKuRnoay1L7CKAjSWRO",
         "capturedAt": "2026-09-27",
-        "note": "Read-only REST capture of the natively created shadcn Alert root set (242:5404) in Evaluations: the independent family's Figma → React journey back from its own native output. Full-width root measured at each variant's Figma preview width (owner decision, 2026-09-27)."
+        "note": "Read-only REST capture of the natively created shadcn Alert root set (253:5947, operation bbbf2381) in Evaluations: the independent family's Figma → React journey back from its own native output. Full-width root measured at each variant's Figma preview width (owner decision, 2026-09-27)."
       },
-      "expect": "known-failure",
-      "knownFailure": "variant null draws its empty content row 1 px tall in Figma and 0 px in CSS (26 vs 27 px), 7.44% on black",
+      "expect": "pass",
       "scope": {
         "note": "4 variants of the root container (empty children slot); all in scope",
         "outOfScope": []
       },
-      "component": "RootMatrix16c39fdef03e8d42SourceNativeCbcd71d4Bc9045deA5af85f6788a1c3bObservedReactMatrix16c39fdef03e8d42"
+      "component": "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42"
     },
     {
       "id": "shadcn-alert-default.react-to-native",
