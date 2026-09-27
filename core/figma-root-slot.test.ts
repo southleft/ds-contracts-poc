@@ -382,7 +382,7 @@ test('a hug-width root keeps its empty content slot above exact zero so instance
   const slot = comp.children![0];
   assert.equal(slot.type, 'SLOT');
   assert.equal(slot.width, 0.01, 'a 0.01 px seed, never exact zero');
-  const inst = comp.createInstance(); inst.resize(360, inst.height); inst.counterAxisSizingMode = 'FIXED'; inst.layoutSizingHorizontal = 'FIXED';
+  const inst = (comp as any).createInstance(); inst.resize(360, inst.height); inst.counterAxisSizingMode = 'FIXED'; inst.layoutSizingHorizontal = 'FIXED';
   assert.equal(inst.width, 360);
   const instSlot = inst.children[0]; instSlot.layoutSizingHorizontal = 'FILL';
   assert.equal(instSlot.width, 360 - inst.paddingLeft - inst.paddingRight, 'the widened instance fills its slot');
