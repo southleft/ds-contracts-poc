@@ -106,7 +106,10 @@ export async function replayReactNative(options: { workspace: string; cases: str
   // node:http, not fetch: fetch's 300 s headers timeout cut off long native
   // preparations on CI ("fetch failed"); the service owns its own refusals.
   const call = (method: 'GET' | 'POST', route: string) => new Promise<{ status: number; body: any }>((resolve, reject) => {
-    const req = request(base + route, { method }, res => {
+    // A fresh connection per call: a reused keep-alive socket that the server
+    // closes after its idle timeout resets a poll that lands at that moment
+    // (seen as ECONNRESET on the composed Card's long ownership poll).
+    const req = request(base + route, { method, agent: false }, res => {
       const chunks: Buffer[] = [];
       res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
