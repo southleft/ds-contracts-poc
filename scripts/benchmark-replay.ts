@@ -78,7 +78,12 @@ export function tarballEntries(tgz: Buffer): Record<string, string> {
 /** relative path → sha256, the same map design:consumer:check records. */
 export function treeHashes(dir: string): Record<string, string> {
   const out: Record<string, string> = {};
-  const walk = (d: string) => { for (const e of readdirSync(d).sort()) { const p = path.join(d, e); statSync(p).isDirectory() ? walk(p) : (out[path.relative(dir, p)] = sha(readFileSync(p))); } };
+  const walk = (d: string) => {
+    for (const e of readdirSync(d).sort()) {
+      const p = path.join(d, e);
+      if (statSync(p).isDirectory()) walk(p); else out[path.relative(dir, p)] = sha(readFileSync(p));
+    }
+  };
   walk(dir);
   return out;
 }
