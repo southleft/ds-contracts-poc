@@ -11922,3 +11922,50 @@ reads component sets. Tests: `core/grid-flow-rows.test.ts`,
 `scripts/design-consumer-check.test.ts`. Reverse by removing the `resolved`
 mark in `extract/figma/rest/map.ts`, the `drawn` parameter of
 `readGridFlowRows`, and `mountProps`.
+
+## D.167 Owner framing decisions: snapped fractional boxes, effect extents, preview width
+
+**OWNER decisions, 2026-09-27** (asked, not inferred). Three measurement
+situations had no rule, so their cells could never be scored under the
+unchanged 5% limit:
+
+1. **Fractional root boxes are snapped outward.** The React → Figma comparison
+   (`scripts/benchmark-source-native-compare.ts`) crops the source to the
+   smallest whole-pixel box that contains a fractional root box, instead of
+   refusing it.
+2. **Effects past the root box are included.** When the source paints outside
+   its root box, or Figma's render bounds exceed its layout box (shadows,
+   outlines), the source crop grows to cover all paint. Figma is then exported
+   with its render bounds, and the two are placed with their snapped root
+   origins together.
+3. **Full-width roots get Figma's preview width.** The consumer check
+   (`scripts/design-consumer-check.ts`) mounts a case in a container as wide
+   as that variant's Figma frame. It keeps that width only where the root then
+   fills exactly that width and did not at `fit-content`; every other root
+   stays at `fit-content`.
+
+Each rule is recorded in the receipt: `sourceFraming` and `nativeFraming` in
+the comparison, `consumer.containerFraming` in the consumer receipt. The
+scorer, the diff and the 5% limit are unchanged. An integer, effect-free pair
+takes the previous path: the shadcn Alert default re-scores to exactly its
+committed 3.068% / 3.105%. The effects path composites with `alignAtOffsets`
+(`scripts/benchmark-source-framing.ts`), a copy of the recorded aligner's
+compositing; `scripts/design-consumer-framing.ts` itself is unchanged, because
+recorded matched-capture evidence pins its bytes as an instrument.
+
+Results:
+- The live shadcn Switch operation `5cfe5ac0` (plan equal to the pin) scores
+  **0.000% on white and 2.174% on black** at the exact 32 × 18.39 px size,
+  over a 34 × 21 source crop that includes its box-shadow halo and a 36 × 23
+  render-bounds export. The Switch cell is **Pass**.
+- The native Alert's return to React (D.166) passes 3 of 4 variants at its
+  100 px preview width (0% white, 4.037% black). Variant `null` fails at 7.44%
+  on black: Figma draws its empty content row 1 px tall and CSS draws it 0 px
+  (26 versus 27 px). That cell is gated as a named known failure.
+- The shadcn Badges can now be framed, but their live creation must first pass
+  readback (the earlier refusal was 43.875 versus 44 px text width).
+
+Tests: `scripts/benchmark-source-framing.test.ts`,
+`scripts/design-consumer-check.test.ts`. Reverse by restoring the integer-box
+refusal and the layout-bounds-only export in the comparison, and the
+`fit-content`-only container in the consumer check.

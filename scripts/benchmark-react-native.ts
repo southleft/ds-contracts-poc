@@ -22,6 +22,8 @@ export interface ReactCell {
 export interface ReactFidelity {
   receipt: string; receiptSha256: string; planSetSha256: string; measuredOn: string; measuredAt: string;
   white: number; black: number; layoutExact: boolean; pass: boolean;
+  /** The owner-approved framing rule the comparison used, when not the plain root box. */
+  framing?: string;
 }
 export interface ReactPin {
   id: string; version: 1; kind: 'react-to-native'; referenceId: string;
@@ -83,7 +85,7 @@ export function judgeReact(cell: ReactCell, pin: ReactPin | null, replay: ReactR
   const f = pin.fidelity;
   if (!f || f.planSetSha256 !== planSet(pin.root, pin.children))
     return { ...base, status: 'stale', reason: 'plans match their pin' + repeated + refused + ', but no native comparison measured these exact plans yet' };
-  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'}${refused} — ${f.measuredOn}, ${f.measuredAt}`;
+  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'}${f.framing ? ` (${f.framing})` : ''}${refused} — ${f.measuredOn}, ${f.measuredAt}`;
   return f.pass ? { ...base, status: 'green', reason: 'plans match their pin' + repeated + '; ' + summary, summary }
     : { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
 }
@@ -122,7 +124,8 @@ export function attachReact(root: string, cell: ReactCell, receiptPath: string, 
   copyFileSync(receiptPath, path.join(dir, 'comparison.json'));
   pin.fidelity = { receipt: path.relative(root, path.join(dir, 'comparison.json')), receiptSha256: sha(bytes), planSetSha256: planSet(pin.root, pin.children),
     measuredOn, measuredAt, white: Number(score('white').mismatchPercent), black: Number(score('black').mismatchPercent),
-    layoutExact: receipt.layoutExact === true, pass: receipt.pass === true && receipt.layoutExact === true };
+    layoutExact: receipt.layoutExact === true, pass: receipt.pass === true && receipt.layoutExact === true,
+    ...(typeof receipt.sourceFraming?.rule === 'string' ? { framing: receipt.sourceFraming.rule } : {}) };
   writeFileSync(pinPath(root, cell.id), JSON.stringify(pin, null, 2) + '\n');
   return pin;
 }

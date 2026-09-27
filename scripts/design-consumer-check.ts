@@ -117,7 +117,7 @@ const run = (cmd: string, args: string[], cwd: string) => {
 /** How a state cell is reached before its screenshot. `none` = the rest state
  *  (and `disabled`, which is a prop, not an interaction). */
 export type Interaction = 'none' | Exclude<InteractionState, 'default' | 'disabled'>;
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; mount?: Record<string, unknown>; hasText: boolean; textProp?: string;
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; mount?: Record<string, unknown>; previewWidth?: number; hasText: boolean; textProp?: string;
   interaction: Interaction; /** the contract state this cell draws, when it draws one */ state?: Exclude<InteractionState, 'default'> }
 
 /** Array props (`arrayOf`) take the design's own repeat sample from the
@@ -271,7 +271,8 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
       if (entry) props[prop.name] = variantPropValue(prop, entry[0]); else unmapped.add(`${property}=${value}`);
     }
     const key = [...Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`), ...(interaction === 'none' ? [] : [`state-${interaction}`])].join('_') || 'default';
-    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}) };
+    return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}),
+      ...(typeof variant.bbox?.width === 'number' && variant.bbox.width > 0 ? { previewWidth: variant.bbox.width } : {}) };
   });
   const keys = cases.map(c => c.key);
   for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
@@ -559,6 +560,26 @@ async function main() {
       catch { throw new Error('consumer did not mount: ' + (errors[0] ?? 'no page error captured')); }
       receipt.consumer.fontProvision.loaded = await loadConsumerFonts(page, fonts);
       const cells = await page.$$('[data-cell]');
+      // FULL-WIDTH ROOTS (owner decision, 2026-09-27): a root whose width
+      // depends on its container collapses at fit-content, while Figma draws
+      // it at its preview width. Each cell tries the variant's Figma width and
+      // keeps it only where the root then fills exactly that width and did not
+      // before; every other root is left at fit-content, unchanged.
+      const previewWidths = Object.fromEntries(cases.filter(c => c.previewWidth).map(c => [c.key, c.previewWidth]));
+      const containerFramed = await page.evaluate(`((widths) => {
+        const kept = [];
+        for (const cell of document.querySelectorAll('[data-cell]')) {
+          const root = cell.firstElementChild, width = widths[cell.getAttribute('data-cell')];
+          if (!root || !width) continue;
+          const before = root.getBoundingClientRect().width;
+          cell.style.width = width + 'px';
+          const after = root.getBoundingClientRect().width;
+          if (Math.abs(after - width) < 0.01 && Math.abs(before - width) > 0.5) kept.push(cell.getAttribute('data-cell'));
+          else cell.style.width = 'fit-content';
+        }
+        return kept;
+      })(${JSON.stringify(previewWidths)})`) as string[];
+      receipt.consumer.containerFraming = { rule: 'figma-preview-width-v1', cases: containerFramed };
       // THE INSTRUMENT, not the product: cells used to flow inline, so a root 47.4 px
       // wide pushed every later root onto a fractional x and 33 of 72 CBDS Badge
       // shots came out one pixel wider with a shifted antialiased edge — while
