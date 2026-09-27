@@ -38,30 +38,49 @@ channels (opacity, literal sizes, shadows, strokes, background layers, bounded
 text colour) in both directions; any other change refuses by name and offers a
 fresh create.
 
-Status per row, newest measurement first (all app-driven; "pre-rt21" marks
-native evidence recorded before the 2026-09-26 slot-sizing runtime fix,
-[D.161](23-known-limitations.md#d161-a-content-slots-counter-axis-fill-is-re-seated-after-the-exact-zero-reset)):
+**Gated cells.** Each row below is replayed from a frozen input on every push
+and is only a pass while its committed receipt measured exactly what the replay
+produces now. This table is generated; do not edit it by hand.
+
+<!-- benchmark:begin -->
+| Component | Direction | Result | Measured |
+| --- | --- | --- | --- |
+| CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-09-25. |
+| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
+| CBDS Checkbox | Figma → React | **Known failure** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial; problems: variant-prop-discarded:state — darwin-arm64, 2026-09-25. Out of scope: keyboard focus is V1.1. |
+| shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-26. |
+| shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
+| shadcn Switch | React → Figma | **Not yet re-scored** | plans match their pin, but no native comparison measured these exact plans yet. |
+
+_Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
+<!-- benchmark:end -->
+
+**Not yet gated.** These results were measured in the app but have no benchmark
+cell yet, so a later change could silently invalidate them. "pre-rt21" marks
+native evidence recorded before the 2026-09-26 slot-sizing runtime fix
+([D.161](23-known-limitations.md#d161-a-content-slots-counter-axis-fill-is-re-seated-after-the-exact-zero-reset)).
 
 | Row | Figma → React (C2) | React → native (C3) | Updates (C1) | Repeat / recovery (C6) |
 | --- | --- | --- | --- | --- |
-| CBDS Badge | Pass 72/72 (2.214% white, 4.557% black) | Pass 72/72, 0.000% vs original, exact sizes (pre-rt21) | Not measured | Readback refusal recovered by read-only retry, no second write |
-| Altitude Badge | Pass 10/10 (3.333%) | Pass 10/10, 0.088% vs original (pre-rt21) | Not measured | Not measured |
-| CBDS Checkbox | 5 of 16 in scope (11 label-text residuals over 5%, hover draws rest ink) | Readback now verifies live ([D.163](23-known-limitations.md#d163-an-inherited-scale-origin-may-keep-only-the-sources-own-float32-invisible-offset)); disabled look fixed in code for the pinned cells ([D.162](23-known-limitations.md#d162-a-parent-set-boolean-state-selects-the-childs-drawn-state-preview)) but the app cannot yet rebuild a completed library operation; no image scores | Not measured | Not measured |
-| CheckboxIcon | Pass 30 of 30 in scope at 0.000% (12 focus cells are V1.1) | Created and read back; no image scores | Not measured | Not measured |
-| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Pass 9/9 (thumb y 1.195 vs 1.1875 open), pre-rt21 | Opacity and bound height both ways, conflicts refused | Begun-write recovery, no-op repeats (stale by three runtime revisions) |
-| shadcn Alert | Not measured | **Pass 2/2**: destructive 3.211% / 3.248%, default 3.068% / 3.105%, exact 360 × 68 | In-place attempt refused by name (layout channel) | Not measured |
+| CBDS Badge | gated above | Pass 72/72, 0.000% vs original, exact sizes (pre-rt21) | Not measured | Readback refusal recovered by read-only retry, no second write |
+| Altitude Badge | gated above | Pass 10/10, 0.088% vs original (pre-rt21) | Not measured | Not measured |
+| CBDS Checkbox | gated above | Readback verifies live ([D.163](23-known-limitations.md#d163-an-inherited-scale-origin-may-keep-only-the-sources-own-float32-invisible-offset)); disabled look fixed in code ([D.162](23-known-limitations.md#d162-a-parent-set-boolean-state-selects-the-childs-drawn-state-preview)) but the app cannot yet rebuild a completed library operation; no image scores | Not measured | Not measured |
+| CBDS CheckboxIcon | gated above | Created and read back; no image scores | Not measured | Not measured |
+| shadcn Switch | Pass 9/9 via native return (4.167% / 2.273%) | Plan gated above; the live app refuses in long-lived local state (state-API anchor drift, a C6 defect under repair) | Opacity and bound height both ways, conflicts refused | Begun-write recovery, no-op repeats (stale by three runtime revisions) |
+| shadcn Alert | Not measured; the return refuses on grid row read-back | gated above | In-place attempt refused by name (layout channel) | Not measured |
 | shadcn Badge | Not measured | Exact-size refusal (43.875 vs 44 px text width) | Not measured | Not measured |
 | Tabs | Pass on both source appearances (≤ 3.349%) | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
 | Card | Not measured | 6/6 variants from 2026-09-18, likely stale | Not measured | Repeat preparation, no duplicates |
 
 No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
-closed: refresh the Switch rows on current code, return the Alert to React and
-update it both ways, give completed library operations a rebuild path so the
-Checkbox fix reaches the canvas, measure bounded updates on both Badges, and
-re-run Card and Tabs through the app. Criterion 5 also needs a fresh
-`npm run v1:readiness` on the release commit and an update of
-[docs/26](26-v1-definition.md) and the [React V1 scope](REACT-V1-SCOPE.md) to
-this benchmark.
+closed: fix the Switch state-API anchor drift and score its native output,
+return the Alert to React, give completed library operations a rebuild path so
+the Checkbox fix reaches the canvas, measure bounded updates and recovery on
+the gated rows, and bring Tabs, Card and shadcn Badge into the gate. Criterion 5
+also needs a fresh `npm run v1:readiness` on the release commit; the older
+definitions in [docs/26](26-v1-definition.md) and the
+[React V1 scope](REACT-V1-SCOPE.md) now point here.
 
 ## The whole loop
 

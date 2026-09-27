@@ -13,7 +13,7 @@ import { judge, readAllCells, readPin, type Status } from './benchmark-replay.js
 import { judgeReact, readReactPin } from './benchmark-react-native.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const DOCUMENTS = ['docs/PREVIEW.md'];
+export const DOCUMENTS = ['docs/PREVIEW.md', 'docs/CURRENT.md'];
 const BEGIN = '<!-- benchmark:begin -->', END = '<!-- benchmark:end -->';
 const label: Record<Status, string> = { green: 'Pass', partial: 'Partial (text only)', 'known-failure': 'Known failure', stale: 'Not yet re-scored', red: 'Failing' };
 

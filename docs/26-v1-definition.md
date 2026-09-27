@@ -1,5 +1,14 @@
 # 26 · Definition of v1
 
+> **Superseded as the product definition (2026-09-26).** The owner approved a
+> React-only V1 on a closed benchmark on 2026-09-25/26; its scope and live
+> scoreboard are in `docs/CURRENT.md` (section "V1 scope and benchmark
+> scoreboard"), and the first releasable journey is the Figma → React preview
+> in `docs/PREVIEW.md`.
+> This page is kept unchanged below as the owner-signed record of the earlier
+> definition, and `npm run v1:readiness` still grades its rows — a green
+> readiness run therefore does not mean the React V1 is complete.
+
 > **Current measurement (2026-09-13; criterion owner-signed 2026-09-03).** The v1 criterion is the
 > stranger sentence (docs/36, *Point it at your library*):
 > one command, one reviewed file, one more command, one paste, a component
