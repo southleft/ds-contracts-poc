@@ -6,7 +6,8 @@ import { prepareNativeContractUpdate, emitNativeContractUpdateScript, nativeCont
 
 test('zero root size repair preserves native identity, centered slot and untouched sizing; repeat and rollback', async () => {
   const f = await fixture(), ids = f.figma.root.findAll(() => true).map((n:any) => n.id), width=f.root.width;
-  assert.deepEqual([width,f.root.height,f.slot.width,f.slot.height],[0,0,0,0]);
+  // An empty main slot keeps a 0.01 px seed so instances can be widened (§D.175); the hug root follows it.
+  assert.deepEqual([width,f.root.height,f.slot.width,f.slot.height],[0.01,0,0.01,0]);
   assert.equal(f.plan.kind, 'native-contract-root-size-update');
   const preflight=await f.run(emitNativeContractUpdateScript(f.plan,'apply',true));
   assert.equal(preflight.status,'preflight-observed',JSON.stringify(preflight.problems));
@@ -19,7 +20,7 @@ test('zero root size repair preserves native identity, centered slot and untouch
   const repeat=await f.run(emitNativeContractUpdateScript(f.plan));assert.equal(repeat.status,'no-op');
   const rollback=await f.run(emitNativeContractUpdateScript(f.plan,'rollback'));assert.equal(rollback.status,'updated',JSON.stringify(rollback.problems));
   assert.equal(nativeContractUpdateMatches(f.plan,rollback.observation),true);
-  assert.deepEqual([f.root.width,f.root.height,f.slot.width,f.slot.height],[0,0,0,0]);
+  assert.deepEqual([f.root.width,f.root.height,f.slot.width,f.slot.height],[0.01,0,0.01,0]);
 });
 test('size repair refuses changed layout, manual geometry and populated content', async () => {
   const f=await fixture();

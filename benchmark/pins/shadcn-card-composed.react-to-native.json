@@ -23,23 +23,7 @@
     },
     "instance-5": {
       "exportName": "Checkbox",
-      "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
-    },
-    "instance-6": {
-      "exportName": "Root",
-      "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
-    },
-    "instance-7": {
-      "exportName": "Indicator",
-      "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
-    },
-    "instance-8": {
-      "exportName": "default",
-      "planSha256": null,
-      "refusal": "react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified"
+      "planSha256": "aa1b81e8ceb81cc40b139280eb76d948495d11aba89719aaaeec67507154ca7e"
     },
     "instance-9": {
       "exportName": "CardFooter",
@@ -51,5 +35,16 @@
     }
   },
   "recordedOn": "darwin-arm64",
-  "fidelity": null
+  "fidelity": {
+    "receipt": "benchmark/receipts/shadcn-card-composed.react-to-native/comparison.json",
+    "receiptSha256": "73ed5ad9145b2ed5e85e4beca22a27afbe4fae30d3213d07e55a5518528da7a6",
+    "planSetSha256": "b6d9c21b868495e1763dbcc4aa3ab9c59ced26ca10764071a1ae0c96a5654c1c",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-27",
+    "white": 1.330532212885154,
+    "black": 1.330532212885154,
+    "layoutExact": true,
+    "pass": true,
+    "framing": "snap-outward-effects-included-v1"
+  }
 }

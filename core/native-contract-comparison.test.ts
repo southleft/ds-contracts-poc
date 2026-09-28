@@ -745,3 +745,15 @@ test('nested linked roots inherit paint once and preserve caller paths through m
   const different = structuredClone(f.content); different.anatomy.root.parts!.first.literals!['border-width'] = '2px';
   assert.throws(() => f.emit(different), /nested-inherited-paint-unqualified/);
 });
+
+test('a caller-width instance refuses by name when its main left the slot at exact zero (§D.175)', async () => {
+  // Measured: a main slot at exactly 0 px pins every instance's slot at 0 px;
+  // no instance override changes it. The comparison must refuse, not draw it.
+  const f = await fixture(undefined, 'column');
+  const main = await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  const createInstance = main.createInstance.bind(main);
+  main.createInstance = () => { const instance = createInstance(); instance.findOne((n: any) => n.type === 'SLOT')._inheritedZeroW = true; return instance; };
+  const creation = await f.run(f.emit(f.content, { ...f.comparison, instanceWidth: 360 }));
+  assert.equal(creation.status, 'partial-or-unknown-allocation');
+  assert.deepEqual(creation.problems, ['native-source-write-comparison-instance-width-slot-refused']);
+});

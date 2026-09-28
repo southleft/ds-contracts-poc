@@ -268,3 +268,24 @@ test('outside source ancestors remain explicit without becoming generated roots 
   }
  }finally{rmSync(f.root,{recursive:true,force:true})}
 });
+
+test('runtime dependencies inside a source-owned child fold into it; nothing else does (§D.174)', async () => {
+  const { foldedRuntimeDependencies, reactCompositionInstances } = await import('./react-source-anatomy.js');
+  // Measured: the shadcn Card's Checkbox renders Radix Root → Indicator → a lucide icon inside its button.
+  const at = (id: string, module: string, parent: string | undefined, path: string, content: string) => ({ instanceId: id,
+    source: { module, exportName: id, sourceSha256: 'a'.repeat(64), span: { start: 0, end: 1 } }, ...(parent ? { parentInstanceId: parent } : {}),
+    roots: [{ path, tag: 'div', correspondence: 'runtime-dependent', observation: {} }], content, sourceOwnedPaths: [], callerContentPaths: [],
+    runtimeDependentPaths: [], dependencies: [], problems: [] });
+  const anatomy = (extra: ReturnType<typeof at>[] = []) => ({ version: 1, status: 'linked', acceptedContract: null, qualification: 'observed-source-correspondence', problems: [],
+    instances: [at('card', 'src/card.tsx', undefined, '', 'caller-slot'), at('checkbox', 'src/checkbox.tsx', 'card', '1.0.0', 'authored-or-runtime'),
+      at('root', 'node_modules/radix/index.mjs', 'checkbox', '1.0.0', 'unresolved'), at('indicator', 'node_modules/radix/index.mjs', 'root', '1.0.0.0', 'unresolved'),
+      at('icon', 'node_modules/lucide/index.mjs', 'indicator', '1.0.0.0.0', 'unresolved'), ...extra] }) as any;
+  assert.deepEqual([...foldedRuntimeDependencies(anatomy())].sort(), ['icon', 'indicator', 'root']);
+  assert.deepEqual(reactCompositionInstances(anatomy()).map((i: { instanceId: string }) => i.instanceId), ['card', 'checkbox']);
+  for (const [extra, why] of [
+    [at('local', 'src/local.tsx', 'checkbox', '1.0.0.1', 'authored-or-runtime'), 'a workspace dependency stays an identity'],
+    [at('outside', 'node_modules/radix/index.mjs', 'checkbox', '1.1', 'unresolved'), 'a root outside the owner is not its layer'],
+    [at('under-slot', 'node_modules/radix/index.mjs', 'card', '1.2', 'unresolved'), 'a caller-slot owner does not absorb dependencies'],
+    [at('orphan', 'node_modules/radix/index.mjs', undefined, '2', 'unresolved'), 'no workspace owner, no fold'],
+  ] as const) assert.equal(foldedRuntimeDependencies(anatomy([extra])).has(extra.instanceId), false, why);
+});

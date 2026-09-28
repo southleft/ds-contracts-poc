@@ -8445,7 +8445,18 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     child['layoutSizing' + axis] = 'FILL';
   };
   if (!horizontal && child.layoutSizingHorizontal === 'FILL') reseat('Horizontal', parent.width - parent.paddingLeft - parent.paddingRight);
-  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);${hasRootGridSlot ? `
+  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);
+  // An exact-zero width here is inherited by every instance, and no instance
+  // override changes it: a caller that widens the instance leaves the slot at
+  // 0 px, its content centred (live Scratch probe 2026-09-27; the composed
+  // shadcn Card and its row CardFooter). Figma keeps a 0.01 px seed, which
+  // draws nothing and lets every instance fill or hug (docs/23 D.175).
+  if (child.width === 0) {
+    const sizing = child.layoutSizingHorizontal;
+    child.layoutSizingHorizontal = 'FIXED';
+    child.resizeWithoutConstraints(0.01, child.height);
+    child.layoutSizingHorizontal = sizing;
+  }${hasRootGridSlot ? `
   if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
     const grid = child.children[0];
     grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
@@ -8456,10 +8467,11 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     // through resizeWithoutConstraints reaches exact zero and keeps HUG tracks
     // (live Scratch probe 2026-09-27; GP4b's revert to FLEX is resize() on a
     // hugged axis). A FILL axis is never zeroed: it would keep the zero.
+    // Horizontally, callers widen instances, so the seed stays 0.01 px (D.175).
     if (!grid.children.length) for (const axis of ['Vertical', 'Horizontal']) {
       if (grid['layoutSizing' + axis] !== 'HUG') continue;
       grid['layoutSizing' + axis] = 'FIXED';
-      grid.resizeWithoutConstraints(axis === 'Horizontal' ? 0 : grid.width, axis === 'Vertical' ? 0 : grid.height);
+      grid.resizeWithoutConstraints(axis === 'Horizontal' ? 0.01 : grid.width, axis === 'Vertical' ? 0 : grid.height);
       grid['layoutSizing' + axis] = 'HUG';
     }
   }` : ''}

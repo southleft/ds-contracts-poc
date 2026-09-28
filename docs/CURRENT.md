@@ -57,7 +57,7 @@ produces now. This table is generated; do not edit it by hand.
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (default) | React → Figma | **Partial (text only)** | native vs React source 6.250% white, 6.250% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
 | shadcn Badge (secondary) | React → Figma | **Partial (text only)** | native vs React source 2.614% white, 2.614% black, size differs (snap-outward-v1) — darwin-arm64, 2026-09-27. |
-| shadcn Card (composed) | React → Figma | **Not yet re-scored** | plans match their pin; 4 nested child plan(s) refuse (react-child-root-preparation-unavailable: react-composition-runtime-or-multiple-root-unqualified: Checkbox, Root, Indicator, default), but no native comparison measured these exact plans yet. |
+| shadcn Card (composed) | React → Figma | **Pass** | native vs React source 1.331% white, 1.331% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
 
 _Generated from `benchmark/pins` by `npm run benchmark:doc`. Every row is replayed from its frozen input on every push (`npm run benchmark:check`). Images are compared with the unchanged 5% limit on white and black; text-only overages are reported as partials, never as passes._
 <!-- benchmark:end -->
@@ -77,12 +77,12 @@ native evidence recorded before the 2026-09-26 slot-sizing runtime fix
 | shadcn Alert | gated above (native return) | gated above | In-place attempt refused by name (layout channel) | Not measured |
 | shadcn Badge | gated above (native return, [D.171](23-known-limitations.md#d171-the-native-shadcn-badge-returns-to-react-from-a-plugin-capture)) | gated above: created and read back live; text-only partial, Figma's label 0.125 px wider ([D.168](23-known-limitations.md#d168-react--figma-text-only-residuals-are-partials-attributed-by-measurement)) | Not measured | Not measured |
 | Altitude Tabs | gated above | Operator-assisted only; empty states wrong | Not measured | Restart and repeat reuse, partial |
-| shadcn Card | Not measured | Plans gated above: the composed root and six nested plans prepare; the nested Checkbox and its three Radix internals refuse (`react-composition-runtime-or-multiple-root-unqualified`: the Radix Checkbox renders more than one root). The 6/6 native variants of 2026-09-18 predate current code | Not measured | Repeat preparation, no duplicates |
+| shadcn Card | Not measured | gated above: the composed root and all seven children created live and scored as one instance. The Checkbox's Radix `Root`, `Indicator` and icon fold into it as its layers ([D.174](23-known-limitations.md#d174-runtime-dependencies-inside-a-source-owned-child-fold-into-that-child)); an empty content slot keeps a 0.01 px seed so the widened instance fills ([D.175](23-known-limitations.md#d175-a-mains-empty-content-slot-keeps-a-001-px-seed-so-instances-can-be-widened)) | Not measured | Repeat preparation, no duplicates |
 
 No row is complete yet, so V1 cannot be claimed. Open work, in order of cells
 closed: give completed library operations a rebuild path so the Checkbox fix
-reaches the canvas, measure bounded updates and recovery on the gated rows,
-and prepare the Card's nested Checkbox. Criterion 5
+reaches the canvas, and measure the other bounded update channels on the gated
+rows. Criterion 5
 also needs a fresh `npm run v1:readiness` on the release commit; the older
 definitions in [docs/26](26-v1-definition.md) and the
 [React V1 scope](REACT-V1-SCOPE.md) now point here.

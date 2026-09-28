@@ -52,12 +52,37 @@ const identity = (source: ReactOwnership['components'][number]['source']) => JSO
   source.module, source.exportName, source.sourceSha256, source.span.start, source.span.end,
 ]);
 
+/** Dependency components (under node_modules) that a source-owned workspace
+ * instance renders inside its one root. They draw that owner's own hosts and
+ * are never separate identities or nested-part boundaries (the rule
+ * workspaceComponents states for a standalone subject; docs/23 §D.174).
+ * Anything else, including a workspace dependency, stays a visible instance. */
+export function foldedRuntimeDependencies(anatomy: ReactSourceAnatomy): Set<string> {
+  const byId = new Map(anatomy.instances.map(i => [i.instanceId, i]));
+  const folded = new Set<string>();
+  for (const instance of anatomy.instances) {
+    if (!instance.source.module.startsWith('node_modules/')) continue;
+    const seen = new Set<string>();
+    let owner = instance.parentInstanceId ? byId.get(instance.parentInstanceId) : undefined;
+    while (owner && owner.source.module.startsWith('node_modules/') && !seen.has(owner.instanceId)) {
+      seen.add(owner.instanceId);
+      owner = owner.parentInstanceId ? byId.get(owner.parentInstanceId) : undefined;
+    }
+    if (owner && owner.content === 'authored-or-runtime' && owner.roots.length === 1 &&
+        instance.roots.every(root => contains(owner!.roots[0].path, root.path)))
+      folded.add(instance.instanceId);
+  }
+  return folded;
+}
+
 /** Logical component boundaries exclude only proved same-host implementation
- * instances. Unqualified chains remain visible and cannot become composition. */
+ * instances and folded runtime dependencies. Unqualified chains remain visible
+ * and cannot become composition. */
 export function reactCompositionInstances(anatomy: ReactSourceAnatomy) {
   const implementations = new Set(anatomy.instances.filter(i => i.content === 'caller-slot' && i.rootDelegation?.forwardsChildren)
     .flatMap(i => i.rootDelegation!.instanceIds.slice(1)));
-  return anatomy.instances.filter(i => !implementations.has(i.instanceId));
+  const folded = foldedRuntimeDependencies(anatomy);
+  return anatomy.instances.filter(i => !implementations.has(i.instanceId) && !folded.has(i.instanceId));
 }
 
 /** Only hosts whose nested source path has already been proved need extra
