@@ -84,6 +84,13 @@ export interface ReactOwnershipReport {
   engine?: Record<string, string>;
   observedReferenceId?: string;
 }
+/** The program an ownership observation reads: the reference's declared
+ * sources with their JSX dependencies, plus the dependency exports its runtime
+ * imports bind. A staged repair candidate must be read the same way (§D.173). */
+export function readReactOwnershipProgram(reference: ReactReference, sourceRoot: string) {
+  return observeReactRuntimeDependencies(reference,
+    readReactSourceProgram(sourceRoot, reactReferenceSourceModules(reference), { includeJsxDependencies: true }));
+}
 /** Private, paired source observation using the same frozen cases and reader.
  * No render configuration, script, path or role map is accepted from the UI. */
 export function startReactOwnership(
@@ -93,9 +100,7 @@ export function startReactOwnership(
 ) {
   if (!reactReferenceUnchanged(reference))
     throw Error("react-ownership-source-changed");
-  const modules = reactReferenceSourceModules(reference);
-  const runtimeDependencies = observeReactRuntimeDependencies(reference,
-    readReactSourceProgram(sourceRoot, modules, { includeJsxDependencies: true }));
+  const runtimeDependencies = readReactOwnershipProgram(reference, sourceRoot);
   const program = runtimeDependencies.program;
   const state: ReactOwnershipReport = {
     id: randomUUID(),

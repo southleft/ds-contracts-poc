@@ -5,8 +5,9 @@ import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {revisionOf} from '../core/contract-provenance.js';
 import {reactCohortWitnessSnapshot} from './react-cohort.js';
-import {buildReactReference,reactReferenceSourceModules,reactReferenceUnchanged,type ReactReference} from './react-reference.js';
-import {readReactSourceProgram,reactSourceProgramUnchanged,type ReactSourceProgram} from './react-source-program.js';
+import {buildReactReference,reactReferenceUnchanged,type ReactReference} from './react-reference.js';
+import {reactSourceProgramUnchanged,type ReactSourceProgram} from './react-source-program.js';
+import {readReactOwnershipProgram} from './react-ownership-run.js';
 import {stageReactUtilitySourceEdit} from './react-source-repair-stage.js';
 import {observeReactSourceRepairStates,verifyReactSourceRepairBaseline,verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
 import {verifyReactSourceRepairCohort} from './react-source-repair-cohort.js';
@@ -28,8 +29,12 @@ export interface ReactSourceRepairPreview {
   limitations:string[];
 }
 type Dependencies={stage:typeof stageReactUtilitySourceEdit;observe:typeof observeReactSourceRepairStates;
-  build:typeof buildReactReference;program:typeof readReactSourceProgram;cohort:typeof verifyReactSourceRepairCohort};
-const dependencies:Dependencies={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,program:readReactSourceProgram,cohort:verifyReactSourceRepairCohort};
+  build:typeof buildReactReference;program:(reference:ReactReference)=>ReactSourceProgram;cohort:typeof verifyReactSourceRepairCohort};
+/** A candidate is read exactly as its recorded original was: by the ownership reader. */
+export const readRepairCandidateProgram=(reference:ReactReference)=>readReactOwnershipProgram(reference,reference.sourceRoot).program;
+export const repairPreviewDependencies:Readonly<Dependencies>={stage:stageReactUtilitySourceEdit,observe:observeReactSourceRepairStates,build:buildReactReference,
+  program:readRepairCandidateProgram,cohort:verifyReactSourceRepairCohort};
+const dependencies:Dependencies=repairPreviewDependencies;
 const sha=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 const reason=(error:unknown)=>{
   const message=error instanceof Error?error.message:'';
@@ -96,7 +101,9 @@ export function createReactSourceRepairPreviews(repo:string,
             state.candidates.push(row);
             try {
               const stage=await deps.stage(repo,input.reference.sourceRoot,input.reference.files,candidate,input.recipe);
-              const reference=await deps.build(stage.workspace),program=deps.program(stage.workspace,reactReferenceSourceModules(reference));
+              // Read the candidate as its recorded original was read: the ownership
+              // program, JSX and runtime-bound dependencies included (§D.173).
+              const reference=await deps.build(stage.workspace),program=deps.program(reference);
               const after=await deps.observe({reference,program,caseId:input.caseId,instanceId:before.observation.instanceId,
                 expected:before.observation,dir:path.join(dir,'candidate-'+index),assertCurrent:assertSource});
               row.comparison=verifyReactSourceRepairStates(before,after,input.variants,input.plan,index);
