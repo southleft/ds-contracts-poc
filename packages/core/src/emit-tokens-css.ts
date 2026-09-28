@@ -70,6 +70,14 @@ export interface TokensCssOptions {
   sources?: string[];
   /** The command that regenerates the sheet (header line). */
   regenerate?: string;
+  /** Emit only these custom properties (`--a-b`) and every one they alias, in
+   *  every block; a mode block left empty is dropped. A generated PACKAGE
+   *  passes the names its own components mention, so the tokens of other
+   *  systems in the same token tree (the repository's demo tokens, a
+   *  `[data-brand]` the package never uses) do not ship and cannot override
+   *  the consumer's own variables. Absent = every token (the repository's own
+   *  tokens.css). Diagnostics then cover only what is emitted. */
+  only?: Iterable<string>;
 }
 
 export interface TokensCssReport {
@@ -181,12 +189,14 @@ export function emitTokensCss(layers: TokensCssLayer[], opts: TokensCssOptions =
   const danglingAliases: string[] = [];
   const skippedComposite: string[] = [];
   const modes: TokensCssReport['modes'] = [];
+  const reachable = opts.only === undefined ? null : reachableCssVars(flat, opts.only);
 
   const block = (layer: TokensCssLayer): string[] => {
     const entries = flat.get(layer)!;
     const resolvable = new Set([...rootPaths, ...entries.keys()]);
     const lines: string[] = [];
     for (const tokenPath of [...entries.keys()].sort()) {
+      if (reachable && !reachable.has(cssVarName(tokenPath))) continue;
       const entry = entries.get(tokenPath)!;
       const target = aliasTarget(entry.value);
       if (target && !resolvable.has(target)) danglingAliases.push(`${tokenPath} -> {${target}}`);
@@ -216,6 +226,13 @@ export function emitTokensCss(layers: TokensCssLayer[], opts: TokensCssOptions =
     ' * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the',
     ' * dark slot; `[data-brand="<name>"]` each other brand — set the attribute',
     ' * on <html> to switch.',
+    ...(reachable
+      ? [
+          ' *',
+          ' * Scope: only the custom properties these components use, and the',
+          ' * tokens those alias. Other tokens in the source tree are not emitted.',
+        ]
+      : []),
     ' */',
   ];
   let defined: string[] = [];
@@ -233,6 +250,31 @@ export function emitTokensCss(layers: TokensCssLayer[], opts: TokensCssOptions =
   if (!root) out.push('', `${ROOT_SELECTOR} {`, '}');
   out.push('');
   return { css: out.join('\n'), defined, modes, danglingAliases, skippedComposite };
+}
+
+/** The `only` names and, transitively, every custom property their values
+ *  mention in ANY block (an alias in the dark slot reaches its own target). */
+function reachableCssVars(flat: Map<TokensCssLayer, Map<string, TokenEntry>>, only: Iterable<string>): Set<string> {
+  const mentions = new Map<string, Set<string>>();
+  for (const entries of flat.values()) {
+    for (const [tokenPath, entry] of entries) {
+      const css = cssValueOf(entry.value);
+      if (css === null) continue;
+      const name = cssVarName(tokenPath);
+      const set = mentions.get(name) ?? new Set<string>();
+      for (const target of mentionedCssVars(css)) set.add(target);
+      mentions.set(name, set);
+    }
+  }
+  const reached = new Set<string>();
+  const queue = [...only];
+  while (queue.length > 0) {
+    const name = queue.pop()!;
+    if (reached.has(name)) continue;
+    reached.add(name);
+    queue.push(...(mentions.get(name) ?? []));
+  }
+  return reached;
 }
 
 // A reference WITHOUT a fallback — `var(--x)` — renders as nothing when

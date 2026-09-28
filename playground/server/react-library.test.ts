@@ -108,6 +108,33 @@ test('a downloaded composed library installs and bundles in a clean consumer wit
   } finally { rmSync(work, { recursive: true, force: true }); }
 });
 
+test('a package ships only the tokens its components reach: no unrelated tokens, no mode block they do not use', async () => {
+  // The cold-start test (2026-09-28): 394 of a package's 415 custom properties
+  // were the repository's demo tokens, with a [data-brand="aurora"] block.
+  const work = mkdtempSync(path.join(tmpdir(), 'react-library-tokens-'));
+  try {
+    const host = path.join(work, 'host'); mkdirSync(host); symlinkSync(path.join(ROOT, 'node_modules'), path.join(host, 'node_modules'));
+    const color = (value: string) => ({ $type: 'color', $value: value });
+    const tokens = {
+      primitives: { palette: { navy: color('#123456'), 'blue-500': color('#3B82F6') } },
+      semantic: { color: { ink: color('{palette.navy}'), unrelated: color('{palette.blue-500}') } },
+      light: {}, dark: { color: { ink: color('#abcdef'), unrelated: color('#111111') } },
+      brands: { default: {}, aurora: { color: { unrelated: color('#222222') } }, ocean: { color: { ink: color('{palette.navy}') } } },
+    };
+    const result = await buildReactLibrary(host, parseLibraryRequest({ ...request(), tokens }));
+    const css = readFileSync(path.join(path.dirname(result.tarball), 'generated', 'tokens.css'), 'utf8');
+    const blocks = Object.fromEntries([...css.matchAll(/^(\S[^{\n]*) \{\n([^}]*)\}/gm)].map(m => [m[1], m[2].trim().split('\n').map(l => l.trim())]));
+    assert.deepEqual(blocks, {
+      ':root': ['--color-ink: var(--palette-navy);', '--palette-navy: #123456;'],
+      '[data-theme="dark"]': ['--color-ink: #abcdef;'],
+      '[data-brand="ocean"]': ['--color-ink: var(--palette-navy);'],
+    });
+    assert.match(css, /Scope: only the custom properties these components use/);
+    const entries = execFileSync('tar', ['-xzOf', result.tarball, 'package/dist/tokens.css'], { encoding: 'utf8' });
+    assert.equal(entries, css, 'the packaged sheet is the scoped sheet');
+  } finally { rmSync(work, { recursive: true, force: true }); }
+});
+
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const storedOutput = (text = 'synthetic archive') => ({bytes:Buffer.from(text),tarballSha256:hash(text),filename:'library.tgz',name:'@test/library'});
 

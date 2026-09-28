@@ -25,7 +25,9 @@ export async function buildReactLibrary(repoRoot: string, input: ReturnType<type
   for (const slot of ['primitives', 'semantic', 'light', 'dark'] as const) token(slot, input.tokens[slot]);
   for (const [brand, tree] of Object.entries(input.tokens.brands)) token(`brand.${brand}`, tree);
   for (const [name, svg] of input.icons) writeFileSync(path.join(iconsDir, `${name}.svg`), svg, { flag: 'wx' });
-  const result = await generateComponents({ contractFiles, tokenFiles, iconsDir, outDir: generated, stories: false, regenerateHint: 'Export this family again from the local Contract Playground.' });
+  // A package ships only the tokens its own components reach (tokensScope):
+  // the request's token tree also holds the repository's demo tokens.
+  const result = await generateComponents({ contractFiles, tokenFiles, iconsDir, outDir: generated, stories: false, tokensScope: 'reachable', regenerateHint: 'Export this family again from the local Contract Playground.' });
   if (result.refused.length || result.generated.length !== input.contracts.length) throw Error('react-library-generation-refused: ' + result.refused.flatMap(r => r.violations).join('; '));
   if (result.tokensCss.danglingAliases.length) throw Error('react-library-token-alias-missing: ' + result.tokensCss.danglingAliases.join(', '));
   const library = await packageReactLibrary(generated, input.root.name, work, repoRoot, options);
