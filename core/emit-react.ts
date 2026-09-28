@@ -34,6 +34,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, c
  *   - optional parts render conditionally on their slot prop
  */
 import { rootContentJsx, literalTextJsx } from './root-content.js';
+import { literalAttrJsx, literalDocText, literalStringJs } from './emit-literal.js';
 import { REACT_REPEAT_RUNTIME } from './react-repeat-runtime.js';
 import { reactSelectionPlan } from './react-selection.js';
 import {
@@ -189,7 +190,7 @@ function depAttrString(
       const parentProp = parent.props.find((p) => p.name === parentRef[1]);
       parts.push(` ${codeName}={${codeValueExpression(depProp, parentProp?.bindings.code.prop ?? parentRef[1])}}`);
     } else {
-      parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${codeName}="${value}"`);
+      parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${literalAttrJsx(codeName, value)}`);
     }
   }
   return parts.join('');
@@ -211,12 +212,12 @@ export function sampleJSX(
       const nestedDefault = slotsOf(dep).find(
         (s) => s.slot.name === 'children' && (s.slot.defaultContent?.length ?? 0) > 0,
       );
-      if (item.text !== undefined) return `<${dep.name}${attrs}>${item.text}</${dep.name}>`;
+      if (item.text !== undefined) return `<${dep.name}${attrs}>${literalTextJsx(item.text)}</${dep.name}>`;
       if (nestedDefault) {
         return `<${dep.name}${attrs}>\n${sampleJSX(nestedDefault.slot.defaultContent!, byId, depth + 1)}\n</${dep.name}>`;
       }
       if (typeof childrenText?.default === 'string') {
-        return `<${dep.name}${attrs}>${childrenText.default}</${dep.name}>`;
+        return `<${dep.name}${attrs}>${literalTextJsx(childrenText.default)}</${dep.name}>`;
       }
       return `<${dep.name}${attrs} />`;
     })
@@ -334,7 +335,7 @@ export function generateTsx(
 
   const propLines: string[] = [];
   for (const p of contract.props) {
-    const doc = p.description ? `  /** ${p.description} */\n` : '';
+    const doc = p.description ? `  /** ${literalDocText(p.description)} */\n` : '';
     if (isEnum(p)) {
       const union = hasCodeValues(p) || p.name === contract.selection?.valueProp ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ');
       propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${union};`);
@@ -355,12 +356,12 @@ export function generateTsx(
     propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
   }
   for (const { slot, part } of slots) {
-    const doc = part.description ? `  /** ${part.description} */\n` : '';
+    const doc = part.description ? `  /** ${literalDocText(part.description)} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
-    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
+    propLines.push(`  /** ${literalDocText(doc)} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
   }
 
   const destructured: string[] = [];
@@ -373,7 +374,7 @@ export function generateTsx(
     destructured.push(
       hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
-        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
+        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${literalStringJs(String(p.default))}`,
     );
   }
   for (const p of bools) destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default === true}`);
@@ -384,7 +385,7 @@ export function generateTsx(
     destructured.push(
       p.required || p.default === undefined
         ? p.bindings.code.prop
-        : `${p.bindings.code.prop} = '${p.default}'`,
+        : `${p.bindings.code.prop} = ${literalStringJs(String(p.default))}`,
     );
   }
   // v7 arrayOf props: no default destructure — undefined means "not
@@ -813,7 +814,7 @@ ${iconsConst}${repeatRuntime}export interface ${name}Props extends ${mr.propsBas
 ${propLines.join('\n')}
 }
 
-/** ${contract.description}${seeLines(contract)} */
+/** ${literalDocText(contract.description)}${seeLines(contract)} */
 export function ${name}({ ${mr.destructured.join(', ')} }: ${name}Props) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
@@ -864,7 +865,7 @@ ${iconsConst}${roleMapConst}${elementMapConst}${repeatRuntime}export interface $
 ${propLines.join('\n')}
 }
 
-/** ${contract.description}${seeLines(contract)} */
+/** ${literalDocText(contract.description)}${seeLines(contract)} */
 export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${sr.destructured.join(', ')} },
   ref,
@@ -911,7 +912,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
   const args: string[] = [];
   for (const p of contract.props) {
     const codeName = p.bindings.code.prop;
-    const desc = p.description ? `, description: '${p.description.replace(/'/g, "\\'")}'` : '';
+    const desc = p.description ? `, description: ${literalStringJs(p.description)}` : '';
     if (isEnum(p)) {
       argTypes.push(
         `    ${codeName}: { control: 'select', options: [${p.type.enum.map((v) => hasCodeValues(p) ? codeValueLiteral(p,v) : `'${v}'`).join(', ')}]${desc} },`,
@@ -920,7 +921,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       // component is actually interactive in the Playground. Setting the
       // control switches it to controlled — the standard React pattern.
       if (p.default !== undefined && !toggledPropNames.has(p.name)) {
-        args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : `'${p.default}'`},`);
+        args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : literalStringJs(String(p.default))},`);
       }
     } else if (isArrayType(p)) {
       argTypes.push(`    ${codeName}: { control: false${desc} },`);
@@ -939,15 +940,15 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       if (typeof p.default === 'number') args.push(`    ${codeName}: ${p.default},`);
     } else {
       argTypes.push(`    ${codeName}: { control: 'text'${desc} },`);
-      if (typeof p.default === 'string') args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : `'${p.default}'`},`);
+      if (typeof p.default === 'string') args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : literalStringJs(p.default)},`);
     }
   }
   for (const { slot } of slots) {
     argTypes.push(`    ${slot.name}: { control: false },`);
   }
   for (const ev of storyEvents) {
-    const evDesc = (ev.description ?? `Fires when the ${ev.trigger} is activated.`).replace(/'/g, "\\'");
-    argTypes.push(`    ${ev.bindings.code.prop}: { control: false, description: '${evDesc}' },`);
+    const evDesc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
+    argTypes.push(`    ${ev.bindings.code.prop}: { control: false, description: ${literalStringJs(evDesc)} },`);
   }
   const defaultSlot = slotsOf(contract).find((s) => s.slot.name === 'children');
   const defaultSample =
@@ -999,11 +1000,11 @@ export const ${storyName}: Story = {
       slotSampleImports.add(dep.name);
       const requiredAttrs = dep.props
         .filter((p) => p.type === 'text' && p.required && p.bindings.code.prop !== 'children' && typeof p.default === 'string')
-        .map((p) => ` ${p.bindings.code.prop}="${p.default}"`)
+        .map((p) => ` ${literalAttrJsx(p.bindings.code.prop, String(p.default))}`)
         .join('');
       const hasChildren = dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');
       sample = hasChildren
-        ? `<${dep.name}${requiredAttrs}>${textDefault(dep)}</${dep.name}>`
+        ? `<${dep.name}${requiredAttrs}>${literalTextJsx(textDefault(dep))}</${dep.name}>`
         : `<${dep.name}${requiredAttrs} />`;
     }
     slotStories += `
@@ -1045,7 +1046,7 @@ export const With${pascal(slot.name)}: Story = {
     // children below (a `children` attribute would duplicate them).
     const requiredTextAttrs = contract.props
       .filter((p) => p.type === 'text' && p.required && typeof p.default === 'string' && p.bindings.code.prop !== 'children')
-      .map((p) => `${p.bindings.code.prop}="${p.default}"`);
+      .map((p) => literalAttrJsx(p.bindings.code.prop, String(p.default)));
     const cells: string[] = [];
     for (const row of rowProp.type.enum) {
       const rowCells = colCombos
@@ -1059,7 +1060,7 @@ export const With${pascal(slot.name)}: Story = {
           // (Button's label) — either way the matrix cell needs content,
           // or every cell renders as an empty pill.
           return hasDefaultSlot || textProps(contract).some((p) => p.bindings.code.prop === 'children')
-            ? `        <${name} ${attrs}>${label}</${name}>`
+            ? `        <${name} ${attrs}>${literalTextJsx(label)}</${name}>`
             : `        <${name} ${attrs} />`;
         })
         .join('\n');
