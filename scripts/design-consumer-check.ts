@@ -34,8 +34,20 @@
  *                 screenshot with the repository's existing pixel scorer.
  *                 The 5% antialias-tolerant limit is the existing one; it is
  *                 not tuned here.
- *   6. receipt  — write receipt.json + images into --out. Every problem is
+ *   6. content  — every TEXT the Figma variant draws must be in the rendered
+ *                 text, and every icon or vector it draws must have a rendered
+ *                 graphic of about its size (scripts/design-consumer-content.ts).
+ *                 A miss fails that variant by name (`content-missing:<case>:
+ *                 text:"Dialog heading"`, `content-missing:<case>:part:<layers>`)
+ *                 at any pixel score: the 5% limit passed a Dialog whose
+ *                 heading and close icon were missing (cold-start, 2026-09-28).
+ *   7. receipt  — write receipt.json + images into --out. Every problem is
  *                 named; the receipt never reports more than was measured.
+ *                 receipt.verdict gives each variant pass / fail / unverified
+ *                 with the problems that name it (design-consumer-verdict.ts).
+ *
+ * Two Figma variants that would mount under the same case key (an axis the
+ * contract does not map) are refused by name before anything is mounted.
  *
  * Inputs: --dump <rest-dump.json> --contract <proposed contract> --generated
  * <dir from `ds-contracts generate`> --component <Name> --out <dir>
@@ -62,6 +74,8 @@ import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
+import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
+import { CONTENT_RULE, variantVerdicts } from './design-consumer-verdict.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
@@ -233,6 +247,7 @@ export const nestedInteractiveScript = `(() => {
 })()`;
 
 export function deriveCases(dump: any, contract: any, component: string): Case[] {
+  unmapped.clear();
   const set = findDumpSet(dump, contract, component);
   if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}" (by key, set name or the contract's anchor node id)`);
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
@@ -274,9 +289,17 @@ export function deriveCases(dump: any, contract: any, component: string): Case[]
     return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name, interaction, ...(state ? { state } : {}),
       ...(typeof variant.bbox?.width === 'number' && variant.bbox.width > 0 ? { previewWidth: variant.bbox.width } : {}) };
   });
-  const keys = cases.map(c => c.key);
-  for (const key of keys) if (keys.filter(k => k === key).length > 1) unmapped.add(`duplicate case key ${key}`);
   return cases;
+}
+
+/** Cases that would mount under the same key: two Figma variants the contract
+ *  cannot tell apart (an axis it does not map). A cell cannot be attributed to
+ *  either variant, so the check refuses by name before mounting anything (the
+ *  cold-start test met this as a Playwright strict-mode crash). */
+export function duplicateCaseKeys(cases: ReadonlyArray<{ key: string; figmaName: string }>): Array<{ key: string; figmaNames: string[] }> {
+  const byKey = new Map<string, string[]>();
+  for (const c of cases) byKey.set(c.key, [...(byKey.get(c.key) ?? []), c.figmaName]);
+  return [...byKey].filter(([, names]) => names.length > 1).map(([key, figmaNames]) => ({ key, figmaNames }));
 }
 // ---------------------------------------------------------------------------
 // INTERACTION STATES (docs/23 §D.41) — reached the way a user reaches them.
@@ -450,13 +473,16 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
       beforeSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-before.json'))), afterSha256: imageSha256(readFileSync(path.join(out,'figma-bounds-after.json'))) } };
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
+export type ConsumerCheckArgs = Args;
+/** The whole check, as a function: figma:to-react runs it on what it just
+ *  generated. Writes <out>/receipt.json and returns the receipt; never exits. */
+export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
   const fonts = args.fonts ? readConsumerFonts(args.fonts) : [];
   const dump = JSON.parse(readFileSync(args.dump, 'utf8')), contract = JSON.parse(readFileSync(args.contract, 'utf8'));
   const cases = deriveCases(dump, contract, args.component);
   for (const c of cases) c.mount = mountProps(contract, c.props);
   const problems: string[] = [...[...unmapped].map(entry => `variant-mapping-missing:${entry}`)];
+  const domContent: Record<string, DomContent> = {};
   const textRects: Record<string, Array<{ x: number; y: number; width: number; height: number }>> = {};
   const consumerFrames: Record<string, ConsumerFrame> = {};
   const fileKey: string | undefined = dump._provenance?.fileKey ?? contract.bindings?.figma?.anchors?.fileKey ?? undefined;
@@ -507,7 +533,11 @@ async function main() {
   }).filter(Boolean);
   receipt.inputs.contractGraph = contractGraph(contract, siblings).map(ref => ({ ...ref, packaged: ref.name !== null && receipt.inputs.componentFolders.includes(ref.name) }));
   for (const ref of receipt.inputs.contractGraph) if (!ref.packaged) problems.push(`dependency-not-packaged:${ref.id}`);
-  try {
+  const duplicates = duplicateCaseKeys(cases);
+  for (const d of duplicates)
+    problems.push(`case-key-duplicate:${d.key}: Figma variants ${d.figmaNames.map(n => JSON.stringify(n)).join(', ')} mount the same props (the contract maps no axis that tells them apart); refused before mounting`);
+  if (duplicates.length) { receipt.refused = 'case-key-duplicate'; rmSync(work, { recursive: true, force: true }); }
+  else try {
     const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
     const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
@@ -653,6 +683,8 @@ async function main() {
           return rects;
         `) as (el: Element) => unknown) as Array<{ x: number; y: number; width: number; height: number }>;
         paints[c.key] = await cell.evaluate(paintOf);
+        // What the cell renders, for the content check (judged once Figma's side is read).
+        domContent[c.key] = await cell.evaluate(domContentOf);
         if (c.interaction !== 'none') {
           const changed = paints[c.key] !== entered.restPaint;
           receipt.behavior.states.push({ key: c.key, state: c.state, reachedBy: REACHED_BY[c.interaction], reached: entered.reached, paintChanged: changed });
@@ -813,11 +845,34 @@ async function main() {
       const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);
       if (dw > SIZE_SLACK_PX || dh > SIZE_SLACK_PX) problems.push(`content-size-mismatch:${c.key}:${aligned.aContent.width}x${aligned.aContent.height} vs ${aligned.bContent.width}x${aligned.bContent.height}`);
     } else problems.push('figma-images-unavailable');
+    // THE CONTENT CHECK (design-consumer-content.ts): every text and icon the
+    // Figma variant draws must render, whatever the pixel score says.
+    const content = unresolved ? { status: 'unavailable' as const, reason: unresolved }
+      : fileKey ? await fetchFigmaContent(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'unavailable' as const, reason: 'no fileKey in dump' };
+    receipt.content = { status: content.status, rule: CONTENT_RULE, ...(content.status === 'collected'
+      ? { figmaVersion: content.version, responseSha256: content.responseSha256, evidence: 'figma-content.json' } : { reason: content.reason }), cases: [] as CaseContent[] };
+    if (content.status === 'collected') for (const c of cases) {
+      const dom = domContent[c.key];
+      if (!dom) { problems.push(`content-unmeasured:${c.key}`); continue; }
+      const judged = caseContent(c.key, content.byNodeId[c.nodeId], dom);
+      receipt.content.cases.push(judged.content);
+      problems.push(...judged.problems);
+      const row = receipt.cases.find((r: { key: string }) => r.key === c.key);
+      if (row) row.content = judged.content;
+    } else problems.push(`content-check-unavailable:${content.reason}`);
   } catch (error) {
     problems.push('check-failed: ' + (error instanceof Error ? error.message : String(error)).split('\n')[0]);
   } finally { rmSync(work, { recursive: true, force: true }); }
   receipt.outcome = problems.length ? 'refused-or-failed' : 'consumer-mounted-behaved-and-compared';
+  receipt.verdict = variantVerdicts(receipt, cases);
   writeFileSync(path.join(args.out, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
+  return receipt;
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const receipt = await runConsumerCheck(args);
+  const problems: string[] = receipt.problems;
   console.log(`${problems.length ? '✘' : '✔'} design:consumer:check ${args.component}: ${receipt.outcome}${problems.length ? '\n  - ' + problems.join('\n  - ') : ''}\n  receipt → ${path.join(args.out, 'receipt.json')}`);
   process.exit(problems.length ? 1 : 0);
 }
