@@ -11,7 +11,7 @@ import {loadReactCohort,reactCohortWitnessSnapshot as snapshot,type ReactCohort}
 import {reactReferenceUnchanged} from './react-reference.js';
 import {reactWitnessesMatch} from './react-reference-profiles.js';
 import {repairCallerProfile,verifyRepairCallerFrames,type RepairCallerFrame} from './react-source-repair-cohort.js';
-import {reactSourceRepairInputRevision,type ReactSourceRepairInput,type ReactSourceRepairPreview} from './react-source-repair-preview.js';
+import {rankedRepairSelection,reactSourceRepairInputRevision,type ReactSourceRepairInput,type ReactSourceRepairPreview} from './react-source-repair-preview.js';
 import {createSourceFileTransactions,type SourceFileTransaction} from './react-source-file-transaction.js';
 import type {stageReactUtilitySourceEdit} from './react-source-repair-stage.js';
 
@@ -76,7 +76,7 @@ export function createReactSourceWitnessSuccessions(repo:string){
     };
     const preview=readProof(path.join(p.previewDirectory,'result.json')) as ReactSourceRepairPreview;
     if(revisionOf(preview)!==p.resultRevision||preview.phase!=='reviewable'||preview.selected!==p.index||preview.planRevision!==p.plan.revision||
-      preview.candidates.filter(c=>c.status==='verified').length!==1||!preview.candidates.some(c=>c.index===p.index&&c.status==='verified'))fail('preview-unqualified');
+      rankedRepairSelection(preview.candidates,p.plan)!==p.index)fail('preview-unqualified');
     const row=preview.candidates.find(c=>c.index===p.index)!,candidate=p.plan.candidates[p.index],stage=readProof(p.stageFile) as Stage;
     if(!candidate||!row.css||row.module!==candidate.source.module||row.before!==candidate.edit.before||row.after!==candidate.edit.after||
       stage.sourceRoot!==selection.sourceRoot||!same(stage.originalFiles,selection.inputs)||

@@ -4,9 +4,9 @@ import {createHash} from 'node:crypto';
 import {constants,cpSync,existsSync,lstatSync,mkdirSync,mkdtempSync,readdirSync,readFileSync,realpathSync,symlinkSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {buildReactSourceCss} from './react-source-css-build.js';
-import type {proposeReactOpacityUtilityEdits} from './react-utility-source-edit.js';
+import type {ReactUtilitySourceCandidate} from './react-utility-source-edit.js';
 
-type Candidate=ReturnType<typeof proposeReactOpacityUtilityEdits>[number];
+type Candidate=ReactUtilitySourceCandidate;
 const sha=(s:string|Buffer)=>createHash('sha256').update(s).digest('hex');
 const fail=(reason:string):never=>{throw Error('react-source-stage-'+reason);};
 
