@@ -665,11 +665,17 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         // applies its shared background after trimming both alpha bounds.
         await root.scrollIntoViewIfNeeded();
         const boundsOf = (el: Element) => {const b=el.getBoundingClientRect();return {x:b.x+scrollX,y:b.y+scrollY,width:b.width,height:b.height};};
-        const beforeCapture = await root.evaluate(boundsOf);
-        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
-        const afterCapture = await root.evaluate(boundsOf);
-        if(JSON.stringify(beforeCapture)!==JSON.stringify(afterCapture)) problems.push(`consumer-bounds-changed-during-capture:${c.key}`);
-        else consumerFrames[c.key]={layout:afterCapture,capture:enclosingFrame(afterCapture),deviceScaleFactor:1,pngSha256:imageSha256(readFileSync(shot))};
+        const shot = path.join(args.out, `consumer-${c.key}.png`);
+        // A root of zero size has no pixels to capture: the screenshot would wait
+        // for a visible box and time out, ending the check for every later cell
+        // (cold-start Progress, 0 px tall). zero-size-render already fails it by name.
+        if (style.width > 0 && style.height > 0) {
+          const beforeCapture = await root.evaluate(boundsOf);
+          await root.screenshot({ ...NODE_SCREENSHOT_OPTIONS, path: shot, timeout: 10000 });
+          const afterCapture = await root.evaluate(boundsOf);
+          if(JSON.stringify(beforeCapture)!==JSON.stringify(afterCapture)) problems.push(`consumer-bounds-changed-during-capture:${c.key}`);
+          else consumerFrames[c.key]={layout:afterCapture,capture:enclosingFrame(afterCapture),deviceScaleFactor:1,pngSha256:imageSha256(readFileSync(shot))};
+        }
         // Where this render draws text, in the screenshot's own pixels (the root's
         // layout box). The same walk extract/figma/visual-parity/render.ts makes.
         // Serialized as text for the same reason as the font probe above.
@@ -692,7 +698,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
         }
         // state-not-carried is one line per STATE (the contract declares no such state — its cells render the rest state and the pixels judge).
         for (const p of stateProblems(c, declaredStates, entered.reached, paints[c.key] !== entered.restPaint)) p.startsWith('state-not-carried:') ? notCarried.add(`${p} (the contract declares no "${c.state}" state — its cells render the rest state and the pixels judge)`) : problems.push(p);
-        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: path.basename(shot), frame: consumerFrames[c.key] ?? null });
+        receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, ...(c.state ? { state: c.state, interaction: c.interaction } : {}), rendered: { text, ...style, font }, screenshot: existsSync(shot) ? path.basename(shot) : null, frame: consumerFrames[c.key] ?? null });
       }
       // `disabled` is a prop, not an interaction: its cell is compared with the
       // rest cell that has the same other props.
@@ -803,6 +809,8 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
+      // No consumer image: the root rendered at zero size (named above as zero-size-render).
+      if (!existsSync(path.join(args.out, `consumer-${c.key}.png`))) { receipt.images.cases.push({ key: c.key, status: 'consumer-image-missing' }); continue; }
       const ours = readPng(path.join(args.out, `consumer-${c.key}.png`)), theirs = readPng(file);
       const aligned = alignPair(ours, theirs), diff = diffPair(aligned, textRects[c.key] ?? []);
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
