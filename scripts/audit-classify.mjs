@@ -32,7 +32,9 @@ export function classifyAudit(parsed, status, stderr = '') {
       .map(([name, v]) => `${name} (${v.severity})`);
     return { kind: 'vulnerable', count: high, names };
   }
-  const total = Object.values(vulns).reduce((a, b) => a + (typeof b === 'number' ? b : 0), 0);
+  // Sum the severities by name: npm's object also carries its own `total`, and
+  // summing every value counted each advisory twice.
+  const total = ['info', 'low', 'moderate', 'high', 'critical'].reduce((a, k) => a + (typeof vulns[k] === 'number' ? vulns[k] : 0), 0);
   return { kind: 'clean', total, dependencies: parsed.metadata?.dependencies?.total ?? null };
 }
 
