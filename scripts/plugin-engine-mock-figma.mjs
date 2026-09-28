@@ -823,6 +823,15 @@ export function createFigmaMock(options = {}) {
       // a zero seed with 7+11 / 3+5 padding is exactly 18 by 8.
       if (this.children.length === 0)
         return Math.max(pad, axis === 'w' ? this._w : this._h);
+      // A SLOT whose only children are hidden is not re-measured either: it
+      // keeps the extent last written to it. Live readback 2026-09-28 (DS
+      // Contracts Live Testing, operation 2f533a1e): a Badge's HUG Children
+      // slot holding only its hidden text template kept the 0.01 px width seed
+      // (docs/23 D.175), where this mock measured 0 and so never exercised the
+      // seed. Modeled only for an extent the writer resized explicitly; the
+      // creation box and other node types are unmeasured.
+      if (this.type === 'SLOT' && this._resized && this.children.every((c) => c.visible === false))
+        return Math.max(pad, axis === 'w' ? this._w : this._h);
       const inFlow = this.children.filter((c) => c.visible !== false && c.layoutPositioning !== 'ABSOLUTE');
       // The degenerate: a FILL child has no intrinsic contribution — a HUG
       // parent whose every child FILLs resolves to padding alone (~collapse).

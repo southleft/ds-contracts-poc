@@ -4,6 +4,7 @@
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeSourceReadback } from './native-source-observation.js';
 import type { NativeContractUpdateInput, NativeOpacityUpdatePlan } from './native-contract-update.js';
+import { emptySlotWidth } from './native-float32.js';
 
 type Values = Record<string, unknown>;
 interface Transition { nodeId: string; before: Values; after: Values; slotId: string; slotBefore: Values; slotAfter: Values }
@@ -93,13 +94,23 @@ export function prepareNativeRootSizeUpdate(input: NativeContractUpdateInput,
       const max = root.values[d.channel === 'width' ? 'maxWidth' : 'maxHeight'];
       if ((typeof min === 'number' && d.value < min) || (typeof max === 'number' && d.value > max))
         throw Error('native-update-size-constraint-conflict');
-      const minimum = slot.values[d.channel] + sides.reduce((sum, side) =>
+      // The empty slot's width seed draws nothing (docs/23 D.175): content
+      // starts at the padding and strokes, as React draws it.
+      const content = d.channel === 'width' && emptySlotWidth(slot.values.width) ? 0 : slot.values[d.channel] as number;
+      const minimum = content + sides.reduce((sum, side) =>
         sum + (root.values['padding' + side] ?? 0) + (root.values['stroke' + side + 'Weight'] ?? 0), 0);
       if (d.value < minimum) throw Error('native-update-size-content-overflow');
       for (const key of [d.channel, 'layoutSizing' + axis, mode]) t.before[key] = root.values[key];
       Object.assign(t.after, { [d.channel]: d.value, ['layoutSizing' + axis]: 'FIXED', [mode]: 'FIXED' });
       t.slotBefore[position] = slot.values[position];
       t.slotAfter[position] = slot.values[position] + (d.value - root.values[d.channel]) * (alignment === 'CENTER' ? 0.5 : alignment === 'MAX' ? 1 : 0);
+      // Figma stores the slot's new offset as a float32, and the update is
+      // checked by exact equality. A prediction that is not a float32 (a
+      // centered seeded slot: (40 - 0.01) / 2) can never match, so Figma would
+      // roll the write back. Refuse by name before writing. Supporting it needs
+      // a live measurement of Figma's own offset arithmetic (docs/23 D.175).
+      if (Math.fround(t.slotAfter[position] as number) !== t.slotAfter[position])
+        throw Error('native-update-size-numeric-domain-unqualified');
       t.slotBefore.relativeTransform = structuredClone(slot.values.relativeTransform);
       const transform = (t.slotAfter.relativeTransform ?? structuredClone(slot.values.relativeTransform)) as number[][];
       transform[d.channel === 'width' ? 0 : 1][2] = t.slotAfter[position] as number;
