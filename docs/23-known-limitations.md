@@ -12406,8 +12406,8 @@ Evidence: `private/v1-scoreboard/switch-shadow-v1/`.
 Not claimed: the updated canvas was not pixel-scored against a React capture
 of `shadow-sm`. It carries the same compiled layers creation writes for that
 stack, and creation's shadow fidelity is gated by the Switch benchmark cell.
-A designer's shadow edit does not yet become React source; that repair is
-opacity-only.
+The reverse direction, a designer's shadow edit becoming React source, is
+D.177.
 
 Tests: `core/native-contract-shadow-token-update.test.ts` (carried and
 verified in one plan; repeat and rollback; a partial application finished; a
@@ -12483,7 +12483,7 @@ refused the ranked selection as `react-source-witness-preview-unqualified`.
 Evidence: `private/v1-scoreboard/switch-shadow-v1/README.md`.
 
 Not claimed: prefixed shadow utilities (`dark:`, `data-*:`) have selectors this
-rule does not reconstruct and refuse; inset and coloured shadows are not
+rule does not reconstruct and refuse; inset and colored shadows are not
 measured live; only the configured callers and recorded finite domains are
 checked (as in D.105).
 

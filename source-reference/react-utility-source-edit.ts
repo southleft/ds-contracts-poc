@@ -118,7 +118,7 @@ const sameEffect=(a:NativeShadowEffect,b:NativeShadowEffect)=>a.type===b.type&&[
   [a.offset.x,b.offset.x],[a.offset.y,b.offset.y],[a.radius,b.radius],[a.spread??0,b.spread??0],
   [a.color.r,b.color.r],[a.color.g,b.color.g],[a.color.b,b.color.b],[a.color.a,b.color.a]].every(([x,y])=>equal(x,y));
 /** One layer as a Tailwind arbitrary value, or nothing when a number has no
- * exact CSS spelling (a colour channel off the 8-bit grid, say). */
+ * exact CSS spelling (a color channel off the 8-bit grid, say). */
 function arbitraryLayer(e:NativeShadowEffect) {
   if(e.visible===false||(e.blendMode!==undefined&&e.blendMode!=='NORMAL')||!['DROP_SHADOW','INNER_SHADOW'].includes(e.type))return undefined;
   const lengths=[e.offset.x,e.offset.y,e.radius,e.spread??0].map(decimal);

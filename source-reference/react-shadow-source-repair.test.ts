@@ -31,7 +31,7 @@ test('a designer shadow proposes every other named size and one exact arbitrary 
     assert.equal(c.result.slice(c.edit.start+c.edit.after.length),text.slice(c.edit.end));
     assert.ok(c.limitations.includes('unique-effect-required')&&c.limitations.includes('source-write-not-authorized'));
   }
-  // A colour off the 8-bit grid has no exact CSS spelling: only named sizes remain.
+  // A color off the 8-bit grid has no exact CSS spelling: only named sizes remain.
   const odd=[...slots,{...layer(0,1,3,0,0.1),color:{r:Math.fround(0.3333),g:0,b:0,a:Math.fround(0.1)}}];
   assert.ok(proposeReactShadowUtilityEdits(text,source,{before:XS,after:odd}).every(c=>c.rank===0));
   assert.throws(()=>proposeReactShadowUtilityEdits(text,source,{before:XS,after:structuredClone(XS)}),/shadow-change-invalid/);
