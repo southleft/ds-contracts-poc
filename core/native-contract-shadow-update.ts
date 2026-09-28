@@ -1,8 +1,11 @@
 /** Restore a compiler-qualified root shadow stack without reallocating a main.
- * All other properties, tokens and topology must retain their verified values. */
+ * All other properties, tokens and topology must retain their verified values,
+ * except the owned, unbound STRING variables that record a shadow: their new
+ * values are written beside the effects (§D.176). */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
 import { emitNativeContractReadbackScript, nativeShadowStackMatches, verifyNativeContractReadback, type NativeSourceReadback } from './native-source-observation.js';
 import type { NativeContractUpdateInput, NativeOpacityUpdatePlan } from './native-contract-update.js';
+import { emitNativeTokenValueChannelScript, nativeTokenValueStored } from './native-token-value-channel-writer.js';
 
 type Effect = { type: 'INNER_SHADOW' | 'DROP_SHADOW'; color: { r: number; g: number; b: number; a: number };
   offset: { x: number; y: number }; radius: number; spread: number; visible: true; blendMode: 'NORMAL' };
@@ -64,6 +67,9 @@ export function prepareNativeShadowUpdate(input: NativeContractUpdateInput,
   }
   const base = prepareBase(sanitized).plan;
   if (base.changes.length) throw Error('native-update-shadow-mixed-channels-unqualified');
+  // The base carries only STRING shadow records (every other variable value
+  // refuses by name). A record is written only beside the effects it shows.
+  if (base.tokenChanges?.some(c => c.resolvedType !== 'STRING')) throw Error('native-update-shadow-mixed-channels-unqualified');
   const plan: NativeShadowUpdatePlan = { ...base, version: 3, kind: 'native-contract-shadow-update', changes: [] };
   for (const i of changed) {
     const spec = input.desired.component.variants[i].spec;
@@ -92,11 +98,21 @@ export function nativeShadowUpdateMatches(plan: NativeShadowUpdatePlan, receipt:
       if (!row || !(matches(row.values.effects, change.after) || !complete && matches(row.values.effects, change.before))) return false;
       row.values.effects = structuredClone(change.before);
     }
+    // Recorded shadow values are pinned transitions like the effects they record.
+    for (const change of plan.tokenChanges ?? []) {
+      const row = normalized.tokens?.receipt?.variables?.find((v: any) => v.id === change.variableId);
+      if (!row || !row.valuesByMode || !(complete ? [change.after] : [change.before, change.after]).some(v => nativeTokenValueStored(row.valuesByMode[change.modeId], change, v))) return false;
+      row.valuesByMode[change.modeId] = change.before;
+    }
+    if (complete && plan.tokenChanges?.length && verifyNativeContractReadback(plan.after, receipt).status !== 'supported-structure-observed') return false;
     return same(normalized, plan.baseline) && verifyNativeContractReadback(plan.before, normalized).status === 'supported-structure-observed';
   } catch { return false; }
 }
 
 export function emitNativeShadowUpdateScript(plan: NativeShadowUpdatePlan, direction: 'apply' | 'rollback', readOnly: boolean) {
+  // Plans without variable values keep their authenticated bytes below.
+  if (plan.tokenChanges !== undefined)
+    return emitNativeTokenValueChannelScript(plan, { field: 'effects', same: MATCH_EFFECTS, conflict: 'native-update-shadow-conflict' }, direction, readOnly);
   const expected = direction === 'apply' ? plan.after : plan.before;
   return `const plan=${JSON.stringify(plan)}, direction=${JSON.stringify(direction)}, readOnly=${readOnly};
 const matches=${MATCH_EFFECTS};

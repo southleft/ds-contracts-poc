@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {isReactStateApiNativeRequest,type ReactStateApiNativeRequest} from './react-state-api-native-request.js';
 import {createReactSourceRepairPreviews} from './react-source-repair-preview.js';
 import {createReactSourceWitnessSuccessions} from './react-source-witness-succession.js';
-import {planReactOpacitySourceRepair} from './react-design-source-repair.js';
+import {planReactDesignSourceRepair} from './react-design-source-repair.js';
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {hasRecordedNativeMeasurement, readRecordedNativeMeasurement} from './matched-native-review.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
@@ -463,7 +463,7 @@ export function createReactReferenceService(
     // its recorded initial observation compiles under the initial id (§D.173).
     const contractId=design.input.component.contractId;
     const recorded=initialStates.repairEvidence(reference,request,stateApi?initialContractIdOfStateApi(contractId):contractId);
-    const plan=planReactOpacitySourceRepair(design,readFileSync(path.join(reference.sourceRoot,recorded.observation.source.module),'utf8'),recorded.observation.source);
+    const plan=planReactDesignSourceRepair(design,readFileSync(path.join(reference.sourceRoot,recorded.observation.source.module),'utf8'),recorded.observation.source);
     const input=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_INPUT,output=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT;
     if(!input||!output||[input,output].some(file=>path.isAbsolute(file)||file.split(/[\\/]/).includes('..')))
       throw Error('react-source-repair-host-css-recipe-required');
