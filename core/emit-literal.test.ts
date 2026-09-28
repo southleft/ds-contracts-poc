@@ -59,6 +59,8 @@ test('ordinary text keeps its historical spelling; text that would end a literal
   }
   assert.equal(literalAttrJsx('label', HEADING), `label={${JSON.stringify(HEADING)}}`);
   assert.equal(literalDocText('ends */ early'), 'ends *\\/ early');
+  // A contract without a description keeps the bytes it always emitted.
+  assert.equal(literalDocText(undefined), 'undefined');
 });
 
 test('a Figma text default with a quote, a backslash and a line break emits, type-checks and renders verbatim on both React surfaces', async () => {

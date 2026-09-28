@@ -29,6 +29,8 @@ export function literalAttrJsx(name: string, text: string): string {
 
 /** Text inside a JSDoc block. A `*` followed by `/` would close the comment
  *  and leave the rest of the text as source code. */
-export function literalDocText(text: string): string {
-  return text.replaceAll('*/', '*\\/');
+export function literalDocText(text: string | undefined): string {
+  // A contract without a description rendered `${undefined}` before this
+  // helper existed; String() keeps those bytes rather than throwing.
+  return String(text).replaceAll('*/', '*\\/');
 }
