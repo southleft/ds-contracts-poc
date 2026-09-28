@@ -7,6 +7,7 @@ import {revisionOf} from '../core/contract-provenance.js';
 import {planReactDesignSourceRepair,planReactShadowSourceRepair} from './react-design-source-repair.js';
 import {proposeReactShadowUtilityEdits,type NativeShadowEffect} from './react-utility-source-edit.js';
 import {verifyReactSourceRepairStates,type RepairStateObservation} from './react-source-repair-observation.js';
+import {rankedRepairSelection} from './react-source-repair-preview.js';
 import {acceptShadowVariables,cssIdentifier,repairShadowShows} from './react-repair-shadow.js';
 
 // Tailwind's composition: four invisible slots, then --tw-shadow (§D.177).
@@ -134,4 +135,14 @@ test('a class swap may change only the shadow variable chain it declares (record
   // Anything outside the chain stays for the whole-tree comparison to refuse.
   const outside=node('.shadow-xs',XS_VAR);acceptShadowVariables(outside,node('.shadow-sm',SM_VAR,{'--primary':'red'}),{before:'shadow-xs',after:'shadow-sm'});
   assert.equal(outside.style['--primary'],'oklch(0.205 0 0)');
+});
+
+test('one selection rule serves the preview and the witness succession',()=>{
+  const row=(index:number,status:'verified'|'refused')=>({index,status,before:'',after:'',module:'m'});
+  const plan=(ranks:Array<0|1|undefined>)=>({candidates:ranks.map(rank=>rank===undefined?{}:{rank})}) as any;
+  assert.equal(rankedRepairSelection([row(0,'verified'),row(1,'verified')],plan([1,0])),1,'the named utility wins');
+  assert.equal(rankedRepairSelection([row(0,'verified'),row(1,'verified')],plan([0,0])),undefined,'equals of one rank are ambiguous');
+  assert.equal(rankedRepairSelection([row(0,'refused'),row(1,'verified')],plan([0,1])),1,'the arbitrary value when no name renders the edit');
+  assert.equal(rankedRepairSelection([row(0,'verified'),row(1,'verified')],plan([undefined,undefined])),undefined,'an unranked plan keeps exactly-one');
+  assert.equal(rankedRepairSelection([row(0,'refused')],plan([0])),undefined);
 });

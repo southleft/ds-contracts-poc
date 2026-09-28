@@ -50,6 +50,19 @@ function changedText(before:string,after:string) {
   return {removed:before.slice(start,before.length-end),added:after.slice(start,after.length-end)};
 }
 
+/** The unique verified candidate of the best rank (§D.177). A named utility
+ * that renders the edit is preferred to the arbitrary spelling of the same
+ * shadow; two verified candidates of one rank stay ambiguous, and a plan
+ * without ranks keeps the historical exactly-one rule. */
+export function rankedRepairSelection(candidates:ReactSourceRepairPreview['candidates'],plan:Plan):number|undefined {
+  const rank=(index:number)=>{const c=plan.candidates[index];return c&&'rank' in c&&c.rank!==undefined?c.rank:0;};
+  const verified=candidates.filter(c=>c.status==='verified');
+  if(!verified.length)return undefined;
+  const best=Math.min(...verified.map(c=>rank(c.index)));
+  const selected=verified.filter(c=>rank(c.index)===best);
+  return selected.length===1?selected[0].index:undefined;
+}
+
 export function createReactSourceRepairPreviews(repo:string,
   derive:(referenceId:string,parentId:string,proposalId:string)=>ReactSourceRepairInput,deps:Dependencies=dependencies) {
   type Job={state:ReactSourceRepairPreview;signature:string;referenceId:string;dir:string;promise:Promise<void>;
@@ -115,14 +128,9 @@ export function createReactSourceRepairPreviews(repo:string,
               verified.set(index,{reference,program,stage});
             }catch(error){row.problem=reason(error);}
           }
-          assertInput();const verifiedRows=state.candidates.filter(c=>c.status==='verified');
-          // A named utility that renders the edit is preferred to the arbitrary
-          // spelling of the same shadow; equals of one rank stay ambiguous (§D.177).
-          const rank=(index:number)=>{const c=input.plan.candidates[index];return c&&'rank' in c&&c.rank!==undefined?c.rank:0;};
-          const best=Math.min(...verifiedRows.map(c=>rank(c.index)));
-          const selected=verifiedRows.filter(c=>rank(c.index)===best);
-          if(selected.length!==1)throw Error(selected.length?'react-source-repair-preview-ambiguous-effect':'react-source-repair-preview-no-matching-effect');
-          const index=selected[0].index,proposed=verified.get(index)!;
+          assertInput();const index=rankedRepairSelection(state.candidates,input.plan);
+          if(index===undefined)throw Error(state.candidates.some(c=>c.status==='verified')?'react-source-repair-preview-ambiguous-effect':'react-source-repair-preview-no-matching-effect');
+          const proposed=verified.get(index)!;
           state.step='Checking every configured caller and its recorded finite states';
           state.cohort=await deps.cohort({input,candidateIndex:index,proposed:proposed.reference,program:proposed.program,dir:path.join(dir,'callers'),assertCurrent:assertSource});
           assertInput();job.selectedStage=structuredClone(proposed.stage);state.selected=index;state.phase='reviewable';state.current=true;state.step='One candidate matches the recorded states and configured callers';
