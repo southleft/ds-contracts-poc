@@ -13,7 +13,7 @@ export function designValue(value: unknown) {
   </details>;
 }
 
-export function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before'] | NativeContractUpdatePlan['changes'][number]['after']) {
+export function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before'] | NativeContractUpdatePlan['changes'][number]['after'] | string) {
   if (typeof value === 'string' || typeof value === 'number') return String(value);
   if (!value.length) return 'No shadows';
   return <ol>{value.map((effect,index)=><li key={index}>

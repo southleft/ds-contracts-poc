@@ -10,6 +10,7 @@ import {prepareNativeBackgroundUpdate, nativeBackgroundUpdateMatches, resolveNat
 import {prepareNativeSvgUpdate,emitNativeSvgUpdateScript,nativeSvgUpdateMatches,type NativeSvgUpdatePlan} from './native-contract-svg-update.js';
 import { prepareNativeRootSizeUpdate, emitNativeRootSizeUpdateScript, nativeRootSizeUpdateMatches, type NativeRootSizeUpdatePlan } from './native-contract-size-update.js';
 import { prepareNativeShadowUpdate, emitNativeShadowUpdateScript, nativeShadowUpdateMatches, type NativeShadowUpdatePlan } from './native-contract-shadow-update.js';
+import { nativeTokenValueStored, type NativeTypedTokenValueChange } from './native-token-value-channel-writer.js';
 /** Bounded corrections to an existing unaccepted native draft. Creation
  * identities remain immutable; the update journal supplies the new revision. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -39,14 +40,16 @@ export interface NativeOpacityUpdatePlan {
 }
 /** One variable value in one mode. The id and mode id come from the host-pinned
  * token identity, never from a name search. `before` is the value the verified
- * baseline stored; `after` is the compiled desired value. */
-export interface NativeTokenValueChange {
-  tokenPath: string; variableId: string; modeId: string; sourceMode: string; brand: string;
-  before: number; after: number;
-}
+ * baseline stored; `after` is the compiled desired value. A number unless
+ * `resolvedType` says STRING; only a sibling planner that asks carries strings. */
+export type NativeTokenValueChange = NativeTypedTokenValueChange;
 /** `$type`s whose compiled variable is one FLOAT the token reader verifies
  * exactly or as its float32 image. Anything else is refused by name. */
 const CARRIED_TOKEN_TYPES = new Set(['number']);
+/** `$type`s whose compiled variable is one STRING, carried only for a planner
+ * that writes them with the channel they record (a root shadow). */
+export const SHADOW_STRING_TOKEN_TYPES: ReadonlySet<string> = new Set(['shadow']);
+const NO_STRING_TOKEN_TYPES: ReadonlySet<string> = new Set();
 const label = (text: string) => text.replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 60);
 /** Every string anywhere inside a value. */
 const strings = (value: unknown, out = new Set<string>()): Set<string> => {
@@ -81,7 +84,9 @@ export function prepareNativeContractUpdate(input: NativeContractUpdateInput): {
   // Only the scalar plan carries variable values. A sibling kind's matcher and
   // program know nothing of them, so a mixed change is refused by name.
   const scalarOnly = (base: NativeContractUpdateInput) => prepareOpacityUpdate(base, false);
-  return prepareNativeBoundCrossSizeUpdate(input, scalarOnly) ?? prepareNativeDefaultFillUpdate(input, scalarOnly) ?? prepareNativeBackgroundUpdate(input, scalarOnly) ?? prepareNativeSvgUpdate(input, scalarOnly) ?? prepareNativeShadowUpdate(input, scalarOnly) ?? prepareNativeRootSizeUpdate(input, scalarOnly) ?? prepareNativeAbsoluteShapeUpdate(input, scalarOnly) ?? prepareOpacityUpdate(input);
+  // The shadow writer also writes the root's own shadow record (a STRING).
+  const shadowRecords = (base: NativeContractUpdateInput) => prepareOpacityUpdate(base, false, SHADOW_STRING_TOKEN_TYPES);
+  return prepareNativeBoundCrossSizeUpdate(input, scalarOnly) ?? prepareNativeDefaultFillUpdate(input, scalarOnly) ?? prepareNativeBackgroundUpdate(input, scalarOnly) ?? prepareNativeSvgUpdate(input, scalarOnly) ?? prepareNativeShadowUpdate(input, shadowRecords) ?? prepareNativeRootSizeUpdate(input, scalarOnly) ?? prepareNativeAbsoluteShapeUpdate(input, scalarOnly) ?? prepareOpacityUpdate(input);
 }
 /** Root corrections must carry the entire compiler output. Dependency edits
  * need their own inherited-instance transitions; dropping them here would
@@ -120,7 +125,7 @@ function assertNativeUpdateGraph(input: NativeContractUpdateInput) {
  * 0.4000000059604645. Exact, or the float32 image of the intended value; no
  * wider tolerance. The same policy already governs colours, strokes and grids. */
 const stored = (actual: unknown, expected: number) => actual === expected || actual === Math.fround(expected);
-function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues = true) {
+function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues = true, carriedStrings = NO_STRING_TOKEN_TYPES) {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.desired.revision) ||
       verifyNativeContractReadback(input.before, input.baseline).status !== 'supported-structure-observed')
     throw Error('native-update-verified-baseline-required');
@@ -160,7 +165,7 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues
   for (const path of [...wasRequested].sort()) if (!nowRequested.has(path))
     throw Error('native-update-token-allocation-change-unsupported:released;' + label(path));
   const before = structuredClone(input.before); delete before.allocationAnchor;
-  const tokenUpdate = valueChanges.length ? prepareTokenValueChanges(input, valueChanges, carryTokenValues) : undefined;
+  const tokenUpdate = valueChanges.length ? prepareTokenValueChanges(input, valueChanges, carryTokenValues, carriedStrings) : undefined;
   const after = structuredClone(before), desired = structuredClone(input.desired.component);
   // Keep both views of the same root synchronized, including when a sibling
   // channel planner changes the scalar plan's root after preparation.
@@ -208,7 +213,8 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput, carryTokenValues
 /** Eligibility of every changed token value, and the token input the update
  * leaves behind. Every refusal names the token path. */
 function prepareTokenValueChanges(input: NativeContractUpdateInput,
-  valueChanges: Array<{ modeIndex: number; tokenPath: string; value: unknown }>, carryTokenValues: boolean) {
+  valueChanges: Array<{ modeIndex: number; tokenPath: string; value: unknown }>, carryTokenValues: boolean,
+  carriedStrings: ReadonlySet<string>) {
   const tokenInput = input.before.tokenInput, identity = input.before.tokenIdentity;
   const prepared = prepareNativeTokenContext(tokenInput);
   const observed = new Map<string, any>((input.baseline.tokens?.receipt?.variables ?? []).map((v: any) => [v.id, v]));
@@ -216,7 +222,8 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
     const name = label(change.tokenPath), mode = tokenInput.modes[change.modeIndex];
     const desiredMode = input.desired.tokenInput.modes.find(m => m.sourceMode === mode.sourceMode && m.brand === mode.brand && m.nativeModeName === mode.nativeModeName)!;
     const old = flattenTokens(mode.tokens).get(change.tokenPath)!, next = flattenTokens(desiredMode.tokens).get(change.tokenPath)!;
-    if (!carryTokenValues) throw Error('native-update-token-value-mixed-channels-unqualified:' + name);
+    const string = carriedStrings.has(old.type ?? '');
+    if (!carryTokenValues && !string) throw Error('native-update-token-value-mixed-channels-unqualified:' + name);
     const variable = prepared.variables.find(v => v.tokenPath === change.tokenPath);
     const pinned = identity.variables.find(v => v.tokenPath === change.tokenPath);
     if (!variable || !pinned || !observed.has(pinned.id)) throw Error('native-update-token-unallocated:' + name);
@@ -226,7 +233,8 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
     if (aliasTarget(old.value) !== null || aliasTarget(next.value) !== null)
       throw Error('native-update-token-alias-change-unsupported:' + name);
     if (old.type !== next.type) throw Error('native-update-token-type-change-unsupported:' + name);
-    if (!CARRIED_TOKEN_TYPES.has(old.type) || variable.resolvedType !== 'FLOAT' || observed.get(pinned.id).resolvedType !== 'FLOAT')
+    const nativeType = string ? 'STRING' : 'FLOAT';
+    if (!(string || CARRIED_TOKEN_TYPES.has(old.type)) || variable.resolvedType !== nativeType || observed.get(pinned.id).resolvedType !== nativeType)
       throw Error('native-update-token-type-unsupported:' + label(old.type || 'untyped').slice(0, 16) + ';' + name); // host reasons cap at 80
     if (!equal({ ...old, value: null }, { ...next, value: null }))
       throw Error('native-update-token-extensions-change-unsupported:' + name);
@@ -246,6 +254,14 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
   }
   delete next.allocatedValues;
   if (allocated.size) next.allocatedValues = [...allocated.entries()].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([, row]) => row);
+  // A remembered string names its protocol; the name leaves with the last one.
+  const remembersStrings = (next.allocatedValues ?? []).some(row =>
+    carriedStrings.has(flattenTokens(next.modes.find(m => m.sourceMode === row.sourceMode && m.brand === row.brand)!.tokens).get(row.tokenPath)?.type ?? ''));
+  if (remembersStrings) {
+    if (next.allocatedValueProtocol !== undefined && next.allocatedValueProtocol !== 'shadow-values-v1')
+      throw Error('native-update-token-value-protocol-mixed:' + label(next.allocatedValueProtocol));
+    next.allocatedValueProtocol = 'shadow-values-v1';
+  } else if (next.allocatedValueProtocol === 'shadow-values-v1') delete next.allocatedValueProtocol;
   let desired: NativeTokenPreparation;
   try { desired = prepareNativeTokenContext(next); }
   catch (error) { throw Error('native-update-token-values-unqualified:' + label(String((error as Error)?.message).replace(/^native-token-context-/, ''))); }
@@ -256,6 +272,15 @@ function prepareTokenValueChanges(input: NativeContractUpdateInput,
     const planned = prepared.variables.find(v => v.tokenPath === change.tokenPath)!.values[change.modeIndex].value;
     const target = desired.variables.find(v => v.tokenPath === change.tokenPath)!.values[change.modeIndex].value;
     const stored_ = observed.get(pinned.id).valuesByMode?.[mode.modeId];
+    // Eligibility above admitted a STRING only for a planner that carries it.
+    if (prepared.variables.find(v => v.tokenPath === change.tokenPath)!.resolvedType === 'STRING') {
+      if (typeof planned !== 'string' || typeof target !== 'string' || stored_ !== planned)
+        throw Error('native-update-token-value-unavailable:' + label(change.tokenPath));
+      if (stored_ === target) continue;
+      tokenChanges.push({ tokenPath: change.tokenPath, variableId: pinned.id, modeId: mode.modeId,
+        sourceMode: mode.sourceMode, brand: mode.brand, resolvedType: 'STRING', before: stored_, after: target });
+      continue;
+    }
     if (typeof planned !== 'number' || typeof target !== 'number' || !Number.isFinite(target) || typeof stored_ !== 'number' || !stored(stored_, planned))
       throw Error('native-update-token-value-unavailable:' + label(change.tokenPath));
     // A different spelling of the same number changes the tree, not the canvas.
@@ -328,7 +353,7 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
     // one side of the change (only the new side once complete), nothing else.
     for (const change of plan.tokenChanges ?? []) {
       const row = normalized.tokens?.receipt?.variables?.find((v: any) => v.id === change.variableId);
-      if (!row || !row.valuesByMode || !(complete ? [change.after] : [change.before, change.after]).some(value => stored(row.valuesByMode[change.modeId], value))) return false;
+      if (!row || !row.valuesByMode || !(complete ? [change.after] : [change.before, change.after]).some(value => nativeTokenValueStored(row.valuesByMode[change.modeId], change, value))) return false;
       row.valuesByMode[change.modeId] = change.before;
     }
     // A completed value update must also satisfy the token input it leaves behind.

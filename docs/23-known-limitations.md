@@ -12358,3 +12358,138 @@ Tests: `core/figma-root-slot.test.ts` (a hug-width root seeds 0.01 px and its
 widened instance fills; against the previous writer the seed is 0),
 `core/native-contract-comparison.test.ts` (an inherited zero refuses by name).
 
+
+## D.176 A root shadow change carries its own STRING record, live on the Switch
+
+**AGENT decision, 2026-09-27.** Criterion 1 bounds live updates to named
+channels in both directions; shadows are one of them. A React shadow reaches
+Figma twice: as the root's effect layers, and as the value of an owned,
+unbound STRING variable, the `box-shadow` token every observed style becomes.
+A source change from `shadow-xs` to `shadow-sm` therefore changes both. The
+shadow planner restored the effects but refused every variable value as
+`native-update-token-value-mixed-channels-unqualified`, so no source shadow
+change could reach the canvas.
+
+The rule, in `core/native-contract-update.ts`, `core/native-contract-shadow-update.ts`,
+`core/native-token-context.ts` and `core/native-token-value-channel-writer.ts`:
+
+- Only the shadow planner carries STRING values, and only for `shadow`-typed
+  tokens compiled to an owned, unbound STRING variable. Every other variable
+  value beside a shadow change still refuses by the same name. A shadow record
+  that changes while no effect does is not a shadow update and refuses as
+  `native-update-token-type-unsupported:shadow;…`.
+- The value history names its protocol, `allocatedValueProtocol:
+  'shadow-values-v1'`: a remembered shadow is one CSS string on both sides,
+  never parsed or normalized. It re-derives the original allocation exactly,
+  and the protocol name leaves with the last remembered string, so a return
+  to the allocated value restores the historical input form.
+- The writer is the frozen variable writer's discipline with the node field
+  and the variable type as parameters: every asynchronous read first, a
+  whole-document binding scan (`document-v1`), no `await` between the final
+  checks and the writes, the record before the effects, and reverse
+  restoration that names what it cannot restore. Shadow plans without a record
+  change, and every opacity plan, keep their authenticated program bytes.
+
+**Measured live on the gated Switch (operation `5cfe5ac0`).** The workspace's
+`switch.tsx` root `shadow-xs` became `shadow-sm` and its Tailwind output was
+rebuilt with the workspace CLI; the unchanged tree rebuilds byte-identically.
+The app planned nine root effect stacks and the one record. The update wrote
+them, scanned 192 pages and 7,742 nodes for bindings, and verified
+independently. The forward readbacks grew from 36 × 23 to 38 × 25, the wider
+blur. A repeat plan wrote no file. After the source files were restored byte
+for byte, a designer's edit to one variant's second blur (2 → 4) refused the
+reverse update at preflight as `native-update-shadow-conflict:251:5626`, before
+any write. With the edit undone (the script asserted it untouched), the retry
+verified, and all nine variants were pixel-identical to the creation readback.
+Evidence: `private/v1-scoreboard/switch-shadow-v1/`.
+
+Not claimed: the updated canvas was not pixel-scored against a React capture
+of `shadow-sm`. It carries the same compiled layers creation writes for that
+stack, and creation's shadow fidelity is gated by the Switch benchmark cell.
+The reverse direction, a designer's shadow edit becoming React source, is
+D.177.
+
+Tests: `core/native-contract-shadow-token-update.test.ts` (carried and
+verified in one plan; repeat and rollback; a partial application finished; a
+foreign value and a binding on another page refuse before any write; a failed
+effects assignment restores in reverse; every other variable value refuses by
+name; returning to the allocated value forgets the protocol; the protocol
+names every other shape).
+
+## D.177 A designer's root shadow edit becomes a validated React source change
+
+**AGENT decision, 2026-09-27.** D.176 carried a source shadow change to the
+canvas. The reverse, a designer's shadow edit becoming React source, was
+opacity-only at every step: the planner, the candidate proposer, the
+per-state render check, the caller check and the preview's selection.
+
+The rule, in `source-reference/react-design-source-repair.ts`,
+`react-utility-source-edit.ts`, `react-repair-shadow.ts`,
+`react-source-repair-observation.ts`, `react-source-repair-cohort.ts`,
+`react-source-repair-preview.ts` and `react-source-witness-succession.ts`:
+
+- **The plan names its channel.** An effects edit shared by every changed
+  root (one before stack, one after stack) plans a shadow repair with
+  `channel: 'effects'`. The opacity plan keeps its historical shape.
+  Different stacks on different roots refuse as `multiple-shadow-values`.
+  A layer set not to show behind the node refuses as
+  `shadow-behind-node-unsupported`: CSS draws no shadow behind its own box, and
+  the compiled layers show there. A layer added in Figma's UI hides there by
+  default, so a designer who adds one is told by name.
+- **Candidates replace the root's shadow utility.** Every other named size of
+  the scale is proposed (rank 0) beside one exact arbitrary value (rank 1),
+  built from the changed tail of the stack. The leading invisible layers are
+  other utilities' composition slots and stay. A number with no exact CSS
+  spelling produces no arbitrary candidate. The theme is never read or
+  guessed.
+- **A staged render selects.** Every recorded state of every candidate is read
+  by the engine's own `parseShadowStack`, now exposed on the engine like
+  `resolveTokenLiteral`, and compared by the native reader's stack rule. A
+  swap may change the root's shadow variable chain and nothing else: the same
+  variables in the same order, declared by the edited rule instead of the
+  original (Chromium's `selectorText` spelling), each changed value the one the
+  render reports on the root. Every configured caller is checked the same way.
+  A caller witness that pins a shadow refuses as `witness-shadow-unqualified`
+  rather than guess Chromium's spelling.
+- **A named utility wins.** When a named utility and the arbitrary spelling
+  both render the edit, the named one is selected. Two verified candidates of
+  one rank stay ambiguous. The preview and the witness succession share one
+  rule, `rankedRepairSelection`. An unranked (opacity) plan keeps
+  exactly-one.
+
+**Measured live on the gated Switch (operation `5cfe5ac0`).** A designer's
+edit set all nine roots to the `shadow-sm` look: the visible layer's blur and
+alpha were edited, and the layer duplicated with spread −1. On a verified
+zero-change tip, the design read named the nine changes.
+
+The preview proposed eight candidates. `shadow-sm` and the exact arbitrary
+value rendered the stack on every recorded state; the six other sizes refused
+`shadow-mismatch`. `shadow-sm` was selected by rank. All seven configured
+callers verified: the three Switch callers changed one root each, and the
+Badge and Alert callers were unchanged.
+
+Apply validated 7/7 on the new reference. The changed `switch.tsx` and
+`tailwind.css` are byte-identical to the developer's own `shadow-xs` →
+`shadow-sm` edit in D.176, and the declaration is untouched. The operation's
+agreement update wrote no node, because the canvas already showed the
+designer's stack; it wrote only the shadow record. After a byte-identical
+developer restore, the return update verified, and all nine variants were
+pixel-identical to the creation readback.
+
+Two live refusals on the way named real gaps, and both are fixed above. First,
+the capture's `vrefs` chain made every correct candidate refuse
+`other-tree-facts-changed`. Second, the witness succession's exactly-one rule
+refused the ranked selection as `react-source-witness-preview-unqualified`.
+Evidence: `private/v1-scoreboard/switch-shadow-v1/README.md`.
+
+Not claimed: prefixed shadow utilities (`dark:`, `data-*:`) have selectors this
+rule does not reconstruct and refuse; inset and colored shadows are not
+measured live; only the configured callers and recorded finite domains are
+checked (as in D.105).
+
+Tests: `source-reference/react-shadow-source-repair.test.ts` (candidates and
+their bytes; the compiler parser reads both renders; the planner and its
+channel dispatch; every recorded state renders only the edit; the variable
+chain rule, from recorded capture shapes; one selection rule for preview and
+witness); `react-source-repair-preview.test.ts` (rank preference and
+ambiguity); `react-source-repair-cohort.test.ts` (a witnessed shadow refuses).
