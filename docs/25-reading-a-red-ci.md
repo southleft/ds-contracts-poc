@@ -148,6 +148,11 @@ If only the UNMASKED score moves on a text-bearing cell while its masked score a
 - `dependency review` examines dependency changes on pull requests and blocks
   high-severity additions.
 - `npm audit` runs both the repository-wide and production-only audit commands.
+  The repository-wide one audits every lockfile git tracks (the root, the
+  benchmark React workspace, the Worker and the recipe/example sandboxes) and
+  names the lockfile on each line; the production-only one audits the root
+  lockfile. Only high and critical advisories fail it. A line that says the
+  advisory endpoint failed is not a finding: nothing was audited, so re-run.
 - `secret scan` examines changed commit history. Treat a verified or unknown
   credential finding as a release blocker; do not paste the secret into an
   issue while triaging it.
