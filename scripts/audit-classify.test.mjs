@@ -40,6 +40,14 @@ test("a clean answer is clean, and low/moderate do not fail it", () => {
   assert.equal(v.dependencies, 386);
 });
 
+test("the count at all severities does not add npm's own `total` key to itself", () => {
+  // The real shape, measured 2026-09-27 in benchmark/react-family: one moderate
+  // advisory, which the first version reported as "2 at all severities".
+  const v = classifyAudit({ metadata: { vulnerabilities: { info: 0, low: 0, moderate: 1, high: 0, critical: 0, total: 1 }, dependencies: { total: 534 } } }, 0, '');
+  assert.equal(v.kind, 'clean');
+  assert.equal(v.total, 1);
+});
+
 test("exit 0 with unparseable output is an endpoint failure, never a pass", () => {
   assert.equal(classifyAudit(null, 0, '').kind, 'endpoint');
 });
