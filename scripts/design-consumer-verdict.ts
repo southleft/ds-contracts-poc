@@ -22,6 +22,14 @@ export const CONTENT_RULE = 'Every TEXT the Figma variant draws must appear in t
 /** A problem that says a measurement could not be made: never a pass, never a product failure. */
 export const UNMEASURED = /^(figma-images-unavailable|figma-image-missing:|image-framing-unqualified:|image-score-unavailable:|content-check-unavailable:|content-unmeasured:)/;
 
+/** The problem an aborted check records. Figma answering 429 or 5xx after the
+ *  retries (bounds read, image download) is an unmade measurement, reported
+ *  as unavailable images; anything else is a failed check. */
+export function checkFailureProblem(message: string): string {
+  return /^figma-(bounds-unavailable:[a-z]+|image-download-failed:[0-9;:-]+):HTTP (429|5\d\d)$/.test(message)
+    ? 'figma-images-unavailable: ' + message : 'check-failed: ' + message;
+}
+
 export type Verdict = 'pass' | 'fail' | 'unverified';
 export interface VariantVerdict {
   key: string; figmaName: string; verdict: Verdict;

@@ -171,6 +171,30 @@ async function get(path: string, token: string, opts: ClientOptions): Promise<un
   return res.json();
 }
 
+/** A GET against the Figma REST API with the importer's 429 policy: wait what
+ *  Retry-After says (5 s when absent), at most MAX_429_RETRIES times, never a
+ *  single wait over MAX_RETRY_AFTER_SECONDS, each wait announced. Returns the
+ *  final response; the caller decides what a non-OK status means. Used by the
+ *  consumer check, whose raw fetches turned a rate limit into a failed set. */
+export async function fetchFigmaApi<T extends { status: number; headers?: { get(name: string): string | null } } = Response>(
+  url: string, token: string, opts: { fetchImpl?: (url: string, init: { headers: Record<string, string> }) => Promise<T>;
+    sleep?: (ms: number) => Promise<void>; onRateLimited?: (info: { url: string; attempt: number; waitSeconds: number }) => void } = {}): Promise<T> {
+  const fetchImpl = opts.fetchImpl ?? (fetch as unknown as (url: string, init: { headers: Record<string, string> }) => Promise<T>);
+  const sleep = opts.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
+  const call = () => fetchImpl(url, { headers: { 'X-Figma-Token': token } });
+  let res = await call();
+  for (let attempt = 0; res.status === 429 && attempt < MAX_429_RETRIES; attempt++) {
+    const retryAfter = Number(res.headers?.get('retry-after') ?? '5');
+    const waitSeconds = Number.isFinite(retryAfter) && retryAfter >= 0 ? retryAfter : 5;
+    if (waitSeconds > MAX_RETRY_AFTER_SECONDS) return res;
+    (opts.onRateLimited ?? ((info) => console.error(`figma API 429 — waiting ${info.waitSeconds} s (Retry-After), retry ${info.attempt} of ${MAX_429_RETRIES}`)))(
+      { url, attempt: attempt + 1, waitSeconds });
+    await sleep(waitSeconds * 1000);
+    res = await call();
+  }
+  return res;
+}
+
 export async function fetchNodes(
   fileKey: string,
   nodeIds: string[],

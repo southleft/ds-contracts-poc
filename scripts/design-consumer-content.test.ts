@@ -9,7 +9,8 @@ import path from 'node:path';
 import { chromium } from 'playwright-core';
 import { caseContent, domContentOf, fetchFigmaContent, figmaContent, matchParts, missingTexts, type RestNode } from './design-consumer-content.js';
 import { deriveCases, duplicateCaseKeys, runConsumerCheck } from './design-consumer-check.js';
-import { formatVerdictTable, problemCase, variantVerdicts } from './design-consumer-verdict.js';
+import { checkFailureProblem, formatVerdictTable, problemCase, variantVerdicts } from './design-consumer-verdict.js';
+import { fetchFigmaApi, MAX_429_RETRIES, MAX_RETRY_AFTER_SECONDS } from '../extract/figma/rest/fetch.js';
 
 const box = (x: number, y: number, width: number, height: number) => ({ x, y, width, height });
 const fill = [{ type: 'SOLID', visible: true }];
@@ -166,6 +167,44 @@ test('verdicts: a content loss fails its variant at any pixel score, an unmeasur
   assert.match(table, /Size=A +FAIL/);
   assert.match(table, /- content-missing:a:text:"Dialog heading"/);
   assert.match(table, /Size=C +UNVERIFIED +not measured/);
+});
+
+test('a rate limit that outlasts the retries is an unmade measurement, never a failed set (first scoreboard run)', () => {
+  // The first real-kit run reported FAIL for 'check-failed: figma-bounds-unavailable:before:HTTP 429'.
+  for (const message of ['figma-bounds-unavailable:before:HTTP 429', 'figma-bounds-unavailable:after:HTTP 503',
+    'figma-image-download-failed:1:2:HTTP 429'])
+    assert.equal(checkFailureProblem(message), 'figma-images-unavailable: ' + message);
+  for (const message of ['figma-bounds-unavailable:before:HTTP 404', 'figma-image-download-failed:1:2:HTTP 403', 'vite build failed'])
+    assert.equal(checkFailureProblem(message), 'check-failed: ' + message);
+  const cases = [{ key: 'a', figmaName: 'Size=A' }];
+  const receipt = { problems: [checkFailureProblem('figma-bounds-unavailable:before:HTTP 429')], images: { cases: [] }, content: { cases: [] } };
+  assert.equal(variantVerdicts(receipt, cases).verdict, 'unverified');
+  assert.equal(variantVerdicts({ ...receipt, problems: [checkFailureProblem('vite build failed')] }, cases).verdict, 'fail');
+});
+
+test('Figma API calls in the check retry 429s the way the importer does', async () => {
+  const waits: number[] = [], seen: string[] = [];
+  const answer = (statuses: Array<[number, string | null]>) => {
+    let i = 0;
+    return async (url: string, init: { headers: Record<string, string> }) => {
+      seen.push(init.headers['X-Figma-Token']);
+      const [status, retryAfter] = statuses[Math.min(i++, statuses.length - 1)];
+      return { status, ok: status === 200, headers: { get: (n: string) => n === 'retry-after' ? retryAfter : null } };
+    };
+  };
+  const quiet = { sleep: async (ms: number) => { waits.push(ms); }, onRateLimited: () => {} };
+  const ok = await fetchFigmaApi('https://api.figma.com/v1/x', 'tok', { ...quiet, fetchImpl: answer([[429, '2'], [429, null], [200, null]]) });
+  assert.equal(ok.status, 200);
+  assert.deepEqual(waits, [2000, 5000], 'Retry-After when given, 5 s when absent');
+  assert.ok(seen.every(t => t === 'tok'));
+  waits.length = 0;
+  const exhausted = await fetchFigmaApi('https://api.figma.com/v1/x', 'tok', { ...quiet, fetchImpl: answer([[429, '1']]) });
+  assert.equal(exhausted.status, 429);
+  assert.equal(waits.length, MAX_429_RETRIES);
+  waits.length = 0;
+  const tooLong = await fetchFigmaApi('https://api.figma.com/v1/x', 'tok', { ...quiet, fetchImpl: answer([[429, String(MAX_RETRY_AFTER_SECONDS + 1)]]) });
+  assert.equal(tooLong.status, 429);
+  assert.deepEqual(waits, [], 'a wait over the cap is not slept');
 });
 
 test('duplicate case keys refuse by name before anything is mounted (cold-start: a Playwright strict-mode crash)', async t => {

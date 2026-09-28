@@ -75,7 +75,8 @@ import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/vi
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
-import { CONTENT_RULE, variantVerdicts } from './design-consumer-verdict.js';
+import { CONTENT_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
+import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
@@ -427,7 +428,7 @@ createRoot(document.getElementById('root')).render(<App />);
  * set's children (read-only nodes endpoint). Names are the only join key
  * Figma offers here, so a duplicate name refuses instead of guessing. */
 async function resolveVariantNodeIds(fileKey: string, setNodeId: string, token: string, cases: Case[]) {
-  const response = await fetch(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, { headers: { 'X-Figma-Token': token } });
+  const response = await fetchFigmaApi(`https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${setNodeId}&depth=1`, token);
   if (!response.ok) return `HTTP ${response.status}`;
   const body = await response.json() as any;
   const children: Array<{ id: string; name: string; type: string }> = body.nodes?.[setNodeId]?.document?.children ?? [];
@@ -446,7 +447,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   if (!token) return { status: 'figma-images-unavailable' as const, reason: 'no token', files: {} as Record<string, string>, frames, framingRefusal: 'no token' };
   const boundsUrl = `https://api.figma.com/v1/files/${encodeURIComponent(fileKey)}/nodes?ids=${ids.join(',')}&depth=1`;
   const readBounds = async (phase: string) => {
-    const response = await fetch(boundsUrl, { headers: { 'X-Figma-Token': token } });
+    const response = await fetchFigmaApi(boundsUrl, token);
     if (!response.ok) throw new Error(`figma-bounds-unavailable:${phase}:HTTP ${response.status}`);
     const bytes = Buffer.from(await response.arrayBuffer());
     writeFileSync(path.join(out, `figma-bounds-${phase}.json`), bytes, {flag:'wx'});
@@ -454,7 +455,7 @@ async function fetchFigmaImages(fileKey: string, ids: string[], token: string | 
   };
   const before = await readBounds('before');
   const url = `https://api.figma.com/v1/images/${encodeURIComponent(fileKey)}?ids=${ids.join(',')}&format=png&scale=1&contents_only=true&use_absolute_bounds=true`;
-  const response = await fetch(url, { headers: { 'X-Figma-Token': token } });
+  const response = await fetchFigmaApi(url, token);
   if (!response.ok) return { status: 'figma-images-unavailable' as const, reason: `HTTP ${response.status}`, files: {} as Record<string, string>, frames, framingRefusal: 'figma-export-unavailable' };
   const body = await response.json() as { images: Record<string, string | null> };
   const files: Record<string, string> = {}, images: Record<string,Buffer> = {};
@@ -869,7 +870,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       if (row) row.content = judged.content;
     } else problems.push(`content-check-unavailable:${content.reason}`);
   } catch (error) {
-    problems.push('check-failed: ' + (error instanceof Error ? error.message : String(error)).split('\n')[0]);
+    problems.push(checkFailureProblem((error instanceof Error ? error.message : String(error)).split('\n')[0]));
   } finally { rmSync(work, { recursive: true, force: true }); }
   receipt.outcome = problems.length ? 'refused-or-failed' : 'consumer-mounted-behaved-and-compared';
   receipt.verdict = variantVerdicts(receipt, cases);
