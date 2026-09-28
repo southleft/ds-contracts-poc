@@ -22,7 +22,7 @@ const meta = {
     dataPrimaryLink: { control: 'boolean', description: 'Indicates whether or not the button is the primary navigation link when rendered inside of an `IndexTable.Row`' },
     tone: { control: 'select', options: ['default', 'critical', 'success'], description: 'Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) — minted as `{variant}.none` paint paths.' },
     variant: { control: 'select', options: ['plain', 'primary', 'secondary', 'tertiary', 'monochromePlain'], description: 'Changes the visual appearance of the Button.' },
-    withIcon: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `icon` ({"$import":"@shopify/polaris-icons#PlusCircleIcon"}); the created subtree is carried as parts gated on this prop.' },
+    withIcon: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({\"$import\":\"@shopify/polaris-icons#PlusCircleIcon\"}); the created subtree is carried as parts gated on this prop." },
   },
   args: {
     size: 'medium',

@@ -49,8 +49,8 @@ const meta = {
     size: { control: 'select', options: ['slim', 'medium'], description: 'Changes the size of the input, giving it more or less padding' },
     autoSize: { control: 'boolean', description: 'Whether the TextField will grow as the text within the input changes' },
     loading: { control: 'boolean', description: 'Indicates the loading state' },
-    withPrefix: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `prefix` ("$"); the created subtree is carried as parts gated on this prop.' },
-    withSuffix: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `suffix` ("USD"); the created subtree is carried as parts gated on this prop.' },
+    withPrefix: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `prefix` (\"$\"); the created subtree is carried as parts gated on this prop." },
+    withSuffix: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `suffix` (\"USD\"); the created subtree is carried as parts gated on this prop." },
     onFocus: { control: false, description: 'Callback fired when input is focused' },
   },
   args: {

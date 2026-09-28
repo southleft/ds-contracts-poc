@@ -19,9 +19,9 @@ const meta = {
     hideIcon: { control: 'boolean', description: 'Renders the banner without a status icon.' },
     tone: { control: 'select', options: ['success', 'info', 'warning', 'critical'], description: 'Sets the status of the banner.' },
     stopAnnouncements: { control: 'boolean', description: 'Disables screen reader announcements when changing the content of the banner' },
-    dismissible: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `onDismiss` ({"$callback":true}); the created subtree is carried as parts gated on this prop.' },
-    withAction: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `action` ({"content":"Print label"}); the created subtree is carried as parts gated on this prop.' },
-    children: { control: 'text', description: 'Promoted from the computed floor: the mounted children render as this part\'s text (captured mount proof).' },
+    dismissible: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `onDismiss` ({\"$callback\":true}); the created subtree is carried as parts gated on this prop." },
+    withAction: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `action` ({\"content\":\"Print label\"}); the created subtree is carried as parts gated on this prop." },
+    children: { control: 'text', description: "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof)." },
   },
   args: {
     tone: 'info',
