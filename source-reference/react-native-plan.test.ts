@@ -359,7 +359,7 @@ for (const kind of ['root', 'initial', 'nested', 'fresh', 'graph'] as const) tes
   let send = boot();
   assert.throws(() => transport.inspectSizing(first.id), /sizing-observation-refused/);
   await send({ type: 'native-connect', connection: pair }); assert.equal(messages.at(-1).status, 'ready');
-  assert.throws(() => transport.claim(first.id, secret, SOURCE_NATIVE_FILE_KEY), /file-refused/);
+  assert.deepEqual(transport.claim(first.id, secret, SOURCE_NATIVE_FILE_KEY), { status: 'wrong-file', fileKey: REACT_NATIVE_FILE_KEY });
   transport.start(first.id);
   for (const phase of ['tokens-created', 'tokens-observed', 'components-created', 'component-structure-observed']) {
     await send({ type: 'native-poll' });
@@ -502,6 +502,91 @@ for (const kind of ['root', 'initial', 'nested', 'fresh', 'graph'] as const) tes
   if (kind === 'initial') assert.throws(() => jobs.verifiedReactInitialObservation(first.id));
   assert.equal(jobs.get(first.id).sourceCurrent, false);
   assert.equal(jobs.get(first.id).phase, 'component-structure-observed');
+});
+
+// Beta 1 (docs/GOAL.md): the user's own Figma file. The app records the
+// configured file on each new operation; the companion runs it only in that
+// file, tells a companion open anywhere else which file to open, and a later
+// change to the setting never moves an operation that already exists.
+test('a React operation targets the user\'s configured Figma file, refuses any other, and keeps its file', async t => {
+  const USER = 'NqssRZQpSjChxv5VyN1ZvJ', saved = process.env.DS_CONTRACTS_FIGMA_FILE;
+  t.after(() => { if (saved === undefined) delete process.env.DS_CONTRACTS_FIGMA_FILE; else process.env.DS_CONTRACTS_FIGMA_FILE = saved; });
+  const repo = mkdtempSync(path.join(tmpdir(), 'react-native-user-file-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const { input } = inputFixture();
+  const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
+    ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
+    caseId: 'button-default', matrixRevision: revisionOf(input.matrix) };
+  const options: NativeOperationJobsOptions = {
+    prepare: () => { throw Error('legacy adapter must not run'); },
+    react: {
+      prepare: (_, operation) => ({ visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+        preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
+        plan: prepareReactNativePlan({ ...input, operation }) }),
+      buildComponent: (_, context) => buildReactNativeComponentWrite({ ...input, operation: context.operation,
+        expectedPlanRevision: context.planRevision, tokens: context.tokens, templateGraph: context.templateGraph }),
+    },
+  };
+  process.env.DS_CONTRACTS_FIGMA_FILE = `https://www.figma.com/design/${USER}/DS-Contracts-Live-Testing?node-id=0-1`;
+  let jobs = createNativeOperationJobs(repo, options), transport = createNativeOperationTransport(repo, jobs);
+  const first = jobs.prepare(request), pair = transport.pair(first.id);
+  assert.equal(jobs.listReact(request.referenceId)[0].fileKey, USER);
+  assert.equal(jobs.get(first.id).phase, 'prepared');
+
+  const host = nativeFixtureHost(), storage = new Map<string, any>(), messages: any[] = [];
+  Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, m: string) { this.explicitVariableModes = { ...this.explicitVariableModes, [c.id]: m }; };
+  host.figma.showUI = () => {};
+  host.figma.clientStorage = { getAsync: async (k: string) => structuredClone(storage.get(k)),
+    setAsync: async (k: string, v: any) => { storage.set(k, JSON.parse(JSON.stringify(v))); },
+    deleteAsync: async (k: string) => { storage.delete(k); } };
+  const plugin = readFileSync(new URL('../figma-sync/plugin/code.js', import.meta.url), 'utf8');
+  const fetch = async (url: string, init: any) => {
+    const payload = JSON.parse(init.body), supplied = init.headers.Authorization.slice(7);
+    const response = url.endsWith('/begin') ? transport.begin(first.id, supplied, payload.attemptId)
+      : url.endsWith('/claim') ? transport.claim(first.id, supplied, payload.fileKey, payload.replaceReadbackAttemptId, payload.resolveWriteAttemptId, payload.protocol)
+      : transport.acceptDelivery(first.id, supplied, payload);
+    return { ok: true, json: async () => JSON.parse(JSON.stringify(response)) };
+  };
+  const boot = (fileKey: string) => {
+    host.figma.fileKey = fileKey;
+    host.figma.ui = { postMessage: (m: any) => messages.push(JSON.parse(JSON.stringify(m))) };
+    vm.runInNewContext(plugin, { figma: host.figma, fetch, __html__: '', console }, { timeout: 5000 });
+    return (m: any) => host.figma.ui.onmessage(m);
+  };
+  const nodes = () => host.figma.root.findAll(() => true).length, empty = nodes();
+
+  // Pasted into the owner's evaluation file: named, refused, nothing created.
+  transport.start(first.id);
+  let send = boot(REACT_NATIVE_FILE_KEY);
+  await send({ type: 'native-connect', connection: pair });
+  assert.equal(messages.at(-1).status, 'refused');
+  assert.match(messages.at(-1).message, new RegExp(`different Figma file \\(figma\\.com/design/${USER}\\)`));
+  assert.equal(jobs.get(first.id).phase, 'prepared');
+  assert.equal(nodes(), empty);
+
+  // A later setting names another file: the existing operation keeps its own.
+  process.env.DS_CONTRACTS_FIGMA_FILE = 'T56aKuRnoay1L7CKAjSWRO';
+  jobs = createNativeOperationJobs(repo, options); transport = createNativeOperationTransport(repo, jobs);
+  assert.equal(jobs.listReact(request.referenceId)[0].fileKey, USER);
+  assert.equal(jobs.prepare(request).id, first.id, 'the reservation is not re-created for the new setting');
+
+  // In the user's file the same connection runs every phase.
+  send = boot(USER);
+  await send({ type: 'native-connect', connection: pair });
+  for (const phase of ['tokens-created', 'tokens-observed', 'components-created', 'component-structure-observed']) {
+    if (jobs.get(first.id).phase !== phase) await send({ type: 'native-poll' });
+    assert.equal(jobs.get(first.id).phase, phase, JSON.stringify(messages.slice(-3)));
+  }
+  assert(nodes() > empty);
+  assert(host.figma.root.findAll((node: any) => node.type === 'COMPONENT').length > 0);
+
+  // An unset or mistyped setting never silently redirects existing work.
+  delete process.env.DS_CONTRACTS_FIGMA_FILE;
+  jobs = createNativeOperationJobs(repo, options);
+  assert.equal(jobs.get(first.id).phase, 'component-structure-observed');
+  assert.equal(jobs.listReact(request.referenceId)[0].fileKey, USER);
+  process.env.DS_CONTRACTS_FIGMA_FILE = 'not a file';
+  assert.throws(() => createNativeOperationJobs(repo, options).prepare({ ...request, caseId: 'button-other' }), /figma-target-file-invalid/);
 });
 
 test('host-selected React evidence reopens after restart and refuses changed source, archive or seal', t => {

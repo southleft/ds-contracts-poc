@@ -330,7 +330,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             </>}
           </div>)}
         </section>}
-        <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
+        <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">Figma file {row.fileKey}</a>. The app fixed this file when it created the operation: DS_CONTRACTS_FIGMA_FILE, or DS Contracts Evaluations when that is unset.</p>
         {(!row.connection.finished || op.canResumeComparison || op.comparisonRepair) && <>
           <p>Open the <a href="/ds-contracts-sync-runner-plugin.zip" download>DS Contracts companion plugin</a> in this file. Under “Connect the local source workflow,” enter the code and choose “Connect / resume.”</p>
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/connection`, id)}>Get connection code</button>

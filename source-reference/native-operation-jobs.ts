@@ -85,10 +85,12 @@ import type { prepareReactCallerNativePlan } from './react-caller-native-plan.js
 import {validNativeGraphCreation} from '../core/native-graph-creation.js';
 import { isReactCallerNativeRequest, reactCallerNativeReservation, type ReactCallerNativeRequest } from './react-caller-native-request.js';
 
+import { DEFAULT_REACT_FIGMA_FILE_KEY, reactFigmaFileKey, validFigmaFileKey } from './figma-target.js';
 /** The current owner-approved writable target. A request/plan cannot override it. */
 export const SOURCE_NATIVE_FILE_KEY = "byMp6lt0Ij9b2QbkDGFwBh";
-/** Owner-supplied evaluation file, only for new React operation identities. */
-export const REACT_NATIVE_FILE_KEY = 'T56aKuRnoay1L7CKAjSWRO';
+/** Owner-supplied evaluation file: the default target for new React
+ * operation identities when the app is not given the user's own file. */
+export const REACT_NATIVE_FILE_KEY = DEFAULT_REACT_FIGMA_FILE_KEY;
 const POLICY = {
   version: 1,
   fileKey: SOURCE_NATIVE_FILE_KEY,
@@ -112,7 +114,18 @@ const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p
 type OperationRequest = ReactAuthoredNativeRequest | PreparedLibraryNativeRequest | BindingEvidenceRequest | ReactNativeRequest | ReactCallerNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest | ReactStateApiNativeRequest;
 const validRequest = (v: unknown): v is OperationRequest => isReactAuthoredNativeRequest(v) || isPreparedLibraryNativeRequest(v) || isReactStateApiNativeRequest(v) || isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactCallerNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
 const reservation = (r: OperationRequest) => isReactAuthoredNativeRequest(r) ? reactAuthoredNativeReservation(r) : isPreparedLibraryNativeRequest(r) ? preparedLibraryNativeReservation(r) : isReactStateApiNativeRequest(r) ? reactStateApiNativeReservation(r) : isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactCallerNativeRequest(r) ? reactCallerNativeReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
-const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactAuthoredNativeRequest(r) || isPreparedLibraryNativeRequest(r) || isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+const reactRequest = (r: OperationRequest) => isReactAuthoredNativeRequest(r) || isPreparedLibraryNativeRequest(r) || isReactStateApiNativeRequest(r) || isReactNativeRequest(r) || isReactCallerNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r);
+/** The policy a NEW operation records. React operations target the user's
+ * configured file (DS_CONTRACTS_FIGMA_FILE), else the evaluation file. */
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: reactRequest(r) ? reactFigmaFileKey() : SOURCE_NATIVE_FILE_KEY });
+/** A recorded policy stays valid for its operation: React operations keep the
+ * file they were created with; source inspection only ever targets Scratch. */
+const recordedPolicyValid = (policy: unknown, r: OperationRequest) => {
+  if (!object(policy)) return false;
+  const p = policy as { fileKey?: unknown };
+  return same({ ...policy, fileKey: null }, { ...POLICY, fileKey: null }) &&
+    (reactRequest(r) ? validFigmaFileKey(p.fileKey) : p.fileKey === SOURCE_NATIVE_FILE_KEY);
+};
 const isReactPlan = (p: Plan): p is AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan => isAuthoredPlan(p) || 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-caller-graph-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection' || p.plan.kind === 'react-state-api-draft-inspection');
 const isMainPlan = (p: Plan): p is AuthoredPlan | ReactPlan | CallerGraphPlan | InitialPlan | StateApiPlan | LibraryPlan => isReactPlan(p) || isLibraryPlan(p);
 type Pin = { id: string; reportSha256: string };
@@ -547,10 +560,12 @@ export function createNativeOperationJobs(
     }
     return false;
   };
-  const validatePlan = (prepared: NativeOperationPreparation<Plan>, id: string, request: OperationRequest) => {
+  // fileKey is the operation's recorded file: policyFor(request) for a new
+  // operation, header.policy.fileKey for a loaded one. The plan must name it.
+  const validatePlan = (prepared: NativeOperationPreparation<Plan>, id: string, request: OperationRequest, fileKey: string) => {
     const plan = prepared.plan;
-    const fileKey = policyFor(request).fileKey;
     if (
+      !recordedPolicyValid({ ...POLICY, fileKey }, request) ||
       !validEvidence(prepared, request) ||
       !plan ||
       plan.plan.version !== 1 ||
@@ -588,8 +603,9 @@ export function createNativeOperationJobs(
     prepared: NativeOperationPreparation<Plan>,
     id: string,
     request: OperationRequest,
+    fileKey: string,
   ) => {
-    validatePlan(prepared, id, request);
+    validatePlan(prepared, id, request, fileKey);
     const plan = prepared.plan;
     const graph = templateGraphPlan(plan);
     if (graph) {
@@ -957,7 +973,7 @@ export function createNativeOperationJobs(
     ...(state.libraryReplacementLastClaim?{priorClaim:state.libraryReplacementLastClaim}:{})});
   const libraryReplacementReviewRevision=(state:State)=>revisionOf({replacement:state.libraryReplacement!.revision,planRevision:state.libraryReplacementPlan!.revision});
   const validateLibraryReplacementPlan = (header:Header,original:Plan,next:LibraryPlan) => {
-    validatePlan({...evidencePins(header),plan:next},header.id,header.request);
+    validatePlan({...evidencePins(header),plan:next},header.id,header.request,header.policy.fileKey);
     if(!isLibraryPlan(original)||!isLibraryPlan(next)||!same(original.plan.tokenInput,next.plan.tokenInput)||
       !same(original.plan.projection.source,next.plan.projection.source))fail('library-replacement-source-changed');
   };
@@ -1050,7 +1066,7 @@ export function createNativeOperationJobs(
       header.id !== id ||
       !date(header.startedAt) ||
       !validRequest(header.request) ||
-      !same(header.policy, policyFor(header.request)) ||
+      !recordedPolicyValid(header.policy, header.request) ||
       !validEvidence(header, header.request) ||
       !REVISION.test(header.planRevision) ||
       !HASH.test(header.planSha256) ||
@@ -1073,6 +1089,7 @@ export function createNativeOperationJobs(
       { ...evidencePins(header), plan },
       id,
       header.request,
+      header.policy.fileKey,
     );
     if (plan.revision !== header.planRevision) fail("compiled-plan-changed");
     // Historical commands are immutable evidence. Recompiling them with a new
@@ -1411,7 +1428,7 @@ export function createNativeOperationJobs(
       id: loaded.header.id,
       fileKey: loaded.header.policy.fileKey,
     });
-    if (validatePreparation(current, loaded.header.id, loaded.header.request) !== loaded.script)
+    if (validatePreparation(current, loaded.header.id, loaded.header.request, loaded.header.policy.fileKey) !== loaded.script)
       fail("compiled-script-changed");
     if (
       !same(evidencePins(current), evidencePins(loaded.header)) ||
@@ -1637,18 +1654,20 @@ export function createNativeOperationJobs(
     if (priorBaseline(reservation(request)))
       fail("baseline-reservation-missing");
     const id = randomUUID();
+    // Read the configured file once, so one operation never names two files.
+    const policy = policyFor(request);
     const prepared = prepareInput(structuredClone(request), {
       id,
-      fileKey: policyFor(request).fileKey,
+      fileKey: policy.fileKey,
     });
-    const script = validatePreparation(prepared, id, request),
+    const script = validatePreparation(prepared, id, request, policy.fileKey),
       planBytes = encode(prepared.plan);
     const header: Header = {
       version: 1,
       id,
       startedAt: new Date().toISOString(),
       request: structuredClone(request),
-      policy: policyFor(request),
+      policy,
       ...evidencePins(prepared),
       planRevision: prepared.plan.revision,
       planSha256: sha(planBytes),
@@ -1659,7 +1678,7 @@ export function createNativeOperationJobs(
       !same(
         prepareInput(structuredClone(request), {
           id,
-          fileKey: policyFor(request).fileKey,
+          fileKey: policy.fileKey,
         }),
         prepared,
       )
@@ -1777,7 +1796,7 @@ export function createNativeOperationJobs(
     } else if(phase==='library-replacement-readback') {
       if(!canReviewLibraryReplacement(loaded.state,loaded.plan)||!isPreparedLibraryNativeRequest(loaded.header.request)||!options.preparedLibrary)fail('library-replacement-unavailable');
       const prepared=options.preparedLibrary.prepare(structuredClone(loaded.header.request),loaded.plan.plan.operation);
-      if(validatePreparation(prepared,id,loaded.header.request)!==loaded.script||!same(evidencePins(prepared),evidencePins(loaded.header)))fail('library-replacement-source-changed');
+      if(validatePreparation(prepared,id,loaded.header.request,loaded.header.policy.fileKey)!==loaded.script||!same(evidencePins(prepared),evidencePins(loaded.header)))fail('library-replacement-source-changed');
       validateLibraryReplacementPlan(loaded.header,loaded.plan,prepared.plan);
       if(loadFresh(id).fingerprint!==loaded.fingerprint)fail('evidence-changed-during-validation');
       libraryReplacementPlan=prepared.plan;

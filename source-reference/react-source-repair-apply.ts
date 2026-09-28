@@ -2,6 +2,7 @@
  * requesting fresh native evidence. The synchronous file transaction owns the
  * write boundary; completion additionally requires normal source validation
  * and a second native read. No Figma write is issued by this controller. */
+import {validFigmaFileKey} from './figma-target.js';
 import {createHash,randomUUID} from 'node:crypto';
 import {closeSync,existsSync,fsyncSync,linkSync,lstatSync,mkdirSync,openSync,readFileSync,
   readdirSync,realpathSync,writeFileSync} from 'node:fs';
@@ -51,7 +52,11 @@ const sha=(bytes:string|Buffer)=>createHash('sha256').update(bytes).digest('hex'
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
 const fail=(reason:string):never=>{throw Error('react-source-apply-'+reason);};
 const hash=/^[a-f0-9]{64}$/;
-const allowedFiles=new Set(['T56aKuRnoay1L7CKAjSWRO','byMp6lt0Ij9b2QbkDGFwBh']);
+// A canvas read names the file of the native operation that issued it, and that
+// operation fixed its file when it was created (docs/GOAL.md: the user's own
+// file). Here the key only has to be well formed: a later change to the app's
+// configured file must not strand an application already recorded.
+const allowedFiles={has:(key:string)=>validFigmaFileKey(key)};
 const reason=(error:unknown)=>error instanceof Error&&/^[a-z][a-z0-9-]*(?::[A-Za-z0-9:;._-]+)?$/.test(error.message)?error.message:'react-source-apply-refused';
 function bytes(file:string){if(!lstatSync(file).isFile()||realpathSync(file)!==file)fail('record-path-changed');return readFileSync(file);}
 function write(file:string,value:unknown){
