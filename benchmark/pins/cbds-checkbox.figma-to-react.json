@@ -30,9 +30,9 @@
     "WarningCircle/WarningCircle.tsx": "463a1e292226e391fa5f6eb24351920a9dcdeb9bd5a7ac61079719c7754f769d",
     "WarningCircle/index.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
     "index.ts": "b995768e8e64062907a90f4ae025fd1142b01330d9667554e458cc7619363de6",
-    "tokens.css": "33a720740ec4cec809352fd154abb68a5b4e242ca73279ef92fbd1710981b562"
+    "tokens.css": "860f97f8acfaab78aebc8dc5a3265da72462dbb615e8cefc6ef1fb1783160448"
   },
-  "generatedSha256": "89fc94ab4ce1bbaca3d14f031f74d792bd262318e9d8139d0b45b175edfd71f4",
+  "generatedSha256": "009e16be91fc70e03a220585d7f7b318e5494e18d006eb3b06c390faeedcb736",
   "entries": {
     "package/dist/Checkbox/Checkbox.d.ts": "fbd25bae2199259886b7da0041d439459bcc1cc73555d0e64b1d5a0bfa64c494",
     "package/dist/Checkbox/Checkbox.js": "11c0795de18385a2bfef18c35b6455bc4f978feb0d43270626c3059854b60ff4",
@@ -71,7 +71,7 @@
     "package/dist/Square/Square.d.ts": "3ff7d48d4a5081886ab6a9066789a1d6aafc6345011fb327ce15f258ed6d37fd",
     "package/dist/Square/Square.js": "371b4d8de6594ea0937cf8e21fcae963cfd71ba1836150364ecacd8f4538104d",
     "package/dist/Square/Square.module.css": "d256a7573981a60e1bd6906b3e27eb94326cdd9c83d8746dd2cec275ff827439",
-    "package/dist/tokens.css": "33a720740ec4cec809352fd154abb68a5b4e242ca73279ef92fbd1710981b562",
+    "package/dist/tokens.css": "860f97f8acfaab78aebc8dc5a3265da72462dbb615e8cefc6ef1fb1783160448",
     "package/dist/WarningCircle/index.d.ts": "6165572bea04d2e22e34b96f30c7c49344372c3f87f0a378a42cb218d296131d",
     "package/dist/WarningCircle/index.js": "96d1eff87efd3abf824d6c8a49d5d938099741ac468ba1548d5538dfe259378a",
     "package/dist/WarningCircle/WarningCircle.d.ts": "aea44145994a43483554462a9626c4f6a4eeffbccbe782b6cd4349cd0e369edd",
@@ -80,15 +80,15 @@
     "package/package.json": "a3173b5f900e9e39e3571696563fe93f549ee2e3530047e55161190f4f1f93fd",
     "package/README.md": "ebb06674886896eace2a334ed054eb2ef63764766774db9a516335713800e078"
   },
-  "entriesSha256": "6e2f06f0a1bee406b081438a896945b5bb95c7cb9e4bc827f496e52ab1645744",
+  "entriesSha256": "20eb6e2a4c95d196fbbc2a6ddb860d218310044c03049b765e48be418955a44d",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/cbds-checkbox.figma-to-react/receipt.json",
-    "receiptSha256": "5b135ded5d1d3c0c55dc16f05b9c7d3f2e6e61f604df21fe5529d980604dc355",
-    "generatedSha256": "89fc94ab4ce1bbaca3d14f031f74d792bd262318e9d8139d0b45b175edfd71f4",
+    "receiptSha256": "e4b1060403e55102f374e4ddb30a1c9f0edd21cbb1fbfa6d067e2d6b0c8749a5",
+    "generatedSha256": "009e16be91fc70e03a220585d7f7b318e5494e18d006eb3b06c390faeedcb736",
     "component": "Checkbox",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-26",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "alignment-left_size-large_state-default",

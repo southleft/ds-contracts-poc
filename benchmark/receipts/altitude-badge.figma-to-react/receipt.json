@@ -23,7 +23,7 @@
     "Badge/Badge.tsx": "55e370d7ba2beb0a0cd586b29688f8d3cf5ebcdaded05e61c262ff87c96b3d3d",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
-    "tokens.css": "9814bfd3ac6b58509993e9d3b4d70cb05361759c2db1be312c6dec1d65322997"
+    "tokens.css": "f204a5c71b35419bb0987d96c3a0cb98b2728ab9077fe1c7e3efea5ce842976a"
   },
   "cases": [
     {
@@ -65,6 +65,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "bff141d2a2a81da317ff96c3f56938449a986b44cab0b406a4fca755f7034b06"
+      },
+      "content": {
+        "key": "variant-danger_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -106,6 +118,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "e4306e23224f25f441964dc2f2506caf1797befd60bd51bbd71fb5f220ca1af6"
+      },
+      "content": {
+        "key": "variant-neutral_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -147,6 +171,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "73329bd2c80c4cea321307d1872f44bfea3a53a176e55105c6a3d81550b99bb3"
+      },
+      "content": {
+        "key": "variant-info_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -188,6 +224,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "c19cb1d292fe269b04bd6f461cb8a20217b3f8750d50f4f2aa4f7cc048ac0606"
+      },
+      "content": {
+        "key": "variant-success_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -229,6 +277,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "ea7b85851ad450370271ae07fc44b63654ac7524cb3f43d4bb1a4e5285c501f5"
+      },
+      "content": {
+        "key": "variant-warning_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -265,6 +325,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "d9005226f5b12e7ab2e3897a3cd6a75646e378a6a583608ccc90daa6d5e7cc1e"
+      },
+      "content": {
+        "key": "variant-danger_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -301,6 +373,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "fd091d43646172945aee9ed8acb83bbedc285f9cbff940296845375513393dfc"
+      },
+      "content": {
+        "key": "variant-neutral_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -337,6 +421,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "11439e879e439133a4b0c6c96d0a2a1cdb5bbea1153167af69d709417e52cf0c"
+      },
+      "content": {
+        "key": "variant-info_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -373,6 +469,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "b250a2b3b29913c023db91808dd2aa31ef3b325f69d004dac9cfb0ae4cbde0e8"
+      },
+      "content": {
+        "key": "variant-success_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -409,6 +517,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "f4c1a787b937b8324ba9679783a933cb8fca35856c2e9a8d78e9ba4fe163552f"
+      },
+      "content": {
+        "key": "variant-warning_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     }
   ],
@@ -522,8 +642,8 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "d904a062cb2ac06f647b0eb98410a6d98b6bc9666678c5f2b39598b6521bb4a9",
-      "afterSha256": "d904a062cb2ac06f647b0eb98410a6d98b6bc9666678c5f2b39598b6521bb4a9"
+      "beforeSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3",
+      "afterSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3"
     },
     "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -1316,7 +1436,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "906cf5ef78107b371e6f2d22fe8dba453ee36f21154a380e18b6f9ec9aaa440c",
+    "tarballSha256": "878aa678f7092cdb254092492273ec441dd8ac0a4d042b1bc8587da0582c0e30",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -1332,7 +1452,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "b9bb4048a1d6f300c5d2b5335b9a4397e1294692e7490d6d84a9b8b23e42e370",
+    "lockfileSha256": "380c5a799aac3619e4f4b8ed15455013deb655c7ee9022ff57e13628b2ac2e48",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -1343,11 +1463,325 @@
       "loaded": []
     },
     "builtCss": {
-      "bytes": 22945,
-      "tokenDefinitions": 415,
-      "tokenDefinitionsExpected": 415
+      "bytes": 4534,
+      "tokenDefinitions": 21,
+      "tokenDefinitionsExpected": 21
+    },
+    "containerFraming": {
+      "rule": "figma-preview-width-v1",
+      "cases": []
     },
     "interactiveNesting": []
   },
-  "outcome": "consumer-mounted-behaved-and-compared"
+  "content": {
+    "status": "collected",
+    "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "figmaVersion": "2402234553296509410",
+    "responseSha256": "122932a5bbde7e0e9ab8d988c06d7757e76c81ec7260af19bf36974dd9921df3",
+    "evidence": "figma-content.json",
+    "cases": [
+      {
+        "key": "variant-danger_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-neutral_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-info_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-success_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-warning_shape-label",
+        "texts": {
+          "figma": 1,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-danger_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-neutral_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-info_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-success_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-warning_shape-dot",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      }
+    ]
+  },
+  "outcome": "consumer-mounted-behaved-and-compared",
+  "verdict": {
+    "verdict": "pass",
+    "variants": [
+      {
+        "key": "variant-danger_shape-label",
+        "figmaName": "Variant=Danger, Shape=Label",
+        "verdict": "pass",
+        "image": {
+          "white": 2.807017543859649,
+          "black": 2.807017543859649,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 1,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-neutral_shape-label",
+        "figmaName": "Variant=Neutral, Shape=Label",
+        "verdict": "pass",
+        "image": {
+          "white": 2.543859649122807,
+          "black": 2.543859649122807,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 1,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-info_shape-label",
+        "figmaName": "Variant=Info, Shape=Label",
+        "verdict": "pass",
+        "image": {
+          "white": 2.719298245614035,
+          "black": 2.719298245614035,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 1,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-success_shape-label",
+        "figmaName": "Variant=Success, Shape=Label",
+        "verdict": "pass",
+        "image": {
+          "white": 2.982456140350877,
+          "black": 2.982456140350877,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 1,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-warning_shape-label",
+        "figmaName": "Variant=Warning, Shape=Label",
+        "verdict": "pass",
+        "image": {
+          "white": 3.3333333333333335,
+          "black": 3.3333333333333335,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 1,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-danger_shape-dot",
+        "figmaName": "Variant=Danger, Shape=Dot",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-neutral_shape-dot",
+        "figmaName": "Variant=Neutral, Shape=Dot",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-info_shape-dot",
+        "figmaName": "Variant=Info, Shape=Dot",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-success_shape-dot",
+        "figmaName": "Variant=Success, Shape=Dot",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-warning_shape-dot",
+        "figmaName": "Variant=Warning, Shape=Dot",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      }
+    ],
+    "setProblems": [],
+    "counts": {
+      "pass": 10,
+      "fail": 0,
+      "unverified": 0
+    }
+  }
 }

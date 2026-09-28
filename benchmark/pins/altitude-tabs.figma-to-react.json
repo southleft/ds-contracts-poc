@@ -27,9 +27,9 @@
     "TextPassage/TextPassage.tsx": "b91dece789f139106b13b6babcbc03fa210cb85fd8dc12aecc4227d1573fae12",
     "TextPassage/index.ts": "a8b1a3725f451ea4ccb4789145ad9be8f5f0f6fe2557df2f905f86bc4f77f6e6",
     "index.ts": "9c06ff6c237e0ff925c8860864c75b8c5adc5c27878056ede1e402baf726216e",
-    "tokens.css": "8cfe2ba989e129625ac16daf0149ddeede375a581d2f7bdfd2c22839e366fe7e"
+    "tokens.css": "d6bf2c73f0e0428893212ee13aff4a4aa012f933bf274e663956edd93e0a5ea0"
   },
-  "generatedSha256": "2eebb4a570bb46cde18c515386b6cb192d2b2fb8ee7f67edd2e928abfb360bb6",
+  "generatedSha256": "71b1012db5a83c99b8ee859cf1585b034d83bb9f0f38421ca858ad9e310cc917",
   "entries": {
     "package/dist/ArrowArcLeft/ArrowArcLeft.d.ts": "b3ac7eb2fffbc856c11bb6c05ad3419a0664bb2fd69c6a218e19d45dd66eacd1",
     "package/dist/ArrowArcLeft/ArrowArcLeft.js": "6e9763a8718d32b87fcd0b1804e90043ac537825c35d56028ee1a0efb0bcba90",
@@ -68,19 +68,19 @@
     "package/dist/TextPassage/TextPassage.d.ts": "04b8b6144d0ffcbfb357315d0ecc120b5d04c51b6de562ac94e73a8a0eafcc34",
     "package/dist/TextPassage/TextPassage.js": "f659c121a7a365e32dbd78b371b39ce13194b34b7d26cbd42879f15b6f07d877",
     "package/dist/TextPassage/TextPassage.module.css": "f414ff703840d73f51d990865e4ec9dc48310c66a4350d02c5be185795231fb2",
-    "package/dist/tokens.css": "8cfe2ba989e129625ac16daf0149ddeede375a581d2f7bdfd2c22839e366fe7e",
+    "package/dist/tokens.css": "d6bf2c73f0e0428893212ee13aff4a4aa012f933bf274e663956edd93e0a5ea0",
     "package/package.json": "520aa0629b3a04917a60249bd73c219db76aa561dc01148d18feae658760976a",
     "package/README.md": "d3a60b140cb804457b515b3534fae765091a79dfeb4bf1a71717623553684ec0"
   },
-  "entriesSha256": "ff32f89beb59786cd2663b9cb1acfbec431dfba2e70c093ae812bcc0b60134e3",
+  "entriesSha256": "cb07046238e88b1179f0bc1ac24d2253a33c60ec08b173edadb3d245034fa490",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/altitude-tabs.figma-to-react/receipt.json",
-    "receiptSha256": "a5fd6ce9c61abef65437dc85a006efade4842801d96af52d72812040536e1f7a",
-    "generatedSha256": "2eebb4a570bb46cde18c515386b6cb192d2b2fb8ee7f67edd2e928abfb360bb6",
+    "receiptSha256": "d0aea98845553491ccacfbdeca7aa0b5eeea6e8fabb69fa78c6bbe17aa6eb80c",
+    "generatedSha256": "71b1012db5a83c99b8ee859cf1585b034d83bb9f0f38421ca858ad9e310cc917",
     "component": "Tabs",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-27",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "variant-default",

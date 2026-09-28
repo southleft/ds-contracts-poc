@@ -9,9 +9,9 @@
     "Badge/Badge.tsx": "55e370d7ba2beb0a0cd586b29688f8d3cf5ebcdaded05e61c262ff87c96b3d3d",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
-    "tokens.css": "9814bfd3ac6b58509993e9d3b4d70cb05361759c2db1be312c6dec1d65322997"
+    "tokens.css": "f204a5c71b35419bb0987d96c3a0cb98b2728ab9077fe1c7e3efea5ce842976a"
   },
-  "generatedSha256": "2ce66e2823d535225c8292510149cfea3661c95c3e6696f6386fcc7eeef84188",
+  "generatedSha256": "3cc9b1d2de7753503779e52a5d642285eccbe72326db79c4ff410e27e667632c",
   "entries": {
     "package/dist/Badge/Badge.d.ts": "a1276011bc5d14a5a91b63803e28ad2ec20f94cbc206f7149735a5864ab67929",
     "package/dist/Badge/Badge.js": "19efc20bcfdf98a6fc5087a2f18b66d9d8731d8b977a942d02e34c79c9dd7363",
@@ -20,19 +20,19 @@
     "package/dist/Badge/index.js": "ffa73a3203235dfb94e1b06554675da916643f946dfc761facfce0f98cd3b600",
     "package/dist/index.d.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
     "package/dist/index.js": "1f2139717c10e30642a61c040847f3ba8548e5bfebb5065be789310fbe11b99c",
-    "package/dist/tokens.css": "9814bfd3ac6b58509993e9d3b4d70cb05361759c2db1be312c6dec1d65322997",
+    "package/dist/tokens.css": "f204a5c71b35419bb0987d96c3a0cb98b2728ab9077fe1c7e3efea5ce842976a",
     "package/package.json": "ed6a043853bb81f92c887c1183139f8662a595896f1bcc25564b6aa148930177",
     "package/README.md": "c12b8295e3116d8b0d89b16a6bd58cf1d193937f7d2fb2c52459d9ae2d0fdaf3"
   },
-  "entriesSha256": "5ae72c877b7533125b199a49715dfcaa4c1930afed24ca59c873aaae2b5c1171",
+  "entriesSha256": "bb41a853ae16cd5eb1f6d91b5b7b9bb637298b4832397043f5ef68e77f1a00b6",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/altitude-badge.figma-to-react/receipt.json",
-    "receiptSha256": "b8adecd0eaf0e4181910b53d81504903fcdb7dfe4d3a55911e72753d91f9ab8e",
-    "generatedSha256": "2ce66e2823d535225c8292510149cfea3661c95c3e6696f6386fcc7eeef84188",
+    "receiptSha256": "dcd080b0229cbea2f49022a079305014630db0fc67095d050967cf0719c52842",
+    "generatedSha256": "3cc9b1d2de7753503779e52a5d642285eccbe72326db79c4ff410e27e667632c",
     "component": "Badge",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-26",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "variant-danger_shape-label",

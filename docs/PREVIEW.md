@@ -20,13 +20,13 @@ preview command.
 <!-- benchmark:begin -->
 | Component | Direction | Result | Measured |
 | --- | --- | --- | --- |
-| CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-09-25. |
-| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-26. |
-| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
-| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-26. Out of scope: keyboard focus is V1.1. |
-| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-27. |
-| shadcn Alert (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 0.692% black) — darwin-arm64, 2026-09-27. |
-| shadcn Badge (native return) | Figma → React | **Pass** | 4/4 in scope within 5% (max 0.000% white, 3.611% black) — darwin-arm64, 2026-09-27. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
+| CBDS Badge | Figma → React | **Pass** | 72/72 in scope within 5% (max 2.214% white, 4.557% black) — darwin-arm64, 2026-09-28. |
+| Altitude Badge | Figma → React | **Pass** | 10/10 in scope within 5% (max 3.333% white, 3.333% black) — darwin-arm64, 2026-09-28. |
+| CBDS CheckboxIcon | Figma → React | **Pass** | 30/30 in scope within 5% (max 0.000% white, 0.000% black) — darwin-arm64, 2026-09-28. Out of scope: keyboard focus is V1.1. |
+| CBDS Checkbox | Figma → React | **Partial (text only)** | 5/16 in scope within 5% (max 4.947% white, 3.048% black); 11 text-only partial — darwin-arm64, 2026-09-28. Out of scope: keyboard focus is V1.1. |
+| Altitude Tabs | Figma → React | **Pass** | 2/2 in scope within 5% (max 0.016% white, 3.240% black) — darwin-arm64, 2026-09-28. |
+| shadcn Alert (native return) | Figma → React | **Not yet re-scored** | output matches its pin, but no receipt scored these exact generated files yet. |
+| shadcn Badge (native return) | Figma → React | **Not yet re-scored** | output matches its pin, but no receipt scored these exact generated files yet. Out of scope: draws no paint without its caller label: nothing to compare (both sides 18 x 20). |
 | shadcn Alert (default) | React → Figma | **Pass** | native vs React source 3.068% white, 3.105% black, exact size — darwin-arm64, 2026-09-27. |
 | shadcn Alert (destructive) | React → Figma | **Pass** | native vs React source 3.211% white, 3.248% black, exact size — darwin-arm64, 2026-09-26. |
 | shadcn Switch | React → Figma | **Pass** | native vs React source 0.000% white, 2.174% black, exact size (snap-outward-effects-included-v1) — darwin-arm64, 2026-09-27. |
@@ -149,6 +149,13 @@ consumer check (receipt: out/check/receipt.json):
 The receipt, Figma's images, the consumer screenshots and side-by-side diff
 images are in `out/check`; `out/result.json` repeats the verdict per variant
 under `check`.
+
+What the content check does not judge: frames and rectangles (backgrounds,
+borders, a radio's drawn circle) are left to the image comparison, and an icon
+counts as present when a graphic of about its size is rendered anywhere in the
+variant, so a misplaced icon is the image comparison's finding, not a missing
+one. It reads what Figma draws with one read-only request per run, so without
+`FIGMA_TOKEN` it reports UNVERIFIED instead of guessing.
 
 ## When something is refused
 

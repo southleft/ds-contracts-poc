@@ -15,9 +15,9 @@
     "Placeholder/Placeholder.tsx": "927bb9c32a129cf830d645c27071a7ef27ad78e6fcf94a53b88f0be92e14f82c",
     "Placeholder/index.ts": "739e1636ac751a063616ba882e97fa0b80aadd3fb25621c7175cd254f8f6c01d",
     "index.ts": "fdadac8e20755d83db9840f50998fe3aac9e6ff9909fac7a5cca7e8388a3e6ea",
-    "tokens.css": "e06cc6d4bd9dc885a185c8fc64664a07925e584a3e2bcbff4e1bf20b629d2547"
+    "tokens.css": "347735cecc303c8f5b86a2f7f4506c92995bffd04fe9a39154e9897a39486091"
   },
-  "generatedSha256": "3d27fd1bc71aa82c754033d8ac32e46bb471e8de3aad7c7133b533f4b0611228",
+  "generatedSha256": "bf010fa7b542e78e9342e3b33346a112dda7230fa9ae8334de1a3b92ec876a6f",
   "entries": {
     "package/dist/Badge/Badge.d.ts": "16f842c131df30d09bf2e69a52312f06386ad7423fa51649879f37b6eda0c0c7",
     "package/dist/Badge/Badge.js": "718940ba03b651b803c62a1868a62b1c004ea9d22d4e22aa439e0a48081dd3a0",
@@ -36,19 +36,19 @@
     "package/dist/Placeholder/Placeholder.d.ts": "df61f2adfda9e85d357d17717be8e3f81c685d1616d05dbc768a714354322fa6",
     "package/dist/Placeholder/Placeholder.js": "1cbf48073a4358d818b57c31b99f5feec6e82a67461b303aeef4c77b4b17e580",
     "package/dist/Placeholder/Placeholder.module.css": "5d8d6f6613d0d418b08520d045f3c7d64d1393851b39ccaa96ed1cafff4f53c8",
-    "package/dist/tokens.css": "e06cc6d4bd9dc885a185c8fc64664a07925e584a3e2bcbff4e1bf20b629d2547",
+    "package/dist/tokens.css": "347735cecc303c8f5b86a2f7f4506c92995bffd04fe9a39154e9897a39486091",
     "package/package.json": "ed6a043853bb81f92c887c1183139f8662a595896f1bcc25564b6aa148930177",
     "package/README.md": "c12b8295e3116d8b0d89b16a6bd58cf1d193937f7d2fb2c52459d9ae2d0fdaf3"
   },
-  "entriesSha256": "8738e5498c26fe6cc762108f776adf569663b7623933ac618c3ce5ae7c492cef",
+  "entriesSha256": "b71d40cdd2bf5f83ccd8a23be34f040cb7ff6b1ce049411c702597c44bca6681",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/cbds-badge.figma-to-react/receipt.json",
-    "receiptSha256": "56c5b3ee5c04c8890c778d1f747193e28ddef65b0d2264f17b6d226a156b97ee",
-    "generatedSha256": "3d27fd1bc71aa82c754033d8ac32e46bb471e8de3aad7c7133b533f4b0611228",
+    "receiptSha256": "92511ef4e88036530b87b6c22a504e3a77c816792738f1200cc4ff2be65b1c3f",
+    "generatedSha256": "bf010fa7b542e78e9342e3b33346a112dda7230fa9ae8334de1a3b92ec876a6f",
     "component": "Badge",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-25",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "type-brand_style-fill_size-large_rounded-false",
