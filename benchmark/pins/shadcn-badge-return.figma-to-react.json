@@ -26,5 +26,68 @@
   },
   "entriesSha256": "e11a7d91add74061c2e7ea977e7ca05e370cc73ca5e68d5fa044b29244086329",
   "recordedOn": "darwin-arm64",
-  "fidelity": null
+  "fidelity": {
+    "receipt": "benchmark/receipts/shadcn-badge-return.figma-to-react/receipt.json",
+    "receiptSha256": "aff83b2fc749d519e23360359219fc503b68348eeb22be904a09d47518afc6f1",
+    "generatedSha256": "3981c1b94a51b676cc88ceb6678cb8ea0da0ed914b293a7b4a7c1bdca64b0199",
+    "component": "RootMatrix39a19bbc2f3d67e9",
+    "measuredOn": "darwin-arm64",
+    "measuredAt": "2026-09-28",
+    "cases": [
+      {
+        "key": "variant-default",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-null",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      },
+      {
+        "key": "variant-destructive",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-link",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      },
+      {
+        "key": "variant-secondary",
+        "withinLimit": true,
+        "white": 0,
+        "black": 0,
+        "residual": null
+      },
+      {
+        "key": "variant-outline",
+        "withinLimit": true,
+        "white": 0,
+        "black": 3.6111111111111107,
+        "residual": null
+      },
+      {
+        "key": "variant-ghost",
+        "withinLimit": false,
+        "white": null,
+        "black": null,
+        "residual": null
+      }
+    ],
+    "problems": [
+      "image-framing-unqualified:variant-null:comparison-has-no-paint",
+      "image-framing-unqualified:variant-link:comparison-has-no-paint",
+      "image-framing-unqualified:variant-ghost:comparison-has-no-paint"
+    ]
+  }
 }

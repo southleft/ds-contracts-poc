@@ -23,7 +23,7 @@
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.tsx": "51ad732b570ed9def286f669ba0893505c22de3048fa81fa804b8ad7cbaa19b5",
     "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/index.ts": "ff6158ff1c5d91d7bd70a181cb8953a6dd77bc6a548a65feec993cfa00e290c2",
     "index.ts": "fa2bcd60cf8e47c86afa9a5513ad93c7788b26c1c657e6718a8b0da8bc3e32db",
-    "tokens.css": "51ec42f42a2d83ff65b0779771a16f4f01a337ee24b923ede12fcd671853b3b9"
+    "tokens.css": "ac7f6f416d8fcccf5a396183d03228746162964c9d2681c690bff2ad36143b3d"
   },
   "cases": [
     {
@@ -57,6 +57,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      },
+      "content": {
+        "key": "default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -92,6 +104,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "cee1ecdc9034065f84a909fffa62ab648f30120005b2177cb1580755d504ca4f"
+      },
+      "content": {
+        "key": "variant-null",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -127,6 +151,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      },
+      "content": {
+        "key": "variant-default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -162,6 +198,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "fbb1924a4390549802aab2f6442e6c78b1413d8a9de0980412f775db442dac7d"
+      },
+      "content": {
+        "key": "variant-destructive",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     }
   ],
@@ -205,7 +253,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2403897461574309383",
+      "version": "2404031653537691694",
       "export": {
         "format": "png",
         "scale": 1,
@@ -216,8 +264,8 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "99570ea9d5aa039d655d2ed7a5ef73846faae26162116ca08c64c87250edbc52",
-      "afterSha256": "99570ea9d5aa039d655d2ed7a5ef73846faae26162116ca08c64c87250edbc52"
+      "beforeSha256": "176897cc1864fcfe127ab4334c74899d683cbc20c9155a3b34119b7c3091a1ee",
+      "afterSha256": "176897cc1864fcfe127ab4334c74899d683cbc20c9155a3b34119b7c3091a1ee"
     },
     "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -554,7 +602,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/rootmatrix16c39fdef03e8d42sourcenativebbbf2381a2024928a570177a3eb284eaobservedreactmatrix16c39fdef03e8d42",
-    "tarballSha256": "da8fdde5f403bef7ee6cee3d9281ebb108a0f62e320d3553000ae39a647471fc",
+    "tarballSha256": "d34cc2033f72e9565eb5b111fb3c83acd9e5af357ae28774eef5cf788dbf5532",
     "distFiles": [
       "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42",
       "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42/RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42.d.ts",
@@ -570,7 +618,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "cc081ec5880f71363e0064002515fac9afd51b173e15242d0ba73a0073cddc4f",
+    "lockfileSha256": "d0258993c53268443cfa34e05b3d5c0d544c67d12add6079cb5564331d05374e",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -581,9 +629,9 @@
       "loaded": []
     },
     "builtCss": {
-      "bytes": 23341,
-      "tokenDefinitions": 403,
-      "tokenDefinitionsExpected": 403
+      "bytes": 4930,
+      "tokenDefinitions": 9,
+      "tokenDefinitionsExpected": 9
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -596,5 +644,141 @@
     },
     "interactiveNesting": []
   },
-  "outcome": "consumer-mounted-behaved-and-compared"
+  "content": {
+    "status": "collected",
+    "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "figmaVersion": "2404031653537691694",
+    "responseSha256": "d533d27a0668b5f5ff94a1d35a582f03219ea8968c79e6a50b79175f0857ba2c",
+    "evidence": "figma-content.json",
+    "cases": [
+      {
+        "key": "default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-null",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-destructive",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      }
+    ]
+  },
+  "outcome": "consumer-mounted-behaved-and-compared",
+  "verdict": {
+    "verdict": "pass",
+    "variants": [
+      {
+        "key": "default",
+        "figmaName": "variant=(unset)",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0.34615384615384615,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-null",
+        "figmaName": "variant=null",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0.6923076923076923,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-default",
+        "figmaName": "variant=default",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0.34615384615384615,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-destructive",
+        "figmaName": "variant=destructive",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0.34615384615384615,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      }
+    ],
+    "setProblems": [],
+    "counts": {
+      "pass": 4,
+      "fail": 0,
+      "unverified": 0
+    }
+  }
 }
