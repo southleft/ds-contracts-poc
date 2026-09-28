@@ -105,6 +105,17 @@ test('zero or multiple matching candidates do not produce an applicable selectio
   }
 });
 
+test('a named utility that renders the edit wins over the arbitrary spelling; equals of one rank stay ambiguous (§D.177)',async t=>{
+  const ranked=fixture(t),first=ranked.input.plan.candidates[0] as any;
+  ranked.input.plan.candidates=[{...structuredClone(first),rank:1},{...structuredClone(first),rank:0}] as any;
+  const job=ranked.store.start(referenceId,parentId,proposalId);await job.promise;
+  assert.equal(job.state.phase,'reviewable',JSON.stringify(job.state.problems));assert.equal(job.state.selected,1);
+  const tied=fixture(t);
+  tied.input.plan.candidates=[{...structuredClone(tied.input.plan.candidates[0] as any),rank:0},{...structuredClone(tied.input.plan.candidates[0] as any),rank:0}] as any;
+  const again=tied.store.start(referenceId,parentId,proposalId);await again.promise;
+  assert.equal(again.state.phase,'refused');assert.match(again.state.problems[0],/ambiguous-effect/);
+});
+
 test('a matching local state set cannot bypass a failed caller check or evidence drift during it',async t=>{
   for(const reason of ['caller-failure','drift'] as const){
     const f=fixture(t);let called=0;

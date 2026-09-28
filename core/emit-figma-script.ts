@@ -10122,6 +10122,9 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */
     resolveTokenLiteral: resolveLiteral,
+    /** The engine's own box-shadow reader, exposed so a source repair reads a
+     *  React render exactly as this engine compiled it (§D.177). */
+    parseShadowStack,
   };
 }
 

@@ -82,4 +82,8 @@ test('unmapped caller inputs, an unrelated root utility and a conflicting origin
   const absent=fixture();absent.old[0].ownership.components[0].props.disabled='unsupported';assert.throws(absent.verify,/caller-state-unmapped/);
   const utility=fixture();utility.old[0].captured.tree!.classes=['opacity-50'];assert.throws(utility.verify,/root-class-unavailable/);
   const f=fixture();assert.throws(()=>repairCallerProfile(profile('0.4'),f.old[0],f.recorded,f.variants,f.plan,0),/original-witness-mismatch/);
+  // A shadow repair never guesses Chromium's spelling of a witnessed shadow (§D.177).
+  const shadow={...structuredClone(f.plan),channel:'effects'} as any,witnessed={...profile(),requiredStyles:{...profile().requiredStyles,'box-shadow':'none'}};
+  assert.throws(()=>repairCallerProfile(witnessed,f.old[0],f.recorded,f.variants,shadow,0),/witness-shadow-unqualified/);
+  assert.deepEqual(repairCallerProfile(profile(),f.old[0],f.recorded,f.variants,shadow,0),profile(),'an unwitnessed shadow leaves the profile unchanged');
 });
