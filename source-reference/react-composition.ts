@@ -5,7 +5,7 @@ import { verifyNativeContractReadback, type NativeContractObservationInput, type
 import type { NativeContractComparisonReference } from '../core/native-contract-comparison.js';
 import type { Contract } from '../scripts/contract-schema.js';
 import { flatten, normalizeValue, type CapturedNode } from '../extract/computed/lib.js';
-import { linkReactSourceAnatomy, reactCompositionInstances } from './react-source-anatomy.js';
+import { foldedRuntimeDependencies, linkReactSourceAnatomy, reactCompositionInstances } from './react-source-anatomy.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 import { reactRootStyleExclusion } from './react-root-visual.js';
 import type { ReactOwnership } from './react-ownership.js';
@@ -47,7 +47,7 @@ const rootStyle = (style: Record<string, string>) => Object.fromEntries(Object.e
 export function matchReactComposition(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode,
   content: ObservedContentDraft, mains: ReactCompositionMain[], ownedTree: CapturedNode = tree) {
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
-  const logical = reactCompositionInstances(anatomy);
+  const logical = reactCompositionInstances(anatomy), folded = foldedRuntimeDependencies(anatomy);
   const roots = logical.filter(i => i.roots.some(r => r.path === ''));
   const children = logical.filter(i => !roots.includes(i));
   const review: ReactCompositionReview = { version: 1, status: 'incomplete', acceptedContract: null,
@@ -71,8 +71,11 @@ export function matchReactComposition(program: ReactSourceProgram, ownership: Re
     try {
       if (child.content === 'nested-caller-slot') throw Error('react-composition-nested-slot-lowering-unqualified');
       const sourceOwned = child.content === 'authored-or-runtime';
+      // A source-owned child may render runtime dependencies only when every
+      // one is folded into it (third-party internals inside its root, §D.174).
       if (child.roots.length !== 1 || child.content === 'unresolved' ||
-          (!sourceOwned && child.roots[0].correspondence === 'runtime-dependent') || sourceOwned && child.dependencies.length)
+          (!sourceOwned && child.roots[0].correspondence === 'runtime-dependent') ||
+          sourceOwned && child.dependencies.some(d => !folded.has(d.instanceId)))
         throw Error('react-composition-runtime-or-multiple-root-unqualified');
       const paths = content.sourcePaths.filter(p => p.sourcePath === child.roots[0].path && p.type === 'frame');
       if (paths.length !== 1 || !paths[0].specPath.length) throw Error('react-composition-compiler-path-unavailable');

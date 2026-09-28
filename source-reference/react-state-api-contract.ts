@@ -11,6 +11,15 @@ import type { ReactBehaviorContract } from './react-behavior-contract.js';
  * semantics to its own authenticated appearance draft. It never changes or
  * upgrades the broader callback sweep. The generated consumer is a separate
  * qualification, as are every excluded input and native interaction metadata. */
+/** A state-API contract is its initial appearance contract under this id. */
+export const stateApiContractId = (initialId: string) => initialId + '-state-api';
+/** The inverse, for evidence recorded against the initial appearance. */
+export function initialContractIdOfStateApi(id: string): string {
+  const initial = id.endsWith('-state-api') ? id.slice(0, -'-state-api'.length) : '';
+  if (!initial || stateApiContractId(initial) !== id) throw Error('react-state-api-contract-identity-invalid');
+  return initial;
+}
+
 export function projectReactStateApiContract(initial: ReactInitialInspection, inspection: ReactStateApiInspection): ReactBehaviorContract {
   const result: ReactBehaviorContract = { status: 'refused', problems: [], limitations: [
     'bounded-state-inputs-only', 'excluded-inputs-not-qualified', 'controlled-source-appearance-not-compared',
@@ -100,7 +109,7 @@ export function projectReactStateApiContract(initial: ReactInitialInspection, in
       roleException: `Independent simultaneous-input observations identify a button-backed ${plan.role}.` };
     contract.events = [{ name: 'stateChange', trigger: 'root', toggles: { prop: prop.name, between: [keyFor(false), keyFor(true)], aria: 'checked' },
       bindings: { code: { prop: plan.callback, argument: 'next-value' } } }];
-    const ids = new Map(contracts.map(c => [c.id, c.id + '-state-api']));
+    const ids = new Map(contracts.map(c => [c.id, stateApiContractId(c.id)]));
     for (const member of contracts) {
       member.id = ids.get(member.id)!; member.name += 'StateApi'; member.bindings.code.anchors.export = member.name;
       const link = (part: Part) => {

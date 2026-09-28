@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,realpathSync,rmSync} from 'node:fs';
+import {lstatSync,mkdtempSync,mkdirSync,readFileSync,readlinkSync,writeFileSync,realpathSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {proposeReactOpacityUtilityEdits} from './react-utility-source-edit.js';
@@ -41,3 +41,33 @@ test('staging refuses changed originals, modified candidates and a nonreproducib
   const changed={...f.files,[path.join(f.root,'output.css')]:sha(readFileSync(path.join(f.root,'output.css')))};
   await assert.rejects(()=>stageReactUtilitySourceEdit(f.repo,f.root,changed,f.candidate,f.recipe),/original-css-not-reproducible/);
 });
+
+test('authenticated dependency packages are cloned into the stage; other modules stay links (§D.173)',async t=>{
+  // Measured: a symlinked node_modules resolved Radix's Switch.Root outside the
+  // stage, so the candidate's ownership lost the dependency components.
+  const f=await fixture(t),modules=path.join(f.root,'node_modules');
+  const write=(file:string,text:string)=>{mkdirSync(path.dirname(path.join(modules,file)),{recursive:true});writeFileSync(path.join(modules,file),text);};
+  write('used/index.js','export const Used=1;');write('used/package.json','{"name":"used"}');write('other/index.js','export const Other=1;');
+  write('@scope/used/dist/index.mjs','export function Root(){}');write('@scope/other/index.js','export const X=1;');
+  const files={...f.files};
+  for(const file of ['used/index.js','@scope/used/dist/index.mjs'])files[path.join(modules,file)]=sha(readFileSync(path.join(modules,file)));
+  const stage=await stageReactUtilitySourceEdit(f.repo,f.root,files,f.candidate,f.recipe),staged=path.join(stage.workspace,'node_modules');
+  assert.equal(lstatSync(staged).isSymbolicLink(),false);
+  for(const pkg of ['used','@scope/used']) {
+    assert.equal(lstatSync(path.join(staged,pkg)).isSymbolicLink(),false,pkg+' is cloned');
+    assert.equal(realpathSync(path.join(staged,pkg)).startsWith(realpathSync(stage.workspace)+path.sep),true);
+  }
+  assert.equal(readFileSync(path.join(staged,'used/package.json'),'utf8'),'{"name":"used"}','the whole package is cloned');
+  assert.equal(readFileSync(path.join(staged,'@scope/used/dist/index.mjs'),'utf8'),'export function Root(){}');
+  assert.equal(readlinkSync(path.join(staged,'other')),path.join(modules,'other'));
+  assert.equal(readlinkSync(path.join(staged,'@scope/other')),path.join(modules,'@scope/other'));
+});
+
+test('a store directory or a loose module file refuses instead of being cloned (§D.173)',async t=>{
+  for(const [file,reason] of [['.pnpm/react@19/node_modules/react/index.js',/module-layout-unsupported/],['loose.js',/module-path-unsupported/],['@scope/loose.js',/module-path-unsupported/]] as const) {
+    const f=await fixture(t),target=path.join(f.root,'node_modules',file);
+    mkdirSync(path.dirname(target),{recursive:true});writeFileSync(target,'export {};');
+    await assert.rejects(stageReactUtilitySourceEdit(f.repo,f.root,{...f.files,[target]:sha(readFileSync(target))},f.candidate,f.recipe),reason);
+  }
+});
+

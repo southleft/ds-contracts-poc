@@ -862,6 +862,7 @@ export function createFigmaMock(options = {}) {
       // no matter what HUG claims. See the constructor. Gated on HUG: a FILL
       // axis is measured by the parent and a FIXED axis by its own resize, and
       // neither reads the stale box.
+      if (this._inheritedZeroW) return 0;
       if (this._birthBox?.w && this._lsH === 'HUG') return this._w;
       if (this._zeroFillW && this._lsH === 'FILL') return 0;
       // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
@@ -1153,9 +1154,15 @@ export function createFigmaMock(options = {}) {
         'layoutSizingHorizontal', 'layoutSizingVertical', 'layoutPositioning', 'constraints',
         'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'clipsContent',
         '_w', '_h', '_resized', 'x', 'y', '_exposedInstance',
+        // Live 2026-09-26: a slot's exact-zero FILL state reaches every instance of it.
+        '_zeroFillW',
       ]) {
         if (this[field] !== undefined) clone[field] = structuredClone(this[field]);
       }
+      // Live Scratch probe 2026-09-27: a slot measuring exactly 0 px wide in
+      // its main pins every instance's slot at 0 px. FILL, FIXED, resize and
+      // resizeWithoutConstraints on the instance all leave it at 0.
+      if (this.type === 'SLOT' && this.width === 0) clone._inheritedZeroW = true;
       // GRID facts survive instancing (P12: instances place, span and fill
       // in cells natively) — deep copies, never shared track arrays.
       if (this._layoutMode === 'GRID') {

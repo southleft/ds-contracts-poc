@@ -206,3 +206,12 @@ test('the generated preview consumer independently selects both inputs, remounts
     assert.equal(await control.getAttribute('aria-checked'),'true');assert.equal(await held.inputValue(),'true');
   }finally{await browser.close();}
 });
+
+test('a state-API contract id maps back to its initial appearance id and nothing else (§D.173)', async () => {
+  const { initialContractIdOfStateApi, stateApiContractId } = await import('./react-state-api-contract.js');
+  // Measured: the gated shadcn Switch set is observed.react-initial-2b72f17fbaa2049c-state-api.
+  assert.equal(initialContractIdOfStateApi('observed.react-initial-2b72f17fbaa2049c-state-api'), 'observed.react-initial-2b72f17fbaa2049c');
+  assert.equal(initialContractIdOfStateApi(stateApiContractId('observed.react-initial-0123456789abcdef')), 'observed.react-initial-0123456789abcdef');
+  for (const id of ['observed.react-initial-2b72f17fbaa2049c', '-state-api', 'observed.react-initial-2b72f17fbaa2049c-state-api-x'])
+    assert.throws(() => initialContractIdOfStateApi(id), /state-api-contract-identity-invalid/);
+});

@@ -94,6 +94,37 @@ export async function observeReactSourceRepairStates(args:{reference:ReactRefere
   }finally{await browser.close();}
 }
 
+type RepairCandidate={source:{module:string};beforeSha256:string;afterSha256:string;edit:{before:string;after:string}};
+type RepairOwnership={components:Array<{id:string;parent?:string|null;roots:string[];props?:unknown;source:{module:string;exportName:string;sourceSha256:string}}>};
+/** The only ownership differences a class-token edit may make, mapped back so
+ * that any other difference still compares unequal: the edited module's
+ * source hash, and the same token in the className that a dependency the
+ * edited owner renders at its root receives from it (the shadcn Switch
+ * passes className to Radix's Switch.Root; docs/23 §D.173). Owners
+ * themselves, and components that are not their descendants, never qualify. */
+export function restoreRepairedOwnership<T extends RepairOwnership>(before:T,after:T,candidate:RepairCandidate,
+  owners:Array<{id:string;root:string}>):T {
+  const restored=structuredClone(after),byId=new Map(restored.components.map(c=>[c.id,c]));
+  const renderedBy=(component:RepairOwnership['components'][number],ownerId:string)=>{
+    const seen=new Set<string>();
+    for(let parent=component.parent;parent&&!seen.has(parent);parent=byId.get(parent)?.parent){if(parent===ownerId)return true;seen.add(parent);}
+    return false;
+  };
+  for(const component of restored.components) {
+    const prior=before.components.find(c=>c.id===component.id);
+    if(!prior)continue;
+    if(component.source.module===candidate.source.module&&component.source.exportName===prior.source.exportName&&
+        component.source.sourceSha256===candidate.afterSha256&&prior.source.sourceSha256===candidate.beforeSha256)
+      component.source=structuredClone(prior.source);
+    const props=component.props as Record<string,unknown>|undefined,priorProps=prior.props as Record<string,unknown>|undefined;
+    if(!owners.some(o=>o.id===component.id)&&owners.some(o=>component.roots.includes(o.root)&&renderedBy(component,o.id))&&
+        typeof props?.className==='string'&&typeof priorProps?.className==='string'&&
+        props.className.split(' ').map(t=>t===candidate.edit.after?candidate.edit.before:t).join(' ')===priorProps.className)
+      props.className=priorProps.className;
+  }
+  return restored;
+}
+
 /** Compare the entire mapped domain. The only tree differences permitted are
  * the precise root class token edit and the requested native root opacity.
  * Other recorded style/content/geometry facts and source ownership must match. */
@@ -131,13 +162,7 @@ export function verifyReactSourceRepairStates(before:RepairStateObservation,afte
       root!.style.opacity=actualRoot!.style.opacity;
     }
     if(!same(expectedTree,now.tree))fail('other-tree-facts-changed:'+variant.observation);
-    const normalizedOwnership=structuredClone(now.ownership);
-    for(const component of normalizedOwnership.components) {
-      const prior=old.ownership.components.find(c=>c.id===component.id);
-      if(prior&&component.source.module===candidate.source.module&&component.source.exportName===prior.source.exportName&&
-          component.source.sourceSha256===candidate.afterSha256&&prior.source.sourceSha256===candidate.beforeSha256)
-        component.source=structuredClone(prior.source);
-    }
+    const normalizedOwnership=restoreRepairedOwnership(old.ownership,now.ownership,candidate,[{id:owner!.id,root:owner!.roots[0]}]);
     if(!same(old.ownership,normalizedOwnership))fail('ownership-facts-changed:'+variant.observation);
     if(!same(comparableFacts(old),comparableFacts(now)))fail('supporting-facts-changed:'+variant.observation);
     for(const key of ['styleOrigin','bounds','descendantSizes'] as const)
