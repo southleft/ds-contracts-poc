@@ -2,6 +2,7 @@ import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
+import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, componentLookupExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
@@ -364,6 +365,8 @@ export function generateTsx(
 
   const destructured: string[] = [];
   if (selection) { propLines.push(selection.propLine); destructured.push(selection.callback); }
+  const statePreview = reactStatePreviewInput(contract);
+  if (statePreview) propLines.push(statePreview.propLine);
   // A toggled enum prop follows the controlled/uncontrolled pattern: no
   // destructure default — undefined means "uncontrolled", backed by useState.
   for (const p of enums) {
@@ -404,6 +407,7 @@ export function generateTsx(
     childrenText && childrenText.bindings.figma.kind === 'NONE' && typeof childrenText.default === 'string'
       ? `children = ${JSON.stringify(childrenText.default)}`
       : 'children';
+  if (statePreview) destructured.push(statePreview.destructured);
   destructured.push('className', childrenDefault, '...rest');
 
   // Body prelude: uncontrolled state + handlers for declared events.
@@ -538,6 +542,7 @@ export function generateTsx(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
+  if (statePreview) elementAttrs.push(statePreview.attribute);
   // anatomy.root.attrs — the root element's own attributes, carried exactly
   // the way nested parts' attrs are (the P0 this closes: icon-button's
   // aria-label + type, progress-bar's role, skeleton's aria-hidden and the
@@ -685,7 +690,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component) + reactStatePreviewAttribute(contract, part.component) + (hasComponentHostPlacement(part) ? ` className={${stylesRef(partName)}}` : '') + (selection?.attrs(part) ?? '');
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be

@@ -6,7 +6,7 @@ import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { enumerate, flatten, normalizeValue, type CapturedNode } from '../extract/computed/lib.js';
 import type { PropSpace, SweepResult } from '../extract/computed/capture.js';
-import { linkReactSourceAnatomy } from './react-source-anatomy.js';
+import { foldedRuntimeDependencies, linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactSourceProgram } from './react-source-program.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactStyleOrigin } from './react-style-origin.js';
@@ -22,8 +22,11 @@ export function deriveReactOwnedChild(program: ReactSourceProgram, ownership: Re
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   const instance = anatomy.instances.find(i => i.instanceId === instanceId);
   const observed = ownership.components.find(i => i.id === instanceId);
+  // Dependencies are allowed only when folded: third-party internals drawn
+  // inside this child's own root, compiled as its layers (§D.174).
+  const folded = foldedRuntimeDependencies(anatomy);
   if (anatomy.status !== 'linked' || !instance || !observed?.parent || instance.content !== 'authored-or-runtime' ||
-      instance.roots.length !== 1 || instance.dependencies.length || instance.roots[0].path === '')
+      instance.roots.length !== 1 || instance.dependencies.some(d => !folded.has(d.instanceId)) || instance.roots[0].path === '')
     throw Error('react-owned-child-leaf-required');
   for (const key of ['style','className']) if (Object.hasOwn(observed.props,key) && observed.props[key] !== null &&
       observed.props[key] !== '' && revisionOf(observed.props[key]) !== revisionOf({kind:'undefined'}))
@@ -68,5 +71,6 @@ export function deriveReactOwnedChild(program: ReactSourceProgram, ownership: Re
     draft:{instanceId,source:instance.source,status:'native-compiled',contract,tokens,native,channels:[],
       sourceSizing:origin!.sizes,sourceBindings:bindings.sourceBindings,residuals:compiled.residuals,problems:[],
       limitations:['observed-child-inputs-only','runtime-interactions-not-projected','descendant-source-bindings-not-observed',
-        'source-variable-modes-and-aliases-not-assembled','native-fidelity-not-verified']}};
+        'source-variable-modes-and-aliases-not-assembled','native-fidelity-not-verified',
+        ...(instance.dependencies.length ? ['runtime-dependency-internals-flattened'] : [])]}};
 }

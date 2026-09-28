@@ -222,7 +222,7 @@ function contractPage(): { route: string; html: string } {
           {
             figma:
               'The design-tool side: <code>anchors</code> (file key, component-set key, node id — <code>null</code> until first sync; the differ reports such contracts as <em>pending</em>, which is workflow state, not drift), <code>representation</code> (<code>component</code>, the default, generates a canvas component set; <code>native</code> declares the concept maps to a native canvas capability such as auto-layout — no component is generated, parity expects none, the code surface is still fully generated), and the <code>statePreviews</code> opt-in — see <a href="/spec/states/#state-previews">States</a>.',
-            code: "The code side: <code>anchors</code> — import path and export name of the generated component. Optional strict <code>runtime</code> retains a verified original custom element: <code>version: 1</code>, <code>kind: custom-element</code>, and distinct lowercase SHA-256 <code>artifactRevision</code>, <code>interfaceRevision</code> and <code>bindingRevision</code>. These bind original files, the full source interface, and the qualified Contract projection. No paths, loaders or executable text are accepted in this reference. The host resolves trusted artifacts; the existing React 19 lowering preserves their original behavior and types. The initial projection freezes the Contract and actual token values; changes require a separately qualified lowering, otherwise emission refuses. Other targets currently refuse retained runtimes. A canvas marker is not authority to introduce executable dependencies or proof of visual equivalence. Source-bound Contract admission and live canvas integration remain unfinished; see <a href=\"/system/\">the current work order</a>.",
+            code: "The code side: <code>anchors</code> — import path and export name of the generated component. Optional strict <code>runtime</code> retains a verified original custom element: <code>version: 1</code>, <code>kind: custom-element</code>, and distinct lowercase SHA-256 <code>artifactRevision</code>, <code>interfaceRevision</code> and <code>bindingRevision</code>. These bind original files, the full source interface, and the qualified Contract projection. No paths, loaders or executable text are accepted in this reference. The host resolves trusted artifacts; the existing React 19 lowering preserves their original behavior and types. The initial projection freezes the Contract and actual token values; changes require a separately qualified lowering, otherwise emission refuses. Other targets currently refuse retained runtimes. A canvas marker is not authority to introduce executable dependencies or proof of visual equivalence. Source-bound Contract admission and live canvas integration remain unfinished; see <a href=\"/system/\">the current work order</a>. The <code>statePreviews</code> opt-in gives the generated component a <code>statePreview</code> input — see <a href=\"/spec/states/#code-state-previews\">States</a>.",
           },
         ) +
         shippingExample("button.contract.json", {
@@ -986,6 +986,18 @@ function statesPage(): { route: string; html: string } {
         }),
     ),
     section(
+      "code-state-previews",
+      "Code state previews (bindings.code.statePreviews, component.statePreview)",
+      ["generated"],
+      `<p>The code twin of canvas previews (docs/23 §D.164). A designer who draws a wrapper’s <code>state=hover</code> draws its nested child’s Hover cell, but the child runs hover as a pseudo-class, and no caller can set a pseudo-class. <code>bindings.code.statePreviews: true</code> gives the child a <code>statePreview</code> input (<code>hover</code>, <code>active</code> or <code>focus-visible</code>, from the states it declares), rendered as <code>data-state-preview</code>. Every state rule in its module sheet matches either the pseudo-class or that attribute, inside <code>:is()</code>, so no rule changes specificity and the live states still run. A composing parent selects the drawing with <code>component.statePreview</code>: a literal state, or <code>{ "prop": "state", "map": { "hover": "hover" } }</code>, a lookup of one parent enum prop in which an unmapped value forces nothing.</p><p>React CSS Modules and the static HTML preview render it. The inline React surface omits it together with the pseudo-class state tokens it already omits, and says so in its header. The canvas selects the child’s <code>State</code> preview where the child draws one and ledgers it by name elsewhere. Web Components refuse <code>component.statePreview</code> by name.</p>` +
+        refusals("Refused by name when:", [
+          "the child opts in but is multi-root, declares no previewable state, or already uses the code prop <code>statePreview</code>",
+          "a ref forces a state on a child that has not opted in, or a state the child does not declare",
+          "the map’s prop is not an enum of the parent, or a key is not one of its values",
+          "the ref is the root or a repeated item",
+        ]),
+    ),
+    section(
       "code-only",
       "part.codeOnly — capture-side receipts riding the contract",
       ["generated"],
@@ -1286,6 +1298,8 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           text: "Overrides the child’s <code>children</code> text prop (code: JSX children; canvas: text override on the instance).",
           overrides:
             'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',
+          statePreview:
+            'Forces the child’s drawn hover, active or focus-visible state, as a literal or per parent value — see <a href="/spec/states/#code-state-previews">Code state previews</a>.',
         }) +
         `<p>On a nested component ref, <code>parts</code> can supply caller-owned React content through the child’s unique, unconstrained <code>children</code> slot. Bindings remain in parent scope while each child keeps its implementation and state. The native generator can populate the child’s existing slot without changing its main; test-host checks cover flex/grid layouts and nested slot locations; caller text inside a slot stays canvas-editable because Figma cannot bind it to a parent TEXT property. Live native behavior, automatic source integration and reverse reconstruction still require verification.</p>` +
         refusals("Refusals:", [

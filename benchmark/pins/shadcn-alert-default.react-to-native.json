@@ -17,10 +17,10 @@
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-alert-default.react-to-native/comparison.json",
-    "receiptSha256": "50fedc12bace2fce3b5d58605b62f2a6defc460a34fd1db05dc186f5b5b1c52f",
+    "receiptSha256": "6bc33f0567087ca40a09f0e0a3e15d6fba87535bbd151a185688ef349d4b5912",
     "planSetSha256": "db279478dfcf316410aba40eece8390b21bfcb938c8cc5a203d96c22eb6b60a2",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-26",
+    "measuredAt": "2026-09-27",
     "white": 3.0678104575163396,
     "black": 3.104575163398693,
     "layoutExact": true,

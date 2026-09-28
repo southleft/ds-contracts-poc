@@ -236,7 +236,7 @@ export function createReactStateApiInspectionStore(
       save('request.json', value.request); save('program.json', program);
       save('initial-input.json', value.saved.initial); save('callback-input.json', value.saved.behavior);
       const promise = (async () => {
-        let browser;
+        let browser, sealable = false;
         try {
           const assertCurrent = () => {
             if (!reactReferenceUnchanged(value.reference) || !reactSourceProgramUnchanged(program) ||
@@ -281,13 +281,16 @@ export function createReactStateApiInspectionStore(
             state.sourceUnchanged = true;
             if (state.observation.problems.length || state.observation.rows.length !== state.plan.cases.length * 2 ||
                 state.restorationChecks !== state.plan.cases.length * 3) throw Error('state-api-observation-incomplete');
-            state.phase = 'complete';
+            sealable = true;
           } finally { failures.dispose(); }
         } catch (error) {
           state.phase = 'failed'; state.problems.push(error instanceof Error ? error.message : String(error));
         } finally {
           try {
-            await browser?.close(); save('report.json', state); save('integrity.json', { version: 1, files: inventoryEvidence(dir) });
+            await browser?.close();
+            // Complete only once sealed: no await from here until the saved report.
+            if (sealable) state.phase = 'complete';
+            save('report.json', state); save('integrity.json', { version: 1, files: inventoryEvidence(dir) });
             const temporary = path.join(value.root, 'latest-' + state.id + '.tmp');
             writeFileSync(temporary, JSON.stringify({ id: state.id, inventorySha256: evidenceSha(readFileSync(path.join(dir, 'integrity.json'))) }), { flag: 'wx' });
             renameSync(temporary, path.join(value.root, 'latest.json'));

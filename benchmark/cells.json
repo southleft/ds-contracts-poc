@@ -80,7 +80,7 @@
         "appArtifact": "bdef6602183c9c9ca442d5e8e363bd95f5f4d85b6a90a6ac3666cc476a2b6863",
         "appTarballSha256": "67b659208368"
       },
-      "expect": "known-failure",
+      "expect": "pass",
       "scope": {
         "note": "20 variants; the 4 focus variants are out of scope (keyboard focus is V1.1).",
         "outOfScope": [
@@ -90,8 +90,69 @@
           }
         ]
       },
-      "component": "Checkbox",
-      "knownFailure": "hover renders the rest variant (variant-prop-discarded:state); label cells over 5% only on text are named partials"
+      "component": "Checkbox"
+    },
+    {
+      "id": "altitude-tabs.figma-to-react",
+      "row": "Altitude Tabs",
+      "criterion": "C2",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/altitude-tabs/dump.json",
+      "inputSha256": "3d8e2330713c1e14d61b66c3b81f6c7c92ee01abfaf6964a91480f5ae6718b73",
+      "source": {
+        "figmaFile": "y83n4o9LOGs74oAoguFcGS",
+        "capturedAt": "2026-09-27",
+        "note": "Fresh read-only REST capture of the Tabs set (node 3558:61955) and its local closure. Text Passage is not proposed in exact mode (no structured property evidence); its content renders through the Tab Panel. Fonts: the three hashed Public Sans statics selected before measurement (docs/23 §D.112)."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "2 variants (Default, Stretch); both in scope",
+        "outOfScope": []
+      },
+      "component": "Tabs"
+    },
+    {
+      "id": "shadcn-alert-return.figma-to-react",
+      "row": "shadcn Alert (native return)",
+      "criterion": "C4",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/shadcn-alert-return/dump.json",
+      "inputSha256": "830db06f8a2e137c19963c78f5c3d6675493e7352a67be40a7e540f53aa8a7a7",
+      "source": {
+        "figmaFile": "T56aKuRnoay1L7CKAjSWRO",
+        "capturedAt": "2026-09-27",
+        "note": "Read-only REST capture of the natively created shadcn Alert root set (253:5947, operation bbbf2381) in Evaluations: the independent family's Figma → React journey back from its own native output. Full-width root measured at each variant's Figma preview width (owner decision, 2026-09-27)."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "4 variants of the root container (empty children slot); all in scope",
+        "outOfScope": []
+      },
+      "component": "RootMatrix16c39fdef03e8d42SourceNativeBbbf2381A2024928A570177a3eb284eaObservedReactMatrix16c39fdef03e8d42"
+    },
+    {
+      "id": "shadcn-badge-return.figma-to-react",
+      "row": "shadcn Badge (native return)",
+      "criterion": "C4",
+      "kind": "figma-to-react",
+      "input": "benchmark/inputs/shadcn-badge-return/dump.json",
+      "inputSha256": "65b09ce58599b25d853dfc9aba6f1daf77f9180b7a9599fdc867803725b1b634",
+      "source": {
+        "figmaFile": "T56aKuRnoay1L7CKAjSWRO",
+        "capturedAt": "2026-09-27",
+        "note": "Plugin capture (extract/figma/dump.plugin.js v1.47, run unmodified from the Sync Runner's Advanced tab with the set selected) of the natively created shadcn Badge root set (253:5754, operation 27002409) in Evaluations. A REST capture refuses this set: its label slot is a text template, which needs the variables REST cannot read with this token."
+      },
+      "expect": "pass",
+      "scope": {
+        "note": "7 variants of the root with an empty label slot. Variants null, link and ghost draw no paint without a caller label (transparent background, empty slot), so there are no pixels to compare; both sides measure exactly 18 x 20.",
+        "outOfScope": [
+          {
+            "pattern": "^variant-(null|link|ghost)$",
+            "reason": "draws no paint without its caller label: nothing to compare (both sides 18 x 20)"
+          }
+        ]
+      },
+      "component": "RootMatrix39a19bbc2f3d67e9"
     },
     {
       "id": "shadcn-alert-default.react-to-native",
@@ -121,6 +182,36 @@
       "workspace": "benchmark/react-family",
       "caseId": "state-api:switch-unchecked",
       "children": false,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-badge-default.react-to-native",
+      "row": "shadcn Badge (default)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "badge-default",
+      "children": false,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-badge-secondary.react-to-native",
+      "row": "shadcn Badge (secondary)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/react-family",
+      "caseId": "badge-secondary",
+      "children": false,
+      "expect": "pass"
+    },
+    {
+      "id": "shadcn-card-composed.react-to-native",
+      "row": "shadcn Card (composed)",
+      "criterion": "C3",
+      "kind": "react-to-native",
+      "workspace": "benchmark/shadcn-cohort",
+      "caseId": "card-composed",
+      "children": true,
       "expect": "pass"
     }
   ]

@@ -71,6 +71,7 @@ import {
   baseTwinName,
   sortByDependencies,
   walkAnatomy,
+  type ComponentRef,
   type Contract,
   type Part,
   type Prop,
@@ -3987,6 +3988,8 @@ function mapDepProps(
    *  to the instance spec's channelMiss footnote — never a silent drop. */
   ledger?: CodeOnlyFactSeed[],
   parent?: Contract,
+  /** docs/23 §D.164 — the ref's forced child state (component.statePreview). */
+  statePreview?: ComponentRef['statePreview'],
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -4093,11 +4096,22 @@ function mapDepProps(
   // selection is made only where the wired axes sit on those pins; anywhere
   // else the state is undrawn and is ledgered BY NAME instead of silently
   // rendering rest ink (live 2026-09-25: CBDS Checkbox disabled cells).
+  // docs/23 §D.164: a forced pseudo-class state (component.statePreview) is
+  // the same selection — one more active state, resolved for this combo.
+  const forced = typeof statePreview === 'string' ? statePreview : statePreview?.map[subst[statePreview.prop] ?? ''];
+  if (forced !== undefined && (!dep.bindings?.figma?.statePreviews || standalone)) {
+    ledger?.push({
+      channel: `${dep.name} state "${forced}"`,
+      value: 'statePreview',
+      reason: `not drawn — ${dep.id} draws no State previews on the canvas, so this instance renders the base variant's ink`,
+    });
+  }
   if (dep.bindings?.figma?.statePreviews && !standalone) {
     const active = dep.states.filter((s) => {
       const p = dep.props.find((q) => q.name === s && q.type === 'boolean' && q.bindings.figma.kind === 'BOOLEAN');
       return p !== undefined && out[p.bindings.figma.property!] === true;
     });
+    if (forced !== undefined && !active.includes(forced)) active.push(forced);
     if (active.length > 0) {
       const axes = dep.props.filter((p) => isEnum(p) || isVariantBool(p));
       const substProps = statePreviewSubstProps(dep);
@@ -5047,7 +5061,7 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
+      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract, part.component.statePreview) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
     const placement = resolveComponentPlacement(part, subst);
@@ -8431,11 +8445,35 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     child['layoutSizing' + axis] = 'FILL';
   };
   if (!horizontal && child.layoutSizingHorizontal === 'FILL') reseat('Horizontal', parent.width - parent.paddingLeft - parent.paddingRight);
-  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);${hasRootGridSlot ? `
+  if (horizontal && child.layoutSizingVertical === 'FILL') reseat('Vertical', parent.height - parent.paddingTop - parent.paddingBottom);
+  // An exact-zero width here is inherited by every instance, and no instance
+  // override changes it: a caller that widens the instance leaves the slot at
+  // 0 px, its content centred (live Scratch probe 2026-09-27; the composed
+  // shadcn Card and its row CardFooter). Figma keeps a 0.01 px seed, which
+  // draws nothing and lets every instance fill or hug (docs/23 D.175).
+  if (child.width === 0) {
+    const sizing = child.layoutSizingHorizontal;
+    child.layoutSizingHorizontal = 'FIXED';
+    child.resizeWithoutConstraints(0.01, child.height);
+    child.layoutSizingHorizontal = sizing;
+  }${hasRootGridSlot ? `
   if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
     const grid = child.children[0];
     grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
     grid.layoutSizingVertical = child.layoutSizingVertical;
+    // An empty carrier keeps its 1 px seed on a HUG axis: Figma does not
+    // re-measure a childless frame, and CSS draws an empty grid at 0 (the
+    // shadcn Alert root drew 27 px against React's 26). The FIXED round-trip
+    // through resizeWithoutConstraints reaches exact zero and keeps HUG tracks
+    // (live Scratch probe 2026-09-27; GP4b's revert to FLEX is resize() on a
+    // hugged axis). A FILL axis is never zeroed: it would keep the zero.
+    // Horizontally, callers widen instances, so the seed stays 0.01 px (D.175).
+    if (!grid.children.length) for (const axis of ['Vertical', 'Horizontal']) {
+      if (grid['layoutSizing' + axis] !== 'HUG') continue;
+      grid['layoutSizing' + axis] = 'FIXED';
+      grid.resizeWithoutConstraints(axis === 'Horizontal' ? 0.01 : grid.width, axis === 'Vertical' ? 0 : grid.height);
+      grid['layoutSizing' + axis] = 'HUG';
+    }
   }` : ''}
 }
 ` : ''}${hasCallerSlots && hasRootSlot ? `const callerSlotsByInstance = new WeakMap();

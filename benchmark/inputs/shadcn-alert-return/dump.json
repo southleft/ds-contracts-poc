@@ -1,0 +1,755 @@
+{
+  "_provenance": {
+    "fileKey": "T56aKuRnoay1L7CKAjSWRO",
+    "extractedAt": "2026-09-27",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.43) for design→contract proposal.",
+    "dumpVersion": "1.43",
+    "captureGaps": [
+      "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
+      "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
+      "image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box",
+      "non-INSIDE strokeAlign (dump v1.11): not captured on this route — OUTSIDE/CENTER alignment remains a named loss; only explicit INSIDE is carried",
+      "layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line",
+      "the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types"
+    ],
+    "stampsObservable": true,
+    "closure": {
+      "rule": "follow-instances",
+      "cap": 64,
+      "requested": [
+        {
+          "nodeId": "253:5947",
+          "name": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42)",
+          "type": "COMPONENT_SET"
+        }
+      ],
+      "pulled": [],
+      "unresolved": [],
+      "cycles": []
+    },
+    "variables": {
+      "status": "unavailable",
+      "cause": "scope",
+      "httpStatus": 403,
+      "message": "Figma refused /variables/local: your personal access token is missing the `file_variables:read` scope (HTTP 403 — a token scope, NOT a plan limit). This is fixable — mint a new token at figma.com → Settings → Security → Personal access tokens with \"Variables: read\" enabled, and re-run. (Variable NAMES will be unresolved until you do; the import still works, using resolved values.)",
+      "fix": "regenerate the token with file_variables:read"
+    }
+  },
+  "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42)": {
+    "setName": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42)",
+    "type": "COMPONENT_SET",
+    "nodeId": "253:5947",
+    "key": "f431d477bf7d5fe245a2905797c98df980a8dfa0",
+    "description": "RootMatrix16c39fdef03e8d42 — generated from contract observed.react-matrix-16c39fdef03e8d42 v0.1.0 † (30 code-only facts — see plugin report)",
+    "contractId": "source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42",
+    "specHash": "1528278667",
+    "version": "0.1.0",
+    "propNames": {
+      "variant": "variant"
+    },
+    "unsetVariantAxes": {
+      "version": 1,
+      "axes": [
+        {
+          "property": "variant",
+          "propName": "variant",
+          "codeProp": "variant",
+          "unsetValue": "(unset)",
+          "values": [
+            {
+              "value": "null",
+              "label": "null"
+            },
+            {
+              "value": "default",
+              "label": "default"
+            },
+            {
+              "value": "destructive",
+              "label": "destructive"
+            }
+          ]
+        }
+      ]
+    },
+    "rootSlot": {
+      "version": 3,
+      "property": "Children",
+      "width": "fill",
+      "display": "grid"
+    },
+    "codeValueAxes": {
+      "version": 1,
+      "axes": [
+        {
+          "property": "variant",
+          "propName": "variant",
+          "codeProp": "variant",
+          "required": false,
+          "unsetValue": "(unset)",
+          "values": [
+            {
+              "value": "null",
+              "label": "null",
+              "code": null
+            },
+            {
+              "value": "default",
+              "label": "default",
+              "code": "default"
+            },
+            {
+              "value": "destructive",
+              "label": "destructive",
+              "code": "destructive"
+            }
+          ]
+        }
+      ]
+    },
+    "semantics": {
+      "element": "div"
+    },
+    "propertyDefinitions": {
+      "Children#253:498": {
+        "type": "SLOT",
+        "preferredValues": []
+      },
+      "variant": {
+        "type": "VARIANT",
+        "defaultValue": "(unset)",
+        "variantOptions": [
+          "(unset)",
+          "null",
+          "default",
+          "destructive"
+        ]
+      }
+    },
+    "swapPreferredValues": {
+      "Children": []
+    },
+    "variants": [
+      {
+        "name": "variant=(unset)",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 100,
+          "height": 26
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 10,
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "e5e5e5"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": true,
+        "children": [
+          {
+            "name": "Children",
+            "type": "SLOT",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "propRefs": {
+              "slotContentId": "Children"
+            },
+            "slotKey": "Children#253:498",
+            "children": [
+              {
+                "name": "Content layout",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "GRID",
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "AUTO",
+                  "grid": {
+                    "rows": [
+                      {
+                        "px": 0,
+                        "resolved": true
+                      }
+                    ],
+                    "columns": [
+                      {
+                        "fr": 1
+                      }
+                    ],
+                    "rowGap": 2,
+                    "columnGap": 2,
+                    "flow": "row",
+                    "flowRows": {
+                      "version": 1,
+                      "rows": [],
+                      "autoRows": {
+                        "type": "HUG",
+                        "value": 1
+                      }
+                    }
+                  }
+                },
+                "fillWidth": true,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "variant": "(unset)"
+        }
+      },
+      {
+        "name": "variant=null",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 100,
+          "height": 26
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 10,
+        "fill": {
+          "hex": "000000",
+          "alpha": 0
+        },
+        "stroke": {
+          "hex": "e5e5e5"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": true,
+        "children": [
+          {
+            "name": "Children",
+            "type": "SLOT",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "propRefs": {
+              "slotContentId": "Children"
+            },
+            "slotKey": "Children#253:498",
+            "children": [
+              {
+                "name": "Content layout",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "GRID",
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "AUTO",
+                  "grid": {
+                    "rows": [
+                      {
+                        "px": 0,
+                        "resolved": true
+                      }
+                    ],
+                    "columns": [
+                      {
+                        "fr": 1
+                      }
+                    ],
+                    "rowGap": 2,
+                    "columnGap": 2,
+                    "flow": "row",
+                    "flowRows": {
+                      "version": 1,
+                      "rows": [],
+                      "autoRows": {
+                        "type": "HUG",
+                        "value": 1
+                      }
+                    }
+                  }
+                },
+                "fillWidth": true,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "variant": "null"
+        }
+      },
+      {
+        "name": "variant=default",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 100,
+          "height": 26
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 10,
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "e5e5e5"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": true,
+        "children": [
+          {
+            "name": "Children",
+            "type": "SLOT",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "propRefs": {
+              "slotContentId": "Children"
+            },
+            "slotKey": "Children#253:498",
+            "children": [
+              {
+                "name": "Content layout",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "GRID",
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "AUTO",
+                  "grid": {
+                    "rows": [
+                      {
+                        "px": 0,
+                        "resolved": true
+                      }
+                    ],
+                    "columns": [
+                      {
+                        "fr": 1
+                      }
+                    ],
+                    "rowGap": 2,
+                    "columnGap": 2,
+                    "flow": "row",
+                    "flowRows": {
+                      "version": 1,
+                      "rows": [],
+                      "autoRows": {
+                        "type": "HUG",
+                        "value": 1
+                      }
+                    }
+                  }
+                },
+                "fillWidth": true,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "variant": "default"
+        }
+      },
+      {
+        "name": "variant=destructive",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 100,
+          "height": 26
+        },
+        "layout": {
+          "mode": "VERTICAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            12,
+            16,
+            12,
+            16
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 10,
+        "fill": {
+          "hex": "ffffff"
+        },
+        "stroke": {
+          "hex": "e5e5e5"
+        },
+        "strokeAlign": "INSIDE",
+        "strokeWeight": 1,
+        "strokesIncludedInLayout": true,
+        "children": [
+          {
+            "name": "Children",
+            "type": "SLOT",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "fillWidth": true,
+            "propRefs": {
+              "slotContentId": "Children"
+            },
+            "slotKey": "Children#253:498",
+            "children": [
+              {
+                "name": "Content layout",
+                "type": "FRAME",
+                "layout": {
+                  "mode": "GRID",
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "primarySizing": "FIXED",
+                  "counterSizing": "AUTO",
+                  "grid": {
+                    "rows": [
+                      {
+                        "px": 0,
+                        "resolved": true
+                      }
+                    ],
+                    "columns": [
+                      {
+                        "fr": 1
+                      }
+                    ],
+                    "rowGap": 2,
+                    "columnGap": 2,
+                    "flow": "row",
+                    "flowRows": {
+                      "version": 1,
+                      "rows": [],
+                      "autoRows": {
+                        "type": "HUG",
+                        "value": 1
+                      }
+                    }
+                  }
+                },
+                "fillWidth": true,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "variantProperties": {
+          "variant": "destructive"
+        }
+      }
+    ]
+  },
+  "_degradations": [
+    {
+      "code": "variables-unavailable",
+      "nodePath": "file:T56aKuRnoay1L7CKAjSWRO",
+      "message": "/v1/files/:key/variables/local refused with HTTP 403: the token lacks the file_variables:read scope (NOT a plan limit — the same token reads the file). FIX: regenerate the token with file_variables:read and re-run. Until then every variable binding on this dump is a resolved literal (see the variable-unresolved rows) and no variable name survives"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "paddingLeft: variable id VariableID:253:5925 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "paddingTop: variable id VariableID:253:5927 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "paddingRight: variable id VariableID:253:5926 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "paddingBottom: variable id VariableID:253:5924 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "topLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "topRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "bottomLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "bottomRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "fill: variable id VariableID:253:5931 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=(unset)",
+      "message": "stroke: variable id VariableID:253:5928 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "paddingLeft: variable id VariableID:253:5925 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "paddingTop: variable id VariableID:253:5927 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "paddingRight: variable id VariableID:253:5926 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "paddingBottom: variable id VariableID:253:5924 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "topLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "topRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "bottomLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "bottomRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "fill: variable id VariableID:253:5911 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=null",
+      "message": "stroke: variable id VariableID:253:5928 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "paddingLeft: variable id VariableID:253:5925 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "paddingTop: variable id VariableID:253:5927 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "paddingRight: variable id VariableID:253:5926 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "paddingBottom: variable id VariableID:253:5924 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "topLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "topRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "bottomLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "bottomRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "fill: variable id VariableID:253:5931 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=default",
+      "message": "stroke: variable id VariableID:253:5928 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "paddingLeft: variable id VariableID:253:5925 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "paddingTop: variable id VariableID:253:5927 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "paddingRight: variable id VariableID:253:5926 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "paddingBottom: variable id VariableID:253:5924 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "topLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "topRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "bottomLeftRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "bottomRightRadius: variable id VariableID:253:5930 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "fill: variable id VariableID:253:5931 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    },
+    {
+      "code": "variable-unresolved",
+      "nodePath": "RootMatrix16c39fdef03e8d42 (source-native:bbbf2381-a202-4928-a570-177a3eb284ea:observed.react-matrix-16c39fdef03e8d42):variant=destructive",
+      "message": "stroke: variable id VariableID:253:5928 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
+    }
+  ]
+}

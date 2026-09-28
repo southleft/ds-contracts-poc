@@ -33,7 +33,7 @@ import { createReactCallbackInspectionStore } from './react-callback-inspection.
 import { buildReactStateApiPreview } from './react-state-api-preview.js';
 import { createReactStateApiInspectionStore, readReactStateApiInitialIdentity, readReactAuthoredStateApiInitial } from './react-state-api-inspection.js';
 import {reactAuthoredNamespace} from './react-authored-namespace.js';
-import { projectReactStateApiContract } from './react-state-api-contract.js';
+import { initialContractIdOfStateApi, projectReactStateApiContract } from './react-state-api-contract.js';
 import { createReactInitialInspectionStore, reactInspectionRequest, readReactInspectionOriginal } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -320,7 +320,7 @@ export function createReactReferenceService(
         // The explicitly observed, sealed source is sufficient. Inspection must
         // not allocate another native graph just to obtain an evidence anchor.
         const authored = composition ? [selectReactAuthoredNativeRequest(repoRoot, observed!, caseId)] :
-          native!().jobs.listReact(referenceId).filter(r => r.kind === 'authored' && r.caseId === caseId && r.operation.sourceCurrent)
+          native!().jobs.listReact(referenceId, 'authored').filter(r => r.kind === 'authored' && r.caseId === caseId && r.operation.sourceCurrent)
           .map(r => native!().jobs.reactOwnershipRequest(r.operation.id)).filter(isReactAuthoredNativeRequest);
         if (authored.length) {
           if (new Set(authored.map(revisionOf)).size !== 1) throw Error('react-inspection-authored-source-ambiguous');
@@ -446,9 +446,10 @@ export function createReactReferenceService(
     authoredNativeEvidence(request);
     return request;
   };
-  const initialRequestForOperation = (id:string) => {
-    try { return native!().jobs.reactInitialRequest(id); }
-    catch { return native!().jobs.reactEffectiveStateApiRequest(id).initial; }
+  const initialRequestForOperation = (id:string) => initialSourceForOperation(id).request;
+  const initialSourceForOperation = (id:string) => {
+    try { return { request: native!().jobs.reactInitialRequest(id), stateApi: false }; }
+    catch { return { request: native!().jobs.reactEffectiveStateApiRequest(id).initial, stateApi: true }; }
   };
   const sourceRepairs=createReactSourceRepairPreviews(repoRoot,(referenceId,parentId,proposalId)=>{
     if(!native||!reference||reference.id!==referenceId||!reactReferenceUnchanged(reference))throw Error('react-source-repair-source-unavailable');
@@ -456,9 +457,12 @@ export function createReactReferenceService(
     if(!updateJobs||jobs.reactIdentity(parentId).referenceId!==referenceId)throw Error('react-source-repair-pair-unavailable');
     const update=updateJobs.forProposal(parentId,proposalId);
     if(!update)throw Error('react-source-repair-design-read-required');
-    const design=updateJobs.designEvidence(update.id),request=initialRequestForOperation(parentId);
+    const design=updateJobs.designEvidence(update.id),{request,stateApi}=initialSourceForOperation(parentId);
     if(request.version!==1)throw Error('react-source-repair-root-initial-states-required');
-    const recorded=initialStates.repairEvidence(reference,request,design.input.component.contractId);
+    // A state-API set draws its initial appearance under `<initial id>-state-api`;
+    // its recorded initial observation compiles under the initial id (§D.173).
+    const contractId=design.input.component.contractId;
+    const recorded=initialStates.repairEvidence(reference,request,stateApi?initialContractIdOfStateApi(contractId):contractId);
     const plan=planReactOpacitySourceRepair(design,readFileSync(path.join(reference.sourceRoot,recorded.observation.source.module),'utf8'),recorded.observation.source);
     const input=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_INPUT,output=process.env.DS_CONTRACTS_REACT_SOURCE_CSS_OUTPUT;
     if(!input||!output||[input,output].some(file=>path.isAbsolute(file)||file.split(/[\\/]/).includes('..')))
@@ -1086,10 +1090,12 @@ export function createReactReferenceService(
                   const evidence = readReactCompositionEvidence(repoRoot, reference!, request, scope, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
                   if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
                   content = evidence.inspection; composition = evidence.review;
-                } catch {
+                } catch (error) {
                   content = running?.report() ?? readReactContentInspection(repoRoot, reference!, request, scope);
+                  // Name the reader's refusal when it is identifier-shaped, as other refusals that reach the browser do.
+                  const reason = error instanceof Error && /^[a-z][a-z0-9:._-]{2,160}$/.test(error.message) ? ` (${error.message})` : '';
                   if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
-                    compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.';
+                    compositionProblem = `Nested component evidence is unavailable or changed${reason}. Reload the unchanged original and inspect its content.`;
                 }
               }
             } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }

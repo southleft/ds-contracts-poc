@@ -22,6 +22,13 @@ export interface ReactCell {
 export interface ReactFidelity {
   receipt: string; receiptSha256: string; planSetSha256: string; measuredOn: string; measuredAt: string;
   white: number; black: number; layoutExact: boolean; pass: boolean;
+  /** The owner-approved framing rule the comparison used, when not the plain root box. */
+  framing?: string;
+  /** Set only on a failing comparison whose every over-limit score is within
+   *  the limit once the React text boxes are masked, and whose root size
+   *  difference, if any, equals the measured difference between the two
+   *  texts: a partial, never a pass (owner rule, 2026-09-25). */
+  residual?: 'text-only';
 }
 export interface ReactPin {
   id: string; version: 1; kind: 'react-to-native'; referenceId: string;
@@ -73,12 +80,20 @@ export function judgeReact(cell: ReactCell, pin: ReactPin | null, replay: ReactR
   if (r.root?.planSha256 !== pin.root) return { ...base, status: 'red', reason: 'the native root plan changed; if intended, re-record the pin in a reviewed change and re-measure' };
   const moved = [...new Set([...Object.keys(pin.children), ...Object.keys(children)])].filter(k => canonicalJson(pin.children[k]) !== canonicalJson(children[k]));
   if (moved.length) return { ...base, status: 'red', reason: `a nested child plan changed (${moved.map(k => pin.children[k]?.exportName ?? children[k]?.exportName ?? k).join(', ')}); re-record and re-measure if intended` };
+  if (r.repeat && (r.repeat.status !== 200 || r.repeat.newOperations !== 0))
+    return { ...base, status: 'red', reason: `a repeated request ${r.repeat.status !== 200 ? 'refused (' + (r.repeat.refusal ?? r.repeat.status) + ')' : 'created ' + r.repeat.newOperations + ' more operation(s)'} instead of returning the prepared one` };
+  const repeated = r.repeat ? '; a repeat after another root joined returned the prepared operation' : '';
+  // Pinned child refusals are part of the cell's state and are always named.
+  const refusedChildren = Object.values(pin.children).filter(c => c.refusal);
+  const refused = refusedChildren.length
+    ? `; ${refusedChildren.length} nested child plan(s) refuse (${[...new Set(refusedChildren.map(c => c.refusal))].join(', ')}: ${refusedChildren.map(c => c.exportName).join(', ')})` : '';
   const f = pin.fidelity;
   if (!f || f.planSetSha256 !== planSet(pin.root, pin.children))
-    return { ...base, status: 'stale', reason: 'plans match their pin, but no native comparison measured these exact plans yet' };
-  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'} — ${f.measuredOn}, ${f.measuredAt}`;
-  return f.pass ? { ...base, status: 'green', reason: 'plans match their pin; ' + summary, summary }
-    : { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
+    return { ...base, status: 'stale', reason: 'plans match their pin' + repeated + refused + ', but no native comparison measured these exact plans yet' };
+  const summary = `native vs React source ${f.white.toFixed(3)}% white, ${f.black.toFixed(3)}% black${f.layoutExact ? ', exact size' : ', size differs'}${f.framing ? ` (${f.framing})` : ''}${refused} — ${f.measuredOn}, ${f.measuredAt}`;
+  if (f.pass) return { ...base, status: 'green', reason: 'plans match their pin' + repeated + '; ' + summary, summary };
+  if (f.residual === 'text-only') return { ...base, status: 'partial', reason: 'plans match their pin' + repeated + '; ' + summary + '; over the limit only inside the text boxes', summary };
+  return { ...base, status: 'red', reason: 'a cell expected to pass fails: ' + summary, summary };
 }
 
 const pinPath = (root: string, id: string) => path.join(root, 'benchmark', 'pins', id + '.json');
@@ -113,9 +128,15 @@ export function attachReact(root: string, cell: ReactCell, receiptPath: string, 
   const dir = path.join(root, 'benchmark', 'receipts', cell.id);
   mkdirSync(dir, { recursive: true });
   copyFileSync(receiptPath, path.join(dir, 'comparison.json'));
+  const pass = receipt.pass === true && receipt.layoutExact === true;
+  const over = [score('white'), score('black')].filter(s => s.withinLimit !== true);
+  const sizeFromText = receipt.layoutExact === true || receipt.text?.sizeDifferenceFromText === true;
+  const textOnly = !pass && over.every(s => s.residual === 'text-only') && sizeFromText;
   pin.fidelity = { receipt: path.relative(root, path.join(dir, 'comparison.json')), receiptSha256: sha(bytes), planSetSha256: planSet(pin.root, pin.children),
     measuredOn, measuredAt, white: Number(score('white').mismatchPercent), black: Number(score('black').mismatchPercent),
-    layoutExact: receipt.layoutExact === true, pass: receipt.pass === true && receipt.layoutExact === true };
+    layoutExact: receipt.layoutExact === true, pass,
+    ...(typeof receipt.sourceFraming?.rule === 'string' ? { framing: receipt.sourceFraming.rule } : {}),
+    ...(textOnly ? { residual: 'text-only' as const } : {}) };
   writeFileSync(pinPath(root, cell.id), JSON.stringify(pin, null, 2) + '\n');
   return pin;
 }
