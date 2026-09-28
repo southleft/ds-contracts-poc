@@ -529,6 +529,10 @@ test('a React operation targets the user\'s configured Figma file, refuses any o
   };
   process.env.DS_CONTRACTS_FIGMA_FILE = `https://www.figma.com/design/${USER}/DS-Contracts-Live-Testing?node-id=0-1`;
   let jobs = createNativeOperationJobs(repo, options), transport = createNativeOperationTransport(repo, jobs);
+  // A fresh checkout: nothing prepared yet lists as empty, never as a failure
+  // (the app's listing refused every first-time user before this).
+  assert.deepEqual(jobs.listReact(request.referenceId), []);
+  assert.deepEqual(jobs.listReactMoved(request.referenceId), []);
   const first = jobs.prepare(request), pair = transport.pair(first.id);
   assert.equal(jobs.listReact(request.referenceId)[0].fileKey, USER);
   assert.equal(jobs.get(first.id).phase, 'prepared');

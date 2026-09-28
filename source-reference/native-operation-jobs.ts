@@ -2277,6 +2277,9 @@ export function createNativeOperationJobs(
      * as current and never matched by recency. */
     listReactMoved(referenceId: string, currentStateApi?: (caseId: string) => ReactStateApiNativeRequest|ReactAuthoredStateApiNativeRequest,
       currentInitial?: (caseId: string) => ReactInitialNativeRequest) {
+      // A fresh checkout has no operations directory until the first operation
+      // is prepared: nothing has moved yet, which is not a failure.
+      if (!present(operations)) return [];
       return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const loaded = load(id), creation = loaded.header.request;
         if (!isReactStateApiNativeRequest(creation) && !isReactInitialNativeRequest(creation) &&
