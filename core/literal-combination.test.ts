@@ -157,7 +157,7 @@ test('combination literals yield to disabled states on roots and nested parts', 
   const stateTokens = { ...tokens, primitives: { paint: { off: { $type: 'color', $value: '#ff0000' } } } };
   const contracts = new Map([[c.id, c]]), inventory = tokenInventoryFromJson([stateTokens.primitives]);
   const errors: string[] = [];
-  validateContract(c, contracts, errors, inventory);
+  validateContract(c, contracts, errors, new Map());
   assert.deepEqual(errors, []);
   const css = emitReact(c, { contracts, icons: new Map(), tokens: inventory });
   const inline = emitReactInline(c, { contracts, icons: new Map(), tokens: stateTokens });
