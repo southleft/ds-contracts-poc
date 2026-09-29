@@ -92,6 +92,19 @@ test('a PERCENT line height reaches the contract as the drawn pixels', () => {
   assert.deepEqual(values, ['21px']);
 });
 
+test('AUTO everywhere mints no line height (CSS normal, the round-trip fixed point); AUTO beside explicit heights carries its drawn pixels', () => {
+  const auto = labelSet([{ name: 'Tone=A' }, { name: 'Tone=B' }], { Tone: ['A', 'B'] });
+  for (const v of auto.variants) Object.assign((v as DumpNode).children![0].text!, { lineHeight: 16.94, lineHeightUnit: 'AUTO' });
+  const none = propose(auto);
+  assert.doesNotMatch(JSON.stringify(none.contract), /line-height/);
+  const mixed = structuredClone(auto);
+  Object.assign((mixed.variants[1] as DumpNode).children![0].text!, { lineHeight: 20, lineHeightUnit: undefined });
+  const r = propose(mixed);
+  const values = [...minted(r).entries()].filter(([ref]) => /line-height/.test(ref)).map(([, v]) => v).sort();
+  assert.deepEqual(values, ['16.94px', '20px']);
+  assert.ok(r.notes.some((n) => /line-height is AUTO .* in 1 of 2 variants beside explicit line heights/.test(n)), r.notes.join('\n'));
+});
+
 // --- CENTER strokes ---------------------------------------------------------
 type Ring = { align: 'INSIDE' | 'CENTER' | 'OUTSIDE'; weight: number; included?: boolean } | null;
 /** A free-frame icon container (Featured icon's shape): no auto-layout, so

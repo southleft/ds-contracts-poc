@@ -5610,7 +5610,25 @@ function mintTextChannels(
   // substitution, and measurement confirms Badge and Button were never among
   // the reminted rows. No note: a receipt that fires on the healthy path is
   // noise, and noise is how a report stops being read.
+  // AUTO (REST dump v1.44 / plugin v1.48 `lineHeightUnit`) is the font's own
+  // line height — CSS `line-height: normal`, which is what no declaration
+  // already renders. A set drawn AUTO everywhere mints nothing, so a contract
+  // that declares no line height round-trips to itself (the REST reader also
+  // carries the pixels Figma reports for AUTO; pinning them broke that fixed
+  // point on the desktop-MCP Badge replay). Only where AUTO sits beside
+  // explicit line heights on one part, and every AUTO occurrence reports its
+  // drawn pixels, do those pixels carry — the observed literal, instead of
+  // refusing the whole channel.
+  const isAuto = (o: Occ) => o.node.text!.lineHeightUnit === 'AUTO';
+  const explicit = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number' && !isAuto(o));
+  // @door propose.line-height-auto-is-normal
+  if (explicit.length === 0) return;
   const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
+  if (withLh.some(isAuto)) {
+    ctx.notes.push(
+      `${where}: line-height is AUTO (the font's own) in ${withLh.filter(isAuto).length} of ${textOcc.length} variants beside explicit line heights — those variants carry the pixels Figma reports for AUTO (the observed literal; CSS normal would follow the consumer's font instead) (review)`,
+    );
+  }
   // @door propose.line-height-none-captured
   if (withLh.length === 0) return;
   if (withLh.length !== textOcc.length) {
