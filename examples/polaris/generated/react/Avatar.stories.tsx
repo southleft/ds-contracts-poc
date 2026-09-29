@@ -21,7 +21,7 @@ const meta = {
     customer: { control: 'boolean', description: 'Whether the avatar is for a customer' },
     source: { control: 'text', description: 'URL of the avatar image which falls back to initials if the image fails to load' },
     accessibilityLabel: { control: 'text', description: 'Accessible label for the avatar image' },
-    withInitials: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `initials` ("TP"); the created subtree is carried as parts gated on this prop.' },
+    withInitials: { control: 'boolean', description: "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` (\"TP\"); the created subtree is carried as parts gated on this prop." },
   },
   args: {
     size: 'md',

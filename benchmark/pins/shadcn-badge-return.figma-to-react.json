@@ -9,9 +9,9 @@
     "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.tsx": "5d44cad3d6bb13d6042dc61596ef1b3cf72ac543791a649797b207ec6e8ee53f",
     "RootMatrix39a19bbc2f3d67e9/index.ts": "b35f27479d1c927e0ba1e754e017b6365a1005d81597be2d4a164f718f8b3056",
     "index.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
-    "tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67"
+    "tokens.css": "4ddf84ea729f4051b7d00993050821635cf6f7208435111d4206f1d1572f4cd4"
   },
-  "generatedSha256": "8037b61920518a0b28e7d9125fac188fd585c9935cb36c4b1c9c9a414b4418e7",
+  "generatedSha256": "3981c1b94a51b676cc88ceb6678cb8ea0da0ed914b293a7b4a7c1bdca64b0199",
   "entries": {
     "package/dist/index.d.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
     "package/dist/index.js": "ecc115e01babfec9e9663d3374aab484ac9e5e3577bf21b6c256617fc5b32366",
@@ -20,19 +20,19 @@
     "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.d.ts": "ac1602060eee078619e08e2e37ff0fac82f0dba6fa33ae7aae0825400a95a358",
     "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.js": "5e12a70e20e809e42d9f5b28f6b8568d06b33a80109b798240620fc79a881e71",
     "package/dist/RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.module.css": "a18359c982847ecf0718acc6cc31d0dd736d9462af685a056f84562452c72de4",
-    "package/dist/tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67",
+    "package/dist/tokens.css": "4ddf84ea729f4051b7d00993050821635cf6f7208435111d4206f1d1572f4cd4",
     "package/package.json": "045e78bbcfcb5ae31caa90d8bc80c81773bab646bb7bf4412bad41ed28b76bd7",
     "package/README.md": "919520e6ec9b3abded6e50ab9564ed772539f533fedacdaf04e6f60eb8913747"
   },
-  "entriesSha256": "48a09020fce3416fff24cb1be59674a5128f5c7bfb67d30bc34f083700ad22f7",
+  "entriesSha256": "e11a7d91add74061c2e7ea977e7ca05e370cc73ca5e68d5fa044b29244086329",
   "recordedOn": "darwin-arm64",
   "fidelity": {
     "receipt": "benchmark/receipts/shadcn-badge-return.figma-to-react/receipt.json",
-    "receiptSha256": "5131dbdc0545d0ed57fa1ed502f5a586e378e5fd8850a70e47d679111f0c67a9",
-    "generatedSha256": "8037b61920518a0b28e7d9125fac188fd585c9935cb36c4b1c9c9a414b4418e7",
+    "receiptSha256": "aff83b2fc749d519e23360359219fc503b68348eeb22be904a09d47518afc6f1",
+    "generatedSha256": "3981c1b94a51b676cc88ceb6678cb8ea0da0ed914b293a7b4a7c1bdca64b0199",
     "component": "RootMatrix39a19bbc2f3d67e9",
     "measuredOn": "darwin-arm64",
-    "measuredAt": "2026-09-27",
+    "measuredAt": "2026-09-28",
     "cases": [
       {
         "key": "variant-default",

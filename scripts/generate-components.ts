@@ -46,6 +46,7 @@ import { ContractSchema, componentRefsOf, slotsOf, sortByDependencies, type Cont
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
 import {
   emitTokensCss,
+  mentionedCssVars,
   referencedCssVars,
   tokensCssLayers,
   undefinedCssVars,
@@ -80,6 +81,14 @@ export interface GenerateComponentsOptions {
   stories?: boolean;
   /** The "Regenerate with:" line in the emitted tokens.css header. */
   regenerateHint?: string;
+  /** Which tokens tokens.css carries. 'all' (default, the repository's own
+   *  src/components) emits every supplied token. 'reachable' (a generated
+   *  PACKAGE: playground/server/react-library.ts) emits only the custom
+   *  properties the generated components mention and what those alias, so a
+   *  package made from one Figma file does not ship the token tree's other
+   *  systems (cold-start test, 2026-09-28: 394 of 415 were the repository's
+   *  demo tokens, with a [data-brand="aurora"] block). */
+  tokensScope?: 'all' | 'reachable';
 }
 
 /** What landed in <outDir>/tokens.css — printed by both shells, asserted by
@@ -454,6 +463,19 @@ export async function generateComponents(
   }
   ledger.propagate();
   ordered = ordered.filter((c) => !ledger.has(c.id));
+
+  // A package's sheet: re-emitted from the same routed slots, keeping only what
+  // the files that will be written mention (their CSS Modules and TSX) and the
+  // tokens those alias. The gate above already held referenced ⊆ defined on the
+  // full sheet; every mentioned name survives, so it still holds.
+  if (options.tokensScope === 'reachable') {
+    const mentioned = new Set(ordered.flatMap((c) => planById.get(c.id)!.flatMap((f) => mentionedCssVars(f.contents))));
+    sheet = emitTokensCss(tokensCssLayers(tokenTrees), {
+      sources: routing.decisions.map((d) => `${path.basename(d.file)} [${d.slot}]`),
+      regenerate: options.regenerateHint ?? 'npm run generate',
+      only: mentioned,
+    });
+  }
 
   const referencedBy = new Map<string, string[]>();
   for (const contract of ordered) {

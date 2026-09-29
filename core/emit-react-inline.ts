@@ -34,6 +34,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, c
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
 import { rootContentJsx, literalTextJsx } from './root-content.js';
+import { literalAttrJsx, literalDocText, literalStringJs } from './emit-literal.js';
 import {
   TOKEN_CHANNELS,
   DEFAULT_FONT_STACK,
@@ -688,7 +689,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   const propLines: string[] = [];
   for (const p of contract.props) {
-    const doc = p.description ? `  /** ${p.description} */\n` : '';
+    const doc = p.description ? `  /** ${literalDocText(p.description)} */\n` : '';
     if (isEnum(p)) {
       propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${hasCodeValues(p) || p.name === contract.selection?.valueProp ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
     } else if (isArrayType(p)) {
@@ -708,12 +709,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
   }
   for (const { slot, part } of slots) {
-    const doc = part.description ? `  /** ${part.description} */\n` : '';
+    const doc = part.description ? `  /** ${literalDocText(part.description)} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
-    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
+    propLines.push(`  /** ${literalDocText(doc)} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
   }
 
   const destructured: string[] = [];
@@ -722,7 +723,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     destructured.push(
       hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
-        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
+        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${literalStringJs(String(p.default))}`,
     );
   }
   for (const p of bools) destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default === true}`);
@@ -733,7 +734,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     destructured.push(
       p.required || p.default === undefined
         ? p.bindings.code.prop
-        : `${p.bindings.code.prop} = '${p.default}'`,
+        : `${p.bindings.code.prop} = ${literalStringJs(String(p.default))}`,
     );
   }
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
@@ -946,7 +947,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         const parentProp = contract.props.find((p) => p.name === parentRef[1]);
         parts.push(` ${codeName}={${codeValueExpression(depProp, parentProp?.bindings.code.prop ?? parentRef[1])}}`);
       } else {
-        parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${codeName}="${value}"`);
+        parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${literalAttrJsx(codeName, value)}`);
       }
     }
     return parts.join('');
@@ -1011,12 +1012,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
               } else if (typeof v === 'number') {
                 fieldAttrs += ` ${codeName}={${v}}`;
               } else {
-                fieldAttrs += ` ${codeName}="${v}"`;
+                fieldAttrs += ` ${literalAttrJsx(codeName, String(v))}`;
               }
             }
             const attrs = depAttrString(dep, part.component!.props ?? {}) + fieldAttrs + (hasComponentHostPlacement(part) || hasScalableOverrides(part) ? ` style=${styleExpr(partName, false, [])}` : '');
             return itemText !== undefined
-              ? `<${dep.name}${attrs}>${itemText}</${dep.name}>`
+              ? `<${dep.name}${attrs}>${literalTextJsx(itemText)}</${dep.name}>`
               : `<${dep.name}${attrs} />`;
           })
           .join('\n'),
@@ -1283,7 +1284,7 @@ export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
-/** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
+/** ${literalDocText(contract.description)}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
 ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
@@ -1319,7 +1320,7 @@ export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
-/** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
+/** ${literalDocText(contract.description)}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${destructured.join(', ')} },
   ref,

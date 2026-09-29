@@ -23,7 +23,7 @@
     "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.tsx": "5d44cad3d6bb13d6042dc61596ef1b3cf72ac543791a649797b207ec6e8ee53f",
     "RootMatrix39a19bbc2f3d67e9/index.ts": "b35f27479d1c927e0ba1e754e017b6365a1005d81597be2d4a164f718f8b3056",
     "index.ts": "faed30ba42ff38e8e0ed551a1731f6aef17ff1fd554983449b5349d49029f5aa",
-    "tokens.css": "d8188724c4e9ee733ab60fb50b25b6c25a67911450f9283d24bb31d781850e67"
+    "tokens.css": "4ddf84ea729f4051b7d00993050821635cf6f7208435111d4206f1d1572f4cd4"
   },
   "cases": [
     {
@@ -59,6 +59,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "14e8a078b4bce0b2cbdbc7d64ddd7650a7ed4246730873ca99906e278e70cbe5"
+      },
+      "content": {
+        "key": "variant-default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -94,6 +106,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      },
+      "content": {
+        "key": "variant-null",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -129,6 +153,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "1fc3a2581b445d8dd710135f5fbf87cf8fea21c0f1a03e258cd32469d55c6907"
+      },
+      "content": {
+        "key": "variant-destructive",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -164,6 +200,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      },
+      "content": {
+        "key": "variant-link",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -199,6 +247,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "4fd211a03e9c8e21d1cf1d3bc51b7719f3ef3034e67e334fa1e04c7151b0add3"
+      },
+      "content": {
+        "key": "variant-secondary",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -234,6 +294,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "59bbda5b8551099f49b24733a7ccd65fe86784f3c4632c737469561a39a31c22"
+      },
+      "content": {
+        "key": "variant-outline",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     },
     {
@@ -269,6 +341,18 @@
         },
         "deviceScaleFactor": 1,
         "pngSha256": "970079a78b3d077d8d1970822aa729f7c4cb7cf96b15e315ac4ce487924bc53b"
+      },
+      "content": {
+        "key": "variant-ghost",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
       }
     }
   ],
@@ -324,7 +408,7 @@
     "frameEvidence": {
       "before": "figma-bounds-before.json",
       "after": "figma-bounds-after.json",
-      "version": "2403933616105000212",
+      "version": "2404031653537691694",
       "export": {
         "format": "png",
         "scale": 1,
@@ -335,8 +419,8 @@
         "kind": "figma-rest-full-bounds-v1",
         "scale": 1
       },
-      "beforeSha256": "f6a2f23c30ee9bb7532e56ae55d47cf3c0c7240929cc143422910981bbdbfc52",
-      "afterSha256": "f6a2f23c30ee9bb7532e56ae55d47cf3c0c7240929cc143422910981bbdbfc52"
+      "beforeSha256": "eee386b7b4a0fdfcec6bdca42de5edd159a1c3b8ec7c959825c4bd211bd40a88",
+      "afterSha256": "eee386b7b4a0fdfcec6bdca42de5edd159a1c3b8ec7c959825c4bd211bd40a88"
     },
     "scorer": "Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.",
     "limitPercent": 5,
@@ -841,7 +925,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/rootmatrix39a19bbc2f3d67e9",
-    "tarballSha256": "4d21ee7be3f5c2f81b3c9da2a5c2ead3f83ea0d096591c66255bfc5621faa944",
+    "tarballSha256": "8a29a95e84a48f2449fda23a8d7a0798cb988b2381cca89250b4fe6e2b632f72",
     "distFiles": [
       "RootMatrix39a19bbc2f3d67e9",
       "RootMatrix39a19bbc2f3d67e9/RootMatrix39a19bbc2f3d67e9.d.ts",
@@ -857,7 +941,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "f77309d66e3415ff1104c8d43d58273f2a8b7b67ed03ebc76b146703b969173c",
+    "lockfileSha256": "887ae303da5b7d61f4edbb1918d36aec7da25f0757c6c21e1bf9409581121ffd",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "fontProvision": {
@@ -868,9 +952,9 @@
       "loaded": []
     },
     "builtCss": {
-      "bytes": 24795,
-      "tokenDefinitions": 425,
-      "tokenDefinitionsExpected": 425
+      "bytes": 6384,
+      "tokenDefinitions": 31,
+      "tokenDefinitionsExpected": 31
     },
     "containerFraming": {
       "rule": "figma-preview-width-v1",
@@ -878,5 +962,222 @@
     },
     "interactiveNesting": []
   },
-  "outcome": "refused-or-failed"
+  "content": {
+    "status": "collected",
+    "rule": "Every TEXT the Figma variant draws must appear in the rendered text (case and whitespace ignored, counted), and every icon or vector it draws must have a rendered graphic of about the same size (max(3 px, 35%) per side, matched one to one). The Figma side is the REST node tree at full depth; see scripts/design-consumer-content.ts.",
+    "figmaVersion": "2404031653537691694",
+    "responseSha256": "1c34cdc22049be268b78d67990f5880e4b94debea441c3440ef685cac9f0da11",
+    "evidence": "figma-content.json",
+    "cases": [
+      {
+        "key": "variant-default",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-null",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-destructive",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-link",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-secondary",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-outline",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      },
+      {
+        "key": "variant-ghost",
+        "texts": {
+          "figma": 0,
+          "missing": []
+        },
+        "parts": {
+          "figma": 0,
+          "matched": 0,
+          "missing": []
+        }
+      }
+    ]
+  },
+  "outcome": "refused-or-failed",
+  "verdict": {
+    "verdict": "unverified",
+    "variants": [
+      {
+        "key": "variant-default",
+        "figmaName": "variant=default",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-null",
+        "figmaName": "variant=null",
+        "verdict": "unverified",
+        "image": null,
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": [
+          "image-framing-unqualified:variant-null:comparison-has-no-paint"
+        ]
+      },
+      {
+        "key": "variant-destructive",
+        "figmaName": "variant=destructive",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-link",
+        "figmaName": "variant=link",
+        "verdict": "unverified",
+        "image": null,
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": [
+          "image-framing-unqualified:variant-link:comparison-has-no-paint"
+        ]
+      },
+      {
+        "key": "variant-secondary",
+        "figmaName": "variant=secondary",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 0,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-outline",
+        "figmaName": "variant=outline",
+        "verdict": "pass",
+        "image": {
+          "white": 0,
+          "black": 3.6111111111111107,
+          "withinLimit": true
+        },
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": []
+      },
+      {
+        "key": "variant-ghost",
+        "figmaName": "variant=ghost",
+        "verdict": "unverified",
+        "image": null,
+        "content": {
+          "texts": 0,
+          "textsMissing": 0,
+          "parts": 0,
+          "partsMissing": 0
+        },
+        "reasons": [
+          "image-framing-unqualified:variant-ghost:comparison-has-no-paint"
+        ]
+      }
+    ],
+    "setProblems": [],
+    "counts": {
+      "pass": 4,
+      "fail": 0,
+      "unverified": 3
+    }
+  }
 }
