@@ -35,8 +35,11 @@
  *                 The 5% antialias-tolerant limit is the existing one; it is
  *                 not tuned here.
  *   6. content  — every TEXT the Figma variant draws must be in the rendered
- *                 text, and every icon or vector it draws must have a rendered
- *                 graphic of about its size (scripts/design-consumer-content.ts).
+ *                 text, drawn in its Figma fill color and font family/weight
+ *                 (`text-color-mismatch:<case>:"Confirm":figma #ffffff vs
+ *                 rendered #172b4d`, `text-font-mismatch:<case>:…`), and every
+ *                 icon or vector it draws must have a rendered graphic of about
+ *                 its size (scripts/design-consumer-content.ts).
  *                 A miss fails that variant by name (`content-missing:<case>:
  *                 text:"Dialog heading"`, `content-missing:<case>:part:<layers>`)
  *                 at any pixel score: the 5% limit passed a Dialog whose
@@ -75,7 +78,7 @@ import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/vi
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
-import { CONTENT_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
+import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -858,7 +861,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // Figma variant draws must render, whatever the pixel score says.
     const content = unresolved ? { status: 'unavailable' as const, reason: unresolved }
       : fileKey ? await fetchFigmaContent(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'unavailable' as const, reason: 'no fileKey in dump' };
-    receipt.content = { status: content.status, rule: CONTENT_RULE, ...(content.status === 'collected'
+    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, ...(content.status === 'collected'
       ? { figmaVersion: content.version, responseSha256: content.responseSha256, evidence: 'figma-content.json' } : { reason: content.reason }), cases: [] as CaseContent[] };
     if (content.status === 'collected') for (const c of cases) {
       const dom = domContent[c.key];

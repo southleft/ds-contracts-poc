@@ -15,6 +15,27 @@
  *         Compared case-insensitively with all whitespace removed (CSS
  *         text-transform and line wrapping change neither), and counted: a
  *         string Figma draws twice must render twice.
+ *   style each drawn TEXT is then located in the rendered text runs and its
+ *         styling compared, character by character (a Figma text with style
+ *         overrides has several runs). The first real-kit scoreboard passed an
+ *         Atlassian ModalFooter at 1.56% whose "Confirm" React drew black
+ *         where Figma draws white; 14 sets drew default black text unseen.
+ *           color  the Figma fill (SOLID paints composited, paint opacity
+ *                  times the text's and its ancestors' layer opacity) against
+ *                  the rendered text's DECLARED computed color (-webkit-text-
+ *                  fill-color, SVG fill) times the element's and its
+ *                  ancestors' CSS opacity. Never pixels: antialiasing is not a
+ *                  text color. The tolerance is what serialization can
+ *                  legitimately change: CSS colors are 8-bit per channel, so a
+ *                  Figma float channel lands within one 8-bit step (1/255) of
+ *                  the value the browser reports. More is a different color.
+ *           font   the REQUESTED family (the first family in the computed
+ *                  font-family stack, not the face the consumer resolved:
+ *                  an unavailable family is font-unavailable-in-consumer's
+ *                  finding) and the numeric weight, both exact.
+ *         A text whose Figma paint is not solid (gradient, image, blend
+ *         mode, stroke only) or whose rendered color is not an sRGB color is
+ *         `text-style-unmeasured`, never a pass.
  *   part  every icon or vector the variant draws must have a rendered graphic
  *         element of about the same size. A Figma "part" is the innermost
  *         INSTANCE around a drawn vector whose drawn subtree holds no text (an
@@ -38,19 +59,31 @@ import path from 'node:path';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 export interface Box { x: number; y: number; width: number; height: number }
-interface RestPaint { visible?: boolean; opacity?: number }
+/** Color channels and alpha, each 0..1. */
+export interface Rgba { r: number; g: number; b: number; a: number }
+interface RestPaint { visible?: boolean; opacity?: number; type?: string; blendMode?: string; color?: { r: number; g: number; b: number; a?: number } }
+interface RestTypeStyle { fontFamily?: string; fontWeight?: number; fills?: RestPaint[] }
 export interface RestNode {
   id?: string; name?: string; type: string; visible?: boolean; opacity?: number; characters?: string;
   absoluteBoundingBox?: Box | null; absoluteRenderBounds?: Box | null;
   fills?: RestPaint[]; strokes?: RestPaint[]; children?: RestNode[];
+  style?: RestTypeStyle; characterStyleOverrides?: number[]; styleOverrideTable?: Record<string, RestTypeStyle>;
 }
+/** How a run of characters is drawn. `color` null = not comparable, `unmeasured` says why. */
+export interface TextStyle { color: Rgba | null; family: string | null; weight: number | null; unmeasured?: string }
+/** A run of a Figma text's characters (UTF-16 indices, end exclusive) sharing one style. */
+export interface FigmaTextRun extends TextStyle { start: number; end: number }
 export interface FigmaPart { name: string; kind: 'icon' | 'vector'; box: Box }
-export interface FigmaContent { texts: string[]; parts: FigmaPart[] }
+/** `textStyles[i]` styles `texts[i]`. */
+export interface FigmaContent { texts: string[]; textStyles: FigmaTextRun[][]; parts: FigmaPart[] }
 export interface DomGraphic { tag: string; box: Box }
-export interface DomContent { text: string; graphics: DomGraphic[] }
+/** A rendered text run as the page reports it: raw computed strings, parsed here. */
+export interface DomTextRun { text: string; color: string; family: string; weight: string; opacity: number }
+export interface DomContent { text: string; graphics: DomGraphic[]; runs?: DomTextRun[] }
+export interface TextStyleRow { text: string; figma: string[]; rendered: string[]; color: 'match' | 'mismatch' | 'unmeasured'; font: 'match' | 'mismatch' | 'unmeasured' }
 export interface CaseContent {
   key: string;
-  texts: { figma: number; missing: string[] };
+  texts: { figma: number; missing: string[]; styles?: TextStyleRow[] };
   parts: { figma: number; matched: number; missing: string[] };
 }
 
@@ -66,19 +99,56 @@ const rendered = (n: RestNode) => {
 const drawsText = (n: RestNode): boolean => shown(n) &&
   (n.type === 'TEXT' ? !!n.characters?.trim() && rendered(n) && (paints(n.fills) || paints(n.strokes)) : (n.children ?? []).some(drawsText));
 
+/** The color a stack of Figma fills paints, times the layer opacity above it.
+ *  Only SOLID paints in normal blending composite to one declared color. */
+export function figmaFillColor(fills: RestPaint[] | undefined, layerOpacity: number): { color: Rgba } | { unmeasured: string } {
+  const drawn = (fills ?? []).filter(p => p.visible !== false && (p.opacity ?? 1) > 0);
+  if (!drawn.length) return { unmeasured: 'no visible fill (stroke-only text)' };
+  let out: Rgba = { r: 0, g: 0, b: 0, a: 0 };
+  for (const p of drawn) { // bottom to top, source-over
+    if (p.type !== 'SOLID' || !p.color) return { unmeasured: `${String(p.type ?? 'unknown').toLowerCase().replace(/_/g, '-')} fill` };
+    if (p.blendMode && p.blendMode !== 'NORMAL' && p.blendMode !== 'PASS_THROUGH') return { unmeasured: `${p.blendMode.toLowerCase().replace(/_/g, '-')} blend` };
+    const a = (p.color.a ?? 1) * (p.opacity ?? 1), below = out.a * (1 - a), total = a + below;
+    out = total === 0 ? { r: 0, g: 0, b: 0, a: 0 } : {
+      r: (p.color.r * a + out.r * below) / total, g: (p.color.g * a + out.g * below) / total, b: (p.color.b * a + out.b * below) / total, a: total };
+  }
+  return { color: { ...out, a: out.a * layerOpacity } };
+}
+
+/** How each character of a Figma TEXT is drawn: its base style, and every
+ *  characterStyleOverrides run with its styleOverrideTable entry over it. */
+export function figmaTextRuns(node: RestNode, layerOpacity: number): FigmaTextRun[] {
+  const styleOf = (override: RestTypeStyle | undefined): TextStyle => {
+    const paint = figmaFillColor(override?.fills ?? node.fills, layerOpacity);
+    const family = override?.fontFamily ?? node.style?.fontFamily, weight = override?.fontWeight ?? node.style?.fontWeight;
+    const missing = [...('unmeasured' in paint ? [paint.unmeasured] : []), ...(typeof family === 'string' && family ? [] : ['no font family']),
+      ...(typeof weight === 'number' && Number.isFinite(weight) ? [] : ['no font weight'])];
+    return { color: 'color' in paint ? paint.color : null, family: typeof family === 'string' && family ? family : null,
+      weight: typeof weight === 'number' && Number.isFinite(weight) ? weight : null, ...(missing.length ? { unmeasured: missing.join(', ') } : {}) };
+  };
+  const characters = node.characters ?? '', overrides = node.characterStyleOverrides ?? [], table = node.styleOverrideTable ?? {};
+  const runs: Array<{ id: number; start: number; end: number }> = [];
+  for (let i = 0; i < characters.length; i++) {
+    const id = overrides[i] ?? 0, last = runs.at(-1);
+    if (last && last.id === id) last.end = i + 1; else runs.push({ id, start: i, end: i + 1 });
+  }
+  return runs.map(({ id, start, end }) => ({ start, end, ...styleOf(id ? table[String(id)] : undefined) }));
+}
+
 /** What one Figma variant (a REST COMPONENT node, full depth) draws. */
 export function figmaContent(variant: RestNode): FigmaContent {
   const origin = variant.absoluteBoundingBox ?? { x: 0, y: 0, width: 0, height: 0 };
-  const texts: string[] = [], parts: FigmaPart[] = [];
+  const texts: string[] = [], textStyles: FigmaTextRun[][] = [], parts: FigmaPart[] = [];
   const owners = new Set<RestNode>();
   const relative = (n: RestNode): Box => {
     const b = n.absoluteBoundingBox ?? n.absoluteRenderBounds ?? { x: origin.x, y: origin.y, width: 0, height: 0 };
     return { x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height };
   };
-  const walk = (node: RestNode, instances: RestNode[]) => {
+  // `opacity` = the layer opacity of every ancestor, the variant's own included.
+  const walk = (node: RestNode, instances: RestNode[], opacity: number) => {
     if (!shown(node)) return;
     if (node.type === 'TEXT') {
-      if (drawsText(node)) texts.push(node.characters!);
+      if (drawsText(node)) { texts.push(node.characters!); textStyles.push(figmaTextRuns(node, opacity * (node.opacity ?? 1))); }
       return;
     }
     if (VECTOR_TYPES.has(node.type)) {
@@ -92,10 +162,10 @@ export function figmaContent(variant: RestNode): FigmaContent {
       return;
     }
     const next = node.type === 'INSTANCE' ? [...instances, node] : instances;
-    for (const child of node.children ?? []) walk(child, next);
+    for (const child of node.children ?? []) walk(child, next, opacity * (node.opacity ?? 1));
   };
-  for (const child of variant.children ?? []) walk(child, []);
-  return { texts, parts };
+  for (const child of variant.children ?? []) walk(child, [], variant.opacity ?? 1);
+  return { texts, textStyles, parts };
 }
 
 /** Case- and whitespace-insensitive spelling used for every text comparison. */
@@ -145,13 +215,148 @@ export function matchParts(parts: readonly FigmaPart[], graphics: readonly DomGr
   return { matched, missing: parts.filter(p => missing.includes(p)) };
 }
 
+// ---------------------------------------------------------------------------
+// TEXT STYLE (see the header): declared color and requested font, per character.
+// ---------------------------------------------------------------------------
+/** One 8-bit channel step. The generated CSS and the browser's computed style
+ *  carry colors at 8 bits per channel, so a Figma float channel (and its alpha)
+ *  lands within one step of the value the browser reports; nothing rendering
+ *  does to glyph pixels enters a declared color. */
+export const COLOR_STEP = 1 / 255;
+export function sameDeclaredColor(a: Rgba, b: Rgba): boolean {
+  if (a.a <= COLOR_STEP && b.a <= COLOR_STEP) return true; // neither paints: its hue is not drawn
+  return (['r', 'g', 'b', 'a'] as const).every(k => Math.abs(a[k] - b[k]) <= COLOR_STEP + 1e-9);
+}
+export function colorHex(c: Rgba): string {
+  const hex = (v: number) => Math.round(Math.min(1, Math.max(0, v)) * 255).toString(16).padStart(2, '0');
+  return '#' + hex(c.r) + hex(c.g) + hex(c.b) + (Math.round(c.a * 255) < 255 ? hex(c.a) : '');
+}
+/** A computed CSS color as sRGB channels (rgb()/rgba(), color(srgb …),
+ *  transparent); null for anything else — another color space, `none`, a paint
+ *  server — which is not compared by guesswork. */
+export function parseCssColor(value: string): Rgba | null {
+  const v = value.trim().toLowerCase();
+  if (v === 'transparent') return { r: 0, g: 0, b: 0, a: 0 };
+  const channel = (s: string, scale: number) => s.endsWith('%') ? parseFloat(s) / 100 : parseFloat(s) / scale;
+  const read = (body: string, scale: number): Rgba | null => {
+    const [rgb, alpha] = body.includes('/') ? body.split('/') : [body, undefined];
+    const parts = rgb.split(/[\s,]+/).filter(Boolean);
+    const a = alpha !== undefined ? alpha.trim() : parts.length === 4 ? parts.pop()! : '1';
+    if (parts.length !== 3) return null;
+    const out = { r: channel(parts[0], scale), g: channel(parts[1], scale), b: channel(parts[2], scale), a: channel(a, 1) };
+    return Object.values(out).every(Number.isFinite) ? out : null;
+  };
+  const rgb = /^rgba?\(([^()]*)\)$/.exec(v);
+  if (rgb) return read(rgb[1], 255);
+  const srgb = /^color\(\s*srgb\s+([^()]*)\)$/.exec(v);
+  return srgb ? read(srgb[1], 1) : null;
+}
+/** The family the CSS asks for first: the first entry of a computed font-family stack. */
+export function firstFamily(stack: string): string {
+  const s = stack.trim();
+  if (/^["']/.test(s)) { const end = s.indexOf(s[0], 1); return (end > 0 ? s.slice(1, end) : s.slice(1)).trim(); }
+  return s.split(',')[0].trim();
+}
+const familyKey = (family: string) => family.trim().replace(/\s+/g, ' ').toLocaleLowerCase('en-US');
+
+/** A text's squashed spelling (squashText) built character by character, with
+ *  the source index of every squashed unit. */
+function squashIndexed(text: string): { squashed: string; from: number[] } {
+  let squashed = '';
+  const from: number[] = [];
+  for (let i = 0; i < text.length;) {
+    const ch = String.fromCodePoint(text.codePointAt(i)!), unit = ch.toLocaleLowerCase('en-US').replace(/\s+/g, '');
+    squashed += unit;
+    for (let k = 0; k < unit.length; k++) from.push(i);
+    i += ch.length;
+  }
+  return { squashed, from };
+}
+const styleLabel = (s: TextStyle) => `${s.color ? colorHex(s.color) : '?'} ${s.family === null ? '?' : JSON.stringify(s.family)} ${s.weight ?? '?'}`;
+/** A Figma text's style at each position of its squashed spelling, or why it cannot be placed. */
+function figmaPositions(text: string, runs: FigmaTextRun[] | undefined): TextStyle[] | string {
+  const key = squashText(text);
+  if (!runs?.length) return 'no Figma text style recorded';
+  if (runs.every(r => styleLabel(r) === styleLabel(runs[0]) && r.unmeasured === runs[0].unmeasured)) return Array(key.length).fill(runs[0]);
+  const indexed = squashIndexed(text);
+  if (indexed.squashed !== key) return 'mixed styles on text that Unicode normalization changes';
+  return indexed.from.map(i => runs.find(r => i >= r.start && i < r.end) ?? { color: null, family: null, weight: null, unmeasured: 'character without a style' });
+}
+/** A rendered run's style: its declared color times its CSS opacity, its requested family and weight. */
+function renderedStyle(run: DomTextRun): TextStyle {
+  const color = parseCssColor(run.color), weight = Number(run.weight), family = firstFamily(run.family);
+  const missing = [...(color ? [] : [`rendered color ${run.color} is not an sRGB color`]), ...(family ? [] : ['no rendered font family']), ...(Number.isFinite(weight) ? [] : ['no rendered font weight'])];
+  return { color: color && { ...color, a: color.a * (Number.isFinite(run.opacity) ? run.opacity : 1) }, family: family || null, weight: Number.isFinite(weight) ? weight : null,
+    ...(missing.length ? { unmeasured: missing.join(', ') } : {}) };
+}
+
+/** Every drawn Figma text, located in the rendered text runs (one to one,
+ *  longest first, preferring an occurrence whose style matches) and compared
+ *  character by character. A text the presence check already reports missing
+ *  is left to it. */
+export function compareTextStyles(key: string, figma: FigmaContent, dom: DomContent): { rows: TextStyleRow[]; problems: string[] } {
+  const runs = dom.runs ?? [], rendered = runs.map(renderedStyle);
+  let corpus = '';
+  const runAt: number[] = [];
+  runs.forEach((run, r) => { const s = squashIndexed(run.text.normalize('NFC')).squashed; corpus += s; for (let k = 0; k < s.length; k++) runAt.push(r); });
+  const presence = squashText(dom.text), needed = new Map<string, number>();
+  for (const text of figma.texts) { const k = squashText(text); if (k) needed.set(k, (needed.get(k) ?? 0) + 1); }
+  const claimed = new Array<boolean>(corpus.length).fill(false);
+  const order = figma.texts.map((text, i) => ({ text, i, squashed: squashText(text) })).filter(t => t.squashed)
+    .sort((a, b) => b.squashed.length - a.squashed.length || a.i - b.i);
+  const byText = new Map<number, { row: TextStyleRow; problems: string[] }>();
+  for (const t of order) {
+    const label = JSON.stringify(t.text.trim()), problems: string[] = [];
+    const occurrences: number[] = [];
+    for (let at = corpus.indexOf(t.squashed); at >= 0; at = corpus.indexOf(t.squashed, at + 1))
+      if (!claimed.slice(at, at + t.squashed.length).some(Boolean)) occurrences.push(at);
+    const positions = figmaPositions(t.text, figma.textStyles?.[t.i]);
+    if (!occurrences.length) {
+      if (presence.split(t.squashed).length - 1 < needed.get(t.squashed)!) continue; // content-missing names it
+      byText.set(t.i, { row: { text: t.text.trim(), figma: [], rendered: [], color: 'unmeasured', font: 'unmeasured' },
+        problems: [`text-style-unmeasured:${key}:${label}:not located in the rendered text runs`] });
+      continue;
+    }
+    const judge = (at: number) => {
+      const color = new Set<string>(), font = new Set<string>(), unmeasured = new Set<string>(), figmaSeen = new Set<string>(), renderedSeen = new Set<string>();
+      if (typeof positions === 'string') unmeasured.add(positions);
+      else positions.forEach((f, j) => {
+        const d = rendered[runAt[at + j]];
+        figmaSeen.add(styleLabel(f)); renderedSeen.add(styleLabel(d));
+        for (const reason of [f.unmeasured, d.unmeasured]) if (reason) unmeasured.add(reason);
+        if (f.color && d.color && !sameDeclaredColor(f.color, d.color)) color.add(`figma ${colorHex(f.color)} vs rendered ${colorHex(d.color)}`);
+        const fontsKnown = f.family !== null && d.family !== null && f.weight !== null && d.weight !== null;
+        if (fontsKnown && (familyKey(f.family!) !== familyKey(d.family!) || f.weight !== d.weight))
+          font.add(`figma ${JSON.stringify(f.family)} ${f.weight} vs rendered ${JSON.stringify(d.family)} ${d.weight}`);
+      });
+      return { at, color, font, unmeasured, figmaSeen, renderedSeen };
+    };
+    const judged = occurrences.map(judge);
+    const chosen = judged.find(j => !j.color.size && !j.font.size && !j.unmeasured.size) ?? judged[0];
+    for (let k = chosen.at; k < chosen.at + t.squashed.length; k++) claimed[k] = true;
+    if (chosen.color.size) problems.push(`text-color-mismatch:${key}:${label}:${[...chosen.color].join('; ')}`);
+    if (chosen.font.size) problems.push(`text-font-mismatch:${key}:${label}:${[...chosen.font].join('; ')}`);
+    if (chosen.unmeasured.size) problems.push(`text-style-unmeasured:${key}:${label}:${[...chosen.unmeasured].join('; ')}`);
+    const colorUnknown = typeof positions === 'string' || positions.some((f, j) => !f.color || !rendered[runAt[chosen.at + j]].color);
+    const fontUnknown = typeof positions === 'string' || positions.some((f, j) => { const d = rendered[runAt[chosen.at + j]]; return f.family === null || f.weight === null || d.family === null || d.weight === null; });
+    byText.set(t.i, { problems, row: { text: t.text.trim(), figma: [...chosen.figmaSeen], rendered: [...chosen.renderedSeen],
+      color: chosen.color.size ? 'mismatch' : colorUnknown ? 'unmeasured' : 'match', font: chosen.font.size ? 'mismatch' : fontUnknown ? 'unmeasured' : 'match' } });
+  }
+  // Drawing order; a text drawn twice with the same finding is one line, counted.
+  const ordered = [...byText].sort(([a], [b]) => a - b).map(([, v]) => v);
+  const counts = new Map<string, number>();
+  for (const p of ordered.flatMap(v => v.problems)) counts.set(p, (counts.get(p) ?? 0) + 1);
+  return { rows: ordered.map(v => v.row), problems: [...counts].map(([p, n]) => (n > 1 ? `${p} (×${n})` : p)) };
+}
+
 /** One case's content verdict and its named problems. */
 export function caseContent(key: string, figma: FigmaContent, dom: DomContent): { content: CaseContent; problems: string[] } {
   const texts = missingTexts(figma.texts, dom.text);
   const parts = matchParts(figma.parts, dom.graphics);
+  const styles = compareTextStyles(key, figma, dom);
   return {
-    content: { key, texts: { figma: figma.texts.length, missing: texts }, parts: { figma: figma.parts.length, matched: parts.matched, missing: parts.missing.map(p => p.name) } },
-    problems: [...texts.map(t => `content-missing:${key}:text:${JSON.stringify(t)}`), ...parts.missing.map(p => `content-missing:${key}:part:${p.name}`)],
+    content: { key, texts: { figma: figma.texts.length, missing: texts, styles: styles.rows }, parts: { figma: figma.parts.length, matched: parts.matched, missing: parts.missing.map(p => p.name) } },
+    problems: [...texts.map(t => `content-missing:${key}:text:${JSON.stringify(t)}`), ...styles.problems, ...parts.missing.map(p => `content-missing:${key}:part:${p.name}`)],
   };
 }
 
@@ -194,7 +399,37 @@ export const domContentOf = new Function('el', `
       (n.children.length === 0 && !(n.textContent || '').trim() && paintsBox(s));
     if (graphic) graphics.push({ tag, box: { x: r.x - origin.x, y: r.y - origin.y, width: r.width, height: r.height } });
   }
-  return { text: texts.join('\\n'), graphics };
+  // Text runs in document order, each with the DECLARED style it is drawn in:
+  // the computed text-fill color (SVG: fill), the family stack as requested,
+  // the weight, and the CSS opacity of it and every ancestor inside the cell.
+  // Opacity-0 text is kept (its opacity is its finding); visibility and
+  // display hide it, as they hide it from innerText.
+  const runs = [];
+  const opacityOf = (n) => { let a = 1; for (let e = n; e && e !== el; e = e.parentElement) { const o = parseFloat(getComputedStyle(e).opacity); if (o >= 0) a *= o; } return a; };
+  const shows = (n) => typeof n.checkVisibility === 'function' ? n.checkVisibility({ visibilityProperty: true }) : true;
+  const push = (text, s, owner, svg, ownOpacity) => runs.push({ text, color: svg ? s.fill : (s.webkitTextFillColor || s.color), family: s.fontFamily, weight: s.fontWeight, opacity: opacityOf(owner) * ownOpacity });
+  const visit = (n) => {
+    if (n.nodeType === 3) {
+      const owner = n.parentElement;
+      if (owner && n.textContent.trim() && shows(owner)) push(n.textContent, getComputedStyle(owner), owner, !!owner.closest('svg'), 1);
+      return;
+    }
+    if (n.nodeType !== 1 || ['style', 'script', 'template', 'noscript'].includes(n.localName)) return;
+    const pseudo = (which) => {
+      if (!shows(n)) return;
+      const s = getComputedStyle(n, which);
+      if (s.content && /^["']/.test(s.content) && s.content.slice(1, -1).trim()) { const o = parseFloat(s.opacity); push(s.content.slice(1, -1), s, n, false, o >= 0 ? o : 1); }
+    };
+    pseudo('::before');
+    if ((n instanceof HTMLInputElement || n instanceof HTMLTextAreaElement) && shows(n)) {
+      if (n.value) push(n.value, getComputedStyle(n), n, false, 1);
+      else if (n.placeholder) { const s = getComputedStyle(n, '::placeholder'), o = parseFloat(s.opacity); push(n.placeholder, s, n, false, o >= 0 ? o : 1); }
+    }
+    if (!(n instanceof HTMLTextAreaElement)) for (const child of n.childNodes) visit(child);
+    pseudo('::after');
+  };
+  visit(el);
+  return { text: texts.join('\\n'), graphics, runs };
 `) as (el: Element) => DomContent;
 
 export type FigmaContentResult =

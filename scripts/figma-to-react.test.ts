@@ -63,14 +63,14 @@ test('without a Chromium the command says NOT CHECKED, exits 0 and never prints 
 
 test('the report: a failing variant is named with its reasons and exits 1; --allow-failures exits 0 but still says FAIL', () => {
   const variant = (key: string, verdict: 'pass' | 'fail' | 'unverified', reasons: string[] = []) => ({ key, figmaName: `Footer=${key}`, verdict, reasons,
-    image: verdict === 'unverified' ? null : { white: 0.6, black: 0.8, withinLimit: true }, content: { texts: 2, textsMissing: reasons.length, parts: 1, partsMissing: 0 } });
+    image: verdict === 'unverified' ? null : { white: 0.6, black: 0.8, withinLimit: true }, content: { texts: 2, textsMissing: reasons.length, textStyleMismatches: 0, parts: 1, partsMissing: 0 } });
   const verdicts = (variants: ReturnType<typeof variant>[], verdict: Verdicts['verdict'], setProblems: string[] = []): CheckOutcome => ({ status: verdict, receipt: 'check/receipt.json',
     verdicts: { verdict, variants, setProblems, counts: { pass: variants.filter(v => v.verdict === 'pass').length, fail: variants.filter(v => v.verdict === 'fail').length, unverified: variants.filter(v => v.verdict === 'unverified').length } } });
   const r = { component: 'Dialog', setName: 'Dialog', tarball: 'dialog.tgz', notes: new Array(125).fill('note') };
   const fail = verdicts([variant('No', 'fail', ['content-missing:No:text:"Dialog heading"']), variant('Yes', 'pass')], 'fail');
   const failed = reportCheck(r, 'out', fail);
   assert.equal(failed.exitCode, 1);
-  assert.ok(failed.lines.some(l => /Footer=No +FAIL +0\.60% \/ 0\.80% +1\/2 text, 0\/1 icons/.test(l)));
+  assert.ok(failed.lines.some(l => /Footer=No +FAIL +0\.60% \/ 0\.80% +1\/2 text, 0\/2 text style, 0\/1 icons/.test(l)));
   assert.ok(failed.lines.some(l => /^ +- content-missing:No:text:"Dialog heading"$/.test(l)));
   assert.ok(failed.lines.some(l => l.startsWith('✖ figma:to-react Dialog: FAIL — 1 of 2 variant(s) fail')));
   assert.ok(failed.lines.some(l => l.includes('125 proposal note(s)')));
