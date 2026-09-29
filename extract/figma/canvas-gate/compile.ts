@@ -130,6 +130,16 @@ export function projectForCanvas(contract: Contract): Contract {
       table.rows = table.rows.filter(row => table.props.every((prop, i) =>
         row.values[i] === null || !keptByProp.has(prop) || keptByProp.get(prop)!.has(row.values[i]!)));
     }
+    // A combination row for a pruned value can never match a kept variant;
+    // a table left without rows is dropped (the schema requires one).
+    if (Array.isArray(part.literalsByCombination)) {
+      const tables = (part.literalsByCombination as NonNullable<Contract['anatomy']['root']['literalsByCombination']>)
+        .map(table => ({ ...table, rows: table.rows.filter(row => table.props.every((prop, i) =>
+          !keptByProp.has(prop) || keptByProp.get(prop)!.has(row.values[i]!))) }))
+        .filter(table => table.rows.length > 0);
+      if (tables.length > 0) part.literalsByCombination = tables;
+      else delete part.literalsByCombination;
+    }
     for (const child of Object.values((part.parts as Record<string, Record<string, unknown>>) ?? {})) pruneMaps(child);
   };
   pruneMaps(clone.anatomy.root as unknown as Record<string, unknown>);

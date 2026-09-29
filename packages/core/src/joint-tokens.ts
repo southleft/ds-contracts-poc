@@ -17,6 +17,7 @@ export function jointTokenTableErrors(contract:Contract):string[]{
   const occupied=new Set<string>();
   const claim=(record:Record<string,unknown>|undefined)=>Object.keys(record??{}).forEach(c=>occupied.add(family(c)));
   claim(part.tokens);claim(part.literals);claim(part.declared);
+  for(const t of part.literalsByCombination??[])t.rows.forEach(r=>claim(r.literals));
   Object.values(part.states??{}).forEach(claim);Object.values(part.declaredStates??{}).forEach(claim);
   for(const entry of [...tokensByPropEntries(part),...(part.literalsByProp??[]),...(part.statesByProp??[])])Object.values(entry.map).forEach(claim);
   for(const rule of part.stylesWhen??[])claim(rule.styles);

@@ -470,6 +470,16 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
       }
     }
   }
+  // Beta spike — literalsByCombination on the root: one compound host rule
+  // per row (the multi-placeholder root-token spelling), after the pairs.
+  for (const table of root.literalsByCombination ?? []) {
+    for (const row of table.rows) {
+      pairRules.push({
+        selector: rootWithCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string])),
+        decls: Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+      });
+    }
+  }
 
   const rule = (selector: string, decls: string[]) => {
     if (decls.length === 0) return;
@@ -670,6 +680,16 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
         subRules.push([
           `${rootWithEnum(entry.prop, value)} ${partSel(name)}`,
           Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+        ]);
+      }
+    }
+    // Beta spike — literalsByCombination on a part: one compound host rule
+    // per row, after the single-prop literal rules.
+    for (const table of part.literalsByCombination ?? []) {
+      for (const row of table.rows) {
+        subRules.push([
+          `${rootWithCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string]))} ${partSel(name)}`,
+          Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
         ]);
       }
     }

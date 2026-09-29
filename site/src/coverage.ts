@@ -361,6 +361,13 @@ reg("tokens", "literals", [
   "literalsByProp.prop",
   "literalsByProp.map",
 ]);
+reg("tokens", "literals-by-combination", [
+  "part.literalsByCombination",
+  "part.literalsByCombination.props",
+  "part.literalsByCombination.rows",
+  "part.literalsByCombination.rows.literals",
+  "part.literalsByCombination.rows.values",
+]);
 // v15 (S4 channel lifts): declared facts — keyword/literal channels with no
 // token vocabulary, carried first-class (code renders; canvas draws or
 // annotates per the capability-matrix verdict).

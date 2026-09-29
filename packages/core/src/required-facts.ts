@@ -1130,6 +1130,8 @@ export function channelsOf(part: Part): Set<string> {
   for (const e of part.literalsByProp ?? [])
     for (const v of Object.values(e.map ?? {}))
       add(v as Record<string, unknown>);
+  for (const table of part.literalsByCombination ?? [])
+    for (const row of table.rows) add(row.literals);
   for (const v of Object.values(part.states ?? {})) add(v);
   for (const e of part.statesByProp ?? [])
     for (const v of Object.values(e.map ?? {}))
