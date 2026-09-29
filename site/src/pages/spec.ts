@@ -855,6 +855,29 @@ function tokensPage(): { route: string; html: string } {
         ),
     ),
     section(
+      "literals-by-combination",
+      "Literals by prop combination",
+      ["curated"],
+      `<p><code>literalsByCombination</code> carries a literal that a variant set draws as a function of <em>several</em> properties at once, when no token or single-property rule can carry it. The Figma importer writes it where it would otherwise drop the value: the Radix Themes Button draws its content fill as a function of variant, color, highContrast and state, which no one- or two-axis token spells. Each entry has <code>props</code> (enum properties or VARIANT-bound booleans, whose values are spelled <code>"true"</code>/<code>"false"</code>) and <code>rows: [{ values, literals }]</code>. A row applies when every listed property has exactly the row's value; an omitted property matches no row.</p><p>Rows are sparse on purpose: a combination the design does not draw has no row and keeps the part's base styling. Nothing is filled in. The importer keys the table by the smallest set of properties the observed values depend on, so a combination the design does not draw can still match a row through its key values. The importer names each table in its notes as an untokenized literal to review and bind to real tokens. React CSS Modules, shadow CSS and inline React write one compound rule per row after <code>literalsByProp</code>. Canvas variants resolve the matching row through the same resolver as <code>literals</code>.</p>` +
+        refusals("Refusals:", [
+          "an unknown property, a property that is not an enum or VARIANT-bound boolean, a value outside its domain, or a row whose value count differs from the property count",
+          "the same tuple twice in one table",
+          "a channel outside the literal-channel set (which here also admits node opacity) or a value outside its grammar",
+          "a channel carried by two tables on one part, or a channel a token already binds on that part",
+          "a component-instance part — the child contract owns its styling",
+        ]) +
+        illustrativeExample(PartSchema, {
+          element: "div",
+          literalsByCombination: [{
+            props: ["variant", "color"],
+            rows: [
+              { values: ["solid", "accent"], literals: { "background-color": "#3e63dd", color: "#ffffff" } },
+              { values: ["soft", "accent"], literals: { "background-color": "#0047f112", color: "#002bb7c4" } },
+            ],
+          }],
+        }, "Two drawn combinations of variant × color; the undrawn ones keep the part's base styling."),
+    ),
+    section(
       "declared-facts",
       "Declared facts",
       ["generated", "curated"],

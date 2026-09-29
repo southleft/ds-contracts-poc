@@ -1761,6 +1761,57 @@
             "additionalProperties": false
           }
         },
+        "literalsByCombination": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "props": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "rows": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "literals": {
+                      "type": "object",
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "literals"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "props",
+              "rows"
+            ],
+            "additionalProperties": false
+          }
+        },
         "declared": {
           "type": "object",
           "propertyNames": {

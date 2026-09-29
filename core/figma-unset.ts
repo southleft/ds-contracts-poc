@@ -119,6 +119,12 @@ export function lowerUnsetProposal(
   for (const alias of omittedCodeBindingConflicts(contract, axes.map(a => a.codeProp))) fail(`props.${alias}: consumer/generated namespace collision`);
   const lowerPart = (part: Record<string, unknown>, path: string): void => {
     if (object(part.component) && object(part.component.props)) componentPropRecords.add(part.component.props);
+    // A literal combination table keyed on an omitted-plane axis has no
+    // proved lowering (its internal value is not a public one) — refused by
+    // name, never passed through with the synthetic value inside a row.
+    if (Array.isArray(part.literalsByCombination) && part.literalsByCombination.some(table =>
+      object(table) && Array.isArray(table.props) && table.props.some(prop => typeof prop === 'string' && axisByProp.has(prop))))
+      fail(`${path}.literalsByCombination`);
     // Per-axis maps already prove each value is independent of other axes.
     // Their omitted row is therefore exactly the base carrier.
     for (const [mapField, baseField] of [['tokensByProp', 'tokens'], ['literalsByProp', 'literals'], ['layoutByProp', 'layout'], ['textByProp', 'text'], ['statesByProp', 'states']]) {

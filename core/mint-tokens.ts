@@ -186,6 +186,23 @@ export interface MintedBinding {
    *  caveat says the PAIR may be drift rather than intent. Distinct from
    *  `reason` on purpose: this binding is bound, not refused. */
   caveat?: string;
+  /** CARRY, DON'T DROP — present only when the caller opts in
+   *  (MintOptions.literalFallback) and `ref` is null because the values
+   *  differ without a token-mintable correlation. The observed values as an
+   *  UNTOKENIZED literal table the caller may place on the part; `reason`
+   *  still says why no token was minted. */
+  literal?: MintedLiteralTable;
+}
+
+/** The observed per-variant values of a refused observation, keyed by the
+ *  SMALLEST set of axes they are a function of. Every row is a measured
+ *  observation (never a fill); combinations the variant set does not draw
+ *  have no row. */
+export interface MintedLiteralTable {
+  /** Axis prop names, in declared axis order. */
+  props: string[];
+  /** One row per observed combination of `props`, in declared value order. */
+  rows: Array<{ values: string[]; value: string }>;
 }
 
 export interface MintResult {
@@ -692,6 +709,75 @@ function classify(
   };
 }
 
+/** Subsets of `axes` with exactly `k` members, in declared order
+ *  (lexicographic over axis indices) — deterministic by construction. */
+function* axisSubsets(axes: MintAxis[], k: number, from = 0, prefix: MintAxis[] = []): Generator<MintAxis[]> {
+  if (prefix.length === k) {
+    yield prefix;
+    return;
+  }
+  for (let i = from; i <= axes.length - (k - prefix.length); i++) yield* axisSubsets(axes, k, i + 1, [...prefix, axes[i]]);
+}
+
+/** Beyond this many axes the subset search is skipped and only the full
+ *  variant tuple is tried (2^n subsets). No kit in the beta scoreboard comes
+ *  close; the cap only bounds the work. */
+const LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES = 12;
+
+/** CARRY, DON'T DROP (beta spike, 2026-09-29). A refused observation's
+ *  measured values, keyed by the SMALLEST set of axes they are a function of.
+ *
+ *  Refusing drops a DRAWN fact: the scoreboard's Radix Button draws its
+ *  content-container fill as f(variant, color, highContrast, state), four
+ *  axes, and a nested part mints at most a pair — so the fill vanished and
+ *  React drew bare text in all 576 variants. A token needs a rule that
+ *  covers every declared combination; a literal only has to reproduce the
+ *  variants that were drawn, so it never needs a fill value, a coverage
+ *  proof or a placeholder cap. Every row is one or more observations that
+ *  agree; a combination the set never draws simply has no row and keeps the
+ *  part's base styling.
+ *
+ *  THE KEY IS THE SMALLEST SUBSET, tried by size and then declared axis
+ *  order, over which every occurrence agrees — so an axis that does not
+ *  change the value never multiplies the rows, and the choice is a function
+ *  of the axis declaration and the observations alone. The full variant
+ *  tuple always fits unless two occurrences share a tuple and disagree (no
+ *  table: nothing can be keyed). Bool axes participate everywhere: every
+ *  code surface spells a bool side on the root (data attribute or class). */
+// @door mint.literal-fallback-table
+function literalTable(obs: MintObservation, axes: MintAxis[]): MintedLiteralTable | undefined {
+  if (obs.occurrences.length === 0 || axes.length === 0) return undefined;
+  const sizes = axes.length <= LITERAL_TABLE_SUBSET_SEARCH_MAX_AXES
+    ? Array.from({ length: axes.length }, (_, i) => i + 1)
+    : [axes.length];
+  for (const k of sizes) {
+    for (const subset of axisSubsets(axes, k)) {
+      const rows = new Map<string, { values: string[]; value: string; rank: number[] }>();
+      let fits = true;
+      for (const o of obs.occurrences) {
+        const values = subset.map((a) => o.axisValues[a.propName]);
+        const rank = subset.map((a, i) => a.values.indexOf(values[i] ?? ''));
+        if (rank.some((r) => r < 0)) { fits = false; break; }
+        const key = JSON.stringify(values);
+        const value = formatValue(obs.kind, o.value);
+        const seen = rows.get(key);
+        if (seen !== undefined && seen.value !== value) { fits = false; break; }
+        rows.set(key, { values: values as string[], value, rank });
+      }
+      if (!fits) continue;
+      const ordered = [...rows.values()].sort((x, y) => {
+        for (let i = 0; i < x.rank.length; i++) if (x.rank[i] !== y.rank[i]) return x.rank[i] - y.rank[i];
+        return 0;
+      });
+      return {
+        props: subset.map((a) => a.propName),
+        rows: ordered.map(({ values, value }) => ({ values, value })),
+      };
+    }
+  }
+  return undefined;
+}
+
 // ---------------------------------------------------------------------------
 // mintTokens
 // ---------------------------------------------------------------------------
@@ -730,6 +816,13 @@ export interface MintOptions {
    *  observation is a real disagreement and is left alone — the collision
    *  still surfaces, by name, downstream. */
   corpusValueAt?: (path: string) => string | undefined;
+  /** CARRY, DON'T DROP (beta spike): a binding refused because its values
+   *  differ without a token-mintable correlation also returns the observed
+   *  values as a literal table (MintedBinding.literal) — keyed by the
+   *  smallest axis subset they are a function of. The caller decides whether
+   *  it can place the table; `reason` is unchanged either way. Default off:
+   *  every existing caller's bindings are byte-identical. */
+  literalFallback?: boolean;
 }
 
 export function mintTokens(
@@ -814,7 +907,14 @@ export function mintTokens(
   const bindings: MintedBinding[] = classified.map((c, i) => {
     const obs = observations[i];
     if (c.kind === 'none') {
-      return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: null, reason: c.reason };
+      const literal = opts?.literalFallback === true ? literalTable(obs, axes) : undefined;
+      return {
+        nodePath: obs.nodePath,
+        cssProperty: obs.cssProperty,
+        ref: null,
+        reason: c.reason,
+        ...(literal ? { literal } : {}),
+      };
     }
     // v17: a style-riding typography observation is named for the STYLE and
     // not for the component/part that happens to draw it (see styleName).

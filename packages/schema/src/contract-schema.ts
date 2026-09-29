@@ -916,6 +916,15 @@ export const LITERAL_CHANNELS = new Set([
   "box-shadow",
 ]);
 
+/** Beta spike (carry, don't drop): the channels a literalsByCombination row
+ *  may carry — every literal channel plus node OPACITY, a unitless 0–1
+ *  number the dump reads as a literal (Radix Button's content-container is
+ *  0.88 on some planes). The canvas sets the node's opacity directly, exactly
+ *  as its token case does. Kept apart from LITERAL_CHANNELS on purpose: that
+ *  set is also the historical vocabulary of recorded source-reference
+ *  evidence, which must reproduce byte for byte. */
+export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity"]);
+
 /** A literals record with channel-aware scalar, shadow and gradient grammars. */
 export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
   for (const [channel, value] of Object.entries(rec)) {
@@ -939,6 +948,42 @@ export const LiteralsByPropSchema = z.strictObject({
   prop: z.string(),
   map: z.record(z.string(), LiteralsRecordSchema),
 });
+
+/** Beta spike (carry, don't drop): literal overrides keyed by a COMBINATION
+ *  of enum/boolean props — the literal a variant set draws when the value is
+ *  a function of several axes at once and no token or single-axis rule
+ *  spells it (Radix Button's content-container fill is f(variant, color,
+ *  highContrast, state)). `literalsByProp` is keyed by ONE prop, and
+ *  `tokensByCombination` holds complete two-prop root paint TOKEN tables, so
+ *  neither can carry it.
+ *
+ *  A row applies when EVERY listed prop has exactly the row's value
+ *  (boolean props spell 'true'/'false'); an omitted prop matches no row.
+ *  Rows are SPARSE on purpose: a combination the design never draws has no
+ *  row and keeps the part's base styling — nothing is filled in. Code: one
+ *  compound-selector rule per row on the root's own prop classes /
+ *  attributes (`.variant-solid.color-accent .label`), emitted after
+ *  `literalsByProp`; per-variant surfaces (canvas, inline React) resolve the
+ *  matching row through resolveLiterals. validateContract refuses unknown
+ *  props or values, duplicate tuples, a channel outside the literal
+ *  registry, a channel carried by two tables, and a channel a token already
+ *  binds on the same part. */
+export const LiteralsByCombinationSchema = z.strictObject({
+  props: z.array(z.string()).min(1),
+  rows: z.array(z.strictObject({
+    values: z.array(z.string()).min(1),
+    literals: LiteralsRecordSchema,
+  })).min(1),
+});
+
+/** Every literal record a part's literalsByCombination tables carry, in
+ *  table then row order — the ONE reader for surfaces that ask "which
+ *  channels does this part carry" rather than "which rule applies". */
+export function literalsByCombinationRecords(part: {
+  literalsByCombination?: Array<z.infer<typeof LiteralsByCombinationSchema>>;
+}): Array<Record<string, string>> {
+  return (part.literalsByCombination ?? []).flatMap((table) => table.rows.map((row) => row.literals));
+}
 
 /** v15 (S4 channel lifts — round 1 of the north-star push): a DECLARED FACT
  *  is a keyword/literal styling channel observed as computed truth that has
@@ -2187,6 +2232,10 @@ export interface Part {
   /** v14: per-enum-value literal overrides merged over `literals` — the
    *  literals sibling of tokensByProp (ordered entries, same refusal rules). */
   literalsByProp?: Array<z.infer<typeof LiteralsByPropSchema>>;
+  /** Beta spike: sparse literal overrides keyed by a combination of props
+   *  (see LiteralsByCombinationSchema) — the observed value per drawn
+   *  combination when no token or single-axis rule can carry it. */
+  literalsByCombination?: Array<z.infer<typeof LiteralsByCombinationSchema>>;
   /** v15 (S4): DECLARED FACTS — keyword/literal channels with no token
    *  vocabulary (cursor, user-select, text-rendering, …), carried verbatim
    *  by every code emitter; the canvas draws the 'draw'-verdict channels
@@ -2439,6 +2488,7 @@ export function gridAxisSizing(
     ...byProp.flatMap((e) =>
       Object.values(e.map ?? {}).map((m) => (m as Record<string, string>)[axis]),
     ),
+    ...literalsByCombinationRecords(part).map((m) => m[axis]),
   ];
   let definite = false;
   for (const v of seen) {
@@ -2679,6 +2729,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     literals: LiteralsRecordSchema.optional(),
     /** v14: ordered per-enum-value literal overrides. */
     literalsByProp: z.array(LiteralsByPropSchema).min(1).optional(),
+    /** Beta spike: sparse literal overrides keyed by a prop combination. */
+    literalsByCombination: z.array(LiteralsByCombinationSchema).min(1).optional(),
     /** v15 (S4): declared facts — DECLARED_CHANNELS registry channels. */
     declared: z.record(z.string(), DeclaredValueSchema).optional(),
     /** v15 (S4): per-state declared facts (state → channel → value). */
@@ -3245,6 +3297,14 @@ export function resolveLiterals(
     const override = entry.map[subst[entry.prop] ?? ""];
     if (override) out = { ...out, ...override };
   }
+  // Beta spike: the combination row whose every prop matches (an omitted
+  // prop matches no row), merged last — the code surfaces emit these rules
+  // after literalsByProp with a strictly more specific selector.
+  for (const table of part.literalsByCombination ?? []) {
+    const row = table.rows.find((r) =>
+      table.props.every((prop, i) => Object.hasOwn(subst, prop) && subst[prop] === r.values[i]));
+    if (row) out = { ...out, ...row.literals };
+  }
   return out;
 }
 
@@ -3783,6 +3843,8 @@ export function lowerStrokedPathPaint(contract: Contract): Contract {
       ...(by ? { tokensByProp: Array.isArray(by) ? by.map(entry => ({ ...entry, map: maps(entry.map) })) : { ...by, map: maps(by.map) } } : {}),
       ...(part.statesByProp ? { statesByProp: part.statesByProp.map(entry => ({ ...entry, map: maps(entry.map) })) } : {}),
       ...(part.literalsByProp ? { literalsByProp: part.literalsByProp.map(entry => ({ ...entry, map: maps(entry.map) })) } : {}),
+      ...(part.literalsByCombination ? { literalsByCombination: part.literalsByCombination.map(table =>
+        ({ ...table, rows: table.rows.map(row => ({ ...row, literals: paint(row.literals) })) })) } : {}),
       ...(part.stylesWhen ? { stylesWhen: part.stylesWhen.map(rule => ({ ...rule, styles: paint(rule.styles) })) } : {}),
     };
   };
