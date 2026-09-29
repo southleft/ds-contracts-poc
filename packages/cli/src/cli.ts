@@ -1,12 +1,14 @@
 /**
  * ds-contracts — the CLI entry. Thin dispatch over command modules; every
  * verb is a shell around the SAME engine the reference repo's npm scripts
- * run (core barrel + extraction + diagnose + generator), esbuild-bundled so
- * an install carries zero required runtime dependencies (playwright-core is
- * optional, loaded lazily by `extract --computed`).
+ * run (core barrel + extraction + diagnose + generator), esbuild-bundled.
+ * Only `figma-to-react` reaches outside the bundle: it packages with the
+ * pinned esbuild, typescript and @types/react dependencies, and checks with
+ * playwright-core (optional, loaded lazily, as `extract --computed` does).
  */
 import { CliUsageError } from './lib.js';
 import { ContractViolationError } from '../../../scripts/generate-components.js';
+import { figmaToReactCommand } from './commands/figma-to-react.js';
 import { initCommand } from './commands/init.js';
 import { onboardCommand, promoteCommand } from './commands/onboard.js';
 import { extractCommand } from './commands/extract.js';
@@ -24,6 +26,15 @@ const USAGE = `ds-contracts ${VERSION} — contracts as the deterministic bridge
 Usage: ds-contracts <command> [options]
 
 Commands:
+  figma-to-react --url <component-set link>   a Figma component set → an installable React
+          | --dump <dump.json>                package (<out>/<name>.tgz), then CHECKED against
+          --out <dir> [--name <npm name>]     the design: each variant is mounted from the
+          [--allow-failures]                  installed package in a clean Vite app and reported
+                                              PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
+                                              from the environment. Any FAIL exits 1 unless
+                                              --allow-failures. The check needs a Chromium:
+                                              npx playwright-core install chromium. Node 20.19+,
+                                              macOS and Linux.
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
           [--components a,b,c]                adapter/styling, create or reuse a sandbox (a PATH
           [--workspace <dir>] [--force]       is npm-packed to a tarball so its deps really
@@ -140,6 +151,31 @@ ds-contracts <command> --help prints that command's section from this reference.
 `;
 
 const COMMAND_HELP: Record<string, string> = {
+  'figma-to-react': `ds-contracts figma-to-react — a Figma component set → a checked React package
+
+  figma-to-react --url <figma component-set link> --out <dir>
+  figma-to-react --dump <dump.json> --out <dir>
+    [--name <npm package name>] [--allow-failures]
+
+Writes <out>/<name>.tgz (install it with npm install <path>), <out>/request.json
+and <out>/result.json, then checks the package against the design: every Figma
+variant is mounted from the installed package in a clean Vite app, compared
+with Figma's own image (5% limit, on white and on black) and checked for every
+text and icon it draws. Each variant is reported PASS, FAIL (with the reasons)
+or UNVERIFIED (not measurable: without FIGMA_TOKEN there are no Figma images).
+Any FAIL exits 1 unless --allow-failures; the package is written either way.
+A green check is printed only when every variant passed.
+
+  FIGMA_TOKEN   a Figma personal access token (file read). Required for --url;
+                with --dump it lets the check fetch Figma's images. Read from
+                the environment only.
+  Chromium      the check needs one: npx playwright-core install chromium
+                (without it the command says NOT CHECKED and exits 0).
+
+Requires Node 20.19 or later, on macOS or Linux. The reference repo's demo
+contracts and tokens ship with the engine and still inform name linking and
+nearest-token matching.
+`,
   onboard: `ds-contracts onboard — code → canvas pipeline (two phases)
 
 Phase 1:
@@ -269,6 +305,7 @@ async function main(): Promise<number> {
     case 'diff':
     case 'propose-pr':
     case 'migrate':
+    case 'figma-to-react':
       if (wantsHelp(rest)) {
         console.log(COMMAND_HELP[command] ?? USAGE);
         return 0;
@@ -296,6 +333,8 @@ async function main(): Promise<number> {
       return proposePrCommand(rest);
     case 'migrate':
       return migrateCommand(rest);
+    case 'figma-to-react':
+      return figmaToReactCommand(rest);
     default:
       console.error(`Unknown command "${command}"\n\n${USAGE}`);
       return 2;

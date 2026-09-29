@@ -1,6 +1,6 @@
 {
   "name": "@ds-contracts/cli",
-  "version": "0.5.0-rc.2",
+  "version": "0.5.0-rc.3",
   "publishConfig": {
     "access": "public"
   },
@@ -17,14 +17,19 @@
   "scripts": {
     "build": "node build.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "tsx --test test/draft-capture-config.test.ts test/propose-bool-axis.test.ts test/accept-candidates.test.ts test/init-detect.test.ts test/library-scorecard.test.ts test/onboard.test.ts test/figma-receive.test.ts test/token-routing.test.ts test/promotion-integrity.test.ts test/vite-glob-plugin.test.ts",
+    "test": "tsx --test test/draft-capture-config.test.ts test/propose-bool-axis.test.ts test/accept-candidates.test.ts test/init-detect.test.ts test/library-scorecard.test.ts test/onboard.test.ts test/figma-receive.test.ts test/token-routing.test.ts test/promotion-integrity.test.ts test/vite-glob-plugin.test.ts test/figma-to-react.test.ts",
     "coverage": "c8 --all --include='src/**/*.ts' --reporter=text --reporter=json --reports-dir=../../coverage/cli --check-coverage --statements=55 --branches=60 --functions=55 --lines=55 npm test"
   },
   "engines": {
     "node": ">=20"
   },
+  "dependencies": {
+    "@types/react": "19.2.17",
+    "esbuild": "0.28.1",
+    "typescript": "6.0.3"
+  },
   "optionalDependencies": {
-    "playwright-core": "^1.61.1"
+    "playwright-core": "1.61.1"
   },
   "repository": {
     "type": "git",
