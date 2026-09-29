@@ -286,7 +286,9 @@ let busy = false; // one run at a time, across both modes
 // caller script. Exclusive host handoff prevents another client from receiving
 // an already delivered creation; durable receipts recover lost acknowledgments.
 const NATIVE_APP_BASE = 'http://localhost:5181/api/source-reference/native/';
-const NATIVE_TARGETS = ['byMp6lt0Ij9b2QbkDGFwBh', 'T56aKuRnoay1L7CKAjSWRO'];
+// No built-in list of files: the user chooses the file by pasting the app's
+// connection into it (docs/GOAL.md). Every command must name the open file,
+// and every generated script checks figma.fileKey again before it runs.
 const NATIVE_UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const NATIVE_PAIR = new RegExp('^dscn_(' + NATIVE_UUID + ')\\.([a-f0-9]{64})$');
 const nativeConnectionKey = () => 'ds_native_connection:' + String(figma.fileKey || '');
@@ -302,7 +304,7 @@ function nativeCommandValid(c, operationId) {
     c.operationId === operationId && phases.includes(c.phase) &&
     new RegExp('^' + NATIVE_UUID + '$').test(c.attemptId) &&
     /^[a-f0-9]{64}$/.test(c.nonce) && /^sha256:[a-f0-9]{64}$/.test(c.planRevision) &&
-    NATIVE_TARGETS.includes(c.fileKey) && figma.fileKey === c.fileKey &&
+    typeof c.fileKey === 'string' && figma.fileKey === c.fileKey &&
     c.readOnly === c.phase.endsWith('-readback') && typeof c.script === 'string' &&
     c.script.length > 0 && c.script.length <= 4 * 1024 * 1024 && sha256Hex(c.script) === c.scriptSha256;
 }
@@ -315,7 +317,7 @@ async function nativePoll(resumeOnly) {
     const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
     const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);
     if (!match) { nativeStatus('disconnected', 'Paste the connection from the local app.'); return; }
-    if (!NATIVE_TARGETS.includes(figma.fileKey)) { nativeStatus('refused', 'Open the authorized target shown in the local app.'); return; }
+    if (!figma.fileKey) { nativeStatus('refused', 'This file has no key yet. Save it to Figma, then connect again.'); return; }
     const operationId = match[1], secret = match[2];
     const receiptKey = 'ds_native_receipt:' + operationId;
     const request = async (route, payload) => {
@@ -358,6 +360,12 @@ async function nativePoll(resumeOnly) {
       nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; it will not be repeated.');
       return;
     }
+    if (delivery.status === 'wrong-file') {
+      const key = typeof delivery.fileKey === 'string' && /^[A-Za-z0-9]{10,64}$/.test(delivery.fileKey) ? delivery.fileKey : '';
+      nativeStatus('refused', 'This connection is for a different Figma file' + (key ? ' (figma.com/design/' + key + ')' : '') +
+        '. Open that file, then paste the connection there. Nothing executed.');
+      return;
+    }
     if (delivery.status !== 'command') {
       const messages = {
         ready: 'Connected. Start Create and inspect in the local app.',
@@ -369,6 +377,9 @@ async function nativePoll(resumeOnly) {
       return;
     }
     const command = delivery.command;
+    if (command && typeof command.fileKey === 'string' && command.fileKey !== figma.fileKey) {
+      nativeStatus('refused', 'This connection is for a different Figma file. Open the file the local app targets, then paste the connection there. Nothing executed.'); return;
+    }
     if (!nativeCommandValid(command, operationId)) {
       nativeStatus('refused', 'The operation identity, active file or script integrity did not match. Nothing executed.'); return;
     }
@@ -463,8 +474,8 @@ figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
   if (msg.type === 'native-connect') {
     const value = typeof msg.connection === 'string' ? msg.connection.trim() : '';
-    if (!NATIVE_PAIR.test(value) || !NATIVE_TARGETS.includes(figma.fileKey)) {
-      nativeStatus('refused', 'Use the connection in the authorized target shown in the local app.'); return;
+    if (!NATIVE_PAIR.test(value) || !figma.fileKey) {
+      nativeStatus('refused', 'Paste the full connection from the local app, in the Figma file the app targets.'); return;
     }
     try { await figma.clientStorage.setAsync(nativeConnectionKey(), value); await nativePoll(); }
     catch (e) { nativeStatus('unavailable', 'The connection could not be saved.'); }

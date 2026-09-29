@@ -331,10 +331,8 @@ test("wrong capability, wrong file and unknown identity cannot receive commands 
     () => f.transport.claim(f.id, "0".repeat(64), SOURCE_NATIVE_FILE_KEY),
     /unauthorized/,
   );
-  assert.throws(
-    () => f.transport.claim(f.id, f.secret, "other-file"),
-    /file-refused/,
-  );
+  assert.deepEqual(f.transport.claim(f.id, f.secret, "other-file"),
+    { status: "wrong-file", fileKey: SOURCE_NATIVE_FILE_KEY });
   assert.throws(() =>
     f.transport.claim(
       "00000000-0000-4000-8000-000000000099",

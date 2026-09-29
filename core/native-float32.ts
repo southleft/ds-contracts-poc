@@ -5,6 +5,16 @@
 export const storedAs = (actual: unknown, planned: number): boolean =>
   actual === planned || actual === Math.fround(planned);
 
+/** The width the root-content writer gives an empty slot that would otherwise
+ * be exactly 0, so instances can be widened (docs/23 D.175). Figma stores its
+ * float32, 0.009999999776482582. Height has no seed. */
+export const ROOT_CONTENT_EMPTY_WIDTH_SEED = 0.01;
+
+/** An empty root-content slot's width as written: exact 0 (operations created
+ * before D.175) or the stored seed. Nothing else draws nothing. */
+export const emptySlotWidth = (width: unknown): boolean =>
+  width === 0 || storedAs(width, ROOT_CONTENT_EMPTY_WIDTH_SEED);
+
 /** Spacing of float32 values at this magnitude (one unit in the last place). */
 export const ulp32 = (magnitude: number): number => {
   const f = new Float32Array([Math.abs(magnitude)]), i = new Int32Array(f.buffer);
