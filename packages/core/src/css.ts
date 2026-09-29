@@ -505,6 +505,10 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     const boolPart = pairs.filter(([p]) => boolNames.has(p)).map(([p, v]) => boolFrag(p, v)).join('');
     return (enumPart.length > 0 ? enumPart : 'root') + boolPart;
   };
+  // A literal row supplies variant values, before interaction states. The
+  // number of participating props must not raise its specificity above a
+  // state rule (.root:disabled). Keep all matching conditions in :where().
+  const literalComboCls = (pairs: Array<[string, string]>) => `root:where(.${comboCls(pairs)})`;
   /** N-placeholder expansion over enum AND boolean props: the cartesian in
    *  DECLARED placeholder order, then declared value order — the web-
    *  components emitter's `expandRef` is this exact loop, so both resolve
@@ -719,10 +723,9 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     }
   }
   // Beta spike — literalsByCombination on the root: one compound rule per
-  // row on the root's own prop classes / attributes (`.variant-solid.color-
-  // accent`), the multi-placeholder root-token spelling. Every single enum
-  // class is claimed so the TSX composes it (an unemitted class is undefined
-  // in the module and the compound selector would never match).
+  // row on the root's own prop classes / attributes, with base specificity.
+  // Every single enum class is claimed so the TSX composes it (an unemitted
+  // class is undefined in the module and the selector would never match).
   for (const table of root.literalsByCombination ?? []) {
     for (const row of table.rows) {
       const combo = table.props.map((p, i) => [p, row.values[i]] as [string, string]);
@@ -730,7 +733,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         if (boolNames.has(sp)) continue;
         if (!enumRules.has(`${sp}-${sv}`)) enumRules.set(`${sp}-${sv}`, new Map());
       }
-      const cls = comboCls(combo);
+      const cls = literalComboCls(combo);
       if (!enumRules.has(cls)) enumRules.set(cls, new Map());
       for (const [cssProp, lit] of Object.entries(row.literals)) enumRules.get(cls)!.set(cssProp, lit);
       for (const decl of borderStyleDecls(row.literals, 'literals', root.declared)) {
@@ -1209,8 +1212,8 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
       }
     }
     // Beta spike — literalsByCombination on a nested part: one compound
-    // ancestor rule per row (`.variant-solid.color-accent .label`), the
-    // N-placeholder nested-token spelling; single classes claimed as above.
+    // ancestor rule per row, below part state rules regardless of axis count;
+    // single classes claimed as above.
     for (const table of part.literalsByCombination ?? []) {
       for (const row of table.rows) {
         const combo = table.props.map((p, i) => [p, row.values[i]] as [string, string]);
@@ -1221,7 +1224,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
         const lDecls = Object.entries(row.literals).map(([cssProp, lit]) => `  ${cssProp}: ${lit};`);
         for (const d of borderStyleDecls(row.literals, 'literals', part.declared)) lDecls.push(`  ${d};`);
         if (lDecls.length === 0) continue;
-        nestedSubRules.push(`\n.${comboCls(combo)} .${cssIdentifier(name)} {\n${lDecls.join('\n')}\n}`);
+        nestedSubRules.push(`\n.${literalComboCls(combo)} .${cssIdentifier(name)} {\n${lDecls.join('\n')}\n}`);
       }
     }
     // v15 declared facts on a nested part: verbatim base decls + per-state

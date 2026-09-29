@@ -92,7 +92,7 @@ test('React CSS Modules and inline React draw every drawn combination and leave 
   const c = seed(), contracts = new Map([[c.id, c]]), icons = new Map<string, string>();
   const css = emitReact(c, { contracts, icons, tokens: tokenInventoryFromJson([{}]) });
   const inline = emitReactInline(c, { contracts, icons, tokens });
-  assert.match(css.css, /\.tone-strong\.size-lg:not\(\[data-loud\]\) \.label \{\n {2}background-color: #405060;\n {2}color: #cccccc;\n\}/);
+  assert.match(css.css, /\.root:where\(\.tone-strong\.size-lg:not\(\[data-loud\]\)\) \.label \{\n {2}background-color: #405060;\n {2}color: #cccccc;\n\}/);
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
@@ -137,3 +137,130 @@ function hexToUnit(h: string) {
   const n = (i: number) => parseInt(h.slice(i, i + 2), 16) / 255;
   return { r: n(1), g: n(3), b: n(5) };
 }
+
+test('combination literals yield to disabled states on roots and nested parts', async () => {
+  const c = seed();
+  c.semantics.element = 'button';
+  c.states = ['disabled'];
+  c.props.push({ name: 'disabled', type: 'boolean', default: false,
+    bindings: { code: { prop: 'disabled' }, figma: { kind: 'BOOLEAN', property: 'Disabled' } } });
+  const row = (literals: Record<string, string>) => [{ props: ['tone', 'size', 'loud'],
+    rows: [{ values: ['strong', 'lg', 'true'], literals }] }];
+  c.anatomy.root.literals = { ...c.anatomy.root.literals, color: '#008000' };
+  c.anatomy.root.literalsByCombination = row({ color: '#0000ff' });
+  c.anatomy.root.states = { disabled: { color: '{paint.off}' } };
+  c.anatomy.root.parts!.label = {
+    text: 'Sample', literals: { 'background-color': '#008000' },
+    literalsByCombination: row({ 'background-color': '#0000ff' }),
+    states: { disabled: { 'background-color': '{paint.off}' } },
+  };
+  const stateTokens = { ...tokens, primitives: { paint: { off: { $type: 'color', $value: '#ff0000' } } } };
+  const contracts = new Map([[c.id, c]]), inventory = tokenInventoryFromJson([stateTokens.primitives]);
+  const errors: string[] = [];
+  validateContract(c, contracts, errors, inventory);
+  assert.deepEqual(errors, []);
+  const css = emitReact(c, { contracts, icons: new Map(), tokens: inventory });
+  const inline = emitReactInline(c, { contracts, icons: new Map(), tokens: stateTokens });
+  const browser = await chromium.launch();
+  const observed: Array<{ surface: string; match: boolean; disabled: boolean; color: string; background: string }> = [];
+  try {
+    const page = await browser.newPage();
+    for (const surface of ['css', 'inline', 'shadow']) {
+      if (surface === 'shadow') {
+        await page.setContent('<div id="host"></div>');
+        await page.locator('#host').evaluate((host, css) => {
+          host.attachShadow({ mode: 'open' }).innerHTML = `<style>${css}</style><button part="root"><span part="label">Sample</span></button>`;
+        }, shadowCss(c, stateTokens, []));
+      } else {
+        const output = surface === 'css' ? css : { ...inline, css: '' };
+        assert.deepEqual(generatedTypeErrors(c.name, output.tsx), []);
+        await mountGenerated(page, c.name, output.tsx, output.css);
+      }
+      await page.addStyleTag({ content: ':root { --paint-off: #ff0000; }' });
+      for (const [match, disabled] of [[true, false], [true, true], [false, false], [false, true], [true, false]]) {
+        const props = { tone: 'strong', size: match ? 'lg' : 'sm', loud: true, disabled };
+        if (surface === 'shadow') {
+          await page.locator('#host button').evaluate((root, props) => {
+            root.setAttribute('data-tone', props.tone);
+            root.setAttribute('data-size', props.size);
+            root.setAttribute('data-loud', '');
+            (root as HTMLButtonElement).disabled = props.disabled;
+          }, props);
+        } else {
+          await page.evaluate((props) => (window as any).renderSubject(props), props);
+        }
+        const got = await page.locator(surface === 'shadow' ? '#host button' : '#root > button').evaluate((root) => ({
+          color: getComputedStyle(root).color,
+          background: getComputedStyle(root.firstElementChild!).backgroundColor,
+        }));
+        observed.push({ surface, match, disabled, ...got });
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+  for (const got of observed) {
+    const expected = got.disabled ? hex('#ff0000') : hex(got.match ? '#0000ff' : '#008000');
+    assert.equal(got.color, expected, JSON.stringify(got));
+    // Inline React names nested interaction states as an unsupported channel.
+    if (got.surface !== 'inline') assert.equal(got.background, expected, JSON.stringify(got));
+  }
+});
+
+test('combination-only borders paint on roots and nested parts, without painting undrawn rows', async () => {
+  const browser = await chromium.launch();
+  const observed: Array<{ surface: string; target: string; shape: string; match: boolean; width: string; style: string }> = [];
+  try {
+    const page = await browser.newPage();
+    for (const target of ['root', 'label']) for (const shape of ['all', 'left', 'none']) {
+      const c = seed();
+      const part = target === 'root' ? c.anatomy.root : c.anatomy.root.parts!.label;
+      part.literalsByCombination = [{ props: ['tone', 'size', 'loud'], rows: [{
+        values: ['strong', 'lg', 'true'],
+        literals: shape !== 'all' ? { 'border-left-width': '3px', 'border-left-color': '#ff0000' }
+          : { 'border-width': '2px', 'border-color': '#ff0000' },
+      }] }];
+      if (shape === 'none') part.declared = { 'border-style': 'none' };
+      assert.deepEqual(errorsOf(c), []);
+      const contracts = new Map([[c.id, c]]), icons = new Map<string, string>();
+      const css = emitReact(c, { contracts, icons, tokens: tokenInventoryFromJson([tokens]) });
+      const inline = emitReactInline(c, { contracts, icons, tokens });
+      for (const surface of ['css', 'inline', 'shadow']) {
+        if (surface === 'shadow') {
+          await page.setContent('<div id="host"></div>');
+          await page.locator('#host').evaluate((host, css) => {
+            host.attachShadow({ mode: 'open' }).innerHTML = `<style>${css}</style><div part="root"><span part="label">x</span></div>`;
+          }, shadowCss(c, tokens, []));
+        } else {
+          const output = surface === 'css' ? css : { ...inline, css: '' };
+          await mountGenerated(page, c.name, output.tsx, output.css);
+        }
+        for (const match of [true, false, true]) {
+          const props = { tone: 'strong', size: match ? 'lg' : 'sm', loud: true };
+          if (surface === 'shadow') {
+            await page.locator('#host [part="root"]').evaluate((root, props) => {
+              root.setAttribute('data-tone', props.tone);
+              root.setAttribute('data-size', props.size);
+              root.setAttribute('data-loud', '');
+            }, props);
+          } else {
+            await page.evaluate((props) => (window as any).renderSubject(props), props);
+          }
+          const root = page.locator(surface === 'shadow' ? '#host [part="root"]' : '#root > div');
+          const got = await root.evaluate((root, target) => {
+            const style = getComputedStyle(target === 'root' ? root : root.firstElementChild!);
+            return { width: style.borderLeftWidth, style: style.borderLeftStyle };
+          }, target);
+          observed.push({ surface, target, shape, match, ...got });
+        }
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+  for (const got of observed) {
+    const paints = got.match && got.shape !== 'none';
+    assert.equal(got.width, paints ? (got.shape === 'left' ? '3px' : '2px') : '0px', JSON.stringify(got));
+    assert.equal(got.style, paints ? 'solid' : 'none', JSON.stringify(got));
+  }
+});

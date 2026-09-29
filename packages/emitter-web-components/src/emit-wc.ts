@@ -65,6 +65,7 @@ import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '
  */
 import { refuseRetainedRuntime,jointTokenCss } from '@ds-contracts/core';
 import {
+  borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
@@ -310,6 +311,10 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   };
   const rootWithCombo = (combo: Array<[string, string]>, lead: string[] = []) =>
     rootWithConds([...lead, ...combo.map(([ph, value]) => placeholderCond(ph, value))]);
+  // Literal rows have base specificity, so states override them regardless
+  // of axis count. This mirrors generateCss's .root:where(...) selector.
+  const rootWithLiteralCombo = (combo: Array<[string, string]>) =>
+    `${ROOT_SEL}:where(${combo.map(([ph, value]) => placeholderCond(ph, value)).join('')})`;
   const expandRef = (
     where: string,
     refPath: string,
@@ -471,12 +476,15 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     }
   }
   // Beta spike — literalsByCombination on the root: one compound host rule
-  // per row (the multi-placeholder root-token spelling), after the pairs.
+  // per row at base specificity, after the pairs.
   for (const table of root.literalsByCombination ?? []) {
     for (const row of table.rows) {
       pairRules.push({
-        selector: rootWithCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string])),
-        decls: Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+        selector: rootWithLiteralCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string])),
+        decls: [
+          ...Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+          ...borderStyleDecls(row.literals, 'literals', root.declared),
+        ],
       });
     }
   }
@@ -688,8 +696,11 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
     for (const table of part.literalsByCombination ?? []) {
       for (const row of table.rows) {
         subRules.push([
-          `${rootWithCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string]))} ${partSel(name)}`,
-          Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+          `${rootWithLiteralCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string]))} ${partSel(name)}`,
+          [
+            ...Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+            ...borderStyleDecls(row.literals, 'literals', part.declared),
+          ],
         ]);
       }
     }
