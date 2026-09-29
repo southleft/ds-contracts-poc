@@ -54,7 +54,14 @@ import { filledPathIssue } from '../../../scripts/contract-schema.js';
  *   REGULAR_POLYGON | ELLIPSE | rotated RECTANGLE   shape (dump v1.3, #42 — kind, intrinsic size, CSS-degrees rotation,
  *     + absoluteBoundingBox/rotation/constraints      ABSOLUTE placement offsets vs the parent box); VECTOR/STAR/LINE/
  *                                                     BOOLEAN_OPERATION stay named receipts (arbitrary paths)
- *   style.lineHeightPx (lineHeightUnit PIXELS)      text.lineHeight (dump v1.3; non-pixel units stay receipts)
+ *   style.lineHeightPx (lineHeightUnit PIXELS)      text.lineHeight (dump v1.3)
+ *   style.lineHeightPercentFontSize (FONT_SIZE_%)   text.lineHeight = pct × fontSize / 100 + lineHeightUnit PERCENT (v1.44)
+ *   style.lineHeightPx (INTRINSIC_%)                text.lineHeight + lineHeightUnit AUTO (dump v1.44)
+ *   style.textDecoration UNDERLINE|STRIKETHROUGH    text.textDecoration (dump v1.44)
+ *   strokeAlign INSIDE|CENTER|OUTSIDE               strokeAlign (INSIDE since v1.43, all three since v1.44)
+ *   layoutPositioning ABSOLUTE, or a parent without abs { x, y, right, bottom, width, height, constraints }
+ *     auto-layout, + both absoluteBoundingBoxes       (dump v1.44 — the plugin's v1.7 channel, same spelling)
+ *   constraints LEFT_RIGHT / TOP_BOTTOM             STRETCH (dump v1.44 — the plugin's v1.13 spelling)
  *   INSTANCE children                               NOT recursed — instance internals belong to the child contract
  *   components[componentId].key /                   instanceKey / instanceSetKey (dump v1.5 — rename-safe identity
  *     componentSets[setId].key                        the session-linking resolver matches against contract anchors)
@@ -148,12 +155,18 @@ export interface RestTypeStyle {
   fontSize?: number;
   fontStyle?: string;
   italic?: boolean;
-  // Read ONLY to name their loss (dump v1 has no projection for them):
   letterSpacing?: number;
   textCase?: string;
+  /** dump v1.44: UNDERLINE | STRIKETHROUGH → text.textDecoration. */
   textDecoration?: string;
+  /** PIXELS | FONT_SIZE_% (PERCENT) | INTRINSIC_% (AUTO). */
   lineHeightUnit?: string;
+  /** The line height Figma DRAWS, in px, whatever the unit. */
   lineHeightPx?: number;
+  /** dump v1.44: the PERCENT value against the node's font size (150 = 1.5×),
+   *  present under FONT_SIZE_%. (`lineHeightPercent` is the deprecated
+   *  percent of the intrinsic height and is not read.) */
+  lineHeightPercentFontSize?: number;
   /** dump v1.31: LEFT | CENTER | RIGHT | JUSTIFIED → text.textAlign. */
   textAlignHorizontal?: string;
   /** dump v1.36: NONE | HEIGHT | WIDTH_AND_HEIGHT | TRUNCATE → text.textAutoResize. */
@@ -469,6 +482,11 @@ export type MapDegradationCode =
   | 'paint-stack-truncated'
   | 'stroke-weights-nonuniform'
   | 'stroke-style-unsupported'
+  // dump v1.44 (plugin parity, dump.plugin.js since v1.11/v1.13): a
+  // constraint value outside both APIs' vocabularies is OMITTED by name, and
+  // a CENTER stroke whose lowering is limited is receipted under its own code.
+  | 'constraint-spelling-unknown'
+  | 'stroke-align-unsupported'
   | 'blend-mode-unsupported'
   | 'rotation-unsupported'
   | 'vector-geometry-unsupported'
@@ -590,6 +608,43 @@ const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
 
 const isAlias = (v: unknown): v is RestVariableAlias =>
   typeof v === 'object' && v !== null && (v as RestVariableAlias).type === 'VARIABLE_ALIAS';
+
+/** The CENTER-stroke receipt, spelled identically by dump.plugin.js. */
+export const STROKE_ALIGN_CENTER_RECEIPT =
+  'strokeAlign CENTER — a centered stroke draws half its weight inside the box and half outside; a CSS border draws wholly inward and an outline wholly outward. The alignment is CAPTURED (dump v1.11); the proposer lowers it to an outline centered on the edge (outline-offset: minus half the weight) where the stroke takes no layout space, and otherwise refuses the lowering by name: the node renders an INSIDE border';
+
+/** dump v1.44 — ONE constraint spelling for both readers. REST spells a
+ *  stretch LEFT_RIGHT / TOP_BOTTOM where the plugin reader (dump.plugin.js
+ *  CONSTRAINT_H / CONSTRAINT_V, dump v1.13) writes STRETCH, and the proposer
+ *  (carryAbsPlacement) reads only the plugin spelling — so a REST stretch
+ *  was ledgered as "no carried offset spelling" and the box rendered in
+ *  flow. Both APIs' words are accepted (the Plugin API's MIN/MAX too) so
+ *  this reads either transport; anything else returns undefined and the
+ *  caller names it (constraint-spelling-unknown), never a guess. */
+const CONSTRAINT_H: Record<string, string> = {
+  LEFT: 'LEFT', MIN: 'LEFT', RIGHT: 'RIGHT', MAX: 'RIGHT', CENTER: 'CENTER',
+  LEFT_RIGHT: 'STRETCH', STRETCH: 'STRETCH', SCALE: 'SCALE',
+};
+const CONSTRAINT_V: Record<string, string> = {
+  TOP: 'TOP', MIN: 'TOP', BOTTOM: 'BOTTOM', MAX: 'BOTTOM', CENTER: 'CENTER',
+  TOP_BOTTOM: 'STRETCH', STRETCH: 'STRETCH', SCALE: 'SCALE',
+};
+function normalizeConstraints(
+  c: { horizontal: string; vertical: string } | undefined,
+  ctx: Ctx,
+  nodePath: string,
+): { horizontal: string; vertical: string } | undefined {
+  if (!c) return undefined;
+  const horizontal = CONSTRAINT_H[c.horizontal];
+  const vertical = CONSTRAINT_V[c.vertical];
+  if (horizontal && vertical) return { horizontal, vertical };
+  ctx.report.degradations.push({
+    code: 'constraint-spelling-unknown',
+    nodePath,
+    message: `constraints ${c.horizontal}x${c.vertical} has no dump spelling — the field is OMITTED, and propose reads an absent field as LEFTxTOP`,
+  });
+  return undefined;
+}
 
 interface Ctx {
   varNameById: Map<string, string>;
@@ -1067,8 +1122,41 @@ function mapCornerRadius(node: RestNode, ctx: Ctx, nodePath: string): number | u
   return undefined;
 }
 
+/** dump v1.44 — the line height one line of this node DRAWS, in px, plus the
+ *  designer's unit when it is not PIXELS. Twin of the same read in
+ *  extract/figma/dump.plugin.js: PIXELS verbatim; PERCENT (REST
+ *  'FONT_SIZE_%') resolved against the node's own font size with the SAME
+ *  arithmetic the plugin uses (value × fontSize / 100 — the letterSpacing
+ *  precedent), falling back to REST's own lineHeightPx when the percent is
+ *  not reported; AUTO (REST 'INTRINSIC_%') carries the pixel value Figma
+ *  reports for the font's own line height — an observed number the Plugin
+ *  API does not expose (there the unit rides alone). `unknown` is a unit
+ *  outside all three, receipted by the caller. */
+function restLineHeight(s: RestTypeStyle): { px?: number; unit?: 'PERCENT' | 'AUTO'; unknown?: string } {
+  const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+  if (s.lineHeightUnit === undefined) return {};
+  if (s.lineHeightUnit === 'PIXELS') return finite(s.lineHeightPx) ? { px: s.lineHeightPx } : {};
+  if (s.lineHeightUnit === 'FONT_SIZE_%') {
+    if (finite(s.lineHeightPercentFontSize) && finite(s.fontSize)) {
+      return { px: s.lineHeightPercentFontSize * s.fontSize / 100, unit: 'PERCENT' };
+    }
+    return finite(s.lineHeightPx) ? { px: s.lineHeightPx, unit: 'PERCENT' } : { unit: 'PERCENT' };
+  }
+  if (s.lineHeightUnit === 'INTRINSIC_%') {
+    return finite(s.lineHeightPx) && s.lineHeightPx > 0 ? { px: s.lineHeightPx, unit: 'AUTO' } : { unit: 'AUTO' };
+  }
+  return { unknown: s.lineHeightUnit };
+}
+
 function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   const s = node.style ?? {};
+  // dump v1.44 (plugin parity): the Plugin API reads the face NAME verbatim
+  // ("Medium Italic"), so the slant survives there whenever the face has one.
+  // REST reports a weight NUMBER, an `italic` flag AND the face name; the
+  // slant is read from either, so a response that names an italic face
+  // without the flag (or a weight outside the table) no longer turns it
+  // upright.
+  const slanted = s.italic === true || /italic|oblique/i.test(s.fontStyle ?? '');
   let fontStyle: string | undefined =
     s.fontWeight !== undefined ? FONT_STYLE_BY_WEIGHT[s.fontWeight] : undefined;
   if (fontStyle === undefined) {
@@ -1078,7 +1166,14 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     ctx.report.notes.push(
       `${nodePath}: fontWeight ${s.fontWeight ?? '(absent)'} is outside the generator's weight table — fontStyle "${fontStyle}" passed through`,
     );
-  } else if (s.italic === true && !/\bItalic\b/.test(fontStyle)) {
+    if (slanted && !/italic/i.test(fontStyle)) {
+      // The flag says italic and the face name does not (absent, or an
+      // "Oblique" face): the slant is spelled the way the proposer reads it
+      // (fontStyleWeight keys on a trailing "Italic").
+      const upright = fontStyle.replace(/\s*oblique\s*/i, ' ').trim();
+      fontStyle = upright === '' || upright === 'Regular' ? 'Italic' : `${upright} Italic`;
+    }
+  } else if (slanted && !/\bItalic\b/.test(fontStyle)) {
     // FC-FONT-SLANT-NOT-CARRIED, the RETURN leg. The Plugin API reader takes
     // `fontName.style` verbatim, so it recovers "Semi Bold Italic" as written.
     // REST does NOT report the face name here — it reports the weight NUMBER
@@ -1133,11 +1228,12 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
       message: 'lineHeight has no single uniform variable binding — legacy stamp not substituted',
     });
   } else if (typeof lhVar === 'string' && lhVar !== '') text.lineHeightVar = lhVar;
-  // dump v1.3: PIXEL line heights are CAPTURED (text.lineHeight); other
-  // explicit units stay receipts below.
-  if (s.lineHeightUnit === 'PIXELS' && typeof s.lineHeightPx === 'number') {
-    text.lineHeight = s.lineHeightPx;
-  }
+  // dump v1.3: PIXEL line heights are CAPTURED (text.lineHeight). dump v1.44:
+  // PERCENT and AUTO carry too — the drawn pixel value, with the unit beside
+  // it (restLineHeight); only a unit outside all three stays a receipt below.
+  const lineHeight = restLineHeight(s);
+  if (lineHeight.px !== undefined) text.lineHeight = lineHeight.px;
+  if (lineHeight.unit !== undefined) text.lineHeightUnit = lineHeight.unit;
   // dump v1.31: the font FAMILY, verbatim (REST style.fontFamily ≡ Plugin
   // fontName.family). Inter is copied too — propose treats Inter as the
   // pipeline's own default and carries any other family as declared
@@ -1190,9 +1286,13 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // fact behind CSS text-transform); other spellings stay receipts.
   if (s.textCase === 'UPPER' || s.textCase === 'LOWER' || s.textCase === 'TITLE') text.textCase = s.textCase;
   else if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
-  if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
-  if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%' && s.lineHeightUnit !== 'PIXELS') {
-    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit} — only PIXELS carries, dump v1.3)`);
+  // dump v1.44: UNDERLINE / STRIKETHROUGH are CAPTURED (text.textDecoration —
+  // the canvas fact behind CSS text-decoration-line); another spelling keeps
+  // its receipt.
+  if (s.textDecoration === 'UNDERLINE' || s.textDecoration === 'STRIKETHROUGH') text.textDecoration = s.textDecoration;
+  else if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
+  if (lineHeight.unknown !== undefined) {
+    channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${lineHeight.unknown} — only PIXELS, FONT_SIZE_% and INTRINSIC_% carry, dump v1.44)`);
   }
   if (channels.length > 0) {
     ctx.report.degradations.push({
@@ -1247,7 +1347,13 @@ function mapSwapInstances(root: RestNode, property: string): DumpFixedSwap['obse
         if (parentSize) row.parentSize = parentSize;
         if (Array.isArray(matrix) && matrix.length === 2 && matrix.every(r => Array.isArray(r) && r.length === 3 && r.every(Number.isFinite)))
           row.relativeTransform = matrix.map(r => [...r]);
-        if (node.constraints) row.constraints = { ...node.constraints };
+        // dump v1.44: the plugin twin (dumpSwapInstances) normalizes MIN/MAX
+        // and copies anything else verbatim; REST's own stretch spelling is
+        // normalized the same way here so the two readers agree.
+        if (node.constraints) row.constraints = {
+          horizontal: CONSTRAINT_H[node.constraints.horizontal] ?? node.constraints.horizontal,
+          vertical: CONSTRAINT_V[node.constraints.vertical] ?? node.constraints.vertical,
+        };
         found.push(row);
       }
       visit(node, next);
@@ -1318,14 +1424,22 @@ function mapShape(
       shape.x = t[0]![2]!; shape.y = t[1]![2]!;
       shape.right = parentBox.width - shape.x - width;
       shape.bottom = parentBox.height - shape.y - height;
-      if (node.constraints) shape.constraints = { ...node.constraints };
+      const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
+      if (constraints) shape.constraints = constraints;
     }
     return shape;
   }
   const kind = SHAPE_KIND_BY_TYPE[node.type];
   if (kind === undefined) return undefined;
   const rotation = restRotationToCssDeg(node.rotation);
-  if (kind === 'rect' && rotation === 0) return undefined; // ordinary box — existing channels
+  // dump v1.44 (dump.plugin.js dumpShape parity, plugin dump v1.7): an
+  // unrotated RECTANGLE is an ordinary box only where auto-layout carries its
+  // size. Outside auto-layout (slider/progress tracks, dividers pinned in a
+  // free frame) or when ABSOLUTE, no other channel carries its width/height,
+  // so it rides the shape channel — on this route it collapsed to 0×0 with
+  // only its fill and radius surviving.
+  const parentAuto = parent?.layoutMode !== undefined && parent.layoutMode !== 'NONE';
+  if (kind === 'rect' && rotation === 0 && parentAuto && node.layoutPositioning !== 'ABSOLUTE') return undefined; // ordinary box — existing channels
   const box = node.absoluteBoundingBox;
   if (!box) {
     ctx.report.degradations.push({
@@ -1349,7 +1463,12 @@ function mapShape(
   const height = round2(swapped ? box.width : box.height);
   const shape: DumpShape = { kind, width, height };
   if (rotation !== 0) shape.rotation = rotation;
-  if (node.layoutPositioning === 'ABSOLUTE' && parentBox) {
+  // dump v1.44 (plugin parity, plugin dump v1.7): a shape child of a
+  // NON-auto-layout parent is placed by x/y exactly like an ABSOLUTE one —
+  // layoutPositioning only means something inside auto-layout. Before, only
+  // ABSOLUTE shapes were placed here, so ring ellipses and tracks in a free
+  // frame kept their size and lost their position.
+  if ((node.layoutPositioning === 'ABSOLUTE' || (parent && !parentAuto)) && parentBox) {
     // Center-preserving intrinsic top-left: rotating the intrinsic box about
     // its center reproduces the captured bounding box exactly.
     const cx = box.x - parentBox.x + box.width / 2;
@@ -1358,9 +1477,8 @@ function mapShape(
     shape.y = round2(cy - height / 2);
     shape.right = round2(parentBox.width - cx - width / 2);
     shape.bottom = round2(parentBox.height - cy - height / 2);
-    if (node.constraints) {
-      shape.constraints = { horizontal: node.constraints.horizontal, vertical: node.constraints.vertical };
-    }
+    const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
+    if (constraints) shape.constraints = constraints;
   }
   return shape;
 }
@@ -1439,11 +1557,23 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
       message: `strokeDashes [${node.strokeDashes.join(', ')}] — dashed strokes have no dump v1 projection; stroke renders solid`,
     });
   }
-  if (strokeDetail && node.strokeAlign !== undefined && node.strokeAlign !== 'INSIDE') {
+  // dump v1.44: every INSIDE/CENTER/OUTSIDE alignment is CARRIED (mapNode).
+  // CENTER keeps the plugin reader's own receipt code: the alignment is
+  // captured, and the proposer can lower it only where the stroke takes no
+  // layout space (an outline centred on the edge); elsewhere it names the
+  // INSIDE-border approximation. Twin of dump.plugin.js (stroke-align-
+  // unsupported). A spelling outside the three is not carried and says so.
+  if (strokeDetail && node.strokeAlign === 'CENTER') {
+    ctx.report.degradations.push({
+      code: 'stroke-align-unsupported',
+      nodePath,
+      message: STROKE_ALIGN_CENTER_RECEIPT,
+    });
+  } else if (strokeDetail && node.strokeAlign !== undefined && node.strokeAlign !== 'INSIDE' && node.strokeAlign !== 'OUTSIDE') {
     ctx.report.degradations.push({
       code: 'stroke-style-unsupported',
       nodePath,
-      message: `strokeAlign ${node.strokeAlign} — dump consumers render INSIDE strokes (CSS borders); alignment dropped`,
+      message: `strokeAlign ${node.strokeAlign} — not an INSIDE/CENTER/OUTSIDE spelling; alignment not captured`,
     });
   }
   // Literal min/max sizing is CARRIED since dump v1.4 (mapNode) — no receipt.
@@ -1698,8 +1828,12 @@ function mapNode(
     out.stroke = stroke;
     // Preserve an observed INSIDE, not an assumed default. State border
     // replacement requires this fact on both the resting and state node.
-    // Other alignments retain their existing named REST capture limitation.
-    if (node.strokeAlign === 'INSIDE') out.strokeAlign = node.strokeAlign;
+    // dump v1.44 (dump.plugin.js parity, plugin dump v1.11): EVERY observed
+    // alignment is carried — OUTSIDE lowers to the outline vocabulary
+    // downstream and CENTER is decided (and, where it cannot lower, named)
+    // by the proposer. Before, only INSIDE carried on this route and an
+    // OUTSIDE ring drew INWARD as a border over the content.
+    if (node.strokeAlign === 'INSIDE' || node.strokeAlign === 'CENTER' || node.strokeAlign === 'OUTSIDE') out.strokeAlign = node.strokeAlign;
     // dump v1.34: sides that differ ride `strokeWeights` and the uniform
     // `strokeWeight` is NOT written beside them — REST reports strokeWeight 0
     // for sides [1, 0, 1, 0], and a consumer reading that 0 draws a correctly
@@ -1725,12 +1859,35 @@ function mapNode(
   }
   const shape = mapShape(node, ctx, nodePath, parentBox, parent);
   if (shape) out.shape = shape;
+  const parentAutoLayout = parent?.layoutMode !== undefined && parent.layoutMode !== 'NONE';
+  // dump v1.44 — ABSOLUTE placement for EVERY node type (FRAME / TEXT /
+  // INSTANCE / GROUP …), the plugin's dump v1.7 `abs` channel, spelled
+  // exactly as dump.plugin.js spells it: center-preserving offsets of the
+  // node's bounding box inside its parent's box, the box's own size, and the
+  // normalized constraints. Captured when the node is out of flow
+  // (layoutPositioning ABSOLUTE) or its parent is not auto-layout (where
+  // every child is placed by x/y). Until now this was a named REST capture
+  // gap: a corner-pinned badge, a free-frame overlay or an ABSOLUTE divider
+  // re-entered the flow and rendered in line. Shapes keep their own
+  // placement channel (`shape`), exactly as in the plugin.
+  const absolutePlaced = node.layoutPositioning === 'ABSOLUTE' || (parent !== null && !parentAutoLayout);
+  if (!shape && absolutePlaced && node.absoluteBoundingBox && parentBox) {
+    const bb = node.absoluteBoundingBox, pb = parentBox;
+    const cx = bb.x - pb.x + bb.width / 2, cy = bb.y - pb.y + bb.height / 2;
+    const abs: NonNullable<DumpNode['abs']> = {
+      x: round2(cx - bb.width / 2), y: round2(cy - bb.height / 2),
+      right: round2(pb.width - cx - bb.width / 2), bottom: round2(pb.height - cy - bb.height / 2),
+      width: round2(bb.width), height: round2(bb.height),
+    };
+    const constraints = normalizeConstraints(node.constraints, ctx, nodePath);
+    if (constraints) abs.constraints = constraints;
+    out.abs = abs;
+  }
   // REST now carries the plugin's existing fixedSize channel for the same
   // bounded class: an in-flow, non-auto-layout box inside auto-layout.
   // Explicit FIXED sizing is evidence; an omitted sizing field is not.
-  const parentAutoLayout = parent?.layoutMode !== undefined && parent.layoutMode !== 'NONE';
   const nodeAutoLayout = node.layoutMode !== undefined && node.layoutMode !== 'NONE';
-  if (!shape && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE' &&
+  if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE' &&
       parentAutoLayout && !nodeAutoLayout && node.layoutPositioning !== 'ABSOLUTE' && node.absoluteBoundingBox) {
     const hFixed = node.layoutSizingHorizontal === 'FIXED';
     const vFixed = node.layoutSizingVertical === 'FIXED';
@@ -1983,8 +2140,13 @@ function mapNode(
     // Keep its reference and swap binding; its private chrome belongs to the
     // selected child definition, just as it does on the ordinary instance path.
     if (out.propRefs?.mainComponent === undefined && (node.children?.length ?? 0) > 0 && node.children!.every(child => staticContent(child, 1))) {
+      const root = mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed content]`, parentBox, parent);
+      // The observed content is compared across every use of the instance
+      // (propose observedStubContent); WHERE a use sits is the instance's own
+      // `abs`, never a fact of its content.
+      delete root.abs;
       out.instanceContent = {
-        root: mapNode({...node, type: 'FRAME'}, ctx, `${nodePath}/[observed content]`, parentBox, parent),
+        root,
         propertyTypes: Object.fromEntries(Object.entries(node.componentProperties ?? {}).map(([key, value]) => [key, value.type])),
       };
     }
@@ -2019,7 +2181,14 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.43';
+export const REST_DUMP_VERSION = '1.44';
+// 1.44: plugin-reader parity for placement and text/stroke detail — `abs` on
+//       every out-of-flow or free-parent node, unrotated RECTANGLE shapes and
+//       shape placement in free parents, constraints normalized to the plugin
+//       spelling (LEFT_RIGHT/TOP_BOTTOM → STRETCH), PERCENT and AUTO line
+//       heights as drawn pixels plus `lineHeightUnit`, `textDecoration`,
+//       the italic face read from the face name as well as the flag, and
+//       OUTSIDE/CENTER stroke alignment carried as read.
 // 1.43: observed LEFT text alignment and explicit INSIDE stroke alignment.
 // 1.42: uniform native font-weight binding identity and observed numeric weight.
 //       Consumer modes and selected alias chains remain plugin-only evidence.
@@ -2048,15 +2217,21 @@ export const REST_DUMP_VERSION = '1.43';
 // lineHeightVar), the same fields dump.plugin.js has carried since v1.22–1.29.
 
 const REST_CAPTURE_GAPS: readonly string[] = [
-  'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
+  // 'absolute placement on non-shape nodes (dump v1.7)' left this list in
+  // dump v1.44: REST returns layoutPositioning, constraints and both
+  // absoluteBoundingBoxes, so `abs` is captured here (mapNode) exactly as the
+  // plugin spells it.
   'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
   // 'instance text overrides (dump v1.10 textOverrides)' left this list in
   // dump v1.31: REST returns overrides[] AND the instance subtree, so the
   // channel is captured here (mapNode, INSTANCE branch) — the old line was a
   // read limit nobody had measured, not a transport fact.
-  'non-INSIDE strokeAlign (dump v1.11): not captured on this route — OUTSIDE/CENTER alignment remains a named loss; only explicit INSIDE is carried',
+  // 'non-INSIDE strokeAlign (dump v1.11)' left this list in dump v1.44:
+  // REST reports every alignment, and OUTSIDE/CENTER are carried as read.
   'layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line',
-  'the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types',
+  // 'the full constraints map (dump v1.13)' left this list in dump v1.44:
+  // `abs` and `shape` carry all five values on every node type, REST's
+  // LEFT_RIGHT / TOP_BOTTOM normalized to the plugin's STRETCH.
 ];
 
 /** The variables line of `captureGaps` — ONLY when no response was passed,

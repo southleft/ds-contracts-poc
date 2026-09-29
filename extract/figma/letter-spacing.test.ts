@@ -33,10 +33,11 @@ test('the REST reader carries pixel letter spacing, including observed zero, and
   const none = mapped([{ letterSpacing: 0 }, {}]);
   assert.deepEqual(none.texts.map(t => 'letterSpacing' in t), [true, false], 'an explicit zero is observed; absence is not captured');
   assert.equal(none.texts[0].letterSpacing, 0);
-  // Channels that still have no projection keep their receipt.
-  const other = mapped([{ letterSpacing: 1, textDecoration: 'UNDERLINE' }, { letterSpacing: 1 }]);
+  // Channels that still have no projection keep their receipt. (textDecoration
+  // UNDERLINE, the example here until REST dump v1.44, is carried now.)
+  const other = mapped([{ letterSpacing: 1, textCase: 'SMALL_CAPS' }, { letterSpacing: 1 }]);
   assert.equal(other.receipts.length, 1);
-  assert.match(other.receipts[0].message, /textDecoration UNDERLINE/);
+  assert.match(other.receipts[0].message, /textCase SMALL_CAPS/);
   assert.doesNotMatch(other.receipts[0].message, /letterSpacing/);
 });
 
@@ -95,7 +96,7 @@ test('the plugin reader resolves PIXELS and PERCENT to pixels and keeps a receip
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['TrackedBadge'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string } };
-  assert.equal(dumps._provenance.dumpVersion, '1.47');
+  assert.equal(dumps._provenance.dumpVersion, '1.48');
   const texts = dumps.TrackedBadge.variants.map(v => v.children![0].text!);
   // The dump was built in the VM's realm; copy the values into this one.
   assert.deepEqual(Array.from(texts, t => t.letterSpacing), [1, 2, undefined, 0], '10 % of a 20 px font is 2 px; zero and mixed remain distinct');

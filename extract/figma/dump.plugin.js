@@ -1,4 +1,7 @@
 // Design-side ANATOMY dump — the canonical node-tree capture.
+// v1.48 carries PERCENT line heights as drawn pixels (+ lineHeightUnit PERCENT /
+// AUTO) and textDecoration UNDERLINE / STRIKETHROUGH, in the spelling of the
+// REST twin (extract/figma/rest/map.ts, REST dump v1.44).
 // v1.47 preserves observed LEFT text alignment independently of CSS defaults.
 //
 // dump v1.31 (Phase 2 fix round 2, 2026-08-23) — ten facts the Phase 2 exam
@@ -125,9 +128,11 @@
 //                      was wrong on Untitled UI's Avatar focus ring. OUTSIDE
 //                      lowers to the CSS outline vocabulary (which draws
 //                      outside the border box and does not affect layout),
-//                      INSIDE to border; CENTER is refused BY NAME
-//                      (stroke-align-unsupported) because CSS has no
-//                      straddling spelling.
+//                      INSIDE to border; CENTER keeps its receipt
+//                      (stroke-align-unsupported) — the proposer lowers it
+//                      to an outline pulled back by half the weight where
+//                      the stroke takes no layout space (dump v1.48) and
+//                      names the INSIDE-border approximation elsewhere.
 //   fillWidth          layoutSizingHorizontal === 'FILL' — canvas projection of
 //                      grow (row parents) / align:stretch (column parents)
 //   text               characters, fontSize, fontStyle, named TextStyle (token
@@ -1239,14 +1244,17 @@ async function dumpNode(node, nodePath, parent) {
       if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
         degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] (CSS border-style: dashed) — dashed strokes have no dump v1 projection; the stroke renders as border-style: solid');
       }
-      // OUTSIDE and INSIDE both LOWER (outline / border). CENTER does not:
-      // it straddles the edge, half the weight each side, and CSS has no
-      // spelling for that — `border` draws wholly inward and `outline`
-      // wholly outward. The FACT is carried above either way; what is
-      // refused is the lowering, and it is refused under its OWN code so
-      // the boundary is countable rather than folded into a shared one.
+      // OUTSIDE and INSIDE both LOWER (outline / border). CENTER straddles
+      // the edge, half the weight each side: `border` draws wholly inward and
+      // `outline` wholly outward. Since dump v1.48 the proposer lowers it to
+      // an outline pulled back by half the weight wherever the stroke takes
+      // no layout space, and names the INSIDE-border approximation
+      // elsewhere. The FACT is carried above either way; the receipt keeps
+      // its OWN code so the boundary stays countable, and it is spelled
+      // exactly as the REST twin spells it (STROKE_ALIGN_CENTER_RECEIPT in
+      // extract/figma/rest/map.ts).
       if (node.strokeAlign === 'CENTER' && (!shape || shape.kind !== 'stroked-path')) {
-        degrade('stroke-align-unsupported', nodePath, 'strokeAlign CENTER — a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border');
+        degrade('stroke-align-unsupported', nodePath, 'strokeAlign CENTER — a centered stroke draws half its weight inside the box and half outside; a CSS border draws wholly inward and an outline wholly outward. The alignment is CAPTURED (dump v1.11); the proposer lowers it to an outline centered on the edge (outline-offset: minus half the weight) where the stroke takes no layout space, and otherwise refuses the lowering by name: the node renders an INSIDE border');
       }
     }
   }
@@ -1392,12 +1400,19 @@ async function dumpNode(node, nodePath, parent) {
   }
 
   if (node.type === 'TEXT') {
-    // dump v1.3: PIXEL line heights are CAPTURED; other explicit units stay
-    // receipts below.
+    // dump v1.3: PIXEL line heights are CAPTURED. dump v1.48 (REST v1.44
+    // twin, extract/figma/rest/map.ts restLineHeight): a PERCENT line height
+    // is resolved against the node's own font size with the same arithmetic
+    // REST uses (value × fontSize / 100 — the letterSpacing precedent) and
+    // the unit rides beside it; AUTO carries its unit alone — the Plugin API
+    // reports no number for the font's own line height (REST does, and
+    // carries it). A mixed value carries nothing.
+    const lh = node.lineHeight !== figma.mixed && node.lineHeight ? node.lineHeight : null;
     const pxLineHeight =
-      node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit === 'PIXELS'
-        ? node.lineHeight.value
-        : null;
+      lh && lh.unit === 'PIXELS' ? lh.value
+        : lh && lh.unit === 'PERCENT' && typeof lh.value === 'number' && typeof node.fontSize === 'number' ? lh.value * node.fontSize / 100
+          : null;
+    const lineHeightUnit = lh && (lh.unit === 'PERCENT' || lh.unit === 'AUTO') ? lh.unit : null;
     const channels = [];
     // R8 (2026-08-22): every text receipt names its CSS CHANNEL, not only the
     // Figma property — the canvas gate (conformance/canvas.ts) and the
@@ -1422,12 +1437,19 @@ async function dumpNode(node, nodePath, parent) {
     if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL' && !TEXT_CASE_CAPTURED[node.textCase]) {
       channels.push('textCase ' + node.textCase + ' (CSS text-transform has no small-caps value — font-variant-caps: small-caps is the nearest CSS spelling and is not a contract channel)');
     }
-    if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') {
-      const DECORATION_CSS = { UNDERLINE: 'underline', STRIKETHROUGH: 'line-through' };
-      channels.push('textDecoration ' + node.textDecoration + ' (the canvas twin of CSS text-decoration-line: ' + (DECORATION_CSS[node.textDecoration] || String(node.textDecoration).toLowerCase()) + ' — drawn, not read back)');
+    // dump v1.48: UNDERLINE / STRIKETHROUGH are CAPTURED (text.textDecoration
+    // below — the canvas fact behind CSS text-decoration-line); a mixed value
+    // or another spelling keeps its receipt.
+    const TEXT_DECORATION_CAPTURED = { UNDERLINE: true, STRIKETHROUGH: true };
+    if (node.textDecoration === figma.mixed) {
+      channels.push('textDecoration mixed (the canvas twin of CSS text-decoration-line — differs across character ranges; no single value on this node)');
+    } else if (node.textDecoration && node.textDecoration !== 'NONE' && !TEXT_DECORATION_CAPTURED[node.textDecoration]) {
+      channels.push('textDecoration ' + node.textDecoration + ' (the canvas twin of CSS text-decoration-line: ' + String(node.textDecoration).toLowerCase() + ' — drawn, not read back)');
     }
-    if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO' && node.lineHeight.unit !== 'PIXELS') {
-      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' (CSS line-height — only PIXELS carries, dump v1.3; a PERCENT line height has no carried spelling)');
+    if (lh && lh.unit !== 'AUTO' && lh.unit !== 'PIXELS' && lh.unit !== 'PERCENT') {
+      channels.push('lineHeight ' + lh.value + lh.unit + ' (CSS line-height — only PIXELS, PERCENT and AUTO carry, dump v1.48)');
+    } else if (lh && lh.unit === 'PERCENT' && typeof pxLineHeight !== 'number') {
+      channels.push('lineHeight ' + lh.value + '% (CSS line-height — a PERCENT line height with no single font size on this node has no single pixel value)');
     }
     if (typeof node.paragraphSpacing === 'number' && node.paragraphSpacing !== 0) {
       channels.push('paragraphSpacing ' + node.paragraphSpacing + 'px (no CSS channel on one text node — paragraph spacing is a block margin between paragraphs, not a contract text channel)');
@@ -1454,9 +1476,11 @@ async function dumpNode(node, nodePath, parent) {
       fontSize: typeof node.fontSize === 'number' ? node.fontSize : null,
       fontStyle: node.fontName === figma.mixed ? null : node.fontName.style,
     };
-    if (typeof pxLineHeight === 'number') text.lineHeight = pxLineHeight;
+    if (typeof pxLineHeight === 'number' && isFinite(pxLineHeight)) text.lineHeight = pxLineHeight;
+    if (lineHeightUnit) text.lineHeightUnit = lineHeightUnit;
     if (typeof pxLetterSpacing === 'number' && isFinite(pxLetterSpacing)) text.letterSpacing = pxLetterSpacing;
     if (node.textCase !== figma.mixed && TEXT_CASE_CAPTURED[node.textCase]) text.textCase = node.textCase;
+    if (node.textDecoration !== figma.mixed && TEXT_DECORATION_CAPTURED[node.textDecoration]) text.textDecoration = node.textDecoration;
     // dump v1.31: the font FAMILY, verbatim (REST twin: style.fontFamily).
     // Inter is copied too — propose treats Inter as the pipeline default and
     // carries any other family as declared font-family; omitting Inter would
@@ -1784,7 +1808,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.47',
+    dumpVersion: '1.48',
   },
 };
 dumps._degradations = degradations;
