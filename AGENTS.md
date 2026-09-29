@@ -2,9 +2,16 @@
 
 ## Current product direction
 
-Read [docs/CURRENT.md](docs/CURRENT.md) before choosing development work. It is
-the active outcome-first architecture and work order, shared by the playground
-and documentation site. Numbered plans and handoffs are historical context,
+**The active goal is [docs/GOAL.md](docs/GOAL.md) (owner-approved 2026-09-28):
+Beta 1 on real Figma files and real codebases.** Read it before choosing any
+work. It freezes the six V1 criteria, new benchmark cells, update channels and
+plan documents, and caps work at two lanes with one PR each. Every task cites a
+smoke-gate failure, a cold-start blocker, a real-design-system miss or an
+outside user's report. Write American English.
+
+[docs/CURRENT.md](docs/CURRENT.md) remains the record of the V1 architecture,
+benchmark and regression gates; it is no longer the work order. It is shared by
+the playground and documentation site. Numbered plans and handoffs are historical context,
 not competing current instructions. Preserve signed evidence and owner-only
 grades; do not equate a rendering draft or a green internal gate with a complete
 autonomous journey. Verify the actual checkout, source revision and PR state.

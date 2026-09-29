@@ -2,6 +2,10 @@
 
 **Public project status · updated 2026-09-26 · V1 is not complete.**
 
+> **2026-09-28: the active goal is [Beta 1 on real Figma files and real
+> codebases](GOAL.md).** The V1 criteria below are frozen as a regression
+> record; the benchmark keeps running in CI as a guard, not a target.
+
 V1 targets React. Design System Contracts observes a team's original code or native Figma components, derives supported contracts and generates editable output through deterministic shared rules. Composed components, two-way updates and repeatable recovery are required outcomes. Lit/Web Components are parked for V1.1.
 
 This page is the current acceptance ledger and work order, also rendered at `/system`. Start with the [user journey guide](USER-JOURNEYS.md) for installation and application steps, and the [React V1 scope](REACT-V1-SCOPE.md) for the required cohort. Earlier measurements remain evidence; they do not override current failures.
