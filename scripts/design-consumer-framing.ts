@@ -44,6 +44,37 @@ export const enclosingFrame = (box: FrameBox): FrameBox => ({
   width: Math.ceil(box.x + box.width) - Math.floor(box.x),
   height: Math.ceil(box.y + box.height) - Math.floor(box.y),
 });
+/** The unit Figma REST bounds are compared in: 1/64 px.
+ *
+ * Figma computes and stores geometry as float32 (core/native-float32.ts), so a
+ * REST absoluteBoundingBox / absoluteRenderBounds carries float32 arithmetic
+ * error of a few units in the last place: HeroUI `lock` (2217:920) reports a
+ * 16 px icon as 16.000003814697266 (16 + 2^-18) wide, and `paper-plane`
+ * (2217:5233) a layout of 15.999999046325684 (16 - 2^-20) around a render of
+ * exactly 16. Taken literally, the first asks for a 17 px export beside
+ * Figma's own 16 px PNG and the second draws "outside" its own layout, so
+ * both came out `image-framing-unqualified` (first real-kit scoreboard,
+ * 2026-09-28) without anything being wrong.
+ *
+ * 1/64 px is the layout unit of the browser this check captures with:
+ * Chromium lays out in 1/64 px units (docs/23-known-limitations.md §D.61,
+ * source-reference/layout-unit.ts), so the consumer side of this comparison
+ * cannot express a difference finer than 1/64 px, and core/native-fixed-cross-size.ts
+ * keeps native layout arithmetic to that same dyadic domain because float32
+ * is exact on it. Rounding each Figma edge to the nearest 1/64 px therefore
+ * removes only differences neither instrument can express (float32 noise at
+ * these magnitudes is ~4,000 times smaller); a render that genuinely reaches
+ * past its layout, or a layout that genuinely needs another export pixel,
+ * differs by at least 1/64 px and is still refused. The recorded receipt keeps
+ * Figma's raw numbers; only the comparison reads them rounded. */
+export const FIGMA_BOUNDS_UNIT_PX = 1 / 64;
+const toBoundsUnit = (v: number) => Math.round(v / FIGMA_BOUNDS_UNIT_PX) * FIGMA_BOUNDS_UNIT_PX;
+/** A Figma REST box with each EDGE rounded to 1/64 px (width and height follow
+ *  from the rounded edges, so containment is judged on the same edges). */
+export const figmaBoundsInLayoutUnits = (box: FrameBox): FrameBox => {
+  const x = toBoundsUnit(box.x), y = toBoundsUnit(box.y);
+  return { x, y, width: toBoundsUnit(box.x + box.width) - x, height: toBoundsUnit(box.y + box.height) - y };
+};
 const validBox = (box: FrameBox | undefined): box is FrameBox =>
   !!box &&
   [box.x, box.y, box.width, box.height].every(Number.isFinite) &&
@@ -109,15 +140,18 @@ export function alignRecordedFrames(
       figma.raster.scale !== 1)
   )
     return { refused: "figma-raster-model-unsupported" };
+  // Figma's REST bounds, read in 1/64 px units (FIGMA_BOUNDS_UNIT_PX above).
+  const figmaLayout = figmaBoundsInLayoutUnits(figma.layout),
+    figmaRender = figmaBoundsInLayoutUnits(figma.render);
   const capture = enclosingFrame(consumer.layout),
     exported = figma.raster
       ? {
           x: 0,
           y: 0,
-          width: Math.ceil(figma.layout.width),
-          height: Math.ceil(figma.layout.height),
+          width: Math.ceil(figmaLayout.width),
+          height: Math.ceil(figmaLayout.height),
         }
-      : enclosingFrame(figma.render);
+      : enclosingFrame(figmaRender);
   if (!sameBox(consumer.capture, capture))
     return { refused: "consumer-capture-span-mismatch" };
   if (ours.width !== capture.width || ours.height !== capture.height)
@@ -127,10 +161,10 @@ export function alignRecordedFrames(
   // The browser instrument captures the root layout box. It cannot qualify a
   // Figma export with shadows/outlines beyond that box by clipping them away.
   if (
-    figma.render.x < figma.layout.x ||
-    figma.render.y < figma.layout.y ||
-    figma.render.x + figma.render.width > figma.layout.x + figma.layout.width ||
-    figma.render.y + figma.render.height > figma.layout.y + figma.layout.height
+    figmaRender.x < figmaLayout.x ||
+    figmaRender.y < figmaLayout.y ||
+    figmaRender.x + figmaRender.width > figmaLayout.x + figmaLayout.width ||
+    figmaRender.y + figmaRender.height > figmaLayout.y + figmaLayout.height
   )
     return { refused: "render-outside-layout-capture-unqualified" };
   const ca = {
@@ -139,7 +173,7 @@ export function alignRecordedFrames(
   };
   const fa = figma.raster
     ? { x: 0, y: 0 }
-    : { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y };
+    : { x: figmaLayout.x - exported.x, y: figmaLayout.y - exported.y };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };
