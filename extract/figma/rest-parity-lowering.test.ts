@@ -176,6 +176,32 @@ test('an OUTSIDE stroke drawn on some sides only keeps its per-side widths as a 
   assert.match(cssOf(r), /--_stroke-left-width: 4px|border-left-width: 4px/);
 });
 
+test('an undrawable path node with a drawn size keeps its box but is not painted as one', () => {
+  // HeroUI's office-badge: a BOOLEAN_OPERATION pencil in a free 16×16 frame.
+  const variant = (id: string, name: string, child: RestNode): RestNode => ({
+    id, name, type: 'COMPONENT', absoluteBoundingBox: { x: 0, y: 0, width: 16, height: 16 }, children: [child],
+  });
+  const glyph = (extra: Partial<RestNode> = {}): RestNode => ({
+    id: '2:1', name: 'edit', type: 'BOOLEAN_OPERATION', fills: SOLID(0, 0, 0),
+    absoluteBoundingBox: { x: 1, y: 1, width: 14, height: 13 }, constraints: { horizontal: 'LEFT', vertical: 'TOP' }, children: [], ...extra,
+  });
+  const proposeOne = (v: RestNode) => propose((mapRestToDump({ nodes: { a: { document: v } } }).dump as unknown as Record<string, DumpSet>)[v.name]);
+  const free = proposeOne(variant('1:1', 'Badge', glyph()));
+  ContractSchema.parse(free.contract);
+  const edit = JSON.stringify(anatomyOf(free).root.parts?.edit);
+  assert.match(edit, /"position":"absolute"/);
+  assert.doesNotMatch(edit, /background-color/);
+  assert.ok(free.notes.some((n) => /BOOLEAN_OPERATION geometry is not carried .* its paint is NOT carried/.test(n)), free.notes.join('\n'));
+  // An unsized, fill-only, childless one (hugging in auto-layout: nothing gives
+  // it a box, so its fill paints nothing) proposes what it always did…
+  const flow = proposeOne({ ...variant('1:1', 'Flow', glyph({ absoluteBoundingBox: { x: 0, y: 0, width: 14, height: 13 } })), layoutMode: 'HORIZONTAL' });
+  assert.match(JSON.stringify(anatomyOf(flow).root.parts?.edit), /background-color/);
+  // …but a stroked one would paint a 2×weight square even at 0×0, so it is not painted either.
+  const stroked = proposeOne({ ...variant('1:1', 'Stroked', glyph({ fills: [], strokes: SOLID(0, 0, 0), strokeWeight: 1.5, strokeAlign: 'CENTER',
+    absoluteBoundingBox: { x: 0, y: 0, width: 14, height: 13 } })), layoutMode: 'HORIZONTAL' });
+  assert.doesNotMatch(JSON.stringify(anatomyOf(stroked).root.parts?.edit ?? {}), /border|outline/);
+});
+
 test('absolute placement whose constraints differ across variants carries at the drawn geometry as LEFT×TOP, named', () => {
   // Chakra's Progress fill: ABSOLUTE in an auto-layout track, STRETCH at 100% and LEFT elsewhere.
   const fills = [{ value: '25', width: 50, h: 'LEFT' }, { value: '100', width: 200, h: 'LEFT_RIGHT' }];

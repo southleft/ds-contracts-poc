@@ -42,7 +42,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 
 | kit | id | set | variants | carried | named | SILENT | verdict | walls |
 |---|---|---|---|---|---|---|---|---|
-| flowbite | `flowbite.alert` | Alert (flowbite.alert) | 4 | 124 | 87 | 0 | recognisable | — |
+| flowbite | `flowbite.alert` | Alert (flowbite.alert) | 4 | 116 | 95 | 0 | recognisable | — |
 | flowbite | `flowbite.badge` | Badge (flowbite.badge) | 24 | 278 | 345 | 0 | recognisable | — |
 | flowbite | `flowbite.button` | Button (flowbite.button) | 45 | 574 | 728 | 0 | recognisable | — |
 | flowbite | `flowbite.card` | Card (flowbite.card) | 1 | 24 | 20 | 0 | recognisable | — |
@@ -57,7 +57,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.chip` | Chip | 10 | 174 | 318 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.heading` | Heading | 42 | 384 | 294 | 0 | recognisable | FC-FONT-SUBSTRATE |
-| figma-ds | `ds.image` | Image | 1 | 13 | 11 | 0 | recognisable | VECTOR-GLYPH-NAMED |
+| figma-ds | `ds.image` | Image | 1 | 11 | 13 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.kicker` | Kicker | 2 | 28 | 14 | 0 | recognisable | FC-FONT-SUBSTRATE; TEXT-LETTER-SPACING-NAMED |
 | figma-ds | `ds.button-group` | Button Group | 2 | 15 | 11 | 0 | NOT recognisable | SLOT-CONTENT-NAMED |
 | figma-ds | `ds.section-header` | Section Header | 2 | 38 | 26 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; GRID-CELL-NAMED |
@@ -65,7 +65,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.card` | Card | 2 | 41 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 22 | 19 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **3136** | **3938** | **0** | | |
+| **all** | | 23 sets | | **3126** | **3948** | **0** | | |
 
 ## Renders
 

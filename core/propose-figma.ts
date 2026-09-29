@@ -2983,6 +2983,9 @@ const drawnStrokeAligns = (m: Merged) =>
  *  replaces the resting stroke in that state, the standing OUTSIDE
  *  limitation. */
 const STROKE_SIDE_BOUND_FIELDS = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+/** Arbitrary-path node types whose geometry is carried only as a `shape` —
+ *  without one, their paint belongs to a glyph, not to a box (buildPart). */
+const UNDRAWABLE_PATH_TYPES = new Set(['VECTOR', 'BOOLEAN_OPERATION', 'STAR']);
 /** Does any drawn stroke here have per-side weights (literal or bound)? An
  *  outline has one width for all four sides, so such a stroke has no outline
  *  spelling. */
@@ -10151,9 +10154,36 @@ function buildPartFromEvidence(
 
   const partByProp: ByPropCollector = { map: {} };
   const partDeclared: Record<string, string> = {};
-  const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
-  carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
-  carryStrokeLayout(m, part, ctx, where); // dump v1.35
+  // AN UNDRAWABLE PATH IS NOT A PAINTED BOX. A VECTOR / BOOLEAN_OPERATION /
+  // STAR whose geometry the dump could not carry (no `shape`) paints its fill
+  // or stroke onto a glyph, not onto its bounding box. Once a drawn size
+  // reaches the part (`abs` — carried on the REST route since REST dump v1.44
+  // — or `fixedSize`), painting that box draws a solid rectangle where Figma
+  // draws a glyph: HeroUI's office-badge pencil became a black 14×13 block.
+  // Measured offline on the hill-climb set against the saved Figma images:
+  // leaving the box unpainted was better on 194 variants and worse on none
+  // (Chakra Progress mean difference 21.5% → 13.4%). The box keeps its size
+  // and placement; its paint is named. It applies wherever the painted box
+  // would draw ink: a drawn size, a stroke (a border paints a 2×weight square
+  // even on a 0×0 box — the pencil's 1.5px strokes did exactly that), or
+  // children that size it. A fill-only, childless, unsized one paints nothing
+  // and proposes what it always did. LINE is not included: a stroked box is
+  // the nearest spelling of a divider.
+  // @door propose.path-geometry-not-painted-as-box
+  const pathBox = UNDRAWABLE_PATH_TYPES.has(m.type ?? '') && m.occ.every((o) => o.node.shape === undefined) &&
+    m.occ.some((o) => (o.node.fill !== undefined || o.node.stroke !== undefined || o.node.gradient !== undefined) &&
+      (o.node.abs !== undefined || o.node.fixedSize !== undefined || o.node.stroke !== undefined || (o.node.children?.length ?? 0) > 0));
+  const paintM: Merged = pathBox
+    ? { ...m, occ: m.occ.map((o) => { const { fill: _f, stroke: _s, gradient: _g, strokeWeight: _w, strokeWeights: _ws, ...node } = o.node; return { ...o, node }; }) }
+    : m;
+  if (pathBox) {
+    ctx.notes.push(
+      `${where}: ${m.type} geometry is not carried (arbitrary path, no shape), and its box would draw ink (a drawn size, a stroke, or children) — its paint is NOT carried: painted, the box would draw a solid rectangle or border where Figma draws the glyph; the part keeps its size and placement (review)`,
+    );
+  }
+  const tokens = invertNodeTokens(paintM, false, ctx, where, partByProp, part, partDeclared);
+  carryPerSideStrokeWeights(paintM, part, ctx, where); // dump v1.34
+  carryStrokeLayout(paintM, part, ctx, where); // dump v1.35
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
