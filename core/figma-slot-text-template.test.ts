@@ -17,6 +17,7 @@ import { revisionOf } from './contract-provenance.js';
 import { flattenTokens } from './tokens.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from './token-set.js';
 import type { NativeTokenContextInput } from './native-token-context.js';
+import { ROOT_CONTENT_EMPTY_WIDTH_SEED, storedAs } from './native-float32.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from './native-contract-comparison-observation.js';
 import { prepareNativeContractUpdate } from './native-contract-update.js';
@@ -115,7 +116,8 @@ test('unscoped writers refuse templates before allocating; scoped reruns retain 
       width: slot.width, height: slot.height, lineBinding: text.boundVariables.lineHeight };
   });
   const before = rows();
-  assert.ok(before.length === 2 && before.every((r: any) => r.visible === false && r.characters === '' && r.width === 0 && r.height === 0 && r.lineBinding));
+  assert.ok(before.length === 2 && before.every((r: any) => r.visible === false && r.characters === '' && storedAs(r.width, ROOT_CONTENT_EMPTY_WIDTH_SEED) && r.height === 0 && r.lineBinding),
+    'the empty template slot keeps the D.175 width seed; height stays 0');
   const repeated = await run(engine.buildNativeContractDraftScript(c, byId, source, context));
   assert.equal(repeated.status, 'refused', JSON.stringify(repeated));
   assert.equal(repeated.allocationAttempted, false);
@@ -211,6 +213,26 @@ test('independent native draft readback requires template typography, bindings, 
   ]) {
     const changed = structuredClone(receipt); mutate(changed);
     assert.notEqual(verifyNativeContractReadback(input, changed).status, 'supported-structure-observed');
+  }
+  // The empty slot's HUG width is the D.175 seed as Figma stores it (the
+  // float32 the first live run into a user's file read back), or exact 0 in
+  // operations created before the seed. Nothing near either value passes.
+  const slots = (r: any) => r.nodes.filter((n: any) => n.type === 'SLOT');
+  assert.ok(slots(receipt).length > 0 && slots(receipt).every((n: any) => n.values.layoutSizingHorizontal === 'HUG'));
+  for (const width of [Math.fround(ROOT_CONTENT_EMPTY_WIDTH_SEED), ROOT_CONTENT_EMPTY_WIDTH_SEED, 0]) {
+    const changed = structuredClone(receipt); for (const n of slots(changed)) n.values.width = width;
+    assert.equal(verifyNativeContractReadback(input, changed).status, 'supported-structure-observed', String(width));
+  }
+  const emptyBox = (r: any) => (verifyNativeContractReadback(input, r) as { problems?: string[] }).problems ?? [];
+  for (const width of [0.02, 0.005, Math.fround(0.0001), Math.fround(0.01) * 2]) {
+    const changed = structuredClone(receipt); for (const n of slots(changed)) n.values.width = width;
+    assert.ok(emptyBox(changed).some(p => p.startsWith('native-source-observation-text-template-empty-box')), String(width));
+  }
+  // Height has no seed: a hugging empty slot is exactly 0 high.
+  assert.ok(slots(receipt).every((n: any) => n.values.layoutSizingVertical === 'HUG' && n.values.height === 0));
+  for (const height of [1, Math.fround(ROOT_CONTENT_EMPTY_WIDTH_SEED)]) {
+    const changed = structuredClone(receipt); for (const n of slots(changed)) n.values.height = height;
+    assert.ok(emptyBox(changed).some(p => p.startsWith('native-source-observation-text-template-empty-box')), 'height ' + height);
   }
 });
 

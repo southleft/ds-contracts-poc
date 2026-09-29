@@ -7,7 +7,7 @@ import { verifyRootTextTemplateTokenContext, applyRootTextTemplateAliases } from
 import { planNativeRootTextTemplateGraph, nativeRootTextTemplateGraphSelection, type NativeRootTextTemplateGraphInput } from './native-root-text-template-graph.js';
 import { emitNativeTemplateGraphReadbackScript, verifyNativeTemplateGraphReceipt, type NativeTemplateGraphIdentity } from './native-root-text-template-graph-native.js';
 import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
-import { positionedAs } from './native-float32.js';
+import { positionedAs, emptySlotWidth } from './native-float32.js';
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
@@ -1367,8 +1367,11 @@ function verifyReadback(
           !same(v.relativeTransform,[[1,0,v.x],[0,1,v.y]])))
         issue('native-filled-path-observation-viewport-position',n);
       if (spec.type === "slot") {
+        // An empty text-template slot draws nothing. Its HUG width is the
+        // root-content writer's seed: 0.01 px since D.175 (Figma stores the
+        // float32), exact 0 in operations created before it. Height has no seed.
         if (spec.children?.some(child => child.slotTextTemplate) &&
-            ((v.layoutSizingHorizontal === 'HUG' && v.width !== 0) ||
+            ((v.layoutSizingHorizontal === 'HUG' && !emptySlotWidth(v.width)) ||
              (v.layoutSizingVertical === 'HUG' && v.height !== 0)))
           issue('native-source-observation-text-template-empty-box', n);
         if (

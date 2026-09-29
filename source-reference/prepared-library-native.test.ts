@@ -679,7 +679,8 @@ test('the application HTTP route reopens the retained selection and the actual t
   assert.equal(paired.status,200);
   const secret = paired.body.connection.split('.')[1], auth = {Origin:'null',Authorization:'Bearer '+secret};
   assert.equal((await send('POST',route+'/start',selection)).status,202);
-  assert.equal((await send('POST',`native/${id}/claim`,{fileKey:'OriginalSourceFile',protocol:2},auth)).status,409);
+  const wrongFile = await send('POST',`native/${id}/claim`,{fileKey:'OriginalSourceFile',protocol:2},auth);
+  assert.deepEqual([wrongFile.status,wrongFile.body],[200,{status:'wrong-file',fileKey:REACT_NATIVE_FILE_KEY}],'a companion in another file is told which file to open and gets nothing to run');
   for (const phase of ['token-create','token-readback','component-create','component-readback']) {
     const claim = await send('POST',`native/${id}/claim`,{fileKey:REACT_NATIVE_FILE_KEY,protocol:2},auth);
     assert.equal(claim.status,200,JSON.stringify(claim.body));

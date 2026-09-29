@@ -1102,7 +1102,10 @@ test("local native HTTP connection restricts authority and retains correlated pl
       ).status,
       403,
     );
-    assert.equal((await post(claim, { fileKey: "other" }, auth)).status, 409);
+    const wrongFile = await post(claim, { fileKey: "other" }, auth);
+    assert.equal(wrongFile.status, 200);
+    assert.deepEqual(await wrongFile.json(), { status: "wrong-file", fileKey: SOURCE_NATIVE_FILE_KEY },
+      "a companion in another file is told which file to open and gets nothing to run");
     assert.equal(
       (
         await post(
