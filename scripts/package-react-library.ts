@@ -4,26 +4,47 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 const exec = promisify(execFile);
-async function run(cmd: string, args: string[], cwd: string): Promise<string> {
+async function run(cmd: string, args: string[], cwd: string, label = path.basename(cmd)): Promise<string> {
   try {
     const result = await exec(cmd, args, { cwd, timeout: 120_000, maxBuffer: 4 * 1024 * 1024,
       env: { ...Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'FIGMA_TOKEN')), npm_config_update_notifier: 'false' } });
     return result.stdout;
   } catch (error: any) {
-    throw new Error(`${path.basename(cmd)} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`);
+    throw new Error(`${label} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`);
   }
+}
+
+/** The tools packaging runs, resolved from wherever this module is installed:
+ *  the repository's node_modules in a checkout, the CLI's own pinned
+ *  dependencies in an installed @ds-contracts/cli (which has no repository to
+ *  reach into). The same versions both ways, so the same bytes. */
+export interface Toolchain {
+  /** the esbuild executable (TSX → ESM, file by file) */
+  esbuild: string;
+  /** TypeScript's tsc entry script, run with this Node */
+  tsc: string;
+  /** @types/react's directory (declaration emission needs React's types) */
+  reactTypes: string;
+}
+export function resolveToolchain(from: string = import.meta.url): Toolchain {
+  const require = createRequire(from);
+  const dir = (name: string) => {
+    try { return path.dirname(require.resolve(`${name}/package.json`)); }
+    catch { throw new Error(`react-library-toolchain-missing: ${name} cannot be resolved from ${from}`); }
+  };
+  return { esbuild: path.join(dir('esbuild'), 'bin', 'esbuild'), tsc: path.join(dir('typescript'), 'bin', 'tsc'), reactTypes: dir('@types/react') };
 }
 
 /** An npm package name the user chose (scoped or not); anything else refuses. */
 export const PACKAGE_NAME = /^(?:@[a-z0-9][a-z0-9._~-]*\/)?[a-z0-9][a-z0-9._~-]*$/;
 
-export async function packageReactLibrary(generatedDir: string, component: string, work: string, repoRoot = ROOT,
-  options: { packageName?: string } = {}) {
+export async function packageReactLibrary(generatedDir: string, component: string, work: string,
+  options: { packageName?: string; toolchain?: Toolchain } = {}) {
+  const toolchain = options.toolchain ?? resolveToolchain();
   if (options.packageName !== undefined && (!PACKAGE_NAME.test(options.packageName) || options.packageName.length > 214))
     throw new Error(`react-library-package-name-invalid: "${options.packageName}" is not an npm package name`);
   const pkgDir = path.join(work, 'library'), src = path.join(pkgDir, 'src'), dist = path.join(pkgDir, 'dist');
@@ -43,16 +64,20 @@ export async function packageReactLibrary(generatedDir: string, component: strin
   const walk = (dir: string) => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p) : sources.push(p); } };
   walk(src);
   const tsSources = sources.filter(f => /\.tsx?$/.test(f));
-  await run(path.join(repoRoot, 'node_modules', '.bin', 'esbuild'), [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', `--outbase=${src}`, `--outdir=${dist}`], repoRoot);
+  // --tsconfig-raw={}: otherwise esbuild reads any tsconfig.json above the work
+  // directory (the user's own project when --out is inside it), and its
+  // jsxImportSource or verbatimModuleSyntax would change the output. This is the
+  // same output as no tsconfig at all.
+  await run(toolchain.esbuild, [...tsSources, '--format=esm', '--jsx=automatic', '--target=es2022', '--tsconfig-raw={}', `--outbase=${src}`, `--outdir=${dist}`], pkgDir);
   for (const f of sources.filter(f => f.endsWith('.css'))) { const rel = path.relative(src, f); mkdirSync(path.dirname(path.join(dist, rel)), { recursive: true }); cpSync(f, path.join(dist, rel)); }
   // Declarations, so a TypeScript consumer sees the contract-derived props.
   writeFileSync(path.join(pkgDir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { declaration: true, emitDeclarationOnly: true, jsx: 'react-jsx', module: 'ESNext', moduleResolution: 'Bundler',
     target: 'ES2022', strict: true, skipLibCheck: true, outDir: 'dist', rootDir: 'src', types: [],
-    // Declaration emission needs React's types. This packaging step is the
-    // repository's tool; only the consumer below must stay free of repo paths.
-    paths: { react: [path.join(repoRoot, 'node_modules', '@types', 'react', 'index.d.ts')], 'react/jsx-runtime': [path.join(repoRoot, 'node_modules', '@types', 'react', 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
+    // Declaration emission needs React's types, from the toolchain. This
+    // tsconfig.json is not packed; the consumer must stay free of these paths.
+    paths: { react: [path.join(toolchain.reactTypes, 'index.d.ts')], 'react/jsx-runtime': [path.join(toolchain.reactTypes, 'jsx-runtime.d.ts')] } }, include: ['src'] }, null, 2));
   writeFileSync(path.join(src, 'css-modules.d.ts'), "declare module '*.module.css' { const classes: { readonly [key: string]: string }; export default classes; }\ndeclare module '*.css';\n");
-  await run(path.join(repoRoot, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], pkgDir);
+  await run(process.execPath, [toolchain.tsc, '-p', 'tsconfig.json'], pkgDir, 'tsc');
   const name = options.packageName ?? `@ds-contracts-generated/${component.toLowerCase()}`;
   writeFileSync(path.join(pkgDir, 'package.json'), JSON.stringify({ name, version: '0.0.0-generated', private: false, type: 'module', license: 'UNLICENSED',
     description: `Generated from the ${component} contract by ds-contracts; not hand-edited.`,
