@@ -276,11 +276,11 @@ export function classifyVariablesRefusal(status: number, body: string): Variable
       kind: 'scope',
       userFixable: true,
       message:
-        'Figma refused /variables/local: your personal access token is missing the ' +
-        '`file_variables:read` scope (HTTP 403 — a token scope, NOT a plan limit). This is fixable — mint a new token at ' +
-        'figma.com → Settings → Security → Personal access tokens with "Variables: read" ' +
-        'enabled, and re-run. (Variable NAMES will be unresolved until you do; the import ' +
-        'still works, using resolved values.)',
+        'Figma refused /variables/local: your personal access token does not carry the ' +
+        '`file_variables:read` scope (HTTP 403). The import continues with resolved values; ' +
+        'variable names stay unresolved. If figma.com → Settings → Security → Personal access ' +
+        'tokens offers "Variables: read", mint a token with it and re-run. Figma may offer that ' +
+        'scope only on some plans; this project has not verified which.',
       fix: VARIABLES_SCOPE_FIX,
       body: b.slice(0, 300),
     };
@@ -291,8 +291,8 @@ export function classifyVariablesRefusal(status: number, body: string): Variable
     userFixable: false,
     message:
       `Figma refused /variables/local with ${status} and did not name a missing scope. ` +
-      'Possible causes include the file\'s plan tier — UNVERIFIED by this project, see ' +
-      'docs/HANDOFF.md. Importing without variable names; resolved values are used instead.',
+      'Possible causes include the file\'s plan tier, which this project has not verified. ' +
+      'Importing without variable names; resolved values are used instead.',
     fix: null,
     body: b.slice(0, 300),
   };
