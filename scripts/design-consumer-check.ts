@@ -35,8 +35,11 @@
  *                 The 5% antialias-tolerant limit is the existing one; it is
  *                 not tuned here.
  *   6. content  — every TEXT the Figma variant draws must be in the rendered
- *                 text, and every icon or vector it draws must have a rendered
- *                 graphic of about its size (scripts/design-consumer-content.ts).
+ *                 text, drawn in its Figma fill color and font family/weight
+ *                 (`text-color-mismatch:<case>:"Confirm":figma #ffffff vs
+ *                 rendered #172b4d`, `text-font-mismatch:<case>:…`), and every
+ *                 icon or vector it draws must have a rendered graphic of about
+ *                 its size (scripts/design-consumer-content.ts).
  *                 A miss fails that variant by name (`content-missing:<case>:
  *                 text:"Dialog heading"`, `content-missing:<case>:part:<layers>`)
  *                 at any pixel score: the 5% limit passed a Dialog whose
@@ -61,7 +64,7 @@
 import { packageReactLibrary } from './package-react-library.js';
 import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts, type ConsumerFont } from './design-consumer-fonts.js';
 import { sourceEquivalentTransitions, sourceEquivalentStateTransitions } from './design-consumer-variants.js';
-import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing.js';
+import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, FIGMA_REST_FULL_BOUNDS, type ConsumerFrame, type FigmaFrame } from './design-consumer-framing-v2.js';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -75,7 +78,7 @@ import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/vi
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
 import { caseContent, domContentOf, fetchFigmaContent, type CaseContent, type DomContent } from './design-consumer-content.js';
-import { CONTENT_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
+import { CONTENT_RULE, TEXT_STYLE_RULE, checkFailureProblem, variantVerdicts } from './design-consumer-verdict.js';
 import { fetchFigmaApi } from '../extract/figma/rest/fetch.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -507,7 +510,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
   } cpSync(args.generated, path.join(inputs, 'generated'), { recursive: true });
   const work = mkdtempSync(path.join(tmpdir(), 'ds-contracts-consumer-'));
   const receipt: any = { version: 1, kind: 'design-led-clean-consumer-check', acceptedContract: null, qualification: 'unqualified',
-    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'], framing: 'recorded-layout-origins-common-alpha-union-v2', deviceScaleFactor: 1, nativeRaster: FIGMA_REST_FULL_BOUNDS }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
+    component: args.component, fileKey: fileKey ?? null, capture: { background: 'transparent', comparisonBackgrounds: ['white', 'black'], framing: 'recorded-layout-origins-common-alpha-union-v3', figmaBoundsUnitPx: FIGMA_BOUNDS_UNIT_PX, deviceScaleFactor: 1, nativeRaster: FIGMA_REST_FULL_BOUNDS }, generatedSha256: {}, cases: [], behavior: {}, images: {}, problems, limitations: [
       'one component set is mounted and scored; the child components it composes are packaged and render inside it (inputs.contractGraph names each, and whether it is a real contract or a stub), but are not mounted or scored on their own; instance swaps are not exercised',
       'declared behavior beyond text props, variant props and the interaction states a designer drew as a state axis (hover, pressed, keyboard focus, disabled — docs/23 §D.41) is not exercised',
       'accessibility is not measured beyond the rendered element',
@@ -806,7 +809,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
       if (row.cellsUnchangedWithoutEquivalentSource.length)
         problems.push(row.axisInertLedgered ? `variant-axis-inert-ledgered:${row.prop}` : `variant-prop-discarded:${row.prop}`);
     }
-    receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins, integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
+    receipt.images = { status: figma.status, reason: figma.reason, frameEvidence: 'frameEvidence' in figma ? figma.frameEvidence : null, scorer: 'Recorded layout origins (Figma REST bounds read in 1/64 px layout units), integer translation only, common nonzero-alpha union crop. Both unmasked white and black scores must meet the unchanged 5% limit (pixelmatch threshold 0.1). Historical independent alpha-trim scores and text masks remain diagnostic; they do not determine this verdict.', limitPercent: IMAGE_LIMIT_PERCENT, cases: [] as any[] };
     if (figma.status === 'figma-images-collected') for (const c of cases) {
       const file = figma.files[c.nodeId];
       if (!file) { receipt.images.cases.push({ key: c.key, status: 'figma-image-missing' }); problems.push(`figma-image-missing:${c.key}`); continue; }
@@ -858,7 +861,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     // Figma variant draws must render, whatever the pixel score says.
     const content = unresolved ? { status: 'unavailable' as const, reason: unresolved }
       : fileKey ? await fetchFigmaContent(fileKey, cases.map(c => c.nodeId), args.token, args.out) : { status: 'unavailable' as const, reason: 'no fileKey in dump' };
-    receipt.content = { status: content.status, rule: CONTENT_RULE, ...(content.status === 'collected'
+    receipt.content = { status: content.status, rule: CONTENT_RULE, textStyleRule: TEXT_STYLE_RULE, ...(content.status === 'collected'
       ? { figmaVersion: content.version, responseSha256: content.responseSha256, evidence: 'figma-content.json' } : { reason: content.reason }), cases: [] as CaseContent[] };
     if (content.status === 'collected') for (const c of cases) {
       const dom = domContent[c.key];

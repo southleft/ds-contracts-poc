@@ -3,6 +3,7 @@
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { brotliDecompressSync, inflateSync } from 'node:zlib';
 import type { Page } from 'playwright-core';
 
 export interface ConsumerFont {
@@ -17,6 +18,66 @@ export interface ConsumerFont {
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 function fail(reason: string): never { throw Error(`consumer-fonts:${reason}`); }
 const exactKeys = (v: Record<string, unknown>, keys: string[]) => Object.keys(v).every(key => keys.includes(key)) && keys.every(key => Object.hasOwn(v, key));
+
+/** The family names a font's own `name` table declares (IDs 1, 16 and 21, every
+ * platform), read from TrueType/OpenType, WOFF (zlib) or WOFF2 (Brotli) bytes.
+ * A face is registered only under a family its own bytes declare: a file is
+ * never provisioned as ANOTHER family (never, for example, the macOS system
+ * UI font SFNS.ttf as "SF Pro"), because the check would then report a font
+ * provisioned that the design never used. Throws when the table is unreadable. */
+export function fontFamilyNames(bytes: Buffer): string[] {
+  const tag = (b: Buffer, at: number) => b.toString('latin1', at, at + 4);
+  let sfnt: Buffer, tables: Map<string, { offset: number; length: number }>;
+  const kind = tag(bytes, 0);
+  if (kind === 'wOFF') {
+    const count = bytes.readUInt16BE(12), out = new Map<string, { offset: number; length: number }>();
+    const parts: Buffer[] = [];
+    let at = 0;
+    for (let i = 0; i < count; i++) {
+      const e = 44 + i * 20, offset = bytes.readUInt32BE(e + 4), compLength = bytes.readUInt32BE(e + 8), origLength = bytes.readUInt32BE(e + 12);
+      const data = bytes.subarray(offset, offset + compLength), table = compLength < origLength ? inflateSync(data) : data;
+      out.set(tag(bytes, e), { offset: at, length: origLength }); parts.push(table); at += table.length;
+    }
+    sfnt = Buffer.concat(parts); tables = out;
+  } else if (kind === 'wOF2') {
+    // WOFF2: a table directory of UIntBase128 lengths, then one Brotli stream
+    // holding every table back to back in directory order.
+    const KNOWN = ['cmap', 'head', 'hhea', 'hmtx', 'maxp', 'name', 'OS/2', 'post', 'cvt ', 'fpgm', 'glyf', 'loca', 'prep', 'CFF ', 'VORG', 'EBDT', 'EBLC', 'gasp', 'hdmx', 'kern', 'LTSH', 'PCLT', 'VDMX', 'vhea', 'vmtx', 'BASE', 'GDEF', 'GPOS', 'GSUB', 'EBSC', 'JSTF', 'MATH', 'CBDT', 'CBLC', 'COLR', 'CPAL', 'SVG ', 'sbix', 'acnt', 'avar', 'bdat', 'bloc', 'bsln', 'cvar', 'fdsc', 'feat', 'fmtx', 'fvar', 'gvar', 'hsty', 'just', 'lcar', 'mort', 'morx', 'opbd', 'prop', 'trak', 'Zapf', 'Silf', 'Glat', 'Gloc', 'Feat', 'Sill'];
+    if (tag(bytes, 4) === 'ttcf') throw Error('font collection');
+    const count = bytes.readUInt16BE(12), compressed = bytes.readUInt32BE(20);
+    let at = 48;
+    const base128 = () => { let v = 0; for (let i = 0; i < 5; i++) { const b = bytes[at++]!; v = v * 128 + (b & 0x7f); if (!(b & 0x80)) return v; } throw Error('bad UIntBase128'); };
+    const out = new Map<string, { offset: number; length: number }>();
+    let offset = 0;
+    for (let i = 0; i < count; i++) {
+      const flags = bytes[at++]!, index = flags & 0x3f, version = flags >> 6;
+      const name = index === 63 ? tag(bytes, (at += 4) - 4) : KNOWN[index];
+      if (!name) throw Error('unknown table');
+      const orig = base128(), transformed = name === 'glyf' || name === 'loca' ? version !== 3 : version !== 0;
+      const length = transformed ? base128() : orig;
+      out.set(name, { offset, length }); offset += length;
+    }
+    sfnt = brotliDecompressSync(bytes.subarray(at, at + compressed)); tables = out;
+  } else if (['\u0000\u0001\u0000\u0000', 'OTTO', 'true'].includes(kind)) {
+    const count = bytes.readUInt16BE(4), out = new Map<string, { offset: number; length: number }>();
+    for (let i = 0; i < count; i++) { const e = 12 + i * 16; out.set(tag(bytes, e), { offset: bytes.readUInt32BE(e + 8), length: bytes.readUInt32BE(e + 12) }); }
+    sfnt = bytes; tables = out;
+  } else throw Error('unsupported font format');
+  const entry = tables.get('name');
+  if (!entry) throw Error('no name table');
+  const name = sfnt.subarray(entry.offset, entry.offset + entry.length), count = name.readUInt16BE(2), strings = name.readUInt16BE(4);
+  const families = new Set<string>();
+  for (let i = 0; i < count; i++) {
+    const r = 6 + i * 12, platform = name.readUInt16BE(r), nameId = name.readUInt16BE(r + 6), length = name.readUInt16BE(r + 8), offset = strings + name.readUInt16BE(r + 10);
+    if (![1, 16, 21].includes(nameId)) continue;
+    const raw = name.subarray(offset, offset + length);
+    // Windows and Unicode platforms are UTF-16BE; Macintosh Roman names are ASCII here.
+    const text = platform === 1 ? raw.toString('latin1') : Buffer.from(raw).swap16().toString('utf16le');
+    if (text.trim()) families.add(text.trim());
+  }
+  if (!families.size) throw Error('no family name');
+  return [...families];
+}
 
 /** Read and authenticate ALL inputs before making a consumer or writing evidence.
  * Paths are explicit operator CLI inputs, resolved beside the manifest. */
@@ -55,6 +116,12 @@ export function readConsumerFonts(manifestPath: string): ConsumerFont[] {
     const formats = { '00010000': ['ttf', 'truetype'], '4f54544f': ['otf', 'opentype'], '774f4646': ['woff', 'woff'], '774f4632': ['woff2', 'woff2'] } as const;
     const format = formats[kind as keyof typeof formats];
     if (!format) reason('unsupported-font-format');
+    // The family must be one the file's own name table declares (fontFamilyNames).
+    const family = value.family;
+    let declared: string[];
+    try { declared = fontFamilyNames(bytes); } catch (error) { reason(`font-names-unreadable:${error instanceof Error ? error.message : String(error)}`); }
+    if (!declared.some(name => name.toLowerCase() === family.toLowerCase()))
+      reason(`family-not-declared-by-font:${JSON.stringify(family)} (the file names itself ${declared.map(n => JSON.stringify(n)).join(', ')})`);
     fonts.push({ family: value.family, weight, style: value.style, sha256: value.sha256,
       file: `${value.sha256}.${format[0]}`, format: format[1], bytes });
   }
