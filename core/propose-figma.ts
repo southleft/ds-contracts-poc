@@ -753,7 +753,8 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string, carriage?: M
     const bt = b.text;
     if (
       at.characters !== bt.characters || at.fontSize !== bt.fontSize || at.fontStyle !== bt.fontStyle ||
-      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null)
+      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null) ||
+      (at.textDecoration ?? null) !== (bt.textDecoration ?? null)
     ) {
       return `${path}: text/typography differs`;
     }
@@ -2957,10 +2958,58 @@ const drawnStrokeAligns = (m: Merged) =>
       .map((o) => o.node.strokeAlign)
       .filter((a): a is NonNullable<typeof a> => a !== undefined),
   );
+/** A CENTER STROKE THAT TAKES NO LAYOUT SPACE IS AN OUTLINE PULLED BACK BY
+ *  HALF ITS WEIGHT (REST dump v1.44 / plugin dump v1.48).
+ *
+ *  A Figma stroke of weight w drawn CENTER covers the band from w/2 inside
+ *  the node box to w/2 outside it. `outline: w solid; outline-offset: -w/2`
+ *  draws exactly that band — an outline starts at the border edge plus its
+ *  offset and extends outward by its width — follows border-radius, and
+ *  takes no layout space, which is what a Figma stroke that is not included
+ *  in layout does. Under the same vocabulary an OUTSIDE stroke is offset 0
+ *  and an INSIDE one (also taking no layout space) offset -w, so a node whose
+ *  variants MIX those alignments (Untitled UI's Featured icon: a 1px INSIDE
+ *  rim beside 2–10px CENTER rings) still has ONE spelling, per-variant
+ *  offsets included. Before, CENTER rendered as an INSIDE border, off by w/2
+ *  on every side (5px on the 10px rings), and a mix was refused.
+ *
+ *  Qualified ONLY where every drawn stroke is OUTSIDE, or CENTER/INSIDE with
+ *  strokesIncludedInLayout === false CAPTURED (dump v1.35+ — an absent flag
+ *  is "not captured" and keeps the border every older dump produced), with a
+ *  uniform literal weight (per-side weights have no outline spelling), on no
+ *  shape part and no instance (their strokes render through their own
+ *  channels), and with minting on (the offsets are px observations). The
+ *  outline is the focus ring's property: a `:focus-visible` outline rule
+ *  replaces the resting stroke in that state, the standing OUTSIDE
+ *  limitation. */
+const STROKE_SIDE_BOUND_FIELDS = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+function centeredStrokeOutline(nodes: readonly DumpNode[]): boolean {
+  const drawn = nodes.filter((n) => n.stroke !== undefined);
+  if (!drawn.some((n) => n.strokeAlign === 'CENTER')) return false;
+  if (nodes.some((n) => n.shape !== undefined || n.type === 'INSTANCE')) return false;
+  return drawn.every((n) =>
+    n.strokeWeights === undefined &&
+    !STROKE_SIDE_BOUND_FIELDS.some((f) => n.bound?.[f] !== undefined) &&
+    typeof n.strokeWeight === 'number' && Number.isFinite(n.strokeWeight) && n.strokeWeight >= 0 &&
+    (n.strokeAlign === 'OUTSIDE' ||
+      ((n.strokeAlign === 'CENTER' || n.strokeAlign === 'INSIDE') && n.strokesIncludedInLayout === false)));
+}
+/** The outline-offset one drawn stroke needs under centeredStrokeOutline. */
+const centeredOutlineOffset = (n: DumpNode): number =>
+  n.stroke === undefined || n.strokeWeight === undefined || n.strokeAlign === 'OUTSIDE'
+    ? 0
+    : n.strokeAlign === 'CENTER' ? -n.strokeWeight / 2 : -n.strokeWeight;
+
 function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
   const aligns = drawnStrokeAligns(m);
   // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
+  if (ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))) {
+    ctx.notes.push(
+      `${where}: strokeAlign ${[...aligns].sort().join(' / ')} with the stroke taking no layout space — carried as an outline with a per-variant outline-offset (CENTER −weight/2, INSIDE −weight, OUTSIDE 0), which draws the same band on both sides of the edge and takes no layout space (REST dump v1.44 / plugin dump v1.48); a :focus-visible outline replaces it in that state`,
+    );
+    return 'outline';
+  }
   // @door propose.stroke-align-mixed-refused
   if (aligns.size > 1) {
     ctx.notes.push(
@@ -3161,6 +3210,14 @@ function invertNodeTokens(
   // The keyword that makes the outline paint at all. Declared, never
   // inferred downstream — see strokeVocabulary's note.
   if (strokeVocab === 'outline' && declaredOut) declaredOut['outline-style'] = 'solid';
+  // REST dump v1.44 / plugin dump v1.48: a CENTER (or mixed CENTER/INSIDE/
+  // OUTSIDE) stroke that takes no layout space rides the outline pulled back
+  // by its per-variant offset — see centeredStrokeOutline. The offsets are
+  // literal px observations derived from the drawn weight (a bound weight's
+  // variable is carried on outline-width; its half has no token spelling).
+  if (strokeVocab === 'outline' && centeredStrokeOutline(m.occ.map((o) => o.node))) {
+    mintObservation(ctx, tokens, where, 'outline-offset', 'px', numOccurrences(m, centeredOutlineOffset), `${where}|strokeAlign`);
+  }
 
   carry(
     'background-color',
@@ -4126,8 +4183,12 @@ interface ShapePlacement {
 function parentCssBorderInsets(o: Occ, ctx: Ctx): BoxInsets {
   const parent = o.parent?.node;
   if (!parent) return zeroInsets();
+  // A parent whose stroke lowers to the offset outline (centeredStrokeOutline,
+  // the same predicate strokeVocabulary applies) draws no CSS border, so its
+  // padding edge is its border edge.
+  if (ctx.mint && centeredStrokeOutline(o.parent!.occurrences.map(p => p.node))) return zeroInsets();
   const drawn = o.parent!.occurrences.map(p => p.node).filter(n => n.stroke !== undefined);
-  // CENTER is already projected as an INSIDE CSS border, with the existing
+  // Any other CENTER is projected as an INSIDE CSS border, with the existing
   // paint-loss receipt. Its CSS padding edge is still fully determined.
   if (new Set(drawn.map(n => n.strokeAlign === 'OUTSIDE' ? 'OUTSIDE' : 'INSIDE')).size > 1 ||
       new Set(drawn.map(n => n.strokesIncludedInLayout ?? true)).size > 1)
@@ -5565,6 +5626,93 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
   );
 }
 
+/** REST dump v1.44 / plugin dump v1.48 — textDecoration UNDERLINE /
+ *  STRIKETHROUGH, the canvas fact behind CSS text-decoration-line
+ *  (underline / line-through). Both readers named it a loss until then, so a
+ *  designer's link drew without its underline.
+ *
+ *  · Drawn the same in every text occurrence → the declared
+ *    `text-decoration-line` channel (DECLARED_CHANNELS, canvas: draw — the
+ *    return leg writes Figma textDecoration).
+ *  · Drawn in SOME variants → carried per value of the ONE variant axis it is
+ *    a function of, as `stylesWhen { prop, equals, styles:
+ *    { 'text-decoration': … } }` for the values that draw it (the literal
+ *    CSS spelling STYLES_WHEN_ALLOWED admits for a per-value fact with no
+ *    token vocabulary; a boolean axis carries its TRUE side, and a
+ *    decoration drawn only on the FALSE side is named — stylesWhen cannot
+ *    express negation). Canvas v1 does not draw conditional styles, a
+ *    documented schema limit. Guarded by the sparse-matrix fence.
+ *  · Anything else is NAMED, never sampled.
+ *  Absent on every occurrence → nothing (no decoration, or an older dump that
+ *  receipted the channel at capture). */
+const TEXT_DECORATION_LINE: Record<string, string> = { UNDERLINE: 'underline', STRIKETHROUGH: 'line-through' };
+function carryTextDecoration(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const lineOf = (n: DumpNode): string => TEXT_DECORATION_LINE[n.text!.textDecoration ?? ''] ?? 'none';
+  const rows = textOcc.map((o) => ({ variant: o.variant, value: lineOf(o.node) }));
+  // @door propose.text-decoration-none-not-a-fact
+  if (rows.every((r) => r.value === 'none')) return;
+  const distinct = [...new Set(rows.map((r) => r.value))];
+  if (distinct.length === 1) {
+    const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+    if (declared['text-decoration-line'] === undefined) declared['text-decoration-line'] = distinct[0];
+    holder.declared = declared;
+    ctx.notes.push(
+      `${where}: text decoration drawn in every variant — carried as declared text-decoration-line: ${distinct[0]} (REST dump v1.44 / plugin dump v1.48; a canvas-drawable channel, the return leg writes Figma textDecoration)`,
+    );
+    return;
+  }
+  for (const axis of ctx.axes) {
+    const byValue = new Map<string, string>();
+    let fits = true;
+    for (const r of rows) {
+      const value = axisValuesOf(r.variant)[axis.property];
+      const seen = value === undefined ? undefined : byValue.get(value);
+      if (value === undefined || (seen !== undefined && seen !== r.value)) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, r.value);
+    }
+    if (!fits || new Set(byValue.values()).size < 2) continue;
+    const entries: Array<Record<string, unknown>> = [];
+    if (isBooleanAxis(axis)) {
+      const side = (want: string) =>
+        [...byValue].filter(([v]) => v.trim().toLowerCase() === want).map(([, line]) => line);
+      const whenTrue = side('true'), whenFalse = side('false');
+      if (whenTrue.length !== 1 || whenFalse.length !== 1) continue;
+      if (whenFalse[0] !== 'none') {
+        // @door propose.text-decoration-false-side-negation
+        ctx.notes.push(
+          `${where}: text decoration ${whenFalse[0]} is drawn on the FALSE side of boolean axis "${axis.property}" — stylesWhen cannot express negation; NAMED, not proposed (review)`,
+        );
+        return;
+      }
+      entries.push({ prop: axis.propName, styles: { 'text-decoration': whenTrue[0] } });
+    } else {
+      for (const value of axis.values) {
+        const line = byValue.get(value);
+        if (line !== undefined && line !== 'none') {
+          entries.push({ prop: axis.propName, equals: axisValue(axis, value), styles: { 'text-decoration': line } });
+        }
+      }
+    }
+    fenceSparseInference(ctx.axes, `text-decoration@${where}`, rows);
+    const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+    stylesWhen.push(...entries);
+    holder.stylesWhen = stylesWhen;
+    ctx.notes.push(
+      `${where}: text decoration differs across variants as a function of axis "${axis.property}" (${[...byValue].map(([v, line]) => `${v}→${line}`).join(', ')}) — carried as stylesWhen { prop: ${axis.propName}, styles: { text-decoration } } on the values that draw it (REST dump v1.44 / plugin dump v1.48; a conditional style is not drawn on canvas v1 — schema limit)`,
+    );
+    return;
+  }
+  // @door propose.text-decoration-uncorrelated-refused
+  ctx.notes.push(
+    `${where}: text decoration differs across variants (${distinct.join(', ')}) without correlating to one variant axis — text-decoration-line has no per-combination vocabulary; NAMED, not proposed (review)`,
+  );
+}
+
 /** dump v1.31 — the text node's font FAMILY (fontName.family / REST
  *  style.fontFamily) → the declared `font-family` channel (DECLARED_CHANNELS,
  *  canvas: draw — the emitter sets fontName.family from the first stack
@@ -5730,7 +5878,9 @@ function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx,
   }
   holder.strokesIncludedInLayout = false;
   ctx.notes.push(
-    `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
+    ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))
+      ? `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; the stroke rides the offset outline (see the strokeAlign note), which takes no layout space in CSS, and the writer sets the field back on the frame`
+      : `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
   );
 }
 /** A part that ended up carrying NO stroke channel (every one refused by
@@ -9311,6 +9461,7 @@ function buildPartFromEvidence(
     const tokens = invertTextTokens(m, ctx, where, byProp);
     attachByProp(part, byProp);
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
+    carryTextDecoration(m, part, ctx, where); // REST dump v1.44 / plugin v1.48 — text-decoration-line
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where, tokens);
@@ -11665,11 +11816,25 @@ function proposeStateDiffs(
   // and dropped outline-width (FC-DUMP-PROPOSE-FOCUS-OUTLINE).
   const focusOutside =
     state === 'focus-visible' && occs.every((o) => o.node.strokeAlign === 'OUTSIDE');
+  // A LITERAL state stroke is not in `target` yet: it is a queued mint
+  // observation the deferred mint pass lands later (and the base's own literal
+  // border is deferred the same way, so baseRootTokens cannot see it either).
+  // REST dump v1.44 made this reachable on the REST route — OUTSIDE is carried
+  // there now — and the remap below never fired for it: a designer's OUTSIDE
+  // focus ring minted as a state `border-*` pair, drawn inward.
+  const queuedStateBorder = focusOutside && !!ctx.mint?.observations.some(
+    (o) => o.target === target && o.part === `state-${state}` && (o.cssProperty === 'border-color' || o.cssProperty === 'border-width'),
+  );
   // A qualified per-side replacement already proves an INSIDE resting stroke,
   // even when its unbound color has not reached the deferred mint pass yet.
   if (!uniformStateStrokeStyles?.has(state) && baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
     const hasBorder = target['border-color'] !== undefined || target['border-width'] !== undefined;
-    if (hasBorder && state === 'focus-visible') {
+    if (!hasBorder && queuedStateBorder) {
+      remapStateMintTargets(ctx, target, state);
+      ctx.notes.push(
+        `${where}: state "${state}" draws an OUTSIDE stroke (literal values, minted) — proposed as the focus OUTLINE pair (outline-color/outline-width), which draws outside the box and takes no layout space`,
+      );
+    } else if (hasBorder && state === 'focus-visible') {
       for (const [from, to] of [['border-color', 'outline-color'], ['border-width', 'outline-width']] as const) {
         if (target[from] !== undefined) {
           target[to] = target[from];
@@ -12156,7 +12321,7 @@ function proposeStateDiffs(
         // TEXT: no text-shadow / text-stroke / per-state type vocabulary.
         if (differs((n) => n.effects ?? [])) nameOnly('effects', `TEXT effects (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) have no text-shadow vocabulary`);
         if (differs((n) => n.stroke) || differs((n) => n.strokeWeight)) nameOnly('stroke', 'a TEXT stroke has no contract vocabulary');
-        for (const field of ['characters', 'fontSize', 'fontStyle', 'lineHeight', 'textCase', 'style', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar'] as const) {
+        for (const field of ['characters', 'fontSize', 'fontStyle', 'lineHeight', 'textCase', 'textDecoration', 'style', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar'] as const) {
           if (differs((n) => n.text?.[field])) nameOnly(`text.${field}`, 'part-level states carry color-kind, shadow, border and opacity channels only (no per-state type vocabulary)');
         }
       } else {
@@ -13055,6 +13220,7 @@ function proposeFromDumpFenced(
       const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true, true);
       Object.assign(rootTokens, textTokens);
       carryTextCase(template, root, ctx, path);
+      carryTextDecoration(template, root, ctx, path);
       carryFontSlant(template, root, ctx, path);
       root.declared = { ...(root.declared as Record<string, string> | undefined), 'font-family': templateFamily! };
       carryLetterSpacing(template, root, ctx, path, rootTokens);
@@ -13070,6 +13236,7 @@ function proposeFromDumpFenced(
     Object.assign(rootTokens, textTokens);
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
+    carryTextDecoration(only, root, ctx, `${where}/label`); // REST dump v1.44 / plugin v1.48 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`, rootTokens);
