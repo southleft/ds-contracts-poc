@@ -19,7 +19,7 @@ release.
 | Surface | Candidate in source | Registry state checked 2026-08-07 | Release action |
 | --- | --- | --- | --- |
 | Repository/reference implementation | `1.0.0-rc.1` | private root package; not published to npm | signed Git tag and GitHub prerelease |
-| `@ds-contracts/cli` | `0.5.0-rc.2` | `latest` is `0.4.0` · `next` is `0.5.0-rc.1` | publish exact RC under `next` |
+| `@ds-contracts/cli` | `0.5.0-rc.3` | `latest` is `0.4.0` · `next` is `0.5.0-rc.1` | publish exact RC under `next` |
 | `@ds-contracts/schema` | `17.0.0-rc.1` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` | publish exact RC under `next` — a MAJOR (schema 17 `bindings` hoist; consumers run `ds-contracts migrate`) |
 | `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | `latest` is `0.3.0` · `next` is `0.4.0-rc.1` | publish exact RC under `next` |
 
@@ -149,7 +149,7 @@ packed CLI. This verifies package exports rather than workspace resolution.
 
 Release notes must tell adopters:
 
-- CLI `0.5.0-rc.2` is newer than the stable `0.4.0` and than the published
+- CLI `0.5.0-rc.3` is newer than the stable `0.4.0` and than the published
   `next` RC (`0.5.0-rc.1`); install it by exact version while it is an RC. Re-run dry-run/review stages before allowing
   `promote`, `figma receive --apply`, or PR-writing commands to change files.
 - Promotion now carries and checks contract provenance. A stale capture may be
@@ -254,7 +254,7 @@ After the workflow completes, verify independently of it:
 ```bash
 npm view @ds-contracts/schema@16.1.0-rc.2 version dist.tarball dist.integrity --json
 npm view @ds-contracts/emitter-web-components@0.4.0-rc.2 version dist.tarball dist.integrity --json
-npm view @ds-contracts/cli@0.5.0-rc.2 version dist.tarball dist.integrity --json
+npm view @ds-contracts/cli@0.5.0-rc.3 version dist.tarball dist.integrity --json
 npm view @ds-contracts/schema dist-tags --json
 npm view @ds-contracts/emitter-web-components dist-tags --json
 npm view @ds-contracts/cli dist-tags --json

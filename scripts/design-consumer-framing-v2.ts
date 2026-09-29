@@ -1,3 +1,7 @@
+/** REST consumer framing v2: quantize Figma float32 bounds to browser layout
+ * units when qualifying REST exports. The original design-consumer-framing.ts
+ * remains byte-identical because recorded native evidence authenticates it.
+ * Thresholds, image scoring, and historical native measurements are unchanged. */
 /** A consumer comparison with recorded layout origins, never an ink alignment
  * search. Historical alpha-trim comparisons remain a separate measurement. */
 import { createHash } from "node:crypto";
@@ -44,6 +48,45 @@ export const enclosingFrame = (box: FrameBox): FrameBox => ({
   width: Math.ceil(box.x + box.width) - Math.floor(box.x),
   height: Math.ceil(box.y + box.height) - Math.floor(box.y),
 });
+/** The unit Figma REST bounds are compared in: 1/64 px.
+ *
+ * Figma computes and stores geometry as float32 (core/native-float32.ts), so a
+ * REST absoluteBoundingBox / absoluteRenderBounds carries float32 arithmetic
+ * error of a few units in the last place: HeroUI `lock` (2217:920) reports a
+ * 16 px icon as 16.000003814697266 (16 + 2^-18) wide, and `paper-plane`
+ * (2217:5233) a layout of 15.999999046325684 (16 - 2^-20) around a render of
+ * exactly 16. Taken literally, the first asks for a 17 px export beside
+ * Figma's own 16 px PNG and the second draws "outside" its own layout, so
+ * both came out `image-framing-unqualified` (first real-kit scoreboard,
+ * 2026-09-28) without anything being wrong.
+ *
+ * 1/64 px is the layout unit of the browser this check captures with:
+ * Chromium lays out in 1/64 px units (docs/23-known-limitations.md §D.61,
+ * source-reference/layout-unit.ts), so the consumer side of this comparison
+ * cannot express a difference finer than 1/64 px, and core/native-fixed-cross-size.ts
+ * keeps native layout arithmetic to that same dyadic domain because float32
+ * is exact on it. Rounding each Figma edge to the nearest 1/64 px therefore
+ * removes only differences neither instrument can express (float32 noise at
+ * these magnitudes is ~4,000 times smaller); a render that genuinely reaches
+ * past its layout, or a layout that genuinely needs another export pixel,
+ * differs by at least 1/64 px and is still refused. The recorded receipt keeps
+ * Figma's raw numbers; only the comparison reads them rounded.
+ *
+ * Figma's own exporter is not consistent below that unit: it drew the 16 px
+ * HeroUI icon above in 16 px, ignoring 3.8e-6, yet exported a Carbon text
+ * input whose REST width is 399.0010070800781 (15784:271032) in 400 px,
+ * counting 0.001. So the export span is qualified when the PNG is the ceiling
+ * of EITHER reading, raw or 1/64 px: the two differ by less than 1/64 px, and
+ * the extra column then holds less than 1/64 px of layout. A PNG that fits
+ * neither reading is still refused. */
+export const FIGMA_BOUNDS_UNIT_PX = 1 / 64;
+const toBoundsUnit = (v: number) => Math.round(v / FIGMA_BOUNDS_UNIT_PX) * FIGMA_BOUNDS_UNIT_PX;
+/** A Figma REST box with each EDGE rounded to 1/64 px (width and height follow
+ *  from the rounded edges, so containment is judged on the same edges). */
+export const figmaBoundsInLayoutUnits = (box: FrameBox): FrameBox => {
+  const x = toBoundsUnit(box.x), y = toBoundsUnit(box.y);
+  return { x, y, width: toBoundsUnit(box.x + box.width) - x, height: toBoundsUnit(box.y + box.height) - y };
+};
 const validBox = (box: FrameBox | undefined): box is FrameBox =>
   !!box &&
   [box.x, box.y, box.width, box.height].every(Number.isFinite) &&
@@ -109,37 +152,43 @@ export function alignRecordedFrames(
       figma.raster.scale !== 1)
   )
     return { refused: "figma-raster-model-unsupported" };
+  // Figma's REST bounds, read in 1/64 px units (FIGMA_BOUNDS_UNIT_PX above).
+  const figmaLayout = figmaBoundsInLayoutUnits(figma.layout),
+    figmaRender = figmaBoundsInLayoutUnits(figma.render);
+  // A full-bounds export spans the layout box from its local origin: its pixel
+  // span is the ceiling of the raw or the 1/64 px reading (see above). Legacy
+  // receipts (no raster model) keep their original raw render-span reading.
+  const spans = (pixels: number, raw: number, unit: number) =>
+    pixels === Math.ceil(raw) || pixels === Math.ceil(unit);
   const capture = enclosingFrame(consumer.layout),
-    exported = figma.raster
-      ? {
-          x: 0,
-          y: 0,
-          width: Math.ceil(figma.layout.width),
-          height: Math.ceil(figma.layout.height),
-        }
-      : enclosingFrame(figma.render);
+    exported = figma.raster ? null : enclosingFrame(figma.render);
   if (!sameBox(consumer.capture, capture))
     return { refused: "consumer-capture-span-mismatch" };
   if (ours.width !== capture.width || ours.height !== capture.height)
     return { refused: "consumer-image-span-mismatch" };
-  if (theirs.width !== exported.width || theirs.height !== exported.height)
+  if (
+    exported
+      ? theirs.width !== exported.width || theirs.height !== exported.height
+      : !spans(theirs.width, figma.layout.width, figmaLayout.width) ||
+        !spans(theirs.height, figma.layout.height, figmaLayout.height)
+  )
     return { refused: "figma-image-span-mismatch" };
   // The browser instrument captures the root layout box. It cannot qualify a
   // Figma export with shadows/outlines beyond that box by clipping them away.
   if (
-    figma.render.x < figma.layout.x ||
-    figma.render.y < figma.layout.y ||
-    figma.render.x + figma.render.width > figma.layout.x + figma.layout.width ||
-    figma.render.y + figma.render.height > figma.layout.y + figma.layout.height
+    figmaRender.x < figmaLayout.x ||
+    figmaRender.y < figmaLayout.y ||
+    figmaRender.x + figmaRender.width > figmaLayout.x + figmaLayout.width ||
+    figmaRender.y + figmaRender.height > figmaLayout.y + figmaLayout.height
   )
     return { refused: "render-outside-layout-capture-unqualified" };
   const ca = {
     x: consumer.layout.x - capture.x,
     y: consumer.layout.y - capture.y,
   };
-  const fa = figma.raster
-    ? { x: 0, y: 0 }
-    : { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y };
+  const fa = exported
+    ? { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y }
+    : { x: 0, y: 0 };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };

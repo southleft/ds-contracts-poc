@@ -1,0 +1,57 @@
+name: cli-figma-to-react
+
+# THE INSTALLED-CLI SMOKE GATE (Beta 1, docs/GOAL.md work order item 3). The
+# packed @ds-contracts/cli is installed into an empty directory with no
+# repository and runs `figma-to-react` on the frozen Altitude Badge dump. Its
+# request, generated files and tarball entries must equal the benchmark pin;
+# the check must report every variant UNVERIFIED without a Figma token and
+# NOT CHECKED without a Chromium; no repository path may reach its output.
+# See scripts/cli-figma-to-react-smoke.ts. Its own workflow so the fast job's
+# time budget is untouched.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cli-figma-to-react-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  cli-smoke:
+    name: installed CLI figma-to-react
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      - name: build @ds-contracts/schema and @ds-contracts/core (the smoke reads the benchmark helpers)
+        run: npm run prep:core
+
+      - name: cache playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+
+      # The installed CLI pins the same playwright-core, so this is the browser
+      # its check launches; the smoke's own install step then finds it cached.
+      - name: install chromium and its system libraries
+        run: npx playwright-core install --with-deps chromium
+
+      - name: cli:figma-to-react:smoke:check (pack, install with no repository, compare with the pin)
+        run: npm run cli:figma-to-react:smoke:check

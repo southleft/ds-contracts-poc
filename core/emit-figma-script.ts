@@ -1,5 +1,6 @@
 import {contractDependencyEdges, resolveComponentPlacement} from '../scripts/contract-schema.js';
 import { lowerNativeFilledPath } from './native-filled-path.js';
+import { ROOT_CONTENT_EMPTY_WIDTH_SEED } from './native-float32.js';
 import { figmaSelectionApi, type FigmaSelectionApi, type SelectionIdentity } from './figma-selection-api.js';
 import { compiledBorderInsets, lowerAbsoluteInsets } from './absolute-box.js';
 import { selectedSampleKey, selectionErrors } from '../packages/core/src/selection.js';
@@ -8470,7 +8471,7 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
   if (child.width === 0) {
     const sizing = child.layoutSizingHorizontal;
     child.layoutSizingHorizontal = 'FIXED';
-    child.resizeWithoutConstraints(0.01, child.height);
+    child.resizeWithoutConstraints(${ROOT_CONTENT_EMPTY_WIDTH_SEED}, child.height);
     child.layoutSizingHorizontal = sizing;
   }${hasRootGridSlot ? `
   if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
@@ -8487,7 +8488,7 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     if (!grid.children.length) for (const axis of ['Vertical', 'Horizontal']) {
       if (grid['layoutSizing' + axis] !== 'HUG') continue;
       grid['layoutSizing' + axis] = 'FIXED';
-      grid.resizeWithoutConstraints(axis === 'Horizontal' ? 0.01 : grid.width, axis === 'Vertical' ? 0 : grid.height);
+      grid.resizeWithoutConstraints(axis === 'Horizontal' ? ${ROOT_CONTENT_EMPTY_WIDTH_SEED} : grid.width, axis === 'Vertical' ? 0 : grid.height);
       grid['layoutSizing' + axis] = 'HUG';
     }
   }` : ''}

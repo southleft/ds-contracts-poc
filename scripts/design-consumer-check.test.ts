@@ -329,7 +329,7 @@ test('a second background exposes missing pale ink while the original white comp
 });
 
 // Authenticated layout origins must not let an independent ink crop move geometry.
-import { alignRecordedFrames, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, type FrameBox, type FigmaFrame } from './design-consumer-framing.js';
+import { alignRecordedFrames, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, type FrameBox, type FigmaFrame } from './design-consumer-framing-v2.js';
 const frameBytes=(width:number,height:number,paint:(p:PNG)=>void)=>{const p=new PNG({width,height});paint(p);return PNG.sync.write(p);};
 const rect=(p:PNG,x:number,y:number,w:number,h:number,rgba=[10,80,150,255])=>{
   for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)for(let c=0;c<4;c++)p.data[(yy*p.width+xx)*4+c]=rgba[c];

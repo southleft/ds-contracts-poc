@@ -227,7 +227,7 @@ being surprised by them is.
    `package.json` declares no `bin`, so from a clone every command is spelled
    `npx tsx packages/cli/src/cli.ts …`. There is *also* a published
    **`@ds-contracts/cli`**, currently **0.4.0**, while this source tree is
-   `0.5.0-rc.2` — **the published CLI is behind the source.**
+   `0.5.0-rc.3` — **the published CLI is behind the source.**
    When that was last checked (the FIVE-stem set, schema 16), `npx
    @ds-contracts/cli@0.4.0 figma bundle …` produced a bundle **byte-identical**
    to the source tree's, sha256 `bb96f43e…`, 92,764 bytes both ways. **That

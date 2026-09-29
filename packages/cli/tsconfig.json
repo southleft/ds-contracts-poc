@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "paths": {
       "@ds-contracts/core": ["../core/src/index.ts"],
       "@ds-contracts/schema": ["../schema/src/index.ts"]
