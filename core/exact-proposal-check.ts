@@ -3321,15 +3321,70 @@ console.log(
     ]),
     reviewable,
   );
+  // BETA SPIKE (carry, don't drop — fidelity first): a DRAWN size the dump
+  // states is carried, not excluded. This pin used to require the refusal.
   check(
-    "a producer's `fixedSize` on an AUTO-LAYOUT node is refused by the same name (the plugin never writes one there; non-auto-layout fixedSize still mints as before)",
+    "a producer's `fixedSize` on an AUTO-LAYOUT node is CARRIED (fidelity first): both drawn 20px axes ride the mint and the receipt says CARRIED, not FC-GEOMETRY-EXCLUDED",
     producerFixed.notes.some((n) =>
-      /P2FixedSize:root\/a: auto-layout FRAME child drawn FIXED on width \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) and height \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) .* FC-GEOMETRY-EXCLUDED/.test(
+      /P2FixedSize:root\/a: auto-layout FRAME child drawn FIXED on width \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) and height \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) — CARRIED \(fidelity first\)/.test(
         n,
       ),
     ) &&
-      !mintedPaths(producerFixed).some((p) =>
-        /imported\.p2-fixed-size\.a\.(width|height)/.test(p),
+      !producerFixed.notes.some((n) =>
+        /P2FixedSize:root\/a: .*FC-GEOMETRY-EXCLUDED \(Option B\)/.test(n),
+      ) &&
+      (partOf(producerFixed, "a")?.tokens as Record<string, string> | undefined)
+        ?.width !== undefined &&
+      (partOf(producerFixed, "a")?.tokens as Record<string, string> | undefined)
+        ?.height !== undefined &&
+      (producerFixed.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.value === "20px" &&
+          e.usageSites.some((s) => s.startsWith("P2FixedSize:root/a width")),
+      ) &&
+      (producerFixed.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.value === "20px" &&
+          e.usageSites.some((s) => s.startsWith("P2FixedSize:root/a height")),
+      ),
+  );
+  // The EXACT implication: a FIXED child that is the ONLY visible in-flow
+  // child of a hugging root is drawn at the root box minus the padding.
+  const soleChild = (h: number, size: string): DumpNode => ({
+    name: `Size=${size}`,
+    type: "COMPONENT",
+    bbox: { width: 60, height: h },
+    ...row({ fill: { hex: "ffffff" } }, [
+      {
+        ...fixedBox("a"),
+        layout: { ...fixedBox("a").layout!, primarySizing: "AUTO" },
+        children: [label()],
+      },
+    ]),
+  });
+  const sole = proposeFromDump(
+    p2Set("P2SoleFixed", [soleChild(36, "Sm"), soleChild(48, "Lg")]),
+    reviewable,
+  );
+  check(
+    "a FIXED child that alone fills a hugging root carries root box − padding per variant (28/40px), keyed by its axis",
+    (partOf(sole, "a")?.tokens as Record<string, string> | undefined)
+      ?.height === "{imported.p2-sole-fixed.a.height.{size}}" &&
+      mintedPaths(sole).includes("{imported.p2-sole-fixed.a.height.sm}") &&
+      (sole.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.ref === "{imported.p2-sole-fixed.a.height.sm}" &&
+          e.value === "28px",
+      ) &&
+      (sole.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.ref === "{imported.p2-sole-fixed.a.height.lg}" &&
+          e.value === "40px",
+      ) &&
+      sole.notes.some((n) =>
+        /P2SoleFixed:root\/a: auto-layout FRAME child drawn FIXED on height .* — CARRIED \(fidelity first\)/.test(
+          n,
+        ),
       ),
   );
 }

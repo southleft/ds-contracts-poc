@@ -30,12 +30,12 @@ import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, CODE_STATE_PREVIEWS, type ComponentRef, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, LITERAL_COMBINATION_CHANNELS, literalValueOk, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, CODE_STATE_PREVIEWS, type ComponentRef, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
-import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
+import { mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
   deriveAbsentVariants,
@@ -2516,6 +2516,79 @@ function mintObservation(
 const numOccurrences = (m: Merged, valueOf: (n: DumpNode) => number | undefined) =>
   m.occ.map((o) => ({ variant: o.variant, value: valueOf(o.node) ?? 0 }));
 
+type LiteralTableField = Array<{ props: string[]; rows: Array<{ values: string[]; literals: Record<string, string> }> }>;
+
+/** Does a part already carry `channel` in a literalsByCombination table? */
+function literalTableCarries(part: Record<string, unknown>, channel: string): boolean {
+  const tables = part.literalsByCombination as LiteralTableField | undefined;
+  return (tables ?? []).some((t) => t.rows.some((r) => channel in r.literals));
+}
+
+/** CARRY, DON'T DROP (beta spike) — place a refused observation's literal
+ *  table (mint-tokens literalTable) on the part that owns the observation.
+ *
+ *  Only a part's OWN base tokens record takes a table: the observation's
+ *  target must be a record attachTokens registered (state planes, per-
+ *  instance override targets and stub geometry keep their refusal). The
+ *  channel must have a literal spelling (LITERAL_COMBINATION_CHANNELS + its value
+ *  grammar), the part must not be a component instance, no token may bind
+ *  the channel on the same part, and no omitted-plane (unset) axis may key
+ *  the table — each refusal is returned so the note can say it. Tables with
+ *  the same props share one entry; rows merge by tuple and stay in declared
+ *  axis value order. Deterministic: a function of the observations and the
+ *  axis declaration only. */
+function placeLiteralTable(
+  mint: MintCapture,
+  obs: MintObservation & { target: Record<string, string> },
+  table: MintedLiteralTable,
+  unsetProps: ReadonlySet<string>,
+): { carried: true } | { carried: false; why: string } {
+  const channel = obs.cssProperty;
+  const holder = mint.attach.find((a) => a.tokens === obs.target)?.holder;
+  if (!holder) return { carried: false, why: 'the channel is not a part\'s base styling (a state plane, an instance override or stub geometry)' };
+  if (holder.component !== undefined) return { carried: false, why: 'the part is a component instance (the child contract owns its styling)' };
+  if (!LITERAL_COMBINATION_CHANNELS.has(channel)) return { carried: false, why: `"${channel}" is not a literal channel` };
+  const bad = table.rows.find((r) => !literalValueOk(channel, r.value));
+  if (bad) return { carried: false, why: `${bad.value} is outside the "${channel}" literal grammar` };
+  if (table.props.some((p) => unsetProps.has(p))) return { carried: false, why: 'an omitted-plane axis keys the values' };
+  const tokenBound = obs.target[channel] !== undefined ||
+    [holder.tokensByProp].flat().some((e) => e && Object.values((e as { map: Record<string, Record<string, string>> }).map).some((m) => channel in m)) ||
+    ((holder.tokensByCombination as Array<{ rows: Array<{ tokens: Record<string, string> }> }> | undefined) ?? []).some((t) => t.rows.some((r) => channel in r.tokens));
+  if (tokenBound) return { carried: false, why: `a token already binds "${channel}" on this part` };
+  if (literalTableCarries(holder, channel)) return { carried: false, why: `another table already carries "${channel}" on this part` };
+  const tables = (holder.literalsByCombination as LiteralTableField | undefined) ?? [];
+  const key = JSON.stringify(table.props);
+  let entry = tables.find((t) => JSON.stringify(t.props) === key);
+  if (!entry) {
+    entry = { props: [...table.props], rows: [] };
+    tables.push(entry);
+  }
+  for (const row of table.rows) {
+    const tuple = JSON.stringify(row.values);
+    const existing = entry.rows.find((r) => JSON.stringify(r.values) === tuple);
+    if (existing) existing.literals[channel] = row.value;
+    else entry.rows.push({ values: [...row.values], literals: { [channel]: row.value } });
+  }
+  const order = entry.props.map((p) => mint.axes.find((a) => a.propName === p)?.values ?? []);
+  entry.rows.sort((x, y) => {
+    for (let i = 0; i < order.length; i++) {
+      const d = order[i].indexOf(x.values[i]) - order[i].indexOf(y.values[i]);
+      if (d !== 0) return d;
+    }
+    return 0;
+  });
+  holder.literalsByCombination = tables;
+  return { carried: true };
+}
+
+/** The receipt for a placed literal table: what was carried, keyed how, and
+ *  that it is NOT a token. */
+function literalTableNote(obs: MintObservation, table: MintedLiteralTable): string {
+  const distinct = [...new Set(table.rows.map((r) => r.value))];
+  const sample = table.rows.slice(0, 4).map((r) => `${r.values.join('/')}=${r.value}`).join(', ');
+  return `${obs.nodePath} ${obs.cssProperty}: CARRIED AS AN UNTOKENIZED LITERAL — the resolved values differ across variants and fit no token rule (one axis, an axis pair, or a root triple with every combination drawn), so no token was minted; they are a function of ${table.props.join(' × ')} over the ${obs.occurrences.length} drawn occurrence(s), and literalsByCombination carries each of the ${table.rows.length} drawn combination(s) with its own measured value (${distinct.length} distinct; ${sample}${table.rows.length > 4 ? ', …' : ''}). A prop combination the set never draws takes the row its ${table.props.join('/')} values name, or the part's base styling when no row matches — review and bind real tokens`;
+}
+
 /** GAP-CLOSING ROUND 2 (`axis-inert`) — BASE-SLICE PROJECTION of a refused
  *  literal channel onto ONE axis.
  *
@@ -4640,8 +4713,41 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
  *  KIT-CLIMB.md) — so the part sizes to content. That was SILENT; it is a
  *  receipt now, with the code. A FILL axis (fillWidth/fillHeight) is spelled
  *  FIXED by Figma too and is excluded (it is carried as grow/stretch). */
-function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
+/** THE DRAWN BOX OF ONE OCCURRENCE ON ONE AXIS, when the dump states it or
+ *  implies it EXACTLY (beta spike, carry don't drop). Stated: a root/instance
+ *  `bbox`, or a producer's `fixedSize`. Implied: the occurrence is the ONLY
+ *  visible in-flow child of an auto-layout parent that HUGS on this axis and
+ *  carries no min/max there and no in-layout stroke — Figma then sizes the
+ *  parent to exactly child + padding, so child = parent − padding, with the
+ *  parent's own box read the same way (up to a root's bbox). Anything else
+ *  (a sibling, a FIXED or wrapping parent, a clamp) is undefined: never a
+ *  guess. Rounded to the dump's two-decimal geometry. */
+function drawnAxisOf(o: Occ, dim: 'width' | 'height', depth = 0): number | undefined {
+  if (o.node.bbox) return o.node.bbox[dim];
+  if (typeof o.node.fixedSize?.[dim] === 'number') return o.node.fixedSize[dim];
+  const parent = o.parent?.node;
+  const l = parent?.layout;
+  if (!parent || !l || depth > 16 || (l.mode !== 'HORIZONTAL' && l.mode !== 'VERTICAL') || l.wrap) return undefined;
+  const hugs = ((dim === 'width') === (l.mode === 'HORIZONTAL') ? l.primarySizing : l.counterSizing) === 'AUTO';
+  const clamped = dim === 'width'
+    ? parent.minWidth !== undefined || parent.maxWidth !== undefined
+    : parent.minHeight !== undefined || parent.maxHeight !== undefined;
+  const inLayoutStroke = parent.strokesIncludedInLayout === true &&
+    ((parent.strokeWeight ?? 0) > 0 || parent.strokeWeights !== undefined);
+  if (!hugs || clamped || inLayoutStroke) return undefined;
+  const inFlow = (parent.children ?? []).filter((c) => c.hidden !== true && c.abs === undefined);
+  if (inFlow.length !== 1 || inFlow[0] !== o.node) return undefined;
+  const parentOcc = o.parent!.occurrences.find((p) => p.node === parent);
+  const outer = parentOcc ? drawnAxisOf(parentOcc, dim, depth + 1) : undefined;
+  if (outer === undefined) return undefined;
+  const [top, right, bottom, left] = l.padding;
+  const inner = Math.round((outer - (dim === 'width' ? left + right : top + bottom)) * 100) / 100;
+  return inner > 0 ? inner : undefined;
+}
+
+function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { tokens: Record<string, string> }): void {
   const dims: string[] = [];
+  const carried: string[] = [];
   for (const dim of ['width', 'height'] as const) {
     // FIXED by the auto-layout sizing MODE, or a producer's `fixedSize` on an
     // auto-layout node (the plugin writes fixedSize for non-auto-layout
@@ -4678,6 +4784,28 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
       // @door propose.fixed-size-carrier-exists
       continue; // a carrier exists — the size channels speak for it
     }
+    // CARRY, DON'T DROP (beta spike): FIXED in EVERY occurrence and a drawn
+    // box every occurrence states or exactly implies (drawnAxisOf) — the
+    // per-variant px ride the standard mint (a token where one axis or a
+    // pair explains them, else an untokenized literal table). A child that
+    // is FIXED in some variants only keeps the receipt below: a uniform
+    // value would otherwise bind the variants where it hugs or fills too.
+    // @door propose.fixed-child-geometry-carried
+    const values = fixedIn.length === m.occ.length ? m.occ.map((o) => drawnAxisOf(o, dim)) : [];
+    if (
+      carry && ctx.mint && carry.tokens[dim] === undefined && values.length > 0 &&
+      values.every((v): v is number => v !== undefined) &&
+      !m.occ.some((o) => o.node.layout?.mode === 'GRID')
+    ) {
+      mintObservation(
+        ctx, carry.tokens, where, dim, 'px',
+        m.occ.map((o, i) => ({ variant: o.variant, value: values[i]! })),
+        `${where}|fixed-child-${dim}`,
+      );
+      const distinct = [...new Set(values)];
+      carried.push(`${dim} (FIXED in ${m.occ.length}/${m.occ.length} variant occurrence(s); drawn ${distinct.slice(0, 8).join('/')}${distinct.length > 8 ? '/…' : ''}px)`);
+      continue;
+    }
     const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
     // The variants where the same child FILLS instead are named beside the
     // FIXED ones, so the receipt says which variant it is about.
@@ -4687,6 +4815,11 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
         ? ` — FIXED on ${fixedIn.map((o) => o.variant).join(', ')}; FILL on ${fillIn.map((o) => o.variant).join(', ')} (a different fact on those variants)`
         : '';
     dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${byVariant}${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
+  }
+  if (carried.length > 0) {
+    ctx.notes.push(
+      `${where}: auto-layout ${m.type} child drawn FIXED on ${carried.join(' and ')} — CARRIED (fidelity first): each occurrence's drawn size is stated by the dump or implied exactly by a hugging parent it alone fills (parent box − padding), and the per-variant px ride the mint as ${carried.map((c) => c.split(' ')[0]).join('/')} observations (a token where one axis or a pair explains them, an untokenized literal table otherwise); formerly FC-GEOMETRY-EXCLUDED — review against the design's own sizing variables`,
+    );
   }
   // @door propose.fixed-child-geometry-excluded
   if (dims.length === 0) return;
@@ -9466,7 +9599,7 @@ function buildPartFromEvidence(
     carryCrossAxisFill(m, parentMode, part, ctx, where);
     invertNodeOpacity(m, part, slotTokens, ctx, where);
     invertNodeEffects(m, slotTokens, ctx, where);
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
+    nameFixedChildGeometry(m, ctx, where, { tokens: slotTokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     attachTokens(ctx, part, slotTokens);
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility
@@ -10025,7 +10158,7 @@ function buildPartFromEvidence(
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -10048,7 +10181,7 @@ function buildPartFromEvidence(
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
     carryCrossAxisFill(m, parentMode, part, ctx, where); // dump v1.31
     carryAspectRatio(m, part, ctx, where); // dump v1.31
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -10072,7 +10205,7 @@ function buildPartFromEvidence(
   // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
-  nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
+  nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
   attachTokens(ctx, part, tokens);
   carryGridAxisSizing(m, part, ctx, where, tokens); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -13650,6 +13783,10 @@ function proposeFromDumpFenced(
     const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, {
       nestedPairs: true,
       realizedCombos,
+      // CARRY, DON'T DROP (beta spike): a refused channel comes back with
+      // its observed values as a literal table; placeLiteralTable below puts
+      // it on the part (literalsByCombination) where the part can carry it.
+      literalFallback: true,
       // THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Both dump producers
       // round canvas geometry to two decimals, so a width the code→canvas
       // mint spelled 39.9219px from computed style comes back 39.92px — one
@@ -13684,7 +13821,16 @@ function proposeFromDumpFenced(
         );
       }
       if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
-      else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
+      else if (binding.literal) {
+        const placed = placeLiteralTable(
+          ctx.mint!, obs, binding.literal, new Set(unsetAxes.map((a) => a.propName)),
+        );
+        ctx.notes.push(
+          placed.carried
+            ? literalTableNote(obs, binding.literal)
+            : `${obs.nodePath} ${obs.cssProperty}: ${binding.reason ?? 'not minted'} (not carried as an untokenized literal either: ${placed.why})`,
+        );
+      } else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
       // A carried-but-unwitnessed pair is BOUND, so it takes the ref above —
       // and its caveat is named here rather than swallowed. Bound and named
       // are not mutually exclusive; only refusals use `reason`.
@@ -13713,6 +13859,9 @@ function proposeFromDumpFenced(
     // offset. The per-variant refusal above stays named; the fallback is too.
     for (const fb of ctx.mint.absFallbacks) {
       if (fb.tokens[fb.chan] !== undefined) continue; // minted — no fallback needed
+      // Carried per drawn combination as an untokenized literal (named at
+      // placement) — a base-combo guess would only restate one of its rows.
+      if (literalTableCarries(fb.part, fb.chan)) continue;
       const literals = (fb.part.literals as Record<string, string> | undefined) ?? {};
       if (literals[fb.chan] !== undefined) continue;
       literals[fb.chan] = `${fb.value}px`;
