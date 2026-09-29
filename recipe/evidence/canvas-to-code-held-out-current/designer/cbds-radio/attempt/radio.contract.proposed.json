@@ -189,7 +189,8 @@
           },
           "tokens": {
             "gap": "{spacing.050}",
-            "padding-left": "{imported.radio-button.error-text.padding-left.{alignment}.{size}}"
+            "padding-left": "{imported.radio-button.error-text.padding-left.{alignment}.{size}}",
+            "width": "{imported.radio-button.error-text.width}"
           },
           "parts": {
             "Icon": {
