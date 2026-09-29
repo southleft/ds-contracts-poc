@@ -66,7 +66,15 @@ export const enclosingFrame = (box: FrameBox): FrameBox => ({
  * these magnitudes is ~4,000 times smaller); a render that genuinely reaches
  * past its layout, or a layout that genuinely needs another export pixel,
  * differs by at least 1/64 px and is still refused. The recorded receipt keeps
- * Figma's raw numbers; only the comparison reads them rounded. */
+ * Figma's raw numbers; only the comparison reads them rounded.
+ *
+ * Figma's own exporter is not consistent below that unit: it drew the 16 px
+ * HeroUI icon above in 16 px, ignoring 3.8e-6, yet exported a Carbon text
+ * input whose REST width is 399.0010070800781 (15784:271032) in 400 px,
+ * counting 0.001. So the export span is qualified when the PNG is the ceiling
+ * of EITHER reading, raw or 1/64 px: the two differ by less than 1/64 px, and
+ * the extra column then holds less than 1/64 px of layout. A PNG that fits
+ * neither reading is still refused. */
 export const FIGMA_BOUNDS_UNIT_PX = 1 / 64;
 const toBoundsUnit = (v: number) => Math.round(v / FIGMA_BOUNDS_UNIT_PX) * FIGMA_BOUNDS_UNIT_PX;
 /** A Figma REST box with each EDGE rounded to 1/64 px (width and height follow
@@ -143,20 +151,23 @@ export function alignRecordedFrames(
   // Figma's REST bounds, read in 1/64 px units (FIGMA_BOUNDS_UNIT_PX above).
   const figmaLayout = figmaBoundsInLayoutUnits(figma.layout),
     figmaRender = figmaBoundsInLayoutUnits(figma.render);
+  // A full-bounds export spans the layout box from its local origin: its pixel
+  // span is the ceiling of the raw or the 1/64 px reading (see above). Legacy
+  // receipts (no raster model) keep their original raw render-span reading.
+  const spans = (pixels: number, raw: number, unit: number) =>
+    pixels === Math.ceil(raw) || pixels === Math.ceil(unit);
   const capture = enclosingFrame(consumer.layout),
-    exported = figma.raster
-      ? {
-          x: 0,
-          y: 0,
-          width: Math.ceil(figmaLayout.width),
-          height: Math.ceil(figmaLayout.height),
-        }
-      : enclosingFrame(figmaRender);
+    exported = figma.raster ? null : enclosingFrame(figma.render);
   if (!sameBox(consumer.capture, capture))
     return { refused: "consumer-capture-span-mismatch" };
   if (ours.width !== capture.width || ours.height !== capture.height)
     return { refused: "consumer-image-span-mismatch" };
-  if (theirs.width !== exported.width || theirs.height !== exported.height)
+  if (
+    exported
+      ? theirs.width !== exported.width || theirs.height !== exported.height
+      : !spans(theirs.width, figma.layout.width, figmaLayout.width) ||
+        !spans(theirs.height, figma.layout.height, figmaLayout.height)
+  )
     return { refused: "figma-image-span-mismatch" };
   // The browser instrument captures the root layout box. It cannot qualify a
   // Figma export with shadows/outlines beyond that box by clipping them away.
@@ -171,9 +182,9 @@ export function alignRecordedFrames(
     x: consumer.layout.x - capture.x,
     y: consumer.layout.y - capture.y,
   };
-  const fa = figma.raster
-    ? { x: 0, y: 0 }
-    : { x: figmaLayout.x - exported.x, y: figmaLayout.y - exported.y };
+  const fa = exported
+    ? { x: figma.layout.x - exported.x, y: figma.layout.y - exported.y }
+    : { x: 0, y: 0 };
   const origin = { x: Math.max(ca.x, fa.x), y: Math.max(ca.y, fa.y) };
   const at = { x: origin.x - ca.x, y: origin.y - ca.y },
     bt = { x: origin.x - fa.x, y: origin.y - fa.y };
