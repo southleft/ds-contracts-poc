@@ -1560,7 +1560,7 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
   // dump v1.44: every INSIDE/CENTER/OUTSIDE alignment is CARRIED (mapNode).
   // CENTER keeps the plugin reader's own receipt code: the alignment is
   // captured, and the proposer can lower it only where the stroke takes no
-  // layout space (an outline centred on the edge); elsewhere it names the
+  // layout space (an outline centered on the edge); elsewhere it names the
   // INSIDE-border approximation. Twin of dump.plugin.js (stroke-align-
   // unsupported). A spelling outside the three is not carried and says so.
   if (strokeDetail && node.strokeAlign === 'CENTER') {

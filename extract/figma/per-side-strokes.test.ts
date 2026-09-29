@@ -157,10 +157,14 @@ test('mixed or partial evidence is NAMED, never guessed', () => {
   assert.equal((part.tokens as Record<string, string> | undefined)?.['border-width'], undefined, 'and no uniform width is invented in its place');
   assert.ok(partial.notes.some(n => /header: per-side stroke weights are mixed, partial, or invalid across variants \(\[1, 0, 1, 0\] \/ not captured/.test(n)));
 
-  // An OUTSIDE stroke lowers to the outline vocabulary, which has no per-side widths.
+  // An OUTSIDE stroke has no per-side outline spelling (one outline width for
+  // all four sides). Since REST dump v1.44 carries OUTSIDE, refusing the widths
+  // left the outline color with nothing to paint (Radix's Blockquote rule
+  // vanished): the per-side widths carry as the border, and the inward
+  // approximation is named.
   const outside = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }]);
   outside.headers[0].strokeAlign = 'OUTSIDE';
   const named = propose(outside.set);
-  assert.equal(headerPart(named.contract as never).literals, undefined);
-  assert.ok(named.notes.some(n => /per-side stroke weights .* on an OUTSIDE stroke/.test(n)));
+  assert.deepEqual(headerPart(named.contract as never).literals, { 'border-top-width': '1px', 'border-right-width': '0px', 'border-bottom-width': '1px', 'border-left-width': '0px' });
+  assert.ok(named.notes.some(n => /strokeAlign OUTSIDE on a stroke whose sides differ .* carries as a border drawn INWARD/.test(n)));
 });

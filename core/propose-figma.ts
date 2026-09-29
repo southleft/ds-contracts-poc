@@ -2983,6 +2983,17 @@ const drawnStrokeAligns = (m: Merged) =>
  *  replaces the resting stroke in that state, the standing OUTSIDE
  *  limitation. */
 const STROKE_SIDE_BOUND_FIELDS = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+/** Does any drawn stroke here have per-side weights (literal or bound)? An
+ *  outline has one width for all four sides, so such a stroke has no outline
+ *  spelling. */
+const perSideStroked = (nodes: readonly DumpNode[]): boolean =>
+  nodes.some((n) => {
+    if (n.stroke === undefined) return false;
+    if (n.strokeWeights !== undefined) return true;
+    const sides = STROKE_SIDE_BOUND_FIELDS.map((f) => n.bound?.[f]);
+    // Four sides bound to ONE variable (or a bound uniform weight) is a uniform stroke.
+    return sides.some((s) => s !== undefined) && n.bound?.strokeWeight === undefined && !sides.every((s) => s !== undefined && s === sides[0]);
+  });
 function centeredStrokeOutline(nodes: readonly DumpNode[]): boolean {
   const drawn = nodes.filter((n) => n.stroke !== undefined);
   if (!drawn.some((n) => n.strokeAlign === 'CENTER')) return false;
@@ -3018,7 +3029,19 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
     return 'border';
   }
   const [align] = aligns;
-  if (align === 'OUTSIDE') return 'outline';
+  if (align === 'OUTSIDE') {
+    if (!perSideStroked(m.occ.map((o) => o.node))) return 'outline';
+    // An OUTSIDE stroke drawn on SOME sides only (Radix's Blockquote rule: the
+    // left side) has no outline spelling — `outline` draws all four sides at
+    // one width — and lowering it to outline-color with no width drew nothing
+    // at all. It carries as the per-side border (inward), off by its weight on
+    // the drawn sides, and says so.
+    // @door propose.stroke-align-outside-per-side-border
+    ctx.notes.push(
+      `${where}: strokeAlign OUTSIDE on a stroke whose sides differ — CSS outline has one width for all four sides, so the per-side stroke carries as a border drawn INWARD (off by its weight on each drawn side; a per-side outer box-shadow is not carried yet) (review)`,
+    );
+    return 'border';
+  }
   // @door propose.stroke-align-center-unsupported
   if (align === 'CENTER' && !m.occ.every(o => o.node.shape?.kind === 'stroked-path')) {
     ctx.notes.push(
@@ -4193,7 +4216,9 @@ function parentCssBorderInsets(o: Occ, ctx: Ctx): BoxInsets {
   if (new Set(drawn.map(n => n.strokeAlign === 'OUTSIDE' ? 'OUTSIDE' : 'INSIDE')).size > 1 ||
       new Set(drawn.map(n => n.strokesIncludedInLayout ?? true)).size > 1)
     throw Error('absolute-box-parent-stroke-basis-unqualified');
-  if (parent.strokeAlign === 'OUTSIDE' || parent.strokesIncludedInLayout === false) return zeroInsets();
+  // A per-side OUTSIDE stroke lowers to a border (strokeVocabulary), so only a
+  // uniform one is the insetless outline here.
+  if ((parent.strokeAlign === 'OUTSIDE' && !perSideStroked(o.parent!.occurrences.map(p => p.node))) || parent.strokesIncludedInLayout === false) return zeroInsets();
   // The parent inverter withholds literal side widths when only SOME sides
   // bind. Those raw widths therefore cannot be the emitted CSS border basis.
   if (parent.strokeWeights !== undefined) {
@@ -4914,8 +4939,24 @@ function carryAbsPlacement(
       `${where}: ${assumed} of ${boxes.length} occurrence(s) carry NO constraints field, so the placement is read as LEFT×TOP — an ASSUMPTION, not an observation. A pre-v1.13 dump also omitted the field for STRETCH/SCALE nodes (only MIN/MAX/CENTER had a spelling), so a box drawn pinned to all four edges is indistinguishable here from one pinned top-left; re-capture with dump v1.13+ to tell them apart`,
     );
   }
-  const hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
-  const vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
+  let hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
+  let vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
+  // CONSTRAINTS THAT DIFFER ACROSS VARIANTS (REST dump v1.44 made this common:
+  // Chakra's Progress fill is STRETCH in some variants and LEFT in others).
+  // Constraints say how a box follows a RESIZED parent; every variant's drawn
+  // box is exact at its drawn parent size, and one LEFT×TOP spelling (left/top
+  // offsets, plus the drawn size where the caller carries size) reproduces
+  // every drawn box exactly. So the observed geometry is carried and the lost
+  // resize behavior is named, instead of the part falling back into the flow
+  // (fidelity first). SCALE keeps its named refusal below.
+  // @door propose.abs-mixed-constraints-drawn-geometry
+  if ((hs.length > 1 || vs.length > 1) && !hs.includes('SCALE') && !vs.includes('SCALE')) {
+    ctx.notes.push(
+      `${where}: constraints differ across variants (${hs.join('|')} × ${vs.join('|')}) — every drawn box is carried at its DRAWN geometry as LEFT×TOP (left/top offsets${opts.size === true && opts.text !== true ? ' + width/height' : ''}, exact at the drawn parent size); how each variant follows a resized parent is NOT carried (review)`,
+    );
+    hs = ['LEFT'];
+    vs = ['TOP'];
+  }
   if (hs.length > 1 || vs.length > 1) {
     return ledger(`constraints differ across variants (${hs.join('|')} × ${vs.join('|')})`);
   }
@@ -5780,12 +5821,11 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
     );
     return;
   }
-  if (drawnStrokeAligns(m).size === 1 && drawnStrokeAligns(m).has('OUTSIDE')) {
-    ctx.notes.push(
-      `${where}: per-side stroke weights (${seen}; top, right, bottom, left) on an OUTSIDE stroke — the stroke lowers to the CSS outline vocabulary, which has no per-side widths; NAMED, not proposed (review)`,
-    );
-    return;
-  }
+  // An OUTSIDE stroke whose sides differ lowers to the per-side BORDER
+  // (strokeVocabulary names the inward approximation): the outline vocabulary
+  // has no per-side widths, and refusing the widths here as well left the
+  // outline color with nothing to paint (REST dump v1.44 made this reachable:
+  // Radix's Blockquote rule vanished).
   const rows: Array<{ variant: string; value: string }> = [];
   for (const o of m.occ) {
     const n = o.node;

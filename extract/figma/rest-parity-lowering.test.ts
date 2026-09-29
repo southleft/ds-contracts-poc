@@ -152,3 +152,52 @@ test('CENTER where the stroke takes layout space, or the fact is not captured, k
   const bare = propose(ringSet([{ align: 'CENTER', weight: 2 }, { align: 'CENTER', weight: 2 }]), false);
   assert.equal((anatomyOf(bare).root.tokens as Record<string, string> | undefined)?.['outline-offset'], undefined);
 });
+
+test('an OUTSIDE stroke drawn on some sides only keeps its per-side widths as a border (no outline spelling), named', () => {
+  // Radix's Blockquote: a 4px rule on the left side only, aligned OUTSIDE.
+  const set: RestNode = {
+    id: '1:1', name: 'Quote', type: 'COMPONENT_SET',
+    componentPropertyDefinitions: { Size: { type: 'VARIANT', defaultValue: '1', variantOptions: ['1', '2'] } },
+    children: ['1', '2'].map((size, i) => ({
+      id: `1:${i + 2}`, name: `Size=${size}`, type: 'COMPONENT', layoutMode: 'HORIZONTAL', paddingLeft: 12,
+      absoluteBoundingBox: { x: 0, y: 40 * i, width: 200, height: 24 },
+      strokes: SOLID(0.2, 0.3, 0.9), strokeWeight: 0, strokeAlign: 'OUTSIDE',
+      individualStrokeWeights: { top: 0, right: 0, bottom: 0, left: 4 },
+      children: [],
+    })),
+  };
+  const dumpSet = (mapRestToDump({ name: 'f', nodes: { '1:1': { document: set } } }).dump as unknown as Record<string, DumpSet>).Quote;
+  const r = propose(dumpSet);
+  ContractSchema.parse(r.contract);
+  const root = JSON.stringify(anatomyOf(r).root);
+  assert.doesNotMatch(root, /outline-color/);
+  assert.match(root, /border-left-width/);
+  assert.ok(r.notes.some((n) => /strokeAlign OUTSIDE on a stroke whose sides differ .* carries as a border drawn INWARD/.test(n)), r.notes.join('\n'));
+  assert.match(cssOf(r), /--_stroke-left-width: 4px|border-left-width: 4px/);
+});
+
+test('absolute placement whose constraints differ across variants carries at the drawn geometry as LEFT×TOP, named', () => {
+  // Chakra's Progress fill: ABSOLUTE in an auto-layout track, STRETCH at 100% and LEFT elsewhere.
+  const fills = [{ value: '25', width: 50, h: 'LEFT' }, { value: '100', width: 200, h: 'LEFT_RIGHT' }];
+  const set: RestNode = {
+    id: '1:1', name: 'Meter', type: 'COMPONENT_SET',
+    componentPropertyDefinitions: { Value: { type: 'VARIANT', defaultValue: '25', variantOptions: ['25', '100'] } },
+    children: fills.map((f, i) => ({
+      id: `1:${i + 2}`, name: `Value=${f.value}`, type: 'COMPONENT', layoutMode: 'VERTICAL', fills: SOLID(0.9, 0.9, 0.9),
+      absoluteBoundingBox: { x: 0, y: 20 * i, width: 200, height: 8 },
+      children: [{ id: `2:${i}`, name: 'Range', type: 'FRAME', layoutPositioning: 'ABSOLUTE', fills: SOLID(0.1, 0.5, 0.9),
+        absoluteBoundingBox: { x: 0, y: 20 * i, width: f.width, height: 8 }, constraints: { horizontal: f.h, vertical: 'TOP' },
+        layoutSizingHorizontal: 'FIXED', layoutSizingVertical: 'FIXED', children: [] }],
+    })),
+  };
+  const dumpSet = (mapRestToDump({ name: 'f', nodes: { '1:1': { document: set } } }).dump as unknown as Record<string, DumpSet>).Meter;
+  assert.deepEqual(dumpSet.variants.map((v) => (v as DumpNode).children![0].abs?.constraints?.horizontal), ['LEFT', 'STRETCH']);
+  const r = propose(dumpSet);
+  ContractSchema.parse(r.contract);
+  const parts = anatomyOf(r).root.parts ?? {};
+  const range = JSON.stringify(parts.Range ?? parts.range);
+  assert.match(range, /"position":"absolute"/);
+  assert.ok(r.notes.some((n) => /constraints differ across variants \(LEFT\|STRETCH × TOP\) — every drawn box is carried at its DRAWN geometry as LEFT×TOP/.test(n)), r.notes.join('\n'));
+  const widths = [...minted(r)].filter(([ref]) => /range\.width/.test(ref)).map(([, v]) => v).sort();
+  assert.deepEqual(widths, ['200px', '50px']);
+});
