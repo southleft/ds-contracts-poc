@@ -4954,6 +4954,20 @@ function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<
     ctx.mint.absFallbacks.push({ part, tokens, chan: dim, value: m.occ[0].node.fixedSize![dim]!, where });
     carried.push(dim);
   }
+  // A fixed in-flow main-axis size must survive a constrained flex parent.
+  // CSS defaults to flex-shrink: 1; Figma's FIXED child keeps its drawn size.
+  // Require that fact in every occurrence, including when the parent changes
+  // direction. A fixed cross axis alone says nothing about main-axis sizing.
+  if (ctx.mint && tokens['flex-shrink'] === undefined && m.occ.every((o) => {
+    const mode = o.parent?.node.layout?.mode;
+    const dim = mode === 'HORIZONTAL' ? 'width' : mode === 'VERTICAL' ? 'height' : undefined;
+    return dim !== undefined && o.node.fixedSize?.[dim] !== undefined &&
+      o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] !== true &&
+      (carried.includes(dim) || tokens[dim] !== undefined);
+  })) {
+    mintObservation(ctx, tokens, where, 'flex-shrink', 'number',
+      m.occ.map((o) => ({ variant: o.variant, value: 0 })), `${where}|fixed-main-axis-shrink`, sparse);
+  }
   if (carried.length > 0) {
     ctx.notes.push(
       `${where}: fixed-size in-flow box (dump v1.8 \`fixedSize\`) carried as ${carried.join('/')} mint observation(s) — the drawn box of a non-auto-layout child inside auto-layout, which no other channel carries; per-variant values classify through the standard mint machinery`,
