@@ -70,7 +70,6 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { chromium } from 'playwright-core';
 import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/visual-parity/img.js';
 import { readStateAxes, type InteractionState } from '../core/interaction-state-axis.js';
 import { contractDependencyEdges } from './contract-schema.js';
@@ -114,7 +113,17 @@ export function residualClass(maskedPct: number | null, maskCoveragePct: number)
   return maskedPct <= IMAGE_LIMIT_PERCENT ? 'text-only' : 'beyond-text';
 }
 
-type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean; fonts?: string };
+type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string; keepBuiltConsumer?: boolean; fonts?: string;
+  /** the Chromium to launch; playwright-core's own when absent */ chromiumPath?: string };
+
+declare const __DS_CONTRACTS_REACT_RANGE__: string | undefined;
+/** The React range the clean consumer installs: this repository's own React.
+ *  A bundled @ds-contracts/cli has no repository to read, so its build bakes
+ *  the same range in (packages/cli/build.mjs). */
+export function consumerReactRange(): string {
+  return typeof __DS_CONTRACTS_REACT_RANGE__ === 'string' ? __DS_CONTRACTS_REACT_RANGE__
+    : '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
+}
 function parseArgs(argv: string[]): Args {
   const read = (flag: string) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : undefined; };
   const required = (flag: string) => { const v = read(flag); if (!v) throw new Error(`design:consumer:check — ${flag} is required`); return v; };
@@ -541,8 +550,7 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
   else try {
     const lib = await packageReactLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
-    const reactVersion = '^' + JSON.parse(readFileSync(path.join(ROOT, 'node_modules', 'react', 'package.json'), 'utf8')).version;
-    const consumer = writeConsumer(work, lib, args.component, cases, reactVersion, fonts);
+    const consumer = writeConsumer(work, lib, args.component, cases, consumerReactRange(), fonts);
     run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], consumer);
     // The consumer must not resolve anything from this repository.
     const lockfile = readFileSync(path.join(consumer, 'package-lock.json'), 'utf8');
@@ -582,7 +590,10 @@ export async function runConsumerCheck(args: ConsumerCheckArgs): Promise<any> {
     });
     await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
     const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
-    const browser = await chromium.launch();
+    // Loaded here, not at the top: an installed CLI carries playwright-core as
+    // an optional dependency, and a missing one must not break the other verbs.
+    const { chromium } = await import('playwright-core');
+    const browser = await chromium.launch(args.chromiumPath ? { executablePath: args.chromiumPath } : undefined);
     try {
       const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 1 });
       const errors: string[] = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
@@ -885,4 +896,6 @@ async function main() {
   console.log(`${problems.length ? '✘' : '✔'} design:consumer:check ${args.component}: ${receipt.outcome}${problems.length ? '\n  - ' + problems.join('\n  - ') : ''}\n  receipt → ${path.join(args.out, 'receipt.json')}`);
   process.exit(problems.length ? 1 : 0);
 }
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) main();
+// Filename-matched (not import.meta.url-compared): bundled into the
+// ds-contracts CLI, import.meta.url is dist/cli.js, which is argv[1] there.
+if (process.argv[1] && /(^|[\\/])design-consumer-check\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))) main();
