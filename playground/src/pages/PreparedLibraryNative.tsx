@@ -103,7 +103,7 @@ export function PreparedLibraryNative({artifactId}:{artifactId:string}) {
         : operation.nativeOutcome === 'unknown' && <p>Figma’s result has not been confirmed. Reconnect the same companion to return its saved result. This operation will not create a replacement graph.</p>}
       {operation.phase !== 'evidence-unavailable' && <>
         <ol>
-          <li>Open DS Contracts Evaluations in Figma Desktop.</li>
+          <li>In Figma Desktop, open the file this operation targets: DS_CONTRACTS_FIGMA_FILE when the app started, or DS Contracts Evaluations when that is unset.</li>
           <li>Open DS Contracts Sync Runner, choose Build, then Connect the local source workflow.</li>
           <li>Paste this operation’s connection code and choose Connect / resume.</li>
         </ol>

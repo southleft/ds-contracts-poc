@@ -267,10 +267,8 @@ test('state API journal and actual companion complete all phases, reopen, reject
   let send = boot();
   await send({ type: 'native-connect', connection: pair });
   assert.equal(messages.at(-1).status, 'ready');
-  assert.throws(
-    () => transport.claim(first.id, secret, SOURCE_NATIVE_FILE_KEY),
-    /file-refused/,
-  );
+  assert.deepEqual(transport.claim(first.id, secret, SOURCE_NATIVE_FILE_KEY),
+    { status: 'wrong-file', fileKey: REACT_NATIVE_FILE_KEY });
   current = false;
   assert.equal(jobs.get(first.id).sourceCurrent, false);
   assert.throws(

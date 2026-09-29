@@ -187,7 +187,11 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
       seen.set(id, Date.now());
       return { status: "awaiting-result" as const };
     }
-    if (fileKey !== jobs.deliveryState(id).fileKey) fail("file-refused");
+    // A companion open in another Figma file gets nothing to run. It is told
+    // which file this operation targets, so it can say where to paste the
+    // connection, and it is not recorded as this operation's companion.
+    const target = jobs.deliveryState(id).fileKey;
+    if (fileKey !== target) return { status: "wrong-file" as const, fileKey: target };
     seen.set(id, Date.now());
     const dir = directory(id),
       state = status(id);

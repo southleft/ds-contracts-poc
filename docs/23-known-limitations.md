@@ -12359,6 +12359,43 @@ widened instance fills; against the previous writer the seed is 0),
 `core/native-contract-comparison.test.ts` (an inherited zero refuses by name).
 
 
+**Readers of the seed, 2026-09-28.** The seed broke every new root draft with
+a text-template slot. The first run into a user's own file (Beta 1,
+`DS Contracts Live Testing`, Badge) was refused on all seven variants with
+`native-source-observation-text-template-empty-box`: the check required the
+empty slot's HUG width to be exactly 0, and Figma kept the seed
+(0.009999999776482582, the float32 of 0.01). The Card never reached that check,
+because its slots hold no text template. The Figma mock hid the defect: it
+measured a HUG slot whose only child is hidden as 0 px. The mock now keeps the
+extent last written to a SLOT whose children are all hidden; that case alone is
+measured, and the creation box and other node types are not.
+
+The seed is now one constant, `ROOT_CONTENT_EMPTY_WIDTH_SEED` in
+`core/native-float32.ts`, used by the writer (emitted bytes unchanged) and by
+two readers:
+
+- The empty-box check accepts exact 0 (operations created before the seed) or
+  the stored seed on the width axis, and nothing else. Height has no seed and
+  still requires 0. An operation refused only by this check verifies when it is
+  next loaded, with no new write: the journal is unchanged and the check is
+  recomputed from it. After the fix, a fresh read of the same Badge in that file
+  observes the supported structure.
+- The root size update no longer counts the seed as content, so a target equal
+  to the padding and strokes fits. Figma stores the slot's new offset as a
+  float32 and the update is checked by exact equality, so a centered or
+  end-aligned seeded slot, (40 - 0.01) / 2, could never match: Figma would roll
+  the write back. The planner now refuses that by name before writing
+  (`native-update-size-numeric-domain-unqualified`). Supporting it needs a live
+  measurement of Figma's own offset arithmetic. Neither size change is measured
+  live.
+
+Tests: `core/figma-slot-text-template.test.ts` (the live float32 value, the seed
+and exact 0 pass; 0.02, 0.005, 0.0001, twice the seed and any height are refused
+by name), `core/native-contract-size-update.test.ts` (the content floor, and the
+named refusal for centered and end-aligned seeded slots; both fail on the previous
+planner), `source-reference/react-native-plan.test.ts` (the template-graph journal
+reads back the seed and refuses it under the previous check).
+
 ## D.176 A root shadow change carries its own STRING record, live on the Switch
 
 **AGENT decision, 2026-09-27.** Criterion 1 bounds live updates to named
