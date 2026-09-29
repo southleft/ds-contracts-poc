@@ -329,7 +329,7 @@ test('a second background exposes missing pale ink while the original white comp
 });
 
 // Authenticated layout origins must not let an independent ink crop move geometry.
-import { alignRecordedFrames, enclosingFrame, figmaFramesFromSnapshots, imageSha256, type FrameBox, type FigmaFrame } from './design-consumer-framing.js';
+import { alignRecordedFrames, enclosingFrame, figmaBoundsInLayoutUnits, figmaFramesFromSnapshots, imageSha256, FIGMA_BOUNDS_UNIT_PX, type FrameBox, type FigmaFrame } from './design-consumer-framing-v2.js';
 const frameBytes=(width:number,height:number,paint:(p:PNG)=>void)=>{const p=new PNG({width,height});paint(p);return PNG.sync.write(p);};
 const rect=(p:PNG,x:number,y:number,w:number,h:number,rgba=[10,80,150,255])=>{
   for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)for(let c=0;c<4;c++)p.data[(yy*p.width+xx)*4+c]=rgba[c];
@@ -486,6 +486,59 @@ test('full bounds keep empty layout space as the origin instead of independently
   const compared = alignRecordedFrames(a, b, consumer, frame, 0);
   assert.ok('aligned' in compared); assert.ok(diffPair(compared.aligned, []).unmaskedPct > 5);
   assert.deepEqual(compared.placement.commonCrop, {x:10,y:4,width:21,height:20});
+});
+
+test('Figma REST bounds are compared in 1/64 px units: float32 noise no longer leaves a frame unqualified (HeroUI scoreboard)', () => {
+  // The REST numbers of the four HeroUI icons the first real-kit scoreboard left
+  // `image-framing-unqualified` (2026-09-28): a 16 px icon, a 16 px PNG from
+  // Figma and a 16 px consumer box, with float32 noise on Figma's side only.
+  const png = frameBytes(16, 16, p => rect(p, 2, 2, 12, 12));
+  const layout = { x: 12, y: 17, width: 16, height: 16 };
+  const consumer = { layout, capture: enclosingFrame(layout), deviceScaleFactor: 1, pngSha256: imageSha256(png) };
+  const raster = { kind: 'figma-rest-full-bounds-v1', scale: 1 } as const;
+  const figma = (layoutBox: FrameBox, render: FrameBox = layoutBox): FigmaFrame => ({ layout: layoutBox, render, pngSha256: imageSha256(png), raster });
+  // lock 2217:920: 16 + 2^-18 wide asked for a 17 px export (figma-image-span-mismatch).
+  const lock = { x: 1959, y: 1522, width: 16.000003814697266, height: 16.000003814697266 };
+  // paper-plane 2217:5233: a 16 - 2^-20 layout around an exact 16 px render (render-outside-layout).
+  const plane = { x: 17, y: 698, width: 15.999999046325684, height: 15.999999046325684 };
+  for (const frame of [figma(lock), figma(plane, { x: 17, y: 698, width: 16, height: 16 })]) {
+    const compared = alignRecordedFrames(png, png, consumer, frame, 0);
+    assert.ok('aligned' in compared, JSON.stringify(compared));
+    assert.equal(diffPair(compared.aligned, []).unmaskedPct, 0);
+  }
+  // Figma's exporter counts 0.001 here (Carbon text input 15784:271032): a
+  // 399.0010070800781 px layout exported in 400 px stays qualified.
+  const wide = frameBytes(400, 48, p => rect(p, 0, 0, 399, 48)), wideLayout = { x: 12, y: 17, width: 400, height: 48 };
+  const carbon = alignRecordedFrames(wide, wide, { layout: wideLayout, capture: enclosingFrame(wideLayout), deviceScaleFactor: 1, pngSha256: imageSha256(wide) },
+    { layout: { x: 116, y: 1772, width: 399.0010070800781, height: 48 }, render: { x: 116, y: 1772, width: 399.0010070800781, height: 48 }, pngSha256: imageSha256(wide), raster }, 0);
+  assert.ok('aligned' in carbon, JSON.stringify(carbon));
+  assert.deepEqual(figmaBoundsInLayoutUnits(lock), { x: 1959, y: 1522, width: 16, height: 16 });
+  assert.deepEqual(figmaBoundsInLayoutUnits({ x: 0.3, y: 0, width: 16, height: 18.390600204467773 }), { x: 0.296875, y: 0, width: 16, height: 18.390625 });
+  assert.equal(FIGMA_BOUNDS_UNIT_PX, 1 / 64);
+});
+
+test('a frame that is genuinely wrong by one 1/64 px unit or more is still refused after rounding', () => {
+  const png = frameBytes(16, 16, p => rect(p, 0, 0, 16, 16));
+  const layout = { x: 12, y: 17, width: 16, height: 16 };
+  const consumer = { layout, capture: enclosingFrame(layout), deviceScaleFactor: 1, pngSha256: imageSha256(png) };
+  const raster = { kind: 'figma-rest-full-bounds-v1', scale: 1 } as const;
+  const native = { x: 100, y: 200, width: 16, height: 16 };
+  const frame = (render: FrameBox, layoutBox: FrameBox = native): FigmaFrame => ({ layout: layoutBox, render, pngSha256: imageSha256(png), raster });
+  // A render (a shadow, an outside stroke) that reaches past its layout by one unit, or by a pixel.
+  for (const render of [{ ...native, width: 16 + 1 / 64 }, { ...native, x: 100 - 1 / 64, width: 16 + 1 / 64 }, { ...native, height: 17 }, { ...native, y: 199, height: 17 }])
+    assert.deepEqual(alignRecordedFrames(png, png, consumer, frame(render), 0), { refused: 'render-outside-layout-capture-unqualified' }, JSON.stringify(render));
+  // A layout that genuinely needs another export pixel beside Figma's 16 px PNG.
+  for (const wider of [{ ...native, width: 16.02 }, { ...native, width: 16 + 1 / 64 }, { ...native, height: 17 }, { ...native, width: 15 }, { ...native, width: 14.99 }])
+    assert.deepEqual(alignRecordedFrames(png, png, consumer, frame(wider, wider), 0), { refused: 'figma-image-span-mismatch' }, JSON.stringify(wider));
+  // Either reading fits only its own ceiling: a 399.001 px layout is 399 or 400 px, never 401 or 398.
+  for (const width of [401, 398]) {
+    const bytes = frameBytes(width, 48, p => rect(p, 0, 0, width, 48)), box = { x: 12, y: 17, width, height: 48 };
+    const wrong = { layout: { x: 116, y: 1772, width: 399.0010070800781, height: 48 }, render: { x: 116, y: 1772, width: 399.0010070800781, height: 48 }, pngSha256: imageSha256(bytes), raster };
+    assert.deepEqual(alignRecordedFrames(bytes, bytes, { layout: box, capture: enclosingFrame(box), deviceScaleFactor: 1, pngSha256: imageSha256(bytes) }, wrong, 0), { refused: 'figma-image-span-mismatch' }, String(width));
+  }
+  // Legacy receipts (no raster model) keep their fractional-translation refusal.
+  const legacy = { layout: { ...native, x: 100.5 }, render: { ...native, x: 100.5 }, pngSha256: imageSha256(png) };
+  assert.ok('refused' in alignRecordedFrames(png, png, consumer, legacy, 0));
 });
 
 test('explicit raster metadata cannot permit fractional browser shifts, clipped overflow, unknown models or unexpected pixel spans', () => {

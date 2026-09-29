@@ -45,7 +45,7 @@ What that means for your own components:
   command runs the same consumer check the benchmark uses
   (`npm run design:consumer:check`) on it and reports every variant (see
   [Read the result](#read-the-result)).
-- Keyboard focus and screen-reader behaviour are not part of the preview.
+- Keyboard focus and screen-reader behavior are not part of the preview.
 
 ## What you need
 
@@ -105,50 +105,109 @@ What that means for your own components:
    `shape`). The package ships TypeScript declarations, so your editor lists
    them; children are refused by type when the design has no slot. The
    package's root import includes its token stylesheet. It does not include
-   font files: load the fonts your Figma design uses.
+   font files: load the fonts your Figma design uses, and give the check the
+   same files with `--fonts` (see [Check with your fonts](#check-with-your-fonts)).
 
 A saved capture works the same way: `npm run figma:to-react -- --dump
 <dump.json> --out ./out`.
+
+## Check with your fonts
+
+The check renders the package in a fresh Vite app, which has only the fonts
+installed on your machine. When your design uses a font you do not have
+installed (the check names it: `font-unavailable-in-consumer:…`), give the
+check the font files with `--fonts`:
+
+```bash
+npm run figma:to-react -- --url "<the copied link>" --out ./out --fonts ./fonts.json
+```
+
+`fonts.json` pins each file by its SHA-256 (for example from
+`shasum -a 256 ./fonts/IBMPlexSans-Regular.woff2`). Files are named relative to
+the manifest, or by absolute path:
+
+```json
+{
+  "version": 1,
+  "fonts": [
+    {
+      "family": "IBM Plex Sans",
+      "weight": "400",
+      "style": "normal",
+      "file": "./fonts/IBMPlexSans-Regular.woff2",
+      "sha256": "<64 lowercase hexadecimal characters>"
+    }
+  ]
+}
+```
+
+- `family` is the family your design uses, and it must be a family the file
+  itself declares (its name table). A file is never loaded as another
+  family: macOS's system font `SFNS.ttf` is refused as "SF Pro", for example.
+- `weight` is one weight from 1 to 1000, or an increasing range such as
+  `"100 900"` for a variable font; `style` is `"normal"` or `"italic"`. TTF,
+  OTF, WOFF and WOFF2 files are accepted.
+- The manifest is checked before anything is read from Figma: a wrong hash, a
+  family the file does not declare, overlapping faces or an unknown field
+  stops the command by name.
+
+The fonts load only in the check's consumer app; the package and its CSS are
+unchanged. The receipt keeps the files and the faces the browser loaded, and
+`out/result.json` lists them under `check.fonts`. This pins what the check
+rendered with; it does not prove these are the exact font files Figma used,
+and the image comparison still decides.
 
 ## Read the result
 
 The check installs the package into a fresh Vite app, mounts every variant of
 the set, and compares it with Figma's own image of that variant (the unchanged
 5% limit, on white and on black). It also checks content: every text the
-variant draws must be rendered, and every icon or vector it draws must have a
-rendered graphic of about the same size. A missing text or icon fails the
+variant draws must be rendered, in the color and font Figma draws it in, and
+every icon or vector it draws must have a rendered graphic of about the same
+size. A missing text or icon, or a text in another color or font, fails the
 variant whatever its image score. The output looks like this:
 
 ```text
 consumer check (receipt: out/check/receipt.json):
-  variant     result      image white/black   content (missing / drawn)
-  Footer=No   FAIL        0.77% / 0.77%       1/2 text, 1/1 icons
+  variant     result      image white/black   content (missing or wrong / drawn)
+  Footer=No   FAIL        0.77% / 0.77%       1/2 text, 0/2 text style, 1/1 icons
                 - content-missing:footer-no:text:"Dialog heading"
                 - content-missing:footer-no:part:al-button/Icon After/X
-  Footer=Yes  FAIL        0.61% / 0.61%       1/3 text, 1/1 icons
+  Footer=Yes  FAIL        0.61% / 0.61%       1/3 text, 0/3 text style, 1/1 icons
                 - content-missing:footer-yes:text:"Dialog heading"
                 - content-missing:footer-yes:part:al-button/Icon After/X
 ✖ figma:to-react Dialog: FAIL — 2 of 2 variant(s) fail; the package was written but does not match the design → out/your-team-dialog-0.0.0-generated.tgz
 ```
 
-- **PASS**: within 5% on white and black, every text and icon rendered, no
-  problem named. A `✔` line is printed only when every variant passes.
+- **PASS**: within 5% on white and black, every text and icon rendered, each
+  text in its Figma color and font, no problem named. A `✔` line is printed
+  only when every variant passes.
 - **FAIL**: each reason is named under the variant, for example a missing
-  text or icon (`content-missing:…`), an image over the limit
+  text or icon (`content-missing:…`), a text drawn in another color
+  (`text-color-mismatch:<variant>:"Confirm":figma #ffffff vs rendered #000000`)
+  or another font family or weight (`text-font-mismatch:…`), an image over the limit
   (`layout-image-difference-above-limit:…`), a render of zero size, or a font
   your machine does not have (`font-unavailable-in-consumer:…`). Problems that
   belong to no single variant (a variant property the component ignores, for
   example) are listed under "set problems". The command exits 1. With
   `--allow-failures` it exits 0, but the report still says FAIL.
 - **UNVERIFIED**: nothing failed, but something could not be measured, for
-  example Figma's images without `FIGMA_TOKEN` (with `--dump`). Never shown as
-  a pass; the command exits 0.
+  example Figma's images without `FIGMA_TOKEN` (with `--dump`), or a text whose
+  Figma fill is a gradient (`text-style-unmeasured:…`). Never shown as a pass;
+  the command exits 0.
 - **NOT CHECKED**: no Chromium was found, so nothing was verified; the package
   is still written and the command exits 0.
 
 The receipt, Figma's images, the consumer screenshots and side-by-side diff
 images are in `out/check`; `out/result.json` repeats the verdict per variant
 under `check`.
+
+Text color is compared as declared, not as pixels: Figma's fill (with paint
+and layer opacity) against the rendered text's computed color (with CSS
+opacity), within one 8-bit step per channel, which is all that writing a color
+as CSS can change. The font family compared is the one the CSS asks for first,
+so a font you have not installed is `font-unavailable-in-consumer`, not a
+wrong font.
 
 What the content check does not judge: frames and rectangles (backgrounds,
 borders, a radio's drawn circle) are left to the image comparison, and an icon

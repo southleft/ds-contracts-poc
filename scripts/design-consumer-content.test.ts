@@ -7,15 +7,20 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
-import { caseContent, domContentOf, fetchFigmaContent, figmaContent, matchParts, missingTexts, type RestNode } from './design-consumer-content.js';
+import { caseContent, COLOR_STEP, colorHex, domContentOf, fetchFigmaContent, figmaContent, figmaFillColor, firstFamily, matchParts, missingTexts, parseCssColor, sameDeclaredColor, type RestNode } from './design-consumer-content.js';
 import { deriveCases, duplicateCaseKeys, runConsumerCheck } from './design-consumer-check.js';
 import { checkFailureProblem, formatVerdictTable, problemCase, variantVerdicts } from './design-consumer-verdict.js';
 import { fetchFigmaApi, MAX_429_RETRIES, MAX_RETRY_AFTER_SECONDS } from '../extract/figma/rest/fetch.js';
 
 const box = (x: number, y: number, width: number, height: number) => ({ x, y, width, height });
 const fill = [{ type: 'SOLID', visible: true }];
+/** REST's TEXT paint and type style (the fixtures' page draws #eeeeee Inter 400). */
+const solid = (hex: string, extra: Record<string, unknown> = {}) => ({ type: 'SOLID', blendMode: 'NORMAL', ...extra,
+  color: { r: parseInt(hex.slice(1, 3), 16) / 255, g: parseInt(hex.slice(3, 5), 16) / 255, b: parseInt(hex.slice(5, 7), 16) / 255, a: 1 } });
+const inter = { fontFamily: 'Inter', fontWeight: 400 };
 const text = (name: string, characters: string, b = box(0, 0, 80, 20), extra: Partial<RestNode> = {}): RestNode =>
-  ({ type: 'TEXT', name, characters, absoluteBoundingBox: b, absoluteRenderBounds: b, fills: fill, ...extra });
+  ({ type: 'TEXT', name, characters, absoluteBoundingBox: b, absoluteRenderBounds: b, fills: [solid('#eeeeee')], style: inter, ...extra });
+const eee = { start: 0, color: { r: 238 / 255, g: 238 / 255, b: 238 / 255, a: 1 }, family: 'Inter', weight: 400 };
 const vector = (b: ReturnType<typeof box>, extra: Partial<RestNode> = {}): RestNode =>
   ({ type: 'VECTOR', name: 'Vector', absoluteBoundingBox: b, absoluteRenderBounds: b, fills: fill, ...extra });
 const node = (type: string, name: string, b: ReturnType<typeof box>, children: RestNode[], extra: Partial<RestNode> = {}): RestNode =>
@@ -43,6 +48,7 @@ const dialogVariant = (): RestNode => node('COMPONENT', 'Footer=No', box(28, 392
 test('what a Figma variant draws: texts inside instances, the innermost text-free instance around a vector as one icon, nothing hidden', () => {
   assert.deepEqual(figmaContent(dialogVariant()), {
     texts: ['Dialog heading', 'Dialog content'],
+    textStyles: [[{ ...eee, end: 14 }], [{ ...eee, end: 14 }]],
     parts: [{ name: 'al-button/Icon After/X', kind: 'icon', box: box(558, 26, 20, 20) }],
   });
   // A vector beside text in the same instance is judged on its own; a
@@ -53,7 +59,7 @@ test('what a Figma variant draws: texts inside instances, the innermost text-fre
     text('Unfilled', 'No paint', box(0, 0, 10, 10), { fills: [{ visible: false }] as any }),
     vector(box(0, 0, 4, 4), { absoluteRenderBounds: null }),
   ]);
-  assert.deepEqual(figmaContent(chip), { texts: ['Tag'], parts: [{ name: 'Chip/Vector', kind: 'vector', box: box(80, 4, 16, 16) }] });
+  assert.deepEqual(figmaContent(chip), { texts: ['Tag'], textStyles: [[{ ...eee, end: 3 }]], parts: [{ name: 'Chip/Vector', kind: 'vector', box: box(80, 4, 16, 16) }] });
 });
 
 test('text is compared case- and whitespace-insensitively, and counted', () => {
@@ -78,7 +84,7 @@ test('parts match one to one by size, never by position; a part with no graphic 
 
 const PAGE = `<!doctype html><html><head><style>
   body{margin:0} [data-cell]{display:block;width:fit-content;margin:8px;padding:4px}
-  .root{display:flex;gap:8px;align-items:center;background:#222;color:#eee;padding:8px}
+  .root{display:flex;gap:8px;align-items:center;background:#222;color:#eee;padding:8px;font-family:Inter,sans-serif;font-weight:400}
   .dot{width:10px;height:10px;border-radius:50%;background:#0a0}
   .masked{width:16px;height:16px;background:#fff;-webkit-mask-image:linear-gradient(#000,#000);mask-image:linear-gradient(#000,#000)}
   .bare{width:32px;height:40px;background:transparent;border:0}
@@ -118,6 +124,134 @@ test('in the page: rendered text includes placeholders and generated content, gr
       'content-missing:footer-no:text:"Dialog content"',
       'content-missing:footer-no:part:al-button/Icon After/X',
     ]);
+  } finally { await browser.close(); }
+});
+
+// ---------------------------------------------------------------------------
+// TEXT STYLE: the first real-kit scoreboard passed an Atlassian ModalFooter at
+// 1.56% whose "Confirm" React drew black where Figma draws white.
+// ---------------------------------------------------------------------------
+/** The ModalFooter variant as REST draws it: a subtle "Cancel" and a primary "Confirm". */
+const modalFooter = (): RestNode => node('COMPONENT', 'appearance=default', box(0, 0, 400, 72), [
+  node('INSTANCE', '<Button>', box(230, 24, 72, 32), [text('label', 'Cancel', box(242, 30, 45, 20), { fills: [solid('#44546f')], style: { fontFamily: 'Atlassian Sans', fontWeight: 500 } })]),
+  node('INSTANCE', '<Button>', box(310, 24, 79, 32), [text('label', 'Confirm', box(322, 30, 55, 20), { fills: [solid('#ffffff')], style: { fontFamily: 'Atlassian Sans', fontWeight: 500 } })]),
+]);
+const run = (text: string, color: string, family = '"Atlassian Sans", sans-serif', weight = '500', opacity = 1) => ({ text, color, family, weight, opacity });
+
+test('text style: a text drawn in another color or font fails by name, whatever the pixel score (Atlassian ModalFooter)', () => {
+  const figma = figmaContent(modalFooter());
+  // What the scoreboard's React drew: both labels default black, in Inter 400.
+  const black = { text: 'Cancel\nConfirm', graphics: [], runs: [run('Cancel', 'rgb(0, 0, 0)', 'Inter, system-ui, sans-serif', '400'), run('Confirm', 'rgb(0, 0, 0)', 'Inter, system-ui, sans-serif', '400')] };
+  assert.deepEqual(caseContent('appearance-default', figma, black).problems, [
+    'text-color-mismatch:appearance-default:"Cancel":figma #44546f vs rendered #000000',
+    'text-font-mismatch:appearance-default:"Cancel":figma "Atlassian Sans" 500 vs rendered "Inter" 400',
+    'text-color-mismatch:appearance-default:"Confirm":figma #ffffff vs rendered #000000',
+    'text-font-mismatch:appearance-default:"Confirm":figma "Atlassian Sans" 500 vs rendered "Inter" 400',
+  ]);
+  const row = caseContent('appearance-default', figma, black).content.texts.styles![1];
+  assert.deepEqual(row, { text: 'Confirm', figma: ['#ffffff "Atlassian Sans" 500'], rendered: ['#000000 "Inter" 400'], color: 'mismatch', font: 'mismatch' });
+  // Drawn right: the requested family counts, not whether the consumer has it
+  // (that is font-unavailable-in-consumer's finding), and case/quotes do not matter.
+  const right = { text: 'CANCEL CONFIRM', graphics: [], runs: [run('Cancel', 'rgb(68, 84, 111)', "'atlassian sans', Inter"), run('Confirm', 'rgb(255, 255, 255)')] };
+  const judged = caseContent('appearance-default', figma, right);
+  assert.deepEqual(judged.problems, []);
+  assert.deepEqual(judged.content.texts.styles!.map(s => [s.text, s.color, s.font]), [['Cancel', 'match', 'match'], ['Confirm', 'match', 'match']]);
+});
+
+test('text color tolerance is one 8-bit step of the declared color, alpha and opacity included; never a pixel', () => {
+  assert.deepEqual(parseCssColor('rgb(68, 84, 111)'), { r: 68 / 255, g: 84 / 255, b: 111 / 255, a: 1 });
+  assert.deepEqual(parseCssColor('rgba(16, 16, 16, 0.3)'), { r: 16 / 255, g: 16 / 255, b: 16 / 255, a: 0.3 });
+  assert.deepEqual(parseCssColor('color(srgb 1 0.5 0 / 0.25)'), { r: 1, g: 0.5, b: 0, a: 0.25 });
+  assert.deepEqual(parseCssColor('transparent'), { r: 0, g: 0, b: 0, a: 0 });
+  for (const other of ['oklch(0.5 0.1 200)', 'none', 'url("#g")', 'rgb(1, 2)']) assert.equal(parseCssColor(other), null, other);
+  const figmaWhite = { r: 1, g: 1, b: 1, a: 1 };
+  // A Figma float channel lands on the nearest 8-bit value: 0.5 → 127.5 → 127 or 128.
+  assert.ok(sameDeclaredColor({ r: 0.5, g: 0.5, b: 0.5, a: 1 }, parseCssColor('rgb(128, 127, 128)')!));
+  assert.ok(sameDeclaredColor(figmaWhite, parseCssColor('rgb(254, 255, 255)')!), 'one step');
+  assert.equal(sameDeclaredColor(figmaWhite, parseCssColor('rgb(253, 255, 255)')!), false, 'two steps is another color');
+  assert.equal(sameDeclaredColor(figmaWhite, parseCssColor('rgba(255, 255, 255, 0.99)')!), false, 'alpha counts');
+  assert.ok(sameDeclaredColor({ r: 1, g: 0, b: 0, a: 0 }, { r: 0, g: 0, b: 1, a: 0 }), 'no alpha on either side paints no hue');
+  assert.equal(COLOR_STEP, 1 / 255);
+  assert.equal(colorHex({ r: 1, g: 1, b: 1, a: 0.5 }), '#ffffff80');
+  // Opacity: Figma paint opacity times layer opacity, against CSS color alpha times CSS opacity.
+  const faded = node('COMPONENT', 'Faded', box(0, 0, 100, 20), [node('FRAME', 'group', box(0, 0, 100, 20), [
+    text('label', 'Muted', box(0, 0, 40, 20), { fills: [solid('#000000', { opacity: 0.8 })], opacity: 0.5 })], { opacity: 0.5 })]);
+  const figma = figmaContent(faded);
+  assert.equal(figma.textStyles[0][0].color!.a, 0.2);
+  const rendered = (color: string, opacity: number) => caseContent('k', figma, { text: 'Muted', graphics: [], runs: [run('Muted', color, 'Inter', '400', opacity)] }).problems.filter(p => p.startsWith('text-color'));
+  assert.deepEqual(rendered('rgba(0, 0, 0, 0.8)', 0.25), []);
+  assert.deepEqual(rendered('rgba(0, 0, 0, 0.2)', 1), [], 'the same ink declared on the color instead of the layer');
+  assert.deepEqual(rendered('rgb(0, 0, 0)', 1), ['text-color-mismatch:k:"Muted":figma #00000033 vs rendered #000000']);
+});
+
+test('text style runs: overrides are compared per character, fills composite, and what cannot be compared is unmeasured, never a pass', () => {
+  // "Save all": "Save" base white Inter 600, " all" overridden to a yellow 400.
+  const mixed = node('COMPONENT', 'Mixed', box(0, 0, 100, 20), [text('label', 'Save all', box(0, 0, 60, 20), {
+    fills: [solid('#ffffff')], style: { fontFamily: 'Inter', fontWeight: 600 },
+    characterStyleOverrides: [0, 0, 0, 0, 7, 7, 7, 7], styleOverrideTable: { 7: { fontWeight: 400, fills: [solid('#ffcc00')] } } })]);
+  const figma = figmaContent(mixed);
+  assert.deepEqual(figma.textStyles[0].map(r => [r.start, r.end, colorHex(r.color!), r.weight]), [[0, 4, '#ffffff', 600], [4, 8, '#ffcc00', 400]]);
+  const dom = (runs: ReturnType<typeof run>[]) => caseContent('k', figma, { text: runs.map(r => r.text).join(''), graphics: [], runs }).problems;
+  assert.deepEqual(dom([run('Save', 'rgb(255, 255, 255)', 'Inter', '600'), run(' all', 'rgb(255, 204, 0)', 'Inter', '400')]), []);
+  assert.deepEqual(dom([run('Save all', 'rgb(255, 255, 255)', 'Inter', '600')]), [
+    'text-color-mismatch:k:"Save all":figma #ffcc00 vs rendered #ffffff', 'text-font-mismatch:k:"Save all":figma "Inter" 400 vs rendered "Inter" 600']);
+  // Two SOLID fills composite; a gradient or a blend mode is not one declared color.
+  assert.deepEqual(figmaFillColor([solid('#000000'), solid('#ffffff', { opacity: 0.5 })], 1), { color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } });
+  assert.deepEqual(figmaFillColor([{ type: 'GRADIENT_LINEAR' }], 1), { unmeasured: 'gradient-linear fill' });
+  assert.deepEqual(figmaFillColor([solid('#000000', { blendMode: 'MULTIPLY' })], 1), { unmeasured: 'multiply blend' });
+  const gradient = node('COMPONENT', 'G', box(0, 0, 100, 20), [text('label', 'Glow', box(0, 0, 40, 20), { fills: [{ type: 'GRADIENT_LINEAR', visible: true }] as any })]);
+  const unmeasured = caseContent('k', figmaContent(gradient), { text: 'Glow', graphics: [], runs: [run('Glow', 'rgb(0, 0, 0)', 'Inter', '400')] }).problems;
+  assert.deepEqual(unmeasured, ['text-style-unmeasured:k:"Glow":gradient-linear fill']);
+  const cases = [{ key: 'k', figmaName: 'G' }];
+  const measured = { key: 'k', layoutAligned: { status: 'measured', whiteMismatchPercent: 1, blackMismatchPercent: 1, withinLimit: true } };
+  const content = { key: 'k', texts: { figma: 1, missing: [] }, parts: { figma: 0, matched: 0, missing: [] } };
+  assert.equal(variantVerdicts({ problems: unmeasured, images: { cases: [measured] }, content: { cases: [content] } }, cases).verdict, 'unverified');
+  assert.equal(variantVerdicts({ problems: ['text-color-mismatch:k:"Confirm":figma #ffffff vs rendered #000000'], images: { cases: [measured] }, content: { cases: [content] } }, cases).verdict, 'fail');
+  // A rendered color outside sRGB is not guessed at.
+  assert.deepEqual(caseContent('k', figmaContent(modalFooter()), { text: 'Cancel Confirm', graphics: [], runs: [run('Cancel Confirm', 'oklch(0.5 0.1 200)')] }).problems, [
+    'text-style-unmeasured:k:"Cancel":rendered color oklch(0.5 0.1 200) is not an sRGB color',
+    'text-style-unmeasured:k:"Confirm":rendered color oklch(0.5 0.1 200) is not an sRGB color']);
+  // A text the presence check reports missing is its finding, not a style one.
+  assert.deepEqual(caseContent('k', figmaContent(modalFooter()), { text: 'Cancel', graphics: [], runs: [run('Cancel', 'rgb(68, 84, 111)')] }).problems,
+    ['content-missing:k:text:"Confirm"']);
+});
+
+const STYLE_PAGE = `<!doctype html><html><head><style>
+  body{margin:0;font-family:Inter,sans-serif} [data-cell]{display:block;width:fit-content;margin:8px;padding:4px}
+  .footer{display:flex;gap:8px} button{font:500 14px "Atlassian Sans",sans-serif;border:0;padding:6px 12px}
+  .subtle{background:none;color:#44546f} .primary{background:#0c66e4;color:#fff} .fade{opacity:.5} .gone{visibility:hidden}
+  .req::after{content:"*";color:#c9372c} input{color:#172b4d} input::placeholder{color:#626f86}
+</style></head><body>
+  <div data-cell="right"><div class="footer"><button class="subtle">Cancel</button><button class="primary">Confirm</button></div></div>
+  <div data-cell="default"><div class="footer"><button style="all:unset">Cancel</button><button style="all:unset">Confirm</button></div></div>
+  <div data-cell="runs"><div><span class="fade"><b>Bold</b></span><span class="req">Name</span><span class="gone">Hidden</span><input placeholder="Search"><svg width="40" height="20"><text x="0" y="15" fill="#123456">Chart</text></svg></div></div>
+</body></html>`;
+
+test('in the page: text runs carry the declared color, requested family, weight and CSS opacity; hidden text is not a run', async () => {
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    await page.setContent(STYLE_PAGE);
+    const figma = figmaContent(modalFooter());
+    const right = await page.locator('[data-cell="right"]').evaluate(domContentOf);
+    assert.deepEqual(caseContent('right', figma, right).problems, []);
+    // The scoreboard's failure: labels in the inherited default color and font.
+    const lost = await page.locator('[data-cell="default"]').evaluate(domContentOf);
+    assert.deepEqual(caseContent('default', figma, lost).problems, [
+      'text-color-mismatch:default:"Cancel":figma #44546f vs rendered #000000',
+      'text-font-mismatch:default:"Cancel":figma "Atlassian Sans" 500 vs rendered "Inter" 400',
+      'text-color-mismatch:default:"Confirm":figma #ffffff vs rendered #000000',
+      'text-font-mismatch:default:"Confirm":figma "Atlassian Sans" 500 vs rendered "Inter" 400',
+    ]);
+    const runs = (await page.locator('[data-cell="runs"]').evaluate(domContentOf)).runs!;
+    assert.deepEqual(runs.map(r => [r.text, r.color, r.weight, r.opacity]), [
+      ['Bold', 'rgb(0, 0, 0)', '700', 0.5],
+      ['Name', 'rgb(0, 0, 0)', '400', 1],
+      ['*', 'rgb(201, 55, 44)', '400', 1],
+      ['Search', 'rgb(98, 111, 134)', '400', 1],
+      ['Chart', 'rgb(18, 52, 86)', '400', 1],
+    ]);
+    assert.equal(firstFamily(runs[0].family), 'Inter');
   } finally { await browser.close(); }
 });
 

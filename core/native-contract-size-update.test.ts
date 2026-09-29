@@ -60,12 +60,19 @@ test('empty baselines do not admit nonpositive or nonfinite target sizes', async
   }
 });
 
+// Figma stores node positions as float32; model that here (docs/23 D.175).
+const storedX = (f: any, factor: number) => Object.defineProperty(f.slot, 'x', { configurable: true,
+  get: () => Math.fround((f.root.width - f.slot.width) * factor) });
+
 test('both literal axes repair together and preserve centered empty content', async () => {
   const f=await fixture();
+  // An operation created before the D.175 seed: its empty slot is exactly 0,
+  // so every centered offset is exact.
+  f.slot.resizeWithoutConstraints(0, f.slot.height);
   f.root.primaryAxisAlignItems='CENTER';
   f.input.before.component.variants[0].spec.layout!.primary='CENTER';
   f.input.desired.component.variants[0].spec.layout!.primary='CENTER';
-  Object.defineProperty(f.slot,'x',{configurable:true,get:()=>(f.root.width-f.slot.width)/2});
+  storedX(f, 0.5);
   f.input.baseline=await f.run(emitNativeContractReadbackScript(f.input.before));
   f.input.desired.component.variants[0].spec.lits={width:40,height:36};
   const {plan}=prepareNativeContractUpdate(f.input);
@@ -73,9 +80,47 @@ test('both literal axes repair together and preserve centered empty content', as
   const applied=await f.run(emitNativeContractUpdateScript(plan));
   assert.equal(applied.status,'updated',JSON.stringify(applied.problems));
   assert.equal(f.root.width,40);assert.equal(f.root.height,36);
-  assert.equal(f.slot.x,(40-f.slot.width)/2);assert.equal(f.slot.y,(36-f.slot.height)/2);
+  assert.equal(f.slot.x,20);assert.equal(f.slot.y,(36-f.slot.height)/2);
   assert.equal(nativeContractUpdateMatches(plan,applied.observation,true),true);
   const rolled=await f.run(emitNativeContractUpdateScript(plan,'rollback'));
   assert.equal(rolled.status,'updated',JSON.stringify(rolled.problems));
   assert.equal(nativeContractUpdateMatches(plan,rolled.observation),true);
+});
+
+test('a centered or end-aligned seeded slot refuses a width it cannot predict, before any write', async () => {
+  for (const [alignment, factor] of [['CENTER', 0.5], ['MAX', 1]] as const) {
+    const f=await fixture();
+    f.root.primaryAxisAlignItems=alignment;
+    f.input.before.component.variants[0].spec.layout!.primary=alignment;
+    f.input.desired.component.variants[0].spec.layout!.primary=alignment;
+    storedX(f, factor);
+    f.input.baseline=await f.run(emitNativeContractReadbackScript(f.input.before));
+    assert.equal(f.root.width, 0.01, 'the hug root follows the D.175 seed');
+    f.input.desired.component.variants[0].spec.lits={width:40};
+    // (40 - 0.01) * factor is not a float32, so Figma could never store it and
+    // would roll the write back; the planner names that before writing.
+    assert.throws(()=>prepareNativeContractUpdate(f.input),/native-update-size-numeric-domain-unqualified/, alignment);
+    assert.equal(f.root.width, 0.01, alignment);
+  }
+  // Height has no seed, so a centered height stays exact and prepares.
+  const f=await fixture();
+  assert.equal(f.plan.kind,'native-contract-root-size-update');
+});
+
+test('a seeded empty slot does not raise the content floor', async () => {
+  const f=await fixture({ 'padding-left': '8px', 'padding-right': '8px' });
+  f.input.baseline=await f.run(emitNativeContractReadbackScript(f.input.before));
+  assert.equal(f.root.width, 16.01, 'padding plus the D.175 seed');
+  const lits=f.input.before.component.variants[0].spec.lits;
+  f.input.desired.component.variants[0].spec.lits={...lits,width:16};
+  // React draws the empty slot at 0, so 16 px is exactly the padding: it fits.
+  const {plan}=prepareNativeContractUpdate(f.input);
+  const applied=await f.run(emitNativeContractUpdateScript(plan));
+  assert.equal(applied.status,'updated',JSON.stringify(applied.problems));
+  assert.equal(f.root.width,16);
+  assert.equal(nativeContractUpdateMatches(plan,applied.observation,true),true);
+  const rolled=await f.run(emitNativeContractUpdateScript(plan,'rollback'));
+  assert.equal(rolled.status,'updated',JSON.stringify(rolled.problems));
+  f.input.desired.component.variants[0].spec.lits={...lits,width:15};
+  assert.throws(()=>prepareNativeContractUpdate(f.input),/native-update-size-content-overflow/);
 });
