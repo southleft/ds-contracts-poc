@@ -29,7 +29,19 @@ An approved, linted set is a good input. Approval establishes design intent; the
 | 6 · Deliver | Download the library or review a repository change. | Include contracts, components, styles/tokens, exports, usage examples and the verification report. Verify installation in a clean consumer. |
 | 7 · Update later | Re-run after an approved design change. | Compare against the stored baseline, show affected code and apply only authorized changes. Preserve hand-authored code outside the managed boundary. |
 
-**Try today:** [open Figma import](https://ds-contracts-playground.pages.dev/playground?source=figma). Enter a component URL and your access token, then choose **Import**. The engine produces a proposal and named limitations. Inspect the contract, **Receipts** and **React** output; each emitted file has a copy action. Review unresolved dependencies and conflicts with the active token inventory before using the output. Without credentials, **Demo import (Badge fixture)** exercises the import with recorded data. That fixture is a way to learn the interface, not the product's scope or proof of a live import.
+**Try it from the command line, with no clone:**
+
+```bash
+FIGMA_TOKEN=<your token> npx @ds-contracts/cli figma-to-react --url "<figma component set link>" --out ./out
+```
+
+The command reads the set and the same-file component sets it uses, then writes an installable React package to `out/<name>.tgz`. Then it checks that package against the design. Each variant is mounted from the installed package in a clean Vite app and compared with Figma's own image on white and on black (the 5% limit). Every text and icon Figma draws must also be rendered. Each variant is reported PASS, FAIL (with the reasons) or UNVERIFIED (not measurable), and any FAIL exits 1. `--dump <file>` runs on a saved capture instead of a link; without `FIGMA_TOKEN` its variants are UNVERIFIED, never passed. The check needs a Chromium: `npx playwright-core@1.61.1 install chromium`. Without one, the command packages anyway and reports NOT CHECKED. It requires Node 20.19 or later on macOS or Linux.
+
+**Not published yet:** the `latest` and `next` versions of `@ds-contracts/cli` on npm predate this command, so the line above answers `Unknown command` until the release that adds it is published (an owner step). Until then, [pack and install it from a checkout](../packages/cli/README.md#release-status). **Known limit:** the reference repo's demo contracts and tokens ship with the engine and still inform name linking and nearest-token matching. The [CLI README](../packages/cli/README.md) has every flag and requirement.
+
+**Contributors, from this checkout:** `npm run figma:to-react -- --url "<figma component set link>" --out ./out` runs the same command, with the engine loaded through Vite. It also takes `--expect-request <request.json>`. [PREVIEW.md](PREVIEW.md) walks through it.
+
+**Try today in the app:** [open Figma import](https://ds-contracts-playground.pages.dev/playground?source=figma). Enter a component URL and your access token, then choose **Import**. The engine produces a proposal and named limitations. Inspect the contract, **Receipts** and **React** output; each emitted file has a copy action. Review unresolved dependencies and conflicts with the active token inventory before using the output. Without credentials, **Demo import (Badge fixture)** exercises the import with recorded data. That fixture is a way to learn the interface, not the product's scope or proof of a live import.
 
 **Install from the local app.** In the React output, choose **Prepare React library**, then the download link. The local development server generates the selected component and its complete dependency graph, packages JavaScript, CSS Modules, tokens and TypeScript declarations into a `.tgz`, and exposes a download link for the archive. Newly prepared links survive local server restarts and newer downloads while the retained local artifact files remain available. The server verifies the saved input and archive bytes before serving a download; changed or incomplete artifacts refuse. Links created before this durable storage was added must be prepared again. Install the file with `npm install ./path/to/the-downloaded-file.tgz`, then import the component from the package name in its `package.json`. The archive includes a README. Use React 18 or later and a bundler with CSS Modules support; supply the fonts declared by the design. The hosted static Playground has no packaging server, so this button is available only in local development. Missing dependencies, invalid contracts, undefined tokens or more than 30 components refuse the whole download. Packaging does not qualify fidelity or accessibility.
 
@@ -308,6 +320,7 @@ Nothing in the install steps above does. `npm ci`, `npm run prep:core`, `npx pla
 Reading a real Figma file needs a Figma personal access token:
 
 - **Figma import in the app:** enter the token in the import form, next to the component URL.
+- **`ds-contracts figma-to-react` and `npm run figma:to-react`:** the `FIGMA_TOKEN` environment variable. Required for `--url`; with `--dump` it lets the check compare against Figma's images.
 - **`npm run design:consumer:check`:** `--token` or the `FIGMA_TOKEN` environment variable, for the image comparison only.
 - **`npm run extract:figma:rest`:** `--token` or `FIGMA_TOKEN` (read-only; with the default closure it makes one more `/nodes` request per round of child sets).
 - **Live `sync` observe and pull** (`sync/cli.ts`): `FIGMA_TOKEN`; their `--fixture` path runs offline.
