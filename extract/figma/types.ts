@@ -3,7 +3,7 @@ import type { StrokedPath } from '../../scripts/contract-schema.js';
 /** Canonical plugin capture includes consuming-node variable modes and values
  * and original open vector centerlines, which the REST producer cannot read.
  * flow-check pins the standalone script stamp. */
-export const PLUGIN_DUMP_VERSION = '1.47';
+export const PLUGIN_DUMP_VERSION = '1.48';
 /**
  * Design-side node-tree dump format (dump v1) — the shapes produced by
  * extract/figma/dump.plugin.js and consumed by extract/figma/propose.ts.
@@ -136,13 +136,32 @@ export interface DumpText {
   /** Inter style name ('Medium', 'Semi Bold', …) — the canvas projection of a
    *  font-weight token through FONT_STYLE_BY_WEIGHT. */
   fontStyle: string;
-  /** Line height in PX (dump v1.3, additive) — captured ONLY when the canvas
-   *  spells it in PIXELS (REST lineHeightUnit 'PIXELS' / Plugin lineHeight
-   *  unit 'PIXELS'). PERCENT/AUTO units stay named degradation receipts
-   *  (text-channel-unsupported). Absence in older dumps means not captured.
+  /** Line height in PX (dump v1.3, additive) — the height one line of this
+   *  node DRAWS. PIXELS is copied verbatim (REST lineHeightUnit 'PIXELS' /
+   *  Plugin unit 'PIXELS'). Since REST dump v1.44 / plugin dump v1.48 a
+   *  PERCENT line height is resolved against the node's own font size (REST
+   *  lineHeightPercentFontSize × fontSize / 100, Plugin value × fontSize /
+   *  100 — the letterSpacing precedent), and REST also copies the pixel value
+   *  Figma reports for an AUTO line height (lineHeightPx under
+   *  'INTRINSIC_%'); the Plugin API reports no number for AUTO, so there it
+   *  stays absent. `lineHeightUnit` names which of the two was resolved.
+   *  Absence means not captured (or AUTO on the plugin route), never 0.
    *  Field case: CBDS Tooltip rides 16px line height on 12px text — dropping
    *  it distorts the text block's proportions. */
   lineHeight?: number;
+  /** The designer's line-height UNIT when it is not PIXELS (REST dump v1.44 /
+   *  plugin dump v1.48, additive): 'PERCENT' (REST 'FONT_SIZE_%', Plugin
+   *  'PERCENT') or 'AUTO' (REST 'INTRINSIC_%', Plugin 'AUTO' — the font's
+   *  own line height, CSS `line-height: normal`). Absence means PIXELS, a
+   *  mixed value, or an older dump. Provenance for `lineHeight`: the carried
+   *  number is always pixels. */
+  lineHeightUnit?: 'PERCENT' | 'AUTO';
+  /** Text decoration line (REST dump v1.44 / plugin dump v1.48, additive) —
+   *  REST style.textDecoration / Plugin textDecoration, UNDERLINE or
+   *  STRIKETHROUGH, the canvas fact behind CSS text-decoration-line
+   *  (underline / line-through). Absence means none or not captured (older
+   *  dumps receipted the channel as text-channel-unsupported). */
+  textDecoration?: 'UNDERLINE' | 'STRIKETHROUGH';
   /** Name of the named TextStyle the node rides, when it rides one — derived
    *  styles mirror semantic size-token paths ('badge' ← font.badge.size,
    *  'control/sm' ← font.control.size.sm), so this is a token identity. */
@@ -358,9 +377,12 @@ export interface DumpShape {
   y?: number;
   right?: number;
   bottom?: number;
-  /** Figma constraints (REST spelling: LEFT|RIGHT|CENTER / TOP|BOTTOM|CENTER)
-   *  — how the placement generalizes when the parent resizes; the proposer
-   *  picks which offset spelling to carry from these. */
+  /** Figma constraints, normalized to ONE spelling for both readers:
+   *  LEFT|RIGHT|CENTER|STRETCH|SCALE × TOP|BOTTOM|CENTER|STRETCH|SCALE (the
+   *  Plugin API's MIN/MAX become LEFT/TOP and RIGHT/BOTTOM; REST's
+   *  LEFT_RIGHT / TOP_BOTTOM become STRETCH since REST dump v1.44) — how the
+   *  placement generalizes when the parent resizes; the proposer picks which
+   *  offset spelling to carry from these. */
   constraints?: { horizontal: string; vertical: string };
 }
 
@@ -541,9 +563,11 @@ export interface DumpNode {
   /** ABSOLUTE placement for ALL node types (dump v1.7, additive) — the
    *  center-preserving spelling DumpShape placement uses, captured when the
    *  node is layoutPositioning ABSOLUTE or its parent is not auto-layout
-   *  (where every child is placed by x/y). NOT yet consumed by the proposer
-   *  (overlay rendering is a planned iteration); presence is ledgered by
-   *  name, never a throw. Absence in older dumps means not captured. */
+   *  (where every child is placed by x/y). The REST reader carries it since
+   *  REST dump v1.44 (before, an out-of-flow FRAME/TEXT/INSTANCE re-entered
+   *  the flow on that route — a named capture gap). The proposer carries it
+   *  as absolute placement (carryAbsPlacement) or ledgers it by name.
+   *  Absence in older dumps means not captured. */
   abs?: {
     x: number;
     y: number;
