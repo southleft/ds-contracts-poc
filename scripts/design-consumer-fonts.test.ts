@@ -2,19 +2,21 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
-import { consumerFontManifest, loadConsumerFonts, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
+import { deflateSync } from 'node:zlib';
+import { consumerFontManifest, fontFamilyNames, loadConsumerFonts, readConsumerFonts, writeConsumerFonts } from './design-consumer-fonts.js';
 
 const fixtureBytes = readFileSync(new URL('../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2', import.meta.url));
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 function fixture(t: { after(fn: () => void): void }, change: (v: any) => void = () => {}) {
   const root = mkdtempSync(path.join(tmpdir(), 'consumer-fonts-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const face = { family: 'Consumer Font Probe', weight: '400', style: 'normal', file: './input.woff2', sha256: sha(fixtureBytes) };
+  // The family the file's own name table declares (see fontFamilyNames).
+  const face = { family: 'IBM Plex Sans', weight: '400', style: 'normal', file: './input.woff2', sha256: sha(fixtureBytes) };
   const manifest = { version: 1, fonts: [face] };
   change(manifest);
   writeFileSync(path.join(root, 'input.woff2'), fixtureBytes);
@@ -78,7 +80,7 @@ test('browser loads the isolated asset, preserves authored text rendering and re
   const server = createServer((req, res) => {
     if (req.url === '/') {
       res.setHeader('content-type', 'text/html');
-      res.end('<link rel="stylesheet" href="/fonts/fonts.css"><span style="font:400 24px \'Consumer Font Probe\';text-rendering:optimizeSpeed">AV office 012</span>');
+      res.end('<link rel="stylesheet" href="/fonts/fonts.css"><span style="font:400 24px \'IBM Plex Sans\';text-rendering:optimizeSpeed">AV office 012</span>');
     } else if (req.url === '/fonts/fonts.css' || req.url === '/fonts/' + fonts[0]!.file) {
       res.setHeader('content-type', req.url.endsWith('.css') ? 'text/css' : 'font/woff2');
       res.end(readFileSync(path.join(root, req.url)));
@@ -103,4 +105,53 @@ test('browser loads the isolated asset, preserves authored text rendering and re
     await browser.close();
     await new Promise<void>(resolve => server.close(() => resolve()));
   }
+});
+
+/** A minimal sfnt holding only a `name` table (Windows UTF-16BE and Macintosh
+ *  Roman records), as TrueType or wrapped as WOFF with a zlib-compressed table. */
+function nameOnlyFont(names: Array<[platform: number, nameId: number, text: string]>, wrap: 'ttf' | 'woff'): Buffer {
+  const encoded = names.map(([platform, , text]) => platform === 1 ? Buffer.from(text, 'latin1') : Buffer.from(text, 'utf16le').swap16());
+  const header = Buffer.alloc(6 + 12 * names.length);
+  header.writeUInt16BE(0, 0); header.writeUInt16BE(names.length, 2); header.writeUInt16BE(header.length, 4);
+  let offset = 0;
+  names.forEach(([platform, nameId], i) => {
+    const r = 6 + i * 12;
+    header.writeUInt16BE(platform, r); header.writeUInt16BE(platform === 1 ? 0 : 1, r + 2); header.writeUInt16BE(platform === 1 ? 0 : 0x409, r + 4);
+    header.writeUInt16BE(nameId, r + 6); header.writeUInt16BE(encoded[i].length, r + 8); header.writeUInt16BE(offset, r + 10); offset += encoded[i].length;
+  });
+  const table = Buffer.concat([header, ...encoded]);
+  if (wrap === 'ttf') {
+    const head = Buffer.alloc(12 + 16);
+    head.writeUInt32BE(0x00010000, 0); head.writeUInt16BE(1, 4);
+    head.write('name', 12, 'latin1'); head.writeUInt32BE(28, 20); head.writeUInt32BE(table.length, 24);
+    return Buffer.concat([head, table]);
+  }
+  const compressed = deflateSync(table), head = Buffer.alloc(44 + 20);
+  head.write('wOFF', 0, 'latin1'); head.writeUInt32BE(0x00010000, 4); head.writeUInt32BE(64 + compressed.length, 8); head.writeUInt16BE(1, 12);
+  head.write('name', 44, 'latin1'); head.writeUInt32BE(64, 48); head.writeUInt32BE(compressed.length, 52); head.writeUInt32BE(table.length, 56);
+  return Buffer.concat([head, compressed]);
+}
+
+test('a face is registered only under a family its own bytes declare; never a system font file as another family', t => {
+  assert.deepEqual(fontFamilyNames(fixtureBytes), ['IBM Plex Sans'], 'WOFF2 (Brotli)');
+  const semibold = readFileSync(new URL('../extract/computed/fonts/ibm-plex-sans/IBMPlexSans-SemiBold.woff2', import.meta.url));
+  assert.deepEqual(fontFamilyNames(semibold), ['IBM Plex Sans SmBld', 'IBM Plex Sans'], 'legacy (ID 1) and typographic (ID 16) family');
+  const names: Array<[number, number, string]> = [[3, 1, 'Example Sans Medium'], [1, 1, 'Example Sans Medium'], [3, 16, 'Example Sans'], [3, 4, 'Example Sans Medium Full']];
+  for (const wrap of ['ttf', 'woff'] as const) assert.deepEqual(fontFamilyNames(nameOnlyFont(names, wrap)), ['Example Sans Medium', 'Example Sans'], wrap);
+  assert.throws(() => fontFamilyNames(Buffer.from('not a font at all')), /unsupported font format/);
+  // The manifest's family must be one of them (case-insensitive); another name refuses before output.
+  const { file } = fixture(t, m => { m.fonts[0].family = 'ibm plex sans'; });
+  assert.equal(readConsumerFonts(file)[0]!.family, 'ibm plex sans');
+  for (const other of ['SF Pro', 'Consumer Font Probe', 'IBM Plex Sans Condensed']) {
+    const { file: renamed } = fixture(t, m => { m.fonts[0].family = other; });
+    assert.throws(() => readConsumerFonts(renamed), new RegExp(`family-not-declared-by-font:${JSON.stringify(other)} \\(the file names itself "IBM Plex Sans"\\)`), other);
+  }
+});
+
+test('the macOS system UI font is never provisioned as SF Pro', { skip: !existsSync('/System/Library/Fonts/SFNS.ttf') && 'not macOS' }, t => {
+  const bytes = readFileSync('/System/Library/Fonts/SFNS.ttf'), root = mkdtempSync(path.join(tmpdir(), 'consumer-fonts-sfns-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  assert.equal(fontFamilyNames(bytes).includes('SF Pro'), false);
+  writeFileSync(path.join(root, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ family: 'SF Pro', weight: '100 900', style: 'normal', file: '/System/Library/Fonts/SFNS.ttf', sha256: sha(bytes) }] }));
+  assert.throws(() => readConsumerFonts(path.join(root, 'fonts.json')), /family-not-declared-by-font:"SF Pro"/);
 });

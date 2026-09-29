@@ -25,6 +25,14 @@
  * command printing ✔ for a Radio with no circle and a Dialog without its
  * heading. The programmatic figmaToReact() (the benchmark replay) does not run
  * the check.
+ *
+ * --fonts <manifest.json> gives the check the design's font files: the same
+ * sha256-pinned manifest design:consumer:check takes (scripts/design-consumer-
+ * fonts.ts; format in docs/PREVIEW.md). It is read and authenticated BEFORE
+ * anything is fetched or packaged — every hash, and every family against the
+ * names the font file itself declares, so a file is never provisioned as
+ * another family (never macOS's SFNS.ttf as "SF Pro"). The faces load in the
+ * clean consumer only; the generated package and its CSS are unchanged.
  */
 import { createServer } from 'vite';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -34,6 +42,7 @@ import { fileURLToPath } from 'node:url';
 import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
+import { consumerFontManifest, readConsumerFonts } from './design-consumer-fonts.js';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -135,7 +144,11 @@ export type CheckOutcome =
  *  Chromium; without one it says it did not check. The verdict is written into
  *  <out>/result.json under `check`, the receipt and images into <out>/check. */
 export async function checkGenerated(r: Awaited<ReturnType<typeof figmaToReact>>, dumpPath: string,
-  options: { token?: string; chromiumPath?: string } = {}): Promise<CheckOutcome> {
+  options: { token?: string; chromiumPath?: string; fonts?: string;
+    /** the check itself; injectable for tests, design:consumer:check's runConsumerCheck otherwise */
+    runCheck?: (args: import('./design-consumer-check.js').ConsumerCheckArgs) => Promise<any> } = {}): Promise<CheckOutcome> {
+  // The fonts the consumer is given, authenticated before anything runs (family, weight, style, sha256).
+  const fonts = options.fonts ? consumerFontManifest(readConsumerFonts(path.resolve(options.fonts))).fonts.map(({ file: _file, ...face }) => face) : null;
   const { chromium } = await import('playwright-core');
   const browser = options.chromiumPath ?? chromium.executablePath();
   let outcome: CheckOutcome;
@@ -144,13 +157,14 @@ export async function checkGenerated(r: Awaited<ReturnType<typeof figmaToReact>>
   } else {
     const out = path.join(r.outDir, 'check');
     rmSync(out, { recursive: true, force: true }); // this command's own subdirectory, rewritten each run
-    const { runConsumerCheck } = await import('./design-consumer-check.js');
-    const receipt = await runConsumerCheck({ dump: dumpPath, contract: r.contractFile, generated: r.generatedDir, component: r.component, out, token: options.token });
+    const runCheck = options.runCheck ?? (await import('./design-consumer-check.js')).runConsumerCheck;
+    const receipt = await runCheck({ dump: dumpPath, contract: r.contractFile, generated: r.generatedDir, component: r.component, out, token: options.token,
+      ...(options.fonts ? { fonts: path.resolve(options.fonts) } : {}) });
     outcome = { status: receipt.verdict.verdict, receipt: path.relative(r.outDir, path.join(out, 'receipt.json')), verdicts: receipt.verdict };
   }
   const resultFile = path.join(r.outDir, 'result.json');
   const result = JSON.parse(readFileSync(resultFile, 'utf8'));
-  result.check = outcome.status === 'not-checked' ? outcome : { status: outcome.status, receipt: outcome.receipt, counts: outcome.verdicts.counts,
+  result.check = outcome.status === 'not-checked' ? { ...outcome, fonts } : { status: outcome.status, receipt: outcome.receipt, counts: outcome.verdicts.counts, fonts,
     variants: outcome.verdicts.variants.map(v => ({ key: v.key, figmaName: v.figmaName, verdict: v.verdict, reasons: v.reasons })), setProblems: outcome.verdicts.setProblems };
   writeFileSync(resultFile, JSON.stringify(result, null, 2) + '\n');
   return outcome;
@@ -181,15 +195,21 @@ export function reportCheck(r: { component: string; setName: string; tarball: st
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const dump = flag('--dump'), url = flag('--url'), out = flag('--out');
-  if ((!dump && !url) || (dump && url) || !out) {
-    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--allow-failures]\n'
+  const dump = flag('--dump'), url = flag('--url'), out = flag('--out'), fonts = flag('--fonts');
+  if ((!dump && !url) || (dump && url) || !out || (process.argv.includes('--fonts') && !fonts)) {
+    console.error('usage: npm run figma:to-react -- (--dump <dump.json> | --url <figma component-set URL>) --out <dir> [--name <npm package name>] [--expect-request <input.json>] [--fonts <manifest.json>] [--allow-failures]\n'
       + '  --url reads FIGMA_TOKEN from the environment (never from the command line).\n'
+      + '  --fonts gives the check your design\'s font files (a sha256-pinned manifest; see docs/PREVIEW.md).\n'
       + '  After packaging, the generated package is checked against the design (design:consumer:check) and each\n'
       + '  variant is reported pass / FAIL / unverified; any FAIL exits 1 unless --allow-failures is given.');
     process.exit(2);
   }
   (async () => {
+    // Authenticate the font manifest before anything is fetched or written.
+    if (fonts) {
+      const faces = readConsumerFonts(path.resolve(fonts));
+      console.log(`fonts: ${faces.length} face(s) from ${fonts} (${[...new Set(faces.map(f => f.family))].join(', ')})`);
+    }
     let dumpPath = dump!, source: 'json' | 'figma' = 'json';
     if (url) {
       const fetched = await dumpFromFigmaUrl(url, out);
@@ -201,7 +221,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     console.log(`packaged ${r.component || r.setName} → ${path.join(out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
     if (r.skipped.length) console.log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
     console.log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; about a minute)…`);
-    const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined });
+    const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined, ...(fonts ? { fonts } : {}) });
     const report = reportCheck(r, out, outcome, process.argv.includes('--allow-failures'));
     for (const line of report.lines) console.log(line);
     if (report.exitCode === 0) console.log(`  install: npm install ${path.resolve(out, r.tarball)}`);
