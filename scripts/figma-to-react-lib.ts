@@ -30,6 +30,7 @@ import path from 'node:path';
 import { buildReactLibrary, parseLibraryRequest } from '../playground/server/react-library.js';
 import { canonicalJson } from '../core/contract-provenance.js';
 import { formatVerdictTable, type Verdict, type Verdicts } from './design-consumer-verdict.js';
+import { consumerFontManifest, readConsumerFonts } from './design-consumer-fonts.js';
 import type { Toolchain } from './package-react-library.js';
 
 export type HeadlessEngine = Pick<typeof import('../playground/src/engine/headless-figma-to-react.js'), 'figmaDumpToLibraryRequest'>;
@@ -131,7 +132,10 @@ async function playwright(): Promise<{ chromium: typeof import('playwright-core'
  *  Chromium; without one it says it did not check. The verdict is written into
  *  <out>/result.json under `check`, the receipt and images into <out>/check. */
 export async function checkGenerated(r: FigmaToReactResult, dumpPath: string,
-  options: { token?: string; chromiumPath?: string } = {}): Promise<CheckOutcome> {
+  options: { token?: string; chromiumPath?: string; fonts?: string;
+    /** The check itself; injected only by tests. */
+    runCheck?: (args: import('./design-consumer-check.js').ConsumerCheckArgs) => Promise<any> } = {}): Promise<CheckOutcome> {
+  const fonts = options.fonts ? consumerFontManifest(readConsumerFonts(path.resolve(options.fonts))).fonts.map(({ file: _file, ...face }) => face) : null;
   const pw = await playwright();
   const browser = 'missing' in pw ? null : options.chromiumPath ?? pw.chromium.executablePath();
   let outcome: CheckOutcome;
@@ -142,14 +146,15 @@ export async function checkGenerated(r: FigmaToReactResult, dumpPath: string,
   } else {
     const out = path.join(r.outDir, 'check');
     rmSync(out, { recursive: true, force: true }); // this command's own subdirectory, rewritten each run
-    const { runConsumerCheck } = await import('./design-consumer-check.js');
-    const receipt = await runConsumerCheck({ dump: dumpPath, contract: r.contractFile, generated: r.generatedDir, component: r.component, out, token: options.token,
-      ...(options.chromiumPath ? { chromiumPath: options.chromiumPath } : {}) });
+    const runCheck = options.runCheck ?? (await import('./design-consumer-check.js')).runConsumerCheck;
+    const receipt = await runCheck({ dump: dumpPath, contract: r.contractFile, generated: r.generatedDir, component: r.component, out, token: options.token,
+      ...(options.chromiumPath ? { chromiumPath: options.chromiumPath } : {}),
+      ...(options.fonts ? { fonts: path.resolve(options.fonts) } : {}) });
     outcome = { status: receipt.verdict.verdict, receipt: path.relative(r.outDir, path.join(out, 'receipt.json')), verdicts: receipt.verdict };
   }
   const resultFile = path.join(r.outDir, 'result.json');
   const result = JSON.parse(readFileSync(resultFile, 'utf8'));
-  result.check = outcome.status === 'not-checked' ? outcome : { status: outcome.status, receipt: outcome.receipt, counts: outcome.verdicts.counts,
+  result.check = outcome.status === 'not-checked' ? { ...outcome, fonts } : { status: outcome.status, receipt: outcome.receipt, counts: outcome.verdicts.counts, fonts,
     variants: outcome.verdicts.variants.map(v => ({ key: v.key, figmaName: v.figmaName, verdict: v.verdict, reasons: v.reasons })), setProblems: outcome.verdicts.setProblems };
   writeFileSync(resultFile, JSON.stringify(result, null, 2) + '\n');
   return outcome;
@@ -181,7 +186,7 @@ export function reportCheck(r: { component: string; setName: string; tarball: st
 }
 
 export interface FigmaToReactRun {
-  dump?: string; url?: string; out: string; name?: string; expectRequest?: string; allowFailures?: boolean;
+  dump?: string; url?: string; out: string; name?: string; expectRequest?: string; fonts?: string; allowFailures?: boolean;
 }
 
 /** The whole command after its flags are read, for both shells: fetch (with
@@ -189,6 +194,11 @@ export interface FigmaToReactRun {
 export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: EngineLoader; toolchain?: Toolchain; label: string;
   log?: (line: string) => void; error?: (line: string) => void }): Promise<number> {
   const log = deps.log ?? ((line: string) => console.log(line)), error = deps.error ?? ((line: string) => console.error(line));
+  // Both command entrypoints authenticate the manifest before fetching or writing.
+  if (run.fonts) {
+    const faces = readConsumerFonts(path.resolve(run.fonts));
+    log(`fonts: ${faces.length} face(s) from ${run.fonts} (${[...new Set(faces.map(f => f.family))].join(', ')})`);
+  }
   let dumpPath = run.dump!, source: 'json' | 'figma' = 'json';
   if (run.url) {
     const fetched = await dumpFromFigmaUrl(run.url, run.out);
@@ -200,7 +210,7 @@ export async function runFigmaToReact(run: FigmaToReactRun, deps: { loadEngine: 
   log(`packaged ${r.component || r.setName} → ${path.join(run.out, r.tarball)} (sha256 ${r.tarballSha256.slice(0, 12)})`);
   if (r.skipped.length) log(`  not proposed: ${r.skipped.map((s: { setName: string; reason: string }) => `${s.setName} (${s.reason})`).join('; ')}`);
   log(`checking ${r.component} in a clean consumer (npm install, vite build, Chromium, Figma images; about a minute)…`);
-  const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined });
+  const outcome = await checkGenerated(r, dumpPath, { token: process.env.FIGMA_TOKEN || undefined, ...(run.fonts ? { fonts: run.fonts } : {}) });
   const report = reportCheck(r, run.out, outcome, run.allowFailures === true, deps.label);
   for (const line of report.lines) log(line);
   if (report.exitCode === 0) log(`  install: npm install ${path.resolve(run.out, r.tarball)}`);

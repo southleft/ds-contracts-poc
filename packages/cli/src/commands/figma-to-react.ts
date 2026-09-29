@@ -24,7 +24,7 @@ import { resolveToolchain } from '../../../../scripts/package-react-library.js';
 import { CliUsageError, flagString, parseFlags } from '../lib.js';
 
 export const FIGMA_TO_REACT_USAGE =
-  'figma-to-react (--url <figma component-set link> | --dump <dump.json>) --out <dir> [--name <npm package name>] [--allow-failures]';
+  'figma-to-react (--url <figma component-set link> | --dump <dump.json>) --out <dir> [--name <npm package name>] [--fonts <manifest.json>] [--allow-failures]';
 
 /** Where this release runs: the packager and the check spawn npm, esbuild and
  *  tsc the POSIX way. */
@@ -42,12 +42,13 @@ export const bundledEngine: EngineLoader = async () => ({
 });
 
 export function parseFigmaToReactArgs(argv: string[]): FigmaToReactRun {
-  const parsed = parseFlags(argv, { value: ['dump', 'url', 'out', 'name'], bool: ['allow-failures'] });
+  const parsed = parseFlags(argv, { value: ['dump', 'url', 'out', 'name', 'fonts'], bool: ['allow-failures'] });
   if (parsed.positionals.length) throw new CliUsageError(`figma-to-react takes no positional arguments (got ${parsed.positionals.join(' ')}); usage: ${FIGMA_TO_REACT_USAGE}`);
   const dump = flagString(parsed, 'dump'), url = flagString(parsed, 'url'), out = flagString(parsed, 'out');
   if (!dump === !url) throw new CliUsageError(`figma-to-react needs exactly one of --url or --dump; usage: ${FIGMA_TO_REACT_USAGE}`);
   if (!out) throw new CliUsageError(`figma-to-react needs --out <dir>; usage: ${FIGMA_TO_REACT_USAGE}`);
-  return { ...(dump ? { dump } : {}), ...(url ? { url } : {}), out, name: flagString(parsed, 'name'), allowFailures: parsed.flags.get('allow-failures') === true };
+  const fonts = flagString(parsed, 'fonts');
+  return { ...(dump ? { dump } : {}), ...(url ? { url } : {}), out, name: flagString(parsed, 'name'), ...(fonts ? { fonts } : {}), allowFailures: parsed.flags.get('allow-failures') === true };
 }
 
 export async function figmaToReactCommand(argv: string[], env: { platform: string; node: string } = { platform: process.platform, node: process.version },

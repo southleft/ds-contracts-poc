@@ -25,6 +25,7 @@ The command is new in `0.5.0-rc.3`. A bare `npx @ds-contracts/cli` installs npm'
 | `--dump <file>` | A saved REST dump instead of a link (for example, the `dump.json` a `--url` run keeps in `--out`). |
 | `--out <dir>` | Where the package and reports go. Required. |
 | `--name <npm name>` | The package name. Default: `@ds-contracts-generated/<component>`. |
+| `--fonts <manifest.json>` | Provide the design's local font files to the check. Checksums and declared family names are verified before fetching or writing; the supplied faces are recorded in `result.json`. See [font manifests](../../docs/PREVIEW.md). |
 | `--allow-failures` | Exit 0 even when a variant fails; the report still says FAIL. |
 
 It writes `<out>/<name>.tgz` (install it with `npm install <path>`), `<out>/request.json`, `<out>/result.json` and the check's receipt and images in `<out>/check`. It is the same engine, generator and packager as the reference repo's `npm run figma:to-react`; `npm run cli:figma-to-react:smoke:check` proves the installed package reproduces that command's pinned output.
@@ -49,7 +50,7 @@ A green check is printed only when every variant passed.
 ## All commands
 
 ```
-ds-contracts figma-to-react (--url <link> | --dump <file>) --out <dir> [--name <npm name>] [--allow-failures]
+ds-contracts figma-to-react (--url <link> | --dump <file>) --out <dir> [--name <npm name>] [--fonts <manifest.json>] [--allow-failures]
                                                        # Figma component set → checked React package
 ds-contracts init                                      # write ds-contracts.config.json
 ds-contracts onboard <package>                         # detect → draft → stop for review

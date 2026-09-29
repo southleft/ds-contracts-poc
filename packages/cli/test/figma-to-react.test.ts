@@ -8,7 +8,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +29,8 @@ test('flags: exactly one of --url and --dump, and --out', () => {
   assert.throws(() => parseFigmaToReactArgs(['--dump', 'd']), /needs --out <dir>/);
   assert.throws(() => parseFigmaToReactArgs(['d.json', '--out', 'o']), /no positional arguments/);
   assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--expect-request', 'r.json']), /Unknown flag "--expect-request"/);
+  assert.equal(parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--fonts', 'fonts.json']).fonts, 'fonts.json');
+  assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--fonts']), /--fonts/);
 });
 
 test('Windows and Node versions outside the consumer Vite engine range are refused before loading the engine', async () => {
@@ -64,6 +66,21 @@ function sandbox(t: test.TestContext, token?: string) {
   });
   return { out, log, errors, restore };
 }
+
+test('an invalid --fonts manifest refuses before a URL fetch, engine load or output write', async t => {
+  const { out, restore } = sandbox(t, 'test-token-not-a-secret');
+  const manifest = path.join(out, 'fonts.json'), target = path.join(out, 'run');
+  writeFileSync(manifest, JSON.stringify({ version: 1, fonts: [] }));
+  let fetches = 0, engineLoads = 0;
+  globalThis.fetch = async () => { fetches++; throw new Error('invalid fonts reached a URL fetch'); };
+  const loadEngine = async () => { engineLoads++; throw new Error('invalid fonts reached the engine'); };
+  await assert.rejects(figmaToReactCommand(['--url', 'https://www.figma.com/design/example/file?node-id=1-2', '--out', target, '--fonts', manifest], supported, loadEngine),
+    /consumer-fonts:invalid-manifest/);
+  restore();
+  assert.equal(fetches, 0);
+  assert.equal(engineLoads, 0);
+  assert.equal(existsSync(target), false);
+});
 
 test('--url imports through the app\'s own URL import with the token from the environment, keeps the dump and packages it', async t => {
   const { out, log, errors, restore } = sandbox(t, 'test-token-not-a-secret');

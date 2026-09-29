@@ -29,10 +29,11 @@ Commands:
   figma-to-react --url <component-set link>   a Figma component set → an installable React
           | --dump <dump.json>                package (<out>/<name>.tgz), then CHECKED against
           --out <dir> [--name <npm name>]     the design: each variant is mounted from the
-          [--allow-failures]                  installed package in a clean Vite app and reported
-                                              PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
+          [--fonts <manifest.json>]          installed package in a clean Vite app and reported
+          [--allow-failures]                  PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
                                               from the environment. Any FAIL exits 1 unless
-                                              --allow-failures. The check needs a Chromium:
+                                              --allow-failures. --fonts supplies local font files.
+                                              The check needs a Chromium:
                                               npx playwright-core install chromium. Node 20.19+ (20.x) or 22.12+,
                                               macOS and Linux.
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
@@ -155,7 +156,7 @@ const COMMAND_HELP: Record<string, string> = {
 
   figma-to-react --url <figma component-set link> --out <dir>
   figma-to-react --dump <dump.json> --out <dir>
-    [--name <npm package name>] [--allow-failures]
+    [--name <npm package name>] [--fonts <manifest.json>] [--allow-failures]
 
 Writes <out>/<name>.tgz (install it with npm install <path>), <out>/request.json
 and <out>/result.json, then checks the package against the design: every Figma
@@ -164,6 +165,8 @@ with Figma's own image (5% limit, on white and on black) and checked for every
 text and icon it draws. Each variant is reported PASS, FAIL (with the reasons)
 or UNVERIFIED (not measurable: without FIGMA_TOKEN there are no Figma images).
 Any FAIL exits 1 unless --allow-failures; the package is written either way.
+--fonts provides local font files in a sha256-pinned manifest. The files are
+authenticated before any fetch or output, and the faces are recorded in result.json.
 A green check is printed only when every variant passed.
 
   FIGMA_TOKEN   a Figma personal access token (file read). Required for --url;

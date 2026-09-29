@@ -22,11 +22,14 @@
  *      under out/;
  *   6. control: the same run with PLAYWRIGHT_BROWSERS_PATH pointing at an empty
  *      directory must say NOT CHECKED, name the install command, and exit 0.
+ *   7. --fonts must reach the real consumer, record its faces, and reject a
+ *      mismatched family before writing output from the installed artifact.
  *
  * Needs the npm registry (the install and the check's clean consumer) and
  * downloads Chromium when it is not cached. `--keep` leaves the temp directory.
  */
 import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -65,9 +68,9 @@ function filesContaining(dir: string, needle: string): string[] {
   return hits;
 }
 
-function runCli(project: string, out: string, env: NodeJS.ProcessEnv) {
+function runCli(project: string, out: string, env: NodeJS.ProcessEnv, extraArgs: string[] = []) {
   const cli = path.join(project, 'node_modules', '@ds-contracts', 'cli', 'dist', 'cli.js');
-  const r = spawnSync(process.execPath, [cli, 'figma-to-react', '--dump', 'dump.json', '--out', out], { cwd: project, env, encoding: 'utf8', timeout: 10 * 60_000, maxBuffer: 64 * 1024 * 1024 });
+  const r = spawnSync(process.execPath, [cli, 'figma-to-react', '--dump', 'dump.json', '--out', out, ...extraArgs], { cwd: project, env, encoding: 'utf8', timeout: 10 * 60_000, maxBuffer: 64 * 1024 * 1024 });
   return { status: r.status, stdout: r.stdout ?? '', stderr: r.stderr ?? '', error: r.error };
 }
 
@@ -93,14 +96,23 @@ export async function smoke(keep = false): Promise<string[]> {
     console.log('installing the Chromium the installed playwright-core names…');
     sh(process.execPath, [path.join(project, 'node_modules', 'playwright-core', 'cli.js'), 'install', 'chromium'], project);
     copyFileSync(DUMP, path.join(project, 'dump.json'));
+    const fontFile = 'IBMPlexSans-Regular.woff2';
+    copyFileSync(path.join(ROOT, 'extract', 'computed', 'fonts', 'ibm-plex-sans', fontFile), path.join(project, fontFile));
+    const fontFace = { family: 'IBM Plex Sans', weight: '400', style: 'normal',
+      sha256: createHash('sha256').update(readFileSync(path.join(project, fontFile))).digest('hex') };
+    writeFileSync(path.join(project, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, file: fontFile }] }));
 
-    console.log('running figma-to-react from the installed CLI (no FIGMA_TOKEN)…');
-    const run = runCli(project, './out', userEnv());
+    console.log('running figma-to-react from the installed CLI with local fonts (no FIGMA_TOKEN)…');
+    const run = runCli(project, './out', userEnv(), ['--fonts', './fonts.json']);
     process.stdout.write(run.stdout.split('\n').map(l => '  | ' + l).join('\n') + '\n');
     if (run.stderr.trim()) process.stdout.write(run.stderr.split('\n').map(l => '  ! ' + l).join('\n') + '\n');
     if (expect(run.status === 0, `exit-code: expected 0, got ${run.status}${run.error ? ` (${run.error.message})` : ''}`)) {
       const out = path.join(project, 'out');
       const result = JSON.parse(readFileSync(path.join(out, 'result.json'), 'utf8'));
+      expect(JSON.stringify(result.check?.fonts) === JSON.stringify([fontFace]), 'font-receipt: the supplied face was not recorded');
+      const consumerReceipt = JSON.parse(readFileSync(path.join(out, 'check', 'receipt.json'), 'utf8'));
+      expect(consumerReceipt.consumer?.fontProvision?.kind === 'explicit-local-assets', 'font-consumer: the installed check did not receive local fonts');
+      expect(existsSync(path.join(out, 'check', 'inputs', 'fonts', `${fontFace.sha256}.woff2`)), 'font-evidence: the authenticated font asset was not retained');
       expect(result.requestSha256 === pin.requestSha256, `request-sha256: ${result.requestSha256} ≠ pin ${pin.requestSha256}`);
       expect(result.rootId === pin.rootId, `root-id: ${result.rootId} ≠ pin ${pin.rootId}`);
       const libraries = readdirSync(path.join(out, 'work')).filter(d => d.startsWith('library-'));
@@ -129,16 +141,25 @@ export async function smoke(keep = false): Promise<string[]> {
     console.log('control: the same run with no Chromium (PLAYWRIGHT_BROWSERS_PATH is an empty directory)…');
     const empty = path.join(work, 'no-browsers');
     mkdirSync(empty);
-    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }));
+    const control = runCli(project, './out-control', userEnv({ PLAYWRIGHT_BROWSERS_PATH: empty }), ['--fonts', './fonts.json']);
     process.stdout.write(control.stdout.split('\n').map(l => '  | ' + l).join('\n') + '\n');
     expect(control.status === 0, `control-exit-code: expected 0, got ${control.status}`);
     expect(/^◌ figma-to-react Badge: NOT CHECKED — no Chromium for the consumer check/m.test(control.stdout), 'control-not-checked: no NOT CHECKED line');
     expect(new RegExp(`npx playwright-core@${version(project, 'playwright-core').replace(/\./g, '\\.')} install chromium`).test(control.stdout),
       'control-install-hint: the NOT CHECKED line does not name the installed playwright-core version');
     expect(!control.stdout.split('\n').some(l => l.startsWith('✔')), 'control-green-check-printed');
-    if (existsSync(path.join(project, 'out-control', 'result.json')))
-      expect(JSON.parse(readFileSync(path.join(project, 'out-control', 'result.json'), 'utf8')).check?.status === 'not-checked', 'control-result: check.status is not "not-checked"');
+    if (existsSync(path.join(project, 'out-control', 'result.json'))) {
+      const controlResult = JSON.parse(readFileSync(path.join(project, 'out-control', 'result.json'), 'utf8'));
+      expect(controlResult.check?.status === 'not-checked', 'control-result: check.status is not "not-checked"');
+      expect(JSON.stringify(controlResult.check?.fonts) === JSON.stringify([fontFace]), 'control-font-receipt: the supplied face was not recorded without Chromium');
+    }
     else problems.push('control-result: out-control/result.json missing');
+    console.log('control: a font file named as another family must refuse before output…');
+    writeFileSync(path.join(project, 'wrong-family.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, family: 'SF Pro', file: fontFile }] }));
+    const wrongFamily = runCli(project, './out-wrong-family', userEnv(), ['--fonts', './wrong-family.json']);
+    expect(wrongFamily.status === 1, `wrong-family-exit-code: expected 1, got ${wrongFamily.status}`);
+    expect(/consumer-fonts:0:family-not-declared-by-font/.test(wrongFamily.stderr), 'wrong-family-refusal: no family mismatch diagnosis');
+    expect(!existsSync(path.join(project, 'out-wrong-family')), 'wrong-family-output: files were written before the font refusal');
     return problems;
   } finally {
     if (keep) console.log(`kept ${work}`); else rmSync(work, { recursive: true, force: true });
