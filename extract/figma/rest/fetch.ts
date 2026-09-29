@@ -291,7 +291,7 @@ export function classifyVariablesRefusal(status: number, body: string): Variable
     userFixable: false,
     message:
       `Figma refused /variables/local with ${status} and did not name a missing scope. ` +
-      'Possible causes include the file\'s plan tier, which this project has not verified. ' +
+      'The cause is UNVERIFIED; the file\'s plan tier is one possibility. ' +
       'Importing without variable names; resolved values are used instead.',
     fix: null,
     body: b.slice(0, 300),
