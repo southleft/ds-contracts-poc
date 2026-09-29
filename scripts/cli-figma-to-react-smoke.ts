@@ -11,8 +11,8 @@
  *      the Chromium the installed playwright-core names (as the README says);
  *   2. copy in benchmark/inputs/altitude-badge/dump.json and run
  *      `node node_modules/@ds-contracts/cli/dist/cli.js figma-to-react --dump
- *      dump.json --out ./out` there, with no FIGMA_TOKEN and no npm run
- *      environment;
+ *      dump.json --out ./out --fonts ./fonts.json` there, supplying the Public
+ *      Sans family the dump names, with no FIGMA_TOKEN and no npm run environment;
  *   3. require the request hash, the generated files and the packed tarball's
  *      entries to equal benchmark/pins/altitude-badge.figma-to-react.json (the
  *      pin the in-repo replay is held to);
@@ -96,9 +96,11 @@ export async function smoke(keep = false): Promise<string[]> {
     console.log('installing the Chromium the installed playwright-core names…');
     sh(process.execPath, [path.join(project, 'node_modules', 'playwright-core', 'cli.js'), 'install', 'chromium'], project);
     copyFileSync(DUMP, path.join(project, 'dump.json'));
-    const fontFile = 'IBMPlexSans-Regular.woff2';
-    copyFileSync(path.join(ROOT, 'extract', 'computed', 'fonts', 'ibm-plex-sans', fontFile), path.join(project, fontFile));
-    const fontFace = { family: 'IBM Plex Sans', weight: '400', style: 'normal',
+    // Supply the dump's actual family: a developer's installed Public Sans
+    // otherwise masks the missing-font failure on a clean Linux runner.
+    const fontFile = 'PublicSans-VariableFont_wght.ttf';
+    copyFileSync(path.join(ROOT, 'extract', 'computed', 'fonts', 'public-sans', fontFile), path.join(project, fontFile));
+    const fontFace = { family: 'Public Sans', weight: '100 900', style: 'normal',
       sha256: createHash('sha256').update(readFileSync(path.join(project, fontFile))).digest('hex') };
     writeFileSync(path.join(project, 'fonts.json'), JSON.stringify({ version: 1, fonts: [{ ...fontFace, file: fontFile }] }));
 
@@ -112,7 +114,12 @@ export async function smoke(keep = false): Promise<string[]> {
       expect(JSON.stringify(result.check?.fonts) === JSON.stringify([fontFace]), 'font-receipt: the supplied face was not recorded');
       const consumerReceipt = JSON.parse(readFileSync(path.join(out, 'check', 'receipt.json'), 'utf8'));
       expect(consumerReceipt.consumer?.fontProvision?.kind === 'explicit-local-assets', 'font-consumer: the installed check did not receive local fonts');
-      expect(existsSync(path.join(out, 'check', 'inputs', 'fonts', `${fontFace.sha256}.woff2`)), 'font-evidence: the authenticated font asset was not retained');
+      const loadedFonts = consumerReceipt.consumer?.fontProvision?.loaded;
+      expect(Array.isArray(loadedFonts) && loadedFonts.length === 1 &&
+        Object.entries({ ...fontFace, file: `${fontFace.sha256}.ttf`, status: 'loaded' })
+          .every(([key, value]) => loadedFonts[0][key] === value),
+        'font-loaded: Chromium did not load the supplied Public Sans face');
+      expect(existsSync(path.join(out, 'check', 'inputs', 'fonts', `${fontFace.sha256}.ttf`)), 'font-evidence: the authenticated font asset was not retained');
       expect(result.requestSha256 === pin.requestSha256, `request-sha256: ${result.requestSha256} ≠ pin ${pin.requestSha256}`);
       expect(result.rootId === pin.rootId, `root-id: ${result.rootId} ≠ pin ${pin.rootId}`);
       const libraries = readdirSync(path.join(out, 'work')).filter(d => d.startsWith('library-'));
