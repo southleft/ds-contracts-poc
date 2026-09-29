@@ -39,7 +39,7 @@ A green check is printed only when every variant passed.
 
 **Requirements:**
 
-- **Node 20.19 or later** (the check builds with Vite 7), on **macOS or Linux**. Windows is refused by name in this release.
+- **Node 20.19+ in the 20.x series, or 22.12+** (the check builds with Vite 7), on **macOS or Linux**. Windows is refused by name in this release.
 - **npm and network access to the registry.** npx installs the CLI with `esbuild`, `typescript`, `@types/react` and `playwright-core`; the check installs `react`, `react-dom` and `vite` into its temporary app.
 - **A Chromium for the check:** `npx playwright-core@1.61.1 install chromium` (the version this CLI pins; the command prints the exact line when the browser is missing). On Linux, add `--with-deps` for the system libraries. Without a Chromium the command packages anyway, prints NOT CHECKED and exits 0.
 - **`FIGMA_TOKEN`**, a Figma personal access token with file read access, from the environment only. Required for `--url`. With `--dump`, it lets the check fetch Figma's images.

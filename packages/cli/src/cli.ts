@@ -33,7 +33,7 @@ Commands:
                                               PASS, FAIL or UNVERIFIED. --url reads FIGMA_TOKEN
                                               from the environment. Any FAIL exits 1 unless
                                               --allow-failures. The check needs a Chromium:
-                                              npx playwright-core install chromium. Node 20.19+,
+                                              npx playwright-core install chromium. Node 20.19+ (20.x) or 22.12+,
                                               macOS and Linux.
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
           [--components a,b,c]                adapter/styling, create or reuse a sandbox (a PATH
@@ -172,7 +172,7 @@ A green check is printed only when every variant passed.
   Chromium      the check needs one: npx playwright-core install chromium
                 (without it the command says NOT CHECKED and exits 0).
 
-Requires Node 20.19 or later, on macOS or Linux. The reference repo's demo
+Requires Node 20.19+ (20.x) or 22.12+, on macOS or Linux. The reference repo's demo
 contracts and tokens ship with the engine and still inform name linking and
 nearest-token matching.
 `,

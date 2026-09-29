@@ -30,10 +30,10 @@ export const FIGMA_TO_REACT_USAGE =
  *  tsc the POSIX way. */
 export const FIGMA_TO_REACT_PLATFORMS: readonly string[] = ['darwin', 'linux'];
 
-/** The consumer check builds with Vite 7, which needs Node 20.19 or later. */
+/** Match the consumer's Vite 7 engine range: ^20.19.0 || >=22.12.0. */
 export function nodeSupported(version: string): boolean {
   const [major, minor] = version.replace(/^v/, '').split('.').map(Number);
-  return major > 20 || (major === 20 && minor >= 19);
+  return (major === 20 && minor >= 19) || (major === 22 && minor >= 12) || major > 22;
 }
 
 /** The engine bundled into dist/cli.js, loaded on first use. */
@@ -56,6 +56,6 @@ export async function figmaToReactCommand(argv: string[], env: { platform: strin
   if (!FIGMA_TO_REACT_PLATFORMS.includes(env.platform))
     throw new Error(`figma-to-react-platform-unsupported: this release runs on macOS and Linux (this is ${env.platform}); use WSL on Windows`);
   if (!nodeSupported(env.node))
-    throw new Error(`figma-to-react-node-unsupported: needs Node 20.19 or later (the check builds the package with Vite 7); this is ${env.node}`);
+    throw new Error(`figma-to-react-node-unsupported: needs Node 20.19+ (20.x) or 22.12+ (the check builds the package with Vite 7); this is ${env.node}`);
   return runFigmaToReact(run, { loadEngine, toolchain: resolveToolchain(import.meta.url), label: 'figma-to-react' });
 }

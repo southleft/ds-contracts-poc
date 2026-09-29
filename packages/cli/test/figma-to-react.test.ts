@@ -31,13 +31,17 @@ test('flags: exactly one of --url and --dump, and --out', () => {
   assert.throws(() => parseFigmaToReactArgs(['--dump', 'd', '--out', 'o', '--expect-request', 'r.json']), /Unknown flag "--expect-request"/);
 });
 
-test('Windows and Node older than 20.19 are refused by name before anything runs', async () => {
+test('Windows and Node versions outside the consumer Vite engine range are refused before loading the engine', async () => {
   await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', 'o'], { platform: 'win32', node: 'v22.12.0' }), /figma-to-react-platform-unsupported: .*macOS and Linux \(this is win32\)/);
-  await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', 'o'], { platform: 'darwin', node: 'v20.18.3' }), /figma-to-react-node-unsupported: needs Node 20\.19 or later/);
-  assert.equal(nodeSupported('v20.19.0'), true);
-  assert.equal(nodeSupported('v22.0.0'), true);
-  assert.equal(nodeSupported('v20.18.9'), false);
-  assert.equal(nodeSupported('v18.20.0'), false);
+  let engineLoads = 0;
+  const loadEngine = async () => { engineLoads++; throw new Error('unsupported runtime reached the engine'); };
+  for (const node of ['v18.20.0', 'v20.18.9', 'v21.7.3', 'v22.0.0', 'v22.11.0']) {
+    assert.equal(nodeSupported(node), false, node);
+    await assert.rejects(figmaToReactCommand(['--dump', dump, '--out', 'o'], { platform: 'darwin', node }, loadEngine),
+      /figma-to-react-node-unsupported: needs Node 20\.19\+ \(20\.x\) or 22\.12\+/);
+  }
+  assert.equal(engineLoads, 0);
+  for (const node of ['v20.19.0', 'v20.20.0', 'v22.12.0', 'v24.0.0']) assert.equal(nodeSupported(node), true, node);
 });
 
 /** A run's sandbox: a temp --out, no Chromium, the given FIGMA_TOKEN, console captured. */
