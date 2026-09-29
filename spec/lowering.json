@@ -202,8 +202,8 @@
       "stage": "css",
       "status": "implemented",
       "file": "packages/core/src/css.ts",
-      "line": 1240,
-      "ruleLine": 1241,
+      "line": 1243,
+      "ruleLine": 1244,
       "ruleText": "decls.push(...(textBoxes.get(part) ?? []));",
       "css": {
         "construct": "Captured textAutoResize: WIDTH_AND_HEIGHT uses inline-size: calc-size(max-content, round(up, size, 1px)) and flex-shrink:0, without an implicit container ceiling. Owned tracked text subtracts final finite px/em/rem tracking before rounding and adds an inner span with calc-size(100%, size + var(--_dsc-text-box-tracking)). Complete one-to-three enum axes select size and tracking together. Empty text contributes zero width. Authored minima/maxima, tracked min-inline-size:0 and conditional align-self:flex-start remain authoritative.",

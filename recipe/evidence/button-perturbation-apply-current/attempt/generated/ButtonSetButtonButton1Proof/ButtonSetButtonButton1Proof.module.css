@@ -129,594 +129,594 @@
 .icons-none {
 }
 
-.variant-secondary.size-medium.state-default.icons-none {
+.root:where(.variant-secondary.size-medium.state-default.icons-none) {
   padding-left: 24px;
 }
 
 .icons-leading {
 }
 
-.variant-secondary.size-medium.state-default.icons-leading {
+.root:where(.variant-secondary.size-medium.state-default.icons-leading) {
   padding-left: 16px;
 }
 
 .icons-trailing {
 }
 
-.variant-secondary.size-medium.state-default.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
 .icons-both {
 }
 
-.variant-secondary.size-medium.state-default.icons-both {
+.root:where(.variant-secondary.size-medium.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-hover.icons-none {
+.root:where(.variant-secondary.size-medium.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-hover.icons-leading {
+.root:where(.variant-secondary.size-medium.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-hover.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-hover.icons-both {
+.root:where(.variant-secondary.size-medium.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-pressed.icons-none {
+.root:where(.variant-secondary.size-medium.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-pressed.icons-leading {
+.root:where(.variant-secondary.size-medium.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-pressed.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-pressed.icons-both {
+.root:where(.variant-secondary.size-medium.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-focusVisible.icons-none {
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-focusVisible.icons-leading {
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-focusVisible.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-focusVisible.icons-both {
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-disabled.icons-none {
+.root:where(.variant-secondary.size-medium.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-disabled.icons-leading {
+.root:where(.variant-secondary.size-medium.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-disabled.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-disabled.icons-both {
+.root:where(.variant-secondary.size-medium.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-loading.icons-none {
+.root:where(.variant-secondary.size-medium.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-loading.icons-leading {
+.root:where(.variant-secondary.size-medium.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-loading.icons-trailing {
+.root:where(.variant-secondary.size-medium.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-medium.state-loading.icons-both {
+.root:where(.variant-secondary.size-medium.state-loading.icons-both) {
   padding-left: 16px;
 }
 
 .size-small {
 }
 
-.variant-secondary.size-small.state-default.icons-none {
+.root:where(.variant-secondary.size-small.state-default.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-default.icons-leading {
+.root:where(.variant-secondary.size-small.state-default.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-default.icons-trailing {
+.root:where(.variant-secondary.size-small.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-default.icons-both {
+.root:where(.variant-secondary.size-small.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-hover.icons-none {
+.root:where(.variant-secondary.size-small.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-hover.icons-leading {
+.root:where(.variant-secondary.size-small.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-hover.icons-trailing {
+.root:where(.variant-secondary.size-small.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-hover.icons-both {
+.root:where(.variant-secondary.size-small.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-pressed.icons-none {
+.root:where(.variant-secondary.size-small.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-pressed.icons-leading {
+.root:where(.variant-secondary.size-small.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-pressed.icons-trailing {
+.root:where(.variant-secondary.size-small.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-pressed.icons-both {
+.root:where(.variant-secondary.size-small.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-focusVisible.icons-none {
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-focusVisible.icons-leading {
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-focusVisible.icons-trailing {
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-focusVisible.icons-both {
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-disabled.icons-none {
+.root:where(.variant-secondary.size-small.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-disabled.icons-leading {
+.root:where(.variant-secondary.size-small.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-disabled.icons-trailing {
+.root:where(.variant-secondary.size-small.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-disabled.icons-both {
+.root:where(.variant-secondary.size-small.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-loading.icons-none {
+.root:where(.variant-secondary.size-small.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-loading.icons-leading {
+.root:where(.variant-secondary.size-small.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-loading.icons-trailing {
+.root:where(.variant-secondary.size-small.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-small.state-loading.icons-both {
+.root:where(.variant-secondary.size-small.state-loading.icons-both) {
   padding-left: 16px;
 }
 
 .size-large {
 }
 
-.variant-secondary.size-large.state-default.icons-none {
+.root:where(.variant-secondary.size-large.state-default.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-default.icons-leading {
+.root:where(.variant-secondary.size-large.state-default.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-default.icons-trailing {
+.root:where(.variant-secondary.size-large.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-default.icons-both {
+.root:where(.variant-secondary.size-large.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-hover.icons-none {
+.root:where(.variant-secondary.size-large.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-hover.icons-leading {
+.root:where(.variant-secondary.size-large.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-hover.icons-trailing {
+.root:where(.variant-secondary.size-large.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-hover.icons-both {
+.root:where(.variant-secondary.size-large.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-pressed.icons-none {
+.root:where(.variant-secondary.size-large.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-pressed.icons-leading {
+.root:where(.variant-secondary.size-large.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-pressed.icons-trailing {
+.root:where(.variant-secondary.size-large.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-pressed.icons-both {
+.root:where(.variant-secondary.size-large.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-focusVisible.icons-none {
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-focusVisible.icons-leading {
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-focusVisible.icons-trailing {
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-focusVisible.icons-both {
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-disabled.icons-none {
+.root:where(.variant-secondary.size-large.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-disabled.icons-leading {
+.root:where(.variant-secondary.size-large.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-disabled.icons-trailing {
+.root:where(.variant-secondary.size-large.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-disabled.icons-both {
+.root:where(.variant-secondary.size-large.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-loading.icons-none {
+.root:where(.variant-secondary.size-large.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-loading.icons-leading {
+.root:where(.variant-secondary.size-large.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-loading.icons-trailing {
+.root:where(.variant-secondary.size-large.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-secondary.size-large.state-loading.icons-both {
+.root:where(.variant-secondary.size-large.state-loading.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-default.icons-none {
+.root:where(.variant-primary.size-medium.state-default.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-default.icons-leading {
+.root:where(.variant-primary.size-medium.state-default.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-default.icons-trailing {
+.root:where(.variant-primary.size-medium.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-default.icons-both {
+.root:where(.variant-primary.size-medium.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-hover.icons-none {
+.root:where(.variant-primary.size-medium.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-hover.icons-leading {
+.root:where(.variant-primary.size-medium.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-hover.icons-trailing {
+.root:where(.variant-primary.size-medium.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-hover.icons-both {
+.root:where(.variant-primary.size-medium.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-pressed.icons-none {
+.root:where(.variant-primary.size-medium.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-pressed.icons-leading {
+.root:where(.variant-primary.size-medium.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-pressed.icons-trailing {
+.root:where(.variant-primary.size-medium.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-pressed.icons-both {
+.root:where(.variant-primary.size-medium.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-focusVisible.icons-none {
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-focusVisible.icons-leading {
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-focusVisible.icons-trailing {
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-focusVisible.icons-both {
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-disabled.icons-none {
+.root:where(.variant-primary.size-medium.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-disabled.icons-leading {
+.root:where(.variant-primary.size-medium.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-disabled.icons-trailing {
+.root:where(.variant-primary.size-medium.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-disabled.icons-both {
+.root:where(.variant-primary.size-medium.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-loading.icons-none {
+.root:where(.variant-primary.size-medium.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-loading.icons-leading {
+.root:where(.variant-primary.size-medium.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-loading.icons-trailing {
+.root:where(.variant-primary.size-medium.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-medium.state-loading.icons-both {
+.root:where(.variant-primary.size-medium.state-loading.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-default.icons-none {
+.root:where(.variant-primary.size-small.state-default.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-default.icons-leading {
+.root:where(.variant-primary.size-small.state-default.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-default.icons-trailing {
+.root:where(.variant-primary.size-small.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-default.icons-both {
+.root:where(.variant-primary.size-small.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-hover.icons-none {
+.root:where(.variant-primary.size-small.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-hover.icons-leading {
+.root:where(.variant-primary.size-small.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-hover.icons-trailing {
+.root:where(.variant-primary.size-small.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-hover.icons-both {
+.root:where(.variant-primary.size-small.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-pressed.icons-none {
+.root:where(.variant-primary.size-small.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-pressed.icons-leading {
+.root:where(.variant-primary.size-small.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-pressed.icons-trailing {
+.root:where(.variant-primary.size-small.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-pressed.icons-both {
+.root:where(.variant-primary.size-small.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-focusVisible.icons-none {
+.root:where(.variant-primary.size-small.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-focusVisible.icons-leading {
+.root:where(.variant-primary.size-small.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-focusVisible.icons-trailing {
+.root:where(.variant-primary.size-small.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-focusVisible.icons-both {
+.root:where(.variant-primary.size-small.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-disabled.icons-none {
+.root:where(.variant-primary.size-small.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-disabled.icons-leading {
+.root:where(.variant-primary.size-small.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-disabled.icons-trailing {
+.root:where(.variant-primary.size-small.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-disabled.icons-both {
+.root:where(.variant-primary.size-small.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-loading.icons-none {
+.root:where(.variant-primary.size-small.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-loading.icons-leading {
+.root:where(.variant-primary.size-small.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-loading.icons-trailing {
+.root:where(.variant-primary.size-small.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-small.state-loading.icons-both {
+.root:where(.variant-primary.size-small.state-loading.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-default.icons-none {
+.root:where(.variant-primary.size-large.state-default.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-default.icons-leading {
+.root:where(.variant-primary.size-large.state-default.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-default.icons-trailing {
+.root:where(.variant-primary.size-large.state-default.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-default.icons-both {
+.root:where(.variant-primary.size-large.state-default.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-hover.icons-none {
+.root:where(.variant-primary.size-large.state-hover.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-hover.icons-leading {
+.root:where(.variant-primary.size-large.state-hover.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-hover.icons-trailing {
+.root:where(.variant-primary.size-large.state-hover.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-hover.icons-both {
+.root:where(.variant-primary.size-large.state-hover.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-pressed.icons-none {
+.root:where(.variant-primary.size-large.state-pressed.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-pressed.icons-leading {
+.root:where(.variant-primary.size-large.state-pressed.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-pressed.icons-trailing {
+.root:where(.variant-primary.size-large.state-pressed.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-pressed.icons-both {
+.root:where(.variant-primary.size-large.state-pressed.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-focusVisible.icons-none {
+.root:where(.variant-primary.size-large.state-focusVisible.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-focusVisible.icons-leading {
+.root:where(.variant-primary.size-large.state-focusVisible.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-focusVisible.icons-trailing {
+.root:where(.variant-primary.size-large.state-focusVisible.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-focusVisible.icons-both {
+.root:where(.variant-primary.size-large.state-focusVisible.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-disabled.icons-none {
+.root:where(.variant-primary.size-large.state-disabled.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-disabled.icons-leading {
+.root:where(.variant-primary.size-large.state-disabled.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-disabled.icons-trailing {
+.root:where(.variant-primary.size-large.state-disabled.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-disabled.icons-both {
+.root:where(.variant-primary.size-large.state-disabled.icons-both) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-loading.icons-none {
+.root:where(.variant-primary.size-large.state-loading.icons-none) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-loading.icons-leading {
+.root:where(.variant-primary.size-large.state-loading.icons-leading) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-loading.icons-trailing {
+.root:where(.variant-primary.size-large.state-loading.icons-trailing) {
   padding-left: 16px;
 }
 
-.variant-primary.size-large.state-loading.icons-both {
+.root:where(.variant-primary.size-large.state-loading.icons-both) {
   padding-left: 16px;
 }
 
