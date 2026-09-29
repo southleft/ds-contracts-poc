@@ -44,15 +44,15 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 |---|---|---|---|---|---|---|---|---|
 | flowbite | `flowbite.alert` | Alert (flowbite.alert) | 4 | 124 | 87 | 0 | recognisable | — |
 | flowbite | `flowbite.badge` | Badge (flowbite.badge) | 24 | 278 | 345 | 0 | recognisable | — |
-| flowbite | `flowbite.button` | Button (flowbite.button) | 45 | 569 | 733 | 0 | recognisable | — |
+| flowbite | `flowbite.button` | Button (flowbite.button) | 45 | 574 | 728 | 0 | recognisable | — |
 | flowbite | `flowbite.card` | Card (flowbite.card) | 1 | 24 | 20 | 0 | recognisable | — |
 | flowbite | `flowbite.helpertext` | HelperText | 5 | 55 | 28 | 0 | recognisable | FC-GEOMETRY-EXCLUDED:root-width |
 | flowbite | `flowbite.kbd` | Kbd | 1 | 20 | 23 | 0 | recognisable | — |
 | flowbite | `flowbite.label` | Label | 5 | 55 | 28 | 0 | recognisable | FC-GEOMETRY-EXCLUDED:root-width |
-| flowbite | `flowbite.toggleswitch` | ToggleSwitch | 6 | 138 | 123 | 0 | NOT recognisable | FC-GEOMETRY-EXCLUDED:track-height; STATE-DRIVER:checked-styles |
+| flowbite | `flowbite.toggleswitch` | ToggleSwitch | 6 | 144 | 117 | 0 | NOT recognisable | FC-GEOMETRY-EXCLUDED:track-height; STATE-DRIVER:checked-styles |
 | figma-ds | `ds.badge` | Badge | 10 | 124 | 139 | 0 | recognisable | — |
-| figma-ds | `ds.button` | Button | 25 | 491 | 852 | 0 | recognisable | — |
-| figma-ds | `ds.button-icon` | Button (Icon) | 5 | 31 | 79 | 0 | NOT recognisable | VECTOR-GLYPH-NAMED |
+| figma-ds | `ds.button` | Button | 25 | 501 | 842 | 0 | recognisable | — |
+| figma-ds | `ds.button-icon` | Button (Icon) | 5 | 32 | 78 | 0 | NOT recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.button-contract` | Button (contract) | 20 | 309 | 461 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.chip` | Chip | 10 | 174 | 318 | 0 | recognisable | VECTOR-GLYPH-NAMED |
 | figma-ds | `ds.dek` | Dek | 2 | 20 | 16 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING |
@@ -65,7 +65,7 @@ Denominator: the raw REST node documents (variant axes + values, component prope
 | figma-ds | `ds.toast` | Toast | 5 | 140 | 246 | 0 | recognisable | VECTOR-GLYPH-NAMED; SLOT-CONTENT-NAMED; KIT-LINE-HEIGHT-AUTHORING |
 | figma-ds | `ds.card` | Card | 2 | 41 | 72 | 0 | NOT recognisable | EFFECT-GLASS-NAMED; VECTOR-GLYPH-NAMED; SLOT-DEFAULT-CONTENT |
 | figma-ds | `ds.section` | Section | 1 | 22 | 19 | 0 | recognisable | KIT-LINE-HEIGHT-AUTHORING; FC-FONT-SUBSTRATE |
-| **all** | | 23 sets | | **3114** | **3960** | **0** | | |
+| **all** | | 23 sets | | **3136** | **3938** | **0** | | |
 
 ## Renders
 
