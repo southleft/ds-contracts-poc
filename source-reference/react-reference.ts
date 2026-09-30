@@ -71,6 +71,7 @@ const loaders: Record<string, Loader> = {
   ".css": "css",
   ".woff": "dataurl",
   ".woff2": "dataurl",
+  ".ttf": "dataurl",
 };
 export interface ReactReference {
   id: string;
