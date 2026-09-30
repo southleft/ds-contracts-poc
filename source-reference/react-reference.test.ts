@@ -1,4 +1,7 @@
 import test from "node:test";
+import { createHash } from "node:crypto";
+import { chromium } from "playwright-core";
+import { fontFamilyNames } from "../scripts/design-consumer-fonts.js";
 import assert from "node:assert/strict";
 import {
   mkdtempSync,
@@ -119,6 +122,53 @@ test("source CSS Modules retain distinct class maps, composition and authenticat
     assert.equal(reactReferenceUnchanged(first), false);
     assert.notEqual((await buildReactReference(root, undefined, entry)).id, first.id);
   } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+
+test("TrueType source fonts retain original bytes, paint custom glyphs and invalidate reference identity", async () => {
+  const { root, put } = fixture();
+  const font = readFileSync("extract/computed/fonts/public-sans/PublicSans-VariableFont_wght.ttf");
+  const hash = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
+  let browser: Awaited<ReturnType<typeof chromium.launch>> | undefined;
+  try {
+    writeFileSync(path.join(root, "original.ttf"), font);
+    put("original-font.css", '@font-face{font-family:"Original TTF";src:url("./original.ttf");font-weight:100 900}.original{font-family:"Original TTF";font-size:24px}');
+    const entry = 'import React from "react"; import {createRoot} from "react-dom/client"; import "./original-font.css"; createRoot(document.getElementById("root")!).render(<span className="original" id="ttf-source">Original TrueType glyphs</span>);';
+    const first = await buildReactReference(root, undefined, entry);
+    assert.equal(first.files[path.join(first.sourceRoot, "original.ttf")], hash(font), "original font bytes are authenticated");
+    const encoded = first.css.match(/data:[^;,]+;base64,([A-Za-z0-9+/=]+)/);
+    assert.ok(encoded, "the original CSS font import is bundled without a network font request");
+    assert.deepEqual(Buffer.from(encoded[1], "base64"), font, "the browser receives the original bytes without conversion");
+    assert.equal((await buildReactReference(root, undefined, entry)).id, first.id);
+    assert.ok(reactReferenceUnchanged(first));
+
+    browser = await chromium.launch();
+    const page = await browser.newPage();
+    await page.setContent(reactReferenceHtml(first));
+    await page.locator("#ttf-source").waitFor();
+    await page.evaluate(() => document.fonts.ready);
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("DOM.enable");
+    await cdp.send("CSS.enable");
+    const {root: documentNode} = await cdp.send("DOM.getDocument");
+    const {nodeId} = await cdp.send("DOM.querySelector", {nodeId: documentNode.nodeId, selector: "#ttf-source"});
+    const {fonts} = await cdp.send("CSS.getPlatformFontsForNode", {nodeId});
+    assert.ok(fonts.some(f => f.isCustomFont && f.glyphCount > 0 && fontFamilyNames(font).includes(f.familyName)), "real original-font glyphs paint; readiness alone is insufficient: " + JSON.stringify(fonts));
+    assert.ok(fonts.every(f => f.isCustomFont), "fallback fonts do not supply the label");
+    await cdp.detach();
+    await page.close();
+
+    // Source identity includes the exact asset even when a change is only
+    // trailing font-container bytes and need not change a drawn glyph.
+    writeFileSync(path.join(root, "original.ttf"), Buffer.concat([font, Buffer.from([0])]));
+    assert.equal(reactReferenceUnchanged(first), false);
+    const changed = await buildReactReference(root, undefined, entry);
+    assert.notEqual(changed.id, first.id);
+    assert.notEqual(changed.css, first.css);
+  } finally {
+    await browser?.close();
     rmSync(root, { recursive: true, force: true });
   }
 });
