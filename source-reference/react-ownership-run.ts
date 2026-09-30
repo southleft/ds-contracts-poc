@@ -14,7 +14,7 @@ import { projectReactRootVisual, type ReactRootVisual } from './react-root-visua
 import {readReactContextualContent} from './react-contextual-content.js';
 import {readReactAuthoredContent} from './react-authored-content.js';
 import {projectReactAuthoredTree,type ReactAuthoredTreeDraft} from './react-authored-tree.js';
-import {observeReactRuntimeDependencies} from './react-runtime-export.js';
+import {observeReactRuntimeDependencies,observeReactRuntimeMounts} from './react-runtime-export.js';
 import {createReactElementCreationObserver} from './react-element-creation.js';
 import {readReactCompiledContent,type ReactCompiledContent} from './react-compiled-content.js';
 import {readReactCompiledEffects,type ReactCompiledEffects} from './react-compiled-effects.js';
@@ -88,8 +88,10 @@ export interface ReactOwnershipReport {
  * sources with their JSX dependencies, plus the dependency exports its runtime
  * imports bind. A staged repair candidate must be read the same way (§D.173). */
 export function readReactOwnershipProgram(reference: ReactReference, sourceRoot: string) {
-  return observeReactRuntimeDependencies(reference,
+  const mounts=observeReactRuntimeMounts(reference,
     readReactSourceProgram(sourceRoot, reactReferenceSourceModules(reference), { includeJsxDependencies: true }));
+  const dependencies=observeReactRuntimeDependencies(reference,mounts.program);
+  return {program:dependencies.program,observations:[...mounts.observations,...dependencies.observations]};
 }
 /** Private, paired source observation using the same frozen cases and reader.
  * No render configuration, script, path or role map is accepted from the UI. */
