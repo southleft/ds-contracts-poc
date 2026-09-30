@@ -633,9 +633,13 @@ console.log("\nCarry, don't drop (literal fallback)");
   }
   const accentMdSquare = table?.rows.find((r: { values: string[] }) => r.values.join() === "accent,md,square");
   check(
-    "generation: the CSS carries one compound rule per drawn combination with its measured fill",
-    accentMdSquare !== undefined &&
-      css3.includes(`.tone-accent.size-md.shape-square .box {\n  background-color: ${accentMdSquare.literals["background-color"]};\n}`),
+    "generation: the CSS carries exactly one :where compound rule per drawn combination with its measured fill",
+    table?.rows.length === 8 &&
+      table.rows.every((r: { values: string[]; literals: Record<string, string> }) => {
+        const combination = table.props.map((prop: string, i: number) => `${prop}-${r.values[i]}`).join(".");
+        const rule = `.root:where(.${combination}) .box {\n  background-color: ${r.literals["background-color"]};\n}`;
+        return css3.split(rule).length === 2;
+      }),
   );
   check(
     "generation: resolveLiterals (canvas + per-variant surfaces) picks the same row, and an omitted prop matches none",
