@@ -47,7 +47,7 @@ const stripWeights = (n: DumpNode) => { const { strokeWeight: _w, strokeWeights:
 test('the REST reader carries sides [1, 0, 1, 0] as strokeWeights, writes no uniform weight beside them, and names nothing', () => {
   // `strokeWeight: 0` is what Figma REST really reports for these sides.
   const { headers, receipts, provenance } = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }, { sides: HEADER_RULE, strokeWeight: 0 }]);
-  assert.equal(provenance.dumpVersion, '1.43');
+  assert.equal(provenance.dumpVersion, '1.44');
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, HEADER_RULE]);
   assert.deepEqual(headers.map(h => 'strokeWeight' in h), [false, false], 'one stroke, one spelling — the reported 0 is not a drawn fact');
   assert.deepEqual(receipts, []);
@@ -93,7 +93,7 @@ test('the plugin reader carries the same field from strokeTopWeight…strokeLeft
   const source = readFileSync(new URL('./dump.plugin.js', import.meta.url), 'utf8')
     .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['RuledTabs'])};`);
   const dumps = await run(source) as Record<string, DumpSet> & { _provenance: { dumpVersion: string }; _degradations: Array<{ code: string; nodePath: string }> };
-  assert.equal(dumps._provenance.dumpVersion, '1.47');
+  assert.equal(dumps._provenance.dumpVersion, '1.48');
   // The dump was built in the VM's realm; copy the values into this one.
   const headers = Array.from(dumps.RuledTabs.variants, v => JSON.parse(JSON.stringify(v.children![0])) as DumpNode);
   assert.deepEqual(headers.map(h => h.strokeWeights), [HEADER_RULE, undefined, undefined]);
@@ -157,10 +157,14 @@ test('mixed or partial evidence is NAMED, never guessed', () => {
   assert.equal((part.tokens as Record<string, string> | undefined)?.['border-width'], undefined, 'and no uniform width is invented in its place');
   assert.ok(partial.notes.some(n => /header: per-side stroke weights are mixed, partial, or invalid across variants \(\[1, 0, 1, 0\] \/ not captured/.test(n)));
 
-  // An OUTSIDE stroke lowers to the outline vocabulary, which has no per-side widths.
+  // An OUTSIDE stroke has no per-side outline spelling (one outline width for
+  // all four sides). Since REST dump v1.44 carries OUTSIDE, refusing the widths
+  // left the outline color with nothing to paint (Radix's Blockquote rule
+  // vanished): the per-side widths carry as the border, and the inward
+  // approximation is named.
   const outside = mapped([{ sides: HEADER_RULE, strokeWeight: 0 }]);
   outside.headers[0].strokeAlign = 'OUTSIDE';
   const named = propose(outside.set);
-  assert.equal(headerPart(named.contract as never).literals, undefined);
-  assert.ok(named.notes.some(n => /per-side stroke weights .* on an OUTSIDE stroke/.test(n)));
+  assert.deepEqual(headerPart(named.contract as never).literals, { 'border-top-width': '1px', 'border-right-width': '0px', 'border-bottom-width': '1px', 'border-left-width': '0px' });
+  assert.ok(named.notes.some(n => /strokeAlign OUTSIDE on a stroke whose sides differ .* carries as a border drawn INWARD/.test(n)));
 });

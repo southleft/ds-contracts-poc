@@ -451,10 +451,18 @@ export function accountSet(inputs: AccountInputs): SetAccount {
           partCarries(part, ["strokesIncludedInLayout"]) ? `part "${part!.name}" strokesIncludedInLayout: false → inset ring, no layout space` : null,
           note("layout space") ?? note("strokesIncludedInLayout"));
       const align = n.strokeAlign as string | undefined;
+      // REST dump v1.44 carries every alignment (the capture gap that NAMED a
+      // non-INSIDE stroke on this route is gone), so the landing is read from
+      // the proposal: the part's outline channels, or a focus-ring child the
+      // proposer folded into the root's focus-visible outline pair.
       if (align && align !== "INSIDE")
         classify(path, "strokeAlign", align,
-          partCarries(part, ["outline-color", "outline-width", "outline-offset"]) ? "outline-* channels (OUTSIDE stroke inverted to outline)" : null,
-          gap("strokeAlign") ?? note("strokeAlign"));
+          partCarries(part, ["outline-color", "outline-width", "outline-offset"])
+            ? "outline-* channels (OUTSIDE stroke inverted to outline)"
+            : note(node.name, "focus-visible outline overrides")
+              ? "focus-visible outline pair on the root (a focus-ring child inverted)"
+              : null,
+          gap("strokeAlign") ?? note(node.name, "strokeAlign") ?? note("stroke alignment") ?? note("strokeAlign"));
       const dashes = n.strokeDashes as number[] | undefined;
       if (Array.isArray(dashes) && dashes.length > 0)
         classify(path, "strokeDashes", JSON.stringify(dashes),
@@ -577,10 +585,22 @@ export function accountSet(inputs: AccountInputs): SetAccount {
           note(dim) ?? note(css));
       }
     }
+    // REST dump v1.44 carries the placement (`abs` / shape placement), so the
+    // landing is read from the proposal: absolute position on the part (its
+    // own channels or a per-value stylesWhen), a focus-ring inversion, or the
+    // proposer's own ledger note when the placement is not carriable.
     if (n.layoutPositioning === "ABSOLUTE")
       classify(path, "layoutPositioning=ABSOLUTE", "out of flow",
-        partCarries(part, ["outline-color", "outline-offset"]) ? "focus-ring inversion (outline-*)" : null,
-        gap("absolute placement") ?? note("ABSOLUTE"));
+        partCarries(part, ["outline-color", "outline-offset"])
+          ? "focus-ring inversion (outline-*)"
+          : pj.includes('"position":"absolute"')
+            ? `part "${part!.name}" position: absolute (+ offsets)`
+            : note(node.name, "focus-visible outline overrides")
+              ? "focus-visible outline pair on the root (a focus-ring child inverted)"
+              : note(node.name, "absolute placement carried")
+                ? "absolute placement carried (dump v1.7 abs)"
+                : null,
+        gap("absolute placement") ?? note(node.name, "absolute placement captured") ?? note("ABSOLUTE"));
 
     // prototype wiring
     const interactions = (n.interactions ?? []) as Array<Record<string, unknown>>;

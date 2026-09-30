@@ -1,0 +1,737 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-set-button-button-1-proof.contract.json (ds.button-set-button-button-1-proof v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  cursor: pointer;
+  padding-right: var(--imported-shared-size-16);
+  padding-block: var(--imported-shared-size-8);
+  border-radius: var(--imported-shared-size-4);
+  border-width: var(--imported-button-root-border-top-width-unset);
+  gap: var(--imported-shared-size-8);
+  width: fit-content;
+  height: fit-content;
+}
+
+.variant-secondary {
+  border-color: var(--imported-button-set-button-button-1-proof-root-border-color-secondary);
+}
+
+.state-default {
+}
+
+.variant-secondary.state-default {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-default
+  );
+}
+
+.state-hover {
+}
+
+.variant-secondary.state-hover {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-hover
+  );
+}
+
+.state-pressed {
+}
+
+.variant-secondary.state-pressed {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-pressed
+  );
+}
+
+.state-focusVisible {
+}
+
+.variant-secondary.state-focusVisible {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-focusVisible
+  );
+}
+
+.state-disabled {
+}
+
+.variant-secondary.state-disabled {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-disabled
+  );
+}
+
+.state-loading {
+}
+
+.variant-secondary.state-loading {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-loading
+  );
+}
+
+.variant-primary {
+  border-color: var(--imported-button-set-button-button-1-proof-root-border-color-primary);
+}
+
+.variant-primary.state-default {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-default
+  );
+}
+
+.variant-primary.state-hover {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-hover
+  );
+}
+
+.variant-primary.state-pressed {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-pressed
+  );
+}
+
+.variant-primary.state-focusVisible {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-focusVisible
+  );
+}
+
+.variant-primary.state-disabled {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-disabled
+  );
+}
+
+.variant-primary.state-loading {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-loading
+  );
+}
+
+.size-medium {
+}
+
+.icons-none {
+}
+
+.root:where(.variant-secondary.size-medium.state-default.icons-none) {
+  padding-left: 24px;
+}
+
+.icons-leading {
+}
+
+.root:where(.variant-secondary.size-medium.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.icons-trailing {
+}
+
+.root:where(.variant-secondary.size-medium.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.icons-both {
+}
+
+.root:where(.variant-secondary.size-medium.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-medium.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.size-small {
+}
+
+.root:where(.variant-secondary.size-small.state-default.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-small.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.size-large {
+}
+
+.root:where(.variant-secondary.size-large.state-default.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-secondary.size-large.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-default.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-medium.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-default.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-small.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-default.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-default.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-default.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-default.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-hover.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-hover.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-hover.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-hover.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-pressed.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-pressed.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-pressed.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-pressed.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-focusVisible.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-focusVisible.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-focusVisible.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-focusVisible.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-disabled.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-disabled.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-disabled.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-disabled.icons-both) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-loading.icons-none) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-loading.icons-leading) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-loading.icons-trailing) {
+  padding-left: 16px;
+}
+
+.root:where(.variant-primary.size-large.state-loading.icons-both) {
+  padding-left: 16px;
+}
+
+.buttonlabelLabel {
+  font-size: var(--imported-shared-size-16);
+  line-height: var(--imported-button-root-line-height);
+  font-weight: var(--imported-button-set-button-button-1-proof-button-label-label-font-weight);
+  font-family: IBM Plex Sans;
+  text-align: center;
+}
+
+.variant-secondary .buttonlabelLabel {
+  color: var(--imported-button-set-button-button-1-proof-button-label-label-color-secondary);
+}
+
+.variant-primary .buttonlabelLabel {
+  color: var(--imported-button-set-button-button-1-proof-button-label-label-color-primary);
+}

@@ -64,3 +64,10 @@ All 20 nested boolean values are checked. Reimporting the already registered
 child retains its mapping. This does not qualify the provisional child anatomy,
 icons, visual fidelity, interaction, accessibility or native return. The
 root-only accounting harness itself still does not measure nested frame width.
+
+The fixed-size carry now preserves the Radio error-text frame width of 126 px
+from all four captured FIXED occurrences, including its provisional width token
+and explicit carry note. Accounting counts, all subject dispositions, and the
+20 Radio alignment residuals are unchanged. The root-only accounting harness
+does not newly qualify that nested frame visually. Frozen examinations and
+platform-specific ledger overlays remain unchanged.

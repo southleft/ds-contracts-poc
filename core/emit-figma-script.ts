@@ -2965,6 +2965,22 @@ function applyLiterals(
         break;
       }
       case 'letter-spacing': { const n = litPx(spec, cssProp, value); if (n !== undefined) next.letterSpacing = n; break; }
+      // Beta spike (carry, don't drop): a literal node opacity — the token
+      // case's literal twin (node opacity, never a bound variable). A token
+      // on the same part wins, and the literal is named.
+      case 'opacity': {
+        if (tokens?.opacity !== undefined) {
+          literalMiss(spec, cssProp, value, 'a token binds the same channel on this part — the token opacity is drawn, the literal is not');
+          break;
+        }
+        const n = Number(value.trim());
+        if (!Number.isFinite(n)) {
+          literalMiss(spec, cssProp, value, `"${value}" is not a number the canvas can set as opacity`);
+          break;
+        }
+        spec.opacity = Math.min(1, Math.max(0, n));
+        break;
+      }
       case 'font-size': {
         const n = litPx(spec, cssProp, value);
         if (n !== undefined) { next.fontSize = n; next.fontSizePath = undefined; }

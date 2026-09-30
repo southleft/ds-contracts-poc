@@ -65,6 +65,7 @@ import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '
  */
 import { refuseRetainedRuntime,jointTokenCss } from '@ds-contracts/core';
 import {
+  borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
@@ -310,6 +311,10 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
   };
   const rootWithCombo = (combo: Array<[string, string]>, lead: string[] = []) =>
     rootWithConds([...lead, ...combo.map(([ph, value]) => placeholderCond(ph, value))]);
+  // Literal rows have base specificity, so states override them regardless
+  // of axis count. This mirrors generateCss's .root:where(...) selector.
+  const rootWithLiteralCombo = (combo: Array<[string, string]>) =>
+    `${ROOT_SEL}:where(${combo.map(([ph, value]) => placeholderCond(ph, value)).join('')})`;
   const expandRef = (
     where: string,
     refPath: string,
@@ -468,6 +473,19 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
         entry.decls.push(`${cssProp}: ${lit}`);
         enumRules.set(key, entry);
       }
+    }
+  }
+  // Beta spike — literalsByCombination on the root: one compound host rule
+  // per row at base specificity, after the pairs.
+  for (const table of root.literalsByCombination ?? []) {
+    for (const row of table.rows) {
+      pairRules.push({
+        selector: rootWithLiteralCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string])),
+        decls: [
+          ...Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+          ...borderStyleDecls(row.literals, 'literals', root.declared),
+        ],
+      });
     }
   }
 
@@ -670,6 +688,19 @@ export function shadowCss(input: Contract, tokenValues?: unknown, errors: string
         subRules.push([
           `${rootWithEnum(entry.prop, value)} ${partSel(name)}`,
           Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+        ]);
+      }
+    }
+    // Beta spike — literalsByCombination on a part: one compound host rule
+    // per row, after the single-prop literal rules.
+    for (const table of part.literalsByCombination ?? []) {
+      for (const row of table.rows) {
+        subRules.push([
+          `${rootWithLiteralCombo(table.props.map((p, i) => [p, row.values[i]] as [string, string]))} ${partSel(name)}`,
+          [
+            ...Object.entries(row.literals).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+            ...borderStyleDecls(row.literals, 'literals', part.declared),
+          ],
         ]);
       }
     }

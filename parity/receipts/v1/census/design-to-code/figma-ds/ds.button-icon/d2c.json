@@ -7,8 +7,8 @@
   "variantCount": 5,
   "contractSha256": "8d99239e7ba8d0ef8af4aeb0174828ecda8a20b1d15e0479a0577808e8debb9f",
   "carriage": {
-    "carried": 31,
-    "named": 79,
+    "carried": 32,
+    "named": 78,
     "silent": 0
   },
   "silentRows": [],
@@ -149,8 +149,8 @@
       0
     ],
     "layoutPositioning=ABSOLUTE": [
-      0,
       1,
+      0,
       0
     ],
     "RECTANGLE decor": [

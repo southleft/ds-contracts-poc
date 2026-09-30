@@ -30,12 +30,12 @@ import { readFigmaStateApi, restoreFigmaStateApi } from './figma-state-api.js';
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, CODE_STATE_PREVIEWS, type ComponentRef, type Contract } from '../scripts/contract-schema.js';
+import { absentVariantAxes, absentVariantIssues, absentVariantKey, arcMaskCss, ContractSchema, DEFAULT_FONT_FAMILY, GRID_REFUSALS, LITERAL_COMBINATION_CHANNELS, literalValueOk, pascal, slotFigmaProperty, slotsOf, STATE_PREVIEW_PROPERTY, statePreviewLabel, statePreviewSubstProps, VOID_ELEMENTS, walkAnatomy, CODE_STATE_PREVIEWS, type ComponentRef, type Contract } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
-import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
+import { mintTokens, type MintAxis, type MintObservation, type MintedEntry, type MintedLiteralTable } from './mint-tokens.js';
 import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
   deriveAbsentVariants,
@@ -753,7 +753,8 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string, carriage?: M
     const bt = b.text;
     if (
       at.characters !== bt.characters || at.fontSize !== bt.fontSize || at.fontStyle !== bt.fontStyle ||
-      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null)
+      (at.lineHeight ?? null) !== (bt.lineHeight ?? null) || (at.style ?? null) !== (bt.style ?? null) ||
+      (at.textDecoration ?? null) !== (bt.textDecoration ?? null)
     ) {
       return `${path}: text/typography differs`;
     }
@@ -2516,6 +2517,79 @@ function mintObservation(
 const numOccurrences = (m: Merged, valueOf: (n: DumpNode) => number | undefined) =>
   m.occ.map((o) => ({ variant: o.variant, value: valueOf(o.node) ?? 0 }));
 
+type LiteralTableField = Array<{ props: string[]; rows: Array<{ values: string[]; literals: Record<string, string> }> }>;
+
+/** Does a part already carry `channel` in a literalsByCombination table? */
+function literalTableCarries(part: Record<string, unknown>, channel: string): boolean {
+  const tables = part.literalsByCombination as LiteralTableField | undefined;
+  return (tables ?? []).some((t) => t.rows.some((r) => channel in r.literals));
+}
+
+/** CARRY, DON'T DROP (beta spike) — place a refused observation's literal
+ *  table (mint-tokens literalTable) on the part that owns the observation.
+ *
+ *  Only a part's OWN base tokens record takes a table: the observation's
+ *  target must be a record attachTokens registered (state planes, per-
+ *  instance override targets and stub geometry keep their refusal). The
+ *  channel must have a literal spelling (LITERAL_COMBINATION_CHANNELS + its value
+ *  grammar), the part must not be a component instance, no token may bind
+ *  the channel on the same part, and no omitted-plane (unset) axis may key
+ *  the table — each refusal is returned so the note can say it. Tables with
+ *  the same props share one entry; rows merge by tuple and stay in declared
+ *  axis value order. Deterministic: a function of the observations and the
+ *  axis declaration only. */
+function placeLiteralTable(
+  mint: MintCapture,
+  obs: MintObservation & { target: Record<string, string> },
+  table: MintedLiteralTable,
+  unsetProps: ReadonlySet<string>,
+): { carried: true } | { carried: false; why: string } {
+  const channel = obs.cssProperty;
+  const holder = mint.attach.find((a) => a.tokens === obs.target)?.holder;
+  if (!holder) return { carried: false, why: 'the channel is not a part\'s base styling (a state plane, an instance override or stub geometry)' };
+  if (holder.component !== undefined) return { carried: false, why: 'the part is a component instance (the child contract owns its styling)' };
+  if (!LITERAL_COMBINATION_CHANNELS.has(channel)) return { carried: false, why: `"${channel}" is not a literal channel` };
+  const bad = table.rows.find((r) => !literalValueOk(channel, r.value));
+  if (bad) return { carried: false, why: `${bad.value} is outside the "${channel}" literal grammar` };
+  if (table.props.some((p) => unsetProps.has(p))) return { carried: false, why: 'an omitted-plane axis keys the values' };
+  const tokenBound = obs.target[channel] !== undefined ||
+    [holder.tokensByProp].flat().some((e) => e && Object.values((e as { map: Record<string, Record<string, string>> }).map).some((m) => channel in m)) ||
+    ((holder.tokensByCombination as Array<{ rows: Array<{ tokens: Record<string, string> }> }> | undefined) ?? []).some((t) => t.rows.some((r) => channel in r.tokens));
+  if (tokenBound) return { carried: false, why: `a token already binds "${channel}" on this part` };
+  if (literalTableCarries(holder, channel)) return { carried: false, why: `another table already carries "${channel}" on this part` };
+  const tables = (holder.literalsByCombination as LiteralTableField | undefined) ?? [];
+  const key = JSON.stringify(table.props);
+  let entry = tables.find((t) => JSON.stringify(t.props) === key);
+  if (!entry) {
+    entry = { props: [...table.props], rows: [] };
+    tables.push(entry);
+  }
+  for (const row of table.rows) {
+    const tuple = JSON.stringify(row.values);
+    const existing = entry.rows.find((r) => JSON.stringify(r.values) === tuple);
+    if (existing) existing.literals[channel] = row.value;
+    else entry.rows.push({ values: [...row.values], literals: { [channel]: row.value } });
+  }
+  const order = entry.props.map((p) => mint.axes.find((a) => a.propName === p)?.values ?? []);
+  entry.rows.sort((x, y) => {
+    for (let i = 0; i < order.length; i++) {
+      const d = order[i].indexOf(x.values[i]) - order[i].indexOf(y.values[i]);
+      if (d !== 0) return d;
+    }
+    return 0;
+  });
+  holder.literalsByCombination = tables;
+  return { carried: true };
+}
+
+/** The receipt for a placed literal table: what was carried, keyed how, and
+ *  that it is NOT a token. */
+function literalTableNote(obs: MintObservation, table: MintedLiteralTable): string {
+  const distinct = [...new Set(table.rows.map((r) => r.value))];
+  const sample = table.rows.slice(0, 4).map((r) => `${r.values.join('/')}=${r.value}`).join(', ');
+  return `${obs.nodePath} ${obs.cssProperty}: CARRIED AS AN UNTOKENIZED LITERAL — the resolved values differ across variants and fit no token rule (one axis, an axis pair, or a root triple with every combination drawn), so no token was minted; they are a function of ${table.props.join(' × ')} over the ${obs.occurrences.length} drawn occurrence(s), and literalsByCombination carries each of the ${table.rows.length} drawn combination(s) with its own measured value (${distinct.length} distinct; ${sample}${table.rows.length > 4 ? ', …' : ''}). A prop combination the set never draws takes the row its ${table.props.join('/')} values name, or the part's base styling when no row matches — review and bind real tokens`;
+}
+
 /** GAP-CLOSING ROUND 2 (`axis-inert`) — BASE-SLICE PROJECTION of a refused
  *  literal channel onto ONE axis.
  *
@@ -2957,10 +3031,72 @@ const drawnStrokeAligns = (m: Merged) =>
       .map((o) => o.node.strokeAlign)
       .filter((a): a is NonNullable<typeof a> => a !== undefined),
   );
+/** A CENTER STROKE THAT TAKES NO LAYOUT SPACE IS AN OUTLINE PULLED BACK BY
+ *  HALF ITS WEIGHT (REST dump v1.44 / plugin dump v1.48).
+ *
+ *  A Figma stroke of weight w drawn CENTER covers the band from w/2 inside
+ *  the node box to w/2 outside it. `outline: w solid; outline-offset: -w/2`
+ *  draws exactly that band — an outline starts at the border edge plus its
+ *  offset and extends outward by its width — follows border-radius, and
+ *  takes no layout space, which is what a Figma stroke that is not included
+ *  in layout does. Under the same vocabulary an OUTSIDE stroke is offset 0
+ *  and an INSIDE one (also taking no layout space) offset -w, so a node whose
+ *  variants MIX those alignments (Untitled UI's Featured icon: a 1px INSIDE
+ *  rim beside 2–10px CENTER rings) still has ONE spelling, per-variant
+ *  offsets included. Before, CENTER rendered as an INSIDE border, off by w/2
+ *  on every side (5px on the 10px rings), and a mix was refused.
+ *
+ *  Qualified ONLY where every drawn stroke is OUTSIDE, or CENTER/INSIDE with
+ *  strokesIncludedInLayout === false CAPTURED (dump v1.35+ — an absent flag
+ *  is "not captured" and keeps the border every older dump produced), with a
+ *  uniform literal weight (per-side weights have no outline spelling), on no
+ *  shape part and no instance (their strokes render through their own
+ *  channels), and with minting on (the offsets are px observations). The
+ *  outline is the focus ring's property: a `:focus-visible` outline rule
+ *  replaces the resting stroke in that state, the standing OUTSIDE
+ *  limitation. */
+const STROKE_SIDE_BOUND_FIELDS = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+/** Arbitrary-path node types whose geometry is carried only as a `shape` —
+ *  without one, their paint belongs to a glyph, not to a box (buildPart). */
+const UNDRAWABLE_PATH_TYPES = new Set(['VECTOR', 'BOOLEAN_OPERATION', 'STAR']);
+/** Does any drawn stroke here have per-side weights (literal or bound)? An
+ *  outline has one width for all four sides, so such a stroke has no outline
+ *  spelling. */
+const perSideStroked = (nodes: readonly DumpNode[]): boolean =>
+  nodes.some((n) => {
+    if (n.stroke === undefined) return false;
+    if (n.strokeWeights !== undefined) return true;
+    const sides = STROKE_SIDE_BOUND_FIELDS.map((f) => n.bound?.[f]);
+    // Four sides bound to ONE variable (or a bound uniform weight) is a uniform stroke.
+    return sides.some((s) => s !== undefined) && n.bound?.strokeWeight === undefined && !sides.every((s) => s !== undefined && s === sides[0]);
+  });
+function centeredStrokeOutline(nodes: readonly DumpNode[]): boolean {
+  const drawn = nodes.filter((n) => n.stroke !== undefined);
+  if (!drawn.some((n) => n.strokeAlign === 'CENTER')) return false;
+  if (nodes.some((n) => n.shape !== undefined || n.type === 'INSTANCE')) return false;
+  return drawn.every((n) =>
+    n.strokeWeights === undefined &&
+    !STROKE_SIDE_BOUND_FIELDS.some((f) => n.bound?.[f] !== undefined) &&
+    typeof n.strokeWeight === 'number' && Number.isFinite(n.strokeWeight) && n.strokeWeight >= 0 &&
+    (n.strokeAlign === 'OUTSIDE' ||
+      ((n.strokeAlign === 'CENTER' || n.strokeAlign === 'INSIDE') && n.strokesIncludedInLayout === false)));
+}
+/** The outline-offset one drawn stroke needs under centeredStrokeOutline. */
+const centeredOutlineOffset = (n: DumpNode): number =>
+  n.stroke === undefined || n.strokeWeight === undefined || n.strokeAlign === 'OUTSIDE'
+    ? 0
+    : n.strokeAlign === 'CENTER' ? -n.strokeWeight / 2 : -n.strokeWeight;
+
 function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
   const aligns = drawnStrokeAligns(m);
   // @door propose.stroke-align-absent-is-border
   if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
+  if (ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))) {
+    ctx.notes.push(
+      `${where}: strokeAlign ${[...aligns].sort().join(' / ')} with the stroke taking no layout space — carried as an outline with a per-variant outline-offset (CENTER −weight/2, INSIDE −weight, OUTSIDE 0), which draws the same band on both sides of the edge and takes no layout space (REST dump v1.44 / plugin dump v1.48); a :focus-visible outline replaces it in that state`,
+    );
+    return 'outline';
+  }
   // @door propose.stroke-align-mixed-refused
   if (aligns.size > 1) {
     ctx.notes.push(
@@ -2969,7 +3105,19 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
     return 'border';
   }
   const [align] = aligns;
-  if (align === 'OUTSIDE') return 'outline';
+  if (align === 'OUTSIDE') {
+    if (!perSideStroked(m.occ.map((o) => o.node))) return 'outline';
+    // An OUTSIDE stroke drawn on SOME sides only (Radix's Blockquote rule: the
+    // left side) has no outline spelling — `outline` draws all four sides at
+    // one width — and lowering it to outline-color with no width drew nothing
+    // at all. It carries as the per-side border (inward), off by its weight on
+    // the drawn sides, and says so.
+    // @door propose.stroke-align-outside-per-side-border
+    ctx.notes.push(
+      `${where}: strokeAlign OUTSIDE on a stroke whose sides differ — CSS outline has one width for all four sides, so the per-side stroke carries as a border drawn INWARD (off by its weight on each drawn side; a per-side outer box-shadow is not carried yet) (review)`,
+    );
+    return 'border';
+  }
   // @door propose.stroke-align-center-unsupported
   if (align === 'CENTER' && !m.occ.every(o => o.node.shape?.kind === 'stroked-path')) {
     ctx.notes.push(
@@ -3161,6 +3309,14 @@ function invertNodeTokens(
   // The keyword that makes the outline paint at all. Declared, never
   // inferred downstream — see strokeVocabulary's note.
   if (strokeVocab === 'outline' && declaredOut) declaredOut['outline-style'] = 'solid';
+  // REST dump v1.44 / plugin dump v1.48: a CENTER (or mixed CENTER/INSIDE/
+  // OUTSIDE) stroke that takes no layout space rides the outline pulled back
+  // by its per-variant offset — see centeredStrokeOutline. The offsets are
+  // literal px observations derived from the drawn weight (a bound weight's
+  // variable is carried on outline-width; its half has no token spelling).
+  if (strokeVocab === 'outline' && centeredStrokeOutline(m.occ.map((o) => o.node))) {
+    mintObservation(ctx, tokens, where, 'outline-offset', 'px', numOccurrences(m, centeredOutlineOffset), `${where}|strokeAlign`);
+  }
 
   carry(
     'background-color',
@@ -4126,13 +4282,19 @@ interface ShapePlacement {
 function parentCssBorderInsets(o: Occ, ctx: Ctx): BoxInsets {
   const parent = o.parent?.node;
   if (!parent) return zeroInsets();
+  // A parent whose stroke lowers to the offset outline (centeredStrokeOutline,
+  // the same predicate strokeVocabulary applies) draws no CSS border, so its
+  // padding edge is its border edge.
+  if (ctx.mint && centeredStrokeOutline(o.parent!.occurrences.map(p => p.node))) return zeroInsets();
   const drawn = o.parent!.occurrences.map(p => p.node).filter(n => n.stroke !== undefined);
-  // CENTER is already projected as an INSIDE CSS border, with the existing
+  // Any other CENTER is projected as an INSIDE CSS border, with the existing
   // paint-loss receipt. Its CSS padding edge is still fully determined.
   if (new Set(drawn.map(n => n.strokeAlign === 'OUTSIDE' ? 'OUTSIDE' : 'INSIDE')).size > 1 ||
       new Set(drawn.map(n => n.strokesIncludedInLayout ?? true)).size > 1)
     throw Error('absolute-box-parent-stroke-basis-unqualified');
-  if (parent.strokeAlign === 'OUTSIDE' || parent.strokesIncludedInLayout === false) return zeroInsets();
+  // A per-side OUTSIDE stroke lowers to a border (strokeVocabulary), so only a
+  // uniform one is the insetless outline here.
+  if ((parent.strokeAlign === 'OUTSIDE' && !perSideStroked(o.parent!.occurrences.map(p => p.node))) || parent.strokesIncludedInLayout === false) return zeroInsets();
   // The parent inverter withholds literal side widths when only SOME sides
   // bind. Those raw widths therefore cannot be the emitted CSS border basis.
   if (parent.strokeWeights !== undefined) {
@@ -4640,8 +4802,41 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
  *  KIT-CLIMB.md) — so the part sizes to content. That was SILENT; it is a
  *  receipt now, with the code. A FILL axis (fillWidth/fillHeight) is spelled
  *  FIXED by Figma too and is excluded (it is carried as grow/stretch). */
-function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
+/** THE DRAWN BOX OF ONE OCCURRENCE ON ONE AXIS, when the dump states it or
+ *  implies it EXACTLY (beta spike, carry don't drop). Stated: a root/instance
+ *  `bbox`, or a producer's `fixedSize`. Implied: the occurrence is the ONLY
+ *  visible in-flow child of an auto-layout parent that HUGS on this axis and
+ *  carries no min/max there and no in-layout stroke — Figma then sizes the
+ *  parent to exactly child + padding, so child = parent − padding, with the
+ *  parent's own box read the same way (up to a root's bbox). Anything else
+ *  (a sibling, a FIXED or wrapping parent, a clamp) is undefined: never a
+ *  guess. Rounded to the dump's two-decimal geometry. */
+function drawnAxisOf(o: Occ, dim: 'width' | 'height', depth = 0): number | undefined {
+  if (o.node.bbox) return o.node.bbox[dim];
+  if (typeof o.node.fixedSize?.[dim] === 'number') return o.node.fixedSize[dim];
+  const parent = o.parent?.node;
+  const l = parent?.layout;
+  if (!parent || !l || depth > 16 || (l.mode !== 'HORIZONTAL' && l.mode !== 'VERTICAL') || l.wrap) return undefined;
+  const hugs = ((dim === 'width') === (l.mode === 'HORIZONTAL') ? l.primarySizing : l.counterSizing) === 'AUTO';
+  const clamped = dim === 'width'
+    ? parent.minWidth !== undefined || parent.maxWidth !== undefined
+    : parent.minHeight !== undefined || parent.maxHeight !== undefined;
+  const inLayoutStroke = parent.strokesIncludedInLayout === true &&
+    ((parent.strokeWeight ?? 0) > 0 || parent.strokeWeights !== undefined);
+  if (!hugs || clamped || inLayoutStroke) return undefined;
+  const inFlow = (parent.children ?? []).filter((c) => c.hidden !== true && c.abs === undefined);
+  if (inFlow.length !== 1 || inFlow[0] !== o.node) return undefined;
+  const parentOcc = o.parent!.occurrences.find((p) => p.node === parent);
+  const outer = parentOcc ? drawnAxisOf(parentOcc, dim, depth + 1) : undefined;
+  if (outer === undefined) return undefined;
+  const [top, right, bottom, left] = l.padding;
+  const inner = Math.round((outer - (dim === 'width' ? left + right : top + bottom)) * 100) / 100;
+  return inner > 0 ? inner : undefined;
+}
+
+function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string, carry?: { tokens: Record<string, string> }): void {
   const dims: string[] = [];
+  const carried: string[] = [];
   for (const dim of ['width', 'height'] as const) {
     // FIXED by the auto-layout sizing MODE, or a producer's `fixedSize` on an
     // auto-layout node (the plugin writes fixedSize for non-auto-layout
@@ -4678,6 +4873,28 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
       // @door propose.fixed-size-carrier-exists
       continue; // a carrier exists — the size channels speak for it
     }
+    // CARRY, DON'T DROP (beta spike): FIXED in EVERY occurrence and a drawn
+    // box every occurrence states or exactly implies (drawnAxisOf) — the
+    // per-variant px ride the standard mint (a token where one axis or a
+    // pair explains them, else an untokenized literal table). A child that
+    // is FIXED in some variants only keeps the receipt below: a uniform
+    // value would otherwise bind the variants where it hugs or fills too.
+    // @door propose.fixed-child-geometry-carried
+    const values = fixedIn.length === m.occ.length ? m.occ.map((o) => drawnAxisOf(o, dim)) : [];
+    if (
+      carry && ctx.mint && carry.tokens[dim] === undefined && values.length > 0 &&
+      values.every((v): v is number => v !== undefined) &&
+      !m.occ.some((o) => o.node.layout?.mode === 'GRID')
+    ) {
+      mintObservation(
+        ctx, carry.tokens, where, dim, 'px',
+        m.occ.map((o, i) => ({ variant: o.variant, value: values[i]! })),
+        `${where}|fixed-child-${dim}`,
+      );
+      const distinct = [...new Set(values)];
+      carried.push(`${dim} (FIXED in ${m.occ.length}/${m.occ.length} variant occurrence(s); drawn ${distinct.slice(0, 8).join('/')}${distinct.length > 8 ? '/…' : ''}px)`);
+      continue;
+    }
     const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
     // The variants where the same child FILLS instead are named beside the
     // FIXED ones, so the receipt says which variant it is about.
@@ -4687,6 +4904,11 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
         ? ` — FIXED on ${fixedIn.map((o) => o.variant).join(', ')}; FILL on ${fillIn.map((o) => o.variant).join(', ')} (a different fact on those variants)`
         : '';
     dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${byVariant}${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
+  }
+  if (carried.length > 0) {
+    ctx.notes.push(
+      `${where}: auto-layout ${m.type} child drawn FIXED on ${carried.join(' and ')} — CARRIED (fidelity first): each occurrence's drawn size is stated by the dump or implied exactly by a hugging parent it alone fills (parent box − padding), and the per-variant px ride the mint as ${carried.map((c) => c.split(' ')[0]).join('/')} observations (a token where one axis or a pair explains them, an untokenized literal table otherwise); formerly FC-GEOMETRY-EXCLUDED — review against the design's own sizing variables`,
+    );
   }
   // @door propose.fixed-child-geometry-excluded
   if (dims.length === 0) return;
@@ -4731,6 +4953,20 @@ function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<
     );
     ctx.mint.absFallbacks.push({ part, tokens, chan: dim, value: m.occ[0].node.fixedSize![dim]!, where });
     carried.push(dim);
+  }
+  // A fixed in-flow main-axis size must survive a constrained flex parent.
+  // CSS defaults to flex-shrink: 1; Figma's FIXED child keeps its drawn size.
+  // Require that fact in every occurrence, including when the parent changes
+  // direction. A fixed cross axis alone says nothing about main-axis sizing.
+  if (ctx.mint && tokens['flex-shrink'] === undefined && m.occ.every((o) => {
+    const mode = o.parent?.node.layout?.mode;
+    const dim = mode === 'HORIZONTAL' ? 'width' : mode === 'VERTICAL' ? 'height' : undefined;
+    return dim !== undefined && o.node.fixedSize?.[dim] !== undefined &&
+      o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] !== true &&
+      (carried.includes(dim) || tokens[dim] !== undefined);
+  })) {
+    mintObservation(ctx, tokens, where, 'flex-shrink', 'number',
+      m.occ.map((o) => ({ variant: o.variant, value: 0 })), `${where}|fixed-main-axis-shrink`, sparse);
   }
   if (carried.length > 0) {
     ctx.notes.push(
@@ -4853,8 +5089,24 @@ function carryAbsPlacement(
       `${where}: ${assumed} of ${boxes.length} occurrence(s) carry NO constraints field, so the placement is read as LEFT×TOP — an ASSUMPTION, not an observation. A pre-v1.13 dump also omitted the field for STRETCH/SCALE nodes (only MIN/MAX/CENTER had a spelling), so a box drawn pinned to all four edges is indistinguishable here from one pinned top-left; re-capture with dump v1.13+ to tell them apart`,
     );
   }
-  const hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
-  const vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
+  let hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
+  let vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
+  // CONSTRAINTS THAT DIFFER ACROSS VARIANTS (REST dump v1.44 made this common:
+  // Chakra's Progress fill is STRETCH in some variants and LEFT in others).
+  // Constraints say how a box follows a RESIZED parent; every variant's drawn
+  // box is exact at its drawn parent size, and one LEFT×TOP spelling (left/top
+  // offsets, plus the drawn size where the caller carries size) reproduces
+  // every drawn box exactly. So the observed geometry is carried and the lost
+  // resize behavior is named, instead of the part falling back into the flow
+  // (fidelity first). SCALE keeps its named refusal below.
+  // @door propose.abs-mixed-constraints-drawn-geometry
+  if ((hs.length > 1 || vs.length > 1) && !hs.includes('SCALE') && !vs.includes('SCALE')) {
+    ctx.notes.push(
+      `${where}: constraints differ across variants (${hs.join('|')} × ${vs.join('|')}) — every drawn box is carried at its DRAWN geometry as LEFT×TOP (left/top offsets${opts.size === true && opts.text !== true ? ' + width/height' : ''}, exact at the drawn parent size); how each variant follows a resized parent is NOT carried (review)`,
+    );
+    hs = ['LEFT'];
+    vs = ['TOP'];
+  }
   if (hs.length > 1 || vs.length > 1) {
     return ledger(`constraints differ across variants (${hs.join('|')} × ${vs.join('|')})`);
   }
@@ -5505,7 +5757,25 @@ function mintTextChannels(
   // substitution, and measurement confirms Badge and Button were never among
   // the reminted rows. No note: a receipt that fires on the healthy path is
   // noise, and noise is how a report stops being read.
+  // AUTO (REST dump v1.44 / plugin v1.48 `lineHeightUnit`) is the font's own
+  // line height — CSS `line-height: normal`, which is what no declaration
+  // already renders. A set drawn AUTO everywhere mints nothing, so a contract
+  // that declares no line height round-trips to itself (the REST reader also
+  // carries the pixels Figma reports for AUTO; pinning them broke that fixed
+  // point on the desktop-MCP Badge replay). Only where AUTO sits beside
+  // explicit line heights on one part, and every AUTO occurrence reports its
+  // drawn pixels, do those pixels carry — the observed literal, instead of
+  // refusing the whole channel.
+  const isAuto = (o: Occ) => o.node.text!.lineHeightUnit === 'AUTO';
+  const explicit = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number' && !isAuto(o));
+  // @door propose.line-height-auto-is-normal
+  if (explicit.length === 0) return;
   const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
+  if (withLh.some(isAuto)) {
+    ctx.notes.push(
+      `${where}: line-height is AUTO (the font's own) in ${withLh.filter(isAuto).length} of ${textOcc.length} variants beside explicit line heights — those variants carry the pixels Figma reports for AUTO (the observed literal; CSS normal would follow the consumer's font instead) (review)`,
+    );
+  }
   // @door propose.line-height-none-captured
   if (withLh.length === 0) return;
   if (withLh.length !== textOcc.length) {
@@ -5562,6 +5832,93 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
   holder.declared = declared;
   ctx.notes.push(
     `${where}: textCase ${drawn[0]} drawn in every variant — carried as declared text-transform: ${value} (dump v1.16; a canvas-drawable channel, the return leg writes Figma textCase)`,
+  );
+}
+
+/** REST dump v1.44 / plugin dump v1.48 — textDecoration UNDERLINE /
+ *  STRIKETHROUGH, the canvas fact behind CSS text-decoration-line
+ *  (underline / line-through). Both readers named it a loss until then, so a
+ *  designer's link drew without its underline.
+ *
+ *  · Drawn the same in every text occurrence → the declared
+ *    `text-decoration-line` channel (DECLARED_CHANNELS, canvas: draw — the
+ *    return leg writes Figma textDecoration).
+ *  · Drawn in SOME variants → carried per value of the ONE variant axis it is
+ *    a function of, as `stylesWhen { prop, equals, styles:
+ *    { 'text-decoration': … } }` for the values that draw it (the literal
+ *    CSS spelling STYLES_WHEN_ALLOWED admits for a per-value fact with no
+ *    token vocabulary; a boolean axis carries its TRUE side, and a
+ *    decoration drawn only on the FALSE side is named — stylesWhen cannot
+ *    express negation). Canvas v1 does not draw conditional styles, a
+ *    documented schema limit. Guarded by the sparse-matrix fence.
+ *  · Anything else is NAMED, never sampled.
+ *  Absent on every occurrence → nothing (no decoration, or an older dump that
+ *  receipted the channel at capture). */
+const TEXT_DECORATION_LINE: Record<string, string> = { UNDERLINE: 'underline', STRIKETHROUGH: 'line-through' };
+function carryTextDecoration(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const lineOf = (n: DumpNode): string => TEXT_DECORATION_LINE[n.text!.textDecoration ?? ''] ?? 'none';
+  const rows = textOcc.map((o) => ({ variant: o.variant, value: lineOf(o.node) }));
+  // @door propose.text-decoration-none-not-a-fact
+  if (rows.every((r) => r.value === 'none')) return;
+  const distinct = [...new Set(rows.map((r) => r.value))];
+  if (distinct.length === 1) {
+    const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+    if (declared['text-decoration-line'] === undefined) declared['text-decoration-line'] = distinct[0];
+    holder.declared = declared;
+    ctx.notes.push(
+      `${where}: text decoration drawn in every variant — carried as declared text-decoration-line: ${distinct[0]} (REST dump v1.44 / plugin dump v1.48; a canvas-drawable channel, the return leg writes Figma textDecoration)`,
+    );
+    return;
+  }
+  for (const axis of ctx.axes) {
+    const byValue = new Map<string, string>();
+    let fits = true;
+    for (const r of rows) {
+      const value = axisValuesOf(r.variant)[axis.property];
+      const seen = value === undefined ? undefined : byValue.get(value);
+      if (value === undefined || (seen !== undefined && seen !== r.value)) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, r.value);
+    }
+    if (!fits || new Set(byValue.values()).size < 2) continue;
+    const entries: Array<Record<string, unknown>> = [];
+    if (isBooleanAxis(axis)) {
+      const side = (want: string) =>
+        [...byValue].filter(([v]) => v.trim().toLowerCase() === want).map(([, line]) => line);
+      const whenTrue = side('true'), whenFalse = side('false');
+      if (whenTrue.length !== 1 || whenFalse.length !== 1) continue;
+      if (whenFalse[0] !== 'none') {
+        // @door propose.text-decoration-false-side-negation
+        ctx.notes.push(
+          `${where}: text decoration ${whenFalse[0]} is drawn on the FALSE side of boolean axis "${axis.property}" — stylesWhen cannot express negation; NAMED, not proposed (review)`,
+        );
+        return;
+      }
+      entries.push({ prop: axis.propName, styles: { 'text-decoration': whenTrue[0] } });
+    } else {
+      for (const value of axis.values) {
+        const line = byValue.get(value);
+        if (line !== undefined && line !== 'none') {
+          entries.push({ prop: axis.propName, equals: axisValue(axis, value), styles: { 'text-decoration': line } });
+        }
+      }
+    }
+    fenceSparseInference(ctx.axes, `text-decoration@${where}`, rows);
+    const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+    stylesWhen.push(...entries);
+    holder.stylesWhen = stylesWhen;
+    ctx.notes.push(
+      `${where}: text decoration differs across variants as a function of axis "${axis.property}" (${[...byValue].map(([v, line]) => `${v}→${line}`).join(', ')}) — carried as stylesWhen { prop: ${axis.propName}, styles: { text-decoration } } on the values that draw it (REST dump v1.44 / plugin dump v1.48; a conditional style is not drawn on canvas v1 — schema limit)`,
+    );
+    return;
+  }
+  // @door propose.text-decoration-uncorrelated-refused
+  ctx.notes.push(
+    `${where}: text decoration differs across variants (${distinct.join(', ')}) without correlating to one variant axis — text-decoration-line has no per-combination vocabulary; NAMED, not proposed (review)`,
   );
 }
 
@@ -5632,12 +5989,11 @@ function carryPerSideStrokeWeights(m: Merged, holder: Record<string, unknown>, c
     );
     return;
   }
-  if (drawnStrokeAligns(m).size === 1 && drawnStrokeAligns(m).has('OUTSIDE')) {
-    ctx.notes.push(
-      `${where}: per-side stroke weights (${seen}; top, right, bottom, left) on an OUTSIDE stroke — the stroke lowers to the CSS outline vocabulary, which has no per-side widths; NAMED, not proposed (review)`,
-    );
-    return;
-  }
+  // An OUTSIDE stroke whose sides differ lowers to the per-side BORDER
+  // (strokeVocabulary names the inward approximation): the outline vocabulary
+  // has no per-side widths, and refusing the widths here as well left the
+  // outline color with nothing to paint (REST dump v1.44 made this reachable:
+  // Radix's Blockquote rule vanished).
   const rows: Array<{ variant: string; value: string }> = [];
   for (const o of m.occ) {
     const n = o.node;
@@ -5730,7 +6086,9 @@ function carryStrokeLayout(m: Merged, holder: Record<string, unknown>, ctx: Ctx,
   }
   holder.strokesIncludedInLayout = false;
   ctx.notes.push(
-    `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
+    ctx.mint && centeredStrokeOutline(m.occ.map((o) => o.node))
+      ? `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; the stroke rides the offset outline (see the strokeAlign note), which takes no layout space in CSS, and the writer sets the field back on the frame`
+      : `${where}: the stroke takes NO layout space in every stroked variant (strokesIncludedInLayout false, dump v1.35) — carried as strokesIncludedInLayout: false; padding and stroke channels keep the designer's numbers, the code emitters draw the stroke as an inset ring instead of a border, and the writer sets the field back on the frame`,
   );
 }
 /** A part that ended up carrying NO stroke channel (every one refused by
@@ -9311,6 +9669,7 @@ function buildPartFromEvidence(
     const tokens = invertTextTokens(m, ctx, where, byProp);
     attachByProp(part, byProp);
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
+    carryTextDecoration(m, part, ctx, where); // REST dump v1.44 / plugin v1.48 — text-decoration-line
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
     carryLetterSpacing(m, part, ctx, where, tokens);
@@ -9466,7 +9825,7 @@ function buildPartFromEvidence(
     carryCrossAxisFill(m, parentMode, part, ctx, where);
     invertNodeOpacity(m, part, slotTokens, ctx, where);
     invertNodeEffects(m, slotTokens, ctx, where);
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
+    nameFixedChildGeometry(m, ctx, where, { tokens: slotTokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     attachTokens(ctx, part, slotTokens);
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility
@@ -9960,9 +10319,36 @@ function buildPartFromEvidence(
 
   const partByProp: ByPropCollector = { map: {} };
   const partDeclared: Record<string, string> = {};
-  const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
-  carryPerSideStrokeWeights(m, part, ctx, where); // dump v1.34
-  carryStrokeLayout(m, part, ctx, where); // dump v1.35
+  // AN UNDRAWABLE PATH IS NOT A PAINTED BOX. A VECTOR / BOOLEAN_OPERATION /
+  // STAR whose geometry the dump could not carry (no `shape`) paints its fill
+  // or stroke onto a glyph, not onto its bounding box. Once a drawn size
+  // reaches the part (`abs` — carried on the REST route since REST dump v1.44
+  // — or `fixedSize`), painting that box draws a solid rectangle where Figma
+  // draws a glyph: HeroUI's office-badge pencil became a black 14×13 block.
+  // Measured offline on the hill-climb set against the saved Figma images:
+  // leaving the box unpainted was better on 194 variants and worse on none
+  // (Chakra Progress mean difference 21.5% → 13.4%). The box keeps its size
+  // and placement; its paint is named. It applies wherever the painted box
+  // would draw ink: a drawn size, a stroke (a border paints a 2×weight square
+  // even on a 0×0 box — the pencil's 1.5px strokes did exactly that), or
+  // children that size it. A fill-only, childless, unsized one paints nothing
+  // and proposes what it always did. LINE is not included: a stroked box is
+  // the nearest spelling of a divider.
+  // @door propose.path-geometry-not-painted-as-box
+  const pathBox = UNDRAWABLE_PATH_TYPES.has(m.type ?? '') && m.occ.every((o) => o.node.shape === undefined) &&
+    m.occ.some((o) => (o.node.fill !== undefined || o.node.stroke !== undefined || o.node.gradient !== undefined) &&
+      (o.node.abs !== undefined || o.node.fixedSize !== undefined || o.node.stroke !== undefined || (o.node.children?.length ?? 0) > 0));
+  const paintM: Merged = pathBox
+    ? { ...m, occ: m.occ.map((o) => { const { fill: _f, stroke: _s, gradient: _g, strokeWeight: _w, strokeWeights: _ws, ...node } = o.node; return { ...o, node }; }) }
+    : m;
+  if (pathBox) {
+    ctx.notes.push(
+      `${where}: ${m.type} geometry is not carried (arbitrary path, no shape), and its box would draw ink (a drawn size, a stroke, or children) — its paint is NOT carried: painted, the box would draw a solid rectangle or border where Figma draws the glyph; the part keeps its size and placement (review)`,
+    );
+  }
+  const tokens = invertNodeTokens(paintM, false, ctx, where, partByProp, part, partDeclared);
+  carryPerSideStrokeWeights(paintM, part, ctx, where); // dump v1.34
+  carryStrokeLayout(paintM, part, ctx, where); // dump v1.35
   if (Object.keys(partDeclared).length > 0) {
     part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
   }
@@ -10025,7 +10411,7 @@ function buildPartFromEvidence(
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
     carryGridAxisSizing(m, part, ctx, where, tokens); // G8
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -10048,7 +10434,7 @@ function buildPartFromEvidence(
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
     carryCrossAxisFill(m, parentMode, part, ctx, where); // dump v1.31
     carryAspectRatio(m, part, ctx, where); // dump v1.31
-    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
+    nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -10072,7 +10458,7 @@ function buildPartFromEvidence(
   // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
-  nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
+  nameFixedChildGeometry(m, ctx, where, { tokens }); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
   attachTokens(ctx, part, tokens);
   carryGridAxisSizing(m, part, ctx, where, tokens); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
@@ -11665,11 +12051,25 @@ function proposeStateDiffs(
   // and dropped outline-width (FC-DUMP-PROPOSE-FOCUS-OUTLINE).
   const focusOutside =
     state === 'focus-visible' && occs.every((o) => o.node.strokeAlign === 'OUTSIDE');
+  // A LITERAL state stroke is not in `target` yet: it is a queued mint
+  // observation the deferred mint pass lands later (and the base's own literal
+  // border is deferred the same way, so baseRootTokens cannot see it either).
+  // REST dump v1.44 made this reachable on the REST route — OUTSIDE is carried
+  // there now — and the remap below never fired for it: a designer's OUTSIDE
+  // focus ring minted as a state `border-*` pair, drawn inward.
+  const queuedStateBorder = focusOutside && !!ctx.mint?.observations.some(
+    (o) => o.target === target && o.part === `state-${state}` && (o.cssProperty === 'border-color' || o.cssProperty === 'border-width'),
+  );
   // A qualified per-side replacement already proves an INSIDE resting stroke,
   // even when its unbound color has not reached the deferred mint pass yet.
   if (!uniformStateStrokeStyles?.has(state) && baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
     const hasBorder = target['border-color'] !== undefined || target['border-width'] !== undefined;
-    if (hasBorder && state === 'focus-visible') {
+    if (!hasBorder && queuedStateBorder) {
+      remapStateMintTargets(ctx, target, state);
+      ctx.notes.push(
+        `${where}: state "${state}" draws an OUTSIDE stroke (literal values, minted) — proposed as the focus OUTLINE pair (outline-color/outline-width), which draws outside the box and takes no layout space`,
+      );
+    } else if (hasBorder && state === 'focus-visible') {
       for (const [from, to] of [['border-color', 'outline-color'], ['border-width', 'outline-width']] as const) {
         if (target[from] !== undefined) {
           target[to] = target[from];
@@ -12156,7 +12556,7 @@ function proposeStateDiffs(
         // TEXT: no text-shadow / text-stroke / per-state type vocabulary.
         if (differs((n) => n.effects ?? [])) nameOnly('effects', `TEXT effects (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) have no text-shadow vocabulary`);
         if (differs((n) => n.stroke) || differs((n) => n.strokeWeight)) nameOnly('stroke', 'a TEXT stroke has no contract vocabulary');
-        for (const field of ['characters', 'fontSize', 'fontStyle', 'lineHeight', 'textCase', 'style', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar'] as const) {
+        for (const field of ['characters', 'fontSize', 'fontStyle', 'lineHeight', 'textCase', 'textDecoration', 'style', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar'] as const) {
           if (differs((n) => n.text?.[field])) nameOnly(`text.${field}`, 'part-level states carry color-kind, shadow, border and opacity channels only (no per-state type vocabulary)');
         }
       } else {
@@ -13055,6 +13455,7 @@ function proposeFromDumpFenced(
       const textTokens = invertTextTokens(template, ctx, path, rootTokensByProp, true, true);
       Object.assign(rootTokens, textTokens);
       carryTextCase(template, root, ctx, path);
+      carryTextDecoration(template, root, ctx, path);
       carryFontSlant(template, root, ctx, path);
       root.declared = { ...(root.declared as Record<string, string> | undefined), 'font-family': templateFamily! };
       carryLetterSpacing(template, root, ctx, path, rootTokens);
@@ -13070,6 +13471,7 @@ function proposeFromDumpFenced(
     Object.assign(rootTokens, textTokens);
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
+    carryTextDecoration(only, root, ctx, `${where}/label`); // REST dump v1.44 / plugin v1.48 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
     carryLetterSpacing(only, root, ctx, `${where}/label`, rootTokens);
@@ -13650,6 +14052,10 @@ function proposeFromDumpFenced(
     const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, {
       nestedPairs: true,
       realizedCombos,
+      // CARRY, DON'T DROP (beta spike): a refused channel comes back with
+      // its observed values as a literal table; placeLiteralTable below puts
+      // it on the part (literalsByCombination) where the part can carry it.
+      literalFallback: true,
       // THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Both dump producers
       // round canvas geometry to two decimals, so a width the code→canvas
       // mint spelled 39.9219px from computed style comes back 39.92px — one
@@ -13684,7 +14090,16 @@ function proposeFromDumpFenced(
         );
       }
       if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
-      else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
+      else if (binding.literal) {
+        const placed = placeLiteralTable(
+          ctx.mint!, obs, binding.literal, new Set(unsetAxes.map((a) => a.propName)),
+        );
+        ctx.notes.push(
+          placed.carried
+            ? literalTableNote(obs, binding.literal)
+            : `${obs.nodePath} ${obs.cssProperty}: ${binding.reason ?? 'not minted'} (not carried as an untokenized literal either: ${placed.why})`,
+        );
+      } else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
       // A carried-but-unwitnessed pair is BOUND, so it takes the ref above —
       // and its caveat is named here rather than swallowed. Bound and named
       // are not mutually exclusive; only refusals use `reason`.
@@ -13713,6 +14128,9 @@ function proposeFromDumpFenced(
     // offset. The per-variant refusal above stays named; the fallback is too.
     for (const fb of ctx.mint.absFallbacks) {
       if (fb.tokens[fb.chan] !== undefined) continue; // minted — no fallback needed
+      // Carried per drawn combination as an untokenized literal (named at
+      // placement) — a base-combo guess would only restate one of its rows.
+      if (literalTableCarries(fb.part, fb.chan)) continue;
       const literals = (fb.part.literals as Record<string, string> | undefined) ?? {};
       if (literals[fb.chan] !== undefined) continue;
       literals[fb.chan] = `${fb.value}px`;

@@ -561,6 +561,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         addVariant(entry.prop, value, partName, decls);
       }
     }
+    // Beta spike — literalsByCombination: one compound override per row,
+    // keyed by EVERY listed prop value (the multi-placeholder token path's
+    // addVariantCompound), so the row wins over single-axis overrides.
+    for (const table of part.literalsByCombination ?? []) {
+      for (const row of table.rows) {
+        const decls: StyleRecord = {};
+        for (const [cssProp, lit] of Object.entries(row.literals)) decls[camel(cssProp)] = lit;
+        applyBorderStyle(decls, row.literals, 'literals', part.declared);
+        addVariantCompound(table.props.map((p, i) => [p, row.values[i]] as [string, string]), partName, decls);
+      }
+    }
     // v15 declared facts: verbatim keyword/literal channels (registry-
     // validated in validateContract). Assigned AFTER the emitter chrome so a
     // declared cursor/position fact wins over the built-in conventions —

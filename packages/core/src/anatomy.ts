@@ -14,7 +14,7 @@
  * layoutOverrideDecls) are exported for the sibling validate/css/grid modules
  * and are deliberately NOT re-exported from the package index.
  */
-import { DEFAULT_FONT_STACK, slotsOf, walkAnatomy, type Contract, type Part, type Prop } from '@ds-contracts/schema';
+import { DEFAULT_FONT_STACK, literalsByCombinationRecords, slotsOf, walkAnatomy, type Contract, type Part, type Prop } from '@ds-contracts/schema';
 import { flattenTokens, makeResolveLiteral, type TokenTreeInput } from './tokens.js';
 
 
@@ -414,6 +414,7 @@ function strokeHolderMaps(part: Part): Array<Record<string, string>> {
     part.tokens, part.literals, ...Object.values(part.states ?? {}),
     ...tbp.flatMap((e) => Object.values(e.map)),
     ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+    ...literalsByCombinationRecords(part),
     ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
   ].filter((m): m is Record<string, string> => m !== undefined);
 }
@@ -485,6 +486,8 @@ export function lowerStrokeRings(contract: Contract): Contract {
       literals,
       ...(tbp ? { tokensByProp: Array.isArray(tbp) ? tbp.map(renameIn) : renameIn(tbp) } : {}),
       ...(part.literalsByProp ? { literalsByProp: part.literalsByProp.map(renameIn) as Part['literalsByProp'] } : {}),
+      ...(part.literalsByCombination ? { literalsByCombination: part.literalsByCombination.map((t) =>
+        ({ ...t, rows: t.rows.map((r) => ({ ...r, literals: rename(r.literals) })) })) } : {}),
       ...(part.states ? { states: Object.fromEntries(Object.entries(part.states).map(([st, m]) => [st, rename(m)])) } : {}),
       ...(part.statesByProp ? { statesByProp: part.statesByProp.map(renameIn) as Part['statesByProp'] } : {}),
     };
@@ -611,6 +614,7 @@ function textHolders(part: Part): { base: Holder[]; perValue: Holder[] } {
       ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
       ...(Array.isArray(part.tokensByProp) ? part.tokensByProp : part.tokensByProp ? [part.tokensByProp] : []).flatMap((e) => Object.values(e.map)),
       ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+      ...literalsByCombinationRecords(part),
       ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
       ...(part.stylesWhen ?? []).map((sw) => sw.styles),
     ],

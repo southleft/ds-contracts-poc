@@ -84,6 +84,7 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-050);
+  width: var(--imported-radio-button-error-text-width);
 }
 
 .alignment-left.size-large .errorText {

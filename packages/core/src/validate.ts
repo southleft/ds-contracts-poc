@@ -13,6 +13,9 @@ import {
   strokedPathDimensionOk,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
+  LITERAL_COMBINATION_CHANNELS,
+  literalValueOk,
+  literalsByCombinationRecords,
   REF_OVERRIDE_CHANNELS,
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
@@ -418,6 +421,7 @@ export function validateContract(
         ...tokensByPropEntries(receiver).flatMap(entry => Object.values(entry.map)),
         ...(receiver.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
         ...(receiver.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...literalsByCombinationRecords(receiver),
         ...(receiver.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
         ...(receiver.stylesWhen ?? []).map(entry => entry.styles)] : [];
       if (p.length === 1 || holders.some(holder => Object.keys(holder ?? {}).some(key => /^(min-(width|height|inline-size|block-size)|flex(-grow|-shrink|-basis)?)$/.test(key))))
@@ -432,11 +436,13 @@ export function validateContract(
         ...tokensByPropEntries(receiver).flatMap(entry => Object.values(entry.map)),
         ...(receiver.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
         ...(receiver.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...literalsByCombinationRecords(receiver),
         ...(receiver.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
         ...(receiver.stylesWhen ?? []).map(entry => entry.styles)] : [];
       const parentOverrides = parent ? [parent.tokens, parent.literals, ...Object.values(parent.declaredStates ?? {}),
         ...tokensByPropEntries(parent).flatMap(entry => Object.values(entry.map)),
         ...(parent.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...literalsByCombinationRecords(parent),
         ...(parent.stylesWhen ?? []).map(entry => entry.styles)] : [];
       const parentConflicts = parentOverrides.some(holder => Object.keys(holder ?? {}).some(key =>
         ['position', 'display', 'transform', 'translate', 'rotate', 'scale', 'perspective'].includes(key))) ||
@@ -450,7 +456,7 @@ export function validateContract(
           part.repeat || part.parts || part.placement || part.overlay || part.layout || part.layoutByProp ||
           Object.keys(part.component?.overrides ?? {}).length || conflicts ||
           [part.tokens, part.literals, part.declared, part.states, part.declaredStates].some(holder => Object.keys(holder ?? {}).length) ||
-          part.tokensByProp || part.tokensByCombination || part.literalsByProp || part.statesByProp || part.stylesWhen ||
+          part.tokensByProp || part.tokensByCombination || part.literalsByProp || part.literalsByCombination || part.statesByProp || part.stylesWhen ||
           part.shape || part.slot || part.icon || part.content || part.attrs || parentConflicts)
         errors.push(`${contract.id}: part "${name}" component-absolute-placement-unproven — requires a positioned direct parent and an ordinary generated child without competing geometry or a placement wrapper`);
     }
@@ -618,6 +624,72 @@ export function validateContract(
     if (part.literals && part.component) {
       errors.push(`${contract.id}: part "${name}" is a component instance — literals cannot restyle it (the child contract owns its styling)`);
     }
+    // Beta spike: literalsByCombination — sparse per-combination literals.
+    // Every prop an enum or VARIANT-bound boolean, every row a unique tuple of
+    // its values, every channel a literal channel inside its grammar, a
+    // channel in at most ONE table (two tables could both match a variant at
+    // equal specificity), and never a channel a token binds on the same part
+    // (the code cascade and the canvas's tokens-first rule would disagree).
+    if (part.literalsByCombination?.length) {
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — literalsByCombination cannot restyle it (the child contract owns its styling)`);
+      }
+      const tokenChannels = new Set([
+        ...Object.keys(part.tokens ?? {}),
+        ...tokensByPropEntries(part).flatMap((e) => Object.values(e.map).flatMap((o) => Object.keys(o))),
+        ...(part.tokensByCombination ?? []).flatMap((t) => t.rows.flatMap((r) => Object.keys(r.tokens))),
+      ]);
+      const tableOf = new Map<string, number>();
+      part.literalsByCombination.forEach((table, i) => {
+        const at = `literalsByCombination[${i}]`;
+        if (new Set(table.props).size !== table.props.length) {
+          errors.push(`${contract.id}: part "${name}" ${at} lists a prop twice (${table.props.join(', ')})`);
+        }
+        const domains = table.props.map((propName) => {
+          const pr = contract.props.find((x) => x.name === propName);
+          if (!pr) {
+            errors.push(`${contract.id}: part "${name}" ${at} references unknown prop "${propName}"`);
+            return undefined;
+          }
+          if (!isEnum(pr) && !isVariantBool(pr)) {
+            errors.push(`${contract.id}: part "${name}" ${at} prop "${propName}" must be an enum prop or VARIANT-bound boolean`);
+            return undefined;
+          }
+          return isEnum(pr) ? pr.type.enum : ['true', 'false'];
+        });
+        const tuples = new Set<string>();
+        for (const row of table.rows) {
+          if (row.values.length !== table.props.length) {
+            errors.push(`${contract.id}: part "${name}" ${at} row ${JSON.stringify(row.values)} has ${row.values.length} value(s) for ${table.props.length} prop(s)`);
+            continue;
+          }
+          row.values.forEach((v, j) => {
+            const domain = domains[j];
+            if (domain && !domain.includes(v)) {
+              errors.push(`${contract.id}: part "${name}" ${at} row value "${v}" is not a value of prop "${table.props[j]}"`);
+            }
+          });
+          const tuple = JSON.stringify(row.values);
+          if (tuples.has(tuple)) errors.push(`${contract.id}: part "${name}" ${at} carries the tuple ${tuple} twice`);
+          tuples.add(tuple);
+          for (const [ch, value] of Object.entries(row.literals)) {
+            if (!LITERAL_COMBINATION_CHANNELS.has(ch)) {
+              errors.push(`${contract.id}: part "${name}" ${at} sets "${ch}" which is not a literal channel (${[...LITERAL_COMBINATION_CHANNELS].join(', ')})`);
+            } else if (!literalValueOk(ch, value)) {
+              errors.push(`${contract.id}: part "${name}" ${at} "${ch}" value ${JSON.stringify(value)} is outside the literal grammar`);
+            }
+            if (tokenChannels.has(ch)) {
+              errors.push(`${contract.id}: part "${name}" carries channel "${ch}" in ${at} AND as a token binding on the same part — ambiguous (the code cascade and the canvas would pick differently), refused by name`);
+            }
+            const prior = tableOf.get(ch);
+            if (prior !== undefined && prior !== i) {
+              errors.push(`${contract.id}: part "${name}" carries channel "${ch}" in two literalsByCombination tables ([${prior}] and [${i}]) — a variant could match both at equal specificity, refused by name`);
+            }
+            tableOf.set(ch, i);
+          }
+        }
+      });
+    }
     // v15 declared facts (S4): registry channels only, each value inside the
     // channel's bounded grammar; a channel carried by BOTH declared and
     // tokens/literals is ambiguous — refused by name. Component instances
@@ -678,6 +750,7 @@ export function validateContract(
           ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
           ...tokensByPropEntries(part).flatMap((e) => Object.values(e.map)),
           ...(part.literalsByProp ?? []).flatMap((e) => Object.values(e.map)),
+          ...literalsByCombinationRecords(part),
           ...(part.statesByProp ?? []).flatMap((e) => Object.values(e.map)),
           ...(part.stylesWhen ?? []).map((sw) => sw.styles),
         ];
@@ -934,6 +1007,7 @@ export function validateContract(
           ...tokensByPropEntries(part).flatMap(entry => Object.values(entry.map)),
           ...(part.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
           ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+          ...literalsByCombinationRecords(part),
           ...(part.stylesWhen ?? []).map(rule => rule.styles)];
         for (const map of maps) for (const [key, value] of Object.entries(map ?? {})) {
           if (!['border-color', 'border-width', 'opacity', 'border-style', 'position', 'display'].includes(key) ||
@@ -960,6 +1034,7 @@ export function validateContract(
             ...tokensByPropEntries(parent).flatMap(entry => Object.values(entry.map)),
             ...(parent.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
             ...(parent.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+            ...literalsByCombinationRecords(parent),
             ...(parent.stylesWhen ?? []).map(rule => rule.styles)];
           for (const map of [...baseMaps, ...dynamicMaps]) for (const [key, value] of Object.entries(map ?? {})) {
             if (!['width', 'height', 'opacity', 'position', 'display'].includes(key) ||
@@ -992,7 +1067,8 @@ export function validateContract(
           const maps = [part.tokens, part.literals, part.declared, ...Object.values(part.states ?? {}),
             ...Object.values(part.declaredStates ?? {}), ...tokensByPropEntries(part).flatMap(entry => Object.values(entry.map)),
             ...(part.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
-            ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)), ...(part.stylesWhen ?? []).map(rule => rule.styles)];
+            ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)), ...literalsByCombinationRecords(part),
+            ...(part.stylesWhen ?? []).map(rule => rule.styles)];
           if (shape.rotation || shape.pathsByProp || part.layout || part.layoutByProp || part.absolutePlacement ||
               maps.some(map => Object.entries(map ?? {}).some(([key, value]) =>
                 !['background-color', 'opacity', 'position', 'display'].includes(key) || key === 'position' && value !== 'absolute' ||
@@ -1005,7 +1081,8 @@ export function validateContract(
           ...tokensByPropEntries(part).flatMap((entry) => Object.values(entry.map)),
           ...(part.statesByProp ?? []).flatMap((entry) => Object.values(entry.map)),
           ...(part.stylesWhen ?? []).map((rule) => rule.styles),
-          ...(part.literalsByProp ?? []).flatMap((entry) => Object.values(entry.map))];
+          ...(part.literalsByProp ?? []).flatMap((entry) => Object.values(entry.map)),
+          ...literalsByCombinationRecords(part)];
         if (paintMaps.some((map) => Object.keys(map ?? {}).some((key) => /^(border|box-shadow|background-image|clip-path|mask)/.test(key))))
           errors.push(`${contract.id}: ${name}: filled-path-unsupported-paint-or-mask`);
         const geometries = [shape, ...Object.values(shape.pathsByProp?.map ?? {})];

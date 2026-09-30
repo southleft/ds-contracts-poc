@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 
 import { BUTTON_V4_PAGE_ID } from "./button-scene-inversion.js";
+import { checkCurrentPerturbation, CURRENT_PERTURBATION_ROOT } from "./button-perturbation-apply-current.js";
 import {
   APPLY_CLASS,
   APPLY_REFUSAL_UNAPPROVED,
@@ -87,4 +90,33 @@ test("committed apply receipt stays ungraded, offline, and zero-silent", () => {
   assert.equal(receipt.overlay.status, "named-blocker");
   assert.equal(receipt.overlay.blocker, OVERLAY_PERTURBATION_BLOCKER);
   assert.equal(receipt.checkbox.status, "observe-committed");
+});
+
+test("current replay refuses a mismatched frozen-source pin before rendering", async () => {
+  const temporary = mkdtempSync(path.join(os.tmpdir(), "perturbation-pin-test-"));
+  try {
+    const baseline = path.join(temporary, "baseline");
+    cpSync(CURRENT_PERTURBATION_ROOT, baseline, { recursive: true });
+    const pinFile = path.join(baseline, "historical-sha256.json");
+    const pins = JSON.parse(readFileSync(pinFile, "utf8"));
+    const scene = Object.keys(pins).find((key) => key.endsWith("observe-altitude.json.gz"))!;
+    assert.ok(scene);
+    pins[scene] = "0".repeat(64);
+    writeFileSync(pinFile, JSON.stringify(pins));
+    await assert.rejects(checkCurrentPerturbation(baseline), /frozen perturbation evidence differs/);
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
+});
+
+test("current replay refuses unexpected artifacts instead of comparing only a summary", async () => {
+  const temporary = mkdtempSync(path.join(os.tmpdir(), "perturbation-inventory-test-"));
+  try {
+    const baseline = path.join(temporary, "baseline");
+    cpSync(CURRENT_PERTURBATION_ROOT, baseline, { recursive: true });
+    writeFileSync(path.join(baseline, "unexpected.txt"), "unaccounted artifact\n");
+    await assert.rejects(checkCurrentPerturbation(baseline), /perturbation current-engine replay differs: unexpected\.txt/);
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
 });

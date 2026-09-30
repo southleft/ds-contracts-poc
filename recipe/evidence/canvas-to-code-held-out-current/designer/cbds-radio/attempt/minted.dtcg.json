@@ -49,6 +49,10 @@
               "$type": "dimension"
             }
           }
+        },
+        "width": {
+          "$value": "126px",
+          "$type": "dimension"
         }
       },
       "error-text-error-text": {
