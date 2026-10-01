@@ -9155,8 +9155,7 @@ function applyNativeLine(parent, node, spec) {
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}
-${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {

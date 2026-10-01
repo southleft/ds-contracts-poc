@@ -1462,7 +1462,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
-
 // v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
   if (!childSpec.absolute) return;

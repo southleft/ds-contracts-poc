@@ -13746,7 +13746,7 @@ async function buildNode(spec, registry) {
       node.fills = [];
       node.clipsContent = false;
       try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { degrade('FC-RT-SVG-RESIZE-REFUSED', node, 'the glyph kept its intrinsic size (resize to ' + spec.shape.width + 'x' + spec.shape.height + ' refused)', e); }
-      if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
     node.effects = spec.effectStack.map((e) => ({
