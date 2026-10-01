@@ -1,4 +1,4 @@
-import {hasComponentGrow} from '@ds-contracts/schema';
+import {hasComponentGrow, normalizeAbsoluteGeometry, absentVariantAxes} from '@ds-contracts/schema';
 import { lowerFilledPathVariants, lowerStrokedPathPaint } from '@ds-contracts/schema';
 import {cssIdentifier} from './css-identifier.js';
 import {jointTokenCss} from './joint-tokens.js';
@@ -107,6 +107,39 @@ function stylesWhenRules(contract: Contract, partName: string, part: Part, isRoo
 function splitDecl(decl: string): [string, string] {
   const i = decl.indexOf(': ');
   return [decl.slice(0, i), decl.slice(i + 2)];
+}
+
+/** Captured geometry lowers through the same normalizer as inline/native output. */
+function absoluteGeometryCss(contract: Contract): string[] {
+  const lines: string[] = [];
+  const axes = absentVariantAxes(contract);
+  const selector = (name: string, value: string): string => {
+    const prop = contract.props.find(prop => prop.name === name)!;
+    if (prop.type !== 'boolean' || prop.default === undefined) return `.${cssIdentifier(`${name}-${value}`)}`;
+    const present = name === 'disabled' ? reactRootDisabledSelector(contract)
+      : `[data-${name.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase()}]`;
+    return value === 'true' ? present : `:not(${present})`;
+  };
+  for (const {part,name,path} of walkAnatomy(contract)) {
+    const emit = (conditions: string, geometry: NonNullable<Part['absoluteGeometry']>) => {
+      const parent = path[path.length-2];
+      const target = conditions
+        ? `.${cssIdentifier(path[0])}${conditions}${parent === path[0] ? '' : ` .${cssIdentifier(parent)}`} > .${cssIdentifier(name)}`
+        : `.${cssIdentifier(parent)} > .${cssIdentifier(name)}`;
+      lines.push('',`${target} {`,...Object.entries(normalizeAbsoluteGeometry(geometry).css).map(([key,value])=>`  ${key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())}: ${value};`),'}');
+    };
+    if (part.absoluteGeometry) emit('',part.absoluteGeometry);
+    const table = part.absoluteGeometryByCombination;
+    if (!table) continue;
+    for (const prop of table.props) for (const value of axes.find(axis=>axis.prop.name===prop)!.options) {
+      if (value !== null && selector(prop,String(value)).startsWith('.'))
+        lines.push('',`${selector(prop,String(value))} {}`);
+    }
+    for (const row of table.rows) emit(table.props.map((prop,i)=>row.values[i] === null
+      ? `:not(:is(${axes.find(axis=>axis.prop.name===prop)!.options.filter(value=>value!==null).map(value=>selector(prop,String(value))).join(', ')}))`
+      : selector(prop,row.values[i]!)).join(''),row.geometry);
+  }
+  return lines;
 }
 
 export function generateCss(input: Contract, tokenInventory: Set<string>, errors: string[], tokenValues?: unknown): string {
@@ -278,6 +311,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     }
     // The multi-root sheet never took finishStylesheet; a ring part still owes
     // its forced-colors boundary (a no-op, byte for byte, without one).
+    lines.push(...absoluteGeometryCss(contract));
     return settle(lowerStrokeRingForcedColors(lines.join('\n') + '\n'));
   }
 
@@ -1345,6 +1379,7 @@ export function generateCss(input: Contract, tokenInventory: Set<string>, errors
     lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
+  lines.push(...absoluteGeometryCss(contract));
   return settle(finishStylesheet(lines.join('\n') + '\n'));
 }
 

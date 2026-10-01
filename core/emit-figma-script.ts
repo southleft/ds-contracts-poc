@@ -1,5 +1,6 @@
+import {normalizeAbsoluteGeometry, resolveNativeAbsoluteGeometry} from '@ds-contracts/schema';
 import { strokedPathNativeData } from './stroked-path-native.js';
-import {contractDependencyEdges, resolveComponentPlacement} from '../scripts/contract-schema.js';
+import {contractDependencyEdges, resolveAbsoluteGeometry, resolveComponentPlacement} from '../scripts/contract-schema.js';
 import { lowerNativeFilledPath } from './native-filled-path.js';
 import { ROOT_CONTENT_EMPTY_WIDTH_SEED } from './native-float32.js';
 import { figmaSelectionApi, type FigmaSelectionApi, type SelectionIdentity } from './figma-selection-api.js';
@@ -281,6 +282,7 @@ export interface NodeSpec {
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
    *  runtime sets layoutPositioning ABSOLUTE + constraints + exact offsets
    *  after append. h/v: MIN pins left/top, MAX right/bottom, CENTER centers. */
+  capturedAbsoluteGeometry?: NonNullable<Part['absoluteGeometry']>;
   absolute?: { h: 'MIN' | 'MAX' | 'CENTER' | 'STRETCH'; v: 'MIN' | 'MAX' | 'CENTER' | 'STRETCH'; left?: number; right?: number; top?: number; bottom?: number };
   /** Single DROP_SHADOW (dump v1.2 box-shadow grammar), parsed at compile
    *  time from the resolved box-shadow token value — the runtime applies it
@@ -2035,7 +2037,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   const BLOCK_FLOW_CONTAINER = new Set(['block', 'list-item', 'flow-root', 'inline']);
   if (!l && !isRoot && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
     const outOfFlow = (k: Part): boolean =>
-      k.declared?.['position'] === 'absolute' ||
+      Boolean(k.absoluteGeometry || k.absoluteGeometryByCombination) || k.declared?.['position'] === 'absolute' ||
       k.declared?.['position'] === 'fixed' ||
       k.declared?.['display'] === 'none' ||
       // …and a part placed absolutely by a CONDITION (the v9 decor spelling:
@@ -4398,6 +4400,7 @@ function shapePlacement(
  *  stylesWhen `position: absolute` (Astryx Slider vertical valueDisplay=text
  *  pins the readout beside the thumb; horizontal stays in-flow). */
 function isAbsoluteThisCombo(part: Part, subst: Record<string, string>): boolean {
+  if (part.absoluteGeometry || part.absoluteGeometryByCombination) return true;
   if (part.declared?.['position'] === 'absolute' || part.declared?.['position'] === 'fixed') return true;
   return (part.stylesWhen ?? []).some(
     (sw) =>
@@ -4564,7 +4567,7 @@ function variantParts(
   // stylesWhen position:absolute too (CSS ::after still paints above ::before
   // when both are absolute — document order among the positioned group).
   const positioned = (p: Part): boolean =>
-    Boolean(p.absolutePlacement || p.absolutePlacementByCombination) || p.declared?.['position'] === 'absolute' ||
+    Boolean(p.absoluteGeometry || p.absoluteGeometryByCombination || p.absolutePlacement || p.absolutePlacementByCombination) || p.declared?.['position'] === 'absolute' ||
     (p.stylesWhen ?? []).some(
       (sw) =>
         sw.styles['position'] === 'absolute' &&
@@ -4846,6 +4849,15 @@ function partToSpec(
     if (Object.keys(defaults).length) subst = {...defaults, ...subst};
   }
   const spec = partToSpecInner(name, part, contract, byId, ctx, subst);
+  const captured = resolveAbsoluteGeometry(part, subst);
+  if (captured) {
+    const normalized = normalizeAbsoluteGeometry(captured);
+    if (normalized.native.width <= 0 || normalized.native.height <= 0)
+      throw Error('absolute-placement-native-zero-extent-unqualified');
+    spec.capturedAbsoluteGeometry = structuredClone(captured);
+    spec.absolute = {h:'MIN',v:'MIN',left:normalized.native.x,top:normalized.native.y};
+    spec.lits = {...spec.lits,width:normalized.native.width,height:normalized.native.height};
+  }
   // v7 overlay: stamped on whatever node kind the part compiled to; the
   // runtime applies it after the node is appended (layoutPositioning
   // requires an auto-layout parent).
@@ -6732,7 +6744,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       const part = nativePartOrigins.get(child);
       const positioned = Boolean(part?.absolutePlacement || part?.absolutePlacementByCombination) || part?.declared?.position === 'absolute' ||
         part?.stylesWhen?.some(sw => sw.styles.position === 'absolute');
-      if ((child.absolute || child.insetOverlay) && positioned && child.shape?.kind !== 'stroked-path') {
+      if (!child.capturedAbsoluteGeometry && (child.absolute || child.insetOverlay) && positioned && child.shape?.kind !== 'stroked-path') {
         const insets = compiledBorderInsets(parent, name => {
           try { return pxOrNull(resolveLiteral(name.replaceAll('/', '.'))) ?? undefined; } catch { return undefined; }
         });
@@ -7753,12 +7765,24 @@ const gridChildrenCall = (has: boolean, args: string): string =>
 
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
-const absoluteRuntime = (has: boolean, hasStrokedPath = false, hasNativePath = false, hasNativeLine = false): string =>
+const absoluteRuntime = (has: boolean, hasStrokedPath = false, hasNativePath = false, hasNativeLine = false, hasCapturedGeometry = false): string =>
   has
     ? `
+${hasCapturedGeometry ? `
+const resolveCapturedNativeGeometry = ${resolveNativeAbsoluteGeometry.toString()};
+function applyCapturedAbsolute(parent, childNode, childSpec) {
+  const box = resolveCapturedNativeGeometry(childSpec.capturedAbsoluteGeometry,{width:parent.width,height:parent.height});
+  if (box.width<=0 || box.height<=0) throw Error('absolute-placement-native-zero-extent-unqualified');
+  if (parent.layoutMode !== 'NONE') childNode.layoutPositioning = 'ABSOLUTE';
+  childNode.resize(box.width,box.height);
+  childNode.x=box.x;childNode.y=box.y;childNode.constraints=box.constraints;
+}
+` : ''}
 // v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
-  if (!childSpec.absolute) return;${hasNativeLine ? `
+  if (!childSpec.absolute) return;${hasCapturedGeometry ? `
+  if (childSpec.capturedAbsoluteGeometry) { applyCapturedAbsolute(parent,childNode,childSpec); return; }
+` : ''}${hasNativeLine ? `
   if (childSpec.shape && childSpec.shape.kind === 'line') return; // dedicated zero-height placement below
 ` : ''}${hasNativePath ? `
   if (childSpec.pathParentViewport) {
@@ -7933,14 +7957,16 @@ const insetOverlayCall = (has: boolean, args: string): string =>
  *  FINAL box after the whole subtree is appended is idempotent: for a parent
  *  whose box was already established the numbers are identical, so every
  *  prior contract's canvas is unchanged. */
-const outOfFlowResizeRuntime = (has: boolean): string =>
+const outOfFlowResizeRuntime = (has: boolean, hasCapturedGeometry = false): string =>
   has
     ? `
 function resizeOutOfFlow(parent, built) {
   for (const pair of built) {
     const childSpec = pair[0], childNode = pair[1];
     try {
-      if (childSpec.insetOverlay) {
+      ${hasCapturedGeometry ? `if (childSpec.capturedAbsoluteGeometry) {
+        applyCapturedAbsolute(parent,childNode,childSpec);
+      } else ` : ''}if (childSpec.insetOverlay) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
@@ -8430,6 +8456,7 @@ function buildSyncScript(
   const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasSlotTextTemplate = featureDatas.some((d) => dataSome(d, (x) => x.slotTextTemplate === true));
   const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
+  const hasCapturedGeometry = featureDatas.some(d => dataSome(d,x=>x.capturedAbsoluteGeometry !== undefined));
   const hasLits = featureDatas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
   // a contract that never carries one emits a byte-identical script.
@@ -9188,7 +9215,7 @@ function applyNativeLine(parent, node, spec) {
   node.strokeCap = line.cap;
   node.strokeAlign = line.align;
 }
-` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
+` : ''}${absoluteRuntime(hasAbsolute, hasStrokedPath, hasNativePath, hasNativeLine, hasCapturedGeometry)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute, hasCapturedGeometry)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 ${hasNestedPropertyControls ? `function nestedCanExpose(instance) {
   let owned = false;
   for (let parent = instance.parent; parent; parent = parent.parent) {

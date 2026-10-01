@@ -8,6 +8,7 @@
  * The repo's scripts/contract-schema.ts is a re-export shim over this
  * source — repo and package cannot drift.
  */
+export * from './absolute-geometry.js';
 export * from './contract-schema.js';
 export {
   isContractDocument,

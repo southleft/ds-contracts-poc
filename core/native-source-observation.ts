@@ -1,3 +1,4 @@
+import {resolveNativeAbsoluteGeometry} from '@ds-contracts/schema';
 import {nativePaintStackMatches,nativeBoundPaintColor} from './native-paint-observation.js';
 import {nativeFilledPathMatches, nativeFilledPathResizeMatches} from './native-filled-path.js';
 import {nativeGraphVariants, nativeLibraryReactionsMatch, type NativePreparedLibraryProjection} from './native-prepared-library.js';
@@ -335,6 +336,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "layoutSizingHorizontal",
     "layoutSizingVertical",
     "layoutPositioning",
+    "constraints",
     "layoutWrap",
     "clipsContent",
     "itemSpacing",
@@ -917,6 +919,18 @@ function verifyReadback(
         if ((n.metadata.callerContentProperty ?? '') !== (spec.callerContentProp ?? ''))
           issue('native-contract-observation-caller-content-property', n);
       }
+      let capturedGeometry: ReturnType<typeof resolveNativeAbsoluteGeometry> | undefined;
+      if (spec.capturedAbsoluteGeometry) {
+        const parent = nodes.get(n.parentId);
+        try {
+          const expected = capturedGeometry = resolveNativeAbsoluteGeometry(spec.capturedAbsoluteGeometry,
+            {width:parent?.values.width,height:parent?.values.height});
+          if (!['x','y','width','height'].every(key=>numeric(v[key],expected[key as 'x'|'y'|'width'|'height'])) ||
+              !same(v.constraints,expected.constraints) ||
+              parent?.values.layoutMode !== 'NONE' && v.layoutPositioning !== 'ABSOLUTE')
+            issue('native-contract-observation-captured-absolute-geometry',n);
+        } catch { issue('native-contract-observation-captured-absolute-basis',n); }
+      }
       // A fixed width can match today's pixels while losing responsive Fill.
       // Check the compiled request before instances take their separate path.
       if (library && spec.fillW &&
@@ -929,7 +943,7 @@ function verifyReadback(
         // A declared left/top offset is an observable contract fact even when
         // the instance's inherited layout remains outside geometry qualification.
         // Check it before the instance branch returns past ordinary leaf checks.
-        if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' ||
+        if (!spec.capturedAbsoluteGeometry && spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' ||
             (spec.absolute.h === 'MIN' && !numeric(v.x, spec.absolute.left ?? 0)) ||
             (spec.absolute.v === 'MIN' && !numeric(v.y, spec.absolute.top ?? 0))))
           issue('native-contract-observation-instance-position', n);
@@ -1178,7 +1192,7 @@ function verifyReadback(
         )
           issue(`native-source-observation-binding-${field}`, n);
       const inspectPaintStack = isContractDraft(input) && ['root','frame','shape'].includes(spec.type) &&
-        !!(spec.gradient || (spec.type === 'shape' && spec.lits?.fillColor));
+        !!(spec.gradient || ((spec.type === 'shape' || spec.capturedAbsoluteGeometry) && spec.lits?.fillColor));
       for (const field of ["fill", "stroke"] as const) {
         const name = spec[field],
           paints = v[field === "fill" ? "fills" : "strokes"] ?? [];
@@ -1222,7 +1236,7 @@ function verifyReadback(
       for (const field of ["width", "height"] as const)
         if (
           spec.lits?.[field] !== undefined &&
-          !numeric(v[field], spec.lits[field]!)
+          !numeric(v[field], capturedGeometry?.[field] ?? spec.lits[field]!)
         )
           issue(`native-source-observation-${field}`, n);
       if (library && spec.type === 'root') {
@@ -1332,8 +1346,8 @@ function verifyReadback(
              v.layoutSizingHorizontal !== 'FIXED' || v.layoutSizingVertical !== 'FIXED' ||
              !['rect','ellipse'].includes(spec.shape!.kind) || spec.absolute?.h !== 'MIN' || spec.absolute?.v !== 'MIN'))
           issue('native-absolute-shape-observation-constraints',n);
-        const width=background?Math.max(0.01,(parent?.values.width??NaN)-2*background.inset):spec.shape!.width;
-        const height=background?Math.max(0.01,(parent?.values.height??NaN)-2*background.inset):spec.shape!.height;
+        const width=background?Math.max(0.01,(parent?.values.width??NaN)-2*background.inset):capturedGeometry?.width ?? spec.shape!.width;
+        const height=background?Math.max(0.01,(parent?.values.height??NaN)-2*background.inset):capturedGeometry?.height ?? spec.shape!.height;
         // A compiled Fill relation replaces the shape's intrinsic size on that
         // axis. Its native sizing mode is verified above; the other axis still
         // has to retain its exact declared geometry. This is structure evidence,
@@ -1354,7 +1368,7 @@ function verifyReadback(
             !numeric(background.radius,Math.max(0,(parent?.values.cornerRadius??NaN)-background.inset))||
             !same(v.constraints,{horizontal:'STRETCH',vertical:'STRETCH'})||parent?.childIds[0]!==n.id))
           issue('native-contract-observation-background-geometry',n);
-        if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !positionedAs(v.x, spec.absolute.left!, parent?.values.width, v.width) ||
+        if (!spec.capturedAbsoluteGeometry && spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !positionedAs(v.x, spec.absolute.left!, parent?.values.width, v.width) ||
             !positionedAs(v.y, spec.absolute.top!, parent?.values.height, v.height)))
           issue('native-contract-observation-shape-position', n);
       }

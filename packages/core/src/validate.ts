@@ -435,6 +435,32 @@ export function validateContract(
       if (p.length === 1 || holders.some(holder => Object.keys(holder ?? {}).some(key => /^(min-(width|height|inline-size|block-size)|flex(-grow|-shrink|-basis)?)$/.test(key))))
         errors.push(`${contract.id}: part "${name}" growth-constraint-unproven — requires a nested item without competing minimum-size or flex declarations`);
     }
+    if (part.absoluteGeometry || part.absoluteGeometryByCombination) {
+      const parent = p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]]);
+      const holders = [part.tokens, part.literals, part.declared,
+        ...Object.values(part.states ?? {}), ...Object.values(part.declaredStates ?? {}),
+        ...tokensByPropEntries(part).flatMap(entry => Object.values(entry.map)),
+        ...(part.tokensByCombination ?? []).flatMap(table => table.rows.map(row => row.tokens)),
+        ...(part.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...literalsByCombinationRecords(part),
+        ...(part.statesByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...(part.stylesWhen ?? []).map(entry => entry.styles)];
+      const owned = /^(position$|box-sizing$|inset($|-)|left$|right$|top$|bottom$|(min-|max-)?(width|height|inline-size|block-size)$|margin($|-)|translate($|-)|rotate$|scale$|transform($|-))/;
+      if (holders.some(holder => Object.keys(holder ?? {}).some(key => owned.test(key))))
+        errors.push(`${contract.id}: part "${name}" absolute-geometry-competing-channel — captured placement owns its edges and dimensions`);
+      const parentTransforms = [parent?.tokens, parent?.literals, parent?.declared,
+        ...Object.values(parent?.states ?? {}), ...Object.values(parent?.declaredStates ?? {}),
+        ...tokensByPropEntries(parent ?? {}).flatMap(entry => Object.values(entry.map)),
+        ...(parent?.literalsByProp ?? []).flatMap(entry => Object.values(entry.map)),
+        ...literalsByCombinationRecords(parent ?? {}),
+        ...(parent?.stylesWhen ?? []).map(entry => entry.styles)]
+        .some(holder => Object.keys(holder ?? {}).some(key => /^(transform($|-)|translate($|-)|rotate$|scale$|perspective($|-))/.test(key)));
+      if (p.length === 1 || !parent || parent.component || parentTransforms || part.component || part.repeat || part.placement || part.overlay ||
+          part.absolutePlacement || part.absolutePlacementByCombination || part.layout?.grow || part.layoutByProp ||
+          !(parent.absoluteGeometry || parent.absoluteGeometryByCombination || ['relative','absolute'].includes(parent.declared?.position ?? '')) ||
+          (part.slot && !part.element))
+        errors.push(`${contract.id}: part "${name}" absolute-geometry-host-unproven — requires an ordinary hosted child and a positioned direct parent`);
+    }
     if (part.absolutePlacement || part.absolutePlacementByCombination) {
       const dep = part.component && byId.get(part.component.id);
       const parent = p.slice(1, -1).reduce<Part | undefined>((node, key) => node?.parts?.[key], contract.anatomy[p[0]]);
