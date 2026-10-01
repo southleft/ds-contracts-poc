@@ -465,3 +465,68 @@ test('two callers of the same child allocate distinct contract-wide selected-con
   const all = walkAnatomy(contract).map(p => p.name);
   assert.equal(new Set(all).size, all.length, 'no duplicate part names anywhere');
 });
+
+function sharedSlotFixture() {
+  const f = fixedContentFixture();
+  const contract = ContractSchema.parse({
+    ...f.target,
+    anatomy: { root: { layout: { display: 'flex', direction: 'column' }, parts: {
+      first: { description: 'First placement', slot: { name: 'payload', bindings: { figma: { property: 'Payload' } } } },
+      second: { description: 'Second placement', slot: { name: 'payload', bindings: { figma: { property: 'Payload' } } } },
+    } } },
+  });
+  f.scope.set(contract.id, contract);
+  const ctx = { contracts: f.scope, tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map<string, string>() };
+  return { ...f, contract, ctx };
+}
+
+test('both React targets expose one shared slot input and render every physical occurrence', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const f = sharedSlotFixture(), before = JSON.stringify(f.contract);
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const files = emitter.emit(f.contract, f.ctx);
+    assert.deepEqual(generatedTypeErrors(f.contract.name, files[0].contents), []);
+    assert.equal((files[0].contents.match(/payload\?: ReactNode;/g) ?? []).length, 1);
+    assert.match(files[0].contents, /First placement/);
+    assert.match(files[0].contents, /Second placement/);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, f.contract.name, files[0].contents, files.find(file => file.path.endsWith('.css'))?.contents);
+      await render({ payload: 'Shared caller content' });
+      assert.equal(await page.getByText('Shared caller content', { exact: true }).count(), 2);
+      await render({ payload: 'Replacement caller content' });
+      assert.equal(await page.getByText('Replacement caller content', { exact: true }).count(), 2);
+      assert.equal(await page.getByText('Shared caller content', { exact: true }).count(), 0);
+    } finally { await page.close(); }
+    assert.equal(JSON.stringify(f.contract), before);
+    assert.equal(walkAnatomy(f.contract).filter(row => row.part.slot?.name === 'payload').length, 2);
+  }
+});
+
+test('shared slot stories keep one control and compile repeated identical samples', async () => {
+  const f = sharedSlotFixture();
+  for (const part of Object.values(f.contract.anatomy.root.parts!)) part.slot!.accepts = [f.sample.id];
+  const before = JSON.stringify(f.contract), files = reactEmitter.emit(f.contract, f.ctx);
+  const stories = files.find(file => file.path.endsWith('.stories.tsx'))!.contents;
+  const { transformSync } = await import('esbuild');
+  assert.doesNotThrow(() => transformSync(stories, { loader: 'tsx', format: 'esm' }));
+  assert.equal((stories.match(/payload: \{ control: false \}/g) ?? []).length, 1);
+  assert.equal((stories.match(/export const WithPayload:/g) ?? []).length, 1);
+  assert.match(stories, /<Sample/);
+  assert.equal(JSON.stringify(f.contract), before);
+});
+
+test('different declared samples for one shared input remain separate compilable stories', async () => {
+  const f = sharedSlotFixture();
+  f.contract.anatomy.root.parts!.first.slot!.defaultContent = [{ id: f.sample.id }];
+  f.contract.anatomy.root.parts!.second.slot!.defaultContent = [{ id: f.child.id }];
+  const before = JSON.stringify(f.contract), files = reactEmitter.emit(f.contract, f.ctx);
+  const stories = files.find(file => file.path.endsWith('.stories.tsx'))!.contents;
+  const { transformSync } = await import('esbuild');
+  assert.doesNotThrow(() => transformSync(stories, { loader: 'tsx', format: 'esm' }));
+  assert.equal((stories.match(/export const WithPayload:/g) ?? []).length, 1);
+  assert.equal((stories.match(/export const WithPayload2:/g) ?? []).length, 1);
+  assert.match(stories, /<Sample/);
+  assert.match(stories, /<Indicator/);
+  assert.equal(JSON.stringify(f.contract), before);
+});

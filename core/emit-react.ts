@@ -1,6 +1,7 @@
 import {hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactSlotInputs } from './react-slot-inputs.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactStatePreviewAttribute, reactStatePreviewInput } from './react-state-preview.js';
 import { reactToggleAria } from './react-toggle-aria.js';
@@ -289,6 +290,7 @@ export function generateTsx(
   const bools = boolProps(contract);
   const texts = namedTextProps(contract);
   const slots = namedSlots(contract);
+  const slotInputs = reactSlotInputs(contract);
   const codePropOf = (propName: string) =>
     contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
   // Optional absence is not the string "undefined" (which may itself be an
@@ -355,9 +357,9 @@ export function generateTsx(
   for (const p of contract.props.filter(p => p.bindings.code.initial)) {
     propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
   }
-  for (const { slot, part } of slots) {
-    const doc = part.description ? `  /** ${literalDocText(part.description)} */\n` : '';
-    propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
+  for (const input of slotInputs) {
+    const doc = input.descriptions.length ? `  /** ${literalDocText(input.descriptions.join('\n'))} */\n` : '';
+    propLines.push(`${doc}  ${input.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
@@ -394,7 +396,7 @@ export function generateTsx(
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
   for (const p of contract.props.filter(p => p.bindings.code.initial))
     destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
-  for (const { slot } of slots) destructured.push(slot.name);
+  for (const input of slotInputs) destructured.push(input.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   // ROUND 3: `children` normally has no destructure default — a JSX-children
   // label is the consumer's, and the contract default is only story/canvas
@@ -901,6 +903,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
   const enums = enumProps(contract);
   const bools = boolProps(contract);
   const slots = namedSlots(contract);
+  const slotInputs = reactSlotInputs(contract);
   const hasDefaultSlot = slotsOf(contract).some((s) => s.slot.name === 'children');
   const label = textDefault(contract);
 
@@ -943,8 +946,8 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       if (typeof p.default === 'string') args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : literalStringJs(p.default)},`);
     }
   }
-  for (const { slot } of slots) {
-    argTypes.push(`    ${slot.name}: { control: false },`);
+  for (const input of slotInputs) {
+    argTypes.push(`    ${input.name}: { control: false },`);
   }
   for (const ev of storyEvents) {
     const evDesc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
@@ -988,6 +991,8 @@ export const ${storyName}: Story = {
     for (const n of sampleDeps(defaultSlot!.slot.defaultContent!, byId)) slotSampleImports.add(n);
   }
   let slotStories = '';
+  const slotStoryScenarios = new Set<string>();
+  const slotStoryNames = new Set<string>();
   for (const { slot } of slots) {
     let sample: string;
     if ((slot.defaultContent?.length ?? 0) > 0) {
@@ -1007,9 +1012,16 @@ export const ${storyName}: Story = {
         ? `<${dep.name}${requiredAttrs}>${literalTextJsx(textDefault(dep))}</${dep.name}>`
         : `<${dep.name}${requiredAttrs} />`;
     }
+    const scenario = JSON.stringify({ name: slot.name, sample, accepts: slot.accepts ?? [] });
+    if (slotStoryScenarios.has(scenario)) continue;
+    slotStoryScenarios.add(scenario);
+    const baseName = `With${pascal(slot.name)}`;
+    let storyName = baseName;
+    for (let suffix = 2; slotStoryNames.has(storyName); suffix += 1) storyName = `${baseName}${suffix}`;
+    slotStoryNames.add(storyName);
     slotStories += `
 /** The "${slot.name}" slot accepts: ${(slot.accepts ?? []).join(', ') || 'anything'}. */
-export const With${pascal(slot.name)}: Story = {
+export const ${storyName}: Story = {
   render: (args) => (
     <${name} {...args} ${slot.name}={${sample}} />
   ),

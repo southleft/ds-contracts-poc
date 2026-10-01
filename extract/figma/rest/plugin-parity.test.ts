@@ -255,3 +255,53 @@ test("an instance's observed content does not carry the instance's own placement
   assert.equal(chip.instanceContent!.root.abs, undefined);
   assert.deepEqual(chip.instanceContent!.root.children![0].abs, { x: 4, y: 2, right: 6, bottom: 2, width: 20, height: 16 });
 });
+
+function prototypeCapture(interactions: RestNode['interactions'], extra: Partial<RestNode> = {}) {
+  const component: RestNode = {
+    id: '8:1', name: 'Nullable action', type: 'COMPONENT',
+    absoluteBoundingBox: { x: 0, y: 0, width: 32, height: 24 },
+    interactions, ...extra,
+  };
+  const result = mapRestToDump({ name: 'fixture', nodes: { '8:1': { document: component } } });
+  const variant = (result.dump['Nullable action'] as DumpSet).variants[0];
+  return { ...result, variant };
+}
+
+test('REST retains the observed trigger of a null prototype action and receipts the unavailable action', () => {
+  // Exact interaction shape observed on two Carbon Accordion variants.
+  const { variant, dump, report } = prototypeCapture([{ trigger: { type: 'ON_CLICK' }, actions: [null] }]);
+  assert.deepEqual(variant.reactions, [{ trigger: 'ON_CLICK' }]);
+  const receipts = report.degradations.filter(d => d.code === 'prototype-action-null');
+  assert.equal(receipts.length, 1);
+  assert.equal(receipts[0].field, 'interactions[0].actions[0]');
+  assert.match(receipts[0].message, /null.*ON_CLICK.*no action or destination/);
+  assert.equal(dump._degradations?.filter(d => d.code === 'prototype-action-null').length, 1);
+  assert.match(dump._degradations!.find(d => d.code === 'prototype-action-null')!.message, /interactions\[0\]\.actions\[0\]/);
+});
+
+test('a null action does not discard neighboring prototype actions or invent their destination', () => {
+  const { variant, report } = prototypeCapture([
+    { trigger: { type: 'ON_HOVER' }, actions: [
+      { type: 'NODE', navigation: 'CHANGE_TO', destinationId: '8:1', transition: { type: 'SMART_ANIMATE', duration: 0.125 } },
+      null,
+      { type: 'BACK', destinationId: null, transition: null },
+    ] },
+    { trigger: null, actions: [null] },
+  ]);
+  assert.deepEqual(variant.reactions, [
+    { trigger: 'ON_HOVER', action: 'CHANGE_TO', destination: '8:1', destinationName: 'Nullable action', transition: 'SMART_ANIMATE', duration: 125 },
+    { trigger: 'ON_HOVER' },
+    { trigger: 'ON_HOVER', action: 'BACK' },
+    { trigger: 'UNKNOWN' },
+  ]);
+  assert.deepEqual(report.degradations.filter(d => d.code === 'prototype-action-null').map(d => d.field), ['interactions[0].actions[1]', 'interactions[1].actions[0]']);
+});
+
+test('empty action lists and legacy prototype destinations keep their existing meanings', () => {
+  const noActions = prototypeCapture([{ trigger: { type: 'ON_PRESS' }, actions: null }], { transitionNodeID: '8:1' });
+  assert.deepEqual(noActions.variant.reactions, [{ trigger: 'ON_PRESS' }]);
+  assert.equal(noActions.report.degradations.some(d => d.code === 'prototype-action-null'), false);
+  const legacy = prototypeCapture(undefined, { transitionNodeID: '8:1', transitionDuration: 125.4 });
+  assert.deepEqual(legacy.variant.reactions, [{ trigger: 'UNKNOWN', destination: '8:1', destinationName: 'Nullable action', duration: 125 }]);
+  assert.equal(legacy.report.degradations.some(d => d.code === 'prototype-action-null'), false);
+});

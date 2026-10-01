@@ -224,7 +224,7 @@ export interface RestInteraction {
     navigation?: string;
     destinationId?: string | null;
     transition?: { type?: string; duration?: number } | null;
-  }> | null;
+  } | null> | null;
 }
 
 /** Overrides (api_types.ts) — InstanceNode.overrides as REST returns it: the
@@ -522,7 +522,9 @@ export type MapDegradationCode =
   // the import could not follow into this dump (remote library component,
   // not found, cap exceeded, …) — the reason is the message's first word; the
   // instance stays an auto-proposed stub.
-  | 'instance-closure-unresolved';
+  | 'instance-closure-unresolved'
+  // The trigger is observed but REST returned a null action, not a behavior.
+  | 'prototype-action-null';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -1656,15 +1658,25 @@ function mapReactions(node: RestNode, ctx: Ctx, nodePath: string): DumpReaction[
     const name = ctx.nodeNameById.get(id);
     if (name !== undefined) r.destinationName = name;
   };
-  for (const it of node.interactions ?? []) {
+  for (const [interactionIndex, it] of (node.interactions ?? []).entries()) {
     const trigger = it?.trigger?.type ?? 'UNKNOWN';
     const actions = it?.actions ?? [];
     if (actions.length === 0) {
       out.push({ trigger });
       continue;
     }
-    for (const a of actions) {
+    for (const [actionIndex, a] of actions.entries()) {
       const r: DumpReaction = { trigger };
+      if (a === null) {
+        ctx.report.degradations.push({
+          code: 'prototype-action-null',
+          nodePath,
+          field: `interactions[${interactionIndex}].actions[${actionIndex}]`,
+          message: `REST returned a null prototype action; ${trigger} is retained with no action or destination — no behavior invented`,
+        });
+        out.push(r);
+        continue;
+      }
       const action = a.navigation ?? a.type;
       if (action) r.action = action;
       destination(a.destinationId, r);
