@@ -267,6 +267,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasText = (spec: NodeSpec): boolean => spec.type === 'text' || !!spec.children?.some(hasText);
   if (isContractDraft(input) && observedVariants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
+  const hasCapturedGeometry = (spec: NodeSpec): boolean => !!spec.capturedAbsoluteGeometry || !!spec.children?.some(hasCapturedGeometry);
   const hasPathInk = (spec: NodeSpec): boolean => spec.nativePathInk === true || !!spec.children?.some(hasPathInk);
   if (isContractDraft(input) && observedVariants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
   if (isContractDraft(input) && input.graphVerification === 2) extra.push('statePreviewAxis');
@@ -280,7 +281,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     isContractDraft(input) ? input.fixedCrossSizeReadback?.nodeIds : undefined, synchronous,
     isContractDraft(input) && input.component.rootSlot?.textTemplate === 1,
     extension ? emitNativeTokenExtensionContextReadbackScript(extension) : undefined, false,
-    observedVariants.some(v => hasPathInk(v.spec)));
+    observedVariants.some(v => hasPathInk(v.spec)), observedVariants.some(v => hasCapturedGeometry(v.spec)));
   if (!isContractDraft(input) || !input.templateGraph) return inventory;
   if (synchronous) {
     const graphRead = emitNativeTemplateGraphReadbackScript(input.templateGraph.input, input.templateGraph.identity, true);
@@ -316,7 +317,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[], absoluteShapeNodeIds:string[]=[], absoluteShapeAspectRatio:boolean|'strict'=false, fixedCrossSizeNodeIds:string[]=[], synchronous=false, textTemplate=false, tokenReadback?:string, synchronousPartialInventory=false, filledPaths=false, capturedGeometry=false): string {
   if(synchronousPartialInventory && !synchronous) throw Error('native-partial-sync-inventory-required');
   if(synchronous && (!fixedCrossSizeNodeIds.length && !textTemplate && !synchronousPartialInventory || captureImages || captureExportBounds))
     throw Error('native-fixed-cross-size-sync-input-invalid');
@@ -336,7 +337,7 @@ export function emitNativeInventoryReadbackScript(expected: {
     "layoutSizingHorizontal",
     "layoutSizingVertical",
     "layoutPositioning",
-    "constraints",
+    ...(capturedGeometry ? ["constraints"] : []),
     "layoutWrap",
     "clipsContent",
     "itemSpacing",

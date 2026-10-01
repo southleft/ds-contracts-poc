@@ -7777,8 +7777,7 @@ function applyCapturedAbsolute(parent, childNode, childSpec) {
   childNode.resize(box.width,box.height);
   childNode.x=box.x;childNode.y=box.y;childNode.constraints=box.constraints;
 }
-` : ''}
-// v9 shape placement: exact offsets vs the parent box, after append.
+` : ''}// v9 shape placement: exact offsets vs the parent box, after append.
 function applyShapeAbsolute(parent, childNode, childSpec) {
   if (!childSpec.absolute) return;${hasCapturedGeometry ? `
   if (childSpec.capturedAbsoluteGeometry) { applyCapturedAbsolute(parent,childNode,childSpec); return; }

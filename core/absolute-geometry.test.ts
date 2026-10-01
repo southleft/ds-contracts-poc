@@ -177,6 +177,7 @@ const sourceGeometryFixture=()=>{
 test('captured SCALE dump reaches contract and both emitted directions without changing source bytes',()=>{
  const f=sourceGeometryFixture(),source=JSON.stringify(f.set),proposal=f.read(),c=ContractSchema.parse(proposal.contract);
  const found=walkAnatomy(c).find(row=>row.part.absoluteGeometryByCombination);assert(found,JSON.stringify(proposal.notes));
+ assert(proposal.notes.some(note=>note.includes('absolute placement carried through captured geometry')));
  const table=found.part.absoluteGeometryByCombination!;assert.equal(table.rows.length,2);assert.deepEqual(table.rows.map(row=>row.geometry.box.constraints.vertical),['SCALE','CENTER']);
  assert.deepEqual(table.rows.map(row=>row.geometry.parent),[{width:12,height:300},{width:12,height:300}]);
  assert.equal(found.part.tokens?.height,undefined);assert.equal(found.part.declared?.position,undefined);
