@@ -1,6 +1,7 @@
 import {hasComponentGrow, hasComponentHostPlacement} from '../scripts/contract-schema.js';
 import { lowerFilledPathVariants, lowerStrokedPathPaint, strokedPathSvg } from '../scripts/contract-schema.js';
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactSlotInputs } from './react-slot-inputs.js';
 import { reactSelectionPlan } from './react-selection.js';
 import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
@@ -688,6 +689,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     ? { attrs: 'HTMLAttributes', el: 'HTMLElement', supportsDisabled: false }
     : ELEMENT_META[contract.semantics.element];
   const slots = namedSlots(contract);
+  const slotInputs = reactSlotInputs(contract);
   const texts = namedTextProps(contract);
   // PROP-NAME COLLISIONS — the same rule as the CSS-Module emitter
   // (packages/core/src/prop-collision.ts): colliding DOM attrs are OMITTED from the base
@@ -719,9 +721,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   for (const p of contract.props.filter(p => p.bindings.code.initial)) {
     propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
   }
-  for (const { slot, part } of slots) {
-    const doc = part.description ? `  /** ${literalDocText(part.description)} */\n` : '';
-    propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
+  for (const input of slotInputs) {
+    const doc = input.descriptions.length ? `  /** ${literalDocText(input.descriptions.join('\n'))} */\n` : '';
+    propLines.push(`${doc}  ${input.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
@@ -751,7 +753,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
   for (const p of contract.props.filter(p => p.bindings.code.initial))
     destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
-  for (const { slot } of slots) destructured.push(slot.name);
+  for (const input of slotInputs) destructured.push(input.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   if (callerStyleAvailable) destructured.push('style');
   destructured.push('children', '...rest');
