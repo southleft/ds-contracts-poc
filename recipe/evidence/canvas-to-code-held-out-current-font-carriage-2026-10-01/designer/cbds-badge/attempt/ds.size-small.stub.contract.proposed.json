@@ -1,0 +1,80 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.size-small",
+  "name": "SizeSmall",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"size=small\" instances of Badge — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "iconSwap",
+      "type": "text",
+      "default": "187:877",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "iconSwap"
+        },
+        "code": {
+          "prop": "iconSwap"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "xsmall"
+        ]
+      },
+      "default": "small",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "small": "small",
+            "xsmall": "xsmall"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "iconSwap": {
+          "content": {
+            "prop": "iconSwap"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.stub-size-small.root.width.{size}}",
+        "height": "{imported.stub-size-small.root.height.{size}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/SizeSmall",
+        "export": "SizeSmall"
+      }
+    }
+  }
+}

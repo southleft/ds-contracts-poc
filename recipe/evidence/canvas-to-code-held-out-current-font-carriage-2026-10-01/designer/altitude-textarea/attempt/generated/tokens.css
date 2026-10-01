@@ -1,0 +1,49 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-current.ts --record-to <new-directory>
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-stub-state-default-root-height: 20px;
+  --imported-stub-state-default-root-width: 74px;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-active: 1;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-default: 1;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-disabled: 0.4000000059604645;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-error: 1;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-focus: 1;
+  --imported-textarea-al-c-textarea-container-al-c-textarea-input-opacity-hover: 1;
+  --imported-textarea-al-c-textarea-label-label-font-weight: 400;
+  --imported-textarea-root-height-active: fit-content;
+  --imported-textarea-root-height-default: 128px;
+  --imported-textarea-root-height-disabled: fit-content;
+  --imported-textarea-root-height-error: fit-content;
+  --imported-textarea-root-height-focus: fit-content;
+  --imported-textarea-root-height-hover: 152px;
+  --imported-textarea-root-width-active: 220px;
+  --imported-textarea-root-width-default: 216px;
+  --imported-textarea-root-width-disabled: 220px;
+  --imported-textarea-root-width-error: 220px;
+  --imported-textarea-root-width-focus: 222px;
+  --imported-textarea-root-width-hover: 220px;
+  --theme-color-background-neutral-default: #1d1d1a;
+  --theme-color-border-danger-default: #ff6d76;
+  --theme-color-border-neutral-default: #3c3c35;
+  --theme-color-border-neutral-strong: #7c7a70;
+  --theme-color-border-primary-default: #8ea6ff;
+  --theme-color-content-neutral-default: #f1f0ea;
+  --theme-space-xxs: 4px;
+  --typography-font-size-16: 16px;
+  --typography-line-height-24: 24px;
+}

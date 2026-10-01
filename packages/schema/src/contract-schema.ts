@@ -831,6 +831,10 @@ const shadowLayerOk = (layer: string): boolean => {
 /** Channel-specific structured values: shadow stacks and one linear gradient.
  * Other channels retain their scalar grammar. */
 export const literalValueOk = (channel: string, value: string): boolean => {
+  if (channel === 'font-weight') {
+    return /^(?:[1-9]\d*(?:\.\d+)?|0\.\d+)$/.test(value) &&
+      Number(value) >= 1 && Number(value) <= 1000;
+  }
   if (channel === 'background-image') {
     if (value === 'none') return true;
     const match = /^linear-gradient\((.*)\)$/.exec(value);
@@ -925,7 +929,7 @@ export const LITERAL_CHANNELS = new Set([
  *  as its token case does. Kept apart from LITERAL_CHANNELS on purpose: that
  *  set is also the historical vocabulary of recorded source-reference
  *  evidence, which must reproduce byte for byte. */
-export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity"]);
+export const LITERAL_COMBINATION_CHANNELS: ReadonlySet<string> = new Set([...LITERAL_CHANNELS, "opacity", "font-weight"]);
 
 /** A literals record with channel-aware scalar, shadow and gradient grammars. */
 export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
