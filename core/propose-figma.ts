@@ -5266,7 +5266,7 @@ function carryAbsPlacement(
   if (hasScale) {
     const refusal=carryCapturedAbsoluteGeometry(m,part,tokens,ctx,opts);
     if(refusal)return ledger(refusal);
-    ctx.notes.push(`${where}: captured absolute geometry carried with its measured parent basis and each source constraint; both React and native Figma resolve the same carrier. Authored spacing and transforms are not inferred from the rectangle`);
+    ctx.notes.push(`${where}: absolute placement carried through captured geometry with its measured parent basis and each source constraint; both React and native Figma resolve the same carrier. Authored spacing and transforms are not inferred from the rectangle`);
     return true;
   }
   if (!ctx.mint) return ledger('minting is off — the per-variant px offsets have no carrier');
