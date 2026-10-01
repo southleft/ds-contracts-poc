@@ -128,7 +128,6 @@ test('callback captures describe the binding at render return, including a local
 
 test('unknown context effects, writes, opaque inspection, callback writes and guessed factories remain refusals',()=>{
   const cases=[
-    [`const config={id:'before'};return make('button',config,(config.id='after','key'));`,{},'binary-unmodeled:,',''],
     [`props.label='changed';return make('button',{});`,{label:'Original'},'external-data-write',''],
     [`return make('button',{title:props.payload.value});`,{payload:{}},'opaque-input-inspected:payload',''],
     [`ref.current='changed';return make('button',{});`,{},'opaque-parameter-inspected',''],
@@ -144,6 +143,20 @@ test('unknown context effects, writes, opaque inspection, callback writes and gu
   for(const [body,input,reason,imports] of cases)fixture(body,f=>{
     const result=readReactTargetEffects(f.reference,f.initializer,f.invocation(input));assert.equal(result.status,'refused',body);if(result.status==='refused')assert.equal(result.reason,reason,body);
   },'Container',imports);
+});
+
+test('a sequence in the key argument mutates local props before the original factory copies them',()=>{
+  fixture(`const config={id:'before'};return make('button',config,(config.id='after','key'));`,f=>{
+    const model=readReactTargetEffects(f.reference,f.initializer,f.invocation({}));
+    assert.equal(model.status,'modeled',JSON.stringify(model));if(model.status!=='modeled')return;
+    const compiled=ts.transpileModule(f.text,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+    const env={exports:{} as any,require:createRequire(import.meta.url)};
+    runInNewContext(compiled,env);
+    const actual=env.exports[f.name].render({},{});
+    assert.equal(actual.props.id,'after');assert.equal(actual.key,'key');
+    check(model.output,actual,{},undefined,undefined);
+    assert.equal(model.acceptedContract,null);assert.equal(model.runtimeVerified,false);
+  });
 });
 
 test('source-model observations are assumptions and cannot authenticate changed initializer, input provenance, source or callback dependencies',()=>{

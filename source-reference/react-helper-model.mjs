@@ -1333,6 +1333,12 @@ function modelReactCall(options, componentMode, compiledMode = false, jsxMode = 
       }
       if (ts.isBinaryExpression(n)) {
         const op = n.operatorToken.kind;
+        if (op === ts.SyntaxKind.CommaToken) {
+          // The left operand still runs every modeled effect and refusal. Its
+          // value is discarded without coercion; the right keeps its identity.
+          this.expr(n.left, env);
+          return this.expr(n.right, env);
+        }
         if (op === ts.SyntaxKind.EqualsToken)
           return this.ref(n.left, env).set(this.expr(n.right, env));
         if (op === ts.SyntaxKind.AmpersandAmpersandToken) {
